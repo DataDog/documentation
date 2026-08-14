@@ -24,7 +24,7 @@ Coverage reflects whether the policies and agent rules on each resource loaded s
 
 Coverage has two views. Use the toggle at the top of the page to switch between them:
 
-- **Explorer**: A faceted table of your resources. Filter with the facet groups in the sidebar (**Agent**, **Rule**, **Policy**, **Infrastructure**, and **Container**), then open a resource to inspect its agent rules and policies deployment status.
+- **Explorer**: A faceted table of your resources. Search and filter resources by **Agent**, **Rule**, **Policy**, **Infrastructure**, and **Container** facets, then open a resource to inspect its agent rules and policies deployment status.
 - **Map**: A visual map where each resource appears as a hexagon colored by its coverage status severity.
 
 {{< img src="security/workload_protection/coverage/coverage_explorer.png" alt="Explorer view of the Coverage page showing resources in a faceted table" width="100%">}}
@@ -35,14 +35,6 @@ In both views, you can:
 - Refresh the view on demand.
 
 A resource appears in Coverage as soon as its agent loads its ruleset. When a resource goes offline, it is removed from Coverage within 15 minutes.
-
-## Key functionality
-
-* **Real-time visibility**: Resources appear as soon as their agent loads a ruleset, and are removed within 15 minutes of going offline.
-* **Granular filtering**: Search and filter by agent, rule, policy, infrastructure, and container facets.
-* **Detailed inspection**: Navigate from a high-level map or table to a detailed resource, policy, or rule view.
-* **Actionable findings**: Highlight resources in a warning or error state so you can respond promptly.
-* **Coverage analytics**: Track rule deployment health, outdated agents, and incomplete data.
 
 ## Key benefits
 
