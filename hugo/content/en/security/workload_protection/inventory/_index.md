@@ -36,13 +36,6 @@ In both views, you can:
 
 A resource appears in Coverage as soon as its agent loads its ruleset. When a resource goes offline, it is removed from Coverage within 15 minutes.
 
-## Key benefits
-
-* Reduce blind spots by monitoring for unprotected workloads.
-* Shorten detection and response times with direct response workflows.
-* Maintain continuous compliance and policy alignment.
-* Integrate posture checks into CI/CD and infrastructure reviews.
-
 ## Coverage statuses
 
 ### Resource coverage status

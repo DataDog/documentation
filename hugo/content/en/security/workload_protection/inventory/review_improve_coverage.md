@@ -5,6 +5,8 @@ disable_toc: false
 
 For information about Coverage views and statuses, see [Coverage][1].
 
+Use the procedures on this page to reduce blind spots, verify policy alignment, and help Workload Protection detect and respond to threats across your environment. You can incorporate these checks into compliance, CI/CD, and infrastructure reviews.
+
 ## Use cases
 
 Here are some ways to use Coverage to improve your workload security.
