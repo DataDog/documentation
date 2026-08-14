@@ -3,9 +3,9 @@ title: Review and Improve Coverage
 disable_toc: false
 ---
 
-For information about Coverage views and statuses, see [Coverage][1].
-
 Use the procedures on this page to reduce blind spots, verify policy alignment, and help Workload Protection detect and respond to threats across your environment. You can incorporate these checks into compliance, CI/CD, and infrastructure reviews.
+
+For information about Coverage views and statuses, see [Coverage][1].
 
 The widget at the top of the Coverage page shows the percentage of your resources secured with Workload Protection, along with any findings.
 
@@ -21,7 +21,7 @@ The widget at the top of the Coverage page shows the percentage of your resource
 - **View outdated**: Resources running an Agent version older than the minimum supported version (`7.65.0`), which might not support the latest Workload Protection features.
 - **View incomplete**: Resources reporting incomplete or invalid data.
 
-Update or deploy the Datadog Agent to help ensure complete coverage.
+Update or deploy the Datadog Agent, then confirm that the affected resources report complete coverage data.
 
 ## Fix policy or rule deployment errors
 
@@ -44,7 +44,7 @@ You can use Coverage to test and iterate on custom security rules:
 
 ## Review detection coverage
 
-Use the Explorer facets (under the **Rule** and **Policy** groups) to filter resources by the detection content applied to them, including MITRE ATT&CK tactics and techniques. This shows which parts of the MITRE ATT&CK framework are covered across your infrastructure.
+Use the Explorer facets under the **Rule** and **Policy** groups to filter resources by applied detection content. Filter by MITRE ATT&CK tactics and techniques to see which parts of the framework are covered across your infrastructure.
 
 For information about the MITRE ATT&CK map available in SIEM or Workload Protection, see [MITRE ATT&CK map][2].
 
