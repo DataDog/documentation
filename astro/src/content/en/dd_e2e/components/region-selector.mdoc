@@ -4,8 +4,6 @@ description: "Preact island (client:load). Astro wrapper resolves the region lis
 type: interactive
 ---
 
-# RegionSelector
-
 A dropdown for picking the active Datadog site. The list of sites is resolved at build time from the Hugo config snapshot (`allowedRegions` in `params.yaml`) by `RegionSelectorIsland.astro` and passed to the Preact component as a `regions` prop. This keeps the `yaml` parser and the full `regions.config.js` data object out of the client bundle.
 
 The active region is persisted to the `site` cookie (path `/`) and the `?site=` URL query parameter, which keeps it in sync with the Hugo site if the user moves between them. The component also listens for navigations from Datadog app subdomains and updates the region to match.

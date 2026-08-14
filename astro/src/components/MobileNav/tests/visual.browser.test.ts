@@ -6,7 +6,10 @@ test.use({ viewport: { width: 390, height: 844 } });
 // A category landing page gives a deterministic state: the API category list is
 // shown in place of the docs accordion, the active category is expanded and
 // highlighted, and its summary carries aria-current — so the inline
-// scroll-into-view also runs.
+// scroll-into-view also runs. That scroll leaves a deliberate 12px gap above
+// the active category (ScrollActiveIntoView's `gap`), so the tail of the
+// preceding Overview section shows under the sticky header — expected, not a
+// layout bug.
 const API_CATEGORY_URL = '/api/latest/action-connection/';
 
 test.describe('Mobile nav — visual', () => {

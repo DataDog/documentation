@@ -1,0 +1,24 @@
+A partial begins here.
+
+## Setup {% #setup-otel-java %}
+
+{% alert level="info" %}
+OpenTelemetry is supported in Java after version 1.24.0.
+{% /alert %}
+
+To configure OpenTelemetry to use the Datadog trace provider, set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
+
+### Add custom span tags
+
+Add custom tags to your spans for any dynamic value in your application code:
+
+```java
+import io.opentelemetry.api.trace.Span;
+
+public void doSomething() {
+  Span span = Span.current();
+  span.setAttribute("user.name", "Some User");
+}
+```
+
+A partial ends here.

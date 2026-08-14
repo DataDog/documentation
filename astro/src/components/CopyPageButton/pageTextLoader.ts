@@ -23,7 +23,11 @@ export function getMdUrl(): string {
     if (url.endsWith('/')) {
         url = url.slice(0, -1);
     }
-    return url + '.md';
+    // Preserve the query string so filterable (cdoc) pages copy the plaintext
+    // for the currently-selected filters. The `.md` fetch omits credentials, so
+    // the cookie can't carry the selection; the query string must. No-op for
+    // pages without query params (e.g. API docs).
+    return url + '.md' + (window.location.search || '');
 }
 
 /**

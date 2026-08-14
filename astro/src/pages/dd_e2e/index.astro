@@ -10,6 +10,9 @@ const docs = await getCollection('en');
 const markdocComponents = docs
   .filter((entry) => entry.id.startsWith('dd_e2e/components/'))
   .sort((a, b) => a.data.title.localeCompare(b.data.title));
+const cdocPages = docs
+  .filter((entry) => entry.id.startsWith('dd_e2e/cdocs/'))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
 
 // A component has a plaintext twin if it ships a `plaintext/<Name>.ts` module.
 // The twin folder's kebab-cased name lines up with both the Markdoc tag name
@@ -135,6 +138,25 @@ const astroComponents: AstroTestPage[] = [
         </tbody>
       </table>
 
+      <h2>Cdocs</h2>
+      <p>Filterable product docs rendered through the cdocs pipeline.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Page</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cdocPages.map((entry) => (
+            <tr>
+              <td><a href={`/${entry.id}/`}>{entry.data.title}</a></td>
+              <td>{entry.data.description ?? ''}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
       <h2>Markdoc components</h2>
       <p>Authored as <code>.mdoc</code> files and rendered through the Markdoc pipeline.</p>
       <p><a href="/api/latest/">&larr; API docs</a></p>
@@ -152,7 +174,7 @@ const astroComponents: AstroTestPage[] = [
             const tagName = entry.id.replace('dd_e2e/components/', '');
             return (
             <tr>
-              <td><a href={`/docs/${entry.id}/`}><code>{tagName}</code></a></td>
+              <td><a href={`/${entry.id}/`}><code>{tagName}</code></a></td>
               <td>{entry.data.type ?? ''}</td>
               <td>{componentsWithPlaintextTwin.has(tagName) ? '✅' : '❌'}</td>
               <td>{entry.data.description ?? ''}</td>

@@ -44,14 +44,14 @@ function deriveHugoDocsUrl() {
 
 export default defineConfig({
   site: deriveSiteUrl(),
-  // On-demand rendering is enabled up front so the API docs share the same
-  // infrastructure the cdocs work needs (cdocs resolve their filters per request
-  // and cannot be prerendered). For the API docs the SSR capability is dormant:
-  // every route opts back into build-time rendering with
-  // `export const prerender = true`, so the output is fully static today. The
-  // @astrojs/node adapter is installed so `astro build` + `astro preview` mirror
-  // a production server locally; the CVEs that once affected the Astro-5-era
-  // adapter are resolved in the current Astro 7 / adapter 11 line.
+  // On-demand rendering: cdocs resolve their filters at request time (reading
+  // URL params + cookie), so those routes render on the server and cannot be
+  // prerendered. Static routes (API docs, etc.) opt back into build-time
+  // rendering with `export const prerender = true`; for the API docs the SSR
+  // capability is dormant and the output is fully static. The @astrojs/node
+  // adapter lets `astro build` + `astro preview` mirror a production server
+  // locally; the CVEs that once affected the Astro-5-era adapter are resolved
+  // in the current Astro 7 / adapter 11 line.
   output: "server",
   adapter: node({ mode: "standalone" }),
   integrations: [
@@ -111,6 +111,14 @@ export default defineConfig({
         "@config": fileURLToPath(new URL("./src/config", import.meta.url)),
         "@lib": fileURLToPath(new URL("./src/lib", import.meta.url)),
         "@utils": fileURLToPath(new URL("./src/lib/utils", import.meta.url)),
+        // Shared Markdoc partials, mirroring Hugo's layouts/shortcodes/mdoc/en.
+        // Referenced from .mdoc files as `{% partial file="@partials/..." /%}`;
+        // @astrojs/markdoc resolves the `file` attribute through Vite, so the
+        // alias applies. Partials live outside src/content so the docs glob
+        // loader does not pick them up as collection entries.
+        "@partials": fileURLToPath(
+          new URL("./src/partials/en", import.meta.url),
+        ),
       },
     },
     plugins: [

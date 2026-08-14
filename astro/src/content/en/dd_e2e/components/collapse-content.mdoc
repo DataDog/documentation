@@ -1,0 +1,75 @@
+---
+title: "Collapse content"
+description: "A native details/summary disclosure rendered as static HTML, with a small progressive-enhancement script for aria-expanded syncing and hash deep-linking."
+type: interactive
+---
+
+A collapsible section built on the native `<details>`/`<summary>` elements. It renders as static HTML and toggles without JavaScript; a small script keeps `aria-expanded` in sync and supports deep-linking to a section by its `id`.
+
+## Properties
+
+| Property   | Type      | Default | Description                                                  |
+|------------|-----------|---------|--------------------------------------------------------------|
+| `title`    | `string`  | —       | Required. The header text.                                   |
+| `level`    | `string`  | `h3`    | Heading level for the title (`h1`–`h6`).                     |
+| `expanded` | `boolean` | `false` | When true, the section starts open.                          |
+| `id`       | `string`  | —       | Optional. Enables deep-linking to the section by URL hash.   |
+
+## Examples
+
+### Expanded by default
+
+{% collapse-content title="Expanded section (h4)" level="h4" expanded=true id="collapse-expanded-h4" %}
+This section is expanded by default. Click the title to collapse it.
+{% /collapse-content %}
+
+### Collapsed by default
+
+{% collapse-content title="Collapsed section (h4)" level="h4" expanded=false id="collapse-collapsed-h4" %}
+This section is collapsed by default. Click the title to expand it.
+{% /collapse-content %}
+
+### Heading level h1
+
+{% collapse-content title="H1 collapse" level="h1" expanded=false id="collapse-h1" %}
+This collapsible section uses an h1 heading level.
+{% /collapse-content %}
+
+### Heading level h2
+
+{% collapse-content title="H2 collapse" level="h2" expanded=false id="collapse-h2" %}
+This collapsible section uses an h2 heading level.
+{% /collapse-content %}
+
+### Heading level h3
+
+{% collapse-content title="H3 collapse" level="h3" expanded=false id="collapse-h3" %}
+This collapsible section uses an h3 heading level.
+{% /collapse-content %}
+
+### Heading level h5
+
+{% collapse-content title="H5 collapse" level="h5" expanded=false id="collapse-h5" %}
+This collapsible section uses an h5 heading level.
+{% /collapse-content %}
+
+### With rich content inside
+
+{% collapse-content title="Configuration example" level="h4" expanded=false id="collapse-rich" %}
+To configure the Agent, update the following settings:
+
+```yaml
+api_key: YOUR_API_KEY
+logs_enabled: true
+```
+
+{% alert level="info" %}
+Restart the Agent after making configuration changes.
+{% /alert %}
+{% /collapse-content %}
+
+### Deep-linkable (`id`)
+
+{% collapse-content title="Link straight here" id="deep-linkable" %}
+Navigating to this page with `#deep-linkable` in the URL opens this section automatically.
+{% /collapse-content %}
