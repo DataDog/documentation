@@ -1,10 +1,7 @@
 Adding user information to your RUM sessions makes it possible to:
-
-* Follow the journey of a given user
-* Know which users are the most impacted by errors
-* Monitor performance for your most important users
-
-{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" style="width:90%" /%}
+* Follow the journey of a given user.
+* Know which users are the most impacted by errors.
+* Monitor performance for your most important users.
 
 | Attribute   | Type   | Description                                                                     |
 | ----------- | ------ | ------------------------------------------------------------------------------- |
@@ -12,10 +9,8 @@ Adding user information to your RUM sessions makes it possible to:
 | `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
 | `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
 
-To identify user sessions, use `DatadogSdk.SetUserInfo`.
+To identify user sessions, use the `datadogUserInfo` global field, after initializing the SDK, for example:
 
-For example:
-
-```csharp
-DatadogSdk.Instance.SetUserInfo("1234", "John Doe", "john@doe.com");
+```text
+    m.global.setField("datadogUserInfo", { id: 42, name: "Abcd Efg", email: "abcd.efg@example.com"})
 ```
