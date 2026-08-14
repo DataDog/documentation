@@ -91,11 +91,13 @@ These are the available processors:
 - [Filter][2]
 - [Sample][3]
 - [Sensitive Data Scanner][4]
+- [Tail-Based Sampling][5]
 
 [1]: /observability_pipelines/processors/custom_processor/
 [2]: /observability_pipelines/processors/filter/
 [3]: /observability_pipelines/processors/sample/
 [4]: /observability_pipelines/processors/sensitive_data_scanner/
+[5]: /observability_pipelines/processors/tail_based_sampling/
 
 {{% /tab %}}
 {{< /tabs >}}

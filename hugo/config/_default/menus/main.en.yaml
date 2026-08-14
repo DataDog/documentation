@@ -6996,11 +6996,16 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tag_cardinality_control
       weight: 322
+    - name: Tail-Based Sampling
+      url: observability_pipelines/processors/tail_based_sampling
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_tail_based_sampling
+      weight: 323
     - name: Throttle
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_throttle
-      weight: 323
+      weight: 324
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
