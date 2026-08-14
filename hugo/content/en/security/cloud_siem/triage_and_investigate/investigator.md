@@ -38,7 +38,7 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-1. Navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} and click the {{< ui >}}Investigate{{< /ui >}} tab, and then the [{{< ui >}}AWS Investigator{{< /ui >}}][1] tab.
+1. Navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}{{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /ui >}} and click the {{< ui >}}Investigate{{< /ui >}} tab, and then the [{{< ui >}}AWS Investigator{{< /ui >}}][1] tab.
 
 2. Select an entity type in the {{< ui >}}In{{< /ui >}} field dropdown menu.
 
@@ -52,7 +52,7 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 
 {{% tab "GCP" %}}
 
-1. Navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} and click the {{< ui >}}Investigate{{< /ui >}} tab, and then the [{{< ui >}}GCP Investigator{{< /ui >}}][1] tab.
+1. Navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}{{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /ui >}} and click the {{< ui >}}Investigate{{< /ui >}} tab, and then the [{{< ui >}}GCP Investigator{{< /ui >}}][1] tab.
 
 2. Select an entity type in the {{< ui >}}In{{< /ui >}} field dropdown menu.
 
@@ -65,7 +65,7 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 
 {{% tab "Azure" %}}
 
-1. Navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} and click the {{< ui >}}Investigate{{< /ui >}} tab, and then the [{{< ui >}}Azure Investigator{{< /ui >}}][1] tab.
+1. Navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}{{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /ui >}} and click the {{< ui >}}Investigate{{< /ui >}} tab, and then the [{{< ui >}}Azure Investigator{{< /ui >}}][1] tab.
 
 2. Select an entity type in the {{< ui >}}In{{< /ui >}} field dropdown menu.
 
@@ -78,7 +78,7 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 
 {{% tab "Datadog" %}}
 
-1. Navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} and click the {{< ui >}}Investigate{{< /ui >}} tab, and then the [{{< ui >}}Datadog Investigator{{< /ui >}}][1] tab.
+1. Navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}{{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /ui >}} and click the {{< ui >}}Investigate{{< /ui >}} tab, and then the [{{< ui >}}Datadog Investigator{{< /ui >}}][1] tab.
 
 2. Select an entity type in the {{< ui >}}In{{< /ui >}} field dropdown menu.
 

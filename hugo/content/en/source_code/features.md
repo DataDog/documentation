@@ -42,7 +42,7 @@ After you have connected your Git repositories and tagged your services, you can
 
 {{< tabs >}}
 {{% tab "Error Tracking" %}}
-You can see links from stack frames to their source repository in [Error Tracking][1].
+You can see links from stack frames to their source repository in [{{< prodname >}}Error Tracking{{< /prodname >}}][1].
 
 1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Error Tracking{{< /ui >}}][2].
 2. Click on an issue. The {{< ui >}}Issue Details{{< /ui >}} panel appears on the right.
@@ -112,7 +112,7 @@ You can see links from errors in your Lambda functions' associated stack traces 
 {{% /tab %}}
 {{% tab "Test Optimization" %}}
 
-You can see links from failed test runs to their source repository in **Test Optimization**.
+You can see links from failed test runs to their source repository in **{{< prodname >}}Test Optimization{{< /prodname >}}**.
 
 1. Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][101] and select a failed test run.
 2. If you're using the GitHub or GitLab integrations, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
@@ -127,7 +127,7 @@ For more information, see [Enhancing Developer Workflows with Datadog][102].
 {{% /tab %}}
 {{% tab "Code Security" %}}
 
-You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in **Code Security**.
+You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in **{{< prodname >}}Code Security{{< /prodname >}}**.
 
 1. Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}}][101] and select a repository.
 2. In the {{< ui >}}Code Vulnerabilities{{< /ui >}} or {{< ui >}}Code Quality{{< /ui >}} view, click on a code vulnerability or violation. In the {{< ui >}}Details{{< /ui >}} section, if you're using the GitHub, GitLab, or Azure DevOps integrations, click {{< ui >}}Connect to preview{{< /ui >}}. You can see inline code snippets highlighting the exact lines of code that triggered the vulnerability or violation. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
@@ -204,7 +204,7 @@ To disable PR comments for CI Visibility, go to the [CI Visibility Repository Se
 {{% /tab %}}
 {{% tab "Code Security" %}}
 
-PR comments are enabled by default when first onboarding to Code Security if the GitHub, GitLab, or Azure DevOps integration is installed correctly. These integrations post two types of comments on your pull requests:
+PR comments are enabled by default when first onboarding to {{< prodname >}}Code Security{{< /prodname >}} if the GitHub, GitLab, or Azure DevOps integration is installed correctly. These integrations post two types of comments on your pull requests:
 
 1. A single comment summarizing the new violations detected in your pull request.
 
@@ -214,18 +214,18 @@ PR comments are enabled by default when first onboarding to Code Security if the
 
 {{< img src="source_code_integration/code-security-inline-pr-comment.png" alt="Inline comment for a specific violation detected by Code Security" style="width:100%;">}}
 
-To disable PR comments for Code Security, go to the [Code Security Repository Settings][101].
+To disable PR comments for {{< prodname >}}Code Security{{< /prodname >}}, go to the [Code Security Repository Settings][101].
 
 [101]: https://app.datadoghq.com/security/configuration/code-security/settings
 
 {{% /tab %}}
 {{% tab "Test Optimization" %}}
 
-PR comments are enabled by default when first onboarding to Test Optimization if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed and flaky tests detected in your pull request.
+PR comments are enabled by default when first onboarding to {{< prodname >}}Test Optimization{{< /prodname >}} if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed and flaky tests detected in your pull request.
 
 {{< img src="source_code_integration/test-optimization-pr-comment.png" alt="PR Comment summarizing failed and flaky tests detected by Test Optimization" style="width:100%;">}}
 
-To disable PR comments for Test Optimization, go to the [Test Optimization Advanced Features Settings][101].
+To disable PR comments for {{< prodname >}}Test Optimization{{< /prodname >}}, go to the [Test Optimization Advanced Features Settings][101].
 
 [101]: https://app.datadoghq.com/ci/settings/test-optimization/advanced-features
 

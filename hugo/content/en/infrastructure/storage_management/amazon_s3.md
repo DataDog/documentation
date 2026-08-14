@@ -61,7 +61,7 @@ In this step, select the buckets to monitor, set an inventory destination, and o
    - If a Datadog Log Forwarder is detected in the account, it is reused. Otherwise, the CloudFormation stack deploys a new forwarder.
    - Forwarded access logs can be ingested without indexing if used only for Storage Management. See [exclusion filters][3] for details.
 
-   <div class="alert alert-warning">Forwarding S3 access logs to Datadog incurs Log Management ingestion costs. To minimize costs, use exclusion filters so logs are ingested but not indexed if used only for Storage Management. For details, see <a href="https://www.datadoghq.com/pricing/?product=log-management">Datadog Log Management pricing</a>.</div>
+   <div class="alert alert-warning">Forwarding S3 access logs to Datadog incurs {{< prodname >}}Log Management{{< /prodname >}} ingestion costs. To minimize costs, use exclusion filters so logs are ingested but not indexed if used only for Storage Management. For details, see <a href="https://www.datadoghq.com/pricing/?product=log-management">Datadog Log Management pricing</a>.</div>
 
 4. Click **Launch CloudFormation Template**. An AWS Quick Create stack opens, pre-filled with the bucket mappings, destination prefix, integration role name, and Datadog API key, application key, and log forwarder parameters.
 
@@ -223,7 +223,7 @@ For each bucket you want to monitor:
 
 To get prefix-level access metrics including request counts, server-side latency, and cold data identification, enable S3 server access logging on your source buckets and forward those logs to Datadog. For step-by-step instructions, see [Enable S3 access logs][208] in the Amazon S3 integration documentation.
 
-<div class="alert alert-warning">Forwarding S3 access logs to Datadog incurs Log Management ingestion costs. To minimize costs, use exclusion filters so logs are ingested but not indexed if used only for Storage Management. For details, see <a href="https://www.datadoghq.com/pricing/?product=log-management">Datadog Log Management pricing</a>.</div>
+<div class="alert alert-warning">Forwarding S3 access logs to Datadog incurs {{< prodname >}}Log Management{{< /prodname >}} ingestion costs. To minimize costs, use exclusion filters so logs are ingested but not indexed if used only for Storage Management. For details, see <a href="https://www.datadoghq.com/pricing/?product=log-management">Datadog Log Management pricing</a>.</div>
 
 [208]: /integrations/amazon-s3/#enable-s3-access-logs
 {{% /collapse-content %}}
@@ -295,17 +295,17 @@ If you have any questions, [contact Datadog][1].
 ## Identify and act on cost savings with Bits Chat
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScbFjbJecpVV-DgJNBt2O205KtaWlD_q6ajThIEX9vTGz6ebA/viewform?usp=publish-editor" >}}
-Bits Chat for Storage Management is in Preview. To try this skill, request access.
+{{< prodname >}}Bits Chat{{< /prodname >}} for Storage Management is in Preview. To try this skill, request access.
 {{< /callout >}} 
 
 
-FinOps and engineering teams can use Bits Chat and Storage Management to identify S3 cost savings opportunities, generate reports in Datadog Notebooks, and implement recommended changes. To use Bits Chat with Storage Management, enable the `storage` skill in the Bits Chat settings.
+FinOps and engineering teams can use {{< prodname >}}Bits Chat{{< /prodname >}} and Storage Management to identify S3 cost savings opportunities, generate reports in Datadog Notebooks, and implement recommended changes. To use {{< prodname >}}Bits Chat{{< /prodname >}} with Storage Management, enable the `storage` skill in the {{< prodname >}}Bits Chat{{< /prodname >}} settings.
 
-With the `storage` skill enabled for Bits Chat, you can:
+With the `storage` skill enabled for {{< prodname >}}Bits Chat{{< /prodname >}}, you can:
 
 - **Find the biggest savings opportunities**: Ask natural language questions to surface the highest-impact prefixes, storage classes, or buckets where lifecycle changes would reduce costs the most.
 - **Create reports through Notebooks**: Generate a Datadog Notebook summarizing findings, estimated savings, and recommended actions for your team to review and share.
-- **Implement changes**: Get step-by-step guidance with [Bits Code][10] to apply lifecycle policies, transition objects to cheaper storage tiers, or expire non-current versions in the prefixes with the highest savings potential.
+- **Implement changes**: Get step-by-step guidance with [{{< prodname >}}Bits Code{{< /prodname >}}][10] to apply lifecycle policies, transition objects to cheaper storage tiers, or expire non-current versions in the prefixes with the highest savings potential.
 
 
 ## Visualize granular S3 usage with inventory metrics
@@ -336,7 +336,7 @@ An out-of-the-box [Storage Management S3 dashboard template][8] is available to 
 
 ## Act on optimizations with Storage Management Recommendations
 
-Storage Management analyzes your inventory data and access logs to surface prefix-level recommendations for reducing S3 storage costs. These recommendations are available to all Storage Management customers. Potential savings are estimated using AWS list prices. If you have [Cloud Cost Management][7] enabled, recommendations also appear in Cloud Cost Recommendations, and you can track actual savings from optimizations.
+Storage Management analyzes your inventory data and access logs to surface prefix-level recommendations for reducing S3 storage costs. These recommendations are available to all Storage Management customers. Potential savings are estimated using AWS list prices. If you have [{{< prodname >}}Cloud Cost Management{{< /prodname >}}][7] enabled, recommendations also appear in Cloud Cost Recommendations, and you can track actual savings from optimizations.
 
 Recommendations are run on a daily basis and are automatically refreshed in your account as soon as the recommendations are released.
 

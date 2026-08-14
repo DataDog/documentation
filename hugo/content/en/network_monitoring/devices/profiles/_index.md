@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Network Device Monitoring uses profiles to tell the Datadog Agent the metrics and associated tags to collect. A profile is a collection of {{< tooltip text="OIDs (Object Identifiers)" tooltip="A unique ID or address on a device that when polled returns the response code of that value." >}} associated with a device. 
+{{< prodname >}}Network Device Monitoring{{< /prodname >}} uses profiles to tell the Datadog Agent the metrics and associated tags to collect. A profile is a collection of {{< tooltip text="OIDs (Object Identifiers)" tooltip="A unique ID or address on a device that when polled returns the response code of that value." >}} associated with a device. 
 
 ## Configuration
 
@@ -37,7 +37,7 @@ By default, all profiles in the Agent configuration directory are loaded. To cus
 
 ### sysOID mapped devices
 
-Profiles allow Network Device Monitoring to reuse metric definitions across several device types or instances. Profiles define which metrics to collect and how to transform them into Datadog metrics. Each profile is expected to monitor a class of similar devices from the same vendor. They are automatically used by the Datadog Agent by comparing the sysObjectIds of the network device with the ones defined in the profile file.
+Profiles allow {{< prodname >}}Network Device Monitoring{{< /prodname >}} to reuse metric definitions across several device types or instances. Profiles define which metrics to collect and how to transform them into Datadog metrics. Each profile is expected to monitor a class of similar devices from the same vendor. They are automatically used by the Datadog Agent by comparing the sysObjectIds of the network device with the ones defined in the profile file.
 
 The Datadog Agent provides out-of-the-box profiles in the `conf.d/snmp.d/default_profiles` directory. This directory is cleaned and reset upon Agent upgrades so do not save anything there. You can write your own custom profiles and extend existing ones by putting files in the `conf.d/snmp.d/profiles` directory. Custom profiles in the `profiles` directory take precedence over default profiles with the same name.
 

@@ -21,7 +21,7 @@ When you declare an incident, a declaration modal appears. This modal has severa
 | Incident elements  | Description |
 | ------------------ | ----------- |
 | Title              | (Required) A descriptive title for the incident. |
-| Severity Level     | (Required) By default, severity ranges from SEV-1 (most severe) to SEV-5 (least severe). You can customize the number of severities and their descriptions in Incident Management settings.
+| Severity Level     | (Required) By default, severity ranges from SEV-1 (most severe) to SEV-5 (least severe). You can customize the number of severities and their descriptions in {{< prodname >}}Incident Management{{< /prodname >}} settings.
 | Incident Commander | The person assigned to lead the incident response. |
 
 You can configure [Incident Management Settings][2] to include more fields in the incident declaration modal or require certain fields.
@@ -45,10 +45,10 @@ Incidents created from a monitor will inherit [field values][10] from the monito
 
 ## From a Security Signal
 
-Declare an incident directly from a Cloud SIEM or Workload Protection signal side panel, by clicking **Declare incident** or **Escalate Investigation**. For more information, see [Investigate Security Signals][3].
+Declare an incident directly from a {{< prodname >}}Cloud SIEM{{< /prodname >}} or {{< prodname >}}Workload Protection{{< /prodname >}} signal side panel, by clicking **Declare incident** or **Escalate Investigation**. For more information, see [Investigate Security Signals][3].
 
-Declare an incident from an App and API Protection signal through the actions listed in the signal side panel. Click **Show all actions** and click **Declare Incident**.
-For more information, see [Investigate Security Signals][4] for App and API Protection.
+Declare an incident from an {{< prodname >}}App and API Protection{{< /prodname >}} signal through the actions listed in the signal side panel. Click **Show all actions** and click **Declare Incident**.
+For more information, see [Investigate Security Signals][4] for {{< prodname >}}App and API Protection{{< /prodname >}}.
 
 {{< img src="/incident_response/incident_management/investigate/declare/declare_asm.png" alt="Your image description" style="width:90%;" >}}
 
@@ -60,7 +60,7 @@ Declare an incident from [Secret Scanning][15] by clicking **Declare incident** 
 
 ## From a case
 
-Declare an incident from [Case Management][5]. From the individual case detail page, click **Declare incident** to escalate a case to an incident.
+Declare an incident from [{{< prodname >}}Case Management{{< /prodname >}}][5]. From the individual case detail page, click **Declare incident** to escalate a case to an incident.
 
 {{< img src="incident_response/incident_management/investigate/declare/declare_case_management.png" alt="An example case page highlighting the Declare Incident button at the top of the page" style="width:90%;" >}}
 
@@ -102,7 +102,7 @@ If you have set up the [Datadog integration for Google Chat][14], you can declar
 
 The Handoff Notification displays callout cards when you are paged or added to active incidents. These cards allow you to:
 
-- View and acknowledge On-Call pages
+- View and acknowledge {{< prodname >}}On-Call{{< /prodname >}} pages
 - Navigate to relevant incident resources
 - Preview Slack messages from incident channels
 - Take direct actions on incidents

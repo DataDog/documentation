@@ -5,7 +5,7 @@ aliases:
 - /continuous_integration/tests/setup/
 ---
 
-For information about configuration options for [Test Optimization][1], choose your language:
+For information about configuration options for [{{< prodname >}}Test Optimization{{< /prodname >}}][1], choose your language:
 
 {{< card-grid card_width="75px" >}}
   {{< image-card href="/tests/setup/dotnet/" src="integrations_logos/dotnet_avatar.svg" alt=".net" >}}
@@ -25,13 +25,13 @@ see the [Agent Network Traffic][3] or [Agentless Network Settings][4] guide for 
 
 If you run your tests in a container, see the [Tests in Containers][5] guide for additional setup steps.
 
-To have a supported Test Optimization library upload code coverage reports automatically, see [Upload reports automatically with Test Optimization][6].
+To have a supported {{< prodname >}}Test Optimization{{< /prodname >}} library upload code coverage reports automatically, see [Upload reports automatically with Test Optimization][6].
 
 ## Data Access Control
 
-You can restrict Test Optimization data at the repository level to the appropriate teams and roles in Datadog. This helps prevent sensitive information, such as test names or source paths, from crossing team boundaries.
+You can restrict {{< prodname >}}Test Optimization{{< /prodname >}} data at the repository level to the appropriate teams and roles in Datadog. This helps prevent sensitive information, such as test names or source paths, from crossing team boundaries.
 
-To use Data Access Control, go to [Organization Settings > Data Access Control][7] and create a Restricted Dataset scoped to Software Delivery and the repository you want to restrict. Grant access to the roles or teams that should see it.
+To use Data Access Control, go to [Organization Settings > Data Access Control][7] and create a Restricted Dataset scoped to {{< prodname >}}Software Delivery{{< /prodname >}} and the repository you want to restrict. Grant access to the roles or teams that should see it.
 
 [1]: /continuous_integration/tests
 [2]: /tests/setup/bazel/

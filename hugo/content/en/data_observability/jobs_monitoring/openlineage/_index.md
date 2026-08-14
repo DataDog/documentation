@@ -560,7 +560,7 @@ The following example shows a job reading from a PostgreSQL table and writing to
 ]
 ```
 
-**Note**: If a dataset namespace is not recognized, Datadog still creates a lineage node for it but does not surface it in the Data Observability product. Use a recognized namespace format to have datasets appear in the catalog and lineage graph.
+**Note**: If a dataset namespace is not recognized, Datadog still creates a lineage node for it but does not surface it in the {{< prodname >}}Data Observability{{< /prodname >}} product. Use a recognized namespace format to have datasets appear in the catalog and lineage graph.
 
 ## Supported facets
 

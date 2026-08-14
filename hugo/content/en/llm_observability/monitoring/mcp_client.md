@@ -9,7 +9,7 @@ further_reading:
 
 ---
 
-You can monitor your MCP clients with Agent Observability in two ways:
+You can monitor your MCP clients with {{< prodname >}}Agent Observability{{< /prodname >}} in two ways:
 
 - [Automatic instrumentation](#automatically-instrument-your-mcp-client): If you are using the official [MCP Python SDK][1] or [MCP JavaScript SDK][3]
 - [Manual instrumentation](#manually-instrument-your-mcp-client): If you are not using an official MCP SDK, or your MCP clients are written in Java

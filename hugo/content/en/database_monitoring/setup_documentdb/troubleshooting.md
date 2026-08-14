@@ -3,7 +3,7 @@ title: Troubleshooting DBM Setup for Amazon DocumentDB
 description: Troubleshoot Database Monitoring setup for Amazon DocumentDB
 ---
 
-This page details common issues with setting up and using Database Monitoring with Amazon DocumentDB, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
+This page details common issues with setting up and using {{< prodname >}}Database Monitoring{{< /prodname >}} with Amazon DocumentDB, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
 ## Amazon DocumentDB known limitations
 

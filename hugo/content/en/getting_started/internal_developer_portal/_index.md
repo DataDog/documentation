@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Datadog's Internal Developer Portal (IDP) helps you unify software metadata, live telemetry, and developer workflows in a single platform. This guide walks you through setting up each core IDP component:
+Datadog's {{< prodname >}}Internal Developer Portal{{< /prodname >}} (IDP) helps you unify software metadata, live telemetry, and developer workflows in a single platform. This guide walks you through setting up each core IDP component:
 
 - [Catalog][1]: Real-time inventory of entities and environments, enriched with ownership and operational metadata.
 - [Scorecards][2]: Measure adoption of engineering best practices using rules-based evaluations.
@@ -117,7 +117,7 @@ In addition to using default rules, you can define custom rules to reflect your 
 1. Send an outcome of `pass`, `fail`, or `skip` for each entity in one of the following ways:
    - Manually through the Datadog UI
    - Programmatically through the Scorecards API
-   - Automatically, using [Workflow Automation][14] to post outcomes on a schedule
+   - Automatically, using [{{< prodname >}}Workflow Automation{{< /prodname >}}][14] to post outcomes on a schedule
 1. View an overview of outcomes on the [Scorecards page][13].
 
 Learn more about scorecard configuration and custom rules in the [Scorecards documentation][2].

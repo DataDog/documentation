@@ -16,7 +16,7 @@ The following code security capabilities are supported in the Java library, for 
 
 The minimum tracer version to get all supported code security capabilities for Java is 1.15.0.
 
-**Note**: **Static Software Composition Analysis (SCA)** and **Static Code Analysis (SAST)** capabilities do not require the Datadog SDK. Therefore, the requirements listd above do not apply to these two Code Security capabilities.
+**Note**: **Static Software Composition Analysis (SCA)** and **Static Code Analysis (SAST)** capabilities do not require the Datadog SDK. Therefore, the requirements listd above do not apply to these two {{< prodname >}}Code Security{{< /prodname >}} capabilities.
 
 ### Supported deployment types
 | Type              | Runtime Software Composition Analysis (SCA) | Runtime Code Analysis (IAST) |
@@ -28,7 +28,7 @@ The minimum tracer version to get all supported code security capabilities for J
 | AWS Lambda        | not supported                               | not supported                |
 | Azure App Service | {{< X >}}                                   | {{< X >}}                    |   
 
-**Note**: Azure App Service is supported for **web applications only**. Code Security doesn't support Azure Functions.
+**Note**: Azure App Service is supported for **web applications only**. {{< prodname >}}Code Security{{< /prodname >}} doesn't support Azure Functions.
 
 ## Language and framework compatibility
 

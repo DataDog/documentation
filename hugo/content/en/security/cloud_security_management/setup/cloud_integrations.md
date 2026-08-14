@@ -14,7 +14,7 @@ Use the following instructions to enable Misconfigurations and Identity Risks (C
 
 ## Enable Posture Management
 
-To enable Posture Management for your cloud accounts, you must first set up the integration and then enable Cloud Security for each AWS, Azure, Google Cloud Platform, or Oracle Cloud Infrastructure account.
+To enable Posture Management for your cloud accounts, you must first set up the integration and then enable {{< prodname >}}Cloud Security{{< /prodname >}} for each AWS, Azure, Google Cloud Platform, or Oracle Cloud Infrastructure account.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -28,9 +28,9 @@ If you haven't already, set up the [Amazon Web Services integration][1]. You mus
 ### Enable Cloud Security for your AWS accounts
 
 1. On the [{{< ui >}}Cloud Security Setup{{< /ui >}}][3] page, click {{< ui >}}Cloud Integrations{{< /ui >}}.
-1. Expand the {{< ui >}}AWS{{< /ui >}} section and click the account you want to enable Cloud Security for. A side panel with configuration options for that account opens.
+1. Expand the {{< ui >}}AWS{{< /ui >}} section and click the account you want to enable {{< prodname >}}Cloud Security{{< /prodname >}} for. A side panel with configuration options for that account opens.
 1. Under {{< ui >}}Features{{< /ui >}}, beside each feature you want to enable, turn on the {{< ui >}}Enable{{< /ui >}} toggle.
-1. To create a filter that excludes certain resources from being evaluated by Cloud Security, under {{< ui >}}Evaluation Filters{{< /ui >}}, click {{< ui >}}Limit to Specific Resources{{< /ui >}}. Then, click {{< ui >}}Add Resource Tags{{< /ui >}}, add `key:value` tags as required, and click {{< ui >}}Save{{< /ui >}}. For more information, see [Use Filters to Exclude Resources from Evaluation][5].
+1. To create a filter that excludes certain resources from being evaluated by {{< prodname >}}Cloud Security{{< /prodname >}}, under {{< ui >}}Evaluation Filters{{< /ui >}}, click {{< ui >}}Limit to Specific Resources{{< /ui >}}. Then, click {{< ui >}}Add Resource Tags{{< /ui >}}, add `key:value` tags as required, and click {{< ui >}}Save{{< /ui >}}. For more information, see [Use Filters to Exclude Resources from Evaluation][5].
 
 [1]: /integrations/amazon_web_services/
 [2]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-management
@@ -65,7 +65,7 @@ If you haven't already, set up the [Microsoft Azure integration][1].
 1. On the [{{< ui >}}Cloud Security Setup{{< /ui >}}][3] page, click {{< ui >}}Cloud Integrations{{< /ui >}}.
 1. Expand the {{< ui >}}Azure{{< /ui >}} section.
 2. To enable Posture Management for an account, switch the {{< ui >}}Posture Management{{< /ui >}} toggle to the on position.
-3. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the subscription you want to filter on. A side panel with configuration options opens. Then, click {{< ui >}}Add Resource Tags{{< /ui >}}, add `key:value` tags as required, and click {{< ui >}}Save{{< /ui >}}. For more information, see [Use Filters to Exclude Resources from Evaluation][4].
+3. To create a filter that excludes certain resources from being evaluated by {{< prodname >}}Cloud Security{{< /prodname >}}, click the subscription you want to filter on. A side panel with configuration options opens. Then, click {{< ui >}}Add Resource Tags{{< /ui >}}, add `key:value` tags as required, and click {{< ui >}}Save{{< /ui >}}. For more information, see [Use Filters to Exclude Resources from Evaluation][4].
 
 [1]: /integrations/azure
 [2]: /integrations/guide/azure-graph-api-permissions/
@@ -97,7 +97,7 @@ The Datadog Google Cloud Platform integration uses service accounts to create an
 1. On the [{{< ui >}}Cloud Security Setup{{< /ui >}}][2] page, click {{< ui >}}Cloud Integrations{{< /ui >}}.
 1. Expand the {{< ui >}}GCP{{< /ui >}} section.
 2. To enable Posture Management for an account, switch the {{< ui >}}Posture Management{{< /ui >}} toggle to the on position.
-3. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the project you want to filter on. A side panel with configuration options opens. Then, click {{< ui >}}Add Resource Tags{{< /ui >}}, add `key:value` tags as required, and click {{< ui >}}Save{{< /ui >}}. For more information, see [Use Filters to Exclude Resources from Evaluation][11].
+3. To create a filter that excludes certain resources from being evaluated by {{< prodname >}}Cloud Security{{< /prodname >}}, click the project you want to filter on. A side panel with configuration options opens. Then, click {{< ui >}}Add Resource Tags{{< /ui >}}, add `key:value` tags as required, and click {{< ui >}}Save{{< /ui >}}. For more information, see [Use Filters to Exclude Resources from Evaluation][11].
 
 [1]: /integrations/google_cloud_platform
 [2]: https://app.datadoghq.com/security/configuration/csm/setup
@@ -121,7 +121,7 @@ If you haven't already, set up the [Oracle Cloud Infrastructure integration][1].
 1. On the [{{< ui >}}Cloud Security Setup{{< /ui >}}][2] page, click {{< ui >}}Cloud Integrations{{< /ui >}}.
 1. Expand the {{< ui >}}OCI{{< /ui >}} section.
 1. To enable Posture Management for a tenancy, switch the {{< ui >}}Posture Management{{< /ui >}} toggle to the on position.
-1. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the {{< ui >}}Plus{{< /ui >}} (+) icon under {{< ui >}}Resource Evaluation Filters{{< /ui >}}. For more information, see [Use Filters to Exclude Resources from Evaluation][3].
+1. To create a filter that excludes certain resources from being evaluated by {{< prodname >}}Cloud Security{{< /prodname >}}, click the {{< ui >}}Plus{{< /ui >}} (+) icon under {{< ui >}}Resource Evaluation Filters{{< /ui >}}. For more information, see [Use Filters to Exclude Resources from Evaluation][3].
 1. Click {{< ui >}}Done{{< /ui >}}.
 
 [1]: /integrations/oracle-cloud-infrastructure/

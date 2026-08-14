@@ -9,10 +9,10 @@ further_reading:
   text: SDK
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov" >}}<div class="alert alert-danger">{{< prodname >}}AI Guard{{< /prodname >}} isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-Manual integrations require additional configuration to enable AI Guard protection. Follow the instructions for each framework to set up AI Guard evaluations.
+Manual integrations require additional configuration to enable {{< prodname >}}AI Guard{{< /prodname >}} protection. Follow the instructions for each framework to set up {{< prodname >}}AI Guard{{< /prodname >}} evaluations.
 
 ## Supported frameworks and libraries
 ### Python
@@ -29,7 +29,7 @@ Manual integrations require additional configuration to enable AI Guard protecti
 ### Amazon Strands
 #### Python
 
-The Amazon Strands integration enables AI Guard evaluations for applications built with the [Amazon Strands Agents SDK][1].
+The Amazon Strands integration enables {{< prodname >}}AI Guard{{< /prodname >}} evaluations for applications built with the [Amazon Strands Agents SDK][1].
 
 ##### Setup
 
@@ -68,7 +68,7 @@ agent = Agent(
 ### LiteLLM Proxy
 #### Python
 
-The LiteLLM Proxy integration enables AI Guard evaluations for applications using the [LiteLLM Proxy][1].
+The LiteLLM Proxy integration enables {{< prodname >}}AI Guard{{< /prodname >}} evaluations for applications using the [LiteLLM Proxy][1].
 
 ##### Setup
 
@@ -101,7 +101,7 @@ guardrails:
 
 The guardrail supports all three modes: `pre_call`, `post_call`, and `during_call`.
 
-By default, the guardrail follows the blocking configuration set in the AI Guard service settings. To disable blocking, set the `block` parameter to `false` (equivalent to the `block` option in the [SDK][2] and [REST API][3]).
+By default, the guardrail follows the blocking configuration set in the {{< prodname >}}AI Guard{{< /prodname >}} service settings. To disable blocking, set the `block` parameter to `false` (equivalent to the `block` option in the [SDK][2] and [REST API][3]).
 
 [1]: https://docs.litellm.ai/docs/simple_proxy
 [2]: /security/ai_guard/setup/sdk/

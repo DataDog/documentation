@@ -64,7 +64,7 @@ Expect to see service data populated in Datadog a few minutes after your queries
 
 Add tags to your network devices in Datadog populated with data from your ServiceNow CMDB.
 
-With device tagging, you can dynamically enrich network devices monitored by Datadog [Network Device Monitoring][5] with device metadata from your ServiceNow CMDB. This feature requires Datadog Agent 7.71+.
+With device tagging, you can dynamically enrich network devices monitored by Datadog [{{< prodname >}}Network Device Monitoring{{< /prodname >}}][5] with device metadata from your ServiceNow CMDB. This feature requires Datadog Agent 7.71+.
 
 **Notes**:
 * The device must exist in both Datadog's infrastructure and the ServiceNow topology for tag enrichment to occur.

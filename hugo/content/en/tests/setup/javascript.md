@@ -206,7 +206,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 
 ### Upload test failure screenshots
 
-When enabled, Test Optimization uploads screenshots that Playwright captures when a test fails. View the screenshots in the {{< ui >}}Media{{< /ui >}} tab of the Test Optimization test details side panel. Use them to inspect browser state at the time of failure.
+When enabled, {{< prodname >}}Test Optimization{{< /prodname >}} uploads screenshots that Playwright captures when a test fails. View the screenshots in the {{< ui >}}Media{{< /ui >}} tab of the {{< prodname >}}Test Optimization{{< /prodname >}} test details side panel. Use them to inspect browser state at the time of failure.
 
 {{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="A Playwright failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
@@ -218,7 +218,7 @@ To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` envi
 - `'only-on-failure'`: Capture screenshot after each test failure.
 - `'on-first-failure'`: Capture screenshot after each test's first failure.
 
-**Note**: If you use `'on'`, Test Optimization only uploads screenshots from failed tests.
+**Note**: If you use `'on'`, {{< prodname >}}Test Optimization{{< /prodname >}} only uploads screenshots from failed tests.
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [2]: /tests/guides/add_custom_measures/?tab=javascripttypescript
@@ -423,7 +423,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 
 ### Upload test failure screenshots
 
-When enabled, Test Optimization uploads screenshots that Cypress captures when a test fails. They appear in the {{< ui >}}Media{{< /ui >}} tab of the Test Optimization test details side panel. Use them to inspect browser state at the time of failure.
+When enabled, {{< prodname >}}Test Optimization{{< /prodname >}} uploads screenshots that Cypress captures when a test fails. They appear in the {{< ui >}}Media{{< /ui >}} tab of the {{< prodname >}}Test Optimization{{< /prodname >}} test details side panel. Use them to inspect browser state at the time of failure.
 
 {{< img src="continuous_integration/tests/setup/cypress-failure-screenshot-media-tab.png" alt="A Cypress failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
@@ -626,7 +626,7 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
   <strong>Note</strong>: The manual testing API is available starting in <code>dd-trace</code> versions <code>5.23.0</code> and <code>4.47.0</code>.
 </div>
 
-If you use Jest, Mocha, Cypress, Playwright, Cucumber, or Vitest, **do not use the manual testing API**, as Test Optimization automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
+If you use Jest, Mocha, Cypress, Playwright, Cucumber, or Vitest, **do not use the manual testing API**, as {{< prodname >}}Test Optimization{{< /prodname >}} automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
 
 Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
 
@@ -742,7 +742,7 @@ If you want visibility into the browser process, consider using [RUM & Session R
 
 ### Cypress interactive mode
 
-Cypress interactive mode (which you can enter by running `cypress open`) is not supported by Test Optimization because some cypress events, such as [`before:run`][11], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][12].
+Cypress interactive mode (which you can enter by running `cypress open`) is not supported by {{< prodname >}}Test Optimization{{< /prodname >}} because some cypress events, such as [`before:run`][11], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][12].
 
 ### Jest's `--forceExit`
 Jest's [--forceExit][15] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
@@ -770,7 +770,7 @@ Because this mode does not initialize `dd-trace` in Vitest workers, the followin
 
 ## Best practices
 
-Follow these practices to take full advantage of the testing framework and Test Optimization.
+Follow these practices to take full advantage of the testing framework and {{< prodname >}}Test Optimization{{< /prodname >}}.
 
 ### Parameterized tests
 
@@ -806,7 +806,7 @@ forEach([
 });
 {{< /code-block >}}
 
-When you use this approach, both the testing framework and Test Optimization can tell your tests apart.
+When you use this approach, both the testing framework and {{< prodname >}}Test Optimization{{< /prodname >}} can tell your tests apart.
 
 ### Test session name `DD_TEST_SESSION_NAME`
 

@@ -20,9 +20,9 @@ further_reading:
 
 ## Overview
 
-Agent Observability allows you to monitor, troubleshoot, and improve your agentic applications. With the Agent Observability SDK for Python, you can monitor the health and quality of your single- or multi-agentic systems built on [OpenAI Agents SDK][1], [LangGraph][2], or [CrewAI][3].
+{{< prodname >}}Agent Observability{{< /prodname >}} allows you to monitor, troubleshoot, and improve your agentic applications. With the Agent Observability SDK for Python, you can monitor the health and quality of your single- or multi-agentic systems built on [OpenAI Agents SDK][1], [LangGraph][2], or [CrewAI][3].
 
-For your agentic applications, Agent Observability allows you to:
+For your agentic applications, {{< prodname >}}Agent Observability{{< /prodname >}} allows you to:
 
 - Monitor error rate, latency build up, or cost 
 - Visualize agent decisions, such as tools used or agent a task was handed off to

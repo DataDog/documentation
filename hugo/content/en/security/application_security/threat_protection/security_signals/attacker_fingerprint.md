@@ -12,7 +12,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -20,7 +20,7 @@ This topic describes a feature called **Datadog Attacker Fingerprint** to identi
 
 ## Overview
 
-Datadog Attacker Fingerprint identifies attackers beyond IP addresses. Datadog Attacker fingerprints are automatically computed and added to your traces on attack or login attempts when App and API Protection (AAP) is enabled on your service.
+Datadog Attacker Fingerprint identifies attackers beyond IP addresses. Datadog Attacker fingerprints are automatically computed and added to your traces on attack or login attempts when {{< prodname >}}App and API Protection{{< /prodname >}} (AAP) is enabled on your service.
 
 Datadog Attacker fingerprints are composed of several fragments:
 * Endpoint Identifier

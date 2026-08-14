@@ -144,4 +144,4 @@ Optimize your system of analysis for analysis while reducing costs by doing the 
 
 ---
 
-<a name="support"></a> * Observability Pipelines support logs. Support for metrics is in beta.
+<a name="support"></a> * {{< prodname >}}Observability Pipelines{{< /prodname >}} support logs. Support for metrics is in beta.

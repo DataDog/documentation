@@ -20,15 +20,15 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" header="App and API Protection for Istio is in Preview" >}}
-To try the preview of App and API Protection for Istio, use the following setup instructions.
+{{< callout url="#" btn_hidden="true" header="{{< prodname >}}App and API Protection{{< /prodname >}} for Istio is in Preview" >}}
+To try the preview of {{< prodname >}}App and API Protection{{< /prodname >}} for Istio, use the following setup instructions.
 {{< /callout >}}
 
-You can enable App and API Protection within an Istio service mesh to inspect and protect traffic at the edge of your infrastructure. This works at the Istio Ingress Gateway or at the sidecar level.
+You can enable {{< prodname >}}App and API Protection{{< /prodname >}} within an Istio service mesh to inspect and protect traffic at the edge of your infrastructure. This works at the Istio Ingress Gateway or at the sidecar level.
 
 ## Prerequisites
 
@@ -38,13 +38,13 @@ Before you begin, verify that you have the following:
 - The [Datadog Agent is installed and configured][2] in your Kubernetes cluster.
   - Enable and configure [Remote Configuration][3] to enable blocking attackers through the Datadog UI.
   - Enable [APM][4] in the Agent. This allows the security processor service to send its own traces to the Agent.
-    - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection security processor service.
+    - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the {{< prodname >}}App and API Protection{{< /prodname >}} security processor service.
 
 ## Automated configuration with App and API Protection for Kubernetes
 
 <div class="alert alert-info">
   <p>Automated configuration uses <strong>sidecar mode</strong>: the security processor runs as a container injected into your Istio gateway pods. No separate processor deployment is needed.</p>
-  <p>For <strong>external mode</strong> setup, see <a href="/containers/kubernetes/appsec/">App and API Protection for Kubernetes</a>.</p>
+  <p>For <strong>external mode</strong> setup, see <a href="/containers/kubernetes/appsec/">{{< prodname >}}App and API Protection{{< /prodname >}} for Kubernetes</a>.</p>
 </div>
 
 ### Setup
@@ -113,7 +113,7 @@ For fine-grained control over specific gateways or sidecars, use the manual setu
 
 ### Step 1: Deploy the Datadog security processor service
 
-This gRPC server receives requests and responses from Envoy for App and API Protection analysis.
+This gRPC server receives requests and responses from Envoy for {{< prodname >}}App and API Protection{{< /prodname >}} analysis.
 
 Deploy it in a namespace accessible by your Istio Ingress Gateway. The Docker image is on the [Datadog Go tracer GitHub Registry][6].
 
@@ -339,7 +339,7 @@ spec:
 {{% /tab %}}
 {{% tab "Sidecar" %}}
 
-This configuration applies App and API Protection to specific pods within your service mesh by targeting their Istio sidecar proxies. This allows for more granular control over which services are protected.
+This configuration applies {{< prodname >}}App and API Protection{{< /prodname >}} to specific pods within your service mesh by targeting their Istio sidecar proxies. This allows for more granular control over which services are protected.
 
 Here is an example manifest (`datadog-aap-sidecar-filter.yaml`) that targets pods with the label `app: <your-app-label>` in the namespace `<your-application-namespace>`. You must update these settings to match your specific application.
 

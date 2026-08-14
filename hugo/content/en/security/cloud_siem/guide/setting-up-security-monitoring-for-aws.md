@@ -12,7 +12,7 @@ With Datadog Cloud SIEM, detection rules are applied to all processed logs. AWS 
 ## Setup
 
 1. Navigate to the [Security Configuration Setup page][1] in the Datadog app.
-2. Select {{< ui >}}Cloud SIEM{{< /ui >}}.
+2. Select {{< ui >}}{{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /ui >}}.
 3. Under **Secure your cloud environment**, select {{< ui >}}AWS{{< /ui >}}.
 4. Complete the **Detect threats with cloud logs** setup.
 5. (Optional) Complete the **Secure your hosts and containers** setup.

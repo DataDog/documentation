@@ -34,7 +34,7 @@ With Cloud Security Vulnerabilities, you can manage your cloud security manageme
 - Pass compliance audits (such as SOC2, PCI, HIPAA, CIS, and FedRamp)
 - Remediate emerging vulnerabilities (0-day CVEs)
 
-**Note**: For vulnerability management in application libraries, see [Software Composition Analysis][5]. For application code, see [Code Security][10].
+**Note**: For vulnerability management in application libraries, see [Software Composition Analysis][5]. For application code, see [{{< prodname >}}Code Security{{< /prodname >}}][10].
 
 ## Key capabilities
 

@@ -726,7 +726,7 @@ You can see the detailed logic for each recommendation type, along with observab
 
 Recommendations support [Tag Pipelines][11], allowing you to filter, group, and analyze recommendations using your organization's standardized tags. Any tag rules configured in Tag Pipelines are automatically applied to recommendations and [are normalized][12].
 
-You can also query your recommendations from an AI agent with the [`cost_recommendations`][16] tool in the Datadog MCP Server.
+You can also query your recommendations from an AI agent with the [`cost_recommendations`][16] tool in the {{< prodname >}}Datadog MCP Server{{< /prodname >}}.
 
 ## Recommendation categories
 
@@ -756,7 +756,7 @@ The following are requirements necessary to receive Cloud Cost recommendations:
 
 For each cloud account that you would like to receive recommendations for:
 
-1. Configure [Cloud Cost Management][2] to send billing data to Datadog.
+1. Configure [{{< prodname >}}Cloud Cost Management{{< /prodname >}}][2] to send billing data to Datadog.
    - For Azure, this requires using the App Registration method to collect billing data.
 1. Enable [resource collection][3] for recommendations.
    - For AWS, enable resource collection in the {{< ui >}}Resource Collection{{< /ui >}} tab on the [AWS integration tile][4].
@@ -818,7 +818,7 @@ You can change a recommendation status in three ways:
 - **From the side panel**: Click a recommendation to open the side panel, then use the status dropdown to select a new status.
 
 ## Recommendation action-taking
-You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking option:
+You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click {{< prodname >}}Workflow Automation{{< /prodname >}}, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click {{< prodname >}}Workflow Automation{{< /prodname >}}. See the following details for each action-taking option:
 
 - **Jira**: Create Jira issues directly from the recommendation side panel or by selecting multiple recommendations in the {{< ui >}}Active Recommendations{{< /ui >}} list and clicking {{< ui >}}Create Jira issue{{< /ui >}}. Created issues are tagged and link back to the recommendation in Datadog.
 
@@ -827,8 +827,8 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
   - `-@jira_issues.issue_key:*` - Show only recommendations without a Jira issue
   - `jira_issues.issue_key:ABC*` - Filter by specific Jira project prefix
 
-- **[Bits Code][14] code fixes**: Code fixes are available for applicable S3 and DynamoDB recommendations, as well as the Downsize Kubernetes Deployment recommendation. In these situations, Bits Code creates production-ready pull requests to implement cloud resource changes and cost optimizations in Terraform or Helm charts, respectively. [Set up Bits Code][13] to use this feature.
-- **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking {{< ui >}}Delete EBS Volume{{< /ui >}}, directly within Cloud Cost Management.
+- **[{{< prodname >}}Bits Code{{< /prodname >}}][14] code fixes**: Code fixes are available for applicable S3 and DynamoDB recommendations, as well as the Downsize Kubernetes Deployment recommendation. In these situations, {{< prodname >}}Bits Code{{< /prodname >}} creates production-ready pull requests to implement cloud resource changes and cost optimizations in Terraform or Helm charts, respectively. [Set up Bits Code][13] to use this feature.
+- **1-click {{< prodname >}}Workflow Automation{{< /prodname >}} actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking {{< ui >}}Delete EBS Volume{{< /ui >}}, directly within {{< prodname >}}Cloud Cost Management{{< /prodname >}}.
 - **[Cost Optimization Automation][15]**: Set up automations that act on recommendations continuously on a recurring schedule. Automations are scoped to specific accounts, regions, and tags and include safeguards such as pre-action snapshots and optional human approval through Slack or Microsoft Teams.
 - **Datadog Case Management**: Users can go to the recommendation side panel and click {{< ui >}}Create Case{{< /ui >}} to generate a case to manage and take action on recommendations.
 - **Dismiss**: Use {{< ui >}}Dismiss{{< /ui >}} in the recommendation side panel to hide a recommendation for a chosen time frame and provide a reason. Dismissed recommendations move to the {{< ui >}}Dismissed{{< /ui >}} tab.

@@ -13,9 +13,9 @@ further_reading:
 
 ## Setup
 
-<div class="alert alert-info">Data Observability: Jobs Monitoring requires <a href="https://github.com/DataDog/datadog-agent/releases" target="_blank">Datadog Agent version</a> 7.64.0 or later, and <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">Java tracer</a> version 1.38.0 or later.</div>
+<div class="alert alert-info">{{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring requires <a href="https://github.com/DataDog/datadog-agent/releases" target="_blank">Datadog Agent version</a> 7.64.0 or later, and <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">Java tracer</a> version 1.38.0 or later.</div>
 
-Follow these steps to enable Data Observability: Jobs Monitoring for Spark on Kubernetes.
+Follow these steps to enable {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring for Spark on Kubernetes.
 
 1. [Install the Datadog Agent](#install-the-datadog-agent-on-your-kubernetes-cluster) on your Kubernetes cluster.
 2. (Optional) [Collect Spark Data Lineage with OpenLineage](#optional-collect-spark-data-lineage-with-openlineage).
@@ -148,11 +148,11 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 
 ### (Optional) Collect Spark Data Lineage with OpenLineage
 
-Data Observability: Jobs Monitoring can collect Spark lineage through [OpenLineage][8], so you can see the upstream and downstream tables of your jobs and visualize entire Spark pipelines. Setup has two steps: install the OpenLineage Spark provider, then enable the feature in the Java tracer.
+{{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring can collect Spark lineage through [OpenLineage][8], so you can see the upstream and downstream tables of your jobs and visualize entire Spark pipelines. Setup has two steps: install the OpenLineage Spark provider, then enable the feature in the Java tracer.
 
 <div class="alert alert-info">OpenLineage lineage collection requires <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">Java tracer</a> version 1.48.0 or later.</div>
 
-1. **Install the OpenLineage Spark provider.** Make the `openlineage-spark` JAR available on the classpath of your Spark driver and executors, following the [OpenLineage Spark installation guide][9]. Use OpenLineage version `1.29.0` or later, which is the first version that supports the run-tag facets that Data Observability: Jobs Monitoring relies on.
+1. **Install the OpenLineage Spark provider.** Make the `openlineage-spark` JAR available on the classpath of your Spark driver and executors, following the [OpenLineage Spark installation guide][9]. Use OpenLineage version `1.29.0` or later, which is the first version that supports the run-tag facets that {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring relies on.
 
    You do not need to set `spark.extraListeners` or configure any `spark.openlineage.transport.*` options. When the feature is enabled and the JAR is present, the Datadog Java tracer registers the OpenLineage listener and routes lineage events through the local Datadog Agent.
 

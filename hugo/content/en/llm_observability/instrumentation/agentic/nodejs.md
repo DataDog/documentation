@@ -42,7 +42,7 @@ Here is an example with the package.json:
 
 Although this value can be set in a `Dockerfile`, bootstrap script, etc., as long as that infrastructure _already_ exists in the code and is _before_ the Node.js application process starts.
 
-3. Initialize the Agent Observability package
+3. Initialize the {{< prodname >}}Agent Observability{{< /prodname >}} package
 
 Initialize the Agent Observability SDK via `ddtrace.auto`. This **needs** to be done as the first import in the application's entrypoint, aside from any environment variable or configuration-loading imports.
 

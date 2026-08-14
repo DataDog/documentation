@@ -16,7 +16,7 @@ further_reading:
       text: 'Learn about Flaky Test Management'
 ---
 
-This page explains how to check that the optimizations offered by Test Optimization are working as intended. The guide assumes that [Test Optimization][13] already works for the repository under validation, and it shows the steps to validate optimizations for a **single repository**.
+This page explains how to check that the optimizations offered by {{< prodname >}}Test Optimization{{< /prodname >}} are working as intended. The guide assumes that [{{< prodname >}}Test Optimization{{< /prodname >}}][13] already works for the repository under validation, and it shows the steps to validate optimizations for a **single repository**.
 
 <div class="alert alert-warning">Run these validations in a feature branch only, and do not merge them into your default or main branch.</div>
 
@@ -248,7 +248,7 @@ Click on the only test in the list and verify that it shows as {{< ui >}}DISABLE
 
 ## Remediation
 
-Test Optimization helps with the remediation of test flakiness with attempt to fix and Bits AI auto fixes. This section focuses on the validation of the attempt to fix workflow.
+{{< prodname >}}Test Optimization{{< /prodname >}} helps with the remediation of test flakiness with attempt to fix and Bits AI auto fixes. This section focuses on the validation of the attempt to fix workflow.
 
 To validate attempt to fix, follow these steps:
 

@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Enable Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring.
+Enable Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} to get comprehensive crash reports and error trends with Real User Monitoring.
 
 Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 

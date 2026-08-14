@@ -13,7 +13,7 @@ Datadog's access management system uses role-based access control (RBAC). This l
 
 ## Permissions
 
-See the [list of permissions][3] for Observability Pipelines' assets and what levels of permissions Datadog default roles include.
+See the [list of permissions][3] for {{< prodname >}}Observability Pipelines{{< /prodname >}}' assets and what levels of permissions Datadog default roles include.
 
 ## Granular access control
 

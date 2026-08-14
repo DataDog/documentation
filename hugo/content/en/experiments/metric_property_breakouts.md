@@ -25,7 +25,7 @@ A breakout is purely additive: the overall metric is still calculated across all
 
 ## Configure breakouts on a metric
 
-You define breakouts when you [create or edit a metric][1]. Breakouts are supported for metrics built on Product Analytics, Real User Monitoring (RUM), and [warehouse][2] data.
+You define breakouts when you [create or edit a metric][1]. Breakouts are supported for metrics built on {{< prodname >}}Product Analytics{{< /prodname >}}, Real User Monitoring (RUM), and [warehouse][2] data.
 
 1. Navigate to the [Metrics page][3] in Datadog Product Analytics and create a metric or open an existing one.
 1. Configure the [metric definition][1].

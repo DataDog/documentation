@@ -77,7 +77,7 @@ The following widgets are included by default on the developer overview page.
 
 #### Monitors, incidents, and SLOs
 
-Shows live signals from Datadog [Monitors][6], [Incident Management][3], and [SLOs][7]. Widgets remain empty until these products are enabled.
+Shows live signals from Datadog [Monitors][6], [{{< prodname >}}Incident Management{{< /prodname >}}][3], and [SLOs][7]. Widgets remain empty until these products are enabled.
 
 #### GitHub pull requests
 
@@ -90,7 +90,7 @@ Lists open pull requests that you have created and those you are assigned to rev
 
 #### Issues and errors
 
-Surfaces issues and errors detected by [Datadog Incidents][3] and [Error Tracking][4]. Widgets remain empty until these products are enabled.
+Surfaces issues and errors detected by [Datadog Incidents][3] and [{{< prodname >}}Error Tracking{{< /prodname >}}][4]. Widgets remain empty until these products are enabled.
 
 #### Watchdog alerts
 

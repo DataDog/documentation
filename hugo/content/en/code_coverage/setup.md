@@ -87,11 +87,11 @@ Navigate to [Roles settings][4], click {{< ui >}}Edit{{< /ui >}} on the role you
 
 For more granular control, use [Data Access Control][19] to restrict code coverage data by repository rather than across your entire organization. This prevents sensitive information in coverage reports, such as source paths and test names, from crossing team boundaries.
 
-In Datadog, go to **Organization Settings > Data Access Control** and create a Restricted Dataset scoped to Software Delivery and the repository you want to restrict. Grant access to the roles or teams that should see it.
+In Datadog, go to **Organization Settings > Data Access Control** and create a Restricted Dataset scoped to {{< prodname >}}Software Delivery{{< /prodname >}} and the repository you want to restrict. Grant access to the roles or teams that should see it.
 
 ## PR Gates
 
-If you wish to gate on PR coverage, you can configure PR Gates rules in one of two ways:
+If you wish to gate on PR coverage, you can configure {{< prodname >}}PR Gates{{< /prodname >}} rules in one of two ways:
 
 - **Datadog UI**: Navigate to [PR Gates rule creation][5] and configure a rule to gate on total or patch coverage.
 - **YAML configuration file**: Define gates in your [`code-coverage.datadog.yml`][6] file. This allows you to manage gates as code alongside your repository.
@@ -100,7 +100,7 @@ Rules from both sources are evaluated when a pull request is opened or updated. 
 
 ## Upload code coverage reports
 
-Upload code coverage report files to Datadog either automatically, with a supported Test Optimization library, or manually, by running the `datadog-ci` CLI in your CI environment.
+Upload code coverage report files to Datadog either automatically, with a supported {{< prodname >}}Test Optimization{{< /prodname >}} library, or manually, by running the `datadog-ci` CLI in your CI environment.
 
 See [Data Collected][7] for details on what data is collected during code coverage report upload.
 
@@ -108,7 +108,7 @@ See [Data Collected][7] for details on what data is collected during code covera
 
 #### Supported libraries and versions
 
-Automatic code coverage report upload is supported in the following Test Optimization library versions:
+Automatic code coverage report upload is supported in the following {{< prodname >}}Test Optimization{{< /prodname >}} library versions:
 
 | Library | First supported version | Coverage source |
 |---|---|---|
@@ -118,7 +118,7 @@ Automatic code coverage report upload is supported in the following Test Optimiz
 | Python `ddtrace` | `4.4.0` | Default pytest plugin using `coverage.py` |
 | Java `dd-java-agent` | `1.53.0` | JaCoCo |
 
-These version requirements apply only to automatic uploads by Test Optimization libraries.
+These version requirements apply only to automatic uploads by {{< prodname >}}Test Optimization{{< /prodname >}} libraries.
 
 #### Enable automatic uploads
 

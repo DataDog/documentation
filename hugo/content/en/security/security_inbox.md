@@ -30,7 +30,7 @@ Security Inbox provides a consolidated, actionable list of your most important s
 
 ## Types of findings in Security Inbox
 
-The findings that appear in Security Inbox are generated from App and API Protection (AAP) and Cloud Security. By default, these include the following types of findings:
+The findings that appear in Security Inbox are generated from {{< prodname >}}App and API Protection{{< /prodname >}} (AAP) and {{< prodname >}}Cloud Security{{< /prodname >}}. By default, these include the following types of findings:
 
 - A curated set of [misconfigurations][1] for [Cloud Security Misconfigurations][2], compiled by Datadog Security Research.
 - A curated set of [identity risks][1] for [Cloud Security Identity Risks][3], compiled by Datadog Security Research.

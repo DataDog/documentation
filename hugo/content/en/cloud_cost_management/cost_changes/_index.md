@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Cloud Cost Management can help you proactively detect and respond to unexpected cost changes before they become significant problems. Use these tools to automatically identify anomalies, set up custom alerts, and track costs in near real-time across AWS, Azure, and Google Cloud.
+{{< prodname >}}Cloud Cost Management{{< /prodname >}} can help you proactively detect and respond to unexpected cost changes before they become significant problems. Use these tools to automatically identify anomalies, set up custom alerts, and track costs in near real-time across AWS, Azure, and Google Cloud.
 
 ## Key features
 

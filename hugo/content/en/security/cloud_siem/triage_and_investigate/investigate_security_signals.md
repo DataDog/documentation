@@ -22,9 +22,9 @@ further_reading:
 
 A Cloud SIEM security signal is created when Datadog detects a threat while analyzing logs against detection rules. View, search, filter, and correlate security signals in the Signals Explorer without needing to learn a dedicated query language. You can also assign security signals to yourself or another user in the Datadog platform. In addition to the Signals Explorer, you can configure [Notification Rules][1] to send signals to specific individuals or teams to keep them informed of issues.
 
-You must have the `Security Signals Write` permission to modify a security signal, such as change the state and view signal action history in [Audit Trail][2]. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Datadog Security in the Cloud Security.
+You must have the `Security Signals Write` permission to modify a security signal, such as change the state and view signal action history in [Audit Trail][2]. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Datadog Security in the {{< prodname >}}Cloud Security{{< /prodname >}}.
 
-If you want to use an autonomous AI agent that investigates Cloud SIEM security signals, see [Bits Security Analyst][14].
+If you want to use an autonomous AI agent that investigates {{< prodname >}}Cloud SIEM{{< /prodname >}} security signals, see [{{< prodname >}}Bits Security Analyst{{< /prodname >}}][14].
 
 ## Signals explorer
 
@@ -64,7 +64,7 @@ To view your signals by MITRE ATT&CK Tactic and Technique:
 
 ### Triage a single signal
 
-1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} > [{{< ui >}}Signals{{< /ui >}}][5].
+1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}{{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /ui >}} > [{{< ui >}}Signals{{< /ui >}}][5].
 1. Click on a security signal from the table.
 1. In the {{< ui >}}What Happened{{< /ui >}} section, see the logs that matched the query. Hover over the query to see the query details.
     - You can also see specific information like username or network IP. In {{< ui >}}Rule Details{{< /ui >}}, click the funnel icon to create a suppression rule or add the information to an existing suppression. See [Create suppression rule][11] for more details.
@@ -74,7 +74,7 @@ To view your signals by MITRE ATT&CK Tactic and Technique:
       - `Under Review`: During an active investigation, change the triage status to `Under Review`. From the `Under Review` state, you can move the status to `Archived` or `Open` as needed.
       - `Archived`: When the detection that caused the signal has been resolved, update the status to `Archived`. When a signal is archived, you can give a reason and description for future reference. If an archived issue resurfaces, or if further investigation is necessary, the status can be changed back to `Open`. All signals are locked 30 days after they have been created.</ul>
    1. Click {{< ui >}}Assign Signal{{< /ui >}} to assign a signal to yourself or another Datadog user.
-   1. Under {{< ui >}}Take Action{{< /ui >}}, you can create a case, declare an incident, edit suppressions, or run workflows. Creating a case automatically sets the triage status to `Under Review`. For more information on associating cases with signals, see [Case Management](#case-management).
+   1. Under {{< ui >}}Take Action{{< /ui >}}, you can create a case, declare an incident, edit suppressions, or run workflows. Creating a case automatically sets the triage status to `Under Review`. For more information on associating cases with signals, see [{{< prodname >}}Case Management{{< /prodname >}}](#case-management).
 
 {{< img src="security/security_monitoring/investigate_security_signals/signal_side_panel.png" alt="The signal side panel of a compromised AWS IAM user access key showing two IP addresses and their locations" style="width:90%;" >}}
 
@@ -107,7 +107,7 @@ To trigger a workflow automatically for any security signal, see [Trigger a Work
 
 #### How suggested Workflows are selected
 
-To streamline incident response and reduce friction during triage, Cloud SIEM suggests Workflows that are relevant to the signal. The suggested Workflows are selected based on which ones have the highest tag similarity with the signal. Cloud SIEM uses the following information to suggest Workflows for a signal:
+To streamline incident response and reduce friction during triage, {{< prodname >}}Cloud SIEM{{< /prodname >}} suggests Workflows that are relevant to the signal. The suggested Workflows are selected based on which ones have the highest tag similarity with the signal. {{< prodname >}}Cloud SIEM{{< /prodname >}} uses the following information to suggest Workflows for a signal:
 
 - **Tags automatically added from Blueprints, which are preconfigured flows**<br>
 Workflows are a set of actions that are relevant to the platform, such as AWS CloudTrail. Workflows created from a Blueprint automatically have tags applied based on the source. For example, a workflow action such as "Shutdown virtual machine on AWS" has the `source` tag AWS CloudTrail.
@@ -120,13 +120,13 @@ If you want a Workflow to be suggested for a specific detection rule, tag the Wo
 When a signal is created:
 
 - **Signals and workflows are matched using tags**<br>
-When a security signal is created, Cloud SIEM checks the signal's tags, and matches them against tags defined in your existing workflows.
+When a security signal is created, {{< prodname >}}Cloud SIEM{{< /prodname >}} checks the signal's tags, and matches them against tags defined in your existing workflows.
 - **Relevant suggestions are made**<br>
 A {{< ui >}}Suggested Workflows{{< /ui >}} section appears in the side panel. It shows the top three workflows based on tags that match closest to the tags on the signal. This ensures that suggested actions are context-aware and operationally relevant.
 
 ## Investigate
 
-A signal contains important information to determine whether the threat detected is malicious. Additionally, you can add a signal to a case in [Case Management](#case-management) for further investigation.
+A signal contains important information to determine whether the threat detected is malicious. Additionally, you can add a signal to a case in [{{< prodname >}}Case Management{{< /prodname >}}](#case-management) for further investigation.
 
 ### Logs
 
@@ -158,7 +158,7 @@ To view the suppression rules for the detection rule that generated the signal, 
 
 ### Case Management
 
-Sometimes you need more information than what is available in a single signal to investigate the signal. Use [Case Management][6] to collect multiple signals, create timelines, discuss with colleagues, and keep a notebook of the analysis and findings.
+Sometimes you need more information than what is available in a single signal to investigate the signal. Use [{{< prodname >}}Case Management{{< /prodname >}}][6] to collect multiple signals, create timelines, discuss with colleagues, and keep a notebook of the analysis and findings.
 
 #### Create and manage cases from the Signals Explorer
 
@@ -190,12 +190,12 @@ In the {{< ui >}}Security Signals{{< /ui >}} section for a case, you can view si
 
 #### Manage default behavior for signals and security cases
 
-On the Cloud SIEM [Security cases][13] settings page, you can manage the default behavior for signals and security cases, so you can save time when you connect signals and security cases with each other, manually or automatically. The settings you choose take effect immediately for all signals and security cases moving forward; they do not have any retroactive effect.
+On the {{< prodname >}}Cloud SIEM{{< /prodname >}} [Security cases][13] settings page, you can manage the default behavior for signals and security cases, so you can save time when you connect signals and security cases with each other, manually or automatically. The settings you choose take effect immediately for all signals and security cases moving forward; they do not have any retroactive effect.
 
 - **Case Project Settings**
 
-  Select your default Cloud SIEM security case project, and other security projects to select from:
-  - **Default SIEM Security Case Project**: Select the project to appear by default when you're connecting security cases to a project. This project also appears as the default project on the Cloud SIEM [Cases][12] page.
+  Select your default {{< prodname >}}Cloud SIEM{{< /prodname >}} security case project, and other security projects to select from:
+  - **Default SIEM Security Case Project**: Select the project to appear by default when you're connecting security cases to a project. This project also appears as the default project on the {{< prodname >}}Cloud SIEM{{< /prodname >}} [Cases][12] page.
   - **Security Case project scoping**: Select up to 20 security case projects that you can choose from to connect security cases with.
 
 - **Case Creation Defaults**
@@ -216,7 +216,7 @@ On the Cloud SIEM [Security cases][13] settings page, you can manage the default
 
 ### Declare an incident
 
-Whether it is based on a single signal or after an investigation of a case, certain malicious activity demands a response. You can declare incidents in Datadog to bring together developers, operations, and security teams to address a critical security event. [Incident Management][7] provides a framework and workflow to help teams effectively identify and mitigate incidents.
+Whether it is based on a single signal or after an investigation of a case, certain malicious activity demands a response. You can declare incidents in Datadog to bring together developers, operations, and security teams to address a critical security event. [{{< prodname >}}Incident Management{{< /prodname >}}][7] provides a framework and workflow to help teams effectively identify and mitigate incidents.
 
 To declare an incident in the signal panel:
 

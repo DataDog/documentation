@@ -70,7 +70,7 @@ To enable threat monitoring, add the following environment variables to your dep
 
 Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][49].
 
-To see App and API Protection threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][44] attempt:
+To see {{< prodname >}}App and API Protection{{< /prodname >}} threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][44] attempt:
    ```sh
    curl -H 'My-AAP-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
    ```
@@ -357,7 +357,7 @@ For renaming downstream services, see `DD_SERVICE_MAPPING` in the [tracer's conf
 
 ## Configure the Datadog SDK
 
-To see what libraries and frameworks are automatically instrumented by the Datadog APM client, see [Compatibility Requirements for APM][15]. To instrument custom applications, see Datadog's APM guide for [custom instrumentation][16].
+To see what libraries and frameworks are automatically instrumented by the {{< prodname >}}Datadog APM{{< /prodname >}} client, see [Compatibility Requirements for APM][15]. To instrument custom applications, see Datadog's APM guide for [custom instrumentation][16].
 
 ## Select sampling rates for ingesting APM spans
 
@@ -644,7 +644,7 @@ Datadog automatically injects the trace context into outgoing AWS SDK requests a
 
 ## Merge X-Ray and Datadog traces
 
-For AWS managed services that Datadog APM doesn't yet instrument (such as AppSync), you can enable the [Datadog X-Ray integration][34] and merge the X-Ray traces with the Datadog native traces. See [additional details][35].
+For AWS managed services that {{< prodname >}}Datadog APM{{< /prodname >}} doesn't yet instrument (such as AppSync), you can enable the [Datadog X-Ray integration][34] and merge the X-Ray traces with the Datadog native traces. See [additional details][35].
 
 ## Enable AWS Lambda code signing
 

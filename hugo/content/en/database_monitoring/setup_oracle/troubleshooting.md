@@ -3,7 +3,7 @@ title: Troubleshooting DBM Setup for Oracle
 description: Troubleshoot Database Monitoring setup for Oracle
 ---
 
-This page details common issues with setting up and using Database Monitoring with Oracle, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
+This page details common issues with setting up and using {{< prodname >}}Database Monitoring{{< /prodname >}} with Oracle, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
 ## Common issues
 

@@ -5,7 +5,7 @@ aliases:
 disable_toc: false
 ---
 
-This guide describes how to set up the Workload Protection eBPF-less solution for eBPF disabled environments, such as AWS Fargate. The eBPF-less solution uses a ptrace-based Datadog Agent.
+This guide describes how to set up the {{< prodname >}}Workload Protection{{< /prodname >}} eBPF-less solution for eBPF disabled environments, such as AWS Fargate. The eBPF-less solution uses a ptrace-based Datadog Agent.
 
 This guide also describes some advantages of the ptrace solution.
 
@@ -14,7 +14,7 @@ This guide also describes some advantages of the ptrace solution.
 
 ## Summary of Agent options
 
-Workload Protection includes two Agent options for threat detection and response:
+{{< prodname >}}Workload Protection{{< /prodname >}} includes two Agent options for threat detection and response:
 
 - eBPF solution
 - eBPF-less solution with ptrace: This version is only available where eBPF is not (Linux kernel versions 3.4 to 4.14).

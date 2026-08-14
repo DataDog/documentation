@@ -21,16 +21,16 @@ further_reading:
 
 ## Overview
 
-Product Analytics collects user activity data as events. Each event has two types of data:
+{{< prodname >}}Product Analytics{{< /prodname >}} collects user activity data as events. Each event has two types of data:
 
 - **Telemetry**: Quantifiable values used to track and compare activity (for example, `view.time_spent`).
 - **Attributes**: Descriptive values used to filter and break down measurements in your analysis (for example, `device.type` or `geo.country`).
 
 Every event includes the [default attributes](#default-attributes). Each event type also has [specific telemetry and attributes](#event-specific-attributes).
 
-To identify individual users across sessions, Product Analytics relies on the `usr.id` and `usr.email` attributes. For unauthenticated users or visitors who never log in, the RUM SDK automatically assigns a `usr.anonymous_id` to track activity. See [Track unauthenticated users][4] for details.
+To identify individual users across sessions, {{< prodname >}}Product Analytics{{< /prodname >}} relies on the `usr.id` and `usr.email` attributes. For unauthenticated users or visitors who never log in, the RUM SDK automatically assigns a `usr.anonymous_id` to track activity. See [Track unauthenticated users][4] for details.
 
-<div class="alert alert-info">Product Analytics uses the same SDKs and configuration as Real User Monitoring (RUM) to collect data. Unlike RUM, Product Analytics does not collect Errors, Resources, Long Tasks, or Vitals events. For the full list of RUM event types and attributes, see the data collected pages for <a href="/real_user_monitoring/application_monitoring/browser/data_collected/">browser</a>, <a href="/real_user_monitoring/application_monitoring/ios/data_collected/">iOS</a>, and <a href="/real_user_monitoring/application_monitoring/android/data_collected/">Android</a>.</div>
+<div class="alert alert-info">{{< prodname >}}Product Analytics{{< /prodname >}} uses the same SDKs and configuration as Real User Monitoring (RUM) to collect data. Unlike RUM, {{< prodname >}}Product Analytics{{< /prodname >}} does not collect Errors, Resources, Long Tasks, or Vitals events. For the full list of RUM event types and attributes, see the data collected pages for <a href="/real_user_monitoring/application_monitoring/browser/data_collected/">browser</a>, <a href="/real_user_monitoring/application_monitoring/ios/data_collected/">iOS</a>, and <a href="/real_user_monitoring/application_monitoring/android/data_collected/">Android</a>.</div>
 
 | Event Type | Retention | Description |
 |------------|-----------|-------------|

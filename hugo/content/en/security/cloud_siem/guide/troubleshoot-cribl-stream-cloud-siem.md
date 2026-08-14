@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Cloud SIEM applies detection rules to all processed logs so it can detect threats and surface them as security signals. For out-of-the-box content (such as dashboards, log pipelines, and detection rules) to work correctly, Datadog must receive logs with the right `ddsource` value and with the log content in the `message` field.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} applies detection rules to all processed logs so it can detect threats and surface them as security signals. For out-of-the-box content (such as dashboards, log pipelines, and detection rules) to work correctly, Datadog must receive logs with the right `ddsource` value and with the log content in the `message` field.
 
 When you use the [Cribl Stream][3] integration to route logs to Datadog, the default destination configuration causes logs to arrive in an unexpected format. Using passthrough, Cribl serializes the entire event as a JSON string and places it inside the `message` field. This prevents Datadog from parsing the logs correctly, so OOTB dashboards do not populate and detection rules do not fire.
 

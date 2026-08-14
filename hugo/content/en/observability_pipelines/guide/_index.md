@@ -6,7 +6,7 @@ disable_toc: false
 {{< whatsnext desc="General guides:" >}}
     {{< nextlink href="observability_pipelines/guide/strategies_for_reducing_log_volume" >}}Strategies for reducing log volume{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/guide/environment_variables" >}}Environment variables for sources, processors, and destinations{{< /nextlink >}}
-    {{< nextlink href="/byoc-logs/guides/send_otel_logs_observability_pipelines" >}}Send OpenTelemetry logs to BYOC Logs with Observability Pipelines{{< /nextlink >}}
+    {{< nextlink href="/byoc-logs/guides/send_otel_logs_observability_pipelines" >}}Send OpenTelemetry logs to {{< prodname >}}BYOC Logs{{< /prodname >}} with {{< prodname >}}Observability Pipelines{{< /prodname >}}{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Worker Upgrade Guides" >}}

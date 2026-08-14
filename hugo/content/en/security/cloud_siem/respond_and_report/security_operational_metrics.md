@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Cloud SIEM provides security operational metrics to help you determine the effectiveness of your team in responding to and resolving security threats to your cloud environments. These metrics are shown in the out-of-the-box [Cloud SIEM dashboard][1] and are sent in the Cloud SIEM [weekly digest reports][2]. You can also create dashboards and monitors for them.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} provides security operational metrics to help you determine the effectiveness of your team in responding to and resolving security threats to your cloud environments. These metrics are shown in the out-of-the-box [Cloud SIEM dashboard][1] and are sent in the {{< prodname >}}Cloud SIEM{{< /prodname >}} [weekly digest reports][2]. You can also create dashboards and monitors for them.
 
 {{< img src="security/security_monitoring/secops_metrics.png" alt="The security operational metrics section of the Cloud SIEM Overview dashboard" style="width:100%;" >}}
 

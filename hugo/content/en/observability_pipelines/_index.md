@@ -102,7 +102,7 @@ The Observability Pipelines UI provides a centralized control plane where you ca
 
 ## Get started
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][1].
 1. Select a [template](#common-use-cases-and-templates) based on your use case.
 1. Set up your pipeline:
     1. Choose a log [source][2].
@@ -115,7 +115,7 @@ See [Set Up Pipelines][6] for detailed instructions.
 
 ## Common use cases and templates
 
-Observability Pipelines includes prebuilt templates for common data routing and transformation workflows. You can fully customize or combine them to meet your needs.
+{{< prodname >}}Observability Pipelines{{< /prodname >}} includes prebuilt templates for common data routing and transformation workflows. You can fully customize or combine them to meet your needs.
 
 {{< img src="observability_pipelines/eight_templates.png" alt="The Observability Pipelines UI showing the eight templates" style="width:100%;" >}}
 

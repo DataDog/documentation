@@ -4,7 +4,7 @@ title: Cloud Security Supported Deployment Types
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
-The following table summarizes the Cloud Security features available relative to each deployment type.
+The following table summarizes the {{< prodname >}}Cloud Security{{< /prodname >}} features available relative to each deployment type.
 
 | Deployment type     | Agent Required (7.46+) | Misconfigurations | Vulnerabilities | Identity Risks | Agentless Scanning |
 |---------------------|------------------------|-------------------|-----------------|----------------|--------------------|
@@ -20,7 +20,7 @@ The following table summarizes the Cloud Security features available relative to
 | Windows             | {{< X >}}              |                   | {{< X >}}       |                |                    |
 | AWS Fargate ECS/EKS | {{< X >}}              |                   |                 |                | ECS Fargate only   |
 
-The following table summarizes the scope of coverage available relative to each Cloud Security feature.
+The following table summarizes the scope of coverage available relative to each {{< prodname >}}Cloud Security{{< /prodname >}} feature.
 | Resources monitored | Misconfigurations | Vulnerabilities | Identity Risks | Agentless scanning |
 |---------------------|-------------------|-----------------|----------------|--------------------|
 | AWS Resources/IAM   | {{< X >}}         | {{< X >}}       | {{< X >}}      | {{< X >}}          |

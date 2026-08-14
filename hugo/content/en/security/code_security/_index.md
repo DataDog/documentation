@@ -36,7 +36,7 @@ aliases:
 - /code_analysis/
 ---
 
-Code Security scans your first-party code and open source libraries used in your applications in both your repositories and running services, providing end-to-end visibility from development to production. It encompasses the following capabilities:
+{{< prodname >}}Code Security{{< /prodname >}} scans your first-party code and open source libraries used in your applications in both your repositories and running services, providing end-to-end visibility from development to production. It encompasses the following capabilities:
 
 - [Static Code Analysis (SAST)][1] for identifying security and quality issues in your first-party code
 - [Software Composition Analysis (SCA)][2] for identifying open source dependencies in both your repositories and your services
@@ -45,17 +45,17 @@ Code Security scans your first-party code and open source libraries used in your
 - [Infrastructure as Code (IaC) Security][10] for identifying security misconfigurations in IaC stored in your repositories
 - [Supply Chain Security](#supply-chain-security-preview) for preventing malicious packages from entering your development environment and code repositories
 
-Code Security helps teams implement DevSecOps throughout the organization:
+{{< prodname >}}Code Security{{< /prodname >}} helps teams implement DevSecOps throughout the organization:
 - **Developers:** early vulnerability detection, code quality improvements, faster development as developers spend less time debugging and patching.
 - **Security Administrators:** enhanced security posture, improved patch management in response to early vulnerability alerts, and compliance monitoring.
 - **Site Reliability Engineers (SREs):** automated security checks throughout CI/CD workflow, security compliance, and system resilience. SAST reduces manual overhead for SREs and ensures that each release is thoroughly tested for vulnerabilities.
 
-The following vulnerability management capabilities are available across Code Security:
+The following vulnerability management capabilities are available across {{< prodname >}}Code Security{{< /prodname >}}:
 - [Developer tool integrations][16] to flag vulnerabilities in IDE and pull request comments, and block vulnerabilities from being merged to your production codebase
 - [Ticketing integrations][13] with Jira and Datadog Case Management, with bidirectional syncing
 - [Notifications][14]
 - [Automation pipelines][15] for automatically muting vulnerabilities and assigning due dates by severity
-- [MCP server][17] to run Code Security scans directly from AI coding assistants (in Preview)
+- [MCP server][17] to run {{< prodname >}}Code Security{{< /prodname >}} scans directly from AI coding assistants (in Preview)
 
 ## Static Code Analysis (SAST)
 Static Code Analysis (SAST) analyzes pre-production code to identify security and quality issues. You can embed best security and development practices throughout the software development lifecycle with:
@@ -76,7 +76,7 @@ Software Composition Analysis (SCA) analyzes open source libraries in both your 
 
 SCA supports both static and runtime dependency detection.  
 For static scanning, you can scan via your CI/CD pipelines or directly via Datadog with hosted scanning. See [static setup][4] to get started.  
-For runtime vulnerability detection, you can easily enable SCA on your services instrumented with Datadog APM. See [runtime setup][5] to get started.
+For runtime vulnerability detection, you can easily enable SCA on your services instrumented with {{< prodname >}}Datadog APM{{< /prodname >}}. See [runtime setup][5] to get started.
 
 ## Runtime Code Analysis (IAST)
 Runtime Code Analysis (IAST) identifies code-level vulnerabilities in your running services. It relies on inspection of legitimate application traffic as opposed to external testing that often requires extra configuration or periodic scheduling. IAST provides an up-to-date view of your attack surface area by:
@@ -84,7 +84,7 @@ Runtime Code Analysis (IAST) identifies code-level vulnerabilities in your runni
 - Providing 100% coverage of the OWASP Top 10
 - Runtime-informed prioritization of vulnerabilities with the Datadog severity score
 
-You can enable IAST on your services instrumented with Datadog APM. See [IAST setup][3] to get started.
+You can enable IAST on your services instrumented with {{< prodname >}}Datadog APM{{< /prodname >}}. See [IAST setup][3] to get started.
 
 ## Secret Scanning
 Secret Scanning identifies and validates exposed credentials, API keys, and other sensitive secrets in your codebase. You can prevent leaked secrets throughout your software development life cycle with:

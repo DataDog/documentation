@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Enable Expo Crash Reporting and Error Tracking to get comprehensive crash reports and error trends for your Expo mobile applications.
+Enable Expo Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} to get comprehensive crash reports and error trends for your Expo mobile applications.
 
 With this feature, you can access:
 
@@ -33,7 +33,7 @@ In order to symbolicate your stack traces and deobfuscate Android crashes, uploa
 
 Debug symbols are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding debug symbols. This ensures that regardless of when the debug symbols were uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
 
-**Note:** Error Tracking can be used as a standalone product or alongside [Real User Monitoring (RUM)][12]. If you're using RUM, Error Tracking is already included. See the [RUM Expo setup documentation][3] for RUM-specific configuration.
+**Note:** {{< prodname >}}Error Tracking{{< /prodname >}} can be used as a standalone product or alongside [Real User Monitoring (RUM)][12]. If you're using RUM, {{< prodname >}}Error Tracking{{< /prodname >}} is already included. See the [RUM Expo setup documentation][3] for RUM-specific configuration.
 
 Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
@@ -61,7 +61,7 @@ yarn add -D @datadog/datadog-ci
 
 ### Step 2 - Track view navigation
 
-To see Error Tracking sessions populate in Datadog, you need to implement view tracking, which can be initialized manually or automatically.
+To see {{< prodname >}}Error Tracking{{< /prodname >}} sessions populate in Datadog, you need to implement view tracking, which can be initialized manually or automatically.
 
 #### Manual tracking
 
@@ -102,7 +102,7 @@ Example with React Navigation:
 
 ### Step 3 - Initialize the SDK
 
-Add the following code to your initialization file to set up Error Tracking:
+Add the following code to your initialization file to set up {{< prodname >}}Error Tracking{{< /prodname >}}:
 
 ```js
 import { CoreConfiguration } from 'expo-datadog';
@@ -129,7 +129,7 @@ const config = new CoreConfiguration(
 await DdSdkReactNative.initialize(config);
 ```
 
-**Note:** If you're using Error Tracking as a standalone product without RUM, you can set the user interaction and XHR resource tracking parameters to `false`. However, view tracking (Step 2) is still required for Error Tracking sessions to be created.
+**Note:** If you're using {{< prodname >}}Error Tracking{{< /prodname >}} as a standalone product without RUM, you can set the user interaction and XHR resource tracking parameters to `false`. However, view tracking (Step 2) is still required for {{< prodname >}}Error Tracking{{< /prodname >}} sessions to be created.
 
 ### Step 4 - Configure the Expo plugin
 
@@ -256,7 +256,7 @@ const crashApp = () => {
 };
 ```
 
-Re-build your application for release to send the new source maps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
+Re-build your application for release to send the new source maps, trigger the crash and wait on the [{{< prodname >}}Error Tracking{{< /prodname >}}][1] page for the error to appear.
 
 To test your dSYMs and Proguard mapping files upload, crash the native main thread instead:
 

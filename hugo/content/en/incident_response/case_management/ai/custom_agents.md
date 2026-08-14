@@ -11,18 +11,18 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger">AI features for Case Management are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">AI features for {{< prodname >}}Case Management{{< /prodname >}} are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Join the Preview">}} Case Management integration with custom agents is in Preview.{{< /callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Join the Preview">}} {{< prodname >}}Case Management{{< /prodname >}} integration with custom agents is in Preview.{{< /callout >}}
 
 ## Overview
 
-Case Management integrates with [Bits Agent Builder][1], allowing you to move from manual to automated case creation, triage, and resolution. Assign cases to custom agents to support your different workflows.
+{{< prodname >}}Case Management{{< /prodname >}} integrates with [Bits Agent Builder][1], allowing you to move from manual to automated case creation, triage, and resolution. Assign cases to custom agents to support your different workflows.
 
 ## Create custom agents
 
-Use [Bits Agent Builder][1] to create custom agents that can triage and resolve cases. Agents can perform any action from the [Action Catalog][2], including creating, updating, and resolving cases. Here are examples of agents you can build to use in Case Management:
+Use [Bits Agent Builder][1] to create custom agents that can triage and resolve cases. Agents can perform any action from the [Action Catalog][2], including creating, updating, and resolving cases. Here are examples of agents you can build to use in {{< prodname >}}Case Management{{< /prodname >}}:
 
 - **Issue triager**: Enriches incoming cases with structure and context so a human can act without manual prep.
 - **Security signal aggregator**: Groups related security signals into one unified investigation case to prevent siloed analysis.

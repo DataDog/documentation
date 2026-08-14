@@ -14,11 +14,11 @@ further_reading:
 
 ## Overview
 
-Case Management provides the capability to create third-party integrations for generating notifications or tickets automatically or manually:
+{{< prodname >}}Case Management{{< /prodname >}} provides the capability to create third-party integrations for generating notifications or tickets automatically or manually:
 - Automatically: Each time a new case is created, it generates a new ticket or notification.
 - Manually: Users choose to create tickets or notifications for specific cases.
 
-By linking Case Management with third-party systems, you can integrate Datadog solutions into your existing workflows and processes. With the Jira and ServiceNow integrations, you can resolve cases using full-stack telemetry in Datadog while keeping a record in these third-party systems.
+By linking {{< prodname >}}Case Management{{< /prodname >}} with third-party systems, you can integrate Datadog solutions into your existing workflows and processes. With the Jira and ServiceNow integrations, you can resolve cases using full-stack telemetry in Datadog while keeping a record in these third-party systems.
 
 
 ## Notifications
@@ -79,7 +79,7 @@ To manually trigger a page:
 To automatically trigger a page, configure automated paging rules in your project settings:
 1. Go to [**Project Settings**][1] and click on a project to expand its settings.
 1. In the expanded menu, click **Integrations** > **Datadog On-Call**.
-1. Toggle on **Automatically page cases to On-Call**. This opens the Paging Rule modal, where you can define your first rule.
+1. Toggle on **Automatically page cases to {{< prodname >}}On-Call{{< /prodname >}}**. This opens the Paging Rule modal, where you can define your first rule.
 1. In the modal, enter a query. If a case matches the specified query at any point in its lifecycle, Datadog automatically pages the designated team.
 1. Choose which team to page:
    - **Specific Team**: Select a particular team to always be paged when the rule is triggered.
@@ -126,7 +126,7 @@ In Project Settings, you can manage membership, configure the auto-closing of ca
   |All updates to ServiceNow |Changes in Case Management are reflected in ServiceNow, but changes in ServiceNow are not reflected in Case Management.|
   |Two-way sync (bi-directional)|Changes in Case Management are reflected in ServiceNow, and vice versa.|
   |Don't sync|The field does not sync to ServiceNow.|
-1. Select ServiceNow state values that Case Management status values should map to.
+1. Select ServiceNow state values that {{< prodname >}}Case Management{{< /prodname >}} status values should map to.
 1. Save changes.
 
 **Note**: A case can only be synced with one external resource at a time, per project. To enable ServiceNow syncing, Jira automatic creation and syncing must be disabled. Only cases using the core statuses of "Open", "In Progress" and "Closed" can sync with ServiceNow.
@@ -163,7 +163,7 @@ When enabled, any case that meets your specified query criteria (at any point in
 
 ## Slack mirroring
 With the Slack integration, replies in Slack notification threads linked to a case are automatically mirrored to the case activity timeline. This keeps the case context up to date without requiring manual updates in Datadog. Slack thread mirroring to cases is supported for:
-- [Slack notifications][8] generated from Case Management
+- [Slack notifications][8] generated from {{< prodname >}}Case Management{{< /prodname >}}
 - Slack notifications generated from Monitors using [case handles][7]
 - Slack threads for cases created directly from Slack using the [Slack integration][9]
 
@@ -171,7 +171,7 @@ With the Slack integration, replies in Slack notification threads linked to a ca
 
 Make sure the [Slack integration][9] is configured for your Datadog organization.
 
-Slack thread mirroring is enabled by default for all Case Management projects. To disable it for a specific project:
+Slack thread mirroring is enabled by default for all {{< prodname >}}Case Management{{< /prodname >}} projects. To disable it for a specific project:
 1. Navigate to [**Project Settings**][1] and click on a project to expand its settings.
 1. In the expanded menu, click **Integrations** > **Slack**.
 1. Toggle off **Slack thread mirroring**.

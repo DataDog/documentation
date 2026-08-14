@@ -121,12 +121,12 @@ Bits uses the following data sources during investigations:
 - Logs
 - Dashboards
 - Events
-- [Change Tracking][4]
+- [{{< prodname >}}Change Tracking{{< /prodname >}}][4]
 - [Source code][17] (GitHub only)
 - Watchdog
 - Real User Monitoring
 - Network Path
-- Database Monitoring
+- {{< prodname >}}Database Monitoring{{< /prodname >}}
 - Continuous Profiler
 
 <div class="alert alert-tip"><b>Add service scoping:</b> For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service. This helps Bits correlate data more accurately.</div>

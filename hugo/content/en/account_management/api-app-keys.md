@@ -54,7 +54,7 @@ The recommended best practice for scoping application keys is to grant your keys
 Action APIs include:
 - [App Builder][5]
 - [Actions Connections][6]
-- [Workflow Automation][7]
+- [{{< prodname >}}Workflow Automation{{< /prodname >}}][7]
 
 In order to use application keys with these APIs, you must enable Actions API access on the application key. This can be done [through the UI][2] or [API][21]. By default, application keys cannot be used with these APIs.
 

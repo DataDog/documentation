@@ -33,7 +33,7 @@ The Libraries inventory displays the libraries and versions used across your ser
 
 The inventory surfaces all library details using several public data sources (such as GuardDog, NIST, osv.dev, and OpenSSF scores) and private data sources (including Datadog's Security Research group). 
 
-To use the Libraries inventory, see [Libraries][1] or select {{< ui >}}Security{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}}, and then select {{< ui >}}Libraries{{< /ui >}}.
+To use the Libraries inventory, see [Libraries][1] or select {{< ui >}}Security{{< /ui >}} > {{< ui >}}{{< prodname >}}Code Security{{< /prodname >}}{{< /ui >}}, and then select {{< ui >}}Libraries{{< /ui >}}.
 
 In {{< ui >}}Libraries{{< /ui >}}, you can:
 
@@ -52,7 +52,7 @@ In the {{< ui >}}Vulnerabilities{{< /ui >}} explorer, you can view the vulnerabi
 
 A library vulnerability is a security bug in a library. 
 
-To view your library vulnerabilities, see [Library Vulnerabilities][3] or navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Vulnerabilities{{< /ui >}} > {{< ui >}}Libraries{{< /ui >}}.
+To view your library vulnerabilities, see [Library Vulnerabilities][3] or navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}{{< prodname >}}Code Security{{< /prodname >}}{{< /ui >}} > {{< ui >}}Vulnerabilities{{< /ui >}} > {{< ui >}}Libraries{{< /ui >}}.
 
 In {{< ui >}}Libraries{{< /ui >}}, you can:
 

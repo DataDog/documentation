@@ -48,7 +48,7 @@ In Datadog, SQL queries are compatible with data stored in [datasets][2]. You ca
 - Security signals
 - Spans
 - RUM events
-- Product Analytics events
+- {{< prodname >}}Product Analytics{{< /prodname >}} events
 - Cloud Network data
 - NetFlow data
 - Reference tables

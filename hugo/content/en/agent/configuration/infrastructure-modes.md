@@ -82,7 +82,7 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
 
 `none`
 : **Minimum Agent version**: 7.77.0<br>
-**Recommended for**: Hosts configured only for [Log Management][19], [APM][20], or [Error Tracking][21]<br>
+**Recommended for**: Hosts configured only for [{{< prodname >}}Log Management{{< /prodname >}}][19], [APM][20], or [{{< prodname >}}Error Tracking{{< /prodname >}}][21]<br>
 : The Agent does not collect any infrastructure metrics or run infrastructure integrations. You can still use custom metrics, [custom checks][15] prefixed with `custom_`, and logs-only integrations such as [journald][16] or [Windows Event Log][17].
 : Hosts in `none` mode appear in [Fleet Automation][22] under the {{< ui >}}View Agents{{< /ui >}} tab because the Agent continues to send metadata to Datadog. However, these hosts do not appear in infrastructure dashboards or queries that rely on infrastructure metrics.
 

@@ -10,7 +10,7 @@ SCA can detect vulnerabilities that affect open source libraries running in your
 Before setting up runtime detection, ensure the following prerequisites are met:
 
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
-2. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
+2. **Datadog APM Configuration:** {{< prodname >}}Datadog APM{{< /prodname >}} is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
 3. **Supported SDK:** The Datadog SDK used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][2] page.
 
 ## Software Composition Analysis enablement types

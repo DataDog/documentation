@@ -25,19 +25,19 @@ algolia:
 
 ## Overview
 
-[Test Optimization][1] allows you to better understand your test posture, identify commits introducing flaky tests, identify performance regressions, and troubleshoot complex test failures. 
+[{{< prodname >}}Test Optimization{{< /prodname >}}][1] allows you to better understand your test posture, identify commits introducing flaky tests, identify performance regressions, and troubleshoot complex test failures. 
 
 {{< img src="getting_started/test_visibility/list.png" alt="List of test services in Test Optimization" style="width:100%;" >}}
 
 You can visualize the performance of your test runs as traces, where spans represent the execution of different parts of the test.
 
-Test Optimization enables development teams to debug, optimize, and accelerate software testing across CI environments by providing insights about test performance, flakiness, and failures. Test Optimization automatically instruments each test and integrates intelligent test selection using the [Test Impact Analysis][2], enhancing test efficiency and reducing redundancy. 
+{{< prodname >}}Test Optimization{{< /prodname >}} enables development teams to debug, optimize, and accelerate software testing across CI environments by providing insights about test performance, flakiness, and failures. {{< prodname >}}Test Optimization{{< /prodname >}} automatically instruments each test and integrates intelligent test selection using the [Test Impact Analysis][2], enhancing test efficiency and reducing redundancy. 
 
-With historical test data, teams can understand performance regressions, compare the outcome of tests from feature branches to default branches, and establish performance benchmarks. By using Test Optimization, teams can improve their [developer workflows][14] and maintain quality code output. 
+With historical test data, teams can understand performance regressions, compare the outcome of tests from feature branches to default branches, and establish performance benchmarks. By using {{< prodname >}}Test Optimization{{< /prodname >}}, teams can improve their [developer workflows][14] and maintain quality code output. 
 
 ## Set up a test service
 
-Test Optimization tracks the performance and results of your CI tests, and displays results of the test runs.
+{{< prodname >}}Test Optimization{{< /prodname >}} tracks the performance and results of your CI tests, and displays results of the test runs.
 
 To start instrumenting and running tests, see the documentation for one of the following languages.
 
@@ -52,7 +52,7 @@ To start instrumenting and running tests, see the documentation for one of the f
   {{< image-card href="/tests/setup/junit_xml/" src="integrations_logos/junit_xml.png" alt="upload junit tests to datadog" >}}
 {{< /card-grid >}}
 
-Test Optimization is compatible with any CI provider and is not limited to those supported by CI Visibility. For more information about supported features, see [Test Optimization][3].
+{{< prodname >}}Test Optimization{{< /prodname >}} is compatible with any CI provider and is not limited to those supported by CI Visibility. For more information about supported features, see [{{< prodname >}}Test Optimization{{< /prodname >}}][3].
 
 ## Use CI test data
 
@@ -60,7 +60,7 @@ Access your tests' metrics (such as executions, duration, distribution of durati
 
 {{< img src="getting_started/test_visibility/tests_dashboard.png" alt="Out-of-the-box Test Optimization dashboard in Datadog" style="width:100%;" >}}
 
-You can create [dashboards][4] for monitoring flaky tests, performance regressions, and test failures occurring within your tests. Alternatively, you can utilize an [out-of-the-box dashboard][5] containing widgets populated with data collected in Test Optimization to visualize the health and performance of your CI test sessions, modules, suites, and tests.
+You can create [dashboards][4] for monitoring flaky tests, performance regressions, and test failures occurring within your tests. Alternatively, you can utilize an [out-of-the-box dashboard][5] containing widgets populated with data collected in {{< prodname >}}Test Optimization{{< /prodname >}} to visualize the health and performance of your CI test sessions, modules, suites, and tests.
 
 ## Manage flaky tests
 
@@ -87,7 +87,7 @@ Failure rate
 Trend
 : A visualization that indicates whether a flaky test was fixed or it is still actively flaking.
 
-Test Optimization displays the following graphs to help you understand your flaky test trends and the impact of your flaky tests in a commit’s {{< ui >}}Flaky Tests{{< /ui >}} section:
+{{< prodname >}}Test Optimization{{< /prodname >}} displays the following graphs to help you understand your flaky test trends and the impact of your flaky tests in a commit’s {{< ui >}}Flaky Tests{{< /ui >}} section:
 
 New Flaky Test Runs
 : How often new flaky tests are being detected.

@@ -13,7 +13,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -534,7 +534,7 @@ Wait a minute for the agent to forward the traces, then check that the traces sh
 
 ### Confirm tracer versions are updated
 
-See the App and API Protection product set up documentation to validate you are using the right version of the SDK. These minimum versions are required to start sending telemetry data that includes library information.
+See the {{< prodname >}}App and API Protection{{< /prodname >}} product set up documentation to validate you are using the right version of the SDK. These minimum versions are required to start sending telemetry data that includes library information.
 
 ### Ensure the communication of telemetry data
 

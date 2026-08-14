@@ -5,7 +5,7 @@ description: Reduce CI testing time by distributing test files across CI nodes o
 
 ## Overview
 
-Test Parallelization helps you reduce CI testing time by distributing test files across CI nodes or local workers. It uses Test Optimization data to detect which test files should run, estimate their duration, and create an execution plan.
+Test Parallelization helps you reduce CI testing time by distributing test files across CI nodes or local workers. It uses {{< prodname >}}Test Optimization{{< /prodname >}} data to detect which test files should run, estimate their duration, and create an execution plan.
 
 Test Parallelization is designed to work with [Test Impact Analysis][1]. Test Impact Analysis skips tests that are not affected by a code change. Test Parallelization splits the remaining test files evenly across the selected CI nodes.
 
@@ -13,7 +13,7 @@ Use Test Parallelization when your test suite takes a long time to run. When use
 
 ## Setup
 
-Before setting up Test Parallelization, set up [Test Optimization][2]. Optionally, also set up [Test Impact Analysis][1] if you plan to use it with Test Parallelization. Then follow [Set Up Test Parallelization][3] to install `ddtest` and configure your CI provider.
+Before setting up Test Parallelization, set up [{{< prodname >}}Test Optimization{{< /prodname >}}][2]. Optionally, also set up [Test Impact Analysis][1] if you plan to use it with Test Parallelization. Then follow [Set Up Test Parallelization][3] to install `ddtest` and configure your CI provider.
 
 ## Compatibility
 

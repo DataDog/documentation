@@ -48,9 +48,9 @@ A schedule defines specific times when Team members are assigned to respond to P
 
 ## Granular access control
 
-Use [granular access controls][3] to limit the [roles][4], teams, or users that can access On-Call resources. By default, access to On-Call schedules, escalation policies, and team routing rules is unrestricted.
+Use [granular access controls][3] to limit the [roles][4], teams, or users that can access {{< prodname >}}On-Call{{< /prodname >}} resources. By default, access to {{< prodname >}}On-Call{{< /prodname >}} schedules, escalation policies, and team routing rules is unrestricted.
 
-Granular access controls are available for the following On-Call resources:
+Granular access controls are available for the following {{< prodname >}}On-Call{{< /prodname >}} resources:
 - **Schedules**: Control who can view, edit, and override schedules
 - **Escalation policies**: Control who can view and edit escalation policies
 - **Team routing rules**: Control who can view and edit team routing rules
@@ -65,9 +65,9 @@ Granular access controls are available for the following On-Call resources:
 
 ### Restrict access to On-Call resources
 
-To restrict access to an On-Call resource:
+To restrict access to an {{< prodname >}}On-Call{{< /prodname >}} resource:
 
-1. Navigate to the specific On-Call resource (schedule, escalation policy, or team routing rules).
+1. Navigate to the specific {{< prodname >}}On-Call{{< /prodname >}} resource (schedule, escalation policy, or team routing rules).
 1. Click **Manage**.
 1. Select **Permissions** from the dropdown menu.
 1. Click **Restrict Access**.
@@ -83,12 +83,12 @@ To restrict access to an On-Call resource:
 
 ## Start using Datadog On-Call
 
-<div class="alert alert-danger">To preserve incident history, Datadog On-Call does not support deletion of resources like Pages, escalation policies, or schedules. To test On-Call without affecting your production environment, create a trial organization as a sandbox.</div>
+<div class="alert alert-danger">To preserve incident history, Datadog On-Call does not support deletion of resources like Pages, escalation policies, or schedules. To test {{< prodname >}}On-Call{{< /prodname >}} without affecting your production environment, create a trial organization as a sandbox.</div>
 
-To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Team members configure their [On-Call notification preferences][2] to receive notifications.
+To get started with {{< prodname >}}On-Call{{< /prodname >}}, [onboard an On-Call Team][1] and ensure that all Team members configure their [On-Call notification preferences][2] to receive notifications.
 
 {{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/incident_response/on-call/teams">}}<u>Onboard a Team</u>: Create a new On-Call Team, add an existing Datadog Team to On-Call, or import a team from PagerDuty.{{< /nextlink >}}
+  {{< nextlink href="/incident_response/on-call/teams">}}<u>Onboard a Team</u>: Create a new On-Call Team, add an existing Datadog Team to {{< prodname >}}On-Call{{< /prodname >}}, or import a team from PagerDuty.{{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/pages">}}<u>Pages</u>: Trigger Pages from monitors, incidents, security signals, and other sources. Acknowledge, reassign, or resolve Pages, or promote them to incidents.{{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/escalation_policies">}}<u>Escalation Policies</u>: Define steps for how a Page is sent to different schedules. {{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/schedules">}}<u>Schedules</u>: Define timetables for Team members' on-call rotations.{{< /nextlink >}}
@@ -97,7 +97,7 @@ To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Te
 
 ## Billing
 
-On-Call is a seat-based SKU. To learn more about how On-Call is billed and how to manage seats within Datadog, visit our [pricing page][5] and the [Incident Response billing documentation][6].
+{{< prodname >}}On-Call{{< /prodname >}} is a seat-based SKU. To learn more about how {{< prodname >}}On-Call{{< /prodname >}} is billed and how to manage seats within Datadog, visit our [pricing page][5] and the [Incident Response billing documentation][6].
 
 ## Further Reading
 

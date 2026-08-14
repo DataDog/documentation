@@ -47,13 +47,13 @@ further_reading:
 
 ## Overview
 
-PR Gates allow you to control software security and quality by configuring rules to block pull requests with substandard code from being merged. Preventing pull requests with substandard code from being merged can ensure that the code that is eventually deployed to production adheres to high organizational standards, reducing incidents and minimizing unwanted behaviors.
+{{< prodname >}}PR Gates{{< /prodname >}} allow you to control software security and quality by configuring rules to block pull requests with substandard code from being merged. Preventing pull requests with substandard code from being merged can ensure that the code that is eventually deployed to production adheres to high organizational standards, reducing incidents and minimizing unwanted behaviors.
 
 {{< img src="pr_gates/setup/sca_4.png" alt="An SCA rule that triggers a failure if any library vulnerabilities with critical or high severity are detected in the repository." style="width:100%" >}}
 
-PR Gates, similar to [Datadog Monitors][9], consume data and findings output by compatible Datadog products and apply conditions to these findings to determine if a PR meets your organizational standards. To prevent unnecessary impact on your developers' velocity, PR Gates only block on violations introduced by the code changes of the PR in question, not on findings that already existed in your repository before the PR and its branch were created. For example, if you configure PR Gates to block on Critical-severity code vulnerabilities, PR Gates fails and blocks the PR only if a developer introduces a new Critical code vulnerability as part of that PR.
+{{< prodname >}}PR Gates{{< /prodname >}}, similar to [Datadog Monitors][9], consume data and findings output by compatible Datadog products and apply conditions to these findings to determine if a PR meets your organizational standards. To prevent unnecessary impact on your developers' velocity, {{< prodname >}}PR Gates{{< /prodname >}} only block on violations introduced by the code changes of the PR in question, not on findings that already existed in your repository before the PR and its branch were created. For example, if you configure {{< prodname >}}PR Gates{{< /prodname >}} to block on Critical-severity code vulnerabilities, {{< prodname >}}PR Gates{{< /prodname >}} fails and blocks the PR only if a developer introduces a new Critical code vulnerability as part of that PR.
 
-You can configure PR Gates rules for the following categories. Please note that the compatible product must be running on your desired repositories before PR Gates can begin taking action on the relevant PRs: 
+You can configure {{< prodname >}}PR Gates{{< /prodname >}} rules for the following categories. Please note that the compatible product must be running on your desired repositories before {{< prodname >}}PR Gates{{< /prodname >}} can begin taking action on the relevant PRs: 
 
 | Source type     | Condition types |
 | --- | ----------- |
@@ -64,15 +64,15 @@ You can configure PR Gates rules for the following categories. Please note that 
 | [**Secret Scanning**][10] | - Leaked secrets |
 | [**New Flaky Tests**][11] | - New flaky tests |
 
-After creating PR Gates rules, Datadog will automatically create checks on your pull requests using the [GitHub integration][5] or [Azure DevOps Source Code integration][6]. Set those checks as required in GitHub or Azure DevOps when you are ready to enforce them.
+After creating {{< prodname >}}PR Gates{{< /prodname >}} rules, Datadog will automatically create checks on your pull requests using the [GitHub integration][5] or [Azure DevOps Source Code integration][6]. Set those checks as required in GitHub or Azure DevOps when you are ready to enforce them.
 
 <div class="alert alert-warning">
-  PR Gates are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository). PR Gates can not be set as required on GitHub repositories using a merge queue.
+  {{< prodname >}}PR Gates{{< /prodname >}} are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository). {{< prodname >}}PR Gates{{< /prodname >}} can not be set as required on GitHub repositories using a merge queue.
 </div>
 
 ## Rule types
 
-PR Gates offers the following rule types:
+{{< prodname >}}PR Gates{{< /prodname >}} offers the following rule types:
 
 {{< tabs >}}
 {{% tab "Static Code Analysis (SAST)" %}}
@@ -128,7 +128,7 @@ To create a PR Gate rule, see the [Setup documentation][7].
 
 ## Manage rules
 
-You can manage and update PR Gates rules on the [{{< ui >}}PR Gates Rules{{< /ui >}}][8] page. Improve your security and quality practices based on your project requirements and risk tolerances. 
+You can manage and update {{< prodname >}}PR Gates{{< /prodname >}} rules on the [{{< ui >}}PR Gates Rules{{< /ui >}}][8] page. Improve your security and quality practices based on your project requirements and risk tolerances. 
 
 You can see all of the rules defined by the organization.
 

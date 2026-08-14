@@ -47,7 +47,7 @@ Investigate details using the [Misconfigurations Findings page][10], where you c
 
 To remediate a misconfiguration, you can:
 - [Create a ticket][15] and assign it to a team
-- Use [Workflow Automation][14] to create automated remediation workflows (with or without human involvement)
+- Use [{{< prodname >}}Workflow Automation{{< /prodname >}}][14] to create automated remediation workflows (with or without human involvement)
 - For supported Terraform resources:
   - Locate the file and line the misconfiguration is in and identify the code owners
   - Generate a pull request in GitHub with code changes that fix the underlying misconfiguration
@@ -55,12 +55,12 @@ To remediate a misconfiguration, you can:
 ## Get started
 
 {{< learning-center-callout header="Try Detect, Prioritize, and Remediate Cloud Security Risks with Datadog Cloud Security in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/csm-misconfigurations">}}
-  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to learn how to secure your cloud environments with Cloud Security misconfigurations.
+  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to learn how to secure your cloud environments with {{< prodname >}}Cloud Security{{< /prodname >}} misconfigurations.
 {{< /learning-center-callout >}}
 
 {{< whatsnext >}}
   {{< nextlink href="/security/cloud_security_management/setup">}}Complete setup and configuration{{< /nextlink >}}
-  {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security{{< /nextlink >}}
+  {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with {{< prodname >}}Cloud Security{{< /prodname >}}{{< /nextlink >}}
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for Cloud Security Misconfigurations{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}Out-of-the-box cloud detection rules for Cloud Security Misconfigurations{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}Out-of-the-box infrastructure detection rules for Cloud Security Misconfigurations{{< /nextlink >}}

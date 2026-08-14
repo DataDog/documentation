@@ -4,9 +4,9 @@ description: Instrument LLM applications with OpenTelemetry using GenAI or OpenI
 ---
 
 ## Overview
-By using OpenTelemetry's standardized semantic conventions for generative AI operations, you can instrument your LLM applications with any OpenTelemetry-compatible library or framework and visualize the traces in Agent Observability.
+By using OpenTelemetry's standardized semantic conventions for generative AI operations, you can instrument your LLM applications with any OpenTelemetry-compatible library or framework and visualize the traces in {{< prodname >}}Agent Observability{{< /prodname >}}.
 
-Agent Observability supports ingesting OpenTelemetry traces that follow either the [OpenTelemetry 1.37+ semantic conventions for generative AI][1] or the supported [OpenInference semantic conventions][12]. This allows you to send LLM traces directly from OpenTelemetry-instrumented applications to Datadog without requiring the Agent Observability SDK or a Datadog Agent.
+{{< prodname >}}Agent Observability{{< /prodname >}} supports ingesting OpenTelemetry traces that follow either the [OpenTelemetry 1.37+ semantic conventions for generative AI][1] or the supported [OpenInference semantic conventions][12]. This allows you to send LLM traces directly from OpenTelemetry-instrumented applications to Datadog without requiring the Agent Observability SDK or a Datadog Agent.
 
 ## Prerequisites
 
@@ -56,9 +56,9 @@ with tracer.start_as_current_span("chat gpt-4o", links=[link]) as llm_span:
 
 ## Setup
 
-Any method Datadog supports for ingesting OpenTelemetry traces works with Agent Observability. For the full list of supported ingestion paths, see [OpenTelemetry feature compatibility][10]. The following is one way to configure it.
+Any method Datadog supports for ingesting OpenTelemetry traces works with {{< prodname >}}Agent Observability{{< /prodname >}}. For the full list of supported ingestion paths, see [OpenTelemetry feature compatibility][10]. The following is one way to configure it.
 
-To send OpenTelemetry traces to Agent Observability, configure your OpenTelemetry exporter with the following settings:
+To send OpenTelemetry traces to {{< prodname >}}Agent Observability{{< /prodname >}}, configure your OpenTelemetry exporter with the following settings:
 
 ### Configuration
 
@@ -82,7 +82,7 @@ This environment variable enables version 1.37+-compliant OpenTelemetry traces f
 
 **Note**:
 * If you are using an OpenTelemetry library other than the default OpenTelemetry SDK, you may need to configure the endpoint, protocol, and headers differently depending on the library's API. See your library's documentation for the appropriate configuration method.
-* When using OpenTelemetry instrumentation, some data sent to Agent Observability may also be written to the corresponding APM traces. If you are protecting sensitive data, consider also configuring a Restricted Dataset on APM to match your Agent Observability access controls. See [Data Access Control][8] for more information.
+* When using OpenTelemetry instrumentation, some data sent to {{< prodname >}}Agent Observability{{< /prodname >}} may also be written to the corresponding APM traces. If you are protecting sensitive data, consider also configuring a Restricted Dataset on APM to match your {{< prodname >}}Agent Observability{{< /prodname >}} access controls. See [Data Access Control][8] for more information.
 
 #### Using strands-agents
 
@@ -92,11 +92,11 @@ If you are using the [`strands-agents` library][5], you need to set an additiona
 OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
 ```
 
-This environment variable ensures that `strands-agents` emits traces following the OpenTelemetry v1.37+ semantic conventions for generative AI, which are required by Agent Observability.
+This environment variable ensures that `strands-agents` emits traces following the OpenTelemetry v1.37+ semantic conventions for generative AI, which are required by {{< prodname >}}Agent Observability{{< /prodname >}}.
 
 ### Instrumentation
 
-To generate traces compatible with Agent Observability, do one of the following:
+To generate traces compatible with {{< prodname >}}Agent Observability{{< /prodname >}}, do one of the following:
 
 - Use an OpenTelemetry library or instrumentation package that emits spans following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1] or the supported [OpenInference semantic conventions][12].
 - Create custom OpenTelemetry instrumentation that produces the required `gen_ai.*` or OpenInference attributes defined by your chosen convention.
@@ -114,7 +114,7 @@ After your application starts sending data, the traces automatically appear in t
 
 ## Tested frameworks and libraries
 
-These frameworks and libraries have been tested with Agent Observability. Frameworks that emit the supported attributes from the [OpenTelemetry 1.37+ GenAI semantic conventions][1] or [OpenInference semantic conventions][12] can send spans to Agent Observability.
+These frameworks and libraries have been tested with {{< prodname >}}Agent Observability{{< /prodname >}}. Frameworks that emit the supported attributes from the [OpenTelemetry 1.37+ GenAI semantic conventions][1] or [OpenInference semantic conventions][12] can send spans to {{< prodname >}}Agent Observability{{< /prodname >}}.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -402,9 +402,9 @@ After running this example, search for `ml_app:simple-openinference-test` in the
 
 ## Attribute mapping reference
 
-This section provides the mappings from OpenTelemetry GenAI semantic conventions (v1.37+), OpenLLMetry, OpenInference, and Langfuse to Datadog's Agent Observability span schema.
+This section provides the mappings from OpenTelemetry GenAI semantic conventions (v1.37+), OpenLLMetry, OpenInference, and Langfuse to Datadog's {{< prodname >}}Agent Observability{{< /prodname >}} span schema.
 
-If a span is missing an expected attribute, or an attribute can't be parsed, Agent Observability flags the span with a **Mapping warnings** indicator. See [Troubleshooting mapping warnings](#troubleshooting-mapping-warnings) for descriptions and fixes.
+If a span is missing an expected attribute, or an attribute can't be parsed, {{< prodname >}}Agent Observability{{< /prodname >}} flags the span with a **Mapping warnings** indicator. See [Troubleshooting mapping warnings](#troubleshooting-mapping-warnings) for descriptions and fixes.
 
 <div class="alert alert-info">Provider-specific mappings are documented separately in the <a href="#openllmetry-attribute-mappings">OpenLLMetry attribute mappings</a>, <a href="#openinference-attribute-mappings">OpenInference attribute mappings</a>, and <a href="#langfuse-attribute-mappings">Langfuse attribute mappings</a> sections.</div>
 
@@ -485,11 +485,11 @@ All `gen_ai.request.*` parameters map to `meta.metadata.*` with the prefix strip
 |----------------|--------------|-------|
 | `gen_ai.conversation.id` | `session_id` | Also added to `metadata.conversation_id` and tags |
 
-When an APM trace's top-most span is not a gen_ai span (for example, an HTTP handler that invokes several LLMs in parallel), Agent Observability produces a separate Agent Observability trace for each top-level gen_ai span in that APM trace. To keep these split traces grouped together in the UI, set `gen_ai.conversation.id` to the same value on each gen_ai span within the APM trace: Agent Observability groups by `session_id`, so the resulting traces appear together even though they have distinct Agent Observability trace IDs. This is the same attribute used for cross-request conversation grouping.
+When an APM trace's top-most span is not a gen_ai span (for example, an HTTP handler that invokes several LLMs in parallel), {{< prodname >}}Agent Observability{{< /prodname >}} produces a separate {{< prodname >}}Agent Observability{{< /prodname >}} trace for each top-level gen_ai span in that APM trace. To keep these split traces grouped together in the UI, set `gen_ai.conversation.id` to the same value on each gen_ai span within the APM trace: {{< prodname >}}Agent Observability{{< /prodname >}} groups by `session_id`, so the resulting traces appear together even though they have distinct {{< prodname >}}Agent Observability{{< /prodname >}} trace IDs. This is the same attribute used for cross-request conversation grouping.
 
 #### Span links
 
-Span links you set on a GenAI span appear as `span_links` on the corresponding Agent Observability span.
+Span links you set on a GenAI span appear as `span_links` on the corresponding {{< prodname >}}Agent Observability{{< /prodname >}} span.
 
 | OTel span link field | Agent Observability Field | Notes |
 |----------------------|--------------|-------|
@@ -534,7 +534,7 @@ Tags are placed directly on the span:
 - Unknown `gen_ai.*` keys are added with prefix stripped
 - Filtered out: `_dd.*`, `llm.*`, `ddtags`, `events`, and already specifically mapped `gen_ai.*` keys
 
-<div class="alert alert-info">Any <code>gen_ai.*</code> attributes that are not explicitly mapped to Agent Observability span fields are placed in the LLM span's tags, with a 256 character limit per value. Values exceeding this limit are truncated. All other non-<code>gen_ai</code> attributes are dropped.</div>
+<div class="alert alert-info">Any <code>gen_ai.*</code> attributes that are not explicitly mapped to {{< prodname >}}Agent Observability{{< /prodname >}} span fields are placed in the LLM span's tags, with a 256 character limit per value. Values exceeding this limit are truncated. All other non-<code>gen_ai</code> attributes are dropped.</div>
 
 #### Custom metadata
 
@@ -652,7 +652,7 @@ The following OpenLLMetry-specific attributes are filtered from tags:
 
 ### OpenInference attribute mappings
 
-Agent Observability recognizes an OpenInference span when the `openinference.span.kind` attribute is present and non-empty. The following sections document the OpenInference attributes that map to dedicated Agent Observability fields.
+{{< prodname >}}Agent Observability{{< /prodname >}} recognizes an OpenInference span when the `openinference.span.kind` attribute is present and non-empty. The following sections document the OpenInference attributes that map to dedicated {{< prodname >}}Agent Observability{{< /prodname >}} fields.
 
 #### Span kind resolution
 
@@ -794,7 +794,7 @@ A span is treated as a Langfuse span when it carries a non-empty `langfuse.obser
 
 #### Token usage metrics
 
-`langfuse.observation.usage_details` is a JSON object. Each key maps to an Agent Observability metric, used as a fallback for any metric not already set from `gen_ai.usage.*` attributes:
+`langfuse.observation.usage_details` is a JSON object. Each key maps to an {{< prodname >}}Agent Observability{{< /prodname >}} metric, used as a fallback for any metric not already set from `gen_ai.usage.*` attributes:
 
 | Langfuse Usage Key | Agent Observability Field |
 |----------------------|--------------|
@@ -851,7 +851,7 @@ The following Langfuse-specific attributes are filtered from tags because they'r
 
 ## Troubleshooting mapping warnings
 
-At ingestion, Agent Observability detects span mapping problems such as missing input messages or an unparsable token count. It flags affected spans instead of failing silently.
+At ingestion, {{< prodname >}}Agent Observability{{< /prodname >}} detects span mapping problems such as missing input messages or an unparsable token count. It flags affected spans instead of failing silently.
 
 Flagged spans display a **Mapping warnings** indicator in the span detail panel. Select the indicator to open the span's mapping warnings. Each entry lists the affected attribute, a suggested fix, and a link to the [attribute mapping reference](#attribute-mapping-reference).
 
@@ -899,7 +899,7 @@ To find the raw attributes Datadog received for a flagged span:
 
 ## Supported semantic conventions
 
-Agent Observability supports spans that follow the OpenTelemetry 1.37+ semantic conventions for generative AI, including:
+{{< prodname >}}Agent Observability{{< /prodname >}} supports spans that follow the OpenTelemetry 1.37+ semantic conventions for generative AI, including:
 
 - LLM operations with `gen_ai.provider.name`, `"gen_ai.operation.name"`, `gen_ai.request.model`, and other gen_ai attributes
 - Operation inputs/outputs on direct span attributes or via span events
@@ -910,7 +910,7 @@ For the complete list of supported attributes and their specifications, see the 
 
 ## Disabling Agent Observability conversion
 
-If you'd only like your generative AI spans to remain in APM and not appear in Agent Observability, you can disable the automatic conversion by setting the `dd_llmobs_enabled` attribute to `false`. Setting this attribute on any span in a trace prevents the entire trace from being converted to Agent Observability.
+If you'd only like your generative AI spans to remain in APM and not appear in {{< prodname >}}Agent Observability{{< /prodname >}}, you can disable the automatic conversion by setting the `dd_llmobs_enabled` attribute to `false`. Setting this attribute on any span in a trace prevents the entire trace from being converted to {{< prodname >}}Agent Observability{{< /prodname >}}.
 
 ### Using environment variables
 

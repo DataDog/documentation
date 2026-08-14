@@ -48,22 +48,22 @@ cascade:
         tags: ['ci test', 'ci tests', 'test optimization', 'test visibility', 'failed test', 'flaky test', 'supported features']
 ---
 
-{{< callout url=# btn_hidden="true" header="Try the new CI/CD Optimization experience!">}}[CI/CD Optimization][1] combines Datadog's CI Visibility and Test Optimization experiences into one unified interface. Click {{< ui >}}Try It Now{{< /ui >}} at the top of any page in CI Visibility or Test Optimization, and switch back to the original UI at any time.
+{{< callout url=# btn_hidden="true" header="Try the new CI/CD Optimization experience!">}}[CI/CD Optimization][1] combines Datadog's CI Visibility and {{< prodname >}}Test Optimization{{< /prodname >}} experiences into one unified interface. Click {{< ui >}}Try It Now{{< /ui >}} at the top of any page in CI Visibility or {{< prodname >}}Test Optimization{{< /prodname >}}, and switch back to the original UI at any time.
 
 [1]: /continuous_integration/cicd_optimization/
 {{< /callout >}}
 
-{{< learning-center-callout header="Try Getting Started with Test Optimization in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/getting-started-test-optimization">}}
+{{< learning-center-callout header="Try Getting Started with {{< prodname >}}Test Optimization{{< /prodname >}} in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/getting-started-test-optimization">}}
   Learn how to accelerate your CI pipelines by setting up test monitoring, identifying flaky tests and using Test Impact Analysis to run only the tests that matter.
 {{< /learning-center-callout >}}
 
 ## Overview
 
-[Test Optimization][1] provides a test-first view into your CI health by displaying important metrics and results from your tests. It can help you investigate performance problems and test failures that are most relevant to your work, focusing on the code you are responsible for, rather than the pipelines which run your tests.
+[{{< prodname >}}Test Optimization{{< /prodname >}}][1] provides a test-first view into your CI health by displaying important metrics and results from your tests. It can help you investigate performance problems and test failures that are most relevant to your work, focusing on the code you are responsible for, rather than the pipelines which run your tests.
 
 ## Setup
 
-Select an option to configure Test Optimization in Datadog:
+Select an option to configure {{< prodname >}}Test Optimization{{< /prodname >}} in Datadog:
 
 {{< card-grid card_width="75px" >}}
   {{< image-card href="/tests/setup/dotnet/" src="integrations_logos/dotnet_avatar.svg" alt=".net" >}}
@@ -78,7 +78,7 @@ Select an option to configure Test Optimization in Datadog:
 
 If you use Bazel to run Go, Java, or Python tests, use the Datadog [Bazel rules for Test Optimization][10].
 
-In addition to tests, Test Optimization provides visibility over the whole testing phase of your project.
+In addition to tests, {{< prodname >}}Test Optimization{{< /prodname >}} provides visibility over the whole testing phase of your project.
 
 ### Supported features
 
@@ -115,7 +115,7 @@ For example, suppose you're testing a single commit and you have a Python test t
 
 ### Test configuration attributes
 
-When you run your tests with Test Optimization, the library detects and reports information about the environment where tests are run as test tags. For example, the operating system name, such as `Windows` or `Linux`, and the architecture of the platform, such as `arm64` or `x86_64`, are added as tags on each test. These values are shown in the commit and on branch overview pages when a test fails or is flaky for a specific configuration but not others.
+When you run your tests with {{< prodname >}}Test Optimization{{< /prodname >}}, the library detects and reports information about the environment where tests are run as test tags. For example, the operating system name, such as `Windows` or `Linux`, and the architecture of the platform, such as `arm64` or `x86_64`, are added as tags on each test. These values are shown in the commit and on branch overview pages when a test fails or is flaky for a specific configuration but not others.
 
 The following tags are automatically collected to identify test configurations, and some may only apply to specific platforms:
 
@@ -137,9 +137,9 @@ The following tags are automatically collected to identify test configurations, 
 
 ### Parameterized test configurations
 
-When you run parameterized tests, the library detects and reports information about the parameters used. Parameters are a part of test configuration, so the same test case executed with different parameters is considered as two different tests in Test Optimization.
+When you run parameterized tests, the library detects and reports information about the parameters used. Parameters are a part of test configuration, so the same test case executed with different parameters is considered as two different tests in {{< prodname >}}Test Optimization{{< /prodname >}}.
 
-If a test parameter is non-deterministic and has a different value every time a test is run, each test execution is considered a new test in Test Optimization. As a consequence, some product features may not work correctly for such tests: history of executions, flakiness detection, Test Impact Analysis, and others.
+If a test parameter is non-deterministic and has a different value every time a test is run, each test execution is considered a new test in {{< prodname >}}Test Optimization{{< /prodname >}}. As a consequence, some product features may not work correctly for such tests: history of executions, flakiness detection, Test Impact Analysis, and others.
 
 Some examples of non-deterministic test parameters are:
 
@@ -152,7 +152,7 @@ Avoid using non-deterministic test parameters. In case this is not possible, som
 
 ## Custom configurations
 
-There are some configurations that cannot be directly identified and reported automatically because they can depend on environment variables, test run arguments, or other approaches that developers use. For those cases, you must provide the configuration details to the library so Test Optimization can properly identify them.
+There are some configurations that cannot be directly identified and reported automatically because they can depend on environment variables, test run arguments, or other approaches that developers use. For those cases, you must provide the configuration details to the library so {{< prodname >}}Test Optimization{{< /prodname >}} can properly identify them.
 
 Define these tags as part of the `DD_TAGS` environment variable using the `test.configuration` prefix.
 

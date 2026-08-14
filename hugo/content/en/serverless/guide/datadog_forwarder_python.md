@@ -429,7 +429,7 @@ def get_message():
     return 'Hello from serverless!'
 ```
 
-For more information on custom metric submission, see [here][4]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][5].
+For more information on custom metric submission, see [here][4]. For additional details on custom instrumentation, see the {{< prodname >}}Datadog APM{{< /prodname >}} documentation for [custom instrumentation][5].
 
 ## Further Reading
 

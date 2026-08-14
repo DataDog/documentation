@@ -11,9 +11,9 @@ further_reading:
 
 ## Overview
 
-Create the metrics you want to measure in your experiments. You can use data from Real User Monitoring (RUM), Product Analytics, or your own warehouse to create Datadog Experiments metrics.
+Create the metrics you want to measure in your experiments. You can use data from Real User Monitoring (RUM), {{< prodname >}}Product Analytics{{< /prodname >}}, or your own warehouse to create Datadog Experiments metrics.
 
-<div class="alert alert-info">If your organization uses custom roles, you must have the appropriate <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#product-analytics">Product Analytics permissions</a> to create experiment metrics.</div>
+<div class="alert alert-info">If your organization uses custom roles, you must have the appropriate <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#product-analytics">{{< prodname >}}Product Analytics{{< /prodname >}} permissions</a> to create experiment metrics.</div>
 
 ## Create a metric
 
@@ -24,14 +24,14 @@ Select your data source:
 
 ### Prerequisites
 
-To create a metric from Product Analytics or RUM data, you must have Datadog's [client-side SDK][3] installed in your application and be actively capturing data. If you have not yet configured your SDK, select your application type to get started:
+To create a metric from {{< prodname >}}Product Analytics{{< /prodname >}} or RUM data, you must have Datadog's [client-side SDK][3] installed in your application and be actively capturing data. If you have not yet configured your SDK, select your application type to get started:
 
 - [Android and Android TV][4]
 - [iOS and tvOS][5]
 - [Browser (JavaScript)][6]
 - [React Native][7]
 
-Product Analytics uses the same SDKs and configuration as Real User Monitoring (RUM). After you configure your SDK using the RUM setup documentation, create your metric in the Product Analytics UI.
+{{< prodname >}}Product Analytics{{< /prodname >}} uses the same SDKs and configuration as Real User Monitoring (RUM). After you configure your SDK using the RUM setup documentation, create your metric in the Product Analytics UI.
 
 ### Create a metric using Product Analytics or RUM data
 

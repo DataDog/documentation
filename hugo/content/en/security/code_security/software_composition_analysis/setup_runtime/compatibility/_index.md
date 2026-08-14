@@ -11,7 +11,7 @@ The following capabilities are supported relative to each language's SDK:
 |------------------------------------------------|---------|----------|--------------------------------------------------|---------------|-----------------|---------------|---------------|
 | Runtime Software Composition Analysis (SCA)    | 1.1.4   | 2.16.0   | 4.0.0                                            | 1.5.0         | 1.49.0          | 1.11.0        | 0.90.0        |
 
-**Note**: **Static Software Composition Analysis (SCA)** and **Static Code Analysis (SAST)** capabilities do not require the Datadog SDK. Therefore, the requirements listed below do not apply to these two Code Security capabilities.
+**Note**: **Static Software Composition Analysis (SCA)** and **Static Code Analysis (SAST)** capabilities do not require the Datadog SDK. Therefore, the requirements listed below do not apply to these two {{< prodname >}}Code Security{{< /prodname >}} capabilities.
 
 Select your application language for details about framework compatibility and feature support.
 

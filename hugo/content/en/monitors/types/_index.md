@@ -32,9 +32,9 @@ further_reading:
 {{< nextlink href="/monitors/types/ci" >}}{{< ui >}}CI{{< /ui >}}: Monitor CI pipelines and tests data gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/cloud_cost" >}}{{< ui >}}Cloud Cost{{< /ui >}}: Monitor cost changes associated with cloud platforms.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/composite" >}}{{< ui >}}Composite{{< /ui >}}: Alert on an expression combining multiple monitors.{{< /nextlink >}}
-{{< nextlink href="/monitors/types/data_observability" >}}{{< ui >}}Data Observability{{< /ui >}}: Monitor freshness, row count, column-level metrics, and custom SQL queries across your data warehouses.{{< /nextlink >}}
-{{< nextlink href="/monitors/types/database_monitoring" >}}{{< ui >}}Database Monitoring{{< /ui >}}: Monitor query execution and explain plan data gathered by Datadog.{{< /nextlink >}}
-{{< nextlink href="/monitors/types/error_tracking" >}}{{< ui >}}Error Tracking{{< /ui >}}: Monitor issues in your applications gathered by Datadog.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/data_observability" >}}{{< ui >}}{{< prodname >}}Data Observability{{< /prodname >}}{{< /ui >}}: Monitor freshness, row count, column-level metrics, and custom SQL queries across your data warehouses.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/database_monitoring" >}}{{< ui >}}{{< prodname >}}Database Monitoring{{< /prodname >}}{{< /ui >}}: Monitor query execution and explain plan data gathered by Datadog.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/error_tracking" >}}{{< ui >}}{{< prodname >}}Error Tracking{{< /prodname >}}{{< /ui >}}: Monitor issues in your applications gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/event" >}}{{< ui >}}Event{{< /ui >}}: Monitor events gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/forecasts" >}}{{< ui >}}Forecast{{< /ui >}}: Alert when a metric is projected to cross a threshold.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/integration" >}}{{< ui >}}Integration{{< /ui >}}: Monitor metric values or health status from a specific integration.{{< /nextlink >}}

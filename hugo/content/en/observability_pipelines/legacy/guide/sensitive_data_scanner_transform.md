@@ -20,11 +20,11 @@ The <code>sensitive_data_scanner</code> transform is in private beta.
 
 ## Overview
 
-Sensitive data, such as credit card numbers, bank routing numbers, and API keys, can be revealed unintentionally in your logs, which can expose your organization to financial and privacy risks. Use the Observability Pipelines `sensitive_data_scanner` transform to identify, tag, and optionally redact or hash sensitive information before routing data to different destinations. You can use out-of-the-box scanning rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. Or, create custom scanning rules using regex patterns to match sensitive information.
+Sensitive data, such as credit card numbers, bank routing numbers, and API keys, can be revealed unintentionally in your logs, which can expose your organization to financial and privacy risks. Use the {{< prodname >}}Observability Pipelines{{< /prodname >}} `sensitive_data_scanner` transform to identify, tag, and optionally redact or hash sensitive information before routing data to different destinations. You can use out-of-the-box scanning rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. Or, create custom scanning rules using regex patterns to match sensitive information.
 
 ## Set up the `sensitive_data_scanner` transform
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][1].
 1. Click on your pipeline.
 1. Click **Edit as Draft**.
 1. Click **+ Add Component**.
@@ -52,7 +52,7 @@ Sensitive data, such as credit card numbers, bank routing numbers, and API keys,
 1. If you want to add another rule, click **Add a New Item** and follow steps 10 to 14.
 1. Click **Save**.
 
-**Note**: Any rules that you add or update only affect data coming into Observability Pipelines after the rule was defined.
+**Note**: Any rules that you add or update only affect data coming into {{< prodname >}}Observability Pipelines{{< /prodname >}} after the rule was defined.
 
 ### Using regex for custom rules
 

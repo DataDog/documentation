@@ -20,14 +20,14 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
 Configuring App and API Protection for AWS Lambda involves:
 
-1. Identifying functions that are vulnerable or are under attack, which would most benefit from App and API Protection. Find them on [the Security tab of your Catalog][1].
-2. Setting up App and API Protection instrumentation by using either the [Datadog CLI][8], [AWS CDK][9], [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
+1. Identifying functions that are vulnerable or are under attack, which would most benefit from {{< prodname >}}App and API Protection{{< /prodname >}}. Find them on [the Security tab of your Catalog][1].
+2. Setting up {{< prodname >}}App and API Protection{{< /prodname >}} instrumentation by using either the [Datadog CLI][8], [AWS CDK][9], [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
 ## Supported trigger types
@@ -45,7 +45,7 @@ Threat Detection supports HTTP requests as function input only, as that channel 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless Framework plugin][1] can be used to automatically configure and deploy your lambda with App and API Protection.
+The [Datadog Serverless Framework plugin][1] can be used to automatically configure and deploy your lambda with {{< prodname >}}App and API Protection{{< /prodname >}}.
 
 To install and configure the Datadog Serverless Framework plugin:
 
@@ -133,7 +133,7 @@ The Datadog CLI modifies existing Lambda function configurations to enable instr
     - Alternatively, you can use `--functions-regex` to automatically instrument multiple functions whose names match the given regular expression.
     - Replace `<aws_region>` with the AWS region name.
 
-   **Note**: Instrument your Lambda functions in a development or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes. After the CLI completes, update your source code to depend on the latest `datadog-lambda-go` module release to enable App and API Protection.
+   **Note**: Instrument your Lambda functions in a development or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes. After the CLI completes, update your source code to depend on the latest `datadog-lambda-go` module release to enable {{< prodname >}}App and API Protection{{< /prodname >}}.
 
     Additional parameters can be found in the [CLI documentation][2].
 

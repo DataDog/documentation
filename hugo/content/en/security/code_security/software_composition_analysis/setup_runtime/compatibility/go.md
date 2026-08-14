@@ -39,7 +39,7 @@ Starting from tracer version 1.53.0, code security capabilities do not require [
 
 The Go tracer includes support for the following frameworks, data stores and libraries.
 
-The Go packages listed in this page are relevant for Code Security capabilities. You can also find more tracing integrations in [APM's tracing compatibility page][16].
+The Go packages listed in this page are relevant for {{< prodname >}}Code Security{{< /prodname >}} capabilities. You can also find more tracing integrations in [APM's tracing compatibility page][16].
 
 **Note**: The [Go integrations documentation][19] provides a detailed overview of the supported packages and their APIs, along with usage examples.
 

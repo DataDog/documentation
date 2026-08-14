@@ -26,9 +26,9 @@ To view detection rules against the MITRE ATT&CK Framework:
 1. Click the {{< ui >}}MITRE ATT&CK Map{{< /ui >}} button located next to {{< ui >}}Rules List{{< /ui >}}.
 1. Toggle the resize button on the bottom left side of the page to switch between an expanded view and a condensed view.
 
-The default view of the map shows all Datadog out-of-the-box and custom rules for active sources, broken down into different attack techniques. Active sources are the sources of logs found and analyzed in the Cloud SIEM index.
+The default view of the map shows all Datadog out-of-the-box and custom rules for active sources, broken down into different attack techniques. Active sources are the sources of logs found and analyzed in the {{< prodname >}}Cloud SIEM{{< /prodname >}} index.
 
-**Note**: For the legacy SKU, all ingested logs are analyzed by Cloud SIEM unless [security filters][2] have been set up.
+**Note**: For the legacy SKU, all ingested logs are analyzed by {{< prodname >}}Cloud SIEM{{< /prodname >}} unless [security filters][2] have been set up.
 
 To view the map for all sources, in the {{< ui >}}Visualize{{< /ui >}} dropdown menu, select {{< ui >}}All Sources{{< /ui >}}. This shows all out-of-the-box rules, including those that are not currently used to detect threats from your logs.
 

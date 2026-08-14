@@ -30,7 +30,7 @@ To create a workflow from a datastore:
 1. On the [Datastores page][1], locate your datastore in the list and click to open it.
 1. Click {{< ui >}}Create{{< /ui >}} > {{< ui >}}Workflow from Datastore{{< /ui >}}.
 
-Datadog creates a workflow with a {{< ui >}}List items{{< /ui >}} workflow step prepopulated with your datastore ID. From here, follow the [Workflow Automation][2] documentation to build your workflow. For a list of available datastore actions, see the [Action Catalog][4].
+Datadog creates a workflow with a {{< ui >}}List items{{< /ui >}} workflow step prepopulated with your datastore ID. From here, follow the [{{< prodname >}}Workflow Automation{{< /prodname >}}][2] documentation to build your workflow. For a list of available datastore actions, see the [Action Catalog][4].
 
 ### App Builder
 

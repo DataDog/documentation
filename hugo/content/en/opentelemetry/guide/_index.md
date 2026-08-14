@@ -32,6 +32,6 @@ private: true
 {{< nextlink href="https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/" >}}OTLP ingestion in the Agent{{< /nextlink >}}
 {{< nextlink href="https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/" >}}Learn more about AWS's managed Lambda Layer for OpenTelemetry{{< /nextlink >}}
 {{< nextlink href="https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/" >}}Correlate Datadog RUM events with traces from OpenTelemetry-instrumented applications{{< /nextlink >}}
-{{< nextlink href="https://www.datadoghq.com/blog/opentelemetry-runtime-metrics-datadog/" >}}Monitor runtime metrics from OTel-instrumented apps with Datadog APM{{< /nextlink >}}
+{{< nextlink href="https://www.datadoghq.com/blog/opentelemetry-runtime-metrics-datadog/" >}}Monitor runtime metrics from OTel-instrumented apps with {{< prodname >}}Datadog APM{{< /prodname >}}{{< /nextlink >}}
 {{< nextlink href="https://www.datadoghq.com/blog/datadog-distribution-otel-collector/" >}}Unify OpenTelemetry and Datadog with the DDOT Collector{{< /nextlink >}}
 {{< /whatsnext >}}

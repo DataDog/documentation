@@ -97,7 +97,7 @@ Click {{< ui >}}View Details{{< /ui >}} on a Trends card or click any row in the
 - {{< ui >}}Projected Cost Change{{< /ui >}}: The projected dollar and percentage change vs. the prior period
 - {{< ui >}}Projected EOM{{< /ui >}}: Estimated total cost at end of month
 - {{< ui >}}Daily Cost{{< /ui >}} bar chart: Day-by-day cost for the previous and current month, with the current month highlighted. Hover over any bar to see the cost for that day. Toggle {{< ui >}}Show Usage Charges Only{{< /ui >}} to isolate on-demand charges.
-- {{< ui >}}Drilldown in Cloud Cost{{< /ui >}}: Click to open Cloud Cost Management, pre-filtered to the selected billing dimension.
+- {{< ui >}}Drilldown in Cloud Cost{{< /ui >}}: Click to open {{< prodname >}}Cloud Cost Management{{< /prodname >}}, pre-filtered to the selected billing dimension.
 
 ### Usage Overview
 

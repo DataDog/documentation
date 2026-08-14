@@ -61,7 +61,7 @@ This behavior can be disabled in version 7.72.0 and later by setting <code>conve
 [Live Containers][3], [Live Process][4], [Cloud Network Monitoring][24], [Universal Service Monitoring][25]
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
-[Network Device Monitoring][10]
+[{{< prodname >}}Network Device Monitoring{{< /prodname >}}][10]
 : `ndm-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
@@ -94,7 +94,7 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 [Remote Configuration][101]
 : `config.`{{< region-param key="dd_site" code="true" >}}
 
-[Database Monitoring][102]
+[{{< prodname >}}Database Monitoring{{< /prodname >}}][102]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 

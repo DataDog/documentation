@@ -22,7 +22,7 @@ further_reading:
 
 {{< img src="incident_response/status_pages/shopist_status_page3.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
 
-Status Pages is part of Datadog's Incident Response suite, alongside On-Call and Incident Management. It lets your team proactively communicate **service availability**, **incidents**, and **planned maintenance** with customers or internal stakeholders through a shareable web page.
+Status Pages is part of Datadog's Incident Response suite, alongside {{< prodname >}}On-Call{{< /prodname >}} and {{< prodname >}}Incident Management{{< /prodname >}}. It lets your team proactively communicate **service availability**, **incidents**, and **planned maintenance** with customers or internal stakeholders through a shareable web page.
 
 Use Status Pages to:
 

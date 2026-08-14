@@ -63,7 +63,7 @@ Do not put API keys in browser, mobile, or game applications.
 
 Evaluation context attributes are the flat string, number, and Boolean values that Datadog uses for targeting rules and rollout bucketing. Set a stable `targetingKey`, such as a user ID, session ID, or device ID, so percentage rollouts are consistent.
 
-Feature Flags telemetry includes exposure events, flag evaluation metrics, and optional RUM correlation depending on the SDK and configuration.
+{{< prodname >}}Feature Flags{{< /prodname >}} telemetry includes exposure events, flag evaluation metrics, and optional RUM correlation depending on the SDK and configuration.
 
 ## Further reading
 

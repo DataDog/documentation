@@ -114,7 +114,7 @@ ping:
 {{% /tab %}}
 {{< /tabs >}}
 
-After ping is enabled on your network devices, the {{< ui >}}Ping State{{< /ui >}} column appears in [Network Device Monitoring][6], displaying the ping status for each device.
+After ping is enabled on your network devices, the {{< ui >}}Ping State{{< /ui >}} column appears in [{{< prodname >}}Network Device Monitoring{{< /prodname >}}][6], displaying the ping status for each device.
 
 {{< img src="/network_device_monitoring/snmp/ping_state_status_2.png" alt="The status column in the NDM UI showing the Ping state toggle enabled with the ping state status column highlighted" style="width:100%;">}}
 

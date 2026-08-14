@@ -10,9 +10,9 @@ further_reading:
   text: "Autodiscovery for RDS"
 ---
 
-Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
+{{< prodname >}}Database Monitoring{{< /prodname >}} provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
 
-The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your MySQL database:
+The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable {{< prodname >}}Database Monitoring{{< /prodname >}} with your MySQL database:
 
 1. [Configure the AWS integration](#configure-the-aws-integration)
 1. [Configure database parameters](#configure-mysql-settings)
@@ -27,14 +27,14 @@ Supported MySQL versions
 
 Supported MariaDB versions
 : 10.5, 10.6, or 10.11 <br/><br/>
-Database Monitoring for MariaDB is supported with [known limitations][11].
+{{< prodname >}}Database Monitoring{{< /prodname >}} for MariaDB is supported with [known limitations][11].
 
 Supported Agent versions
 : 7.36.1+
 
 Performance impact
-: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
-Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
+: The default Agent configuration for {{< prodname >}}Database Monitoring{{< /prodname >}} is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
+{{< prodname >}}Database Monitoring{{< /prodname >}} runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
 : The Datadog Agent must connect directly to the host being monitored, preferably through the instance endpoint. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
@@ -275,7 +275,7 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOI
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
+If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for {{< prodname >}}Database Monitoring{{< /prodname >}}.
 
 Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the MySQL configuration either with static files mounted in the Cluster Agent container or using service annotations:
 

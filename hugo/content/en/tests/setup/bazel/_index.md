@@ -13,9 +13,9 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-Datadog provides official Bazel rules for Test Optimization. Use these rules to configure Bazel test targets. The rules read Test Optimization metadata, write local payload files during test execution, and upload test results to Datadog after Bazel tests complete. See all rules in the [`DataDog/rules_test_optimization` repository](https://github.com/DataDog/rules_test_optimization).
+Datadog provides official Bazel rules for {{< prodname >}}Test Optimization{{< /prodname >}}. Use these rules to configure Bazel test targets. The rules read {{< prodname >}}Test Optimization{{< /prodname >}} metadata, write local payload files during test execution, and upload test results to Datadog after Bazel tests complete. See all rules in the [`DataDog/rules_test_optimization` repository](https://github.com/DataDog/rules_test_optimization).
 
-The Bazel integration keeps Datadog metadata fetches outside test execution. During module or repository resolution, Bazel fetches Test Optimization metadata from Datadog and exposes it through a generated repository. During test execution, language-specific macros pass the metadata location to the test process and configure payloads to be written under `TEST_UNDECLARED_OUTPUTS_DIR`. After tests finish, run the doctor and uploader targets with `bazel run`.
+The Bazel integration keeps Datadog metadata fetches outside test execution. During module or repository resolution, Bazel fetches {{< prodname >}}Test Optimization{{< /prodname >}} metadata from Datadog and exposes it through a generated repository. During test execution, language-specific macros pass the metadata location to the test process and configure payloads to be written under `TEST_UNDECLARED_OUTPUTS_DIR`. After tests finish, run the doctor and uploader targets with `bazel run`.
 
 [Test Impact Analysis][1] and automatic [coverage configuration][5] are not supported for Bazel.
 

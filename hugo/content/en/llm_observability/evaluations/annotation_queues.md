@@ -37,7 +37,7 @@ Annotation Queues provide a structured workflow for human review of LLM traces. 
 2. Click {{< ui >}}Create Queue{{< /ui >}}.
 3. On the {{< ui >}}About{{< /ui >}} tab, configure:
    - {{< ui >}}Name{{< /ui >}}: Descriptive name reflecting the queue's purpose (for example, "Failed Evaluations Review - Q1 2026")
-   - {{< ui >}}Project{{< /ui >}}: Agent Observability project this queue belongs to
+   - {{< ui >}}Project{{< /ui >}}: {{< prodname >}}Agent Observability{{< /prodname >}} project this queue belongs to
    - {{< ui >}}Description{{< /ui >}} (optional): Explain the queue's purpose and any special instructions for annotators
 
 4. Then click {{< ui >}}Next{{< /ui >}}.
@@ -287,7 +287,7 @@ To delete a queue:
 2. Open the queue.
 3. Click {{< ui >}}Delete{{< /ui >}} in the Details panel.
 
-<div class="alert alert-info">Deleting a queue removes the queue and label associations, but does not delete the underlying traces from Agent Observability. Traces remain accessible in Trace Explorer.</div>
+<div class="alert alert-info">Deleting a queue removes the queue and label associations, but does not delete the underlying traces from {{< prodname >}}Agent Observability{{< /prodname >}}. Traces remain accessible in Trace Explorer.</div>
 
 ## Using the API
 

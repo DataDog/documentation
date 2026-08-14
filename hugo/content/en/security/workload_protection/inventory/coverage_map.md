@@ -10,7 +10,7 @@ further_reading:
   text: "Review your Workload Protection coverage with the Coverage map"
 ---
 
-Workload Protection [Coverage][1] provides a real-time view of security coverage across all your hosts. Use Coverage to assess protection posture, identify gaps, and take immediate action.
+{{< prodname >}}Workload Protection{{< /prodname >}} [Coverage][1] provides a real-time view of security coverage across all your hosts. Use Coverage to assess protection posture, identify gaps, and take immediate action.
 
 {{< img src="security/cws/workload_protection_coverage_map.png" alt="Leverage the Coverage map to get real time visibility into the workload protection status across all your hosts and see which policies are effectively applied" width="100%">}}
 
@@ -62,17 +62,17 @@ From the {{< ui >}}Incomplete infrastructure coverage{{< /ui >}} status card on 
 
 ### Identify assets missing Workload Protection
 
-From the {{< ui >}}Incomplete infrastructure coverage{{< /ui >}} status card on the Coverage page, you can review assets without full Workload Protection (WP):
+From the {{< ui >}}Incomplete infrastructure coverage{{< /ui >}} status card on the Coverage page, you can review assets without full {{< prodname >}}Workload Protection{{< /prodname >}} (WP):
 
-1. In {{< ui >}}Improve infrastructure coverage{{< /ui >}}, click {{< ui >}}NO WP{{< /ui >}}. {{< ui >}}NO WP{{< /ui >}} shows how many hosts are running the Datadog Agent without Workload Protection enabled.
+1. In {{< ui >}}Improve infrastructure coverage{{< /ui >}}, click {{< ui >}}NO WP{{< /ui >}}. {{< ui >}}NO WP{{< /ui >}} shows how many hosts are running the Datadog Agent without {{< prodname >}}Workload Protection{{< /prodname >}} enabled.
 2. Click {{< ui >}}Inspect Hosts Without WP{{< /ui >}}. Fleet Automation appears, allowing you to [set up Workload Protection][3].
 
 ### Identify assets missing key features
 
 From the {{< ui >}}Incomplete infrastructure coverage{{< /ui >}} status card on the Coverage page, you can find assets with gaps in protection.
 
-1. In {{< ui >}}Improve infrastructure coverage{{< /ui >}}, click {{< ui >}}INFO{{< /ui >}} to review the `outdated_agent` flag. The `outdated_agent` flag means an outdated Agent version is running and might not support the latest Workload Protection features.
-2. In {{< ui >}}Improve infrastructure coverage{{< /ui >}}, click {{< ui >}}NO AGENT{{< /ui >}}. {{< ui >}}NO AGENT{{< /ui >}} shows how many hosts are not running the Datadog Agent, and therefore can't be evaluated by Workload Protection.
+1. In {{< ui >}}Improve infrastructure coverage{{< /ui >}}, click {{< ui >}}INFO{{< /ui >}} to review the `outdated_agent` flag. The `outdated_agent` flag means an outdated Agent version is running and might not support the latest {{< prodname >}}Workload Protection{{< /prodname >}} features.
+2. In {{< ui >}}Improve infrastructure coverage{{< /ui >}}, click {{< ui >}}NO AGENT{{< /ui >}}. {{< ui >}}NO AGENT{{< /ui >}} shows how many hosts are not running the Datadog Agent, and therefore can't be evaluated by {{< prodname >}}Workload Protection{{< /prodname >}}.
    1. Click {{< ui >}}Inspect Hosts Without Agent{{< /ui >}}. The Resource Catalog appears, allowing you to address hosts missing agents.
 3. Filter by {{< ui >}}Agent Version{{< /ui >}} to detect outdated agents lacking recent security updates.
 4. Update the Agent to ensure complete coverage.
@@ -87,7 +87,7 @@ To use these filters to strengthen detection and response alignment with proven 
 2. After the map updates for the tactic you selected, click {{< ui >}}Techniques{{< /ui >}} and select a technique to identify gaps in technique coverage for critical systems.
 3. Click {{< ui >}}Policies{{< /ui >}} and select a policy type to see the distribution of policies across the filtered infrastructure.
 
-For information about the MITRE ATT&CK map available in SIEM or Workload Protection, see [MITRE ATT&CK map][2].
+For information about the MITRE ATT&CK map available in SIEM or {{< prodname >}}Workload Protection{{< /prodname >}}, see [MITRE ATT&CK map][2].
 
 ### Experiment with new rules
 

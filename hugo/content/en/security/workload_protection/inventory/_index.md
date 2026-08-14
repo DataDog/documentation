@@ -15,7 +15,7 @@ Inventory is organized into the following tools:
   * Track coverage for serverless functions
   * Filter by environment, enabled features, agent version, and more
 - [Coverage Map][3]:
-  * View a map of Workload Protection status updated every 1-5 minutes
+  * View a map of {{< prodname >}}Workload Protection{{< /prodname >}} status updated every 1-5 minutes
   * Find and prioritize workloads in a warning state
   * Filter by policy, rule, or MITRE ATT&CK tactic to locate gaps
   * Check for outdated or unhealthy agents

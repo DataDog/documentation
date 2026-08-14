@@ -24,7 +24,7 @@ This guide walks you through deploying the Worker in your common tools cluster a
 {{% op-deployment-modes %}}
 
 ## Assumptions
-* You are already using Datadog and want to use Observability Pipelines.
+* You are already using Datadog and want to use {{< prodname >}}Observability Pipelines{{< /prodname >}}.
 * You have administrative access to the clusters where the Observability Pipelines Worker is going to be deployed, as well as to the workloads that are going to be aggregated.
 * You have a common tools cluster or security cluster for your environment to which all other clusters are connected.
 
@@ -34,7 +34,7 @@ Before installing, make sure you have:
 * A valid [Datadog API key][2].
 * A Pipeline ID.
 
-You can generate both of these in [Observability Pipelines][3].
+You can generate both of these in [{{< prodname >}}Observability Pipelines{{< /prodname >}}][3].
 
 ### Provider-specific requirements
 {{< tabs >}}
@@ -192,7 +192,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     
     Replace these placeholders with the following information:
     - `<API_KEY>` with your Datadog API key.
-    - `<PIPELINES_ID>` with your Observability Pipelines configuration ID.
+    - `<PIPELINES_ID>` with your {{< prodname >}}Observability Pipelines{{< /prodname >}} configuration ID.
     - `<SITE>` with {{< region-param key="dd_site" code="true" >}}.
     - `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` with the AWS credentials you created earlier.
     - `<AWS_BUCKET_NAME>` with the name of the S3 bucket storing the logs.
@@ -208,7 +208,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 
 2. In the Helm chart, replace these placeholders with the following information:
     - `datadog.apiKey` with your Datadog API key. 
-    - `datadog.pipelineId` with your Observability Pipelines configuration ID.
+    - `datadog.pipelineId` with your {{< prodname >}}Observability Pipelines{{< /prodname >}} configuration ID.
     - `site` with {{< region-param key="dd_site" code="true" >}}. 
     - `${DD_ARCHIVES_SERVICE_ACCOUNT}` in `serviceAccount.name` with the service account name. 
     - `${DD_ARCHIVES_BUCKET}` in `pipelineConfig.sinks.datadog_archives` with the name of the S3 bucket storing the logs.
@@ -382,7 +382,7 @@ The Terraform module provisions an NLB to point at the instances. The DNS addres
 {{< /tabs >}}
 
 ### Buffering
-Observability Pipelines includes multiple buffering strategies that allow you to increase the resilience of your cluster to downstream faults. The provided sample configurations use disk buffers, the capacities of which are rated for approximately 10 minutes of data at 10Mbps/core for Observability Pipelines deployments. That is often enough time for transient issues to resolve themselves, or for incident responders to decide what needs to be done with the observability data.
+{{< prodname >}}Observability Pipelines{{< /prodname >}} includes multiple buffering strategies that allow you to increase the resilience of your cluster to downstream faults. The provided sample configurations use disk buffers, the capacities of which are rated for approximately 10 minutes of data at 10Mbps/core for {{< prodname >}}Observability Pipelines{{< /prodname >}} deployments. That is often enough time for transient issues to resolve themselves, or for incident responders to decide what needs to be done with the observability data.
 
 {{< tabs >}}
 {{% tab "Docker" %}}

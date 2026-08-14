@@ -90,12 +90,12 @@ To set up the Enrichment Table processor:
   1. Select the Reference Table in the dropdown menu. See [Using reference tables](#using-reference-tables) for more information.
   1. Click {{< ui >}}Manage{{< /ui >}} to go to the Reference Tables configuration page.
   1. (Optional) Select specific columns with which to enrich your logs.
-      - Observability Pipelines enriches logs with all columns in the table by default. Each column in the table is added as an attribute to the log, where the attribute name is the column name and the attribute value is the column value.
+      - {{< prodname >}}Observability Pipelines{{< /prodname >}} enriches logs with all columns in the table by default. Each column in the table is added as an attribute to the log, where the attribute name is the column name and the attribute value is the column value.
       - If you want to enrich your logs with specific columns from your Reference Table, select the columns' corresponding attributes in the dropdown menu.
-  1. Enter a Datadog Application key identifier. Observability Pipelines uses [application keys][1] to access Datadog's programmatic API when enriching data. Ensure you application key is:
+  1. Enter a Datadog Application key identifier. {{< prodname >}}Observability Pipelines{{< /prodname >}} uses [application keys][1] to access Datadog's programmatic API when enriching data. Ensure you application key is:
       - Associated with a [Service Account][2] (not a personal Datadog user account).
       - Limited to the [`reference_tables_read`][3] scope.
-  1. Enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the Reference Table. See the [Enrichment example](#enrichment-example) for more information.
+  1. Enter the source attribute of the log. The source attribute's value is what you want {{< prodname >}}Observability Pipelines{{< /prodname >}} to find in the Reference Table. See the [Enrichment example](#enrichment-example) for more information.
   1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the Reference Table. See the [Enrichment file example](#enrichment-file-example) for more information.
   1. Click {{< ui >}}Save{{< /ui >}}.
 

@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Observability Pipelines enables you to transform your logs before sending them to your destinations. Use the Custom Processor to create scripts with custom functions that conditionally modify log fields, values, and events.
+{{< prodname >}}Observability Pipelines{{< /prodname >}} enables you to transform your logs before sending them to your destinations. Use the Custom Processor to create scripts with custom functions that conditionally modify log fields, values, and events.
 
 This guide walks you through how to use the following functions in your Custom Processor script:
 
@@ -457,7 +457,7 @@ empty_patterns = ["null", "NULL", "N/A", "n/a", "none", "NONE", "-", "undefined"
 
 ## Merge nested attributes to root level
 
-Targeting nested objects or fields in a filter query may require you to define multiple paths. This is common when working with the message field, where the resulting parsed contents are nested in an object. When you use the Observability Pipelines' filter syntax, accessing a nested field requires the `<OUTER_PATH>.<INNER_PATH>` notation.
+Targeting nested objects or fields in a filter query may require you to define multiple paths. This is common when working with the message field, where the resulting parsed contents are nested in an object. When you use the {{< prodname >}}Observability Pipelines{{< /prodname >}}' filter syntax, accessing a nested field requires the `<OUTER_PATH>.<INNER_PATH>` notation.
 
 For example, this log contains a stringified JSON message:
 

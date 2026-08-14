@@ -62,7 +62,7 @@ cascade:
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Security">}}
-  Learn how Datadog Cloud SIEM and Cloud Security elevate your organization's threat detection and investigation for dynamic, cloud-scale environments. 
+  Learn how Datadog Cloud SIEM and {{< prodname >}}Cloud Security{{< /prodname >}} elevate your organization's threat detection and investigation for dynamic, cloud-scale environments. 
 {{< /learning-center-callout >}}
 
 Datadog Cloud Security delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure—all in a unified platform for seamless collaboration and faster remediation.
@@ -73,13 +73,13 @@ Security and DevOps teams can act on the shared context of observability and sec
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Cloud Security leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
+{{< prodname >}}Cloud Security{{< /prodname >}} leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
 
 - [{{< ui >}}Misconfigurations{{< /ui >}}][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
 - [{{< ui >}}Identity Risks{{< /ui >}}][8]: Provides in-depth visibility into your organization's AWS IAM, Azure, and GCP risks, and enables you to detect and resolve identity risks on an ongoing basis.
 - [{{< ui >}}Vulnerabilities{{< /ui >}}][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.
 
-Cloud Security also includes access to Datadog Security features, including:
+{{< prodname >}}Cloud Security{{< /prodname >}} also includes access to Datadog Security features, including:
 - [Detection Rules][18]
 - [Notifications][6]
 - [Automation Pipelines][19]
@@ -95,11 +95,11 @@ Cloud Security also includes access to Datadog Security features, including:
 
 ### Manage homepage dashboards
 
-You can customize the dashboards that you can access directly from the Cloud Security homepage, including setting a dashboard to your default homepage view. Use dashboards to prioritize remediation efforts, schedule reports, put security data next to observability and cost data, and embed apps and workflows you can start directly from your reporting view. 
+You can customize the dashboards that you can access directly from the {{< prodname >}}Cloud Security{{< /prodname >}} homepage, including setting a dashboard to your default homepage view. Use dashboards to prioritize remediation efforts, schedule reports, put security data next to observability and cost data, and embed apps and workflows you can start directly from your reporting view. 
 
-On the [Cloud Security homepage][4], in the {{< ui >}}Dashboards{{< /ui >}} section, you can jump directly to dashboards for Identity Risks, Misconfigurations, or Vulnerabilities. You can also add existing dashboards or create one to keep on your Cloud Security homepage sidebar for convenient access.
+On the [Cloud Security homepage][4], in the {{< ui >}}Dashboards{{< /ui >}} section, you can jump directly to dashboards for Identity Risks, Misconfigurations, or Vulnerabilities. You can also add existing dashboards or create one to keep on your {{< prodname >}}Cloud Security{{< /prodname >}} homepage sidebar for convenient access.
 
-Additionally, you can click the {{< ui >}}More Options{{< /ui >}} icon {{< img src="icons/kebab.png" inline="true" style="height:1em" >}} to manage your pinned dashboards, including setting one as your Cloud Security homepage default view. Click {{< ui >}}Cloud Security{{< /ui >}} in the Datadog nav bar or {{< ui >}}Summary{{< /ui >}} in the Cloud Security nav bar to go directly to your pinned dashboard.
+Additionally, you can click the {{< ui >}}More Options{{< /ui >}} icon {{< img src="icons/kebab.png" inline="true" style="height:1em" >}} to manage your pinned dashboards, including setting one as your {{< prodname >}}Cloud Security{{< /prodname >}} homepage default view. Click {{< ui >}}{{< prodname >}}Cloud Security{{< /prodname >}}{{< /ui >}} in the Datadog nav bar or {{< ui >}}Summary{{< /ui >}} in the {{< prodname >}}Cloud Security{{< /prodname >}} nav bar to go directly to your pinned dashboard.
 
 For more information, see [Dashboards][23].
 
@@ -113,7 +113,7 @@ Improve your organization's score by remediating misconfigurations, either by re
 
 ## Explore and remediate issues
 
-For an overview of your Cloud Security and App and API Protection findings, sorted by importance, use the [Security Inbox][14].
+For an overview of your {{< prodname >}}Cloud Security{{< /prodname >}} and {{< prodname >}}App and API Protection{{< /prodname >}} findings, sorted by importance, use the [Security Inbox][14].
 
 To get more detail, use [Findings][7] to review and remediate your organization's security findings concerning misconfigurations, vulnerabilities, and identity risks. View detailed information about a finding, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
@@ -125,14 +125,14 @@ To get more detail, use [Findings][7] to review and remediate your organization'
   {{< img src="security/csm/security_graph.png" alt="Security Graph displaying an example EC2 instance" width="100%">}}
 - Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. For more information, see the [Resource Catalog][13] documentation.
   {{< site-region region="gov,gov2" >}}
-  <div class="alert alert-danger">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+  <div class="alert alert-danger">{{< prodname >}}Resource Catalog{{< /prodname >}} is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
   {{< /site-region >}}
   {{< img src="infrastructure/resource_catalog/resource_catalog_infra_3.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}
 - Use the [Cloudcraft Security Map][21] to visualize your resources and any misconfigurations, vulnerabilities, identity risks, or sensitive data associated with them. For more information on these overlays, see the [Cloudcraft overlay][22] documentation.
 
 ## Subscribe to weekly digest reports
 
-Receive a weekly summary of Cloud Security activity over the past week, including important new security issues discovered in the last seven days. Subscriptions to the weekly digest report are managed on a per user basis. To [subscribe to the weekly digest report][11], you must have the `security_monitoring_signals_read` permission.
+Receive a weekly summary of {{< prodname >}}Cloud Security{{< /prodname >}} activity over the past week, including important new security issues discovered in the last seven days. Subscriptions to the weekly digest report are managed on a per user basis. To [subscribe to the weekly digest report][11], you must have the `security_monitoring_signals_read` permission.
 
 ## Learn about emerging threats and vulnerabilities
 
@@ -140,7 +140,7 @@ Use the [Security Research Feed][15] to stay current with the latest security de
 
 ## Next steps
 
-To get started with Cloud Security, navigate to the [{{< ui >}}Cloud Security Setup{{< /ui >}}][3] page in Datadog, which has detailed steps on how to set up and configure Cloud Security. For more information, see [Setting Up Cloud Security][10].
+To get started with {{< prodname >}}Cloud Security{{< /prodname >}}, navigate to the [{{< ui >}}Cloud Security Setup{{< /ui >}}][3] page in Datadog, which has detailed steps on how to set up and configure {{< prodname >}}Cloud Security{{< /prodname >}}. For more information, see [Setting Up Cloud Security][10].
 
 ## Further reading
 

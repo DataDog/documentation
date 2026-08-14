@@ -62,7 +62,7 @@ To build a Software Template from scratch:
 
 2. [Create a workflow][6] for your template:
    
-   1. Navigate to [Workflow Automation][3] and click **New Workflow**. 
+   1. Navigate to [{{< prodname >}}Workflow Automation{{< /prodname >}}][3] and click **New Workflow**. 
    1. Enter a name, add relevant tags, and define the input parameters you want to collect from users.
   
 3. Configure the templating workflow:
@@ -90,7 +90,7 @@ Once your Software Template is configured and tested, publish it so your team ca
 
 ## Available templating actions
 
-The following actions are available for Catalog in Datadog App Builder and Workflow Automation. For a complete list, see [Action Catalog][7].
+The following actions are available for Catalog in Datadog App Builder and {{< prodname >}}Workflow Automation{{< /prodname >}}. For a complete list, see [Action Catalog][7].
 
 - **Templating**
   - "Apply template": Pass input parameters into a set of files.

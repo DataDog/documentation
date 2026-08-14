@@ -15,7 +15,7 @@ aliases:
   - /api/v2/tracing/
 ---
 
-Datadog APM allows you to collect performance metrics by tracing your code to determine which parts of your application are slow or inefficient.
+{{< prodname >}}Datadog APM{{< /prodname >}} allows you to collect performance metrics by tracing your code to determine which parts of your application are slow or inefficient.
 
 Tracing data is sent from your instrumented code to the Datadog Agent through an HTTP API. Datadog SDKs simplify sending metrics to the Datadog Agent. However you might want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don't yet have an official Datadog SDK.
 

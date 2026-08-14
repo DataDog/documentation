@@ -19,7 +19,7 @@ Autocomplete and search are in Preview for Python and .NET.
 
 ## Overview
 
-Autocomplete and search enhance the user experience of [Dynamic Instrumentation][1] by adding IDE-like features like class and method search and autocomplete for [Dynamic Instrumentation Expression Language][5].
+Autocomplete and search enhance the user experience of [{{< prodname >}}Dynamic Instrumentation{{< /prodname >}}][1] by adding IDE-like features like class and method search and autocomplete for [Dynamic Instrumentation Expression Language][5].
 
 To provide autocomplete and search, nonsensitive symbols and metadata are uploaded from your application to Datadog. The uploaded data includes the names of classes, methods, arguments, fields, and local variables, along with related metadata, like line numbers.
 
@@ -29,7 +29,7 @@ To provide autocomplete and search, nonsensitive symbols and metadata are upload
 
 Autocomplete and search require the following:
 
-- [Dynamic Instrumentation][1] is enabled for your service.
+- [{{< prodname >}}Dynamic Instrumentation{{< /prodname >}}][1] is enabled for your service.
 - [Datadog Agent][2] 7.49.0 or higher is installed alongside your service.
 - [Remote Configuration][3] is enabled in the Agent.
 - The [Unified Service Tagging][4] tags `service`, `env`, and `version` are applied to your deployment.
@@ -47,10 +47,10 @@ Select your runtime below:
 
 ## Explore autocomplete and search
 
-Autocomplete and search make Dynamic Instrumentation behave more like an IDE:
+Autocomplete and search make {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} behave more like an IDE:
 
 - **Class and method search**: Find where to add instrumentation.
-- **Code display**: When you select a method in the Dynamic Instrumentation configuration, Datadog displays the code for that method.
+- **Code display**: When you select a method in the {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} configuration, Datadog displays the code for that method.
 - **Expression autocomplete**: Get suggestions for expression templates that use the [Dynamic Instrumentation expression language][5].
 
 ## Further Reading

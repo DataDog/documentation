@@ -21,7 +21,7 @@ further_reading:
 
 If your front-end JavaScript source code is minified, upload your source maps to Datadog to de-obfuscate your different stack traces. For any given error, you can access the file path, line number, and code snippet for each frame of the related stack trace. Datadog can also link stack frames to your source code in your repository.
 
-<div class="alert alert-info"><ul><li>Only errors collected by <a href="/error_tracking/">Error Tracking</a>, <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a>, and logs from <a href="/logs/log_collection/javascript/">Browser Logs Collection</a> can be unminified.</li><li>To automate source map uploads as part of your build process, see <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps">Build Plugins: Source Maps</a>.</li></ul></div>
+<div class="alert alert-info"><ul><li>Only errors collected by <a href="/error_tracking/">{{< prodname >}}Error Tracking{{< /prodname >}}</a>, <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a>, and logs from <a href="/logs/log_collection/javascript/">Browser Logs Collection</a> can be unminified.</li><li>To automate source map uploads as part of your build process, see <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps">Build Plugins: Source Maps</a>.</li></ul></div>
 
 ## Instrument your code
 
@@ -151,7 +151,7 @@ To minimize overhead on your CI's performance, the CLI is optimized to upload as
 
 **Note**: Re-uploading a source map does not override the existing one if the version has not changed.
 
-The `--service` and `--release-version` parameters must match the `service` and `version` tags on your Error Tracking events, RUM events, and browser logs. For more information on how to setup these tags, refer to the [Browser SDK initialization documentation][2] or [Browser Logs Collection documentation][3].
+The `--service` and `--release-version` parameters must match the `service` and `version` tags on your {{< prodname >}}Error Tracking{{< /prodname >}} events, RUM events, and browser logs. For more information on how to setup these tags, refer to the [Browser SDK initialization documentation][2] or [Browser Logs Collection documentation][3].
 
 <div class="alert alert-info">If you have defined multiple services in your application, run the CI command as many times as there are services, even if you have one set of sourcemaps for the entire application.</div>
 

@@ -69,7 +69,7 @@ Signals persist for the lifetime of an image version: after a package is observe
 
 ## Get started
 
-1. Deploy the Datadog Agent version 7.79 or later with Cloud Security enabled. See [Setting Up Cloud Security][3].
+1. Deploy the Datadog Agent version 7.79 or later with {{< prodname >}}Cloud Security{{< /prodname >}} enabled. See [Setting Up Cloud Security][3].
 2. Enable Runtime Package Prioritization on the Agent to surface the *Package is running* signal on vulnerability findings. See the instructions to do so for [Kubernetes][4], [Docker][9], or [Linux][10] deployments.
 3. Open the [{{< ui >}}Cloud Security Summary{{< /ui >}}][5] in Datadog. Prioritized findings are surfaced at the top of each funnel and in the [{{< ui >}}Security Inbox{{< /ui >}}][6].
 

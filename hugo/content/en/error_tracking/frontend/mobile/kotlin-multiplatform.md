@@ -14,9 +14,9 @@ further_reading:
 
 ## Overview
 
-Error Tracking processes errors collected from the Kotlin Multiplatform SDK. 
+{{< prodname >}}Error Tracking{{< /prodname >}} processes errors collected from the Kotlin Multiplatform SDK. 
 
-Enable Kotlin Multiplatform Crash Reporting and Error Tracking to get comprehensive crash reports and error trends. With this feature, you can access:
+Enable Kotlin Multiplatform Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} to get comprehensive crash reports and error trends. With this feature, you can access:
 
 - Aggregated Kotlin Multiplatform crash dashboards and attributes
 - Deobfuscated Kotlin Multiplatform (iOS and Android) crash reports
@@ -26,7 +26,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-If you have not set up the Kotlin Multiplatform SDK yet, follow the [in-app setup instructions][2] or see the [Kotlin Multiplatform setup documentation][3]. Then, follow the steps on this page to enable Kotlin Multiplatform Crash Reporting and Error Tracking.
+If you have not set up the Kotlin Multiplatform SDK yet, follow the [in-app setup instructions][2] or see the [Kotlin Multiplatform setup documentation][3]. Then, follow the steps on this page to enable Kotlin Multiplatform Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}}.
 
 **Note**: For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
@@ -391,7 +391,7 @@ The SDK handles crash reporting with the following behaviors:
 
 ## Test your implementation
 
-To verify your Kotlin Multiplatform Crash Reporting and Error Tracking configuration, you need to trigger a crash in your application and confirm that the error appears in Datadog.
+To verify your Kotlin Multiplatform Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} configuration, you need to trigger a crash in your application and confirm that the error appears in Datadog.
 
 To test your implementation:
 
@@ -404,7 +404,7 @@ To test your implementation:
    }
    ```
 
-3. After the crash happens, restart your application and wait for the Kotlin Multiplatform SDK to upload the crash report in [**Error Tracking**][1].
+3. After the crash happens, restart your application and wait for the Kotlin Multiplatform SDK to upload the crash report in [**{{< prodname >}}Error Tracking{{< /prodname >}}**][1].
 
 
 ## Advanced Error Tracking Features

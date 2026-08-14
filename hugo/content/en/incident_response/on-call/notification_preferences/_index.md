@@ -33,7 +33,7 @@ Go to [My On-Call Profile][1] to configure your settings.
 - Phone calls
 
 <div class="alert alert-info">
-Phone number support varies by country. See <a href="/incident_response/on-call/notification_preferences/supported_countries/">Supported Countries</a> for the full list of supported countries, or open the phone number <strong>Prefix</strong> menu when adding a phone contact method in your On-Call profile. If your country does not appear, phone calls and SMS are not available for that location.
+Phone number support varies by country. See <a href="/incident_response/on-call/notification_preferences/supported_countries/">Supported Countries</a> for the full list of supported countries, or open the phone number <strong>Prefix</strong> menu when adding a phone contact method in your {{< prodname >}}On-Call{{< /prodname >}} profile. If your country does not appear, phone calls and SMS are not available for that location.
 </div>
 
 To set up your mobile device, including how to **circumvent Do Not Disturb mode**, see [Set Up Your Mobile Device for Datadog On-Call][4].
@@ -52,7 +52,7 @@ Configure your high-urgency Pages (P1 monitor alerts, SEV-1 security threats, SE
 If you are paged for a high urgency incident and have not configured any notification preferences, Datadog automatically falls back to sending an email notification to ensure you are notified of critical issues.
 </div>
 
-For example, you can configure On-Call to start with a push notification, call after one minute, and send a follow-up push notification if unacknowledged after two minutes.
+For example, you can configure {{< prodname >}}On-Call{{< /prodname >}} to start with a push notification, call after one minute, and send a follow-up push notification if unacknowledged after two minutes.
 
 ##### Best practices for high urgency
 - Use immediate push notifications and phone calls as the primary notification method for critical Pages.
@@ -67,7 +67,7 @@ Configure your low-urgency Pages (non-blocking issues, informational signals, et
 ### Other notifications
 {{< img src="incident_response/on-call/profile_settings/settings_shift_reminder.png" alt="Configuring a shift reminder in On-Call notification preferences. A shift reminder is configured to notify a phone number 10 minutes before the shift begins." style="width:100%;" >}}
 
-Under **Other Notifications**, you can opt to receive a **Shift reminder** before your On-Call shift begins.
+Under **Other Notifications**, you can opt to receive a **Shift reminder** before your {{< prodname >}}On-Call{{< /prodname >}} shift begins.
 
 ## Further Reading
 

@@ -27,7 +27,7 @@ Targeting attributes are organization-wide: after they're defined, an attribute 
 
 To view and manage your organization's targeting attributes:
 
-1. Navigate to **Feature Flags** > **Settings** > **Targeting Attributes**.
+1. Navigate to **{{< prodname >}}Feature Flags{{< /prodname >}}** > **Settings** > **Targeting Attributes**.
 2. Click **Create Attribute** to define a new one, or select an existing attribute to edit it.
 
 For each attribute, configure:

@@ -10,7 +10,7 @@ further_reading:
 
 <div class="alert alert-info">Workload Protection Active Protection is in Preview.</div>
 
-This topic explains how to use the Workload Protection **Active Protection** feature to block crypto mining threats automatically. 
+This topic explains how to use the {{< prodname >}}Workload Protection{{< /prodname >}} **Active Protection** feature to block crypto mining threats automatically. 
 
 By default, all OOTB Agent [threat detection rules][4] are enabled and actively monitoring for crypto threats. 
 
@@ -79,7 +79,7 @@ Consequently, you do not need to worry that enabling Active Protection immediate
 
 To enable Active Protection:
 
-1. Go to Cloud Security [Agent Configuration][2] rules.
+1. Go to {{< prodname >}}Cloud Security{{< /prodname >}} [Agent Configuration][2] rules.
 2. Select **Enable Active Protection**.
 
     {{< img src="security/cws/guide/enable-active-protection.png" alt="Enable Active Protection button" style="width:100%;" >}}

@@ -24,14 +24,14 @@ Indicators of Compromise (IOCs) are reputation data associated with entities suc
 ## Prerequisites
 
 To view data in the IOC Explorer, all of the following must be true:
-- Your organization must subscribe to Cloud SIEM.
+- Your organization must subscribe to {{< prodname >}}Cloud SIEM{{< /prodname >}}.
 - The indicator of compromise must be in a threat feed that was available to Datadog at the time of the log acquisition.
   - For more information on the threat intelligence feeds the IOC Explorer displays content from, see [Threat intelligence sources][2].
 - The time frame for the Explorer is fixed to the last 30 days. The log must be from within that time frame. If your organization has recently onboarded, the Explorer shows data from when you onboarded.
 
 ## Use the IOC Explorer
 
-To access the IOC Explorer in Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} > {{< ui >}}Investigate{{< /ui >}} > [{{< ui >}}IOC Explorer{{< /ui >}}][1].
+To access the IOC Explorer in Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}{{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /ui >}} > {{< ui >}}Investigate{{< /ui >}} > [{{< ui >}}IOC Explorer{{< /ui >}}][1].
 
 ### Query and filter indicators of compromise
 

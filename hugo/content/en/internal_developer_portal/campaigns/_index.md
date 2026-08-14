@@ -52,7 +52,7 @@ Add one or more [existing Scorecard rules][3] that align with your campaign's go
 
 For each rule, optionally include: 
 - Linked documentation
-- Workflows through [Workflow Automation][4] to automatically remediate failing rules
+- Workflows through [{{< prodname >}}Workflow Automation{{< /prodname >}}][4] to automatically remediate failing rules
 - Steps teams should follow to meet compliance
 
 ## Tracking campaign progress

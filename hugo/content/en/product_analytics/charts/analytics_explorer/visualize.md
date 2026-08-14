@@ -14,7 +14,7 @@ Visualizations define the outcomes of the filters and aggregates displayed in th
 
 ## Timeseries
 
-Visualize the evolution of a single measure (an attribute with a numerical value contained in your Product Analytics events), or a facet (unique count of values) over a selected time frame.
+Visualize the evolution of a single measure (an attribute with a numerical value contained in your {{< prodname >}}Product Analytics{{< /prodname >}} events), or a facet (unique count of values) over a selected time frame.
 
 {{< img src="product_analytics/analytics/visualize/analytics-timeseries-2.png" alt="A view of the Timeseries graph in the Analytics Explorer" style="width:90%;" >}}
 
@@ -70,7 +70,7 @@ The following pie chart shows the percentage breakdown by {{< ui >}}View Path{{<
 
 ## Geomaps
 
-Visualize a single measure (an attribute with a numerical value contained in your Product Analytics events), or a facet (unique count of values) on the world map.
+Visualize a single measure (an attribute with a numerical value contained in your {{< prodname >}}Product Analytics{{< /prodname >}} events), or a facet (unique count of values) on the world map.
 
 {{< img src="product_analytics/analytics/visualize/analytics-geomaps-1.png" alt="A view of the Geographical map in the Analytics Explorer" style="width:90%;">}}
 

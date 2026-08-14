@@ -5,7 +5,7 @@ description: Learn how to migrate feature flags from Statsig to Eppo by Datadog.
 
 ## Overview
 
-This guide walks you through the process of migrating feature flags from Statsig to [Eppo by Datadog][1], as an intermediate step before fully migrating to Datadog's dedicated [Feature Flags][2] product. Follow these general steps:
+This guide walks you through the process of migrating feature flags from Statsig to [Eppo by Datadog][1], as an intermediate step before fully migrating to Datadog's dedicated [{{< prodname >}}Feature Flags{{< /prodname >}}][2] product. Follow these general steps:
 
 1. [Install the Eppo SDK.](#install-sdk)
 2. [Create a feature flag in Eppo and verify its functionality.](#set-up-flag)
@@ -50,7 +50,7 @@ await init({
 
 ### 2. Set up and verify a new flag {#set-up-flag}
 
-1. Create a flag in Eppo by navigating to {{< ui >}}Flags{{< /ui >}} > {{< ui >}}Feature Flags{{< /ui >}}, then clicking {{< ui >}}Create Flag{{< /ui >}} > {{< ui >}}Feature Flag{{< /ui >}}.
+1. Create a flag in Eppo by navigating to {{< ui >}}Flags{{< /ui >}} > {{< ui >}}{{< prodname >}}Feature Flags{{< /prodname >}}{{< /ui >}}, then clicking {{< ui >}}Create Flag{{< /ui >}} > {{< ui >}}Feature Flag{{< /ui >}}.
 1. Implement the flag in your application code.
 1. Test the flag in your local development environment to ensure it works as expected.
 

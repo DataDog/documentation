@@ -82,7 +82,7 @@ For these cases, scan using CI pipelines.
 Datadog Software Composition Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8].
 
 <div class="alert alert-info">
-You must scan your default branch at least once before results appear in {{< ui >}}Code Security{{< /ui >}}.
+You must scan your default branch at least once before results appear in {{< ui >}}{{< prodname >}}Code Security{{< /prodname >}}{{< /ui >}}.
 </div>
 
 {{< whatsnext desc="See instructions based on your CI provider:">}}

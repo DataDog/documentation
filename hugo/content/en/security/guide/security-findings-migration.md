@@ -63,18 +63,18 @@ View the full specification at [Security Findings Schema Reference][1].
 ### New features
 
 Starting January 28, 2026, the following features will be made available and use the new data model:
-- Unified search queries for Cloud Security [Misconfigurations][9], [Identity Risks][10], [Attack Paths][11], [IaC][12], and [API][13] findings
+- Unified search queries for {{< prodname >}}Cloud Security{{< /prodname >}} [Misconfigurations][9], [Identity Risks][10], [Attack Paths][11], [IaC][12], and [API][13] findings
 - A new unified [public findings API][18]
-- [Dashboard][2] support for Code Security
+- [Dashboard][2] support for {{< prodname >}}Code Security{{< /prodname >}}
 - Graphing security findings in [Datadog Sheets][3]
-- Datadog [Workflow Automation][4] support for all finding types
+- Datadog [{{< prodname >}}Workflow Automation{{< /prodname >}}][4] support for all finding types
 - Using SQL to query security findings and join them with other Datadog telemetry using [DDSQL Editor][5]
 
 The following additional features will be released later:
 
-- Support for Cloud Security Vulnerabilities and Code Security findings (SCA, SAST, IAST, Secrets) in the unified search experience
+- Support for Cloud Security Vulnerabilities and {{< prodname >}}Code Security{{< /prodname >}} findings (SCA, SAST, IAST, Secrets) in the unified search experience
 - [Data Access Controls][6]
-- Security findings & tools in the [Datadog MCP Server][7]
+- Security findings & tools in the [{{< prodname >}}Datadog MCP Server{{< /prodname >}}][7]
 - API & Terraform support for [automation pipelines][8]
 
 ### Security findings
@@ -91,7 +91,7 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
   </thead>
   <tbody>
     <tr>
-      <td rowspan="4"><a href="/security/cloud_security_management/"><strong>Cloud Security</strong></a></td>
+      <td rowspan="4"><a href="/security/cloud_security_management/"><strong>{{< prodname >}}Cloud Security{{< /prodname >}}</strong></a></td>
       <td>Misconfigurations (CSPM)</td>
       <td>Supported</td>
     </tr>
@@ -113,7 +113,7 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
       <td>Supported</td>
     </tr>
     <tr>
-      <td rowspan="5"><a href="/security/code_security/"><strong>Code Security</strong></a></td>
+      <td rowspan="5"><a href="/security/code_security/"><strong>{{< prodname >}}Code Security{{< /prodname >}}</strong></a></td>
       <td>Infrastructure as code (IaC)</td>
       <td>Supported</td>
     </tr>

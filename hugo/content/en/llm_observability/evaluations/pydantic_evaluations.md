@@ -11,7 +11,7 @@ further_reading:
 
 Pydantic is an open source framework that provides ready-to-use evaluations and allows for customizable LLM evaluations. For more information, see [Pydantic's documentation][3].
 
-You can use Agent Observability to run Pydantic evaluations and scalar Pydantic report evaluations in [Experiments][1]. Pydantic evaluation results appear as evaluator results tied to each instance in an [Agent Observability dataset][5]. Pydantic report evaluations run on an entire Agent Observability dataset and report one scalar result for the dataset.
+You can use {{< prodname >}}Agent Observability{{< /prodname >}} to run Pydantic evaluations and scalar Pydantic report evaluations in [Experiments][1]. Pydantic evaluation results appear as evaluator results tied to each instance in an [Agent Observability dataset][5]. Pydantic report evaluations run on an entire {{< prodname >}}Agent Observability{{< /prodname >}} dataset and report one scalar result for the dataset.
 
 ## Setup
 

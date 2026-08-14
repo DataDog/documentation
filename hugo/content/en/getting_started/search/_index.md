@@ -15,7 +15,7 @@ Datadog provides powerful and flexible search capabilities across its products a
 ## Understanding Datadog search
 
 Datadog provides a unified way to query data across products using text-based search syntax. All data in Datadog can be explored and filtered through queries, but the syntax and behavior differ depending on the type of data you're working with. There are two primary query formats in Datadog:
-- **Metric-based queries**: Used in Metrics and Cloud Cost Management (CCM).
+- **Metric-based queries**: Used in Metrics and {{< prodname >}}Cloud Cost Management{{< /prodname >}} (CCM).
 - **Event-based queries**: Used across most other products, including Logs, APM, RUM, Events, and Security.
 
 Although both query types let you filter and analyze data, their syntax is not interchangeable. Each follows its own structure, operators, and supported functions designed for the type of data it handles.

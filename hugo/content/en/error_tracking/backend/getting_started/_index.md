@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-[Error Tracking][1] processes errors collected by the Datadog SDKs. Whenever an error is collected, Error Tracking processes and groups it under an issue, or group of similar errors.
+[{{< prodname >}}Error Tracking{{< /prodname >}}][1] processes errors collected by the Datadog SDKs. Whenever an error is collected, {{< prodname >}}Error Tracking{{< /prodname >}} processes and groups it under an issue, or group of similar errors.
 
 ## Getting started with Backend Error Tracking
 

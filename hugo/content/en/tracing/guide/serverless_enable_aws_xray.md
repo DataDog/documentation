@@ -6,7 +6,7 @@ aliases:
 ---
 ## Before you enable X-Ray
 
-The AWS X-Ray integration converts X-Ray traces into Datadog APM traces. Datadog offers native instrumentation for the use cases that originally required X-Ray. Before enabling X-Ray, consider whether one of the native paths fits your stack:
+The AWS X-Ray integration converts X-Ray traces into {{< prodname >}}Datadog APM{{< /prodname >}} traces. Datadog offers native instrumentation for the use cases that originally required X-Ray. Before enabling X-Ray, consider whether one of the native paths fits your stack:
 
 | Use case | Recommended Datadog path |
 |----------|-------------------------|
@@ -14,7 +14,7 @@ The AWS X-Ray integration converts X-Ray traces into Datadog APM traces. Datadog
 | AWS Step Functions tracing, including merging Step Functions traces with Lambda traces | [Serverless Monitoring for AWS Step Functions][9] and [Merge Step Functions and Lambda Traces][10] |
 | Trace context propagation across managed services (API Gateway, SQS, SNS, EventBridge, Kinesis, DynamoDB, S3) | Supported out of the box by the [Datadog Lambda Library][11] |
 
-Use the X-Ray integration if you need traces for an AWS managed service that Datadog APM doesn't yet instrument (for example, AppSync). The X-Ray integration also remains available if you already have X-Ray instrumentation in place and prefer to keep it.
+Use the X-Ray integration if you need traces for an AWS managed service that {{< prodname >}}Datadog APM{{< /prodname >}} doesn't yet instrument (for example, AppSync). The X-Ray integration also remains available if you already have X-Ray instrumentation in place and prefer to keep it.
 
 ## Enable AWS X-Ray
 

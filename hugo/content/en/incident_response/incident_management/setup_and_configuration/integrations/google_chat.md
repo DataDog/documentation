@@ -34,7 +34,7 @@ To declare an incident, run:
 
 ## Incident Spaces
 
-You can configure Incident Management to automatically create a dedicated Google space for each incident that meets the criteria you define. Your responders can then manage the incident directly in Google Chat from the incident space.
+You can configure {{< prodname >}}Incident Management{{< /prodname >}} to automatically create a dedicated Google space for each incident that meets the criteria you define. Your responders can then manage the incident directly in Google Chat from the incident space.
 
 To use incident spaces:
 

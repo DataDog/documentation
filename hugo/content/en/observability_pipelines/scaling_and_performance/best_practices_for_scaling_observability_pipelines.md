@@ -72,7 +72,7 @@ Choose the Kubernetes-based architecture if:
 
 Choose the VM-based architecture if your organization is more VM centric and not proficient with Kubernetes.
 
-Choosing between the two models comes down to what your organization is best equipped to do from an infrastructure perspective. Each model offers the ability to automatically scale based on CPU utilization, which is generally the primary constraint for Observability Pipelines. See [Optimize the instance][6] for more information.
+Choosing between the two models comes down to what your organization is best equipped to do from an infrastructure perspective. Each model offers the ability to automatically scale based on CPU utilization, which is generally the primary constraint for {{< prodname >}}Observability Pipelines{{< /prodname >}}. See [Optimize the instance][6] for more information.
 
 ### Centralized vs decentralized approach
 

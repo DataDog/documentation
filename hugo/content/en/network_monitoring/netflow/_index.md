@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-The NetFlow view in Network Device Monitoring provides visibility into network traffic flows collected from devices that export flow data (for example, routers, firewalls, or switches). You can analyze traffic volume, identify top talkers, and understand how data moves through your network.
+The NetFlow view in {{< prodname >}}Network Device Monitoring{{< /prodname >}} provides visibility into network traffic flows collected from devices that export flow data (for example, routers, firewalls, or switches). You can analyze traffic volume, identify top talkers, and understand how data moves through your network.
 
 The NetFlow view displays traffic metrics aggregated by device and interface. Use it to identify which devices or interfaces are consuming the most bandwidth, generating the most packets, or contributing to traffic spikes.
 
@@ -39,7 +39,7 @@ Use the left-hand navigation to explore additional NetFlow views:
 
 ## Installation
 
-To use NetFlow Monitoring with Network Device Monitoring, ensure you are using the [Agent][1] version 7.45 or newer.
+To use NetFlow Monitoring with {{< prodname >}}Network Device Monitoring{{< /prodname >}}, ensure you are using the [Agent][1] version 7.45 or newer.
 
 **Note:** Configuring [metric collection from Network Device Monitoring][2] is not a requirement for sending NetFlow data, although it is strongly recommended as this extra data can be used to enrich your flow records with information such as the device name, model, and vendor, as well as the inbound/outbound interface name.
 

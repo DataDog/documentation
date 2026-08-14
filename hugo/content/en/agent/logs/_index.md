@@ -24,7 +24,7 @@ further_reading:
 
 Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do not include the `log collection` interface. If you are not using the Agent already, follow the [Agent installation instructions][1].
 
-See [Observability Pipelines][2] if you want to send logs using another vendor's collector or forwarder, or you want to preprocess your log data within your environment before shipping.
+See [{{< prodname >}}Observability Pipelines{{< /prodname >}}][2] if you want to send logs using another vendor's collector or forwarder, or you want to preprocess your log data within your environment before shipping.
 
 ## Activate log collection
 

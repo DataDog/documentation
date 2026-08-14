@@ -22,7 +22,7 @@ aliases:
 ---
 
 ## Overview
-Bits Chat helps you search and act across Datadog using natural language. Bits Chat is available across the web application, mobile app, and Slack.
+{{< prodname >}}Bits Chat{{< /prodname >}} helps you search and act across Datadog using natural language. {{< prodname >}}Bits Chat{{< /prodname >}} is available across the web application, mobile app, and Slack.
 
 Ask Bits Chat questions across these categories:
 
@@ -58,16 +58,16 @@ Ask Bits Chat questions across these categories:
 
 #### Access to Bits Chat
 
-To use Bits Chat, your role must have the **Bits Chat Access** permission. This permission is enabled by default for all three standard Datadog roles: Datadog Admin, Datadog Standard, and Datadog Read Only.
+To use {{< prodname >}}Bits Chat{{< /prodname >}}, your role must have the **Bits Chat Access** permission. This permission is enabled by default for all three standard Datadog roles: Datadog Admin, Datadog Standard, and Datadog Read Only.
 
 To manage this permission for custom roles, go to **Organization Settings** > **Roles**, select a role, and toggle **Bits Chat Access** under **General Permissions**.
 
 #### Data access through Bits Chat
 
-Bits Chat uses your Datadog role to fetch data, so it can only access the resources you have permission to view or modify. For example, if your role restricts access to a specific set of logs indexes, Bits Chat can only query logs from those indexes. Similarly, if you do not have permission to edit a dashboard, Bits Chat cannot edit that dashboard on your behalf.
+{{< prodname >}}Bits Chat{{< /prodname >}} uses your Datadog role to fetch data, so it can only access the resources you have permission to view or modify. For example, if your role restricts access to a specific set of logs indexes, {{< prodname >}}Bits Chat{{< /prodname >}} can only query logs from those indexes. Similarly, if you do not have permission to edit a dashboard, {{< prodname >}}Bits Chat{{< /prodname >}} cannot edit that dashboard on your behalf.
 
 ### Skills
-Bits Chat has a range of specialized skills for tasks across Datadog. The most commonly used skills are described below.
+{{< prodname >}}Bits Chat{{< /prodname >}} has a range of specialized skills for tasks across Datadog. The most commonly used skills are described below.
 
 #### Dashboards
 Build [dashboards][5] and widgets from natural language descriptions.
@@ -116,19 +116,19 @@ Example prompts:
 
 ### Reports
 
-The Bits Chat Reports page provides visibility into how your organization uses Bits Chat. Go to [**Bits AI** > **Chat** > **Reports**][10] to view:
+The Bits Chat Reports page provides visibility into how your organization uses {{< prodname >}}Bits Chat{{< /prodname >}}. Go to [**Bits AI** > **Chat** > **Reports**][10] to view:
 
-- **Top users**: See which team members use Bits Chat the most, ranked by conversation count.
+- **Top users**: See which team members use {{< prodname >}}Bits Chat{{< /prodname >}} the most, ranked by conversation count.
 - **Usage trends**: Track conversation volume over time to understand adoption and identify usage patterns.
 - **Conversation intent distribution**: See how conversations break down by intent category, such as investigating issues, exploring telemetry, learning Datadog concepts, and configuring observability.
 
 Use these insights to understand adoption patterns, identify power users for best-practice sharing, and assess which use cases deliver the most value for your organization.
 
 ### Web application
-There are multiple ways to open Bits Chat in the Datadog web application:
-- Go to [Bits Chat][11].
+There are multiple ways to open {{< prodname >}}Bits Chat{{< /prodname >}} in the Datadog web application:
+- Go to [{{< prodname >}}Bits Chat{{< /prodname >}}][11].
 - In the top-right of the navigation bar, click {{< ui >}}Ask Bits{{< /ui >}}.
-- In a Datadog product integrated with Bits Chat, click {{< ui >}}Ask Bits{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon).
+- In a Datadog product integrated with {{< prodname >}}Bits Chat{{< /prodname >}}, click {{< ui >}}Ask Bits{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon).
 - Press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.
 - In the left-side navigation panel, click {{< ui >}}Bits AI{{< /ui >}}.
 
@@ -139,8 +139,8 @@ There are multiple ways to open Bits Chat in the Datadog web application:
 Ask Bits questions about your system or active incident. Bits has context on Datadog public documentation, telemetry, and ownership.
 
 1. [Download the mobile app and log in][2].
-2. On the home screen, tap {{< ui >}}Bits Chat{{< /ui >}}.
-3. Start chatting with Bits Chat by voice or text.
+2. On the home screen, tap {{< ui >}}{{< prodname >}}Bits Chat{{< /prodname >}}{{< /ui >}}.
+3. Start chatting with {{< prodname >}}Bits Chat{{< /prodname >}} by voice or text.
 {{< img src="bits_ai/getting_started/bits_ai_mobile_app_2026.png" alt="View of the Mobile App Home dashboard with Bits AI" style="width:40%;" >}}
 
 ### Slack

@@ -19,7 +19,7 @@ Configure the Splunk HEC destination when you [set up a pipeline][1]. You can se
 
 **Notes**:
 - The Splunk index you send your metrics to must be a metrics index. If you send your metrics to an events index, you can't view them in Splunk using any metrics type queries, such as `mcatalog` and `mstats`.
-- If you don't attach your index to the Splunk authentication token you are using for Observability Pipelines, you must enter the name of the [index](#splunk-index) when you set up the destination.
+- If you don't attach your index to the Splunk authentication token you are using for {{< prodname >}}Observability Pipelines{{< /prodname >}}, you must enter the name of the [index](#splunk-index) when you set up the destination.
 
 After you select the Splunk HEC destination in the pipeline UI:
 
@@ -42,7 +42,7 @@ To compress your metrics with gzip, select **gzip** in the dropdown menu. The de
 
 Enter the name of the Splunk metrics index to which you are sending metrics. See [template syntax][6] to route metrics to different indexes based on specific fields.
 
-**Note**: The **Index** field is optional only if you have an index attached to the Splunk authentication token you are using for Observability Pipelines. Otherwise, you must enter the name of the Splunk metrics index.
+**Note**: The **Index** field is optional only if you have an index attached to the Splunk authentication token you are using for {{< prodname >}}Observability Pipelines{{< /prodname >}}. Otherwise, you must enter the name of the Splunk metrics index.
 
 #### Source
 

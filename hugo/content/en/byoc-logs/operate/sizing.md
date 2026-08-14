@@ -104,7 +104,7 @@ Allocate the following resources for these lightweight components:
 
 ## Object storage estimation
 
-BYOC Logs compresses and indexes log data before storing it in object storage. The compression ratio depends on the log format, structure, and redundancy in your data.
+{{< prodname >}}BYOC Logs{{< /prodname >}} compresses and indexes log data before storing it in object storage. The compression ratio depends on the log format, structure, and redundancy in your data.
 
 | Metric | Typical range |
 |--------|---------------|
@@ -123,7 +123,7 @@ Assuming a 6x compression ratio:
 1. **Stored per day:** `10 TB / 6 ≈ 1.67 TB/day`
 2. **Total for 30 days:** `1.67 TB × 30 ≈ 50 TB`
 
-Use standard-tier object storage (for example, S3 Standard, GCS Standard) for active data. Lower-cost tiers such as S3 Infrequent Access or GCS Nearline are not validated for use with BYOC Logs.
+Use standard-tier object storage (for example, S3 Standard, GCS Standard) for active data. Lower-cost tiers such as S3 Infrequent Access or GCS Nearline are not validated for use with {{< prodname >}}BYOC Logs{{< /prodname >}}.
 {{% /collapse-content %}}
 
 ## PostgreSQL database

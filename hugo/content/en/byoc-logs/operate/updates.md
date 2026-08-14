@@ -19,11 +19,11 @@ BYOC (Bring Your Own Cloud) Logs includes two customer-deployed components:
 - The BYOC Logs engine, distributed through the `datadog/cloudprem` Helm chart
 - The Observability Pipelines Worker (OPW)
 
-The components are versioned independently. Each BYOC Logs release is a validated version pair, consisting of one version of each component and its corresponding Helm chart. Datadog recommends deploying this version pair; other combinations are not validated as a BYOC Logs release.
+The components are versioned independently. Each BYOC Logs release is a validated version pair, consisting of one version of each component and its corresponding Helm chart. Datadog recommends deploying this version pair; other combinations are not validated as a {{< prodname >}}BYOC Logs{{< /prodname >}} release.
 
 ## Release cadence
 
-Datadog publishes at least one BYOC Logs engine release per month. Releases may occur more frequently, and patch releases are published as needed. Each engine release includes a corresponding Helm chart and release notes.
+Datadog publishes at least one {{< prodname >}}BYOC Logs{{< /prodname >}} engine release per month. Releases may occur more frequently, and patch releases are published as needed. Each engine release includes a corresponding Helm chart and release notes.
 
 A BYOC Logs release is published when the engine changes or when Datadog adds an OPW update to the validated pair. One component can remain unchanged between releases.
 

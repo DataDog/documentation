@@ -13,7 +13,7 @@ With Data Streams Monitoring's Kafka Console, a Datadog Agent check connects to 
 - **Pinpoint root cause**: Correlate configuration and schema changes with lag, throughput, and errors, and trace issues to the exact topic, schema version, or configuration change
 - **Connect services to topics**: See which producers and consumers interact with each topic, with linked owners, repos, on-call rotations, traces, and error logs
 - **Inspect topic schemas and messages**: View schemas, compare versions, and access messages to debug poison payloads or explore the topic
-- **Alert and automate responses**: Use [recommended monitor templates][4] and trigger Workflow Automation or webhooks when a Kafka condition fires
+- **Alert and automate responses**: Use [recommended monitor templates][4] and trigger {{< prodname >}}Workflow Automation{{< /prodname >}} or webhooks when a Kafka condition fires
 
 To get started, see [Kafka Console Setup][2].
 

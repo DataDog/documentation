@@ -27,7 +27,7 @@ _8 minutes to complete_
 
 <div class="alert alert-danger">This page describes using OpenTracing to custom instrument applications. OpenTracing is deprecated. The concepts presented here still apply, but follow the <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with OpenTelemetry</a> instructions and examples for your language instead. </div>
 
-To provide you with deep visibility into your business logic, Datadog APM allows you to customize the spans that make up your traces based on your needs and implementation. This empowers you to trace any method in your codebase and even specific components within methods. You can use this to optimize and monitor critical areas of your application at the granularity that works for you.
+To provide you with deep visibility into your business logic, {{< prodname >}}Datadog APM{{< /prodname >}} allows you to customize the spans that make up your traces based on your needs and implementation. This empowers you to trace any method in your codebase and even specific components within methods. You can use this to optimize and monitor critical areas of your application at the granularity that works for you.
 
 Datadog instruments many frameworks out-of-the-box, such as web services, databases, and caches, and enables you to instrument your own business logic to have the exact visibility you need. By creating spans for methods, you can optimize timing and track errors using the APM flame graph and monitors.
 
@@ -43,7 +43,7 @@ The `http.request POST /charge/` span is taking a lot of time without having any
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}
 
-In Java, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
+In Java, {{< prodname >}}Datadog APM{{< /prodname >}} allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
 
 **Instrument a method with a decorator**:
 
@@ -104,7 +104,7 @@ public class BackupLedger {
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-In Python, Datadog APM allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
+In Python, {{< prodname >}}Datadog APM{{< /prodname >}} allows you to instrument your code to generate custom spans—either by using method decorators, or by instrumenting specific code blocks.
 
 **Instrument a method with a decorator**:
 
@@ -150,7 +150,7 @@ class BackupLedger:
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-  In Ruby, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
+  In Ruby, {{< prodname >}}Datadog APM{{< /prodname >}} allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
 
   This example creates a new span for the call to the `BackupLedger.write` method and a child span for every transaction posted to the ledger with a [custom tag][1] with the specific transaction ID.
 
@@ -180,7 +180,7 @@ end
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-  In Go, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
+  In Go, {{< prodname >}}Datadog APM{{< /prodname >}} allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
 
   This example creates a new span for every transaction posted to the ledger and adds a [custom tag][1] with the specific transaction ID to the span.
 
@@ -232,7 +232,7 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-  In Node.js, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
+  In Node.js, {{< prodname >}}Datadog APM{{< /prodname >}} allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
 
 This example creates a new span for the call to the `BackupLedger.write` method and a child span for every transaction posted to the ledger with a [custom tag][1] with the specific transaction ID.
 
@@ -259,7 +259,7 @@ function write (transactions) {
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-  In .NET, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
+  In .NET, {{< prodname >}}Datadog APM{{< /prodname >}} allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
 
 This example creates a new span for every transaction posted to the ledger and adds a [custom tag][1] with the specific transaction ID to the span.
 
@@ -290,7 +290,7 @@ public void Write(List<Transaction> transactions)
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-In PHP, Datadog APM allows you to instrument your code to generate custom spans—either by using method wrappers, or by instrumenting specific code blocks.
+In PHP, {{< prodname >}}Datadog APM{{< /prodname >}} allows you to instrument your code to generate custom spans—either by using method wrappers, or by instrumenting specific code blocks.
 
 **Instrument a method with a wrapper**:
 

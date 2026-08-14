@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-The [Test Health][5] dashboard provides analytics to help teams manage and optimize their testing in CI. This includes sections showing the current impact of test flakiness and how Test Optimization is mitigating these problems. 
+The [Test Health][5] dashboard provides analytics to help teams manage and optimize their testing in CI. This includes sections showing the current impact of test flakiness and how {{< prodname >}}Test Optimization{{< /prodname >}} is mitigating these problems. 
 
 The dashboard also provides [Test Health recommendations](#test-health-recommendations) to suggest specific Datadog features and strategies you can enable to reduce flaky test failures and recover CI time.
 
@@ -116,7 +116,7 @@ The Test Health dashboard provides data-driven, repository-specific suggestions 
 
 {{< img src="tests/test-health-recommendations.png" alt="Recommendations side panel opened on the Test Health dashboard" style="width:100%;" >}}
 
-Each recommendation estimates how much you can reduce test failures and CI time by enabling a specific Test Optimization feature. Recommendations may include the following:
+Each recommendation estimates how much you can reduce test failures and CI time by enabling a specific {{< prodname >}}Test Optimization{{< /prodname >}} feature. Recommendations may include the following:
 
 - **[Auto Test Retries][1]**: Retry failing tests to avoid failing your build due to flaky tests.
 - **[Test Impact Analysis][4]**: Automatically select and run only the relevant tests for a given commit based on the code being changed.

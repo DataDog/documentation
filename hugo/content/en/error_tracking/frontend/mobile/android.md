@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-Android [Error Tracking][1] gives you comprehensive visibility into your mobile app's health by automatically capturing crashes, exceptions, and errors. With this feature, you can:
+Android [{{< prodname >}}Error Tracking{{< /prodname >}}][1] gives you comprehensive visibility into your mobile app's health by automatically capturing crashes, exceptions, and errors. With this feature, you can:
 
 - Monitor app stability in real-time with instant crash alerts and error rate tracking across versions, devices, and user segments.
 - Debug issues faster with deobfuscated stack traces and automatic ProGuard mapping file uploads for easier problem identification.
@@ -468,7 +468,7 @@ For more information, see [Web View Tracking][8].
 
 If your Android app uses native code (C/C++) through the Android NDK (Native Development Kit), you can track crashes that occur in this native code. Native code is often used for performance-critical operations, image processing, or when reusing existing C/C++ libraries.
 
-Without NDK crash reporting, crashes in your native code do not appear in Error Tracking, making it difficult to debug issues in this part of your application.
+Without NDK crash reporting, crashes in your native code do not appear in {{< prodname >}}Error Tracking{{< /prodname >}}, making it difficult to debug issues in this part of your application.
 
 To enable NDK crash reporting, use the Datadog NDK plugin:
 
@@ -519,14 +519,14 @@ Rum.enable(rumConfig);
 
 ANRs are only reported through the SDK (not through Logs).
 
-**Note**: If you see `com.datadog.android.rum.internal.anr.ANRException` in your crash reports, the Datadog SDK did not cause the ANR. `ANRException` is the SDK's mechanism for detecting and surfacing ANRs in Error Tracking. The root cause is always application code blocking the main thread.
+**Note**: If you see `com.datadog.android.rum.internal.anr.ANRException` in your crash reports, the Datadog SDK did not cause the ANR. `ANRException` is the SDK's mechanism for detecting and surfacing ANRs in {{< prodname >}}Error Tracking{{< /prodname >}}. The root cause is always application code blocking the main thread.
 
 #### Reporting fatal ANRs
 Fatal ANRs result in crashes. The application reports them when it's unresponsive, leading to the Android OS displaying a popup dialog to the user, who chooses to force quit the app through the popup.
 
 {{< img src="real_user_monitoring/error_tracking/rum-anr-fatal.png" alt="A fatal crash report in Error Tracking." >}}
 
-- In the {{< ui >}}Error Tracking{{< /ui >}} page, fatal ANRs are grouped based on their similarity, which can result in several **individual issues** being created.
+- In the {{< ui >}}{{< prodname >}}Error Tracking{{< /prodname >}}{{< /ui >}} page, fatal ANRs are grouped based on their similarity, which can result in several **individual issues** being created.
 - By default, Datadog catches fatal ANRs through the [ApplicationExitInfo API][19] (available since *[Android 30+][20]*), which can be read on the next app launch.
 - In *[Android 29][21] and below*, reporting on fatal ANRs is not possible.
 
@@ -535,7 +535,7 @@ Non-fatal ANRs may or may not have led to the application being terminated (cras
 
 {{< img src="real_user_monitoring/error_tracking/rum-anr-non-fatal.png" alt="A non-fatal crash report in Error Tracking." >}}
 
-- In the {{< ui >}}Error Tracking{{< /ui >}} page, non-fatal ANRs are grouped under a **single** issue due to their level of noise.
+- In the {{< ui >}}{{< prodname >}}Error Tracking{{< /prodname >}}{{< /ui >}} page, non-fatal ANRs are grouped under a **single** issue due to their level of noise.
 - By default, the reporting of non-fatal ANRs on *Android 30+* is **disabled** because it would create too much noise over fatal ANRs. On *Android 29* and below, however, the reporting of non-fatal ANRs is **enabled** by default, as fatal ANRs cannot be reported on those versions.
 
 For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` to `true` or `false` when initializing the SDK.
@@ -877,7 +877,7 @@ When looking at RUM Crash Reporting behaviors for Android, consider the followin
 
 ## Test your implementation
 
-To verify your Android Crash Reporting and Error Tracking configuration, you need to trigger a crash in your application and confirm that the error appears in Datadog.
+To verify your Android Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} configuration, you need to trigger a crash in your application and confirm that the error appears in Datadog.
 
 To test your implementation:
 

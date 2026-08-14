@@ -283,7 +283,7 @@ For more information about how to add spans and tags for custom instrumentation,
   <strong>Note:</strong> To use the manual testing API, you must add the <code>Datadog.Trace</code> NuGet package in the target .NET project.
 </div>
 
-If you use XUnit, NUnit, or MSTest with your .NET projects, Test Optimization automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog.
+If you use XUnit, NUnit, or MSTest with your .NET projects, {{< prodname >}}Test Optimization{{< /prodname >}} automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog.
 
 The API is based around three concepts: test module, test suites, and tests.
 

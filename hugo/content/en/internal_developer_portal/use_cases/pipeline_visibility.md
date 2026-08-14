@@ -50,7 +50,7 @@ By default, your service is linked to CI pipelines through its repository URL. T
 
 2. Edit the service metadata to add or remove a pipeline:
 
-   - **Edit in UI**: Find the Software Delivery section, then search for and select the pipelines you want to associate with the service.
+   - **Edit in UI**: Find the {{< prodname >}}Software Delivery{{< /prodname >}} section, then search for and select the pipelines you want to associate with the service.
 
       {{< img src="tracing/software_catalog/pipeline-visibility-update-metadata.png" alt="The configuration page for updating service metadata, featuring the Software Delivery field for adding and removing related pipelines" style="width:100%;" >}}
 

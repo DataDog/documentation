@@ -14,11 +14,11 @@ further_reading:
 
 ## Overview
 
-Because Error Tracking billing is based on the number of errors, large increases in the errors for a single issue can quickly consume your Error Tracking budget. Dynamic Sampling protects you by establishing a threshold for the error rate per issue based on your daily rate limit and historical error volumes, sampling errors when that threshold is reached. Dynamic Sampling automatically deactivates when the error rate of your issue decreases below the given threshold.
+Because Error Tracking billing is based on the number of errors, large increases in the errors for a single issue can quickly consume your {{< prodname >}}Error Tracking{{< /prodname >}} budget. Dynamic Sampling protects you by establishing a threshold for the error rate per issue based on your daily rate limit and historical error volumes, sampling errors when that threshold is reached. Dynamic Sampling automatically deactivates when the error rate of your issue decreases below the given threshold.
 
 ## Setup
 
-Dynamic Sampling is automatically enabled with Error Tracking with a default intake threshold based on your daily rate limit and historical volume.
+Dynamic Sampling is automatically enabled with {{< prodname >}}Error Tracking{{< /prodname >}} with a default intake threshold based on your daily rate limit and historical volume.
 
 For best results, set up a daily rate limit on the [Error Tracking Rate Limits page][2]: Click **Edit Rate Limit** and enter a new value.
 
@@ -40,9 +40,9 @@ A `Dynamic Sampling activated` event is generated when Dynamic Sampling is appli
 
 When Dynamic Sampling is applied, the following steps are recommended:
 
-- Check which issue is consuming your quota. The issue to which Dynamic Sampling is applied is linked in the event generated in Event Management.
+- Check which issue is consuming your quota. The issue to which Dynamic Sampling is applied is linked in the event generated in {{< prodname >}}Event Management{{< /prodname >}}.
 - If you'd like to collect additional samples for this issue, raise your daily quota on the [Error Tracking Rate Limits page][2].
-- If you'd like to avoid collecting samples for this issue in the future, consider creating an [exclusion filter][3] to prevent additional events from being ingested into Error Tracking.
+- If you'd like to avoid collecting samples for this issue in the future, consider creating an [exclusion filter][3] to prevent additional events from being ingested into {{< prodname >}}Error Tracking{{< /prodname >}}.
 
 ## Further Reading
 

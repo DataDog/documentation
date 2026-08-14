@@ -62,13 +62,13 @@ Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][8] and then cli
    {{< img src="integrations/snowflake/snowflake_account_url.png" alt="The account menu with the copy account URL option selected in the Snowflake UI" style="width:100%;" >}}
 2. Navigate to the [Snowflake integration tile][101] in Datadog and click {{< ui >}}Add Snowflake Account{{< /ui >}}.
 3. Enter your Snowflake account URL in the {{< ui >}}Account URL{{< /ui >}} field. For example: `https://xyz12345.us-east-1.snowflakecomputing.com`.
-4. Under the {{< ui >}}Connect your Snowflake account{{< /ui >}} section, click the toggle to enable Snowflake in Cloud Cost Management.
+4. Under the {{< ui >}}Connect your Snowflake account{{< /ui >}} section, click the toggle to enable Snowflake in {{< prodname >}}Cloud Cost Management{{< /prodname >}}.
 5. Enter your Snowflake user name in the {{< ui >}}User Name{{< /ui >}} field.
 6. Follow step 4 of the [Snowflake integration][103] page to create a Datadog-specific role and user to monitor Snowflake.
 7. Follow step 5 of the [Snowflake integration][103] page to configure the key-value pair authentication.
 8. Click {{< ui >}}Save{{< /ui >}}.
 
-Snowflake cost data from the past 6 months is available in Cloud Cost Management within 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+Snowflake cost data from the past 6 months is available in {{< prodname >}}Cloud Cost Management{{< /prodname >}} within 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 **Snowflake query tags**
 
@@ -86,7 +86,7 @@ To use query tags within cost management, ensure the following:
 
 - The `query_tag` string must be JSON parsable. Specifically, this means that the string is processable by the native `PARSE_JSON` function.
 
-- An allowlist of keys must be provided in the Snowflake integration tile. These keys map to the first layer of the JSON-formatted `query_tag` field. This allowlist appears in the form of a comma-separated list of strings for example: `tag_1,tag_2,tag_3`. Ensure that strings contain only alphanumeric characters, underscores, hyphens, and periods. You can enter this information into the Snowflake tile, under {{< ui >}}Resources Collected{{< /ui >}} > {{< ui >}}Cloud Cost Management{{< /ui >}} > {{< ui >}}Collected Query Tags{{< /ui >}}.
+- An allowlist of keys must be provided in the Snowflake integration tile. These keys map to the first layer of the JSON-formatted `query_tag` field. This allowlist appears in the form of a comma-separated list of strings for example: `tag_1,tag_2,tag_3`. Ensure that strings contain only alphanumeric characters, underscores, hyphens, and periods. You can enter this information into the Snowflake tile, under {{< ui >}}Resources Collected{{< /ui >}} > {{< ui >}}{{< prodname >}}Cloud Cost Management{{< /prodname >}}{{< /ui >}} > {{< ui >}}Collected Query Tags{{< /ui >}}.
 
 **Note**: Select your query tags with data magnitude in mind. Appropriate query tags are ones that have low to medium group cardinality (for example: team, user, service). Selecting a query tag with high group cardinality (such as unique UUID associated with job executions) can result in bottlenecking issues for both data ingestion and frontend rendering.
 
@@ -125,7 +125,7 @@ GRANT USE SCHEMA ON CATALOG system TO `<CLIENT-ID>`;
 GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
 ```
 
-Your Databricks cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+Your Databricks cost data for the past 15 months can be accessed in {{< prodname >}}Cloud Cost Management{{< /prodname >}} after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 {{< img src="cloud_cost/saas_costs/databricks_setup_1.png" alt="Integrate with Databricks to collect cost data." style="width:100%" >}}
 
@@ -136,7 +136,7 @@ Your Databricks cost data for the past 15 months can be accessed in Cloud Cost M
 
 {{% tab "OpenAI" %}}
 
-<div class="alert alert-danger">An <strong>admin-scoped API key is required</strong> to collect OpenAI cost data for Cloud Cost Management. Project-scoped API keys cannot collect cost data.</div>
+<div class="alert alert-danger">An <strong>admin-scoped API key is required</strong> to collect OpenAI cost data for {{< prodname >}}Cloud Cost Management{{< /prodname >}}. Project-scoped API keys cannot collect cost data.</div>
 
 1. Create an [admin API key][103] in your OpenAI account settings:
    - Log in to your [OpenAI Account][104].
@@ -147,7 +147,7 @@ Your Databricks cost data for the past 15 months can be accessed in Cloud Cost M
 4. Under the {{< ui >}}Resources{{< /ui >}} section, click the toggle for each account to enable `OpenAI Billing Usage Data Collection`.
 5. Click {{< ui >}}Save{{< /ui >}}.
 
-Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+Your OpenAI cost data for the past 15 months can be accessed in {{< prodname >}}Cloud Cost Management{{< /prodname >}} after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 {{< img src="cloud_cost/saas_costs/openai_setup.png" alt="Integrate with OpenAI to collect cost data." style="width:100%" >}}
 
@@ -197,7 +197,7 @@ Begin by getting an Admin API key from Cursor. This key allows access to usage a
 3. Under the {{< ui >}}Resources{{< /ui >}} section, click the toggle for each account to enable `Cursor in Cloud Cost Management`.
 4. Click {{< ui >}}Save{{< /ui >}}.
 
-After you save your configuration, Datadog begins polling Cursor usage and cost endpoints using this key, and populates metrics in your environment. Your Cursor cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+After you save your configuration, Datadog begins polling Cursor usage and cost endpoints using this key, and populates metrics in your environment. Your Cursor cost data for the past 15 months can be accessed in {{< prodname >}}Cloud Cost Management{{< /prodname >}} after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 [101]: https://app.datadoghq.com/integrations/cursor
 
@@ -220,7 +220,7 @@ After you save your configuration, Datadog begins polling Cursor usage and cost 
 3. Click {{< ui >}}Add Account{{< /ui >}} and paste in the Billing API key from Temporal Cloud.
 4. Click {{< ui >}}Save{{< /ui >}}.
 
-After you save your configuration, Datadog begins polling the Temporal Cloud Billing API using this key, and populates metrics in your environment. Your Temporal Cloud cost data can be accessed in Cloud Cost Management within 25-30 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+After you save your configuration, Datadog begins polling the Temporal Cloud Billing API using this key, and populates metrics in your environment. Your Temporal Cloud cost data can be accessed in {{< prodname >}}Cloud Cost Management{{< /prodname >}} within 25-30 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 [110]: https://app.datadoghq.com/integrations/temporal-cloud-costs
 
@@ -234,7 +234,7 @@ After you save your configuration, Datadog begins polling the Temporal Cloud Bil
 4. Enter an account name, your personal access token, and your enterprise name (in `enterprise-name` format), as well as any appropriate tags.
 5. Click the checkmark button to save this account.
 
-Your GitHub cost data for the past 15 months can be accessed in Cloud Cost Management within 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+Your GitHub cost data for the past 15 months can be accessed in {{< prodname >}}Cloud Cost Management{{< /prodname >}} within 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 {{< img src="cloud_cost/saas_costs/github_setup.png" alt="Integrate with GitHub to collect cost data." style="width:100%" >}}
 
@@ -248,10 +248,10 @@ Your GitHub cost data for the past 15 months can be accessed in Cloud Cost Manag
 1. Create or acquire an API key with the [billing admin][102] role in Confluent Cloud.
 2. Navigate to the [Confluent Cloud integration tile][101] in Datadog and click {{< ui >}}Add Account{{< /ui >}}.
 3. Enter your Confluent Cloud account name, API key, API secret, and optionally, specify tags.
-4. Under the {{< ui >}}Resources{{< /ui >}} section, click the toggle for {{< ui >}}Collect cost data to view in Cloud Cost Management{{< /ui >}}.
+4. Under the {{< ui >}}Resources{{< /ui >}} section, click the toggle for {{< ui >}}Collect cost data to view in {{< prodname >}}Cloud Cost Management{{< /prodname >}}{{< /ui >}}.
 5. Click {{< ui >}}Save{{< /ui >}}.
 
-Your Confluent Cloud cost data becomes available in Cloud Cost Management 24 hours after setup. This data automatically includes 12 months of history, the maximum provided by the Confluent billing API. Over the next three months, the data gradually expands to cover 15 months of history. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+Your Confluent Cloud cost data becomes available in {{< prodname >}}Cloud Cost Management{{< /prodname >}} 24 hours after setup. This data automatically includes 12 months of history, the maximum provided by the Confluent billing API. Over the next three months, the data gradually expands to cover 15 months of history. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 If you wish to collect cluster-level tags or business metadata tags for your costs, you can add a Schema Registry API key and secret. Please look into [Schema Management on Confluent Cloud][103] for more information.
 
@@ -269,7 +269,7 @@ If you wish to collect cluster-level tags or business metadata tags for your cos
 3. Enter your MongoDB account name, public key, private key, organizational ID, and optionally, specify tags.
 4. Click {{< ui >}}Save{{< /ui >}}.
 
-Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+Your MongoDB cost data for the past 15 months can be accessed in {{< prodname >}}Cloud Cost Management{{< /prodname >}} after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 {{< img src="cloud_cost/saas_costs/mongodb_setup.png" alt="Integrate with MongoDB to collect cost data." style="width:100%" >}}
 
@@ -289,7 +289,7 @@ Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Mana
 7. Click {{< ui >}}Add Account{{< /ui >}}.
 8. Enter your {{< ui >}}Elastic Cloud Organization ID{{< /ui >}} and {{< ui >}}Billing API Key{{< /ui >}} in the account table.
 
-Your Elastic Cloud cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+Your Elastic Cloud cost data for the past 15 months can be accessed in {{< prodname >}}Cloud Cost Management{{< /prodname >}} after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 {{< img src="cloud_cost/saas_costs/elasticcloud_setup.png" alt="Integrate with Elastic Cloud to collect cost data." style="width:100%" >}}
 
@@ -305,7 +305,7 @@ Your Elastic Cloud cost data for the past 15 months can be accessed in Cloud Cos
 3. Enter your Fastly account name and API token.
 4. Click {{< ui >}}Save{{< /ui >}}.
 
-Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+Your Fastly cost data for the past 15 months can be accessed in {{< prodname >}}Cloud Cost Management{{< /prodname >}} after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 {{< img src="cloud_cost/saas_costs/fastly_setup_1.png" alt="Integrate with Fastly to collect cost data." style="width:100%" >}}
 
@@ -320,7 +320,7 @@ Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Manag
 3. Enter an {{< ui >}}Account SID{{< /ui >}} for your Twilio account.
 4. Click {{< ui >}}Save{{< /ui >}}.
 
-Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+Your Twilio cost data for the past 15 months can be accessed in {{< prodname >}}Cloud Cost Management{{< /prodname >}} after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 {{< img src="cloud_cost/saas_costs/twilio_setup.png" alt="Integrate with Twilio to collect cost data." style="width:100%" >}}
 

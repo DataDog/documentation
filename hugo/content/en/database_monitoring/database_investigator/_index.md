@@ -25,11 +25,11 @@ further_reading:
   text: "Diagnose and resolve database performance issues faster with Database Investigator"
 ---
 
-Database Monitoring contributes a set of tools and skills to [Bits Chat][1], so you can investigate the databases you monitor directly in chat. Bits Chat analyzes the telemetry Database Monitoring already collects. This includes health signals, query metrics, explain plans, instance and infrastructure metrics, calling APM services, related incidents, and recent events. For a database investigation, Bits Chat returns a structured root cause analysis with concrete remediation steps.
+{{< prodname >}}Database Monitoring{{< /prodname >}} contributes a set of tools and skills to [{{< prodname >}}Bits Chat{{< /prodname >}}][1], so you can investigate the databases you monitor directly in chat. {{< prodname >}}Bits Chat{{< /prodname >}} analyzes the telemetry {{< prodname >}}Database Monitoring{{< /prodname >}} already collects. This includes health signals, query metrics, explain plans, instance and infrastructure metrics, calling APM services, related incidents, and recent events. For a database investigation, {{< prodname >}}Bits Chat{{< /prodname >}} returns a structured root cause analysis with concrete remediation steps.
 
-Bits Chat supports investigating all databases monitored by Database Monitoring.
+{{< prodname >}}Bits Chat{{< /prodname >}} supports investigating all databases monitored by {{< prodname >}}Database Monitoring{{< /prodname >}}.
 
-Both database administrators and the platform or application teams that own database-backed services can investigate this way. Describe an issue in plain language and Bits Chat runs the investigation. Deep database expertise is not required.
+Both database administrators and the platform or application teams that own database-backed services can investigate this way. Describe an issue in plain language and {{< prodname >}}Bits Chat{{< /prodname >}} runs the investigation. Deep database expertise is not required.
 
 Use Bits Chat to answer questions like:
 
@@ -45,7 +45,7 @@ Database investigations are billed in [AI Credits][2].
 
 ## Start an investigation
 
-Start a database investigation from any of the following surfaces in Database Monitoring:
+Start a database investigation from any of the following surfaces in {{< prodname >}}Database Monitoring{{< /prodname >}}:
 
 - The **Investigate** button on a database **Overview** page
 - A metric in the **Metrics** tab of a database host
@@ -57,17 +57,17 @@ Start a database investigation from any of the following surfaces in Database Mo
 
 {{< img src="database_monitoring/database_investigator/investigate_metrics.png" alt="The Investigate button highlighted on a graph in the Metrics tab of a database host" style="width:100%;" >}}
 
-Each of these automatically launches a Bits Chat session and starts an investigation scoped to what you clicked from. You do not need to write a prompt.
+Each of these automatically launches a {{< prodname >}}Bits Chat{{< /prodname >}} session and starts an investigation scoped to what you clicked from. You do not need to write a prompt.
 
 You can also ask a database question from anywhere in Datadog. Click {{< ui >}}Ask Bits{{< /ui >}} in the top-right of the navigation bar, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.
 
-Bits Chat streams the response as it works through the investigation. It states a plan, calls Datadog services to gather evidence, and shares interim findings. The investigation ends with a structured report covering what happened, why, the supporting evidence, the root cause, and recommended fixes.
+{{< prodname >}}Bits Chat{{< /prodname >}} streams the response as it works through the investigation. It states a plan, calls Datadog services to gather evidence, and shares interim findings. The investigation ends with a structured report covering what happened, why, the supporting evidence, the root cause, and recommended fixes.
 
-You can ask follow-up questions at any point to refine the analysis. You can also paste in external context, such as an execution plan captured outside of Datadog, and Bits Chat factors it into its next steps.
+You can ask follow-up questions at any point to refine the analysis. You can also paste in external context, such as an execution plan captured outside of Datadog, and {{< prodname >}}Bits Chat{{< /prodname >}} factors it into its next steps.
 
 {{< img src="database_monitoring/database_investigator/investigator_action.png" alt="Bits Chat reporting the root cause of a database issue, with immediate mitigation and durable remediation steps" style="width:100%;" >}}
 
-If a recommended fix involves a SQL change (a new index, a query rewrite), Bits Chat includes the SQL in its response. Bits Chat never connects to your database or runs SQL against it, as recommended changes are for you to review and apply.
+If a recommended fix involves a SQL change (a new index, a query rewrite), {{< prodname >}}Bits Chat{{< /prodname >}} includes the SQL in its response. {{< prodname >}}Bits Chat{{< /prodname >}} never connects to your database or runs SQL against it, as recommended changes are for you to review and apply.
 
 ## Share, save, or escalate findings
 
@@ -79,17 +79,17 @@ After an investigation completes, you can:
 
 ## Permissions
 
-To run database investigations, your role must have the **Bits Chat Access** and **Database Monitoring Read** permissions. Bits Chat uses your Datadog role to fetch data, so it can only access the resources you have permission to view.
+To run database investigations, your role must have the **Bits Chat Access** and **Database Monitoring Read** permissions. {{< prodname >}}Bits Chat{{< /prodname >}} uses your Datadog role to fetch data, so it can only access the resources you have permission to view.
 
 ## Programmatic access
 
-The data sources that Bits Chat uses for database investigations are also exposed through the [Datadog MCP server][5]. You can call them from your own AI tooling.
+The data sources that {{< prodname >}}Bits Chat{{< /prodname >}} uses for database investigations are also exposed through the [Datadog MCP server][5]. You can call them from your own AI tooling.
 
 ## Preview investigations
 
-Investigations you ran in Database Investigator during Preview, before database investigations moved into Bits Chat, are kept separately from your Bits Chat conversation history. They remain available until September 30, 2026.
+Investigations you ran in Database Investigator during Preview, before database investigations moved into {{< prodname >}}Bits Chat{{< /prodname >}}, are kept separately from your {{< prodname >}}Bits Chat{{< /prodname >}} conversation history. They remain available until September 30, 2026.
 
-To reach them, click the dropdown arrow next to the **Investigate** button in Database Monitoring, then select **View Preview Investigations**.
+To reach them, click the dropdown arrow next to the **Investigate** button in {{< prodname >}}Database Monitoring{{< /prodname >}}, then select **View Preview Investigations**.
 
 {{< img src="database_monitoring/database_investigator/view_preview_investigations.png" alt="The dropdown next to the Investigate button, with the View Preview Investigations option" style="width:100%;" >}}
 

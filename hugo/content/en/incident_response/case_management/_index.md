@@ -32,7 +32,7 @@ algolia:
 
 Datadog Case Management offers a centralized place to triage, track, and remediate issues detected by Datadog and third-party integrations. After you create a case, you can assign it to a user, establishing clear lines of ownership that persist throughout the lifespan of the case.
 
-While investigating, populate the case with graphs, logs, and other telemetry data from across Datadog and collaborate with your team members in the activity timeline. Case Management also integrates with tools like Jira, ServiceNow, PagerDuty, Slack, and Microsoft Teams—allowing you to fit Case Management solutions to your organization's processes.
+While investigating, populate the case with graphs, logs, and other telemetry data from across Datadog and collaborate with your team members in the activity timeline. {{< prodname >}}Case Management{{< /prodname >}} also integrates with tools like Jira, ServiceNow, PagerDuty, Slack, and Microsoft Teams—allowing you to fit {{< prodname >}}Case Management{{< /prodname >}} solutions to your organization's processes.
 
 ## Getting started
 {{< whatsnext desc="Learn more about case management:">}}

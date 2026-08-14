@@ -23,7 +23,7 @@ further_reading:
 ---
 ## Overview
 
-Enable Expo Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring.
+Enable Expo Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} to get comprehensive crash reports and error trends with Real User Monitoring.
 
 With this feature, you can access the following features:
 
@@ -156,7 +156,7 @@ Source maps and mapping files are limited in size to **500 MB** each, while dSYM
 
 ## Test your implementation
 
-To verify your Expo Crash Reporting and Error Tracking configuration, you need to issue an error in your application and confirm that the error appears in Datadog.
+To verify your Expo Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} configuration, you need to issue an error in your application and confirm that the error appears in Datadog.
 
 To test your implementation:
 

@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Atlassian's Statuspage conveys real-time status of an organization's services on a webpage. Enable the integration to automatically link and update your Statuspage incident within Datadog's Incident Management platform. As an Incident Commander or Responder, you can:
+Atlassian's Statuspage conveys real-time status of an organization's services on a webpage. Enable the integration to automatically link and update your Statuspage incident within Datadog's {{< prodname >}}Incident Management{{< /prodname >}} platform. As an Incident Commander or Responder, you can:
 - Send customer facing messages with accurate and up to date information
 - Update Statuspage while investigating an incident without leaving the Datadog platform
 - Resolve both Datadog incidents and the linked Statuspage incident at the same time
@@ -30,7 +30,7 @@ Atlassian's Statuspage conveys real-time status of an organization's services on
 
 Install the integration through the [Statuspage Integration tile][1]. For more information, see the [Statuspage integration][2] documentation.
 
-You must have a role with the Incident Settings Write permission to enable the Atlassian Statuspage integration for Incident Management.
+You must have a role with the Incident Settings Write permission to enable the Atlassian Statuspage integration for {{< prodname >}}Incident Management{{< /prodname >}}.
 
 ## Setup
 

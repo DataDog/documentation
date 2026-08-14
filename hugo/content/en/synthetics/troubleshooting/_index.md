@@ -180,16 +180,16 @@ In large or high-volume environments, scheduled tests may not run at the expecte
 
 ### Missing test results executed from the Datadog Agent
 
-If you do not see test results in the Datadog UI, the Datadog Agent is not sending test results to the Synthetics intake (https://http-synthetics.datadoghq.com) that processes test results. Verify that outbound network traffic from the Datadog Agent to this intake is allowed.
+If you do not see test results in the Datadog UI, the Datadog Agent is not sending test results to the {{< prodname >}}Synthetics{{< /prodname >}} intake (https://http-synthetics.datadoghq.com) that processes test results. Verify that outbound network traffic from the Datadog Agent to this intake is allowed.
 
-If the Datadog Agent is running behind a proxy, make sure the Synthetics forwarder is configured to send traffic through the proxy, for example:
+If the Datadog Agent is running behind a proxy, make sure the {{< prodname >}}Synthetics{{< /prodname >}} forwarder is configured to send traffic through the proxy, for example:
 ```
 synthetics: 
   collector: 
     enabled: true
 synthetics.forwarder.dd_url: http://my-proxy.com:<proxy-port>
 ```
-Additionaly, ensure that the proxy itself is configured to allow outboud network traffic to the Synthetics intake.
+Additionaly, ensure that the proxy itself is configured to allow outboud network traffic to the {{< prodname >}}Synthetics{{< /prodname >}} intake.
 
 ## Private locations
 
@@ -207,7 +207,7 @@ Error: Got 403 in request - {"errors":["Expired/not yet valid signature"]}
     at DatadogQueue.receiveMessages (dist/build/index.js:258914:48)
 ```
 
-**Cause**: The log shows that the Private Location was able to successfully reach the Synthetics intake to fetch tests, but the request failed with a 403 response from Datadog due to an authentication issue. Specifically, the request signature was considered expired or not yet valid. Communication between the Private Location and Datadog is secured using Datadog Signature v1 (based on the same signing process as [AWS Signature v4][105]) which includes a timestamp in each request, ensuring both authentication and integrity). If the system clock on the server hosting the Private Location is out of sync, the timestamp can fall outside the allowed window, and the signature validation fails.
+**Cause**: The log shows that the Private Location was able to successfully reach the {{< prodname >}}Synthetics{{< /prodname >}} intake to fetch tests, but the request failed with a 403 response from Datadog due to an authentication issue. Specifically, the request signature was considered expired or not yet valid. Communication between the Private Location and Datadog is secured using Datadog Signature v1 (based on the same signing process as [AWS Signature v4][105]) which includes a timestamp in each request, ensuring both authentication and integrity). If the system clock on the server hosting the Private Location is out of sync, the timestamp can fall outside the allowed window, and the signature validation fails.
 
 **Solution**: Ensure the server hosting the Private Location has accurate time synchronization. If NTP (Network Time Protocol) services are in use, verify that these services are correctly configured and functioning properly, and address any misconfigurations that could prevent the system clock from syncing with its time sources.
 

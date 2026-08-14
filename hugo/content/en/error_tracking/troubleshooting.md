@@ -2,7 +2,7 @@
 title: Error Tracking Troubleshooting
 ---
 
-If you experience unexpected behavior with Error Tracking, the troubleshooting steps below can help you resolve the issue quickly. If you continue to have trouble, reach out to [Datadog support][1].
+If you experience unexpected behavior with {{< prodname >}}Error Tracking{{< /prodname >}}, the troubleshooting steps below can help you resolve the issue quickly. If you continue to have trouble, reach out to [Datadog support][1].
 
 Datadog recommends regularly updating to the latest version of Datadog SDKs, as each release contains improvements and fixes.
 
@@ -10,13 +10,13 @@ Datadog recommends regularly updating to the latest version of Datadog SDKs, as 
 
 ### Logs
 
-Make sure the error message has the [required attributes][2], and Error Tracking for Logs is [activated][7].
+Make sure the error message has the [required attributes][2], and {{< prodname >}}Error Tracking{{< /prodname >}} for Logs is [activated][7].
 
-This [example query][3] searches for logs meeting the criteria for inclusion in Error Tracking.
+This [example query][3] searches for logs meeting the criteria for inclusion in {{< prodname >}}Error Tracking{{< /prodname >}}.
 
 ### APM
 
-To be processed by Error Tracking, a span must have these attributes:
+To be processed by {{< prodname >}}Error Tracking{{< /prodname >}}, a span must have these attributes:
 
 - `error.type`
 - `error.message`
@@ -26,13 +26,13 @@ To be processed by Error Tracking, a span must have these attributes:
 <strong>Note:</strong> The stack must have at least two lines and one <em>meaningful</em> frame (a frame with a function name and a filename in most languages).
 </div>
 
-This [example query][5] searches for spans meeting the criteria for inclusion in Error Tracking.
+This [example query][5] searches for spans meeting the criteria for inclusion in {{< prodname >}}Error Tracking{{< /prodname >}}.
 
 ### RUM
 
-Error Tracking only processes errors that are sent with the source set to `custom`, `source`, `report`, or `console`, and contain a stack trace. Errors sent with any other source (such as `network`) or sent from browser extensions are not processed by Error Tracking.
+{{< prodname >}}Error Tracking{{< /prodname >}} only processes errors that are sent with the source set to `custom`, `source`, `report`, or `console`, and contain a stack trace. Errors sent with any other source (such as `network`) or sent from browser extensions are not processed by {{< prodname >}}Error Tracking{{< /prodname >}}.
 
-This [example query][6] shows RUM errors that meet the criteria for inclusion in Error Tracking.
+This [example query][6] shows RUM errors that meet the criteria for inclusion in {{< prodname >}}Error Tracking{{< /prodname >}}.
 
 ### Inclusion/Exclusion filters
 

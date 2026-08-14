@@ -51,7 +51,7 @@ Datadog supports creating reference tables through a manual upload, or by period
 <li>Signals are not enriched. Enrichment only applies to traces.</li>
 <li>Datadog does not enrich local or private IPs.</li>
 <li>Only new traces (after the reference table is enabled or updated) are enriched. Old traces are not retroactively enriched.</li>
-<li>Enrichment happens for traces that match the IPs (supported in SIEM and App and API Protection) and domains (supported in SIEM) in the reference table.</li>
+<li>Enrichment happens for traces that match the IPs (supported in SIEM and {{< prodname >}}App and API Protection{{< /prodname >}}) and domains (supported in SIEM) in the reference table.</li>
 <li>Manual file uploads don't auto-update. Updates occur only from cloud storage.</li>
 </ul>
 </div>

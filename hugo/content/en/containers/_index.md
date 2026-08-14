@@ -51,7 +51,7 @@ Log into Datadog and use the [Install Agents][2] page to install the Datadog Age
   {{< nextlink href="/containers/kubernetes/configuration">}}<u>Further Configuration</u>: Additional configuration options for APM, logs, processes, events, and other capabilities after installing the Datadog Agent {{< /nextlink >}}
   {{< nextlink href="/containers/kubernetes/distributions">}}<u>Distributions</u>: Platform-specific installation and configuration instructions for Datadog Agent on various Kubernetes distributions {{< /nextlink >}}
   {{< nextlink href="/containers/kubernetes/apm">}}<u>APM</u>:  Enable APM trace collection for containerized applications running in Kubernetes environments {{< /nextlink >}}
-  {{< nextlink href="/containers/kubernetes/appsec">}}<u>App and API Protection</u>: Automatically enable App and API Protection for your Kubernetes ingress proxies and gateways {{< /nextlink >}}
+  {{< nextlink href="/containers/kubernetes/appsec">}}<u>{{< prodname >}}App and API Protection{{< /prodname >}}</u>: Automatically enable {{< prodname >}}App and API Protection{{< /prodname >}} for your Kubernetes ingress proxies and gateways {{< /nextlink >}}
   {{< nextlink href="/containers/kubernetes/log">}}<u>Log collection</u>: Configure log collection from containerized applications running on Kubernetes using the Datadog Agent {{< /nextlink >}}
   {{< nextlink href="/containers/kubernetes/tag">}}<u>Tag extraction</u>: Configure automatic tag extraction from Kubernetes pod labels and annotations for enhanced monitoring {{< /nextlink >}}
   {{< nextlink href="/containers/kubernetes/integrations">}}<u>Integrations</u>: Configure monitoring integrations for applications running in Kubernetes using Autodiscovery templates {{< /nextlink >}}

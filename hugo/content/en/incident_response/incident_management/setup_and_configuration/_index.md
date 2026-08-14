@@ -10,7 +10,7 @@ aliases:
 
 ## Overview
 
-Use [Incident Settings][1] to customize aspects of the Incident Management experience for your entire organization. These settings enable you to align your usage of Incident Management with your existing processes.
+Use [Incident Settings][1] to customize aspects of the {{< prodname >}}Incident Management{{< /prodname >}} experience for your entire organization. These settings enable you to align your usage of {{< prodname >}}Incident Management{{< /prodname >}} with your existing processes.
 
 ## Incident types
 

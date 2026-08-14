@@ -167,11 +167,11 @@ If there are follow-up tasks that you and your team need to complete to ensure t
 {{< img src="getting_started/incident_management/generate_postmortem.png" alt="Generate Postmortem" responsive="true" style="width:80%;">}}
 ## Customizing your incident management workflow
 
-Datadog Incident Management can be customized with different severity and status levels, based on your organization's needs, and also include additional information such as APM services and teams related to the incident. For more information, see this [section][9] of the Incident Management page.
+Datadog Incident Management can be customized with different severity and status levels, based on your organization's needs, and also include additional information such as APM services and teams related to the incident. For more information, see this [section][9] of the {{< prodname >}}Incident Management{{< /prodname >}} page.
 
 You can also set up notification rules to automatically notify specific people or services based on an incident's severity level. For more information, see the [Incident Settings][10] documentation.
 
-To customize Incident Management, go to the [incident settings page][11]. From the Datadog menu on the left-hand side, go to {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}Incidents{{< /ui >}} (if you get an Incident Management welcome screen, click {{< ui >}}Get Started{{< /ui >}}). Then on the top, click {{< ui >}}Settings{{< /ui >}}.
+To customize {{< prodname >}}Incident Management{{< /prodname >}}, go to the [incident settings page][11]. From the Datadog menu on the left-hand side, go to {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}Incidents{{< /ui >}} (if you get an {{< prodname >}}Incident Management{{< /prodname >}} welcome screen, click {{< ui >}}Get Started{{< /ui >}}). Then on the top, click {{< ui >}}Settings{{< /ui >}}.
 
 ## Create and Manage Incidents on Mobile
 

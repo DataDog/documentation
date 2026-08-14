@@ -115,9 +115,9 @@ Successful evaluations are sent through the Datadog Feature Flags telemetry pipe
 
 ## Standalone Dart setup
 
-Use this setup when you are not using `datadog_flutter_plugin`, or when you want to manage Feature Flags independently from Flutter SDK initialization.
+Use this setup when you are not using `datadog_flutter_plugin`, or when you want to manage {{< prodname >}}Feature Flags{{< /prodname >}} independently from Flutter SDK initialization.
 
-Enable Datadog Feature Flags early in your app startup. For live Feature Flags configuration, `clientToken`, `env`, and `site` are required. To create a client token, see [Client tokens][1].
+Enable Datadog Feature Flags early in your app startup. For live {{< prodname >}}Feature Flags{{< /prodname >}} configuration, `clientToken`, `env`, and `site` are required. To create a client token, see [Client tokens][1].
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Dart and Flutter Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
@@ -138,7 +138,7 @@ await datadogFlags.enable(
 );
 {{< /code-block >}}
 
-`applicationId`, `service`, and `version` are optional. When present, the SDK includes them in Feature Flags telemetry context.
+`applicationId`, `service`, and `version` are optional. When present, the SDK includes them in {{< prodname >}}Feature Flags{{< /prodname >}} telemetry context.
 
 Use the `DatadogFlagsSite` value that matches your Datadog organization.
 

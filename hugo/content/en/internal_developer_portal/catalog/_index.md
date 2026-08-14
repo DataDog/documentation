@@ -41,7 +41,7 @@ Catalog offers multiple views to help you explore and manage your entities. To q
 - **Performance**: Compare latency, traffic, error rate, and Apdex by environment.
 - **Security**: Find vulnerable libraries and live attacks from a single list to harden security posture.
 - **Costs**: Track AWS costs linked to code and infrastructure changes to control cloud spend.
-- **Software Delivery**: Monitor CI pipeline health, static analysis violations, and DORA metrics to shorten delivery cycles.
+- **{{< prodname >}}Software Delivery{{< /prodname >}}**: Monitor CI pipeline health, static analysis violations, and DORA metrics to shorten delivery cycles.
 - **Relationships**: See the dependency graph for services and hover over any service card to see the infrastructure resources it runs on.
 - **Infrastructure**: Browse your cloud infrastructure resources in a dedicated section of the Catalog. Infrastructure resources link to the software entities that run on them. You can click any service in the dependency graph to navigate directly to the infrastructure it runs on.
 
@@ -54,7 +54,7 @@ Catalog includes an entity when:
 - You [declare it in an Entity Definition][6], or
 - You [import it from a third-party source][7] such as Backstage or ServiceNow.
 
-You can view infrastructure resources when you [enable Resource collection][9]. Resource collection is free for any Infrastructure Monitoring customer.
+You can view infrastructure resources when you [enable Resource collection][9]. Resource collection is free for any {{< prodname >}}Infrastructure Monitoring{{< /prodname >}} customer.
 
 [Learn more][3] about entity types and how to configure them for your needs.
 

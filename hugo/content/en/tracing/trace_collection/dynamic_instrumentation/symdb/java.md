@@ -13,12 +13,12 @@ aliases:
 
 ## Requirements
 
-- [Dynamic Instrumentation][1] is enabled for your service.
+- [{{< prodname >}}Dynamic Instrumentation{{< /prodname >}}][1] is enabled for your service.
 - Tracing library [`dd-trace-java`][6] 1.42.0 or higher is installed.
 
 ## Installation
 
-Run your service with Dynamic Instrumentation enabled, autocomplete and search are automatically enabled.
+Run your service with {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} enabled, autocomplete and search are automatically enabled.
 
 ## Additional configuration
 

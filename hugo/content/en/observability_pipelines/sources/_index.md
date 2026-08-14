@@ -125,9 +125,9 @@ After events are ingested by the source, they get sent to different processors a
 
 ## TLS certificates
 
-Enable TLS for Observability Pipelines to ensure that data are encrypted during transit. This prevents attackers from tampering with your data.
+Enable TLS for {{< prodname >}}Observability Pipelines{{< /prodname >}} to ensure that data are encrypted during transit. This prevents attackers from tampering with your data.
 
-Observability Pipelines does not accept self-signed certificates by default because they do not provide secure trust verification and can potentially expose your environment to man-in-the-middle attacks.
+{{< prodname >}}Observability Pipelines{{< /prodname >}} does not accept self-signed certificates by default because they do not provide secure trust verification and can potentially expose your environment to man-in-the-middle attacks.
 
 To check if your certificate is self-signed, run this command:
 

@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-This document lists some of the metrics available from Observability Pipelines. You can:
+This document lists some of the metrics available from {{< prodname >}}Observability Pipelines{{< /prodname >}}. You can:
 
 - Create your own [dashboards][1], [notebooks][2], and [monitors][3] with these metrics.
 - Use [Metrics Summary][5] to see metadata and tags available for the metrics. You can also see which dashboards, notebooks, monitors, and SLOs are using those metrics.
@@ -53,9 +53,9 @@ All metrics are tagged with the following:
 
 ## Estimated usage metric
 
-Observability Pipelines ingested bytes
+{{< prodname >}}Observability Pipelines{{< /prodname >}} ingested bytes
 : **Metric**: `datadog.estimated_usage.observability_pipelines.ingested_bytes`
-: **Description**: The volume of data ingested by Observability Pipelines. See [Estimated Usage Metrics][6] for more information.
+: **Description**: The volume of data ingested by {{< prodname >}}Observability Pipelines{{< /prodname >}}. See [Estimated Usage Metrics][6] for more information.
 
 ## Host metrics
 

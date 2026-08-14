@@ -32,7 +32,7 @@ further_reading:
 
 [Datadog Cloud Security][1] delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure—all in a unified platform for seamless collaboration and faster remediation.
 
-With Cloud Security, Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues. This guide walks you through best practices for getting your team up and running with Cloud Security.
+With Cloud Security, Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues. This guide walks you through best practices for getting your team up and running with {{< prodname >}}Cloud Security{{< /prodname >}}.
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
@@ -55,7 +55,7 @@ With Cloud Security, Security and DevOps teams can act on the shared context of 
 ## Phase 2: Customization
 
 1. Set up [Workload Protection suppression rules][18] to reduce noise.
-2. Create custom detection rules for [Cloud Security Misconfigurations][19] and [Workload Protection][20].
+2. Create custom detection rules for [Cloud Security Misconfigurations][19] and [{{< prodname >}}Workload Protection{{< /prodname >}}][20].
 
 ## Phase 3: Reports and dashboards
 
@@ -65,7 +65,7 @@ With Cloud Security, Security and DevOps teams can act on the shared context of 
 
 ## Disable Cloud Security
 
-For information on disabling Cloud Security, see the following:
+For information on disabling {{< prodname >}}Cloud Security{{< /prodname >}}, see the following:
 
 - [Disable Cloud Security Vulnerabilities][32]
 - [Disable Workload Protection][33]

@@ -637,7 +637,7 @@ Additional Git configuration for physical device testing:
 
 ## Best practices
 
-Follow these practices to take full advantage of the testing framework and Test Optimization.
+Follow these practices to take full advantage of the testing framework and {{< prodname >}}Test Optimization{{< /prodname >}}.
 
 ### Generate symbols file when building
 

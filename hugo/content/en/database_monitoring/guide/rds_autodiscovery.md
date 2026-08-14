@@ -4,7 +4,7 @@ aliases:
 - /database_monitoring/rds_autodiscovery
 ---
 
-This guide assumes you have configured Database Monitoring for your Amazon RDS [Postgres][1] or [MySQL][11] databases.
+This guide assumes you have configured {{< prodname >}}Database Monitoring{{< /prodname >}} for your Amazon RDS [Postgres][1] or [MySQL][11] databases.
 
 ## Before you begin
 
@@ -18,7 +18,7 @@ Supported Agent versions
 
 Datadog's [Autodiscovery][4] enables you to configure monitoring in dynamic infrastructures. You can use this feature to monitor your RDS instances without having to list individual database host endpoints. Autodiscovery automatically discovers and monitors any RDS instances that match the tag criteria specified in your configuration.
 
-With Autodiscovery and Database Monitoring, you can define configuration templates for Postgres or MySQL checks and specify which instances to apply each check to.
+With Autodiscovery and {{< prodname >}}Database Monitoring{{< /prodname >}}, you can define configuration templates for Postgres or MySQL checks and specify which instances to apply each check to.
 
 ## Enabling Autodiscovery for RDS clusters
 

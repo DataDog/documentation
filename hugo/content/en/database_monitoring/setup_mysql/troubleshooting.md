@@ -3,7 +3,7 @@ title: Troubleshoot Database Monitoring setup for MySQL
 description: Troubleshoot Database Monitoring setup
 ---
 
-This page details common issues with setting up and using Database Monitoring with MySQL, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
+This page details common issues with setting up and using {{< prodname >}}Database Monitoring{{< /prodname >}} with MySQL, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
 ## Diagnosing common problems
 
@@ -11,7 +11,7 @@ This page details common issues with setting up and using Database Monitoring wi
 
 If you do not see any data after following the [setup instructions][1] and configuring the Agent, there is most likely an issue with the Agent configuration or API key. Ensure you are receiving data from the Agent by following the [troubleshooting guide][2].
 
-If you are receiving other data such as system metrics, but not Database Monitoring data (such as query metrics and query samples), there is probably an issue with the Agent or database configuration. Ensure your Agent configuration looks like the example in the [setup instructions][1], double-checking the location of the configuration files.
+If you are receiving other data such as system metrics, but not {{< prodname >}}Database Monitoring{{< /prodname >}} data (such as query metrics and query samples), there is probably an issue with the Agent or database configuration. Ensure your Agent configuration looks like the example in the [setup instructions][1], double-checking the location of the configuration files.
 
 To debug, start by running the [Agent status command][3] to collect debugging information about data collected and sent to Datadog.
 
@@ -172,7 +172,7 @@ The host is managed by Google Cloud SQL and does not support `performance_schema
 
 ### Certain queries are missing
 
-If you have data from some queries, but are expecting to see a particular query or set of queries in Database Monitoring, follow this guide.
+If you have data from some queries, but are expecting to see a particular query or set of queries in {{< prodname >}}Database Monitoring{{< /prodname >}}, follow this guide.
 
 
 | Possible cause                         | Solution                                  |

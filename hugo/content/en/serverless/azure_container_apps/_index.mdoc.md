@@ -34,7 +34,7 @@ First, [set up the Azure Integration](/integrations/azure/) to collect metrics a
 
 Then, choose one of two paths to instrument your application with the `serverless-init` Agent:
 
-- **[Set up with agentic onboarding](#set-up-with-agentic-onboarding)**: An AI assistant instruments your service for you, using the AI Setup CLI or the Datadog MCP Server.
+- **[Set up with agentic onboarding](#set-up-with-agentic-onboarding)**: An AI assistant instruments your service for you, using the AI Setup CLI or the {{< prodname >}}Datadog MCP Server{{< /prodname >}}.
 - **[Set up with manual instrumentation][3]**: Instrument your service yourself, with per-runtime steps for the in-container and sidecar approaches. 
 
 ## Set up with agentic onboarding
@@ -60,7 +60,7 @@ Omit `--product` to run interactively, or add `--site` to target your Datadog si
 {% /tab %}
 {% tab label="MCP server" %}
 
-Use the Datadog MCP Server's [`serverless_onboarding`][2] tool. After you connect, try a prompt like:
+Use the {{< prodname >}}Datadog MCP Server{{< /prodname >}}'s [`serverless_onboarding`][2] tool. After you connect, try a prompt like:
 
 ```
 Help me monitor my Azure Container Apps services with Datadog

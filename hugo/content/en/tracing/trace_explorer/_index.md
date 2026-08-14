@@ -54,7 +54,7 @@ You can customize settings for both [ingestion and retention][6] to send and kee
 
 #### Ingestion
 
-Control your volume globally with [Datadog Agent configuration options][7] or set precise [ingestion rules][8] per service instrumented with Datadog APM.
+Control your volume globally with [Datadog Agent configuration options][7] or set precise [ingestion rules][8] per service instrumented with {{< prodname >}}Datadog APM{{< /prodname >}}.
 
 
 #### Indexing

@@ -14,10 +14,10 @@ further_reading:
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
-Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
+{{< prodname >}}Deployment Gates{{< /prodname >}} are in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
-With **preconfigured** Deployment Gates, gates and rules are persisted in Datadog and referenced by service and environment at evaluation time. Preconfigured gates are a good fit when you want to share rules across many deployments, manage configuration in Terraform, or let non-CI users edit rules in the Datadog UI.
+With **preconfigured** {{< prodname >}}Deployment Gates{{< /prodname >}}, gates and rules are persisted in Datadog and referenced by service and environment at evaluation time. Preconfigured gates are a good fit when you want to share rules across many deployments, manage configuration in Terraform, or let non-CI users edit rules in the Datadog UI.
 
 Looking to define rules inline in your deployment config? See [Just-In-Time (JIT) Deployment Gates][5].
 
@@ -559,7 +559,7 @@ The field `data.attributes.gate_status` contains the result of the evaluation, w
 
 ## Recommendation for first-time onboarding
 
-When integrating Deployment Gates into your Continuous Delivery workflow, an evaluation phase helps confirm the product is working as expected before it impacts deployments. Use the Dry Run evaluation mode and the [{{< ui >}}Deployment Gates Evaluations{{< /ui >}}][7] page:
+When integrating {{< prodname >}}Deployment Gates{{< /prodname >}} into your Continuous Delivery workflow, an evaluation phase helps confirm the product is working as expected before it impacts deployments. Use the Dry Run evaluation mode and the [{{< ui >}}Deployment Gates Evaluations{{< /ui >}}][7] page:
 
 1. Create a gate for a service and set the {{< ui >}}Evaluation Mode{{< /ui >}} to {{< ui >}}Dry Run{{< /ui >}}.
 2. Add the gate evaluation to your deployment process. While the gate is in dry-run mode, the API always returns `pass` and deployments are not impacted by the gate result.

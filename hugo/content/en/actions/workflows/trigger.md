@@ -96,7 +96,7 @@ See the test and debug page for information on [how to test a monitor trigger][1
 
 Incident triggers can run a workflow automatically based on incident events, or manually from within an incident.
 
-<div class="alert alert-info">To set up incident automations within Incident Management, with incident context built in and no additional billing, see <a href="/incident_response/incident_management/setup_and_configuration/automations">Incident Automations</a>. Use a workflow with an incident trigger when incident events are one trigger among others, or when the workflow is managed outside of Incident Management.</div>
+<div class="alert alert-info">To set up incident automations within {{< prodname >}}Incident Management{{< /prodname >}}, with incident context built in and no additional billing, see <a href="/incident_response/incident_management/setup_and_configuration/automations">Incident Automations</a>. Use a workflow with an incident trigger when incident events are one trigger among others, or when the workflow is managed outside of {{< prodname >}}Incident Management{{< /prodname >}}.</div>
 
 To add an incident trigger to your workflow:
 1. From the [Workflow creation page][6], scroll down to the Trigger options and click {{< ui >}}Incident{{< /ui >}}.

@@ -32,7 +32,7 @@ algolia:
 
 Remote Configuration is a Datadog capability that allows you to remotely configure and change the behavior of select product features in Datadog components such as Agents, SDKs, and Observability Pipelines Workers deployed in your infrastructure. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
 
-For Datadog security products, App and API Protection and Workload Protection, Remote Configuration-enabled Agents and compatible SDKs provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
+For Datadog security products, {{< prodname >}}App and API Protection{{< /prodname >}} and {{< prodname >}}Workload Protection{{< /prodname >}}, Remote Configuration-enabled Agents and compatible SDKs provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
 
 ## How it works
 
@@ -64,7 +64,7 @@ Fleet Automation
 : - [Send flares][27] directly from the Datadog site. Seamlessly troubleshoot the Datadog Agent without directly accessing the host.
 : - [Upgrade your Agents][29].
 
-App and API Protection (AAP)
+{{< prodname >}}App and API Protection{{< /prodname >}} (AAP)
 : - [1-click AAP activation][33]: Enable AAP in 1-click from the Datadog UI.
 : - [In-App attack patterns updates][34]: Receive the newest Web Application Firewall (WAF) attack patterns automatically as Datadog releases them, following newly disclosed vulnerabilities or attack vectors.
 : - [Protect][34]: Block attackers' IPs, authenticated users, and suspicious requests that are flagged in AAP Security Signals and Traces temporarily or permanently through the Datadog UI.
@@ -73,14 +73,14 @@ Application Performance Monitoring (APM)
 : - Configuration at runtime: Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
 : - [Remotely set Agent sampling rate][35]: Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
-[Dynamic Instrumentation][36]
+[{{< prodname >}}Dynamic Instrumentation{{< /prodname >}}][36]
 : - Send critical metrics, traces, and logs from your live applications with no code changes.
 
-Workload Protection
+{{< prodname >}}Workload Protection{{< /prodname >}}
 : - Automatic default Agent rule updates: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Workload Protection][3] for more information.
 : - Automatic deployment of custom Agent rules: Automatically deploy your custom Agent rules to designated hosts (all hosts or a defined subset of hosts).
 
-Observability Pipelines
+{{< prodname >}}Observability Pipelines{{< /prodname >}}
 : - Remotely deploy and update [Observability Pipelines Workers][4] (OPW): Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
 
 [Autoscaling][47]
@@ -89,8 +89,8 @@ Observability Pipelines
 Private action runner
 : - Run Datadog workflows and apps that interact with services hosted on your private network without exposing your services to the public internet. For more information, see [Private Actions][30].
 
-Feature Flags
-: - Deliver flag configurations (targeting and assignment rules) to server-side SDKs for synchronous variant assignment based on evaluation context. See [Feature Flags][48] for more information.
+{{< prodname >}}Feature Flags{{< /prodname >}}
+: - Deliver flag configurations (targeting and assignment rules) to server-side SDKs for synchronous variant assignment based on evaluation context. See [{{< prodname >}}Feature Flags{{< /prodname >}}][48] for more information.
 
 ## Security considerations
 

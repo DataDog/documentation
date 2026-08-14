@@ -18,16 +18,16 @@ further_reading:
   text: "LLM guardrails: Best practices for deploying LLM apps securely"
 ---
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">{{< prodname >}}AI Guard{{< /prodname >}} isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. AI Guard can also detect sensitive data such as PII and secrets in LLM conversations. This page describes how to set it up so you can keep your data secure against these AI-based threats.
+{{< prodname >}}AI Guard{{< /prodname >}} helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. {{< prodname >}}AI Guard{{< /prodname >}} can also detect sensitive data such as PII and secrets in LLM conversations. This page describes how to set it up so you can keep your data secure against these AI-based threats.
 
-For an overview on AI Guard, see [AI Guard][13].
+For an overview on {{< prodname >}}AI Guard{{< /prodname >}}, see [{{< prodname >}}AI Guard{{< /prodname >}}][13].
 
 ## Setup
 
-To set up AI Guard, you need to create API keys, install an SDK, configure retention filters, and set AI Guard policies including blocking, evaluation sensitivity, and sensitive data scanning.
+To set up {{< prodname >}}AI Guard{{< /prodname >}}, you need to create API keys, install an SDK, configure retention filters, and set {{< prodname >}}AI Guard{{< /prodname >}} policies including blocking, evaluation sensitivity, and sensitive data scanning.
 
 For full setup instructions, see [Set Up AI Guard][15].
 
@@ -39,13 +39,13 @@ After completing the [setup steps][15] and using an [SDK][21] to instrument your
 
 ## Security signals {#security-signals}
 
-AI Guard generates security signals when it detects threats such as prompt injection, jailbreaking, or tool misuse. You can create custom detection rules, set thresholds for notifications, and investigate signals alongside other application security threats.
+{{< prodname >}}AI Guard{{< /prodname >}} generates security signals when it detects threats such as prompt injection, jailbreaking, or tool misuse. You can create custom detection rules, set thresholds for notifications, and investigate signals alongside other application security threats.
 
 For more information, see [AI Guard Security Signals][14].
 
 ## Set up Datadog Monitors for alerting {#set-up-datadog-monitors}
 
-To create monitors for alerting at certain thresholds, you can use [Datadog Monitors][9]. You can monitor AI Guard evaluations with either APM traces or with metrics. For both types of monitor, you should set your alert conditions, name for the alert, and define notifications; Datadog recommends using Slack.
+To create monitors for alerting at certain thresholds, you can use [Datadog Monitors][9]. You can monitor {{< prodname >}}AI Guard{{< /prodname >}} evaluations with either APM traces or with metrics. For both types of monitor, you should set your alert conditions, name for the alert, and define notifications; Datadog recommends using Slack.
 
 ### APM monitor
 
@@ -63,12 +63,12 @@ Follow the instructions to create a new [metric monitor][11].
 
 ## Evaluate conversations in AI Guard Playground {#playground}
 
-The [{{< ui >}}AI Guard Playground{{< /ui >}}][19] lets you test AI Guard evaluations directly from the Datadog UI, without writing any code. Submit a conversation, including user input, assistant output, and tool calls, and see the evaluation result (action and reason) in real time.
+The [{{< ui >}}AI Guard Playground{{< /ui >}}][19] lets you test {{< prodname >}}AI Guard{{< /prodname >}} evaluations directly from the Datadog UI, without writing any code. Submit a conversation, including user input, assistant output, and tool calls, and see the evaluation result (action and reason) in real time.
 
 Use the Playground to:
-- Experiment with different prompt patterns and see how AI Guard responds.
-- Verify that AI Guard correctly detects prompt injection, jailbreaking, or unsafe tool calls.
-- Tweak the evaluation sensitivity threshold and see how it affects detection results. You can then adjust the threshold in AI Guard's [evaluation sensitivity][20] settings.
+- Experiment with different prompt patterns and see how {{< prodname >}}AI Guard{{< /prodname >}} responds.
+- Verify that {{< prodname >}}AI Guard{{< /prodname >}} correctly detects prompt injection, jailbreaking, or unsafe tool calls.
+- Tweak the evaluation sensitivity threshold and see how it affects detection results. You can then adjust the threshold in {{< prodname >}}AI Guard{{< /prodname >}}'s [evaluation sensitivity][20] settings.
 - Test sensitive data scanning on your conversations.
 - Add [evaluation context][22] to a conversation to see how it affects false positives, before applying that context to a service's policy.
 - Share evaluation results with your team during development.

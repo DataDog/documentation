@@ -26,7 +26,7 @@ With this report, you can:
 - Identify entities without owners across every entity type.
 - Filter by owner, lifecycle, tier, and definition version to focus on a subset of the catalog.
 
-Access the Catalog Health report by navigating to **Reports** in your Internal Developer Portal and selecting **Catalog Health** in the left-hand menu. 
+Access the Catalog Health report by navigating to **Reports** in your {{< prodname >}}Internal Developer Portal{{< /prodname >}} and selecting **Catalog Health** in the left-hand menu. 
 
 {{< img src="tracing/eng_reports/catalog-health-landing.png" alt="Default view of the Catalog Health report, showing the summary information section" style="width:100%;" >}} 
 

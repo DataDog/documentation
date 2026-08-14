@@ -54,7 +54,7 @@ Using Software Composition Analysis provides organizations with the following be
 
 SCA supports two complementary detection modes:
 - **Static detection** scans repositories by analyzing dependency files (lockfiles and manifests). By default, scans run when a commit updates a supported dependency manifest or lockfile in an enabled repository. You can also run SCA in your CI/CD pipeline (CI jobs are supported for `push` events). See [Set up Static SCA][1] to get started.
-- **Runtime detection** identifies libraries that are loaded and used by your services at runtime using instrumentation from Datadog APM. See [Set up Runtime SCA][2] to get started.
+- **Runtime detection** identifies libraries that are loaded and used by your services at runtime using instrumentation from {{< prodname >}}Datadog APM{{< /prodname >}}. See [Set up Runtime SCA][2] to get started.
 
 When Datadog ingests a new advisory, it is matched against your last known library inventory and appears in the Vulnerabilities Explorer even if you have not rescanned the repository. The Repositories Explorer is commit-scoped and reflects what was known at the time the scan ran—so a scan that executed before Datadog ingested the advisory will not show that newly published advisory in the Repositories Explorer for that commit. See [Understanding SCA views](#understanding-sca-views) for more details.
 
@@ -74,7 +74,7 @@ When Datadog identifies a public exploit for a vulnerability from any of these s
 
 ### Review and prioritize vulnerabilities
 
-The [Vulnerabilities Explorer][11] provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST, IAST, Secrets Scanning, and IaC). All vulnerabilities in the explorer are either detected on the default branch at the last commit of a scanned repository, or are affecting a running service.
+The [Vulnerabilities Explorer][11] provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other {{< prodname >}}Code Security{{< /prodname >}} capabilities (SAST, IAST, Secrets Scanning, and IaC). All vulnerabilities in the explorer are either detected on the default branch at the last commit of a scanned repository, or are affecting a running service.
 
 #### Datadog severity score
 
@@ -107,25 +107,25 @@ Click on a library with a vulnerability to open a side panel that contains infor
 
 ### Remediation
 
-Datadog SCA supports using coding agents and [Bits Code][31] to apply fixes for vulnerable libraries. You can also use [Bits Code Automation][32] to automatically generate fixes for vulnerabilities as they are found or on a schedule.
+Datadog SCA supports using coding agents and [{{< prodname >}}Bits Code{{< /prodname >}}][31] to apply fixes for vulnerable libraries. You can also use [Bits Code Automation][32] to automatically generate fixes for vulnerabilities as they are found or on a schedule.
 
-<div class="alert alert-info">SCA remediations in Bits Code require internet access to apply library upgrades. To configure internet access, see <a href="/bits_ai/bits_code/setup/#configure-internet-access">Configure internet access</a>.</div>
+<div class="alert alert-info">SCA remediations in {{< prodname >}}Bits Code{{< /prodname >}} require internet access to apply library upgrades. To configure internet access, see <a href="/bits_ai/bits_code/setup/#configure-internet-access">Configure internet access</a>.</div>
 
 To view and remediate vulnerabilities:
 
 1. In Datadog, navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Vulnerabilities{{< /ui >}}][11], and select {{< ui >}}Libraries (SCA){{< /ui >}}.
 2. Select a vulnerability to open a side panel with details about the finding and the affected library.
 3. In the {{< ui >}}Next Steps{{< /ui >}} > {{< ui >}}Remediation{{< /ui >}} section, click {{< ui >}}Remediate with AI{{< /ui >}}
-4. Select either Bits Code or another coding agent. With Bits Code, you can choose between:
+4. Select either {{< prodname >}}Bits Code{{< /prodname >}} or another coding agent. With Bits Code, you can choose between:
    - [{{< ui >}}Single fix{{< /ui >}}](#single-fix): Generates a fix for this vulnerable library
      - If a fix has already been generated, select {{< ui >}}View fix and create PR{{< /ui >}} to view the existing [remediation session](#remediation-session-details).
    - [{{< ui >}}Create automation{{< /ui >}}](#create-automation): Opens a pop-up modal where you can create a [Bits Code automation][32]
 
 #### Single fix
 
-Use **Single fix** to open a Bits Code session to fix this single vulnerability. You can review the proposed diff, ask follow-up questions, edit the patch, and create a pull request to apply the remediation to your source code repository.
+Use **Single fix** to open a {{< prodname >}}Bits Code{{< /prodname >}} session to fix this single vulnerability. You can review the proposed diff, ask follow-up questions, edit the patch, and create a pull request to apply the remediation to your source code repository.
 
-View all Bits Code sessions on {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][33].
+View all {{< prodname >}}Bits Code{{< /prodname >}} sessions on {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}{{< prodname >}}Bits Code{{< /prodname >}}{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][33].
 
 #### Create automation
 
@@ -133,21 +133,21 @@ Use **Create automation** to create a [Bits Code automation][32] to generate fix
 
 Selecting this option opens an {{< ui >}}Automate with Bits{{< /ui >}} modal with the {{< ui >}}Remediate SCA vulnerabilities{{< /ui >}} action pre-filled. Complete the form, including specifying a trigger and output, then click {{< ui >}}Create Automation{{< /ui >}}. See [Automations][32] to learn more about actions, triggers, and outputs.
 
-View all Bits Code automations on {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Automations{{< /ui >}}][34].
+View all {{< prodname >}}Bits Code{{< /prodname >}} automations on {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}{{< prodname >}}Bits Code{{< /prodname >}}{{< /ui >}} > [{{< ui >}}Automations{{< /ui >}}][34].
 
 #### Remediation session details
 
 Each Bits Code session shows the life cycle of an AI-generated fix so you can review and validate changes before merging. It includes:
 
 - The original security finding and proposed code change
-- An explanation of how and why Bits Code generated the fix
+- An explanation of how and why {{< prodname >}}Bits Code{{< /prodname >}} generated the fix
 - CI results (if enabled) to validate the patch is safe to deploy
 - Options to refine the fix or {{< ui >}}Create PR{{< /ui >}} to apply the changes to your source code repository
 
 You can also view all remediation sessions on [**Sessions**][33].
 
 #### Fix with Cursor
-Instead of Bits Code, you can generate a fix with an AI coding agent such as Cursor:
+Instead of {{< prodname >}}Bits Code{{< /prodname >}}, you can generate a fix with an AI coding agent such as Cursor:
 
 1. In the {{< ui >}}Remediate with AI{{< /ui >}} dialog, select the {{< ui >}}Coding agent{{< /ui >}} tab.
 2. Under {{< ui >}}Generate your fix directly from Claude Code, Codex, or Cursor{{< /ui >}}, click {{< ui >}}Open{{< /ui >}} next to {{< ui >}}Fix with Cursor{{< /ui >}}. Datadog opens Cursor with a tailored prompt that includes the recommended library upgrade for the vulnerability.
@@ -162,13 +162,13 @@ To handle the Cursor deep link, install the [Datadog extension for VS Code and C
 
 ### Automatically block risky changes with PR Gates
 
-Use [PR Gates][16] to enforce security standards for open source libraries before changes are merged. Datadog scans the dependencies introduced in each pull request, identifies vulnerabilities or license violations that exceed your configured severity threshold, and reports a pass or fail status to GitHub or Azure DevOps.
+Use [{{< prodname >}}PR Gates{{< /prodname >}}][16] to enforce security standards for open source libraries before changes are merged. Datadog scans the dependencies introduced in each pull request, identifies vulnerabilities or license violations that exceed your configured severity threshold, and reports a pass or fail status to GitHub or Azure DevOps.
 
-You can configure PR Gates to block on:
+You can configure {{< prodname >}}PR Gates{{< /prodname >}} to block on:
 - **Security vulnerabilities**: libraries with known CVEs above a configured severity threshold.
 - **License violations**: libraries using licenses that do not comply with your organization's policy.
 
-PR Gates marks a PR check as failed only if the developer introduces a new violation in that PR. Violations that already existed in the codebase before the PR branch was created do not cause the check to fail. By default, failed checks are informational and do not block merging, but you can configure them as blocking in GitHub or Azure DevOps to prevent merges when critical issues are detected. For setup instructions, see [Set up PR Gate Rules][17].
+{{< prodname >}}PR Gates{{< /prodname >}} marks a PR check as failed only if the developer introduces a new violation in that PR. Violations that already existed in the codebase before the PR branch was created do not cause the check to fail. By default, failed checks are informational and do not block merging, but you can configure them as blocking in GitHub or Azure DevOps to prevent merges when critical issues are detected. For setup instructions, see [Set up PR Gate Rules][17].
 
 ### Manage your library inventory
 
@@ -277,7 +277,7 @@ You can exclude paths from Static SCA analysis by configuring `ignore-paths` in 
 1. [Set up Static SCA][1] to scan your repositories.
 2. [Set up Runtime SCA][2] to detect libraries loaded by your running services.
 3. Review and triage findings in the [Vulnerabilities Explorer][11].
-4. Configure [PR Gates][16] to block risky changes before they are merged.
+4. Configure [{{< prodname >}}PR Gates{{< /prodname >}}][16] to block risky changes before they are merged.
 5. Use the [CVE Explorer][15] to proactively assess exposure to newly published vulnerabilities.
 
 ## Further Reading

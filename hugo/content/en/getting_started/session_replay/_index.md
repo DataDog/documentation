@@ -86,7 +86,7 @@ Open Session Replay's [browser developer tools][8] to explore your application's
 
 ## Pivot to correlated data
 
-Session Replay integrates with your application's metrics, traces, and logs to give you helpful context for debugging issues. Using APM and Error Tracking alongside Session Replay enables you to investigate the root cause of user-facing issues, regardless of where they originate in your stack.
+Session Replay integrates with your application's metrics, traces, and logs to give you helpful context for debugging issues. Using APM and {{< prodname >}}Error Tracking{{< /prodname >}} alongside Session Replay enables you to investigate the root cause of user-facing issues, regardless of where they originate in your stack.
 
 ### Investigating request performance with APM traces
 
@@ -102,7 +102,7 @@ Select {{< ui >}}View Trace in APM{{< /ui >}} to see more detailed information, 
 
 ### Investigating errors with Error Tracking
 
-[Error Tracking][10] is helpful in debugging issues and getting to the root cause. You can receive alerts for an error occurring, see the exact line of code that caused it, and pivot to view a user session that encountered the error.
+[{{< prodname >}}Error Tracking{{< /prodname >}}][10] is helpful in debugging issues and getting to the root cause. You can receive alerts for an error occurring, see the exact line of code that caused it, and pivot to view a user session that encountered the error.
 
 In the {{< ui >}}Errors{{< /ui >}} tab, select an error to see the time the error occurred and the message. Click {{< ui >}}Issue in error tracking{{< /ui >}} to see more detail and attributes associated with the session.
 

@@ -11,7 +11,7 @@ further_reading:
 
 Use this guide if your Amazon MWAA environment runs Airflow `2.7.2`, `2.8.1`, or `2.9.2`.
 
-For these Airflow versions, MWAA default constraints pin older `apache-airflow-providers-openlineage` and OpenLineage package versions. These versions can cause known reliability and compatibility issues, which can degrade the Data Observability experience.
+For these Airflow versions, MWAA default constraints pin older `apache-airflow-providers-openlineage` and OpenLineage package versions. These versions can cause known reliability and compatibility issues, which can degrade the {{< prodname >}}Data Observability{{< /prodname >}} experience.
 
 To use provider versions that include these fixes, update constraints and requirements together. Amazon MWAA enforces package constraints for each Airflow and Python version, so upgrading OpenLineage packages can conflict with MWAA defaults unless you provide custom constraints.
 

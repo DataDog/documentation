@@ -16,7 +16,7 @@ further_reading:
 The Log Management product supports multiple [environments and formats][1], allowing you to submit to Datadog nearly any data you choose. This article describes the main security guarantees and filtering controls available to you when submitting logs to Datadog.
 
 **Notes**:
-- Logs can be viewed in various Datadog products. All logs viewed in the Datadog UI, including logs viewed in APM trace pages, are part of the Log Management product.
+- Logs can be viewed in various Datadog products. All logs viewed in the Datadog UI, including logs viewed in APM trace pages, are part of the {{< prodname >}}Log Management{{< /prodname >}} product.
 - Datadog's tools and policies comply with PCI v4.0. For more information, see [PCI DSS Compliance][10].
 
 ## Information security
@@ -33,7 +33,7 @@ As of version 6, the Agent can be configured to obfuscate specific patterns with
 
 Alteratively, use [Sensitive Data Scanner][7] in the cloud or with the Agent to identify, tag, and redact sensitive data. In Sensitive Data Scanner, you set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data. You can choose whether to redact the data if there is a match. Datadog provides a library of predefined rules to detect sensitive information such as credit card numbers, email addresses, IP addresses, API keys, and more. You can also define your own regex-based scanning rules to identify sensitive information.
 
-Sensitive Data Scanner is also available as a [processor][8] in [Observability Pipelines][9]. With Observability Pipelines, you can collect and process logs within your own infrastructure and then route them to downstream integrations.
+Sensitive Data Scanner is also available as a [processor][8] in [{{< prodname >}}Observability Pipelines{{< /prodname >}}][9]. With Observability Pipelines, you can collect and process logs within your own infrastructure and then route them to downstream integrations.
 
 ## HIPAA-enabled customers
 

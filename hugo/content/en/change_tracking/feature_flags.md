@@ -30,7 +30,7 @@ Datadog supports tracking [Datadog Feature Flags][8] automatically, [LaunchDarkl
 
 ### Datadog Feature Flags
 
-Change tracking for [Datadog Feature Flags][8] is enabled automatically. No additional setup is required. When you update a flag's targeting, rollout, or status in an environment, Datadog emits a change tracking event that appears in your services' Change Tracking timelines.
+Change tracking for [Datadog Feature Flags][8] is enabled automatically. No additional setup is required. When you update a flag's targeting, rollout, or status in an environment, Datadog emits a change tracking event that appears in your services' {{< prodname >}}Change Tracking{{< /prodname >}} timelines.
 
 Each event includes:
 
@@ -44,14 +44,14 @@ To associate a Datadog Feature Flag change with a service, [instrument your flag
 
 ### LaunchDarkly flags
 
-To track LaunchDarkly feature flags in your services' Change Tracking timeline:
+To track LaunchDarkly feature flags in your services' {{< prodname >}}Change Tracking{{< /prodname >}} timeline:
 
 1. Enable the [Datadog integration][1] in LaunchDarkly.
 1. Go to {{< ui >}}Flags{{< /ui >}} > `<your-feature-flag-name>` in LaunchDarkly.
 1. In {{< ui >}}Datadog tags{{< /ui >}}, add a tag with key `service` and value `<your-service-name>`, matching your Datadog service name exactly.
 1. Click {{< ui >}}Save changes{{< /ui >}}.
 
-For example, to link a flag to the `payments_api` service used in the examples below, you would set the tag value to `payments_api`. After you submit the event, you can navigate to the [Catalog][7], select the `payments_api` service, and see the `fallback_payments_test` feature flag event in the Change Tracking timeline.
+For example, to link a flag to the `payments_api` service used in the examples below, you would set the tag value to `payments_api`. After you submit the event, you can navigate to the [Catalog][7], select the `payments_api` service, and see the `fallback_payments_test` feature flag event in the {{< prodname >}}Change Tracking{{< /prodname >}} timeline.
 
 ### Custom feature flags
 
@@ -177,13 +177,13 @@ statsd.gauge(
 
 ## Remediate feature flag changes with Workflow Automation
 
-When you identify that a feature flag change caused an issue, you can immediately toggle its state without leaving Datadog. This feature uses [Workflow Automation][2] to toggle LaunchDarkly flags directly from Change Tracking timelines.
+When you identify that a feature flag change caused an issue, you can immediately toggle its state without leaving Datadog. This feature uses [{{< prodname >}}Workflow Automation{{< /prodname >}}][2] to toggle LaunchDarkly flags directly from {{< prodname >}}Change Tracking{{< /prodname >}} timelines.
 
-<div class="alert alert-info">This feature requires Workflow Automation. See <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Workflow Automation pricing</a>.</div>
+<div class="alert alert-info">This feature requires {{< prodname >}}Workflow Automation{{< /prodname >}}. See <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">{{< prodname >}}Workflow Automation{{< /prodname >}} pricing</a>.</div>
 
 ### Setup
 
-To set up feature flag toggles using Workflow Automation:
+To set up feature flag toggles using {{< prodname >}}Workflow Automation{{< /prodname >}}:
 
 1. Go to [**Actions > Action Catalog > Connections**][6].
 1. Click **New Connection**.
@@ -196,7 +196,7 @@ To set up feature flag toggles using Workflow Automation:
 
 To toggle feature flags on or off from inside Datadog:
 
-1. Click a LaunchDarkly feature flag change in the Change Tracking timeline.
+1. Click a LaunchDarkly feature flag change in the {{< prodname >}}Change Tracking{{< /prodname >}} timeline.
 1. Click the {{< ui >}}Toggle Feature Flag{{< /ui >}} button.
 1. Click {{< ui >}}Run Action{{< /ui >}} to run the workflow and toggle the feature flag on or off.
 

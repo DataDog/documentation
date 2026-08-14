@@ -71,7 +71,7 @@ If Test Impact Analysis behaves unexpectedly, see the [Troubleshooting][12] page
 
 ## Set up a Datadog library
 
-Before setting up Test Impact Analysis, you must configure [Test Optimization][4] for your particular language. If you are reporting data through the Agent, use v6.40 or 7.40 and later.
+Before setting up Test Impact Analysis, you must configure [{{< prodname >}}Test Optimization{{< /prodname >}}][4] for your particular language. If you are reporting data through the Agent, use v6.40 or 7.40 and later.
 
 {{< whatsnext desc="Choose a language to set up Test Impact Analysis in Datadog:" >}}
     {{< nextlink href="intelligent_test_runner/setup/dotnet" >}}.NET{{< /nextlink >}}

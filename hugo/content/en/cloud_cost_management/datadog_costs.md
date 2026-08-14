@@ -17,20 +17,20 @@ further_reading:
 
 Daily Datadog costs give you visibility into daily Datadog spending across dashboards, notebooks, [cost monitors][1], Cloud Cost Explorer, [reports][12], [budgets][11], and [anomalies][13], along with your entire organization's cloud provider and [SaaS costs][2].
 
-You can view daily Datadog costs in [Cloud Cost Management][3](CCM), and access additional Datadog cost capabilities like [Cost Summary][5] and [Cost Chargebacks][6] on the [{{< ui >}}Plan & Usage{{< /ui >}} page][7].
+You can view daily Datadog costs in [{{< prodname >}}Cloud Cost Management{{< /prodname >}}][3](CCM), and access additional Datadog cost capabilities like [Cost Summary][5] and [Cost Chargebacks][6] on the [{{< ui >}}Plan & Usage{{< /ui >}} page][7].
 
 There is **no additional charge** for Datadog Costs, and it is available for both CCM and non-CCM customers with a direct contract through Datadog or an External Marketplace drawdown contract.
 
 ## Required permissions
 
-Viewing Datadog costs in Cloud Cost Management requires both the `billing_read` and `usage_read` permissions: `billing_read` grants access to Datadog cost data, and `usage_read` grants access to Datadog usage data. This requirement applies everywhere Datadog cost data appears, including Cloud Cost Management, dashboards, and notebooks. The `cloud_cost_management_read` permission grants access to Cloud Cost Management and to your cloud and SaaS provider costs, but it does not grant access to Datadog cost data on its own.
+Viewing Datadog costs in {{< prodname >}}Cloud Cost Management{{< /prodname >}} requires both the `billing_read` and `usage_read` permissions: `billing_read` grants access to Datadog cost data, and `usage_read` grants access to Datadog usage data. This requirement applies everywhere Datadog cost data appears, including {{< prodname >}}Cloud Cost Management{{< /prodname >}}, dashboards, and notebooks. The `cloud_cost_management_read` permission grants access to {{< prodname >}}Cloud Cost Management{{< /prodname >}} and to your cloud and SaaS provider costs, but it does not grant access to Datadog cost data on its own.
 
 | Permission | Description | Available Roles |
 |------------|-------------|-----------------|
 | `billing_read` | Read access to billing information. **Required to view Datadog cost data.** | • Datadog Admin |
 | `usage_read` | Read access to usage data. **Required to view Datadog usage data.** | • Datadog Admin |
 
-**Note**: A user with `cloud_cost_management_read` but without `billing_read` and `usage_read` can use Cloud Cost Management for their cloud and SaaS providers, but Datadog costs do not appear for them. `cloud_cost_management_read` is not required to view Datadog costs. To give a user access to Datadog cost data, assign them a role that includes the `billing_read` and `usage_read` permissions. For more information about managing roles, see [Role Based Access Control][14].
+**Note**: A user with `cloud_cost_management_read` but without `billing_read` and `usage_read` can use {{< prodname >}}Cloud Cost Management{{< /prodname >}} for their cloud and SaaS providers, but Datadog costs do not appear for them. `cloud_cost_management_read` is not required to view Datadog costs. To give a user access to Datadog cost data, assign them a role that includes the `billing_read` and `usage_read` permissions. For more information about managing roles, see [Role Based Access Control][14].
 
 ## Data availability to sub-organizations
 
@@ -38,7 +38,7 @@ Daily Datadog cost data is available to sub-organizations with the [Sub Organiza
 
 ## Visualize and break down costs
 
-Costs in Cloud Cost Management may not match the estimated month-to-date (MTD) costs on the [{{< ui >}}Plan & Usage{{< /ui >}} page][7] because Plan & Usage costs are cumulative and prorated monthly. Only Cloud Cost Management provides daily cost calculations.
+Costs in {{< prodname >}}Cloud Cost Management{{< /prodname >}} may not match the estimated month-to-date (MTD) costs on the [{{< ui >}}Plan & Usage{{< /ui >}} page][7] because Plan & Usage costs are cumulative and prorated monthly. Only Cloud Cost Management provides daily cost calculations.
 
 Datadog cost data has an expected data delay of 48 hours and is available for the past 15 months. Prior month Datadog charges are finalized around the 16th of each month. Before costs are finalized, the {{< ui >}}Usage Charges Only: Enabled{{< /ui >}} toggle represents estimated usage-based charges only. When charges are finalized, the {{< ui >}}Usage Charges Only: Disabled{{< /ui >}} toggle also includes any adjustment records. These adjustments are applied to the prior month and reflect the finalized cost amounts.
 

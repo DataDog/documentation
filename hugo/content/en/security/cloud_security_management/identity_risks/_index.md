@@ -48,7 +48,7 @@ For detailed insights and remediation help, click the {{< ui >}}Remediation{{< /
 
 - To remediate the identity risk, you can:
   - Click {{< ui >}}Fix in \<cloud provider\>{{< /ui >}} to update the resource directly in your cloud provider console.
-  - Use [Workflow Automation][3] to create automated workflows for identity risks (with or without human involvement).
+  - Use [{{< prodname >}}Workflow Automation{{< /prodname >}}][3] to create automated workflows for identity risks (with or without human involvement).
   - For supported Terraform resources:
     - Locate the file and line the identity risk is in and identify the code owners.
     - Generate a pull request in GitHub with code changes that fix the underlying misconfiguration.
@@ -72,13 +72,13 @@ In the {{< ui >}}What can this resource access?{{< /ui >}} section, you can:
 - Search for entities, or filter them by entity type or account
 - View a list of excluded policies
 - Use the {{< ui >}}All{{< /ui >}}, {{< ui >}}Direct Access{{< /ui >}}, and {{< ui >}}Indirect Access{{< /ui >}} tabs to filter which entities display in the table
-- Click the {{< ui >}}Actions{{< /ui >}} dropdown beside an entity to see it in Resource Catalog, or update its configuration in AWS IAM console
+- Click the {{< ui >}}Actions{{< /ui >}} dropdown beside an entity to see it in {{< prodname >}}Resource Catalog{{< /prodname >}}, or update its configuration in AWS IAM console
 
 In the {{< ui >}}Who can access this resource?{{< /ui >}} section, you can:
 - See the risks associated with each principal in the {{< ui >}}Risks{{< /ui >}} column, as well as the type of {{< ui >}}Path{{< /ui >}} the principal can take (direct or indirect) to access the resource
 - Filter principals by name, type, public accessibility, or administrative access
 - Use the {{< ui >}}All{{< /ui >}}, {{< ui >}}Direct Access{{< /ui >}}, and {{< ui >}}Indirect Access{{< /ui >}} tabs to filter which principals display in the table
-- Click the {{< ui >}}Actions{{< /ui >}} dropdown beside a principal to see it in Resource Catalog, or update its configuration in AWS IAM console
+- Click the {{< ui >}}Actions{{< /ui >}} dropdown beside a principal to see it in {{< prodname >}}Resource Catalog{{< /prodname >}}, or update its configuration in AWS IAM console
 
 
 ## AWS IAM Access Analyzer integration

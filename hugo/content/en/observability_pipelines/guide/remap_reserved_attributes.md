@@ -12,22 +12,22 @@ further_reading:
 
 ## Overview
 
-Observability Pipelines' processors enable you to add, edit, and remove log fields. Remapping attributes or rewriting values ensures your logs are processed and standardized properly. For the majority of processing use cases, use the Edit Fields processor to add, remap, or remove fields from your logs. For advanced use cases, use the Custom Processor to conditionally modify fields or rewrite a field's value.
+{{< prodname >}}Observability Pipelines{{< /prodname >}}' processors enable you to add, edit, and remove log fields. Remapping attributes or rewriting values ensures your logs are processed and standardized properly. For the majority of processing use cases, use the Edit Fields processor to add, remap, or remove fields from your logs. For advanced use cases, use the Custom Processor to conditionally modify fields or rewrite a field's value.
 
-In Datadog, [reserved attributes][1] are log fields that are set aside for specific processing in the platform. Reserved attributes include ` host`, `source`, `status`, `service`, `trace_id`, and `message`. Reserved attributes are applied when routing logs to the following Observability Pipelines destinations:
+In Datadog, [reserved attributes][1] are log fields that are set aside for specific processing in the platform. Reserved attributes include ` host`, `source`, `status`, `service`, `trace_id`, and `message`. Reserved attributes are applied when routing logs to the following {{< prodname >}}Observability Pipelines{{< /prodname >}} destinations:
 
 - Datadog Logs
 - Amazon S3 (for Log Archives)
 - Azure Blob Storage (for Log Archives)
 - Google Cloud Storage (for Log Archives)
 
-There are restrictions in Observability Pipelines on how you can modify reserved attributes. For example, reserved attributes cannot be renamed using the Rename Field processor, but must be remapped instead. This guide walks you through the steps to remap the value of reserved attributes.
+There are restrictions in {{< prodname >}}Observability Pipelines{{< /prodname >}} on how you can modify reserved attributes. For example, reserved attributes cannot be renamed using the Rename Field processor, but must be remapped instead. This guide walks you through the steps to remap the value of reserved attributes.
 
 If your specific setup uses a Splunk HEC source and Datadog destination, see [Remap source and service attributes when using the Splunk HEC source and Datadog destination](#remap-source-and-service-attributes-when-using-the-splunk-hec-source-and-datadog-destination).
 
 ## Remap the value of reserved attributes
 
-To change or override the value of an existing reserved attribute field, Datadog recommends two approaches using Observability Pipelines. The first uses the Edit Fields processor, and the second uses the Custom Processor.
+To change or override the value of an existing reserved attribute field, Datadog recommends two approaches using {{< prodname >}}Observability Pipelines{{< /prodname >}}. The first uses the Edit Fields processor, and the second uses the Custom Processor.
 
 ### Use an Edit Fields processor for basic field assignments
 

@@ -144,7 +144,7 @@ sudo journalctl -u datadog-fips-proxy
 
 #### journald logs configuration
 
-If you use [Log Management][3] and want to send the Datadog Agent FIPS Proxy logs to Datadog, set up the Datadog Agent to read logs from journald.
+If you use [{{< prodname >}}Log Management{{< /prodname >}}][3] and want to send the Datadog Agent FIPS Proxy logs to Datadog, set up the Datadog Agent to read logs from journald.
 
 1. In the Agent's [configuration file][2], set `logs_enabled` to `true` to activate the Logs Agent. In the [configuration directory][4], create a file at `fips_proxy.d/conf.yaml` with the following content:
 

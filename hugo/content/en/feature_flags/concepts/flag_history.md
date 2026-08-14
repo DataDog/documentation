@@ -27,7 +27,7 @@ When you view an individual feature flag, the {{< ui >}}Version history{{< /ui >
 
 ## Global flag history
 
-Navigate to {{< ui >}}Feature Flags{{< /ui >}} > [{{< ui >}}Global Flag History{{< /ui >}}][1] to show all flag changes across your organization in a single view.
+Navigate to {{< ui >}}{{< prodname >}}Feature Flags{{< /prodname >}}{{< /ui >}} > [{{< ui >}}Global Flag History{{< /ui >}}][1] to show all flag changes across your organization in a single view.
 
 - Use the {{< ui >}}Environment{{< /ui >}} filter to view changes in a particular environment or all environments.
 - Use the {{< ui >}}Feature Flag{{< /ui >}} filter to view changes for a specific flag.

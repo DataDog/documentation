@@ -11,7 +11,7 @@ Schemas help you monitor performance, usage, and changes in your data models, en
 
 ## Configuration
 
-To enable the schemas feature, add the `collect_schemas` parameter to your Database Monitoring configuration:
+To enable the schemas feature, add the `collect_schemas` parameter to your {{< prodname >}}Database Monitoring{{< /prodname >}} configuration:
 
 ```yaml
 init_config:

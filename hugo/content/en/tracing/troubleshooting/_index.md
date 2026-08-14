@@ -39,7 +39,7 @@ further_reading:
   text: Troubleshooting APM Instrumentation on a Host
 ---
 
-If you experience unexpected behavior while using Datadog APM, read the information on this page to help resolve the issue. Datadog recommends regularly updating to the latest version of the Datadog SDKs you use, as each release contains improvements and fixes. If you continue to experience issues, reach out to [Datadog support][1].
+If you experience unexpected behavior while using {{< prodname >}}Datadog APM{{< /prodname >}}, read the information on this page to help resolve the issue. Datadog recommends regularly updating to the latest version of the Datadog SDKs you use, as each release contains improvements and fixes. If you continue to experience issues, reach out to [Datadog support][1].
 
 The following components are involved in sending APM data to Datadog:
 
@@ -236,7 +236,7 @@ If the number of services exceeds what is specified in the [data volume guidelin
 
 ### Exclude environment tag values from service names
 
-By default, the environment (`env`) is the primary tag for [Datadog APM][17].
+By default, the environment (`env`) is the primary tag for [{{< prodname >}}Datadog APM{{< /prodname >}}][17].
 
 {{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-3.png" alt="Environment is the default primary tag" style="width:100%;" >}}
 

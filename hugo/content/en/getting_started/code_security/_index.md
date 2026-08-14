@@ -59,11 +59,11 @@ In [Code Security Settings][3], you can manage which repositories have PR commen
 
 ### Set up PR Gates
 
-Datadog provides [PR Gates][6] as a platform capability to help you maintain and enforce security and quality standards for changes introduced to your codebase. For more information, see [PR Gate setup][7].
+Datadog provides [{{< prodname >}}PR Gates{{< /prodname >}}][6] as a platform capability to help you maintain and enforce security and quality standards for changes introduced to your codebase. For more information, see [PR Gate setup][7].
 
 ## Prioritize vulnerabilities with runtime context
 
-Code Security offers **vulnerability-centric views** of all library and code vulnerabilities detected from both static repository scanning and runtime service detection.
+{{< prodname >}}Code Security{{< /prodname >}} offers **vulnerability-centric views** of all library and code vulnerabilities detected from both static repository scanning and runtime service detection.
 
 ### Explore vulnerabilities
 
@@ -86,7 +86,7 @@ In the side panel for a single library vulnerability in SCA, in addition to deta
 
 ### Explore results per repository
 
-Code Security also offers **repository-centric views** of static scan results, supporting granular filtering across all branches and commits for scanned repositories.
+{{< prodname >}}Code Security{{< /prodname >}} also offers **repository-centric views** of static scan results, supporting granular filtering across all branches and commits for scanned repositories.
 
 Click on a repository on the {{< ui >}}Repositories{{< /ui >}} page to access a more detailed view where you can customize the search query by branch (with the default branch appearing first) and by commit (starting with the latest).
 
@@ -134,7 +134,7 @@ You can access vulnerability reports and locate the source files where the vulne
 
 ## Notify, remediate, and report
 
-Code Security helps you set up workflows to track and manage remediation of findings:
+{{< prodname >}}Code Security{{< /prodname >}} helps you set up workflows to track and manage remediation of findings:
 
 - Set up [notification rules][9] to notify your team(s) of new findings via Slack, Jira, email, and more
 - Track vulnerabilities by service and team in the {{< ui >}}Code Security Summary{{< /ui >}} page.

@@ -17,7 +17,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -64,11 +64,11 @@ You can triage a signal by assigning it to a user for further investigation. The
     - {{< ui >}}Under Review{{< /ui >}}: The signal is actively being investigated. From the {{< ui >}}Under Review{{< /ui >}} state, you can move the signal to {{< ui >}}Archived{{< /ui >}} or {{< ui >}}Open{{< /ui >}} as needed.
     - {{< ui >}}Archived{{< /ui >}}: The detection that caused the signal has been resolved. From the {{< ui >}}Archived{{< /ui >}} state, you can move the signal back to {{< ui >}}Open{{< /ui >}} if it's within 30 days of when the signal was originally detected.
 
-**Note**: To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][9] for more information about Datadog's default roles and granular role-based access control permissions available for App and API Protection.
+**Note**: To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][9] for more information about Datadog's default roles and granular role-based access control permissions available for {{< prodname >}}App and API Protection{{< /prodname >}}.
 
 ## Declare an incident
 
-Use [Incident Management][4] to create an incident for a security signal.
+Use [{{< prodname >}}Incident Management{{< /prodname >}}][4] to create an incident for a security signal.
 
 Declare an incident if:
 
@@ -85,14 +85,14 @@ If you don't know whether you should declare an incident, notify other users and
 
 ## Run a workflow
 
-Use [Workflow Automation][5] to manually trigger a workflow for a security signal.
+Use [{{< prodname >}}Workflow Automation{{< /prodname >}}][5] to manually trigger a workflow for a security signal.
 
 1. Make sure the workflow you want to run has a security trigger.
 2. On the [Signals Explorer][2] page, open a security signal.
 3. In the {{< ui >}}Respond{{< /ui >}} section, click {{< ui >}}Run Workflow{{< /ui >}}.
 4. In {{< ui >}}Run a workflow{{< /ui >}}, select the workflow you want to run or click {{< ui >}}New Workflow{{< /ui >}}.
    - Depending on the workflow you select, you might be required to enter additional input parameters.
-   - If you selected {{< ui >}}New Workflow{{< /ui >}}, Run a Security Workflow opens. To learn more about workflows, see [Workflow Automation][5].
+   - If you selected {{< ui >}}New Workflow{{< /ui >}}, Run a Security Workflow opens. To learn more about workflows, see [{{< prodname >}}Workflow Automation{{< /prodname >}}][5].
 5. Click {{< ui >}}Run{{< /ui >}}.
 
 ## Review and remediate
@@ -101,7 +101,7 @@ Use [Workflow Automation][5] to manually trigger a workflow for a security signa
 2. In the signal details, view each of the sections, such as {{< ui >}}What Happened{{< /ui >}}, {{< ui >}}Activity Summary{{< /ui >}}, and {{< ui >}}Detection Rule{{< /ui >}}.
 3. Review the {{< ui >}}Next Steps{{< /ui >}} and take action:
     -  Click {{< ui >}}Block all Attacking IPs{{< /ui >}} (by specific duration or permanently).
-    -  Click {{< ui >}}Automated Attacker Blocking{{< /ui >}} (based on [detection][10] rules). This setting requires the App and API Protection `Protect Write` permission.
+    -  Click {{< ui >}}Automated Attacker Blocking{{< /ui >}} (based on [detection][10] rules). This setting requires the {{< prodname >}}App and API Protection{{< /prodname >}} `Protect Write` permission.
     -  Click [{{< ui >}}Block with Edge WAF{{< /ui >}}][11].
 
 ## Bulk actions
@@ -120,7 +120,7 @@ Select {{< ui >}}Remove all assignments{{< /ui >}} to reset the signal assignmen
 
 ### Case management
 
-Datadog [Case Management][6] offers a centralized place to triage, track, and remediate issues detected by Datadog and third-party integrations.
+Datadog [{{< prodname >}}Case Management{{< /prodname >}}][6] offers a centralized place to triage, track, and remediate issues detected by Datadog and third-party integrations.
 
 1. On the [Signals Explorer][2] page, select a security signal.
 2. In {{< ui >}}Bulk Actions{{< /ui >}}, select {{< ui >}}Create a case{{< /ui >}}.
@@ -128,7 +128,7 @@ Datadog [Case Management][6] offers a centralized place to triage, track, and re
 4. Enter a title and optional description.
 5. Click {{< ui >}}Create Case{{< /ui >}}.
 
-When you click {{< ui >}}Create Case{{< /ui >}}, you are directed to Case Management and the project you selected.
+When you click {{< ui >}}Create Case{{< /ui >}}, you are directed to {{< prodname >}}Case Management{{< /prodname >}} and the project you selected.
 
 ## Saved views
 

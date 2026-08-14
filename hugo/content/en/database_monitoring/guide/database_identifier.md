@@ -24,10 +24,10 @@ The default value for `database_identifier.template` is `$resolved_hostname`, wh
 
 Most users do not need to change the default value. Changing the value of `template` is primarily useful when multiple database instances are hosted on one machine.
 
-Each distinct instance identifier is billed as a host for Database Monitoring.
+Each distinct instance identifier is billed as a host for {{< prodname >}}Database Monitoring{{< /prodname >}}.
 
 ## Reported hostname
-The `reported_hostname` configuration allows users to override the automatic resolution of `host` for a single database instance. This is useful when connecting to a database through a proxy to maintain the association between the Database Monitoring database instance and any available metrics for the database host.
+The `reported_hostname` configuration allows users to override the automatic resolution of `host` for a single database instance. This is useful when connecting to a database through a proxy to maintain the association between the {{< prodname >}}Database Monitoring{{< /prodname >}} database instance and any available metrics for the database host.
 
 
 ## Examples

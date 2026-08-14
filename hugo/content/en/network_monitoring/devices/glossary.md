@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Network Device Monitoring (NDM) helps you gain insights into the health and performance of your on-prem routers, switches, and firewalls. 
+{{< prodname >}}Network Device Monitoring{{< /prodname >}} (NDM) helps you gain insights into the health and performance of your on-prem routers, switches, and firewalls. 
 For additional definitions and descriptions of important NDM terms such as _layer 2_ and _layer 3_, see the main [Glossary][1].
 
 ## Terminology

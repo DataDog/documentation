@@ -112,7 +112,7 @@ Start exploring your ingested logs in the [Log Explorer][1].
 - [Saved Views][12]: Use saved views to automatically configure your Log Explorer.
 
 
-{{< learning-center-callout header="Try Introduction to Log Management in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/intro-to-log-management">}}
+{{< learning-center-callout header="Try Introduction to {{< prodname >}}Log Management{{< /prodname >}} in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/intro-to-log-management">}}
   Learn without cost on real cloud compute capacity and a Datadog trial account. Enroll today to learn more about log collection, querying, analytics, metrics, monitoring, processing, storage, and access control.
 {{< /learning-center-callout >}}
 

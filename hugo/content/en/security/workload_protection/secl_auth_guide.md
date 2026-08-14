@@ -20,7 +20,7 @@ Datadog threat detection rules act as backend logic: they combine one or more Ag
 
 In summary, the Agent rule finds raw behavior and the detection rule turns it into a usable signal.
 
-<div class="alert alert-info">This guide describes how to create rule expressions manually, but Workload Protection also provides the <b>Assisted rule creator</b> wizard to walk you through creating the Agent and detections rules together. See <a href="/security/workload_protection/workload_security_rules/custom_rules/?tab=host#create-the-custom-agent-and-detection-rules-together">Create the custom Agent and detection rules together.</a></div>
+<div class="alert alert-info">This guide describes how to create rule expressions manually, but {{< prodname >}}Workload Protection{{< /prodname >}} also provides the <b>Assisted rule creator</b> wizard to walk you through creating the Agent and detections rules together. See <a href="/security/workload_protection/workload_security_rules/custom_rules/?tab=host#create-the-custom-agent-and-detection-rules-together">Create the custom Agent and detection rules together.</a></div>
 
 ### Agent expression syntax
 
@@ -42,7 +42,7 @@ open.file.path == "/etc/shadow" && process.file.path not in ["/usr/sbin/vipw"]
 
 Here's a summary of the process:
 
-1. Go to Workload Protection [Policies][1].
+1. Go to {{< prodname >}}Workload Protection{{< /prodname >}} [Policies][1].
 2. Click {{< ui >}}New Policy{{< /ui >}} to create a policy, or select an existing policy from the list to open it.
 3. In the policy, click {{< ui >}}Add Agent Rule{{< /ui >}}, and then click {{< ui >}}Manual rule creator{{< /ui >}}.
 4. In {{< ui >}}Define the agent expression{{< /ui >}}, enter your expression using the following steps.

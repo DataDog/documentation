@@ -134,7 +134,7 @@ Values are defined using SNMP OIDs. During collection, Datadog queries these OID
 
 This metadata enriches device details in the UI, enables filtering and grouping, and provides consistent tagging across devices.
 
-Click the pencil icon to edit a metadata field. Metadata is displayed on the [Network Device Monitoring][15] page as searchable facets and in the device side panel.
+Click the pencil icon to edit a metadata field. Metadata is displayed on the [{{< prodname >}}Network Device Monitoring{{< /prodname >}}][15] page as searchable facets and in the device side panel.
 
 {{< img src="/network_device_monitoring/profile_onboarding/ndm_advanced_options_edit.png" alt="The Advanced Options tab with Device metadata selected, showing a table of metadata field names such as Device name, Vendor, and Location, and their mapped SNMP OID values" style="width:90%;">}}
 

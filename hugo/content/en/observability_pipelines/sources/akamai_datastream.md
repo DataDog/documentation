@@ -14,11 +14,11 @@ aliases:
 
 ## Overview
 
-This document goes over how to send Akamai DataStream logs to Observability Pipelines using the HTTP Server source.
+This document goes over how to send Akamai DataStream logs to {{< prodname >}}Observability Pipelines{{< /prodname >}} using the HTTP Server source.
 
 ## Prerequisites
 
-The following are required to send Akamai DataStream logs to Observability Pipelines:
+The following are required to send Akamai DataStream logs to {{< prodname >}}Observability Pipelines{{< /prodname >}}:
 
 - An Akamai account with DataStreams 2.
 - A server or a server pool, fronted by a load balancer, that runs the Observability Pipelines Worker and allows traffic from the public internet.
@@ -46,12 +46,12 @@ The following are required to send Akamai DataStream logs to Observability Pipel
 1. In the **Destination** section:
 	1. In the **Destination** dropdown menu, select **Custom HTTPS**.
 	1. Enter a **Display Name**.
-	1. In the **Authentication** dropdown menu, select the authorization method you chose for the HTTP Server source in Observability Pipelines.
+	1. In the **Authentication** dropdown menu, select the authorization method you chose for the HTTP Server source in {{< prodname >}}Observability Pipelines{{< /prodname >}}.
 1. Enter your endpoint URL.
     - **Note**: Your endpoint URL **must** be a FQDN, not an IP address. If you enter an IP address you get an error message.
 1. Click **Validate & Save**.
 1. After the stream is activated (it takes about 20 minutes), the **Stream list** page shows the status of your stream as **Active**.
-1. View your Akamai DataStream logs in Datadog [Log Explorer][3] or the Observability Pipelines destination.
+1. View your Akamai DataStream logs in Datadog [Log Explorer][3] or the {{< prodname >}}Observability Pipelines{{< /prodname >}} destination.
 
 ## Health metrics
 

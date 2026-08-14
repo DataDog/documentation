@@ -19,9 +19,9 @@ further_reading:
 
 ## Overview
 
-Error Tracking processes errors collected from the .NET MAUI SDK.
+{{< prodname >}}Error Tracking{{< /prodname >}} processes errors collected from the .NET MAUI SDK.
 
-Enable .NET MAUI Crash Reporting and Error Tracking to get comprehensive crash reports, deobfuscated stack traces, and error trends across iOS and Android. Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
+Enable .NET MAUI Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} to get comprehensive crash reports, deobfuscated stack traces, and error trends across iOS and Android. Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ### C# error tracking
 
@@ -193,7 +193,7 @@ In a MAUI app, the native `.so` files typically come from the .NET runtime (`lib
 
 ## Test your implementation
 
-To verify your Crash Reporting and Error Tracking configuration, trigger a crash and confirm that the error appears in Datadog:
+To verify your Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} configuration, trigger a crash and confirm that the error appears in Datadog:
 
 1. Run your application on a real device or emulator (dSYMs are generated only for device builds on iOS).
 2. Execute code that throws an unhandled exception. For example:

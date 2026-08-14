@@ -30,7 +30,7 @@ algolia:
 
 Datadog Log Management collects, processes, archives, explores, and monitors your logs, so that you have visibility into your system's issues. However, it can be hard to get the right level of visibility from your logs and log throughput can vary highly, creating unexpected resource usage.
 
-Therefore, this guide walks you through various Log Management best practices and account configurations that provide you flexibility in governance, usage attribution, and budget control. More specifically, how to:
+Therefore, this guide walks you through various {{< prodname >}}Log Management{{< /prodname >}} best practices and account configurations that provide you flexibility in governance, usage attribution, and budget control. More specifically, how to:
 
 - [Set up multiple indexes to segment your logs](#set-up-multiple-indexes-for-log-segmentation)
 - [Set up multiple archives for long-term storage](#set-up-multiple-archives-for-long-term-storage)

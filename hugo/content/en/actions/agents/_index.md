@@ -19,7 +19,7 @@ further_reading:
   text: "Case Management Integration with Bits Agent Builder"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Case Management integration is in Preview" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="{{< prodname >}}Case Management{{< /prodname >}} integration is in Preview" >}}
 Automatically assign custom agents to work on your Cases.
 {{< /callout >}}
 
@@ -84,11 +84,11 @@ Tools define what actions the agent can take. Add tools from the [Action Catalog
 
 Click on any added tool to hardcode its parameters. For example, lock a Slack tool to a specific channel or a logs query to a specific service.
 
-The [Datadog MCP Server][8] is enabled by default. You can connect to any API using [custom HTTP actions][12].
+The [{{< prodname >}}Datadog MCP Server{{< /prodname >}}][8] is enabled by default. You can connect to any API using [custom HTTP actions][12].
 
 ### Automations
 
-Set up your agent to run automatically with a [schedule][13], or trigger it from a Datadog [monitor][14], [incident][15], or [security signal][16]. These automations use [Workflow Automation][9].
+Set up your agent to run automatically with a [schedule][13], or trigger it from a Datadog [monitor][14], [incident][15], or [security signal][16]. These automations use [{{< prodname >}}Workflow Automation{{< /prodname >}}][9].
 
 ## Test your agent
 
@@ -96,11 +96,11 @@ Use the built-in chat interface to test your agent. Send messages, review the ag
 
 ## Agent orchestration
 
-Use agents in [Workflow Automation][9] and [App Builder][10] through the **Run Agent** action. This lets you embed AI reasoning into any workflow:
+Use agents in [{{< prodname >}}Workflow Automation{{< /prodname >}}][9] and [App Builder][10] through the **Run Agent** action. This lets you embed AI reasoning into any workflow:
 
 {{< img src="/actions/agents/run-agent-step.png" alt="The Run Agent step configuration in a workflow, showing agent selection, run instructions, conversation ID, and output schema fields" style="width:100%;" >}}
 
-1. Open or create a workflow in [Workflow Automation][9], or open or create an app in [App Builder][10].
+1. Open or create a workflow in [{{< prodname >}}Workflow Automation{{< /prodname >}}][9], or open or create an app in [App Builder][10].
 1. Add the **Run Agent** step from the action catalog.
 1. Select which agent to run.
 1. Write the **Run Instructions**—the prompt the agent receives each time it runs. Use variables such as `{{Source.form}}` to pass in trigger data.

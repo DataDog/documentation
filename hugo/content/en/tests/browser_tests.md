@@ -16,11 +16,11 @@ further_reading:
 
 ## Overview
 
-Test Optimization integrates with Datadog [Real User Monitoring][2] to provide you with the tools for deep analysis of your browser tests.
+{{< prodname >}}Test Optimization{{< /prodname >}} integrates with Datadog [Real User Monitoring][2] to provide you with the tools for deep analysis of your browser tests.
 
 ### Compatibility
 
-To enable RUM integration ensure that [Test Optimization][1] is set up for your tests and that the application being tested is instrumented using [RUM][2].
+To enable RUM integration ensure that [{{< prodname >}}Test Optimization{{< /prodname >}}][1] is set up for your tests and that the application being tested is instrumented using [RUM][2].
 
 RUM integration is supported for Cypress browser tests and Selenium-driven browser tests.
 
@@ -54,7 +54,7 @@ If you use Cypress, Selenium, or Playwright to run your browser tests and the ap
 
 If a test ends before its RUM session flushes, the session and test can appear unlinked. To give the session more time to flush, set the `DD_CIVISIBILITY_RUM_FLUSH_WAIT_MILLIS` environment variable to a value higher than the default of 500 milliseconds.
 
-A {{< ui >}}Browser Sessions{{< /ui >}} tab appears in the Test Optimization test details side panel.
+A {{< ui >}}Browser Sessions{{< /ui >}} tab appears in the {{< prodname >}}Test Optimization{{< /prodname >}} test details side panel.
 
 {{< img src="ci/ci-browser-session-tab.png" alt="Browser Session Tab in Test Detail" style="width:100%;">}}
 

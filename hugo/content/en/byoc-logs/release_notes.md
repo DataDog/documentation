@@ -20,7 +20,7 @@ This page tracks releases of the **BYOC (Bring Your Own Cloud) Logs binary**, di
 
 ### Check your installed binary version
 
-Look at the `image` field on a BYOC Logs pod:
+Look at the `image` field on a {{< prodname >}}BYOC Logs{{< /prodname >}} pod:
 
 ```shell
 kubectl get pods -n <BYOC_LOGS_NAMESPACE> \

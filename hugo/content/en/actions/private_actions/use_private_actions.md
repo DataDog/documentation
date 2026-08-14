@@ -861,17 +861,17 @@ By default, only the runner's creator has {{< ui >}}Editor{{< /ui >}} access. Th
 Before you can use an action runner, you must pair it with one or more connections.
 
 To pair a runner to a connection:
-1. From the [Workflow Automation][7] or [App Builder][8] Connections page, click {{< ui >}}New Connection{{< /ui >}}.
+1. From the [{{< prodname >}}Workflow Automation{{< /prodname >}}][7] or [App Builder][8] Connections page, click {{< ui >}}New Connection{{< /ui >}}.
 1. Select the integration you want to connect with your private action runner. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
 1. Add a {{< ui >}}Connection Name{{< /ui >}} and select your runner from the {{< ui >}}Private Action Runner{{< /ui >}} dropdown.
 1. Add the paths to any required credential files. For more information on credentials, see [Handling Private Action Credentials][9].
 
 ## Use a private action
 
-To use a private action in your [Workflow Automation][10] workflow or [App Builder][11] app:
+To use a private action in your [{{< prodname >}}Workflow Automation{{< /prodname >}}][10] workflow or [App Builder][11] app:
 
-{{% collapse-content title="Workflow Automation" level="p" %}}
-1. From the [Workflow Automation][10] page, create a workflow, or open an existing workflow. For information on creating or editing a workflow, see [Build Workflows][12].
+{{% collapse-content title="{{< prodname >}}Workflow Automation{{< /prodname >}}" level="p" %}}
+1. From the [{{< prodname >}}Workflow Automation{{< /prodname >}}][10] page, create a workflow, or open an existing workflow. For information on creating or editing a workflow, see [Build Workflows][12].
 1. Click {{< ui >}}Add Step{{< /ui >}} and search for the private action you want to add to your workflow. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
 1. Enter a name for the step.
 1. Select a {{< ui >}}Connection{{< /ui >}} from the dropdown or click the plus ({{< ui >}}+{{< /ui >}}) icon to add a new connection. Using a private action requires a private action runner that is paired with a connection. See [Connect a runner](#connect-a-runner) for more information.

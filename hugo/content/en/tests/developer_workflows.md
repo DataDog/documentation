@@ -23,18 +23,18 @@ further_reading:
 
 ## Overview
 
-[Test Optimization][5] integrates with other developer-oriented Datadog products as well as external partners such as GitHub to streamline developer workflows with features including being able to:
+[{{< prodname >}}Test Optimization{{< /prodname >}}][5] integrates with other developer-oriented Datadog products as well as external partners such as GitHub to streamline developer workflows with features including being able to:
 
 - [Enable test summaries in GitHub pull request comments](#test-summaries-in-github-pull-requests)
 - [Create and open GitHub issues](#create-and-open-github-issues) 
 - [Create Jira issues through Case Management](#create-jira-issues)
 - [Open tests in GitHub and your IDE](#open-tests-in-github-and-your-ide)
 
-These features are available for all Test Optimization customers, and they do not require usage of the [Datadog GitHub integration][4].
+These features are available for all {{< prodname >}}Test Optimization{{< /prodname >}} customers, and they do not require usage of the [Datadog GitHub integration][4].
 
 ## Test summaries in GitHub pull requests
 
-Test Optimization integrates with GitHub to show summaries of test results directly in your pull request comments. Each summary contains an overview of the tests executions, flakiness information, and error messages for failed tests.
+{{< prodname >}}Test Optimization{{< /prodname >}} integrates with GitHub to show summaries of test results directly in your pull request comments. Each summary contains an overview of the tests executions, flakiness information, and error messages for failed tests.
 
 {{< img src="ci/github_comments_light.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
 
@@ -61,11 +61,11 @@ Comments only appear on pull requests that have run at least one test for an ena
 
 ## Create and open GitHub issues
 
-With Test Optimization, you can create and open pre-filled GitHub issues with relevant context into your tests as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Optimization can help you track and maintain accountability for test failures and flaky tests.
+With Test Optimization, you can create and open pre-filled GitHub issues with relevant context into your tests as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from {{< prodname >}}Test Optimization{{< /prodname >}} can help you track and maintain accountability for test failures and flaky tests.
 
 ### In-app entry points
 
-You can create pre-filled GitHub issues from three areas within Test Optimization:
+You can create pre-filled GitHub issues from three areas within {{< prodname >}}Test Optimization{{< /prodname >}}:
 
 - [Commit Overview page (from the {{< ui >}}Commits{{< /ui >}} table)](#commit-overview) 
 - [Branch Overview page](#branch-overview)
@@ -99,19 +99,19 @@ Below is what a pre-filled GitHub issue might look like:
 
 ## Create Jira issues
 
-With [Case Management][8], you can create and open pre-filled Jira issues that contain relevant context related to your tests, as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Optimization can help you track and maintain accountability for test failures and flaky tests. 
+With [{{< prodname >}}Case Management{{< /prodname >}}][8], you can create and open pre-filled Jira issues that contain relevant context related to your tests, as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from {{< prodname >}}Test Optimization{{< /prodname >}} can help you track and maintain accountability for test failures and flaky tests. 
 
-When you update the status of a Jira issue, the status in Case Management updates and reflects the latest case status.
+When you update the status of a Jira issue, the status in {{< prodname >}}Case Management{{< /prodname >}} updates and reflects the latest case status.
 
 ### In-app entry points
 
-After you have [set up the Jira integration][7], you can create cases from three areas within Test Optimization:
+After you have [set up the Jira integration][7], you can create cases from three areas within {{< prodname >}}Test Optimization{{< /prodname >}}:
 
 - [Commit Overview page (from the {{< ui >}}Commits{{< /ui >}} table)](#commit-overview-1) 
 - [Flaky Tests section](#branch-overview-1)
 - [Test Runs side panel](#test-runs-view)
 
-You can manually create a Jira issue from a case in [Case Management][9] by clicking `Shift + J`.
+You can manually create a Jira issue from a case in [{{< prodname >}}Case Management{{< /prodname >}}][9] by clicking `Shift + J`.
 
 ### Commit Overview
 

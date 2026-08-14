@@ -70,7 +70,7 @@ To configure the {{< ui >}}Executor{{< /ui >}} permission for the Datadog AWS In
 
 ### 2. Add the integration to an action
 
-1. In [Workflow Automation][5], click the workflow you want to edit.
+1. In [{{< prodname >}}Workflow Automation{{< /prodname >}}][5], click the workflow you want to edit.
 1. Add an AWS action, such as {{< ui >}}List ECS Clusters{{< /ui >}}.
 1. In the configuration pane, click the {{< ui >}}Connection{{< /ui >}} dropdown and scroll to {{< ui >}}Existing AWS Integrations{{< /ui >}}. 
 1. Select the AWS Account you configured in step one.

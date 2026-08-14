@@ -27,7 +27,7 @@ Real-time costs are available for:
 
 Real-Time Costs is available for Cloud Cost Management Enterprise customers.
 
-- Cloud Cost Management is enabled for the AWS account
+- {{< prodname >}}Cloud Cost Management{{< /prodname >}} is enabled for the AWS account
 - Datadog Agent is installed on each EC2 instance
 - (Optional) To see Kubernetes costs in real time, enable Datadog Container Monitoring for your clusters by following the setup guide in [Container Cost Allocation][2]
 
@@ -54,7 +54,7 @@ Similar to the existing container cost allocation, EC2 instance costs are broken
 
 ## Tags
 
-Tags for real-time costs are similar to those on other Cloud Cost Management metrics, but not identical.
+Tags for real-time costs are similar to those on other {{< prodname >}}Cloud Cost Management{{< /prodname >}} metrics, but not identical.
 - All tag values are lowercase, normalized like Metrics data
 - Tag Pipelines and Custom Allocation Rules are not applied
 - Some Cost and Usage Report (CUR) specific tags and FOCUS tags may not exist on the real-time cost metric, since real-time costs are derived primarily using usage data collected by the Datadog Agent, not the CUR

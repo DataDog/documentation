@@ -18,13 +18,13 @@ further_reading:
 
 ## Overview
 
-Datadog provides built-in [threat intelligence][1] for Cloud SIEM logs. This article explains how to extend that functionality by enriching logs with your own custom threat intelligence feeds.
+Datadog provides built-in [threat intelligence][1] for {{< prodname >}}Cloud SIEM{{< /prodname >}} logs. This article explains how to extend that functionality by enriching logs with your own custom threat intelligence feeds.
 
-Cloud SIEM supports enriching and searching logs using threat intelligence indicators of compromise (IOCs) stored in Datadog reference tables. [Reference Tables][7] allow you to combine metadata with information already in Datadog.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} supports enriching and searching logs using threat intelligence indicators of compromise (IOCs) stored in Datadog reference tables. [Reference Tables][7] allow you to combine metadata with information already in Datadog.
 
 ### How bring your own threat intelligence works
 
-When Cloud SIEM processes a log, the log's IP, domain, hash, AWS account ID, container, SSH, and user agent attributes are evaluated against reference tables that you have enabled for Cloud SIEM. The process is as follows:
+When Cloud SIEM processes a log, the log's IP, domain, hash, AWS account ID, container, SSH, and user agent attributes are evaluated against reference tables that you have enabled for {{< prodname >}}Cloud SIEM{{< /prodname >}}. The process is as follows:
 
 1. For each log, Datadog extracts the relevant attributes:
     - **IPs**: IPv4 and IPv6 addresses found anywhere in the log.
@@ -46,7 +46,7 @@ When Cloud SIEM processes a log, the log's IP, domain, hash, AWS account ID, con
     - If a match is found, Datadog enriches the log with the threat intelligence metadata from the table (for example, `category`, `source`, `first_seen`, `last_seen`, `confidence`). The enriched fields are then available for search, analytics, and detection rules.
 
 **Notes**:
-- Cloud SIEM evaluates logs in real time and uses both [Datadog-curated threat intelligence][10] and your own reference tables.
+- {{< prodname >}}Cloud SIEM{{< /prodname >}} evaluates logs in real time and uses both [Datadog-curated threat intelligence][10] and your own reference tables.
 - Reference tables are the mechanism for storing and joining your custom IoCs with logs and detections.
 
 ### Store indicators of compromise in reference tables
@@ -263,7 +263,7 @@ See the related reference table documentation for:
 
 If a reference table is not refreshing, open the reference table's settings menu and select {{< ui >}}View Change Events{{< /ui >}}.
 
-{{< ui >}}View Change Events{{< /ui >}} opens a page in {{< ui >}}Event Management{{< /ui >}} showing potential error events for the ingestion. You can also filter in {{< ui >}}Event Management{{< /ui >}} using the reference table name.
+{{< ui >}}View Change Events{{< /ui >}} opens a page in {{< ui >}}{{< prodname >}}Event Management{{< /prodname >}}{{< /ui >}} showing potential error events for the ingestion. You can also filter in {{< ui >}}{{< prodname >}}Event Management{{< /prodname >}}{{< /ui >}} using the reference table name.
 
 In Datadog Event Management, it may appear that data has been fetched from the cloud, but it can take a few additional minutes for those changes to propagate to Threat Intelligence. Other useful cloud import details to remember:
 
@@ -274,11 +274,11 @@ In case of a duplicated primary key, the rows with the duplicated key are not wr
 
 ## View threat intelligence data in Datadog
 
-To enable Cloud SIEM threat intelligence data for reference tables:
+To enable {{< prodname >}}Cloud SIEM{{< /prodname >}} threat intelligence data for reference tables:
 1. Navigate to [Threat Intelligence][3].
-1. For the table you want to see Cloud SIEM threat intelligence data for, click the dropdown menu in the {{< ui >}}Enabled{{< /ui >}} column and select {{< ui >}}Cloud SIEM{{< /ui >}}.
+1. For the table you want to see {{< prodname >}}Cloud SIEM{{< /prodname >}} threat intelligence data for, click the dropdown menu in the {{< ui >}}Enabled{{< /ui >}} column and select {{< ui >}}{{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /ui >}}.
 
-After applying a reference table to Cloud SIEM, all incoming logs are evaluated against the table using a specific Indicator of Compromise (IoC) key, such as an IP address or domain. If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, which enhances detection, investigation, and response. A threat intelligence reference table can be shared across multiple security products.
+After applying a reference table to {{< prodname >}}Cloud SIEM{{< /prodname >}}, all incoming logs are evaluated against the table using a specific Indicator of Compromise (IoC) key, such as an IP address or domain. If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, which enhances detection, investigation, and response. A threat intelligence reference table can be shared across multiple security products.
 
 You can view your threat intelligence data in the [IOC Explorer][11].
 

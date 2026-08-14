@@ -34,7 +34,7 @@ Saved filters contain only attribute conditions and cannot be nested or referenc
 
 ## Create a saved filter
 
-1. In **Feature Flags**, go to **Settings > Saved Filters** and click **New Saved Filter**.
+1. In **{{< prodname >}}Feature Flags{{< /prodname >}}**, go to **Settings > Saved Filters** and click **New Saved Filter**.
 2. Enter a **Name** and an optional **Description**.
 3. Choose a **Filter type**:
    - **Saved Rule**: Build your conditions in the rule editor. Each condition uses an attribute from your SDK's [evaluation context][1], an operator, and one or more values.
@@ -49,7 +49,7 @@ The saved filter is available to apply to any flag in your organization.
 
 After you create a saved filter, reference it when you configure a flag's targeting rules:
 
-1. Navigate to **Feature Flags** and select your flag.
+1. Navigate to **{{< prodname >}}Feature Flags{{< /prodname >}}** and select your flag.
 2. Select the environment whose rules you want to modify.
 3. Add or edit a targeting rule, then click **Add > Add Saved Filter**.
 4. Select the saved filter you want to apply.

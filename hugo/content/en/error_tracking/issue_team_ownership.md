@@ -56,7 +56,7 @@ Your team owns an issue if it is the code owner of the top-level stack frame of 
 
 ### Setup
 
-1. Ensure [Source Code Integration][1] is set up.
+1. Ensure [{{< prodname >}}Source Code Integration{{< /prodname >}}][1] is set up.
 2. Install [the GitHub integration][2].
 3. Make sure the GitHub integration has all requested permissions (Contents and Members).
 4. Create a valid `CODEOWNERS` file in your repository following [GitHub's CODEOWNERS standards][3].

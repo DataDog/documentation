@@ -95,7 +95,7 @@ Artifacts are browser test screenshots, snapshots, errors, and resources.
 
 ## Testing accounts
 
-It is strongly recommended to leverage accounts dedicated to testing for your Synthetics tests.
+It is strongly recommended to leverage accounts dedicated to testing for your {{< prodname >}}Synthetics{{< /prodname >}} tests.
 
 ## Storing secrets
 

@@ -58,7 +58,7 @@ In the Databricks workspace:
     GRANT CREATE TABLE ON SCHEMA <CATALOG_NAME>.<SCHEMA_NAME> TO <USER>;
     ```
 
-1. Run the following command to create the table that Observability Pipelines writes log data to:
+1. Run the following command to create the table that {{< prodname >}}Observability Pipelines{{< /prodname >}} writes log data to:
     ```sql
     CREATE TABLE <CATALOG_NAME>.<SCHEMA_NAME>.<TABLE_NAME> (
       host STRING,

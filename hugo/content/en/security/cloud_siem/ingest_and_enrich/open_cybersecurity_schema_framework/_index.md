@@ -20,13 +20,13 @@ further_reading:
 
 ## Overview
 
-Cloud SIEM collects and analyzes data from a wide range of sources such as cloud services, firewalls, networks, applications, and IT systems. Since these services emit data in different formats, it often requires significant effort to normalize and prepare logs before meaningful threat analysis can occur.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} collects and analyzes data from a wide range of sources such as cloud services, firewalls, networks, applications, and IT systems. Since these services emit data in different formats, it often requires significant effort to normalize and prepare logs before meaningful threat analysis can occur.
 
 The Open Cybersecurity Schema Framework (OCSF) is an open-source, vendor-neutral standard for organizing and classifying security event data. It is designed to simplify and unify how security logs are structured across platforms and products, enabling consistent threat detection and faster investigation.
 
-At Datadog, OCSF support is integrated directly into Datadog Cloud SIEM so you get standardized, normalized log data without manual configuration. Incoming security logs are automatically enriched with OCSF-compliant attributes at ingestion time through out-of-the-box (OOTB) pipelines. All OCSF values are contained in the dedicated `OCSF` attribute, and are in addition to the other processes that transform and enrich logs. See [Supported out-of-the-box OCSF pipelines](#supported-out-of-the-box-ocsf-pipelines) to see a list of Log Management integrations that support OCSF. 
+At Datadog, OCSF support is integrated directly into Datadog Cloud SIEM so you get standardized, normalized log data without manual configuration. Incoming security logs are automatically enriched with OCSF-compliant attributes at ingestion time through out-of-the-box (OOTB) pipelines. All OCSF values are contained in the dedicated `OCSF` attribute, and are in addition to the other processes that transform and enrich logs. See [Supported out-of-the-box OCSF pipelines](#supported-out-of-the-box-ocsf-pipelines) to see a list of {{< prodname >}}Log Management{{< /prodname >}} integrations that support OCSF. 
 
-OCSF integration in Datadog's Cloud SIEM enables:
+OCSF integration in Datadog's {{< prodname >}}Cloud SIEM{{< /prodname >}} enables:
 
 * **Simplified detection rules**: A unified attribute structure means detection logic can be written once and applied across multiple sources.
 * **Streamlined investigations**: Analysts no longer need to remember source-specific formats because one schema enables a single-query triage across providers.
@@ -67,13 +67,13 @@ You can optionally add extensions, such as new attributes, objects, categories, 
 
 ## Supported out-of-the-box OCSF pipelines
 
-The following Log Management integrations support out-of-the-box OCSF pipelines:
+The following {{< prodname >}}Log Management{{< /prodname >}} integrations support out-of-the-box OCSF pipelines:
 
 {{% cloud-siem-supported-ocsf %}}
 
 ## View Security Pipelines \- OCSF
 
-Cloud SIEM OCSF remaps log data in Log Management's [integration pipelines][8]. See [Supported out-of-the-box OCSF pipelines](#supported-out-of-the-box-ocsf-pipelines) for details.
+Cloud SIEM OCSF remaps log data in {{< prodname >}}Log Management{{< /prodname >}}'s [integration pipelines][8]. See [Supported out-of-the-box OCSF pipelines](#supported-out-of-the-box-ocsf-pipelines) for details.
 
 To view the Integration Pipeline Library for a source:
 

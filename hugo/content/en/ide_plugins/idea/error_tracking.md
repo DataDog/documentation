@@ -13,17 +13,17 @@ further_reading:
 
 <div class="alert alert-info">This feature is in limited support.</div>
 
-The [Error Tracking][1] integration in the Datadog plugin for JetBrains IDEs helps you find and fix runtime errors from production, without leaving your IDE.
+The [{{< prodname >}}Error Tracking{{< /prodname >}}][1] integration in the Datadog plugin for JetBrains IDEs helps you find and fix runtime errors from production, without leaving your IDE.
 
 ## Source editor
 Errors are highlighted in the source editor with a distinctive icon in the gutter, for lines that appear in error stack frames (lines of code on the execution path that led to an observed runtime error). Click the icon to select an error and display it in the Datadog tool window.
 
 {{< img src="/ide_plugins/idea/error_tracking/editor.png" alt="Error Tracking in the source editor" style="width:100%;" >}}
 
-Errors shown in the editor are filtered by controls on the Error Tracking tab, described in the next section.
+Errors shown in the editor are filtered by controls on the {{< prodname >}}Error Tracking{{< /prodname >}} tab, described in the next section.
 
 ## Error Tracking tab
-Use the Error Tracking tab in the tool window to filter, sort and inspect errors, view stack traces, navigate to relevant locations in your source code, attempt fixes with your local agent, or navigate to Datadog to continue your investigations.
+Use the {{< prodname >}}Error Tracking{{< /prodname >}} tab in the tool window to filter, sort and inspect errors, view stack traces, navigate to relevant locations in your source code, attempt fixes with your local agent, or navigate to Datadog to continue your investigations.
 
 {{< img src="/ide_plugins/idea/error_tracking/error_tracking_toolwindow.png" alt="JetBrains Error Tracking tool window" style="width:100%;" >}}
 

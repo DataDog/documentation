@@ -702,7 +702,7 @@ To send telemetry data to Datadog, the following components are defined in the c
 
 ##### Datadog connector
 
-The [Datadog connector][6] computes Datadog APM trace metrics.
+The [Datadog connector][6] computes {{< prodname >}}Datadog APM{{< /prodname >}} trace metrics.
 
 {{< code-block lang="yaml" filename="otel-config.yaml" disable_copy="false" collapsible="true" >}}
 connectors:

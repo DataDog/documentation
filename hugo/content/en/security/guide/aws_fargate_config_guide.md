@@ -10,7 +10,7 @@ further_reading:
   text: "Get real-time threat detection for AWS Fargate ECS and EKS environments with Datadog Cloud Security"
 ---
 
-This guide walks you through configuring [Cloud Security][3], [Software Composition Analysis (SCA)][22], [Threat Detection and Protection (AAP)][4], and [Cloud SIEM][5] on AWS Fargate.
+This guide walks you through configuring [{{< prodname >}}Cloud Security{{< /prodname >}}][3], [Software Composition Analysis (SCA)][22], [Threat Detection and Protection (AAP)][4], and [{{< prodname >}}Cloud SIEM{{< /prodname >}}][5] on AWS Fargate.
 
 {{< img src="security/datadog_security_coverage_aws_fargate2.png" alt="Flow chart showing how Cloud Security, AAP, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
 
@@ -32,14 +32,14 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
     <tr>
         <td>Fargate Application</td>
         <td>Application Performance Monitoring</td>
-        <td>Software Composition Analysis (SCA) and Code Security</td>
+        <td>Software Composition Analysis (SCA) and {{< prodname >}}Code Security{{< /prodname >}}</td>
         <td>AAP - Threat Detection and Protection</td>
     </tr>
     <tr>
         <td>Fargate Infrastructure</td>
-        <td>Infrastructure Monitoring</td>
-        <td>Cloud Security</td>
-        <td>Workload Protection</td>
+        <td>{{< prodname >}}Infrastructure Monitoring{{< /prodname >}}</td>
+        <td>{{< prodname >}}Cloud Security{{< /prodname >}}</td>
+        <td>{{< prodname >}}Workload Protection{{< /prodname >}}</td>
     </tr>
 </table>
 
@@ -54,21 +54,21 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
     </thead>
     <tr>
         <td>AWS IAM roles and policies</td>
-        <td>Log Management</td>
-        <td>Cloud Security</td>
-        <td>Cloud SIEM</td>
+        <td>{{< prodname >}}Log Management{{< /prodname >}}</td>
+        <td>{{< prodname >}}Cloud Security{{< /prodname >}}</td>
+        <td>{{< prodname >}}Cloud SIEM{{< /prodname >}}</td>
     </tr>
     <tr>
         <td>AWS databases</td>
-        <td>Log Management</td>
-        <td>Cloud Security</td>
-        <td>Cloud SIEM</td>
+        <td>{{< prodname >}}Log Management{{< /prodname >}}</td>
+        <td>{{< prodname >}}Cloud Security{{< /prodname >}}</td>
+        <td>{{< prodname >}}Cloud SIEM{{< /prodname >}}</td>
     </tr>
     <tr>
         <td>AWS S3 buckets</td>
-        <td>Log Management</td>
-        <td>Cloud Security</td>
-        <td>Cloud SIEM</td>
+        <td>{{< prodname >}}Log Management{{< /prodname >}}</td>
+        <td>{{< prodname >}}Cloud Security{{< /prodname >}}</td>
+        <td>{{< prodname >}}Cloud SIEM{{< /prodname >}}</td>
     </tr>
 </table>
 
@@ -80,7 +80,7 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
 - Access to AWS Management Console
 - AWS Fargate ECS or EKS workloads
 
-<div class="alert alert-info">For additional performance and reliability insights, Datadog recommends enabling Infrastructure Monitoring with Cloud Security.</div>
+<div class="alert alert-info">For additional performance and reliability insights, Datadog recommends enabling {{< prodname >}}Infrastructure Monitoring{{< /prodname >}} with {{< prodname >}}Cloud Security{{< /prodname >}}.</div>
 
 ### Images
 
@@ -267,7 +267,7 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 
 #### Deploy the Agent as a sidecar
 
-The following manifest represents the minimum configuration required to deploy your application with the Datadog Agent as a sidecar with Workload Protection enabled:
+The following manifest represents the minimum configuration required to deploy your application with the Datadog Agent as a sidecar with {{< prodname >}}Workload Protection{{< /prodname >}} enabled:
 
 ```yaml
 apiVersion: apps/v1
@@ -342,9 +342,9 @@ spec:
 
 ### Verify that the Agent is sending events to Cloud Security
 
-When you enable Cloud Security on AWS Fargate ECS or EKS, the Agent sends an agent event to Datadog to confirm that the default ruleset has been successfully deployed. To view the agent event, navigate to the [Agent Events][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
+When you enable {{< prodname >}}Cloud Security{{< /prodname >}} on AWS Fargate ECS or EKS, the Agent sends an agent event to Datadog to confirm that the default ruleset has been successfully deployed. To view the agent event, navigate to the [Agent Events][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
 
-<div class="alert alert-info">You can also verify the Agent is sending events to Cloud Security by manually triggering an AWS Fargate security signal.</div>
+<div class="alert alert-info">You can also verify the Agent is sending events to {{< prodname >}}Cloud Security{{< /prodname >}} by manually triggering an AWS Fargate security signal.</div>
 
 In the task definition, replace the "workload" container with the following:
 
@@ -367,9 +367,9 @@ In the task definition, replace the "workload" container with the following:
 ### Prerequisites
 
 - The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment
-- Datadog APM is configured for your application or service
+- {{< prodname >}}Datadog APM{{< /prodname >}} is configured for your application or service
 
-<div class="alert alert-info"> For additional performance and reliability insights, Datadog recommends enabling Application Performance Monitoring with App and API Protection.</div>
+<div class="alert alert-info"> For additional performance and reliability insights, Datadog recommends enabling Application Performance Monitoring with {{< prodname >}}App and API Protection{{< /prodname >}}.</div>
 
 ### Installation
 

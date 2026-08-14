@@ -33,7 +33,7 @@ Monitor your Datadog telemetry and use [out-of-the-box detection rules](#out-of-
 
 ### Out-of-the-box detection rules
 
-Cloud SIEM provides you with an extensive list of [OOTB detection rules][1]. After you have enabled and configured Cloud SIEM content packs, OOTB detection rules automatically begin analyzing your logs, Audit Trail events, and events from Event Management.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} provides you with an extensive list of [OOTB detection rules][1]. After you have enabled and configured {{< prodname >}}Cloud SIEM{{< /prodname >}} content packs, OOTB detection rules automatically begin analyzing your logs, Audit Trail events, and events from {{< prodname >}}Event Management{{< /prodname >}}.
 
 You can edit OOTB detection rules and do the following:
 
@@ -76,7 +76,7 @@ See [Critical Assets][6] for more information.
 
 ## MITRE ATT&CK Map
 
-After setting up your detection rules, use the Cloud SIEM [MITRE ATT&CK Map][5] to explore and visualize your rules against the MITRE ATT&CK framework so you have visibility into attacker techniques.
+After setting up your detection rules, use the {{< prodname >}}Cloud SIEM{{< /prodname >}} [MITRE ATT&CK Map][5] to explore and visualize your rules against the MITRE ATT&CK framework so you have visibility into attacker techniques.
 
 ## Further reading
 

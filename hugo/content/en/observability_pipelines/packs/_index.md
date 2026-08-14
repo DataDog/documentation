@@ -17,7 +17,7 @@ further_reading:
 
 {{< img src="observability_pipelines/packs/packs.png" alt="The packs section of Observability Pipelines" style="width:100%;" >}}
 
-When setting up a pipeline to send logs from a specific source to Observability Pipelines, you often need to decide how to process and manage those logs.
+When setting up a pipeline to send logs from a specific source to {{< prodname >}}Observability Pipelines{{< /prodname >}}, you often need to decide how to process and manage those logs.
 
 Questions such as the following might come up:
 

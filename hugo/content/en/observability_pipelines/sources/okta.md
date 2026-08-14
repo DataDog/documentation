@@ -12,11 +12,11 @@ products:
 
 ## Overview
 
-This document goes over how to send Okta logs to Observability Pipelines using Amazon EventBridge and the Observability Pipelines HTTP Server source.
+This document goes over how to send Okta logs to {{< prodname >}}Observability Pipelines{{< /prodname >}} using Amazon EventBridge and the Observability Pipelines HTTP Server source.
 
 ## Prerequisites
 
-The following are required to send Okta logs to Observability Pipelines using Amazon EventBridge:
+The following are required to send Okta logs to {{< prodname >}}Observability Pipelines{{< /prodname >}} using Amazon EventBridge:
 
 - A registered domain.
 - A TLS certificate that matches the domain.
@@ -25,7 +25,7 @@ The following are required to send Okta logs to Observability Pipelines using Am
 
 ### Set up the pipeline components
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][1].
 1. Select a log template to create a pipeline.
 1. Select the HTTP Server source.
 1. If you are using Secrets Management, enter the identifier for the HTTP/S Server address key. See [Secret defaults][2] for the defaults used.

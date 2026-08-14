@@ -53,10 +53,10 @@ Both monitors are grouped by `kafka_cluster_id` so each cluster alerts its own o
 
 When a monitor triggers, Datadog can take action automatically rather than waiting for a human to triage. Two options:
 
-- **Workflow Automation** — Build a Datadog Workflow that chains pre-built actions across your infrastructure and tools (PagerDuty, Slack, Jira, AWS, Kubernetes, and so on), and run it from a monitor trigger. Best for the "trigger a runbook" patterns below. See [Trigger a workflow from a monitor][3].
+- **{{< prodname >}}Workflow Automation{{< /prodname >}}** — Build a Datadog Workflow that chains pre-built actions across your infrastructure and tools (PagerDuty, Slack, Jira, AWS, Kubernetes, and so on), and run it from a monitor trigger. Best for the "trigger a runbook" patterns below. See [Trigger a workflow from a monitor][3].
 - **Webhooks** — Call any HTTP endpoint when a monitor triggers, recovers, or changes state. Best when the action lives in a system outside Datadog and you already have an HTTPS callback. See [Webhooks integration][2].
 
-Either option can be added to a monitor by mentioning it in the notification message: `@workflow-<name>` for Workflow Automation, `@webhook-<name>` for a webhook. Monitor metadata is available as template variables (`{{topic.name}}`, `{{kafka_cluster_id.name}}`, `{{value}}`, etc.) and can be passed to the workflow or webhook payload.
+Either option can be added to a monitor by mentioning it in the notification message: `@workflow-<name>` for {{< prodname >}}Workflow Automation{{< /prodname >}}, `@webhook-<name>` for a webhook. Monitor metadata is available as template variables (`{{topic.name}}`, `{{kafka_cluster_id.name}}`, `{{value}}`, etc.) and can be passed to the workflow or webhook payload.
 
 The following examples show conditions where automation is particularly valuable in a Kafka pipeline.
 
@@ -64,7 +64,7 @@ The following examples show conditions where automation is particularly valuable
 
 Signals that a consumer group is falling behind its producer, with messages accumulating in the topic faster than they can be read.
 
-**Potential action:** Run a workflow that scales the consumer group's replica count (for example, with the Kubernetes or AWS actions in Workflow Automation), or call a CI/CD or autoscaler webhook.
+**Potential action:** Run a workflow that scales the consumer group's replica count (for example, with the Kubernetes or AWS actions in {{< prodname >}}Workflow Automation{{< /prodname >}}), or call a CI/CD or autoscaler webhook.
 
 ### Lag approaching retention limit
 

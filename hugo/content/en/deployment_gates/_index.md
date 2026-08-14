@@ -19,13 +19,13 @@ algolia:
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
-Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
+{{< prodname >}}Deployment Gates{{< /prodname >}} are in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
-Deployment Gates allow you to reduce the likelihood and impact of incidents caused by deployments.
+{{< prodname >}}Deployment Gates{{< /prodname >}} allow you to reduce the likelihood and impact of incidents caused by deployments.
 
-When performing a production rollout, you can use Deployment Gates to evaluate the impact of the new changes by using [monitors][1] and APM anomalies.
-When anomalies or performance regressions are detected, you can automatically halt the release, preventing unstable code from reaching a wider user base. Additionally, you can then use Deployment Gates as the entry-point to investigate the problem.
+When performing a production rollout, you can use {{< prodname >}}Deployment Gates{{< /prodname >}} to evaluate the impact of the new changes by using [monitors][1] and APM anomalies.
+When anomalies or performance regressions are detected, you can automatically halt the release, preventing unstable code from reaching a wider user base. Additionally, you can then use {{< prodname >}}Deployment Gates{{< /prodname >}} as the entry-point to investigate the problem.
 
 For setup instructions, see [Set up Deployment Gates][2]. After the setup is completed, you can track and analyze gate evaluations through the [Deployment Gates Evaluations][3] page:
 

@@ -107,7 +107,7 @@ Usually, the default APM setup is sufficient for most use cases, but if, for exa
 
 ### Log Management
 
-Log Management capabilities allow you and your teams to diagnose and fix your infrastructure issues. [Logging without Limits™][14] enables you to create tunable log collection patterns and extract information from your log data into custom metrics. You can also receive alerts about critical errors in your logs, without needing to index your logs.
+{{< prodname >}}Log Management{{< /prodname >}} capabilities allow you and your teams to diagnose and fix your infrastructure issues. [Logging without Limits™][14] enables you to create tunable log collection patterns and extract information from your log data into custom metrics. You can also receive alerts about critical errors in your logs, without needing to index your logs.
 
 {{< img src="/administrators_guide/logging_without_limits.png" alt="Logging without Limits diagram" style="width:90%;">}}
 
@@ -199,7 +199,7 @@ There are different types of integrations in Datadog, and the order in which the
 
 ## Additional resources
 
-You've achieved some important wins and adopted best practices with APM, RUM, Synthetic Monitoring and Log Management. Some additional resources that are important when planning your installation phase are outlined below.
+You've achieved some important wins and adopted best practices with APM, RUM, Synthetic Monitoring and {{< prodname >}}Log Management{{< /prodname >}}. Some additional resources that are important when planning your installation phase are outlined below.
 
 ### Live processes 
 
@@ -231,9 +231,9 @@ Refer to the [Endpoints list][33] to categorize, monitor performance and reliabi
 
 ### Resource Catalog
 
-Use [Resource Catalog][46] to view key resource information such as metadata, ownership, configurations, relationships between assets, and active security risks. It is the central hub of all of your infrastructure resources. Resource Catalog offers visibility into infrastructure compliance, promotes good tagging practices, reduces application risks by identifying security vulnerabilities, provides engineering leadership with a high-level view of security practices, and allows resource export for record-keeping or auditing.
+Use [{{< prodname >}}Resource Catalog{{< /prodname >}}][46] to view key resource information such as metadata, ownership, configurations, relationships between assets, and active security risks. It is the central hub of all of your infrastructure resources. {{< prodname >}}Resource Catalog{{< /prodname >}} offers visibility into infrastructure compliance, promotes good tagging practices, reduces application risks by identifying security vulnerabilities, provides engineering leadership with a high-level view of security practices, and allows resource export for record-keeping or auditing.
 
-You can use Resource Catalog in a variety of contexts, including:
+You can use {{< prodname >}}Resource Catalog{{< /prodname >}} in a variety of contexts, including:
 
 - Understanding the team ownership of resources and finding orphaned ones to clean up.
 - Planning upgrades of resources that are running deprecated versions.
@@ -242,11 +242,11 @@ You can use Resource Catalog in a variety of contexts, including:
 
 ### Event Management 
 
-Without any additional setup, [Event management][31] can show third-party event statuses, events generated from the Agent and installed integrations. Datadog Event Management centralizes third-party events, such as alerts and change events. Datadog also automatically creates events from various products including monitors and Error Tracking. You can also use Event Management to send monitor alerts and notifications based on event queries.
+Without any additional setup, [Event management][31] can show third-party event statuses, events generated from the Agent and installed integrations. Datadog Event Management centralizes third-party events, such as alerts and change events. Datadog also automatically creates events from various products including monitors and {{< prodname >}}Error Tracking{{< /prodname >}}. You can also use {{< prodname >}}Event Management{{< /prodname >}} to send monitor alerts and notifications based on event queries.
 
 ### Error Tracking 
 
-See errors where they happen with Datadog's [Error Tracking][32]. Error Tracking can ingest errors from APM, Log Management, and Real User Monitoring to debug issues faster.
+See errors where they happen with Datadog's [{{< prodname >}}Error Tracking{{< /prodname >}}][32]. {{< prodname >}}Error Tracking{{< /prodname >}} can ingest errors from APM, {{< prodname >}}Log Management{{< /prodname >}}, and Real User Monitoring to debug issues faster.
 
 ### Fleet Automation  
 

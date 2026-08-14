@@ -166,7 +166,7 @@ spec:
 
 `groupRetentionDuration`
 : _string_
-<br/>The time span after which groups with missing data are dropped from the monitor state. The minimum value is one hour, and the maximum value is 72 hours. Example values are: `60m`, `1h`, and `2d`. This option is only available for APM Trace Analytics, Audit Trail, CI, Error Tracking, Event, Logs, and RUM monitors.
+<br/>The time span after which groups with missing data are dropped from the monitor state. The minimum value is one hour, and the maximum value is 72 hours. Example values are: `60m`, `1h`, and `2d`. This option is only available for APM Trace Analytics, Audit Trail, CI, {{< prodname >}}Error Tracking{{< /prodname >}}, Event, Logs, and RUM monitors.
 
 `groupbySimpleMonitor`
 : _boolean_
@@ -211,7 +211,7 @@ spec:
 
 `onMissingData`
 : _enum_
-<br/>Controls how groups or monitors are treated if an evaluation does not return any data points. The default option results in different behavior depending on the monitor query type. For monitors using Count queries, an empty monitor evaluation is treated as 0 and is compared to the threshold conditions. For monitors using any query type other than Count, for example Gauge, Measure, or Rate, the monitor shows the last known status. This option is only available for APM Trace Analytics, Audit Trail, CI, Error Tracking, Event, Logs, and RUM monitors. 
+<br/>Controls how groups or monitors are treated if an evaluation does not return any data points. The default option results in different behavior depending on the monitor query type. For monitors using Count queries, an empty monitor evaluation is treated as 0 and is compared to the threshold conditions. For monitors using any query type other than Count, for example Gauge, Measure, or Rate, the monitor shows the last known status. This option is only available for APM Trace Analytics, Audit Trail, CI, {{< prodname >}}Error Tracking{{< /prodname >}}, Event, Logs, and RUM monitors. 
 <br/>Allowed enum values: `default`, `show_no_data`, `show_and_notify_no_data`, `resolve`
 
 `renotifyInterval`

@@ -27,7 +27,7 @@ Each automation targets a single recommendation type and includes the following:
 
 Recommendations acted on by an automation move to {{< ui >}}Completed{{< /ui >}} automatically and contribute to realized savings on the [Cloud Cost Recommendations][1] page.
 
-Cost Optimization Automation is different from the 1-click Workflow Automation actions described in [Recommendation action-taking][2]. 1-click actions execute a single change on demand from the recommendation side panel. Automations execute on a recurring schedule and act on every matching resource in scope.
+Cost Optimization Automation is different from the 1-click {{< prodname >}}Workflow Automation{{< /prodname >}} actions described in [Recommendation action-taking][2]. 1-click actions execute a single change on demand from the recommendation side panel. Automations execute on a recurring schedule and act on every matching resource in scope.
 
 **Note**: Cost Optimization Automation uses Datadog Workflows and incurs additional costs. For detailed pricing information, see the [Workflow Automation pricing page][3].
 
@@ -89,7 +89,7 @@ Open an automation and select the {{< ui >}}Activity{{< /ui >}} tab to see past 
 - Execution time and status (success, failure, or pending approval)
 - The resources acted on
 - Estimated savings realized by the run
-- A link to the underlying Workflow Automation execution
+- A link to the underlying {{< prodname >}}Workflow Automation{{< /prodname >}} execution
 
 Use the filters at the top of the {{< ui >}}Activity{{< /ui >}} view to find executions by status, recommendation type, or date range.
 

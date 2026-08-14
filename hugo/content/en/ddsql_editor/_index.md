@@ -32,7 +32,7 @@ With [DDSQL Editor][1], you can get deeper visibility into your telemetry by que
 
 You can also export the results of a DDSQL query to visualize in a Dashboard or Notebook or to automate in a Datadog Workflow through [DDSQL Action](#save-and-share-queries).
 
-You can run DDSQL queries from AI agents using the [Datadog MCP Server][9] `ddsql` toolset (Preview).
+You can run DDSQL queries from AI agents using the [{{< prodname >}}Datadog MCP Server{{< /prodname >}}][9] `ddsql` toolset (Preview).
 
 {{< img src="/ddsql_editor/query-results-avg-cpu-usage-by-host.png" alt="The result of a SQL query showing average CPU usage by host on the DDSQL page in Datadog" style="width:100%;" >}}
 
@@ -75,7 +75,7 @@ Export the results of a saved query to:
   - [Create a custom metric from a DDSQL query](https://app.datadoghq.com/workflow/blueprints/create-a-metric-from-a-ddsql-query)
   - [Programmatically export the results of a DDSQL query](https://app.datadoghq.com/workflow/blueprints/export-ebs-volumes-not-in-ddsql-as-s3-csv)
   - [Schedule a Slack message for checking compliance of resources](https://app.datadoghq.com/workflow/blueprints/idle-compute-check-via-ddsql-with-slack-updates)
-- Alert on a DDSQL query in Preview (Logs, Metrics, RUM, Spans, and Product Analytics only; [contact support][8] for access)
+- Alert on a DDSQL query in Preview (Logs, Metrics, RUM, Spans, and {{< prodname >}}Product Analytics{{< /prodname >}} only; [contact support][8] for access)
 
 {{< img src="/ddsql_editor/queries-tab-recent-queries.png" alt="Side panel showing the Queries tab with a list of saved and recent queries in the DDSQL Editor" style="width:70%;" >}}
 

@@ -40,7 +40,7 @@ When Datadog resolves a code location for a finding, the finding side panel show
 To see code locations on your misconfiguration findings, you need:
 
 - [Cloud Security Misconfigurations][1] enabled for the cloud accounts you want to scan, so that findings are generated.
-- [Source Code Integration][2] connected to the repositories that contain your IaC. Datadog indexes supported IaC files in your connected repositories to determine where each resource is defined.
+- [{{< prodname >}}Source Code Integration{{< /prodname >}}][2] connected to the repositories that contain your IaC. Datadog indexes supported IaC files in your connected repositories to determine where each resource is defined.
 
 After both are configured, Datadog resolves code locations for supported resources automatically. Coverage increases as you connect more of the repositories that manage your cloud infrastructure.
 
@@ -72,9 +72,9 @@ You can narrow the results further. For example:
 
 After you locate the code that defines a misconfigured resource, you can remediate it in several ways:
 
-- **Remediate with AI**: Click **Remediate with AI** on the finding to hand off the fix to [Bits Code][7], or to copy a fix prompt into the coding agent you already use. See [Remediate with AI][8].
+- **Remediate with AI**: Click **Remediate with AI** on the finding to hand off the fix to [{{< prodname >}}Bits Code{{< /prodname >}}][7], or to copy a fix prompt into the coding agent you already use. See [Remediate with AI][8].
 - **Route to the right team**: Use the code owners shown on the finding to assign the fix to the team that owns the file, or [create a ticket][4] in your ticketing tool.
-- **Automate remediation**: Use [Workflow Automation][5] to build automated remediation workflows, with or without human approval.
+- **Automate remediation**: Use [{{< prodname >}}Workflow Automation{{< /prodname >}}][5] to build automated remediation workflows, with or without human approval.
 
 If a misconfiguration doesn't apply to your environment or is an accepted risk, you can [mute it][6] instead.
 

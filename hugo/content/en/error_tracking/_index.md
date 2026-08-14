@@ -32,8 +32,8 @@ Developers can triage and fix issues completely within IntelliJ IDEA, PyCharm, W
 
 ## Getting started
 
-- Take a tour of key Error Tracking features in the [Error Tracking Explorer][5] documentation.
-- Use the product-specific links in the next section to set up Error Tracking for a particular error source.
+- Take a tour of key {{< prodname >}}Error Tracking{{< /prodname >}} features in the [Error Tracking Explorer][5] documentation.
+- Use the product-specific links in the next section to set up {{< prodname >}}Error Tracking{{< /prodname >}} for a particular error source.
 
 ## Setup
 {{< whatsnext desc="To get started with Datadog Error Tracking, choose one of the following setup options:" >}}
@@ -50,14 +50,14 @@ Developers can triage and fix issues completely within IntelliJ IDEA, PyCharm, W
 
 ## Supported error sources
 
-Error Tracking captures and processes errors across your web, mobile, and backend applications. You can instrument your applications and services using the [Browser SDK][6], [Mobile SDK][7], or ingest errors from your Logs, Traces, and Real User Monitoring events. 
+{{< prodname >}}Error Tracking{{< /prodname >}} captures and processes errors across your web, mobile, and backend applications. You can instrument your applications and services using the [Browser SDK][6], [Mobile SDK][7], or ingest errors from your Logs, Traces, and Real User Monitoring events. 
 
 Additional features are available depending on the source of the error. For example, in errors originating from an APM trace, the [Exception Replay][4] feature automatically captures production variable values. 
 
-For details, see the product-specific Error Tracking documentation:
+For details, see the product-specific {{< prodname >}}Error Tracking{{< /prodname >}} documentation:
 
 - [APM][1]
-- [Log Management][2]
+- [{{< prodname >}}Log Management{{< /prodname >}}][2]
 - [Real User Monitoring][3]
 
 ## Further reading

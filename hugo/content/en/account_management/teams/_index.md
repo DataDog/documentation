@@ -84,7 +84,7 @@ Datadog supports associating the following resources with team handles:
 - [Dashboards][5]
 - [Incidents][6]
 - [Monitors][7]
-- [Resource Catalog][8]
+- [{{< prodname >}}Resource Catalog{{< /prodname >}}][8]
 - [Catalog][9]
 - [Service Level Objectives][10]
 - Synthetic Tests, Global Variables, Private Locations

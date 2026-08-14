@@ -19,9 +19,9 @@ further_reading:
     text: "Learn more about security notifications"
 ---
 
-[Workload Protection][9] security signals are created when Datadog detects a threat based on a security rule. View, search, filter, and investigate security signals in the [Signals Explorer][4], or configure [Notification Rules][1] to send signals to third-party tools.
+[{{< prodname >}}Workload Protection{{< /prodname >}}][9] security signals are created when Datadog detects a threat based on a security rule. View, search, filter, and investigate security signals in the [Signals Explorer][4], or configure [Notification Rules][1] to send signals to third-party tools.
 
-To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Cloud Security.
+To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for {{< prodname >}}Cloud Security{{< /prodname >}}.
 
 <!-- {{< img src="security/cws/signals_explorer.png" alt="CSM Signals Explorer page" width="100%">}} -->
 
@@ -43,10 +43,10 @@ You can triage a signal by assigning it to a user for further investigation. The
 ## Create a case
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Case Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">{{< prodname >}}Case Management{{< /prodname >}} is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Use [Case Management][6] to track, triage, and investigate security signals.
+Use [{{< prodname >}}Case Management{{< /prodname >}}][6] to track, triage, and investigate security signals.
 
 1. On the [Signals Explorer][4], select a security signal.
 2. On the signal side panel, click the {{< ui >}}Escalate Investigation{{< /ui >}} dropdown menu and select {{< ui >}}Create a case{{< /ui >}}. Alternatively, select {{< ui >}}Add to an existing case{{< /ui >}} to add the signal to an existing case.
@@ -55,7 +55,7 @@ Use [Case Management][6] to track, triage, and investigate security signals.
 
 ## Declare an incident
 
-Use [Incident Management][5] to create an incident for a security signal.
+Use [{{< prodname >}}Incident Management{{< /prodname >}}][5] to create an incident for a security signal.
 
 1. On the [Signals Explorer][4], select a security signal.
 1. On the signal side panel under *Next Steps*, click the {{< ui >}}Show all actions{{< /ui >}} dropdown menu and select {{< ui >}}Declare incident{{< /ui >}}.
@@ -65,7 +65,7 @@ Use [Incident Management][5] to create an incident for a security signal.
 
 ## Run a workflow
 
-Use [Workflow Automation][8] to manually trigger a workflow for a security signal. See [Trigger a Workflow from a Security Signal][7] for more information.
+Use [{{< prodname >}}Workflow Automation{{< /prodname >}}][8] to manually trigger a workflow for a security signal. See [Trigger a Workflow from a Security Signal][7] for more information.
 
 1. On the [Signals Explorer][4], select a security signal.
 2. On the signal side panel, click the {{< ui >}}Workflows{{< /ui >}} tab.

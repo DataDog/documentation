@@ -25,7 +25,7 @@ Journey Monitoring is in Preview.
 
 ## Overview
 
-Each journey has a details report that combines metrics and telemetry from [Real User Monitoring][1], [Synthetic Monitoring & Testing][2], [Product Analytics][3], and [Session Replay][4]. The report shows data about the journey's user behavior patterns and technical performance.
+Each journey has a details report that combines metrics and telemetry from [Real User Monitoring][1], [Synthetic Monitoring & Testing][2], [{{< prodname >}}Product Analytics{{< /prodname >}}][3], and [Session Replay][4]. The report shows data about the journey's user behavior patterns and technical performance.
 
 {{< img src="journey_monitoring/journey-monitoring-details-report-1.png" alt="The Journey Monitoring details report showing a specific journey's key performance indicators, user behavior insights, and technical performance measurements." style="width:100%;" >}}
 
@@ -43,7 +43,7 @@ The attribute filters at the top of the details report work in tandem with the j
 
 ### Funnel
 
-Each details report has a [funnel][6] showing the journey's traffic, conversion rate, and average completion time for each step. The top conversion and drop-off drivers are located under the funnel. You can also click on **Analyze in Product Analytics** to analyze funnel drop-off patterns.
+Each details report has a [funnel][6] showing the journey's traffic, conversion rate, and average completion time for each step. The top conversion and drop-off drivers are located under the funnel. You can also click on **Analyze in {{< prodname >}}Product Analytics{{< /prodname >}}** to analyze funnel drop-off patterns.
 
 ### User drop-offs
 
@@ -69,7 +69,7 @@ If the RUM [distributed tracing][11] integration is enabled, the side panel also
 
 ### Error count
 
-The error count chart shows a timeseries of errors that occurred while users were executing the journey. The data is imported from frontend issues in [Error Tracking][9]. You can click on the **Investigate** button to see the list of top issues. Clicking on any issue in the list redirects you to the issue in Error Tracking.
+The error count chart shows a timeseries of errors that occurred while users were executing the journey. The data is imported from frontend issues in [{{< prodname >}}Error Tracking{{< /prodname >}}][9]. You can click on the **Investigate** button to see the list of top issues. Clicking on any issue in the list redirects you to the issue in {{< prodname >}}Error Tracking{{< /prodname >}}.
 
 {{< img src="journey_monitoring/journey-monitoring-details-report-technical.png" alt="The Journey Monitoring details report showing a specific journey's technical performance data, including error count timeseries and backend service dependencies." style="width:100%;" >}}
 

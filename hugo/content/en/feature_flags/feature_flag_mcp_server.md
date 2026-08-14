@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-The Datadog MCP Server uses the Model Context Protocol (MCP) to provide AI agents with access to [Feature Flags][1] management capabilities. These capabilities include flag creation, configuration, and React/JavaScript integration guidance.
+The Datadog MCP Server uses the Model Context Protocol (MCP) to provide AI agents with access to [{{< prodname >}}Feature Flags{{< /prodname >}}][1] management capabilities. These capabilities include flag creation, configuration, and React/JavaScript integration guidance.
 
 ## Setup
 

@@ -50,7 +50,7 @@ The {{< ui >}}Evaluated Data{{< /ui >}} graph shows how your monitor would have 
 - Preview who would be notified (including from notification rules)
 - Quickly spot misconfigurations before saving.
 
-This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, Agent Observability, and Deployment monitors.
+This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, {{< prodname >}}Agent Observability{{< /prodname >}}, and Deployment monitors.
 
 {{% /tab %}}
 
@@ -252,7 +252,7 @@ Some use cases to define a custom group retention time include:
 - When you would like to drop the group immediately or shortly after data stops reporting
 - When you would like to keep the group in the status for as long as you usually take for troubleshooting
 
-**Note**: The custom group retention time option requires a multi alert monitor that supports the [`On missing data`][4] option. These monitor types are APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors.
+**Note**: The custom group retention time option requires a multi alert monitor that supports the [`On missing data`][4] option. These monitor types are APM Trace Analytics, Audit Logs, CI Pipelines, {{< prodname >}}Error Tracking{{< /prodname >}}, Events, Logs, and RUM monitors.
 
 <div class="alert alert-info"><strong>Preview: Dynamic group retention</strong><p>Dynamic group retention is in Preview and applies to newly created monitors. For monitors with a large number of groups, Datadog automatically shortens how long a group is kept after it stops reporting data. The more frequently groups appear and disappear, the shorter this period becomes, keeping the monitor fast and efficient. This only affects groups that have gone silent; groups actively reporting data are never removed.</p></div>
 

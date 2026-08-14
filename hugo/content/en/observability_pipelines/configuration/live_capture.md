@@ -49,7 +49,7 @@ If you want to use Live Capture and are using a firewall, you must add these dom
 
 ## Capture events
 
-1. Navigate to [Observability Pipelines][3].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][3].
 1. Select your pipeline.
 1. Click the cog for the source or processor that you want to capture events for.
 1. Select {{< ui >}}Capture and view events{{< /ui >}} in the side panel.

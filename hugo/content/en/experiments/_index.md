@@ -52,7 +52,7 @@ When you [plan and launch an experiment][16], link it to a feature flag to defin
 
 If you randomize subjects outside Datadog—for example, with an in-house system—use [Exposure SQL Models][17] to tell Datadog who was exposed to each experiment and when. Exposure SQL Models query exposure records from your [connected warehouse][13] and map them to Datadog fields such as subject key, timestamp, experiment ID, and variant ID.
 
-Datadog deduplicates exposure data automatically: if a user appears in multiple variants for the same experiment, that user is excluded from the analysis. When exposures come from your warehouse instead of Feature Flags, metrics built on Datadog SDK events are not supported—you need [warehouse-native metrics][14].
+Datadog deduplicates exposure data automatically: if a user appears in multiple variants for the same experiment, that user is excluded from the analysis. When exposures come from your warehouse instead of {{< prodname >}}Feature Flags{{< /prodname >}}, metrics built on Datadog SDK events are not supported—you need [warehouse-native metrics][14].
 
 ## Metrics
 
@@ -66,9 +66,9 @@ Warehouse mode is required when you use [Exposure SQL Models][17] for randomizat
 
 ### Product Analytics and RUM
 
-For client-side experiments, build metrics from events collected by the [Real User Monitoring (RUM)][2] and [Product Analytics][3] SDKs. Define metrics from actions, views, sessions, and other event types, then choose an aggregation method such as count of events, count of unique users, or sum of a property.
+For client-side experiments, build metrics from events collected by the [Real User Monitoring (RUM)][2] and [{{< prodname >}}Product Analytics{{< /prodname >}}][3] SDKs. Define metrics from actions, views, sessions, and other event types, then choose an aggregation method such as count of events, count of unique users, or sum of a property.
 
-This path works when randomization runs through [Datadog Feature Flags][1] and you want to measure user behavior, funnel conversion, or application performance without querying a warehouse. Product Analytics and RUM metrics are available in near real time as experiments launch.
+This path works when randomization runs through [Datadog Feature Flags][1] and you want to measure user behavior, funnel conversion, or application performance without querying a warehouse. {{< prodname >}}Product Analytics{{< /prodname >}} and RUM metrics are available in near real time as experiments launch.
 
 ## Statistics
 

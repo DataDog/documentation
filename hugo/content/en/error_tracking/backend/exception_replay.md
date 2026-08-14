@@ -29,7 +29,7 @@ Exception Replay is generally available for Python, Java, .NET, PHP, and is enab
 
 Exception Replay captures execution context and local variable values when an exception occurs, helping you diagnose,
 reproduce, and resolve issues faster. It records the surrounding state, including the stack trace and variable
-snapshots, then surfaces this data directly in Error Tracking alongside the rest of the issue details.
+snapshots, then surfaces this data directly in {{< prodname >}}Error Tracking{{< /prodname >}} alongside the rest of the issue details.
 
 {{< img src="tracing/error_tracking/error_tracking_executional_context-3.png" alt="Error Tracking Explorer Exception Replay" style="width:90%" >}}
 
@@ -58,7 +58,7 @@ below for details.
 | **Minimum Tracer Versions** | [Python][8] ≥ 3.15.0<br>[Java][9] ≥ 1.54.0<br>[.NET][10] ≥ 3.29.0 | [Python][8] ≥ 3.10.0<br>[Java][9] ≥ 1.48.0<br>[.NET][10] ≥ 3.29.0 | [Python][8] ≥ 1.16.0<br>[Java][9] ≥ 1.47.0<br>[.NET][10] ≥ 2.53.0<br>[PHP][11] ≥ 1.12.1 |
 | **Remote Configuration Required?** | Yes | Yes | No |
 
-To enable Exception Replay in-app, navigate to the Exception Replay {{< ui >}}Settings{{< /ui >}} page in Error Tracking, select the
+To enable Exception Replay in-app, navigate to the Exception Replay {{< ui >}}Settings{{< /ui >}} page in {{< prodname >}}Error Tracking{{< /prodname >}}, select the
 desired environment or service, and toggle it to {{< ui >}}Enabled{{< /ui >}}.
 
 {{< img src="tracing/error_tracking/error_tracking_exception_replay_enablement.mp4" video="true" alt="Enabling Exception Replay through the setting page" style="width:90%" >}}
@@ -85,7 +85,7 @@ Exception Replay snapshots are emitted as logs enriched with links back to the o
 
 ### Link your source code
 
-If you enable the Datadog Source Code Integration, you can see code previews directly inside your Error Tracking stack
+If you enable the Datadog Source Code Integration, you can see code previews directly inside your {{< prodname >}}Error Tracking{{< /prodname >}} stack
 traces. When Exception Replay snapshots are captured, you can hover over variable names in the code preview to view
 their captured values.
 
@@ -123,7 +123,7 @@ for configuration details.
 
 <div class="alert alert-info">
 <b>Why DI instructions?</b>
-Exception Replay is built on <a href="/tracing/dynamic_instrumentation/">Dynamic Instrumentation (DI)</a>, so its
+Exception Replay is built on <a href="/tracing/dynamic_instrumentation/">{{< prodname >}}Dynamic Instrumentation{{< /prodname >}} (DI)</a>, so its
 sensitive data scrubbing configuration options also apply here.
 </div>
 
@@ -148,7 +148,7 @@ snapshots.
 
 ### BatchUploader WARN messages on GovCloud (Java)
 
-On GovCloud sites (`app.ddog-gov.com`), Java tracers may log periodic WARN messages from `com.datadog.debugger.uploader.BatchUploader` with HTTP 403 and text similar to `This traffic is not permitted on your account`. This is expected when debugger-related uploads are attempted on a site where Exception Replay, Dynamic Instrumentation, and Code Origin for Spans are not supported. Core APM functionality (traces, metrics, profiling, log injection) is not affected.
+On GovCloud sites (`app.ddog-gov.com`), Java tracers may log periodic WARN messages from `com.datadog.debugger.uploader.BatchUploader` with HTTP 403 and text similar to `This traffic is not permitted on your account`. This is expected when debugger-related uploads are attempted on a site where Exception Replay, {{< prodname >}}Dynamic Instrumentation{{< /prodname >}}, and Code Origin for Spans are not supported. Core APM functionality (traces, metrics, profiling, log injection) is not affected.
 
 To stop these log messages, set the following environment variables on the Java application pod and restart the workload:
 

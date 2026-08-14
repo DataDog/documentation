@@ -62,7 +62,7 @@ Agent Observability SDKs provide automatic instrumentation as well as manual ins
 {{% tab "Python" %}}
 Enable Agent Observability by running your application using the `ddtrace-run` command and specifying the required environment variables.
 
-**Note**: `ddtrace-run` automatically turns on all Agent Observability integrations.
+**Note**: `ddtrace-run` automatically turns on all {{< prodname >}}Agent Observability{{< /prodname >}} integrations.
 
 {{< code-block lang="shell">}}
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
@@ -77,7 +77,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_ENABLED`
 : required - _integer or string_
-<br />Toggle to enable submitting data to Agent Observability. Should be set to `1` or `true`.
+<br />Toggle to enable submitting data to {{< prodname >}}Agent Observability{{< /prodname >}}. Should be set to `1` or `true`.
 
 `DD_LLMOBS_ML_APP`
 : optional - _string_
@@ -90,7 +90,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_SAMPLE_RATE`
 : optional - _float_ - **default**: `1.0`
-<br />The fraction of traces retained by Agent Observability. See [Trace sampling](#trace-sampling).
+<br />The fraction of traces retained by {{< prodname >}}Agent Observability{{< /prodname >}}. See [Trace sampling](#trace-sampling).
 
 `DD_API_KEY`
 : optional - _string_
@@ -122,7 +122,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_LLMOBS_ENABLED`
 : required - _integer or string_
-<br />Toggle to enable submitting data to Agent Observability. Should be set to `1` or `true`.
+<br />Toggle to enable submitting data to {{< prodname >}}Agent Observability{{< /prodname >}}. Should be set to `1` or `true`.
 
 `DD_LLMOBS_ML_APP`
 : optional - _string_
@@ -135,7 +135,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_LLMOBS_SAMPLE_RATE`
 : optional - _float_ - **default**: `1.0`
-<br />The fraction of traces retained by Agent Observability. See [Trace sampling](#trace-sampling).
+<br />The fraction of traces retained by {{< prodname >}}Agent Observability{{< /prodname >}}. See [Trace sampling](#trace-sampling).
 
 `DD_API_KEY`
 : optional - _string_
@@ -163,7 +163,7 @@ You can supply the following parameters as environment variables (for example, `
 
 `DD_LLMOBS_ENABLED` or `dd.llmobs.enabled`
 : required - _integer or string_
-<br />Toggle to enable submitting data to Agent Observability. Should be set to `1` or `true`.
+<br />Toggle to enable submitting data to {{< prodname >}}Agent Observability{{< /prodname >}}. Should be set to `1` or `true`.
 
 `DD_LLMOBS_ML_APP` or `dd.llmobs.ml.app`
 : optional - _string_
@@ -186,12 +186,12 @@ You can supply the following parameters as environment variables (for example, `
 
 {{% collapse-content title="In-code setup" level="h3" expanded=false id="in-code-setup" %}}
 
-Instead of using [command-line setup](#command-line-setup), you can also enable Agent Observability programmatically.
+Instead of using [command-line setup](#command-line-setup), you can also enable {{< prodname >}}Agent Observability{{< /prodname >}} programmatically.
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-Use the `LLMObs.enable()` function to enable Agent Observability.
+Use the `LLMObs.enable()` function to enable {{< prodname >}}Agent Observability{{< /prodname >}}.
 
 <div class="alert alert-info">
 Do not use this setup method with the <code>ddtrace-run</code> command.
@@ -239,7 +239,7 @@ LLMObs.enable(
 
 `sample_rate`
 : optional - _float_
-<br />The fraction of traces retained by Agent Observability. Requires `ddtrace` 4.12.0 or later. When set, this takes precedence over `DD_LLMOBS_SAMPLE_RATE`. See [Trace sampling](#trace-sampling).
+<br />The fraction of traces retained by {{< prodname >}}Agent Observability{{< /prodname >}}. Requires `ddtrace` 4.12.0 or later. When set, this takes precedence over `DD_LLMOBS_SAMPLE_RATE`. See [Trace sampling](#trace-sampling).
 
 `capture_intent`
 : optional - _boolean_ - **default**: `false`
@@ -254,7 +254,7 @@ LLMObs.enable(
 Do not use this setup method with the <code>dd-trace/initialize.mjs</code> command.
 </div>
 
-Use the `init()` function to enable Agent Observability.
+Use the `init()` function to enable {{< prodname >}}Agent Observability{{< /prodname >}}.
 
 {{< code-block lang="javascript" >}}
 const tracer = require('dd-trace').init({
@@ -281,7 +281,7 @@ const llmobs = tracer.llmobs;
 
 `sampleRate`
 : optional - _number_
-<br />The fraction of traces retained by Agent Observability. Requires `dd-trace` 5.110.0 or later. When set, this takes precedence over `DD_LLMOBS_SAMPLE_RATE`. See [Trace sampling](#trace-sampling).
+<br />The fraction of traces retained by {{< prodname >}}Agent Observability{{< /prodname >}}. Requires `dd-trace` 5.110.0 or later. When set, this takes precedence over `DD_LLMOBS_SAMPLE_RATE`. See [Trace sampling](#trace-sampling).
 
 **Options for general tracer configuration**:
 
@@ -312,7 +312,7 @@ Set the following values as environment variables. They cannot be configured pro
 
 {{% collapse-content title="AWS Lambda Setup" level="h3" expanded=false id="aws-lambda-setup" %}}
 
-To instrument an existing AWS Lambda function with Agent Observability, you can use the Datadog Extension and respective language layers.
+To instrument an existing AWS Lambda function with {{< prodname >}}Agent Observability{{< /prodname >}}, you can use the Datadog Extension and respective language layers.
 
 1. Open a Cloudshell in the AWS console.
 2. Install the Datadog CLI client
@@ -328,7 +328,7 @@ If you already have or prefer to use a secret in Secrets Manager, you can set th
 ```shell
 export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
 ```
-4. Install your Lambda function with Agent Observability (this requires at least version 77 of the Datadog Extension layer)
+4. Install your Lambda function with {{< prodname >}}Agent Observability{{< /prodname >}} (this requires at least version 77 of the Datadog Extension layer)
 {{< tabs >}}
 {{% tab "Python" %}}
 ```shell
@@ -349,9 +349,9 @@ datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Invoke your Lambda function and verify that Agent Observability traces are visible in the Datadog UI.
+4. Invoke your Lambda function and verify that {{< prodname >}}Agent Observability{{< /prodname >}} traces are visible in the Datadog UI.
 
-Manually flush Agent Observability traces by using the `flush` method before the Lambda function returns.
+Manually flush {{< prodname >}}Agent Observability{{< /prodname >}} traces by using the `flush` method before the Lambda function returns.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -379,13 +379,13 @@ export const handler = async (event) => {
 {{% /collapse-content %}}
 
 
-After installing the SDK and running your application you should expect to see some data in Agent Observability from auto-instrumentation. Manual instrumentation can be used to capture custom built frameworks or operations from libraries that are not yet supported.
+After installing the SDK and running your application you should expect to see some data in {{< prodname >}}Agent Observability{{< /prodname >}} from auto-instrumentation. Manual instrumentation can be used to capture custom built frameworks or operations from libraries that are not yet supported.
 
 ## Trace sampling
 
 <div class="alert alert-info">Trace sampling is available in the Python SDK (<code>ddtrace</code> 4.12.0 or later) and the Node.js SDK (<code>dd-trace</code> 5.110.0 or later). The Java SDK does not support trace sampling.</div>
 
-Trace sampling sets the fraction of traces that Agent Observability retains. Because Agent Observability billing is based on the volume of spans you send, setting a sample rate is one way to control your Agent Observability cost. The SDK makes the sampling decision on the root span and applies it to all of that root span's child spans, including spans created in downstream services through [distributed tracing](#distributed-tracing).
+Trace sampling sets the fraction of traces that {{< prodname >}}Agent Observability{{< /prodname >}} retains. Because Agent Observability billing is based on the volume of spans you send, setting a sample rate is one way to control your {{< prodname >}}Agent Observability{{< /prodname >}} cost. The SDK makes the sampling decision on the root span and applies it to all of that root span's child spans, including spans created in downstream services through [distributed tracing](#distributed-tracing).
 
 Sampling does not affect your [Agent Observability metrics](/llm_observability/monitoring/metrics/), including [token and cost metrics](/llm_observability/monitoring/cost/) and other operational metrics. Because unsampled spans are dropped after Datadog ingests your traces, these metrics remain based on 100% of your application's instrumented traffic, regardless of the specified sample rate. Trace sampling is also independent of in-app controls such as [automation rules](/llm_observability/monitoring/automation_rules/) and [APM trace sampling](/tracing/trace_pipeline/ingestion_mechanisms/), which apply after ingestion.
 
@@ -482,7 +482,7 @@ To trace a span, use `llmobs.wrap(options, function)` as a function wrapper for 
 
 Span kinds are required, and are specified on the `options` object passed to the `llmobs` tracing functions (`trace`, `wrap`, and `decorate`). See the [Span Kinds documentation][1] for a list of supported span kinds.
 
-**Note:** Spans with an invalid span kind are not submitted to Agent Observability.
+**Note:** Spans with an invalid span kind are not submitted to {{< prodname >}}Agent Observability{{< /prodname >}}.
 
 ### Automatic function argument/output/name capturing
 
@@ -1997,7 +1997,7 @@ function ragWorkflow(userQuestion) {
 
 ## Prompt tracking
 
-Attach structured prompt metadata to the LLM span so you can reproduce results, audit changes, and compare prompt performance across versions. When using templates, Agent Observability also provides [version tracking](#version-tracking) based on template content changes.
+Attach structured prompt metadata to the LLM span so you can reproduce results, audit changes, and compare prompt performance across versions. When using templates, {{< prodname >}}Agent Observability{{< /prodname >}} also provides [version tracking](#version-tracking) based on template content changes.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -2128,11 +2128,11 @@ function answerQuestion(text) {
 
 ### Version tracking
 
-Agent Observability provides automatic versioning for your prompts when no explicit version is specified. When you provide a `template` or `chat_template` in your prompt metadata without a `version` tag, the system automatically generates a version by computing a hash of the template content. If you do provide a `version` tag, Agent Observability uses your specified version label instead of auto-generating one.
+{{< prodname >}}Agent Observability{{< /prodname >}} provides automatic versioning for your prompts when no explicit version is specified. When you provide a `template` or `chat_template` in your prompt metadata without a `version` tag, the system automatically generates a version by computing a hash of the template content. If you do provide a `version` tag, {{< prodname >}}Agent Observability{{< /prodname >}} uses your specified version label instead of auto-generating one.
 
 The versioning system works as follows:
-- **Auto versioning**: When no `version` tag is provided, Agent Observability computes a hash of the `template` or `chat_template` content to automatically generate a numerical version identifier
-- **Manual versioning**: When a `version` tag is provided, Agent Observability uses your specified version label exactly as provided
+- **Auto versioning**: When no `version` tag is provided, {{< prodname >}}Agent Observability{{< /prodname >}} computes a hash of the `template` or `chat_template` content to automatically generate a numerical version identifier
+- **Manual versioning**: When a `version` tag is provided, {{< prodname >}}Agent Observability{{< /prodname >}} uses your specified version label exactly as provided
 - **Version history**: Both auto-generated and manual versions are maintained in the version history to track prompt evolution over time
 
 This gives you the flexibility to either rely on automatic version management based on template content changes, or maintain full control over versioning with your own version labels.
@@ -2169,7 +2169,7 @@ Attach token metrics (for automatic cost tracking) or cost metrics (for manual c
 
 If you're using automatic instrumentation, token and cost metrics appear on your spans automatically. If you're instrumenting manually, follow the guidance below.
 
-<div class="alert alert-info">In this context, "token metrics" and "cost metrics" refer to numeric key-value pairs you attach to spans through the <code>metrics</code> parameter of the <code>LLMObs.annotate()</code> method. These are distinct from <a href="/llm_observability/monitoring/metrics/">Datadog platform Agent Observability metrics</a>. For recognized keys such as <code>input_tokens</code>, <code>output_tokens</code>, <code>input_cost</code>, and <code>output_cost</code>, Datadog uses these span attributes to generate corresponding platform metrics (such as <code>ml_obs.span.llm.input.cost</code>) for use in dashboards and monitors.</div>
+<div class="alert alert-info">In this context, "token metrics" and "cost metrics" refer to numeric key-value pairs you attach to spans through the <code>metrics</code> parameter of the <code>LLMObs.annotate()</code> method. These are distinct from <a href="/llm_observability/monitoring/metrics/">Datadog platform {{< prodname >}}Agent Observability{{< /prodname >}} metrics</a>. For recognized keys such as <code>input_tokens</code>, <code>output_tokens</code>, <code>input_cost</code>, and <code>output_cost</code>, Datadog uses these span attributes to generate corresponding platform metrics (such as <code>ml_obs.span.llm.input.cost</code>) for use in dashboards and monitors.</div>
 
 ### Use case: Using a common model provider
 Datadog supports common model providers such as OpenAI, Azure OpenAI, Anthropic, and Google Gemini. When using these providers, you only need to annotate your LLM request with the model name, model provider, and token usage. Datadog automatically calculates the estimated cost based on the provider's pricing.
@@ -3047,7 +3047,7 @@ def separate_task(workflow_span):
 
 #### Force flushing in serverless environments
 
-`LLMObs.flush()` is a blocking function that submits all buffered Agent Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all Agent Observability traces are submitted.
+`LLMObs.flush()` is a blocking function that submits all buffered {{< prodname >}}Agent Observability{{< /prodname >}} data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all {{< prodname >}}Agent Observability{{< /prodname >}} traces are submitted.
 
 ### Tracing multiple applications
 
@@ -3144,7 +3144,7 @@ class MyAgent {
 
 ### Force flushing in serverless environments
 
-`llmobs.flush()` is a blocking function that submits all buffered Agent Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all Agent Observability traces are submitted.
+`llmobs.flush()` is a blocking function that submits all buffered {{< prodname >}}Agent Observability{{< /prodname >}} data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all {{< prodname >}}Agent Observability{{< /prodname >}} traces are submitted.
 
 ### Tracing multiple applications
 

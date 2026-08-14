@@ -11,7 +11,7 @@ The team detail page is organized into three tabs:
 
 - **Info**: Core team details and membership.
 - **Resources**: The Datadog resources associated with the team.
-- **On-Call**: The team's [Datadog On-Call][6] configuration.
+- **{{< prodname >}}On-Call{{< /prodname >}}**: The team's [Datadog On-Call][6] configuration.
 
 The team header displays the team's avatar, banner, name, and description. Customize the look of your team by choosing an emoji avatar and banner. The emoji avatar displays next to the team name in lists across Datadog.
 

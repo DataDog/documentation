@@ -17,7 +17,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -87,7 +87,7 @@ CMD ["node", "--require", "dd-trace/init", "app.js"]
 
 {{% collapse-content title="APM Tracing Enabled" level="h4" %}}
 
-Update your task definition to include the Node.js application container with App and API Protection configuration:
+Update your task definition to include the Node.js application container with {{< prodname >}}App and API Protection{{< /prodname >}} configuration:
 
 ```json
 {
@@ -117,9 +117,9 @@ Update your task definition to include the Node.js application container with Ap
 {{% /collapse-content %}}
 
 {{% collapse-content title="APM Tracing Disabled" level="h4" %}}
-To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
+To disable APM tracing while keeping {{< prodname >}}App and API Protection{{< /prodname >}} enabled, you must set the APM tracing variable to false.
 
-Update your task definition to include the Node.js application container with App and API Protection configuration:
+Update your task definition to include the Node.js application container with {{< prodname >}}App and API Protection{{< /prodname >}} configuration:
 
 ```json
 {
@@ -165,7 +165,7 @@ aws ecs run-task --cluster your-cluster --task-definition your-task-definition
 
 ## Troubleshooting
 
-If you encounter issues while setting up App and API Protection for your Node.js application, see the [Node.js App and API Protection troubleshooting guide][2].
+If you encounter issues while setting up {{< prodname >}}App and API Protection{{< /prodname >}} for your Node.js application, see the [Node.js App and API Protection troubleshooting guide][2].
 
 ## Further Reading
 

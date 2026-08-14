@@ -24,20 +24,20 @@ products:
 
 ## Overview
 
-A misconfiguration finding tells you what is wrong with a cloud resource. **Remediate with AI** turns that finding into a code change: Datadog builds a prompt that describes the finding, the affected resource, and the fix. From there, you can hand it off to [Bits Code][1] to open a pull request, open Cursor with the prompt ready to run, or copy the prompt into the coding agent you already use.
+A misconfiguration finding tells you what is wrong with a cloud resource. **Remediate with AI** turns that finding into a code change: Datadog builds a prompt that describes the finding, the affected resource, and the fix. From there, you can hand it off to [{{< prodname >}}Bits Code{{< /prodname >}}][1] to open a pull request, open Cursor with the prompt ready to run, or copy the prompt into the coding agent you already use.
 
 {{< img src="security/csm/remediate_with_ai_button.png" alt="The Next Steps section of a finding side panel, showing a Remediate with AI button under Remediation" style="width:50%;" >}}
 
 ## Prerequisites
 
-Copying a fix prompt for your own coding agent requires no setup. To have Bits Code generate the fix, you need:
+Copying a fix prompt for your own coding agent requires no setup. To have {{< prodname >}}Bits Code{{< /prodname >}} generate the fix, you need:
 
 - The [`Bits Code Write` (`bits_dev_write`) permission][8] in Datadog.
-- Bits Code [set up][5] for your source control provider.
+- {{< prodname >}}Bits Code{{< /prodname >}} [set up][5] for your source control provider.
 
-Bits Code resolves fixes most reliably when Datadog knows where the affected resource is defined in your code. See [Code Locations][6] for how that mapping is established.
+{{< prodname >}}Bits Code{{< /prodname >}} resolves fixes most reliably when Datadog knows where the affected resource is defined in your code. See [Code Locations][6] for how that mapping is established.
 
-Bits Code usage is billed through [AI Credits][7].
+{{< prodname >}}Bits Code{{< /prodname >}} usage is billed through [AI Credits][7].
 
 ## Remediate a finding
 
@@ -50,8 +50,8 @@ Bits Code usage is billed through [AI Credits][7].
      - **Fix with Cursor**: Click **Open** to open Cursor with a prompt tailored to the finding, so you can run the fix without copying anything.
      - **Copy fix prompt**: Click **Copy**, then paste the prompt into the coding agent you already use. The prompt describes the finding and the change required, so the agent can make the fix in your repository.
    - On the **Bits Code** tab, click either button:
-     - **Fix with Bits**: Bits Code starts a [session][3], locates the code that defines the resource, generates the fix, and opens a pull or merge request in your source control provider for review.
-     - **Create Automation**: Bits Code fixes similar findings for you as they appear, without you opening each one. For more information, see [Bits Code Automations][4].
+     - **Fix with Bits**: {{< prodname >}}Bits Code{{< /prodname >}} starts a [session][3], locates the code that defines the resource, generates the fix, and opens a pull or merge request in your source control provider for review.
+     - **Create Automation**: {{< prodname >}}Bits Code{{< /prodname >}} fixes similar findings for you as they appear, without you opening each one. For more information, see [Bits Code Automations][4].
 
 {{< img src="security/csm/remediate_with_ai_coding_agent_with_cursor.png" alt="The Remediate with AI dialog on the Coding agent tab, showing Fix with Cursor and Copy fix prompt options" style="width:100%;" >}}
 

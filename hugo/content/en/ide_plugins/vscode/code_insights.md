@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-**Code Insights** keep you informed with code and library vulnerabilities reported by [Code Security][2] that are relevant to your codebase.
+**Code Insights** keep you informed with code and library vulnerabilities reported by [{{< prodname >}}Code Security{{< /prodname >}}][2] that are relevant to your codebase.
 
 The extension identifies vulnerabilities in the code with colored squiggles; hover over the line for more details.
 
@@ -27,7 +27,7 @@ You can group code insights by kind, file, priority, or service. You can also ig
 
 {{< img src="/ide_plugins/vscode/code-insights-2.png" alt="The Code Insights view." style="width:100%;" >}}
 
-For specific insights about the file currently open in the active editor, check the **File Insights** view in the IDE's file explorer. This view also lists issues discovered by [Code Security][4] within the file.
+For specific insights about the file currently open in the active editor, check the **File Insights** view in the IDE's file explorer. This view also lists issues discovered by [{{< prodname >}}Code Security{{< /prodname >}}][4] within the file.
 
 {{< img src="/ide_plugins/vscode/file_insights_view.mp4" alt="File Insights view" style="width:100%" video=true >}}
 
@@ -35,8 +35,8 @@ For specific insights about the file currently open in the active editor, check 
 
 The following insight types are in limited support:
 
-- Runtime errors collected by [Error Tracking][1]
-- Flaky tests detected by [Test Optimization][3]
+- Runtime errors collected by [{{< prodname >}}Error Tracking{{< /prodname >}}][1]
+- Flaky tests detected by [{{< prodname >}}Test Optimization{{< /prodname >}}][3]
 
 ## Further reading
 

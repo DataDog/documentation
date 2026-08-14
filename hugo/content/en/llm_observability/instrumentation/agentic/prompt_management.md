@@ -4,7 +4,7 @@ title: Prompt Management Agentic Integration
 
 ## Goal
 
-Use an existing Datadog managed prompt or promote an application's local prompt, preserve the application's existing behavior as a fallback, and track use of the managed prompt in Agent Observability.
+Use an existing Datadog managed prompt or promote an application's local prompt, preserve the application's existing behavior as a fallback, and track use of the managed prompt in {{< prodname >}}Agent Observability{{< /prodname >}}.
 
 ## Select the workflow
 
@@ -36,11 +36,11 @@ Skip this section when the user supplied an existing managed prompt ID.
 2. Propose a stable, descriptive prompt ID based on the prompt's purpose, then wait for the user to confirm it. If the deployment environment was not supplied, ask which environment to use at the same time.
 3. Before creating the prompt, obtain a Datadog API key and a one-time application key with the `llm_observability_write`, `feature_flag_config_write`, and `feature_flag_environment_config_read` permissions. If the user did not already provide a suitable application key, ask for one. Do not add this setup credential to the application's runtime configuration.
 4. Follow the [List environments API](/api/latest/feature-flags/list-environments/) and call `GET /api/v2/feature-flags/environments?dd_env=<URL_ENCODED_DD_ENV>`. The `dd_env` filter matches `DD_ENV` exactly against each environment's `attributes.queries`.
-   - If exactly one environment matches, use its `data[].id` as the Feature Flags environment ID.
+   - If exactly one environment matches, use its `data[].id` as the {{< prodname >}}Feature Flags{{< /prodname >}} environment ID.
    - If more than one environment matches, ask the user which one to use. Do not guess.
-   - If no environment matches, explain that the application's current `DD_ENV` is not mapped to a Feature Flags environment and ask whether the user wants you to create one. Do not ask for a different `DD_ENV` or create an environment without explicit approval.
+   - If no environment matches, explain that the application's current `DD_ENV` is not mapped to a {{< prodname >}}Feature Flags{{< /prodname >}} environment and ask whether the user wants you to create one. Do not ask for a different `DD_ENV` or create an environment without explicit approval.
      - If the user agrees, ask for the environment's display name and whether it represents production. Then follow the [Create an environment API](/api/latest/feature-flags/create-an-environment/) to create an environment whose `queries` contains the exact `DD_ENV` value. Attempt the request with the supplied application key. If Datadog rejects it because the key lacks permission, ask the user to grant `feature_flag_environment_config_write` or provide an application key with that permission, then retry. Leave feature-flag approval disabled unless the user explicitly requests it, and use the returned `data.id`.
-     - If the user declines, do not deploy the managed prompt to another environment. Explain that a Feature Flags environment matching the application's `DD_ENV` must exist before the prompt can be deployed there.
+     - If the user declines, do not deploy the managed prompt to another environment. Explain that a {{< prodname >}}Feature Flags{{< /prodname >}} environment matching the application's `DD_ENV` must exist before the prompt can be deployed there.
 5. Check for an exact prompt-ID match with `LLMObs.list_prompts()`. If the ID already belongs to a managed prompt, do not overwrite it: ask whether to integrate that prompt or choose a different ID. A tracked prompt that is not yet managed can be promoted using its existing ID.
 6. Create and deploy the first version in one operation with `env_ids`:
 

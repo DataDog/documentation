@@ -9,7 +9,7 @@ Like traditional applications, an LLM application can span multiple microservice
 
 ## Enabling Agent Observability for a proxy or gateway service
 
-To enable Agent Observability for a proxy or gateway service used by multiple ML applications, you can configure it without specifying an ML application name. Instead, set the service name. This allows you to [filter spans specific to that proxy or gateway service within Agent Observability](#observing-llm-gateway-and-proxy-services).
+To enable {{< prodname >}}Agent Observability{{< /prodname >}} for a proxy or gateway service used by multiple ML applications, you can configure it without specifying an ML application name. Instead, set the service name. This allows you to [filter spans specific to that proxy or gateway service within Agent Observability](#observing-llm-gateway-and-proxy-services).
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -41,7 +41,7 @@ const llmobs = tracer.llmobs;
 {{< /tabs >}}
 
 
-If you have a service that orchestrates ML applications which send requests to an LLM proxy or gateway, enable Agent Observability with the ML application name:
+If you have a service that orchestrates ML applications which send requests to an LLM proxy or gateway, enable {{< prodname >}}Agent Observability{{< /prodname >}} with the ML application name:
 
 {{< tabs >}}
 {{% tab "Python" %}}

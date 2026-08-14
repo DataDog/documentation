@@ -8,7 +8,7 @@ After setting up pipelines and scaling Workers:
 - If you are trying to troubleshoot an issue with the Observability Pipelines Worker, see [Worker CLI Commands][1] on how to see the raw data sent to the Worker.
 - You can track the status of your pipelines and components with health graphs and out-of-the-box monitors. See [Monitoring Pipelines][2] for more information.
 - You can also create your monitors, dashboards, and notebooks to monitor your pipelines. See [Pipeline Usage Metrics][3] for a list of metrics.
-- If you run into issues with Observability Pipelines, see [Troubleshooting][4].
+- If you run into issues with {{< prodname >}}Observability Pipelines{{< /prodname >}}, see [Troubleshooting][4].
 
 [1]: /observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
 [2]: /observability_pipelines/monitoring_and_troubleshooting/monitoring_pipelines/

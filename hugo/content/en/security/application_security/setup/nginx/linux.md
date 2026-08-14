@@ -25,7 +25,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -71,10 +71,10 @@ The Datadog nginx tracing module has experimental support for threat detection a
 
 ## Using App and API Protection without APM tracing
 
-If you want to use App and API Protection without APM tracing functionality, you can deploy with tracing disabled:
+If you want to use {{< prodname >}}App and API Protection{{< /prodname >}} without APM tracing functionality, you can deploy with tracing disabled:
 
 1. Configure your SDK with the `DD_APM_TRACING_ENABLED=false` environment variable in addition to the `DD_APPSEC_ENABLED=true` environment variable.
-2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
+2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by {{< prodname >}}App and API Protection{{< /prodname >}} products.
 
 For more details, see [Standalone App and API Protection][7].
 

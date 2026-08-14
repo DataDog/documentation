@@ -64,7 +64,7 @@ After installation, ensure you have initialized the Datadog provider with your c
 
 ### 2. Set up and verify a new flag {#set-up-flag}
 
-1. Create a flag in Datadog by navigating to {{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Feature Flags{{< /ui >}}, then clicking {{< ui >}}Create Flag{{< /ui >}}.
+1. Create a flag in Datadog by navigating to {{< ui >}}{{< prodname >}}Software Delivery{{< /prodname >}}{{< /ui >}} > {{< ui >}}{{< prodname >}}Feature Flags{{< /prodname >}}{{< /ui >}}, then clicking {{< ui >}}Create Flag{{< /ui >}}.
 2. Implement the flag in your application code (see the code examples below these steps).
 3. Test the flag in your local development environment to ensure it works as expected.
 4. Deploy the application to your staging or testing environments and verify the flag's functionality.
@@ -788,7 +788,7 @@ The [Datadog Flag Migration CLI][13] automates the migration of flag definitions
 
 #### Option 2: Recreate flags manually
 
-1. In the Datadog UI, recreate the critical flags from LaunchDarkly by navigating to {{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Feature Flags{{< /ui >}}.
+1. In the Datadog UI, recreate the critical flags from LaunchDarkly by navigating to {{< ui >}}{{< prodname >}}Software Delivery{{< /prodname >}}{{< /ui >}} > {{< ui >}}{{< prodname >}}Feature Flags{{< /prodname >}}{{< /ui >}}.
 2. Ensure that the flag configurations - such as rollout percentages, targeting rules, and variations - are accurately replicated in the new service.
 3. For complex targeting rules, use the evaluation context attributes to implement equivalent logic.
 

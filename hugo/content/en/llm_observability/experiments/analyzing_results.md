@@ -180,7 +180,7 @@ Datadog suggests that you:
 - Update `ddtrace-py` version >= 4.1.0
 
 
-To build a widget using LLM Experiments data, use {{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}} as data source. Then, use the [search syntax on this page](#searching-for-specific-records) to narrow down the events to plot. 
+To build a widget using LLM Experiments data, use {{< ui >}}{{< prodname >}}Agent Observability{{< /prodname >}}{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}} as data source. Then, use the [search syntax on this page](#searching-for-specific-records) to narrow down the events to plot. 
 
 For record level data aggregation, use {{< ui >}}Traces{{< /ui >}}; otherwise, use {{< ui >}}All Spans{{< /ui >}}.
 

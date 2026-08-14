@@ -15,7 +15,7 @@ Use the Azure Storage destination to send logs to an Azure Storage bucket. If yo
 
 ## Configure Log Archives
 
-This step is only required if you want to send logs to Azure Storage in Datadog-rehydratable format for [archiving][1] and [rehydration][2], and you don't already have a Datadog Log Archive configured for Observability Pipelines. If you already have a Datadog Log Archive configured or don't want to rehydrate logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
+This step is only required if you want to send logs to Azure Storage in Datadog-rehydratable format for [archiving][1] and [rehydration][2], and you don't already have a Datadog Log Archive configured for {{< prodname >}}Observability Pipelines{{< /prodname >}}. If you already have a Datadog Log Archive configured or don't want to rehydrate logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
 
 You need to have Datadog's [Azure integration][3] installed to set up Datadog Log Archives.
 

@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Enable React Native Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring. With this feature, you can access:
+Enable React Native Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} to get comprehensive crash reports and error trends with Real User Monitoring. With this feature, you can access:
 
 -   Aggregated React Native crash dashboards and attributes
 -   Symbolicated React Native (JavaScript and native iOS or Android) crash reports
@@ -147,7 +147,7 @@ If a `build` directory does not already exist, create it first by running `mkdir
 
 ## Test your implementation
 
-To verify your React Native Crash Reporting and Error Tracking configuration, you need to issue an error in your application and confirm that the error appears in Datadog.
+To verify your React Native Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} configuration, you need to issue an error in your application and confirm that the error appears in Datadog.
 
 To test your implementation:
 

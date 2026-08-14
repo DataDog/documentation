@@ -9,11 +9,11 @@ further_reading:
     text: "Test Optimization"
 ---
 
-CI/CD Optimization combines Datadog's [CI Visibility][1] and [Test Optimization][2] experiences into one unified interface. It provides a single place to understand, monitor, and improve your entire CI/CD ecosystem, from pipeline executions to individual test runs.
+CI/CD Optimization combines Datadog's [CI Visibility][1] and [{{< prodname >}}Test Optimization{{< /prodname >}}][2] experiences into one unified interface. It provides a single place to understand, monitor, and improve your entire CI/CD ecosystem, from pipeline executions to individual test runs.
 
-To enable the new experience, click {{< ui >}}Try It Now{{< /ui >}} at the top of any page in CI Visibility or Test Optimization. You can return to the previous UI at any time by clicking {{< ui >}}Switch Back{{< /ui >}}.
+To enable the new experience, click {{< ui >}}Try It Now{{< /ui >}} at the top of any page in CI Visibility or {{< prodname >}}Test Optimization{{< /prodname >}}. You can return to the previous UI at any time by clicking {{< ui >}}Switch Back{{< /ui >}}.
 
-This page provides an overview of CI/CD Optimization's key features, some of which retain original functionality of CI Visibility and Test Optimization. Follow the links to legacy documentation for details on using each product within the unified UI.
+This page provides an overview of CI/CD Optimization's key features, some of which retain original functionality of CI Visibility and {{< prodname >}}Test Optimization{{< /prodname >}}. Follow the links to legacy documentation for details on using each product within the unified UI.
 
 ## CI/CD Health
 

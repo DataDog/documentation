@@ -43,7 +43,7 @@ further_reading:
 - [Detection Rules][2] to provide comprehensive coverage of your environment
 - An interactive dashboard with detailed insights into the state of logs and security signals for the Content Pack
 - [Investigator][3], an interactive graphical interface for investigating suspicious activity by a user or resource
-- [Workflow Automation][4], to automate actions and accelerate investigation and remediation of issues
+- [{{< prodname >}}Workflow Automation{{< /prodname >}}][4], to automate actions and accelerate investigation and remediation of issues
 - Configuration guides
 
 {{% cloud-siem-content-packs %}}

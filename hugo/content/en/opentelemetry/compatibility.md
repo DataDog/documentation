@@ -67,7 +67,7 @@ Datadog SDKs provide support for the OpenTelemetry Traces, Metrics, and Logs API
 
 ### Agent Observability
 
-OpenTelemetry traces that have [generative AI attributes](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/) are automatically converted into Agent Observability traces. To disable this conversion, see [Disabling Agent Observability conversion][38].
+OpenTelemetry traces that have [generative AI attributes](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/) are automatically converted into {{< prodname >}}Agent Observability{{< /prodname >}} traces. To disable this conversion, see [Disabling Agent Observability conversion][38].
 
 ### Runtime metrics
 

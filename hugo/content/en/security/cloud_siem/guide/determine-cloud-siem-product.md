@@ -4,12 +4,12 @@ description: Cloud SIEM is available in Standalone, Add-on with Flex Logs, and L
 ---
 
 ## Overview
-Cloud SIEM is available as the following products:
+{{< prodname >}}Cloud SIEM{{< /prodname >}} is available as the following products:
 - Standalone
 - Add-on with Flex Logs
 - Legacy
 
-There are two ways to see which Cloud SIEM product your organization is using:
+There are two ways to see which {{< prodname >}}Cloud SIEM{{< /prodname >}} product your organization is using:
 - [Check the Plan & Usage page](#plan-usage)
 - [Check the Cloud SIEM settings page](#settings)
 
@@ -18,14 +18,14 @@ There are two ways to see which Cloud SIEM product your organization is using:
 <div class="alert alert-info">You may not be able to use this option if:
   <ul>
     <li>You don't have access to this page</li>
-    <li>Your organization has multi-org configured; the Plan & Usage page is a roll-up of all sub-orgs, so you might see multiple Cloud SIEM product tiles</li>
+    <li>Your organization has multi-org configured; the Plan & Usage page is a roll-up of all sub-orgs, so you might see multiple {{< prodname >}}Cloud SIEM{{< /prodname >}} product tiles</li>
   </ul>
-  In either case, follow the instructions in the <a href="#settings">Check the Cloud SIEM settings page</a> section to determine which product your organization is using.
+  In either case, follow the instructions in the <a href="#settings">Check the {{< prodname >}}Cloud SIEM{{< /prodname >}} settings page</a> section to determine which product your organization is using.
 </div>
 
 1. In Datadog, go to {{< ui >}}Plan & Usage{{< /ui >}} > [**Usage & Cost**][1] page.
 1. Scroll to the **Usage Summary** section and click the {{< ui >}}Security{{< /ui >}} tab.
-1. Find the tile that indicates which Cloud SIEM product your organization is using:
+1. Find the tile that indicates which {{< prodname >}}Cloud SIEM{{< /prodname >}} product your organization is using:
    <table>
      <thead>
        <tr>
@@ -57,7 +57,7 @@ There are two ways to see which Cloud SIEM product your organization is using:
 
 ## Check the Cloud SIEM settings page{#settings}
 
-In Datadog, go to the [Cloud SIEM settings][2] page. The page shows either a {{< ui >}}Core Configuration{{< /ui >}} or {{< ui >}}Settings{{< /ui >}} section, which indicates the Cloud SIEM product your organization is using.
+In Datadog, go to the [Cloud SIEM settings][2] page. The page shows either a {{< ui >}}Core Configuration{{< /ui >}} or {{< ui >}}Settings{{< /ui >}} section, which indicates the {{< prodname >}}Cloud SIEM{{< /prodname >}} product your organization is using.
 <table>
   <thead>
     <tr>

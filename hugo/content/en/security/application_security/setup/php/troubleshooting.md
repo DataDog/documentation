@@ -14,7 +14,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -149,7 +149,7 @@ datadog.appsec.helper_runtime_path = /<directory with compatible permissions>/
 
 ### Confirm tracer versions are updated
 
-See the App and API Protection setup documentation to validate that you are using the right tracer version. These minimum versions are required to start sending telemetry data that includes library information.
+See the {{< prodname >}}App and API Protection{{< /prodname >}} setup documentation to validate that you are using the right tracer version. These minimum versions are required to start sending telemetry data that includes library information.
 
 ### Ensure the communication of telemetry data
 

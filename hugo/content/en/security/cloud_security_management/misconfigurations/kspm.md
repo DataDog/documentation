@@ -11,7 +11,7 @@ further_reading:
   text: "Create Custom Rules"
 ---
 
-Kubernetes Security Posture Management (KSPM) for Cloud Security helps you proactively strengthen the security posture of your Kubernetes deployments by benchmarking your environment against established industry best practices, such as those defined by [CIS][1], or your own [custom detection policies](#create-your-own-kubernetes-detection-rules).
+Kubernetes Security Posture Management (KSPM) for {{< prodname >}}Cloud Security{{< /prodname >}} helps you proactively strengthen the security posture of your Kubernetes deployments by benchmarking your environment against established industry best practices, such as those defined by [CIS][1], or your own [custom detection policies](#create-your-own-kubernetes-detection-rules).
 
 ## Setting up KSPM
 
@@ -38,7 +38,7 @@ This allows Datadog to detect risks in your Kubernetes deployments for each of t
 
 With KSPM, Datadog scans your environment for risks defined by more than 50+ out-of-the-box Kubernetes detection rules. When at least one case defined in a rule is matched over a given period of time, [a notification alert is sent][6], and a finding is generated in the [Misconfigurations explorer][11].
 
-Each finding contains the context you need to identify the issue's impact, such as the full resource configuration, resource-level tags, and a map of the resource's relationships with other components of your infrastructure. After you understand the problem and its impact, you can start remediating the issue by [creating a ticket][7] from within Cloud Security or by [executing a pre-defined workflow][8].
+Each finding contains the context you need to identify the issue's impact, such as the full resource configuration, resource-level tags, and a map of the resource's relationships with other components of your infrastructure. After you understand the problem and its impact, you can start remediating the issue by [creating a ticket][7] from within {{< prodname >}}Cloud Security{{< /prodname >}} or by [executing a pre-defined workflow][8].
 
 **Note**: You can also use the [API to programmatically interact with findings][10].
 
@@ -46,7 +46,7 @@ Each finding contains the context you need to identify the issue's impact, such 
 
 ## Assess your Kubernetes security posture against industry-standard frameworks
 
-Cloud Security provides a [security posture score][2] that helps you understand your security and compliance status using a single metric. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure detection rules. You can obtain the score for your entire organization, or for specific teams, accounts, and environments, including Kubernetes deployments.
+{{< prodname >}}Cloud Security{{< /prodname >}} provides a [security posture score][2] that helps you understand your security and compliance status using a single metric. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure detection rules. You can obtain the score for your entire organization, or for specific teams, accounts, and environments, including Kubernetes deployments.
 
 For an in-depth explanation on how the security posture score works, see [Security posture score][3].
 

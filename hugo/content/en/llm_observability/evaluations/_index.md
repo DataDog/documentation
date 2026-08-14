@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Agent Observability offers several ways to support evaluations. They can be configured by navigating to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8].
+{{< prodname >}}Agent Observability{{< /prodname >}} offers several ways to support evaluations. They can be configured by navigating to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8].
 
 ### Custom LLM-as-a-judge evaluations
 
@@ -22,7 +22,7 @@ Agent Observability offers several ways to support evaluations. They can be conf
 
 ### Managed evaluations
 
-Datadog builds and supports [managed evaluations][2] to support common use cases. You can enable and configure them within the Agent Observability application.
+Datadog builds and supports [managed evaluations][2] to support common use cases. You can enable and configure them within the {{< prodname >}}Agent Observability{{< /prodname >}} application.
 
 ### Submit end-user feedback
 
@@ -46,12 +46,12 @@ Datadog also supports integrations with some 3rd party evaluation frameworks, su
 
 ### Sensitive Data Scanner integration
 
-In addition to evaluating the input and output of LLM requests, agents, workflows, or the application, Agent Observability integrates with [Sensitive Data Scanner][6], which helps prevent data leakage by identifying and redacting any sensitive information. For a list of the out-of-the-box rules included with Sensitive Data Scanner, see [Library Rules][12].
+In addition to evaluating the input and output of LLM requests, agents, workflows, or the application, {{< prodname >}}Agent Observability{{< /prodname >}} integrates with [Sensitive Data Scanner][6], which helps prevent data leakage by identifying and redacting any sensitive information. For a list of the out-of-the-box rules included with Sensitive Data Scanner, see [Library Rules][12].
 
 ### Security
 
 {{< learning-center-callout header="Get real-time security guardrails for your AI apps and agents" btn_title="Join the preview" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/ai-security/">}}
-  AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. Try it today!
+  {{< prodname >}}AI Guard{{< /prodname >}} helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. Try it today!
 {{< /learning-center-callout >}}
 
 ### Permissions
@@ -60,7 +60,7 @@ In addition to evaluating the input and output of LLM requests, agents, workflow
 
 ### Retrieving spans
 
-Agent Observability offers an [Export API][9] that you can use to retrieve spans for running external evaluations. This helps circumvent the need to keep track of evaluation-relevant data at execution time.
+{{< prodname >}}Agent Observability{{< /prodname >}} offers an [Export API][9] that you can use to retrieve spans for running external evaluations. This helps circumvent the need to keep track of evaluation-relevant data at execution time.
 
 ## Further Reading
 

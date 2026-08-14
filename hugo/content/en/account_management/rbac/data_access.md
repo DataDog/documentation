@@ -46,7 +46,7 @@ Name Dataset
 : A descriptive name to help users understand what data is contained in the dataset.
 
 Select data to be included in this Dataset
-: The boundary definition that describes which data to restrict to a specific set of users. Boundaries are query statements with limitations that allow an access manager to define the scope of sensitive data to be protected. The [supported telemetry types][10] are custom metrics, RUM sessions, APM traces, logs, cloud costs, error tracking issues, Software Delivery repository info (CI Visibility pipelines), Workload Protection Agent Events, and security signals (Cloud SIEM signals only).
+: The boundary definition that describes which data to restrict to a specific set of users. Boundaries are query statements with limitations that allow an access manager to define the scope of sensitive data to be protected. The [supported telemetry types][10] are custom metrics, RUM sessions, APM traces, logs, cloud costs, error tracking issues, {{< prodname >}}Software Delivery{{< /prodname >}} repository info (CI Visibility pipelines), Workload Protection Agent Events, and security signals ({{< prodname >}}Cloud SIEM{{< /prodname >}} signals only).
 
 Grant access
 : Select one or more teams or roles that may access the content bound in the Restricted Dataset. Any users who are not members of these groups are blocked from accessing this data.
@@ -61,20 +61,20 @@ You may create a maximum of 100 Restricted Datasets under the Enterprise plan, a
 
 ### Supported telemetry types {#supported-telemetry}
 
-- Agent Observability traces
+- {{< prodname >}}Agent Observability{{< /prodname >}} traces
 - APM traces
 - Cloud costs
-- Error Tracking issues
+- {{< prodname >}}Error Tracking{{< /prodname >}} issues
 - Logs
 - RUM sessions
-- Security signals (Cloud SIEM signals only)
-- Software Delivery repository info (in CI Visibility pipelines)
+- Security signals ({{< prodname >}}Cloud SIEM{{< /prodname >}} signals only)
+- {{< prodname >}}Software Delivery{{< /prodname >}} repository info (in CI Visibility pipelines)
 - Workload Protection Agent Events
 
 The following are available as a Preview upon request:
 - Custom metrics
     - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
-- Database Monitoring
+- {{< prodname >}}Database Monitoring{{< /prodname >}}
 - Hosts
 - Processes
 
@@ -130,8 +130,8 @@ If you are concerned about unauthorized data access through monitors, Datadog re
 
 ### Software Delivery repository info (CI Visibility pipelines)
 
-* **Supported telemetry**: Only CI Visibility pipelines are supported. Test Optimizations tests are not supported.
-* **CI Logs**: CI Logs are stored in the Log Management product. To restrict access to CI Logs, create a Logs dataset.
+* **Supported telemetry**: Only CI Visibility pipelines are supported. {{< prodname >}}Test Optimization{{< /prodname >}}s tests are not supported.
+* **CI Logs**: CI Logs are stored in the {{< prodname >}}Log Management{{< /prodname >}} product. To restrict access to CI Logs, create a Logs dataset.
 * **Supported dataset tags**: Only the following tags are supported:
   * `@git.repository_url`
   * `@git.repository.id`
@@ -140,8 +140,8 @@ If you are concerned about unauthorized data access through monitors, Datadog re
 
 ### Agent Observability
 
-* **Supported telemetry**: Agent Observability traces are supported. Experiment event data (spans and evaluation metrics) for experiments in a project is also restricted by `ml_app`-keyed Restricted Datasets. Only the event data is restricted—experiment list views and metadata are not. Datasets, annotation queues, and managed prompts are not supported.
-* **OpenTelemetry**: When using [OpenTelemetry instrumentation][13], some data sent to Agent Observability may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on Agent Observability, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
+* **Supported telemetry**: {{< prodname >}}Agent Observability{{< /prodname >}} traces are supported. Experiment event data (spans and evaluation metrics) for experiments in a project is also restricted by `ml_app`-keyed Restricted Datasets. Only the event data is restricted—experiment list views and metadata are not. Datasets, annotation queues, and managed prompts are not supported.
+* **OpenTelemetry**: When using [OpenTelemetry instrumentation][13], some data sent to {{< prodname >}}Agent Observability{{< /prodname >}} may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on {{< prodname >}}Agent Observability{{< /prodname >}}, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
 
 
 ## Select tags for access

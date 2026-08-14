@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Prompt Tracking links prompt templates and versions to LLM calls. Prompt Tracking works alongside Agent Observability's traces, spans, and Playground, as well as [Prompt Management][8], which provides a centralized registry for creating and versioning prompts.
+Prompt Tracking links prompt templates and versions to LLM calls. Prompt Tracking works alongside {{< prodname >}}Agent Observability{{< /prodname >}}'s traces, spans, and Playground, as well as [Prompt Management][8], which provides a centralized registry for creating and versioning prompts.
 
 Prompt Tracking enables you to:
 - See all prompts used by your LLM application or agent, with call volume and latency over time
@@ -91,14 +91,14 @@ The following fields are supported in the prompt tracking JSON:
 | `rag_context_variables` | array of strings | No | Names of variables in `variables` that contain RAG context (ground truth). Used by RAG evaluators |
 | `rag_query_variables` | array of strings | No | Names of variables in `variables` that contain the user query. Used by RAG evaluators |
 
-<div class="alert alert-info">If you are using prompt templates, Agent Observability can automatically attach version information based on prompt content.</div>
+<div class="alert alert-info">If you are using prompt templates, {{< prodname >}}Agent Observability{{< /prodname >}} can automatically attach version information based on prompt content.</div>
 
 ### With LangChain templates
 If you are using LangChain prompt templates, Datadog automatically captures prompt metadata without code changes. IDs are derived from module or template names. To override these IDs, see [Agent Observability Auto-instrumentation: LangChain][5].
 
 ## Use Prompt Tracking in Agent Observability
 
-View your app in Agent Observability and select {{< ui >}}Prompts{{< /ui >}} on the left. The _Prompts view_ features the following information:
+View your app in {{< prodname >}}Agent Observability{{< /prodname >}} and select {{< ui >}}Prompts{{< /ui >}} on the left. The _Prompts view_ features the following information:
 
 - {{< ui >}}Prompt Call Count{{< /ui >}}: A timeseries chart displaying calls per prompt (or per version) over time
 - {{< ui >}}Recent Prompt Updates{{< /ui >}}: Information about recent prompt updates, including time of last update, call count, average latency, and average tokens per call

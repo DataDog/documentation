@@ -74,7 +74,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
-- If your framework is not listed below, **Code Security** will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
+- If your framework is not listed below, **{{< prodname >}}Code Security{{< /prodname >}}** will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
 | Framework | Versions | Threat Detection supported? | Threat Protection supported? | Code Security? |

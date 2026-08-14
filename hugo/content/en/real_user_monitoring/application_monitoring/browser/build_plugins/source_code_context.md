@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-When viewing errors in [Error Tracking][1], Datadog can display the source code lines surrounding each frame in the stack trace. The Source Code Context build plugin enables this feature by injecting a small runtime snippet into your bundle that associates stack traces with your `service` and `version` metadata.
+When viewing errors in [{{< prodname >}}Error Tracking{{< /prodname >}}][1], Datadog can display the source code lines surrounding each frame in the stack trace. The Source Code Context build plugin enables this feature by injecting a small runtime snippet into your bundle that associates stack traces with your `service` and `version` metadata.
 
 At build time, the plugin injects a snippet that writes metadata to `window.DD_SOURCE_CODE_CONTEXT`. At runtime, the RUM SDK reads `window.DD_SOURCE_CODE_CONTEXT` to tag errors with the correct service and version for source code resolution. This works in conjunction with [uploaded source maps][2] — source maps provide the file mapping, and `window.DD_SOURCE_CODE_CONTEXT` provides the service and version association.
 

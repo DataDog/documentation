@@ -17,7 +17,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -77,7 +77,7 @@ ADD 'https://dtdg.co/latest-java-tracer' /dd-java-agent.jar
 {{< tabs >}}
 {{% tab "Using system properties" %}}
 
-Update your task definition to include the Java agent and App and API Protection configuration:
+Update your task definition to include the Java agent and {{< prodname >}}App and API Protection{{< /prodname >}} configuration:
 
 ```json
 {
@@ -102,7 +102,7 @@ Update your task definition to include the Java agent and App and API Protection
 {{% /tab %}}
 {{% tab "Using environment variables" %}}
 
-Update your task definition to include the Java agent and App and API Protection configuration:
+Update your task definition to include the Java agent and {{< prodname >}}App and API Protection{{< /prodname >}} configuration:
 
 ```json
 {
@@ -140,11 +140,11 @@ Update your task definition to include the Java agent and App and API Protection
 {{% /collapse-content %}}
 
 {{% collapse-content title="APM Tracing Disabled" level="h4" %}}
-To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
+To disable APM tracing while keeping {{< prodname >}}App and API Protection{{< /prodname >}} enabled, you must set the APM tracing variable to false.
 {{< tabs >}}
 {{% tab "Using system properties" %}}
 
-Update your task definition to include the Java agent and App and API Protection configuration with APM tracing disabled:
+Update your task definition to include the Java agent and {{< prodname >}}App and API Protection{{< /prodname >}} configuration with APM tracing disabled:
 
 ```json
 {
@@ -170,7 +170,7 @@ Update your task definition to include the Java agent and App and API Protection
 {{% /tab %}}
 {{% tab "Using environment variables" %}}
 
-Update your task definition to include the Java agent and App and API Protection configuration with APM tracing disabled:
+Update your task definition to include the Java agent and {{< prodname >}}App and API Protection{{< /prodname >}} configuration with APM tracing disabled:
 
 ```json
 {
@@ -224,7 +224,7 @@ aws ecs run-task --cluster your-cluster --task-definition your-task-definition
 
 ## Troubleshooting
 
-If you encounter issues while setting up App and API Protection for your Java application, see the [Java App and API Protection troubleshooting guide][2].
+If you encounter issues while setting up {{< prodname >}}App and API Protection{{< /prodname >}} for your Java application, see the [Java App and API Protection troubleshooting guide][2].
 
 ## Further Reading
 

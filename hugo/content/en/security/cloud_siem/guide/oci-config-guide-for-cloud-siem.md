@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Cloud SIEM applies detection rules to all processed logs in Datadog to detect threats such as targeted attacks, communication with threat intel-listed IPs, or insecure resource modifications. Detected threats are surfaced as Security Signals in the Security Signals Explorer for triage.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} applies detection rules to all processed logs in Datadog to detect threats such as targeted attacks, communication with threat intel-listed IPs, or insecure resource modifications. Detected threats are surfaced as Security Signals in the Security Signals Explorer for triage.
 
 This guide walks you through the following steps to start detecting threats with your OCI Audit logs:
 
@@ -34,7 +34,7 @@ Ensure that log collection is enabled in the Datadog OCI integration tile:
 
 ## Use Cloud SIEM to triage Security Signals
 
-Cloud SIEM applies out-of-the-box detection rules to all processed logs, including your OCI Audit logs. When a threat is detected with a detection rule, a Security Signal is generated and can be viewed in the Security Signals Explorer.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} applies out-of-the-box detection rules to all processed logs, including your OCI Audit logs. When a threat is detected with a detection rule, a Security Signal is generated and can be viewed in the Security Signals Explorer.
 
 - Go to the [Cloud SIEM Signals Explorer][1] to view and triage threats. See [Investigate Security Signals][2] for further details.  
 - See [out-of-the-box detection rules][3] that are applied to your logs.  

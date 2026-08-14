@@ -10,7 +10,7 @@ further_reading:
   text: "Mobile App Documentation"
 ---
 <div class="alert alert-info">
-If you only need to access On-Call on mobile and want to restrict access to sensitive telemetry data on mobile devices, contact Datadog support.
+If you only need to access {{< prodname >}}On-Call{{< /prodname >}} on mobile and want to restrict access to sensitive telemetry data on mobile devices, contact Datadog support.
 </div>
 
 Being on-call requires reliable and timely notifications to ensure you can respond to incidents effectively. This guide walks you through the steps to configure your mobile device for optimal performance with [Datadog On-Call][5].
@@ -66,7 +66,7 @@ You can override your device's system volume and Do Not Disturb mode for both pu
 
 {{< img src="mobile/push_notification/ios_critical_may_2025.png" alt="Override your iOS device's system volume and do-not-disturb mode." style="width:100%;" >}}
 
-1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}On-Call{{< /ui >}}.
+1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}{{< prodname >}}On-Call{{< /prodname >}}{{< /ui >}}.
 
 2. Enable the {{< ui >}}Critical Alerts{{< /ui >}} toggle. Critical alerts ignore the mute switch and Do Not Disturb. If you enable critical alerts, the system plays a critical alert’s sound regardless of the device’s mute or Do Not Disturb settings.
 
@@ -81,7 +81,7 @@ You can override your device's system volume and Do Not Disturb mode for both pu
 
 {{< img src="mobile/push_notification/android_critical_may_2025.png" alt="Override your Android device’s system volume and Do Not Disturb mode." style="width:100%;" >}}
 
-1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}On-Call{{< /ui >}}.
+1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}{{< prodname >}}On-Call{{< /prodname >}}{{< /ui >}}.
 
 {{< img src="mobile/push_notification/android_allow_notification_may_2025.png" alt="Override your Android device’s system volume and Do Not Disturb mode." style="width:100%;" >}}
 
@@ -134,7 +134,7 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 
 {{< img src="incident_response/on-call/guides/configure-mobile-device-for-on-call/android_sync_card_may_2025.png" alt="Override your Android device's do-not-disturb mode for SMS and voice calls" style="width:100%;" >}}
 
-1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}On-Call{{< /ui >}}.
+1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}{{< prodname >}}On-Call{{< /prodname >}}{{< /ui >}}.
 
 2. Under {{< ui >}}Phone & SMS{{< /ui >}}, enable {{< ui >}}Automatic Contact Card Sync{{< /ui >}}. This creates a contact named "Datadog On-Call", which updates regularly with Datadog's latest phone numbers.
 
@@ -154,20 +154,20 @@ Add On-Call home screen and lock screen widgets to access your pages and shifts.
 
 ### On-Call home screen widget
 
-View your On-Call shifts and On-Call pages on your mobile home screen with Datadog widgets.
+View your {{< prodname >}}On-Call{{< /prodname >}} shifts and {{< prodname >}}On-Call{{< /prodname >}} pages on your mobile home screen with Datadog widgets.
 
-You can customize your On-Call shift widgets by filtering on:
+You can customize your {{< prodname >}}On-Call{{< /prodname >}} shift widgets by filtering on:
 
 - Organization
 - Period of time
 
-You can customize your On-Call page widgets by filtering on:
+You can customize your {{< prodname >}}On-Call{{< /prodname >}} page widgets by filtering on:
 
 - Organization
 - Team
 - Order
 
-**Note**: You can add additional filters for the On-Call pages widget.
+**Note**: You can add additional filters for the {{< prodname >}}On-Call{{< /prodname >}} pages widget.
 
 #### Edit an On-Call shift widget
 
@@ -178,7 +178,7 @@ You can customize your On-Call page widgets by filtering on:
 
 1. Long press on the widget to configure.
 2. Tap {{< ui >}}Edit Widget{{< /ui >}} to bring up the configuration screen.
-3. Select the {{< ui >}}Organization{{< /ui >}} and {{< ui >}}Period{{< /ui >}} you would like to see your On-Call shifts for.
+3. Select the {{< ui >}}Organization{{< /ui >}} and {{< ui >}}Period{{< /ui >}} you would like to see your {{< prodname >}}On-Call{{< /prodname >}} shifts for.
 4. Tap out of the widget to validate your selection and exit the configuration screen.
 
 
@@ -188,7 +188,7 @@ You can customize your On-Call page widgets by filtering on:
 {{< img src="mobile/widgets/android_shifts_widget_may_2025.png" alt="Configured home screen On-Call shift widgets displayed on Android screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 1. Tap on the widget to configure.
-2. Select the {{< ui >}}Organization{{< /ui >}} and {{< ui >}}Time Period{{< /ui >}} you would like to see your On-Call shifts for.
+2. Select the {{< ui >}}Organization{{< /ui >}} and {{< ui >}}Time Period{{< /ui >}} you would like to see your {{< prodname >}}On-Call{{< /prodname >}} shifts for.
 3. Tap {{< ui >}}✓{{< /ui >}} to save the configuration.
 4. Long press and resize the widget to fit your preference.
 
@@ -197,15 +197,15 @@ You can customize your On-Call page widgets by filtering on:
 
 ### On-Call lock screen widget
 
-The On-Call lock screen widget displays your On-Call status. Lock screen widgets are only available on iOS.
+The On-Call lock screen widget displays your {{< prodname >}}On-Call{{< /prodname >}} status. Lock screen widgets are only available on iOS.
 
 1. Long press on your lock screen.
 2. Tap {{< ui >}}Customize{{< /ui >}}, then {{< ui >}}Lock Screen{{< /ui >}}.
 3. Tap on the lock screen widget space to pull up the {{< ui >}}Add Widgets{{< /ui >}} card.
 4. Scroll to and tap on the {{< ui >}}Datadog{{< /ui >}} app.
-4. Tap the On-Call lock screen widget.
+4. Tap the {{< prodname >}}On-Call{{< /prodname >}} lock screen widget.
 5. Tap the widget on the lock screen to pull up the configuration panel.
-6. Select the organization you would like to display your On-Call status for.
+6. Select the organization you would like to display your {{< prodname >}}On-Call{{< /prodname >}} status for.
 
 **Note**: You must have an empty space on your lock screen to add a new widget. You can delete lock screen widgets by tapping the {{< ui >}}-{{< /ui >}} button on the top left of the widget you would like to delete.
 

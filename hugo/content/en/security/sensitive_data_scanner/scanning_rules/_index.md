@@ -22,7 +22,7 @@ Physical address PII detection in logs using machine learning is in Preview. To 
 <div class="alert alert-info">Human Name Scanner detects personal names in logs using machine learning. The feature is in Preview for the {{< region-param key="dd_site_name" >}} site. Fill out the <a href="https://www.datadoghq.com/product-preview/human-name-pii-detection-in-logs-using-machine-learning/">form</a> to request access.</a></div>
 {{< /site-region >}}
 
-Sensitive Data Scanner for Telemetry Data uses scanning rules to determine what sensitive information to match within the data. This data can be from your application logs, APM spans, RUM events, and events from Event Management. You can use Datadog's [Scanning Rule Library][1] to create rules or you can create [custom rules][2].
+Sensitive Data Scanner for Telemetry Data uses scanning rules to determine what sensitive information to match within the data. This data can be from your application logs, APM spans, RUM events, and events from {{< prodname >}}Event Management{{< /prodname >}}. You can use Datadog's [Scanning Rule Library][1] to create rules or you can create [custom rules][2].
 
 Datadog's Scanning Rule Library containes predefined scanning rules that detect common patterns, such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more. See [Library Rules][1] for more information.
 

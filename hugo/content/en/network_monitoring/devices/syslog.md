@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Network Device Monitoring (NDM) uses Syslog to provide visibility into the health and performance of your network infrastructure. By integrating your network devices with Datadog through Syslog, you can collect and analyze log data, monitor device behavior, troubleshoot issues, and maintain network stability.
+{{< prodname >}}Network Device Monitoring{{< /prodname >}} (NDM) uses Syslog to provide visibility into the health and performance of your network infrastructure. By integrating your network devices with Datadog through Syslog, you can collect and analyze log data, monitor device behavior, troubleshoot issues, and maintain network stability.
 
 ## Prerequisites
 

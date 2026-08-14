@@ -40,7 +40,7 @@ Datadog supports different targeting rule types depending on your rollout strate
 
 To configure targeting rules for a flag:
 
-1. Navigate to **Feature Flags** and select your flag.
+1. Navigate to **{{< prodname >}}Feature Flags{{< /prodname >}}** and select your flag.
 2. Select the environment whose rules you want to modify.
 3. Click **Add Targeting Rule** (or click the targeting rule you want to modify).
 

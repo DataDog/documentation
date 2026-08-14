@@ -19,17 +19,17 @@ aliases:
 
 Use the `search_datadog_logs` tool on the [Datadog MCP (Model Context Protocol) server][1] to query logs stored in BYOC (Bring Your Own Cloud) Logs indexes. You can access the tool through AI-powered tools and integrations.
 
-**Note**: BYOC Logs indexes are supported only by `search_datadog_logs`. The `analyze_datadog_logs` tool and the `datadog/querying-patterns` skill do not support BYOC Logs indexes.
+**Note**: {{< prodname >}}BYOC Logs{{< /prodname >}} indexes are supported only by `search_datadog_logs`. The `analyze_datadog_logs` tool and the `datadog/querying-patterns` skill do not support {{< prodname >}}BYOC Logs{{< /prodname >}} indexes.
 
 ## Prerequisites
 
-- A running BYOC Logs deployment with logs ingested.
+- A running {{< prodname >}}BYOC Logs{{< /prodname >}} deployment with logs ingested.
 - Access to the [Datadog MCP server][1].
 - Your BYOC Logs index name (visible in the [Datadog Log Explorer][2] under {{< ui >}}BYOC INDEXES{{< /ui >}}).
 
 ## Querying BYOC Logs
 
-To query logs stored in BYOC Logs indexes, use `search_datadog_logs` and specify your BYOC Logs index name in addition to your standard log query.
+To query logs stored in {{< prodname >}}BYOC Logs{{< /prodname >}} indexes, use `search_datadog_logs` and specify your {{< prodname >}}BYOC Logs{{< /prodname >}} index name in addition to your standard log query.
 
 For best results, your prompt **should also include**:
 - (Recommended) Time range (for example, "in the last hour", "from the last 24 hours").
@@ -50,7 +50,7 @@ For examples of parameter and natural language queries, see [Advanced query exam
 
 ### Finding your BYOC Logs index name
 
-To find your BYOC Logs index name:
+To find your {{< prodname >}}BYOC Logs{{< /prodname >}} index name:
 
 1. Navigate to the [Datadog Log Explorer][2].
 2. Look for the {{< ui >}}BYOC INDEXES{{< /ui >}} section in the left facet panel.
@@ -60,7 +60,7 @@ You can also find your index names in the [BYOC Logs console][3] by selecting a 
 
 ## Advanced query examples
 
-When using AI-powered tools with `search_datadog_logs`, you can ask questions in natural language. The tool translates these into properly formatted BYOC Logs queries.
+When using AI-powered tools with `search_datadog_logs`, you can ask questions in natural language. The tool translates these into properly formatted {{< prodname >}}BYOC Logs{{< /prodname >}} queries.
 
 ### Error logs from a specific service
 **Prompt**:
@@ -106,9 +106,9 @@ When using AI-powered tools with `search_datadog_logs`, you can ask questions in
 
 ## Important notes
 
-- The `indexes` parameter must contain valid BYOC Logs index names (in the format `byoc--<cluster_name>--<index_name>`).
-- When using natural language queries, explicitly mention your BYOC Logs index name in your prompt.
-- BYOC Logs data is queryable in real-time as soon as it is indexed.
+- The `indexes` parameter must contain valid {{< prodname >}}BYOC Logs{{< /prodname >}} index names (in the format `byoc--<cluster_name>--<index_name>`).
+- When using natural language queries, explicitly mention your {{< prodname >}}BYOC Logs{{< /prodname >}} index name in your prompt.
+- {{< prodname >}}BYOC Logs{{< /prodname >}} data is queryable in real-time as soon as it is indexed.
 - Query syntax follows standard [Datadog log search syntax][4].
 
 ## Further reading

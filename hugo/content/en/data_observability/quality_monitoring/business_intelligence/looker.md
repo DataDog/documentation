@@ -41,7 +41,7 @@ Datadog's Looker integration helps data teams make changes to their data platfor
 
 Datadog parses LookML files to collect lineage and metadata for Looker views and derived tables.
 
-Connect each LookML Git repository to Datadog using the [Source Code Integration][4]. The next time the Looker integration runs on its hourly schedule, it automatically detects the repositories and parses the LookML files.
+Connect each LookML Git repository to Datadog using the [{{< prodname >}}Source Code Integration{{< /prodname >}}][4]. The next time the Looker integration runs on its hourly schedule, it automatically detects the repositories and parses the LookML files.
 
 If your Git repositories already appear on the Datadog [repositories page][5], no additional steps are required.
 

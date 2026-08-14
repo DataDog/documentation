@@ -22,7 +22,7 @@ further_reading:
 
 It is critical for your system’s health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting.
 
-Error Tracking simplifies debugging by grouping thousands of similar errors into a single issue. Error Tracking enables you to:
+{{< prodname >}}Error Tracking{{< /prodname >}} simplifies debugging by grouping thousands of similar errors into a single issue. {{< prodname >}}Error Tracking{{< /prodname >}} enables you to:
 
 - Track, triage, and debug fatal errors
 - Group similar errors into issues to identify important errors and reduce noise

@@ -17,7 +17,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -50,7 +50,7 @@ npm install dd-trace
 
 {{% collapse-content title="APM Tracing Enabled" level="h4" %}}
 
-Start your Node.js application with the Datadog library and App and API Protection enabled:
+Start your Node.js application with the Datadog library and {{< prodname >}}App and API Protection{{< /prodname >}} enabled:
 
 ```powershell
 $env:DD_APPSEC_ENABLED="true"
@@ -63,9 +63,9 @@ node --require dd-trace/init app.js
 {{% /collapse-content %}}
 
 {{% collapse-content title="APM Tracing Disabled" level="h4" %}}
-To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
+To disable APM tracing while keeping {{< prodname >}}App and API Protection{{< /prodname >}} enabled, you must set the APM tracing variable to false.
 
-Start your Node.js application with the Datadog library and App and API Protection enabled:
+Start your Node.js application with the Datadog library and {{< prodname >}}App and API Protection{{< /prodname >}} enabled:
 
 ```powershell
 $env:DD_APPSEC_ENABLED="true"
@@ -86,7 +86,7 @@ Start your Node.js application with the configured settings.
 
 ## Troubleshooting
 
-If you encounter issues while setting up App and API Protection for your Node.js application, see the [Node.js App and API Protection troubleshooting guide][2].
+If you encounter issues while setting up {{< prodname >}}App and API Protection{{< /prodname >}} for your Node.js application, see the [Node.js App and API Protection troubleshooting guide][2].
 
 ## Further Reading
 

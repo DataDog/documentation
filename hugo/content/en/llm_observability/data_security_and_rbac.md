@@ -12,9 +12,9 @@ further_reading:
 
 ## Data Access Control
 
-Agent Observability allows you to restrict access to potentially sensitive data associated with your ML applications to only certain teams and roles in your organization. This is particularly important when your LLM applications process sensitive information such as personal data, proprietary business information, or confidential user interactions.
+{{< prodname >}}Agent Observability{{< /prodname >}} allows you to restrict access to potentially sensitive data associated with your ML applications to only certain teams and roles in your organization. This is particularly important when your LLM applications process sensitive information such as personal data, proprietary business information, or confidential user interactions.
 
-Access controls in Agent Observability are built on Datadog's [Data Access Control][1] feature, which enables you to regulate access to data deemed sensitive. You can use the `ml_app` tag to identify and restrict access to specific LLM applications within your organization.
+Access controls in {{< prodname >}}Agent Observability{{< /prodname >}} are built on Datadog's [Data Access Control][1] feature, which enables you to regulate access to data deemed sensitive. You can use the `ml_app` tag to identify and restrict access to specific LLM applications within your organization.
 
 ## Redacting data with span processors
 
@@ -29,9 +29,9 @@ For detailed implementation examples and usage patterns, see the [Span Processin
 
 ## Sensitive Data Scanner integration
 
-Agent Observability integrates with [Sensitive Data Scanner][3], which helps prevent data leakage by identifying and redacting any sensitive information (such as personal data, financial details, or proprietary information) that may be present in any step of your LLM application.
+{{< prodname >}}Agent Observability{{< /prodname >}} integrates with [Sensitive Data Scanner][3], which helps prevent data leakage by identifying and redacting any sensitive information (such as personal data, financial details, or proprietary information) that may be present in any step of your LLM application.
 
-By proactively scanning for sensitive data, Agent Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
+By proactively scanning for sensitive data, {{< prodname >}}Agent Observability{{< /prodname >}} ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
 
 ## Further reading
 

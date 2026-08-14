@@ -2,7 +2,7 @@
 title: Setting Up Datadog Database Monitoring with RDS Autodiscovery Using Terraform
 ---
 
-This guide walks you through deploying a Datadog Agent on an EC2 instance with RDS Autodiscovery enabled, using Terraform. The Agent automatically discovers eligible RDS instances in your AWS account and begins collecting Database Monitoring metrics — no manual  configuration required.
+This guide walks you through deploying a Datadog Agent on an EC2 instance with RDS Autodiscovery enabled, using Terraform. The Agent automatically discovers eligible RDS instances in your AWS account and begins collecting {{< prodname >}}Database Monitoring{{< /prodname >}} metrics — no manual  configuration required.
 
 ## Before you begin
 

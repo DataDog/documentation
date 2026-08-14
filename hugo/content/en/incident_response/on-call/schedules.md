@@ -12,7 +12,7 @@ In Datadog On-Call, schedules define the specific times when team members are av
 
 ### Concepts
 
-On-Call schedules are structured in layers, where each layer covers different parts of the week or specific responsibilities.
+{{< prodname >}}On-Call{{< /prodname >}} schedules are structured in layers, where each layer covers different parts of the week or specific responsibilities.
 
 Consider the following example schedule:
 
@@ -55,7 +55,7 @@ To completely or partially override a shift, select the shift and click **Overri
 
 #### Request overrides in Slack or Microsoft Teams
 
-If you are part of an On-Call rotation, and you know that you will be out of office during your shift, you can request an override in Slack or Microsoft Teams. Type `/dd override`, select the timeframe to be overridden, and add a description. This sends a request to the channel:
+If you are part of an {{< prodname >}}On-Call{{< /prodname >}} rotation, and you know that you will be out of office during your shift, you can request an override in Slack or Microsoft Teams. Type `/dd override`, select the timeframe to be overridden, and add a description. This sends a request to the channel:
 
 {{< img src="incident_response/on-call/schedules/schedule_override_request.png" alt="In Slack, a message from Datadog Staging reads: '@Daljeet has an override request. Schedule: [Primary] Payments & Transactions (payments-transactions). Start: Today, 1:00PM. End: Today, 3:00 PM. Duration: 2h. Note: Doctor's appointment. Will offer cookies for override.' A button labeled 'Take it' appears at the end of the message." style="width:80%;" >}}
 
@@ -101,16 +101,16 @@ Enable reminders for upcoming shifts in your calendar app. You can also configur
 
 #### Troubleshooting schedule exports
 
-If you encounter issues when exporting your On-Call schedule feeds to Google Calendar (such as "could not fetch URL) or Outlook ("Couldn't import calendar. Try again"), try the following fixes when initially subscribing to the calendar through URL:
+If you encounter issues when exporting your {{< prodname >}}On-Call{{< /prodname >}} schedule feeds to Google Calendar (such as "could not fetch URL) or Outlook ("Couldn't import calendar. Try again"), try the following fixes when initially subscribing to the calendar through URL:
 
 - Change `webcal://` to `http://` or `https://` at the beginning of the URL. For example, change `webcal://<your_personal_link>` to `http://<your_personal_link>`.
 
 ### Managing user departures
 
-When team members leave your organisation, they are not automatically removed from On-Call schedules:
+When team members leave your organisation, they are not automatically removed from {{< prodname >}}On-Call{{< /prodname >}} schedules:
 
-- **Schedule membership**: Departed users remain in On-Call schedules until manually removed. You must update schedules to remove former team members and reassign their shifts.
-- **Notifications**: If a user's Datadog account is deactivated, they no longer receive On-Call notifications (such as SMS, email, and push notifications), even if still assigned to scheduled shifts.
+- **Schedule membership**: Departed users remain in {{< prodname >}}On-Call{{< /prodname >}} schedules until manually removed. You must update schedules to remove former team members and reassign their shifts.
+- **Notifications**: If a user's Datadog account is deactivated, they no longer receive {{< prodname >}}On-Call{{< /prodname >}} notifications (such as SMS, email, and push notifications), even if still assigned to scheduled shifts.
 
 ## Further Reading
 

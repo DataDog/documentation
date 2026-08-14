@@ -73,24 +73,24 @@ further_reading:
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Security">}}
-  Learn how Datadog Cloud SIEM and Cloud Security elevate your organization's threat detection and investigation for dynamic, cloud-scale environments.
+  Learn how Datadog Cloud SIEM and {{< prodname >}}Cloud Security{{< /prodname >}} elevate your organization's threat detection and investigation for dynamic, cloud-scale environments.
 {{< /learning-center-callout >}}
 
 ## Overview
 
-Datadog Cloud SIEM (Security Information and Event Management) is a security data analysis and correlation system. It enables your entire security operations team to view, detect, investigate, and respond to security issues. Leveraging Datadog's scalable platform, Cloud SIEM ingests telemetry from both cloud and on‑premises systems using the Datadog Agent and API-based integrations.
+Datadog Cloud SIEM (Security Information and {{< prodname >}}Event Management{{< /prodname >}}) is a security data analysis and correlation system. It enables your entire security operations team to view, detect, investigate, and respond to security issues. Leveraging Datadog's scalable platform, {{< prodname >}}Cloud SIEM{{< /prodname >}} ingests telemetry from both cloud and on‑premises systems using the Datadog Agent and API-based integrations.
 
-Effective security response requires speed, context, insight, and automation. Cloud SIEM continuously analyzes incoming data to detect threats, generate actionable security signals, and correlate them across multiple sources. This empowers your team to investigate incidents and respond quickly.
+Effective security response requires speed, context, insight, and automation. {{< prodname >}}Cloud SIEM{{< /prodname >}} continuously analyzes incoming data to detect threats, generate actionable security signals, and correlate them across multiple sources. This empowers your team to investigate incidents and respond quickly.
 
 To keep your team on top of the latest attacks, Datadog also has a team of threat researchers who analyze petabytes of telemetry across cloud and on-premises systems to identify emerging threats and attacker behaviors. See [Datadog Security Labs][1] to read articles about their recent investigations.
 
 ### Security and observability
 
-Cloud SIEM embeds both cloud and on-premises telemetry directly into security workflows to accelerate investigation and response. And with a shared platform that brings DevOps and Security teams together, organizations can break down silos and respond to threats collaboratively and efficiently.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} embeds both cloud and on-premises telemetry directly into security workflows to accelerate investigation and response. And with a shared platform that brings DevOps and Security teams together, organizations can break down silos and respond to threats collaboratively and efficiently.
 
 ### Flexible cost control for security data
 
-As your organization scales, controlling the ingestion cost of security logs without compromising visibility is critical. Cloud SIEM is integrated with Datadog Log Management so you can choose the appropriate retention and querying capability for  your security logs. This flexibility helps you balance cost efficiency with your threat detection needs.
+As your organization scales, controlling the ingestion cost of security logs without compromising visibility is critical. {{< prodname >}}Cloud SIEM{{< /prodname >}} is integrated with Datadog Log Management so you can choose the appropriate retention and querying capability for  your security logs. This flexibility helps you balance cost efficiency with your threat detection needs.
 
 Store logs using one of the available options:
 - [Standard indexing][6] for logs that need to be queried frequently with the most compute.
@@ -99,7 +99,7 @@ Store logs using one of the available options:
 
 ### Guided security data onboarding
 
-Cloud SIEM [Content Packs][9] are a curated set of Datadog integrations designed for security teams. Each content pack has instructions on how to configure the integration and what is included, such as detection rules, out-of-the-box interactive dashboards, parsers, and SOAR workflows. Content Packs highlight actionable insights specific to each integration to help you investigate security issues.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} [Content Packs][9] are a curated set of Datadog integrations designed for security teams. Each content pack has instructions on how to configure the integration and what is included, such as detection rules, out-of-the-box interactive dashboards, parsers, and SOAR workflows. Content Packs highlight actionable insights specific to each integration to help you investigate security issues.
 
 ### Content pack health monitoring
 
@@ -163,7 +163,7 @@ See signals grouped by rule name and sorted by severity to get an overview of th
 
 #### Recent open security cases
 
-Use [Case Management][5] to track signals that require further analysis. View active security cases in your environment and click a case to see more details.
+Use [{{< prodname >}}Case Management{{< /prodname >}}][5] to track signals that require further analysis. View active security cases in your environment and click a case to see more details.
 
 ### Risk insights
 
@@ -242,7 +242,7 @@ See which MITRE ATT&CK techniques are generating signals. Click on a pie chart w
 
 {{< img src="security/security_monitoring/landing/07_detection_rule_performance.png" alt="" style="width:100%;" >}}
 
-Gain a deeper understanding of detection rule performance. This section works best if you triage signals in Cloud SIEM.
+Gain a deeper understanding of detection rule performance. This section works best if you triage signals in {{< prodname >}}Cloud SIEM{{< /prodname >}}.
 
 #### MTTD KPIs for Cloud SIEM
 

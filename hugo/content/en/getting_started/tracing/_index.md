@@ -23,11 +23,11 @@ further_reading:
 
 ## Overview
 
-Datadog Application Performance Monitoring (APM) provides deep visibility into your applications, enabling you to identify performance bottlenecks, troubleshoot issues, and optimize your services.
+{{< prodname >}}Datadog Application Performance Monitoring{{< /prodname >}} (APM) provides deep visibility into your applications, enabling you to identify performance bottlenecks, troubleshoot issues, and optimize your services.
 
 This guide demonstrates how to get started with APM and send your first trace to Datadog:
 
-1. Set up Datadog APM to send traces to Datadog.
+1. Set up {{< prodname >}}Datadog APM{{< /prodname >}} to send traces to Datadog.
 1. Run your application to generate data.
 1. Explore the collected data in Datadog.
 
@@ -71,7 +71,7 @@ To create an application to observe in Datadog:
 
 ## Set up Datadog APM
 
-To set up Datadog APM without needing to modify your application's code or the deployment process, use Single Step APM Instrumentation, or alternatively, you can set up APM using [Datadog tracing][8] libraries.
+To set up {{< prodname >}}Datadog APM{{< /prodname >}} without needing to modify your application's code or the deployment process, use Single Step APM Instrumentation, or alternatively, you can set up APM using [Datadog tracing][8] libraries.
 
 
 1. Run the installation command:
@@ -89,11 +89,11 @@ To set up Datadog APM without needing to modify your application's code or the d
    sudo datadog-agent status
    ```
 
-This approach automatically installs the Datadog Agent, enables Datadog APM, and [instruments][5] your application at runtime.
+This approach automatically installs the Datadog Agent, enables {{< prodname >}}Datadog APM{{< /prodname >}}, and [instruments][5] your application at runtime.
 
 ## Run the application
 
-When you set up Datadog APM with Single Step Instrumentation, Datadog automatically instruments your application at runtime.
+When you set up {{< prodname >}}Datadog APM{{< /prodname >}} with Single Step Instrumentation, Datadog automatically instruments your application at runtime.
 
 To run `hello.py`:
 

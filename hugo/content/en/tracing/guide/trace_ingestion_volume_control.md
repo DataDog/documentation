@@ -21,7 +21,7 @@ With the ingestion control page, you have full visibility and complete control o
 
 {{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_25_percent.png" alt="APM ingestion sampling displaying 25 percent complete traces ingested" style="width:70%;" >}}
 
-If you decide to reduce the ingestion volume for certain services, the **request, error, and latency [metrics][3]** (known as RED metrics, for Requests, Errors, and Duration) remain 100% accurate, as they are being calculated based on 100% of the application's traffic, regardless of any sampling configuration. These metrics are included when purchasing Datadog APM. In order to make sure you have full visibility into your application's traffic, you can use these metrics to spot potential errors on a service or a resource, by creating dashboards, monitors, and SLOs.
+If you decide to reduce the ingestion volume for certain services, the **request, error, and latency [metrics][3]** (known as RED metrics, for Requests, Errors, and Duration) remain 100% accurate, as they are being calculated based on 100% of the application's traffic, regardless of any sampling configuration. These metrics are included when purchasing {{< prodname >}}Datadog APM{{< /prodname >}}. In order to make sure you have full visibility into your application's traffic, you can use these metrics to spot potential errors on a service or a resource, by creating dashboards, monitors, and SLOs.
 
 **Note**: If your applications and services are instrumented with OpenTelemetry libraries and you set up sampling at the SDK level and/or at the collector level, APM metrics are based on the **sampled** set of data by default. See [Ingestion Sampling with OpenTelemetry][4] for more information.
 

@@ -14,9 +14,9 @@ further_reading:
 
 This guide assumes that you have configured the [Datadog Heroku buildpack][1] in your application dynos.
 
-[Datadog Database Monitoring][2] allows you to view query metrics and explain plans from all of your databases in a single place. This guide covers how to set up Database Monitoring for a [Heroku Postgres managed database][3].
+[Datadog Database Monitoring][2] allows you to view query metrics and explain plans from all of your databases in a single place. This guide covers how to set up {{< prodname >}}Database Monitoring{{< /prodname >}} for a [Heroku Postgres managed database][3].
 
-*Note*: Only databases in the [Standard and Premium plans][4] publish metrics used by the integration. Not all the features of Database Monitoring are available when used with a Postgres instance in the Hobby plan.
+*Note*: Only databases in the [Standard and Premium plans][4] publish metrics used by the integration. Not all the features of {{< prodname >}}Database Monitoring{{< /prodname >}} are available when used with a Postgres instance in the Hobby plan.
 
 ## Preparing the Postgres Database
 
@@ -107,7 +107,7 @@ For tuning options, see [Advanced Configuration][8].
 
 Configure the Datadog Agent to enable the Postgres integration, using one of the following two options.
 
-**Option A**: Use a buildpack to create a static Postgres configuration that cannot be modified. In addition, Database Monitoring may be enabled through this method.
+**Option A**: Use a buildpack to create a static Postgres configuration that cannot be modified. In addition, {{< prodname >}}Database Monitoring{{< /prodname >}} may be enabled through this method.
 
 **Option B**: Create a custom Postgres configuration with the ability to enable additional features that aren’t available through the static configuration in Option A.
 
@@ -123,7 +123,7 @@ git commit --allow-empty -m "enabled postgres integration"
 git push heroku main
 ```
 
-To enable both the Postgres integration and Database Monitoring, set `DD_ENABLE_HEROKU_POSTGRES` and `DD_ENABLE_DBM` to true:
+To enable both the Postgres integration and {{< prodname >}}Database Monitoring{{< /prodname >}}, set `DD_ENABLE_HEROKU_POSTGRES` and `DD_ENABLE_DBM` to true:
 
 ``` shell
 heroku config:set DD_ENABLE_HEROKU_POSTGRES=true
@@ -132,7 +132,7 @@ git commit --allow-empty -m "enabled postgres integration with DBM"
 git push heroku main
 ```
 
-The Postgres integration and, if enabled, Database Monitoring, will begin collecting metrics.
+The Postgres integration and, if enabled, {{< prodname >}}Database Monitoring{{< /prodname >}}, will begin collecting metrics.
 {{% /tab %}}
 
 {{% tab "Option B: Custom Configuration" %}}

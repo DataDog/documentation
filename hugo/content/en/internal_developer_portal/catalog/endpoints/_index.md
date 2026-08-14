@@ -54,7 +54,7 @@ The Endpoints list combines data from across Datadog to provide opinionated work
 
 ## Getting started
 
-Your endpoints automatically populate in the Endpoints list if you use [Datadog APM][8] to monitor HTTP services.
+Your endpoints automatically populate in the Endpoints list if you use [{{< prodname >}}Datadog APM{{< /prodname >}}][8] to monitor HTTP services.
 
 ### Exploring endpoints
 

@@ -27,7 +27,7 @@ Datadog builds lineage automatically from metadata collected through your [Quali
 
 {{< img src="data_observability/lineage/lineage-overview.png" alt="The Lineage page showing upstream and downstream dependencies for an anchored Snowflake table" style="width:100%;" >}}
 
-To open Lineage, go to {{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Lineage{{< /ui >}}.
+To open Lineage, go to {{< ui >}}{{< prodname >}}Data Observability{{< /prodname >}}{{< /ui >}} > {{< ui >}}Lineage{{< /ui >}}.
 
 ## Select anchor assets
 

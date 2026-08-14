@@ -38,18 +38,18 @@ further_reading:
 ---
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Change Tracking is not available in the selected site ({{< region-param key="dd_site_name" >}})</div>
+<div class="alert alert-danger">{{< prodname >}}Change Tracking{{< /prodname >}} is not available in the selected site ({{< region-param key="dd_site_name" >}})</div>
 {{< /site-region >}}
 
 ## Overview
 
-Change Tracking streamlines troubleshooting and incident response by surfacing relevant changes to your service and its dependencies, enabling faster detection and remediation when issues arise.
+{{< prodname >}}Change Tracking{{< /prodname >}} streamlines troubleshooting and incident response by surfacing relevant changes to your service and its dependencies, enabling faster detection and remediation when issues arise.
 
 {{< img src="/change_tracking/change-tracking-overview-2.png" alt="The details of a change on the Recent Changes timeline in the Service Summary" style="width:100%;" >}}
 
-Change Tracking supports monitoring of a range of modifications to your service and its dependencies including:
+{{< prodname >}}Change Tracking{{< /prodname >}} supports monitoring of a range of modifications to your service and its dependencies including:
 - Deployments
-- [Feature Flags][14]
+- [{{< prodname >}}Feature Flags{{< /prodname >}}][14]
 - Traffic Spikes
 - Configuration Changes
 - Database Modifications
@@ -63,7 +63,7 @@ For details on specific types of supported changes and setup requirements, see t
 
 ## Using Change Tracking
 
-Change Tracking is available on several pages in Datadog:
+{{< prodname >}}Change Tracking{{< /prodname >}} is available on several pages in Datadog:
 
 ### Monitor status page
 
@@ -124,30 +124,30 @@ To see relevant changes within the timeline and as overlays on your dashboard, e
 
 ### Widgets
 
-In addition to the out-of-the-box integrations, Change Tracking is available as a data source for widgets across Datadog, including Dashboards and Notebooks.
+In addition to the out-of-the-box integrations, {{< prodname >}}Change Tracking{{< /prodname >}} is available as a data source for widgets across Datadog, including Dashboards and Notebooks.
 
 {{< img src="/change_tracking/change-tracking-datasource-examples.png" alt="Change Tracking datasource examples" style="width:100%;" >}}
 
-To configure a widget using Change Tracking data:
+To configure a widget using {{< prodname >}}Change Tracking{{< /prodname >}} data:
 
 1.	In a dashboard or notebook, add or edit a supported widget type (Timeseries, Query Value, Table, Tree Map, Top List, Pie, Change, or Bar Chart).
-3.	From the {{< ui >}}data source{{< /ui >}} dropdown, select {{< ui >}}Change Tracking{{< /ui >}}.
+3.	From the {{< ui >}}data source{{< /ui >}} dropdown, select {{< ui >}}{{< prodname >}}Change Tracking{{< /prodname >}}{{< /ui >}}.
 4.	Configure your filters ({{< ui >}}Service{{< /ui >}} is required).
 5.	(Optional) For widgets that support grouping, use {{< ui >}}Group by{{< /ui >}} to split results.
 
 {{< img src="/change_tracking/change-tracking-datasource-edit-widget.png" alt="Change Tracking datasource widgets" style="width:100%;" >}}
 
-For Timeseries widgets, you can also enable Change Tracking as an {{< ui >}}Event Overlay{{< /ui >}}, which displays changes on top of the timeseries to help correlate them with metric behavior.
+For Timeseries widgets, you can also enable {{< prodname >}}Change Tracking{{< /prodname >}} as an {{< ui >}}Event Overlay{{< /ui >}}, which displays changes on top of the timeseries to help correlate them with metric behavior.
 
 {{< img src="/change_tracking/change-tracking-datasource-edit-overlay.png" alt="Change Tracking datasource as Event Overlay" style="width:100%;" >}}
 
 
 #### View change details
 
-To view information about a change or set of changes, click a datapoint in the widget and select {{< ui >}}View Changes{{< /ui >}}. This opens the Change Tracking side panel with additional details.
+To view information about a change or set of changes, click a datapoint in the widget and select {{< ui >}}View Changes{{< /ui >}}. This opens the {{< prodname >}}Change Tracking{{< /prodname >}} side panel with additional details.
 
 ## Tracked changes
-Change Tracking follows these types of changes across your infrastructure:
+{{< prodname >}}Change Tracking{{< /prodname >}} follows these types of changes across your infrastructure:
 
 | Change Type                                                                      | Tracking Requirements                                                                                                                                                                   |
 |----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

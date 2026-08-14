@@ -15,11 +15,11 @@ further_reading:
 
 Conversion funnels show where users drop off, but not always why. The root cause can be a layout issue, a third-party overlay, or a rendering problem on certain devices. These are issues that don't appear in error logs and are difficult to reproduce without matching exact conditions.
 
-This guide walks through a workflow for diagnosing funnel drop-offs by combining [Product Analytics][1] with [Session Replay][2]. Product Analytics narrows down who is dropping off, while Session Replay shows you exactly what they encountered.
+This guide walks through a workflow for diagnosing funnel drop-offs by combining [{{< prodname >}}Product Analytics{{< /prodname >}}][1] with [Session Replay][2]. {{< prodname >}}Product Analytics{{< /prodname >}} narrows down who is dropping off, while Session Replay shows you exactly what they encountered.
 
 ## Spot the drop in Product Analytics
 
-In this example, a funnel in Product Analytics tracks each step of a campaign landing page: landing page, CTA click, flow completion, and conversion.
+In this example, a funnel in {{< prodname >}}Product Analytics{{< /prodname >}} tracks each step of a campaign landing page: landing page, CTA click, flow completion, and conversion.
 
 {{< img src="real_user_monitoring/session_replay/guides/spot-the-drop.png" alt="A funnel chart in Product Analytics showing conversion rate dropping from approximately 60% to 35% over a five-day period at the landing page step" style="width:100%;" >}}
 
@@ -53,7 +53,7 @@ After the fix ships, monitor the same funnel to confirm click-through rates for 
 
 Use this workflow whenever a funnel moves and the cause is not immediately clear:
 
-1. Detect the drop in Product Analytics and identify the affected step.
+1. Detect the drop in {{< prodname >}}Product Analytics{{< /prodname >}} and identify the affected step.
 2. Segment the funnel by device, region, browser, or other attributes to isolate who is affected.
 3. Watch Session Replays of the affected cohort.
 4. Identify the root cause from what you observe in the sessions.

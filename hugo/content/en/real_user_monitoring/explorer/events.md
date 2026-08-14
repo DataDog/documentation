@@ -74,7 +74,7 @@ Use the other tabs to explore related data:
 {{< ui >}}Traces{{< /ui >}}
 : See backend traces connected to the event.
 
-{{< ui >}}Feature Flags{{< /ui >}}
+{{< ui >}}{{< prodname >}}Feature Flags{{< /prodname >}}{{< /ui >}}
 : View feature flags evaluated during the event.
 
 {{< ui >}}Actions{{< /ui >}}

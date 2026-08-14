@@ -104,7 +104,7 @@ To enable job logs collection:
 
 Immediately after toggling logs collection, workflow job logs are forwarded to Datadog Log Management. Log files larger than 1 GiB are truncated.
 
-Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for GitHub jobs can be identified by the `datadog.product:cipipeline` and `source:github` tags.
+Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [{{< prodname >}}Log Management{{< /prodname >}}][16]. Logs for GitHub jobs can be identified by the `datadog.product:cipipeline` and `source:github` tags.
 
 ### Correlate infrastructure metrics to jobs
 

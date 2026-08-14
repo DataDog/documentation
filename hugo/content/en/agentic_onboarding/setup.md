@@ -11,7 +11,7 @@ Agentic Onboarding is a set of AI-driven tools that automate Datadog instrumenta
 - [AI Setup CLI](#ai-setup-cli): Set up Datadog from a terminal, without a coding assistant.
 - [MCP server](#mcp-server): Set up Datadog through a coding assistant (such as Claude Code or Cursor), which handles framework detection and configuration from your IDE.
 
-The two paths are complementary and use the same Datadog account. You can install the Datadog MCP Server in your IDE and run the CLI in a terminal.
+The two paths are complementary and use the same Datadog account. You can install the {{< prodname >}}Datadog MCP Server{{< /prodname >}} in your IDE and run the CLI in a terminal.
 
 ## AI Setup CLI
 
@@ -146,7 +146,7 @@ Add the server to `~/.cursor/mcp.json`:
 
 {{% tab "Other MCP clients" %}}
 
-Any MCP client that supports HTTP transport can connect to the Datadog MCP Server. Point it at the endpoint for your [Datadog site][1]:
+Any MCP client that supports HTTP transport can connect to the {{< prodname >}}Datadog MCP Server{{< /prodname >}}. Point it at the endpoint for your [Datadog site][1]:
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=onboarding</code></pre>
 
@@ -189,7 +189,7 @@ Send the prompt that matches the product you want to set up:
 {{% /tab %}}
 
 {{% tab "App and API Protection (Preview)" %}}
-<div class="alert alert-info">Agentic onboarding for App and API Protection is in Public Preview.</div>
+<div class="alert alert-info">Agentic onboarding for {{< prodname >}}App and API Protection{{< /prodname >}} is in Public Preview.</div>
 
 {{< code-block lang="text" >}}Add Datadog App and API Protection to my project{{< /code-block >}}
 {{% /tab %}}
@@ -228,8 +228,8 @@ After the agent completes, commit the changes to your repository and set any new
 
 Confirm data is flowing in the Datadog UI for the product you set up:
 
-- [Error Tracking][6]
-- [App and API Protection][11]
+- [{{< prodname >}}Error Tracking{{< /prodname >}}][6]
+- [{{< prodname >}}App and API Protection{{< /prodname >}}][11]
 - [RUM > Applications][7]
 - [Infrastructure > Hosts][8]
 - [Serverless > Functions][9]

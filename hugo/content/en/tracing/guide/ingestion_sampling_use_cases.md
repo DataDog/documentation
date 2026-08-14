@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Trace data tends to be repetitive. A problem in your application is rarely identified in only one trace and no others. For high throughput services, particularly for incidents that require your attention, an issue shows symptoms repeatedly in multiple traces. Consequently, there's usually no need for you to collect every single trace for a service or endpoint, or every span within a trace. Datadog APM [ingestion control mechanisms][1] help you keep the visibility that you need to troubleshoot problems, while cutting down the noise and managing costs.
+Trace data tends to be repetitive. A problem in your application is rarely identified in only one trace and no others. For high throughput services, particularly for incidents that require your attention, an issue shows symptoms repeatedly in multiple traces. Consequently, there's usually no need for you to collect every single trace for a service or endpoint, or every span within a trace. {{< prodname >}}Datadog APM{{< /prodname >}} [ingestion control mechanisms][1] help you keep the visibility that you need to troubleshoot problems, while cutting down the noise and managing costs.
 
 Ingestion mechanisms are configurations within the Datadog Agent and Datadog SDKs. If you are using OpenTelemetry SDKs to instrument your applications, read [Ingestion Sampling with OpenTelemetry][2].
 

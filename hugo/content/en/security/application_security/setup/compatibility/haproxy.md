@@ -7,11 +7,11 @@ code_lang_weight: 40
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
-The following table lists App and API Protection capabilities for the HAProxy integration according to the specified Datadog HAProxy SPOA image version:
+The following table lists {{< prodname >}}App and API Protection{{< /prodname >}} capabilities for the HAProxy integration according to the specified Datadog HAProxy SPOA image version:
 
 | App and API Protection capability              | Minimum Datadog HAProxy SPOA image version |
 |------------------------------------------------|--------------------------------------------|
@@ -33,7 +33,7 @@ The Datadog HAProxy SPOA supports the processing of request and response bodies 
 
 ## HAProxy version support
 
-The Datadog HAProxy integration for App and API Protection relies on features that might not be present in every HAProxy version. The following table shows which HAProxy versions support each feature.
+The Datadog HAProxy integration for {{< prodname >}}App and API Protection{{< /prodname >}} relies on features that might not be present in every HAProxy version. The following table shows which HAProxy versions support each feature.
 
 | Feature | Minimum HAProxy version |
 |---------|-----------------------|
@@ -43,7 +43,7 @@ The Datadog HAProxy integration for App and API Protection relies on features th
 
 All currently supported (non-EOL) HAProxy versions are compatible and supported with the Datadog App and API Protection integration.
 
-<div class="alert alert-info">The Datadog HAProxy integration for App and API Protection is in Preview.</div>
+<div class="alert alert-info">The Datadog HAProxy integration for {{< prodname >}}App and API Protection{{< /prodname >}} is in Preview.</div>
 
 Please refer to the [limitations][1] of the Datadog App and API Protection HAProxy integration.
 

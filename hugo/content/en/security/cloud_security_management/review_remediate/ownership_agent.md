@@ -18,7 +18,7 @@ further_reading:
 
 The Ownership Agent analyzes cloud resources that have security findings and infers who is responsible for each one. For every resource, it produces a suggested owner—a team, service, or individual—along with a confidence score, a short explanation, and a list of the evidence signals it used.
 
-Ownership suggestions appear in the Cloud Security side panel when you view a misconfiguration or finding. You can edit each suggestion with the correct team/service/individual, which additionally improves future inference results.
+Ownership suggestions appear in the {{< prodname >}}Cloud Security{{< /prodname >}} side panel when you view a misconfiguration or finding. You can edit each suggestion with the correct team/service/individual, which additionally improves future inference results.
 
 ## Data sources
 
@@ -74,7 +74,7 @@ Corrections and feedback are vital for tuning the agent. They also affect how th
 
 ## Automatic team assignment
 
-By default, high-confidence ownership inferences are applied to the `team` tag on Cloud Security findings. Inferred owners then become available in other Datadog features, including the [Datadog MCP server](/mcp_server/) and automatic notification routing.
+By default, high-confidence ownership inferences are applied to the `team` tag on {{< prodname >}}Cloud Security{{< /prodname >}} findings. Inferred owners then become available in other Datadog features, including the [Datadog MCP server](/mcp_server/) and automatic notification routing.
 
 To adjust the confidence threshold or turn off automatic team assignment, use the [ownership settings page](https://app.datadoghq.com/security/configuration/csm/ownership-agent).
 

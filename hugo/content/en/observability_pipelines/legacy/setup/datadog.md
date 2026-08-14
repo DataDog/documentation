@@ -31,7 +31,7 @@ This guide walks you through deploying the Worker in your common tools cluster a
 {{% op-deployment-modes %}}
 
 ## Assumptions
-* You are already using Datadog and want to use Observability Pipelines.
+* You are already using Datadog and want to use {{< prodname >}}Observability Pipelines{{< /prodname >}}.
 * You have administrative access to the clusters where the Observability Pipelines Worker is going to be deployed, as well as to the workloads that are going to be aggregated.
 * You have a common tools or security cluster for your environment to which all other clusters are connected.
 
@@ -41,7 +41,7 @@ Before installing, make sure you have:
 * A valid [Datadog API key][2].
 * A Pipeline ID.
 
-You can generate both of these in [Observability Pipelines][3].
+You can generate both of these in [{{< prodname >}}Observability Pipelines{{< /prodname >}}][3].
 
 ### Provider-specific requirements
 {{< tabs >}}
@@ -136,7 +136,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -v ./pipeline.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
       datadog/observability-pipelines-worker run
     ```
-    Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1.
+    Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your {{< prodname >}}Observability Pipelines{{< /prodname >}} configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1.
   
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
@@ -412,7 +412,7 @@ An NLB is provisioned by the CloudFormation template, and is configured to point
 {{< /tabs >}}
 
 ### Buffering
-Observability Pipelines includes multiple buffering strategies that allow you to increase the resilience of your cluster to downstream faults. The provided sample configurations use disk buffers, the capacities of which are rated for approximately 10 minutes of data at 10Mbps/core for Observability Pipelines deployments. That is often enough time for transient issues to resolve themselves, or for incident responders to decide what needs to be done with the observability data.
+{{< prodname >}}Observability Pipelines{{< /prodname >}} includes multiple buffering strategies that allow you to increase the resilience of your cluster to downstream faults. The provided sample configurations use disk buffers, the capacities of which are rated for approximately 10 minutes of data at 10Mbps/core for {{< prodname >}}Observability Pipelines{{< /prodname >}} deployments. That is often enough time for transient issues to resolve themselves, or for incident responders to decide what needs to be done with the observability data.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -473,10 +473,10 @@ At this point, your observability data should be going to the Worker and is avai
 {{% op-updating-deployment-modes %}}
 
 ## Working with data
-The sample configuration provided has example processing steps that demonstrate Observability Pipelines tools and ensures that data sent to Datadog is in the correct format.
+The sample configuration provided has example processing steps that demonstrate {{< prodname >}}Observability Pipelines{{< /prodname >}} tools and ensures that data sent to Datadog is in the correct format.
 
 ### Processing logs
-The sample Observability Pipelines configuration does the following:
+The sample {{< prodname >}}Observability Pipelines{{< /prodname >}} configuration does the following:
 - Collects logs sent from the Datadog agent to the Observability Pipelines Worker.
 - Tags logs coming through the Observability Pipelines Worker. This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
 - Corrects the status of logs coming through the Worker. Due to how the Datadog Agent collects logs from containers, the provided `.status` attribute does not properly reflect the actual level of the message. It is removed to prevent issues with parsing rules in the backend, where logs are received from the Worker.
@@ -487,7 +487,7 @@ The following are two important components in the example configuration:
 
 Internally, the Datadog Agent represents log tags as a CSV in a single string. To effectively manipulate these tags, they must be parsed, modified, and then re-encoded before they are sent to the ingest endpoint. These steps are written to automatically perform those actions for you. Any modifications you make to the pipeline, especially for manipulating tags, should be in between these two steps.
 
-At this point, your environment is configured for Observability Pipelines with data flowing through it. Further configuration is likely required for your specific use cases, but the tools provided give you a starting point.
+At this point, your environment is configured for {{< prodname >}}Observability Pipelines{{< /prodname >}} with data flowing through it. Further configuration is likely required for your specific use cases, but the tools provided give you a starting point.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}

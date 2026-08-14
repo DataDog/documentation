@@ -19,15 +19,15 @@ The Microsoft Teams integration for Datadog Incident Management enables you to d
 
 ## Prerequisites
 
-To use Incident Management's Microsoft Teams features, you must first [install the Microsoft Teams integration for Datadog][1] and connect your Microsoft Teams account to your Datadog account.
+To use {{< prodname >}}Incident Management{{< /prodname >}}'s Microsoft Teams features, you must first [install the Microsoft Teams integration for Datadog][1] and connect your Microsoft Teams account to your Datadog account.
 
-After installation, go to **[Incident Response > Incident Management > Settings > Integrations][2]** to configure the Microsoft Teams features for Incident Management.
+After installation, go to **[Incident Response > Incident Management > Settings > Integrations][2]** to configure the Microsoft Teams features for {{< prodname >}}Incident Management{{< /prodname >}}.
 
 ## Incident channels
 
 ### Automatic channel creation
 
-You can configure Incident Management to automatically create an incident Microsoft Teams channel for each incident or for incidents meeting criteria you define. To set up automatic incident channel creation:
+You can configure {{< prodname >}}Incident Management{{< /prodname >}} to automatically create an incident Microsoft Teams channel for each incident or for incidents meeting criteria you define. To set up automatic incident channel creation:
 
 1. Navigate to [**Settings > Integrations**][2] and select **Microsoft Teams**.
 2. From the **Tenant** dropdown, select your connected Microsoft Teams tenant.
@@ -39,13 +39,13 @@ After you enable this automation, you can define a **channel name template** for
 
 ### Channel message syncing
 
-You can configure Incident Management to push all incident Microsoft Teams channel messages to the incident timeline. To enable, toggle **Automatically push Microsoft Teams channel messages to the incident timeline**.
+You can configure {{< prodname >}}Incident Management{{< /prodname >}} to push all incident Microsoft Teams channel messages to the incident timeline. To enable, toggle **Automatically push Microsoft Teams channel messages to the incident timeline**.
 
-The author of a synced message does not need an Incident Management or Incident Response seat for the message to be recorded. In organizations with usage-based billing for Incident Management, the author is not counted as a monthly active user.
+The author of a synced message does not need an {{< prodname >}}Incident Management{{< /prodname >}} or Incident Response seat for the message to be recorded. In organizations with usage-based billing for {{< prodname >}}Incident Management{{< /prodname >}}, the author is not counted as a monthly active user.
 
 ### Automatic channel archiving
 
-You can configure Incident Management to automatically archive an incident channel after the incident is resolved.
+You can configure {{< prodname >}}Incident Management{{< /prodname >}} to automatically archive an incident channel after the incident is resolved.
 
 ## Global channel for incident updates
 
@@ -83,9 +83,9 @@ Delegated permissions are required for automatic, criteria-based Microsoft Teams
 4. Save your settings.
 
 ### Meeting message sync
-You can configure Incident Management to push all incident Microsoft Teams meeting messages to the incident timeline. To enable, toggle **Sync meeting chat to incident timeline**.
+You can configure {{< prodname >}}Incident Management{{< /prodname >}} to push all incident Microsoft Teams meeting messages to the incident timeline. To enable, toggle **Sync meeting chat to incident timeline**.
 
-The author of a synced message does not need an Incident Management or Incident Response seat for the message to be recorded. In organizations with usage-based billing for Incident Management, the author is not counted as a monthly active user.
+The author of a synced message does not need an {{< prodname >}}Incident Management{{< /prodname >}} or Incident Response seat for the message to be recorded. In organizations with usage-based billing for {{< prodname >}}Incident Management{{< /prodname >}}, the author is not counted as a monthly active user.
 
 ### Meeting summaries
 

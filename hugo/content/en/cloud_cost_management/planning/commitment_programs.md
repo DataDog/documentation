@@ -22,7 +22,7 @@ With Commitment Programs, you can:
 
 Use Commitment Programs to understand and optimize your cloud commitments.
 
-1. Go to [**Cloud Cost > Planning > Commitment Programs**][1] in Cloud Cost Management.
+1. Go to [**Cloud Cost > Planning > Commitment Programs**][1] in {{< prodname >}}Cloud Cost Management{{< /prodname >}}.
 2. Use the product selector to choose a commitment type and the time frame selector to set the reporting period.
 3. Gain insights into your KPIs, commitment costs, and renewal recommendations:
    - Review KPIs in the [Commitments overview](#commitments-overview) section.

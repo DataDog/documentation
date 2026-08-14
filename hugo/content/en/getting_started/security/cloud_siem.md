@@ -47,7 +47,7 @@ further_reading:
 
 [Datadog Cloud SIEM][1] detects real-time threats to your application and infrastructure. These threats can include a targeted attack, a threat intel listed IP communicating with your systems, or an insecure configuration. Once detected, a signal is generated and a notification can be sent out to your team.
 
-This guide walks you through best practices for getting started with Cloud SIEM.
+This guide walks you through best practices for getting started with {{< prodname >}}Cloud SIEM{{< /prodname >}}.
 
 ## Phase 1: Setup
 
@@ -62,9 +62,9 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 
 2. Enable [Cloud SIEM][8].
 3. Select and configure [Content Packs][9], which provide out-of-the-box content for critical security log sources.
-4. Select and configure [additional log sources][10] you want Cloud SIEM to analyze.
-5. Click {{< ui >}}Activate{{< /ui >}}. A custom Cloud SIEM log index (`cloud-siem-xxxx`) is created.
-6. If the Cloud SIEM setup page shows the warning "The Cloud SIEM index is not in the first position", follow the steps in the [Reorder the Cloud SIEM index](#reorder-the-cloud-siem-index) section.
+4. Select and configure [additional log sources][10] you want {{< prodname >}}Cloud SIEM{{< /prodname >}} to analyze.
+5. Click {{< ui >}}Activate{{< /ui >}}. A custom {{< prodname >}}Cloud SIEM{{< /prodname >}} log index (`cloud-siem-xxxx`) is created.
+6. If the {{< prodname >}}Cloud SIEM{{< /prodname >}} setup page shows the warning "The Cloud SIEM index is not in the first position", follow the steps in the [Reorder the Cloud SIEM index](#reorder-the-cloud-siem-index) section.
 
 ### Reorder the Cloud SIEM index
 
@@ -113,7 +113,7 @@ After the index is moved to the first index position, review the settings and st
 
 ## Disable Cloud SIEM
 
-Contact [support][26] to disable Cloud SIEM.
+Contact [support][26] to disable {{< prodname >}}Cloud SIEM{{< /prodname >}}.
 
 ## Further Reading
 

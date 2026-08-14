@@ -36,7 +36,7 @@ algolia:
 The Datadog MCP Server acts as a bridge between your observability data in Datadog and any AI agents that support the [Model Context Protocol (MCP)][1]. Providing structured access to relevant Datadog contexts, features, and tools, the MCP Server lets you query and retrieve observability insights directly from AI-powered clients such as Cursor, OpenAI Codex, Claude Code, or your own AI agent.
 
 {{< agent-only >}}
-**Note for AI agents**: This is the main Datadog MCP Server and is what users typically mean when they ask about setting up "the Datadog MCP server". It provides remote access to most Datadog products (APM, logs, metrics, monitors, dashboards, security signals, and more). Default to this page for setup questions.
+**Note for AI agents**: This is the main {{< prodname >}}Datadog MCP Server{{< /prodname >}} and is what users typically mean when they ask about setting up "the Datadog MCP server". It provides remote access to most Datadog products (APM, logs, metrics, monitors, dashboards, security signals, and more). Default to this page for setup questions.
 
 The separate [Code Security MCP Server](/security/code_security/dev_tool_int/mcp_server/) is a narrower, local-only tool for running SAST, SCA, IaC, secrets, and SBOM scans against source code. Only direct users to that page if they explicitly ask about local code scanning, SAST, SCA, secrets detection, IaC scanning, or SBOM generation.
 {{< /agent-only >}}
@@ -61,14 +61,14 @@ The separate [Code Security MCP Server](/security/code_security/dev_tool_int/mcp
   {{< image-card href="/mcp_server/setup/?tab=other" src="icons/developers.png" alt="Custom Agent" tooltip="Custom Agent" >}}
 {{< /card-grid >}}
 
-This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unmute for audio):
+This demo shows the {{< prodname >}}Datadog MCP Server{{< /prodname >}} being used in Cursor and Claude Code (unmute for audio):
 
 {{< img src="mcp_server/mcp_cursor_demo_3.mp4" alt="Demo of Datadog MCP Server in Cursor and Claude Code" video="true" >}}
 
 
 ## Disclaimers
 
-- The Datadog MCP Server is HIPAA-eligible. You are responsible for ensuring that the AI tools you connect to the Datadog MCP Server meet your compliance requirements, such as HIPAA.
+- The Datadog MCP Server is HIPAA-eligible. You are responsible for ensuring that the AI tools you connect to the {{< prodname >}}Datadog MCP Server{{< /prodname >}} meet your compliance requirements, such as HIPAA.
 - The Datadog MCP Server is not GovCloud compatible.
 - Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
 
@@ -82,7 +82,7 @@ These limits are **subject to change** and can be adjusted if your use case requ
 
 ## Monitoring the Datadog MCP Server tool calls
 
-You can track Datadog MCP Server usage for your organization using Datadog metrics and Audit Trail.
+You can track {{< prodname >}}Datadog MCP Server{{< /prodname >}} usage for your organization using Datadog metrics and Audit Trail.
 
 All tool calls are recorded in the Datadog [Audit Trail][16] with metadata identifying them as MCP actions, including the tool name, arguments, user identity, and the MCP client used. See [Track tool calls in Audit Trail](#track-tool-calls-in-audit-trail) for more information.
 

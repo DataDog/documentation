@@ -31,7 +31,7 @@ Send a Page by mentioning a Team's handle with `oncall-` prepended. For example,
 
 {{< img src="incident_response/on-call/notification_page.png" alt="Notification that mentions an On-Call Team." style="width:80%;" >}}
 
-You can send Pages to On-Call Teams anywhere @-handles are supported, including monitors, Incident Management, security detection rules, and Event Management.
+You can send Pages to On-Call Teams anywhere @-handles are supported, including monitors, {{< prodname >}}Incident Management{{< /prodname >}}, security detection rules, and {{< prodname >}}Event Management{{< /prodname >}}.
 
 #### Resolving Pages automatically
 
@@ -74,7 +74,7 @@ Trigger a Page through [Live Call Routing][3] by calling a dedicated phone numbe
 
 ### Trigger Pages manually
 
-Send a Page from the Datadog platform, or through a tool like Slack or Microsoft Teams. This lets you alert a Team or individual directly, even if they are not On-Call.
+Send a Page from the Datadog platform, or through a tool like Slack or Microsoft Teams. This lets you alert a Team or individual directly, even if they are not {{< prodname >}}On-Call{{< /prodname >}}.
 
 #### Through Datadog
 
@@ -146,7 +146,7 @@ If the Page was triggered by a monitor, it resolves automatically when the monit
 
 ### Declare an incident from a Page
 
-If a Page requires cross-team coordination, stakeholder communication, or formal tracking, promote it to an incident. This creates an incident in [Incident Management][6] with the Page context pre-filled.
+If a Page requires cross-team coordination, stakeholder communication, or formal tracking, promote it to an incident. This creates an incident in [{{< prodname >}}Incident Management{{< /prodname >}}][6] with the Page context pre-filled.
 
 To declare an incident:
 
@@ -158,7 +158,7 @@ To declare an incident:
 
 1. Select **Declare Incident** to confirm.
 
-For guidance on incident severity levels and responder roles, see [Incident Management][6].
+For guidance on incident severity levels and responder roles, see [{{< prodname >}}Incident Management{{< /prodname >}}][6].
 
 ### Add a comment
 

@@ -74,7 +74,7 @@ In case of any redirection, the download time only corresponds to the last reque
 
 ### Total response time
 
-The `*.response.time` metrics measure the total time between the moment Synthetics starts and the moment Synthetic finishes the request. The response time is the sum of all network timings. 
+The `*.response.time` metrics measure the total time between the moment {{< prodname >}}Synthetics{{< /prodname >}} starts and the moment Synthetic finishes the request. The response time is the sum of all network timings. 
 
 For example, the total response time for an HTTP test with no redirections on an HTTPS endpoint:  `synthetics.http.response.time = synthetics.http.dns.time + synthetics.http.connect.time + synthetics.http.ssl.time + synthetics.http.firstbyte.time + synthetics.http.download.time`.
 
@@ -106,10 +106,10 @@ An increase in DNS resolution time can occur with additional latency from author
 Variations of the TCP handshake can occur because of the network and server load, the size of the request and response messages, and the distance between the Synthetic Monitoring managed or [private location][5] and the server.
 
 ### SSL handshake time
-Variations of the SSL handshake time can occur because of the server load (SSL handshakes are usually CPU intensive), the network load, and the distance between the Synthetics managed or [private location][5] and the server. Issues with CDN can increase SSL handshake time.
+Variations of the SSL handshake time can occur because of the server load (SSL handshakes are usually CPU intensive), the network load, and the distance between the {{< prodname >}}Synthetics{{< /prodname >}} managed or [private location][5] and the server. Issues with CDN can increase SSL handshake time.
 
 ### Time To first byte
-Variations of the Time to first byte can occur because of the network and server load and the distance between the Synthetics managed or [private location][5] and the server. For example, a higher network load or the rerouting of traffic caused by an unavailable CDN can negatively impact Time to First Byte timing.
+Variations of the Time to first byte can occur because of the network and server load and the distance between the {{< prodname >}}Synthetics{{< /prodname >}} managed or [private location][5] and the server. For example, a higher network load or the rerouting of traffic caused by an unavailable CDN can negatively impact Time to First Byte timing.
 
 ### Download time
 Variations in download time can occur because of changes in the response size. The downloaded body size is available on test results and the `synthetics.http.response.size` metric.

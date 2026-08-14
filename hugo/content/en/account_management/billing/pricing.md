@@ -11,7 +11,7 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 
 ## Billing plans
 
-Datadog offers two billing plans for host-based products, such as Infrastructure Monitoring, APM, and Database Monitoring:
+Datadog offers two billing plans for host-based products, such as {{< prodname >}}Infrastructure Monitoring{{< /prodname >}}, APM, and {{< prodname >}}Database Monitoring{{< /prodname >}}:
 
 - **High watermark plan (HWMP)**: Datadog meters your host count each hour. At the end of the month, Datadog bills you on the maximum count (high-water mark) of the lower 99% of those hourly readings, excluding the top 1% to reduce the impact of short usage spikes on your bill. This plan is well-suited to environments with stable usage throughout the month.
 - **Hybrid monthly/hourly plan (MHP)**: You commit to a monthly minimum, and any host hours above that commitment are billed at an hourly rate. Because usage above the commitment is billed hourly, this plan is well-suited to ephemeral environments, such as autoscaling fleets or short-lived workloads.
@@ -33,8 +33,8 @@ The following sections describe the most common pricing units for each product.
 * If an application running on a host (defined in [Infrastructure monitoring](#infrastructure-monitoring)) generates traces and submits them to the Datadog SaaS application, Datadog counts that host as one **APM host**.
   * On a high watermark plan (HWMP), Datadog meters the count of hosts hourly. The billable count of hosts is calculated at the end of the month using the maximum count (high-water mark) of the lower 99 percent of usage for those hours. Datadog excludes the top 1 percent to reduce the impact of spikes in usage on your bill.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
-* An **Indexed Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed by [retention filters][3] within Datadog APM.
-* An **Ingested Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of gigabytes of spans ingested into Datadog APM.
+* An **Indexed Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed by [retention filters][3] within {{< prodname >}}Datadog APM{{< /prodname >}}.
+* An **Ingested Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of gigabytes of spans ingested into {{< prodname >}}Datadog APM{{< /prodname >}}.
 
 You can put controls in place for both Indexed and Ingested span volumes. For more information, read the [Trace Ingestion][4] and [Retention][5] documentation.
 
@@ -86,7 +86,7 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 ## Incident Management
 
 * For organizations on a seat-based plan, Datadog charges based on your organization's seat commitment. 
-* For organizations on the legacy usage-based plan, Datadog tracks the number of monthly active Incident Management users.
+* For organizations on the legacy usage-based plan, Datadog tracks the number of monthly active {{< prodname >}}Incident Management{{< /prodname >}} users.
   * Datadog counts a user as an **active user** if they have used Datadog capabilities to contribute substantively to the incident response. For example, you become an active user for the month when you:
     * Update an incident's state, severity, or other fields
     * Comment on the incident's timeline

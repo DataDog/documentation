@@ -17,7 +17,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -107,7 +107,7 @@ export DD_APPSEC_ENABLED=true
 {{% /collapse-content %}}
 
 {{% collapse-content title="APM Tracing Disabled" level="h4" %}}
-To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
+To disable APM tracing while keeping {{< prodname >}}App and API Protection{{< /prodname >}} enabled, you must set the APM tracing variable to false.
 ```bash
 export CORECLR_ENABLE_PROFILING=1
 export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
@@ -129,7 +129,7 @@ Start your .NET application with above settings.
 
 ## Troubleshooting
 
-If you encounter issues while setting up App and API Protection for your .NET application, see the [.NET App and API Protection troubleshooting guide][4].
+If you encounter issues while setting up {{< prodname >}}App and API Protection{{< /prodname >}} for your .NET application, see the [.NET App and API Protection troubleshooting guide][4].
 
 ## Further Reading
 

@@ -29,11 +29,11 @@ further_reading:
 
 ## Overview
 
-Ingest, enrich and normalize, and correlate your events from any source into actionable insights. Datadog automatically creates events from various products including monitors, Watchdog, and Error Tracking. You can also track events generated from the Agent and installed integrations. Event Management can also ingest events from any source, including alert events from third parties, change requests, deployments, configuration changes.
+Ingest, enrich and normalize, and correlate your events from any source into actionable insights. Datadog automatically creates events from various products including monitors, Watchdog, and {{< prodname >}}Error Tracking{{< /prodname >}}. You can also track events generated from the Agent and installed integrations. {{< prodname >}}Event Management{{< /prodname >}} can also ingest events from any source, including alert events from third parties, change requests, deployments, configuration changes.
 
 More than 100 Datadog integrations support events collection, including [Kubernetes][1], [Docker][2], [Jenkins][3], [Chef][4], [Puppet][5], [Amazon ECS][6] or [Autoscaling][7], [Sentry][8], and [Nagios][9].
 
-<div class="alert alert-tip">To open the Event Management page from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for <code>event explorer</code>.</div>
+<div class="alert alert-tip">To open the {{< prodname >}}Event Management{{< /prodname >}} page from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for <code>event explorer</code>.</div>
 
 **Update to Datadog monitor events `aggregation_key` starting March 1, 2025:** The Datadog monitor events `aggregation_key` is unique to each Monitor ID. Starting March 1st, this key will also include Monitor Group, making it unique per *Monitor ID and Monitor Group*. If you're using monitor events `aggregation_key` in dashboard queries or the Event API, you must migrate to use `@monitor.id`. Reach out to [support][10] if you have any questions.
 

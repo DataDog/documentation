@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-[Pup CLI][1] is a comprehensive, AI-agent-ready command-line interface that gives AI agents access to Datadog's observability platform. It exposes [Datadog's API surface][9] for use in AI agent workflows and automated pipelines.
+[{{< prodname >}}Pup CLI{{< /prodname >}}][1] is a comprehensive, AI-agent-ready command-line interface that gives AI agents access to Datadog's observability platform. It exposes [Datadog's API surface][9] for use in AI agent workflows and automated pipelines.
 
 Key features:
 

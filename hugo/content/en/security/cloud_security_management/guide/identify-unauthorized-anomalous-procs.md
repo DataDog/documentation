@@ -7,7 +7,7 @@ further_reading:
   text: "Creating Custom Detection Rules"
 ---
 
-You can use Workload Protection to identify if unauthorized or anomalous processes are running or executed on your IT systems.
+You can use {{< prodname >}}Workload Protection{{< /prodname >}} to identify if unauthorized or anomalous processes are running or executed on your IT systems.
 
 For example, you can create a process allowlist and query for processes running on hosts and containers outside of the allowlist. 
 

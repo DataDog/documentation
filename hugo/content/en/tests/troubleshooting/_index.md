@@ -8,7 +8,7 @@ further_reading:
 
 ## Overview
 
-This page provides information to help you troubleshot issues with Test Optimization. If you need additional help, contact [Datadog Support][2].
+This page provides information to help you troubleshot issues with {{< prodname >}}Test Optimization{{< /prodname >}}. If you need additional help, contact [Datadog Support][2].
 
 ## RUM sessions and tests are not linked
 

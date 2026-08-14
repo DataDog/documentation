@@ -21,7 +21,7 @@ further_reading:
 ---
 ## Overview
 
-Enable iOS Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring. With this feature, you can access:
+Enable iOS Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} to get comprehensive crash reports and error trends with Real User Monitoring. With this feature, you can access:
 
  - Aggregated iOS crash dashboards and attributes
  - Symbolicated iOS crash reports
@@ -108,11 +108,11 @@ App hangs are reported through the RUM iOS SDK (not through [Logs][4]).
 
 When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in [{{< ui >}}Error Tracking{{< /ui >}}][1]. There are two types of hangs:
 
-- **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in Error Tracking and the RUM explorer.
+- **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in {{< prodname >}}Error Tracking{{< /prodname >}} and the RUM explorer.
 
   {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang-1.png" alt="A fatal app hang in the RUM Error side panel." style="width:90%;" >}}
 
-- **Non-fatal app hang**: How a hang gets reported if the app recovers from a relatively short hang and continues running. Non-fatal app hangs do not have a "Crash" mark on them in Error Tracking and the RUM explorer.
+- **Non-fatal app hang**: How a hang gets reported if the app recovers from a relatively short hang and continues running. Non-fatal app hangs do not have a "Crash" mark on them in {{< prodname >}}Error Tracking{{< /prodname >}} and the RUM explorer.
 
   {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang-1.png" alt="A non-fatal app hang in the RUM Error side panel." style="width:90%;" >}}
 
@@ -449,7 +449,7 @@ For more information, see [dSYMs commands][11].
 
 ## Test your implementation
 
-To verify your iOS Crash Reporting and Error Tracking configuration, issue a crash in your RUM application and confirm that the error appears in Datadog. 
+To verify your iOS Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} configuration, issue a crash in your RUM application and confirm that the error appears in Datadog. 
 
 1. Run your application on an iOS simulator or a real device. Ensure that the debugger is not attached. Otherwise, Xcode captures the crash before the iOS SDK does.
 2. Execute the code containing the crash:

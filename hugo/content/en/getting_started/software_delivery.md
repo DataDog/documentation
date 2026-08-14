@@ -11,9 +11,9 @@ further_reading:
 {{< whatsnext desc=" ">}}
     {{< nextlink href="/getting_started/ci_visibility/" >}}Getting Started with CI Visibility{{< /nextlink >}}
 
-    {{< nextlink href="/getting_started/feature_flags/" >}}Getting Started with Feature Flags{{< /nextlink >}}
+    {{< nextlink href="/getting_started/feature_flags/" >}}Getting Started with {{< prodname >}}Feature Flags{{< /prodname >}}{{< /nextlink >}}
 
-    {{< nextlink href="/getting_started/test_optimization/" >}}Getting Started with Test Optimization{{< /nextlink >}}
+    {{< nextlink href="/getting_started/test_optimization/" >}}Getting Started with {{< prodname >}}Test Optimization{{< /prodname >}}{{< /nextlink >}}
 
     {{< nextlink href="/getting_started/test_impact_analysis" >}}Getting Started with Test Impact Analysis{{< /nextlink >}}
 

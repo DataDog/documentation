@@ -18,7 +18,7 @@ further_reading:
 ---
 ## Overview
 
-The Browser SDK collects frontend errors, including the error message and stack trace when available. For triaging and managing these errors in the Error Tracking product, see [Browser Error Tracking][4].
+The Browser SDK collects frontend errors, including the error message and stack trace when available. For triaging and managing these errors in the {{< prodname >}}Error Tracking{{< /prodname >}} product, see [Browser Error Tracking][4].
 
 When the Browser SDK collects an error:
 
@@ -27,7 +27,7 @@ When the Browser SDK collects an error:
 * The [RUM metrics][16] `rum.measure.error`, `rum.measure.session.error`, and `rum.measure.view.error_free` are updated, regardless of whether the session is retained.
 * The error is captured in [Error Tracking][4].
 
-[Error Tracking rules][17] do not apply to _Error events_, and RUM still records Error events that match [Ignored and Excluded issues][18] in Error Tracking. To prevent errors from being recorded as Error events, you must discard them before they are sent to Datadog [using the `beforeSend` callback][19].
+[Error Tracking rules][17] do not apply to _Error events_, and RUM still records Error events that match [Ignored and Excluded issues][18] in {{< prodname >}}Error Tracking{{< /prodname >}}. To prevent errors from being recorded as Error events, you must discard them before they are sent to Datadog [using the `beforeSend` callback][19].
 
 ## Error sources
 Frontend errors come from several different sources:
@@ -69,7 +69,7 @@ addError(
 );
 {{< /code-block >}}
 
-**Note**: [Error Tracking][4] processes errors that are sent with the source set to `custom`, `source`, `report` or `console`, and contain a stack trace. Errors sent with any other source (such as `network`) or sent from browser extensions are not processed by Error Tracking.
+**Note**: [{{< prodname >}}Error Tracking{{< /prodname >}}][4] processes errors that are sent with the source set to `custom`, `source`, `report` or `console`, and contain a stack trace. Errors sent with any other source (such as `network`) or sent from browser extensions are not processed by {{< prodname >}}Error Tracking{{< /prodname >}}.
 
 {{< tabs >}}
 {{% tab "npm" %}}

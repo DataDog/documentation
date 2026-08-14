@@ -19,7 +19,7 @@ further_reading:
 
 Bits Database Optimization detects underperforming queries across your database fleet, identifies optimizations validated against a simulated copy of your environment, and delivers the result as a pull request fixing the exact code that triggered the query.
 
-Optimization candidates are selected automatically from Database Monitoring telemetry, with no additional setup required. Candidates are identified by highest potential impact, focusing on query execution times, blocking queries, and regressed queries.
+Optimization candidates are selected automatically from {{< prodname >}}Database Monitoring{{< /prodname >}} telemetry, with no additional setup required. Candidates are identified by highest potential impact, focusing on query execution times, blocking queries, and regressed queries.
 
 <div class="alert alert-info">Bits Database Optimization does not require write access to your database, and does not export or use actual data from your environment. Optimizations are empirically tested against database simulations populated with synthetic data using statistical properties of your schema.</div>
 
@@ -27,7 +27,7 @@ Optimization candidates are selected automatically from Database Monitoring tele
 
 ## Prerequisites
 
-- **Database Monitoring** is configured for the target database instances. See [Database Monitoring Setup][1].
+- **{{< prodname >}}Database Monitoring{{< /prodname >}}** is configured for the target database instances. See [Database Monitoring Setup][1].
 - **Schema collection** is enabled on the target instances.
 - For automated PR creation:
     - **APM** must be configured for the services that issue the queries you want to address. See [Correlate Database Monitoring and Traces][2] for more information.

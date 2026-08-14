@@ -39,20 +39,20 @@ Detection rules define conditional logic that is applied to all ingested logs an
 
 ## Out-of-the-box detection rules
 
-Datadog provides [out-of-the-box detection rules][2] to flag attacker techniques and potential misconfigurations. When new detection rules are released, they are automatically imported into your account, your App and API Protection library, and the Agent, depending on your configuration.
+Datadog provides [out-of-the-box detection rules][2] to flag attacker techniques and potential misconfigurations. When new detection rules are released, they are automatically imported into your account, your {{< prodname >}}App and API Protection{{< /prodname >}} library, and the Agent, depending on your configuration.
 
 Out-of-the box rules are available for the following security products:
 
-- [Cloud SIEM][3] uses log detection to analyze ingested logs in real-time.
+- [{{< prodname >}}Cloud SIEM{{< /prodname >}}][3] uses log detection to analyze ingested logs in real-time.
 - Cloud Security:
     - [Cloud Security Misconfigurations][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
     - [Cloud Security Identity Risks][6] uses detection rules to detect IAM-based risks in your cloud infrastructure.
-- [Workload Protection][5] uses the Datadog Agent and detection rules to actively monitor and evaluate system activity.
-- [App and API Protection][7] (AAP) leverages Datadog [APM][8], the [Datadog Agent][9], and detection rules to detect threats in your application environment.
+- [{{< prodname >}}Workload Protection{{< /prodname >}}][5] uses the Datadog Agent and detection rules to actively monitor and evaluate system activity.
+- [{{< prodname >}}App and API Protection{{< /prodname >}}][7] (AAP) leverages Datadog [APM][8], the [Datadog Agent][9], and detection rules to detect threats in your application environment.
 
 ## MITRE ATT&CK map
 
-{{< product-availability names="Cloud SIEM,App and API Protection,Workload Protection" >}}
+{{< product-availability names="{{< prodname >}}Cloud SIEM{{< /prodname >}},{{< prodname >}}App and API Protection{{< /prodname >}},{{< prodname >}}Workload Protection{{< /prodname >}}" >}}
 
 MITRE ATT&CK is a framework that helps organizations understand how cyber attackers operate. It maps the following:
 
@@ -63,14 +63,14 @@ By mapping tactics and techniques, MITRE ATT&CK provides security teams with a c
 
 To use the MITRE ATT&CK map, do the following:
 
-1. Open Detection Rules in [SIEM][16] or [Workload Protection][17].
+1. Open Detection Rules in [SIEM][16] or [{{< prodname >}}Workload Protection{{< /prodname >}}][17].
 2. Select {{< ui >}}MITRE ATT&CK map{{< /ui >}}.
 3. Select one of more products in the filter <i class="icon-filter"></i>.
 4. Review the map for the following:
    - Assessing Coverage: Determine which attack techniques are well-covered and which are under-monitored.
    - Prioritizing Rule Creation: Focus on creating detection rules for techniques with low or no coverage.
    - Streamlining Rule Management: Manage and update detection rules, ensuring they align with the latest threat intelligence.
-The MITRE ATT&CK map available in SIEM or Workload Protection, but you can select Application and API Protection in the filter. Application and API Protection is included in the MITRE ATT&CK map for all-inclusive security coverage.
+The MITRE ATT&CK map available in SIEM or {{< prodname >}}Workload Protection{{< /prodname >}}, but you can select Application and API Protection in the filter. Application and API Protection is included in the MITRE ATT&CK map for all-inclusive security coverage.
 
 ## Beta detection rules
 
@@ -84,7 +84,7 @@ To [create custom rules](#create-detection-rules), you can clone the default rul
 
 ## Search and filter detection rules
 
-To view out-of-the-box and custom detection rules in Datadog, navigate to the [{{< ui >}}Security Settings{{< /ui >}}][10] page. Rules are listed on separate pages for each product (App and API Protection, Cloud Security, and Cloud SIEM).
+To view out-of-the-box and custom detection rules in Datadog, navigate to the [{{< ui >}}Security Settings{{< /ui >}}][10] page. Rules are listed on separate pages for each product ({{< prodname >}}App and API Protection{{< /prodname >}}, {{< prodname >}}Cloud Security{{< /prodname >}}, and {{< prodname >}}Cloud SIEM{{< /prodname >}}).
 
 To search and filter the rules, use the search box and facets to query by value. For example, to only show rules for a given rule type, hover over the rule type and select `only`. You can also filter by facets such as `source` and `severity` when investigating and triaging incoming issues.
 
@@ -96,14 +96,14 @@ To create a custom detection rule, click the {{< ui >}}New Rule{{< /ui >}} butto
 
 For detailed instructions, see the following articles:
 
-- [Cloud SIEM][11]
+- [{{< prodname >}}Cloud SIEM{{< /prodname >}}][11]
 - [AAP][12]
 - [Cloud Security Misconfigurations][13]
-- [Workload Protection][14]
+- [{{< prodname >}}Workload Protection{{< /prodname >}}][14]
 
 ## Manage detection rules
 
-You can manage detection rules from both the [SIEM][16] or [Workload Protection][17] pages in Datadog. These instructions describe how to perform these actions from those pages, but these options are also available when you click on a detection rule to open it in a side panel.
+You can manage detection rules from both the [SIEM][16] or [{{< prodname >}}Workload Protection{{< /prodname >}}][17] pages in Datadog. These instructions describe how to perform these actions from those pages, but these options are also available when you click on a detection rule to open it in a side panel.
 
 ### Enable or disable rules
 
@@ -150,9 +150,9 @@ Use Rule Version History to:
 
 To see the version history of a rule:
 1. Navigate to the [Security Settings][15] page. In the left navigation panel:
-    - For AAP: Click {{< ui >}}App and API Protection{{< /ui >}} and then click {{< ui >}}Detection Rules{{< /ui >}}.
-    - For Cloud Security: Click {{< ui >}}Cloud Security{{< /ui >}} and then click {{< ui >}}Threat Detection Rules{{< /ui >}}.
-    - For Cloud SIEM: Click {{< ui >}}Cloud SIEM{{< /ui >}} and then click {{< ui >}}Detection Rules{{< /ui >}}.
+    - For AAP: Click {{< ui >}}{{< prodname >}}App and API Protection{{< /prodname >}}{{< /ui >}} and then click {{< ui >}}Detection Rules{{< /ui >}}.
+    - For Cloud Security: Click {{< ui >}}{{< prodname >}}Cloud Security{{< /prodname >}}{{< /ui >}} and then click {{< ui >}}Threat Detection Rules{{< /ui >}}.
+    - For Cloud SIEM: Click {{< ui >}}{{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /ui >}} and then click {{< ui >}}Detection Rules{{< /ui >}}.
 1. Click on the rule you are interested in, then click {{< ui >}}Edit rule{{< /ui >}}.
 1. In the rule editor, click {{< ui >}}Version History{{< /ui >}} to see past changes:
    - Click a specific version to see what changes were made.

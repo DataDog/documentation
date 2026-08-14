@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-To set up Cloud Cost Management for Oracle Cloud Infrastructure (OCI) in Datadog, you should:
+To set up {{< prodname >}}Cloud Cost Management{{< /prodname >}} for Oracle Cloud Infrastructure (OCI) in Datadog, you should:
 1. Have an OCI tenancy
 2. Have the [OCI integration][1] installed in Datadog
 
@@ -32,13 +32,13 @@ Navigate to [Setup & Configuration][2], add an OCI account and follow the steps 
 **Note**: If the OCI integration was created without the QuickStart method, then you need to follow the [documentation][3] for QuickStart migration.
 
 ### Enable Cloud Cost Management
-Once the integration is created, enable the toggle for Cloud Cost Management.
+Once the integration is created, enable the toggle for {{< prodname >}}Cloud Cost Management{{< /prodname >}}.
 
 {{< img src="cloud_cost/oci/oci_ccm_enablement.png" alt="Toggle for enabling Cloud Cost Management" style="width:100%;" >}}
 
 ### Getting historical data
 
-Oracle Cloud Infrastructure retains cost reports for 1 year. When you enable Cloud Cost Management, Datadog automatically ingests up to 15 months of available historical cost data from these retained reports (up to 1 year based on Oracle's retention).
+Oracle Cloud Infrastructure retains cost reports for 1 year. When you enable {{< prodname >}}Cloud Cost Management{{< /prodname >}}, Datadog automatically ingests up to 15 months of available historical cost data from these retained reports (up to 1 year based on Oracle's retention).
 
 Oracle does not provide a process for backfilling additional historical data beyond what is already retained in the cost reports.
 

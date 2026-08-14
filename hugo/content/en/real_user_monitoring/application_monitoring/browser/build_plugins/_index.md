@@ -162,7 +162,7 @@ datadogWebpackPlugin({
 {{< whatsnext desc="Configure individual build plugins:" >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps" >}}<u>Source Maps</u>: Automatically upload source maps to Datadog during your build, enabling deobfuscated stack traces.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/action_name_deobfuscation" >}}<u>Action Name Deobfuscation</u>: Restore readable action names in minified builds.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context" >}}<u>Source Code Context</u>: Display source code inline in Error Tracking stack traces.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context" >}}<u>Source Code Context</u>: Display source code inline in {{< prodname >}}Error Tracking{{< /prodname >}} stack traces.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

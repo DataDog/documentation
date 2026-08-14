@@ -34,7 +34,7 @@ Datadog Kubernetes Autoscaling continuously monitors your Kubernetes resources t
 ## How it works
 Datadog uses real-time and historical utilization metrics and event signals from your existing Datadog Agents to make recommendations. You can then examine these recommendations and choose to deploy them.
 
-By default, Datadog Kubernetes Autoscaling uses estimated CPU and memory cost values to show savings opportunities and impact estimates. You can also use Kubernetes Autoscaling alongside [Cloud Cost Management](#idle-cost-and-savings-estimates) to get reporting based on your exact instance type costs.
+By default, Datadog Kubernetes Autoscaling uses estimated CPU and memory cost values to show savings opportunities and impact estimates. You can also use Kubernetes Autoscaling alongside [{{< prodname >}}Cloud Cost Management{{< /prodname >}}](#idle-cost-and-savings-estimates) to get reporting based on your exact instance type costs.
 
 Automated workload scaling is powered by a `DatadogPodAutoscaler` custom resource that defines scaling behavior on a per-workload level. The Datadog Cluster Agent acts as the controller for this custom resource.
 
@@ -165,11 +165,11 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 
 {{< tabs >}}
 {{% tab "With Cloud Cost Management" %}}
-If [Cloud Cost Management][1] is enabled within an org, Datadog Kubernetes Autoscaling shows idle cost and savings estimates based on your exact bill cost of underlying monitored instances.
+If [{{< prodname >}}Cloud Cost Management{{< /prodname >}}][1] is enabled within an org, Datadog Kubernetes Autoscaling shows idle cost and savings estimates based on your exact bill cost of underlying monitored instances.
 
 See Cloud Cost setup instructions for [AWS][2], [Azure][3], or [Google Cloud][4].
 
-Cloud Cost Management data enhances Kubernetes Autoscaling, but it is not required. All of Datadog's workload recommendations and autoscaling decisions are valid and functional without Cloud Cost Management.
+{{< prodname >}}Cloud Cost Management{{< /prodname >}} data enhances Kubernetes Autoscaling, but it is not required. All of Datadog's workload recommendations and autoscaling decisions are valid and functional without {{< prodname >}}Cloud Cost Management{{< /prodname >}}.
 
 [1]: /cloud_cost_management
 [2]: /cloud_cost_management/aws

@@ -336,7 +336,7 @@ Both Agentless and Agent-based options are supported.
 
 Logs are billed separately from CI Visibility.
 
-Log retention, exclusion, and indexes are configured in [Log Management][27]. Logs for Jenkins jobs can be identified by the `source:jenkins` tag.
+Log retention, exclusion, and indexes are configured in [{{< prodname >}}Log Management{{< /prodname >}}][27]. Logs for Jenkins jobs can be identified by the `source:jenkins` tag.
 
 ## Correlate infrastructure metrics
 
@@ -359,11 +359,11 @@ This is only required for Jenkins workers. For the Jenkins controller, the infra
 
 ## Enable Test Optimization
 
-This is an optional step that enables the collection of tests data using [Test Optimization][16].
+This is an optional step that enables the collection of tests data using [{{< prodname >}}Test Optimization{{< /prodname >}}][16].
 
 See the [Test Optimization documentation][17] for your language to make sure that the testing framework that you use is supported.
 
-There are different ways to enable Test Optimization inside a Jenkins job or pipeline:
+There are different ways to enable {{< prodname >}}Test Optimization{{< /prodname >}} inside a Jenkins job or pipeline:
 1. Using the Jenkins configuration UI.
 2. Adding the `datadog` step inside the pipeline script.
 3. Configuring the SDK manually.
@@ -372,16 +372,16 @@ For pipelines that spin up a Docker container to execute tests, you can only con
 
 ### Enable with the Jenkins configuration UI
 
-UI-based Test Optimization configuration is available in Datadog Jenkins plugin v5.6.0 or later.
+UI-based {{< prodname >}}Test Optimization{{< /prodname >}} configuration is available in Datadog Jenkins plugin v5.6.0 or later.
 
 This option is not suitable for pipelines that are configured entirely in `Jenkinsfile` (for example, Multibranch pipelines or pipelines from Organization Folder).
 For these pipelines use declarative configuration with the `datadog` step (described in the next section).
 
-To enable Test Optimization through the UI do the following:
+To enable {{< prodname >}}Test Optimization{{< /prodname >}} through the UI do the following:
 1. In your Jenkins instance web interface, go to the job or pipeline that you want to instrument and choose the {{< ui >}}Configure{{< /ui >}} option.
 2. In the {{< ui >}}General{{< /ui >}} configuration section, tick the {{< ui >}}Enable Datadog Test Optimization{{< /ui >}} checkbox.
 3. Enter the name of the service or library being tested into the {{< ui >}}Service Name{{< /ui >}} input. You can choose any value that makes sense to you.
-4. Choose the languages for which you want to enable tests instrumentation. Some of the languages do not support configuration through the UI. To configure Test Optimization for these languages, follow the manual [configuration instructions][18].
+4. Choose the languages for which you want to enable tests instrumentation. Some of the languages do not support configuration through the UI. To configure {{< prodname >}}Test Optimization{{< /prodname >}} for these languages, follow the manual [configuration instructions][18].
 5. Optionally, provide [additional configuration settings][18].
 6. Click {{< ui >}}Save{{< /ui >}}.
 
@@ -430,7 +430,7 @@ The other `datadog` settings, such as `collectLogs` or `tags` can be added along
 
 ### Enable with manual tracer configuration
 
-Follow the manual Test Optimization [configuration instructions][17] that are specific to your language.
+Follow the manual {{< prodname >}}Test Optimization{{< /prodname >}} [configuration instructions][17] that are specific to your language.
 
 ## Propagate Git information
 

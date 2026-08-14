@@ -26,14 +26,14 @@ Prompt Optimization runs your LLM application on a dataset with the current prom
 - Built-in stopping conditions to prevent over-optimization
 - Parallel experiment execution for rapid iteration
 - Dataset splitting into train, validation, and test subsets for unbiased performance estimates
-- Full integration with Agent Observability for tracking and debugging
+- Full integration with {{< prodname >}}Agent Observability{{< /prodname >}} for tracking and debugging
 
 Prompt Optimization supports any use case where the expected output is known and there is a defined way to score the model's predictions. Prompt Optimization's architecture supports any output type, including structured data extraction, free-form text generation, and numerical predictions.
 
 ## Prerequisites
 
 - [`ddtrace`][1] version 4.6.0+
-- Agent Observability enabled with Datadog [API and application keys][2]
+- {{< prodname >}}Agent Observability{{< /prodname >}} enabled with Datadog [API and application keys][2]
 - A [dataset][3] with representative examples (recommended: 50-100 records)
 - Access to an advanced reasoning model (o3-mini, Claude 3.5 Sonnet, or similar)
 

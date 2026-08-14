@@ -13,13 +13,13 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-info">If you have Real User Monitoring, you can access a preview of RUM, Session Replay, Error Tracking, and additional performance data from your Synthetic browser test runs.</div>
+<div class="alert alert-info">If you have Real User Monitoring, you can access a preview of RUM, Session Replay, {{< prodname >}}Error Tracking{{< /prodname >}}, and additional performance data from your Synthetic browser test runs.</div>
 
 Synthetic browser tests embed the Real User Monitoring SDK, allowing you to explore:
 
 - [Session Replay][1] for all tests. You can access additional context beyond screenshots available for each step and [Browser Dev Tools][2].
 - The session in the [RUM Explorer][3].
-- Aggregated errors across your different steps, tests, and test runs with [Error Tracking][4]. You can scope the error impact and prioritize fixing the most severe issues. 
+- Aggregated errors across your different steps, tests, and test runs with [{{< prodname >}}Error Tracking{{< /prodname >}}][4]. You can scope the error impact and prioritize fixing the most severe issues. 
 - Extra resources and timing information from RUM including additional search and monitor capabilities.
 
 ## Allow Synthetic data on RUM applications

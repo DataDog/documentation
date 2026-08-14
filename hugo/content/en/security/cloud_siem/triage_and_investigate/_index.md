@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Cloud SIEM offers integrated tools to streamline security investigations after a security signal is generated. These tools guide you through the following investigative workflow when a security signal is triggered:
+{{< prodname >}}Cloud SIEM{{< /prodname >}} offers integrated tools to streamline security investigations after a security signal is generated. These tools guide you through the following investigative workflow when a security signal is triggered:
 
 - Threat assessment
 - Scope comprehension
@@ -21,7 +21,7 @@ Cloud SIEM offers integrated tools to streamline security investigations after a
 
 Start with [Investigate Security Signals][1] to triage and investigate signals using the signals explorer. Filter by severity, entity, or timeframe to quickly assess what triggered detections and decide which signals require immediate attention.
 
-For a more entity-centric approach, [Risk Insights][2] consolidates SIEM signals, Cloud Security findings, and identity risks into unified entity profiles representing users or assets paired with an opinionated risk score model.
+For a more entity-centric approach, [Risk Insights][2] consolidates SIEM signals, {{< prodname >}}Cloud Security{{< /prodname >}} findings, and identity risks into unified entity profiles representing users or assets paired with an opinionated risk score model.
 
 To gain a broad understanding of how an actor moves throughout your ecosystem, the [Investigator][3] graphical interface maps connections between entities and activities over time.
 

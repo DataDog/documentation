@@ -104,7 +104,7 @@ Worker version 2.19.0 gives you access to the following:
 
 #### Enhancements
 
-- A `server_name` TLS option has been added to the BYOC Logs, HTTP Client, Socket, and Syslog destinations, and to the HTTP Client source. It overrides the SNI and certificate hostname used for the TLS handshake, which is applicable when the dialed address does not match the certificate's Common Name or Subject Alternative Name.
+- A `server_name` TLS option has been added to the {{< prodname >}}BYOC Logs{{< /prodname >}}, HTTP Client, Socket, and Syslog destinations, and to the HTTP Client source. It overrides the SNI and certificate hostname used for the TLS handshake, which is applicable when the dialed address does not match the certificate's Common Name or Subject Alternative Name.
 - The Splunk TCP source now supports hot-reloading TLS certificates, so certificate rotations are applied without restarting the Worker.
 - The BYOC Logs destination now supports hot-reloading mTLS files.
 - The Worker now supports a configurable graceful shutdown limit.
@@ -140,7 +140,7 @@ Worker version 2.18.0 gives you access to the following:
 
 #### Enhancements
 
-- mTLS support has been added to the BYOC Logs destination.
+- mTLS support has been added to the {{< prodname >}}BYOC Logs{{< /prodname >}} destination.
 - The `measure_cpu_usage` option is now enabled, so that `pipelines.component_cpu_usage_ns_total` is always emitted for the following log processors: Custom Processor, Sensitive Data Scanner, Grok Parser, Parse JSON, Parse XML, OCSF Mapper, Enrichment Table, Reduce, Dedupe, Split Array, and Throttle; and the following metrics processors: Aggregate and Tag Cardinality Limit.
 - Pipeline configuration errors now include the ID of the component that caused the failure. This makes it easier to identify which source, processor, or destination needs correcting. For processors made up of multiple blocks, such as the Custom Processor, Generate Metrics, and OCSF Mapper, the error also identifies which individual block failed, including its position and, where the block has one, its name.
 - Pipeline metrics are now tagged with the pipeline name using `pipeline_name:<NORMALIZED_PIPELINE_NAME>`.
@@ -306,11 +306,11 @@ Worker version 2.15.0 gives you access to the following:
 - The `parse_yaml` function is now available for the Custom Processor. This function parses YAML according to the [YAML 1.1 spec][41].
 - The Enrichment Table file option now supports a `field` option that accepts an event field path or a metadata secret as the lookup key source. Plain text is supported for backwards compatibility.
     - Explicit event path example:
-        - Observability Pipelines simplified syntax: `field: {event: "message"}`
+        - {{< prodname >}}Observability Pipelines{{< /prodname >}} simplified syntax: `field: {event: "message"}`
         - VRL syntax for the Custom Processor: `field: {vrl: ".message"}`
     - Metadata secret reference example: `field: {secret: "splunk_hec_token"}`
     - Plain string (for backwards compatibility):
-        - Observability Pipelines simplified syntax: `field: "message"`
+        - {{< prodname >}}Observability Pipelines{{< /prodname >}} simplified syntax: `field: "message"`
         - VRL syntax for the Custom Processor: `field: ".message"`
 
 #### Enhancements
@@ -436,7 +436,7 @@ Worker version 2.13.0 gives you access to the following:
 #### New features
 
 - [Custom Processor][24] for metrics: Use VRL to transform metric events.
-- [Secrets Management][31]: Observability Pipelines can retrieve secrets using Datadog Secrets Management.
+- [Secrets Management][31]: {{< prodname >}}Observability Pipelines{{< /prodname >}} can retrieve secrets using Datadog Secrets Management.
 - [Live capture][25] is available for metrics pipelines.
 - The [Enrichment Tables][28] processor can use datasets in Reference Tables.
 
@@ -482,7 +482,7 @@ Worker version 2.12.0 gives you access to the following:
 #### New features
 
 - [HTTP destination][29] for metrics pipelines: Routes metrics to an HTTP client endpoint.
-- [MySQL Source][30]: Sends logs from a MySQL database to Observability Pipelines.
+- [MySQL Source][30]: Sends logs from a MySQL database to {{< prodname >}}Observability Pipelines{{< /prodname >}}.
 
 #### Enhancements
 
@@ -537,7 +537,7 @@ Worker version 2.10.0 gives you access to the following:
 
 #### New features
 
-- [Kafka destination][5]: Send logs from Observability Pipelines to your Kafka topics.
+- [Kafka destination][5]: Send logs from {{< prodname >}}Observability Pipelines{{< /prodname >}} to your Kafka topics.
 - New and updated [Custom Processor functions][6]:
     - The `pop` function removes the last item from an array.
     - The cryptographic functions `encrypt_ip` and `decrypt_ip` for IP address encryption.
@@ -550,7 +550,7 @@ Worker version 2.10.0 gives you access to the following:
         - When `strict_mode` is set to `false`, the parser ignores any newly added or trailing fields in AWS ALB logs, instead of failing.
         - Defaults to `true` to preserve current behavior.
     - [Metrics pipelines][32]:
-        - [Datadog Agent source][33]: Send metrics from the Datadog Agent to Observability Pipelines for processing.
+        - [Datadog Agent source][33]: Send metrics from the Datadog Agent to {{< prodname >}}Observability Pipelines{{< /prodname >}} for processing.
         - [Filter processor][35]: Filter the metrics you want to process.
         - [Tag processor][36]: Include or exclude specific tags in your metrics.
         - [Datadog Metrics destination][34]: Send your processed metrics Datadog.
@@ -597,9 +597,9 @@ Worker version 2.9.0 gives you access to the following:
 
 #### New features
 
-- [OpenTelemetry Collector source][10]: Ingest logs from your OpenTelemetry Collector into Observability Pipelines.
+- [OpenTelemetry Collector source][10]: Ingest logs from your OpenTelemetry Collector into {{< prodname >}}Observability Pipelines{{< /prodname >}}.
 - [Datadog BYOC Logs destination][11]: Route logs to the Datadog BYOC Logs destination.
-- [Google Pub/Sub destination][12]: Send logs from Observability Pipelines to the Google Pub/Sub messaging system.
+- [Google Pub/Sub destination][12]: Send logs from {{< prodname >}}Observability Pipelines{{< /prodname >}} to the Google Pub/Sub messaging system.
 - The `haversine` custom function to calculate haversine distance and bearing.
 
 #### Enhancements

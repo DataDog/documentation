@@ -19,7 +19,7 @@ aliases:
 - /tracing/setup_overview/proxy_setup/
 ---
 
-Datadog APM supports NGINX in two configurations:
+{{< prodname >}}Datadog APM{{< /prodname >}} supports NGINX in two configurations:
 - NGINX operated as a proxy with tracing provided by the Datadog module.
 - NGINX as an Ingress Controller for Kubernetes.
 

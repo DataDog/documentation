@@ -64,7 +64,7 @@ Live Debugger supports Python, Java, .NET, Ruby, Node.js, PHP, and Go. It requir
 - An installed [Datadog SDK][3] (see the [Enable Live Debugger](#enable-live-debugger) section for minimum SDK versions)
 - [Unified Service Tagging][27] configured with `service`, `env`, and `version` tags on your deployment
 - [Remote Configuration][4] enabled in the Agent
-- (Recommended) [Source Code Integration][28]
+- (Recommended) [{{< prodname >}}Source Code Integration{{< /prodname >}}][28]
 
 ### Permissions
 
@@ -273,9 +273,9 @@ To create the index:
 
 ### (Recommended) Link your source code {#link-your-source-code}
 
-Set up [Source Code Integration][28] to view source code files directly in Live Debugger. After you link the service and environment to the corresponding repository and Git commit SHA, you can add logpoints and see existing ones in the source code as you would with breakpoints in an IDE. This helps you confirm logpoints are placed accurately and avoid capturing unintended data or generating invalid results.
+Set up [{{< prodname >}}Source Code Integration{{< /prodname >}}][28] to view source code files directly in Live Debugger. After you link the service and environment to the corresponding repository and Git commit SHA, you can add logpoints and see existing ones in the source code as you would with breakpoints in an IDE. This helps you confirm logpoints are placed accurately and avoid capturing unintended data or generating invalid results.
 
-**Note**: Source Code Integration is optional when starting a Debug Session manually, but it is required when using [Bits Live Debugger][23].
+**Note**: {{< prodname >}}Source Code Integration{{< /prodname >}} is optional when starting a Debug Session manually, but it is required when using [Bits Live Debugger][23].
 
 ## Using Live Debugger
 
@@ -339,7 +339,7 @@ See the [sensitive data scrubbing][1] instructions and [Sensitive Data Scanner][
 
 <div class="alert alert-info">Bits Live Debugger is in Preview. <a href="/tracing/live_debugger/bits-live-debugger/">Learn more about Bits Live Debugger and request access</a>.</div>
 
-[Bits Live Debugger][23] lets you investigate a running service by describing the issue in plain language. Bits Code handles logpoint placement, captures variable snapshots, and helps interpret the results.
+[Bits Live Debugger][23] lets you investigate a running service by describing the issue in plain language. {{< prodname >}}Bits Code{{< /prodname >}} handles logpoint placement, captures variable snapshots, and helps interpret the results.
 
 **Note**: [Bits Live Debugger][23] requires the service and environment to be in Targeted Mode. See [Mode-based redaction][24] for details.
 
@@ -347,7 +347,7 @@ See the [sensitive data scrubbing][1] instructions and [Sensitive Data Scanner][
 
 The following constraints apply to Live Debugger usage and configuration:
 
-- **Configuration scope:** Live Debugger and Dynamic Instrumentation are enabled or disabled together for the same service and environment.
+- **Configuration scope:** Live Debugger and {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} are enabled or disabled together for the same service and environment.
 - **Rate limits:**
    - Logpoints with variable capture: Limited to 1 execution per second.
    - Logpoints without variable capture: Limited to 5000 executions per second, per service instance.

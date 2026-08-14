@@ -20,14 +20,14 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
 Configuring App and API Protection for AWS Lambda involves:
 
-1. Identifying functions that are vulnerable or are under attack, which would most benefit from App and API Protection. Find them on [the Security tab of your Catalog][1].
-2. Setting up App and API Protection instrumentation by using either the [Datadog CLI][8], [AWS CDK][9], [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
+1. Identifying functions that are vulnerable or are under attack, which would most benefit from {{< prodname >}}App and API Protection{{< /prodname >}}. Find them on [the Security tab of your Catalog][1].
+2. Setting up {{< prodname >}}App and API Protection{{< /prodname >}} instrumentation by using either the [Datadog CLI][8], [AWS CDK][9], [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
 ## Supported trigger types
@@ -44,7 +44,7 @@ Threat Detection supports HTTP requests as function input only, as that channel 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless Framework plugin][1] can be used to automatically configure and deploy your Lambda with App and API Protection.
+The [Datadog Serverless Framework plugin][1] can be used to automatically configure and deploy your Lambda with {{< prodname >}}App and API Protection{{< /prodname >}}.
 
 To install and configure the Datadog Serverless Framework plugin:
 
@@ -209,7 +209,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
       gem 'datadog-lambda'
       ```
 
-      `datadog` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda. Datadog therefore recommends that you build and deploy your Lambda as a container image. If your function cannot be deployed as a container image and you would like to use Datadog APM, Datadog recommends installing the Lambda Library as a layer instead of as a gem.
+      `datadog` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda. Datadog therefore recommends that you build and deploy your Lambda as a container image. If your function cannot be deployed as a container image and you would like to use {{< prodname >}}Datadog APM{{< /prodname >}}, Datadog recommends installing the Lambda Library as a layer instead of as a gem.
 
       Install `gcc`, `gmp-devel`, and `make` prior to running `bundle install` in your function's Dockerfile to ensure that the native extensions can be successfully compiled.
 

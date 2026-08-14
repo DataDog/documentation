@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-[Cloud Cost Management][1] detects the sources for all of your cost-related tags. You can search and manage tags for breaking down costs, including [Custom Costs][4], [Datadog costs][5], and [SaaS cost integrations][6].
+[{{< prodname >}}Cloud Cost Management{{< /prodname >}}][1] detects the sources for all of your cost-related tags. You can search and manage tags for breaking down costs, including [Custom Costs][4], [Datadog costs][5], and [SaaS cost integrations][6].
 
 Use the [Tag Explorer][2] to understand the sources and view descriptions for each tag. This includes tags managed through [Tag Pipelines][3]. Tag Pipelines allow you to create and manage tag rules that fix missing or incorrect tags on your cloud bill, or create inferred tags according to your business logic.
 
@@ -31,7 +31,7 @@ Use the [Tag Explorer][2] to understand the sources and view descriptions for ea
 
 ## Setup
 
-To use the Tag Explorer, you must configure [Cloud Cost Management][1] for AWS, Azure, Google Cloud, or Oracle Cloud.
+To use the Tag Explorer, you must configure [{{< prodname >}}Cloud Cost Management{{< /prodname >}}][1] for AWS, Azure, Google Cloud, or Oracle Cloud.
 
 See the respective documentation for your cloud provider:
 
@@ -151,7 +151,7 @@ For Twilio tags, select {{< ui >}}Twilio{{< /ui >}} from the dropdown menu on th
 {{< /tabs >}}
 
 ## Set preferred tags
-You can set up to five preferred tags to highlight your organization's most important tags throughout Cloud Cost Management. These tags appear first when selecting tags in the [Explorer page][7], [CCM Reports][8], and [Custom Allocation Rules][9], among other areas.
+You can set up to five preferred tags to highlight your organization's most important tags throughout {{< prodname >}}Cloud Cost Management{{< /prodname >}}. These tags appear first when selecting tags in the [Explorer page][7], [CCM Reports][8], and [Custom Allocation Rules][9], among other areas.
 
 {{< img src="cloud_cost/tag_explorer/preferred_tags_1.png" alt="Preferred tags are shown throughout CCM" style="width:100%;" >}}
 
@@ -168,7 +168,7 @@ You can add or edit descriptions for any tag in the Tag Explorer to provide cont
 Tag descriptions are visible to all members of your organization and appear in the following locations:
 
 - {{< ui >}}Tag Explorer{{< /ui >}}: Descriptions are displayed in the tag table alongside each tag key.
-- {{< ui >}}Group-by selectors{{< /ui >}}: When selecting tags to group by across Cloud Cost Management, descriptions appear in the dropdown menu to help users choose the right tag.
+- {{< ui >}}Group-by selectors{{< /ui >}}: When selecting tags to group by across {{< prodname >}}Cloud Cost Management{{< /prodname >}}, descriptions appear in the dropdown menu to help users choose the right tag.
 
 ## Further reading
 

@@ -246,7 +246,7 @@ See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-e
 : Enable forwarding content from the XML reports as [Logs][6]. The content inside `<system-out>`, `<system-err>`, and `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
 **Environment variable**: `DD_CIVISIBILITY_LOGS_ENABLED`<br/>
 **Default**: `false`<br/>
-**Note**: Logs are billed separately from Test Optimization.
+**Note**: Logs are billed separately from {{< prodname >}}Test Optimization{{< /prodname >}}.
 
 `--max-concurrency`
 : The number of concurrent uploads to the API.<br/>

@@ -124,7 +124,7 @@ To prevent accidental overwriting, create and modify your definition files with 
 
 ##### Integration validation
 
-To validate your service definitions ingested by Datadog's GitHub integration, you can view events when services are updated or when there is an error. To view validation errors in [Event Management][12], filter by `source:software_catalog` and `status:error`. Adjust the timeframe as needed.
+To validate your service definitions ingested by Datadog's GitHub integration, you can view events when services are updated or when there is an error. To view validation errors in [{{< prodname >}}Event Management{{< /prodname >}}][12], filter by `source:software_catalog` and `status:error`. Adjust the timeframe as needed.
 
 {{< img src="tracing/software_catalog/github_error_event.png" alt="Github event showing error message from service definition." >}}
 

@@ -84,7 +84,7 @@ To see a complete list of metrics collected, see the integration Data Collected 
 {{< /card-grid >}}
 <p></p>
 
-The metrics used for Database Monitoring views are, primarily:
+The metrics used for {{< prodname >}}Database Monitoring{{< /prodname >}} views are, primarily:
 - **MySQL**: `mysql.queries.*`
 - **Postgres**: `postgresql.queries.*`
 - **SQL Server**: `sqlserver.queries.*`

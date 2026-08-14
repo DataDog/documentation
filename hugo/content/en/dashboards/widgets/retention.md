@@ -18,7 +18,7 @@ The Retention widget is not available in the <a href="/getting_started/site">Dat
 {{% /site-region %}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/product-analytics/" header="false" >}}
-The Retention widget is available in Preview for Product Analytics customers. To request access, complete the form.
+The Retention widget is available in Preview for {{< prodname >}}Product Analytics{{< /prodname >}} customers. To request access, complete the form.
 {{< /callout >}}
 
 {{< img src="/dashboards/widgets/retention/retention_widget_graph.png" alt="Graph visualization of the retention widget" style="width:100%;" >}}

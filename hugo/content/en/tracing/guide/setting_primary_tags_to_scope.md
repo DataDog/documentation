@@ -20,7 +20,7 @@ further_reading:
 
 ## Definition
 
-There are several dimensions available to scope an entire Datadog APM application. These include aggregate statistics (such as requests/second, latency, error rate, Apdex score) and visible [traces][1]. These dimensions are set up through primary tags that allow you to get an even finer view of your application's behavior. Use cases for primary tags include environment, availability zone, datacenter, etc.
+There are several dimensions available to scope an entire {{< prodname >}}Datadog APM{{< /prodname >}} application. These include aggregate statistics (such as requests/second, latency, error rate, Apdex score) and visible [traces][1]. These dimensions are set up through primary tags that allow you to get an even finer view of your application's behavior. Use cases for primary tags include environment, availability zone, datacenter, etc.
 
 Primary tags must follow a different set of rules from those of conventional [Datadog tags][2].
 

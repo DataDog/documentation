@@ -29,7 +29,7 @@ Supported Agent versions
 
 ## Data collected
 
-Database Monitoring collects the following data from ClickHouse:
+{{< prodname >}}Database Monitoring{{< /prodname >}} collects the following data from ClickHouse:
 
 **Database instance**
 : Periodic collection (every 5 minutes) of instance information including version, hostname, and configuration. Custom tags defined in the `tags` option are attached to the instance for filtering and grouping by environment, region, service, or any other custom dimensions.

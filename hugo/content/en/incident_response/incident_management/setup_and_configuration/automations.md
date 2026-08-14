@@ -19,7 +19,7 @@ further_reading:
 
 Automations enable you to customize and extend incident management to fit your organization's specific processes. Automatically trigger actions based on incident events such as severity changes, or state transitions.
 
-Automations are powered by [Datadog Workflow Automation][1] and are included in your Incident Management billing at no additional cost.
+Automations are powered by [Datadog Workflow Automation][1] and are included in your {{< prodname >}}Incident Management{{< /prodname >}} billing at no additional cost.
 
 ## Prerequisites
 
@@ -46,7 +46,7 @@ From this page, you can view, create, enable, disable, and manage your automatio
 
 ## Creating an automation
 
-You can build automations entirely from the Incident Management settings UI. For more advanced workflows, open the automation in the [Workflow Automation][1] editor to access additional actions and logic capabilities.
+You can build automations entirely from the {{< prodname >}}Incident Management{{< /prodname >}} settings UI. For more advanced workflows, open the automation in the [{{< prodname >}}Workflow Automation{{< /prodname >}}][1] editor to access additional actions and logic capabilities.
 
 When you click **New Automation**, you have two options for building your workflow:
 

@@ -7,11 +7,11 @@ disable_toc: false
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
-This topic describes how to use the App and API Protection [Users explorer][1] to investigate the risks associated with the users tracked by security [traces][3].
+This topic describes how to use the {{< prodname >}}App and API Protection{{< /prodname >}} [Users explorer][1] to investigate the risks associated with the users tracked by security [traces][3].
 
 ## Overview
 
@@ -36,7 +36,7 @@ The Users explorer assigns one or more of the following risk categories to a use
 
 To understand the difference between the different explorers, review these security approaches they support:
 
-- **Protect:** Automatically block attackers (IPs and authenticated users) using App and API Protection [Policies][2]. Customers should block attack tools as their first automated blocking action. Blocking attack tools reduces common vulnerability discovery for OWASP threats such as SQLi, command injection, and SSRF.
+- **Protect:** Automatically block attackers (IPs and authenticated users) using {{< prodname >}}App and API Protection{{< /prodname >}} [Policies][2]. Customers should block attack tools as their first automated blocking action. Blocking attack tools reduces common vulnerability discovery for OWASP threats such as SQLi, command injection, and SSRF.
 - **React:** Blocking attackers in response to observed threats using the [Signals][9], [Traces][3], Users, [Attackers][4] explorers.
 
 Each explorer focuses on a specific use case:

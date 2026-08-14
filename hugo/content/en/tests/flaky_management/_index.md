@@ -117,11 +117,11 @@ For more information about a specific flaky test, use these options in the actio
 
 ## Create cases for flaky tests
 
-For any flaky test, you can create a case and use [Case Management][4] to track any work toward remediation. Click the {{< ui >}}Create Case{{< /ui >}} button or use the actions menu at the end of the row.
+For any flaky test, you can create a case and use [{{< prodname >}}Case Management{{< /prodname >}}][4] to track any work toward remediation. Click the {{< ui >}}Create Case{{< /ui >}} button or use the actions menu at the end of the row.
 
 ## Confirm fixes for flaky tests
 
-When you fix a flaky test, Test Optimization's remediation flow can confirm the fix by retrying the test multiple times. To enable the remediation flow:
+When you fix a flaky test, {{< prodname >}}Test Optimization{{< /prodname >}}'s remediation flow can confirm the fix by retrying the test multiple times. To enable the remediation flow:
 
 1. For the test you are fixing, click {{< ui >}}Link commit to Flaky Test fix{{< /ui >}} in the Flaky Tests Management UI.
 1. Copy the unique flaky test key that is displayed (for example, `DD_ABC123`).
@@ -141,10 +141,10 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
 After a successful remediation run, Flaky Tests Management tracks the branch containing the fix and displays a {{< ui >}}Fix in progress{{< /ui >}} indicator until the fix reaches the repository's default branch. When the associated pull request merges, the test automatically moves to `Fixed` and the indicator is removed. If the fix is pushed directly to the default branch, the test is marked `Fixed` immediately.
 
 Requirements and limitations:
-- Source Code Integration must be configured for a supported SCM provider (GitHub, GitLab, or Azure DevOps) so Datadog can receive pull request merge webhooks. See [Source Code Integration setup][17].
+- {{< prodname >}}Source Code Integration{{< /prodname >}} must be configured for a supported SCM provider (GitHub, GitLab, or Azure DevOps) so Datadog can receive pull request merge webhooks. See [Source Code Integration setup][17].
 - Renaming or deleting the feature branch after the remediation run prevents Datadog from detecting the merge.
 - Branches with fixes older than three months stop being monitored; rerun the remediation flow to refresh tracking.
-- If your SCM provider isn't supported or Source Code Integration isn't set up, Datadog cannot detect merges automatically. Manually transition the test to `Fixed` after the fix is deployed.
+- If your SCM provider isn't supported or {{< prodname >}}Source Code Integration{{< /prodname >}} isn't set up, Datadog cannot detect merges automatically. Manually transition the test to `Fixed` after the fix is deployed.
 
 ### Grace period mechanism
 
@@ -158,7 +158,7 @@ This method avoids unnecessary CI failures and saves developer time.
 
 ## Bits AI-powered flaky test fixes
 
-After Test Optimization detects a flaky test, [Bits Code][16] can automatically diagnose and fix it. Bits Code analyzes the test's failure patterns and generates production-ready code changes. You can then create a GitHub pull request directly from Bits Code's suggestions.
+After Test Optimization detects a flaky test, [{{< prodname >}}Bits Code{{< /prodname >}}][16] can automatically diagnose and fix it. {{< prodname >}}Bits Code{{< /prodname >}} analyzes the test's failure patterns and generates production-ready code changes. You can then create a GitHub pull request directly from {{< prodname >}}Bits Code{{< /prodname >}}'s suggestions.
 
 For Bits Code to create a fix, the flaky test must meet the following criteria:
 - **Failure rate**: At least 5%
@@ -171,9 +171,9 @@ For Bits Code to create a fix, the flaky test must meet the following criteria:
 
 ### Setup
 
-To allow Bits Code to suggest flaky test fixes, enable Bits Code for Test Optimization by following the setup instructions in the [Bits Code documentation][16]. Bits Code automatically creates fixes for flaky tests detected by Test Optimization.
+To allow {{< prodname >}}Bits Code{{< /prodname >}} to suggest flaky test fixes, enable {{< prodname >}}Bits Code{{< /prodname >}} for {{< prodname >}}Test Optimization{{< /prodname >}} by following the setup instructions in the [Bits Code documentation][16]. {{< prodname >}}Bits Code{{< /prodname >}} automatically creates fixes for flaky tests detected by {{< prodname >}}Test Optimization{{< /prodname >}}.
 
-After you have enabled Bits Code, when viewing a flaky test, click {{< ui >}}Generate fix{{< /ui >}}.
+After you have enabled {{< prodname >}}Bits Code{{< /prodname >}}, when viewing a flaky test, click {{< ui >}}Generate fix{{< /ui >}}.
 
 ## AI-powered flaky test categorization
 

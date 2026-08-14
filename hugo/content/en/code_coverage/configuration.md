@@ -168,7 +168,7 @@ ignore:
 
 ## PR Gates
 
-You can define [PR Gates][2] in the configuration file to enforce code coverage thresholds on pull requests. If gates are also configured in the [Datadog UI][2], Datadog evaluates both the configuration file rules and the UI rules when a PR is opened or updated.
+You can define [{{< prodname >}}PR Gates{{< /prodname >}}][2] in the configuration file to enforce code coverage thresholds on pull requests. If gates are also configured in the [Datadog UI][2], Datadog evaluates both the configuration file rules and the UI rules when a PR is opened or updated.
 
 <div class="alert alert-info">If both the configuration file and the Datadog UI define gates for the same scope, the pull request must meet every defined threshold.</div>
 

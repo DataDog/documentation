@@ -311,7 +311,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     sudo systemctl restart observability-pipelines-worker
     ```
 
-7. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
+7. Navigate back to the {{< prodname >}}Observability Pipelines{{< /prodname >}} installation page and click {% ui %}Deploy{% /ui %}.
 
 {% /if %}
 
@@ -323,7 +323,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     - **Note**: The API key must be [enabled for Remote Configuration][10].
 4. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered in {% ui %}Review your secrets management{% /ui %}.
 
-5. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
+5. Navigate back to the {{< prodname >}}Observability Pipelines{{< /prodname >}} installation page and click {% ui %}Deploy{% /ui %}.
 
 {% /if %}
 
@@ -352,7 +352,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
 6. Configure your `values.yaml` file for your secrets manager. See [Secrets Management][18].
 7. Run the command provided in the UI to install the Worker.
-8. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
+8. Navigate back to the {{< prodname >}}Observability Pipelines{{< /prodname >}} installation page and click {% ui %}Deploy{% /ui %}.
 
 {% /if %}
 
@@ -362,7 +362,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 2. In {% ui %}Review your secrets management{% /ui %}, enter the [environment variables][7] for your sources and destinations, if applicable.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
 6. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
-7. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
+7. Navigate back to the {{< prodname >}}Observability Pipelines{{< /prodname >}} installation page and click {% ui %}Deploy{% /ui %}.
 
 {% /if %}
 {% /if %}
@@ -384,7 +384,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     ```
     sudo systemctl restart observability-pipelines-worker
     ```
-7. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
+7. Navigate back to the {{< prodname >}}Observability Pipelines{{< /prodname >}} installation page and click {% ui %}Deploy{% /ui %}.
 
 **Note**: If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
@@ -395,7 +395,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 2. In {% ui %}Review your secrets management{% /ui %}, enter the [environment variables][7] for your sources and destinations, if applicable.
 {% partial file="observability_pipelines/install_the_worker/ui-linux.mdoc.md" /%}
-5. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
+5. Navigate back to the {{< prodname >}}Observability Pipelines{{< /prodname >}} installation page and click {% ui %}Deploy{% /ui %}.
 
 {% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
 
@@ -443,7 +443,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 6. Click {% ui %}Launch CloudFormation Template{% /ui %} to navigate to the AWS Console to review the stack configuration and then launch it. Make sure the CloudFormation parameters are as expected.
 7. Select the VPC and subnet you want to use to install the Worker.
 8. Review and check the necessary permissions checkboxes for IAM. Click {% ui %}Submit{% /ui %} to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
-9. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
+9. Navigate back to the {{< prodname >}}Observability Pipelines{{< /prodname >}} installation page and click {% ui %}Deploy{% /ui %}.
 
 **Note**: If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
@@ -641,7 +641,7 @@ An example task definition:
 
 ### Set up load balancing
 
-Depending on your use case, configure either an [Application Load Balancer][22] or a [Network Load Balancer][23] to target the group of Fargate tasks you defined earlier. Configure the health check against the Observability Pipelines' API port that was set in the task definition.
+Depending on your use case, configure either an [Application Load Balancer][22] or a [Network Load Balancer][23] to target the group of Fargate tasks you defined earlier. Configure the health check against the {{< prodname >}}Observability Pipelines{{< /prodname >}}' API port that was set in the task definition.
 
 ## Upgrade the Worker
 
@@ -906,7 +906,7 @@ Follow these steps to manually install the Worker, instead of running the one-li
 <!-- UI - Linux APT -->
 {% if equals($interface, "ui") %}
 
-5. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
+5. Navigate back to the {{< prodname >}}Observability Pipelines{{< /prodname >}} installation page and click {% ui %}Deploy{% /ui %}.
 
 {% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
 
@@ -977,7 +977,7 @@ Follow these steps to manually install the Worker, instead of running the one-li
 <!-- UI - Linux RPM -->
 {% if equals($interface, "ui") %}
 
-5. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
+5. Navigate back to the {{< prodname >}}Observability Pipelines{{< /prodname >}} installation page and click {% ui %}Deploy{% /ui %}.
 
 {% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
 
@@ -1074,7 +1074,7 @@ See [Network Traffic][26] for more information.
 
 ## Index your Worker logs
 
-Make sure your Worker logs are [indexed][9] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
+Make sure your Worker logs are [indexed][9] in {{< prodname >}}Log Management{{< /prodname >}} for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
 
 [1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#bootstrap-options
 [7]: /observability_pipelines/guide/environment_variables/

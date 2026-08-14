@@ -100,7 +100,7 @@ After adding scanning rules from the library, you can edit each rule separately 
 
 To delete a rule in the Sensitive Data Scanner:
 
-1. Navigate to [Observability Pipelines][2].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][2].
 1. Select your pipeline.
 1. Click the Sensitive Data Scanner processor to expand it.
 1. Click {{< ui >}}Manage Scanning Rules{{< /ui >}}.
@@ -295,7 +295,7 @@ The Sensitive Data Scanner processor is CPU intensive. Use the following best pr
 
 ### View scanning rule usage with the Observability Pipelines Overview dashboard
 
-Observability Pipelines includes an out-of-the-box [Observability Pipelines Overview][16] dashboard with a **Sensitive data found by Observability Pipelines** section. Use the widgets in that section to see which scanning rules are matching data.
+{{< prodname >}}Observability Pipelines{{< /prodname >}} includes an out-of-the-box [Observability Pipelines Overview][16] dashboard with a **Sensitive data found by {{< prodname >}}Observability Pipelines{{< /prodname >}}** section. Use the widgets in that section to see which scanning rules are matching data.
 
 1. Navigate to Dashboards > [Observability Pipelines Overview][16].
 1. Use the template variables (`pipeline_id`, `host`, `worker_uuid`, `component_type`, `component_kind`, `component_id`) at the top of the dashboard to scope the view to a specific pipeline or Worker.
@@ -317,7 +317,7 @@ After you identify rules with no matches over a representative time frame, confi
 
 Rules that are enabled but not used consume unnecessary resources. Check the Sensitive Data Scanner processor to view how many matches each rule has had over the past 24 hours.
 
-1. Navigate to [Observability Pipelines][2].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][2].
 1. Select your pipeline.
 1. Click the Sensitive Data Scanner processor to expand it.
 1. Click {{< ui >}}View Scanning Rules{{< /ui >}} to open the side panel and see {{< ui >}}Matches in the last 24 hours{{< /ui >}} for each rule.

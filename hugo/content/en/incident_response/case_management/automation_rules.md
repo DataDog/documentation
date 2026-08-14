@@ -37,7 +37,7 @@ Add the following to your configuration:
     1. When a case's status changes
     1. When a case attribute is added or deleted
     1. When a case receives an approval or decline
-1. **Select a workflow** - Use [Workflow Automation][2] to automate actions such as:
+1. **Select a workflow** - Use [{{< prodname >}}Workflow Automation{{< /prodname >}}][2] to automate actions such as:
     1. Assigning the case to a team member
     1. Adding comments
     1. Closing a resolved case

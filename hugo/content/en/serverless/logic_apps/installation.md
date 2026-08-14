@@ -49,7 +49,7 @@ After configuring log forwarding, invoke your Logic App workflow a couple of tim
 
 ### 4. Verify traces in Datadog
 
-Use Live Search in Datadog APM to verify that traces are being received:
+Use Live Search in {{< prodname >}}Datadog APM{{< /prodname >}} to verify that traces are being received:
 
 1. Navigate to [APM > Traces][4] in Datadog
 2. Use the query `operation_name:azure.logicapps` to filter for Logic Apps traces

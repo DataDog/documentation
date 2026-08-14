@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Observability Pipelines enables you to shape and transform observability data. Similar to Logging without Limits™ pipelines, you can configure pipelines for Observability Pipelines that are composed of a series of transform components. These transforms allow you to parse, structure, and enrich data with built-in type safety.
+{{< prodname >}}Observability Pipelines{{< /prodname >}} enables you to shape and transform observability data. Similar to Logging without Limits™ pipelines, you can configure pipelines for {{< prodname >}}Observability Pipelines{{< /prodname >}} that are composed of a series of transform components. These transforms allow you to parse, structure, and enrich data with built-in type safety.
 
 ## Remap data
 
@@ -97,7 +97,7 @@ The configuration returns the following:
 
 ## Sample, reduce, filter, and aggregate data
 
-Sampling, reducing, filtering, and aggregating are common transforms to reduce the volume of observability data delivered to downstream services. Observability Pipelines offers a variety of ways to control your data volume:
+Sampling, reducing, filtering, and aggregating are common transforms to reduce the volume of observability data delivered to downstream services. {{< prodname >}}Observability Pipelines{{< /prodname >}} offers a variety of ways to control your data volume:
 
 - [Sample events][4] based on supplied criteria and at a configurable rate.
 - [Reduce and collapse][5] multiple events into a single event.

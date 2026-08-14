@@ -33,7 +33,7 @@ kubectl describe pod -n datadog-byoc-logs <pod-name>
 
 ## Access permissions
 
-The most common errors come from access permissions to the object storage or to the metastore. To troubleshoot, use `kubectl` and verify logs from BYOC Logs components: indexer pods, metastore pods, and searcher pods.
+The most common errors come from access permissions to the object storage or to the metastore. To troubleshoot, use `kubectl` and verify logs from {{< prodname >}}BYOC Logs{{< /prodname >}} components: indexer pods, metastore pods, and searcher pods.
 
 ## Metastore errors
 
@@ -72,7 +72,7 @@ postgresql://user:abc/def+ghi=@host:5432/byoc-logs
 ERROR quickwit: command failed error=metastore error `index `datadog` not found`
 ```
 
-The cluster eventually crashes, and the BYOC Logs console shows multiple clusters where you expect one.
+The cluster eventually crashes, and the {{< prodname >}}BYOC Logs{{< /prodname >}} console shows multiple clusters where you expect one.
 
 **Cause:** The metastore URI is not set correctly, so the metastore falls back to a local file-backed store. Each time the metastore pod restarts, the file is wiped and a fresh metastore is created—all index metadata is lost. An earlier error in the logs often points to the misconfiguration:
 
@@ -109,11 +109,11 @@ Action: Check if your pod has access to the bucket.
 - **Indexers undersized:** Check CPU utilization and the `pending_merge_ops.gauge` metric. If merge operations are backing up, indexers need more CPU or additional pods.
 - **Disk full:** Check `disk.available_space.gauge`. If the write-ahead log (WAL) fills up, indexers stop accepting new data. Increase persistent volume size or add more indexer pods.
 
-In case you use Observability Pipelines in front of BYOC Logs, you will need to check what's happening there, see OP [Scaling and Performance][2].
+In case you use {{< prodname >}}Observability Pipelines{{< /prodname >}} in front of {{< prodname >}}BYOC Logs{{< /prodname >}}, you will need to check what's happening there, see OP [Scaling and Performance][2].
 
 ### Occasional 429 (Too Many Requests) errors
 
-A low rate of 429 errors is not a problem in itself. The Datadog Agent or Observability Pipelines buffers payloads and retries the request automatically.
+A low rate of 429 errors is not a problem in itself. The Datadog Agent or {{< prodname >}}Observability Pipelines{{< /prodname >}} buffers payloads and retries the request automatically.
 
 429s usually mean the cluster is temporarily short on shards. Common triggers:
 

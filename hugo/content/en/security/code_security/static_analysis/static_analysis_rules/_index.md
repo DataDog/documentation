@@ -283,7 +283,7 @@ further_reading:
 
 {{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
-    Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
+    {{< prodname >}}Code Security{{< /prodname >}} is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 

@@ -37,7 +37,7 @@ For the full API reference, including authentication, required fields, and reque
 
 ## Analyze server-side events
 
-After you send server-side events, they are available in any Product Analytics chart. In the event picker, select **Server Events** to scope your analysis to server-side data.
+After you send server-side events, they are available in any {{< prodname >}}Product Analytics{{< /prodname >}} chart. In the event picker, select **Server Events** to scope your analysis to server-side data.
 
 ## Further reading
 

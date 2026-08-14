@@ -18,7 +18,7 @@ To create a [Maintenance Window][2]:
 1. Select {{< ui >}}Maintenance Windows{{< /ui >}} next to Case Attributes in the left navigation bar.
 1. Click {{< ui >}}New Maintenance Window{{< /ui >}} in the top right.
 1. Enter a Maintenance Window name.
-1. Set conditions for the cases that should be impacted by this maintenance window using tags or attributes. By default, Event Management cases inherit tags from the alerts they correlate.
+1. Set conditions for the cases that should be impacted by this maintenance window using tags or attributes. By default, {{< prodname >}}Event Management{{< /prodname >}} cases inherit tags from the alerts they correlate.
 1. Select the start and end times for the Maintenance Window.
 1. Review Maintenance Window details and click {{< ui >}}Save{{< /ui >}}.
 

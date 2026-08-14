@@ -25,7 +25,7 @@ Prepare one or more read replica instances of your metastore PostgreSQL database
 
 ## Create a Kubernetes secret for the read replica
 
-The read-only metastore requires an environment variable named `QW_METASTORE_READ_REPLICA_URI`. Set it to the connection URI for your read replica instance(s), similar to `QW_METASTORE_URI` for the primary metastore. Store this URI in a Kubernetes secret in your BYOC Logs namespace:
+The read-only metastore requires an environment variable named `QW_METASTORE_READ_REPLICA_URI`. Set it to the connection URI for your read replica instance(s), similar to `QW_METASTORE_URI` for the primary metastore. Store this URI in a Kubernetes secret in your {{< prodname >}}BYOC Logs{{< /prodname >}} namespace:
 
 ```shell
 kubectl create secret generic byoclogs-metastore-read-replica-uri \

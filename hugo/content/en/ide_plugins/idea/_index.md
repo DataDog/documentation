@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-The Datadog plugin for JetBrains IDEs helps improve software performance by providing code insights in the IDE based on real-time observability data. The plugin is for developers that use Datadog products including [Code Security][24], [Error Tracking][25], and [Logs][23] to monitor their services. It is available for IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm.
+The Datadog plugin for JetBrains IDEs helps improve software performance by providing code insights in the IDE based on real-time observability data. The plugin is for developers that use Datadog products including [{{< prodname >}}Code Security{{< /prodname >}}][24], [{{< prodname >}}Error Tracking{{< /prodname >}}][25], and [Logs][23] to monitor their services. It is available for IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm.
 
 {{< img src="/ide_plugins/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
@@ -66,19 +66,19 @@ To remove a service, select it in the **Services** table and click the minus ico
 ## Core features
 
 ### Code Security
-The [**Code Security**][24] integration promotes better security by flagging library vulnerabilities and runtime code vulnerabilities. The local code analyzer checks your code changes as you edit to detect quality and security issues prior to commit.
+The [**{{< prodname >}}Code Security{{< /prodname >}}**][24] integration promotes better security by flagging library vulnerabilities and runtime code vulnerabilities. The local code analyzer checks your code changes as you edit to detect quality and security issues prior to commit.
 
 {{< img src="/ide_plugins/idea/code_security/library-vulnerability.png" alt="A library vulnerability highlighted in the source editor." style="width:80%;" >}}
 
-Find out more in the [Code Security][24] sub-section.
+Find out more in the [{{< prodname >}}Code Security{{< /prodname >}}][24] sub-section.
 
 ### View in IDE
 
-The **View in IDE** feature provides a link from the Datadog platform directly to the source files in your IDE. Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
+The **View in IDE** feature provides a link from the Datadog platform directly to the source files in your IDE. Look for the button next to frames in stack traces displayed on the platform (for example, in [{{< prodname >}}Error Tracking{{< /prodname >}}][6]):
 
 {{< img src="/ide_plugins/idea/view-in-idea.png" alt="A stack trace on the Datadog platform showing the View in IntelliJ button." style="width:100%;" >}}
 
-<div class="alert alert-info">To make the most of this feature, ensure that Source Code Integration is configured for your service.</div>
+<div class="alert alert-info">To make the most of this feature, ensure that {{< prodname >}}Source Code Integration{{< /prodname >}} is configured for your service.</div>
 
 ## Other features
 
@@ -86,13 +86,13 @@ The **View in IDE** feature provides a link from the Datadog platform directly t
 
 <div class="alert alert-info">This feature is in limited support.</div>
 
-The [**Error Tracking**][25] integration helps you find and fix runtime errors from Error Tracking.
+The [**{{< prodname >}}Error Tracking{{< /prodname >}}**][25] integration helps you find and fix runtime errors from {{< prodname >}}Error Tracking{{< /prodname >}}.
 
 {{< img src="/ide_plugins/idea/error_tracking/editor.png" alt="Error tracking in the source editor" style="width:100%;" >}}
 
 Click the gutter icon to open the Datadog tool window and inspect details of the runtime error.
 
-Find out more in the [Error Tracking][25] sub-section.
+Find out more in the [{{< prodname >}}Error Tracking{{< /prodname >}}][25] sub-section.
 
 ### Logs
 
@@ -118,7 +118,7 @@ Click the inlay to open the Datadog tool window and inspect the span details.
 
 <div class="alert alert-info">This feature is in limited support.</div>
 
-The [**Flaky Tests**][7] integration shows you flaky tests detected by [Test Optimization][2].
+The [**Flaky Tests**][7] integration shows you flaky tests detected by [{{< prodname >}}Test Optimization{{< /prodname >}}][2].
 
 {{< img src="/ide_plugins/idea/flaky-test-in-editor.png" alt="APM spans in the source editor" style="width:80%;" >}}
 

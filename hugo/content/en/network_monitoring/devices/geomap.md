@@ -18,13 +18,13 @@ further_reading:
 
 ## Overview
 
-[Device Geomap][1] displays the geographic distribution of your network devices discovered through Network Device Monitoring (NDM). Using the [Geomap Widget points visualization][11], it plots devices on a geographical map based on their configured locations, allowing you to visualize site coverage, assess connectivity, and monitor regional network health. Use it to identify device outages, latency issues, or coverage gaps across distributed environments.
+[Device Geomap][1] displays the geographic distribution of your network devices discovered through {{< prodname >}}Network Device Monitoring{{< /prodname >}} (NDM). Using the [Geomap Widget points visualization][11], it plots devices on a geographical map based on their configured locations, allowing you to visualize site coverage, assess connectivity, and monitor regional network health. Use it to identify device outages, latency issues, or coverage gaps across distributed environments.
 
 {{< img src="network_device_monitoring/geomap/device_geomap.png" alt="Network Device Geomap tab displaying the location of mapped devices." style="width:100%;" >}}
 
 ### Prerequisites
 
-- [Network Device Monitoring][2] must be configured on your devices.
+- [{{< prodname >}}Network Device Monitoring{{< /prodname >}}][2] must be configured on your devices.
 - Devices must be tagged using the `geolocation:<value>` format, where `<value>` is the location identifier. 
 
 ## Configuring locations

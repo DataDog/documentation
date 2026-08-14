@@ -47,10 +47,10 @@ Each topic shows its interaction volume and share of total traffic. Interactions
 
 ## Set up a Pattern
 
-1. In Datadog, navigate to **AI Observability** > **Agent Observability** > [**Patterns**][4].
+1. In Datadog, navigate to **AI Observability** > **{{< prodname >}}Agent Observability{{< /prodname >}}** > [**Patterns**][4].
 1. Click **+ New Pattern**.
 1. Enter a **Name**.
-1. Click **Select a model**. The Model configuration window opens, where you can add details that Agent Observability uses to generate topic names, summaries, topic hierarchy, and to attribute each interaction to a topic:
+1. Click **Select a model**. The Model configuration window opens, where you can add details that {{< prodname >}}Agent Observability{{< /prodname >}} uses to generate topic names, summaries, topic hierarchy, and to attribute each interaction to a topic:
    - **LLM Provider**: Supported providers are OpenAI, Amazon Bedrock, Azure OpenAI, and Vertex AI.
    - **Account**
    - **Model**
@@ -59,7 +59,7 @@ Each topic shows its interaction volume and share of total traffic. Interactions
    1. Use the **Application** multi-selector to choose one or more LLM applications to include spans for. Selecting applications automatically updates the underlying span filter query, and editing the query updates the selected applications. For finer-grained scoping, click the filter icon next to the selector to open the **Advanced** popover, which exposes:
       - **Which spans do you want to cluster?:** The raw span filter query for scoping by environment, span type, or other tags.
       - **Time window:** The lookback period for interactions to analyze.
-   1. Set the **Sampling Rate**: The percentage of matching interactions to include. Patterns processes up to 10,000 records per run; if your filter matches more than that, Agent Observability randomly samples records until it reaches that number.
+   1. Set the **Sampling Rate**: The percentage of matching interactions to include. Patterns processes up to 10,000 records per run; if your filter matches more than that, {{< prodname >}}Agent Observability{{< /prodname >}} randomly samples records until it reaches that number.
 1. Under **What should we detect Patterns on?**, enter a template that defines what gets sent to the model for analysis. Use `{{variable}}` syntax to reference any span field; for example, `{{meta.input.value}}` to analyze patterns by user input, or `{{meta.span.kind}}` to analyze by span kind. Click {{< ui >}}Template Examples{{< /ui >}} to see common configurations. As you type, the right panel previews matching spans and shows what percentage of interactions have values for the variables you've referenced.
 1. Under **How often should we run Patterns?**, choose how the Pattern runs. Scheduled times use your Datadog timezone preference. Scheduled runs use the same pipeline as a manual run, so results appear in the same place, and the Patterns page always shows your most recent run.
    - **On demand** (default): Run the Pattern manually.

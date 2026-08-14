@@ -19,9 +19,9 @@ The Observability Pipelines Worker uses standard Google authentication methods. 
 
 ## Configure Log Archives
 
-This step is only required if you want to send logs to Google Cloud Storage for [archiving][1] and [rehydration][2], and you don't already have a Datadog Log Archive configured for Observability Pipelines. If you already have a Datadog Log Archive configured or do not want to rehydrate your logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destinations).
+This step is only required if you want to send logs to Google Cloud Storage for [archiving][1] and [rehydration][2], and you don't already have a Datadog Log Archive configured for {{< prodname >}}Observability Pipelines{{< /prodname >}}. If you already have a Datadog Log Archive configured or do not want to rehydrate your logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destinations).
 
-If you already have a Datadog Log Archive configured for Observability Pipelines, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
+If you already have a Datadog Log Archive configured for {{< prodname >}}Observability Pipelines{{< /prodname >}}, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
 
 You need to have Datadog's [Google Cloud Platform integration][3] installed to set up Datadog Log Archives.
 

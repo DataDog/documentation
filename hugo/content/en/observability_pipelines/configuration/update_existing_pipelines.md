@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-For existing pipelines in Observability Pipelines, you can update and deploy changes for source settings, destination settings, and processors in the Observability Pipelines UI. But if you are using environment variables and want to update source and destination environment variables, you must manually update the Worker with the new values.
+For existing pipelines in {{< prodname >}}Observability Pipelines{{< /prodname >}}, you can update and deploy changes for source settings, destination settings, and processors in the Observability Pipelines UI. But if you are using environment variables and want to update source and destination environment variables, you must manually update the Worker with the new values.
 
 This document goes through updating the pipeline in the UI. You can also use the [update a pipeline][2] API or [datadog_observability_pipeline][3] Terraform resource to update existing pipelines.
 
@@ -15,7 +15,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][4] if you want to pro
 
 ## Update an existing pipeline
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][1].
 1. Select the pipeline you want to update.
 1. Click {{< ui >}}Edit Pipeline{{< /ui >}} in the top right corner.
 1. Make changes to the pipeline.

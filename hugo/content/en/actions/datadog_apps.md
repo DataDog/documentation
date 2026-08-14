@@ -20,7 +20,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/apps/" btn_hidden="false" header="Join the Preview!">}}
-Datadog Apps is in Preview. Use this form to request access.
+{{< prodname >}}Datadog Apps{{< /prodname >}} is in Preview. Use this form to request access.
 {{< /callout >}}
 
 ## Overview
@@ -43,7 +43,7 @@ Choose Apps when you need:
   ```shell
   node --version
   ```
-- Optional: A Datadog **API key** and an **application key** with [Actions API Access][5] enabled. Required for API-key-backed build telemetry (build metrics and Error Tracking sourcemap uploads) and for CI/CD uploads. For instructions, see [API and Application Keys][6].
+- Optional: A Datadog **API key** and an **application key** with [Actions API Access][5] enabled. Required for API-key-backed build telemetry (build metrics and {{< prodname >}}Error Tracking{{< /prodname >}} sourcemap uploads) and for CI/CD uploads. For instructions, see [API and Application Keys][6].
 
   To enable Actions API Access on an application key:
 
@@ -72,7 +72,7 @@ The scaffolded project includes:
 
 ## Use the `datadog-app` skill
 
-The [`datadog-app` agent skill][20] gives AI coding agents guidance on Datadog Apps workflows, including scaffolding, local development, uploads, publishing, CI/CD, troubleshooting, DDSQL, and Action Catalog usage. The skill is available in the [agent-skills GitHub repository][21].
+The [`datadog-app` agent skill][20] gives AI coding agents guidance on {{< prodname >}}Datadog Apps{{< /prodname >}} workflows, including scaffolding, local development, uploads, publishing, CI/CD, troubleshooting, DDSQL, and Action Catalog usage. The skill is available in the [agent-skills GitHub repository][21].
 
 ### Install
 
@@ -188,7 +188,7 @@ import { Button } from '@datadog/druids';
 Druids requires React 18 or 19 as a peer dependency. For the set of available components, see the [package on npm][23].
 
 <div class="alert alert-info">
-Druids components are for use in Datadog Apps and App Builder only. See the package's license for details.
+Druids components are for use in {{< prodname >}}Datadog Apps{{< /prodname >}} and App Builder only. See the package's license for details.
 </div>
 
 ## Build and upload your app
@@ -224,7 +224,7 @@ After you upload an app, it appears in your [App Builder][12] app list. From App
 - [Publish your app][13]
 - [Edit the app name and description][13]
 - Manage [permissions][14]
-- [Embed the app][3] in dashboards, notebooks, and the Internal Developer Portal
+- [Embed the app][3] in dashboards, notebooks, and the {{< prodname >}}Internal Developer Portal{{< /prodname >}}
 
 <div class="alert alert-danger">
 The following App Builder features are not available for locally-built apps:

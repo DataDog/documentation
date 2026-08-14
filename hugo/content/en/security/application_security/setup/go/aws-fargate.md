@@ -17,7 +17,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -62,7 +62,7 @@ Install the Datadog Agent in your Fargate task definition:
 
 ### Building your application with Orchestrion
 
-To enable App and API Protection for Go, you need to compile your application with [Orchestrion][4], Datadog's compile-time instrumentation tool.
+To enable {{< prodname >}}App and API Protection{{< /prodname >}} for Go, you need to compile your application with [Orchestrion][4], Datadog's compile-time instrumentation tool.
 
 Update your Dockerfile to install Orchestrion and build your application:
 
@@ -97,7 +97,7 @@ CMD ["/myapp"]
 
 {{% collapse-content title="APM Tracing Enabled" level="h3" %}}
 
-Update your task definition to include the Go application container with App and API Protection configuration:
+Update your task definition to include the Go application container with {{< prodname >}}App and API Protection{{< /prodname >}} configuration:
 
 ```json
 {
@@ -128,9 +128,9 @@ Update your task definition to include the Go application container with App and
 
 {{% collapse-content title="APM Tracing Disabled" level="h3" %}}
 
-To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
+To disable APM tracing while keeping {{< prodname >}}App and API Protection{{< /prodname >}} enabled, you must set the APM tracing variable to false.
 
-Update your task definition to include the Go application container with App and API Protection configuration with APM tracing disabled:
+Update your task definition to include the Go application container with {{< prodname >}}App and API Protection{{< /prodname >}} configuration with APM tracing disabled:
 
 ```json
 {
@@ -174,7 +174,7 @@ aws ecs run-task --cluster your-cluster --task-definition your-task-definition
 
 ## 4. Verify your setup
 
-To verify that App and API Protection is working correctly, send known attack patterns to your application. For example, trigger the [Security Scanner Detected][5] rule by running a file that contains the following curl script:
+To verify that {{< prodname >}}App and API Protection{{< /prodname >}} is working correctly, send known attack patterns to your application. For example, trigger the [Security Scanner Detected][5] rule by running a file that contains the following curl script:
 
 ```bash
 for ((i=1;i<=250;i++));
@@ -190,7 +190,7 @@ A few minutes after you enable your application and exercise it, threat informat
 
 ## Troubleshooting
 
-If you encounter issues while setting up App and API Protection for your Go application, see the [Go App and API Protection troubleshooting guide][7].
+If you encounter issues while setting up {{< prodname >}}App and API Protection{{< /prodname >}} for your Go application, see the [Go App and API Protection troubleshooting guide][7].
 
 ## Further Reading
 

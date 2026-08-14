@@ -17,7 +17,7 @@ further_reading:
 ---
 
 
-Datadog provides official Bazel rules for Java Test Optimization. Use `dd_topt_java_test` to configure Java test targets to run with the Datadog Java tracer and write Test Optimization payloads during Bazel test execution.
+Datadog provides official Bazel rules for Java Test Optimization. Use `dd_topt_java_test` to configure Java test targets to run with the Datadog Java tracer and write {{< prodname >}}Test Optimization{{< /prodname >}} payloads during Bazel test execution.
 
 ## Compatibility
 
@@ -30,11 +30,11 @@ Use the following minimum versions:
 | Java runtime example | `>=17` |
 | `dd-java-agent` example | `>=1.60.0` |
 
-The Datadog Bazel rule is the official Test Optimization setup path for Java tests that run with Bazel.
+The Datadog Bazel rule is the official {{< prodname >}}Test Optimization{{< /prodname >}} setup path for Java tests that run with Bazel.
 
 ## Prerequisites
 
-Before setting up Test Optimization for Java tests in Bazel:
+Before setting up {{< prodname >}}Test Optimization{{< /prodname >}} for Java tests in Bazel:
 
 - Configure a Datadog API key in your CI secret store.
 - Set `DD_SITE` to your Datadog site, such as `datadoghq.com`.
@@ -167,7 +167,7 @@ dd_topt_java_test(
 )
 ```
 
-The macro injects the Datadog Java tracer with `-javaagent` and adds the agent JAR to test runtime data. It also enables Test Optimization for the Java test process and configures payloads to be written as JSON files under `TEST_UNDECLARED_OUTPUTS_DIR`.
+The macro injects the Datadog Java tracer with `-javaagent` and adds the agent JAR to test runtime data. It also enables {{< prodname >}}Test Optimization{{< /prodname >}} for the Java test process and configures payloads to be written as JSON files under `TEST_UNDECLARED_OUTPUTS_DIR`.
 
 ### Optional parameters
 

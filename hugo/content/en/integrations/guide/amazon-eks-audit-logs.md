@@ -47,13 +47,13 @@ To view only EKS audit logs in the Log Explorer, query `source:kubernetes.audit`
 
 You can use Datadog Cloud SIEM to detect potential misconfigurations or targeted attacks to your EKS clusters.
 
-To start monitoring your Amazon EKS audit logs with Cloud SIEM, setup Cloud SIEM and create a custom [log detection rule][8] that generates a [Security Signal][9] in the [Security Signals Explorer][10] whenever a misconfiguration or threat is detected.
+To start monitoring your Amazon EKS audit logs with {{< prodname >}}Cloud SIEM{{< /prodname >}}, setup {{< prodname >}}Cloud SIEM{{< /prodname >}} and create a custom [log detection rule][8] that generates a [Security Signal][9] in the [Security Signals Explorer][10] whenever a misconfiguration or threat is detected.
 
 ### Setup
 
-Setup and configure Cloud SIEM. See the in-app [Cloud SIEM setup and configuration instructions][1].
+Setup and configure {{< prodname >}}Cloud SIEM{{< /prodname >}}. See the in-app [Cloud SIEM setup and configuration instructions][1].
 
-Once Cloud SIEM is set up and configured, you can either create a new Cloud SIEM rule from scratch or export a query in Log Explorer to a new rule.
+Once Cloud SIEM is set up and configured, you can either create a new {{< prodname >}}Cloud SIEM{{< /prodname >}} rule from scratch or export a query in Log Explorer to a new rule.
 
 ### Review Security Monitoring Rules
 

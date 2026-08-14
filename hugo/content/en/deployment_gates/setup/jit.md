@@ -14,10 +14,10 @@ further_reading:
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
-Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
+{{< prodname >}}Deployment Gates{{< /prodname >}} are in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
-With **Just-In-Time (JIT)** Deployment Gates, rules are defined inline in the evaluation request. No gate needs to exist in Datadog ahead of time, which makes JIT a good fit for rules-as-code and per-deployment flexibility.
+With **Just-In-Time (JIT)** {{< prodname >}}Deployment Gates{{< /prodname >}}, rules are defined inline in the evaluation request. No gate needs to exist in Datadog ahead of time, which makes JIT a good fit for rules-as-code and per-deployment flexibility.
 
 Looking for persistent gates managed in the Datadog UI, API, or Terraform? See [Preconfigured Deployment Gates][5].
 
@@ -707,7 +707,7 @@ The field `data.attributes.gate_status` contains the result of the evaluation, w
 
 ## Recommendation for first-time onboarding
 
-When integrating Deployment Gates into your Continuous Delivery workflow, an evaluation phase helps confirm the product is working as expected before it impacts deployments. Use dry-run mode and the [{{< ui >}}Deployment Gates Evaluations{{< /ui >}}][6] page:
+When integrating {{< prodname >}}Deployment Gates{{< /prodname >}} into your Continuous Delivery workflow, an evaluation phase helps confirm the product is working as expected before it impacts deployments. Use dry-run mode and the [{{< ui >}}Deployment Gates Evaluations{{< /ui >}}][6] page:
 
 1. Set `dry_run: true` on the `configuration` (or `dryRun: true` in the CLI config file). To mark only some rules as dry-run, set `dry_run` per rule. A dry-run evaluation always returns `pass` over the API, but the real result is recorded in the UI.
 2. Add the gate evaluation to your deployment process. Deployments are not impacted by the gate result while dry-run is enabled.

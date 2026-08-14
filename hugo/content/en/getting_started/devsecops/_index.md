@@ -7,12 +7,12 @@ This guide introduces the Infrastructure Monitoring DevSecOps bundles, with link
 
 ## Infrastructure DevSecOps
 
-The Infrastructure DevSecOps bundles combine infrastructure monitoring with the security capabilities of [Cloud Security][3].
+The Infrastructure DevSecOps bundles combine infrastructure monitoring with the security capabilities of [{{< prodname >}}Cloud Security{{< /prodname >}}][3].
 
 {{< tabs >}}
 {{% tab "Infrastructure DevSecOps Pro" %}}
 
-Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [Cloud Security][3]. It also includes more than {{< translate key="integration_count" >}} [out-of-the-box integrations][4].
+Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [{{< prodname >}}Cloud Security{{< /prodname >}}][3]. It also includes more than {{< translate key="integration_count" >}} [out-of-the-box integrations][4].
 
 ### Setup
 
@@ -22,9 +22,9 @@ To get started with Infrastructure DevSecOps Pro, [install and configure the Dat
 - [Serverless][2]
 - [Integrations][4]
 
-After you install the Agent, configure Cloud Security for your environment.
+After you install the Agent, configure {{< prodname >}}Cloud Security{{< /prodname >}} for your environment.
 
-- [Cloud Security][3]
+- [{{< prodname >}}Cloud Security{{< /prodname >}}][3]
 
 ### Next steps
 
@@ -35,7 +35,7 @@ Learn more about the features included with Infrastructure DevSecOps Pro:
 - [Host and Container Maps][9]: Visualize your hosts and containers
 - [Live Containers][10]: Gain real-time visibility into all containers across your environment
 - [Serverless][2]: Gain full visibility into all of the managed services that power your serverless applications
-- [Cloud Security][11]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
+- [{{< prodname >}}Cloud Security{{< /prodname >}}][11]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
 
 [1]: /containers/
 [2]: /serverless/
@@ -51,7 +51,7 @@ Learn more about the features included with Infrastructure DevSecOps Pro:
 {{% /tab %}}
 {{% tab "Infrastructure DevSecOps Enterprise" %}}
 
-Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [Cloud Security][4]. It also includes more than {{< translate key="integration_count" >}} [out-of-the-box integrations][5].
+Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [{{< prodname >}}Cloud Security{{< /prodname >}}][4]. It also includes more than {{< translate key="integration_count" >}} [out-of-the-box integrations][5].
 
 ### Setup
 
@@ -62,9 +62,9 @@ To get started with Infrastructure DevSecOps Enterprise, [install and configure 
 - [Live Processes][7]
 - [Integrations][5]
 
-After you install the Agent, configure Cloud Security for your environment.
+After you install the Agent, configure {{< prodname >}}Cloud Security{{< /prodname >}} for your environment.
 
-- [Cloud Security][4]
+- [{{< prodname >}}Cloud Security{{< /prodname >}}][4]
 
 ### Next steps
 
@@ -78,7 +78,7 @@ Learn more about the features included with Infrastructure DevSecOps Enterprise:
 - [Live Processes][14]: Gain real-time visibility into the process running on your infrastructure
 - [Serverless][2]: Gain full visibility into all of the managed services that power your serverless 
 - [Watchdog][15]: Automatically detect potential application and infrastructure issues
-- [Cloud Security][16]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
+- [{{< prodname >}}Cloud Security{{< /prodname >}}][16]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
 
 [1]: /containers/
 [2]: /serverless/

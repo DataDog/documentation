@@ -15,7 +15,7 @@ further_reading:
   text: "Trace Context Propagation"
 ---
 
-Datadog APM can create **inferred spans** for requests that pass through Azure API Management to your backend services. The spans enable end-to-end traces, service maps, and sampling based on the API Management gateway.
+{{< prodname >}}Datadog APM{{< /prodname >}} can create **inferred spans** for requests that pass through Azure API Management to your backend services. The spans enable end-to-end traces, service maps, and sampling based on the API Management gateway.
 
 Inferred spans for Azure API Management are supported for **.NET**, **JavaScript** (Node.js), **Python**, and **Java** only. Other runtimes (for example Go or PHP) do not emit Azure API Management inferred spans, even if they support inferred spans for other gateways.
 

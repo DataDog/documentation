@@ -25,7 +25,7 @@ To use Docker in your Jenkins environment, see [Using Docker with Pipeline][1].
 ### Prerequisites
 
 * Node.js v10.24.1+
-* A global JSON configuration file uploaded to your Jenkins instance through the [Config File Provider][2]. You need this file to define the global properties for your Synthetics test setup.
+* A global JSON configuration file uploaded to your Jenkins instance through the [Config File Provider][2]. You need this file to define the global properties for your {{< prodname >}}Synthetics{{< /prodname >}} test setup.
 
 You can store environment variables directly within the global configuration file or [use credentials][3]. For more information about test configurations, see [Configure tests][4].
 

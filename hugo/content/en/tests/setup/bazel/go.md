@@ -17,7 +17,7 @@ further_reading:
 ---
 
 
-Datadog provides official Bazel rules for Go Test Optimization. Guided bootstrap writes a local `dd_go_test` wrapper that calls Datadog's `dd_topt_go_test` macro with the recommended Test Optimization defaults. Use `dd_go_test` in package `BUILD.bazel` files after running bootstrap. Use `dd_topt_go_test` directly when you maintain your own wrapper or need to set Datadog attributes such as `orchestrion_mode`.
+Datadog provides official Bazel rules for Go Test Optimization. Guided bootstrap writes a local `dd_go_test` wrapper that calls Datadog's `dd_topt_go_test` macro with the recommended {{< prodname >}}Test Optimization{{< /prodname >}} defaults. Use `dd_go_test` in package `BUILD.bazel` files after running bootstrap. Use `dd_topt_go_test` directly when you maintain your own wrapper or need to set Datadog attributes such as `orchestrion_mode`.
 
 ## Compatibility
 
@@ -40,7 +40,7 @@ Use the following minimum versions:
 
 ## Prerequisites
 
-Before setting up Test Optimization for Go tests in Bazel:
+Before setting up {{< prodname >}}Test Optimization{{< /prodname >}} for Go tests in Bazel:
 
 - Configure a Datadog API key in your CI secret store.
 - Set `DD_SITE` to your Datadog site, such as `datadoghq.com`.
@@ -146,7 +146,7 @@ dd_go_test(
 )
 ```
 
-Use `embed = [":pkg_lib"]` so the macro can infer the Go import path from `rules_go` providers and select the matching per-module Test Optimization metadata.
+Use `embed = [":pkg_lib"]` so the macro can infer the Go import path from `rules_go` providers and select the matching per-module {{< prodname >}}Test Optimization{{< /prodname >}} metadata.
 
 If you use a manual wrapper instead of guided bootstrap, call `dd_topt_go_test` and set `orchestrion_mode = "test_optimization"` for the faster standard-library `testing` path:
 
@@ -194,13 +194,13 @@ bazel run --config=test-optimization //:dd_upload_payloads -- --dry-run --valida
 DD_API_KEY=<DATADOG_API_KEY> DD_SITE=<DATADOG_SITE> bazel run --config=test-optimization //:dd_upload_payloads
 ```
 
-You do not need to set the Test Optimization runtime variables manually. The `dd_topt_go_test` macro adds them to the generated test target, including:
+You do not need to set the {{< prodname >}}Test Optimization{{< /prodname >}} runtime variables manually. The `dd_topt_go_test` macro adds them to the generated test target, including:
 
 `DD_CIVISIBILITY_ENABLED`
 : Enables Test Optimization for the Go test process.
 
 `DD_TEST_OPTIMIZATION_MANIFEST_FILE`
-: Points the Go test process to the synced Test Optimization metadata.
+: Points the Go test process to the synced {{< prodname >}}Test Optimization{{< /prodname >}} metadata.
 
 `DD_TEST_OPTIMIZATION_PAYLOADS_IN_FILES`
 : Configures payloads to be written as JSON files under `TEST_UNDECLARED_OUTPUTS_DIR`.
@@ -225,7 +225,7 @@ bazel run @datadog-rules-test-optimization-go//:dd_topt_go_bootstrap -- \
 
 Use `--rules-go-variant complete` only when the repository needs the extended monorepo compatibility variant.
 
-Keep repository-specific scheduling, tags, flaky policy, Docker defaults, and platform constraints in your local wrapper. The optimized wrapper should own only Test Optimization wiring, Orchestrion mode, and pin files.
+Keep repository-specific scheduling, tags, flaky policy, Docker defaults, and platform constraints in your local wrapper. The optimized wrapper should own only {{< prodname >}}Test Optimization{{< /prodname >}} wiring, Orchestrion mode, and pin files.
 
 ## Known limitations
 

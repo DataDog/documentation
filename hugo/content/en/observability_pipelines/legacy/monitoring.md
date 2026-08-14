@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-In [Observability Pipelines][1], your pipelines are comprised of components that collect, process, and route your observability data. The health of your pipelines and components are indicated by health statuses and graphs, as well as resource utilization and data delivery graphs.
+In [{{< prodname >}}Observability Pipelines{{< /prodname >}}][1], your pipelines are comprised of components that collect, process, and route your observability data. The health of your pipelines and components are indicated by health statuses and graphs, as well as resource utilization and data delivery graphs.
 
 Health statuses are determined by specific metrics based on thresholds and default time windows. The available statuses are as follows:
 
@@ -33,7 +33,7 @@ Resource utilization graphs are available for the following metrics:
 
 ## See the status of your pipelines and components
 
-1. Navigate to [Observability Pipelines][3].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][3].
 1. Click on a pipeline.
 1. Hover over the graphs to see specific data points.
 

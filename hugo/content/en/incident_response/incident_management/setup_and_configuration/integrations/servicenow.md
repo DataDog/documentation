@@ -45,7 +45,7 @@ To use automatic incident creation and bidirectional sync with ServiceNow:
 
 ### Configure bidirectional sync
 
-In ServiceNow, you can sync state, impact, and urgency bidirectionally with Incident Management.
+In ServiceNow, you can sync state, impact, and urgency bidirectionally with {{< prodname >}}Incident Management{{< /prodname >}}.
 
 1. In ServiceNow, click the globe icon in the top-right corner, then make sure the **Application Scope** is set to **ITOM/ITSM Integration for Datadog**.
 2. In the top-left navigation menu, click **All**.
@@ -100,7 +100,7 @@ The following fields are synced between Datadog Incident Management and ServiceN
 | SEV-5 (Minor)                 | 3                      | 3                     | 5 - Planning            |
 | Unknown                       | 3                      | 3                     | 5 - Planning            |
 
-**Note**: If `Start at SEV-0` is enabled in Incident Management settings, the values in `ServiceNow Urgency`, `ServiceNow Impact`, and `ServiceNow Priority` all stay the same, but the `Datadog Incident Severity` shifts down by one. For example, in the first row of this table, the `Datadog Incident Severity` would be `0`, but the rest of the values in the rest of the row would stay the same.
+**Note**: If `Start at SEV-0` is enabled in {{< prodname >}}Incident Management{{< /prodname >}} settings, the values in `ServiceNow Urgency`, `ServiceNow Impact`, and `ServiceNow Priority` all stay the same, but the `Datadog Incident Severity` shifts down by one. For example, in the first row of this table, the `Datadog Incident Severity` would be `0`, but the rest of the values in the rest of the row would stay the same.
 
 ## Further Reading
 

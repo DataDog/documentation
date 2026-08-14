@@ -6,7 +6,7 @@ further_reading:
   text: "Basic MongoDB Integration"
 ---
 
-Database Monitoring offers comprehensive insights into your MongoDB databases by providing access to critical metrics, slow operations, operation samples, explain plans, and replication state changes. To take advantage of Database Monitoring for MongoDB, ensure that the Datadog Agent is installed and configured to connect to your MongoDB instances. This guide outlines the steps to set up Database Monitoring for self-hosted MongoDB.
+{{< prodname >}}Database Monitoring{{< /prodname >}} offers comprehensive insights into your MongoDB databases by providing access to critical metrics, slow operations, operation samples, explain plans, and replication state changes. To take advantage of {{< prodname >}}Database Monitoring{{< /prodname >}} for MongoDB, ensure that the Datadog Agent is installed and configured to connect to your MongoDB instances. This guide outlines the steps to set up {{< prodname >}}Database Monitoring{{< /prodname >}} for self-hosted MongoDB.
 
 ## Before you begin
 
@@ -20,7 +20,7 @@ Supported MongoDB editions
 
 ## Setup
 
-To enable Database Monitoring for your database:
+To enable {{< prodname >}}Database Monitoring{{< /prodname >}} for your database:
 
 1. [Grant the Agent access to your MongoDB instances](#grant-the-agent-access-to-your-mongodb-instances)
 2. [Install and configure the Agent](#install-and-configure-the-agent)

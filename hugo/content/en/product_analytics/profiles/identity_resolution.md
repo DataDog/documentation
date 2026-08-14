@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Identity Resolution enables Product Analytics to automatically connect anonymous user activity to authenticated users. When a user browses your application anonymously and later logs in, their pre-login behavior becomes associated with their authenticated identity. This gives you a complete view of the user journey without any additional instrumentation.
+Identity Resolution enables {{< prodname >}}Product Analytics{{< /prodname >}} to automatically connect anonymous user activity to authenticated users. When a user browses your application anonymously and later logs in, their pre-login behavior becomes associated with their authenticated identity. This gives you a complete view of the user journey without any additional instrumentation.
 
 ## Prerequisites
 
@@ -26,13 +26,13 @@ Identity Resolution enables Product Analytics to automatically connect anonymous
   DD_RUM.setUser({ id: 'user-123' })
   ```
 
-- Product Analytics enabled for your organization.
+- {{< prodname >}}Product Analytics{{< /prodname >}} enabled for your organization.
 
 No additional SDK configuration is required. Identity Resolution uses the anonymous ID the RUM SDK already generates and the user ID set through `setUser()`.
 
 ## Feature behavior
 
-The following Product Analytics features automatically reflect resolved identity:
+The following {{< prodname >}}Product Analytics{{< /prodname >}} features automatically reflect resolved identity:
 
 | Feature | Behavior |
 |---------|----------|
@@ -47,7 +47,7 @@ The following Product Analytics features automatically reflect resolved identity
 
 **Cross-device**: Identity Resolution operates at the device level. A user who browses anonymously on one device and logs in on another does not have their sessions linked across devices.
 
-**Data retention**: Identity mappings are retained for 15 months, aligned with standard Product Analytics retention.
+**Data retention**: Identity mappings are retained for 15 months, aligned with standard {{< prodname >}}Product Analytics{{< /prodname >}} retention.
 
 **Historical data**: After enablement, historical queries resolve identity for any mappings in the 15-month window, including activity before you enabled the feature.
 

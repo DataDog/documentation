@@ -32,7 +32,7 @@ further_reading:
 
 {{< img src="llm_observability/experiments/Experiments_LLMO.png" alt="Agent Observability, Experiment view. Heading: 'Comparing 6 experiments across 9 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}
 
-Agent Observability [Experiments][1] supports the entire lifecycle of building LLM applications and agents. It helps you understand how changes to prompts, models, providers, or system architecture affect performance. With this feature, you can:
+{{< prodname >}}Agent Observability{{< /prodname >}} [Experiments][1] supports the entire lifecycle of building LLM applications and agents. It helps you understand how changes to prompts, models, providers, or system architecture affect performance. With this feature, you can:
 
 - Create and version datasets
 - Run and manage experiments

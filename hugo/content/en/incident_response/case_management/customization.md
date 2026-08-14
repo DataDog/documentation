@@ -29,7 +29,7 @@ Datadog Case Management allows customization to align with your team's unique wo
   <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#case_management">Datadog Role Permissions</a>.
 </div>
 
-Datadog provides five [built-in case types][1], each designed for common workflows. To customize Case Management for your team's needs, you can define your own custom case types. This allows you to:
+Datadog provides five [built-in case types][1], each designed for common workflows. To customize {{< prodname >}}Case Management{{< /prodname >}} for your team's needs, you can define your own custom case types. This allows you to:
 
 * Scope custom data capture to relevant work types
 * Enable targeted automation
@@ -45,7 +45,7 @@ Datadog provides five [built-in case types][1], each designed for common workflo
 
 ### Enable a custom case type
 
-After you create a custom case type, you must explicitly assign it to each project where it should be available. Follow the steps below to enable your new case type within a specific Case Management project.
+After you create a custom case type, you must explicitly assign it to each project where it should be available. Follow the steps below to enable your new case type within a specific {{< prodname >}}Case Management{{< /prodname >}} project.
 
 1. Back on the [**Settings** page][2], locate the target project under either **Starred Projects** or **Other Projects**.
 2. Expand the project menu by clicking on the project name.
@@ -92,7 +92,7 @@ You can add attributes that reflect your team's specific needs, such as escalati
 
 ## Custom statuses
 
-Case Management supports customizable case statuses. By default, cases move through Open, In Progress, and Closed. You can add additional statuses to represent reviews, handoffs, or other workflow steps. Custom statuses let you standardize case workflows and align status options with your team's processes to support reporting and automation.
+{{< prodname >}}Case Management{{< /prodname >}} supports customizable case statuses. By default, cases move through Open, In Progress, and Closed. You can add additional statuses to represent reviews, handoffs, or other workflow steps. Custom statuses let you standardize case workflows and align status options with your team's processes to support reporting and automation.
 
 ### Understanding custom statuses behavior
 * Each status group (Open, In Progress, Closed) must contain at least one status.

@@ -28,7 +28,7 @@ Handover automations run automatically when on-call duty passes from one person 
 
 Each automation is configured at the team level and scoped to one or more schedules.
 
-**Note**: For a low-code approach to automating actions across a broader range of on-call events, see [Workflow Automation][1].
+**Note**: For a low-code approach to automating actions across a broader range of on-call events, see [{{< prodname >}}Workflow Automation{{< /prodname >}}][1].
 
 ### Prerequisites
 

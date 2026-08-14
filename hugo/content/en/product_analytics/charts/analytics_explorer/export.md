@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-You can use your Product Analytics query and visualization graphs in dashboards, monitors, and notebooks.
+You can use your {{< prodname >}}Product Analytics{{< /prodname >}} query and visualization graphs in dashboards, monitors, and notebooks.
 
 ## Export the search query or visualization
 
@@ -29,7 +29,7 @@ Copy, export, or download your aggregated search query and visualization graphs 
 
 Click the {{< ui >}}More{{< /ui >}} button on the right hand corner and select an option from the dropdown menu:
 
-- Download your search results as a CSV file for individual Product Analytics events and specific aggregations. You can export up to 5,000 individual Product Analytics events with lists and up to 500 aggregations for timeseries, top lists, and table graphs.
+- Download your search results as a CSV file for individual {{< prodname >}}Product Analytics{{< /prodname >}} events and specific aggregations. You can export up to 5,000 individual {{< prodname >}}Product Analytics{{< /prodname >}} events with lists and up to 500 aggregations for timeseries, top lists, and table graphs.
 
 ## Further Reading
 

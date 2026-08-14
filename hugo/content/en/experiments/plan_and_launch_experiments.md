@@ -18,7 +18,7 @@ Plan and launch [experiments][8] to measure how new features affect business out
 
 ## Prerequisites
 
-<div class="alert alert-info">You must have the appropriate <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#product-analytics">Product Analytics</a> and <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#feature-flags">Feature Flags</a> permissions to create and launch experiments.</div>
+<div class="alert alert-info">You must have the appropriate <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#product-analytics">{{< prodname >}}Product Analytics{{< /prodname >}}</a> and <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#feature-flags">{{< prodname >}}Feature Flags{{< /prodname >}}</a> permissions to create and launch experiments.</div>
 
 Before you begin, make sure you have:
 

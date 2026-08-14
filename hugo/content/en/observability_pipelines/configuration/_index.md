@@ -20,7 +20,7 @@ further_reading:
 
 {{< img src="observability_pipelines/setup/pipeline_ui.png" alt="The pipelines page with a source going to two processors groups and two destinations" style="width:100%;" >}}
 
-Observability Pipelines lets you collect and process logs and metrics within your own infrastructure, and then route them to different destinations. A pipeline consists of three core components:
+{{< prodname >}}Observability Pipelines{{< /prodname >}} lets you collect and process logs and metrics within your own infrastructure, and then route them to different destinations. A pipeline consists of three core components:
 
 - [Source][1]: Receives data from a tool like the Datadog Agent.
 - [Processors][2]: Transform, enrich, or filter data.
@@ -64,7 +64,7 @@ See [Set Up Pipelines][2] for more information on setting up a source, processor
 
 ### Metrics data
 
-Metrics sent to Observability Pipelines include the following:
+Metrics sent to {{< prodname >}}Observability Pipelines{{< /prodname >}} include the following:
 
 - `name`: The metric name.
 - `kind`: There are two kinds of metrics:

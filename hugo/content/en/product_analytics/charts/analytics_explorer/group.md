@@ -8,7 +8,7 @@ further_reading:
 
 ## Overview
 
-Product Analytics events are valuable both individually and collectively. The search query contains information to aggregate a subset of events.
+{{< prodname >}}Product Analytics{{< /prodname >}} events are valuable both individually and collectively. The search query contains information to aggregate a subset of events.
 
 {{< img src="product_analytics/analytics/group/pana_group_search_bar.png" alt="Group into fields section of the Search query" style="width:100%;" >}}
 

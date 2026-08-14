@@ -56,7 +56,7 @@ To investigate a log finding:
 Additionally, you can:
 - Use {{< ui >}}Apply Targeted Obfuscation{{< /ui >}} to obfuscate future sensitive data matches in new logs for this finding, or extend obfuscation to the entire service. If redaction is already enabled, use this section to verify how matching logs are obfuscated.
 - Use {{< ui >}}Tune Detection Logic{{< /ui >}} to edit the scanning rule's keywords or apply suppressions for false positives or risk-accepted data.
-- Use {{< ui >}}Generate Code Fix{{< /ui >}} to launch a [Bits Code][2] session that identifies the log pattern causing the leak and proposes a fix. Review the fix and create a pull request directly from the session. The source repository must already be onboarded to Bits Code.
+- Use {{< ui >}}Generate Code Fix{{< /ui >}} to launch a [{{< prodname >}}Bits Code{{< /prodname >}}][2] session that identifies the log pattern causing the leak and proposes a fix. Review the fix and create a pull request directly from the session. The source repository must already be onboarded to {{< prodname >}}Bits Code{{< /prodname >}}.
 
 [1]: /help
 [2]: /bits_ai/bits_code/
@@ -85,8 +85,8 @@ To investigate a finding:
    To modify the Scanning Rule that was used to detect the sensitive data finding, click {{< ui >}}Modify Rule{{< /ui >}} at the top of the panel.
 
 Additionally, you can also:
-- Use [Case Management][1] to track, triage, and investigate the finding, click {{< ui >}}Create Case{{< /ui >}} at the top of the panel. Associated cases are surfaced in the Findings page.
-- Use [Incident Management][2] to create an incident, you can add the finding to an existing incident or declare a new incident. Click the {{< ui >}}Declare Incident{{< /ui >}} dropdown menu to add the finding to an existing incident. Click {{< ui >}}Declare Incident{{< /ui >}} to declare a new incident.
+- Use [{{< prodname >}}Case Management{{< /prodname >}}][1] to track, triage, and investigate the finding, click {{< ui >}}Create Case{{< /ui >}} at the top of the panel. Associated cases are surfaced in the Findings page.
+- Use [{{< prodname >}}Incident Management{{< /prodname >}}][2] to create an incident, you can add the finding to an existing incident or declare a new incident. Click the {{< ui >}}Declare Incident{{< /ui >}} dropdown menu to add the finding to an existing incident. Click {{< ui >}}Declare Incident{{< /ui >}} to declare a new incident.
 - Use [Audit Trail][3] to see who may have accessed this sensitive data within Datadog, {{< ui >}}View in Audit Trail{{< /ui >}} in the {{< ui >}}Users who accessed these events{{< /ui >}} section.
 
 {{< img src="sensitive_data_scanner/investigate_sensitive_data_issues/case_mgmt_02_01_2024.png" alt="The case page showing information about the security finding, the assignee and creator of the case, and a timeline of events" style="width:60%;">}}
@@ -110,7 +110,7 @@ To investigate a datastore:
       - If it is not supposed to be in the bucket, delete the files or move them to an appropriate bucket.
       - If it is supposed to be in the bucket, complete the following steps to improve your security posture:
         1. Click the {{< ui >}}Security{{< /ui >}} tab in the side panel and review the {{< ui >}}Misconfigurations{{< /ui >}} section.
-        1. Click on a misconfiguration to see details in Cloud Security.
+        1. Click on a misconfiguration to see details in {{< prodname >}}Cloud Security{{< /prodname >}}.
         1. In the {{< ui >}}Next Steps{{< /ui >}} section:
             1. Under {{< ui >}}Triage{{< /ui >}}, click the dropdown to change the triage status of the signal. The default status is `OPEN`.
             1. Click {{< ui >}}Assign Signal{{< /ui >}} to assign a signal to yourself or another Datadog user.

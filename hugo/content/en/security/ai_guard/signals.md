@@ -12,31 +12,31 @@ further_reading:
   text: Detection Rules
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov" >}}<div class="alert alert-danger">{{< prodname >}}AI Guard{{< /prodname >}} isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-AI Guard security signals provide visibility into threats and attacks AI Guard detects in your applications. These signals are built on top of [AAP (Application and API Protection) security signals][1] and integrate with Datadog's security monitoring workflows.
+{{< prodname >}}AI Guard{{< /prodname >}} security signals provide visibility into threats and attacks {{< prodname >}}AI Guard{{< /prodname >}} detects in your applications. These signals are built on top of [AAP (Application and API Protection) security signals][1] and integrate with Datadog's security monitoring workflows.
 
 ## Understand AI Guard signals
 
-Datadog creates AI Guard security signals when it detects a threat based on a configured detection rule. Signals indicating threats such as prompt injection, jailbreaking, or tool misuse appear in the Datadog Security Signals explorer. These signals can provide:
+Datadog creates {{< prodname >}}AI Guard{{< /prodname >}} security signals when it detects a threat based on a configured detection rule. Signals indicating threats such as prompt injection, jailbreaking, or tool misuse appear in the Datadog Security Signals explorer. These signals can provide:
 
 - **Threat detection**: Attack context based on your configured detection rules
 - **Action insights**: Blocked or allowed actions information according to your rule settings
-- **Rich investigation context**: Attack categories detected, AI Guard evaluation results, and links to related AI Guard spans for comprehensive analysis
+- **Rich investigation context**: Attack categories detected, {{< prodname >}}AI Guard{{< /prodname >}} evaluation results, and links to related {{< prodname >}}AI Guard{{< /prodname >}} spans for comprehensive analysis
 - **Custom runbooks**: Custom remediation guidance and response procedures for specific threat scenarios
 
-To help you prioritize your remediation efforts, AI Guard automatically assigns a severity level to every security signal. You can create [custom detection rules](#create-detection-rules) to customize severity levels and define specific security responses.
+To help you prioritize your remediation efforts, {{< prodname >}}AI Guard{{< /prodname >}} automatically assigns a severity level to every security signal. You can create [custom detection rules](#create-detection-rules) to customize severity levels and define specific security responses.
 
 ## Create detection rules
 
 You can create custom detection rules by defining thresholds for when you want to receive notifications; for example, more than 5 `DENY` actions in 10 minutes. When AI Guard evaluations exceed those thresholds, it generates security signals.
 
-To create AI Guard detection rules:
+To create {{< prodname >}}AI Guard{{< /prodname >}} detection rules:
 1. In Datadog, go to the [AI Guard detection rule explorer][2], then click {{< ui >}}New Rule{{< /ui >}}.
    {{< img src="security/ai_guard/ai_guard_detection_rules_1.png" alt="AI Guard Detection Rules Explorer" style="width:100%;" >}}
 1. Under {{< ui >}}Define your Real-time rule{{< /ui >}}, choose the type of rule to create.
-1. Under {{< ui >}}Define Search Queries{{< /ui >}}, define the types of tags you want to create signals for. You can use the following AI Guard attributes to filter and target specific threat patterns:
+1. Under {{< ui >}}Define Search Queries{{< /ui >}}, define the types of tags you want to create signals for. You can use the following {{< prodname >}}AI Guard{{< /prodname >}} attributes to filter and target specific threat patterns:
    <table>
      <thead>
        <tr>
@@ -48,7 +48,7 @@ To create AI Guard detection rules:
      <tbody>
        <tr>
          <td><code>@ai_guard.action</code></td>
-         <td>Filter by AI Guard's evaluation result</td>
+         <td>Filter by {{< prodname >}}AI Guard{{< /prodname >}}'s evaluation result</td>
          <td><code>ALLOW</code> or <code>DENY</code></td>
        </tr>
        <tr>
@@ -94,10 +94,10 @@ To create AI Guard detection rules:
    </table>
 1. Under {{< ui >}}Define Rule Conditions{{< /ui >}}:
    1. Define your threshold conditions, if applicable to the type of rule you chose.
-   1. Set the severity level of the security signals AI Guard generates with this rule.
+   1. Set the severity level of the security signals {{< prodname >}}AI Guard{{< /prodname >}} generates with this rule.
    1. Choose who should get notifications for new signals and how often.
    1. Choose security responses to take, such as automated IP or user blocking, and IP flagging.
-   1. Configure additional settings, such as updating the same signal instead of creating a new one if AI Guard detects new values within a set amount of time, and decreasing signal severity for non-production environments.
+   1. Configure additional settings, such as updating the same signal instead of creating a new one if {{< prodname >}}AI Guard{{< /prodname >}} detects new values within a set amount of time, and decreasing signal severity for non-production environments.
 1. Under {{< ui >}}Describe your Playbook{{< /ui >}}, customize the notification and define tags to send with the signals.
 1. Click {{< ui >}}Save Rule{{< /ui >}}.
 
@@ -105,25 +105,25 @@ For more comprehensive detection rule capabilities, see [detection rules][3].
 
 ## Investigate signals
 
-To view and investigate AI Guard security signals, and correlate them with other security events, you can view signals in two places:
+To view and investigate {{< prodname >}}AI Guard{{< /prodname >}} security signals, and correlate them with other security events, you can view signals in two places:
 - [Application and API Protection Security Signals explorer][4]
 - [Cloud SIEM Security Signals explorer][5]
 
-  In the Cloud SIEM Security Signals explorer, beside the search bar, click the {{< ui >}}Filter{{< /ui >}} icon and select the {{< ui >}}App & API Protection{{< /ui >}} checkbox to view AI Guard signals.
+  In the Cloud SIEM Security Signals explorer, beside the search bar, click the {{< ui >}}Filter{{< /ui >}} icon and select the {{< ui >}}App & API Protection{{< /ui >}} checkbox to view {{< prodname >}}AI Guard{{< /prodname >}} signals.
 
-The Security Signals explorers allow you to filter, prioritize, and investigate AI Guard signals alongside other application security threats, providing a unified view of your security posture.
+The Security Signals explorers allow you to filter, prioritize, and investigate {{< prodname >}}AI Guard{{< /prodname >}} signals alongside other application security threats, providing a unified view of your security posture.
 
-You can create or link cases directly from an AI Guard security signal, and click any signal to open a side panel containing additional context.
+You can create or link cases directly from an {{< prodname >}}AI Guard{{< /prodname >}} security signal, and click any signal to open a side panel containing additional context.
 
 ## Get additional context with spans
 
-AI Guard spans offer detailed information about the assessments it made and why. When you open a span from the [Investigate][6] page or from a signal, you can get context on the specific prompts your AI agent used, read exact inputs and outputs, and see any attack categories that contributed to AI Guard assessing a tool call as unsafe.
+{{< prodname >}}AI Guard{{< /prodname >}} spans offer detailed information about the assessments it made and why. When you open a span from the [Investigate][6] page or from a signal, you can get context on the specific prompts your AI agent used, read exact inputs and outputs, and see any attack categories that contributed to {{< prodname >}}AI Guard{{< /prodname >}} assessing a tool call as unsafe.
 
 ### Get context on a span
 
 When you click on a span in the explorer, you can see:
 - The service and environment the requests occurred in
-- The [blocking policy][7] configured for that service, which determines whether AI Guard blocks unsafe requests, or detects and tags them without blocking them
+- The [blocking policy][7] configured for that service, which determines whether {{< prodname >}}AI Guard{{< /prodname >}} blocks unsafe requests, or detects and tags them without blocking them
 - The user who interacted with the agent
 - The specific inputs and outputs from your agent, and whether they came from LLMs or external tools
 - Whether AI Guard assessed each request as safe or unsafe

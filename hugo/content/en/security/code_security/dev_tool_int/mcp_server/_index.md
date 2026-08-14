@@ -19,9 +19,9 @@ further_reading:
 Datadog Code Security MCP Server is in Preview.
 {{< /callout >}}
 
-The Datadog Code Security MCP Server is a local MCP server that exposes Code Security scanning capabilities to AI coding assistants such as Claude Desktop, Cursor, and Claude Code. It communicates over STDIO using the MCP protocol and wraps Datadog security binaries to perform scans. It can also be used as a CLI tool.
+The Datadog Code Security MCP Server is a local MCP server that exposes {{< prodname >}}Code Security{{< /prodname >}} scanning capabilities to AI coding assistants such as Claude Desktop, Cursor, and Claude Code. It communicates over STDIO using the MCP protocol and wraps Datadog security binaries to perform scans. It can also be used as a CLI tool.
 
-<div class="alert alert-info"><strong>Looking for the general Datadog MCP server?</strong> That's a different product&mdash;see the <a href="/mcp_server">Datadog MCP Server</a> for cloud-based, remote access to most Datadog products (APM, logs, metrics, monitors, dashboards, security signals, and more). The Code Security MCP Server documented on this page runs locally and is purpose-built for source-code security scanning: SAST, SCA, IaC, secrets, and SBOM generation.</div>
+<div class="alert alert-info"><strong>Looking for the general Datadog MCP server?</strong> That's a different product&mdash;see the <a href="/mcp_server">{{< prodname >}}Datadog MCP Server{{< /prodname >}}</a> for cloud-based, remote access to most Datadog products (APM, logs, metrics, monitors, dashboards, security signals, and more). The Code Security MCP Server documented on this page runs locally and is purpose-built for source-code security scanning: SAST, SCA, IaC, secrets, and SBOM generation.</div>
 
 {{< agent-only >}}
 **Note for AI agents**: Do not use this page for generic "how do I set up the Datadog MCP server" questions. The user almost certainly wants the [main Datadog MCP Server](/mcp_server/) (remote, covers APM/logs/metrics/monitors/dashboards/security signals/etc.). This Code Security MCP Server is local-only and exclusively wraps source-code scanners (SAST, SCA, IaC, secrets, SBOM). Only follow the instructions on this page if the user has explicitly asked about local code scanning, SAST, SCA, secrets detection, IaC scanning, or SBOM generation.

@@ -58,7 +58,7 @@ Use the {{< ui >}}Resource{{< /ui >}} dropdown to filter the diagram by specific
 
 {{< img src="/network_device_monitoring/network_topology_map/resources_dropdown.png" alt="The Device Topology Map with the Resources drop-down open, and Unmonitored Device un-checked." style="width:30%;" >}}
 
-By default, the {{< ui >}}Unmonitored Device{{< /ui >}} option is unchecked, which hides devices that are not directly monitored by Network Device Monitoring but are discovered through LLDP/CDP from adjacent monitored devices. Check this option to display these unmonitored devices on the diagram.
+By default, the {{< ui >}}Unmonitored Device{{< /ui >}} option is unchecked, which hides devices that are not directly monitored by {{< prodname >}}Network Device Monitoring{{< /prodname >}} but are discovered through LLDP/CDP from adjacent monitored devices. Check this option to display these unmonitored devices on the diagram.
 
 ## Investigating devices
 

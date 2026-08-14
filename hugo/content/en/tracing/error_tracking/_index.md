@@ -26,7 +26,7 @@ algolia:
 
 ## Setup
 
-Error Tracking is available for all languages supported by APM. It requires no additional SDK and no configuration changes.
+{{< prodname >}}Error Tracking{{< /prodname >}} is available for all languages supported by APM. It requires no additional SDK and no configuration changes.
 
 Optionally, to see code snippets in your stack traces, set up the [GitHub integration][4].
 
@@ -40,11 +40,11 @@ The Datadog SDKs collect errors through integrations and the manual instrumentat
 
 {{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Flame graph with errors" style="width:100%;" >}}
 
-Error Tracking computes a fingerprint for each error span it processes using the error type, the error message, and the frames that form the stack trace. Errors with the same fingerprint are grouped together and belong to the same issue. For more information, see the [Trace Explorer documentation][2].
+{{< prodname >}}Error Tracking{{< /prodname >}} computes a fingerprint for each error span it processes using the error type, the error message, and the frames that form the stack trace. Errors with the same fingerprint are grouped together and belong to the same issue. For more information, see the [Trace Explorer documentation][2].
 
 ## Control which errors are tracked
 
-Error Tracking automatically processes all error spans, but you can control which errors are ingested and how they are managed:
+{{< prodname >}}Error Tracking{{< /prodname >}} automatically processes all error spans, but you can control which errors are ingested and how they are managed:
 
 - **Filter errors with inclusion and exclusion rules**: Define rules to include or exclude errors based on attributes such as service, environment, or error type. See [Manage Data Collection][7].
 - **Set rate limits**: Control the volume of errors ingested per day to manage costs. See [Manage Data Collection][7].
@@ -53,7 +53,7 @@ Error Tracking automatically processes all error spans, but you can control whic
 
 ## Examine issues to start troubleshooting or debugging
 
-Error Tracking automatically categorizes errors into issues collected from your backend services in the [Error Tracking Explorer][5]. See the [Error Tracking Explorer documentation][3] for a tour of key features.
+{{< prodname >}}Error Tracking{{< /prodname >}} automatically categorizes errors into issues collected from your backend services in the [Error Tracking Explorer][5]. See the [Error Tracking Explorer documentation][3] for a tour of key features.
 
 Issues created from APM include the distribution of impacted spans, the latest most relevant stack trace, span attributes, host tags, container tags, and metrics.
 

@@ -62,7 +62,7 @@ Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If yo
 Data Streams Monitoring requires minimum Datadog SDK versions. See each setup page for details.
 
 #### Support for OpenTelemetry
-Data Streams Monitoring supports OpenTelemetry. If you have set up Datadog APM to work with OpenTelemetry, no additional setup is required to use Data Streams Monitoring. See [OpenTelemetry Compatibility][11].
+Data Streams Monitoring supports OpenTelemetry. If you have set up {{< prodname >}}Datadog APM{{< /prodname >}} to work with OpenTelemetry, no additional setup is required to use Data Streams Monitoring. See [OpenTelemetry Compatibility][11].
 
 ## Setup
 

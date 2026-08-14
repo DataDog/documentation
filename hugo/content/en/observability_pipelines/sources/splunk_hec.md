@@ -13,7 +13,7 @@ products:
 
 Use Observability Pipelines' Splunk HTTP Event Collector (HEC) source to receive logs from your Splunk HEC. You can choose to store the HEC token as event metadata and:
 
-- Send logs from Observability Pipelines to Splunk HEC with the original token sent with the event.
+- Send logs from {{< prodname >}}Observability Pipelines{{< /prodname >}} to Splunk HEC with the original token sent with the event.
 - Use the Enrichment Table processor to append a log field from your lookup file based on the token in the metadata, and then process and route your logs based on the value of that field.
 
 **Notes**:
@@ -50,7 +50,7 @@ After you select the Splunk HEC source in the pipeline UI:
 
 #### Configure authentication tokens
 
-If you store Splunk HEC tokens in your HTTP request's authorization header, you can configure Observability Pipelines to check if incoming HTTP requests have a valid token. Request events that do not have a valid token are dropped.
+If you store Splunk HEC tokens in your HTTP request's authorization header, you can configure {{< prodname >}}Observability Pipelines{{< /prodname >}} to check if incoming HTTP requests have a valid token. Request events that do not have a valid token are dropped.
 
 To configure authentication tokens, enable the {{< ui >}}Configure authentication tokens{{< /ui >}} toggle:
 

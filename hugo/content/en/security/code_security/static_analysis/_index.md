@@ -23,7 +23,7 @@ further_reading:
 
 {{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
-    Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
+    {{< prodname >}}Code Security{{< /prodname >}} is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 
@@ -129,7 +129,7 @@ If GitHub is your source code manager, you can push a code change to fix a SAST 
 If your GitHub app's {{< ui >}}Pull Requests{{< /ui >}} permission is set to {{< ui >}}Read & Write{{< /ui >}}, one-click remediation is enabled for all Static Code Analysis findings with an available suggested fix.
 
 Follow these steps to fix a vulnerability and open a pull request:
-1. View a specific SAST result in Code Security.
+1. View a specific SAST result in {{< prodname >}}Code Security{{< /prodname >}}.
 2. Click {{< ui >}}Fix Violation{{< /ui >}} in the side panel of the result.
 3. Select {{< ui >}}Open a Pull Request{{< /ui >}}.
 4. Enter a pull request title and commit message.
@@ -140,14 +140,14 @@ You can also fix a vulnerability by committing directly to the branch the result
 
 To commit a suggested fix:
 
-1. View a specific SAST result in Code Security.
+1. View a specific SAST result in {{< prodname >}}Code Security{{< /prodname >}}.
 2. Click {{< ui >}}Fix Violation{{< /ui >}} in the side panel of the result.
 3. Click {{< ui >}}Commit to current branch{{< /ui >}}.
 
 ### Fix with Cursor
 You can hand off remediation for a SAST finding to an AI coding agent such as Cursor.
 
-1. View a specific SAST result in Code Security.
+1. View a specific SAST result in {{< prodname >}}Code Security{{< /prodname >}}.
 2. In the side panel's {{< ui >}}Next Steps{{< /ui >}} > {{< ui >}}Remediation{{< /ui >}} section, click {{< ui >}}Remediate with AI{{< /ui >}}.
 3. Select the {{< ui >}}Coding agent{{< /ui >}} tab.
 4. Under {{< ui >}}Generate your fix directly from Claude Code, Codex, or Cursor{{< /ui >}}, click {{< ui >}}Open{{< /ui >}} next to {{< ui >}}Fix with Cursor{{< /ui >}}. Datadog opens Cursor with a tailored remediation prompt for the finding. Review the suggested changes before you commit them.

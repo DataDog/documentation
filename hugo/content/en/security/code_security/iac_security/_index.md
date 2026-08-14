@@ -56,7 +56,7 @@ To handle the Cursor deep link, install the [Datadog extension for VS Code and C
 
 ### Automatically block risky changes with PR Gates
 
-Use [PR Gates][11] to enforce security standards on infrastructure-as-code changes before they're merged. Datadog scans the IaC changes in each pull request, identifies any vulnerabilities above your configured severity threshold, and reports a pass or fail status to GitHub or Azure DevOps.
+Use [{{< prodname >}}PR Gates{{< /prodname >}}][11] to enforce security standards on infrastructure-as-code changes before they're merged. Datadog scans the IaC changes in each pull request, identifies any vulnerabilities above your configured severity threshold, and reports a pass or fail status to GitHub or Azure DevOps.
 
 By default, checks are informational, but you can make them blocking in GitHub or Azure DevOps to prevent merging when critical issues are detected. For setup instructions, see [Set up PR Gate Rules][12].
 

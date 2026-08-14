@@ -3,7 +3,7 @@ title: Datadog-CrewAI integration for Agent Observability
 description: Learn how to integrate CrewAI with Agent Observability using auto-instrumentation to monitor and trace your CrewAI agent runs.
 ---
 
-This guide demonstrates how to integrate Agent Observability with [CrewAI][1] using [auto-instrumentation][2]. This also includes how to submit Agent Observability traces to Datadog and view your CrewAI agent runs in Datadog's [Agentic Execution View][3].
+This guide demonstrates how to integrate {{< prodname >}}Agent Observability{{< /prodname >}} with [CrewAI][1] using [auto-instrumentation][2]. This also includes how to submit {{< prodname >}}Agent Observability{{< /prodname >}} traces to Datadog and view your CrewAI agent runs in Datadog's [Agentic Execution View][3].
 
 ## Getting started
 
@@ -19,7 +19,7 @@ pip install ddtrace crewai crewai-tools
 
 If you do not have a Datadog API key, create an account and [get your API key][4].
 
-You also need to specify an _ML application name_ in the following environment variables. An ML application is a grouping of Agent Observability traces associated with a specific LLM-based application. See [Application naming guidelines][5] for more information on limitations with ML application names.
+You also need to specify an _ML application name_ in the following environment variables. An ML application is a grouping of {{< prodname >}}Agent Observability{{< /prodname >}} traces associated with a specific LLM-based application. See [Application naming guidelines][5] for more information on limitations with ML application names.
 
 ```shell 
 export DD_API_KEY=<YOUR_DD_API_KEY>

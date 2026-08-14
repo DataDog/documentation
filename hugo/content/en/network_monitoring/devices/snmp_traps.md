@@ -97,7 +97,7 @@ Binding to a port number under `1024` requires elevated permissions. To bind to 
 
 ## Device namespaces
 
-As with [Network Device Monitoring][3], use namespace tags to differentiate between multiple network devices that share the same private IP. For example, you could have two routers that share the same private IP: one in New York, and another in Paris. In this case, you can deploy an Agent in the New York data center that sends telemetry tagged with `namespace: nyc`; and a second Agent in the Paris data center that sends telemetry tagged with `namespace: paris`.
+As with [{{< prodname >}}Network Device Monitoring{{< /prodname >}}][3], use namespace tags to differentiate between multiple network devices that share the same private IP. For example, you could have two routers that share the same private IP: one in New York, and another in Paris. In this case, you can deploy an Agent in the New York data center that sends telemetry tagged with `namespace: nyc`; and a second Agent in the Paris data center that sends telemetry tagged with `namespace: paris`.
 
 The namespace can then be used to uniquely pivot from an SNMP trap to the emitter device, or from the emitter device to an SNMP trap.
 

@@ -110,7 +110,7 @@ After updating either file on your default branch, it may take up to six hours f
 
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [{{< ui >}}Repository Settings{{< /ui >}}][4]. Afterwards, uploads from your non-default branches will succeed.
+**If you are running {{< prodname >}}Code Security{{< /prodname >}} on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [{{< ui >}}Repository Settings{{< /ui >}}][4]. Afterwards, uploads from your non-default branches will succeed.
 
 If you are using Datadog’s analyzer, [diff-aware scanning][21] is enabled by default. If you are running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
 
@@ -244,7 +244,7 @@ After updating either file on your default branch, it may take up to six hours f
 
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt an SBOM upload for your repository and then manually override the default branch in-app under [{{< ui >}}Repository Settings{{< /ui >}}][4]. Afterwards, uploads from your non-default branches will succeed.
+**If you are running {{< prodname >}}Code Security{{< /prodname >}} on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt an SBOM upload for your repository and then manually override the default branch in-app under [{{< ui >}}Repository Settings{{< /ui >}}][4]. Afterwards, uploads from your non-default branches will succeed.
 
 ### No package detected for C# projects
 
@@ -300,7 +300,7 @@ Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRAC
 
 ### Bits Code remediation fails or produces incomplete fixes
 
-Bits Code requires internet access to apply library upgrades when remediating SCA findings. If Bits Code fails to generate a fix or produces an incomplete patch, confirm that your internet access policy allows Bits Code to reach the package registries required for your language (for example, `registry.npmjs.org` for JavaScript or `pypi.org` for Python). See [Configure internet access][30] for more information.
+{{< prodname >}}Bits Code{{< /prodname >}} requires internet access to apply library upgrades when remediating SCA findings. If Bits Code fails to generate a fix or produces an incomplete patch, confirm that your internet access policy allows {{< prodname >}}Bits Code{{< /prodname >}} to reach the package registries required for your language (for example, `registry.npmjs.org` for JavaScript or `pypi.org` for Python). See [Configure internet access][30] for more information.
 
 ## Runtime Code Analysis (IAST)
 
@@ -323,7 +323,7 @@ If you're running a Flask application, ensure that you are calling the `ddtrace_
 ## How committers are calculated for Code Security
 A **committer** is an active Git contributor identified by the `author_email` field in Git commit metadata.
 
-A committer is counted toward billing if they make **at least three commits in a calendar month** in repositories where Code Security is enabled.
+A committer is counted toward billing if they make **at least three commits in a calendar month** in repositories where {{< prodname >}}Code Security{{< /prodname >}} is enabled.
 
 Multiple commits with the same `author_email` count as one committer. By default, commits with different email addresses count separately. For GitHub repositories that meet the requirements in [Deduplicating committers across email addresses](#deduplicating-committers-across-email-addresses), multiple emails belonging to the same GitHub user are counted as one committer.
 
@@ -348,7 +348,7 @@ If your committer count looks higher than expected for GitHub repositories, chec
 ## Disabling Code Security capabilities
 ### Disabling static repository scanning
 To disable scanning Static Code Analysis (SAST) or static Software Composition Analysis:
-- If you are scanning your repositories through Datadog-hosted scanning, navigate to Code Security [{{< ui >}}Setup{{< /ui >}}][17], click {{< ui >}}Enable scanning for your repositories{{< /ui >}}, and disable the toggles previously enabled for scanning either all connected repositories or each repository.
+- If you are scanning your repositories through Datadog-hosted scanning, navigate to {{< prodname >}}Code Security{{< /prodname >}} [{{< ui >}}Setup{{< /ui >}}][17], click {{< ui >}}Enable scanning for your repositories{{< /ui >}}, and disable the toggles previously enabled for scanning either all connected repositories or each repository.
 - If you are scanning source code repositories through your CI pipelines, remove the relevant job(s) from your CI pipelines.
 
 ### Disabling runtime SCA on your services

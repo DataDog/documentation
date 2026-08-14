@@ -23,33 +23,33 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Incident Response:">}}
-{{< nextlink href="/incident_response/incident_management/guides/" >}}<i class="icon-incidents" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Incident Management{{< /nextlink >}}
-{{< nextlink href="/incident_response/on-call/guides/" >}}<i class="icon-on-call" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;On-Call{{< /nextlink >}}
+{{< nextlink href="/incident_response/incident_management/guides/" >}}<i class="icon-incidents" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{< prodname >}}Incident Management{{< /prodname >}}{{< /nextlink >}}
+{{< nextlink href="/incident_response/on-call/guides/" >}}<i class="icon-on-call" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{< prodname >}}On-Call{{< /prodname >}}{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Infrastructure:">}}
 {{< nextlink href="/containers/guide" >}}<i class="icon-container" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Containers{{< /nextlink >}}
 {{< nextlink href="/serverless/guide" >}}<i class="icon-serverless" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Serverless{{< /nextlink >}}
 {{< nextlink href="/network_monitoring/cloud_network_monitoring/guide" >}}<i class="icon-network" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud Network Monitoring{{< /nextlink >}}
-{{< nextlink href="/network_monitoring/devices/guide" >}}<i class="icon-ndm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Network Device Monitoring{{< /nextlink >}}
+{{< nextlink href="/network_monitoring/devices/guide" >}}<i class="icon-ndm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{< prodname >}}Network Device Monitoring{{< /prodname >}}{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Application Performance:">}}
 {{< nextlink href="/tracing/guide" >}}<i class="icon-apm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;APM{{< /nextlink >}}
-{{< nextlink href="/database_monitoring/guide" >}}<i class="icon-database-2" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Database Monitoring{{< /nextlink >}}
+{{< nextlink href="/database_monitoring/guide" >}}<i class="icon-database-2" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{< prodname >}}Database Monitoring{{< /prodname >}}{{< /nextlink >}}
 {{< nextlink href="/universal_service_monitoring/guide" >}}<i class="icon-usm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Universal Service Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Software Delivery:">}}
 {{< nextlink href="/continuous_integration/guides/" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;CI Visibility{{< /nextlink >}}
-{{< nextlink href="/tests/guides/" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Test Optimization{{< /nextlink >}}
-{{< nextlink href="/feature_flags/guide" >}}<i class="icon-signpost" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Feature Flags{{< /nextlink >}}
+{{< nextlink href="/tests/guides/" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{< prodname >}}Test Optimization{{< /prodname >}}{{< /nextlink >}}
+{{< nextlink href="/feature_flags/guide" >}}<i class="icon-signpost" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{< prodname >}}Feature Flags{{< /prodname >}}{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Security:">}}
-{{< nextlink href="/security/cloud_siem/guide" >}}<i class="icon-siem" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud SIEM{{< /nextlink >}}
-{{< nextlink href="/security/cloud_security_management/guide" >}}<i class="icon-cloud-security-management" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud Security{{< /nextlink >}}
-{{< nextlink href="/security/application_security/guide" >}}<i class="icon-app-sec" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;App and API Protection{{< /nextlink >}}
+{{< nextlink href="/security/cloud_siem/guide" >}}<i class="icon-siem" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /nextlink >}}
+{{< nextlink href="/security/cloud_security_management/guide" >}}<i class="icon-cloud-security-management" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{< prodname >}}Cloud Security{{< /prodname >}}{{< /nextlink >}}
+{{< nextlink href="/security/application_security/guide" >}}<i class="icon-app-sec" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{< prodname >}}App and API Protection{{< /prodname >}}{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Digital Experience:">}}
@@ -59,9 +59,9 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Log Management:">}}
-{{< nextlink href="/logs/guide" >}}<i class="icon-log" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Log Management{{< /nextlink >}}
-{{< nextlink href="/observability_pipelines/guide" >}}<i class="icon-pipelines" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Observability Pipelines{{< /nextlink >}}
-{{< nextlink href="/byoc-logs/guides/" >}}<i class="icon-upload-wui" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;BYOC Logs{{< /nextlink >}}
+{{< nextlink href="/logs/guide" >}}<i class="icon-log" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{< prodname >}}Log Management{{< /prodname >}}{{< /nextlink >}}
+{{< nextlink href="/observability_pipelines/guide" >}}<i class="icon-pipelines" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{< prodname >}}Observability Pipelines{{< /prodname >}}{{< /nextlink >}}
+{{< nextlink href="/byoc-logs/guides/" >}}<i class="icon-upload-wui" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{< prodname >}}BYOC Logs{{< /prodname >}}{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Administration:">}}

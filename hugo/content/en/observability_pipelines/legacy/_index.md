@@ -79,7 +79,7 @@ The following documents are for the Observability Pipelines Worker 1.8 and older
 
 ## Overview
 
-Observability Pipelines allow you to collect, process, and route logs from any source to any destination in infrastructure that you own or manage.
+{{< prodname >}}Observability Pipelines{{< /prodname >}} allow you to collect, process, and route logs from any source to any destination in infrastructure that you own or manage.
 
 With Observability Pipelines, you can:
 
@@ -101,12 +101,12 @@ The Datadog UI provides a control plane to manage your Observability Pipelines W
 1. [Set up the Observability Pipelines Worker][1].
 2. [Create pipelines to collect, transform and route your data][2].
 3. Discover how to deploy Observability Pipelines at production scale:
-    - See [Deployment Design and Principles][3] for information on what to consider when designing your Observability Pipelines architecture.
+    - See [Deployment Design and Principles][3] for information on what to consider when designing your {{< prodname >}}Observability Pipelines{{< /prodname >}} architecture.
     - See [Best Practices for OP Worker Aggregator Architecture][4].
 
 ## Explore Observability Pipelines
 
-Start getting insights into your Observability Pipelines:
+Start getting insights into your {{< prodname >}}Observability Pipelines{{< /prodname >}}:
 
 ###  Collect data from any source and route data to any destination
 

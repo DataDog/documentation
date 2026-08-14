@@ -22,11 +22,11 @@ Context about your users and their applications, including the OS, country, code
 
 To open the event side panel in the [Analytics Explorer][1], click on a table row in the {{< ui >}}List{{< /ui >}} visualization type. Alternatively, click in the side panel list displayed after you click on {{< ui >}}Show related events{{< /ui >}}. 
 
-The event side panel displays all the information relative to a Product Analytics event. The waterfall displays related views and actions.
+The event side panel displays all the information relative to a {{< prodname >}}Product Analytics{{< /prodname >}} event. The waterfall displays related views and actions.
 
 ## Attributes
 
-Product Analytics collects contextual information by default. You can also add additional context attributes with the [Global Context API][2].
+{{< prodname >}}Product Analytics{{< /prodname >}} collects contextual information by default. You can also add additional context attributes with the [Global Context API][2].
 
 {{< img src="real_user_monitoring/explorer/events/attributes.png" alt="Attribute tab" width="80%" >}}
 

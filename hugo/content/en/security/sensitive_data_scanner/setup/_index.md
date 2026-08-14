@@ -23,11 +23,11 @@ further_reading:
 
 Set up Sensitive Data Scanner for each data source you want to scan. Each source uses its own setup process, so you only need to configure the sources relevant to your needs.
 
-- **Telemetry data:** Scan your logs, APM spans, RUM events, and events from Event Management. See [Telemetry Data][1] for setup instructions. To scan logs before they leave your network, use the [Sensitive Data Scanner processor for Observability Pipelines][5].
-- **Agent Observability data:** Scan LLM traces, prompts, and completions. Configure scanning from the [Agent Observability Settings page][3].
+- **Telemetry data:** Scan your logs, APM spans, RUM events, and events from {{< prodname >}}Event Management{{< /prodname >}}. See [Telemetry Data][1] for setup instructions. To scan logs before they leave your network, use the [Sensitive Data Scanner processor for Observability Pipelines][5].
+- **{{< prodname >}}Agent Observability{{< /prodname >}} data:** Scan LLM traces, prompts, and completions. Configure scanning from the [Agent Observability Settings page][3].
 - **Cloud storage data:** Scan your Amazon S3 buckets. See [Cloud Storage][2] for setup instructions.
 - **Code repositories:** Detect exposed secrets in your source code. See [Secret Scanning][4] for setup instructions.
-- **AI Guard evaluations:** Scan the conversations AI Guard evaluates for sensitive data such as credentials and PII. Configure scanning rules from the [AI Guard tab][6] of the Sensitive Data Scanner configuration page.
+- **{{< prodname >}}AI Guard{{< /prodname >}} evaluations:** Scan the conversations {{< prodname >}}AI Guard{{< /prodname >}} evaluates for sensitive data such as credentials and PII. Configure scanning rules from the [AI Guard tab][6] of the Sensitive Data Scanner configuration page.
 
 ## Further reading
 

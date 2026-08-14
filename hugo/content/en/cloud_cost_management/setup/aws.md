@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-To set up Cloud Cost Management in Datadog, you need:
+To set up {{< prodname >}}Cloud Cost Management{{< /prodname >}} in Datadog, you need:
 1. An AWS account with billing access
 2. The AWS integration installed in Datadog
 3. A Cost and Usage Report (follow the steps below to create one)
@@ -232,7 +232,7 @@ Attach the new S3 policy to the Datadog integration role.
 
 #### Permissions for AWS Cost Optimization Hub recommendations
 
-Cloud Cost Management generates some [recommendations][30] from data sourced from [AWS Cost Optimization Hub][31]. For Datadog to receive these recommendations, the Datadog AWS integration IAM role must include the following permissions:
+{{< prodname >}}Cloud Cost Management{{< /prodname >}} generates some [recommendations][30] from data sourced from [AWS Cost Optimization Hub][31]. For Datadog to receive these recommendations, the Datadog AWS integration IAM role must include the following permissions:
 
 - `cost-optimization-hub:GetRecommendation`
 - `cost-optimization-hub:ListRecommendations`
@@ -243,9 +243,9 @@ If you set up the AWS integration before these permissions were added to the def
 
 ### Account filtering
 
-Use Account Filtering to control which AWS member accounts to pull into Cloud Cost Management. Filtering out accounts does not incur additional Datadog costs.
+Use Account Filtering to control which AWS member accounts to pull into {{< prodname >}}Cloud Cost Management{{< /prodname >}}. Filtering out accounts does not incur additional Datadog costs.
 
-Using Account Filtering requires an AWS management account. You can configure account filters after an account has been configured in Cloud Cost Management.
+Using Account Filtering requires an AWS management account. You can configure account filters after an account has been configured in {{< prodname >}}Cloud Cost Management{{< /prodname >}}.
 
 **Note:** Account filters are not supported for tag search.
 
@@ -495,7 +495,7 @@ Billing rates, credits and fees, and overhead costs can be customized at your di
 - Adding accounts to a billing group impacts how Reservations and Savings Plans are shared across AWS accounts.
 
 To create a billing conductor CUR, follow the [AWS Cost and Usage Reports user guide][8]. Ensure the CUR meets [Datadog's requirements][9].
-After the billing conductor CUR is created, follow the Cloud Cost Management instructions above to set it up in Datadog.
+After the billing conductor CUR is created, follow the {{< prodname >}}Cloud Cost Management{{< /prodname >}} instructions above to set it up in Datadog.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}

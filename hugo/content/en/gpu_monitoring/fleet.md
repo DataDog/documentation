@@ -46,7 +46,7 @@ You can also {{< ui >}}Search{{< /ui >}} or {{< ui >}}Group{{< /ui >}} by other 
 {{< img src="gpu_monitoring/filters_and_groupings-3.png" alt="Filter dropdowns and Group by selector at the top of the GPU Fleet page" style="width:90%;" >}}
 
 ## Use case-driven views and recommendations
-GPU Monitoring's Fleet Explorer page provides two dedicated use case-driven views:
+{{< prodname >}}GPU Monitoring{{< /prodname >}}'s Fleet Explorer page provides two dedicated use case-driven views:
 
 - **Provisioning**: Allocate capacity and manage quotas.
 - **Performance**: Optimize workload efficiency and throughput.
@@ -149,7 +149,7 @@ Clicking any row in the Fleet table opens a side panel with more details for the
 
 ### Connected entities 
 
-Datadog's GPU Monitoring doesn't need to rely on NVIDIA'S DCGM Exporter. It uses the Datadog Agent to observe GPUs directly, providing insight into GPU usage and costs for pods and processes. Under the {{< ui >}}Connected Entities{{< /ui >}} section in any detail view, you can see SM activity, GPU core utilization (only if System Probe is enabled), and the memory usage of pods, processes, and Slurm jobs. This helps you identify which workloads to cut or optimize to decrease total spend. 
+Datadog's {{< prodname >}}GPU Monitoring{{< /prodname >}} doesn't need to rely on NVIDIA'S DCGM Exporter. It uses the Datadog Agent to observe GPUs directly, providing insight into GPU usage and costs for pods and processes. Under the {{< ui >}}Connected Entities{{< /ui >}} section in any detail view, you can see SM activity, GPU core utilization (only if System Probe is enabled), and the memory usage of pods, processes, and Slurm jobs. This helps you identify which workloads to cut or optimize to decrease total spend. 
 
 **Note**: The {{< ui >}}Pods{{< /ui >}} tab is only available if you're using Kubernetes.
 
@@ -196,11 +196,11 @@ Within this side panel, you have a device-specific view that identifies:
 
 ## Installation recommendations
 
-Datadog actively surveys your infrastructure and detects installation gaps that may diminish the value you get out of GPU Monitoring. In this modal, you can find installation update recommendations to get the optimal value of GPU Monitoring. For example, making sure your hosts have the [latest version][1] of the Datadog Agent installed, installing the latest version of the NVIDIA driver, and checking for misconfigured hosts.
+Datadog actively surveys your infrastructure and detects installation gaps that may diminish the value you get out of {{< prodname >}}GPU Monitoring{{< /prodname >}}. In this modal, you can find installation update recommendations to get the optimal value of {{< prodname >}}GPU Monitoring{{< /prodname >}}. For example, making sure your hosts have the [latest version][1] of the Datadog Agent installed, installing the latest version of the NVIDIA driver, and checking for misconfigured hosts.
 
 <div class="alert alert-danger">Do not use Datadog Agent v7.82.0, which can cause unexpected kernel panics.</div>
 
-To view advanced GPU Monitoring features such as attribution of GPU resources by related processes or SLURM jobs, you must enable [Live Processes][3] and the [Slurm][4] integration, respectively.
+To view advanced {{< prodname >}}GPU Monitoring{{< /prodname >}} features such as attribution of GPU resources by related processes or SLURM jobs, you must enable [Live Processes][3] and the [Slurm][4] integration, respectively.
 
 {{< img src="gpu_monitoring/installation.png" alt="Modal containing installation guidance for smoother GPU Monitoring user experience." style="width:90%;" >}}
 

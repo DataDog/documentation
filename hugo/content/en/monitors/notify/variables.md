@@ -458,7 +458,7 @@ You can include any attribute or tag from a log, trace span, RUM event, CI pipel
 
 #### Reserved attributes
 
-Logs, Event Management, spans, RUM, CI Pipeline, and CI Test events have generic reserved attributes, which you can use in variables with the following syntax:
+Logs, {{< prodname >}}Event Management{{< /prodname >}}, spans, RUM, CI Pipeline, and CI Test events have generic reserved attributes, which you can use in variables with the following syntax:
 
 | Monitor type    | Variable syntax   | First level attributes |
 |-----------------|-------------------|------------------------|
@@ -473,7 +473,7 @@ If the matching event does not contain the attribute in its definition, the vari
 
 #### Explorer link
 
-Use `{{log.link}}`, `{{span.link}}`, `{{rum.link}}`, and `{{issue.link}}` to enrich the notification with a link to the Log Explorer, Trace Explorer, RUM Explorer, or Error Tracking, scoped on the events matching the query.
+Use `{{log.link}}`, `{{span.link}}`, `{{rum.link}}`, and `{{issue.link}}` to enrich the notification with a link to the Log Explorer, Trace Explorer, RUM Explorer, or {{< prodname >}}Error Tracking{{< /prodname >}}, scoped on the events matching the query.
 
 ### Check monitor variables
 

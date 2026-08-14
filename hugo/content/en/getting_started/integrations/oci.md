@@ -188,20 +188,20 @@ After setting up the OCI integration, ensure that the GPU-related namespaces are
 
 Datadog's [Oracle Cloud Cost Management][24] provides insights for engineering and finance teams to understand how infrastructure changes impact costs, allocate spend across your organization, and identify potential improvements. 
 
-To enable Cloud Cost Management for OCI:
+To enable {{< prodname >}}Cloud Cost Management{{< /prodname >}} for OCI:
 1. Ensure you have configured the OCI integration as described above.
 2. Follow the setup instructions in the [Oracle Cloud Cost Management documentation][24] to enable cost data collection.
 
 ### Cloud SIEM
 
-Cloud SIEM provides real-time analysis of operational and security logs, using out-of-the-box integrations and rules to detect and investigate threats. 
+{{< prodname >}}Cloud SIEM{{< /prodname >}} provides real-time analysis of operational and security logs, using out-of-the-box integrations and rules to detect and investigate threats. 
 
-To use Cloud SIEM with your OCI environment:
+To use {{< prodname >}}Cloud SIEM{{< /prodname >}} with your OCI environment:
 1. Ensure log collection is enabled in your OCI integration configuration.
 2. Review [Getting Started with Cloud SIEM][25] to configure threat detection.
 3. Follow the [OCI configuration guide for Cloud SIEM][26] to set up specific log sources and security rules for OCI.
 
-Cloud SIEM analyzes OCI logs to detect:
+{{< prodname >}}Cloud SIEM{{< /prodname >}} analyzes OCI logs to detect:
 - Unauthorized access attempts
 - Suspicious API calls
 - Configuration changes that may introduce security risks

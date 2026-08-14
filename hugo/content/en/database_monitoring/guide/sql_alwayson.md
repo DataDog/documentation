@@ -16,7 +16,7 @@ further_reading:
 
 The Database Monitoring AlwaysOn Clusters view enables you to detect data synchronization issues, understand availability group behavior, and identify cluster bottlenecks in SQL Server availability groups.
 
-To access the AlwaysOn Clusters view, navigate to the {{< ui >}}APM{{< /ui >}} > {{< ui >}}Database Monitoring{{< /ui >}} > {{< ui >}}Databases{{< /ui >}} tab and select {{< ui >}}AlwaysOn Clusters{{< /ui >}}.
+To access the AlwaysOn Clusters view, navigate to the {{< ui >}}APM{{< /ui >}} > {{< ui >}}{{< prodname >}}Database Monitoring{{< /prodname >}}{{< /ui >}} > {{< ui >}}Databases{{< /ui >}} tab and select {{< ui >}}AlwaysOn Clusters{{< /ui >}}.
 
 ## Determine the health of your nodes
 

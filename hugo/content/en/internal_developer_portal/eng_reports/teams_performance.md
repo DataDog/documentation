@@ -23,9 +23,9 @@ With this report, you can:
 - Filter by team and [team hierarchy][1] to focus on your organization or specific subteams.
 - Explore trends across the selected time range to catch regressions early.
 
-The Teams Performance report pulls data from Datadog [Incident Management][2], [Service Level Objectives][3], and [DORA Metrics][4]. Each domain populates after its source is set up. 
+The Teams Performance report pulls data from Datadog [{{< prodname >}}Incident Management{{< /prodname >}}][2], [Service Level Objectives][3], and [DORA Metrics][4]. Each domain populates after its source is set up. 
 
-To access the Teams Performance report, navigate to **Reports** in your Internal Developer Portal and select **Teams Performance** in the left-hand menu.
+To access the Teams Performance report, navigate to **Reports** in your {{< prodname >}}Internal Developer Portal{{< /prodname >}} and select **Teams Performance** in the left-hand menu.
 
 {{< img src="tracing/eng_reports/teams-performance-landing.png" alt="Default view of the Teams Performance report, showing the Incident Response section" style="width:100%;" >}} 
 

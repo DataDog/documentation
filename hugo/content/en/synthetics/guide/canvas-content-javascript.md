@@ -186,7 +186,7 @@ simulateCanvasClick(canvas, 620, 8);
 
 ## Asserting on elements triggered by clicks
 
-Now that the key pieces are in place, you can build a complete flow that includes a Synthetics assertion. In the following example, the test:
+Now that the key pieces are in place, you can build a complete flow that includes a {{< prodname >}}Synthetics{{< /prodname >}} assertion. In the following example, the test:
 
 - Scans the canvas for the first pixel matching a target color
 - Simulates a click at that location

@@ -102,7 +102,7 @@ _Example: the latency of all user requests should be less than 250 ms 99% of the
 
 1. [Custom metrics][3] (for example, counters)
 2. [Integration metrics][4] (for example, load balancer, http requests)
-3. [Datadog APM][5] (for example, errors, latency on services and resources)
+3. [{{< prodname >}}Datadog APM{{< /prodname >}}][5] (for example, errors, latency on services and resources)
 4. [Datadog Logs][6] (for example, metrics generated from logs for a count of particular occurrence)
 
 ## Set your target objective and time window

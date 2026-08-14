@@ -114,7 +114,7 @@ You can run the `java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` command to check
 Set the following environment variables to configure the SDK:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the Test Optimization product.
+: Enables the {{< prodname >}}Test Optimization{{< /prodname >}} product.
 
 `DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
@@ -139,7 +139,7 @@ Run your tests as you normally do (for example: `mvn test` or `mvn verify`).
 Set the following environment variables to configure the SDK:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the Test Optimization product.
+: Enables the {{< prodname >}}Test Optimization{{< /prodname >}} product.
 
 `DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
@@ -161,7 +161,7 @@ Run your tests as you normally do (for example: `./gradlew clean test`).
 Set the following environment variables to configure the SDK:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the Test Optimization product.
+: Enables the {{< prodname >}}Test Optimization{{< /prodname >}} product.
 
 `DD_TEST_SESSION_NAME`
 : Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
@@ -186,7 +186,7 @@ Run your tests as you normally do (for example: `sbt test`).
 Set the following environment variables to configure the SDK:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the Test Optimization product.
+: Enables the {{< prodname >}}Test Optimization{{< /prodname >}} product.
 
 `DD_TEST_SESSION_NAME`
 : Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
@@ -445,7 +445,7 @@ Always call ``datadog.trace.api.civisibility.DDTestSession#end`` at the end so t
 
 ### Deterministic test parameters representation
 
-Test Optimization works best when the [test parameters are deterministic][8] and stay the same between test runs.
+{{< prodname >}}Test Optimization{{< /prodname >}} works best when the [test parameters are deterministic][8] and stay the same between test runs.
 If a test case has a parameter that varies between test executions (such as a current date, a random number, or an instance of a class whose `toString()` method is not overridden), some of the product features may not work as expected.
 For example, the history of executions may not be available, or the test case may not be classified as flaky even if it exhibits flakiness.
 
@@ -527,7 +527,7 @@ A common mistake is to set the variables in a build step and run the tests in an
 
 Ensure that you are using the latest version of the SDK.
 
-Verify that your build system and testing framework are supported by Test Optimization. See the list of [supported build systems and test frameworks](#compatibility).
+Verify that your build system and testing framework are supported by {{< prodname >}}Test Optimization{{< /prodname >}}. See the list of [supported build systems and test frameworks](#compatibility).
 
 Ensure that the `dd.civisibility.enabled` property (or `DD_CIVISIBILITY_ENABLED` environment variable) is set to `true` in the SDK arguments.
 
@@ -536,7 +536,7 @@ Check the build output for any errors that indicate tracer misconfiguration, suc
 
 ### Tests or source code compilation fails when building a project with the SDK attached
 
-By default, Test Optimization runs Java code compilation with a compiler plugin attached.
+By default, {{< prodname >}}Test Optimization{{< /prodname >}} runs Java code compilation with a compiler plugin attached.
 
 The plugin is optional, as it only serves to reduce the performance overhead.
 

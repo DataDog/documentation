@@ -30,7 +30,7 @@ byoc--<CLUSTER_NAME>--<INDEX_NAME>
 
 ## Search limitations
 
-You cannot query BYOC Logs indexes alongside other Datadog log indexes. Additionally, Flex Logs are not supported with BYOC Logs.
+You cannot query {{< prodname >}}BYOC Logs{{< /prodname >}} indexes alongside other Datadog log indexes. Additionally, Flex Logs are not supported with {{< prodname >}}BYOC Logs{{< /prodname >}}.
 
 [1]: https://app.datadoghq.com/logs
 

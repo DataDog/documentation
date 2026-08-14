@@ -9,16 +9,16 @@ further_reading:
   text: SDK
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov" >}}<div class="alert alert-danger">{{< prodname >}}AI Guard{{< /prodname >}} isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-AI Guard provides a single JSON:API endpoint:
+{{< prodname >}}AI Guard{{< /prodname >}} provides a single JSON:API endpoint:
 
 `POST {{< region-param key=dd_api >}}/api/v2/ai-guard/evaluate`
 
 <div class="alert alert-info">The endpoint URL varies by region. Ensure you're using the correct Datadog site for your organization.</div>
 
-<div class="alert alert-warning">HTTP API requests do not send traces to Datadog. AI Guard evaluations performed through the HTTP API do not appear in the Datadog UI. To view AI Guard activity in Datadog, use the <a href="/security/ai_guard/setup/sdk/">SDK</a> instead.</div>
+<div class="alert alert-warning">HTTP API requests do not send traces to Datadog. {{< prodname >}}AI Guard{{< /prodname >}} evaluations performed through the HTTP API do not appear in the Datadog UI. To view {{< prodname >}}AI Guard{{< /prodname >}} activity in Datadog, use the <a href="/security/ai_guard/setup/sdk/">SDK</a> instead.</div>
 
 ## Examples {#api-examples}
 ### Generic API example
@@ -78,7 +78,7 @@ curl -s -XPOST \
 
 #### Explanation {#api-example-generic-explanation}
 
-1. The request contains one attribute: `messages`. This attribute contains the full sequence of messages in the LLM call. AI Guard evaluates the last message in the sequence. See the [Request message format](#request-message-format) section for more details.
+1. The request contains one attribute: `messages`. This attribute contains the full sequence of messages in the LLM call. {{< prodname >}}AI Guard{{< /prodname >}} evaluates the last message in the sequence. See the [Request message format](#request-message-format) section for more details.
 2. The response has two attributes: `action` and `reason`.
    - `action` can be `ALLOW`, `DENY`, or `ABORT`.
       - `ALLOW`: Interaction is safe and should proceed.
@@ -88,7 +88,7 @@ curl -s -XPOST \
 
 ### Evaluate user prompt
 
-In the initial example, AI Guard evaluated a tool call in the context of its system and user prompt. It can also evaluate user prompts.
+In the initial example, {{< prodname >}}AI Guard{{< /prodname >}} evaluated a tool call in the context of its system and user prompt. It can also evaluate user prompts.
 
 #### Request {#api-example-evaluate-user-prompt-request}
 

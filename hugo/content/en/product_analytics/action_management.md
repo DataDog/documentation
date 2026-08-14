@@ -25,7 +25,7 @@ Use labeled actions to:
 
 After you create a labeled action, Datadog applies the name retroactively to all matching interactions in your recorded data. This includes historical interactions, not only new ones going forward.
 
-Labeled actions work across all Product Analytics charts and help improve trust in your dataset and efficiency in your analysis.
+Labeled actions work across all {{< prodname >}}Product Analytics{{< /prodname >}} charts and help improve trust in your dataset and efficiency in your analysis.
 
 Two labeling methods are available:
 - [**Visual labeling**](#visual-labeling): A point-and-click interface for labeling actions on web pages. Requires the Datadog test recorder Chrome extension.
@@ -61,7 +61,7 @@ Visual labeling requires [the Datadog test recorder Chrome extension][1]. If you
 3. Add or remove tracked elements, and update the name or CSS selector as needed.
 4. Click {{< ui >}}Save labeled action{{< /ui >}}.
 
-After you define an action, it appears in the list of labeled actions on the [Actions][3] page, and you can use it in any Product Analytics chart.
+After you define an action, it appears in the list of labeled actions on the [Actions][3] page, and you can use it in any {{< prodname >}}Product Analytics{{< /prodname >}} chart.
 
 ## Manual labeling {#manual-labeling}
 
@@ -77,7 +77,7 @@ Manual labeling is available for both web and mobile applications and does not r
    Select {{< ui >}}Add New Definition{{< /ui >}} to add a definition.
 5. Select **Save**.
 
-After you define an action, it appears in the list of labeled actions on the [Actions][3] page, and you can use it in any Product Analytics chart.
+After you define an action, it appears in the list of labeled actions on the [Actions][3] page, and you can use it in any {{< prodname >}}Product Analytics{{< /prodname >}} chart.
 
 ## Retrieve your actions
 After you define an action, you can find it on the [Actions][3] page. 

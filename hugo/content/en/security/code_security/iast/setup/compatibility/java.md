@@ -59,7 +59,7 @@ Versions 22 and above are supported as in Preview.
 
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
-- If **Code Security** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
+- If **{{< prodname >}}Code Security{{< /prodname >}}** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
 
@@ -90,7 +90,7 @@ Versions 22 and above are supported as in Preview.
 
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
-- If **Code Security** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
+- If **{{< prodname >}}Code Security{{< /prodname >}}** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
 | Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Code Security? |
@@ -119,7 +119,7 @@ Versions 22 and above are supported as in Preview.
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
-- If your framework is not supported below, **Code Security** won’t detect SQL Injection vulnerabilities, but will still detect the rest of vulnerability types listed [here][3].
+- If your framework is not supported below, **{{< prodname >}}Code Security{{< /prodname >}}** won’t detect SQL Injection vulnerabilities, but will still detect the rest of vulnerability types listed [here][3].
 
 | Database                | Versions | Threat Detection supported? |  Code Security? |
 | ----------------------- | -------- |  ------------------------| ---------------------------------------------------------------- |

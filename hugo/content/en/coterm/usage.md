@@ -85,7 +85,7 @@ With this configuration, CoTerm intercepts any `kubectl scale` command without a
 
 ### Require approval for commands
 
-For even more dangerous commands, CoTerm can require explicit approval by another team member (through Case Management) before running the command.
+For even more dangerous commands, CoTerm can require explicit approval by another team member (through {{< prodname >}}Case Management{{< /prodname >}}) before running the command.
 
 1. Create a shim for your command: `ddcoterm shim create kubectl`
 
@@ -105,7 +105,7 @@ process_config:
           actions: ["record", "logs", "process_info", "approval"]
    {{< /code-block >}}
 
-With this configuration, when you run a `kubectl scale --context prod` command, CoTerm creates an approval request in [Case Management][3]. If you opt to associate the approval request with an active [incident][5], other incident responders are automatically added as approvers. After this request is approved, your command executes. You can also configure [case automation rules][8] to trigger workflows based on approval requests.
+With this configuration, when you run a `kubectl scale --context prod` command, CoTerm creates an approval request in [{{< prodname >}}Case Management{{< /prodname >}}][3]. If you opt to associate the approval request with an active [incident][5], other incident responders are automatically added as approvers. After this request is approved, your command executes. You can also configure [case automation rules][8] to trigger workflows based on approval requests.
 
 #### Manually require approval
 

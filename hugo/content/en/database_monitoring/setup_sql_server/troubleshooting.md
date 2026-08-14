@@ -3,7 +3,7 @@ title: Troubleshooting DBM Setup for SQL Server
 description: Troubleshoot Database Monitoring setup for SQL Server
 ---
 
-This page details common issues with setting up and using Database Monitoring with SQL Server, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
+This page details common issues with setting up and using {{< prodname >}}Database Monitoring{{< /prodname >}} with SQL Server, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
 ## Diagnosing common connection issues {#common-connection-issues}
 

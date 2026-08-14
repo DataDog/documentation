@@ -15,10 +15,10 @@ further_reading:
   text: "Set Up the Datadog MCP Server"
 ---
 
-The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolsets][1], which allow you to use only the tools you need, saving valuable context window space.
+The following tools are available in the {{< prodname >}}Datadog MCP Server{{< /prodname >}}. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolsets][1], which allow you to use only the tools you need, saving valuable context window space.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server. For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and Agent Observability tools:
+To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the {{< prodname >}}Datadog MCP Server{{< /prodname >}}. For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and {{< prodname >}}Agent Observability{{< /prodname >}} tools:
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -29,7 +29,7 @@ You can also exclude specific tools with the `omit_tools` query parameter.
 
 See [Set Up the Datadog MCP Server][1] for more information on connecting to the MCP Server, enabling toolsets, and omitting specific tools.
 
-<div class="alert alert-info">Datadog MCP Server tools are under significant development and are subject to change. Use <a href="https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform">this feedback form</a> to share any feedback, use cases, or issues encountered with your prompts and queries.</div>
+<div class="alert alert-info">{{< prodname >}}Datadog MCP Server{{< /prodname >}} tools are under significant development and are subject to change. Use <a href="https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform">this feedback form</a> to share any feedback, use cases, or issues encountered with your prompts and queries.</div>
 
 ## Core tools
 
@@ -87,7 +87,7 @@ Retrieves information about Datadog monitors, including their statuses, threshol
 ### `get_datadog_trace`
 *Toolset: **core***\
 *Permissions Required: `APM Read`*\
-Fetches a complete trace from Datadog APM using a trace ID.
+Fetches a complete trace from {{< prodname >}}Datadog APM{{< /prodname >}} using a trace ID.
 
 - Get the complete trace for ID 7d5d747be160e280504c099d984bcfe0.
 - Show me all spans for trace abc123 with timing information.
@@ -409,14 +409,14 @@ Translates a natural-language description into an Audit Trail query string. If y
 
 ## Cases
 
-Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
+Tools for [{{< prodname >}}Case Management{{< /prodname >}}][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
 
-<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the {{< prodname >}}Datadog MCP Server{{< /prodname >}}</a> for instructions on enabling toolsets.</div>
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Searches [Case Management][38] cases with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
+Searches [{{< prodname >}}Case Management{{< /prodname >}}][38] cases with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
 
 - Show me all open cases assigned to me.
 - Are there any open P1 cases in the Security Reviews project?
@@ -434,7 +434,7 @@ Retrieves detailed information about a specific case by ID or key, including tit
 ### `create_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
-Creates a new [Case Management][38] case with a title, project, and optional fields like description, priority, and assignee.
+Creates a new [{{< prodname >}}Case Management{{< /prodname >}}][38] case with a title, project, and optional fields like description, priority, and assignee.
 
 - I'm seeing a latency spike on the checkout service. Create a P2 case to track the investigation.
 - Open a security review case for the suspicious login activity we found in the logs.
@@ -467,10 +467,10 @@ Adds a comment to a case's timeline. Comments support markdown formatting.
 ### `list_datadog_case_projects`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Lists available [Case Management][38] projects with optional filtering by name or key.
+Lists available [{{< prodname >}}Case Management{{< /prodname >}}][38] projects with optional filtering by name or key.
 
-- What projects are available in Case Management?
-- Is there a project related to security in Case Management?
+- What projects are available in {{< prodname >}}Case Management{{< /prodname >}}?
+- Is there a project related to security in {{< prodname >}}Case Management{{< /prodname >}}?
 
 ### `get_datadog_case_project`
 *Toolset: **cases***\
@@ -488,12 +488,12 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 
 ## Cloud Cost Management
 
-Tools for [Cloud Cost Management][64], including listing cost-saving recommendations ranked by estimated potential daily savings.
+Tools for [{{< prodname >}}Cloud Cost Management{{< /prodname >}}][64], including listing cost-saving recommendations ranked by estimated potential daily savings.
 
 ### `cost_recommendations`
 *Toolset: **cost***\
 *Permissions Required: `Cloud Cost Management Read`*\
-Lists an organization's Cloud Cost Management cost-saving recommendations, ranked by estimated potential daily savings (highest first). Supports faceted filtering by cloud provider, recommendation type, status, savings threshold, and resource tags, along with pagination and a summary of the total count and total potential daily savings.
+Lists an organization's {{< prodname >}}Cloud Cost Management{{< /prodname >}} cost-saving recommendations, ranked by estimated potential daily savings (highest first). Supports faceted filtering by cloud provider, recommendation type, status, savings threshold, and resource tags, along with pagination and a summary of the total count and total potential daily savings.
 
 #### Examples of queries:
 
@@ -577,7 +577,7 @@ Ask a Datadog widget expert a question about widget configuration, schemas, quer
 
 ## Data Observability
 
-Tools for [Data Observability][70], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs.
+Tools for [{{< prodname >}}Data Observability{{< /prodname >}}][70], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs.
 
 ### `search_data_entities`
 *Toolset: **data-observability***\
@@ -593,7 +593,7 @@ Searches for data entities in the data catalog by name, full-text search, or fil
 *Permissions Required: `Monitors Read` or `APM Read`*\
 Returns the entity type schema for every platform with data in the catalog: entity types, containment hierarchy, filterable attributes, and default metrics.
 
-- What platforms are connected to Data Observability?
+- What platforms are connected to {{< prodname >}}Data Observability{{< /prodname >}}?
 - What entity types exist for Databricks?
 - What metrics are available for a table entity?
 
@@ -736,13 +736,13 @@ Lists cost and performance optimization recommendations for data jobs and querie
 ### `get_data_observability_recommendation`
 *Toolset: **data-observability***\
 *Permissions Required: `APM Read`*\
-Retrieves full details of a specific Data Observability recommendation by ID, including its structured body describing the problem, evidence, and proposed change.
+Retrieves full details of a specific {{< prodname >}}Data Observability{{< /prodname >}} recommendation by ID, including its structured body describing the problem, evidence, and proposed change.
 
 - Get the details of recommendation `abc123`.
 
 ## Database Monitoring
 
-Tools for interacting with [Database Monitoring][26].
+Tools for interacting with [{{< prodname >}}Database Monitoring{{< /prodname >}}][26].
 
 ### `find_datadog_database_instances`
 *Toolset: **dbm***\
@@ -828,7 +828,7 @@ Analyzes a PostgreSQL query for optimization opportunities using deterministic r
 ### `search_datadog_database_plans`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
-Searches [Database Monitoring][26] query execution plans, which show how the database engine executes queries, including index usage, join strategies, and cost estimates. Use this to analyze query performance and identify optimization opportunities.
+Searches [{{< prodname >}}Database Monitoring{{< /prodname >}}][26] query execution plans, which show how the database engine executes queries, including index usage, join strategies, and cost estimates. Use this to analyze query performance and identify optimization opportunities.
 
 - Show me execution plans for slow queries on `host:db-prod-1` from the last hour.
 - Find query plans with `@db.plan.type:explain_analyze` for the production database.
@@ -837,7 +837,7 @@ Searches [Database Monitoring][26] query execution plans, which show how the dat
 ### `search_datadog_database_samples`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
-Searches [Database Monitoring][26] query samples, which represent individual query executions with performance metrics. Use this to analyze database activity patterns, identify slow queries, and investigate database performance issues.
+Searches [{{< prodname >}}Database Monitoring{{< /prodname >}}][26] query samples, which represent individual query executions with performance metrics. Use this to analyze database activity patterns, identify slow queries, and investigate database performance issues.
 
 - Show me query samples with `@duration:>1000000000` (duration greater than 1 second) from `db:mydb`.
 - Find slow queries on `host:db-prod-1` filtered by `@db.user:app_user`.
@@ -895,7 +895,7 @@ Generates a Datadog UI link to the [DDSQL Editor][41] with a given query pre-pop
 
 ## Error Tracking
 
-Tools for interacting with Datadog [Error Tracking][49].
+Tools for interacting with Datadog [{{< prodname >}}Error Tracking{{< /prodname >}}][49].
 
 ### `search_datadog_error_tracking_issues`
 *Toolset: **error-tracking***\
@@ -946,7 +946,7 @@ Adds, updates, or deletes a comment on a Datadog Error Tracking Issue.
 
 Tools for managing and analyzing [Experiments][62], including creating and concluding experiments, running diagnostics, and investigating metric movements.
 
-<div class="alert alert-info">The <code>experiments</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+<div class="alert alert-info">The <code>experiments</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the {{< prodname >}}Datadog MCP Server{{< /prodname >}}</a> for instructions on enabling toolsets.</div>
 
 ### `list_experiments`
 *Toolset: **experiments***\
@@ -1221,7 +1221,7 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 
 ## Networks
 
-Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32].
+Tools for [Cloud Network Monitoring][31] analysis and [{{< prodname >}}Network Device Monitoring{{< /prodname >}}][32].
 
 ### `analyze_cloud_network_monitoring`
 *Toolset: **networks***\
@@ -1235,7 +1235,7 @@ Investigates network-level issues using [Cloud Network Monitoring][31] data, ana
 ### `search_ndm_devices`
 *Toolset: **networks***\
 *Permissions Required: `NDM Read`*\
-Searches network devices (routers, switches, firewalls) monitored by Datadog [Network Device Monitoring][32].
+Searches network devices (routers, switches, firewalls) monitored by Datadog [{{< prodname >}}Network Device Monitoring{{< /prodname >}}][32].
 
 - Show me all network devices in the `us-east-1` datacenter.
 - Find firewalls that are reporting errors.
@@ -1284,16 +1284,16 @@ Guides you through onboarding Kubernetes clusters to Datadog.
 
 ### `llm_observability_onboarding`
 *Toolset: **onboarding***\
-Guides you through onboarding Agent Observability in Datadog.
+Guides you through onboarding {{< prodname >}}Agent Observability{{< /prodname >}} in Datadog.
 
-- Help me set up Agent Observability for my AI application.
+- Help me set up {{< prodname >}}Agent Observability{{< /prodname >}} for my AI application.
 
 ### `test_optimization_onboarding`
 *Toolset: **onboarding***\
 *Permissions Required: None*\
-Guides you through onboarding Test Optimization in Datadog.
+Guides you through onboarding {{< prodname >}}Test Optimization{{< /prodname >}} in Datadog.
 
-- Help me set up Test Optimization for my CI pipeline.
+- Help me set up {{< prodname >}}Test Optimization{{< /prodname >}} for my CI pipeline.
 
 ### `serverless_onboarding`
 *Toolset: **onboarding***\
@@ -1312,9 +1312,9 @@ Guides you through uploading source maps for RUM error mapping.
 
 ## Product Analytics
 
-Tools for querying [Product Analytics][68] data, including org vocabulary lookup, semantic search, aggregations, journeys, pathways, and retention.
+Tools for querying [{{< prodname >}}Product Analytics{{< /prodname >}}][68] data, including org vocabulary lookup, semantic search, aggregations, journeys, pathways, and retention.
 
-<div class="alert alert-info">The <code>product-analytics</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+<div class="alert alert-info">The <code>product-analytics</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the {{< prodname >}}Datadog MCP Server{{< /prodname >}}</a> for instructions on enabling toolsets.</div>
 
 ### `search_product_analytics_events`
 *Toolset: **product-analytics***\
@@ -1327,17 +1327,17 @@ Finds Product Analytics views and actions matching a natural-language descriptio
 ### `search_product_analytics_org_entities`
 *Toolset: **product-analytics***\
 *Permissions Required: `RUM Apps Read`*\
-Looks up org-specific Product Analytics entities by name or keyword (feature flags, context attribute keys, saved charts, and segments).
+Looks up org-specific {{< prodname >}}Product Analytics{{< /prodname >}} entities by name or keyword (feature flags, context attribute keys, saved charts, and segments).
 
 - Find the segment for "power users".
-- What feature flags are available to filter Product Analytics data by?
+- What feature flags are available to filter {{< prodname >}}Product Analytics{{< /prodname >}} data by?
 
 **Note**: Use the segment filter expression returned by this tool verbatim rather than constructing one manually.
 
 ### `get_product_analytics_saved_chart`
 *Toolset: **product-analytics***\
 *Permissions Required: `RUM Apps Read` and `Product Analytics Saved Widgets Read`*\
-Retrieves the full definition of a saved Product Analytics chart by ID, including its query parameters, filters, and time interval. Use `search_product_analytics_org_entities` first to find the chart ID.
+Retrieves the full definition of a saved {{< prodname >}}Product Analytics{{< /prodname >}} chart by ID, including its query parameters, filters, and time interval. Use `search_product_analytics_org_entities` first to find the chart ID.
 
 - Load the saved chart `abc-123-def` and show me its query parameters.
 - Reproduce the "weekly retention" saved chart with an updated time range.
@@ -1369,7 +1369,7 @@ Runs a Sankey (pathway) analysis showing how users navigate between views, start
 ### `run_product_analytics_retention`
 *Toolset: **product-analytics***\
 *Permissions Required: `RUM Apps Read`*\
-Runs retention queries on Product Analytics data as a cohort grid, retention curve, timeseries, or scalar value, tracked at the user or account level.
+Runs retention queries on {{< prodname >}}Product Analytics{{< /prodname >}} data as a cohort grid, retention curve, timeseries, or scalar value, tracked at the user or account level.
 
 - Show me the weekly retention grid for users who signed up in the last quarter.
 - What's the day-7 retention rate for users who joined in January?
@@ -1655,13 +1655,13 @@ Scans code for hardcoded secrets and credentials, detecting AWS keys, API keys, 
 Returns the available fields and their types for security signals. Signal types map to `@workflow.rule.type` values such as `Log Detection`, `Application Security`, and `Workload Security`.
 
 - What fields can I use to filter security signals?
-- Show me the available fields for Cloud SIEM signals.
+- Show me the available fields for {{< prodname >}}Cloud SIEM{{< /prodname >}} signals.
 - What enum values are valid for the signal rule type field?
 
 ### `search_datadog_security_signals`
 *Toolset: **security***\
 *Permissions Required: `Security Signals Read`*\
-Searches and retrieves security signals from Datadog Security Monitoring, including Cloud SIEM signals, App & API Protection signals, and Workload Protection signals.
+Searches and retrieves security signals from Datadog Security Monitoring, including {{< prodname >}}Cloud SIEM{{< /prodname >}} signals, App & API Protection signals, and {{< prodname >}}Workload Protection{{< /prodname >}} signals.
 
 - Show me security signals from the last 24 hours.
 - Find high-severity security signals related to my production environment.
@@ -1741,7 +1741,7 @@ Returns the authoring reference and schema for detection rules. Covers supported
 *Permissions Required: `Security Monitoring Rules Read`*\
 Retrieves security detection rules. Supports two modes: provide `rule_id` to get the full definition of a single rule by ID, or omit `rule_id` to list rules (optionally filtered with `query` and token-limited with `max_tokens`). The two modes are mutually exclusive.
 
-- List all enabled Cloud SIEM detection rules.
+- List all enabled {{< prodname >}}Cloud SIEM{{< /prodname >}} detection rules.
 - Show me detection rules tagged with `source:cloudtrail`.
 - Get the full definition of detection rule `abc-123-def`.
 - What thresholds and group-by fields does this detection rule use?
@@ -1839,7 +1839,7 @@ Fallback tool for retrieving full security finding details. Prefer `analyze_data
 ### `get_datadog_security_findings_ticket_suggestions`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Read`, `Cases Read`*\
-Returns ranked project suggestions for ticketing security findings. Shows available Case Management, Jira, Linear, and ServiceNow projects with 30-day usage data. Call this before `create_datadog_security_findings_ticket` to discover which project to use.
+Returns ranked project suggestions for ticketing security findings. Shows available {{< prodname >}}Case Management{{< /prodname >}}, Jira, Linear, and ServiceNow projects with 30-day usage data. Call this before `create_datadog_security_findings_ticket` to discover which project to use.
 
 - What Jira projects can I use to create tickets for security findings?
 - Show me available ServiceNow projects for ticketing.
@@ -1849,17 +1849,17 @@ Returns ranked project suggestions for ticketing security findings. Shows availa
 ### `create_datadog_security_findings_ticket`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Write`, `Cases Read`, `Cases Write`*\
-Creates a Case Management case, Jira issue, Linear issue, or ServiceNow ticket for security findings. Requires specific finding IDs and a project ID. Use `get_datadog_security_findings_ticket_suggestions` first to discover available projects.
+Creates a {{< prodname >}}Case Management{{< /prodname >}} case, Jira issue, Linear issue, or ServiceNow ticket for security findings. Requires specific finding IDs and a project ID. Use `get_datadog_security_findings_ticket_suggestions` first to discover available projects.
 
 - Create a Jira ticket for these critical findings in project SECURITY.
-- Open a Case Management case for the findings from this rule.
+- Open a {{< prodname >}}Case Management{{< /prodname >}} case for the findings from this rule.
 - Create a Linear issue for these high-severity findings.
 - Create a ServiceNow ticket for these library vulnerabilities.
 
 ### `detach_datadog_security_findings_ticket`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Write`, `Cases Write`*\
-Detaches security findings from their linked case or ticket. Since Jira and ServiceNow tickets are linked through Case Management, detaching the case also detaches any downstream ticket.
+Detaches security findings from their linked case or ticket. Since Jira and ServiceNow tickets are linked through {{< prodname >}}Case Management{{< /prodname >}}, detaching the case also detaches any downstream ticket.
 
 - Detach these findings from their linked Jira ticket.
 - Remove the case association for these findings.
@@ -1894,7 +1894,7 @@ Lists security findings automation rules of a given type (`mute`, `due_date`, `t
 ### `create_datadog_security_findings_automation_rule`
 *Toolset: **security***\
 *Permissions Required: `Security Pipelines Write` and `Security Monitoring Findings Read`*\
-Creates a security findings automation rule. Choose a `rule_type`: `mute` (suppress findings), `due_date` (set remediation deadlines), `severity_modifier` (adjust finding severity), or `ticket_creation` (auto-create Jira or Case Management tickets).
+Creates a security findings automation rule. Choose a `rule_type`: `mute` (suppress findings), `due_date` (set remediation deadlines), `severity_modifier` (adjust finding severity), or `ticket_creation` (auto-create Jira or {{< prodname >}}Case Management{{< /prodname >}} tickets).
 
 - Create a rule to automatically mute false-positive misconfiguration findings in staging.
 - Set 30-day remediation due dates for high-severity library vulnerabilities.
@@ -2033,7 +2033,7 @@ Generates an AI-powered, time-based play-by-play of what a user did during a spe
 
 ## Software Delivery
 
-Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
+Tools for interacting with {{< prodname >}}Software Delivery{{< /prodname >}} ([CI Visibility][48], [{{< prodname >}}Test Optimization{{< /prodname >}}][24], [Code Coverage][65], and [DORA metrics][66]).
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
@@ -2056,7 +2056,7 @@ Aggregates CI pipeline events to produce statistics, metrics, and grouped analyt
 ### `get_datadog_flaky_tests`
 *Toolset: **software-delivery***\
 *Permissions Required: `Test Optimization Read`*\
-Searches Datadog [Test Optimization][24] for flaky tests and returns triage details (failure rate, category, owners, history, CI impact), with pagination and sorting.
+Searches Datadog [{{< prodname >}}Test Optimization{{< /prodname >}}][24] for flaky tests and returns triage details (failure rate, category, owners, history, CI impact), with pagination and sorting.
 
 - Find active flaky tests for the checkout service owned by `@team-abc`, sorted by failure rate.
 - Show flaky tests on branch `main` for repo `github.com/org/repo`, most recent first.
@@ -2083,7 +2083,7 @@ Aggregates Datadog Test Optimization events to quantify reliability and performa
 ### `search_datadog_test_events`
 *Toolset: **software-delivery***\
 *Permissions Required: `Test Optimization Read`*\
-Searches [Test Optimization][24] test events with filters and returns details on them.
+Searches [{{< prodname >}}Test Optimization{{< /prodname >}}][24] test events with filters and returns details on them.
 
 - Show me failed tests on branch `main` from the last 24 hours.
 - Get test executions for commit `abc123` to see what passed and failed.
@@ -2126,10 +2126,10 @@ Fetches per-file code coverage line data for a repository commit, branch, or pul
 ### `get_datadog_test_optimization_settings`
 *Toolset: **software-delivery***\
 *Permissions Required: `Test Optimization Read`*\
-Retrieves the Test Optimization features that are enabled for a service, including Test Impact Analysis (ITR), Early Flake Detection (EFD), Auto Test Retries (ATR), Failed Test Replay, Code Coverage collection, and PR Comments.
+Retrieves the {{< prodname >}}Test Optimization{{< /prodname >}} features that are enabled for a service, including Test Impact Analysis (ITR), Early Flake Detection (EFD), Auto Test Retries (ATR), Failed Test Replay, Code Coverage collection, and PR Comments.
 
 - Which test optimization features are enabled for the `auth-service`?
-- Show me the Test Optimization settings for my checkout service.
+- Show me the {{< prodname >}}Test Optimization{{< /prodname >}} settings for my checkout service.
 
 ### `get_datadog_flaky_tests_management_policies`
 *Toolset: **software-delivery***\
@@ -2185,8 +2185,8 @@ Edits Datadog Synthetic HTTP API tests.
 Preview and create Datadog Synthetics HTTP API Tests.
 
 - Create Synthetics tests on every endpoint defined in this code file.
-- Create a Synthetics test on `/path/to/endpoint`.
-- Create a Synthetics test that checks if my domain `mycompany.com` stays up.
+- Create a {{< prodname >}}Synthetics{{< /prodname >}} test on `/path/to/endpoint`.
+- Create a {{< prodname >}}Synthetics{{< /prodname >}} test that checks if my domain `mycompany.com` stays up.
 
 ## Widgets
 
@@ -2251,12 +2251,12 @@ Renders tabular data as an interactive visualization (sunburst, treemap, or top 
 
 ## Workflows
 
-Tools for [Workflow Automation][39], including listing, inspecting, executing, and configuring workflows for agent use.
+Tools for [{{< prodname >}}Workflow Automation{{< /prodname >}}][39], including listing, inspecting, executing, and configuring workflows for agent use.
 
 ### `list_datadog_workflows`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Lists and searches [Workflow Automation][39] workflows. Supports filtering by name, tags, owner, handle, and trigger type (such as `monitor`, `schedule`, `api`, or `incident`). Results can be sorted by fields like `name` or `updatedAt`.
+Lists and searches [{{< prodname >}}Workflow Automation{{< /prodname >}}][39] workflows. Supports filtering by name, tags, owner, handle, and trigger type (such as `monitor`, `schedule`, `api`, or `incident`). Results can be sorted by fields like `name` or `updatedAt`.
 
 - Show me all published workflows tagged with `team:platform`.
 - List workflows that have an agent trigger configured.
@@ -2278,7 +2278,7 @@ Executes a published workflow that has an agent trigger, with optional input par
 
 - Run the incident escalation workflow for service `checkout-api` with severity `high`.
 - Execute the deployment rollback workflow for the payments service.
-- Trigger the On-Call notification workflow with the context from this investigation.
+- Trigger the {{< prodname >}}On-Call{{< /prodname >}} notification workflow with the context from this investigation.
 
 **Note**: The workflow must be published and have an agent trigger configured. Use `update_datadog_workflow_with_agent_trigger` to add one if needed.
 

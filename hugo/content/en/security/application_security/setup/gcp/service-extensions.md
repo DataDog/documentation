@@ -27,7 +27,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -35,7 +35,7 @@ App and API Protection is in Preview on Datadog Government site US1-FED.
 To try the preview of App and API Protection Service Extensions for GCP, use the following setup instructions.
 {{< /callout >}}
 
-You can enable App and API Protection with GCP Service Extensions within GCP Cloud Load Balancing. The Datadog App and API Protection Service Extensions integration provides threat detection and blocking capabilities directly in your GCP environment.
+You can enable {{< prodname >}}App and API Protection{{< /prodname >}} with GCP Service Extensions within GCP Cloud Load Balancing. The Datadog App and API Protection Service Extensions integration provides threat detection and blocking capabilities directly in your GCP environment.
 
 ## Prerequisites
 
@@ -53,7 +53,7 @@ You can enable App and API Protection with GCP Service Extensions within GCP Clo
 
 To set up the App and API Protection Service Extension in GCP, use the Google Cloud Console with VM Compute Engine or Terraform scripts, and complete the following steps.
 
-**Note:** Google Cloud provides guides for creating [a callout backend service][4] and [configuring a Service Extension as a traffic extension][5]. The following steps use the same general setup but include custom configurations specific to Datadog's App and API Protection integration.
+**Note:** Google Cloud provides guides for creating [a callout backend service][4] and [configuring a Service Extension as a traffic extension][5]. The following steps use the same general setup but include custom configurations specific to Datadog's {{< prodname >}}App and API Protection{{< /prodname >}} integration.
 
 {{< tabs >}}
 {{% tab "VM Compute Engine" %}}

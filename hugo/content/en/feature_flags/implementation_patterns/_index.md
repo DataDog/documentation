@@ -7,6 +7,6 @@ Explore implementation patterns for integrating Datadog Feature Flags with your 
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/feature_flags/implementation_patterns/local_flag_overrides" >}}Local Flag Overrides with the Multi-Provider Pattern{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/implementation_patterns/opentelemetry" >}}Feature Flags with OpenTelemetry{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/implementation_patterns/opentelemetry" >}}{{< prodname >}}Feature Flags{{< /prodname >}} with OpenTelemetry{{< /nextlink >}}
     {{< nextlink href="/feature_flags/implementation_patterns/serverless" >}}Serverless Environments{{< /nextlink >}}
 {{< /whatsnext >}}

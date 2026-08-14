@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Datadog Forms allow you to collect input, analyze responses, and trigger automations in Datadog. Forms and their responses can be shared across your organization, allowing you to collect and analyze data with your team.
+{{< prodname >}}Datadog Forms{{< /prodname >}} allow you to collect input, analyze responses, and trigger automations in Datadog. Forms and their responses can be shared across your organization, allowing you to collect and analyze data with your team.
 
 Some ways you can use forms:
 - Scaffold services from predefined templates.
@@ -27,11 +27,11 @@ On the [Forms][2] page, click {{< ui >}}New Form{{< /ui >}}, then select a creat
 
 {{< tabs >}}
 {{% tab "Create with AI" %}}
-1. Select {{< ui >}}Create with AI{{< /ui >}} and click {{< ui >}}Continue{{< /ui >}}. The form editor opens with [Bits Chat][100].
-1. Describe the form you want to build in the Bits Chat panel.
+1. Select {{< ui >}}Create with AI{{< /ui >}} and click {{< ui >}}Continue{{< /ui >}}. The form editor opens with [{{< prodname >}}Bits Chat{{< /prodname >}}][100].
+1. Describe the form you want to build in the {{< prodname >}}Bits Chat{{< /prodname >}} panel.
 1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to make the form available to respondents.
 
-You can also ask Bits Chat to create a form from anywhere in Datadog, not only from the Forms editor. See [Create and manage forms with MCP](#create-and-manage-forms-with-mcp).
+You can also ask {{< prodname >}}Bits Chat{{< /prodname >}} to create a form from anywhere in Datadog, not only from the Forms editor. See [Create and manage forms with MCP](#create-and-manage-forms-with-mcp).
 
 [100]: /bits_ai/bits_chat/
 
@@ -146,11 +146,11 @@ After creating a form, you can add an [action][7] or [workflow blueprint][8] tha
 1. The action or blueprint opens in a workflow canvas, where you can [edit it][9].
 1. Click {{< ui >}}Create{{< /ui >}}.
 
-**Note**: Automations triggered by forms appear under [Workflow Automation][10].
+**Note**: Automations triggered by forms appear under [{{< prodname >}}Workflow Automation{{< /prodname >}}][10].
 
 ## Create and manage forms with MCP
 
-Connect an external AI agent to the [Datadog MCP Server][11] to create, update, publish, and read forms and their responses. Enable the `forms` toolset (or `all`) when you [connect to the MCP Server][12]. You can also ask [Bits Chat][13] to build a form from anywhere in Datadog. See [Forms][14] in the Datadog MCP Server tools reference for the full list of available tools.
+Connect an external AI agent to the [{{< prodname >}}Datadog MCP Server{{< /prodname >}}][11] to create, update, publish, and read forms and their responses. Enable the `forms` toolset (or `all`) when you [connect to the MCP Server][12]. You can also ask [{{< prodname >}}Bits Chat{{< /prodname >}}][13] to build a form from anywhere in Datadog. See [Forms][14] in the {{< prodname >}}Datadog MCP Server{{< /prodname >}} tools reference for the full list of available tools.
 
 ## Manage access
 

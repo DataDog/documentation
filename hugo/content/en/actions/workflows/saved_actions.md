@@ -50,7 +50,7 @@ To configure an existing step using a saved action:
 You can preview, edit, or delete your Saved Actions from the [Action Catalog][1] tab.
 
 To find a saved action:
-1. From the [Workflow Automation][2] page, click [**Action Catalog**][1].
+1. From the [{{< prodname >}}Workflow Automation{{< /prodname >}}][2] page, click [**Action Catalog**][1].
 1. Click {{< ui >}}Saved Actions{{< /ui >}} and browse through the list for the Saved Action you'd like to preview, edit, or delete.
 1. Hover over the action and click {{< ui >}}Preview/Edit saved configurations{{< /ui >}} to be presented with a preview of the action.
 1. From the preview screen, select the action to edit or delete it.

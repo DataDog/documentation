@@ -102,7 +102,7 @@ Inside your RUM application, create services for each set of pages owned by a te
 2. For each page of your website, assign a view name and a service following [the instructions for overriding default RUM view names][8].
    - `"purchase"` service for the pages available at `/checkout`, `/payment`, `/confirmOrder`.
    - `"catalog"` service for the pages available at `/beds`, `/chairs/123`, `/search`.
-3. [Upload a source map for each service][9] to view unminified stack traces in Error Tracking.
+3. [Upload a source map for each service][9] to view unminified stack traces in {{< prodname >}}Error Tracking{{< /prodname >}}.
 
 Get insights into the performance or the adoption of a given team's scope by using the `service` attribute in RUM:
 

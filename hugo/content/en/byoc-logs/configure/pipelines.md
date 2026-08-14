@@ -17,7 +17,7 @@ further_reading:
 
 BYOC (Bring Your Own Cloud) Logs includes a processing feature that allows you to parse and enrich logs. It automatically parses logs formatted in JSON. You can define pipelines and processors to extract meaningful information or attributes from semi-structured text, which can then be used for aggregations.
 
-<div class="alert alert-info">BYOC Logs pipelines and processors are designed to match the capabilities of Datadog's <a href="/logs/log_configuration/pipelines/?tab=source">cloud-based log pipelines and processors</a>. </div>
+<div class="alert alert-info">{{< prodname >}}BYOC Logs{{< /prodname >}} pipelines and processors are designed to match the capabilities of Datadog's <a href="/logs/log_configuration/pipelines/?tab=source">cloud-based log pipelines and processors</a>. </div>
 
 For a list of supported and unsupported processors, see [Compatibility with cloud-based pipelines](#compatibility-with-cloud-based-pipelines).
 
@@ -34,7 +34,7 @@ You can configure log processing pipelines using a JSON file that adheres to the
     -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" > pipelines-config.json
    ```
 
-This JSON file can be used directly with BYOC Logs.
+This JSON file can be used directly with {{< prodname >}}BYOC Logs{{< /prodname >}}.
 
 2. To set the configuration in the Helm Chart, provide the path to your JSON configuration file using the `pipelinesConfig` parameter in the BYOC Logs Helm chart:
 
@@ -43,7 +43,7 @@ This JSON file can be used directly with BYOC Logs.
    helm upgrade <RELEASE_NAME> -n <NAMESPACE_NAME> --set-file pipelinesConfig=./pipelines-config.json -f datadog-values.yaml
    ```
 
-   BYOC Logs records an informational message (`Successfully read pipeline config file`) when it successfully reads the configuration file. Any processors defined in the file that are not supported by BYOC Logs are ignored during startup.
+   {{< prodname >}}BYOC Logs{{< /prodname >}} records an informational message (`Successfully read pipeline config file`) when it successfully reads the configuration file. Any processors defined in the file that are not supported by {{< prodname >}}BYOC Logs{{< /prodname >}} are ignored during startup.
    **Note**: Helm imposes a 1 MB size limit on the configuration file due to its underlying etcd storage.
 
 ## Configuration file format
@@ -103,10 +103,10 @@ The order of elements in the array defines the sequential execution order of the
 
 ## Compatibility with cloud-based pipelines
 
-BYOC Logs processing is designed to align closely with cloud-based [Datadog Log Management][3], allowing direct use of existing log pipeline configurations. It achieves this by ignoring unknown or unsupported processors. However, some differences exist:
+{{< prodname >}}BYOC Logs{{< /prodname >}} processing is designed to align closely with cloud-based [Datadog Log Management][3], allowing direct use of existing log pipeline configurations. It achieves this by ignoring unknown or unsupported processors. However, some differences exist:
 - Some filter queries can't be parsed, such as filters with combined wildcards (for example, `@data.message:+*`).
 - Filter on `message` has a different matching behavior (it also affects the category processor).
-- BYOC Logs uses a regex to grep the word, but it should tokenize the text and try to match the tokens. Phrases are also ignored.
+- {{< prodname >}}BYOC Logs{{< /prodname >}} uses a regex to grep the word, but it should tokenize the text and try to match the tokens. Phrases are also ignored.
 - Groks use regular expressions internally. The regex engines may have slightly different matching behavior.
 - Some grok patterns can't be parsed (for example, `%{?>notSpace:db.severity}`).
 

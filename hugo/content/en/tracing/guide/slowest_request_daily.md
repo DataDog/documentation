@@ -54,7 +54,7 @@ With Datadog APM, you can investigate the performance of your endpoints, identif
 5. Click into the {{< ui >}}Host{{< /ui >}} tab, observe the CPU and memory performance of the underlying host while the request was hitting it.
 6. Click {{< ui >}}Open Host Dashboard{{< /ui >}} to view all relevant data about the host
 
-Datadog APM seamlessly integrates with the other Datadog metrics and information - like infrastructure metrics and Logs. Using the flame graph, this information is available to you as well as any [custom metadata][7] you are sending with your traces.
+{{< prodname >}}Datadog APM{{< /prodname >}} seamlessly integrates with the other Datadog metrics and information - like infrastructure metrics and Logs. Using the flame graph, this information is available to you as well as any [custom metadata][7] you are sending with your traces.
 
 ## Further Reading
 

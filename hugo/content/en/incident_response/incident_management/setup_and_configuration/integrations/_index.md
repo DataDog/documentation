@@ -21,9 +21,9 @@ Use integrations in Datadog Incident Management to:
 
 Configure and manage incident-related integrations from the **Incident Settings** page. Connect tools such as Slack or Microsoft Teams to automate notifications, ticket creation, and collaboration during incidents.
 
-To integrate Incident Management with a third-party application, install that application's integration in the [Datadog integrations library][1].
+To integrate {{< prodname >}}Incident Management{{< /prodname >}} with a third-party application, install that application's integration in the [Datadog integrations library][1].
 
-Then, configure the integration for Incident Management by navigating to [**Incidents > Settings > Integrations**][2].
+Then, configure the integration for {{< prodname >}}Incident Management{{< /prodname >}} by navigating to [**Incidents > Settings > Integrations**][2].
 
 ## Setup
 
@@ -40,7 +40,7 @@ Then, configure the integration for Incident Management by navigating to [**Inci
 
 ## Other integrations
 
-Incident Management also integrates with:
+{{< prodname >}}Incident Management{{< /prodname >}} also integrates with:
 
 - [PagerDuty][3] and [Opsgenie][4] to send incident notifications to your on-call engineers.
 - [Webhooks][6] to send incident notifications using webhooks (for example, [sending SMS to Twilio][7]).

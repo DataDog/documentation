@@ -81,17 +81,17 @@ For more information, see the [guide on setting up your mobile device for On-Cal
 
 ### Critical push notifications
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">{{< prodname >}}On-Call{{< /prodname >}} is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 <div class="alert alert-info">
-Critical push notifications are only available for On-Call. If you are setting up On-Call on the Datadog mobile app for the first time, an onboarding flow takes care of notification settings and permissions.
+Critical push notifications are only available for {{< prodname >}}On-Call{{< /prodname >}}. If you are setting up {{< prodname >}}On-Call{{< /prodname >}} on the Datadog mobile app for the first time, an onboarding flow takes care of notification settings and permissions.
 </div>
 {{< tabs >}}
 {{% tab "iOS" %}}
 
 {{< img src="mobile/push_notification/ios_critical_may_2025.png" alt="Override your iOS device's system volume and do-not-disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
-1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}On-Call{{< /ui >}}.
+1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}{{< prodname >}}On-Call{{< /prodname >}}{{< /ui >}}.
 
 2. Enable the {{< ui >}}Critical Alerts{{< /ui >}} toggle. Critical alerts ignore the mute switch and Do Not Disturb. If you enable critical alerts, the system plays a critical alert’s sound regardless of the device’s mute or Do Not Disturb settings.
 
@@ -106,7 +106,7 @@ Critical push notifications are only available for On-Call. If you are setting u
 
 {{< img src="mobile/push_notification/android_critical_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
-1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}On-Call{{< /ui >}}.
+1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}{{< prodname >}}On-Call{{< /prodname >}}{{< /ui >}}.
 
 {{< img src="mobile/push_notification/android_allow_notification_may_2025.png" alt="Override your Android device's system volume and Do Not Disturb mode." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
@@ -139,7 +139,7 @@ You must be logged in to acknowledge and take action for on-call pages. However,
 
 ### Custom sounds and volume for critical push
 
-<div class="alert alert-info"> Volume and sound controls are available only for On-Call notifications. Incident and workflow notifications use your device's default system settings. </div>
+<div class="alert alert-info"> Volume and sound controls are available only for {{< prodname >}}On-Call{{< /prodname >}} notifications. Incident and workflow notifications use your device's default system settings. </div>
 
 For high-urgency notifications, Datadog strongly recommends customizing your system sounds and volume settings. This ensures that alerts are not only more distinct and recognizable, but also more effective in capturing attention. Test your critical push notification preferences to confirm that they behave as expected.
 

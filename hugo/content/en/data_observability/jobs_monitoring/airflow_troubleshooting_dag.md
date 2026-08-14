@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-The OpenLineage validation DAG validates your Airflow OpenLineage configuration and reports any issues that would prevent Data Observability: Jobs Monitoring from receiving events.
+The OpenLineage validation DAG validates your Airflow OpenLineage configuration and reports any issues that would prevent {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring from receiving events.
 
 Run this DAG when:
 

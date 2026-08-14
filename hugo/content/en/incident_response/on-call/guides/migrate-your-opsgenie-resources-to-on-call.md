@@ -45,7 +45,7 @@ The migration follows a six-step wizard-style process in Datadog. Complete all s
 
 ### Step 1: Select team to migrate
 
-1. Go to the [On-Call Teams list][2] and select **Add Team to On-Call** > **Import team from OpsGenie**.
+1. Go to the [On-Call Teams list][2] and select **Add Team to {{< prodname >}}On-Call{{< /prodname >}}** > **Import team from OpsGenie**.
 1. If you have multiple regions configured, select your OpsGenie account's region from the dropdown. 
 1. Datadog loads all your OpsGenie teams in a searchable, paginated list. Select the team to migrate, then select **Next**. A preview pane shows the team's members and settings.
 

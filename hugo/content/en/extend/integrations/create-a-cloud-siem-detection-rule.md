@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This guide provides steps for creating a Cloud SIEM detection rule and outlines best practices for rule configuration.
+This guide provides steps for creating a {{< prodname >}}Cloud SIEM{{< /prodname >}} detection rule and outlines best practices for rule configuration.
 
 [Datadog Cloud SIEM (Security Information and Event Management)][1] unifies developer, operation, and security teams through one platform. Datadog provides a set of out-of-the-box detection rules for many features and integrations. View these rules in your [SIEM Detection Rules list][2].
 
@@ -39,7 +39,7 @@ Within your integration in the Integration Developer Platform, navigate to the C
 
 ## Verify your detection rule in production
 
-To see the out-of-the-box detection rule, the relevant integration tile must be `Installed` in Datadog, and Cloud SIEM must be enabled.
+To see the out-of-the-box detection rule, the relevant integration tile must be `Installed` in Datadog, and {{< prodname >}}Cloud SIEM{{< /prodname >}} must be enabled.
 
 1. Find your detection rule in the [Detection Rules list][2], and click to expand it.
 2. Ensure that its logos render correctly.

@@ -91,7 +91,7 @@ Follow these instructions to install the example application on macOS or Linux.
 
 Which query consumes the most database time? To find out, use the Query Metrics view.
 
-1. On the [Database Monitoring][6] page, click the {{< ui >}}Query metrics{{< /ui >}} tab in the UI.
+1. On the [{{< prodname >}}Database Monitoring{{< /prodname >}}][6] page, click the {{< ui >}}Query metrics{{< /ui >}} tab in the UI.
 
 2. Sort the Normalized Query table by {{< ui >}}Percent time{{< /ui >}} to see the query that the database spends the most time executing.
 
@@ -103,7 +103,7 @@ Which query consumes the most database time? To find out, use the Query Metrics 
 
 In addition to identifying slow queries, Datadog Database Monitoring can help you diagnose them. A query's Explain Plan describes the steps that the database takes to resolve the query. View an Explain Plan by clicking on a sample in the Query Samples view.
 
-1. Navigate to the Query Samples view within [Database Monitoring][6] by selecting the {{< ui >}}Samples{{< /ui >}} tab.
+1. Navigate to the Query Samples view within [{{< prodname >}}Database Monitoring{{< /prodname >}}][6] by selecting the {{< ui >}}Samples{{< /ui >}} tab.
 
 2. In the {{< ui >}}In{{< /ui >}} dropdown, select {{< ui >}}Explain Plans{{< /ui >}}. 
 
@@ -125,9 +125,9 @@ The orders app emits APM traces that are automatically linked to the database qu
 
 2. On the trace flame graph, click a database span to open its details panel.
 
-3. In the details panel, click {{< ui >}}View in DBM{{< /ui >}} to jump directly to that query in Database Monitoring.
+3. In the details panel, click {{< ui >}}View in DBM{{< /ui >}} to jump directly to that query in {{< prodname >}}Database Monitoring{{< /prodname >}}.
 
-Conversely, in a Query Sample in Database Monitoring, click {{< ui >}}View Trace{{< /ui >}} to open the originating APM trace.
+Conversely, in a Query Sample in {{< prodname >}}Database Monitoring{{< /prodname >}}, click {{< ui >}}View Trace{{< /ui >}} to open the originating APM trace.
 
 {{< img src="database_monitoring/dbm_apm_correlation.png" alt="APM trace linked to a DBM query sample" style="width:100%;">}}
 
@@ -161,7 +161,7 @@ For example, you can see the absolute change in query volume in the past hour by
 
 Observe current database activity, resource utilization, and more on out-of-the-box dashboards provided by Datadog Database Monitoring.
 
-To access the dashboards, from the [Database Monitoring][6] page, select the {{< ui >}}Dashboards{{< /ui >}} tab and choose the dashboard that you want to see.
+To access the dashboards, from the [{{< prodname >}}Database Monitoring{{< /prodname >}}][6] page, select the {{< ui >}}Dashboards{{< /ui >}} tab and choose the dashboard that you want to see.
 
 You can clone and modify out-of-the-box dashboards to suit your needs.
 

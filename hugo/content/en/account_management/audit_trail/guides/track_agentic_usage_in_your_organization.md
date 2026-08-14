@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Datadog AI agents, including the Bits fleet (Bits SRE, Bits Chat, Bits Security Analyst) and Bits Agent Builder, can take actions inside your organization on their own or on behalf of a user. Audit Trail attributes these actions to the agent that performed them and, when applicable, to the user who authorized them. Onboarding to this attribution model varies by agent and by action type. This guide walks you through finding agent-driven events, filtering them by agent type, tracing an agent's actions back to the user who delegated them, and checking agent coverage.
+Datadog AI agents, including the Bits fleet (Bits SRE, {{< prodname >}}Bits Chat{{< /prodname >}}, {{< prodname >}}Bits Security Analyst{{< /prodname >}}) and Bits Agent Builder, can take actions inside your organization on their own or on behalf of a user. Audit Trail attributes these actions to the agent that performed them and, when applicable, to the user who authorized them. Onboarding to this attribution model varies by agent and by action type. This guide walks you through finding agent-driven events, filtering them by agent type, tracing an agent's actions back to the user who delegated them, and checking agent coverage.
 
 ## Agent coverage
 
@@ -69,7 +69,7 @@ To retrieve a user's complete activity, including delegated agent actions:
 
 ## Distinguish agent events from human events
 
-Agent-driven events are marked with the agent's name and avatar (for example, Bits Chat) paired with the delegating user, labeled Co-authored by user + agent. This lets you distinguish agent activity from human activity without opening each event.
+Agent-driven events are marked with the agent's name and avatar (for example, {{< prodname >}}Bits Chat{{< /prodname >}}) paired with the delegating user, labeled Co-authored by user + agent. This lets you distinguish agent activity from human activity without opening each event.
 
 ## Further reading
 

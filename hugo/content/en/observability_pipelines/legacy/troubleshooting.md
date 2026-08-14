@@ -14,7 +14,7 @@ If you experience unexpected behavior with Datadog Observability Pipelines (OP),
 
 The Observability Pipelines Worker emits internal logs about its own health. In the Observability Pipelines UI, you can investigate any internal error logs that the Worker process emits for all of its individual components. To see these diagnostic logs:
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][1].
 1. Click into the pipeline you want to investigate.
 1. Click on a component to see the component's side panel.
 1. Click the **Diagnostic Logs** tab to view error logs that the Worker is emitting. Click on a log record to investigate it in the Log Explorer. If there are no logs listed, then the component is not emitting any error logs.

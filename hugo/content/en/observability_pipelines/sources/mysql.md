@@ -16,7 +16,7 @@ products:
 
 Databases often contain large numbers of historical, audit, or operational records. For many legacy, enterprise resource planning (ERP), and IoT-based systems, these databases serve as storage layers for important information. Teams often depend on these records for monitoring, alerting, and creating dashboards in their preferred logging or security tool.
 
-The Observability Pipelines' MySQL source (includes Amazon RDS and AWS Aurora) allows you to connect to your database so you can query and process record data in Observability Pipelines, and route your log events that are stored as database records.
+The Observability Pipelines' MySQL source (includes Amazon RDS and AWS Aurora) allows you to connect to your database so you can query and process record data in {{< prodname >}}Observability Pipelines{{< /prodname >}}, and route your log events that are stored as database records.
 
 **Note**: The Observability Pipelines Worker can only execute read-only SQL queries against supported databases.
 
@@ -33,7 +33,7 @@ You can use this source to:
 
 ## Prerequisites
 
-Before you configure the MySQL source, complete the following prerequisites to ensure that Observability Pipelines can validate credentials, connectivity, and queries before they are used in Observability Pipelines. Use a [tool](#external-tools-for-validating-queries) external to Observability Pipelines, such as MySQL Workbench or third-party tools, to complete these steps.
+Before you configure the MySQL source, complete the following prerequisites to ensure that {{< prodname >}}Observability Pipelines{{< /prodname >}} can validate credentials, connectivity, and queries before they are used in {{< prodname >}}Observability Pipelines{{< /prodname >}}. Use a [tool](#external-tools-for-validating-queries) external to {{< prodname >}}Observability Pipelines{{< /prodname >}}, such as MySQL Workbench or third-party tools, to complete these steps.
 
 1. [Create a database role](#1-create-a-database-role).
 1. [Validate the connection string](#2-validate-the-connection-string).
@@ -55,11 +55,11 @@ The connection string must:
 - Be able to successfully connect to the database from the environment in which the Observability Pipelines Worker runs.
 - Be in this format: `mysql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`.
 - Use the correct host, port, database name, and authentication mechanism.
-- Be tested prior to configuring it in Observability Pipelines, to avoid runtime failures.
+- Be tested prior to configuring it in {{< prodname >}}Observability Pipelines{{< /prodname >}}, to avoid runtime failures.
 
 ### 3. Write, validate, and test SQL queries
 
-Write and test your SQL queries. Validate all SQL queries with a [tool](#external-tools-for-validating-queries) external to Observability Pipelines and prior to configuring it in Observability Pipelines. [Store the SQL query in a local file](#store-the-sql-query-in-a-local-file) for the Worker to execute.
+Write and test your SQL queries. Validate all SQL queries with a [tool](#external-tools-for-validating-queries) external to {{< prodname >}}Observability Pipelines{{< /prodname >}} and prior to configuring it in {{< prodname >}}Observability Pipelines{{< /prodname >}}. [Store the SQL query in a local file](#store-the-sql-query-in-a-local-file) for the Worker to execute.
 
 **Notes**:
 
@@ -108,7 +108,7 @@ Checkpoint values are updated every job run. To monitor the checkpoint value, th
 1. Check the latest Worker log to see the last checkpoint value the Worker received from querying the database.
 1. Check the logs in your destination to see the last checkpoint value it received from the Worker. This value might not be the same as the checkpoint value seen in the latest Worker log. If you want to ensure that every record is sent to the destination at least once, reset the starting checkpoint value in the MySQL source with the destination's last checkpoint value.
 1. To reset the checkpoint value in the MySQL source:
-    1. Navigate to [Observability Pipelines][1].
+    1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][1].
     1. Click on your pipeline and click.
     1. In the MySQL source, enter the destination's last checkpoint value in the {{< ui >}}Checkpoint value{{< /ui >}} field.
 

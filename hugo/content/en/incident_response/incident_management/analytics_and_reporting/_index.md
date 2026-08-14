@@ -42,7 +42,7 @@ Incidents carry three timestamp attributes that influence analytics:
 
 ### Measures
 
-Incident Management reports the following analytic measures, which you can use to power analytic queries in Dashboard and Notebook widgets:
+{{< prodname >}}Incident Management{{< /prodname >}} reports the following analytic measures, which you can use to power analytic queries in Dashboard and Notebook widgets:
 
 {{< collapse-content title="Customer Impact Duration" level="h4" >}}
 The duration during which customers were impacted, based on the impacts defined on the incident.

@@ -17,7 +17,7 @@ Scopes are an authorization mechanism that allow you to limit and define the spe
 
 The best practice for scoping applications is to follow the principle of least privilege. Assign only the minimum scopes necessary for an application to function as intended. This enhances security and provides visibility into how applications interact with your organization's data. For example, a third-party application that only reads dashboards does not need permissions to delete or manage users.
 
-You can use authorization scopes with OAuth2 clients for your [Datadog Apps][1].
+You can use authorization scopes with OAuth2 clients for your [{{< prodname >}}Datadog Apps{{< /prodname >}}][1].
 
 {{< api-scopes >}}
 

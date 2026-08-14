@@ -116,7 +116,7 @@ As you are monitoring your release, this helps you to compare the performance of
 The {{< ui >}}Issues{{< /ui >}} tab lists differences in errors detected for each of the two versions, highlighting:
 - Error Count by Version
 - % of Views with Errors by Version
-- Error Tracking issues
+- {{< prodname >}}Error Tracking{{< /prodname >}} issues
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-comparison-error.png" alt="Browser Deployment Tracking Comparison Errors" style="width:75%;">}}
 
@@ -163,7 +163,7 @@ As you are monitoring your release, this makes it easy for you to compare the pe
 The {{< ui >}}Issues{{< /ui >}} tab lists differences in errors detected for each of the two versions, highlighting:
 - Error Count by Version
 - % of Views with Errors by Version
-- Error Tracking issues
+- {{< prodname >}}Error Tracking{{< /prodname >}} issues
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-comparison-error.png" alt="Mobile Deployment Tracking Comparison Errors" style="width:75%;">}}
 

@@ -165,7 +165,7 @@ The additional repository context helps Bits AI distinguish true positives from 
 
 ## Remediation
 
-Datadog SAST uses [Bits Code][10] to generate code fixes for vulnerabilities. You can also create an [automation][13] to automatically generate fixes for vulnerabilities as they are found or on a schedule.
+Datadog SAST uses [{{< prodname >}}Bits Code{{< /prodname >}}][10] to generate code fixes for vulnerabilities. You can also create an [automation][13] to automatically generate fixes for vulnerabilities as they are found or on a schedule.
 
 To view and remediate vulnerabilities:
 
@@ -178,9 +178,9 @@ To view and remediate vulnerabilities:
 
 ### Single fix
 
-Use **Single fix** to open a Bits Code session to fix this single vulnerability. You can review the proposed diff, ask follow-up questions, edit the patch, and create a pull request to apply the remediation to your source code repository.
+Use **Single fix** to open a {{< prodname >}}Bits Code{{< /prodname >}} session to fix this single vulnerability. You can review the proposed diff, ask follow-up questions, edit the patch, and create a pull request to apply the remediation to your source code repository.
 
-View all Bits Code sessions on {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][7].
+View all {{< prodname >}}Bits Code{{< /prodname >}} sessions on {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}{{< prodname >}}Bits Code{{< /prodname >}}{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][7].
 
 ### Create automation
 
@@ -188,14 +188,14 @@ Use **Create automation** to create a [Bits Code automation][13] to generate fix
 
 Selecting this option opens an {{< ui >}}Automate with Bits{{< /ui >}} modal with the {{< ui >}}Remediate SAST vulnerabilities{{< /ui >}} action pre-filled. Complete the form, including specifying a trigger and output, then click {{< ui >}}Create Automation{{< /ui >}}. See [Automations][13] to learn more about actions, triggers, and outputs.
 
-View all Bits Code automations on {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Automations{{< /ui >}}][14].
+View all {{< prodname >}}Bits Code{{< /prodname >}} automations on {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}{{< prodname >}}Bits Code{{< /prodname >}}{{< /ui >}} > [{{< ui >}}Automations{{< /ui >}}][14].
 
 ### Remediation session details
 
 Each Bits Code session shows the life cycle of an AI-generated fix so you can review and validate changes before merging. It includes:
 
 - The original security finding and proposed code change
-- An explanation of how and why Bits Code generated the fix
+- An explanation of how and why {{< prodname >}}Bits Code{{< /prodname >}} generated the fix
 - CI results (if enabled) to validate the patch is safe to deploy
 - Options to refine the fix or {{< ui >}}Create PR{{< /ui >}} to apply the changes to your source code repository
 

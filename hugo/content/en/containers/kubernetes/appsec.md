@@ -29,19 +29,19 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
-{{< learning-center-callout header="App and API Protection for Kubernetes is in Preview" btn_title="Join the preview" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/kubernetes-gateway-security-injector/">}}
-  App and API Protection for Kubernetes automatically configures supported Kubernetes ingress proxies and gateways. Try it today!
+{{< learning-center-callout header="{{< prodname >}}App and API Protection{{< /prodname >}} for Kubernetes is in Preview" btn_title="Join the preview" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/kubernetes-gateway-security-injector/">}}
+  {{< prodname >}}App and API Protection{{< /prodname >}} for Kubernetes automatically configures supported Kubernetes ingress proxies and gateways. Try it today!
 {{< /learning-center-callout >}}
 
-This page describes how to set up [App and API Protection][11] for Kubernetes to automatically configure supported Kubernetes ingress proxies and gateways to run API discovery, threat detection, and inline blocking at the edge of the infrastructure.
+This page describes how to set up [{{< prodname >}}App and API Protection{{< /prodname >}}][11] for Kubernetes to automatically configure supported Kubernetes ingress proxies and gateways to run API discovery, threat detection, and inline blocking at the edge of the infrastructure.
 
 ## Overview
 
-App and API Protection for Kubernetes automatically configures supported ingress proxies and gateways in your Kubernetes cluster to enable Application Security monitoring. This eliminates the need for manual proxy configuration and provides API-wide security coverage without modifying individual services or deploying tracers across your application fleet.
+{{< prodname >}}App and API Protection{{< /prodname >}} for Kubernetes automatically configures supported ingress proxies and gateways in your Kubernetes cluster to enable Application Security monitoring. This eliminates the need for manual proxy configuration and provides API-wide security coverage without modifying individual services or deploying tracers across your application fleet.
 
 ### What performs the automatic configuration?
 
-App and API Protection for Kubernetes uses a Kubernetes controller (running in the Datadog Cluster Agent) that:
+{{< prodname >}}App and API Protection{{< /prodname >}} for Kubernetes uses a Kubernetes controller (running in the Datadog Cluster Agent) that:
 - **Automatically detects** supported proxies in your cluster
 - **Configures proxies** to route traffic through an external Application Security processor
 - **Enables threat detection** for all traffic passing through your ingress layer
@@ -69,7 +69,7 @@ For the list of supported proxies and proxy-specific setup steps, see the [setup
 
 ## Prerequisites
 
-Before enabling App and API Protection for Kubernetes, verify that you have:
+Before enabling {{< prodname >}}App and API Protection{{< /prodname >}} for Kubernetes, verify that you have:
 
 - A running Kubernetes cluster (version 1.20 or later)
 - [Datadog Cluster Agent 7.80.2 or later][1] installed and configured in your cluster
@@ -78,7 +78,7 @@ Before enabling App and API Protection for Kubernetes, verify that you have:
 
 ## How it works
 
-App and API Protection for Kubernetes supports two deployment modes:
+{{< prodname >}}App and API Protection{{< /prodname >}} for Kubernetes supports two deployment modes:
 
 - **Sidecar mode** (default): The Application Security processor runs as a sidecar container injected directly into each gateway pod. No separate processor deployment is needed, and the processor scales automatically with your gateway pods.
 - **External mode**: A single, centralized Application Security processor deployment serves all gateway traffic in your cluster. Use this mode when you want to manage one shared processor for the whole cluster.
@@ -361,7 +361,7 @@ The Datadog Cluster Agent produces events for each operation that results in fai
 
 #### Test traffic processing
 
-Send requests through your gateway and verify they appear in the Datadog [App and API Protection][5] UI:
+Send requests through your gateway and verify they appear in the Datadog [{{< prodname >}}App and API Protection{{< /prodname >}}][5] UI:
 
 1. Navigate to [Security > Application Security][5] in Datadog.
 2. Look for security signals from your gateway traffic.
@@ -453,7 +453,7 @@ spec:
 
 Resources with the `appsec.datadoghq.com/enabled: "false"` label are ignored. This is useful when you want to:
 - Manually configure specific gateways
-- Temporarily disable App and API Protection for testing
+- Temporarily disable {{< prodname >}}App and API Protection{{< /prodname >}} for testing
 - Exclude certain gateways from security monitoring
 
 **Note**: By default, all resources are included. Only resources with the label explicitly set to `"false"` are excluded.

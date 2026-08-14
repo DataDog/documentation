@@ -36,7 +36,7 @@ Code-based custom instrumentation allows for precise monitoring of specific comp
 
 Code-based custom instrumentation involves embedding tracing code directly into your application code. This allows for the programmatic creation, modification, or deletion of traces to send to Datadog.
 
-<div class="alert alert-info">To add custom instrumentation at specific application code locations from the Datadog UI, without code changes, see <a href="https://docs.datadoghq.com/tracing/dynamic_instrumentation/">Dynamic Instrumentation</a>.</div>
+<div class="alert alert-info">To add custom instrumentation at specific application code locations from the Datadog UI, without code changes, see <a href="https://docs.datadoghq.com/tracing/dynamic_instrumentation/">{{< prodname >}}Dynamic Instrumentation{{< /prodname >}}</a>.</div>
 
 ## Getting started
 

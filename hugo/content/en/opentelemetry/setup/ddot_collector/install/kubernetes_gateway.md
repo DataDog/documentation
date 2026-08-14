@@ -1341,7 +1341,7 @@ Deploy each layer as a separate Helm release, starting from the final layer and 
 
 ## View gateway pods on Fleet Automation
 
-The DDOT Collector gateway includes the [Datadog extension][11] by default. This extension exports Collector build information and configurations to Datadog, allowing you to monitor your telemetry pipeline from Infrastructure Monitoring and Fleet Automation.
+The DDOT Collector gateway includes the [Datadog extension][11] by default. This extension exports Collector build information and configurations to Datadog, allowing you to monitor your telemetry pipeline from {{< prodname >}}Infrastructure Monitoring{{< /prodname >}} and Fleet Automation.
 
 To view your gateway pods:
 

@@ -12,7 +12,7 @@ products:
 
 ## Overview
 
-Use Observability Pipelines' Datadog Metrics destination ({{< tooltip glossary="preview" case="title" >}}) to send metrics to Datadog. You can also use [AWS PrivateLink](#aws-privatelink) to send metrics from Observability Pipelines to Datadog.
+Use Observability Pipelines' Datadog Metrics destination ({{< tooltip glossary="preview" case="title" >}}) to send metrics to Datadog. You can also use [AWS PrivateLink](#aws-privatelink) to send metrics from {{< prodname >}}Observability Pipelines{{< /prodname >}} to Datadog.
 
 ## Setup
 
@@ -46,7 +46,7 @@ There are no secret identifiers for this destination.
 
 ## AWS PrivateLink
 
-To send metrics from Observability Pipelines to Datadog using AWS PrivateLink, see [Connect to Datadog over AWS PrivateLink][3] for setup instructions. The two endpoints you need to set up are:
+To send metrics from {{< prodname >}}Observability Pipelines{{< /prodname >}} to Datadog using AWS PrivateLink, see [Connect to Datadog over AWS PrivateLink][3] for setup instructions. The two endpoints you need to set up are:
 
 - Metrics: {{< region-param key=metrics_endpoint_private_link code="true" >}}
 - Remote Configuration: {{< region-param key=remote_config_endpoint_private_link code="true" >}}

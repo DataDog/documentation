@@ -27,7 +27,7 @@ A new flaky test is a test that:
 
 Before you begin:
 
-- Set up [Test Optimization][1] for your language.
+- Set up [{{< prodname >}}Test Optimization{{< /prodname >}}][1] for your language.
 - To improve detection of new flaky tests, enable [Early Flake Detection][4]. See [supported features][5].
 
 ## How it works

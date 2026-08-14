@@ -9,11 +9,11 @@ aliases:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
-App and API Protection provides serverless capability for the following platforms and libraries:
+{{< prodname >}}App and API Protection{{< /prodname >}} provides serverless capability for the following platforms and libraries:
 
 {{< card-grid card_width="225px" image_width="200" >}}
   {{< image-card href="/security/application_security/serverless/#aws-lambda" src="integrations_logos/amazon_lambda.png" alt="AWS Lambda" >}}
@@ -65,7 +65,7 @@ Go
 
 ## Google Cloud Run
 
-<div class="alert alert-info">Google Cloud Run support for App and API Protection serverless is in Preview</a>.</div>
+<div class="alert alert-info">Google Cloud Run support for {{< prodname >}}App and API Protection{{< /prodname >}} serverless is in Preview</a>.</div>
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
    

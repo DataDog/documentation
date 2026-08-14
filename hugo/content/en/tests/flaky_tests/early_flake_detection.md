@@ -39,11 +39,11 @@ You can choose to block the merge of the feature branch with a [PR Gate][4]. For
 
 ## Setup
 
-Before implementing Early Flake Detection, you must configure [Test Optimization][6] for your development environment. If you are reporting data through the Datadog Agent, use v6.40 or 7.40 and later.
+Before implementing Early Flake Detection, you must configure [{{< prodname >}}Test Optimization{{< /prodname >}}][6] for your development environment. If you are reporting data through the Datadog Agent, use v6.40 or 7.40 and later.
 
 ### Configuration
 
-After you set up your Datadog library for Test Optimization, configure Early Flake Detection in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][7]. You can apply the setting at the organization, repository, or test service level.
+After you set up your Datadog library for {{< prodname >}}Test Optimization{{< /prodname >}}, configure Early Flake Detection in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][7]. You can apply the setting at the organization, repository, or test service level.
 
 {{< img src="continuous_integration/early_flake_detection_test_settings-1.png" alt="Early Flake Detection toggle in CI/CD Settings." style="width:100%" >}}
 

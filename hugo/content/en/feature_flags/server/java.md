@@ -543,7 +543,7 @@ Before checking infrastructure, confirm the flag itself is set up correctly:
 5. Confirm that application code initializes the Datadog OpenFeature provider.
 6. Confirm that `DD_API_KEY`, `DD_SITE`, and `DD_ENV` are configured in the application process.
 7. Confirm that the application can make outbound HTTPS requests to Datadog.
-8. Enable `DD_TRACE_DEBUG=true` and check for authentication, timeout, or malformed-payload messages from the Feature Flags agentless endpoint.
+8. Enable `DD_TRACE_DEBUG=true` and check for authentication, timeout, or malformed-payload messages from the {{< prodname >}}Feature Flags{{< /prodname >}} agentless endpoint.
 
 #### Agent Remote Configuration
 
@@ -560,7 +560,7 @@ Before checking infrastructure, confirm the flag itself is set up correctly:
 
 #### Enable debug logging
 
-Set `DD_TRACE_DEBUG=true` to enable Feature Flags startup messages. For the default agentless source, confirm that CDN polling starts after provider initialization.
+Set `DD_TRACE_DEBUG=true` to enable {{< prodname >}}Feature Flags{{< /prodname >}} startup messages. For the default agentless source, confirm that CDN polling starts after provider initialization.
 
 With `remote_config`, the provider uses the bridge in the Java agent. An older agent produces a provider initialization error that states the required agent version. It does not fall back to CDN delivery.
 

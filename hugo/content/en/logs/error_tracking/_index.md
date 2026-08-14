@@ -27,11 +27,11 @@ further_reading:
 
 {{% error-tracking-description %}}
 
-Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] documentation. To view the Error Tracking Explorer for Logs in Datadog, navigate to [{{< ui >}}Error Tracking{{< /ui >}}][1].
+Take a tour of key {{< prodname >}}Error Tracking{{< /prodname >}} features in the [Error Tracking Explorer][3] documentation. To view the Error Tracking Explorer for Logs in Datadog, navigate to [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Setup
 
-Error Tracking for Logs processes properly configured error logs with stack traces.
+{{< prodname >}}Error Tracking{{< /prodname >}} for Logs processes properly configured error logs with stack traces.
 
 {{< whatsnext desc="To get started with Datadog Error Tracking for Logs, see the corresponding documentation for your framework:" >}}
     {{< nextlink href="logs/error_tracking/browser_and_mobile" >}}Browser and Mobile{{< /nextlink >}}

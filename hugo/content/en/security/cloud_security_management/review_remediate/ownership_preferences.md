@@ -367,7 +367,7 @@ Replace `api.datadoghq.com` with your [Datadog site URL][4] if applicable (for e
    - **Tag mappings** add ownership candidates based on your tag rules.
    - **Exclusions** remove unwanted handles from results.
    - **Custom prompt text** guides the AI inference engine.
-5. Updated results appear in the Cloud Security posture management UI.
+5. Updated results appear in the {{< prodname >}}Cloud Security{{< /prodname >}} posture management UI.
 
 Changes to your reference table take effect within **24 hours**.
 

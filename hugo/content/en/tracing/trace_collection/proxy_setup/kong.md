@@ -15,7 +15,7 @@ aliases:
 - /tracing/setup_overview/proxy_setup/
 ---
 
-Datadog APM is available for [Kong Gateway][1] using the [kong-plugin-ddtrace][2] plugin.
+{{< prodname >}}Datadog APM{{< /prodname >}} is available for [Kong Gateway][1] using the [kong-plugin-ddtrace][2] plugin.
 
 ## Installation
 

@@ -21,7 +21,7 @@ integration_id: "amazon-guardduty"
 
 ## Overview
 
-Datadog integrates with Amazon GuardDuty through a Lambda function that ships GuardDuty findings to Datadog's Log Management solution.
+Datadog integrates with Amazon GuardDuty through a Lambda function that ships GuardDuty findings to Datadog's {{< prodname >}}Log Management{{< /prodname >}} solution.
 
 ## Setup
 

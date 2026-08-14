@@ -87,7 +87,7 @@ Customize the Security Inbox by defining specific conditions that determine whic
 
 ### Automatically create tickets to route findings into engineering workflows
 
-Route security findings directly into Jira or Case Management as soon as they are discovered. This allows you to:
+Route security findings directly into Jira or {{< prodname >}}Case Management{{< /prodname >}} as soon as they are discovered. This allows you to:
 
 - **Eliminate manual triage**: Automatically generate tickets for findings that match your criteria, removing the need for security teams to create tickets by hand.
 - **Integrate with existing engineering workflows**: Meet engineering teams where they already work by routing security work into the same tools they use for other tasks.

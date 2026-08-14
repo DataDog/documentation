@@ -10,16 +10,16 @@ algolia:
 ---
 
 ## Overview
-Correlate RUM and Agent Observability sessions to gain more visibility on how your web application interacts with AI Agents. This correlation helps you understand the complete user journey by connecting frontend user interactions with backend AI processing.
+Correlate RUM and {{< prodname >}}Agent Observability{{< /prodname >}} sessions to gain more visibility on how your web application interacts with AI Agents. This correlation helps you understand the complete user journey by connecting frontend user interactions with backend AI processing.
 
-The link between RUM and Agent Observability is created by forwarding the RUM Session ID to the Agent Observability SDK.
+The link between RUM and {{< prodname >}}Agent Observability{{< /prodname >}} is created by forwarding the RUM Session ID to the Agent Observability SDK.
 
 ## Prerequisites
 
 Before you begin, ensure you have:
 - [RUM Browser SDK][1] installed and configured in your web application
 - [Agent Observability SDK][2] installed in your backend service
-- Datadog account with [RUM][3] and [Agent Observability][4] enabled
+- Datadog account with [RUM][3] and [{{< prodname >}}Agent Observability{{< /prodname >}}][4] enabled
 - AI Agent endpoint that your web application can call
 
 ## Setup
@@ -59,7 +59,7 @@ Update your web application to include the RUM Session ID in every call to your 
 
 ### Step 3: Update your backend handler
 
-Modify your server-side code to extract the session ID and pass it to the Agent Observability SDK. For detailed Agent Observability setup, see the [Agent Observability Setup Guide][4].
+Modify your server-side code to extract the session ID and pass it to the Agent Observability SDK. For detailed {{< prodname >}}Agent Observability{{< /prodname >}} setup, see the [Agent Observability Setup Guide][4].
 
 ```python
 # Read the session_id from the incoming request

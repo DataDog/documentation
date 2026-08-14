@@ -15,7 +15,7 @@ In Datadog, [**Containers Explorer**][2] provides real-time visibility into all 
 
 {{< img src="security/vulnerabilities/container_images.png" alt="The container images view highlighting vulnerabilities and container column sort feature" width="80%">}}
 
-[**Container Images Explorer**][4] provides insights into every image used in your environment to help you assess your images' deployment footprint, including [Cloud Security][5] vulnerabilities. To configure this page, read the [Container Images Explorer documentation][6]. 
+[**Container Images Explorer**][4] provides insights into every image used in your environment to help you assess your images' deployment footprint, including [{{< prodname >}}Cloud Security{{< /prodname >}}][5] vulnerabilities. To configure this page, read the [Container Images Explorer documentation][6]. 
 
 ## Explore Kubernetes resources
 
@@ -33,7 +33,7 @@ Select the [**Autoscaling**][11] tab in the Kubernetes section to view scaling r
 
 ### Kubernetes Remediation
 
-Select the [**Remediation**][13] tab in the Kubernetes section to investigate and remediate errors with [Bits Code][14]. For more information, read the [Bits Remediation documentation][15].
+Select the [**Remediation**][13] tab in the Kubernetes section to investigate and remediate errors with [{{< prodname >}}Bits Code{{< /prodname >}}][14]. For more information, read the [Bits Remediation documentation][15].
 
 {{< callout url="https://www.datadoghq.com/product-preview/kubernetes-remediation/"
  btn_hidden="false" header="Join the Preview!">}}

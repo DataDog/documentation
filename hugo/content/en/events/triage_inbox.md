@@ -44,7 +44,7 @@ On the right hand split-view side panel, you can perform the following:
 
 - {{< ui >}}Tag and comment{{< /ui >}}: Collaborate with teammates in the case timeline by tagging users and adding notes.
 - {{< ui >}}Send notifications{{< /ui >}}: Alert stakeholders with Slack, Microsoft Teams, email, or webhooks.
-- {{< ui >}}Escalate issues{{< /ui >}}: Trigger an incident or page an on-call responder using [Incident Management][1], [On-Call][2], [Workflow Automation][3], or third-party tools.
+- {{< ui >}}Escalate issues{{< /ui >}}: Trigger an incident or page an on-call responder using [{{< prodname >}}Incident Management{{< /prodname >}}][1], [{{< prodname >}}On-Call{{< /prodname >}}][2], [{{< prodname >}}Workflow Automation{{< /prodname >}}][3], or third-party tools.
 - {{< ui >}}Sync with external tools{{< /ui >}}: Keep Jira and ServiceNow records in sync to ensure external stakeholders stay up to date.
 
    {{< img src="/events/triage_inbox/event_mgmt_inbox_right_hand_panel.png" alt="Event Management Inbox right hand panel, highlighting Escalate drop down" style="width:100%;" >}}

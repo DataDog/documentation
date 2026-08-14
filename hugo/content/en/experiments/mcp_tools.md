@@ -23,7 +23,7 @@ algolia:
 
 ## Overview
 
-The [Datadog MCP Server][1] lets AI agents interact with your experiment data through the [Model Context Protocol (MCP)][2]. The `experiments` toolset gives AI clients like Cursor, Claude Code, OpenAI Codex, and [Bits AI][6] structured access to your experiments, metrics, and diagnostic data.
+The [{{< prodname >}}Datadog MCP Server{{< /prodname >}}][1] lets AI agents interact with your experiment data through the [Model Context Protocol (MCP)][2]. The `experiments` toolset gives AI clients like Cursor, Claude Code, OpenAI Codex, and [Bits AI][6] structured access to your experiments, metrics, and diagnostic data.
 
 The toolset becomes most powerful when your AI client can also read your codebase—combining live experiment state with how the associated feature flag is installed in your code.
 
@@ -49,7 +49,7 @@ For metric movements, `get_metric_definition` returns the underlying event query
 
 ## Setup
 
-The `experiments` toolset is not enabled by default. To enable it, add `experiments` to the `toolsets` parameter when connecting to the Datadog MCP Server. See [Set Up the Datadog MCP Server][3] for connection instructions and toolset configuration.
+The `experiments` toolset is not enabled by default. To enable it, add `experiments` to the `toolsets` parameter when connecting to the {{< prodname >}}Datadog MCP Server{{< /prodname >}}. See [Set Up the Datadog MCP Server][3] for connection instructions and toolset configuration.
 
 For feature flag management tools used alongside experiments—creating flags, syncing allocations, checking canary results—see [Feature Flags MCP Tools][4].
 

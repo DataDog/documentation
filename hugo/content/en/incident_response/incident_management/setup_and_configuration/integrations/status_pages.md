@@ -17,16 +17,16 @@ further_reading:
 
 Status Pages is a way to keep internal and external stakeholders informed during service disruptions by publishing real-time updates about system health.
 
-This integration enables responders to publish and update status page notices directly from Incident Management.
+This integration enables responders to publish and update status page notices directly from {{< prodname >}}Incident Management{{< /prodname >}}.
 - Eliminate context switching by managing public communications without leaving your incident workflow
 - Publish notices quickly and consistently during high-severity incidents
 - Keep incident timelines and public-facing updates in sync to reduce confusion and messaging mistakes
 
 ## Prerequisites
 
-At least one status page is required to enable the Status Pages integration for Incident Management.
+At least one status page is required to enable the Status Pages integration for {{< prodname >}}Incident Management{{< /prodname >}}.
 
-You must have a role with the Incident Settings Write permission to enable the Status Pages integration for Incident Management.
+You must have a role with the Incident Settings Write permission to enable the Status Pages integration for {{< prodname >}}Incident Management{{< /prodname >}}.
 
 ## Setup
 

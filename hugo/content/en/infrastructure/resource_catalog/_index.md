@@ -28,9 +28,9 @@ further_reading:
 
 ## Overview
 
-Datadog Resource Catalog is the central hub of all your infrastructure resources. It can help you manage resource compliance, investigate root causes for incidents, and close observability gaps on your infrastructure. With the Resource Catalog, you can understand key resource information such as metadata, ownership, configurations, relationship between assets, and active security risks for your resources.
+Datadog Resource Catalog is the central hub of all your infrastructure resources. It can help you manage resource compliance, investigate root causes for incidents, and close observability gaps on your infrastructure. With the {{< prodname >}}Resource Catalog{{< /prodname >}}, you can understand key resource information such as metadata, ownership, configurations, relationship between assets, and active security risks for your resources.
 
-Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to gather data from cloud resources such as hosts, databases, and storage services.
+{{< prodname >}}Resource Catalog{{< /prodname >}} leverages Datadog cloud integrations and the Datadog Agent to gather data from cloud resources such as hosts, databases, and storage services.
 
 {{< img src="/infrastructure/resource_catalog/resource_catalog_new_2.png" alt="The Resource Catalog page showing the Catalog tab, grouped by resource type" width="100%">}}
 
@@ -54,7 +54,7 @@ Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to g
 
 ## Setup
 
-By default, when you navigate to the Resource Catalog, you are able to see Datadog Agent monitored hosts, as well as cloud resources crawled for other Datadog products such as CNM (Cloud Network Monitoring), and DBM (Database Monitoring). To view additional cloud resources in the Resource Catalog, toggle on **extend resource collection** from the [Resource Catalog][5] setup page. 
+By default, when you navigate to the {{< prodname >}}Resource Catalog{{< /prodname >}}, you are able to see Datadog Agent monitored hosts, as well as cloud resources crawled for other Datadog products such as CNM (Cloud Network Monitoring), and DBM ({{< prodname >}}Database Monitoring{{< /prodname >}}). To view additional cloud resources in the {{< prodname >}}Resource Catalog{{< /prodname >}}, toggle on **extend resource collection** from the [{{< prodname >}}Resource Catalog{{< /prodname >}}][5] setup page. 
 
 {{< img src="/infrastructure/resource_catalog/resource_catalog_settings.png" alt="The Resource Catalog configuration page for extending resource collection" width="100%">}}
 
@@ -71,7 +71,7 @@ On the [Resource Catalog page][2], explore the cloud resources in your Datadog o
 
 The Catalog tab shows context for a resource, including team ownership and related services. It helps you proactively identify and fill in missing ownership information before it's needed in an incident. The Resource Catalog also shows resource attributes customized for each resource type. You can search resources by specific attributes such as the instance type for a host, or the version for a database.
 
-**Note**: If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, then select the toggle for the teams to which you're assigned to view only the resources assigned to those teams. In addition, you can export your Resource Catalog list as a CSV file from the top right corner of the list.
+**Note**: If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, then select the toggle for the teams to which you're assigned to view only the resources assigned to those teams. In addition, you can export your {{< prodname >}}Resource Catalog{{< /prodname >}} list as a CSV file from the top right corner of the list.
 
 To access the relevant cloud console for any resource in your list, click on a resource to open a side panel. Then, click the **Open Resource** dropdown in the top right corner to be redirected.
 

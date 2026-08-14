@@ -12,7 +12,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -26,7 +26,7 @@ The **Ask Bits** panel is a contextual entry point to Bits AI for questions abou
 
 ## App Instrumentation
 
-The **App Instrumentation** section reports how broadly App and API Protection (AAP) is activated across your services. **Threat detection coverage** shows how many services are actively detecting threats in real time compared to your total services, and **Recommended services activated** tracks your progress in enabling AAP on at-risk services identified by known vulnerabilities and suspicious traffic. From this section you can protect additional services or view the services already protected.
+The **App Instrumentation** section reports how broadly {{< prodname >}}App and API Protection{{< /prodname >}} (AAP) is activated across your services. **Threat detection coverage** shows how many services are actively detecting threats in real time compared to your total services, and **Recommended services activated** tracks your progress in enabling AAP on at-risk services identified by known vulnerabilities and suspicious traffic. From this section you can protect additional services or view the services already protected.
 
 ## Attack Coverage
 

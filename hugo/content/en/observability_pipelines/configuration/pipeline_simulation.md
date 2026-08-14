@@ -21,7 +21,7 @@ products:
 
 ## Overview
 
-When you configure or edit a pipeline in Observability Pipelines, you often have to update filter queries, sampling rules, or [Packs][12] that transform your telemetry. These changes can impact downstream monitors, dashboards, and detection rules. Therefore, it's important to test and validate how your changes affect your production data before you deploy those changes.
+When you configure or edit a pipeline in {{< prodname >}}Observability Pipelines{{< /prodname >}}, you often have to update filter queries, sampling rules, or [Packs][12] that transform your telemetry. These changes can impact downstream monitors, dashboards, and detection rules. Therefore, it's important to test and validate how your changes affect your production data before you deploy those changes.
 
 Use Pipeline Simulation to preview how your processors, volume control rules, and [Packs][12] modify your data before deploying your pipeline configuration. This helps ensure your processors target the right data and modify it as expected. You can test your configuration with live data sent through the pipeline or import your own sample data.
 
@@ -56,7 +56,7 @@ If you are using a firewall, add these domains to the allowlist:
 
 Before running a simulation, you need to capture sample data to test against. Pipeline Simulation lets you capture live data from an active pipeline, reuse previously captured samples, or import your own data.
 
-1. Navigate to [Observability Pipelines][3].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][3].
 1. [Set up a new pipeline][4] or select an existing pipeline and click {{< ui >}}Edit Pipeline{{< /ui >}} on the top right side of the page.
 1. On the pipeline's edit page, you can expand a processor in a processor group to view its read-only configuration. To edit any processors, capture data, and run a simulation, click {{< ui >}}Edit{{< /ui >}} on a processor group.
   {{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_edit_processor_group.png" alt="A pipeline's edit page with the Edit button on a processor group highlighted." style="width:100%;" >}}
@@ -73,7 +73,7 @@ The status of a pipeline determines whether a simulation can be run with live da
 
 ### Capture live data from your pipeline to run a simulation with production data
 
-For active pipelines, Observability Pipelines automatically runs a Live Capture if a previously saved capture, whether from imported data or a live capture, is not available.
+For active pipelines, {{< prodname >}}Observability Pipelines{{< /prodname >}} automatically runs a Live Capture if a previously saved capture, whether from imported data or a live capture, is not available.
 
 To run a capture for a specific set of data:
 
@@ -339,7 +339,7 @@ After you use Live Capture to pull data from your pipeline, the results are stor
 
 After you have captured data for your pipeline simulation, edit your pipeline processors and run a simulation.
 
-1. Navigate to [Observability Pipelines][3].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][3].
 1. Select your pipeline and click {{< ui >}}Edit Pipeline{{< /ui >}} on the top right side of the page.
 1. On the pipeline edit page, click {{< ui >}}Edit{{< /ui >}} on a processor group to add or edit processors in your pipeline.
 1. You can:

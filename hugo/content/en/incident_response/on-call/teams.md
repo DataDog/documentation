@@ -10,7 +10,7 @@ further_reading:
 
 Teams are the central organizational unit of [Datadog On-Call][2]. Pages are sent to a Team, and the Team's schedules or escalation policies route the Page to an appropriate Team member.
 
-On-Call Teams are an extension of [Datadog Teams][1]. On-Call Teams are listed on the [Teams][3] overview page, alongside Teams that do not perform on-call duties. Datadog recommends that you use existing Teams for your On-Call configuration whenever possible, as this increases your On-Call Team's discoverability.
+On-Call Teams are an extension of [Datadog Teams][1]. On-Call Teams are listed on the [Teams][3] overview page, alongside Teams that do not perform on-call duties. Datadog recommends that you use existing Teams for your {{< prodname >}}On-Call{{< /prodname >}} configuration whenever possible, as this increases your On-Call Team's discoverability.
 
 ### Onboard a new or existing Team
 

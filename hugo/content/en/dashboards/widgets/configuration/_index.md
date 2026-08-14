@@ -56,7 +56,7 @@ Supported data sources for joins include (but are not limited to):
 - Static Analysis
 - CI Tests
 - Compliance Findings
-- Product Analytics
+- {{< prodname >}}Product Analytics{{< /prodname >}}
 - Reference Tables
 
 Using joins and data previews makes it easier to select the right fields and enrich your graphs with relevant details, improving the quality and usefulness of your dashboards.

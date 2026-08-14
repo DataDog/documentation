@@ -52,7 +52,7 @@ The typical flow:
 
 ## Building evaluators
 
-There are two ways to define an evaluator using Agent Observability: class-based and function-based. In addition to these evaluators, Agent Observability has integrations with open source evaluation frameworks, such as [DeepEval][6] and [Pydantic][], that can be used in Agent Observability Experiments.
+There are two ways to define an evaluator using {{< prodname >}}Agent Observability{{< /prodname >}}: class-based and function-based. In addition to these evaluators, {{< prodname >}}Agent Observability{{< /prodname >}} has integrations with open source evaluation frameworks, such as [DeepEval][6] and [Pydantic][], that can be used in Agent Observability Experiments.
 
 | | Class-based | Function-based |
 |---|---|---|

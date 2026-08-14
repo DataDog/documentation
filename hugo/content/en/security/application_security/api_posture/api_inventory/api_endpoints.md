@@ -5,7 +5,7 @@ description: Monitor API traffic to assess endpoint risk, authentication, sensit
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -17,7 +17,7 @@ The [API Endpoints][1] explorer monitors your API traffic to provide visibility 
 - **Sensitive data flows**: Sensitive data handled by the API, and the flows between APIs.
 - **Attack Exposure**: If the endpoint is targeted by attacks.
 - **Business Logic**: Business logic and associated business logic suggestions for this API.
-- **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Code Security][2] and [Software Composition Analysis][3]).
+- **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [{{< prodname >}}Code Security{{< /prodname >}}][2] and [Software Composition Analysis][3]).
 - **Findings**: Security findings identified on this API.
 - **Dependencies**: APIs and Databases the API depends on.
 
@@ -55,7 +55,7 @@ For information on what library versions are compatible with API Inventory, see 
 
 ## How it works
 
-API Endpoints gathers security metadata about API traffic by using the Datadog SDK with App and API Protection enabled, alongside configurations from Amazon API Gateway and uploaded API Definitions. This data includes the discovered API schema, the types of sensitive data (PII) processed, and the authentication scheme in use. The API information is continuously evaluated, helping ensure a comprehensive and up-to-date view of your entire API attack surface.
+API Endpoints gathers security metadata about API traffic by using the Datadog SDK with {{< prodname >}}App and API Protection{{< /prodname >}} enabled, alongside configurations from Amazon API Gateway and uploaded API Definitions. This data includes the discovered API schema, the types of sensitive data (PII) processed, and the authentication scheme in use. The API information is continuously evaluated, helping ensure a comprehensive and up-to-date view of your entire API attack surface.
 
 API Endpoints uses [Remote Configuration][10] to manage and configure scanning rules that detect sensitive data and authentication.
 
@@ -104,7 +104,7 @@ The actions you take depend on the attack surface:
 
 The {{< ui >}}Source Code{{< /ui >}} data source shows API endpoints discovered directly from your source code. This complements runtime-based discovery by surfacing endpoints earlier in the development life cycle, including endpoints that may not receive live traffic.
 
-To use this data source, configure the [Source Code Integration][12] with GitHub, GitLab, or Azure DevOps. The following languages and frameworks are supported:
+To use this data source, configure the [{{< prodname >}}Source Code Integration{{< /prodname >}}][12] with GitHub, GitLab, or Azure DevOps. The following languages and frameworks are supported:
 
 | Language | Framework |
 |----------|-----------|
@@ -187,7 +187,7 @@ To reduce noise, some differences are excluded because they don't represent mean
 
 ## Processing sensitive data
 
-App and API Protection detects and classifies sensitive data processed by your endpoints, tagging each endpoint with the category and type of data found. To see which endpoints process sensitive data and to create custom API data scanners, see [Sensitive Data][16].
+{{< prodname >}}App and API Protection{{< /prodname >}} detects and classifies sensitive data processed by your endpoints, tagging each endpoint with the category and type of data found. To see which endpoints process sensitive data and to create custom API data scanners, see [Sensitive Data][16].
 
 ## Business logic
 

@@ -197,7 +197,7 @@ For more information, see [APM][17].
 
 ### Security
 
-The {{< ui >}}Security{{< /ui >}} tab highlights potential network threats and findings detected by [Workload Protection][6] and [Cloud Security Misconfigurations][7]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][8], or if there are other threats and misconfigurations related to the selected network flow.
+The {{< ui >}}Security{{< /ui >}} tab highlights potential network threats and findings detected by [{{< prodname >}}Workload Protection{{< /prodname >}}][6] and [Cloud Security Misconfigurations][7]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][8], or if there are other threats and misconfigurations related to the selected network flow.
 
 For a complete reference of default tags available for querying and filtering network traffic, see [Tags Reference][16].
 

@@ -43,7 +43,7 @@ Before you begin, confirm you have:
   kubectl get nodes
   ```
 
-- A **Datadog account** with the BYOC Logs feature enabled
+- A **Datadog account** with the {{< prodname >}}BYOC Logs{{< /prodname >}} feature enabled
 
 - A **[Datadog API key][1]**
 
@@ -55,7 +55,7 @@ Before you begin, confirm you have:
   - Password
 
 - A **MinIO instance** accessible from your Kubernetes cluster, with:
-  - A bucket created for BYOC Logs data (for example, `byoc-logs`)
+  - A bucket created for {{< prodname >}}BYOC Logs{{< /prodname >}} data (for example, `byoc-logs`)
   - An access key and secret key with read/write permissions on the bucket
   - The MinIO endpoint URL (for example, `http://minio.minio.svc.cluster.local:9000`)
 
@@ -263,7 +263,7 @@ janitor:
 
 ### Check deployment status
 
-Verify that all BYOC Logs components are running:
+Verify that all {{< prodname >}}BYOC Logs{{< /prodname >}} components are running:
 
 ```shell
 kubectl get pods -n <NAMESPACE_NAME>
@@ -302,7 +302,7 @@ kubectl logs -n <NAMESPACE_NAME> -l app.kubernetes.io/component=indexer --tail=5
 
 ## Uninstall
 
-To uninstall BYOC Logs:
+To uninstall {{< prodname >}}BYOC Logs{{< /prodname >}}:
 
 ```shell
 helm uninstall <RELEASE_NAME> -n <NAMESPACE_NAME>
@@ -316,7 +316,7 @@ kubectl delete namespace <NAMESPACE_NAME>
 
 ## Next step
 
-**[Set up log ingestion with Datadog Agent][2]** - Configure the Datadog Agent to send logs to BYOC Logs
+**[Set up log ingestion with Datadog Agent][2]** - Configure the Datadog Agent to send logs to {{< prodname >}}BYOC Logs{{< /prodname >}}
 
 ## Further reading
 

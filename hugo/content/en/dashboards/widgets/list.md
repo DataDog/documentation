@@ -69,7 +69,7 @@ Data sources marked _(Preview)_ are in Preview and might not be available in you
 | [Watchdog Alerts](#spans-and-watchdog-alerts) | Alerts surfaced by Watchdog. | None |
 | [Workload Protection Agent](#workload-protection-agent-preview) _(Preview)_ | Workload Protection events from the Datadog Agent. | Workload Protection |
 
-**Note:** The **Recommendations** data source displays Cloud Cost Management recommendations only. APM recommendations are not available as a List widget data source. If Cloud Cost Management is not configured for your organization, the widget displays a `Not Accessible` message. This indicates that the data source requires Cloud Cost Management, rather than that you lack permissions.
+**Note:** The **Recommendations** data source displays {{< prodname >}}Cloud Cost Management{{< /prodname >}} recommendations only. APM recommendations are not available as a List widget data source. If Cloud Cost Management is not configured for your organization, the widget displays a `Not Accessible` message. This indicates that the data source requires {{< prodname >}}Cloud Cost Management{{< /prodname >}}, rather than that you lack permissions.
 
 ### Options
 
@@ -97,7 +97,7 @@ Sort by (ascending or descending):
 Select a **Level** to display: Pipeline, Stage, Job, Step, or Custom.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Data Observability (Preview)" level="h4" id="data-observability-preview" expanded=false %}}
+{{% collapse-content title="{{< prodname >}}Data Observability{{< /prodname >}} (Preview)" level="h4" id="data-observability-preview" expanded=false %}}
 Select an entity type (database table or database column). The available columns and sort options depend on the entity type.
 {{% /collapse-content %}}
 
@@ -176,7 +176,7 @@ For these data sources, you can:
 - Filter the rows with a search query.
 {{% /collapse-content %}}
 
-{{% collapse-content title="On-Call" level="h4" id="on-call" expanded=false %}}
+{{% collapse-content title="{{< prodname >}}On-Call{{< /prodname >}}" level="h4" id="on-call" expanded=false %}}
 Select a **Team**, and optionally add **Tags** to filter the events shown.
 {{% /collapse-content %}}
 

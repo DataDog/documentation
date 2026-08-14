@@ -10,9 +10,9 @@ further_reading:
   text: "Capturing SQL Query Parameter Values"
 ---
 
-Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
+{{< prodname >}}Database Monitoring{{< /prodname >}} provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
-The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Postgres database:
+The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable {{< prodname >}}Database Monitoring{{< /prodname >}} with your Postgres database:
 
 1. [Configure database parameters](#configure-postgres-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
@@ -31,8 +31,8 @@ Supported Agent versions
 : 7.36.1+
 
 Performance impact
-: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
-Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
+: The default Agent configuration for {{< prodname >}}Database Monitoring{{< /prodname >}} is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
+{{< prodname >}}Database Monitoring{{< /prodname >}} runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
 : The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, use `127.0.0.1` or the socket. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
@@ -276,7 +276,7 @@ To monitor Azure Postgres databases, install the Datadog Agent in your infrastru
 
 {{< tabs >}}
 {{% tab "Host" %}}
-To configure collecting Database Monitoring metrics for an Agent running on a host, for example when you provision a small virtual machine for the Agent to collect from an Azure database:
+To configure collecting {{< prodname >}}Database Monitoring{{< /prodname >}} metrics for an Agent running on a host, for example when you provision a small virtual machine for the Agent to collect from an Azure database:
 
 1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][1] for all available configuration options.
    ```yaml
@@ -365,7 +365,7 @@ For Postgres 9.6, add the following settings to the instance config where host a
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
-If you're running a Kubernetes cluster, use the [Datadog Cluster Agent][1] to enable Database Monitoring.
+If you're running a Kubernetes cluster, use the [Datadog Cluster Agent][1] to enable {{< prodname >}}Database Monitoring{{< /prodname >}}.
 
 **Note**: Make sure [cluster checks][2] are enabled for your Datadog Cluster Agent before proceeding.
 

@@ -6,11 +6,11 @@ description: Learn how to use Product Analytics & Session Replay to monitor the 
 
 ## Overview
 
-Urchin Tracking Module (UTM) tracking is a parameter that can be added to a URL for tracking the performance of specific campaigns and identifying attribution paths for how visitors arrived on your website. This guide walks you through the types of UTM parameters Datadog Product Analytics collects and how you can use Product Analytics to monitor their use.
+Urchin Tracking Module (UTM) tracking is a parameter that can be added to a URL for tracking the performance of specific campaigns and identifying attribution paths for how visitors arrived on your website. This guide walks you through the types of UTM parameters Datadog Product Analytics collects and how you can use {{< prodname >}}Product Analytics{{< /prodname >}} to monitor their use.
 
 ## Data collected
 
-UTM campaigns are connected to [View][1] events in Product Analytics. The campaign data is collected automatically by the Browser SDK and can be viewed as facets in the Analytics Explorer. The UTM parameters Datadog collects can be defined as the following:
+UTM campaigns are connected to [View][1] events in {{< prodname >}}Product Analytics{{< /prodname >}}. The campaign data is collected automatically by the Browser SDK and can be viewed as facets in the Analytics Explorer. The UTM parameters Datadog collects can be defined as the following:
 
 | Field                | Type   | Description                                                   |
 |-------------------------------|--------|---------------------------------------------------------------|

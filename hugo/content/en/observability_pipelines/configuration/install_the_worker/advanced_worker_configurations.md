@@ -91,7 +91,7 @@ The following is a list of bootstrap options, their related pipeline environment
 `tags: []`
 : **Pipeline environment variable**: `DD_OP_TAGS`
 : **Priority**: `DD_OP_TAGS`
-: **Description**: The tags reported with internal metrics and can be used to filter Observability Pipelines instances for Remote Configuration deployments.
+: **Description**: The tags reported with internal metrics and can be used to filter {{< prodname >}}Observability Pipelines{{< /prodname >}} instances for Remote Configuration deployments.
 
 `threads`
 : **Pipeline environment variable**: `DD_OP_THREADS`

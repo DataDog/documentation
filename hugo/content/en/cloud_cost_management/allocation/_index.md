@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-The Allocation section of Cloud Cost Management helps you understand and optimize your cloud spending by breaking down costs across different resources and organizational dimensions. Use these tools to allocate costs to specific teams, projects, or business units, track resource-level spending, and identify optimization opportunities.
+The Allocation section of {{< prodname >}}Cloud Cost Management{{< /prodname >}} helps you understand and optimize your cloud spending by breaking down costs across different resources and organizational dimensions. Use these tools to allocate costs to specific teams, projects, or business units, track resource-level spending, and identify optimization opportunities.
 
 ## Key features
 

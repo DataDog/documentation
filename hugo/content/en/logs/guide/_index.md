@@ -15,7 +15,7 @@ cascade:
     {{< nextlink href="logs/guide/getting-started-lwl" >}}Logging Without Limits™ Guide{{< /nextlink >}}
     {{< nextlink href="tracing/other_telemetry/connect_logs_and_traces" >}}Correlate Logs with Traces{{< /nextlink >}}
     {{< nextlink href="logs/guide/correlate-logs-with-metrics" >}}Correlate Logs with Metrics{{< /nextlink >}}
-    {{< nextlink href="logs/guide/best-practices-for-log-management" >}}Best Practices for Log Management{{< /nextlink >}}
+    {{< nextlink href="logs/guide/best-practices-for-log-management" >}}Best Practices for {{< prodname >}}Log Management{{< /prodname >}}{{< /nextlink >}}
     {{< nextlink href="logs/guide/manage_logs_and_metrics_with_terraform" >}}Manage Logs and Metrics with Terraform{{< /nextlink >}}
     {{< nextlink href="logs/guide/flex_compute" >}}Monitor Flex Compute Usage{{< /nextlink >}}
 {{< /whatsnext >}}

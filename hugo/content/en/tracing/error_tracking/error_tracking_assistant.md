@@ -26,7 +26,7 @@ The Error Tracking Assistant in APM Error Tracking provides a summary of your er
 Supported languages
 : Python, Java
 
-The Error Tracking Assistant requires [Source Code Integration][3]. To enable Source Code Integration:
+The Error Tracking Assistant requires [{{< prodname >}}Source Code Integration{{< /prodname >}}][3]. To enable {{< prodname >}}Source Code Integration{{< /prodname >}}:
 
 1. Go to {{< ui >}}Integrations{{< /ui >}} and choose {{< ui >}}Link Source Code{{< /ui >}} in the top navbar.
 2. Follow the steps to associate a commit with your telemetry and configure your GitHub repository.
@@ -39,7 +39,7 @@ The Error Tracking Assistant requires [Source Code Integration][3]. To enable So
 
 ## Getting started
 1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Error Tracking{{< /ui >}}][4].
-2. Click into any Error Tracking issue to view the new {{< ui >}}Generate test & fix{{< /ui >}} section.
+2. Click into any {{< prodname >}}Error Tracking{{< /prodname >}} issue to view the new {{< ui >}}Generate test & fix{{< /ui >}} section.
 
 {{< img src="tracing/error_tracking/error_tracking_assistant.png" alt="Error Tracking Assistant" style="width:80%" >}}
 
@@ -47,7 +47,7 @@ The Error Tracking Assistant requires [Source Code Integration][3]. To enable So
 
 If you aren't seeing generated suggestions:
 
-1. Ensure that [Source Code Integration][2] with the Github Integration is correctly configured.
+1. Ensure that [{{< prodname >}}Source Code Integration{{< /prodname >}}][2] with the Github Integration is correctly configured.
 2. Enhance Error Tracking Assistant suggestions by enrolling in the [Python Executional Context Beta][1].
 
 ## Further Reading

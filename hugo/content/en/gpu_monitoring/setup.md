@@ -12,11 +12,11 @@ further_reading:
   text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
 ---
 
-This page provides instructions on setting up Datadog's GPU Monitoring on your infrastructure. Follow the configuration instructions that match your operating environment below.
+This page provides instructions on setting up Datadog's {{< prodname >}}GPU Monitoring{{< /prodname >}} on your infrastructure. Follow the configuration instructions that match your operating environment below.
 
 ### Prerequisites
 
-To begin using Datadog's GPU Monitoring, your environment must meet the following criteria:
+To begin using Datadog's {{< prodname >}}GPU Monitoring{{< /prodname >}}, your environment must meet the following criteria:
 
 - You are running Datadog Agent on your GPU-accelerated hosts that you want to monitor. If not, see the following guides:
   - [Install the Datadog Agent on Kubernetes][1]
@@ -41,15 +41,15 @@ If using Google Kubernetes Engine, Container-Optimized OS nodes are _not_ suppor
 
 ## Setting up GPU Monitoring
 
-Configuring GPU Monitoring does not require DCGM. You need to opt-in to the collection of GPU Monitoring metrics at the Agent. Setup depends on your environment: non-Kubernetes/uniform, Kubernetes cluster, or mixed cluster.
+Configuring GPU Monitoring does not require DCGM. You need to opt-in to the collection of {{< prodname >}}GPU Monitoring{{< /prodname >}} metrics at the Agent. Setup depends on your environment: non-Kubernetes/uniform, Kubernetes cluster, or mixed cluster.
 
-After you've enabled the collection of GPU Monitoring metrics, you can opt-in to enable several integrations for more advanced insights:
+After you've enabled the collection of {{< prodname >}}GPU Monitoring{{< /prodname >}} metrics, you can opt-in to enable several integrations for more advanced insights:
 - For cloud costs and cloud instance-type information: enable the [AWS][9], [Google Cloud][10], [Azure][11], or [Oracle][12] cloud integrations in your Datadog UI.
 - For process-level insights, set up Datadog's [Live Processes][13].
 
 ### Set up GPU Monitoring on a non-Kubernetes environment or uniform Kubernetes cluster
 
-The following instructions are the basic steps to set up GPU Monitoring in the following environments:
+The following instructions are the basic steps to set up {{< prodname >}}GPU Monitoring{{< /prodname >}} in the following environments:
 - In a Kubernetes cluster where **all** nodes have GPU devices
 - In a non-Kubernetes environment, such as Docker or non-containerized Linux.
 
@@ -122,7 +122,7 @@ The following instructions are the basic steps to set up GPU Monitoring in the f
 
 {{% tab "Docker" %}}
 
-To enable GPU Monitoring in Docker, use the following configuration when starting the container Agent:
+To enable {{< prodname >}}GPU Monitoring{{< /prodname >}} in Docker, use the following configuration when starting the container Agent:
 
 ```shell
 docker run \
@@ -169,7 +169,7 @@ services:
 {{% /tab %}}
 {{% tab "Linux (non-containerized)" %}}
 
-GPU Monitoring requires configuration in **both** `datadog.yaml` and `system-probe.yaml`. Configuring only `datadog.yaml` does not load the eBPF module and results in no metrics being collected.
+{{< prodname >}}GPU Monitoring{{< /prodname >}} requires configuration in **both** `datadog.yaml` and `system-probe.yaml`. Configuring only `datadog.yaml` does not load the eBPF module and results in no metrics being collected.
 
 1. Add the following to `/etc/datadog-agent/datadog.yaml`:
 
@@ -213,7 +213,7 @@ The recommended method is the Datadog Operator, version 1.20 or greater. This ve
 {{< tabs >}}
 {{% tab "Datadog Operator (1.20 or greater)" %}}
 
-To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles][2] feature. This selectively enables GPU Monitoring only on nodes with GPUs.
+To set up {{< prodname >}}GPU Monitoring{{< /prodname >}} on a mixed cluster, use the Operator's [Agent Profiles][2] feature. This selectively enables {{< prodname >}}GPU Monitoring{{< /prodname >}} only on nodes with GPUs.
 
 1. Configure the Datadog Operator to enable the Datadog Agent Profile feature in the DatadogAgentInternal mode.
 
@@ -255,7 +255,7 @@ To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles]
 
 3. Apply your changes to the `DatadogAgent` resource. These changes are safe to apply to all Datadog Agents, regardless of whether they run on GPU nodes.
 
-4. Create a [Datadog Agent Profile][2] that targets GPU nodes and enables GPU Monitoring on these targeted nodes.
+4. Create a [Datadog Agent Profile][2] that targets GPU nodes and enables {{< prodname >}}GPU Monitoring{{< /prodname >}} on these targeted nodes.
 
    In the following example, the `profileNodeAffinity` selector is targeting nodes with the label [`nvidia.com/gpu.present=true`][3], because this label is commonly present on nodes with the NVIDIA GPU Operator. You may use another label if you wish.
 
@@ -287,7 +287,7 @@ To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles]
 
 {{% /tab %}}
 {{% tab "Datadog Operator (1.18 or 1.19)" %}}
-To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles][2] feature. This selectively enables GPU Monitoring only on nodes with GPUs.
+To set up {{< prodname >}}GPU Monitoring{{< /prodname >}} on a mixed cluster, use the Operator's [Agent Profiles][2] feature. This selectively enables {{< prodname >}}GPU Monitoring{{< /prodname >}} only on nodes with GPUs.
 
 1. Make sure that the [latest version of the Datadog Agent][4] is [installed and deployed][1] on every GPU host you wish to monitor.
 
@@ -333,7 +333,7 @@ To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles]
 
 2. Apply your changes to the `DatadogAgent` resource. These changes are safe to apply to all Datadog Agents, regardless of whether they run on GPU nodes.
 
-3. Create a [Datadog Agent Profile][2] that targets GPU nodes and enables GPU Monitoring on these targeted nodes.
+3. Create a [Datadog Agent Profile][2] that targets GPU nodes and enables {{< prodname >}}GPU Monitoring{{< /prodname >}} on these targeted nodes.
 
    In the following example, the `profileNodeAffinity` selector is targeting nodes with the label [`nvidia.com/gpu.present=true`][3], because this label is commonly present on nodes with the NVIDIA GPU Operator. You may use another label if you wish.
 
@@ -383,7 +383,7 @@ To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles]
 
 {{% tab "Helm" %}}
 
-To set up GPU Monitoring on a mixed cluster with Helm, create two Helm deployments. One deployment targets GPU nodes, and the other targets non-GPU nodes.
+To set up {{< prodname >}}GPU Monitoring{{< /prodname >}} on a mixed cluster with Helm, create two Helm deployments. One deployment targets GPU nodes, and the other targets non-GPU nodes.
 
 1. Make sure that the [latest version of the Datadog Agent][3] is [installed and deployed][1] on every GPU host you wish to monitor.
 

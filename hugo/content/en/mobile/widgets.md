@@ -285,20 +285,20 @@ All organizations you've logged into are displayed in the configuration screen. 
 
 ### On-Call widget
 
-View your On-Call shifts and On-Call pages on your mobile home screen with Datadog widgets.
+View your {{< prodname >}}On-Call{{< /prodname >}} shifts and {{< prodname >}}On-Call{{< /prodname >}} pages on your mobile home screen with Datadog widgets.
 
-You can customize your On-Call shifts widgets by filtering on:
+You can customize your {{< prodname >}}On-Call{{< /prodname >}} shifts widgets by filtering on:
 
 - Organization
 - Timeframe period
 
-You can customize your On-Call pages widgets by filtering on:
+You can customize your {{< prodname >}}On-Call{{< /prodname >}} pages widgets by filtering on:
 
 - Organization
 - Team
 - Order
 
-**Note**: You can add additional filters for the On-Call pages widget.
+**Note**: You can add additional filters for the {{< prodname >}}On-Call{{< /prodname >}} pages widget.
 
 #### Edit an On-Call shift widget
 
@@ -309,7 +309,7 @@ You can customize your On-Call pages widgets by filtering on:
 
 1. Long press on the widget to configure.
 2. Tap {{< ui >}}Edit Widget{{< /ui >}} to bring up the configure screen.
-3. Select the {{< ui >}}Organization{{< /ui >}} and {{< ui >}}Period{{< /ui >}} you would like to see your On-Call shifts.
+3. Select the {{< ui >}}Organization{{< /ui >}} and {{< ui >}}Period{{< /ui >}} you would like to see your {{< prodname >}}On-Call{{< /prodname >}} shifts.
 4. Tap out of the widget to validate your selection and exit the configuration screen.
 
 
@@ -319,7 +319,7 @@ You can customize your On-Call pages widgets by filtering on:
 {{< img src="mobile/widgets/android_shifts_widget_may_2025.png" alt="Configured home screen On-Call shift widgets displayed on Android screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 1. Tap on the widget to configure.
-2. Select the {{< ui >}}Organization{{< /ui >}} and {{< ui >}}Time Period{{< /ui >}} you would like to see your On-Call shifts.
+2. Select the {{< ui >}}Organization{{< /ui >}} and {{< ui >}}Time Period{{< /ui >}} you would like to see your {{< prodname >}}On-Call{{< /prodname >}} shifts.
 3. Tap {{< ui >}}✓{{< /ui >}} to save the configuration.
 4. Long press and resize the widget to fit your preference.
 
@@ -335,7 +335,7 @@ You can customize your On-Call pages widgets by filtering on:
 
 1. Long press on the widget to configure.
 2. Tap {{< ui >}}Edit Widget{{< /ui >}} to bring up the configure screen.
-3. Select the {{< ui >}}Organization{{< /ui >}}, {{< ui >}}Teams{{< /ui >}}, and {{< ui >}}Order{{< /ui >}} in which you would like to see On-Call pages.
+3. Select the {{< ui >}}Organization{{< /ui >}}, {{< ui >}}Teams{{< /ui >}}, and {{< ui >}}Order{{< /ui >}} in which you would like to see {{< prodname >}}On-Call{{< /prodname >}} pages.
 4. Type in any additional filters and tap {{< ui >}}Done{{< /ui >}}.
 5. Tap out of the widget to validate your selection and exit the configuration screen.
 
@@ -346,7 +346,7 @@ You can customize your On-Call pages widgets by filtering on:
 {{< img src="mobile/widgets/android_pages_widget_may_2025.png" alt="Configured home screen on-call page widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 1. Tap on the widget to configure.
-2. Select the {{< ui >}}Organization{{< /ui >}}, {{< ui >}}Teams{{< /ui >}} and {{< ui >}}Sort by{{< /ui >}} in which you would like to see On-Call pages.
+2. Select the {{< ui >}}Organization{{< /ui >}}, {{< ui >}}Teams{{< /ui >}} and {{< ui >}}Sort by{{< /ui >}} in which you would like to see {{< prodname >}}On-Call{{< /prodname >}} pages.
 3. Tap to type in any {{< ui >}}Additional Filter{{< /ui >}} and tap {{< ui >}}Save{{< /ui >}}.
 4. Tap {{< ui >}}✓{{< /ui >}} when done configurations
 5. Long press and resize the widget to fit your preference.
@@ -358,7 +358,7 @@ You can customize your On-Call pages widgets by filtering on:
 ## Lock screen widgets
 {{< img src="mobile/widgets/lockscreen_widget_may_2025.png" alt="Configured lock screen widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-Lock screen widgets for On-Call, Monitors, SLOs, Incidents, and Dashboards are supported on iOS.
+Lock screen widgets for {{< prodname >}}On-Call{{< /prodname >}}, Monitors, SLOs, Incidents, and Dashboards are supported on iOS.
 
 1. Long press on your lock screen.
 2. Tap {{< ui >}}Customize{{< /ui >}}, then {{< ui >}}Lock Screen{{< /ui >}}.

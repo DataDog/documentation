@@ -12,13 +12,13 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
 ## Overview
 
-This topic describes [threat intelligence][1] for App and API Protection (AAP).
+This topic describes [threat intelligence][1] for {{< prodname >}}App and API Protection{{< /prodname >}} (AAP).
 
 Datadog provides built-in threat intelligence [datasets][1] for AAP. This provides additional evidence when acting on security activity and reduces detection thresholds for some business logic detections. 
 

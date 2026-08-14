@@ -9,9 +9,9 @@ description: "Instrument your client-side applications with Datadog SDKs to moni
 Datadog Client SDKs enable you to instrument your web and mobile applications with comprehensive observability. With these SDKs, you can:
 
 - Monitor real user interactions and page performance with Real User Monitoring (RUM)
-- Track and debug errors and crashes with Error Tracking
+- Track and debug errors and crashes with {{< prodname >}}Error Tracking{{< /prodname >}}
 - Record and replay user sessions with Session Replay
-- Analyze user behavior and conversion funnels with Product Analytics
+- Analyze user behavior and conversion funnels with {{< prodname >}}Product Analytics{{< /prodname >}}
 - Collect and forward application logs
 - Correlate frontend performance with backend traces
 

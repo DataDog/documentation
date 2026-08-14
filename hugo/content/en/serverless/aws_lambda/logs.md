@@ -109,7 +109,7 @@ Set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false` on your Lam
 {{% /tab %}}
 {{< /tabs >}}
 
-For more information, see [Log Management][47].
+For more information, see [{{< prodname >}}Log Management{{< /prodname >}}][47].
 
 ### Filter or scrub information from logs
 

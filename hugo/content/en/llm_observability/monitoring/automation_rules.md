@@ -23,7 +23,7 @@ Automation Rules continuously route production LLM traces to annotation queues o
 
 <div class="alert alert-info">Automations apply going forward: new traces matching your rule are routed to the destination as they arrive. Existing traces matching the filter are not added retroactively.</div>
 
-Each rule is evaluated **per span**, in real time, as spans stream into Agent Observability. The rule-matcher does not buffer or join across spans, which constrains the filter set (see [Supported filter fields](#supported-filter-fields)).
+Each rule is evaluated **per span**, in real time, as spans stream into {{< prodname >}}Agent Observability{{< /prodname >}}. The rule-matcher does not buffer or join across spans, which constrains the filter set (see [Supported filter fields](#supported-filter-fields)).
 
 ## Configuring an automation
 

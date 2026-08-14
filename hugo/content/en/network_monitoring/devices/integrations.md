@@ -17,7 +17,7 @@ aliases:
 
 ## Overview
 
-Network Device Monitoring (NDM) supports a growing set of integrations for routers, switches, firewalls, SD-WAN platforms, and virtual infrastructure. Use the tables below to find which integrations support NDM collection and how each one connects to Datadog.
+{{< prodname >}}Network Device Monitoring{{< /prodname >}} (NDM) supports a growing set of integrations for routers, switches, firewalls, SD-WAN platforms, and virtual infrastructure. Use the tables below to find which integrations support NDM collection and how each one connects to Datadog.
 
 <div class="alert alert-info">Beyond the integrations shown below, NDM includes built-in SNMP profiles for over 80 <a href="/network_monitoring/devices/supported_devices/">supported vendors</a>.</div>
 

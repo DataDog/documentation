@@ -11,12 +11,12 @@ further_reading:
 ---
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Workflow Automation is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">{{< prodname >}}Workflow Automation{{< /prodname >}} is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
 
-Datadog Security Orchestration, Automation, and Response (SOAR) helps you orchestrate security operations, investigate signals, and remediate threats using [Workflow Automation][1]. For example, you can [run a workflow][2] to:
+Datadog Security Orchestration, Automation, and Response (SOAR) helps you orchestrate security operations, investigate signals, and remediate threats using [{{< prodname >}}Workflow Automation{{< /prodname >}}][1]. For example, you can [run a workflow][2] to:
 
 - Block an IP address from your environment.
 - Disable a user account.
@@ -31,7 +31,7 @@ SOAR also includes ready-to-use customizable [blueprints][4] to help you build w
 - An Endpoint Detection and Response (EDR) workflow that speeds up the investigation and containment of endpoint threats.
 - A Threat Intelligence Enrichment workflow that enriches alerts with external data so you can prioritize and respond more effectively.
 
-Cloud SIEM also provides [security operational metrics][3], so you can determine the efficiency and effectiveness of your security processes.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} also provides [security operational metrics][3], so you can determine the efficiency and effectiveness of your security processes.
 
 ## Further reading
 

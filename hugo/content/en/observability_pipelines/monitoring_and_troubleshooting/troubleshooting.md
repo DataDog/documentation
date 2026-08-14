@@ -11,11 +11,11 @@ If you experience unexpected behavior with Datadog Observability Pipelines (OP),
 
 To view information about the Observability Pipelines Workers running for an active pipeline:
 
-1. Navigate to [Observability Pipelines][2].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][2].
 1. Select your pipeline.
 1. Click the {{< ui >}}Workers{{< /ui >}} tab to see the Workers' memory and CPU utilization, traffic stats, and any errors.
 1. To view the Workers' statuses and versions, click the {{< ui >}}Latest Deployment & Setup{{< /ui >}} tab.
-1. To see the Workers' logs, click the cog at the top right side of the page, then select {{< ui >}}View OPW Logs{{< /ui >}}. See [Logs Search Syntax][3] for details on how to filter your logs. To see logs for a specific Worker, add `@op_worker.id:<worker_id>` to the search query.<br>**Note**: If you are not seeing Observability Pipelines Worker logs, make sure you are [indexing Worker logs][10] to Log Management.
+1. To see the Workers' logs, click the cog at the top right side of the page, then select {{< ui >}}View OPW Logs{{< /ui >}}. See [Logs Search Syntax][3] for details on how to filter your logs. To see logs for a specific Worker, add `@op_worker.id:<worker_id>` to the search query.<br>**Note**: If you are not seeing Observability Pipelines Worker logs, make sure you are [indexing Worker logs][10] to {{< prodname >}}Log Management{{< /prodname >}}.
 
 ## Inspect events sent through your pipeline to identify setup issues
 
@@ -68,11 +68,11 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
 
 ### No Worker logs in Log Explorer
 
-If you do not see Worker logs in [Log Explorer][12], make sure they are not getting excluded in your log pipelines. Worker logs must be indexed in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the Observability Pipelines UI. The logs are also helpful for troubleshooting Worker or pipelines issues. If Worker logs are not indexed in Log Management, the Latest Deploy and Setup tab displays a perpetual loading state instead of the current Worker status. All Worker logs have the tag `source:op_worker`.
+If you do not see Worker logs in [Log Explorer][12], make sure they are not getting excluded in your log pipelines. Worker logs must be indexed in {{< prodname >}}Log Management{{< /prodname >}} for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the Observability Pipelines UI. The logs are also helpful for troubleshooting Worker or pipelines issues. If Worker logs are not indexed in {{< prodname >}}Log Management{{< /prodname >}}, the Latest Deploy and Setup tab displays a perpetual loading state instead of the current Worker status. All Worker logs have the tag `source:op_worker`.
 
 ### Duplicate Observability Pipelines logs
 
-If you see duplicate Observability Pipelines logs in [Log Explorer][7] and your Agent is running in a Docker container, you must exclude Observability Pipelines logs using the `DD_CONTAINER_EXCLUDE_LOGS` environment variable. For Helm, use `datadog.containerExcludeLogs`. This prevents duplicate logs, as the Worker also sends its own logs directly to Datadog. See [Docker Log Collection][8] or [Setting environment variables for Helm][9] for more information.
+If you see duplicate {{< prodname >}}Observability Pipelines{{< /prodname >}} logs in [Log Explorer][7] and your Agent is running in a Docker container, you must exclude {{< prodname >}}Observability Pipelines{{< /prodname >}} logs using the `DD_CONTAINER_EXCLUDE_LOGS` environment variable. For Helm, use `datadog.containerExcludeLogs`. This prevents duplicate logs, as the Worker also sends its own logs directly to Datadog. See [Docker Log Collection][8] or [Setting environment variables for Helm][9] for more information.
 
 ## Worker issues and errors
 
@@ -97,7 +97,7 @@ If the Worker is not starting, Worker logs are not sent to Datadog and are not v
 
 ### Certificate verify failed
 
-If you see an error with `certificate verify failed` and `self-signed certificate in certificate chain`, see [TLS certificates][16]. Observability Pipelines does not accept self-signed certificates because they are not secure.
+If you see an error with `certificate verify failed` and `self-signed certificate in certificate chain`, see [TLS certificates][16]. {{< prodname >}}Observability Pipelines{{< /prodname >}} does not accept self-signed certificates because they are not secure.
 
 ### Ensure your organization is enabled for RC
 
@@ -158,7 +158,7 @@ Run the command `netstat -anp | find "<port_number>"` to check that the port tha
 
 ### Seeing delayed logs at the destination
 
-Observability Pipelines destinations batch events before sending them to the downstream integration. For example, the Amazon S3, Google Cloud Storage, and Azure Storage destinations have a batch timeout of 900 seconds. If the other batch parameters (maximum events and maximum bytes) have not been met within the 900-second timeout, the batch is flushed at 900 seconds. This means the destination component can take up to 15 minutes to send out a batch of events to the downstream integration.
+{{< prodname >}}Observability Pipelines{{< /prodname >}} destinations batch events before sending them to the downstream integration. For example, the Amazon S3, Google Cloud Storage, and Azure Storage destinations have a batch timeout of 900 seconds. If the other batch parameters (maximum events and maximum bytes) have not been met within the 900-second timeout, the batch is flushed at 900 seconds. This means the destination component can take up to 15 minutes to send out a batch of events to the downstream integration.
 
 These are the batch parameters for each destination:
 

@@ -15,7 +15,7 @@ further_reading:
       text: "Cloud Security Identity Risks"
 ---
 
-Use the following instructions to enable Infrastructure as Code (IaC) remediation for Cloud Security. IaC remediation is available for [Cloud Security Misconfigurations][1] and [Cloud Security Identity Risks][2].
+Use the following instructions to enable Infrastructure as Code (IaC) remediation for {{< prodname >}}Cloud Security{{< /prodname >}}. IaC remediation is available for [Cloud Security Misconfigurations][1] and [Cloud Security Identity Risks][2].
 
 <div class="alert alert-info">Static IaC remediation supports GitHub for version control and Terraform for infrastructure as code.</div>
 
@@ -30,7 +30,7 @@ Follow [the instructions][3] for creating a GitHub app for your organization.
 
 After you set up the GitHub integration, enable IaC remediation for the repositories in your GitHub account.
 
-1. On the [Cloud Security Setup page][4], expand the {{< ui >}}Source Code Integrations{{< /ui >}} section.
+1. On the [Cloud Security Setup page][4], expand the {{< ui >}}{{< prodname >}}Source Code Integration{{< /prodname >}}s{{< /ui >}} section.
 2. Click {{< ui >}}Configure{{< /ui >}} for the GitHub account you want to configure.
 3. To enable IaC:
     - All repositories: Toggle {{< ui >}}Enable Infrastructure as Code (IaC) Remediation{{< /ui >}} to the on position.

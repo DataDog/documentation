@@ -14,7 +14,7 @@ further_reading:
 
 ## Installation
 
-Network Device Monitoring relies on the SNMP Integration included in the [Datadog Agent][1] package, and supports all three versions of SNMP: `SNMPv1`, `SNMPv2`, and `SNMPv3`. During discovery, the SNMP port (default 161) is polled. A device is considered discovered if there is a response and a matching profile.
+{{< prodname >}}Network Device Monitoring{{< /prodname >}} relies on the SNMP Integration included in the [Datadog Agent][1] package, and supports all three versions of SNMP: `SNMPv1`, `SNMPv2`, and `SNMPv3`. During discovery, the SNMP port (default 161) is polled. A device is considered discovered if there is a response and a matching profile.
 
 ## Pre-requisites
 
@@ -107,7 +107,7 @@ An alternative to specifying individual devices is to use Autodiscovery to autom
 
 Autodiscovery polls each IP on the configured subnet, and checks for a response from the device. Then, the Datadog Agent looks up the `sysObjectID` of the discovered device and maps it to one of [Datadog's supported device profiles][6]. The profiles contain lists of predefined metrics to collect for various types of devices.
 
-To use Autodiscovery with Network Device Monitoring:
+To use Autodiscovery with {{< prodname >}}Network Device Monitoring{{< /prodname >}}:
 
 1. Install or upgrade the Datadog Agent to v7.27+. For platform specific instructions, see the [Datadog Agent][7] documentation.
 

@@ -22,9 +22,9 @@ Rehydration is in Preview. Fill out the form to request access.
 
 ## Overview
 
-Rehydration for Observability Pipelines enables you to pull archived logs from object storage and process them in Observability Pipelines, including with [Packs][1]. This gives you consistent access to historical context without having to rebuild workflows or modify ingestion pipelines.
+Rehydration for {{< prodname >}}Observability Pipelines{{< /prodname >}} enables you to pull archived logs from object storage and process them in {{< prodname >}}Observability Pipelines{{< /prodname >}}, including with [Packs][1]. This gives you consistent access to historical context without having to rebuild workflows or modify ingestion pipelines.
 
-Organizations often store large volumes of logs in cost-efficient, long-term archives to control spend and meet compliance requirements. However, historical data often becomes difficult to access when there is a security incident, audit request, or operational investigation. Retrieving archived logs from cold storage can be slow, manual, and disruptive, requiring ad-hoc scripts, decompression, or dedicated engineering effort. Rehydration for Observability Pipelines solves these issues.
+Organizations often store large volumes of logs in cost-efficient, long-term archives to control spend and meet compliance requirements. However, historical data often becomes difficult to access when there is a security incident, audit request, or operational investigation. Retrieving archived logs from cold storage can be slow, manual, and disruptive, requiring ad-hoc scripts, decompression, or dedicated engineering effort. Rehydration for {{< prodname >}}Observability Pipelines{{< /prodname >}} solves these issues.
 
 {{< img src="observability_pipelines/rehydration_pipeline.png" alt="A pipeline with the Amazon S3 rehydration source" style="width:100%;" >}}
 
@@ -55,7 +55,7 @@ This ensures:
 
 ### Route rehydrated data to any supported destination
 
-You can send processed historical logs to SIEMs, data lakes, analytics platforms, or any Observability Pipelines destination.
+You can send processed historical logs to SIEMs, data lakes, analytics platforms, or any {{< prodname >}}Observability Pipelines{{< /prodname >}} destination.
 
 ### Eliminate manual handling
 

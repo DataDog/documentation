@@ -17,7 +17,7 @@ further_reading:
 
 <div class="alert alert-info">Workload Protection Active Protection is in Preview.</div>
 
-This topic explains how to use the Workload Protection {{< ui >}}Active Protection{{< /ui >}} feature to block crypto mining threats automatically. 
+This topic explains how to use the {{< prodname >}}Workload Protection{{< /prodname >}} {{< ui >}}Active Protection{{< /ui >}} feature to block crypto mining threats automatically. 
 
 By default, all OOTB Agent [threat detection rules][4] are enabled and actively monitoring for crypto threats. 
 

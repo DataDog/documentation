@@ -39,9 +39,9 @@ A span consists of the following attributes:
 
 ### Span kinds
 
-Agent Observability categorizes spans by their *span kind*, which defines the type of work the span is performing. This can give you more granular insights on what operations are being performed by your LLM application.
+{{< prodname >}}Agent Observability{{< /prodname >}} categorizes spans by their *span kind*, which defines the type of work the span is performing. This can give you more granular insights on what operations are being performed by your LLM application.
 
-Agent Observability supports the following span kinds:
+{{< prodname >}}Agent Observability{{< /prodname >}} supports the following span kinds:
 
 | Kind      | Represents   | Valid Root span?   | Examples |
 |-----------|--------------|--------------|-------------|
@@ -107,7 +107,7 @@ Retrieval spans typically do not have child spans, as they represent a standalon
 
 ## Traces
 
-Agent Observability supports observability for LLM applications with varying complexity. Based on the structure and complexity of your traces, you can use the following features of Agent Observability:
+{{< prodname >}}Agent Observability{{< /prodname >}} supports observability for LLM applications with varying complexity. Based on the structure and complexity of your traces, you can use the following features of {{< prodname >}}Agent Observability{{< /prodname >}}:
 
 ### LLM Inference Monitoring
 
@@ -115,7 +115,7 @@ LLM inference traces are composed of a single LLM span.
 
 {{< img src="llm_observability/llm-observability-llm-span.png" alt="A single LLM span" style="width:100%;" >}}
 
-Tracing individual LLM inferences unlocks basic Agent Observability features, allowing you to:
+Tracing individual LLM inferences unlocks basic {{< prodname >}}Agent Observability{{< /prodname >}} features, allowing you to:
 
 1. Track inputs and outputs to your LLM calls.
 2. Track token usage, error rates, and latencies for your LLM calls.
@@ -152,14 +152,14 @@ For a detailed example, see the [LLM Monitoring Jupyter notebook][9] which demon
 
 ## Evaluations
 
-Agent Observability offers managed evaluations and quality checks to evaluate the quality, safety, and effectiveness of your LLM conversations. With [evaluations][11], you can understand the performance of conversations and enhance your LLM application's responses. This improves the user experience and ensures valuable, accurate outputs.
+{{< prodname >}}Agent Observability{{< /prodname >}} offers managed evaluations and quality checks to evaluate the quality, safety, and effectiveness of your LLM conversations. With [evaluations][11], you can understand the performance of conversations and enhance your LLM application's responses. This improves the user experience and ensures valuable, accurate outputs.
 
 Datadog provides a variety of options for your evaluations:
 - Use [managed evaluations][12] for your traces
-- [Submit custom evaluations][6] to Agent Observability
+- [Submit custom evaluations][6] to {{< prodname >}}Agent Observability{{< /prodname >}}
 - Integrate with frameworks like [NeMo][13]
 
-In addition, Datadog's [Sensitive Data Scanner][5] is natively integrated with Agent Observability, so you can ensure any sensitive data in your input and output is scanned and redacted.
+In addition, Datadog's [Sensitive Data Scanner][5] is natively integrated with {{< prodname >}}Agent Observability{{< /prodname >}}, so you can ensure any sensitive data in your input and output is scanned and redacted.
 
 ## Further Reading
 

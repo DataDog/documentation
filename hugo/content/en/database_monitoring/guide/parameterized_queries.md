@@ -16,7 +16,7 @@ further_reading:
 
 The Database Monitoring integrations collect aggregated query metrics, in-flight query executions, and query explain plans across your database. By default, query SQL texts and explain plans are obfuscated and normalized in the Agent before being sent to Datadog in order to protect sensitive data, which may be exposed in query parameters.
 
-However, exposing query statements with actual parameter values provides enhanced observability and debugging capabilities. Database Monitoring currently supports query capture with parameter values on the PostgreSQL and SQL Server integrations.
+However, exposing query statements with actual parameter values provides enhanced observability and debugging capabilities. {{< prodname >}}Database Monitoring{{< /prodname >}} currently supports query capture with parameter values on the PostgreSQL and SQL Server integrations.
 
 Having access to query parameters enables:
 
@@ -30,7 +30,7 @@ Having access to query parameters enables:
 
 <div class="alert alert-danger">Query statements and execution plans with parameterized values may contain sensitive information (for example, passwords in query parameters) or personally identifiable information. Enabling this option allows Datadog to collect and ingest raw query statements and execution plans that appear in query samples or explain plans. This option is disabled by default.</div>
 
-You must configure Database Monitoring for your database instance before continuing with this guide.
+You must configure {{< prodname >}}Database Monitoring{{< /prodname >}} for your database instance before continuing with this guide.
 
 Supported databases
 : PostgreSQL, SQL Server
@@ -40,7 +40,7 @@ Supported deployments
 
 ## Permissions
 
-To view query parameter values in the Database Monitoring UI, users need the **Database Monitoring Parameterized Queries Read** permission. This permission is located under the **Database Monitoring** section in the [Roles page][2]. This permission is enabled by default in the Datadog Admin Role, Datadog Standard Role, and Datadog Read Only Role. If your organization uses custom roles, add this permission to the appropriate role. For more information on managing permissions, see the [RBAC documentation][3].
+To view query parameter values in the Database Monitoring UI, users need the **Database Monitoring Parameterized Queries Read** permission. This permission is located under the **{{< prodname >}}Database Monitoring{{< /prodname >}}** section in the [Roles page][2]. This permission is enabled by default in the Datadog Admin Role, Datadog Standard Role, and Datadog Read Only Role. If your organization uses custom roles, add this permission to the appropriate role. For more information on managing permissions, see the [RBAC documentation][3].
 
 ## Setup
 To capture SQL query text and execution plans with parameter values, update the appropriate integration `conf.yaml` file based on your database type:

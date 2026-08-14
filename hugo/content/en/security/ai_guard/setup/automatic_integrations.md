@@ -9,10 +9,10 @@ further_reading:
   text: SDK
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov" >}}<div class="alert alert-danger">{{< prodname >}}AI Guard{{< /prodname >}} isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-AI Guard can automatically evaluate LLM calls made through supported AI ecosystem packages, without requiring manual API calls. When your application uses one of the supported packages, the Datadog SDK instruments it to evaluate those calls through AI Guard automatically. No code changes are required.
+{{< prodname >}}AI Guard{{< /prodname >}} can automatically evaluate LLM calls made through supported AI ecosystem packages, without requiring manual API calls. When your application uses one of the supported packages, the Datadog SDK instruments it to evaluate those calls through {{< prodname >}}AI Guard{{< /prodname >}} automatically. No code changes are required.
 
 ## Supported frameworks and libraries
 
@@ -48,11 +48,11 @@ AI Guard can automatically evaluate LLM calls made through supported AI ecosyste
 
 {{< tabs >}}
 {{% tab "LangChain" %}}
-The LangChain integration automatically applies AI Guard evaluations to calls made through the [LangChain Python SDK][1].
+The LangChain integration automatically applies {{< prodname >}}AI Guard{{< /prodname >}} evaluations to calls made through the [LangChain Python SDK][1].
 
 #### Traced operations
 
-AI Guard automatically evaluates the following LangChain operations:
+{{< prodname >}}AI Guard{{< /prodname >}} automatically evaluates the following LangChain operations:
 
 - LLMs:
   - `llm.invoke()`, `llm.ainvoke()`
@@ -66,11 +66,11 @@ AI Guard automatically evaluates the following LangChain operations:
 [3]: https://docs.langchain.com/oss/python/langchain/tools
 {{% /tab %}}
 {{% tab "OpenAI" %}}
-The OpenAI integration automatically applies AI Guard evaluations to calls made through the [OpenAI Python SDK][1].
+The OpenAI integration automatically applies {{< prodname >}}AI Guard{{< /prodname >}} evaluations to calls made through the [OpenAI Python SDK][1].
 
 #### Traced operations
 
-AI Guard automatically evaluates the following OpenAI operations:
+{{< prodname >}}AI Guard{{< /prodname >}} automatically evaluates the following OpenAI operations:
 
 - [Chat completions][2]:
   - `client.chat.completions.create()`
@@ -84,17 +84,17 @@ AI Guard automatically evaluates the following OpenAI operations:
 [3]: https://platform.openai.com/docs/api-reference/responses
 {{% /tab %}}
 {{% tab "Anthropic" %}}
-The Anthropic integration automatically applies AI Guard evaluations to calls made through the [Anthropic Python SDK][1].
+The Anthropic integration automatically applies {{< prodname >}}AI Guard{{< /prodname >}} evaluations to calls made through the [Anthropic Python SDK][1].
 
 #### Traced operations
 
-AI Guard automatically evaluates the following Anthropic operations:
+{{< prodname >}}AI Guard{{< /prodname >}} automatically evaluates the following Anthropic operations:
 
 - [Messages][2]:
   - `client.messages.create()`
   - `client.messages.stream()`
 
-For the `anthropic` package >= 0.37.0, AI Guard also evaluates the following beta messages operations:
+For the `anthropic` package >= 0.37.0, {{< prodname >}}AI Guard{{< /prodname >}} also evaluates the following beta messages operations:
 
 - Beta messages:
   - `client.beta.messages.create()`
@@ -109,7 +109,7 @@ For the `anthropic` package >= 0.37.0, AI Guard also evaluates the following bet
 
 {{< tabs >}}
 {{% tab "AI SDK" %}}
-The [AI SDK][1] integration automatically applies AI Guard evaluations to text and object generation, embeddings, and tool calls.
+The [AI SDK][1] integration automatically applies {{< prodname >}}AI Guard{{< /prodname >}} evaluations to text and object generation, embeddings, and tool calls.
 
 #### Traced operations
 
@@ -128,11 +128,11 @@ The [AI SDK][1] integration automatically applies AI Guard evaluations to text a
 [4]: https://ai-sdk.dev/docs/ai-sdk-core/tools-and-tool-calling
 {{% /tab %}}
 {{% tab "OpenAI" %}}
-The OpenAI integration automatically applies AI Guard evaluations to calls made through the [OpenAI Node.js SDK][1].
+The OpenAI integration automatically applies {{< prodname >}}AI Guard{{< /prodname >}} evaluations to calls made through the [OpenAI Node.js SDK][1].
 
 #### Traced operations
 
-AI Guard automatically evaluates the following OpenAI operations:
+{{< prodname >}}AI Guard{{< /prodname >}} automatically evaluates the following OpenAI operations:
 
 - [Chat completions][2]:
   - `client.chat.completions.create()`
@@ -140,7 +140,7 @@ AI Guard automatically evaluates the following OpenAI operations:
 - [Responses API][3]:
   - `client.responses.create()`
 
-**Note:** Streaming requests (`stream: true`) are not evaluated by AI Guard.
+**Note:** Streaming requests (`stream: true`) are not evaluated by {{< prodname >}}AI Guard{{< /prodname >}}.
 
 [1]: https://github.com/openai/openai-node
 [2]: https://platform.openai.com/docs/api-reference/chat
@@ -152,11 +152,11 @@ AI Guard automatically evaluates the following OpenAI operations:
 
 {{< tabs >}}
 {{% tab "RubyLLM" %}}
-The [RubyLLM][1] integration automatically applies AI Guard evaluations to chat messages and tool calls.
+The [RubyLLM][1] integration automatically applies {{< prodname >}}AI Guard{{< /prodname >}} evaluations to chat messages and tool calls.
 
 #### Traced operations
 
-AI Guard automatically evaluates the following RubyLLM operations:
+{{< prodname >}}AI Guard{{< /prodname >}} automatically evaluates the following RubyLLM operations:
 
 - [Chat][2]:
   - `RubyLLM::Chat#ask`

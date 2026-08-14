@@ -19,7 +19,7 @@ Environments represent different deployment stages or modes in your software del
 
 ## Manage environments
 
-Manage environments from **Feature Flags > Settings > Environments**:
+Manage environments from **{{< prodname >}}Feature Flags{{< /prodname >}} > Settings > Environments**:
 
 {{< img src="feature_flags/concepts/environments-list-2.png" alt="Environments list in Feature Flags settings." style="width:100%;" >}}
 
@@ -58,11 +58,11 @@ Mark an environment as **production** to indicate that changes in that environme
 
 Each environment is configured with a **name** and a set of **queries**. Queries are the `env` or `DD_ENV` strings your applications send at runtime.
 
-Having multiple queries per environment lets you keep the `env` value consistent with the environment you pass to RUM, APM, or StatsD. For example, you might have `staging-eu` and `staging-us` as separate `env` values in your telemetry, but map both to a single **Staging** environment in Feature Flags. That way, you do not need to duplicate flag configuration across multiple Staging environments when you want to enable a flag across all of Staging.
+Having multiple queries per environment lets you keep the `env` value consistent with the environment you pass to RUM, APM, or StatsD. For example, you might have `staging-eu` and `staging-us` as separate `env` values in your telemetry, but map both to a single **Staging** environment in {{< prodname >}}Feature Flags{{< /prodname >}}. That way, you do not need to duplicate flag configuration across multiple Staging environments when you want to enable a flag across all of Staging.
 
 ## Connect environments in the SDK
 
-The `env` value you use must match a query configured for the Feature Flags environment you want, such as `staging-us` or `production`. If you already set `env` or `DD_ENV` for RUM, APM, or tracing, use the *same value* for Feature Flags.
+The `env` value you use must match a query configured for the {{< prodname >}}Feature Flags{{< /prodname >}} environment you want, such as `staging-us` or `production`. If you already set `env` or `DD_ENV` for RUM, APM, or tracing, use the *same value* for {{< prodname >}}Feature Flags{{< /prodname >}}.
 
 ### Client-side applications
 

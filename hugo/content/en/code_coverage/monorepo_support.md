@@ -45,7 +45,7 @@ These methods can be used together. Service splitting and code owner splitting w
 
 If you use [Catalog][1], Code Coverage automatically uses the `codeLocations` attribute from your service definitions to calculate coverage for each service.
 
-<div class="alert alert-info">Using Catalog for service definitions is the recommended approach, as code locations configured in Catalog can be used by multiple Datadog products, including Code Coverage, Error Tracking, and Code Security. Use manual configuration only when Catalog integration is not available.</div>
+<div class="alert alert-info">Using Catalog for service definitions is the recommended approach, as code locations configured in Catalog can be used by multiple Datadog products, including Code Coverage, {{< prodname >}}Error Tracking{{< /prodname >}}, and {{< prodname >}}Code Security{{< /prodname >}}. Use manual configuration only when Catalog integration is not available.</div>
 
 ### How Catalog integration works
 
@@ -115,7 +115,7 @@ On the Branch overview, Pull Request details, and Commit details pages in [Code 
 
 ## Set up PR Gates for services and code owners
 
-You can configure [PR Gates][7] to enforce coverage thresholds for specific services or code owners.
+You can configure [{{< prodname >}}PR Gates{{< /prodname >}}][7] to enforce coverage thresholds for specific services or code owners.
 
 ### Using the Datadog UI
 

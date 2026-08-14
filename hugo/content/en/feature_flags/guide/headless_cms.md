@@ -32,7 +32,7 @@ This guide explains how to use Datadog Feature Flags to run Experiments with a h
 
 ## Prerequisites
 
-* A Datadog account with Feature Flags and Product Analytics enabled
+* A Datadog account with {{< prodname >}}Feature Flags{{< /prodname >}} and {{< prodname >}}Product Analytics{{< /prodname >}} enabled
 * The Datadog RUM Browser SDK installed in your frontend application
 * A headless CMS account such as: Contentful, Builder.io, or Strapi
 * Node.js / React (examples below use the React SDK; vanilla JavaScript and other frameworks are also supported)
@@ -124,7 +124,7 @@ export default function App() {
 
 ## Step 3: Create the feature flag in Datadog
 
-1. Navigate to **Feature Flags** in the Datadog UI and click **\+ Create Flag**.
+1. Navigate to **{{< prodname >}}Feature Flags{{< /prodname >}}** in the Datadog UI and click **\+ Create Flag**.
 2. Configure the flag:
    * **Name**: For example, `cms_homepage_hero_variant`
    * **Key**: For example, `cms_homepage_hero_variant`
@@ -243,7 +243,7 @@ export function HeroBanner() {
 
 ## Step 5: Track conversion events with Datadog RUM
 
-To measure experiment results in Product Analytics, trigger RUM custom actions at key moments in the user journey. These become the metrics used in your experiment.
+To measure experiment results in {{< prodname >}}Product Analytics{{< /prodname >}}, trigger RUM custom actions at key moments in the user journey. These become the metrics used in your experiment.
 
 {{< code-block lang="typescript" filename="lib/tracking.ts" >}}
 import { datadogRum } from '@datadog/browser-rum';
@@ -278,7 +278,7 @@ export function trackConversion(entryId: string, variantLabel: string, conversio
 
 After your RUM actions are flowing, define the metrics your experiment measures.
 
-1. In Datadog, navigate to **Digital Experience \> Product Analytics \> Metrics**.
+1. In Datadog, navigate to **Digital Experience \> {{< prodname >}}Product Analytics{{< /prodname >}} \> Metrics**.
 2. Click **\+ Create Metric**.
 3. Select the relevant RUM action as the event (for example, `cms_cta_click`).
 4. Choose an aggregation method:
@@ -292,7 +292,7 @@ After your RUM actions are flowing, define the metrics your experiment measures.
 
 ## Step 7: Launch the experiment
 
-1. Navigate to **Digital Experience \> Product Analytics \> Experiments**.
+1. Navigate to **Digital Experience \> {{< prodname >}}Product Analytics{{< /prodname >}} \> Experiments**.
 2. Click **\+ Create Experiment**.
 3. Enter a name and hypothesis, for example:
 

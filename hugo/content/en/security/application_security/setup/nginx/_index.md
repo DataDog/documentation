@@ -17,14 +17,14 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
 {{< partial name="app_and_api_protection/callout.html" >}}
 
 ## Overview
-Learn how to set up App and API Protection (AAP) on your NGINX proxy by selecting the integration that suits you best.
+Learn how to set up {{< prodname >}}App and API Protection{{< /prodname >}} (AAP) on your NGINX proxy by selecting the integration that suits you best.
 
 ## Environments
 

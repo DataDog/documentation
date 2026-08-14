@@ -20,7 +20,7 @@ further_reading:
 
 Before setting up Test Parallelization:
 
-- Set up [Test Optimization][1].
+- Set up [{{< prodname >}}Test Optimization{{< /prodname >}}][1].
 - For Ruby: use the `datadog-ci` gem version `1.31.0` or later.
 - For Python: use the `ddtrace` package version `4.11.0` or later and `pytest`.
 - For JavaScript: use the `dd-trace` package version `5.111.0` or later for `v5` or `v6.0.0` or later for `v6`, Node.js, and Jest.
@@ -83,7 +83,7 @@ Make these changes on a feature branch. Commit and push each CI configuration ch
 
 ### 1. Add test planning
 
-After setting up dependencies and Test Optimization, add `ddtest plan` before your existing test step. Keep the existing test command in place during this step.
+After setting up dependencies and {{< prodname >}}Test Optimization{{< /prodname >}}, add `ddtest plan` before your existing test step. Keep the existing test command in place during this step.
 
 Choose the minimum and maximum parallelism for your CI environment. For example, the following values allow `ddtest` to choose between 1 and 8 CI nodes or local workers:
 

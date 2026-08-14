@@ -34,13 +34,13 @@ further_reading:
   text: "Make data-driven design decisions with Product Analytics"
 ---
 
-{{< learning-center-callout header="Try Getting Started with Product Analytics in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/getting-started-product-analytics">}}
-  Learn how to define meaningful digital product metrics and visualize them in Product Analytics with a Datadog trial account. Enroll for free today!
+{{< learning-center-callout header="Try Getting Started with {{< prodname >}}Product Analytics{{< /prodname >}} in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/getting-started-product-analytics">}}
+  Learn how to define meaningful digital product metrics and visualize them in {{< prodname >}}Product Analytics{{< /prodname >}} with a Datadog trial account. Enroll for free today!
 {{< /learning-center-callout >}}
 
 ## Overview
 
-Product Analytics helps you gain insight into user behavior and make data-driven decisions. It supports the following use cases in your application:
+{{< prodname >}}Product Analytics{{< /prodname >}} helps you gain insight into user behavior and make data-driven decisions. It supports the following use cases in your application:
 
 - [Understand product adoption](#understand-product-adoption)
 - [Track conversion rates and their evolution over time](#track-conversion-rates-and-their-evolution-over-time)
@@ -49,17 +49,17 @@ Product Analytics helps you gain insight into user behavior and make data-driven
 
 ## Instrument your application
 
-Product Analytics collects client-side user activity data through the Datadog SDK. You can also send server-side events through the API to supplement your client-side data.
+{{< prodname >}}Product Analytics{{< /prodname >}} collects client-side user activity data through the Datadog SDK. You can also send server-side events through the API to supplement your client-side data.
 
 To get started, [add the Datadog SDK](#track-client-side-events-sdk) to your application and [enable Product Analytics](#enable-product-analytics) in Datadog. You can also [send server-side events through the API](#track-server-side-events-api).
 
-<div class="alert alert-info">Product Analytics uses the same SDKs and configuration as <a href="/real_user_monitoring/#what-is-real-user-monitoring">Real User Monitoring (RUM)</a>, and retains data for 15 months by default. See <a href="/data_security/data_retention_periods/">Datadog's data retention periods</a> for more information.</div>
+<div class="alert alert-info">{{< prodname >}}Product Analytics{{< /prodname >}} uses the same SDKs and configuration as <a href="/real_user_monitoring/#what-is-real-user-monitoring">Real User Monitoring (RUM)</a>, and retains data for 15 months by default. See <a href="/data_security/data_retention_periods/">Datadog's data retention periods</a> for more information.</div>
 
 ### Track client-side events (SDK)
 
 Collect events, such as pageviews or button clicks, from your users' devices, and send them to Datadog.
 
-Add the Datadog SDK to your application to start collecting user activity data. If you have already configured RUM, you do not need to instrument your application again for Product Analytics.
+Add the Datadog SDK to your application to start collecting user activity data. If you have already configured RUM, you do not need to instrument your application again for {{< prodname >}}Product Analytics{{< /prodname >}}.
 
 If you do not have an application set up in Datadog yet, follow the instructions for your platform:
 
@@ -77,10 +77,10 @@ After you set up client-side collection, you can use the [Product Analytics API]
 
 ## Enable Product Analytics
 
-For each application you want to monitor user behavior for, enable Product Analytics:
+For each application you want to monitor user behavior for, enable {{< prodname >}}Product Analytics{{< /prodname >}}:
 
 1. In Datadog, go to {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Real User Monitoring{{< /ui >}} > [{{< ui >}}Manage Applications{{< /ui >}}][9]. In the list of applications under {{< ui >}}Active{{< /ui >}}, select the application you want to monitor.
-2. Under {{< ui >}}PRODUCT SETTINGS{{< /ui >}}, click {{< ui >}}Product Analytics{{< /ui >}}.
+2. Under {{< ui >}}PRODUCT SETTINGS{{< /ui >}}, click {{< ui >}}{{< prodname >}}Product Analytics{{< /prodname >}}{{< /ui >}}.
 3. Click the {{< ui >}}Enable{{< /ui >}} button.
 
 {{< img src="product_analytics/enable-product-analytics.png" alt="Enable Product Analytics from the Application Management page.">}}
@@ -104,7 +104,7 @@ The Datadog SDK automatically collects three levels of client-side user data: Se
 Each Product Analytics feature provides context about your users' journeys.
 
 ### Understand product adoption
-The [Home][3] page gives you a bird's-eye view of your users' activity and your product's adoption. This is where you most often land when accessing Product Analytics.
+The [Home][3] page gives you a bird's-eye view of your users' activity and your product's adoption. This is where you most often land when accessing {{< prodname >}}Product Analytics{{< /prodname >}}.
 
 {{< img src="/product_analytics/pana_home_page.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
 
@@ -163,7 +163,7 @@ Use the following features to inform your product change decisions, such as chan
 : Capture and replay your users' web browsing or mobile app experience.<br><br>This is beneficial for error identification, reproduction, and resolution, and provides insights into your application's usage patterns and design pitfalls.
 
 [Heatmaps][10]
-: Visualize your users' interactions overlaid on Session Replay data. Product Analytics has three types of heatmaps: Click maps, Top elements, and Scroll maps. <br><br> Use heatmaps to review complex data at a glance, gaining insights into optimizing your user experience.
+: Visualize your users' interactions overlaid on Session Replay data. {{< prodname >}}Product Analytics{{< /prodname >}} has three types of heatmaps: Click maps, Top elements, and Scroll maps. <br><br> Use heatmaps to review complex data at a glance, gaining insights into optimizing your user experience.
 
 [Playlist][12]
 : Create a playlist of Session Replays to organize them by any patterns you notice. Learn more about [Session Replay Playlists][12].

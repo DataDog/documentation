@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Error Tracking processes errors collected from browser and mobile Datadog Log SDKs. Whenever an error containing a stack trace is collected, Error Tracking processes and groups it under an _issue_, which is a grouping of similar errors.
+{{< prodname >}}Error Tracking{{< /prodname >}} processes errors collected from browser and mobile Datadog Log SDKs. Whenever an error containing a stack trace is collected, {{< prodname >}}Error Tracking{{< /prodname >}} processes and groups it under an _issue_, which is a grouping of similar errors.
 
 An essential attribute for log errors is the stack trace in a log's `error.stack`. If you are sending stack traces to Datadog but they are not in `error.stack`, you can set up a [generic log remapper][6] to remap the stack trace to the correct attribute in Datadog.
 
@@ -28,7 +28,7 @@ Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][2].
 
 If you have not set up the Datadog Browser Logs SDK yet, follow the [in-app setup instructions][1] or see the [Browser Logs setup documentation][2].
 
-1. Download the latest version of the Logs Browser SDK. Error Tracking requires at least `v4.36.0`.
+1. Download the latest version of the Logs Browser SDK. {{< prodname >}}Error Tracking{{< /prodname >}} requires at least `v4.36.0`.
 2. Configure your application's `version`, `env`, and `service` when [initializing the SDK][3]. For example, with NPM:
 
    ```javascript
@@ -54,7 +54,7 @@ If you have not set up the Datadog Browser Logs SDK yet, follow the [in-app setu
    }
    ```
 
-**Note**: Error Tracking only considers errors that are instances of `Error`.
+**Note**: {{< prodname >}}Error Tracking{{< /prodname >}} only considers errors that are instances of `Error`.
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
 [2]: /logs/log_collection/javascript/#setup

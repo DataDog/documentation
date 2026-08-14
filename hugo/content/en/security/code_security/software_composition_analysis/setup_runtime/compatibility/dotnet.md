@@ -26,7 +26,7 @@ The minimum tracer version to get all supported application security capabilitie
 | AWS Lambda        |                                             |                                     |
 | Azure App Service | {{< X >}}                                   | {{< X >}}                           |
 
-**Note**: Azure App Service is supported for **web applications only**. Code Security capabilities are not supported for Azure Functions.
+**Note**: Azure App Service is supported for **web applications only**. {{< prodname >}}Code Security{{< /prodname >}} capabilities are not supported for Azure Functions.
 
 ## Language and framework compatibility
 

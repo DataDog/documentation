@@ -12,7 +12,7 @@ This document provides an overview of how BYOC (Bring Your Own Cloud) Logs and D
 
 ## Reverse connection (default)
 
-By default, BYOC Logs **searcher** pods initiate an outbound WebSocket connection to Datadog using your API key. Each searcher pod maintains its own connection to `wss://<DD_SITE>/api/unstable/cloudprem-connection-gateway/connect`.
+By default, {{< prodname >}}BYOC Logs{{< /prodname >}} **searcher** pods initiate an outbound WebSocket connection to Datadog using your API key. Each searcher pod maintains its own connection to `wss://<DD_SITE>/api/unstable/cloudprem-connection-gateway/connect`.
 
 Datadog recommends this setup because:
 - **No inbound ports need to be opened** in your network.
@@ -31,7 +31,7 @@ Datadog recommends this setup because:
 
 Searcher pods require **outbound HTTPS (port 443)** access to your Datadog site (for example, `app.datadoghq.com`). No inbound connectivity is required.
 
-If your environment uses an HTTP proxy, BYOC Logs supports standard proxy configuration with `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` environment variables.
+If your environment uses an HTTP proxy, {{< prodname >}}BYOC Logs{{< /prodname >}} supports standard proxy configuration with `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` environment variables.
 
 ### Which pods connect to Datadog
 
@@ -39,9 +39,9 @@ Only **searcher** pods establish the reverse connection. Indexers, the control p
 
 ## Public ingress (optional)
 
-It is also possible to configure BYOC Logs to deploy a public ingress so Datadog can establish the connection in the other direction.
+It is also possible to configure {{< prodname >}}BYOC Logs{{< /prodname >}} to deploy a public ingress so Datadog can establish the connection in the other direction.
 
-The public ingress enables Datadog's control plane and query service to manage and query BYOC Logs clusters over the public internet. It provides secure access to the BYOC Logs gRPC API using mTLS authentication. You can find more information about BYOC Logs ingress in its [configuration page](/byoc-logs/configure/ingress/).
+The public ingress enables Datadog's control plane and query service to manage and query {{< prodname >}}BYOC Logs{{< /prodname >}} clusters over the public internet. It provides secure access to the {{< prodname >}}BYOC Logs{{< /prodname >}} gRPC API using mTLS authentication. You can find more information about {{< prodname >}}BYOC Logs{{< /prodname >}} ingress in its [configuration page](/byoc-logs/configure/ingress/).
 
 ## Further reading
 

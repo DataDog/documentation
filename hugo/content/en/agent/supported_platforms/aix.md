@@ -20,7 +20,7 @@ algolia:
 ## Overview
 The [Datadog UNIX Agent][4] brings host-level monitoring to IBM AIX (PowerPC 8+) so you can visualize system metrics, enable additional Datadog products, and troubleshoot services that still run on-prem.
 
-The UNIX Agent supports Infrastructure Monitoring and Custom Metrics using [DogStatsD][11]. Other products like APM, Live Process Monitoring, Cloud Network Monitoring, and Log Management are not supported on the UNIX Agent. See [Supported Platforms][5] for the complete list of supported AIX versions.
+The UNIX Agent supports {{< prodname >}}Infrastructure Monitoring{{< /prodname >}} and Custom Metrics using [DogStatsD][11]. Other products like APM, Live Process Monitoring, Cloud Network Monitoring, and {{< prodname >}}Log Management{{< /prodname >}} are not supported on the UNIX Agent. See [Supported Platforms][5] for the complete list of supported AIX versions.
 
 This page walks you through installing, operating, and removing the Datadog UNIX Agent on AIX.
 

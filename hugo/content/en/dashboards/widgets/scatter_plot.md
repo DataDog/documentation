@@ -43,7 +43,7 @@ You can plot unaggregated data from the following sources:
 - Logs
 - RUM
 - LLM Observability
-- Product Analytics
+- {{< prodname >}}Product Analytics{{< /prodname >}}
 - Spans
 - Audit Trail
 - Events

@@ -25,11 +25,11 @@ For backend languages such as **C#**, **.NET**, **Go**, and **Node.js**, the cod
 
 If you are already sending stack traces to Datadog but they are not in `error.stack`, you can set up a [generic log remapper][8] to remap the stack trace to the correct attribute in Datadog.
 
-To configure inline code snippets in issues, set up the [source code integration][9]. Adding code snippets in Error Tracking for Logs does not require APM; the enrichment tags and linked repository is the same for both.
+To configure inline code snippets in issues, set up the [source code integration][9]. Adding code snippets in {{< prodname >}}Error Tracking{{< /prodname >}} for Logs does not require APM; the enrichment tags and linked repository is the same for both.
 
 #### Attributes for Error Tracking
 
-To enable Error Tracking, logs must include the following attributes:
+To enable {{< prodname >}}Error Tracking{{< /prodname >}}, logs must include the following attributes:
 
 - Either an `error.kind` or `error.stack` field. **Note**: if using `error.stack`, it must be a valid stack trace.
 - A `Service` attribute
@@ -37,7 +37,7 @@ To enable Error Tracking, logs must include the following attributes:
 
 The remaining attributes listed below are optional, but their presence improves error grouping.
 
-Specific attributes have a dedicated UI display within Datadog. To enable these functionalities for Error Tracking, use the following attribute names:
+Specific attributes have a dedicated UI display within Datadog. To enable these functionalities for {{< prodname >}}Error Tracking{{< /prodname >}}, use the following attribute names:
 
 | Attribute            | Description                                                             |
 |----------------------|-------------------------------------------------------------------------|

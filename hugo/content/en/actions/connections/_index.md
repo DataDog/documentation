@@ -50,7 +50,7 @@ If the integration you need to set up is not listed above, set up connection cre
 
 ## Connection credentials
 
-Connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation and App Builder products.
+Connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the {{< prodname >}}Workflow Automation{{< /prodname >}} and App Builder products.
 
 Connections support the following example use cases:
 - The integration you need is not available as a built-in connection.
@@ -133,7 +133,7 @@ The example below shows the {{< ui >}}New Connection{{< /ui >}} dialog box for t
 
 ### Restrict connection use
 
-To learn how to restrict connection use, see Access and Authentication for [Workflow Automation][12] or [App Builder][15].
+To learn how to restrict connection use, see Access and Authentication for [{{< prodname >}}Workflow Automation{{< /prodname >}}][12] or [App Builder][15].
 
 ## HTTP connection
 

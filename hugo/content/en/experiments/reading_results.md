@@ -109,7 +109,7 @@ For [warehouse-native metrics][3], click {{< ui >}}Copy SQL{{< /ui >}} to copy a
 
 ### Replays
 
-For metrics built on [RUM][4] or [Product Analytics][5] data, click {{< ui >}}Replays{{< /ui >}} to watch [session replays][6] for users enrolled in the experiment. Review how subjects in each variant experienced the product.
+For metrics built on [RUM][4] or [{{< prodname >}}Product Analytics{{< /prodname >}}][5] data, click {{< ui >}}Replays{{< /ui >}} to watch [session replays][6] for users enrolled in the experiment. Review how subjects in each variant experienced the product.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}

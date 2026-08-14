@@ -228,7 +228,7 @@ In this example, an additional `Tags` object property has been added with two ke
 
 ### Configure Custom Costs
 
-After your data is formatted to the requirements above, upload your CSV and JSON files to Cloud Cost Management on the [**Custom Costs Files** page][3] or programmatically by using the API.
+After your data is formatted to the requirements above, upload your CSV and JSON files to {{< prodname >}}Cloud Cost Management{{< /prodname >}} on the [**Custom Costs Files** page][3] or programmatically by using the API.
 
 In Datadog:
 

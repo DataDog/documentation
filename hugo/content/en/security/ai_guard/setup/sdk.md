@@ -9,16 +9,16 @@ further_reading:
   text: HTTP API
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov" >}}<div class="alert alert-danger">{{< prodname >}}AI Guard{{< /prodname >}} isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-Use an SDK to call the AI Guard REST API and monitor AI Guard activity in real time in Datadog.
+Use an SDK to call the AI Guard REST API and monitor {{< prodname >}}AI Guard{{< /prodname >}} activity in real time in Datadog.
 
 {{< partial name="security-platform/aiguard-sdk-setup.html" target="manual" >}}
 
 ## Install the SDK
 
-To use AI Guard and see AI Guard activity in Datadog, install the appropriate SDK for your language. The SDK requires the Datadog Agent to send data to Datadog.
+To use {{< prodname >}}AI Guard{{< /prodname >}} and see {{< prodname >}}AI Guard{{< /prodname >}} activity in Datadog, install the appropriate SDK for your language. The SDK requires the Datadog Agent to send data to Datadog.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -80,7 +80,7 @@ result = client.evaluate(
 ```
 
 The `evaluate` method accepts the following parameters:
-- `messages` (required): list of `Message` objects (prompts or tool calls) for AI Guard to evaluate.
+- `messages` (required): list of `Message` objects (prompts or tool calls) for {{< prodname >}}AI Guard{{< /prodname >}} to evaluate.
 - `options` (optional): an `Options` object with a `block` flag. When set to `True`, the SDK raises an `AIGuardAbortError` when the assessment is `DENY` or `ABORT` and the service is configured with blocking enabled. When omitted, blocking follows the remote `is_blocking_enabled` setting.
 
 The method returns an `Evaluation` object containing:
@@ -155,7 +155,7 @@ const result = await tracer.aiguard.evaluate([
 ```
 
 The evaluate method returns a promise and receives the following parameters:
-- `messages` (required): array of message objects (prompts or tool calls) for AI Guard to evaluate.
+- `messages` (required): array of message objects (prompts or tool calls) for {{< prodname >}}AI Guard{{< /prodname >}} to evaluate.
 - `opts` (optional): object with a `block` flag. When set to `true`, the SDK rejects the promise with `AIGuardAbortError` when the assessment is `DENY` or `ABORT` and the service is configured with blocking enabled. When omitted, blocking follows the remote `is_blocking_enabled` setting.
 
 The method returns a promise that resolves to an Evaluation object containing:
@@ -211,7 +211,7 @@ final AIGuard.Evaluation evaluation = AIGuard.evaluate(
 ```
 
 The evaluate method receives the following parameters:
-- `messages` (required): list of `Message` objects (prompts or tool calls) for AI Guard to evaluate.
+- `messages` (required): list of `Message` objects (prompts or tool calls) for {{< prodname >}}AI Guard{{< /prodname >}} to evaluate.
 - `options` (optional): `Options` object with a `block` flag. When set to `true`, the SDK throws an `AIGuardAbortError` when the assessment is `DENY` or `ABORT` and the service is configured with blocking enabled. When omitted, blocking follows the remote `is_blocking_enabled` setting.
 
 The method returns an `Evaluation` object containing:
@@ -294,7 +294,7 @@ result = Datadog::AIGuard.evaluate(
 ```
 
 The evaluate method receives the following parameters:
-- `messages` (required): list of messages (prompts or tool calls) for AI Guard to evaluate.
+- `messages` (required): list of messages (prompts or tool calls) for {{< prodname >}}AI Guard{{< /prodname >}} to evaluate.
 - `allow_raise` (optional): Boolean flag; if set to `false`, the method will not not raise an `AIGuardAbortError` when the assessment is `DENY` or `ABORT`.
 
 This SDK method raises an `AIGuardAbortError` when the assessment is `DENY` or `ABORT` and if the service is configured with blocking enabled.

@@ -36,7 +36,7 @@ The Datadog extension for VS Code and Cursor brings Datadog to your code editor 
 
 The extension includes these features:
 
-- [**Code Security**](#code-security): Detect and fix security issues before you commit, and write custom rules.
+- [**{{< prodname >}}Code Security{{< /prodname >}}**](#code-security): Detect and fix security issues before you commit, and write custom rules.
 
 - [**Code Insights**](#code-insights): Stay informed about code and library vulnerabilities without leaving the code.
 
@@ -72,7 +72,7 @@ Install the extension either directly in the IDE, or from the web:
 
 ### Datadog MCP Server setup
 
-Sign in to Datadog using the extension and run the `Datadog: Open MCP Configuration Assistant` command. Follow the guidance to configure the [Datadog MCP Server][3].
+Sign in to Datadog using the extension and run the `Datadog: Open MCP Configuration Assistant` command. Follow the guidance to configure the [{{< prodname >}}Datadog MCP Server{{< /prodname >}}][3].
 
 [1]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
 [3]: /mcp_server/
@@ -88,7 +88,7 @@ Install the extension either directly in the IDE, or from the web:
 
 ### Datadog MCP Server setup
 
-Install the Datadog Plugin to enable the [Datadog MCP Server][3]. You can install the plugin from the [Cursor Marketplace][4] or in **Cursor Settings** > **Plugins**.
+Install the Datadog Plugin to enable the [{{< prodname >}}Datadog MCP Server{{< /prodname >}}][3]. You can install the plugin from the [Cursor Marketplace][4] or in **Cursor Settings** > **Plugins**.
 
 [2]: https://open-vsx.org/extension/datadog/datadog-vscode
 [3]: /mcp_server/setup/?tab=cursor
@@ -101,11 +101,11 @@ Install the Datadog Plugin to enable the [Datadog MCP Server][3]. You can instal
 
 ### Code Security
 
-The [**Code Security**][19] features analyze your code locally against predefined rules to detect and fix security issues and vulnerabilities before you commit changes.
+The [**{{< prodname >}}Code Security{{< /prodname >}}**][19] features analyze your code locally against predefined rules to detect and fix security issues and vulnerabilities before you commit changes.
 
 {{< img src="/ide_plugins/vscode/static_analysis.mp4" alt="Preview of Static Analysis" style="width:100%" video=true >}}
 
-Find out more in the [Code Security][19] sub-section.
+Find out more in the [{{< prodname >}}Code Security{{< /prodname >}}][19] sub-section.
 
 ### Code insights
 
@@ -119,11 +119,11 @@ Find out more in the [Code Insights][21] sub-section.
 
 <div class="alert alert-info">This feature is only available for VS Code and Cursor. Other forks of VS Code are not supported.</div>
 
-The **View in VS Code** or **View in Cursor** feature provides a link from Datadog directly to your source files. Look for the button next to frames in stack traces displayed in the UI (for example, in [Error Tracking][5]):
+The **View in VS Code** or **View in Cursor** feature provides a link from Datadog directly to your source files. Look for the button next to frames in stack traces displayed in the UI (for example, in [{{< prodname >}}Error Tracking{{< /prodname >}}][5]):
 
 {{< img src="/ide_plugins/vscode/view-in-vscode-2.png" alt="A stack trace in Datadog showing the View in VS Code button" style="width:100%;" >}}
 
-You can also use this feature to open your source files from an insight (such as an error from Error Tracking):
+You can also use this feature to open your source files from an insight (such as an error from {{< prodname >}}Error Tracking{{< /prodname >}}):
 
 {{< img src="/ide_plugins/vscode/view-in-vscode-error.png" alt="An Error Tracking issue in Datadog showing the View in VS Code button" style="width:100%;" >}}
 
@@ -135,7 +135,7 @@ The **Fix in Chat** button appears in several contexts when the extension identi
 
 {{< img src="/ide_plugins/vscode/cursor_fix_in_chat.mp4" alt="Using Fix in Chat to fix an inline code error" style="width:100%" video=true >}}
 
-The extension also handles the {{< ui >}}Fix with Cursor{{< /ui >}} deep link used in Code Security. When you click {{< ui >}}Fix with Cursor{{< /ui >}} in the Datadog UI or in a pull request comment, the extension opens the workspace in Cursor. It then checks out the relevant repository, branch, and commit, and loads a tailored remediation prompt for the finding.
+The extension also handles the {{< ui >}}Fix with Cursor{{< /ui >}} deep link used in {{< prodname >}}Code Security{{< /prodname >}}. When you click {{< ui >}}Fix with Cursor{{< /ui >}} in the Datadog UI or in a pull request comment, the extension opens the workspace in Cursor. It then checks out the relevant repository, branch, and commit, and loads a tailored remediation prompt for the finding.
 
 ## Other features
 
@@ -153,7 +153,7 @@ Find out more in the [Logs][20] sub-section.
 
 <div class="alert alert-info">This feature is in limited support.</div>
 
-**Exception Replay** allows you to inspect the stack trace frames of any Error Tracking code insight and get information about the values of the variables of the code running in production.
+**Exception Replay** allows you to inspect the stack trace frames of any {{< prodname >}}Error Tracking{{< /prodname >}} code insight and get information about the values of the variables of the code running in production.
 
 {{< img src="/ide_plugins/vscode/exception_replay.mp4" alt="Preview of Exception Replay" style="width:100%" video=true >}}
 

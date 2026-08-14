@@ -5,13 +5,13 @@ disable_toc: false
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
-Datadog App and API Protection (AAP) is built on top of [APM][3] and runs alongside [Infrastructure Monitoring][7] by default. While Datadog recommends using AAP together with APM and Infrastructure Monitoring to adopt DevSecOps practices, you can also run AAP on its own. This configuration is referred to as Standalone App and API Protection.
+Datadog App and API Protection (AAP) is built on top of [APM][3] and runs alongside [{{< prodname >}}Infrastructure Monitoring{{< /prodname >}}][7] by default. While Datadog recommends using AAP together with APM and {{< prodname >}}Infrastructure Monitoring{{< /prodname >}} to adopt DevSecOps practices, you can also run AAP on its own. This configuration is referred to as Standalone App and API Protection.
 
-Running standalone allows to be billed primarily for App and API Protection. Some APM intake is still present to support AAP features (for example, security traces), and is expected to appear on your bill.
+Running standalone allows to be billed primarily for {{< prodname >}}App and API Protection{{< /prodname >}}. Some APM intake is still present to support AAP features (for example, security traces), and is expected to appear on your bill.
 
 This guide explains how to disable APM tracing and infrastructure monitoring.
 
@@ -20,7 +20,7 @@ This guide explains how to disable APM tracing and infrastructure monitoring.
 This guide assumes you have the following:
 
 - **Datadog Agent:** [Install the Datadog Agent][6] and configure it for your application's operating system, container, cloud, or virtual environment. Disabling Infrastructure Monitoring requires Datadog Agent version 7.77.0 or newer.
-- **Supported SDK:** The Datadog SDK used by your application or service supports App and API Protection. For more details, see the guide for [App and API Protection][4].
+- **Supported SDK:** The Datadog SDK used by your application or service supports {{< prodname >}}App and API Protection{{< /prodname >}}. For more details, see the guide for [{{< prodname >}}App and API Protection{{< /prodname >}}][4].
 
 ## Compatibility
 
@@ -38,13 +38,13 @@ Standalone App and API Protection is supported for the following SDK versions:
 
 ## Setup
 
-Standalone App and API Protection requires two pieces of configuration: disabling Infrastructure Monitoring on the Datadog Agent, and disabling APM tracing on the SDK while enabling AAP.
+Standalone App and API Protection requires two pieces of configuration: disabling {{< prodname >}}Infrastructure Monitoring{{< /prodname >}} on the Datadog Agent, and disabling APM tracing on the SDK while enabling AAP.
 
 ### Disable Infrastructure Monitoring on the Datadog Agent
 
 Standalone App and API Protection uses the same Datadog Agent installation as APM. For installation steps, see [Install the Datadog Agent][6].
 
-To disable Infrastructure Monitoring, set the Datadog Agent infrastructure mode to `none` (requires Datadog Agent 7.77.0 or newer) using either:
+To disable {{< prodname >}}Infrastructure Monitoring{{< /prodname >}}, set the Datadog Agent infrastructure mode to `none` (requires Datadog Agent 7.77.0 or newer) using either:
 
 - The `DD_INFRASTRUCTURE_MODE=none` environment variable
 - The `infrastructure_mode: none` setting in the `datadog.yaml` configuration file
@@ -58,7 +58,7 @@ On the instrumented service, set the following environment variables:
 - `DD_APM_TRACING_ENABLED=false`
 - `DD_APPSEC_ENABLED=true`
 
-`DD_APM_TRACING_ENABLED=false` disabled APM tracing and limits the amount of APM data sent to the minimum required by App and API Protection. This environment variable can be combined with other [App and API Protection configuration options][4].
+`DD_APM_TRACING_ENABLED=false` disabled APM tracing and limits the amount of APM data sent to the minimum required by {{< prodname >}}App and API Protection{{< /prodname >}}. This environment variable can be combined with other [App and API Protection configuration options][4].
 
 
 [1]: /security/workload_protection/

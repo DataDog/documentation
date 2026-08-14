@@ -22,7 +22,7 @@ The NetFlow monitor is in Preview. Reach out to your Datadog representative to s
 
 ## Overview
 
-Datadog [Network Device Monitoring][1] (NDM) provides visibility into your on-premises and virtual network devices, such as routers, switches, and firewalls. As a part of NDM, [NetFlow Monitoring][2] enables you to examine, interpret, and analyze your network traffic flow data over time, and identify top contributors to network congestion. 
+Datadog [{{< prodname >}}Network Device Monitoring{{< /prodname >}}][1] (NDM) provides visibility into your on-premises and virtual network devices, such as routers, switches, and firewalls. As a part of NDM, [NetFlow Monitoring][2] enables you to examine, interpret, and analyze your network traffic flow data over time, and identify top contributors to network congestion. 
 
 After enabling NetFlow Monitoring, you can create a NetFlow monitor to alert you when a flow metric (such as network throughput for a specific source or destination pair) crosses a threshold that you have set.
 

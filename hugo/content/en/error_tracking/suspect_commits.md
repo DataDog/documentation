@@ -8,7 +8,7 @@ further_reading:
 ---
 ## Overview
 
-Error Tracking can identify suspect commits, helping you pinpoint the root cause of your errors and expedite resolution. This feature is automatically enabled on issues when the [setup requirements](#setup) are met.
+{{< prodname >}}Error Tracking{{< /prodname >}} can identify suspect commits, helping you pinpoint the root cause of your errors and expedite resolution. This feature is automatically enabled on issues when the [setup requirements](#setup) are met.
 
 {{< img src="logs/error_tracking/suspect_commit.png" alt="A suspect commit as it is displayed in the Datadog UI" style="width:100%" >}}
 
@@ -33,7 +33,7 @@ Once the setup requirements are met, suspect commits automatically appear on iss
 
 ### Enable Source Code Integration
 
-The Suspect Commits feature requires [Source Code Integration][1]. To enable Source Code Integration:
+The Suspect Commits feature requires [{{< prodname >}}Source Code Integration{{< /prodname >}}][1]. To enable {{< prodname >}}Source Code Integration{{< /prodname >}}:
 
 1. On the [{{< ui >}}Integrations{{< /ui >}} page][3] in Datadog, choose {{< ui >}}Link Source Code{{< /ui >}} in the top navbar.
 2. Follow the steps to associate a commit with your telemetry and configure your GitHub repository.

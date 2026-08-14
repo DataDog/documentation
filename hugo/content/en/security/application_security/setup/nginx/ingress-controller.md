@@ -17,7 +17,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -29,7 +29,7 @@ App and API Protection is in Preview on Datadog Government site US1-FED.
 that uses NGINX as a reverse proxy and load balancer. In a Kubernetes cluster, external access is restricted by default for security reasons.
 An ingress controller uses rules to control how external traffic may reach your services.
 
-You can enable [App and API Protection][10] for your ingress-nginx controller to inspect and protect traffic at the edge of your cluster. Datadog supports two setup methods:
+You can enable [{{< prodname >}}App and API Protection{{< /prodname >}}][10] for your ingress-nginx controller to inspect and protect traffic at the edge of your cluster. Datadog supports two setup methods:
 
 - **Automated configuration** (recommended): the Datadog Cluster Agent injects the `nginx-datadog` module into your ingress-nginx controller pods.
 - **Manual configuration**: you add a Datadog init container and NGINX configuration snippets yourself.
@@ -101,9 +101,9 @@ After you enable automatic configuration, the Datadog Cluster Agent:
 
 - Detects your ingress-nginx controller pods
 - Injects the `nginx-datadog` module into the controller
-- Configures the controller to load the module and apply App and API Protection
+- Configures the controller to load the module and apply {{< prodname >}}App and API Protection{{< /prodname >}}
 
-You can turn App and API Protection on or off through [Remote Configuration][8] without changing this setup.
+You can turn {{< prodname >}}App and API Protection{{< /prodname >}} on or off through [Remote Configuration][8] without changing this setup.
 
 For configuration options, see [App and API Protection for Kubernetes][9].
 

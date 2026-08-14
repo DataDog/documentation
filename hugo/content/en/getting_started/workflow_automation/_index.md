@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-With Workflow Automation, you can automate end-to-end processes in response to Datadog alerts and security signals. Workflow Automation is powered by real-time observability data, enabling you to resolve issues faster and proactively maintain the availability and security of your systems.
+With Workflow Automation, you can automate end-to-end processes in response to Datadog alerts and security signals. {{< prodname >}}Workflow Automation{{< /prodname >}} is powered by real-time observability data, enabling you to resolve issues faster and proactively maintain the availability and security of your systems.
 
 Follow this guide to create a custom workflow triggered by a monitor alert. When it is triggered, the workflow creates a task in Jira and sends a notification to Slack with a link to the Jira ticket. This guide covers passing data from one step in your workflow to another step, saving and publishing your workflow, and viewing the workflow's run history.
 
@@ -23,7 +23,7 @@ Follow this guide to create a custom workflow triggered by a monitor alert. When
 
 Before getting started, you need the Jira and Slack integrations installed on your [Datadog account][1]. For installation instructions, see the [Slack][2] and [Jira integration][3] documentation.
 
-Account credentials and authentication that you set up in the Jira and Slack integration tiles automatically propagate to the Jira and Slack actions in Workflow Automation. Some integrations require additional configuration for authentication. For more information, see [Connections][4].
+Account credentials and authentication that you set up in the Jira and Slack integration tiles automatically propagate to the Jira and Slack actions in {{< prodname >}}Workflow Automation{{< /prodname >}}. Some integrations require additional configuration for authentication. For more information, see [Connections][4].
 
 ## Build the workflow
 

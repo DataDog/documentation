@@ -17,7 +17,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -85,7 +85,7 @@ ENV CORECLR_ENABLE_PROFILING=1 \
 
 {{% collapse-content title="APM Tracing Enabled" level="h4" %}}
 
-Update your task definition to include the .NET agent and App and API Protection configuration:
+Update your task definition to include the .NET agent and {{< prodname >}}App and API Protection{{< /prodname >}} configuration:
 
 ```json
 {
@@ -115,9 +115,9 @@ Update your task definition to include the .NET agent and App and API Protection
 {{% /collapse-content %}}
 
 {{% collapse-content title="APM Tracing Disabled" level="h4" %}}
-To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
+To disable APM tracing while keeping {{< prodname >}}App and API Protection{{< /prodname >}} enabled, you must set the APM tracing variable to false.
 
-Update your task definition to include the .NET agent and App and API Protection configuration with APM tracing disabled:
+Update your task definition to include the .NET agent and {{< prodname >}}App and API Protection{{< /prodname >}} configuration with APM tracing disabled:
 
 ```json
 {
@@ -163,7 +163,7 @@ aws ecs run-task --cluster your-cluster --task-definition your-task-definition
 
 ## Troubleshooting
 
-If you encounter issues while setting up App and API Protection for your .net application, see the [.NET App and API Protection troubleshooting guide][2].
+If you encounter issues while setting up {{< prodname >}}App and API Protection{{< /prodname >}} for your .net application, see the [.NET App and API Protection troubleshooting guide][2].
 
 ## Further Reading
 

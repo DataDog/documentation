@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Cloud SIEM applies detection rules to all processed logs in Datadog to detect threats, like a targeted attack, a threat intel listed IP communicating with your systems, or an insecure resource modification. The threats are surfaced as Security Signals in the Security Signals Explorer for triaging.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} applies detection rules to all processed logs in Datadog to detect threats, like a targeted attack, a threat intel listed IP communicating with your systems, or an insecure resource modification. The threats are surfaced as Security Signals in the Security Signals Explorer for triaging.
 
 This guide walks you through configuring Microsoft Azure to send logs to Datadog so that you can start detecting threats on your Azure Platform logs.
 
@@ -178,7 +178,7 @@ Go to [Log Explorer][7] and enter `service:azure` in the search query to view yo
 
 ## Use Cloud SIEM to triage Security Signals
 
-Cloud SIEM applies out-of-the-box detection rules to all processed logs, including the Azure Platform logs you have just set up. When a threat is detected with a detection rule, a Security Signal is generated and can be viewed in the Security Signals Explorer.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} applies out-of-the-box detection rules to all processed logs, including the Azure Platform logs you have just set up. When a threat is detected with a detection rule, a Security Signal is generated and can be viewed in the Security Signals Explorer.
 
 - Go to the Cloud SIEM Signals Explorer to view and triage threats. See Security Signals Explorer for further details.
 - See out-of-the-box detection rules that are applied to your logs.

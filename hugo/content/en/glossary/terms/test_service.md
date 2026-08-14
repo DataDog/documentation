@@ -9,4 +9,4 @@ core_product:
 related_terms:
   - test_suite
 ---
-In Datadog Test Optimization, a test service is generally a group of tests associated with, for example, a project or repo. It contains all the individual tests for your code, optionally organized into test suites, which are like folders for your tests. For more information on Test Optimization, <a href="/tests/">see the documentation</a>.
+In Datadog Test Optimization, a test service is generally a group of tests associated with, for example, a project or repo. It contains all the individual tests for your code, optionally organized into test suites, which are like folders for your tests. For more information on {{< prodname >}}Test Optimization{{< /prodname >}}, <a href="/tests/">see the documentation</a>.

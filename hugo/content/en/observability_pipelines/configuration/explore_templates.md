@@ -73,7 +73,7 @@ When you have logs from different services and applications, you might need to s
 
 Metrics capture signals about your environment and offer insight into your system health, business workflows, and security activities. These metrics are sent from your various applications, network devices, and nodes, but the value of individual metrics can vary significantly.
 
-To help you manage the quality and volume of your metrics, use the Metric Tag Governance template to process them in Observability Pipelines before sending them to your destinations. You can use processors to keep only the metrics you need, standardize metrics tagging, and remove unwanted tags to prevent high cardinality.
+To help you manage the quality and volume of your metrics, use the Metric Tag Governance template to process them in {{< prodname >}}Observability Pipelines{{< /prodname >}} before sending them to your destinations. You can use processors to keep only the metrics you need, standardize metrics tagging, and remove unwanted tags to prevent high cardinality.
 
 {{% /tab %}}
 {{< /tabs >}}

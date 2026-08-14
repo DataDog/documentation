@@ -18,7 +18,7 @@ further_reading:
 
 {{% observability_pipelines/legacy_warning %}}
 
-<div class="alert alert-info">Observability Pipelines only supports Splunk's HTTP Event Collector (HEC) protocol.</div>
+<div class="alert alert-info">{{< prodname >}}Observability Pipelines{{< /prodname >}} only supports Splunk's HTTP Event Collector (HEC) protocol.</div>
 
 ## Overview
 
@@ -40,7 +40,7 @@ Before installing, make sure you have:
 * A valid [Datadog API key][2].
 * A Pipeline ID.
 
-You can generate both of these in [Observability Pipelines][3].
+You can generate both of these in [{{< prodname >}}Observability Pipelines{{< /prodname >}}][3].
 
 
 ### Provider-specific requirements
@@ -120,7 +120,7 @@ In order to run the Worker in your AWS account, you need administrative access t
 
 ## Setting up the Splunk index
 
-<div class="alert alert-info">Observability Pipelines supports acknowledgments when you enable the <strong>Enable Indexer Acknowledgments</strong> setting on the input.</div>
+<div class="alert alert-info">{{< prodname >}}Observability Pipelines{{< /prodname >}} supports acknowledgments when you enable the <strong>Enable Indexer Acknowledgments</strong> setting on the input.</div>
 
 To receive logs from the Observability Pipelines Worker, you must provision a HEC input and HEC token on the index.
 
@@ -151,7 +151,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -v ./pipeline.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
       datadog/observability-pipelines-worker run
     ```
-   Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. Be sure to also update `SPLUNK_HEC_ENDPOINT` and `SPLUNK_TOKEN` with values that match the Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index). `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1. 
+   Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your {{< prodname >}}Observability Pipelines{{< /prodname >}} configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. Be sure to also update `SPLUNK_HEC_ENDPOINT` and `SPLUNK_TOKEN` with values that match the Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index). `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1. 
   
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/splunk/pipeline.yaml
@@ -538,7 +538,7 @@ An NLB is provisioned by the CloudFormation template, and is configured to point
 {{< /tabs >}}
 
 ### Buffering
-Observability Pipelines includes multiple buffering strategies that allow you to increase the resilience of your cluster to downstream faults. The provided sample configurations use disk buffers, the capacities of which are rated for approximately 10 minutes of data at 10Mbps/core for Observability Pipelines deployments. That is often enough time for transient issues to resolve themselves, or for incident responders to decide what needs to be done with the observability data.
+{{< prodname >}}Observability Pipelines{{< /prodname >}} includes multiple buffering strategies that allow you to increase the resilience of your cluster to downstream faults. The provided sample configurations use disk buffers, the capacities of which are rated for approximately 10 minutes of data at 10Mbps/core for {{< prodname >}}Observability Pipelines{{< /prodname >}} deployments. That is often enough time for transient issues to resolve themselves, or for incident responders to decide what needs to be done with the observability data.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -597,7 +597,7 @@ In the sample configuration provided, the same HEC token is used for both the Sp
 At this point, your logs should be going to the Worker and be available for processing. The next section goes through what process is included by default, and the additional options that are available.
 
 ## Working with data
-The sample Observability Pipelines configuration does the following:
+The sample {{< prodname >}}Observability Pipelines{{< /prodname >}} configuration does the following:
 - Collects logs being sent from the Splunk forwarder to the Observability Pipelines Worker. 
 - Transforms logs by adding tags to data that has come through the Observability Pipelines Worker. This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
 - Routes the logs by dual-shipping the data to both Splunk and Datadog.

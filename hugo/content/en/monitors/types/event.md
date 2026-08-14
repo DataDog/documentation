@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Datadog automatically creates events from various products including monitors, Watchdog, and Error Tracking. You can also track events generated from the Agent and installed integrations and ingest events from sources, including alert events from third parties, change requests, deployments, and configuration changes.
+Datadog automatically creates events from various products including monitors, Watchdog, and {{< prodname >}}Error Tracking{{< /prodname >}}. You can also track events generated from the Agent and installed integrations and ingest events from sources, including alert events from third parties, change requests, deployments, and configuration changes.
 
 <div class="alert alert-info">Event monitors do not alert on <a href="/monitors/status/events/">monitor events</a> as this can create an endless loop.</a></div>
 

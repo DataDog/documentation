@@ -97,7 +97,7 @@ You can retrieve the command for running a specific test using `datadog-ci` from
 3. Look for the command in the {{< ui >}}CI/CD Execution{{< /ui >}} section.
 4. Copy and paste the command into your command line.
 
-For more information about running the Synthetics command and using reporters, see the [Configuration documentation][11].
+For more information about running the {{< prodname >}}Synthetics{{< /prodname >}} command and using reporters, see the [Configuration documentation][11].
 
 ## Examine results in the Synthetic Monitoring & Testing Results Explorer
 

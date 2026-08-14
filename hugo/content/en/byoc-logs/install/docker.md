@@ -16,16 +16,16 @@ aliases:
 ## Overview
 
 <div class="alert alert-warning">
-<strong>This installation method is for local evaluation only.</strong> Docker is not supported for production deployments. For production workloads, deploy BYOC Logs on a <a href="/byoc-logs/install/">supported Kubernetes platform</a> (EKS, GKE, or AKS).
+<strong>This installation method is for local evaluation only.</strong> Docker is not supported for production deployments. For production workloads, deploy {{< prodname >}}BYOC Logs{{< /prodname >}} on a <a href="/byoc-logs/install/">supported Kubernetes platform</a> (EKS, GKE, or AKS).
 </div>
 
-This installation guide shows you how to run Datadog BYOC (Bring Your Own Cloud) Logs locally using either standalone Docker containers or Docker Compose. Follow these steps to deploy a minimal BYOC Logs environment on your machine, ideal for exploring BYOC Logs features and testing log ingestion with Datadog.
+This installation guide shows you how to run Datadog BYOC (Bring Your Own Cloud) Logs locally using either standalone Docker containers or Docker Compose. Follow these steps to deploy a minimal {{< prodname >}}BYOC Logs{{< /prodname >}} environment on your machine, ideal for exploring {{< prodname >}}BYOC Logs{{< /prodname >}} features and testing log ingestion with Datadog.
 
 ## Prerequisites
 
-Before getting started with BYOC Logs, ensure you have:
+Before getting started with {{< prodname >}}BYOC Logs{{< /prodname >}}, ensure you have:
 
-- A **Datadog account** with the BYOC Logs feature enabled.
+- A **Datadog account** with the {{< prodname >}}BYOC Logs{{< /prodname >}} feature enabled.
 - **API credentials**: Have your [Datadog API key][2] ready.
 - **Docker**: [Docker][4] installed and running on your machine.
 - **Docker Compose** (optional): [Docker Compose][5] for a single command line setup.
@@ -35,12 +35,12 @@ Before getting started with BYOC Logs, ensure you have:
 Choose one of the following installation methods:
 
 1. **Standalone Docker containers**: Minimal setup for testing
-2. **Docker Compose**: Single command line to run BYOC Logs and Datadog agent
+2. **Docker Compose**: Single command line to run {{< prodname >}}BYOC Logs{{< /prodname >}} and Datadog agent
 
 {{< tabs >}}
 {{% tab "Standalone Docker setup" %}}
 
-This method uses individual Docker containers for a minimal BYOC Logs setup.
+This method uses individual Docker containers for a minimal {{< prodname >}}BYOC Logs{{< /prodname >}} setup.
 
 Export your Datadog credentials as environment variables:
 
@@ -51,7 +51,7 @@ export DD_API_KEY="your_datadog_api_key"
 
 ### Step 1: Start BYOC Logs
 
-Create the data directory and start the BYOC Logs container:
+Create the data directory and start the {{< prodname >}}BYOC Logs{{< /prodname >}} container:
 
 ```shell
 # Start BYOC Logs
@@ -66,7 +66,7 @@ docker run -d \
 
 ### Step 2: Start the Datadog Agent
 
-To collect logs from your local containers and send them to BYOC Logs, start the Datadog Agent:
+To collect logs from your local containers and send them to {{< prodname >}}BYOC Logs{{< /prodname >}}, start the Datadog Agent:
 
 ```shell
 docker run \
@@ -89,7 +89,7 @@ docker run \
 
 {{% tab "Docker Compose setup" %}}
 
-This method provides a BYOC Logs setup with the Datadog Agent integration.
+This method provides a {{< prodname >}}BYOC Logs{{< /prodname >}} setup with the Datadog Agent integration.
 
 ### Step 1: Create the Docker Compose file
 
@@ -155,7 +155,7 @@ docker compose up -d
 
 ## Next steps
 
-After starting BYOC Logs with either method, verify that the installation is working correctly:
+After starting {{< prodname >}}BYOC Logs{{< /prodname >}} with either method, verify that the installation is working correctly:
 
 ### Check BYOC Logs status
 
@@ -169,7 +169,7 @@ You should see a response with version information.
 
 ### Send a log
 
-In your terminal, send a "Hello World" log entry directly to your local BYOC Logs instance using the API:
+In your terminal, send a "Hello World" log entry directly to your local {{< prodname >}}BYOC Logs{{< /prodname >}} instance using the API:
 
 ```shell
 curl -X POST "http://localhost:7280/api/v2/logs" \
@@ -186,7 +186,7 @@ curl -X POST "http://localhost:7280/api/v2/logs" \
 
 ### Search your local logs from the Log Explorer
 
-Verify that BYOC Logs is running. In the Log Explorer, select your BYOC Logs index to search and analyze your logs.
+Verify that {{< prodname >}}BYOC Logs{{< /prodname >}} is running. In the Log Explorer, select your {{< prodname >}}BYOC Logs{{< /prodname >}} index to search and analyze your logs.
 
 ## Further reading
 

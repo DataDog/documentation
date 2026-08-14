@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-You can use your Test Optimization search query and visualization graphs in dashboards, monitors, and notebooks, or programmatically search for events using the [Search Tests Events endpoint][1].
+You can use your {{< prodname >}}Test Optimization{{< /prodname >}} search query and visualization graphs in dashboards, monitors, and notebooks, or programmatically search for events using the [Search Tests Events endpoint][1].
 
 ## Export the search query or visualization
 

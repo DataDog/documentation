@@ -3,7 +3,7 @@ title: Deploying Workload Protection on the Agent
 type: multi-code-lang
 ---
 
-Use the following instructions to enable Workload Protection on the Datadog Agent.
+Use the following instructions to enable {{< prodname >}}Workload Protection{{< /prodname >}} on the Datadog Agent.
 
 {{< partial name="security-platform/WP-billing-note.html" >}}
 

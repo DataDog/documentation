@@ -16,9 +16,9 @@ further_reading:
   text: "Capturing SQL Query Parameter Values"
 ---
 
-Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
+{{< prodname >}}Database Monitoring{{< /prodname >}} provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
-Complete the following steps to enable Database Monitoring with your database:
+Complete the following steps to enable {{< prodname >}}Database Monitoring{{< /prodname >}} with your database:
 
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 2. [Install and configure the Agent](#install-and-configure-the-agent)
@@ -228,7 +228,7 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 [6]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-If you're using a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring. If cluster checks aren’t already enabled, [follow these instructions][2] to enable them before proceeding..
+If you're using a Kubernetes cluster, use the [Datadog Cluster Agent][1] for {{< prodname >}}Database Monitoring{{< /prodname >}}. If cluster checks aren’t already enabled, [follow these instructions][2] to enable them before proceeding..
 
 ### Operator
 

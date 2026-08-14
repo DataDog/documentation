@@ -18,8 +18,8 @@ The Agent collects telemetry directly from the database by logging in as a read-
 {{% dbm-supported-oracle-agent-version %}}
 
 Performance impact
-: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
-Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][6]).
+: The default Agent configuration for {{< prodname >}}Database Monitoring{{< /prodname >}} is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
+{{< prodname >}}Database Monitoring{{< /prodname >}} runs as an integration on top of the base Agent ([see benchmarks][6]).
 
 Proxies, load balancers, and connection poolers
 : The Agent must connect directly to the host being monitored. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. Each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
@@ -29,7 +29,7 @@ Data security considerations
 
 ## Setup
 
-Complete the following to enable Database Monitoring with your Oracle database:
+Complete the following to enable {{< prodname >}}Database Monitoring{{< /prodname >}} with your Oracle database:
 
 1. [Create the Datadog user](#create-the-datadog-user)
 1. [Grant the user access to the database](#grant-the-user-access-to-the-database)
@@ -164,7 +164,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][9].
 
 ## Custom queries
 
-Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][4] to learn more about the configuration options available.
+{{< prodname >}}Database Monitoring{{< /prodname >}} supports custom queries for Oracle databases. See the [conf.yaml.example][4] to learn more about the configuration options available.
 
 <div class="alert alert-danger">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
 

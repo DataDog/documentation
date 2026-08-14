@@ -14,7 +14,7 @@ Journey Monitoring is in Preview.
 - How fast and reliable is performance?
 - Are issues coming from the frontend, network, or backend?
 
-A *journey* is a user flow defined by a start event and an end event. For example, a checkout journey captures the experience from a user landing on the checkout page to completing the checkout process. Journey Monitoring pulls in data from [Real User Monitoring][1], [Synthetic Monitoring & Testing][2], [Product Analytics][3], and [Session Replay][4] to show traffic, conversion rates, uptime, and errors for each journey in one report.
+A *journey* is a user flow defined by a start event and an end event. For example, a checkout journey captures the experience from a user landing on the checkout page to completing the checkout process. Journey Monitoring pulls in data from [Real User Monitoring][1], [Synthetic Monitoring & Testing][2], [{{< prodname >}}Product Analytics{{< /prodname >}}][3], and [Session Replay][4] to show traffic, conversion rates, uptime, and errors for each journey in one report.
 
 This gives engineering, product, and developer operations teams a shared view of journey health without switching between tools.
 
@@ -33,7 +33,7 @@ For each journey, you can:
 
 Journey Monitoring requires the following products for frontend applications, each contributing different data to your journeys:
 
-- **[RUM without Limits][5]** and **[Product Analytics][8]**: Traffic, conversion rate, time-to-convert metrics, and performance.
+- **[RUM without Limits][5]** and **[{{< prodname >}}Product Analytics{{< /prodname >}}][8]**: Traffic, conversion rate, time-to-convert metrics, and performance.
 - **[Synthetic Browser Tests][6] or [Synthetic Mobile Tests][7]**: Uptime tracking through the journey's automatically created test suite.
 
 ## Journey structure

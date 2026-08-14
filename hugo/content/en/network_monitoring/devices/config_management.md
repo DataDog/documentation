@@ -24,7 +24,7 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
 ## Prerequisites
 
-- [Network Device Monitoring][3] (NDM) must be configured on your devices.
+- [{{< prodname >}}Network Device Monitoring{{< /prodname >}}][3] (NDM) must be configured on your devices.
 
 ## Setup
 
@@ -92,9 +92,9 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
 ## Viewing configurations
 
-Network Configuration Management is accessible from the NDM device view in Network Device Monitoring:
+Network Configuration Management is accessible from the NDM device view in {{< prodname >}}Network Device Monitoring{{< /prodname >}}:
 
-1. Navigate to [Network Device Monitoring][3].
+1. Navigate to [{{< prodname >}}Network Device Monitoring{{< /prodname >}}][3].
 2. Select a device from the device list or from any NDM visualization such as [Device Geomap][4] or the [Device Topology][5] map.
 3. Open the {{< ui >}}Configuration{{< /ui >}} tab in the NDM device view.
 

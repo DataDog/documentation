@@ -85,7 +85,7 @@ Quickly reference monitor saved views for your most important monitors. For more
 
 
 ## Enable push notifications
-Enable push notifications to ensure timely response to alerts from On-Call, incidents, or workflows. To receive push notifications: 
+Enable push notifications to ensure timely response to alerts from {{< prodname >}}On-Call{{< /prodname >}}, incidents, or workflows. To receive push notifications: 
 
 {{< tabs >}}
 {{% tab "Android" %}}

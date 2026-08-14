@@ -23,7 +23,7 @@ further_reading:
     text: "Best practices for monitoring cloud costs with Scorecards"
 ---
 
-Datadog's [Catalog][4], [Scorecards][2], and [Workflow Automation][5] enable organizations to monitor and optimize cloud costs with team-level granularity, ensuring appropriate cost allocation and protocol compliance.
+Datadog's [Catalog][4], [Scorecards][2], and [{{< prodname >}}Workflow Automation{{< /prodname >}}][5] enable organizations to monitor and optimize cloud costs with team-level granularity, ensuring appropriate cost allocation and protocol compliance.
 
 ## Proactively monitor cost spikes
 

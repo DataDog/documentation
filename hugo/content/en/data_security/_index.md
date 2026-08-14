@@ -86,7 +86,7 @@ The Datadog SDKs are used to instrument your applications, services, tests, and 
 - Application Performance Monitoring (APM)
 - Continuous Profiler
 - CI Visibility
-- App and API Protection
+- {{< prodname >}}App and API Protection{{< /prodname >}}
 
 For detailed information about how tracing-library sourced data is managed, default basic security settings, and custom obfuscating, scrubbing, excluding, and modifying of trace-related elements, read [Configuring Agent and Tracer for trace data security][18].
 

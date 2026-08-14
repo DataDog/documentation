@@ -2,7 +2,7 @@
 title: Workload Protection Agent Variables
 ---
 
-The Datadog Agent has several environment variables that can be enabled for Workload Protection. This article describes the purpose of each environment variable.
+The Datadog Agent has several environment variables that can be enabled for {{< prodname >}}Workload Protection{{< /prodname >}}. This article describes the purpose of each environment variable.
 
 | Variable                                      | Description                                                                                                            |
 |-----------------------------------------------|------------------------------------------------------------------------------------------------------------------------|

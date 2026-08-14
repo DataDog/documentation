@@ -30,7 +30,7 @@ Metric Sync supports a plan-and-apply workflow. The `plan` command validates you
 
 Before using Metric Sync, you need:
 
-- A Datadog account with Product Analytics and Experiments enabled.
+- A Datadog account with {{< prodname >}}Product Analytics{{< /prodname >}} and Experiments enabled.
 - A connected warehouse. See [Connect a data warehouse][1].
 - The Product Analytics permissions required to create and update experiment metrics. Synced metrics are certified by default, so custom roles also need the Product Analytics Certified Metrics Write permission. See [Product Analytics permissions][2].
 - A Datadog API key and application key for CI authentication. See [API and application keys][3].

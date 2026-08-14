@@ -18,13 +18,13 @@ aliases:
 
 ## Overview
 
-After you start ingesting your [AWS][1], [Azure][2], [Google Cloud][3], [Oracle][15], [SaaS][4], or [Datadog costs][5] in [Cloud Cost Management][6], you can flexibly query costs across providers. Multisource Querying enables you to query costs across multiple providers using consistent and standardized tags instead of building multiple queries for each provider.
+After you start ingesting your [AWS][1], [Azure][2], [Google Cloud][3], [Oracle][15], [SaaS][4], or [Datadog costs][5] in [{{< prodname >}}Cloud Cost Management{{< /prodname >}}][6], you can flexibly query costs across providers. Multisource Querying enables you to query costs across multiple providers using consistent and standardized tags instead of building multiple queries for each provider.
 
 Use Multisource Querying to build cost views, understand the total cost of service ownership, and alert on cost changes and trends across the [**Explorer** page][6], [dashboards][7], [notebooks][8], and [cost monitors][9].
 
 ## Setup
 
-To use Multisource Querying, ensure you have configured [Cloud Cost Management][10] and are actively ingesting costs in Datadog. Multiple currencies are supported, with your costs automatically being converted to and displayed in USD.
+To use Multisource Querying, ensure you have configured [{{< prodname >}}Cloud Cost Management{{< /prodname >}}][10] and are actively ingesting costs in Datadog. Multiple currencies are supported, with your costs automatically being converted to and displayed in USD.
 
 ## Query your cost data
 
@@ -71,7 +71,7 @@ Multisource Querying uses the `all.cost` metric, which combines all individual c
 
 ### Out-of-the-box tags
 
-Cloud Cost Management collects tags for the AWS, Azure, Google Cloud, and Oracle Cloud integrations. This table provides a non-exhaustive list of out-of-the-box tags shared across each integration.
+{{< prodname >}}Cloud Cost Management{{< /prodname >}} collects tags for the AWS, Azure, Google Cloud, and Oracle Cloud integrations. This table provides a non-exhaustive list of out-of-the-box tags shared across each integration.
 
 | Tag Name | Tag Description |
 |---|---|
@@ -83,13 +83,13 @@ Cloud Cost Management collects tags for the AWS, Azure, Google Cloud, and Oracle
 
 ### Tag enrichment
 
-Cloud Cost Management enriches all provider cost data with tags that adhere to the [FinOps FOCUS specification][12]. FOCUS™ is a technical specification that normalizes cost and usage billing data across cloud vendors.
+{{< prodname >}}Cloud Cost Management{{< /prodname >}} enriches all provider cost data with tags that adhere to the [FinOps FOCUS specification][12]. FOCUS™ is a technical specification that normalizes cost and usage billing data across cloud vendors.
 
 FOCUS tags allow you to query similar concepts across providers. For example, if you'd like to see cost per account across AWS and Azure, you are not required to create two queries (one for AWS costs grouped by `aws_member_account_name` and one for Azure costs grouped by `subscriptionname`). You can use one search query that filters to AWS and Azure costs grouped by `subaccountname`.
 
-Cloud Cost Management adds lowercase versions of the specification Column IDs to all cost metrics.
+{{< prodname >}}Cloud Cost Management{{< /prodname >}} adds lowercase versions of the specification Column IDs to all cost metrics.
 
-The following FOCUS tags are available in Cloud Cost Management:
+The following FOCUS tags are available in {{< prodname >}}Cloud Cost Management{{< /prodname >}}:
 
 | Tag Name | Tag Description |
 |---|---|
@@ -106,10 +106,10 @@ The following FOCUS tags are available in Cloud Cost Management:
 
 The `all.cost` metric has [Container costs allocated][13] for AWS, Azure, and Google Cloud costs, so you can query by the [relevant container tags][14].
 
-<div class="alert alert-danger">If your organization tags with any of these FOCUS tags, Datadog recommends updating your tag key on the underlying infrastructure so that tag values do not overlap with FOCUS tag values in Cloud Cost Management.</div>
+<div class="alert alert-danger">If your organization tags with any of these FOCUS tags, Datadog recommends updating your tag key on the underlying infrastructure so that tag values do not overlap with FOCUS tag values in {{< prodname >}}Cloud Cost Management{{< /prodname >}}.</div>
 
 ## Currency conversion
-Cloud Cost Management retrieves the billing currency from each cloud provider's bill. When processing costs from multiple providers in different currencies, cost charges are converted to USD. This conversion is performed using the average monthly exchange rate, which is updated daily. This ensures that Cloud Cost Management can consistently and accurately represent all cost data, regardless of its original currency. To view your cost in the original billing currency, filter to a single provider.
+{{< prodname >}}Cloud Cost Management{{< /prodname >}} retrieves the billing currency from each cloud provider's bill. When processing costs from multiple providers in different currencies, cost charges are converted to USD. This conversion is performed using the average monthly exchange rate, which is updated daily. This ensures that {{< prodname >}}Cloud Cost Management{{< /prodname >}} can consistently and accurately represent all cost data, regardless of its original currency. To view your cost in the original billing currency, filter to a single provider.
 
 ## Further reading
 

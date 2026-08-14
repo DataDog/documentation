@@ -25,7 +25,7 @@ This tutorial walks you through the steps for enabling tracing on a sample Java 
 
 For other scenarios, including on a host, in a container, on other cloud infrastructure, and on applications written in other languages, see the other [Enabling Tracing tutorials][1]. Some of those other tutorials, for example, the ones using containers or EKS, step through the differences seen in Datadog between automatic and custom instrumentation. This tutorial skips right to a fully custom instrumented example.
 
-This tutorial also uses intermediate-level AWS topics, so it requires that you have some familiarity with AWS networking and applications. If you're not as familiar with AWS, and you are trying to learn the basics of Datadog APM setup, use one of the host or container tutorials instead.
+This tutorial also uses intermediate-level AWS topics, so it requires that you have some familiarity with AWS networking and applications. If you're not as familiar with AWS, and you are trying to learn the basics of {{< prodname >}}Datadog APM{{< /prodname >}} setup, use one of the host or container tutorials instead.
 
 See [Tracing Java Applications][2] for general comprehensive tracing setup documentation for Java.
 

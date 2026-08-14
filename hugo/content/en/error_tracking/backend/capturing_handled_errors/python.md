@@ -22,7 +22,7 @@ This environment variable enables reporting of handled errors respectively from 
 List the modules from which handled errors should be reported. You need to specify the full name of the module. For instance, to instrument the module `security` in your `mysite` app, you need to specify
 `mysite.security`
 
-Handled errors will be reported in Error Tracking and attached to spans through [span events][3].
+Handled errors will be reported in {{< prodname >}}Error Tracking{{< /prodname >}} and attached to spans through [span events][3].
 
 If you are running `Python3.10` or `Python3.11` and you want to instrument the ``__main__`` module, you need to add:
 
@@ -50,7 +50,7 @@ except ValueError as e:
         span.record_exception(e)
 ```
 
-This call will create a span event on the span with the error information and will report the error to Error Tracking.
+This call will create a span event on the span with the error information and will report the error to {{< prodname >}}Error Tracking{{< /prodname >}}.
 You can also provide additional attributes using:
 
 ```Python

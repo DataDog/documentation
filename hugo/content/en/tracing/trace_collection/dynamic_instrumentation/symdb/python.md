@@ -16,14 +16,14 @@ Autocomplete and search are in Preview.
 
 ## Requirements
 
-- [Dynamic Instrumentation][1] is enabled for your service.
+- [{{< prodname >}}Dynamic Instrumentation{{< /prodname >}}][1] is enabled for your service.
 - Tracing library [`dd-trace-py`][6] 2.9.0 or higher is installed.
 
 ## Installation
 
-Run your service with Dynamic Instrumentation enabled, and additionally enable autocomplete and search:
+Run your service with {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} enabled, and additionally enable autocomplete and search:
 
-1. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`.
+1. Run your service with {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`.
 2. Specify `DD_SERVICE` and `DD_VERSION` [Unified Service Tags][5].
 3. Invoke your service:
 
@@ -36,7 +36,7 @@ Run your service with Dynamic Instrumentation enabled, and additionally enable a
   ddtrace-run python -m myapp
   ```
 
-After starting your service with the required features enabled, you can use Dynamic Instrumentation's IDE-like features on the [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Dynamic Instrumentation{{< /ui >}}][4] page.
+After starting your service with the required features enabled, you can use {{< prodname >}}Dynamic Instrumentation{{< /prodname >}}'s IDE-like features on the [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Dynamic Instrumentation{{< /ui >}}][4] page.
 
 ## Additional configuration
 

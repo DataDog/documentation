@@ -118,7 +118,7 @@ The Overall Usage section shows the monthly aggregate usage across all organizat
 
 {{< img src="account_management/multi-org-v2-trends.png" alt="Overall Usage Long-term trends" >}}
 
-Both the Month-to-Date Total Usage section and the Overall Usage section can be filtered by clicking on product specific sub-tabs. In the "Log Management" sub-tab, you can view the Logs Usage by Index table, which displays your month-to-date and last month's indexed log usage by:
+Both the Month-to-Date Total Usage section and the Overall Usage section can be filtered by clicking on product specific sub-tabs. In the "{{< prodname >}}Log Management{{< /prodname >}}" sub-tab, you can view the Logs Usage by Index table, which displays your month-to-date and last month's indexed log usage by:
 
 * Index name
 * Organization

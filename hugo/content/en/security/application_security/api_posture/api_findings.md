@@ -5,7 +5,7 @@ description: Triage detected API risks across definitions, gateways, and live tr
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -38,21 +38,21 @@ Click a finding to view its details and perform a workflow such as Validate > In
 
 ## Remediation
 
-Datadog API Posture uses [Bits Code][3] to generate code fixes for vulnerabilities.
+Datadog API Posture uses [{{< prodname >}}Bits Code{{< /prodname >}}][3] to generate code fixes for vulnerabilities.
 
 1. In Datadog, navigate to [**Security** > **App & API Protection** > **Findings**][1].
 2. Select a finding to open a side panel with details about the finding and the affected endpoint.
 3. In the **Next Steps** > **Remediation** section, click **Fix with Bits**.
 
-This opens a Bits Code session to fix this single API finding. You can review the proposed diff, ask follow-up questions, edit the patch, and create a pull request to apply the remediation to your source code repository.
-View all Bits Code sessions on **Bits AI** > **Bits Code** > [**Sessions**][4].
+This opens a {{< prodname >}}Bits Code{{< /prodname >}} session to fix this single API finding. You can review the proposed diff, ask follow-up questions, edit the patch, and create a pull request to apply the remediation to your source code repository.
+View all {{< prodname >}}Bits Code{{< /prodname >}} sessions on **Bits AI** > **{{< prodname >}}Bits Code{{< /prodname >}}** > [**Sessions**][4].
 
 ### Remediation session details
 
 Each Bits Code session shows the life cycle of an AI-generated fix so you can review and validate changes before merging. It includes:
 
 - The original security finding and proposed code change
-- An explanation of how and why Bits Code generated the fix
+- An explanation of how and why {{< prodname >}}Bits Code{{< /prodname >}} generated the fix
 - CI results (if enabled) to validate the patch is safe to deploy
 - Options to refine the fix or **Create PR** to apply the changes to your source code repository
 

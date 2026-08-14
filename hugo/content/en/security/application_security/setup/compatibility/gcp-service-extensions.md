@@ -9,11 +9,11 @@ aliases:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
-The following table lists App and API Protection capabilities for GCP Service Extensions according to the specified Datadog Service Extensions callout image version:
+The following table lists {{< prodname >}}App and API Protection{{< /prodname >}} capabilities for GCP Service Extensions according to the specified Datadog Service Extensions callout image version:
 
 | App and API Protection capability        | Minimum App and API Protection Service Extensions callout image version  |
 |------------------------------------------|--------------------------------------------------------------------------|

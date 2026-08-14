@@ -13,7 +13,7 @@ algolia:
 
 {{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
-    Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
+    {{< prodname >}}Code Security{{< /prodname >}} is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 
@@ -85,7 +85,7 @@ See the [Azure source code setup instructions][4] to connect Azure DevOps reposi
 {{% tab "Other" %}}
 
 If you are using another source code management provider, configure Static Code Analysis to run in your CI pipelines using the `datadog-ci` CLI tool and [upload the results](#upload-third-party-static-analysis-results-to-datadog) to Datadog.
-You **must** run an analysis of your repository on the default branch before results can begin appearing on the {{< ui >}}Code Security{{< /ui >}} page.
+You **must** run an analysis of your repository on the default branch before results can begin appearing on the {{< ui >}}{{< prodname >}}Code Security{{< /prodname >}}{{< /ui >}} page.
 
 {{% /tab %}}
 {{< /tabs >}}

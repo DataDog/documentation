@@ -14,7 +14,7 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-Dynamic Instrumentation is a feature of the Datadog SDK that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Java.
+{{< prodname >}}Dynamic Instrumentation{{< /prodname >}} is a feature of the Datadog SDK that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} for Java.
 
 ## Prerequisites
 
@@ -46,7 +46,7 @@ Before you begin, review the [Dynamic Instrumentation prerequisites][9]. Java ap
 {{% /tab %}}
 {{< /tabs >}}
 
-3. Run your service with Dynamic Instrumentation enabled by setting `-Ddd.dynamic.instrumentation.enabled` flag or `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
+3. Run your service with {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} enabled by setting `-Ddd.dynamic.instrumentation.enabled` flag or `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
    {{< tabs >}}
 {{% tab "Command arguments" %}}
 
@@ -84,7 +84,7 @@ java \
    java -jar my-service.jar -javaagent:dd-java-agent.jar ...
    ```
 
-4. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][4].
+4. After starting your service with {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} enabled, you can start using {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} on the [APM > Dynamic Instrumentation page][4].
 
 ## Configuration
 
@@ -100,7 +100,7 @@ Configure Dynamic Instrumentation using the following environment variables:
 
 ## What to do next
 
-See [Dynamic Instrumentation][6] for information about adding instrumentations and browsing and indexing the data.
+See [{{< prodname >}}Dynamic Instrumentation{{< /prodname >}}][6] for information about adding instrumentations and browsing and indexing the data.
 
 ## Limitations
 

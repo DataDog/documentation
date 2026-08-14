@@ -19,7 +19,7 @@ This guide is for Dataproc clusters on Compute Engine. If you are using Dataproc
 
 ## Setup
 
-Follow these steps to enable Data Observability: Jobs Monitoring for GCP Dataproc.
+Follow these steps to enable {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring for GCP Dataproc.
 
 1. [Store your Datadog API key](#store-your-datadog-api-key-in-google-cloud-secret-manager-recommended) in GCP Secret Manager (recommended).
 1. [Create and configure your Dataproc cluster](#create-and-configure-your-dataproc-cluster).
@@ -61,7 +61,7 @@ When you create a new {{< ui >}}Dataproc Cluster on Compute Engine{{< /ui >}} in
    curl -L https://install.datadoghq.com/scripts/install-dataproc.sh > djm-install-script; bash djm-install-script || true
    ```
 
-   The script above sets the required parameters, and downloads and runs the latest init script for Data Observability: Jobs Monitoring in Dataproc. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-dataproc-0.13.5.sh` to use version `0.13.5`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][13].
+   The script above sets the required parameters, and downloads and runs the latest init script for {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring in Dataproc. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-dataproc-0.13.5.sh` to use version `0.13.5`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][13].
 
    Optionally, the script can be configured by adding the following environment variable:
 

@@ -75,7 +75,7 @@ Authenticate through your browser and publish your plugin:
 https://app.datadoghq.com/app-builder/apps/65afc2dc-60de-455b-8d32-64950504fbec
 ```
 
-Plugins are automatically instrumented with telemetry and can appear anywhere Datadog supports App Builder apps, such as dashboards, notebooks, and the Internal Developer Portal.
+Plugins are automatically instrumented with telemetry and can appear anywhere Datadog supports App Builder apps, such as dashboards, notebooks, and the {{< prodname >}}Internal Developer Portal{{< /prodname >}}.
 
 ## Key features
 

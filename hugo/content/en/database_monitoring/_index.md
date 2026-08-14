@@ -130,7 +130,7 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 
 ## Explore Datadog Database Monitoring
 
-Navigate to [Database Monitoring][1] in Datadog.
+Navigate to [{{< prodname >}}Database Monitoring{{< /prodname >}}][1] in Datadog.
 
 ### Dig into query performance metrics
 
@@ -168,7 +168,7 @@ Use [`custom_queries`][7] to collect metrics from your own database tables — a
 
 ### Visualize everything on enriched dashboards
 
-Quickly pinpoint problem areas by viewing database and system metrics together on enriched integration dashboards for both self-hosted and cloud-managed instances. Clone dashboards for customization and enhancement with your own custom metrics. Click the {{< ui >}}Dashboards{{< /ui >}} link at the top of the Query Metrics and Query Samples pages to go to the Database Monitoring dashboards.
+Quickly pinpoint problem areas by viewing database and system metrics together on enriched integration dashboards for both self-hosted and cloud-managed instances. Clone dashboards for customization and enhancement with your own custom metrics. Click the {{< ui >}}Dashboards{{< /ui >}} link at the top of the Query Metrics and Query Samples pages to go to the {{< prodname >}}Database Monitoring{{< /prodname >}} dashboards.
 
 {{< img src="database_monitoring/dbm-dashboard-postgres.png" alt="Database Monitoring" style="width:100%;">}}
 

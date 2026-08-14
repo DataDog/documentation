@@ -10,7 +10,7 @@ further_reading:
   text: "Metric Types"
 ---
 
-Use `custom_queries` to collect metrics from any table the Agent's database user can read. This extends the data available in Datadog beyond the query performance metrics that Database Monitoring collects natively, such as application state tables, business counters, or queue depths.
+Use `custom_queries` to collect metrics from any table the Agent's database user can read. This extends the data available in Datadog beyond the query performance metrics that {{< prodname >}}Database Monitoring{{< /prodname >}} collects natively, such as application state tables, business counters, or queue depths.
 
 ## Before you begin
 

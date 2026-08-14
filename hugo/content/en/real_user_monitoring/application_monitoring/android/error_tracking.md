@@ -17,9 +17,9 @@ further_reading:
 
 ## Overview
 
-Error Tracking processes errors collected from the Android SDK. 
+{{< prodname >}}Error Tracking{{< /prodname >}} processes errors collected from the Android SDK. 
 
-Enable Android Crash Reporting and Error Tracking to get comprehensive crash reports and error trends. With this feature, you can access:
+Enable Android Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} to get comprehensive crash reports and error trends. With this feature, you can access:
 
 - Aggregated Android crash dashboards and attributes
 - Deobfuscated Android crash reports with stack trace mapping

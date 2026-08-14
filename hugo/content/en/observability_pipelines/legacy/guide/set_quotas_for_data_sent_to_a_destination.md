@@ -23,7 +23,7 @@ The <code>quota</code> transform is in private beta.
 
 ## Overview
 
-Use the Observability Pipelines `quota` transform to limit the volume of data or number of events sent to a destination within a specific timeframe. This can safeguard you from unexpected data surges that might impact your operating costs. With the transform, you can set up different ways of handling the data when the quota has been reached. For example, you can:
+Use the {{< prodname >}}Observability Pipelines{{< /prodname >}} `quota` transform to limit the volume of data or number of events sent to a destination within a specific timeframe. This can safeguard you from unexpected data surges that might impact your operating costs. With the transform, you can set up different ways of handling the data when the quota has been reached. For example, you can:
 
 - Set a soft limit by setting up a monitor to alert you when the quota has been reached.
 - Reroute the data sent after the quota limit to another destination, such as a cold storage.
@@ -40,7 +40,7 @@ This guide walks you through how to:
 
 ## Set up the quota transform
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][1].
 1. Click on your pipeline.
 1. Click **Edit draft**.
 1. Click **+ Add Component**.
@@ -156,7 +156,7 @@ To set up a monitor to alert when the quota is reached:
 
 The Observability Pipelines `datadog_archives` destination formats logs into a Datadog-rehydratable format and then routes it to [Log Archives][12]. See [Route Logs in Datadog-Rehydratable Format to Amazon S3][13] to set up `datadog_archives`.
 
-The example configuration below is similar to the previous [example configuration](#handling-data-sent-after-the-limit), except the destination type is `datadog_archives`. All logs sent to Observability Pipelines after the quota is reached are routed to the archives.
+The example configuration below is similar to the previous [example configuration](#handling-data-sent-after-the-limit), except the destination type is `datadog_archives`. All logs sent to {{< prodname >}}Observability Pipelines{{< /prodname >}} after the quota is reached are routed to the archives.
 
 ```yaml
 sources:

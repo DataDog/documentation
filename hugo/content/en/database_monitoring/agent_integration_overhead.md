@@ -6,7 +6,7 @@ description: Learn about the overhead of integrating the Datadog Agent with your
 
 ## Overview
 
-Database Monitoring runs on top of the base Datadog Agent. By default, it’s configured with optimal performance settings to minimize impact on your system. However, you have the flexibility to adjust parameters like data collection frequency and query sampling to better suit your workloads.
+{{< prodname >}}Database Monitoring{{< /prodname >}} runs on top of the base Datadog Agent. By default, it’s configured with optimal performance settings to minimize impact on your system. However, you have the flexibility to adjust parameters like data collection frequency and query sampling to better suit your workloads.
 
 This page contains the results of integration overhead tests conducted against databases with Datadog Database Monitoring enabled.
 

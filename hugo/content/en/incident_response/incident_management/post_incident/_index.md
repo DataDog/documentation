@@ -48,7 +48,7 @@ During an incident investigation, your team may identify issues that need attent
 
 Common examples include infrastructure improvements, technical debt, process gaps, and root cause fixes that require more time than the immediate mitigation.
 
-Follow-ups can be created at any point during or after an incident from the incident's **Remediation** tab or from Slack. After resolution, you can export follow-ups to [Jira][3] (unidirectional sync) or [Case Management][4] (bidirectional sync with Jira and ServiceNow) to integrate them into your team's existing workflows.
+Follow-ups can be created at any point during or after an incident from the incident's **Remediation** tab or from Slack. After resolution, you can export follow-ups to [Jira][3] (unidirectional sync) or [{{< prodname >}}Case Management{{< /prodname >}}][4] (bidirectional sync with Jira and ServiceNow) to integrate them into your team's existing workflows.
 
 For detailed information on creating, managing, and exporting follow-ups, see [Incident Follow-ups][5].
 

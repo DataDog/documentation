@@ -41,7 +41,7 @@ When a pull request introduces a leaked secret, Datadog automatically adds inlin
 
 ### Automatically block leaks with PR Gates
 
-Use [PR Gates][11] to prevent leaked secrets from being merged into your main branch. Datadog scans each pull request for exposed secrets and reports a pass or fail status directly to GitHub, Azure DevOps, or GitLab (in preview).
+Use [{{< prodname >}}PR Gates{{< /prodname >}}][11] to prevent leaked secrets from being merged into your main branch. Datadog scans each pull request for exposed secrets and reports a pass or fail status directly to GitHub, Azure DevOps, or GitLab (in preview).
 
 By default, checks are informational, but you can make them blocking to prevent merging when secrets are detected. For setup instructions, see [Set up PR Gate Rules][12].
 

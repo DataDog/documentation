@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-This document walks through how to send Azure Event Hubs logs to Observability Pipelines using the Kafka source. The setup steps include setting up Azure Event Hubs for the Kafka source:
+This document walks through how to send Azure Event Hubs logs to {{< prodname >}}Observability Pipelines{{< /prodname >}} using the Kafka source. The setup steps include setting up Azure Event Hubs for the Kafka source:
 
 - [Create an Event Hubs namespace](#create-an-azure-event-hubs-namespace)
 - [Create an Event Hub (Kafka topic)](#create-an-event-hub-kafka-topic)
@@ -13,7 +13,7 @@ This document walks through how to send Azure Event Hubs logs to Observability P
 - [Set up diagnostic settings](#set-up-diagnostic-settings)
 - [Configure Kafka-compatible connection for the event hub](#configure-kafka-compatible-connection-for-the-event-hub)
 
-After Azure Event Hubs has been set up, you [set up a pipeline with the Kafka source](#set-up-a-pipeline-with-the-kafka-source) to send Azure Event Hubs logs to Observability Pipelines.
+After Azure Event Hubs has been set up, you [set up a pipeline with the Kafka source](#set-up-a-pipeline-with-the-kafka-source) to send Azure Event Hubs logs to {{< prodname >}}Observability Pipelines{{< /prodname >}}.
 
 ## Set up Azure Event Hubs for the Kafka source
 
@@ -60,7 +60,7 @@ After Azure Event Hubs has been set up, you [set up a pipeline with the Kafka so
 
 ### Configure Kafka-compatible connection for the Event Hub
 
-Azure Event Hubs exposes a Kafka endpoint at `NAMESPACE.servicebus.windows.net:9093`, which Observability Pipelines uses as the Kafka source.
+Azure Event Hubs exposes a Kafka endpoint at `NAMESPACE.servicebus.windows.net:9093`, which {{< prodname >}}Observability Pipelines{{< /prodname >}} uses as the Kafka source.
 
 #### Get the Kafka endpoint
 
@@ -73,7 +73,7 @@ Azure Event Hubs exposes a Kafka endpoint at `NAMESPACE.servicebus.windows.net:9
 #### Set up authentication
 
 1. Azure Event Hubs uses SASL_SSL with the PLAIN mechanism for Kafka authentication.
-1. The connection string is formatted for Observability Pipelines:
+1. The connection string is formatted for {{< prodname >}}Observability Pipelines{{< /prodname >}}:
     ```
     Username: $$ConnectionString
     Password: Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>
@@ -85,7 +85,7 @@ Select your platform.
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
-1. Navigate to [Observability Pipelines](https://app.datadoghq.com/observability-pipelines).
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}](https://app.datadoghq.com/observability-pipelines).
 1. Select the Kafka source.
     1.  In the {{< ui >}}Group ID{{< /ui >}} field, specify or create a unique consumer group (for example, `datadog-consumer-group`).
     1.  In the {{< ui >}}Topics{{< /ui >}} field, enter `datadog-topic` or the topic you configured for your Event Hub earlier.
@@ -131,13 +131,13 @@ Select your platform.
 {{% /tab %}}
 {{% tab "Virtual machine (VM)" %}}
 
-1. Navigate to [Observability Pipelines](https://app.datadoghq.com/observability-pipelines).
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}](https://app.datadoghq.com/observability-pipelines).
 1. Select the Kafka source.
     1.  In the {{< ui >}}Group ID{{< /ui >}} field, specify or create a unique consumer group (for example, `datadog-consumer-group`).
     1.  Enter `datadog-topic` in the {{< ui >}}Topics{{< /ui >}} field.
     1.  Toggle the switch to enable SASL authentication.
     1.  In the {{< ui >}}Mechanism{{< /ui >}} dropdown menu, select {{< ui >}}PLAIN{{< /ui >}}.
-    1.  Enable TLS. For the certificate, copy the certificate from its original location to the default Observability Pipelines data configuration directory:
+    1.  Enable TLS. For the certificate, copy the certificate from its original location to the default {{< prodname >}}Observability Pipelines{{< /prodname >}} data configuration directory:
         1. Since the Observability Pipelines Worker hasn't been installed yet, run this command to create the directory for the certificate:
             ```
             sudo mkdir -p /var/lib/observability-pipelines-worker/config
@@ -165,7 +165,7 @@ Select your platform.
 
 ## Troubleshooting
 
-If you run into issues after installing the Worker, check your Observability Pipelines environment file (`/etc/default/observability-pipelines-worker`) to make sure the environment variables are correctly set:
+If you run into issues after installing the Worker, check your {{< prodname >}}Observability Pipelines{{< /prodname >}} environment file (`/etc/default/observability-pipelines-worker`) to make sure the environment variables are correctly set:
 
 - `DD_OP_SOURCE_KAFKA_SASL_USERNAME="$$ConnectionString"`
 - `DD_OP_SOURCE_KAFKA_BOOTSTRAP_SERVERS=<NAMESPACE>.servicebus.windows.net:9093`

@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Observability Pipelines allows you to collect and process logs, as well as determine where you want to route them, all before the data leaves your on-premises or cloud environment.
+{{< prodname >}}Observability Pipelines{{< /prodname >}} allows you to collect and process logs, as well as determine where you want to route them, all before the data leaves your on-premises or cloud environment.
 
 Logs are not equal value. For example, error logs are often more useful than info logs when troubleshooting live operations. Logs from production environments are also more important than logs from non-production environments. Therefore, routing all of your logs to an indexed solution can dilute the overall value of your data and cause you to exceed your budget.
 
@@ -23,7 +23,7 @@ The following situations can also unnecessarily increase your log volume and cos
 - Teams attempt to add as much performance and metric data into the logs because it seems easier than implementing other telemetry solutions.
 - Logs contain extra fields and values that are never used.
 
-This guide walks you through strategies on how to reduce your log volume using Observability Pipelines' processors, so that you can stay cost-compliant and increase the value of your stored data.
+This guide walks you through strategies on how to reduce your log volume using {{< prodname >}}Observability Pipelines{{< /prodname >}}' processors, so that you can stay cost-compliant and increase the value of your stored data.
 
 ## Strategies for reducing your log volume
 

@@ -21,9 +21,9 @@ Prompt Management is in Preview.
 
 ## Overview
 
-Prompt Management provides a centralized registry for the prompts used by your LLM applications. Instead of hardcoding prompt templates in application code or configuration files, create, version, and update prompts through Agent Observability, then retrieve them at runtime.
+Prompt Management provides a centralized registry for the prompts used by your LLM applications. Instead of hardcoding prompt templates in application code or configuration files, create, version, and update prompts through {{< prodname >}}Agent Observability{{< /prodname >}}, then retrieve them at runtime.
 
-Runtime retrieval is supported in Python through the `ddtrace` SDK. Prompt retrieval and Prompt Tracking are separate: `LLMObs.get_prompt()` can retrieve a managed prompt without enabling Agent Observability, but Agent Observability must be enabled to create LLM spans and associate prompt metadata with them.
+Runtime retrieval is supported in Python through the `ddtrace` SDK. Prompt retrieval and Prompt Tracking are separate: `LLMObs.get_prompt()` can retrieve a managed prompt without enabling {{< prodname >}}Agent Observability{{< /prodname >}}, but {{< prodname >}}Agent Observability{{< /prodname >}} must be enabled to create LLM spans and associate prompt metadata with them.
 
 Prompt Management works alongside [Prompt Tracking][1]. When Agent Observability is enabled, managed prompts passed directly to supported, automatically instrumented LLM calls are associated with the resulting spans.
 
@@ -212,7 +212,7 @@ Create prompts and publish new versions in the {{< ui >}}Prompts{{< /ui >}} UI, 
 
 #### Promote a tracked prompt
 
-To promote a prompt already tracked in Agent Observability to a managed prompt, navigate to the {{< ui >}}Prompts{{< /ui >}} page, open the prompt, and click {{< ui >}}Register{{< /ui >}}. You can then update the prompt in the UI and retrieve it at runtime.
+To promote a prompt already tracked in {{< prodname >}}Agent Observability{{< /prodname >}} to a managed prompt, navigate to the {{< ui >}}Prompts{{< /ui >}} page, open the prompt, and click {{< ui >}}Register{{< /ui >}}. You can then update the prompt in the UI and retrieve it at runtime.
 
 #### In the UI from scratch
 
@@ -251,7 +251,7 @@ Open a prompt in the {{< ui >}}Prompts{{< /ui >}} page to:
 
 ### Use the Python SDK
 
-Use `LLMObs.create_prompt()` to create a prompt and deploy its first version to one or more environments. The `env_ids` values are Feature Flags environment IDs, which you can obtain from the [List environments API][9]:
+Use `LLMObs.create_prompt()` to create a prompt and deploy its first version to one or more environments. The `env_ids` values are {{< prodname >}}Feature Flags{{< /prodname >}} environment IDs, which you can obtain from the [List environments API][9]:
 
 ```python
 from ddtrace.llmobs import LLMObs

@@ -32,7 +32,7 @@ Use the following commands for incidents navigation. All commands can use `/dd i
 | `/dd shortcuts` | View Incident Actions.|
 
 ## On-Call
-Use the following commands for On-Call. For more details, see [On-Call Pages][3].
+Use the following commands for {{< prodname >}}On-Call{{< /prodname >}}. For more details, see [On-Call Pages][3].
 
 | Command | Description|
 | ------------------ | ---------- |

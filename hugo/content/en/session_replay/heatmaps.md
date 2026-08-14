@@ -177,11 +177,11 @@ To remove the currently saved screenshot and revert to an auto-picked one from a
 The time periods you can view in a heatmap depend on where you access it:
 
 - **RUM**: Session Replay heatmaps use RUM click data (RUM action events), which has a 30-day retention period.
-- **Product Analytics**: Heatmaps use Product Analytics click data, which has a 15-month retention period.
+- **{{< prodname >}}Product Analytics{{< /prodname >}}**: Heatmaps use {{< prodname >}}Product Analytics{{< /prodname >}} click data, which has a 15-month retention period.
 
 ## Next steps
 
-After analyzing heatmaps, the next step is to understand the user action by exploring related data. Watch associated [session replays][1] to see user actions in the context of their overall session, or navigate to an Analytics explorer in [RUM][3] or [Product Analytics][4] to analyze your user data.
+After analyzing heatmaps, the next step is to understand the user action by exploring related data. Watch associated [session replays][1] to see user actions in the context of their overall session, or navigate to an Analytics explorer in [RUM][3] or [{{< prodname >}}Product Analytics{{< /prodname >}}][4] to analyze your user data.
 
 ## Troubleshooting
 

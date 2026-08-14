@@ -18,11 +18,11 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
-App and API Protection (AAP) provides account takeover (ATO) protection to detect and mitigate account takeover attacks.
+{{< prodname >}}App and API Protection{{< /prodname >}} (AAP) provides account takeover (ATO) protection to detect and mitigate account takeover attacks.
 
 ATO protection has the following benefits:
 

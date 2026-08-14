@@ -21,9 +21,9 @@ further_reading:
 
 ## Overview
 
-Observability Pipelines are designed for durability and to mitigate the impact when destinations are unavailable. If a destination is unavailable (for example, due to connection issues), the Observability Pipelines Worker retries its connection to the destination until the connection is reestablished or the destination times out. During this time, events accumulate in the pipeline components' internal buffers, eventually blocking the source from ingesting new events. This behavior is called **backpressure**.
+{{< prodname >}}Observability Pipelines{{< /prodname >}} are designed for durability and to mitigate the impact when destinations are unavailable. If a destination is unavailable (for example, due to connection issues), the Observability Pipelines Worker retries its connection to the destination until the connection is reestablished or the destination times out. During this time, events accumulate in the pipeline components' internal buffers, eventually blocking the source from ingesting new events. This behavior is called **backpressure**.
 
-It is important to consider how backpressure propagates through your architecture in the event of a destination outage. For example, backpressure can block your application from sending logs to Observability Pipelines and those logs may contend for memory or disk resources needed by your service. To prevent backpressure from reaching your application, [configure a destination buffer](#choosing-buffer-types) and size it according to your pipeline's throughput, which helps the Worker absorb backpressure when the destination is unavailable. You may also want to configure the [on-full buffer behavior](#choosing-buffer-on-full-behavior) to `drop newest`, which prevents backpressure by dropping incoming events when the buffer is full. See the [destination buffers section](#destination-buffers) for more information on configurable destination buffers.
+It is important to consider how backpressure propagates through your architecture in the event of a destination outage. For example, backpressure can block your application from sending logs to {{< prodname >}}Observability Pipelines{{< /prodname >}} and those logs may contend for memory or disk resources needed by your service. To prevent backpressure from reaching your application, [configure a destination buffer](#choosing-buffer-types) and size it according to your pipeline's throughput, which helps the Worker absorb backpressure when the destination is unavailable. You may also want to configure the [on-full buffer behavior](#choosing-buffer-on-full-behavior) to `drop newest`, which prevents backpressure by dropping incoming events when the buffer is full. See the [destination buffers section](#destination-buffers) for more information on configurable destination buffers.
 
 All components in the Observability Pipelines Worker have an in-memory buffer to help smooth the handoff of events between components. All sources have a buffer with a capacity of 1,000 events per worker thread. Sources write events to their respective downstream buffer upon ingestion. All processors have an in-memory buffer with a capacity of 100 events, which the processors consume upstream. Source and processor buffers are not configurable.
 
@@ -71,7 +71,7 @@ The `drop_newest` on-full behavior drops incoming events when a destination's bu
 
 ### Kubernetes persistent volumes
 
-If you enable disk buffering for destinations, you must enable Kubernetes [persistent volumes][1] in the Observability Pipelines helm chart. With disk buffering enabled, events are first sent to the buffer and written to the persistent volumes, then sent downstream.
+If you enable disk buffering for destinations, you must enable Kubernetes [persistent volumes][1] in the {{< prodname >}}Observability Pipelines{{< /prodname >}} helm chart. With disk buffering enabled, events are first sent to the buffer and written to the persistent volumes, then sent downstream.
 
 ## Buffer metrics
 

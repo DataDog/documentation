@@ -14,7 +14,7 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-Dynamic Instrumentation is a feature of the Datadog SDK that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for PHP.
+{{< prodname >}}Dynamic Instrumentation{{< /prodname >}} is a feature of the Datadog SDK that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} for PHP.
 
 ## Prerequisites
 
@@ -25,8 +25,8 @@ Before you begin, review the [Dynamic Instrumentation prerequisites][10]. PHP ap
 ## Installation
 
 1. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
-2. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
-3. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][3].
+2. Run your service with {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
+3. After starting your service with {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} enabled, you can start using {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} on the [APM > Dynamic Instrumentation page][3].
 
 ## Configuration
 
@@ -42,7 +42,7 @@ Configure Dynamic Instrumentation using the following environment variables:
 
 ## What to do next
 
-See [Dynamic Instrumentation][5] for information about adding instrumentations and browsing and indexing the data.
+See [{{< prodname >}}Dynamic Instrumentation{{< /prodname >}}][5] for information about adding instrumentations and browsing and indexing the data.
 
 
 ## Limitations

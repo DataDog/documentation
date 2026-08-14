@@ -44,7 +44,7 @@ The Log Explorer opens in a separate tab with a pre-filled search query.
 
 ### Errors
 
-The {{< ui >}}Errors{{< /ui >}} tab displays [RUM errors][4] and [Error Tracking][5] issues that correlate to the session.
+The {{< ui >}}Errors{{< /ui >}} tab displays [RUM errors][4] and [{{< prodname >}}Error Tracking{{< /prodname >}}][5] issues that correlate to the session.
 
 {{< img src="real_user_monitoring/session_replay/dev_tools/dev-tools-errors.png" alt="Errors tab" style="width:100%;">}}
 

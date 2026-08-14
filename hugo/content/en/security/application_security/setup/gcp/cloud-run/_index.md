@@ -21,11 +21,11 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
-Learn how to setup App and API Protection (AAP) on your Google Cloud Run functions by selecting the programming language your function is written with.
+Learn how to setup {{< prodname >}}App and API Protection{{< /prodname >}} (AAP) on your Google Cloud Run functions by selecting the programming language your function is written with.
 
 <div class="alert alert-info">
   <p class="fs-bold m-0">Are you missing your environment?</p>

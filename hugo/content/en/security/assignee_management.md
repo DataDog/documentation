@@ -34,10 +34,10 @@ If a finding is linked to a Case or ticket, the finding's assignee and the linke
 
 You can assign users to findings in the following products:
 
-- [Cloud Security][2]
-- [Code Security][3]
-- [App and API Protection][4]
-- [Workload Protection][5]
+- [{{< prodname >}}Cloud Security{{< /prodname >}}][2]
+- [{{< prodname >}}Code Security{{< /prodname >}}][3]
+- [{{< prodname >}}App and API Protection{{< /prodname >}}][4]
+- [{{< prodname >}}Workload Protection{{< /prodname >}}][5]
 
 ## Assign a user to a finding
 

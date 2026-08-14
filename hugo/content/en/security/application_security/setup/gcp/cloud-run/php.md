@@ -20,7 +20,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -36,7 +36,7 @@ To get full instrumentation, ensure you are calling `datadog-init` as the first 
 
 ## Compatibility
 
-<div class="alert alert-info">Google Cloud Run support for App and API Protection serverless is in Preview</a>.</div>
+<div class="alert alert-info">Google Cloud Run support for {{< prodname >}}App and API Protection{{< /prodname >}} serverless is in Preview</a>.</div>
 **Note**: Threat Protection through Remote Configuration is not supported. Instead, use [Workflows][5] to block IPs in your [WAF][6].
 
 ### Get started

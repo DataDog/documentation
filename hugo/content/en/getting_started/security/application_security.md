@@ -26,7 +26,7 @@ site_support_id: application_security_override
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -34,7 +34,7 @@ App and API Protection is in Preview on Datadog Government site US1-FED.
 
 Datadog App and API Protection (AAP) helps secure your web applications and APIs in production.
 - With threat detection, Datadog provides real-time protection against attacks and attackers targeting code-level vulnerabilities.
-- With [Code Security][28], Datadog detects code and library vulnerabilities in your repositories and your running services, providing end-to-end visibility from development to production.
+- With [{{< prodname >}}Code Security{{< /prodname >}}][28], Datadog detects code and library vulnerabilities in your repositories and your running services, providing end-to-end visibility from development to production.
 
 This guide walks you through best practices for getting your team up and running with AAP.
 
@@ -54,8 +54,8 @@ These security insights are detected from data reported by APM. The insights hel
 ## Enable AAP
 
 ### Enable AAP with in-app instructions
-- To enable App and API Protection in-app, navigate to [{{< ui >}}App and API Protection{{< /ui >}} > {{< ui >}}Setup{{< /ui >}}][29].
-- To enable Code Security in-app, navigate to [{{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Setup{{< /ui >}}][29].
+- To enable {{< prodname >}}App and API Protection{{< /prodname >}} in-app, navigate to [{{< ui >}}App and API Protection{{< /ui >}} > {{< ui >}}Setup{{< /ui >}}][29].
+- To enable {{< prodname >}}Code Security{{< /prodname >}} in-app, navigate to [{{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Setup{{< /ui >}}][29].
 
 
 <!-- On the [AAP landing page,][18] follow the instructions to get started. This includes:

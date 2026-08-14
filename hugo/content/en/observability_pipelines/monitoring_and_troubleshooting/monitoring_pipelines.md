@@ -31,7 +31,7 @@ A pipeline consists of components that collect, process, and route your observab
 
 ## View the status of your pipelines
 
-1. Navigate to [Observability Pipelines][1] to see how many events or bytes your pipelines are receiving and sending out. The {{< ui >}}events/s{{< /ui >}} and {{< ui >}}bytes/s{{< /ui >}} metrics shown on this page are based on an average over 15 minutes.
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][1] to see how many events or bytes your pipelines are receiving and sending out. The {{< ui >}}events/s{{< /ui >}} and {{< ui >}}bytes/s{{< /ui >}} metrics shown on this page are based on an average over 15 minutes.
 1. Select a pipeline.
 1. Click the {{< ui >}}Health{{< /ui >}} tab to see details about the pipeline and its components. You can view graphs of:
     - How much each component is being used, and the total number of events that the component receives and sends out.
@@ -45,7 +45,7 @@ You can export a health graph to a dashboard, notebook, or monitor. The exported
 
 To view graphs of resource usage and data sent through Observability Pipelines Workers:
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][1].
 1. Select a pipeline.
 1. Click the {{< ui >}}Workers{{< /ui >}} tab to see the Workers' memory and CPU utilization, traffic stats, and any errors.
 
@@ -53,7 +53,7 @@ To view graphs of resource usage and data sent through Observability Pipelines W
 
 To view metrics for a source, process, or destination:
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][1].
 1. Select a pipeline.
 1. Click the cog next to the source's, processor's, or destination's name, then select {{< ui >}}View details{{< /ui >}}. Datadog displays health graphs for the component you selected.
 1. If you want to export a graph to an [incident][2], [dashboard][3], or [notebook][4], click the export icon on the graph. The exported graph shows that the metric is grouped by the specific pipeline and component tags.
@@ -62,7 +62,7 @@ To view metrics for a source, process, or destination:
 
 To see available out-of-the-box monitors:
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][1].
 1. Click {{< ui >}}Enable monitors{{< /ui >}} in the {{< ui >}}Monitors{{< /ui >}} column for your pipeline.
 1. Click {{< ui >}}Start{{< /ui >}} to set up a monitor for one of the suggested use cases.<br>
     The new metric monitor page is configured based on the use case you selected. You can update the configuration to further customize it. See the [Metric monitor documentation][3] for more information.

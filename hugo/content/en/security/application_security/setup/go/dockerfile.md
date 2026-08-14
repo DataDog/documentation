@@ -14,11 +14,11 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
-App and API Protection for Go installation requirements can be abstract and the Go toolchain
+{{< prodname >}}App and API Protection{{< /prodname >}} for Go installation requirements can be abstract and the Go toolchain
 cross-compilation and CGO capabilities can make precise installation steps difficult to understand.
 
 The goal of this guide is to provide a step-by-step guide to a working Dockerfile customized for your use case.
@@ -54,16 +54,16 @@ ENTRYPOINT [ "/usr/local/bin/main" ]
 This is the simplest version of a working Dockerfile for a Datadog WAF-enabled Go application. If this is your first use of [Orchestrion][5], note that this dockerfile requires you run `orchestrion pin` beforehand and commit the resulting changes. See [Getting Started for Go][6].
 
 This Dockerfile is split into two stages:
-1. The build stage uses a Debian image to build the Go application, and uses the [Orchestrion][5] tool to instrument the application with App and API Protection features.
-2. The runtime stage copies the built application into a minimal Ubuntu image and sets the environment variable `DD_APPSEC_ENABLED` to `true` to enable App and API Protection.
+1. The build stage uses a Debian image to build the Go application, and uses the [Orchestrion][5] tool to instrument the application with {{< prodname >}}App and API Protection{{< /prodname >}} features.
+2. The runtime stage copies the built application into a minimal Ubuntu image and sets the environment variable `DD_APPSEC_ENABLED` to `true` to enable {{< prodname >}}App and API Protection{{< /prodname >}}.
 
-This two-stage build process allows you to keep the final image small and free of unnecessary build tools while still ensuring that your application is instrumented correctly for App and API Protection.
+This two-stage build process allows you to keep the final image small and free of unnecessary build tools while still ensuring that your application is instrumented correctly for {{< prodname >}}App and API Protection{{< /prodname >}}.
 
 The following sections show different Dockerfile scenarios, each with their specific considerations and complete examples.
 
 ## Dockerfile scenarios
 
-Two main dimensions impact your Dockerfile choice for App and API Protection:
+Two main dimensions impact your Dockerfile choice for {{< prodname >}}App and API Protection{{< /prodname >}}:
 * **libc implementation**: glibc (Debian/Ubuntu) or musl (Alpine)
 * **CGO**: enabled or disabled (with the env var `CGO_ENABLED`).
 
@@ -247,9 +247,9 @@ docker run appsec-go-test-app
 
 ### Verify your setup
 
-To verify that App and API Protection is working correctly:
+To verify that {{< prodname >}}App and API Protection{{< /prodname >}} is working correctly:
    
-To see App and API Protection threat detection in action, send known attack patterns to your application. For example, trigger the [Security Scanner Detected][9] rule by running a file that contains the following curl script:
+To see {{< prodname >}}App and API Protection{{< /prodname >}} threat detection in action, send known attack patterns to your application. For example, trigger the [Security Scanner Detected][9] rule by running a file that contains the following curl script:
 ```bash
 for ((i=1;i<=250;i++));
 do

@@ -7,7 +7,7 @@ aliases:
 
 ## Dashboards
 
-BYOC (Bring Your Own Cloud) Logs provides an out-of-the-box dashboard that monitors BYOC Logs' key metrics.
+BYOC (Bring Your Own Cloud) Logs provides an out-of-the-box dashboard that monitors {{< prodname >}}BYOC Logs{{< /prodname >}}' key metrics.
 
 ### Setup
 
@@ -16,7 +16,7 @@ These metrics are exported by [DogStatsD][1]. You can either:
 - Run DogStatsD as a standalone service, or
 - Run the Datadog Agent (which includes DogStatsD by default)
 
-Configure either option with your organization's API key to export these metrics. As soon as your BYOC Logs cluster is connected to Datadog, the OOTB dashboard is automatically created, and you can access it from your [Dashboards list][2].
+Configure either option with your organization's API key to export these metrics. As soon as your {{< prodname >}}BYOC Logs{{< /prodname >}} cluster is connected to Datadog, the OOTB dashboard is automatically created, and you can access it from your [Dashboards list][2].
 
 <div class="alert alert-info">To display distribution metrics on your dashboard, you must <a href="/metrics/distributions/#enabling-advanced-query-functionality">enable advanced query functionality</a>.</div>
 

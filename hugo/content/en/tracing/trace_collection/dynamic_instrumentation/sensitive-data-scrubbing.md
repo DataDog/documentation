@@ -19,13 +19,13 @@ Datadog Dynamic Instrumentation enhances the observability and debugging capabil
 
 While this functionality is powerful, it also presents the possibility of sensitive data leaks, both intentional and unintentional. Alongside the product's robust data capture capabilities, it also provides comprehensive measures to safeguard sensitive information.
 
-By understanding and properly configuring these redaction mechanisms, you can use Dynamic Instrumentation with confidence and security.
+By understanding and properly configuring these redaction mechanisms, you can use {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} with confidence and security.
 
 ## Redact based on identifiers
 
 ### Default behavior
 
-Dynamic Instrumentation automatically redacts values linked to specific identifiers deemed sensitive, such as `password` and `accessToken`. See [the full list of redacted identifiers][1].
+{{< prodname >}}Dynamic Instrumentation{{< /prodname >}} automatically redacts values linked to specific identifiers deemed sensitive, such as `password` and `accessToken`. See [the full list of redacted identifiers][1].
 
 ### Custom identifier redaction
 
@@ -50,11 +50,11 @@ Class-based redaction:
 
 ### Initial setup
 
-When you first access [Dynamic Instrumentation Setup][2], you can optionally set up default Sensitive Data Scanner rules for Dynamic Instrumentation. These cover common regular expressions for likely sensitive data such as email addresses or JWT tokens.
+When you first access [Dynamic Instrumentation Setup][2], you can optionally set up default Sensitive Data Scanner rules for {{< prodname >}}Dynamic Instrumentation{{< /prodname >}}. These cover common regular expressions for likely sensitive data such as email addresses or JWT tokens.
 
 ### Customizing Sensitive Data Scanner
 
-You can disable the default rules or create other rules through the [Sensitive Data Scanner][4]. To create a new Sensitive Data Scanner rule for Dynamic Instrumentation, set it to filter on `source:dd_debugger`.
+You can disable the default rules or create other rules through the [Sensitive Data Scanner][4]. To create a new Sensitive Data Scanner rule for {{< prodname >}}Dynamic Instrumentation{{< /prodname >}}, set it to filter on `source:dd_debugger`.
 
 **Note**: Datadog Sensitive Data Scanner performs its redaction _after_ the information is uploaded to Datadog.
 

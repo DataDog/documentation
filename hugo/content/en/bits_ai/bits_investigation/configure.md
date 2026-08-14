@@ -11,7 +11,7 @@ Set up integrations to extend Bits Investigation's capabilities:
 
 ## Integrate with third-party observability and SCM platforms
 
-Bits Investigation integrates with GitHub, Grafana, Dynatrace, Splunk, Sentry, and ServiceNow to incorporate observability data and source code into investigations. Source code access is also required for Bits Code to generate a code fix when Bits Investigation identifies an issue that can be resolved in code.
+Bits Investigation integrates with GitHub, Grafana, Dynatrace, Splunk, Sentry, and ServiceNow to incorporate observability data and source code into investigations. Source code access is also required for {{< prodname >}}Bits Code{{< /prodname >}} to generate a code fix when Bits Investigation identifies an issue that can be resolved in code.
 
 ### GitHub
 To configure GitHub:
@@ -43,12 +43,12 @@ The Microsoft Teams integration with Bits Investigation is in Preview for all cu
 
 ### Datadog Case Management
 
-Datadog Case Management provides a centralized workspace for triaging, tracking, and remediating issues detected by Datadog and third-party integrations. Bits Investigation automatically delivers its investigation findings to Jira and ServiceNow through Case Management.
+Datadog Case Management provides a centralized workspace for triaging, tracking, and remediating issues detected by Datadog and third-party integrations. Bits Investigation automatically delivers its investigation findings to Jira and ServiceNow through {{< prodname >}}Case Management{{< /prodname >}}.
 
-To set up Case Management, and the Jira and ServiceNow integrations:
+To set up {{< prodname >}}Case Management{{< /prodname >}}, and the Jira and ServiceNow integrations:
 1. Create a [Case Management project][5] for your team.
 1. In Datadog, go to [{{< ui >}}Case Management{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][6]. In the list of projects, expand your project, go to {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Datadog Monitors{{< /ui >}}, and turn on the {{< ui >}}Enable Datadog Monitors integration for this project{{< /ui >}} toggle. This generates your project's unique handle: `@case-{project_name}`.
-1. On the same page, under {{< ui >}}Integrations{{< /ui >}}, set up the Case Management Jira and/or ServiceNow integrations. When a new case is created, Case Management can automatically open the corresponding Jira ticket or ServiceNow incident.
+1. On the same page, under {{< ui >}}Integrations{{< /ui >}}, set up the Case Management Jira and/or ServiceNow integrations. When a new case is created, {{< prodname >}}Case Management{{< /prodname >}} can automatically open the corresponding Jira ticket or ServiceNow incident.
 1. In your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@case-{project_name}` handle. When the monitor triggers:
    - Datadog automatically creates a new case
    - The case creates a linked Jira ticket or ServiceNow incident
@@ -58,7 +58,7 @@ To set up Case Management, and the Jira and ServiceNow integrations:
 
 Datadog On-Call is a paging solution that unifies monitoring, paging, and incident response in a single platform.
 
-To set up On-Call, in your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@oncall-{team}` handle. Bits' findings can then appear on the On-Call page in the Datadog mobile app, helping your teams triage issues on the go.
+To set up {{< prodname >}}On-Call{{< /prodname >}}, in your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@oncall-{team}` handle. Bits' findings can then appear on the {{< prodname >}}On-Call{{< /prodname >}} page in the Datadog mobile app, helping your teams triage issues on the go.
 
 ## Pull context from knowledge bases
 

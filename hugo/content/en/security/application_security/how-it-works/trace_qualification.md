@@ -6,13 +6,13 @@ aliases:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
 ## Overview
 
-App and API Protection (AAP) provides observability into application-level attacks, and evaluates the conditions in which each trace was generated. AAP trace qualification then labels each attack as harmful or safe to help you take action on the most impactful attacks.
+{{< prodname >}}App and API Protection{{< /prodname >}} (AAP) provides observability into application-level attacks, and evaluates the conditions in which each trace was generated. AAP trace qualification then labels each attack as harmful or safe to help you take action on the most impactful attacks.
 
 Filter by the **Qualification** facet in the AAP [Traces Explorer][1] to view the possible qualification results:
 

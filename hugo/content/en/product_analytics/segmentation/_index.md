@@ -32,9 +32,9 @@ To create a segment:
 
 {{% collapse-content title="Using Product Analytics data" level="h4" expanded=false id="segment-pana" %}}
 
-To create a segment using Product Analytics data:
+To create a segment using {{< prodname >}}Product Analytics{{< /prodname >}} data:
 
-1. Select {{< ui >}}Product Analytics{{</ ui >}} on the **[segment creation page](https://app.datadoghq.com/product-analytics/segments/create)**.
+1. Select {{< ui >}}{{< prodname >}}Product Analytics{{< /prodname >}}{{</ ui >}} on the **[segment creation page](https://app.datadoghq.com/product-analytics/segments/create)**.
 
 2. Select a **condition** for the users in the segment:
       - **performed event(s)**
@@ -79,9 +79,9 @@ To create a segment using an uploaded list of users from your own file:
 
 2. Click {{< ui >}}Browse files{{< /ui >}} to upload your CSV file.
 
-The file needs a column with user IDs or user emails to map with the `usr.id` or `usr.email` attributes in Product Analytics.
+The file needs a column with user IDs or user emails to map with the `usr.id` or `usr.email` attributes in {{< prodname >}}Product Analytics{{< /prodname >}}.
 
-The following example maps the Product Analytics attribute `@usr.id` to the column named `id` in the CSV file.
+The following example maps the {{< prodname >}}Product Analytics{{< /prodname >}} attribute `@usr.id` to the column named `id` in the CSV file.
 
 {{< img src="product_analytics/segmentation/segment_link_csv.png" alt="A view of the CSV import page showing the options for mapping your file to Product Analytics attributes." style="width:80%">}}
 
@@ -107,7 +107,7 @@ Add one or both conditions:
 
 **Importing with CSV**
 
-Upload a CSV file with a column containing account IDs. The account IDs map to the account ID attribute in Product Analytics.
+Upload a CSV file with a column containing account IDs. The account IDs map to the account ID attribute in {{< prodname >}}Product Analytics{{< /prodname >}}.
 
 {{% /collapse-content %}}
 

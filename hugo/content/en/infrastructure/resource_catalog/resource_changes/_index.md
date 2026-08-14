@@ -39,7 +39,7 @@ For a comprehensive list of supported resources, see the [Supported resources](#
 
 ## Setup
 
-To view configuration changes for your resources, ensure that resource collection is enabled for your cloud resources so they are visible within the Resource Catalog. You can manage this setting from the [Resource Catalog settings page][2] or the relevant [cloud provider integration tile][3]. This step automatically enables [Snapshot Changes](#snapshot-changes) for your resources.
+To view configuration changes for your resources, ensure that resource collection is enabled for your cloud resources so they are visible within the {{< prodname >}}Resource Catalog{{< /prodname >}}. You can manage this setting from the [Resource Catalog settings page][2] or the relevant [cloud provider integration tile][3]. This step automatically enables [Snapshot Changes](#snapshot-changes) for your resources.
 
 <div class="alert alert-warning">Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable <strong>Usage</strong> metrics in the <strong>Metric Collection</strong> tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.<br/>
 
@@ -63,7 +63,7 @@ You can access Resource Changes in the Datadog platform in the following ways:
 
 -  **Main Navigation**: Go to [**Infrastructure > Resources > Resource Changes**][8].
 -  **Within a Resource's Side Panel**:
-    1. Open the side panel for a specific resource (for example, by clicking on a host in the Resource Catalog or a related host view).
+    1. Open the side panel for a specific resource (for example, by clicking on a host in the {{< prodname >}}Resource Catalog{{< /prodname >}} or a related host view).
     2. Scroll down to the **Recent Changes** section.
 
 ## Querying Resource Changes

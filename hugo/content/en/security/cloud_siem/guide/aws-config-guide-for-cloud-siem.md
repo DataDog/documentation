@@ -29,7 +29,7 @@ aliases:
 
 ## Overview
 
-Cloud SIEM applies detection rules to all processed logs in Datadog to detect threats, like a targeted attack, a threat intel listed IP communicating with your systems, or an insecure configuration. The threats are surfaced as Security Signals in the [Security Signals Explorer][1] for triaging.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} applies detection rules to all processed logs in Datadog to detect threats, like a targeted attack, a threat intel listed IP communicating with your systems, or an insecure configuration. The threats are surfaced as Security Signals in the [Security Signals Explorer][1] for triaging.
 
 This guide walks you through the following steps so that you can start detecting threats with your AWS CloudTrail logs:
 
@@ -52,7 +52,7 @@ This guide walks you through the following steps so that you can start detecting
 
 ## Use Cloud SIEM to triage Security Signals
 
-Cloud SIEM applies out of the box detection rules to all processed logs, including the CloudTrail logs you have just set up. When a threat is detected with a Detection Rule, a Security Signal is generated and can be viewed in the Security Signals Explorer.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} applies out of the box detection rules to all processed logs, including the CloudTrail logs you have just set up. When a threat is detected with a Detection Rule, a Security Signal is generated and can be viewed in the Security Signals Explorer.
 
 - Go to the [Cloud SIEM Signals Explorer][9] to view and triage threats. See [Security Signals Explorer][10] for further details.
 - You can also use the [AWS CloudTrail dashboard][11] to investigate anomalous activity.

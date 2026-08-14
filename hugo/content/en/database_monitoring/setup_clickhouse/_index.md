@@ -24,7 +24,7 @@ This feature is in preview and requires Datadog Agent v7.78 or later. Customers 
 
 ### Setup instructions by hosting type
 
-To learn how to set up Database Monitoring on a ClickHouse database, select your hosting type:
+To learn how to set up {{< prodname >}}Database Monitoring{{< /prodname >}} on a ClickHouse database, select your hosting type:
 
 {{< card-grid card_width="300px" >}}
   {{< image-card href="/database_monitoring/setup_clickhouse/selfhosted" src="integrations_logos/clickhouse.png" alt="Self-hosted" title="Self-hosted" >}}

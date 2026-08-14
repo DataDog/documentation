@@ -22,7 +22,7 @@ further_reading:
   text: "Variables and Parameters"
 ---
 
-You can create workflows or edit existing workflows from the [Workflow Automation][1] page. The page lists information about existing workflows, such as the workflow's owner, the trigger type, the dates that each workflow was last modified and executed, and whether the workflow is published or not.
+You can create workflows or edit existing workflows from the [{{< prodname >}}Workflow Automation{{< /prodname >}}][1] page. The page lists information about existing workflows, such as the workflow's owner, the trigger type, the dates that each workflow was last modified and executed, and whether the workflow is published or not.
 - Hover over a workflow for the options to delete, clone, or edit the permissions for the workflow.
 - Toggle {{< ui >}}My workflows{{< /ui >}} if you want to see only workflows that you created.
 
@@ -46,7 +46,7 @@ You can create workflows or edit existing workflows from the [Workflow Automatio
 If you're not sure where to start, you can automatically generate a workflow, or iterate on an existing workflow with AI.
 
 To generate a workflow:
-1. From the [Workflow Automation][1] page, click {{< ui >}}New Workflow{{< /ui >}}.
+1. From the [{{< prodname >}}Workflow Automation{{< /prodname >}}][1] page, click {{< ui >}}New Workflow{{< /ui >}}.
 1. Click {{< ui >}}Create a workflow with AI{{< /ui >}}.
 1. Enter a detailed prompt for your workflow. Specify the integrations and actions you'd like to use.
 1. Click the up arrow ({{< ui >}}↑{{< /ui >}}) to create your workflow.
@@ -60,7 +60,7 @@ To iterate on an existing workflow:
 
 ## Create a custom workflow
 
-To create a workflow, click {{< ui >}}New workflow{{< /ui >}} on the [Workflow Automation][1] page.
+To create a workflow, click {{< ui >}}New workflow{{< /ui >}} on the [{{< prodname >}}Workflow Automation{{< /prodname >}}][1] page.
 
 To configure your workflow:
 1. In the workflow configuration panel, enter a {{< ui >}}Name{{< /ui >}} for your workflow.

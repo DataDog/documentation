@@ -19,7 +19,7 @@ This document walks you through the process of configuring your AWS environment 
 
 ## Prerequisites
 
-To deploy BYOC Logs on AWS, you must configure:
+To deploy {{< prodname >}}BYOC Logs{{< /prodname >}} on AWS, you must configure:
 - AWS credentials and authentication.
 - AWS region selection.
 - IAM permissions for S3 object storage.
@@ -30,7 +30,7 @@ To deploy BYOC Logs on AWS, you must configure:
 
 ### AWS credentials
 
-When starting a node, BYOC Logs uses the default credential provider chain from the [AWS SDK for Rust][4] to find AWS credentials in this order:
+When starting a node, {{< prodname >}}BYOC Logs{{< /prodname >}} uses the default credential provider chain from the [AWS SDK for Rust][4] to find AWS credentials in this order:
 
 1. Environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, with `AWS_SESSION_TOKEN` as an optional addition for temporary credentials.
 2. Credential profiles file, typically located at `~/.aws/credentials` or otherwise specified by the `AWS_SHARED_CREDENTIALS_FILE` and `AWS_PROFILE` environment variables if set and not empty.
@@ -42,14 +42,14 @@ An error is returned if no credentials are found in the chain.
 
 ### AWS Region
 
-BYOC Logs attempts to find the AWS region from multiple sources, using the following order of precedence:
+{{< prodname >}}BYOC Logs{{< /prodname >}} attempts to find the AWS region from multiple sources, using the following order of precedence:
 
 1. **Environment variables**: Checks `AWS_REGION`, then `AWS_DEFAULT_REGION`.
 2. **AWS config file**: Typically located at `~/.aws/config`, or at the path specified by the `AWS_CONFIG_FILE` environment variable (if set and not empty).
 3. **EC2 instance metadata**: Uses the region of the currently running Amazon EC2 instance.
 4. **Default**: Falls back to `us-east-1` if no other source provides a region.
 
-<div class="alert alert-warning">The resolved AWS region must match the region of the S3 bucket used for BYOC Logs storage.</div>
+<div class="alert alert-warning">The resolved AWS region must match the region of the S3 bucket used for {{< prodname >}}BYOC Logs{{< /prodname >}} storage.</div>
 
 
 ### IAM access for S3
@@ -206,7 +206,7 @@ echo ""
 
    <div class="alert alert-info"><p>The <code>storageClass</code> (<code>sc</code>) used in the example file below is <code>gp3</code>, which is not installed by default and is not the default <code>sc</code> for EKS. To create the gp3 storage class, follow the instructions in this <a href="https://docs.aws.amazon.com/eks/latest/userguide/create-storage-class.html">AWS guide</a>. If you do not want to set gp3 as the default (and migrate from gp2), set <code>storageclass.kubernetes.io/is-default-class: "false"</code>.</p>
    
-   <p>Datadog recommends gp3 storage volumes for BYOC Logs to provide the IOPS and throughput flexibility to support higher indexing rates.</p>
+   <p>Datadog recommends gp3 storage volumes for {{< prodname >}}BYOC Logs{{< /prodname >}} to provide the IOPS and throughput flexibility to support higher indexing rates.</p>
    </div>
 
    Any parameters not explicitly overridden in `datadog-values.yaml` fall back to the defaults defined [in the chart's `values.yaml`][6].
@@ -326,7 +326,7 @@ echo ""
 
 ### Check deployment status
 
-Verify that all BYOC Logs components are running:
+Verify that all {{< prodname >}}BYOC Logs{{< /prodname >}} components are running:
 
 ```shell
 kubectl get pods -n <NAMESPACE_NAME>
@@ -336,7 +336,7 @@ kubectl get services -n <NAMESPACE_NAME>
 
 ## Uninstall
 
-To uninstall BYOC Logs:
+To uninstall {{< prodname >}}BYOC Logs{{< /prodname >}}:
 
 ```shell
 helm uninstall <RELEASE_NAME> \
@@ -345,7 +345,7 @@ helm uninstall <RELEASE_NAME> \
 
 ## Next step
 
-**[Set up log ingestion with Datadog Agent][7]** - Configure the Datadog Agent to send logs to BYOC Logs
+**[Set up log ingestion with Datadog Agent][7]** - Configure the Datadog Agent to send logs to {{< prodname >}}BYOC Logs{{< /prodname >}}
 
 ## Further reading
 

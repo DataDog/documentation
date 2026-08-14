@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Enable React Native Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring.
+Enable React Native Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} to get comprehensive crash reports and error trends with Real User Monitoring.
 
 Each time you release a new [CodePush][1] version for your React Native application, you need to upload the source maps to Datadog to unminify errors.
 

@@ -16,18 +16,18 @@ Configure the LLM provider you would like to use for bring-your-own-key (BYOK) e
 
 <div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
-Connect your OpenAI account to Agent Observability with your OpenAI API key.
+Connect your OpenAI account to {{< prodname >}}Agent Observability{{< /prodname >}} with your OpenAI API key.
 
 1. In Datadog, navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
 1. Select {{< ui >}}Connect{{< /ui >}} on the OpenAI tile.
 1. Follow the instructions on the tile.
    - Provide your OpenAI API key. Ensure that this key has {{< ui >}}write{{< /ui >}} permission for {{< ui >}}model capabilities{{< /ui >}}.
 1. Enable {{< ui >}}Use this API key to evaluate your LLM applications{{< /ui >}}.
-1. Agent Observability requires that the `complete/chat` API endpoint be available for the selected model. See [OpenAI's model overview page][3] for details about which models support this endpoint.
+1. {{< prodname >}}Agent Observability{{< /prodname >}} requires that the `complete/chat` API endpoint be available for the selected model. See [OpenAI's model overview page][3] for details about which models support this endpoint.
 
 {{< img src="llm_observability/configuration/openai-tile.png" alt="The OpenAI configuration tile in Agent Observability. Lists instructions for configuring OpenAI and providing your OpenAI API key." style="width:100%;" >}}
 
-Agent Observability does not support [data residency][2] for OpenAI.
+{{< prodname >}}Agent Observability{{< /prodname >}} does not support [data residency][2] for OpenAI.
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 [2]: https://platform.openai.com/docs/guides/your-data#which-models-and-features-are-eligible-for-data-residency
@@ -37,7 +37,7 @@ Agent Observability does not support [data residency][2] for OpenAI.
 
 <div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Azure OpenAI account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
-Connect your Azure OpenAI account to Agent Observability with your OpenAI API key. Datadog strongly recommends using the `GPT-4o mini` model for evaluations. The selected model version must support [structured output][8], and the Chat Completions API must be available. See a [full list of compatible models][9].
+Connect your Azure OpenAI account to {{< prodname >}}Agent Observability{{< /prodname >}} with your OpenAI API key. Datadog strongly recommends using the `GPT-4o mini` model for evaluations. The selected model version must support [structured output][8], and the Chat Completions API must be available. See a [full list of compatible models][9].
 
 1. In Datadog, navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
 1. Select {{< ui >}}Connect{{< /ui >}} on the Azure OpenAI tile.
@@ -55,7 +55,7 @@ Connect your Azure OpenAI account to Agent Observability with your OpenAI API ke
 
 <div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Anthropic account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
-Connect your Anthropic account to Agent Observability with your Anthropic API key.
+Connect your Anthropic account to {{< prodname >}}Agent Observability{{< /prodname >}} with your Anthropic API key.
 
 1. In Datadog, navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
 1. Select {{< ui >}}Connect{{< /ui >}} on the Anthropic tile.
@@ -70,7 +70,7 @@ Connect your Anthropic account to Agent Observability with your Anthropic API ke
 
 <div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Amazon Bedrock account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
-Connect your Amazon Bedrock account to Agent Observability with your AWS Account.
+Connect your Amazon Bedrock account to {{< prodname >}}Agent Observability{{< /prodname >}} with your AWS Account.
 
 1. In Datadog, navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
 1. Select {{< ui >}}Connect{{< /ui >}} on the Amazon Bedrock tile.
@@ -91,11 +91,11 @@ Connect your Amazon Bedrock account to Agent Observability with your AWS Account
 
 <div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to a Google Cloud Platform account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
-Connect Vertex AI to Agent Observability with your Google Cloud Platform account.
+Connect Vertex AI to {{< prodname >}}Agent Observability{{< /prodname >}} with your Google Cloud Platform account.
 
 1. In Datadog, navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
 1. On the Google Cloud Vertex AI tile, click {{< ui >}}Connect{{< /ui >}} to add a new GCP account, or click {{< ui >}}Configure{{< /ui >}} next to where your existing accounts are listed to begin the onboarding process.
-   - You will see all GCP accounts connected to Datadog in this page. However, you must still go through the onboarding process for an account to use it in Agent Observability.
+   - You will see all GCP accounts connected to Datadog in this page. However, you must still go through the onboarding process for an account to use it in {{< prodname >}}Agent Observability{{< /prodname >}}.
 1. Follow the onboarding instructions to configure your account.
    - Add the [{{< ui >}}Vertex AI User{{< /ui >}}][2] role to your account and enable the [{{< ui >}}Vertex AI API{{< /ui >}}][3].
 
@@ -114,7 +114,7 @@ Connect Vertex AI to Agent Observability with your Google Cloud Platform account
 
 Your AI Gateway must be compatible with the [OpenAI API specification][2].
 
-Connect your AI Gateway to Agent Observability with your base URL, API key, and headers.
+Connect your AI Gateway to {{< prodname >}}Agent Observability{{< /prodname >}} with your base URL, API key, and headers.
 
 1. In Datadog, navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
 1. Click the {{< ui >}}Configure{{< /ui >}} tab, then click {{< ui >}}New{{< /ui >}} to create a new gateway.

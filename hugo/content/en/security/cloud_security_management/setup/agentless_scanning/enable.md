@@ -117,7 +117,7 @@ Select your cloud provider to see the available setup methods. If you are settin
 
 ### Choose your setup
 
-- **New to Datadog**: On the [Intro to Cloud Security][2] page, click {{< ui >}}Get Started with Cloud Security{{< /ui >}}, then click {{< ui >}}Quick Start{{< /ui >}}. Quick Start is a guided setup flow that uses AWS CloudFormation to deploy Agentless Scanning with all Cloud Security features pre-enabled. It is only available for organizations that have not yet set up Cloud Security Management.
+- **New to Datadog**: On the [Intro to Cloud Security][2] page, click {{< ui >}}Get Started with {{< prodname >}}Cloud Security{{< /prodname >}}{{< /ui >}}, then click {{< ui >}}Quick Start{{< /ui >}}. Quick Start is a guided setup flow that uses AWS CloudFormation to deploy Agentless Scanning with all {{< prodname >}}Cloud Security{{< /prodname >}} features pre-enabled. It is only available for organizations that have not yet set up Cloud Security Management.
 - **Single AWS account in Datadog**: Use [CloudFormation](#aws-cloudformation-setup) or [Terraform](#aws-terraform-setup). Terraform is recommended for multi-region deployments.
 - **AWS organization with multiple accounts**: Use [CloudFormation StackSet](#aws-cloudformation-stackset-setup) to deploy scanning capabilities across all member accounts.
 - **Multiple accounts without AWS Organizations**: Repeat the [CloudFormation](#aws-cloudformation-setup) or [Terraform](#aws-terraform-setup) setup for each account individually.

@@ -28,11 +28,11 @@ further_reading:
 
 ## Overview
 
-This onboarding guide walks platform and engineering leaders through the phases of implementing Datadog's Internal Developer Portal (IDP).  
+This onboarding guide walks platform and engineering leaders through the phases of implementing Datadog's {{< prodname >}}Internal Developer Portal{{< /prodname >}} (IDP).  
 
 Recommendations:
 - Onboard one or two teams first, and use their feedback to refine standards.  
-- Iterate regularly—treat your Internal Developer Portal as a product.  
+- Iterate regularly—treat your {{< prodname >}}Internal Developer Portal{{< /prodname >}} as a product.  
 - Connect IDP standards with other initiatives, such as SLOs, CI/CD pipelines, and incident workflows.  
 
 ## Phase 1: Plan your implementation
@@ -45,7 +45,7 @@ Recommendations:
 
 1. **Identify data sources**: Learn about the three ways to bring in entities, and decide what to use as sources of truth for your [Catalog][7]:
 
-   - **[Automatically discover entries from Datadog][23]** products, such as APM, RUM, or USM. You can also import from Infrastructure or Log Management.
+   - **[Automatically discover entries from Datadog][23]** products, such as APM, RUM, or USM. You can also import from Infrastructure or {{< prodname >}}Log Management{{< /prodname >}}.
    - **Import from external systems** such as [Backstage][14] or [ServiceNow][15].  
    - **[Create entries directly][24]** through the Datadog UI, or programmatically by importing from GitHub, Terraform, the Datadog Software Metadata Provider, or the Service Definition API.  
 

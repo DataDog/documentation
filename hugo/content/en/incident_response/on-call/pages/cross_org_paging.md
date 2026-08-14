@@ -21,7 +21,7 @@ With cross-org paging, you can:
 
 - **Manage On-Call Teams in a central org**: Consolidate all On-Call Teams in a single org, and trigger Pages from any org or region.
 
-- **Avoid duplicating On-Call configs**: Instead of replicating the same team structures across orgs, use one set of configs and page teams from anywhere.
+- **Avoid duplicating {{< prodname >}}On-Call{{< /prodname >}} configs**: Instead of replicating the same team structures across orgs, use one set of configs and page teams from anywhere.
 
 - **Page teams across regional or compliance boundaries**: Page teams in compliant regions (like US1 or AP1) while keeping alerting logic where it originates.
 

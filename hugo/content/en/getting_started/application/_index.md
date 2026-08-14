@@ -73,7 +73,7 @@ Navigate to [{{< ui >}}Logs{{< /ui >}}][8] in the app to get started. To learn m
 
 ## APM
 
-[Datadog Application Performance Monitoring][9] (APM or tracing) provides you with deep insight into your application's performance side by side with your logs and infrastructure monitoring.
+[{{< prodname >}}Datadog Application Performance Monitoring{{< /prodname >}}][9] (APM or tracing) provides you with deep insight into your application's performance side by side with your logs and infrastructure monitoring.
 
 **Key capabilities**:
 

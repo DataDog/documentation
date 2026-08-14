@@ -12,9 +12,9 @@ further_reading:
 
 ## Overview
 
-Enable crash reporting for your C and C++ applications to surface, triage, and debug crashes in [Error Tracking][1]. On Linux and macOS, the C++ SDK captures unhandled signals (such as `SIGSEGV` and `SIGABRT`). On Windows, it captures unhandled structured exceptions. In both cases, the SDK stores a crash report with the crashing thread's stack trace locally for upload on the next application launch.
+Enable crash reporting for your C and C++ applications to surface, triage, and debug crashes in [{{< prodname >}}Error Tracking{{< /prodname >}}][1]. On Linux and macOS, the C++ SDK captures unhandled signals (such as `SIGSEGV` and `SIGABRT`). On Windows, it captures unhandled structured exceptions. In both cases, the SDK stores a crash report with the crashing thread's stack trace locally for upload on the next application launch.
 
-Crash reports appear in [Error Tracking][1] and are deduplicated and grouped into issues to help you prioritize and resolve the most impactful crashes.
+Crash reports appear in [{{< prodname >}}Error Tracking{{< /prodname >}}][1] and are deduplicated and grouped into issues to help you prioritize and resolve the most impactful crashes.
 
 ## Setup
 
@@ -156,7 +156,7 @@ RaiseException(EXCEPTION_ACCESS_VIOLATION, 0, 0, NULL);
 {{< /tabs >}}
 
 3. Relaunch the application. The crash report is uploaded during the next launch.
-4. After a few seconds, navigate to [Error Tracking][1] in Datadog to confirm the crash report appears.
+4. After a few seconds, navigate to [{{< prodname >}}Error Tracking{{< /prodname >}}][1] in Datadog to confirm the crash report appears.
 
 ## Further Reading
 

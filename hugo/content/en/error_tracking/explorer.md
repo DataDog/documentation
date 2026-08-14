@@ -39,7 +39,7 @@ The time range appears on the top right of the Explorer as a timeline. This feat
 ### Sorting
 
 Order issues in the list using one of these options:
--   {{< ui >}}Relevance{{< /ui >}} combines multiple issue features to prioritize code related, recent, or spiking issues. Error Tracking analyzes how old issues are, occurrences over the last day, notable increase over the past hour, or if they triggered an application crash.
+-   {{< ui >}}Relevance{{< /ui >}} combines multiple issue features to prioritize code related, recent, or spiking issues. {{< prodname >}}Error Tracking{{< /prodname >}} analyzes how old issues are, occurrences over the last day, notable increase over the past hour, or if they triggered an application crash.
 -   {{< ui >}}Count{{< /ui >}} sorts issues based on the total count of occurrences over the selected time range.
 -   {{< ui >}}Newest{{< /ui >}} orders issues by when they were first seen.
 -   {{< ui >}}Impacted Sessions{{< /ui >}} sorts issues by the number of impacted [RUM sessions][4].
@@ -48,7 +48,7 @@ Order issues in the list using one of these options:
 
 {{< img src="/error_tracking/facets-panel-2.png" alt="Error Tracking Facets" style="width:100%;" >}}
 
-Error Tracking automatically indexes a predefined list of attributes from your issues and creates facets out of it. A facet displays all the distinct members of an attribute for the selected time period and provides some basic analytics, such as the number of issues represented. Facets allow you to pivot or filter your issues based on the given attribute.
+{{< prodname >}}Error Tracking{{< /prodname >}} automatically indexes a predefined list of attributes from your issues and creates facets out of it. A facet displays all the distinct members of an attribute for the selected time period and provides some basic analytics, such as the number of issues represented. Facets allow you to pivot or filter your issues based on the given attribute.
 
 Some commonly used error attributes include:
 | Attribute | Description |
@@ -64,13 +64,13 @@ Click the Edit icon to see the list of available facets that you can show or hid
 
 ### Issue level filters
 
-In addition to error events, Error Tracking offers issue level filters to refine the list of displayed issues.
+In addition to error events, {{< prodname >}}Error Tracking{{< /prodname >}} offers issue level filters to refine the list of displayed issues.
 
 {{< img src="error_tracking/issue-level-filters-2.png" alt="Issue level filters in Error Tracking" style="width:100%;" >}}
 
 #### Sources
 
-Error Tracking consolidates errors from multiple Datadog products (Rum, Logs, APM) into a unified view, allowing you to watch and troubleshoot errors across your entire stack. You can choose to display {{< ui >}}All{{< /ui >}}, {{< ui >}}Browser{{< /ui >}}, {{< ui >}}Mobile{{< /ui >}}, or {{< ui >}}Backend{{< /ui >}} issues in the explorer.
+{{< prodname >}}Error Tracking{{< /prodname >}} consolidates errors from multiple Datadog products (Rum, Logs, APM) into a unified view, allowing you to watch and troubleshoot errors across your entire stack. You can choose to display {{< ui >}}All{{< /ui >}}, {{< ui >}}Browser{{< /ui >}}, {{< ui >}}Mobile{{< /ui >}}, or {{< ui >}}Backend{{< /ui >}} issues in the explorer.
 
 For more granular filtering, you can narrow down issues by specific log sources or by SDK and scope to a programming language.
 
@@ -106,7 +106,7 @@ The lower part of the issue panel gives you the ability to navigate error sample
 
 ## Get alerted on new or impactful errors
 
-Seeing a new issue as soon as it happens gives you the chance to proactively identify and fix it before it becomes critical. Error Tracking monitors allow you to track any new issue or issues that have a high impact in your systems or on your users (see [Error Tracking Monitors][7])
+Seeing a new issue as soon as it happens gives you the chance to proactively identify and fix it before it becomes critical. {{< prodname >}}Error Tracking{{< /prodname >}} monitors allow you to track any new issue or issues that have a high impact in your systems or on your users (see [Error Tracking Monitors][7])
 
 You can directly export your search query from the explorer to create an Error Tracking Monitor on the related scope:
 

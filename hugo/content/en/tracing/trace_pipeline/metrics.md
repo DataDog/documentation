@@ -33,7 +33,7 @@ The following metrics are available in your account:
 Leverage these metrics in dashboards and monitors to visualize and control your usage. Two out-of-the box dashboards are built with these metrics. These dashboards help
  monitor your APM usage as well as your ingested and indexed span volumes.
 
-Datadog APM plans come with indexed and ingested spans included. For more information, see the [Pricing page][3] or some [pricing example scenarios][4].
+{{< prodname >}}Datadog APM{{< /prodname >}} plans come with indexed and ingested spans included. For more information, see the [Pricing page][3] or some [pricing example scenarios][4].
 
 ### Ingested spans volume
 

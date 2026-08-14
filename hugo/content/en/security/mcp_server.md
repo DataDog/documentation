@@ -29,19 +29,19 @@ algolia:
 
 ## Overview
 
-The [Datadog MCP Server][1] lets AI agents query your security data through the [Model Context Protocol (MCP)][2]. The `security` toolset gives AI clients like Cursor, Claude Code, and OpenAI Codex access to your security signals and findings, so you can investigate threats and analyze your security posture using natural language.
+The [{{< prodname >}}Datadog MCP Server{{< /prodname >}}][1] lets AI agents query your security data through the [Model Context Protocol (MCP)][2]. The `security` toolset gives AI clients like Cursor, Claude Code, and OpenAI Codex access to your security signals and findings, so you can investigate threats and analyze your security posture using natural language.
 
-<div class="alert alert-info">This page covers the <code>security</code> toolset of the remote Datadog MCP Server. For the Code Security MCP Server, which runs locally and scans source code during development, see <a href="/security/code_security/dev_tool_int/mcp_server/">Code Security MCP Server</a>.</div>
+<div class="alert alert-info">This page covers the <code>security</code> toolset of the remote {{< prodname >}}Datadog MCP Server{{< /prodname >}}. For the Code Security MCP Server, which runs locally and scans source code during development, see <a href="/security/code_security/dev_tool_int/mcp_server/">Code Security MCP Server</a>.</div>
 
 ### Use cases
 
 You can use the `security` toolset to:
 
-- **Analyze and understand security signals**: Ask your AI agent to surface recent high-severity Cloud SIEM signals, App & API Protection alerts, or Workload Protection threats, and get a summary of patterns and affected resources.
+- **Analyze and understand security signals**: Ask your AI agent to surface recent high-severity {{< prodname >}}Cloud SIEM{{< /prodname >}} signals, App & API Protection alerts, or {{< prodname >}}Workload Protection{{< /prodname >}} threats, and get a summary of patterns and affected resources.
 - **Triage security signals**: Update triage state or assignee across a set of matching signals in bulk.
-- **Analyze your security posture**: Query findings across Cloud Security with SQL to understand the distribution of misconfigurations, vulnerabilities, and identity risks across your environment.
+- **Analyze your security posture**: Query findings across {{< prodname >}}Cloud Security{{< /prodname >}} with SQL to understand the distribution of misconfigurations, vulnerabilities, and identity risks across your environment.
 - **Investigate specific findings**: Retrieve full details for a set of findings to understand scope, affected resources, and remediation context.
-- **Triage security findings**: Create Jira issues, ServiceNow tickets, or Case Management cases for findings. Assign findings to team members, or mute false positives and accepted risks.
+- **Triage security findings**: Create Jira issues, ServiceNow tickets, or {{< prodname >}}Case Management{{< /prodname >}} cases for findings. Assign findings to team members, or mute false positives and accepted risks.
 - **Correlate signals and findings**: Cross-reference active security signals with open findings to determine whether an alert is tied to a known posture issue.
 - **Inspect and manage detection rules**: List, retrieve, create, update, and delete detection rules to understand and manage the logic generating signals.
 - **Manage suppressions**: Create, update, and delete suppressions to silence noisy rules for specific conditions without disabling them entirely.
@@ -54,7 +54,7 @@ You can use the `security` toolset to:
 The `security` toolset is not enabled by default. You can enable it by adding a parameter to your URL, which allows security tools to interact with your AI client.
 
 1. [Set up the Datadog MCP Server][4].
-2. When connecting to the Datadog MCP Server, add `security` to the `toolsets` parameter. For example, for your [Datadog site][3] ({{< region-param key="dd_site_name" >}}), use:
+2. When connecting to the {{< prodname >}}Datadog MCP Server{{< /prodname >}}, add `security` to the `toolsets` parameter. For example, for your [Datadog site][3] ({{< region-param key="dd_site_name" >}}), use:
    ```text
    https://mcp.{{< region-param key="dd_site" >}}/v1/mcp?toolsets=core,security
    ```
@@ -72,7 +72,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Security Signals Read`*
 
 `search_datadog_security_signals`
-: Searches and retrieves security signals from Datadog, including Cloud SIEM signals, App & API Protection signals, and Workload Protection signals. Use this to surface and investigate suspicious activity.
+: Searches and retrieves security signals from Datadog, including {{< prodname >}}Cloud SIEM{{< /prodname >}} signals, App & API Protection signals, and {{< prodname >}}Workload Protection{{< /prodname >}} signals. Use this to surface and investigate suspicious activity.
 : *Permissions required: `Security Signals Read`*
 
 `analyze_datadog_security_signals`
@@ -120,15 +120,15 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Security Monitoring Findings Read`*
 
 `get_datadog_security_findings_ticket_suggestions`
-: Returns ranked project suggestions for ticketing security findings. Shows available Case Management, Jira, Linear, and ServiceNow projects with usage data. Call this before `create_datadog_security_findings_ticket` to discover which project to use.
+: Returns ranked project suggestions for ticketing security findings. Shows available {{< prodname >}}Case Management{{< /prodname >}}, Jira, Linear, and ServiceNow projects with usage data. Call this before `create_datadog_security_findings_ticket` to discover which project to use.
 : *Permissions required: `Security Monitoring Findings Read`, `Cases Read`*
 
 `create_datadog_security_findings_ticket`
-: Creates a Case Management case, Jira issue, Linear issue, or ServiceNow ticket for security findings. Requires specific finding IDs and a project ID. Use `get_datadog_security_findings_ticket_suggestions` first to discover available projects.
+: Creates a {{< prodname >}}Case Management{{< /prodname >}} case, Jira issue, Linear issue, or ServiceNow ticket for security findings. Requires specific finding IDs and a project ID. Use `get_datadog_security_findings_ticket_suggestions` first to discover available projects.
 : *Permissions required: `Security Monitoring Findings Write`, `Cases Read`, `Cases Write`*
 
 `detach_datadog_security_findings_ticket`
-: Detaches security findings from their linked case or ticket. Since Jira and ServiceNow tickets are linked through Case Management, detaching the case also detaches any downstream ticket.
+: Detaches security findings from their linked case or ticket. Since Jira and ServiceNow tickets are linked through {{< prodname >}}Case Management{{< /prodname >}}, detaching the case also detaches any downstream ticket.
 : *Permissions required: `Security Monitoring Findings Write`, `Cases Write`*
 
 `mute_datadog_security_findings`
@@ -144,7 +144,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Security Pipelines Read`*
 
 `create_datadog_security_findings_automation_rule`
-: Creates a security findings automation rule. Choose a `rule_type`: `mute` (suppress findings), `due_date` (set remediation deadlines), `severity_modifier` (adjust finding severity), or `ticket_creation` (auto-create Jira or Case Management tickets).
+: Creates a security findings automation rule. Choose a `rule_type`: `mute` (suppress findings), `due_date` (set remediation deadlines), `severity_modifier` (adjust finding severity), or `ticket_creation` (auto-create Jira or {{< prodname >}}Case Management{{< /prodname >}} tickets).
 : *Permissions required: `Security Pipelines Write`, `Security Monitoring Findings Read`*
 
 `update_datadog_security_findings_automation_rule`

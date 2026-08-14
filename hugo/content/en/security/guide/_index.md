@@ -15,13 +15,13 @@ disable_toc: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Cloud SIEM Guides:" >}}
-    {{< nextlink href="/getting_started/cloud_siem" >}}Getting Started with Cloud SIEM{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/guide/automate-the-remediation-of-detected-threats" >}}Automate the remediation of detected threats with Cloud SIEM{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/guide/aws-config-guide-for-cloud-siem" >}}AWS Configuration Guide for Cloud SIEM{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/" >}}Google Cloud Configuration Guide for Cloud SIEM{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/guide/azure-config-guide-for-cloud-siem/" >}}Azure Configuration Guide for Cloud SIEM{{< /nextlink >}}
+    {{< nextlink href="/getting_started/cloud_siem" >}}Getting Started with {{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/guide/automate-the-remediation-of-detected-threats" >}}Automate the remediation of detected threats with {{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/guide/aws-config-guide-for-cloud-siem" >}}AWS Configuration Guide for {{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/" >}}Google Cloud Configuration Guide for {{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/guide/azure-config-guide-for-cloud-siem/" >}}Azure Configuration Guide for {{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /nextlink >}}
     {{< nextlink href="security/cloud_siem/guide/monitor-authentication-logs-for-security-threats" >}}Monitor Authentication Logs for Security Threats{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/guide/customize-which-logs-cloud-siem-analyzes/" >}}Customize which logs Cloud SIEM analyzes{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/guide/customize-which-logs-cloud-siem-analyzes/" >}}Customize which logs {{< prodname >}}Cloud SIEM{{< /prodname >}} analyzes{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Code Security Guides:" >}}
@@ -29,7 +29,7 @@ disable_toc: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Cloud Security Guides:" >}}
-    {{< nextlink href="/getting_started/cloud_security_management" >}}First Steps for Cloud Security{{< /nextlink >}}
+    {{< nextlink href="/getting_started/cloud_security_management" >}}First Steps for {{< prodname >}}Cloud Security{{< /prodname >}}{{< /nextlink >}}
     {{< nextlink href="/security/cloud_security_management/guide/agent_variables" >}}Cloud Security Agent Variables{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -41,7 +41,7 @@ disable_toc: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="App and API Protection Guides:" >}}
-    {{< nextlink href="/getting_started/application_security/" >}}First steps with App and API Protection{{< /nextlink >}}
+    {{< nextlink href="/getting_started/application_security/" >}}First steps with {{< prodname >}}App and API Protection{{< /prodname >}}{{< /nextlink >}}
     {{< nextlink href="/security/application_security/guide/standalone_application_security/" >}}Standalone App and API Protection{{< /nextlink >}}
     {{< nextlink href="/security/application_security/guide/manage_account_theft_appsec/" >}}Managing account theft with AAP{{< /nextlink >}}
 {{< /whatsnext >}}

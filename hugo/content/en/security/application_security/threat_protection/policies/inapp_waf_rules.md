@@ -9,7 +9,7 @@ aliases:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -52,13 +52,13 @@ An input represents which part of the request the operator is applied to. The fo
 
 ## Custom In-App WAF rules
 
-Custom In-App WAF rules enable users to log or block specific types of requests to their applications. For example, you can use custom rules to monitor login success or failure. To get started, navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}App and API Protection{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}In-App WAF{{< /ui >}} > [{{< ui >}}Custom Rules{{< /ui >}}][4].
+Custom In-App WAF rules enable users to log or block specific types of requests to their applications. For example, you can use custom rules to monitor login success or failure. To get started, navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}{{< prodname >}}App and API Protection{{< /prodname >}}{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}In-App WAF{{< /ui >}} > [{{< ui >}}Custom Rules{{< /ui >}}][4].
 
 **Note:** Default rules in In-App WAF are read-only. To refine your In-App WAF behavior, modify the In-App WAF rules. Default rules cannot be modified, however, you can create a custom rule based on one of the default rules, and modify the match conditions to your needs. Be sure to disable the default rule so that you don't have two similar rules evaluating the same requests.
 
 ## Suggested rules
 
-Datadog's App and API Protection [Suggested Rules][5] feature automatically analyzes application traffic and proposes rules to help monitor and protect login and API flows. Rules are pre-built around common authentication patterns like `users.login.success` or `users.login.failure`, which are the most critical signals for detecting suspicious login behavior.
+Datadog's {{< prodname >}}App and API Protection{{< /prodname >}} [Suggested Rules][5] feature automatically analyzes application traffic and proposes rules to help monitor and protect login and API flows. Rules are pre-built around common authentication patterns like `users.login.success` or `users.login.failure`, which are the most critical signals for detecting suspicious login behavior.
 
 Suggested rules benefits include:
 

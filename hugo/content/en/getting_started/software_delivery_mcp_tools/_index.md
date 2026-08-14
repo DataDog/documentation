@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The [Datadog MCP Server][1] enables AI agents to access your Software Delivery data through the [Model Context Protocol (MCP)][2]. The `software-delivery` toolset provides tools for interacting with [CI Visibility][3], [Test Optimization][4], [Code Coverage][8], and [DORA metrics][9] directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
+The [{{< prodname >}}Datadog MCP Server{{< /prodname >}}][1] enables AI agents to access your {{< prodname >}}Software Delivery{{< /prodname >}} data through the [Model Context Protocol (MCP)][2]. The `software-delivery` toolset provides tools for interacting with [CI Visibility][3], [{{< prodname >}}Test Optimization{{< /prodname >}}][4], [Code Coverage][8], and [DORA metrics][9] directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
 
 ## Use cases
 
@@ -30,7 +30,7 @@ The Software Delivery MCP tools unlock AI-assisted workflows for:
 - **Triaging test failures**: Understand which tests are failing, their ownership, and historical patterns.
 - **Reviewing code coverage**: Get coverage summaries for branches or commits, including patch coverage and breakdowns by service or code owner.
 - **Measuring DORA metrics**: Query deployment frequency, change lead time, change failure rate, and recovery time by service or team.
-- **Checking test optimization settings**: See which Test Optimization features are active for a service, including Test Impact Analysis, Early Flake Detection, and Auto Test Retries.
+- **Checking test optimization settings**: See which {{< prodname >}}Test Optimization{{< /prodname >}} features are active for a service, including Test Impact Analysis, Early Flake Detection, and Auto Test Retries.
 - **Retrying failed CI jobs**: Queue a retry for a failed GitHub Actions or GitLab job without leaving the agent session.
 - **Checking PR health**: Get a combined view of CI failures, code coverage, and quality or security violations for a pull request.
 
@@ -63,7 +63,7 @@ The `software-delivery` toolset includes the following tools:
 : Fetch aggregated code coverage summary metrics for a repository commit, including total coverage, patch coverage, and service/codeowner breakdowns.
 
 `get_datadog_test_optimization_settings`
-: Retrieve which Test Optimization features are enabled for a service, including Test Impact Analysis (ITR), Early Flake Detection (EFD), Auto Test Retries (ATR), Failed Test Replay, Code Coverage collection, and PR Comments.
+: Retrieve which {{< prodname >}}Test Optimization{{< /prodname >}} features are enabled for a service, including Test Impact Analysis (ITR), Early Flake Detection (EFD), Auto Test Retries (ATR), Failed Test Replay, Code Coverage collection, and PR Comments.
 
 `get_datadog_flaky_tests_management_policies`
 : Retrieve the Flaky Tests Management policies configured for a repository, including auto-quarantine windows, branch rules, failure rate thresholds, disable policies, and retry settings.
@@ -94,7 +94,7 @@ After you are connected, try prompts like:
 
 ## Setup
 
-To use the Software Delivery tools, connect to the Datadog MCP Server with the `software-delivery` toolset enabled. Add the `toolsets` query parameter to the endpoint URL for your [Datadog site][5]:
+To use the {{< prodname >}}Software Delivery{{< /prodname >}} tools, connect to the {{< prodname >}}Datadog MCP Server{{< /prodname >}} with the `software-delivery` toolset enabled. Add the `toolsets` query parameter to the endpoint URL for your [Datadog site][5]:
 
 ```text
 https://mcp.{{< region-param key="dd_site" >}}/v1/mcp?toolsets=core,software-delivery
@@ -104,7 +104,7 @@ For full setup instructions including client configuration for Cursor, Claude Co
 
 ## Agent skills
 
-Agent skills are prebuilt instruction sets for AI coding agents that automate common Software Delivery workflows. The `dd-software-delivery` skill set is available in the [Datadog agent-skills][6] repository. It provides two skills for triaging flaky tests and unblocking failing PR pipelines using your live CI and Test Optimization data.
+Agent skills are prebuilt instruction sets for AI coding agents that automate common {{< prodname >}}Software Delivery{{< /prodname >}} workflows. The `dd-software-delivery` skill set is available in the [Datadog agent-skills][6] repository. It provides two skills for triaging flaky tests and unblocking failing PR pipelines using your live CI and {{< prodname >}}Test Optimization{{< /prodname >}} data.
 
 After you connect the `software-delivery` MCP toolset, your AI assistant automatically loads skills when your prompt matches their purpose. For example, entering "TestCheckoutServiceIntegration keeps failing in CI — investigate it" loads `/triage-flaky-test` without any installation required.
 

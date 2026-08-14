@@ -7,12 +7,12 @@ title: Agentic Instrumentation
 **Important**: Follow **all** guidelines listed here when following hyperlinks to other steps.
 
 1. Only add Datadog Agent Observability and Datadog tracer-related code. Unless for the purposes of manual instrumentation, do not modify unrelated code.
-2. If being run in a monorepo or project with multiple services or instrumentation targets, confirm with the user which service or sub-project should be instrumented with Agent Observability.
+2. If being run in a monorepo or project with multiple services or instrumentation targets, confirm with the user which service or sub-project should be instrumented with {{< prodname >}}Agent Observability{{< /prodname >}}.
 3. Install the latest Datadog SDKs. If it is already installed, check with the user if it is ok to update the dependency.
 
 ## Pre-requisites
 
-1. A Datadog API key is required to send Agent Observability data to Datadog. Without an API key, the user will not receive Agent Observability data, so this is a **hard requirement**. If the user has not provided one already and does not wish to provide one, continue instrumenting their application, making sure in an explicit call-out at the end that they must set it, and point them to where it can be set.
+1. A Datadog API key is required to send {{< prodname >}}Agent Observability{{< /prodname >}} data to Datadog. Without an API key, the user will not receive {{< prodname >}}Agent Observability{{< /prodname >}} data, so this is a **hard requirement**. If the user has not provided one already and does not wish to provide one, continue instrumenting their application, making sure in an explicit call-out at the end that they must set it, and point them to where it can be set.
 2. Determine the programming language and framework being used in the application to instrument. This is important for correctly instrumenting the application.
 
 ## Environment variables
@@ -34,7 +34,7 @@ DD_API_KEY=<provided-dd-api-key>
 
 ### Enable Agent Observability
 
-This is **critical**. Set the following environment variables to properly enable Agent Observability.
+This is **critical**. Set the following environment variables to properly enable {{< prodname >}}Agent Observability{{< /prodname >}}.
 
 ```bash
 DD_LLMOBS_ENABLED=true
@@ -70,7 +70,7 @@ Follow the instructions for the detected language:
 
 ## Instrument prompts and offer Prompt Management
 
-Prompt Tracking is part of the default Agent Observability instrumentation. Identify the prompt-construction boundary for each selected LLM call and preserve the prompt template separately from its dynamic variables.
+Prompt Tracking is part of the default {{< prodname >}}Agent Observability{{< /prodname >}} instrumentation. Identify the prompt-construction boundary for each selected LLM call and preserve the prompt template separately from its dynamic variables.
 
 1. If the user's request already specifies a Datadog managed prompt ID, follow the [Prompt Management agentic integration guide](/llm_observability/instrumentation/agentic/prompt_management.md). Do not ask whether to use Prompt Management again.
 2. Otherwise, identify the application's prompts and the dynamic variables used to format them. Preserve the existing provider, model, prompt content, and application behavior.

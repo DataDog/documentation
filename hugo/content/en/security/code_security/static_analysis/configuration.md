@@ -3,7 +3,7 @@ title: Static Code Analysis (SAST) Configuration
 description: Reference documentation for Datadog Static Code Analysis (SAST) configuration, covering ruleset selection, rule customization, severities, and paths.
 ---
 
-By default, Datadog Static Code Analysis (SAST) scans your repositories with [Datadog's default rulesets][6] for each programming language. You can customize which rulesets and rules run, along with severities, paths, and other parameters. Configure these settings under the `sast` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
+By default, Datadog Static Code Analysis (SAST) scans your repositories with [Datadog's default rulesets][6] for each programming language. You can customize which rulesets and rules run, along with severities, paths, and other parameters. Configure these settings under the `sast` key in the {{< prodname >}}Code Security{{< /prodname >}} configuration, either in Datadog or in a `code-security.datadog.yaml` file.
 
 For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][26].
 

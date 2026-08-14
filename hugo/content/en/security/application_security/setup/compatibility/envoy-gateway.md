@@ -7,11 +7,11 @@ code_lang_weight: 40
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
-The following table lists App and API Protection capabilities for the Envoy Gateway integration according to the specified Datadog External Processor image version:
+The following table lists {{< prodname >}}App and API Protection{{< /prodname >}} capabilities for the Envoy Gateway integration according to the specified Datadog External Processor image version:
 
 | App and API Protection capability              | Minimum Datadog External Processor image version  |
 |------------------------------------------------|---------------------------------------------------|
@@ -40,7 +40,7 @@ Envoy Gateway relies on Envoy Proxy and the Gateway API, and runs within a Kuber
 
 ### Envoy version support
 
-The Datadog Envoy integration for App and API Protection relies on features that might not be present in every Envoy version. The following table shows which Envoy versions support each feature.
+The Datadog Envoy integration for {{< prodname >}}App and API Protection{{< /prodname >}} relies on features that might not be present in every Envoy version. The following table shows which Envoy versions support each feature.
 
 | Feature | Minimum Envoy version |
 |---------|-----------------------|
@@ -49,7 +49,7 @@ The Datadog Envoy integration for App and API Protection relies on features that
 
 ## Datadog Envoy Gateway integration support
 
-<div class="alert alert-info">The Datadog Envoy Gateway integration for App and API Protection is in Preview.</div>
+<div class="alert alert-info">The Datadog Envoy Gateway integration for {{< prodname >}}App and API Protection{{< /prodname >}} is in Preview.</div>
 
 Only the Linux version and both the amd64 and arm64 architectures are supported.
 

@@ -25,11 +25,11 @@ With Catalog, you can:
 - Detect gaps such as missing SLOs or monitors, or unowned entities.
 - Enforce tagging best practices and verify configurations for enabling cross-telemetry insights.
 
-In [Catalog][3], click on an entity to open a detailed side panel, and find the Setup Guidance tab. In this section, you can check whether your service has the necessary setup to leverage Datadog features like Monitors, SLOs, and Error Tracking. You can also check if your service is properly configured to collect key telemetry data, like tracing and logs.
+In [Catalog][3], click on an entity to open a detailed side panel, and find the Setup Guidance tab. In this section, you can check whether your service has the necessary setup to leverage Datadog features like Monitors, SLOs, and {{< prodname >}}Error Tracking{{< /prodname >}}. You can also check if your service is properly configured to collect key telemetry data, like tracing and logs.
 
 {{< img src="tracing/software_catalog/production-readiness-setup-guidance.png" alt="The Setup Guidance tab for a service, which shows the configuration completeness of that service and recommended setup steps " style="width:100%;" >}}
 
-**Note**: This table reflects service activity, not product billing. For example, if a service has not emitted infrastructure metrics for an extended period, Infrastructure Monitoring may display 'Not Detected', even if hosts or containers are running it.
+**Note**: This table reflects service activity, not product billing. For example, if a service has not emitted infrastructure metrics for an extended period, {{< prodname >}}Infrastructure Monitoring{{< /prodname >}} may display 'Not Detected', even if hosts or containers are running it.
 
 ## Governance and observation
 
@@ -55,7 +55,7 @@ To explore security details for a particular service, you can do one of the foll
 
 ### Use the Costs tab to optimize spending
 
-In the Costs tab, powered by [Cloud Cost Management][2], you can identify inefficiencies, cost-saving opportunities, and trends over time. With cost data and service metrics in one place, you can understand how engineering changes impact overall cloud spend.
+In the Costs tab, powered by [{{< prodname >}}Cloud Cost Management{{< /prodname >}}][2], you can identify inefficiencies, cost-saving opportunities, and trends over time. With cost data and service metrics in one place, you can understand how engineering changes impact overall cloud spend.
 
 {{< img src="tracing/software_catalog/production-readiness-cost-changes.png" alt="The Costs view of Catalog, showing total cost per service and change over time" style="width:100%;" >}}
 

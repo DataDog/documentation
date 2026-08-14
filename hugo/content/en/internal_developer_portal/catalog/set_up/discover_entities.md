@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-Catalog automatically discovers entities from Datadog Application Performance Monitoring (APM), Universal Service Monitoring (USM), and Real User Monitoring (RUM). You can also configure it to import entities from infrastructure metrics and logs.
+Catalog automatically discovers entities from {{< prodname >}}Datadog Application Performance Monitoring{{< /prodname >}} (APM), Universal Service Monitoring (USM), and Real User Monitoring (RUM). You can also configure it to import entities from infrastructure metrics and logs.
 
 ## Automatic discovery with APM, USM, and RUM 
 

@@ -133,7 +133,7 @@ The .NET Tracer depends on the host operating system, .NET Framework runtime, ce
 
 ### Package versioning
 
-Datadog APM for .NET Framework practices [semantic versioning][10].
+{{< prodname >}}Datadog APM{{< /prodname >}} for .NET Framework practices [semantic versioning][10].
 Version updates imply the following changes to runtime support:
 
   - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Preview](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).

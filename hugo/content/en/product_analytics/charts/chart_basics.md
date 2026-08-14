@@ -21,7 +21,7 @@ further_reading:
 
 Charts help you turn user data into actionable insights by visualizing trends, funnels, and key product metrics. Use charts to answer common product questions, such as how users move through a funnel, how engagement changes over time, and how adoption varies across segments.
 
-This page introduces the core charting capabilities available across Product Analytics, including:
+This page introduces the core charting capabilities available across {{< prodname >}}Product Analytics{{< /prodname >}}, including:
 
 - [Creating charts](#create-a-chart)
 - [Saving individual charts](#save-a-chart)
@@ -50,7 +50,7 @@ Share charts to make product insights available across dashboards, notebooks, an
 To add a chart to a dashboard or a notebook, click {{< ui >}}+ Add To{{< /ui >}} in the top-right corner of the chart. Then, select whether to add it to an existing dashboard or notebook, or to a new one.
 
 
-To share a link to a chart, click {{< ui >}}Share{{< /ui >}} to copy the link to your clipboard. Then paste and share this link through the method of your choice. Team members with Datadog access are directed to the live chart in Product Analytics, while users without Datadog access see a static snapshot of the chart.
+To share a link to a chart, click {{< ui >}}Share{{< /ui >}} to copy the link to your clipboard. Then paste and share this link through the method of your choice. Team members with Datadog access are directed to the live chart in {{< prodname >}}Product Analytics{{< /prodname >}}, while users without Datadog access see a static snapshot of the chart.
 
 {{< img src="product_analytics/chart_basics/pana_chart_basics_share_add.png" alt="Chart editor view showing the Add To button for sharing charts to a dashboard or to a notebook." style="width:100%;" >}}
 

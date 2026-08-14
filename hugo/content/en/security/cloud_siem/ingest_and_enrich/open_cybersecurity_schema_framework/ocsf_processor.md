@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Cloud SIEM provides out-of-the-box [Open Cybersecurity Framework (OCSF) support][1] (with editable settings) for certain integrations. You can also add custom mappings with the OCSF processor to normalize your security logs according to the OCSF framework.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} provides out-of-the-box [Open Cybersecurity Framework (OCSF) support][1] (with editable settings) for certain integrations. You can also add custom mappings with the OCSF processor to normalize your security logs according to the OCSF framework.
 
 This document explains how to set up the OCSF processor, which is configured in [Log Management pipelines][2].
 

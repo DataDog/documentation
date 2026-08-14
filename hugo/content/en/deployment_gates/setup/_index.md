@@ -17,10 +17,10 @@ further_reading:
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
-Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
+{{< prodname >}}Deployment Gates{{< /prodname >}} are in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
-Deployment Gates have two main components:
+{{< prodname >}}Deployment Gates{{< /prodname >}} have two main components:
 
 - A **Gate** is defined for a service and environment (and optionally an identifier), and evaluates one or more rules to decide whether a deployment should proceed.
 - A **Rule** is a type of evaluation performed as part of a gate, such as checking the status of a set of monitors or running APM Faulty Deployment Detection analysis on the deployed version.
@@ -28,7 +28,7 @@ Deployment Gates have two main components:
 Gate evaluations are asynchronous — the API returns immediately with an evaluation ID, and the result resolves to `pass` or `fail` over time as the rules run.
 
 ## Deployment Gate evaluation modes
-Deployment Gates support two evaluation modes: Just-In-Time (JIT) and preconfigured.
+{{< prodname >}}Deployment Gates{{< /prodname >}} support two evaluation modes: Just-In-Time (JIT) and preconfigured.
 
 
 | | **[JIT][1]** (default) | **[Preconfigured][2]** |

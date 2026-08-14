@@ -153,7 +153,7 @@ In the CCM Terraform setup UI, follow the instructions in the **Apply Terraform 
 {{< /tabs >}}
 
 ### Create or select a Google Cloud Storage bucket
-Cloud Cost Management uses a GCP storage bucket to receive data extracted from your Detailed Usage Cost BigQuery dataset (prefixed with `datadog_cloud_cost_detailed_usage_export`). You can create a new bucket or use an existing one.
+{{< prodname >}}Cloud Cost Management{{< /prodname >}} uses a GCP storage bucket to receive data extracted from your Detailed Usage Cost BigQuery dataset (prefixed with `datadog_cloud_cost_detailed_usage_export`). You can create a new bucket or use an existing one.
 
 **Note:** The bucket [must be co-located][9] with the BigQuery export dataset.
 

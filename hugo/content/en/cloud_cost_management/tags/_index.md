@@ -20,7 +20,7 @@ further_reading:
 
 Tags help you investigate and understand your cloud and SaaS costs across any dimensions. Tags consist of tag keys and values. For example, in `aws_product:ec2`, the tag key is `aws_product`, and the value is `ec2`.
 
-Cloud Cost Management automatically enriches your cost data with tags from multiple sources, to help you achieve better cost allocation and get deeper insight into who owns infrastructure costs in your ever-changing cloud environments. Using tags, you can allocate shared costs fairly, create accurate reports, and track costs by team, service, or environment.
+{{< prodname >}}Cloud Cost Management{{< /prodname >}} automatically enriches your cost data with tags from multiple sources, to help you achieve better cost allocation and get deeper insight into who owns infrastructure costs in your ever-changing cloud environments. Using tags, you can allocate shared costs fairly, create accurate reports, and track costs by team, service, or environment.
 
 ## Where tags come from
 
@@ -67,9 +67,9 @@ Datadog also adds provider-specific tags:
 
 ## How tags are normalized
 
-Tag keys and values may look slightly different in Cloud Cost Management compared to the providers or other parts of Datadog because of tag normalization.
+Tag keys and values may look slightly different in {{< prodname >}}Cloud Cost Management{{< /prodname >}} compared to the providers or other parts of Datadog because of tag normalization.
 
-Cloud Cost Management normalizes tag **keys** in a similar way to Datadog Metrics:
+{{< prodname >}}Cloud Cost Management{{< /prodname >}} normalizes tag **keys** in a similar way to Datadog Metrics:
 - Drop leading characters that are not letters
 - Lowercase all characters
 - Replace special characters and spaces with single underscores `_`
@@ -77,7 +77,7 @@ Cloud Cost Management normalizes tag **keys** in a similar way to Datadog Metric
 - Reduce contiguous underscores to a single underscore
 - Tag keys up to 5000 characters are supported, and any characters before the first letter are dropped so that tag keys start with letters (different from Datadog Metrics)
 
-Cloud Cost Management normalizes tag **values** as well, while maintaining human readable tag values for cost reporting. For example, `aws_instance_family:Machine Learning ASIC Instances` remains readable rather than being converted to something like `machine_learning_asic_instances`. The normalization follows this logic:
+{{< prodname >}}Cloud Cost Management{{< /prodname >}} normalizes tag **values** as well, while maintaining human readable tag values for cost reporting. For example, `aws_instance_family:Machine Learning ASIC Instances` remains readable rather than being converted to something like `machine_learning_asic_instances`. The normalization follows this logic:
 - Convert any consecutive whitespaces to a single space
 - Keep all letters, marks, numbers, punctuation, and symbols
 - Replace any other characters with an underscore `_`
@@ -101,7 +101,7 @@ Tag normalization allows you to:
 
 A cost data row can have multiple values for the same tag key when tag values from two or more sources are combined and one is not prioritized over the other.
 
-To resolve conflicts and mitigate this, Cloud Cost Management replaces existing tags instead of adding duplicates using the most specific source for each tag key. For example, a Kubernetes Pod tag `team:shopping` would take precedence and replace a Kubernetes node tag `team:compute`.
+To resolve conflicts and mitigate this, {{< prodname >}}Cloud Cost Management{{< /prodname >}} replaces existing tags instead of adding duplicates using the most specific source for each tag key. For example, a Kubernetes Pod tag `team:shopping` would take precedence and replace a Kubernetes node tag `team:compute`.
 
 Sources higher in this list replace tag values from sources lower in this list, if there are conflicts:
 - Custom Allocation Rules

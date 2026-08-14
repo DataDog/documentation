@@ -20,7 +20,7 @@ The NDM Summary Page is in Preview.
 
 The Network Device Monitoring (NDM) **Summary Page** gives network engineers a single view of device and interface health, active issues, and recent configuration changes. Use it as a starting point for assessing your network's state and investigating problems.
 
-**Note**: To use the Summary Page, [Network Device Monitoring][1] must be configured and collecting metrics from at least one SNMP-monitored device. For setup instructions, see [Setup][2].
+**Note**: To use the Summary Page, [{{< prodname >}}Network Device Monitoring{{< /prodname >}}][1] must be configured and collecting metrics from at least one SNMP-monitored device. For setup instructions, see [Setup][2].
 
 {{< img src="network_device_monitoring/summary/summary_page.png" alt="The NDM Summary Page, showing network health, interface and device health, traffic, and recent changes." style="width:100%;" >}}
 

@@ -76,7 +76,7 @@ Detected secrets are shown in three places:
 
 - **Inline in the editor**: Each finding appears as an underline on the detected secret, with severity derived from the rule's priority.
 - **Problems panel**: All findings are listed with the source `Datadog`.
-- **File Insights view**: Findings are grouped alongside other Code Security issues.
+- **File Insights view**: Findings are grouped alongside other {{< prodname >}}Code Security{{< /prodname >}} issues.
 
 {{< img src="/ide_plugins/vscode/secret-scanning-findings.png" alt="A detected secret shown inline in the editor with a hover diagnostic, alongside the Problems panel and the File Insights view" style="width:100%;" >}}
 

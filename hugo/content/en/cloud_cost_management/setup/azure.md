@@ -40,7 +40,7 @@ Datadog provides cost visibility on a Subscription, Resource Group, and Billing 
 You can set up using the [API][13], [Terraform][14], or directly in Datadog by following the instructions below.
 
 {{% site-region region="us3" %}}
-**Note**: If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an app registration][2].
+**Note**: If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the [Datadog Resource method][1] through the Azure Portal. To support {{< prodname >}}Cloud Cost Management{{< /prodname >}}, you need to [create an app registration][2].
 
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/

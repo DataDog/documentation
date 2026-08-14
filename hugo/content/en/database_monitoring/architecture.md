@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-The steps required for setting up Database Monitoring in Datadog vary based on the type of database you're using (Postgres, MySQL, SQL Server, Oracle), and the host provider (self-hosted, AWS, Google Cloud SQL, Azure, or Oracle). To use Database Monitoring for any database on any host provider, you need the following:
+The steps required for setting up {{< prodname >}}Database Monitoring{{< /prodname >}} in Datadog vary based on the type of database you're using (Postgres, MySQL, SQL Server, Oracle), and the host provider (self-hosted, AWS, Google Cloud SQL, Azure, or Oracle). To use {{< prodname >}}Database Monitoring{{< /prodname >}} for any database on any host provider, you need the following:
 
 * [A Datadog Agent][1]
 * Host for your Datadog Agent
@@ -44,7 +44,7 @@ For self-hosted setups, you install the Agent directly onto the database host so
 
 You grant the Agent read-only access to your database, and configure the integration. The Agent must log in as a user so it can run read-only queries on your database.
 
-Instructions for setting up Database Monitoring with a self-hosted provider:
+Instructions for setting up {{< prodname >}}Database Monitoring{{< /prodname >}} with a self-hosted provider:
 
 * [Postgres][5]
 * [MySQL][6]
@@ -55,7 +55,7 @@ Instructions for setting up Database Monitoring with a self-hosted provider:
 
 If your setup is cloud-managed (with providers such as [Amazon RDS][8] or Aurora, Google Cloud SQL, or Azure), you install the Agent on a separate host and configure it to connect to each managed instance.
 
-Database Monitoring collects system metrics such as CPU, memory, disk usage, logs, and related telemetry directly from the cloud provider using the Datadog integration with that provider.
+{{< prodname >}}Database Monitoring{{< /prodname >}} collects system metrics such as CPU, memory, disk usage, logs, and related telemetry directly from the cloud provider using the Datadog integration with that provider.
 
 {{< img src="database_monitoring/dbm_architecture_cloud-hosted.png" alt="The database instance is separate from the Agent host, which is separate from the Datadog backend. The cloud API connects to the Datadog AWS integration through the internet.">}}
 

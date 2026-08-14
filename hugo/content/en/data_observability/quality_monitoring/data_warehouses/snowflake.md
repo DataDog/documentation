@@ -197,7 +197,7 @@ When enabled, each task graph run appears as a trace in APM with individual task
 
 ## Object tags
 
-Datadog ingests [Snowflake object tags][6] applied to your tables and attaches them to the corresponding table in Data Observability. Tags are read from `SNOWFLAKE.ACCOUNT_USAGE.TAG_REFERENCES` using the `SNOWFLAKE.GOVERNANCE_VIEWER` database role granted during setup, so no additional permissions are required.
+Datadog ingests [Snowflake object tags][6] applied to your tables and attaches them to the corresponding table in {{< prodname >}}Data Observability{{< /prodname >}}. Tags are read from `SNOWFLAKE.ACCOUNT_USAGE.TAG_REFERENCES` using the `SNOWFLAKE.GOVERNANCE_VIEWER` database role granted during setup, so no additional permissions are required.
 
 Ingested tags are available as attributes on the **Data Observability Metrics** data source, alongside `database`, `schema`, `table`, and `entity_id`. In the Metrics Explorer and dashboard widget editor, you can use them to:
 

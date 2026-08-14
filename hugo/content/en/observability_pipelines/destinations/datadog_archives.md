@@ -156,7 +156,7 @@ There are no secret identifiers to configure.
 
 ## Route logs to Snowflake using the Datadog Archives destination
 
-You can route logs from Observability Pipelines to Snowflake using the Datadog Archives destination by configuring Snowpipe in Snowflake to automatically ingest those logs. Snowpipe continuously monitors your S3 bucket for new files and automatically ingests them into your Snowflake tables, ensuring near real-time data availability for analytics or further processing. When logs are collected by Observability Pipelines, they are written to an S3 bucket. To set this up:
+You can route logs from {{< prodname >}}Observability Pipelines{{< /prodname >}} to Snowflake using the Datadog Archives destination by configuring Snowpipe in Snowflake to automatically ingest those logs. Snowpipe continuously monitors your S3 bucket for new files and automatically ingests them into your Snowflake tables, ensuring near real-time data availability for analytics or further processing. When logs are collected by {{< prodname >}}Observability Pipelines{{< /prodname >}}, they are written to an S3 bucket. To set this up:
 1. Configure [Log Archives](#configure-log-archives).
 1. [Set up a pipeline][5] to use Datadog Archives as the log destination. Use the configuration detailed in [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
 1. Set up Snowpipe in Snowflake. See [Automating Snowpipe for Amazon S3][6] for instructions.

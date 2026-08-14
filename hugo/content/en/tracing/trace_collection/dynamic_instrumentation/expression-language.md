@@ -23,7 +23,7 @@ Generally, the Expression Language supports:
 * Using the `null` literal (which is automatically translated to `None` in Python and `nil` in Ruby).
 
 It does **not** support:
-* Calling methods. Dynamic Instrumentation does not permit executing code that may have side effects. However, you can access `private` fields directly.
+* Calling methods. {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} does not permit executing code that may have side effects. However, you can access `private` fields directly.
 * Other native programming language syntax beyond what is described on this page.
 
 Try [autocomplete and search (in Preview)](/dynamic_instrumentation/symdb/) for an improved user experience using the Expression Language.

@@ -12,7 +12,7 @@ further_reading:
   text: "Build Workflows"
 ---
 
-This page describes rate limits and throttles that apply to Workflow Automation.
+This page describes rate limits and throttles that apply to {{< prodname >}}Workflow Automation{{< /prodname >}}.
 
 ## Account-level limits
 

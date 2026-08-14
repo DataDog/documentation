@@ -42,7 +42,7 @@ To view AI-suggested follow-up tasks:
 
 ## Create and manage follow-ups
 
-Follow-ups can be created at any point during an incident (even before it's resolved), allowing responders to document necessary work as they discover it. After resolution, you can [export follow-ups](#export-follow-ups) to Jira or Case Management to integrate them into your team's existing workflows.
+Follow-ups can be created at any point during an incident (even before it's resolved), allowing responders to document necessary work as they discover it. After resolution, you can [export follow-ups](#export-follow-ups) to Jira or {{< prodname >}}Case Management{{< /prodname >}} to integrate them into your team's existing workflows.
 
 **From Datadog**: Go to the incident's **Post-Incident** tab to view, create, edit, and track all follow-ups associated with the incident.
 
@@ -54,13 +54,13 @@ You can display follow-ups directly in a postmortem notebook using the `{{incide
 
 ## Export follow-ups
 
-You can export follow-ups from Incident Management to either Case Management or Jira, allowing you to track and manage them within your team's existing workflows. You can export follow-ups manually or configure Incident Management to automatically export all follow-ups to a selected Case Management or Jira project.
+You can export follow-ups from {{< prodname >}}Incident Management{{< /prodname >}} to either {{< prodname >}}Case Management{{< /prodname >}} or Jira, allowing you to track and manage them within your team's existing workflows. You can export follow-ups manually or configure {{< prodname >}}Incident Management{{< /prodname >}} to automatically export all follow-ups to a selected {{< prodname >}}Case Management{{< /prodname >}} or Jira project.
 
 To export follow-ups:
 1. Navigate to [**Incident Management settings > Follow-Ups**][1].
 1. Add or define an **export template**. An export template describes the way that Datadog can export and sync a follow-up.
 1. The following export template types are supported:
-   1. [Case Management](#case-management-exports)
+   1. [{{< prodname >}}Case Management{{< /prodname >}}](#case-management-exports)
    1. [Jira](#jira-exports)
 1. When defining a template, you can configure how Datadog should set the fields on the resulting Datadog case or Jira issue, using variables provided by the follow-up and its incident. For example:
    * `{{ title }}` represents the incident's title
@@ -80,13 +80,13 @@ After defining an export template, you have two options:
 
 ### Case Management exports
 
-When you export your follow-ups to [Case Management][2], you can manage, track, and analyze your follow-ups directly in Datadog. For example, you can:
+When you export your follow-ups to [{{< prodname >}}Case Management{{< /prodname >}}][2], you can manage, track, and analyze your follow-ups directly in Datadog. For example, you can:
 
 * View all of the open follow-up cases assigned to a particular user in Datadog
 * Create a Datadog dashboard that shows follow-up cases by team
-* Automatically sync these cases to any external application with which Case Management integrates, including Jira and ServiceNow
+* Automatically sync these cases to any external application with which {{< prodname >}}Case Management{{< /prodname >}} integrates, including Jira and ServiceNow
 
-When Datadog exports an incident follow-up to Case Management, it creates a case for the follow-up in the project you selected in the export template.
+When Datadog exports an incident follow-up to {{< prodname >}}Case Management{{< /prodname >}}, it creates a case for the follow-up in the project you selected in the export template.
 
 **Status syncing:** Datadog syncs the status between the follow-up and the case **in both directions**, following the mapping you defined in the export template.
 
@@ -101,7 +101,7 @@ When Datadog exports an incident follow-up to Jira, it creates a Jira issue for 
 
 **Status syncing:** When you close or open an incident follow-up, Datadog automatically syncs the status of the connected Jira issue based on the mapping you defined in the export template. **This is a one-way sync.**
 
-Organizations that need two-way sync should export to a Case Management project that is configured for two-way sync with a Jira project.
+Organizations that need two-way sync should export to a {{< prodname >}}Case Management{{< /prodname >}} project that is configured for two-way sync with a Jira project.
 
 ## Further reading
 

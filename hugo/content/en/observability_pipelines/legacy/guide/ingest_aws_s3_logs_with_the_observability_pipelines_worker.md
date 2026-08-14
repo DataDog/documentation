@@ -115,7 +115,7 @@ Create a separate IAM role for the Worker so that only the necessary permissions
 11. Enter a name for the policy.
 12. Click **Create policy**.
 
-Apply the role to the running Observability Pipelines process. You can do this by attaching the role to an EC2 instance or assuming a role from a given user profile.
+Apply the role to the running {{< prodname >}}Observability Pipelines{{< /prodname >}} process. You can do this by attaching the role to an EC2 instance or assuming a role from a given user profile.
 
 ## Configure the Worker to receive notifications from the SQS queue
 

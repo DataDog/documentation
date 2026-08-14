@@ -21,11 +21,11 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
-You can enable App and API Protection for the Envoy proxy. The Datadog Envoy integration has support for threat detection and blocking.
+You can enable {{< prodname >}}App and API Protection{{< /prodname >}} for the Envoy proxy. The Datadog Envoy integration has support for threat detection and blocking.
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ The App and API Protection Envoy integration uses the Envoy external processing 
 
 1. Deploy a new container with the Datadog External Processor Docker image. The image is available on the [Datadog GitHub Registry][5].
 
-   This service is a gRPC server that Envoy communicates with to have requests and responses analyzed by App and API Protection.
+   This service is a gRPC server that Envoy communicates with to have requests and responses analyzed by {{< prodname >}}App and API Protection{{< /prodname >}}.
 
    The Datadog External Processor exposes some settings:
    | Environment variable                      | Default value       | Description                                                                                                                              |

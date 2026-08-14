@@ -66,7 +66,7 @@ When you create a rule with the content anomaly detection method, you can set th
 
 ### Jaccard similarity computation examples
 
-Cloud SIEM uses the [Jaccard similarity][3] to compare logs.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} uses the [Jaccard similarity][3] to compare logs.
 
 $$\text"J(A,B)" = {∣\text"A" ∩ \text"B"∣} / {∣\text"A" ∪ \text"B"∣}$$
 

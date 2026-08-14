@@ -17,7 +17,7 @@ aliases:
 
 ## Overview
 
-Managed evaluations are built-in tools to assess your LLM application. Agent Observability associates evaluations with individual
+Managed evaluations are built-in tools to assess your LLM application. {{< prodname >}}Agent Observability{{< /prodname >}} associates evaluations with individual
 spans so you can view the inputs and outputs that led to a specific evaluation.
 
 Learn more about the [compatibility requirements][2].

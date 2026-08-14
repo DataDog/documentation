@@ -139,7 +139,7 @@ With your core migration to Datadog On-Call complete, shift focus to long-term o
 - **Incorporate post-mortems**: Review incidents that occurred during or after the migration to identify any missed escalation or alerting issues. Feed those lessons back into your testing and runbook documentation.
 - **Track on-call health**: Use [On-Call Analytics][8] to monitor alert volume per responder, MTTA/MTTR trends, notification fatigue, and recurring escalations.
 - **Stay current**: Subscribe to [Incident Response product updates][9] to keep up with new features, improvements, and deprecations.
-- **Deepen your product knowledge**: Explore Datadog's documentation on [Incident Management][6], [Schedules][7], and [Integrations][2] to expand your use of the platform.
+- **Deepen your product knowledge**: Explore Datadog's documentation on [{{< prodname >}}Incident Management{{< /prodname >}}][6], [Schedules][7], and [Integrations][2] to expand your use of the platform.
 - **Join the community**: Connect with peers and Datadog engineers in the [Datadog Slack Community][10] to share best practices, get advice, and give feedback.
 - **Schedule a retrospective**: Within 30-60 days post-migration, hold a retrospective to capture lessons learned and update your documentation, internal guides, and test plans.
 

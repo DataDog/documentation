@@ -179,7 +179,7 @@ See the [Sinks documentation][3] for all supported sinks.
 
 ## Put it all together
 
-With these three basic components, a source, transform, and sink, you now have a working Observability Pipelines configuration file.
+With these three basic components, a source, transform, and sink, you now have a working {{< prodname >}}Observability Pipelines{{< /prodname >}} configuration file.
 
 {{< tabs >}}
 {{% tab "YAML" %}}

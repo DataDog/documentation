@@ -6,7 +6,7 @@ aliases:
   - /security/threats/workload_security_rules
 ---
 
-This topic explains how Workload Protection actively monitors system activity and evaluates it against a set of out-of-the-box (OOTB) rules to detect suspicious behavior.
+This topic explains how {{< prodname >}}Workload Protection{{< /prodname >}} actively monitors system activity and evaluates it against a set of out-of-the-box (OOTB) rules to detect suspicious behavior.
 
 ## Proactively block threats with Active Protection
 
@@ -16,9 +16,9 @@ By default, all OOTB Agent crypto mining threat detection rules are enabled and 
 
 ## Workload Protection rules construction
 
-Workload Protection rules consist of two different components: Agent rules and threat detection rules.
+{{< prodname >}}Workload Protection{{< /prodname >}} rules consist of two different components: Agent rules and threat detection rules.
 
-- **Agent rules:** [Agent rules][9] are evaluated on the Agent host. Workload Protection first evaluates activity within the Datadog Agent against Agent expressions to decide what activity to collect. Agent expressions use Datadog's [Security Language (SECL)][2].<br><br>
+- **Agent rules:** [Agent rules][9] are evaluated on the Agent host. {{< prodname >}}Workload Protection{{< /prodname >}} first evaluates activity within the Datadog Agent against Agent expressions to decide what activity to collect. Agent expressions use Datadog's [Security Language (SECL)][2].<br><br>
 
   For example, here is the *Agent rule* expression `cryptominer_args`:
 
@@ -46,7 +46,7 @@ Workload Protection rules consist of two different components: Agent rules and t
 
 ### Workload Protection rules pipeline
 
-Workload Protection uses the following pipeline when evaluating events:
+{{< prodname >}}Workload Protection{{< /prodname >}} uses the following pipeline when evaluating events:
 
 1. The Agent rules evaluate system activity on the Agent host.
 2. When activity matches an Agent rule expression, the Agent generates a detection event and passes it to the Datadog backend.
@@ -60,7 +60,7 @@ The following diagram illustrates this pipeline:
 
 ### Saving resources by design
 
-Workload Protection detection rules are complex, correlating several datapoints, sometimes across different hosts, and including third party data. This complexity would result in considerable compute resource demands on the Agent host if all rules were evaluated there.
+{{< prodname >}}Workload Protection{{< /prodname >}} detection rules are complex, correlating several datapoints, sometimes across different hosts, and including third party data. This complexity would result in considerable compute resource demands on the Agent host if all rules were evaluated there.
 
 Datadog solves this problem by keeping the Agent lightweight with only a few rules, and processes most rules using the threat detection rules on the Datadog backend.
 
@@ -81,7 +81,7 @@ For a detailed explanation, see [Workload Protection Detection Rules][11].
 
 Agent rules contain [Agent expressions](#agent-expressions) that determine which activities the Agent collects. A full set of Agent rules is called a policy. Datadog provides you with several [out-of-the-box Agent rules][6] powered by the default Agent policy.
 
-With [Workload Protection][7] enabled, you automatically receive new and updated Workload Protection Agent rules when they're released. These bundled Agent rules are used in the [default detection rules][1].
+With [{{< prodname >}}Workload Protection{{< /prodname >}}][7] enabled, you automatically receive new and updated Workload Protection Agent rules when they're released. These bundled Agent rules are used in the [default detection rules][1].
 
 <!-- <div class="alert alert-info">Remote Configuration for Workload Protection is in Preview. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div> -->
 
@@ -93,7 +93,7 @@ Agent expressions use [Datadog's Security Language (SECL)][2] to define behavior
 
 To detect when the `passwd` command is executed, there are a few attributes to note.
 
-On most Linux distributions, the `passwd` utility is installed at `/usr/bin/passwd`. Execution events include `exec`, `execve`, `fork`, and other system calls. In the Workload Protection environment, all of these events are identified by the `exec` symbol.
+On most Linux distributions, the `passwd` utility is installed at `/usr/bin/passwd`. Execution events include `exec`, `execve`, `fork`, and other system calls. In the {{< prodname >}}Workload Protection{{< /prodname >}} environment, all of these events are identified by the `exec` symbol.
 
 Putting it all together, the rule expression is `exec.file.path == "/usr/bin/passwd"`.
 
@@ -105,7 +105,7 @@ To detect when a PHP or Nginx process launches Bash, there are a few attributes 
 
 On most Linux distributions, Bash is installed at `/usr/bin/bash`. As in the previous example, to detect execution, include `exec.file.path == "/usr/bin/bash"` in your rule. This ensures the rule is accounting for the execution of Bash, and also Bash as a child process of PHP or Nginx.
 
-A process ancestor's filename in Workload Protection is an attribute with the symbol `process.ancestors.file.name`. To check if the ancestor is Nginx, add `process.ancestors.file.name == "nginx"`. Since PHP runs as multiple processes, use a wildcard to expand the rule to any process with the prefix `php`. To check if the ancestor is a PHP process, add `process.ancestors.file.name =~ "php*"`. 
+A process ancestor's filename in {{< prodname >}}Workload Protection{{< /prodname >}} is an attribute with the symbol `process.ancestors.file.name`. To check if the ancestor is Nginx, add `process.ancestors.file.name == "nginx"`. Since PHP runs as multiple processes, use a wildcard to expand the rule to any process with the prefix `php`. To check if the ancestor is a PHP process, add `process.ancestors.file.name =~ "php*"`. 
 
 Putting it all together, the rule expression is `exec.file.path == "/usr/bin/bash"  && (process.ancestors.file.name == "nginx" || process.ancestors.file.name =~ "php*")`.
 

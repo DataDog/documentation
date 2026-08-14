@@ -185,7 +185,7 @@ Test execution has two phases:
 
 The distinct discovery and execution phases allow for a gap between the test runner process collecting the tests and the tests starting.
 
-API users must provide consistent identifiers (described below) that are used as references for Test Optimization items within the API's state storage.
+API users must provide consistent identifiers (described below) that are used as references for {{< prodname >}}Test Optimization{{< /prodname >}} items within the API's state storage.
 
 ##### Enable `test_visibility`
 
@@ -201,7 +201,7 @@ Modules, suites, and tests form a hierarchy in the Python Test Optimization API,
 
 ##### Test session
 
-A test session represents a project's test execution, typically corresponding to the execution of a test command. Only one session can be discovered, started, and finished in the execution of Test Optimization program.
+A test session represents a project's test execution, typically corresponding to the execution of a test command. Only one session can be discovered, started, and finished in the execution of {{< prodname >}}Test Optimization{{< /prodname >}} program.
 
 Call `ddtrace.ext.test_visibility.api.TestSession.discover()` to discover the session, passing the test command, a given framework name, and version.
 

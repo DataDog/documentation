@@ -410,7 +410,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
       gem 'datadog-lambda'
       ```
 
-      `datadog` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda. Datadog therefore recommends that you build and deploy your Lambda as a container image. If your function cannot be deployed as a container image and you would like to use Datadog APM, Datadog recommends installing the Lambda Library as a layer instead of as a gem.
+      `datadog` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda. Datadog therefore recommends that you build and deploy your Lambda as a container image. If your function cannot be deployed as a container image and you would like to use {{< prodname >}}Datadog APM{{< /prodname >}}, Datadog recommends installing the Lambda Library as a layer instead of as a gem.
 
       Install `gcc`, `gmp-devel`, and `make` prior to running `bundle install` in your function's Dockerfile to ensure that the native extensions can be successfully compiled.
 
@@ -542,7 +542,7 @@ def some_operation()
 end
 ```
 
-For more information on custom metric submission, see [Serverless Custom Metrics][7]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][8].
+For more information on custom metric submission, see [Serverless Custom Metrics][7]. For additional details on custom instrumentation, see the {{< prodname >}}Datadog APM{{< /prodname >}} documentation for [custom instrumentation][8].
 
 ## Further Reading
 

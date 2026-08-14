@@ -17,12 +17,12 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview">}}
-Agent Console is in Preview and available to all Datadog customers.
+{{< prodname >}}Agent Console{{< /prodname >}} is in Preview and available to all Datadog customers.
 {{< /callout >}}
 
-The [Agent Console][1] provides centralized monitoring for AI agents across your organization. It collects logs and metrics from coding agents and Datadog's own [Bits AI agents](#bits-ai-agents), surfacing them in real time to give you visibility into usage, cost, latency, productivity impact, and emerging problem patterns.
+The [{{< prodname >}}Agent Console{{< /prodname >}}][1] provides centralized monitoring for AI agents across your organization. It collects logs and metrics from coding agents and Datadog's own [Bits AI agents](#bits-ai-agents), surfacing them in real time to give you visibility into usage, cost, latency, productivity impact, and emerging problem patterns.
 
-Agent Console supports the following coding agents:
+{{< prodname >}}Agent Console{{< /prodname >}} supports the following coding agents:
 
 | Tool | Description |
 |------|-------------|
@@ -91,11 +91,11 @@ The {{< ui >}}User Analytics{{< /ui >}} panel gives you visibility into how indi
 
 The {{< ui >}}Bits AI Agents{{< /ui >}} tab shows usage of Datadog's built-in AI agents alongside your coding agents. The combined view of investigations, sessions, and executions across all Datadog agents lets you correlate Bits AI activity with the rest of your organization.
 
-Individual cards summarize activity for each Bits AI agent, including [Bits Investigation][5], [Bits Code][6], and [Bits Agent Builder][7]. Click {{< ui >}}View Details{{< /ui >}} on a card to examine that agent.
+Individual cards summarize activity for each Bits AI agent, including [Bits Investigation][5], [{{< prodname >}}Bits Code{{< /prodname >}}][6], and [Bits Agent Builder][7]. Click {{< ui >}}View Details{{< /ui >}} on a card to examine that agent.
 
 ## Set up
 
-To start sending data to Agent Console, see [Set Up Agent Console][8].
+To start sending data to {{< prodname >}}Agent Console{{< /prodname >}}, see [Set Up Agent Console][8].
 
 ## Further reading
 

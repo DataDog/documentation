@@ -100,7 +100,7 @@ bundle exec ddcirb exec rspec
 The following is a list of the most important configuration settings that can be used with the test optimization library:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the Test Optimization product.
+: Enables the {{< prodname >}}Test Optimization{{< /prodname >}} product.
 **Default**: `false`
 
 `DD_ENV` (Required)
@@ -174,7 +174,7 @@ You can enable automatic APM instrumentation by adding the following line in you
 require "datadog/auto_instrument" if ENV["DD_ENV"] == "ci"
 ```
 
-**Note**: In CI mode, these traces are submitted to Test Optimization, and they do **not** show up in Datadog APM.
+**Note**: In CI mode, these traces are submitted to {{< prodname >}}Test Optimization{{< /prodname >}}, and they do **not** show up in {{< prodname >}}Datadog APM{{< /prodname >}}.
 
 For the full list of available instrumentation methods, see the [tracing documentation][6]
 
@@ -184,7 +184,7 @@ For the full list of available instrumentation methods, see the [tracing documen
 
 ## Using library's public API for unsupported test frameworks
 
-If you use RSpec, Minitest, or Cucumber, **do not use the manual testing API**, as Test Optimization automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
+If you use RSpec, Minitest, or Cucumber, **do not use the manual testing API**, as {{< prodname >}}Test Optimization{{< /prodname >}} automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
 
 Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
 Full public API documentation is available on [YARD site][8].

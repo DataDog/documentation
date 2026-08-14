@@ -247,20 +247,20 @@ This table shows the mapping between the metric origin as seen in the facet and 
 | Metric Origin           | Submitted from                                                                |
 | ------------------------| ----------------------------------------------------------------------------- |
 | API Catalog             | Timeseries sent by the Datadog [Catalog][13] product from the APIM Endpoint.
-| APM                     | Timeseries sent by the Datadog APM product for metrics generated from traces and span metrics.
+| APM                     | Timeseries sent by the {{< prodname >}}Datadog APM{{< /prodname >}} product for metrics generated from traces and span metrics.
 | Agent                   | Timeseries sent by the Datadog Agent, collected from [Agent integrations][10], [built-in integrations][9], [DogStatsD][32], or [custom Agent checks][33].
-| Cloud Security                     | Timeseries sent by the Datadog [Cloud Security][14] product.
+| {{< prodname >}}Cloud Security{{< /prodname >}}                     | Timeseries sent by the Datadog [{{< prodname >}}Cloud Security{{< /prodname >}}][14] product.
 | Cloud Integrations      | Timeseries collected from cloud providers like AWS, Azure, and Google Cloud etc. from their respective integrations. 
-| DBM                     | Timeseries sent by the Datadog [Database Monitoring][15] product, including insights into MySQL, Oracle, and Postgres activities/queries/locks.
+| DBM                     | Timeseries sent by the Datadog [{{< prodname >}}Database Monitoring{{< /prodname >}}][15] product, including insights into MySQL, Oracle, and Postgres activities/queries/locks.
 | DSM                     | Timeseries sent by the Datadog [Data Streams Monitoring][16] product, for metrics generated from the DSM spans and traces.
 | Datadog Exporter        | Timeseries sent by the [OpenTelemetry Collector][17] or the [Datadog Exporter][18].
 | Datadog Platform        | Timeseries sent by metrics intake that are used to [report metrics usage][11].
 | Events                  | Timeseries generated from the Datadog Events platform.
-| Agent Observability       | Timeseries emitted by the Agent Observability product using the `lmobs_to_metrics` service.
+| {{< prodname >}}Agent Observability{{< /prodname >}}       | Timeseries emitted by the {{< prodname >}}Agent Observability{{< /prodname >}} product using the `lmobs_to_metrics` service.
 | Logs                    | Timeseries generated from the Datadog [Logs][28] platform.
 | Metrics API             | Timeseries sent using Datadog's [OTLP Ingestion endpoint][21] and OTel receiver with a Datadog integration counterparts or points for estimated usage metrics or Datadog API Client.
 | CNM                     | Timeseries sent by the Datadog [Cloud Network Monitoring][19] product.
-| Observability Pipelines | Timeseries sent by the Datadog [Observability Pipielines][20] including error and performance metrics.
+| {{< prodname >}}Observability Pipelines{{< /prodname >}} | Timeseries sent by the Datadog [Observability Pipielines][20] including error and performance metrics.
 | Other                   | Timeseries that don't have a DD integration counterpart.
 | Processes               | Timeseries generated from the Datadog [Processes][22] product.
 | RUM                     | Timeseries generated from the Datadog [Real User Monitoring][23] product.

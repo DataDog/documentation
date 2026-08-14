@@ -17,16 +17,16 @@ further_reading:
 
 ## Overview
 
-Integrate Jira with Error Tracking to create and link Jira tickets to Error Tracking issues. With Jira for Error Tracking, you can:
+Integrate Jira with {{< prodname >}}Error Tracking{{< /prodname >}} to create and link Jira tickets to {{< prodname >}}Error Tracking{{< /prodname >}} issues. With Jira for {{< prodname >}}Error Tracking{{< /prodname >}}, you can:
 
-- Create Jira tickets directly from the Error Tracking issue panel
-- Group multiple Error Tracking issues into a single ticket
+- Create Jira tickets directly from the {{< prodname >}}Error Tracking{{< /prodname >}} issue panel
+- Group multiple {{< prodname >}}Error Tracking{{< /prodname >}} issues into a single ticket
 - Automatically route issues to specific Jira boards using automation rules
-- Automatically create Jira tickets for Error Tracking issues matching specific criteria.
+- Automatically create Jira tickets for {{< prodname >}}Error Tracking{{< /prodname >}} issues matching specific criteria.
 
 ## Prerequisites
 
-<div class="alert alert-info">Ticket creation from an Error Tracking issue is available for Jira Cloud and Data Center. Dual-sync between Jira and Error Tracking is only available for Jira Cloud.</div>
+<div class="alert alert-info">Ticket creation from an {{< prodname >}}Error Tracking{{< /prodname >}} issue is available for Jira Cloud and Data Center. Dual-sync between Jira and {{< prodname >}}Error Tracking{{< /prodname >}} is only available for Jira Cloud.</div>
 
 1. Set up the [Jira integration for Datadog][7].
 2. Make sure you have the following [permissions][1]:
@@ -49,13 +49,13 @@ You can create a Jira ticket directly from the issue panel to group investigatio
 
 {{< img src="error_tracking/create-ticket.png" alt="Create a Jira ticket from an Error Tracking issue" style="width:100%;" >}}
 
-Once created, the ticket is linked to the Error Tracking issue. The ticket link appears in the issue panel, and the issue status automatically changes to {{< ui >}}REVIEWED{{< /ui >}}.
+Once created, the ticket is linked to the {{< prodname >}}Error Tracking{{< /prodname >}} issue. The ticket link appears in the issue panel, and the issue status automatically changes to {{< ui >}}REVIEWED{{< /ui >}}.
 
 When an issue is linked to a ticket, their state, assignee and comments are two-way synced. See [State dual-way sync between issues and tickets](#state-dual-way-sync-between-issues-and-tickets) for more information on how the issue state and ticket status are synced.
 
 ## Group multiple issues into a single ticket
 
-You can attach multiple Error Tracking issues to a single Jira ticket to group correlated issues into a single unit of work:
+You can attach multiple {{< prodname >}}Error Tracking{{< /prodname >}} issues to a single Jira ticket to group correlated issues into a single unit of work:
 
 1. Navigate to the [Error Tracking Explorer][2].
 2. Click on an issue to open the issue panel.
@@ -73,17 +73,17 @@ The relationship between tickets and issues is a 1:N relationship. A single tick
 
 ## State dual-way sync between issues and tickets
 
-If two-way sync is enabled and configured between Datadog and Jira projects, the states of Error Tracking issues and Jira tickets are mirrored. If you encounter any unexpected behavior on this states sync, see the [Troubleshooting](#troubleshooting) section for how to fix your configuration.
+If two-way sync is enabled and configured between Datadog and Jira projects, the states of {{< prodname >}}Error Tracking{{< /prodname >}} issues and Jira tickets are mirrored. If you encounter any unexpected behavior on this states sync, see the [Troubleshooting](#troubleshooting) section for how to fix your configuration.
 
 ### Single Error Tracking issue linked to single Jira ticket
 
-When a single Error Tracking issue is linked to a Jira ticket, their states are two-way synced. The mapping between these states can be configured in the Data Sync settings of the ticket creation or automation rule forms:
+When a single {{< prodname >}}Error Tracking{{< /prodname >}} issue is linked to a Jira ticket, their states are two-way synced. The mapping between these states can be configured in the Data Sync settings of the ticket creation or automation rule forms:
 
 {{< img src="error_tracking/jira-status-mapping.png" alt="Map Error Tracking issue states to Jira ticket statuses" style="width:100%;" >}}
 
 ### Multiple Error Tracking issues linked to single Jira ticket
 
-When multiple Error Tracking issues are linked to the same Jira ticket, there is also a sync between their states, depending on the situation. If you update the status of the ticket, all linked issues are updated to mirror this state according to your mapping.
+When multiple {{< prodname >}}Error Tracking{{< /prodname >}} issues are linked to the same Jira ticket, there is also a sync between their states, depending on the situation. If you update the status of the ticket, all linked issues are updated to mirror this state according to your mapping.
 
 Assuming that your mapping is defined as follows:
 
@@ -108,7 +108,7 @@ You can configure rules to match specific issues to Jira boards. When an issue m
 
 ### Setup
 
-To create automation rules for your Error Tracking issues, you need one (1) of the following [permissions][1] :
+To create automation rules for your {{< prodname >}}Error Tracking{{< /prodname >}} issues, you need one (1) of the following [permissions][1] :
 - Error Tracking Write
 - Error Tracking Settings Write
 
@@ -147,22 +147,22 @@ When adding an automation rule, you can enable automatic Jira ticket creation fo
 
 {{< img src="error_tracking/enable-auto-ticket-creation.png" alt="Enable automatic case creation" style="height:300px;" >}}
 
-When a new Error Tracking issue is created, rules are evaluated and the first rule that matches is applied. If automatic ticket creation is enabled on that matching rule, a new Jira ticket will be created on the Jira board specified in your rule, and attached to the matching issue.
+When a new {{< prodname >}}Error Tracking{{< /prodname >}} issue is created, rules are evaluated and the first rule that matches is applied. If automatic ticket creation is enabled on that matching rule, a new Jira ticket will be created on the Jira board specified in your rule, and attached to the matching issue.
 
 ## Troubleshooting
 
-If you experience unexpected behaviors using ticketing systems with Error Tracking, the following troubleshooting steps can help you resolve the issue quickly. If you continue to have trouble, reach out to [Datadog support][5].
+If you experience unexpected behaviors using ticketing systems with {{< prodname >}}Error Tracking{{< /prodname >}}, the following troubleshooting steps can help you resolve the issue quickly. If you continue to have trouble, reach out to [Datadog support][5].
 
 ### Sync is broken between Jira and Error Tracking
 
-If you experience syncing issues between your Jira tickets and the corresponding Error Tracking issues (such as the issue state not being updated when you close the Jira ticket), verify that the following steps are all properly configured:
+If you experience syncing issues between your Jira tickets and the corresponding {{< prodname >}}Error Tracking{{< /prodname >}} issues (such as the issue state not being updated when you close the Jira ticket), verify that the following steps are all properly configured:
 
 1. In the issue panel, make sure that the issue is correctly linked to the Jira ticket.
-2. A Case Management case was automatically created by Datadog to act as a linking point for the Error Tracking issue and the Jira ticket. You can access this case from the issue panel, to find the  Case Management project in which it was created. In Case Management settings, make sure that the Jira integration is enabled for this project, and the correct Jira account and board are configured.
+2. A Case Management case was automatically created by Datadog to act as a linking point for the {{< prodname >}}Error Tracking{{< /prodname >}} issue and the Jira ticket. You can access this case from the issue panel, to find the  {{< prodname >}}Case Management{{< /prodname >}} project in which it was created. In Case Management settings, make sure that the Jira integration is enabled for this project, and the correct Jira account and board are configured.
 
 {{< img src="error_tracking/enable-jira-for-case-management-project.png" alt="Enable Jira for your Case Management project" style="width:100%;" >}}
 
-3. In Case Management settings, make sure that sync between Case Management and Jira is enabled for this project. Check that the fields you want to sync are configured for two-way sync between Datadog and Jira.
+3. In Case Management settings, make sure that sync between {{< prodname >}}Case Management{{< /prodname >}} and Jira is enabled for this project. Check that the fields you want to sync are configured for two-way sync between Datadog and Jira.
 
 {{< img src="error_tracking/sync-data-between-case-management-and-jira.png" alt="Sync data between Case Management and Jira" style="width:100%;" >}}
 
@@ -170,11 +170,11 @@ If you experience syncing issues between your Jira tickets and the corresponding
 
 ### Reporter on Jira tickets is the wrong user
 
-When a Jira ticket is created from an Error Tracking issue, the ticket's {{< ui >}}Reporter{{< /ui >}} field is set to the Datadog user who configured the Jira integration, not to the user who triggered the ticket creation. This is a known limitation of the Jira integration for Datadog and applies to every ticket created from Error Tracking. To change the Reporter on a specific ticket, update it directly in Jira after creation.
+When a Jira ticket is created from an {{< prodname >}}Error Tracking{{< /prodname >}} issue, the ticket's {{< ui >}}Reporter{{< /ui >}} field is set to the Datadog user who configured the Jira integration, not to the user who triggered the ticket creation. This is a known limitation of the Jira integration for Datadog and applies to every ticket created from {{< prodname >}}Error Tracking{{< /prodname >}}. To change the Reporter on a specific ticket, update it directly in Jira after creation.
 
 ### A new Case Management project is created for each Jira ticket
 
-Datadog Case Management maps each Jira issue type to a different Case Management project. When you create a ticket from an Error Tracking issue using a Jira issue type that has not been used before, a new Case Management project is automatically created to link the Error Tracking issue and the Jira ticket. This behavior means that creating tickets with several Jira issue types over time produces several Case Management projects, one per issue type.
+Datadog Case Management maps each Jira issue type to a different {{< prodname >}}Case Management{{< /prodname >}} project. When you create a ticket from an {{< prodname >}}Error Tracking{{< /prodname >}} issue using a Jira issue type that has not been used before, a new {{< prodname >}}Case Management{{< /prodname >}} project is automatically created to link the {{< prodname >}}Error Tracking{{< /prodname >}} issue and the Jira ticket. This behavior means that creating tickets with several Jira issue types over time produces several {{< prodname >}}Case Management{{< /prodname >}} projects, one per issue type.
 
 ## Further reading
 

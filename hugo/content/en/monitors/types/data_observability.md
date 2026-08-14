@@ -21,9 +21,9 @@ further_reading:
 
 ## Overview
 
-[Data Observability][1] monitors use anomaly detection that learns from seasonality, trends, and user feedback to catch delayed data, incomplete loads, and unexpected value changes before they affect downstream dashboards, AI applications, or business decisions. Combined with end-to-end data and code lineage, these monitors help teams detect issues early, assess downstream impact, and route to the right owner.
+[{{< prodname >}}Data Observability{{< /prodname >}}][1] monitors use anomaly detection that learns from seasonality, trends, and user feedback to catch delayed data, incomplete loads, and unexpected value changes before they affect downstream dashboards, AI applications, or business decisions. Combined with end-to-end data and code lineage, these monitors help teams detect issues early, assess downstream impact, and route to the right owner.
 
-Data Observability monitors support the following metric types:
+{{< prodname >}}Data Observability{{< /prodname >}} monitors support the following metric types:
 
 **Table-level metric types:**
 | Metric type | Description |
@@ -45,13 +45,13 @@ Data Observability monitors support the following metric types:
 
 Datadog collects metrics such as row count and freshness from warehouse system metadata (for example, `INFORMATION_SCHEMA`) when available. This avoids running a query against your warehouse and reduces compute costs. Not all warehouses expose system metadata. For metrics that cannot be collected from system metadata, the monitor runs a query directly against your warehouse to compute the value.
 
-Data Observability monitors require [Quality Monitoring][2] to be set up with at least one supported data warehouse (for example, [Snowflake][3], [Databricks][4], or [BigQuery][5]).
+{{< prodname >}}Data Observability{{< /prodname >}} monitors require [Quality Monitoring][2] to be set up with at least one supported data warehouse (for example, [Snowflake][3], [Databricks][4], or [BigQuery][5]).
 
 To compare a metric across two data assets instead of tracking a single one, see [Source to target monitors](#source-to-target-monitors).
 
 ## Monitor creation
 
-To create a Data Observability monitor in Datadog, navigate to [{{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][6] or [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Data Observability{{< /ui >}}][6]. To view all existing Data Observability monitors, see the [Data Observability Monitors page][7].
+To create a {{< prodname >}}Data Observability{{< /prodname >}} monitor in Datadog, navigate to [{{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][6] or [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Data Observability{{< /ui >}}][6]. To view all existing {{< prodname >}}Data Observability{{< /prodname >}} monitors, see the [Data Observability Monitors page][7].
 
 ## Choose data to monitor
 
@@ -269,7 +269,7 @@ Source to target monitors are available in all regions except GovCloud.
 1. Navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][6] and select {{< ui >}}Source to Target{{< /ui >}}.
 2. Under {{< ui >}}Choose source{{< /ui >}}, select the warehouse that holds the source data, then select the data to compare.
 3. Under {{< ui >}}Choose target{{< /ui >}}, do the same for the destination. The source and the target can be in different data warehouses or in the same one.
-4. Under {{< ui >}}Select your metric type{{< /ui >}}, choose the metric to compare. Source to target monitors support the same metric types as other Data Observability monitors, including row count, freshness, nullness, uniqueness, cardinality, and {{< ui >}}Custom SQL{{< /ui >}}.
+4. Under {{< ui >}}Select your metric type{{< /ui >}}, choose the metric to compare. Source to target monitors support the same metric types as other {{< prodname >}}Data Observability{{< /prodname >}} monitors, including row count, freshness, nullness, uniqueness, cardinality, and {{< ui >}}Custom SQL{{< /ui >}}.
 5. Set {{< ui >}}Format{{< /ui >}} to control how the comparison is expressed:
     - {{< ui >}}Difference{{< /ui >}}: the target value minus the source value. A negative value means the target has less than the source.
     - {{< ui >}}% Difference{{< /ui >}}: the same difference as a percentage of the source value.
@@ -285,7 +285,7 @@ When the metric type is {{< ui >}}Custom SQL{{< /ui >}}, supply one query for th
 
 ### Evaluation
 
-The difference between the source and the target is recorded as its own metric, so a source to target monitor is evaluated by the same detection methods as any other Data Observability monitor, including anomaly detection. Both sides are measured on a synchronized schedule, so the two values are captured at the same time rather than following each warehouse's default collection cadence.
+The difference between the source and the target is recorded as its own metric, so a source to target monitor is evaluated by the same detection methods as any other {{< prodname >}}Data Observability{{< /prodname >}} monitor, including anomaly detection. Both sides are measured on a synchronized schedule, so the two values are captured at the same time rather than following each warehouse's default collection cadence.
 
 ## Example monitors
 

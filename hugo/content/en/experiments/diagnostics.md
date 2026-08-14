@@ -121,7 +121,7 @@ This diagnostic does not necessarily mean that the source event never fired. Eve
 1. Open the metric and confirm that the event name, aggregation, filters, and data source are correct. Check the metric event volume chart for recent matching data.
 2. Compare an assigned subject's identifier with the identifier on its metric events. Confirm that the configured subject type attribute or mapped warehouse column contains the same value as the SDK `targetingKey` or the assignment subject column configured in the Exposure SQL Model.
 3. Confirm that metric events occur after the subject's first assignment and within the experiment analysis window.
-4. For an experiment backed by Datadog Feature Flags, if [Source Code Integration][6] is configured, click [{{< ui >}}Ask Bits{{< /ui >}}][7] for a **Missing metric data** failure on the primary metric. Bits can inspect the source locations where the feature flag is evaluated and help you check nearby metric instrumentation. An empty code search is inconclusive and does not prove that the SDK or flag is missing from the application.
+4. For an experiment backed by Datadog Feature Flags, if [{{< prodname >}}Source Code Integration{{< /prodname >}}][6] is configured, click [{{< ui >}}Ask Bits{{< /ui >}}][7] for a **Missing metric data** failure on the primary metric. Bits can inspect the source locations where the feature flag is evaluated and help you check nearby metric instrumentation. An empty code search is inconclusive and does not prove that the SDK or flag is missing from the application.
 5. For warehouse metrics, run the Metric SQL Model or query its source table directly.
 6. Fix the metric definition, identity mapping, event timing, or instrumentation issue, then rerun experiment analysis.
 
@@ -190,7 +190,7 @@ Datadog applies a Bonferroni correction by dividing the family significance leve
 
 ## Analysis pipeline failure
 
-Experiment analysis can use Product Analytics and RUM data in Datadog or warehouse native mode. **Analysis pipeline failure** applies only to experiments that use warehouse metrics. Datadog reports this diagnostic when a customer warehouse query fails, so current warehouse results cannot be computed. Datadog does not report internal Product Analytics or RUM analysis failures with this diagnostic.
+Experiment analysis can use {{< prodname >}}Product Analytics{{< /prodname >}} and RUM data in Datadog or warehouse native mode. **Analysis pipeline failure** applies only to experiments that use warehouse metrics. Datadog reports this diagnostic when a customer warehouse query fails, so current warehouse results cannot be computed. Datadog does not report internal {{< prodname >}}Product Analytics{{< /prodname >}} or RUM analysis failures with this diagnostic.
 
 The SQL you define depends on how the experiment is randomized. For experiments backed by Datadog Feature Flags, Datadog synchronizes assignments to the `g_exposures` table, and you define Metric SQL Models. For warehouse-native experiments, you define both the Exposure SQL Model and Metric SQL Models. Datadog generates the remaining pipeline SQL.
 

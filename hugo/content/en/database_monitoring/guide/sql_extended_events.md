@@ -33,7 +33,7 @@ This data is useful for:
 
 ## Before you begin
 
-You must configure Database Monitoring for your [SQL Server][1] instance before continuing with this guide.
+You must configure {{< prodname >}}Database Monitoring{{< /prodname >}} for your [SQL Server][1] instance before continuing with this guide.
 
 
 Supported databases

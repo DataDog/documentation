@@ -43,7 +43,7 @@ For security admins or InfoSec teams, audit trail events help with compliance ch
 
 - For user logins, account, or role changes in your organization.
 
-You can also analyze Audit Trail events with [Cloud SIEM][15] to detect threats and generate security signals. See [Getting Started with Cloud SIEM][16] for more information.
+You can also analyze Audit Trail events with [{{< prodname >}}Cloud SIEM{{< /prodname >}}][15] to detect threats and generate security signals. See [Getting Started with Cloud SIEM][16] for more information.
 
 **Note**: Datadog's tools and policies comply with PCI v4.0. For more information, see [PCI DSS Compliance][2].
 

@@ -23,13 +23,13 @@ aliases:
 - /tracing/setup_overview/proxy_setup/
 ---
 
-Datadog APM is included in Envoy v1.9.0 and newer.
+{{< prodname >}}Datadog APM{{< /prodname >}} is included in Envoy v1.9.0 and newer.
 
 ## Enabling Datadog APM
 
 **Note**: The example configuration below is for Envoy v1.19.
 
-The following settings are required to enable Datadog APM in Envoy:
+The following settings are required to enable {{< prodname >}}Datadog APM{{< /prodname >}} in Envoy:
 
 - a cluster for submitting traces to the Datadog Agent
 - `http_connection_manager` configuration to activate tracing
@@ -82,7 +82,7 @@ With this configuration, HTTP requests to Envoy initiate and propagate Datadog t
 
 ## Example Envoy v1.19 configuration
 
-The following example configuration demonstrates the placement of items required to enable tracing using Datadog APM.
+The following example configuration demonstrates the placement of items required to enable tracing using {{< prodname >}}Datadog APM{{< /prodname >}}.
 
 {{< highlight yaml "hl_lines=18-24 66-78" >}}
 static_resources:

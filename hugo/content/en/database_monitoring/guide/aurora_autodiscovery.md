@@ -4,7 +4,7 @@ aliases:
 - /database_monitoring/aurora_autodiscovery
 ---
 
-This guide assumes you have configured Database Monitoring for your Amazon Aurora [Postgres][1] or [MySQL][11] databases.
+This guide assumes you have configured {{< prodname >}}Database Monitoring{{< /prodname >}} for your Amazon Aurora [Postgres][1] or [MySQL][11] databases.
 
 ## Before you begin
 
@@ -18,7 +18,7 @@ Supported Agent versions
 
 Datadog's [Autodiscovery][4] enables you to configure monitoring in dynamic infrastructures. You can use this feature to monitor your Aurora clusters without having to list individual database host endpoints (for example, `postgres.d/conf.yaml`). This is especially helpful for clusters that use [Aurora Auto Scaling][6], which dynamically adjusts the number of Aurora Replicas in response to variations in connectivity or workload. Autodiscovery automatically discovers and monitors both primary and replica endpoint instances.
 
-With Autodiscovery and Database Monitoring, you can define configuration templates for Postgres or MySQL checks and specify which clusters to apply each check to.
+With Autodiscovery and {{< prodname >}}Database Monitoring{{< /prodname >}}, you can define configuration templates for Postgres or MySQL checks and specify which clusters to apply each check to.
 
 ## Enabling Autodiscovery for Aurora clusters
 

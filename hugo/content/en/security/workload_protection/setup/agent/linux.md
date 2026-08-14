@@ -5,7 +5,7 @@ type: multi-code-lang
 code_lang_weight: 80 # a number that represents relative weight.
 ---
 
-Use the following instructions to enable Workload Protection.
+Use the following instructions to enable {{< prodname >}}Workload Protection{{< /prodname >}}.
 
 {{< partial name="security-platform/WP-billing-note.html" >}}
 

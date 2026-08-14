@@ -16,7 +16,7 @@ further_reading:
 
 Permissions control what actions a user can take in Datadog. Users are assigned to roles, and each role has a set of permissions that determines what that user can see and do.
 
-Cloud Cost Management (CCM) uses two main permissions, `cloud_cost_management_read` and `cloud_cost_management_write`, to control access to cost data and most CCM configurations. Additional product-level permissions are available for specific features, such as editing budgets (`ccm_budget_write`), customizing forecast in the budgets (`ccm_forecast_write`), and managing report schedules (`generate_ccm_report_schedules`, `manage_ccm_report_schedules`). Assign these permissions to roles through [Role Based Access Control (RBAC)][1].
+{{< prodname >}}Cloud Cost Management{{< /prodname >}} (CCM) uses two main permissions, `cloud_cost_management_read` and `cloud_cost_management_write`, to control access to cost data and most CCM configurations. Additional product-level permissions are available for specific features, such as editing budgets (`ccm_budget_write`), customizing forecast in the budgets (`ccm_forecast_write`), and managing report schedules (`generate_ccm_report_schedules`, `manage_ccm_report_schedules`). Assign these permissions to roles through [Role Based Access Control (RBAC)][1].
 
 CCM also supports [Data Access Control](#data-access-control) to further restrict cost data by tags.
 

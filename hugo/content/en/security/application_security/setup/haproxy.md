@@ -19,15 +19,15 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/haproxy-integration/">}}
-App and API Protection for HAProxy is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+{{< prodname >}}App and API Protection{{< /prodname >}} for HAProxy is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}
 
-You can enable App and API Protection for your HAProxy instances. The Datadog HAProxy integration leverages HAProxy's Stream Processing Offload Engine (SPOE) to inspect and protect traffic for threat detection at the edge of your infrastructure.
+You can enable {{< prodname >}}App and API Protection{{< /prodname >}} for your HAProxy instances. The Datadog HAProxy integration leverages HAProxy's Stream Processing Offload Engine (SPOE) to inspect and protect traffic for threat detection at the edge of your infrastructure.
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ You can enable App and API Protection for your HAProxy instances. The Datadog HA
 
 The App and API Protection HAProxy integration uses HAProxy's [Stream Processing Offload Engine][3] (SPOE) to call a Datadog Stream Processing Offload Agent (SPOA). The SPOA analyzes requests and responses.
 
-To enable App and API Protection for HAProxy, do the following:
+To enable {{< prodname >}}App and API Protection{{< /prodname >}} for HAProxy, do the following:
 1. Deploy the Datadog HAProxy SPOA container.
 2. Update your HAProxy configuration files to integrate with the SPOA
 
@@ -104,7 +104,7 @@ The `datadog_aap_blocking_response.lua` script is responsible for sending a cust
 It is important that no custom modifications are made to this file.
 
 <div class="alert alert-info">
-  <strong>Note:</strong> This Lua script is not invoked on every request processed by HAProxy. It is only invoked when a request is blocked by App and API Protection. This design ensures optimal performance by avoiding the overhead of running Lua code for all requests.
+  <strong>Note:</strong> This Lua script is not invoked on every request processed by HAProxy. It is only invoked when a request is blocked by {{< prodname >}}App and API Protection{{< /prodname >}}. This design ensures optimal performance by avoiding the overhead of running Lua code for all requests.
 </div>
 
 ### Validation

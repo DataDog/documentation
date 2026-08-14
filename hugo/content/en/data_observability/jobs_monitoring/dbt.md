@@ -36,7 +36,7 @@ Create a service token in dbt Cloud so Datadog can access your account's metadat
 
 ## Connect your dbt Cloud account to Datadog
 
-Use the API token to configure the integration in Data Observability.
+Use the API token to configure the integration in {{< prodname >}}Data Observability{{< /prodname >}}.
 
 1. Navigate to [{{< ui >}}Datadog Data Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][1].
 2. In the {{< ui >}}dbt Cloud{{< /ui >}} section, click {{< ui >}}Configure{{< /ui >}}.

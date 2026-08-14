@@ -11,7 +11,7 @@ further_reading:
 
 DeepEval is an open source framework that provides ready-to-use LLM metrics and allows for customizable LLM evaluations. For more information, see [DeepEval's documentation][3].
 
-You can use Agent Observability to run DeepEval evaluations in [Experiments][1]. DeepEval evaluation results appear as evaluator results tied to each instance in an [Agent Observability dataset][5].
+You can use {{< prodname >}}Agent Observability{{< /prodname >}} to run DeepEval evaluations in [Experiments][1]. DeepEval evaluation results appear as evaluator results tied to each instance in an [Agent Observability dataset][5].
 
 ## Setup
 

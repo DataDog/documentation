@@ -26,11 +26,11 @@ further_reading:
 
 Use Datadog Log Management, also called logs, to collect logs across multiple logging sources, such as your server, container, cloud environment, application, or existing log processors and forwarders. With conventional logging, you have to choose which logs to analyze and retain to maintain cost-efficiency. With Datadog Logging without Limits*, you can collect, process, archive, explore, and monitor your logs without logging limits.
 
-This page shows you how to get started with Log Management in Datadog. If you haven't already, create a [Datadog account][1].
+This page shows you how to get started with {{< prodname >}}Log Management{{< /prodname >}} in Datadog. If you haven't already, create a [Datadog account][1].
 
 ## Configure a logging source
 
-With Log Management, you can analyze and explore data in the {{< ui >}}Log Explorer{{< /ui >}}, connect [Tracing][2] and [Metrics][3] to correlate valuable data across Datadog, and use ingested logs for Datadog [Cloud SIEM][4]. The lifecycle of a log within Datadog begins at ingestion from a logging source.
+With Log Management, you can analyze and explore data in the {{< ui >}}Log Explorer{{< /ui >}}, connect [Tracing][2] and [Metrics][3] to correlate valuable data across Datadog, and use ingested logs for Datadog [{{< prodname >}}Cloud SIEM{{< /prodname >}}][4]. The lifecycle of a log within Datadog begins at ingestion from a logging source.
 
 {{< img src="/getting_started/logs/getting-started-overview.png" alt="Different types of log configurations">}}
 

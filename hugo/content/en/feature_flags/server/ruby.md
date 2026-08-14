@@ -36,7 +36,7 @@ Before setting up the Ruby Feature Flags SDK, ensure you have:
 - **Service and environment configured** - Feature flags are targeted by service and environment
 - **Supported operating system** - Production support is limited to [Linux operating systems][2]. macOS and Windows are not natively supported production targets, but Dockerized Linux environments running on those operating systems are. For local development on macOS, you can use a compatible prebuilt native artifact when one is available.
 
-<div class="alert alert-info">The Datadog Ruby tracer supports older Ruby runtimes for APM. Applications on older Ruby versions, including Ruby 2.5, can continue to use Datadog APM, but cannot use Datadog Feature Flags through OpenFeature until they upgrade to Ruby 3.1 or later. The OpenFeature Ruby SDK versions that expose the provider hook surface required for complete Feature Flags telemetry require Ruby 3.1 or later.</div>
+<div class="alert alert-info">The Datadog Ruby tracer supports older Ruby runtimes for APM. Applications on older Ruby versions, including Ruby 2.5, can continue to use {{< prodname >}}Datadog APM{{< /prodname >}}, but cannot use Datadog Feature Flags through OpenFeature until they upgrade to Ruby 3.1 or later. The OpenFeature Ruby SDK versions that expose the provider hook surface required for complete {{< prodname >}}Feature Flags{{< /prodname >}} telemetry require Ruby 3.1 or later.</div>
 
 ## Installing and initializing
 
@@ -53,7 +53,7 @@ gem "opentelemetry-metrics-sdk", ">= 0.8"
 gem "opentelemetry-exporter-otlp-metrics", ">= 0.4"
 ```
 
-You can enable Feature Flags with environment variables:
+You can enable {{< prodname >}}Feature Flags{{< /prodname >}} with environment variables:
 
 ```shell
 # Required: Enable the feature flags provider

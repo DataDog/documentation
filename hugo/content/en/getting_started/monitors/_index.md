@@ -126,7 +126,7 @@ Send notifications to your team through email, Slack, PagerDuty, and more. You c
 
 {{< img src="getting_started/monitors/monitor_notification.png" alt="Add a monitor message and automations to your alert notification" style="width:100%;" >}}
 
-To add a workflow from [Workflow Automation][14] or a case from [Case Management][15] to the alert notification, click {{< ui >}}Add Workflow{{< /ui >}} or {{< ui >}}Add Case{{< /ui >}}. You can also tag [Datadog Team][16] members using the `@team` handle.
+To add a workflow from [{{< prodname >}}Workflow Automation{{< /prodname >}}][14] or a case from [{{< prodname >}}Case Management{{< /prodname >}}][15] to the alert notification, click {{< ui >}}Add Workflow{{< /ui >}} or {{< ui >}}Add Case{{< /ui >}}. You can also tag [Datadog Team][16] members using the `@team` handle.
 
 Leave the other sections as-is. For more information on what each configuration option does, see the [Monitor configuration][9] documentation.
 

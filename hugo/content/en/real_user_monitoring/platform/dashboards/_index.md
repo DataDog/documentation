@@ -15,13 +15,13 @@ When you create a RUM application, Datadog [collects data][1] and generates dash
 
 {{< img src="real_user_monitoring/dashboards/rum-dashboards-performance-summary.png" alt="RUM Application Overview page" style="width:90%;" >}}
 
-Access your RUM dashboards by filtering for `RUM` in the search query of the [{{< ui >}}Dashboard List{{< /ui >}}][2] or from your application summary pages ({{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Performance Summary{{< /ui >}} and {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Product Analytics{{< /ui >}} > {{< ui >}}Analytics Summary{{< /ui >}}).
+Access your RUM dashboards by filtering for `RUM` in the search query of the [{{< ui >}}Dashboard List{{< /ui >}}][2] or from your application summary pages ({{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Performance Summary{{< /ui >}} and {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}{{< prodname >}}Product Analytics{{< /prodname >}}{{< /ui >}} > {{< ui >}}Analytics Summary{{< /ui >}}).
 
 {{< img src="real_user_monitoring/dashboards/available-rum-dashboards.png" alt="Out-of-the-box RUM Dashboards" style="width:90%;" >}}
 
 {{< whatsnext desc="You can explore the following out-of-the-box RUM dashboards:" >}}
   {{< nextlink href="/real_user_monitoring/platform/dashboards/performance" >}}<u>Performance Overviews</u>: See a global view of your website/app performance and demographics. {{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/platform/dashboards/testing_and_deployment" >}}<u>Testing and Deployment</u>: Evaluate your browser tests' application coverage and identify popular elements in your application to track using RUM and Synthetics data. {{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/platform/dashboards/testing_and_deployment" >}}<u>Testing and Deployment</u>: Evaluate your browser tests' application coverage and identify popular elements in your application to track using RUM and {{< prodname >}}Synthetics{{< /prodname >}} data. {{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/platform/dashboards/usage" >}}<u>Usage</u>: Analyze user session and usage data for your RUM applications, including frustration signals. {{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/platform/dashboards/errors" >}}<u>Errors</u>: Observe errors that appear in user consoles by browser and device type. {{< /nextlink >}}
 {{< /whatsnext >}}

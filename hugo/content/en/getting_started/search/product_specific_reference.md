@@ -15,9 +15,9 @@ Each Datadog product offers unique search capabilities optimized for its use cas
 
 There are two main families of search syntaxes across Datadog products:
 
-**Metrics-based syntax**: Used by Metrics and Cloud Cost Management for time-series data queries with tag-based filtering and aggregation.
+**Metrics-based syntax**: Used by Metrics and {{< prodname >}}Cloud Cost Management{{< /prodname >}} for time-series data queries with tag-based filtering and aggregation.
 
-**Event-based syntax**: Used by Log Management and adopted by most other Datadog products including traces, RUM, CI/CD, Observability Pipelines, and more. This syntax provides flexible faceted search with boolean operators and pattern matching.
+**Event-based syntax**: Used by {{< prodname >}}Log Management{{< /prodname >}} and adopted by most other Datadog products including traces, RUM, CI/CD, {{< prodname >}}Observability Pipelines{{< /prodname >}}, and more. This syntax provides flexible faceted search with boolean operators and pattern matching.
 
 ## Metrics
 
@@ -58,7 +58,7 @@ system.mem.used{env:production AND NOT service:test}
 
 ## Logs
 
-Log Management uses event-based search syntax, serving as the foundation for many other products' search capabilities.
+{{< prodname >}}Log Management{{< /prodname >}} uses event-based search syntax, serving as the foundation for many other products' search capabilities.
 
 For a complete reference for log search operators, wildcards, facets, and advanced queries, see [Log Search Syntax][2].
 

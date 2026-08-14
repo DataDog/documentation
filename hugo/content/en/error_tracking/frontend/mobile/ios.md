@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Enable iOS Crash Reporting and Error Tracking to get comprehensive crash reports and error trends. With this feature, you can access:
+Enable iOS Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} to get comprehensive crash reports and error trends. With this feature, you can access:
 
  - Aggregated iOS crash dashboards and attributes
  - Symbolicated iOS crash reports
@@ -28,7 +28,7 @@ See [Supported versions][15] for a list of operating system versions and platfor
 
 ## Setup
 
-To start sending Error Tracking data from your iOS or tvOS application to Datadog:
+To start sending {{< prodname >}}Error Tracking{{< /prodname >}} data from your iOS or tvOS application to Datadog:
 
 ### Step 1 - Declare the iOS SDK as a dependency
 
@@ -88,7 +88,7 @@ DatadogRUM.xcframework
 
 ### Step 2 - Specify application details in the UI
 
-1. Navigate to {{< ui >}}Error Tracking{{< /ui >}} > [{{< ui >}}Settings{{< /ui >}}][2] > {{< ui >}}Browser and Mobile{{< /ui >}}.
+1. Navigate to {{< ui >}}{{< prodname >}}Error Tracking{{< /prodname >}}{{< /ui >}} > [{{< ui >}}Settings{{< /ui >}}][2] > {{< ui >}}Browser and Mobile{{< /ui >}}.
 2. Click {{< ui >}}New Application{{< /ui >}}.
 3. Enter an application name and select {{< ui >}}iOS{{< /ui >}} as the application type.
 4. Click {{< ui >}}Create Application{{< /ui >}} to generate a unique Datadog application ID and client token.
@@ -420,7 +420,7 @@ For more information, see [Web View Tracking][3].
 
 ### Step 4 - Add crash reporting
 
-Crash reporting captures fatal crashes when your app terminates unexpectedly, in addition to the errors that Error Tracking displays in a unified interface.
+Crash reporting captures fatal crashes when your app terminates unexpectedly, in addition to the errors that {{< prodname >}}Error Tracking{{< /prodname >}} displays in a unified interface.
 
 To enable crash reporting, add the package according to your dependency manager and update your initialization snippet.
 
@@ -482,11 +482,11 @@ App hangs are an iOS-specific type of error that happens when the application is
 
 There are two types of hangs:
 
-- **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in Error Tracking and the RUM explorer.
+- **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in {{< prodname >}}Error Tracking{{< /prodname >}} and the RUM explorer.
 
   {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang-1.png" alt="A fatal app hang in the Error side panel." style="width:100%;" >}}
 
-- **Non-fatal app hang**: How a hang gets reported if the app recovers from a relatively short hang and continues running. Non-fatal app hangs do not have a "Crash" mark on them in Error Tracking and the RUM explorer.
+- **Non-fatal app hang**: How a hang gets reported if the app recovers from a relatively short hang and continues running. Non-fatal app hangs do not have a "Crash" mark on them in {{< prodname >}}Error Tracking{{< /prodname >}} and the RUM explorer.
 
   {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang-1.png" alt="A non-fatal app hang in the Error side panel." style="width:100%;" >}}
 
@@ -551,7 +551,7 @@ To disable app hang monitoring, update the initialization snippet and set the `a
 
 Crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information (a process called symbolication), Datadog requires `.dSYM` files, which are generated in your application's build or distribution process.
 
-**Note:** Error Tracking supports symbolication of system symbol files for iOS v14+ arm64 and arm64e architecture. `.dSYM` files are limited in size to **2 GB** each.
+**Note:** {{< prodname >}}Error Tracking{{< /prodname >}} supports symbolication of system symbol files for iOS v14+ arm64 and arm64e architecture. `.dSYM` files are limited in size to **2 GB** each.
 
 To help you debug errors, Datadog uses a unique generated build ID to deobfuscate stack traces, matching them with their corresponding mapping files. This process occurs regardless of whether the mapping files were uploaded during pre-production or production builds, ensuring the correct information is available for efficient QA processes when reviewing crashes and errors in Datadog.
 
@@ -677,7 +677,7 @@ For more information, see [dSYMs commands][2].
 
 ## Test your implementation
 
-To verify your iOS Crash Reporting and Error Tracking configuration, issue a crash in your application and confirm that the error appears in Datadog.
+To verify your iOS Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} configuration, issue a crash in your application and confirm that the error appears in Datadog.
 
 1. Run your application on an iOS simulator or a real device. Ensure that the debugger is not attached. Otherwise, Xcode captures the crash before the iOS SDK does.
 2. Execute the code containing the crash:

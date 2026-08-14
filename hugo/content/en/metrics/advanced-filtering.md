@@ -26,7 +26,7 @@ further_reading:
 
 When using the Metrics Explorer, monitors, or dashboards to query metrics data, you can filter the data to narrow the scope of the timeseries returned. Any metric can be filtered by tag(s) using the {{< ui >}}from{{< /ui >}} field to the right of the metric. 
 
-You can also perform advanced filtering with Boolean or Wildcard tag value filters. For queries outside of metrics data such as logs, traces, Network Monitoring, Real User Monitoring, Synthetics, or Security, see the [Log Search Syntax][1] documentation for configuration.
+You can also perform advanced filtering with Boolean or Wildcard tag value filters. For queries outside of metrics data such as logs, traces, Network Monitoring, Real User Monitoring, {{< prodname >}}Synthetics{{< /prodname >}}, or Security, see the [Log Search Syntax][1] documentation for configuration.
 
 ## Boolean filtered queries 
 

@@ -25,7 +25,7 @@ Flags in Code Coverage let you organize and filter coverage data by custom categ
 
 With flags, you can:
 - View coverage data filtered by a specific flag in the Datadog UI.
-- Configure [PR Gates][1] that evaluate coverage thresholds for specific flags.
+- Configure [{{< prodname >}}PR Gates{{< /prodname >}}][1] that evaluate coverage thresholds for specific flags.
 - Track coverage trends separately for different test suites or environments.
 - Enable [carryforward][2] to keep total coverage accurate when not every CI job runs for a commit.
 
@@ -90,7 +90,7 @@ In this example, the coverage data is available under both the `unit-tests` and 
 
 ### Add flags to automatically uploaded reports
 
-[Automatic report uploads][4] are available in several Test Optimization libraries. Of those libraries, only the following versions support `DD_CODE_COVERAGE_FLAGS`:
+[Automatic report uploads][4] are available in several {{< prodname >}}Test Optimization{{< /prodname >}} libraries. Of those libraries, only the following versions support `DD_CODE_COVERAGE_FLAGS`:
 
 | Library | First version with `DD_CODE_COVERAGE_FLAGS` |
 |---|---|
@@ -125,7 +125,7 @@ When you select a flag, the coverage metrics update to show only the data from r
 
 ## Set up PR Gates with flags
 
-You can configure [PR Gates][1] to enforce coverage thresholds for specific flags. This allows you to enforce different coverage requirements for different test types or runtime versions.
+You can configure [{{< prodname >}}PR Gates{{< /prodname >}}][1] to enforce coverage thresholds for specific flags. This allows you to enforce different coverage requirements for different test types or runtime versions.
 
 You can create flag-specific gates in one of two ways:
 

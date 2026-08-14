@@ -28,11 +28,11 @@ This page demonstrates using Datadog's Agent Observability SDK to instrument a P
 
 ### Try Agent Observability locally with lapdog
 
-To try Agent Observability locally, for free, [follow the steps][12] to instrument your application and view data locally with [lapdog](https://lapdog.datadoghq.com).
+To try {{< prodname >}}Agent Observability{{< /prodname >}} locally, for free, [follow the steps][12] to instrument your application and view data locally with [lapdog](https://lapdog.datadoghq.com).
 
 ### Prerequisites
 
-Agent Observability requires a Datadog API key if you don't have a Datadog Agent running. Find your API key [in Datadog](https://app.datadoghq.com/organization-settings/api-keys).
+{{< prodname >}}Agent Observability{{< /prodname >}} requires a Datadog API key if you don't have a Datadog Agent running. Find your API key [in Datadog](https://app.datadoghq.com/organization-settings/api-keys).
 
 ### Instrument Agent Observability with a coding agent
 
@@ -84,7 +84,7 @@ After enabling, the SDK automatically traces calls to [supported Python framewor
    npm install dd-trace
    ```
 
-2. Import and initialize `dd-trace` with Agent Observability as the first dependency in your application entrypoint:
+2. Import and initialize `dd-trace` with {{< prodname >}}Agent Observability{{< /prodname >}} as the first dependency in your application entrypoint:
    ```shell
    DD_LLMOBS_ENABLED=1 \
    DD_LLMOBS_ML_APP=quickstart-app \
@@ -161,7 +161,7 @@ After traces are being submitted from your application, you can:
 
 ## Example "Hello World" application
 
-See below for a simple application that can be used to begin exploring the Agent Observability product.
+See below for a simple application that can be used to begin exploring the {{< prodname >}}Agent Observability{{< /prodname >}} product.
 
 
 {{< tabs >}}

@@ -15,8 +15,8 @@ aliases:
 
 This installation setup walks you through deploying Datadog BYOC (Bring Your Own Cloud) Logs on Google Kubernetes Engine (GKE).
 
-BYOC Logs on GKE uses the following Google Cloud services:
-- **Google Kubernetes Engine (GKE)**: Container orchestration platform for running BYOC Logs components
+{{< prodname >}}BYOC Logs{{< /prodname >}} on GKE uses the following Google Cloud services:
+- **Google Kubernetes Engine (GKE)**: Container orchestration platform for running {{< prodname >}}BYOC Logs{{< /prodname >}} components
 - **Cloud Storage (GCS)**: Object storage for telemetry data and indexes
 - **Cloud SQL for PostgreSQL**: Managed PostgreSQL database for metadata storage
 - **Workload Identity**: Secure authentication between GKE workloads and Google Cloud services
@@ -111,7 +111,7 @@ kubectl get nodes
 
 ### Step 3: Create Cloud Storage bucket
 
-Create a GCS bucket for BYOC Logs data storage:
+Create a GCS bucket for {{< prodname >}}BYOC Logs{{< /prodname >}} data storage:
 
 ```shell
 export BUCKET_NAME="byoc-logs-data-${PROJECT_ID}"
@@ -147,7 +147,7 @@ gcloud sql instances describe byoc-logs-postgres \
 # Should output: RUNNABLE
 ```
 
-Create the BYOC Logs database:
+Create the {{< prodname >}}BYOC Logs{{< /prodname >}} database:
 ```shell
 gcloud sql databases create byoc-logs \
   --instance=byoc-logs-postgres
@@ -177,7 +177,7 @@ gcloud sql instances patch byoc-logs-postgres \
 
 ### Step 5: Configure IAM and Workload Identity
 
-Create a GCP service account for BYOC Logs:
+Create a GCP service account for {{< prodname >}}BYOC Logs{{< /prodname >}}:
 
 ```shell
 export SERVICE_ACCOUNT_NAME="byoc-logs-sa"
@@ -361,7 +361,7 @@ kubectl apply -f ingress-values.yaml
 
 ### Step 9: Install Datadog Agent (Recommended)
 
-Install the Datadog Agent to collect metrics from BYOC Logs components and send them to Datadog.
+Install the Datadog Agent to collect metrics from {{< prodname >}}BYOC Logs{{< /prodname >}} components and send them to Datadog.
 
 Create a separate namespace for the Datadog Agent:
 
@@ -474,7 +474,7 @@ kubectl logs -n datadog-byoc-logs -l app.kubernetes.io/component=metastore --tai
 
 ## Uninstall
 
-To completely remove BYOC Logs:
+To completely remove {{< prodname >}}BYOC Logs{{< /prodname >}}:
 
 ```shell
 # Uninstall Helm release
@@ -506,16 +506,16 @@ gcloud container clusters delete ${CLUSTER_NAME} \
 - **Enable Cloud SQL backups** for disaster recovery.
 - **Use regional GKE clusters** for high availability.
 - **Monitor disk usage** on indexer nodes and enable auto-scaling.
-- **Set up alerts** in Datadog for BYOC Logs component health.
+- **Set up alerts** in Datadog for {{< prodname >}}BYOC Logs{{< /prodname >}} component health.
 - **Use private GKE clusters** for enhanced security in production.
-- **Regularly update** BYOC Logs to the latest version for bug fixes and features.
+- **Regularly update** {{< prodname >}}BYOC Logs{{< /prodname >}} to the latest version for bug fixes and features.
 - **Test scaling** in a staging environment before production changes.
 - **Store the database password** in Secret Manager and use External Secrets Operator (ESO) or the Secrets Store CSI Driver to provide the password to metastore pods.
 
 ## Next steps
 
-- Configure your applications to send telemetry to BYOC Logs
-- Set up dashboards in Datadog to monitor BYOC Logs performance
+- Configure your applications to send telemetry to {{< prodname >}}BYOC Logs{{< /prodname >}}
+- Set up dashboards in Datadog to monitor {{< prodname >}}BYOC Logs{{< /prodname >}} performance
 - Review BYOC Logs metrics and data in your Datadog account
 - Plan capacity based on your data volume
 

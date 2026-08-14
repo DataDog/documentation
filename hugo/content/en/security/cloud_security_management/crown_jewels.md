@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Crown Jewels is an inventory of your most critical cloud resources, automatically detected from the telemetry you already send to Datadog. The list is the starting point for prioritizing remediation work across Cloud Security: you can sort, filter and route vulnerabilities, misconfigurations, and identity risks that are linked to a crown jewel differently from the rest of your findings.
+Crown Jewels is an inventory of your most critical cloud resources, automatically detected from the telemetry you already send to Datadog. The list is the starting point for prioritizing remediation work across {{< prodname >}}Cloud Security{{< /prodname >}}: you can sort, filter and route vulnerabilities, misconfigurations, and identity risks that are linked to a crown jewel differently from the rest of your findings.
 
 Most security teams have more findings than they can act on, but by knowing which resources matter most, you can start addressing the subset of findings that need attention first.
 
@@ -65,7 +65,7 @@ You can combine the filter with other criteria; for example, you can filter the 
 
 ## Review and edit the list
 
-To view your Crown Jewels, go to **Security** > **Settings** > **Cloud Security** > [**Crown Jewels**][1]. Datadog automatically populates the list with entries showing:
+To view your Crown Jewels, go to **Security** > **Settings** > **{{< prodname >}}Cloud Security{{< /prodname >}}** > [**Crown Jewels**][1]. Datadog automatically populates the list with entries showing:
 
 - The resource type and name.
 - The detection signal that triggered inclusion.
@@ -78,7 +78,7 @@ Treat the automatically generated list as a draft that you can curate so it refl
 
 ## Privacy and data handling
 
-Crown Jewels runs on telemetry you have already sent to Datadog. It does not move data outside of your Datadog account or send data to third parties. Detection runs in the same regional infrastructure as your other Cloud Security data.
+Crown Jewels runs on telemetry you have already sent to Datadog. It does not move data outside of your Datadog account or send data to third parties. Detection runs in the same regional infrastructure as your other {{< prodname >}}Cloud Security{{< /prodname >}} data.
 
 
 ## Further reading

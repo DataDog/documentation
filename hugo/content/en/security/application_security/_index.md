@@ -46,14 +46,14 @@ cascade:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
 {{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
 
 <div class="alert alert-info">
-AI Guard is in Preview. Get real-time security guardrails for your AI apps and agents. AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. Fill out this <a href="https://www.datadoghq.com/product-preview/ai-security/">form</a> to request access.
+{{< prodname >}}AI Guard{{< /prodname >}} is in Preview. Get real-time security guardrails for your AI apps and agents. {{< prodname >}}AI Guard{{< /prodname >}} helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. Fill out this <a href="https://www.datadoghq.com/product-preview/ai-security/">form</a> to request access.
 </div>
 
 {{% /site-region %}}
@@ -91,7 +91,7 @@ Whether you're defending public-facing APIs, internal services, or user-facing a
 
 ## AAP implementation in Datadog
 
-If you're curious how App and API Protection is structured and how it uses tracing data to identify security problems, read [How App and API Protection Works][3].
+If you're curious how {{< prodname >}}App and API Protection{{< /prodname >}} is structured and how it uses tracing data to identify security problems, read [How App and API Protection Works][3].
 
 ## Configure your environment
 

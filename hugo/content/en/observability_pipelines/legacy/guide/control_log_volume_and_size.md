@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Because your log volume grows as your organization scales, the cost of ingesting and indexing in your downstream services (for example, log management solutions, SIEMs, and so forth) also rises. This guide walks you through using Observability Pipelines' transforms to cut down on log volume and trim down the size of your logs to control your costs *before* data leaves your infrastructure or network. 
+Because your log volume grows as your organization scales, the cost of ingesting and indexing in your downstream services (for example, log management solutions, SIEMs, and so forth) also rises. This guide walks you through using {{< prodname >}}Observability Pipelines{{< /prodname >}}' transforms to cut down on log volume and trim down the size of your logs to control your costs *before* data leaves your infrastructure or network. 
 
 ## Prerequisites
 - You have [installed and configured the Observability Pipelines Worker][1] to collect data from your sources and route it to your destinations.

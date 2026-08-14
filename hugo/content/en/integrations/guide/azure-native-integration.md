@@ -53,7 +53,7 @@ This page describes the Azure Portal experience. If you prefer to use CLI, see t
 Some features cannot be managed through the Datadog resource in Azure. These include:
 
 - Metric filtering at the **resource** level
-- [Cloud Cost Management][8] (CCM)
+- [{{< prodname >}}Cloud Cost Management{{< /prodname >}}][8] (CCM)
 - [Log Archiving][9]
 - [Storage Management][7]
 

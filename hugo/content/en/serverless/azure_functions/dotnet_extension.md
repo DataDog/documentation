@@ -239,7 +239,7 @@ az webapp deployment slot swap --resource-group <RESOURCE GROUP> --name <SITE_NA
 4. **Stop the slot** by navigating to the slot's {{< ui >}}Overview{{< /ui >}} page and clicking {{< ui >}}Stop{{< /ui >}}.
    <div class="alert alert-danger">You must stop the slot before installing the extension.</div>
 
-5. Navigate to {{< ui >}}Extensions{{< /ui >}} and add the Datadog APM extension for your runtime.
+5. Navigate to {{< ui >}}Extensions{{< /ui >}} and add the {{< prodname >}}Datadog APM{{< /prodname >}} extension for your runtime.
 
 6. **Start the slot** by clicking {{< ui >}}Start{{< /ui >}} on the slot's {{< ui >}}Overview{{< /ui >}} page.
 

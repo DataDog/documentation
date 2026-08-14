@@ -31,7 +31,7 @@ algolia:
 ---
 
 ## Overview
-Application {{< tooltip glossary="instrumentation" >}} with Datadog APM involves:
+Application {{< tooltip glossary="instrumentation" >}} with {{< prodname >}}Datadog APM{{< /prodname >}} involves:
 
 1. **SDK setup**: Adding a Datadog SDK to your application.
 2. **Span creation**: Capturing observability data as {{< tooltip glossary="span" >}}s.
@@ -66,10 +66,10 @@ As your observability needs grow, you can add more control and customization:
     {{< nextlink href="/tracing/trace_collection/dd_libraries/" >}}Use manually managed Datadog SDKs{{< /nextlink >}}
 {{< /whatsnext >}}
 
-**For custom spans without code changes:** Use [Dynamic Instrumentation][4] to create custom spans from the Datadog UI without redeploying your application.
+**For custom spans without code changes:** Use [{{< prodname >}}Dynamic Instrumentation{{< /prodname >}}][4] to create custom spans from the Datadog UI without redeploying your application.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/tracing/trace_collection/dynamic_instrumentation/" >}}Add custom spans with Dynamic Instrumentation{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/dynamic_instrumentation/" >}}Add custom spans with {{< prodname >}}Dynamic Instrumentation{{< /prodname >}}{{< /nextlink >}}
 {{< /whatsnext >}}
 
 **For custom spans in code:** Add [code-based custom instrumentation][3] to instrument custom business logic or add application-specific metadata to spans.
@@ -78,7 +78,7 @@ As your observability needs grow, you can add more control and customization:
     {{< nextlink href="/tracing/trace_collection/custom_instrumentation/" >}}Add custom spans with code-based instrumentation{{< /nextlink >}}
 {{< /whatsnext >}}
 
-These options can be combined. For example, you can start with Single Step Instrumentation and add code-based custom instrumentation for specific spans, or use manually managed SDKs with Dynamic Instrumentation for no-deploy span additions.
+These options can be combined. For example, you can start with Single Step Instrumentation and add code-based custom instrumentation for specific spans, or use manually managed SDKs with {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} for no-deploy span additions.
 
 ## Detailed comparison
 
@@ -121,12 +121,12 @@ Single Step Instrumentation is the recommended starting point for most users. If
 
 ### Span customization
 
-Auto-instrumentation automatically creates spans for supported frameworks and libraries, providing essential observability with no additional work. When you need visibility into custom code paths or want to enrich traces with application-specific data, you can add custom spans using either Dynamic Instrumentation or code-based custom instrumentation:
+Auto-instrumentation automatically creates spans for supported frameworks and libraries, providing essential observability with no additional work. When you need visibility into custom code paths or want to enrich traces with application-specific data, you can add custom spans using either {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} or code-based custom instrumentation:
 
 <table style="width:100%; border-collapse:collapse; border:2px solid #999;">
   <tr style="background-color:#f2f2f2;">
     <th style="border:1px solid #ccc;"></th>
-    <th style="border:1px solid #ccc; font-weight:bold;"><a href="/tracing/trace_collection/dynamic_instrumentation/">Dynamic Instrumentation</a></th>
+    <th style="border:1px solid #ccc; font-weight:bold;"><a href="/tracing/trace_collection/dynamic_instrumentation/">{{< prodname >}}Dynamic Instrumentation{{< /prodname >}}</a></th>
     <th style="border:1px solid #ccc; font-weight:bold;"><a href="/tracing/trace_collection/custom_instrumentation/">Code-based custom instrumentation</a></th>
   </tr>
   <tr>

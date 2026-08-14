@@ -23,19 +23,19 @@ further_reading:
 
 ## Overview
 
-Datadog [Error Tracking][1] automatically groups all your errors into issues across your web, mobile, and backend applications. Viewing errors grouped into issues helps you prioritize and find the problems that are most impactful, making it easier to minimize service downtimes and reduce user frustration.
+Datadog [{{< prodname >}}Error Tracking{{< /prodname >}}][1] automatically groups all your errors into issues across your web, mobile, and backend applications. Viewing errors grouped into issues helps you prioritize and find the problems that are most impactful, making it easier to minimize service downtimes and reduce user frustration.
 
-With Error Tracking enabled for your organization, you can create an Error Tracking monitor to alert you when an issue in your web or mobile application, backend service, or logs is new, when it has a high impact, and when it starts regressing.
+With Error Tracking enabled for your organization, you can create an {{< prodname >}}Error Tracking{{< /prodname >}} monitor to alert you when an issue in your web or mobile application, backend service, or logs is new, when it has a high impact, and when it starts regressing.
 
 ## Create an Error Tracking monitor
 
-To create an Error Tracking monitor in Datadog, navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Error Tracking{{< /ui >}}][3].
+To create an {{< prodname >}}Error Tracking{{< /prodname >}} monitor in Datadog, navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Error Tracking{{< /ui >}}][3].
 
-<div class="alert alert-info">There is a default limit of 1000 Error Tracking monitors per account. <a href="/help/">Contact Support</a> to increase this limit for your account.</div>
+<div class="alert alert-info">There is a default limit of 1000 {{< prodname >}}Error Tracking{{< /prodname >}} monitors per account. <a href="/help/">Contact Support</a> to increase this limit for your account.</div>
 
 ### Select the alerting condition
 
-There are two types of alerting conditions you can configure your Error Tracking monitor with:
+There are two types of alerting conditions you can configure your {{< prodname >}}Error Tracking{{< /prodname >}} monitor with:
 
 | Alerting&nbsp;condition     | Description    |
 | ---  | ----------- |
@@ -147,7 +147,7 @@ error-tracking("{filter}").source("browser").impact().rollup("count").by("@issue
 
 To display triggering tags in the notification title, click {{< ui >}}Include triggering tags in notification title{{< /ui >}}.
 
-In addition to [matching attribute variables][7], the following Error Tracking specific variables are available
+In addition to [matching attribute variables][7], the following {{< prodname >}}Error Tracking{{< /prodname >}} specific variables are available
 for alert message notifications:
 
 * `{{issue.attributes.error.type}}`
@@ -160,10 +160,10 @@ for alert message notifications:
 
 For more information about the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see [Notifications][5].
 
-Select multi alert to receive a notification per issue. This is the intended experience for Error Tracking monitors.
+Select multi alert to receive a notification per issue. This is the intended experience for {{< prodname >}}Error Tracking{{< /prodname >}} monitors.
 
 ### Muting monitors
-Error Tracking monitors use [Issue States][2] to ensure that your alerts stay focused on high-priority matters, reducing distractions from non-critical issues.
+{{< prodname >}}Error Tracking{{< /prodname >}} monitors use [Issue States][2] to ensure that your alerts stay focused on high-priority matters, reducing distractions from non-critical issues.
 
 {{< ui >}}Ignored{{< /ui >}} issues are errors requiring no additional investigation or action. By marking issues as {{< ui >}}Ignored{{< /ui >}}, these issues are automatically muted from monitor notifications.
 

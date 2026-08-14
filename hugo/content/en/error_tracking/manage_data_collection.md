@@ -12,9 +12,9 @@ further_reading:
 
 ## Overview
 
-Error Tracking provides fine-grained control of which errors to ingest, helping you reduce noise and avoid unexpected costs.
+{{< prodname >}}Error Tracking{{< /prodname >}} provides fine-grained control of which errors to ingest, helping you reduce noise and avoid unexpected costs.
 
-You can define what data is included in Error Tracking in two ways:
+You can define what data is included in {{< prodname >}}Error Tracking{{< /prodname >}} in two ways:
 
 - [Rules](#rules-inclusion)
 - [Rate limits](#rate-limits)
@@ -23,7 +23,7 @@ You can configure both rules and rate limits on the [{{< ui >}}Error Tracking{{<
 
 ## Rules
 
-Rules allow you to select which errors are ingested into Error Tracking. They apply to both billable and non-billable errors.
+Rules allow you to select which errors are ingested into {{< prodname >}}Error Tracking{{< /prodname >}}. They apply to both billable and non-billable errors.
 
 Each rule consists of:
 - A scope: an inclusion filter, which contains a search query, such as `service:my-web-store`.
@@ -33,7 +33,7 @@ An event is included if it matches a rule's inclusion filter and does not match 
 
 Events are checked against rules in order. Evaluation stops at the first matching active rule, and subsequent rules are ignored.
 
-**Note:** Error events that get accepted by a rule might still be excluded from Error Tracking if they lack the [required attributes][2].
+**Note:** Error events that get accepted by a rule might still be excluded from {{< prodname >}}Error Tracking{{< /prodname >}} if they lack the [required attributes][2].
 
 ### How rules are evaluated
 
@@ -74,14 +74,14 @@ The processing flow is as follows:
 
 ### Default rules
 
-By default, Error Tracking includes an `*` inclusion filter with no exclusion filters. This catch-all means any event that does not match your other rules is still ingested. To restrict ingestion to specific sources, add exclusion filters to the default rule, or remove it and replace it with explicit inclusion rules.
+By default, {{< prodname >}}Error Tracking{{< /prodname >}} includes an `*` inclusion filter with no exclusion filters. This catch-all means any event that does not match your other rules is still ingested. To restrict ingestion to specific sources, add exclusion filters to the default rule, or remove it and replace it with explicit inclusion rules.
 
 ### Add a rule
 
 To add a rule (inclusion filter):
 1. Navigate to [Error Tracking Settings][1].
 2. Click {{< ui >}}Add New Rule{{< /ui >}}.
-3. Choose the {{< ui >}}Error Tracking source{{< /ui >}} the rule should be applied to.
+3. Choose the {{< ui >}}{{< prodname >}}Error Tracking{{< /prodname >}} source{{< /ui >}} the rule should be applied to.
 4. Enter a search query in the {{< ui >}}Define scope{{< /ui >}} field.
 5. Optionally, {{< ui >}}Add Exclusion{{< /ui >}} filters and a description to the rule.
 6. Click {{< ui >}}Save Changes{{< /ui >}}
@@ -92,7 +92,7 @@ To add a rule (inclusion filter):
 
 ## Rate limits
 
-Rate limits allow you to control the number of billable errors included in Error Tracking per day. This cap applies to all errors that match the filters of a [rule](#rules).
+Rate limits allow you to control the number of billable errors included in {{< prodname >}}Error Tracking{{< /prodname >}} per day. This cap applies to all errors that match the filters of a [rule](#rules).
 
 After the daily cap is reached, ingestion stops until the next day. You can modify or remove the cap at any time.
 
@@ -112,17 +112,17 @@ A `Rate limit applied` event is generated when you reach the rate limit. See the
 
 ## Monitoring usage
 
-You can monitor your Error Tracking on Logs usage by setting up monitors and alerts for the `datadog.estimated_usage.error_tracking.logs.events` metric, which tracks the number of ingested error logs.
+You can monitor your {{< prodname >}}Error Tracking{{< /prodname >}} on Logs usage by setting up monitors and alerts for the `datadog.estimated_usage.error_tracking.logs.events` metric, which tracks the number of ingested error logs.
 
 This metric is available by default at no additional cost, and its data is retained for 15 months.
 
 ## Dynamic Sampling
 
-Because Error Tracking billing is based on the number of errors, large increases in the errors for a single issue can quickly consume your Error Tracking budget. Dynamic Sampling protects you by establishing a threshold for the error rate per issue based on your daily rate limit and historical error volumes, sampling errors when that threshold is reached. Dynamic Sampling automatically deactivates when the error rate of your issue decreases below the given threshold.
+Because Error Tracking billing is based on the number of errors, large increases in the errors for a single issue can quickly consume your {{< prodname >}}Error Tracking{{< /prodname >}} budget. Dynamic Sampling protects you by establishing a threshold for the error rate per issue based on your daily rate limit and historical error volumes, sampling errors when that threshold is reached. Dynamic Sampling automatically deactivates when the error rate of your issue decreases below the given threshold.
 
 ### Setup
 
-Dynamic Sampling is automatically enabled with Error Tracking with a default intake threshold based on your daily rate limit and historical volume.
+Dynamic Sampling is automatically enabled with {{< prodname >}}Error Tracking{{< /prodname >}} with a default intake threshold based on your daily rate limit and historical volume.
 
 For best results, set up a daily rate limit on the [Error Tracking Rate Limits page][5]: Click {{< ui >}}Edit Rate Limit{{< /ui >}} and enter a new value.
 
@@ -144,9 +144,9 @@ A `Dynamic Sampling activated` event is generated when Dynamic Sampling is appli
 
 When Dynamic Sampling is applied, the following steps are recommended:
 
-- Check which issue is consuming your quota. The issue to which Dynamic Sampling is applied is linked in the event generated in Event Management.
+- Check which issue is consuming your quota. The issue to which Dynamic Sampling is applied is linked in the event generated in {{< prodname >}}Event Management{{< /prodname >}}.
 - If you'd like to collect additional samples for this issue, raise your daily quota on the [Error Tracking Rate Limits page][5].
-- If you'd like to avoid collecting samples for this issue in the future, consider creating an exclusion filter to prevent additional events from being ingested into Error Tracking.
+- If you'd like to avoid collecting samples for this issue in the future, consider creating an exclusion filter to prevent additional events from being ingested into {{< prodname >}}Error Tracking{{< /prodname >}}.
 
 ## Further Reading
 

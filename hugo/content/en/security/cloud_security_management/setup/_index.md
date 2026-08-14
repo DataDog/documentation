@@ -28,7 +28,7 @@ further_reading:
 
 ## Overview
 
-To get started with Cloud Security, review the following:
+To get started with {{< prodname >}}Cloud Security{{< /prodname >}}, review the following:
 
 - [Enable Agentless Scanning](#enable-agentless-scanning)
 - [Deploy the Agent for additional coverage](#deploy-the-agent-for-additional-coverage)
@@ -45,7 +45,7 @@ To get started with Cloud Security, review the following:
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-The simplest way to get started with Cloud Security is by [enabling Agentless Scanning][1]. Agentless Scanning provides the broadest coverage across your AWS, Azure, and GCP cloud infrastructure: it scans all hosts, running containers, and other supported workloads without requiring you to install anything on individual resources.
+The simplest way to get started with {{< prodname >}}Cloud Security{{< /prodname >}} is by [enabling Agentless Scanning][1]. Agentless Scanning provides the broadest coverage across your AWS, Azure, and GCP cloud infrastructure: it scans all hosts, running containers, and other supported workloads without requiring you to install anything on individual resources.
 
 To learn more about Agentless Scanning, see [Cloud Security Agentless Scanning][2].
 
@@ -122,7 +122,7 @@ Monitor your compliance security coverage and secure your cloud infrastructure a
 
 ## Disable Cloud Security
 
-For information on disabling Cloud Security, see the following:
+For information on disabling {{< prodname >}}Cloud Security{{< /prodname >}}, see the following:
 
 - [Disable Cloud Security Vulnerabilities][8]
 

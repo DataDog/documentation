@@ -55,7 +55,7 @@ Ask Bits Data Analysis questions like:
 
 Query contexts are curated instructions per data domain, such as Product or Sales. Each context tells Bits Data Analysis which tables to use, which filters to apply, and which edge cases to avoid. Query contexts are what make Bits Data Analysis accurate and consistent.
 
-Bits Data Analysis can auto-generate query contexts from usage and metadata in your connected BI tools and data warehouses through [Data Observability][4]. Data teams then review and refine the generated instructions so anyone on the team can get reliable answers, without analyst expertise or analyst involvement.
+Bits Data Analysis can auto-generate query contexts from usage and metadata in your connected BI tools and data warehouses through [{{< prodname >}}Data Observability{{< /prodname >}}][4]. Data teams then review and refine the generated instructions so anyone on the team can get reliable answers, without analyst expertise or analyst involvement.
 
 ### Example: revenue query context
 

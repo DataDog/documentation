@@ -29,7 +29,7 @@ further_reading:
   text: "How we designed empathetic alert sounds for on-call engineers"
 ---
 
-The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert through On-Call, Slack, or email, you can investigate issues by opening monitor graphs and dashboards on your mobile device.
+The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert through {{< prodname >}}On-Call{{< /prodname >}}, Slack, or email, you can investigate issues by opening monitor graphs and dashboards on your mobile device.
 
 ## Installing
 
@@ -98,14 +98,14 @@ To log out, navigate to the {{< ui >}}Settings{{< /ui >}} page on the mobile app
 {{% /tab %}}
 {{< /tabs >}}
 
-The On-Call page provides a comprehensive view of On-Call shifts, schedules, pages, and escalation policies. You can filter the information by user, team, urgency, status, or date to quickly find relevant details. Tapping {{< ui >}}Escalate{{< /ui >}} prompts you to confirm the escalation to the next policy level. Tapping {{< ui >}}Declare Incident{{< /ui >}} prompts you to enter a title and provide relevant incident attributes.
+The On-Call page provides a comprehensive view of {{< prodname >}}On-Call{{< /prodname >}} shifts, schedules, pages, and escalation policies. You can filter the information by user, team, urgency, status, or date to quickly find relevant details. Tapping {{< ui >}}Escalate{{< /ui >}} prompts you to confirm the escalation to the next policy level. Tapping {{< ui >}}Declare Incident{{< /ui >}} prompts you to enter a title and provide relevant incident attributes.
 
 You can initiate a page to an individual or team, and also override existing shifts by tapping on the shift you would like to override. You can view Bits Investigation monitor investigations for initial findings and conclusions. For more information, see [Datadog On-Call][20].
 
-To configure On-Call notifications on your mobile device, see the guide to [Set up your Mobile Device for Datadog On-Call][21].
+To configure {{< prodname >}}On-Call{{< /prodname >}} notifications on your mobile device, see the guide to [Set up your Mobile Device for Datadog On-Call][21].
 
 <div class="alert alert-info">
-If you only need to access On-Call on mobile and want to restrict access to sensitive telemetry data on mobile devices, contact Datadog support.
+If you only need to access {{< prodname >}}On-Call{{< /prodname >}} on mobile and want to restrict access to sensitive telemetry data on mobile devices, contact Datadog support.
 </div>
 
 ## Incidents
@@ -287,7 +287,7 @@ On the Services page, you can view, search and filter all services that you have
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Bits AI home page, you can ask questions about your system or active incident by voice or text. Bits Chat has context on Datadog public documentation, telemetry, and ownership. For more information, see [Bits Chat][27].
+On the Bits AI home page, you can ask questions about your system or active incident by voice or text. {{< prodname >}}Bits Chat{{< /prodname >}} has context on Datadog public documentation, telemetry, and ownership. For more information, see [{{< prodname >}}Bits Chat{{< /prodname >}}][27].
 
 ### Bits Investigation
 {{< tabs >}}
@@ -303,7 +303,7 @@ On the Bits AI home page, you can ask questions about your system or active inci
 {{% /tab %}}
 {{< /tabs >}}
 
-When enabled, Bits Investigation initiates investigations directly on On-Call pages. These investigations present initial findings and conclusions to help responders identify potential root causes and next steps. For more information, see [Bits Investigation][28].
+When enabled, Bits Investigation initiates investigations directly on {{< prodname >}}On-Call{{< /prodname >}} pages. These investigations present initial findings and conclusions to help responders identify potential root causes and next steps. For more information, see [Bits Investigation][28].
 
 ## Frequently Asked Question
 ### How do I remain logged into the mobile app?

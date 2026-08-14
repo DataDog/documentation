@@ -8,7 +8,7 @@ aliases:
 
 ## Overview	
 
-Workload Protection monitors suspicious activity occurring at the workload level. However, in some cases, benign activities are flagged as malicious because of particular settings in the user's environment. When a benign expected activity is triggering a signal, you can suppress the trigger on the activity to limit noise. 
+{{< prodname >}}Workload Protection{{< /prodname >}} monitors suspicious activity occurring at the workload level. However, in some cases, benign activities are flagged as malicious because of particular settings in the user's environment. When a benign expected activity is triggering a signal, you can suppress the trigger on the activity to limit noise. 
 
 This guide provides considerations for best practices and steps for fine-tuning signal suppression.
 
@@ -138,11 +138,11 @@ Additionally you might notice that signals are created even when some of your ma
 
 ## Adding a suppression from the signal
 
-When you are in the process of investigating a potential threat reported by Workload Protection detection rules, you can encounter some signals that alert on known benign behaviors that are specific to your environment.  
+When you are in the process of investigating a potential threat reported by {{< prodname >}}Workload Protection{{< /prodname >}} detection rules, you can encounter some signals that alert on known benign behaviors that are specific to your environment.  
 
 Consider a Java process utility exploitation. An attacker intentionally targets vulnerabilities in your application code that runs Java processes. This kind of attack entails persistent access to your application by spawning its own Java shell utility. 
 
-In some cases, Workload Protection rules might also detect expected activity, for example from your security team running a pentest session to evaluate the robustness of your applications. In this case, you can evaluate the accuracy of alerts reported and suppress noise.
+In some cases, {{< prodname >}}Workload Protection{{< /prodname >}} rules might also detect expected activity, for example from your security team running a pentest session to evaluate the robustness of your applications. In this case, you can evaluate the accuracy of alerts reported and suppress noise.
 
 Open the signal details side panel and navigate from one tab to the other to gain context, including key process metadata like command-line arguments and environment variable keys. For containerized workloads, the information includes the relevant image, pod, Kubernetes cluster, and more.
 
@@ -172,7 +172,7 @@ Signals surface relevant context within security alerts. Although event data can
 In Workload Protection, the runtime Agent logs are generated from collected kernel events. You can preview the logs from the signal side-panel without context switching. 
 
 1. Go to your chosen signal details side-panel and click the {{< ui >}}Events{{< /ui >}} tab. 
-2. Click {{< ui >}}View in Log Explorer{{< /ui >}} to navigate to Log Management, which displays the full list of logs that instigate this signal.
+2. Click {{< ui >}}View in Log Explorer{{< /ui >}} to navigate to {{< prodname >}}Log Management{{< /prodname >}}, which displays the full list of logs that instigate this signal.
    Because there can be many logs, the signal side-panel combines these logs and their shared attributes into a JSON structure.
 3. Go back to the {{< ui >}}Events{{< /ui >}} tab and scroll to the end of the panel. Expand the JSON dropdown to access all log attributes contained in runtime Agent events.
 4. Identify key-value pairs to suppress signals by common keys, including `@process.args`, `@process.group`, `@process.ancestors.comm`, or `@process.ancestors.args`.

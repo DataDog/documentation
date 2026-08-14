@@ -5,7 +5,7 @@ further_reading:
 
 ---
 
-When you set up Database Monitoring, the Agent collects all the metrics described in the corresponding integration documentation. This includes metrics about database state, events, failovers, connections, and buffer pools, plus the query performance metrics that Database Monitoring uses.
+When you set up {{< prodname >}}Database Monitoring{{< /prodname >}}, the Agent collects all the metrics described in the corresponding integration documentation. This includes metrics about database state, events, failovers, connections, and buffer pools, plus the query performance metrics that {{< prodname >}}Database Monitoring{{< /prodname >}} uses.
 
 These are standard Datadog metrics that you can use in [dashboards][1], [monitors][2], [notebooks][3], and anywhere else you use metrics.
 
@@ -20,7 +20,7 @@ To see a complete list of metrics collected, see the integration **Data Collecte
 {{< /card-grid >}}
 <p></p>
 
-The metrics used for Database Monitoring views are, primarily:
+The metrics used for {{< prodname >}}Database Monitoring{{< /prodname >}} views are, primarily:
 - **MySQL**: `mysql.queries.*`
 - **Postgres**: `postgresql.queries.*`
 - **SQL Server**: `sqlserver.queries.*`
@@ -28,7 +28,7 @@ The metrics used for Database Monitoring views are, primarily:
 
 ## Normalized queries
 
-In order to eliminate redundant information and keep track of performance trends, Database Monitoring groups together identical queries with different parameters by obfuscating the parameters. These query groups are called normalized queries and are sometimes referred to as query digests. Rather than imposing a strict query volume limitation, Datadog supports 200 normalized queries per database host. This process also ensures that no sensitive data leaks into observability tools.
+In order to eliminate redundant information and keep track of performance trends, {{< prodname >}}Database Monitoring{{< /prodname >}} groups together identical queries with different parameters by obfuscating the parameters. These query groups are called normalized queries and are sometimes referred to as query digests. Rather than imposing a strict query volume limitation, Datadog supports 200 normalized queries per database host. This process also ensures that no sensitive data leaks into observability tools.
 
 For example, you may see many queries retrieving data from the same table by id:
 
@@ -82,7 +82,7 @@ Query samples have no limits on the number of unique normalized queries tracked,
 
 ## Query retention periods
 
-Datadog retains Database Monitoring query data based on the type of data collected:
+Datadog retains {{< prodname >}}Database Monitoring{{< /prodname >}} query data based on the type of data collected:
 
 - Query Metrics are retained for 15 months.
 - Query Samples are retained for 15 days.

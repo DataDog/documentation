@@ -123,7 +123,7 @@ Once you click into a pipeline, you can access individual pipeline executions li
 
 You can identify bottlenecks in your pipeline and examine individual nodes ranked from the largest to smallest percentage of execution time. 
 
-After you have set up Test Optimization, you can access information about tests that were run in your CI pipelines, including the test status (Failed, New Flaky, Passed, or Skipped), on the {{< ui >}}Test Runs{{< /ui >}} tab in a pipeline execution’s side panel. For more information, see the [Flaky Test Management documentation][10].
+After you have set up {{< prodname >}}Test Optimization{{< /prodname >}}, you can access information about tests that were run in your CI pipelines, including the test status (Failed, New Flaky, Passed, or Skipped), on the {{< ui >}}Test Runs{{< /ui >}} tab in a pipeline execution’s side panel. For more information, see the [Flaky Test Management documentation][10].
 
 You can access pipeline or job logs across cloud and self-hosted runners and see information about your runners on the {{< ui >}}Logs{{< /ui >}} tab in a pipeline execution’s side panel.
 

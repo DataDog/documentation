@@ -26,11 +26,11 @@ site_support_id: workflows
 
 [Datadog Workflow Automation][1] allows you to orchestrate and automate your end-to-end processes by building workflows made up of actions that connect to your infrastructure and tools.
 
-Use Workflow Automation with [Cloud Security][2] to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public Amazon S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
+Use Workflow Automation with [{{< prodname >}}Cloud Security{{< /prodname >}}][2] to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public Amazon S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
 
 ## Understanding how triggers and sources work
 
-Workflow Automation allows you to trigger a workflow manually or automatically. In the following examples, the workflows are triggered manually by clicking the **Run Workflow** button in the **Next Steps** box at the top of the side panel.
+{{< prodname >}}Workflow Automation{{< /prodname >}} allows you to trigger a workflow manually or automatically. In the following examples, the workflows are triggered manually by clicking the **Run Workflow** button in the **Next Steps** box at the top of the side panel.
 
 When you trigger a workflow, the [source object variables][7] specified in the trigger are passed into the workflow and can be used in subsequent steps. In the following examples, the trigger event is a new security finding.
 

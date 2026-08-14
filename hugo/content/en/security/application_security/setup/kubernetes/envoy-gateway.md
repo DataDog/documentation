@@ -18,15 +18,15 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" header="App and API Protection for Envoy Gateway is in Preview" >}}
-App and API Protection for Envoy Gateway is in Preview. Use the following instructions to try the preview.
+{{< callout url="#" btn_hidden="true" header="{{< prodname >}}App and API Protection{{< /prodname >}} for Envoy Gateway is in Preview" >}}
+{{< prodname >}}App and API Protection{{< /prodname >}} for Envoy Gateway is in Preview. Use the following instructions to try the preview.
 {{< /callout >}}
 
-You can enable Datadog [App and API Protection][12] for traffic managed by [Envoy Gateway][1] to inspect and protect traffic at the edge of your infrastructure.
+You can enable Datadog [{{< prodname >}}App and API Protection{{< /prodname >}}][12] for traffic managed by [Envoy Gateway][1] to inspect and protect traffic at the edge of your infrastructure.
 
 ## Prerequisites
 
@@ -34,7 +34,7 @@ You can enable Datadog [App and API Protection][12] for traffic managed by [Envo
 - The [Datadog Agent is installed and configured][2] in your Kubernetes cluster.
   - Enable and configure [Remote Configuration][3] to enable blocking attackers through the Datadog UI.
   - Enable [APM][4] in the Agent to allow the security processor service to send its own traces to the Agent.
-    - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection security processor service.
+    - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the {{< prodname >}}App and API Protection{{< /prodname >}} security processor service.
 
 ## Automated configuration with App and API Protection for Kubernetes
 
@@ -121,7 +121,7 @@ For fine-grained control over specific gateways, use the manual setup:
 
 ### Step 1: Deploy the Datadog security processor service
 
-This gRPC server receives requests and responses from Envoy for App and API Protection analysis.
+This gRPC server receives requests and responses from Envoy for {{< prodname >}}App and API Protection{{< /prodname >}} analysis.
 
 Deploy it in a namespace accessible by your Envoy Gateway. The Docker image is on the [Datadog Go tracer GitHub Registry][6].
 
@@ -303,7 +303,7 @@ spec:
 
 ### Step 3: Validate
 
-After applying the policy, traffic through the targeted Gateway/Routes is inspected by App and API Protection.
+After applying the policy, traffic through the targeted Gateway/Routes is inspected by {{< prodname >}}App and API Protection{{< /prodname >}}.
 
 {{% appsec-getstarted-2-plusrisk %}}
 

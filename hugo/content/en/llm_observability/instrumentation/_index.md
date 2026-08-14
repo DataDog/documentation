@@ -15,13 +15,13 @@ further_reading:
 ---
 
 
-To get started with Agent Observability, instrument your LLM application or agent(s) by choosing from several approaches based on your programming language and setup. Datadog provides comprehensive instrumentation options designed to capture detailed traces, metrics, and evaluations from your LLM applications and agents with minimal code changes.
+To get started with {{< prodname >}}Agent Observability{{< /prodname >}}, instrument your LLM application or agent(s) by choosing from several approaches based on your programming language and setup. Datadog provides comprehensive instrumentation options designed to capture detailed traces, metrics, and evaluations from your LLM applications and agents with minimal code changes.
 
 ## Instrumentation Options
 You can instrument your application with the Python, Node.js, or Java SDKs, or by using the Agent Observability API.
 
 ### SDK-based instrumentation (Recommended)
-Datadog provides native SDKs that offer the most comprehensive Agent Observability features:
+Datadog provides native SDKs that offer the most comprehensive {{< prodname >}}Agent Observability{{< /prodname >}} features:
 | Language | SDK Available | Auto-Instrumentation | Custom Instrumentation |
 | -------- | ------------- | -------------------- | ---------------------- |
 | Python | Python 3.7+ | {{< X >}} | {{< X >}} |

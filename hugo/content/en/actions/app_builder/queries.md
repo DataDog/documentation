@@ -25,7 +25,7 @@ To add a query, click the Data ({{< ui >}}{&nbsp;}{{< /ui >}}) icon to open the 
 
 You can also use Bits AI to add, configure, and trigger queries. Click the {{< ui >}}Build with AI{{< /ui >}} icon (**<i class="icon-bits-ai"></i>**) to get started. 
 
-Queries rely on [Connections][5] for authentication. App Builder shares connections with [Workflow Automation][6].
+Queries rely on [Connections][5] for authentication. App Builder shares connections with [{{< prodname >}}Workflow Automation{{< /prodname >}}][6].
 
 ## Run settings
 
@@ -139,7 +139,7 @@ When executing a query, App Builder performs the following steps in the order li
 ## Example apps
 
 ### Return workflow results to an app
-App Builder queries can trigger Workflow Automation workflows. Apps can then use the results of those workflows.
+App Builder queries can trigger {{< prodname >}}Workflow Automation{{< /prodname >}} workflows. Apps can then use the results of those workflows.
 
 This app provides a button to trigger a workflow. The workflow sends a poll to a Slack channel asking the user to pick from one of two options. Based on the option the user chooses, the workflow issues one of two different HTTP GET requests, which then returns data that is displayed in the app.
 

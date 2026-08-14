@@ -9,7 +9,7 @@ aliases:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -28,18 +28,18 @@ Datadog App and API Protection (AAP) provides observability into application and
 
 ### Identify services exposed to application attacks
 
-Datadog App and API Protection Threat Management uses the information APM is already collecting to flag traces containing attack attempts. While APM collects a sample of your application traffic, enabling App and API Protection in the SDK is necessary to effectively monitor and protect your services.
+Datadog App and API Protection Threat Management uses the information APM is already collecting to flag traces containing attack attempts. While APM collects a sample of your application traffic, enabling {{< prodname >}}App and API Protection{{< /prodname >}} in the SDK is necessary to effectively monitor and protect your services.
 
 Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Catalog][2], [Service Page][3], [Traces][4]).
 
 Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses, login account info (for example, user account/ID), and manually-added user tags on all requests.
 
 <div class="alert alert-info"><strong>1-Click Enablement</strong><br>
-If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and an SDK version that supports it</a>, you can <a href="https://app.datadoghq.com/security/configuration/asm/setup">enable App and API Protection</a> from the Datadog UI without additional configuration of the Agent or SDKs.</div>
+If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and an SDK version that supports it</a>, you can <a href="https://app.datadoghq.com/security/configuration/asm/setup">enable {{< prodname >}}App and API Protection{{< /prodname >}}</a> from the Datadog UI without additional configuration of the Agent or SDKs.</div>
 
 ## Compatibility
 
-App and API Protection uses the same libraries as APM, so you don't need to deploy and maintain another library. Steps to enable Datadog App and API Protection are specific to each runtime language. See the [App and API Protection setup guides][6] to check if your language is supported.
+{{< prodname >}}App and API Protection{{< /prodname >}} uses the same libraries as APM, so you don't need to deploy and maintain another library. Steps to enable Datadog App and API Protection are specific to each runtime language. See the [App and API Protection setup guides][6] to check if your language is supported.
 
 ## Serverless monitoring
 
@@ -63,7 +63,7 @@ Data for security traces is kept for 90 days. The underlying trace data is kept 
 
 ## Data privacy
 
-By default, App and API Protection collects information from security traces to help you understand why the request was flagged as suspicious. Before sending the data, App and API Protection scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag. This indicates that the request was suspicious, but that the request data could not be collected because of data security concerns.
+By default, {{< prodname >}}App and API Protection{{< /prodname >}} collects information from security traces to help you understand why the request was flagged as suspicious. Before sending the data, {{< prodname >}}App and API Protection{{< /prodname >}} scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag. This indicates that the request was suspicious, but that the request data could not be collected because of data security concerns.
 
 Here are some examples of data that is flagged as sensitive by default:
 * `pwd`, `password`, `ipassword`, `pass_phrase`
@@ -77,7 +77,7 @@ Here are some examples of data that is flagged as sensitive by default:
 * `BEGIN PRIVATE KEY`
 * `ssh-rsa`
 
-To configure the information redacted by App and API Protection, refer to the [data security configuration][17]
+To configure the information redacted by {{< prodname >}}App and API Protection{{< /prodname >}}, refer to the [data security configuration][17]
 
 ## Threat detection methods
 
@@ -117,7 +117,7 @@ Datadog App and API Protection includes over 100 attack signatures that help pro
 
 <div class="alert alert-info">API security is in Preview.</div>
 
-Datadog App and API Protection provides visibility into threats targeting your APIs. Use the [Endpoints list][27] in Catalog to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both App and API Protection and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
+Datadog App and API Protection provides visibility into threats targeting your APIs. Use the [Endpoints list][27] in Catalog to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both {{< prodname >}}App and API Protection{{< /prodname >}} and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
 
 ## How Datadog App and API Protection protects against Log4Shell
 

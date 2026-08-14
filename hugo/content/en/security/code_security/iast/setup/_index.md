@@ -13,7 +13,7 @@ Before setting up Runtime Code Analysis (IAST), ensure the following prerequisit
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 2. **Supported SDK:** The Datadog SDK used by your application or service supports Runtime Code Analysis (IAST) capabilities for the language of your application or service. For more details, see the **Compatibility Requirements** section below.
 
-<div class="alert alert-info">The Datadog Agent and SDK are the only requirements for IAST. APM tracing and Infrastructure Monitoring are not required; IAST reports findings independently of both. To disable APM or Infrastructure Monitoring, see <a href="#disable-apm-and-infrastructure-monitoring">Disable APM and Infrastructure Monitoring</a>. 
+<div class="alert alert-info">The Datadog Agent and SDK are the only requirements for IAST. APM tracing and {{< prodname >}}Infrastructure Monitoring{{< /prodname >}} are not required; IAST reports findings independently of both. To disable APM or {{< prodname >}}Infrastructure Monitoring{{< /prodname >}}, see <a href="#disable-apm-and-infrastructure-monitoring">Disable APM and {{< prodname >}}Infrastructure Monitoring{{< /prodname >}}</a>. 
 <br>
 Even if APM is disabled, APM intake costs are still incurred for ingesting data, such as security traces and spans, to support IAST.</div>
 
@@ -488,7 +488,7 @@ The following code security capabilities are supported relative to each language
 | Runtime Software Composition Analysis (SCA)   | 1.1.4   | 2.16.0   | 4.0.0      | 1.5.0       | 1.49.0         | 1.11.0        | 0.90.0        |
 | Runtime Code Analysis (IAST)                  | 1.15.0  | 2.42.0   | 4.18.0     | 3.18.0      | not supported  | not supported | not supported |
 
-**Note**: **Static Software Composition Analysis (SCA)** and **Static Code Analysis (SAST)** capabilities do not require the Datadog SDK. Therefore, the requirements listed below do not apply to these two Code Security capabilities.
+**Note**: **Static Software Composition Analysis (SCA)** and **Static Code Analysis (SAST)** capabilities do not require the Datadog SDK. Therefore, the requirements listed below do not apply to these two {{< prodname >}}Code Security{{< /prodname >}} capabilities.
 
 Select your application language for details about framework compatibility and feature support.
 
@@ -515,7 +515,7 @@ The minimum tracer version to get all supported code security capabilities for J
 | AWS Lambda        |                                             |                                     |
 | Azure App Service | <i class="icon-check-bold"></i>             | <i class="icon-check-bold"></i>     |
 
-**Note**: Azure App Service is supported for **web applications only**. Code Security doesn't support Azure Functions.
+**Note**: Azure App Service is supported for **web applications only**. {{< prodname >}}Code Security{{< /prodname >}} doesn't support Azure Functions.
 
 ### Language and framework compatibility
 
@@ -626,7 +626,7 @@ The minimum tracer version to get all supported code security capabilities for .
 | AWS Lambda        |                                             |                                     |
 | Azure App Service | <i class="icon-check-bold"></i>             | <i class="icon-check-bold"></i>     |
 
-**Note**: Azure App Service is supported for **web applications only**. Code Security capabilities are not supported for Azure Functions.
+**Note**: Azure App Service is supported for **web applications only**. {{< prodname >}}Code Security{{< /prodname >}} capabilities are not supported for Azure Functions.
 
 ### Language and framework compatibility
 

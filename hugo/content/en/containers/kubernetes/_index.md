@@ -46,7 +46,7 @@ further_reading:
 You can install the Agent using either the [Datadog Operator][4] or Helm chart by following the [in-app installation guide in Fleet Automation][5]. This guided interface allows you to:
 - Select your Kubernetes distribution (for example EKS, AKS, or GKE)
 - Generate helm and kubectl commands with your API key prefilled
-- Enable features such as APM, Log Management, tagging and other telemetry through UI-based configuration
+- Enable features such as APM, {{< prodname >}}Log Management{{< /prodname >}}, tagging and other telemetry through UI-based configuration
 
 
 {{< img src="agent/basic_agent_usage/agent_install_k8.png" alt="In-app installation steps for the Datadog Agent on Kubernetes." style="width:90%;">}}
@@ -74,7 +74,7 @@ For Agent commands, see the [Agent Commands guides][9]. For information on the D
   {{< nextlink href="/agent/kubernetes/configuration">}}<u>Further Configuration</u>: Collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, and reference the full list of available environment variables.{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/distributions">}}<u>Distributions</u>: Review base configurations for major Kubernetes distributions, including AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, and Oracle Container Engine for Kubernetes (OKE).{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/apm">}}<u>APM</u>: Set up trace collection: configure the Agent to accept traces, configure your Pods to communicate with the Agent, and configure your application SDKs to emit traces.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/appsec">}}<u>App and API Protection</u>: Automatically enable App and API Protection for your Kubernetes ingress proxies and gateways to detect threats and protect APIs at the edge.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/appsec">}}<u>{{< prodname >}}App and API Protection{{< /prodname >}}</u>: Automatically enable {{< prodname >}}App and API Protection{{< /prodname >}} for your Kubernetes ingress proxies and gateways to detect threats and protect APIs at the edge.{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/csi">}}<u>CSI Driver</u>: Install and set up Datadog CSI driver, and mount DogStatsD and Trace Agent UDS socket using Datadog CSI volumes.{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/log">}}<u>Log collection</u>: Set up log collection in a Kubernetes environment.{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/tag">}}<u>Tag extraction</u>: Configure the Agent to create and assign tags to all metrics, traces, and logs emitted by a container, Pod, or Node, based on Kubernetes labels or annotations.{{< /nextlink >}}

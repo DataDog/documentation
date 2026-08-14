@@ -103,12 +103,12 @@ Some of these permissions are related to monitoring Iceberg tables in Glue. For 
    - `/aws-glue/jobs/output`
    - `/aws-glue/jobs/logs-v2`
 
-This helps ensure the logs are searchable and available under the {{< ui >}}Glue{{< /ui >}} tab in **Data Observability: Jobs Monitoring**.
+This helps ensure the logs are searchable and available under the {{< ui >}}Glue{{< /ui >}} tab in **{{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring**.
 
 ## (Optional) Configure Glue metrics
 
 Enable the [Glue Integration][4] tile for Glue metrics collection.
-Metrics should be available under the {{< ui >}}Glue{{< /ui >}} job tab in **Data Observability: Jobs Monitoring**.
+Metrics should be available under the {{< ui >}}Glue{{< /ui >}} job tab in **{{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring**.
 
 ## (Optional) Enable dataset lineage
 

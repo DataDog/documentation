@@ -79,7 +79,7 @@ These attributes are present on all security findings and describe the fundament
     <tr>
       <td><code>related_services</code></td>
       <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@related_services</code><br>Services that are inferred from Source Code Integration (for example, for SAST findings).</td>
+      <td><strong>Path:</strong> <code>@related_services</code><br>Services that are inferred from {{< prodname >}}Source Code Integration{{< /prodname >}} (for example, for SAST findings).</td>
     </tr>
     <tr>
       <td><code>resource_id</code></td>
@@ -561,7 +561,7 @@ Container image where the finding was detected, including registry, repository, 
     <tr>
       <td><code>git_repository_url</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@container_image.git_repository_url</code><br>URL of the Git repository for the code used to build the container image. Available only when Source Code Integration is configured.</td>
+      <td><strong>Path:</strong> <code>@container_image.git_repository_url</code><br>URL of the Git repository for the code used to build the container image. Available only when {{< prodname >}}Source Code Integration{{< /prodname >}} is configured.</td>
     </tr>
     <tr>
       <td><code>image_layer_diff_ids</code></td>
@@ -4714,12 +4714,12 @@ Information about the service where the finding was detected, including its name
     <tr>
       <td><code>git_commit_sha</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@service.git_commit_sha</code><br>Git commit SHA of the latest commit where the finding was detected for the service. Available only when Source Code Integration is configured.</td>
+      <td><strong>Path:</strong> <code>@service.git_commit_sha</code><br>Git commit SHA of the latest commit where the finding was detected for the service. Available only when {{< prodname >}}Source Code Integration{{< /prodname >}} is configured.</td>
     </tr>
     <tr>
       <td><code>git_repository_url</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@service.git_repository_url</code><br>URL of the Git repository for the service associated with the finding. Available only when Source Code Integration is configured.</td>
+      <td><strong>Path:</strong> <code>@service.git_repository_url</code><br>URL of the Git repository for the service associated with the finding. Available only when {{< prodname >}}Source Code Integration{{< /prodname >}} is configured.</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -4992,7 +4992,7 @@ All mutable information related to the management of a finding after it was dete
     <tr>
       <td><code>integrations</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@workflow.integrations</code><br>Integrations like Jira, Case Management, or ServiceNow used to triage and remediate the finding.</td>
+      <td><strong>Path:</strong> <code>@workflow.integrations</code><br>Integrations like Jira, {{< prodname >}}Case Management{{< /prodname >}}, or ServiceNow used to triage and remediate the finding.</td>
     </tr>
     <tr>
       <td><code>mute</code></td>
@@ -5076,7 +5076,7 @@ Due date rule applied to the finding.
 
 ### Integrations
 
-Integrations like Jira, Case Management, or ServiceNow used to triage and remediate the finding.
+Integrations like Jira, {{< prodname >}}Case Management{{< /prodname >}}, or ServiceNow used to triage and remediate the finding.
 
 <table>
   <thead>

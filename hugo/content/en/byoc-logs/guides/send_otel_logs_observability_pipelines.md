@@ -17,7 +17,7 @@ aliases:
 
 ## Overview
 
-BYOC (Bring Your Own Cloud) Logs supports log ingestion from OTEL collectors by using Observability Pipelines as the ingestion layer. This guide provides step-by-step instructions to connect OTEL logs to BYOC Logs—without disrupting your existing OTEL configuration.
+BYOC (Bring Your Own Cloud) Logs supports log ingestion from OTEL collectors by using {{< prodname >}}Observability Pipelines{{< /prodname >}} as the ingestion layer. This guide provides step-by-step instructions to connect OTEL logs to {{< prodname >}}BYOC Logs{{< /prodname >}}—without disrupting your existing OTEL configuration.
 
 By the end of this guide, you will be able to:
 1. [Start BYOC Logs locally](#step-1-start-byoc-logs).
@@ -28,7 +28,7 @@ By the end of this guide, you will be able to:
 
 ## Prerequisites
 
-- BYOC Logs access. Contact your Datadog account team to request access.
+- {{< prodname >}}BYOC Logs{{< /prodname >}} access. Contact your Datadog account team to request access.
 - **Datadog API Key**: [Get your API key][2].
 - **Datadog Application Key**: [Get your application key][3].
 - **Docker**: [Install Docker][4].
@@ -36,7 +36,7 @@ By the end of this guide, you will be able to:
 
 ## Step 1: Start BYOC Logs
 
-Start a local BYOC Logs instance. Replace `<YOUR_API_KEY>` with your Datadog API Key:
+Start a local {{< prodname >}}BYOC Logs{{< /prodname >}} instance. Replace `<YOUR_API_KEY>` with your Datadog API Key:
 
 ```shell
 export DD_API_KEY="<YOUR_API_KEY>"
@@ -53,7 +53,7 @@ docker run -d \
 
 ## Step 2: Create an Observability Pipeline with the API
 
-Create a pipeline with an OpenTelemetry source, a filter processor, and a BYOC Logs destination. Replace `<YOUR_APP_KEY>` with your Datadog Application Key:
+Create a pipeline with an OpenTelemetry source, a filter processor, and a {{< prodname >}}BYOC Logs{{< /prodname >}} destination. Replace `<YOUR_APP_KEY>` with your Datadog Application Key:
 
 ```shell
 export DD_APP_KEY="<YOUR_APP_KEY>"
@@ -139,7 +139,7 @@ docker run -d \
 
 **Notes**:
 - The Worker exposes port 4318 for HTTP and 4317 for gRPC.
-- On macOS/Windows, use `host.docker.internal` to connect to BYOC Logs on the host machine.
+- On macOS/Windows, use `host.docker.internal` to connect to {{< prodname >}}BYOC Logs{{< /prodname >}} on the host machine.
 - On Linux, use `--network host` instead of `-p` flags and `http://localhost:7280` for the endpoint.
 
 {{< img src="/cloudprem/guides/otel-op-cloudprem/op-config.png" alt="The Observability Pipelines configuration" style="width:100%;" >}}
@@ -201,7 +201,7 @@ docker logs opw --tail 20
 ## Step 5: View logs in Datadog
 
 1. Go to the [Datadog Log Explorer][5].
-2. In the left facet panel, select your BYOC Logs index under {{< ui >}}BYOC INDEXES{{< /ui >}}.
+2. In the left facet panel, select your {{< prodname >}}BYOC Logs{{< /prodname >}} index under {{< ui >}}BYOC INDEXES{{< /ui >}}.
 3. You should see your OpenTelemetry logs from the `otel-demo` service with custom tags: `pipeline:observability-pipelines` and `source:opentelemetry`.
 
 {{< img src="/cloudprem/guides/otel-op-cloudprem/cloudprem_logs.png" alt="BYOC Logs data available in the Datadog Log Explorer" style="width:100%;" >}}

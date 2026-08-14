@@ -23,7 +23,7 @@ By default, access to projects and cases is unrestricted. [Granular Access Contr
 - **Viewer**: Users can view and watch all cases, views, and settings of the project. They can't create, edit, or comment on cases.
 - **No Access**: Users can't view any cases, views, or settings of the project.
 
-**Note:** Other Datadog products that integrate with Case Management, such as Monitors, are able to automatically create cases within a project regardless of the project's access settings.
+**Note:** Other Datadog products that integrate with {{< prodname >}}Case Management{{< /prodname >}}, such as Monitors, are able to automatically create cases within a project regardless of the project's access settings.
 
 ## Status transitions
 
@@ -31,7 +31,7 @@ To reduce noise, configure cases to automatically close after 7, 14, 30, 90, or 
 
 ## Set up integrations
 
-Case Management offers a range of native and third-party integrations, so you can incorporate Datadog solutions into your existing workflows and processes. With the Jira, ServiceNow, and Linear integrations, you can solve the case with full-stack telemetry in Datadog, while maintaining a record of the investigation in those third-party systems.
+{{< prodname >}}Case Management{{< /prodname >}} offers a range of native and third-party integrations, so you can incorporate Datadog solutions into your existing workflows and processes. With the Jira, ServiceNow, and Linear integrations, you can solve the case with full-stack telemetry in Datadog, while maintaining a record of the investigation in those third-party systems.
 
 ### Monitors
 

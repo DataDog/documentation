@@ -22,27 +22,27 @@ further_reading:
 
 ## Overview
 
-BYOC Logs combines Observability Pipelines with the BYOC Logs engine. Observability Pipelines Workers can store logs in persistent disk buffers when the BYOC Logs engine is unavailable or cannot keep up with the incoming rate. This gives the ingestion path time to recover without immediately dropping logs.
+{{< prodname >}}BYOC Logs{{< /prodname >}} combines {{< prodname >}}Observability Pipelines{{< /prodname >}} with the {{< prodname >}}BYOC Logs{{< /prodname >}} engine. Observability Pipelines Workers can store logs in persistent disk buffers when the {{< prodname >}}BYOC Logs{{< /prodname >}} engine is unavailable or cannot keep up with the incoming rate. This gives the ingestion path time to recover without immediately dropping logs.
 
 A durable setup has four parts:
 
 - Enough buffer capacity for the backlog you want to retain
-- Disk buffering on the BYOC Logs destination
+- Disk buffering on the {{< prodname >}}BYOC Logs{{< /prodname >}} destination
 - A persistent volume for each Worker's buffer
 - Enough time for a terminating Worker to drain its buffer
 
 ## Before you begin
 
-This guide assumes that you have a BYOC Logs deployment with:
+This guide assumes that you have a {{< prodname >}}BYOC Logs{{< /prodname >}} deployment with:
 
-- Observability Pipelines configured with a [BYOC Logs destination][1]
+- {{< prodname >}}Observability Pipelines{{< /prodname >}} configured with a [BYOC Logs destination][1]
 - A [BYOC Logs engine deployment][2]
 
 ## Size the disk buffer
 
-A useful starting point is to decide how long Workers need to retain logs if the BYOC Logs engine is unavailable. The expected backlog can then be divided across the minimum number of Workers that remain active.
+A useful starting point is to decide how long Workers need to retain logs if the {{< prodname >}}BYOC Logs{{< /prodname >}} engine is unavailable. The expected backlog can then be divided across the minimum number of Workers that remain active.
 
-For example, consider a total ingress of 50 TB/day, 25 Workers, and a one-hour BYOC Logs engine outage:
+For example, consider a total ingress of 50 TB/day, 25 Workers, and a one-hour {{< prodname >}}BYOC Logs{{< /prodname >}} engine outage:
 
 1. **Total backlog:** `50 TB × 1 hour ÷ 24 hours = 2.08 TB`
 2. **Buffer per Worker:** `2.08 TB ÷ 25 Workers ≈ 83 GB`
@@ -51,7 +51,7 @@ Rounding up the result leaves capacity for a longer incident or a higher ingress
 
 ## Disk buffer configuration
 
-The following buffering options are available when editing the BYOC Logs destination in the Observability Pipelines UI or through the API:
+The following buffering options are available when editing the {{< prodname >}}BYOC Logs{{< /prodname >}} destination in the Observability Pipelines UI or through the API:
 
 - **Buffer type**: Disk
 - **Buffer size**: The per-Worker capacity from your calculation
@@ -89,7 +89,7 @@ The persistent volume keeps buffered logs if a Worker pod restarts. The `Retain`
 
 ## Draining Workers before shutdown
 
-During a scale-down or rollout, a Worker stops accepting new logs and sends its buffered logs to the BYOC Logs engine. If the Worker exits before the buffer is empty, the logs remain on its persistent volume until a replacement Worker reattaches that volume.
+During a scale-down or rollout, a Worker stops accepting new logs and sends its buffered logs to the {{< prodname >}}BYOC Logs{{< /prodname >}} engine. If the Worker exits before the buffer is empty, the logs remain on its persistent volume until a replacement Worker reattaches that volume.
 
 The `terminationGracePeriodSeconds` setting controls how long Kubernetes waits before terminating the pod. This gives the Worker time to empty its buffer before exiting.
 

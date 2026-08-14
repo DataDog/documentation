@@ -4,7 +4,7 @@ title: Troubleshooting App and API Protection for Go
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -16,13 +16,13 @@ App and API Protection is in Preview on Datadog Government site US1-FED.
 
 When security signals don't appear, this could be due to an incompatible Agent version:
 
-- **Error**: No security events in the Datadog UI, despite App and API Protection being enabled
+- **Error**: No security events in the Datadog UI, despite {{< prodname >}}App and API Protection{{< /prodname >}} being enabled
 - **Solution**: Upgrade to Datadog Agent v7.41.1 or higher
 - **Verification**: Check Agent status with `datadog-agent status`
 
 #### Outdated Go tracer version
 
-Older Go tracer versions may not support App and API Protection features:
+Older Go tracer versions may not support {{< prodname >}}App and API Protection{{< /prodname >}} features:
 
 - **Error**: Security monitoring not working despite proper configuration
 - **Solution**: Upgrade to Go tracer v1.53.0 or higher: `go get github.com/DataDog/dd-trace-go/v2@latest`
@@ -30,7 +30,7 @@ Older Go tracer versions may not support App and API Protection features:
 
 #### Missing or incorrect environment variables
 
-App and API Protection requires specific environment variables to be set:
+{{< prodname >}}App and API Protection{{< /prodname >}} requires specific environment variables to be set:
 
 - **Error**: Application starts normally but no security monitoring occurs
 - **Solution**: Set `DD_APPSEC_ENABLED=true` in your deployment environment

@@ -52,7 +52,7 @@ Datadog On-Call supports two routing types: direct call routing and voicemail ro
 
 In direct call routing, the system follows the On-Call Team's escalation policy to connect the caller to the first available responder.
 
-Responders must have valid phone numbers in their profiles; On-Call skips any responders that don't.
+Responders must have valid phone numbers in their profiles; {{< prodname >}}On-Call{{< /prodname >}} skips any responders that don't.
 
 Responders then have the following options:
 - Press `1` to acknowledge the call.
@@ -103,7 +103,7 @@ If your route isn't accepting calls:
 ### Keypad problems
 
 If a keypad option is not routing calls correctly:
-- Confirm each keypad option is linked to a valid On-Call team.
+- Confirm each keypad option is linked to a valid {{< prodname >}}On-Call{{< /prodname >}} team.
 - Test each option individually by dialing the route and pressing the corresponding key.
 - Verify that your phone system supports DTMF (touch-tone) input, as some VoIP systems disable it by default.
 
@@ -111,7 +111,7 @@ If a keypad option is not routing calls correctly:
 
 If calls are not reaching a responder or no Page is created:
 - Confirm that the On-Call Team has an active escalation policy with at least one escalation level defined.
-- Verify that all responders in the escalation policy have a valid phone number in their profile. On-Call skips responders without a phone number.
+- Verify that all responders in the escalation policy have a valid phone number in their profile. {{< prodname >}}On-Call{{< /prodname >}} skips responders without a phone number.
 - Check that each responder's phone number is reachable and not blocked or forwarded to an unavailable destination.
 - Confirm that each team member has notification preferences configured to receive Pages.
 

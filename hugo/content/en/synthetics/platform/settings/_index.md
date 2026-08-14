@@ -229,7 +229,7 @@ For more information about TOTP-based MFA in a browser test, see [TOTPs For Mult
 {{% /tab %}}
 {{% tab "Virtual Authenticator" %}}
 
-To complete a user journey with a passkey in your Synthetics tests, create a Virtual Authenticator global variable. This global variable is used to generate and store passkeys for all your Synthetics browser tests. For more information, see [Using passkeys In Browser Tests][1].
+To complete a user journey with a passkey in your {{< prodname >}}Synthetics{{< /prodname >}} tests, create a Virtual Authenticator global variable. This global variable is used to generate and store passkeys for all your {{< prodname >}}Synthetics{{< /prodname >}} browser tests. For more information, see [Using passkeys In Browser Tests][1].
 
 1. Navigate to the {{< ui >}}Global Variables{{< /ui >}} tab in [{{< ui >}}Synthetic Monitoring & Continuous Testing{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][1] and click {{< ui >}}+ New Global Variable{{< /ui >}}.
 

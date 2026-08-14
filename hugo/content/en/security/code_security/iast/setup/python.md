@@ -25,10 +25,10 @@ You can detect code-level vulnerabilities and monitor application security in Py
 
 NOTE: Code-Level Vulnerability detection in Python is in Preview.
 
-Follow these steps to enable Code Security in your service:
+Follow these steps to enable {{< prodname >}}Code Security{{< /prodname >}} in your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
-2. Update your Datadog SDK to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][3] page.
+2. Update your Datadog SDK to at least the minimum version needed to turn on {{< prodname >}}Code Security{{< /prodname >}}. For details, see [Library Compatibility][3] page.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    From the command line:
@@ -96,7 +96,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{< /tabs >}}
 
 4. Restart your service.
-5. To see Code Security in action, browse your service and find code-level vulnerabilities in the [{{< ui >}}Vulnerability Explorer{{< /ui >}}][4].
+5. To see {{< prodname >}}Code Security{{< /prodname >}} in action, browse your service and find code-level vulnerabilities in the [{{< ui >}}Vulnerability Explorer{{< /ui >}}][4].
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
 
@@ -105,7 +105,7 @@ If you need additional assistance, contact [Datadog support][5].
 
 ### Third-Party Library Compatibility Note
 
-Code Security modifies Python code at runtime. This could cause conflicts with other third-party Python libraries that perform similar code transformations, particularly with the following, though not limited to them:
+{{< prodname >}}Code Security{{< /prodname >}} modifies Python code at runtime. This could cause conflicts with other third-party Python libraries that perform similar code transformations, particularly with the following, though not limited to them:
 
 - Numba
 - JAX
@@ -115,7 +115,7 @@ Code Security modifies Python code at runtime. This could cause conflicts with o
 - Codetransformer
 - PyPy
 
-Additionally, Code Security does not correctly propagate taint ranges over native (compiled) code. Therefore, if your codebase heavily relies on modules written in C or C++,
+Additionally, {{< prodname >}}Code Security{{< /prodname >}} does not correctly propagate taint ranges over native (compiled) code. Therefore, if your codebase heavily relies on modules written in C or C++,
 using the CPython API, or on intermediate language systems like Cython, the results might be less accurate than expected.
 
 

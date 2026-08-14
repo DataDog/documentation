@@ -5,7 +5,7 @@ disable_toc: false
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -56,7 +56,7 @@ This step describes how to set up your service to use AAP.
 
 To enable AAP on your login service, ensure you meet the following requirements:
 
-* Similarly to Datadog APM, AAP requires a library integration in your services and a running Datadog Agent.  
+* Similarly to {{< prodname >}}Datadog APM{{< /prodname >}}, AAP requires a library integration in your services and a running Datadog Agent.  
 * AAP generally benefits from using the newest library possible; however, minimum supported versions are documented in [Compatibility Requirements][3].   
 * At a minimum, {{< ui >}}Threat Detection{{< /ui >}} must be enabled. Ideally, {{< ui >}}Automatic user activity event tracking{{< /ui >}} should be enabled as well.
 
@@ -171,7 +171,7 @@ The actions covered in the next sections help you to identify and leverage detec
 
 1. Open [Create a new rule][18].  
 2. Enter a name for the rule.
-3. Select {{< ui >}}Signal{{< /ui >}} and remove all entries except {{< ui >}}App and API Protection{{< /ui >}}.
+3. Select {{< ui >}}Signal{{< /ui >}} and remove all entries except {{< ui >}}{{< prodname >}}App and API Protection{{< /prodname >}}{{< /ui >}}.
 4. Restrict the rule to `category:account_takeover`, and expand the severities to include `Medium`.
 5. Add notification recipients (Slack, Teams, PagerDuty).
    To learn more, see [Notification channels][19].  
@@ -589,7 +589,7 @@ You can configure a signal to push any user ID using a webhook. This method can 
 </div>
 
 To configure a signal to push a user ID using a webhook, do the following: 
-1. Configuring a [standard webhook target][28]. To see how this works in Cloud SIEM, go to [Automate the Remediation of Detected Threats with Webhooks][29].
+1. Configuring a [standard webhook target][28]. To see how this works in {{< prodname >}}Cloud SIEM{{< /prodname >}}, go to [Automate the Remediation of Detected Threats with Webhooks][29].
 2. In [Detection Rules][30], open the rules you want to configure. 
 {{<img src="security/ato/guide_detection_rules.png" alt="Tables of ATO-related detection rules" style="width:100%;" >}}
 3. Go to the notification settings in a detection rule condition. 

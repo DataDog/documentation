@@ -22,7 +22,7 @@ Once configured and enabled, issues are automatically assigned to developers bas
 
 ### Configure Source Code Integration
 
-1. Ensure [Source Code Integration][2] is enabled and set up.
+1. Ensure [{{< prodname >}}Source Code Integration{{< /prodname >}}][2] is enabled and set up.
 2. Install [the GitHub integration][3].
 3. Make sure all requested permissions (Contents, Members) are granted for the GitHub integration.
 

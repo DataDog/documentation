@@ -23,7 +23,7 @@ If a user's IP is not contained in the IP allowlist, they are effectively blocke
 - Datadog's public [API][1], including both documented and unpublished endpoints
 - Datadog's mobile apps (iOS, Android)
 - Third-party integrations and applications that access Datadog through OAuth
-- The [Datadog MCP Server][9], including remote connections from AI agents and MCP clients
+- The [{{< prodname >}}Datadog MCP Server{{< /prodname >}}][9], including remote connections from AI agents and MCP clients
 
 The IP allowlist feature does not block access to the following:
 - Data ingest endpoints to which the Agent sends data, such as metrics, traces, and logs

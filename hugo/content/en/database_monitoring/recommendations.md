@@ -13,7 +13,7 @@ further_reading:
     text: "Not all index scans are equal: How we cut query latency by over 99%"
 ---
 
-Database Monitoring (DBM) Recommendations draw attention to potential optimizations and problematic areas across your database fleet.
+{{< prodname >}}Database Monitoring{{< /prodname >}} (DBM) Recommendations draw attention to potential optimizations and problematic areas across your database fleet.
 
 {{< img src="database_monitoring/recommendations-page.png" alt="The Recommendations page in Datadog" style="width:90%;" >}}
 

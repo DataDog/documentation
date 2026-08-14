@@ -3,7 +3,7 @@ title: Troubleshoot Database Monitoring setup for MongoDB
 description: Troubleshoot Database Monitoring setup
 ---
 
-This page explains how to resolve common issues with setting up and using Database Monitoring with MongoDB. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
+This page explains how to resolve common issues with setting up and using {{< prodname >}}Database Monitoring{{< /prodname >}} with MongoDB. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
 ## Diagnosing common problems
 

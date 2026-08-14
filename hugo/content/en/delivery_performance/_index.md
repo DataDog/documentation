@@ -5,7 +5,7 @@ description: Measure and improve your software delivery performance with DORA Me
 
 ## Overview
 
-Delivery Performance provides tools to measure your software delivery performance and the impact of AI coding assistants on your development workflow.
+{{< prodname >}}Delivery Performance{{< /prodname >}} provides tools to measure your software delivery performance and the impact of AI coding assistants on your development workflow.
 
 ### DORA Metrics
 

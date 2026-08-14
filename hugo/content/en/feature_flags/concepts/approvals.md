@@ -86,11 +86,11 @@ The **Feature Flag Approvals Override** organization permission serves two purpo
 - **Existing flags:** Required to enable approvals for a flag that already exists (in addition to [granular edit access][1] on that flag).
 - **Workflow bypass:** Allows holders to bypass the approvals workflow where that option is available, so changes can proceed without the usual review and approval steps.
 
-Treat this permission as highly sensitive: assign it only to people who may need to change approval requirements or make exceptions to governance. Organization permissions are granted through [Datadog roles][4]. For related Feature Flags permissions, see [Permissions and Access Control][1].
+Treat this permission as highly sensitive: assign it only to people who may need to change approval requirements or make exceptions to governance. Organization permissions are granted through [Datadog roles][4]. For related {{< prodname >}}Feature Flags{{< /prodname >}} permissions, see [Permissions and Access Control][1].
 
 ## Find flags with pending approvals
 
-On the Feature Flags search page, toggle the **Pending Approvals** filter to view flags with changes awaiting approval.
+On the {{< prodname >}}Feature Flags{{< /prodname >}} search page, toggle the **Pending Approvals** filter to view flags with changes awaiting approval.
 
 ## Further reading
 

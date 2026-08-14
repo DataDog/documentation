@@ -35,7 +35,7 @@ further_reading:
   text: Learn how to explore your RUM data
 ---
 
-This page describes how to instrument your applications for [Real User Monitoring (RUM)][1] with the React Native SDK. RUM includes Error Tracking by default, but if you have purchased Error Tracking as a standalone product, see the [Error Tracking setup guide][2] for specific steps.
+This page describes how to instrument your applications for [Real User Monitoring (RUM)][1] with the React Native SDK. RUM includes {{< prodname >}}Error Tracking{{< /prodname >}} by default, but if you have purchased {{< prodname >}}Error Tracking{{< /prodname >}} as a standalone product, see the [Error Tracking setup guide][2] for specific steps.
 
 The minimum supported version for the React Native SDK is React Native v0.65+. Compatibility with older versions is not guaranteed out-of-the-box.
 

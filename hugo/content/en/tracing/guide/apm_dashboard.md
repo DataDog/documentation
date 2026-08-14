@@ -20,7 +20,7 @@ _4 minutes to complete_
 
 {{< img src="tracing/guide/apm_dashboard/dashboard_7_cropped.mp4" alt="dashboard 7" video="true" style="width:90%;">}}
 
-Datadog APM allows you to create dashboards based on your business priorities and metrics important to you:
+{{< prodname >}}Datadog APM{{< /prodname >}} allows you to create dashboards based on your business priorities and metrics important to you:
 You can create widgets on these dashboards to keep track of any traditional infrastructure, logs and custom metrics like host memory usage alongside critical APM metrics based on throughput, latency, and error rate for correlation.
 Next to these you can track latency of the user experience of your top customers or largest transactions and alongside these keep track of the throughput of your main web server ahead of any major events like Black Friday.
 

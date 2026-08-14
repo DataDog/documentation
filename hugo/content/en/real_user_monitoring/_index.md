@@ -209,7 +209,7 @@ The [RUM Performance Monitoring summary][1] page provides relevant and actionabl
 
 For **web apps**, use the search bar to filter data, identify slow pages, and follow the UI to the [RUM Optimization Inspect][17] page.
 
-For **mobile apps**, review recent crashes at the bottom of the page and use the [Error Tracking][6] side panel for troubleshooting.
+For **mobile apps**, review recent crashes at the bottom of the page and use the [{{< prodname >}}Error Tracking{{< /prodname >}}][6] side panel for troubleshooting.
 
 ### Out-of-the-box dashboards
 
@@ -231,7 +231,7 @@ View your [backend traces, logs, and infrastructure metrics][5] down to the exac
 
 ### Error tracking and crash reporting
 
-Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][6].
+Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [{{< prodname >}}Error Tracking{{< /prodname >}}][6].
 
 {{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM error tracking" video=true >}}
 

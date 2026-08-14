@@ -20,7 +20,7 @@ further_reading:
 
 {{< img src="data_jobs/overview_052026.png" alt="Datadog Data Observability: Jobs Monitoring overview page" style="width:100%;" >}}
 
-Data Observability: Jobs Monitoring provides visibility into the performance, reliability, and cost efficiency of your data processing jobs, along with the underlying infrastructure. Data Observability: Jobs Monitoring enables you to:
+{{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring provides visibility into the performance, reliability, and cost efficiency of your data processing jobs, along with the underlying infrastructure. {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring enables you to:
 
 - Track the health and performance of data processing jobs across your accounts and workspaces. See which take up the most compute resources or have inefficiencies.
 - Receive an alert when a job fails—or when a job is taking too long to complete.
@@ -31,7 +31,7 @@ Data Observability: Jobs Monitoring provides visibility into the performance, re
 
 ## Setup
 
-Data Observability: Jobs Monitoring supports multiple job technologies. To get started, select your technology and follow the installation instructions:
+{{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring supports multiple job technologies. To get started, select your technology and follow the installation instructions:
 
 {{< card-grid >}}
   {{< image-card href="/data_observability/jobs_monitoring/databricks/" src="integrations_logos/databricks.png" alt="Databricks" >}}
@@ -41,7 +41,7 @@ Data Observability: Jobs Monitoring supports multiple job technologies. To get s
   {{< image-card href="/data_observability/jobs_monitoring/azure_data_factory/" src="integrations_logos/azure_data_factory.png" alt="Azure Data Factory" >}}
 {{< /card-grid >}}
 
-Data Observability: Jobs Monitoring also supports Apache Spark jobs on the following platforms:
+{{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring also supports Apache Spark jobs on the following platforms:
 
 {{< card-grid >}}
   {{< image-card href="/data_observability/jobs_monitoring/kubernetes/" src="integrations_logos/kubernetes.png" alt="Kubernetes" >}}
@@ -71,13 +71,13 @@ Clicking on a run opens a side panel with details of how much time was spent on 
 
 On the {{< ui >}}Infrastructure{{< /ui >}} tab, you can correlate the execution to infrastructure metrics.
 
-{{< img src="data_jobs/djm_run_infra_062024.png" alt="Data Observability: Jobs Monitoring > Run panel, Infrastructure tab" style="width:100%;" >}}
+{{< img src="data_jobs/djm_run_infra_062024.png" alt="{{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring > Run panel, Infrastructure tab" style="width:100%;" >}}
 
 For a failed run, look at the {{< ui >}}Errors{{< /ui >}} tab to see the stack trace, which can help you determine where and how this failure occurred.
 
 To determine why a stage is taking a long time to complete, you can use the {{< ui >}}Spark Task Metrics{{< /ui >}} tab to view task-level metrics for a specific Spark stage, so that you can identify data skew. See the distribution of time spent and data consumed by different tasks.
 
-{{< img src="data_jobs/djm_task_metrics.png" alt="Data Observability: Jobs Monitoring > Run panel, Spark Task Metrics tab" style="width:100%;" >}}
+{{< img src="data_jobs/djm_task_metrics.png" alt="{{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring > Run panel, Spark Task Metrics tab" style="width:100%;" >}}
 
 ## Further Reading
 

@@ -20,25 +20,25 @@ further_reading:
 
 ## Overview
 
-This guide explains how you can use both Agent Observability and APM to correlate Agent Observability and APM [spans][6] in Datadog. 
+This guide explains how you can use both {{< prodname >}}Agent Observability{{< /prodname >}} and APM to correlate {{< prodname >}}Agent Observability{{< /prodname >}} and APM [spans][6] in Datadog. 
 
-By instrumenting your LLM-specific operations with Agent Observability and your broader application with APM, you can accomplish the following:
+By instrumenting your LLM-specific operations with {{< prodname >}}Agent Observability{{< /prodname >}} and your broader application with APM, you can accomplish the following:
 
 
 
 * Understand end-to-end visibility: Explore upstream and downstream requests of your LLM applications within the context of your entire application.
-* From APM, dive deeper into Agent Observability: Investigate whether or not an issue with your application is specific to LLM-specific applications, such as a call to OpenAI.
+* From APM, dive deeper into {{< prodname >}}Agent Observability{{< /prodname >}}: Investigate whether or not an issue with your application is specific to LLM-specific applications, such as a call to OpenAI.
 
 ## Setup
 
-The Agent Observability SDK is built on APM's dd-tracer. This allows you to use Agent Observability with [Application Performance Monitoring (APM)][7]
+The Agent Observability SDK is built on APM's dd-tracer. This allows you to use {{< prodname >}}Agent Observability{{< /prodname >}} with [Application Performance Monitoring (APM)][7]
 
-If you are using the [Agent Observability SDK for Python][1] along with APM's [`dd-tracer`][2], you can navigate between spans in Datadog APM and Agent Observability without additional setup.
+If you are using the [Agent Observability SDK for Python][1] along with APM's [`dd-tracer`][2], you can navigate between spans in {{< prodname >}}Datadog APM{{< /prodname >}} and {{< prodname >}}Agent Observability{{< /prodname >}} without additional setup.
 
 If you are using the [Agent Observability API][3] with `dd-tracer` for APM:
 
 1. Use the appropriate method to obtain the span ID from the tracer (for example, using `span.Context().SpanID()` for the Go tracer).
-1. Include the captured span IDs in all of the Agent Observability API requests. This links APM and Agent Observability spans in Datadog.
+1. Include the captured span IDs in all of the Agent Observability API requests. This links APM and {{< prodname >}}Agent Observability{{< /prodname >}} spans in Datadog.
 
 ## Navigate between spans
 
@@ -48,13 +48,13 @@ By using this integration, you can correlate data across your application stack 
 
 ### From Agent Observability to APM
 
-To understand the broader context of your LLM operations within your application ecosystem, select an Agent Observability span in the [Agent Observability Explorer][4] and click {{< ui >}}APM span{{< /ui >}} to navigate to the relevant APM span.
+To understand the broader context of your LLM operations within your application ecosystem, select an {{< prodname >}}Agent Observability{{< /prodname >}} span in the [Agent Observability Explorer][4] and click {{< ui >}}APM span{{< /ui >}} to navigate to the relevant APM span.
 
 {{< img src="llm_observability/guides/apm/llm_span.png" alt="An Agent Observability span with a related APM span that you can navigate to from the Traces page in Agent Observability" style="width:100%;" >}}
 
 ### From APM to Agent Observability 
 
-To access LLM-specific insights, select an APM span in the [Trace Explorer][5] and click {{< ui >}}View Span{{< /ui >}} in the Agent Observability section on the {{< ui >}}Info{{< /ui >}} tab to navigate to the corresponding Agent Observability span.
+To access LLM-specific insights, select an APM span in the [Trace Explorer][5] and click {{< ui >}}View Span{{< /ui >}} in the {{< prodname >}}Agent Observability{{< /prodname >}} section on the {{< ui >}}Info{{< /ui >}} tab to navigate to the corresponding {{< prodname >}}Agent Observability{{< /prodname >}} span.
 
 {{< img src="llm_observability/guides/apm/apm_span.png" alt="An APM span with a related Agent Observability span that you can navigate to from the Traces page in APM" style="width:100%;" >}}
 

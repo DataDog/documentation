@@ -25,7 +25,7 @@ The flag still needs to be enabled in the environment for the rule to take effec
 
 To schedule a start time for a targeting rule:
 
-1. Navigate to **Feature Flags** and select your flag.
+1. Navigate to **{{< prodname >}}Feature Flags{{< /prodname >}}** and select your flag.
 2. Select the environment whose rule you want to modify.
 3. Click **Add Targeting Rule** (or click the targeting rule you want to modify).
 4. Select **Schedule a start time**.

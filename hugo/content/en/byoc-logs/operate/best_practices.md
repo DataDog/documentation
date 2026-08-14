@@ -19,10 +19,10 @@ This page outlines operational best practices for running BYOC (Bring Your Own C
 
 ## Enable monitoring from the start
 
-Set up BYOC Logs monitoring before sending production traffic. Without monitoring, diagnosing ingestion or search issues is difficult.
+Set up {{< prodname >}}BYOC Logs{{< /prodname >}} monitoring before sending production traffic. Without monitoring, diagnosing ingestion or search issues is difficult.
 
-1. Deploy the Datadog Agent (or standalone DogStatsD) in the same cluster as BYOC Logs.
-2. Verify that BYOC Logs metrics appear in the [out-of-the-box dashboard][1].
+1. Deploy the Datadog Agent (or standalone DogStatsD) in the same cluster as {{< prodname >}}BYOC Logs{{< /prodname >}}.
+2. Verify that {{< prodname >}}BYOC Logs{{< /prodname >}} metrics appear in the [out-of-the-box dashboard][1].
 3. Confirm that key metrics are reporting: `indexed_events.count`, `search_requests.count`, `disk.available_space.gauge`.
 
 See [Monitor BYOC Logs][2] for detailed setup instructions.
@@ -65,7 +65,7 @@ indexer:
 
 ## Enable automated backups on your metastore database
 
-BYOC Logs stores metadata in a PostgreSQL database (Amazon RDS, Cloud SQL, or Azure Database for PostgreSQL, depending on your cloud provider). Enable automated backups on this database for disaster recovery.
+{{< prodname >}}BYOC Logs{{< /prodname >}} stores metadata in a PostgreSQL database (Amazon RDS, Cloud SQL, or Azure Database for PostgreSQL, depending on your cloud provider). Enable automated backups on this database for disaster recovery.
 
 For example, on AWS, set a nonzero `--backup-retention-period` when you create the RDS instance. See [Create an RDS database][5] for an example command.
 
@@ -89,7 +89,7 @@ If you observe search timeouts or slow dashboard loads, adjust capacity:
 
 ## Use Lambda search offloading on AWS
 
-On AWS, BYOC Logs can offload leaf search operations to AWS Lambda. Instead of provisioning searcher pods for peak query load, Lambda handles overflow automatically.
+On AWS, {{< prodname >}}BYOC Logs{{< /prodname >}} can offload leaf search operations to AWS Lambda. Instead of provisioning searcher pods for peak query load, Lambda handles overflow automatically.
 
 This is useful when:
 - Your query load has significant peaks (for example, during incidents or business hours)
@@ -100,7 +100,7 @@ With Lambda offloading enabled, you can run fewer searcher pods sized for your b
 
 ## Keep your Helm chart version up to date
 
-BYOC Logs improvements and bug fixes are delivered through Helm chart updates.
+{{< prodname >}}BYOC Logs{{< /prodname >}} improvements and bug fixes are delivered through Helm chart updates.
 
 Refresh the Datadog repository and upgrade to the latest chart version with your existing values file:
 

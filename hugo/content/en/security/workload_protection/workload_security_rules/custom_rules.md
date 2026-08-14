@@ -4,7 +4,7 @@ aliases:
   - /security/threats/workload_security_rules/custom_rules
 ---
 
-This topic explains how to create custom Datadog Agent policies and detection rules for [Workload Protection][8].
+This topic explains how to create custom Datadog Agent policies and detection rules for [{{< prodname >}}Workload Protection{{< /prodname >}}][8].
 
 In addition to the out of the box (OOTB) [default Agent and detection rules][7], you can write custom Agent and detection rules. Custom rules help to detect events Datadog is not detecting with its OOTB rules.
 
@@ -211,7 +211,7 @@ After you upload the new default policy file to the Agent, navigate to the [{{< 
    1. In {{< ui >}}Detection rule types{{< /ui >}}, select {{< ui >}}Workload Security{{< /ui >}}. 
    2. Select a detection method such as {{< ui >}}Threshold{{< /ui >}} or {{< ui >}}New Value{{< /ui >}}.
 3. **Define search queries:**
-   1. Configure a new Workload Protection rule. A rule can have multiple rule cases combined with Boolean logic, for example `(||, &&)`. You can also set the counter, group by, and roll-up window.
+   1. Configure a new {{< prodname >}}Workload Protection{{< /prodname >}} rule. A rule can have multiple rule cases combined with Boolean logic, for example `(||, &&)`. You can also set the counter, group by, and roll-up window.
 
       {{< img src="security/cws/workload_security_rules/define_runtime_expression2.png" alt="Adding a rule to the search queries field" >}}  
     

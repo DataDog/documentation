@@ -26,7 +26,7 @@ algolia:
 
 [Test Impact Analysis][1] allows you to skip irrelevant tests unaffected by a code change.
 
-With [Test Optimization][2], development teams can configure Test Impact Analysis for their test services, set branches to exclude (such as the default branch), and define files to be tracked (which triggers full runs of all tests when any tracked file changes).
+With [{{< prodname >}}Test Optimization{{< /prodname >}}][2], development teams can configure Test Impact Analysis for their test services, set branches to exclude (such as the default branch), and define files to be tracked (which triggers full runs of all tests when any tracked file changes).
 
 {{< img src="/continuous_integration/itr_test_selection_diagram.png" alt="A Venn diagram of the components for Test Impact Analysis: tracked files, excluded branches, and skipped tests" caption="A Venn diagram displaying how Test Impact Analysis defines an excluded test by using tracked files, excluded branches, and passed tests." style="width:65%" >}}
 
@@ -89,7 +89,7 @@ You can create [dashboards][6] to visualize your testing metrics, or use an [out
 
 ## Examine results in the Test Optimization Explorer
 
-The [Test Optimization Explorer][8] allows you to create visualizations and filter test spans using the data collected from Test Optimization and Test Impact Analysis. When Test Impact Analysis is active, it displays the amount of time saved for each test session or commit. The duration bars turn purple to indicate active test skipping.
+The [Test Optimization Explorer][8] allows you to create visualizations and filter test spans using the data collected from {{< prodname >}}Test Optimization{{< /prodname >}} and Test Impact Analysis. When Test Impact Analysis is active, it displays the amount of time saved for each test session or commit. The duration bars turn purple to indicate active test skipping.
 
 {{< tabs >}}
 {{% tab "Session" %}}

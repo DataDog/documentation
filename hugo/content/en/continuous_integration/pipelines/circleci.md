@@ -107,7 +107,7 @@ To display and filter the teams associated with your pipelines, add `team:<your-
 
 The Datadog CircleCI integration collects logs from your finished CircleCI jobs and forwards them to Datadog. To install and configure this integration, see the [CircleCI integration documentation][11].
 
-Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for CircleCI jobs can be identified by the `datadog.product:cipipeline` and `source:circleci` tags.
+Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [{{< prodname >}}Log Management{{< /prodname >}}][16]. Logs for CircleCI jobs can be identified by the `datadog.product:cipipeline` and `source:circleci` tags.
 
 ## Visualize pipeline data in Datadog
 

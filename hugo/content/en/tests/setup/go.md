@@ -107,7 +107,7 @@ In addition to this, Orchestrion only supports projects using [Go modules][go-mo
 Set the following environment variables to configure the library:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the Test Optimization product.
+: Enables the {{< prodname >}}Test Optimization{{< /prodname >}} product.
 
 `DD_ENV` (Required)
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).

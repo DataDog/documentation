@@ -39,7 +39,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 - For the best experience, Datadog strongly recommends using the AWS-managed [`SecurityAudit`][5] policy, or the more permissive [`ReadOnlyAccess`][6] policy.
 
 - Viewing content on the [Security overlay][10] requires additional products to be enabled:
-  - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
+  - To view security misconfigurations and identity risks, [{{< prodname >}}Cloud Security{{< /prodname >}}][3] must be enabled.
   - To view sensitive data, [Sensitive Data Scanner][12] must be enabled. For a user to turn the layer on, they must have the [`data_scanner_read`][13] permission.
 
 **Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you don't grant permission to list S3 buckets, the diagram excludes those buckets. If permissions block certain resources, an alert displays in the UI.
@@ -71,7 +71,7 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
   4. On the {{< ui >}}Resource Collection{{< /ui >}} tab, ensure the {{< ui >}}Enable Resource Collection{{< /ui >}} toggle is enabled.
 
 - Viewing content on the [Security overlay][10] requires additional products to be enabled:
-  - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
+  - To view security misconfigurations and identity risks, [{{< prodname >}}Cloud Security{{< /prodname >}}][3] must be enabled.
 
 [3]: /security/cloud_security_management
 [10]: /datadog_cloudcraft/overlays#security
@@ -89,9 +89,9 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
   3. Enable the {{< ui >}}Enable Resource Collection{{< /ui >}} toggle.
 
 - Viewing content on the [Security overlay][10] requires additional products to be enabled:
-  - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
+  - To view security misconfigurations and identity risks, [{{< prodname >}}Cloud Security{{< /prodname >}}][3] must be enabled.
 
-**Note**: The [Cloud Cost Management][11] Cost view and sensitive data in the Security overlay are not available for GCP accounts. The CCM Recommendations view is supported.
+**Note**: The [{{< prodname >}}Cloud Cost Management{{< /prodname >}}][11] Cost view and sensitive data in the Security overlay are not available for GCP accounts. The CCM Recommendations view is supported.
 
 [3]: /security/cloud_security_management
 [10]: /datadog_cloudcraft/overlays#security
@@ -107,7 +107,7 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 - Add your OCI tenancy to the [Oracle Cloud Infrastructure integration][20] and enable [resource collection][21].
 
 - Viewing content on the [Security overlay][10] requires additional products to be enabled:
-  - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
+  - To view security misconfigurations and identity risks, [{{< prodname >}}Cloud Security{{< /prodname >}}][3] must be enabled.
 
 [3]: /security/cloud_security_management
 [10]: /datadog_cloudcraft/overlays#security
@@ -209,7 +209,7 @@ Learn how to navigate between [built-in overlays][4] to view your architecture f
 - [Infrastructure][8]: High-level view of services and resources.
 - [Observability][9]: Indicates which hosts have the Agent installed and what observability features are enabled.
 - [Security][10]: IAM, firewall, and security group visibility.
-- [Cloud Cost Management][11]: Track and optimize resource spend.
+- [{{< prodname >}}Cloud Cost Management{{< /prodname >}}][11]: Track and optimize resource spend.
 - [APM][15]: Visualize distributed traces between cloud resources (AWS only, Preview).
 
 ## Further reading

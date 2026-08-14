@@ -3,7 +3,7 @@ title: Troubleshooting DBM Setup for Postgres
 description: Troubleshoot Database Monitoring setup for Postgres
 ---
 
-This page details common issues with setting up and using Database Monitoring with Postgres, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
+This page details common issues with setting up and using {{< prodname >}}Database Monitoring{{< /prodname >}} with Postgres, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
 ## Diagnosing common problems
 
@@ -11,7 +11,7 @@ This page details common issues with setting up and using Database Monitoring wi
 
 If you do not see any data after following the [setup instructions][1] and configuring the Agent, there is most likely an issue with the Agent configuration or API key. Ensure you are receiving data from the Agent by following the [troubleshooting guide][2].
 
-If you are receiving other data such as system metrics, but not Database Monitoring data (such as query metrics and query samples), there is probably an issue with the Agent or database configuration. Ensure your Agent configuration looks like the example in the [setup instructions][1], double-checking the location of the configuration files.
+If you are receiving other data such as system metrics, but not {{< prodname >}}Database Monitoring{{< /prodname >}} data (such as query metrics and query samples), there is probably an issue with the Agent or database configuration. Ensure your Agent configuration looks like the example in the [setup instructions][1], double-checking the location of the configuration files.
 
 To debug, start by running the [Agent status command][3] to collect debugging information about data collected and sent to Datadog.
 
@@ -113,7 +113,7 @@ ALTER ROLE datadog SET search_path = "$user",public,<schema_with_pg_stat_stateme
 
 ### Certain queries are missing
 
-If you have data from some queries, but do not see a particular query or set of queries in Database Monitoring that you're expecting to see, follow this guide.
+If you have data from some queries, but do not see a particular query or set of queries in {{< prodname >}}Database Monitoring{{< /prodname >}} that you're expecting to see, follow this guide.
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
 | For Postgres 9.6, if you only see queries executed by the datadog user, then the instance configuration is likely missing some settings. | For monitoring instances on Postgres 9.6, the Datadog Agent instance config must use the settings `pg_stat_statements_view: datadog.pg_stat_statements()` and `pg_stat_activity_view: datadog.pg_stat_activity()` based on the functions created in the initial setup guide. These functions must be created in all databases. |
@@ -244,7 +244,7 @@ For more information, see the appropriate version of the [Postgres `contrib` doc
 
 ### Queries from Agent are slow and/or have a high impact on the database
 
-The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. Below are possible reasons for Agent queries to require more resources.
+The default Agent configuration for {{< prodname >}}Database Monitoring{{< /prodname >}} is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. Below are possible reasons for Agent queries to require more resources.
 
 #### High value for `pg_stat_statements.max` {#high-pg-stat-statements-max-configuration}
 The recommended value for `pg_stat_statements.max` is `10000`. Setting this configuration to a higher value
@@ -252,7 +252,7 @@ may cause the collection query to take longer to run, which can lead to query ti
 
 ### Databases are missing or merged in the list
 
-Datadog tags database metrics with the `db` tag to identify which database each metric belongs to. Applying a custom `db` tag overrides this per-database value, so all metrics share a single `db` value. Your databases then collapse into one entry, and individual databases may not appear in the Databases list in Database Monitoring.
+Datadog tags database metrics with the `db` tag to identify which database each metric belongs to. Applying a custom `db` tag overrides this per-database value, so all metrics share a single `db` value. Your databases then collapse into one entry, and individual databases may not appear in the Databases list in {{< prodname >}}Database Monitoring{{< /prodname >}}.
 
 To restore per-database `db` values, remove any custom `db` tags so that Datadog can populate the tag per database.
 

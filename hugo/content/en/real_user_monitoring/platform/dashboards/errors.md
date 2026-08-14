@@ -15,7 +15,7 @@ further_reading:
 The RUM web app errors dashboard provides insights about your applications' errors. It helps you focus on the views or versions that are generating the most errors. It shows:
 
 - {{< ui >}}Code errors{{< /ui >}}:
-  Get an overview of which parts of your application are generating the most errors. If you need to dig deeper, see [Error Tracking][1] to investigate critical frontend errors and learn when new errors appear.
+  Get an overview of which parts of your application are generating the most errors. If you need to dig deeper, see [{{< prodname >}}Error Tracking{{< /prodname >}}][1] to investigate critical frontend errors and learn when new errors appear.
 - {{< ui >}}Network errors{{< /ui >}}:
   Monitor which resources are generating the most errors.
 
@@ -29,7 +29,7 @@ For more information about the data displayed, see [RUM Browser Data Collected][
 The RUM mobile app crashes and errors dashboard provides insights about your mobile applications' errors. It helps you focus on the views or versions that are generating the most errors. It shows:
 
 - {{< ui >}}Code errors{{< /ui >}}:
-  Get an overview of which parts of your application are generating the most errors. If you need to dig deeper, see [Error Tracking][1] to investigate critical frontend errors and learn when new errors appear.
+  Get an overview of which parts of your application are generating the most errors. If you need to dig deeper, see [{{< prodname >}}Error Tracking{{< /prodname >}}][1] to investigate critical frontend errors and learn when new errors appear.
 - {{< ui >}}Network errors{{< /ui >}}:
   Monitor which resources are generating the most errors.
 

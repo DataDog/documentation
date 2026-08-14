@@ -12,7 +12,7 @@ site_support_id: bits_remediation
 ## Suggested code fixes from Bits Code
 After Bits Investigation helps you identify a root cause, it can also help you take action as quickly as possible.
 
-Bits Investigation integrates with [Bits Code][2] to automatically generate code fixes. Bits Code connects to GitHub to create production-ready pull requests, iterates on fixes using CI logs and developer feedback, and uses multiple Datadog products to generate contextual fixes.
+Bits Investigation integrates with [{{< prodname >}}Bits Code{{< /prodname >}}][2] to automatically generate code fixes. {{< prodname >}}Bits Code{{< /prodname >}} connects to GitHub to create production-ready pull requests, iterates on fixes using CI logs and developer feedback, and uses multiple Datadog products to generate contextual fixes.
 1. [Set up Bits Code][1]. Then, after Bits Investigation has determined a code-related root cause, you will automatically receive suggested code fixes.
 1. Ask Bits Code to make any additional updates as needed, create a pull request for review in GitHub, and merge when ready to fix the underlying problem.
 

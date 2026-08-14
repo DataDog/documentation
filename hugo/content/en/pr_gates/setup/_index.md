@@ -15,11 +15,11 @@ To use Datadog PR Gates, you can define one or more rules on the [{{< ui >}}PR G
 
 {{< img src="pr_gates/rules_list_3.png" alt="PR Gates page in Datadog" style="width:100%" >}}
 
-PR Gates ensure that only the code changes that meet your security and quality standards is merged.
+{{< prodname >}}PR Gates{{< /prodname >}} ensure that only the code changes that meet your security and quality standards is merged.
 
 ## Create a rule
 
-To create a PR Gates rule in Datadog:
+To create a {{< prodname >}}PR Gates{{< /prodname >}} rule in Datadog:
 
 1. Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}PR Gates{{< /ui >}} > {{< ui >}}PR Gate Rules{{< /ui >}}][1] and click {{< ui >}}New Rule{{< /ui >}}.
 
@@ -50,17 +50,17 @@ To create a PR Gates rule in Datadog:
 
 1. Click {{< ui >}}Create Rule{{< /ui >}}.
 
-1. It is recommended that you test your PR Gate rule by creating a new branch and PR that purposely introduces code changes that would violate the rule's condition. Please note that PR Gates will not:
+1. It is recommended that you test your PR Gate rule by creating a new branch and PR that purposely introduces code changes that would violate the rule's condition. Please note that {{< prodname >}}PR Gates{{< /prodname >}} will not:
    - Retroactively block existing PRs unless new commits are pushed to them after the PR Gate rule has been created
    - Block new PRs that don't introduce violations as part of their modified lines
 
 ### Manage PR checks
 
-PR Gates automatically create PR checks in [GitHub][4] or [Azure DevOps][5] pull requests for each rule type evaluated. The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog.
+{{< prodname >}}PR Gates{{< /prodname >}} automatically create PR checks in [GitHub][4] or [Azure DevOps][5] pull requests for each rule type evaluated. The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog.
 
-<div class="alert alert-info"><strong>Note</strong>: Re-running a check in the pull request UI does not re-run the corresponding PR Gates rule.</div>
+<div class="alert alert-info"><strong>Note</strong>: Re-running a check in the pull request UI does not re-run the corresponding {{< prodname >}}PR Gates{{< /prodname >}} rule.</div>
 
-To ensure PR Gates are able to create PR checks, you must install the integration for your SCM provider. If you do not have the integration installed, follow the [GitHub][6] or [Azure DevOps Source Code][7] integration documentation to set one up.
+To ensure {{< prodname >}}PR Gates{{< /prodname >}} are able to create PR checks, you must install the integration for your SCM provider. If you do not have the integration installed, follow the [GitHub][6] or [Azure DevOps Source Code][7] integration documentation to set one up.
 
 To make these checks blocking, they must be set as required in the branch policies of your source code management provider:
 
@@ -69,7 +69,7 @@ To make these checks blocking, they must be set as required in the branch polici
 
 ## Manage rules
 
-You can edit or delete a PR Gates rule by hovering over it on the [{{< ui >}}PR Gates Rules{{< /ui >}}][1] list and clicking the {{< ui >}}Edit{{< /ui >}} or {{< ui >}}Delete{{< /ui >}} icon.
+You can edit or delete a {{< prodname >}}PR Gates{{< /prodname >}} rule by hovering over it on the [{{< ui >}}PR Gates Rules{{< /ui >}}][1] list and clicking the {{< ui >}}Edit{{< /ui >}} or {{< ui >}}Delete{{< /ui >}} icon.
 
 {{< img src="pr_gates/setup/delete_3.png" alt="Edit, clone, or delete a PR Gates rule" style="width:100%;">}}
 

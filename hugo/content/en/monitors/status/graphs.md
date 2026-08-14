@@ -72,7 +72,7 @@ The Change Tracking graph allows you to view and analyze changes related to your
 
 {{< img src="/monitors/status/change_tracking_monitor_status_page.png" alt="Example of a deployment shown in the monitor status page" style="width:100%;" >}}
 
-Change Tracking supports multiple changes like deployments, feature flags or database modifications. To see the full list and setup requirements, see the [Change Tracking][2] documentation.
+{{< prodname >}}Change Tracking{{< /prodname >}} supports multiple changes like deployments, feature flags or database modifications. To see the full list and setup requirements, see the [{{< prodname >}}Change Tracking{{< /prodname >}}][2] documentation.
 
 ## Source data graph
 
@@ -89,11 +89,11 @@ The following monitor types are not supported by the provisional status page:
 - Anomaly
 - Cloud Cost
 - Composite
-- Database Monitoring
+- {{< prodname >}}Database Monitoring{{< /prodname >}}
 - Forecast
 - Live Process
 - Outlier
-- Synthetics
+- {{< prodname >}}Synthetics{{< /prodname >}}
 - SLO Alerts
 - Usage
 

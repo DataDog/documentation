@@ -21,7 +21,7 @@ disable_sidebar: true
 
 ### Setup instructions by hosting type
 
-To learn how to set up Database Monitoring on a Postgres database, select your hosting type:
+To learn how to set up {{< prodname >}}Database Monitoring{{< /prodname >}} on a Postgres database, select your hosting type:
 
 {{< card-grid card_width="200px" >}}
   {{< image-card href="/database_monitoring/setup_postgres/selfhosted" src="integrations_logos/postgres.png" alt="Selfhosted" title="Self-hosted" >}}

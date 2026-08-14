@@ -387,7 +387,7 @@ To enable this feature:
 
 ## Log collection
 
-Forwarding logs from your Google Cloud environment enables near real-time monitoring of the resources and activities taking place in your organization or folder. You can set up [log monitors][37] to be notified of issues, use [Cloud SIEM][38] to detect threats, or leverage [Watchdog][39] to identify unknown issues or anomalous behavior.
+Forwarding logs from your Google Cloud environment enables near real-time monitoring of the resources and activities taking place in your organization or folder. You can set up [log monitors][37] to be notified of issues, use [{{< prodname >}}Cloud SIEM{{< /prodname >}}][38] to detect threats, or leverage [Watchdog][39] to identify unknown issues or anomalous behavior.
 
 Use the [Datadog Dataflow template][14] to batch and compresses your log events before forwarding them to Datadog through [Google Cloud Dataflow][15]. This is the most network-efficient way to forward your logs. To specify which logs are forwarded, configure the [Google Cloud Logging sink][40] with any inclusion or exclusion queries using Google Cloud's [Logging query language][56]. See the [Google Cloud Log Forwarding Setup page][67] for log forwarding setup options (including Terraform) and instructions.
 
@@ -410,7 +410,7 @@ For the full list of benefits of installing the Agent on your cloud instances, s
 
 ## Resource changes collection
 
-Resource changes collection allows you to monitor infrastructure changes in your Google Cloud environment. When Google's Cloud Asset Inventory detects changes in your cloud resources, an event is forwarded to Datadog's [Event Management][62] through a Cloud Pub/Sub topic and subscription. Use these events to be proactively notified of risky changes in your infrastructure, and to assist with troubleshooting.
+Resource changes collection allows you to monitor infrastructure changes in your Google Cloud environment. When Google's Cloud Asset Inventory detects changes in your cloud resources, an event is forwarded to Datadog's [{{< prodname >}}Event Management{{< /prodname >}}][62] through a Cloud Pub/Sub topic and subscription. Use these events to be proactively notified of risky changes in your infrastructure, and to assist with troubleshooting.
 
 For detailed setup instructions, see the [resource changes collection section][18] of the Google Cloud integration documentation.
 
@@ -435,10 +435,10 @@ Datadog's [Google Cloud Cost Management][45] provides insights for engineering a
 
 ### Cloud SIEM
 
-Cloud SIEM provides real-time analysis of operational and security logs, while using out-of-the-box integrations and rules to detect and investigate threats.
+{{< prodname >}}Cloud SIEM{{< /prodname >}} provides real-time analysis of operational and security logs, while using out-of-the-box integrations and rules to detect and investigate threats.
 To use this feature, see [Getting Started with Cloud SIEM][46].
 
-To view security findings from [Google Cloud Security Command Center][47] in Cloud SIEM, toggle the {{< ui >}}Enable collection of security findings{{< /ui >}} option under the {{< ui >}}Security Findings{{< /ui >}} tab and follow the setup instructions on the [Google Cloud Security Command Center guide][48].
+To view security findings from [Google Cloud Security Command Center][47] in {{< prodname >}}Cloud SIEM{{< /prodname >}}, toggle the {{< ui >}}Enable collection of security findings{{< /ui >}} option under the {{< ui >}}Security Findings{{< /ui >}} tab and follow the setup instructions on the [Google Cloud Security Command Center guide][48].
 
 {{< img src="integrations/google_cloud_platform/security_findings.png" alt="The security findings tab in the Google Cloud integration tile" style="width:90%;" >}}
 
@@ -447,7 +447,7 @@ To view security findings from [Google Cloud Security Command Center][47] in Clo
 Datadog Cloud Security delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure.
 Check out the [Setting up Cloud Security guide][49] to get started.
 
-After setting up Cloud Security, toggle the {{< ui >}}Enable Resource Collection{{< /ui >}} option under the {{< ui >}}Resource Collection{{< /ui >}} tab to start collecting configuration data for the [Resource Catalog][50] and Cloud Security. Then, follow these instructions to enable [Misconfigurations and Identity Risks (CIEM)][51] on Google Cloud.
+After setting up {{< prodname >}}Cloud Security{{< /prodname >}}, toggle the {{< ui >}}Enable Resource Collection{{< /ui >}} option under the {{< ui >}}Resource Collection{{< /ui >}} tab to start collecting configuration data for the [{{< prodname >}}Resource Catalog{{< /prodname >}}][50] and {{< prodname >}}Cloud Security{{< /prodname >}}. Then, follow these instructions to enable [Misconfigurations and Identity Risks (CIEM)][51] on Google Cloud.
 
 {{< img src="integrations/google_cloud_platform/resource_collection.png" alt="The resource collection tab in the Google Cloud integration tile" style="width:100%;" >}}
 

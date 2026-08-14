@@ -23,7 +23,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -53,7 +53,7 @@ To enable AAP on your application, begin by adding the following key-value pairs
 - `DD_SITE` is the Datadog site [parameter][2]. Your site is {{< region-param key="dd_site" code="true" >}}. This value defaults to `datadoghq.com`.
 - `DD_SERVICE` is the service name used for this program. Defaults to the name field value in `package.json`.
 - `DD_START_APP` is the command used to start your application. For example, `node ./bin/www` (unnecessary for applications running in Tomcat).
-- `DD_APPSEC_ENABLED` value should be 1 in order to enable App and API Protection
+- `DD_APPSEC_ENABLED` value should be 1 in order to enable {{< prodname >}}App and API Protection{{< /prodname >}}
 
 ### Identifying your startup command
 
@@ -102,7 +102,7 @@ Download the [`datadog_wrapper`][8] file from the releases and upload it to your
 
 ## Testing threat detection
 
-To see App and API Protection threat detection in action, send known attack patterns to your application. For example, send a request with the user agent header set to `dd-test-scanner-log` to trigger a [security scanner attack][5] attempt:
+To see {{< prodname >}}App and API Protection{{< /prodname >}} threat detection in action, send known attack patterns to your application. For example, send a request with the user agent header set to `dd-test-scanner-log` to trigger a [security scanner attack][5] attempt:
    ```sh
    curl -A 'dd-test-scanner-log' https://your-function-url/existing-route
    ```

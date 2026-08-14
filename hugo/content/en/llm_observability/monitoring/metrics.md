@@ -16,19 +16,19 @@ further_reading:
       text: "Investigate with LLM Observability"
 ---
 
-After you instrument your application with Agent Observability, you can access Agent Observability metrics for use in dashboards and monitors. These metrics capture span counts, error counts, token usage, and latency measures for your LLM applications. These metrics are calculated based on 100% of the application's traffic.
+After you instrument your application with {{< prodname >}}Agent Observability{{< /prodname >}}, you can access {{< prodname >}}Agent Observability{{< /prodname >}} metrics for use in dashboards and monitors. These metrics capture span counts, error counts, token usage, and latency measures for your LLM applications. These metrics are calculated based on 100% of the application's traffic.
 
 <div class="alert alert-info">
 The <code>ml_obs.*</code> entries on this page are <a href="/metrics/">Datadog Metrics</a>: numerical values that describe an aspect of your LLM application over time, derived from your LLM spans (counts, distributions of cost, tokens, latency, errors). They are 100%-sampled, follow standard <a href="/developers/guide/data-collection-resolution-retention/">Datadog metric retention</a> (15 months at full granularity), and are queryable from dashboards, monitors, and notebooks like any other Datadog metric.
 <br><br>
 They are distinct from two other things in Agent Observability:
 <ul>
-<li><strong>Per-span operational data</strong> (cost, tokens, latency, errors on each individual trace or span): the raw values these metrics roll up from. Stored with spans, follow <a href="/llm_observability/setup/#data-retention">Agent Observability trace retention</a>, and are queried from the Traces explorer rather than as metrics.</li>
-<li><strong><a href="/llm_observability/evaluations/">Evaluation scores</a></strong> (also called "evals"): quality and safety judgments (for example, hallucination, faithfulness, custom LLM-as-a-judge) attached to individual spans or experiment rows. These are not derived from operational telemetry, and follow Agent Observability trace and experiment retention rather than Datadog metric retention.</li>
+<li><strong>Per-span operational data</strong> (cost, tokens, latency, errors on each individual trace or span): the raw values these metrics roll up from. Stored with spans, follow <a href="/llm_observability/setup/#data-retention">{{< prodname >}}Agent Observability{{< /prodname >}} trace retention</a>, and are queried from the Traces explorer rather than as metrics.</li>
+<li><strong><a href="/llm_observability/evaluations/">Evaluation scores</a></strong> (also called "evals"): quality and safety judgments (for example, hallucination, faithfulness, custom LLM-as-a-judge) attached to individual spans or experiment rows. These are not derived from operational telemetry, and follow {{< prodname >}}Agent Observability{{< /prodname >}} trace and experiment retention rather than Datadog metric retention.</li>
 </ul>
 </div>
 
-<div class="alert alert-info">Other tags set on spans are not available as tags on Agent Observability metrics.</div>
+<div class="alert alert-info">Other tags set on spans are not available as tags on {{< prodname >}}Agent Observability{{< /prodname >}} metrics.</div>
 
 ### Span metrics
 
@@ -63,7 +63,7 @@ They are distinct from two other things in Agent Observability:
 ### LLM cost metrics
 
 <div class="alert alert-info">
-The unit for estimated cost metrics for Agent Observability is <strong>nanodollars</strong>.
+The unit for estimated cost metrics for {{< prodname >}}Agent Observability{{< /prodname >}} is <strong>nanodollars</strong>.
 </div>
 
 | Metric Name | Description | Metric Type | Tags |
@@ -105,7 +105,7 @@ The following metrics are deprecated, and are maintained only for backward compa
 ## Next steps
 
 {{< whatsnext desc="Make use of your Agent Observability metrics:" >}}
-    {{< nextlink href="dashboards/" >}}Create a dashboard to track and correlate Agent Observability metrics{{< /nextlink >}}
+    {{< nextlink href="dashboards/" >}}Create a dashboard to track and correlate {{< prodname >}}Agent Observability{{< /prodname >}} metrics{{< /nextlink >}}
     {{< nextlink href="monitors/create/" >}}Create a monitor for alerts and notifications{{< /nextlink >}}
 {{< /whatsnext >}}
 

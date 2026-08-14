@@ -50,7 +50,7 @@ Consult on this page:
 * [Out-of-the-box graphs](#out-of-the-box-graphs)
 * [Resources associated to this service][2]
 * [Additional sections](#additional-sections)
-    *  [Deployments](#deployments), [Error Tracking](#error-tracking), [Traces](#traces), [Security](#security), and more
+    *  [Deployments](#deployments), [{{< prodname >}}Error Tracking{{< /prodname >}}](#error-tracking), [Traces](#traces), [Security](#security), and more
 
 ## Service health
 
@@ -77,7 +77,7 @@ Service health displays the status of your service as *Critical* or *Warning* if
 
 ## Service monitor
 
-The Service monitor panel surfaces active Monitors and Synthetics tests linked to your service.
+The Service monitor panel surfaces active Monitors and {{< prodname >}}Synthetics{{< /prodname >}} tests linked to your service.
 Datadog also proposes a list of monitors depending on your service type:
 
 {{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors" style="width:90%;">}}
@@ -88,7 +88,7 @@ Enable them directly or create your own [APM monitors][3].
 
 ## Watchdog Insights
 
-The [Watchdog Insights][7] carousel surfaces anomalies and outliers detected on specific tags, enabling you to investigate the root cause of an issue. Insights are discovered from APM, Continuous Profiler, Log Management, and Infrastructure data that include the service tag. These insights are the same insights that appear in each of the product pages. For example, the same Log outliers on the service page can be found in the [Log Explorer][19].
+The [Watchdog Insights][7] carousel surfaces anomalies and outliers detected on specific tags, enabling you to investigate the root cause of an issue. Insights are discovered from APM, Continuous Profiler, {{< prodname >}}Log Management{{< /prodname >}}, and Infrastructure data that include the service tag. These insights are the same insights that appear in each of the product pages. For example, the same Log outliers on the service page can be found in the [Log Explorer][19].
 
 {{< img src="tracing/visualization/service/cross_product_insight_1.jpg" alt="Watchdog Insights" style="width:100%;">}}
 
@@ -98,7 +98,7 @@ Click on an insight to see more details, such as the time frame of the insight, 
 
 ## Summary cards
 
-The service page features summary cards with highlights on your service health. Easily spot potential faulty deployments, click into the card to view details or traces of the latest deployment, or view all deployments on this service. See new issues flagged on your service through our integration with [Error Tracking][4], where errors are automatically aggregated into issues.
+The service page features summary cards with highlights on your service health. Easily spot potential faulty deployments, click into the card to view details or traces of the latest deployment, or view all deployments on this service. See new issues flagged on your service through our integration with [{{< prodname >}}Error Tracking{{< /prodname >}}][4], where errors are automatically aggregated into issues.
 
 {{< img src="tracing/visualization/service/summary_cards.png" alt="Summary cards" style="width:100%;">}}
 
@@ -199,14 +199,14 @@ You can add columns to or remove columns from this overview table and your selec
 Read more about Deployments [on the service page][12].
 
 ### Error Tracking
-View issues on your service, which are similar errors aggregated together to turn a noisy stream of errors into manageable issues and help you assess the impact of your service's errors. Read more about issues in [Error Tracking][4].
+View issues on your service, which are similar errors aggregated together to turn a noisy stream of errors into manageable issues and help you assess the impact of your service's errors. Read more about issues in [{{< prodname >}}Error Tracking{{< /prodname >}}][4].
 
 This tab has overview graphs that show which resources have the most issues and a list of the most common issues occurring in your service. Click on an issue in the list to see details in a side panel, including its stack trace, related code versions, and total error occurrences since inception.
 
 {{< img src="tracing/visualization/service/error_tracking_side_panel_1.jpg" alt="Error Tracking tab" style="width:90%;">}}
 
 ### Security
-Understand the security posture of the service, including known vulnerabilities exposed in the service's libraries and security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you to review instead of assessing each individual attack attempt. Read more about [App and API Protection][18].
+Understand the security posture of the service, including known vulnerabilities exposed in the service's libraries and security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you to review instead of assessing each individual attack attempt. Read more about [{{< prodname >}}App and API Protection{{< /prodname >}}][18].
 
 The top section of the security tab has overview graphs that show the number and severity of vulnerabilities, a timeline of attacks, the types of attacks, and attacker information (client IP or authenticated user).
 
@@ -221,7 +221,7 @@ View host details, queries, recommendations, and downstream database dependencie
 The Queries tab includes a visualization of sampled span durations and a full list of queries from the selected time interval. Select a query from the table to open the query panel and view diagnostics, error details, and traces.
 
 #### Databases
-The Databases tab includes active connection and average query duration visualizations to help identify outliers, and a full list of database hosts for the selected service. Select a database host from the list to view it in Database Monitoring.
+The Databases tab includes active connection and average query duration visualizations to help identify outliers, and a full list of database hosts for the selected service. Select a database host from the list to view it in {{< prodname >}}Database Monitoring{{< /prodname >}}.
 
 [Learn more about connecting DBM and APM][21].
 
@@ -321,7 +321,7 @@ The summary cards highlight the aggregate frontend impact for the current select
 
 #### Product Analytics enrichment
 
-If you use [Product Analytics][25], the Frontend activity tab shows enriched details about the impacted users and accounts, giving you more context on who is affected when the service degrades and helping you prioritize work by business impact.
+If you use [{{< prodname >}}Product Analytics{{< /prodname >}}][25], the Frontend activity tab shows enriched details about the impacted users and accounts, giving you more context on who is affected when the service degrades and helping you prioritize work by business impact.
 
 ## Further Reading
 

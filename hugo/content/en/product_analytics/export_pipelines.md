@@ -20,7 +20,7 @@ Export Pipelines is in Preview.
 
 ## Overview
 
-Export Pipelines stream your ingested Real User Monitoring (RUM) and Product Analytics events to a cloud storage bucket you own — Amazon S3, Azure Blob Storage, or Google Cloud Storage — in JSON or Parquet format.
+Export Pipelines stream your ingested Real User Monitoring (RUM) and {{< prodname >}}Product Analytics{{< /prodname >}} events to a cloud storage bucket you own — Amazon S3, Azure Blob Storage, or Google Cloud Storage — in JSON or Parquet format.
 
 {{< img src="real_user_monitoring/rum_export/rum-export-overview.png" alt="Export Pipelines list on the RUM application settings page" style="width:100%;">}}
 
@@ -32,7 +32,7 @@ Datadog only manages the export from your Datadog account to your cloud storage 
 
 ## How it works
 
-Export Pipelines is a shared feature between [Real User Monitoring][4] and [Product Analytics][5]. Pipelines are configured at two different levels:
+Export Pipelines is a shared feature between [Real User Monitoring][4] and [{{< prodname >}}Product Analytics{{< /prodname >}}][5]. Pipelines are configured at two different levels:
 
 | Scope | Source | Max pipelines | Available presets |
 |---|---|---|---|
@@ -46,7 +46,7 @@ Each pipeline exports continuously and independently of the others.
 
 ## Prerequisites
 
-- Product Analytics is enabled on the application (or RUM, or both).
+- {{< prodname >}}Product Analytics{{< /prodname >}} is enabled on the application (or RUM, or both).
 - The Datadog integration for your cloud provider is set up: [Amazon Web Services][6], [Azure][7], or [Google Cloud][8].
 - Your Datadog user has the `rum_write_archives` permission. See [Role Based Access Control][1].
 

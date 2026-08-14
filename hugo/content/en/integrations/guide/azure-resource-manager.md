@@ -67,7 +67,7 @@ A form to create a new app registration is displayed:
 
     **Note**: If you've selected to monitor individual subscriptions rather than a management group, select the subscriptions to monitor from the **Subscriptions to monitor** dropdown.
 
-13. Select your Datadog site, as well as any other integration configuration options, such as host filters and whether to collect resources for [Cloud Security][2].
+13. Select your Datadog site, as well as any other integration configuration options, such as host filters and whether to collect resources for [{{< prodname >}}Cloud Security{{< /prodname >}}][2].
 
 14. Click **Review + create**, then click **Create**.
 

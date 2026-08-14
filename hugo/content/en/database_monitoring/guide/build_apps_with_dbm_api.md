@@ -15,7 +15,7 @@ further_reading:
   text: "Metrics API"
 ---
 
-Database Monitoring data is accessible through the Datadog API, which lets you build custom tooling, automated analysis pipelines, and integrations with external systems. This guide explains the data entities that DBM captures, how to query each one through the API, and how to combine them to answer questions about query performance.
+{{< prodname >}}Database Monitoring{{< /prodname >}} data is accessible through the Datadog API, which lets you build custom tooling, automated analysis pipelines, and integrations with external systems. This guide explains the data entities that DBM captures, how to query each one through the API, and how to combine them to answer questions about query performance.
 
 ## Data entities
 

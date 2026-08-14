@@ -14,7 +14,7 @@ title: Unity Crash Reporting and Error Tracking
 ---
 ## Overview
 
-Enable Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring.
+Enable Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} to get comprehensive crash reports and error trends with Real User Monitoring.
 
 Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
@@ -86,7 +86,7 @@ Mapping files are limited in size to **500 MB** each, while dSYM files can go up
 
 ## Test your implementation
 
-To verify your Unity Crash Reporting and Error Tracking configuration, issue an error in your application and confirm that the error appears in Datadog.
+To verify your Unity Crash Reporting and {{< prodname >}}Error Tracking{{< /prodname >}} configuration, issue an error in your application and confirm that the error appears in Datadog.
 
 1. Ensure you are not running a development build. Uncheck the {{< ui >}}Development Build{{< /ui >}} box in Unity's build settings.
 2. Run your application on a simulator, emulator, or a real device. If you are running on iOS, ensure that the debugger is not attached. Otherwise, Xcode captures the crash before the Datadog SDK does.

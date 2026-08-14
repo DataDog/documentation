@@ -68,11 +68,11 @@ buildscript {
 
 ## Initialize the SDK
 
-The Datadog OpenFeature provider for React Native requires the core Datadog React Native SDK to be initialized first, followed by enabling the Feature Flags feature. To create a client token, see [Client tokens][2].
+The Datadog OpenFeature provider for React Native requires the core Datadog React Native SDK to be initialized first, followed by enabling the {{< prodname >}}Feature Flags{{< /prodname >}} feature. To create a client token, see [Client tokens][2].
 
 ### Option 1: Using DatadogProvider component
 
-If you use the `DatadogProvider` component for SDK initialization, enable Feature Flags in the `onInitialized` callback:
+If you use the `DatadogProvider` component for SDK initialization, enable {{< prodname >}}Feature Flags{{< /prodname >}} in the `onInitialized` callback:
 
 ```tsx
 import { DatadogProvider, DatadogProviderConfiguration, DdFlags } from '@datadog/mobile-react-native';
@@ -113,7 +113,7 @@ export default function App() {
 
 ### Option 2: Using imperative initialization
 
-If you initialize the SDK imperatively, enable Feature Flags after initialization completes:
+If you initialize the SDK imperatively, enable {{< prodname >}}Feature Flags{{< /prodname >}} after initialization completes:
 
 ```tsx
 import { DdSdkReactNative, DdFlags, CoreConfiguration } from '@datadog/mobile-react-native';
@@ -394,7 +394,7 @@ function onUserLogin(user) {
 
 ## Configure Feature Flags options
 
-Pass configuration options to `DdFlags.enable()` to customize Feature Flags behavior:
+Pass configuration options to `DdFlags.enable()` to customize {{< prodname >}}Feature Flags{{< /prodname >}} behavior:
 
 {{< code-block lang="tsx" >}}
 await DdFlags.enable({
@@ -517,7 +517,7 @@ end
 
 ### Feature Flags not initialized error
 
-If you see an error about Feature Flags not being initialized, verify the initialization order:
+If you see an error about {{< prodname >}}Feature Flags{{< /prodname >}} not being initialized, verify the initialization order:
 
 1. Initialize the core Datadog React Native SDK first (`DdSdkReactNative.initialize()` or `DatadogProvider`).
 2. Call `DdFlags.enable()` after SDK initialization.

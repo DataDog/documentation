@@ -8,7 +8,7 @@ algolia:
 
 {{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
-    Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
+    {{< prodname >}}Code Security{{< /prodname >}} is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 
@@ -183,7 +183,7 @@ The analyzer includes a few helper functions to help you write rules:
 
 ### Rule examples
 
-All Datadog default rules are available in [Code Security][4]. You can easily analyze and copy them to create your own custom rules.
+All Datadog default rules are available in [{{< prodname >}}Code Security{{< /prodname >}}][4]. You can easily analyze and copy them to create your own custom rules.
 
 
 [1]: https://app.datadoghq.com/ci/code-analysis

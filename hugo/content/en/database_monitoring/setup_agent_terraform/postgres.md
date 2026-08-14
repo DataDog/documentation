@@ -25,7 +25,7 @@ terraform/<database>/<cloud>/<agent-runtime>/
 
 The directory tree is keyed on **cloud** rather than the hosting type — one Terraform module typically covers all of a cloud's database hosting options that share the same VPC and security-group semantics. For example, the ECS Fargate Agent against any AWS-side Postgres is available at `terraform/postgres/aws/ecs-fargate/` and works for RDS, Aurora, and self-hosted Postgres on EC2.
 
-This page covers the **Agent** side of the setup. It does not provision the database, set database-side parameters, or create the `datadog` user inside the database. For those steps, see the per-database setup pages from [Database Monitoring][2].
+This page covers the **Agent** side of the setup. It does not provision the database, set database-side parameters, or create the `datadog` user inside the database. For those steps, see the per-database setup pages from [{{< prodname >}}Database Monitoring{{< /prodname >}}][2].
 
 {{< tabs >}}
 {{% tab "ECS Fargate" %}}
@@ -38,7 +38,7 @@ The Terraform module for this combination works for any Postgres database reacha
 - **Amazon Aurora Postgres**: The Aurora cluster writer endpoint and the Aurora cluster's security group.
 - **Self-hosted Postgres on EC2 in the same VPC**: The EC2 instance hostname/IP and the security group attached to the Postgres EC2 instance.
 
-For Postgres self-hosted outside AWS (on-premises or in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [Database Monitoring][2].
+For Postgres self-hosted outside AWS (on-premises or in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [{{< prodname >}}Database Monitoring{{< /prodname >}}][2].
 
 ## Architecture
 
@@ -160,7 +160,7 @@ The Terraform module for this combination works for any Postgres database reacha
 - **Amazon Aurora Postgres**: The Aurora cluster writer endpoint and the Aurora cluster's security group.
 - **Self-hosted Postgres on EC2 in the same VPC**: The EC2 instance hostname/IP and the security group attached to the Postgres EC2 instance.
 
-For Postgres self-hosted outside AWS (on-premises or in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [Database Monitoring][2].
+For Postgres self-hosted outside AWS (on-premises or in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [{{< prodname >}}Database Monitoring{{< /prodname >}}][2].
 
 ## Architecture
 
@@ -329,7 +329,7 @@ The Terraform module for this combination works for any Postgres database reacha
 - **Amazon Aurora Postgres**: The Aurora cluster writer endpoint and the Aurora cluster's security group.
 - **Self-hosted Postgres on EC2 in the same VPC**: The EC2 instance hostname/IP and the security group attached to the Postgres EC2 instance.
 
-For Postgres self-hosted outside AWS (on-premises or in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [Database Monitoring][2].
+For Postgres self-hosted outside AWS (on-premises or in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [{{< prodname >}}Database Monitoring{{< /prodname >}}][2].
 
 ## Architecture
 

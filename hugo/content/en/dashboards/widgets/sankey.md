@@ -16,7 +16,7 @@ The Sankey widget is not available in the selected <a href="/getting_started/sit
 
 {{< img src="dashboards/widgets/sankey/sankey_widget.png" alt="Sankey widget configuration showing an example graph" style="width:100%;" >}}
 
-The Sankey widget shows user flow, movement, or change from one application state to another. This widget is available for Product Analytics.
+The Sankey widget shows user flow, movement, or change from one application state to another. This widget is available for {{< prodname >}}Product Analytics{{< /prodname >}}.
 
 ## Setup
 

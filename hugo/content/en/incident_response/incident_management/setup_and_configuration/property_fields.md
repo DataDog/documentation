@@ -9,7 +9,7 @@ aliases:
 
 Custom property fields enable you to capture important attributes unique to your organization, such as specific product models in the automotive industry or unique codes in a software deployment. These attributes help you efficiently categorize incidents.
 
-You can use custom fields to filter for specific subsets of incidents on the [Incident Management][2] page and in [Incident Management Analytics][3]. You can also build conditions around custom fields in [incident notification rules][9].
+You can use custom fields to filter for specific subsets of incidents on the [{{< prodname >}}Incident Management{{< /prodname >}}][2] page and in [Incident Management Analytics][3]. You can also build conditions around custom fields in [incident notification rules][9].
 
 ## Field sections
 
@@ -70,7 +70,7 @@ If you mark a field as "Required at Declaration," users are required to enter a 
 
 ### Prompt user
 
-Incident Management can be configured to prompt responders to set particular fields when changing the incident's state. To set this behavior for a field, edit the field's "Prompt user" option.
+{{< prodname >}}Incident Management{{< /prodname >}} can be configured to prompt responders to set particular fields when changing the incident's state. To set this behavior for a field, edit the field's "Prompt user" option.
 
 **During declaration**: Users are prompted to enter a value for the field during declaration and at all state changes if the field is empty.
 

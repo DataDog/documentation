@@ -18,15 +18,15 @@ Use Observability Pipelines' BYOC (Bring Your Own Cloud) Logs destination to sen
 
 ## Prerequisites
 
-Before configuring the destination, you need to deploy a BYOC Logs cluster. Learn how to install it in the [BYOC Logs installation section][3].
+Before configuring the destination, you need to deploy a {{< prodname >}}BYOC Logs{{< /prodname >}} cluster. Learn how to install it in the [BYOC Logs installation section][3].
 
 ## Setup
 
-Configure the BYOC Logs destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The steps in this section are configured in the UI.
+Configure the {{< prodname >}}BYOC Logs{{< /prodname >}} destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The steps in this section are configured in the UI.
 
 ### Optional buffering
 
-After you select the BYOC Logs destination in the pipeline UI, you can configure buffering.
+After you select the {{< prodname >}}BYOC Logs{{< /prodname >}} destination in the pipeline UI, you can configure buffering.
 
 {{% observability_pipelines/destination_buffer %}}
 
@@ -39,8 +39,8 @@ After you select the BYOC Logs destination in the pipeline UI, you can configure
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
-- BYOC Logs endpoint URL identifier:
-	- References the intake endpoint to which Observability Pipelines sends logs.
+- {{< prodname >}}BYOC Logs{{< /prodname >}} endpoint URL identifier:
+	- References the intake endpoint to which {{< prodname >}}Observability Pipelines{{< /prodname >}} sends logs.
 	- In your secrets manager:
 		- Define the cluster URL, such as `http://byoc-logs.acme.internal:7280`. **Note**: The URL must include the port.
 		- The Worker appends `/api/v2/logs` and `/api/v1/validate` to the endpoint URL, so these endpoints must be allowed if you are using forwarding or firewall rules.
@@ -53,7 +53,7 @@ After you select the BYOC Logs destination in the pipeline UI, you can configure
 {{< img src="observability_pipelines/destinations/cloudprem_env_vars.png" alt="The install page showing the BYOC Logs environment variable field" style="width:75%;" >}}
 
 - BYOC Logs endpoint URL
-	- Observability Pipelines sends logs to the BYOC Logs intake endpoint. Define the cluster URL, such as `http://byoc-logs.acme.internal:7280`. **Note**: The URL must include the port.
+	- {{< prodname >}}Observability Pipelines{{< /prodname >}} sends logs to the {{< prodname >}}BYOC Logs{{< /prodname >}} intake endpoint. Define the cluster URL, such as `http://byoc-logs.acme.internal:7280`. **Note**: The URL must include the port.
 	- The Worker appends `/api/v2/logs` and `/api/v1/validate` to the endpoint URL, so these endpoints must be allowed if you are using forwarding or firewall rules.
   - Stored as the environment variable: `DD_OP_DESTINATION_CLOUDPREM_ENDPOINT_URL`.
 

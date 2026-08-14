@@ -51,7 +51,7 @@ Incidents live in Datadog alongside your metrics, traces, and logs. Your teams c
 
 ## Get Started
 
-Incident Management requires no installation. Get started by taking a Learning Center course, reading our guided walkthrough, or declaring an incident.
+{{< prodname >}}Incident Management{{< /prodname >}} requires no installation. Get started by taking a Learning Center course, reading our guided walkthrough, or declaring an incident.
 
 {{< whatsnext desc="Learn more about Incident Management:">}}
     {{< nextlink href="https://learn.datadoghq.com/courses/intro-to-incident-management" >}}Learn about Datadog Incident Management by working through a hands-on examples{{< /nextlink >}}
@@ -61,7 +61,7 @@ Incident Management requires no installation. Get started by taking a Learning C
 
 ## Billing
 
-Incident Management is a seat-based SKU. To learn more about how Incident Management is billed and how to manage seats within Datadog, visit our [pricing page][31] and the [Incident Response billing documentation][32].
+{{< prodname >}}Incident Management{{< /prodname >}} is a seat-based SKU. To learn more about how {{< prodname >}}Incident Management{{< /prodname >}} is billed and how to manage seats within Datadog, visit our [pricing page][31] and the [Incident Response billing documentation][32].
 
 ## View and search for incidents
 
@@ -69,7 +69,7 @@ To view your incidents, go to the [Incidents][1] page to see a feed of all ongoi
 
 ### Search examples
 
-Incident search uses the same event-based [search syntax][33] as Logs and Event Management. Combine `key:value` pairs with Boolean operators (`AND`, `OR`, `-`) to filter incidents.
+Incident search uses the same event-based [search syntax][33] as Logs and {{< prodname >}}Event Management{{< /prodname >}}. Combine `key:value` pairs with Boolean operators (`AND`, `OR`, `-`) to filter incidents.
 
 | Query | Description |
 |-------|-------------|
@@ -110,7 +110,7 @@ For more details on the measures collected and step-by-step graph configurations
 
 ## Integrations
 
-Incident Management integrates closely with other Datadog products, including:
+{{< prodname >}}Incident Management{{< /prodname >}} integrates closely with other Datadog products, including:
 
 - [Datadog Status Pages][26] to create public or private status pages and connect them to incidents.
 - [Datadog On-Call][27] to escalate pages into incidents and manually or automatically page teams from an incident.
@@ -119,7 +119,7 @@ Incident Management integrates closely with other Datadog products, including:
 
 ### Third-party integrations
 
-Incident Management integrates with third-party applications, including:
+{{< prodname >}}Incident Management{{< /prodname >}} integrates with third-party applications, including:
 
 - [Atlassian Statuspage][25] to create and update Statuspage incidents.
 - [Confluence][22] to generate incident [postmortems][34].

@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Organization admins can set monthly caps on AI Credit usage at the organization level, the per-user level, or both. Admins can also override the default per-user limit for individual users. AI Credits are shared across [Bits Chat][1], [Bits Investigation][2], [Bits Code][3], and [Bits Agent Builder][4].
+Organization admins can set monthly caps on AI Credit usage at the organization level, the per-user level, or both. Admins can also override the default per-user limit for individual users. AI Credits are shared across [{{< prodname >}}Bits Chat{{< /prodname >}}][1], [Bits Investigation][2], [{{< prodname >}}Bits Code{{< /prodname >}}][3], and [Bits Agent Builder][4].
 
 ## Permissions
 
@@ -38,7 +38,7 @@ You can configure three types of monthly limits:
 - When both an organization limit and a user limit (or override) are configured, the most restrictive applicable limit applies to a user.
 - If a user has both a default per-user limit and an override configured, the higher of the two applies, and the user's usage is still subject to the organization-wide limit.
 - Raising a limit unblocks users who reached the previous limit. Lowering a limit blocks users whose usage already exceeds the new value.
-- When a user or the organization reaches a limit, affected users can't use Bits Chat, Bits Investigation, Bits Code, or Bits Agent Builder, and a banner shows the reset date.
+- When a user or the organization reaches a limit, affected users can't use {{< prodname >}}Bits Chat{{< /prodname >}}, Bits Investigation, {{< prodname >}}Bits Code{{< /prodname >}}, or Bits Agent Builder, and a banner shows the reset date.
 
 ### Examples
 

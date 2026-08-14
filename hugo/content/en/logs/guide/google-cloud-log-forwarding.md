@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Forwarding logs from your Google Cloud environment enables near real-time monitoring of the resources and activities taking place in your organization or folder. You can set up [log monitors][5] to be notified of issues, use [Cloud SIEM][6] to detect threats, or leverage [Watchdog][7] to identify unknown issues or anomalous behavior.
+Forwarding logs from your Google Cloud environment enables near real-time monitoring of the resources and activities taking place in your organization or folder. You can set up [log monitors][5] to be notified of issues, use [{{< prodname >}}Cloud SIEM{{< /prodname >}}][6] to detect threats, or leverage [Watchdog][7] to identify unknown issues or anomalous behavior.
 
 Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow template][3]. This approach offers batching and compression of your log events before forwarding them to Datadog, which is the most network-efficient way to forward your logs. You can specify which logs are forwarded with inclusion and exclusion filters.
 

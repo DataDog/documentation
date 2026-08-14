@@ -4,7 +4,7 @@ description: Monitor your LLM tokens and costs.
 ---
 {{< img src="llm_observability/Cost_LLMO.png" alt="Cost view for an app in Agent Observability." style="width:100%;" >}}
 
-Agent Observability automatically calculates an estimated cost for each LLM request, using providers' public pricing models and token counts annotated on LLM/embedding spans.
+{{< prodname >}}Agent Observability{{< /prodname >}} automatically calculates an estimated cost for each LLM request, using providers' public pricing models and token counts annotated on LLM/embedding spans.
 
 By aggregating this information across traces and applications, you can gain insights into the user patterns of your LLM models and their impact on overall spending.
 
@@ -52,7 +52,7 @@ Datadog automatically calculates the cost of LLM requests made to the following 
 Datadog supports estimated costs for [800+ models][4], from OpenAI, Hugging Face, Gemini, Anthropic to models served by OpenRouter.
 
 ## Metrics
-You can find cost metrics in [Agent Observability Metrics][5]. The unit for Agent Observability estimated cost metrics is **nanodollars**. 
+You can find cost metrics in [Agent Observability Metrics][5]. The unit for {{< prodname >}}Agent Observability{{< /prodname >}} estimated cost metrics is **nanodollars**. 
 
 The cost metrics include a `source` tag to indicate where the value originated:
 - `source:auto` — automatically calculated
@@ -89,7 +89,7 @@ Many LLM providers cache reused prompt prefixes to reduce repeated processing. T
 {{< img src="llm_observability/cost_tags_cache.png" alt="Dashboard comparing cache read, cache write, and non-cached input tokens grouped by a custom prompt_version tag." style="width:100%;" >}}
 
 ## View costs in Agent Observability
-View your app in Agent Observability and select {{< ui >}}Cost{{< /ui >}} on the left. The _Cost view_ features:
+View your app in {{< prodname >}}Agent Observability{{< /prodname >}} and select {{< ui >}}Cost{{< /ui >}} on the left. The _Cost view_ features:
 - A high-level overview of your LLM usage over time including {{< ui >}}Total Cost{{< /ui >}}, {{< ui >}}Cost Change{{< /ui >}}, {{< ui >}}Total Tokens{{< /ui >}}, and {{< ui >}}Token Change{{< /ui >}}
 - {{< ui >}}Breakdown by Token Type{{< /ui >}}: A breakdown of token usage, along with associated costs
 - {{< ui >}}Breakdown by Provider/Model{{< /ui >}} or {{< ui >}}Prompt ID/Version{{< /ui >}}: Cost and token usage broken down by LLM provider and model, or by individual prompts or prompt versions (powered by [Prompt Tracking][6])

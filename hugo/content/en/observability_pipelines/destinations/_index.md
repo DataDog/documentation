@@ -146,7 +146,7 @@ year=\%Y/month=\%m/day=\%d/
 
 ## Event batching
 
-Observability Pipelines destinations send events in batches to the downstream integration. A batch of events is flushed when one of the following parameters is met:
+{{< prodname >}}Observability Pipelines{{< /prodname >}} destinations send events in batches to the downstream integration. A batch of events is flushed when one of the following parameters is met:
 
 - Maximum number of events
 - Maximum number of bytes

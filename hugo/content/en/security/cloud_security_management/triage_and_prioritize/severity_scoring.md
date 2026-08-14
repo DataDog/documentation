@@ -17,11 +17,11 @@ further_reading:
   text: Visually identify and prioritize security risks using Cloudcraft
 ---
 
-Accurate severity scores help security teams understand the risks that vulnerabilities pose to their environment. This guide explains how Cloud Security uses different measures of severity to calculate the scores.
+Accurate severity scores help security teams understand the risks that vulnerabilities pose to their environment. This guide explains how {{< prodname >}}Cloud Security{{< /prodname >}} uses different measures of severity to calculate the scores.
 
 ## Cloud Security severity scoring framework
 
-Cloud Security Misconfigurations, Cloud Security Identity Risks, and Security Inbox misconfigurations use the Cloud Security severity scoring framework to determine the severity of a finding. The framework compares the likelihood that an adversary would take advantage of a misconfiguration to the risk posed to your environment. By weighting both of these aspects, findings can be prioritized more accurately by real-world risks. The matrices below show how a misconfiguration's severity score is computed based on its likelihood of abuse and impact.
+Cloud Security Misconfigurations, Cloud Security Identity Risks, and Security Inbox misconfigurations use the {{< prodname >}}Cloud Security{{< /prodname >}} severity scoring framework to determine the severity of a finding. The framework compares the likelihood that an adversary would take advantage of a misconfiguration to the risk posed to your environment. By weighting both of these aspects, findings can be prioritized more accurately by real-world risks. The matrices below show how a misconfiguration's severity score is computed based on its likelihood of abuse and impact.
 
 ### Likelihood
 
@@ -91,7 +91,7 @@ To explain how the framework is used here are a few examples.
 
 The detection rule for [SNS Topic should have access restrictions set for subscription][1] checks if the SNS topic has a resource-based policy that contains a `Principal` of `*`, and an `Action` with the `sns:Subscribe` permission. This combination gives anyone the ability to subscribe to the SNS topic and receive its notifications. 
 
-Using the Cloud Security severity scoring framework, the rule would be scored as follows:
+Using the {{< prodname >}}Cloud Security{{< /prodname >}} severity scoring framework, the rule would be scored as follows:
 
 - **Likelihood score**: Highly Probable
   - **Attack vector**: No Authorization
@@ -107,7 +107,7 @@ Using the Cloud Security severity scoring framework, the rule would be scored as
 
 The detection rule for [EC2 instances should enforce IMDSv2][2] checks if an EC2 instance is using the Instance Metadata Service Version 1 ([IMDSv1][3]), which is vulnerable to common web application attacks. If exploited, an adversary can obtain access to the IAM credentials stored in the IMDS and use them to access resources in the AWS account.
 
-Using the Cloud Security severity scoring framework, the rule would be scored as follows:
+Using the {{< prodname >}}Cloud Security{{< /prodname >}} severity scoring framework, the rule would be scored as follows:
 
 - **Likelihood score**: Possible
   - **Attack vector**: Vulnerability

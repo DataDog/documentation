@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-The Cloud Cost skill is the Cloud Cost Management analysis workflow in [Bits Chat][1]. It is designed for FinOps tasks, such as root cause analysis, budget tracking, and answering general cost questions. For example, you can ask Bits Chat to:
+The Cloud Cost skill is the {{< prodname >}}Cloud Cost Management{{< /prodname >}} analysis workflow in [{{< prodname >}}Bits Chat{{< /prodname >}}][1]. It is designed for FinOps tasks, such as root cause analysis, budget tracking, and answering general cost questions. For example, you can ask {{< prodname >}}Bits Chat{{< /prodname >}} to:
 
 - Investigate [cost monitor alerts][2], [cost anomalies][3], and [cost changes][4]
 - Identify teams, services, accounts, regions, or resources driving spend
@@ -32,7 +32,7 @@ The Cloud Cost skill is the Cloud Cost Management analysis workflow in [Bits Cha
 
 ## Prerequisites
 
-To use the Cloud Cost skill in Bits Chat, you must:
+To use the Cloud Cost skill in {{< prodname >}}Bits Chat{{< /prodname >}}, you must:
 
 - [Set up Cloud Cost Management][6] for the cost sources you want to analyze
 - Have these permissions:
@@ -46,7 +46,7 @@ To use the Cloud Cost skill in Bits Chat, you must:
 
 When you want to start an investigation, such as for a [cost anomaly][3], click {{< ui >}}Investigate{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon) to open the Cloud Cost skill.
 
-Alternatively, you can click {{< ui >}}Ask Bits{{< /ui >}} on the top right of the navigation bar on any Datadog page to open Bits Chat and ask a cost question.
+Alternatively, you can click {{< ui >}}Ask Bits{{< /ui >}} on the top right of the navigation bar on any Datadog page to open {{< prodname >}}Bits Chat{{< /prodname >}} and ask a cost question.
 
 Example prompts:
 
@@ -58,7 +58,7 @@ Example prompts:
 
 ### Cost change investigations
 
-When you investigate a cost change with the Cloud Cost skill, Bits Chat provides a concise summary, then asks what you want to explore next. The initial analysis typically includes:
+When you investigate a cost change with the Cloud Cost skill, {{< prodname >}}Bits Chat{{< /prodname >}} provides a concise summary, then asks what you want to explore next. The initial analysis typically includes:
 
 - A daily cost chart for the baseline and investigation periods
 - The baseline period, investigation period, total dollar amount and percentage change, and projected annual impact when applicable
@@ -67,7 +67,7 @@ When you investigate a cost change with the Cloud Cost skill, Bits Chat provides
 
 {{< img src="cloud_cost/cc_skill_cost_summary.png" alt="Bits Chat's investigation summary showing an initial analysis." style="width:60%;" >}}
 
-After the initial summary, Bits Chat can:
+After the initial summary, {{< prodname >}}Bits Chat{{< /prodname >}} can:
 
 - Find the top services, accounts, regions, resources, or tags driving the change
 - Correlate the cost change with metrics such as CPU requests, memory requests, request count, bucket size, or database usage
@@ -77,14 +77,14 @@ After the initial summary, Bits Chat can:
 
 ### Budgets and forecasting
 
-After setting up [Budgets][5], use the Cloud Cost skill in Bits Chat to explain budget status and spending. Bits Chat can help summarize:
+After setting up [Budgets][5], use the Cloud Cost skill in {{< prodname >}}Bits Chat{{< /prodname >}} to explain budget status and spending. {{< prodname >}}Bits Chat{{< /prodname >}} can help summarize:
 
 - Actual spend versus budgeted amount
 - Forecasted spend versus budgeted amount
 - Which cost scope a budget covers, based on the budget's filters
 - Which budget entries, teams, services, or providers are contributing to an overage
 
-After the initial summary, Bits Chat can:
+After the initial summary, {{< prodname >}}Bits Chat{{< /prodname >}} can:
 
 - Find the top services, accounts, regions, resources, or tags driving spending
 - Identify the teams that own the resources contributing to the cost change
@@ -93,12 +93,12 @@ After the initial summary, Bits Chat can:
 
 ## Use the Datadog MCP Server for cost analysis
 
-The [Datadog MCP Server][10] lets external AI agents query Datadog data. This is useful when you want to ask cost questions from an IDE, terminal-based assistant, or custom AI workflow.
+The [{{< prodname >}}Datadog MCP Server{{< /prodname >}}][10] lets external AI agents query Datadog data. This is useful when you want to ask cost questions from an IDE, terminal-based assistant, or custom AI workflow.
 
 To use an external AI agent, [set up the Datadog MCP Server][11]. If your MCP client filters toolsets, you must enable the relevant toolset before the agent can call its tools:
 
 - Enable the `cost` toolset to list cost-saving recommendations with [`cost_recommendations`][16].
-- Enable the `core` toolset to query Cloud Cost Management metrics with the metric tools.
+- Enable the `core` toolset to query {{< prodname >}}Cloud Cost Management{{< /prodname >}} metrics with the metric tools.
 
 ### List cost-saving recommendations
 
@@ -112,14 +112,14 @@ Example prompts for the `cost` toolset:
 
 ### Query Cloud Cost Management metrics
 
-The `core` toolset provides the metric tools that can query Cloud Cost Management data:
+The `core` toolset provides the metric tools that can query {{< prodname >}}Cloud Cost Management{{< /prodname >}} data:
 
 | MCP tool                          | Usage                                 |
 | --------------------------------- | ------------------------------------- |
 | [`get_datadog_metric`][12]         | Query cost metrics, compare periods, and group costs by provider, service, team, account, resource, or tag. |
 | [`get_datadog_metric_context`][13] | Discover metadata, available tag keys, and tag values for a cost metric before querying it.               |
 
-Ask your agent to set `use_cloud_cost` to `true` for Cloud Cost Management metrics, such as `all.cost`, `aws.cost.*`, `azure.cost.*`, `gcp.cost.*`, `oci.cost.*`, `custom.cost.*`, or `datadog.cost.*`. For observability metrics that explain a cost change, such as Kubernetes CPU or S3 bucket size, use the standard metric query behavior.
+Ask your agent to set `use_cloud_cost` to `true` for {{< prodname >}}Cloud Cost Management{{< /prodname >}} metrics, such as `all.cost`, `aws.cost.*`, `azure.cost.*`, `gcp.cost.*`, `oci.cost.*`, `custom.cost.*`, or `datadog.cost.*`. For observability metrics that explain a cost change, such as Kubernetes CPU or S3 bucket size, use the standard metric query behavior.
 
 Example prompts for the `core` toolset:
 

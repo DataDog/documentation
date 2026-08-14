@@ -58,7 +58,7 @@ further_reading:
 
 ---
 
-{{< learning-center-callout header="Try Getting Started with Agent Observability in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}
+{{< learning-center-callout header="Try Getting Started with {{< prodname >}}Agent Observability{{< /prodname >}} in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}
   Learn how to monitor your LLM application's performance, costs, traces, token usage, and errors to identify and resolve issues.
 {{< /learning-center-callout >}}
 
@@ -119,7 +119,7 @@ These outliers are analyzed over the past week and automatically surfaced in the
 
 The [Agent Observability SDK for Python][3] integrates with frameworks such as OpenAI, LangChain, AWS Bedrock, and Anthropic. It automatically traces and annotate LLM calls, capturing latency, errors, and token usage metrics—without code changes.
 
-<div class="alert alert-info">Datadog offers a variety of artificial intelligence (AI) and machine learning (ML) capabilities. The <a href="/integrations/#cat-aiml">AI/ML integrations on the Integrations page and the Datadog Marketplace</a> are platform-wide Datadog functionalities. <br><br> For example, APM offers a native integration with OpenAI for monitoring your OpenAI usage, while Infrastructure Monitoring offers an integration with NVIDIA DCGM Exporter for monitoring compute-intensive AI workloads. These integrations are different from the Agent Observability offering.</div>
+<div class="alert alert-info">Datadog offers a variety of artificial intelligence (AI) and machine learning (ML) capabilities. The <a href="/integrations/#cat-aiml">AI/ML integrations on the Integrations page and the Datadog Marketplace</a> are platform-wide Datadog functionalities. <br><br> For example, APM offers a native integration with OpenAI for monitoring your OpenAI usage, while {{< prodname >}}Infrastructure Monitoring{{< /prodname >}} offers an integration with NVIDIA DCGM Exporter for monitoring compute-intensive AI workloads. These integrations are different from the {{< prodname >}}Agent Observability{{< /prodname >}} offering.</div>
 
 For more information, see the [Auto Instrumentation documentation][8].
 

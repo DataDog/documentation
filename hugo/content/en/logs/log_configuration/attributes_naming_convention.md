@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Centralizing logs from various technologies and applications can generate tens or hundreds of different attributes in a Log Management environment, especially when many teams are working within the same environment.
+Centralizing logs from various technologies and applications can generate tens or hundreds of different attributes in a {{< prodname >}}Log Management{{< /prodname >}} environment, especially when many teams are working within the same environment.
 
 For instance, a client IP may have various log attributes, such as `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, and so on. The execution time of a request may be referred to as `exec_time`, `request_latency`, `request.time_elapsed`, and so on.
 

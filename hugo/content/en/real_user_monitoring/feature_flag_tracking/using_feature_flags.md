@@ -53,7 +53,7 @@ These out-of-the-box graphs are aggregated across your flag variants, making it 
 
 - The {{< ui >}}Users{{< /ui >}} tab provides some high level summary statistics of your feature flag and allows you to further analyze the users viewing each of your feature flag variants by any attribute. If you want to understand what it looks like for someone who experienced a certain variant versus another, you can watch a [Session Replay][2] for each case.
 
-- The {{< ui >}}Issues{{< /ui >}} tab gives you a view of the errors that are occurring in your application for user sessions that have your feature flag. Check if any issues detected by [Error Tracking][3] occurred for a specific variant of your feature flag and might be related to your changes.
+- The {{< ui >}}Issues{{< /ui >}} tab gives you a view of the errors that are occurring in your application for user sessions that have your feature flag. Check if any issues detected by [{{< prodname >}}Error Tracking{{< /prodname >}}][3] occurred for a specific variant of your feature flag and might be related to your changes.
 
 - The {{< ui >}}Performance{{< /ui >}} tab allows you to understand if one of your feature flag variants have caused poor performance. You can view your Core Web Vitals and loading time for each variant to determine if one of your variants may be causing a negative impact on your application's performance.
 

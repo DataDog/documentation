@@ -28,7 +28,7 @@ further_reading:
 
 {{< product-availability >}}
 
-Configure ticket creation rules to automatically create tickets in Jira or Case Management when new findings are discovered. This approach tracks security issues in your existing engineering workflows without manual triage, helping teams respond quickly to new threats at scale. For more information about ticketing integrations with security findings, see [Ticketing Integrations][3].
+Configure ticket creation rules to automatically create tickets in Jira or {{< prodname >}}Case Management{{< /prodname >}} when new findings are discovered. This approach tracks security issues in your existing engineering workflows without manual triage, helping teams respond quickly to new threats at scale. For more information about ticketing integrations with security findings, see [Ticketing Integrations][3].
 
 ## Create a ticket creation rule
 
@@ -57,9 +57,9 @@ Configure ticket creation rules to automatically create tickets in Jira or Case 
      - **Ticket Type**: Select the type of Jira issue to create, for example, **Task**.
      - **Assignee** (optional): Specify a user to assign automatically created tickets to.
      - To add more fields to the Jira ticket Datadog creates, use **Add Optional Field**.
-     - Expand **Data Sync Settings** to review or update the linked Case Management project and bidirectional sync configuration.
+     - Expand **Data Sync Settings** to review or update the linked {{< prodname >}}Case Management{{< /prodname >}} project and bidirectional sync configuration.
    - **Case Management**
-     - **Case Management Project**: Select an existing Case Management project, or create one.
+     - **Case Management Project**: Select an existing {{< prodname >}}Case Management{{< /prodname >}} project, or create one.
      - **Assignee** (optional): Specify a user to assign automatically created cases to.
 1. Under **Rate limit**, enter the [maximum number of tickets](#daily-ticket-limit) this rule can create per UTC day.
 1. To test the rule before saving, click **Test Rule**, select a matching finding, and click **Run Test**. After the test completes, you can view the created ticket or detach the test ticket from the finding.

@@ -10,9 +10,9 @@ further_reading:
 
 {{< img src="events/correlation/triage/triage.png" alt="Case detail page with an event side panel. Investigate correlated events from a case and analyze related metrics" style="width:100%;" >}}
 
-Event Management correlates related events and automatically consolidates them into a single case. Bring in all the context of related logs, related metrics, and alerting monitors to triage and troubleshoot issues in one place.
+{{< prodname >}}Event Management{{< /prodname >}} correlates related events and automatically consolidates them into a single case. Bring in all the context of related logs, related metrics, and alerting monitors to triage and troubleshoot issues in one place.
 
-From the [Correlation][1] page, find the pattern you want to analyze and click {{< ui >}}Triage Cases{{< /ui >}} at the end of the same row. You can also click {{< ui >}}Case Management{{< /ui >}} at the top of the page to view all cases with correlated events in [Case Management][2]. Datadog pulls in related metrics and logs so you can troubleshoot issues with all the related data in one place.
+From the [Correlation][1] page, find the pattern you want to analyze and click {{< ui >}}Triage Cases{{< /ui >}} at the end of the same row. You can also click {{< ui >}}{{< prodname >}}Case Management{{< /prodname >}}{{< /ui >}} at the top of the page to view all cases with correlated events in [{{< prodname >}}Case Management{{< /prodname >}}][2]. Datadog pulls in related metrics and logs so you can troubleshoot issues with all the related data in one place.
 
 ## Event Management Case
 
@@ -28,7 +28,7 @@ From the [Correlation][1] page, find the pattern you want to analyze and click {
 | Enriched Alerts | some cases will get automatically enriched with intelligent alerts that Datadog thinks are related based on your infrastructure. Enriched alert do not impact case attribute, priority, and status |
 
 
-For more information on Case Management operations, see the [Case Management documentation][5].
+For more information on {{< prodname >}}Case Management{{< /prodname >}} operations, see the [Case Management documentation][5].
 
 ### Investigation
 1. From the case Overview, click {{< ui >}}Investigation{{< /ui >}}
@@ -40,7 +40,7 @@ For more information on Case Management operations, see the [Case Management doc
 
 ## Create a notification or ticket
 
-With correlated events, you can configure one notification for a group. So, instead of having 20 notifications and 20 potential issues to investigate, you have one single case and one notification. Combine all your alerts in the Case Management Projects page. There are a few ways to group notifications in Case Management:
+With correlated events, you can configure one notification for a group. So, instead of having 20 notifications and 20 potential issues to investigate, you have one single case and one notification. Combine all your alerts in the Case Management Projects page. There are a few ways to group notifications in {{< prodname >}}Case Management{{< /prodname >}}:
 
 ### Ticketing
 

@@ -19,7 +19,7 @@ further_reading:
 ---
 {{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">
-PagerDuty and Opsgenie integrations for Internal Developer Portal are not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
+PagerDuty and Opsgenie integrations for {{< prodname >}}Internal Developer Portal{{< /prodname >}} are not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
 </div>
 {{% /site-region %}}
   
@@ -126,7 +126,7 @@ You can import entities from ServiceNow and Backstage into Datadog's Catalog. Re
 
 ## Cloud Resources
 
-Datadog's Infrastructure integrations and [Resource Catalog][54] provides a comprehensive inventory of integrations across AWS, Azure, and GCP. You can also leverage Datadog's 1000+ actions in the [Action Catalog][31] to create custom visualizations, actions, and automations.
+Datadog's Infrastructure integrations and [{{< prodname >}}Resource Catalog{{< /prodname >}}][54] provides a comprehensive inventory of integrations across AWS, Azure, and GCP. You can also leverage Datadog's 1000+ actions in the [Action Catalog][31] to create custom visualizations, actions, and automations.
 
 ## Further reading
 

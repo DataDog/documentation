@@ -60,7 +60,7 @@ After you've set up the pipeline to send logs to the SentinelOne destination, yo
 1. Log into the [S1 console][2].
 2. Navigate to the Singularity Data Lake (SDL) {{< ui >}}Search{{< /ui >}} page. To access it from the console, click on {{< ui >}}Visibility{{< /ui >}} on the left menu to go to SDL, and make sure you're on the {{< ui >}}Search{{< /ui >}} tab.
 3. Make sure the filter next to the search bar is set to {{< ui >}}All Data{{< /ui >}}.
-4. This page shows the logs you sent from Observability Pipelines to SentinelOne.
+4. This page shows the logs you sent from {{< prodname >}}Observability Pipelines{{< /prodname >}} to SentinelOne.
 
 ## Health metrics
 

@@ -12,7 +12,7 @@ poetry install ddtrace # poetry
 uv install ddtrace # uv
 ```
 
-2. Initialize the Agent Observability package
+2. Initialize the {{< prodname >}}Agent Observability{{< /prodname >}} package
 
 Initialize the Agent Observability SDK via `ddtrace.auto`. This **needs** to be done as the first import in the application's entrypoint, aside from any environment variable or configuration-loading imports.
 

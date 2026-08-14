@@ -35,7 +35,7 @@ Statistics (requests, errors, latency, etc.), are calculated based on the full v
 
 ### Statistics
 
-Datadog APM computes following aggregate statistics over all the traces instrumented, regardless of sampling:
+{{< prodname >}}Datadog APM{{< /prodname >}} computes following aggregate statistics over all the traces instrumented, regardless of sampling:
 
 * Total requests and requests per second
 * Total errors and errors per second

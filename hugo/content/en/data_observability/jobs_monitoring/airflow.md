@@ -114,7 +114,7 @@ To get started, follow the instructions below.
 
 5. Trigger an update to your Airflow pods and wait for them to finish.
 
-6. Optionally, set up log collection for correlating task logs to DAG run executions in Data Observability: Jobs Monitoring. Correlation requires the logs directory to follow the [default log filename format][5].
+6. Optionally, set up log collection for correlating task logs to DAG run executions in {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring. Correlation requires the logs directory to follow the [default log filename format][5].
 
    **Note:** For log correlation to work, inject Airflow task context attributes (DAG ID, run ID, task ID, attempt number) into task logs as structured facets in Datadog. See [Inject Airflow Task Context into Logs][11].
 
@@ -165,7 +165,7 @@ To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow S
 
 ### Setup
 
-<div class="alert alert-info"><strong>If you are using Airflow 2.7.2, 2.8.1, or 2.9.2</strong>: MWAA default constraints pin older <code>apache-airflow-providers-openlineage</code> versions. These versions include known issues that can degrade the Data Observability experience. To upgrade to provider versions with fixes, see <a href="/data_observability/jobs_monitoring/airflow_mwaa_upgrade/">Upgrade OpenLineage provider on Amazon MWAA for Airflow 2.7.2, 2.8.1, and 2.9.2</a>.</div>
+<div class="alert alert-info"><strong>If you are using Airflow 2.7.2, 2.8.1, or 2.9.2</strong>: MWAA default constraints pin older <code>apache-airflow-providers-openlineage</code> versions. These versions include known issues that can degrade the {{< prodname >}}Data Observability{{< /prodname >}} experience. To upgrade to provider versions with fixes, see <a href="/data_observability/jobs_monitoring/airflow_mwaa_upgrade/">Upgrade OpenLineage provider on Amazon MWAA for Airflow 2.7.2, 2.8.1, and 2.9.2</a>.</div>
 
 To get started, follow the instructions below.
 
@@ -240,7 +240,7 @@ To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow S
 {{% tab "Astronomer" %}}
 
 <div class="alert alert-danger">
-For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/learn/airflow-openlineage#lineage-on-astro>Astro offers lineage features that rely on the Airflow OpenLineage provider</a>. Data Observability: Jobs Monitoring depends on the same OpenLineage provider and uses the <a href=https://openlineage.io/docs/client/python#composite>Composite</a> transport to add additional transport.
+For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/learn/airflow-openlineage#lineage-on-astro>Astro offers lineage features that rely on the Airflow OpenLineage provider</a>. {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring depends on the same OpenLineage provider and uses the <a href=https://openlineage.io/docs/client/python#composite>Composite</a> transport to add additional transport.
 </div>
 
 ### Requirements
@@ -309,7 +309,7 @@ To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow S
 {{% /tab %}}
 {{% tab "Google Cloud Composer" %}}
 <div class="alert alert-danger">
-Data Observability: Jobs Monitoring for Airflow is not yet compatible with <a href=https://cloud.google.com/composer/docs/composer-2/lineage-integration>Dataplex</a> data lineage. Setting up OpenLineage for Data Observability: Jobs Monitoring overrides your existing Dataplex transport configuration.
+{{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring for Airflow is not yet compatible with <a href=https://cloud.google.com/composer/docs/composer-2/lineage-integration>Dataplex</a> data lineage. Setting up OpenLineage for {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring overrides your existing Dataplex transport configuration.
 </div>
 
 ### Requirements
@@ -381,11 +381,11 @@ To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow S
 
 ## Known issues
 
-In Airflow 2.x, manually marking a DAG run or task as failed does not update its status in Data Observability: Jobs Monitoring. For affected runs, span durations and duration metrics may be inaccurate.
+In Airflow 2.x, manually marking a DAG run or task as failed does not update its status in {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring. For affected runs, span durations and duration metrics may be inaccurate.
 
 ## OpenLineage provider version reference
 
-Data Observability: Jobs Monitoring uses the Apache Airflow OpenLineage provider to emit Airflow DAG and task events. For the best experience, Datadog recommends using the newest OpenLineage provider version that is compatible with your Airflow version.
+{{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring uses the Apache Airflow OpenLineage provider to emit Airflow DAG and task events. For the best experience, Datadog recommends using the newest OpenLineage provider version that is compatible with your Airflow version.
 
 **Airflow 2.11 or later, including Airflow 3**
 : **Recommended provider version**: `2.18.0`

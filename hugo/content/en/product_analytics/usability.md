@@ -34,12 +34,12 @@ User confusion | A user clicks dead elements, hunts for the right control, or hi
 
 ## Prerequisites
 
-- **Session Replay and Product Analytics**: Enable both [Session Replay][1] and [Product Analytics][2] for your application. Datadog analyzes session replays and product analytics events to find friction.
+- **Session Replay and {{< prodname >}}Product Analytics{{< /prodname >}}**: Enable both [Session Replay][1] and [{{< prodname >}}Product Analytics{{< /prodname >}}][2] for your application. Datadog analyzes session replays and product analytics events to find friction.
 - **Permission**: To trigger an analysis, users need the `session_replay_analysis_write` permission. This permission is included in the Datadog Standard and Admin roles. Administrators can grant this permission to custom roles through [Role-based access control][3].
 
 ## Trigger an analysis
 
-You start an analysis from a saved Product Analytics funnel, either from the funnel chart or from the Usability page.
+You start an analysis from a saved {{< prodname >}}Product Analytics{{< /prodname >}} funnel, either from the funnel chart or from the Usability page.
 
 ### From a funnel
 

@@ -65,7 +65,7 @@ Widgets can visualize data from multiple Datadog sources including:
 
 ## Common use cases
 
-{{% collapse-content title="Infrastructure Monitoring" level="h4" expanded=false %}}
+{{% collapse-content title="{{< prodname >}}Infrastructure Monitoring{{< /prodname >}}" level="h4" expanded=false %}}
 - Use **Timeseries** widgets for CPU, memory, and network metrics over time
 - Use **Hostmap** widgets to visualize resource usage across your infrastructure
 - Use **Top List** widgets to identify the most resource-intensive hosts or services

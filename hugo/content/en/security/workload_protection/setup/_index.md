@@ -3,30 +3,30 @@ title: Setting up Workload Protection
 disable_toc: false
 ---
 
-To get started with Workload Protection, use the Workload Protection [{{< ui >}}Get Started{{< /ui >}}][1] steps in your Datadog account.
+To get started with {{< prodname >}}Workload Protection{{< /prodname >}}, use the {{< prodname >}}Workload Protection{{< /prodname >}} [{{< ui >}}Get Started{{< /ui >}}][1] steps in your Datadog account.
 
 <div class="alert alert-info">Activating Workload Protection requires the Org Management <a href="https://docs.datadoghq.com/account_management/rbac/permissions/">permission</a>.</div>
 
 
 ## Remote configuration
 
-You can enable [Remote Configuration][3] for Workload Protection. 
+You can enable [Remote Configuration][3] for {{< prodname >}}Workload Protection{{< /prodname >}}. 
 
 Remote Configuration can be used to:
 - Automatically stay up to date on the latest security detections
 - Block attackers and attacks
 
-Remote Configuration can be set up using the Workload Protection [{{< ui >}}Get Started{{< /ui >}}][1] steps in your Datadog account.
+Remote Configuration can be set up using the {{< prodname >}}Workload Protection{{< /prodname >}} [{{< ui >}}Get Started{{< /ui >}}][1] steps in your Datadog account.
 
 <div class="alert alert-info">To enable Remote Configuration, ask your admin for the <strong>API Keys Write</strong> permission.</div>
 
 ## Agent setup options for Workload Protection
 
-Workload Protection supports **Agent-based-only deployments**.
+{{< prodname >}}Workload Protection{{< /prodname >}} supports **Agent-based-only deployments**.
 
 ## Supported deployment types
 
-The following table summarizes Workload Protection relative to deployment types.
+The following table summarizes {{< prodname >}}Workload Protection{{< /prodname >}} relative to deployment types.
 
 |          | Docker    | Kubernetes | Linux     | Amazon ECS/EKS | Windows   | AWS Fargate ECS/EKS | AWS Account | Azure Account | GCP Account | Terraform |
 |------------------------|-----------|------------|-----------|----------------|-----------|---------------------|-------------|---------------|-------------|-----------|
@@ -36,7 +36,7 @@ The following table summarizes Workload Protection relative to deployment types.
 
 ## Supported Linux distributions
 
-Workload Protection supports the following Linux distributions:
+{{< prodname >}}Workload Protection{{< /prodname >}} supports the following Linux distributions:
 
 | Linux Distributions                                           | Supported Versions      |
 |---------------------------------------------------------------|-------------------------|
@@ -60,7 +60,7 @@ Workload Protection supports the following Linux distributions:
 
 ## Deploy the Agent
 
-You can enable Workload Protection on the Datadog Agent using [multiple tools and systems][6]:
+You can enable {{< prodname >}}Workload Protection{{< /prodname >}} on the Datadog Agent using [multiple tools and systems][6]:
 
 - [Kubernetes][8]
 - [Docker][9]
@@ -70,7 +70,7 @@ You can enable Workload Protection on the Datadog Agent using [multiple tools an
 
 ## Workload Protection Agent variables
 
-The Datadog Agent has several [environment variables][7] that can be enabled for Workload Protection. This article describes the purpose of each environment variable.
+The Datadog Agent has several [environment variables][7] that can be enabled for {{< prodname >}}Workload Protection{{< /prodname >}}. This article describes the purpose of each environment variable.
 
 [1]: https://app.datadoghq.com/security/workload-protection/onboarding
 [2]: /account_management/rbac/permissions/

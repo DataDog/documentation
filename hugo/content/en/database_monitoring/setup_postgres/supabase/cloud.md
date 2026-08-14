@@ -13,7 +13,7 @@ further_reading:
       text: 'Supabase Self-Hosted Setup (Agent Installation)'
 ---
 
-Database Monitoring for Supabase Cloud provides visibility into your Supabase databases by exposing query performance metrics and query samples — without requiring a self-hosted Datadog Agent.
+{{< prodname >}}Database Monitoring{{< /prodname >}} for Supabase Cloud provides visibility into your Supabase databases by exposing query performance metrics and query samples — without requiring a self-hosted Datadog Agent.
 
 <div class="alert alert-info">For self-hosted Supabase deployments that require a Datadog Agent, see <a href="/database_monitoring/setup_postgres/supabase/agent">Supabase Self-Hosted Setup</a>.</div>
 
@@ -35,13 +35,13 @@ Database Monitoring for Supabase Cloud provides visibility into your Supabase da
 1. Enter your {{< ui >}}Personal Access Token{{< /ui >}}.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
-Datadog connects to your Supabase project and begins collecting Database Monitoring telemetry. No Agent installation is required.
+Datadog connects to your Supabase project and begins collecting {{< prodname >}}Database Monitoring{{< /prodname >}} telemetry. No Agent installation is required.
 
-<div class="alert alert-info">Each Supabase project must be configured separately. Adding new projects to a connected Supabase account does not automatically enable Database Monitoring.</div>
+<div class="alert alert-info">Each Supabase project must be configured separately. Adding new projects to a connected Supabase account does not automatically enable {{< prodname >}}Database Monitoring{{< /prodname >}}.</div>
 
 ## Data collected
 
-After you enable Database Monitoring, Datadog collects the following telemetry from your Supabase Cloud database:
+After you enable {{< prodname >}}Database Monitoring{{< /prodname >}}, Datadog collects the following telemetry from your Supabase Cloud database:
 
 ### Query performance metrics
 Sourced from `pg_stat_statements`, collected every 5 seconds:
@@ -68,7 +68,7 @@ Collected every 5 minutes:
 
 ## Validate
 
-After setup, navigate to the [Database Monitoring][2] page in Datadog to see your Supabase database queries and performance metrics.
+After setup, navigate to the [{{< prodname >}}Database Monitoring{{< /prodname >}}][2] page in Datadog to see your Supabase database queries and performance metrics.
 
 {{< img src="database_monitoring/supabase_cloud_product.png" alt="Database Monitoring overview for a Supabase Cloud instance" style="width:100%;" >}}
 

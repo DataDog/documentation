@@ -33,7 +33,7 @@ The following data sources are supported:
 - CI Pipelines
 - CI Tests
 - Events
-- Agent Observability
+- {{< prodname >}}Agent Observability{{< /prodname >}}
 - Logs
 - Metrics
 - NetFlow

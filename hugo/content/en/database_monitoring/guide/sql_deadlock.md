@@ -19,7 +19,7 @@ A deadlock occurs when two or more processes are unable to proceed because each 
 
 ## Before you begin
 
-You must configure Database Monitoring for your [SQL Server][1] before following the steps in this guide.
+You must configure {{< prodname >}}Database Monitoring{{< /prodname >}} for your [SQL Server][1] before following the steps in this guide.
 
 
 Supported databases
@@ -106,7 +106,7 @@ Supported Agent versions
 
 ## Exploring deadlock events
 
-To access the deadlock view, navigate to the {{< ui >}}APM{{< /ui >}} > {{< ui >}}Database Monitoring{{< /ui >}} > {{< ui >}}Databases{{< /ui >}} tab, then select a SQL Server host. Next, select the {{< ui >}}Queries{{< /ui >}} tab, then select the {{< ui >}}Deadlocks{{< /ui >}} tab.
+To access the deadlock view, navigate to the {{< ui >}}APM{{< /ui >}} > {{< ui >}}{{< prodname >}}Database Monitoring{{< /prodname >}}{{< /ui >}} > {{< ui >}}Databases{{< /ui >}} tab, then select a SQL Server host. Next, select the {{< ui >}}Queries{{< /ui >}} tab, then select the {{< ui >}}Deadlocks{{< /ui >}} tab.
 The Deadlocks tab displays details about the victim and survivor processes, and includes a link to the deadlock diagram.
 
 **Note**: Because deadlocks occur infrequently, it's unlikely that any deadlock information will be visible right away.

@@ -7,7 +7,7 @@ This page describes how to set up and use Agent Observability Experiments with t
 
 ## Set up Agent Observability
 
-If you have not already set up Agent Observability:
+If you have not already set up {{< prodname >}}Agent Observability{{< /prodname >}}:
 
 1. Install Agent Observability Python SDK:
 
@@ -32,7 +32,7 @@ If you have not already set up Agent Observability:
 
 ### APM Trace correlation
 
-To correlate your Experiment spans with [APM Traces][5], run Agent Observability through a Datadog Agent and keep `agentless_enabled` set to `False` (the default). The Agent forwards trace data to APM, which is what enables Experiment ↔ APM Trace correlation.
+To correlate your Experiment spans with [APM Traces][5], run {{< prodname >}}Agent Observability{{< /prodname >}} through a Datadog Agent and keep `agentless_enabled` set to `False` (the default). The Agent forwards trace data to APM, which is what enables Experiment ↔ APM Trace correlation.
 
    ```python
    LLMObs.enable(
@@ -129,7 +129,7 @@ To create an experiment:
    ```
 
    You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][2] you use in production.
-   If you use a [supported framework][3] (OpenAI, Amazon Bedrock, etc.), Agent Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
+   If you use a [supported framework][3] (OpenAI, Amazon Bedrock, etc.), {{< prodname >}}Agent Observability{{< /prodname >}} automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 
    #### Using OpenTelemetry spans inside experiments
 

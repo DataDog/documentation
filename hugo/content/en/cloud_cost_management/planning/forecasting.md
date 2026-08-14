@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Cloud Cost Management (CCM) Forecasts help you predict future cloud costs based on historical spending patterns. Use forecasts to anticipate cost trends, plan budgets more effectively, and make data-driven decisions about resource allocation.
+{{< prodname >}}Cloud Cost Management{{< /prodname >}} (CCM) Forecasts help you predict future cloud costs based on historical spending patterns. Use forecasts to anticipate cost trends, plan budgets more effectively, and make data-driven decisions about resource allocation.
 
 Forecasts are available in:
 - [**Reports**](#view-forecasts-in-reports): Enable the forecast toggle on Cost reports and Budget reports to visualize predicted costs.
@@ -30,7 +30,7 @@ With Forecasts, you can:
 
 ## How forecasting works
 
-Cloud Cost Management uses forecasting algorithms to generate cost to generate cost predictions. The forecasting model analyzes your historical spending data to identify patterns and trends in your cloud costs, including:
+{{< prodname >}}Cloud Cost Management{{< /prodname >}} uses forecasting algorithms to generate cost to generate cost predictions. The forecasting model analyzes your historical spending data to identify patterns and trends in your cloud costs, including:
 
 - Recurring costs that happen on a **predictable schedule** (such as weekly or monthly cycles).
 - Whether your costs are **increasing, decreasing, or staying stable** over time.

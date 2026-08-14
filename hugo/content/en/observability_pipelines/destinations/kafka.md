@@ -23,7 +23,7 @@ Common scenarios when you might use this destination:
     - [Databricks][3]: A data lakehouse for analytics and storage.
     - [Azure Event Hub][4]: An ingest and processing service in the Microsoft and Azure ecosystem.
 - To route data to Kafka and use the Kafka Connect ecosystem.
-- To process and normalize your data with Observability Pipelines before routing to Apache Spark with Kafka to analyze data and run machine learning workloads.
+- To process and normalize your data with {{< prodname >}}Observability Pipelines{{< /prodname >}} before routing to Apache Spark with Kafka to analyze data and run machine learning workloads.
 
 ## Setup
 

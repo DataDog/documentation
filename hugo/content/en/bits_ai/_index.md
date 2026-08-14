@@ -40,9 +40,9 @@ Learn about Bits AI pricing on [AI Credits][1].
 
 {{< whatsnext desc="Learn about how you can use Bits AI:" >}}
    {{< nextlink href="bits_ai/bits_investigation" >}}Investigate alerts with Bits Investigation{{< /nextlink >}}
-   {{< nextlink href="bits_ai/bits_code" >}}Automate code fixes with Bits Code{{< /nextlink >}}
-   {{< nextlink href="bits_ai/bits_security_analyst" >}}Triage security threat signals with Bits Security Analyst{{< /nextlink >}}
-   {{< nextlink href="bits_ai/bits_chat" >}}Explore your observability data with Bits Chat{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_code" >}}Automate code fixes with {{< prodname >}}Bits Code{{< /prodname >}}{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_security_analyst" >}}Triage security threat signals with {{< prodname >}}Bits Security Analyst{{< /prodname >}}{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_chat" >}}Explore your observability data with {{< prodname >}}Bits Chat{{< /prodname >}}{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_data_analysis" >}}Explore your business data in natural language with Bits Data Analysis{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_detection" >}}Autonomously monitor for impactful service degradations with Bits Detection{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_remediation" >}}Take action on root causes with Bits Remediation{{< /nextlink >}}

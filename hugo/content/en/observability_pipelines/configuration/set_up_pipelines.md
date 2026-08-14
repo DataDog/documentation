@@ -47,7 +47,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 {{< tabs >}}
 {{% tab "Logs" %}}
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][1].
 1. Select a [template][2] based on your use case, or click {{< ui >}}New Pipeline{{< /ui >}} and select {{< ui >}}Logs Pipeline{{< /ui >}}.
 1. Select and set up a [log source][3].
 1. Select and set up [destinations][5] for your processed logs.
@@ -87,7 +87,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 {{% /tab %}}
 {{% tab "Metrics" %}}
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][1].
 1. Select the [Metric Tag Governance][2] template, or click {{< ui >}}New Pipeline{{< /ui >}} and select {{< ui >}}Metrics Pipeline{{< /ui >}}.
 1. Select and set up a [metrics source][3].
 1. Select and set up [destinations][5] for your processed metrics.
@@ -154,7 +154,7 @@ See [Advanced Worker Configurations][5] for bootstrapping options.
 
 To clone a pipeline in the UI:
 
-1. Navigate to [Observability Pipelines][4].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][4].
 1. Select the pipeline you want to clone.
 1. Click the cog at the top right side of the page, then select {{< ui >}}Clone{{< /ui >}}.
 
@@ -162,7 +162,7 @@ To clone a pipeline in the UI:
 
 To delete a pipeline in the UI:
 
-1. Navigate to [Observability Pipelines][4].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][4].
 1. Select the pipeline you want to delete.
 1. Click the cog at the top right side of the page, then select {{< ui >}}Delete{{< /ui >}}.
 

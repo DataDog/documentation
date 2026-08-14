@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-[Error Tracking][1] processes errors collected from the browser by the Browser SDK. Whenever a [source][2], [custom][3], [report][4], or [console][4] error containing a stack trace is collected, Error Tracking processes and groups it under an issue, or group of similar errors to be found in the [Error Tracking Explorer][16].
+[{{< prodname >}}Error Tracking{{< /prodname >}}][1] processes errors collected from the browser by the Browser SDK. Whenever a [source][2], [custom][3], [report][4], or [console][4] error containing a stack trace is collected, {{< prodname >}}Error Tracking{{< /prodname >}} processes and groups it under an issue, or group of similar errors to be found in the [Error Tracking Explorer][16].
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ Download the latest version of the [Browser SDK][5].
 
 ## Setup
 
-To start sending Error Tracking data from your browser application to Datadog, follow the [in-app setup instructions][6] or follow the steps below.
+To start sending {{< prodname >}}Error Tracking{{< /prodname >}} data from your browser application to Datadog, follow the [in-app setup instructions][6] or follow the steps below.
 
 ### Step 1 - Create the application
 
@@ -169,7 +169,7 @@ Upload your JavaScript source maps to access unminified stack traces. See the [s
 
 Now that you've completed the basic setup for Browser Error Tracking, your application is collecting browser errors and you can start monitoring and debugging issues in real-time.
 
-Visualize the [data collected][7] in [dashboards][8] or create a search query in Error Tracking.
+Visualize the [data collected][7] in [dashboards][8] or create a search query in {{< prodname >}}Error Tracking{{< /prodname >}}.
 
 Until Datadog starts receiving data, your application appears as `pending` on the {{< ui >}}Applications{{< /ui >}} page.
 
@@ -177,7 +177,7 @@ Until Datadog starts receiving data, your application appears as `pending` on th
 
 In addition to sending source maps, the [Datadog CLI][11] reports Git information such as the commit hash, repository URL, and a list of tracked file paths in the code repository.
 
-Error Tracking can use this information to correlate errors with your [source code][15], allowing you to pivot from any stack trace frame to the related line of code in [GitHub][12], [GitLab][13] and [Bitbucket][14].
+{{< prodname >}}Error Tracking{{< /prodname >}} can use this information to correlate errors with your [source code][15], allowing you to pivot from any stack trace frame to the related line of code in [GitHub][12], [GitLab][13] and [Bitbucket][14].
 
 <div class="alert alert-info">Linking from stack frames to source code is supported in the <a href="https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command">Datadog CLI</a> version <code>0.12.0</code> and later.</div>
 
@@ -185,7 +185,7 @@ For more information, see the [Datadog Source Code Integration][15].
 
 ## Tagging for Error Tracking
 
-These tags (configured in step 3 above) power Error Tracking functionality:
+These tags (configured in step 3 above) power {{< prodname >}}Error Tracking{{< /prodname >}} functionality:
 
 - Filtering and faceting issues by `service` and `env`
 - Cross-product correlation with RUM, Logs, and APM for the same `service`/`env`

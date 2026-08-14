@@ -14,7 +14,7 @@ The Azure App Insights Integration is in Preview. Use this form to request acces
 
 ## Overview
 
-Bring your Azure Application Insights distributed traces into Datadog APM. Datadog converts App Insights traces into APM spans and enriches spans from supported services with Azure resource metadata.
+Bring your Azure Application Insights distributed traces into {{< prodname >}}Datadog APM{{< /prodname >}}. Datadog converts App Insights traces into APM spans and enriches spans from supported services with Azure resource metadata.
 
 {{< img src="tracing/guide/serverless_enable_azure_app_insights/app-insights-azure-fn-example.png" alt="An Azure Application Insights trace shown in the Datadog APM flame graph, with Azure resource metadata visible on the selected span." style="width:100%;" >}}
 
@@ -25,10 +25,10 @@ The integration reads App Insights records forwarded to Datadog as logs and emit
 When Application Insights is enabled on your workloads and your Azure logs are flowing to Datadog, Datadog:
 
 1. Reads App Insights records from your forwarded Azure logs.
-2. Converts each App Insights operation into a Datadog APM span, preserving parent-child relationships across both the legacy hierarchical Request-Id format and W3C Trace Context.
+2. Converts each App Insights operation into a {{< prodname >}}Datadog APM{{< /prodname >}} span, preserving parent-child relationships across both the legacy hierarchical Request-Id format and W3C Trace Context.
 3. Enriches spans for [supported Azure services](#supported-azure-services) with Azure resource metadata, including resource group, subscription, region, and resource tags.
 
-After conversion, the spans behave like any other Datadog APM spans. They appear in the same waterfall view, support trace search, and correlate with your logs and metrics.
+After conversion, the spans behave like any other {{< prodname >}}Datadog APM{{< /prodname >}} spans. They appear in the same waterfall view, support trace search, and correlate with your logs and metrics.
 
 ## Prerequisites
 

@@ -81,7 +81,7 @@ If you store tokens as credentials in your HTTP request's authorization header, 
 
 ## Send AWS vended logs with the Datadog Lambda Forwarder to Observability Pipelines
 
-To send AWS vended logs to Observability Pipelines with the HTTP/S Server source:
+To send AWS vended logs to {{< prodname >}}Observability Pipelines{{< /prodname >}} with the HTTP/S Server source:
 
 - [Set up a pipeline with the HTTP/S Server source](#set-up-a-pipeline).
 - [Deploy the Datadog Forwarder](#deploy-the-datadog-lambda-forwarder).

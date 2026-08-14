@@ -17,7 +17,7 @@ further_reading:
 ---
 
 
-Datadog provides official Bazel rules for Python Test Optimization. Use `dd_topt_py_test` to configure `pytest` targets to read synced Test Optimization metadata and write payloads during Bazel test execution.
+Datadog provides official Bazel rules for Python Test Optimization. Use `dd_topt_py_test` to configure `pytest` targets to read synced {{< prodname >}}Test Optimization{{< /prodname >}} metadata and write payloads during Bazel test execution.
 
 ## Compatibility
 
@@ -37,7 +37,7 @@ The repository that consumes the Bazel rule owns Python toolchains, `pytest`, `d
 
 ## Prerequisites
 
-Before setting up Test Optimization for Python tests in Bazel:
+Before setting up {{< prodname >}}Test Optimization{{< /prodname >}} for Python tests in Bazel:
 
 - Configure a Datadog API key in your CI secret store.
 - Set `DD_SITE` to your Datadog site, such as `datadoghq.com`.
@@ -161,7 +161,7 @@ dd_topt_py_test(
 )
 ```
 
-By default, `dd_topt_py_test` uses `runner_mode = "managed_pytest"`. In this mode, the macro runs the bundled pytest entry point. It sets `PYTEST_ADDOPTS=--ddtrace` when you have not already configured it, and passes the Test Optimization metadata path to the test process.
+By default, `dd_topt_py_test` uses `runner_mode = "managed_pytest"`. In this mode, the macro runs the bundled pytest entry point. It sets `PYTEST_ADDOPTS=--ddtrace` when you have not already configured it, and passes the {{< prodname >}}Test Optimization{{< /prodname >}} metadata path to the test process.
 
 ## Use a repository-owned pytest wrapper
 

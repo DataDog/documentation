@@ -37,7 +37,7 @@ Cross-organization visibility supports the following telemetry in [Dashboard and
 * Metrics (all types supported, including [custom metrics][3], [trace metrics][4], and [metrics generated from logs][5])
 * Logs
 * CI Visibility pipelines
-* Test Optimization tests
+* {{< prodname >}}Test Optimization{{< /prodname >}} tests
 * Audit Trail
 
 ## Configure connections

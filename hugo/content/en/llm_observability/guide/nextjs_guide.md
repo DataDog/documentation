@@ -10,7 +10,7 @@ further_reading:
       text: 'Agent Observability SDK Reference for manual instrumentation'
 ---
 
-Monitor Next.js applications using [Agent Observability][1] by instrumenting your server-side LLM and agent calls.
+Monitor Next.js applications using [{{< prodname >}}Agent Observability{{< /prodname >}}][1] by instrumenting your server-side LLM and agent calls.
 
 ## Prerequisites
 
@@ -96,7 +96,7 @@ DD_API_KEY=<YOUR_DATADOG_API_KEY>
 
 Your Datadog site is {{< region-param key="dd_site" code="true" >}}.
 
-**Note**: If you are using `NODE_OPTIONS`, define these environment variables at the same level as `NODE_OPTIONS`, otherwise Agent Observability will not be properly enabled.
+**Note**: If you are using `NODE_OPTIONS`, define these environment variables at the same level as `NODE_OPTIONS`, otherwise {{< prodname >}}Agent Observability{{< /prodname >}} will not be properly enabled.
 
 ### Start the application
 

@@ -48,7 +48,7 @@ To install the Observability Pipelines Worker, you need the following:
 
 To generate a new API key and pipeline:
 
-1. Navigate to [Observability Pipelines][6].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][6].
 2. Click **New Pipeline**.
 3. Enter a name for your pipeline.
 4. Click **Next**.
@@ -78,7 +78,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       datadog/observability-pipelines-worker run
     ```
 
-    Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. **Note**: `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in step 1.
+    Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your {{< prodname >}}Observability Pipelines{{< /prodname >}} configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. **Note**: `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in step 1.
 
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/quickstart/pipeline.yaml
@@ -310,7 +310,7 @@ The quickstart walked you through installing the Worker and deploying a sample p
 
 For recommendations on deploying and scaling multiple Workers:
 
-- See [Deployment Design and Principles][9] for information on what to consider when designing your Observability Pipelines architecture.
+- See [Deployment Design and Principles][9] for information on what to consider when designing your {{< prodname >}}Observability Pipelines{{< /prodname >}} architecture.
 - See [Best Practices for OP Worker Aggregator Architecture][10].
 
 ## Further reading

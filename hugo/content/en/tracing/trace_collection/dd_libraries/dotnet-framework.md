@@ -62,11 +62,11 @@ For a full list of Datadog's .NET Framework library and processor architecture s
 ## Installation and getting started
 
 <div class="alert alert-info">
-  To set up Datadog APM in Serverless environments, such as AWS Lambda or Azure Functions, see <a href="/serverless">Serverless</a>.
+  To set up {{< prodname >}}Datadog APM{{< /prodname >}} in Serverless environments, such as AWS Lambda or Azure Functions, see <a href="/serverless">Serverless</a>.
 </div>
 
 <div class="alert alert-danger">
-  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog APM). To ensure maximum visibility, run only one APM solution in your application environment.
+  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, {{< prodname >}}Datadog APM{{< /prodname >}}). To ensure maximum visibility, run only one APM solution in your application environment.
 </div>
 
 ### Installation

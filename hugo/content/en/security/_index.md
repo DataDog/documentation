@@ -111,32 +111,32 @@ cascade:
 Bring speed and scale to your production security operations. Datadog Security delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, Datadog Security brings unprecedented integration between security and operations aligned to your organization's shared goals.
 
 Datadog Security includes: 
-- [Cloud SIEM](#cloud-siem)
-- [Code Security](#code-security)
-- [Cloud Security](#cloud-security)
-- [App and API Protection](#app-and-api-protection)
-- [AI Guard](#ai-guard)
-- [Workload Protection](#workload-protection)
+- [{{< prodname >}}Cloud SIEM{{< /prodname >}}](#cloud-siem)
+- [{{< prodname >}}Code Security{{< /prodname >}}](#code-security)
+- [{{< prodname >}}Cloud Security{{< /prodname >}}](#cloud-security)
+- [{{< prodname >}}App and API Protection{{< /prodname >}}](#app-and-api-protection)
+- [{{< prodname >}}AI Guard{{< /prodname >}}](#ai-guard)
+- [{{< prodname >}}Workload Protection{{< /prodname >}}](#workload-protection)
 - [Sensitive Data Scanner](#sensitive-data-scanner)
  
 To learn more, check out the [30-second Product Guided Tour][14].
 
 ## Cloud SIEM
 
-[Cloud SIEM][4] (Security Information and Event Management) detects real-time threats to your application and infrastructure, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration. Cloud SIEM is powered by [Datadog Log Management][5]. With these areas combined, you can [automate remediation of threats detected by Datadog Cloud SIEM][6] to speed up your threat-response workflow. Check out the dedicated [Guided Tour](https://www.datadoghq.com/guided-tour/security/cloud-siem/) to see more.
+[{{< prodname >}}Cloud SIEM{{< /prodname >}}][4] (Security Information and {{< prodname >}}Event Management{{< /prodname >}}) detects real-time threats to your application and infrastructure, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration. {{< prodname >}}Cloud SIEM{{< /prodname >}} is powered by [Datadog Log Management][5]. With these areas combined, you can [automate remediation of threats detected by Datadog Cloud SIEM][6] to speed up your threat-response workflow. Check out the dedicated [Guided Tour](https://www.datadoghq.com/guided-tour/security/cloud-siem/) to see more.
 
 {{< img src="security/security_monitoring/cloud_siem_overview_2025.png" alt="The Cloud SIEM home page showing the Security Overview section with widgets for important signals, suspicious actors, impacted resources, threat intel, and signal trends" width="100%">}}
 
 ## Code Security
 
-[Code Security][20] scans your first-party code and open source libraries used in your applications in both your repositories and running services, providing end-to-end visibility from development to production. It encompasses the following capabilities:
+[{{< prodname >}}Code Security{{< /prodname >}}][20] scans your first-party code and open source libraries used in your applications in both your repositories and running services, providing end-to-end visibility from development to production. It encompasses the following capabilities:
 
 - [Static Code Analysis (SAST)][27] for identifying security and quality issues in your first-party code
 - [Software Composition Analysis (SCA)][28] for identifying open source dependencies in both your repositories and your services
 - [Runtime Code Analysis (IAST)][29] for identifying vulnerabilities in the first-party code within your services
 - [Secret Scanning][30] for identifying and validating leaked secrets (in Preview)
 
-With IDE integrations, pull request comments, and CI/CD gates, Code Security helps teams implement DevSecOps throughout the organization:
+With IDE integrations, pull request comments, and CI/CD gates, {{< prodname >}}Code Security{{< /prodname >}} helps teams implement DevSecOps throughout the organization:
 - **Developers:** early vulnerability detection, code quality improvements, faster development as developers spend less time debugging and patching.
 - **Security Administrators:** enhanced security posture, improved patch management in response to early vulnerability alerts, and compliance monitoring.
 - **Site Reliability Engineers (SREs):** automated security checks throughout CI/CD workflow, security compliance, and system resilience. SAST reduces manual overhead for SREs and ensures that each release is thoroughly tested for vulnerabilities.  
@@ -145,9 +145,9 @@ With IDE integrations, pull request comments, and CI/CD gates, Code Security hel
 
 ## Cloud Security
 
-[Cloud Security][10] delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
+[{{< prodname >}}Cloud Security{{< /prodname >}}][10] delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
-Cloud Security includes [Workload Protection][12], [Misconfigurations][11], [Identity Risks][15], and [Vulnerabilities][16]. To learn more, check out the dedicated [Guided Tour][13].
+{{< prodname >}}Cloud Security{{< /prodname >}} includes [{{< prodname >}}Workload Protection{{< /prodname >}}][12], [Misconfigurations][11], [Identity Risks][15], and [Vulnerabilities][16]. To learn more, check out the dedicated [Guided Tour][13].
 
 {{< img src="security/csm/csm_overview_3.png" alt="The Security Inbox on the Cloud Security overview shows a list of prioritized security issues" width="100%">}}
 
@@ -155,19 +155,19 @@ To get started with Datadog Security, navigate to the [{{< ui >}}Security{{< /ui
 
 ##  App and API Protection
 
-Datadog [App and API Protection (AAP)][1] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). AAP leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
+Datadog [App and API Protection (AAP)][1] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). AAP leverages [{{< prodname >}}Datadog APM{{< /prodname >}}][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
 ## AI Guard
 
-[AI Guard][35] inspects, blocks, and governs AI behavior in real time. It sits inline with your AI app or agent to protect against prompt injection, jailbreaking, and sensitive data exfiltration attacks, using Prompt Protection, Tool Protection, and Sensitive Data Protection. These protections work for any target AI model, including OpenAI, Anthropic, Bedrock, VertexAI, and Azure.
+[{{< prodname >}}AI Guard{{< /prodname >}}][35] inspects, blocks, and governs AI behavior in real time. It sits inline with your AI app or agent to protect against prompt injection, jailbreaking, and sensitive data exfiltration attacks, using Prompt Protection, Tool Protection, and Sensitive Data Protection. These protections work for any target AI model, including OpenAI, Anthropic, Bedrock, VertexAI, and Azure.
 
 {{< img src="security/ai_guard/ai_guard_detection_rules_1.png" alt="AI Guard Detection Rules Explorer" width="100%">}}
 
 ## Workload Protection
 
-[Workload Protection][26] monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of Workload Protection with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
+[{{< prodname >}}Workload Protection{{< /prodname >}}][26] monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of {{< prodname >}}Workload Protection{{< /prodname >}} with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
 
 - Proactively block threats with [Active Protection][31].
 - Manage out-of-the-box and custom [detection rules][32].
@@ -176,7 +176,7 @@ Datadog [App and API Protection (AAP)][1] provides observability into applicatio
 
 ## Sensitive Data Scanner
 
-[Sensitive Data Scanner][24] can help prevent sensitive data leaks and limit non-compliance risks by discovering, classifying, and optionally redacting sensitive data. It can scan for sensitive data in your telemetry data, such as application logs, APM spans, RUM events, and events from Event Management. It can also scan for sensitive information within your cloud storage resources. 
+[Sensitive Data Scanner][24] can help prevent sensitive data leaks and limit non-compliance risks by discovering, classifying, and optionally redacting sensitive data. It can scan for sensitive data in your telemetry data, such as application logs, APM spans, RUM events, and events from {{< prodname >}}Event Management{{< /prodname >}}. It can also scan for sensitive information within your cloud storage resources. 
 
 After you [set up Sensitive Data Scanner][25], use the {{< ui >}}Findings{{< /ui >}} page to see details of sensitive data findings that have been identified, so that you can triage, investigate, and remediate the findings.
 

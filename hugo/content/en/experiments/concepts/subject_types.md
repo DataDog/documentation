@@ -81,7 +81,7 @@ LEFT JOIN measures
 
 ### Product Analytics and RUM metrics
 
-Each subject type has an associated **attribute**. Datadog uses this attribute to associate Product Analytics and Real User Monitoring (RUM) data with experiment exposures. The attribute value must match the identifier you pass as `targetingKey`.
+Each subject type has an associated **attribute**. Datadog uses this attribute to associate {{< prodname >}}Product Analytics{{< /prodname >}} and Real User Monitoring (RUM) data with experiment exposures. The attribute value must match the identifier you pass as `targetingKey`.
 
 For example:
 
@@ -99,7 +99,7 @@ datadogRum.setUser({
 });
 ```
 
-When Datadog computes experiment results, it joins experiment exposures to Product Analytics and RUM events on the subject type attribute. By default, the analysis includes events that occur between a subject's first exposure and the end of the experiment. Datadog aggregates those events using the metric definition you configured (for example, count or sum), then runs a [statistical analysis][3] for the experiment.
+When Datadog computes experiment results, it joins experiment exposures to {{< prodname >}}Product Analytics{{< /prodname >}} and RUM events on the subject type attribute. By default, the analysis includes events that occur between a subject's first exposure and the end of the experiment. Datadog aggregates those events using the metric definition you configured (for example, count or sum), then runs a [statistical analysis][3] for the experiment.
 
 ## Further reading
 

@@ -16,52 +16,52 @@ further_reading:
 
 ## Overview
 
-Bits Code is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with [source code providers](#supported-source-code-providers) to create production-ready pull or merge requests, then iterates on changes using CI logs and developer feedback.
+{{< prodname >}}Bits Code{{< /prodname >}} is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with [source code providers](#supported-source-code-providers) to create production-ready pull or merge requests, then iterates on changes using CI logs and developer feedback.
 
 {{< img src="bits_ai/dev_agent/sessions_overview.png" alt="A tab titled 'Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
-Each time Bits Code investigates an issue or generates a fix, it creates a [session](#sessions), which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products. Set up [automations][28] to have Bits Code run sessions on a schedule or in response to signals from other Datadog products, such as a new APM Recommendation or flaky test.
+Each time {{< prodname >}}Bits Code{{< /prodname >}} investigates an issue or generates a fix, it creates a [session](#sessions), which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products. Set up [automations][28] to have {{< prodname >}}Bits Code{{< /prodname >}} run sessions on a schedule or in response to signals from other Datadog products, such as a new APM Recommendation or flaky test.
 
-To get started with Bits Code, [set up a source code integration][6] and complete any additional configuration. Then, [start your first session](#start-a-session).
+To get started with {{< prodname >}}Bits Code{{< /prodname >}}, [set up a source code integration][6] and complete any additional configuration. Then, [start your first session](#start-a-session).
 
-Learn how your Bits Code usage is billed on [AI Credits][27].
+Learn how your {{< prodname >}}Bits Code{{< /prodname >}} usage is billed on [AI Credits][27].
 
 ## Sessions
-A session captures a segment of work with Bits Code, including its analysis and code changes. Start, view, and manage your sessions at {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][7].
+A session captures a segment of work with {{< prodname >}}Bits Code{{< /prodname >}}, including its analysis and code changes. Start, view, and manage your sessions at {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}{{< prodname >}}Bits Code{{< /prodname >}}{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][7].
 
 {{< img src="bits_ai/dev_agent/code_fix.png" alt="A session showing a Bits AI summary and task list on the left and a code diff on the right" style="width:100%;" >}}
 
 ### Start a session
-After [completing setup][6], do one of the following to start a Bits Code session:
+After [completing setup][6], do one of the following to start a {{< prodname >}}Bits Code{{< /prodname >}} session:
 - Enter a freeform prompt at [{{< ui >}}Sessions{{< /ui >}}][7]: enter a custom prompt or generate one by clicking a suggested prompt card
 - Invoke Bits Code in a [supported Datadog product](#supported-datadog-products)
-- Set up a Bits Code [automation][28]
+- Set up a {{< prodname >}}Bits Code{{< /prodname >}} [automation][28]
 
-A session can also be created when another Bits AI agent (like [Bits Chat][16] or [Bits Investigation][17]) hands off a coding task to Bits Code.
+A session can also be created when another Bits AI agent (like [{{< prodname >}}Bits Chat{{< /prodname >}}][16] or [Bits Investigation][17]) hands off a coding task to {{< prodname >}}Bits Code{{< /prodname >}}.
 
 ### Session visibility
 
-Bits Code sessions are shared across your Datadog organization by default. Anyone in your organization can open a session to review its analysis, actions, and code changes—or continue working with Bits Code in it. This makes it easy to share context and pick up a teammate's in-progress work.
+{{< prodname >}}Bits Code{{< /prodname >}} sessions are shared across your Datadog organization by default. Anyone in your organization can open a session to review its analysis, actions, and code changes—or continue working with {{< prodname >}}Bits Code{{< /prodname >}} in it. This makes it easy to share context and pick up a teammate's in-progress work.
 
 ### View and manage sessions
 On [{{< ui >}}Sessions{{< /ui >}}][7], the {{< ui >}}My Sessions{{< /ui >}} panel shows the sessions you're involved in. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR or MR. {{< ui >}}My Sessions{{< /ui >}} is a personalized view, not a privacy boundary—that is, other members of your organization can still access these sessions.
 
-Click a session to view its details and continue working with Bits Code. To remove a session from your {{< ui >}}My Sessions{{< /ui >}} list, click one of the following:
+Click a session to view its details and continue working with {{< prodname >}}Bits Code{{< /prodname >}}. To remove a session from your {{< ui >}}My Sessions{{< /ui >}} list, click one of the following:
 - <i class="icon-eye-slashed-wui"></i> ({{< ui >}}Unwatch session{{< /ui >}}): removes the session from your own {{< ui >}}My Sessions{{< /ui >}} list only. Other users are not affected.
 - <i class="icon-archive-wui"></i> ({{< ui >}}Archive for everyone{{< /ui >}}): archives the session for all users in your organization.
 
 ## Supported source code providers
-Bits Code supports the following source code providers:
+{{< prodname >}}Bits Code{{< /prodname >}} supports the following source code providers:
 - **GitHub**: GitHub.com and [GitHub Enterprise Cloud][30]
 - **GitLab**: GitLab.com
 
 The following plans are not supported:
 - **Self-hosted plans**, such as GitHub Enterprise Server and GitLab Self-Managed.
-- **Cloud-hosted plans on dedicated domains**, such as [GitHub Enterprise Cloud with data residency][31] and [GitLab Dedicated][32]. Bits Code supports only providers on the standard GitHub.com and GitLab.com domains.
+- **Cloud-hosted plans on dedicated domains**, such as [GitHub Enterprise Cloud with data residency][31] and [GitLab Dedicated][32]. {{< prodname >}}Bits Code{{< /prodname >}} supports only providers on the standard GitHub.com and GitLab.com domains.
 
 ## Supported Datadog products
 
-Bits Code can suggest code improvements within several Datadog products, including the following:
+{{< prodname >}}Bits Code{{< /prodname >}} can suggest code improvements within several Datadog products, including the following:
 
 | Product                   | Capabilities                                                       |
 |---------------------------|--------------------------------------------------------------------|
@@ -81,43 +81,43 @@ Bits Code can suggest code improvements within several Datadog products, includi
 
 ### Code fixes and optimizations surfaced by Datadog products
 
-Across [supported Datadog products](#supported-datadog-products), use Bits Code to implement optimizations and fixes—for example, [Cloud Cost Recommendations][23], [Error Tracking][1] issues, and [SAST vulnerabilities][15]. In certain products, [Bits Chat][16] explores and investigates issues, then hands off its findings to Bits Code to implement a code change.
+Across [supported Datadog products](#supported-datadog-products), use {{< prodname >}}Bits Code{{< /prodname >}} to implement optimizations and fixes—for example, [Cloud Cost Recommendations][23], [{{< prodname >}}Error Tracking{{< /prodname >}}][1] issues, and [SAST vulnerabilities][15]. In certain products, [{{< prodname >}}Bits Chat{{< /prodname >}}][16] explores and investigates issues, then hands off its findings to {{< prodname >}}Bits Code{{< /prodname >}} to implement a code change.
 
 {{< img src="bits_ai/dev_agent/fix_with_bits.png" alt="A button labeled with the text 'Fix with Bits.'" style="width:25%" >}}
 
-You can manually prompt Bits Code to implement changes for a certain finding, or configure an [automation][28] so that it does so autonomously. 
+You can manually prompt {{< prodname >}}Bits Code{{< /prodname >}} to implement changes for a certain finding, or configure an [automation][28] so that it does so autonomously. 
 
 ### General coding tasks
 
-Use the freeform prompt field at [{{< ui >}}Sessions{{< /ui >}}][7] to work with Bits Code on general coding tasks.
+Use the freeform prompt field at [{{< ui >}}Sessions{{< /ui >}}][7] to work with {{< prodname >}}Bits Code{{< /prodname >}} on general coding tasks.
 
 ### Automations
 
-[Automations][28] run Bits Code sessions automatically, on a schedule or in response to signals from Datadog products like Error Tracking, APM, or Code Security. After a session completes, Bits Code delivers the results as a pull or merge request (optionally in draft mode) or a Slack notification.
+[Automations][28] run {{< prodname >}}Bits Code{{< /prodname >}} sessions automatically, on a schedule or in response to signals from Datadog products like {{< prodname >}}Error Tracking{{< /prodname >}}, APM, or {{< prodname >}}Code Security{{< /prodname >}}. After a session completes, {{< prodname >}}Bits Code{{< /prodname >}} delivers the results as a pull or merge request (optionally in draft mode) or a Slack notification.
 
-You can build automations from triggers (a product finding, a custom prompt, a schedule, or a combination) and configure one or more outputs. Datadog-provided templates are also available to help you get started. Create and manage automations at {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Automations{{< /ui >}}][29].
+You can build automations from triggers (a product finding, a custom prompt, a schedule, or a combination) and configure one or more outputs. Datadog-provided templates are also available to help you get started. Create and manage automations at {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}{{< prodname >}}Bits Code{{< /prodname >}}{{< /ui >}} > [{{< ui >}}Automations{{< /ui >}}][29].
 
 ### Custom agent skills and instructions
 
-Bits Code can use custom skills defined in your repository. It discovers skills formatted like `<skill-name>/SKILL.md` in `.claude/skills/`, `.codex/skills/`, and `.gemini/skills/` directories. Skills should contain YAML `name` and `description` frontmatter keys.
+{{< prodname >}}Bits Code{{< /prodname >}} can use custom skills defined in your repository. It discovers skills formatted like `<skill-name>/SKILL.md` in `.claude/skills/`, `.codex/skills/`, and `.gemini/skills/` directories. Skills should contain YAML `name` and `description` frontmatter keys.
 
-Bits Code automatically invokes appropriate skills based on their `name` and `description` values, and you can encourage use by mentioning skills in your [custom instructions file][33]. You can also prompt Bits Code to use a certain skill directly.
+{{< prodname >}}Bits Code{{< /prodname >}} automatically invokes appropriate skills based on their `name` and `description` values, and you can encourage use by mentioning skills in your [custom instructions file][33]. You can also prompt {{< prodname >}}Bits Code{{< /prodname >}} to use a certain skill directly.
 
-Bits Code also [ingests custom instructions][33] defined in your repository and Bits Code settings.
+{{< prodname >}}Bits Code{{< /prodname >}} also [ingests custom instructions][33] defined in your repository and {{< prodname >}}Bits Code{{< /prodname >}} settings.
 
 ### Pull or merge request collaboration
 
-Bits Code integrates with [source code providers](#supported-source-code-providers) to:
+{{< prodname >}}Bits Code{{< /prodname >}} integrates with [source code providers](#supported-source-code-providers) to:
 - Create pull or merge requests, generating titles and descriptions based on your repository's pull or merge request template
 - Iterate on pull requests in response to comments (GitHub only); mention `@Datadog` in a comment to prompt Bits for updates
 - Monitor CI logs and pull or merge request state to fix failures and merge blockers
 
-Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is working on in {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][7].
+{{< prodname >}}Bits Code{{< /prodname >}} never auto-merges PRs or MRs. See all the PRs or MRs that {{< prodname >}}Bits Code{{< /prodname >}} is working on in {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}{{< prodname >}}Bits Code{{< /prodname >}}{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][7].
 
 ## Limitations
 
-- Bits Code is an AI product, which means it can make mistakes. Use best practices when reviewing and testing agent-generated code.  
-- Bits Code does not support multi-repository investigations.
+- {{< prodname >}}Bits Code{{< /prodname >}} is an AI product, which means it can make mistakes. Use best practices when reviewing and testing agent-generated code.  
+- {{< prodname >}}Bits Code{{< /prodname >}} does not support multi-repository investigations.
 - When using GitLab, mentioning `@Datadog` in a comment to prompt Bits for updates is not supported.
 
 ## Further reading

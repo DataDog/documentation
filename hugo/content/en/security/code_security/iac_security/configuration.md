@@ -18,7 +18,7 @@ further_reading:
     text: "IaC Security Rules"
 ---
 
-Infrastructure as Code (IaC) Security detects IaC misconfigurations. By default, IaC Security scans repositories with [all supported rules][3]. You can customize which rules run and on which paths, as well as their severities and categories. Configure these settings under the `iac` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
+Infrastructure as Code (IaC) Security detects IaC misconfigurations. By default, IaC Security scans repositories with [all supported rules][3]. You can customize which rules run and on which paths, as well as their severities and categories. Configure these settings under the `iac` key in the {{< prodname >}}Code Security{{< /prodname >}} configuration, either in Datadog or in a `code-security.datadog.yaml` file.
 
 For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][1].
 
@@ -124,7 +124,7 @@ iac:
     - A
 {{< /code-block >}}
 
-Replace placeholders such as `A` and `B` with Code Security rule IDs. Legacy rule IDs are also supported for backward compatibility.
+Replace placeholders such as `A` and `B` with {{< prodname >}}Code Security{{< /prodname >}} rule IDs. Legacy rule IDs are also supported for backward compatibility.
 
 ## Global configuration
 

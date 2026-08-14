@@ -52,7 +52,7 @@ For containerized environments, follow the links below to enable trace collectio
 
 ### AWS Lambda
 
-To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][9] documentation.
+To set up {{< prodname >}}Datadog APM{{< /prodname >}} in AWS Lambda, see the [Tracing Serverless Functions][9] documentation.
 
 ### Other environments
 

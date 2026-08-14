@@ -4,7 +4,7 @@ description: Troubleshoot Database Monitoring setup
 
 ---
 
-This page details database agnostic common issues with setting up and using Database Monitoring, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with agent version releases.
+This page details database agnostic common issues with setting up and using {{< prodname >}}Database Monitoring{{< /prodname >}}, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with agent version releases.
 
 For specific database setup troubleshooting, use the corresponding troubleshooting page:
 

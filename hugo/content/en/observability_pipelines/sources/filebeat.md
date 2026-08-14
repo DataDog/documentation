@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Use the Logstash source to send logs to Observability Pipelines with Filebeat.
+Use the Logstash source to send logs to {{< prodname >}}Observability Pipelines{{< /prodname >}} with Filebeat.
 
 ## Setup
 

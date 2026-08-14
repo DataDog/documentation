@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-You can correlate Test Optimization data with [logs injected into Datadog][1], which allows you to view and analyze logs for specific test cases.
+You can correlate {{< prodname >}}Test Optimization{{< /prodname >}} data with [logs injected into Datadog][1], which allows you to view and analyze logs for specific test cases.
 
 {{< img src="continuous_integration/correlate_logs_and_tests.png"
   alt="Examine logs for specific test cases with logs and tests correlation." style="width:90%" >}}
@@ -166,7 +166,7 @@ async def main(jobs):
 
 ### Ruby
 
-Agentless logs submission with Test Optimization is supported for Rails applications. Before enabling, ensure
+Agentless logs submission with {{< prodname >}}Test Optimization{{< /prodname >}} is supported for Rails applications. Before enabling, ensure
 that your application is [instrumented with Datadog tracing][1].
 
 To use agentless log submission, you need `datadog-ci` version `0.16` or later. The following logging libraries are supported:

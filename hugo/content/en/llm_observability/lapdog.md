@@ -15,9 +15,9 @@ further_reading:
 
 ## Overview
 
-Lapdog is a local development tool for Agent Observability. It runs an agent on `localhost:8126` that captures every span, prompt, tool call, and cost from your LLM application, or from a coding agent like Claude Code, Codex, or Pi, and streams them into a browser dashboard at [lapdog.datadoghq.com](https://lapdog.datadoghq.com). No Datadog account is required.
+Lapdog is a local development tool for {{< prodname >}}Agent Observability{{< /prodname >}}. It runs an agent on `localhost:8126` that captures every span, prompt, tool call, and cost from your LLM application, or from a coding agent like Claude Code, Codex, or Pi, and streams them into a browser dashboard at [lapdog.datadoghq.com](https://lapdog.datadoghq.com). No Datadog account is required.
 
-Lapdog is built on the open-source [Datadog APM test agent][1]. It can also forward captured telemetry to Datadog so the same data appears in Agent Observability alongside your production traffic.
+Lapdog is built on the open-source [Datadog APM test agent][1]. It can also forward captured telemetry to Datadog so the same data appears in {{< prodname >}}Agent Observability{{< /prodname >}} alongside your production traffic.
 
 ## What you get
 
@@ -86,7 +86,7 @@ If you've changed the local port, override it from the {{< ui >}}Collecting sess
 
 ## Forward events to Datadog
 
-To dual-ship captured events to Agent Observability in Datadog, set your API key and pass `--forward`:
+To dual-ship captured events to {{< prodname >}}Agent Observability{{< /prodname >}} in Datadog, set your API key and pass `--forward`:
 
 ```shell
 DD_API_KEY=<YOUR_API_KEY> lapdog --forward claude

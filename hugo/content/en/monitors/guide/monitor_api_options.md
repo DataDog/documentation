@@ -166,7 +166,7 @@ The minimum number of test locations that must be in failure at the same time du
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Options for APM Trace Analytics, Audit Trail, CI, Error Tracking, Event, Logs, and RUM monitors" level="h3" %}}
+{{% collapse-content title="Options for APM Trace Analytics, Audit Trail, CI, {{< prodname >}}Error Tracking{{< /prodname >}}, Event, Logs, and RUM monitors" level="h3" %}}
 
 _These options only apply to the monitor types listed in this section's title._
 

@@ -14,14 +14,14 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Data Observability for PostgreSQL is in Preview. Contact your Datadog representative to enable it for your organization.
+{{< prodname >}}Data Observability{{< /prodname >}} for PostgreSQL is in Preview. Contact your Datadog representative to enable it for your organization.
 {{< /callout >}}
 
 ## Overview
 
 The PostgreSQL integration for Datadog Data Observability tracks table metadata, providing visibility into schemas, table dimensions, and row volumes across your environment.
 
-PostgreSQL is collected through the [Datadog Agent][1] rather than through a direct cloud connection like the [data warehouse integrations][7]. This page covers only the configuration needed for Data Observability. To set up the full suite of Database Monitoring features, see the [DBM setup guide for PostgreSQL][2].
+PostgreSQL is collected through the [Datadog Agent][1] rather than through a direct cloud connection like the [data warehouse integrations][7]. This page covers only the configuration needed for {{< prodname >}}Data Observability{{< /prodname >}}. To set up the full suite of {{< prodname >}}Database Monitoring{{< /prodname >}} features, see the [DBM setup guide for PostgreSQL][2].
 
 ## Prerequisites
 
@@ -33,7 +33,7 @@ Before you begin, make sure you have:
 
 ## Already using Database Monitoring?
 
-If [Database Monitoring][2] is already running against this database, most of the setup is done: the `datadog` user exists and has `pg_monitor`. Three things are still needed.
+If [{{< prodname >}}Database Monitoring{{< /prodname >}}][2] is already running against this database, most of the setup is done: the `datadog` user exists and has `pg_monitor`. Three things are still needed.
 
 1. **Check your Agent version.** Run `datadog-agent status` and read the version from the header and from the Postgres check line in the Collector section:
 
@@ -45,16 +45,16 @@ If [Database Monitoring][2] is already running against this database, most of th
 
    If the Agent is older than `7.81.0`, [upgrade the Agent][6]. Upgrading only the Postgres check with `datadog-agent integration install` is not sufficient: the Remote Configuration handler that delivers monitor queries ships with the Agent itself, not with the check.
 
-2. **Grant `SELECT` on your data.** Database Monitoring grants `pg_monitor` and `USAGE` on the `public` schema, but it does not grant `SELECT` on your tables. Data Observability needs it to compute row counts, column-level metrics, and custom SQL results. Run the grants in [Set up the Datadog database user](#set-up-the-datadog-database-user) for each schema in each database you want to track, skipping the `CREATE USER` step.
+2. **Grant `SELECT` on your data.** {{< prodname >}}Database Monitoring{{< /prodname >}} grants `pg_monitor` and `USAGE` on the `public` schema, but it does not grant `SELECT` on your tables. {{< prodname >}}Data Observability{{< /prodname >}} needs it to compute row counts, column-level metrics, and custom SQL results. Run the grants in [Set up the Datadog database user](#set-up-the-datadog-database-user) for each schema in each database you want to track, skipping the `CREATE USER` step.
 
-3. **Enable the Data Observability job.** Add the following to each existing instance in `conf.d/postgres.d/conf.yaml`, keeping `dbm: true` in place:
+3. **Enable the {{< prodname >}}Data Observability{{< /prodname >}} job.** Add the following to each existing instance in `conf.d/postgres.d/conf.yaml`, keeping `dbm: true` in place:
 
    ```yaml
    data_observability:
      enabled: true
    ```
 
-   If your instance already uses `database_autodiscovery`, Data Observability picks up every discovered database, so make sure the `SELECT` grants cover all of them.
+   If your instance already uses `database_autodiscovery`, {{< prodname >}}Data Observability{{< /prodname >}} picks up every discovered database, so make sure the `SELECT` grants cover all of them.
 
 [Restart the Agent][5] to apply the changes, then continue from [Explore your table metadata](#explore-your-table-metadata).
 
@@ -79,7 +79,7 @@ If [Database Monitoring][2] is already running against this database, most of th
      GRANT SELECT ON TABLES TO datadog;
    ```
 
-   `ALTER DEFAULT PRIVILEGES` only affects tables created by the role named in `FOR ROLE`. Run it once for **each role that creates tables** in the schema; otherwise Data Observability loses access to new tables as your application creates them. To list the roles that own tables in a schema:
+   `ALTER DEFAULT PRIVILEGES` only affects tables created by the role named in `FOR ROLE`. Run it once for **each role that creates tables** in the schema; otherwise {{< prodname >}}Data Observability{{< /prodname >}} loses access to new tables as your application creates them. To list the roles that own tables in a schema:
 
    ```sql
    SELECT DISTINCT tableowner FROM pg_tables WHERE schemaname = '<YOUR_SCHEMA>';
@@ -97,7 +97,7 @@ GRANT SELECT ON "<YOUR_SCHEMA>"."orders" TO datadog;
 GRANT SELECT ON "<YOUR_SCHEMA>"."users" TO datadog;
 ```
 
-Data Observability only displays tables where the `datadog` user has explicit `SELECT` privileges.
+{{< prodname >}}Data Observability{{< /prodname >}} only displays tables where the `datadog` user has explicit `SELECT` privileges.
 
 ## Configure the PostgreSQL integration
 
@@ -148,7 +148,7 @@ instances:
 
 **Note**: If your password includes special characters, wrap it in single quotes.
 
-Schema collection (`collect_schemas`) is enabled by default and is what populates your tables in Data Observability. `dbm: true` is **not** required for Data Observability; set it only if you also use [Database Monitoring][2].
+Schema collection (`collect_schemas`) is enabled by default and is what populates your tables in {{< prodname >}}Data Observability{{< /prodname >}}. `dbm: true` is **not** required for {{< prodname >}}Data Observability{{< /prodname >}}; set it only if you also use [{{< prodname >}}Database Monitoring{{< /prodname >}}][2].
 
 [Restart the Agent][5] to apply the changes:
 
@@ -168,7 +168,7 @@ The output should show the `postgres` check with a `Total Runs` count greater th
 
 ## Explore your table metadata
 
-Allow approximately one hour for the initial metadata collection to complete. You can then [view your PostgreSQL tables][3] in the Data Observability catalog.
+Allow approximately one hour for the initial metadata collection to complete. You can then [view your PostgreSQL tables][3] in the {{< prodname >}}Data Observability{{< /prodname >}} catalog.
 
 If your tables do not appear, verify that:
 
@@ -195,7 +195,7 @@ Monitors run on the collection schedule. Keep `SELECT` privileges in place for t
 
 ## Known limitations
 
-Data Observability lists all PostgreSQL tables from instances where `dbm` and `collect_schemas` are enabled, including instances that do not have `data_observability.enabled: true`. Scheduling a monitor against one of those databases produces a monitor with no data. If your tables are listed but your monitors stay empty, follow [Already using Database Monitoring?](#already-using-database-monitoring) to enable the job and grant the required `SELECT` privileges.
+{{< prodname >}}Data Observability{{< /prodname >}} lists all PostgreSQL tables from instances where `dbm` and `collect_schemas` are enabled, including instances that do not have `data_observability.enabled: true`. Scheduling a monitor against one of those databases produces a monitor with no data. If your tables are listed but your monitors stay empty, follow [Already using Database Monitoring?](#already-using-database-monitoring) to enable the job and grant the required `SELECT` privileges.
 
 ## Further reading
 

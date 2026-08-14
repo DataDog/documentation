@@ -10,13 +10,13 @@ further_reading:
 ---
 
 ## Overview
-Datadog's [GPU Monitoring][1] provides a centralized view into your GPU fleet's health, cost, and performance. It enables teams to make better provisioning decisions, optimize and troubleshoot AI workload performance, and eliminate idle GPU costs without having to manually set up individual vendor tools (like NVIDIA's DCGM). GPU Monitoring supports fleets deployed across the major cloud providers (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or provisioned through GPU-as-a-Service platforms like Coreweave and Lambda Labs. 
+Datadog's [{{< prodname >}}GPU Monitoring{{< /prodname >}}][1] provides a centralized view into your GPU fleet's health, cost, and performance. It enables teams to make better provisioning decisions, optimize and troubleshoot AI workload performance, and eliminate idle GPU costs without having to manually set up individual vendor tools (like NVIDIA's DCGM). {{< prodname >}}GPU Monitoring{{< /prodname >}} supports fleets deployed across the major cloud providers (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or provisioned through GPU-as-a-Service platforms like Coreweave and Lambda Labs. 
 
 You can access insights into your GPU fleet by deploying the Datadog Agent on your GPU-accelerated hosts. For setup instructions, see [Set up GPU Monitoring][2].
 
 ## Key capabilities
 ### Make data-driven GPU allocation and provisioning decisions
-With a comprehensive view of your entire fleet and available capacity, Datadog's GPU Monitoring helps you assign and manage your infrastructure and capacity fairly across your organization. 
+With a comprehensive view of your entire fleet and available capacity, Datadog's {{< prodname >}}GPU Monitoring{{< /prodname >}} helps you assign and manage your infrastructure and capacity fairly across your organization. 
 
 {{< img src="gpu_monitoring/funnel-3.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:100%;" >}}
 
@@ -30,7 +30,7 @@ With GPU Monitoring's resource telemetry, you can analyze trends in GPU resource
 {{< img src="gpu_monitoring/device_metrics.png" alt="Detail view of a device, displaying configurable timeseries visualizations for SM activity, memory utilization, power, and engine activity." style="width:100%;" >}}
 
 ### Proactively detect hardware issues
-GPUs are an expensive and scarce resource that have higher failure rates than standard servers. Datadog's GPU Monitoring solution provides OOTB monitors and proactive recommendations to help you detect and remediate hardware issues before they impact your mission-critical workloads.
+GPUs are an expensive and scarce resource that have higher failure rates than standard servers. Datadog's {{< prodname >}}GPU Monitoring{{< /prodname >}} solution provides OOTB monitors and proactive recommendations to help you detect and remediate hardware issues before they impact your mission-critical workloads.
 
 ### Identify and eliminate wasted, idle GPU costs
 Identify total spend on GPU infrastructure and attribute those costs to specific workloads and instances. Directly correlate GPU usage to related pods or processes.
@@ -39,7 +39,7 @@ Identify total spend on GPU infrastructure and attribute those costs to specific
 
 ## Ready to start?
 
-See [Set up GPU Monitoring][2] for instructions on how to set up Datadog's GPU Monitoring.
+See [Set up GPU Monitoring][2] for instructions on how to set up Datadog's {{< prodname >}}GPU Monitoring{{< /prodname >}}.
 
 ## Further Reading
 

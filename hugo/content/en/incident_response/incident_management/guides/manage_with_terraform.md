@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-You can use Terraform to manage your Incident Management configuration through the Datadog API. This guide covers the Incident Management resources available in the [Terraform registry][1] and links to the corresponding Datadog documentation for each.
+You can use Terraform to manage your {{< prodname >}}Incident Management{{< /prodname >}} configuration through the Datadog API. This guide covers the {{< prodname >}}Incident Management{{< /prodname >}} resources available in the [Terraform registry][1] and links to the corresponding Datadog documentation for each.
 
 Configuring incident types, fields, roles, and notification rules by hand in the UI works well for a handful of teams. It becomes harder to scale as your organization grows, for example, when standardizing configuration across hundreds of teams or migrating from another incident management tool. Terraform lets you define this configuration as code, so you can create and update it programmatically and keep it consistent across your organization.
 

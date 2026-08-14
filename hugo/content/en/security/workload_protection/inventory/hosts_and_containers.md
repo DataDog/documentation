@@ -5,12 +5,12 @@ disable_toc: false
 
 The [Hosts and Containers][1] view in Datadog Workload Protection {{< ui >}}Inventory{{< /ui >}} provides a unified view of host-level agent deployment, configuration health, and security feature status. 
 
-The {{< ui >}}Hosts and Containers{{< /ui >}} view shows the hostname of all active Agents running directly on hosts or as containers. This includes hosts with Workload Protection enabled or disabled.
+The {{< ui >}}Hosts and Containers{{< /ui >}} view shows the hostname of all active Agents running directly on hosts or as containers. This includes hosts with {{< prodname >}}Workload Protection{{< /prodname >}} enabled or disabled.
 
 {{< ui >}}Hosts and Containers{{< /ui >}} enables DevSecOps teams to:  
 
 - Verify that protections are properly deployed and running across environments, including:  
-  - [Workload Protection][3]  
+  - [{{< prodname >}}Workload Protection{{< /prodname >}}][3]  
   - [CSM Misconfigurations][2]  
   - [Container Vulnerability Scanning][4]  
   - [Host Vulnerability Scanning][4]  
@@ -72,7 +72,7 @@ Filtering on a cluster confirms whether protections are applied uniformly. This 
 
 [Hosts and Containers][1] supports investigations and incident triage. Use the feature icon panel to spot protection gaps. 
 
-Typically, hosts missing critical features like {{< ui >}}Workload Protection{{< /ui >}} or {{< ui >}}Host/Container Vulnerability Scanning{{< /ui >}} are triaged first. 
+Typically, hosts missing critical features like {{< ui >}}{{< prodname >}}Workload Protection{{< /prodname >}}{{< /ui >}} or {{< ui >}}Host/Container Vulnerability Scanning{{< /ui >}} are triaged first. 
 
 Hover over a feature icon and click {{< ui >}}Configure{{< /ui >}} to see remediation steps for all feature gaps. This enables triage without context switching.
 

@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-[Cloud SIEM's Risk Insights][4] consolidates multiple data sources, such as SIEM threats and Cloud Security insights, into a profile representing a single security entity, such as an IAM user.
+[Cloud SIEM's Risk Insights][4] consolidates multiple data sources, such as SIEM threats and {{< prodname >}}Cloud Security{{< /prodname >}} insights, into a profile representing a single security entity, such as an IAM user.
 
 With Risk Insights, you can:
 
@@ -28,11 +28,11 @@ With Risk Insights, you can:
 
 ## Prerequisites
 
-- To use Risk Insights, configure at least one of the following supported log sources to send logs to Cloud SIEM, with an active Open Cybersecurity Schema Framework (OCSF) pipeline:
+- To use Risk Insights, configure at least one of the following supported log sources to send logs to {{< prodname >}}Cloud SIEM{{< /prodname >}}, with an active Open Cybersecurity Schema Framework (OCSF) pipeline:
   - **Sources that provide identity and resource entities** (such as users, service identities, assumed roles, compute instances, and storage containers): AWS, Azure, GCP, GitHub, Microsoft 365, and Okta.
   - **Sources that provide user entities identified by email address**: 1Password, Cisco Duo, Cloudflare, CrowdStrike, Google Workspace, JumpCloud, LastPass, Salesforce, Slack, and Zscaler Internet Access (ZIA).
 - Many supported sources use an [out-of-the-box OCSF pipeline][8] that requires no additional configuration. If a supported source is not producing entities, confirm that its out-of-the-box OCSF pipeline is active. Pipelines that predate OCSF support, and customized pipelines, may not include the required OCSF processing.
-- (Optional) To view associated Cloud Security insights in the entity panel, [Cloud Security must be configured][2].
+- (Optional) To view associated {{< prodname >}}Cloud Security{{< /prodname >}} insights in the entity panel, [Cloud Security must be configured][2].
 
 
 ## Explore risk insights
@@ -68,7 +68,7 @@ You can configure Datadog to send you notifications as soon as it detects new th
 
 1. Navigate to the {{< ui >}}Create a new Risk Insight notification{{< /ui >}} page. There are two ways to do this:
    - In Datadog, go to the [Risk Insights Explorer][4], then click {{< ui >}}Create Notification Rule{{< /ui >}}.
-   - In Datadog, go to {{< ui >}}Cloud SIEM{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}. Under {{< ui >}}Products{{< /ui >}}, in the {{< ui >}}Cloud SIEM{{< /ui >}} section, click [{{< ui >}}Risk Insights{{< /ui >}}][7]; then, under {{< ui >}}Notification rules{{< /ui >}}, click {{< ui >}}New notification rule{{< /ui >}}.
+   - In Datadog, go to {{< ui >}}{{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}. Under {{< ui >}}Products{{< /ui >}}, in the {{< ui >}}{{< prodname >}}Cloud SIEM{{< /prodname >}}{{< /ui >}} section, click [{{< ui >}}Risk Insights{{< /ui >}}][7]; then, under {{< ui >}}Notification rules{{< /ui >}}, click {{< ui >}}New notification rule{{< /ui >}}.
 1. Under {{< ui >}}Define entity attributes{{< /ui >}}, specify the attributes that should trigger notifications when Datadog detects them on an entity. Beside {{< ui >}}Entities matching{{< /ui >}}, start typing entity attributes and values. As you type, the preview table dynamically displays risk insights that match your criteria.
    <div class="alert alert-info">This step is optional, but if you don't enter any attributes, the notification defaults to sending alerts for all entities.</div>
 1. Under {{< ui >}}Set notification conditions{{< /ui >}}, specify the risk score threshold to trigger notifications for.

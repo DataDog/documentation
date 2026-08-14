@@ -29,7 +29,7 @@ further_reading:
 
 DDSQL is SQL for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data. You can perform actions like getting exactly the data you want by writing your own `SELECT` statement, or querying tags as if they are standard table columns.
 
-You can run DDSQL queries from AI agents using the [Datadog MCP Server][10] `ddsql` toolset (Preview).
+You can run DDSQL queries from AI agents using the [{{< prodname >}}Datadog MCP Server{{< /prodname >}}][10] `ddsql` toolset (Preview).
 
 This documentation covers the SQL support available and includes:
 - [Syntax compatible with PostgreSQL](#syntax)
@@ -1050,7 +1050,7 @@ dd.cloud_cost_scalar(
     to_timestamp timestamp]
 )</pre>
       </td>
-      <td>Returns <a href="/cloud_cost_management/">Cloud Cost Management</a> data as a scalar value. The function accepts a cloud cost query (with optional grouping), an aggregation reducer (use <code>sum</code> for cost data; other reducers such as <code>avg</code>, <code>min</code>, and <code>max</code> are accepted but rarely applicable to cost queries), and optional timestamp parameters (default 1 hour) to define the time range. <strong>Note</strong>: Cloud cost data is typically delayed by 24-48 hours, so recent timestamps may return no results.</td>
+      <td>Returns <a href="/cloud_cost_management/">{{< prodname >}}Cloud Cost Management{{< /prodname >}}</a> data as a scalar value. The function accepts a cloud cost query (with optional grouping), an aggregation reducer (use <code>sum</code> for cost data; other reducers such as <code>avg</code>, <code>min</code>, and <code>max</code> are accepted but rarely applicable to cost queries), and optional timestamp parameters (default 1 hour) to define the time range. <strong>Note</strong>: Cloud cost data is typically delayed by 24-48 hours, so recent timestamps may return no results.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT *
@@ -1072,7 +1072,7 @@ dd.cloud_cost_timeseries(
     to_timestamp timestamp]
 )</pre>
       </td>
-      <td>Returns <a href="/cloud_cost_management/">Cloud Cost Management</a> data as a timeseries. The function accepts a cloud cost query (with optional grouping) and optional timestamp parameters (default 1 hour) to define the time range. Returns cost datapoints over time rather than a single aggregated value. <strong>Note</strong>: Cloud cost data is typically delayed by 24-48 hours, so recent timestamps may return no results.</td>
+      <td>Returns <a href="/cloud_cost_management/">{{< prodname >}}Cloud Cost Management{{< /prodname >}}</a> data as a timeseries. The function accepts a cloud cost query (with optional grouping) and optional timestamp parameters (default 1 hour) to define the time range. Returns cost datapoints over time rather than a single aggregated value. <strong>Note</strong>: Cloud cost data is typically delayed by 24-48 hours, so recent timestamps may return no results.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT *

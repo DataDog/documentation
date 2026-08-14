@@ -7,11 +7,11 @@ further_reading:
   text: "Manage Data Collection"
 ---
 <div class="alert alert-danger">
-Using the Sentry SDK with Error Tracking helps you migrate to Datadog. However, to get the most out of Error Tracking, it is recommended to use the Datadog SDKs. See <a href="/error_tracking/frontend">Frontend Error Tracking</a> and <a href="/error_tracking/backend">Backend Error Tracking</a>.
+Using the Sentry SDK with {{< prodname >}}Error Tracking{{< /prodname >}} helps you migrate to Datadog. However, to get the most out of {{< prodname >}}Error Tracking{{< /prodname >}}, it is recommended to use the Datadog SDKs. See <a href="/error_tracking/frontend">Frontend Error Tracking</a> and <a href="/error_tracking/backend">Backend Error Tracking</a>.
 </div>
 
 ## Overview
-You can use [Sentry SDKs][1] to send your events to Datadog, so you can start using Error Tracking on existing applications that are instrumented using Sentry SDKs.
+You can use [Sentry SDKs][1] to send your events to Datadog, so you can start using {{< prodname >}}Error Tracking{{< /prodname >}} on existing applications that are instrumented using Sentry SDKs.
 
 Setting up the Sentry SDK with Datadog requires a minimal code change to point the SDK to a Datadog Data Source Name (DSN).
 
@@ -19,7 +19,7 @@ Setting up the Sentry SDK with Datadog requires a minimal code change to point t
 
 ## Supported SDKs
 
-The following Sentry SDKs are verified to work with Error Tracking:
+The following Sentry SDKs are verified to work with {{< prodname >}}Error Tracking{{< /prodname >}}:
 
 | Platform   | Tested version                                    |
 | ---------- | ------------------------------------------------- |
@@ -32,9 +32,9 @@ The following Sentry SDKs are verified to work with Error Tracking:
 
 ## Setup
 ### Prerequisites
-Sentry SDK events are sent into Datadog as logs. You must have [Error Tracking for Logs][2] enabled for errors to show up in Error Tracking.
+Sentry SDK events are sent into Datadog as logs. You must have [Error Tracking for Logs][2] enabled for errors to show up in {{< prodname >}}Error Tracking{{< /prodname >}}.
 
-**Note:** By default, enabling Error Tracking for Logs enables Error Tracking on **all** of your logs. You can use [rules][9] to configure Error Tracking for Logs to **only** collect errors from the Sentry SDK. To do this, create a rule for logs with scope `source:sentry-sdk`, and create an exclusion rule for all other logs.
+**Note:** By default, enabling {{< prodname >}}Error Tracking{{< /prodname >}} for Logs enables {{< prodname >}}Error Tracking{{< /prodname >}} on **all** of your logs. You can use [rules][9] to configure {{< prodname >}}Error Tracking{{< /prodname >}} for Logs to **only** collect errors from the Sentry SDK. To do this, create a rule for logs with scope `source:sentry-sdk`, and create an exclusion rule for all other logs.
 
 {{< img src="error_tracking/sentry-sdk-rules.png" alt="Error Tracking rules including only Logs from the Sentry SDK" style="width:70%;" >}}
 
@@ -115,7 +115,7 @@ To configure the Sentry SDK to send events into Datadog:
 
 ### Upload JavaScript source maps
 
-If your frontend JavaScript source code is minified, you can upload source maps to Datadog to deobfuscate stack traces in Error Tracking. See [Upload JavaScript Source Maps][4].
+If your frontend JavaScript source code is minified, you can upload source maps to Datadog to deobfuscate stack traces in {{< prodname >}}Error Tracking{{< /prodname >}}. See [Upload JavaScript Source Maps][4].
 
 The `version` on source maps is matched with the `release` [configured][11] on the Sentry SDK.
 
@@ -178,7 +178,7 @@ Sentry.set_tags('git.repository_url', '<git-provider.example/me/my-repo>')
 
 ## Migrate to the recommended setup
 
-To get the most out of Error Tracking, Datadog recommends migrating to the Datadog SDK and/or Agent-based setups. See [Backend Error Tracking][7] and [Frontend Error Tracking][8] for more information.
+To get the most out of {{< prodname >}}Error Tracking{{< /prodname >}}, Datadog recommends migrating to the Datadog SDK and/or Agent-based setups. See [Backend Error Tracking][7] and [Frontend Error Tracking][8] for more information.
 
 The Sentry SDK setup can be used simultaneously with the recommended setup. Errors may be reported twice.
 

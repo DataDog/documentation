@@ -18,7 +18,7 @@ further_reading:
 
 <div class="alert alert-info">If your Databricks workspace has <a href="https://docs.databricks.com/en/security/network/front-end/index.html">Networking Restrictions</a> enabled, add Datadog's {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP ranges" >}} to your allow-list. If your workspace uses Private Link, see the <strong>Private Link Connectivity</strong> tab below.</div>
 
-Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
+Follow these steps to enable {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring for Databricks.
 
 1. [Configure the Datadog-Databricks integration](#configure-the-datadog-databricks-integration) for a Databricks workspace.
 1. [Install the Datadog Agent](#install-the-datadog-agent) on your Databricks cluster(s) in the workspace.
@@ -64,7 +64,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 1. On the {{< ui >}}Configure{{< /ui >}} tab, click {{< ui >}}Add Databricks Workspace{{< /ui >}}.
 1. Enter a workspace name, your Databricks workspace URL, and the client ID and secret you generated.
    {{< img src="data_jobs/databricks/connect-workspace-form-m2m.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, client ID, and client secret." style="width:100%;" >}}
-1. Provide the ID of a [Databricks SQL Warehouse][19] for Datadog to query. This gives you visibility into your Databricks costs in Jobs Monitoring or [Cloud Cost Management][18] and powers [Quality Monitoring][21].
+1. Provide the ID of a [Databricks SQL Warehouse][19] for Datadog to query. This gives you visibility into your Databricks costs in Jobs Monitoring or [{{< prodname >}}Cloud Cost Management{{< /prodname >}}][18] and powers [Quality Monitoring][21].
    1. In Databricks, go to {{< ui >}}SQL Warehouses{{< /ui >}} and select the warehouse for Datadog to use. It must be Pro or Serverless. Classic Warehouses are not supported. To reduce costs, use a dedicated 2XS warehouse, with Auto Stop configured for 5-10 minutes.
    1. Copy the ID from the warehouse's overview page (it is also the last segment of the warehouse's URL) and enter it in the integration tile.
    1. On the warehouse's {{< ui >}}Permissions{{< /ui >}} tab (top right), grant the service principal `CAN USE`.
@@ -77,7 +77,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
       ```
 
       <div class="alert alert-info">The user running these commands must have the <code>MANAGE</code> privilege on <code>CATALOG system</code>.</div>
-1. In the **Select products to set up integration** section, ensure that Data Observability: Jobs Monitoring is {{< ui >}}Enabled{{< /ui >}}.
+1. In the **Select products to set up integration** section, ensure that {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring is {{< ui >}}Enabled{{< /ui >}}.
 1. In the {{< ui >}}Datadog Agent Setup{{< /ui >}} section, choose either
     - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
     - [Manually](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent): Follow the [instructions below](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) to install and manage the init script for installing the Agent globally or on specific Databricks clusters.
@@ -117,7 +117,7 @@ See [Private Link Connectivity (Preview)][15] for full setup instructions.
 1. On the {{< ui >}}Configure{{< /ui >}} tab, click {{< ui >}}Add Databricks Workspace{{< /ui >}}.
 1. Enter a workspace name, your Databricks workspace URL, and the Databricks token you generated.
    {{< img src="data_jobs/databricks/configure-workspace-form.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, and API token." style="width:100%;" >}}
-1. Provide the ID of a [Databricks SQL Warehouse][19] for Datadog to query. This gives you visibility into your Databricks costs in Jobs Monitoring or [Cloud Cost Management][18] and powers [Quality Monitoring][21].
+1. Provide the ID of a [Databricks SQL Warehouse][19] for Datadog to query. This gives you visibility into your Databricks costs in Jobs Monitoring or [{{< prodname >}}Cloud Cost Management{{< /prodname >}}][18] and powers [Quality Monitoring][21].
    1. In Databricks, go to {{< ui >}}SQL Warehouses{{< /ui >}} and select the warehouse for Datadog to use. It must be Pro or Serverless. Classic Warehouses are not supported. To reduce costs, use a dedicated 2XS warehouse, with Auto Stop configured for 5-10 minutes.
    1. Copy the ID from the warehouse's overview page (it is also the last segment of the warehouse's URL) and enter it in the integration tile.
    1. On the warehouse's {{< ui >}}Permissions{{< /ui >}} tab (top right), grant the token's principal `CAN USE`.
@@ -130,7 +130,7 @@ See [Private Link Connectivity (Preview)][15] for full setup instructions.
       ```
 
       <div class="alert alert-info">The user running these commands must have the <code>MANAGE</code> privilege on <code>CATALOG system</code>.</div>
-1. In the **Select products to set up integration** section, make sure the Data Observability: Jobs Monitoring product is **Enabled**.
+1. In the **Select products to set up integration** section, make sure the {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring product is **Enabled**.
 1. In the {{< ui >}}Datadog Agent Setup{{< /ui >}} section, choose either
     - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
     - [Manually](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent): Follow the [instructions below](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) to install and manage the init script for installing the Agent globally or on specific Databricks clusters.
@@ -167,7 +167,7 @@ Datadog can install and manage a global init script in the Databricks workspace.
 
 #### When integrating a workspace with Datadog
 
-1. In the **Select products to set up integration** section, make sure the Data Observability: Jobs Monitoring product is **Enabled**.
+1. In the **Select products to set up integration** section, make sure the {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring product is **Enabled**.
 1. In the {{< ui >}}Datadog Agent Setup{{< /ui >}} section, select the {{< ui >}}Managed by Datadog{{< /ui >}} toggle button.
 1. Click {{< ui >}}Select API Key{{< /ui >}} to either select an existing Datadog API key or create a new Datadog API key.
 1. (Optional) Disable {{< ui >}}Enable Log Collection{{< /ui >}} if you do not want to collect driver and worker logs for correlating with jobs.
@@ -178,7 +178,7 @@ Datadog can install and manage a global init script in the Databricks workspace.
 
 1. On the **Configure** tab, click the workspace in the list of workspaces
 1. Click the {{< ui >}}Configured Products{{< /ui >}} tab
-1. Make sure the Data Observability: Jobs Monitoring product is **Enabled**.
+1. Make sure the {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring product is **Enabled**.
 1. In the {{< ui >}}Datadog Agent Setup{{< /ui >}} section, select the {{< ui >}}Managed by Datadog{{< /ui >}} toggle button.
 1. Click {{< ui >}}Select API Key{{< /ui >}} to either select an existing Datadog API key or create a new Datadog API key.
 1. (Optional) Disable {{< ui >}}Enable Log Collection{{< /ui >}} if you do not want to collect driver and worker logs for correlating with jobs.
@@ -217,7 +217,7 @@ This approach is recommended for clusters in **Standard** access mode.
     bash djm-install-script || true
     ```
 
-    The script above downloads and runs the latest init script for Data Observability: Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-databricks-0.14.0.sh` to use version `0.14.0`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][3].
+    The script above downloads and runs the latest init script for {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-databricks-0.14.0.sh` to use version `0.14.0`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][3].
 
 1. Grant read-only permissions to the init script:
     1. At the volume level, grant the `READ VOLUME` permission to all account users.
@@ -301,7 +301,7 @@ This setup does not work on Databricks clusters in <strong>Standard</strong> acc
    bash djm-install-script || true
    ```
 
-   The script above sets the required parameters, and downloads and runs the latest init script for Data Observability: Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-databricks-0.14.0.sh` to use version `0.14.0`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][3].
+   The script above sets the required parameters, and downloads and runs the latest init script for {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-databricks-0.14.0.sh` to use version `0.14.0`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][3].
 
 1. To enable the script for all new and restarted clusters, toggle {{< ui >}}Enabled{{< /ui >}}.
    {{< img src="data_jobs/databricks/toggle.png" alt="Databricks UI, admin settings, global init scripts. A script called 'install-datadog-agent' is in a list with an enabled toggle." style="width:100%;" >}}
@@ -350,7 +350,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
    bash djm-install-script || true
    ```
 
-   The script above downloads and runs the latest init script for Data Observability: Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL (for example, `install-databricks-0.14.0.sh` to use version `0.14.0`). You can find the source code used to generate this script, and the changes between script versions, on the [Datadog Agent repository][3].
+   The script above downloads and runs the latest init script for {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL (for example, `install-databricks-0.14.0.sh` to use version `0.14.0`). You can find the source code used to generate this script, and the changes between script versions, on the [Datadog Agent repository][3].
 
 1. Grant read-only permissions to the init script:
     1. At the volume level, grant the `READ VOLUME` permission to all account users.
@@ -472,7 +472,7 @@ If you need more granular control, grant these minimal permissions to the follow
 | Query                            | [CAN VIEW][23]
 | SQL warehouse                    | [CAN MONITOR][24]
 
-Additionally, for Datadog to access your Databricks cost data in Data Observability: Jobs Monitoring or [Cloud Cost Management][26], the user or service principal used to query [system tables][27] must have the following permissions:
+Additionally, for Datadog to access your Databricks cost data in {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring or [{{< prodname >}}Cloud Cost Management{{< /prodname >}}][26], the user or service principal used to query [system tables][27] must have the following permissions:
    - `CAN USE` permission on the SQL Warehouse.
    - Read access to the [system tables][27] within Unity Catalog. In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} and run the following commands, using the service principal's client ID (not its display name):
    ```sql
@@ -489,7 +489,7 @@ Additionally, for Datadog to access your Databricks cost data in Data Observabil
 
 ### Configure cluster tags
 
-Databricks custom cluster tags are automatically captured and available across Data Observability: Jobs Monitoring and the Datadog platform. The only exception is tags from Azure resource groups, which are not auto-captured.
+Databricks custom cluster tags are automatically captured and available across {{< prodname >}}Data Observability{{< /prodname >}}: Jobs Monitoring and the Datadog platform. The only exception is tags from Azure resource groups, which are not auto-captured.
 
 To add tags manually, set the `DD_TAGS` environment variable in the Spark environment variables of your cluster. This has the same effect as Databricks custom cluster tags but requires manual configuration. Use comma or space separated key:value pairs following [Datadog tag conventions][28]:
 

@@ -4,7 +4,7 @@ title: Serverless Monitoring for Azure Service Bus
 
 ## Overview
 
-Datadog APM uses **inferred spans** to collect traces and trace metrics from Azure Service Bus. These spans appear directly in flame graph and waterfall views.
+{{< prodname >}}Datadog APM{{< /prodname >}} uses **inferred spans** to collect traces and trace metrics from Azure Service Bus. These spans appear directly in flame graph and waterfall views.
 
 For Python and Node.js, Datadog traces Service Bus producers and Azure Functions consumers. .NET supports full producer and consumer tracing. Service Bus distributed tracing requires no additional setup beyond existing instrumentation for APM users.
 

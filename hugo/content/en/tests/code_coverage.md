@@ -25,7 +25,7 @@ This Test Optimization feature is legacy. Use the new dedicated <a href="https:/
 
 Code coverage is a measure of the total code coverage percentage that a module or session exercises.
 
-Ensure that [Test Optimization][1] is already set up for your language.
+Ensure that [{{< prodname >}}Test Optimization{{< /prodname >}}][1] is already set up for your language.
 
 ## Report code coverage
 

@@ -347,7 +347,7 @@ See the [{{< ui >}}Manual{{< /ui >}} tab](?tab=manual#instrumentation) for descr
 4. Stop your application by clicking {{< ui >}}Stop{{< /ui >}}.
    <div class="alert alert-danger">You <u>must</u> stop your application to successfully install Datadog.</div>
 
-5. In your Azure Portal, navigate to the {{< ui >}}Extensions{{< /ui >}} page and select the Datadog APM extension.
+5. In your Azure Portal, navigate to the {{< ui >}}Extensions{{< /ui >}} page and select the {{< prodname >}}Datadog APM{{< /prodname >}} extension.
 
    {{< img src="infrastructure/serverless/azure_app_services/choose_extension.png" alt="Example of Extensions page in Azure portal, showing .NET Datadog APM extension." style="width:100%;" >}}
 

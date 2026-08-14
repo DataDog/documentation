@@ -26,10 +26,10 @@ further_reading:
 
 You can detect code-level vulnerabilities and monitor application security in Node.js applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
-Follow these steps to enable Code Security in your service:
+Follow these steps to enable {{< prodname >}}Code Security{{< /prodname >}} in your service:
 
 1. [Update your Datadog Agent][4] to at least version 7.41.1.
-2. Update your Datadog SDK to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][3] page.
+2. Update your Datadog SDK to at least the minimum version needed to turn on {{< prodname >}}Code Security{{< /prodname >}}. For details, see [Library Compatibility][3] page.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    If you initialize the Datadog SDK on the command line using the `--require` option to Node.js:
@@ -96,7 +96,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{< /tabs >}}
 
 4. Restart your service.
-5. To see Code Security in action, browse your service and the code-level vulnerabilities appear in the [{{< ui >}}Vulnerability Explorer{{< /ui >}}][5].
+5. To see {{< prodname >}}Code Security{{< /prodname >}} in action, browse your service and the code-level vulnerabilities appear in the [{{< ui >}}Vulnerability Explorer{{< /ui >}}][5].
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
 

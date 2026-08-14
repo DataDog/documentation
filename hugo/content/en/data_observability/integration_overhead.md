@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Data Observability monitors your data through two products, each with a different overhead profile:
+{{< prodname >}}Data Observability{{< /prodname >}} monitors your data through two products, each with a different overhead profile:
 
 - **Quality Monitoring** evaluates data-quality metrics (such as freshness, row count, and column statistics) on a schedule. Depending on the warehouse and metric, an evaluation either reads table metadata or runs a SQL query against your data, so its cost is measured in **warehouse compute** (for example, Snowflake credits, Databricks DBUs, or BigQuery bytes scanned).
 - **Jobs Monitoring** observes the performance of your jobs by running the **Datadog Agent** on your compute (for example, Databricks or Spark clusters). The Agent shares a small amount of the CPU and memory you already provision for your workloads.
@@ -30,7 +30,7 @@ This page describes both overhead sources and how to control them. Actual cost d
 
 ## Quality Monitoring overhead
 
-A Data Observability monitor evaluates its metric on a fixed schedule that you choose: **hourly** or **daily**. Each time a monitor runs, Data Observability collects the metric value, either by reading table metadata or by running a query against your data. How each metric is collected depends on the warehouse.
+A Data Observability monitor evaluates its metric on a fixed schedule that you choose: **hourly** or **daily**. Each time a monitor runs, {{< prodname >}}Data Observability{{< /prodname >}} collects the metric value, either by reading table metadata or by running a query against your data. How each metric is collected depends on the warehouse.
 
 {{< tabs >}}
 {{% tab "Snowflake" %}}
@@ -72,7 +72,7 @@ Warehouse compute consumed by Quality Monitoring scales with:
 - **Data scanned per query**: column-statistic queries (and Custom SQL) are aggregates that scan table data, so larger tables and partitions cost more on every warehouse. Row count scans the table only on Databricks (`COUNT`); on Snowflake and BigQuery it is a metadata read that does not grow with table size. Freshness checks are lightweight everywhere: metadata reads on Snowflake and BigQuery, and metadata commands on Databricks.
 - **Warehouse warm time**: on warehouse-based platforms (Snowflake, Databricks), the dominant factor on most bills is how long your warehouse stays running. Frequent checks against a warehouse with a long idle timeout keep it warm and accrue cost even between queries. BigQuery on-demand is serverless and bills only by bytes scanned, so it has no warm-time cost.
 
-Data Observability runs these queries with bounded concurrency and a per-query timeout. A backlog of monitors does not flood your warehouse with unbounded parallel queries.
+{{< prodname >}}Data Observability{{< /prodname >}} runs these queries with bounded concurrency and a per-query timeout. A backlog of monitors does not flood your warehouse with unbounded parallel queries.
 
 ### Reducing Quality Monitoring overhead
 

@@ -42,7 +42,7 @@ Verify that your feature flag is enabled and evaluates in the correct environmen
 
    {{< img src="/product_analytics/experiment/troubleshooting_flag_link1.png" alt="An experiment page showing a tooltip on the feature flag with the environment (dev, enabled) and a Go to Flag link highlighted." style="width:90%;" >}}
 
-1. On the {{< ui >}}Feature Flags{{< /ui >}} page, select the correct environment tab and confirm that the flag is {{< ui >}}Enabled{{< /ui >}}. If the flag is disabled, enable it before proceeding.
+1. On the {{< ui >}}{{< prodname >}}Feature Flags{{< /prodname >}}{{< /ui >}} page, select the correct environment tab and confirm that the flag is {{< ui >}}Enabled{{< /ui >}}. If the flag is disabled, enable it before proceeding.
 
    {{< img src="/product_analytics/experiment/troubleshooting_feature_flag_page.png" alt="The Feature Flags page with the Enabled toggle highlighted in the Targeting rules and rollouts section." style="width:90%;" >}}
 

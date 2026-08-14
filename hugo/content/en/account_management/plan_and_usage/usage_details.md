@@ -130,7 +130,7 @@ For more details on your metrics, navigate to the [Metrics Summary][7] by hoveri
 
 ## Logs usage by index
 
-In the Log Management tab, this table displays your hourly, daily, monthly, and annual indexed log usage by index name and retention period. It also shows the breakdown between live logs and [rehydrated logs][8]. The following information is provided:
+In the {{< prodname >}}Log Management{{< /prodname >}} tab, this table displays your hourly, daily, monthly, and annual indexed log usage by index name and retention period. It also shows the breakdown between live logs and [rehydrated logs][8]. The following information is provided:
 
 * Index name
 * Retention period in days

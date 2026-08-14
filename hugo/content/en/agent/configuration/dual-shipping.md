@@ -23,7 +23,7 @@ Dual shipping can impact billing if you are sending data to multiple Datadog org
 
 This guide provides examples of Agent configurations for dual shipping different types of data (for example, APM, logs, Cluster Agent metrics) to multiple Datadog organizations and sites. For more information about Datadog sites, see [Getting Started with Datadog sites][3].
 
-**Note**: Use [Observability Pipelines][1] if you want to dual ship logs or split log traffic across different logging vendors, cloud storages, or SIEM providers.
+**Note**: Use [{{< prodname >}}Observability Pipelines{{< /prodname >}}][1] if you want to dual ship logs or split log traffic across different logging vendors, cloud storages, or SIEM providers.
 
 For a full list of network traffic destinations, see [Network Traffic][2].
 
@@ -221,7 +221,7 @@ DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://<VERSION>-app.agent.{{< reg
 
 ## Logs
 
-Use the Agent if you want to dual ship logs to multiple Datadog organizations. Use [Observability Pipelines][2] if you want to send logs to Datadog and external destinations.
+Use the Agent if you want to dual ship logs to multiple Datadog organizations. Use [{{< prodname >}}Observability Pipelines{{< /prodname >}}][2] if you want to send logs to Datadog and external destinations.
 
 TCP requires Agent version >= 6.6.<br/>
 HTTPS requires Agent version >= 6.13.

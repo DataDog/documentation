@@ -151,7 +151,7 @@ Datadog resolves datasets across the major warehouse, database, and object stora
 - Azure Blob Storage
 - Azure Data Lake Storage
 
-Assets resolve to the same entities that Datadog's other Data Observability integrations report, so lineage connects across your data platforms.
+Assets resolve to the same entities that Datadog's other {{< prodname >}}Data Observability{{< /prodname >}} integrations report, so lineage connects across your data platforms.
 
 Activities that Datadog cannot resolve datasets for appear as job runs without dataset lineage.
 

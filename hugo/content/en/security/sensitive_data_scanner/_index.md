@@ -56,8 +56,8 @@ Sensitive data, such as credit card numbers, API keys, IP addresses, and persona
  
 - APM spans
 - Code repositories
-- Events from Event Management
-- Agent Observability traces
+- Events from {{< prodname >}}Event Management{{< /prodname >}}
+- {{< prodname >}}Agent Observability{{< /prodname >}} traces
 - RUM events
 - Telemetry data, such as application logs
 
@@ -67,9 +67,9 @@ Sensitive data can also be unintentionally moved to cloud storage resources when
 
 ## Supported data sources
 
-Sensitive Data Scanner scans telemetry data (logs, APM spans, RUM events, and events), Agent Observability traces, cloud storage, and code repositories.
+Sensitive Data Scanner scans telemetry data (logs, APM spans, RUM events, and events), {{< prodname >}}Agent Observability{{< /prodname >}} traces, cloud storage, and code repositories.
 
-The action you can apply to matched sensitive data depends on the data source. The following table shows which obfuscation actions are supported for each telemetry source and for Agent Observability:
+The action you can apply to matched sensitive data depends on the data source. The following table shows which obfuscation actions are supported for each telemetry source and for {{< prodname >}}Agent Observability{{< /prodname >}}:
 
 | Action           | Logs | APM | RUM | Events | Agent Observability |
 |------------------|------|-----|-----|--------|---------------------|
@@ -116,15 +116,15 @@ See [Set Up Sensitive Data Scanner for Telemetry Data][4] for setup details.
 
 #### In your environment {#in-your-environment}
 
-Use [Observability Pipelines][5] to collect and process your logs within your environment, and then route the data to their downstream integrations. When you set up a pipeline in Observability Pipelines, add the [Sensitive Data Scanner processor][6] to redact sensitive data in your logs before they leave your premises. You can add predefined scanning rules from the Rule Library, such as email addresses, credit card numbers, API keys, authorization tokens, IP addresses, and more. You can also create your own rules using regex patterns.
+Use [{{< prodname >}}Observability Pipelines{{< /prodname >}}][5] to collect and process your logs within your environment, and then route the data to their downstream integrations. When you set up a pipeline in {{< prodname >}}Observability Pipelines{{< /prodname >}}, add the [Sensitive Data Scanner processor][6] to redact sensitive data in your logs before they leave your premises. You can add predefined scanning rules from the Rule Library, such as email addresses, credit card numbers, API keys, authorization tokens, IP addresses, and more. You can also create your own rules using regex patterns.
 
 See [Set Up Pipelines][7] for more information.
 
 ### Agent Observability
 
-Sensitive Data Scanner can scan [Agent Observability][20] traces, including inputs and outputs from LLM applications. This helps prevent exposing sensitive data like PII, API keys, or proprietary information in prompts, completions, and LLM workflow metadata.
+Sensitive Data Scanner can scan [{{< prodname >}}Agent Observability{{< /prodname >}}][20] traces, including inputs and outputs from LLM applications. This helps prevent exposing sensitive data like PII, API keys, or proprietary information in prompts, completions, and LLM workflow metadata.
 
-Agent Observability scanning uses a managed configuration model that differs from telemetry data scanning, where Agent Observability scanning has:
+{{< prodname >}}Agent Observability{{< /prodname >}} scanning uses a managed configuration model that differs from telemetry data scanning, where {{< prodname >}}Agent Observability{{< /prodname >}} scanning has:
 
 - **One managed scanning group**: A default scanning group is automatically created for your organization when you first access the [Agent Observability Settings page][18]. You cannot create additional scanning groups or delete the managed group.
 - **Customizable rules**: You can modify existing rules, disable rules you don't need, or add custom scanning rules to detect additional sensitive data patterns.
@@ -135,7 +135,7 @@ For each scanning rule, one of the following actions can be applied to matched s
 - **Partially redact**: Replace a specific portion of all matching values.
 - **Hash**: Replace the entire matched data with a non-reversible unique identifier.
 
-To configure scanning for Agent Observability data, navigate to the [Agent Observability Settings page][18] in Sensitive Data Scanner settings. For more information about Agent Observability, see the [Agent Observability documentation][20].
+To configure scanning for {{< prodname >}}Agent Observability{{< /prodname >}} data, navigate to the [Agent Observability Settings page][18] in Sensitive Data Scanner settings. For more information about {{< prodname >}}Agent Observability{{< /prodname >}}, see the [Agent Observability documentation][20].
 
 ### Cloud storage
 
@@ -147,7 +147,7 @@ Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners
 
 Sensitive Data Scanner leverages its [entire rules library][10] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. **Note**: Data stores and their files are only read in your environment—no sensitive data that was scanned is sent back to Datadog.
 
-Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [Cloud Security][11] affecting the sensitive data stores. You can click any issue to continue triage and remediation within Cloud Security.
+Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [{{< prodname >}}Cloud Security{{< /prodname >}}][11] affecting the sensitive data stores. You can click any issue to continue triage and remediation within {{< prodname >}}Cloud Security{{< /prodname >}}.
 
 See [Set up Sensitive Data Scanner for Cloud Storage][12] for setup details.
 
@@ -155,7 +155,7 @@ See [Set up Sensitive Data Scanner for Cloud Storage][12] for setup details.
 
 Datadog [Secret Scanning][21] scans code repositories to detect exposed secrets in the source code. Secret Scanning is powered by Sensitive Data Scanner and uses all rules from the [Secrets and credentials category][19] of the SDS library to find matches.
 
-Unlike telemetry data scanning, Secret Scanning operates in your CI/CD pipelines or directly in Datadog with hosted scanning (supported for GitHub, Azure DevOps, and GitLab). When secrets are detected in the code, findings are surfaced in the Code Security interface.
+Unlike telemetry data scanning, Secret Scanning operates in your CI/CD pipelines or directly in Datadog with hosted scanning (supported for GitHub, Azure DevOps, and GitLab). When secrets are detected in the code, findings are surfaced in the {{< prodname >}}Code Security{{< /prodname >}} interface.
 
 See the [Secret Scanning documentation][21] for setup details.
 

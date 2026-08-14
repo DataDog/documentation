@@ -17,7 +17,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
@@ -71,7 +71,7 @@ spec:
 {{< tabs >}}
 {{% tab "Using command-line arguments" %}}
 
-Start your Java application with the Datadog agent and App and API Protection enabled using command-line arguments:
+Start your Java application with the Datadog agent and {{< prodname >}}App and API Protection{{< /prodname >}} enabled using command-line arguments:
 
 ```yaml
 apiVersion: apps/v1
@@ -95,7 +95,7 @@ spec:
 {{% /tab %}}
 {{% tab "Using environment variables" %}}
 
-Start your Java application with App and API Protection enabled using environment variables:
+Start your Java application with {{< prodname >}}App and API Protection{{< /prodname >}} enabled using environment variables:
 
 ```yaml
 apiVersion: apps/v1
@@ -128,11 +128,11 @@ spec:
 {{% /collapse-content %}}
 
 {{% collapse-content title="APM Tracing Disabled" level="h4" %}}
-To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
+To disable APM tracing while keeping {{< prodname >}}App and API Protection{{< /prodname >}} enabled, you must set the APM tracing variable to false.
 {{< tabs >}}
 {{% tab "Using command-line arguments" %}}
 
-Start your Java application with the Datadog agent and App and API Protection enabled using command-line arguments:
+Start your Java application with the Datadog agent and {{< prodname >}}App and API Protection{{< /prodname >}} enabled using command-line arguments:
 
 ```yaml
 apiVersion: apps/v1
@@ -156,7 +156,7 @@ spec:
 {{% /tab %}}
 {{% tab "Using environment variables" %}}
 
-Start your Java application with App and API Protection enabled using environment variables:
+Start your Java application with {{< prodname >}}App and API Protection{{< /prodname >}} enabled using environment variables:
 
 ```yaml
 apiVersion: apps/v1
@@ -203,7 +203,7 @@ kubectl apply -f your-deployment.yaml
 
 ## Troubleshooting
 
-If you encounter issues while setting up App and API Protection for your Java application, see the [Java App and API Protection troubleshooting guide][2].
+If you encounter issues while setting up {{< prodname >}}App and API Protection{{< /prodname >}} for your Java application, see the [Java App and API Protection troubleshooting guide][2].
 
 ## Further Reading
 

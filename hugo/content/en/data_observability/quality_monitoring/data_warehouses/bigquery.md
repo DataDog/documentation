@@ -27,7 +27,7 @@ To configure the BigQuery integration in Datadog:
 1. Navigate to [{{< ui >}}Datadog Data Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][8].
 2. Click the {{< ui >}}Configure{{< /ui >}} button for the BigQuery option.
 
-You can now choose to use a service account that you've [already connected to Datadog](#using-an-existing-service-account) or [set up a new one](#using-a-new-service-account) specifically for Data Observability.
+You can now choose to use a service account that you've [already connected to Datadog](#using-an-existing-service-account) or [set up a new one](#using-a-new-service-account) specifically for {{< prodname >}}Data Observability{{< /prodname >}}.
 
 ### Using an existing service account
 
@@ -37,7 +37,7 @@ Choose this option if you've previously connected a service account to Datadog.
 2. Select the service account from the dropdown list.
 3. Click {{< ui >}}Next{{< /ui >}}.
 4. Turn on the {{< ui >}}Enable Data Observability{{< /ui >}} toggle and click {{< ui >}}Add Account{{< /ui >}}.
-Data Observability functionality requires additional roles and API access beyond the basic BigQuery integration.
+{{< prodname >}}Data Observability{{< /prodname >}} functionality requires additional roles and API access beyond the basic BigQuery integration.
 
 #### Additional roles
 

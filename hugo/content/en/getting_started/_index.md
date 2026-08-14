@@ -39,7 +39,7 @@ The table below lists a few examples of Datadog products:
         <td><p><strong>Development</strong></p></td>
         <td>
         <ul>
-        <li>Highlight code vulnerabilities in your text editor or on GitHub with <a href="/security/code_security/">Code Security</a>.</li>
+        <li>Highlight code vulnerabilities in your text editor or on GitHub with <a href="/security/code_security/">{{< prodname >}}Code Security{{< /prodname >}}</a>.</li>
         </ul>
         </td>
     </tr>
@@ -47,7 +47,7 @@ The table below lists a few examples of Datadog products:
         <td><p><strong>Testing</strong></p></td>
         <td>
             <ul>
-                <li>Block faulty code from deploying to production with <a href="/pr_gates/">PR Gates</a>.</li>
+                <li>Block faulty code from deploying to production with <a href="/pr_gates/">{{< prodname >}}PR Gates{{< /prodname >}}</a>.</li>
                 <li>Simulate users around the globe to test your web app, API, or mobile application with <a href="/synthetics/">Synthetic Monitoring</a>.</li>
             </ul>
         </td>
@@ -110,33 +110,33 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 
 {{< whatsnext desc="Platform Services:">}}
 {{< nextlink href="/getting_started/dashboards" >}}<u>Dashboards</u>: Create, share, and maintain dashboards that answer the work questions that matter to you.{{< /nextlink >}}
-{{< nextlink href="/getting_started/incident_management" >}}<u>Incident Management</u>: Communicate and track problems in your systems.{{< /nextlink >}}
+{{< nextlink href="/getting_started/incident_management" >}}<u>{{< prodname >}}Incident Management{{< /prodname >}}</u>: Communicate and track problems in your systems.{{< /nextlink >}}
 {{< nextlink href="/getting_started/monitors" >}}<u>Monitors</u>: Set up alerts and notifications so that your team knows when critical changes occur.{{< /nextlink >}}
 {{< nextlink href="/getting_started/notebooks" >}}<u>Notebooks</u>: Combine live graphs, metrics, logs, and monitors to isolate issues and create interactive guides.{{< /nextlink >}}
 {{< nextlink href="/account_management/organization_topology" >}}<u>Organization Topology</u>: Choose between single-org and multi-org Datadog deployments and manage isolation with access controls.{{< /nextlink >}}
 {{< nextlink href="/getting_started/teams" >}}<u>Teams</u>: Build a reliable ownership model by syncing team data from identity providers, GitHub, and other sources into Datadog.{{< /nextlink >}}
-{{< nextlink href="/getting_started/workflow_automation" >}}<u>Workflow Automation</u>: Automate end-to-end processes in response to alerts and security signals.{{< /nextlink >}}
+{{< nextlink href="/getting_started/workflow_automation" >}}<u>{{< prodname >}}Workflow Automation{{< /prodname >}}</u>: Automate end-to-end processes in response to alerts and security signals.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Product:">}}
 {{< nextlink href="/getting_started/containers" >}}<u>Containers</u>: Learn how to use Agent Autodiscovery and the Datadog operator.{{< /nextlink >}}
 {{< nextlink href="/getting_started/serverless" >}}<u>Serverless for AWS Lambda</u>: Learn how to collect metrics, logs, and traces from your serverless infrastructure.{{< /nextlink >}}
-{{< nextlink href="/getting_started/internal_developer_portal" >}}<u>Internal Developer Portal</u>: Unify telemetry, metadata, and workflows to accelerate delivery. {{< /nextlink >}}
+{{< nextlink href="/getting_started/internal_developer_portal" >}}<u>{{< prodname >}}Internal Developer Portal{{< /prodname >}}</u>: Unify telemetry, metadata, and workflows to accelerate delivery. {{< /nextlink >}}
 {{< nextlink href="/getting_started/tracing" >}}<u>Tracing</u>: Set up the Agent to trace a small application.{{< /nextlink >}}
 {{< nextlink href="/getting_started/profiler" >}}<u>Profiler</u>: Use Continuous Profiler to find and fix performance problems in your code.{{< /nextlink >}}
-{{< nextlink href="/getting_started/database_monitoring" >}}<u>Database Monitoring</u>: View the health and performance of databases, and quickly troubleshoot any issues that arise.{{< /nextlink >}}
+{{< nextlink href="/getting_started/database_monitoring" >}}<u>{{< prodname >}}Database Monitoring{{< /prodname >}}</u>: View the health and performance of databases, and quickly troubleshoot any issues that arise.{{< /nextlink >}}
 {{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic Monitoring</u>: Start testing and monitoring your API endpoints and key business journeys with Synthetic tests.{{< /nextlink >}}
 {{< nextlink href="/getting_started/continuous_testing" >}}<u>Continuous Testing</u>: Run end-to-end Synthetic tests in your CI pipelines and IDEs.{{< /nextlink >}}
 {{< nextlink href="/getting_started/session_replay" >}}<u>Session Replay</u>: Get an in-depth look at how users are interacting with your product with Session Replays.{{< /nextlink >}}
-{{< nextlink href="/getting_started/application_security" >}}<u>App and API Protection</u>: Discover best practices for getting your team up and running with AAP.{{< /nextlink >}}
-{{< nextlink href="/getting_started/cloud_security_management" >}}<u>Cloud Security</u>: Discover best practices for getting your team up and running with Cloud Security.{{< /nextlink >}}
-{{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Discover best practices for getting your team up and running with Cloud SIEM.{{< /nextlink >}}
+{{< nextlink href="/getting_started/application_security" >}}<u>{{< prodname >}}App and API Protection{{< /prodname >}}</u>: Discover best practices for getting your team up and running with AAP.{{< /nextlink >}}
+{{< nextlink href="/getting_started/cloud_security_management" >}}<u>{{< prodname >}}Cloud Security{{< /prodname >}}</u>: Discover best practices for getting your team up and running with {{< prodname >}}Cloud Security{{< /prodname >}}.{{< /nextlink >}}
+{{< nextlink href="/getting_started/cloud_siem" >}}<u>{{< prodname >}}Cloud SIEM{{< /prodname >}}</u>: Discover best practices for getting your team up and running with {{< prodname >}}Cloud SIEM{{< /prodname >}}.{{< /nextlink >}}
 {{< nextlink href="/getting_started/logs" >}}<u>Logs</u>: Send your first logs and use log processing to enrich them.{{< /nextlink >}}
 {{< nextlink href="/getting_started/ci_visibility" >}}<u>CI Visibility</u>: Collect CI pipeline data by setting up integrations with your CI providers.{{< /nextlink >}}
-{{< nextlink href="/getting_started/feature_flags" >}}<u>Feature Flags</u>: Manage feature delivery and personalize user experiences, with built-in observability.{{< /nextlink >}}
-{{< nextlink href="/getting_started/test_optimization" >}}<u>Test Optimization</u>: Collect CI test data by setting up test services in Datadog.{{< /nextlink >}}
+{{< nextlink href="/getting_started/feature_flags" >}}<u>{{< prodname >}}Feature Flags{{< /prodname >}}</u>: Manage feature delivery and personalize user experiences, with built-in observability.{{< /nextlink >}}
+{{< nextlink href="/getting_started/test_optimization" >}}<u>{{< prodname >}}Test Optimization{{< /prodname >}}</u>: Collect CI test data by setting up test services in Datadog.{{< /nextlink >}}
 {{< nextlink href="/getting_started/test_impact_analysis" >}}<u>Test Impact Analysis</u>: Optimize your test suite and reduce CI costs by only running tests that are relevant to your code changes.{{< /nextlink >}}
-{{< nextlink href="/getting_started/code_security" >}}<u>Code Security</u>: Analyze your first-party code and open source libraries in your applications from development to runtime.{{< /nextlink >}}
+{{< nextlink href="/getting_started/code_security" >}}<u>{{< prodname >}}Code Security{{< /prodname >}}</u>: Analyze your first-party code and open source libraries in your applications from development to runtime.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Try a Preview product or feature

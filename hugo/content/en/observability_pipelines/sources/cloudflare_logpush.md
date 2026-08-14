@@ -12,11 +12,11 @@ products:
 
 ## Overview
 
-This document goes over how to send Cloudflare Logpush logs to Observability Pipelines using the HTTP Server source.
+This document goes over how to send Cloudflare Logpush logs to {{< prodname >}}Observability Pipelines{{< /prodname >}} using the HTTP Server source.
 
 ## Prerequisites
 
-The following are required to send Cloudflare Logpush logs to Observability Pipelines:
+The following are required to send Cloudflare Logpush logs to {{< prodname >}}Observability Pipelines{{< /prodname >}}:
 
 - A Cloudflare account with Logpush enabled.
 - A server or a server pool, fronted by a load balancer, that runs the Observability Pipelines Worker and allows traffic from Cloudflare's CIDR blocks or the public internet.
@@ -29,7 +29,7 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
 
 ### Set up the pipeline components
 
-1. Navigate to [Observability Pipelines][2].
+1. Navigate to [{{< prodname >}}Observability Pipelines{{< /prodname >}}][2].
 1. Select a log template to create a pipeline.
 1. Select the HTTP Server source.
 1. If you are using Secrets Management, enter the identifier for the HTTP/S Server address key. See [Secret defaults][3] for the defaults used.

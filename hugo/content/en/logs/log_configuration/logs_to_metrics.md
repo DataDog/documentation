@@ -20,7 +20,7 @@ algolia:
 
 ## Overview
 
-<div class="alert alert-info">The solutions outlined in this documentation are specific to cloud-based logging environments. To generate metrics from on-premises logs, see the <a href="https://docs.datadoghq.com/observability_pipelines/configuration/explore_templates#generate-metrics">Observability Pipelines</a> documentation.</div>
+<div class="alert alert-info">The solutions outlined in this documentation are specific to cloud-based logging environments. To generate metrics from on-premises logs, see the <a href="https://docs.datadoghq.com/observability_pipelines/configuration/explore_templates#generate-metrics">{{< prodname >}}Observability Pipelines{{< /prodname >}}</a> documentation.</div>
 
 Datadog's [Logging without Limits][1]\* lets you dynamically decide what to include or exclude from your indexes for storage and query, at the same time many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. This means that even if you use [exclusion filters][2] to limit what you store for exploration, you can still visualize trends and anomalies over all of your log data at 10s granularity for 15 months.
 
@@ -79,7 +79,7 @@ Usage metrics are estimates of your current Datadog usage in near real-time. The
 - Get instant alerts about spikes or drops in your usage.
 - Assess the potential impact of code changes on your usage in near real-time.
 
-Log Management usage metrics come with three tags that can be used for more granular monitoring:
+{{< prodname >}}Log Management{{< /prodname >}} usage metrics come with three tags that can be used for more granular monitoring:
 
 | Tag                     | Description                                                           |
 | ----------------------- | --------------------------------------------------------------------- |

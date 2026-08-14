@@ -20,7 +20,7 @@ further_reading:
 
 {{< img src="security/vulnerabilities/container_images.png" alt="The container images view highlighting vulnerabilities and container column sort feature" width="100%">}}
 
-In Datadog, the [Container Images Explorer][1] provides insights into every image used in your environment. You can also view [Cloud Security][2] vulnerabilities in your container images, and track these vulnerabilities to specific layers.
+In Datadog, the [Container Images Explorer][1] provides insights into every image used in your environment. You can also view [{{< prodname >}}Cloud Security{{< /prodname >}}][2] vulnerabilities in your container images, and track these vulnerabilities to specific layers.
 
 Select the [Trends tab][3] for high-level insights across all of your images in your containerized infrastructure. Container image trends metrics can help you answer key questions about your security posture and deployment footprint over the span of weeks and months.
 

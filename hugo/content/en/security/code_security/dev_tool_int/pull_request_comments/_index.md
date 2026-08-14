@@ -8,10 +8,10 @@ aliases:
 ---
 
 ## Overview
-Code Security posts comments directly on pull requests (PRs) in your source code management (SCM) system when vulnerabilities are detected on enabled repositories. This help you see and fix issues in context before merging code. The comments are diff-aware, meaning they only flag new issues introduced on lines modified in the PR.
+{{< prodname >}}Code Security{{< /prodname >}} posts comments directly on pull requests (PRs) in your source code management (SCM) system when vulnerabilities are detected on enabled repositories. This help you see and fix issues in context before merging code. The comments are diff-aware, meaning they only flag new issues introduced on lines modified in the PR.
 
 There are two types of PR comments:
-- **Inline comment**: Flags an individual Code Security finding on specific lines of code and suggests a remediation (if available).
+- **Inline comment**: Flags an individual {{< prodname >}}Code Security{{< /prodname >}} finding on specific lines of code and suggests a remediation (if available).
         
     {{< img src="/code_security/github_inline_pr_comment_light.png" alt="A Datadog bot has posted an inline comment on a GitHub pull request flagging a \"Critical: Code Vulnerability\". The comment suggests replacing the code os.system(command) with os.system(shlex.quote(command)) to sanitize the process call." style="width:100%;" >}}
 
@@ -30,11 +30,11 @@ You can configure PR comments at the organization or repository level in [Reposi
 
 Learn more about [PR comments across Datadog][11].
 
-**Note**: PR comments are not PR checks. To set up checks, see [PR Gates][10].
+**Note**: PR comments are not PR checks. To set up checks, see [{{< prodname >}}PR Gates{{< /prodname >}}][10].
 
 ## Prerequisites
 - You must have the Datadog source code integration for your provider enabled. PR comments are supported for [GitHub][2], [GitLab][8], and [Azure DevOps][9] repositories.  
-- Your repositories must have the relevant Code Security product(s) enabled. To enable Code Security in-app, navigate to the [{{< ui >}}Code Security{{< /ui >}} Settings page][4].
+- Your repositories must have the relevant {{< prodname >}}Code Security{{< /prodname >}} product(s) enabled. To enable {{< prodname >}}Code Security{{< /prodname >}} in-app, navigate to the [{{< ui >}}Code Security{{< /ui >}} Settings page][4].
 
 <div class="alert alert-info">
   PR comments are not supported for pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
@@ -61,7 +61,7 @@ If you already have a GitHub App connected to Datadog, update it. Otherwise, cre
 
 1. In Datadog, navigate to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}GitHub Applications{{< /ui >}} > {{< ui >}}Add New GitHub Application{{< /ui >}}][3].
 2. Fill out any required details, such as the GitHub organization name.
-3. Under {{< ui >}}Select Features{{< /ui >}}, check the {{< ui >}}Code Security: Pull Request Review Comments{{< /ui >}} box.
+3. Under {{< ui >}}Select Features{{< /ui >}}, check the {{< ui >}}{{< prodname >}}Code Security{{< /prodname >}}: Pull Request Review Comments{{< /ui >}} box.
 4. Under {{< ui >}}Edit Permissions{{< /ui >}}, verify that the {{< ui >}}Pull Requests{{< /ui >}} permission is set to {{< ui >}}Read & Write{{< /ui >}}.
 5. Click {{< ui >}}Create App in GitHub{{< /ui >}}.
 6. Enter a name for your app, and submit it.
@@ -72,9 +72,9 @@ If you already have a GitHub App connected to Datadog, update it. Otherwise, cre
 
 #### Update an existing GitHub App
 
-1. In Datadog, navigate to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}GitHub Applications{{< /ui >}}][5], and search for the GitHub App you want to use for Code Security.
+1. In Datadog, navigate to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}GitHub Applications{{< /ui >}}][5], and search for the GitHub App you want to use for {{< prodname >}}Code Security{{< /prodname >}}.
    {{< img src="ci/static-analysis-existing-github-app.png" alt="Example of a Static Code Analysis comment on a pull request" style="width:90%;" >}}
-2. On the {{< ui >}}Features{{< /ui >}} tab, look at the {{< ui >}}Code Security: Pull Request Comments{{< /ui >}} section to determine whether your GitHub App needs additional permissions. If so, click {{< ui >}}Update permissions in GitHub{{< /ui >}} to edit the app settings.
+2. On the {{< ui >}}Features{{< /ui >}} tab, look at the {{< ui >}}{{< prodname >}}Code Security{{< /prodname >}}: Pull Request Comments{{< /ui >}} section to determine whether your GitHub App needs additional permissions. If so, click {{< ui >}}Update permissions in GitHub{{< /ui >}} to edit the app settings.
 3. Under {{< ui >}}Repository permissions{{< /ui >}}, set the {{< ui >}}Pull Requests{{< /ui >}} access to {{< ui >}}Read and write{{< /ui >}}.
    {{< img src="ci/static-analysis-pr-read-write-permissions.png" alt="The dropdown for the pull request read and write permission" style="width:90%;" >}}
 4. Under the {{< ui >}}Subscribe to events{{< /ui >}} heading, check the {{< ui >}}Pull request{{< /ui >}} box.
@@ -104,7 +104,7 @@ See the [Azure source code setup instructions][9] to connect Azure DevOps reposi
 
 ## Configuration options
 
-Before enabling PR comments, ensure that **at least one Code Security scan capability is enabled in the repository.** Even if PR comments are configured at the organization level, they are only added in repositories where a supported scan type (for example, SAST, SCA, or IaC) is active. Repositories without any enabled scan types will not receive PR comments.
+Before enabling PR comments, ensure that **at least one {{< prodname >}}Code Security{{< /prodname >}} scan capability is enabled in the repository.** Even if PR comments are configured at the organization level, they are only added in repositories where a supported scan type (for example, SAST, SCA, or IaC) is active. Repositories without any enabled scan types will not receive PR comments.
 
 PR comments can be configured at the organization level or at the repository level:
 - **Organization level:** Settings apply to all repositories in the organization that have at least one scan capability enabled.

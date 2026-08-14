@@ -64,7 +64,7 @@ To save your filter and column configuration, open the **Views** panel in the up
 
 ## Inspect a host
 
-Click any host to open its detail panel, which is the same side panel used by the [Resource Catalog][15]. The panel includes:
+Click any host to open its detail panel, which is the same side panel used by the [{{< prodname >}}Resource Catalog{{< /prodname >}}][15]. The panel includes:
 
 - [Hostnames and aliases](/agent/faq/how-datadog-agent-determines-the-hostname/#host-aliases)
 - [Tags][2]

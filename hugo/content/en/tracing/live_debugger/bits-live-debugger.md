@@ -28,7 +28,7 @@ All debugging activity runs through [Live Debugger][1], so the same [permissions
 Bits Live Debugger functionality is only accessible from the Live Debugger page.
 
 <div class="alert alert-info">
-Bits Live Debugger uses <a href="/bits_ai/bits_code/">Bits Code</a> as the underlying agent. During the Bits Live Debugger Preview phase, Bits Code AI Credits are not charged when sessions are started through Live Debugger.
+Bits Live Debugger uses <a href="/bits_ai/bits_code/">{{< prodname >}}Bits Code{{< /prodname >}}</a> as the underlying agent. During the Bits Live Debugger Preview phase, Bits Code AI Credits are not charged when sessions are started through Live Debugger.
 </div>
 
 ## Prerequisites
@@ -37,8 +37,8 @@ Before using Bits Live Debugger:
 
 - [Live Debugger][1] must be enabled for the target service. See [Enable Live Debugger][7] for details.
 - Your account must have the [permissions][2] required to use Live Debugger, including read, write, and variable-capture permissions for the target environment.
-- [Bits Code][5] must be available in your organization.
-- [Source Code Integration][6] must be set up for the target service.
+- [{{< prodname >}}Bits Code{{< /prodname >}}][5] must be available in your organization.
+- [{{< prodname >}}Source Code Integration{{< /prodname >}}][6] must be set up for the target service.
 
 ## Available actions
 

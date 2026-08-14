@@ -25,7 +25,7 @@ Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs or metr
 
 **Notes**:
 - If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector, use the OpenTelemetry source to [send data to Observability Pipelines](#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
-- If you are using the Splunk HEC Distribution of the OpenTelemetry Collector, use the [Splunk HEC source][4] to send logs to Observability Pipelines.
+- If you are using the Splunk HEC Distribution of the OpenTelemetry Collector, use the [Splunk HEC source][4] to send logs to {{< prodname >}}Observability Pipelines{{< /prodname >}}.
 
 ### When to use this source
 
@@ -33,7 +33,7 @@ Common scenarios when you might use this source:
 
 - You are using [OpenTelemetry][1] as your standard method for collecting and routing data, and you want to normalize that data, before routing them to different destinations.
 - You are collecting data from multiple sources and want to aggregate them in a central place for consistent processing.
-    - For example, if some of your services export logs using OpenTelemetry, while other services use Datadog Agents or other Observability Pipelines [sources][2], you can send all of your data to Observability Pipelines for processing.
+    - For example, if some of your services export logs using OpenTelemetry, while other services use Datadog Agents or other {{< prodname >}}Observability Pipelines{{< /prodname >}} [sources][2], you can send all of your data to {{< prodname >}}Observability Pipelines{{< /prodname >}} for processing.
 
 ## Prerequisites
 
@@ -170,12 +170,12 @@ Set the listener address environment variables to the following default values. 
 
 To send logs from the Datadog Distribution of the OpenTelemetry (DDOT) Collector:
 1. Deploy the DDOT Collector using Helm. See [Install the DDOT Collector as a Kubernetes DaemonSet][5] for instructions.
-1. [Set up a pipeline][6] on Observability Pipelines using the [OpenTelemetry source](#set-up-the-source-in-the-pipeline-ui).
+1. [Set up a pipeline][6] on {{< prodname >}}Observability Pipelines{{< /prodname >}} using the [OpenTelemetry source](#set-up-the-source-in-the-pipeline-ui).
     1. (Optional) Datadog recommends adding an [Edit Fields processor][7] to the pipeline that appends the field `op_otel_ddot:true`.
     1. When you install the Worker, for the OpenTelemetry source environment variables:
         1. Set your HTTP listener to `0.0.0.0:4318`.
         1. Set your gRPC listener to `0.0.0.0:4317`.
-    1. After you install the Worker and deployed the pipeline, update the OpenTelemetry Collector's [`otel-config.yaml`][9] to include an exporter that sends logs to Observability Pipelines. For example:
+    1. After you install the Worker and deployed the pipeline, update the OpenTelemetry Collector's [`otel-config.yaml`][9] to include an exporter that sends logs to {{< prodname >}}Observability Pipelines{{< /prodname >}}. For example:
         ```
         exporters:
             otlphttp:
@@ -195,7 +195,7 @@ To send logs from the Datadog Distribution of the OpenTelemetry (DDOT) Collector
         ```
 
 **Notes**:
-- Because DDOT is sending logs to Observability Pipelines, and not the Datadog Agent, the following settings do not work for sending logs from DDOT to Observability Pipelines:
+- Because DDOT is sending logs to {{< prodname >}}Observability Pipelines{{< /prodname >}}, and not the Datadog Agent, the following settings do not work for sending logs from DDOT to {{< prodname >}}Observability Pipelines{{< /prodname >}}:
     - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_ENABLED`
     - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL`
 - Logs sent from DDOT might have nested objects that prevent Datadog from parsing the logs correctly. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.
@@ -213,12 +213,12 @@ To send logs from the Datadog Distribution of the OpenTelemetry (DDOT) Collector
 
 To send metrics from the Datadog Distribution of the OpenTelemetry (DDOT) Collector:
 1. Deploy the DDOT Collector using Helm. See [Install the DDOT Collector as a Kubernetes DaemonSet][5] for instructions.
-1. [Set up a pipeline][6] on Observability Pipelines using the [OpenTelemetry source](#set-up-the-source-in-the-pipeline-ui).
+1. [Set up a pipeline][6] on {{< prodname >}}Observability Pipelines{{< /prodname >}} using the [OpenTelemetry source](#set-up-the-source-in-the-pipeline-ui).
     1. (Optional) Datadog recommends adding an [Edit Fields processor][7] to the pipeline that appends the field `op_otel_ddot:true`.
     1. When you install the Worker, for the OpenTelemetry source environment variables:
         1. Set your HTTP listener to `0.0.0.0:4318`.
         1. Set your gRPC listener to `0.0.0.0:4317`.
-    1. After you install the Worker and deployed the pipeline, update the OpenTelemetry Collector's [`otel-config.yaml`][9] to include an exporter that sends metrics to Observability Pipelines. For example:
+    1. After you install the Worker and deployed the pipeline, update the OpenTelemetry Collector's [`otel-config.yaml`][9] to include an exporter that sends metrics to {{< prodname >}}Observability Pipelines{{< /prodname >}}. For example:
         ```
         exporters:
             otlphttp:
@@ -238,7 +238,7 @@ To send metrics from the Datadog Distribution of the OpenTelemetry (DDOT) Collec
         ```
 
 **Notes**:
-- Because DDOT is sending metrics to Observability Pipelines, and not the Datadog Agent, the following settings do not work for sending metrics from DDOT to Observability Pipelines:
+- Because DDOT is sending metrics to {{< prodname >}}Observability Pipelines{{< /prodname >}}, and not the Datadog Agent, the following settings do not work for sending metrics from DDOT to {{< prodname >}}Observability Pipelines{{< /prodname >}}:
     - `DD_OBSERVABILITY_PIPELINES_WORKER_METRICS_ENABLED`
     - `DD_OBSERVABILITY_PIPELINES_WORKER_METRICS_URL`
 - Metrics sent from DDOT might have nested objects that prevent Datadog from parsing the metrics correctly. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.

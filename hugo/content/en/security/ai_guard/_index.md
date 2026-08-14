@@ -15,27 +15,27 @@ further_reading:
   text: "LLM guardrails: Best practices for deploying LLM apps securely"
 ---
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">{{< prodname >}}AI Guard{{< /prodname >}} isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-{{< callout url="" btn_hidden="true" header="Get access to AI Guard!">}}
-Use one of these forms to request access to AI Guard features:
+{{< callout url="" btn_hidden="true" header="Get access to {{< prodname >}}AI Guard{{< /prodname >}}!">}}
+Use one of these forms to request access to {{< prodname >}}AI Guard{{< /prodname >}} features:
 - <a href="https://www.datadoghq.com/product-preview/ai-security/">Custom Agent Runtime Protection</a> (Limited Access): Secure your custom AI agents from runtime attacks.
 - <a href="https://www.datadoghq.com/product-preview/coding-agent-security-guardrails/">Coding Agent Runtime Protection</a> (Preview): Secure your coding agents in developer workflows, so you can ship AI-generated code safely.
 {{< /callout >}}
 
-Datadog AI Guard is a defense-in-depth product designed to **inspect**, **block**, and **govern** AI behavior in real time. AI Guard is built to plug in directly with existing Datadog tracing and observability workflows to secure agentic AI systems in production. It sits **inline with your AI app/agent** and layers on top of existing prompt templates, guardrails, and policy checks, to **secure your LLM workflows in the critical path**.
+Datadog AI Guard is a defense-in-depth product designed to **inspect**, **block**, and **govern** AI behavior in real time. {{< prodname >}}AI Guard{{< /prodname >}} is built to plug in directly with existing Datadog tracing and observability workflows to secure agentic AI systems in production. It sits **inline with your AI app/agent** and layers on top of existing prompt templates, guardrails, and policy checks, to **secure your LLM workflows in the critical path**.
 
-AI Guard protects against prompt injection, jailbreaking, and sensitive data exfiltration attacks with Prompt Protection, Tool Protection, and Sensitive Data Protection. Together, these capabilities protect against the [agentic lethal trifecta][3]:
+{{< prodname >}}AI Guard{{< /prodname >}} protects against prompt injection, jailbreaking, and sensitive data exfiltration attacks with Prompt Protection, Tool Protection, and Sensitive Data Protection. Together, these capabilities protect against the [agentic lethal trifecta][3]:
 - Privileged system access
 - Exposure to untrusted data
 - Outbound communication
 
-AI Guard also detects sensitive data such as personally identifiable information (PII) and secrets in LLM inputs and outputs. These protections work for any target AI model, including OpenAI, Anthropic, Bedrock, VertexAI, and Azure. To see your AI agents and services mapped out, including how they interact with each other and which ones AI Guard is protecting, go to the [{{< ui >}}Discover{{< /ui >}}][5] page.
+{{< prodname >}}AI Guard{{< /prodname >}} also detects sensitive data such as personally identifiable information (PII) and secrets in LLM inputs and outputs. These protections work for any target AI model, including OpenAI, Anthropic, Bedrock, VertexAI, and Azure. To see your AI agents and services mapped out, including how they interact with each other and which ones {{< prodname >}}AI Guard{{< /prodname >}} is protecting, go to the [{{< ui >}}Discover{{< /ui >}}][5] page.
 
 To quickly evaluate a conversation without any code or setup, use the [{{< ui >}}AI Guard Playground{{< /ui >}}][4] to submit user input, assistant output, and tool calls, and see the evaluation result in real time.
 
-For information on how to set up AI Guard, see [Get Started with AI Guard][1].
+For information on how to set up {{< prodname >}}AI Guard{{< /prodname >}}, see [Get Started with AI Guard][1].
 
 ## Further reading
 

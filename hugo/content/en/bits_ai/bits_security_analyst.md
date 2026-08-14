@@ -19,13 +19,13 @@ further_reading:
 
 ## Overview
 
-Bits Security Analyst is an autonomous AI agent that investigates Cloud SIEM signals end to end. It queries security signals and logs, and uses data-based reasoning to help security engineers investigate threat alerts and make a recommendation on the verdict of each alert signal. By reducing manual effort and analyst fatigue, Bits Security Analyst makes security operations smoother and more efficient.
+{{< prodname >}}Bits Security Analyst{{< /prodname >}} is an autonomous AI agent that investigates {{< prodname >}}Cloud SIEM{{< /prodname >}} signals end to end. It queries security signals and logs, and uses data-based reasoning to help security engineers investigate threat alerts and make a recommendation on the verdict of each alert signal. By reducing manual effort and analyst fatigue, {{< prodname >}}Bits Security Analyst{{< /prodname >}} makes security operations smoother and more efficient.
 
 ### Key capabilities
 
-Bits Security Analyst investigations are autonomous. If a detection rule is enabled, Bits AI autonomously investigates signals associated with it.
+{{< prodname >}}Bits Security Analyst{{< /prodname >}} investigations are autonomous. If a detection rule is enabled, Bits AI autonomously investigates signals associated with it.
 
-In the [Cloud SIEM Signals Explorer][5], you can click the {{< ui >}}Bits Security Analyst{{< /ui >}} tab to only show signals that Bits AI investigated. In the Severity column, a Bits AI status displays as Investigating, until marking the signal as either Benign or Suspicious.
+In the [Cloud SIEM Signals Explorer][5], you can click the {{< ui >}}{{< prodname >}}Bits Security Analyst{{< /prodname >}}{{< /ui >}} tab to only show signals that Bits AI investigated. In the Severity column, a Bits AI status displays as Investigating, until marking the signal as either Benign or Suspicious.
 
 {{< img src="bits_ai/bits_security_analyst_signals_explorer.png" alt="The Cloud SIEM signals explorer, on the Bits Security Analyst tab" style="width:100%;" >}}
 
@@ -45,10 +45,10 @@ You can also take additional steps directly from the side panel:
 - Run a workflow with a SOAR blueprint
 - Declare an incident
 - Add a rule suppression
-- Archive the signal, or view the signal with the usual Cloud SIEM interface
+- Archive the signal, or view the signal with the usual {{< prodname >}}Cloud SIEM{{< /prodname >}} interface
 - Give Bits AI feedback on its analysis
 
-Additionally, when you use Cloud SIEM notifications to send new signal alerts to Slack or Jira, Bits AI automatically updates those notifications. It includes replies showing the Bits AI investigative conclusion, with a link to the full investigation.
+Additionally, when you use {{< prodname >}}Cloud SIEM{{< /prodname >}} notifications to send new signal alerts to Slack or Jira, Bits AI automatically updates those notifications. It includes replies showing the Bits AI investigative conclusion, with a link to the full investigation.
 
 ### Supported sources
 
@@ -86,22 +86,22 @@ Bits AI can run investigations on the following Security log sources:
 
 ### Prerequisites
 
-To use Bits Security Analyst:
-- Ensure your organization is using a non-legacy version of Cloud SIEM. If you need assistance, contact [Datadog support][1].
-- To set up Bits Security Analyst, you need the **Bits Security Analyst Config Write** [permission][2].
-- To view investigations, you must have **14 days or more** of log history. If you have a shorter log history, you can still set up Bits Security Analyst, but won't see any investigations until you have that much history.
+To use {{< prodname >}}Bits Security Analyst{{< /prodname >}}:
+- Ensure your organization is using a non-legacy version of {{< prodname >}}Cloud SIEM{{< /prodname >}}. If you need assistance, contact [Datadog support][1].
+- To set up {{< prodname >}}Bits Security Analyst{{< /prodname >}}, you need the **Bits Security Analyst Config Write** [permission][2].
+- To view investigations, you must have **14 days or more** of log history. If you have a shorter log history, you can still set up {{< prodname >}}Bits Security Analyst{{< /prodname >}}, but won't see any investigations until you have that much history.
 
 ### Setup
 
-When you enable Bits Security Analyst, Datadog analyzes your rules, including custom rules, to determine whether it can confidently investigate signals associated with them. For all eligible rules above medium severity, it starts autonomously investigating signals. 
+When you enable {{< prodname >}}Bits Security Analyst{{< /prodname >}}, Datadog analyzes your rules, including custom rules, to determine whether it can confidently investigate signals associated with them. For all eligible rules above medium severity, it starts autonomously investigating signals. 
 
 Rule eligibility depends on whether Datadog has built the investigation capability for the log source, and whether the Agent is able to investigate the specific rule. If you have new custom rules to evaluate, or want to ask about a rule that wasn't made eligible, contact [Datadog support][1].
 
 1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits Security Analyst{{< /ui >}} > [{{< ui >}}Analyst Configuration{{< /ui >}}][3].
 1. Turn on the toggle to {{< ui >}}Enable Bits Security Analyst{{< /ui >}}. Additional settings appear.
-1. (Optional) Configure which rules and which severities you want Bits Security Analyst to automatically investigate signals for. There are two ways to do so:
+1. (Optional) Configure which rules and which severities you want {{< prodname >}}Bits Security Analyst{{< /prodname >}} to automatically investigate signals for. There are two ways to do so:
    - Click {{< ui >}}Rule Settings{{< /ui >}} to configure investigations for individual rules. You can change the minimum severity for signals to be investigated, and enable or disable individual rules for investigation.
-   - Click {{< ui >}}Query Filter{{< /ui >}} to write a signal query filter, so Bits Security Analyst only investigates signals that match your filter.
+   - Click {{< ui >}}Query Filter{{< /ui >}} to write a signal query filter, so {{< prodname >}}Bits Security Analyst{{< /prodname >}} only investigates signals that match your filter.
 1. Some log sources require credentials to run or enhance investigations by accessing logs, telemetry, or other data that isn't in Datadog. To add credentials, click {{< ui >}}Edit credentials{{< /ui >}}. In the {{< ui >}}Select or Add Connection{{< /ui >}} window that opens, follow the prompts to select an [existing connection][4] from Actions Catalog, or add a connection. Datadog securely stores and restricts all credentials using Actions Catalog.
    
    Some log sources require additional setup so you can create HTTP connections. Here are some examples:
@@ -213,27 +213,27 @@ Rule eligibility depends on whether Datadog has built the investigation capabili
 
 ### Add knowledge sources
 
-You can provide additional context for Bits Security Analyst, such as details about your organization's authorization rules, policies, and environment, allowing Bits to produce more accurate investigations tailored to your organization's needs.
+You can provide additional context for {{< prodname >}}Bits Security Analyst{{< /prodname >}}, such as details about your organization's authorization rules, policies, and environment, allowing Bits to produce more accurate investigations tailored to your organization's needs.
 
-To add knowledge, in Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits Security Analyst{{< /ui >}} > [{{< ui >}}Knowledge Sources{{< /ui >}}][8]. There, you can add two kinds of knowledge:
-- **General Org Context (Bits.md)**: Organization-level instructions that Bits Security Analyst should apply to all investigations.
+To add knowledge, in Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}{{< prodname >}}Bits Security Analyst{{< /prodname >}}{{< /ui >}} > [{{< ui >}}Knowledge Sources{{< /ui >}}][8]. There, you can add two kinds of knowledge:
+- **General Org Context (Bits.md)**: Organization-level instructions that {{< prodname >}}Bits Security Analyst{{< /prodname >}} should apply to all investigations.
   1. Click **Edit** to make the field editable so you can make your changes.
   1. Click **Save**.
-- **Situational Context**: Investigation-specific facts that Bits Security Analyst should apply in specific situations. You can search and filter the table of context entries, and choose to view expired entries, to get an overview of existing context.
+- **Situational Context**: Investigation-specific facts that {{< prodname >}}Bits Security Analyst{{< /prodname >}} should apply in specific situations. You can search and filter the table of context entries, and choose to view expired entries, to get an overview of existing context.
   1. Click **Create Context Entry**. In the window that opens, enter:
      1. **Title**: A short title for your entry.
-     1. **Context description**: The information you want Bits Security Analyst to take into account.
+     1. **Context description**: The information you want {{< prodname >}}Bits Security Analyst{{< /prodname >}} to take into account.
      1. **Status**: Choose to enable this piece of context, or to save it without enabling it.
-     1. **Expiration date** (optional): A date for Bits Security Analyst to stop taking this piece of context into account.
+     1. **Expiration date** (optional): A date for {{< prodname >}}Bits Security Analyst{{< /prodname >}} to stop taking this piece of context into account.
   1. Click **Create Entry**. The window closes and your context appears in the table.
 
 ### Get notifications for completed investigations
 
-You can create security notification rules to get a notification when Bits Security Analyst completes an investigation. To do so, follow the instructions in [Create notification rules][7]. When specifying the tags and attributes that must be present for the notification rule to be triggered, add the tag `@workflow.bits_investigator.state:*`.
+You can create security notification rules to get a notification when {{< prodname >}}Bits Security Analyst{{< /prodname >}} completes an investigation. To do so, follow the instructions in [Create notification rules][7]. When specifying the tags and attributes that must be present for the notification rule to be triggered, add the tag `@workflow.bits_investigator.state:*`.
 
 ## Disable Bits Security Analyst
 
-1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits Security Analyst{{< /ui >}} > [{{< ui >}}Analyst Configuration{{< /ui >}}][3].
+1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}{{< prodname >}}Bits Security Analyst{{< /prodname >}}{{< /ui >}} > [{{< ui >}}Analyst Configuration{{< /ui >}}][3].
 1. Scroll to the bottom of the page. Under {{< ui >}}Disable Bits Security Analyst{{< /ui >}}, turn off the {{< ui >}}Enabled{{< /ui >}} toggle.
    <div class="alert alert-warning">Disabling Bits Security Analyst permanently resets all configuration settings.</div>
 

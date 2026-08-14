@@ -140,14 +140,14 @@ AI-driven recommendation types are now available, expanding the set of [optimiza
 
 Certain recommendations rely on specific Datadog products. Use the {{< ui >}}Recommendation Prerequisite{{< /ui >}} dropdown to filter recommendations by the Datadog products in your setup.
 
-If you plan to use [Bits Code][3] to implement recommendations, you must [complete its setup][4].
+If you plan to use [{{< prodname >}}Bits Code{{< /prodname >}}][3] to implement recommendations, you must [complete its setup][4].
 
 ## How it works
 
 Recommendations are based on data collected from different parts of your stack:
 
 - Distributed traces from Application Performance Monitoring (APM)
-- Database telemetry from Database Monitoring (DBM)
+- Database telemetry from {{< prodname >}}Database Monitoring{{< /prodname >}} (DBM)
 - Sessions and user journeys from Real User Monitoring (RUM)
 
 Datadog correlates these sources to identify opportunities to improve performance, reliability, and user experience.
@@ -162,12 +162,12 @@ To review recommendations that need your attention:
 2. Filter your recommendations by status or type.
 3. Select a recommendation from the list to see a detailed description of the issue.
 4. Review the problem, impact, and Datadog's recommendation for resolving it.
-5. (Optional) To use [Bits Code][3] to generate a code fix, under {{< ui >}}Next Steps{{< /ui >}}, click {{< ui >}}Fix with Bits{{< /ui >}}.
-6. (Optional) To track the fix in Jira or Case Management, under {{< ui >}}Triage{{< /ui >}}, click {{< ui >}}Add Jira Ticket{{< /ui >}} or {{< ui >}}Add Case{{< /ui >}}.
+5. (Optional) To use [{{< prodname >}}Bits Code{{< /prodname >}}][3] to generate a code fix, under {{< ui >}}Next Steps{{< /ui >}}, click {{< ui >}}Fix with Bits{{< /ui >}}.
+6. (Optional) To track the fix in Jira or {{< prodname >}}Case Management{{< /prodname >}}, under {{< ui >}}Triage{{< /ui >}}, click {{< ui >}}Add Jira Ticket{{< /ui >}} or {{< ui >}}Add Case{{< /ui >}}.
 
 After you've reviewed the recommendation, you can use the {{< ui >}}FOR REVIEW{{< /ui >}} dropdown to change the recommendation status to {{< ui >}}REVIEWED{{< /ui >}}, {{< ui >}}IGNORED{{< /ui >}}, or {{< ui >}}RESOLVED{{< /ui >}}.
 
-**Note**: On the [APM Home page][5], the {{< ui >}}Watchdog{{< /ui >}} and {{< ui >}}Error Tracking{{< /ui >}} sections also respect the selected service filter (or your personalized services when no filter is set), matching how recommendations are scoped. When a service is selected and no alerts or issues match, the section shows an empty state with a {{< ui >}}Clear filter{{< /ui >}} button, and the Error Tracking {{< ui >}}View all{{< /ui >}} link is pre-filtered to that service.
+**Note**: On the [APM Home page][5], the {{< ui >}}Watchdog{{< /ui >}} and {{< ui >}}{{< prodname >}}Error Tracking{{< /prodname >}}{{< /ui >}} sections also respect the selected service filter (or your personalized services when no filter is set), matching how recommendations are scoped. When a service is selected and no alerts or issues match, the section shows an empty state with a {{< ui >}}Clear filter{{< /ui >}} button, and the {{< prodname >}}Error Tracking{{< /prodname >}} {{< ui >}}View all{{< /ui >}} link is pre-filtered to that service.
 
 ## Viewing recommendations on a dashboard
 
@@ -185,7 +185,7 @@ Add a List widget with APM Recommendations as its data source to review recommen
 
 {{< multifilter-search >}}
 
-**Note**: If you use both APM and Database Monitoring (DBM), you may see fewer Missing Index recommendations here than on the [DBM Recommendations page][2]. APM Recommendations only surface Missing Index issues that Datadog can associate with an instrumented application service. Missing Index recommendations that cannot be linked to a specific service appear only in DBM.
+**Note**: If you use both APM and {{< prodname >}}Database Monitoring{{< /prodname >}} (DBM), you may see fewer Missing Index recommendations here than on the [DBM Recommendations page][2]. APM Recommendations only surface Missing Index issues that Datadog can associate with an instrumented application service. Missing Index recommendations that cannot be linked to a specific service appear only in DBM.
 
 ## Further reading
 

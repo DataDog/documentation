@@ -27,7 +27,7 @@ Datadog monitors every aspect of your Istio environment, so you can:
 
 To learn more about monitoring your Istio environment with Datadog, [see the Istio blog][3].
 
-Datadog APM is available for [supported Istio releases][13].
+{{< prodname >}}Datadog APM{{< /prodname >}} is available for [supported Istio releases][13].
 
 ## Datadog Agent installation
 
@@ -38,7 +38,7 @@ Datadog APM is available for [supported Istio releases][13].
 
 ## Istio configuration and installation
 
-To enable Datadog APM, a [custom Istio installation][6] is required to set two extra options when installing Istio.
+To enable {{< prodname >}}Datadog APM{{< /prodname >}}, a [custom Istio installation][6] is required to set two extra options when installing Istio.
 
 - `--set values.global.proxy.tracer=datadog`
 - `--set values.pilot.traceSampling=100.0`

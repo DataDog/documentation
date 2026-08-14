@@ -44,7 +44,7 @@ It's recommended to use <a href="https://www.php.net/supported-versions">officia
 | 7.1.x          | General Availability                  | All             |
 | 7.0.x          | General Availability                  | All             |
 
-Code Security capabililties for PHP support the following SAPI's:
+{{< prodname >}}Code Security{{< /prodname >}} capabililties for PHP support the following SAPI's:
 
 | SAPI           | Support type    |
 |:---------------|:----------------|
@@ -55,7 +55,7 @@ Code Security capabililties for PHP support the following SAPI's:
 
 ## Supported processor architectures
 
-Code Security capabililties for PHP support the following architectures:
+{{< prodname >}}Code Security{{< /prodname >}} capabililties for PHP support the following architectures:
 
 | Processor architectures                   | Support level         | Package version                        |
 | ------------------------------------------|-----------------------|----------------------------------------|

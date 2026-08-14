@@ -27,15 +27,15 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
+{{< prodname >}}App and API Protection{{< /prodname >}} is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" header="App and API Protection for GKE is in Preview" >}}
-To try the Preview of App and API Protection for GKE, use the following setup instructions.
+{{< callout url="#" btn_hidden="true" header="{{< prodname >}}App and API Protection{{< /prodname >}} for GKE is in Preview" >}}
+To try the Preview of {{< prodname >}}App and API Protection{{< /prodname >}} for GKE, use the following setup instructions.
 {{< /callout >}}
 
-You can enable Datadog [App and API Protection][1] on a Google Kubernetes Engine (GKE) Gateway to inspect and protect traffic at the cluster edge. The integration uses the GKE Gateway controller and the `GCPTrafficExtension` custom resource to attach the Datadog security processor to the GCP Cloud Load Balancer.
+You can enable Datadog [{{< prodname >}}App and API Protection{{< /prodname >}}][1] on a Google Kubernetes Engine (GKE) Gateway to inspect and protect traffic at the cluster edge. The integration uses the GKE Gateway controller and the `GCPTrafficExtension` custom resource to attach the Datadog security processor to the GCP Cloud Load Balancer.
 
 ## Prerequisites
 
@@ -47,7 +47,7 @@ You can enable Datadog [App and API Protection][1] on a Google Kubernetes Engine
 
 ## Enabling threat detection
 
-To enable App and API Protection on a GKE Gateway, do the following:
+To enable {{< prodname >}}App and API Protection{{< /prodname >}} on a GKE Gateway, do the following:
 
 1. Deploy the Datadog security processor service in your cluster.
 2. Create a `HealthCheckPolicy` so GCP can probe the security processor.
@@ -55,7 +55,7 @@ To enable App and API Protection on a GKE Gateway, do the following:
 
 ### Deploy the Datadog security processor service
 
-The Datadog security processor is a gRPC service that analyzes requests and responses for App and API Protection. Deploy it in the same namespace as your `Gateway`. The Docker image is available on the [Datadog Go tracer GitHub Registry][7].
+The Datadog security processor is a gRPC service that analyzes requests and responses for {{< prodname >}}App and API Protection{{< /prodname >}}. Deploy it in the same namespace as your `Gateway`. The Docker image is available on the [Datadog Go tracer GitHub Registry][7].
 
 Example manifest (`datadog-aap-extproc-service.yaml`):
 

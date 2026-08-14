@@ -64,7 +64,7 @@ These are supported on the following architectures:
 
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks.
-- If your framework is not listed below, **Code Security** will still detect Insecure Cookie vulnerabilities.
+- If your framework is not listed below, **{{< prodname >}}Code Security{{< /prodname >}}** will still detect Insecure Cookie vulnerabilities.
 
 
 | Framework                  | Threat Detection supported? | Threat Protection supported? | Code Security? |

@@ -4,7 +4,7 @@ title: Workflow Automation
 
 ## Overview
 
-Datadog [Workflow Automation][8] billing is based on the number of **workflow executions**. Workflow executions are recorded whenever a published workflow runs, regardless of its run method (manually, programmatically, or automatically), except for the cases listed under [Included automations](#included-automations).
+Datadog [{{< prodname >}}Workflow Automation{{< /prodname >}}][8] billing is based on the number of **workflow executions**. Workflow executions are recorded whenever a published workflow runs, regardless of its run method (manually, programmatically, or automatically), except for the cases listed under [Included automations](#included-automations).
 
 ## Summary
 - **Billing metric**: You incur a cost per committed execution or on-demand execution, depending on your billing plan. Specific pricing can be found on the [Workflow Automation pricing page][13].
@@ -12,7 +12,7 @@ Datadog [Workflow Automation][8] billing is based on the number of **workflow ex
 - **Visibility**: Usage and cost breakdowns are available in [Plan & Usage][1].
 - **Exceptions for certain SKUs**: 
     - CSM/DevSecOps SKUs include 5-20 executions per host.
-    - [Incident Management][9], [On-Call][10], and [App Builder][11] SKUs include free unlimited executions when triggered by events from these products. 
+    - [{{< prodname >}}Incident Management{{< /prodname >}}][9], [{{< prodname >}}On-Call{{< /prodname >}}][10], and [App Builder][11] SKUs include free unlimited executions when triggered by events from these products. 
 
 ## Pricing model
 
@@ -22,7 +22,7 @@ A workflow execution refers to one full run of a published workflow, regardless 
 - API or programmatic triggers
 - Event-based triggers (monitors, incidents, etc.)
 - Workflows triggered from other workflows
-    - **Note**: When a workflow triggers another workflow, billing is determined by the original (root) trigger of the chain. If the root trigger is a billed source (such as a monitor or API call), every workflow in the chain is billed. If the root trigger is a free source (for example, Incident Management, On-Call, or App Builder), the entire chain is free, regardless of depth.
+    - **Note**: When a workflow triggers another workflow, billing is determined by the original (root) trigger of the chain. If the root trigger is a billed source (such as a monitor or API call), every workflow in the chain is billed. If the root trigger is a free source (for example, {{< prodname >}}Incident Management{{< /prodname >}}, {{< prodname >}}On-Call{{< /prodname >}}, or App Builder), the entire chain is free, regardless of depth.
 
 Unpublished (test or draft) runs are **not billed**.
 
@@ -36,7 +36,7 @@ Failed executions are not exempt from billing. All published executions are bill
 </div>
 
 ### Billing metrics
-Workflow Automation is billed **per execution**. This means that each workflow run counts toward your bill.
+{{< prodname >}}Workflow Automation{{< /prodname >}} is billed **per execution**. This means that each workflow run counts toward your bill.
 
 The two billing options are committed executions and on-demand executions. Committed executions are purchased in advance, while on-demand executions are billed as they occur. Prepaid executions cost less than on-demand executions.
 
@@ -46,7 +46,7 @@ The best source of truth for billing is on your [Datadog Plan & Usage page][1], 
 Other sources of usage tracking that do not include billing metrics are the [Workflow Automation API][7] and the [Workflows Overview dashboard][2]. Through the API, you can view granular information such as [all instances of a given workflow][12]. The Workflows Overview dashboard is based on execution metrics, before any billing considerations take place. Additionally, the dashboard does not reflect billing complexities such as free allotments of workflows. 
 
 ## Included workflow allotments by SKU
-Certain Datadog SKUs include Workflow Automation allotments as part of their pricing:
+Certain Datadog SKUs include {{< prodname >}}Workflow Automation{{< /prodname >}} allotments as part of their pricing:
 
   | SKU                       | Included Workflow Executions | Allotment Basis | 
   |---------------------------|------------------------------|-----------------|
@@ -59,11 +59,11 @@ These included executions are automatically applied to your account each month a
 
 ### Included automations
 Workflows triggered automatically or manually by events from the following products are **free** and included in their respective SKU pricing:
-- [**Incident Management**][9]
-- [**On-Call**][10]
+- [**{{< prodname >}}Incident Management{{< /prodname >}}**][9]
+- [**{{< prodname >}}On-Call{{< /prodname >}}**][10]
 - [**App Builder**][11]
 
-This means that if your automation originates from one of these services, those executions **do not count** toward your Workflow Automation bill. For example, a workflow triggered by an incident creation or an on-call handover does not incur a cost.
+This means that if your automation originates from one of these services, those executions **do not count** toward your {{< prodname >}}Workflow Automation{{< /prodname >}} bill. For example, a workflow triggered by an incident creation or an on-call handover does not incur a cost.
 
 [1]: https://app.datadoghq.com/billing/usage?selected_cost_products=workflow_execution
 [2]: https://app.datadoghq.com/dash/integration/30994/workflows-overview?fromUser=false&refresh_mode=sliding&from_ts=1760203373269&to_ts=1762885373269&live=true

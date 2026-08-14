@@ -33,27 +33,27 @@ further_reading:
 
 ## Overview
 
-Dynamic Instrumentation lets you add metrics, spans, and span tags to running production systems without restarts or code changes, including in third-party libraries.
+{{< prodname >}}Dynamic Instrumentation{{< /prodname >}} lets you add metrics, spans, and span tags to running production systems without restarts or code changes, including in third-party libraries.
 
-If you are interested in trying out the latest user experience improvements for Dynamic Instrumentation, consider opting into the [autocomplete and search Preview][17].
+If you are interested in trying out the latest user experience improvements for {{< prodname >}}Dynamic Instrumentation{{< /prodname >}}, consider opting into the [autocomplete and search Preview][17].
 
 ## Getting started
 
 ### Prerequisites
 
-Dynamic Instrumentation supports Java, Python, .NET, and PHP. It requires the following:
+{{< prodname >}}Dynamic Instrumentation{{< /prodname >}} supports Java, Python, .NET, and PHP. It requires the following:
 
 - [Datadog Agent][1] 7.49.0 or higher is installed alongside your service.
 - [Remote Configuration][2] is enabled in that Agent.
 - A supported Datadog SDK is installed and up to date. See the [Enable Dynamic Instrumentation](#enable-dynamic-instrumentation) section for version requirements.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
-- Recommended: [Source Code Integration][7] is set up for your service.
+- Recommended: [{{< prodname >}}Source Code Integration{{< /prodname >}}][7] is set up for your service.
 
 ### Permissions
 
-The following permissions are required to use Dynamic Instrumentation:
+The following permissions are required to use {{< prodname >}}Dynamic Instrumentation{{< /prodname >}}:
 
-- **Dynamic Instrumentation Read Configuration** (`debugger_read`): Required to access the Dynamic Instrumentation page.
+- **Dynamic Instrumentation Read Configuration** (`debugger_read`): Required to access the {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} page.
 - One of the following write permissions:
   - **Dynamic Instrumentation Write Configuration** (`debugger_write`): Required to create or modify instrumentations in any environment.
   - **Dynamic Instrumentation Write Pre-Prod** (`debugger_write_preprod`): Required to create or modify instrumentations in known pre-production environments only (such as staging or QA).
@@ -63,7 +63,7 @@ For more information about roles and how to assign roles to users, see [Role Bas
 ### Enable Dynamic Instrumentation
 
 
-<div class="alert alert-info">Dynamic Instrumentation and <a href="/tracing/live_debugger/">Live Debugger</a> share the same enablement state per service and environment: enabling or disabling one also enables or disables the other. The two products have separate permissions and Settings pages.</div>
+<div class="alert alert-info">{{< prodname >}}Dynamic Instrumentation{{< /prodname >}} and <a href="/tracing/live_debugger/">Live Debugger</a> share the same enablement state per service and environment: enabling or disabling one also enables or disables the other. The two products have separate permissions and Settings pages.</div>
 
 #### (Recommended) In-app enablement {#in-app-enablement}
 
@@ -77,7 +77,7 @@ If your SDK meets the minimum version and all prerequisites are met, Datadog aut
 
 #### Manual enablement
 
-Manual enablement is required for PHP and for older SDK versions of Java, Python, and .NET. You can also choose manual enablement on supported SDK versions if you prefer to manage enablement through environment variables (for example, to enable Dynamic Instrumentation in bulk across many services).
+Manual enablement is required for PHP and for older SDK versions of Java, Python, and .NET. You can also choose manual enablement on supported SDK versions if you prefer to manage enablement through environment variables (for example, to enable {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} in bulk across many services).
 
 Select your runtime for manual enablement instructions:
 
@@ -91,13 +91,13 @@ Select your runtime for manual enablement instructions:
 
 ### Limitations
 
-- Dynamic Instrumentation is not compatible with Azure App Services or serverless environments.
+- {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} is not compatible with Azure App Services or serverless environments.
 - Not all instrumentation types are supported in every language. See the language-specific enabling pages linked from [Enable Dynamic Instrumentation](#enable-dynamic-instrumentation) for supported features and limitations.
 - The Java SDK does not support Kotlin coroutines.
 
 ## Explore Dynamic Instrumentation
 
-Dynamic Instrumentation can help you understand what your application is doing at runtime. By adding an instrumentation at a specific code location, you can capture additional telemetry from your application without the need to change code or redeploy it.
+{{< prodname >}}Dynamic Instrumentation{{< /prodname >}} can help you understand what your application is doing at runtime. By adding an instrumentation at a specific code location, you can capture additional telemetry from your application without the need to change code or redeploy it.
 
 ### Using instrumentations
 
@@ -105,7 +105,7 @@ An instrumentation allows you to collect additional telemetry from specific poin
 
 Dynamic spans, span tags, and metrics are a UI-based alternative to adding custom instrumentation directly to your source code. Datadog receives the instrumentation configurations you define and dynamically applies them to the running service without requiring restarts.
 
-Datadog captures and processes spans, tags, and metrics generated by Dynamic Instrumentation like other telemetry from the running application. Unlike manual custom instrumentation, Dynamic Instrumentation does not require code changes, deployments, or service restarts. To stop collecting data, disable the instrumentation in Datadog.
+Datadog captures and processes spans, tags, and metrics generated by {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} like other telemetry from the running application. Unlike manual custom instrumentation, {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} does not require code changes, deployments, or service restarts. To stop collecting data, disable the instrumentation in Datadog.
 
 ### Creating an instrumentation
 
@@ -116,7 +116,7 @@ All instrumentation types require the same initial setup:
 1. If they are not prefilled, choose service, runtime, environment, and version (optional).
 1. Specify where to set the instrumentation in the source code by selecting either a class and method, or a specific line of code in a file. When autocomplete and search are available, use them to find files, methods, or symbols.
 
-For the best experience, set up [Source Code Integration][7] to view code directly in Datadog and select instrumentation locations as you would with breakpoints in an IDE.
+For the best experience, set up [{{< prodname >}}Source Code Integration{{< /prodname >}}][7] to view code directly in Datadog and select instrumentation locations as you would with breakpoints in an IDE.
 
 For creation steps specific to each instrumentation type, see the following sections.
 
@@ -134,7 +134,7 @@ A dynamic metric emits a metric when it executes. To create a dynamic metric:
 
 Metric instrumentations are automatically enabled on all service instances that match the configured environment and version. Metric instrumentations are not rate limited and execute every time the method or line is invoked.
 
-Dynamic Instrumentation supports the following metric types:
+{{< prodname >}}Dynamic Instrumentation{{< /prodname >}} supports the following metric types:
 
 - {{< ui >}}Count{{< /ui >}}: Counts how many times a given method or line is executed. Can be combined with [metric expressions][15] to use the value of a variable to increment the count.
 - {{< ui >}}Gauge{{< /ui >}}: Generates a gauge based on the last value of a variable. This metric requires a [metric expression][15].
@@ -161,7 +161,7 @@ To create a dynamic span tag:
 1. Complete the [generic instrumentation setup](#creating-an-instrumentation) (choose service, environment, version, and location).
 1. Specify a name for the tag.
 1. Specify the value of the tag using the [Dynamic Instrumentation expression language][15].
-1. Optionally define a condition using the Dynamic Instrumentation expression language. The tag is added only when the expression evaluates to true.
+1. Optionally define a condition using the {{< prodname >}}Dynamic Instrumentation{{< /prodname >}} expression language. The tag is added only when the expression evaluates to true.
 1. Optionally add additional tags, each with their own name, expression, and optional condition.
 
 You can use a *dynamic span tag* as an alternative to [using Custom Instrumentation to add tags in code][14].

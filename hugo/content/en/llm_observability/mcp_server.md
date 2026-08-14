@@ -18,22 +18,22 @@ further_reading:
 
 ## Overview
 
-The [Datadog MCP Server][1] enables AI agents to access your [Agent Observability][2] data through the Model Context Protocol (MCP). The `llmobs` toolset provides tools for searching and analyzing traces, inspecting span details and content, and evaluating experiment results directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
+The [{{< prodname >}}Datadog MCP Server{{< /prodname >}}][1] enables AI agents to access your [{{< prodname >}}Agent Observability{{< /prodname >}}][2] data through the Model Context Protocol (MCP). The `llmobs` toolset provides tools for searching and analyzing traces, inspecting span details and content, and evaluating experiment results directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
 
 ## Setup
 
-Connect an MCP-compatible client to the Datadog MCP Server with the `llmobs` toolset enabled.
+Connect an MCP-compatible client to the {{< prodname >}}Datadog MCP Server{{< /prodname >}} with the `llmobs` toolset enabled.
 
-<div class="alert alert-info">For full setup instructions, including Cursor and VS Code extension configuration, see <a href="/mcp_server/setup/">Set up the Datadog MCP Server</a>.</div>
+<div class="alert alert-info">For full setup instructions, including Cursor and VS Code extension configuration, see <a href="/mcp_server/setup/">Set up the {{< prodname >}}Datadog MCP Server{{< /prodname >}}</a>.</div>
 
 ### Prerequisites
 
-- A Datadog account with permission to access Agent Observability data.
+- A Datadog account with permission to access {{< prodname >}}Agent Observability{{< /prodname >}} data.
 - An MCP-compatible client (for example, Claude Code, Codex CLI, Cursor, Gemini CLI, or Kiro CLI).
 
 ### Endpoint
 
-The MCP Server endpoint depends on your [Datadog site][5]. Use the {{< ui >}}Datadog Site{{< /ui >}} selector to display the endpoint for your site. Append `?toolsets=llmobs,core` to enable the Agent Observability and core toolsets.
+The MCP Server endpoint depends on your [Datadog site][5]. Use the {{< ui >}}Datadog Site{{< /ui >}} selector to display the endpoint for your site. Append `?toolsets=llmobs,core` to enable the {{< prodname >}}Agent Observability{{< /prodname >}} and core toolsets.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Endpoint for your selected site ({{< region-param key="dd_site_name" >}}):
@@ -91,7 +91,7 @@ After adding the configuration, run `codex mcp login datadog` to complete the OA
 
 Local binary authentication uses the MCP specification's [stdio][2] transport. Use this method if remote authentication is unavailable.
 
-1. Install the Datadog MCP Server binary:
+1. Install the {{< prodname >}}Datadog MCP Server{{< /prodname >}} binary:
 
     ```bash
     curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
@@ -158,7 +158,7 @@ For security, scope the API key and application key to a [service account][7] wi
 
 ## Agent skills
 
-Agent skills are prebuilt instruction sets for AI coding agents that automate common Agent Observability workflows. The `agent-observability` skill set is available in the [Datadog agent-skills][8] repository. It provides six skills for classifying sessions, diagnosing failures, analyzing experiments, generating experiment code with the `ddtrace.llmobs` SDK, and bootstrapping evaluators against your live production data.
+Agent skills are prebuilt instruction sets for AI coding agents that automate common {{< prodname >}}Agent Observability{{< /prodname >}} workflows. The `agent-observability` skill set is available in the [Datadog agent-skills][8] repository. It provides six skills for classifying sessions, diagnosing failures, analyzing experiments, generating experiment code with the `ddtrace.llmobs` SDK, and bootstrapping evaluators against your live production data.
 
 ### Install
 
@@ -194,7 +194,7 @@ Restart Claude Code after running both commands for the skills to appear.
 
 #### Session classification
 
-`/agent-observability-session-classify` classifies whether user intent was satisfied in a given interaction. It draws from up to three signal sources: Agent Observability traces, RUM behavioral data, and Audit Trail events. The skill returns a `yes / partial / no` verdict with supporting evidence. Confidence improves with each additional signal source.
+`/agent-observability-session-classify` classifies whether user intent was satisfied in a given interaction. It draws from up to three signal sources: {{< prodname >}}Agent Observability{{< /prodname >}} traces, RUM behavioral data, and Audit Trail events. The skill returns a `yes / partial / no` verdict with supporting evidence. Confidence improves with each additional signal source.
 
 ```
 /agent-observability-session-classify session_id=<SESSION_ID>
@@ -454,7 +454,7 @@ After connecting, try prompts like:
 
 ## Combine with other Datadog tools
 
-The `core` toolset included in the setup URL gives your AI agent access to additional Datadog tools that pair naturally with Agent Observability analysis.
+The `core` toolset included in the setup URL gives your AI agent access to additional Datadog tools that pair naturally with {{< prodname >}}Agent Observability{{< /prodname >}} analysis.
 
 ### Export analysis to Datadog Notebooks
 

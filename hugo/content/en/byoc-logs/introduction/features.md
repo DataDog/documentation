@@ -25,8 +25,8 @@ Datadog BYOC (Bring Your Own Cloud) Logs brings core Log Explorer capabilities t
 
 ### Dashboards and monitors
 
-- Dashboards with BYOC Logs data
-- Log monitors on BYOC Logs indexes
+- Dashboards with {{< prodname >}}BYOC Logs{{< /prodname >}} data
+- Log monitors on {{< prodname >}}BYOC Logs{{< /prodname >}} indexes
 
 ### Index management
 
@@ -38,13 +38,13 @@ Datadog BYOC (Bring Your Own Cloud) Logs brings core Log Explorer capabilities t
 
 ### Correlation
 
-- Correlation from a log in BYOC Logs to metrics sent to Datadog SaaS
-- Correlation from a log in BYOC Logs to traces sent to Datadog SaaS
-- Correlation from a log in BYOC Logs to processes sent to Datadog SaaS
+- Correlation from a log in {{< prodname >}}BYOC Logs{{< /prodname >}} to metrics sent to Datadog SaaS
+- Correlation from a log in {{< prodname >}}BYOC Logs{{< /prodname >}} to traces sent to Datadog SaaS
+- Correlation from a log in {{< prodname >}}BYOC Logs{{< /prodname >}} to processes sent to Datadog SaaS
 
 ### Processing
 
-- Configurable processing pipelines through Observability Pipelines
+- Configurable processing pipelines through {{< prodname >}}Observability Pipelines{{< /prodname >}}
 - Observability Pipeline connection
 
 ### AI features
@@ -54,7 +54,7 @@ Datadog BYOC (Bring Your Own Cloud) Logs brings core Log Explorer capabilities t
 
 ## Unsupported features
 
-BYOC Logs does not support the following features:
+{{< prodname >}}BYOC Logs{{< /prodname >}} does not support the following features:
 
 - SIEM
 - Watchdog
