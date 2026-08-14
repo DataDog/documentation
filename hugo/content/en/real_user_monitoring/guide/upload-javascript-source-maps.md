@@ -11,6 +11,9 @@ further_reading:
 - link: 'https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps'
   tag: 'Source Code'
   text: 'Sourcemaps command reference'
+- link: 'https://docs.datadoghq.com/api/latest/rum/upload-source-maps/'
+  tag: 'Documentation'
+  text: 'Upload RUM source maps via the API'
 - link: "https://learn.datadoghq.com/courses/tracking-errors-rum-javascript"
   tag: "Learning Center"
   text: "Tracking errors with RUM for JavaScript Web Applications"
@@ -113,7 +116,13 @@ If the sum of the file size for <code>javascript.364758.min.js</code> and <code>
 
 ## Upload your source maps
 
-The best way to upload source maps is to add an extra step in your CI pipeline and run the dedicated command from the [Datadog CLI][1]. It scans the `dist` directory and subdirectories to automatically upload source maps with relevant minified files.
+You can upload source maps to Datadog in three ways:
+
+- **CI/CD with the `datadog-ci` CLI** (recommended for automated builds): Add an extra step in your CI pipeline to run the dedicated command described below.
+- **Manual upload from the Datadog UI**: For one-off uploads, upload source maps directly from the [{{< ui >}}Debug Symbols{{< /ui >}}][5] page.
+- **Programmatic upload through the API**: For environments without a CI pipeline or for custom automation, use the [Debug Symbols Upload API][6].
+
+The [`datadog-ci` CLI][1] scans the `dist` directory and subdirectories to automatically upload source maps with relevant minified files.
 
 {{< site-region region="us" >}}
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
@@ -190,3 +199,4 @@ On the other hand, an unminified stack trace provides you with all the context y
 [3]: https://docs.datadoghq.com/logs/log_collection/javascript/#initialization-parameters
 [4]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps#link-errors-with-your-source-code
 [5]: https://app.datadoghq.com/source-code/setup/rum
+[6]: https://docs.datadoghq.com/api/latest/rum/upload-source-maps/

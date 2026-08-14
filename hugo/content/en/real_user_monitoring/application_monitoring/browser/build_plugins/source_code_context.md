@@ -26,7 +26,7 @@ At build time, the plugin injects a snippet that writes metadata to `window.DD_S
 
 ## Prerequisites
 
-- Source maps uploaded to Datadog, either through the [Source Maps build plugin][3] or [manually][2].
+- Source maps uploaded to Datadog through the [Source Maps build plugin][3], the [`datadog-ci` CLI][2], the [Debug Symbols][5] page in Datadog, or the [Debug Symbols Upload API][6].
 - The RUM SDK initialized with matching `service` and `version` parameters.
 - The Datadog build plugin installed and registered with your bundler. See [Build Plugins][4] for installation instructions.
 
@@ -80,3 +80,5 @@ module.exports = {
 [2]: /real_user_monitoring/guide/upload-javascript-source-maps
 [3]: /real_user_monitoring/application_monitoring/browser/build_plugins/source_maps
 [4]: /real_user_monitoring/application_monitoring/browser/build_plugins/
+[5]: https://app.datadoghq.com/source-code/setup/rum
+[6]: https://docs.datadoghq.com/api/latest/rum/upload-source-maps/

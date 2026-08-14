@@ -131,7 +131,14 @@ set(DD_CRASH_MODE "noop" CACHE STRING "")
 
 ### Symbolication
 
-To get human-readable function names and line numbers in your crash reports, upload your application's debug symbols to Datadog. See [RUM Debug Symbols][4] for setup instructions.
+Crash reports are captured with memory addresses rather than function names and line numbers. To get human-readable stack traces in Error Tracking, upload your application's debug symbols to Datadog.
+
+The C++ SDK supports the following debug symbol formats:
+
+- **Linux**: ELF symbol files
+- **Windows**: PE/PDB symbol files
+
+Use the [Debug Symbols Upload API][6] to upload debug symbols, for example from a CI/CD pipeline.
 
 ## Test your implementation
 
@@ -165,5 +172,5 @@ RaiseException(EXCEPTION_ACCESS_VIOLATION, 0, 0, NULL);
 [1]: /real_user_monitoring/error_tracking/
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/application_monitoring/cpp/setup
-[4]: https://app.datadoghq.com/source-code/setup/rum
 [5]: /real_user_monitoring/application_monitoring/cpp/advanced_build_configuration
+[6]: https://docs.datadoghq.com/api/latest/rum/upload-source-maps/

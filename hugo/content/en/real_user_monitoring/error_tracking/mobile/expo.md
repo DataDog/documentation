@@ -150,6 +150,8 @@ If you are using EAS to build your Expo application, set `cli.requireCommit` to 
 
 See the [{{< ui >}}RUM Debug Symbols{{< /ui >}}][4] page to view all uploaded symbols.
 
+In addition to the `expo-datadog` config plugin, source maps and dSYMs can be uploaded manually from the [{{< ui >}}RUM Debug Symbols{{< /ui >}}][4] page, or programmatically through the [Debug Symbols Upload API][6].
+
 ## Limitations
 
 Source maps and mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
@@ -244,4 +246,5 @@ If you are using the `expo-dev-client` and already have the `expo-datadog` plugi
 [3]: /real_user_monitoring/application_monitoring/react_native/setup/expo/#usage
 [4]: https://app.datadoghq.com/source-code/setup/rum
 [5]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#inject-debug-id
+[6]: https://docs.datadoghq.com/api/latest/rum/upload-source-maps/
 [14]: https://github.com/DataDog/react-native-performance-limiter
