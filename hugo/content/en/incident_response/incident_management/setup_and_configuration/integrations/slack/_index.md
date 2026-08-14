@@ -179,8 +179,8 @@ The following buttons are available in the action tray. Incident types are initi
 | 🏠 View Web App               | Open the incident in Datadog Incident Management                      | ✓ | ✓ | ✓ |
 | ☎️ Page On-Call               | Page a team about the ongoing incident using your preferred service   | ✓ |   |   |
 | 🔔 Notify                     | Notify stakeholders about an incident through email, push, or services |   | ✓ | ✓ |
-| ▶️ Create/Join Zoom           | Start a new meeting or quickly join if one already exists             | ✓ |   |   |
-| ▶️ Create/Join Google Meet    | Start a new meeting or quickly join if one already exists             | ✓ |   |   |
+| ▶️ Create/Join Zoom           | Start a new meeting, or join if one already exists             | ✓ |   |   |
+| ▶️ Create/Join Google Meet    | Start a new meeting, or join if one already exists             | ✓ |   |   |
 | ▶️ Run Workflow               | Select and run pre-defined workflows for the incident                 | ✓ |   |   |
 | 🟨 Set to Stable              | Mark the incident as stable after mitigating the impact                 | ✓ |   |   |
 | ✅ Resolve Incident           | Mark the incident as resolved                                         |   | ✓ |   |
