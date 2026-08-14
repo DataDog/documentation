@@ -121,7 +121,7 @@ Under the hood, this feature is a built-in, hidden [incident notification rule][
 
 ## Slack commands
 
-You can view the full list of available Slack commands at any time by typing `/datadog` (or `/dd`) to open up the command modal to browse and execute any Datadog actions, or `/dd help` to view the same list. To open the action tray for common incident management actions, type `/dd shortcuts`.
+You can view the full list of available Slack commands at any time by typing `/datadog` (or `/dd`) in Slack to open the command modal to browse and execute any Datadog actions, or `/dd help` to view those options as a list instead. To open the action tray for common incident management actions, type `/dd shortcuts`.
 
 ### Global commands (run anywhere)
 
