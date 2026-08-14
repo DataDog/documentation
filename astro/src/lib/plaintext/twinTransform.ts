@@ -25,6 +25,8 @@ import {
   stepperNodes,
   type StepInput,
 } from "@components/Stepper/plaintext/Stepper";
+import { imgNode } from "@components/Img/plaintext/Img";
+import { IMAGES_URL } from "@config/images";
 
 /**
  * Adapts a parsed Markdoc tag node into its plaintext-twin equivalent. Most

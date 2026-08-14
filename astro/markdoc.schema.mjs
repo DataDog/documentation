@@ -89,5 +89,33 @@ export default {
     "agent-only": {
       attributes: {},
     },
+    img: {
+      selfClosing: true,
+      attributes: {
+        src: { type: String, required: true },
+        alt: { type: String },
+        caption: { type: String },
+        width: { type: String },
+        height: { type: String },
+        widthPercent: { type: Number },
+        video: { type: Boolean, default: false },
+        inline: { type: Boolean, default: false },
+        popup: { type: Boolean, default: true },
+      },
+      validate(node) {
+        const { widthPercent, width, height } = node.attributes;
+        if (widthPercent != null && (width != null || height != null)) {
+          return [
+            {
+              id: "img-widthPercent-conflict",
+              level: "error",
+              message:
+                "The `widthPercent` attribute can't be combined with `width` or `height`.",
+            },
+          ];
+        }
+        return [];
+      },
+    },
   },
 };
