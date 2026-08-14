@@ -52,7 +52,7 @@ For infrastructure-related issues, Bits can recommend a remediation action, such
 
 {{< img src="bits_ai/bits_remediation/one_click_action.png" alt="A suggested remediation action with instructions to restart a deployment, a Run button, and a Verify Resolution button" style="width:100%;" >}}
 
-Kubernetes actions are supported in Preview, with more integration actions in progress. See the [Action Catalog][4] for the full list of supported actions and how to enable them in Datadog.
+Kubernetes actions are supported in Preview. See the [Action Catalog][4] for the full list of supported actions and how to enable them in Datadog.
 
 To run one-click Kubernetes actions, your organization needs:
 - A [Private Action Runner][5] with network access to your Kubernetes cluster, paired with a [Connection][6] to the Kubernetes integration.
