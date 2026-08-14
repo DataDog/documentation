@@ -6831,56 +6831,61 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_opentelemetry
       weight: 214
+    - name: Prometheus
+      url: observability_pipelines/sources/prometheus/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_prometheus
+      weight: 215
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_kafka
-      weight: 215
+      weight: 216
     - name: Logstash
       url: observability_pipelines/sources/logstash/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_logstash
-      weight: 216
+      weight: 217
     - name: MySQL
       url: observability_pipelines/sources/mysql/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_mysql
-      weight: 217
+      weight: 218
     - name: Okta
       url: observability_pipelines/sources/okta/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_okta
-      weight: 218
+      weight: 219
     - name: Socket
       url: observability_pipelines/sources/socket/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_socket
-      weight: 219
+      weight: 220
     - name: Splunk HEC
       url: observability_pipelines/sources/splunk_hec/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_hec
-      weight: 220
+      weight: 221
     - name: Splunk TCP
       url: observability_pipelines/sources/splunk_tcp/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_tcp
-      weight: 221
+      weight: 222
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/sources/sumo_logic/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_sumo_logic
-      weight: 222
+      weight: 223
     - name: Syslog
       url: observability_pipelines/sources/syslog/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
-      weight: 223
+      weight: 224
     - name: WebSocket
       url: observability_pipelines/sources/websocket/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_websocket
-      weight: 224
+      weight: 225
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
@@ -7116,31 +7121,41 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
       weight: 421
+    - name: OpenTelemetry
+      url: observability_pipelines/destinations/opentelemetry
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_destinations_opentelemetry
+      weight: 422
+    - name: Prometheus
+      url: /observability_pipelines/destinations/prometheus/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_prometheus
+      weight: 423
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sentinelone
-      weight: 422
+      weight: 424
     - name: Socket
       url: observability_pipelines/destinations/socket
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_socket
-      weight: 423
+      weight: 425
     - name: Splunk HEC
       url: observability_pipelines/destinations/splunk_hec/logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
-      weight: 424
+      weight: 426
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
-      weight: 425
+      weight: 427
     - name: Syslog
       url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
-      weight: 426
+      weight: 428
     - name: Packs
       url: observability_pipelines/packs/
       parent: observability_pipelines
