@@ -182,7 +182,7 @@ The following buttons are available in the action tray. Incident types are initi
 | ▶️ Create/Join Zoom           | Start a new meeting or quickly join if one already exists             | ✓ |   |   |
 | ▶️ Create/Join Google Meet    | Start a new meeting or quickly join if one already exists             | ✓ |   |   |
 | ▶️ Run Workflow               | Select and run pre-defined workflows for the incident                 | ✓ |   |   |
-| 🟨 Set to Stable              | Mark the incident as stable after impact is mitigated                 | ✓ |   |   |
+| 🟨 Set to Stable              | Mark the incident as stable after mitigating the impact                 | ✓ |   |   |
 | ✅ Resolve Incident           | Mark the incident as resolved                                         |   | ✓ |   |
 | ✨ Investigate with Bits AI   | Use Bits AI to investigate the incident                               | ✓ |   |   |
 | 📋 Create Follow-Up           | Create follow-up tasks identified during the incident response        |   | ✓ | ✓ |
