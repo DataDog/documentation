@@ -8,13 +8,9 @@ aliases:
 disable_toc: false
 ---
 
-This guide shows you how to write effective SECL (Security Language) rules for Datadog Workload Protection.
-
-## Overview
-
 Datadog SECL is a custom domain-specific language used to create Agent expressions and policies within Datadog Workload Protection. SECL allows security teams to define real-time threat detection rules by specifying conditions, operators, and patterns that security agents can monitor across hosts, containers, applications, and cloud infrastructure.
 
-### How SECL rules fit together
+## How SECL rules fit together
 
 Think of SECL as a local filter: it runs inside the Agent on each host, watching kernel and OS events. When an event matches your SECL expression, the Agent raises a detection.
 
@@ -67,7 +63,7 @@ SECL operators are used to combine event attributes together into a full express
 | `not in [CIDR1, ...]` | Element is not in the IP ranges          | 7.37          |
 | `allin [CIDR1, ...]`  | All the elements are in the IP ranges    | 7.37          |
 
-#### Patterns and regular expressions
+### Patterns and regular expressions
 
 Patterns or regular expressions can be used in SECL expressions. They can be used with the `in`, `not in`, `=~`, and `!~` operators.
 
@@ -78,7 +74,7 @@ Patterns or regular expressions can be used in SECL expressions. They can be use
 
 Patterns on `.path` fields are used as Glob. `*` matches files and folders at the same level. `**`, introduced in 7.34, can be used at the end of a path to match all the files and subfolders.
 
-#### Durations
+### Durations
 
 You can use SECL to write rules based on durations, which trigger on events that occur during a specific time period. For example, trigger on an event where a secret file is accessed more than a certain length of time after a process is created.
 Such a rule could be written as follows:

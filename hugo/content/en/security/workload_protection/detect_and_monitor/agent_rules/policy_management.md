@@ -1,5 +1,5 @@
 ---
-title: Policy management
+title: Policy Management
 aliases:
   - /security/workload_protection/workload_security_rules/custom_rules
   - /security/threats/workload_security_rules/custom_rules

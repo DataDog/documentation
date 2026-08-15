@@ -1,5 +1,5 @@
 ---
-title: Detection rules
+title: Detection Rules
 disable_toc: false
 aliases:
   - /security/workload_protection/detect_and_monitor/detection_rules
