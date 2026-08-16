@@ -57,9 +57,11 @@ The initial run history for a workflow provides a panel with the list of previou
 
 ## Fix a failed step with AI
 
-From a failed step in {{< ui >}}Run History{{< /ui >}}, click {{< ui >}}Fix with AI{{< /ui >}} to get help resolving the failure.
+From a failed step's error message in {{< ui >}}Run History{{< /ui >}}, click {{< ui >}}Fix with AI{{< /ui >}} to get help resolving the failure.
 
-The AI assistant reviews the step's inputs, outputs, execution context, and error message, and can search external documentation for errors returned by third-party APIs. It proposes a fix and asks for your confirmation before applying any change. After you confirm, the assistant updates the step's configuration and reruns validation.
+{{< img src="actions/workflows/test_and_debug/fix-with-ai.png" alt="Bits Chat diagnosing and proposing a fix for a failed workflow step." >}}
+
+The assistant opens in [Bits Chat][7], diagnoses the failure using the step's inputs, outputs, execution context, and error message, and can search external documentation for errors returned by third-party APIs. It explains the issue and proposes a fix. Unless you turn on {{< ui >}}Auto-approve{{< /ui >}}, the assistant waits for your confirmation before applying any change. After you confirm, the assistant updates the step's configuration and reruns validation.
 
 Fixes with AI apply to problems in the workflow's configuration, such as incorrect inputs or an outdated action setup. The assistant can't fix failures caused by external factors, such as invalid credentials, rate limits, or outages in a connected service. Investigate those with the owner of the connected service.
 
@@ -73,4 +75,5 @@ If the failed step triggers another workflow, debug the triggered workflow's own
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][10].
 
 [6]: /actions/workflows/expressions/
+[7]: /bits_ai/bits_chat/
 [10]: https://chat.datadoghq.com/
