@@ -55,6 +55,17 @@ Clicking on a failed step gives you the inputs, outputs, and execution context f
 The initial run history for a workflow provides a panel with the list of previous workflow executions and whether each execution succeeded or failed. Failures include a link to the failed workflow step. Click on a workflow execution in the list to inspect it. You can return to the initial execution history at any time by clicking anywhere on the workflow canvas.
 
 
+## Fix a failed step with AI
+
+From a failed step in {{< ui >}}Run History{{< /ui >}}, click {{< ui >}}Fix with AI{{< /ui >}} to get help resolving the failure.
+
+The AI assistant reviews the step's inputs, outputs, execution context, and error message, and can search external documentation for errors returned by third-party APIs. It proposes a fix and asks for your confirmation before applying any change. After you confirm, the assistant updates the step's configuration and reruns validation.
+
+Fixes with AI apply to problems in the workflow's configuration, such as incorrect inputs or an outdated action setup. The assistant can't fix failures caused by external factors, such as invalid credentials, rate limits, or outages in a connected service. Investigate those with the owner of the connected service.
+
+If the failed step triggers another workflow, debug the triggered workflow's own run history to find the underlying failure.
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
