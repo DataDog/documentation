@@ -93,11 +93,11 @@ For any conversion analysis view, you can choose to view conversions by count or
 ## Conversion computing metrics
 
 ### How Datadog computes conversion metrics
-Consider a funnel with events `A → B → C` and event steps **`A`**, `A`, `A`, **`B`**, **`C`**, `C`.
+Consider a funnel with events `A → B → C` and event steps <code><strong>A</strong>, A, A, <strong>B</strong>, <strong>C</strong>, C</code>.
 
 In this case, Datadog counts one conversion. Each occurrence of **A** is an entry that starts an independent attempt. Because all three attempts complete on the same **C** event, Datadog counts only the attempt with the earliest entry.
 
-To further illustrate, if the user performs the event sequence **`A`**, `A`, `A`, **`B`**, **`C`**, `C`, **`A`**, **`B`**, **`C`**, Datadog counts two conversions. The first conversion completes with the sequence **`A`**, `A`, `A`, **`B`**, **`C`**, `C`, and the second conversion completes with the following sequence of **`A`**, **`B`**, **`C`**.
+To further illustrate, if the user performs the event sequence <code><strong>A</strong>, A, A, <strong>B</strong>, <strong>C</strong>, C, <strong>A</strong>, <strong>B</strong>, <strong>C</strong></code>, Datadog counts two conversions. The first conversion completes with the sequence <code><strong>A</strong>, A, A, <strong>B</strong>, <strong>C</strong>, C</code>, and the second conversion completes with the following sequence of <code><strong>A</strong>, <strong>B</strong>, <strong>C</strong></code>.
 
 <div class="alert alert-info"> Any action or view that does not match a funnel step does not impact the step-by-step or overall conversion rate. If all funnel steps occur in the right order within the conversion window, Datadog counts the session as a single converted session.</div>
 
