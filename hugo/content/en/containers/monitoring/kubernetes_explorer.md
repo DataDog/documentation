@@ -110,7 +110,7 @@ This setup deploys the OTel Collector as a Kubernetes Deployment. Create a `depl
 
 ##### Collector image and mode
 
-Set the Collector to run as a single-replica Deployment or as a DaemonSet using the Contrib distribution:
+Set the Collector to run as a single-replica Deployment using the Contrib distribution:
 
 ```yaml
 mode: deployment
@@ -128,8 +128,6 @@ extraEnvs:
         name: datadog-secret
         key: api-key
 ```
-
-To run as a DaemonSet, set `mode: daemonset` and remove `replicaCount`.
 
 ##### Kubernetes objects collection
 
