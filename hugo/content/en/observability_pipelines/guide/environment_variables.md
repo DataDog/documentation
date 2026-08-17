@@ -93,6 +93,9 @@ Some Observability Pipelines components require setting up environment variables
 ### Databricks (Zerobus)
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/databricks_zerobus %}}
 
+### Datadog APM
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+
 ### Datadog Logs
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 
@@ -129,7 +132,12 @@ Some Observability Pipelines components require setting up environment variables
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
 
 ### OpenTelemetry
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry %}}
+
+**Metrics**
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_metrics %}}
+
+**Traces**
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_traces %}}
 
 ### Prometheus
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/prometheus %}}
