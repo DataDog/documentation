@@ -1511,15 +1511,6 @@ $acl.SetAccessRule((New-Object System.Security.AccessControl.RegistryAccessRule 
 Set-Acl "HKLM:\SOFTWARE\Datadog\secrets" $acl
 ```
 
-Then configure the Agent to read from that key:
-
-```yaml
-# datadog.yaml
-secret_backend_type: windows.regkey
-
-api_key: 'ENC[SOFTWARE\Datadog\secrets:api_key]'
-```
-
 {{% /collapse-content %}}
 
 #### Multiple backends
