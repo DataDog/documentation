@@ -49,7 +49,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog` folder.
 
-   3. Look for `libddprof error: Failed to send profile.` entries: this message means it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][1] for more information.
+   3. Look for `libddprof error: Failed to send profile.` entries: this message means it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][4] for more information.
 
    4. If the `Failed to send profile` message is not present, look for `The profile was sent. Success?` entries.
 
@@ -84,8 +84,6 @@ If you've configured the profiler and don't see profiles in the profile search p
    - A trace was created
    - The application ran for more than 30 seconds
 If it is set to another value or not set at all, the profiler is disabled.
-
-[1]: /profiler/enabling/dotnet/?tab=linux#configuration
 
 {{% /tab %}}
 {{% tab "Linux" %}}
@@ -124,7 +122,7 @@ If it is set to another value or not set at all, the profiler is disabled.
 
    2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog` folder.
 
-   3. Look for `libddprof error: Failed to send profile.` entries: this message means it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][1] for more information.
+   3. Look for `libddprof error: Failed to send profile.` entries: this message means it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][4] for more information.
 
    4. If the `Failed to send profile` message is not present, look for `The profile was sent. Success?` entries.
 
@@ -146,8 +144,6 @@ If it is set to another value or not set at all, the profiler is disabled.
    3. If one of these messages is present, it means that the application code or a third party code is repeatedly reinstalling its own signal handler over the Datadog signal handler. To avoid any further conflict, the CPU and Wall time profilers are disabled.
 
    Note that the following message could appear, but it does not impact Datadog profiling: `Profiler signal handler has been replaced. Restoring it.` This indicates only that the Datadog signal handler is reinstalled when it was overwritten.
-
-[1]: /profiler/enabling/dotnet/?tab=linux#configuration
 
 {{% /tab %}}
 
@@ -189,7 +185,7 @@ The default profiler log directory is `%ProgramData%\Datadog .NET Tracer\logs\`.
 
    2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file from the default log folder.
 
-   3. Look for `libddprof error: Failed to send profile.` entries: This message means that it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][1] for more information.
+   3. Look for `libddprof error: Failed to send profile.` entries: This message means that it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][5] for more information.
 
    4. If the `Failed to send profile` message is not present, look for `The profile was sent. Success?` entries.
 
@@ -199,8 +195,6 @@ The default profiler log directory is `%ProgramData%\Datadog .NET Tracer\logs\`.
       ```
 
    5. Check the other HTTP codes for possible errors such as 403 for invalid API key.
-
-[1]: /profiler/enabling/dotnet/?tab=linux#configuration
 
 {{% /tab %}}
 
@@ -225,9 +219,9 @@ The [different profile types][3] have a fixed CPU and memory overhead per applic
 To reduce overhead when profiling multiple processes:
 
 - Use `DD_PROFILING_ENABLED=auto` instead of `true` when enabling profiling host-wide. With `auto`, profiling starts only when the application has run for more than 30 seconds **and** at least one trace was created.
-- Use [instrumentation rules][101] to limit which processes receive SSI.
+- Use [instrumentation rules][6] to limit which processes receive SSI.
 - Set `DD_PROFILING_ENABLED=false` in a specific process environment to opt that process out of profiling. Tracing is not affected.
-[101]: /tracing/trace_collection/single-step-apm/linux/#define-instrumentation-rules
+
 {{% /tab %}}
 {{% tab "Linux" %}}
 
@@ -291,3 +285,6 @@ If an application hangs, or otherwise becomes unresponsive on Linux, CPU and Wal
 [1]: /tracing/troubleshooting/#debugging-and-logging
 [2]: /help/
 [3]: /profiler/profile_types/?code-lang=dotnet
+[4]: /profiler/enabling/dotnet/?tab=linux#configuration
+[5]: /profiler/enabling/dotnet/#configuration
+[6]: /tracing/trace_collection/single-step-apm/linux/#define-instrumentation-rules
