@@ -15,6 +15,12 @@ aliases:
     - /tracing/setup_overview/custom_instrumentation/undefined
     - /tracing/setup_overview/custom_instrumentation/
 further_reading:
+    - link: "https://learn.datadoghq.com/courses/create-custom-spans-and-tags"
+      tag: "Learning Center"
+      text: "Create Custom Spans and Span Tags with APM"
+    - link: "https://www.datadoghq.com/blog/choosing-apm-instrumentation/"
+      tag: "Blog"
+      text: "From zero to traces: Choosing the right APM instrumentation method for your stack | Datadog"
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'
     - link: 'tracing/connect_logs_and_traces'
@@ -23,9 +29,6 @@ further_reading:
       text: 'Explore your services, resources, and traces'
     - link: 'https://www.datadoghq.com/blog/opentelemetry-instrumentation/'
       text: 'Learn More about Datadog and the OpenTelemetry initiative'
-    - link: "https://learn.datadoghq.com/courses/create-custom-spans-and-tags"
-      tag: "Learning Center"
-      text: "Create Custom Spans and Span Tags with APM"
 algolia:
   tags: ['apm custom instrumentation']
 ---

@@ -16,6 +16,9 @@ further_reading:
 - link: "/incident_response/incident_management/setup_and_configuration/templates"
   tag: "Documentation"
   text: "Configure AI variables in notification and postmortem templates"
+- link: "https://www.datadoghq.com/blog/datadog-incident-response-ai-features/"
+  tag: "Blog"
+  text: "Accelerate investigations with AI in Datadog Incident Response | Datadog"
 ---
 
 ## Overview

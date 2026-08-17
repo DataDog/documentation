@@ -17,6 +17,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/open-source-ai-sast/"
       tag: "Blog"
       text: "Introducing our open source AI-native SAST"
+    - link: "https://www.datadoghq.com/blog/sast-triage-agentic-evaluation-bits-memories/"
+      tag: "Blog"
+      text: "Reduce SAST false positives with agentic evaluation and Bits Memories | Datadog"
 ---
 
 Static Code Analysis (SAST) uses AI to help automate detection, validation, and remediation across the vulnerability management lifecycle.

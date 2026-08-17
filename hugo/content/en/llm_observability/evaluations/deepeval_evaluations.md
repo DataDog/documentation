@@ -5,6 +5,9 @@ further_reading:
 - link: "/llm_observability/evaluations/external_evaluations"
   tag: "Documentation"
   text: "Submit Evaluations"
+- link: "https://www.datadoghq.com/blog/using-evaluation-frameworks-with-agent-observability/"
+  tag: "Blog"
+  text: "Using Evaluation Frameworks with Agent Observability | Datadog"
 ---
 
 ## Overview

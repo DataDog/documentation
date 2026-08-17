@@ -11,6 +11,9 @@ further_reading:
     - link: '/llm_observability/evaluations/annotation_queues'
       tag: 'Documentation'
       text: 'Learn about Annotation Queues'
+    - link: "https://www.datadoghq.com/blog/debug-and-evaluate-your-ai-app-from-your-coding-agent/"
+      tag: "Blog"
+      text: "Debug and evaluate your AI app from your coding agent with Datadog Agent Observability | Datadog"
 ---
 
 ## Overview

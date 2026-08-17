@@ -1,5 +1,9 @@
 ---
 title: Dead Letter Queues
+further_reading:
+- link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
+  tag: "Blog"
+  text: "Data pipeline monitoring 101: Tracking health and performance across the data stack | Datadog"
 ---
 
 Data Streams Monitoring (DSM) provides visibility into your non-empty dead letter queues (DLQs), enabling you to monitor and inspect message processing failures. DSM also enables you to remediate these message processing failures directly within Datadog.
@@ -70,3 +74,7 @@ If you are unable to see dead letter queue information:
 [7]: https://app.datadoghq.com/data-streams/issues
 [8]: /monitors/types/metric/
 [9]: https://app.datadoghq.com/actions/connections
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

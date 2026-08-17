@@ -8,6 +8,9 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/getting-started-product-analytics
   tag: Learning Center
   text: Getting Started with Product Analytics
+- link: "https://www.datadoghq.com/blog/product-analytics-account-segments/"
+  tag: "Blog"
+  text: "Investigate account-level churn risk with Product Analytics account segments | Datadog"
 ---
 
 ## Overview

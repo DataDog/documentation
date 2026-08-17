@@ -5,6 +5,9 @@ type: multi-code-lang
 code_lang: ios
 code_lang_weight: 20
 further_reading:
+ - link: "https://www.datadoghq.com/blog/monitor-watchos-visionos-datadog-rum/"
+   tag: "Blog"
+   text: "Monitor watchOS and visionOS apps with Datadog RUM | Datadog"
  - link: "https://github.com/DataDog/dd-sdk-ios"
    tag: "Source Code"
    text: "Source code for dd-sdk-ios"

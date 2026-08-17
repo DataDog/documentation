@@ -17,6 +17,9 @@ further_reading:
     - link: '/data_observability/cicd/'
       tag: 'Documentation'
       text: 'CI/CD'
+    - link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
+      tag: "Blog"
+      text: "Data pipeline monitoring 101: Tracking health and performance across the data stack | Datadog"
 ---
 
 The Data Catalog is a searchable, centralized inventory of data assets (tables, schemas, databases, and pipeline jobs) automatically populated from your connected integrations.
@@ -54,3 +57,7 @@ Wildcards and unions are also supported:
 Recent searches are saved and surfaced in the dropdown for quick reuse.
 
 [1]: /data_observability/lineage/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

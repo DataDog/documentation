@@ -8,12 +8,15 @@ further_reading:
 - link: "integrations/slack/"
   tag: "Documentation"
   text: "Install the Slack Integration"
-- link: "https://app.datadoghq.com/integrations/slack"
-  tag: "App"
-  text: "In-app Slack integration tile"
 - link: "https://www.datadoghq.com/blog/slack-incident-management/"
   tag: "Blog"
   text: "Manage incidents seamlessly with the Datadog integration for Slack"
+- link: "https://www.datadoghq.com/blog/datadog-incident-response-ai-features/"
+  tag: "Blog"
+  text: "Accelerate investigations with AI in Datadog Incident Response | Datadog"
+- link: "https://app.datadoghq.com/integrations/slack"
+  tag: "App"
+  text: "In-app Slack integration tile"
 ---
 
 ## Overview

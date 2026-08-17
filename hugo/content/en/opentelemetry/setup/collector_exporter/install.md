@@ -8,15 +8,18 @@ aliases:
 - /opentelemetry/collector_exporter/otel_collector_datadog_exporter
 description: 'Send OpenTelemetry data to the OpenTelemetry Collector and Datadog Exporter'
 further_reading:
-- link: "https://opentelemetry.io/docs/collector/"
-  tag: "External Site"
-  text: "Collector documentation"
-- link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
-  tag: "Blog"
-  text: "Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using Datadog Exporter"
 - link: "/opentelemetry/integrations/datadog_extension/"
   tag: "Documentation"
   text: "Enable the Datadog Extension to inspect collector configurations in Fleet Automation"
+- link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
+  tag: "Blog"
+  text: "Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using Datadog Exporter"
+- link: "https://www.datadoghq.com/blog/native-otel-with-datadog/"
+  tag: "Blog"
+  text: "Use OpenTelemetry-native observability with Datadog from ingestion to investigation | Datadog"
+- link: "https://opentelemetry.io/docs/collector/"
+  tag: "External Site"
+  text: "Collector documentation"
 ---
 
 ## Overview
