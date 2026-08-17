@@ -21,7 +21,7 @@ Coverage reflects whether the policies and Agent rules on each resource loaded s
 
 To identify and address coverage gaps, see [Review and Improve Coverage][6].
 
-{{< img src="security/workload_protection/coverage/coverage_explorer.png" alt="Explorer view of the Coverage page showing resources in a faceted table" width="100%">}}
+{{< img src="security/workload_protection/coverage_page/coverage_explorer.png" alt="Explorer view of the Coverage page showing resources in a faceted table" width="100%">}}
 
 ## Views
 
@@ -31,7 +31,7 @@ Coverage has two views. Use the toggle at the top of the page to switch between 
 
 - **Map**: A visual map where each resource appears as a hexagon colored by its coverage status severity.
 
-{{< img src="security/workload_protection/coverage/coverage_map.png" alt="Map view of the Coverage page showing resources as hexagons colored by coverage status" width="100%">}}
+{{< img src="security/workload_protection/coverage_page/coverage_map.png" alt="Map view of the Coverage page showing resources as hexagons colored by coverage status" width="100%">}}
 
 In both views, you can:
 
@@ -80,7 +80,7 @@ When a rule is filtered or in error, a **verdict** explains why:
 
 To understand why a rule is failing, select the resource to open its side panel. The side panel lists the resource's policies and rules. For each rule, it shows the expression, the status and verdict, and the error message reported by the Agent.
 
-{{< img src="security/workload_protection/coverage/coverage_side_panel.png" alt="Resource side panel showing policy and rule statuses with verdicts" width="100%">}}
+{{< img src="security/workload_protection/coverage_page/coverage_side_panel.png" alt="Resource side panel showing policy and rule statuses with verdicts" width="100%">}}
 
 ## Further reading
 
