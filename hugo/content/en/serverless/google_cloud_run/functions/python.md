@@ -99,6 +99,72 @@ import ddtrace.auto
 
 {{% svl-tracing-env %}}
 
+## Distributed tracing with Pub/Sub
+
+To get end-to-end distributed traces between Pub/Sub producers and Cloud Run functions, set `DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED=true` in the application container. This creates an inferred `gcp.pubsub.receive` span for the push request.
+
+Configure your push subscriptions with the `--push-no-wrapper` and `--push-no-wrapper-write-metadata` flags. This moves message attributes from the JSON body to HTTP headers, allowing Datadog to extract the producer trace context.
+
+For more information, see [Producer-aware tracing for Google Cloud Pub/Sub and Cloud Run][7] and [Payload unwrapping][8] in the Google Cloud documentation.
+
+### Configure push subscriptions for full trace visibility
+
+**Create a new push subscription:**
+
+{{< code-block lang="shell" disable_copy="false" >}}
+gcloud pubsub subscriptions create order-processor-sub \
+  --topic=orders \
+  --push-endpoint=https://order-processor-xyz.run.app/pubsub \
+  --push-no-wrapper \
+  --push-no-wrapper-write-metadata
+{{< /code-block >}}
+
+**Update an existing push subscription:**
+
+{{< code-block lang="shell" disable_copy="false" >}}
+gcloud pubsub subscriptions update order-processor-sub \
+  --push-no-wrapper \
+  --push-no-wrapper-write-metadata
+{{< /code-block >}}
+
+### Configure Eventarc Pub/Sub triggers
+
+Eventarc Pub/Sub triggers use push subscriptions as the underlying delivery mechanism. When you create an Eventarc trigger, GCP automatically creates a managed push subscription. However, Eventarc does not expose `--push-no-wrapper-write-metadata` as a trigger creation parameter, so you must manually update the auto-created subscription.
+
+1. **Create the Eventarc trigger:**
+
+   {{< code-block lang="shell" disable_copy="false" >}}
+gcloud eventarc triggers create order-processor-trigger \
+  --destination-run-service=order-processor \
+  --destination-run-region=us-central1 \
+  --event-filters="type=google.cloud.pubsub.topic.v1.messagePublished" \
+  --transport-topic=projects/my-project/topics/orders \
+  --location=us-central1
+{{< /code-block >}}
+
+2. **Find the auto-created subscription:**
+
+   {{< code-block lang="shell" disable_copy="false" >}}
+gcloud pubsub subscriptions list \
+  --filter="topic:projects/my-project/topics/orders" \
+  --format="table(name,pushConfig.pushEndpoint)"
+{{< /code-block >}}
+
+   Example output:
+   ```
+   NAME                                                          PUSH_ENDPOINT
+   eventarc-us-central1-order-processor-trigger-abc-sub-def      https://order-processor-xyz.run.app
+   ```
+
+3. **Update the subscription for trace propagation:**
+
+   {{< code-block lang="shell" disable_copy="false" >}}
+gcloud pubsub subscriptions update \
+  eventarc-us-central1-order-processor-trigger-abc-sub-def \
+  --push-no-wrapper \
+  --push-no-wrapper-write-metadata
+{{< /code-block >}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
@@ -113,3 +179,5 @@ import ddtrace.auto
 [4]: /extend/dogstatsd/?tab=python#install-the-dogstatsd-client
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples-5
 [6]: /profiler/
+[7]: https://www.datadoghq.com/blog/pubsub-cloud-run-tracing/
+[8]: https://cloud.google.com/pubsub/docs/payload-unwrapping
