@@ -107,7 +107,7 @@ IaC misconfigurations are shown in three places:
 - **Problems panel**: All findings are listed with the source `Datadog`.
 - **File Insights view**: Findings are grouped under **Infrastructure as Code** alongside other Code Security issues.
 
-{{< img src="/ide_plugins/vscode/iac_real_time_analysis.mp4" alt="Preview of IaC Scanning" style="width:100%" video=true >}}
+{{< img src="/ide_plugins/vscode/iac_real_time_analysis.mp4" alt="Several IaC findings highlighted inline in Dockerfile and Terraform files, with a hover diagnostic, a quick fix action to suppress a finding with a comment, and the corresponding findings in the File Insights view and Problems panel" style="width:100%" video=true >}}
 
 ### Suppress a finding
 
