@@ -1026,10 +1026,10 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="Kafka Monitoring (Preview)" level="h3" >}}
+{{< collapse-content title="Kafka Console (Preview)" level="h3" >}}
 
 <div class="alert alert-info">
-Kafka Monitoring is available in <strong>Preview</strong>.
+Kafka Console is available in <strong>Preview</strong>.
 </div>
 
 <strong>Note</strong>:

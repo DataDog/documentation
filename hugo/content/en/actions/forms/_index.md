@@ -121,6 +121,8 @@ The following options are available:
 
 To pause or remove external sharing, click {{< ui >}}Share{{< /ui >}}, then click {{< ui >}}Edit{{< /ui >}} and select {{< ui >}}Pause Sharing{{< /ui >}} or {{< ui >}}Delete Sharing{{< /ui >}}.
 
+To prefill fields in a shared link so respondents start with some answers filled in, see [Prefill form fields][15].
+
 ## Add a form to a dashboard
 
 To add a form to a dashboard from the form editor:
@@ -177,3 +179,4 @@ By default, only the creator of a form can access it. To change the permissions 
 [12]: /mcp_server/setup/#toolsets
 [13]: /bits_ai/bits_chat/
 [14]: /mcp_server/tools/#forms
+[15]: /actions/forms/guide/prefill/
