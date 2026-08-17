@@ -23,36 +23,36 @@ This covers task **run history** only. To monitor Snowflake data quality and lin
 
 ## Prerequisites
 
-Connect the [Snowflake integration][2] to Data Observability. The standard setup script already grants everything this feature needs. The grant specific to task monitoring is **`MONITOR EXECUTION ON ACCOUNT`**, which lets Datadog read your Snowflake task run history.
+Connect the [Snowflake integration][2] to Data Observability. The standard setup script already grants everything this feature needs. The permission it grants that is specific to task monitoring is **`MONITOR EXECUTION ON ACCOUNT`**, which lets Datadog read your Snowflake task run history.
 
 ## Enable Task History Traces
 
-1. In Data Observability, go to your Snowflake account configuration.
+1. In Data Observability, go to your Snowflake account configuration in [Integration settings][3].
 2. Under **Data Jobs Monitoring**, turn on **Task History Traces**.
 3. Choose a **Traces collection period** (`5 Min`, `15 Min`, `30 Min`, `Hourly`, or `Daily`).
 
-Task runs are read from Snowflake's `ACCOUNT_USAGE.TASK_HISTORY` view. When you first enable the feature, Datadog backfills task runs from roughly the last 18 hours. Because that view has a latency of up to 45 minutes, new runs may take that long to appear.
+Data Observability reads task runs from Snowflake's `ACCOUNT_USAGE.TASK_HISTORY` view. When you first enable the feature, Datadog backfills task runs from roughly the last 18 hours. Because that view has a latency of up to 45 minutes, new runs may take that long to appear.
 
 ## What Datadog collects
 
 For each task run, Datadog creates a span with:
 
-- **Timing** — scheduled time, completed time, and duration.
-- **Status** — success or failure, with the error code and message on failed runs.
-- **The SQL statement** the task ran.
+- **Timing**: Scheduled time, completed time, and duration.
+- **Status**: Success or failure, with the error code and message on failed runs.
+- The **SQL statement** the task ran.
 
-Runs are grouped into a **task graph (DAG)** trace, so a root task and its dependent tasks appear together.
+Data Observability groups runs into a **task graph (DAG)** trace, so a root task and its dependent tasks appear together.
 
 ## View your task runs
 
-- In the Data Observability catalog, the same **Task Runs** view appears in two places:
-    - the **Task Runs** tab on the task's entity page, and
-    - the **side panel** that opens when you click a task in the Lineage map.
-- In **Trace Explorer**.
+You can view task runs in the following places:
 
-{{< img src="data_jobs/snowflake_task_runs.png" alt="Task Runs on a Snowflake task's entity page in Data Observability" style="width:100%;" >}}
-
-{{< img src="data_jobs/snowflake_task_runs_lineage.png" alt="Task runs in the side panel of a Snowflake task in the Data Observability Lineage map" style="width:100%;" >}}
+- Trace Explorer
+- In the [Data Observability catalog][4], in the **Task Runs** view:
+    - In the **Task Runs** tab on the task's entity page:
+      {{< img src="data_jobs/snowflake_task_runs.png" alt="Task runs on a Snowflake task's entity page in Data Observability" style="width:100%;" >}}
+    - In the side panel that opens when you click a task in the [Lineage map][5]:
+      {{< img src="data_jobs/snowflake_task_runs_lineage.png" alt="Task runs in the side panel of a Snowflake task in the Data Observability Lineage map" style="width:100%;" >}}
 
 ## Troubleshooting
 
@@ -67,3 +67,6 @@ If no task runs appear:
 
 [1]: https://docs.snowflake.com/en/user-guide/tasks-intro
 [2]: /data_observability/quality_monitoring/data_warehouses/snowflake/
+[3]: https://app.datadoghq.com/integrations?search=snow&integrationId=snowflake-web
+[4]: https://app.datadoghq.com/data-obs/catalog
+[5]: https://app.datadoghq.com/data-obs/lineage
