@@ -21,7 +21,7 @@ The [profiling flame graph][1] visualizes stack traces collected by Continuous P
 
 ## Setup
  
- {{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph_config.png" alt="Graph your data section in the profiling flame graph widget configuration" style="width:100%;" >}}
+ {{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph_config_2.png" alt="Graph your data section in the profiling flame graph widget configuration" style="width:100%;" >}}
 
 ### Graph your data
 
