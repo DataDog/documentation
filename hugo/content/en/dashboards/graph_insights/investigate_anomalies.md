@@ -89,7 +89,7 @@ Investigations started this way record {{< ui >}}Dashboard Anomaly{{< /ui >}} as
 
 To stop scanning a dashboard for anomalies, click {{< ui >}}Investigate{{< /ui >}} and turn off {{< ui >}}Auto-detect issues{{< /ui >}}.
 
-This preference applies to one dashboard and is stored in your browser. Other viewers of the same dashboard still see anomalies unless they turn detection off themselves, and the preference does not carry over to a different browser or device.
+This preference applies to one dashboard and is stored in your browser. Other viewers of the same dashboard still see anomalies unless they turn detection off themselves. The preference also does not carry over to a different browser or device.
 
 <!-- TODO (verify): a per-widget exclusion also exists. use-anomaly-detection-opt-out.ts says
 "Widget-level opt-out is handled via widget definitions (detection_sensitivity =
