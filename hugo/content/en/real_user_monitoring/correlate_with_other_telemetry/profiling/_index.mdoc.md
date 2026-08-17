@@ -212,7 +212,7 @@ Only devices running Android 15 (API level 35) or higher generate profiling data
 
 ## Preview quota system
 
-During the Preview, the Datadog Android SDK profiles up to 100,000 sessions per day. After reaching this quota, the SDK pauses profiling until the quota resets at 2:00 a.m. EST the following day.
+During the preview, the Datadog Android SDK profiles up to 100,000 sessions per day across all applications in the organization. After reaching this quota, the SDK pauses profiling until the quota resets at 12:00 a.m. UTC.
 
 ## Setup
 
@@ -321,7 +321,7 @@ iOS profiling helps you identify and optimize slow methods during important mome
 
 ## Preview quota system
 
-During the Preview, the Datadog iOS SDK profiles up to 100,000 sessions per day. After reaching this quota, the SDK pauses profiling until the quota resets at 2:00 a.m. EST the following day.
+During the preview, the Datadog iOS SDK profiles up to 100,000 sessions per day across all applications in the organization. After reaching this quota, the SDK pauses profiling until the quota resets at 12:00 a.m. UTC.
 
 ## Setup
 
