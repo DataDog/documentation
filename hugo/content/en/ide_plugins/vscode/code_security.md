@@ -93,7 +93,7 @@ To toggle Secret Scanning, run the `Datadog: Turn on Secret Scanning` or `Datado
 
 ## Infrastructure as Code (IaC) Scanning
 
-The extension runs [Infrastructure as Code (IaC) Security][6] rules on supported IaC files in your workspace. It detects cloud misconfigurations, such as missing encryption or overly permissive access, before you deploy them. Files are scanned locally as you edit, and findings are displayed in real time.
+The extension runs [Infrastructure as Code (IaC) Security][6] rules on supported IaC files in your workspace. It detects cloud misconfigurations, such as missing encryption or overly permissive access. Files are scanned locally as you edit, and findings are displayed in real time.
 
 ### Get started with IaC Scanning
 
