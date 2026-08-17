@@ -306,7 +306,7 @@ The [`opentelemetry-kube-stack`][112] Helm chart installs the OpenTelemetry Oper
 
 #### Prerequisites
 
-- OpenTelemetry Kube Stack Helm chart [0.20.0][113] or later.
+- OpenTelemetry Kube Stack Helm chart [0.20.1][113] or later.
 - OpenTelemetry Collector Contrib [v0.154.0][102] or later (pinned by the reference values file).
 - cert-manager, which is required for the operator's admission webhook.
 
@@ -319,7 +319,21 @@ Recommendations:
 - Use Kubernetes 1.33 or later, which includes [streaming list improvements][106] that reduce API server impact.
 - Start with smaller clusters. Limit the number of objects per resource type to fewer than 5,000 as a starting point, and scale up gradually while monitoring cluster health.
 
-#### 1. Install cert-manager (if not already present)
+#### Quickstart (interactive installer)
+
+The [`opentelemetry-examples`][115] repository ships an interactive installer that handles all of the steps below. From `guides/kubernetes/configuration/opentelemetry-kube-stack/`:
+
+```sh
+./install
+```
+
+The installer prompts for your Datadog API key, [Datadog site][104], Kubernetes platform, and deployment environment. For EKS, GKE, and AKS it enables the matching resource-detection preset. For other platforms it prompts for the cluster name. It then creates the `opentelemetry-operator-system` namespace and `datadog-secret`, installs cert-manager if needed, and installs or upgrades the chart.
+
+#### Install with values files
+
+If you did not use the interactive installer above, follow the steps below to install manually.
+
+##### 1. Install cert-manager (if not already present)
 
 ```sh
 helm repo add jetstack https://charts.jetstack.io
@@ -330,48 +344,60 @@ helm install cert-manager jetstack/cert-manager \
   --set crds.enabled=true
 ```
 
-#### 2. Create the Datadog secret
+##### 2. Create the Datadog secret
 
-Set `DD_SITE` to your [Datadog site][104]:
+Set `DD_SITE` to your [Datadog site][104] (defaults to `datadoghq.com`):
 
 ```sh
 export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
-export DD_SITE="<YOUR_DATADOG_SITE>"  # for example datadoghq.com, us3.datadoghq.com, datadoghq.eu
+export DD_SITE="datadoghq.com"  # for example us3.datadoghq.com, datadoghq.eu
 
-kubectl create namespace opentelemetry-operator-system
+kubectl create namespace opentelemetry-operator-system \
+  --dry-run=client -o yaml | kubectl apply -f -
+
 kubectl create secret generic datadog-secret \
   --namespace opentelemetry-operator-system \
   --from-literal="api-key=$DD_API_KEY" \
-  --from-literal="dd-site=$DD_SITE"
+  --from-literal="dd-site=$DD_SITE" \
+  --dry-run=client -o yaml | kubectl apply -f -
 ```
 
-#### 3. Deploy the reference collectors
+##### 3. Create a deployment overlay
 
-Download the reference [`values.yaml`][114] from the `opentelemetry-examples` repository, then install the chart:
+The reference `values.yaml` is the base; deployment-specific settings (cluster platform, environment, cluster name) live in an overlay file. From `guides/kubernetes/configuration/opentelemetry-kube-stack/`, copy the example that matches your platform:
+
+```sh
+mkdir -p deployment
+
+# EKS, GKE, or AKS (resource detector auto-populates k8s.cluster.name):
+cp examples/eks-deployment/values.yaml deployment/values.yaml
+cp examples/gcp-deployment/values.yaml deployment/values.yaml
+cp examples/aks-deployment/values.yaml deployment/values.yaml
+
+# Other platforms (set the cluster name manually):
+cp examples/manually-set-k8s-cluster-name/values.yaml deployment/values.yaml
+```
+
+For non-EKS/GKE/AKS platforms, edit `deployment/values.yaml` and replace `my_k8s_cluster` and `production` with your cluster name and deployment environment.
+
+##### 4. Deploy the reference collectors
+
+Install or upgrade the chart with both the base `values.yaml` and your overlay:
 
 ```sh
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
 helm repo update
 
-helm upgrade --install opentelemetry-kube-stack open-telemetry/opentelemetry-kube-stack \
+helm upgrade --install opentelemetry-kube-stack \
+  open-telemetry/opentelemetry-kube-stack \
   --namespace opentelemetry-operator-system \
-  --values values.yaml
-```
-
-The required `k8s.cluster.name` is automatically detected on EKS, AKS, and GKE through the `resourceDetection` preset in the reference `values.yaml`. For other cloud providers or self-managed clusters, add a `resource/cluster` processor at the start of each pipeline:
-
-```yaml
-processors:
-  resource/cluster:
-    attributes:
-      - key: k8s.cluster.name
-        value: <YOUR_CLUSTER_NAME>
-        action: insert
+  --values ./values.yaml \
+  --values ./deployment/values.yaml
 ```
 
 Both collectors default to limits of `500m` CPU and `1Gi` memory, and requests of `200m` CPU and `500Mi` memory. Scale up for large clusters.
 
-#### 4. Verify the installation
+#### Verify the installation
 
 Open the [Kubernetes Explorer][1] and filter by your cluster name. All core Kubernetes resource sections should populate, along with **Custom Resources > CRD**. The **Custom Resources > Resources** section is not supported with this setup.
 
@@ -380,8 +406,9 @@ Open the [Kubernetes Explorer][1] and filter by your cluster name. All core Kube
 [104]: /getting_started/site/
 [106]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
 [112]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-kube-stack
-[113]: https://github.com/open-telemetry/opentelemetry-helm-charts/releases/tag/opentelemetry-kube-stack-0.20.0
+[113]: https://github.com/open-telemetry/opentelemetry-helm-charts/releases/tag/opentelemetry-kube-stack-0.20.1
 [114]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/values.yaml
+[115]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack
 
 {{% /tab %}}
 {{< /tabs >}}
