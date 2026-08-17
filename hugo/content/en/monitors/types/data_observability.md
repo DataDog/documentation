@@ -207,22 +207,22 @@ The default limit is 500 groups per monitor. To increase this limit, [contact Su
 
 ### Model configuration
 
-For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand {{< ui >}}Model configuration{{< /ui >}} to tune how the model behaves:
+For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand {{< ui >}}Model configuration{{< /ui >}} to refine how the model behaves:
 
 | Setting | Description |
 |---|---|
-| {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | The number of consecutive failed evaluations before the monitor alerts. Raise this to suppress isolated spikes. |
+| {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | The number of consecutive Configure this setting to suppress isolated spikes. |
 | {{< ui >}}Minimum upper bound size{{< /ui >}} | Constrains how tightly the model tracks your data on the upper end. |
 | {{< ui >}}Minimum lower bound size{{< /ui >}} | Constrains how tightly the model tracks your data on the lower end. |
 
-Use {{< ui >}}If data is missing to evaluate{{< /ui >}} to control what the monitor reports when no data is available for an evaluation.
+In the  {{< ui >}}If data is missing to evaluate{{< /ui >}} dropdown menu, select what the monitor reports when no data is available for an evaluation.
 
 ### Monitor schedule
 
 Set how often the monitor evaluates your data:
 
 - {{< ui >}}Scheduled{{< /ui >}}: The monitor runs on a fixed cadence. Under {{< ui >}}Run this monitor{{< /ui >}}, select {{< ui >}}Hourly{{< /ui >}}, {{< ui >}}Every 3 hours{{< /ui >}}, {{< ui >}}Every 6 hours{{< /ui >}}, {{< ui >}}Every 12 hours{{< /ui >}}, {{< ui >}}Daily{{< /ui >}}, or {{< ui >}}Custom schedule{{< /ui >}}.
-- {{< ui >}}Manual{{< /ui >}} (Preview): The monitor runs only when triggered programmatically. Trigger these monitors using the [Data Observability API][10] on a schedule so enough historical data can accumulate for modeling to be useful. The UI does not support default metrics such as row counts and freshness, so this workflow applies to custom or column-level metrics.
+- {{< ui >}}Manual{{< /ui >}} (Preview): The monitor runs only when triggered programmatically. Trigger these monitors using the [Data Observability API][10] on a schedule to accumulate enough historical data for modeling to be useful. The UI does not support default metrics such as row counts and freshness, so this workflow applies to custom or column-level metrics.
 
 To define your own cadence, select {{< ui >}}Custom schedule{{< /ui >}} and supply a cron expression. A custom schedule can run as often as every 15 minutes. {{< ui >}}Preview times{{< /ui >}} lists the next several runs in your local time zone, so you can confirm the expression before saving it.
 
@@ -313,7 +313,7 @@ The difference between the source and the target is recorded as its own metric, 
 
 <div class="alert alert-info">Schema change monitors are in Preview.</div>
 
-A schema change monitor alerts when the structure of your data changes, rather than when its contents change. Use it to catch an upstream change before it breaks a downstream pipeline or dashboard, for example a column that is dropped, renamed, or switched to a different data type.
+A schema change monitor alerts when the structure of your data changes, rather than when its contents change. Use it to catch an upstream change before it breaks a downstream pipeline or dashboard, such as when a column is dropped, renamed, or switched to a different data type.
 
 Schema change monitors detect four kinds of change across databases, schemas, tables, and columns:
 
@@ -322,7 +322,7 @@ Schema change monitors detect four kinds of change across databases, schemas, ta
 | Added | A database, schema, table, or column was created. |
 | Removed | A database, schema, table, or column was dropped. |
 | Renamed | A table or column was renamed. |
-| Type changed | A column's data type changed, for example from `INTEGER` to `STRING`. |
+| Type changed | A column's data type changed, such as from `INTEGER` to `STRING`. |
 
 Schema changes are detected for Snowflake, BigQuery, Databricks, and Redshift.
 
@@ -332,13 +332,13 @@ Schema changes are detected for Snowflake, BigQuery, Databricks, and Redshift.
 2. Under {{< ui >}}Choose data to monitor{{< /ui >}}, select the warehouse to watch.
 3. Configure notifications as described in [Configure monitor](#configure-monitor).
 
-A schema change monitor does not take a metric type or a detection method, because it alerts on a structural change rather than on a measured value crossing a bound.
+A schema change monitor does not take a metric type or a detection method because it alerts on a structural change rather than on a measured value crossing a bound.
 
 ### Browse detected schema changes
 
 To see the changes Datadog has detected without creating a monitor, go to [{{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Schema Changes{{< /ui >}}][12]. Filter by platform, account, database, schema, or change type, and expand an entry to see the affected columns and their data types.
 
-Changes are detected when Datadog next collects schema metadata from your warehouse, by comparing the current structure against the previously collected one.
+Changes are detected when Datadog next collects schema metadata from your warehouse and compares the current structure against the previously collected one.
 
 ## Example monitors
 
