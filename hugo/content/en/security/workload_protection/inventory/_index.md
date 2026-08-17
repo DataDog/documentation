@@ -21,16 +21,17 @@ Coverage reflects whether the policies and Agent rules on each resource loaded s
 
 To identify and address coverage gaps, see [Review and Improve Coverage][6].
 
-{{< img src="security/workload_protection/coverage/coverage_map.png" alt="Use the Coverage page to get real-time visibility into Workload Protection status across all your resources and see which policies are applied" width="100%">}}
+{{< img src="security/workload_protection/coverage/coverage_explorer.png" alt="Explorer view of the Coverage page showing resources in a faceted table" width="100%">}}
 
 ## Views
 
 Coverage has two views. Use the toggle at the top of the page to switch between them:
 
 - **Explorer**: A faceted table of your resources. Search and filter resources by **Agent**, **Rule**, **Policy**, **Infrastructure**, and **Container** facets, then open a resource to inspect its Agent rules and policy deployment status.
+
 - **Map**: A visual map where each resource appears as a hexagon colored by its coverage status severity.
 
-{{< img src="security/workload_protection/coverage/coverage_explorer.png" alt="Explorer view of the Coverage page showing resources in a faceted table" width="100%">}}
+{{< img src="security/workload_protection/coverage/coverage_map.png" alt="Map view of the Coverage page showing resources as hexagons colored by coverage status" width="100%">}}
 
 In both views, you can:
 
