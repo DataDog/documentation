@@ -38,7 +38,6 @@ For more information on using JavaScript in App Builder, see [JavaScript Express
 
 ## Available components
 
-
 {{% collapse-content title="Button" level="h3" %}}
 Button components have the following properties.
 
