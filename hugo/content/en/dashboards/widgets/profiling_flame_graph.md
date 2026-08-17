@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph.png" alt="Profiling Flame Graph" >}}
+{{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph_2.png" alt="Profiling Flame Graph" >}}
 
 The [profiling flame graph][1] visualizes stack traces collected by Continuous Profiler. Each frame represents a unit of code, such as a method or line. The width of a frame represents its share of the selected profile metric, and the frames on the next row represent code called by the frame above. Use the widget to identify resource-intensive code paths across your profiled applications.
 
