@@ -8820,7 +8820,7 @@ menu:
       parent: workload_protection
       identifier: workload_protection_investigate_and_triage
       weight: 92
-    - name: Agent events
+    - name: Agent Events
       url: security/workload_protection/investigate_and_triage/agent_events
       parent: workload_protection_investigate_and_triage
       identifier: workload_protection_investigate_and_triage_agent_events
@@ -8830,12 +8830,12 @@ menu:
       parent: workload_protection_investigate_and_triage
       identifier: workload_protection_investigate_and_triage_security_signals
       weight: 20
-    - name: Investigate
+    - name: Investigate Security Signals
       url: security/workload_protection/investigate_and_triage/security_signals/investigate
       parent: workload_protection_investigate_and_triage_security_signals
       identifier: workload_protection_investigate_and_triage_security_signals_investigate
       weight: 10
-    - name: Take action
+    - name: Triage and Respond to Security Signals
       url: security/workload_protection/investigate_and_triage/security_signals/actions
       parent: workload_protection_investigate_and_triage_security_signals
       identifier: workload_protection_investigate_and_triage_security_signals_actions

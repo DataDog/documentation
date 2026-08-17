@@ -13,21 +13,16 @@ further_reading:
     text: "Learn more about security notifications"
 ---
 
-This topic explains how to use the Agent Events explorer to query and review Workload Protection events.
-
 The Datadog Agent evaluates system activity on the Agent host. When activity matches an Agent rule expression, the Agent generates an event and passes it to the Datadog backend.
 
 With the [Agent Events explorer][13], you can investigate Agent events separately from signals. Review what happened, where it occurred, and which Agent rule matched using the event side panel. You can also explore the investigation graph, process tree, and raw JSON payload, and view triage and response instructions for the matching rule.
 
-## View Agent events
-
-To view Agent events, go to the [Agent Events explorer][13].
-
-Agent events are queried and displayed using the standard explorer controls in the Datadog [Events explorer][14].
-
 ## Investigate Agent events
 
-When you select an Agent event in the [Agent Events explorer][13], the side panel opens with tabs that help you investigate the event.
+To investigate an Agent event:
+
+1. Go to the [Agent Events explorer][13]. Agent events are queried and displayed using the standard explorer controls in the Datadog [Events Explorer][14].
+2. Select an Agent event. The side panel opens with tabs that help you investigate the event.
 
 ### Overview
 
@@ -41,6 +36,7 @@ The Overview tab includes the following sections:
 - **Where**: The infrastructure context where the event occurred, including cloud provider, account, region, host, Kubernetes cluster, namespace, pod, container, and image.
 - **Agent rule**: The Agent rule that matched the event, including the rule name, event name, deployment policies, policy version, and rule expression.
 - **Investigation graph**: A preview of the investigation graph at the bottom of the Overview tab.
+- **Process tree**: The complete process lineage from the system init process to the process that triggered the event.
 
 #### Investigation graph
 
@@ -70,6 +66,10 @@ The process tree shows the full ancestry of the event, starting from `systemd` a
 ### JSON
 
 The **JSON** tab displays the raw event payload with the complete set of event attributes collected by the Agent. Use JSON when you need the most detailed view of the event data, for example, to write advanced queries in the [Agent Events explorer][13], or share the full event payload during an investigation.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [13]: https://app.datadoghq.com/security/agent-events
 [14]: /events/explorer/
