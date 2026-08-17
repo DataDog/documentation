@@ -67,4 +67,3 @@ In addition to the Content Packs listed on this page, Cloud SIEM includes **Alwa
 [3]: /security/cloud_siem/triage_and_investigate/investigator
 [4]: /actions/workflows/
 [5]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/
-[6]: /security/cloud_siem/ingest_and_enrich/threat_intelligence/
