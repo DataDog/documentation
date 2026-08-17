@@ -54,7 +54,7 @@ secret_backend_config:
 More specific setup instructions depend on the backend type used. See the appropriate section below for further information:
 
 
-{{% collapse-content title="AWS Secrets" level="h4" expanded=false id="id-for-secrets" %}}
+{{% collapse-content title="AWS Secrets" level="h5" expanded=false id="id-for-secrets" %}}
 The following AWS services are supported:
 
 |secret_backend_type value                                | AWS Service                             |
@@ -347,7 +347,7 @@ spec:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="AWS SSM" level="h4" expanded=false id="id-for-ssm" %}}
+{{% collapse-content title="AWS SSM" level="h5" expanded=false id="id-for-ssm" %}}
 The following AWS services are supported:
 
 |secret_backend_type value                                | AWS Service                             |
@@ -398,7 +398,7 @@ The following `aws_session` fields configure how the Agent authenticates to AWS.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Azure Keyvault Backend" level="h4" expanded=false id="id-for-azure" %}}
+{{% collapse-content title="Azure Keyvault Backend" level="h5" expanded=false id="id-for-azure" %}}
 
 
 The following Azure services are supported:
@@ -629,7 +629,7 @@ spec:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="GCP Secret Manager" level="h4" expanded=false id="id-for-gcp" %}}
+{{% collapse-content title="GCP Secret Manager" level="h5" expanded=false id="id-for-gcp" %}}
 
 *Available in Agent version 7.74+*
 
@@ -892,7 +892,7 @@ The Datadog Agent supports extracting specific keys from JSON-formatted secrets 
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="HashiCorp Vault Backend" level="h4" expanded=false id="id-for-hashicorp" %}}
+{{% collapse-content title="HashiCorp Vault Backend" level="h5" expanded=false id="id-for-hashicorp" %}}
 
 The following HashiCorp services are supported:
 
@@ -1013,7 +1013,7 @@ secret_backend_config:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Kubernetes Secrets" level="h4" expanded=false id="id-for-kubernetes" %}}
+{{% collapse-content title="Kubernetes Secrets" level="h5" expanded=false id="id-for-kubernetes" %}}
 
 *Available in Agent version 7.75+*
 
@@ -1252,7 +1252,7 @@ override:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Docker Secrets" level="h4" expanded=false id="id-for-docker" %}}
+{{% collapse-content title="Docker Secrets" level="h5" expanded=false id="id-for-docker" %}}
 
 *Available in Agent version 7.75+*
 
@@ -1341,7 +1341,7 @@ The secret file `./secrets/api_key.txt` is mounted at `/run/secrets/dd_api_key` 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="JSON, YAML, or TEXT File Secret Backends" level="h4" expanded=false id="id-for-json-yaml-text" %}}
+{{% collapse-content title="JSON, YAML, or TEXT File Secret Backends" level="h5" expanded=false id="id-for-json-yaml-text" %}}
 
 | secret_backend_type value                                 | File Service                             |
 |---------------------------------------------|-----------------------------------------|
