@@ -14,6 +14,57 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
 
+## Worker version 2.20.4
+
+To upgrade to Worker version 2.20.4:
+
+- Docker: Run the `docker pull` command for the [2.20.4 image][53].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.20.4`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.20.4`.
+
+Worker version 2.20.4 gives you access to the following:
+
+#### Fixes
+
+- The Splunk TCP source previously enforced a hardcoded maximum frame length of 10,000 bytes. The Worker rejected larger events and logged warnings. The source no longer limits the frame length by default. To prevent unbounded memory consumption, use the `DD_OP_SPLUNK_TCP_MAX_FRAME_LENGTH` environment variable to set a maximum frame length.
+
+
+
+
+## Worker version 2.20.3
+
+To upgrade to Worker version 2.20.3:
+
+- Docker: Run the `docker pull` command for the [2.20.3 image][52].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.20.3`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.20.3`.
+
+Worker version 2.20.3 gives you access to the following:
+
+#### Fixes
+
+- Fixed the OpenTelemetry source's gRPC listener to advertise `h2` over ALPN when TLS is enabled. Previously, gRPC clients connecting over TLS could fail to establish a connection.
+
+## Worker version 2.20.2
+
+To upgrade to Worker version 2.20.2:
+
+- Docker: Run the `docker pull` command for the [2.20.2 image][51].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.20.2`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.20.2`.
+
+Worker version 2.20.2 gives you access to the following:
+
+#### Fixes
+
+- Fixed an issue where non-finite (NaN or Infinity) gauge, counter delta, histogram delta-sum values, and zero-count histograms could be serialized into malformed OTLP metrics payloads. These values are now dropped before OTLP encoding.
+
+
+
+
 ## Worker version 2.20.0
 
 To upgrade to Worker version 2.20.0:
@@ -669,7 +720,7 @@ Worker version 2.7.0 gives you access to the following:
 [34]: /observability_pipelines/destinations/datadog_metrics/?tab=secretsmanagement
 [35]: /observability_pipelines/processors/filter/?tab=metrics
 [36]: /observability_pipelines/processors/tag_allow_block_list/
-[37]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=kubernetes&secrets_source=secrets_management#upgrade-the-worker
+[37]: /observability_pipelines/configuration/install_the_worker/?interface=ui&platform=kubernetes&secrets_source=secrets_management#upgrade-the-worker-4
 [38]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.14.0
 [39]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.13.2
 [40]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.15.0
@@ -683,3 +734,6 @@ Worker version 2.7.0 gives you access to the following:
 [48]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.18.0
 [49]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.19.0
 [50]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.20.0
+[51]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.20.2
+[52]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.20.3
+[53]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.20.4

@@ -27,7 +27,7 @@ To begin using Datadog's GPU Monitoring, your environment must meet the followin
 #### Minimum version requirements
 
 - **Datadog Agent**: v7.80
-  - (Preferred version: 7.81.3). Datadog advises against using v7.82.0 to avoid a bug that causes unexpected kernel panics. 
+  - (Preferred version: the [most recent Agent version][2]). Datadog advises against using v7.82.0 to avoid a bug that causes unexpected kernel panics. 
 - **Operating system**: Linux
 - **Linux kernel**: 5.8 and above
 - **NVIDIA driver**: version 450.51
