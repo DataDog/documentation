@@ -97,7 +97,7 @@ The extension runs [Infrastructure as Code (IaC) Security][6] rules on supported
 
 ### Get started with IaC Scanning
 
-IaC Scanning is enabled by default and runs automatically in the background whenever you open or edit a supported IaC file. No separate scanner setup is required. The extension honors IaC configuration and exclusions in `code-security.datadog.yaml`. For configuration options, see [Configure IaC Security][7], and for available rules, see [IaC Security Rules][8].
+IaC Scanning is enabled by default and runs automatically in the background whenever you open or edit a supported IaC file. No separate scanner setup is required. The extension honors IaC configuration and exclusions in `code-security.datadog.yaml`. For configuration options, see [Configure IaC Security][7]. For available rules, see [IaC Security Rules][8].
 
 ### Review findings
 
