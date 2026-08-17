@@ -59861,6 +59861,11 @@ components:
           description: Name of the step.
           example: generate_topics
           type: string
+        nb_completed:
+          description: Number of completed work items.
+          example: 620
+          format: int64
+          type: integer
         started_at:
           description: Timestamp when the step started. Null if the step has not started.
           example: "2024-01-15T10:30:00Z"
@@ -59871,6 +59876,15 @@ components:
           description: Status of the step.
           example: completed
           type: string
+        sub_step:
+          description: Label of the current sub-step.
+          example: cluster_spans
+          type: string
+        target:
+          description: Total number of work items.
+          example: 1000
+          format: int64
+          type: integer
       required:
         - name
         - status
@@ -60213,6 +60227,10 @@ components:
           description: Integration account ID used for a bring-your-own-model run.
           example: "1000000001"
           type: string
+        curation_enabled:
+          description: Whether automatic dataset curation was enabled for the run.
+          example: true
+          type: boolean
         evp_query:
           description: Query that selected the spans for the run.
           example: "@ml_app:support-bot"
@@ -163942,12 +163960,15 @@ paths:
                       attributes:
                         created_at: "2024-01-15T10:30:00Z"
                         progress:
-                          - name: query_evp
+                          - name: fetch_spans
                             started_at: "2024-01-15T10:30:05Z"
                             status: completed
                           - name: generate_topics
+                            nb_completed: 620
                             started_at: "2024-01-15T10:32:00Z"
                             status: running
+                            sub_step: cluster_spans
+                            target: 1000
                         status: running
                         step: generate_topics
                       id: 3fd6b5e0-8910-4b1c-a7d0-5b84de329012
