@@ -11,6 +11,9 @@ further_reading:
     - link: "/account_management/workload_identity_federation/"
       tag: "Documentation"
       text: "Workload Identity Federation"
+    - link: "https://www.datadoghq.com/blog/datadog-api-authentication/"
+      tag: "Blog"
+      text: "Modernize Datadog API authentication with scoped credentials | Datadog"
 ---
 
 ## Overview

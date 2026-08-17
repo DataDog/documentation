@@ -10,6 +10,12 @@ further_reading:
 - link: "/security/security_inbox/"
   tag: "Documentation"
   text: "Review prioritized findings in the Security Inbox"
+- link: "https://www.datadoghq.com/blog/runtime-prioritization-engine/"
+  tag: "Blog"
+  text: "Prioritize security findings with the Datadog Runtime Prioritization Engine | Datadog"
+- link: "https://www.datadoghq.com/blog/datadog-security/"
+  tag: "Blog"
+  text: "Securing the AI era: Outpace AI-powered attacks with unified security and observability | Datadog"
 ---
 
 {{< callout url=https://www.datadoghq.com/product-preview/runtime-prioritization-engine/

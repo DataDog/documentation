@@ -7,6 +7,9 @@ further_reading:
 - link: "incident_response/case_management/create_case"
   tag: "Documentation"
   text: "Create a case"
+- link: "https://www.datadoghq.com/blog/forms-case-management-requests/"
+  tag: "Blog"
+  text: "Simplify request flows with Datadog Forms and Case Management | Datadog"
 ---
 
 ## Overview

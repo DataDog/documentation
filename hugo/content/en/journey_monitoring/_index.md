@@ -1,6 +1,10 @@
 ---
 title: Journey Monitoring
 description: "Monitor and analyze critical user flows to troubleshoot user experience and technical issues."
+further_reading:
+- link: "https://www.datadoghq.com/blog/journey-monitoring/"
+  tag: "Blog"
+  text: "Monitor critical user journeys with Datadog Journey Monitoring | Datadog"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
@@ -108,3 +112,7 @@ Each journey and its variants have the following performance metrics:
 [12]: /journey_monitoring/details_report/
 [13]: /real_user_monitoring/operations_monitoring/
 [14]: /synthetics/test_suites/#service-level-objectives
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

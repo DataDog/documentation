@@ -11,6 +11,9 @@ further_reading:
   - link: "/network_monitoring/devices/troubleshooting"
     tag: "Documentation"
     text: "NDM Troubleshooting"
+  - link: "https://www.datadoghq.com/blog/end-to-end-network-operations-with-bits/"
+    tag: "Blog"
+    text: "Resolve network issues from L7 to L1 with Datadog  | Datadog"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/network-device-remediation-with-bits/" btn_hidden="false" header="Device Health is in Preview">}}

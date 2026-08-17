@@ -14,6 +14,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/claude-code-monitoring"
     tag: "Blog"
     text: "Monitor Claude Code adoption in your organization with Datadog's Agent Console"
+  - link: "https://www.datadoghq.com/blog/datadog-agent-console/"
+    tag: "Blog"
+    text: "Monitor agent adoption with Datadog Agent Console | Datadog"
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview">}}

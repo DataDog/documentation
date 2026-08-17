@@ -4,6 +4,10 @@ aliases:
 - /tracing/services/inferred_entity_remapping_rules/
 - /tracing/services/renaming_rules/
 site_support_id: service_remapping_rules
+further_reading:
+- link: "https://www.datadoghq.com/blog/service-remapping/"
+  tag: "Blog"
+  text: "Comprehensively connect your service data with Service Remapping | Datadog"
 ---
 
 ## Overview
@@ -95,3 +99,7 @@ Remapping rules are applied across APM, Logs, Metrics, USM, DSM, DJM, DBM, Profi
 [14]: https://app.datadoghq.com/software
 [15]: /tracing/services/service_override_removal
 [16]: https://github.com/DataDog/dd-trace-js/releases/tag/v3.37.0
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
