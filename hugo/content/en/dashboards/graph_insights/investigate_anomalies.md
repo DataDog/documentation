@@ -25,9 +25,17 @@ Datadog detects anomalies on your dashboard's timeseries graphs, groups co-occur
 
 This replaces Watchdog Explains, which analyzed one anomaly at a time.
 
-<div class="alert alert-info">Anomaly detection is available for <a href="/dashboards/widgets/timeseries/">Timeseries widgets</a> with {{< ui >}}Metrics{{< /ui >}} data (avg, sum, min, and max aggregation).</div>
+<div class="alert alert-info">Anomaly detection is available for <a href="/dashboards/widgets/timeseries/">Timeseries widgets</a> with {{< ui >}}Metrics{{< /ui >}} data (avg, sum, min, and max aggregation). Widgets using functions such as <code>cumsum</code>, <code>anomalies</code>, or <code>outliers</code> are not eligible.</div>
 
 Detection runs when you open a dashboard, and issues appear within approximately 20 seconds. If Datadog detects no anomalies, none of the controls described on this page appear.
+
+Datadog does not run anomaly detection on:
+
+- Public (shared) dashboards, because there is no signed-in viewer who can act on a result
+- Dashboards embedded in the mobile app
+- Dashboards in TV mode
+- Dashboards in print mode
+- Dashboards where you turned off {{< ui >}}Auto-detect issues{{< /ui >}}
 
 ## How Datadog detects anomalies
 
@@ -47,9 +55,13 @@ Anomalies occurring across several widgets at once are grouped into one issue, s
 Auto-detect issues toggle. Must come from a demo org, NOT preprod, and must not contain
 real cost figures or account data. -->
 
-<!-- TODO (verify): does the grouped "Anomalies co-occur on N widgets" issue appear on load,
-or only after grouping completes / after an investigation is started? Olivia saw four separate
-anomalies collapse into one grouped issue and wasn't sure what triggered it. -->
+<!-- NOTE (resolved, deliberately not documented): the four-separate-anomalies-collapsing-into-one
+behavior Olivia observed is a mid-migration artifact. GroupedInsightsProvider.tsx runs both a
+widget-driven client path and a feature-flagged backend path (isBackendPoweredFlowEnabled ->
+useBackendPoweredDashboardInvestigation returns groupedInsights). Individual findings register
+client-side, then backend grouping arrives. Behavior therefore varies by org and DNV-667
+(Backend-Powered Dashboard Investigations) is still open, so documenting the sequence would age
+badly. The end state (issues can span multiple widgets) is documented above instead. -->
 
 ## Review an anomaly
 
@@ -77,12 +89,16 @@ Investigations started this way record {{< ui >}}Dashboard Anomaly{{< /ui >}} as
 
 To stop scanning a dashboard for anomalies, click {{< ui >}}Investigate{{< /ui >}} and turn off {{< ui >}}Auto-detect issues{{< /ui >}}.
 
-<!-- TODO (verify): two things the previous version of this page claimed that need
-re-confirming for the Auto-detect issues toggle:
-  1. Is it per-viewer? The old Watchdog Explains text said turning it off "only affects your
-     view, other dashboard viewers still see anomalies unless they turn it off."
-  2. DNV-684 ("Don't show an anomaly opt-out toggle on public dashboards") suggests the toggle
-     is hidden on public dashboards. Worth confirming and documenting if so. -->
+This preference applies to one dashboard and is stored in your browser. Other viewers of the same dashboard still see anomalies unless they turn detection off themselves, and the preference does not carry over to a different browser or device.
+
+<!-- TODO (verify): a per-widget exclusion also exists. use-anomaly-detection-opt-out.ts says
+"Widget-level opt-out is handled via widget definitions (detection_sensitivity =
+'never_detect')". Unlike the dashboard toggle, that lives in the dashboard definition, so it
+would apply to everyone. Need to know whether there is a UI control for it or whether it is
+JSON-only before documenting a procedure. -->
+
+<!-- TODO (verify): also confirm the Auto-detect issues label is unchanged for widget-level
+sensitivity, i.e. that "detection sensitivity" is not surfaced to users under another name. -->
 
 ## Further reading
 
