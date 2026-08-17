@@ -13,20 +13,16 @@ further_reading:
   text: "Investigate security signals"
 ---
 
-This topic explains how Workload Protection Content Packs help you deploy targeted detections to the workloads where they apply, and stay current with emerging threats.
-
-## Overview
-
 Not every detection rule is relevant to every workload. Some detections can be too noisy for environments with specific constraints, or may not apply to particular software stacks. At the same time, new threats emerge regularly, and Datadog security research team continuously develops rules to detect novel attacks and vulnerabilities.
 
 Workload Protection [Content Packs][1] address both challenges. Each Content Pack is a Datadog-crafted bundle of optional [Agent rules][2], [detection rules][3], and supporting content built for a specific software stack, threat vector, or emerging vulnerability. You opt in to the Content Packs you need and deploy them only to the workloads where they apply.
 
-## Why use Content Packs?
+## Benefits
 
 - **Deploy targeted detections to relevant workloads:** Opt into policies built for specific workloads or environments, and deploy them only where they apply. This avoids unnecessary noise and performance impact on workloads where those detections do not apply.
 - **Stay ahead of emerging threats:** Get access to new rules as Datadog security research team identifies novel threats and vulnerabilities, complementing the coverage provided by default policies.
 
-## What's included in a Content Pack?
+## Included content
 
 Depending on the Content Pack, a bundle can include:
 
@@ -40,8 +36,7 @@ Depending on the Content Pack, a bundle can include:
 1. Go to [Content Packs][1].
 2. Browse the available Content Packs and select one.
 3. Review the included Agent rules, detection rules, and deployment requirements.
-4. Click **Enable** to activate the Content Pack.
-5. You are redirected to the associated policy page.
+4. Click **Enable** to activate the Content Pack and go to the associated policy page.
 
 Enabling a Content Pack adds its associated policy and rules to your organization. To start detecting threats, deploy the associated policy to your infrastructure.
 

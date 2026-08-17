@@ -10,9 +10,6 @@ Actions are defined in Agent policy files (`.policy`) under the `actions` field 
 When you create an Agent rule in Datadog, you can configure <code>hash</code>, <code>kill</code> (<a href="/security/workload_protection/respond_and_report/#automated-response">Automated Response</a>), and <code>set</code> actions. From a security signal, you can manually apply <code>kill</code> or <code>network_filter</code> to a targeted threat with <a href="/security/workload_protection/respond_and_report/#response">Response</a>.
 </div>
 
-## Overview
-
-
 | Action           | Purpose                                          | Platform       | Requires enforcement |
 | ---------------- | ------------------------------------------------ | -------------- | -------------------- |
 | `set`            | Store state in a variable for use by other rules | Linux, Windows | No                   |
@@ -429,4 +426,3 @@ The Agent validates actions at policy load time:
 - **Required fields**: for example, `kill.signal`, `log.level`, `network_filter.filter`.
 - **Enforcement gate**: `kill` and `network_filter` require enforcement to be enabled.
 - **Event type compatibility**: `network_filter` requires the `raw_packet` event type; `hash.field` must be compatible with the rule's event type.
-

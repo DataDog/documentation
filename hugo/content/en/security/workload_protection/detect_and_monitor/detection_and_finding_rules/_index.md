@@ -1,5 +1,5 @@
 ---
-title: Detection and finding rules
+title: Detection and Finding Rules
 disable_toc: false
 ---
 
