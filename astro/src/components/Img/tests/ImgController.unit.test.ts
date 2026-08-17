@@ -88,7 +88,7 @@ describe("ImgController — rendering", () => {
 });
 
 describe("ImgController — opening via its own trigger", () => {
-  it("opens the overlay with the full-size image when the popup link is clicked", async () => {
+  it("opens the overlay with a viewport-sized image when the popup link is clicked", async () => {
     const user = userEvent.setup();
     const { container } = renderImgController({ alt: "An example screenshot" });
 
@@ -100,7 +100,13 @@ describe("ImgController — opening via its own trigger", () => {
     expect(overlay.getAttribute("aria-hidden")).toBe("false");
 
     const lightboxImage = overlay.querySelector("img");
-    expect(lightboxImage?.getAttribute("src")).toBe(baseProps.popupHref);
+    const src = lightboxImage?.getAttribute("src") ?? "";
+    expect(src.startsWith(baseProps.imageUrl)).toBe(true);
+    expect(src).toContain("fit=max");
+    expect(src).toContain("auto=format");
+    expect(src).toMatch(/w=\d+/);
+    expect(src).toMatch(/h=\d+/);
+    expect(src).toContain("dpr=");
     expect(lightboxImage?.getAttribute("alt")).toBe("An example screenshot");
   });
 
@@ -135,6 +141,33 @@ describe("ImgController — opening via its own trigger", () => {
     expect(overlay.querySelector("img")).toBeNull();
   });
 
+  it("sizes the lightbox request to the current viewport and DPR", async () => {
+    const originalWidth = window.innerWidth;
+    const originalHeight = window.innerHeight;
+    const originalDpr = window.devicePixelRatio;
+    Object.defineProperty(window, "innerWidth", { configurable: true, value: 1024 });
+    Object.defineProperty(window, "innerHeight", { configurable: true, value: 768 });
+    Object.defineProperty(window, "devicePixelRatio", { configurable: true, value: 3 });
+
+    try {
+      const user = userEvent.setup();
+      const { container } = renderImgController();
+
+      const trigger = container.querySelector("a.img__link--popup")!;
+      await user.click(trigger);
+
+      const overlay = container.querySelector<HTMLElement>(".img-lightbox__overlay")!;
+      const src = overlay.querySelector("img")?.getAttribute("src") ?? "";
+      expect(src).toContain("w=1024");
+      expect(src).toContain("h=768");
+      expect(src).toContain("dpr=3");
+    } finally {
+      Object.defineProperty(window, "innerWidth", { configurable: true, value: originalWidth });
+      Object.defineProperty(window, "innerHeight", { configurable: true, value: originalHeight });
+      Object.defineProperty(window, "devicePixelRatio", { configurable: true, value: originalDpr });
+    }
+  });
+
   it("never renders a close button", async () => {
     const user = userEvent.setup();
     const { container } = renderImgController();
@@ -150,9 +183,9 @@ describe("ImgController — opening via its own trigger", () => {
 describe("ImgController — closing", () => {
   async function openLightbox(
     user: ReturnType<typeof userEvent.setup>,
-    container: HTMLElement,
+    container: Element,
   ) {
-    const trigger = container.querySelector("a.img__link--popup")!;
+    const trigger = container.querySelector<HTMLElement>("a.img__link--popup")!;
     await user.click(trigger);
   }
 
@@ -184,6 +217,58 @@ describe("ImgController — closing", () => {
 
     await user.click(overlay);
     expect(overlay.hasAttribute("hidden")).toBe(true);
+  });
+});
+
+describe("ImgController — focus management", () => {
+  async function openLightbox(
+    user: ReturnType<typeof userEvent.setup>,
+    container: Element,
+  ) {
+    const trigger = container.querySelector<HTMLElement>("a.img__link--popup")!;
+    await user.click(trigger);
+    return trigger;
+  }
+
+  it("has an accessible name on the dialog", async () => {
+    const user = userEvent.setup();
+    const { container } = renderImgController({ alt: "An example screenshot" });
+    await openLightbox(user, container);
+
+    const overlay = container.querySelector<HTMLElement>(".img-lightbox__overlay")!;
+    expect(overlay.getAttribute("aria-label")).toBeTruthy();
+  });
+
+  it("moves focus into the dialog when opened", async () => {
+    const user = userEvent.setup();
+    const { container } = renderImgController();
+    await openLightbox(user, container);
+
+    const dialog = container.querySelector<HTMLElement>(".img-lightbox__dialog")!;
+    expect(document.activeElement).toBe(dialog);
+  });
+
+  it("restores focus to the trigger when closed via Escape", async () => {
+    const user = userEvent.setup();
+    const { container } = renderImgController();
+    const trigger = await openLightbox(user, container);
+
+    await user.keyboard("{Escape}");
+
+    expect(document.activeElement).toBe(trigger);
+  });
+
+  it("traps Tab focus within the dialog", async () => {
+    const user = userEvent.setup();
+    const { container } = renderImgController();
+    await openLightbox(user, container);
+
+    const dialog = container.querySelector<HTMLElement>(".img-lightbox__dialog")!;
+    expect(document.activeElement).toBe(dialog);
+
+    await user.tab();
+
+    expect(document.activeElement).toBe(dialog);
   });
 });
 

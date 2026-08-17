@@ -45,6 +45,7 @@ const popupHref = `${imageUrl}?fit=max&auto=format`;
   ) : (
     <ImgController
       client:idle
+      imageUrl={imageUrl}
       srcset={srcset}
       popupHref={popupHref}
       alt={alt}

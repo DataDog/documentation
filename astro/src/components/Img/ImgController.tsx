@@ -6,6 +6,7 @@ import { classListFactory } from "@lib/cssUtils/classListFactory";
 const cl = classListFactory(styles);
 
 interface ImgControllerProps {
+  imageUrl: string;
   srcset: string;
   popupHref: string;
   alt?: string;
@@ -141,7 +142,20 @@ function FigureWithLightbox({
   );
 }
 
+/**
+ * Builds a lightbox image URL sized to the current viewport (capped by DPR),
+ * so opening the lightbox doesn't download the full original resolution just
+ * to shrink it with CSS. Ported from Hugo's global-modals.js.
+ */
+function buildViewportSizedUrl(imageUrl: string): string {
+  const width = Math.round(window.innerWidth);
+  const height = Math.round(window.innerHeight);
+  const dpr = Math.round(window.devicePixelRatio || 1);
+  return `${imageUrl}?fit=max&auto=format&w=${width}&h=${height}&dpr=${dpr}`;
+}
+
 export default function ImgController({
+  imageUrl,
   srcset,
   popupHref,
   alt,
@@ -158,17 +172,30 @@ export default function ImgController({
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const lightboxImageRef = useRef<HTMLImageElement | null>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!open) return;
     function handleKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      // The dialog has no focusable content (Hugo's modal has no close
+      // button either), so trap Tab on the dialog itself rather than
+      // cycling between real elements.
+      if (e.key === "Tab") {
+        e.preventDefault();
+        dialogRef.current?.focus();
+      }
     }
     document.addEventListener("keydown", handleKey);
     document.body.style.overflow = "hidden";
+    dialogRef.current?.focus();
     return () => {
       document.removeEventListener("keydown", handleKey);
       document.body.style.overflow = "";
+      triggerRef.current?.focus();
     };
   }, [open]);
 
@@ -195,7 +222,8 @@ export default function ImgController({
 
   function handleTriggerClick(e: MouseEvent) {
     e.preventDefault();
-    setDisplayed({ src: popupHref, alt, caption });
+    triggerRef.current = e.currentTarget as HTMLElement;
+    setDisplayed({ src: buildViewportSizedUrl(imageUrl), alt, caption });
     setLoading(true);
     setOpen(true);
   }
@@ -258,11 +286,16 @@ export default function ImgController({
         class={cl("img-lightbox__overlay")}
         role="dialog"
         aria-modal="true"
+        aria-label={displayed?.alt || "Image preview"}
         aria-hidden={!open}
         hidden={!open}
         onClick={handleOverlayClick}
       >
-        <div ref={dialogRef} class={cl("img-lightbox__dialog")}>
+        <div
+          ref={dialogRef}
+          class={cl("img-lightbox__dialog")}
+          tabIndex={-1}
+        >
           {open && displayed && (
             <>
               {loading && <div class={cl("img-lightbox__spinner")} />}

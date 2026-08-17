@@ -65,18 +65,25 @@ test.describe("Img component — lightbox", () => {
     });
   });
 
-  test("clicking a popup-enabled image opens the lightbox with the full-size image", async ({
+  test("clicking a popup-enabled image opens the lightbox with a viewport-sized image", async ({
     page,
   }) => {
     const trigger = page.locator("main").locator(".img__link--popup").first();
-    const expectedSrc = await trigger.getAttribute("href");
+    const triggerHref = await trigger.getAttribute("href");
 
     await trigger.click();
 
     const overlay = page.locator(".img-lightbox__overlay:not([hidden])");
     await expect(overlay).toBeVisible();
     const lightboxImage = overlay.locator("img");
-    await expect(lightboxImage).toHaveAttribute("src", expectedSrc ?? "");
+    const lightboxSrc = await lightboxImage.getAttribute("src");
+
+    // The lightbox requests a viewport-sized/DPR-aware variant client-side
+    // rather than reusing the trigger's static full-resolution href.
+    expect(lightboxSrc?.startsWith(triggerHref?.split("?")[0] ?? "")).toBe(true);
+    expect(lightboxSrc).toMatch(/w=\d+/);
+    expect(lightboxSrc).toMatch(/h=\d+/);
+    expect(lightboxSrc).toMatch(/dpr=\d+/);
   });
 
   test("Escape closes the lightbox", async ({ page }) => {
