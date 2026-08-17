@@ -2,6 +2,9 @@
 title: Feature Flags Approvals
 description: Require approvals before feature flag changes apply in production environments.
 further_reading:
+- link: "/feature_flags/concepts/scheduled_rollouts"
+  tag: "Documentation"
+  text: "Scheduled Rollouts"
 - link: "/feature_flags/concepts/permissions"
   tag: "Documentation"
   text: "Permissions and Access Control"
@@ -67,6 +70,10 @@ Approvers see a diff, a description of the change, and the affected environment.
 - **Approve & apply** the change in one step
 
 Approving a change suggestion does not apply it. The approved change remains visible on the flag, and you can apply it at any time after approval.
+
+If the change includes a [scheduled rollout start time](/feature_flags/concepts/scheduled_rollouts/) that has already passed by the time a reviewer acts on it, the rollout does not start automatically. The reviewer sees a warning banner, and approving the change opens a confirmation modal with **Cancel** and **Start Now** options instead of approving immediately.
+
+{{< img src="feature_flags/concepts/scheduled-rollouts-approval.png" alt="Confirmation modal to approve a rollout whose start time has passed" style="width:70%;" >}}
 
 ### Apply approved changes
 

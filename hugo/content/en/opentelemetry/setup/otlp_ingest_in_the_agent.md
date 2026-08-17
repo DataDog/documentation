@@ -317,7 +317,7 @@ For more information, see [log collection with your DaemonSet][8].
 {{% /tab %}}
 {{< /tabs >}}
 
-There are many other environment variables and settings supported in the Datadog Agent. To get an overview of them all, see [the configuration template][6].
+There are many other environment variables and settings supported in the Datadog Agent. For an overview, see [Agent configuration files][6].
 
 ## Sending OpenTelemetry traces, metrics, and logs to Datadog Agent
 
@@ -391,5 +391,5 @@ env:
 [3]: https://opentelemetry.io/docs/concepts/instrumenting/
 [4]: https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
-[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[6]: /agent/configuration/agent-configuration-files/
 [10]: /opentelemetry/runtime_metrics/

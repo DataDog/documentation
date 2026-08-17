@@ -47,6 +47,8 @@ Datadog collects metrics such as row count and freshness from warehouse system m
 
 Data Observability monitors require [Quality Monitoring][2] to be set up with at least one supported data warehouse (for example, [Snowflake][3], [Databricks][4], or [BigQuery][5]).
 
+To compare a metric across two data assets instead of tracking a single one, see [Source to target monitors](#source-to-target-monitors).
+
 ## Monitor creation
 
 To create a Data Observability monitor in Datadog, navigate to [{{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][6] or [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Data Observability{{< /ui >}}][6]. To view all existing Data Observability monitors, see the [Data Observability Monitors page][7].
@@ -245,6 +247,46 @@ Observed value {{observed}} is within the expected range.
 {{% /tab %}}
 {{< /tabs >}}
 
+## Source to target monitors
+
+<div class="alert alert-info">Source to target monitors are in Preview. Contact your Datadog representative or <a href="/help/">support</a> to request access.</div>
+
+A source to target monitor compares the same metric on two data assets and alerts when the two values diverge. Other Data Observability monitors track whether a single asset is fresh or complete. A source to target monitor tracks whether the copy that landed in a destination matches what left the source.
+
+When a pipeline moves data between systems, partial failures rarely look like failures. If 100,000 rows leave a source table and 99,850 rows arrive in the destination, a row count monitor on the destination alone sees a plausible value. Comparing the two assets surfaces the gap.
+
+Use a source to target monitor to:
+
+- Validate replication from Postgres into Databricks.
+- Reconcile two databases inside the same Snowflake account, for example a quality database against production.
+- Verify a migration from Redshift to BigQuery before cutover, by running both systems side by side and confirming that they match.
+- Confirm that a transformation does not drop rows between its input and its output.
+
+Source to target monitors are available in all regions except GovCloud.
+
+### Create a source to target monitor
+
+1. Navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][6] and select {{< ui >}}Source to Target{{< /ui >}}.
+2. Under {{< ui >}}Choose source{{< /ui >}}, select the warehouse that holds the source data, then select the data to compare.
+3. Under {{< ui >}}Choose target{{< /ui >}}, do the same for the destination. The source and the target can be in different data warehouses or in the same one.
+4. Under {{< ui >}}Select your metric type{{< /ui >}}, choose the metric to compare. Source to target monitors support the same metric types as other Data Observability monitors, including row count, freshness, nullness, uniqueness, cardinality, and {{< ui >}}Custom SQL{{< /ui >}}.
+5. Set {{< ui >}}Format{{< /ui >}} to control how the comparison is expressed:
+    - {{< ui >}}Difference{{< /ui >}}: the target value minus the source value. A negative value means the target has less than the source.
+    - {{< ui >}}% Difference{{< /ui >}}: the same difference as a percentage of the source value.
+6. Configure the detection method, schedule, and notifications as described in [Configure monitor](#configure-monitor).
+
+The {{< ui >}}Preview Monitor Evaluation{{< /ui >}} panel shows the identified source and target, along with a preview of the selected metric.
+
+The monitored asset is the target, so the monitor appears on the target's status page.
+
+### Compare a custom metric
+
+When the metric type is {{< ui >}}Custom SQL{{< /ui >}}, supply one query for the source and one query for the target. A {{< ui >}}WHERE{{< /ui >}} clause is not accepted for this metric type. Include any filtering in each query.
+
+### Evaluation
+
+The difference between the source and the target is recorded as its own metric, so a source to target monitor is evaluated by the same detection methods as any other Data Observability monitor, including anomaly detection. Both sides are measured on a synchronized schedule, so the two values are captured at the same time rather than following each warehouse's default collection cadence.
+
 ## Example monitors
 
 {{< tabs >}}
@@ -253,7 +295,7 @@ Observed value {{observed}} is within the expected range.
 Detect a significant decrease in row count that could indicate a pipeline failure or missing data.
 
 1. Select {{< ui >}}Table{{< /ui >}} > {{< ui >}}Row Count{{< /ui >}} and choose the target table (for example, `ANALYTICS_DB.PROD.EVENTS`).
-1. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method. The monitor triggers when the row count deviates from its historical baseline.
+2. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method. The monitor triggers when the row count deviates from its historical baseline.
 
 {{% /tab %}}
 {{% tab "Stale table" %}}
@@ -261,8 +303,8 @@ Detect a significant decrease in row count that could indicate a pipeline failur
 Alert when a critical table has not been updated within the expected time window.
 
 1. Select {{< ui >}}Table{{< /ui >}} > {{< ui >}}Freshness{{< /ui >}} and choose the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
-1. Select {{< ui >}}Threshold{{< /ui >}} as the detection method.
-1. Set the {{< ui >}}Alert threshold{{< /ui >}} to **6 hours** and optionally a {{< ui >}}Warning threshold{{< /ui >}} at **4 hours**.
+2. Select {{< ui >}}Threshold{{< /ui >}} as the detection method.
+3. Set the {{< ui >}}Alert threshold{{< /ui >}} to **6 hours** and optionally a {{< ui >}}Warning threshold{{< /ui >}} at **4 hours**.
 
 {{% /tab %}}
 {{% tab "Null percentage spike" %}}
@@ -270,7 +312,16 @@ Alert when a critical table has not been updated within the expected time window
 Detect when a column's null percentage exceeds normal levels, which may indicate data ingestion issues.
 
 1. Select {{< ui >}}Column{{< /ui >}} > {{< ui >}}Nullness{{< /ui >}} and choose the target column (for example, `ANALYTICS_DB.PROD.USERS.EMAIL`).
-1. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method.
+2. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method.
+
+{{% /tab %}}
+{{% tab "Rows lost between source and target" %}}
+
+Detect rows dropped between a source table and its destination after a replication or migration.
+
+1. Select {{< ui >}}Source to Target{{< /ui >}}, then choose the source table (for example, `POSTGRES_DB.PUBLIC.ORDERS`) and the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
+2. Select {{< ui >}}Row Count{{< /ui >}} as the metric type and set {{< ui >}}Format{{< /ui >}} to {{< ui >}}Difference{{< /ui >}}.
+3. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method.
 
 {{% /tab %}}
 {{< /tabs >}}

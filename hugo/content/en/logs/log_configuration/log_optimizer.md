@@ -10,10 +10,6 @@ further_reading:
   text: "Logs to Metrics"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-Log Optimizer is in Preview. To optimize your log volumes and reduce noise in your environment, reach out to your account manager.
-{{< /callout >}}
-
 ## Overview
 
 Log Optimizer helps you identify log patterns that generate high volumes of repetitive or noisy data. Datadog analyzes your indexed logs and recommends actions, such as excluding, sampling, or converting logs to metrics, so you can optimize log volumes and focus on the most relevant information for troubleshooting and analysis.
