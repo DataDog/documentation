@@ -15,6 +15,8 @@ The Tail-based Sampling processor determines whether the Worker keeps a complete
 
 ## Setup
 
+<div class="alert alert-warning">If you are using the Filter processor, do not filter out spans belonging to a trace because this can lead to incorrect sampling and incomplete traces.</div>
+
 To set up the tail-based sampling processor:
 
 1. Define a {{< ui >}}filter query{{< /ui >}}. See [APM Query Syntax][1] for more information.
@@ -29,9 +31,13 @@ To set up the tail-based sampling processor:
     - {{< ui >}}Status code{{< /ui >}}: Keep traces that have the selected status code.
     - {{< ui >}}Latency{{< /ui >}}: Keep traces whose total duration falls within the specified bounds.
     - {{< ui >}}Sampling rate{{< /ui >}}: Keep this percentage of traces, sampled consistently by trace ID.
-    - **Note**: If a trace matches a policy group, it's kept and sent to the next step in the pipeline. If a trace doesn't match any policy group, it's dropped.
 1. (Optional) Click to add more policies to the policy group. A trace matches a policy group only if it satisfies all of the policies within that group.
 1. (Optional) Repeat these steps to add more policy groups.
 1. Click **Save**.
+
+**Notes**:
+- A trace is only sampled if it matches any of the configured policy groups.
+- If a trace matches a policy group, it's kept and sent to the next step in the pipeline. If a trace doesn't match any policy groups, it's dropped.
+- If there are multiple policies in a policy group, a trace must match all policies to be sampled.
 
 [1]: /tracing/trace_explorer/query_syntax/
