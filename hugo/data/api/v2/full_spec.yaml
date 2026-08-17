@@ -207904,7 +207904,7 @@ paths:
           - status_pages_incident_write
   /api/v2/statuspages/{page_id}/publish:
     post:
-      description: Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate publishing functionality from the update status page endpoint to the publish status page endpoint.
+      description: Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission.
       operationId: PublishStatusPage
       parameters:
         - description: The ID of the status page.
@@ -207925,7 +207925,6 @@ paths:
         - AuthZ:
             - status_pages_internal_page_publish
             - status_pages_public_page_publish
-            - status_pages_settings_write
       summary: Publish status page
       tags:
         - Status Pages
@@ -207933,12 +207932,11 @@ paths:
       x-permission:
         operator: OR
         permissions:
-          - status_pages_settings_write
           - status_pages_public_page_publish
           - status_pages_internal_page_publish
   /api/v2/statuspages/{page_id}/unpublish:
     post:
-      description: Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate unpublishing functionality from the update status page endpoint to the unpublish status page endpoint.
+      description: Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission.
       operationId: UnpublishStatusPage
       parameters:
         - description: The ID of the status page.
@@ -207959,7 +207957,6 @@ paths:
         - AuthZ:
             - status_pages_internal_page_publish
             - status_pages_public_page_publish
-            - status_pages_settings_write
       summary: Unpublish status page
       tags:
         - Status Pages
@@ -207967,7 +207964,6 @@ paths:
       x-permission:
         operator: OR
         permissions:
-          - status_pages_settings_write
           - status_pages_public_page_publish
           - status_pages_internal_page_publish
   /api/v2/stegadography/get-widgets:
