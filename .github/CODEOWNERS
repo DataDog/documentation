@@ -138,8 +138,8 @@ hugo/content/en/logs/error_tracking/browser_and_mobile.md            @Datadog/ru
 hugo/content/en/real_user_monitoring/error_tracking/browser.md       @Datadog/rum-browser @DataDog/documentation
 
 # Threat Intel
-hugo/content/en/security/threat_intelligence.md  @DataDog/documentation @datamarmot
-hugo/content/en/security/application_security/threats/threat_intelligence.md  @DataDog/documentation @datamarmot
+hugo/content/en/security/threat_intelligence.md  @DataDog/documentation
+hugo/content/en/security/application_security/threats/threat_intelligence.md  @DataDog/documentation
 
 # Observability Pipelines
 hugo/static/resources/yaml/observability_pipelines/                  @DataDog/observability-pipelines-worker-admin  @DataDog/documentation
