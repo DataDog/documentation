@@ -13,6 +13,7 @@ hugo/i18n/                             @DataDog/corpweb
 hugo/archetypes/                       @DataDog/corpweb
 
 # Websites Platform
+astro/                                                       @DataDog/WebOps-Platform   
 hugo/babel.config.js                                         @DataDog/WebOps-Platform
 hugo/data/reference/                                         @DataDog/WebOps-Platform
 datadog-ci.preview.json                                 @DataDog/WebOps-Platform
