@@ -15,7 +15,7 @@ The Tail-based Sampling processor determines whether the Worker keeps a complete
 
 ## Setup
 
-<div class="alert alert-warning">If you are using the Filter processor, do not filter out spans belonging to a trace because this can lead to incorrect sampling and incomplete traces.</div>
+<div class="alert alert-warning">If you are using the Filter processor, do not filter out spans belonging to a trace because this can lead to incomplete traces and incorrect sampling.</div>
 
 To set up the tail-based sampling processor:
 
