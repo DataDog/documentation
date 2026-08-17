@@ -65,7 +65,7 @@ To run one-click Kubernetes actions, your organization needs:
 
 {{< callout >}} Bits Guardrails are in Preview.{{< /callout >}}
 
-Bits Guardrails let admins define which remediation actions Bits can take, where those actions apply, and who needs to approve them.
+[Bits Guardrails][8] let admins define which remediation actions Bits can take, where those actions apply, and who needs to approve them.
 
 Guardrails require the `Guardrails Read` and `Guardrails Write` permissions, which can be enabled in [Organizational Settings > Roles][7]. 
 
@@ -87,3 +87,4 @@ Bits can verify whether a remediation action was applied successfully, and wheth
 [5]: /actions/private_actions/
 [6]: /actions/connections/
 [7]: https://app.datadoghq.com/organization-settings/roles
+[8]: https://app.datadoghq.com/bits-ai/settings/remediation-guardrails 
