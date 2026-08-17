@@ -45,12 +45,16 @@ further_reading:
 - [Investigator][3], an interactive graphical interface for investigating suspicious activity by a user or resource
 - [Workflow Automation][4], to automate actions and accelerate investigation and remediation of issues
 - Configuration guides
+- OCSF pipelines that normalize the integration's logs to the [Open Cybersecurity Schema Framework (OCSF)][5] common data model
+- Mapping of the integration's native alerts to Cloud SIEM security signals
 
 You can filter Content Packs by the following types:
 - **Content Packs**: Integrations bundled with security-relevant content such as detection rules, SOAR (Security Orchestration, Automation, and Response) workflows, and custom tooling
 - **Enrichment Packs**: Content to add valuable context to SIEM analysis, such as vulnerabilities or third-party insights, to improve investigations
 - **Integration Packs**: Content curated from Datadog's catalog to be relevant for use with Cloud SIEM
 - **Entity Packs**: Integrations and bundled content that power UEBA (User and Entity Behavior Analytics) by modeling normal activity for users and entities and surfacing risky anomalies in Cloud SIEM
+
+In addition to the Content Packs listed on this page, Cloud SIEM includes **Always-On Content Packs**: threat intelligence enrichments that Datadog automatically applies to your logs and security signals, with no installation or configuration required. [Bring Your Own Threat Intelligence][6] extends these enrichments with your own threat intelligence sources.
 
 {{% cloud-siem-content-packs %}}
 
@@ -62,3 +66,5 @@ You can filter Content Packs by the following types:
 [2]: /security/detection_rules/
 [3]: /security/cloud_siem/triage_and_investigate/investigator
 [4]: /actions/workflows/
+[5]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/
+[6]: /security/cloud_siem/ingest_and_enrich/threat_intelligence/
