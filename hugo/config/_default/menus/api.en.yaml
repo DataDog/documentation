@@ -8417,6 +8417,34 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: CI Visibility GitHub Accounts
+      url: /api/latest/ci-visibility-github-accounts/
+      identifier: ci-visibility-github-accounts
+      generated: true
+    - name: Update GitHub CI Visibility status
+      url: /api/latest/ci-visibility-github-accounts/update-github-ci-visibility-status/
+      identifier: ci-visibility-github-accounts-update-github-ci-visibility-status
+      parent: ci-visibility-github-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCIAppGitHubAccount
+        unstable: []
+        order: 2
+    - name: List GitHub CI Visibility status
+      url: /api/latest/ci-visibility-github-accounts/list-github-ci-visibility-status/
+      identifier: ci-visibility-github-accounts-list-github-ci-visibility-status
+      parent: ci-visibility-github-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCIAppGitHubAccounts
+        unstable: []
+        order: 1
     - name: CI Visibility Pipelines
       url: /api/latest/ci-visibility-pipelines/
       identifier: ci-visibility-pipelines
@@ -11351,6 +11379,19 @@ menu:
           - ListDORADeployments
         unstable: []
         order: 3
+    - name: Patch a deployment event by version
+      url: /api/latest/dora-metrics/patch-a-deployment-event-by-version/
+      identifier: dora-metrics-patch-a-deployment-event-by-version
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchDORADeploymentByVersion
+        unstable:
+          - v2
+        order: 11
     - name: Delete a deployment event
       url: /api/latest/dora-metrics/delete-a-deployment-event/
       identifier: dora-metrics-delete-a-deployment-event
@@ -20476,6 +20517,18 @@ menu:
           - PublishStatusPage
         unstable: []
         order: 6
+    - name: Edit maintenance update
+      url: /api/latest/status-pages/edit-maintenance-update/
+      identifier: status-pages-edit-maintenance-update
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchMaintenanceUpdate
+        unstable: []
+        order: 26
     - name: Update maintenance
       url: /api/latest/status-pages/update-maintenance/
       identifier: status-pages-update-maintenance
@@ -20535,7 +20588,7 @@ menu:
         operationids:
           - UpdateMaintenanceTemplate
         unstable: []
-        order: 32
+        order: 33
     - name: Get maintenance template
       url: /api/latest/status-pages/get-maintenance-template/
       identifier: status-pages-get-maintenance-template
@@ -20547,7 +20600,7 @@ menu:
         operationids:
           - GetMaintenanceTemplate
         unstable: []
-        order: 34
+        order: 35
     - name: Delete maintenance template
       url: /api/latest/status-pages/delete-maintenance-template/
       identifier: status-pages-delete-maintenance-template
@@ -20559,7 +20612,7 @@ menu:
         operationids:
           - DeleteMaintenanceTemplate
         unstable: []
-        order: 35
+        order: 36
     - name: Create maintenance template
       url: /api/latest/status-pages/create-maintenance-template/
       identifier: status-pages-create-maintenance-template
@@ -20571,7 +20624,7 @@ menu:
         operationids:
           - CreateMaintenanceTemplate
         unstable: []
-        order: 31
+        order: 32
     - name: List maintenance templates
       url: /api/latest/status-pages/list-maintenance-templates/
       identifier: status-pages-list-maintenance-templates
@@ -20583,7 +20636,7 @@ menu:
         operationids:
           - ListMaintenanceTemplates
         unstable: []
-        order: 33
+        order: 34
     - name: Edit degradation update
       url: /api/latest/status-pages/edit-degradation-update/
       identifier: status-pages-edit-degradation-update
@@ -20679,7 +20732,7 @@ menu:
         operationids:
           - UpdateDegradationTemplate
         unstable: []
-        order: 27
+        order: 28
     - name: Get degradation template
       url: /api/latest/status-pages/get-degradation-template/
       identifier: status-pages-get-degradation-template
@@ -20691,7 +20744,7 @@ menu:
         operationids:
           - GetDegradationTemplate
         unstable: []
-        order: 29
+        order: 30
     - name: Delete degradation template
       url: /api/latest/status-pages/delete-degradation-template/
       identifier: status-pages-delete-degradation-template
@@ -20703,7 +20756,7 @@ menu:
         operationids:
           - DeleteDegradationTemplate
         unstable: []
-        order: 30
+        order: 31
     - name: Create degradation template
       url: /api/latest/status-pages/create-degradation-template/
       identifier: status-pages-create-degradation-template
@@ -20715,7 +20768,7 @@ menu:
         operationids:
           - CreateDegradationTemplate
         unstable: []
-        order: 26
+        order: 27
     - name: List degradation templates
       url: /api/latest/status-pages/list-degradation-templates/
       identifier: status-pages-list-degradation-templates
@@ -20727,7 +20780,7 @@ menu:
         operationids:
           - ListDegradationTemplates
         unstable: []
-        order: 28
+        order: 29
     - name: Update component
       url: /api/latest/status-pages/update-component/
       identifier: status-pages-update-component
