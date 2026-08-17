@@ -27,6 +27,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
   tag: "Blog"
   text: "Rightsize workloads and reduce costs with Datadog Kubernetes Autoscaling"
+- link: "https://www.datadoghq.com/architecture/kubernetes-workload-autoscaling-with-datadog/"
+  tag: "Architecture Center"
+  text: "Kubernetes workload autoscaling with Datadog"
 ---
 
 Datadog Kubernetes Autoscaling continuously monitors your Kubernetes resources to provide immediate scaling recommendations and multidimensional autoscaling of your Kubernetes workloads. You can deploy autoscaling through the Datadog web interface, or with a `DatadogPodAutoscaler` custom resource.
