@@ -81,6 +81,13 @@ Some integrations alias to certain types. For example, Postgres, MySQL, and Cass
 
 {{< /site-region >}}
 
+## Query Catalog data in Dashboards
+
+Use the **Developer Portal** datasource to bring Catalog data directly into [Dashboards][10]. You can query entities across services, queues, frontend apps, APIs, and systems, and group or filter them by metadata such as ownership, tier, lifecycle, and definition version. 
+
+To use the datasource, add a widget to your dashboard, select **Developer Portal** as the data source, and choose an entity type to query. The Query Value, Top List, Table, Treemap, Pie, and Bar widget types are supported. 
+
+{{< img src="tracing/internal_developer_portal/catalog/catalog_datasource.png" video=true alt="Querying Catalog data in Dashboards" style="width:100%;" >}}
 
 ## Further reading
 
@@ -95,4 +102,5 @@ Some integrations alias to certain types. For example, Postgres, MySQL, and Cass
 [7]: /internal_developer_portal/catalog/set_up/import_entities
 [8]: /internal_developer_portal/catalog/set_up/ownership
 [9]: /infrastructure/
+[10]: /dashboards/
 
