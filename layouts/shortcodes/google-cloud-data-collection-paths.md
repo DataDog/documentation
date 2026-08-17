@@ -1,4 +1,4 @@
-The Google Cloud integration provides three independent collection paths. Each is configured separately. Set up the ones you need.
+The Google Cloud integration provides two independent collection paths. Each is configured separately. Set up the ones you need.
 
 **Metrics**: Datadog pulls metrics from the Google Cloud Monitoring API after the integration is configured. The integration ingests metrics from the [Google Cloud metric catalog][1]. Start with [Metric collection][2].
 
