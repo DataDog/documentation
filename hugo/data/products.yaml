@@ -342,3 +342,7 @@ products:
                 link: data_security/
                 description: Learn how Datadog protects your data
                 short_description: Data protection practices
+              - title: Disaster Recovery
+                link: disaster_recovery/
+                description: Keep your observability running at an alternate Datadog site during an outage
+                short_description: Observability failover

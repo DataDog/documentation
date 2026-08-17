@@ -10699,6 +10699,12 @@ menu:
       url: account_management/workload_identity_federation/
       parent: account_management
       weight: 18
+    - name: Disaster Recovery
+      url: disaster_recovery/
+      pre: disaster-recovery-wui
+      identifier: disaster_recovery
+      parent: administration_heading
+      weight: 15000
     - name: Data Security
       url: data_security/
       pre: security-lock
