@@ -50,6 +50,8 @@ When using `DdRum.StartAction` and `DdRum.StopAction`, the `type` action must be
 
 ### Track resources
 
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][4].
+
 Datadog provides `DatadogTrackedWebRequest` as a drop in replacement for `UnityWebRequest` to enable tracking of resources and HTTP calls from your RUM views.
 
 You can use it the same way as you would any other `UnityWebRequest`:
@@ -151,3 +153,4 @@ DatadogSdk.instance.ClearAllData();
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/unity/setup/
 [3]: /real_user_monitoring/application_monitoring/unity/data_collected/
+[4]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=unity

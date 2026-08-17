@@ -57,39 +57,12 @@ Either cold or warm starts can be [prewarmed][2], which is an iOS-specific optim
 The iOS SDK automatically measures the time to initial display. The time to initial display can be optionally profiled using the iOS Mobile Profiler.
 
 ### Measuring the time to full display
+
+For setup steps, see [Track application startups][3].
+
 Every application behaves differently, so the iOS SDK does not automatically detect when to measure time to full display. As a result, the SDK needs to be notified when the application reaches the fully drawn state.
 
 The time to full display is manually defined using the `Monitor.reportAppFullyDisplayed()` API in the iOS SDK based on the application’s specific definition of “fully drawn.” 
-
-The example below calls `Monitor.reportAppFullyDisplayed()` to measure the time to full display after the app finishes loading the data needed to render its initial UI. The signal is sent only once the UI has been updated with the received content or the error has been properly handled.
-
-{{< tabs >}}
-{{% tab "Swift" %}}
-
-```swift
-@MainActor
-class HomeViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        Task { await loadData() }
-    }
-
-    private func loadData() async {
-        let url = URL(string: "https://api.example.com/data")!
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            updateUI(with: data)
-        } catch {
-            // Handle the error if needed
-        }
-        
-        // Mark the app as fully displayed
-        RUMMonitor.shared().reportAppFullyDisplayed()
-    }
-}
-```
-{{% /tab %}}
-{{< /tabs >}}
 
 <div class="alert alert-danger">
   If the time to full display is not defined, the iOS SDK only collects the time to initial display. 
@@ -137,3 +110,4 @@ These metrics contain attributes to specify the launch type for accurate monitor
 
 [1]: https://developer.apple.com/documentation/xcode/reducing-your-app-s-launch-time 
 [2]: https://developer.apple.com/documentation/uikit/about-the-app-launch-sequence#Prepare-your-app-for-prewarming  
+[3]: /real_user_monitoring/setup/enable_rum/track_application_startups/?platform=ios

@@ -17,6 +17,8 @@ View timings help you understand the performance of your application from a user
 
 ### Time to network settled
 
+For setup steps, see [Track UI latency][3].
+
 The **Time-to-Network-Settled (TNS)** measures the time it takes for a view to be fully loaded with all relevant network calls initiated at the start of the view. TNS is represented by the `@view.network_settled_time` attribute in RUM view events.
 
 By default, TNS is calculated as the time elapsed between the start of the view and the completion of all resources that started within 100ms of the view's start. This behavior is controlled by the `TimeBasedTNSResourcePredicate`, which classifies such resources as "initial."
@@ -141,4 +143,5 @@ To maximize the accuracy of TNS and INV, consider adjusting time thresholds in t
 
 [1]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
 [2]: /real_user_monitoring/application_monitoring/ios/data_collected/#views-instrumentation-versus-app-lifecycle
+[3]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=ios
 

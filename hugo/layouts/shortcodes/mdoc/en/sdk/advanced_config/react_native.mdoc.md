@@ -352,6 +352,8 @@ DdRum.addError('<message>', ErrorSource.SOURCE, '<stacktrace>', {}, Date.now());
 
 ### Manually track RUM resources
 
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][24].
+
 You can manually track RUM resources:
 
 ```javascript
@@ -361,6 +363,8 @@ DdRum.stopResource('<res-key>', 200, 'xhr', (size = 1337), {}, Date.now());
 ```
 
 ### Notify the SDK that your view finished loading
+
+For setup steps, see [Track UI latency][25].
 
 You can notify the SDK that your view has finished loading by calling the `addViewLoadingTime` method on `DdRum`.
 Call this method when your view is fully loaded and ready to be displayed to the user:
@@ -726,3 +730,5 @@ See [Monitor hybrid React Native applications][19].
 [21]: #rum-configuration
 [22]: #logs-configuration
 [23]: #trace-configuration
+[24]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=react_native
+[25]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=react_native

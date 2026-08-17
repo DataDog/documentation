@@ -1,26 +1,21 @@
-## Track RUM resources
+### Automated resource collection
 
-### roUrlTransfer
-
-Network requests made directly with a `roUrlTransfer` node must be tracked.
-
-For *synchronous requests*, you can use Datadog's `datadogroku_DdUrlTransfer` wrapper to track the resource automatically. This wrapper supports most features of the `roUrlTransfer` component, but does not support anything related to async network calls.
-
-For example, here's how to do a `GetToString` call:
+For synchronous requests made with a `roUrlTransfer` node, use Datadog's `datadogroku_DdUrlTransfer` wrapper to track the resource automatically. This wrapper supports most features of the `roUrlTransfer` component, but doesn't support asynchronous network calls.
 
 ```text
-    ddUrlTransfer = datadogroku_DdUrlTransfer(m.global.datadogRumAgent)
-    ddUrlTransfer.SetUrl(url)
-    ddUrlTransfer.EnablePeerVerification(false)
-    ddUrlTransfer.EnableHostVerification(false)
-    result = ddUrlTransfer.GetToString()
+ddUrlTransfer = datadogroku_DdUrlTransfer(m.global.datadogRumAgent)
+ddUrlTransfer.SetUrl(url)
+ddUrlTransfer.EnablePeerVerification(false)
+ddUrlTransfer.EnableHostVerification(false)
+result = ddUrlTransfer.GetToString()
 ```
 
-For *asynchronous requests*, automatic instrumentation is not supported. You need to track the resource manually. The following code snippet shows how to report the request as a RUM Resource:
+### Manual resource collection
+
+Asynchronous `roUrlTransfer` requests aren't automatically instrumented. Track the resource manually by forwarding the `roUrlEvent` to `addResource`:
 
 ```text
 sub performRequest()
-
     m.port = CreateObject("roMessagePort")
     request = CreateObject("roUrlTransfer")
     ' setup the node url, headers, …
@@ -32,8 +27,7 @@ sub performRequest()
     while (true)
         msg = wait(1000, m.port)
         if (msg <> invalid)
-            msgType = type(msg)
-            if (msgType = "roUrlEvent")
+            if (type(msg) = "roUrlEvent")
                 if (msg.GetInt() = 1) ' transfer complete
                     durationMs& = timer.TotalMilliseconds()
                     transferTime# = datadogroku_millisToSec(durationMs&)
@@ -57,23 +51,18 @@ sub performRequest()
 end sub
 ```
 
-### Streaming resources
-
-Whenever you use a `Video` or an `Audio` node to stream media, you can forward all `roSystemLogEvent` you receive to Datadog as follows:
+For media streaming, forward `roSystemLogEvent` from a `Video` or `Audio` node's `roSystemLog` the same way:
 
 ```text
-    sysLog = CreateObject("roSystemLog")
-    sysLog.setMessagePort(m.port)
-    sysLog.enableType("http.error")
-    sysLog.enableType("http.complete")
+sysLog = CreateObject("roSystemLog")
+sysLog.setMessagePort(m.port)
+sysLog.enableType("http.error")
+sysLog.enableType("http.complete")
 
-    while(true)
-        msg = wait(0, m.port)
-        if (type(msg) = "roSystemLogEvent")
-            m.global.datadogRumAgent.callfunc("addResource", msg.getInfo())
-        end if
-    end while
+while(true)
+    msg = wait(0, m.port)
+    if (type(msg) = "roSystemLogEvent")
+        m.global.datadogRumAgent.callfunc("addResource", msg.getInfo())
+    end if
+end while
 ```
-
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/roku/setup

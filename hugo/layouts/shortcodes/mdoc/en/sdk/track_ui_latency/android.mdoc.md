@@ -1,58 +1,94 @@
-### Automatically track long tasks
+### Time to network settled
 
-Long running operations performed on the main thread can impact the visual performance and reactivity of your application. To track these operations, define the duration threshold above which a task is considered too long.
+Time to Network Settled (TNS) is calculated automatically. It measures the time between the start of a view and the completion of all resources that started within 100ms of the view's start.
+
+To customize the 100ms threshold, set `setInitialResourceIdentifier()` with a `TimeBasedInitialResourceIdentifier`:
+
+```kotlin
+import com.datadog.android.rum.RumConfiguration
+import com.datadog.android.rum.metric.networksettled.TimeBasedInitialResourceIdentifier
+
+val rumConfig = RumConfiguration.Builder(applicationId)
+   .setInitialResourceIdentifier(TimeBasedInitialResourceIdentifier(500)) // Set threshold to 0.5s
+   .build()
+```
+
+For more control over which resources count as "initial," implement your own `InitialResourceIdentifier`.
+
+### Interaction to next view
+
+Interaction to Next View (INV) is calculated automatically. It uses the last tap, click, or swipe action occurring within a 3-second threshold before the view starts.
+
+To customize the 3-second threshold, set `setLastInteractionIdentifier()` with a `TimeBasedInteractionIdentifier`:
+
+```kotlin
+import com.datadog.android.rum.RumConfiguration
+import com.datadog.android.rum.metric.interactiontonextview.TimeBasedInteractionIdentifier
+
+val rumConfig = RumConfiguration.Builder(applicationId)
+   .setLastInteractionIdentifier(TimeBasedInteractionIdentifier(5000)) // Set threshold to 5s
+   .build()
+```
+
+For more control over which interactions count as the "last interaction," implement your own `LastInteractionIdentifier`.
+
+### View loading time
+
+To notify the SDK that your view finished loading, call `addViewLoadingTime(override=)` through `GlobalRumMonitor` when your view is fully loaded and displayed:
 
 {% tabs %}
 {% tab label="Kotlin" %}
-```kotlin
-val rumConfig = RumConfiguration.Builder(applicationId)
-  // …
-  .trackLongTasks(durationThreshold)
-  .build()
-```
-
-For example, to replace the default `100 ms` duration, set a custom threshold in your configuration.
 
 ```kotlin
-val rumConfig = RumConfiguration.Builder(applicationId)
-  // …
-  .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
-  .build()
+@OptIn(ExperimentalRumApi::class)
+fun onViewLoaded() {
+   GlobalRumMonitor.get().addViewLoadingTime(override = false)
+}
 ```
 
 {% /tab %}
 {% tab label="Java" %}
 
 ```java
-RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-  // …
-  .trackLongTasks(durationThreshold)
-  .build();
-```
-
-For example, to replace the default `100 ms` duration, set a custom threshold in your configuration.
-
-```java
-RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-  // …
-  .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
-  .build();
+@OptIn(markerClass = ExperimentalRumApi.class)
+public void onViewLoaded() {
+   GlobalRumMonitor.get().addViewLoadingTime(override);
+}
 ```
 
 {% /tab %}
 {% /tabs %}
 
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/android
-[3]: /real_user_monitoring/android/data_collected
-[4]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-views
-[5]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
-[6]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-network-requests
-[7]: /real_user_monitoring/android/data_collected/#event-specific-attributes
-[8]: /real_user_monitoring/application_monitoring/android/setup/#sending-data-when-device-is-offline
-[9]: https://github.com/DataDog/dd-sdk-android/blob/eaa15cd344d1723fafaf179fcebf800d6030c6bb/sample/kotlin/src/main/kotlin/com/datadog/android/sample/SampleApplication.kt#L279
-[10]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
-[11]: /real_user_monitoring/application_monitoring/android/monitoring_app_performance/#time-to-network-settled
-[12]: https://square.github.io/okhttp/features/events/
-[13]: /real_user_monitoring/application_monitoring/android/monitoring_app_performance/#interaction-to-next-view
-[14]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#setup
+Use `override` to replace the previously calculated loading time for the current view. This API is experimental and might change.
+
+### Custom timings
+
+To measure how long a specific part of your app takes, such as a hero image appearing, use `addTiming`:
+
+{% tabs %}
+{% tab label="Kotlin" %}
+
+```kotlin
+fun onHeroImageLoaded() {
+      GlobalRumMonitor.get().addTiming("hero_image")
+}
+```
+
+{% /tab %}
+{% tab label="Java" %}
+
+```java
+public void onHeroImageLoaded() {
+   GlobalRumMonitor.get().addTiming("hero_image");
+}
+```
+
+{% /tab %}
+{% /tabs %}
+
+For troubleshooting missing TNS/INV values and how loading times are calculated relative to the view life cycle, see [Android Monitoring App Performance][1].
+
+For additional mobile performance metrics, such as slow renders, frozen frames, and ANRs, see [Mobile Vitals][2].
+
+[1]: /real_user_monitoring/application_monitoring/android/monitoring_app_performance/
+[2]: /real_user_monitoring/application_monitoring/mobile_vitals/?tab=android

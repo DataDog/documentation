@@ -76,6 +76,8 @@ DdRum.StopAction(RumActionType.Scroll, "Feed Scroll");
 
 ### Custom resources
 
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][5].
+
 In addition to [tracking resources automatically](#customize-automatic-tracking), you can track specific custom resources (such as network requests and third-party provider APIs) with `DdRum.StartResource` and `DdRum.StopResource`. Provide a stable resource key, the HTTP method, and the URL when you start, and the status code, kind, and size when you stop.
 
 ```csharp
@@ -323,3 +325,4 @@ DdTrace.Enable(new DdTraceConfiguration
 [2]: /real_user_monitoring/application_monitoring/maui/setup
 [3]: /real_user_monitoring/application_monitoring/maui/data_collected
 [4]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[5]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=maui

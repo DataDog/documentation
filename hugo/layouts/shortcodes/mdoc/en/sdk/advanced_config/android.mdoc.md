@@ -155,6 +155,8 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
 
 ### Custom resources
 
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][15].
+
 In addition to [tracking resources automatically][6], you can also track specific custom resources (such as network requests and third-party provider APIs) with methods (such as `GET` and `POST`) while loading the resource with `RumMonitor#startResource`. Stop tracking with `RumMonitor#stopResource` when it is fully loaded, or `RumMonitor#stopResourceWithError` if an error occurs while loading the resource.
 
 {% tabs %}
@@ -733,3 +735,4 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [12]: https://square.github.io/okhttp/features/events/
 [13]: /real_user_monitoring/application_monitoring/android/monitoring_app_performance/#interaction-to-next-view
 [14]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#setup
+[15]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=android

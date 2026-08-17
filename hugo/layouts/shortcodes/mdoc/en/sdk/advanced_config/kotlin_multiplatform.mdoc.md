@@ -23,6 +23,8 @@ GlobalRumMonitor.get().stopView(viewKey, viewAttributes)
 
 ### Add your own performance timing
 
+For setup steps, see [Track UI latency][12].
+
 In addition to RUM's default attributes, you can measure where your application is spending its time by using the `addTiming` API. The timing measure is relative to the start of the current RUM view. For example, you can time how long it takes for your hero image to appear:
 
 ```kotlin
@@ -73,6 +75,8 @@ val ktorClient = HttpClient {
 ```
 
 ### Custom resources
+
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][11].
 
 In addition to [tracking resources automatically][6], you can also track specific custom resources (such as network requests and third-party provider APIs) with methods (such as `GET` and `POST`) while loading the resource with `RumMonitor#startResource`. Stop tracking with `RumMonitor#stopResource` when it is fully loaded, or `RumMonitor#stopResourceWithError` if an error occurs while loading the resource.
 
@@ -421,4 +425,6 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [8]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
 [9]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/#sending-data-when-device-is-offline
 [10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[11]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=kotlin_multiplatform
+[12]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=kotlin_multiplatform
 [a1]: https://docs.datadoghq.com/help/
