@@ -11379,6 +11379,19 @@ menu:
           - ListDORADeployments
         unstable: []
         order: 3
+    - name: Patch a deployment event by version
+      url: /api/latest/dora-metrics/patch-a-deployment-event-by-version/
+      identifier: dora-metrics-patch-a-deployment-event-by-version
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchDORADeploymentByVersion
+        unstable:
+          - v2
+        order: 11
     - name: Delete a deployment event
       url: /api/latest/dora-metrics/delete-a-deployment-event/
       identifier: dora-metrics-delete-a-deployment-event
