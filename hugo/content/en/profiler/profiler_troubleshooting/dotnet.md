@@ -85,6 +85,8 @@ If you've configured the profiler and don't see profiles in the profile search p
    - The application ran for more than 30 seconds
 If it is set to another value or not set at all, the profiler is disabled.
 
+[4]: /profiler/enabling/dotnet/?tab=linux#configuration
+
 {{% /tab %}}
 {{% tab "Linux" %}}
 
@@ -145,6 +147,8 @@ If it is set to another value or not set at all, the profiler is disabled.
 
    Note that the following message could appear, but it does not impact Datadog profiling: `Profiler signal handler has been replaced. Restoring it.` This indicates only that the Datadog signal handler is reinstalled when it was overwritten.
 
+[4]: /profiler/enabling/dotnet/?tab=linux#configuration
+
 {{% /tab %}}
 
 {{% tab "Windows" %}}
@@ -196,6 +200,8 @@ The default profiler log directory is `%ProgramData%\Datadog .NET Tracer\logs\`.
 
    5. Check the other HTTP codes for possible errors such as 403 for invalid API key.
 
+[5]: /profiler/enabling/dotnet/#configuration
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -221,6 +227,8 @@ To reduce overhead when profiling multiple processes:
 - Use `DD_PROFILING_ENABLED=auto` instead of `true` when enabling profiling host-wide. With `auto`, profiling starts only when the application has run for more than 30 seconds **and** at least one trace was created.
 - Use [instrumentation rules][6] to limit which processes receive SSI.
 - Set `DD_PROFILING_ENABLED=false` in a specific process environment to opt that process out of profiling. Tracing is not affected.
+
+[6]: /tracing/trace_collection/single-step-apm/linux/#define-instrumentation-rules
 
 {{% /tab %}}
 {{% tab "Linux" %}}
@@ -285,6 +293,3 @@ If an application hangs, or otherwise becomes unresponsive on Linux, CPU and Wal
 [1]: /tracing/troubleshooting/#debugging-and-logging
 [2]: /help/
 [3]: /profiler/profile_types/?code-lang=dotnet
-[4]: /profiler/enabling/dotnet/?tab=linux#configuration
-[5]: /profiler/enabling/dotnet/#configuration
-[6]: /tracing/trace_collection/single-step-apm/linux/#define-instrumentation-rules
