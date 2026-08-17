@@ -134,7 +134,7 @@ A successful request returns `200 OK` and a summary of how Datadog processed the
     "type": "threat-intel-stix-ingest",
     "id": "acme",
     "attributes": {
-      "accepted": 3,
+      "added": 3,
       "unsupported": 1,
       "invalid": 0
     }
@@ -144,7 +144,7 @@ A successful request returns `200 OK` and a summary of how Datadog processed the
 
 | Attribute | Description |
 |---|---|
-| `accepted` | The number of supported indicator objects that Datadog accepted for processing. This count includes new indicators, updates, and revocations. One object can produce more than one indicator when its pattern uses `IN` or `OR`. |
+| `added` | The number of indicator objects that Datadog ingested. One object can produce more than one indicator when its pattern uses `IN` or `OR`. |
 | `unsupported` | The number of indicator objects that Datadog skipped because their type, pattern, or object-level STIX version is not supported. |
 | `invalid` | The number of indicator objects whose pattern Datadog could not parse. |
 
