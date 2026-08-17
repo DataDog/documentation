@@ -462,8 +462,8 @@ DD_LOGS_CONFIG_PROCESSING_RULES=[{\"type\": \"exclude_at_match\",\"name\": \"dro
 ### Permissions
 The user or service principal that connects to your Databricks workspace must have the following workspace entitlements enabled, in addition to the permissions described below:
 
-- {{< ui >}}Databricks SQL access{{< /ui >}}
 - {{< ui >}}Workspace access{{< /ui >}}
+- {{< ui >}}Databricks SQL access{{< /ui >}}
 
 #### Workspace permissions
 
@@ -474,11 +474,11 @@ Choose one of the following approaches for the user or service principal:
 
   | Object                 | Permission                                                                                                                                                      |
   |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | Job                              | [CAN VIEW][20]
-  | Compute                          | [CAN ATTACH TO][21]
-  | Lakeflow Declarative Pipelines   | [CAN VIEW][22]
-  | Query                            | [CAN VIEW][23]
-  | SQL warehouse                    | [CAN MONITOR][24]
+  | [Job][20]                              | CAN VIEW
+  | [Compute][21]                          | CAN ATTACH TO
+  | [Lakeflow Declarative Pipelines][22]   | CAN VIEW
+  | [Query][23]                            | CAN VIEW
+  | [SQL warehouse][24]                    | CAN MONITOR
 
 #### Cost data permissions
 
