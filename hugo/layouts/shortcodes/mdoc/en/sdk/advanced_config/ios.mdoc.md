@@ -110,6 +110,8 @@ For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom resources
 
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][10].
+
 In addition to [tracking resources automatically](#automatically-track-network-requests), you can also track specific custom resources such as network requests or third-party provider APIs. This is the recommended approach for third-party libraries that don't expose a `URLSession` delegate. Use the following methods on `RUMMonitor.shared()` to manually collect RUM resources:
 
 - `.startResource(resourceKey:request:)`
@@ -1160,3 +1162,4 @@ Calling this method disables the SDK and all active features, such as RUM. To re
 [7]: https://www.ntppool.org/en/
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [9]: /real_user_monitoring/application_monitoring/ios/setup
+[10]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=ios

@@ -189,6 +189,8 @@ If you are using [Datadog Tracking HTTP Client][10] to automatically track resou
 
 ## Automatically track resources
 
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][23].
+
 Use the [Datadog Tracking HTTP Client][10] package to enable automatic tracking of resources and HTTP calls from your views.
 
 Add the package to your `pubspec.yaml` and add the following to your initialization file:
@@ -252,6 +254,8 @@ While [Datadog Tracking HTTP Client][10] can track most common network calls in 
 Flutter RUM automatically tracks attributes such as user activity, views (using the `DatadogNavigationObserver`), errors, native crashes, and network requests (using the Datadog Tracking HTTP Client). See the [RUM Data Collection documentation][14] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
 
 ### Notify the SDK that your view finished loading
+
+For setup steps, see [Track UI latency][24].
 
 iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime` method on `DatadogRum`.
 Call this method when your view is fully loaded and ready to be displayed to the user:
@@ -509,3 +513,5 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 [20]: https://pub.dev/packages/datadog_gql_link
 [21]: https://pub.dev/packages/datadog_dio
 [22]: /real_user_monitoring/application_monitoring/flutter/integrated_libraries
+[23]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=flutter
+[24]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=flutter

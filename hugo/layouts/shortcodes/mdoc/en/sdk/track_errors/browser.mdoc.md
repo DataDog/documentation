@@ -49,5 +49,5 @@ datadogRum.addError(error, { pageStatus: 'beta' });
 
 For React applications, instrument your error boundaries to report caught errors with `addError` from the `componentDidCatch` life cycle method. See [Collect browser errors][2] for the full example.
 
-[1]: /real_user_monitoring/application_monitoring/browser/error_tracking/
+[1]: /error_tracking/frontend/browser/
 [2]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/

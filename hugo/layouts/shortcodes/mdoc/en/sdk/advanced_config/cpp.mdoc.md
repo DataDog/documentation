@@ -86,6 +86,8 @@ dd_rum_stop_action(rum, DD_RUM_ACTION_TYPE_SCROLL, NULL, NULL);
 
 ### Track resources
 
+For setup steps, see [Track network requests][5].
+
 Resources track HTTP requests (or any analogous network operation) made in the context of the current view. Each resource is identified by a `key` string that must be unique among all concurrently active resources; this is how `StopResource` and `StopResourceWithError` identify which request has completed.
 
 {% tabs %}
@@ -514,3 +516,4 @@ dd_core_destroy(core);
 [2]: /real_user_monitoring/application_monitoring/cpp/setup
 [3]: /real_user_monitoring/operations_monitoring/
 [4]: /getting_started/site/
+[5]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=cpp

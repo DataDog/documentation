@@ -1,6 +1,24 @@
-### Enrich resources
+### Automated resource collection
 
-When [tracking resources automatically][6], provide a custom `RumResourceAttributesProvider` instance to add custom attributes to each tracked network request/response. For example, if you want to track a network request's headers, create an implementation like the following, and pass it in the `datadogKtorPlugin` initialization call.
+To automatically track network requests made with Ktor as RUM resources, add the provided Datadog Ktor plugin:
+
+```kotlin
+val ktorClient = HttpClient {
+    install(
+        datadogKtorPlugin(
+            tracedHosts = mapOf(
+                "example.com" to setOf(TracingHeaderType.DATADOG),
+                "example.eu" to setOf(TracingHeaderType.DATADOG)
+            ),
+            traceSampleRate = 100f
+        )
+    )
+}
+```
+
+This records each request processed by the `HttpClient` as a resource, with the URL, method, status code, and error automatically filled in. Only network requests that start while a view is active are tracked.
+
+To add custom attributes to each tracked request or response, provide a `RumResourceAttributesProvider` implementation:
 
 ```kotlin
 class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
@@ -11,23 +29,13 @@ class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
 
     override fun onError(request: HttpRequestSnapshot, throwable: Throwable) = emptyMap<String, Any?>()
 }
-
-val ktorClient = HttpClient {
-    install(
-        datadogKtorPlugin(
-            tracedHosts = mapOf(
-                "example.com" to setOf(TracingHeaderType.DATADOG),
-                "example.eu" to setOf(TracingHeaderType.DATADOG)
-            ),
-            rumResourceAttributesProvider = CustomRumResourceAttributesProvider()
-        )
-    )
-}
 ```
 
-### Custom resources
+Pass the provider to `datadogKtorPlugin` with the `rumResourceAttributesProvider` argument.
 
-In addition to [tracking resources automatically][6], you can also track specific custom resources (such as network requests and third-party provider APIs) with methods (such as `GET` and `POST`) while loading the resource with `RumMonitor#startResource`. Stop tracking with `RumMonitor#stopResource` when it is fully loaded, or `RumMonitor#stopResourceWithError` if an error occurs while loading the resource.
+### Manual resource collection
+
+To track a custom resource such as a request made outside Ktor, start and stop it around the load:
 
 ```kotlin
 fun loadResource() {
@@ -41,7 +49,4 @@ fun loadResource() {
 }
 ```
 
-**Note**: `stopResource` / `stopResourceWithError` methods accepting `NSURLConnection` and `NSError` are also available from iOS source set.
-
-[1]: https://app.datadoghq.com/rum/application/create
-[6]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/#initialize-rum-ktor-plugin-to-track-network-events-made-with-ktor
+`stopResource`/`stopResourceWithError` overloads that accept `NSURLConnection` and `NSError` are also available from the iOS source set.

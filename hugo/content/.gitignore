@@ -125,3 +125,6 @@
 /*/real_user_monitoring/setup/enable_rum/_index.md
 /*/real_user_monitoring/setup/enable_rum/manage_sessions.md
 /*/real_user_monitoring/setup/enable_rum/track_errors.md
+/*/real_user_monitoring/setup/enable_rum/track_network_requests.md
+/*/real_user_monitoring/setup/enable_rum/track_application_startups.md
+/*/real_user_monitoring/setup/enable_rum/track_ui_latency.md

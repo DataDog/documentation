@@ -1,28 +1,27 @@
-### Manually track RUM resources
+### Automated resource collection
 
-You can manually track RUM resources:
-
-```javascript
-DdRum.startResource('<res-key>', 'GET', 'http://www.example.com/api/v1/test', {}, Date.now());
-//...
-DdRum.stopResource('<res-key>', 200, 'xhr', (size = 1337), {}, Date.now());
-```
-
-### Manually send spans
-
-You can send spans manually:
+To automatically track network requests as RUM resources, set `trackResources` to `true` in your RUM configuration:
 
 ```javascript
-const spanId = await DdTrace.startSpan('foo', { custom: 42 }, Date.now());
-//...
-DdTrace.finishSpan(spanId, { custom: 21 }, Date.now());
+rumConfiguration: {
+    applicationId: '<DATADOG_APPLICATION_ID>',
+    trackResources: true,
+    firstPartyHosts: [
+        { match: 'example.com', propagatorTypes: [PropagatorType.DATADOG, PropagatorType.TRACECONTEXT] }
+    ]
+}
 ```
 
-## Resource timings
+This automatically tracks [XMLHttpRequest][1] and Fetch requests as resources. Use `firstPartyHosts` to enable distributed tracing for requests made to those hosts.
 
-Resource tracking provides the following timings:
+### Manual resource collection
 
--   `First Byte`: The time between the scheduled request and the first byte of the response. This includes time for the request preparation on the native level, network latency, and the time it took the server to prepare the response.
--   `Download`: The time it took to receive a response.
+To track a custom resource around its load, start and stop it:
 
-[1]: https://app.datadoghq.com/rum/application/create
+```javascript
+DdRum.startResource('<RESOURCE_KEY>', 'GET', url, {}, Date.now());
+// ... perform the request ...
+DdRum.stopResource('<RESOURCE_KEY>', 200, 'xhr', undefined, {}, Date.now());
+```
+
+[1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest

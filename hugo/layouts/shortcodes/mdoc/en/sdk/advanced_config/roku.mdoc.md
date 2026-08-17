@@ -7,6 +7,8 @@ If you have not set up the SDK yet, follow the [in-app setup instructions][1] or
 
 ## Track RUM resources
 
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][3].
+
 ### roUrlTransfer
 
 Network requests made directly with a `roUrlTransfer` node must be tracked.
@@ -102,3 +104,4 @@ In addition to the default attributes captured by the SDK automatically, you can
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/roku/setup
+[3]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=roku

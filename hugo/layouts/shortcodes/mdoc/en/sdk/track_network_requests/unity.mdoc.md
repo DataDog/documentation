@@ -1,38 +1,24 @@
-### Track resources
+### Automated resource collection
 
-Datadog provides `DatadogTrackedWebRequest` as a drop in replacement for `UnityWebRequest` to enable tracking of resources and HTTP calls from your RUM views.
-
-You can use it the same way as you would any other `UnityWebRequest`:
+Use `DatadogTrackedWebRequest` as a drop-in replacement for `UnityWebRequest` to automatically track HTTP calls as resources:
 
 ```csharp
-var request = DatadogTrackedWebRequest.Get("https://httpbin.org/headers");
+var request = DatadogTrackedWebRequest.Get("https://api.example.com/users");
 yield return request.SendWebRequest();
-
-Debug.Log("Got result: " + request.downloadHandler.text);
 ```
 
-### Track custom resources
+### Manual resource collection
 
-In addition to tracking resources automatically using `DatadogTrackedWebRequest`, you can track specific custom resources such as network requests or third-party provider APIs using the following methods:
-
-- `DdRum.StartResource`
-- `DdRum.StopResource`
-- `DdRum.StopResourceWithError`
-- `DdRum.StopResourceWithErrorInfo`
-
-For example:
+To track a custom resource such as a third-party provider API, start and stop it around the load:
 
 ```csharp
-// in your network client:
-
 DatadogSdk.Instance.Rum.StartResource(
     "resource-key",
     RumHttpMethod.Get,
-    url,
+    url
 );
 
-// Later
-
+// Later, when the response arrives
 DatadogSdk.Instance.Rum.StopResource(
     "resource-key",
     200,
@@ -40,8 +26,4 @@ DatadogSdk.Instance.Rum.StopResource(
 );
 ```
 
-The `string` used for `resourceKey` in both calls must be unique for the resource you are calling in order for the Unity Datadog SDK to match a resource's start with its completion.
-
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/unity/setup/
-[3]: /real_user_monitoring/application_monitoring/unity/data_collected/
+If the request fails, use `StopResourceWithError` or `StopResourceWithErrorInfo` instead. The `resourceKey` string must be unique among concurrently active resources so the SDK can match a resource's start with its completion.

@@ -173,6 +173,8 @@ To account for modern web applications, loading time watches for network request
 
 ### Manually set the loading time
 
+For setup steps, see [Track UI latency][24].
+
 If the automatic loading time calculation does not accurately reflect when your view has finished loading, you can manually set it using `setViewLoadingTime`. Call this method when your view is fully loaded and displayed to the user. The loading time is computed as the elapsed time since the current view started.
 
 ```javascript
@@ -235,6 +237,8 @@ This is useful for elements that constantly update but don't indicate real UI in
 The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
 
 ## Create custom performance telemetry
+
+For setup steps, see [Track UI latency][24].
 
 ### Measure component-level performance with custom vitals
 
@@ -352,3 +356,4 @@ document.addEventListener("scroll", function handler() {
 [21]: https://en.wikipedia.org/wiki/Comet_(programming)
 [22]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
 [23]: https://developer.chrome.com/docs/web-platform/soft-navigations
+[24]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser
