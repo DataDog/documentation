@@ -38640,6 +38640,157 @@ components:
           format: int64
           type: integer
       type: object
+    FileCoverageLines:
+      description: Per-file line coverage data including executable, covered, and added lines.
+      properties:
+        added_lines:
+          description: Line numbers that were added in the specified scope (for example, in a PR diff).
+          example: [11, 12]
+          items:
+            format: int64
+            type: integer
+          type: array
+        covered_lines:
+          description: Line numbers that were covered by tests.
+          example: [10, 11, 15]
+          items:
+            format: int64
+            type: integer
+          type: array
+        executable_lines:
+          description: Line numbers that are executable (can be covered).
+          example: [10, 11, 12, 15, 20]
+          items:
+            format: int64
+            type: integer
+          type: array
+      type: object
+    FilesCoverageAttributes:
+      description: Attributes of the per-file code coverage response.
+      properties:
+        base_commit_sha:
+          description: The SHA of the base commit used for comparison (for example, the merge base for a PR).
+          example: abc1234567890abcdef1234567890abcdef12345
+          type: string
+        event_timestamp:
+          description: Unix timestamp (milliseconds) of the coverage event.
+          example: 1709564000000
+          format: int64
+          type: integer
+        files:
+          additionalProperties:
+            $ref: "#/components/schemas/FileCoverageLines"
+          description: Map of file paths to per-file coverage line data.
+          type: object
+        head_commit_sha:
+          description: The SHA of the head commit for which coverage was evaluated.
+          example: 66adc9350f2cc9b250b69abddab733dd55e1a588
+          type: string
+        report_count:
+          description: Number of coverage reports evaluated.
+          example: 3
+          format: int64
+          type: integer
+      type: object
+    FilesCoverageData:
+      description: Data object for files coverage response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/FilesCoverageAttributes"
+        id:
+          description: Unique identifier for the files coverage response.
+          example: ZGQxMjM0NV9tYWluXzE3MDk1NjQwMDA=
+          type: string
+        type:
+          $ref: "#/components/schemas/FilesCoverageResponseType"
+      type: object
+    FilesCoverageRequest:
+      description: Request object for getting per-file code coverage data.
+      properties:
+        data:
+          $ref: "#/components/schemas/FilesCoverageRequestData"
+      required:
+        - data
+      type: object
+    FilesCoverageRequestAttributes:
+      description: Attributes for requesting per-file code coverage data. Exactly one of `commit_sha`, `branch`, or `pr_number` must be provided. At most one of `service`, `codeowner`, or `flag` may be provided.
+      properties:
+        branch:
+          description: The branch name.
+          example: main
+          type: string
+        changed_only:
+          description: When true, return coverage data only for files that were changed in the specified scope.
+          example: true
+          type: boolean
+        codeowner:
+          description: Filter coverage by code owner. At most one of `service`, `codeowner`, or `flag` may be provided.
+          example: "@my-team"
+          type: string
+        commit_sha:
+          description: The commit SHA (40-character hexadecimal string).
+          example: 66adc9350f2cc9b250b69abddab733dd55e1a588
+          pattern: "^[a-fA-F0-9]{40}$"
+          type: string
+        flag:
+          description: Filter coverage by coverage flag. At most one of `service`, `codeowner`, or `flag` may be provided.
+          example: unit-tests
+          type: string
+        pr_number:
+          description: The pull request number. Must be a positive integer.
+          example: 42
+          format: int64
+          minimum: 1
+          type: integer
+        repository_id:
+          deprecated: true
+          description: "Deprecated: use `repository_url` instead. The repository URL."
+          example: github.com/datadog/shopist
+          minLength: 1
+          type: string
+        repository_url:
+          description: The repository URL. Accepts a full URL with or without a scheme (for example, `https://github.com/org/repo` or `github.com/org/repo`).
+          example: https://github.com/datadog/shopist
+          minLength: 1
+          type: string
+        service:
+          description: Filter coverage by service name. At most one of `service`, `codeowner`, or `flag` may be provided.
+          example: my-service
+          type: string
+      type: object
+    FilesCoverageRequestData:
+      description: Data object for files coverage request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/FilesCoverageRequestAttributes"
+        type:
+          $ref: "#/components/schemas/FilesCoverageRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    FilesCoverageRequestType:
+      description: JSON:API type for files coverage request. The value must always be `ci_app_coverage_files_request`.
+      enum:
+        - ci_app_coverage_files_request
+      example: ci_app_coverage_files_request
+      type: string
+      x-enum-varnames:
+        - CI_APP_COVERAGE_FILES_REQUEST
+    FilesCoverageResponse:
+      description: Response object containing per-file code coverage data.
+      properties:
+        data:
+          $ref: "#/components/schemas/FilesCoverageData"
+      type: object
+    FilesCoverageResponseType:
+      description: JSON:API type for files coverage response. The value must always be `ci_app_coverage_files`.
+      enum:
+        - ci_app_coverage_files
+      example: ci_app_coverage_files
+      type: string
+      x-enum-varnames:
+        - CI_APP_COVERAGE_FILES
     FiltersPerProduct:
       description: Product-specific filters for the dataset.
       properties:
@@ -80796,6 +80947,51 @@ components:
       type: string
       x-enum-varnames:
         - PE_SYMBOL_FILE
+    PRCoverageSummaryRequest:
+      description: Request object for getting code coverage summary for a pull request.
+      properties:
+        data:
+          $ref: "#/components/schemas/PRCoverageSummaryRequestData"
+      required:
+        - data
+      type: object
+    PRCoverageSummaryRequestAttributes:
+      description: Attributes for requesting code coverage summary for a pull request.
+      properties:
+        pr_number:
+          description: The pull request number. Must be a positive integer.
+          example: 42
+          format: int64
+          minimum: 1
+          type: integer
+        repository_url:
+          description: The repository URL. Accepts a full URL with or without a scheme (for example, `https://github.com/org/repo` or `github.com/org/repo`).
+          example: https://github.com/datadog/shopist
+          minLength: 1
+          type: string
+      required:
+        - repository_url
+        - pr_number
+      type: object
+    PRCoverageSummaryRequestData:
+      description: Data object for PR summary request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/PRCoverageSummaryRequestAttributes"
+        type:
+          $ref: "#/components/schemas/PRCoverageSummaryRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    PRCoverageSummaryRequestType:
+      description: JSON:API type for PR coverage summary request. The value must always be `ci_app_coverage_pr_summary_request`.
+      enum:
+        - ci_app_coverage_pr_summary_request
+      example: ci_app_coverage_pr_summary_request
+      type: string
+      x-enum-varnames:
+        - CI_APP_COVERAGE_PR_SUMMARY_REQUEST
     PageAnnotationsAttributes:
       description: Attributes of the annotations on a page.
       properties:
@@ -133653,9 +133849,6 @@ paths:
         operator: OR
         permissions:
           - code_coverage_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and may be subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/code-coverage/commit/summary:
     post:
       description: |-
@@ -133724,9 +133917,144 @@ paths:
         operator: OR
         permissions:
           - code_coverage_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and may be subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/code-coverage/files:
+    post:
+      description: |-
+        Retrieve per-file code coverage data for a specific commit, branch, or pull request.
+        Exactly one of `commit_sha`, `branch`, or `pr_number` must be provided.
+        Optionally filter by `service`, `codeowner`, or `flag` (at most one).
+      operationId: GetCodeCoverageFiles
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      changed_only: true
+                      commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+                      repository_url: https://github.com/datadog/test-service
+                    type: ci_app_coverage_files_request
+            schema:
+              $ref: "#/components/schemas/FilesCoverageRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        base_commit_sha: abc1234567890abcdef1234567890abcdef12345
+                        event_timestamp: 1709564000000
+                        files:
+                          src/main.go:
+                            added_lines: [11, 12]
+                            covered_lines: [10, 11, 15]
+                            executable_lines: [10, 11, 12, 15, 20]
+                        head_commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+                        report_count: 3
+                      id: ZGQxMjM0NV9tYWluXzE3MDk1NjQwMDA=
+                      type: ci_app_coverage_files
+              schema:
+                $ref: "#/components/schemas/FilesCoverageResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Internal server error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - code_coverage_read
+      summary: Get per-file code coverage data
+      tags: ["Code Coverage"]
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - code_coverage_read
+  /api/v2/code-coverage/pr/summary:
+    post:
+      description: |-
+        Retrieve aggregated code coverage statistics for a specific pull request in a repository.
+        This endpoint provides overall coverage metrics as well as breakdowns by service
+        and code owner.
+      operationId: GetCodeCoveragePRSummary
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      pr_number: 42
+                      repository_url: https://github.com/datadog/test-service
+                    type: ci_app_coverage_pr_summary_request
+            schema:
+              $ref: "#/components/schemas/PRCoverageSummaryRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        evaluated_flags_count: 3
+                        evaluated_reports_count: 5
+                        patch_coverage: 65.2
+                        total_coverage: 78.6
+                      id: ZGQxMjM0NV9wcl80Ml8xNzA5NTY0MDAw
+                      type: ci_app_coverage_summary
+              schema:
+                $ref: "#/components/schemas/CoverageSummaryResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Internal server error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - code_coverage_read
+      summary: Get code coverage summary for a pull request
+      tags: ["Code Coverage"]
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - code_coverage_read
   /api/v2/compliance_findings/rule_based_view:
     get:
       deprecated: true

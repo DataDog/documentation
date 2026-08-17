@@ -11035,6 +11035,30 @@ menu:
       url: /api/latest/code-coverage/
       identifier: code-coverage
       generated: true
+    - name: Get code coverage summary for a pull request
+      url: /api/latest/code-coverage/get-code-coverage-summary-for-a-pull-request/
+      identifier: code-coverage-get-code-coverage-summary-for-a-pull-request
+      parent: code-coverage
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCodeCoveragePRSummary
+        unstable: []
+        order: 3
+    - name: Get per-file code coverage data
+      url: /api/latest/code-coverage/get-per-file-code-coverage-data/
+      identifier: code-coverage-get-per-file-code-coverage-data
+      parent: code-coverage
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCodeCoverageFiles
+        unstable: []
+        order: 4
     - name: Get code coverage summary for a commit
       url: /api/latest/code-coverage/get-code-coverage-summary-for-a-commit/
       identifier: code-coverage-get-code-coverage-summary-for-a-commit
@@ -11045,8 +11069,7 @@ menu:
           - v2
         operationids:
           - GetCodeCoverageCommitSummary
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Get code coverage summary for a branch
       url: /api/latest/code-coverage/get-code-coverage-summary-for-a-branch/
@@ -11058,8 +11081,7 @@ menu:
           - v2
         operationids:
           - GetCodeCoverageBranchSummary
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Compliance
       url: /api/latest/compliance/
