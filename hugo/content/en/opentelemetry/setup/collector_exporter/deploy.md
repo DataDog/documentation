@@ -93,6 +93,8 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from oth
 
 ### Kubernetes
 
+To collect Kubernetes resource data and populate [Kubernetes Explorer][26], configure a cluster-level OpenTelemetry Collector.
+
 {{< tabs >}}
 {{% tab "DaemonSet" %}}
 
@@ -396,3 +398,4 @@ The OpenTelemetry Collector has [two primary deployment methods][20]: Agent and 
 [23]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
 [24]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver
 [25]: /opentelemetry/schema_semantics/hostname/
+[26]: /containers/monitoring/kubernetes_explorer/?tab=opentelemetry
