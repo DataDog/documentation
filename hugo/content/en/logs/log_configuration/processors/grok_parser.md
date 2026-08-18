@@ -15,7 +15,7 @@ further_reading:
 
 Create custom grok rules to parse the full message or a specific attribute of your raw event. As a best practice, limit your grok parser to 10 parsing rules. For more information on Grok syntax and parsing rules, see [Parsing][1].
 
-{{< img src="/logs/processing/processors/define_parsing_rules_syntax_suggestions.png" alt="Grok parser syntax suggestions in the UI" style="width:90%;" >}}
+{{< img src="/logs/processing/processors/ai-grok-rules.png" alt="Grok parser configuration" style="width:90%;" >}}
 
 ## Use cases
 
@@ -28,21 +28,20 @@ After creating a grok rule, the parser can write the IP address, user, request t
 
 Define the Grok processor on the [{{< ui >}}Pipelines{{< /ui >}} page][2]. To configure Grok parsing rules:
 
-1. Click {{< ui >}}Parse my logs{{< /ui >}} to automatically generate a set of three parsing rules based on the logs flowing through the pipeline.
-   **Note**: This feature requires that the corresponding logs are indexed and actively flowing in. You can temporarily deactivate or sample down exclusion filters to allow the feature to detect logs.
+1. Click {{< ui >}}Add Grok Parser{{< /ui >}} to open a new parser configuration.
+1. {{< ui >}}Log Samples{{< /ui >}}: Log samples are automatically pulled into the Log Samples section. You can also add more log samples (up to 10 total, 5000 characters each).
+   **Note**: The sample logs are pulled from the five highest-volume log patterns matching your pipeline filter.
 1. {{< ui >}}Log Samples{{< /ui >}}: Add up to five sample logs (up to 5000 characters each) to test your parsing rules.
-1. {{< ui >}}Define parsing rules{{< /ui >}}: Write your parsing rules in the rule editor. As you define rules, the Grok parser provides syntax assistance:
-   - **Matcher suggestions**: Type a rule name followed by `%{`. A dropdown appears with available matchers (such as `word`, `integer`, `ip`, `date`). Select a matcher from the list to insert it into your rule.<br>
-     ```
-     MyParsingRule %{
-     ```
-   - **Filter suggestions**: When adding a filter with `:`, a dropdown shows compatible filters for the selected matcher.
-1. {{< ui >}}Test your rules{{< /ui >}}: Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
+1. {{< ui >}}Define parsing rules{{< /ui >}}: Click {{< ui >}}Auto parsing{{< /ui >}} to generate rules that match your samples.
+   {{< site-region region="gov,gov2" >}}
+   <div class="alert alert-info">Auto parsing is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+   {{< /site-region >}}
+1. {{< ui >}}Test your rules{{< /ui >}}: Click a sample to trigger its evaluation against the parsing rule and display the result on the right of the screen. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
 
 
 ## Before and after state of logs
 
-{{% collapse-content title="Example: Parsing nginx access logs" level="h4" %}}
+{{% collapse-content title="Example: Parsing nginx access logs" level="h3" %}}
 
 **Before (raw log):**
 

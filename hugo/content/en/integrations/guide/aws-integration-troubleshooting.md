@@ -198,7 +198,7 @@ By default, host-level tags remain permanently attached to AWS hosts. If you wan
 [3]: /agent/
 [4]: /help/
 [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
-[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[6]: /agent/configuration/agent-configuration-files/
 [7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2
 [8]: https://docs.aws.amazon.com/cli/latest/reference/ec2/modify-instance-metadata-options.html
 [9]: https://github.com/DataDog/helm-charts/blob/58bf52e4e342c79dbec95659458f7de8c5de7e6c/charts/datadog/values.yaml#L1683-L1688

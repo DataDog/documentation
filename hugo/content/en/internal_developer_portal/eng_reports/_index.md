@@ -34,7 +34,9 @@ Datadog's IDP supports two types of reports:
 - [**Custom Reports**][2]: Any Datadog Dashboards that your organization has added to your IDP Overview Page
 
 {{< whatsnext desc="Explore the following OOTB Engineering Reports:" >}}
+    {{< nextlink href="/internal_developer_portal/eng_reports/teams_performance/" >}}Teams Performance: A team-level view of operational health across incident response, SLO performance, and DORA metrics.{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/eng_reports/reliability_overview/" >}}Reliability Overview: Summary of your organization's reliability based on SLO performance and Incident trends.{{< /nextlink >}}
+    {{< nextlink href="/internal_developer_portal/eng_reports/catalog_health/" >}}Catalog Health: An overview of IDP Catalog completeness across entity types, metadata coverage, and ownership.{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/eng_reports/scorecards_performance/" >}}Scorecards Performance: Organization-wide view of Scorecard performance broken down by teams and rules.{{< /nextlink >}}
     {{< nextlink href="/internal_developer_portal/eng_reports/dora_metrics/" >}}DORA Metrics: Software development velocity and stability metrics broken down by services and teams.{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -153,7 +153,7 @@ This pattern stops as soon as it sees `}`, making it more reliable for successfu
 
 Below are common log examples and recommended parsing strategies.
 
-{{% collapse-content title="Extracting key/value groups with bracketed data" level="h4" expanded=false %}}
+{{% collapse-content title="Extracting key/value groups with bracketed data" level="h3" expanded=false %}}
 In this example, we need to extract the values from each key/value pair while skipping unrelated text. Using the `[^<character>]*` pattern, we can anchor the match to a delimiter that appears only before the content we care about. Here, each relevant value is preceded by a `:`, making it an effective anchor.
 
 **Log**:
@@ -178,7 +178,7 @@ rule %{_tocolon}\[%{_insidebrackets:User}\],\s*
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Jumping directly to JSON" level="h4" expanded=false %}}
+{{% collapse-content title="Jumping directly to JSON" level="h3" expanded=false %}}
 In this example, we only need the JSON portion of the log (`{"awsRequestId":..."}`). Since everything before it is irrelevant and the first bracket `{` uniquely identifies the start of the JSON, we can anchor the rule to that character to jump directly to the content.
 
 **Log**:
@@ -194,7 +194,7 @@ rule [^{]*%{data::json}
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Extracting JSON when additional text follows" level="h4" expanded=false %}}
+{{% collapse-content title="Extracting JSON when additional text follows" level="h3" expanded=false %}}
 In this example, we can't use `data` to extract the JSON because additional text follows it, making the structure invalid for the JSON filter. Instead, we use a regex matcher to capture the opening bracket `{`, everything inside it, and the closing bracket `}`.
 
 **Log**:
@@ -216,7 +216,7 @@ This captures:
 * the closing `}`
 {{% /collapse-content %}}
 
-{{% collapse-content title="Extract a URL query parameter" level="h4" expanded=false %}}
+{{% collapse-content title="Extract a URL query parameter" level="h3" expanded=false %}}
 In this example, we want to extract a specific query parameter from a URL. By anchoring the pattern to the portion of the string that precedes the parameter, we can reliably capture its value without matching the rest of the query string.
 
 **Log**:
@@ -237,7 +237,7 @@ It finds `utm_custom[rm]=148647836` and extracts `148647836` into an attribute c
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Conditional matching with alternation" level="h4" expanded=false %}}
+{{% collapse-content title="Conditional matching with alternation" level="h3" expanded=false %}}
 In this example, the log can contain different types of values, so we use alternation to match the correct pattern based on what appears. Each branch handles a different possible format, allowing the rule to adapt to the log content.
 
 **Log**:
@@ -255,7 +255,7 @@ rule Connected with (%{regex("OSX|Windows"):os}|%{regex("\\d+"):kernel_version})
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Case-insensitive matching" level="h4" expanded=false %}}
+{{% collapse-content title="Case-insensitive matching" level="h3" expanded=false %}}
 When the log may vary in letter casing, we use a case-insensitive modifier to match the text consistently regardless of capitalization.
 
 **Log**:

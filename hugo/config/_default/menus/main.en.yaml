@@ -1555,36 +1555,36 @@ menu:
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
       weight: 101
-    - name: Take Action
-      url: bits_ai/bits_investigation/take_action
-      identifier: bits_ai_sre_take_action
-      parent: bits_ai_sre
-      weight: 102
     - name: Bits Investigation Integrations and Settings
       url: bits_ai/bits_investigation/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
-      weight: 103
+      weight: 102
     - name: Knowledge Sources
       url: bits_ai/bits_investigation/knowledge_sources
       identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
-      weight: 104
+      weight: 103
     - name: Chat with Bits Investigation
       url: bits_ai/bits_investigation/chat_bits_investigation
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
-      weight: 105
+      weight: 104
+    - name: Bits Remediation
+      url: bits_ai/bits_remediation
+      identifier: bits_remediation
+      parent: bits_ai
+      weight: 2
     - name: Bits Detection
       url: bits_ai/bits_detection
       identifier: bits_detection
       parent: bits_ai
-      weight: 2
+      weight: 3
     - name: Bits Code
       url: bits_ai/bits_code
       parent: bits_ai
       identifier: bits_ai_dev_agent
-      weight: 3
+      weight: 4
     - name: Setup
       url: bits_ai/bits_code/setup
       parent: bits_ai_dev_agent
@@ -1599,22 +1599,22 @@ menu:
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
       parent: bits_ai
-      weight: 4
+      weight: 5
     - name: Bits Chat
       url: bits_ai/bits_chat
       identifier: bits_ai_bits_chat
       parent: bits_ai
-      weight: 5
+      weight: 6
     - name: Bits Agent Builder
       url: actions/agents/
       identifier: bits_ai_agent_builder
       parent: bits_ai
-      weight: 6
+      weight: 7
     - name: Bits Data Analysis
       url: bits_ai/bits_data_analysis
       identifier: bits_data_analysis
       parent: bits_ai
-      weight: 7
+      weight: 8
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -2225,26 +2225,36 @@ menu:
       parent: internal_developer_portal
       identifier: idp_eng_reports
       weight: 4
+    - name: Teams Performance
+      url: internal_developer_portal/eng_reports/teams_performance
+      parent: idp_eng_reports
+      identifier: eng_reports_teams_performance
+      weight: 401
     - name: Reliability Overview
       url: internal_developer_portal/eng_reports/reliability_overview
       parent: idp_eng_reports
       identifier: eng_reports_reliability_overview
-      weight: 401
+      weight: 402
+    - name: Catalog Health
+      url: internal_developer_portal/eng_reports/catalog_health
+      parent: idp_eng_reports
+      identifier: eng_reports_catalog_health
+      weight: 403
     - name: Scorecards Performance
       url: internal_developer_portal/eng_reports/scorecards_performance
       parent: idp_eng_reports
       identifier: eng_reports_scorecards_perf
-      weight: 402
+      weight: 404
     - name: DORA Metrics
       url: internal_developer_portal/eng_reports/dora_metrics
       parent: idp_eng_reports
       identifier: eng_reports_dora_metrics
-      weight: 403
+      weight: 405
     - name: Custom Reports
       url: internal_developer_portal/eng_reports/custom_reports
       parent: idp_eng_reports
       identifier: eng_reports_custom
-      weight: 404
+      weight: 406
     - name: Homepage
       url: internal_developer_portal/homepage
       parent: internal_developer_portal
@@ -2471,8 +2481,8 @@ menu:
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_linear
       weight: 101
-    - name: Case Management
-      url: error_tracking/ticketing_systems/case_management
+    - name: Work Management
+      url: error_tracking/ticketing_systems/work_management
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_case_management
       weight: 102
@@ -2826,64 +2836,64 @@ menu:
       parent: incident_response_heading
       identifier: status_pages
       weight: 40000
-    - name: Case Management
-      url: incident_response/case_management/
+    - name: Work Management
+      url: incident_response/work_management/
       pre: case-management
       parent: incident_response_heading
       identifier: case_management
       weight: 60000
     - name: Projects
-      url: incident_response/case_management/projects
+      url: incident_response/work_management/projects
       parent: case_management
       identifier: case_management_projects
       weight: 1
     - name: Settings
-      url: incident_response/case_management/settings
+      url: incident_response/work_management/settings
       parent: case_management_projects
       identifier: case_management_settings
       weight: 102
-    - name: Create a Case
-      url: incident_response/case_management/create_case
+    - name: Create a Work Item
+      url: incident_response/work_management/create_work_item
       parent: case_management
       identifier: case_management_create_case
       weight: 2
     - name: Customization
-      url: incident_response/case_management/customization
+      url: incident_response/work_management/customization
       parent: case_management
       identifier: case_management_customization
       weight: 3
-    - name: View and Manage Cases
-      url: incident_response/case_management/view_and_manage
+    - name: View and Manage Work Items
+      url: incident_response/work_management/view_and_manage
       parent: case_management
       identifier: case_management_view_and_manage
       weight: 4
     - name: Notifications and Integrations
-      url: incident_response/case_management/notifications_integrations
+      url: incident_response/work_management/notifications_integrations
       parent: case_management
       identifier: case_management_notifications_and_integrations
       weight: 5
-    - name: Case Automation Rules
-      url: incident_response/case_management/automation_rules
+    - name: Work Item Automation Rules
+      url: incident_response/work_management/automation_rules
       parent: case_management
       identifier: case_management_automation_rules
       weight: 6
-    - name: Case Approvals
-      url: incident_response/case_management/approvals
+    - name: Work Item Approvals
+      url: incident_response/work_management/approvals
       parent: case_management
       identifier: case_management_approvals
       weight: 7
     - name: AI Tools
-      url: incident_response/case_management/ai
+      url: incident_response/work_management/ai
       parent: case_management
       identifier: case_management_ai
       weight: 8
     - name: Custom Agents
-      url: incident_response/case_management/ai/custom_agents
+      url: incident_response/work_management/ai/custom_agents
       parent: case_management_ai
       identifier: case_management_ai_custom_agents
       weight: 801
     - name: Troubleshooting
-      url: incident_response/case_management/troubleshooting
+      url: incident_response/work_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
       weight: 9
@@ -3080,6 +3090,11 @@ menu:
       parent: forms
       identifier: forms_responses
       weight: 2
+    - name: Guides
+      url: actions/forms/guide/
+      parent: forms
+      identifier: forms_guides
+      weight: 3
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
@@ -3744,6 +3759,11 @@ menu:
       parent: serverless_azure
       identifier: serverless_container_apps
       weight: 5
+    - name: Manual Instrumentation
+      url: serverless/azure_container_apps/manual_instrumentation
+      parent: serverless_container_apps
+      identifier: serverless_container_apps_manual
+      weight: 1
     - name: Azure Database & Messaging Services
       url: serverless/azure_database_messaging_services
       parent: serverless_azure
@@ -4222,16 +4242,21 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_recommendations
       weight: 7
-    - name: Cost Optimization Automation
+    - name: Cost Optimization Automations
       url: cloud_cost_management/recommendations/cost_optimization_automation
       parent: cloud_cost_recommendations
       identifier: cloud_cost_optimization_automation
       weight: 700
+    - name: Notifications
+      url: cloud_cost_management/recommendations/notifications
+      parent: cloud_cost_recommendations
+      identifier: cloud_cost_notifications
+      weight: 701
     - name: Custom Recommendations
       url: cloud_cost_management/recommendations/custom_recommendations
       parent: cloud_cost_recommendations
       identifier: cloud_cost_custom_recommendations
-      weight: 701
+      weight: 702
     - name: Planning
       url: cloud_cost_management/planning
       parent: cloud_cost
@@ -5281,11 +5306,6 @@ menu:
       identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
-    - name: Business Transaction Tracking
-      url: data_streams/business_transaction_tracking
-      identifier: data_streams_business_transaction_tracking
-      parent: data_streams
-      weight: 6
     - name: Data Observability Overview
       url: data_observability/
       pre: data-observability-wui
@@ -5344,6 +5364,16 @@ menu:
       url: data_observability/quality_monitoring/data_lakes/aws_glue
       identifier: aws_glue_iceberg
       parent: data_lakes
+      weight: 1000000
+    - name: Transactional Databases
+      url: data_observability/quality_monitoring/transactional_databases
+      identifier: transactional_databases
+      parent: quality_monitoring
+      weight: 260000
+    - name: PostgreSQL
+      url: data_observability/quality_monitoring/transactional_databases/postgres
+      identifier: data_obs_postgres
+      parent: transactional_databases
       weight: 1000000
     - name: ELT Integrations
       url: data_observability/quality_monitoring/elt
@@ -5477,6 +5507,12 @@ menu:
       identifier: openlineage_datadog_agent_for_openlineage
       parent: openlineage_integrations
       weight: 1000000
+    - name: Integration Overhead
+      url: data_observability/integration_overhead
+      pre: data-observability-wui
+      identifier: data_observability_integration_overhead
+      parent: data_observability_heading
+      weight: 90000
     - name: Agent Observability
       url: llm_observability/
       pre: llm-observability
@@ -6244,31 +6280,36 @@ menu:
       parent: code_coverage
       identifier: code_coverage_configuration
       weight: 2
+    - name: Coverage Calculation
+      url: code_coverage/coverage_calculation/
+      parent: code_coverage
+      identifier: code_coverage_coverage_calculation
+      weight: 3
     - name: Monorepo Support
       url: code_coverage/monorepo_support/
       parent: code_coverage
       identifier: code_coverage_monorepo_support
-      weight: 3
+      weight: 4
     - name: Flags
       url: code_coverage/flags/
       parent: code_coverage
       identifier: code_coverage_flags
-      weight: 4
+      weight: 5
     - name: Carryforward
       url: code_coverage/carryforward/
       parent: code_coverage
       identifier: code_coverage_carryforward
-      weight: 5
+      weight: 6
     - name: Data Collected
       url: code_coverage/data_collected/
       parent: code_coverage
       identifier: code_coverage_data_collected
-      weight: 5
+      weight: 7
     - name: Dashboards
       url: code_coverage/dashboards/
       parent: code_coverage
       identifier: code_coverage_dashboards
-      weight: 6
+      weight: 8
     - name: PR Gates
       url: pr_gates/
       pre: ci
@@ -6427,41 +6468,51 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_targeting_rules
       weight: 303
+    - name: Targeting Attributes
+      url: feature_flags/concepts/targeting_attributes
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_targeting_attributes
+      weight: 304
+    - name: Scheduled Rollouts
+      url: feature_flags/concepts/scheduled_rollouts
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_scheduled_rollouts
+      weight: 305
     - name: Saved Filters
       url: feature_flags/concepts/saved_filters
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_saved_filters
-      weight: 304
+      weight: 306
     - name: Traffic Splitting and Randomization
       url: feature_flags/concepts/traffic_splitting
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_traffic_splitting
-      weight: 305
+      weight: 307
     - name: Distribution Channels
       url: feature_flags/concepts/distribution_channels
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_distribution_channels
-      weight: 306
+      weight: 308
     - name: Configuration Sources
       url: feature_flags/concepts/configuration_sources
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_configuration_sources
-      weight: 307
+      weight: 309
     - name: Flag History
       url: feature_flags/concepts/flag_history
       parent: feature_flags_concepts
       identifier: feature_flags_history
-      weight: 308
+      weight: 310
     - name: Feature Flag Graphs
       url: feature_flags/concepts/flag_graphs
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
-      weight: 309
+      weight: 311
     - name: Stale Flags
       url: feature_flags/concepts/stale_flags
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
-      weight: 310
+      weight: 312
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
@@ -6512,16 +6563,21 @@ menu:
       parent: feature_flags_implementation_patterns
       identifier: feature_flags_implementation_patterns_serverless
       weight: 502
+    - name: Browser Developer Extension
+      url: feature_flags/browser_developer_extension
+      parent: feature_flags
+      identifier: feature_flags_browser_developer_extension
+      weight: 6
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
       identifier: feature_flags_mcp_server
-      weight: 6
+      weight: 7
     - name: Guides
       url: feature_flags/guide
       parent: feature_flags
       identifier: feature_flags_guide
-      weight: 7
+      weight: 8
     - name: Source Code Integration
       url: source_code/
       pre: dev-code
@@ -6700,11 +6756,16 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_export_pipeline_configuration
       weight: 108
+    - name: Network Traffic
+      url: observability_pipelines/configuration/network_traffic
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_network_traffic
+      weight: 109
     - name: Access Control
       url: observability_pipelines/configuration/access_control
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_access_control
-      weight: 109
+      weight: 110
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
@@ -6780,56 +6841,61 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_opentelemetry
       weight: 214
+    - name: Prometheus
+      url: observability_pipelines/sources/prometheus/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_prometheus
+      weight: 215
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_kafka
-      weight: 215
+      weight: 216
     - name: Logstash
       url: observability_pipelines/sources/logstash/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_logstash
-      weight: 216
+      weight: 217
     - name: MySQL
       url: observability_pipelines/sources/mysql/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_mysql
-      weight: 217
+      weight: 218
     - name: Okta
       url: observability_pipelines/sources/okta/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_okta
-      weight: 218
+      weight: 219
     - name: Socket
       url: observability_pipelines/sources/socket/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_socket
-      weight: 219
+      weight: 220
     - name: Splunk HEC
       url: observability_pipelines/sources/splunk_hec/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_hec
-      weight: 220
+      weight: 221
     - name: Splunk TCP
       url: observability_pipelines/sources/splunk_tcp/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_tcp
-      weight: 221
+      weight: 222
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/sources/sumo_logic/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_sumo_logic
-      weight: 222
+      weight: 223
     - name: Syslog
       url: observability_pipelines/sources/syslog/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
-      weight: 223
+      weight: 224
     - name: WebSocket
       url: observability_pipelines/sources/websocket/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_websocket
-      weight: 224
+      weight: 225
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
@@ -6945,11 +7011,16 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tag_cardinality_control
       weight: 322
+    - name: Tail-Based Sampling
+      url: observability_pipelines/processors/tail_based_sampling
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_tail_based_sampling
+      weight: 323
     - name: Throttle
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_throttle
-      weight: 323
+      weight: 324
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
@@ -6990,96 +7061,111 @@ menu:
       url: observability_pipelines/destinations/databricks/
       parent: observability_pipelines_destinations
       weight: 407
+    - name: Datadog APM
+      identifier: observability_pipelines_datadog_apm
+      url: observability_pipelines/destinations/datadog_apm/
+      parent: observability_pipelines_destinations
+      weight: 408
     - name: Datadog Archives
       identifier: observability_pipelines_destinations_datadog_archives
       url: observability_pipelines/destinations/datadog_archives/
       parent: observability_pipelines_destinations
-      weight: 408
+      weight: 409
     - name: Datadog BYOC Logs
       url: observability_pipelines/destinations/datadog_byoc_logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_byoc_logs
-      weight: 409
+      weight: 410
     - name: Datadog Logs
       url: observability_pipelines/destinations/datadog_logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_logs
-      weight: 410
+      weight: 411
     - name: Datadog Metrics
       url: observability_pipelines/destinations/datadog_metrics/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_metrics
-      weight: 411
+      weight: 412
     - name: Elasticsearch
       url: observability_pipelines/destinations/elasticsearch/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
-      weight: 412
+      weight: 413
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage
       url: /observability_pipelines/destinations/google_cloud_storage/
       parent: observability_pipelines_destinations
-      weight: 413
+      weight: 414
     - name: Google Pub/Sub
       identifier: observability_pipelines_google_pubsub
       url: /observability_pipelines/destinations/google_pubsub/
       parent: observability_pipelines_destinations
-      weight: 414
+      weight: 415
     - name: Google SecOps
       url: observability_pipelines/destinations/google_secops/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_google_secops
-      weight: 415
+      weight: 416
     - name: HTTP Client
       url: observability_pipelines/destinations/http_client/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_http_client
-      weight: 416
+      weight: 417
     - name: Kafka
       url: observability_pipelines/destinations/kafka/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_kafka
-      weight: 417
+      weight: 418
     - name: Microsoft Sentinel
       identifier: observability_pipelines_microsoft_sentinel
       url: /observability_pipelines/destinations/microsoft_sentinel/
       parent: observability_pipelines_destinations
-      weight: 418
+      weight: 419
     - name: New Relic
       identifier: observability_pipelines_new_relic
       url: /observability_pipelines/destinations/new_relic/
       parent: observability_pipelines_destinations
-      weight: 419
+      weight: 420
     - name: OpenSearch
       url: observability_pipelines/destinations/opensearch
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
-      weight: 420
+      weight: 421
+    - name: OpenTelemetry
+      url: observability_pipelines/destinations/opentelemetry/metrics/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_destinations_opentelemetry
+      weight: 422
+    - name: Prometheus
+      url: /observability_pipelines/destinations/prometheus/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_prometheus
+      weight: 423
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sentinelone
-      weight: 421
+      weight: 424
     - name: Socket
       url: observability_pipelines/destinations/socket
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_socket
-      weight: 422
+      weight: 425
     - name: Splunk HEC
       url: observability_pipelines/destinations/splunk_hec/logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
-      weight: 423
+      weight: 426
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
-      weight: 424
+      weight: 427
     - name: Syslog
       url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
-      weight: 425
+      weight: 428
     - name: Packs
       url: observability_pipelines/packs/
       parent: observability_pipelines
@@ -10091,26 +10177,31 @@ menu:
       parent: pa_experiments_metrics
       identifier: pa_experiments_metric_sync
       weight: 1
+    - name: Standardize Experiments with Protocols
+      url: experiments/protocols
+      parent: pa_experiments
+      identifier: pa_experiments_protocols
+      weight: 2
     - name: Plan and Launch Experiments
       url: experiments/plan_and_launch_experiments
       parent: pa_experiments
       identifier: pa_experiments_plan
-      weight: 2
+      weight: 3
     - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 3
+      weight: 4
     - name: Experiment Diagnostics
       url: experiments/diagnostics
       parent: pa_experiments
       identifier: pa_experiments_diagnostics
-      weight: 4
+      weight: 5
     - name: Concepts
       url: experiments/concepts/
       parent: pa_experiments
       identifier: pa_experiments_concepts
-      weight: 5
+      weight: 6
     - name: Subject Types
       url: experiments/concepts/subject_types
       parent: pa_experiments_concepts
@@ -10135,7 +10226,7 @@ menu:
       url: experiments/statistics/
       parent: pa_experiments
       identifier: pa_experiments_statistics
-      weight: 6
+      weight: 7
     - name: Analysis Methods
       url: experiments/statistics/analysis_methods
       parent: pa_experiments_statistics
@@ -10165,7 +10256,7 @@ menu:
       url: experiments/metric_property_breakouts
       parent: pa_experiments
       identifier: pa_experiments_metric_property_breakouts
-      weight: 6
+      weight: 8
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
