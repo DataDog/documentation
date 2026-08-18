@@ -121,13 +121,13 @@ Make sure your full username includes the `.ddgov.support` suffix.
 
 ### Password reset not received
 
-Click **Forgot Password** to open the **Reset Your Password** page, then enter your full username, including the `.ddgov.support` suffix, in **Enter your username**. If you still do not receive the email, add `ddog-gov.com` to your email allowlist.
+Click **Forgot Your Password?** to open the **Reset Your Password** page, then enter your full username, including the `.ddgov.support` suffix, in **Enter your username**. If you still do not receive the email, add `ddog-gov.com` to your email allowlist.
 
-If you do not know your username, click **Forgot your username?**, then click **Use Your Email Address**. This control takes you out of the GovCloud support portal. The page it opens is also titled **Reset Your Password**, but its **Enter your email address** field takes your work email address, not your `.ddgov.support` username.
+If you do not know your username, click **Forgot your username?**, then click **Use Your Email Address**. This control takes you out of the GovCloud support portal and opens Salesforce Identity. That page is also titled **Reset Your Password**, but its **Enter your email address** field takes your work email address, not your `.ddgov.support` username.
 
 ### Registration error
 
-Your account may already exist. Click **Forgot Password**, then enter your full username, including the `.ddgov.support` suffix (for example, `[name]@[domain].ddgov.support`), in **Enter your username**. If you are still unable to access your account, contact `support@ddog-gov.com`.
+Your account may already exist. Click **Forgot Your Password?**, then enter your full username, including the `.ddgov.support` suffix (for example, `[name]@[domain].ddgov.support`), in **Enter your username**. If you are still unable to access your account, contact `support@ddog-gov.com`.
 
 {{% /site-region %}}
 
