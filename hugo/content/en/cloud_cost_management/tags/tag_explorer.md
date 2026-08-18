@@ -43,7 +43,7 @@ See the respective documentation for your cloud provider:
 
 ## Search and manage tags
 
-Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Tag Explorer{{< /ui >}}][2] to search for tags related to your cloud provider bills, custom costs, Datadog costs, SaaS cost integrations, and tag pipelines.
+Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Analyze{{< /ui >}} > {{< ui >}}Tags{{< /ui >}}][2] to search for tags related to your cloud provider bills, custom costs, Datadog costs, SaaS cost integrations, and tag pipelines.
 
 {{< tabs >}}
 {{% tab "AWS" %}}
