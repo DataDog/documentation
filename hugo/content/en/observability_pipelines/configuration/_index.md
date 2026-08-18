@@ -1,5 +1,6 @@
 ---
 title: Configuration
+description: Learn about the source, processor, and destination components that make up an Observability Pipelines pipeline, and the methods available for building and deploying them.
 disable_toc: false
 further_reading:
 - link: "observability_pipelines/configuration/set_up_pipelines/"

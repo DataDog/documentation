@@ -1,5 +1,6 @@
 ---
 title: Set Up Pipelines
+description: Learn how to set up an Observability Pipelines pipeline's source, processors, and destinations with the Pipeline UI, API, or Terraform.
 disable_toc: false
 aliases:
   - /observability_pipelines/set_up_pipelines/

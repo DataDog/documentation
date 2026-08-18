@@ -1,5 +1,6 @@
 ---
 title: Advanced Worker Configurations
+description: Learn about Worker bootstrap options, other configuration options, and how to enable the health check endpoint and liveness and readiness probes for the Observability Pipelines Worker.
 disable_toc: false
 aliases:
   - /observability_pipelines/setup_opw/

@@ -1,5 +1,6 @@
 ---
 title: Update Existing Pipelines
+description: Learn how to update and deploy changes to an existing Observability Pipelines pipeline's source, destination, and processor settings, including environment variables.
 disable_toc: false
 aliases:
   - /observability_pipelines/update_existing_pipelines/
