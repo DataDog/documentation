@@ -558,6 +558,12 @@ multifiltersearch:
       recommendation_type: Shutdown Azure VM Scale Set
       recommendation_description: VM instances with low usage that can be shutdown.
       recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: Cursor
+      resource_type: Cursor Seat
+      recommendation_type: Enable Cursor Auto Mode
+      recommendation_description: Identifies Cursor seats with significant non-auto model spend and recommends using Auto Mode as the model choice.
+      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
       resource_type: Databricks Cluster
@@ -707,6 +713,12 @@ multifiltersearch:
       resource_type: API Key
       recommendation_type: Optimize Prompt Caching
       recommendation_description: Identifies OpenAI API keys already using prompt caching below the target hit rate and recommends improving cache configuration to reduce input token costs.
+      recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: OpenAI
+      resource_type: API Key
+      recommendation_type: Reduce OpenAI Priority Processing
+      recommendation_description: Identifies OpenAI API keys with significant priority-processing spend and recommends moving latency-tolerant traffic to standard to drop the priority premium.
       recommendation_prerequisites: ""
 ---
 
