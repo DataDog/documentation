@@ -67,7 +67,8 @@ Remote authentication uses the MCP specification's [Streamable HTTP][1] transpor
 **Codex CLI** (`~/.codex/config.toml`):
 
 <pre><code>[mcp_servers.datadog]
-url = "{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core"
+url = "{{< region-param key="mcp_server_endpoint" >}}"
+http_headers = { "X-Datadog-MCP-Toolsets" = "llmobs,core" }
 </code></pre>
 
 After adding the configuration, run `codex mcp login datadog` to complete the OAuth flow.

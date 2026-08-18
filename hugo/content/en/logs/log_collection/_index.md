@@ -182,7 +182,7 @@ You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP 
 The HTTPS API supports logs of sizes up to 1MB. However, for optimal performance, Datadog recommends that an individual log be no greater than 25 KB (25,000 bytes). If you use the Datadog Agent for logging, it is configured to split a log at 900 KB (900,000 bytes).
 </div>
 
-{{% collapse-content title="TCP" level="h3" expanded=false %}}
+{{% collapse-content title="TCP" level="h4" expanded=false %}}
 
 {{% logs-tcp-disclaimer %}}
 
