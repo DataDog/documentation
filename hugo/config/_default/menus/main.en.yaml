@@ -5694,11 +5694,6 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_language_mismatch
       weight: 60102
-    - name: Sensitive Data Scanner
-      url: llm_observability/configure/evaluations/sensitive_data_scanner
-      parent: llm_obs_evaluations
-      identifier: llm_obs_sensitive_data_scanner
-      weight: 60103
     - name: End-User Feedback
       url: llm_observability/configure/evaluations/end_user_feedback
       parent: llm_obs_evaluations

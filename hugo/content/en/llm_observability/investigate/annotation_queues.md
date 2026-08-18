@@ -4,7 +4,7 @@ aliases:
 - /llm_observability/evaluations/annotation_queues/
 description: Enable systematic human review of LLM traces to identify failure modes, validate automated evaluations, and build golden datasets.
 further_reading:
-  - link: /llm_observability/configure/evaluations/evaluation_types
+  - link: /llm_observability/configure/evaluations/
     tag: Documentation
     text: Learn about evaluation types
   - link: /llm_observability/configure/automation_rules

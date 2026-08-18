@@ -1,5 +1,5 @@
 ---
-title: Monitoring
+title: Investigate
 aliases:
 - /llm_observability/monitoring/
 description: How to explore more of your application in Agent Observability.

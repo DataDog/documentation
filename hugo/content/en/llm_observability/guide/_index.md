@@ -9,7 +9,7 @@ cascade:
 ---
 
 {{< whatsnext desc="Agent Observability Guides:" >}}
-    {{< nextlink href="/llm_observability/quickstart#trace-an-llm-application" >}}Trace an LLM Application{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/quickstart/" >}}Trace an LLM Application{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/trace-an-llm-application-in-aws-lambda" >}}Trace an LLM Application in AWS Lambda{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/monitor_proxy_services" >}}Trace Proxy and Gateway Services{{< /nextlink >}}
     {{< nextlink href="/llm_observability/configure/evaluations/" >}}Evaluations{{< /nextlink >}}
