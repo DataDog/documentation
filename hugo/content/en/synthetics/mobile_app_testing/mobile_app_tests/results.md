@@ -1,0 +1,194 @@
+---
+title: Mobile App Testing Results
+description: View Synthetic mobile app test results and compare successful or failed sample runs to test runs.
+aliases:
+- /mobile_testing/mobile_app_tests/results
+- /mobile_app_testing/mobile_app_tests/results
+further_reading:
+- link: "/synthetics/mobile_app_testing/"
+  tag: "Documentation"
+  text: "Learn about Synthetic mobile tests"
+- link: "/events/explorer"
+  tag: "Documentation"
+  text: "Learn about the Events Explorer"
+---
+
+## Overview
+
+Click on a mobile app test on the [{{< ui >}}Synthetic Tests{{< /ui >}} page][11] to see the Test Details page. The Test Details page contains all the information relating to your test, including test activity, test results, performance metrics, and test properties.
+
+{{< img src="mobile_app_testing/mobile_app_results_new.png" alt="The Mobile App Test Details page" style="width=80%" >}}
+
+Test runs appear in a test details page after a Synthetic mobile app test executes. [Test results](#test-results) correlate to the latest passed and failed test executions over a time interval and in a specific number of locations and devices.
+
+## Test activity
+
+On the {{< ui >}}Activity{{< /ui >}} tab, you can see:
+
+- The {{< ui >}}Global Uptime{{< /ui >}} graph, which displays the total uptime of all test locations in a given time interval. The global uptime visualization displays red only if the [alert conditions][4] configured for a test are triggered in the given time interval. Since location uptime is computed based on the final test result after retries complete, [fast retry][15] intervals directly impact what appears in your total uptime graph. For more information about uptime monitoring, see the [Uptime Percentage widget][5] guide.
+- A {{< ui >}}Timeline{{< /ui >}} of alert triggers, recoveries, and test modifications.
+- A detail panel for the selected alert showing what happened, the failing result, and suggested next steps for investigation.
+
+{{< img src="mobile_app_testing/mobile_activity_global_uptime.png" alt="The Activity tab on a mobile app Test Details page showing Global Uptime, an alert timeline, and a failure detail panel" style="width=80%" >}}
+
+## Test results
+
+On the {{< ui >}}Test Results{{< /ui >}} tab, you can examine the latest failed test runs and compare them to recent successful test runs. Mobile app test runs include components such as [screenshots](#screenshots-and-actions) to help troubleshoot your [test failure](#failed-results).
+
+{{< img src="mobile_app_testing/mobile_app_test_runs.png" alt="The Test Runs tab on a mobile app Test Details page showing a filterable table of test runs with status, date, run type, steps, duration, location, device, app version, and test version columns" style="width:100%;">}}
+
+{{% collapse-content title="Test run columns" level="h3" %}}
+
+The following describes each column in the {{< ui >}}Test Results{{< /ui >}} table:
+
+Status
+: The status of your test run (`PASSED` or `FAILED`).
+
+Date
+: The date and time your test ran.
+
+Duration
+: The amount of time it took your test to run.
+
+Location
+: The [managed][8] or [private location][9] your test was executed from.
+
+Device
+: The type of device your test was executed from.
+
+App version
+: The version of the mobile application used in your test run.
+
+Test version
+: The version of the test that was executed.
+
+Run type
+: The type of test run (CI, manually triggered, or scheduled).
+
+Video replay
+: A recording of the test execution available for diagnosing failures. See [Video replay](#video-replay).
+
+{{% /collapse-content %}}
+
+### Screenshots and actions
+
+Every executed test step contains a screenshot of the step action, step action name, step ID, and step duration. 
+
+{{< img src="mobile_app_testing/screenshot-and-action.png" alt="Screenshots and actions in the Sample Runs section of the test details" style="width:100%" >}}
+
+Screenshots can be disabled by checking {{< ui >}}Do not capture screenshot for this step{{< /ui >}} in the {{< ui >}}Advanced Options{{< /ui >}} section.
+
+{{< img src="mobile_app_testing/do_not_capture_screenshot.png" alt="Advanced options for a Mobile app test, highlighting Do not capture screenshot for this step" style="width:60%" >}}
+
+### Video replay
+
+Use video replay to diagnose test failures by showing unexpected UI behavior or pop-ups that may have caused the issue. Video replay requires [screenshots to be enabled](#screenshots-and-actions). Disabling screenshots for a step prevents video replay for all test runs.
+
+Click the video icon ▶️ for a failed test run on the [Mobile Application test details page][11] to watch the complete test execution. You can also access video replay for all test runs using the {{< ui >}}Video Replay{{< /ui >}} tab in the test run side panel, which provides detailed test run information.
+
+{{< img src="mobile_app_testing/video_replay_2.mp4" alt="Video Replay of a test run in Mobile App testing" video=true >}}
+
+**Note**: Mobile Application test session replays are not available in RUM.
+
+### XML highlighting 
+
+Results of steps contain the XML representation of the screen being tested, as well as the ability to hover over the screenshot or the XML to highlight specific elements of the app. 
+Click an element to view additional attributes:
+
+{{< img src="mobile_app_testing/xml_inspector.png" alt="Screenshot of a test result under the Sample Runs section, showing the XML inspector" style="width=80%" >}}
+
+## Test performance
+
+On the {{< ui >}}Performance{{< /ui >}} tab, you can see aggregate performance metrics across all runs of your test:
+
+- {{< ui >}}Average Test duration by location{{< /ui >}}, which displays the time the test takes to complete in each location.
+- {{< ui >}}Average Step duration{{< /ui >}}, which displays the time each step takes to complete across runs.
+
+{{< img src="mobile_app_testing/mobile_app_performance.png" alt="The Performance tab on a mobile app Test Details page showing Average Test duration by location and Average Step duration graphs" style="width=80%" >}}
+
+## Test properties
+
+The {{< ui >}}Properties{{< /ui >}} tab contains the configuration details, ownership information, and integrations associated with your test. Use the left navigation to switch between sections.
+
+{{< img src="mobile_app_testing/mobile_app_properties.png" alt="The Properties tab on a mobile app Test Details page showing Ownership, Execution, and Monitor sections, with left navigation for Continuous Testing, Parent Tests, and other configuration" style="width:100%;">}}
+
+{{% collapse-content title="Properties tab sections" level="h3" %}}
+
+The following describes each section available on the {{< ui >}}Properties{{< /ui >}} tab:
+
+{{< ui >}}Ownership{{< /ui >}}
+: Displays the test owner, editor, creation date, last modified date, environments, teams, and tags.
+
+{{< ui >}}Execution{{< /ui >}}
+: Shows the test frequency, alert conditions, and retry behavior.
+
+{{< ui >}}Monitor{{< /ui >}}
+: Contains the [Synthetic test monitor][1] name, priority, configured recipients, and notification message.
+
+{{< ui >}}Continuous Testing{{< /ui >}}
+: Sets the [execution rule][2] used when this test runs as part of a [Continuous Testing CI pipeline][3].
+
+{{< ui >}}Parent Tests{{< /ui >}}
+: Lists tests that reference this test, such as multistep tests that include it as a subtest.
+
+{{< ui >}}Parent Suites{{< /ui >}}
+: Lists the [test suites][13] this test belongs to.
+
+{{< ui >}}Downtimes{{< /ui >}}
+: Lists [scheduled downtimes][14] that pause execution of this test, for example during planned maintenance windows.
+
+{{< ui >}}Configuration as Code{{< /ui >}}
+: Exports the test configuration in formats such as Terraform for managing tests as code.
+
+{{% /collapse-content %}}
+
+## Crash reports
+
+View and download crash reports for your iOS and Android devices in the [Results Explorer][12].
+
+To find specific crash reports, use the following queries in the search bar:
+- **iOS**: `@result.failure.code:APPLICATION_CRASH_FAILURE @device.platform.name:ios`
+- **Android**: `@result.failure.code:APPLICATION_CRASH_FAILURE @device.platform.name:android`
+
+
+{{< img src="mobile_app_testing/ios_search_2.png" alt="Screenshot the Results Explorer using filter and search to locate iOS crash results" style="width=80%" >}}
+
+Click on a failed test to open the side panel and download the crash report in the {{< ui >}}Run Details{{< /ui >}} tab:
+
+{{< img src="mobile_app_testing/ios_crash_report_2.png" alt="Screenshot of a test result highlighting the ability to download the iOS crash report" style="width=80%" >}}
+
+## Failed results
+
+A test result is considered `FAILED` if it does not satisfy its assertions or if a step failed for another reason. You can troubleshoot failed runs by looking at their screenshots, checking for potential errors at the step level, and looking into resources generated by their steps.
+
+Common mobile app test errors include:
+
+`Element located but it's invisible`
+: The element is on the page but cannot be clicked on—for instance, if another element is overlaid on top of it.
+
+`Cannot locate element`
+: The element cannot be found in the XML.
+
+## Test events
+
+Alerts from your Synthetic test monitors appear on the timeline in the [{{< ui >}}Activity{{< /ui >}} tab](#test-activity), where you can review alert triggers, recoveries, and test modifications alongside the global uptime graph. To search for alerts from Synthetic tests in the Events Explorer, navigate to [{{< ui >}}Events{{< /ui >}} > {{< ui >}}Explorer{{< /ui >}}][7] and enter `@evt.type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][1].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /monitors/types/synthetic_monitoring/
+[2]: /continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
+[3]: /continuous_testing/cicd_integrations
+[4]: /mobile_app_testing/mobile_app_tests/#scheduling-and-alert
+[5]: /synthetics/guide/uptime-percentage-widget/
+[6]: /help
+[7]: https://app.datadoghq.com/event/explorer
+[8]: /getting_started/synthetics/browser_test#select-locations
+[9]: /synthetics/private_locations
+[10]: /mobile_app_testing/mobile_app_tests/steps
+[11]: https://app.datadoghq.com/synthetics/tests
+[12]: https://app.datadoghq.com/synthetics/explorer
+[13]: /synthetics/test_suites/
+[14]: /synthetics/platform/downtime/
+[15]: /synthetics/guide/synthetic-test-retries-monitor-status/

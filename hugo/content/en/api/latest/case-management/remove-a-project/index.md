@@ -1,0 +1,3 @@
+---
+title: Remove a project
+---

@@ -1,0 +1,109 @@
+---
+title: Arithmetic
+description: Perform mathematical operations including absolute values, rounding, logarithms, exponents, and cumulative sums on metrics.
+aliases:
+    - /graphing/functions/arithmetic/
+---
+
+## Absolute
+
+| Function | Description                             | Example                 |
+| :----    | :-------                                | :---------              |
+| `abs()`  | Graph the absolute value of the metric. | `abs(<METRIC_NAME>{*})` |
+
+Transforms this sine timeseries `sin{*}`:
+
+{{< img src="dashboards/functions/arithmetic/sinus.png" alt="Sinus function" style="width:80%;">}}
+
+into this one `abs(sin{*})`:
+
+{{< img src="dashboards/functions/arithmetic/sinus_abs.png" alt="Sinus function with abs" style="width:80%;">}}
+
+## Rounding
+
+| Function | Description | Example |
+| :----    | :-------    | :------ |
+| `round()` | Round each point in the metric to the nearest value. You can optionally choose the precision. | `round(<METRIC_NAME>{*})`, `round(<METRIC_NAME>{*}, <DECIMAL_PLACES>)` |
+| `ceil()` | Round each point in the metric up to the nearest integer. | `ceil(<METRIC_NAME>{*})` |
+| `floor()` | Round each point in the metric down to the nearest integer. | `floor(<METRIC_NAME>{*})` |
+
+Use the optional second argument with `round()` to set the number of decimal places to keep.
+
+## Exponent
+
+| Function | Description | Example |
+| :----    | :-------    | :------ |
+| `pow()`  | Raise each point in a metric or constant to the power of another metric or constant. | `pow(<METRIC_NAME>{*}, CONSTANT)`, `pow(<METRIC_NAME>{*}, <METRIC_NAME>{*})`, `pow(CONSTANT, <METRIC_NAME>{*})`, `pow(CONSTANT, CONSTANT)` |
+
+Use `pow()` when you need exponentiation in a formula. For example, you can square a metric with `pow(<METRIC_NAME>{*}, 2)` or use a metric as the exponent with `pow(2, <METRIC_NAME>{*})`.
+
+## Logarithm
+
+### Log base 2
+
+| Function | Description                               | Example                  |
+| :----    | :-------                                  | :---------               |
+| `log2()` | Graph the Base-2 logarithm of the metric. | `log2(<METRIC_NAME>{*})` |
+
+Example:
+
+If a metric, `x{*}`, increments itself by 1 for each data point, then `log2(x{*})` has the following shape:
+
+{{< img src="dashboards/functions/arithmetic/log2.png" alt=" log2 function" style="width:80%;">}}
+
+### Log base 10
+
+| Function  | Description                                | Example                   |
+| :----     | :-------                                   | :---------                |
+| `log10()` | Graph the Base-10 logarithm of the metric. | `log10(<METRIC_NAME>{*})` |
+
+Example:
+
+If a metric, `x{*}`, increments itself by 1 for each data point, then `log10(x{*})` has the following shape:
+
+{{< img src="dashboards/functions/arithmetic/log10.png" alt="log10 function" style="width:80%;">}}
+
+## Cumulative sum
+
+| Function   | Description                                                          | Example                    |
+| :----      | :-------                                                             | :---------                 |
+| `cumsum()` | Graph the cumulative sum of the metric over the visible time window. | `cumsum(<METRIC_NAME>{*})` |
+
+Example:
+
+If a metric, `const_1{*}`, is a constant with the value of `1`, then `cumsum(const_1{*})` has the following shape:
+
+{{< img src="dashboards/functions/arithmetic/cumsum.png" alt="cum sum function with abs" style="width:80%;">}}
+
+## Cumulative sum in monitors
+
+Cumulative sum should be avoided in monitor queries, because the cumulative sum function is a visual function. When used in a dashboard or notebook, the points will reflect values based on the selected timeframe. This doesn't translate well in a monitor as the monitor doesn't have a sense of which timeframe to use.
+
+Instead, configure [Cumulative Time Windows][1] in your monitor evaluation period.
+
+## Integral
+
+| Function     | Description                       | Example                             |
+| :----        | :-------                          | :---------                          |
+| `integral()` | Graph the integral of the metric. | `integral(<METRIC_NAME>{*})` |
+
+**Note**: Datadog's `integral()` is the cumulative sum of `[time delta] x [value delta]` over all consecutive pairs of points in the visible time window for a given metric.
+
+{{< img src="dashboards/functions/arithmetic/integral.png" alt="integral function with abs" style="width:80%;">}}
+
+## Other functions
+
+{{< whatsnext desc="Consult the other available functions:" >}}
+    {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/count" >}}Count: Count non zero or non null value of your metric. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusion: Exclude certain values of your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation: Fill or set default values for your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rank" >}}Rank: Select only a subset of metrics. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rate" >}}Rate: Calculate custom derivative over your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/regression" >}}Regression: Apply some machine learning function to your metric.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rollup" >}}Rollup: Control the number of raw points used in your metric. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
+{{< /whatsnext >}}
+
+[1]: /monitors/configuration/?tab=thresholdalert#cumulative-time-windows

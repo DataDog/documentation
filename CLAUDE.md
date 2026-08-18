@@ -6,7 +6,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the Datadog Documentation repository, built using Hugo (static site generator) and published to docs.datadoghq.com. The codebase consists of markdown content, Hugo themes, Node.js build scripts, and Python automation tools.
 
+The repository is a monorepo that supports more than one site. All Hugo site files live in the `hugo/` directory, not at the repository root. Paths in this document are relative to the repository root unless noted otherwise. For background, see `REPO_REORG.md`.
+
 ## Development Commands
+
+**Run all build and development commands from the `hugo/` directory.** There is no `package.json` or `Makefile` at the repository root.
 
 ### Build and Development
 - `yarn start` or `make start` - Full build including external dependencies and run development server
@@ -34,11 +38,11 @@ This is the Datadog Documentation repository, built using Hugo (static site gene
 ## Architecture
 
 ### Content Structure
-- `content/en/` - English documentation (primary language)
-- `content/{fr,es,ja,ko}/` - Translated content (managed externally)
-- `layouts/` - Hugo templates and shortcodes
-- `static/` - Static assets, images, fonts
-- `assets/` - SCSS stylesheets and JavaScript
+- `hugo/content/en/` - English documentation (primary language)
+- `hugo/content/{fr,es,ja,ko}/` - Translated content (managed externally)
+- `hugo/layouts/` - Hugo templates and shortcodes
+- `hugo/static/` - Static assets, images, fonts
+- `hugo/assets/` - SCSS stylesheets and JavaScript
 
 ### Build System
 - **Hugo**: Static site generator with custom themes
@@ -51,7 +55,7 @@ The build system automatically fetches:
 - API client examples from multiple language repositories
 - Integration metadata and documentation
 - Vector integration data via CUE files
-- Some documentation is sourced from GitHub using the `pull_config.yaml` file at `local/bin/py/build/configurations/pull_config.yaml`.
+- Some documentation is sourced from GitHub using the `pull_config.yaml` file at `hugo/local/bin/py/build/configurations/pull_config.yaml`.
 - Some documentation is sourced from a go module called `websites-sources`
 
 ### Related Repositories
@@ -64,15 +68,17 @@ These repositories are dependencies of or closely related to this project. They 
 - **`DataDog/websites-sources`** (https://github.com/DataDog/websites-sources) — Provides integration data consumed during the build via S3. The `make websites_sources_data` target downloads this data. The S3 path is controlled by the `FF_S3_PATH` env var (default: `staging`).
 
 ### Configuration
-- `config/` - Hugo configuration for different environments (development, preview, live)
-- `package.json` - Node.js dependencies and scripts
-- `Makefile` + `Makefile.config` - Build orchestration
-- Environment-specific parameters in `config/{env}/params.yaml`
+- `hugo/config/` - Hugo configuration for different environments (development, preview, live)
+- `hugo/package.json` - Node.js dependencies and scripts
+- `hugo/Makefile` + `hugo/Makefile.config` - Build orchestration
+- Environment-specific parameters in `hugo/config/{env}/params.yaml`
 
 ## Critical Rules
 
 - **NEVER push directly to `master`.** Always create a PR and go through the review process. Direct pushes bypass branch protection and code review.
 - **Obey the git hooks set up in .husky.** Do not use `--no-verify` or other workarounds to skip repository git hooks.
+- **NEVER force-push any branch.** Do not use `git push --force`, `git push -f`, or `--force-with-lease`. Force-pushing rewrites history and destroys commit history in open PRs.
+- **The rules above are enforced mechanically.** A `PreToolUse` hook (`.claude/hooks/block-master-git.py`) blocks commits and pushes that target `master`, along with `--no-verify`, `HUSKY=0`, and force-push flags. The `.husky` git hooks enforce the same rules for commits made outside Claude Code. A block from either layer is intentional. Do not work around it.
 - **This is a PUBLIC repository. NEVER include internal or sensitive information in documentation content, commit messages, PR titles, PR descriptions, or code comments.** This includes: customer names, incident details (Sev 1s, outages, etc.), internal URLs, internal Slack conversations, Jira ticket details beyond the ticket key, internal bugs or implementation details, or any context that isn't appropriate for public visibility. Documentation should describe how to use features, not reference internal issues (e.g., not "there's currently a bug in the backend that processes this"). PR descriptions should describe *what changed in the docs*, not *why internally* (e.g., not "a customer hit a Sev 1 because..."). Keep all content concise and focused on the user-facing documentation change itself.
 
 ## Branch and PR Guidelines
@@ -90,19 +96,27 @@ CRITICAL: Always use format `<name>/<description>` with forward slash. Without t
 Use the Jira ticket key in square brackets: `[DOCS-XXXXX] Brief description`
 
 ### PR Description Template
+
 ```
 <!-- *Note: Please remember to review the Datadog Documentation [Contribution Guidelines](https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md) if you have not yet done so.* -->
-
 ### What does this PR do? What is the motivation?
 
 Fixes DOCS-XXXXX
 
 [Brief description of changes]
 
-### Merge instructions
+### Merge readiness
 
-Merge readiness:
 - [ ] Ready for merge
+
+## For Datadog employees:
+
+- ⚠️ Your branch name **MUST** follow the `<name>/<description>` convention and include the forward slash (`/`). If you've already created your PR with an incorrect branch name, please rename your branch and open a fresh PR.
+- 🤖 **New**: Comment with `/review` to run an automated check that catches common issues before a Documentation team member reviews your PR.
+
+### AI assistance
+
+[If AI tools were used, briefly note how. Leave blank if not applicable.]
 
 ### Additional notes
 
@@ -161,7 +175,7 @@ Avoid temporal words: currently, now, will, won't
 ## Hugo-Specific Details
 
 ### Shortcodes
-Extensive library in `layouts/shortcodes/` for:
+Extensive library in `hugo/layouts/shortcodes/` for:
 - Code examples across multiple languages
 - Integration-specific content
 - API documentation
@@ -185,7 +199,7 @@ Extensive library in `layouts/shortcodes/` for:
 - API examples automatically sync from datadog-api-client-* repositories
 - Integration data pulled from the `websites-sources` go module.
    - The exception is Dogweb integrations, which are pulled from a GitHub repository.
-- Some documentation is sourced from GitHub using the `pull_config.yaml` file at `local/bin/py/build/configurations/pull_config.yaml`.
+- Some documentation is sourced from GitHub using the `pull_config.yaml` file at `hugo/local/bin/py/build/configurations/pull_config.yaml`.
 - Build scripts fetched from external repository during setup
 
 ### Build Environments

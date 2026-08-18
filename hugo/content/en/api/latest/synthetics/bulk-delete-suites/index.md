@@ -1,0 +1,3 @@
+---
+title: Bulk delete suites
+---

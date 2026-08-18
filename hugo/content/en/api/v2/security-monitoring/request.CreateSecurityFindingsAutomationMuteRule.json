@@ -1,0 +1,18 @@
+{
+  "data": {
+    "attributes": {
+      "action": {
+        "reason": "risk_accepted"
+      },
+      "enabled": true,
+      "name": "Example-Security-Monitoring",
+      "rule": {
+        "finding_types": [
+          "misconfiguration"
+        ],
+        "query": "env:staging"
+      }
+    },
+    "type": "mute_rules"
+  }
+}

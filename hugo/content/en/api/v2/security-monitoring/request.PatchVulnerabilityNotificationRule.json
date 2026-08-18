@@ -1,0 +1,26 @@
+{
+  "data": {
+    "attributes": {
+      "enabled": true,
+      "name": "Rule 9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
+      "selectors": {
+        "query": "(source:production_service OR env:prod)",
+        "rule_types": [
+          "misconfiguration",
+          "attack_path"
+        ],
+        "severities": [
+          "critical"
+        ],
+        "trigger_source": "security_findings"
+      },
+      "targets": [
+        "@john.doe@email.com"
+      ],
+      "time_aggregation": 86400,
+      "version": 1
+    },
+    "id": "aaa-bbb-ccc",
+    "type": "notification_rules"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "data": {
+    "attributes": {
+      "from": "2023-08-31T00:00:00Z",
+      "to": "2023-09-01T00:00:00Z"
+    },
+    "type": "dora_deployments_list_request"
+  }
+}

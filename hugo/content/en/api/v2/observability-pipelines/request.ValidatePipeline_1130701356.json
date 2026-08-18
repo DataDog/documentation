@@ -1,0 +1,57 @@
+{
+  "data": {
+    "attributes": {
+      "config": {
+        "destinations": [
+          {
+            "id": "datadog-logs-destination",
+            "inputs": [
+              "my-processor-group"
+            ],
+            "type": "datadog_logs"
+          }
+        ],
+        "processor_groups": [
+          {
+            "enabled": true,
+            "id": "my-processor-group",
+            "include": "service:my-service",
+            "inputs": [
+              "splunk-hec-source"
+            ],
+            "processors": [
+              {
+                "enabled": true,
+                "id": "filter-processor",
+                "include": "status:error",
+                "type": "filter"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "id": "splunk-hec-source",
+            "type": "splunk_hec",
+            "valid_tokens": [
+              {
+                "token_key": "SPLUNK_HEC_TOKEN",
+                "enabled": true,
+                "field_to_add": {
+                  "key": "token_name",
+                  "value": "primary_token"
+                }
+              },
+              {
+                "token_key": "SPLUNK_HEC_TOKEN_BACKUP",
+                "enabled": false
+              }
+            ]
+          }
+        ]
+      },
+      "name": "Pipeline with Splunk HEC valid_tokens"
+    },
+    "type": "pipelines"
+  }
+}

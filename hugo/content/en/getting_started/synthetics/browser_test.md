@@ -1,0 +1,166 @@
+---
+title: Getting Started with Browser Tests
+description: Create Datadog browser tests to monitor user journeys across devices and browsers. Record test scenarios, set up alerts, and validate business transactions.
+further_reading:
+- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
+  tag: 'Learning Center'
+  text: 'Getting Started with Synthetic Browser Testing'
+- link: '/synthetics/browser_tests'
+  tag: 'Documentation'
+  text: 'Learn more about browser tests'
+- link: '/getting_started/synthetics/private_location'
+  tag: 'Documentation'
+  text: 'Learn about private locations'
+- link: '/continuous_testing/cicd_integrations'
+  tag: 'Documentation'
+  text: 'Learn how to trigger Synthetic tests from your CI/CD pipeline'
+- link: '/synthetics/identify_synthetics_bots'
+  tag: 'Documentation'
+  text: 'Learn how to identify Synthetic bots for API tests'
+- link: '/synthetics/guide/synthetic-test-monitors'
+  tag: 'Documentation'
+  text: 'Learn about Synthetic test monitors'
+- link: '/synthetics/guide/export-tests-to-terraform'
+  tag: 'Guide'
+  text: 'Export Synthetic tests to Terraform'
+      
+---
+
+## Overview
+
+[Browser tests][1] are scenarios that Datadog executes on your web applications. You can configure periodic intervals to run tests from multiple locations, devices, and browsers as well as execute them from your CI/CD pipelines. These tests verify that your users can perform **key business transactions** on your applications and that they are not negatively impacted by recent code changes.
+
+## Create a browser test
+
+The example below demonstrates the creation of a browser test that maps a user's journey from adding an item to a cart to successfully checking out. 
+
+### Configure your test details
+
+1. In the Datadog site, hover over {{< ui >}}Digital Experience{{< /ui >}} in the left hand menu and select [{{< ui >}}Tests{{< /ui >}}][2] (under {{< ui >}}Synthetic Monitoring & Testing{{< /ui >}}).
+2. In the top right corner, click {{< ui >}}New Test{{< /ui >}} > [{{< ui >}}Browser Test{{< /ui >}}][3].
+
+You may create a test using one of the following options:
+
+- **Create a test from a template**:
+
+    1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: Test Details, Alert Conditions, Steps, and optionally Variables.
+    2. Click {{< ui >}}+Create Test{{< /ui >}} to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+    3. Click {{< ui >}}Save & Quit{{< /ui >}} in the upper right hand corner to submit your Browser Test.<br /><br>
+
+       {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
+
+- **Build a test from scratch**:
+
+    1. Click the {{< ui >}}+{{< /ui >}} template to start a new Browser Test from scratch.
+    1. Add the URL of the website you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
+    2. Select {{< ui >}}Advanced Options{{< /ui >}} to set custom request options, certificates, authentication credentials, and more. 
+    3. Name your test and set tags to it such as `env:prod` and `app:shopist`. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
+    4. Choose the browsers and devices you want to test with. 
+    5. Click {{< ui >}}Save & Edit Recording{{< /ui >}} to submit your Browser Test.
+
+### Select locations 
+
+Select one or more {{< ui >}}Managed Locations{{< /ui >}} or {{< ui >}}Private Locations{{< /ui >}} to run your test from.
+
+Managed locations allow you to test public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, use [private locations][4] instead.
+
+The Shopist application is publicly available at `https://www.shopist.io/`, so you can pick any managed locations to execute your test from.
+
+### Specify test frequency 
+
+Select the frequency at which you want your test to execute. You can leave the default frequency of 1 hour.
+
+In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][5].
+
+### Define alert conditions 
+
+You can define alert conditions to ensure your test does not trigger for things like a sporadic network blip, so that you only get alerted in case of real issues with your application.
+
+You can specify the number of consecutive failures that should happen before considering a location failed:
+
+```text
+Retry test 2 times after 300 ms in case of failure
+```
+
+You can also configure your test to only trigger a notification when your application goes down for a certain amount of time and number of locations. In the below example, the alerting rule is set to send a notification if the test fails for three minutes on two different locations:
+
+```text
+An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
+```
+
+### Configure the test monitor 
+
+Use this section to build the **message** that you want to send with the notification. The notification includes your custom message and details about any failing locations. Pre-filled monitor messages are included in the message body:
+
+{{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="Synthetic Monitoring monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
+
+For example, the following monitor message creates a monitor that iterates over steps and extracts variables for browser tests:
+
+   ```text
+   {{! List extracted variables across all successful steps }}
+   # Extracted variables
+   {{#each synthetics.attributes.result.steps}}
+   {{#if extractedValue}}
+   * **Name**: `{{extractedValue.name}}`
+   **Value:** {{#if extractedValue.secure}}*Obfuscated (value hidden)*{{else}}`{{{extractedValue.value}}}`{{/if}}
+   {{/if}}
+   {{/each}}
+   ```
+
+When you're ready to save your test configuration and monitor, click {{< ui >}}Save & Edit Recording{{< /ui >}}.
+
+For more information, see [Using Synthetic Test Monitors][8].
+
+## Create recording
+
+Once your test configuration is saved, Datadog prompts you to download and install the [Datadog test recorder][9] Chrome extension. (This Chrome extension can also be installed on a Microsoft Edge browser)
+
+Once you have installed the extension, click {{< ui >}}Start Recording{{< /ui >}} to begin recording your test steps.
+
+Navigate through the page in the iframe located on the right of the recorder page. When you select a div, image, or any area of the page, Datadog records and creates the associated step in the browser test. 
+
+To end recording your test steps, click {{< ui >}}Stop Recording{{< /ui >}}.
+
+The example below demonstrates how to map a user journey from adding an item to a cart to successfully checking out in `https://www.shopist.io`:
+
+1. Navigate to one of the furniture sections on the example website such as {{< ui >}}Chairs{{< /ui >}} and select {{< ui >}}Add to cart{{< /ui >}}.
+2. Click on {{< ui >}}Cart{{< /ui >}} and {{< ui >}}Checkout{{< /ui >}}.
+3. Under {{< ui >}}Add New{{< /ui >}}, select {{< ui >}}Assertion{{< /ui >}} and click {{< ui >}}"Test that some text is present on the active page"{{< /ui >}}.
+4. To confirm that the words "Thank you!" appear after checking out, enter `Thank you!` in the {{< ui >}}Value{{< /ui >}} field. 
+5. Press {{< ui >}}Save & Quit{{< /ui >}}.
+
+It is important to finish your browser test with an {{< ui >}}Assertion{{< /ui >}} to ensure your application resulted in the expected state after the defined user journey.
+
+{{< img src="getting_started/synthetics/record-test.mp4" alt="Record test steps" video="true" >}}
+
+The example website regularly throws an error causing it to intentionally fail. If you include your email address in the {{< ui >}}Configure the monitor for this test{{< /ui >}} field, you receive an email notification when the test fails and recovers.
+
+## Look at test results
+
+The {{< ui >}}Browser Test{{< /ui >}} details page displays an overview of your test configuration, the global and per location uptime, graphs about time-to-interactive and test duration, sample successful and failed test results, and the list of all test results. Depending on the length of your test, you might have to wait for a few minutes to see the first test results come in.
+
+To troubleshoot a [failed test][10], review the failures on the **Activity** tab or the **Test Runs** tab. Select an alert from the timeline to see a **What happened?** summary describing the failing step and error message. From the **Next Steps** panel, you can investigate with Bits Investigation, view the recovery, pause scheduling, or declare an incident. You can also review potential [{{< ui >}}Errors & Warnings{{< /ui >}}][11], [{{< ui >}}Resources{{< /ui >}}][12], and [{{< ui >}}Core Web Vitals{{< /ui >}}][13] to diagnose the issue.
+
+{{< img src="synthetics/browser_tests/synthetics_bits_investigation.png" alt="Browser test details page showing the Activity tab with an alert timeline, failure summary, and Next Steps panel" style="width:100%;">}}
+
+Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces generated from your backend by the test runs from the {{< ui >}}Traces{{< /ui >}} tab.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /synthetics/browser_tests/
+[2]: https://app.datadoghq.com/synthetics/tests
+[3]: https://app.datadoghq.com/synthetics/browser/create
+[4]: /getting_started/synthetics/private_location
+[5]: /continuous_testing/cicd_integrations
+[6]: /integrations/#cat-notification
+[7]: https://app.datadoghq.com/account/settings
+[8]: /monitors/types/synthetic_monitoring/
+[9]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[10]: /synthetics/browser_tests/test_results#test-failure
+[11]: /synthetics/browser_tests/test_results#errors
+[12]: /synthetics/browser_tests/test_results#resources
+[13]: /synthetics/browser_tests/test_results#test-performance
+[14]: /synthetics/apm/
