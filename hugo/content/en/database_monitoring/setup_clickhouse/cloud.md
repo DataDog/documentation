@@ -76,7 +76,7 @@ GRANT SELECT ON system.query_log TO datadog;
 GRANT SHOW ON *.* TO datadog;
 ```
 
-The `system.processes` and `system.query_log` grants are required for DBM query collection. The `system.parts`, `system.detached_parts`, `system.merges`, `system.mutations`, `system.replication_queue`, and `system.merge_tree_settings` grants are required for parts and merges (storage health) collection. The `SHOW` privilege is required to automatically discover metadata such as database names, table names, columns and views. The remaining grants enable collection of core ClickHouse infrastructure metrics.
+The `system.processes` and `system.query_log` grants are required for DBM query collection. The `system.parts`, `system.detached_parts`, `system.merges`, `system.mutations`, `system.replication_queue`, and `system.merge_tree_settings` grants are required for parts and merges (storage health) collection. The `SHOW` privilege is required to automatically discover metadata such as database names, table names, columns, and views. The remaining grants enable collection of core ClickHouse infrastructure metrics.
 
 Grant `REMOTE` permissions to allow cross-replica querying:
 
