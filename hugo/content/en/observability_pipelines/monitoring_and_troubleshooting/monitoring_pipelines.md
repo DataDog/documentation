@@ -1,5 +1,6 @@
 ---
 title: Monitoring Pipelines
+description: Learn how to track the status of Observability Pipelines pipelines, Workers, and components with health graphs and out-of-the-box monitors.
 disable_toc: false
 aliases:
   - /observability_pipelines/monitoring/

@@ -1,5 +1,6 @@
 ---
 title: Scaling and Performance
+description: Find links on running multiple pipelines on a host, buffering and backpressure, and best practices for scaling Observability Pipelines Workers.
 disable_toc: false
 ---
 

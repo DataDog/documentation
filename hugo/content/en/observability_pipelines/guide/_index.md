@@ -1,5 +1,6 @@
 ---
 title: Observability Pipelines Guides
+description: Find guides on reducing log volume, environment variables, upgrading the Worker, and working with Observability Pipelines processors.
 disable_toc: false
 ---
 

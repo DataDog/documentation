@@ -1,5 +1,6 @@
 ---
 title: Best Practices for Scaling Observability Pipelines
+description: Learn the recommended aggregator architecture, instance optimization, and capacity planning practices for scaling Observability Pipelines Workers in large deployments.
 aliases:
     - /observability_pipelines/best_practices_for_scaling_observability_pipelines/
 further_reading:

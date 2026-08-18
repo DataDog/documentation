@@ -1,5 +1,6 @@
 ---
 title: Get Started with the Custom Processor
+description: Learn how to use Custom Processor functions, such as Base64 decoding and encoding, and see example scripts for common log transformation use cases.
 disable_toc: false
 further_reading:
 - link: "/observability_pipelines/processors/custom_processor/"

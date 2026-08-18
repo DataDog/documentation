@@ -1,5 +1,6 @@
 ---
 title: Buffering and Backpressure
+description: Learn how Observability Pipelines uses buffering and backpressure to handle destination outages, and how to configure destination buffer settings.
 disable_toc: false
 aliases:
   - /observability_pipelines/performance/
