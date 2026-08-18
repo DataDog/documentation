@@ -167,6 +167,7 @@ If `@feature_flags.<flag_key>` attributes do not appear on your traces:
 - Verify that your application is evaluating flags during traced requests. Enrichment only occurs when a flag is evaluated while a trace is active.
 - Wait a few seconds after the span is ingested. The `@feature_flags.<flag_key>` facets are derived by backend processing and do not appear in raw span metadata.
 - For debugging, inspect raw span metadata for the `ffe_flags_enc` tag. If this tag is present, the SDK is emitting enrichment data. Either the backend has not processed it yet, or the feature flag gate is not enabled for your organization.
+- If flags are not evaluating at all, see [Server-Side Feature Flags][2] for setup and language-specific troubleshooting.
 
 ## Search and filter by flag variant
 
