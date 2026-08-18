@@ -97,7 +97,7 @@ Consider a funnel with events `A → B → C` and event steps <code><strong styl
 
 In this case, Datadog counts one conversion. Each **A** starts an independent attempt. Because all three attempts complete on the same **C** event, Datadog counts only the earliest attempt.
 
-To further illustrate, if the user performs the event sequence <code><strong style="font-weight: 900">A</strong>, A, A, <strong style="font-weight: 900">B</strong>, <strong style="font-weight: 900">C</strong>, C, <strong style="font-weight: 900">A</strong>, <strong style="font-weight: 900">B</strong>, <strong style="font-weight: 900">C</strong></code>, Datadog counts two conversions. The first conversion completes with the sequence <code><strong style="font-weight: 900">A</strong>, A, A, <strong style="font-weight: 900">B</strong>, <strong style="font-weight: 900">C</strong></code>, and the second conversion completes with the following sequence of <code><strong style="font-weight: 900">A</strong>, <strong style="font-weight: 900">B</strong>, <strong style="font-weight: 900">C</strong></code>.
+To further illustrate, if the user performs the event sequence **A**, A, A, **B**, **C**, C, **A**, **B**, **C**, Datadog counts two conversions. The first conversion completes with the sequence **A**, A, A, **B**, **C**, and the second conversion completes with the following sequence of **A**, **B**, **C**.
 
 <div class="alert alert-info"> Any action or view that does not match a funnel step does not impact the step-by-step or overall conversion rate. If all funnel steps occur in the right order within the conversion window, Datadog counts the session as a single converted session.</div>
 
