@@ -18,7 +18,7 @@ further_reading:
   text: "Monitor Core Web Vitals with Synthetic Monitoring"
 - link: "https://www.datadoghq.com/blog/bits-investigation-synthetic-tests/"
   tag: "Blog"
-  text: "Triage synthetic test failures faster with Bits Investigation | Datadog"
+  text: "Triage synthetic test failures faster with Bits Investigation"
 
 ---
 

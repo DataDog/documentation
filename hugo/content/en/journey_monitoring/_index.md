@@ -4,7 +4,7 @@ description: "Monitor and analyze critical user flows to troubleshoot user exper
 further_reading:
 - link: "https://www.datadoghq.com/blog/journey-monitoring/"
   tag: "Blog"
-  text: "Monitor critical user journeys with Datadog Journey Monitoring | Datadog"
+  text: "Monitor critical user journeys with Datadog Journey Monitoring"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}

@@ -12,7 +12,7 @@ further_reading:
   text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway
 - link: "https://www.datadoghq.com/blog/otel-gateway-topology-view/"
   tag: "Blog"
-  text: "Troubleshoot OTel gateways with Datadog Fleet Automation | Datadog"
+  text: "Troubleshoot OTel gateways with Datadog Fleet Automation"
 - link: "https://opentelemetry.io/docs/collector/deployment/gateway/"
   tag: "OpenTelemetry"
   text: "Collector Deployment: Gateway"

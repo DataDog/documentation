@@ -11,7 +11,7 @@ further_reading:
   text: "Learn about the GitHub Integration"   
 - link: "https://www.datadoghq.com/blog/datadog-idp-homepage/"
   tag: "Blog"
-  text: "Start your day with the IDP Homepage | Datadog"
+  text: "Start your day with the IDP Homepage"
 
 ---
 

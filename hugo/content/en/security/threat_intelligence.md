@@ -15,7 +15,7 @@ further_reading:
     text: "How to investigate cloud credential compromise with Bits Security Analyst"
   - link: "https://www.datadoghq.com/blog/bits-threat-hunting/"
     tag: "Blog"
-    text: "Automate threat hunting with Datadog Cloud SIEM | Datadog"
+    text: "Automate threat hunting with Datadog Cloud SIEM"
 
 products:
 - name: Cloud SIEM

@@ -22,7 +22,7 @@ further_reading:
   text: "Tracing LLM Applications"
 - link: "https://www.datadoghq.com/blog/patterns-agent-observability/"
   tag: "Blog"
-  text: "Understand production LLM behavior with Patterns in Agent Observability | Datadog"
+  text: "Understand production LLM behavior with Patterns in Agent Observability"
 ---
 
 

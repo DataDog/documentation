@@ -6,7 +6,7 @@ disable_toc: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/bits-code/"
   tag: "Blog"
-  text: "Turn Datadog findings into automated code fixes with Bits Code | Datadog"
+  text: "Turn Datadog findings into automated code fixes with Bits Code"
 ---
 
 ## Overview

@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-api-authentication/"
   tag: "Blog"
-  text: "Modernize Datadog API authentication with scoped credentials | Datadog"
+  text: "Modernize Datadog API authentication with scoped credentials"
 ---
 
 ## Overview

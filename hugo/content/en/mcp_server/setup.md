@@ -15,10 +15,10 @@ further_reading:
   text: "Datadog MCP Server Tools"
 - link: "https://www.datadoghq.com/blog/kubernetes-mcp-tools/"
   tag: "Blog"
-  text: "Investigate Kubernetes resources with Datadog MCP tools | Datadog"
+  text: "Investigate Kubernetes resources with Datadog MCP tools"
 - link: "https://www.datadoghq.com/blog/datadog-ai-agent-integrations/"
   tag: "Blog"
-  text: "Bring live Datadog telemetry into your AI agents with native integrations | Datadog"
+  text: "Bring live Datadog telemetry into your AI agents with native integrations"
 ---
 
 Learn how to set up and configure the Datadog MCP Server, which lets you retrieve telemetry insights and manage platform features directly from AI-powered clients. Select your client:

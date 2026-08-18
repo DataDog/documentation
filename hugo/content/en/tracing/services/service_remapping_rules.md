@@ -7,7 +7,7 @@ site_support_id: service_remapping_rules
 further_reading:
 - link: "https://www.datadoghq.com/blog/service-remapping/"
   tag: "Blog"
-  text: "Comprehensively connect your service data with Service Remapping | Datadog"
+  text: "Comprehensively connect your service data with Service Remapping"
 ---
 
 ## Overview

@@ -15,7 +15,7 @@ further_reading:
   text: "Best practices for custom metrics governance"
 - link: "https://www.datadoghq.com/blog/infinite-cardinality-metrics/"
   tag: "Blog"
-  text: "Infinite Cardinality Metrics: Custom metrics built for modern systems | Datadog"
+  text: "Infinite Cardinality Metrics: Custom metrics built for modern systems"
 algolia:
   tags: ['custom metrics billing', 'metric name pricing']
 ---

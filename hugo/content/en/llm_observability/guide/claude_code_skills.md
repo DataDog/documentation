@@ -13,7 +13,7 @@ further_reading:
       text: 'Evaluation Developer Guide: Build custom evaluators'
     - link: "https://www.datadoghq.com/blog/bits-evals/"
       tag: "Blog"
-      text: "Improve AI agent quality with Bits Evals | Datadog"
+      text: "Improve AI agent quality with Bits Evals"
     - link: 'https://github.com/datadog-labs/agent-skills'
       tag: 'GitHub'
       text: 'datadog-labs/agent-skills'

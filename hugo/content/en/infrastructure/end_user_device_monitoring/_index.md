@@ -4,7 +4,7 @@ description: Monitor employee desktops and laptops to detect performance, connec
 further_reading:
 - link: "https://www.datadoghq.com/blog/auto-detected-endpoint-issues/"
   tag: "Blog"
-  text: "Detect and resolve endpoint issues across your fleet with Datadog | Datadog"
+  text: "Detect and resolve endpoint issues across your fleet with Datadog"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/end-user-device-monitoring/" btn_hidden="false" >}}
