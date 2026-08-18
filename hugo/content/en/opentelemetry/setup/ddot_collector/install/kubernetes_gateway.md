@@ -7,9 +7,9 @@ further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
-- link: https://www.datadoghq.com/blog/ddot-gateway
-  tag: Blog
-  text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway
+- link: "https://www.datadoghq.com/blog/ddot-gateway"
+  tag: "Blog"
+  text: "Centralize and govern your OpenTelemetry pipeline with the DDOT gateway"
 - link: "https://www.datadoghq.com/blog/otel-gateway-topology-view/"
   tag: "Blog"
   text: "Troubleshoot OTel gateways with Datadog Fleet Automation"
