@@ -1745,6 +1745,20 @@ components:
       required: true
       schema:
         type: string
+    RumExclusionFilterApplicationIDParameter:
+      description: RUM application ID.
+      in: path
+      name: app_id
+      required: true
+      schema:
+        type: string
+    RumExclusionFilterIDParameter:
+      description: Exclusion filter ID.
+      in: path
+      name: ef_id
+      required: true
+      schema:
+        type: string
     RumMetricIDParameter:
       description: The name of the RUM-based metric.
       in: path
@@ -2200,6 +2214,12 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Failed Precondition
+    RumExclusionFilterMethodNotAllowedResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/APIErrorResponse"
+      description: Method Not Allowed
     SpansBadRequestResponse:
       content:
         application/json:
@@ -90544,6 +90564,185 @@ components:
           maximum: 100
           minimum: 0
           type: number
+      type: object
+    RumExclusionFilterAttributes:
+      description: The attributes of an exclusion filter.
+      properties:
+        enabled:
+          $ref: "#/components/schemas/RumExclusionFilterEnabled"
+        event_type:
+          $ref: "#/components/schemas/RumExclusionFilterEventType"
+        name:
+          $ref: "#/components/schemas/RumExclusionFilterName"
+        query:
+          $ref: "#/components/schemas/RumExclusionFilterQuery"
+      type: object
+    RumExclusionFilterCreateAttributes:
+      description: The attributes of an exclusion filter to create.
+      properties:
+        enabled:
+          description: Whether the exclusion filter is active. Defaults to `true`.
+          example: true
+          type: boolean
+        event_type:
+          $ref: "#/components/schemas/RumExclusionFilterEventType"
+        name:
+          $ref: "#/components/schemas/RumExclusionFilterName"
+        query:
+          $ref: "#/components/schemas/RumExclusionFilterQuery"
+      required:
+        - name
+      type: object
+    RumExclusionFilterCreateData:
+      description: The new exclusion filter properties to create.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumExclusionFilterCreateAttributes"
+        type:
+          $ref: "#/components/schemas/RumExclusionFilterType"
+      required:
+        - type
+        - attributes
+      type: object
+    RumExclusionFilterCreateRequest:
+      description: The exclusion filter body to create.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumExclusionFilterCreateData"
+      required:
+        - data
+      type: object
+    RumExclusionFilterData:
+      description: An exclusion filter.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumExclusionFilterAttributes"
+        id:
+          description: The ID of the exclusion filter.
+          example: "051601eb-54a0-abc0-03f9-cc02efa18892"
+          type: string
+        meta:
+          $ref: "#/components/schemas/RumExclusionFilterMeta"
+        type:
+          $ref: "#/components/schemas/RumExclusionFilterType"
+      required:
+        - id
+        - type
+      type: object
+    RumExclusionFilterEnabled:
+      description: Whether the exclusion filter is active.
+      example: true
+      type: boolean
+    RumExclusionFilterEventType:
+      description: The type of RUM events to filter on.
+      enum:
+        - session
+        - view
+        - action
+        - error
+        - resource
+        - long_task
+        - vital
+      example: error
+      type: string
+      x-enum-varnames:
+        - SESSION
+        - VIEW
+        - ACTION
+        - ERROR
+        - RESOURCE
+        - LONG_TASK
+        - VITAL
+    RumExclusionFilterMeta:
+      description: Metadata about the exclusion filter.
+      properties:
+        enabled_at:
+          description: Unix epoch (in milliseconds) when the exclusion filter was last enabled.
+          example: 1735689600000
+          format: int64
+          type: integer
+        updated_at:
+          description: Unix epoch (in milliseconds) of the last update.
+          example: 1735689600000
+          format: int64
+          type: integer
+        updated_by_handle:
+          description: Handle of the user who last updated the exclusion filter.
+          example: jane.doe@example.com
+          type: string
+      type: object
+    RumExclusionFilterName:
+      description: The name of the exclusion filter.
+      example: Exclude noisy browser extension errors
+      type: string
+    RumExclusionFilterQuery:
+      description: |-
+        Additional query used to further restrict which RUM events are excluded.
+        Combined with `event_type` when both are provided.
+      example: "@error.message:*extension*"
+      type: string
+    RumExclusionFilterResponse:
+      description: An exclusion filter response body.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumExclusionFilterData"
+      type: object
+    RumExclusionFilterType:
+      default: exclusion_filters
+      description: The resource type. The value must be `exclusion_filters`.
+      enum:
+        - exclusion_filters
+      example: exclusion_filters
+      type: string
+      x-enum-varnames:
+        - EXCLUSION_FILTERS
+    RumExclusionFilterUpdateAttributes:
+      description: |-
+        The attributes of an exclusion filter that can be updated.
+        For the built-in Error Tracking exclusion filter, only `enabled` can be set;
+        `name`, `event_type`, and `query` must be omitted.
+      properties:
+        enabled:
+          $ref: "#/components/schemas/RumExclusionFilterEnabled"
+        event_type:
+          $ref: "#/components/schemas/RumExclusionFilterEventType"
+        name:
+          $ref: "#/components/schemas/RumExclusionFilterName"
+        query:
+          $ref: "#/components/schemas/RumExclusionFilterQuery"
+      type: object
+    RumExclusionFilterUpdateData:
+      description: The exclusion filter properties to update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumExclusionFilterUpdateAttributes"
+        id:
+          description: The ID of the exclusion filter. Must match the `ef_id` path parameter.
+          example: "051601eb-54a0-abc0-03f9-cc02efa18892"
+          type: string
+        type:
+          $ref: "#/components/schemas/RumExclusionFilterType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    RumExclusionFilterUpdateRequest:
+      description: The exclusion filter body to update.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumExclusionFilterUpdateData"
+      required:
+        - data
+      type: object
+    RumExclusionFiltersResponse:
+      description: All exclusion filters for a RUM application.
+      properties:
+        data:
+          description: A list of exclusion filters.
+          items:
+            $ref: "#/components/schemas/RumExclusionFilterData"
+          type: array
       type: object
     RumMetricCompute:
       description: The compute rule to compute the RUM-based metric.
@@ -184542,6 +184741,238 @@ paths:
         - Rum Retention Filters
       x-codegen-request-body-name: body
       x-menu-order: 3
+  /api/v2/rum/applications/{app_id}/retention_filters/exclusion:
+    get:
+      description: |-
+        Get the list of exclusion filters for a RUM application.
+        The built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`) is always returned first.
+      operationId: ListExclusionFilters
+      parameters:
+        - $ref: "#/components/parameters/RumExclusionFilterApplicationIDParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          enabled: true
+                          name: Ignored / Excluded errors from Error Tracking
+                        id: error_tracking_exclusion_filter
+                        meta:
+                          enabled_at: 1735689600000
+                          updated_at: 1735689600000
+                          updated_by_handle: jane.doe@example.com
+                        type: exclusion_filters
+                      - attributes:
+                          enabled: true
+                          event_type: error
+                          name: Exclude noisy browser extension errors
+                          query: "@error.message:*extension*"
+                        id: "051601eb-54a0-abc0-03f9-cc02efa18892"
+                        meta:
+                          enabled_at: 1735689600000
+                          updated_at: 1735689600000
+                          updated_by_handle: jane.doe@example.com
+                        type: exclusion_filters
+              schema:
+                $ref: "#/components/schemas/RumExclusionFiltersResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get all RUM exclusion filters
+      tags:
+        - Rum Retention Filters
+      x-menu-order: 10
+    post:
+      description: |-
+        Create an exclusion filter for a RUM application.
+        Returns the created exclusion filter when the request is successful.
+      operationId: CreateExclusionFilter
+      parameters:
+        - $ref: "#/components/parameters/RumExclusionFilterApplicationIDParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      enabled: true
+                      event_type: error
+                      name: Exclude noisy browser extension errors
+                      query: "@error.message:*extension*"
+                    type: exclusion_filters
+            schema:
+              $ref: "#/components/schemas/RumExclusionFilterCreateRequest"
+        description: The definition of the new RUM exclusion filter.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        enabled: true
+                        event_type: error
+                        name: Exclude noisy browser extension errors
+                        query: "@error.message:*extension*"
+                      id: "051601eb-54a0-abc0-03f9-cc02efa18892"
+                      meta:
+                        enabled_at: 1735689600000
+                        updated_at: 1735689600000
+                        updated_by_handle: jane.doe@example.com
+                      type: exclusion_filters
+              schema:
+                $ref: "#/components/schemas/RumExclusionFilterResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a RUM exclusion filter
+      tags:
+        - Rum Retention Filters
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+  /api/v2/rum/applications/{app_id}/retention_filters/exclusion/{ef_id}:
+    delete:
+      description: |-
+        Delete an exclusion filter for a RUM application.
+        The built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`) cannot be deleted;
+        attempting to do so returns a `405 Method Not Allowed` response.
+      operationId: DeleteExclusionFilter
+      parameters:
+        - $ref: "#/components/parameters/RumExclusionFilterApplicationIDParameter"
+        - $ref: "#/components/parameters/RumExclusionFilterIDParameter"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "405":
+          $ref: "#/components/responses/RumExclusionFilterMethodNotAllowedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a RUM exclusion filter
+      tags:
+        - Rum Retention Filters
+      x-menu-order: 14
+    get:
+      description: Get a single exclusion filter for a RUM application.
+      operationId: GetExclusionFilter
+      parameters:
+        - $ref: "#/components/parameters/RumExclusionFilterApplicationIDParameter"
+        - $ref: "#/components/parameters/RumExclusionFilterIDParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        enabled: true
+                        event_type: error
+                        name: Exclude noisy browser extension errors
+                        query: "@error.message:*extension*"
+                      id: "051601eb-54a0-abc0-03f9-cc02efa18892"
+                      meta:
+                        enabled_at: 1735689600000
+                        updated_at: 1735689600000
+                        updated_by_handle: jane.doe@example.com
+                      type: exclusion_filters
+              schema:
+                $ref: "#/components/schemas/RumExclusionFilterResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a RUM exclusion filter
+      tags:
+        - Rum Retention Filters
+      x-menu-order: 11
+    patch:
+      description: |-
+        Update an exclusion filter for a RUM application.
+        For the built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`), only `enabled` can be
+        updated; `name`, `event_type`, and `query` must be omitted.
+        Returns the updated exclusion filter when the request is successful.
+      operationId: UpdateExclusionFilter
+      parameters:
+        - $ref: "#/components/parameters/RumExclusionFilterApplicationIDParameter"
+        - $ref: "#/components/parameters/RumExclusionFilterIDParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      enabled: false
+                      event_type: error
+                      name: Exclude noisy browser extension errors
+                      query: "@error.message:*extension*"
+                    id: "051601eb-54a0-abc0-03f9-cc02efa18892"
+                    type: exclusion_filters
+            schema:
+              $ref: "#/components/schemas/RumExclusionFilterUpdateRequest"
+        description: New definition of the RUM exclusion filter.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        enabled: false
+                        event_type: error
+                        name: Exclude noisy browser extension errors
+                        query: "@error.message:*extension*"
+                      id: "051601eb-54a0-abc0-03f9-cc02efa18892"
+                      meta:
+                        enabled_at: 1735689600000
+                        updated_at: 1735689600000
+                        updated_by_handle: jane.doe@example.com
+                      type: exclusion_filters
+              schema:
+                $ref: "#/components/schemas/RumExclusionFilterResponse"
+          description: Updated
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "409":
+          $ref: "#/components/responses/ConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a RUM exclusion filter
+      tags:
+        - Rum Retention Filters
+      x-codegen-request-body-name: body
+      x-menu-order: 13
   /api/v2/rum/applications/{app_id}/retention_filters/permanent:
     get:
       description: |-

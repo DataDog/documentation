@@ -18902,6 +18902,66 @@ menu:
           - ListPermanentRetentionFilters
         unstable: []
         order: 7
+    - name: Update a RUM exclusion filter
+      url: /api/latest/rum-retention-filters/update-a-rum-exclusion-filter/
+      identifier: rum-retention-filters-update-a-rum-exclusion-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateExclusionFilter
+        unstable: []
+        order: 13
+    - name: Get a RUM exclusion filter
+      url: /api/latest/rum-retention-filters/get-a-rum-exclusion-filter/
+      identifier: rum-retention-filters-get-a-rum-exclusion-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetExclusionFilter
+        unstable: []
+        order: 11
+    - name: Delete a RUM exclusion filter
+      url: /api/latest/rum-retention-filters/delete-a-rum-exclusion-filter/
+      identifier: rum-retention-filters-delete-a-rum-exclusion-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteExclusionFilter
+        unstable: []
+        order: 14
+    - name: Create a RUM exclusion filter
+      url: /api/latest/rum-retention-filters/create-a-rum-exclusion-filter/
+      identifier: rum-retention-filters-create-a-rum-exclusion-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateExclusionFilter
+        unstable: []
+        order: 12
+    - name: Get all RUM exclusion filters
+      url: /api/latest/rum-retention-filters/get-all-rum-exclusion-filters/
+      identifier: rum-retention-filters-get-all-rum-exclusion-filters
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListExclusionFilters
+        unstable: []
+        order: 10
     - name: Create a RUM retention filter
       url: /api/latest/rum-retention-filters/create-a-rum-retention-filter/
       identifier: rum-retention-filters-create-a-rum-retention-filter

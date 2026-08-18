@@ -4967,6 +4967,30 @@
     "request_description": "The definition of the new RUM retention filter.",
     "request_schema_description": "The RUM retention filter body to create."
   },
+  "ListExclusionFilters": {
+    "description": "Get the list of exclusion filters for a RUM application.\nThe built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`) is always returned first.",
+    "summary": "Get all RUM exclusion filters"
+  },
+  "CreateExclusionFilter": {
+    "description": "Create an exclusion filter for a RUM application.\nReturns the created exclusion filter when the request is successful.",
+    "summary": "Create a RUM exclusion filter",
+    "request_description": "The definition of the new RUM exclusion filter.",
+    "request_schema_description": "The exclusion filter body to create."
+  },
+  "DeleteExclusionFilter": {
+    "description": "Delete an exclusion filter for a RUM application.\nThe built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`) cannot be deleted;\nattempting to do so returns a `405 Method Not Allowed` response.",
+    "summary": "Delete a RUM exclusion filter"
+  },
+  "GetExclusionFilter": {
+    "description": "Get a single exclusion filter for a RUM application.",
+    "summary": "Get a RUM exclusion filter"
+  },
+  "UpdateExclusionFilter": {
+    "description": "Update an exclusion filter for a RUM application.\nFor the built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`), only `enabled` can be\nupdated; `name`, `event_type`, and `query` must be omitted.\nReturns the updated exclusion filter when the request is successful.",
+    "summary": "Update a RUM exclusion filter",
+    "request_description": "New definition of the RUM exclusion filter.",
+    "request_schema_description": "The exclusion filter body to update."
+  },
   "ListPermanentRetentionFilters": {
     "description": "Get the list of permanent RUM retention filters for a RUM application.\nPermanent retention filters are predefined filters that cannot be created or deleted.\nFor each filter, the `editability` block indicates which cross-product fields can be updated.",
     "summary": "Get all permanent RUM retention filters"
