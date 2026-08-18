@@ -160,7 +160,7 @@ Once the resources are deleted, wait for five minutes for Datadog to recognize t
 
 ## Troubleshooting
 
-If you encounter issues while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][6]. If CloudWatch metrics stop appearing after Metric Streams has been running successfully, see [Persistent Firehose destination errors](#persistent-firehose-destination-errors) below.
+If you encounter issues while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][6]. If CloudWatch metrics stop appearing after Metric Streams has been running successfully, the problem may be Firehose destination errors.
 
 ### Persistent Firehose destination errors
 
@@ -178,13 +178,13 @@ To diagnose and restore delivery:
      --region <AWS_REGION>
    ```
 
-2. Review the [Firehose delivery error logs][9] in CloudWatch Logs. If delivery error logging is not enabled, enable it so future delivery errors are captured. Relevant errors include `HttpEndpoint.DestinationException` (such as HTTP 408 responses) and `S3.AccessDenied`.
+2. Review the [Firehose delivery error logs][9] in CloudWatch Logs. If delivery error logging is not enabled, enable it so you can capture future delivery errors. Relevant errors include `HttpEndpoint.DestinationException` (such as HTTP 408 responses) and `S3.AccessDenied`.
 3. Inspect the [Firehose CloudWatch metrics][10] in the CloudWatch console (Datadog may not show these metrics while delivery is interrupted). Check `DeliveryToHttpEndpoint.Success`, `DeliveryToHttpEndpoint.DataFreshness`, `DeliveryToHttpEndpoint.Records`, and `IncomingRecords`.
 4. If Firehose receives records but does not deliver them, verify the S3 backup configuration and IAM role:
    - Confirm that Firehose can assume the configured role and write to the backup bucket.
    - Check that the bucket policy, permissions boundary, service control policies (SCPs), and KMS key policy do not deny the required access.
 5. Check whether records are reaching S3 by looking in the backup bucket under the prefix configured in your Firehose delivery stream's S3 backup settings. If no objects are being written, it confirms a permissions or configuration issue with the S3 backup path. If the delivery error logs from step 2 show an S3 permissions error, correct it before continuing.
-6. Update the Firehose HTTP destination configuration using the Firehose [UpdateDestination API][11], for example by changing its retry duration. A configuration update like this can restart a stalled destination.
+6. Update the Firehose HTTP destination configuration using the Firehose [UpdateDestination API][11]; for example, by changing its retry duration. A configuration update like this can restart a stalled destination.
 
 If delivery does not recover, contact [Datadog Support][12] and provide:
    - The AWS account ID and region
