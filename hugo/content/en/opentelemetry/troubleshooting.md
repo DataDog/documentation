@@ -53,7 +53,7 @@ Alternatively, you can override the hostname using the `datadog.host.name` attri
              - set(attributes["datadog.host.name"], "${NODE_NAME}")
    ```
 
-For more information on host-identifying attributes, see [Mapping OpenTelemetry Semantic Conventions to Hostnames][2]. For the recommended configuration in each deployment topology, see [Hostname and Tagging][9].
+For more information on host-identifying attributes, see [Mapping OpenTelemetry Semantic Conventions to Hostnames][2]. For the recommended hostname configuration for your setup, see [Hostname and Tagging][9].
 
 ### Unexpected hostnames with AWS Fargate deployment
 
@@ -349,4 +349,4 @@ features:
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#readme
 [7]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor#readme
 [8]: https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainerID
-[9]: /opentelemetry/config/hostname_tagging/#recommendations-by-topology
+[9]: /opentelemetry/config/hostname_tagging/#hostname-recommendations

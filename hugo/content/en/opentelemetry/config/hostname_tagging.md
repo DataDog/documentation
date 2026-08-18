@@ -20,11 +20,11 @@ Datadog uses OpenTelemetry resource attributes to associate metrics, traces, and
 
 The recommended configuration depends on where your telemetry is collected relative to your workload. For the hostname resolution order and the full list of supported resource attributes, see [Mapping OpenTelemetry Semantic Conventions to Hostnames][8].
 
-## Recommendations by topology
+## Hostname recommendations
 
-Find your deployment topology in the following table, then follow the linked section. Topology matters more than which product you install.
+The right configuration depends on where telemetry is collected relative to the workload that produced it. Find your setup in the following table, then follow the linked section.
 
-| Topology | Recommendation |
+| How you collect telemetry | Recommendation |
 |---|---|
 | [Agent or DDOT Collector on the same host as your workload](#agent-or-ddot-collector-on-the-same-host-as-your-workload) | The Datadog Agent hostname is authoritative. Omit hostname attributes, or set them to match the Agent hostname. |
 | [Node-level Collector sending to a gateway](#node-level-collector-sending-to-a-gateway) | Detect host information in the node-level Collector and preserve those resource attributes through the gateway. |
@@ -33,7 +33,7 @@ Find your deployment topology in the following table, then follow the linked sec
 
 ### Agent or DDOT Collector on the same host as your workload
 
-This topology covers [OTLP ingestion by the Datadog Agent][11], the [DDOT Collector as a DaemonSet][9], the DDOT Collector on [Linux][14] and [Windows][15] hosts, and the DDOT Collector sidecar on [ECS Fargate][16] and [EKS Fargate][17].
+This applies to [OTLP ingestion by the Datadog Agent][11], the [DDOT Collector as a DaemonSet][9], the DDOT Collector on [Linux][14] and [Windows][15] hosts, and the DDOT Collector sidecar on [ECS Fargate][16] and [EKS Fargate][17].
 
 Deploy the Agent or DDOT Collector on every host that generates OTLP telemetry. Sending telemetry from one host to an Agent on another host is not supported.
 
@@ -53,7 +53,7 @@ The `infraattributes` processor needs resource attributes that identify the sour
 
 ### Node-level Collector sending to a gateway
 
-This topology covers gateway deployments of the OpenTelemetry Collector with the Datadog Exporter, and the [DDOT Collector as a gateway on Kubernetes][18].
+This applies to gateway deployments of the OpenTelemetry Collector with the Datadog Exporter, and the [DDOT Collector as a gateway on Kubernetes][18].
 
 In a gateway deployment, the Collector that exports to Datadog does not run on the host that produced the telemetry. If host information is not attached before the data reaches the gateway, telemetry from many hosts can collapse onto the gateway's hostname, or each Collector pod can register as its own host.
 
@@ -61,13 +61,13 @@ Detect host information in the node-level Collector, then configure the gateway 
 
 ### Collector on each host with the Datadog Exporter
 
-This topology covers the [OpenTelemetry Collector with the Datadog Exporter][20] running on each host or as a Kubernetes DaemonSet.
+This applies to the [OpenTelemetry Collector with the Datadog Exporter][20] running on each host or as a Kubernetes DaemonSet.
 
 Run a Collector on every host and add the `resourcedetection` processor with the detectors for your environment, as described in [Datadog Exporter configuration](#datadog-exporter-configuration).
 
 ### Direct OTLP intake without a host
 
-This topology covers [OTLP intake for serverless platforms][12], such as AWS Lambda, ECS Fargate, Azure Functions, and Cloud Run, and [OTLP intake for managed platforms][13].
+This applies to [OTLP intake for serverless platforms][12], such as AWS Lambda, ECS Fargate, Azure Functions, and Cloud Run, and [OTLP intake for managed platforms][13].
 
 These workloads have no host to identify. Set the cloud and platform resource attributes for your environment instead of relying on `host.name` for workload identification. Each platform requires a different set of attributes.
 

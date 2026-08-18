@@ -20,7 +20,7 @@ Use this option when you run workloads on a managed platform where installing a 
 
 <div class="alert alert-danger">Host metadata sent to managed platform endpoints does not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
 
-For hostname recommendations across OpenTelemetry deployment topologies, see [Hostname and Tagging][18].
+For hostname recommendations across OpenTelemetry setups, see [Hostname and Tagging][18].
 
 Each endpoint supports the following signal paths:
 
