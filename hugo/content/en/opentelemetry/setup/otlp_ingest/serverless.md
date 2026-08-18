@@ -40,6 +40,8 @@ The following configuration applies to all platforms.
 
 **Resource attributes**: Set platform-specific attributes with `OTEL_RESOURCE_ATTRIBUTES`. See each cloud provider tab below for required and optional attributes.
 
+Use the platform attributes on this page for workload identification instead of relying on `host.name`. For recommendations across other ingestion paths, see [Hostname and Tagging][6].
+
 ```shell
 export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"
 export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="{{< region-param key="otlp_trace_endpoint" >}}"
@@ -212,3 +214,4 @@ The GCP Resource Detector SDK automatically populates: `cloud.account.id`, `clou
 [3]: /opentelemetry/setup/otlp_ingest/logs/
 [4]: /opentelemetry/setup/otlp_ingest/metrics/
 [5]: /opentelemetry/setup/otlp_ingest/managed_platforms/
+[6]: /opentelemetry/config/hostname_tagging/#direct-otlp-intake-for-serverless-workloads

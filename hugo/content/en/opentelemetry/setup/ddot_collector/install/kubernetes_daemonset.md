@@ -694,6 +694,8 @@ service:
 {{% /tab %}}
 {{< /tabs >}}
 
+The `infraattributes` processor can also apply the Agent hostname to OTLP telemetry. See [Hostname and Tagging][58] for hostname recommendations and the Agent hostname override.
+
 #### Key components
 
 To send telemetry data to Datadog, the following components are defined in the configuration:
@@ -974,3 +976,4 @@ View metrics from the DDOT Collector to monitor the Collector health.
 [55]: /containers/datadog_operator
 [56]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [57]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog-operator/README.md
+[58]: /opentelemetry/config/hostname_tagging/#ddot-collector-on-kubernetes
