@@ -23,7 +23,7 @@ Investigating an incident requires trial and error. Drawing from their experienc
 Throughout most of Datadog, Watchdog returns two types of insights:
 
 - **Anomalies**: All the pre-calculated [Watchdog alerts][11] matching the active search query that Watchdog found by scanning your organization's data. Access the full list in the [Watchdog Alert explorer][12].
-- **Outliers**: Tags that appear too frequently in some event types (for example, errors) or drive some continuous metrics upwards (for example, latency).  Outliers are dynamically calculated on the data matching the active query and the time frame.
+- **Outliers**: Tags that appear too frequently in some event types (for example, errors) or drive some continuous metrics upwards (for example, latency). Outliers are dynamically calculated on the data matching the active query and the time frame.
 
 {{< img src="logs/explorer/watchdog_insights/insights-for-log-explorer.png" alt="The log explorer showing the Watchdog Insights banner with five log anomalies" style="width:100%;" >}}
 
@@ -68,14 +68,13 @@ To share a given outlier, click on it in the insight panel to open the details s
 
 The link to the outlier expires with the retention of the underlying data. For instance, if the logs used to build the outlier are retained for 15 days, the link to the outlier expires with the logs after 15 days.
 
-## Explore graph insights with Watchdog explains
-{{< img src="dashboards/graph_insights/watchdog_explains/graph_filter_tag.png" alt="Filter out the offending tag, in this case researcher-query, to compare the original against what the graph would look like without the offending tag" style="width:90%;" >}}
+## Explore graph insights with anomaly detection
 
-Datadog collects various types of data to provide insights into application performance, including metrics, traces, and logs, which tell you what, how, and why something is happening. Watchdog Explains analyzes high-level trends such as latency, error rates, or request count evolution to detect critical signals. Upon observing a spike in these graphs, Watchdog Explains helps you investigate the immediate questions:
+Datadog collects various types of data to provide insights into application performance, including metrics, traces, and logs, which tell you what, how, and why something is happening. On dashboards, Datadog detects anomalies on timeseries graphs, groups related anomalies into issues, and identifies the tags contributing most to each. This helps you investigate the immediate questions:
 - What is the source of the spike?
-- Does this anomaly affect everyone or is an isolated incident?
+- Does this anomaly affect everyone, or is it an isolated incident?
 
-For more information, see the [Watchdog Explains][14] documentation.
+For more information, see [Investigate Dashboard Anomalies][14].
 
 ## Outlier types
 
@@ -331,5 +330,5 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 [11]: /watchdog/#overview
 [12]: https://app.datadoghq.com/watchdog
 [13]: https://app.datadoghq.com/rum/error-tracking
-[14]: /dashboards/graph_insights/watchdog_explains
+[14]: /dashboards/graph_insights/investigate_anomalies
 [15]: https://app.datadoghq.com/synthetics/explorer

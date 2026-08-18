@@ -1,6 +1,6 @@
 ---
 title: Graph Insights
-description: Discover potential root causes using Metric Correlations and Watchdog Explains to analyze irregular metric behavior.
+description: Discover potential root causes using Metric Correlations and dashboard anomaly detection to analyze irregular metric behavior.
 disable_toc: false
 further_reading:
 - link: "/watchdog/insights/"
@@ -23,19 +23,21 @@ To target the search more effectively, Metric Correlations uses information abou
 
 For more information, see the [Metric Correlations][1] documentation.
 
-## Watchdog Explains
+## Anomaly detection and investigation
 
-<div class="alert alert-info">Watchdog Explains is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with the <strong>Metric</strong> data source.</div>
+<div class="alert alert-info">Anomaly detection is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with the <strong>Metric</strong> data source.</div>
 
-Datadog collects various types of data to provide insights into application performance, including metrics, traces, and logs, which tell you what, how, and why something is happening. Watchdog Explains analyzes high-level trends such as latency, error rates, or request count evolution to detect critical signals. Upon observing a spike in these graphs, Watchdog Explains helps you investigate the immediate questions:
+Datadog detects anomalies on the timeseries graphs of your dashboard and groups anomalies that occur together into issues. For each issue, it identifies the tags contributing most to the change, helping you answer the immediate questions:
 - What is the source of the spike?
-- Does this anomaly affect everyone or is an isolated incident?
+- Does this anomaly affect everyone, or is it an isolated incident?
 
-For more information, see the [Watchdog Explains][2] documentation.
+From there, you can delegate root cause analysis to Bits Investigation. This replaces Watchdog Explains, which analyzed one anomaly at a time.
+
+For more information, see [Investigate Dashboard Anomalies][2].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/graph_insights/correlations/
-[2]: /dashboards/graph_insights/watchdog_explains/
+[2]: /dashboards/graph_insights/investigate_anomalies/
