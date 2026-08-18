@@ -35,7 +35,7 @@ Read the OpenTelemetry instrumentation documentation to understand how to point 
 
 <div class="alert alert-warning">The supported setup is an ingesting Agent deployed on every OpenTelemetry-data generating host. You cannot send OpenTelemetry telemetry from collectors or instrumented apps running one host to an Agent on a different host. But, provided the Agent is local to the collector or SDK instrumented app, you can set up multiple pipelines.</div>
 
-For hostname recommendations across OpenTelemetry ingestion paths, see [Hostname and Tagging][11].
+For hostname recommendations across OpenTelemetry deployment topologies, see [Hostname and Tagging][11].
 
 ## Enabling OTLP Ingestion on the Datadog Agent
 
@@ -394,4 +394,4 @@ env:
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
 [6]: /agent/configuration/agent-configuration-files/
 [10]: /opentelemetry/runtime_metrics/
-[11]: /opentelemetry/config/hostname_tagging/#otlp-ingestion-by-the-datadog-agent
+[11]: /opentelemetry/config/hostname_tagging/#agent-or-ddot-collector-on-the-same-host-as-your-workload

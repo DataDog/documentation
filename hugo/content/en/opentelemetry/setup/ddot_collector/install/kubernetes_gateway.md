@@ -484,6 +484,8 @@ If you set <code>fullnameOverride</code>, the gateway's Kubernetes service name 
 
 The example configurations use insecure TLS for simplicity. Follow the [OTel configtls instructions][7] if you want to enable TLS.
 
+In a gateway deployment, host information must be attached before telemetry reaches the gateway. For the recommended hostname configuration, see [Hostname and Tagging][12].
+
 ### Advanced configuration options
 
 {{< tabs >}}
@@ -1371,3 +1373,4 @@ To view your gateway pods:
 [9]: http://github.com/kubernetes-sigs/metrics-server
 [10]: /containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/datadogextension
+[12]: /opentelemetry/config/hostname_tagging/#node-level-collector-sending-to-a-gateway
