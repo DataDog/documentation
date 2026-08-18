@@ -67,12 +67,12 @@ To add specific tag overrides for this metric:
 
 The Tag Cardinality Control processor supports two modes for tracking tag cardinality:
 
-- **exact**: Stores tag values as an 8-byte hash to optimize memory usage, at the cost of an extremely small chance of two distinct values being hashed to the same fingerprint.
-- **probabilistic**: Uses [bloom filters][2] to track seen values, which can heavily optimize memory usage at the cost of occasional false positives. A false positive occurs when a value that has not been seen yet is incorrectly determined to have been seen, causing the processor to slightly exceed the specified cardinality limit.
+- **Exact**: Stores tag values as an 8-byte hash to optimize memory usage, at the cost of an extremely small chance of two distinct values being hashed to the same fingerprint.
+- **Probabilistic**: Uses [bloom filters][2] to track seen values, which can heavily optimize memory usage at the cost of occasional false positives. A false positive occurs when a value that has not been seen yet is incorrectly determined to have been seen, causing the processor to slightly exceed the specified cardinality limit.
 
-#### Memory usage for `exact` mode
+#### Memory usage for exact mode
 
-The following formula calculates how much memory `exact` mode uses:
+The following formula calculates how much memory exact mode uses:
 
 $$A = \text"total number of metrics"\ \×\ \text"average number of tag keys per metric"$$
 
@@ -101,7 +101,7 @@ You can calculate `cache_size_per_key` with a Bloom Filter Calculator using a st
 
 ### Benchmarks for exact mode versus probabilistic mode
 
-The following tables show benchmarks for `exact` mode and `probabilistic` mode. As the number of unique values for each tag increases, `probabilistic` mode becomes more memory-efficient. The metric names and tag names used for these benchmarks were randomly generated 20-byte strings.
+The following tables show benchmarks for exact mode and probabilistic mode. As the number of unique values for each tag increases, probabilistic mode becomes more memory-efficient. The metric names and tag names used for these benchmarks were randomly generated 20-byte strings.
 
 The machine type used for benchmarking is an AWS M6gd.4xlarge instance.
 
