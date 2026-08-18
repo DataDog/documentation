@@ -28,7 +28,7 @@ To get started with RUM for .NET MAUI, create an application and configure the .
   {{< nextlink href="/real_user_monitoring/application_monitoring/maui/error_tracking">}}<u>Crash Reporting</u>: Add crash reporting, get deobfuscated stack traces, then test your implementation.{{< /nextlink>}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/maui/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/maui/data_collected">}}<u>Data Collected</u>: Review data that the RUM .NET MAUI SDK collects.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/maui/mobile_vitals">}}<u>Mobile Vitals</u>: View mobile vitals, which help compute insights about your mobile application.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=maui">}}<u>Track UI Latency</u>: View mobile vitals, which help compute insights about your mobile application.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/maui/frustration_signals">}}<u>Frustration Signals</u>: Identify the highest points of user friction in your .NET MAUI application.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/maui/troubleshooting">}}<u>Troubleshooting</u>: Common troubleshooting .NET MAUI SDK issues.{{< /nextlink >}}
 {{< /whatsnext >}}

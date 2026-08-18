@@ -1614,7 +1614,7 @@ The `service` and `version` tags representing each micro frontend can also be fo
 - `rum.measure.operation.duration`
 
 [1]: /real_user_monitoring/application_monitoring/browser/data_collected/
-[2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
+[2]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
 [4]: /real_user_monitoring/application_monitoring/browser/setup/
 [5]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130

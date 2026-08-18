@@ -253,7 +253,7 @@ Alerts from your Synthetic test monitors appear on the timeline in the [{{< ui >
 [3]: https://web.dev/cls/
 [4]: https://web.dev/fid/
 [5]: /real_user_monitoring/
-[6]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[6]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#core-web-vitals
 [7]: /tracing/trace_explorer/trace_view/
 [8]: /synthetics/settings/?tab=specifyvalue#apm-integration-for-browser-tests
 [9]: /synthetics/browser_tests/advanced_options/?tab=requestoptions#user-specified-locator

@@ -10,9 +10,6 @@ fun onHeroImageLoaded() {
 
 To [create a measure][1] from a custom timing in the RUM Explorer, use the `@view.custom_timings.<timing_name>` attribute.
 
-View loading time, Time to Network Settled, and Interaction to Next View aren't available for the Kotlin Multiplatform SDK yet.
-
-For additional mobile performance metrics, see [Mobile Vitals][2].
+View loading time, Time to Network Settled, Interaction to Next View, and mobile vitals aren't available for the Kotlin Multiplatform SDK yet.
 
 [1]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
-[2]: /real_user_monitoring/application_monitoring/mobile_vitals/

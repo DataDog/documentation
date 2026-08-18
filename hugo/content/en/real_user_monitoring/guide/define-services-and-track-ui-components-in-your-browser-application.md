@@ -129,10 +129,10 @@ Components are tracked using custom vitals [mentioned above][10]:
 [1]: /real_user_monitoring/explorer/
 [2]: /real_user_monitoring/application_monitoring/browser/setup/
 [3]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
-[4]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-metrics
-[5]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#add-your-own-performance-timing
-[6]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#overview
-[7]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#measure-component-level-performance-with-custom-vitals
+[4]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#all-performance-telemetry
+[5]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#track-additional-performance-timings
+[6]: /real_user_monitoring/explorer/
+[7]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#measure-component-level-performance-with-custom-vitals
 [8]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [9]: /real_user_monitoring/guide/upload-javascript-source-maps/?tabs=webpackjs#upload-your-source-maps
 [10]: #track-components-in-web-pages

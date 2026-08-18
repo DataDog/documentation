@@ -289,9 +289,9 @@ You must have edit access to restore general access to a restricted application.
 [4]: /monitors/types/real_user_monitoring/
 [5]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [6]: /real_user_monitoring/error_tracking/
-[7]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[8]: /real_user_monitoring/application_monitoring/ios/mobile_vitals/
-[9]: /real_user_monitoring/application_monitoring/android/mobile_vitals/
+[7]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#core-web-vitals
+[8]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=ios#mobile-vitals
+[9]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#mobile-vitals
 [10]: /real_user_monitoring/application_monitoring/ios/web_view_tracking/
 [11]: /real_user_monitoring/application_monitoring/android/web_view_tracking/
 [12]: /session_replay/browser/
