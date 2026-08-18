@@ -56803,6 +56803,139 @@ components:
           example: "my-gcp-project"
           type: string
       type: object
+    LLMObsDataDeletionRequest:
+      description: Request to delete LLM Observability data.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsDataDeletionRequestData"
+      required:
+        - data
+      type: object
+    LLMObsDataDeletionRequestAttributes:
+      description: Attributes for an LLM Observability data deletion request.
+      properties:
+        delay:
+          description: Optional delay in seconds before the deletion is executed.
+          example: 0
+          format: int64
+          type: integer
+        from:
+          description: Start of the deletion time range in milliseconds since Unix epoch.
+          example: 1705314600000
+          format: int64
+          type: integer
+        query:
+          additionalProperties:
+            type: string
+          description: Query filters selecting the data to delete. Must include a `query` key with an `@trace_id` filter.
+          example:
+            query: "@trace_id:abc123def456"
+          type: object
+        to:
+          description: End of the deletion time range in milliseconds since Unix epoch.
+          example: 1705315200000
+          format: int64
+          type: integer
+      required:
+        - query
+        - from
+        - to
+      type: object
+    LLMObsDataDeletionRequestData:
+      description: Data object for an LLM Observability data deletion request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsDataDeletionRequestAttributes"
+        type:
+          $ref: "#/components/schemas/LLMObsDataDeletionRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    LLMObsDataDeletionRequestType:
+      description: Resource type for an LLM Observability data deletion request.
+      enum:
+        - create_deletion_req
+      example: create_deletion_req
+      type: string
+      x-enum-varnames:
+        - CREATE_DELETION_REQ
+    LLMObsDataDeletionResponse:
+      description: Response containing details of a submitted LLM Observability data deletion request.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsDataDeletionResponseData"
+      required:
+        - data
+      type: object
+    LLMObsDataDeletionResponseAttributes:
+      description: Attributes of a submitted LLM Observability data deletion request.
+      properties:
+        created_at:
+          description: Timestamp when the deletion request was created.
+          example: "2024-01-15T10:30:00Z"
+          format: date-time
+          type: string
+        created_by:
+          description: UUID of the user who created the deletion request.
+          example: "user-uuid-1234"
+          type: string
+        from_time:
+          description: Start of the deletion time range in milliseconds since Unix epoch.
+          example: 1705314600000
+          format: int64
+          type: integer
+        org_id:
+          description: ID of the organization that submitted the deletion request.
+          example: 12345
+          format: int64
+          type: integer
+        product:
+          description: Product name for the deletion request.
+          example: "llmobs"
+          type: string
+        query:
+          description: The query string used to select data for deletion.
+          example: "@trace_id:abc123def456"
+          type: string
+        to_time:
+          description: End of the deletion time range in milliseconds since Unix epoch.
+          example: 1705315200000
+          format: int64
+          type: integer
+      required:
+        - org_id
+        - product
+        - created_at
+        - created_by
+        - from_time
+        - to_time
+        - query
+      type: object
+    LLMObsDataDeletionResponseData:
+      description: Data object for an LLM Observability data deletion response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsDataDeletionResponseAttributes"
+        id:
+          description: Unique identifier of the deletion request.
+          example: "msg-abc123"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsDataDeletionResponseType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    LLMObsDataDeletionResponseType:
+      description: Resource type for an LLM Observability data deletion response.
+      enum:
+        - deletion_request
+      example: deletion_request
+      type: string
+      x-enum-varnames:
+        - DELETION_REQUEST
     LLMObsDatasetBatchUpdateDataAttributesRequest:
       description: Attributes for batch-updating records in an LLM Observability dataset.
       properties:
@@ -121445,7 +121578,7 @@ paths:
       summary: List custom evaluator configurations
       tags:
         - LLM Observability
-      x-menu-order: 72
+      x-menu-order: 73
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -160004,6 +160137,78 @@ paths:
         operator: OR
         permissions:
           - org_management
+  /api/v2/llm-obs/deletion/data/llmobs:
+    post:
+      description: Submit a request to delete LLM Observability span data matching a trace ID filter within a specified time range.
+      operationId: DeleteLLMObsData
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      from: 1705314600000
+                      query:
+                        query: "@trace_id:abc123def456"
+                      to: 1705315200000
+                    type: create_deletion_req
+            schema:
+              $ref: "#/components/schemas/LLMObsDataDeletionRequest"
+        description: Data deletion request payload.
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-15T10:30:00Z"
+                        created_by: "user-uuid-1234"
+                        from_time: 1705314600000
+                        org_id: 12345
+                        product: llmobs
+                        query: "@trace_id:abc123def456"
+                        to_time: 1705315200000
+                      id: msg-abc123
+                      type: deletion_request
+              schema:
+                $ref: "#/components/schemas/LLMObsDataDeletionResponse"
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Delete LLM Observability data
+      tags:
+        - LLM Observability
+      x-menu-order: 36
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/annotated-interactions:
     get:
       description: |-
@@ -160102,7 +160307,7 @@ paths:
       summary: Get annotated interactions by content IDs
       tags:
         - LLM Observability
-      x-menu-order: 39
+      x-menu-order: 40
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -160879,7 +161084,7 @@ paths:
       summary: Get annotation queue label schema
       tags:
         - LLM Observability
-      x-menu-order: 51
+      x-menu-order: 52
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -161025,7 +161230,7 @@ paths:
       summary: Update annotation queue label schema
       tags:
         - LLM Observability
-      x-menu-order: 52
+      x-menu-order: 53
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -161736,7 +161941,7 @@ paths:
       summary: List LLM Observability experiment spans (v1)
       tags:
         - LLM Observability
-      x-menu-order: 49
+      x-menu-order: 50
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -161861,7 +162066,7 @@ paths:
       summary: List LLM integration accounts
       tags:
         - LLM Observability
-      x-menu-order: 36
+      x-menu-order: 37
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -161946,7 +162151,7 @@ paths:
       summary: Run an LLM inference
       tags:
         - LLM Observability
-      x-menu-order: 38
+      x-menu-order: 39
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -162004,7 +162209,7 @@ paths:
       summary: List LLM integration models
       tags:
         - LLM Observability
-      x-menu-order: 37
+      x-menu-order: 38
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -162343,7 +162548,7 @@ paths:
       summary: List LLM Observability prompts
       tags:
         - LLM Observability
-      x-menu-order: 63
+      x-menu-order: 64
       x-permission:
         operator: OR
         permissions:
@@ -162431,7 +162636,7 @@ paths:
       summary: Create an LLM Observability prompt
       tags:
         - LLM Observability
-      x-menu-order: 64
+      x-menu-order: 65
       x-permission:
         operator: AND
         permissions:
@@ -162492,7 +162697,7 @@ paths:
       summary: Delete an LLM Observability prompt
       tags:
         - LLM Observability
-      x-menu-order: 67
+      x-menu-order: 68
       x-permission:
         operator: AND
         permissions:
@@ -162558,7 +162763,7 @@ paths:
       summary: Get an LLM Observability prompt
       tags:
         - LLM Observability
-      x-menu-order: 65
+      x-menu-order: 66
       x-permission:
         operator: OR
         permissions:
@@ -162642,7 +162847,7 @@ paths:
       summary: Update an LLM Observability prompt
       tags:
         - LLM Observability
-      x-menu-order: 66
+      x-menu-order: 67
       x-permission:
         operator: AND
         permissions:
@@ -162712,7 +162917,7 @@ paths:
       summary: List versions of an LLM Observability prompt
       tags:
         - LLM Observability
-      x-menu-order: 68
+      x-menu-order: 69
       x-permission:
         operator: OR
         permissions:
@@ -162802,7 +163007,7 @@ paths:
       summary: Create a new LLM Observability prompt version
       tags:
         - LLM Observability
-      x-menu-order: 69
+      x-menu-order: 70
       x-permission:
         operator: AND
         permissions:
@@ -162879,7 +163084,7 @@ paths:
       summary: Get a specific LLM Observability prompt version
       tags:
         - LLM Observability
-      x-menu-order: 70
+      x-menu-order: 71
       x-permission:
         operator: OR
         permissions:
@@ -162966,7 +163171,7 @@ paths:
       summary: Update a specific LLM Observability prompt version
       tags:
         - LLM Observability
-      x-menu-order: 71
+      x-menu-order: 72
       x-permission:
         operator: AND
         permissions:
@@ -163303,7 +163508,7 @@ paths:
       summary: List patterns clustered points
       tags:
         - LLM Observability
-      x-menu-order: 59
+      x-menu-order: 60
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163367,7 +163572,7 @@ paths:
       summary: List patterns configurations
       tags:
         - LLM Observability
-      x-menu-order: 62
+      x-menu-order: 63
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163452,7 +163657,7 @@ paths:
       summary: Create or update a patterns configuration
       tags:
         - LLM Observability
-      x-menu-order: 53
+      x-menu-order: 54
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163520,7 +163725,7 @@ paths:
       summary: Get a patterns configuration
       tags:
         - LLM Observability
-      x-menu-order: 61
+      x-menu-order: 62
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163571,7 +163776,7 @@ paths:
       summary: Delete a patterns configuration
       tags:
         - LLM Observability
-      x-menu-order: 54
+      x-menu-order: 55
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163638,7 +163843,7 @@ paths:
       summary: List patterns runs
       tags:
         - LLM Observability
-      x-menu-order: 57
+      x-menu-order: 58
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163714,7 +163919,7 @@ paths:
       summary: Trigger a patterns run
       tags:
         - LLM Observability
-      x-menu-order: 55
+      x-menu-order: 56
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163788,7 +163993,7 @@ paths:
       summary: Get patterns run status
       tags:
         - LLM Observability
-      x-menu-order: 56
+      x-menu-order: 57
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163869,7 +164074,7 @@ paths:
       summary: List patterns topics
       tags:
         - LLM Observability
-      x-menu-order: 58
+      x-menu-order: 59
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163962,7 +164167,7 @@ paths:
       summary: List patterns topics with clustered points
       tags:
         - LLM Observability
-      x-menu-order: 60
+      x-menu-order: 61
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -164390,7 +164595,7 @@ paths:
       summary: Batch update LLM Observability dataset records
       tags:
         - LLM Observability
-      x-menu-order: 45
+      x-menu-order: 46
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -164487,7 +164692,7 @@ paths:
       summary: Clone an LLM Observability dataset
       tags:
         - LLM Observability
-      x-menu-order: 46
+      x-menu-order: 47
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -164568,7 +164773,7 @@ paths:
       summary: Get LLM Observability dataset draft state
       tags:
         - LLM Observability
-      x-menu-order: 40
+      x-menu-order: 41
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -164649,7 +164854,7 @@ paths:
       summary: Lock LLM Observability dataset draft state
       tags:
         - LLM Observability
-      x-menu-order: 41
+      x-menu-order: 42
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -164713,7 +164918,7 @@ paths:
       summary: Unlock LLM Observability dataset draft state
       tags:
         - LLM Observability
-      x-menu-order: 42
+      x-menu-order: 43
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -164796,7 +165001,7 @@ paths:
       summary: Export an LLM Observability dataset
       tags:
         - LLM Observability
-      x-menu-order: 44
+      x-menu-order: 45
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -165189,7 +165394,7 @@ paths:
       summary: Restore an LLM Observability dataset version
       tags:
         - LLM Observability
-      x-menu-order: 47
+      x-menu-order: 48
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -165273,7 +165478,7 @@ paths:
       summary: List LLM Observability dataset versions
       tags:
         - LLM Observability
-      x-menu-order: 43
+      x-menu-order: 44
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -165348,7 +165553,7 @@ paths:
       summary: List LLM Observability experiment events (v2)
       tags:
         - LLM Observability
-      x-menu-order: 50
+      x-menu-order: 51
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -165454,7 +165659,7 @@ paths:
       summary: Upload records to an LLM Observability dataset
       tags:
         - LLM Observability
-      x-menu-order: 48
+      x-menu-order: 49
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
