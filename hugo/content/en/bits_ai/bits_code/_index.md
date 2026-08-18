@@ -52,12 +52,15 @@ Click a session to view its details and continue working with Bits Code. To remo
 
 ## Supported source code providers
 Bits Code supports the following source code providers:
-- **GitHub**: GitHub.com and [GitHub Enterprise Cloud][30]
-- **GitLab**: GitLab.com
+- **GitHub**: GitHub.com and [GitHub Enterprise Cloud][30], including *.ghe.com, *.github.com domains.
+- **GitLab**: GitLab.com and GitLab Self-Managed.
 
 The following plans are not supported:
-- **Self-hosted plans**, such as GitHub Enterprise Server and GitLab Self-Managed.
-- **Cloud-hosted plans on dedicated domains**, such as [GitHub Enterprise Cloud with data residency][31] and [GitLab Dedicated][32]. Bits Code supports only providers on the standard GitHub.com and GitLab.com domains.
+- **Self-hosted GithHub Enterpise**: Custom domains are not supported.
+- **Cloud-hosted GitHub on dedicated domains**: such as [GitHub Enterprise Cloud with data residency][31] when using a custom domain name.
+- **Azure Dev Ops**
+- **BitBucket**
+
 
 ## Supported Datadog products
 
