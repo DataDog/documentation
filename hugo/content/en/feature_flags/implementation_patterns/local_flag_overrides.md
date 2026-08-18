@@ -8,6 +8,9 @@ further_reading:
 - link: "/feature_flags/client/javascript/"
   tag: "Documentation"
   text: "JavaScript Feature Flags"
+- link: "/feature_flags/browser_developer_extension/"
+  tag: "Documentation"
+  text: "Browser Developer Extension"
 - link: "https://openfeature.dev/specification/appendix-a/#multi-provider"
   tag: "OpenFeature"
   text: "Multi-Provider Specification"
@@ -27,6 +30,8 @@ Typical use cases include:
 - Demos and support workflows where a teammate needs a predictable variant on demand
 
 <div class="alert alert-warning">Use local overrides only in non-production environments. Restrict or disable this pattern in production builds so end users cannot change flag behavior through local configuration.</div>
+
+If your application runs in the browser, the **Feature Flags** tab in the [Datadog Browser SDK developer extension][3] provides the same local override behavior through a Chrome DevTools panel, without the provider composition described on this page.
 
 ## How local flag overrides work
 
@@ -389,3 +394,4 @@ const isEnabled = await client.getBooleanValue('checkout_new', false, {
 
 [1]: https://openfeature.dev/specification/appendix-a/#multi-provider
 [2]: https://openfeature.dev/specification/appendix-a/#first-match-strategy
+[3]: /feature_flags/browser_developer_extension/

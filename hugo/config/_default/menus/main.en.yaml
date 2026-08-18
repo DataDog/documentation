@@ -6558,16 +6558,21 @@ menu:
       parent: feature_flags_implementation_patterns
       identifier: feature_flags_implementation_patterns_serverless
       weight: 502
+    - name: Browser Developer Extension
+      url: feature_flags/browser_developer_extension
+      parent: feature_flags
+      identifier: feature_flags_browser_developer_extension
+      weight: 6
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
       identifier: feature_flags_mcp_server
-      weight: 6
+      weight: 7
     - name: Guides
       url: feature_flags/guide
       parent: feature_flags
       identifier: feature_flags_guide
-      weight: 7
+      weight: 8
     - name: Source Code Integration
       url: source_code/
       pre: dev-code
