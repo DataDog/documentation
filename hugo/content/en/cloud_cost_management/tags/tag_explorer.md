@@ -27,6 +27,7 @@ further_reading:
 
 Use the [Tag Explorer][2] to understand the sources and view descriptions for each tag. This includes tags managed through [Tag Pipelines][3]. Tag Pipelines allow you to create and manage tag rules that fix missing or incorrect tags on your cloud bill, or create inferred tags according to your business logic.
 
+<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
 {{< img src="cloud_cost/tag_explorer/dropdown_1.png" alt="Search through the list of Azure cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 ## Setup
@@ -50,6 +51,7 @@ Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Analyze{{< /ui >}} > {{
 
 For AWS tags, select {{< ui >}}AWS{{< /ui >}} from the dropdown menu on the top right corner.
 
+<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
 {{< img src="cloud_cost/tag_explorer/aws_1.png" alt="Search through the list of AWS cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
@@ -57,6 +59,7 @@ For AWS tags, select {{< ui >}}AWS{{< /ui >}} from the dropdown menu on the top 
 
 For Azure tags, select {{< ui >}}Azure{{< /ui >}} from the dropdown menu on the top right corner.
 
+<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
 {{< img src="cloud_cost/tag_explorer/azure_1.png" alt="Search through the list of Azure cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
@@ -64,6 +67,7 @@ For Azure tags, select {{< ui >}}Azure{{< /ui >}} from the dropdown menu on the 
 
 For Google Cloud tags, select {{< ui >}}Google{{< /ui >}} from the dropdown menu on the top right corner.
 
+<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
 {{< img src="cloud_cost/tag_explorer/google_1.png" alt="Search through the list of Google Cloud cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
@@ -73,6 +77,7 @@ For Google Cloud tags, select {{< ui >}}Google{{< /ui >}} from the dropdown menu
 
 For Datadog tags, select {{< ui >}}Datadog{{< /ui >}} from the dropdown menu on the top right corner.
 
+<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
 {{< img src="cloud_cost/tag_explorer/datadog_1.png" alt="Search through the list of your Datadog cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
@@ -82,6 +87,7 @@ For Datadog tags, select {{< ui >}}Datadog{{< /ui >}} from the dropdown menu on 
 
 For Confluent Cloud tags, select {{< ui >}}Confluent Cloud{{< /ui >}} from the dropdown menu on the top right corner.
 
+<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
 {{< img src="cloud_cost/tag_explorer/confluent_cloud_1.png" alt="Search through the list of your Confluent Cloud cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
@@ -91,6 +97,7 @@ For Confluent Cloud tags, select {{< ui >}}Confluent Cloud{{< /ui >}} from the d
 
 For Databricks tags, select {{< ui >}}Databricks{{< /ui >}} from the dropdown menu on the top right corner.
 
+<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
 {{< img src="cloud_cost/tag_explorer/databricks_1.png" alt="Search through the list of your Databricks cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
@@ -100,6 +107,7 @@ For Databricks tags, select {{< ui >}}Databricks{{< /ui >}} from the dropdown me
 
 For Fastly tags, select {{< ui >}}Fastly{{< /ui >}} from the dropdown menu on the top right corner.
 
+<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
 {{< img src="cloud_cost/tag_explorer/fastly_1.png" alt="Search through the list of your Fastly cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
@@ -109,6 +117,7 @@ For Fastly tags, select {{< ui >}}Fastly{{< /ui >}} from the dropdown menu on th
 
 For Elastic Cloud tags, select {{< ui >}}Elastic Cloud{{< /ui >}} from the dropdown menu on the top right corner.
 
+<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
 {{< img src="cloud_cost/tag_explorer/elastic_cloud.png" alt="Search through the list of your Elastic Cloud cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
@@ -118,6 +127,7 @@ For Elastic Cloud tags, select {{< ui >}}Elastic Cloud{{< /ui >}} from the dropd
 
 For MongoDB tags, select {{< ui >}}MongoDB{{< /ui >}} from the dropdown menu on the top right corner.
 
+<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
 {{< img src="cloud_cost/tag_explorer/mongodb_1.png" alt="Search through the list of your MongoDB cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
@@ -127,6 +137,7 @@ For MongoDB tags, select {{< ui >}}MongoDB{{< /ui >}} from the dropdown menu on 
 
 For OpenAI tags, select {{< ui >}}OpenAI{{< /ui >}} from the dropdown menu on the top right corner.
 
+<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
 {{< img src="cloud_cost/tag_explorer/openai_1.png" alt="Search through the list of your OpenAI cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
@@ -136,6 +147,7 @@ For OpenAI tags, select {{< ui >}}OpenAI{{< /ui >}} from the dropdown menu on th
 
 For Snowflake tags, select {{< ui >}}Snowflake{{< /ui >}} from the dropdown menu on the top right corner.
 
+<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
 {{< img src="cloud_cost/tag_explorer/snowflake_1.png" alt="Search through the list of your Snowflake cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
@@ -145,6 +157,7 @@ For Snowflake tags, select {{< ui >}}Snowflake{{< /ui >}} from the dropdown menu
 
 For Twilio tags, select {{< ui >}}Twilio{{< /ui >}} from the dropdown menu on the top right corner.
 
+<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
 {{< img src="cloud_cost/tag_explorer/twilio_1.png" alt="Search through the list of your Twilio cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
 
 {{% /tab %}}
