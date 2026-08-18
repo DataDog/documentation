@@ -5679,31 +5679,6 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations
       weight: 60101
-    - name: Connect Your LLM Provider
-      url: llm_observability/configure/evaluations/llm_as_a_judge_evaluations/connect_to_account
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_connect_to_account
-      weight: 6010101
-    - name: Template Evaluations
-      url: llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_template
-      weight: 6010102
-    - name: Session-Level Evaluations
-      url: llm_observability/configure/evaluations/llm_as_a_judge_evaluations/session_level_evaluations
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_session_level
-      weight: 6010103
-    - name: Trace-Level Evaluations
-      url: llm_observability/configure/evaluations/llm_as_a_judge_evaluations/trace_level_evaluations
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_trace_level
-      weight: 6010104
-    - name: Prompt Templating
-      url: llm_observability/configure/evaluations/llm_as_a_judge_evaluations/prompt_templating
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_prompt_templating
-      weight: 6010105
     - name: Language Mismatch
       url: llm_observability/configure/evaluations/language_mismatch
       parent: llm_obs_evaluations
@@ -5714,11 +5689,6 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_end_user_feedback
       weight: 60104
-    - name: Developer Guide
-      url: llm_observability/configure/evaluations/evaluation_developer_guide
-      parent: llm_obs_evaluations
-      identifier: llm_obs_evaluation_developer_guide
-      weight: 60105
     - name: Compatibility
       url: llm_observability/configure/evaluations/compatibility
       parent: llm_obs_evaluations
@@ -5729,21 +5699,6 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
       weight: 60107
-    - name: NeMo
-      url: llm_observability/configure/evaluations/external_evaluations/nemo
-      parent: llm_obs_external_evaluations
-      identifier: llm_obs_submit_nemo_evaluations
-      weight: 6010701
-    - name: DeepEval Evaluations
-      url: llm_observability/configure/evaluations/external_evaluations/deepeval
-      parent: llm_obs_external_evaluations
-      identifier: llm_obs_deepeval_evaluations
-      weight: 6010702
-    - name: Pydantic Evaluations
-      url: llm_observability/configure/evaluations/external_evaluations/pydantic
-      parent: llm_obs_external_evaluations
-      identifier: llm_obs_pydantic_evaluations
-      weight: 6010703
     - name: Prompt Management
       url: llm_observability/configure/prompt_management
       parent: llm_obs_configure
