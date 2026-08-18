@@ -139,7 +139,7 @@ To convert a string timestamp to timestamp format:
 
 For [component metrics][10] and [processor buffer metrics][11] emitted by all processors, see the [Pipelines Usage Metrics][12] documentation.
 
-### Generate Metrics metrics
+### Generate Metrics processor metrics
 
 - Use the `component_id` tag to filter or group by individual components.
 - The `component_type` tag is `generate_metrics` for this processor's metrics.
