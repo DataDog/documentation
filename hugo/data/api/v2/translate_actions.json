@@ -1540,6 +1540,12 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "ValidateDashboardWidgets": {
+    "description": "Validate dashboard widgets without creating or updating a dashboard.",
+    "summary": "Validate dashboard widgets",
+    "request_description": "",
+    "request_schema_description": "Request containing dashboard widgets and their layout context."
+  },
   "ListSharedDashboardsByDashboardId": {
     "description": "Retrieve shared dashboards associated with the specified dashboard.",
     "summary": "List shared dashboards for a dashboard"

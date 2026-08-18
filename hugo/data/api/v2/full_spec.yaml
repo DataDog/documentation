@@ -30765,6 +30765,94 @@ components:
           example: Jane Doe
           type: string
       type: object
+    DashboardWidgetValidationLayoutType:
+      description: Layout type used to apply dashboard-specific widget layout validation.
+      enum:
+        - ordered
+        - free
+      example: ordered
+      type: string
+      x-enum-varnames:
+        - ORDERED
+        - FREE
+    DashboardWidgetValidationReflowType:
+      description: Reflow behavior used for an ordered dashboard.
+      enum:
+        - auto
+        - fixed
+      example: auto
+      type: string
+      x-enum-varnames:
+        - AUTO
+        - FIXED
+    DashboardWidgetValidationRequest:
+      description: Request containing dashboard widgets and their layout context.
+      properties:
+        layout_type:
+          $ref: "#/components/schemas/DashboardWidgetValidationLayoutType"
+        reflow_type:
+          $ref: "#/components/schemas/DashboardWidgetValidationReflowType"
+          nullable: true
+        widgets:
+          description: Dashboard widgets to validate.
+          example:
+            - definition:
+                content: Valid note
+                type: note
+          items:
+            $ref: "#/components/schemas/DashboardWidgetValidationWidget"
+          type: array
+      required:
+        - widgets
+        - layout_type
+      type: object
+    DashboardWidgetValidationResponse:
+      description: Ordered validation results corresponding to the requested widgets.
+      properties:
+        results:
+          description: Validation results in the same order as the requested widgets.
+          items:
+            $ref: "#/components/schemas/DashboardWidgetValidationResult"
+          type: array
+      required:
+        - results
+      type: object
+    DashboardWidgetValidationResult:
+      description: Validation result for one dashboard widget.
+      properties:
+        error_message:
+          description: Validation error message, when the widget is invalid.
+          example: Invalid widget definition at position 0 of type timeseries.
+          nullable: true
+          type: string
+        error_path:
+          description: Path to the invalid value, when available.
+          example: "['requests', 0, 'display_type']"
+          nullable: true
+          type: string
+        is_valid:
+          description: Whether the widget passed validation.
+          example: false
+          type: boolean
+        widget_type:
+          description: Type of the validated widget, when available.
+          example: timeseries
+          nullable: true
+          type: string
+      required:
+        - is_valid
+        - widget_type
+        - error_message
+        - error_path
+      type: object
+    DashboardWidgetValidationWidget:
+      additionalProperties: {}
+      description: A dashboard widget to validate.
+      example:
+        definition:
+          content: Valid note
+          type: note
+      type: object
     DataAttributesRulesItemsIfTagExists:
       description: The behavior when the tag already exists.
       enum:
@@ -140050,6 +140138,79 @@ paths:
         - Dashboard Lists
       x-codegen-request-body-name: body
       x-menu-order: 3
+  /api/v2/dashboard/widgets/validate:
+    post:
+      description: Validate dashboard widgets without creating or updating a dashboard.
+      operationId: ValidateDashboardWidgets
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  layout_type: ordered
+                  widgets:
+                    - definition:
+                        content: Valid note
+                        type: note
+            schema:
+              $ref: "#/components/schemas/DashboardWidgetValidationRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    results:
+                      - error_message:
+                        error_path:
+                        is_valid: true
+                        widget_type: note
+              schema:
+                $ref: "#/components/schemas/DashboardWidgetValidationResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Unprocessable Entity
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - dashboards_read
+        - AuthZ:
+            - dashboards_write
+      summary: Validate dashboard widgets
+      tags:
+        - Dashboards
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - dashboards_read
+          - dashboards_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/dashboard/{dashboard_id}/shared:
     get:
       description: Retrieve shared dashboards associated with the specified dashboard.
