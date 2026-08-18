@@ -1,5 +1,6 @@
 ---
 title: Grok Parser Processor
+description: "Learn how to use the Grok Parser processor to generate parsing rules that structure custom or non-standard logs."
 disable_toc: false
 products:
 - name: Logs

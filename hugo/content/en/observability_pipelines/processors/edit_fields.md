@@ -1,5 +1,6 @@
 ---
 title: Edit Fields Processor
+description: "Learn how to use the Edit Fields processor to add, drop, or rename fields in your log data."
 disable_toc: false
 further_reading:
 - link: "/observability_pipelines/guide/remap_reserved_attributes/"

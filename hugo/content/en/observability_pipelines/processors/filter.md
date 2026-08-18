@@ -1,5 +1,6 @@
 ---
 title: Filter Processor
+description: "Learn how to use the Filter processor to send only logs, metrics, or traces that match a filter query to the next step in the pipeline."
 disable_toc: false
 further_reading:
 - link: "/getting_started/search/"

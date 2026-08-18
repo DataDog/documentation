@@ -1,5 +1,6 @@
 ---
 title: Add Hostname Processor
+description: "Learn how to use the Add Hostname processor to add a field with the name of the host that sent the log."
 disable_toc: false
 products:
 - name: Logs

@@ -1,5 +1,6 @@
 ---
 title: Aggregate Processor
+description: "Learn how to use the Aggregate processor to combine multiple metrics with the same tag values into a single sample."
 disable_toc: false
 products:
 - name: Metrics

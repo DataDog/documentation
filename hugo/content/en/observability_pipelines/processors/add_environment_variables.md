@@ -1,5 +1,6 @@
 ---
 title: Add Environment Variables Processor
+description: "Learn how to use the Add Environment Variables processor to add an environment variable name and value to log messages."
 disable_toc: false
 products:
 - name: Logs

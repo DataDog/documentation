@@ -1,5 +1,6 @@
 ---
 title: Sensitive Data Scanner Processor
+description: "Learn how to use the Sensitive Data Scanner processor to detect and redact or hash sensitive information such as PII and PCI data in logs or traces."
 disable_toc: false
 further_reading:
 - link: "/logs/guide/regex_log_parsing/"

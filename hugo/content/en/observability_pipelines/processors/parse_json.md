@@ -1,5 +1,6 @@
 ---
 title: Parse JSON Processor
+description: "Learn how to use the Parse JSON processor to parse a specified JSON field into objects."
 disable_toc: false
 products:
 - name: Logs

@@ -1,5 +1,6 @@
 ---
 title: Tag Cardinality Control Processor
+description: "Learn how to use the Tag Cardinality Control processor to limit the number of tag values for each metric."
 disable_toc: false
 products:
 - name: Metrics
