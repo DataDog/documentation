@@ -818,7 +818,7 @@ You can change a recommendation status in three ways:
 - **From the side panel**: Click a recommendation to open the side panel, then use the status dropdown to select a new status.
 
 ## Recommendation action-taking
-You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking option:
+You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Work Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking option:
 
 - **Jira**: Create Jira issues directly from the recommendation side panel or by selecting multiple recommendations in the {{< ui >}}Active Recommendations{{< /ui >}} list and clicking {{< ui >}}Create Jira issue{{< /ui >}}. Created issues are tagged and link back to the recommendation in Datadog.
 

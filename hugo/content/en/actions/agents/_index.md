@@ -16,16 +16,16 @@ further_reading:
   text: "AI Credits"
 - link: "/incident_response/case_management/ai/custom_agents/"
   tag: "Documentation"
-  text: "Case Management Integration with Bits Agent Builder"
+  text: "Work Management Integration with Bits Agent Builder"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Case Management integration is in Preview" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Work Management integration is in Preview" >}}
 Automatically assign custom agents to work on your Cases.
 {{< /callout >}}
 
 ## Overview
 
-Bits Agent Builder lets you create custom AI agents that use Datadog's tools and integrations to automate operational tasks. Agents can search logs, query metrics, create cases, send messages, or perform any action from the [Action Catalog][7].
+Bits Agent Builder lets you create custom AI agents that use Datadog's tools and integrations to automate operational tasks. Agents can search logs, query metrics, create work items, send messages, or perform any action from the [Action Catalog][7].
 
 Use agents to handle work that's too complex for static automation but too repetitive for humans. For example, triaging errors, responding to incidents, analyzing trends, and escalating issues.
 
