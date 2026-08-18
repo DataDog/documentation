@@ -15,6 +15,8 @@ products:
 
 For logs coming from the Datadog Agent, use this processor to exclude or include specific tags in the Datadog tags (`ddtags`) array. Tags that are excluded or not included are dropped and may reduce your outbound log volume.
 
+**Note**: This processor only keeps or drops tags that already exist in the `ddtags` array. It does not add new tags or attributes to a log. To add a new attribute to a log, use the [Edit Fields][3] processor.
+
 ## Setup
 
 To set up the processor:
@@ -27,3 +29,4 @@ To set up the processor:
 
 [1]: /getting_started/tagging/#define-tags
 [2]: /observability_pipelines/search_syntax/logs/
+[3]: /observability_pipelines/processors/edit_fields/
