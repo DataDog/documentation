@@ -5,6 +5,25 @@ content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options
     label: "SDK"
+aliases:
+  - /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
+  - /real_user_monitoring/browser/monitoring_page_performance/
+  - /real_user_monitoring/application_monitoring/android/monitoring_app_performance/
+  - /real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance
+  - /real_user_monitoring/application_monitoring/ios/monitoring_app_performance/
+  - /real_user_monitoring/mobile_and_tv_monitoring/ios/monitoring_app_performance
+  - /real_user_monitoring/application_monitoring/mobile_vitals/
+  - /real_user_monitoring/android/mobile_vitals
+  - /real_user_monitoring/ios/mobile_vitals
+  - /real_user_monitoring/flutter/mobile_vitals
+  - /real_user_monitoring/reactnative/mobile_vitals
+  - /real_user_monitoring/application_monitoring/android/mobile_vitals/
+  - /real_user_monitoring/application_monitoring/ios/mobile_vitals/
+  - /real_user_monitoring/application_monitoring/flutter/mobile_vitals/
+  - /real_user_monitoring/application_monitoring/kotlin_multiplatform/mobile_vitals/
+  - /real_user_monitoring/application_monitoring/react_native/mobile_vitals/
+  - /real_user_monitoring/application_monitoring/unity/mobile_vitals/
+  - /real_user_monitoring/application_monitoring/maui/mobile_vitals/
 ---
 
 ## Overview
@@ -48,7 +67,7 @@ RUM measures how fast your UI responds, from page and view loading to user inter
 
 <!-- .NET MAUI -->
 {% if equals($platform, "maui") %}
-{% partial file="sdk/track_ui_latency/unavailable.mdoc.md" /%}
+{% partial file="sdk/track_ui_latency/maui.mdoc.md" /%}
 {% /if %}
 
 <!-- Roku -->

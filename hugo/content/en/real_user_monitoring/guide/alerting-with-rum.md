@@ -93,8 +93,8 @@ This example monitor warns when INP exceeds 200 milliseconds and alerts when INP
 [7]: /real_user_monitoring/explorer/export/
 [8]: /monitors/notify/
 [9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
-[10]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-metrics
-[11]: /real_user_monitoring/application_monitoring/android/mobile_vitals/
+[10]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#all-performance-telemetry
+[11]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#mobile-vitals
 [12]: https://app.datadoghq.com/rum/performance-monitoring
 [13]: /real_user_monitoring/rum_without_limits/metrics
 [14]: /real_user_monitoring/explorer/events/

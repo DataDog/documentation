@@ -9416,11 +9416,6 @@ menu:
       parent: rum_browser
       identifier: rum_data_collected
       weight: 104
-    - name: Monitoring Page Performance
-      url: real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
-      parent: rum_browser
-      identifier: page_performance
-      weight: 105
     - name: Optimizing Performance
       url: real_user_monitoring/application_monitoring/browser/optimizing_performance/
       parent: rum_browser
@@ -9476,11 +9471,6 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_application_launch_monitoring
       weight: 103
-    - name: Monitoring App Performance
-      url: real_user_monitoring/application_monitoring/android/monitoring_app_performance
-      parent: rum_mobile_android
-      identifier: rum_mobile_android_monitoring_app_performance
-      weight: 104
     - name: Advanced Configuration
       url: real_user_monitoring/application_monitoring/android/advanced_configuration
       parent: rum_mobile_android
@@ -9491,11 +9481,6 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_data_collected
       weight: 106
-    - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/android/mobile_vitals
-      parent: rum_mobile_android
-      identifier: rum_mobile_android_mobile_vitals
-      weight: 107
     - name: Frustration Signals
       url: real_user_monitoring/application_monitoring/android/frustration_signals
       parent: rum_mobile_android
@@ -9546,11 +9531,6 @@ menu:
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_application_launch_monitoring
       weight: 103
-    - name: Mobile App Performance
-      url: real_user_monitoring/application_monitoring/ios/monitoring_app_performance
-      parent: rum_mobile_ios
-      identifier: rum_mobile_ios_monitoring_app_performance
-      weight: 104
     - name: Advanced Configuration
       url: real_user_monitoring/application_monitoring/ios/advanced_configuration
       parent: rum_mobile_ios
@@ -9561,11 +9541,6 @@ menu:
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_data_collected
       weight: 106
-    - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/ios/mobile_vitals?tab=ios
-      parent: rum_mobile_ios
-      identifier: rum_mobile_ios_mobile_vitals
-      weight: 107
     - name: Frustration Signals
       url: real_user_monitoring/application_monitoring/ios/frustration_signals
       parent: rum_mobile_ios
@@ -9621,11 +9596,6 @@ menu:
       parent: rum_mobile_flutter
       identifier: rum_mobile_flutter_data_collected
       weight: 104
-    - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/flutter/mobile_vitals?tab=flutter
-      parent: rum_mobile_flutter
-      identifier: rum_mobile_flutter_mobile_vitals
-      weight: 105
     - name: Frustration Signals
       url: real_user_monitoring/application_monitoring/flutter/frustration_signals
       parent: rum_mobile_flutter
@@ -9671,11 +9641,6 @@ menu:
       parent: rum_mobile_kotlin
       identifier: rum_mobile_kotlin_data_collected
       weight: 104
-    - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/kotlin_multiplatform/mobile_vitals
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_mobile_vitals
-      weight: 105
     - name: Frustration Signals
       url: real_user_monitoring/application_monitoring/kotlin_multiplatform/frustration_signals
       parent: rum_mobile_kotlin
@@ -9721,11 +9686,6 @@ menu:
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_data_collected
       weight: 104
-    - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/react_native/mobile_vitals?tab=reactnative
-      parent: rum_mobile_react_native
-      identifier: rum_mobile_react_mobile_vitals
-      weight: 105
     - name: Frustration Signals
       url: real_user_monitoring/application_monitoring/react_native/frustration_signals
       parent: rum_mobile_react_native
@@ -9841,11 +9801,6 @@ menu:
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_data_collected
       weight: 104
-    - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/unity/mobile_vitals?tab=unity
-      parent: rum_mobile_unity
-      identifier: rum_mobile_unity_mobile_vitals
-      weight: 105
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/unity/troubleshooting
       parent: rum_mobile_unity
@@ -9876,11 +9831,6 @@ menu:
       parent: rum_mobile_maui
       identifier: rum_mobile_maui_data_collected
       weight: 104
-    - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/maui/mobile_vitals
-      parent: rum_mobile_maui
-      identifier: rum_mobile_maui_mobile_vitals
-      weight: 105
     - name: Frustration Signals
       url: real_user_monitoring/application_monitoring/maui/frustration_signals
       parent: rum_mobile_maui
