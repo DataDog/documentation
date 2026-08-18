@@ -13,7 +13,7 @@ further_reading:
   text: "Manage incidents seamlessly with the Datadog integration for Slack"
 - link: "https://www.datadoghq.com/blog/datadog-incident-response-ai-features/"
   tag: "Blog"
-  text: "Accelerate investigations with AI in Datadog Incident Response | Datadog"
+  text: "Accelerate investigations with AI in Datadog Incident Response"
 - link: "https://app.datadoghq.com/integrations/slack"
   tag: "App"
   text: "In-app Slack integration tile"

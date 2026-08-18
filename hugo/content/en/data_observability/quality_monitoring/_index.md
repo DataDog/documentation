@@ -18,7 +18,7 @@ further_reading:
     text: 'CI/CD'
   - link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
     tag: "Blog"
-    text: "Data pipeline monitoring 101: Tracking health and performance across the data stack | Datadog"
+    text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
 ---
 
 ## Overview

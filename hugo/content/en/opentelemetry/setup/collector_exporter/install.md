@@ -16,7 +16,7 @@ further_reading:
   text: "Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using Datadog Exporter"
 - link: "https://www.datadoghq.com/blog/native-otel-with-datadog/"
   tag: "Blog"
-  text: "Use OpenTelemetry-native observability with Datadog from ingestion to investigation | Datadog"
+  text: "Use OpenTelemetry-native observability with Datadog from ingestion to investigation"
 - link: "https://opentelemetry.io/docs/collector/"
   tag: "External Site"
   text: "Collector documentation"

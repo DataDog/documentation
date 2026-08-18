@@ -13,7 +13,7 @@ further_reading:
   text: "Tracking errors with RUM for JavaScript Web Applications"
 - link: "https://www.datadoghq.com/blog/a-practical-guide-to-react-error-monitoring/"
   tag: "Blog"
-  text: "A practical guide to React error monitoring | Datadog"
+  text: "A practical guide to React error monitoring"
 - link: 'https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps'
   tag: 'Source Code'
   text: 'Sourcemaps command reference'

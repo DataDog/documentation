@@ -4,7 +4,7 @@ description: Instrument your applications with Datadog using the AI Setup CLI or
 further_reading:
 - link: "https://www.datadoghq.com/blog/serverless-agentic-onboarding/"
   tag: "Blog"
-  text: "Instrument serverless apps with agentic onboarding | Datadog"
+  text: "Instrument serverless apps with agentic onboarding"
 ---
 
 ## Overview

@@ -4,7 +4,7 @@ description: How to set up Agent Observability Experiments and start running exp
 further_reading:
 - link: "https://www.datadoghq.com/blog/debug-and-evaluate-your-ai-app-from-your-coding-agent/"
   tag: "Blog"
-  text: "Debug and evaluate your AI app from your coding agent with Datadog Agent Observability | Datadog"
+  text: "Debug and evaluate your AI app from your coding agent with Datadog Agent Observability"
 ---
 
 This page describes how to set up and use Agent Observability Experiments with the Python SDK.

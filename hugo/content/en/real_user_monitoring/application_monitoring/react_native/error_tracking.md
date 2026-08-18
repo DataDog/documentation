@@ -15,7 +15,7 @@ further_reading:
   text: Datadog now offers React Native Crash Reporting and Error Tracking
 - link: "https://www.datadoghq.com/blog/a-practical-guide-to-react-error-monitoring/"
   tag: "Blog"
-  text: "A practical guide to React error monitoring | Datadog"
+  text: "A practical guide to React error monitoring"
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: "Source Code"
   text: dd-sdk-reactnative Source code

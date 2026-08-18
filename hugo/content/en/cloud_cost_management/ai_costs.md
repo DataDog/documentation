@@ -31,10 +31,10 @@ further_reading:
   text: "Attribute AI costs across providers with Datadog Cloud Cost Management"
 - link: "https://www.datadoghq.com/blog/making-agentic-token-costs-visible-in-production/"
   tag: "Blog"
-  text: "Making agentic token costs visible in production | Datadog"
+  text: "Making agentic token costs visible in production"
 - link: "https://www.datadoghq.com/blog/cloud-cost-skill-bits-chat/"
   tag: "Blog"
-  text: "Answer any cost question faster with the Cloud Cost skill in Bits Chat | Datadog"
+  text: "Answer any cost question faster with the Cloud Cost skill in Bits Chat"
 ---
 
 

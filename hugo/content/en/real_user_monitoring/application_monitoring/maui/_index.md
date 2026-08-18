@@ -10,7 +10,7 @@ further_reading:
   text: Explore Datadog RUM
 - link: "https://www.datadoghq.com/blog/monitor-dotnet-maui-apps-datadog-rum/"
   tag: "Blog"
-  text: "Monitor your .NET MAUI apps with Datadog RUM | Datadog"
+  text: "Monitor your .NET MAUI apps with Datadog RUM"
 - link: https://github.com/DataDog/dd-sdk-maui
   tag: "Source Code"
   text: Source code for dd-sdk-maui

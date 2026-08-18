@@ -19,7 +19,7 @@ further_reading:
   text: "Budgets"
 - link: "https://www.datadoghq.com/blog/cloud-cost-skill-bits-chat/"
   tag: "Blog"
-  text: "Answer any cost question faster with the Cloud Cost skill in Bits Chat | Datadog"
+  text: "Answer any cost question faster with the Cloud Cost skill in Bits Chat"
 ---
 
 ## Overview

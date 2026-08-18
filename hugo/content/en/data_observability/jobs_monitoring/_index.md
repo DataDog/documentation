@@ -18,7 +18,7 @@ further_reading:
     text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
   - link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
     tag: "Blog"
-    text: "Data pipeline monitoring 101: Tracking health and performance across the data stack | Datadog"
+    text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
 ---
 
 {{< img src="data_jobs/overview_052026.png" alt="Datadog Data Observability: Jobs Monitoring overview page" style="width:100%;" >}}

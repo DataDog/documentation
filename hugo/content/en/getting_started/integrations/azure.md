@@ -16,7 +16,7 @@ further_reading:
       text: 'Accelerate your Azure integration setup with guided onboarding'
     - link: "https://www.datadoghq.com/blog/azure-secretless-authentication/"
       tag: "Blog"
-      text: "Avoid Azure secret rotation with secretless authentication | Datadog"
+      text: "Avoid Azure secret rotation with secretless authentication"
 ---
 
 ## Overview

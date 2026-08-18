@@ -20,7 +20,7 @@ further_reading:
       text: "Create Custom Spans and Span Tags with APM"
     - link: "https://www.datadoghq.com/blog/choosing-apm-instrumentation/"
       tag: "Blog"
-      text: "From zero to traces: Choosing the right APM instrumentation method for your stack | Datadog"
+      text: "From zero to traces: Choosing the right APM instrumentation method for your stack"
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'
     - link: 'tracing/connect_logs_and_traces'

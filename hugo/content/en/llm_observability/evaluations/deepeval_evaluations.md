@@ -7,7 +7,7 @@ further_reading:
   text: "Submit Evaluations"
 - link: "https://www.datadoghq.com/blog/using-evaluation-frameworks-with-agent-observability/"
   tag: "Blog"
-  text: "Using Evaluation Frameworks with Agent Observability | Datadog"
+  text: "Using Evaluation Frameworks with Agent Observability"
 ---
 
 ## Overview

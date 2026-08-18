@@ -18,7 +18,7 @@ further_reading:
   text: 'A practical guide to error handling in Go'
 - link: "https://www.datadoghq.com/blog/a-practical-guide-to-react-error-monitoring/"
   tag: "Blog"
-  text: "A practical guide to React error monitoring | Datadog"
+  text: "A practical guide to React error monitoring"
 ---
 
 ## Overview

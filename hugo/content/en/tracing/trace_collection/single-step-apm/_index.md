@@ -31,7 +31,7 @@ further_reading:
     text: "Manage service tracing across hosts with Single Step Instrumentation rules"
   - link: "https://www.datadoghq.com/blog/choosing-apm-instrumentation/"
     tag: "Blog"
-    text: "From zero to traces: Choosing the right APM instrumentation method for your stack | Datadog"
+    text: "From zero to traces: Choosing the right APM instrumentation method for your stack"
 ---
 ## Overview
 

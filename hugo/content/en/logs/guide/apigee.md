@@ -12,7 +12,7 @@ further_reading:
   text: 'Log Management'
 - link: "https://www.datadoghq.com/blog/monitor-apigee-x-api-traffic-and-security-with-datadog/"
   tag: "Blog"
-  text: "Monitor Apigee X API traffic and security with Datadog | Datadog"
+  text: "Monitor Apigee X API traffic and security with Datadog"
 - link: 'https://docs.apigee.com/api-platform/reference/policies/javascript-policy'
   tag: 'Apigee'
   text: 'Apigee JavaScript Policy'

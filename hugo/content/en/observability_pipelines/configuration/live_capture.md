@@ -9,10 +9,10 @@ further_reading:
   text: "Set up pipelines"
 - link: "https://www.datadoghq.com/blog/observability-pipelines-google-secops/"
   tag: "Blog"
-  text: "Normalize security logs to Google SecOps UDM with Observability Pipelines | Datadog"
+  text: "Normalize security logs to Google SecOps UDM with Observability Pipelines"
 - link: "https://www.datadoghq.com/blog/mitre-attack-enrichment-packs-observability-pipelines/"
   tag: "Blog"
-  text: "Automatically enrich security logs with MITRE ATT&CK context before they reach your SIEM | Datadog"
+  text: "Automatically enrich security logs with MITRE ATT&CK context before they reach your SIEM"
 products:
 - name: Logs
   icon: logs

@@ -35,7 +35,7 @@ further_reading:
   text: 'Visually replay user-facing issues with Zendesk and Datadog Session Replay'
 - link: "https://www.datadoghq.com/blog/session-replay-investigate-collaborate/"
   tag: "Blog"
-  text: "Find, analyze, and collaborate on user sessions in Datadog Session Replay | Datadog"
+  text: "Find, analyze, and collaborate on user sessions in Datadog Session Replay"
 
 ---
 
