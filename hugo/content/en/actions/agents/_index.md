@@ -8,15 +8,18 @@ further_reading:
 - link: "/actions/workflows/"
   tag: "Documentation"
   text: "Workflow Automation"
-- link: "https://www.datadoghq.com/knowledge-center/aiops/ai-agents/"
-  tag: "Knowledge Center"
-  text: "What are AI agents and how do they work?"
 - link: "/account_management/billing/ai_credits/"
   tag: "Documentation"
   text: "AI Credits"
 - link: "/incident_response/case_management/ai/custom_agents/"
   tag: "Documentation"
   text: "Work Management Integration with Bits Agent Builder"
+- link: "https://www.datadoghq.com/knowledge-center/aiops/ai-agents/"
+  tag: "Knowledge Center"
+  text: "What are AI agents and how do they work?"
+- link: "https://www.datadoghq.com/blog/bits-agent-builder/"
+  tag: "Blog"
+  text: "Introducing Bits Agent Builder: Build agentic workflows for alert response and remediation"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Work Management integration is in Preview" >}}
