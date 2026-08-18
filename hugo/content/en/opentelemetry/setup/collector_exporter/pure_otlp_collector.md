@@ -168,7 +168,7 @@ exporters:
     endpoint: https://otlp.${env:DD_SITE}
     headers:
       dd-api-key: ${env:DD_API_KEY}
-      # Map resource attributes and instrumentation scope metadata to Datadog metrics tags
+      # Map resource attributes and instrumentation scope metadata to Datadog metric tags
       dd-otel-metric-config: >-
         {
         "resource_attributes_as_tags": true,
