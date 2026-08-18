@@ -7,7 +7,7 @@ description: Learn more about the Exabeam - Cisco ASA pack.
 
 {{< img src="observability_pipelines/packs/exabeam_cisco_asa.png" alt="The Exabeam - Cisco ASA pack" style="width:25%;" >}}
 
-Cisco ASA firewall logs sent to Exabeam, filtered by ASA code to drop non-actionable syslog noise.
+This pack processes Cisco ASA firewall logs sent to Exabeam and filters by ASA code to drop non-actionable syslog noise.
 
 What this pack does:
 

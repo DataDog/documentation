@@ -7,7 +7,7 @@ description: Learn more about the Amazon Connect pack.
 
 {{< img src="observability_pipelines/packs/amazon_connect.png" alt="The Amazon Connect pack" style="width:25%;" >}}
 
-Extracts contact and agent signals from Amazon Connect logs, flagging abandoned calls and fraud risk.
+This pack extracts contact and agent signals from Amazon Connect logs, flagging abandoned calls and fraud risk.
 
 What this pack does:
 

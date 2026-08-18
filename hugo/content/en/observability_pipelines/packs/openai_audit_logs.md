@@ -7,7 +7,7 @@ description: Learn more about the OpenAI - Audit Logs pack.
 
 {{< img src="observability_pipelines/packs/openai_audit_logs.png" alt="The OpenAI - Audit Logs pack" style="width:25%;" >}}
 
-Flags failed logins, new API keys, and privilege changes from OpenAI organization audit logs.
+This pack flags failed logins, new API keys, and privilege changes from OpenAI organization audit logs.
 
 What this pack does:
 

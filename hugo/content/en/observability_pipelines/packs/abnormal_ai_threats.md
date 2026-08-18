@@ -7,7 +7,7 @@ description: Learn more about the Abnormal.ai - Threats pack.
 
 {{< img src="observability_pipelines/packs/abnormal_ai_threats.png" alt="The Abnormal.ai - Threats pack" style="width:25%;" >}}
 
-Flags unremediated high-risk email threats like BEC, extortion, and credential phishing targeting VIPs.
+This pack flags unremediated high-risk email threats like business email compromise (BEC), extortion, and credential phishing targeting VIPs.
 
 What this pack does:
 

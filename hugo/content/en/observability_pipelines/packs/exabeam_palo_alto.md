@@ -7,7 +7,7 @@ description: Learn more about the Exabeam - Palo Alto pack.
 
 {{< img src="observability_pipelines/packs/exabeam_palo_alto.png" alt="The Exabeam - Palo Alto pack" style="width:25%;" >}}
 
-PAN-OS syslog sent to Exabeam, with empty and duplicate-start traffic logs filtered, raw CSV untouched.
+This pack processes PAN-OS syslog sent to Exabeam and filters empty and duplicate-start traffic logs, leaving raw CSV untouched.
 
 What this pack does:
 

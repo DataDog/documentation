@@ -7,7 +7,7 @@ description: Learn more about the Abnormal.ai - Audit Logs pack.
 
 {{< img src="observability_pipelines/packs/abnormal_ai_audit_logs.png" alt="The Abnormal.ai - Audit Logs pack" style="width:25%;" >}}
 
-Flags failed admin actions and mass remediation events from the Abnormal.ai portal audit trail.
+This pack flags failed admin actions and mass remediation events from the Abnormal.ai portal audit trail.
 
 What this pack does:
 

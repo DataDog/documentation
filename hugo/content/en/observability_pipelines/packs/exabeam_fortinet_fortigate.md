@@ -7,7 +7,7 @@ description: Learn more about the Exabeam - Fortinet FortiGate pack.
 
 {{< img src="observability_pipelines/packs/exabeam_fortinet_fortigate.png" alt="The Exabeam - Fortinet FortiGate pack" style="width:25%;" >}}
 
-FortiGate firewall logs sent to Exabeam, with routine traffic and health-check noise filtered out.
+This pack processes FortiGate firewall logs sent to Exabeam and filters out routine traffic and health-check noise.
 
 What this pack does:
 

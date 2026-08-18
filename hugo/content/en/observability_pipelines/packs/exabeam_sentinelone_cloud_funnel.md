@@ -7,7 +7,7 @@ description: Learn more about the Exabeam - SentinelOne Cloud Funnel pack.
 
 {{< img src="observability_pipelines/packs/exabeam_sentinelone_cloud_funnel.png" alt="The Exabeam - SentinelOne Cloud Funnel pack" style="width:25%;" >}}
 
-SentinelOne EDR events sent to Exabeam, sampled on high-volume event types to reduce ingest costs.
+This pack processes SentinelOne EDR events sent to Exabeam and samples high-volume event types to reduce ingest costs.
 
 What this pack does:
 
