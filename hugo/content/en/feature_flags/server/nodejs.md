@@ -29,7 +29,7 @@ further_reading:
 
 This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management. Starting in `dd-trace` 5.116.0 and 6.5.0, it loads flag configuration directly from the Datadog-managed CDN by default.
 
-<div class="alert alert-warning">Node.js 5.116.0 and 6.5.0 support agentless configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
+Agentless delivery changes only the flag configuration source. Node.js sends experiment exposure events through a supported local Event Platform Proxy (EVP) relay. It does not emit EVP flag evaluation events.
 
 ## Getting started
 
@@ -307,7 +307,7 @@ Use [Server SDK Configuration Sources][6] as the canonical reference for source 
 - [Use Agent Remote Configuration][10] to retain Agent-managed delivery
 - [Migrate an existing Remote Configuration setup][8] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
 
-The initial Node.js agentless releases do not support `feature_flag.evaluations`, exposure logging, or experimentation use cases. The [Server-Side Flag Evaluation Metrics][4] guide applies only to supported Agent-backed configurations. For more information on available graphing, see [Feature Flag Graphs][5].
+For no-Agent serverless environments, use [`serverless-init`][11] to egress experiment exposure events. The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Server-Side Flag Evaluation Metrics][4] guide. For more information on available graphing, see [Feature Flag Graphs][5].
 
 ## Testing
 
@@ -383,3 +383,4 @@ The snippet above uses Vitest for its first-class ESM support. The same pattern 
 [8]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
 [9]: /feature_flags/concepts/configuration_sources/#configure-agentless-delivery
 [10]: /feature_flags/concepts/configuration_sources/#use-agent-remote-configuration
+[11]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry-with-serverless-init

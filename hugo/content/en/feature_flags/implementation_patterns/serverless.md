@@ -35,7 +35,7 @@ Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. The Java runtim
 
 Other server SDKs and versions earlier than those listed require Agent Remote Configuration for flag delivery.
 
-<div class="alert alert-warning">The initial Node.js agentless releases load configuration and evaluate flags locally. They do not export evaluation metrics or exposure events. Java and Python agentless delivery change only the configuration source. Java and Python do not export these signals without a supported Datadog Agent or serverless telemetry path.</div>
+Agentless delivery changes only the flag configuration source. Telemetry egress uses a separate connection to a supported Datadog Agent or serverless telemetry relay.
 
 ## Agentless architecture
 
@@ -58,6 +58,43 @@ The SDK polls the Datadog-managed CDN every 30 seconds by default and uses ETags
 Tracer installation and initialization alone do not start CDN polling. Requests to the CDN contribute to server Feature Flags billing only after application code activates the provider.
 
 Agentless mode removes the Datadog Agent dependency for _flag configuration_. It does not remove language-specific tracer requirements. It also does not configure or enable APM and serverless telemetry. You can use the Datadog Lambda Extension, `serverless-init`, an Agent sidecar, or another supported telemetry path independently.
+
+## Send feature flag telemetry with serverless-init
+
+`serverless-init` is a local telemetry relay. It is not a Feature Flags configuration source. Keep the default `agentless` source to load configuration from the CDN.
+
+Do not use `serverless-init` as a replacement for the Datadog Agent when you select `remote_config`. Agent Remote Configuration requires a Datadog Agent.
+
+The minimum agentless SDK versions require a local relay for this telemetry. They do not send these events directly to Datadog. The supported telemetry depends on the SDK:
+
+| SDK | Experiment exposure events | Event Platform Proxy (EVP) flag evaluation events |
+|---|---|---|
+| Java 1.65.0 | Supported | Not emitted |
+| Node.js 5.116.0 on v5, or 6.5.0 on v6 | Supported | Not emitted |
+| Python 4.14.0 | Supported | Supported |
+
+Experiment exposure events are emitted only for flags associated with an experiment. Python aggregates EVP flag evaluation events and emits them by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only the Python EVP flag evaluation event path.
+
+The `feature_flag.evaluations` metric is a separate OpenTelemetry (OTLP) signal. The standard `serverless-init` connection on port 8126 does not configure its OTLP path. See [Set Up Server-Side Flag Evaluation Metrics][10].
+
+### Configure serverless-init
+
+Complete the [Serverless Monitoring][11] setup for your platform. Those instructions provide the supported in-container and sidecar configurations, required environment variables, and network settings.
+
+Then apply these Feature Flags requirements:
+
+- Use `serverless-init` 1.9.13 or later. Earlier versions do not support the required EVP route.
+- Keep `DD_API_KEY` and `DD_SITE` in the application environment for agentless CDN configuration delivery. A sidecar also needs them for telemetry egress.
+- Do not configure a Feature Flags-specific endpoint. The SDK uses the standard tracer connection configured by the Serverless Monitoring setup.
+- Node.js and Java call `GET /info` on the tracer URL to discover the local EVP proxy. Python sends supported EVP events to the same URL without this discovery request.
+
+### Verify telemetry egress
+
+1. Initialize the OpenFeature provider and confirm that it reaches a ready state.
+2. Evaluate a flag associated with an experiment. Then confirm that the experiment receives an exposure event.
+3. Check the application and `serverless-init` logs for connection errors to port 8126.
+4. For Python, confirm that `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` is not set to `false` when you need EVP flag evaluation events.
+5. If you use the `feature_flag.evaluations` metric, validate its separate OTLP path with the [metrics setup guide][10].
 
 ## Agent-backed Remote Configuration
 
@@ -88,7 +125,7 @@ Explicitly selecting `remote_config` enables the Feature Flags Remote Configurat
 
 - **Cold starts**: Blocking provider initialization waits for the first configuration and can add cold-start latency. Initialize asynchronously if serving caller-provided default values during startup is acceptable.
 - **Outbound connectivity**: Agentless delivery requires outbound HTTPS access to the Datadog-managed flag configuration service.
-- **API key ownership**: In agentless mode, the application owns `DD_API_KEY`. In `remote_config` mode, the Agent owns the API key.
+- **API key ownership**: In agentless mode, the application owns `DD_API_KEY` for configuration. A `serverless-init` sidecar also needs the key for telemetry egress. In `remote_config` mode, the Agent owns the API key.
 - **Flag updates**: Delivery is eventually consistent. Allow for the SDK polling interval and application startup time when testing changes.
 - **Last-known-good behavior**: After a configuration has been accepted, temporary network failures or malformed responses do not replace it.
 - **Runtime support**: Java requires Java 11 or later. For Node.js and Python, check the tracer's runtime compatibility requirements.
@@ -131,7 +168,7 @@ Before enabling Feature Flags in production:
 3. Initialize the OpenFeature provider and check that it reaches a ready state.
 4. Change a non-production flag in Datadog and confirm that the workload receives the updated value after the polling interval.
 5. Confirm that your application handles caller-provided defaults if configuration is unavailable during a cold start.
-6. For Node.js, do not plan experimentation workflows around evaluation metrics or exposure data. For Java and Python, configure a supported Datadog Agent or serverless telemetry path before you use these signals.
+6. For telemetry, configure a supported relay and verify each required signal. Use the separate OTLP setup for `feature_flag.evaluations`.
 
 ## Further reading
 
@@ -146,3 +183,5 @@ Before enabling Feature Flags in production:
 [7]: /serverless/google_cloud_run/functions/java/?tab=maven
 [8]: /serverless/google_cloud_run/containers/in_container/java/
 [9]: /feature_flags/server/python/
+[10]: /feature_flags/guide/server_flag_evaluation_metrics/
+[11]: /serverless/

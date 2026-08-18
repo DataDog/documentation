@@ -22,7 +22,7 @@ Flag evaluation metrics let you measure how often each variant of a feature flag
 
 <div class="alert alert-warning">The <code>feature_flag.evaluations</code> metric is experimental and may change or be removed in a future release.</div>
 
-<div class="alert alert-warning"><strong>Node.js agentless limitation:</strong> The initial agentless releases in <code>dd-trace</code> 5.116.0 and 6.5.0 support configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases. Do not set <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code> to enable these features in agentless mode. The setting is deprecated and preserves Agent Remote Configuration when no explicit configuration source is set; remove it when you <a href="/feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup">migrate to agentless delivery</a>.</div>
+<div class="alert alert-info">The <code>feature_flag.evaluations</code> metric is separate from experiment exposure events and Event Platform Proxy (EVP) flag evaluation events. Exposure and EVP event egress use the standard tracer URL on port 8126. This metric uses an OTLP endpoint on port 4317 or 4318.</div>
 
 ## Prerequisites
 
@@ -30,7 +30,7 @@ Before setting up flag evaluation metrics, confirm the following:
 
 - [Server-side feature flags][1] are already configured.
 - Datadog Agent 7.32.0 or later is running.
-- For Agent-backed configurations that use the legacy activation path, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set on your application. Do not use this setting for the initial Node.js agentless releases described above.
+- For Agent-backed configurations that use the legacy activation path, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set on your application.
 - Your server-side tracer meets the minimum version for flag evaluation metrics support:
 
 | Language | Minimum tracer version |
@@ -43,7 +43,7 @@ Before setting up flag evaluation metrics, confirm the following:
 | Python   | 4.7.0                  |
 | Ruby     | 2.32.0                 |
 
-The Node.js minimum in this table applies to supported Agent-backed evaluation metrics. The initial Node.js agentless releases do not support this metric.
+Agentless configuration delivery and this metric use independent paths. An agentless SDK can emit the metric when you configure the required OTLP path.
 
 ## Step 1: Enable the Agent OTLP receiver
 
@@ -130,6 +130,8 @@ gem "opentelemetry-exporter-otlp-metrics", ">= 0.4"
 Install the gems with `bundle install`. These gems provide the OpenTelemetry meter provider and OTLP metrics exporter. The Ruby tracer uses them when `DD_METRICS_OTEL_ENABLED=true` is set. If the gems are missing, the Ruby tracer does not emit `feature_flag.evaluations` metrics and logs `Failed to load OpenTelemetry metrics gems`.
 
 ### Endpoint configuration
+
+`DD_TRACE_AGENT_URL` and the standard `serverless-init` listener on port 8126 do not configure the OTLP metric endpoint. Configure the OTLP endpoint separately as described below.
 
 By default, most tracers send OTLP metrics to the Agent at `DD_AGENT_HOST` on port `4318` (HTTP). If your application already sets `DD_AGENT_HOST` to reach the Agent, no endpoint configuration is required.
 

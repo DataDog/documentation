@@ -28,7 +28,7 @@ This page describes how to instrument your Python application with the Datadog F
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
-<div class="alert alert-warning">Python agentless delivery changes only the configuration source. Without a supported Datadog Agent or serverless telemetry path, the SDK does not export evaluation metrics or exposure events.</div>
+Agentless delivery changes only the flag configuration source. Python sends experiment exposures and aggregated Event Platform Proxy (EVP) flag evaluation events through a supported local relay.
 
 ## Prerequisites
 
@@ -258,7 +258,7 @@ Use [Server SDK Configuration Sources][6] as the canonical reference for source 
 - [Use Agent Remote Configuration][9] to retain Agent-managed delivery
 - [Migrate an existing Remote Configuration setup][8] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
 
-Agentless mode changes only flag configuration. It does not configure or enable `feature_flag.evaluations`, exposure logging, or experimentation use cases. These features require a supported Datadog Agent or serverless telemetry path.
+For no-Agent serverless environments, use [`serverless-init`][11] to egress experiment exposures and EVP flag evaluation events. Python emits EVP flag evaluation events by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable this event path. This setting does not disable the separate `feature_flag.evaluations` OTLP metric.
 
 ## Cleanup
 
@@ -350,6 +350,7 @@ Verify the following:
 [8]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
 [9]: /feature_flags/concepts/configuration_sources/#use-agent-remote-configuration
 [10]: /feature_flags/concepts/configuration_sources/#configure-agentless-delivery
+[11]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry-with-serverless-init
 
 ## Further reading
 
