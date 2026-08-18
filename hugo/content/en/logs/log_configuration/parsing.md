@@ -25,7 +25,7 @@ further_reading:
   text: "Debugging Log Pipelines"
 - link: "https://www.datadoghq.com/blog/detect-http2-abuse-apache-web-server-logs/"
   tag: "Blog"
-  text: "How to detect HTTP/2 abuse in Apache web server logs | Datadog"
+  text: "How to detect HTTP/2 abuse in Apache web server logs"
 - link: "https://www.youtube.com/watch?v=AwW70AUmaaQ&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=3"
   tag: "Video"
   text: "Datadog Tips & Tricks: Use Grok parsing to extract fields from logs"

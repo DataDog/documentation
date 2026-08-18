@@ -16,13 +16,13 @@ further_reading:
   text: "AI Credits"
 - link: "https://www.datadoghq.com/blog/datadog-mcp-apps/"
   tag: "Blog"
-  text: "Datadog MCP Apps: Interactive experiences in AI workflows | Datadog"
+  text: "Datadog MCP Apps: Interactive experiences in AI workflows"
 - link: "https://www.datadoghq.com/blog/introducing-bits-chat/"
   tag: "Blog"
-  text: "Search and act across Datadog to resolve issues faster with Bits Chat | Datadog"
+  text: "Search and act across Datadog to resolve issues faster with Bits Chat"
 - link: "https://www.datadoghq.com/blog/cloud-cost-skill-bits-chat/"
   tag: "Blog"
-  text: "Answer any cost question faster with the Cloud Cost skill in Bits Chat | Datadog"
+  text: "Answer any cost question faster with the Cloud Cost skill in Bits Chat"
 aliases:
 - /bits_ai/getting_started/
 - /bits_ai/chat_with_bits_ai

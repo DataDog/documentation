@@ -18,7 +18,7 @@ further_reading:
   text: "Normalize your data with the OCSF Common Data Model in Datadog Cloud SIEM"
 - link: "https://www.datadoghq.com/blog/cloud-siem-claude-compliance-api-integration/"
   tag: "Blog"
-  text: "Monitor Claude Enterprise activity with Datadog Cloud SIEM | Datadog"
+  text: "Monitor Claude Enterprise activity with Datadog Cloud SIEM"
 ---
 
 ## Overview

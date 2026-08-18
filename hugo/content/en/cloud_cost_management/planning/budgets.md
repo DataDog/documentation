@@ -12,7 +12,7 @@ further_reading:
   text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
 - link: "https://www.datadoghq.com/blog/cloud-cost-management-budget-forecasting/"
   tag: "Blog"
-  text: "Project and manage cloud spend with Datadog budget forecasting | Datadog"
+  text: "Project and manage cloud spend with Datadog budget forecasting"
 ---
 
 ## Overview

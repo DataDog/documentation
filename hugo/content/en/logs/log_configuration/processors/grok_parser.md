@@ -11,7 +11,7 @@ further_reading:
   text: "Learn more about parsing"
 - link: "https://www.datadoghq.com/blog/detect-http2-abuse-apache-web-server-logs/"
   tag: "Blog"
-  text: "How to detect HTTP/2 abuse in Apache web server logs | Datadog"
+  text: "How to detect HTTP/2 abuse in Apache web server logs"
 ---
 
 ## Overview

@@ -18,7 +18,7 @@ further_reading:
     text: "Monitor agents built on Amazon Bedrock with Datadog LLM Observability"
   - link: "https://www.datadoghq.com/blog/langgraph-agent-monitoring/"
     tag: "Blog"
-    text: "Monitoring LangGraph agents with Datadog: a practical guide | Datadog"
+    text: "Monitoring LangGraph agents with Datadog: a practical guide"
 ---
 
 ## Overview
