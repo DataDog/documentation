@@ -137,14 +137,14 @@ Given this log line:
 this pattern:
 
 ```plaintext
-(?<client_ip>\S+) (?<method>\S+) (?<path>\S+) (?<status>\d+)
+(?<ip>\S+) (?<method>\S+) (?<path>\S+) (?<status>\d+)
 ```
 
 produces four fields you can filter, group, and sort by:
 
 | Field | Value |
 |---|---|
-| `client_ip` | `10.0.0.14` |
+| `ip` | `10.0.0.14` |
 | `method` | `GET` |
 | `path` | `/api/v1/orders` |
 | `status` | `503` |
