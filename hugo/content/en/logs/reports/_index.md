@@ -25,7 +25,7 @@ To schedule a CSV Report, the query must meet the following conditions:
    {{< img src="logs/reports/schedule_csv_report_menu.png" alt="The Log Explorer results toolbar with the dropdown next to Download as CSV expanded, showing Copy, Copy as cURL, Share event, and Schedule CSV Report options" style="width:80%;" >}}
 
 3. In the configuration modal that opens, set a schedule for the report to determine when and how often the report is sent.  
-4. Configure report: Define the report title and set a time frame to determine the range of time displayed in the resulting report. The report time frame can be different from the time frame displayed on the dashboard.  
+4. Configure the report: Define the report title and set a time frame to determine the range of time displayed in the resulting report. The report time frame can be different from the time frame displayed on the dashboard.  
 5. Add recipients:
    1. {{< ui >}}Email recipients{{< /ui >}}: To add email recipients to your report, enter their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the trash icon that appears next to it.  
    2. {{< ui >}}Slack recipients{{< /ui >}}: To add Slack recipients, select the Slack workspace and channel from the available dropdowns. If you do not see any Slack workspaces available, ensure you have the Datadog [Slack Integration][5] installed. All public channels within the Slack workspace should be listed automatically. To select a private Slack channel, make sure to invite the Datadog Slack bot to the channel in Slack. To send a test message to Slack, add a channel recipient and click {{< ui >}}Send Test Message{{< /ui >}}.
