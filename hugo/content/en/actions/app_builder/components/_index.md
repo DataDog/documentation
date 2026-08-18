@@ -35,7 +35,7 @@ Any component that can trigger an event has a list of available reactions in [ev
 For more information on using JavaScript in App Builder, see [JavaScript Expressions][7]. For more information about saving your components as a template, see [Reusable Modules][12].
 <br><br> 
 
-{{% collapse-content title="Button" level="h3" %}}
+{{% collapse-content title="Button" level="h2" %}}
 Button components have the following properties.
 
 ### General
@@ -89,7 +89,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Callout value" level="h3" %}}
+{{% collapse-content title="Callout value" level="h2" %}}
 Callout value components have the following properties.
 
 ### General
@@ -141,7 +141,7 @@ To view this component in context, see the [EC2 Instance Manager][3] app bluepri
 
 
 
-{{% collapse-content title="Checkbox" level="h3" %}}
+{{% collapse-content title="Checkbox" level="h2" %}}
 Checkbox components have the following properties.
 
 ### General
@@ -201,7 +201,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 
 
-{{% collapse-content title="Container" level="h3" %}}
+{{% collapse-content title="Container" level="h2" %}}
 Container components have the following properties.
 
 ### Appearance
@@ -221,7 +221,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 
 
-{{% collapse-content title="Custom chart" level="h3" %}}
+{{% collapse-content title="Custom chart" level="h2" %}}
 Custom chart components have the following properties.
 
 ### General
@@ -250,7 +250,7 @@ For an example showing how to use this component, see [Custom charts][10].
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Date picker" level="h3" %}}
+{{% collapse-content title="Date picker" level="h2" %}}
 Date picker components have the following properties.
 
 ### General
@@ -297,7 +297,7 @@ Displays properties and values in JSON format. Values are displayed both as a UN
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Date range picker" level="h3" %}}
+{{% collapse-content title="Date range picker" level="h2" %}}
 Date range picker components have the following properties.
 
 ### General
@@ -331,7 +331,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Divider" level="h3" %}}
+{{% collapse-content title="Divider" level="h2" %}}
 Divider components have the following properties.
 
 ### Appearance
@@ -347,7 +347,7 @@ Displays properties in JSON format.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="File input" level="h3" %}}
+{{% collapse-content title="File input" level="h2" %}}
 File input components have the following properties.
 
 ### General
@@ -378,7 +378,7 @@ Displays property and value pairs in JSON format.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Image" level="h3" %}}
+{{% collapse-content title="Image" level="h2" %}}
 Image components have the following properties.
 
 ### General 
@@ -428,7 +428,7 @@ Displays properties in JSON format.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Integration logo" level="h3" %}}
+{{% collapse-content title="Integration logo" level="h2" %}}
 Integration logo components have the following properties.
 
 ### General
@@ -463,7 +463,7 @@ Displays property and value pairs in JSON format.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Form" level="h3" %}}
+{{% collapse-content title="Form" level="h2" %}}
 Form components have the following properties.
 
 ### General
@@ -545,7 +545,7 @@ Displays property and value pairs in JSON format.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="JSON input" level="h3" %}}
+{{% collapse-content title="JSON input" level="h2" %}}
 JSON input components have the following properties.
 
 ### General
@@ -582,7 +582,7 @@ Displays property and value pairs in JSON format.
 
 
 
-{{% collapse-content title="Modal" level="h3" %}}
+{{% collapse-content title="Modal" level="h2" %}}
 Modal components have the following properties.
 
 ### General
@@ -626,7 +626,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 
 
-{{% collapse-content title="Number input" level="h3" %}}
+{{% collapse-content title="Number input" level="h2" %}}
 Number input components have the following properties.
 
 Label
@@ -687,7 +687,7 @@ To view this component in context, see the [ECS Task Manager][4] app blueprint.
 
 
 
-{{% collapse-content title="Radio" level="h3" %}}
+{{% collapse-content title="Radio" level="h2" %}}
 Radio components have the following properties.
 
 ### General
@@ -748,7 +748,7 @@ Displays property and value pairs in JSON format.
 
 
 
-{{% collapse-content title="React renderer" level="h3" %}}
+{{% collapse-content title="React renderer" level="h2" %}}
 React renderer components have the following properties.
 
 ### General
@@ -795,7 +795,7 @@ For an example showing how to use this component, see [React renderer][11].
 
 
 
-{{% collapse-content title="Search" level="h3" %}}
+{{% collapse-content title="Search" level="h2" %}}
 Search components have the following properties.
 
 ### General
@@ -847,7 +847,7 @@ Displays property and value pairs in JSON format.
 To view this component in context, see the [EC2 Instance Manager][3] app blueprint.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Select" level="h3" %}}
+{{% collapse-content title="Select" level="h2" %}}
 Select components have the following properties.
 
 ### General
@@ -919,7 +919,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Side panel" level="h3" %}}
+{{% collapse-content title="Side panel" level="h2" %}}
 Side panel components have the following properties.
 
 ### General 
@@ -959,7 +959,7 @@ Displays properties and values in JSON format.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Tab" level="h3" %}}
+{{% collapse-content title="Tab" level="h2" %}}
 
 Tab components have the following properties.
 
@@ -1017,7 +1017,7 @@ Displays property and value pairs in JSON format.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Table" level="h3" %}}
+{{% collapse-content title="Table" level="h2" %}}
 
 Table components have the following properties.
 
@@ -1186,7 +1186,7 @@ For examples showing how to use advanced features of tables, see [Tables][6].
 
 
 
-{{% collapse-content title="Text" level="h3" %}}
+{{% collapse-content title="Text" level="h2" %}}
 Text components have the following properties.
 
 ### General
@@ -1227,7 +1227,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Text area" level="h3" %}}
+{{% collapse-content title="Text area" level="h2" %}}
 Text area components have the following properties.
 
 Label
@@ -1272,7 +1272,7 @@ Displays property and value pairs in JSON format.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Text input" level="h3" %}}
+{{% collapse-content title="Text input" level="h2" %}}
 Text input components have the following properties.
 
 Label
