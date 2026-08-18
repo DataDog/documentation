@@ -1,5 +1,5 @@
 ---
-title: Agent Observability SDK Reference
+title: SDK Reference
 description: Reference documentation for the Agent Observability SDKs for Python, Node.js, and Java, covering automatic and manual instrumentation.
 aliases:
     - /tracing/llm_observability/sdk/python

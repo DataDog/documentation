@@ -1,5 +1,5 @@
 ---
-title: Automatic Instrumentation for Agent Observability
+title: Automatic Instrumentation
 description: Enable automatic tracing for LLM frameworks and libraries in your Python or Node.js application using Agent Observability integrations.
 aliases:
     - /tracing/llm_observability/auto_instrumentation

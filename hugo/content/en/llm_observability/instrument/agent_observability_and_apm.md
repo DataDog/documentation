@@ -1,5 +1,5 @@
 --- 
-title: Correlating Agent Observability and APM
+title: Correlate with APM
 description: Learn how to navigate between Agent Observability spans and APM spans so you can gain insights into LLM-specific operations and your broader application ecosystem.
 aliases:
   - /llm_observability/guide/llm_observability_and_apm

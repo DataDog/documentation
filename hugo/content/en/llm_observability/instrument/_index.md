@@ -1,5 +1,5 @@
 ---
-title: Agent Observability Instrumentation
+title: Instrument
 aliases:
 - /llm_observability/instrumentation/
 description: Overview of instrumentation options for Agent Observability, including SDK-based and API-based approaches for Python, Node.js, and Java.
