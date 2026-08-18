@@ -44,7 +44,7 @@ Define the Grok processor on the [{{< ui >}}Pipelines{{< /ui >}} page][2]. To co
 
 ## Before and after state of logs
 
-{{% collapse-content title="Example: Parsing nginx access logs" level="h4" %}}
+{{% collapse-content title="Example: Parsing nginx access logs" level="h3" %}}
 
 **Before (raw log):**
 

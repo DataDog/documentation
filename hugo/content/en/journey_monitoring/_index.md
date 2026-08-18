@@ -31,9 +31,10 @@ For each journey, you can:
 
 ## Prerequisites
 
-Journey Monitoring requires the following products for frontend applications, each contributing different data to your journeys:
+Journey Monitoring requires **at least one** of the following products to be enabled in frontend applications, each contributing different data to your journeys:
 
-- **[RUM without Limits][5]** and **[Product Analytics][8]**: Traffic, conversion rate, time-to-convert metrics, and performance.
+- **[RUM without Limits][5]**: Frontend errors and performance tracking through RUM operations.
+- **[Product Analytics][8]**: Traffic, conversion rate, and time-to-convert metrics.
 - **[Synthetic Browser Tests][6] or [Synthetic Mobile Tests][7]**: Uptime tracking through the journey's automatically created test suite.
 
 ## Journey structure

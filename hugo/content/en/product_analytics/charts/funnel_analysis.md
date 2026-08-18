@@ -93,13 +93,13 @@ For any conversion analysis view, you can choose to view conversions by count or
 ## Conversion computing metrics
 
 ### How Datadog computes conversion metrics
-Consider a funnel with events `A → B → C` and event steps `A, A, A, B, C, C`. 
+Consider a funnel with events `A → B → C` and event steps **A**, A, A, **B**, **C**, C.
 
-In this case, Datadog counts one conversion. This is because the conversion calculation matches only the first occurrence of event **A** and the first occurrence of event **C** in the sequence. 
+In this case, Datadog counts one conversion. Each **A** starts an independent attempt. Because all three attempts complete on the same **C** event, Datadog counts only the earliest attempt.
 
-To further illustrate, if the user performs the event sequence `A, A, A, B, C, C, A, B, C`, Datadog counts two conversions. The first conversion completes with the sequence `A, A, A, B, C, C`, and the second conversion completes with the following sequence of `A, B, C`.
+To further illustrate, if the user performs the event sequence **A**, A, A, **B**, **C**, C, **A**, **B**, **C**, Datadog counts two conversions. The first conversion completes with the sequence **A**, A, A, **B**, **C**, and the second conversion completes with the following sequence of **A**, **B**, **C**.
 
-<div class="alert alert-info"> Any action or view that happens between two steps in a funnel does not impact the step-by-step or overall conversion rate. As long as step A and C happen in the right order in a given session at least once, it counts as a single converted session.</div>
+<div class="alert alert-info"> Any action or view that does not match a funnel step does not impact the step-by-step or overall conversion rate. If all funnel steps occur in the right order within the conversion window, Datadog counts the session as a single converted session.</div>
 
 Datadog calculates the average time between steps by averaging the total duration between the first and last step of each conversion over the total number of steps.
 
