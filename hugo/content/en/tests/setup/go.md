@@ -60,7 +60,7 @@ Install `orchestrion` from [https://github.com/datadog/orchestrion][1] using the
 $ go install github.com/DataDog/orchestrion@latest
 ```
 
-{{% collapse-content title="Optional: project go.mod registration" level="h4" expanded=false %}}
+{{% collapse-content title="Optional: project go.mod registration" level="h3" expanded=false %}}
 
 You can automatically add `orchestrion` to your project's dependencies by running:
 ```bash

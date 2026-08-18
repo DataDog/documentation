@@ -44,6 +44,15 @@ There are no secret identifiers for this destination.
 {{% /tab %}}
 {{< /tabs >}}
 
+## AWS PrivateLink
+
+To send metrics from Observability Pipelines to Datadog using AWS PrivateLink, see [Connect to Datadog over AWS PrivateLink][3] for setup instructions. The two endpoints you need to set up are:
+
+- Metrics: {{< region-param key=metrics_endpoint_private_link code="true" >}}
+- Remote Configuration: {{< region-param key=remote_config_endpoint_private_link code="true" >}}
+
+**Note**: The `obpipeline-intake.datadoghq.com` endpoint is used for Live Capture and is not available as a PrivateLink endpoint.
+
 ## How the destination works
 
 ### Metrics aggregation
@@ -57,15 +66,6 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|
 | 100,000        | None              | 2                   |
-
-## AWS PrivateLink
-
-To send metrics from Observability Pipelines to Datadog using AWS PrivateLink, see [Connect to Datadog over AWS PrivateLink][3] for setup instructions. The two endpoints you need to set up are:
-
-- Metrics: {{< region-param key=metrics_endpoint_private_link code="true" >}}
-- Remote Configuration: {{< region-param key=remote_config_endpoint_private_link code="true" >}}
-
-**Note**: The `obpipeline-intake.datadoghq.com` endpoint is used for Live Capture and is not available as a PrivateLink endpoint.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: https://docs.datadoghq.com/observability_pipelines/destinations/#event-batching
