@@ -94,3 +94,12 @@ https://app.{dd_site}/llm/applications?query=@ml_app:{application_name}
 Fill in the provided values:
 1. `dd_site` - if the value was provided for [Datadog site](#datadog-site), use that value. Otherwise, use `datadoghq.com`.
 2. `application_name` - use either the provided or inferred value from the [Agent Observability application name](#llm-observability-application-name) section.
+
+## Pages in this section
+
+{{< whatsnext desc="Agentic instrumentation instructions:" >}}
+    {{< nextlink href="/llm_observability/instrument/agentic/python" >}}Python Application Agentic Instrumentation{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/instrument/agentic/nodejs" >}}Node.js Application Agentic Instrumentation{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/instrument/agentic/java" >}}Java Application Agentic Instrumentation{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/instrument/agentic/prompt_management" >}}Prompt Management Agentic Integration{{< /nextlink >}}
+{{< /whatsnext >}}
