@@ -878,7 +878,7 @@ env:
 {{% /tab %}}
 {{< /tabs >}}
 
-Set the `service.name`, `deployment.environment.name`, and `service.version` resource attributes in your application's OpenTelemetry configuration. Datadog maps these to [Unified Service Tagging][4], which is what correlates your traces, metrics, and logs across the platform.
+Set the `service.name`, `deployment.environment.name`, and `service.version` resource attributes in your application's OpenTelemetry configuration. Datadog maps these to [Unified Service Tagging][4], which correlates your traces, metrics, and logs.
 
 ## Verify the setup
 
