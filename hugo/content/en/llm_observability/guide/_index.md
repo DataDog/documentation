@@ -19,5 +19,5 @@ cascade:
     {{< nextlink href="/llm_observability/guide/nextjs_guide" >}}Instrument a Next.js Application for Agent Observability{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/agent_monitoring" >}}Agent Monitoring{{< /nextlink >}}
     {{< nextlink href="/llm_observability/configure/evaluations/evaluation_developer_guide" >}}Evaluation Developer Guide: Build custom evaluators{{< /nextlink >}}
-    {{< nextlink href="/llm_observability/mcp_cli_skills/claude_code_skills" >}}Analyze LLM Applications with Claude Code Skills{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/build_with_ai/claude_code_skills" >}}Analyze LLM Applications with Claude Code Skills{{< /nextlink >}}
 {{< /whatsnext >}}

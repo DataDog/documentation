@@ -13,7 +13,7 @@ further_reading:
 - link: "/llm_observability/investigate"
   tag: "Documentation"
   text: "Monitor your application with Agent Observability"
-- link: "/llm_observability/mcp_cli_skills/claude_code_skills"
+- link: "/llm_observability/build_with_ai/claude_code_skills"
   tag: "Guide"
   text: "Analyze LLM Applications with Claude Code Skills"
 ---
@@ -484,4 +484,4 @@ For custom visualizations that go beyond standard Datadog widgets, like comparis
 [6]: /account_management/api-app-keys/
 [7]: /account_management/org_settings/service_accounts/
 [8]: https://github.com/datadog-labs/agent-skills
-[9]: /llm_observability/mcp_cli_skills/claude_code_skills
+[9]: /llm_observability/build_with_ai/claude_code_skills

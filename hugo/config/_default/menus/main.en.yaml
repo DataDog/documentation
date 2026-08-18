@@ -5524,14 +5524,14 @@ menu:
       parent: llm_obs_quickstart
       identifier: llm_obs_terms
       weight: 101
-    - name: MCP and CLI Skills
-      url: llm_observability/mcp_cli_skills/
+    - name: Build with AI
+      url: llm_observability/build_with_ai/
       parent: llm_obs
-      identifier: llm_obs_mcp_cli_skills
+      identifier: llm_obs_build_with_ai
       weight: 2
     - name: MCP Server
-      url: llm_observability/mcp_cli_skills/mcp_server
-      parent: llm_obs_mcp_cli_skills
+      url: llm_observability/build_with_ai/mcp_server
+      parent: llm_obs_build_with_ai
       identifier: llm_obs_mcp_server
       weight: 201
     - name: Instrument
