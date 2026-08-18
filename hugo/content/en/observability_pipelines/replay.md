@@ -1,6 +1,6 @@
 ---
 title: Replay
-description: Learn about using Replay to pull archived logs and processing them in Observability Pipelines.
+description: Learn about using Replay to pull archived logs and process them in Observability Pipelines.
 disable_toc: false
 aliases:
   - /observability_pipelines/rehydration/
