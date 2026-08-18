@@ -4,6 +4,9 @@ further_reading:
   - link: "/serverless/guide/disable_serverless"
     tag: "Documentation"
     text: "Disable Serverless Monitoring"
+  - link: "/opentelemetry/setup/otlp_ingest/serverless/?tab=azure#azure-functions"
+    tag: "Documentation"
+    text: "Send Azure Functions traces to Datadog with OTLP"
   - link: 'http://datadoghq.com/blog/azure-well-architected-serverless-applications-best-practices/'
     tag: 'Blog'
     text: 'Build secure and scalable Azure serverless applications with the Well-Architected Framework'
@@ -228,6 +231,10 @@ You can collect [debug logs][6] for troubleshooting. To configure debug logs, us
 : Sets logging level for the Datadog Serverless Compatibility Layer. Defaults to `info`.
 
   **Values**: `trace`, `debug`, `info`, `warn`, `error`, `critical`, `off`
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [2]: /getting_started/site

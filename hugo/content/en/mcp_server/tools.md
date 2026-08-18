@@ -407,7 +407,7 @@ Translates a natural-language description into an Audit Trail query string. If y
 - Create an Audit Trail query to show when the dashboard `abc123` was deleted.
 - Generate an Audit Trail query to check which actions were executed through the Datadog MCP server.
 
-## Cases
+## Cases (Work Management)
 
 Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
 

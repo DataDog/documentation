@@ -46,7 +46,7 @@ The Agent's main configuration file is `datadog.yaml`. The required parameters a
 - Your [Datadog API key][16], which is used to associate the Agent's data with your organization. 
 - Your [Datadog site][41] ({{< region-param key="dd_site" code="true" >}}).
 
-See the [sample `config_template.yaml` file][23] for all available configuration options. You can adjust the Agent configuration files to take advantage of other Datadog features.
+You can adjust the Agent configuration files to take advantage of other Datadog features.
 
 
 ## Installation
@@ -114,7 +114,7 @@ These checks can be used in Datadog to visualize the Agent status through monito
 
 ## Advanced configurations and features
 
-{{% collapse-content title="Differences between Agent for hosts and containers" level="h4" expanded=false id="agent-hosts-vs-containers" %}}
+{{% collapse-content title="Differences between Agent for hosts and containers" level="h3" expanded=false id="agent-hosts-vs-containers" %}}
 
 There are key differences between installing Agents on a host and in a containerized environment: 
 
@@ -135,7 +135,7 @@ Additionally, see the [Docker Agent][12] or [Kubernetes][13] for a walkthrough o
 {{% /collapse-content %}} 
 
 
-{{% collapse-content title="Setting tags through the Agent configuration file" level="h4" expanded=false id="setting-tags-agent-config-file" %}}
+{{% collapse-content title="Setting tags through the Agent configuration file" level="h3" expanded=false id="setting-tags-agent-config-file" %}}
 
 Tags add an additional layer of metadata to your metrics and events. They allow you to scope and compare your data in Datadog visualizations. When data is sent to Datadog from multiple hosts, tagging this information allows you to scope down to the data you are most interested in visualizing.
 
@@ -190,7 +190,7 @@ For example, let's say you have data that is collected from different teams and 
 
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Finding metrics in the Datadog UI" level="h4" expanded=false id="finding-metrics-in-the-datadog-ui" %}}
+{{% collapse-content title="Finding metrics in the Datadog UI" level="h3" expanded=false id="finding-metrics-in-the-datadog-ui" %}}
 
 You can confirm the Agent is running correctly by checking its default metrics in the Datadog UI. Go to the [{{< ui >}}Metrics Summary{{< /ui >}} page][22] and search for the metric `datadog.agent.started` or the metric `datadog.agent.running`. If these metrics are not visible right away, it may take a few minutes for the Agent to send the data to Datadog.
 
@@ -200,14 +200,14 @@ Explore other default metrics such as `ntp.offset` or `system.cpu.idle`.
 {{% /collapse-content %}} 
 
 
-{{% collapse-content title="Agent overhead" level="h4" expanded=false id="agent-overhead" %}}
+{{% collapse-content title="Agent overhead" level="h3" expanded=false id="agent-overhead" %}}
 
 The amount of space and resources the Agent takes up depends on the configuration and what data the Agent is sending. At the onset, you can expect around 0.08% CPU used on average with a disk space of roughly 880MB to 1.3GB.
 
 See [Agent Overhead][2] to learn more about these benchmarks.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Additional configuration options" level="h4" expanded=false id="additional-configuration-options" %}}
+{{% collapse-content title="Additional configuration options" level="h3" expanded=false id="additional-configuration-options" %}}
 
 The collection of [logs][27], [traces][28], and [processes][29] data can be enabled through the Agent configuration file. These features are not enabled by default. For example, in the configuration file, the `logs_enabled` parameter is set to false.
 
@@ -282,7 +282,6 @@ For help troubleshooting the Agent:
 [20]: https://app.datadoghq.com/event/explorer
 [21]: /extend/service_checks/#visualize-your-service-check-in-datadog
 [22]: https://app.datadoghq.com/metric/summary
-[23]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [24]: /getting_started/tagging/
 [25]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [26]: /agent/configuration/agent-commands/#restart-the-agent

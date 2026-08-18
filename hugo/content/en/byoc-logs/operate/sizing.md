@@ -62,7 +62,7 @@ Indexers receive logs from Datadog Agents, then process, index, and store them a
 | **Disk I/O** | ~20 MB/s per vCPU | Equivalent to 320 IOPS per vCPU for Amazon EBS (assuming 64 KB IOPS) |
 
 
-{{% collapse-content title="Example: Sizing for 1 TB of logs per day" level="h4" expanded=false %}}
+{{% collapse-content title="Example: Sizing for 1 TB of logs per day" level="h3" expanded=false %}}
 To index 1 TB of logs per day (~11.6 MB/s), follow these steps:
 
 1. **Calculate vCPUs:** `11.6 MB/s ÷ 5 MB/s per vCPU ≈ 2.3 vCPUs`
@@ -70,7 +70,7 @@ To index 1 TB of logs per day (~11.6 MB/s), follow these steps:
 3. **Add headroom:** Start with one indexer pod configured with **3 vCPUs, 12 GB RAM, and a 200 GB disk**. Adjust these values based on observed performance and redundancy needs.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Sizing by event count" level="h4" expanded=false %}}
+{{% collapse-content title="Sizing by event count" level="h3" expanded=false %}}
 If you know your daily event count but not your byte volume, use this formula to estimate:
 
 $$\text"Daily volume (TB)" = {\text"events per day" × \text"average event size (bytes)"} / 10^{12}$$
@@ -117,7 +117,7 @@ $$\text"Stored data per day" = {\text"Daily volume"} / {\text"compression ratio"
 
 $$\text"Total storage" = \text"Stored data per day" × \text"retention period (days)"$$
 
-{{% collapse-content title="Example: Storage for 10 TB/day with 30-day retention" level="h4" expanded=false %}}
+{{% collapse-content title="Example: Storage for 10 TB/day with 30-day retention" level="h3" expanded=false %}}
 Assuming a 6x compression ratio:
 
 1. **Stored per day:** `10 TB / 6 ≈ 1.67 TB/day`
