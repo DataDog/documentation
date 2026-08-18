@@ -65,20 +65,31 @@ This table compares the differences between the memory and disk buffer.
 
 ### Changing or removing destination buffers
 
-When you update a running pipeline, the Worker handles existing buffered events based on the destination's previous and new buffer configurations. In this table, the same destination means a destination with the same component ID.
+When you update a running pipeline, the Worker handles existing buffered events based on the destination's previous and new buffer configurations. A destination is considered the same destination if it has the same component ID.
 
-| Before | After | Handling of existing buffered events | Data loss or inactive buffer risk |
-| ------- | ----- | ------------------------------------ | --------------------------------- |
-| Destination with a memory or disk buffer | Same destination with an unchanged buffer configuration | The buffer is transferred to the updated destination. The updated destination processes the backlog using its new configuration. | No expected data loss or inactive buffer. If the destination endpoint changed, buffered events are sent to the new endpoint. |
-| Destination with a memory buffer | Same destination with a different memory buffer configuration | The previous destination drains its memory buffer in the background while the updated destination starts with a new buffer. | Events remaining in the previous memory buffer are lost if the Worker stops before the background drain completes. |
-| Destination with a memory buffer | Same destination with a disk buffer | The previous destination drains its memory buffer in the background while the updated destination starts with a new disk buffer. | Events remaining in the previous memory buffer are lost if the Worker stops before the background drain completes. |
-| Destination with a disk buffer | Same destination with a different disk buffer configuration | The updated disk buffer opens the same buffer directory and resumes processing the persisted backlog. | No expected data loss or inactive buffer. |
-| Destination with a disk buffer | Same destination with a memory buffer | The updated destination starts with a new memory buffer. The previous disk backlog remains on disk and is not processed. | The disk buffer becomes inactive. Restore a disk buffer on the same destination to resume processing its persisted events. Treat the events as lost if the disk buffer is not restored. |
-| Destination with a memory buffer | Destination removed | The removed destination drains its memory buffer in the background. | Events remaining in memory are lost if the Worker stops before the background drain completes. |
-| Destination with a disk buffer | Destination removed | The removed destination drains its disk buffer in the background. | A Worker restart before the drain completes leaves the remaining disk buffer inactive. Re-add a disk buffer with the same component ID to resume processing it. |
-| Inactive disk buffer from a removed or changed destination | Disk-buffered destination re-added with the same component ID | The destination opens the existing disk buffer and resumes processing its persisted events. | This recovers the inactive disk backlog. |
+#### Changing a destination
 
-Background draining continues only while the same Worker process is running. A pipeline update can complete before a background drain finishes. If the previous destination uses a resource required by the updated pipeline, the update waits for the previous destination to stop.
+| Previous buffer | Updated buffer | What happens |
+| --------------- | -------------- | ------------ |
+| Memory or disk | Unchanged | The updated destination reuses the buffer and processes its backlog. If the destination endpoint changed, buffered events are sent to the new endpoint. |
+| Memory | Changed memory or disk | The previous destination drains in the background while the updated destination starts with a new buffer. If the Worker stops before the drain completes, events remaining in the previous memory buffer are lost. |
+| Disk | Changed disk | The updated destination opens the existing disk buffer and processes its persisted events. |
+| Disk | Memory | The updated destination starts with a new memory buffer. Persisted events remain on disk but are inactive. |
+
+#### Removing a destination
+
+| Buffer | What happens |
+| ------ | ------------ |
+| Memory | The destination drains in the background. If the Worker stops before the drain completes, events remaining in memory are lost. |
+| Disk | The destination drains in the background. If the Worker restarts before the drain completes, the remaining events stay persisted on disk but become inactive. |
+
+Background draining continues only while the same Worker process is running. A pipeline update can complete before a background drain finishes.
+
+#### Recovering an inactive disk buffer
+
+To resume processing persisted events, re-add a disk-buffered destination with the same component ID. Before re-adding the destination, wait for the previous background drain to stop and release the buffer lock, or restart the Worker.
+
+If an update introduces a resource conflict, the update waits for the previous destination to stop. This waiting applies only to destinations changed or removed by the current update. A later update does not wait for a destination that is still draining after an earlier update.
 
 ### Using buffers with multiple destinations
 
