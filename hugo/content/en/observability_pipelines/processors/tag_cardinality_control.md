@@ -29,7 +29,7 @@ To set up the Tag Cardinality Control processor:
 1. Define a filter query. See [Metrics Search Syntax][1] for more information.
     - Only metrics matching the filter are processed.
     - All metrics, regardless of whether they match the filter query, are sent to the next step in the pipeline.
-1. Select a **Tracking mode** in the dropdown menu. See [Exact and probabilistic modes](#exact-and-probabilistic-modes) for more information.
+1. Select a **Tracking mode** in the dropdown menu. See the [Exact and probabilistic modes](#exact-and-probabilistic-modes) section for more information.
 1. Enter a cardinality limit for the maximum number of distinct values per tag. This limit is applied to all metrics that match the filter query.
 1. In the **When the limit is reached** dropdown menu, select whether to **Drop tag** or **Drop event** for metrics that have exceeded the cardinality limit.
 
@@ -99,7 +99,7 @@ $$\text"Memory usage" = A\ \×\ B$$
 
 You can calculate `cache_size_per_key` with a Bloom Filter Calculator using a standard formula, where `n` is the cardinality limit and the false positive rate (`p`) is fixed at `0.1%` in the Worker.
 
-### Benchmarks for exact mode vs probabilistic mode
+### Benchmarks for exact mode versus probabilistic mode
 
 The following tables show benchmarks for `exact` mode and `probabilistic` mode. As the number of unique values for each tag increases, `probabilistic` mode becomes more memory-efficient. The metric names and tag names used for these benchmarks were randomly generated 20-byte strings.
 
@@ -107,11 +107,11 @@ The machine type used for benchmarking is an AWS M6gd.4xlarge instance.
 
 #### Benchmarks for 10,000 metrics tracked
 
-The Worker's RSS memory usage for probabilistic and exact mode for 10,000 metrics tracked.
+The following table shows the Worker's RSS memory usage for probabilistic and exact mode when tracking 10,000 metrics.
 
 **10 tags per metric**
 
-| Unique values per tag | Probabilistic Mode (GB) | Exact Mode (GB) |
+| Unique values per tag | Probabilistic mode (GB) | Exact mode (GB) |
 |:---------------------:|:-----------------------:|:---------------:|
 | 500                   | 0.20                    | 1.04            |
 | 250                   | 0.13                    | 0.56            |
@@ -119,11 +119,11 @@ The Worker's RSS memory usage for probabilistic and exact mode for 10,000 metric
 
 #### Benchmarks for 50,000 metrics tracked
 
-The Worker's RSS memory usage for probabilistic and exact mode for 50,000 metrics tracked.
+The following table shows the Worker's RSS memory usage for probabilistic and exact mode when tracking 50,000 metrics.
 
 **10 tags per metric**
 
-| Unique values per tag | Probabilistic Mode (GB) | Exact Mode (GB) |
+| Unique values per tag | Probabilistic mode (GB) | Exact mode (GB) |
 |:---------------------:|:-----------------------:|:---------------:|
 | 100                   | 0.35                    | 0.92            |
 | 250                   | 0.54                    | 2.67            |
@@ -139,11 +139,11 @@ The Worker's RSS memory usage for probabilistic and exact mode for 50,000 metric
 
 #### Benchmarks for 100,000 metrics tracked
 
-The Worker's RSS memory usage for probabilistic and exact mode for 100,000 metrics tracked.
+The following table shows the Worker's RSS memory usage for probabilistic and exact mode when tracking 100,000 metrics.
 
 **10 tags per metric**
 
-| Unique values per tag | Probabilistic Mode (GB) | Exact Mode (GB) |
+| Unique values per tag | Probabilistic mode (GB) | Exact mode (GB) |
 |:---------------------:|:-----------------------:|:---------------:|
 | 100                   | 0.66                    | 1.79            |
 | 250                   | 1.02                    | 5.29            |
@@ -151,7 +151,7 @@ The Worker's RSS memory usage for probabilistic and exact mode for 100,000 metri
 
 **50 tags per metric**
 
-| Unique values per tag | Probabilistic Mode (GB) | Exact Mode (GB) |
+| Unique values per tag | Probabilistic mode (GB) | Exact mode (GB) |
 |:---------------------:|:-----------------------:|:---------------:|
 | 100                   | 2.49                    | 7.86            |
 | 250                   | 4.08                    | 25.74           |
