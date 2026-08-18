@@ -1,5 +1,5 @@
 ---
-title: HTTP API Reference
+title: API Reference
 description: Reference documentation for the Agent Observability HTTP API, used to send LLM traces and spans to Datadog from applications in any language.
 aliases:
     - /tracing/llm_observability/api
