@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-Send traces, metrics, and logs to Datadog using the Community OpenTelemetry Collector, which is based on the [OpenTelemetry Collector Contrib][1] distribution and standard OpenTelemetry components. This setup uses the following key components:
+Send traces, metrics, and logs to Datadog using the Pure OpenTelemetry Collector, which is based on the [OpenTelemetry Collector Contrib][1] distribution and standard OpenTelemetry components. This setup uses the following key components:
 
 - **OTLP HTTP exporter**: Sends telemetry to Datadog's OTLP intake endpoints.
 - **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Service Catalog and Service Page.
