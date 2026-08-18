@@ -48,16 +48,13 @@ helm repo update
 helm install kube-state-metrics prometheus-community/kube-state-metrics
 ```
 
-#### 2. Create a Datadog configuration secret
+#### 2. Create a Datadog API key secret
 
-Create a Kubernetes secret to store your Datadog API key and [site][12]. Replace `<YOUR_DATADOG_SITE>` with your Datadog site, such as `datadoghq.com` or `datadoghq.eu`:
+Create a Kubernetes secret to store your Datadog API key:
 
 ```sh
 export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
-export DD_SITE="<YOUR_DATADOG_SITE>"
-kubectl create secret generic datadog-secret \
-  --from-literal api-key="$DD_API_KEY" \
-  --from-literal dd-site="$DD_SITE"
+kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
 ```
 
 #### 3. Install the OpenTelemetry Collectors
@@ -183,4 +180,3 @@ The [count connector][11] generates object-count metrics by counting the number 
 [9]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/opentelemetry-collector-0.156.2/charts/opentelemetry-collector
 [10]: /containers/monitoring/kubernetes_explorer/
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/countconnector
-[12]: /getting_started/site/
