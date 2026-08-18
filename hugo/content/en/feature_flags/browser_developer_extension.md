@@ -79,7 +79,7 @@ An override whose value doesn't match its declared type is ignored when the wrap
 2. Open Chrome DevTools (`Cmd+Opt+I` on Mac, `F12` on Windows or Linux).
 3. Select the **Browser SDK** panel. If you don't see it, select the overflow menu (`»`) in the DevTools tab bar.
 4. Select the **Feature Flags** tab.
-5. Choose your Datadog site, then click **Sign in to Datadog**.
+5. On the site dropdown, select US1 (the only supported Datadog site), then click **Sign in to Datadog**.
 
 {{< img src="feature_flags/devtools_extension/flags-tab-connect.png" alt="The Feature Flags tab sign-in screen, showing the Datadog site dropdown set to US1 and the Sign in to Datadog button." style="width:100%;" >}}
 
