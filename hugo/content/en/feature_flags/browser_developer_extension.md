@@ -71,7 +71,7 @@ const details = client.getBooleanDetails('<FLAG_KEY>', false);
 console.log(details.value, details.reason, details.flagMetadata.overridden);
 {{< /code-block >}}
 
-An override whose value doesn't match its declared type is ignored, and the wrapper logs a warning to the browser console. Integer overrides must be whole numbers.
+An override whose value doesn't match its declared type is ignored when the wrapper reads it at initialization, and the wrapper logs a warning to the browser console. Integer overrides must be whole numbers.
 
 ## Open the Feature Flags tab
 
