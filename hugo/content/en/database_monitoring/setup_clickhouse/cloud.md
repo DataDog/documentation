@@ -49,8 +49,6 @@ Database Monitoring collects the following data from ClickHouse:
 
 ## Setup
 
-
-
 ### Step 1: Grant Datadog Agent access
 
 Create a dedicated `datadog` user:
@@ -86,7 +84,7 @@ Grant `REMOTE` permissions to allow cross-replica querying:
 GRANT REMOTE ON *.* TO datadog;
 ```
 
-The `REMOTE` privilege is required because the Agent uses ClickHouse's `clusterAllReplicas()` table function to aggregate data across all replicas in a ClickHouse Cloud service through the single endpoint. This privilege enables cross-node query execution—it does **not** grant access to any additional databases or tables beyond what was explicitly granted above. The `ON *.`* syntax is a ClickHouse requirement for this privilege type and does not expand the scope of data access.
+The `REMOTE` privilege is required because the Agent uses ClickHouse's `clusterAllReplicas()` table function to aggregate data across all replicas in a ClickHouse Cloud service through the single endpoint. This privilege enables cross-node query execution—it does **not** grant access to any additional databases or tables beyond what was explicitly granted above. The `ON *.*` syntax is a ClickHouse requirement for this privilege type and does not expand the scope of data access.
 
 The grants above are sufficient for query metrics, query samples, query completions, and parts and merges collection. They do **not** grant the Agent access to your application data.
 
