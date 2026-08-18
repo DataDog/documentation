@@ -1,5 +1,6 @@
 ---
 title: SentinelOne Destination
+description: Learn how to send logs to SentinelOne using the Observability Pipelines Worker.
 disable_toc: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-sentinelone/"

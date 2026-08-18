@@ -1,5 +1,6 @@
 ---
 title: Azure Storage Destination
+description: Learn how to send logs to an Azure Storage bucket, optionally for archiving and rehydration in Datadog.
 disable_toc: false
 products:
 - name: Logs

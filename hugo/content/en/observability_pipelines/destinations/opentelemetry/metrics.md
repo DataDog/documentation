@@ -1,5 +1,6 @@
 ---
 title: OpenTelemetry Destination
+description: Learn how to send metrics to an OpenTelemetry Collector or OTLP-compatible endpoint using the Observability Pipelines Worker.
 disable_toc: false
 code_lang: metrics
 type: multi-code-lang

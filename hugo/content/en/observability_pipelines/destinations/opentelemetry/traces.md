@@ -1,5 +1,6 @@
 ---
 title: OpenTelemetry Traces Destination
+description: Learn how to send traces to an OpenTelemetry Collector using the Observability Pipelines Worker.
 disable_toc: false
 code_lang: traces
 type: multi-code-lang

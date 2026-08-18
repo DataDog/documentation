@@ -1,5 +1,6 @@
 ---
 title: Amazon Security Lake Destination
+description: Learn how to send logs to Amazon Security Lake using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

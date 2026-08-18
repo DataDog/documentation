@@ -1,5 +1,6 @@
 ---
 title: Datadog Archives Destination
+description: Learn how to send logs to Amazon S3 in Datadog-rehydratable format for archiving and rehydration.
 disable_toc: false
 products:
 - name: Logs
