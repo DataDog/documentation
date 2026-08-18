@@ -74,7 +74,7 @@ produces four fields you can filter, group, and sort by:
 
 Logs where the pattern does not match have no value for those fields.
 
-Extracted values are always strings. Unlike a Grok rule such as `%{integer:status}`, regex extraction does not convert types. To get a number, wrap the extracted field in a calculated field that casts it.
+Extracted values are always strings. Unlike a Grok rule such as `%{integer:status}`, regex extraction does not convert types. To use the value as a number, reference it in an arithmetic formula.
 
 ## Use regex in a calculated field
 
@@ -83,7 +83,7 @@ Extracted values are always strings. Unlike a Grok rule such as `%{integer:statu
 Returns `true` when the pattern matches anywhere in the value, and `false` otherwise.
 
 ```plaintext
-regexp_like(#message, 'timeout|deadline exceeded')
+regexp_like(message, "timeout|deadline exceeded")
 ```
 
 ### regexp_replace(value, pattern, replacement)
@@ -92,7 +92,7 @@ Returns the value with matched text replaced. Use `$1` through `$9` in the repla
 
 ```plaintext
 -- strips the version prefix: /api/v1/orders becomes orders
-regexp_replace(#path, '^/api/v[0-9]+/(.*)$', '$1')
+regexp_replace(#path, "^/api/v[0-9]+/(.*)$", "$1")
 ```
 
 By default, `regexp_replace` replaces only the first match. Two optional arguments change that:
@@ -104,7 +104,7 @@ By default, `regexp_replace` replaces only the first match. Two optional argumen
 
 ```plaintext
 -- replace every match
-regexp_replace(#message, '[0-9]+', 'N', 1, 0)
+regexp_replace(message, "[0-9]+", "N", 1, 0)
 ```
 
 ## Further reading
