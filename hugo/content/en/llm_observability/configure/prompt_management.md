@@ -226,7 +226,7 @@ In the Prompt Editor:
 
 Structure the prompt so the user query and context are injected as variables:
 
-{{< img src="llm_observability/investigate/prompt-creation.png" alt="The Playground with a System Prompt message reading 'You are a support agent for {{company}}' and a User Prompt message containing {{question}}, with the Save Prompt button in the top right." style="width:100%;" >}}
+{{< img src="llm_observability/monitoring/prompt-creation.png" alt="The Playground with a System Prompt message reading 'You are a support agent for {{company}}' and a User Prompt message containing {{question}}, with the Save Prompt button in the top right." style="width:100%;" >}}
 
 In the save dialog:
 

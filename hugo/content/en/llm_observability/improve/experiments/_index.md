@@ -31,7 +31,7 @@ further_reading:
     text: "How we made a SQL query optimization agent 59% more accurate using autoresearch and Agent Observability"
 ---
 
-{{< img src="llm_observability/improve/experiments/Experiments_LLMO.png" alt="Agent Observability, Experiment view. Heading: 'Comparing 6 experiments across 9 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}
+{{< img src="llm_observability/experiments/Experiments_LLMO.png" alt="Agent Observability, Experiment view. Heading: 'Comparing 6 experiments across 9 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}
 
 Agent Observability [Experiments][1] supports the entire lifecycle of building LLM applications and agents. It helps you understand how changes to prompts, models, providers, or system architecture affect performance. With this feature, you can:
 

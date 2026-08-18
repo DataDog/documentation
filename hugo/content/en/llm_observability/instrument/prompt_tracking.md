@@ -25,7 +25,7 @@ Prompt Tracking enables you to:
 - Filter [Trace Explorer][1] by prompt name, ID, or version to isolate impacted requests
 - Reproduce a run by populating [Agent Observability Playground][2] with the exact template and variables from any span
 
-{{< img src="llm_observability/investigate/llm-prompt-tracking-hero.png" alt="Prompts view for an app in Agent Observability." style="width:100%;" >}}
+{{< img src="llm_observability/monitoring/llm-prompt-tracking-hero.png" alt="Prompts view for an app in Agent Observability." style="width:100%;" >}}
 
 ## Set up Prompt Tracking
 
@@ -107,11 +107,11 @@ View your app in Agent Observability and select {{< ui >}}Prompts{{< /ui >}} on 
 - {{< ui >}}Most Tokens Used{{< /ui >}}: Prompts ranked by total (input or output) tokens
 - {{< ui >}}Highest Latency Prompts{{< /ui >}}: Prompts ranked by average duration
 
-{{< img src="llm_observability/investigate/prompt_details.png" alt="Detail view for a single prompt." style="width:100%;" >}}
+{{< img src="llm_observability/monitoring/prompt_details.png" alt="Detail view for a single prompt." style="width:100%;" >}}
 
 Click on a prompt to open a detailed side-panel view that features information about version activity and various metrics. You can also see a diff view of two versions, open Trace Explorer pre-filtered to spans that use a selected version, or start a Playground session pre-populated with the selected version's template and variables.
 
-{{< img src="llm_observability/instrument/prompt_tracking_trace_explorer3.png" alt="Prompts view for an app in Agent Observability." style="width:100%;" >}}
+{{< img src="llm_observability/monitoring/prompt_tracking_trace_explorer3.png" alt="Prompts view for an app in Agent Observability." style="width:100%;" >}}
 
 You can use the Agent Observability Trace Explorer to locate requests by prompt usage. You can use a prompt's name, ID, and version as facets for both trace-level and span-level search. Click any LLM span to see the prompt that generated it.
 

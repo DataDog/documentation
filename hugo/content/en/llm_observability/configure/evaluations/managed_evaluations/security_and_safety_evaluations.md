@@ -16,7 +16,7 @@ aliases:
 
 This check ensures that sensitive information is handled appropriately and securely, reducing the risk of data breaches or unauthorized access.
 
-{{< img src="llm_observability/configure/evaluations/sensitive_data_scanning_4.png" alt="A Security and Safety evaluation detected by the Sensitive Data Scanner in Agent Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sensitive_data_scanning_4.png" alt="A Security and Safety evaluation detected by the Sensitive Data Scanner in Agent Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Method | Evaluation Definition |
 |---|---|---|

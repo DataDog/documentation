@@ -35,7 +35,7 @@ Supported providers:
 
 ## Test a prompt with arbitrary input
 
-{{< img src="llm_observability/improve/playground/playground-arbitrary-input.png" alt="Agent Observability Playground showing a user message with {{category}} and {{approach}} variable placeholders and the model response in the output panel." style="width:100%;" >}}
+{{< img src="llm_observability/playground/playground-arbitrary-input.png" alt="Agent Observability Playground showing a user message with {{category}} and {{approach}} variable placeholders and the model response in the output panel." style="width:100%;" >}}
 
 Use Prompts mode to iterate on a prompt with a fixed set of inputs.
 
@@ -54,7 +54,7 @@ Edit messages, variable values, or model settings, then click {{< ui >}}Run{{< /
 
 ## Run an experiment from the Playground
 
-{{< img src="llm_observability/improve/playground/playground-experiment-preview.png" alt="Agent Observability Playground in experiment mode with all steps completed and Save and Run as experiment active. The Experiment Preview table shows OUTPUT, EVAL_EXPECTED_OUTPUT, INPUT, and EXPECTEDOUTPUT columns with PASS and FAIL badges per row and a summary banner reading 6 of 20 records passed." style="width:100%;" >}}
+{{< img src="llm_observability/playground/playground-experiment-preview.png" alt="Agent Observability Playground in experiment mode with all steps completed and Save and Run as experiment active. The Experiment Preview table shows OUTPUT, EVAL_EXPECTED_OUTPUT, INPUT, and EXPECTEDOUTPUT columns with PASS and FAIL badges per row and a summary banner reading 6 of 20 records passed." style="width:100%;" >}}
 
 Use Experiments mode to test your prompt across a dataset, score results with evaluators, and save the configuration as a reproducible experiment.
 
@@ -114,7 +114,7 @@ Click a {{< ui >}}FAIL{{< /ui >}} badge to expand a popover showing the actual o
 
 ### Iterate on prompt and evaluator configuration
 
-{{< img src="llm_observability/improve/playground/playground-stale-preview.png" alt="Agent Observability Playground showing stale preview state after a prompt edit. A warning banner reads 'Prompt or settings changed since the last preview. Run the preview again before running the full dataset.' with a Re-run Preview button. The results table shows PASS and FAIL badges from the previous run." style="width:100%;" >}}
+{{< img src="llm_observability/playground/playground-stale-preview.png" alt="Agent Observability Playground showing stale preview state after a prompt edit. A warning banner reads 'Prompt or settings changed since the last preview. Run the preview again before running the full dataset.' with a Re-run Preview button. The results table shows PASS and FAIL badges from the previous run." style="width:100%;" >}}
 
 After reviewing results, edit the prompt or evaluator configuration to improve scores. Any edit marks the preview results as stale. Click {{< ui >}}Re-run Preview{{< /ui >}} to run again with the updated configuration.
 

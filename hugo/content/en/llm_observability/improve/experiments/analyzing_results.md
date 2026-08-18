@@ -73,7 +73,7 @@ The following options are available on tags:
 
 You can use the search bar to find specific records, based on their properties (dataset records data) or on the result of the experiment (output and evaluations). The search is executed at trace level.
 
-{{< img src="llm_observability/improve/experiments/exp_details_search.png" alt="Agent Observability, Experiment Details focus. Heading: 'Highlighting the search bar'." style="width:100%;" >}}
+{{< img src="llm_observability/experiments/exp_details_search.png" alt="Agent Observability, Experiment Details focus. Heading: 'Highlighting the search bar'." style="width:100%;" >}}
 
 <div class="alert alert-info">To have access to the most data, update to <code>ddtrace-py >= 4.1.0</code>, as this version brings the following changes: 
 
@@ -122,7 +122,7 @@ To find traces using tags, search `<tag>:<value>`. For example, `dataset_record_
 
 To see which tags are available, open a trace to find its tags.
 
-{{< img src="llm_observability/improve/experiments/side-panel-tag.png" alt="Agent Observability, Experiment trace side-panel. Highlighting where to find trace tags." style="width:100%;" >}}
+{{< img src="llm_observability/experiments/side-panel-tag.png" alt="Agent Observability, Experiment trace side-panel. Highlighting where to find trace tags." style="width:100%;" >}}
 
 
 #### Find traces by input, output, expected output, or metadata
@@ -190,11 +190,11 @@ Group or filter by `@experiment.status` to compare metrics across running or com
 
 ### Widget examples
 #### Plotting performance over time broken down by a metadata field
-{{< img src="llm_observability/improve/experiments/widget-metadata.png" alt="Widget using LLM Experiments data. Graph showing the performance over time broken down by a metadata field." style="width:100%;" >}}
+{{< img src="llm_observability/experiments/widget-metadata.png" alt="Widget using LLM Experiments data. Graph showing the performance over time broken down by a metadata field." style="width:100%;" >}}
 
 <div class="alert alert-info">If you are trying to compute an average of a Boolean evaluation, you must manually compute the percentage of <code>True</code> over all traces.</div>
 
 #### Displaying tool usage stats
 In a situation where your agent is supposed to call a certain tool, and you need to understand how often the tool is called and get some stats about it:
 
-{{< img src="llm_observability/improve/experiments/widget-tool.png" alt="Widget using LLM Experiments data. Graph showing some usage statistics of a tool in multiple experiments." style="width:100%;" >}}
+{{< img src="llm_observability/experiments/widget-tool.png" alt="Widget using LLM Experiments data. Graph showing some usage statistics of a tool in multiple experiments." style="width:100%;" >}}
