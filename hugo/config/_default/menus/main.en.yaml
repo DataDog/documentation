@@ -5769,6 +5769,41 @@ menu:
       parent: llm_obs
       identifier: llm_obs_guide
       weight: 9
+    - name: Using the Datadog-CrewAI Integration
+      url: llm_observability/guide/crewai_guide
+      parent: llm_obs_guide
+      identifier: llm_obs_guide_crewai
+      weight: 901
+    - name: Trace an LLM Application in AWS Lambda
+      url: llm_observability/guide/trace-an-llm-application-in-aws-lambda
+      parent: llm_obs_guide
+      identifier: llm_obs_guide_aws_lambda
+      weight: 902
+    - name: Evaluation Developer Guide
+      url: llm_observability/configure/evaluations/evaluation_developer_guide
+      parent: llm_obs_guide
+      identifier: llm_obs_guide_evaluation_developer_guide
+      weight: 903
+    - name: Instrument a Next.js Application
+      url: llm_observability/guide/nextjs_guide
+      parent: llm_obs_guide
+      identifier: llm_obs_guide_nextjs
+      weight: 903
+    - name: Monitor Proxy Services
+      url: llm_observability/guide/monitor_proxy_services
+      parent: llm_obs_guide
+      identifier: llm_obs_guide_monitor_proxy_services
+      weight: 904
+    - name: Agent Monitoring
+      url: llm_observability/guide/agent_monitoring
+      parent: llm_obs_guide
+      identifier: llm_obs_guide_agent_monitoring
+      weight: 905
+    - name: Monitor MCP Clients
+      url: llm_observability/guide/monitor_mcp_client
+      parent: llm_obs_guide
+      identifier: llm_obs_guide_monitor_mcp_client
+      weight: 906
     - name: GPU Monitoring
       url: gpu_monitoring/
       pre: gpu-monitoring-wui
