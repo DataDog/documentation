@@ -5579,11 +5579,6 @@ menu:
       parent: llm_obs_instrumentation_agentic
       identifier: llm_obs_instrumentation_agentic_java
       weight: 30503
-    - name: Prompt Management
-      url: llm_observability/instrument/agentic/prompt_management
-      parent: llm_obs_instrumentation_agentic
-      identifier: llm_obs_instrumentation_agentic_prompt_management
-      weight: 30504
     - name: Correlate with APM
       url: llm_observability/instrument/agent_observability_and_apm
       parent: llm_obs_instrumentation
