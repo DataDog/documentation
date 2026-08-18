@@ -52,7 +52,7 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 
 #### Helm chart changes
 - **Breaking**: Removes the `medium` pod size. `indexer.podSize` and `searcher.podSize` accept `large`, `xlarge`, `2xlarge`, `4xlarge`, `6xlarge`, and `8xlarge`.
-- Adjusts pod-size CPU and memory requests and limits to account for node reservations and add-ons, and rescales caches, ingest queues, and concurrent split searches accordingly.
+- Adjusts pod-size CPU and memory requests and limits to account for node reservations and add-ons. This rescales caches, ingest queues, and concurrent split searches accordingly.
 - Enables document clustering by default with `config.docs_clustering`.
 - Sets indexer and standalone-compactor decommission timeouts to 90% of each workload's `terminationGracePeriodSeconds`.
 - Adds a default metastore `PodDisruptionBudget` and global DNS `ndots: 1` setting.
