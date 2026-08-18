@@ -163,7 +163,6 @@ Each attribute key is `@feature_flags.<flag_key>` and the value is the variant r
 
 If `@feature_flags.<flag_key>` attributes do not appear on your traces:
 
-- Confirm the Datadog Feature Flags provider is active. See [Server SDK Configuration Sources][5] to verify your configuration source is set up correctly.
 - Confirm span enrichment is enabled (`DD_EXPERIMENTAL_FLAGGING_PROVIDER_SPAN_ENRICHMENT_ENABLED=true`).
 - Verify that your application is evaluating flags during traced requests. Enrichment only occurs when a flag is evaluated while a trace is active.
 - Wait a few seconds after the span is ingested. The `@feature_flags.<flag_key>` facets are derived by backend processing and do not appear in raw span metadata.
@@ -221,4 +220,3 @@ Evaluations beyond these limits are dropped for that span.
 [2]: /feature_flags/server/
 [3]: /tracing/
 [4]: /experiments/
-[5]: /feature_flags/concepts/configuration_sources/
