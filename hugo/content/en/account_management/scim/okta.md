@@ -73,7 +73,7 @@ Datadog's SCIM role support follows the SCIM multi-valued attribute convention d
 }
 ```
 
-1. In {{< ui >}}Directory{{< /ui >}} > {{< ui >}}Profile Editor{{< /ui >}}, select the Okta user profile, then click {{< ui >}}Add Attribute{{< /ui >}} to create a `roles` attribute:
+1. In {{< ui >}}Directory{{< /ui >}} > {{< ui >}}Profile Editor{{< /ui >}}, select the user profile for the application configured for Datadog SCIM, then click {{< ui >}}Add Attribute{{< /ui >}} to create a `roles` attribute:
     - {{< ui >}}Data type{{< /ui >}}: **string**
     - {{< ui >}}Display name{{< /ui >}}: **Roles**
     - {{< ui >}}Variable name{{< /ui >}}: **roles**

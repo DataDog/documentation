@@ -817,7 +817,7 @@ If you are a partner or vendor adding Datadog to an MCP directory for your AI ag
 
 Local authentication is recommended for Cline and when remote authentication is unreliable or not available. After installation, you typically do not need to update the local binary to benefit from MCP Server updates, as the tools are remote.
 
-{{% collapse-content title="Set up Datadog MCP Server local binary" level="h5" expanded=false id="mcp-local-binary" %}}
+{{% collapse-content title="Set up Datadog MCP Server local binary" level="h4" expanded=false id="mcp-local-binary" %}}
 
 1. Install the Datadog MCP Server binary (macOS and Linux):
    ```bash
