@@ -1,5 +1,5 @@
 ---
-title: Python Application Agentic Instrumentation
+title: Python
 aliases:
 - /llm_observability/instrumentation/agentic/python/
 ---

@@ -5534,7 +5534,7 @@ menu:
       parent: llm_obs
       identifier: llm_obs_instrumentation
       weight: 3
-    - name: Automatic
+    - name: Automatic Instrumentation
       url: llm_observability/instrument/auto_instrumentation
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_auto
@@ -5544,12 +5544,12 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_sdk
       weight: 302
-    - name: HTTP API
+    - name: HTTP API Reference
       url: llm_observability/instrument/api
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_api
       weight: 303
-    - name: OpenTelemetry
+    - name: OpenTelemetry Instrumentation
       url: llm_observability/instrument/otel_instrumentation
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_otel
@@ -5574,7 +5574,7 @@ menu:
       parent: llm_obs_instrumentation_agentic
       identifier: llm_obs_instrumentation_agentic_java
       weight: 30503
-    - name: Correlate with APM
+    - name: Agent Observability and APM
       url: llm_observability/instrument/agent_observability_and_apm
       parent: llm_obs_instrumentation
       identifier: llm_obs_correlate_apm

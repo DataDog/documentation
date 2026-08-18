@@ -119,7 +119,7 @@ To submit evaluations for <a href="/llm_observability/instrument/otel_instrument
 }
 {{< /code-block >}}
 
-## Supported evaluation tools
+## Supported evaluation frameworks
 
 {{< whatsnext desc="Submit evaluations from these tools:" >}}
     {{< nextlink href="/llm_observability/configure/evaluations/external_evaluations/deepeval" >}}DeepEval Evaluations{{< /nextlink >}}

@@ -98,8 +98,8 @@ Fill in the provided values:
 ## Language-specific instructions
 
 {{< whatsnext desc="Instrument an application with a coding agent:" >}}
-    {{< nextlink href="/llm_observability/instrument/agentic/python" >}}Python Application Agentic Instrumentation{{< /nextlink >}}
-    {{< nextlink href="/llm_observability/instrument/agentic/nodejs" >}}Node.js Application Agentic Instrumentation{{< /nextlink >}}
-    {{< nextlink href="/llm_observability/instrument/agentic/java" >}}Java Application Agentic Instrumentation{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/instrument/agentic/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/instrument/agentic/nodejs" >}}Node.js{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/instrument/agentic/java" >}}Java{{< /nextlink >}}
     {{< nextlink href="/llm_observability/instrument/agentic/prompt_management" >}}Prompt Management Agentic Integration{{< /nextlink >}}
 {{< /whatsnext >}}
