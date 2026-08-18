@@ -17,7 +17,7 @@ For how each one is produced, see [How Workload Protection works][4].
 
 {{< whatsnext desc="Explore Workload Protection signals:" >}}
 {{< nextlink href="/security/workload_protection/investigate_and_triage/security_signals/investigate" >}}Investigate signals{{< /nextlink >}}
-{{< nextlink href="/security/workload_protection/investigate_and_triage/security_signals/actions" >}}Take action on signals{{< /nextlink >}}
+{{< nextlink href="/security/workload_protection/investigate_and_triage/security_signals/actions" >}}Triage and act on signals{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Findings

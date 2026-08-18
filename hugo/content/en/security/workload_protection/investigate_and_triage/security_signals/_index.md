@@ -29,7 +29,7 @@ Select a signal to open the side panel. From there, you can [investigate the thr
 
 {{< whatsnext desc="Learn how to investigate and respond to Workload Protection signals:" >}}
 {{< nextlink href="/security/workload_protection/investigate_and_triage/security_signals/investigate" >}}Investigate signals with the investigation graph, timeline, and Signal JSON{{< /nextlink >}}
-{{< nextlink href="/security/workload_protection/investigate_and_triage/security_signals/actions" >}}Take action on signals: triage, escalate, automate, and respond{{< /nextlink >}}
+{{< nextlink href="/security/workload_protection/investigate_and_triage/security_signals/actions" >}}Triage and act on signals: assign, escalate, automate, and enforce{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /security/workload_protection/

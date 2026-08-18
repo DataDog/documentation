@@ -1,5 +1,5 @@
 ---
-title: Triage and Respond to Security Signals
+title: Triage and Act on Security Signals
 disable_toc: false
 ---
 
