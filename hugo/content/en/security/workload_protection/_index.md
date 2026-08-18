@@ -123,7 +123,7 @@ See the [Investigate and Triage][3] pages to discover the explorers and in-app v
 
 ### Respond to threats
 
-The [Respond to Threats][4] page explains how to configure automated and manual response. The Agent can terminate a malicious process or container as soon as a rule matches. From a signal, you can terminate a process or container, or isolate it from the network.
+The [Respond to Threats][4] page explains how to configure automated and manual response. It covers the Agent enforcement requirements, the response actions available, and how to interpret their results.
 
 ### Coverage
 

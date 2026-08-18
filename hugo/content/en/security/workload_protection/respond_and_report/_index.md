@@ -24,13 +24,13 @@ further_reading:
   text: "Detect Host and Container Compromises with Workload Protection"
 ---
 
-Workload Protection can act on threats automatically when an Agent rule matches or manually when you respond to a signal. The Datadog Agent terminates processes and containers or blocks network traffic. Both methods depend on Agent enforcement.
+Workload Protection acts on threats by terminating processes and containers or blocking network traffic. The Datadog Agent runs these actions automatically when an Agent rule matches, or when you trigger them manually from a signal. Both methods depend on Agent enforcement.
 
 For more information about where response fits in the detection pipeline, see [How Workload Protection works][7].
 
 ## Response requirements
 
-Automated and manual response rely on enforcement in the Agent, which is enabled by default. Depending on the response action, the Agent can terminate a process or container or isolate it from the network.
+Automated and manual response rely on enforcement in the Agent, which is enabled by default.
 
 ### Configure Agent enforcement
 
@@ -40,11 +40,11 @@ These settings let you exclude binaries from response actions or control which r
 
 ### Response permissions
 
-Both **Automated response** and manual response require specific [RBAC permissions][5]:
+Both automated and manual response require specific [RBAC permissions][5]:
 
-- The `security_monitoring_cws_agent_rules_actions` permission lets users configure Automated response and manually respond to threats.
-  - A user with the Datadog Admin role must create a role that includes this permission, then assign that role only to users who manage Automated response or need to run manual response actions.
-- The **Datadog Standard** role lets users create and update custom rules by default, as long as the changes do not modify **protection** settings on the rule. Users with the Standard role cannot enable a disabled rule that includes an Automated response action and cannot use manual response actions.
+- The `security_monitoring_cws_agent_rules_actions` permission lets users configure automated response and manually respond to threats.
+  - A user with the Datadog Admin role must create a role that includes this permission, then assign that role only to users who manage automated response or need to run manual response actions.
+- The **Datadog Standard** role lets users create and update custom rules by default, as long as the changes do not modify **protection** settings on the rule. Users with the Standard role cannot enable a disabled rule that includes an automated response action and cannot use manual response actions.
 
 ## Automated response
 
