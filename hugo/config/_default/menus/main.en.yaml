@@ -5529,11 +5529,6 @@ menu:
       parent: llm_obs
       identifier: llm_obs_build_with_ai
       weight: 2
-    - name: MCP Server
-      url: llm_observability/build_with_ai/mcp_server
-      parent: llm_obs_build_with_ai
-      identifier: llm_obs_mcp_server
-      weight: 201
     - name: Instrument
       url: llm_observability/instrument/
       parent: llm_obs
@@ -5759,7 +5754,7 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_monitoring_automation_rules
       weight: 603
-    - name: Data Security and RBAC
+    - name: Data Privacy, Security, and RBAC
       url: llm_observability/data_privacy_security_and_rbac
       parent: llm_obs
       identifier: llm_obs_data_security_and_rbac

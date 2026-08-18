@@ -1,5 +1,5 @@
 ---
-title: Data Security and RBAC
+title: Data Privacy, Security, and RBAC
 aliases:
 - /llm_observability/data_security_and_rbac/
 description: Restrict access to sensitive Agent Observability data using data access controls, redact data with span processors, and integrate with Sensitive Data Scanner.
