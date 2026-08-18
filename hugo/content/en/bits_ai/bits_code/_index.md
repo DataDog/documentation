@@ -59,7 +59,7 @@ The following plans are not supported:
 - **Self-hosted GithHub Enterpise**: Custom domains are not supported.
 - **Cloud-hosted GitHub on dedicated domains**: such as [GitHub Enterprise Cloud with data residency][31] when using a custom domain name.
 - **Azure Dev Ops**.
-- **BitBucket**
+- **BitBucket**.
 
 
 ## Supported Datadog products
