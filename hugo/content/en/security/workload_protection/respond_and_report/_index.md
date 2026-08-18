@@ -30,6 +30,8 @@ For more information about where response fits in the detection pipeline, see [H
 
 ## Response requirements
 
+Response actions run in the Agent, so both automated and manual response depend on Agent settings and on the right RBAC permissions.
+
 ### Configure Agent enforcement
 
 Response actions use the `runtime_security_config.enforcement` settings in `/etc/datadog-agent/system-probe.yaml`. Enforcement is enabled by default, and the default settings are sufficient for most configurations. For the full parameter reference, see [Workload Protection Agent configuration][4].
