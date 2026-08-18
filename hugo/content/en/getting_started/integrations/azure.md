@@ -24,7 +24,7 @@ Datadog offers multiple configuration options for the Azure integration. This gu
 
 If you haven't already, create a [Datadog account][2].
 
-{{% collapse-content title="Permissions required for integration setup" level="h4" expanded=false id="required-permissions" %}}
+{{% collapse-content title="Permissions required for integration setup" level="h3" expanded=false id="required-permissions" %}}
 
 ### In Azure
 
@@ -85,7 +85,7 @@ You select the authentication method when you create or configure an app registr
 
 {{< img src="/getting_started/integrations/azure/GSwAzure_authenticationMethod.png" alt="The Authentication Method step in the Azure integration setup, showing the recommended Secretless Auth and Client Secret options" style="width:100%;" >}}
 
-{{% collapse-content title="Quickstart (recommended)" level="h4" expanded=false id="quickstart-setup" %}}
+{{% collapse-content title="Quickstart (recommended)" level="h3" expanded=false id="quickstart-setup" %}}
 
 ### Choose the Quickstart setup method if...
 
@@ -125,7 +125,7 @@ You can also click to enable custom metric collection from [Azure Application In
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Terraform" expanded=false level="h4" id="terraform-setup" %}}
+{{% collapse-content title="Terraform" expanded=false level="h3" id="terraform-setup" %}}
 
 ### Choose the Terraform setup method if...
 
@@ -220,7 +220,7 @@ Datadog provides a monitor template to help you get started. To use the monitor 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Use an existing app registration" level="h4" expanded=false id="existing-app-registration-setup" %}}
+{{% collapse-content title="Use an existing app registration" level="h3" expanded=false id="existing-app-registration-setup" %}}
 
 ### Choose the existing app registration setup method if..
 
@@ -337,7 +337,7 @@ You can use the automated log forwarding feature to setup and configure the serv
 
 Datadog recommends using the Agent or DaemonSet to send logs from Azure. If direct streaming isn't possible, use the {{< ui >}}Configure Log Forwarding{{< /ui >}} flow in the [Azure integration][20] to set up and manage automated log forwarding directly in Datadog. You can also deploy log forwarding with an [Azure Resource Manager (ARM) template][19]. Both methods automatically manage and scale log forwarding services.
 
-{{% collapse-content title="Automated (recommended)" level="h4" expanded=false id="automated-log-forwarding-setup" %}}
+{{% collapse-content title="Automated (recommended)" level="h3" expanded=false id="automated-log-forwarding-setup" %}}
 
 ### Choose the automated log forwarding setup method if...
 
@@ -381,7 +381,7 @@ See [Azure Automated Log Forwarding Architecture][34] for more details.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Container App" level="h4" expanded=false id="container-app-log-forwarding-setup" %}}
+{{% collapse-content title="Container App" level="h3" expanded=false id="container-app-log-forwarding-setup" %}}
 
 ### Choose the Container App log forwarding method if...
 

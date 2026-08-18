@@ -158,6 +158,20 @@ If you set streaming up through the [AWS Console](?tab=awsconsole#installation):
 
 Once the resources are deleted, wait for five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog's [AWS integration page][5] and verify that the disabled regions are not displayed under **CloudWatch Metric Streams** for the specified AWS account.
 
+### Monitor stream health
+
+Datadog submits the `datadog.aws_metric_streams.data_received` metric when it receives data from a CloudWatch metric stream. Use this metric to confirm that AWS is sending metrics and that Datadog is receiving them.
+
+`datadog.aws_metric_streams.data_received`
+: **Type**: Gauge<br>
+Reports a value of `1` when Datadog receives data from a CloudWatch metric stream, and does not report when Datadog receives no data. Tagged with `stream_arn`, `stream_name`, `aws_account`, and `region`. How often the metric reports depends on your data volume and the buffering configuration of your Firehose delivery stream.
+
+For a cross-account stream, the metric stream and the Firehose delivery stream are in the monitoring account. The `aws_account` tag identifies the monitoring account, not the source accounts that the metrics come from.
+
+To check whether a stream is delivering data, query this metric in the [Metrics Explorer][8] and group by `stream_name` or `stream_arn`.
+
+Because the metric does not report when a stream stops delivering data, monitor it for the transition from reporting to no data. Create a [metric monitor][9] on `datadog.aws_metric_streams.data_received`, group it by `stream_arn`, and enable missing data notifications. For the configuration steps, see [Set up an alert for when a specific tag stops reporting][10].
+
 ## Troubleshooting
 
 If you encounter issues while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][6]. If CloudWatch metrics stop appearing after Metric Streams has been running successfully, the problem may be Firehose destination errors.
@@ -166,7 +180,7 @@ If you encounter issues while setting up Metric Streams or the associated resour
 
 If CloudWatch metrics stop appearing in Datadog, the CloudWatch Metric Stream and Amazon Data Firehose delivery stream may still show a `running` state. This can happen even when Firehose is no longer delivering records.
 
-This can happen when Firehose cannot deliver records to the Datadog HTTP endpoint within its [retry period][8], nor write the records to its S3 backup. When both delivery paths fail, the delivery stream may not automatically resume HTTP delivery after the endpoint becomes available again.
+This can happen when Firehose cannot deliver records to the Datadog HTTP endpoint within its [retry period][11], nor write the records to its S3 backup. When both delivery paths fail, the delivery stream may not automatically resume HTTP delivery after the endpoint becomes available again.
 
 To diagnose and restore delivery:
 
@@ -178,15 +192,15 @@ To diagnose and restore delivery:
      --region <AWS_REGION>
    ```
 
-2. Review the [Firehose delivery error logs][9] in CloudWatch Logs. If delivery error logging is not enabled, enable it so you can capture future delivery errors. Relevant errors include `HttpEndpoint.DestinationException` (such as HTTP 408 responses) and `S3.AccessDenied`.
-3. Inspect the [Firehose CloudWatch metrics][10] in the CloudWatch console (Datadog may not show these metrics while delivery is interrupted). Check `DeliveryToHttpEndpoint.Success`, `DeliveryToHttpEndpoint.DataFreshness`, `DeliveryToHttpEndpoint.Records`, and `IncomingRecords`.
+2. Review the [Firehose delivery error logs][12] in CloudWatch Logs. If delivery error logging is not enabled, enable it so you can capture future delivery errors. Relevant errors include `HttpEndpoint.DestinationException` (such as HTTP 408 responses) and `S3.AccessDenied`.
+3. Inspect the [Firehose CloudWatch metrics][13] in the CloudWatch console (Datadog may not show these metrics while delivery is interrupted). Check `DeliveryToHttpEndpoint.Success`, `DeliveryToHttpEndpoint.DataFreshness`, `DeliveryToHttpEndpoint.Records`, and `IncomingRecords`.
 4. If Firehose receives records but does not deliver them, verify the S3 backup configuration and IAM role:
    - Confirm that Firehose can assume the configured role and write to the backup bucket.
    - Check that the bucket policy, permissions boundary, service control policies (SCPs), and KMS key policy do not deny the required access.
 5. Check whether records are reaching S3 by looking in the backup bucket under the prefix configured in your Firehose delivery stream's S3 backup settings. If no objects are being written, it confirms a permissions or configuration issue with the S3 backup path. If the delivery error logs from step 2 show an S3 permissions error, correct it before continuing.
-6. Update the Firehose HTTP destination configuration using the Firehose [UpdateDestination API][11]; for example, by changing its retry duration. A configuration update like this can restart a stalled destination.
+6. Update the Firehose HTTP destination configuration using the Firehose [UpdateDestination API][14]; for example, by changing its retry duration. A configuration update like this can restart a stalled destination.
 
-If delivery does not recover, contact [Datadog Support][12] and provide:
+If delivery does not recover, contact [Datadog Support][15] and provide:
    - The AWS account ID and region
    - The CloudWatch Metric Stream and Firehose delivery stream ARNs
    - The approximate time delivery stopped
@@ -204,8 +218,11 @@ If delivery does not recover, contact [Datadog Support][12] and provide:
 [5]: https://app.datadoghq.com/integrations/amazon-web-services
 [6]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
 [7]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
-[8]: https://docs.aws.amazon.com/firehose/latest/dev/retry.html
-[9]: https://docs.aws.amazon.com/firehose/latest/dev/monitoring-with-cloudwatch-logs.html
-[10]: https://docs.aws.amazon.com/firehose/latest/dev/monitoring-with-cloudwatch-metrics.html#fh-http-metrics
-[11]: https://docs.aws.amazon.com/firehose/latest/APIReference/API_UpdateDestination.html
-[12]: /help/
+[8]: https://app.datadoghq.com/metric/explorer
+[9]: /monitors/types/metric/
+[10]: /monitors/guide/set-up-an-alert-for-when-a-specific-tag-stops-reporting/
+[11]: https://docs.aws.amazon.com/firehose/latest/dev/retry.html
+[12]: https://docs.aws.amazon.com/firehose/latest/dev/monitoring-with-cloudwatch-logs.html
+[13]: https://docs.aws.amazon.com/firehose/latest/dev/monitoring-with-cloudwatch-metrics.html#fh-http-metrics
+[14]: https://docs.aws.amazon.com/firehose/latest/APIReference/API_UpdateDestination.html
+[15]: /help/

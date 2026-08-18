@@ -67,7 +67,7 @@ Datadog automatically creates a visualization based on your query.
 Use the Command Palette (<kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>) to auto-select a chart type based on your query, add or edit encodings, or rotate axes/switch chart types.
 </div>
 
-{{% collapse-content title="Guided example of Auto-generate" level="h4" expanded=false %}}
+{{% collapse-content title="Guided example of Auto-generate" level="h3" expanded=false %}}
 1. In a new Wildcard widget, click the JSON tab of the query editor and paste the following query:
     ```json
     {
