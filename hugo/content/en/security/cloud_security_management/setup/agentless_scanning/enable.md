@@ -40,7 +40,7 @@ Before setting up Agentless Scanning, verify that the following prerequisites ar
   - An {{< ui >}}API key{{< /ui >}} with Remote Configuration enabled is required for scanners to report scan results to Datadog.
   - An {{< ui >}}Application key{{< /ui >}} with either `Integrations Manage` or `Org Management` permissions is required for you to enable scanning features through the Datadog API.
 - **Cloud permissions**: The Agentless Scanning instance requires specific permissions to scan hosts, host images, container registries, and functions. Datadog automatically applies these permissions, listed below for transparency, during installation.<br><br>
-  {{< collapse-content title="AWS scanning permissions" level="h5" >}}
+  {{< collapse-content title="AWS scanning permissions" level="h3" >}}
   <p>Scanning permissions:</p>
   <ul>
     <li><code>ebs:GetSnapshotBlock</code></li>
@@ -71,7 +71,7 @@ Before setting up Agentless Scanning, verify that the following prerequisites ar
   </ul>
   {{< /collapse-content >}}
 
-  {{< collapse-content title="Azure scanning permissions" level="h5" >}}
+  {{< collapse-content title="Azure scanning permissions" level="h3" >}}
   <ul>
     <li><code>Microsoft.Compute/virtualMachines/read</code></li>
     <li><code>Microsoft.Compute/virtualMachines/instanceView/read</code></li>
@@ -86,7 +86,7 @@ Before setting up Agentless Scanning, verify that the following prerequisites ar
   </ul>
   {{< /collapse-content >}}
 
-  {{< collapse-content title="GCP scanning permissions" level="h5" >}}
+  {{< collapse-content title="GCP scanning permissions" level="h3" >}}
   <ul>
     <li><code>compute.disks.create</code></li>
     <li><code>compute.disks.createSnapshot</code></li>
@@ -122,7 +122,7 @@ Select your cloud provider to see the available setup methods. If you are settin
 - **AWS organization with multiple accounts**: Use [CloudFormation StackSet](#aws-cloudformation-stackset-setup) to deploy scanning capabilities across all member accounts.
 - **Multiple accounts without AWS Organizations**: Repeat the [CloudFormation](#aws-cloudformation-setup) or [Terraform](#aws-terraform-setup) setup for each account individually.
 
-{{% collapse-content title="CloudFormation" level="h3" id="aws-cloudformation-setup" %}}
+{{% collapse-content title="CloudFormation" level="h4" id="aws-cloudformation-setup" %}}
 Use CloudFormation if you already have an AWS account integrated with Datadog and want to enable Agentless Scanning, or if you want to add a new AWS account.
 
 #### New AWS account
@@ -155,7 +155,7 @@ Use CloudFormation if you already have an AWS account integrated with Datadog an
 [3]: /remote_configuration
 
 {{% /collapse-content %}}
-{{% collapse-content title="CloudFormation StackSet (Multi-Account)" level="h3" id="aws-cloudformation-stackset-setup" %}}
+{{% collapse-content title="CloudFormation StackSet (Multi-Account)" level="h4" id="aws-cloudformation-stackset-setup" %}}
 
 For AWS Organizations with multiple accounts, use a CloudFormation StackSet to deploy the Agentless Scanning delegate role across all member accounts. This approach automates onboarding and configures new accounts added to your AWS Organization.
 
@@ -192,7 +192,7 @@ This setup deploys the delegate role required for [cross-account scanning](/secu
 
 After the StackSet deploys, the member accounts are configured to allow cross-account scanning from your central scanner account.
 {{% /collapse-content %}}
-{{% collapse-content title="Terraform" level="h3" id="aws-terraform-setup" %}}
+{{% collapse-content title="Terraform" level="h4" id="aws-terraform-setup" %}}
 
 The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. Terraform is the recommended deployment method for multi-region environments. It deploys one scanner per region, which avoids cross-region networking costs. For guidance on choosing your deployment topology, see [Deploying Agentless Scanning](/security/cloud_security_management/setup/agentless_scanning/deployment_methods). For usage examples including multi-region configurations, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
 
@@ -238,7 +238,7 @@ After completing any of the setup methods above, [verify your setup](#verify-you
 
 <div class="alert alert-info">If you haven't connected your Azure subscription to Datadog yet, <a href="https://app.datadoghq.com/security/configuration/csm/setup?active_steps=cloud-accounts&active_sub_step=azure">set up the Azure integration</a> first.</div>
 
-{{% collapse-content title="Cloud Shell" level="h3" id="azure-cloud-shell-setup" %}}
+{{% collapse-content title="Cloud Shell" level="h4" id="azure-cloud-shell-setup" %}}
 Use Azure Cloud Shell to set up Agentless Scanning for your Azure subscriptions. This method downloads a [setup script](https://github.com/DataDog/integrations-management/tree/main/azure/agentless) that wraps the [Terraform Datadog Agentless Scanner module for Azure](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme), so you do not need to manage Terraform directly. You can review the script before running it.
 
 1. Ensure the identity you use in Cloud Shell has the required Azure permissions:
@@ -262,7 +262,7 @@ Use Azure Cloud Shell to set up Agentless Scanning for your Azure subscriptions.
 1. Click {{< ui >}}Copy command{{< /ui >}} to copy the generated command, and click {{< ui >}}Open Azure Cloud Shell{{< /ui >}} to open [Azure Cloud Shell](https://shell.azure.com). Review and run the command. The script applies the [Terraform Datadog Agentless Scanner module for Azure](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme) to deploy and configure the scanner in your selected subscription and location(s).
 1. After the command completes, return to the Datadog setup page and click {{< ui >}}Done{{< /ui >}}.
 {{% /collapse-content %}}
-{{% collapse-content title="Azure Resource Manager" level="h3" id="azure-resource-manager-setup" %}}
+{{% collapse-content title="Azure Resource Manager" level="h4" id="azure-resource-manager-setup" %}}
 Use the Azure Resource Manager template to deploy the Agentless Scanner. The template includes the role definitions required to deploy and manage Agentless scanners.
 
 #### New Azure subscription
@@ -276,7 +276,7 @@ Use the Azure Resource Manager template to deploy the Agentless Scanner. The tem
 {{% csm-agentless-azure-resource-manager %}}
 
 {{% /collapse-content %}}
-{{% collapse-content title="Terraform" level="h3" id="azure-terraform-setup" %}}
+{{% collapse-content title="Terraform" level="h4" id="azure-terraform-setup" %}}
 
 The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. For guidance on choosing your deployment topology, see [Deploying Agentless Scanning](/security/cloud_security_management/setup/agentless_scanning/deployment_methods). For usage examples, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
 
@@ -302,7 +302,7 @@ After completing any of the setup methods above, [verify your setup](#verify-you
 
 <div class="alert alert-info">If you haven't connected your GCP project to Datadog yet, <a href="https://app.datadoghq.com/security/configuration/csm/setup?active_steps=cloud-accounts&active_sub_step=gcp">set up the GCP integration</a> first.</div>
 
-{{% collapse-content title="Cloud Shell" level="h3" id="gcp-cloud-shell-setup" %}}
+{{% collapse-content title="Cloud Shell" level="h4" id="gcp-cloud-shell-setup" %}}
 Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This method downloads a [setup script](https://github.com/DataDog/integrations-management/tree/main/gcp/agentless) that wraps the [Terraform Datadog Agentless Scanner module for GCP](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme), so you do not need to manage Terraform directly. You can review the script before running it.
 
 1. Ensure you have the required GCP permissions:
@@ -329,7 +329,7 @@ Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This 
 
 [26]: /security/cloud_security_management/troubleshooting/agentless_scanning#gcp-failed-to-create-state-bucket-storagebucketscreate-403
 {{% /collapse-content %}}
-{{% collapse-content title="Terraform" level="h3" id="gcp-terraform-setup" %}}
+{{% collapse-content title="Terraform" level="h4" id="gcp-terraform-setup" %}}
 The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. For guidance on choosing your deployment topology, see [Deploying Agentless Scanning](/security/cloud_security_management/setup/agentless_scanning/deployment_methods). For usage examples, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
 
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click {{< ui >}}Cloud Integrations{{< /ui >}} > {{< ui >}}GCP{{< /ui >}}.
