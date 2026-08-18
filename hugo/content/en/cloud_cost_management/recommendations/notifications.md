@@ -35,6 +35,7 @@ To set up a notification rule:
 1. In the {{< ui >}}Set schedule{{< /ui >}} section, select the notification frequency, execution day, execution time, and timezone.
 1. In the {{< ui >}}Destination{{< /ui >}} section, select a Slack workspace connection and channel.
 1. Enter a name for the notification rule.
+1. (Optional) Mention specific Slack users in the notification message.
 1. (Optional) Turn off the {{< ui >}}Notification enabled{{< /ui >}} toggle to create the rule without activating it.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
