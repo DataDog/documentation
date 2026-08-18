@@ -5519,245 +5519,246 @@ menu:
       parent: llm_obs
       identifier: llm_obs_quickstart
       weight: 1
-    - name: Instrumentation
-      url: llm_observability/instrumentation/
+    - name: Terms and Concepts
+      url: llm_observability/quickstart/terms/
+      parent: llm_obs_quickstart
+      identifier: llm_obs_terms
+      weight: 101
+    - name: MCP and CLI Skills
+      url: llm_observability/mcp_cli_skills/
+      parent: llm_obs
+      identifier: llm_obs_mcp_cli_skills
+      weight: 2
+    - name: MCP Server
+      url: llm_observability/mcp_cli_skills/mcp_server
+      parent: llm_obs_mcp_cli_skills
+      identifier: llm_obs_mcp_server
+      weight: 201
+    - name: Instrument
+      url: llm_observability/instrument/
       parent: llm_obs
       identifier: llm_obs_instrumentation
-      weight: 2
+      weight: 3
     - name: Automatic
-      url: llm_observability/instrumentation/auto_instrumentation
+      url: llm_observability/instrument/auto_instrumentation
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_auto
-      weight: 201
+      weight: 301
     - name: SDK Reference
-      url: llm_observability/instrumentation/sdk
+      url: llm_observability/instrument/sdk
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_sdk
-      weight: 202
+      weight: 302
     - name: HTTP API
-      url: llm_observability/instrumentation/api
+      url: llm_observability/instrument/api
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_api
-      weight: 203
+      weight: 303
     - name: OpenTelemetry
-      url: llm_observability/instrumentation/otel_instrumentation
+      url: llm_observability/instrument/otel_instrumentation
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_otel
-      weight: 204
-    - name: Tracing Proxy Services
-      url: llm_observability/trace_proxy_services
+      weight: 304
+    - name: Correlate with APM
+      url: llm_observability/instrument/agent_observability_and_apm
       parent: llm_obs_instrumentation
-      identifier: llm_obs_instrumentation_trace_proxy_services
-      weight: 205
-    - name: Lapdog
-      url: llm_observability/lapdog
-      parent: llm_obs
-      identifier: llm_obs_lapdog
-      weight: 3
-    - name: Monitoring
-      url: llm_observability/monitoring
+      identifier: llm_obs_correlate_apm
+      weight: 305
+    - name: Prompt Tracking
+      url: llm_observability/instrument/prompt_tracking
+      parent: llm_obs_instrumentation
+      identifier: llm_obs_prompt_tracking
+      weight: 306
+    - name: Investigate
+      url: llm_observability/investigate/
       parent: llm_obs
       identifier: llm_obs_monitoring
       weight: 4
     - name: Querying spans and traces
-      url: llm_observability/monitoring/querying
+      url: llm_observability/investigate/querying
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_querying
-      weight: 301
-    - name: Correlate with APM
-      url: llm_observability/monitoring/llm_observability_and_apm
-      parent: llm_obs_monitoring
-      identifier: llm_obs_correlate_apm
-      weight: 302
-    - name: Patterns
-      url: llm_observability/monitoring/patterns/
-      parent: llm_obs_monitoring
-      identifier: llm_obs_patterns
-      weight: 303
-    - name: Agent Monitoring
-      url: llm_observability/monitoring/agent_monitoring
-      parent: llm_obs_monitoring
-      identifier: llm_obs_agent_monitoring
-      weight: 304
+      weight: 401
     - name: Cost
-      url: llm_observability/monitoring/cost
+      url: llm_observability/investigate/cost
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_cost
-    - name: MCP Clients
-      url: llm_observability/monitoring/mcp_client
-      parent: llm_obs_monitoring
-      identifier: llm_obs_mcp_client
-      weight: 305
-    - name: Prompt Tracking
-      url: llm_observability/monitoring/prompt_tracking
-      parent: llm_obs_monitoring
-      identifier: llm_obs_prompt_tracking
-      weight: 306
-    - name: Prompt Management
-      url: llm_observability/monitoring/prompt_management
-      parent: llm_obs_monitoring
-      identifier: llm_obs_prompt_management
-      weight: 307
+      weight: 402
     - name: Metrics
-      url: llm_observability/monitoring/metrics
+      url: llm_observability/investigate/metrics
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_metrics
-      weight: 308
-    - name: Automation Rules
-      url: llm_observability/monitoring/automation_rules
+      weight: 403
+    - name: Patterns
+      url: llm_observability/investigate/patterns/
       parent: llm_obs_monitoring
-      identifier: llm_obs_monitoring_automation_rules
-      weight: 309
-    - name: Evaluations
-      url: llm_observability/evaluations/
-      parent: llm_obs
-      identifier: llm_obs_evaluations
-      weight: 5
-    - name: Custom LLM-as-a-Judge
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations
-      weight: 400
-    - name: Language Mismatch
-      url: llm_observability/evaluations/managed_evaluations/language_mismatch
-      parent: llm_obs_evaluations
-      identifier: llm_obs_language_mismatch
-      weight: 401
-    - name: Sensitive Data Scanner
-      url: llm_observability/evaluations/sensitive_data_scanner
-      parent: llm_obs_evaluations
-      identifier: llm_obs_sensitive_data_scanner
-      weight: 402
-    - name: External Evaluations
-      url: llm_observability/evaluations/external_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_external_evaluations
-      weight: 403
-    - name: End-User Feedback
-      url: llm_observability/evaluations/end_user_feedback
-      parent: llm_obs_evaluations
-      identifier: llm_obs_end_user_feedback
-      weight: 4030
-    - name: Developer Guide
-      url: llm_observability/evaluations/evaluation_developer_guide
-      parent: llm_obs_evaluations
-      identifier: llm_obs_evaluation_developer_guide
-      weight: 4031
-    - name: Connect Your LLM Provider
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_connect_to_account
-      weight: 40100
-    - name: Template Evaluations
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_template
-      weight: 40101
-    - name: Session-Level Evaluations
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/session_level_evaluations
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_session_level
-      weight: 40102
-    - name: Trace-Level Evaluations
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_trace_level
-      weight: 40103
-    - name: Prompt Templating
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/prompt_templating
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_prompt_templating
-      weight: 40104
-    - name: NeMo
-      url: llm_observability/evaluations/submit_nemo_evaluations
-      parent: llm_obs_external_evaluations
-      identifier: llm_obs_submit_nemo_evaluations
-      weight: 40201
-    - name: DeepEval Evaluations
-      url: llm_observability/evaluations/deepeval_evaluations
-      parent: llm_obs_external_evaluations
-      identifier: llm_obs_deepeval_evaluations
-      weight: 40301
-    - name: Pydantic Evaluations
-      url: llm_observability/evaluations/pydantic_evaluations
-      parent: llm_obs_external_evaluations
-      identifier: llm_obs_pydantic_evaluations
-      weight: 40302
-    - name: Annotation Queues
-      url: llm_observability/evaluations/annotation_queues
-      parent: llm_obs_evaluations
-      identifier: llm_obs_annotation_queues
-      weight: 403
-    - name: Compatibility
-      url: llm_observability/evaluations/evaluation_compatibility
-      parent: llm_obs_evaluations
-      identifier: llm_obs_evaluation_compatibility
+      identifier: llm_obs_patterns
       weight: 404
-    - name: Export API
-      url: llm_observability/evaluations/export_api
-      parent: llm_obs_evaluations
-      identifier: llm_obs_evaluations_export_api
+    - name: Annotation Queues
+      url: llm_observability/investigate/annotation_queues
+      parent: llm_obs_monitoring
+      identifier: llm_obs_annotation_queues
       weight: 405
-    - name: Experiments
-      url: llm_observability/experiments
+    - name: Export API
+      url: llm_observability/investigate/export_api
+      parent: llm_obs_monitoring
+      identifier: llm_obs_evaluations_export_api
+      weight: 406
+    - name: Improve
+      url: llm_observability/improve/
       parent: llm_obs
-      identifier: llm_obs_experiments
-      weight: 6
-    - name: Setup and Usage
-      url: llm_observability/experiments/setup
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_setup
+      identifier: llm_obs_improve
+      weight: 5
+    - name: Playground
+      url: llm_observability/improve/playground
+      parent: llm_obs_improve
+      identifier: llm_obs_playground
       weight: 501
     - name: Datasets
-      url: llm_observability/experiments/datasets
-      parent: llm_obs_experiments
+      url: llm_observability/improve/datasets
+      parent: llm_obs_improve
       identifier: llm_obs_experiments_datasets
       weight: 502
+    - name: Experiments
+      url: llm_observability/improve/experiments
+      parent: llm_obs_improve
+      identifier: llm_obs_experiments
+      weight: 503
+    - name: Setup and Usage
+      url: llm_observability/improve/experiments/setup
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_setup
+      weight: 50301
     - name: Analyzing Results
-      url: llm_observability/experiments/analyzing_results
+      url: llm_observability/improve/experiments/analyzing_results
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_analyzing_results
-      weight: 503
+      weight: 50302
     - name: Advanced Experiment Runs
-      url: llm_observability/experiments/advanced_runs
+      url: llm_observability/improve/experiments/advanced_runs
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_advanced_runs
-      weight: 504
-    - name: Experiments API
-      url: llm_observability/experiments/api
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_api
-      weight: 505
+      weight: 50303
     - name: Prompt Optimization
-      url: llm_observability/experiments/prompt_optimization
+      url: llm_observability/improve/experiments/prompt_optimization
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_prompt_optimization
-      weight: 506
-    - name: Playground
-      url: llm_observability/playground
+      weight: 50304
+    - name: Experiments API
+      url: llm_observability/improve/experiments/api
       parent: llm_obs_experiments
-      identifier: llm_obs_playground
-      weight: 507
-    - name: MCP Server
-      url: llm_observability/mcp_server
+      identifier: llm_obs_experiments_api
+      weight: 50305
+    - name: Configure
+      url: llm_observability/configure/
       parent: llm_obs
-      identifier: llm_obs_mcp_server
-      weight: 7
+      identifier: llm_obs_configure
+      weight: 6
+    - name: Evaluations
+      url: llm_observability/configure/evaluations/
+      parent: llm_obs_configure
+      identifier: llm_obs_evaluations
+      weight: 601
+    - name: Custom LLM-as-a-Judge
+      url: llm_observability/configure/evaluations/llm_as_a_judge_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations
+      weight: 60101
+    - name: Connect Your LLM Provider
+      url: llm_observability/configure/evaluations/llm_as_a_judge_evaluations/connect_to_account
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_connect_to_account
+      weight: 6010101
+    - name: Template Evaluations
+      url: llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_template
+      weight: 6010102
+    - name: Session-Level Evaluations
+      url: llm_observability/configure/evaluations/llm_as_a_judge_evaluations/session_level_evaluations
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_session_level
+      weight: 6010103
+    - name: Trace-Level Evaluations
+      url: llm_observability/configure/evaluations/llm_as_a_judge_evaluations/trace_level_evaluations
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_trace_level
+      weight: 6010104
+    - name: Prompt Templating
+      url: llm_observability/configure/evaluations/llm_as_a_judge_evaluations/prompt_templating
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_prompt_templating
+      weight: 6010105
+    - name: Language Mismatch
+      url: llm_observability/configure/evaluations/language_mismatch
+      parent: llm_obs_evaluations
+      identifier: llm_obs_language_mismatch
+      weight: 60102
+    - name: Sensitive Data Scanner
+      url: llm_observability/configure/evaluations/sensitive_data_scanner
+      parent: llm_obs_evaluations
+      identifier: llm_obs_sensitive_data_scanner
+      weight: 60103
+    - name: End-User Feedback
+      url: llm_observability/configure/evaluations/end_user_feedback
+      parent: llm_obs_evaluations
+      identifier: llm_obs_end_user_feedback
+      weight: 60104
+    - name: Developer Guide
+      url: llm_observability/configure/evaluations/evaluation_developer_guide
+      parent: llm_obs_evaluations
+      identifier: llm_obs_evaluation_developer_guide
+      weight: 60105
+    - name: Compatibility
+      url: llm_observability/configure/evaluations/compatibility
+      parent: llm_obs_evaluations
+      identifier: llm_obs_evaluation_compatibility
+      weight: 60106
+    - name: External Evaluations
+      url: llm_observability/configure/evaluations/external_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_external_evaluations
+      weight: 60107
+    - name: NeMo
+      url: llm_observability/configure/evaluations/external_evaluations/nemo
+      parent: llm_obs_external_evaluations
+      identifier: llm_obs_submit_nemo_evaluations
+      weight: 6010701
+    - name: DeepEval Evaluations
+      url: llm_observability/configure/evaluations/external_evaluations/deepeval
+      parent: llm_obs_external_evaluations
+      identifier: llm_obs_deepeval_evaluations
+      weight: 6010702
+    - name: Pydantic Evaluations
+      url: llm_observability/configure/evaluations/external_evaluations/pydantic
+      parent: llm_obs_external_evaluations
+      identifier: llm_obs_pydantic_evaluations
+      weight: 6010703
+    - name: Prompt Management
+      url: llm_observability/configure/prompt_management
+      parent: llm_obs_configure
+      identifier: llm_obs_prompt_management
+      weight: 602
+    - name: Automation Rules
+      url: llm_observability/configure/automation_rules
+      parent: llm_obs_configure
+      identifier: llm_obs_monitoring_automation_rules
+      weight: 603
     - name: Data Security and RBAC
-      url: llm_observability/data_security_and_rbac
+      url: llm_observability/data_privacy_security_and_rbac
       parent: llm_obs
       identifier: llm_obs_data_security_and_rbac
-      weight: 8
-    - name: Terms and Concepts
-      url: llm_observability/terms/
+      weight: 7
+    - name: Lapdog
+      url: llm_observability/lapdog
       parent: llm_obs
-      identifier: llm_obs_terms
-      weight: 9
+      identifier: llm_obs_lapdog
+      weight: 8
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 10
+      weight: 9
     - name: GPU Monitoring
       url: gpu_monitoring/
       pre: gpu-monitoring-wui

@@ -5,10 +5,10 @@ further_reading:
     - link: 'https://github.com/DataDog/dd-apm-test-agent/blob/master/lapdog/README.md'
       tag: 'GitHub'
       text: 'Lapdog README on GitHub'
-    - link: '/llm_observability/instrumentation/sdk'
+    - link: '/llm_observability/instrument/sdk'
       tag: 'Documentation'
       text: 'Instrument your application with the Agent Observability SDK'
-    - link: '/llm_observability/instrumentation/auto_instrumentation'
+    - link: '/llm_observability/instrument/auto_instrumentation'
       tag: 'Documentation'
       text: 'Auto-instrumentation for Agent Observability'
 ---

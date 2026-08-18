@@ -49,7 +49,7 @@ Datadog enforces a maximum payload size per request on each OTLP intake endpoint
 [2]: /opentelemetry/setup/collector_exporter/
 [3]: /opentelemetry/setup/otlp_ingest/logs/
 [4]: /opentelemetry/setup/otlp_ingest/metrics/
-[5]: /llm_observability/instrumentation/otel_instrumentation/?tab=python#setup
+[5]: /llm_observability/instrument/otel_instrumentation/?tab=python#setup
 [6]: /opentelemetry/setup/otlp_ingest/managed_platforms/
 [7]: /opentelemetry/setup/otlp_ingest/serverless/
 [8]: /opentelemetry/setup/otlp_ingest/traces/

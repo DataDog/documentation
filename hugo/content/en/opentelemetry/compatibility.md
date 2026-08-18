@@ -154,7 +154,7 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [35]: /opentelemetry/instrument/api_support/go/
 [36]: /opentelemetry/instrument/api_support/ruby/
 [37]: /opentelemetry/instrument/api_support/php/
-[38]: /llm_observability/instrumentation/otel_instrumentation/
+[38]: /llm_observability/instrument/otel_instrumentation/
 [39]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/datadogconnector/README.md
 [40]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/README.md
 [41]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor#readme

@@ -907,7 +907,7 @@ Local authentication is recommended for Cline and when remote authentication is 
 [33]: /database_monitoring/
 [34]: /tracing/
 [35]: /feature_flags/
-[36]: /llm_observability/mcp_server/
+[36]: /llm_observability/mcp_cli_skills/mcp_server/
 [37]: /network_monitoring/cloud_network_monitoring/
 [38]: /network_monitoring/devices/
 [39]: /security/threats/security_signals/
