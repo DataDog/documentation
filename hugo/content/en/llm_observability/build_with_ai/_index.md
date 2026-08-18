@@ -17,6 +17,11 @@ curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
 datadog_mcp_cli login
 claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli
 
+# Install the Pup CLI with Homebrew (macOS/Linux) and authenticate
+brew tap datadog-labs/pack
+brew install datadog-labs/pack/pup
+pup auth login
+
 # Install the Agent Observability skills
 npx skills add datadog-labs/agent-skills/agent-observability --full-depth -y</code></pre>
 {{< /site-region >}}
@@ -24,6 +29,10 @@ npx skills add datadog-labs/agent-skills/agent-observability --full-depth -y</co
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
+
+For other Pup CLI installation methods, supported commands, and authentication options, see [Pup CLI][1].
+
+[1]: /cli/
 
 {{< whatsnext desc="Build with the Datadog MCP server and skills:" >}}
     {{< nextlink href="/llm_observability/build_with_ai/mcp_server" >}}MCP Server{{< /nextlink >}}
