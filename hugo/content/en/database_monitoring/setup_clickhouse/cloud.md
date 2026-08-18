@@ -16,9 +16,7 @@ further_reading:
   text: "Specifying a Database Identifier"
 ---
 
-<div class="alert alert-info">
-This feature is in preview and requires Datadog Agent v7.78 or later. Customers who participate in the Datadog Database Monitoring for ClickHouse preview <strong>will not be charged</strong> for usage incurred during the preview period. No additional enablement is required; follow the setup instructions below to get started.
-</div>
+This feature is in preview and requires Datadog Agent v7.78 or later. Customers who participate in the Datadog Database Monitoring for ClickHouse preview **will not be charged** for usage incurred during the preview period. No additional enablement is required; follow the setup instructions below to get started.
 
 Datadog Database Monitoring (DBM) for ClickHouse provides deep visibility into your ClickHouse Cloud services by collecting query metrics, live query samples, and completed query records to help you resolve issues and optimize query performance across your entire fleet.
 
@@ -51,6 +49,8 @@ Database Monitoring collects the following data from ClickHouse:
 
 ## Setup
 
+
+
 ### Step 1: Grant Datadog Agent access
 
 Create a dedicated `datadog` user:
@@ -75,9 +75,10 @@ GRANT SELECT ON system.replicas TO datadog;
 GRANT SELECT ON system.dictionaries TO datadog;
 GRANT SELECT ON system.processes TO datadog;
 GRANT SELECT ON system.query_log TO datadog;
+GRANT SHOW ON *.* TO datadog;
 ```
 
-The `system.processes` and `system.query_log` grants are required for DBM query collection. The `system.parts`, `system.detached_parts`, `system.merges`, `system.mutations`, `system.replication_queue`, and `system.merge_tree_settings` grants are required for parts and merges (storage health) collection. The remaining grants enable collection of core ClickHouse infrastructure metrics.
+The `system.processes` and `system.query_log` grants are required for DBM query collection. The `system.parts`, `system.detached_parts`, `system.merges`, `system.mutations`, `system.replication_queue`, and `system.merge_tree_settings` grants are required for parts and merges (storage health) collection. The `SHOW` privilege is required to automatically discover metadata such as database names, table names, columns and views. The remaining grants enable collection of core ClickHouse infrastructure metrics.
 
 Grant `REMOTE` permissions to allow cross-replica querying:
 
@@ -85,13 +86,9 @@ Grant `REMOTE` permissions to allow cross-replica querying:
 GRANT REMOTE ON *.* TO datadog;
 ```
 
-<div class="alert alert-info">
-The <code>REMOTE</code> privilege is required because the Agent uses ClickHouse's <code>clusterAllReplicas()</code> table function to aggregate data across all replicas in a ClickHouse Cloud service through the single endpoint. This privilege enables cross-node query execution—it does <strong>not</strong> grant access to any additional databases or tables beyond what was explicitly granted above. The <code>ON *.*</code> syntax is a ClickHouse requirement for this privilege type and does not expand the scope of data access.
-</div>
+The `REMOTE` privilege is required because the Agent uses ClickHouse's `clusterAllReplicas()` table function to aggregate data across all replicas in a ClickHouse Cloud service through the single endpoint. This privilege enables cross-node query execution—it does **not** grant access to any additional databases or tables beyond what was explicitly granted above. The `ON *.`* syntax is a ClickHouse requirement for this privilege type and does not expand the scope of data access.
 
-<div class="alert alert-info">
-The grants above are sufficient for query metrics, query samples, query completions, and parts and merges collection. They do <strong>not</strong> grant the Agent access to your application data.
-</div>
+The grants above are sufficient for query metrics, query samples, query completions, and parts and merges collection. They do **not** grant the Agent access to your application data.
 
 #### Optional: Grant access for explain plan collection
 
@@ -107,13 +104,9 @@ If this grant isn't provided, the Agent can't run `EXPLAIN` for queries against 
 
 For ClickHouse Cloud, the Agent connects to the service endpoint directly. Data is collected at the service level (aggregate across all replicas), not per individual node.
 
-<div class="alert alert-warning">
 On serverless ClickHouse deployments with auto-suspend enabled, DBM collection activity may prevent the cluster from suspending during idle periods, which can impact billing.
-</div>
 
-<div class="alert alert-info">
-This integration uses the ClickHouse <strong>HTTP interface</strong> (port 8443), not the native TCP protocol (port 9440).
-</div>
+This integration uses the ClickHouse **HTTP interface** (port 8443), not the native TCP protocol (port 9440).
 
 ```yaml
 # /etc/datadog-agent/conf.d/clickhouse.d/conf.yaml
@@ -176,71 +169,103 @@ instances:
 
 With `env:production`, `server: xyz.us-east-2.aws.clickhouse.cloud`, and `port: 8443`, this produces:
 
-| Template | Result |
-|----------|--------|
-| `$server:$port` (default) | `xyz.us-east-2.aws.clickhouse.cloud:8443` |
-| `$env-$server:$port` | `production-xyz.us-east-2.aws.clickhouse.cloud:8443` |
+
+| Template                  | Result                                               |
+| ------------------------- | ---------------------------------------------------- |
+| `$server:$port` (default) | `xyz.us-east-2.aws.clickhouse.cloud:8443`            |
+| `$env-$server:$port`      | `production-xyz.us-east-2.aws.clickhouse.cloud:8443` |
+
+
+
 
 ## Configuration reference
 
+
+
 ### Connection settings
 
-| Field | Type | Required | Default | Description |
-|-------|------|----------|---------|-------------|
-| `server` | string | Yes | - | ClickHouse Cloud service hostname (for example, `xyz.us-east-2.aws.clickhouse.cloud`). |
-| `port` | integer | No | `8123` | HTTP port. Use `8443` for ClickHouse Cloud (HTTPS). |
-| `username` | string | No | `default` | ClickHouse user account the Agent authenticates as. Datadog recommends a dedicated `datadog` user with limited permissions. |
-| `password` | string | No | - | Password for the specified user. |
-| `db` | string | No | `default` | Database to connect to. Most metrics come from system tables, so `default` is usually appropriate. |
+
+| Field      | Type    | Required | Default   | Description                                                                                                                 |
+| ---------- | ------- | -------- | --------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `server`   | string  | Yes      | -         | ClickHouse Cloud service hostname (for example, `xyz.us-east-2.aws.clickhouse.cloud`).                                      |
+| `port`     | integer | No       | `8123`    | HTTP port. Use `8443` for ClickHouse Cloud (HTTPS).                                                                         |
+| `username` | string  | No       | `default` | ClickHouse user account the Agent authenticates as. Datadog recommends a dedicated `datadog` user with limited permissions. |
+| `password` | string  | No       | -         | Password for the specified user.                                                                                            |
+| `db`       | string  | No       | `default` | Database to connect to. Most metrics come from system tables, so `default` is usually appropriate.                          |
+
+
+
 
 ### TLS settings
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `tls_verify` | Boolean | `false` | Enable TLS. Required for ClickHouse Cloud. |
-| `verify` | Boolean | `true` | Validate the server's SSL certificate. Setting `false` in production is a security risk. |
-| `tls_ca_cert` | string | - | Path to a custom CA certificate file. Not needed for ClickHouse Cloud, which uses certificates from public CAs. |
+
+| Field         | Type    | Default | Description                                                                                                     |
+| ------------- | ------- | ------- | --------------------------------------------------------------------------------------------------------------- |
+| `tls_verify`  | Boolean | `false` | Enable TLS. Required for ClickHouse Cloud.                                                                      |
+| `verify`      | Boolean | `true`  | Validate the server's SSL certificate. Setting `false` in production is a security risk.                        |
+| `tls_ca_cert` | string  | -       | Path to a custom CA certificate file. Not needed for ClickHouse Cloud, which uses certificates from public CAs. |
+
+
+
 
 ### DBM settings
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `dbm` | Boolean | `false` | Enable Database Monitoring. Required for query metrics, samples, and completions collection. |
+
+| Field                  | Type    | Default | Description                                                                                                                                                                                                                                                                                                                               |
+| ---------------------- | ------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dbm`                  | Boolean | `false` | Enable Database Monitoring. Required for query metrics, samples, and completions collection.                                                                                                                                                                                                                                              |
 | `single_endpoint_mode` | Boolean | `false` | Required for ClickHouse Cloud. Enables `clusterAllReplicas()` queries to collect data across all nodes behind a single endpoint. Also collects standard system-table metrics per node (tagged with `clickhouse_node`) so cumulative counters report accurate per-node values. Per-node collection requires Agent version 7.83.0 or later. |
+
+
+
 
 ### Database identifier
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
+
+| Field                          | Type   | Default         | Description                                                                                                                                          |
+| ------------------------------ | ------ | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `database_identifier.template` | string | `$server:$port` | Template for the unique database identifier. Supports variables: `$server`, `$port`, and any custom tag keys (for example, `$env`, `$service_name`). |
+
+
+
 
 ### Query metrics
 
 Collects aggregated query statistics from `system.query_log`.
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `query_metrics.enabled` | Boolean | `true` | Enable query metrics collection. Requires `dbm: true`. |
-| `query_metrics.collection_interval` | number | `10` | Collection interval in seconds. |
+
+| Field                               | Type    | Default | Description                                            |
+| ----------------------------------- | ------- | ------- | ------------------------------------------------------ |
+| `query_metrics.enabled`             | Boolean | `true`  | Enable query metrics collection. Requires `dbm: true`. |
+| `query_metrics.collection_interval` | number  | `10`    | Collection interval in seconds.                        |
+
+
+
 
 ### Query samples
 
 Collects currently running queries from `system.processes`.
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `query_samples.enabled` | Boolean | `true` | Enable query samples collection. Requires `dbm: true`. |
-| `query_samples.collection_interval` | number | `1` | Collection interval in seconds. |
-| `query_samples.payload_row_limit` | integer | `1000` | Maximum number of active queries per snapshot. |
+
+| Field                               | Type    | Default | Description                                            |
+| ----------------------------------- | ------- | ------- | ------------------------------------------------------ |
+| `query_samples.enabled`             | Boolean | `true`  | Enable query samples collection. Requires `dbm: true`. |
+| `query_samples.collection_interval` | number  | `1`     | Collection interval in seconds.                        |
+| `query_samples.payload_row_limit`   | integer | `1000`  | Maximum number of active queries per snapshot.         |
+
+
+
 
 ### Query completions
 
 Collects records of individual completed queries from `system.query_log`.
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `query_completions.enabled` | Boolean | `true` | Enable query completions collection. Requires `dbm: true`. |
-| `query_completions.collection_interval` | number | `10` | Collection interval in seconds. |
-| `query_completions.samples_per_hour_per_query` | number | `15` | Maximum samples collected per hour per unique query signature. |
+
+| Field                                          | Type    | Default | Description                                                    |
+| ---------------------------------------------- | ------- | ------- | -------------------------------------------------------------- |
+| `query_completions.enabled`                    | Boolean | `true`  | Enable query completions collection. Requires `dbm: true`.     |
+| `query_completions.collection_interval`        | number  | `10`    | Collection interval in seconds.                                |
+| `query_completions.samples_per_hour_per_query` | number  | `15`    | Maximum samples collected per hour per unique query signature. |
+
 
 {{< partial name="whats-next/whats-next.html" >}}
