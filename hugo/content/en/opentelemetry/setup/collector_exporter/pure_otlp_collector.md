@@ -1,9 +1,10 @@
 ---
-title: Set Up the Community OpenTelemetry Collector
+title: Set Up the Pure OpenTelemetry Collector
 aliases:
 - /opentelemetry/setup/collector_exporter/oss_setup/
+- /opentelemetry/setup/collector_exporter/community_collector/
 private: true
-description: 'Send OpenTelemetry data to Datadog using the Community OpenTelemetry Collector'
+description: 'Send OpenTelemetry data to Datadog using the Pure OpenTelemetry Collector'
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/"
   tag: "External Site"
@@ -22,7 +23,7 @@ Send traces, metrics, and logs to Datadog using the Community OpenTelemetry Coll
 
 - **OTLP HTTP exporter**: Sends telemetry to Datadog's OTLP intake endpoints.
 - **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Service Catalog and Service Page.
-- **Resource detection processor**: Extracts host and cloud metadata for hostname resolution and tagging in Datadog.
+- **Resource detection processor**: Detects host and cloud resource attributes, which Datadog uses for hostname resolution and tagging.
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running any OpenTelemetry Collector with OTLP HTTP exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
 
@@ -64,7 +65,7 @@ receivers:
         endpoint: 0.0.0.0:4317
       http:
         endpoint: 0.0.0.0:4318
-  # Collect host-level metrics for the Infrastructure List
+  # Collect host system metrics (CPU, memory, disk, network); populates the Infrastructure List
   host_metrics:
     collection_interval: 10s
     scrapers:
@@ -98,7 +99,7 @@ receivers:
       processes: {}
 
 processors:
-  # Detect host and cloud metadata for hostname resolution and tagging
+  # Detect host and cloud resource attributes for hostname resolution and tagging
   resource_detection:
     detectors: [env, system]
     timeout: 2s
@@ -167,7 +168,7 @@ exporters:
     endpoint: https://otlp.${env:DD_SITE}
     headers:
       dd-api-key: ${env:DD_API_KEY}
-      # Send resource attributes and scope metadata as metric tags
+      # Map resource attributes and instrumentation scope metadata to Datadog metrics tags
       dd-otel-metric-config: >-
         {
         "resource_attributes_as_tags": true,
@@ -253,7 +254,7 @@ receivers:
         endpoint: 0.0.0.0:4317
       http:
         endpoint: 0.0.0.0:4318
-  # Collect host-level metrics for the Infrastructure List
+  # Collect host system metrics (CPU, memory, disk, network); populates the Infrastructure List
   # root_path maps to the host filesystem mounted at /hostfs
   host_metrics:
     root_path: /hostfs
@@ -289,7 +290,7 @@ receivers:
       processes: {}
 
 processors:
-  # Detect host and cloud metadata for hostname resolution and tagging
+  # Detect host and cloud resource attributes for hostname resolution and tagging
   resource_detection:
     detectors: [env]
     timeout: 2s
@@ -358,7 +359,7 @@ exporters:
     endpoint: https://otlp.${env:DD_SITE}
     headers:
       dd-api-key: ${env:DD_API_KEY}
-      # Send resource attributes and scope metadata as metric tags
+      # Map resource attributes and instrumentation scope metadata to Datadog metrics tags
       dd-otel-metric-config: >-
         {
         "resource_attributes_as_tags": true,
@@ -454,7 +455,7 @@ receivers:
         endpoint: 0.0.0.0:4317
       http:
         endpoint: 0.0.0.0:4318
-  # Collect host-level metrics for the Infrastructure List
+  # Collect host system metrics (CPU, memory, disk, network); populates the Infrastructure List
   # root_path maps to the host filesystem mounted at /hostfs
   host_metrics:
     root_path: /hostfs
@@ -502,7 +503,7 @@ receivers:
       - volume
 
 processors:
-  # Detect host and cloud metadata for hostname resolution and tagging
+  # Detect host and cloud resource attributes for hostname resolution and tagging
   resource_detection:
     detectors: [env, system]
     timeout: 2s
@@ -617,7 +618,7 @@ exporters:
     endpoint: https://otlp.${env:DD_SITE}
     headers:
       dd-api-key: ${env:DD_API_KEY}
-      # Send resource attributes and scope metadata as metric tags
+      # Map resource attributes and instrumentation scope metadata to Datadog metrics tags
       dd-otel-metric-config: >-
         {
         "resource_attributes_as_tags": true,
@@ -877,7 +878,7 @@ env:
 {{% /tab %}}
 {{< /tabs >}}
 
-Apply [Unified Service Tagging][4] by setting the `service.name`, `deployment.environment.name`, and `service.version` resource attributes in your application's OpenTelemetry configuration.
+Set the `service.name`, `deployment.environment.name`, and `service.version` resource attributes in your application's OpenTelemetry configuration. Datadog maps these to [Unified Service Tagging][4], which is what correlates your traces, metrics, and logs across the platform.
 
 ## Verify the setup
 
