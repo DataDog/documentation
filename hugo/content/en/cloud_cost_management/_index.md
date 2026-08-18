@@ -108,8 +108,9 @@ You can create tag rules to correct missing or incorrect tags, and add inferred 
 
 ## Create a cost monitor
 
-Proactively manage and optimize your cloud spending by creating a [Cloud Cost Monitor][3]. You can choose {{< ui >}}Cost Changes{{< /ui >}} or {{< ui >}}Cost Threshold{{< /ui >}} to monitor your cloud expenses.
+Proactively manage and optimize your cloud spending by creating a [Cloud Cost Monitor][3]. Choose from {{< ui >}}Cost Changes{{< /ui >}}, {{< ui >}}Cost Anomalies{{< /ui >}}, {{< ui >}}Cost Threshold{{< /ui >}}, {{< ui >}}Cost Forecast{{< /ui >}}, or {{< ui >}}Budget{{< /ui >}} monitor types. See [Cloud Cost Monitors][3] for details on each type.
 
+<!-- TODO: recapture screenshot to show all five monitor type options -->
 {{< img src="cloud_cost/monitor.png" alt="Create a Cloud Cost monitor that alerts on cost changes" style="width:100%;" >}}
 
 ## Allocate costs
