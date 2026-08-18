@@ -1694,6 +1694,12 @@
     "description": "Use this API endpoint to delete a deployment event.",
     "summary": "Delete a deployment event"
   },
+  "PatchDORADeploymentByVersion": {
+    "description": "Update a deployment's change failure status, identifying the deployment by its service, environment, and version instead of its ID. Use this to mark a deployment as a change failure or back to stable. You can optionally include remediation details to enable failed deployment recovery time calculation. If multiple deployments match the given service, environment, and version, the most recently finished one is updated.",
+    "summary": "Patch a deployment event by version",
+    "request_description": "",
+    "request_schema_description": "Request to patch a DORA deployment event identified by service, environment, and version."
+  },
   "ListDORADeployments": {
     "description": "Use this API endpoint to get a list of deployment events.",
     "summary": "Get a list of deployment events",
@@ -3872,7 +3878,7 @@
     "summary": "Delete a tag configuration"
   },
   "ListTagConfigurationByName": {
-    "description": "Returns the tag configuration for the given metric name.",
+    "description": "Returns the tag configuration for the given metric name.\n\nA metric may exist and submit data without having a tag configuration. If no tag configuration exists\nfor the metric, this endpoint returns `404 Not Found`. This response does not indicate that the metric\nitself is missing.",
     "summary": "List tag configuration by name"
   },
   "UpdateTagConfiguration": {
@@ -6661,11 +6667,11 @@
     "request_schema_description": "Request object for editing a maintenance update."
   },
   "PublishStatusPage": {
-    "description": "Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate publishing functionality from the update status page endpoint to the publish status page endpoint.",
+    "description": "Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission.",
     "summary": "Publish status page"
   },
   "UnpublishStatusPage": {
-    "description": "Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate unpublishing functionality from the update status page endpoint to the unpublish status page endpoint.",
+    "description": "Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission.",
     "summary": "Unpublish status page"
   },
   "GetStegadographyWidgets": {

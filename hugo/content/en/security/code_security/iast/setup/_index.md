@@ -22,7 +22,7 @@ Even if APM is disabled, APM intake costs are still incurred for ingesting data,
 Select your application language for details on how to enable Runtime Code Analysis (IAST) for your language and infrastructure types.
 
 
-{{% collapse-content title="Java" level="h4" %}}
+{{% collapse-content title="Java" level="h3" %}}
 
 You can detect code-level vulnerabilities and monitor application security in Java applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
@@ -128,7 +128,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 {{% /collapse-content %}}
 
-{{% collapse-content title=".NET" level="h4" %}}
+{{% collapse-content title=".NET" level="h3" %}}
 
 You can detect code-level vulnerabilities and monitor application security in .NET applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
@@ -256,7 +256,7 @@ If you need additional assistance, contact [Datadog support][5].
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Node.js" level="h4" %}}
+{{% collapse-content title="Node.js" level="h3" %}}
 
 You can detect code-level vulnerabilities and monitor application security in Node.js applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
@@ -343,7 +343,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Python" level="h4" %}}
+{{% collapse-content title="Python" level="h3" %}}
 
 You can detect code-level vulnerabilities and monitor application security in Python applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
@@ -492,7 +492,7 @@ The following code security capabilities are supported relative to each language
 
 Select your application language for details about framework compatibility and feature support.
 
-{{% collapse-content title="Java" level="h4" %}}
+{{% collapse-content title="Java" level="h3" %}}
 
 ### Code Security capabilities
 
@@ -603,7 +603,7 @@ Versions 22 and above are supported as in Preview.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title=".NET" level="h4" %}}
+{{% collapse-content title=".NET" level="h3" %}}
 
 ### Code Security capabilities support
 
@@ -698,7 +698,7 @@ These are supported on the following architectures:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Node.js" level="h4" %}}
+{{% collapse-content title="Node.js" level="h3" %}}
 
 ### Code Security capabilities
 
@@ -828,7 +828,7 @@ Datastore tracing provides:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Python" level="h4" %}}
+{{% collapse-content title="Python" level="h3" %}}
 
 ### Code Security capabilities support
 
