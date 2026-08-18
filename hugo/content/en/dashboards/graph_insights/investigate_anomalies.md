@@ -91,14 +91,7 @@ To stop scanning a dashboard for anomalies, click {{< ui >}}Investigate{{< /ui >
 
 This preference applies to one dashboard and is stored in your browser. Other viewers of the same dashboard still see anomalies unless they turn detection off themselves. The preference also does not carry over to a different browser or device.
 
-<!-- TODO (verify): a per-widget exclusion also exists. use-anomaly-detection-opt-out.ts says
-"Widget-level opt-out is handled via widget definitions (detection_sensitivity =
-'never_detect')". Unlike the dashboard toggle, that lives in the dashboard definition, so it
-would apply to everyone. Need to know whether there is a UI control for it or whether it is
-JSON-only before documenting a procedure. -->
-
-<!-- TODO (verify): also confirm the Auto-detect issues label is unchanged for widget-level
-sensitivity, i.e. that "detection sensitivity" is not surfaced to users under another name. -->
+To exclude a single widget from anomaly detection, edit the widget, expand {{< ui >}}Anomaly Detection{{< /ui >}}, and select {{< ui >}}Hide{{< /ui >}}. This setting is part of the widget definition, so it applies to everyone who views the dashboard.
 
 ## Further reading
 
