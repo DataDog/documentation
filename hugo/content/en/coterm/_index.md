@@ -18,7 +18,7 @@ With CoTerm, you can:
    Investigating terminal sessions provides context about how system and security incidents were caused and remediated.
 - **Protect against the accidental execution of dangerous terminal commands**.
 
-   CoTerm can intercept terminal commands and warn you before you execute a risky command. For even more oversight, you can use CoTerm with [Datadog Case Management][3] to require approvals for particularly impactful commands.
+   CoTerm can intercept terminal commands and warn you before you execute a risky command. For even more oversight, you can use CoTerm with [Datadog Work Management][3] to require approvals for particularly impactful commands.
 
 For your security, CoTerm uses [Sensitive Data Scanner][2] to detect and obfuscate sensitive data, such as passwords and API keys.
 
@@ -50,7 +50,7 @@ You can review your recorded terminal sessions and process data in Datadog:
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /security/sensitive_data_scanner/
-[3]: /incident_response/case_management/
+[3]: /incident_response/work_management/
 [4]: http://app.datadoghq.com/event/explorer?query=source%3Acoterm_process_info
 [5]: https://app.datadoghq.com/logs?query=service%3Addcoterm
 [6]: https://app.datadoghq.com/terminal-streams

@@ -259,7 +259,7 @@ You can also launch this query directly from the signal panel:
 [3]: /account_management/rbac/
 [4]: /logs/explorer/saved_views/
 [5]: https://app.datadoghq.com/security/siem/signals
-[6]: /incident_response/case_management/
+[6]: /incident_response/work_management/
 [7]: /incident_response/incident_management/
 [8]: /actions/workflows/trigger/#trigger-a-workflow-from-a-security-signal
 [9]: /security/cloud_security_management/workflows/

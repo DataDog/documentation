@@ -9,6 +9,9 @@ further_reading:
 - link: "/logs/log_configuration/parsing"
   tag: "Documentation"
   text: "Learn more about parsing"
+- link: "https://www.datadoghq.com/blog/detect-http2-abuse-apache-web-server-logs/"
+  tag: "Blog"
+  text: "How to detect HTTP/2 abuse in Apache web server logs"
 ---
 
 ## Overview
@@ -41,7 +44,7 @@ Define the Grok processor on the [{{< ui >}}Pipelines{{< /ui >}} page][2]. To co
 
 ## Before and after state of logs
 
-{{% collapse-content title="Example: Parsing nginx access logs" level="h4" %}}
+{{% collapse-content title="Example: Parsing nginx access logs" level="h3" %}}
 
 **Before (raw log):**
 
