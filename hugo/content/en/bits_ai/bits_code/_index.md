@@ -59,7 +59,7 @@ The following plans are not supported:
 - **Self-hosted GitHub Enterprise**: Custom domains are not supported.
 - **Cloud-hosted GitHub on dedicated domains**: such as [GitHub Enterprise Cloud with data residency][31] when using a custom domain name.
 - **Azure DevOps**: Neither Azure DevOps Cloud nor Azure DevOps Server (On-Prem) is supported by Bits Code. Datadog [Source Code Integration][37] does not support Azure DevOps Server (On-Prem).
-- **Bitbucket**: Neither Bitbucket.org nor Bitbucket Data Center or Server (on-prem) is supported by Bits Code. Datadog [Source Code Integration][37] does not support Bitbucket (on-prem).
+- **Bitbucket**: Neither Bitbucket.org, Bitbucket Data Center, nor Bitbucket Data Server (On-Prem) are supported by Bits Code. Datadog [Source Code Integration][37] does not support On-Prem Bitbucket deployments.
 
 
 ## Supported Datadog products
