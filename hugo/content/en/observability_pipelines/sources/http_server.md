@@ -1,5 +1,6 @@
 ---
 title: HTTP/S Server Source
+description: Learn how to collect HTTP client logs using the Observability Pipelines Worker's HTTP/S Server source.
 disable_toc: false
 products:
 - name: Logs

@@ -1,5 +1,6 @@
 ---
 title: Sources
+description: Learn about the sources available for the Observability Pipelines Worker.
 disable_toc: false
 further_reading:
 - link: "/observability_pipelines/configuration/set_up_pipelines/"
