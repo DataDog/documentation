@@ -145073,6 +145073,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Conflict - Another active feature flag already uses the archived flag's key or name.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
