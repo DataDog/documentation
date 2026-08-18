@@ -20,6 +20,9 @@ further_reading:
 - link: "/feature_flags/concepts/configuration_sources/"
   tag: "Concept"
   text: "Server SDK Configuration Sources"
+- link: "/feature_flags/guide/apm_trace_enrichment/"
+  tag: "Guide"
+  text: "Set Up APM Trace Enrichment for Feature Flags"
 ---
 
 ## Overview
@@ -134,7 +137,7 @@ DD_VERSION=<YOUR_APP_VERSION>
 
 <div class="alert alert-info">In the Java, Node.js, and Python versions listed above, <code>DD_FEATURE_FLAGS_ENABLED</code> defaults to <code>true</code>, so you do not need to set it. Setting it to <code>false</code> disables the provider, CDN polling, and the Feature Flags Remote Configuration subscription. Other server SDKs continue to use the activation settings documented on their language pages.</div>
 
-For SDKs and delivery modes that support it, see <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the <code>feature_flag.evaluations</code> metric. The initial Node.js agentless releases do not export evaluation metrics or exposure events. Java and Python require a supported Datadog Agent or serverless telemetry path to export these signals. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
+For SDKs and delivery modes that support it, see <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the <code>feature_flag.evaluations</code> metric. The initial Node.js agentless releases do not export evaluation metrics or exposure events. Java and Python require a supported Datadog Agent or serverless telemetry path to export these signals. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing. See <a href="/feature_flags/guide/apm_trace_enrichment/">Set Up APM Trace Enrichment for Feature Flags</a> to attach feature flag evaluation data to APM traces for filtering and experimentation.
 
 ## Testing with in-memory providers
 
