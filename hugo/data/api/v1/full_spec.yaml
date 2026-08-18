@@ -7372,6 +7372,12 @@ components:
           maximum: 99.99
           minimum: 50
           type: number
+        description:
+          description: |-
+            A description of the index, to help explain its purpose or configuration to other users.
+            Maximum length of 250 characters.
+          example: "Contains logs matching the criteria defined by the filter."
+          type: string
         exclusion_filters:
           description: |-
             An array of exclusion objects. The logs are tested against the query of each filter,
@@ -7446,6 +7452,12 @@ components:
           maximum: 99.99
           minimum: 50
           type: number
+        description:
+          description: |-
+            A description of the index, to help explain its purpose or configuration to other users.
+            Maximum length of 250 characters.
+          example: "Contains logs matching the criteria defined by the filter."
+          type: string
         disable_daily_limit:
           description: |-
             If true, sets the `daily_limit` value to null and the index is not limited on a daily basis (any
