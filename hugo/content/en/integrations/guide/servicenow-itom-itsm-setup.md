@@ -281,11 +281,11 @@ The ServiceNow integration writes from Datadog to interim tables, which transfor
 
 ## Additional configuration options
 
-{{% collapse-content title="Datadog import host auto-flush rule" level="h4" expanded=false id="import-host-auto-flush" %}}
+{{% collapse-content title="Datadog import host auto-flush rule" level="h3" expanded=false id="import-host-auto-flush" %}}
 To prevent the import set table `x_datad_datadog_import_host` from accumulating too many rows, an auto-flush rule has been added to the Table Cleaner tool to keep only the last 24 hours of data. This configuration setting can be changed as needed by navigating to `sys_auto_flush_list.do` in the filter navigator and going into the rule for the `x_datad_datadog_import_host` table. The `Age in seconds` field can be updated accordingly.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Create custom field mappings in ServiceNow" level="h4" expanded=false id="custom-field-mappings" %}}
+{{% collapse-content title="Create custom field mappings in ServiceNow" level="h3" expanded=false id="custom-field-mappings" %}}
 To create a custom field mapping in ServiceNow:
 
 1. Click one of the tables (for example, **Datadog Monitors ITSM Tables**), and scroll to the bottom of the record to see the link for the associated transform map.
@@ -315,7 +315,7 @@ answer = (function transformEntry(source)
 - The field mappings are at the bottom of the record. Some basic mappings are included. This is where you select the fields to include, define the format, and select the target fields in your ServiceNow instance.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Transform correlated alert data" level="h4" expanded=false id="transform-correlated-alert-data" %}}
+{{% collapse-content title="Transform correlated alert data" level="h3" expanded=false id="transform-correlated-alert-data" %}}
 To use information from correlated alerts to populate values in ServiceNow, add a new onBefore transform script under the Datadog Cases ITSM/ITOM table transform map.
 
 To populate data into the ServiceNow incident, you have to modify your script to parse data that has been sent from Datadog and stored in the EM Correlated Alert column, and specify which fields in the incident you want to send the parsed data to. Below is a sample script that you can customize for your needs:
@@ -369,14 +369,14 @@ To populate data into the ServiceNow incident, you have to modify your script to
 
 ## Troubleshooting
 
-{{% collapse-content title="Error message in your Datadog integration" level="h4" expanded=false id="troubleshooting-error-messages" %}}
+{{% collapse-content title="Error message in your Datadog integration" level="h3" expanded=false id="troubleshooting-error-messages" %}}
 If you get an error message in your Datadog integration tile, or an `Error while trying to post to your ServiceNow instance` notification:
 - Verify only the subdomain was used when entering your instance name.
 - Verify the user you created has the required permissions.
 - Verify the username and password are correct.
 {{% /collapse-content %}}
 
-{{% collapse-content title="No ticket created" level="h4" expanded=false id="troubleshooting-no-ticket" %}}
+{{% collapse-content title="No ticket created" level="h3" expanded=false id="troubleshooting-no-ticket" %}}
 If the integration is configured and an alert triggered, but no ticket is created:
 - Confirm that the interim table is populated. If so, the issue is with mappings and transformations. You can debug your mappings and scripts further by navigating to **Transform Errors** in ServiceNow.
 - Confirm that you're working with the interim table you specified in the tile.
@@ -384,11 +384,11 @@ If the integration is configured and an alert triggered, but no ticket is create
 The ServiceNow user needs `rest_service` and `x_datad_datadog.user` roles so that it can access the import tables. If you're using the legacy way of sending notifications directly to either the Incident table or Event table, you need the permissions `itil` and `evt_mgmt_integration`.
 {{% /collapse-content %}}
 
-{{% collapse-content title="No updates from ServiceNow to Datadog" level="h4" expanded=false id="troubleshooting-no-updates" %}}
+{{% collapse-content title="No updates from ServiceNow to Datadog" level="h3" expanded=false id="troubleshooting-no-updates" %}}
 If you're seeing updates from Datadog Work Management to ServiceNow, but not seeing updates from ServiceNow to Datadog, this is expected behavior for ServiceNow ITOM. Bidirectional syncing with Work Management is only supported for ServiceNow ITSM.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Monitors duplicating incidents" level="h4" expanded=false id="troubleshooting-monitors-duplicating-incidents" %}}
+{{% collapse-content title="Monitors duplicating incidents" level="h3" expanded=false id="troubleshooting-monitors-duplicating-incidents" %}}
 If a monitor is reopening the same incident instead of creating a new one for each warning, ensure it is not set as a simple alert. Convert the monitor to a [multi-alert][11] by grouping it using a tag in the metric. This way, each alert will trigger a separate incident.
 {{% /collapse-content %}}
 

@@ -92,7 +92,7 @@ To automatically trigger a page, configure automated paging rules in your projec
 ## Third party tickets
 In Project Settings, you can manage membership, configure the auto-closing of work items, and set up third-party integrations like Jira and ServiceNow.
 
-{{% collapse-content title="Jira Configuration" level="h4" expanded=false %}}
+{{% collapse-content title="Jira Configuration" level="h3" expanded=false %}}
 1. Ensure the Jira integration is configured.
 1. In Work Management project settings, enable **Jira** for manual Jira issue creation from the project.
 1. Select a Jira account, a project to create issues in, and the desired issue type (such as story, epic, bug, or task).
@@ -113,7 +113,7 @@ In Project Settings, you can manage membership, configure the auto-closing of wo
 - Issue creation is available for Jira Cloud and Data Center. Field syncing is only available for Jira Cloud.
 {{% /collapse-content %}}
 
-{{% collapse-content title="ServiceNow Configuration" level="h4" expanded=false id="servicenow" %}}
+{{% collapse-content title="ServiceNow Configuration" level="h3" expanded=false id="servicenow" %}}
 1. Configure the ServiceNow integration by following the [ITOM and ITSM setup instructions][3].
 1. In Work Management project settings, enable ServiceNow for manual ServiceNow incident creation from the project.
 1. Select a ServiceNow instance and assignment group.
@@ -131,7 +131,7 @@ In Project Settings, you can manage membership, configure the auto-closing of wo
 **Note**: A work item can only be synced with one external resource at a time, per project. To enable ServiceNow syncing, Jira automatic creation and syncing must be disabled. Only work items using the core statuses of "Open", "In Progress" and "Closed" can sync with ServiceNow.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Linear Configuration" level="h4" expanded=false id="linear" %}}
+{{% collapse-content title="Linear Configuration" level="h3" expanded=false id="linear" %}}
 1. Ensure the [Linear integration][5] is configured.
 1. In Work Management project settings, enable **Linear** for manual Linear issue creation from the project.
 1. Select a Linear workspace and team to create issues in.

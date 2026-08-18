@@ -9,26 +9,82 @@ aliases:
 site_support_id: bits_remediation
 ---
 
-## Suggested code fixes from Bits Code
-After Bits Investigation helps you identify a root cause, it can also help you take action as quickly as possible.
+{{< callout url="https://www.datadoghq.com/product-preview/bits-remediation/" >}}
+  Bits Remediation includes capabilities in Preview. Click <strong>Request Access</strong> to join the Preview program.
+{{< /callout >}}
 
-Bits Investigation integrates with [Bits Code][2] to automatically generate code fixes. Bits Code connects to GitHub to create production-ready pull requests, iterates on fixes using CI logs and developer feedback, and uses multiple Datadog products to generate contextual fixes.
-1. [Set up Bits Code][1]. Then, after Bits Investigation has determined a code-related root cause, you will automatically receive suggested code fixes.
-1. Ask Bits Code to make any additional updates as needed, create a pull request for review in GitHub, and merge when ready to fix the underlying problem.
+## Automate code fixes
 
-{{< img src="bits_ai/bits_ai_sre_suggested_code_fix.png" alt="Flowchart showing Bits' investigation conclusion and a suggested code fix" style="width:100%;" >}}
+After Bits helps you identify a root cause from an investigation, it can also help you take action as quickly as possible.
 
-## Run triage actions via chat
+Bits Investigation integrates with [Bits Code][2] to generate code fixes. Bits connects to your source code provider to create, update, and iterate on production-ready pull requests, based on existing issues detected by Datadog.
+
+By default, Bits automatically generates code fixes for investigations with code-related root causes. To manually generate code fixes instead, disable automatic code fix generation in [Settings][3].
+
+To start using code fixes:
+1. [Set up Bits Code][1]. After Bits determines a code-related root cause, Bits generates a suggested code fix in Next Steps by default.
+1. If automatic code fixes are disabled, manually generate a code fix from Next Steps.
+1. Chat with Bits within the code session to update the suggested code fix.
+1. Create a pull request for review and merge when ready.
+
+With code fixes enabled, you can close the loop and resolve issues directly from a Bits Investigation.
+
+{{< img src="bits_ai/bits_remediation/suggested_code_fix.png" alt="Bits Investigation hypothesis tree showing a root cause conclusion with a suggested code fix and other next steps" style="width:100%;" >}}
+
+## Run triage actions
+
 From chat, you can trigger triage actions without leaving the investigation workflow.
 
 Supported actions include:
 - Sending Slack and Microsoft Teams messages
 - Creating incidents in Datadog and PagerDuty
-- Paging engineers via Datadog On-Call
+- Paging engineers using Datadog On-Call
 - Creating work items in Datadog Work Management
 - Opening Jira tickets
 
-Bits Investigation automatically pulls relevant context from the investigation and your connected integrations to prefill messages, incident descriptions, and ticket metadata. This reduces manual effort, ensures consistency, and accelerates response time.
+Bits can pull relevant context from the investigation and your connected integrations to prefill messages, incident descriptions, and ticket metadata. This reduces manual effort, helps ensure consistency, and accelerates response time.
+
+## Take action on your infrastructure
+
+{{< callout >}} One-click actions are in Preview. {{< /callout >}}
+
+For infrastructure-related issues, Bits can recommend a remediation action, such as scaling a deployment, restarting a pod, or patching a resource.
+
+- **Manual recommendations**: Copy the suggested command (for example, a `kubectl patch` command) and run it in your own CLI.
+- **One-click actions (Preview)**: Click **Run** to let Bits execute the suggested remediation action directly from the investigation context.
+
+{{< img src="bits_ai/bits_remediation/one_click_action.png" alt="A suggested remediation action with instructions to restart a deployment and a Run button" style="width:100%;" >}}
+
+Kubernetes actions are supported in Preview. See the [Action Catalog][4] for the full list of supported actions and how to enable them in Datadog.
+
+To run one-click Kubernetes actions, your organization needs:
+- A [Private Action Runner][5] with network access to your Kubernetes cluster, paired with a [Connection][6] to the Kubernetes integration.
+- A user role with permission to run actions and resolve the Kubernetes connection.
+
+## Govern how Bits takes remediation action
+
+{{< callout >}} Bits Guardrails are in Preview.{{< /callout >}}
+
+[Bits Guardrails][8] let admins define which remediation actions Bits can take, where those actions apply, and who needs to approve them.
+
+Guardrails require the `Guardrails Read` and `Guardrails Write` permissions, which can be enabled in [Organizational Settings > Roles][7]. 
+
+To create a guardrail:
+1. **Choose the actions to target**: Select one or more available actions for an integration (for example, Kubernetes) for the guardrail to target.
+1. **Define guardrail scope**: Specify the environment, service, and resource tags the guardrail applies to.
+1. **Set the enforcement level**: For the selected actions and scope, decide when Bits can take action.
+    - **Ask**: Requires user approval before Bits executes actions. Choose which teams, roles, or individuals can approve.
+    - **Deny**: Bits can recommend an action but cannot take it.
+
+## Validate that issues are resolved
+
+Bits can verify whether a remediation action was applied successfully, and whether the original issue was resolved. Click **Verify Resolution** to validate the status of remediation action and issue.
 
 [1]: /bits_ai/bits_code/setup/
 [2]: /bits_ai/bits_code
+[3]: https://app.datadoghq.com/bits-ai/settings/source-code-integration
+[4]: /actions/actions_catalog/
+[5]: /actions/private_actions/
+[6]: /actions/connections/
+[7]: https://app.datadoghq.com/organization-settings/roles
+[8]: https://app.datadoghq.com/bits-ai/settings/remediation-guardrails 
