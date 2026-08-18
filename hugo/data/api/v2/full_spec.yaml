@@ -192983,7 +192983,7 @@ paths:
                   data:
                     attributes:
                       enabled: true
-                      name: Rule 1
+                      name: Rule <UUID>
                       selectors:
                         query: (source:production_service OR env:prod)
                         rule_types:
@@ -193167,7 +193167,7 @@ paths:
                   data:
                     attributes:
                       enabled: true
-                      name: Rule 1
+                      name: Rule <UUID>
                       selectors:
                         query: (source:production_service OR env:prod)
                         rule_types:
@@ -193813,7 +193813,7 @@ paths:
                   data:
                     attributes:
                       enabled: true
-                      name: Rule 1
+                      name: Rule <UUID>
                       selectors:
                         query: (source:production_service OR env:prod)
                         rule_types:
@@ -193999,7 +193999,7 @@ paths:
                   data:
                     attributes:
                       enabled: true
-                      name: Rule 1
+                      name: Rule <UUID>
                       selectors:
                         query: (source:production_service OR env:prod)
                         rule_types:
