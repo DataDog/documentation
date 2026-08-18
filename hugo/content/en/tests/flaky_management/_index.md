@@ -136,8 +136,7 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
     - If any retry fails, keeps the test's current state (`Active`, `Quarantined`, or `Disabled`).
       - Tags the last test retry with `@test.test_management.attempt_to_fix_passed:false` in test run events.
 
-**Note**: For Cypress, the remediation flow requires [test isolation](https://docs.cypress.io/app/core-concepts/test-isolation)
-to be enabled. With `testIsolation: false`, attempt-to-fix retries do not run. See also [Known Limitations](/tests/setup/javascript/?tab=cypress#known-limitations)
+<div class="alert alert-danger">For Cypress, this remediation flow requires <a href="https://docs.cypress.io/app/core-concepts/test-isolation">test isolation</a> to be enabled. With <code>testIsolation: false</code>, attempt-to-fix retries do not run. See also <a href="/tests/setup/javascript/?tab=cypress#retries-require-cypress-test-isolation">Retries require Cypress test isolation</a>.</div>
 
 ### Track fixes that are in progress
 

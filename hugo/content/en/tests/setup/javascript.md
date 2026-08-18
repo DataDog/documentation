@@ -744,20 +744,18 @@ If you want visibility into the browser process, consider using [RUM & Session R
 
 Cypress interactive mode (which you can enter by running `cypress open`) is not supported by Test Optimization because some cypress events, such as [`before:run`][11], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][12].
 
-### Cypress test isolation
+### Retries require Cypress test isolation
 
-Cypress [test isolation][cypress-test-isolation] must be enabled (the default) for
+Cypress [test isolation][13] must be enabled (the default) for
 retry-based Test Optimization features to work. When `testIsolation` is set to
 `false` in your Cypress configuration, `dd-trace` disables all test
-retries—**Early Flake Detection**, **Auto Test Retries**, and **Attempt to
-Fix**—because these features re-run each test in place, which requires isolation.
+retries—[Early Flake Detection][22], [Auto Test Retries][23], and
+[attempt to fix][24]—because these features re-run each test in place, which requires isolation.
 
 When isolation is disabled, the tracer logs the warning `Test isolation is
-disabled, retries will not be enabled`, and no test executions are tagged
+disabled, retries will not be enabled`, and no test executions are tagged with
 `@test.test_management.is_attempt_to_fix`. Because the tracer reads the global
 `testIsolation` value, per-suite `describe` overrides do not re-enable retries.
-
-[cypress-test-isolation]: https://docs.cypress.io/app/core-concepts/test-isolation
 
 ### Jest's `--forceExit`
 Jest's [--forceExit][15] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
@@ -855,6 +853,7 @@ The test session name should be unique within a repository to help you distingui
 [10]: /continuous_integration/guides/rum_integration/
 [11]: https://docs.cypress.io/api/plugins/before-run-api
 [12]: https://docs.cypress.io/guides/references/configuration#Configuration-File
+[13]: https://docs.cypress.io/app/core-concepts/test-isolation
 [15]: https://jestjs.io/docs/cli#--forceexit
 [16]: https://mochajs.org/running/cli/#--exit
 [17]: https://vitest.dev/guide/browser/
@@ -862,3 +861,6 @@ The test session name should be unique within a repository to help you distingui
 [19]: https://www.npmjs.com/package/mocha-each
 [20]: https://github.com/nodejs/import-in-the-middle
 [21]: https://vitest.dev/config/isolate
+[22]: /tests/flaky_tests/early_flake_detection/
+[23]: /tests/flaky_tests/auto_test_retries/
+[24]: /tests/flaky_management/#confirm-fixes-for-flaky-tests
