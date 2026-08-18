@@ -56,7 +56,7 @@ Bits Code supports the following source code providers:
 - **GitLab**: GitLab.com and GitLab Self-Managed.
 
 The following plans are not supported:
-- **Self-hosted GithHub Enterprise**: Custom domains are not supported.
+- **Self-hosted GitHub Enterprise**: Custom domains are not supported.
 - **Cloud-hosted GitHub on dedicated domains**: such as [GitHub Enterprise Cloud with data residency][31] when using a custom domain name.
 - **Azure Dev Ops**: Neither Azure Dev Ops Cloud, nor Azure Dev Ops Server (on-prem) are supported. Additionally, Azure Dev Ops Server is not supported at all by Datadog [Source Code Integration][34].
 - **Bitbucket**: Neither Bitbucket.org nor Bitbucket Data Center or Server (on-prem) are supported. Additionally, on-prem Bitbucket is not supported by at all by Datadog [Source Code Integration][34].
