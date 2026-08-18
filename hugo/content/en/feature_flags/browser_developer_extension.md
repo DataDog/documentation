@@ -103,7 +103,7 @@ To narrow the list, use the filter row:
 
 To override a flag from the list, click one of its variant buttons.
 
-To set a value that isn't defined as a variant, expand **Add a custom override**. Enter the flag key, select the value type, and enter the value. Applying a key that already has an override replaces the existing value. A value that doesn't match the flag's type is rejected.
+To set a value that isn't defined as a variant, expand **Add a custom override**. Enter the flag key, select the value type, and enter the value. Applying a key that already has an override replaces the existing value. A value that doesn't match the flag's type is rejected in the extension UI before it's saved.
 
 Overridden flags move into a highlighted **Local overrides** section at the top of the list, which shows how many are active. The selected variant is highlighted, and each row has a revert control to remove that single override. To remove every override at once, click **Clear all** at the bottom of the tab.
 
