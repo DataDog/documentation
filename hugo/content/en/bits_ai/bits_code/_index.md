@@ -61,7 +61,6 @@ The following plans are not supported:
 - **Azure DevOps**: Neither Azure DevOps Cloud nor Azure DevOps Server (On-Prem) is supported by Bits Code. Datadog [Source Code Integration][37] does not support Azure DevOps Server (On-Prem).
 - **Bitbucket**: Neither Bitbucket.org, Bitbucket Data Center, nor Bitbucket Data Server (On-Prem) are supported by Bits Code. Datadog [Source Code Integration][37] does not support On-Prem Bitbucket deployments.
 
-
 ## Supported Datadog products
 
 Bits Code can suggest code improvements within several Datadog products, including the following:
