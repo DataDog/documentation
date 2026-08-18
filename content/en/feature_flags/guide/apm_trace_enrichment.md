@@ -30,9 +30,11 @@ APM trace enrichment is available in the following SDKs:
 
 | Language | Minimum version |
 | -------- | --------------- |
-| Go       | 2.8.0           |
-| Java     | 1.64.1          |
+| .NET     | 3.51.0          |
+| Java     | 1.65.0          |
 | Node.js  | 5.105.0         |
+| Python   | 4.13.0          |
+| Ruby     | 2.39.0          |
 
 ## Prerequisites
 
