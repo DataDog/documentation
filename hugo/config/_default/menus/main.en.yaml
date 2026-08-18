@@ -8845,7 +8845,7 @@ menu:
       parent: workload_protection_investigate_and_triage
       identifier: workload_protection_investigate_and_triage_security_findings
       weight: 30
-    - name: Respond and Report
+    - name: Respond to Threats
       url: security/workload_protection/respond_and_report
       parent: workload_protection
       identifier: workload_protection_respond_and_report

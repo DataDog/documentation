@@ -1,5 +1,5 @@
 ---
-title: Respond and Report
+title: Respond to Threats
 disable_toc: false
 site_support_id: workload_security_active_protection
 aliases:
@@ -24,89 +24,86 @@ further_reading:
   text: "Detect Host and Container Compromises with Workload Protection"
 ---
 
-Workload Protection can act on the threats it detects. The Datadog Agent terminates processes and containers, or blocks network traffic. It acts automatically when an agent rule matches, or manually when you respond to a signal. Both paths depend on enforcement in the Agent, which is enabled by default.
+Workload Protection can act on threats automatically when an Agent rule matches or manually when you respond to a signal. The Datadog Agent terminates processes and containers or blocks network traffic. Both methods depend on Agent enforcement.
 
-For where response sits in the detection pipeline, see [How Workload Protection works][7].
+For more information about where response fits in the detection pipeline, see [How Workload Protection works][7].
 
-## Enable enforcement
+## Response requirements
 
-Both **Automated response** and **Response** rely on enforcement in the Agent to kill processes or containers when a matching rule or action is triggered.
+Automated and manual response rely on enforcement in the Agent. Depending on the response action, the Agent can terminate a process or container or isolate it from the network.
 
-### Turn on enforcement in `system-probe`
+### Configure Agent enforcement
 
-Both response features rely on `runtime_security_config.enforcement` in `/etc/datadog-agent/system-probe.yaml`. Default values are sufficient in most setups, and both features are enabled by default. For the full parameter reference, see [Workload Protection Agent configuration][4].
+Response actions use the `runtime_security_config.enforcement` settings in `/etc/datadog-agent/system-probe.yaml`. The default settings are sufficient for most configurations. For the full parameter reference, see [Workload Protection Agent configuration][4].
 
-In addition to disabling enforcement, you can specify binaries to protect from response actions (none by default) or control which rule sources can trigger response actions (`file` rules and `remote-config`, both enabled by default).
+These settings let you exclude binaries from response actions or control which rule sources can trigger them. By default, no binaries are excluded, and the `file` and `remote-config` rule sources are allowed.
 
-### RBAC for response
+### Response permissions
 
-Both **Automated response** and **Response** require specific RBAC permissions. The following [roles and permissions][5] are commonly used:
+Both **Automated response** and manual response require specific [RBAC permissions][5]:
 
 - The `security_monitoring_cws_agent_rules_actions` permission lets users configure Automated response and manually respond to threats.
-  - A user with the Datadog Admin role must create a role that includes this permission, then assign that role only to users who manage Automated response or need to run manual Response actions.
-- The **Datadog Standard** role lets users create and update custom rules by default, as long as the changes do not modify **protection** settings on the rule. Users with the Standard role cannot enable a disabled rule that includes an Automated response action and cannot use manual Response actions.
+  - A user with the Datadog Admin role must create a role that includes this permission, then assign that role only to users who manage Automated response or need to run manual response actions.
+- The **Datadog Standard** role lets users create and update custom rules by default, as long as the changes do not modify **protection** settings on the rule. Users with the Standard role cannot enable a disabled rule that includes an Automated response action and cannot use manual response actions.
 
 ## Automated response
 
-Automated response enables you to proactively block and terminate threats identified by the Datadog Agent detection rules using the Workload Protection {{< ui >}}Automated response{{< /ui >}} feature.
+Automated response enables you to proactively block threats identified by Datadog Agent detection rules by terminating matching processes.
 
 Automated response streamlines threat detection and targeted response, resulting in risk reduction, allowing DevSecOps and security teams to tackle evolving threats effectively:
 
 - Security decides which threats warrant an automated action.
 - DevOps decides which applications and resources are resilient enough to withstand targeted protection.
 
-The end result is threat detection followed by immediate surgical mitigation against high confidence, true positive attacks.
+The result is threat detection followed by immediate, targeted mitigation of high-confidence threats.
 
 ### Automated response availability
 
-If Automated response is active for an Agent rule, you can see it by looking at the rule:
+If Automated response is active for an Agent rule, you can verify it in the rule:
 
 1. In [Agent Configuration][2], open the rule.
-2. In the rule, there is an **Automated Response** action in the list of active actions.
+2. Confirm that {{< ui >}}Automated response{{< /ui >}} appears in the list of active actions.
 
-When Automated response applies to a rule that generated a signal, you can see it by doing the following:
+To check whether Automated response applies to a rule that generated a signal:
 
-1. In [Signals][1], open a signal.
-2. In the signal, view **Next Steps**. If available for the matching rule, **Proactively block threats** displays **Automated response enabled**.
+1. In [Signals][1], open the signal.
+2. View {{< ui >}}Next Steps{{< /ui >}}. If Automated response is available for the matching rule, {{< ui >}}Proactively block threats{{< /ui >}} displays {{< ui >}}Automated response enabled{{< /ui >}}.
 
 ### Configure Automated response on Agent rules
 
-By default, all OOTB Agent rules (such as crypto mining) are in an active state. You must configure the Automated response action manually.
-You can change the protection option to **Blocking** on an Agent rule and the Agent terminates the corresponding processes instantly.
+By default, all out-of-the-box (OOTB) Agent rules, such as crypto mining rules, are active. You must configure the Automated response action manually.
 
-#### Protection options
+#### Agent rule configurations
 
-You have three options for Agent rules:
+Agent rules can be configured in the following ways:
 
-- **Inactive state:** The Agent does not monitor for the rule events and does not send detections to the Datadog backend.
-- **Active state:** This is the default setting for enabled rules. The Agent monitors for the enabled rule and displays detections in [Signals][1].
-- **Active with Automated response state:** The Agent monitors for the enabled rule, terminates the corresponding actions instantly, and displays detections in [Signals][1].
+- **Inactive:** The Agent does not monitor for the rule events and does not send detections to the Datadog backend.
+- **Active:** This is the default setting for enabled rules. The Agent monitors for the enabled rule and displays detections in [Signals][1].
+- **Active with Automated response:** The Agent monitors for the enabled rule, terminates matching processes, and displays detections in [Signals][1].
 
 <div class="alert alert-info">Automated response is applied to all threats detected after automated response is enabled. Automated response is not retroactive.</div>
 
-To enable automated response on an Agent rule:
+To enable Automated response on an Agent rule:
 
-1. In [Agent Configuration][2], open a rule. If there is no Automated Response in the **Agent's actions** section, then Automated response is not available for that rule yet.
-2. Click **Edit**.
-3. In the Agent rule, in **Add actions for the agent to follow**, check **Automated Response**.
+1. In [Agent Configuration][2], open a rule. If there is no {{< ui >}}Automated response{{< /ui >}} action in the {{< ui >}}Agent's actions{{< /ui >}} section, then Automated response is not available for that rule yet.
+2. Click {{< ui >}}Edit{{< /ui >}}.
+3. Under {{< ui >}}Add actions for the agent to follow{{< /ui >}}, select {{< ui >}}Automated response{{< /ui >}}.
 
    {{< img src="security/workload_protection/respond_and_report/automated_response_activation.png" alt="An Agent rule Protection section displaying the Automated response action" style="width:100%;" >}}
-4. In **Link the rule to policies**, validate that the rule is active in at least one policy.
-5. Click **Update Agent Rule**.
+4. Under {{< ui >}}Link the rule to policies{{< /ui >}}, verify that the rule is {{< ui >}}Active{{< /ui >}} in at least one policy.
+5. Click {{< ui >}}Update Agent Rule{{< /ui >}}.
 
-### Report blocked attack attempts
+### Review blocked attack attempts
 
 After Automated response is enabled for an Agent rule, blocked threats appear in [Signals][1].
 
 A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The process <THREAT NAME> was automatically killed because it exhibited malicious behavior.`
 
-## Response
+## Manual response
 
-If you do not want to automatically kill processes based on rules, you can respond manually after a [Workload Protection signal][6] is triggered.
+Manual response lets you protect your infrastructure from the signal side panel after Workload Protection generates a [signal][6]. Use manual response if you do not want an Agent rule to terminate processes automatically.
 
 <div class="alert alert-info">Response and Agent enforcement capabilities depend on your Datadog subscription and organization settings. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> if you are unsure whether the feature is enabled for your account.</div>
-
-You can take actions directly from the signal side panel to protect your infrastructure after a signal is generated.
 
 {{< img src="security/workload_protection/respond_and_report/response_actions.png" alt="Response section showing isolate container and kill container actions with ISOLATED and KILLED statuses" style="width:100%;" >}}
 
@@ -118,7 +115,7 @@ Complete the following once per environment (hosts or containers running the Wor
 
 - Datadog **Agent 7.78** or later on the hosts that should execute response actions.
 - [**Remote Configuration**][3] is enabled so response policies can be delivered to the Agent.
-- Enforcement is enabled in `system-probe` as described in [Turn on enforcement in `system-probe`](#turn-on-enforcement-in-system-probe).
+- Enforcement is enabled in `system-probe` as described in [Configure Agent enforcement](#configure-agent-enforcement).
 
 #### Enable network probes for network isolation
 
