@@ -93,7 +93,7 @@ For any conversion analysis view, you can choose to view conversions by count or
 ## Conversion computing metrics
 
 ### How Datadog computes conversion metrics
-Consider a funnel with events `A → B → C` and event steps <code><strong style="font-weight: 900">A</strong>, A, A, <strong style="font-weight: 900">B</strong>, <strong style="font-weight: 900">C</strong>, C</code>.
+Consider a funnel with events `A → B → C` and event steps **A**, A, A, **B**, **C**, C.
 
 In this case, Datadog counts one conversion. Each **A** starts an independent attempt. Because all three attempts complete on the same **C** event, Datadog counts only the earliest attempt.
 
