@@ -119,9 +119,9 @@ To submit evaluations for <a href="/llm_observability/instrument/otel_instrument
 }
 {{< /code-block >}}
 
-## Pages in this section
+## Supported evaluation tools
 
-{{< whatsnext desc="Submit evaluations from an external tool:" >}}
+{{< whatsnext desc="Submit evaluations from these tools:" >}}
     {{< nextlink href="/llm_observability/configure/evaluations/external_evaluations/deepeval" >}}DeepEval Evaluations{{< /nextlink >}}
     {{< nextlink href="/llm_observability/configure/evaluations/external_evaluations/pydantic" >}}Pydantic Evaluations{{< /nextlink >}}
     {{< nextlink href="/llm_observability/configure/evaluations/external_evaluations/nemo" >}}NeMo Evaluations{{< /nextlink >}}
