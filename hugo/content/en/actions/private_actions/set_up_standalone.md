@@ -166,6 +166,69 @@ helm upgrade --install datadog-par datadog/private-action-runner -f values.yaml
 When the runner shows **Ready to use**, create a connection for it, or view it on the **Private
 Action Runners** page.
 
+## Custom CA certificates
+
+If your organization uses a custom certificate authority (CA) to issue certificates for internal services, such as HTTP endpoints or Jenkins, you can configure a standalone private action runner to trust that CA.
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+Add the `SSL_CERT_DIR` environment variable and mount your certificate to the `docker run` command, replacing `<PATH_TO_YOUR_CA_CERTIFICATE>` with the path to your CA certificate file:
+
+{{< highlight bash "hl_lines=7 9" >}}
+docker run -d \
+  -e DD_BASE_URL=https://{{< region-param key=dd_site >}} \
+  -e DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config \
+  -e DD_API_KEY="$DD_API_KEY" \
+  -e DD_APP_KEY="$DD_APP_KEY" \
+  -e RUNNER_NAME=<YOUR_RUNNER_NAME> \
+  -e SSL_CERT_DIR=/etc/dd-action-runner/config/ca-certificates \
+  -v ./config:/etc/dd-action-runner/config \
+  -v <PATH_TO_YOUR_CA_CERTIFICATE>:/etc/dd-action-runner/config/ca-certificates/ca.crt \
+  gcr.io/datadoghq/private-action-runner:v{{< private-action-runner-version "private-action-runner" >}} \
+  --with-api-key
+{{< /highlight >}}
+
+{{% /tab %}}
+{{% tab "Docker Compose" %}}
+
+Add the `SSL_CERT_DIR` environment variable and mount your certificate in your `docker-compose.yaml` file, replacing `<PATH_TO_YOUR_CA_CERTIFICATE>` with the path to your CA certificate file:
+
+```yaml
+services:
+  private-runner:
+    environment:
+      SSL_CERT_DIR: /etc/dd-action-runner/config/ca-certificates
+    volumes:
+      - "<PATH_TO_YOUR_CA_CERTIFICATE>:/etc/dd-action-runner/config/ca-certificates/ca.crt"
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+1. Create a ConfigMap containing your CA certificate:
+
+   ```bash
+   kubectl create configmap my-ca-cert --from-file=ca.crt=./my-custom-ca.pem
+   ```
+
+1. In your Helm `values.yaml` file, reference the ConfigMap:
+
+   ```yaml
+   runner:
+     customCaCert:
+       configMapName: my-ca-cert
+   ```
+
+1. Apply the updated values:
+
+   ```bash
+   helm upgrade --install datadog-par datadog/private-action-runner -f values.yaml
+   ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Connect the runner
 
 A standalone runner is always owned and uses the Connections authorization model. A connection
