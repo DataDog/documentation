@@ -20,6 +20,9 @@ To schedule a CSV Report, the query must meet the following conditions:
 
 1. In the [Log Explorer][1], run the query you want to export.
 2. Above the query results, click the down arrow next to {{< ui >}}Download as CSV{{< /ui >}}, then select {{< ui >}}Schedule CSV Report{{< /ui >}}.
+
+   {{< img src="logs/reports/schedule_csv_report_menu.png" alt="The Log Explorer results toolbar with the dropdown next to Download as CSV expanded, showing Copy, Copy as cURL, Share event, and Schedule CSV Report options" style="width:80%;" >}}
+
 3. In the configuration modal that opens, set a schedule for the report to determine when and how often the report is sent.  
 4. Configure report: Define the report title and set a time frame to determine the range of time displayed in the resulting report. The report time frame can be different from the time frame displayed on the dashboard.  
 5. Add recipients:
