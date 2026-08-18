@@ -65,7 +65,7 @@ The assistant opens in [Bits Chat][7], diagnoses the failure using the step's in
 
 Fixes with AI apply to problems in the workflow's configuration, such as incorrect inputs or an outdated action setup. For failures caused by external factors, such as invalid credentials, rate limits, or an outage in a connected service, the assistant explains the root cause and suggests next steps, such as checking your credentials or contacting the owner of the connected service.
 
-If the failed step triggers another workflow, debug the triggered workflow's own run history to find the underlying failure.
+If the failed step triggers another workflow, Bits Chat can trace the failure into the triggered workflow to diagnose and propose a fix there as well.
 
 
 ## Further reading
