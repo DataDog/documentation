@@ -22,7 +22,7 @@ Replay for Observability Pipelines enables you to pull archived logs from object
 
 Organizations often store large volumes of logs in cost-efficient, long-term archives to control spend and meet compliance requirements. However, historical data often becomes difficult to access when there is a security incident, audit request, or operational investigation. Retrieving archived logs from cold storage can be slow, manual, and disruptive, requiring ad-hoc scripts, decompression, or dedicated engineering effort. Replay for Observability Pipelines solves these issues.
 
-{{< img src="observability_pipelines/replay_pipeline.png" alt="A pipeline with the Amazon S3 replay source" style="width:100%;" >}}
+{{< img src="observability_pipelines/replay_pipeline.png" alt="A pipeline with the Amazon S3 replay source." style="width:100%;" >}}
 
 ## How Replay works
 
