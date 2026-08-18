@@ -42,7 +42,7 @@ This approach helps ensure your monitor titles and messages are clear, actionabl
 </ul>
 </div>
 
-{{% collapse-content title="Example monitor message" level="h4" expanded=false %}}
+{{% collapse-content title="Example monitor message" level="h3" expanded=false %}}
 A common use-case for the monitor message is to include a step-by-step way to resolve the problem, for example:
 
 ```text
@@ -75,28 +75,21 @@ An @notification must have a space between it and the last line character:
 |------------------|-------------------|
 | `Disk space is low @ops-team@company.com` | `Disk space is low@ops-team@company.com` |
 
-{{% collapse-content title="Integrations" level="h4" expanded=false %}}
+{{% collapse-content title="Integrations" level="h3" expanded=false %}}
 {{% notifications-integrations %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Teams" level="h4" expanded=false %}}
+{{% collapse-content title="Teams" level="h3" expanded=false %}}
 {{% notifications-teams %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Cases" level="h4" expanded=false %}}
+{{% collapse-content title="Cases" level="h3" expanded=false %}}
 {{% notifications-cases %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Email" level="h4" expanded=false %}}
+{{% collapse-content title="Email" level="h3" expanded=false %}}
 {{% notifications-email %}}
 {{% /collapse-content %}}
-
-### Threading notifications in Slack
-Monitor notifications sent to Slack through [notification rules][22] can be threaded. When threaded, all monitor alerts for a given alert cycle group under a single Slack thread with the top-level message reflecting the latest status of the monitor. 
-
-To enable monitor threading, set up or edit a [notification rule][22] scoped to the monitor alerts you would like targeted. Select **Thread Notifications** and save.
-
-**Note**: An alert cycle is defined as starting from a non-recovered state to a recovered state. 
 
 ### Bulk editing monitor @-handles
 Datadog supports editing alert message recipients across multiple monitors at once. Use this feature to efficiently add, remove, or replace `@-handles` in the monitor message body. Use cases include:
@@ -172,7 +165,7 @@ Add metadata (Priority, Tags, Datadog Team) to your monitor. Monitor Priority al
 
 {{< img src="monitors/notifications/notifications_metadata.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:100%;" >}}
 
-{{% collapse-content title="Priority" level="h4" expanded=false %}}
+{{% collapse-content title="Priority" level="h3" expanded=false %}}
 
 Add a priority (optional) associated with your monitors. Values range from P1 through P5, with P1 being the highest priority and the P5 being the lowest.
 To override the monitor priority in the notification message, use `{{override_priority 'Pi'}}` where `Pi` is between P1 and P5.
