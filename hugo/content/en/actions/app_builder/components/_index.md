@@ -26,6 +26,7 @@ App Builder is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
+## Overview
 This page provides a list of UI components that you can use when creating apps in App Builder.
 
 Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click {{< ui >}}&lt;/&gt;{{< /ui >}} next to the property to use the code editor. 
@@ -33,18 +34,20 @@ Many component properties allow you to select from provided values. If you want 
 Any component that can trigger an event has a list of available reactions in [events and reactions][13]. These components can also use [custom reactions][14].
 
 For more information on using JavaScript in App Builder, see [JavaScript Expressions][7]. For more information about saving your components as a template, see [Reusable Modules][12].
-<br><br> 
+<br>
 
-{{% collapse-content title="Button" level="h2" %}}
+## Available components
+
+{{% collapse-content title="Button" level="h3" %}}
 Button components have the following properties.
 
-### General
+#### General
 
 Label
 : The text that displays on the button.<br>
 **Value**: string or expression
 
-### Appearance
+#### Appearance
 
 Intent
 : Controls the color of the button, with colors representing the purpose of the button.<br>
@@ -70,7 +73,7 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Value**: click
@@ -79,20 +82,20 @@ Reaction
 : **Values**: examples include open modal, trigger action, and set component state<br>
 See [Events][1] for the full list of available reactions.
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
-### Example
+#### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Callout value" level="h2" %}}
+{{% collapse-content title="Callout value" level="h3" %}}
 Callout value components have the following properties.
 
-### General
+#### General
 
 Label
 : The text that displays at the top of the component.<br>
@@ -106,7 +109,7 @@ Unit
 : The unit associated with the value.<br>
 **Value**: string or expression
 
-### Style
+#### Style
 
 Style
 : The visual style of the component.<br>
@@ -116,7 +119,7 @@ Size
 : Responsively sizes the metric so that it is proportional to the sizing of the value.<br>
 **Provided values**: sm, md, lg, xl
 
-### Appearance
+#### Appearance
 
 Is Loading
 : Shows a loading indicator.<br>
@@ -130,21 +133,21 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
-### Example
+#### Example
 
 To view this component in context, see the [EC2 Instance Manager][3] app blueprint.
 {{% /collapse-content %}}
 
 
 
-{{% collapse-content title="Checkbox" level="h2" %}}
+{{% collapse-content title="Checkbox" level="h3" %}}
 Checkbox components have the following properties.
 
-### General
+#### General
 
 Label
 : The text that displays at the top of the component.<br>
@@ -167,7 +170,7 @@ Options
       ]}
       ```
 
-### Appearance
+#### Appearance
 
 Is Multiline
 : Determines whether the checkbox text should wrap onto a new line or be truncated by an ellipsis.<br>
@@ -181,7 +184,7 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Value**: change<br>
@@ -190,46 +193,46 @@ Reaction
 : **Values**: examples include open modal, trigger action, and set component state<br>
 See [Events][1] for the full list of available reactions.
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
-### Example
+#### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
 {{% /collapse-content %}}
 
 
 
-{{% collapse-content title="Container" level="h2" %}}
+{{% collapse-content title="Container" level="h3" %}}
 Container components have the following properties.
 
-### Appearance
+#### Appearance
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
-### Example
+#### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
 {{% /collapse-content %}}
 
 
 
-{{% collapse-content title="Custom chart" level="h2" %}}
+{{% collapse-content title="Custom chart" level="h3" %}}
 Custom chart components have the following properties.
 
-### General
+#### General
 
 Vega Specification
 : A string representing a valid Vega-Lite or Vega JSON specification.
 
-### Appearance
+#### Appearance
 
 Is Loading
 : Shows a loading indicator.<br>
@@ -239,21 +242,21 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
-### Example
+#### Example
 
 For an example showing how to use this component, see [Custom charts][10].
 
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Date picker" level="h2" %}}
+{{% collapse-content title="Date picker" level="h3" %}}
 Date picker components have the following properties.
 
-### General
+#### General
 
 Label
 : The label displayed at the top of the date picker.<br>
@@ -271,13 +274,13 @@ Allow Future Dates
 : Determines whether the date can be set after the current day's date.<br>
 **Provided values**: on, off
 
-### Appearance
+#### Appearance
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Value**: change
@@ -290,29 +293,29 @@ State Function
 : setValue<br>
 **Example**: See [State functions][9].
 
-### Inspect data
+#### Inspect data
 
 Displays properties and values in JSON format. Values are displayed both as a UNIX timestamp in milliseconds and ISO (year, month, day, hour, minutes, seconds, and milliseconds).
 
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Date range picker" level="h2" %}}
+{{% collapse-content title="Date range picker" level="h3" %}}
 Date range picker components have the following properties.
 
-### General
+#### General
 
 Default timeframe
 : The default timeframe that the date picker displays.<br>
 **Provided values**: past 5 minutes, past 30 minutes, past 1 hour, past 4 hours, past 1 day
 
-### Appearance
+#### Appearance
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Value**: change
@@ -321,48 +324,48 @@ Reaction
 : **Values**: examples include open modal, trigger action, and set component state<br>
 See [Events][1] for the full list of available reactions.
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
-### Example
+#### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Divider" level="h2" %}}
+{{% collapse-content title="Divider" level="h3" %}}
 Divider components have the following properties.
 
-### Appearance
+#### Appearance
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Inspect data
+#### Inspect data
 
 Displays properties in JSON format.
 
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="File input" level="h2" %}}
+{{% collapse-content title="File input" level="h3" %}}
 File input components have the following properties.
 
-### General
+#### General
 
 Accepted File Types
 : Determines which file types the file input component accepts.<br>
 **Values**: .csv, .json
 
-### Appearance
+#### Appearance
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Value**: change
@@ -371,23 +374,23 @@ Reaction
 : **Values**: examples include open modal, trigger action, and set component state<br>
 See [Events][1] for the full list of available reactions.
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Image" level="h2" %}}
+{{% collapse-content title="Image" level="h3" %}}
 Image components have the following properties.
 
-### General 
+#### General 
 
 Source
 : The image to display. The supported formats are JPG, PNG, and GIF. The maximum upload size is 4 MB.<br>
 **Values**: URL or file
 
-### Appearance
+#### Appearance
 
 Fit
 : Determines the dimensions of the image within the bounds of the image component.<br>
@@ -421,24 +424,24 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Inspect data
+#### Inspect data
 
 Displays properties in JSON format.
 
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Integration logo" level="h2" %}}
+{{% collapse-content title="Integration logo" level="h3" %}}
 Integration logo components have the following properties.
 
-### General
+#### General
 
 Integration Id
 : Specifies which integration logo icon to display.<br>
 **Value**: string or expression<br>
 **Examples**: datadog, amazon-s3, postgres, okta
 
-### Appearance
+#### Appearance
 
 Horizontal Alignment
 : Controls the horizontal positioning of the logo within the component.<br>
@@ -456,17 +459,17 @@ Is Loading
 : Shows a loading indicator.<br>
 **Provided values**: on, off
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Form" level="h2" %}}
+{{% collapse-content title="Form" level="h3" %}}
 Form components have the following properties.
 
-### General
+#### General
 
 Title
 : The title of the form.<br>
@@ -476,7 +479,7 @@ Default value
 : The default value that the app populates in the form. To populate a specific field, you can use JSON notation, such as `{"org":"frontend"}` to populate the `org` field with the value `frontend`.<br>
 **Value**: string or expression
 
-### Fields
+#### Fields
 
 Each item represents a field in the form. Fields each have one of the following types: `textInput`, `select`, `textArea`, or `text`.
 
@@ -514,7 +517,7 @@ Is Required
 : Determines whether the field is required in order to submit the form.<br>
 **Provided values**: on, off
 
-### Appearance
+#### Appearance
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
@@ -524,7 +527,7 @@ Is Disabled
 : Applies disabled styling and removes interactions.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Value**: submit, change, validate
@@ -538,17 +541,17 @@ State Function
 **Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.<br>
 See [State functions][9] for more information.
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="JSON input" level="h2" %}}
+{{% collapse-content title="JSON input" level="h3" %}}
 JSON input components have the following properties.
 
-### General
+#### General
 
 Label
 : The text that displays at the top of the component.
@@ -556,7 +559,7 @@ Label
 Default value
 : The default JSON value that the component displays.
 
-### Appearance
+#### Appearance
 
 Is Read Only
 : Determines whether the component is read only.<br>
@@ -566,7 +569,7 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Value**: change
@@ -575,23 +578,23 @@ Reaction
 : **Values**: examples include open modal, trigger action, and set component state<br>
 See [Events][1] for the full list of available reactions.
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 {{% /collapse-content %}}
 
 
 
-{{% collapse-content title="Modal" level="h2" %}}
+{{% collapse-content title="Modal" level="h3" %}}
 Modal components have the following properties.
 
-### General
+#### General
 
 Title
 : The title of the modal.<br>
 **Value**: string or expression
 
-### Appearance
+#### Appearance
 
 Size
 : The scale of the modal.<br>
@@ -601,7 +604,7 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Values**: toggleOpen, close, open
@@ -615,18 +618,18 @@ State Function
 **Example**: `modal0.setIsOpen(true)` sets the state of `modal0` to open.<br>
 See [State functions][9] for more information.
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
-### Example
+#### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
 {{% /collapse-content %}}
 
 
 
-{{% collapse-content title="Number input" level="h2" %}}
+{{% collapse-content title="Number input" level="h3" %}}
 Number input components have the following properties.
 
 Label
@@ -641,7 +644,7 @@ Placeholder text
 : The text that displays when no value is entered.<br>
 **Value**: string or expression
 
-### Validation
+#### Validation
 
 Min
 : The minimum value the number input accepts.<br>
@@ -651,7 +654,7 @@ Max
 : The maximum value the number input accepts.<br>
 **Value**: number or expression that evaluates to a number
 
-### Appearance
+#### Appearance
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
@@ -661,7 +664,7 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Value**: change
@@ -675,11 +678,11 @@ State Function
 **Example**: `numberInput0.setValue(3)` sets the value of the `numberInput0` component to `3`.<br>
 See [State functions][9] for more information.
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
-### Example
+#### Example
 
 To view this component in context, see the [ECS Task Manager][4] app blueprint.
 {{% /collapse-content %}}
@@ -687,10 +690,10 @@ To view this component in context, see the [ECS Task Manager][4] app blueprint.
 
 
 
-{{% collapse-content title="Radio" level="h2" %}}
+{{% collapse-content title="Radio" level="h3" %}}
 Radio components have the following properties.
 
-### General
+#### General
 
 Label
 : The text that displays at the top of the component.<br>
@@ -717,7 +720,7 @@ Default value
 : The value that is selected when the radio loads.<br>
 **Value**: string or expression
 
-### Appearance
+#### Appearance
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
@@ -727,7 +730,7 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Value**: change
@@ -741,17 +744,17 @@ State Function
 **Example**: `radioButtons0.setValue("production")` sets the value of the `radioButtons0` component to `"production"`.<br>
 See [State functions][9] for more information.
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 {{% /collapse-content %}}
 
 
 
-{{% collapse-content title="React renderer" level="h2" %}}
+{{% collapse-content title="React renderer" level="h3" %}}
 React renderer components have the following properties.
 
-### General
+#### General
 
 React Component Definition
 : The code that is executed to create a React component.<br>
@@ -762,13 +765,13 @@ Component Input Props
 Initial Component State
 : Sets the initial state values for your component. This state is used when the component first renders or if no state has been set yet. The component can access this data through <code>props.state</code>.<br>
 
-### Appearance
+#### Appearance
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 Event
 : **Values**: set component state, callback function
 
@@ -779,15 +782,15 @@ Reaction
 : **Values**: examples include open modal, trigger action, and set component state<br>
 See [Events][1] for the full list of available reactions.
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
-### Relationships
+#### Relationships
 
 Displays data dependencies between React renderer and components in the app.
 
-### Example
+#### Example
 
 For an example showing how to use this component, see [React renderer][11].
 
@@ -795,10 +798,10 @@ For an example showing how to use this component, see [React renderer][11].
 
 
 
-{{% collapse-content title="Search" level="h2" %}}
+{{% collapse-content title="Search" level="h3" %}}
 Search components have the following properties.
 
-### General
+#### General
 
 Default value
 : The default value that the app populates in the search box.<br>
@@ -808,7 +811,7 @@ Placeholder text
 : The text that displays when no value is entered.<br>
 **Value**: string or expression
 
-### Appearance
+#### Appearance
 
 Size
 : The scale of the search component.<br>
@@ -822,7 +825,7 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Values**: change, submit
@@ -838,19 +841,19 @@ See [State functions][9] for more information.
 
 For more information on events, see [Events][1].
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
-### Example
+#### Example
 
 To view this component in context, see the [EC2 Instance Manager][3] app blueprint.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Select" level="h2" %}}
+{{% collapse-content title="Select" level="h3" %}}
 Select components have the following properties.
 
-### General
+#### General
 
 Label
 : The text that displays at the top of the component.<br>
@@ -885,7 +888,7 @@ Is Multiselect
 : Determines whether the user can select more than one option at a time.<br>
 **Provided values**: on, off
 
-### Appearance
+#### Appearance
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
@@ -895,7 +898,7 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Value**: change
@@ -909,26 +912,26 @@ State Function
 **Example**: `select0.setValue("staging")` sets the value of the `select0` component to `"staging"`.<br>
 See [State functions][9] for more information.
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
-### Example
+#### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Side panel" level="h2" %}}
+{{% collapse-content title="Side panel" level="h3" %}}
 Side panel components have the following properties.
 
-### General 
+#### General 
 
 Title
 : The title for the side panel.<br>
 **Value**: string
 
-### Appearance
+#### Appearance
 
 Width
 : Determines the width of the side panel. A percent sign (`%`) must be included after the value.<br>
@@ -938,7 +941,7 @@ Hide Close Button
 : Determines whether side panel displays an X to close the panel.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Values**: toggle open, close, open
@@ -952,23 +955,23 @@ State Function
 **Example**: `sidePanel0.setIsOpen(true)` sets the state of `sidePanel0` to open.<br>
 See [State functions][9] for more information.
 
-### Inspect data
+#### Inspect data
 
 Displays properties and values in JSON format.
 
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Tab" level="h2" %}}
+{{% collapse-content title="Tab" level="h3" %}}
 
 Tab components have the following properties.
 
-### Tabs
+#### Tabs
 
 A list of tab views. Use the ({{< ui >}}+{{< /ui >}}) to add additional views.
 
 
-### Style
+#### Style
 
 Style
 : The coloring style used for the tab component.<br>
@@ -983,7 +986,7 @@ Impact
 **Provided values**: High, low
 
 
-### Appearance
+#### Appearance
 
 Hide Tabs
 : Controls whether the tab markers are displayed.<br>
@@ -997,7 +1000,7 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Value**: change
@@ -1011,17 +1014,17 @@ State Function
 **Example**: `tab0.setTabIndex(0)` sets the value of the `tab0` component to the first tab.<br>
 See [State functions][9] for more information.
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Table" level="h2" %}}
+{{% collapse-content title="Table" level="h3" %}}
 
 Table components have the following properties.
 
-### General
+#### General
 
 Title
 : A title for the table. Select {{< ui >}}Markdown{{< /ui >}} for custom formatting.<br>
@@ -1031,7 +1034,7 @@ Data source
 : The array of objects to display in a table.<br>
 **Values**: query, demo data, components
 
-### Columns
+#### Columns
 
 Each column of data from the data source is represented here and has the following properties:
 
@@ -1060,7 +1063,7 @@ Filterable
 
 Some columns have additional properties based on their {{< ui >}}Formatting{{< /ui >}} property.
 
-### Pagination
+#### Pagination
 
 Has summary
 : Determines whether to display a pagination summary directly above the table.<br>
@@ -1078,7 +1081,7 @@ Type
 : Determines the type of pagination.<br>
 **Provided values**: client side, server side
 
-### Sorting
+#### Sorting
 
 Select the column and direction for default table sorting.
 Column
@@ -1089,7 +1092,7 @@ Direction
 : The direction to sort.<br>
 **Provided values**: ascending, descending
 
-### Row actions
+#### Row actions
 
 Adding a row action adds an {{< ui >}}Actions{{< /ui >}} column to the table, which contains user-defined action buttons. Rows can have multiple actions. Actions have the following properties:
 
@@ -1118,7 +1121,7 @@ Reactions
 **Provided values**: download file, open modal, close modal, open side panel, close side panel, open URL, set component state, set state variable value, toast notification, trigger action, custom<br>
 Some reaction types have additional properties.
 
-### Appearance
+#### Appearance
 
 Scrollable
 : Determines what ways the table is scrollable in.<br>
@@ -1156,7 +1159,7 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Values**: pageChange, tableRowClick
@@ -1172,11 +1175,11 @@ State Function
 **Example**: `table0.setPageIndex(0)` sets the `pageIndex` property of `table0` to the first page.<br>
 See [State functions][9] for more information.
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
-### Example
+#### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
 
@@ -1186,10 +1189,10 @@ For examples showing how to use advanced features of tables, see [Tables][6].
 
 
 
-{{% collapse-content title="Text" level="h2" %}}
+{{% collapse-content title="Text" level="h3" %}}
 Text components have the following properties.
 
-### General
+#### General
 
 Content
 : The content that the component displays.<br>
@@ -1199,7 +1202,7 @@ Content type
 : Determines how to render the text. When {{< ui >}}Markdown{{< /ui >}} is selected, the text component supports [basic Markdown syntax][8], including images that you host elsewhere.<br>
 **Provided values**: plain text, Markdown
 
-### Appearance
+#### Appearance
 
 Text alignment
 : Determines the horizontal alignment of the text within the component.<br>
@@ -1213,21 +1216,21 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
-### Relationships
+#### Relationships
 
 Displays data dependencies between table data and components in the app.
 
-### Example
+#### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Text area" level="h2" %}}
+{{% collapse-content title="Text area" level="h3" %}}
 Text area components have the following properties.
 
 Label
@@ -1242,7 +1245,7 @@ Placeholder text
 : The text that displays when no value is entered.<br>
 **Value**: string or expression
 
-### Appearance
+#### Appearance
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
@@ -1252,7 +1255,7 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Values**: change, submit
@@ -1266,13 +1269,13 @@ State Function
 **Example**: `textArea0.setValue("text")` sets the value of the `textArea0` component to `"text"`.<br>
 See [State functions][9] for more information.
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Text input" level="h2" %}}
+{{% collapse-content title="Text input" level="h3" %}}
 Text input components have the following properties.
 
 Label
@@ -1287,7 +1290,7 @@ Placeholder text
 : The text that displays when no value is entered.<br>
 **Value**: string or expression
 
-### Appearance
+#### Appearance
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
@@ -1297,7 +1300,7 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
+#### Events
 
 Event
 : **Values**: change, submit
@@ -1311,11 +1314,11 @@ State Function
 **Example**: `textInput0.setValue("text")` sets the value of the `textInput0` component to `"text"`.
 See [State functions][9] for more information.
 
-### Inspect data
+#### Inspect data
 
 Displays property and value pairs in JSON format.
 
-### Example
+#### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
 {{% /collapse-content %}}
