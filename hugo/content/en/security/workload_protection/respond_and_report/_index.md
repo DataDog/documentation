@@ -30,8 +30,6 @@ For more information about where response fits in the detection pipeline, see [H
 
 ## Response requirements
 
-Automated and manual response rely on enforcement in the Agent, which is enabled by default.
-
 ### Configure Agent enforcement
 
 Response actions use the `runtime_security_config.enforcement` settings in `/etc/datadog-agent/system-probe.yaml`. Enforcement is enabled by default, and the default settings are sufficient for most configurations. For the full parameter reference, see [Workload Protection Agent configuration][4].
@@ -59,19 +57,19 @@ The result is threat detection followed by immediate, targeted mitigation of hig
 
 ### Automated response availability
 
-If Automated response is active for an Agent rule, you can verify it in the rule:
+If automated response is active for an Agent rule, you can verify it in the rule:
 
 1. In [Agent Configuration][2], open the rule.
 2. Confirm that {{< ui >}}Automated response{{< /ui >}} appears in the list of active actions.
 
-To check whether Automated response applies to a rule that generated a signal:
+To check whether automated response applies to a rule that generated a signal:
 
 1. In [Signals][1], open the signal.
-2. View {{< ui >}}Next Steps{{< /ui >}}. If Automated response is available for the matching rule, {{< ui >}}Proactively block threats{{< /ui >}} displays {{< ui >}}Automated response enabled{{< /ui >}}.
+2. View {{< ui >}}Next Steps{{< /ui >}}. If automated response is available for the matching rule, {{< ui >}}Proactively block threats{{< /ui >}} displays {{< ui >}}Automated response enabled{{< /ui >}}.
 
-### Configure Automated response on Agent rules
+### Configure automated response on Agent rules
 
-By default, all out-of-the-box (OOTB) Agent rules, such as crypto mining rules, are active. You must configure the Automated response action manually.
+By default, all out-of-the-box (OOTB) Agent rules, such as crypto mining rules, are active. You must configure the automated response action manually.
 
 #### Protection states
 
@@ -79,23 +77,23 @@ An Agent rule can be in one of the following states:
 
 - **Inactive:** The Agent does not monitor for the rule events and does not send detections to the Datadog backend.
 - **Active:** This is the default setting for enabled rules. The Agent monitors for the enabled rule and displays detections in [Signals][1].
-- **Active with Automated response:** The Agent monitors for the enabled rule, terminates matching processes or containers, and displays detections in [Signals][1].
+- **Active with automated response:** The Agent monitors for the enabled rule, terminates matching processes or containers, and displays detections in [Signals][1].
 
 <div class="alert alert-info">Automated response is applied to all threats detected after automated response is enabled. Automated response is not retroactive.</div>
 
-To enable Automated response on an Agent rule:
+To enable automated response on an Agent rule:
 
-1. In [Agent Configuration][2], open a rule. If there is no {{< ui >}}Automated response{{< /ui >}} action in the {{< ui >}}Agent's actions{{< /ui >}} section, then Automated response is not available for that rule.
+1. In [Agent Configuration][2], open a rule. If there is no {{< ui >}}Automated response{{< /ui >}} action in the {{< ui >}}Agent's actions{{< /ui >}} section, then automated response is not available for that rule.
 2. Click {{< ui >}}Edit{{< /ui >}}.
 3. Under {{< ui >}}Add actions for the agent to follow{{< /ui >}}, select {{< ui >}}Automated response{{< /ui >}}.
 
-   {{< img src="security/workload_protection/respond_and_report/automated_response_activation.png" alt="An Agent rule Protection section displaying the Automated response action" style="width:100%;" >}}
+   {{< img src="security/workload_protection/respond_and_report/automated_response_activation.png" alt="An Agent rule Protection section displaying the automated response action" style="width:100%;" >}}
 4. Under {{< ui >}}Link the rule to policies{{< /ui >}}, verify that the rule is {{< ui >}}Active{{< /ui >}} in at least one policy.
 5. Click {{< ui >}}Update Agent Rule{{< /ui >}}.
 
 ### Review blocked attack attempts
 
-After Automated response is enabled for an Agent rule, blocked threats appear in [Signals][1].
+After automated response is enabled for an Agent rule, blocked threats appear in [Signals][1].
 
 A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The process <THREAT NAME> was automatically killed because it exhibited malicious behavior.`
 
