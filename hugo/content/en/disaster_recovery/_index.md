@@ -43,7 +43,7 @@ To enable Datadog Disaster Recovery, follow these steps. If you have any questio
 
 ### 1. Create a DDR org and link it to your primary org
 
-{{% collapse-content title="Create and share your DDR org" level="h5" %}}
+{{% collapse-content title="Create and share your DDR org" level="h4" %}}
 
 <div class="alert alert-info">If required, Datadog can set this up for you.</div>
 
@@ -63,7 +63,7 @@ Email your new org name to your [Customer Success Manager][14]. Then, your Custo
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Retrieve the public IDs and link your DDR and primary orgs" level="h5" %}}
+{{% collapse-content title="Retrieve the public IDs and link your DDR and primary orgs" level="h4" %}}
 
 For security reasons, Datadog is unable to link the orgs on your behalf.
 
@@ -97,7 +97,7 @@ After linking your orgs, only the failover org displays this banner:
 
 ### 2. Set up access, integrations, syncing, and agents
 
-{{% collapse-content title="Configure Single Sign On for the DDR org" level="h5" %}}
+{{% collapse-content title="Configure Single Sign On for the DDR org" level="h4" %}}
 
 **Datadog recommends using Single Sign On (SSO)** to enable all your users to log in to your Disaster Recovery org during an outage.
 
@@ -107,7 +107,7 @@ Managed sync replicates user accounts from your primary org to your DDR org. Dat
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Set up your cloud integrations (AWS, Azure, Google Cloud)" level="h5" %}}
+{{% collapse-content title="Set up your cloud integrations (AWS, Azure, Google Cloud)" level="h4" %}}
 
 See the [AWS][5], [Azure][6], and [Google Cloud][7] integrations for setup steps.
 
@@ -117,7 +117,7 @@ For more information, see the [Cloud integrations failover](#id-for-cloud) secti
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Set up credentials for managed resource sync" level="h5" id="syncing-data" %}}
+{{% collapse-content title="Set up credentials for managed resource sync" level="h4" id="syncing-data" %}}
 
 Datadog manages resource sync on your behalf using the open source [datadog-sync-cli][8] tool. You do not need to run or operate this tool yourself.
 
@@ -129,7 +129,7 @@ Managed sync replicates resources from your primary org to your DDR org on a reg
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Enable Remote Configuration [**RECOMMENDED]" level="h5" %}}
+{{% collapse-content title="Enable Remote Configuration [**RECOMMENDED]" level="h4" %}}
 
 [Remote Configuration (RC)][11] allows you to remotely configure and change the behavior of Datadog Agents deployed in your infrastructure.
 
@@ -139,7 +139,7 @@ Datadog strongly recommends using Remote Configuration for better failover contr
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Dual ship telemetry to DDR org during failover or drills" level="h5" %}}
+{{% collapse-content title="Dual ship telemetry to DDR org during failover or drills" level="h4" %}}
 
 
 To enable Dual Shipping, Datadog recommends using [Fleet Automation][12] for management at scale. Alternatively, you can configure it manually by editing your `datadog.yaml` file.
@@ -188,7 +188,7 @@ multi_region_failover:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Configure DNS-based failover" level="h5" %}}
+{{% collapse-content title="Configure DNS-based failover" level="h4" %}}
 
 DNS-based failover is a complementary approach to Agent-based failover. Instead of configuring Agents with a secondary site endpoint, you configure all your data sources to send telemetry to a single Datadog-provided custom intake URL. During a failover event, Datadog updates the DNS record for that URL to redirect traffic from your primary site to your DDR site.
 
@@ -208,7 +208,7 @@ To initiate a DNS failover, contact Datadog through your [Customer Success Manag
 
 ### 3. Run failover tests in various environments
 
-{{% collapse-content title="Activate and test DDR failover in Agent-based environments" level="h5" %}}
+{{% collapse-content title="Activate and test DDR failover in Agent-based environments" level="h4" %}}
 
 To trigger a failover of your Agents, you can click on one of the policies in [Fleet Automation][13] in your DDR org, and then click {{< ui >}}Enable{{< /ui >}}. The status of each host updates as the failover occurs.
 
@@ -279,7 +279,7 @@ DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Activate and test DDR failover in cloud integrations" level="h5" id="id-for-cloud" %}}
+{{% collapse-content title="Activate and test DDR failover in cloud integrations" level="h4" id="id-for-cloud" %}}
 
 You can test failover for your cloud integrations from your DDR organization's landing page.
 
