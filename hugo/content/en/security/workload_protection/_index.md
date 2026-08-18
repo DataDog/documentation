@@ -101,11 +101,11 @@ Workload Protection ships with over 350 agent rules and 200 detection rules, cov
 Response actions run in the Agent. The Agent can terminate a process or container, or block network traffic using an eBPF-based filter. You can trigger these actions two ways:
 
 - **Automated response** attaches an action to an agent rule, so the Agent acts as soon as the rule matches.
-- **Response** lets you act manually from a signal after it is generated.
+- **Manual response** lets you act from a signal after it is generated.
 
-Both depend on enforcement being enabled in the Agent.
+Both depend on enforcement being enabled in the Agent. See [Respond to Threats][4].
 
-You can also respond from Datadog instead of the Agent. Trigger a [workflow][15] from a signal, or integrate signals with your existing response pipelines. See [Respond to Threats][4].
+You can also respond from Datadog instead of the Agent. Trigger a [workflow][15] from a signal, or integrate signals with your existing response pipelines. See [Signal actions][16].
 
 ## Next steps
 
@@ -123,7 +123,7 @@ See the [Investigate and Triage][3] pages to discover the explorers and in-app v
 
 ### Respond to threats
 
-The [Respond to Threats][4] page explains how to configure automated and manual response. You can configure the Agent to terminate a malicious process or container automatically, or respond from a signal by terminating a process or container or isolating it from the network.
+The [Respond to Threats][4] page explains how to configure automated and manual response. The Agent can terminate a malicious process or container as soon as a rule matches. From a signal, you can terminate a process or container, or isolate it from the network.
 
 ### Coverage
 
@@ -150,3 +150,4 @@ Use [Coverage][5] to get a unified, real-time view of Workload Protection postur
 [13]: /security/workload_protection/detect_and_monitor/threat_intelligence
 [14]: /security/workload_protection/detect_and_monitor/agent_rules/policy_management
 [15]: /actions/workflows/
+[16]: /security/workload_protection/investigate_and_triage/security_signals/actions

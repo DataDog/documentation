@@ -100,7 +100,7 @@ Use the following instructions to enable the Windows agent of Workload Protectio
 
 ## Next steps
 
-After setup, you can explore Workload Protection, configure the Agent for your environment, or request access to Automated Response.
+After setup, you can explore Workload Protection, configure the Agent for your environment, or request access to Automated response.
 
 ### Explore Workload Protection
 

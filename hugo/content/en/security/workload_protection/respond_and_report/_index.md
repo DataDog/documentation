@@ -30,11 +30,11 @@ For more information about where response fits in the detection pipeline, see [H
 
 ## Response requirements
 
-Automated and manual response rely on enforcement in the Agent. Depending on the response action, the Agent can terminate a process or container or isolate it from the network.
+Automated and manual response rely on enforcement in the Agent, which is enabled by default. Depending on the response action, the Agent can terminate a process or container or isolate it from the network.
 
 ### Configure Agent enforcement
 
-Response actions use the `runtime_security_config.enforcement` settings in `/etc/datadog-agent/system-probe.yaml`. The default settings are sufficient for most configurations. For the full parameter reference, see [Workload Protection Agent configuration][4].
+Response actions use the `runtime_security_config.enforcement` settings in `/etc/datadog-agent/system-probe.yaml`. Enforcement is enabled by default, and the default settings are sufficient for most configurations. For the full parameter reference, see [Workload Protection Agent configuration][4].
 
 These settings let you exclude binaries from response actions or control which rule sources can trigger them. By default, no binaries are excluded, and the `file` and `remote-config` rule sources are allowed.
 
@@ -48,9 +48,9 @@ Both **Automated response** and manual response require specific [RBAC permissio
 
 ## Automated response
 
-Automated response enables you to proactively block threats identified by Datadog Agent detection rules by terminating matching processes.
+Automated response enables you to proactively block threats identified by Datadog Agent detection rules by terminating matching processes or containers.
 
-Automated response streamlines threat detection and targeted response, resulting in risk reduction, allowing DevSecOps and security teams to tackle evolving threats effectively:
+Automated response splits the decision between two teams:
 
 - Security decides which threats warrant an automated action.
 - DevOps decides which applications and resources are resilient enough to withstand targeted protection.
@@ -73,19 +73,19 @@ To check whether Automated response applies to a rule that generated a signal:
 
 By default, all out-of-the-box (OOTB) Agent rules, such as crypto mining rules, are active. You must configure the Automated response action manually.
 
-#### Agent rule configurations
+#### Protection states
 
-Agent rules can be configured in the following ways:
+An Agent rule can be in one of the following states:
 
 - **Inactive:** The Agent does not monitor for the rule events and does not send detections to the Datadog backend.
 - **Active:** This is the default setting for enabled rules. The Agent monitors for the enabled rule and displays detections in [Signals][1].
-- **Active with Automated response:** The Agent monitors for the enabled rule, terminates matching processes, and displays detections in [Signals][1].
+- **Active with Automated response:** The Agent monitors for the enabled rule, terminates matching processes or containers, and displays detections in [Signals][1].
 
 <div class="alert alert-info">Automated response is applied to all threats detected after automated response is enabled. Automated response is not retroactive.</div>
 
 To enable Automated response on an Agent rule:
 
-1. In [Agent Configuration][2], open a rule. If there is no {{< ui >}}Automated response{{< /ui >}} action in the {{< ui >}}Agent's actions{{< /ui >}} section, then Automated response is not available for that rule yet.
+1. In [Agent Configuration][2], open a rule. If there is no {{< ui >}}Automated response{{< /ui >}} action in the {{< ui >}}Agent's actions{{< /ui >}} section, then Automated response is not available for that rule.
 2. Click {{< ui >}}Edit{{< /ui >}}.
 3. Under {{< ui >}}Add actions for the agent to follow{{< /ui >}}, select {{< ui >}}Automated response{{< /ui >}}.
 
@@ -103,11 +103,11 @@ A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The
 
 Manual response lets you protect your infrastructure from the signal side panel after Workload Protection generates a [signal][6]. Use manual response if you do not want an Agent rule to terminate processes automatically.
 
-<div class="alert alert-info">Response and Agent enforcement capabilities depend on your Datadog subscription and organization settings. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> if you are unsure whether the feature is enabled for your account.</div>
+<div class="alert alert-info">Manual response and Agent enforcement capabilities depend on your Datadog subscription and organization settings. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> if you are unsure whether the feature is enabled for your account.</div>
 
 {{< img src="security/workload_protection/respond_and_report/response_actions.png" alt="Response section showing isolate container and kill container actions with ISOLATED and KILLED statuses" style="width:100%;" >}}
 
-### Manual response requirements
+### Additional requirements for manual response
 
 Confirm that each environment with hosts or containers running the Workload Protection-enabled Agent meets these requirements:
 
@@ -115,13 +115,9 @@ Confirm that each environment with hosts or containers running the Workload Prot
 - [**Remote Configuration**][3] is enabled so response policies can be delivered to the Agent.
 - Enforcement is enabled in `system-probe` as described in [Configure Agent enforcement](#configure-agent-enforcement).
 
-#### Network isolation
-
-By default, the Agent enables the network probes required for network isolation.
-
 ### Available actions
 
-The Agent supports the following **enforcement** action types for response workflows:
+The Agent supports the following **enforcement** action types:
 
 #### Kill
 
@@ -130,6 +126,8 @@ Terminate a malicious process or all processes in a compromised **container** (c
 #### Network filter (network isolation)
 
 Block network traffic using an eBPF-based filter (for example, drop egress to specific ports). Any isolation can be reverted.
+
+Network isolation uses eBPF **Traffic Control** classifiers and raw packet programs. The Agent enables the required network probes by default in `event_monitoring_config.network` in `system-probe.yaml`.
 
 ### Action statuses
 
