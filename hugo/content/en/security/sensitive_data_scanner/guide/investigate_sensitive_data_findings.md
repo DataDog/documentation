@@ -91,7 +91,7 @@ Additionally, you can also:
 
 {{< img src="sensitive_data_scanner/investigate_sensitive_data_issues/case_mgmt_02_01_2024.png" alt="The case page showing information about the security finding, the assignee and creator of the case, and a timeline of events" style="width:60%;">}}
 
-[1]: /incident_response/case_management/
+[1]: /incident_response/work_management/
 [2]: /incident_response/incident_management/
 [3]: /account_management/audit_trail
 

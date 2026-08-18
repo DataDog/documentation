@@ -19,7 +19,7 @@ This guide introduces Datadog Notebooks and demonstrates how notebook types enha
 
 - **Direct data access**: Query and visualize your Datadog metrics, logs, and traces without leaving the document
 - **Real-time collaboration**: Multiple team members can edit simultaneously, leave comments, and track changes
-- **Workflow integration**: Create notebooks from alerts, dashboards, logs, or Datadog Case Management to start investigations where issues appear
+- **Workflow integration**: Create notebooks from alerts, dashboards, logs, or Datadog Work Management to start investigations where issues appear
 
 ## Choosing the right notebook type
 
