@@ -136,7 +136,7 @@ In addition to defining `kill` actions in Agent policy files, you can configure 
 - **Automatic:** Add `kill` actions to Agent rules in a policy, as described in this section, or use [Automated response](/security/workload_protection/respond_and_report/#automated-response).
 - **Manual:** From a security signal, use [Kill containers or processes](/security/workload_protection/investigate_and_triage/security_signals/actions#kill-containers-or-processes) under **Respond** in the signal side panel.
 
-Both approaches require [Response](/security/workload_protection/respond_and_report/#response) to be enabled on the Agent. See [Respond and Report](/security/workload_protection/respond_and_report/) for an overview of enforcement and response workflows.
+Both approaches require [Response](/security/workload_protection/respond_and_report/#response) to be enabled on the Agent. See [Respond to Threats](/security/workload_protection/respond_and_report/) for an overview of enforcement and response workflows.
 
 ### When to use it
 

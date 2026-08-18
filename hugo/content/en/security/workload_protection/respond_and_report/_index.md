@@ -10,10 +10,10 @@ aliases:
   - /security/workload_protection/guide/active-protection
   - /security/cloud_security_management/guide/active-protection
 further_reading:
-- link: "security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules"
+- link: "/security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules"
   tag: "Documentation"
   text: "Workload Protection detection rules"
-- link: "security/workload_protection/setup"
+- link: "/security/workload_protection/setup"
   tag: "Documentation"
   text: "Setting up Workload Protection"
 - link: "/security/workload_protection/setup/advanced_configuration"
@@ -99,7 +99,7 @@ After Automated response is enabled for an Agent rule, blocked threats appear in
 
 A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The process <THREAT NAME> was automatically killed because it exhibited malicious behavior.`
 
-## Manual response
+## Manual response {#response}
 
 Manual response lets you protect your infrastructure from the signal side panel after Workload Protection generates a [signal][6]. Use manual response if you do not want an Agent rule to terminate processes automatically.
 
@@ -107,19 +107,17 @@ Manual response lets you protect your infrastructure from the signal side panel 
 
 {{< img src="security/workload_protection/respond_and_report/response_actions.png" alt="Response section showing isolate container and kill container actions with ISOLATED and KILLED statuses" style="width:100%;" >}}
 
-### Enable the Response feature
+### Manual response requirements
 
-Complete the following once per environment (hosts or containers running the Workload Protection-enabled Agent).
-
-#### Prerequisites
+Confirm that each environment with hosts or containers running the Workload Protection-enabled Agent meets these requirements:
 
 - Datadog **Agent 7.78** or later on the hosts that should execute response actions.
 - [**Remote Configuration**][3] is enabled so response policies can be delivered to the Agent.
 - Enforcement is enabled in `system-probe` as described in [Configure Agent enforcement](#configure-agent-enforcement).
 
-#### Enable network probes for network isolation
+#### Network isolation
 
-Network isolation uses eBPF **Traffic Control** classifiers and raw packet programs. The required network probes are enabled by default in `event_monitoring_config.network` in `system-probe.yaml`.
+By default, the Agent enables the network probes required for network isolation.
 
 ### Available actions
 
@@ -144,6 +142,10 @@ When a response action runs, the Agent reports a **status** for each action. The
 | `removed` | An isolation rule was **removed** from the current ruleset while it was present before—used when **reverting** network isolation. | | {{< X >}} |
 | `error` | An error occurred during the response. The action failed and the process or container is still running or not isolated. | {{< X >}} | {{< X >}} |
 | `not_triggered` | The Agent did not find the targeted resource. The container or process may have exited before the response action ran. | {{< X >}} | {{< X >}} |
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security
 [2]: https://app.datadoghq.com/security/workload-protection/agent-rules
