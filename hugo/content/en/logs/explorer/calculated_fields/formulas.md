@@ -47,6 +47,7 @@ The available functions are categorized as follows:
 - [Arithmetic](#arithmetic)
 - [String](#string)
 - [Logical](#logical)
+- [Regex](#regex)
 
 
 ### Arithmetic
@@ -312,6 +313,44 @@ Checks if an attribute or expression is null.
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attributes: <br> - `@users_online` = 5 <br> - `@max_capacity` = 0 | `is_null(@users_online / @max_capacity)` | "true" |
+
+{{% /collapse-content %}}
+
+---
+
+### Regex
+
+Regex functions match or transform a value using a regular expression (regex). Patterns follow the same syntax as [regex extraction](/logs/explorer/calculated_fields/extractions/#regex).
+
+<h4>regexp_like(<i>str</i> value, <i>str</i> pattern)</h4>
+
+Returns `true` when the pattern matches anywhere in the value, and `false` otherwise.
+
+{{% collapse-content title="Example" level="h5" expanded=false %}}
+
+| Example  | Formula | Result |
+|----------|-------------|---------|
+| A log event has the following attribute:<br>`message` = "connection timeout after 30s" | `#is_timeout = regexp_like(message, "timeout\|deadline exceeded")` | `#is_timeout` = "true" |
+
+{{% /collapse-content %}}
+
+
+<h4>regexp_replace(<i>str</i> value, <i>str</i> pattern, <i>str</i> replacement, [<i>int</i> start, <i>int</i> N])</h4>
+
+Returns the value with matched text replaced. Use `$1` through `$9` in the replacement to insert a capture group's match, or `${name}` for a named group. To write a literal `$`, escape it as `\$`.
+
+By default, only the first match is replaced. Two optional arguments change that:
+
+| Argument | Meaning |
+|---|---|
+| `start` | The character position to start matching from, counting from 1. Defaults to the first character |
+| `N` | Which match to replace. `1` (the default) replaces the first match; `N` replaces the Nth match; `0` replaces every match |
+
+{{% collapse-content title="Example" level="h5" expanded=false %}}
+
+| Example  | Formula | Result |
+|----------|-------------|---------|
+| A log event has the following attribute:<br>`@path` = "/api/v1/orders" | `#resource = regexp_replace(@path, "^/api/v[0-9]+/(.*)$", "$1")` | `#resource` = "orders" |
 
 {{% /collapse-content %}}
 
