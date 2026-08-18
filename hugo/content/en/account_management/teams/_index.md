@@ -140,7 +140,7 @@ The following table describes the products in which you can use the team filter:
 |--------------------------------|------------------------------------------------------------------------------------|
 | [APM Error Tracking][15]       | Service owned by teams (determined by ownership inside the [Catalog][12]) |
 | [Apps][21]                     | Team handle                                                                        |
-| [Case Management projects][22] | Team handle                                                                        |
+| [Work Management projects][22] | Team handle                                                                        |
 | [Connections][23]              | Team handle                                                                        |
 | [Connection Groups][24]        | Team handle                                                                        |
 | [Cross Org Connections][25]    | Team handle                                                                        |
@@ -199,7 +199,7 @@ To customize your team, see [Team Management][3].
 [19]: https://app.datadoghq.com/synthetics
 [20]: https://app.datadoghq.com/notebook/list/
 [21]: https://app.datadoghq.com/app-builder/apps/list
-[22]: https://app.datadoghq.com/cases
+[22]: https://app.datadoghq.com/work
 [23]: https://app.datadoghq.com/actions/connections
 [24]: https://app.datadoghq.com/actions/connections?sort=-updated_at&tab=groups
 [25]: https://app.datadoghq.com/organization-settings/cross-org-visibility

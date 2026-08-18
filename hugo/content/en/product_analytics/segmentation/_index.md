@@ -33,7 +33,7 @@ To create a segment:
 
    <div class="alert alert-info">A segment returns either user or account profiles, not both.</div>
 
-{{% collapse-content title="Using Product Analytics data" level="h4" expanded=false id="segment-pana" %}}
+{{% collapse-content title="Using Product Analytics data" level="h3" expanded=false id="segment-pana" %}}
 
 To create a segment using Product Analytics data:
 
@@ -72,7 +72,7 @@ You can define additional attributes, such as the Device Type, to further specif
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Importing CSV files" level="h4" expanded=false id="segment-csv" %}}
+{{% collapse-content title="Importing CSV files" level="h3" expanded=false id="segment-csv" %}}
 
 If you have a list of users from a survey, experiment, or CRM, upload it as a CSV file to turn it into a segment.
 
@@ -90,7 +90,7 @@ The following example maps the Product Analytics attribute `@usr.id` to the colu
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Account segments" level="h4" expanded=false id="segment-accounts" %}}
+{{% collapse-content title="Account segments" level="h3" expanded=false id="segment-accounts" %}}
 
 Account segments group accounts—such as organizations or companies—based on their attributes or the events their users performed. Use them to analyze groups like accounts with ARR over a specific amount or accounts that adopted a specific feature.
 
