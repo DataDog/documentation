@@ -28,7 +28,7 @@ To set up Cloud Cost Management in Datadog, you need:
 
 ## Setup
 
-You can setup using the [API][21], [Terraform][22], or directly in Datadog by following the instructions below.
+You can set up using the [API][21], [Terraform][22], the **Set up with AI Agent** guided flow, or directly in Datadog by following the instructions below.
 
 ### Configure the AWS integration
 
@@ -225,6 +225,39 @@ Attach the new S3 policy to the Datadog integration role.
 [204]: https://docs.aws.amazon.com/cur/latest/userguide/dataexports-view.html
 [205]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [210]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
+
+{{% /tab %}}
+
+{{% tab "AI Agent" %}}
+
+The **Set up with AI Agent** flow creates or imports a Cost and Usage Report and generates Terraform for you to review before applying. Datadog provides a setup prompt that you run in your own coding agent, such as Claude Code or Cursor.
+
+### Prerequisites
+
+- An AWS account already connected to Datadog through a role-based integration. Accounts that authenticate with an access key pair are not supported, because the report read policy must attach to an IAM role.
+- The **AWS Configurations Manage** permission.
+- A coding agent installed locally. Datadog provides instructions for Claude Code and Cursor.
+
+### Start the flow in Datadog
+
+1. Navigate to [Setup & Configuration][300], find {{< ui >}}Amazon Web Services{{< /ui >}}, and click {{< ui >}}Add Account{{< /ui >}}.
+2. Select {{< ui >}}Set up with AI agent{{< /ui >}}. Datadog generates a managed API key and application key for the session.
+3. Start your agent:
+    - **Claude Code**: Copy the generated command and run it in your terminal.
+    - **Cursor**: Click {{< ui >}}Open in Cursor{{< /ui >}} to download your credentials and open Cursor with the prompt prefilled.
+4. Leave the Datadog setup page open while the agent works. After Datadog detects your new configuration, the {{< ui >}}Waiting for agent{{< /ui >}} button changes to {{< ui >}}Setup complete{{< /ui >}}. Click it to finish.
+
+### Complete the setup with the agent
+
+1. Choose a Cost and Usage Report format:
+    - **CUR 2.0**: Recommended and selected by default for new reports.
+    - **Legacy CUR**: Available for an existing legacy report or as a fallback.
+2. Select the resources to create. The flow checks for an existing Cost and Usage Report before creating a new one. You can:
+    - Create a Cost and Usage Report and its S3 bucket
+    - Use an existing report and S3 bucket
+3. Review the generated Terraform configuration, then apply it to finish setting up the account.
+
+[300]: https://app.datadoghq.com/cost/setup
 
 {{% /tab %}}
 
