@@ -40,9 +40,6 @@ Before setting up APM trace enrichment, confirm the following:
 
 - Server-side feature flags are already configured and flags are evaluating in your application.
 - [APM tracing][3] is enabled and traces are flowing to Datadog.
-- `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set, or the equivalent code-based configuration for your language.
-
-See [Server-Side Feature Flags][2] for details on setting up flags for supported languages.
 
 ## How APM trace enrichment works
 
@@ -57,13 +54,9 @@ The SDK-side tags are transport-only and are stripped server-side. The tags visi
 
 ## Enable APM trace enrichment
 
-Set the following environment variables. The first enables the Datadog Feature Flags provider (if not already set), and the second enables span enrichment:
+Set the following environment variable to enable span enrichment:
 
 {{< code-block lang="bash" >}}
-# Required: Enable the Datadog Feature Flags provider (if not already set)
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
-# Enable APM trace enrichment
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_SPAN_ENRICHMENT_ENABLED=true
 {{< /code-block >}}
 
