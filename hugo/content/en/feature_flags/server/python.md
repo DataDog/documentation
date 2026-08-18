@@ -17,38 +17,44 @@ further_reading:
 - link: "/feature_flags/concepts/flag_graphs/"
   tag: "Concept"
   text: "Feature Flag Graphs"
+- link: "/feature_flags/concepts/configuration_sources/"
+  tag: "Concept"
+  text: "Server SDK Configuration Sources"
 ---
 
 ## Overview
 
-This page describes how to instrument your Python application with the Datadog Feature Flags SDK. The Python SDK integrates with [OpenFeature][1], an open standard for feature flag management, and receives flag updates through Remote Configuration in the Datadog Python tracer (`ddtrace`).
+This page describes how to instrument your Python application with the Datadog Feature Flags SDK. The Python SDK integrates with [OpenFeature][1], an open standard for feature flag management. Starting in `ddtrace` 4.14.0, it loads flag configuration directly from the Datadog-managed CDN by default.
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
+
+<div class="alert alert-warning">Python agentless delivery changes only the configuration source. Without a supported Datadog Agent or serverless telemetry path, the SDK does not export evaluation metrics or exposure events.</div>
 
 ## Prerequisites
 
 Before setting up the Python Feature Flags SDK, ensure you have:
 
-- **Datadog Agent** version 7.55 or later with [Remote Configuration][2] enabled
-- **Datadog [API key][3]** configured on the Agent
-- **Datadog Python SDK** `ddtrace` version 3.19.0 or later
+- **Datadog Python SDK** `ddtrace` version 4.14.0 or later
 - **OpenFeature Python SDK** `openfeature-sdk`: version 0.5.0 or later (version 0.7.0 or later required if you use provider event handlers to wait for initialization)
+- A Datadog [API key][3]
+- Your Datadog site
 
 Set the following environment variables:
 
 {{< code-block lang="bash" >}}
-# Required: Enable the feature flags provider
-export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+# Required: Agentless configuration delivery
+export DD_API_KEY=<YOUR_API_KEY>
+export DD_SITE={{< region-param key="dd_site" code="true" >}}
+export DD_ENV=<YOUR_ENVIRONMENT>
 
 # Optional: Enable flag evaluation metrics
 export DD_METRICS_OTEL_ENABLED=true
 
-# Required: Service identification
+# Recommended: Service identification
 export DD_SERVICE=<YOUR_SERVICE_NAME>
-export DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+No Feature Flags enablement or source setting is required. Register the provider as shown in [Initialize the SDK](#initialize-the-sdk) to begin polling. Installing or initializing `ddtrace` alone does not create Feature Flags CDN traffic.
 
 To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][4]. For more information on available graphing, see [Feature Flag Graphs][5].
 
@@ -63,7 +69,7 @@ pip install ddtrace openfeature-sdk
 Or add them to your `requirements.txt`:
 
 {{< code-block lang="text" filename="requirements.txt" >}}
-ddtrace>=3.19.0
+ddtrace>=4.14.0
 openfeature-sdk>=0.5.0
 {{< /code-block >}}
 
@@ -82,15 +88,11 @@ opentelemetry-exporter-otlp-proto-grpc>=1.41.0
 
 ## Initialize the SDK
 
-Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog Python tracer's Remote Configuration system to receive flag configurations.
+Register the Datadog OpenFeature provider with the OpenFeature API. The provider starts the selected configuration source and waits up to 10 seconds for its first configuration.
 
 {{< code-block lang="python" >}}
-from ddtrace import tracer
 from openfeature import api
 from ddtrace.openfeature import DataDogProvider
-
-# Initialize the tracer (required for Remote Configuration)
-tracer.configure()
 
 # Create and register the Datadog provider
 provider = DataDogProvider()
@@ -212,7 +214,7 @@ if maintenance_mode:
 
 ## Waiting for provider initialization
 
-By default, the provider initializes asynchronously and flag evaluations return default values until the first Remote Configuration payload is received. If your application requires flags to be ready before handling requests, you can wait for the provider to initialize using event handlers:
+Provider registration waits up to 10 seconds for the selected source to deliver its first configuration. If configuration arrives, the provider emits `PROVIDER_READY`. If the wait times out, registration completes with the provider in an error state, and evaluations return caller-provided default values until configuration arrives. Use an event handler to wait for a later ready event:
 
 {{< code-block lang="python" >}}
 import threading
@@ -233,7 +235,7 @@ api.add_handler(ProviderEvent.PROVIDER_READY, on_ready)
 provider = DataDogProvider()
 api.set_provider(provider)
 
-# Wait for provider to be ready (with optional timeout)
+# Wait for the provider to be ready if registration timed out
 if ready_event.wait(timeout=30):
     print("Provider is ready")
 else:
@@ -243,7 +245,20 @@ else:
 client = api.get_client()
 {{< /code-block >}}
 
-<div class="alert alert-info">Waiting for provider initialization requires OpenFeature SDK 0.7.0 or later. Most applications don't need to wait for initialization, as flag evaluations work immediately with default values.</div>
+<div class="alert alert-info">Provider event handlers require OpenFeature SDK 0.7.0 or later. Most applications can use the default 10-second initialization timeout and handle caller-provided default values if configuration is unavailable.</div>
+
+Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_INITIALIZATION_TIMEOUT_MS` to a positive number of milliseconds to change the initialization timeout.
+
+## Advanced configuration
+
+Use [Server SDK Configuration Sources][6] as the canonical reference for source selection and operational settings:
+
+- [Configure agentless delivery][10], including polling, request timeout, and endpoint settings
+- [Use a custom agentless endpoint][7] for advanced testing, local development, or an operator-managed proxy
+- [Use Agent Remote Configuration][9] to retain Agent-managed delivery
+- [Migrate an existing Remote Configuration setup][8] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
+
+Agentless mode changes only flag configuration. It does not configure or enable `feature_flag.evaluations`, exposure logging, or experimentation use cases. These features require a supported Datadog Agent or serverless telemetry path.
 
 ## Cleanup
 
@@ -300,27 +315,41 @@ def test_missing_flag_returns_default(client):
 
 ## Troubleshooting
 
-### Provider not enabled
+### Agentless configuration not working
 
-If you receive warnings about the provider not being enabled, ensure `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set in your environment:
+Verify the following:
 
-{{< code-block lang="bash" >}}
-export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-{{< /code-block >}}
+- `ddtrace` is version 4.14.0 or later.
+- `DD_FEATURE_FLAGS_ENABLED` is unset or set to `true`.
+- `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` is unset or set to `agentless`.
+- `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` is unset. Setting it to `true` selects Agent Remote Configuration during the migration window when no explicit source is set.
+- Application code registers `DataDogProvider` with the OpenFeature API.
+- `DD_API_KEY`, `DD_SITE`, and `DD_ENV` are configured in the application process.
+- The application can make outbound HTTPS requests to Datadog.
 
-### Remote Configuration not working
+Set `DD_TRACE_DEBUG=true` and check for authentication, timeout, or malformed-payload messages from the Feature Flags agentless endpoint.
 
-Verify the following to ensure that Remote Configuration is working:
-- Datadog Agent is version 7.55 or later
-- Remote Configuration is enabled on the Agent
-- `DD_SERVICE` and `DD_ENV` environment variables are set
-- The SDK can communicate with the Agent
+### Agent Remote Configuration not working
+
+Verify the following:
+
+- `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` is set. During the migration window, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` also selects Remote Configuration when no explicit source is set.
+- Datadog Agent is version 7.55 or later.
+- [Remote Configuration][2] is enabled on the Agent.
+- The Agent has a valid API key for the target organization.
+- `DD_SERVICE` and `DD_ENV` are configured in the application process.
+- The SDK can communicate with the Agent.
 
 [1]: https://openfeature.dev/
 [2]: /agent/remote_config/
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /feature_flags/guide/server_flag_evaluation_metrics/
 [5]: /feature_flags/concepts/flag_graphs/
+[6]: /feature_flags/concepts/configuration_sources/
+[7]: /feature_flags/concepts/configuration_sources/#use-a-custom-agentless-endpoint
+[8]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
+[9]: /feature_flags/concepts/configuration_sources/#use-agent-remote-configuration
+[10]: /feature_flags/concepts/configuration_sources/#configure-agentless-delivery
 
 ## Further reading
 

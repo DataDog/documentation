@@ -42,10 +42,11 @@ The default source does not activate Feature Flags traffic for every tracer inst
 | Java `dd-openfeature` and `dd-java-agent` | 1.65.0 |
 | Node.js `dd-trace` v5 | 5.116.0 |
 | Node.js `dd-trace` v6 | 6.5.0 |
+| Python `ddtrace` | 4.14.0 |
 
 Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. It does not require a Datadog Agent for flag configuration.
 
-<div class="alert alert-warning">The initial Node.js agentless releases support configuration delivery and local flag evaluation only. They do not export evaluation metrics or exposure events. Java agentless delivery changes only the configuration source. Without a supported Datadog Agent or serverless telemetry path, Java also does not export these signals.</div>
+<div class="alert alert-warning">The initial Node.js agentless releases support configuration delivery and local flag evaluation only. They do not export evaluation metrics or exposure events. Java and Python agentless delivery change only the configuration source. Java and Python do not export these signals without a supported Datadog Agent or serverless telemetry path.</div>
 
 Agentless delivery is available for the SDKs and versions listed. Other server SDKs use Agent Remote Configuration.
 
@@ -92,11 +93,11 @@ DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-No Feature Flags enablement or source setting is required. See [Java Feature Flags][10] or [Node.js Feature Flags][9] for dependency versions and language-specific initialization. Initializing or accessing the provider starts CDN polling; tracer installation and initialization alone do not.
+No Feature Flags enablement or source setting is required. See [Java Feature Flags][10], [Node.js Feature Flags][9], or [Python Feature Flags][11] for dependency versions and language-specific initialization. Initializing or accessing the provider starts CDN polling; tracer installation and initialization alone do not.
 
 ## Agent Remote Configuration
 
-For Java and Node.js, set the source explicitly to retain Agent-managed delivery:
+For Java, Node.js, and Python, set the source explicitly to retain Agent-managed delivery:
 
 {{< code-block lang="bash" >}}
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
@@ -106,7 +107,7 @@ Remote Configuration is enabled by default in Agent 7.47.0 and later. If your Ag
 
 See the [Remote Configuration documentation][1] for detailed setup instructions across deployment environments.
 
-Existing Java and Node.js implementations with `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. The setting is deprecated. See [Migrate from the legacy provider setting][7] to remain on Remote Configuration explicitly or move to agentless delivery.
+Existing Java, Node.js, and Python implementations with `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. The setting is deprecated. See [Migrate from the legacy provider setting][7] to remain on Remote Configuration explicitly or move to agentless delivery.
 
 ### Remote Configuration polling interval
 
@@ -134,9 +135,9 @@ DD_VERSION=<YOUR_APP_VERSION>
 # See "Set Up Server-Side Flag Evaluation Metrics" documentation
 {{< /code-block >}}
 
-<div class="alert alert-info">In the Java and Node.js versions listed above, <code>DD_FEATURE_FLAGS_ENABLED</code> defaults to <code>true</code>, so you do not need to set it. Setting it to <code>false</code> disables the provider, CDN polling, and the Feature Flags Remote Configuration subscription. Other server SDKs continue to use the activation settings documented on their language pages.</div>
+<div class="alert alert-info">In the Java, Node.js, and Python versions listed above, <code>DD_FEATURE_FLAGS_ENABLED</code> defaults to <code>true</code>, so you do not need to set it. Setting it to <code>false</code> disables the provider, CDN polling, and the Feature Flags Remote Configuration subscription. Other server SDKs continue to use the activation settings documented on their language pages.</div>
 
-For SDKs and delivery modes that support it, see <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the <code>feature_flag.evaluations</code> metric. The initial Node.js agentless releases do not export evaluation metrics or exposure events. Java requires a supported Datadog Agent or serverless telemetry path to export these signals. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing. See <a href="/feature_flags/guide/apm_trace_enrichment/">Set Up APM Trace Enrichment for Feature Flags</a> to attach feature flag evaluation data to APM traces for filtering and experimentation.
+For SDKs and delivery modes that support it, see <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the <code>feature_flag.evaluations</code> metric. The initial Node.js agentless releases do not export evaluation metrics or exposure events. Java and Python require a supported Datadog Agent or serverless telemetry path to export these signals. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing. See <a href="/feature_flags/guide/apm_trace_enrichment/">Set Up APM Trace Enrichment for Feature Flags</a> to attach feature flag evaluation data to APM traces for filtering and experimentation.
 
 ## Testing with in-memory providers
 
@@ -200,3 +201,4 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [8]: /feature_flags/concepts/configuration_sources/
 [9]: /feature_flags/server/nodejs/
 [10]: /feature_flags/server/java/
+[11]: /feature_flags/server/python/
