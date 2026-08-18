@@ -2,7 +2,6 @@
 title: Replay
 description: Learn about using Replay to pull archived logs and processing them in Observability Pipelines.
 disable_toc: false
-private: true
 aliases:
   - /observability_pipelines/rehydration/
 further_reading:
@@ -16,11 +15,6 @@ further_reading:
   tag: Blog
   text: Rehydrate archived logs in any SIEM or logging vendor with Observability Pipelines
 ---
-
-{{< callout url="https://www.datadoghq.com/product-preview/rehydration-for-observability-pipelines/"
- btn_hidden="false">}}
-Replay is in Preview. Fill out the form to request access.
-{{< /callout >}}
 
 ## Overview
 
