@@ -3,6 +3,10 @@ title: Personal Access Tokens
 description: "Create and manage short-lived, scoped Personal Access Tokens to authenticate Datadog API calls without pairing API and application keys."
 aliases:
     - /account_management/faq/personal-access-tokens/
+further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-api-authentication/"
+  tag: "Blog"
+  text: "Modernize Datadog API authentication with scoped credentials"
 ---
 
 ## Overview
@@ -65,6 +69,16 @@ curl -X GET "https://api.datadoghq.com/api/v2/users" \
 ```
 
 **Note:** When a valid PAT is provided in the `dd-application-key` header, Datadog authenticates with the PAT only. The `dd-api-key` header is optional and its value is not evaluated.
+
+## Restrictions on PAT-authenticated API calls
+
+To prevent privilege escalation, Datadog restricts what an API call authenticated with a PAT can do. These restrictions apply regardless of the API client making the call:
+
+- **Application keys**: A PAT cannot create or update application keys. Revoking application keys is allowed.
+- **Scopes on new tokens**: A PAT can create or update a PAT or a SAT only if the new token's scopes are a subset of its own scopes.
+- **Time-to-live (TTL) on new tokens**: A PAT cannot create a PAT or a SAT with a TTL that extends beyond its own expiration.
+
+A call that violates one of these restrictions returns a `403 Forbidden` response.
 
 ## Manage Personal Access Tokens
 
@@ -157,3 +171,7 @@ PATs follow an eventual consistency model. After creation or revocation, changes
 [5]: https://app.datadoghq.com/audit-trail
 [6]: /api/latest/key-management/
 [7]: /account_management/service-access-tokens/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -73,12 +73,11 @@ further_reading:
   text: Manage metric volume and tags in your environment with Observability Pipelines
 
 ---
-
 ## Overview
 
 {{< img src="observability_pipelines/op_marketecture_06042025.png" alt="A graphic showing data being aggregated from a variety of sources, processed and enriched by the observability pipelines worker in your own environment, and then being routed to the security, analytics, and storage destinations of your choice" style="width:100%;" >}}
 
-Datadog Observability Pipelines allows you to collect and process logs and metrics within your own infrastructure, and then route the data to different destinations. It gives you control over your observability data before it leaves your environment.
+Datadog Observability Pipelines allows you to collect and process {{< tooltip text="logs, metrics, and traces" tooltip="Contact your account manager to discuss use cases and pricing." >}} within your own infrastructure, and then route the data to different destinations. It gives you control over your observability data before it leaves your environment.
 
 With out-of-the-box templates, you can build pipelines that redact sensitive data, enrich data, filter out noisy events, and route data to destinations like Datadog, SIEM tools, or cloud storage.
 
@@ -140,6 +139,13 @@ Observability Pipelines includes prebuilt templates for common data routing and 
 | Template | Description |
 |----------|-------------|
 | Metric Tag Governance | Manage the quality and volume of your metrics by keeping only the metrics you need, standardizing metrics tagging, and removing unwanted tags to prevent high cardinality. |
+
+{{% /tab %}}
+{{% tab "Traces" %}}
+
+| Template | Description |
+|----------|-------------|
+| Trace Sampling | Ingest, process, and route traces to control costs while retaining the traces you need for troubleshooting and analysis. |
 
 {{% /tab %}}
 {{< /tabs >}}
