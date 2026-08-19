@@ -7,7 +7,7 @@ Rule actions extend Workload Protection (Runtime Security) rules beyond detectio
 
 Actions are defined in Agent policy files (`.policy`) under the `actions` field of a rule.
 <div class="alert alert-info">All actions can be configured in Agent policy files (YAML) on the Agent but <code>log</code>, <code>coredump</code>, and <code>network_filter</code> cannot be setup from the UI when creating a rule.
-When you create an Agent rule in Datadog, you can configure <code>hash</code>, <code>kill</code> (<a href="/security/workload_protection/respond_and_report/#automated-response">Automated Response</a>), and <code>set</code> actions. From a security signal, you can manually apply <code>kill</code> or <code>network_filter</code> to a targeted threat with <a href="/security/workload_protection/respond_and_report/#response">Response</a>.
+When you create an Agent rule in Datadog, you can configure <code>hash</code>, <code>kill</code> (<a href="/security/workload_protection/respond_and_report/#automated-response">automated response</a>), and <code>set</code> actions. From a security signal, you can manually apply <code>kill</code> or <code>network_filter</code> to a targeted threat with <a href="/security/workload_protection/respond_and_report/#response">manual response</a>.
 </div>
 
 | Action           | Purpose                                          | Platform       | Requires enforcement |
@@ -133,10 +133,10 @@ Use `kill` to actively stop malicious activity. The Agent sends a POSIX signal t
 
 In addition to defining `kill` actions in Agent policy files, you can configure process termination in Datadog:
 
-- **Automatic:** Add `kill` actions to Agent rules in a policy, as described in this section, or use [Automated response](/security/workload_protection/respond_and_report/#automated-response).
+- **Automatic:** Add `kill` actions to Agent rules in a policy, as described in this section, or use [automated response](/security/workload_protection/respond_and_report/#automated-response).
 - **Manual:** From a security signal, use [Kill containers or processes](/security/workload_protection/investigate_and_triage/security_signals/actions#kill-containers-or-processes) under **Respond** in the signal side panel.
 
-Both approaches require [Response](/security/workload_protection/respond_and_report/#response) to be enabled on the Agent. See [Respond and Report](/security/workload_protection/respond_and_report/) for an overview of enforcement and response workflows.
+Both approaches require [Agent enforcement](/security/workload_protection/respond_and_report/#configure-agent-enforcement), which is enabled by default. See [Respond to Threats](/security/workload_protection/respond_and_report/) for an overview of enforcement and response actions.
 
 ### When to use it
 

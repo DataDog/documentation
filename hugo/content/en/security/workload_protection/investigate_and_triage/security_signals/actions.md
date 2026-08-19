@@ -58,13 +58,13 @@ Alternatively, click the {{< ui >}}Workflows{{< /ui >}} tab in the signal side p
 
 From the signal side panel, you can terminate a malicious process or container directly. Under {{< ui >}}Respond{{< /ui >}}, click {{< ui >}}Kill Containers or Processes{{< /ui >}}.
 
-This action requires [Response][8] to be enabled on the Datadog Agent. The Agent terminates the targeted process or all processes in a compromised container depending on the configured scope. See [Response][8] for prerequisites, configuration, and action statuses.
+This action requires enforcement to be enabled on the Datadog Agent. The Agent terminates the targeted process or all processes in a compromised container depending on the configured scope. See [Manual response][8] for requirements, configuration, and action statuses.
 
 ## Network isolation
 
 From the signal side panel, you can isolate a compromised process or container from the network. Under {{< ui >}}Respond{{< /ui >}}, click {{< ui >}}Network Isolation{{< /ui >}} to block network traffic for the affected workload using an eBPF-based filter.
 
-Network isolation requires [Response][8] to be enabled with network probes configured on the Agent. See [Response][8] for setup instructions and available enforcement options.
+Network isolation requires enforcement to be enabled on the Agent, along with the network probes that the Agent enables by default. See [Manual response][8] for requirements and available enforcement options.
 
 [1]: /security/detection_rules/
 [2]: https://app.datadoghq.com/security/signals
