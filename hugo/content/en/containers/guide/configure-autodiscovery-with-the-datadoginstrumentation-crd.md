@@ -190,7 +190,7 @@ Each entry in `checks` accepts the following fields:
 
 Each entry in `logs` accepts the same log collection options as Autodiscovery log annotations, such as `tags`, `type`, and `path`. Each entry requires a `containerName` matching a container in the pod.
 
-### Target Services
+### Target services
 
 Targeting a `Service` configures an [endpoint check][6] similar to an annotation on a Kubernetes service.
 
