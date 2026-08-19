@@ -94,6 +94,8 @@ Traces matching the rule's filters are added to the queue as they arrive. Annota
 
 Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Experiment{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2] to see all available annotation queues. Click on a queue to see the trace list, then click {{< ui >}}Review{{< /ui >}} to begin annotating.
 
+**Note**: When an annotation task is newly assigned to you, Datadog sends an email with the queue name, the user who assigned it, and a direct link to open the assigned interaction. To opt out, disable Agent Observability annotation assignment emails in [Personal Settings email subscriptions][15].
+
 Review Mode displays:
 - {{< ui >}}Full trace context{{< /ui >}} (right panel):
   - Complete span tree with inputs, outputs, metadata
@@ -397,3 +399,4 @@ Build benchmark datasets with human-verified labels for regression testing and c
 [12]: /api/latest/llm-observability/#get-annotated-queue-interactions
 [13]: /api/latest/llm-observability/#get-annotation-queue-label-schema
 [14]: /api/latest/llm-observability/#update-annotation-queue-label-schema
+[15]: /account_management/#email-subscriptions
