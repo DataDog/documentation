@@ -5,15 +5,18 @@ aliases:
 - /integrations/guide/azure-programmatic-management/
 description: Connect Microsoft Azure with Datadog using Azure app registration integration options. Configure metric collection, log forwarding, and Agent installation.
 further_reading:
-    - link: 'https://www.datadoghq.com/blog/azure-integration-onboarding/'
-      tag: 'Blog'
-      text: 'Accelerate your Azure integration setup with guided onboarding'
     - link: 'https://docs.datadoghq.com/integrations/azure/#overview'
       tag: 'Documentation'
       text: 'Microsoft Azure integration'
     - link: 'https://docs.datadoghq.com/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/'
       tag: 'Guide'
       text: 'Why should I install the Datadog Agent on my cloud instances?'
+    - link: 'https://www.datadoghq.com/blog/azure-integration-onboarding/'
+      tag: 'Blog'
+      text: 'Accelerate your Azure integration setup with guided onboarding'
+    - link: "https://www.datadoghq.com/blog/azure-secretless-authentication/"
+      tag: "Blog"
+      text: "Avoid Azure secret rotation with secretless authentication"
 ---
 
 ## Overview
