@@ -9,6 +9,9 @@ further_reading:
 - link: "/product_analytics/analytics_explorer/"
   tag: "Documentation"
   text: "Analytics Explorer"
+- link: "/product_analytics/charts/journey_paths/"
+  tag: "Documentation"
+  text: "Journey Paths Analysis"
 - link: https://learn.datadoghq.com/courses/getting-started-product-analytics
   tag: Learning Center
   text: Getting Started with Product Analytics
@@ -139,19 +142,15 @@ The top list visualization identifies the top values from a facet based on a cho
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_top_list.png" alt="The top list visualization, configured to show the top four conversion sources by continent." style="width:80%;" >}}
 
-## View conversion drivers and journey paths
+## View conversion drivers
 
-To gain more context about user conversions and dropoffs, click on a funnel step to access conversion analysis and journey paths.
+To gain more context about user conversions and dropoffs, click on a funnel step to access conversion analysis.
 
 <div class="alert alert-info">Conversion analysis is in Preview.</div>
 
-- **Conversion analysis**: View conversion drivers, user journeys, available user replays for conversions and dropoffs, and user details.
+View conversion drivers, user journeys, available user replays for conversions and dropoffs, and user details.
 
-  {{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_side_panel.png" alt="The side panel view after clicking a funnel step, showing conversion drivers, available replays, and converted users." style="width:100%;" >}}
-
-- **Journey paths**: View conversion and dropoff user paths for the selected step sequence, including branching paths to other steps outside of the funnel.
-
-  {{< img src="product_analytics/journeys/funnel_analysis/funnel_journey_paths.png" alt="A journey path showing the top five dropoff paths following step 1 in the funnel." style="width:100%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_side_panel.png" alt="The side panel view after clicking a funnel step, showing conversion drivers, available replays, and converted users." style="width:100%;" >}}
 
 ## Share a funnel
 
