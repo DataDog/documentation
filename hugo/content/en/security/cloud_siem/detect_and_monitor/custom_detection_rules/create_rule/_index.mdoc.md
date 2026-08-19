@@ -39,9 +39,55 @@ aliases:
 ### Understand rule creation options
 
 Before creating a rule, you have to choose three options:
-- **Detection method**: The event to monitor for (for example, select Threshold to create a signal when the number of detections exceeds a certain value).
-- **Rule type**: When you want to analyze incoming or indexed events.
-- **Query language**: The language used to write your query.
+{% collapse-content title="Detection method" level="h4" expanded=false id="detection-methods" %}
+The event to monitor for:
+
+**Threshold**
+: Define a query for the activity you want to detect. Then, configure how many matches should generate a signal: set the threshold to 1 for signature-based detections, or use a higher value to alert on patterns of repeated activity. This is the most common starting point when building a new rule.
+
+**New Value**
+: Triggers when one or more tracked attributes take on a value not seen during the learning period; for example, an account logging in from a country, IP, and device it's never used before.
+
+**Anomaly**
+: Detects unexpected spikes or upward shifts, but not drop-offs, in log activity, accounting for daily and weekly seasonality. An example detection could be a spike in outbound traffic from a database server at 2 pm, far outside its normal nightly backup window.
+
+**Content Anomaly**
+: Attackers hide intent in fields the rest of the log looks normal in; for example, encoded commands, oddly long URLs, or suspicious user agents. Content Anomaly inspects those fields and flags content that doesn't match what you usually see.
+
+**Impossible Travel**
+: If a user signs in from New York and London 10 minutes apart, at least one of those sessions isn't theirs. Impossible Travel detects credential theft by comparing the speed required to move between consecutive logins.
+
+**Third Party**
+: Your security stack already detects threats in your endpoint, identity, and cloud tools. Third Party brings those findings into Cloud SIEM so they can be triaged alongside your native rules, in a single, unified workflow.
+
+**Sequence**
+: A sequence of events that are suspicious in combination with each other: for example, a successful login from a previously unseen IP, then a new privileged role granted to that user, then access to a sensitive resource, all in that order, by the same actor. Each step on its own can look like normal admin activity. Only the precise chain points to credential abuse.
+{% /collapse-content %}
+
+{% collapse-content title="Rule type" level="h4" expanded=false id="rule-types" %}
+When you want to analyze incoming or indexed events:
+
+**Real-time rule**
+: Real-time detection rules continuously monitor and analyze incoming logs for security threats. These rules trigger immediate alerts when specific patterns or anomalies are detected, enabling quicker response to potential incidents.
+
+**Scheduled rule**
+: Scheduled detection rules run at predefined intervals to analyze indexed log data and detect security threats. These rules can identify patterns, anomalies, or specific conditions within a defined time frame, and trigger alerts or reports if the criteria are met. They complement real-time monitoring by providing periodic, in-depth analysis of logs using [calculated fields][7].
+
+**Historical job**
+: Historical jobs are one-time executable queries on historical logs used to backtest detection rules and assess their effectiveness on past data. The generated job results are lightweight versions of signals providing information on potential threats and anomalies on historical logs. After reviewing the results, you can convert results needing immediate action into signals.
+{% /collapse-content %}
+{% collapse-content title="Query language" level="h4" expanded=false id="query-languages" %}
+The language used to write your query:
+
+**Event query**
+: Depending on the detection method and rule type, you can create detections based on data in logs, audit trails, events, RUM, signals, or rules.
+
+**SQL**
+: Use SQL syntax to write detection rules using [DDSQL][5] that are compatible with datasets.
+
+**Event/rule query**
+: If you select the Sequence detection method, for each step in the sequence, you can query logs using either events or rules.
+{% /collapse-content %}
 
 The options you choose impact the steps required to create the rule. Use the filters at the top of this page to specify your rule creation options, so the relevant instructions populate on the rest of the page.
 
@@ -83,21 +129,6 @@ If you're getting started, you can click these links to automatically apply comm
 - [Threshold/Real-time rule/Event query](?cloud_siem_detection_rule_detection_method=threshold&cloud_siem_detection_rule_type=real_time_rule&cloud_siem_detection_threshold_rule_query_language=event_query)
 - [Threshold/Scheduled rule/SQL](?cloud_siem_detection_rule_detection_method=threshold&cloud_siem_detection_rule_type=scheduled_rule&cloud_siem_detection_threshold_sql_rule_query_language=sql)
 - [Threshold/Historical job/SQL](?cloud_siem_detection_rule_detection_method=threshold&cloud_siem_detection_rule_type=historical_job&cloud_siem_detection_threshold_sql_rule_query_language=sql)
-
-{% if equals($cloud_siem_detection_rule_type, "real_time_rule") %}
-### Real-time rules
-Real-time detection rules continuously monitor and analyze incoming logs for security threats. These rules trigger immediate alerts when specific patterns or anomalies are detected, enabling quicker response to potential incidents.
-{% /if %}
-{% if equals($cloud_siem_detection_rule_type, "scheduled_rule") %}
-### Scheduled rules
-Scheduled detection rules run at predefined intervals to analyze indexed log data and detect security threats. These rules can identify patterns, anomalies, or specific conditions within a defined time frame, and trigger alerts or reports if the criteria are met.
-
-Scheduled rules complement real-time monitoring by providing periodic, in-depth analysis of logs using [calculated fields][7].
-{% /if %}
-{% if equals($cloud_siem_detection_rule_type, "historical_job") %}
-### Historical jobs
-Historical jobs are one-time executable queries on historical logs used to backtest detection rules and assess their effectiveness on past data. The generated job results are lightweight versions of signals providing information on potential threats and anomalies on historical logs. After reviewing the results, you can convert results needing immediate action into signals.
-{% /if %}
 
 ## Create a rule
 
