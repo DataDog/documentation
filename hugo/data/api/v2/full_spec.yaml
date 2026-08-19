@@ -1774,6 +1774,23 @@ components:
       required: true
       schema:
         type: string
+    RumRetentionQuotaScopeIDParameter:
+      description: |-
+        The identifier of the scope the retention quota configuration applies to.
+        For the `application` scope, this is the RUM application ID.
+      in: path
+      name: scope_id
+      required: true
+      schema:
+        example: cd73a516-a481-4af5-8352-9b577465c77b
+        type: string
+    RumRetentionQuotaScopeTypeParameter:
+      description: The type of scope the retention quota configuration applies to.
+      in: path
+      name: scope_type
+      required: true
+      schema:
+        $ref: "#/components/schemas/RumRetentionQuotaScopeType"
     SAMLConfigurationUUIDPathParameter:
       description: The UUID of the SAML configuration.
       in: path
@@ -91330,6 +91347,180 @@ components:
             $ref: "#/components/schemas/RumRetentionFilterData"
           type: array
       type: object
+    RumRetentionQuotaAdaptiveConfig:
+      description: The configuration used when `mode` is `adaptive`.
+      properties:
+        max_retention_rate:
+          description: The maximum fraction of sessions to retain, in the range `(0, 1]`.
+          example: 0.5
+          exclusiveMinimum: true
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+      required:
+        - max_retention_rate
+      type: object
+    RumRetentionQuotaConfigAttributes:
+      description: The RUM retention quota configuration properties.
+      properties:
+        adaptive:
+          $ref: "#/components/schemas/RumRetentionQuotaAdaptiveConfig"
+        custom:
+          $ref: "#/components/schemas/RumRetentionQuotaCustomConfig"
+        mode:
+          $ref: "#/components/schemas/RumRetentionQuotaMode"
+        org_id:
+          description: The ID of the organization the retention quota configuration belongs to.
+          example: 2
+          format: int64
+          type: integer
+        updated_at:
+          description: The date the retention quota configuration was last updated.
+          example: "2026-03-04T15:37:54.951447Z"
+          format: date-time
+          type: string
+        updated_by:
+          description: The handle of the user who last updated the retention quota configuration.
+          example: test@example.com
+          type: string
+      required:
+        - mode
+        - org_id
+      type: object
+    RumRetentionQuotaConfigData:
+      description: The RUM retention quota configuration object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumRetentionQuotaConfigAttributes"
+        id:
+          description: The identifier of the scope the retention quota configuration applies to.
+          example: cd73a516-a481-4af5-8352-9b577465c77b
+          type: string
+        type:
+          $ref: "#/components/schemas/RumRetentionQuotaConfigType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    RumRetentionQuotaConfigResponse:
+      description: The RUM retention quota configuration response.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumRetentionQuotaConfigData"
+      required:
+        - data
+      type: object
+    RumRetentionQuotaConfigType:
+      default: rum_quota_config
+      description: The type of the resource, always `rum_quota_config`.
+      enum:
+        - rum_quota_config
+      example: rum_quota_config
+      type: string
+      x-enum-varnames: ["RUM_QUOTA_CONFIG"]
+    RumRetentionQuotaConfigUpdateAttributes:
+      description: The RUM retention quota configuration properties to create or update.
+      properties:
+        adaptive:
+          $ref: "#/components/schemas/RumRetentionQuotaAdaptiveConfig"
+        custom:
+          $ref: "#/components/schemas/RumRetentionQuotaCustomConfig"
+        mode:
+          $ref: "#/components/schemas/RumRetentionQuotaMode"
+      required:
+        - mode
+      type: object
+    RumRetentionQuotaConfigUpdateData:
+      description: The RUM retention quota configuration to create or update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumRetentionQuotaConfigUpdateAttributes"
+        id:
+          description: |-
+            The identifier of the scope the retention quota configuration applies to.
+            Must match `scope_id` in the path.
+          example: cd73a516-a481-4af5-8352-9b577465c77b
+          type: string
+        type:
+          $ref: "#/components/schemas/RumRetentionQuotaConfigType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    RumRetentionQuotaConfigUpdateRequest:
+      description: The body of a request to create or update a RUM retention quota configuration.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumRetentionQuotaConfigUpdateData"
+      required:
+        - data
+      type: object
+    RumRetentionQuotaCustomConfig:
+      description: The configuration used when `mode` is `custom`.
+      properties:
+        daily_reset_time:
+          description: The time of day when the daily quota resets, in `HH:MM` 24-hour format.
+          example: "08:00"
+          pattern: "^([01]\\d|2[0-3]):[0-5]\\d$"
+          type: string
+        daily_reset_timezone:
+          description: The timezone offset used for the daily reset time, in `±HH:MM` format.
+          example: "+09:00"
+          pattern: "^[+-](0\\d|1[0-4]):[0-5]\\d$"
+          type: string
+        quota_reached_action:
+          $ref: "#/components/schemas/RumRetentionQuotaReachedAction"
+        session_limit:
+          description: The maximum number of sessions allowed within the window. Must be at least `1000`.
+          example: 1000000
+          format: int64
+          minimum: 1000
+          type: integer
+        window_type:
+          $ref: "#/components/schemas/RumRetentionQuotaWindowType"
+      required:
+        - window_type
+        - session_limit
+        - daily_reset_time
+        - daily_reset_timezone
+        - quota_reached_action
+      type: object
+    RumRetentionQuotaMode:
+      description: |-
+        The retention quota mode. `custom` enforces a fixed session limit, while
+        `adaptive` dynamically adjusts retention.
+      enum:
+        - custom
+        - adaptive
+      example: custom
+      type: string
+      x-enum-varnames: ["CUSTOM", "ADAPTIVE"]
+    RumRetentionQuotaReachedAction:
+      description: The action to take when the session quota is reached.
+      enum:
+        - stop
+        - slowdown
+      example: stop
+      type: string
+      x-enum-varnames: ["STOP", "SLOWDOWN"]
+    RumRetentionQuotaScopeType:
+      default: application
+      description: The type of scope the retention quota configuration applies to.
+      enum:
+        - application
+      example: application
+      type: string
+      x-enum-varnames: ["APPLICATION"]
+    RumRetentionQuotaWindowType:
+      description: The window type over which the session limit is enforced.
+      enum:
+        - daily
+      example: daily
+      type: string
+      x-enum-varnames: ["DAILY"]
     RumSdkConfigAllowedTracingUrlList:
       description: A list of URL configurations for distributed tracing.
       items:
@@ -185949,6 +186140,202 @@ paths:
         - Rum Metrics
       x-codegen-request-body-name: body
       x-menu-order: 4
+  /api/v2/rum/config/retention-quota/{scope_type}/{scope_id}:
+    delete:
+      description: Delete the RUM retention quota configuration for a given scope.
+      operationId: DeleteRumQuotaConfig
+      parameters:
+        - $ref: "#/components/parameters/RumRetentionQuotaScopeTypeParameter"
+        - $ref: "#/components/parameters/RumRetentionQuotaScopeIDParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a RUM retention quota configuration
+      tags:
+        - RUM Retention Quota
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_write
+    get:
+      description: Get the RUM retention quota configuration for a given scope.
+      operationId: GetRumQuotaConfig
+      parameters:
+        - $ref: "#/components/parameters/RumRetentionQuotaScopeTypeParameter"
+        - $ref: "#/components/parameters/RumRetentionQuotaScopeIDParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        custom:
+                          daily_reset_time: "08:00"
+                          daily_reset_timezone: "+09:00"
+                          quota_reached_action: stop
+                          session_limit: 1000000
+                          window_type: daily
+                        mode: custom
+                        org_id: 2
+                        updated_at: "2026-03-04T15:37:54.951447Z"
+                        updated_by: test@example.com
+                      id: cd73a516-a481-4af5-8352-9b577465c77b
+                      type: rum_quota_config
+              schema:
+                $ref: "#/components/schemas/RumRetentionQuotaConfigResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a RUM retention quota configuration
+      tags:
+        - RUM Retention Quota
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
+    put:
+      description: |-
+        Create or update the RUM retention quota configuration for a given scope.
+        Returns the retention quota configuration object when the request is successful.
+      operationId: UpsertRumQuotaConfig
+      parameters:
+        - $ref: "#/components/parameters/RumRetentionQuotaScopeTypeParameter"
+        - $ref: "#/components/parameters/RumRetentionQuotaScopeIDParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      custom:
+                        daily_reset_time: "08:00"
+                        daily_reset_timezone: "+09:00"
+                        quota_reached_action: stop
+                        session_limit: 1000000
+                        window_type: daily
+                      mode: custom
+                    id: cd73a516-a481-4af5-8352-9b577465c77b
+                    type: rum_quota_config
+            schema:
+              $ref: "#/components/schemas/RumRetentionQuotaConfigUpdateRequest"
+        description: The definition of the RUM retention quota configuration to create or update.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        custom:
+                          daily_reset_time: "08:00"
+                          daily_reset_timezone: "+09:00"
+                          quota_reached_action: stop
+                          session_limit: 1000000
+                          window_type: daily
+                        mode: custom
+                        org_id: 2
+                        updated_at: "2026-03-04T21:52:53.526022Z"
+                        updated_by: test@example.com
+                      id: cd73a516-a481-4af5-8352-9b577465c77b
+                      type: rum_quota_config
+              schema:
+                $ref: "#/components/schemas/RumRetentionQuotaConfigResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create or update a RUM retention quota config
+      tags:
+        - RUM Retention Quota
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_write
   /api/v2/rum/events:
     get:
       description: |-
@@ -217911,6 +218298,9 @@ tags:
       description: Find out more at
       url: https://docs.datadoghq.com/real_user_monitoring/
     name: RUM Remote Config
+  - description: |-
+      Manage RUM retention quota configurations for your organization's RUM applications.
+    name: RUM Retention Quota
   - description: View and manage Reference Tables in your organization.
     name: Reference Tables
   - description: |-

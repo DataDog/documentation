@@ -17972,6 +17972,46 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: RUM Retention Quota
+      url: /api/latest/rum-retention-quota/
+      identifier: rum-retention-quota
+      generated: true
+    - name: Create or update a RUM retention quota config
+      url: /api/latest/rum-retention-quota/create-or-update-a-rum-retention-quota-config/
+      identifier: rum-retention-quota-create-or-update-a-rum-retention-quota-config
+      parent: rum-retention-quota
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertRumQuotaConfig
+        unstable: []
+        order: 2
+    - name: Get a RUM retention quota configuration
+      url: /api/latest/rum-retention-quota/get-a-rum-retention-quota-configuration/
+      identifier: rum-retention-quota-get-a-rum-retention-quota-configuration
+      parent: rum-retention-quota
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumQuotaConfig
+        unstable: []
+        order: 1
+    - name: Delete a RUM retention quota configuration
+      url: /api/latest/rum-retention-quota/delete-a-rum-retention-quota-configuration/
+      identifier: rum-retention-quota-delete-a-rum-retention-quota-configuration
+      parent: rum-retention-quota
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRumQuotaConfig
+        unstable: []
+        order: 3
     - name: Reference Tables
       url: /api/latest/reference-tables/
       identifier: reference-tables

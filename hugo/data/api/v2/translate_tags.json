@@ -391,6 +391,10 @@
     "name": "RUM Remote Config",
     "description": "Manage [RUM SDK configurations](https://docs.datadoghq.com/real_user_monitoring/) delivered to RUM applications via Remote Configuration."
   },
+  "rum-retention-quota": {
+    "name": "RUM Retention Quota",
+    "description": "Manage RUM retention quota configurations for your organization's RUM applications."
+  },
   "reference-tables": {
     "name": "Reference Tables",
     "description": "View and manage Reference Tables in your organization."
