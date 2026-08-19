@@ -37,9 +37,13 @@ Anomalies can be sharp spikes or drops, but may also be subtler trends such as s
 
 ## Find detected issues on a dashboard
 
-Click {{< ui >}}Investigate{{< /ui >}} at the top of the dashboard to see the issues Datadog detected. Selecting an issue scrolls the dashboard to the affected graph, which is useful on dashboards with many widgets.
+Click {{< ui >}}Investigate{{< /ui >}} at the top of the dashboard to see the issues Datadog detected. Each issue names the metric that deviated and when it was detected. Expanding an issue also shows its influential tags and the {{< ui >}}Widget affected{{< /ui >}}.
+
+Selecting an issue scrolls the dashboard to that graph, which is useful on dashboards with many widgets.
 
 Anomalies occurring across several widgets at once are grouped into one issue, such as `Anomalies co-occur on 18 widgets`.
+
+{{< img src="dashboards/graph_insights/investigate_anomalies/investigate_menu.png" alt="The Investigate menu open on a dashboard, listing four detected issues with an Auto-detect issues toggle." style="width:100%;" >}}
 
 ## Review an anomaly
 
@@ -51,6 +55,8 @@ Detected anomalies are highlighted in pink on the graph.
    - **Next steps**: suggested follow-up actions, such as viewing the affected service or creating a monitor.
 
    Some anomalies also include a **Co-occurs with** section, listing other metrics that deviated over the same period.
+
+{{< img src="dashboards/graph_insights/investigate_anomalies/anomaly_chip.png" alt="An expanded anomaly chip showing an influential tag, next steps, and the Investigate With AI button." style="width:100%;" >}}
 
 ## Analyze a single graph with Watchdog Explains
 
