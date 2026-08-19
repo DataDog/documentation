@@ -66,7 +66,7 @@ server:
 
 update-blog-links: hugpython
 	@. hugpython/bin/activate && \
-	./local/bin/py/blog_linker.py
+	./scripts/blog_linker.py
 
 # compile .mdoc.md files to HTML
 # so Hugo can include them in the site
