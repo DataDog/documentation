@@ -65,17 +65,22 @@ Agentless mode removes the Datadog Agent dependency for _flag configuration_. It
 
 Do not use `serverless-init` as a replacement for the Datadog Agent when you select `remote_config`. Agent Remote Configuration requires a Datadog Agent.
 
-The minimum agentless SDK versions require a local relay for this telemetry. They do not send these events directly to Datadog. The supported telemetry depends on the SDK:
+### Telemetry rollout
 
-| SDK | Experiment exposure events | Event Platform Proxy (EVP) flag evaluation events |
-|---|---|---|
-| Java 1.65.0 | Supported | Not emitted |
-| Node.js 5.116.0 on v5, or 6.5.0 on v6 | Supported | Not emitted |
-| Python 4.14.0 | Supported | Supported |
+Agentless configuration delivery reached these SDKs before telemetry egress reached parity. The version rows below show the released and upcoming rollout stages:
 
-Experiment exposure events are emitted only for flags associated with an experiment. Python aggregates EVP flag evaluation events and emits them by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only the Python EVP flag evaluation event path.
+| SDK | Availability | Experiment exposure events | Event Platform Proxy (EVP) flag evaluation events | Egress path |
+|---|---|---|---|---|
+| Java 1.65.0 | Released | Supported | Not emitted | Local relay |
+| Java 1.66.0 | Upcoming | Supported | Supported | Prefer a local relay; use direct fallback when a compatible relay is unavailable |
+| Node.js 5.116.0 on v5, or 6.5.0 on v6 | Released | Supported | Not emitted | Local relay |
+| Python 4.14.0 | Upcoming | Supported | Supported | Local relay |
 
-The `feature_flag.evaluations` metric is a separate OpenTelemetry (OTLP) signal. The standard `serverless-init` connection on port 8126 does not configure its OTLP path. See [Set Up Server-Side Flag Evaluation Metrics][10].
+Direct fallback means the SDK sends authenticated EVP events to Datadog when it cannot use a compatible local relay. Experiment exposure events are emitted only for flags associated with an experiment. Java 1.66.0 and Python 4.14.0 aggregate EVP flag evaluation events and emit them by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only the EVP flag evaluation event path.
+
+These rows are transitional. After Java, Node.js, and Python support the same signals and egress paths, this table can use one minimum version for each SDK.
+
+The `feature_flag.evaluations` metric is a separate OpenTelemetry (OTLP) signal. The standard `serverless-init` connection on port 8126 does not configure the OTLP endpoint for this metric. See [Set Up Server-Side Flag Evaluation Metrics][10].
 
 ### Configure serverless-init
 
@@ -92,8 +97,8 @@ Then apply these Feature Flags requirements:
 
 1. Initialize the OpenFeature provider and confirm that it reaches a ready state.
 2. Evaluate a flag associated with an experiment. Then confirm that the experiment receives an exposure event.
-3. Check the application and `serverless-init` logs for connection errors to port 8126.
-4. For Python, confirm that `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` is not set to `false` when you need EVP flag evaluation events.
+3. When you use a local relay, check the application and `serverless-init` logs for connection errors to port 8126.
+4. For Java 1.66.0 and Python 4.14.0, confirm that `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` is not set to `false` when you need EVP flag evaluation events.
 5. If you use the `feature_flag.evaluations` metric, validate its separate OTLP path with the [metrics setup guide][10].
 
 ## Agent-backed Remote Configuration

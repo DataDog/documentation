@@ -28,7 +28,7 @@ This page describes how to add Datadog Feature Flags to a Java application. Star
 
 The Datadog provider implements the [OpenFeature](https://openfeature.dev/) standard. It uses `dd-java-agent` for configuration delivery. Agentless delivery removes the external Datadog Agent requirement, but `dd-java-agent` must still load in the JVM.
 
-Agentless delivery changes only the flag configuration source. Java sends experiment exposure events through a supported local Event Platform Proxy (EVP) relay. It does not emit EVP flag evaluation events.
+Agentless delivery changes only the flag configuration source. Java 1.65.0 sends experiment exposure events through a supported local Event Platform Proxy (EVP) relay. The upcoming 1.66.0 release also sends aggregate EVP flag evaluation events. It prefers a compatible local relay and sends both event types directly when no compatible relay is available.
 
 ## Compatibility requirements
 
@@ -344,7 +344,7 @@ Use [Server SDK Configuration Sources][9] as the canonical reference for source 
 - [Use Agent Remote Configuration][13] to retain Agent-managed delivery
 - [Migrate an existing Remote Configuration setup][11] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
 
-For no-Agent serverless environments, use [`serverless-init`][17] to egress experiment exposure events. The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Server-Side Flag Evaluation Metrics][8] guide. For more information on available graphing, see [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/).
+For no-Agent serverless environments, use [`serverless-init`][17] to send experiment exposure events from Java 1.65.0. The upcoming 1.66.0 release prefers a compatible local relay for exposure and aggregate flag evaluation events. It uses authenticated direct EVP fallback when no compatible relay is available. This direct path uses the application `DD_API_KEY` and `DD_SITE` settings. The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Server-Side Flag Evaluation Metrics][8] guide. For more information on available graphing, see [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/).
 
 ### Custom initialization timeout
 

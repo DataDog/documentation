@@ -64,7 +64,7 @@ Then initialize or access the Datadog OpenFeature provider in application code. 
 
 No configuration-source or provider-enable setting is required. Polling begins only when application code initializes or accesses the provider; installing or initializing the tracer alone does not create Feature Flags CDN traffic.
 
-Agentless delivery changes only the flag configuration source. For Java, Node.js, and Python telemetry egress in serverless environments, see [Send feature flag telemetry with serverless-init][6].
+Agentless delivery changes only the flag configuration source. To send telemetry from the Java, Node.js, and Python SDKs in serverless environments, see [Send feature flag telemetry with serverless-init][6].
 
 ### Configure agentless delivery
 

@@ -307,7 +307,7 @@ Use [Server SDK Configuration Sources][6] as the canonical reference for source 
 - [Use Agent Remote Configuration][10] to retain Agent-managed delivery
 - [Migrate an existing Remote Configuration setup][8] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
 
-For no-Agent serverless environments, use [`serverless-init`][11] to egress experiment exposure events. The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Server-Side Flag Evaluation Metrics][4] guide. For more information on available graphing, see [Feature Flag Graphs][5].
+For no-Agent serverless environments, use [`serverless-init`][11] to send experiment exposure events. The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Server-Side Flag Evaluation Metrics][4] guide. For more information on available graphing, see [Feature Flag Graphs][5].
 
 ## Testing
 
