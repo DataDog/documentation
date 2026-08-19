@@ -33,6 +33,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/zendesk-session-replay-integration/'
   tag: 'Blog'
   text: 'Visually replay user-facing issues with Zendesk and Datadog Session Replay'
+- link: "https://www.datadoghq.com/blog/session-replay-investigate-collaborate/"
+  tag: "Blog"
+  text: "Find, analyze, and collaborate on user sessions in Datadog Session Replay"
 
 ---
 
@@ -89,7 +92,7 @@ To find replays that need your attention, use the {{< ui >}}All mentions to me{{
 
 ## Extend data retention
 
-By default, Session Replay data is retained for 30 days.
+By default, Session Replay data is retained for 30 days. To set the default retention period for all Session Replays to longer than 30 days, contact your account team.
 
 To extend Session Replay data retention to 15 months, you can enable {{< ui >}}Extended Retention{{< /ui >}} on individual session replays. These sessions must be non-active (the user has completed their experience).
 

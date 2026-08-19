@@ -3,6 +3,10 @@ title: Bits Code Setup
 aliases:
 - /bits_ai/bits_ai_dev_agent/setup/
 disable_toc: false
+further_reading:
+- link: "https://www.datadoghq.com/blog/bits-code/"
+  tag: "Blog"
+  text: "Turn Datadog findings into automated code fixes with Bits Code"
 ---
 
 ## Overview
@@ -162,3 +166,7 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [8]: /bits_ai/bits_code/
 [11]: /bits_ai/bits_code/#supported-source-code-providers
 [12]: /bits_ai/bits_code/#custom-agent-skills-and-instructions
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

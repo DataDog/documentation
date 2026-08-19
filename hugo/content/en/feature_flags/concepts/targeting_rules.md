@@ -2,6 +2,12 @@
 title: Targeting Rules and Filters
 description: Learn how targeting rules, filters, and rollout types control which variants your application serves.
 further_reading:
+- link: "/feature_flags/concepts/targeting_attributes"
+  tag: "Documentation"
+  text: "Targeting Attributes"
+- link: "/feature_flags/concepts/scheduled_rollouts"
+  tag: "Documentation"
+  text: "Scheduled Rollouts"
 - link: "/feature_flags/concepts/saved_filters"
   tag: "Documentation"
   text: "Saved Filters"
@@ -11,6 +17,9 @@ further_reading:
 - link: "/feature_flags/concepts/experiments"
   tag: "Documentation"
   text: "Feature Flags and Experiments"
+- link: "/feature_flags/concepts/evaluation_context"
+  tag: "Documentation"
+  text: "Evaluation Context"
 - link: "/feature_flags/concepts/environments"
   tag: "Documentation"
   text: "Environments"
@@ -29,9 +38,9 @@ Datadog supports different targeting rule types depending on your rollout strate
 
 | Type | Description |
 |------|-------------|
-| **Feature gate** | Roll out immediately to a percentage of subjects matching your filter (randomized or not) |
-| **Progressive rollout** | Randomized rollout over a schedule with multiple steps |
-| **Experiment** | Randomized allocation associated with an [experiment][2] |
+| **Feature gate** | Roll out to a percentage of subjects matching your filter (randomized or not), immediately or at a [scheduled start time](/feature_flags/concepts/scheduled_rollouts/) |
+| **Progressive rollout** | Randomized rollout over a schedule with multiple steps, started manually or at a [scheduled start time](/feature_flags/concepts/scheduled_rollouts/) |
+| **Experiment** | Randomized allocation associated with an [experiment][3] |
 
 ## Configure targeting rules
 
@@ -49,10 +58,11 @@ For each targeting rule, configure the following:
 - **Define a filter** (optional): If you do not define a filter, the rule matches all subjects in that environment. To reuse the same conditions across multiple flags, add a [saved filter][1] instead of redefining them on each flag.
 - **Select variants**: Choose which variants to serve to matching subjects. Click **Split Traffic** to randomize across multiple variants (see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/)).
 - **Set the traffic exposure** (optional): Serve the variant to a percentage of matching subjects (see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/)).
+- **Schedule a start time** (optional): Activate the rule automatically at a future date and time instead of immediately (see [Scheduled Rollouts](/feature_flags/concepts/scheduled_rollouts/)).
 
-{{< img src="feature_flags/concepts/configure-targeting-rule-2.png" alt="Targeting Rule editor side panel on a feature flag." style="width:70%;" >}}
+{{< img src="feature_flags/concepts/configure-targeting-rule-3.png" alt="Targeting Rule editor side panel on a feature flag." style="width:70%;" >}}
 
-After configuring your targeting rules, click **Save Changes**, then enable the flag in the environment so SDKs can evaluate targeting rules.
+After configuring your targeting rules, click **Save**, then enable the flag in the environment so SDKs can evaluate targeting rules.
 
 <div class="alert alert-info">
 SDKs do not evaluate targeting rules when the flag is <b>disabled</b> or <b>overridden</b> in an environment. If the flag is overridden with a fixed variant, the SDK returns that variant instead. If the flag is disabled, the SDK returns the coded default variant.
@@ -60,80 +70,16 @@ SDKs do not evaluate targeting rules when the flag is <b>disabled</b> or <b>over
 
 ## Filters and evaluation context
 
-Filters use attributes from your SDK's **evaluation context**. Define attributes when you set the evaluation context before evaluating flags. Attributes must be flat primitive values (strings, numbers, Booleans). Nested objects and arrays are not supported.
+Filters use attributes from your SDK's [evaluation context][4]. Define attributes when you set the evaluation context before evaluating flags. Attributes must be flat primitive values (strings, numbers, Booleans). Nested objects and arrays are not supported.
 
-### Example evaluation contexts and filters
+When you build a filter, the attribute field suggests attributes your organization has already defined or that your SDKs have sent recently. See [Targeting Attributes][2] to define reusable attributes with a data type, which also determines the operators available for that attribute.
 
-With the following evaluation context, you can build filters with different operators, such as equality, **is one of**, **is not**, or numeric comparisons:
-
-**Evaluation context:**
-
-{{< programming-lang-wrapper langs="javascript,python,go" >}}
-
-{{< programming-lang lang="javascript" >}}
-
-```javascript
-await OpenFeature.setContext({
-  targetingKey: 'user-123',
-  user_id: 'user-123',
-  user_role: 'admin',
-  email: 'user@example.com',
-  country: 'US',
-  tier: 'premium',
-  account_age_days: 120,
-});
-```
-
-{{< /programming-lang >}}
-
-{{< programming-lang lang="python" >}}
-
-```python
-from openfeature.evaluation_context import EvaluationContext
-
-eval_ctx = EvaluationContext(
-    targeting_key="user-123",
-    attributes={
-        "user_id": "user-123",
-        "user_role": "admin",
-        "email": "user@example.com",
-        "country": "US",
-        "tier": "premium",
-        "account_age_days": 120,
-    },
-)
-```
-
-{{< /programming-lang >}}
-
-{{< programming-lang lang="go" >}}
-
-```go
-evalCtx := openfeature.NewEvaluationContext(
-    "user-123",
-    map[string]interface{}{
-        "user_id":          "user-123",
-        "user_role":        "admin",
-        "email":            "user@example.com",
-        "country":          "US",
-        "tier":             "premium",
-        "account_age_days": 120,
-    },
-)
-```
-
-{{< /programming-lang >}}
-
-{{< /programming-lang-wrapper >}}
-
-#### Example filters
+Given an evaluation context with `country`, `tier`, `user_role`, and `account_age_days` attributes, you can build filters with different operators, such as equality, **is one of**, **is not**, or numeric comparisons:
 
 - `country` **is one of** `US`, `CA`
 - `tier` **equals** `premium`
 - `user_role` **is not** `guest`
 - `account_age_days` **greater than** `90`
-
-**Note**: Other SDKs follow the same pattern. See your platform's [client](/feature_flags/client/) or [server](/feature_flags/server/) SDK documentation for evaluation context setup.
 
 ## Rule hierarchy
 
@@ -148,4 +94,6 @@ Targeting rules are evaluated **in order** from top to bottom:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /feature_flags/concepts/saved_filters/
-[2]: /feature_flags/concepts/experiments/
+[2]: /feature_flags/concepts/targeting_attributes/
+[3]: /feature_flags/concepts/experiments/
+[4]: /feature_flags/concepts/evaluation_context/
