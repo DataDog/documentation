@@ -48,7 +48,7 @@ For metrics pipelines, you can search for and {{< tooltip text="filter out custo
     - Check the {{< ui >}}Origin{{< /ui >}} column to see which product sent the custom metric.
     - In the {{< ui >}}Asset Usage{{< /ui >}} column, hover over the asset usage total for a metric to see which assets are using that metric. Click on an asset to go to that asset.
     - In the search bar, enter a metric name to find it in the list.
-1. Select the custom metrics in the list to filter them out. The selected metrics are added to the {{< ui >}}Filter query{{< /ui >}} field.
+1. Select the custom metrics in the list to filter them out. The selected metrics are added to the {{< ui >}}Filter query{{< /ui >}} field. You can also manually update and add to the filter query.
 1. Click {{< ui >}}Save Filters{{< /ui >}}.
 
 ## Health metrics
