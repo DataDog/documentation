@@ -45,6 +45,17 @@ When creating a Goal-Based test manually, provide:
 
 {{< img src="synthetics/goal_based_testing/goal_based_test_creation.png" alt="The New Synthetics Test dialog with Goal-Based Test selected, and the New Goal-Based Test panel with starting URL and goal fields" style="width:100%;" >}}
 
+### Supported locations
+
+Goal-Based tests run only from the following cloud locations:
+
+- Frankfurt (GCP: `gcp:europe-west3`)
+- N. Virginia (AWS: `aws:us-east-1`)
+- Ohio (AWS: `aws:us-east-2`)
+- Virginia (Azure: `azure:eastus`)
+
+For pricing and Private Locations details, see the [Bits Testing FAQ][3].
+
 ## How it works
 
 After you start a Goal-Based test, the agent explores your application from the starting URL, branching across the different paths a user might take toward the goal.
@@ -66,17 +77,6 @@ After the first run completes, click the {{< ui >}}Edit test{{< /ui >}} icon to:
 - Change the selected Agent Profile.
 
 {{< img src="synthetics/goal_based_testing/goal_based_test_schedule.png" alt="The Goal-Based test edit page with the user goal and scheduling options" style="width:100%;" >}}
-
-## Supported locations
-
-Goal-Based tests run only from the following cloud locations:
-
-- Frankfurt (GCP: `gcp:europe-west3`)
-- N. Virginia (AWS: `aws:us-east-1`)
-- Ohio (AWS: `aws:us-east-2`)
-- Virginia (Azure: `azure:eastus`)
-
-For pricing and Private Locations details, see the [Bits Testing FAQ][3].
 
 ## Further reading
 
