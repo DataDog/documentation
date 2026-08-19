@@ -68863,6 +68863,8 @@ components:
       additionalProperties: false
       description: Attributes of the monitor notification rule.
       properties:
+        bundle_config:
+          $ref: "#/components/schemas/MonitorNotificationRuleBundleConfig"
         conditional_recipients:
           $ref: "#/components/schemas/MonitorNotificationRuleConditionalRecipients"
         filter:
@@ -68872,6 +68874,19 @@ components:
         recipients:
           $ref: "#/components/schemas/MonitorNotificationRuleRecipients"
       required: [name]
+      type: object
+    MonitorNotificationRuleBundleConfig:
+      description: |-
+        Use bundle config to enable alert bundling to reduce monitor signal noises. **Note**: This feature is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+      properties:
+        duration:
+          description: Duration of the bundling period.
+          example: 3600
+          format: int32
+          maximum: 2147483647
+          type: integer
+      required: [duration]
       type: object
     MonitorNotificationRuleCondition:
       description: |-
@@ -69055,6 +69070,8 @@ components:
       additionalProperties: {}
       description: Attributes of the monitor notification rule.
       properties:
+        bundle_config:
+          $ref: "#/components/schemas/MonitorNotificationRuleBundleConfig"
         conditional_recipients:
           $ref: "#/components/schemas/MonitorNotificationRuleConditionalRecipients"
         created:
