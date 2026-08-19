@@ -29,14 +29,14 @@ The right configuration depends on how you send telemetry to Datadog. Find your 
 | [OTLP ingestion by the Datadog Agent](#otlp-ingestion-by-the-datadog-agent) | Run an Agent on every host that generates telemetry. Omit hostname attributes, or set them to match the Agent hostname. |
 | [DDOT Collector exporting directly to Datadog](#ddot-collector-exporting-directly-to-datadog) | Include the `infraattributes` processor in every pipeline. On hosts, enable `allow_hostname_override`. On Fargate, supply platform resource attributes instead. |
 | [Collector exporting through a gateway](#collector-exporting-through-a-gateway) | Detect host information in the node-level Collector and preserve those resource attributes through the gateway. |
-| [OpenTelemetry Collector with the Datadog Exporter](#opentelemetry-collector-with-the-datadog-exporter) | Run a Collector on each host and use the `resourcedetection` processor with the detectors for your environment. |
+| [OpenTelemetry Collector with the Datadog Exporter sending directly to Datadog](#opentelemetry-collector-with-the-datadog-exporter-sending-directly-to-datadog) | Run a Collector on each host and use the `resourcedetection` processor with the detectors for your environment. |
 | [Direct OTLP intake without an Agent or Collector](#direct-otlp-intake-without-an-agent-or-collector) | Set platform resource attributes instead of `host.name`. |
 
 ### OTLP ingestion by the Datadog Agent
 
 Deploy the Datadog Agent on every host that generates OTLP telemetry. Sending telemetry from one host to an Agent on another host is not supported. For setup instructions, see [OTLP Ingestion by the Datadog Agent][11].
 
-If incoming telemetry has no valid hostname attributes, Datadog uses the Agent hostname. If you set `host.name`, `host.id`, or another hostname attribute, make its value match the Agent hostname to avoid duplicate hosts. When you do not control the attributes that your applications emit, set the `datadog.host.name` resource attribute to override hostname resolution explicitly.
+If incoming telemetry has no valid hostname attributes, Datadog uses the Agent hostname. If you set `host.name`, `host.id`, or another hostname attribute, make its value match the Agent hostname to avoid duplicate hosts. To override hostname resolution explicitly, set the `datadog.host.name` resource attribute to the Agent hostname.
 
 ### DDOT Collector exporting directly to Datadog
 
@@ -73,9 +73,9 @@ In a gateway deployment, the Collector that exports to Datadog does not run on t
 
 Detect host information in the node-level Collector, then configure the gateway to preserve those resource attributes instead of detecting them again. For the Datadog Exporter, use the **Kubernetes DaemonSet -> Gateway** configuration in [Datadog Exporter configuration](#datadog-exporter-configuration). If a gateway deployment reports the wrong host, see [Gateway collector not forwarding host metadata][19].
 
-### OpenTelemetry Collector with the Datadog Exporter
+### OpenTelemetry Collector with the Datadog Exporter sending directly to Datadog
 
-This applies to the [OpenTelemetry Collector with the Datadog Exporter][20] exporting directly to Datadog, either on each host or as a Kubernetes DaemonSet. If your Collector forwards to a gateway, see [Collector exporting through a gateway](#collector-exporting-through-a-gateway) instead.
+This applies to the [OpenTelemetry Collector with the Datadog Exporter][20] running on each host or as a Kubernetes DaemonSet. If your Collector forwards to a gateway, see [Collector exporting through a gateway](#collector-exporting-through-a-gateway) instead.
 
 Run a Collector on every host and add the `resourcedetection` processor with the detectors for your environment, as described in [Datadog Exporter configuration](#datadog-exporter-configuration).
 
@@ -83,7 +83,7 @@ Run a Collector on every host and add the `resourcedetection` processor with the
 
 This applies to [OTLP intake for serverless platforms][12], such as AWS Lambda, ECS Fargate, Azure Functions, and Cloud Run, and to [OTLP intake for managed platforms][13].
 
-These workloads have no host to identify. Set the cloud and platform resource attributes for your environment instead of relying on `host.name` for workload identification. Each platform requires a different set of attributes.
+These ingestion paths do not use a host-based Agent or Collector. Set the cloud and platform resource attributes for your environment instead of relying on `host.name` for workload identification. Each platform requires a different set of attributes.
 
 <div class="alert alert-danger">Host metadata sent to the <a href="/opentelemetry/setup/otlp_ingest/">OTLP intake endpoints</a> does not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
 
