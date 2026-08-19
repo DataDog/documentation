@@ -40,7 +40,7 @@ To set up the filter processor:
 
 For metrics pipelines, you can search for and {{< tooltip text="filter out custom metrics" tooltip="Contact your account manager to request access." >}} that have not been queried in the selected time frame.
 
-1. Click {{< ui >}}Select Unused Metrics to Filter{{< /ui >}}.
+1. Click {{< ui >}}Select Unused Metrics to Filter{{< /ui >}} in the Filter processor.
 1. Select the time frame in the dropdown menu to check metric queries against. For example, if you select `90d`, the Worker looks for metrics that have not been queried in the last 90 days.
 1. In the {{< ui >}}Asset usage{{< /ui >}} dropdown menu, select whether to find metrics used in assets, such as dashboards and monitors.
 1. In the list of metrics found:
