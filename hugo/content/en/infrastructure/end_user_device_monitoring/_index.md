@@ -1,6 +1,10 @@
 ---
 title: End User Device Monitoring
 description: Monitor employee desktops and laptops to detect performance, connectivity, and application issues across your organization.
+further_reading:
+- link: "https://www.datadoghq.com/blog/auto-detected-endpoint-issues/"
+  tag: "Blog"
+  text: "Detect and resolve endpoint issues across your fleet with Datadog"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/end-user-device-monitoring/" btn_hidden="false" >}}
@@ -63,3 +67,7 @@ With network path tracing, you can:
 [5]: https://app.datadoghq.com/end-user-devices
 [6]: /agent/fleet_automation/
 [7]: /logs/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

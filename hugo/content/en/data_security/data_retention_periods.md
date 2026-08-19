@@ -41,7 +41,7 @@ attributes:
     data_type: |
        - **Session, View, Action, and Error Events**: 30 days
        - **Resource, Long Task, and Vitals Events**: 15 Days
-  - product: Case Management
+  - product: Work Management
     data_type: |
        - **Cases**: Retained for the duration of the account
   - product: CD Visibility
@@ -144,7 +144,7 @@ attributes:
     data_type: |
        - **Events**: 15 months
        - **User Profiles**: 15 months, or 30 days if <a href="/product_analytics/guide/rum_and_product_analytics/#how-do-i-set-up-product-analytics">Product Analytics is not enabled</a>
-  - product: PR Gates
+  - product: Quality Gates
     data_type: |
        - **Gate evaluations**: 30 days
   - product: Reference Tables

@@ -47,7 +47,16 @@ Datadog collects metrics such as row count and freshness from warehouse system m
 
 Data Observability monitors require [Quality Monitoring][2] to be set up with at least one supported data warehouse (for example, [Snowflake][3], [Databricks][4], or [BigQuery][5]).
 
-To compare a metric across two data assets instead of tracking a single one, see [Source to target monitors](#source-to-target-monitors).
+Data Observability offers four monitor types, selected in the first step of the [monitor creation flow][13]:
+
+| Monitor type | What it monitors |
+|---|---|
+| Data quality | Freshness, row count, and column-level metrics on tables and columns. |
+| [Source to target](#source-to-target-monitors) | The difference in the same metric between a source asset and a target asset. |
+| [Schema change](#schema-change-monitors) | Fields added, removed, renamed, or retyped in your warehouse. |
+| Job | Failed job runs. |
+
+Unless stated otherwise, the sections below describe the data quality monitor type.
 
 ## Monitor creation
 
@@ -178,8 +187,8 @@ If your SQL query includes a `GROUP BY` clause, list the grouped columns as a co
 
 Select a detection method:
 
-- {{< ui >}}Anomaly{{< /ui >}}: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model requires **3 to 7 days** to train (including a weekend), depending on how frequently the underlying data updates. During the training period, the monitor does not trigger alerts and will be visualized in blue. After training completes, the monitor will be shown in green when in a normal state and red when in an outlier state.
-- {{< ui >}}Threshold{{< /ui >}}: Alert when the metric crosses a fixed value. Set the comparison operator (`above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to`) and define a {{< ui >}}Critical{{< /ui >}} threshold (required) and optionally a {{< ui >}}Warning{{< /ui >}} threshold. For more details, see [Configure Monitors][8].
+- {{< ui >}}Anomalies{{< /ui >}}: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model requires **3 to 7 days** to train (including a weekend), depending on how frequently the underlying data updates. During the training period, the monitor does not trigger alerts and is visualized in blue. After training completes, the monitor is shown in green when in a normal state and red when in an outlier state.
+- {{< ui >}}Thresholds{{< /ui >}}: Alert when the metric crosses a fixed value. Set the comparison operator (`above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to`) and define a {{< ui >}}Critical{{< /ui >}} threshold (required) and optionally a {{< ui >}}Warning{{< /ui >}} threshold. For more details, see [Configure Monitors][8].
 
 ### WHERE clause
 
@@ -196,13 +205,26 @@ You can add a {{< ui >}}Group by{{< /ui >}} clause to split a single monitor int
 
 The default limit is 500 groups per monitor. To increase this limit, [contact Support][9].
 
+### Model configuration
+
+For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand {{< ui >}}Model configuration{{< /ui >}} to refine how the model behaves:
+
+| Setting | Description |
+|---|---|
+| {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | The number of consecutive failed evaluations before the monitor alerts. Configure this setting to suppress isolated spikes. |
+| {{< ui >}}Minimum upper bound size{{< /ui >}} | Constrains how tightly the model tracks your data on the upper end. |
+| {{< ui >}}Minimum lower bound size{{< /ui >}} | Constrains how tightly the model tracks your data on the lower end. |
+
+In the {{< ui >}}If data is missing to evaluate{{< /ui >}} dropdown menu, select what the monitor reports when no data is available for an evaluation.
+
 ### Monitor schedule
 
 Set how often the monitor evaluates your data:
 
-- {{< ui >}}Hourly{{< /ui >}}: The monitor runs every hour.
-- {{< ui >}}Daily{{< /ui >}}: The monitor runs once per day.
-- {{< ui >}}Manual{{< /ui >}}: The monitor runs only when triggered programmatically. Trigger these monitors using the [Data Observability API][10] on a schedule so enough historical data can accumulate for modeling to be useful. Currently, the UI does not support default metrics like row counts and freshness, so this workflow only applies to custom or column-level metrics.
+- {{< ui >}}Scheduled{{< /ui >}}: The monitor runs on a fixed cadence. Under {{< ui >}}Run this monitor{{< /ui >}}, select {{< ui >}}Hourly{{< /ui >}}, {{< ui >}}Every 3 hours{{< /ui >}}, {{< ui >}}Every 6 hours{{< /ui >}}, {{< ui >}}Every 12 hours{{< /ui >}}, {{< ui >}}Daily{{< /ui >}}, or {{< ui >}}Custom schedule{{< /ui >}}.
+- {{< ui >}}Manual{{< /ui >}} (Preview): The monitor runs only when triggered programmatically. Trigger these monitors using the [Data Observability API][10] on a schedule to accumulate enough historical data for modeling to be useful. The UI does not support default metrics such as row counts and freshness, so this workflow applies to custom or column-level metrics.
+
+To define your own cadence, select {{< ui >}}Custom schedule{{< /ui >}} and supply a cron expression. A custom schedule can run as often as every 15 minutes. {{< ui >}}Preview times{{< /ui >}} lists the next several runs in your local time zone, so you can confirm the expression before saving it.
 
 ### Set alert conditions
 
@@ -287,6 +309,37 @@ When the metric type is {{< ui >}}Custom SQL{{< /ui >}}, supply one query for th
 
 The difference between the source and the target is recorded as its own metric, so a source to target monitor is evaluated by the same detection methods as any other Data Observability monitor, including anomaly detection. Both sides are measured on a synchronized schedule, so the two values are captured at the same time rather than following each warehouse's default collection cadence.
 
+## Schema change monitors
+
+<div class="alert alert-info">Schema change monitors are in Preview.</div>
+
+A schema change monitor alerts when the structure of your data changes, rather than when its contents change. Use it to catch an upstream change before it breaks a downstream pipeline or dashboard, such as when a column is dropped, renamed, or switched to a different data type.
+
+Schema change monitors detect four kinds of change across databases, schemas, tables, and columns:
+
+| Change type | Description |
+|---|---|
+| Added | A database, schema, table, or column was created. |
+| Removed | A database, schema, table, or column was dropped. |
+| Renamed | A table or column was renamed. |
+| Type changed | A column's data type changed, such as from `INTEGER` to `STRING`. |
+
+Schema changes are detected for Snowflake, BigQuery, Databricks, and Redshift.
+
+### Create a schema change monitor
+
+1. Navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Schema Change{{< /ui >}}][11].
+2. Under {{< ui >}}Choose data to monitor{{< /ui >}}, select the warehouse to watch.
+3. Configure notifications as described in [Configure monitor](#configure-monitor).
+
+A schema change monitor does not take a metric type or a detection method because it alerts on a structural change rather than on a measured value crossing a bound.
+
+### Browse detected schema changes
+
+To see the changes Datadog has detected without creating a monitor, go to [{{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Schema Changes{{< /ui >}}][12]. Filter by platform, account, database, schema, or change type, and expand an entry to see the affected columns and their data types.
+
+Changes are detected when Datadog next collects schema metadata from your warehouse and compares the current structure against the previously collected one.
+
 ## Example monitors
 
 {{< tabs >}}
@@ -295,7 +348,7 @@ The difference between the source and the target is recorded as its own metric, 
 Detect a significant decrease in row count that could indicate a pipeline failure or missing data.
 
 1. Select {{< ui >}}Table{{< /ui >}} > {{< ui >}}Row Count{{< /ui >}} and choose the target table (for example, `ANALYTICS_DB.PROD.EVENTS`).
-2. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method. The monitor triggers when the row count deviates from its historical baseline.
+2. Select {{< ui >}}Anomalies{{< /ui >}} as the detection method. The monitor triggers when the row count deviates from its historical baseline.
 
 {{% /tab %}}
 {{% tab "Stale table" %}}
@@ -303,7 +356,7 @@ Detect a significant decrease in row count that could indicate a pipeline failur
 Alert when a critical table has not been updated within the expected time window.
 
 1. Select {{< ui >}}Table{{< /ui >}} > {{< ui >}}Freshness{{< /ui >}} and choose the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
-2. Select {{< ui >}}Threshold{{< /ui >}} as the detection method.
+2. Select {{< ui >}}Thresholds{{< /ui >}} as the detection method.
 3. Set the {{< ui >}}Alert threshold{{< /ui >}} to **6 hours** and optionally a {{< ui >}}Warning threshold{{< /ui >}} at **4 hours**.
 
 {{% /tab %}}
@@ -312,7 +365,7 @@ Alert when a critical table has not been updated within the expected time window
 Detect when a column's null percentage exceeds normal levels, which may indicate data ingestion issues.
 
 1. Select {{< ui >}}Column{{< /ui >}} > {{< ui >}}Nullness{{< /ui >}} and choose the target column (for example, `ANALYTICS_DB.PROD.USERS.EMAIL`).
-2. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method.
+2. Select {{< ui >}}Anomalies{{< /ui >}} as the detection method.
 
 {{% /tab %}}
 {{% tab "Rows lost between source and target" %}}
@@ -321,7 +374,7 @@ Detect rows dropped between a source table and its destination after a replicati
 
 1. Select {{< ui >}}Source to Target{{< /ui >}}, then choose the source table (for example, `POSTGRES_DB.PUBLIC.ORDERS`) and the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
 2. Select {{< ui >}}Row Count{{< /ui >}} as the metric type and set {{< ui >}}Format{{< /ui >}} to {{< ui >}}Difference{{< /ui >}}.
-3. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method.
+3. Select {{< ui >}}Anomalies{{< /ui >}} as the detection method.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -355,3 +408,6 @@ On a monitor's status page, click {{< ui >}}Annotate Bounds{{< /ui >}}, select a
 [8]: /monitors/configuration/?tab=thresholdalert#thresholds
 [9]: /help/
 [10]: /api/latest/data-observability/
+[11]: https://app.datadoghq.com/monitors/create/schema-change
+[12]: https://app.datadoghq.com/data-obs/schema-changes
+[13]: https://app.datadoghq.com/monitors/create/data-quality
