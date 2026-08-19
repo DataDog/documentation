@@ -16,7 +16,7 @@ further_reading:
 
 Datadog's [Kubernetes Explorer][1] allows you to monitor the state of pods, deployments, and other Kubernetes resources. You can also view resource specifications for failed pods within a deployment, correlate node activity with related logs, track resource utilization, automatically scale workloads, and remediate errors.
 
-<div class="alert alert-info">When using the Datadog Agent, Kubernetes Explorer requires Agent 7.27.0+ and Cluster Agent 1.11.0+. If you are using Kubernetes 1.25+, then Cluster Agent 7.40.0+ is required. For OpenTelemetry-based setups, see the <strong>OpenTelemetry Collector</strong> and <strong>OpenTelemetry Kube Stack</strong> tabs.</div>
+<div class="alert alert-info">When using the Datadog Agent, Kubernetes Explorer requires Agent 7.27.0+ and Cluster Agent 1.11.0+. If you are using Kubernetes 1.25+, then Cluster Agent 7.40.0+ is required.</div>
 
 
 ## Configuration
