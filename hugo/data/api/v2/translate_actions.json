@@ -133,6 +133,30 @@
     "request_description": "Update an existing Action Connection request body",
     "request_schema_description": "Request used to update an action connection."
   },
+  "ListExecutionPolicies": {
+    "description": "Retrieve a list of execution policies for the current organization.",
+    "summary": "List execution policies"
+  },
+  "CreateExecutionPolicy": {
+    "description": "Create a new execution policy.",
+    "summary": "Create an execution policy",
+    "request_description": "The execution policy to create.",
+    "request_schema_description": "Request object that includes the execution policy to create."
+  },
+  "DeleteExecutionPolicy": {
+    "description": "Delete a specific execution policy.",
+    "summary": "Delete an execution policy"
+  },
+  "GetExecutionPolicy": {
+    "description": "Retrieve an existing execution policy by ID.",
+    "summary": "Get an execution policy"
+  },
+  "UpdateExecutionPolicy": {
+    "description": "Update an existing execution policy.\nReturns the execution policy object when the request is successful.",
+    "summary": "Update an execution policy",
+    "request_description": "The new execution policy.",
+    "request_schema_description": "Request object that includes the execution policy to update."
+  },
   "ListAwsScanOptions": {
     "description": "Fetches the scan options configured for AWS accounts.",
     "summary": "List AWS scan options"
@@ -3226,12 +3250,6 @@
     "summary": "Update IP Allowlist",
     "request_description": "",
     "request_schema_description": "Update the IP allowlist."
-  },
-  "DeleteLLMObsData": {
-    "description": "Submit a request to delete LLM Observability span data matching a trace ID filter within a specified time range.",
-    "summary": "Delete LLM Observability data",
-    "request_description": "Data deletion request payload.",
-    "request_schema_description": "Request to delete LLM Observability data."
   },
   "GetLLMObsAnnotatedInteractionsByTraceIDs": {
     "description": "Returns annotated interactions across all annotation queues for the given content IDs.\nResults include queue metadata (ID and name) for each interaction.",

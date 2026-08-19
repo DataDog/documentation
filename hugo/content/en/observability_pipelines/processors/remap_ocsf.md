@@ -22,7 +22,7 @@ Click {{< ui >}}Manage mappings{{< /ui >}}. This opens a modal:
 - If you have already added mappings, click on a mapping in the list to edit or delete it. You can use the search bar to find a mapping by its name. Click {{< ui >}}Add Mapping{{< /ui >}} if you want to add another mapping. Select {{< ui >}}Library Mapping{{< /ui >}} or {{< ui >}}Custom Mapping{{< /ui >}} and click {{< ui >}}Continue{{< /ui >}}.
 - If you have not added any mappings yet, select {{< ui >}}Library Mapping{{< /ui >}} or {{< ui >}}Custom Mapping{{< /ui >}}. Click {{< ui >}}Continue{{< /ui >}}.
 
-{{% collapse-content title="Library mapping" level="h5" expanded=false id="library_mapping" %}}
+{{% collapse-content title="Library mapping" level="h3" expanded=false id="library_mapping" %}}
 
 ### Add a mapping
 
@@ -60,7 +60,7 @@ These are the library mappings available:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Custom mapping" level="h5" expanded=false id="custom_mapping" %}}
+{{% collapse-content title="Custom mapping" level="h3" expanded=false id="custom_mapping" %}}
 
 When you set up a custom mapping, if you try to close or exit the modal, you are prompted to export your mapping. Datadog recommends that you export your mapping to save what you have set up so far. The exported mapping is saved as a JSON file.
 
