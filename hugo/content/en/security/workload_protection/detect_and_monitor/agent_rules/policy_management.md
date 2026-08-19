@@ -114,7 +114,7 @@ Next, use the following instructions to upload the policy file to each host.
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Copy the `default.policy` file to the target host in the `/etc/datadog-agent/runtime-security.d` folder (that will contains all your `.policy` files). The file must have `read` and `write` access for the `root` user on the host. This may require use of a utility such as SCP or FTP.
+Copy the `default.policy` file to the target host in the `/etc/datadog-agent/runtime-security.d` folder (which contains all your `.policy` files). The file must have `read` and `write` access for the `root` user on the host. This may require use of a utility such as SCP or FTP.
 
 To apply the changes, do **one** of the following:
 
@@ -124,7 +124,7 @@ To apply the changes, do **one** of the following:
     sudo /opt/datadog-agent/embedded/bin/system-probe runtime policy reload
     ```
 
--   Or restart the [Datadog Agent](/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent).
+-   Or restart the [Datadog Agent][27].
 
 {{% /tab %}}
 
@@ -194,3 +194,4 @@ Here are some important [role and permissions][11] to use for custom rules RBAC:
 [24]: https://app.datadoghq.com/security/workload-protection/agent-rules
 [25]: /security/workload_protection/detect_and_monitor/agent_rules/variables_and_actions
 [26]: https://app.datadoghq.com/security/workload-protection/deployments
+[27]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent

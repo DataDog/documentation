@@ -17,9 +17,9 @@ Agent rules can collect contextual telemetry or match high-confidence activity a
 
 To create an Agent rule and threat detection rule together, use the Assisted rule creator or manual flow. See [Create the custom Agent and detection rules together][3] in the [Detection Rules][4] documentation.
 
-## Write custom Agent rules in SecL
+## Write custom Agent rules in SECL
 
-Workload Protection Agent rules use a custom expression language called SecL to specify which events to observe, match, and send to Datadog based on runtime context. For more information, see the [SecL guide][5].
+Workload Protection Agent rules use a custom expression language called SECL to specify which events to observe, match, and send to Datadog based on runtime context. For more information, see the [SECL guide][5].
 
 ## Deploy Agent rules with policies
 
@@ -27,7 +27,7 @@ Agent rules are packaged and deployed in policies. Manage policies centrally in 
 
 ## Use variables and actions
 
-Variables and actions extend Agent rules beyond event matching. Actions can collect additional telemetry, such as file hashes, respond to threats, or operate on SecL variables. SecL variables enable the construction of advanced, stateful detection logic based on state machines. For more information, see [Variables and actions][6].
+Variables and actions extend Agent rules beyond event matching. Actions can collect additional telemetry, such as file hashes, respond to threats, or operate on SECL variables. SECL variables enable the construction of advanced, stateful detection logic based on state machines. For more information, see [Variables and actions][6].
 
 [1]: https://app.datadoghq.com/security/workload-protection/agent-rules?ruleQuery=defaultRule%3Atrue
 [2]: /security/workload_protection/detect_and_monitor/agent_rules/policy_management

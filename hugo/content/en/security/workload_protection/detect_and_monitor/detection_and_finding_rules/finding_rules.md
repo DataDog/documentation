@@ -9,7 +9,7 @@ further_reading:
     text: "Investigate and triage findings"
   - link: "/security/workload_protection/detect_and_monitor/agent_rules/secl_guide"
     tag: "Documentation"
-    text: "SecL guide"
+    text: "SECL guide"
   - link: "/security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules"
     tag: "Documentation"
     text: "Detection rules"

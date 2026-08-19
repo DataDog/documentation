@@ -133,10 +133,10 @@ Use `kill` to actively stop malicious activity. The Agent sends a POSIX signal t
 
 In addition to defining `kill` actions in Agent policy files, you can configure process termination in Datadog:
 
-- **Automatic:** Add `kill` actions to Agent rules in a policy, as described in this section, or use [automated response](/security/workload_protection/respond_and_report/#automated-response).
-- **Manual:** From a security signal, use [Kill containers or processes](/security/workload_protection/investigate_and_triage/security_signals/actions#kill-containers-or-processes) under **Respond** in the signal side panel.
+- **Automatic:** Add `kill` actions to Agent rules in a policy, as described in this section, or use [automated response][1].
+- **Manual:** From a security signal, use [Kill containers or processes][2] under **Respond** in the signal side panel.
 
-Both approaches require [Agent enforcement](/security/workload_protection/respond_and_report/#configure-agent-enforcement), which is enabled by default. See [Respond to Threats](/security/workload_protection/respond_and_report/) for an overview of enforcement and response actions.
+Both approaches require [Agent enforcement][3], which is enabled by default. See [Respond to Threats][4] for an overview of enforcement and response actions.
 
 ### When to use it
 
@@ -145,7 +145,7 @@ Both approaches require [Agent enforcement](/security/workload_protection/respon
 
 ### Requirements
 
-- Enforcement must be enabled in the Agent configuration (`runtime_security.enforcement.enabled`). See [Advanced configuration](/security/workload_protection/setup/advanced_configuration).
+- Enforcement must be enabled in the Agent configuration (`runtime_security.enforcement.enabled`). See [Advanced configuration][5].
 - Kill actions are rejected at policy load time if enforcement is globally disabled.
 - Supported signals include `SIGKILL`, `SIGTERM`, `SIGHUP`, `SIGINT`, and other standard POSIX signal names.
 
@@ -162,7 +162,7 @@ Both approaches require [Agent enforcement](/security/workload_protection/respon
 
 ### Safeguards
 
-The Agent includes disarmers to prevent runaway kill loops during automated response. If too many kill actions fire against the same container or executable within a configured period, subsequent kills for that target are suppressed until the period expires. 
+The Agent includes disarmers to prevent runaway kill loops during automated response. If too many kill actions fire against the same container or executable within a configured period, subsequent kills for that target are suppressed until the period expires.
 
 Certain binaries can also be excluded from enforcement through `runtime_security.enforcement.exclude_binaries`.
 
@@ -209,7 +209,7 @@ Use `network_filter` to drop packets matching a BPF filter expression for the of
 In addition to defining `network_filter` actions in Agent policy files, you can isolate a compromised workload in Datadog:
 
 - **Automatic:** Add `network_filter` actions to Agent rules in a policy, as described in this section. When a rule matches, the Agent drops matching traffic automatically.
-- **Manual:** From a security signal, use [Network isolation](/security/workload_protection/investigate_and_triage/security_signals/actions#network-isolation) under **Respond** in the signal side panel.
+- **Manual:** From a security signal, use [Network isolation][6] under **Respond** in the signal side panel.
 
 ### When to use it
 
@@ -285,7 +285,7 @@ Use `hash` to enrich an event with cryptographic hashes of a file referenced in 
 
 ### Supported algorithms
 
-Hashes are computed by the Agent hash resolver and may include `MD5`, `SHA1`, `SHA256`, and `SSDEEP`, depending on Agent configuration. Results appear in the `*.hashes` field of the file event (for example, `exec.file.hashes`). To change the algorithms used, update `runtime_security_config.hash_resolver.hash_algorithms` in `system-probe.yaml` or set `DD_RUNTIME_SECURITY_CONFIG_HASH_RESOLVER_HASH_ALGORITHMS`. See [Workload Protection Agent configuration](/security/workload_protection/setup/advanced_configuration) for all hash resolver parameters.
+Hashes are computed by the Agent hash resolver and may include `MD5`, `SHA1`, `SHA256`, and `SSDEEP`, depending on Agent configuration. Results appear in the `*.hashes` field of the file event (for example, `exec.file.hashes`). To change the algorithms used, update `runtime_security_config.hash_resolver.hash_algorithms` in `system-probe.yaml` or set `DD_RUNTIME_SECURITY_CONFIG_HASH_RESOLVER_HASH_ALGORITHMS`. See [Workload Protection Agent configuration][5] for all hash resolver parameters.
 
 ### Example
 
@@ -426,3 +426,10 @@ The Agent validates actions at policy load time:
 - **Required fields**: for example, `kill.signal`, `log.level`, `network_filter.filter`.
 - **Enforcement gate**: `kill` and `network_filter` require enforcement to be enabled.
 - **Event type compatibility**: `network_filter` requires the `raw_packet` event type; `hash.field` must be compatible with the rule's event type.
+
+[1]: /security/workload_protection/respond_and_report/#automated-response
+[2]: /security/workload_protection/investigate_and_triage/security_signals/actions#kill-containers-or-processes
+[3]: /security/workload_protection/respond_and_report/#configure-agent-enforcement
+[4]: /security/workload_protection/respond_and_report/
+[5]: /security/workload_protection/setup/advanced_configuration
+[6]: /security/workload_protection/investigate_and_triage/security_signals/actions#network-isolation

@@ -17,10 +17,10 @@ For how these rules fit together in the detection pipeline, see [How Workload Pr
 ## Agent rules
 
 [Agent rules][1] define which system activity is sent to the Datadog backend for further analysis:
-- [SecL guide][15] for writing custom agent rules with the SecL expression language
+- [SECL guide][15] for writing custom agent rules with the SECL expression language
 - [Policy management][9] for deploying custom and default agent rules
 - [Variables and actions][16] for stateful detections and additional telemetry collection
-- [Linux expressions][17] and [Windows expressions][18] for the full set of queryable SecL fields
+- [Linux expressions][17] and [Windows expressions][18] for the full set of queryable SECL fields
 
 ## Detection and finding rules
 
@@ -32,7 +32,7 @@ For how these rules fit together in the detection pipeline, see [How Workload Pr
 ## Threat intelligence
 
 Workload Protection uses threat intelligence databases to enrich your [Agent Events][2] and detect malware and known malicious entities. The [Threat Intelligence][7] page helps you:
-- Explore the threat intelligence databases that are provided Out Of The Box (OOTB) to Workload Protection
+- Explore the threat intelligence databases that are provided out-of-the-box (OOTB) with Workload Protection
 - Import your own threat intelligence database and configure it to work with Workload Protection
 
 ## Content Packs

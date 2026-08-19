@@ -52,16 +52,16 @@ On Linux, you need to look at the Linux kernel version and distribution version,
 
 #### Supported cloud environments
 
-| Cloud environments                      | Supported | 
+| Cloud environments                      | Supported |
 |-----------------------------------------|----------------------|
 | Amazon Elastic Compute Cloud (EC2)      | ✅                    |
 | Amazon Elastic Kubernetes Service (EKS) | ✅                    |
 | Amazon Elastic Container Service (ECS)  | ✅                    |
 | AWS Fargate                             | ✅ (only using eBPF-less agent)                    |
 | Azure Virtual Machines (Azure VMs)      | ✅                    |
-| Azure Kubernetes Service (AKS)          | ✅                    | 
+| Azure Kubernetes Service (AKS)          | ✅                    |
 | Google Compute Engine (GCE)             | ✅                    |
-| Google Kubernetes Engine (GKE)          | ✅                    | 
+| Google Kubernetes Engine (GKE)          | ✅                    |
 
 **Notes:**
 

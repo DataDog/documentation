@@ -194,7 +194,7 @@ aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-
 
 To collect data from your AWS Fargate pods, you must run the Agent as a sidecar of your application pod and set up Role-Based Access Control (RBAC) rules.
 
-<div class="alert alert-info">If the Agent is running as a sidecar, it can only communicate with containers on the same pod. Run an Agent for every pod you wish to monitor.</div>
+<div class="alert alert-info">If the Agent is running as a sidecar, it can only communicate with containers on the same pod. Run an Agent for every pod you want to monitor.</div>
 
 ### Set up RBAC rules
 

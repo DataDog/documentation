@@ -1,5 +1,5 @@
 ---
-title: SecL guide
+title: SECL guide
 aliases:
   - /security/workload_protection/agent_expressions
   - /security/threats/agent_expressions
@@ -20,7 +20,7 @@ In summary, the Agent rule finds raw behavior and the detection rule turns it in
 
 <div class="alert alert-info">This guide describes how to create rule expressions manually, but Workload Protection also provides the <b>Assisted rule creator</b> wizard to walk you through creating the Agent and detections rules together. See <a href="/security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules/#create-the-custom-agent-and-detection-rules-together">Create the custom Agent and detection rules together</a>.</div>
 
-## SecL expression syntax
+## SECL expression syntax
 
 The standard format of a SECL expression is:
 

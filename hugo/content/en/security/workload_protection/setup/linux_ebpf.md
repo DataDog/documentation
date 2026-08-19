@@ -42,7 +42,7 @@ sbom:
   # Set to true to enable Container Vulnerability Management
   container_image:
     enabled: true
-  # Set to true to enable Host Vulnerability Management  
+  # Set to true to enable Host Vulnerability Management
   host:
     enabled: true
 {{< /code-block >}}
@@ -73,7 +73,7 @@ runtime_security_config:
     enabled: true
 {{< /code-block >}}
 
-**Notes**: 
+**Notes**:
 
 - You can also use the following [Agent install script][5] to automatically enable Misconfigurations and Threat Detection:
 

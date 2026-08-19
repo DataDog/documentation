@@ -7,7 +7,7 @@ aliases:
   - /security/workload_protection/inventory/hosts_and_containers
   - /security/workload_protection/inventory/serverless
 further_reading:
-  - link: "security/detection_rules/#mitre-attck-map"
+  - link: "/security/detection_rules/#mitre-attck-map"
     tag: "Documentation"
     text: "MITRE ATT&CK map"
   - link: "https://app.datadoghq.com/release-notes/review-your-workload-protection-coverage-with-the-coverage-map"

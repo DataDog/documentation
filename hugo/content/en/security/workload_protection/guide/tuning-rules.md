@@ -6,17 +6,17 @@ aliases:
   - /security/cloud_security_management/guide/tuning-rules
 ---
 
-## Overview	
+## Overview
 
-Workload Protection monitors suspicious activity occurring at the workload level. However, in some cases, benign activities are flagged as malicious because of particular settings in the user's environment. When a benign expected activity is triggering a signal, you can suppress the trigger on the activity to limit noise. 
+Workload Protection monitors suspicious activity occurring at the workload level. However, in some cases, benign activities are flagged as malicious because of particular settings in the user's environment. When a benign expected activity is triggering a signal, you can suppress the trigger on the activity to limit noise.
 
-This guide provides considerations for best practices and steps for fine-tuning signal suppression.
+This guide provides considerations for best practices and steps for refining signal suppression.
 
 ## Suppression strategy
 
 Before suppressing benign patterns, identify common characteristics in signals based on the type of detection activity. The more specific combinations of attributes are, the more precise the suppression is.
 
-From a risk management perspective, suppressing based on fewer attributes increases the possibility of tuning out actual malicious activities. To fine-tune effectively and without losing coverage of any malicious behaviors, consider the following list of common key attributes, categorized by activity types:
+From a risk management perspective, suppressing based on fewer attributes increases the possibility of tuning out actual malicious activities. To refine suppressions effectively and without losing coverage of any malicious behaviors, consider the following list of common key attributes, categorized by activity types:
 
 ### Process activity
 
@@ -45,7 +45,7 @@ Example combination:
 - `@process.parent.executable.args`
 - `@process.user`
 
-If you decide to suppress on a wide time frame, avoid using processes that have arguments with temporary values because the suppression stops being effective when the value changes.
+When suppressing over a wide time frame, avoid processes that have arguments with temporary values, because the suppression stops being effective when the value changes.
 
 For example, certain programs when rebooting or executing use temporary files (`/tmp`). Building suppressions based on these values isn't effective in the event a similar activity is detected.
 
@@ -72,13 +72,13 @@ Common keys:
   - `@process.parent.executable.path`
   - `@process.user`
 - File:
-  - `@file.path` 
+  - `@file.path`
   - `@file.inode`
   - `@file.mode`
 
 To determine an actual malicious activity while inspecting a signal, validate if the context in which the process is accessing and modifying the file is expected. To avoid suppressing intended behaviors on files across all of your infrastructure, you should always have a combination that gathers all relevant context information from the common keys listed above.
 
-Example combination: 
+Example combination:
   - `@process.args`
   - `@process.executable.path`
   - `@process.user`
@@ -128,9 +128,9 @@ Common keys:
   - `@file.inode`
   - `@file.mode`
 
-Defining a combination for this type of activity is similar to file or process activities, with some additional specificity tied to the system call used for the attack. 
+Defining a combination for this type of activity is similar to file or process activities, with some additional specificity tied to the system call used for the attack.
 
-For example the Dirty Pipe exploitation is a privilege escalation vulnerability. Since it becomes critical if local users escalate their privileges on the system leveraging this attack, it makes sense to suppress noise created from root users running expected processes. 
+For example the Dirty Pipe exploitation is a privilege escalation vulnerability. Since it becomes critical if local users escalate their privileges on the system using this attack, it makes sense to suppress noise created from root users running expected processes.
 - `@process.executable.user`
 - `@process.executable.uid`
 

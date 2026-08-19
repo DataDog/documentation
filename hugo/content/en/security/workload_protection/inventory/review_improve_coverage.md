@@ -19,7 +19,9 @@ Use this order to review coverage across your environment:
 5. Reassess coverage to confirm that your changes took effect.
 6. Record the final state for compliance, audits, incident reference, and future comparison.
 
-The widget at the top of the Coverage page shows the percentage of your resources secured with Workload Protection, along with any findings. Use the widget's buttons to investigate:
+## Coverage widget
+
+The widget at the top of the Coverage page shows the percentage of your resources secured with Workload Protection, along with any findings. Use its buttons to investigate unprotected workloads and outdated or incomplete Agents.
 
 {{< img src="security/workload_protection/coverage_page/coverage_top_widgets.png" alt="Coverage page top widgets showing resource coverage, rule loading status, Workload Protection adoption, and Remote Config deployment" width="100%">}}
 
