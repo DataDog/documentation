@@ -14,6 +14,12 @@ further_reading:
 - link: "/llm_observability/guide/claude_code_skills"
   tag: "Guide"
   text: "Analyze LLM Applications with Claude Code Skills"
+- link: "https://www.datadoghq.com/blog/debug-and-evaluate-your-ai-app-from-your-coding-agent/"
+  tag: "Blog"
+  text: "Debug and evaluate your AI app from your coding agent with Datadog Agent Observability"
+- link: "https://www.datadoghq.com/blog/bits-evals/"
+  tag: "Blog"
+  text: "Improve AI agent quality with Bits Evals"
 ---
 
 ## Overview
@@ -61,7 +67,8 @@ Remote authentication uses the MCP specification's [Streamable HTTP][1] transpor
 **Codex CLI** (`~/.codex/config.toml`):
 
 <pre><code>[mcp_servers.datadog]
-url = "{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core"
+url = "{{< region-param key="mcp_server_endpoint" >}}"
+http_headers = { "X-Datadog-MCP-Toolsets" = "llmobs,core" }
 </code></pre>
 
 After adding the configuration, run `codex mcp login datadog` to complete the OAuth flow.

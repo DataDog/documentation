@@ -521,6 +521,14 @@ components:
       schema:
         example: github
         type: string
+    ExecutionPolicyId:
+      description: The ID of the execution policy.
+      example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      in: path
+      name: policy_id
+      required: true
+      schema:
+        type: string
     FastlyAccountID:
       description: Fastly Account id.
       in: path
@@ -37532,6 +37540,350 @@ components:
           example: "One or several indexes are missing or invalid. Results hold data from the other indexes."
           type: string
       type: object
+    ExecutionPolicyActionPattern:
+      description: The set of actions this policy applies to.
+      properties:
+        action_fqns:
+          description: |-
+            The fully qualified action names this policy matches. Use `*` to match all actions
+            of the integration, or a fully qualified name prefixed with the integration's action
+            namespace (for example `com.datadoghq.script.*` for the Script integration).
+          example:
+            - "com.datadoghq.script.*"
+          items:
+            type: string
+          type: array
+        integration:
+          $ref: "#/components/schemas/ExecutionPolicyIntegration"
+      required:
+        - integration
+        - action_fqns
+      type: object
+    ExecutionPolicyAttributes:
+      description: An execution policy.
+      properties:
+        action_pattern:
+          $ref: "#/components/schemas/ExecutionPolicyActionPattern"
+        created_at:
+          description: The date and time the execution policy was created.
+          example: "2026-01-15T10:00:00.000Z"
+          format: date-time
+          type: string
+        created_by:
+          description: The ID of the user who created the execution policy.
+          example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          type: string
+        effect:
+          $ref: "#/components/schemas/ExecutionPolicyEffect"
+        name:
+          description: The name of the execution policy.
+          example: "Block prod restarts"
+          type: string
+        scope:
+          $ref: "#/components/schemas/ExecutionPolicyScope"
+        targets:
+          description: The targets this policy applies to.
+          items:
+            $ref: "#/components/schemas/ExecutionPolicyTarget"
+          type: array
+        updated_at:
+          description: The date and time the execution policy was last updated.
+          example: "2026-01-15T10:00:00.000Z"
+          format: date-time
+          type: string
+        updated_by:
+          description: The ID of the user who last updated the execution policy.
+          example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          type: string
+        version:
+          description: The version of the execution policy. Incremented on every update.
+          example: 1
+          format: int32
+          maximum: 2147483647
+          type: integer
+      required:
+        - name
+        - effect
+        - action_pattern
+        - targets
+        - version
+        - created_at
+        - updated_at
+        - created_by
+        - updated_by
+      type: object
+    ExecutionPolicyCreateRequest:
+      description: Request object that includes the execution policy to create.
+      properties:
+        data:
+          $ref: "#/components/schemas/ExecutionPolicyCreateRequestData"
+      required:
+        - data
+      type: object
+    ExecutionPolicyCreateRequestData:
+      description: Object for a single execution policy.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExecutionPolicyWriteAttributes"
+        type:
+          $ref: "#/components/schemas/ExecutionPolicyType"
+      required:
+        - type
+        - attributes
+      type: object
+    ExecutionPolicyEffect:
+      description: Whether the policy allows or denies matching actions.
+      enum:
+        - allow
+        - deny
+      example: allow
+      type: string
+      x-enum-varnames:
+        - ALLOW
+        - DENY
+    ExecutionPolicyIntegration:
+      description: The integration the action pattern applies to.
+      enum:
+        - INTEGRATION_KUBERNETES
+        - INTEGRATION_SCRIPT
+        - INTEGRATION_REMOTE_ACTION
+      example: INTEGRATION_SCRIPT
+      type: string
+      x-enum-varnames:
+        - INTEGRATION_KUBERNETES
+        - INTEGRATION_SCRIPT
+        - INTEGRATION_REMOTE_ACTION
+    ExecutionPolicyKubernetesScope:
+      description: Restricts the policy to specific Kubernetes namespaces.
+      properties:
+        rules:
+          description: The Kubernetes scope rules.
+          items:
+            $ref: "#/components/schemas/ExecutionPolicyKubernetesScopeRule"
+          type: array
+      required:
+        - rules
+      type: object
+    ExecutionPolicyKubernetesScopeRule:
+      description: A rule restricting a Kubernetes scope to specific namespaces.
+      properties:
+        target_namespaces:
+          description: The Kubernetes namespaces this rule applies to.
+          example:
+            - "default"
+          items:
+            type: string
+          type: array
+      required:
+        - target_namespaces
+      type: object
+    ExecutionPolicyListResponse:
+      description: Response object that includes a list of execution policies.
+      properties:
+        data:
+          description: The execution policies.
+          items:
+            $ref: "#/components/schemas/ExecutionPolicyResponseData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/ExecutionPolicyListResponseMeta"
+      required:
+        - data
+        - meta
+      type: object
+    ExecutionPolicyListResponseMeta:
+      description: Pagination metadata for the list of execution policies.
+      properties:
+        page:
+          $ref: "#/components/schemas/ExecutionPolicyListResponsePage"
+      required:
+        - page
+      type: object
+    ExecutionPolicyListResponsePage:
+      description: Pagination details.
+      properties:
+        total:
+          description: The total number of execution policies matching the query.
+          example: 1
+          format: int32
+          maximum: 2147483647
+          type: integer
+      required:
+        - total
+      type: object
+    ExecutionPolicyRemoteActionRshellAccess:
+      description: The level of remote shell access granted for the target paths.
+      enum:
+        - read_only
+        - read_write
+      example: read_only
+      type: string
+      x-enum-varnames:
+        - READ_ONLY
+        - READ_WRITE
+    ExecutionPolicyRemoteActionRshellScope:
+      description: Restricts the policy to specific remote shell paths.
+      properties:
+        rules:
+          description: The remote shell scope rules.
+          items:
+            $ref: "#/components/schemas/ExecutionPolicyRemoteActionRshellScopeRule"
+          type: array
+      required:
+        - rules
+      type: object
+    ExecutionPolicyRemoteActionRshellScopeRule:
+      description: A rule restricting remote shell access to specific paths.
+      properties:
+        access:
+          $ref: "#/components/schemas/ExecutionPolicyRemoteActionRshellAccess"
+        target_paths:
+          description: The file system paths this rule applies to.
+          example:
+            - "/var/log"
+          items:
+            type: string
+          type: array
+      required:
+        - target_paths
+        - access
+      type: object
+    ExecutionPolicyResponse:
+      description: Response object that includes a single execution policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/ExecutionPolicyResponseData"
+      required:
+        - data
+      type: object
+    ExecutionPolicyResponseData:
+      description: Object for a single execution policy.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExecutionPolicyAttributes"
+        id:
+          description: The ID of the execution policy.
+          example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/ExecutionPolicyType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ExecutionPolicyScope:
+      description: |-
+        Restricts where the policy applies. At most one of `kubernetes`, `scripts`,
+        or `remote_action_rshell` can be set. An empty object means the policy has
+        no scope restriction.
+      properties:
+        kubernetes:
+          $ref: "#/components/schemas/ExecutionPolicyKubernetesScope"
+        remote_action_rshell:
+          $ref: "#/components/schemas/ExecutionPolicyRemoteActionRshellScope"
+        scripts:
+          $ref: "#/components/schemas/ExecutionPolicyScriptScope"
+      type: object
+    ExecutionPolicyScriptScope:
+      description: Restricts the policy to specific scripts.
+      properties:
+        rules:
+          description: The script scope rules.
+          items:
+            $ref: "#/components/schemas/ExecutionPolicyScriptScopeRule"
+          type: array
+      required:
+        - rules
+      type: object
+    ExecutionPolicyScriptScopeRule:
+      description: A rule restricting a script scope to specific script names.
+      properties:
+        target_script_names:
+          description: The script names this rule applies to.
+          example:
+            - "restart_service.sh"
+          items:
+            type: string
+          type: array
+      required:
+        - target_script_names
+      type: object
+    ExecutionPolicyTarget:
+      description: A target this policy is scoped to, expressed as a set of Agent tags.
+      properties:
+        agent_tags:
+          description: The Agent tags identifying the target.
+          example:
+            - "env:prod"
+          items:
+            type: string
+          type: array
+        name:
+          description: A human-readable name for the target.
+          example: "Production hosts"
+          nullable: true
+          type: string
+      required:
+        - agent_tags
+      type: object
+    ExecutionPolicyType:
+      default: execution_policy
+      description: The type of the resource. The value should always be `execution_policy`.
+      enum:
+        - execution_policy
+      example: execution_policy
+      type: string
+      x-enum-varnames:
+        - EXECUTION_POLICY
+    ExecutionPolicyUpdateRequest:
+      description: Request object that includes the execution policy to update.
+      properties:
+        data:
+          $ref: "#/components/schemas/ExecutionPolicyUpdateRequestData"
+      required:
+        - data
+      type: object
+    ExecutionPolicyUpdateRequestData:
+      description: Object for a single execution policy.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExecutionPolicyWriteAttributes"
+        id:
+          description: The ID of the execution policy.
+          example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          type: string
+        type:
+          $ref: "#/components/schemas/ExecutionPolicyType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ExecutionPolicyWriteAttributes:
+      description: Attributes used to create or update an execution policy.
+      properties:
+        action_pattern:
+          $ref: "#/components/schemas/ExecutionPolicyActionPattern"
+        effect:
+          $ref: "#/components/schemas/ExecutionPolicyEffect"
+        name:
+          description: The name of the execution policy.
+          example: "Block prod restarts"
+          type: string
+        scope:
+          $ref: "#/components/schemas/ExecutionPolicyScope"
+        targets:
+          description: The targets this policy applies to.
+          items:
+            $ref: "#/components/schemas/ExecutionPolicyTarget"
+          type: array
+      required:
+        - name
+        - effect
+        - action_pattern
+      type: object
     ExposureRolloutStepRequest:
       description: Rollout step request payload.
       properties:
@@ -56803,139 +57155,6 @@ components:
           example: "my-gcp-project"
           type: string
       type: object
-    LLMObsDataDeletionRequest:
-      description: Request to delete LLM Observability data.
-      properties:
-        data:
-          $ref: "#/components/schemas/LLMObsDataDeletionRequestData"
-      required:
-        - data
-      type: object
-    LLMObsDataDeletionRequestAttributes:
-      description: Attributes for an LLM Observability data deletion request.
-      properties:
-        delay:
-          description: Optional delay in seconds before the deletion is executed.
-          example: 0
-          format: int64
-          type: integer
-        from:
-          description: Start of the deletion time range in milliseconds since Unix epoch.
-          example: 1705314600000
-          format: int64
-          type: integer
-        query:
-          additionalProperties:
-            type: string
-          description: Query filters selecting the data to delete. Must include a `query` key with an `@trace_id` filter.
-          example:
-            query: "@trace_id:abc123def456"
-          type: object
-        to:
-          description: End of the deletion time range in milliseconds since Unix epoch.
-          example: 1705315200000
-          format: int64
-          type: integer
-      required:
-        - query
-        - from
-        - to
-      type: object
-    LLMObsDataDeletionRequestData:
-      description: Data object for an LLM Observability data deletion request.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/LLMObsDataDeletionRequestAttributes"
-        type:
-          $ref: "#/components/schemas/LLMObsDataDeletionRequestType"
-      required:
-        - type
-        - attributes
-      type: object
-    LLMObsDataDeletionRequestType:
-      description: Resource type for an LLM Observability data deletion request.
-      enum:
-        - create_deletion_req
-      example: create_deletion_req
-      type: string
-      x-enum-varnames:
-        - CREATE_DELETION_REQ
-    LLMObsDataDeletionResponse:
-      description: Response containing details of a submitted LLM Observability data deletion request.
-      properties:
-        data:
-          $ref: "#/components/schemas/LLMObsDataDeletionResponseData"
-      required:
-        - data
-      type: object
-    LLMObsDataDeletionResponseAttributes:
-      description: Attributes of a submitted LLM Observability data deletion request.
-      properties:
-        created_at:
-          description: Timestamp when the deletion request was created.
-          example: "2024-01-15T10:30:00Z"
-          format: date-time
-          type: string
-        created_by:
-          description: UUID of the user who created the deletion request.
-          example: "user-uuid-1234"
-          type: string
-        from_time:
-          description: Start of the deletion time range in milliseconds since Unix epoch.
-          example: 1705314600000
-          format: int64
-          type: integer
-        org_id:
-          description: ID of the organization that submitted the deletion request.
-          example: 12345
-          format: int64
-          type: integer
-        product:
-          description: Product name for the deletion request.
-          example: "llmobs"
-          type: string
-        query:
-          description: The query string used to select data for deletion.
-          example: "@trace_id:abc123def456"
-          type: string
-        to_time:
-          description: End of the deletion time range in milliseconds since Unix epoch.
-          example: 1705315200000
-          format: int64
-          type: integer
-      required:
-        - org_id
-        - product
-        - created_at
-        - created_by
-        - from_time
-        - to_time
-        - query
-      type: object
-    LLMObsDataDeletionResponseData:
-      description: Data object for an LLM Observability data deletion response.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/LLMObsDataDeletionResponseAttributes"
-        id:
-          description: Unique identifier of the deletion request.
-          example: "msg-abc123"
-          type: string
-        type:
-          $ref: "#/components/schemas/LLMObsDataDeletionResponseType"
-      required:
-        - id
-        - type
-        - attributes
-      type: object
-    LLMObsDataDeletionResponseType:
-      description: Resource type for an LLM Observability data deletion response.
-      enum:
-        - deletion_request
-      example: deletion_request
-      type: string
-      x-enum-varnames:
-        - DELETION_REQUEST
     LLMObsDatasetBatchUpdateDataAttributesRequest:
       description: Attributes for batch-updating records in an LLM Observability dataset.
       properties:
@@ -68996,6 +69215,8 @@ components:
       additionalProperties: false
       description: Attributes of the monitor notification rule.
       properties:
+        bundle_config:
+          $ref: "#/components/schemas/MonitorNotificationRuleBundleConfig"
         conditional_recipients:
           $ref: "#/components/schemas/MonitorNotificationRuleConditionalRecipients"
         filter:
@@ -69005,6 +69226,19 @@ components:
         recipients:
           $ref: "#/components/schemas/MonitorNotificationRuleRecipients"
       required: [name]
+      type: object
+    MonitorNotificationRuleBundleConfig:
+      description: |-
+        Use bundle config to enable alert bundling to reduce monitor signal noises. **Note**: This feature is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+      properties:
+        duration:
+          description: Duration of the bundling period.
+          example: 3600
+          format: int32
+          maximum: 2147483647
+          type: integer
+      required: [duration]
       type: object
     MonitorNotificationRuleCondition:
       description: |-
@@ -69188,6 +69422,8 @@ components:
       additionalProperties: {}
       description: Attributes of the monitor notification rule.
       properties:
+        bundle_config:
+          $ref: "#/components/schemas/MonitorNotificationRuleBundleConfig"
         conditional_recipients:
           $ref: "#/components/schemas/MonitorNotificationRuleConditionalRecipients"
         created:
@@ -121578,7 +121814,7 @@ paths:
       summary: List custom evaluator configurations
       tags:
         - LLM Observability
-      x-menu-order: 73
+      x-menu-order: 72
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -122802,6 +123038,405 @@ paths:
       tags:
         - Action Connection
       x-menu-order: 3
+  /api/v2/actions/execution-policies:
+    get:
+      description: Retrieve a list of execution policies for the current organization.
+      operationId: ListExecutionPolicies
+      parameters:
+        - description: The number of execution policies to return per page.
+          example: 100
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 100
+            format: int32
+            maximum: 100
+            type: integer
+        - description: The page number to return.
+          example: 0
+          in: query
+          name: page[number]
+          required: false
+          schema:
+            default: 0
+            format: int32
+            maximum: 1000
+            minimum: 0
+            type: integer
+        - description: Filter execution policies by name.
+          example: "Block prod restarts"
+          in: query
+          name: filter[name]
+          required: false
+          schema:
+            type: string
+        - description: Filter execution policies by a list of IDs.
+          example:
+            - "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          explode: true
+          in: query
+          name: filter[ids]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - description: Filter execution policies by a list of integrations.
+          example:
+            - INTEGRATION_SCRIPT
+          explode: true
+          in: query
+          name: filter[integration]
+          required: false
+          schema:
+            items:
+              $ref: "#/components/schemas/ExecutionPolicyIntegration"
+            type: array
+          style: form
+        - description: Filter execution policies by a list of effects.
+          example:
+            - allow
+          explode: true
+          in: query
+          name: filter[effects]
+          required: false
+          schema:
+            items:
+              $ref: "#/components/schemas/ExecutionPolicyEffect"
+            type: array
+          style: form
+        - description: Filter execution policies by a list of creator IDs.
+          example:
+            - "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          explode: true
+          in: query
+          name: filter[creator_ids]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - description: |-
+            The sort order for the results. Prefix a field with `-` to sort in
+            descending order. Valid fields are `name`, `effect`, `integration`,
+            `created_at`, and `updated_at`.
+          example:
+            - "-created_at"
+          explode: true
+          in: query
+          name: sort
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          action_pattern:
+                            action_fqns:
+                              - "com.datadoghq.script.*"
+                            integration: INTEGRATION_SCRIPT
+                          created_at: "2026-01-15T10:00:00.000Z"
+                          created_by: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                          effect: allow
+                          name: "Block prod restarts"
+                          targets: []
+                          updated_at: "2026-01-15T10:00:00.000Z"
+                          updated_by: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                          version: 1
+                        id: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        type: execution_policy
+                    meta:
+                      page:
+                        total: 1
+              schema:
+                $ref: "#/components/schemas/ExecutionPolicyListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List execution policies
+      tags:
+        - Execution Policy
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+          - execution_groups_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a new execution policy.
+      operationId: CreateExecutionPolicy
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      action_pattern:
+                        action_fqns:
+                          - "com.datadoghq.script.*"
+                        integration: INTEGRATION_SCRIPT
+                      effect: allow
+                      name: "Block prod restarts"
+                    type: execution_policy
+            schema:
+              $ref: "#/components/schemas/ExecutionPolicyCreateRequest"
+        description: The execution policy to create.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action_pattern:
+                          action_fqns:
+                            - "com.datadoghq.script.*"
+                          integration: INTEGRATION_SCRIPT
+                        created_at: "2026-01-15T10:00:00.000Z"
+                        created_by: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        effect: allow
+                        name: "Block prod restarts"
+                        targets: []
+                        updated_at: "2026-01-15T10:00:00.000Z"
+                        updated_by: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        version: 1
+                      id: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                      type: execution_policy
+              schema:
+                $ref: "#/components/schemas/ExecutionPolicyResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create an execution policy
+      tags:
+        - Execution Policy
+      x-codegen-request-body-name: body
+      x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+          - execution_groups_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/actions/execution-policies/{policy_id}:
+    delete:
+      description: Delete a specific execution policy.
+      operationId: DeleteExecutionPolicy
+      parameters:
+        - $ref: "#/components/parameters/ExecutionPolicyId"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an execution policy
+      tags:
+        - Execution Policy
+      x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+          - execution_groups_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Retrieve an existing execution policy by ID.
+      operationId: GetExecutionPolicy
+      parameters:
+        - $ref: "#/components/parameters/ExecutionPolicyId"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action_pattern:
+                          action_fqns:
+                            - "com.datadoghq.script.*"
+                          integration: INTEGRATION_SCRIPT
+                        created_at: "2026-01-15T10:00:00.000Z"
+                        created_by: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        effect: allow
+                        name: "Block prod restarts"
+                        targets: []
+                        updated_at: "2026-01-15T10:00:00.000Z"
+                        updated_by: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        version: 1
+                      id: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                      type: execution_policy
+              schema:
+                $ref: "#/components/schemas/ExecutionPolicyResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get an execution policy
+      tags:
+        - Execution Policy
+      x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+          - execution_groups_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    put:
+      description: |-
+        Update an existing execution policy.
+        Returns the execution policy object when the request is successful.
+      operationId: UpdateExecutionPolicy
+      parameters:
+        - $ref: "#/components/parameters/ExecutionPolicyId"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      action_pattern:
+                        action_fqns:
+                          - "com.datadoghq.script.*"
+                        integration: INTEGRATION_SCRIPT
+                      effect: allow
+                      name: "Block prod restarts"
+                    id: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                    type: execution_policy
+            schema:
+              $ref: "#/components/schemas/ExecutionPolicyUpdateRequest"
+        description: The new execution policy.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action_pattern:
+                          action_fqns:
+                            - "com.datadoghq.script.*"
+                          integration: INTEGRATION_SCRIPT
+                        created_at: "2026-01-15T10:00:00.000Z"
+                        created_by: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        effect: allow
+                        name: "Block prod restarts"
+                        targets: []
+                        updated_at: "2026-01-15T10:00:00.000Z"
+                        updated_by: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        version: 2
+                      id: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                      type: execution_policy
+              schema:
+                $ref: "#/components/schemas/ExecutionPolicyResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update an execution policy
+      tags:
+        - Execution Policy
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+          - execution_groups_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/agentless_scanning/accounts/aws:
     get:
       description: Fetches the scan options configured for AWS accounts.
@@ -160137,78 +160772,6 @@ paths:
         operator: OR
         permissions:
           - org_management
-  /api/v2/llm-obs/deletion/data/llmobs:
-    post:
-      description: Submit a request to delete LLM Observability span data matching a trace ID filter within a specified time range.
-      operationId: DeleteLLMObsData
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      from: 1705314600000
-                      query:
-                        query: "@trace_id:abc123def456"
-                      to: 1705315200000
-                    type: create_deletion_req
-            schema:
-              $ref: "#/components/schemas/LLMObsDataDeletionRequest"
-        description: Data deletion request payload.
-        required: true
-      responses:
-        "202":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        created_at: "2024-01-15T10:30:00Z"
-                        created_by: "user-uuid-1234"
-                        from_time: 1705314600000
-                        org_id: 12345
-                        product: llmobs
-                        query: "@trace_id:abc123def456"
-                        to_time: 1705315200000
-                      id: msg-abc123
-                      type: deletion_request
-              schema:
-                $ref: "#/components/schemas/LLMObsDataDeletionResponse"
-          description: Accepted
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-      summary: Delete LLM Observability data
-      tags:
-        - LLM Observability
-      x-menu-order: 36
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/annotated-interactions:
     get:
       description: |-
@@ -160307,7 +160870,7 @@ paths:
       summary: Get annotated interactions by content IDs
       tags:
         - LLM Observability
-      x-menu-order: 40
+      x-menu-order: 39
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -161084,7 +161647,7 @@ paths:
       summary: Get annotation queue label schema
       tags:
         - LLM Observability
-      x-menu-order: 52
+      x-menu-order: 51
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -161230,7 +161793,7 @@ paths:
       summary: Update annotation queue label schema
       tags:
         - LLM Observability
-      x-menu-order: 53
+      x-menu-order: 52
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -161941,7 +162504,7 @@ paths:
       summary: List LLM Observability experiment spans (v1)
       tags:
         - LLM Observability
-      x-menu-order: 50
+      x-menu-order: 49
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -162066,7 +162629,7 @@ paths:
       summary: List LLM integration accounts
       tags:
         - LLM Observability
-      x-menu-order: 37
+      x-menu-order: 36
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -162151,7 +162714,7 @@ paths:
       summary: Run an LLM inference
       tags:
         - LLM Observability
-      x-menu-order: 39
+      x-menu-order: 38
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -162209,7 +162772,7 @@ paths:
       summary: List LLM integration models
       tags:
         - LLM Observability
-      x-menu-order: 38
+      x-menu-order: 37
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -162548,7 +163111,7 @@ paths:
       summary: List LLM Observability prompts
       tags:
         - LLM Observability
-      x-menu-order: 64
+      x-menu-order: 63
       x-permission:
         operator: OR
         permissions:
@@ -162636,7 +163199,7 @@ paths:
       summary: Create an LLM Observability prompt
       tags:
         - LLM Observability
-      x-menu-order: 65
+      x-menu-order: 64
       x-permission:
         operator: AND
         permissions:
@@ -162697,7 +163260,7 @@ paths:
       summary: Delete an LLM Observability prompt
       tags:
         - LLM Observability
-      x-menu-order: 68
+      x-menu-order: 67
       x-permission:
         operator: AND
         permissions:
@@ -162763,7 +163326,7 @@ paths:
       summary: Get an LLM Observability prompt
       tags:
         - LLM Observability
-      x-menu-order: 66
+      x-menu-order: 65
       x-permission:
         operator: OR
         permissions:
@@ -162847,7 +163410,7 @@ paths:
       summary: Update an LLM Observability prompt
       tags:
         - LLM Observability
-      x-menu-order: 67
+      x-menu-order: 66
       x-permission:
         operator: AND
         permissions:
@@ -162917,7 +163480,7 @@ paths:
       summary: List versions of an LLM Observability prompt
       tags:
         - LLM Observability
-      x-menu-order: 69
+      x-menu-order: 68
       x-permission:
         operator: OR
         permissions:
@@ -163007,7 +163570,7 @@ paths:
       summary: Create a new LLM Observability prompt version
       tags:
         - LLM Observability
-      x-menu-order: 70
+      x-menu-order: 69
       x-permission:
         operator: AND
         permissions:
@@ -163084,7 +163647,7 @@ paths:
       summary: Get a specific LLM Observability prompt version
       tags:
         - LLM Observability
-      x-menu-order: 71
+      x-menu-order: 70
       x-permission:
         operator: OR
         permissions:
@@ -163171,7 +163734,7 @@ paths:
       summary: Update a specific LLM Observability prompt version
       tags:
         - LLM Observability
-      x-menu-order: 72
+      x-menu-order: 71
       x-permission:
         operator: AND
         permissions:
@@ -163508,7 +164071,7 @@ paths:
       summary: List patterns clustered points
       tags:
         - LLM Observability
-      x-menu-order: 60
+      x-menu-order: 59
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163572,7 +164135,7 @@ paths:
       summary: List patterns configurations
       tags:
         - LLM Observability
-      x-menu-order: 63
+      x-menu-order: 62
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163657,7 +164220,7 @@ paths:
       summary: Create or update a patterns configuration
       tags:
         - LLM Observability
-      x-menu-order: 54
+      x-menu-order: 53
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163725,7 +164288,7 @@ paths:
       summary: Get a patterns configuration
       tags:
         - LLM Observability
-      x-menu-order: 62
+      x-menu-order: 61
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163776,7 +164339,7 @@ paths:
       summary: Delete a patterns configuration
       tags:
         - LLM Observability
-      x-menu-order: 55
+      x-menu-order: 54
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163843,7 +164406,7 @@ paths:
       summary: List patterns runs
       tags:
         - LLM Observability
-      x-menu-order: 58
+      x-menu-order: 57
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163919,7 +164482,7 @@ paths:
       summary: Trigger a patterns run
       tags:
         - LLM Observability
-      x-menu-order: 56
+      x-menu-order: 55
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -163993,7 +164556,7 @@ paths:
       summary: Get patterns run status
       tags:
         - LLM Observability
-      x-menu-order: 57
+      x-menu-order: 56
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -164074,7 +164637,7 @@ paths:
       summary: List patterns topics
       tags:
         - LLM Observability
-      x-menu-order: 59
+      x-menu-order: 58
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -164167,7 +164730,7 @@ paths:
       summary: List patterns topics with clustered points
       tags:
         - LLM Observability
-      x-menu-order: 61
+      x-menu-order: 60
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -164595,7 +165158,7 @@ paths:
       summary: Batch update LLM Observability dataset records
       tags:
         - LLM Observability
-      x-menu-order: 46
+      x-menu-order: 45
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -164692,7 +165255,7 @@ paths:
       summary: Clone an LLM Observability dataset
       tags:
         - LLM Observability
-      x-menu-order: 47
+      x-menu-order: 46
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -164773,7 +165336,7 @@ paths:
       summary: Get LLM Observability dataset draft state
       tags:
         - LLM Observability
-      x-menu-order: 41
+      x-menu-order: 40
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -164854,7 +165417,7 @@ paths:
       summary: Lock LLM Observability dataset draft state
       tags:
         - LLM Observability
-      x-menu-order: 42
+      x-menu-order: 41
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -164918,7 +165481,7 @@ paths:
       summary: Unlock LLM Observability dataset draft state
       tags:
         - LLM Observability
-      x-menu-order: 43
+      x-menu-order: 42
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -165001,7 +165564,7 @@ paths:
       summary: Export an LLM Observability dataset
       tags:
         - LLM Observability
-      x-menu-order: 45
+      x-menu-order: 44
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -165394,7 +165957,7 @@ paths:
       summary: Restore an LLM Observability dataset version
       tags:
         - LLM Observability
-      x-menu-order: 48
+      x-menu-order: 47
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -165478,7 +166041,7 @@ paths:
       summary: List LLM Observability dataset versions
       tags:
         - LLM Observability
-      x-menu-order: 44
+      x-menu-order: 43
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -165553,7 +166116,7 @@ paths:
       summary: List LLM Observability experiment events (v2)
       tags:
         - LLM Observability
-      x-menu-order: 51
+      x-menu-order: 50
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -165659,7 +166222,7 @@ paths:
       summary: Upload records to an LLM Observability dataset
       tags:
         - LLM Observability
-      x-menu-order: 49
+      x-menu-order: 48
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -192983,7 +193546,7 @@ paths:
                   data:
                     attributes:
                       enabled: true
-                      name: Rule 1
+                      name: Rule <UUID>
                       selectors:
                         query: (source:production_service OR env:prod)
                         rule_types:
@@ -193167,7 +193730,7 @@ paths:
                   data:
                     attributes:
                       enabled: true
-                      name: Rule 1
+                      name: Rule <UUID>
                       selectors:
                         query: (source:production_service OR env:prod)
                         rule_types:
@@ -193813,7 +194376,7 @@ paths:
                   data:
                     attributes:
                       enabled: true
-                      name: Rule 1
+                      name: Rule <UUID>
                       selectors:
                         query: (source:production_service OR env:prod)
                         rule_types:
@@ -193999,7 +194562,7 @@ paths:
                   data:
                     attributes:
                       enabled: true
-                      name: Rule 1
+                      name: Rule <UUID>
                       selectors:
                         query: (source:production_service OR env:prod)
                         rule_types:
@@ -217028,6 +217591,12 @@ tags:
 
       **Update to Datadog monitor events `aggregation_key` starting March 1, 2025:** The Datadog monitor events `aggregation_key` is unique to each Monitor ID. Starting March 1st, this key will also include Monitor Group, making it unique per *Monitor ID and Monitor Group*. If you're using monitor events `aggregation_key` in dashboard queries or the Event API, you must migrate to use `@monitor.id`. Reach out to [support](https://www.datadoghq.com/support/) if you have any question.
     name: Events
+  - description: |-
+      Execution policies control which actions Datadog Action Platform is allowed to run
+      against your infrastructure, and where. Each policy pairs an effect (allow or deny)
+      with a pattern of actions, and can scope that decision to specific Kubernetes
+      namespaces, scripts, or remote shell paths.
+    name: Execution Policy
   - description: |-
       Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information.
     name: Fastly Integration

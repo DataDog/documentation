@@ -283,23 +283,6 @@
               dependencies: ["https://github.com/DataDog/datadog-cdk-constructs/blob/main/README.md"]
               title: Datadog CDK Construct
 
-      - repo_name: datadog-lambda-extension
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - 'README.md'
-          options:
-            dest_path: '/serverless/libraries_integrations/'
-            file_name: 'extension.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md"]
-              title: Datadog Lambda Extension
-              algolia:
-                tags: ['datadog lambda extension']
-              aliases:
-                - /serverless/datadog_lambda_library/extension
-
       - repo_name: datadog-ci-azure-devops
         contents:
         - action: pull-and-push-file

@@ -84,6 +84,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/opentelemetry %}}
 
 {{% /tab %}}
+{{% tab "Prometheus" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/prometheus %}}
+
+{{% /tab %}}
 {{% tab "Socket" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/socket %}}
@@ -201,9 +206,20 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
 
 {{% /tab %}}
-{{% tab "OpenTelemetry Traces" %}}
+{{% tab "OpenTelemetry" %}}
+
+**Metrics**
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_metrics %}}
+
+**Traces**
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_traces %}}
+
+{{% /tab %}}
+{{% tab "Prometheus" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/prometheus %}}
 
 {{% /tab %}}
 {{% tab "SentinelOne" %}}
