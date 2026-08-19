@@ -27,8 +27,6 @@ further_reading:
 
 Use the [Tag Explorer][2] to understand the sources and view descriptions for each tag. This includes tags managed through [Tag Pipelines][3]. Tag Pipelines allow you to create and manage tag rules that fix missing or incorrect tags on your cloud bill, or create inferred tags according to your business logic.
 
-{{< img src="cloud_cost/tag_explorer/aws_2.png" alt="The Tag Explorer listing AWS cost tags with their sources, descriptions, cost coverage, and distinct values" style="width:100%;" >}}
-
 ## Setup
 
 To use the Tag Explorer, you must configure [Cloud Cost Management][1] for AWS, Azure, Google Cloud, or Oracle Cloud.
@@ -45,9 +43,25 @@ See the respective documentation for your cloud provider:
 
 Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Analyze{{< /ui >}} > {{< ui >}}Tags{{< /ui >}}][2] to search tags from your cloud provider bills, [Custom Costs][4], [Datadog costs][5], [SaaS cost integrations][6], and [Tag Pipelines][3].
 
-To see the tags for one provider, select it from the {{< ui >}}Provider{{< /ui >}} dropdown menu in the top left corner. AWS, Azure, Google Cloud, and Oracle Cloud are available, along with each SaaS cost integration you have configured. Use the {{< ui >}}Tag Sources{{< /ui >}} panel to narrow the results further by where each tag originates.
+To see the tags for one provider, select it from the {{< ui >}}Provider{{< /ui >}} dropdown menu in the top left corner. Use the {{< ui >}}Tag Sources{{< /ui >}} panel to narrow the results further by where each tag originates.
 
-<div class="alert alert-danger">Datadog, Confluent Cloud, Databricks, Elastic Cloud, Fastly, MongoDB, OpenAI, Snowflake, and Twilio costs are in Preview.</div>
+Tags are available for the following providers:
+
+- AWS
+- Azure
+- Confluent Cloud\*
+- Databricks\*
+- Datadog\*
+- Elastic Cloud\*
+- Fastly\*
+- Google Cloud
+- MongoDB\*
+- OpenAI\*
+- Oracle Cloud
+- Snowflake\*
+- Twilio\*
+
+\* Costs for this provider are in Preview.
 
 ## Set preferred tags
 You can set up to five preferred tags to highlight your organization's most important tags throughout Cloud Cost Management. These tags appear first when selecting tags in the [Explorer page][7], [CCM Reports][8], and [Custom Allocation Rules][9], among other areas.
