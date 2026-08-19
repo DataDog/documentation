@@ -1,6 +1,7 @@
 ---
 title: Goal-Based Testing
 description: Verify that users can complete a goal in your application with prompted, non-deterministic, agentic Synthetic tests.
+private: true
 further_reading:
 - link: "/synthetics/bits_testing/"
   tag: "Documentation"

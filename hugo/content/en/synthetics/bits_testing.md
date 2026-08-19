@@ -1,6 +1,7 @@
 ---
 title: Bits Testing
 description: Use Bits Testing, an AI agent that explores your application to map critical user journeys and generate covering Synthetic tests.
+private: true
 further_reading:
 - link: "/synthetics/goal_based_testing/"
   tag: "Documentation"
