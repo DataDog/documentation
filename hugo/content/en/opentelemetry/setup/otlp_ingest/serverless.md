@@ -214,4 +214,4 @@ The GCP Resource Detector SDK automatically populates: `cloud.account.id`, `clou
 [3]: /opentelemetry/setup/otlp_ingest/logs/
 [4]: /opentelemetry/setup/otlp_ingest/metrics/
 [5]: /opentelemetry/setup/otlp_ingest/managed_platforms/
-[6]: /opentelemetry/config/hostname_tagging/#direct-otlp-intake-without-a-host
+[6]: /opentelemetry/config/hostname_tagging/#direct-otlp-intake-without-an-agent-or-collector

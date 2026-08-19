@@ -1373,4 +1373,4 @@ To view your gateway pods:
 [9]: http://github.com/kubernetes-sigs/metrics-server
 [10]: /containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/datadogextension
-[12]: /opentelemetry/config/hostname_tagging/#node-level-collector-sending-to-a-gateway
+[12]: /opentelemetry/config/hostname_tagging/#collector-exporting-through-a-gateway

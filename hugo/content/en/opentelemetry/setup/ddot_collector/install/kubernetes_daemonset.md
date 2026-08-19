@@ -976,4 +976,4 @@ View metrics from the DDOT Collector to monitor the Collector health.
 [55]: /containers/datadog_operator
 [56]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [57]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog-operator/README.md
-[58]: /opentelemetry/config/hostname_tagging/#agent-or-ddot-collector-on-the-same-host-as-your-workload
+[58]: /opentelemetry/config/hostname_tagging/#ddot-collector-exporting-directly-to-datadog

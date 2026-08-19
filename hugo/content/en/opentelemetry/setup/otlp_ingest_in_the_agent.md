@@ -394,4 +394,4 @@ env:
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
 [6]: /agent/configuration/agent-configuration-files/
 [10]: /opentelemetry/runtime_metrics/
-[11]: /opentelemetry/config/hostname_tagging/#agent-or-ddot-collector-on-the-same-host-as-your-workload
+[11]: /opentelemetry/config/hostname_tagging/#otlp-ingestion-by-the-datadog-agent

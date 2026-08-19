@@ -122,4 +122,4 @@ Sampling controls available in the Collector (tail-based sampling, probabilistic
 [15]: https://docs.mulesoft.com/monitoring/telemetry-exporter
 [16]: https://docs.retool.com/apps/guides/observability/performance-monitoring
 [17]: https://vercel.com/marketplace/datadog
-[18]: /opentelemetry/config/hostname_tagging/#direct-otlp-intake-without-a-host
+[18]: /opentelemetry/config/hostname_tagging/#direct-otlp-intake-without-an-agent-or-collector
