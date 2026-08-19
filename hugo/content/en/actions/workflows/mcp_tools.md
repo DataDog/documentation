@@ -56,10 +56,14 @@ The `workflows` toolset exposes the following tools, grouped by the part of the 
 
 ### Workflow discovery
 
+Use these tools to check what already exists, such as finding whether a workflow already escalates the on-call team when a critical incident is declared, before you build a new one.
+
 - [`list_datadog_workflows`][6]
 - [`get_datadog_workflow`][7]
 
 ### Specification and action discovery
+
+Use these tools to find the building blocks for that workflow: pull the specification schema needed to write it, then search the action catalog for a step such as the Run Agent action or a remediation action like restarting a service.
 
 - [`get_datadog_workflow_spec_schema`][8]
 - [`search_datadog_workflow_actions`][9]
@@ -67,15 +71,21 @@ The `workflows` toolset exposes the following tools, grouped by the part of the 
 
 ### Workflow creation and management
 
+Use these tools to build or update the workflow with those pieces, for example so a monitor alert triggers the custom agent's investigation, then automatically escalates and pages the right team.
+
 - [`create_datadog_workflow`][11]
 - [`update_datadog_workflow`][12]
 - [`delete_datadog_workflow`][13]
 
 ### Workflow validation
 
+Use this tool to check that the updated specification is structurally valid before you create or publish it, catching errors early even though it doesn't verify credentials, permissions, or third-party runtime behavior.
+
 - [`validate_datadog_workflow`][14]
 
 ### Workflow execution
+
+Use these tools to run the workflow on demand and track it, such as triggering it with the invocation context "investigating a checkout-api deployment regression," then checking its status or canceling the run if it's no longer needed.
 
 - [`execute_datadog_workflow`][15]
 - [`get_datadog_workflow_instance`][16]
@@ -83,6 +93,8 @@ The `workflows` toolset exposes the following tools, grouped by the part of the 
 - [`cancel_datadog_workflow_instance`][18]
 
 ### Execution debugging
+
+Use this tool to step through that run, such as tracing why a high-severity security finding didn't page the expected on-call responder.
 
 - [`get_datadog_workflow_step_data`][19]
 
