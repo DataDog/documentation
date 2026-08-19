@@ -1,5 +1,6 @@
 ---
 title: Setting up Workload Protection on AWS Fargate
+description: Enable Workload Protection on AWS Fargate ECS and EKS workloads.
 aliases:
   - /security/workload_protection/guide/ebpf-free-agent
 disable_toc: false

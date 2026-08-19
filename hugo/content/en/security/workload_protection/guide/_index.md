@@ -1,5 +1,6 @@
 ---
 title: Workload Protection Guides
+description: End-to-end guides for tuning Workload Protection signals and dual shipping data to multiple Datadog organizations.
 disable_toc: true
 further_reading:
 - link: "https://learn.datadoghq.com/courses/workload-protection-enable-manage"

@@ -1,5 +1,6 @@
 ---
 title: Detect and Monitor
+description: Understand the Agent rules, detection rules, finding rules, threat intelligence, and Content Packs that Workload Protection uses to detect threats.
 aliases:
   - /security/workload_protection/workload_security_rules
   - /security/threats/workload_security_rules
@@ -7,8 +8,6 @@ aliases:
   - /security_platform/cloud_workload_security/workload_security_rules
 disable_toc: false
 ---
-
-## Overview
 
 Workload Protection evaluates your workload activity against several kinds of rules. Together they detect threats, assess your runtime security posture, and provide granular audit capabilities. Agent rules select which activity reaches Datadog. Detection rules and finding rules analyze that activity. Threat intelligence enriches it with reputation context, and Content Packs bundle optional rules for specific software stacks and threat vectors.
 

@@ -1,5 +1,6 @@
 ---
 title: Setting up Workload Protection on Kubernetes
+description: Enable Workload Protection on Kubernetes with the Datadog Operator, Helm, or a DaemonSet.
 aliases:
   - /security/workload_protection/setup/agent/kubernetes
 disable_toc: false

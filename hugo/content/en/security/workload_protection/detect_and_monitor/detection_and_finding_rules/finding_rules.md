@@ -1,5 +1,6 @@
 ---
 title: Finding Rules
+description: Create and manage the backend rules that evaluate your runtime security posture and generate Workload Protection findings.
 disable_toc: false
 aliases:
   - /security/workload_protection/detect_and_monitor/finding_rules
@@ -14,8 +15,6 @@ further_reading:
     tag: "Documentation"
     text: "Detection rules"
 ---
-
-## Overview
 
 Finding rules describe the backend logic used to evaluate your runtime security posture by analyzing [Agent events][1]. When a finding rule matches, Workload Protection generates a [finding][2] for the affected resource.
 
@@ -35,7 +34,7 @@ To reduce noise for expected configurations, use a findings automation to mute a
 
 Custom finding rules follow the same creation process as [detection rules][3], with one key difference: they target a specific resource type—host or container—rather than detecting a point-in-time event.
 
-To create a custom finding rule, go to the Workload Protection [finding rules][6] page and click **New Rule**.
+To create a custom finding rule, go to the Workload Protection [finding rules][6] page and click {{< ui >}}New Rule{{< /ui >}}.
 
 The rule editor walks you through five steps.
 
@@ -43,8 +42,8 @@ The rule editor walks you through five steps.
 
 Select the type of resource the finding rule evaluates:
 
-- **Host**: The rule applies to hosts. Workload Protection automatically prepends `-@container.id:*` to your query to exclude container events.
-- **Container**: The rule applies to containers. Workload Protection automatically prepends `@container.id:*` to your query to include only container events.
+- {{< ui >}}Host{{< /ui >}}: The rule applies to hosts. Workload Protection automatically prepends `-@container.id:*` to your query to exclude container events.
+- {{< ui >}}Container{{< /ui >}}: The rule applies to containers. Workload Protection automatically prepends `@container.id:*` to your query to include only container events.
 
 {{< img src="security/workload_protection/detect_and_monitor/finding_rules_editor.png" alt="Finding rule editor showing the Host and Container resource type selector and search query preview" width="100%">}}
 
@@ -55,7 +54,7 @@ You can:
 - Filter on **specific fields** in Agent events to refine the query and make the finding more precise. For example, filter on `@process.executable.path`, `@file.path`, or `@agent.rule_id`. Similar to [detection rules][3], finding rules can query any field from the backend event schema, which includes all Agent event fields plus additional enrichment such as infrastructure context, process ancestry, and threat intelligence. See [Linux backend syntax][9] and [Windows backend syntax][10] for the full set of available fields.
 - Combine multiple conditions to scope the rule to a subset of your infrastructure or workloads.
 
-Use the [Agent Events explorer][5] to test your query and validate which events match before you publish the rule.
+Use the [Agent Events Explorer][5] to test your query and validate which events match before you publish the rule.
 
 ### Step 2: Define finding severity
 
@@ -65,9 +64,9 @@ Define the severity a finding has when the rule is triggered.
 
 Configure the **name**, **description**, and **remediation guidance** that appear when a finding is generated.
 
-1. Enter a **Rule name**. The name appears in the finding rules list and becomes the title of the generated finding.
-2. In the **Rule message** section, use Markdown to describe what the finding means and how to address it. Include a `## Remediation` header in the message body—Workload Protection uses this section to surface remediation steps directly in the finding side panel.
-3. Use the **Tag resulting findings** dropdown to add tags to generated findings. For example, `security:posture` or `compliance:pci`.
+1. Enter a {{< ui >}}Rule name{{< /ui >}}. The name appears in the finding rules list and becomes the title of the generated finding.
+2. In the {{< ui >}}Rule message{{< /ui >}} section, use Markdown to describe what the finding means and how to address it. Include a `## Remediation` header in the message body—Workload Protection uses this section to surface remediation steps directly in the finding side panel.
+3. Use the {{< ui >}}Tag resulting findings{{< /ui >}} dropdown to add tags to generated findings. For example, `security:posture` or `compliance:pci`.
 
 **Note**: The `## Remediation` header is required for remediation steps to display correctly in the finding side panel.
 

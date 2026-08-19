@@ -27,15 +27,15 @@ To identify and address coverage gaps, see [Review and Improve Coverage][6].
 
 Coverage has two views. Use the toggle at the top of the page to switch between them:
 
-- **Explorer**: A faceted table of your resources. Search and filter resources by **Agent**, **Rule**, **Policy**, **Infrastructure**, and **Container** facets, then open a resource to inspect its Agent rules and policy deployment status.
+- {{< ui >}}Explorer{{< /ui >}}: A faceted table of your resources. Search and filter resources by {{< ui >}}Agent{{< /ui >}}, {{< ui >}}Rule{{< /ui >}}, {{< ui >}}Policy{{< /ui >}}, {{< ui >}}Infrastructure{{< /ui >}}, and {{< ui >}}Container{{< /ui >}} facets, then open a resource to inspect its Agent rules and policy deployment status.
 
-- **Map**: A visual map where each resource appears as a hexagon colored by its coverage status severity.
+- {{< ui >}}Map{{< /ui >}}: A visual map where each resource appears as a hexagon colored by its coverage status severity.
 
 {{< img src="security/workload_protection/coverage_page/coverage_map.png" alt="Map view of the Coverage page showing resources as hexagons colored by coverage status" width="100%">}}
 
 In both views, you can:
 
-- **Group by** Cloud Provider, OS, Agent Version, Severity, or Kubernetes Cluster.
+- {{< ui >}}Group by{{< /ui >}} Cloud Provider, OS, Agent Version, Severity, or Kubernetes Cluster.
 - Refresh the view on demand.
 
 A resource appears in Coverage as soon as its Agent loads its ruleset. When a resource goes offline, it is removed from Coverage within 15 minutes.
@@ -57,16 +57,16 @@ In the Map view, resources are displayed as hexagons colored by severity. Click 
 
 Each policy loaded on a resource has one of the following statuses:
 
-- **Loaded**: All of the policy's rules pass.
-- **Error**: One or more of the policy's rules are in error.
+- {{< ui >}}Loaded{{< /ui >}}: All of the policy's rules pass.
+- {{< ui >}}Error{{< /ui >}}: One or more of the policy's rules are in error.
 
 ### Rule statuses
 
 Each rule reports one of the following statuses:
 
-- **Loaded**: The rule loaded successfully.
-- **Filtered**: The rule was intentionally not applied (for example, the Agent version is too low or the event type is disabled).
-- **Error**: The rule failed to load.
+- {{< ui >}}Loaded{{< /ui >}}: The rule loaded successfully.
+- {{< ui >}}Filtered{{< /ui >}}: The rule was intentionally not applied (for example, the Agent version is too low or the event type is disabled).
+- {{< ui >}}Error{{< /ui >}}: The rule failed to load.
 
 When a rule is filtered or in error, a **verdict** explains why:
 

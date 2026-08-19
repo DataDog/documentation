@@ -1,5 +1,6 @@
 ---
 title: Respond to Threats
+description: Terminate processes and containers or block network traffic with automated and manual Workload Protection response actions.
 disable_toc: false
 site_support_id: workload_security_active_protection
 aliases:

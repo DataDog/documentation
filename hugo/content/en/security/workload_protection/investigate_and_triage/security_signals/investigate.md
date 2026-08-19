@@ -1,5 +1,6 @@
 ---
 title: Investigate Security Signals
+description: Use the signal side panel to reconstruct the attack story, assess impact, and read the raw signal data.
 disable_toc: false
 ---
 
@@ -7,16 +8,16 @@ When you select a Workload Protection signal in the [Signals Explorer][1], the s
 
 ## What happened
 
-The **What Happened** section gives you a summary of the current signal:
+The {{< ui >}}What Happened{{< /ui >}} section gives you a summary of the current signal:
 
-- **Attack chain**: A human-readable description of the detected activity and how it fits into the broader threat story.
-- **Where**: The infrastructure context where the signal occurred, including cloud provider, account, region, host, Kubernetes cluster, namespace, pod, container, and image.
-- **Detection rule**: The backend detection rule that generated the signal, including its name, severity, and rule expression.
-- **Agent rule**: The Agent rule that matched the underlying runtime activity, including the rule name, event name, and deployment policies.
+- {{< ui >}}Attack chain{{< /ui >}}: A human-readable description of the detected activity and how it fits into the broader threat story.
+- {{< ui >}}Where{{< /ui >}}: The infrastructure context where the signal occurred, including cloud provider, account, region, host, Kubernetes cluster, namespace, pod, container, and image.
+- {{< ui >}}Detection rule{{< /ui >}}: The backend detection rule that generated the signal, including its name, severity, and rule expression.
+- {{< ui >}}Agent rule{{< /ui >}}: The Agent rule that matched the underlying runtime activity, including the rule name, event name, and deployment policies.
 
 ## Investigation graph
 
-The **Investigation** tab displays an interactive graph that maps processes, resources, and runtime events involved in the signal. The investigation graph helps you see how an attack unfolded step by step.
+The {{< ui >}}Investigation{{< /ui >}} tab displays an interactive graph that maps processes, resources, and runtime events involved in the signal. The investigation graph helps you see how an attack unfolded step by step.
 
 {{< img src="security/workload_protection/investigate_and_triage/security_signals/signal_investigation_graph.png" alt="Investigation graph showing an attack chain from attacker to compromised container, with correlated processes and suspicious actions" width="100%">}}
 
@@ -24,7 +25,7 @@ From the graph, you can pivot to other telemetry sources, such as Code Security 
 
 ### Correlated events
 
-Use **Correlated events** on the investigation graph to expand the view beyond the initial signal. It uses [variables][2] to group runtime activity that belongs to the same process lineage or exploitation chain.
+Use {{< ui >}}Correlated events{{< /ui >}} on the investigation graph to expand the view beyond the initial signal. It uses [variables][2] to group runtime activity that belongs to the same process lineage or exploitation chain.
 
 Each event detected by Workload Protection is tagged with a correlation key that associates it with other events in the same execution chain. This grouping helps you focus on the broader compromise attempt instead of responding to isolated alerts.
 
@@ -39,23 +40,23 @@ Workload Protection supports built-in Execution Context layers for common runtim
 
 ### Blast radius
 
-Use **Blast radius** on the investigation graph to assess the potential impact of the detected threat. The blast radius view highlights the resources, services, and dependencies that could be affected if the compromise spreads beyond the initial detection point.
+Use {{< ui >}}Blast radius{{< /ui >}} on the investigation graph to assess the potential impact of the detected threat. The blast radius view highlights the resources, services, and dependencies that could be affected if the compromise spreads beyond the initial detection point.
 
 This helps you prioritize response efforts and understand which adjacent workloads, hosts, or containers require additional monitoring or hardening.
 
 ### Events timeline
 
-The **Events timeline** presents a chronological narrative of every event within a correlated threat story. It combines correlated events, triage statuses, responses, and recommended actions into a single view. Use it to retrace an attacker's movements from the initial exploit to subsequent actions without switching between views.
+The {{< ui >}}Events timeline{{< /ui >}} presents a chronological narrative of every event within a correlated threat story. It combines correlated events, triage statuses, responses, and recommended actions into a single view. Use it to retrace an attacker's movements from the initial exploit to subsequent actions without switching between views.
 
 Each event in the timeline includes contextual details and links to correlated metrics, logs, and traces.
 
 ## Context
 
-The **Context** tab summarizes the key attributes of the host where the signal was triggered and links to related metrics, processes, and other information to help you assess the affected resource.
+The {{< ui >}}Context{{< /ui >}} tab summarizes the key attributes of the host where the signal was triggered and links to related metrics, processes, and other information to help you assess the affected resource.
 
 ## Signal JSON
 
-The **Signal JSON** tab displays the raw content of the signal. Signal JSON is the underlying data structure that powers the Signals Explorer, dashboards, and programmatic queries.
+The {{< ui >}}Signal JSON{{< /ui >}} tab displays the raw content of the signal. Signal JSON is the underlying data structure that powers the Signals Explorer, dashboards, and programmatic queries.
 
 Use Signal JSON when you need to:
 

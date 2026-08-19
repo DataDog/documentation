@@ -1,5 +1,6 @@
 ---
 title: Threat intelligence
+description: Enrich Workload Protection Agent events with Datadog-curated threat intelligence, or import your own database.
 disable_toc: false
 further_reading:
   - link: "/security/threat_intelligence/"
@@ -9,8 +10,6 @@ further_reading:
     tag: "documentation"
     text: "Detection Rules"
 ---
-
-## Overview
 
 Workload Protection enriches [Agent events][1] with [Threat Intelligence][2] curated by Datadog. This enrichment adds reputation context to entities observed on your hosts and containers, such as IP addresses and file hashes, to help you assess whether an event is part of a known malicious campaign.
 
@@ -46,7 +45,7 @@ For category definitions and intents that apply across Datadog security products
 
 ## Threat intelligence facets
 
-Threat intelligence [sources, categories, and intents][6] are available as facets and filters. You can see threat intelligence enrichments on matching events in the [Agent Events explorer][1] and on the resulting [security signals][7].
+Threat intelligence [sources, categories, and intents][6] are available as facets and filters. You can see threat intelligence enrichments on matching events in the [Agent Events Explorer][1] and on the resulting [security signals][7].
 
 ## Threat intelligence on security signals
 

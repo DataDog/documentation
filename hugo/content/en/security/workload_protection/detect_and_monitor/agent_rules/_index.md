@@ -1,5 +1,6 @@
 ---
 title: Agent Rules
+description: Learn how Agent rules determine which runtime activity the Datadog Agent collects and sends to Datadog as Agent events.
 disable_toc: false
 ---
 

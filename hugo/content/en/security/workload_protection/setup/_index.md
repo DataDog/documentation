@@ -1,5 +1,6 @@
 ---
 title: Setting up Workload Protection
+description: Enable Workload Protection in Datadog, then deploy the Datadog Agent to the workloads you want to protect.
 aliases:
   - /security/workload_protection/setup/agent
   - /security/workload_protection/supported_linux_distributions
@@ -28,7 +29,7 @@ Workload Protection offers 3 different flavors depending on your environment and
 
 ### Linux support
 
-On Linux, you need to look at the Linux kernel version and distribution version, as well as the underlying Cloud environment (when applicable) since some Cloud computing services prevent access to eBPF.
+On Linux, you need to look at the Linux kernel version and distribution version, as well as the underlying cloud environment (when applicable) since some Cloud computing services prevent access to eBPF.
 
 #### Supported Linux distributions
 

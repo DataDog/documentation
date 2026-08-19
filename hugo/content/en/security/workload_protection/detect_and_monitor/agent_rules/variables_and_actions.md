@@ -1,5 +1,6 @@
 ---
 title: Variables and Actions
+description: Use SECL variables and Agent rule actions to enrich events, respond to threats, and build stateful detection logic.
 disable_toc: false
 ---
 
@@ -134,7 +135,7 @@ Use `kill` to actively stop malicious activity. The Agent sends a POSIX signal t
 In addition to defining `kill` actions in Agent policy files, you can configure process termination in Datadog:
 
 - **Automatic:** Add `kill` actions to Agent rules in a policy, as described in this section, or use [automated response][1].
-- **Manual:** From a security signal, use [Kill containers or processes][2] under **Respond** in the signal side panel.
+- **Manual:** From a security signal, use [Kill containers or processes][2] under {{< ui >}}Respond{{< /ui >}} in the signal side panel.
 
 Both approaches require [Agent enforcement][3], which is enabled by default. See [Respond to Threats][4] for an overview of enforcement and response actions.
 
@@ -209,7 +210,7 @@ Use `network_filter` to drop packets matching a BPF filter expression for the of
 In addition to defining `network_filter` actions in Agent policy files, you can isolate a compromised workload in Datadog:
 
 - **Automatic:** Add `network_filter` actions to Agent rules in a policy, as described in this section. When a rule matches, the Agent drops matching traffic automatically.
-- **Manual:** From a security signal, use [Network isolation][6] under **Respond** in the signal side panel.
+- **Manual:** From a security signal, use [Network isolation][6] under {{< ui >}}Respond{{< /ui >}} in the signal side panel.
 
 ### When to use it
 

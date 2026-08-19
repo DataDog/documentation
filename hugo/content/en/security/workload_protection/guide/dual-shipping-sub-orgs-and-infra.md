@@ -1,5 +1,6 @@
 ---
 title: How to Safely Dual Ship Workload Protection to Multiple Organizations
+description: Requirements and considerations for dual shipping Workload Protection data to two Datadog organizations.
 disable_toc: false
 further_reading:
 - link: "/agent/configuration/dual-shipping/"
@@ -12,8 +13,6 @@ further_reading:
   tag: "Documentation"
   text: "Infrastructure Monitoring"
 ---
-
-## Overview
 
 This guide explains why and how to dual ship Workload Protection data to two Datadog organizations—for example, a primary organization used by platform teams and a second organization used only by security teams.
 

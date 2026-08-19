@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Workload Protection
+description: Troubleshoot Workload Protection, including Agent flares, self tests, and network plugin compatibility.
 ---
 
 If you experience issues with Workload Protection, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
@@ -21,7 +22,7 @@ If you don't have a case ID, enter the email address you use to log in to Datado
 | Kubernetes   | `kubectl exec -it <POD_NAME> -c security-agent -- security-agent flare <CASE_ID>`   |
 | Host         | `sudo /opt/datadog-agent/embedded/bin/security-agent flare <CASE_ID>`               |
 
-## Agent Self tests
+## Agent self tests
 
 To confirm that Workload Protection can detect system events, manually trigger self tests by running the following command:
 
@@ -38,7 +39,7 @@ The following response appears when rules are propagated.
 Runtime self test: OK
 ```
 
-Events appear in the {{< ui >}}Event Explorer{{< /ui >}}.
+Events appear in the {{< ui >}}Events Explorer{{< /ui >}}.
 
 ## Compatibility with custom Kubernetes network plugins
 

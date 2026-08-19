@@ -1,5 +1,6 @@
 ---
 title: Setting up Workload Protection on ECS
+description: Enable Workload Protection on Amazon ECS with the EC2 compute option.
 aliases:
   - /security/workload_protection/setup/agent/ecs_ec2
 disable_toc: false

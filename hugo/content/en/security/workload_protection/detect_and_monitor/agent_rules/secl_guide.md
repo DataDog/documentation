@@ -1,5 +1,6 @@
 ---
 title: SECL guide
+description: Write Workload Protection Agent rule expressions with the Datadog Security Language (SECL).
 aliases:
   - /security/workload_protection/agent_expressions
   - /security/threats/agent_expressions

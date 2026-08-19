@@ -1,5 +1,6 @@
 ---
 title: Policy Management
+description: Create, deploy, and scope Workload Protection policies, and write custom Agent rules for your infrastructure.
 aliases:
   - /security/workload_protection/workload_security_rules/custom_rules
   - /security/threats/workload_security_rules/custom_rules
@@ -15,14 +16,14 @@ In addition to the out-of-the-box (OOTB) [default Agent rules][7], you can write
 ### Create a policy
 
 1. Go to [Policies][3].
-2. Click **New Policy**. You can also open an existing policy, click **Actions**, and clone it.
-3. Enter a name for the policy and click **Create**.
+2. Click {{< ui >}}New Policy{{< /ui >}}. You can also open an existing policy, click {{< ui >}}Actions{{< /ui >}}, and clone it.
+3. Enter a name for the policy and click {{< ui >}}Create{{< /ui >}}.
    The new policy is created, but it is not enabled or deployed.
 4. Click the policy to open it.
-5. In **New Rule**, add custom Agent rules to the policy. To create an Agent rule, see [Create a custom Agent rule][14].
-6. Click **Edit** next to **Deployed on 0 agents**.
+5. In {{< ui >}}New Rule{{< /ui >}}, add custom Agent rules to the policy. To create an Agent rule, see [Create a custom Agent rule][14].
+6. Click {{< ui >}}Edit{{< /ui >}} next to {{< ui >}}Deployed on 0 agents{{< /ui >}}.
 7. Add [tags][18] to the policy to target specific infrastructure.
-8. To deploy the policy, toggle the switch next to **Policy is disabled** and confirm. This uses [Remote Configuration](#remote-configuration), as detailed below in that page.
+8. To deploy the policy, toggle the switch next to {{< ui >}}Policy is disabled{{< /ui >}} and confirm. This uses [Remote Configuration](#remote-configuration), as detailed below in that page.
 
 ### Pin a Datadog-managed policy to its current version
 
@@ -36,9 +37,9 @@ To pin a policy, do the following:
 
 1. Go to [Policies][3].
 2. Click a Datadog-managed policy.
-3. In **Version**, click the pin option.
+3. In {{< ui >}}Version{{< /ui >}}, click the pin option.
    If your infrastructure is running Agents below version 7.71.0, an outdated agents warning appears. View and upgrade your Agent version in [Fleet Automation][19].
-4. Click **Pin**. To unpin the policy version, click the pin option again.
+4. Click {{< ui >}}Pin{{< /ui >}}. To unpin the policy version, click the pin option again.
 
 ### Conflicting rules
 
@@ -51,8 +52,8 @@ When two policies deployed to the same host contain the same rule with a differe
 Tags identify two things: the Agents using the policy and the infrastructure where those Agents apply the policy. For example, if a policy has the tag `cluster_name:mycluster` the Agents in that cluster use the policy on the hosts in that cluster.
 
 1. Go to [Agent Configuration][6].
-2. Open a policy and click **Edit**.
-3. Enter tags and click **Apply**. If the policy is enabled, the policy is applied to the tag targets.
+2. Open a policy and click {{< ui >}}Edit{{< /ui >}}.
+3. Enter tags and click {{< ui >}}Apply{{< /ui >}}. If the policy is enabled, the policy is applied to the tag targets.
 
 When you add tags, Datadog displays how many agents the tags target as well the infrastructure running each agent. For example, `Tags match 144 agents`.
 
@@ -63,11 +64,11 @@ Custom Agent rules are deployed to the Agent in a custom policy separate from th
 
 1. Go to [Agent Configuration][6].
 2. Create a policy or open an existing one.
-3. With the policy open, in **Actions**, select **Manual rule creator** to open the Agent rule editor. The same editor is also available from the [Agent rules][24] page in Datadog. To use the **Assisted rule creator** wizard instead—which walks you through both the Agent rule and the threat detection rule—see [Create the custom Agent and detection rules together][23].
-4. Enter a **Name** and **Description** for the rule.
-5. In **Expression**, define the match using [Datadog Security Language (SECL)][16].
+3. With the policy open, in {{< ui >}}Actions{{< /ui >}}, select {{< ui >}}Manual rule creator{{< /ui >}} to open the Agent rule editor. The same editor is also available from the [Agent rules][24] page in Datadog. To use the {{< ui >}}Assisted rule creator{{< /ui >}} wizard instead—which walks you through both the Agent rule and the threat detection rule—see [Create the custom Agent and detection rules together][23].
+4. Enter a {{< ui >}}Name{{< /ui >}} and {{< ui >}}Description{{< /ui >}} for the rule.
+5. In {{< ui >}}Expression{{< /ui >}}, define the match using [Datadog Security Language (SECL)][16].
 6. (Optional) Add variables or actions that run when the rule matches an event. See [Variables and actions][25].
-7. Click **Create Agent Rule**. You are returned to the policy.
+7. Click {{< ui >}}Create Agent Rule{{< /ui >}}. You are returned to the policy.
 
 After you create a custom Agent rule, the change is saved along with other pending rule updates. To apply the change to your environment, deploy the updated custom policy to the Agent.
 
@@ -89,25 +90,25 @@ To roll out a change to Agent rules or policies with Remote Configuration, you c
 
 Deploy instantly sends the updated policy to all hosts in scope at the same time, without staged validation. This generally takes a few minutes, and is best when you want the change applied everywhere right away.
 
-Select **Deploy instantly**, then click **Update Policy**. Track the progress from the [Deployments page][26].
+Select {{< ui >}}Deploy instantly{{< /ui >}}, then click {{< ui >}}Update Policy{{< /ui >}}. Track the progress from the [Deployments page][26].
 
 ##### Managed deployment
 
 A managed deployment rolls out your change in stages so you can validate it on a subset of hosts before it reaches your entire infrastructure.
 
-1. When editing a policy or a rule, select **Start a managed deployment**. If the policy or rule was already rolled out with a managed deploy, select **Start from your last deployment** to reuse the last deployment's parameters. For a rule change, the reused parameters are those of the last deployment of the policy containing the rule.
-2. Under **Customize deployment roll-out plan**, set the scope of the deployment, then configure up to 10 stages to roll out the change gradually. Define each stage **By percentage of hosts in scope** or **By host tags**.
-3. Under **Set up monitoring and delay time**, select one or more monitors to check during the deployment. If a monitor alerts while the deployment is in progress, the rollout pauses. Then set the delay time to wait before continuing to the next stage.
-4. Under **Set deployment window**, set the days, times, and timezone when the deployment can run. If the deployment runs past a window, it pauses and resumes in the next one.
-5. (Optional) Under **Add a description**, add a description for the deployment.
-6. Click **Update Policy** to start the rollout. Track the progress from the [Deployments page][26].
+1. When editing a policy or a rule, select {{< ui >}}Start a managed deployment{{< /ui >}}. If the policy or rule was already rolled out with a managed deploy, select {{< ui >}}Start from your last deployment{{< /ui >}} to reuse the last deployment's parameters. For a rule change, the reused parameters are those of the last deployment of the policy containing the rule.
+2. Under {{< ui >}}Customize deployment roll-out plan{{< /ui >}}, set the scope of the deployment, then configure up to 10 stages to roll out the change gradually. Define each stage {{< ui >}}By percentage of hosts in scope{{< /ui >}} or {{< ui >}}By host tags{{< /ui >}}.
+3. Under {{< ui >}}Set up monitoring and delay time{{< /ui >}}, select one or more monitors to check during the deployment. If a monitor alerts while the deployment is in progress, the rollout pauses. Then set the delay time to wait before continuing to the next stage.
+4. Under {{< ui >}}Set deployment window{{< /ui >}}, set the days, times, and timezone when the deployment can run. If the deployment runs past a window, it pauses and resumes in the next one.
+5. (Optional) Under {{< ui >}}Add a description{{< /ui >}}, add a description for the deployment.
+6. Click {{< ui >}}Update Policy{{< /ui >}} to start the rollout. Track the progress from the [Deployments page][26].
 
 ### Manual deployment
 
 For **manual deployment**, you install a policy file on each Agent yourself. You can build the policy and its rules in the Datadog UI and **download** the generated file. If you already know the policy syntax, author a `.policy` file by hand. Then upload or sync that file to every Agent where the policy should run, as described below.
 
-1. On the **Agent Configuration** page, open a policy.
-2. In Actions, select **Download Policy**.
+1. On the {{< ui >}}Agent Configuration{{< /ui >}} page, open a policy.
+2. In Actions, select {{< ui >}}Download Policy{{< /ui >}}.
 
 Next, use the following instructions to upload the policy file to each host.
 
@@ -158,10 +159,10 @@ To apply the changes, do **one** of the following:
 
 ## Disable default Agent rules
 
-1. To disable an Agent rule, navigate to the [**Agent Configuration**][6] page and select the policy using the rule.
+1. To disable an Agent rule, navigate to the [{{< ui >}}Agent Configuration{{< /ui >}}][6] page and select the policy using the rule.
 2. In the policy, open the rule.
-3. Set the status to **Inactive**.
-4. Click **Save Changes**.
+3. Set the status to {{< ui >}}Inactive{{< /ui >}}.
+4. Click {{< ui >}}Save Changes{{< /ui >}}.
 
 Deleting a rule from [Rules configuration][24] removes it from **all policies** that included that rule.
 
@@ -171,7 +172,7 @@ Here are some important [role and permissions][11] to use for custom rules RBAC:
 
 -   The `security_monitoring_cws_agent_rules_actions` permission can be used to turn on and configure the [Automated response][12] feature used to enable the blocking mode in the rules.
     -   To use the `security_monitoring_cws_agent_rules_actions` permission, a user with the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_actions` permission and then add only those users that manage Automated response to this role.
--   The **Datadog Standard** role enables users to create/update a custom rule by default, as long as the operation does not change the **protection** settings on the rule.
+-   The {{< ui >}}Datadog Standard{{< /ui >}} role enables users to create/update a custom rule by default, as long as the operation does not change the **protection** settings on the rule.
 
 [3]: https://app.datadoghq.com/security/workload-protection/policies
 [4]: https://app.datadoghq.com/security/configuration/agent-rules

@@ -1,5 +1,6 @@
 ---
 title: Workload Protection
+description: Detect and respond to runtime threats across your hosts, containers, and serverless workloads with Datadog Workload Protection.
 aliases:
   - /security_platform/cloud_workload_security/
   - /security/cloud_workload_security/
@@ -42,8 +43,6 @@ cascade:
     - /security/threats/windows_expressions
 
 ---
-
-## Overview
 
 Datadog Workload Protection provides real-time visibility and defense for your infrastructure by continuously monitoring file, network, and process activity across your environments. It detects threats as they occur, generating security signals and findings. Use them to identify, investigate, and stop malicious behaviors before they impact your workloads.
 
