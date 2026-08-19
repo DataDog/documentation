@@ -22,7 +22,7 @@ further_reading:
   - link: "/security/assignee_management/"
     tag: "Documentation"
     text: "Assignee Management"
-  - link: "/incident_response/case_management/"
+  - link: "/incident_response/work_management/"
     tag: "Documentation"
     text: "Case Management"
   - link: "/api/latest/security-monitoring/#create-cases-for-security-findings"
@@ -111,9 +111,9 @@ You are ready to start creating bidirectional Case Management tickets.
 If you do not see the {{< ui >}}Case Management  ↔ Jira Integration{{< /ui >}} section, verify that you have completed the prerequisites.
 
 [2]: /integrations/jira/
-[3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
+[3]: /incident_response/work_management/notifications_integrations/#third-party-tickets
 [8]: /integrations/jira/#configure-a-jira-webhook
-[9]: /incident_response/case_management/projects/
+[9]: /incident_response/work_management/projects/
 [20]: /security/ticketing_integrations/#supported-products
 
 {{% /tab %}}
@@ -139,8 +139,8 @@ You are ready to start creating bidirectional Case Management tickets.
 
 If you do not see the {{< ui >}}Case Management ↔ ServiceNow Integration{{< /ui >}} section, verify that you have completed the prerequisites.
 
-[3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
-[9]: /incident_response/case_management/projects/
+[3]: /incident_response/work_management/notifications_integrations/#third-party-tickets
+[9]: /incident_response/work_management/projects/
 [20]: /security/ticketing_integrations/#supported-products
 [21]: /integrations/servicenow/
 [22]: /integrations/guide/servicenow-itom-itsm-setup/
@@ -266,7 +266,7 @@ Closed Jira tickets are green.
 
 In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
 
-[1]: /incident_response/case_management/
+[1]: /incident_response/work_management/
 {{% /tab %}}
 
 {{% tab "ServiceNow" %}}
@@ -299,7 +299,7 @@ Hover over the Linear issue to see its details, including status, assignee, and 
 
 In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
 
-[1]: /incident_response/case_management/
+[1]: /incident_response/work_management/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -336,15 +336,15 @@ Dedicated endpoints allow users to [create Datadog case for existing security fi
 Users can also [create Jira issues for security findings][18] and [attach security findings to a Jira issue][19].
 
 
-[1]: /incident_response/case_management/
+[1]: /incident_response/work_management/
 [2]: /integrations/jira/
-[3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
+[3]: /incident_response/work_management/notifications_integrations/#third-party-tickets
 [4]: https://app.datadoghq.com/security/siem/signals
 [5]: https://app.datadoghq.com/security/code-security
 [6]: https://app.datadoghq.com/security/appsec/signals
 [7]: https://app.datadoghq.com/security/workload-protection/signals
 [8]: /integrations/jira/#configure-a-jira-webhook
-[9]: /incident_response/case_management/projects/
+[9]: /incident_response/work_management/projects/
 [10]: /security/ticketing_integrations/#prerequisites
 [11]: https://app.datadoghq.com/security/compliance
 [12]: https://app.datadoghq.com/security/appsec/inventory/finding
