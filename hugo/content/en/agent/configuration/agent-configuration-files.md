@@ -16,12 +16,12 @@ algolia:
 
 The location of the Agent configuration file differs depending on the operating system.
 
-| Platform                             | Command                              |
-|:-------------------------------------|:-------------------------------------|
-| AIX                                  | `/etc/datadog-agent/datadog.yaml`    |
-| Linux                                | `/etc/datadog-agent/datadog.yaml`    |
-| macOS                                | `/opt/datadog-agent/etc/datadog.yaml`      |
-| Windows                              | `%ProgramData%\Datadog\datadog.yaml` |
+| Platform | Command                               | Example config                            |
+|:---------|:--------------------------------------|:------------------------------------------|
+| AIX      | `/etc/datadog-agent/datadog.yaml`     | [`datadog.yaml.example`][3]               |
+| Linux    | `/etc/datadog-agent/datadog.yaml`     | [`datadog-agent_linux.yaml.example`][4]   |
+| macOS    | `/opt/datadog-agent/etc/datadog.yaml` | [`datadog-agent_darwin.yaml.example`][5]  |
+| Windows  | `%ProgramData%\Datadog\datadog.yaml`  | [`datadog-agent_windows.yaml.example`][6] |
 
 ## Agent configuration directory
 
@@ -70,3 +70,7 @@ For log collection, the Agent does not accept multiple YAML files that point to 
 JMX Agent checks have an additional `metrics.yaml` file in their configuration folder. It is a list of all the beans that the Datadog Agent collects by default. This way, you do not need to list all of the beans manually when you configure a check through [Docker labels or k8s annotations][2].
 
 [2]: /agent/kubernetes/integrations/#configuration
+[3]: https://github.com/DataDog/datadog-unix-agent/blob/master/docs/datadog.yaml.example
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
+[5]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_darwin.yaml.example
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_windows.yaml.example
