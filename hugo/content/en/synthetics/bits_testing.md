@@ -50,9 +50,9 @@ Open Bits Testing from Synthetic Monitoring & Testing using any of the following
 - `cmd+K` (or `ctrl+K`), then search for Bits Testing.
 - **Bits Testing** in the side navigation menu, under Digital Experience > Synthetic Monitoring & Testing.
 
-{{< img src="synthetics/bits_testing/bits_testing_nav_and_prompt.png" alt="The Bits Testing entry point in the Synthetic Monitoring & Testing top navigation, and the prompt where you describe what you want to test" style="width:100%;" >}}
-
 ## Run Bits Testing
+
+{{< img src="synthetics/bits_testing/bits_testing_nav_and_prompt.png" alt="The Bits Testing entry point in the Synthetic Monitoring & Testing top navigation, and the prompt where you describe what you want to test" style="width:100%;" >}}
 
 1. Describe the coverage you want in plain English. For example, ask Bits Testing to increase coverage generally, or to focus on specific features.
 1. Select a location to run the exploration from:
@@ -101,9 +101,9 @@ If a run doesn't complete successfully, the graph shows the error that stopped i
 
 Click a green journey card to open the AI-generated test suite for that journey. A test suite can include:
 
-- **Browser tests** that replay the interactions a user takes to complete the journey, with assertions along the way.
-- **HTTP tests** that validate the endpoints the journey calls to retrieve data.
-- **Network path tests** that check the hosts powering the journey are reachable.
+- **[Browser tests][6]** that replay the interactions a user takes to complete the journey, with assertions along the way.
+- **[HTTP tests][7]** that validate the endpoints the journey calls to retrieve data.
+- **[Network path tests][8]** that check the hosts powering the journey are reachable.
 - **[Goal-Based tests][1]** that validate the journey using non-deterministic, agentic testing.
 
 Each test in the suite includes a free sample test run. Review the suite and either:
@@ -134,3 +134,6 @@ Bits Testing and Goal-Based tests run only from the [locations listed above](#ru
 [3]: /synthetics/platform/settings/#global-variables
 [4]: https://www.datadoghq.com/pricing/?product=synthetic-monitoring#products
 [5]: /synthetics/platform/private_locations/
+[6]: /synthetics/browser_tests/
+[7]: /synthetics/api_tests/http_tests
+[8]: /synthetics/network_path_tests/
