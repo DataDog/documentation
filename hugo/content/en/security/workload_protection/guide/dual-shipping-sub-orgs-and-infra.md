@@ -1,5 +1,5 @@
 ---
-title: How to Safely Dual Ship Workload Protection to Multiple Organizations
+title: Safely Dual Ship Workload Protection to Multiple Organizations
 description: Requirements and considerations for dual shipping Workload Protection data to two Datadog organizations.
 disable_toc: false
 further_reading:
