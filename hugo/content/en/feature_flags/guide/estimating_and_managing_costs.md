@@ -1,6 +1,6 @@
 ---
 title: Estimate and Manage Feature Flags Costs
-description: Estimate your Feature Flags usage and costs before you roll out, and apply concrete levers to manage and reduce them after you're live.
+description: Estimate your Feature Flags usage and costs before you roll out, and apply concrete levers to manage and reduce them after deployment.
 further_reading:
 - link: "/feature_flags/concepts/monthly_flag_configuration_requests/"
   tag: "Documentation"
@@ -24,7 +24,12 @@ further_reading:
 
 ## Overview
 
-Feature Flags usage scales with how you deploy flags. For client-side usage, it depends on the number of client applications and end users connecting to Datadog. For server-side usage, it depends on the number of backend services polling for configuration. Two organizations with the same number of flags can generate different amounts of usage, depending on this deployment footprint. This guide helps you estimate usage and cost before you roll out broadly. It also covers the levers available to manage and reduce cost after you're live.
+Feature Flags usage scales with how you deploy flags:
+
+- For **client-side** usage, it depends on the number of client applications and end users connecting to Datadog.
+- For **server-side** usage, it depends on the number of backend services polling for configuration.
+
+Two organizations with the same number of flags can generate different amounts of usage, depending on this deployment footprint. This guide helps you estimate usage and cost before you roll out broadly. It also covers the levers available to manage and reduce cost after deployment.
 
 ## Estimate your Feature Flags usage and costs
 
@@ -42,7 +47,7 @@ Because MFCR counts configuration requests, the number of flags you maintain and
 
 1. Decide which SDKs you plan to deploy: client-side, server-side, or both.
 1. For client-side usage, estimate with one of the following:
-   - Your monthly volume of RUM sessions or daily active users across the applications where you plan to use flags, multiplied by 30 for a monthly estimate.
+   - Your monthly volume of RUM sessions. Alternatively, use your daily active users across the applications where you plan to use flags, multiplied by 30 for a monthly estimate.
    - If flags cover a broader set of applications than your current RUM implementation, use daily active users or daily sessions across those applications instead.
 1. For server-side usage, count the total number of running hosts, services, or containers with the SDK deployed. Multiply that count by the number of configuration requests per day at your polling interval, then by 30 for a monthly estimate, and apply the 10 times server-side multiplier.
 1. Add the client-side and server-side estimates together for a combined monthly MFCR estimate.
@@ -55,7 +60,7 @@ Usage under 1 million MFCR per month is included at no cost. For current pricing
 
 ### Monitor your actual usage and cost
 
-After you're live, compare your estimate against actual usage. Datadog reports Feature Flags usage and cost alongside your other products on the [Usage Details][5] and [Bill Overview][6] pages, where you can view usage trends over time and download detailed usage data.
+After deployment, compare your estimate against actual usage. Datadog reports Feature Flags usage and cost alongside your other products on the [Usage Details][5] and [Bill Overview][6] pages, where you can view usage trends over time and download detailed usage data.
 
 ## Manage and reduce Feature Flags costs
 
