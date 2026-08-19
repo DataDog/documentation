@@ -1,0 +1,15 @@
+{
+  "data": {
+    "type": "execution_policy",
+    "attributes": {
+      "name": "Cassette Execution Policy exampleexecutionpolicy",
+      "effect": "allow",
+      "action_pattern": {
+        "integration": "INTEGRATION_SCRIPT",
+        "action_fqns": [
+          "com.datadoghq.script.*"
+        ]
+      }
+    }
+  }
+}

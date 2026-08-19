@@ -84,6 +84,15 @@ content/en/integrations/guide/amazon_cloudformation.md
 !content/en/integrations/apigee.md
 !content/en/integrations/snyk.md
 !content/en/integrations/content_security_policy_logs.md
+!content/en/integrations/agentprofiling.md
+!content/en/integrations/amazon_guardduty.md
+!content/en/integrations/nxlog.md
+!content/en/integrations/rsyslog.md
+!content/en/integrations/sinatra.md
+!content/en/integrations/stunnel.md
+!content/en/integrations/syslog_ng.md
+!content/en/integrations/uwsgi.md
+!content/en/integrations/vmware_tanzu_application_service.md
 
 # Ignore the marketplace images that get pulled
 static/images/marketplace
