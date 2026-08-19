@@ -84,19 +84,28 @@ To get started with Workload Protection, you need to enable the Workload Protect
 
 Use the following instructions to enable the eBPF agent of Workload Protection in the Datadog Agent.
 
-{{< partial name="workload-protection/wp-ebpf-tiles.html" >}}
+{{< card-grid card_width="225px" image_width="200" >}}
+  {{< image-card href="/security/workload_protection/setup/kubernetes/" src="integrations_logos/kubernetes.png" alt="Kubernetes" >}}
+  {{< image-card href="/security/workload_protection/setup/docker/" src="integrations_logos/docker.png" alt="Docker" >}}
+  {{< image-card href="/security/workload_protection/setup/ecs_ec2/" src="integrations_logos/amazon_ecs.png" alt="ECS EC2" >}}
+  {{< image-card href="/security/workload_protection/setup/linux_ebpf/" src="integrations_logos/linux.png" alt="Linux eBPF" >}}
+{{< /card-grid >}}
 
 ### AWS Fargate
 
 Use the following instructions to enable the eBPF-less agent of Workload Protection in the Datadog Agent.
 
-{{< partial name="workload-protection/wp-ebpfless-tiles.html" >}}
+{{< card-grid card_width="225px" image_width="200" >}}
+  {{< image-card href="/security/workload_protection/setup/fargate/" src="integrations_logos/amazon_fargate.png" alt="Amazon Fargate" >}}
+{{< /card-grid >}}
 
 ### Windows
 
 Use the following instructions to enable the Windows agent of Workload Protection in the Datadog Agent.
 
-{{< partial name="workload-protection/wp-windows-tiles.html" >}}
+{{< card-grid card_width="225px" image_width="200" >}}
+  {{< image-card href="/security/workload_protection/setup/windows/" src="integrations_logos/windows.png" alt="Windows" >}}
+{{< /card-grid >}}
 
 ## Next steps
 
