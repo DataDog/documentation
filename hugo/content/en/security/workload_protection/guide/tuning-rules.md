@@ -1,5 +1,5 @@
 ---
-title: Fine-tuning Workload Protection Security Signals
+title: Best Practices for Tuning Workload Protection Security Signals
 aliases:
   - /security_platform/cloud_workload_security/guide/tuning-rules/
   - /security_platform/cloud_security_management/guide/
@@ -130,8 +130,8 @@ Common keys:
 
 Defining a combination for this type of activity is similar to file or process activities, with some additional specificity tied to the system call used for the attack.
 
-For example the Dirty Pipe exploitation is a privilege escalation vulnerability. Since it becomes critical if local users escalate their privileges on the system using this attack, it makes sense to suppress noise created from root users running expected processes.
+For example, the Dirty Pipe exploitation is a privilege escalation vulnerability. Since it becomes critical if local users escalate their privileges on the system using this attack, it makes sense to suppress noise created from root users running expected processes.
 - `@process.executable.user`
 - `@process.executable.uid`
 
-Additionally you might notice that signals are created even when some of your machines are running patched kernel versions (for example, Linux versions 5.16.11, 5.15.25, and 5.10 that are patched for Dirty Pipe vulnerability). In this case, add a workload level tag such as `host`, `kube_container_name`, or `kube_service` to the combination. However, when you use a workload level attribute or tag, be aware that it applies to a wide range of candidates which decreases your detection surface and coverage. To prevent that from happening, always combine a workload level tag with process or file based attributes to define a more granular suppression criteria.
+Additionally, you might notice that signals are created even when some of your machines are running patched kernel versions (for example, Linux versions 5.16.11, 5.15.25, and 5.10 that are patched for Dirty Pipe vulnerability). In this case, add a workload level tag such as `host`, `kube_container_name`, or `kube_service` to the combination. However, when you use a workload level attribute or tag, be aware that it applies to a wide range of candidates which decreases your detection surface and coverage. To prevent that from happening, always combine a workload level tag with process or file based attributes to define a more granular suppression criteria.

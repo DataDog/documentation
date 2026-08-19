@@ -48,7 +48,7 @@ disable_toc: true
 
 {{< whatsnext desc="Workload Protection Guides:" >}}
     {{< nextlink href="/security/workload_protection/guide/dual-shipping-sub-orgs-and-infra" >}}How to Safely Dual Ship Workload Protection to Multiple Organizations{{< /nextlink >}}
-    {{< nextlink href="/security/workload_protection/guide/tuning-rules" >}}Best Practices for Fine-Tuning Workload Protection Security Signals{{< /nextlink >}}
+    {{< nextlink href="/security/workload_protection/guide/tuning-rules" >}}Best Practices for Tuning Workload Protection Security Signals{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Sensitive Data Scanner Guides:" >}}

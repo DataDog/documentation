@@ -89,8 +89,8 @@ Durations are numbers with a unit suffix. The supported suffixes are "s", "m", "
 
 SECL expressions support several platforms. You can use the documentation below to see what attributes and helpers are available for each.
 
-* [Linux][1]
-* [Windows][2]
+- [Linux][1]
+- [Windows][2]
 
 ## Rule authoring tips
 

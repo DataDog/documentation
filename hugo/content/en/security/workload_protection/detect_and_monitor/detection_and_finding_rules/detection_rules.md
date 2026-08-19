@@ -68,7 +68,7 @@ Configure the **title** and **description** of the signal that appears when you 
 
 ### Step 5: Create a suppression
 
-Optionally add a **suppression query** to reduce noise by excluding specific infrastructure or events from this rule. Suppressions help prevent signals from being generated when matching activity is expected or benign.
+Optionally, add a **suppression query** to reduce noise by excluding specific infrastructure or events from this rule. Suppressions help prevent signals from being generated when matching activity is expected or benign.
 
 For example, to exclude a known automation user from a rule, add a suppression query such as `@usr.name:automation-bot`.
 

@@ -132,7 +132,7 @@ Use [Coverage][5] to get a unified, real-time view of Workload Protection postur
 ### Guides
 
 {{< whatsnext desc="Use case driven examples to help you discover and learn about Workload Protection:" >}}
-{{< nextlink href="/security/workload_protection/guide/tuning-rules" >}}Fine-tuning Workload Protection Security Signals{{< /nextlink >}}
+{{< nextlink href="/security/workload_protection/guide/tuning-rules" >}}Best Practices for Tuning Workload Protection Security Signals{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /security/workload_protection/setup

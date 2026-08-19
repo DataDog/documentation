@@ -126,6 +126,8 @@ To apply the changes, do **one** of the following:
 
 -   Or restart the [Datadog Agent][27].
 
+[27]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+
 {{% /tab %}}
 
 {{% tab "Helm" %}}
@@ -194,4 +196,3 @@ Here are some important [role and permissions][11] to use for custom rules RBAC:
 [24]: https://app.datadoghq.com/security/workload-protection/agent-rules
 [25]: /security/workload_protection/detect_and_monitor/agent_rules/variables_and_actions
 [26]: https://app.datadoghq.com/security/workload-protection/deployments
-[27]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
