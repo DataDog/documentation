@@ -319,6 +319,7 @@ unsupported_sites:
   bits_ai_sre: [gov,gov2]
   bits_data_analysis: [gov,gov2]
   bits_investigation: [gov,gov2]
+  dashboard_anomaly_detection: [gov,gov2]
   bits_remediation: [gov,gov2]
   byoti: [gov, gov2]
   case_management: [gov2]

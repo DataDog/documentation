@@ -1,30 +1,19 @@
 ---
 title: Investigate Dashboard Anomalies
-description: Automatically detect and group anomalies on dashboard graphs, identify the tags contributing to them, and investigate with Watchdog Explains or Bits Investigation.
-aliases:
-    - /graphing/correlations/
-    - /dashboards/correlations/
-    - /dashboards/graph_insights/watchdog_explains/
+description: Automatically detect and group anomalies across a dashboard's graphs, identify the tags contributing to them, and delegate root cause analysis to Bits Investigation.
+site_support_id: dashboard_anomaly_detection
 further_reading:
+- link: "/dashboards/graph_insights/watchdog_explains/"
+  tag: "Documentation"
+  text: "Analyze a single anomaly with Watchdog Explains"
 - link: "/bits_ai/bits_investigation/"
   tag: "Documentation"
   text: "Learn how Bits Investigation analyzes root cause"
-- link: "/watchdog/insights/"
-  tag: "Documentation"
-  text: "Learn more about Watchdog Insights"
 ---
-
-<!-- NOTE (regions, resolved): deliberately NOT using `site_support_id` here. That renders a
-page-level banner, which would be wrong: Ethan Lipkind confirmed gov users get no dashboard
-anomaly highlighting, but Watchdog Explains IS still reachable there in fullscreen, and this page
-documents both. The gov caveat is inline in the Overview instead.
-Still unconfirmed: uk1 and ap2. Ethan said "I think not uk1 or ap2" and that the flag is mid
-rollout to all commercial DCs, so it is deliberately not documented — a hedge plus a moving
-target is worse than silence. Revisit if he confirms. -->
 
 ## Overview
 
-Datadog detects anomalies on your dashboard's timeseries graphs, groups co-occurring anomalies into issues, and identifies the tags contributing most to each. From an anomaly you can either open it in [Watchdog Explains](#watchdog-explains) for tag-level analysis, or delegate root cause analysis to [Bits Investigation][1].
+Datadog detects anomalies across your dashboard's timeseries graphs, groups co-occurring anomalies into issues, and identifies the tags contributing most to each. From an anomaly you can open it in [Watchdog Explains][2] for tag-level analysis on a single graph, or delegate root cause analysis to [Bits Investigation][1].
 
 <div class="alert alert-info">Anomaly detection is available for <a href="/dashboards/widgets/timeseries/">Timeseries widgets</a> with {{< ui >}}Metrics{{< /ui >}} data (avg, sum, min, and max aggregation). Widgets using functions such as <code>cumsum</code>, <code>anomalies</code>, or <code>outliers</code> are not eligible.</div>
 
@@ -32,14 +21,19 @@ Detection runs when you open a dashboard, and issues appear within approximately
 
 Datadog does not run anomaly detection on:
 
-- Dashboards in the GovCloud sites (US1-FED and US2-FED)
 - Public (shared) dashboards, because there is no signed-in viewer who can act on a result
 - Dashboards embedded in the mobile app
 - Dashboards in TV mode
 - Dashboards in print mode
 - Dashboards where you turned off {{< ui >}}Auto-detect issues{{< /ui >}}
 
-In the GovCloud sites, anomalies are not highlighted on dashboards and {{< ui >}}Investigate with AI{{< /ui >}} is unavailable. [Watchdog Explains](#watchdog-explains) is still available from a fullscreen timeseries graph.
+<!-- NOTE (regions): `site_support_id: dashboard_anomaly_detection` is set here with a matching
+[gov,gov2] entry in hugo/config/_default/params.yaml. Ethan Lipkind confirmed gov users get no
+dashboard anomaly highlighting and cannot reach Investigate with AI. Watchdog Explains IS still
+available to them, which is why it lives on its own page rather than here.
+Still unconfirmed: uk1 and ap2. Ethan said "I think not uk1 or ap2" and the flag is mid rollout
+to all commercial DCs, so it is deliberately not documented — a hedge plus a moving target is
+worse than silence. Revisit if he confirms. -->
 
 ## How Datadog detects anomalies
 
@@ -79,20 +73,11 @@ Detected anomalies are highlighted in pink on the graph.
 <!-- TODO (screenshot): capture an expanded anomaly chip showing Influential tags and
 Next steps. Demo org only. -->
 
-From here you can take either of two paths, described in the following sections. Watchdog Explains keeps you on the graph and lets you test which tags account for the change. Bits Investigation leaves the dashboard and produces a written root cause analysis.
+## Analyze a single graph with Watchdog Explains
 
-## Watchdog Explains
+From the expanded chip's {{< ui >}}Next steps{{< /ui >}}, you can open the anomaly in Watchdog Explains. It analyzes one graph at a time and shows which tags account for the change, including a comparison of the graph with and without a given tag.
 
-Watchdog Explains analyzes a single anomaly on one graph. It compares each applicable tag group against the source graph to show which tags contribute to the change.
-
-Open a compatible timeseries graph in fullscreen to use it. From a detected anomaly, the expanded chip's {{< ui >}}Next steps{{< /ui >}} section can take you there directly.
-
-Clicking a tag shows the graph with and without that dimension, so you can confirm whether removing it flattens the spike. Use this to identify causes such as a specific customer, service, or environment.
-
-<!-- TODO (verify): is Watchdog Explains reachable in fullscreen in all DCs, or only where the
-dashboard-level highlighting flag is not yet enabled? Ethan confirmed gov users reach it this way.
-Also pending from Omar: whether Watchdog Explains is on a deprecation path, which would change
-whether this page nudges readers toward Bits Investigation instead. -->
+For more information, see [Watchdog Explains][2].
 
 ## Investigate root cause with Bits Investigation
 
@@ -117,3 +102,4 @@ To exclude a single widget from anomaly detection, edit the widget, expand {{< u
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /bits_ai/bits_investigation/
+[2]: /dashboards/graph_insights/watchdog_explains/
