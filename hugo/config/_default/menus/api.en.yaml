@@ -14445,7 +14445,7 @@ menu:
           - UploadLLMObsDatasetRecordsFile
         unstable:
           - v2
-        order: 49
+        order: 48
     - name: List LLM Observability experiment events (v2)
       url: /api/latest/llm-observability/list-llm-observability-experiment-events-v2/
       identifier: llm-observability-list-llm-observability-experiment-events-v2
@@ -14458,7 +14458,7 @@ menu:
           - ListLLMObsExperimentEventsV2
         unstable:
           - v2
-        order: 51
+        order: 50
     - name: List LLM Observability dataset versions
       url: /api/latest/llm-observability/list-llm-observability-dataset-versions/
       identifier: llm-observability-list-llm-observability-dataset-versions
@@ -14471,7 +14471,7 @@ menu:
           - ListLLMObsDatasetVersions
         unstable:
           - v2
-        order: 44
+        order: 43
     - name: Restore an LLM Observability dataset version
       url: /api/latest/llm-observability/restore-an-llm-observability-dataset-version/
       identifier: llm-observability-restore-an-llm-observability-dataset-version
@@ -14484,7 +14484,7 @@ menu:
           - RestoreLLMObsDatasetVersion
         unstable:
           - v2
-        order: 48
+        order: 47
     - name: Delete LLM Observability dataset records
       url: /api/latest/llm-observability/delete-llm-observability-dataset-records/
       identifier: llm-observability-delete-llm-observability-dataset-records
@@ -14549,7 +14549,7 @@ menu:
           - ExportLLMObsDataset
         unstable:
           - v2
-        order: 45
+        order: 44
     - name: Unlock LLM Observability dataset draft state
       url: /api/latest/llm-observability/unlock-llm-observability-dataset-draft-state/
       identifier: llm-observability-unlock-llm-observability-dataset-draft-state
@@ -14562,7 +14562,7 @@ menu:
           - UnlockLLMObsDatasetDraftState
         unstable:
           - v2
-        order: 43
+        order: 42
     - name: Lock LLM Observability dataset draft state
       url: /api/latest/llm-observability/lock-llm-observability-dataset-draft-state/
       identifier: llm-observability-lock-llm-observability-dataset-draft-state
@@ -14575,7 +14575,7 @@ menu:
           - LockLLMObsDatasetDraftState
         unstable:
           - v2
-        order: 42
+        order: 41
     - name: Get LLM Observability dataset draft state
       url: /api/latest/llm-observability/get-llm-observability-dataset-draft-state/
       identifier: llm-observability-get-llm-observability-dataset-draft-state
@@ -14588,7 +14588,7 @@ menu:
           - GetLLMObsDatasetDraftState
         unstable:
           - v2
-        order: 41
+        order: 40
     - name: Clone an LLM Observability dataset
       url: /api/latest/llm-observability/clone-an-llm-observability-dataset/
       identifier: llm-observability-clone-an-llm-observability-dataset
@@ -14601,7 +14601,7 @@ menu:
           - CloneLLMObsDataset
         unstable:
           - v2
-        order: 47
+        order: 46
     - name: Batch update LLM Observability dataset records
       url: /api/latest/llm-observability/batch-update-llm-observability-dataset-records/
       identifier: llm-observability-batch-update-llm-observability-dataset-records
@@ -14614,7 +14614,7 @@ menu:
           - BatchUpdateLLMObsDataset
         unstable:
           - v2
-        order: 46
+        order: 45
     - name: Update an LLM Observability dataset
       url: /api/latest/llm-observability/update-an-llm-observability-dataset/
       identifier: llm-observability-update-an-llm-observability-dataset
@@ -14679,7 +14679,7 @@ menu:
           - ListLLMObsPatternsTopicsWithClusteredPoints
         unstable:
           - v2
-        order: 61
+        order: 60
     - name: List patterns topics
       url: /api/latest/llm-observability/list-patterns-topics/
       identifier: llm-observability-list-patterns-topics
@@ -14692,7 +14692,7 @@ menu:
           - ListLLMObsPatternsTopics
         unstable:
           - v2
-        order: 59
+        order: 58
     - name: Get patterns run status
       url: /api/latest/llm-observability/get-patterns-run-status/
       identifier: llm-observability-get-patterns-run-status
@@ -14705,7 +14705,7 @@ menu:
           - GetLLMObsPatternsRunStatus
         unstable:
           - v2
-        order: 57
+        order: 56
     - name: Trigger a patterns run
       url: /api/latest/llm-observability/trigger-a-patterns-run/
       identifier: llm-observability-trigger-a-patterns-run
@@ -14718,7 +14718,7 @@ menu:
           - TriggerLLMObsPatterns
         unstable:
           - v2
-        order: 56
+        order: 55
     - name: List patterns runs
       url: /api/latest/llm-observability/list-patterns-runs/
       identifier: llm-observability-list-patterns-runs
@@ -14731,7 +14731,7 @@ menu:
           - ListLLMObsPatternsRuns
         unstable:
           - v2
-        order: 58
+        order: 57
     - name: Delete a patterns configuration
       url: /api/latest/llm-observability/delete-a-patterns-configuration/
       identifier: llm-observability-delete-a-patterns-configuration
@@ -14744,7 +14744,7 @@ menu:
           - DeleteLLMObsPatternsConfig
         unstable:
           - v2
-        order: 55
+        order: 54
     - name: Get a patterns configuration
       url: /api/latest/llm-observability/get-a-patterns-configuration/
       identifier: llm-observability-get-a-patterns-configuration
@@ -14757,7 +14757,7 @@ menu:
           - GetLLMObsPatternsConfig
         unstable:
           - v2
-        order: 62
+        order: 61
     - name: Create or update a patterns configuration
       url: /api/latest/llm-observability/create-or-update-a-patterns-configuration/
       identifier: llm-observability-create-or-update-a-patterns-configuration
@@ -14770,7 +14770,7 @@ menu:
           - UpsertLLMObsPatternsConfig
         unstable:
           - v2
-        order: 54
+        order: 53
     - name: List patterns configurations
       url: /api/latest/llm-observability/list-patterns-configurations/
       identifier: llm-observability-list-patterns-configurations
@@ -14783,7 +14783,7 @@ menu:
           - ListLLMObsPatternsConfigs
         unstable:
           - v2
-        order: 63
+        order: 62
     - name: List patterns clustered points
       url: /api/latest/llm-observability/list-patterns-clustered-points/
       identifier: llm-observability-list-patterns-clustered-points
@@ -14796,7 +14796,7 @@ menu:
           - ListLLMObsPatternsClusteredPoints
         unstable:
           - v2
-        order: 60
+        order: 59
     - name: Search LLM Observability spans
       url: /api/latest/llm-observability/search-llm-observability-spans/
       identifier: llm-observability-search-llm-observability-spans
@@ -14835,7 +14835,7 @@ menu:
           - UpdateLLMObsPromptVersion
         unstable:
           - v2
-        order: 72
+        order: 71
     - name: Get a specific LLM Observability prompt version
       url: /api/latest/llm-observability/get-a-specific-llm-observability-prompt-version/
       identifier: llm-observability-get-a-specific-llm-observability-prompt-version
@@ -14848,7 +14848,7 @@ menu:
           - GetLLMObsPromptVersion
         unstable:
           - v2
-        order: 71
+        order: 70
     - name: Create a new LLM Observability prompt version
       url: /api/latest/llm-observability/create-a-new-llm-observability-prompt-version/
       identifier: llm-observability-create-a-new-llm-observability-prompt-version
@@ -14861,7 +14861,7 @@ menu:
           - CreateLLMObsPromptVersion
         unstable:
           - v2
-        order: 70
+        order: 69
     - name: List versions of an LLM Observability prompt
       url: /api/latest/llm-observability/list-versions-of-an-llm-observability-prompt/
       identifier: llm-observability-list-versions-of-an-llm-observability-prompt
@@ -14874,7 +14874,7 @@ menu:
           - ListLLMObsPromptVersions
         unstable:
           - v2
-        order: 69
+        order: 68
     - name: Update an LLM Observability prompt
       url: /api/latest/llm-observability/update-an-llm-observability-prompt/
       identifier: llm-observability-update-an-llm-observability-prompt
@@ -14887,7 +14887,7 @@ menu:
           - UpdateLLMObsPrompt
         unstable:
           - v2
-        order: 67
+        order: 66
     - name: Get an LLM Observability prompt
       url: /api/latest/llm-observability/get-an-llm-observability-prompt/
       identifier: llm-observability-get-an-llm-observability-prompt
@@ -14900,7 +14900,7 @@ menu:
           - GetLLMObsPrompt
         unstable:
           - v2
-        order: 66
+        order: 65
     - name: Delete an LLM Observability prompt
       url: /api/latest/llm-observability/delete-an-llm-observability-prompt/
       identifier: llm-observability-delete-an-llm-observability-prompt
@@ -14913,7 +14913,7 @@ menu:
           - DeleteLLMObsPrompt
         unstable:
           - v2
-        order: 68
+        order: 67
     - name: Create an LLM Observability prompt
       url: /api/latest/llm-observability/create-an-llm-observability-prompt/
       identifier: llm-observability-create-an-llm-observability-prompt
@@ -14926,7 +14926,7 @@ menu:
           - CreateLLMObsPrompt
         unstable:
           - v2
-        order: 65
+        order: 64
     - name: List LLM Observability prompts
       url: /api/latest/llm-observability/list-llm-observability-prompts/
       identifier: llm-observability-list-llm-observability-prompts
@@ -14939,7 +14939,7 @@ menu:
           - ListLLMObsPrompts
         unstable:
           - v2
-        order: 64
+        order: 63
     - name: Update an LLM Observability project
       url: /api/latest/llm-observability/update-an-llm-observability-project/
       identifier: llm-observability-update-an-llm-observability-project
@@ -15004,7 +15004,7 @@ menu:
           - ListLLMObsIntegrationModels
         unstable:
           - v2
-        order: 38
+        order: 37
     - name: Run an LLM inference
       url: /api/latest/llm-observability/run-an-llm-inference/
       identifier: llm-observability-run-an-llm-inference
@@ -15017,7 +15017,7 @@ menu:
           - CreateLLMObsIntegrationInference
         unstable:
           - v2
-        order: 39
+        order: 38
     - name: List LLM integration accounts
       url: /api/latest/llm-observability/list-llm-integration-accounts/
       identifier: llm-observability-list-llm-integration-accounts
@@ -15030,7 +15030,7 @@ menu:
           - ListLLMObsIntegrationAccounts
         unstable:
           - v2
-        order: 37
+        order: 36
     - name: Push events for an LLM Observability experiment
       url: /api/latest/llm-observability/push-events-for-an-llm-observability-experiment/
       identifier: llm-observability-push-events-for-an-llm-observability-experiment
@@ -15056,7 +15056,7 @@ menu:
           - ListLLMObsExperimentEventsV1
         unstable:
           - v2
-        order: 50
+        order: 49
     - name: Update an LLM Observability experiment
       url: /api/latest/llm-observability/update-an-llm-observability-experiment/
       identifier: llm-observability-update-an-llm-observability-experiment
@@ -15160,7 +15160,7 @@ menu:
           - UpdateLLMObsAnnotationQueueLabelSchema
         unstable:
           - v2
-        order: 53
+        order: 52
     - name: Get annotation queue label schema
       url: /api/latest/llm-observability/get-annotation-queue-label-schema/
       identifier: llm-observability-get-annotation-queue-label-schema
@@ -15173,7 +15173,7 @@ menu:
           - GetLLMObsAnnotationQueueLabelSchema
         unstable:
           - v2
-        order: 52
+        order: 51
     - name: Delete annotation queue interactions
       url: /api/latest/llm-observability/delete-annotation-queue-interactions/
       identifier: llm-observability-delete-annotation-queue-interactions
@@ -15303,20 +15303,7 @@ menu:
           - GetLLMObsAnnotatedInteractionsByTraceIDs
         unstable:
           - v2
-        order: 40
-    - name: Delete LLM Observability data
-      url: /api/latest/llm-observability/delete-llm-observability-data/
-      identifier: llm-observability-delete-llm-observability-data
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteLLMObsData
-        unstable:
-          - v2
-        order: 36
+        order: 39
     - name: Create or update a custom evaluator configuration
       url: /api/latest/llm-observability/create-or-update-a-custom-evaluator-configuration/
       identifier: llm-observability-create-or-update-a-custom-evaluator-configuration
@@ -15368,7 +15355,7 @@ menu:
           - ListLLMObsCustomEvalConfigs
         unstable:
           - v2
-        order: 73
+        order: 72
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives

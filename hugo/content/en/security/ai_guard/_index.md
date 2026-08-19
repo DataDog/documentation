@@ -13,6 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/llm-guardrails-best-practices/"
   tag: "Blog"
   text: "LLM guardrails: Best practices for deploying LLM apps securely"
+- link: "https://www.datadoghq.com/blog/securing-ai-agents-guardrail-placement/"
+  tag: "Blog"
+  text: "Securing AI agents: Why guardrail placement is a key design decision"
 ---
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>

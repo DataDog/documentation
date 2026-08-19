@@ -1597,6 +1597,11 @@
     },
     {
       "group": "monitors",
+      "suffix": "_678042569",
+      "description": "Create a monitor notification rule with bundle config returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_1181818787",
       "description": "Create a monitor notification rule with conditional recipients returns \"OK\" response"
     },
@@ -1625,6 +1630,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Update a monitor notification rule returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_752032728",
+      "description": "Update a monitor notification rule with bundle config returns \"OK\" response"
     },
     {
       "group": "monitors",
