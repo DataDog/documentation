@@ -15,7 +15,7 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 ## Application keys
 
-[Application keys][2], in conjunction with your organization's API key, give users access to Datadog's programmatic API. Application keys are associated with the user account that created them and by default have the permissions of the user who created them.
+[Application keys][2], in conjunction with your organization's API key, give users access to Datadog's programmatic API. Application keys are associated with the user account that created them and by default have the permissions of the user who created them. Some APIs require additional access on the application key before you can use it. See [Actions API access](#actions-api-access).
 
 ### One-Time Read mode
 
