@@ -124,12 +124,15 @@ helm upgrade --install datadog-crds datadog/datadog-crds
 
 You can target the following Kubernetes resources:
 
-- Deployment
-- DaemonSet
-- StatefulSet
-- CronJob
-- Job
-- Service (see the [Service targets](#service-targets) section)
+| Target | Group/version/resource | Minimum Agent version | Notes |
+|---|---|---|---|
+| Deployment | `apps/v1/deployments` | 7.82.0 | |
+| DaemonSet | `apps/v1/daemonsets` | 7.82.0 | |
+| StatefulSet | `apps/v1/statefulsets` | 7.82.0 | |
+| CronJob | `batch/v1/cronjobs` | 7.82.0 | |
+| Job | `batch/v1/jobs` | 7.82.0 | |
+| Service | `core/v1/services` | 7.82.0 | Supports checks only. See [Service targets](#service-targets). |
+| Rollout | `argoproj.io/v1alpha1/rollouts` | 7.83.0 | Requires [Argo Rollouts][7]. |
 
 This example configures a [Redis integration][4] for a `StatefulSet` named `redis`, mirroring this [annotation-based example][2].
 
@@ -274,3 +277,4 @@ Auto-discovery IDs:
 [4]: /integrations/redisdb/
 [5]: /containers/guide/template_variables/
 [6]: /containers/cluster_agent/endpointschecks/
+[7]: https://argoproj.github.io/rollouts/
