@@ -1,0 +1,83 @@
+{{/*
+  Renders the per-operation date-version control for a date-versioned operation
+  (x-datadog-api-versioning): a compact chip (static if there's only one version
+  ever, a Bootstrap dropdown trigger otherwise), with a short link to the API
+  versioning overview in the dropdown itself.
+
+  Params:
+    operationId - string, the endpoint's operationId
+    versions    - slice of dicts: {date string, isBase bool}, sorted oldest -> newest
+    baseVersion - string, the date of the default selected version
+    apiMajorVersion - string, the endpoint's major version (for example, "v1")
+*/}}
+{{ $operationId := .operationId }}
+{{ $versions    := .versions }}
+{{ $baseVersion := .baseVersion }}
+{{ $apiMajorVersion := .apiMajorVersion | default "" }}
+{{ $count       := len $versions }}
+{{ $latest      := "" }}
+{{ range $versions }}{{ $latest = .date }}{{ end }}
+{{ $isLatest    := eq $baseVersion $latest }}
+{{ $versionsDesc := $versions | collections.Reverse }}
+{{ $dateCsv     := "" }}
+{{ range $i, $v := $versions }}{{ if $i }}{{ $dateCsv = print $dateCsv "," }}{{ end }}{{ $dateCsv = print $dateCsv $v.date }}{{ end }}
+{{ $versionMeta := dict }}
+{{ range $versions }}{{ $versionMeta = merge $versionMeta (dict .date (dict "deprecated" .deprecated "eol" .eol)) }}{{ end }}
+{{ $baseDeprecated := false }}
+{{ range $versions }}{{ if eq .date $baseVersion }}{{ $baseDeprecated = .deprecated }}{{ end }}{{ end }}
+
+<div class="api-version-block" data-operation-id="{{ $operationId }}" data-api-major-version="{{ $apiMajorVersion }}" data-base-version="{{ $baseVersion }}" data-latest-version="{{ $latest }}" data-versions="{{ $dateCsv }}" data-version-meta='{{ jsonify $versionMeta }}'>
+    {{ if le $count 1 }}
+      <div class="api-version-selector-col">
+        <span class="btn api-version-chip d-flex align-items-center">
+          <span class="api-version-chip-dot api-version-dot-green"></span>
+          <span class="api-version-chip-date">{{ with $apiMajorVersion }}{{ . }} - {{ end }}{{ $baseVersion }}</span>
+        </span>
+      </div>
+    {{ else }}
+      <div class="api-version-selector-col">
+        <div class="dropdown bootstrap-dropdown-custom api-version-dropdown">
+          <button id="{{ $operationId }}-version" class="btn d-flex align-items-center justify-content-between api-version-chip js-api-version-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="api-version-chip-dot js-api-version-dot {{ if $isLatest }}api-version-dot-green{{ else }}api-version-dot-amber{{ end }}"></span>
+            <span class="api-version-chip-date">{{ with $apiMajorVersion }}{{ . }} - {{ end }}<span class="js-api-version-label">{{ $baseVersion }}</span></span>
+            <span class="api-version-chip-pill js-api-version-chip-pill {{ if not $baseDeprecated }}d-none{{ end }}">Deprecated</span>
+            <div class="chevron chevron-down"></div>
+            <div class="chevron chevron-up d-none"></div>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end js-api-version-menu" aria-labelledby="{{ $operationId }}-version">
+            <div class="api-version-menu-header">Versions of this operation</div>
+            <div class="api-version-menu-list">
+              {{ range $versionsDesc }}
+                <a href="#"
+                        class="dropdown-item js-api-version-item {{ if eq .date $baseVersion }}active{{ end }}"
+                        data-api-date-version="{{ .date }}"
+                        data-operation-id="{{ $operationId }}">
+                  <span class="api-version-menu-item-dot {{ if eq .date $latest }}api-version-dot-green{{ else }}api-version-dot-amber{{ end }}"></span>
+                  <span class="api-version-menu-item-date">{{ with $apiMajorVersion }}{{ . }} - {{ end }}{{ .date }}</span>
+                  {{ if eq .date $latest }}
+                    <span class="api-version-tag api-version-tag-latest">latest</span>
+                  {{ else if .isBase }}
+                    <span class="api-version-tag api-version-tag-default">default</span>
+                  {{ end }}
+                  {{ if .deprecated }}
+                    <span class="api-version-tag api-version-tag-deprecated">deprecated</span>
+                  {{ end }}
+                  <span class="api-version-check js-api-version-check {{ if ne .date $baseVersion }}d-none{{ end }}">
+                    <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                  </span>
+                </a>
+              {{ end }}
+            </div>
+            <div class="dropdown-divider"></div>
+            <a href="{{ "/api/versions/" | relLangURL }}" class="api-version-menu-notice">
+              <span class="api-version-menu-notice-icon" aria-hidden="true">i</span>
+              <span>
+                Datadog is rolling out date-based API versions.
+                <span class="api-version-menu-notice-link">Learn more</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+</div>

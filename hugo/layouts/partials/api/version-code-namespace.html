@@ -1,0 +1,28 @@
+{{/*
+  Rewrites a generated SDK example to use the namespace for one date-based API
+  version. Language identifiers use underscores where hyphens are invalid.
+
+  Params: body, language, apiMajorVersion (v1/v2), date (YYYY-MM-DD)
+*/}}
+{{ $body := .body }}
+{{ $language := .language }}
+{{ $majorLower := lower .apiMajorVersion }}
+{{ $majorUpper := upper .apiMajorVersion }}
+{{ $dateCompact := replace .date "-" "" }}
+
+{{ if eq $language "go" }}
+  {{ $namespace := printf "datadog%s" $majorUpper }}
+  {{ $body = replace $body (printf "/api/%s\"" $namespace) (printf "/api/%s-%s\"" $namespace $dateCompact) }}
+{{ else if or (eq $language "python") (eq $language "python-legacy") }}
+  {{ $body = replace $body (printf "datadog_api_client.%s." $majorLower) (printf "datadog_api_client.%s_%s." $majorLower $dateCompact) }}
+{{ else if eq $language "java" }}
+  {{ $body = replace $body (printf "com.datadog.api.client.%s." $majorLower) (printf "com.datadog.api.client.%s_%s." $majorLower $dateCompact) }}
+{{ else if or (eq $language "ruby") (eq $language "ruby-legacy") }}
+  {{ $body = replace $body (printf "DatadogAPIClient::%s" $majorUpper) (printf "DatadogAPIClient::%s_%s" $majorUpper $dateCompact) }}
+{{ else if eq $language "typescript" }}
+  {{ $body = replaceRE (printf `\b%s\b` $majorLower) (printf "%s_%s" $majorLower $dateCompact) $body }}
+{{ else if eq $language "rust" }}
+  {{ $body = replace $body (printf "datadog%s" $majorUpper) (printf "datadog%s_%s" $majorUpper $dateCompact) }}
+{{ end }}
+
+{{ return $body }}

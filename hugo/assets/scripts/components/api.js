@@ -266,6 +266,132 @@ if (changelogRoot) {
     });
 }
 
+// Date-based per-operation API version control (x-datadog-api-versioning)
+const apiVersionQueryParameter = 'datadog-api-version';
+
+function getRequestedApiVersion(block) {
+    const { apiMajorVersion, versions } = block.dataset;
+    const requestedVersion = new URLSearchParams(window.location.search).get(apiVersionQueryParameter);
+    const prefix = `${apiMajorVersion}-`;
+
+    if (!requestedVersion || !apiMajorVersion || !requestedVersion.startsWith(prefix)) return null;
+
+    const dateVersion = requestedVersion.slice(prefix.length);
+    return versions.split(',').includes(dateVersion) ? dateVersion : null;
+}
+
+function setRequestedApiVersion(block, version) {
+    const { apiMajorVersion } = block.dataset;
+    if (!apiMajorVersion) return;
+
+    const url = new URL(window.location.href);
+    url.searchParams.set(apiVersionQueryParameter, `${apiMajorVersion}-${version}`);
+    window.history.replaceState(window.history.state, '', `${url.pathname}${url.search}${url.hash}`);
+}
+
+function daysUntil(dateStr) {
+    if (!dateStr) return null;
+    const msPerDay = 24 * 60 * 60 * 1000;
+    return Math.round((new Date(dateStr) - new Date()) / msPerDay);
+}
+
+// Reads a version's { deprecated, eol } off the block's data-version-meta
+// JSON blob and derives escalation state for the lifecycle pill.
+function getVersionLifecycle(block, version) {
+    let meta = {};
+    try {
+        meta = JSON.parse(block.dataset.versionMeta || '{}');
+    } catch (err) {
+        meta = {};
+    }
+    const entry = meta[version] || {};
+    const remaining = daysUntil(entry.eol);
+    const eolPast = remaining !== null && remaining < 0;
+    const eolSoon = remaining !== null && remaining >= 0 && remaining <= 90;
+    return {
+        deprecated: !!entry.deprecated,
+        eol: entry.eol || '',
+        eolPast,
+        urgent: eolPast || eolSoon,
+    };
+}
+
+const apiVersionBlocks = document.querySelectorAll('.api-version-block');
+
+// Applies `version` to an operation and updates
+// every piece of UI that reflects it: the chip, dropdown selection, and the
+// underlying versioned panes / curl header.
+function applyApiVersion(operationId, version) {
+    const block = document.querySelector(`.api-version-block[data-operation-id="${operationId}"]`);
+    if (!block) return;
+    const { latestVersion } = block.dataset;
+    const isLatest = version === latestVersion;
+    const lifecycle = getVersionLifecycle(block, version);
+
+    const label = block.querySelector('.js-api-version-label');
+    if (label) label.textContent = version;
+
+    const dot = block.querySelector('.js-api-version-dot');
+    if (dot) {
+        dot.classList.toggle('api-version-dot-green', isLatest);
+        dot.classList.toggle('api-version-dot-amber', !isLatest);
+    }
+
+    const chipPill = block.querySelector('.js-api-version-chip-pill');
+    if (chipPill) {
+        chipPill.classList.toggle('d-none', !lifecycle.deprecated);
+        chipPill.classList.toggle('is-urgent', lifecycle.urgent);
+        chipPill.textContent = lifecycle.eolPast ? 'End of life' : 'Deprecated';
+    }
+
+    const toggle = block.querySelector('.js-api-version-toggle');
+    if (toggle) {
+        toggle.classList.toggle('is-deprecated', lifecycle.deprecated);
+    }
+
+    block.querySelectorAll('.js-api-version-item').forEach((item) => {
+        const selected = item.dataset.apiDateVersion === version;
+        item.classList.toggle('active', selected);
+        const check = item.querySelector('.js-api-version-check');
+        if (check) check.classList.toggle('d-none', !selected);
+    });
+
+    document.querySelectorAll(`.api-versioned-pane[data-operation-id="${operationId}"]`).forEach((pane) => {
+        pane.classList.toggle('d-none', pane.dataset.apiDateVersion !== version);
+    });
+    document.querySelectorAll(`.api-version-header-value[data-operation-id="${operationId}"]`).forEach((el) => {
+        el.textContent = version;
+    });
+}
+
+if (apiVersionBlocks.length) {
+    apiVersionBlocks.forEach((block) => {
+        const { operationId } = block.dataset;
+        const requestedVersion = getRequestedApiVersion(block);
+        if (requestedVersion) applyApiVersion(operationId, requestedVersion);
+    });
+
+    // Dropdown open/close is handled by Bootstrap's own dropdown component
+    // (data-bs-toggle="dropdown"); only selection needs custom wiring.
+    document.addEventListener('click', (e) => {
+        const item = e.target.closest('.js-api-version-item');
+        if (!item) return;
+        e.preventDefault();
+        const { apiDateVersion: version } = item.dataset;
+        const selectedBlock = item.closest('.api-version-block');
+        setRequestedApiVersion(selectedBlock, version);
+
+        // A page-level version query can apply to more than one operation. Keep
+        // every compatible selector in sync so reloading a copied URL produces
+        // exactly the same view.
+        apiVersionBlocks.forEach((block) => {
+            const { operationId: blockOperationId, versions } = block.dataset;
+            if (versions.split(',').includes(version)) applyApiVersion(blockOperationId, version);
+        });
+    });
+}
+
+
 // Scroll the active top level nav item into view below Docs search input
 if (bodyClassContains('api')) {
     setSidenavMaxHeight();

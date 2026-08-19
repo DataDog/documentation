@@ -35,6 +35,13 @@ data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="5"
 
   {{ partial "header/header.html" . }}
 
+  {{ $dateVersioning := partial "api/detect-date-versioning.html" (dict "dot" .) }}
+  {{ .Scratch.Set "isDateVersioned" $dateVersioning.isDateVersioned }}
+  {{ .Scratch.Set "apiVersionsList" $dateVersioning.apiVersionsList }}
+  {{ .Scratch.Set "baseVersion" $dateVersioning.baseVersion }}
+  {{ .Scratch.Set "dateVersionOperationId" $dateVersioning.dateVersionOperationId }}
+  {{ .Scratch.Set "apiMajorVersion" $dateVersioning.apiMajorVersion }}
+
   <div class="container container__content">
     <div class="row">
       <div class="d-none d-lg-flex col-sm-3 side">

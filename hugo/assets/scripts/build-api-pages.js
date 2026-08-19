@@ -245,6 +245,10 @@ const writeEndpointPage = (entry) => {
  */
 const createResources = (apiYaml, deref, apiVersion) => {
 
+  // Versioned oneOf variants are paired positionally with these dates,
+  // oldest to newest, so each schema can be diffed against its predecessor.
+  const versionDates = Object.keys((deref["x-datadog-api-versioning"] || {}).versions || {}).sort();
+
   apiYaml.tags.forEach((tag) => {
     const jsonData = {};
     const newDirName = getTagSlug(tag.name);
@@ -266,8 +270,16 @@ const createResources = (apiYaml, deref, apiVersion) => {
           const requestSchema = getSchema(action.requestBody.content);
           const requestJson = filterExampleJson("request", requestSchema);
           const requestCurlJson = filterExampleJson("curl", requestSchema);
-          const requestHtml = schemaTable("request", requestSchema);
+          const requestHtml = schemaTable("request", (requestSchema && requestSchema["x-datadog-api-versioned"])
+            ? pruneLargeOneOf(requestSchema)
+            : requestSchema);
           request = {"json_curl": requestCurlJson, "json": requestJson, "html": requestHtml};
+          if (requestSchema && requestSchema["x-datadog-api-versioned"] && Array.isArray(requestSchema.oneOf)) {
+            const pruned = requestSchema.oneOf.map((variant) => pruneLargeOneOf(variant));
+            assertVersionAlignment(action.operationId, "request", pruned.length, versionDates);
+            request.versionedHtml = pruned.map((variant, index) => schemaTable("request", variant, false, pruned[index - 1], versionDates[index]));
+            request.versionedJson = pruned.map((variant) => variant.example || filterExampleJson("request", variant));
+          }
           console.log(`successfully wrote ${pageDir}${action.operationId} html`);
         }
 
@@ -277,8 +289,19 @@ const createResources = (apiYaml, deref, apiVersion) => {
             if(response.content) {
               const responseSchema = getSchema(response.content);
               const responseJson = filterExampleJson("response", responseSchema);
-              const responseHtml = schemaTable("response", responseSchema);
-              responses[responseCode] = {"json": responseJson, "html": responseHtml};
+              const responseHtml = schemaTable("response", (responseSchema && responseSchema["x-datadog-api-versioned"])
+                ? pruneLargeOneOf(responseSchema)
+                : responseSchema);
+              const responseEntry = {"json": responseJson, "html": responseHtml};
+              // Date-based API versioning: render each schema variant separately so
+              // Hugo can switch the model and example panes with the version dropdown.
+              if (responseSchema && responseSchema["x-datadog-api-versioned"] && Array.isArray(responseSchema.oneOf)) {
+                const pruned = responseSchema.oneOf.map((variant) => pruneLargeOneOf(variant));
+                assertVersionAlignment(action.operationId, `response ${responseCode}`, pruned.length, versionDates);
+                responseEntry.versionedHtml = pruned.map((variant, index) => schemaTable("response", variant, false, pruned[index - 1], versionDates[index]));
+                responseEntry.versionedJson = pruned.map((variant) => variant.example || filterExampleJson("response", variant));
+              }
+              responses[responseCode] = responseEntry;
               console.log(`successfully wrote ${pageDir}${action.operationId}_response_${responseCode} html`);
             }
         });
@@ -707,6 +730,7 @@ const filterExampleJson = (actionType, data) => {
   const requiredKeys = getInitialRequiredData(data);
 
   // just return the example in additionalProperties cases with example
+  // just return the example in additionalProperties cases with example
   // just return the example if theres a top-level example and its response
   if(data.additionalProperties && data.example || data.example && actionType === 'response') {
     return data.example;
@@ -754,7 +778,7 @@ const isReadOnlyRow = (value) => {
  * @param {string} parentKey - optional key of the parent object
  * returns html column
  */
-const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') => {
+const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '', markerMarkup = '') => {
   let field = '';
   if(['type'].includes(key) && (typeof value !== 'object') && (key !== "&lt;any-key&gt;")) {
     field = '';
@@ -763,7 +787,7 @@ const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') =
   }
   return `
     <div class="col-4 column">
-      <p class="key table-cell">${toggleMarkup}${field}${requiredMarkup}</p>
+      <p class="key table-cell">${toggleMarkup}${field}${requiredMarkup}${markerMarkup}</p>
     </div>
   `.trim();
 };
@@ -949,6 +973,41 @@ const getOneOfChildData = (items) => {
 
 
 /**
+ * Given a field's schema `value`, resolves the nested properties dict rowRecursive
+ * should recurse into (array items, object properties, additionalProperties, oneOf),
+ * or null if the field has no nested structure. Factored out of rowRecursive so the
+ * same resolution can be applied to a field's *previous*-version value when diffing
+ * for D5 New/Changed/Removed markers.
+ * @param {object} value - part of a schema object
+ * returns {object|null} childData
+ */
+const extractChildData = (value) => {
+  let childData = null;
+  if (!value || typeof value !== 'object') return null;
+  if (value.type === 'array') {
+    if (typeof value.items === 'object') {
+      if (value.items.properties) {
+        childData = value.items.properties;
+      }
+      if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < oneOfLimit) {
+        childData = getOneOfChildData(value.items.oneOf);
+      }
+    }
+  } else if ("properties" in value) {
+    childData = value.properties;
+  } else if ("additionalProperties" in value) {
+    if (Object.keys(value.additionalProperties).length !== 0) {
+      childData = {"&lt;any-key&gt;": value.additionalProperties};
+    }
+  } else if ("oneOf" in value) {
+    if (value.oneOf instanceof Array && value.oneOf.length < oneOfLimit) {
+      childData = getOneOfChildData(value.oneOf);
+    }
+  }
+  return childData;
+};
+
+/**
  * Takes a application/json schema for request or response and outputs a table
  * @param {string} tableType - string 'request' or 'response'
  * @param {object} data - schema object
@@ -957,9 +1016,15 @@ const getOneOfChildData = (items) => {
  * @param {number} level - how deep does the rabbit hole go?
  * @param {string} parentKey - parent key
  * @param {boolean} skipAnyKeys - whether to skip <any-key> rows
+ * @param {object|null} prevData - the same-shaped properties dict from the prior
+ *   date-versioned variant, used to mark rows New/Removed relative to it (D5).
+ *   Only diffed when the field exists (unchanged presence) in both — a field new
+ *   or removed at this level isn't diffed further down.
+ * @param {string} versionLabel - the date this variant belongs to, shown in
+ *   "Added in {versionLabel}" / "Removed in {versionLabel}" markers.
  * returns html row with nested rows
  */
-const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '', skipAnyKeys = false) => {
+const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '', skipAnyKeys = false, prevData = null, versionLabel = '') => {
   let html = '';
   let newRequiredFields;
 
@@ -976,57 +1041,33 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
   if(level > 10) return '';
 
     if (typeof data === 'object') {
-      Object.entries(data).forEach(([key, value]) => {
+      const prevObj = (prevData && typeof prevData === 'object') ? prevData : null;
+      const keys = Object.keys(data);
+      if (prevObj) {
+        Object.keys(prevObj).forEach((k) => { if (!keys.includes(k)) keys.push(k); });
+      }
+
+      keys.forEach((key) => {
+        const isRemoved = !(key in data);
+        const existedBefore = !!(prevObj && key in prevObj);
+        const isNew = !!(versionLabel && prevObj && !isRemoved && !existedBefore);
+        const value = isRemoved ? prevObj[key] : data[key];
 
         // calculate child data in advance
         // we do this here so that we can add classes to html with this knowledge
-        let childData = null;
         let newParentKey = key;
-        if(value.type === 'array') {
-          if(typeof value.items === 'object') {
-            if (value.items.properties) {
-              childData = value.items.properties;
-              newRequiredFields = (value.items.required) ? value.items.required : [];
-            }
-            // for items -> oneOf
-            if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < oneOfLimit) {
-              childData = getOneOfChildData(value.items.oneOf);
-            }
-          } else if(typeof value.items === 'string') {
-            if(value.items === '[Circular]') {
-              childData = null;
-            }
-          }
+        let childData = extractChildData(value);
+        if(value.type === 'array' && typeof value.items === 'object' && value.items.properties) {
+          newRequiredFields = (value.items.required) ? value.items.required : [];
         } else if(typeof value === 'object' && "properties" in value) {
-          childData = value.properties;
           newRequiredFields = (value.required) ? value.required : [];
-        } else if (typeof value === 'object' && "additionalProperties" in value) {
-          // check if `additionalProperties` is an empty object
-          if(Object.keys(value.additionalProperties).length !== 0){
-            childData = {"&lt;any-key&gt;": value.additionalProperties};
-            newParentKey = "additionalProperties";
-          }
-        } else if (typeof value === 'object' && "oneOf" in value) {
-          // for properties -> oneOf
-          if(value.oneOf instanceof Array && value.oneOf.length < oneOfLimit) {
-            childData = getOneOfChildData(value.oneOf);
-          }
+        } else if (typeof value === 'object' && "additionalProperties" in value && childData) {
+          newParentKey = "additionalProperties";
         }
-        // for widgets
-        /*
-        if(key === "definition" && value.discriminator) {
-          childData = Object.keys(value.discriminator.mapping)
-            .map((mapkey, indx) => { return {[mapkey]: value.oneOf[indx]} })
-            .reduce((obj, item) => ({...obj, ...item}), {});
-        }
-        */
-        // console.log(childData);
-        // if(childData && "definition" in childData) {
-        //   console.log("YES!!!!")
-        //   console.log(childData)
-        //   childData = value["oneOf"];
-        // }
-
+        // Only keep diffing into a field that exists on both sides — a field
+        // that itself just appeared/disappeared doesn't need its children
+        // individually marked, the parent row's marker already covers it.
+        const childPrevData = (!isRemoved && !isNew && existedBefore) ? extractChildData(prevObj[key]) : null;
 
         if (skipAnyKeys && childData) {
           Object.entries(childData).forEach(([ckey, cvalue]) => {
@@ -1040,9 +1081,15 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         }
 
         const isReadOnly = isReadOnlyRow(value);
+        const changeMarkerClass = isRemoved ? "isRemoved" : (isNew ? "isNew" : "");
+        const changeMarkerLabel = isRemoved ? `Removed in ${versionLabel}` : (isNew ? `Added in ${versionLabel}` : '');
+        const changeMarkerMarkup = changeMarkerLabel
+          ? ` <span class="schema-change-marker ${isRemoved ? "schema-change-marker-removed" : "schema-change-marker-new"}">${changeMarkerLabel}</span>`
+          : '';
+        const changeMarkerClassSuffix = changeMarkerClass ? ` ${changeMarkerClass}` : '';
 
         // build up row classes
-        const outerRowClasses = `${(isNested) ? "isNested d-none" : ""} ${(childData) ? "hasChildData" : ""} ${(isReadOnly) ? "isReadOnly" : ""}`;
+        const outerRowClasses = `${(isNested) ? "isNested d-none" : ""} ${(childData) ? "hasChildData" : ""} ${(isReadOnly) ? "isReadOnly" : ""}${changeMarkerClassSuffix}`;
         const nestedRowClasses = `first-row ${(childData) ? "js-collapse-trigger collapse-trigger" : ""} ${(isReadOnly) ? "isReadOnly" : ""}`;
 
         // build markdown
@@ -1055,11 +1102,11 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         <div class="row ${outerRowClasses}">
           <div class="col-12 first-column">
             <div ${parentKey ? `data-parent-field="${parentKey}"` : ""} class="row table-row ${nestedRowClasses}">
-              ${fieldColumn(key, value, toggleArrow, required, parentKey)}
+              ${fieldColumn(key, value, toggleArrow, required, parentKey, changeMarkerMarkup)}
               ${typeColumn(key, value, readOnlyField)}
               ${descColumn(key, value)}
             </div>
-            ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey, skipAnyKeys) : ''}
+            ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey, skipAnyKeys, childPrevData, versionLabel) : ''}
           </div>
         </div>
         `.trim();
@@ -1071,37 +1118,94 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
 };
 
 /**
+ * Warns at build time when a date-versioned schema does not enumerate exactly one
+ * oneOf variant per declared version. The variant <-> version pairing is positional
+ * (see createResources), so a mismatch silently mislabels or blanks version panes.
+ * @param {string} operationId
+ * @param {string} schemaKind - e.g. "request" or "response 200"
+ * @param {number} variantCount - number of oneOf variants
+ * @param {string[]} versionDates - sorted list of declared version dates
+ */
+const assertVersionAlignment = (operationId, schemaKind, variantCount, versionDates) => {
+  if (variantCount !== versionDates.length) {
+    console.warn(
+      `WARNING: date-versioned ${schemaKind} schema for ${operationId} has ${variantCount} ` +
+      `oneOf variant(s) but ${versionDates.length} declared version(s) ` +
+      `(${versionDates.join(", ")}). Variant<->version pairing is positional; ` +
+      `enumerate one oneOf variant per version, oldest -> newest, or panes will be mislabeled/blank.`
+    );
+  }
+};
+
+/**
+ * Deep-clone a schema while replacing any oneOf whose length exceeds a threshold
+ * with a single-line stub. Used when pre-rendering versioned schema variants to
+ * avoid re-expanding large shared subtrees (e.g. WidgetDefinition, ~40 variants)
+ * per version. The threshold is set above the size of any legitimate per-field
+ * union so real polymorphic fields still render in full — only the big shared
+ * component trees get stubbed. (Non-versioned tables expand unions up to
+ * oneOfLimit=50; this is deliberately lower to catch the shared trees.)
+ */
+const pruneLargeOneOf = (schema, threshold = 25, depth = 0) => {
+  if (depth > 20) return schema;
+  if (!schema || typeof schema !== 'object') return schema;
+  if (Array.isArray(schema)) return schema.map((s) => pruneLargeOneOf(s, threshold, depth + 1));
+  if (Array.isArray(schema.oneOf) && schema.oneOf.length > threshold) {
+    return { type: schema.type || 'object', description: schema.description || '' };
+  }
+  const out = {};
+  for (const [k, v] of Object.entries(schema)) {
+    out[k] = pruneLargeOneOf(v, threshold, depth + 1);
+  }
+  return out;
+};
+
+/**
+ * Resolves the same "what does rowRecursive iterate over" logic schemaTable
+ * uses for `data`, applied to a schema object generically — used to derive
+ * `initialData` for both the current variant and (when diffing, D5) the
+ * prior date-versioned variant, which won't necessarily share the same shape
+ * (e.g. array vs plain object) but still needs the same extraction rules.
+ * @param {object|null} data - schema object, or null
+ * returns {object|null} initialData
+ */
+const resolveInitialData = (data) => {
+  if (!data || typeof data !== 'object') return null;
+  if (data.type === 'array') {
+    // A pruned oneOf stub or malformed variant can be type:'array' with no items;
+    // bail out rather than deref undefined (this runs for prevData too now).
+    if (!data.items || typeof data.items !== 'object') return null;
+    if (data.items.type === 'array') {
+      return data.items.items && data.items.items.properties;
+    } else if (data.items.properties) {
+      return data.items.properties;
+    }
+    return data.items;
+  } else if (data.additionalProperties) {
+    return {"&lt;any-key&gt;": data.additionalProperties};
+  } else if (data.oneOf && data.oneOf.length > 0) {
+    // we don't have access to oneOf names in json so lets set them as "Option n"
+    return data.oneOf
+      .map((object, index) => ({[`Option ${index + 1}`]: object}))
+      .reduce((output, item) => ({...output, ...item}), {});
+  }
+  return data.properties;
+};
+
+/**
  * Takes a application/json schema for request or response and outputs a table
  * @param {string} tableType - 'request' or 'response'
  * @param {object} data - schema object
  * @param {boolean} skipAnyKeys - whether to skip <any-key>
+ * @param {object|null} prevData - the same-shaped schema object from the prior
+ *   date-versioned variant, if any (D5 New/Changed/Removed field diffing).
+ * @param {string} versionLabel - the date this variant belongs to.
  * returns html table string
  */
-const schemaTable = (tableType, data, skipAnyKeys = false) => {
-  let extraClasses = '';
-  let initialData;
-  if(data.type === 'array') {
-    if(data.items.type === 'array') {
-      initialData = data.items.items.properties;
-    } else if(data.items.properties) {
-      initialData = data.items.properties;
-    } else {
-      initialData = data.items;
-      extraClasses = 'hide-table';
-    }
-  } else if(data.additionalProperties) {
-    initialData = {"&lt;any-key&gt;": data.additionalProperties};
-  } else if(data.oneOf && data.oneOf.length > 0) {
-    // we don't have access to oneOf names in json so lets set them as "Option n"
-    initialData = data.oneOf
-      .map((obj, indx) => {
-        return {[`Option ${indx + 1}`]: data.oneOf[indx]}
-      })
-      .reduce((obj, item) => ({...obj, ...item}), {});
-  } else {
-    initialData = data.properties;
-  }
-  extraClasses = (initialData) ? extraClasses : 'hide-table';
+const schemaTable = (tableType, data, skipAnyKeys = false, prevData = null, versionLabel = '') => {
+  const initialData = resolveInitialData(data);
+  const prevInitialData = resolveInitialData(prevData);
+  const extraClasses = (initialData) ? (data.type === 'array' && data.items && !data.items.properties && data.items.type !== 'array' ? 'hide-table' : '') : 'hide-table';
   const emptyRow = `
     <div class="row">
       <div class="col-12 first-column">
@@ -1110,7 +1214,7 @@ const schemaTable = (tableType, data, skipAnyKeys = false) => {
         </div>
       </div>
     </div>`.trim();
-  return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, data.required || [], 0, '', skipAnyKeys) : emptyRow}</div>`;
+  return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, data.required || [], 0, '', skipAnyKeys, prevInitialData, versionLabel) : emptyRow}</div>`;
 };
 
 /**

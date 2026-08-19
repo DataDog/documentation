@@ -1,0 +1,116 @@
+{{/*
+  Detects whether the current API page is a single-operation page whose
+  request/response schemas use date-based versioning (x-datadog-api-versioning
+  / x-datadog-api-versioned), and if so, returns the version list needed to
+  render the per-operation control and its versioned content.
+
+  Runs against every api/* page (single, list, category) since it's called
+  once from baseof.html before the API page renders; on non-single-operation
+  pages it simply finds no matching menu entry and returns isDateVersioned=false.
+
+  Params:
+    dot - the current Page
+
+  Returns a dict:
+    isDateVersioned        - bool
+    apiVersionsList        - slice of {date string, isBase bool}, sorted oldest -> newest
+    baseVersion            - string
+    dateVersionOperationId - string
+    apiMajorVersion        - string (for example, "v1")
+*/}}
+{{ $dot := .dot }}
+
+{{ $relPath := strings.TrimSuffix "/" $dot.RelPermalink }}
+{{ $tagSlug := path.Base (path.Dir $relPath) }}
+{{ $endpointSlug := path.Base $relPath }}
+{{ $identifier := printf "%s-%s" $tagSlug $endpointSlug }}
+
+{{ $menuEntry := dict }}
+{{ $tagName := "" }}
+{{ with index $dot.Sites.Default.Menus "api" }}
+  {{ range . }}
+    {{ if eq .Identifier $tagSlug }}
+      {{ $tagName = .Name }}
+      {{/* The operation's menu entry (identifier "{tag}-{endpoint}") is always a
+           child of its own tag, so only walk this tag's children instead of every
+           tag's — on non-operation pages nothing matches and no children are walked. */}}
+      {{ range .Children }}
+        {{ if eq .Identifier $identifier }}
+          {{ $menuEntry = . }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $versions := $menuEntry.Params.versions | default (slice) | sort | collections.Reverse }}
+{{ $operationids := $menuEntry.Params.operationids | default (slice) }}
+
+{{ $dvScratch := newScratch }}
+{{ $dvScratch.Set "isDateVersioned" false }}
+{{ $dvScratch.Set "apiVersionsList" slice }}
+{{ $dvScratch.Set "baseVersion" "" }}
+{{ $dvScratch.Set "dateVersionOperationId" "" }}
+{{ $dvScratch.Set "apiMajorVersion" "" }}
+{{ range $versionNum := $versions }}
+  {{ $specData := partial "api/load-specs.html" (dict "version" $versionNum) }}
+  {{ if $specData }}
+    {{ $gr := partial "api/regions.html" (dict "servers" $specData.servers) }}
+    {{ $ep := partial "api/get-endpoint.html" (dict "lang" $dot.Lang "operationids" $operationids "version" $versionNum "generalRegions" $gr) }}
+    {{ if $ep }}
+      {{ range $respCode, $resp := $ep.action.responses }}
+        {{ range $mt, $content := $resp.content }}
+          {{ if index $content.schema "x-datadog-api-versioned" }}
+            {{ $dvScratch.Set "isDateVersioned" true }}
+            {{ $dvScratch.Set "dateVersionOperationId" $ep.action.operationId }}
+            {{ $dvScratch.Set "apiMajorVersion" $versionNum }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      {{ with $ep.action.requestBody }}
+        {{ range $mt, $content := .content }}
+          {{ if index $content.schema "x-datadog-api-versioned" }}
+            {{ $dvScratch.Set "isDateVersioned" true }}
+            {{ $dvScratch.Set "dateVersionOperationId" $ep.action.operationId }}
+            {{ $dvScratch.Set "apiMajorVersion" $versionNum }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      {{ if $dvScratch.Get "isDateVersioned" }}
+        {{ $apiVersioningData := index $specData "x-datadog-api-versioning" | default dict }}
+        {{ $versionMap := $apiVersioningData.versions | default dict }}
+        {{ $dateKeys := slice }}
+        {{ range $dk, $_ := $versionMap }}
+          {{ $dateKeys = append $dk $dateKeys }}
+        {{ end }}
+        {{ $dateKeys = sort $dateKeys }}
+        {{ $bvs := newScratch }}
+        {{ $bvs.Set "bv" "" }}
+        {{ range $dateKeys }}
+          {{ if (index $versionMap .).base }}
+            {{ $bvs.Set "bv" . }}
+          {{ end }}
+        {{ end }}
+        {{ $bv := $bvs.Get "bv" }}
+        {{ if and (eq $bv "") (gt (len $dateKeys) 0) }}
+          {{ $bv = index $dateKeys 0 }}
+        {{ end }}
+        {{ $dvScratch.Set "baseVersion" $bv }}
+        {{ $vList := slice }}
+        {{ range $dateKeys }}
+          {{ $vd := index $versionMap . }}
+          {{ $vList = append (dict "date" . "isBase" ($vd.base | default false) "deprecated" ($vd.deprecated | default false) "eol" ($vd.eol | default "")) $vList }}
+        {{ end }}
+        {{ $dvScratch.Set "apiVersionsList" $vList }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ return dict
+  "isDateVersioned" ($dvScratch.Get "isDateVersioned")
+  "apiVersionsList" ($dvScratch.Get "apiVersionsList")
+  "baseVersion" ($dvScratch.Get "baseVersion")
+  "dateVersionOperationId" ($dvScratch.Get "dateVersionOperationId")
+  "apiMajorVersion" ($dvScratch.Get "apiMajorVersion")
+}}
