@@ -13,11 +13,11 @@ further_reading:
 
 ## Overview
 
-Datadog detects anomalies across your dashboard's timeseries graphs, groups co-occurring anomalies into issues, and identifies the tags contributing most to each. From an anomaly you can narrow the cause down on a single graph with [Watchdog Explains][2], or delegate root cause analysis to [Bits Investigation][1].
+Datadog detects anomalies across your dashboard's timeseries graphs, groups co-occurring anomalies into issues, and identifies the tags contributing most to each. From an anomaly, you can narrow down the cause on a single graph with [Watchdog Explains][2], or delegate root cause analysis to [Bits Investigation][1].
 
 <div class="alert alert-info">Anomaly detection is available for <a href="/dashboards/widgets/timeseries/">Timeseries widgets</a> with {{< ui >}}Metrics{{< /ui >}} data (avg, sum, min, and max aggregation). Widgets using functions such as <code>cumsum</code>, <code>anomalies</code>, or <code>outliers</code> are not eligible.</div>
 
-Detection runs when you open a dashboard, and issues appear within approximately 20 seconds. If Datadog detects no anomalies, none of the controls described on this page appear.
+Detection runs when you open a dashboard, and issues appear within about 20 seconds. If Datadog detects no anomalies, the {{< ui >}}Investigate{{< /ui >}} menu and the controls described on this page do not appear.
 
 Datadog does not run anomaly detection on:
 
@@ -31,7 +31,7 @@ Datadog does not run anomaly detection on:
 
 Datadog applies anomaly detection to the graphs on your dashboard by analyzing both the shape and value of the underlying timeseries. It identifies deviations from historical patterns, flagging spikes, dips, or gradual drifts that don't align with expected behavior.
 
-To account for seasonality, the algorithm looks back up to three weeks. For example, if a spike appears on a Monday at 9:00 a.m., Datadog compares that datapoint against previous Mondays at the same hour. If similar patterns appear consistently, the spike is treated as **seasonal** and is not flagged as an anomaly. This helps reduce false positives so that only unexpected deviations are surfaced.
+To account for seasonality, the algorithm looks back up to three weeks. For example, if a spike appears on a Monday at 9:00 a.m., Datadog compares that datapoint against previous Mondays at the same hour. If similar patterns appear consistently, the spike is treated as **seasonal** and is not flagged as an anomaly. This helps reduce false positives so Datadog surfaces only unexpected deviations.
 
 Anomalies can be sharp spikes or drops, but may also be subtler trends such as step changes or slope shifts.
 
@@ -39,7 +39,7 @@ Anomalies can be sharp spikes or drops, but may also be subtler trends such as s
 
 Click {{< ui >}}Investigate{{< /ui >}} at the top of the dashboard to see the issues Datadog detected. Each issue names the metric that deviated and when it was detected. Expanding an issue also shows its influential tags and the {{< ui >}}Widget affected{{< /ui >}}.
 
-Selecting an issue scrolls the dashboard to that graph, which is useful on dashboards with many widgets.
+Selecting an issue scrolls the dashboard to the affected graph.
 
 Anomalies occurring across several widgets at once are grouped into one issue, such as `Anomalies co-occur on 18 widgets`.
 
@@ -70,7 +70,7 @@ For more information, see [Watchdog Explains][2].
 
 Click {{< ui >}}Investigate With AI{{< /ui >}} from an expanded anomaly chip, from the {{< ui >}}Investigate{{< /ui >}} menu, or from a Watchdog Explains finding. Datadog opens [Bits Investigation][1] in a new tab, where it analyzes the anomaly and reports a root cause, an impact assessment, and a timeline.
 
-After an investigation exists, the button reads {{< ui >}}See N Related Investigation{{< /ui >}}. Clicking it opens a filtered list of investigations rather than a single investigation. To open one, click {{< ui >}}Review Completed Investigation{{< /ui >}}.
+After one or more related investigations exist, the button reads {{< ui >}}See _N_ Related Investigations{{< /ui >}}, where _N_ is the count. Clicking it opens a filtered list of investigations rather than a single investigation. To open one, click {{< ui >}}Review Completed Investigation{{< /ui >}}.
 
 <div class="alert alert-info">The related-investigations count is scoped to the whole dashboard and time range, not to the anomaly you are viewing. A count of one can mean an investigation started from a different graph on the same dashboard.</div>
 
