@@ -381,6 +381,37 @@ Retrieves full details of a specific APM recommendation by ID.
 
 - Get the details of recommendation `abc123`.
 
+## Assistant
+
+Tools for interacting with [Bits Chat][73], the AI-powered companion that helps you search and act across Datadog using natural language.
+
+**Note**: The `assistant` toolset does not support mutating actions, such as creating, editing, or deleting Datadog resources. To perform those actions, use the specific product toolset instead, for example `dashboards` or `alerting`.
+
+### `send_message_to_assistant`
+*Toolset: **assistant***\
+*Permissions Required: `Bits Chat Access`*\
+Sends a message to the Datadog Assistant and returns its response. Optionally continues an existing conversation by providing a `conversation_id`.
+
+- Ask the assistant what's causing the latency spike on the checkout service.
+- Continue conversation `abc-123-def` and ask the assistant for next steps.
+- Ask the assistant to summarize open P1 incidents, with debug mode enabled.
+
+### `get_assistant_conversation_history`
+*Toolset: **assistant***\
+*Permissions Required: `Bits Chat Access`*\
+Retrieves the full conversation history for a specific assistant conversation by its ID.
+
+- Get the full conversation history for conversation `abc-123-def`.
+- Show me everything the assistant said in my last conversation about the payment outage.
+
+### `list_assistant_conversations`
+*Toolset: **assistant***\
+*Permissions Required: `Bits Chat Access`*\
+Lists all Datadog Assistant conversations for the current user.
+
+- List all my past conversations with the Datadog Assistant.
+- Show me my most recent assistant conversations.
+
 ## Audit Trail
 
 Tools for [Audit Trail][71], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
@@ -1189,6 +1220,68 @@ Publishes a specific draft version of a form, making it the live version respond
 Copies an existing form, including its latest definition, into a new form with a new data store.
 
 - Clone my incident review form to create a template for next quarter.
+
+## Investigations
+
+Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting.
+
+<div class="alert alert-info">The <code>investigator</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+### `trigger_bits_ai_investigation`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Write`*\
+Triggers a Bits Investigation for a monitor alert. This starts an automated investigation that analyzes the alert context and provides findings and conclusions. Use `get_bits_ai_investigation` to retrieve results.
+
+- Investigate why monitor `12345` fired at event `abc123`.
+- Kick off a Bits Investigation for the CPU alert on the checkout service.
+
+### `trigger_general_investigation`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Write`*\
+Triggers a Bits Investigation from a text description. For best results, scope the investigation with a `service:<name>` or `host:<name>` tag. Use `get_bits_ai_investigation` to poll for results after triggering.
+
+- Investigate the latency spike on `service:checkout` since 2pm today.
+- Start an investigation into elevated error rates on `host:web-01`.
+
+### `trigger_incident_investigation`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Write`*\
+Triggers a Bits Investigation scoped to a Datadog incident. The investigation analyzes the incident timeline and context to provide findings and conclusions. Use `get_investigations_from_incident_id` to check for existing investigations first.
+
+- Trigger an investigation for incident `1234` to help find the root cause.
+- Start a Bits Investigation scoped to the ongoing checkout incident.
+
+### `search_investigations`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Read`*\
+Searches Bits AI investigations by keyword or query. Returns matching investigations with their IDs, status, and summaries.
+
+- Find investigations related to the checkout service.
+- Show me all completed investigations from this week.
+
+### `get_investigations_from_incident_id`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Read`*\
+Retrieves Bits AI investigations linked to a specific Datadog incident.
+
+- What investigations have been triggered for incident `1234`?
+- List investigation IDs linked to the payments incident.
+
+### `get_bits_ai_investigation`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Read`*\
+Retrieves the status, findings, and conclusions of a Bits AI investigation.
+
+- Get the findings for investigation `abc-123-def`.
+- What did the investigation conclude about the outage?
+
+### `steer_bits_ai_investigation`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Write`*\
+Sends a steering message to a running Bits AI investigation to correct, redirect, or add context. Use `get_bits_ai_investigation` first to confirm the investigation is still active.
+
+- Tell the running investigation to focus on the database layer instead.
+- Redirect investigation `abc-123-def` to also check recent deployments.
 
 ## Kubernetes
 
@@ -2340,6 +2433,8 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [70]: /data_observability/
 [71]: /account_management/audit_trail/
 [72]: /actions/forms/
+[73]: /bits_ai/bits_chat/
+[74]: /bits_ai/bits_investigation/
 
 ## Further reading
 
