@@ -27,8 +27,7 @@ further_reading:
 
 Use the [Tag Explorer][2] to understand the sources and view descriptions for each tag. This includes tags managed through [Tag Pipelines][3]. Tag Pipelines allow you to create and manage tag rules that fix missing or incorrect tags on your cloud bill, or create inferred tags according to your business logic.
 
-<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
-{{< img src="cloud_cost/tag_explorer/dropdown_1.png" alt="Search through the list of Azure cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
+{{< img src="cloud_cost/tag_explorer/aws_2.png" alt="The Tag Explorer listing AWS cost tags with their sources, descriptions, cost coverage, and distinct values" style="width:100%;" >}}
 
 ## Setup
 
@@ -44,124 +43,11 @@ See the respective documentation for your cloud provider:
 
 ## Search and manage tags
 
-Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Analyze{{< /ui >}} > {{< ui >}}Tags{{< /ui >}}][2] to search for tags related to your cloud provider bills, custom costs, Datadog costs, SaaS cost integrations, and tag pipelines.
+Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Analyze{{< /ui >}} > {{< ui >}}Tags{{< /ui >}}][2] to search tags from your cloud provider bills, [Custom Costs][4], [Datadog costs][5], [SaaS cost integrations][6], and [Tag Pipelines][3].
 
-{{< tabs >}}
-{{% tab "AWS" %}}
+To see the tags for one provider, select it from the {{< ui >}}Provider{{< /ui >}} dropdown menu in the top left corner. AWS, Azure, Google Cloud, and Oracle Cloud are available, along with each SaaS cost integration you have configured. Use the {{< ui >}}Tag Sources{{< /ui >}} panel to narrow the results further by where each tag originates.
 
-For AWS tags, select {{< ui >}}AWS{{< /ui >}} from the dropdown menu on the top right corner.
-
-<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
-{{< img src="cloud_cost/tag_explorer/aws_1.png" alt="Search through the list of AWS cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
-
-{{% /tab %}}
-{{% tab "Azure" %}}
-
-For Azure tags, select {{< ui >}}Azure{{< /ui >}} from the dropdown menu on the top right corner.
-
-<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
-{{< img src="cloud_cost/tag_explorer/azure_1.png" alt="Search through the list of Azure cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
-
-{{% /tab %}}
-{{% tab "Google" %}}
-
-For Google Cloud tags, select {{< ui >}}Google{{< /ui >}} from the dropdown menu on the top right corner.
-
-<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
-{{< img src="cloud_cost/tag_explorer/google_1.png" alt="Search through the list of Google Cloud cost-related tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
-
-{{% /tab %}}
-{{% tab "Datadog" %}}
-
-<div class="alert alert-danger">Daily Datadog costs are in Preview.</div>
-
-For Datadog tags, select {{< ui >}}Datadog{{< /ui >}} from the dropdown menu on the top right corner.
-
-<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
-{{< img src="cloud_cost/tag_explorer/datadog_1.png" alt="Search through the list of your Datadog cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
-
-{{% /tab %}}
-{{% tab "Confluent Cloud" %}}
-
-<div class="alert alert-danger">Confluent Cloud costs are in Preview.</div>
-
-For Confluent Cloud tags, select {{< ui >}}Confluent Cloud{{< /ui >}} from the dropdown menu on the top right corner.
-
-<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
-{{< img src="cloud_cost/tag_explorer/confluent_cloud_1.png" alt="Search through the list of your Confluent Cloud cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
-
-{{% /tab %}}
-{{% tab "Databricks" %}}
-
-<div class="alert alert-danger">Databricks costs are in Preview.</div>
-
-For Databricks tags, select {{< ui >}}Databricks{{< /ui >}} from the dropdown menu on the top right corner.
-
-<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
-{{< img src="cloud_cost/tag_explorer/databricks_1.png" alt="Search through the list of your Databricks cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
-
-{{% /tab %}}
-{{% tab "Fastly" %}}
-
-<div class="alert alert-danger">Fastly costs are in Preview.</div>
-
-For Fastly tags, select {{< ui >}}Fastly{{< /ui >}} from the dropdown menu on the top right corner.
-
-<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
-{{< img src="cloud_cost/tag_explorer/fastly_1.png" alt="Search through the list of your Fastly cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
-
-{{% /tab %}}
-{{% tab "Elastic Cloud" %}}
-
-<div class="alert alert-danger">Elastic Cloud costs are in Preview.</div>
-
-For Elastic Cloud tags, select {{< ui >}}Elastic Cloud{{< /ui >}} from the dropdown menu on the top right corner.
-
-<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
-{{< img src="cloud_cost/tag_explorer/elastic_cloud.png" alt="Search through the list of your Elastic Cloud cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
-
-{{% /tab %}}
-{{% tab "MongoDB" %}}
-
-<div class="alert alert-danger">MongoDB costs are in Preview.</div>
-
-For MongoDB tags, select {{< ui >}}MongoDB{{< /ui >}} from the dropdown menu on the top right corner.
-
-<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
-{{< img src="cloud_cost/tag_explorer/mongodb_1.png" alt="Search through the list of your MongoDB cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
-
-{{% /tab %}}
-{{% tab "OpenAI" %}}
-
-<div class="alert alert-danger">OpenAI costs are in Preview.</div>
-
-For OpenAI tags, select {{< ui >}}OpenAI{{< /ui >}} from the dropdown menu on the top right corner.
-
-<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
-{{< img src="cloud_cost/tag_explorer/openai_1.png" alt="Search through the list of your OpenAI cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
-
-{{% /tab %}}
-{{% tab "Snowflake" %}}
-
-<div class="alert alert-danger">Snowflake costs are in Preview.</div>
-
-For Snowflake tags, select {{< ui >}}Snowflake{{< /ui >}} from the dropdown menu on the top right corner.
-
-<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
-{{< img src="cloud_cost/tag_explorer/snowflake_1.png" alt="Search through the list of your Snowflake cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
-
-{{% /tab %}}
-{{% tab "Twilio" %}}
-
-<div class="alert alert-danger">Twilio costs are in Preview.</div>
-
-For Twilio tags, select {{< ui >}}Twilio{{< /ui >}} from the dropdown menu on the top right corner.
-
-<!-- TODO: recapture screenshot, still shows the old Cloud Cost > Settings breadcrumb -->
-{{< img src="cloud_cost/tag_explorer/twilio_1.png" alt="Search through the list of your Twilio cost tags in the Tag Explorer and understand where the costs are coming from" style="width:100%;" >}}
-
-{{% /tab %}}
-{{< /tabs >}}
+<div class="alert alert-danger">Datadog, Confluent Cloud, Databricks, Elastic Cloud, Fastly, MongoDB, OpenAI, Snowflake, and Twilio costs are in Preview.</div>
 
 ## Set preferred tags
 You can set up to five preferred tags to highlight your organization's most important tags throughout Cloud Cost Management. These tags appear first when selecting tags in the [Explorer page][7], [CCM Reports][8], and [Custom Allocation Rules][9], among other areas.
