@@ -49,18 +49,22 @@
     {{ $versionCount := (len $versions) }}
     {{ $anchorStr := .Title }}
 
-    <div class="row align-items-start mb-1">
-      <div class="col-11 col-xl-9">
-          <h1 class="api-task-description mb-0" id="{{ $anchorStr | anchorize }}">
-              {{- $anchorStr -}}
-          </h1>
-      </div>
-      <div class="col-1 col-xl-3 d-flex justify-content-end align-items-center">
+    {{/* Reuse the date-versioning metadata detected in baseof.html before the sidebar rendered. */}}
+    {{ $topIsDateVersioned := $.Scratch.Get "isDateVersioned" }}
+    {{ $topApiVersionsList := $.Scratch.Get "apiVersionsList" }}
+    {{ $topBaseVersion := $.Scratch.Get "baseVersion" }}
+    {{ $topApiMajorVersion := $.Scratch.Get "apiMajorVersion" }}
+
+    <div class="api-operation-header d-flex flex-wrap align-items-center justify-content-between mb-1">
+      <h1 class="api-task-description mb-0" id="{{ $anchorStr | anchorize }}">
+          {{- $anchorStr -}}
+      </h1>
+      <div class="api-operation-header-actions d-flex align-items-center">
           {{ partial "api/api-copy-btn.html" . }}
       </div>
     </div>
 
-    {{ if gt $versionCount 0 }}
+    {{ if and (not $topIsDateVersioned) (gt $versionCount 0) }}
     <ul class="nav nav-tabs border-none response-toggle px-0">
       {{ range $versionIndex, $versionNum := $versions }}
         {{ $adat := cond (eq $versionNum "v1") $d $d2 }}
@@ -87,7 +91,7 @@
         {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $operationids "version" $versionNum "generalRegions" $generalRegions ) }}
         {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuEntry "endpoint" $endpoint) }}
 
-        <div data-title="{{ $versionNum }}" id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="tab-pane {{ if $endpointVisibility.isVisibleVersion }} active{{ end }}" role="tabpanel">
+        <div data-title="{{ $versionNum }}" id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="{{ if not $topIsDateVersioned }}tab-pane{{ end }} {{ if or $topIsDateVersioned $endpointVisibility.isVisibleVersion }} active{{ end }}" {{ if not $topIsDateVersioned }}role="tabpanel"{{ end }}>
 
         <!-- the version-specific resource page (provides examples.json) lives at /api/{v}/{tag}/ -->
         {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" $tagSlug "") }}
@@ -107,7 +111,11 @@
                 "adat" $adat
                 "tag" $tag
                 "translate_action" $translate_action
-                "resourcePage" $resourcePage) }}
+                "resourcePage" $resourcePage
+                "isDateVersioned" $topIsDateVersioned
+                "apiVersionsList" $topApiVersionsList
+                "baseVersion" $topBaseVersion
+                "apiMajorVersion" $topApiMajorVersion) }}
           {{ else }}
             {{ warnf "endpoint not found in api single.html lang: %q, version: %q, tag: %q, operationids: %v" $dot.Lang $versionNum $tagName $operationids }}
           {{ end }}

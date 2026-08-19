@@ -1,5 +1,511 @@
 // API
 $ddpurple: #632ca6;
+// Operation title actions: keep the version selector and copy-page control on
+// the same row as the title when space allows.
+.api-operation-header {
+    gap: 1rem;
+    margin-bottom: 0.75rem !important;
+    .api-copy-btn {
+        flex-shrink: 0;
+        margin-top: 0;
+    }
+}
+.api-operation-header-actions {
+    gap: 1rem;
+    margin-left: auto;
+}
+.api-operation-request-line {
+    gap: 1rem;
+    margin-top: 0.5rem;
+
+    .api-url-info {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    @include media-breakpoint-down(md) {
+        align-items: flex-start !important;
+
+        .api-version-block {
+            margin-top: 0.5rem;
+        }
+    }
+}
+// Date-based per-operation API version control (compact chip + dropdown).
+.api-version-block {
+    flex: 0 0 auto;
+}
+.api-version-selector-col {
+    position: relative;
+}
+// Same button+menu convention as the site's language/region picker.
+.api-version-chip {
+    height: 31px;
+    padding: 0 0.625rem;
+    font-size: 0.8125rem;
+    font-family: monospace;
+    color: $brand-primary;
+    background: $gray-lightest;
+    border: 1px solid $gray-light;
+    border-radius: 4px;
+    // The button's width hugs its content, so add an explicit chevron gap.
+    .chevron {
+        margin-left: 0.5rem;
+    }
+}
+.js-api-version-toggle {
+    cursor: pointer;
+    transition: border-color .12s ease, box-shadow .12s ease;
+    &.is-deprecated {
+        border-color: rgba($brand-warning, 0.6);
+        box-shadow: 0 0 0 2px rgba($brand-warning, 0.14);
+    }
+    &[aria-expanded="true"] {
+        border-color: $brand-info;
+        box-shadow: 0 0 0 3px rgba($brand-info, 0.2);
+    }
+}
+.api-version-chip-dot {
+    display: inline-block;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    &.api-version-dot-green {
+        background: $brand-success;
+    }
+    &.api-version-dot-amber {
+        background: $brand-warning;
+    }
+}
+.api-version-chip-date {
+    font-family: monospace;
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+// Shared pill geometry for the version chip/tag/marker pills below. Bootstrap's
+// .badge base class (padding/radius/line-height) isn't imported anywhere in this
+// codebase — only the .badge-white color modifier is (see whats-next/nextlink) —
+// so the pill shape is defined here once; each pill sets only its own margin and
+// semantic color.
+%api-pill-shape {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: 50rem;
+}
+.api-version-chip-pill {
+    @extend %api-pill-shape;
+    margin-left: 0.5rem;
+    color: $brand-warning;
+    background: rgba($brand-warning, 0.14);
+    &.is-urgent {
+        color: $brand-danger;
+        background: rgba($brand-danger, 0.14);
+    }
+}
+.api-version-dropdown .dropdown-menu {
+    width: 306px;
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    text-align: left;
+}
+.api-version-menu-header {
+    padding: 0.625rem 0.875rem 0.375rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: $gray;
+}
+.api-version-menu-list {
+    padding-bottom: 0.25rem;
+}
+.js-api-version-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.8125rem;
+    color: #212529;
+    &:hover {
+        color: $brand-primary;
+        background: $gray-lighter;
+    }
+    &.active {
+        color: $brand-primary;
+        font-weight: 600;
+        background: $gray-lighter;
+        .api-version-menu-item-date {
+            font-weight: 700;
+        }
+    }
+}
+.api-version-menu-item-dot {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    &.api-version-dot-green {
+        background: $brand-success;
+    }
+    &.api-version-dot-amber {
+        background: $brand-warning;
+    }
+}
+.api-version-menu-item-date {
+    flex: 0 0 auto;
+    font-family: monospace;
+}
+// Same pill shape as .api-version-chip-pill above, reused for dropdown-row tags
+// — only the semantic color is custom.
+.api-version-tag {
+    @extend %api-pill-shape;
+    margin-left: 0.5rem;
+    &.api-version-tag-latest {
+        color: $brand-success;
+        background: rgba($brand-success, 0.12);
+    }
+    &.api-version-tag-default {
+        color: $gray-dark;
+        background: $gray-lighter;
+    }
+    &.api-version-tag-deprecated {
+        color: $brand-warning;
+        background: rgba($brand-warning, 0.14);
+    }
+}
+.api-version-check {
+    margin-left: auto;
+    color: $brand-info;
+}
+.api-version-menu-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.625rem 0.875rem 0.75rem;
+    font-size: 0.75rem;
+    line-height: 1.35;
+    color: $gray-dark;
+    text-decoration: none;
+    &:hover {
+        color: $gray-dark;
+        background: $gray-lighter;
+        text-decoration: none;
+    }
+}
+.api-version-menu-notice-icon {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.05rem;
+    border: 1px solid $gray-light;
+    border-radius: 50%;
+    color: $gray-dark;
+    font-family: serif;
+    font-size: 0.6875rem;
+    font-weight: 700;
+}
+.api-version-menu-notice-link {
+    display: inline-block;
+    margin-left: 0.2rem;
+    color: $brand-primary;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+// Date-versioned schema surfaces use a quiet toolbar to establish hierarchy:
+// the version is context, while Model and Example remain the controls.
+.api-schema-panel {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid $gray-light;
+    border-radius: 6px;
+    background: $white;
+}
+.api-schema-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    min-height: 42px;
+    padding: 0.375rem 6.5rem 0.375rem 0.875rem;
+    background: $gray-lightest;
+    border-bottom: 1px solid $gray-light;
+}
+.api-schema-namespace {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    min-width: 0;
+    color: $gray-dark;
+
+    code {
+        padding: 0;
+        color: $gray-dark;
+        background: transparent;
+        font-size: 0.75rem;
+        white-space: nowrap;
+    }
+}
+.api-schema-namespace-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: $gray;
+}
+.api-schema-tabs {
+    flex: 0 0 auto;
+    gap: 0.25rem;
+    margin: 0 !important;
+    padding: 0 !important;
+
+    .nav-item {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .nav-item .nav-link {
+        min-width: auto;
+        margin: 0 !important;
+        padding: 0.25rem 0.5rem !important;
+        border: 1px solid transparent !important;
+        border-radius: 3px;
+        color: $gray-dark !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        font-size: 0.75rem !important;
+        font-weight: 600;
+        line-height: 1.25;
+
+        &:hover {
+            color: $brand-primary !important;
+            background: $white !important;
+        }
+        &.active {
+            color: $brand-primary !important;
+            background: rgba($ddpurple, 0.08) !important;
+            border-color: rgba($ddpurple, 0.2) !important;
+        }
+    }
+}
+.api-schema-panel-body {
+    padding: 0.75rem;
+
+    .schema-table {
+        margin-top: 0;
+        margin-bottom: 0;
+
+        .expand-all {
+            top: -49px;
+            right: 0;
+            width: auto;
+            margin: 0;
+            padding: 0.25rem 0;
+            font-size: 0.75rem;
+            line-height: 1.25;
+            white-space: nowrap;
+        }
+    }
+    .code-snippet-wrapper {
+        margin-bottom: 0;
+    }
+}
+
+// Response codes, description, and schema form one continuous surface for
+// date-versioned operations instead of reading as three unrelated tab groups.
+.api-response-panel {
+    overflow: hidden;
+    border: 1px solid $gray-light;
+    border-radius: 6px;
+    background: $white;
+
+    .api-schema-panel {
+        border-top: 0;
+        border-right: 0;
+        border-bottom: 0;
+        border-left: 0;
+        border-radius: 0;
+    }
+}
+.api-response-status-tabs {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    min-height: 42px;
+    margin: 0 !important;
+    padding: 0.375rem 0.875rem !important;
+    background: $gray-lighter;
+    border-bottom: 1px solid $gray-light !important;
+
+    .api-response-status-label {
+        margin-right: 0.25rem;
+        color: $gray;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+    .nav-item {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .nav-item .nav-link {
+        display: inline-flex;
+        align-items: center;
+        min-width: auto;
+        margin: 0 !important;
+        padding: 0.25rem 0.625rem !important;
+        border: 1px solid transparent !important;
+        border-radius: 3px;
+        color: $gray-dark !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        font-size: 0.75rem !important;
+        font-weight: 600;
+        line-height: 1.25;
+
+        &:hover {
+            color: $brand-primary !important;
+            background: $white !important;
+        }
+        &.active {
+            color: $brand-primary !important;
+            background: rgba($ddpurple, 0.08) !important;
+            border-color: rgba($ddpurple, 0.2) !important;
+        }
+    }
+}
+.api-response-status-description {
+    display: none;
+    margin-left: 0.375rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.api-response-status-tabs .nav-link.active .api-response-status-description {
+    display: inline;
+}
+.api-response-tab-content {
+    margin-bottom: 0 !important;
+}
+
+// Date-versioned code samples follow the same two-tier surface as responses:
+// language selection is the header and the selected sample is its body.
+.api-code-panel {
+    overflow: hidden;
+    border: 1px solid $gray-light;
+    border-radius: 6px;
+    background: $white;
+}
+.api-code-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 42px;
+    padding: 0.375rem 0.875rem;
+    background: $gray-lighter;
+    border-bottom: 1px solid $gray-light;
+}
+.api-code-toolbar-label {
+    flex: 0 0 auto;
+    margin-right: 0.25rem;
+    color: $gray;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.api-code-toolbar .code-lang-list-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+
+    .nav-item {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .nav-link {
+        min-width: auto;
+        margin: 0 !important;
+        padding: 0.25rem 0.625rem !important;
+        border: 1px solid transparent !important;
+        border-radius: 3px;
+        color: $gray-dark !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        font-size: 0.75rem !important;
+        font-weight: 600;
+        line-height: 1.25;
+
+        &:hover {
+            color: $brand-primary !important;
+            background: $white !important;
+        }
+        &.active {
+            color: $brand-primary !important;
+            background: rgba($ddpurple, 0.08) !important;
+            border-color: rgba($ddpurple, 0.2) !important;
+        }
+    }
+}
+.api-code-panel-body {
+    padding: 0.75rem;
+
+    > .code-snippet-wrapper:last-of-type,
+    > .code-snippet-wrapper[style*="display: block"] {
+        margin-bottom: 0;
+    }
+}
+
+// Subtle dividers make the long operation page easier to scan without turning
+// every section into a separate card.
+.api-endpoint-date-versioned .endpoint-content > h3:not(:first-of-type) {
+    padding-top: 1.25rem;
+    margin-top: 1.5rem !important;
+    border-top: 1px solid $gray-light;
+}
+// Schema table row markers for fields added/removed between date-versioned
+// variants (see rowRecursive's prevData diffing in build-api-pages.js). Same
+// pill shape as .api-version-chip-pill; only margin and color are custom.
+.schema-change-marker {
+    @extend %api-pill-shape;
+    margin-left: 0.375rem;
+}
+.schema-change-marker-new {
+    color: $brand-success;
+    background: rgba($brand-success, 0.12);
+}
+.schema-change-marker-removed {
+    color: $gray;
+    background: $gray-lighter;
+}
+.row.isRemoved {
+    > .first-column > .table-row > .key,
+    .table-row .key {
+        text-decoration: line-through;
+        opacity: 0.7;
+    }
+}
+.row.isNew {
+    > .first-column > .table-row {
+        background: rgba($brand-success, 0.05);
+    }
+}
+
 
 // Both endpoint and category pages: flush right alongside the h1.
 .main-api .api-copy-btn,
