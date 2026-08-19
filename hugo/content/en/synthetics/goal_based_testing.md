@@ -36,6 +36,8 @@ Goal-Based tests are created in either of the following ways:
 - Generated automatically by [Bits Testing][1] as part of a journey's test suite.
 - Created manually by clicking {{< ui >}}New Test{{< /ui >}} and selecting Goal-Based test.
 
+{{< img src="synthetics/goal_based_testing/goal_based_test_type_selection.png" alt="The New Synthetics Test dialog with Goal-Based Test selected" style="width:100%;" >}}
+
 When creating a Goal-Based test manually, provide:
 
 - A **starting URL** for the application under test.
@@ -43,7 +45,7 @@ When creating a Goal-Based test manually, provide:
 - A **location** to run the test from. See [supported locations](#supported-locations).
 - Optionally, an [Agent Profile][2] to reuse variables such as login credentials.
 
-{{< img src="synthetics/goal_based_testing/goal_based_test_creation.png" alt="The New Synthetics Test dialog with Goal-Based Test selected, and the New Goal-Based Test panel with starting URL and goal fields" style="width:100%;" >}}
+{{< img src="synthetics/goal_based_testing/goal_based_test_creation.png" alt="The New Goal-Based Test panel with starting URL and goal fields" style="width:100%;" >}}
 
 ### Supported locations
 
