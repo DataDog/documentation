@@ -83,7 +83,7 @@ From here you can take either of two paths, described in the following sections.
 
 ## Watchdog Explains
 
-Watchdog Explains analyzes a single anomaly on one graph, comparing timeseries data across each applicable tag group against the source graph to show which tags contribute to the change.
+Watchdog Explains analyzes a single anomaly on one graph. It compares each applicable tag group against the source graph to show which tags contribute to the change.
 
 Open a compatible timeseries graph in fullscreen to use it. From a detected anomaly, the expanded chip's {{< ui >}}Next steps{{< /ui >}} section can take you there directly.
 
