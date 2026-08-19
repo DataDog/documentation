@@ -14,10 +14,13 @@ further_reading:
   text: "Learn more about Watchdog Insights"
 ---
 
-<!-- TODO (regions): Omar confirming GovCloud. Once known, add a `site_support_id` here AND a
-matching entry under `unsupported_sites` in hugo/config/_default/params.yaml. Setting the ID
-without the params entry fails the build (see layouts/partials/site_support_banner/
-get_unsupported_regions.html). Bits Investigation is already [gov,gov2]. -->
+<!-- NOTE (regions, resolved): deliberately NOT using `site_support_id` here. That renders a
+page-level banner, which would be wrong: Ethan Lipkind confirmed gov users get no dashboard
+anomaly highlighting, but Watchdog Explains IS still reachable there in fullscreen, and this page
+documents both. The gov caveat is inline in the Overview instead.
+Still unconfirmed: uk1 and ap2. Ethan said "I think not uk1 or ap2" and that the flag is mid
+rollout to all commercial DCs, so it is deliberately not documented — a hedge plus a moving
+target is worse than silence. Revisit if he confirms. -->
 
 ## Overview
 
@@ -29,11 +32,14 @@ Detection runs when you open a dashboard, and issues appear within approximately
 
 Datadog does not run anomaly detection on:
 
+- Dashboards in the GovCloud sites (US1-FED and US2-FED)
 - Public (shared) dashboards, because there is no signed-in viewer who can act on a result
 - Dashboards embedded in the mobile app
 - Dashboards in TV mode
 - Dashboards in print mode
 - Dashboards where you turned off {{< ui >}}Auto-detect issues{{< /ui >}}
+
+In the GovCloud sites, anomalies are not highlighted on dashboards and {{< ui >}}Investigate with AI{{< /ui >}} is unavailable. [Watchdog Explains](#watchdog-explains) is still available from a fullscreen timeseries graph.
 
 ## How Datadog detects anomalies
 
