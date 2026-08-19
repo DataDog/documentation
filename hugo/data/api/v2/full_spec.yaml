@@ -521,6 +521,14 @@ components:
       schema:
         example: github
         type: string
+    ExecutionPolicyId:
+      description: The ID of the execution policy.
+      example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      in: path
+      name: policy_id
+      required: true
+      schema:
+        type: string
     FastlyAccountID:
       description: Fastly Account id.
       in: path
@@ -37531,6 +37539,350 @@ components:
           description: A short human-readable summary of the warning.
           example: "One or several indexes are missing or invalid. Results hold data from the other indexes."
           type: string
+      type: object
+    ExecutionPolicyActionPattern:
+      description: The set of actions this policy applies to.
+      properties:
+        action_fqns:
+          description: |-
+            The fully qualified action names this policy matches. Use `*` to match all actions
+            of the integration, or a fully qualified name prefixed with the integration's action
+            namespace (for example `com.datadoghq.script.*` for the Script integration).
+          example:
+            - "com.datadoghq.script.*"
+          items:
+            type: string
+          type: array
+        integration:
+          $ref: "#/components/schemas/ExecutionPolicyIntegration"
+      required:
+        - integration
+        - action_fqns
+      type: object
+    ExecutionPolicyAttributes:
+      description: An execution policy.
+      properties:
+        action_pattern:
+          $ref: "#/components/schemas/ExecutionPolicyActionPattern"
+        created_at:
+          description: The date and time the execution policy was created.
+          example: "2026-01-15T10:00:00.000Z"
+          format: date-time
+          type: string
+        created_by:
+          description: The ID of the user who created the execution policy.
+          example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          type: string
+        effect:
+          $ref: "#/components/schemas/ExecutionPolicyEffect"
+        name:
+          description: The name of the execution policy.
+          example: "Block prod restarts"
+          type: string
+        scope:
+          $ref: "#/components/schemas/ExecutionPolicyScope"
+        targets:
+          description: The targets this policy applies to.
+          items:
+            $ref: "#/components/schemas/ExecutionPolicyTarget"
+          type: array
+        updated_at:
+          description: The date and time the execution policy was last updated.
+          example: "2026-01-15T10:00:00.000Z"
+          format: date-time
+          type: string
+        updated_by:
+          description: The ID of the user who last updated the execution policy.
+          example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          type: string
+        version:
+          description: The version of the execution policy. Incremented on every update.
+          example: 1
+          format: int32
+          maximum: 2147483647
+          type: integer
+      required:
+        - name
+        - effect
+        - action_pattern
+        - targets
+        - version
+        - created_at
+        - updated_at
+        - created_by
+        - updated_by
+      type: object
+    ExecutionPolicyCreateRequest:
+      description: Request object that includes the execution policy to create.
+      properties:
+        data:
+          $ref: "#/components/schemas/ExecutionPolicyCreateRequestData"
+      required:
+        - data
+      type: object
+    ExecutionPolicyCreateRequestData:
+      description: Object for a single execution policy.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExecutionPolicyWriteAttributes"
+        type:
+          $ref: "#/components/schemas/ExecutionPolicyType"
+      required:
+        - type
+        - attributes
+      type: object
+    ExecutionPolicyEffect:
+      description: Whether the policy allows or denies matching actions.
+      enum:
+        - allow
+        - deny
+      example: allow
+      type: string
+      x-enum-varnames:
+        - ALLOW
+        - DENY
+    ExecutionPolicyIntegration:
+      description: The integration the action pattern applies to.
+      enum:
+        - INTEGRATION_KUBERNETES
+        - INTEGRATION_SCRIPT
+        - INTEGRATION_REMOTE_ACTION
+      example: INTEGRATION_SCRIPT
+      type: string
+      x-enum-varnames:
+        - INTEGRATION_KUBERNETES
+        - INTEGRATION_SCRIPT
+        - INTEGRATION_REMOTE_ACTION
+    ExecutionPolicyKubernetesScope:
+      description: Restricts the policy to specific Kubernetes namespaces.
+      properties:
+        rules:
+          description: The Kubernetes scope rules.
+          items:
+            $ref: "#/components/schemas/ExecutionPolicyKubernetesScopeRule"
+          type: array
+      required:
+        - rules
+      type: object
+    ExecutionPolicyKubernetesScopeRule:
+      description: A rule restricting a Kubernetes scope to specific namespaces.
+      properties:
+        target_namespaces:
+          description: The Kubernetes namespaces this rule applies to.
+          example:
+            - "default"
+          items:
+            type: string
+          type: array
+      required:
+        - target_namespaces
+      type: object
+    ExecutionPolicyListResponse:
+      description: Response object that includes a list of execution policies.
+      properties:
+        data:
+          description: The execution policies.
+          items:
+            $ref: "#/components/schemas/ExecutionPolicyResponseData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/ExecutionPolicyListResponseMeta"
+      required:
+        - data
+        - meta
+      type: object
+    ExecutionPolicyListResponseMeta:
+      description: Pagination metadata for the list of execution policies.
+      properties:
+        page:
+          $ref: "#/components/schemas/ExecutionPolicyListResponsePage"
+      required:
+        - page
+      type: object
+    ExecutionPolicyListResponsePage:
+      description: Pagination details.
+      properties:
+        total:
+          description: The total number of execution policies matching the query.
+          example: 1
+          format: int32
+          maximum: 2147483647
+          type: integer
+      required:
+        - total
+      type: object
+    ExecutionPolicyRemoteActionRshellAccess:
+      description: The level of remote shell access granted for the target paths.
+      enum:
+        - read_only
+        - read_write
+      example: read_only
+      type: string
+      x-enum-varnames:
+        - READ_ONLY
+        - READ_WRITE
+    ExecutionPolicyRemoteActionRshellScope:
+      description: Restricts the policy to specific remote shell paths.
+      properties:
+        rules:
+          description: The remote shell scope rules.
+          items:
+            $ref: "#/components/schemas/ExecutionPolicyRemoteActionRshellScopeRule"
+          type: array
+      required:
+        - rules
+      type: object
+    ExecutionPolicyRemoteActionRshellScopeRule:
+      description: A rule restricting remote shell access to specific paths.
+      properties:
+        access:
+          $ref: "#/components/schemas/ExecutionPolicyRemoteActionRshellAccess"
+        target_paths:
+          description: The file system paths this rule applies to.
+          example:
+            - "/var/log"
+          items:
+            type: string
+          type: array
+      required:
+        - target_paths
+        - access
+      type: object
+    ExecutionPolicyResponse:
+      description: Response object that includes a single execution policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/ExecutionPolicyResponseData"
+      required:
+        - data
+      type: object
+    ExecutionPolicyResponseData:
+      description: Object for a single execution policy.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExecutionPolicyAttributes"
+        id:
+          description: The ID of the execution policy.
+          example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/ExecutionPolicyType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ExecutionPolicyScope:
+      description: |-
+        Restricts where the policy applies. At most one of `kubernetes`, `scripts`,
+        or `remote_action_rshell` can be set. An empty object means the policy has
+        no scope restriction.
+      properties:
+        kubernetes:
+          $ref: "#/components/schemas/ExecutionPolicyKubernetesScope"
+        remote_action_rshell:
+          $ref: "#/components/schemas/ExecutionPolicyRemoteActionRshellScope"
+        scripts:
+          $ref: "#/components/schemas/ExecutionPolicyScriptScope"
+      type: object
+    ExecutionPolicyScriptScope:
+      description: Restricts the policy to specific scripts.
+      properties:
+        rules:
+          description: The script scope rules.
+          items:
+            $ref: "#/components/schemas/ExecutionPolicyScriptScopeRule"
+          type: array
+      required:
+        - rules
+      type: object
+    ExecutionPolicyScriptScopeRule:
+      description: A rule restricting a script scope to specific script names.
+      properties:
+        target_script_names:
+          description: The script names this rule applies to.
+          example:
+            - "restart_service.sh"
+          items:
+            type: string
+          type: array
+      required:
+        - target_script_names
+      type: object
+    ExecutionPolicyTarget:
+      description: A target this policy is scoped to, expressed as a set of Agent tags.
+      properties:
+        agent_tags:
+          description: The Agent tags identifying the target.
+          example:
+            - "env:prod"
+          items:
+            type: string
+          type: array
+        name:
+          description: A human-readable name for the target.
+          example: "Production hosts"
+          nullable: true
+          type: string
+      required:
+        - agent_tags
+      type: object
+    ExecutionPolicyType:
+      default: execution_policy
+      description: The type of the resource. The value should always be `execution_policy`.
+      enum:
+        - execution_policy
+      example: execution_policy
+      type: string
+      x-enum-varnames:
+        - EXECUTION_POLICY
+    ExecutionPolicyUpdateRequest:
+      description: Request object that includes the execution policy to update.
+      properties:
+        data:
+          $ref: "#/components/schemas/ExecutionPolicyUpdateRequestData"
+      required:
+        - data
+      type: object
+    ExecutionPolicyUpdateRequestData:
+      description: Object for a single execution policy.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExecutionPolicyWriteAttributes"
+        id:
+          description: The ID of the execution policy.
+          example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          type: string
+        type:
+          $ref: "#/components/schemas/ExecutionPolicyType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ExecutionPolicyWriteAttributes:
+      description: Attributes used to create or update an execution policy.
+      properties:
+        action_pattern:
+          $ref: "#/components/schemas/ExecutionPolicyActionPattern"
+        effect:
+          $ref: "#/components/schemas/ExecutionPolicyEffect"
+        name:
+          description: The name of the execution policy.
+          example: "Block prod restarts"
+          type: string
+        scope:
+          $ref: "#/components/schemas/ExecutionPolicyScope"
+        targets:
+          description: The targets this policy applies to.
+          items:
+            $ref: "#/components/schemas/ExecutionPolicyTarget"
+          type: array
+      required:
+        - name
+        - effect
+        - action_pattern
       type: object
     ExposureRolloutStepRequest:
       description: Rollout step request payload.
@@ -122669,6 +123021,405 @@ paths:
       tags:
         - Action Connection
       x-menu-order: 3
+  /api/v2/actions/execution-policies:
+    get:
+      description: Retrieve a list of execution policies for the current organization.
+      operationId: ListExecutionPolicies
+      parameters:
+        - description: The number of execution policies to return per page.
+          example: 100
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 100
+            format: int32
+            maximum: 100
+            type: integer
+        - description: The page number to return.
+          example: 0
+          in: query
+          name: page[number]
+          required: false
+          schema:
+            default: 0
+            format: int32
+            maximum: 1000
+            minimum: 0
+            type: integer
+        - description: Filter execution policies by name.
+          example: "Block prod restarts"
+          in: query
+          name: filter[name]
+          required: false
+          schema:
+            type: string
+        - description: Filter execution policies by a list of IDs.
+          example:
+            - "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          explode: true
+          in: query
+          name: filter[ids]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - description: Filter execution policies by a list of integrations.
+          example:
+            - INTEGRATION_SCRIPT
+          explode: true
+          in: query
+          name: filter[integration]
+          required: false
+          schema:
+            items:
+              $ref: "#/components/schemas/ExecutionPolicyIntegration"
+            type: array
+          style: form
+        - description: Filter execution policies by a list of effects.
+          example:
+            - allow
+          explode: true
+          in: query
+          name: filter[effects]
+          required: false
+          schema:
+            items:
+              $ref: "#/components/schemas/ExecutionPolicyEffect"
+            type: array
+          style: form
+        - description: Filter execution policies by a list of creator IDs.
+          example:
+            - "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          explode: true
+          in: query
+          name: filter[creator_ids]
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - description: |-
+            The sort order for the results. Prefix a field with `-` to sort in
+            descending order. Valid fields are `name`, `effect`, `integration`,
+            `created_at`, and `updated_at`.
+          example:
+            - "-created_at"
+          explode: true
+          in: query
+          name: sort
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          action_pattern:
+                            action_fqns:
+                              - "com.datadoghq.script.*"
+                            integration: INTEGRATION_SCRIPT
+                          created_at: "2026-01-15T10:00:00.000Z"
+                          created_by: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                          effect: allow
+                          name: "Block prod restarts"
+                          targets: []
+                          updated_at: "2026-01-15T10:00:00.000Z"
+                          updated_by: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                          version: 1
+                        id: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        type: execution_policy
+                    meta:
+                      page:
+                        total: 1
+              schema:
+                $ref: "#/components/schemas/ExecutionPolicyListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List execution policies
+      tags:
+        - Execution Policy
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+          - execution_groups_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a new execution policy.
+      operationId: CreateExecutionPolicy
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      action_pattern:
+                        action_fqns:
+                          - "com.datadoghq.script.*"
+                        integration: INTEGRATION_SCRIPT
+                      effect: allow
+                      name: "Block prod restarts"
+                    type: execution_policy
+            schema:
+              $ref: "#/components/schemas/ExecutionPolicyCreateRequest"
+        description: The execution policy to create.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action_pattern:
+                          action_fqns:
+                            - "com.datadoghq.script.*"
+                          integration: INTEGRATION_SCRIPT
+                        created_at: "2026-01-15T10:00:00.000Z"
+                        created_by: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        effect: allow
+                        name: "Block prod restarts"
+                        targets: []
+                        updated_at: "2026-01-15T10:00:00.000Z"
+                        updated_by: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        version: 1
+                      id: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                      type: execution_policy
+              schema:
+                $ref: "#/components/schemas/ExecutionPolicyResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create an execution policy
+      tags:
+        - Execution Policy
+      x-codegen-request-body-name: body
+      x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+          - execution_groups_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/actions/execution-policies/{policy_id}:
+    delete:
+      description: Delete a specific execution policy.
+      operationId: DeleteExecutionPolicy
+      parameters:
+        - $ref: "#/components/parameters/ExecutionPolicyId"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an execution policy
+      tags:
+        - Execution Policy
+      x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+          - execution_groups_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Retrieve an existing execution policy by ID.
+      operationId: GetExecutionPolicy
+      parameters:
+        - $ref: "#/components/parameters/ExecutionPolicyId"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action_pattern:
+                          action_fqns:
+                            - "com.datadoghq.script.*"
+                          integration: INTEGRATION_SCRIPT
+                        created_at: "2026-01-15T10:00:00.000Z"
+                        created_by: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        effect: allow
+                        name: "Block prod restarts"
+                        targets: []
+                        updated_at: "2026-01-15T10:00:00.000Z"
+                        updated_by: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        version: 1
+                      id: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                      type: execution_policy
+              schema:
+                $ref: "#/components/schemas/ExecutionPolicyResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get an execution policy
+      tags:
+        - Execution Policy
+      x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+          - execution_groups_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    put:
+      description: |-
+        Update an existing execution policy.
+        Returns the execution policy object when the request is successful.
+      operationId: UpdateExecutionPolicy
+      parameters:
+        - $ref: "#/components/parameters/ExecutionPolicyId"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      action_pattern:
+                        action_fqns:
+                          - "com.datadoghq.script.*"
+                        integration: INTEGRATION_SCRIPT
+                      effect: allow
+                      name: "Block prod restarts"
+                    id: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                    type: execution_policy
+            schema:
+              $ref: "#/components/schemas/ExecutionPolicyUpdateRequest"
+        description: The new execution policy.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action_pattern:
+                          action_fqns:
+                            - "com.datadoghq.script.*"
+                          integration: INTEGRATION_SCRIPT
+                        created_at: "2026-01-15T10:00:00.000Z"
+                        created_by: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        effect: allow
+                        name: "Block prod restarts"
+                        targets: []
+                        updated_at: "2026-01-15T10:00:00.000Z"
+                        updated_by: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                        version: 2
+                      id: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                      type: execution_policy
+              schema:
+                $ref: "#/components/schemas/ExecutionPolicyResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update an execution policy
+      tags:
+        - Execution Policy
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+          - execution_groups_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/agentless_scanning/accounts/aws:
     get:
       description: Fetches the scan options configured for AWS accounts.
@@ -216823,6 +217574,12 @@ tags:
 
       **Update to Datadog monitor events `aggregation_key` starting March 1, 2025:** The Datadog monitor events `aggregation_key` is unique to each Monitor ID. Starting March 1st, this key will also include Monitor Group, making it unique per *Monitor ID and Monitor Group*. If you're using monitor events `aggregation_key` in dashboard queries or the Event API, you must migrate to use `@monitor.id`. Reach out to [support](https://www.datadoghq.com/support/) if you have any question.
     name: Events
+  - description: |-
+      Execution policies control which actions Datadog Action Platform is allowed to run
+      against your infrastructure, and where. Each policy pairs an effect (allow or deny)
+      with a pattern of actions, and can scope that decision to specific Kubernetes
+      namespaces, scripts, or remote shell paths.
+    name: Execution Policy
   - description: |-
       Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information.
     name: Fastly Integration

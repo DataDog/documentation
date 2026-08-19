@@ -763,6 +763,25 @@
       "description": "Search events returns \"OK\" response with pagination"
     }
   ],
+  "CreateExecutionPolicy": [
+    {
+      "group": "execution_policy",
+      "suffix": "",
+      "description": "Create an execution policy returns \"Created\" response"
+    },
+    {
+      "group": "execution_policy",
+      "suffix": "_1075977289",
+      "description": "Create an execution policy with scope and targets returns \"Created\" response"
+    }
+  ],
+  "UpdateExecutionPolicy": [
+    {
+      "group": "execution_policy",
+      "suffix": "",
+      "description": "Update an execution policy returns \"OK\" response"
+    }
+  ],
   "CreateFastlyAccount": [
     {
       "group": "fastly_integration",
