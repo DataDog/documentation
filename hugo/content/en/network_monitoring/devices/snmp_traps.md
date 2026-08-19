@@ -71,7 +71,20 @@ You can also view SNMP traps directly from the NDM device view. Select a device 
 
 ### Using the default SNMP trap port 162
 
-Binding to a port number under `1024` requires elevated permissions. To bind to a port number such as the default SNMP Trap port `162`, use the following instructions:
+Binding to a port number under `1024` requires elevated permissions.
+
+Starting with Agent v7.71.0, no additional configuration is required to use the default SNMP Trap port `162`. The Agent's systemd unit sets `AmbientCapabilities=CAP_NET_BIND_SERVICE` by default, which allows the Agent to bind to privileged ports (below `1024`) while running as the `dd-agent` user.
+
+To disable this behavior, create a systemd drop-in file (for example, `/etc/systemd/system/datadog-agent.service.d/disable-capability.conf`) with the following content:
+
+```
+[Service]
+AmbientCapabilities=
+```
+
+**Warning**: Do not run `setcap` on the Agent binary on v7.71.0 or later. Setting a file capability causes the binary to run in secure-execution mode (`AT_SECURE`) when it is started by the non-root `dd-agent` user. In that mode, the dynamic linker stops resolving the Agent's bundled libraries through its executable-relative library path (`RPATH`), and the Agent fails to start with an error such as `error while loading shared libraries: libdatadog-agent-rtloader.so: cannot open shared object file`. The file capability also does not persist across upgrades, because each upgrade installs the Agent binary in a new versioned directory.
+
+**Agent versions earlier than v7.71.0**
 
 1. Grant access to the port using the `setcap` command:
 
