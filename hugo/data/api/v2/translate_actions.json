@@ -949,6 +949,16 @@
     "request_description": "Decision update payload.",
     "request_schema_description": "Request object to update a change request decision."
   },
+  "ListCIAppGitHubAccounts": {
+    "description": "Retrieve the list of GitHub accounts (organizations or users) available to this Datadog organization\nthrough its GitHub App installation, along with each account's and repository's CI Visibility opt-in status.",
+    "summary": "List GitHub CI Visibility status"
+  },
+  "UpdateCIAppGitHubAccount": {
+    "description": "Enable or disable CI Visibility for a GitHub account, one of its repositories, or both in the same request.\nThe account (and, optionally, repository) are identified by name. Account-level and repository-level\nchanges are independent and may both be supplied in the same request. At least one of `enabled` or\n`repository.enabled` must be provided. If the account name matches installations on more than one host,\n`host` must be supplied to disambiguate, otherwise a 409 is returned. Returns a 404 if the CI Visibility\nGitHub integration is not enabled for this organization, or if the given account or repository cannot be\nfound by name.",
+    "summary": "Update GitHub CI Visibility status",
+    "request_description": "",
+    "request_schema_description": "Request object for updating a GitHub account's CI Visibility opt-in status."
+  },
   "CreateCIAppPipelineEvent": {
     "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nMultiple events can be sent in an array (up to 1000).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.\nThe duration between the event start and end times cannot exceed 1 year.",
     "summary": "Send pipeline event",
@@ -1683,6 +1693,12 @@
   "DeleteDORADeployment": {
     "description": "Use this API endpoint to delete a deployment event.",
     "summary": "Delete a deployment event"
+  },
+  "PatchDORADeploymentByVersion": {
+    "description": "Update a deployment's change failure status, identifying the deployment by its service, environment, and version instead of its ID. Use this to mark a deployment as a change failure or back to stable. You can optionally include remediation details to enable failed deployment recovery time calculation. If multiple deployments match the given service, environment, and version, the most recently finished one is updated.",
+    "summary": "Patch a deployment event by version",
+    "request_description": "",
+    "request_schema_description": "Request to patch a DORA deployment event identified by service, environment, and version."
   },
   "ListDORADeployments": {
     "description": "Use this API endpoint to get a list of deployment events.",
@@ -3211,12 +3227,6 @@
     "request_description": "",
     "request_schema_description": "Update the IP allowlist."
   },
-  "DeleteLLMObsData": {
-    "description": "Submit a request to delete LLM Observability span data matching a trace ID filter within a specified time range.",
-    "summary": "Delete LLM Observability data",
-    "request_description": "Data deletion request payload.",
-    "request_schema_description": "Request to delete LLM Observability data."
-  },
   "GetLLMObsAnnotatedInteractionsByTraceIDs": {
     "description": "Returns annotated interactions across all annotation queues for the given content IDs.\nResults include queue metadata (ID and name) for each interaction.",
     "summary": "Get annotated interactions by content IDs"
@@ -3862,7 +3872,7 @@
     "summary": "Delete a tag configuration"
   },
   "ListTagConfigurationByName": {
-    "description": "Returns the tag configuration for the given metric name.",
+    "description": "Returns the tag configuration for the given metric name.\n\nA metric may exist and submit data without having a tag configuration. If no tag configuration exists\nfor the metric, this endpoint returns `404 Not Found`. This response does not indicate that the metric\nitself is missing.",
     "summary": "List tag configuration by name"
   },
   "UpdateTagConfiguration": {
@@ -6509,7 +6519,7 @@
     "summary": "Get status page"
   },
   "UpdateStatusPage": {
-    "description": "Updates an existing status page's attributes. **Note**: Publishing and unpublishing via the `enabled` property will be deprecated on this endpoint. Use the dedicated [publish](#publish-status-page) and [unpublish](#unpublish-status-page) status page endpoints instead.",
+    "description": "Updates an existing status page's attributes. To publish and unpublish status pages, use the dedicated [publish](#publish-status-page) and [unpublish](#unpublish-status-page) status page endpoints.",
     "summary": "Update status page",
     "request_description": "",
     "request_schema_description": "Request object for updating a status page."
@@ -6644,12 +6654,18 @@
     "request_description": "",
     "request_schema_description": "Request object for updating a maintenance."
   },
+  "PatchMaintenanceUpdate": {
+    "description": "Edits the message of a specific maintenance update. Editing is allowed regardless of the parent maintenance's status, including completed and canceled maintenances.",
+    "summary": "Edit maintenance update",
+    "request_description": "",
+    "request_schema_description": "Request object for editing a maintenance update."
+  },
   "PublishStatusPage": {
-    "description": "Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate publishing functionality from the update status page endpoint to the publish status page endpoint.",
+    "description": "Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission.",
     "summary": "Publish status page"
   },
   "UnpublishStatusPage": {
-    "description": "Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. The `status_pages_settings_write` permission is temporarily honored as we migrate unpublishing functionality from the update status page endpoint to the unpublish status page endpoint.",
+    "description": "Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission.",
     "summary": "Unpublish status page"
   },
   "GetStegadographyWidgets": {

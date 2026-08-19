@@ -10379,6 +10379,7 @@ components:
         - "data-quality alert"
         - "network-path alert"
         - "data-jobs alert"
+        - "llm-observability alert"
       example: "query alert"
       type: string
       x-enum-varnames:
@@ -10404,6 +10405,7 @@ components:
         - DATA_QUALITY_ALERT
         - NETWORK_PATH_ALERT
         - DATA_JOBS_ALERT
+        - LLM_OBSERVABILITY_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -39290,6 +39292,15 @@ paths:
           schema:
             format: int64
             type: integer
+        - description: |-
+            Whether to return only deleted service level objective objects.
+          example: true
+          in: query
+          name: is_deleted
+          required: false
+          schema:
+            default: false
+            type: boolean
       responses:
         "200":
           content:
