@@ -5,12 +5,15 @@ further_reading:
 - link: /real_user_monitoring/application_monitoring/maui/advanced_configuration
   tag: Documentation
   text: RUM .NET MAUI Advanced Configuration
-- link: https://github.com/DataDog/dd-sdk-maui
-  tag: "Source Code"
-  text: Source code for dd-sdk-maui
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+- link: "https://www.datadoghq.com/blog/monitor-dotnet-maui-apps-datadog-rum/"
+  tag: "Blog"
+  text: "Monitor your .NET MAUI apps with Datadog RUM"
+- link: https://github.com/DataDog/dd-sdk-maui
+  tag: "Source Code"
+  text: Source code for dd-sdk-maui
 ---
 
 ## Overview

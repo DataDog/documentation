@@ -1,9 +1,9 @@
 ---
-title: Kafka Monitoring Setup
-description: Set up Data Streams Monitoring's Kafka Monitoring, including prerequisites, Agent configuration, and the additional steps required to inspect Kafka messages.
+title: Kafka Console Setup
+description: Set up Kafka Console, including prerequisites, Agent configuration, and the additional steps required to inspect Kafka messages.
 ---
 
-This page covers the prerequisites and setup steps for Data Streams Monitoring's Kafka Monitoring.
+This page covers the prerequisites and setup steps for Kafka Console.
 
 ## Prerequisites
 
@@ -25,9 +25,9 @@ If your Kafka cluster uses ACLs, the Datadog Agent user requires the following m
 
 ## Setup
 
-Go to the [Kafka Monitoring setup page][1] and click {{< ui >}}Get Started{{< / ui >}}. Then choose your environment and follow the instructions. To request assistance, choose {{< ui >}}Request a pairing session{{< /ui >}}.
+Go to the [Kafka Console setup page][1] and click {{< ui >}}Get Started{{< / ui >}}. Then choose your environment and follow the instructions. To request assistance, choose {{< ui >}}Request a pairing session{{< /ui >}}.
 
-{{< img src="data_streams/kafka_setup-2.png" alt="The Kafka Monitoring setup dialog showing environment selection, security protocol, schema registry options, and Kubernetes configuration instructions" >}}
+{{< img src="data_streams/kafka_setup-2.png" alt="The Kafka Console setup dialog showing environment selection, security protocol, schema registry options, and Kubernetes configuration instructions" >}}
 
 The setup page provides environment-specific configuration instructions. You can copy the instructions directly to an AI agent with {{< ui >}}Copy for AI{{< /ui >}}.
 

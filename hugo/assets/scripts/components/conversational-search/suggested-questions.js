@@ -18,7 +18,7 @@ const SUGGESTED_QUESTIONS = [
     'How do I set up Real User Monitoring (RUM) for a web application?',
     'How do I monitor AWS Lambda functions with Datadog?',
     'How do I enable Continuous Profiler for a Java service?',
-    'How do I trace LLM application calls with Datadog LLM Observability?',
+    'How do I trace LLM application calls with Datadog Agent Observability?',
     'How do I create a Service Level Objective (SLO) in Datadog?',
     'How do I send OpenTelemetry traces to Datadog?',
     'How do I track AWS cloud costs in Datadog?'

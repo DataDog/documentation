@@ -16,6 +16,9 @@ further_reading:
   - link: '/data_observability/cicd/'
     tag: 'Documentation'
     text: 'CI/CD'
+  - link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
+    tag: "Blog"
+    text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
 ---
 
 ## Overview
@@ -42,6 +45,10 @@ With Quality Monitoring, you can:
 
 {{< whatsnext desc="Connect to these data lake catalogs:" >}}
    {{< nextlink href="data_observability/quality_monitoring/data_lakes/aws_glue" >}}Iceberg Tables (AWS Glue){{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Connect to these transactional databases:" >}}
+   {{< nextlink href="data_observability/quality_monitoring/transactional_databases/postgres" >}}PostgreSQL{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Integrate with these transformation and orchestration tools:" >}}
