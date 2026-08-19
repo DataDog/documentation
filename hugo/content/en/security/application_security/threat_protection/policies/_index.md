@@ -49,6 +49,8 @@ Create workflows from the available [blueprints][18] and run them directly from 
 
 Attackers' IP addresses and authenticated users that are permanently or temporarily blocked are added to the _Denylist_. Manage the list on the [Denylist page][7]. A denylist supports blocking individual IPs as well as a range of IPs (CIDR blocks).
 
+**Note**: By default, your Denylist can contain up to 2,500 entries (IP addresses, CIDR ranges, and authenticated users combined). Entries added beyond this limit are accepted in the Datadog UI but aren't included in the enforced Denylist configuration, so blocking doesn't take effect for them. If you need to block more entries than this limit allows, contact [Datadog Support][21] to request an increase.
+
 ## Passlist
 
 You can use the _Passlist_ to permanently allow specific IP addresses access to your application. For example, you may wish to add internal IP addresses to your passlist, or IP addresses that regularly run security audits on your application. You can also add specific paths to ensure uninterrupted access. Manage the list from the [Passlist page][8].
@@ -121,3 +123,4 @@ As important as it is for you to be able to apply protection granularly and redu
 [17]: https://docs.datadoghq.com/actions/workflows/
 [18]: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY
 [20]: /security/application_security/threat_protection/security_signals/
+[21]: https://docs.datadoghq.com/help/
