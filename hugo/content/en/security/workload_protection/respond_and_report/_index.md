@@ -97,8 +97,7 @@ To enable automated response on an Agent rule:
 
 After automated response is enabled for an Agent rule, blocked threats appear in [Signals][1].
 
-A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The process <THREAT NAME> was automatically killed because it exhibited malicious behavior.`
-
+Any automated response is listed in the Response table, along with manually submitted responses. 
 ## Manual response {#response}
 
 Manual response lets you protect your infrastructure from the signal side panel after Workload Protection generates a [signal][6]. Use manual response if you do not want an Agent rule to terminate processes automatically.
@@ -131,7 +130,7 @@ Network isolation uses eBPF **Traffic Control** classifiers and raw packet progr
 
 ### Action statuses
 
-When a response action runs, the Agent reports a **status** for each action. The table below summarizes the main outcomes for each action type.
+When a response action runs, the Agent records it in the Response table, along with automated responses. Each action has a status. The table below summarizes the main outcomes for each action type.
 
 | Status | Description | Kill | Network isolation |
 | --- | --- | --- | --- |
