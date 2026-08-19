@@ -21,15 +21,15 @@ products:
 
 ## Overview
 
-Generating metrics from your logs or spans is a cost-effective way to summarize data:
+Generating metrics from your high-volume logs or spans is a cost-effective way to summarize data, including:
 
-- From high-volume logs such as CDN logs, VPC flow logs, firewall logs, and network logs
-- From high-volume traces such as from complex production applications
+- Logs such as CDN logs, VPC flow logs, firewall logs, and network logs
+- Traces from complex production applications
 
-Use the Generate Metrics processor to generate count, gauge, or distribution metrics from logs or spans that match a query, and send the metrics to your destination. Use the generated metrics:
+Use the Generate Metrics processor to generate count, gauge, or distribution metrics from logs or spans that match a query, and send the metrics to your destination. You can generate metrics:
 
-- From Logs: to track trends, such as KPIs, over long periods of time
-- From spans: to track long-term trends in application performance
+- From Logs to track trends, such as KPIs, over long periods of time
+- From spans to track long-term trends in application performance
 
 **Note**: The metrics generated from logs or spans and routed to Datadog are [custom metrics][1] and billed accordingly. See [Custom Metrics Billing][2] for more information.
 
