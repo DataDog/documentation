@@ -48,10 +48,9 @@ Open Bits Testing from Synthetic Monitoring & Testing using any of the following
 
 - **Bits Testing** in the Synthetic Monitoring & Testing top navigation.
 - `cmd+K` (or `ctrl+K`), then search for Bits Testing.
-- **Bits Testing** in the side navigation menu.
+- **Bits Testing** in the side navigation menu, under Digital Experience > Synthetic Monitoring & Testing.
 
-{{< img src="synthetics/bits_testing/TODO_bits_testing_nav.png" alt="TODO: screenshot of the Bits Testing entry point in the Synthetic Monitoring & Testing navigation" style="width:100%;" >}}
-<!-- TODO: replace with a real screenshot before merge -->
+{{< img src="synthetics/bits_testing/bits_testing_nav_and_prompt.png" alt="The Bits Testing entry point in the Synthetic Monitoring & Testing top navigation, and the prompt where you describe what you want to test" style="width:100%;" >}}
 
 ## Run Bits Testing
 
@@ -64,10 +63,11 @@ Open Bits Testing from Synthetic Monitoring & Testing using any of the following
 1. Optionally, select an [Agent Profile](#agent-profiles).
 1. Click {{< ui >}}Run Now{{< /ui >}}.
 
+{{< img src="synthetics/bits_testing/bits_testing_run_config.png" alt="The Bits Testing run configuration panel with a starting URL, location, and Agent Profile selectors" style="width:100%;" >}}
+
 Bits Testing explores your application starting from the URL you provide. At each new page it encounters, it determines a set of actions to try, and it repeats this process as it moves through your application.
 
-{{< img src="synthetics/bits_testing/TODO_bits_testing_run_config.png" alt="TODO: screenshot of the Bits Testing run configuration panel with location and Agent Profile selectors" style="width:100%;" >}}
-<!-- TODO: replace with a real screenshot before merge -->
+{{< img src="synthetics/bits_testing/bits_testing_exploration_in_progress.png" alt="A Bits Testing run in progress, exploring an application from its starting URL" style="width:100%;" >}}
 
 ### Agent Profiles
 
@@ -82,6 +82,8 @@ To create an Agent Profile:
    - **Value**: Either a typed value, or an existing [Global Variable][3].
 1. Click {{< ui >}}Create Profile{{< /ui >}}.
 
+{{< img src="synthetics/bits_testing/bits_testing_agent_profile_modal.png" alt="The New Profile modal for creating an Agent Profile, with fields for name, variable usage, and value" style="width:100%;" >}}
+
 The new profile is automatically selected for the current run. Saved Agent Profiles can be reused in later Bits Testing runs without redefining their variables.
 
 ## Review results
@@ -93,8 +95,7 @@ When a run completes, Bits Testing displays a graph of the branches it explored:
 
 If a run doesn't complete successfully, the graph shows the error that stopped it.
 
-{{< img src="synthetics/bits_testing/TODO_bits_testing_results_graph.png" alt="TODO: screenshot of the Bits Testing exploration graph showing green and indigo branches" style="width:100%;" >}}
-<!-- TODO: replace with a real screenshot before merge -->
+{{< img src="synthetics/bits_testing/bits_testing_results_graph.png" alt="A completed Bits Testing exploration graph showing the branches explored and the journeys found" style="width:100%;" >}}
 
 ## Generated test suites
 
@@ -112,6 +113,8 @@ Each test in the suite includes a free sample test run. Review the suite and eit
 
 After you start testing a suite, each test becomes a regular Synthetic test that you can edit or delete. By default, generated tests run every 5 minutes from the location you selected for the Bits Testing run.
 
+{{< img src="synthetics/bits_testing/bits_testing_generated_suite.png" alt="A generated test suite with Browser, HTTP, Network Path, and Goal-Based tests, showing a passed run's details" style="width:100%;" >}}
+
 ## FAQ
 
 **1. What does Bits Testing cost?**
@@ -127,7 +130,7 @@ Bits Testing and Goal-Based tests run only from the [locations listed above](#ru
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/goal_based_testing/
-[2]: https://ip-ranges.datadoghq.com/synthetics.json
+[2]: https://docs.datadoghq.com/api/latest/ip-ranges/list-ip-ranges/
 [3]: /synthetics/platform/settings/#global-variables
 [4]: https://www.datadoghq.com/pricing/?product=synthetic-monitoring#products
 [5]: /synthetics/platform/private_locations/

@@ -43,8 +43,7 @@ When creating a Goal-Based test manually, provide:
 - A **location** to run the test from. See [supported locations](#supported-locations).
 - Optionally, an [Agent Profile][2] to reuse variables such as login credentials.
 
-{{< img src="synthetics/goal_based_testing/TODO_goal_based_test_creation.png" alt="TODO: screenshot of the Goal-Based test creation panel with a goal prompt, starting URL, and location fields" style="width:100%;" >}}
-<!-- TODO: replace with a real screenshot before merge -->
+{{< img src="synthetics/goal_based_testing/goal_based_test_creation.png" alt="The New Synthetics Test dialog with Goal-Based Test selected, and the New Goal-Based Test panel with starting URL and goal fields" style="width:100%;" >}}
 
 ## How it works
 
@@ -55,8 +54,7 @@ When the run finishes, the test reports a **Pass** or **Fail** result, based on 
 - A summary explaining the rationale behind the Pass or Fail result.
 - Step-by-step navigation through the actions the agent took, so you can review exactly what it tried.
 
-{{< img src="synthetics/goal_based_testing/TODO_goal_based_test_run_result.png" alt="TODO: screenshot of a Goal-Based test run result with the Pass/Fail summary and step navigation" style="width:100%;" >}}
-<!-- TODO: replace with a real screenshot before merge -->
+{{< img src="synthetics/goal_based_testing/goal_based_test_run_result.png" alt="A failed Goal-Based test run showing the explored paths, a rationale for the failure, and the final screenshot" style="width:100%;" >}}
 
 ## Schedule and edit a test
 
@@ -66,6 +64,8 @@ After the first run completes, click the {{< ui >}}Edit test{{< /ui >}} icon to:
 - Edit the test name.
 - Add tags.
 - Change the selected Agent Profile.
+
+{{< img src="synthetics/goal_based_testing/goal_based_test_schedule.png" alt="The Goal-Based test edit page with the user goal and scheduling options" style="width:100%;" >}}
 
 ## Supported locations
 
