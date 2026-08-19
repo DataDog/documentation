@@ -10101,16 +10101,21 @@ menu:
       parent: pa_charts
       identifier: pa_funnel_analysis
       weight: 103
+    - name: Journey Paths Analysis
+      url: product_analytics/charts/journey_paths
+      parent: pa_charts
+      identifier: pa_journey_paths
+      weight: 104
     - name: Retention Analysis
       url: product_analytics/charts/retention_analysis
       parent: pa_charts
       identifier: pa_user_retention
-      weight: 104
+      weight: 105
     - name: Analytics Explorer
       url: product_analytics/charts/analytics_explorer
       parent: pa_charts
       identifier: pa_analytics_explorer
-      weight: 105
+      weight: 106
     - name: Dashboards
       url: product_analytics/dashboards
       parent: product_analytics

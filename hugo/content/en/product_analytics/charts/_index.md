@@ -28,11 +28,11 @@ The [Pathways diagram][3] allows you to visualize all user journeys across your 
 With [funnel analysis][2], you can understand the end-to-end conversion of a single essential workflow. You can view details in the side panel to understand why conversation rates are what they are.
 For example, you can determine if there was there a performance issue that caused user drop-off. Are customers experiencing an error that occurred in a recent release? Watch a Session Replay of a user who converted or dropped off to see exactly what happened.
 
-### Journey Paths Analysis
+### Journey Paths
 
 {{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_conversion_chart.png" alt="A rendered Journey Paths chart showing the top paths users take between two views" >}}
 
-With [Journey Paths Analysis][5], you can see the most popular paths users take between any two events, including the paths users take when they drop off before reaching the second event.
+With [Journey Paths][5], you can see the most common paths users take between selected events, including view and action events, for both converted and dropped users.
 
 ### Retention Analysis
 

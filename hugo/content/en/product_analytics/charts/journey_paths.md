@@ -9,84 +9,49 @@ further_reading:
   text: Pathways Diagrams
 ---
 
-## Overview
+Journey paths show the most common paths users take between selected events.
 
-Journey Paths charts show the most popular paths users take between any two events, and the most popular paths users take when they drop off before reaching the second event.
-
-Use a Journey Paths chart to:
-- See what pages and actions users typically go through between a starting event and a target event
-- Compare the paths taken by users who converted against the paths taken by users who dropped off
-- Investigate branching paths, including detours that skip directly from one step to another
-
-## Build a Journey Paths chart
-
-To start building a Journey Paths chart, navigate to [{{< ui >}}Product Analytics{{< /ui >}}][1], then select [{{< ui >}}Create New{{< /ui >}} > {{< ui >}}Journey Paths{{< /ui >}}][2].
-
-{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_create_new.png" alt="The Journey Paths option highlighted in the Create New menu, alongside Funnel, Pathways, Retention, and Analytics" style="width:60%;" >}}
-
-### Define your steps
-
-Under {{< ui >}}User steps{{< /ui >}}, select the two events you want to analyze paths between:
-
-1. Select the view or action to act as **Step 1**, the starting event.
-2. Select the view or action to act as **Step 2**, the target event.
-
-{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_select_step.png" alt="The step picker open for Step 1, showing tabs for All, Views, Actions, and Server actions" style="width:80%;" >}}
-
-Click {{< ui >}}Add step{{< /ui >}} to define additional steps, then use the {{< ui >}}Step 1 → Step 2{{< /ui >}} selector above the chart to choose which pair of steps to analyze paths between. Non-adjacent steps are supported, so you can, for example, analyze the paths between step 1 and step 3 directly, skipping step 2.
-
-To combine multiple events into a single step, click {{< ui >}}or...{{< /ui >}} next to that step. Click the filter icon next to a step to add filter criteria for that step alone.
-
-### Add filters
-
-Optionally, use {{< ui >}}Filter by{{< /ui >}} to add global filter criteria, such as user country or device type, that apply to all sessions included in the chart.
-
-## Analyze a Journey Paths chart
-
-After you define your steps, the chart displays the most common paths that sessions took between them.
+Use journey paths to:
+- See what views and actions users typically go through between a starting event and a target event.
+- Compare the paths taken by users who converted against the paths taken by users who dropped off.
+- Investigate branching paths, including detours that skip directly from one step to another.
 
 {{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_conversion_chart.png" alt="A rendered Journey Paths chart showing the top paths users take between two views" style="width:100%;" >}}
 
-Each path row shows the percentage and number of sessions that took that path, and the average time spent on it. A path with no listed events represents sessions that went directly from the start event to the end event with no intermediate views or actions in between.
+## Create a journey paths chart
 
-### View conversion or drop-off paths
+1. In {{< ui >}}Product Analytics{{< /ui >}}, select {{< ui >}}Create New{{< /ui >}} > {{< ui >}}Journey Paths{{< /ui >}}.
 
-Use the {{< ui >}}Converted{{< /ui >}} / {{< ui >}}Dropped{{< /ui >}} selector above the chart to switch between:
+2. Define {{< ui >}}User steps{{< /ui >}} by selecting at least two events that you want to analyze paths between. 
 
-- **Converted**: paths taken by sessions that reached Step 2 after Step 1.
-- **Dropped**: paths taken by sessions that reached Step 1 but never reached Step 2.
+   For a given step, click {{< ui >}}or...{{< /ui >}} to specify multiple events, or click the filter icon to filter the step by specified properties. 
 
-{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_dropoff_chart.png" alt="A rendered Journey Paths chart showing the top drop-off paths after a starting event" style="width:100%;" >}}
+3. (Optional) Filter chart results based on properties such as country or device type using {{< ui >}}Filter by{{< /ui >}} criteria.
 
-Because drop-off sessions never reach Step 2, drop-off paths have no end node, and the total session count reflects only the sessions that dropped off rather than the full starting population.
+## Analyze a journey paths chart
 
-### Filter by event type
+After you define steps in a journey, the chart displays the most common paths that sessions took between them.
 
-Use the {{< ui >}}Views{{< /ui >}} and {{< ui >}}Actions{{< /ui >}} toggles in the bottom-right corner of the chart to control which event types appear as path nodes. Expand {{< ui >}}Actions{{< /ui >}} to toggle {{< ui >}}Auto Actions{{< /ui >}} and {{< ui >}}Custom actions{{< /ui >}} independently.
+Each path shows the percentage and number of sessions that followed that path, and the average time spent on it. Paths with no listed events represent sessions that went directly from the start event to the end event with no intermediate views or actions in between.
 
-{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_event_filters.png" alt="A Journey Paths chart with Views, Actions, Auto Actions, and Custom actions all enabled, showing color-coded path nodes for each event type" style="width:100%;" >}}
+{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_customization.png" alt="A Journey Paths chart with numbered callouts for the converted/dropped selector, step selector, time range, event type toggles, View more, the path options menu, and the More Paths/Fewer Paths controls" style="width:100%;" >}}
 
-Views, actions, and custom actions each display with a distinct color and icon in the diagram, so you can identify the type of event at each step of a path. Hold **Option** (macOS) or **Alt** (Windows/Linux) and click an event node to hide that event from the diagram.
+You can refine journey path charts in various ways to zero in on the paths you want to analyze.
 
-### Expand a path
+1. Use the {{< ui >}}Converted{{< /ui >}} / {{< ui >}}Dropped{{< /ui >}} selector to switch between paths that reached the final step and those that dropped off. Dropoff paths have no end node, and their total session count reflects a subset of the full starting population. 
 
-Paths are truncated at a set number of events. Click {{< ui >}}View more{{< /ui >}} at the end of a truncated path to reveal the next events in that path. Click {{< ui >}}View less{{< /ui >}} to collapse it again.
+2. In journeys with multiple steps, use the step selector to choose which pair of steps to analyze paths between.  
 
-{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_expand_path.png" alt="A Journey Paths chart with a path expanded to show additional events beyond the initial truncation point" style="width:100%;" >}}
+3. Use the time range selector to change the period of data the chart analyzes.
 
-### Investigate a path
+4. Use the {{< ui >}}Views{{< /ui >}} and {{< ui >}}Actions{{< /ui >}} toggles to control which event types appear as path nodes. Views, actions, and custom actions each display with a distinct color and icon in the diagram, so you can identify the type of event at each step of a path.
 
-Click a path's event chain to open a menu with options to view the session replays or the users associated with that path.
+5. For truncated paths, click {{< ui >}}View more{{< /ui >}} to reveal the next events in that path. Click {{< ui >}}View less{{< /ui >}} to collapse it again.
 
-{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_node_menu.png" alt="The path options menu showing View related replays and View related users" style="width:100%;" >}}
+6. Click an event to open a menu with options to view the session replays or the users associated with that path. Or, hold **Option** (macOS) or **Alt** (Windows/Linux) and click an event to hide it from the diagram.
 
-### Adjust the number of paths shown
-
-Use {{< ui >}}More Paths{{< /ui >}} and {{< ui >}}Fewer Paths{{< /ui >}} below the chart to control how many paths are displayed.
+7. Use {{< ui >}}More Paths{{< /ui >}} and {{< ui >}}Fewer Paths{{< /ui >}} to control how many paths are displayed.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/product-analytics/
-[2]: https://app.datadoghq.com/product-analytics/user-journey/journey-paths
