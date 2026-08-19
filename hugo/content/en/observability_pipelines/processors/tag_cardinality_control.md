@@ -101,7 +101,7 @@ You can calculate `cache_size_per_key` with a Bloom Filter Calculator using a st
 
 ### Benchmarks for exact mode versus probabilistic mode
 
-The following tables show benchmarks for exact mode and probabilistic mode. As the number of unique values for each tag increases, probabilistic mode becomes more memory-efficient. The metric names and tag names used for these benchmarks were randomly generated 20-byte strings.
+The following tables show benchmarks for exact mode and probabilistic mode. As the number of unique values for each tag increases, probabilistic mode becomes more memory efficient. The metric names and tag names used for these benchmarks were randomly generated 20-byte strings.
 
 The machine type used for benchmarking is an AWS M6gd.4xlarge instance.
 
