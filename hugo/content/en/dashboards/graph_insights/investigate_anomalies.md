@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Datadog detects anomalies across your dashboard's timeseries graphs, groups co-occurring anomalies into issues, and identifies the tags contributing most to each. From an anomaly you can open it in [Watchdog Explains][2] for tag-level analysis on a single graph, or delegate root cause analysis to [Bits Investigation][1].
+Datadog detects anomalies across your dashboard's timeseries graphs, groups co-occurring anomalies into issues, and identifies the tags contributing most to each. From an anomaly you can narrow the cause down on a single graph with [Watchdog Explains][2], or delegate root cause analysis to [Bits Investigation][1].
 
 <div class="alert alert-info">Anomaly detection is available for <a href="/dashboards/widgets/timeseries/">Timeseries widgets</a> with {{< ui >}}Metrics{{< /ui >}} data (avg, sum, min, and max aggregation). Widgets using functions such as <code>cumsum</code>, <code>anomalies</code>, or <code>outliers</code> are not eligible.</div>
 
@@ -46,19 +46,23 @@ Anomalies occurring across several widgets at once are grouped into one issue, s
 Detected anomalies are highlighted in pink on the graph.
 
 1. Hover over a highlighted region. A chip appears summarizing the anomaly and how far it deviates from the expected range, for example: `The spike is 70% higher than the expected range as inferred from the past 3 weeks of data.`
-1. Click the chip to expand it. The expanded chip contains:
+1. Click the chip to expand it. The expanded chip always contains:
    - **Influential tags**: the tags contributing most to the anomaly.
-   - **Next steps**: where you can open the anomaly in Watchdog Explains or hand it to Bits Investigation.
+   - **Next steps**: suggested follow-up actions, such as viewing the affected service or creating a monitor.
+
+   Some anomalies also include a **Co-occurs with** section, listing other metrics that deviated over the same period.
 
 ## Analyze a single graph with Watchdog Explains
 
-From the expanded chip's {{< ui >}}Next steps{{< /ui >}}, you can open the anomaly in Watchdog Explains. It analyzes one graph at a time and shows which tags account for the change, including a comparison of the graph with and without a given tag.
+To narrow an anomaly down to a specific tag, open the graph in fullscreen and click {{< ui >}}Findings{{< /ui >}}. This panel is powered by Watchdog Explains.
+
+Each finding names a tag that likely explains the anomaly. It also shows the graph before and after filtering that tag out, so you can confirm whether removing it flattens the spike.
 
 For more information, see [Watchdog Explains][2].
 
 ## Investigate root cause with Bits Investigation
 
-From an expanded anomaly chip, or from the {{< ui >}}Investigate{{< /ui >}} menu, click {{< ui >}}Investigate with AI{{< /ui >}}. Both entry points behave the same way. Datadog opens [Bits Investigation][1] in a new tab, where it analyzes the anomaly and reports a root cause, an impact assessment, and a timeline.
+Click {{< ui >}}Investigate With AI{{< /ui >}} from an expanded anomaly chip, from the {{< ui >}}Investigate{{< /ui >}} menu, or from a Watchdog Explains finding. Datadog opens [Bits Investigation][1] in a new tab, where it analyzes the anomaly and reports a root cause, an impact assessment, and a timeline.
 
 After an investigation exists, the button reads {{< ui >}}See N Related Investigation{{< /ui >}}. Clicking it opens a filtered list of investigations rather than a single investigation. To open one, click {{< ui >}}Review Completed Investigation{{< /ui >}}.
 
