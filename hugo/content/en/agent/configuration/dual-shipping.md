@@ -424,6 +424,7 @@ and add the relevant settings to `customAgentConfig`.
 
   # agents.customAgentConfig -- Specify custom contents for the datadog agent config (datadog.yaml)
   ## ref: https://docs.datadoghq.com/agent/configuration/agent-configuration-files/?tab=agentv6
+  ## ref: https://github.com/DataDog/datadog-agent/tree/main/pkg/config/example
   ## Note the `agents.useConfigMap` needs to be set to `true` for this parameter to be taken into account.
   customAgentConfig:
     additional_endpoints:
