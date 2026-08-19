@@ -1,226 +1,106 @@
 ---
-title: Getting Started with APM Tracing
-description: Set up Application Performance Monitoring (APM) to identify bottlenecks, troubleshoot issues, and send traces to Datadog.
+title: Set Up Datadog APM
+description: Choose the right Datadog APM setup for your environment and language, instrument your application, and verify your first trace.
 aliases:
     - /getting_started/tracing/distributed-tracing
+algolia:
+    tags: ['apm setup', 'application performance monitoring', 'distributed tracing', 'tracing setup', 'single step instrumentation']
 further_reading:
-    - link: '/tracing/'
+    - link: '/tracing/trace_collection/'
       tag: 'Documentation'
-      text: 'Learn more about APM features'
-    - link: '/tracing/metrics/runtime_metrics/'
+      text: 'Compare application instrumentation methods'
+    - link: '/tracing/troubleshooting/'
       tag: 'Documentation'
-      text: 'Enable runtime metrics'
+      text: 'Troubleshoot APM'
     - link: '/tracing/guide/#enabling-tracing-tutorials'
       tag: 'Guides'
-      text: 'Tutorials for various ways to enable tracing'
+      text: 'Explore APM setup tutorials'
     - link: 'https://learn.datadoghq.com/courses/intro-to-apm'
       tag: 'Learning Center'
       text: 'Introduction to Application Performance Monitoring'
-    - link: 'https://dtdg.co/fe'
-      tag: 'Foundation Enablement'
-      text: 'Join an interactive session to boost your APM understanding'
 ---
 
 ## Overview
 
-Datadog Application Performance Monitoring (APM) provides deep visibility into your applications, enabling you to identify performance bottlenecks, troubleshoot issues, and optimize your services.
+To collect traces with Datadog Application Performance Monitoring (APM), instrument your application and configure it to send traces to Datadog. For supported applications on Linux, Docker, Kubernetes, and Windows, **Single Step Instrumentation (SSI) is the recommended starting point** because it installs and loads the Datadog SDK without application code changes.
 
-This guide demonstrates how to get started with APM and send your first trace to Datadog:
+Use this page to choose the setup path for your environment and language, then verify that your application sends traces to Datadog.
 
-1. Set up Datadog APM to send traces to Datadog.
-1. Run your application to generate data.
-1. Explore the collected data in Datadog.
+<div class="alert alert-info">To try APM with a sample application, follow the <a href="/tracing/guide/apm-quickstart-python-linux/">Python and Linux SSI quickstart</a>.</div>
 
-{{% dd-apm-skill %}}
+## Before you begin
 
-## Prerequisites
+To set up APM, you need:
 
-To complete this guide, you need the following:
+- A [Datadog account][1] and [API key][2].
+- Access to install or update the Datadog Agent and application instrumentation.
+- Permission to restart or redeploy your application.
+- Your application's language, runtime, and deployment environment.
 
-1. [Create a Datadog account][1] if you haven't already.
-1. Find or create a [Datadog API key][2].
-1. Start up a Linux host or VM.
-
-## Create an application
-
-To create an application to observe in Datadog:
-
-1. On your Linux host or VM, create a new Python application named `hello.py`. For example, `nano hello.py`.
-1. Add the following code to `hello.py`:
-
-    {{< code-block lang="python" filename="hello.py" collapsible="true" disable_copy="false" >}}
-  from flask import Flask
-  import random
-
-  app = Flask(__name__)
-  
-  quotes = [
-      "Strive not to be a success, but rather to be of value. - Albert Einstein",
-      "Believe you can and you're halfway there. - Theodore Roosevelt",
-      "The future belongs to those who believe in the beauty of their dreams. - Eleanor Roosevelt"
-  ]
-  
-  @app.route('/')
-  def index():
-      quote = random.choice(quotes)+"\n"
-      return quote
-  
-  if __name__ == '__main__':
-      app.run(host='0.0.0.0', port=5050)
-  {{< /code-block >}}
+If your application already sends traces to Datadog, use the [SDK configuration][3] or [APM troubleshooting][4] documentation instead of reinstalling instrumentation.
 
 ## Set up Datadog APM
 
-To set up Datadog APM without needing to modify your application's code or the deployment process, use Single Step APM Instrumentation, or alternatively, you can set up APM using [Datadog tracing][8] libraries.
+First, check whether your application requires a specialized setup:
 
+| Your application runs in | Start with |
+|---|---|
+| AWS Lambda or another serverless environment | [Serverless setup][5] |
+| An environment already instrumented with OpenTelemetry | [Send OpenTelemetry data to Datadog][6] |
+| Android or iOS | [Android tracing][7] or [iOS tracing][8] |
+| A proxy or API gateway | [Proxy Tracing][9] |
 
-1. Run the installation command:
+For applications on hosts, in containers, or on Kubernetes, choose between SSI and a manually managed SDK.
 
-   ```shell
-    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=python:4 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
-    ```
- 
-    Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][2], `<YOUR_DD_SITE>` with your [Datadog site][7], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `development`).
+### Single Step Instrumentation (recommended)
 
-1. Restart the services on your host or VM.
-1. Verify the Agent is running:
+Use SSI when it supports both your deployment environment and application runtime. SSI supports Java, Python, Ruby, Node.js, .NET, and PHP applications, subject to runtime and environment requirements. Review [SSI compatibility][10] before installation.
 
-    ```shell
-   sudo datadog-agent status
-   ```
+Choose your deployment environment:
 
-This approach automatically installs the Datadog Agent, enables Datadog APM, and [instruments][5] your application at runtime.
+| Environment | Setup guide | What the guide covers |
+|---|---|---|
+| Linux host or VM | [Set up SSI on Linux][11] | New and existing Agent installations |
+| Docker on Linux | [Set up SSI on Docker][12] | Host instrumentation, the Agent container, and application containers |
+| Kubernetes with Linux nodes | [Set up SSI on Kubernetes][13] | Datadog Operator and Datadog Helm chart installations |
+| Windows | [Set up SSI on Windows][14] | Supported .NET applications; host-wide .NET and Java support is in Preview |
 
-## Run the application
+Each guide includes environment-specific installation and verification steps.
 
-When you set up Datadog APM with Single Step Instrumentation, Datadog automatically instruments your application at runtime.
+{{% dd-apm-skill %}}
 
-To run `hello.py`:
+### Manually managed Datadog SDK
 
-1. Create a Python virtual environment in the current directory:
+Use a manually managed Datadog SDK when:
 
-   ```shell
-   python3 -m venv ./venv
-   ```
+- SSI does not support your language, runtime, operating system, or deployment model.
+- Your application already manages a Datadog SDK as a dependency.
+- You need application-controlled SDK installation or versioning.
 
-1. Activate the `venv` virtual environment:
+**Go applications are not supported by SSI.** To instrument a Go application, [add the Datadog Go SDK][15] with Orchestrion or configure the SDK in code.
 
-   ```shell
-   source ./venv/bin/activate
-   ```
+For other languages, [choose a Datadog SDK][16] and follow its installation instructions. If you need a vendor-neutral instrumentation API or use a runtime without a Datadog SDK, [instrument your application with OpenTelemetry][17].
 
-1. Install `pip` and `flask`:
+## Verify your first trace
 
-   ```shell
-   sudo apt-get install python3-pip
-   pip install flask
-   ```
+After you complete the selected setup guide:
 
-1. Set the service name and run `hello.py`:
+1. Complete the verification steps for your environment.
+1. Restart or redeploy the instrumented application when the guide requires it.
+1. Send a request to the application to generate traffic.
+1. In Datadog, go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}}][18] and confirm that your service appears.
+1. Go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][19] and select a trace to inspect its spans.
 
-   ```shell
-   export DD_SERVICE=hello
-   python3 hello.py
-   ```
+If your service does not appear, first confirm that instrumentation loaded, then verify the connection between the application and the Agent. See [Troubleshooting Single Step APM][20] or [APM Connection Errors][21] for the selected setup method.
 
-## Test the application
+## Next steps
 
-Test the application to send traces to Datadog:
+After your application sends traces to Datadog:
 
-1. In a new command prompt, run the following:
-
-   ```shell
-   curl http://0.0.0.0:5050/
-   ```
-1. Confirm that a random quote is returned.
-   ```text
-   Believe you can and you're halfway there. - Theodore Roosevelt
-   ```
-
-Each time you run the `curl` command, a new trace is sent to Datadog.
-
-## Explore traces in Datadog
-
-1. In Datadog, go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}}][3]. You should see a Python service named `hello`:
-
-   {{< img src="/getting_started/apm/service-catalog.png" alt="Catalog shows the new Python service." style="width:100%;" >}}
-
-1. Select the service to view its performance metrics, such as latency, throughput, and error rates.
-1. Go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][4]. You should see a trace for the `hello` service:
-
-   {{< img src="/getting_started/apm/trace-explorer.png" alt="Trace explorer shows the trace for the hello service." style="width:100%;" >}}
-
-1. Select a trace to see its details, including the flame graph, which helps identify performance bottlenecks.
-
-## Advanced APM setup
-
-Up until this point, you let Datadog automatically instrument the `hello.py` application using Single Step Instrumentation. This approach is recommended if you want to capture essential traces across common libraries and languages without touching code or manually installing libraries.
-
-However, if you need to collect traces from custom code or require more fine-grained control, you can add [custom instrumentation][6].
-
-To illustrate this, you will import the Datadog Python SDK into `hello.py` and create a custom span and span tag.
-
-To add custom instrumentation:
-
-1. Install the Datadog SDK:
-
-   ```shell
-   pip install ddtrace
-   ```
-
-1. Add the highlighted lines to the code in `hello.py` to create a custom span tag `get_quote` and a custom span tag `quote`:
-
-   {{< highlight python "hl_lines=3 15 17" >}}
-    from flask import Flask
-    import random
-    from ddtrace import tracer
-
-    app = Flask(__name__)
-
-    quotes = [
-        "Strive not to be a success, but rather to be of value. - Albert Einstein",
-        "Believe you can and you're halfway there. - Theodore Roosevelt",
-        "The future belongs to those who believe in the beauty of their dreams. - Eleanor Roosevelt"
-    ]
-
-    @app.route('/')
-    def index():
-        with tracer.trace("get_quote") as span:
-            quote = random.choice(quotes)+"\n"
-            span.set_tag("quote", quote)
-            return quote
-
-    if __name__ == '__main__':
-        app.run(host='0.0.0.0', port=5050)
-   {{< /highlight >}}
-
-1. Run `hello.py` in the virtual environment from earlier:
-   ```shell
-   ddtrace-run python hello.py
-   ```
-1. Run a few `curl` commands in a separate command prompt:
-   ```shell
-   curl http://0.0.0.0:5050/
-   ```
-1. In Datadog, go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][4].
-1. Select the `hello` trace.
-1. Find the new custom `get_quote` span in the flame graph and hover over it:
-
-   {{< img src="/getting_started/apm/custom-instrumentation.png" alt="The get_quote custom span displays in the flame graph. On hover, the quote span tag is displayed. " style="width:100%;" >}}
-
-1. Notice that the custom `quote` span tag displays on the {{< ui >}}Info{{< /ui >}} tab.
-
-## What's next?
-
-After you set up tracing and your application is sending data to Datadog, explore additional APM features:
-
-### Catalog
-
-[Catalog][9] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, and cost allocation in one place. Configure [service metadata][10] using tags, annotations, or a `service.datadog.yaml` file to enrich your services with ownership information, runbooks, and documentation links.
-
-### Trace ingestion and retention
-
-Control costs and manage data volume by configuring [ingestion controls][11] and [retention filters][12]. Ingestion controls let you customize sampling rates at the Datadog Agent or SDK level, while retention filters determine which spans are indexed for search and analytics.
+- Apply [Unified Service Tags][22] to correlate telemetry by service, environment, and version.
+- [Correlate logs and traces][23].
+- Enable [runtime metrics][24].
+- Review [ingestion controls][25] and [retention filters][26] before a broad production rollout.
 
 ## Further reading
 
@@ -228,13 +108,27 @@ Control costs and manage data volume by configuring [ingestion controls][11] and
 
 [1]: https://www.datadoghq.com/free-datadog-trial/
 [2]: https://app.datadoghq.com/organization-settings/api-keys/
-[3]: https://app.datadoghq.com/services
-[4]: https://app.datadoghq.com/apm/traces
-[5]: /tracing/glossary/#instrumentation
-[6]: /tracing/trace_collection/custom_instrumentation/
-[7]: /getting_started/site/
-[8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
-[9]: /internal_developer_portal/catalog/
-[10]: /internal_developer_portal/catalog/entity_model/
-[11]: /tracing/trace_pipeline/ingestion_controls/
-[12]: /tracing/trace_pipeline/trace_retention/
+[3]: /tracing/trace_collection/library_config/
+[4]: /tracing/troubleshooting/
+[5]: /serverless/
+[6]: /opentelemetry/setup/
+[7]: /tracing/trace_collection/dd_libraries/android/
+[8]: /tracing/trace_collection/dd_libraries/ios/
+[9]: /tracing/trace_collection/proxy_setup/
+[10]: /tracing/trace_collection/single-step-apm/compatibility/
+[11]: /tracing/trace_collection/single-step-apm/linux/
+[12]: /tracing/trace_collection/single-step-apm/docker/
+[13]: /tracing/trace_collection/single-step-apm/kubernetes/
+[14]: /tracing/trace_collection/single-step-apm/windows/
+[15]: /tracing/trace_collection/dd_libraries/go/
+[16]: /tracing/trace_collection/dd_libraries/
+[17]: /opentelemetry/instrument/
+[18]: https://app.datadoghq.com/services
+[19]: https://app.datadoghq.com/apm/traces
+[20]: /tracing/trace_collection/single-step-apm/troubleshooting/
+[21]: /tracing/troubleshooting/connection_errors/
+[22]: /getting_started/tagging/unified_service_tagging/
+[23]: /tracing/other_telemetry/connect_logs_and_traces/
+[24]: /tracing/metrics/runtime_metrics/
+[25]: /tracing/trace_pipeline/ingestion_controls/
+[26]: /tracing/trace_pipeline/trace_retention/

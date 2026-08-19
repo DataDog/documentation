@@ -64,7 +64,7 @@ The simplest way to start with Datadog APM is with Single Step Instrumentation. 
 
 For setups that require more customization, Datadog supports custom instrumentation with Datadog SDKs and [Dynamic Instrumentation][30] in the Datadog UI. To learn more, read [Application Instrumentation][2].
 
-<div class="alert alert-info">If you're new to Datadog APM, read <a href="https://docs.datadoghq.com/getting_started/tracing/">Getting Started with APM</a> to learn how to send your first trace to Datadog.</div>
+<div class="alert alert-info">If you're new to Datadog APM, read <a href="https://docs.datadoghq.com/getting_started/tracing/">Set Up Datadog APM</a> to choose the setup for your environment and language.</div>
 
 ## Use cases
 

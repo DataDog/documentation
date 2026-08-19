@@ -263,6 +263,8 @@ phrase:
       dst: "hugo/content/{lang}/observability_pipelines/configuration/set_up_pipelines.md"
     - src: "hugo/content/en/getting_started/tracing/_index.md"
       dst: "hugo/content/{lang}/getting_started/tracing/_index.md"
+    - src: "hugo/content/en/tracing/guide/apm-quickstart-python-linux.md"
+      dst: "hugo/content/{lang}/tracing/guide/apm-quickstart-python-linux.md"
     - src: "hugo/content/en/real_user_monitoring/guide/upload-javascript-source-maps.md"
       dst: "hugo/content/{lang}/real_user_monitoring/guide/upload-javascript-source-maps.md"
     - src: "hugo/content/en/real_user_monitoring/correlate_with_other_telemetry/apm/_index.md"

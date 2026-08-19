@@ -86,7 +86,7 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
 [6]: /tracing/configure_data_security#telemetry-collection
 [7]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[8]: /getting_started/tracing/#environment-name
+[8]: /getting_started/tagging/unified_service_tagging/#non-containerized-environment
 [9]: https://github.com/openzipkin/b3-propagation
 [13]: /agent/configuration/network/#configure-ports
 [14]: https://github.com/w3c/trace-context
