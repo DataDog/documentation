@@ -94,7 +94,7 @@ After setting up the Azure DevOps integration, enable IaC Security for your repo
 {{% /tab %}}
 {{< /tabs >}}
 
-## Set up IaC with a Generic CI Provider
+## Set up IaC with a generic CI provider
 
 ### Overview
 
@@ -142,7 +142,7 @@ datadog-ci sarif upload /tmp/datadog-iac-scanner-result.sarif
 ```
 
 <div class="alert alert-info">
-  This example uses the x86_64 Linux version of the Datadog IaC Scanner. If you're using a different OS or architecture, select the appropriate release from the <a href="https://github.com/DataDog/datadog-iac-scanner/releases">GitHub Releases</a> page and update the <code>DATADOG_IAC_SCANNER_URL</code> value.
+  This example uses the x86_64 Linux version of the Datadog IaC Scanner. If you're using a different OS or architecture, select the appropriate release from the <a href="https://github.com/DataDog/datadog-iac-scanner/releases">GitHub Releases</a> page and update the <code>IAC_SCANNER_URL</code> value.
 </div>
 
 ## Upload third-party static analysis results to IaC Security
