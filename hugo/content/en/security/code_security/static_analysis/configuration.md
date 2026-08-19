@@ -1,0 +1,328 @@
+---
+title: Static Code Analysis (SAST) Configuration
+description: Reference documentation for Datadog Static Code Analysis (SAST) configuration, covering ruleset selection, rule customization, severities, and paths.
+---
+
+By default, Datadog Static Code Analysis (SAST) scans your repositories with [Datadog's default rulesets][6] for each programming language. You can customize which rulesets and rules run, along with severities, paths, and other parameters. Configure these settings under the `sast` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
+
+For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][26].
+
+## Default rulesets
+
+By default, Datadog enables the default rulesets for your repository's programming languages (`use-default-rulesets: true`). To modify the enabled rulesets:
+
+- **Add rulesets**: List them under `use-rulesets`
+- **Disable specific rulesets**: List them under `ignore-rulesets`
+- **Disable all default rulesets**: Set `use-default-rulesets: false`, then list the desired rulesets under `use-rulesets`
+
+For the full list of default rulesets, see [Static Code Analysis (SAST) Rules][6].
+
+## Configure AI-native SAST
+
+AI-native SAST uses the same `sast` configuration as other Static Code Analysis rules and is available only for Datadog-hosted scans. The `sast` configuration controls which AI-native SAST rulesets run; it does not enable Datadog-hosted scanning or grant access to AI-native SAST.
+
+When AI-native SAST is enabled, its default rulesets run for the supported languages detected in the repository. AI-native SAST ruleset names use the format `<language>-ai_sast`:
+
+| Language | Ruleset |
+| --- | --- |
+| C# | `csharp-ai_sast` |
+| Elixir | `elixir-ai_sast` |
+| Go | `go-ai_sast` |
+| Java | `java-ai_sast` |
+| JavaScript | `javascript-ai_sast` |
+| Kotlin | `kotlin-ai_sast` |
+| PHP | `php-ai_sast` |
+| Python | `python-ai_sast` |
+| Ruby | `ruby-ai_sast` |
+| Rust | `rust-ai_sast` |
+| TypeScript | `typescript-ai_sast` |
+
+The `use-default-rulesets` setting applies to both traditional SAST and AI-native SAST rulesets. If you set `use-default-rulesets: false`, include every traditional and AI-native SAST ruleset that you want to run. For example, the following configuration runs the Ruby security and AI-native SAST rulesets:
+
+{{< code-block lang="yaml" >}}
+schema-version: v1.4
+sast:
+  use-default-rulesets: false
+  use-rulesets:
+    - ruby-security
+    - ruby-ai_sast
+{{< /code-block >}}
+
+To disable a specific AI-native SAST ruleset while retaining the other default rulesets, add it to `ignore-rulesets`:
+
+{{< code-block lang="yaml" >}}
+schema-version: v1.4
+sast:
+  use-default-rulesets: true
+  ignore-rulesets:
+    - ruby-ai_sast
+{{< /code-block >}}
+
+## Configuration format
+
+The following configuration format applies to all configuration locations: org-level, repository-level, and repository-level (file).
+
+The configuration file must begin with a supported `schema-version` (`v1.0`, `v1.1`, `v1.2`, `v1.3`, or `v1.4`), followed by a `sast` key containing the analysis configuration. Use `v1.4` for all new configurations. The configuration is structured as shown below:
+
+{{< code-block lang="yaml" >}}
+schema-version: v1.4
+sast:
+  use-default-rulesets: true
+  use-rulesets:
+    - ruleset-name
+  ignore-rulesets:
+    # Always ignore these rulesets (even if it is a default ruleset or listed in `use-rulesets`)
+    - ignored-ruleset-name
+  ruleset-configs:
+    ruleset-name:
+      # Only apply this ruleset to the following paths/files
+      only-paths:
+        - "path/example"
+        - "**/*.file"
+      # Do not apply this ruleset in the following paths/files
+      ignore-paths:
+        - "path/example/directory"
+        - "**/config.file"
+      rule-configs:
+        rule-name:
+          # Only apply this rule to the following paths/files
+          only-paths:
+            - "path/example"
+            - "**/*.file"
+          # Do not apply this rule to the following paths/files
+          ignore-paths:
+            - "path/example/directory"
+            - "**/config.file"
+          arguments:
+            # Set the rule's argument to value.
+            argument-name: value
+          severity: ERROR
+          category: CODE_STYLE
+        rule-name:
+          arguments:
+            # Set different argument values in different subtrees
+            argument-name:
+              # Set the rule's argument to value_1 by default (root path of the repo)
+              /: value_1
+              # Set the rule's argument to value_2 for specific paths
+              path/example: value_2
+  global-config:
+    # Only analyze the following paths/files
+    only-paths:
+      - "path/example"
+      - "**/*.file"
+    # Do not analyze the following paths/files
+    ignore-paths:
+      - "path/example/directory"
+      - "**/config.file"
+    use-gitignore: true
+    ignore-generated-files: true
+    max-file-size-kb: 200
+{{< /code-block >}}
+
+The `sast` key supports the following fields:
+
+| **Property** | **Type** | **Description** | **Default** |
+| --- | --- | --- | --- |
+| `use-default-rulesets` | Boolean | Whether to enable Datadog default rulesets. | `true` |
+| `use-rulesets` | Array | A list of ruleset names to enable. | None |
+| `ignore-rulesets` | Array | A list of ruleset names to disable. Takes precedence over `use-rulesets` and `use-default-rulesets`. | None |
+| `ruleset-configs` | Object | A map from ruleset name to its configuration. | None |
+| `global-config` | Object | Global settings for the repository. | None |
+
+## Ruleset configuration
+
+Each entry in the `ruleset-configs` map configures a specific ruleset. A ruleset does not need to be listed in `use-rulesets` for its configuration to apply; the configuration is used whenever the ruleset is enabled, including through `use-default-rulesets`.
+
+| **Property** | **Type** | **Description** | **Default** |
+| --- | --- | --- | --- |
+| `only-paths` | Array | File paths or glob patterns. Only files matching these patterns are processed for this ruleset. | None |
+| `ignore-paths` | Array | File paths or glob patterns to exclude from analysis for this ruleset. | None |
+| `rule-configs` | Object | A map from rule name to its configuration. | None |
+
+## Rule configuration
+
+Each entry in a ruleset's `rule-configs` map configures a specific rule:
+
+| **Property** | **Type** | **Description** | **Default** |
+| --- | --- | --- | --- |
+| `only-paths` | Array | File paths or glob patterns. The rule is applied only to files matching these patterns. | None |
+| `ignore-paths` | Array | File paths or glob patterns to exclude. The rule is not applied to files matching these patterns. | None |
+| `arguments` | Object | Parameters and values for the rule. Values can be scalars or defined per path. | None |
+| `severity` | String or Object | The rule severity. Valid values: `ERROR`, `WARNING`, `NOTICE`, `NONE`. Can be a single value or defined per path. | None |
+| `category` | String | The rule category. Valid values: `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE`, `SECURITY`. | None |
+
+## Argument and severity configuration
+
+Arguments and severity can be defined in one of two formats:
+
+1. **Single value:** Applies to the whole repository.
+
+   {{< code-block lang="yaml" >}}
+   arguments:
+     argument-name: value
+   severity: ERROR
+   {{< /code-block >}}
+
+2. **Per-path mapping:** Different values for different subtrees. The longest matching path prefix applies. Use `/` as a catch-all default.
+
+   {{< code-block lang="yaml" >}}
+   arguments:
+     argument-name:
+       /: value_default
+       path/example: value_specific
+   severity:
+     /: WARNING
+     path/example: ERROR
+   {{< /code-block >}}
+
+   | **Key** | **Type** | **Description** | **Default** |
+   | --- | --- | --- | --- |
+   | `/` | Any | The default value when no specific path is matched. | None |
+   | `specific path` | Any | The value for files matching the specified path or glob pattern. | None |
+
+The `category` field takes a single string value for the whole repository.
+
+## Global configuration
+
+The `global-config` object controls repository-wide settings:
+
+| **Property** | **Type** | **Description** | **Default** |
+| --- | --- | --- | --- |
+| `only-paths` | Array | File paths or glob patterns. Only matching files are analyzed. | None |
+| `ignore-paths` | Array | File paths or glob patterns to exclude. Matching files are not analyzed. | None |
+| `use-gitignore` | Boolean | Whether to include entries from the `.gitignore` file in `ignore-paths`. | `true` |
+| `ignore-generated-files` | Boolean | Whether to include common generated file patterns in `ignore-paths`. | `true` |
+| `max-file-size-kb` | Number | Maximum file size (in kB) to analyze. Larger files are ignored. | `200` |
+
+Example configuration:
+
+Because this example disables the default rulesets, the example explicitly includes `python-ai_sast` to retain AI-native SAST for Python:
+
+{{< code-block lang="yaml" >}}
+schema-version: v1.4
+sast:
+  use-default-rulesets: false
+  use-rulesets:
+    - python-best-practices
+    - python-security
+    - python-code-style
+    - python-inclusive
+    - python-django
+    - python-ai_sast
+    - custom-python-ruleset
+  ruleset-configs:
+    python-code-style:
+      rule-configs:
+        max-function-lines:
+          # Do not apply the rule max-function-lines to the following files
+          ignore-paths:
+            - "src/main/util/process.py"
+            - "src/main/util/datetime.py"
+          arguments:
+            # Set the max-function-lines rule's threshold to 150 lines
+            max-lines: 150
+          # Override this rule's severity
+          severity: NOTICE
+        max-class-lines:
+          arguments:
+            # Set different thresholds for the max-class-lines rule in different subtrees
+            max-lines:
+              # Set the rule's threshold to 200 lines by default (root path of the repo)
+              /: 200
+              # Set the rule's threshold to 100 lines in src/main/backend
+              src/main/backend: 100
+          # Override this rule's severity with different values in different subtrees
+          severity:
+            # Set the rule's severity to NOTICE by default
+            /: NOTICE
+            # Set the rule's severity to NONE in tests/
+            tests: NONE
+    python-django:
+      # Only apply the python-django ruleset to the following paths
+      only-paths:
+        - "src/main/backend"
+        - "src/main/django"
+      # Do not apply the python-django ruleset in files matching the following pattern
+      ignore-paths:
+        - "src/main/backend/util/*.py"
+  global-config:
+    # Only analyze source files
+    only-paths:
+      - "src/main"
+      - "src/tests"
+      - "**/*.py"
+    # Do not analyze third-party files
+    ignore-paths:
+      - "lib/third_party"
+{{< /code-block >}}
+
+## Legacy configuration
+
+Datadog Static Code Analysis (SAST) previously used a different configuration file (`static-analysis.datadog.yml`) and schema. This schema is deprecated and does not receive new updates, but it is [documented][25] in the `datadog-static-analyzer` repository.
+
+If both files are present, `code-security.datadog.yaml` takes precedence over `static-analysis.datadog.yml`.
+
+### Ignoring violations
+
+#### Ignore for a repository
+
+Add a rule configuration in your `code-security.datadog.yaml` file. The following example ignores the rule `javascript-express/reduce-server-fingerprinting` for all directories.
+
+{{< code-block lang="yaml" >}}
+schema-version: v1.0
+sast:
+  ruleset-configs:
+    javascript-express:
+      rule-configs:
+        reduce-server-fingerprinting:
+          ignore-paths:
+            - "**"
+{{< /code-block >}}
+
+#### Ignore for a file or directory
+
+Add a rule configuration in your `code-security.datadog.yaml` file. The following example ignores the rule `javascript-express/reduce-server-fingerprinting` for a specific file. For more information on how to ignore by path, see [Customize your configuration](#customize-your-configuration).
+
+{{< code-block lang="yaml" >}}
+schema-version: v1.0
+sast:
+  ruleset-configs:
+    javascript-express:
+      rule-configs:
+        reduce-server-fingerprinting:
+          ignore-paths:
+            - "ad-server/src/app.js"
+{{< /code-block >}}
+
+#### Ignore for a specific instance
+
+To ignore a specific instance of a violation, comment `no-dd-sa` above the line of code. Violations suppressed with `no-dd-sa` are shown as **suppressed**, rather than omitted entirely, so you can search and audit them.
+
+On the [Repositories page][1], suppressed violations appear with `is_suppressed: true`. In the [Vulnerabilities explorer][2], they appear with `status: muted` and `workflow.mute.reason: muted_in_code`.
+
+For example, in the following Python code snippet, the line `foo = 1` would be suppressed in Static Code Analysis scans.
+
+{{< code-block lang="python" >}}
+#no-dd-sa
+foo = 1
+bar = 2
+{{< /code-block >}}
+
+You can also use `no-dd-sa` to only suppress a particular rule, rather than suppressing all rules. To do so, specify the name of the rule you wish to suppress in place of `<rule-name>` using this template:
+
+`no-dd-sa:<rule-name>`
+
+For example, in the following JavaScript code snippet, the line `my_foo = 1` is suppressed only for the `javascript-code-style/assignment-name` rule, but all other rules still analyze it.
+
+{{< code-block lang="javascript" >}}
+// no-dd-sa:javascript-code-style/assignment-name
+my_foo = 1
+myBar = 2
+{{< /code-block >}}
+
+[1]: https://app.datadoghq.com/security/code-security/repositories
+[2]: https://app.datadoghq.com/security/code-security/sca
+[6]: /security/code_security/static_analysis/static_analysis_rules
+[25]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
+[26]: /security/code_security/guides/configuration/

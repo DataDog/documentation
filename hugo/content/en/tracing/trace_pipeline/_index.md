@@ -1,0 +1,79 @@
+---
+title: The Trace Pipeline
+aliases:
+    - /tracing/ingestion/
+    - /tracing/trace_ingestion/
+    - /tracing/trace_retention_and_ingestion/
+description: "Learn how to control span ingestion"
+further_reading:
+- link: "https://learn.datadoghq.com/courses/apm-rate-limit-retention"
+  tag: "Learning Center"
+  text: "APM Rate Limiting and Retention"
+- link: "https://www.datadoghq.com/architecture/mastering-distributed-tracing-data-volume-challenges-and-datadogs-approach-to-efficient-sampling/"
+  tag: "Architecture Center"
+  text: "Mastering Distributed tracing: data volume challenges, and Datadog's approach to efficient sampling"
+- link: "https://www.datadoghq.com/architecture/optimizing-distributed-tracing-best-practices-for-remaining-within-budget-and-capturing-critical-traces/"
+  tag: "Architecture Center"
+  text: "Optimizing Distributed Tracing: Best practices for remaining within budget and capturing critical traces"
+
+---
+
+{{< img src="tracing/apm_lifecycle/trace_pipeline.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Pipeline" >}}
+
+Collect traces from your instrumented applications to gain end-to-end visibility into your applications. Query and visualize distributed traces from the [Trace Explorer][1], understand how requests flow through your microservices and easily investigate errors and performance issues.
+
+With APM, both the **ingestion** and the **retention** of traces are fully customizable.
+
+## Ingestion mechanisms
+
+Set up tracing to gain end-to-end visibility into your applications with fine-grained [ingestion configuration][2]. Make sure to capture complete traces, including all error and high-latency traces to never miss performance issues such as an application outage or an unresponsive service.
+
+{{< img src="tracing/trace_indexing_and_ingestion/service_setup.png" style="width:80%;" alt="Service Setup" >}}
+
+
+## Ingestion controls
+
+The [Ingestion Control page][3] overviews ingestion volumes and configuration settings across your services.
+
+{{< img src="tracing/trace_indexing_and_ingestion/ingestion_controls_page.png" style="width:100%;" alt="Ingestion Control Page Overview" >}}
+
+## Processing pipelines
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-warning">Processing Pipelines are not supported in {{< region-param key="dd_site_name" >}}.</div>
+{{< /site-region >}}
+
+Transform, normalize, and enrich span attributes after ingestion with [Processing Pipelines][7]. Standardize attribute naming across services, consolidate inconsistent keys, and extract structured data from span values, without modifying application code.
+
+{{< img src="tracing/processing_pipelines/manage_pipelines.png" style="width:100%;" alt="Processing Pipelines" >}}
+
+## Generating metrics from spans
+
+You can generate metrics from ingested spans, and use those custom metrics for queries and comparisons. Learn more in [Generating Metrics from Spans][4].
+
+{{< img src="tracing/span_to_metrics/metrics_from_spans_1.png" style="width:100%;" alt="Graph of a span-based metric" >}}
+
+## Trace retention
+
+After spans are ingested, [Retention Filters][5] determine which individual spans are indexed and stored for 15 days. The Datadog Intelligent Retention Filter automatically indexes a representative selection of spans to help you monitor application health. You can also define custom retention filters to index additional spans that are important for your organization's goals.
+
+{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filters.png" style="width:100%;" alt="Retention Filters Page" >}}
+
+## Trace usage metrics
+
+Learn about how to track and monitor your volume of ingested and indexed data, including using the APM Estimated Usage and Ingestion Reasons dashboards, by reading [Usage Metrics][6].
+
+{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_apm_usage.png" style="width:100%;" alt="APM Estimated Usage Dashboard" >}}
+
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/trace_explorer
+[2]: /tracing/trace_pipeline/ingestion_mechanisms/
+[3]: /tracing/trace_pipeline/ingestion_controls
+[4]: /tracing/trace_pipeline/generate_metrics
+[5]: /tracing/trace_pipeline/trace_retention
+[6]: /tracing/trace_pipeline/metrics
+[7]: /tracing/trace_pipeline/processing_pipelines
