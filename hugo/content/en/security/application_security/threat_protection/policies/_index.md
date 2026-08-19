@@ -123,4 +123,4 @@ As important as it is for you to be able to apply protection granularly and redu
 [17]: https://docs.datadoghq.com/actions/workflows/
 [18]: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY
 [20]: /security/application_security/threat_protection/security_signals/
-[21]: https://docs.datadoghq.com/help/
+[21]: /help/
