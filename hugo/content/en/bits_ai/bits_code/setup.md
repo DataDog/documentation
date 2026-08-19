@@ -83,7 +83,7 @@ You can also configure service-to-repository mapping manually in Bits Code setti
 
 Auto-push allows Bits Code to create branches, push code, and open PRs or MRs when it detects something it can help you with. Auto-push only opens PRs or MRs and pushes changes; it never merges code. When auto-push is disabled, you must review code in Datadog before it gets pushed.
 
-To enable auto-push, navigate to {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}General{{< /ui >}}][6].
+To enable auto-push, navigate to {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Admin{{< /ui >}}][6].
 
 
 #### Security considerations
@@ -103,7 +103,7 @@ Bits Code ingests custom instruction files from your repository, including:
 - `.windsurfrules`
 - `copilot-instructions.md`
 
-You can also define global custom instructions that apply to all Bits Code sessions in {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}General{{< /ui >}}][6], in the {{< ui >}}Global Agent Instructions{{< /ui >}} section.
+You can also define global custom instructions that apply to all Bits Code sessions in {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Admin{{< /ui >}}][13], in the {{< ui >}}Global Agent Instructions{{< /ui >}} section.
 
 A custom instruction file is a good place to mention [custom skills][12] you'd like Bits Code to use.
 
@@ -113,7 +113,7 @@ Configure Bits Code's runtime environment, including network access policies and
 
 ### Configure internet access
 
-By default, Bits Code has **no internet access** during agent execution. To configure which external domains agents can reach, navigate to {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}General{{< /ui >}}][6], and find the {{< ui >}}Internet Access{{< /ui >}} section. Choose from the following access policies: {{< ui >}}No Internet Access{{< /ui >}}, {{< ui >}}Default Allowlist{{< /ui >}}, {{< ui >}}Custom + Default Allowlist{{< /ui >}}, or {{< ui >}}Custom Allowlist{{< /ui >}}.
+By default, Bits Code has **no internet access** during agent execution. To configure which external domains agents can reach, navigate to {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Admin{{< /ui >}}][14], and find the {{< ui >}}Internet Access{{< /ui >}} section. Choose from the following access policies: {{< ui >}}No Internet Access{{< /ui >}}, {{< ui >}}Default Allowlist{{< /ui >}}, {{< ui >}}Custom + Default Allowlist{{< /ui >}}, or {{< ui >}}Custom Allowlist{{< /ui >}}.
 
 The default allowlist includes the following domains. This list will evolve over time based on user feedback and ecosystem changes. To avoid changes, configure a custom allowlist.
 
@@ -161,11 +161,13 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [2]: https://app.datadoghq.com/integrations/github
 [4]: /integrations/guide/source-code-integration/?tab=go#tag-your-apm-telemetry-with-git-information
 [5]: https://app.datadoghq.com/code/settings?tab=repositories
-[6]: https://app.datadoghq.com/code/settings
+[6]: https://app.datadoghq.com/code/settings/admin
 [7]: /bits_ai/bits_code/#start-a-session
 [8]: /bits_ai/bits_code/
 [11]: /bits_ai/bits_code/#supported-source-code-providers
 [12]: /bits_ai/bits_code/#custom-agent-skills-and-instructions
+[13]: https://app.datadoghq.com/code/settings/admin#agent-instructions
+[14]: https://app.datadoghq.com/code/settings/admin#internet-access
 
 ## Further reading
 

@@ -110,5 +110,5 @@ You can pause or resume any automation, but you can only edit or delete automati
 [4]: /integrations/slack/
 [5]: /internal_developer_portal/catalog/
 [6]: /account_management/rbac/permissions/#bits-ai
-[7]: https://app.datadoghq.com/code/settings
+[7]: https://app.datadoghq.com/code/settings/admin
 [8]: /account_management/billing/ai_credits/
