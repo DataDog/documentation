@@ -144,7 +144,7 @@ products:
                 link: watchdog/
                 description: Detect and surface application and infrastructure anomalies
                 short_description: Anomaly detection
-              - title: LLM Observability
+              - title: Agent Observability
                 link: llm_observability/
                 description: Trace, monitor, and secure your LLM applications
                 short_description: LLM monitoring and security
