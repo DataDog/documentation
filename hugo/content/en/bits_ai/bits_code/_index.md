@@ -52,12 +52,14 @@ Click a session to view its details and continue working with Bits Code. To remo
 
 ## Supported source code providers
 Bits Code supports the following source code providers:
-- **GitHub**: GitHub.com and [GitHub Enterprise Cloud][30]
-- **GitLab**: GitLab.com
+- **GitHub**: GitHub.com and [GitHub Enterprise Cloud][30], including *.ghe.com, *.github.com domains.
+- **GitLab**: GitLab.com and GitLab Self-Managed.
 
 The following plans are not supported:
-- **Self-hosted plans**, such as GitHub Enterprise Server and GitLab Self-Managed.
-- **Cloud-hosted plans on dedicated domains**, such as [GitHub Enterprise Cloud with data residency][31] and [GitLab Dedicated][32]. Bits Code supports only providers on the standard GitHub.com and GitLab.com domains.
+- **Self-hosted GitHub Enterprise**: Custom domains are not supported.
+- **Cloud-hosted GitHub on dedicated domains**: such as [GitHub Enterprise Cloud with data residency][31] when using a custom domain name.
+- **Azure DevOps**: Neither Azure DevOps Cloud nor Azure DevOps Server (On-Prem) is supported by Bits Code. Datadog [Source Code Integration][37] does not support Azure DevOps Server (On-Prem).
+- **Bitbucket**: Neither Bitbucket.org, Bitbucket Data Center, nor Bitbucket Data Server (On-Prem) are supported by Bits Code. Datadog [Source Code Integration][37] does not support On-Prem Bitbucket deployments.
 
 ## Supported Datadog products
 
@@ -110,7 +112,7 @@ Bits Code also [ingests custom instructions][33] defined in your repository and 
 Bits Code integrates with [source code providers](#supported-source-code-providers) to:
 - Create pull or merge requests, generating titles and descriptions based on your repository's pull or merge request template
 - Iterate on pull requests in response to comments (GitHub only); mention `@Datadog` in a comment to prompt Bits for updates
-- Monitor CI logs and fix failures
+- Monitor CI logs and pull or merge request state to fix failures and merge blockers
 
 Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is working on in {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][7].
 
@@ -155,3 +157,4 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 [31]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud#about-data-residency
 [32]: https://docs.gitlab.com/subscriptions/gitlab_dedicated/
 [33]: /bits_ai/bits_code/setup/#configure-custom-instructions
+[37]: /source_code/source-code-management#source-code-management-providers

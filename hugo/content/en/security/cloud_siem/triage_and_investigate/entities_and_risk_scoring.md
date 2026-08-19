@@ -28,7 +28,10 @@ With Risk Insights, you can:
 
 ## Prerequisites
 
-- For Risk Insights coverage, either GitHub, [Azure][6], [GCP][5], or [AWS][1] must be configured for Cloud SIEM.
+- To use Risk Insights, configure at least one of the following supported log sources to send logs to Cloud SIEM, with an active Open Cybersecurity Schema Framework (OCSF) pipeline:
+  - **Sources that provide identity and resource entities** (such as users, service identities, assumed roles, compute instances, and storage containers): AWS, Azure, GCP, GitHub, Microsoft 365, and Okta.
+  - **Sources that provide user entities identified by email address**: 1Password, Cisco Duo, Cloudflare, CrowdStrike, Google Workspace, JumpCloud, LastPass, Salesforce, Slack, and Zscaler Internet Access (ZIA).
+- Many supported sources use an [out-of-the-box OCSF pipeline][8] that requires no additional configuration. If a supported source is not producing entities, confirm that its out-of-the-box OCSF pipeline is active. Pipelines that predate OCSF support, and customized pipelines, may not include the required OCSF processing.
 - (Optional) To view associated Cloud Security insights in the entity panel, [Cloud Security must be configured][2].
 
 
@@ -109,10 +112,8 @@ The severity threshold of an entity is calculated by adding up the score impact 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
 [2]: https://docs.datadoghq.com/security/cloud_security_management/setup
 [3]: https://app.datadoghq.com/security
 [4]: https://app.datadoghq.com/security/siem/risk-insights
-[5]: /security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
-[6]: /security/cloud_siem/guide/azure-config-guide-for-cloud-siem/
 [7]: https://app.datadoghq.com/security/configuration/siem/risk-insights
+[8]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/#supported-out-of-the-box-ocsf-pipelines

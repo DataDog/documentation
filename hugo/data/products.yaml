@@ -268,8 +268,8 @@ products:
                 link: service_management/app_builder/
                 description: Create low-code applications to streamline your internal tools
                 short_description: Low-code internal tools
-              - title: Case Management
-                link: incident_response/case_management/
+              - title: Work Management
+                link: incident_response/work_management/
                 description: Triage, track, and remediate issues with centralized ownership and team collaboration
                 short_description: Issue tracking and triage
               - title: Service Level Objectives
