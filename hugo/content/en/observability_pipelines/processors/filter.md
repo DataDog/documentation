@@ -44,9 +44,9 @@ For metrics pipelines, you can search for and {{< tooltip text="filter out custo
 1. Select the time frame in the dropdown menu to check metric queries against. For example, if you select `90d`, the Worker looks for metrics that have not been queried in the last 90 days.
 1. In the {{< ui >}}Asset usage{{< /ui >}} dropdown menu, select whether to find metrics used in assets, such as dashboards and monitors.
 1. In the list of metrics found:
-    - The {{< ui >}}Vol/Mo{{< /ui >}} column shows you the metric's monthly ingested volume for the entire organization, not this specific pipeline.
+    - Check the {{< ui >}}Vol/Mo{{< /ui >}} column to see the metric's monthly ingested volume for the entire organization, not this specific pipeline.
+    - Check the {{< ui >}}Origin{{< /ui >}} column to see which product sent the custom metric.
     - In the {{< ui >}}Asset Usage{{< /ui >}} column, hover over the asset usage total for a metric to see which assets are using that metric. Click on an asset to go to that asset.
-    - The {{< ui >}}Origin{{< /ui >}} column shows you which product sent the custom metric.
     - In the search bar, enter a metric name to find it in the list.
 1. Select the custom metrics in the list to filter them out. The selected metrics are added to the {{< ui >}}Filter query{{< /ui >}} field.
 1. Click {{< ui >}}Save Filters{{< /ui >}}.
