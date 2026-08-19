@@ -131,7 +131,7 @@ You can target the following Kubernetes resources:
 | StatefulSet | `apps/v1/statefulsets` | 7.82.0 | |
 | CronJob | `batch/v1/cronjobs` | 7.82.0 | |
 | Job | `batch/v1/jobs` | 7.82.0 | |
-| Service | `core/v1/services` | 7.82.0 | Supports checks only. See [Service targets](#service-targets). |
+| Service | `core/v1/services` | 7.82.0 | Supports checks only. See [Target services](#target-services). |
 | Rollout | `argoproj.io/v1alpha1/rollouts` | 7.83.0 | Requires [Argo Rollouts][7]. |
 
 This example configures a [Redis integration][4] for a `StatefulSet` named `redis`, mirroring this [annotation-based example][2].
