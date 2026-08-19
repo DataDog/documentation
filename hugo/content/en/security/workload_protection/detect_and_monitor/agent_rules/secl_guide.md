@@ -112,7 +112,6 @@ SECL expressions support several platforms. You can use the documentation below 
 | Pattern                   | Explanation                                 |
 | ------------------------- | -------------------------------------------- |
 | `open.file.path == "/etc/passwd"`, `exec.comm != ""` | Too broad. Matches a lot of valid use cases.  |
-| `fd.name contains "/"`    | Matches nearly every file I/O event.     |
 | `container.id != ""`      | Useful only if scoped with a more specific field. |
 
 ## Example library
@@ -131,6 +130,8 @@ rules:
     expression: >-
       open.file.path in ["/etc/shadow", "/etc/sudoers"] &&
       process.file.path not in ["/usr/sbin/vipw", "/usr/sbin/visudo"]
+    filters:
+      - os == "linux"
 {{< /code-block >}}
 
 #### NGINX or PHP spawning bash
@@ -144,6 +145,8 @@ rules:
         process.ancestors.file.name == "nginx" ||
         process.ancestors.file.name =~ "php*"
       )
+    filters:
+      - os == "linux"
 {{< /code-block >}}
 
 #### Suspicious IMDS access from container
@@ -155,6 +158,8 @@ rules:
       connect &&
       network.destination.ip in ["169.254.169.254"] &&
       container.id != ""
+    filters:
+      - os == "linux"
 {{< /code-block >}}
 
 #### Kernel module loads outside maintenance window
@@ -166,6 +171,8 @@ rules:
       load_module &&
       process.user != "root" &&
       process.ancestors.file.name not in ["modprobe", "insmod"]
+    filters:
+      - os == "linux"
 {{< /code-block >}}
 
 #### Sensitive file read shortly after start
@@ -177,6 +184,8 @@ rules:
       open.file.path == "/etc/secret" &&
       process.file.name == "java" &&
       process.created_at > 5s
+    filters:
+      - os == "linux"
 {{< /code-block >}}
 
 #### Outbound to non-corporate IPs (CIDR allowlist)
@@ -187,6 +196,8 @@ rules:
     expression: >-
       connect &&
       network.destination.ip not in [10.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12]
+    filters:
+      - os == "linux"
 {{< /code-block >}}
 
 ### Windows
@@ -199,6 +210,8 @@ rules:
     expression: >-
       set_key_value &&
       open_key.registry.key_path =~ "*\\Software\\Microsoft\\Windows\\CurrentVersion\\Run*"
+    filters:
+      - os == "windows"
 {{< /code-block >}}
 
 #### Unsigned binary launching PowerShell
@@ -210,6 +223,8 @@ rules:
       exec.file.path =~ "*\\WindowsPowerShell\\v1.0\\powershell.exe" &&
       process.parent.file.path !~ "*\\Program Files*" &&
       process.user_sid != "S-1-5-18"
+    filters:
+      - os == "windows"
 {{< /code-block >}}
 
 ### Cross-platform

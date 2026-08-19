@@ -22,8 +22,7 @@ Workload Protection Agent rules use a custom expression language called SECL to 
 
 ## Deploy Agent rules with policies
 
-Agent rules are packaged and deployed in policies. Manage policies centrally in Datadog with Remote Configuration, manually with Agent configuration files, or as code with Terraform. For more information, see [Policy Management][2].
-
+Agent rules are packaged and deployed in policies. Manage policies centrally in Datadog or using Terraform, and deploy them to the Agent with Remote Configuration or by manually modifying the Agent configuration files. For more information, see [Policy Management][2].
 ## Use variables and actions
 
 Variables and actions extend Agent rules beyond event matching. Actions can collect additional telemetry, such as file hashes, respond to threats, or operate on SECL variables. SECL variables enable the construction of advanced, stateful detection logic based on state machines. For more information, see [Variables and actions][6].
