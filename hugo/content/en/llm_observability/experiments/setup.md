@@ -1,6 +1,10 @@
 ---
 title: Setup and Usage
 description: How to set up Agent Observability Experiments and start running experiments.
+further_reading:
+- link: "https://www.datadoghq.com/blog/debug-and-evaluate-your-ai-app-from-your-coding-agent/"
+  tag: "Blog"
+  text: "Debug and evaluate your AI app from your coding agent with Datadog Agent Observability"
 ---
 
 This page describes how to set up and use Agent Observability Experiments with the Python SDK.
@@ -344,3 +348,7 @@ Note: LLM Experiments traces are retained for 90 days.
 [4]: /llm_observability/guide/evaluation_developer_guide
 [5]: /llm_observability/monitoring/llm_observability_and_apm/
 [6]: /llm_observability/instrumentation/otel_instrumentation
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

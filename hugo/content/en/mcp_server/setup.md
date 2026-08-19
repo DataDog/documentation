@@ -13,6 +13,12 @@ further_reading:
 - link: "mcp_server/tools"
   tag: "Documentation"
   text: "Datadog MCP Server Tools"
+- link: "https://www.datadoghq.com/blog/kubernetes-mcp-tools/"
+  tag: "Blog"
+  text: "Investigate Kubernetes resources with Datadog MCP tools"
+- link: "https://www.datadoghq.com/blog/datadog-ai-agent-integrations/"
+  tag: "Blog"
+  text: "Bring live Datadog telemetry into your AI agents with native integrations"
 ---
 
 Learn how to set up and configure the Datadog MCP Server, which lets you retrieve telemetry insights and manage platform features directly from AI-powered clients. Select your client:
@@ -817,7 +823,7 @@ If you are a partner or vendor adding Datadog to an MCP directory for your AI ag
 
 Local authentication is recommended for Cline and when remote authentication is unreliable or not available. After installation, you typically do not need to update the local binary to benefit from MCP Server updates, as the tools are remote.
 
-{{% collapse-content title="Set up Datadog MCP Server local binary" level="h5" expanded=false id="mcp-local-binary" %}}
+{{% collapse-content title="Set up Datadog MCP Server local binary" level="h4" expanded=false id="mcp-local-binary" %}}
 
 1. Install the Datadog MCP Server binary (macOS and Linux):
    ```bash
