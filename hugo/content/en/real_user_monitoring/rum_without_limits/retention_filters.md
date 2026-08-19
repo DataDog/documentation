@@ -192,7 +192,7 @@ Analyze performance with [metrics][8].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/
-[2]: /session_replay/browser/#force-session-replay
+[2]: /session_replay/setup_and_configuration/?platform=browser&tab=npm#start-or-stop-the-recording-manually
 [3]: https://app.datadoghq.com/rum/list
 [4]: /real_user_monitoring/explorer/
 [5]: /real_user_monitoring/guide/retention_filter_best_practices

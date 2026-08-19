@@ -56,7 +56,7 @@ Agent Observability SDKs provide automatic instrumentation as well as manual ins
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% collapse-content title="Command-line setup" level="h3" expanded=false id="command-line-setup" %}}
+{{% collapse-content title="Command-line setup" level="h4" expanded=false id="command-line-setup" %}}
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -184,7 +184,7 @@ You can supply the following parameters as environment variables (for example, `
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="In-code setup" level="h3" expanded=false id="in-code-setup" %}}
+{{% collapse-content title="In-code setup" level="h4" expanded=false id="in-code-setup" %}}
 
 Instead of using [command-line setup](#command-line-setup), you can also enable Agent Observability programmatically.
 
@@ -310,7 +310,7 @@ Set the following values as environment variables. They cannot be configured pro
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="AWS Lambda Setup" level="h3" expanded=false id="aws-lambda-setup" %}}
+{{% collapse-content title="AWS Lambda Setup" level="h4" expanded=false id="aws-lambda-setup" %}}
 
 To instrument an existing AWS Lambda function with Agent Observability, you can use the Datadog Extension and respective language layers.
 
@@ -1363,7 +1363,7 @@ The SDK provides the method `LLMObs.annotate()` to enrich spans with inputs, out
 
 The `LLMObs.annotate()` method accepts the following arguments:
 
-{{% collapse-content title="Arguments" level="h4" expanded=false id="annotating-span-arguments" %}}
+{{% collapse-content title="Arguments" level="h3" expanded=false id="annotating-span-arguments" %}}
 
 `span`
 : optional - _Span_ - **default**: the current active span
@@ -1512,7 +1512,7 @@ The SDK provides the method `llmobs.annotate()` to annotate spans with inputs, o
 
 The `LLMObs.annotate()` method accepts the following arguments:
 
-{{% collapse-content title="Arguments" level="h4" expanded=false id="annotating-span-arguments" %}}
+{{% collapse-content title="Arguments" level="h3" expanded=false id="annotating-span-arguments" %}}
 `span`
 : optional - _Span_ - **default**: the current active span
 <br />The span to annotate. If `span` is not provided (as when using function wrappers), the SDK annotates the current active span.
@@ -2005,7 +2005,7 @@ Use `LLMObs.annotation_context(prompt=...)` to attach prompt metadata before the
 
 #### Arguments
 
-{{% collapse-content title="Arguments" level="h4" expanded=false id="prompt-tracking-arguments" %}}
+{{% collapse-content title="Arguments" level="h5" expanded=false id="prompt-tracking-arguments" %}}
 
 `prompt`
 : required - dictionary
@@ -2013,7 +2013,7 @@ Use `LLMObs.annotation_context(prompt=...)` to attach prompt metadata before the
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Prompt structure" level="h4" expanded=false id="prompt-structure" %}}
+{{% collapse-content title="Prompt structure" level="h5" expanded=false id="prompt-structure" %}}
 
 Supported keys:
 
@@ -2068,7 +2068,7 @@ Use `llmobs.annotationContext({ prompt: ... }, () => { ... })` to attach prompt 
 
 #### Arguments
 
-{{% collapse-content title="Options" level="h4" expanded=false id="prompt-tracking-arguments" %}}
+{{% collapse-content title="Options" level="h5" expanded=false id="prompt-tracking-arguments" %}}
 
 `prompt`
 : required - object
@@ -2076,7 +2076,7 @@ Use `llmobs.annotationContext({ prompt: ... }, () => { ... })` to attach prompt 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Prompt structure" level="h4" expanded=false id="prompt-structure" %}}
+{{% collapse-content title="Prompt structure" level="h5" expanded=false id="prompt-structure" %}}
 
 Supported properties:
 

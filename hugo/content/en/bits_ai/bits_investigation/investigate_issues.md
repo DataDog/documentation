@@ -163,7 +163,7 @@ The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investig
 [8]: /bits_ai/bits_investigation/configure#slack
 [9]: /bits_ai/bits_investigation/knowledge_sources/
 [10]: /incident_response/on-call/pages/#page-from-notifications
-[14]: /incident_response/case_management/notifications_integrations/#third-party-tickets
+[14]: /incident_response/work_management/notifications_integrations/#third-party-tickets
 [15]: /account_management/rbac/permissions/#bits-ai
 [16]: https://app.datadoghq.com/bits-ai/investigations/new
 [17]: /source_code/#tag-your-apm-telemetry-with-git-information
