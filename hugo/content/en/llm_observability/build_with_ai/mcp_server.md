@@ -16,6 +16,12 @@ further_reading:
 - link: "/llm_observability/build_with_ai/claude_code_skills"
   tag: "Guide"
   text: "Analyze LLM Applications with Claude Code Skills"
+- link: "https://www.datadoghq.com/blog/debug-and-evaluate-your-ai-app-from-your-coding-agent/"
+  tag: "Blog"
+  text: "Debug and evaluate your AI app from your coding agent with Datadog Agent Observability"
+- link: "https://www.datadoghq.com/blog/bits-evals/"
+  tag: "Blog"
+  text: "Improve AI agent quality with Bits Evals"
 ---
 
 ## Overview

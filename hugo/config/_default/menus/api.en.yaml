@@ -11913,6 +11913,75 @@ menu:
           - SearchIssues
         unstable: []
         order: 1
+    - name: Execution Policy
+      url: /api/latest/execution-policy/
+      identifier: execution-policy
+      generated: true
+    - name: Update an execution policy
+      url: /api/latest/execution-policy/update-an-execution-policy/
+      identifier: execution-policy-update-an-execution-policy
+      parent: execution-policy
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateExecutionPolicy
+        unstable:
+          - v2
+        order: 12
+    - name: Get an execution policy
+      url: /api/latest/execution-policy/get-an-execution-policy/
+      identifier: execution-policy-get-an-execution-policy
+      parent: execution-policy
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetExecutionPolicy
+        unstable:
+          - v2
+        order: 11
+    - name: Delete an execution policy
+      url: /api/latest/execution-policy/delete-an-execution-policy/
+      identifier: execution-policy-delete-an-execution-policy
+      parent: execution-policy
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteExecutionPolicy
+        unstable:
+          - v2
+        order: 13
+    - name: Create an execution policy
+      url: /api/latest/execution-policy/create-an-execution-policy/
+      identifier: execution-policy-create-an-execution-policy
+      parent: execution-policy
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateExecutionPolicy
+        unstable:
+          - v2
+        order: 10
+    - name: List execution policies
+      url: /api/latest/execution-policy/list-execution-policies/
+      identifier: execution-policy-list-execution-policies
+      parent: execution-policy
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListExecutionPolicies
+        unstable:
+          - v2
+        order: 9
     - name: Fastly Integration
       url: /api/latest/fastly-integration/
       identifier: fastly-integration
