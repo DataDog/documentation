@@ -210,7 +210,7 @@ Navigate to [Setup & Configuration][3] and follow the steps.
 
 Azure exports cost data starting from the month you created the export. Datadog automatically ingests up to 15 months of available historical cost data from these exports. You can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
 
-If you migrated from an EA to an MCA, follow the migration instructions below before running a historical export. Run the export from the agreement scope that covered the requested dates.
+If you migrated from an EA to an MCA, follow the [migration instructions][18] before running a historical export. Run the export from the agreement scope that covered the requested dates.
 
 1. Complete the instructions in the **Setup** and **Configure Cloud Cost in Datadog** sections above.
 1. Wait up to 24 hours for cost data to appear in Datadog to ensure the integration is working end-to-end before beginning the backfill process. **Note:** If you have already completed setup, and cost data is appearing in Datadog, you can proceed directly to the backfill steps below.
@@ -245,7 +245,7 @@ This migration process preserves historical EA data for Datadog configurations t
    * Storage directory and export prefix
    * Dataset version, format, and compression type
 2. Leave the Azure Cloud Cost Management configuration in Datadog enabled and unchanged.
-3. After the MCA becomes active, follow the [cost export instructions](#generate-cost-exports) to recreate the actual and amortized exports at the corresponding MCA scope. Use the export names, storage account, container, directory, and prefix recorded from the EA exports.
+3. After the MCA becomes active, follow the [cost export instructions][17] to recreate the actual and amortized exports at the corresponding MCA scope. Use the export names, storage account, container, directory, and prefix recorded from the EA exports.
 
 Datadog continues to read the historical EA files from the existing destination and adds MCA data to the same cost history.
 
@@ -362,3 +362,5 @@ For example, to view cost and utilization for each Azure VM, you can make a tabl
 [14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/azure_uc_config
 [15]: https://learn.microsoft.com/en-us/azure/cost-management-billing/microsoft-customer-agreement/onboard-microsoft-customer-agreement
 [16]: /help/
+[17]: #generate-cost-exports
+[18]: #migrate-exports-after-changing-billing-agreements
