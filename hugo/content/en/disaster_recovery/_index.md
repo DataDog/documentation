@@ -1,5 +1,7 @@
 ---
 title: Datadog Disaster Recovery
+aliases:
+- /agent/guide/datadog-disaster-recovery/
 site_support_id: datadog_disaster_recovery
 further_reading:
 - link: "agent/remote_config/?tab=configurationyamlfile"
