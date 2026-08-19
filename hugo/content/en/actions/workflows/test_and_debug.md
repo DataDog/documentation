@@ -57,7 +57,7 @@ The initial run history for a workflow provides a panel with the list of previou
 
 ## Fix a failed step with AI
 
-In {{< ui >}}Run History{{< /ui >}}, select a failed step and open its {{< ui >}}Outputs{{< /ui >}} tab. Next to the error message, click {{< ui >}}Fix with AI{{< /ui >}} to get help resolving the failure.
+In {{< ui >}}Run History{{< /ui >}}, select a failed step or open its {{< ui >}}Outputs{{< /ui >}} tab. Next to the error message, click {{< ui >}}Fix with AI{{< /ui >}} to get help resolving the failure.
 
 {{< img src="actions/workflows/test_and_debug/fix-with-ai.png" alt="Bits Chat diagnosing and proposing a fix for a failed workflow step." >}}
 
