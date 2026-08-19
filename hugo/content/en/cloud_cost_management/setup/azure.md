@@ -251,7 +251,7 @@ Datadog continues to read the historical EA files from the existing destination 
 
 <div class="alert alert-warning">
 <strong>Do not backfill EA dates from an MCA scope</strong>
-<p>An MCA export does not include costs from the previous EA. Running a one-time MCA export for an EA date range can write a newer empty manifest to the shared destination. Datadog reads the latest export for each month, so the empty manifest can make previously available EA data unavailable.</p>
+<p>An MCA export does not include costs from the previous EA. Running a one-time MCA export for an EA date range can write a newer empty manifest to the shared destination. Datadog reads the latest export for each month, so the empty manifest can zero out EA data that was previously ingested.</p>
 </div>
 
 To backfill data after an EA-to-MCA migration, use the agreement that covered the requested dates:
