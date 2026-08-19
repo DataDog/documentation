@@ -29,7 +29,7 @@ An MFCR increments each time the flag configuration file is requested. A configu
 - A **client-side SDK** initializes, which generally happens when a user opens a mobile app or loads a web page.
 - A **server-side SDK** checks for an updated configuration file, at a recurring interval.
 
-The request itself goes to different places depending on the delivery path. Client-side SDKs and server-side SDKs using agentless delivery request configuration directly from Datadog's CDN, which runs on Fastly. Server-side SDKs using Agent delivery do not request configuration directly—the Datadog Agent requests it on the SDK's behalf through Remote Configuration. See [Server SDK Configuration Sources][1] for how server-side SDKs choose between these delivery paths.
+The request itself goes to different places depending on the delivery path. Client-side SDKs, and server-side SDKs using agentless delivery, request configuration directly from Datadog's CDN, which runs on Fastly. Server-side SDKs using Agent delivery do not request configuration directly; the Datadog Agent requests it on the SDK's behalf through Remote Configuration. See [Server SDK Configuration Sources][1] for how server-side SDKs choose between these delivery paths.
 
 Installing an SDK does not generate configuration requests by itself. Requests start only after application code initializes the SDK (client-side) or explicitly selects a configuration source (server-side).
 
