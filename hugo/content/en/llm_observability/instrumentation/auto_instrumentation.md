@@ -45,7 +45,7 @@ Agent Observability can automatically trace and annotate calls to supported LLM 
 | [OpenAI](#openai), [Azure OpenAI](#openai)      | >= 1.0.0           | >= 2.9.0       |
 | [OpenAI Agents](#openai-agents)                 | >= 0.0.2           | >= 3.5.0       |
 | [Pydantic AI](#pydantic-ai)                     | >= 0.3.0           | >= 3.11.0      |
-| [Strands Agents](#strands-agents)               | >= 1.11.0          | Any            |
+| [Strands Agents](#strands-agents) (through OpenTelemetry) | >= 1.11.0     | Any            |
 | [Vertex AI](#vertex-ai)                         | >= 1.71.1          | >= 2.18.0      |
 | [vLLM](#vllm)                                   | >= 0.10.2          | >= 4.2.0       |
 
