@@ -133,6 +133,30 @@
     "request_description": "Update an existing Action Connection request body",
     "request_schema_description": "Request used to update an action connection."
   },
+  "ListExecutionPolicies": {
+    "description": "Retrieve a list of execution policies for the current organization.",
+    "summary": "List execution policies"
+  },
+  "CreateExecutionPolicy": {
+    "description": "Create a new execution policy.",
+    "summary": "Create an execution policy",
+    "request_description": "The execution policy to create.",
+    "request_schema_description": "Request object that includes the execution policy to create."
+  },
+  "DeleteExecutionPolicy": {
+    "description": "Delete a specific execution policy.",
+    "summary": "Delete an execution policy"
+  },
+  "GetExecutionPolicy": {
+    "description": "Retrieve an existing execution policy by ID.",
+    "summary": "Get an execution policy"
+  },
+  "UpdateExecutionPolicy": {
+    "description": "Update an existing execution policy.\nReturns the execution policy object when the request is successful.",
+    "summary": "Update an execution policy",
+    "request_description": "The new execution policy.",
+    "request_schema_description": "Request object that includes the execution policy to update."
+  },
   "ListAwsScanOptions": {
     "description": "Fetches the scan options configured for AWS accounts.",
     "summary": "List AWS scan options"
