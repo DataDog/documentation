@@ -18,13 +18,16 @@ products:
 - name: Metrics
   icon: metrics
   url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
+- name: Traces
+  icon: apm
+  url: /observability_pipelines/configuration/?tab=traces#pipeline-types
 ---
 
 {{< product-availability >}}
 
 ## Overview
 
-Use this processor with Vector Remap Language (VRL) to modify and enrich your logs. VRL is an expression-oriented, domain specific language designed for transforming logs. It features built-in functions for observability use cases. You can use custom functions in the following ways:
+Use this processor with Vector Remap Language (VRL) to modify and enrich your logs, metrics, or {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}}. VRL is an expression-oriented, domain specific language designed for transforming data. It features built-in functions for observability use cases. You can use custom functions in the following ways:
 
 - Manipulate [arrays](#array), [strings](#string), and other data types.
 - Encode and decode values using [Codec](#codec).
@@ -51,10 +54,10 @@ To set up this processor:
 ### Add a function
 
 1. Enter a name for your custom processor.
-1. Add your script to modify your logs using [custom functions][1]. You can also click {{< ui >}}Autofill with Example{{< /ui >}} and select one of the common use cases to get started. Click the copy icon for the example script and paste it into your script. See [Get Started with the Custom Processor][2] for more information.
+1. Add your script to modify your data using [custom functions][1]. You can also click {{< ui >}}Autofill with Example{{< /ui >}} and select one of the common use cases to get started. Click the copy icon for the example script and paste it into your script. See [Get Started with the Custom Processor][2] for more information.
 1. Optionally, check {{< ui >}}Drop events on error{{< /ui >}} if you want to drop events that encounter an error during processing.
-1. Enter a sample log event.
-1. Click {{< ui >}}Run{{< /ui >}} to preview how the functions process the log. After the script has run, you can see the output for the log.
+1. Enter a sample event.
+1. Click {{< ui >}}Run{{< /ui >}} to preview how the functions process the event. After the script has run, you can see the output for the event.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Custom functions

@@ -25,6 +25,9 @@ further_reading:
 - link: "/containers/troubleshooting/log-collection"
   tag: "Documentation"
   text: "Container Log Collection Troubleshooting"
+- link: "https://www.datadoghq.com/architecture/monitoring-container-apps-logs/"
+  tag: "Architecture Center"
+  text: "Monitoring Container Apps - Logs"
 ---
 
 This page discusses collecting logs from Kubernetes log files.
@@ -163,9 +166,9 @@ The Datadog Agent in Kubernetes is deployed by a DaemonSet (managed by the Datad
 
 When "Container Collect All" is enabled you can configure which containers you want to collect logs from. This can be useful to prevent the collection of the Datadog Agent logs, if desired. You can do this by passing configurations to the Datadog Agent to control what it pulls, or by passing configurations to the Kubernetes Pod to exclude certain logs more explicitly.
 
-When filtering out logs through methods like `DD_CONTAINER_EXCLUDE_LOGS` or `ad.datadoghq.com/logs_exclude`, the Agent ignores log collection regardless of explicitly defined log collection configurations in [Autodiscovery annotations][19] or [Autodiscovery configuration files][20].
+When filtering out logs through methods like `DD_CONTAINER_EXCLUDE_LOGS` or `ad.datadoghq.com/logs_exclude`, the Agent ignores log collection regardless of explicitly defined log collection configurations in [Autodiscovery annotations][19], the [`DatadogInstrumentation` CRD][23], or [Autodiscovery configuration files][20].
 
-When "Container Collect All" is disabled (default) you don't need to add any filtering because everything is excluded by default. To include collection for only selected pods, you can enable the log configuration by [Autodiscovery annotations][19] or [Autodiscovery configuration files][20] for the desired pods.
+When "Container Collect All" is disabled (default) you don't need to add any filtering because everything is excluded by default. To include collection for only selected pods, you can enable the log configuration by [Autodiscovery annotations][19], the [`DatadogInstrumentation` CRD][23], or [Autodiscovery configuration files][20] for the desired pods.
 
 See [Container Discovery Management][8] to learn more about filtering.
 
@@ -179,10 +182,11 @@ The `source` tag can be important for your logs, as the [out of box log pipeline
 
 ## Integration logs
 
-[Autodiscovery][10] enables you to use templates to configure log collection (and other capabilities) on containers. This can be used to enable log collection, customize tagging, and add advanced collection rules. To configure log collection for an integration with Autodiscovery you can either:
+[Autodiscovery][10] enables you to use templates to configure log collection and other capabilities on containers. Use one of the following methods to configure log collection:
 
-- Specify a log configuration as Autodiscovery Annotations on a given Pod, to configure the rules for a given container *(Recommended)*
-- Specify a log configuration as a configuration file, to configure the rules for each matching container by image
+- [Autodiscovery annotations](#autodiscovery-annotations) (recommended)
+- [`DatadogInstrumentation` CRD](#datadoginstrumentation-crd) (new)
+- [Autodiscovery configuration files](#autodiscovery-configuration-files)
 
 Setting a `source` and `service` tag on these log configurations is strongly recommended. Match the `source` tag to one of Datadog's [out-of-the-box log pipelines][15] so your logs are automatically enriched; you can also find a [library of pipelines in Datadog][16]. The `service` tag powers [Unified Service Tagging][4], linking your logs with metrics and traces from the same service. If `source` and `service` are omitted, the Agent falls back to the `service` tag from Unified Service Tagging (when set), and otherwise to the container's short image name.
 
@@ -190,7 +194,7 @@ Setting a `source` and `service` tag on these log configurations is strongly rec
 
 With Autodiscovery, the Agent automatically searches all Pod annotations for integration templates.
 
-To apply a specific configuration to a given container, add the annotation `ad.datadoghq.com/<CONTAINER_NAME>.logs` to your Pod with the JSON formatted log configuration. 
+To apply a specific configuration to a given container, add the annotation `ad.datadoghq.com/<CONTAINER_NAME>.logs` to your Pod with the JSON formatted log configuration.
 
 **Note**: Autodiscovery annotations identify containers by name, **not** image. It tries to match `<CONTAINER_NAME>` to the `.spec.containers[i].name`, not `.spec.containers[i].image`.
 
@@ -265,6 +269,30 @@ spec:
 # (...)
 ```
 
+### DatadogInstrumentation CRD
+
+Instead of annotating your pods or deployments, you can use a [`DatadogInstrumentation` custom resource][23] to configure log collection. The following examples is for the `app` container part of the `example` Deployment:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: example-logs
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: example
+  config:
+    logs:
+      - containerName: app
+        source: java
+        service: example-app
+        tags:
+          - foo:bar
+```
+
 ### Autodiscovery configuration files
 You can provide the Datadog Agent with configuration files to have the Agent run a specified integration when it discovers a container using the matching image identifier. This allows you to create a generic log configuration that applies to a set of container images.
 
@@ -286,7 +314,7 @@ spec:
           <INTEGRATION_NAME>.yaml: |-
             ad_identifiers:
             - <CONTAINER_IMAGE>
-        
+
             logs:
             - source: example-source
               service: example-service
@@ -307,7 +335,6 @@ datadog:
     <INTEGRATION_NAME>.yaml: |-
       ad_identifiers:
       - <CONTAINER_IMAGE>
-      
       logs:
       - source: example-source
         service: example-service
@@ -495,3 +522,4 @@ For troubleshooting steps, see [Container Log Collection Troubleshooting][21].
 [20]: /containers/kubernetes/log/?tab=helm#autodiscovery-configuration-files
 [21]: /containers/troubleshooting/log-collection/?tab=datadogoperator
 [22]: /containers/guide/ad_identifiers/
+[23]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/

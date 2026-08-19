@@ -20,6 +20,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications"
   tag: "Learning Center"
   text: "Tracing LLM Applications"
+- link: "https://www.datadoghq.com/blog/patterns-agent-observability/"
+  tag: "Blog"
+  text: "Understand production LLM behavior with Patterns in Agent Observability"
 ---
 
 
@@ -51,7 +54,7 @@ Each topic shows its interaction volume and share of total traffic. Interactions
 1. Click **+ New Pattern**.
 1. Enter a **Name**.
 1. Click **Select a model**. The Model configuration window opens, where you can add details that Agent Observability uses to generate topic names, summaries, topic hierarchy, and to attribute each interaction to a topic:
-   - **LLM Provider**: Supported providers are OpenAI, Amazon Bedrock, Azure OpenAI, and Vertex AI.
+   - **LLM Provider**: Supported providers are OpenAI, Anthropic, Amazon Bedrock, Azure OpenAI, and Vertex AI.
    - **Account**
    - **Model**
 1. Click **Confirm** to save your changes and close the window.

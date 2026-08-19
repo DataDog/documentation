@@ -13,14 +13,16 @@ Before setting up Runtime Code Analysis (IAST), ensure the following prerequisit
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 2. **Supported SDK:** The Datadog SDK used by your application or service supports Runtime Code Analysis (IAST) capabilities for the language of your application or service. For more details, see the **Compatibility Requirements** section below.
 
-<div class="alert alert-info">The Datadog Agent and SDK are the only requirements for IAST. APM tracing and Infrastructure Monitoring are not required; IAST reports findings independently of both. To disable APM or Infrastructure Monitoring, see <a href="#disable-apm-and-infrastructure-monitoring">Disable APM and Infrastructure Monitoring</a>.</div>
+<div class="alert alert-info">The Datadog Agent and SDK are the only requirements for IAST. APM tracing and Infrastructure Monitoring are not required; IAST reports findings independently of both. To disable APM or Infrastructure Monitoring, see <a href="#disable-apm-and-infrastructure-monitoring">Disable APM and Infrastructure Monitoring</a>. 
+<br>
+Even if APM is disabled, APM intake costs are still incurred for ingesting data, such as security traces and spans, to support IAST.</div>
 
 ## Using Datadog SDKs
 
 Select your application language for details on how to enable Runtime Code Analysis (IAST) for your language and infrastructure types.
 
 
-{{% collapse-content title="Java" level="h4" %}}
+{{% collapse-content title="Java" level="h3" %}}
 
 You can detect code-level vulnerabilities and monitor application security in Java applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
@@ -126,7 +128,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 {{% /collapse-content %}}
 
-{{% collapse-content title=".NET" level="h4" %}}
+{{% collapse-content title=".NET" level="h3" %}}
 
 You can detect code-level vulnerabilities and monitor application security in .NET applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
@@ -254,7 +256,7 @@ If you need additional assistance, contact [Datadog support][5].
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Node.js" level="h4" %}}
+{{% collapse-content title="Node.js" level="h3" %}}
 
 You can detect code-level vulnerabilities and monitor application security in Node.js applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
@@ -341,7 +343,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Python" level="h4" %}}
+{{% collapse-content title="Python" level="h3" %}}
 
 You can detect code-level vulnerabilities and monitor application security in Python applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
@@ -490,7 +492,7 @@ The following code security capabilities are supported relative to each language
 
 Select your application language for details about framework compatibility and feature support.
 
-{{% collapse-content title="Java" level="h4" %}}
+{{% collapse-content title="Java" level="h3" %}}
 
 ### Code Security capabilities
 
@@ -601,7 +603,7 @@ Versions 22 and above are supported as in Preview.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title=".NET" level="h4" %}}
+{{% collapse-content title=".NET" level="h3" %}}
 
 ### Code Security capabilities support
 
@@ -696,7 +698,7 @@ These are supported on the following architectures:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Node.js" level="h4" %}}
+{{% collapse-content title="Node.js" level="h3" %}}
 
 ### Code Security capabilities
 
@@ -826,7 +828,7 @@ Datastore tracing provides:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Python" level="h4" %}}
+{{% collapse-content title="Python" level="h3" %}}
 
 ### Code Security capabilities support
 

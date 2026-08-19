@@ -17,14 +17,55 @@ By default, Datadog enables the default rulesets for your repository's programmi
 
 For the full list of default rulesets, see [Static Code Analysis (SAST) Rules][6].
 
+## Configure AI-native SAST
+
+AI-native SAST uses the same `sast` configuration as other Static Code Analysis rules and is available only for Datadog-hosted scans. The `sast` configuration controls which AI-native SAST rulesets run; it does not enable Datadog-hosted scanning or grant access to AI-native SAST.
+
+When AI-native SAST is enabled, its default rulesets run for the supported languages detected in the repository. AI-native SAST ruleset names use the format `<language>-ai_sast`:
+
+| Language | Ruleset |
+| --- | --- |
+| C# | `csharp-ai_sast` |
+| Elixir | `elixir-ai_sast` |
+| Go | `go-ai_sast` |
+| Java | `java-ai_sast` |
+| JavaScript | `javascript-ai_sast` |
+| Kotlin | `kotlin-ai_sast` |
+| PHP | `php-ai_sast` |
+| Python | `python-ai_sast` |
+| Ruby | `ruby-ai_sast` |
+| Rust | `rust-ai_sast` |
+| TypeScript | `typescript-ai_sast` |
+
+The `use-default-rulesets` setting applies to both traditional SAST and AI-native SAST rulesets. If you set `use-default-rulesets: false`, include every traditional and AI-native SAST ruleset that you want to run. For example, the following configuration runs the Ruby security and AI-native SAST rulesets:
+
+{{< code-block lang="yaml" >}}
+schema-version: v1.4
+sast:
+  use-default-rulesets: false
+  use-rulesets:
+    - ruby-security
+    - ruby-ai_sast
+{{< /code-block >}}
+
+To disable a specific AI-native SAST ruleset while retaining the other default rulesets, add it to `ignore-rulesets`:
+
+{{< code-block lang="yaml" >}}
+schema-version: v1.4
+sast:
+  use-default-rulesets: true
+  ignore-rulesets:
+    - ruby-ai_sast
+{{< /code-block >}}
+
 ## Configuration format
 
 The following configuration format applies to all configuration locations: org-level, repository-level, and repository-level (file).
 
-The configuration file must begin with a supported `schema-version` (`v1.0`, `v1.1`, or `v1.2`), followed by a `sast` key containing the analysis configuration, structured as shown below:
+The configuration file must begin with a supported `schema-version` (`v1.0`, `v1.1`, `v1.2`, `v1.3`, or `v1.4`), followed by a `sast` key containing the analysis configuration. Use `v1.4` for all new configurations. The configuration is structured as shown below:
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.0
+schema-version: v1.4
 sast:
   use-default-rulesets: true
   use-rulesets:
@@ -156,8 +197,10 @@ The `global-config` object controls repository-wide settings:
 
 Example configuration:
 
+Because this example disables the default rulesets, the example explicitly includes `python-ai_sast` to retain AI-native SAST for Python:
+
 {{< code-block lang="yaml" >}}
-schema-version: v1.0
+schema-version: v1.4
 sast:
   use-default-rulesets: false
   use-rulesets:
@@ -166,6 +209,7 @@ sast:
     - python-code-style
     - python-inclusive
     - python-django
+    - python-ai_sast
     - custom-python-ruleset
   ruleset-configs:
     python-code-style:
