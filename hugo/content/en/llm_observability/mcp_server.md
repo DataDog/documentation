@@ -401,6 +401,11 @@ The `llmobs` toolset includes the following tools:
 `get_llmobs_pattern_points`
 : Get a cursor-paginated page of clustering points (individual spans) assigned to a single topic. Each point includes the `span_id`, `session_id`, and a span input preview. Pass `next_page_token` back as `page_token` to continue paging.
 
+### Pricing tools
+
+`get_llmobs_model_pricing`
+: Retrieve provider and model pricing tiers in USD per million tokens. Supply at least one of `provider` or `model`, where `provider` is an optional hint that scopes the lookup. When a tier's `rates` omits a component such as cache read or cache write, the provider does not define a price for that component. Do not read the omission as a zero-cost rate.
+
 ## Recommended workflows
 
 ### Trace analysis
