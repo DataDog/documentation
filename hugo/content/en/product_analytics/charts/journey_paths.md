@@ -1,12 +1,5 @@
 ---
 title: Journey Paths Analysis
-further_reading:
-- link: '/product_analytics/charts/funnel_analysis/'
-  tag: Documentation
-  text: Funnel Analysis
-- link: '/product_analytics/charts/pathways/'
-  tag: Documentation
-  text: Pathways Diagrams
 ---
 
 Journey paths show the most common paths users take between selected events.
@@ -51,7 +44,3 @@ You can refine journey path charts in various ways to zero in on the paths you w
 6. Click an event to open a menu with options to view the session replays or the users associated with that path. Or, hold **Option** (macOS) or **Alt** (Windows/Linux) and click an event to hide it from the diagram.
 
 7. Use {{< ui >}}More Paths{{< /ui >}} and {{< ui >}}Fewer Paths{{< /ui >}} to control how many paths are displayed.
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
