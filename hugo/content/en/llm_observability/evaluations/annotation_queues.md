@@ -132,6 +132,17 @@ For each trace:
 
 The Annotations list page displays a progress bar for each queue showing the ratio of reviewed interactions to total interactions. Use this to monitor annotation completion across queues at a glance.
 
+### Managing queue access
+
+Queue owners manage the reviewer list, access settings, and assignments from the queue details. Only the queue owner can change the reviewer list, access settings, or assignments.
+
+Access restrictions apply independently, so you can enable either restriction or both:
+- Reviewer restriction limits unassigned interactions to designated reviewers.
+- Assignee restriction limits assigned interactions to their assignees.
+- When both restrictions are enabled, reviewers can annotate unassigned interactions and assignees can annotate their assigned interactions.
+
+The queue owner retains access and can annotate all interactions.
+
 ### Filtering traces by annotation labels
 
 use the {{< ui >}}Annotation Labels{{< /ui >}} facet to filter traces by labels applied in annotation queues. This allows you to:

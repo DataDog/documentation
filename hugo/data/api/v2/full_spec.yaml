@@ -4235,6 +4235,18 @@ components:
           description: Name of the connection
           example: My AWS Connection
           type: string
+        tags:
+          description: |-
+            Tags associated with the connection. Each tag must follow the `key:value` format.
+            The `default` tag key is reserved.
+          example:
+            - env:prod
+            - team:action-platform
+          items:
+            description: A non-reserved tag in `key:value` format.
+            pattern: "^[A-Za-z0-9._/-]+:[A-Za-z0-9._/-]+$"
+            type: string
+          type: array
       required:
         - name
         - integration
@@ -4248,6 +4260,18 @@ components:
           description: Name of the connection
           example: My AWS Connection
           type: string
+        tags:
+          description: |-
+            Tags associated with the connection. Each tag must follow the `key:value` format.
+            The `default` tag key is reserved.
+          example:
+            - env:prod
+            - team:action-platform
+          items:
+            description: A non-reserved tag in `key:value` format.
+            pattern: "^[A-Za-z0-9._/-]+:[A-Za-z0-9._/-]+$"
+            type: string
+          type: array
       type: object
     ActionConnectionData:
       description: Data related to the connection.
@@ -122844,6 +122868,9 @@ paths:
                           type: AWSAssumeRole
                         type: AWS
                       name: My AWS Connection
+                      tags:
+                        - env:prod
+                        - team:action-platform
                     type: action_connection
             schema:
               $ref: "#/components/schemas/CreateActionConnectionRequest"
@@ -122860,6 +122887,9 @@ paths:
                         integration:
                           type: AWS
                         name: My AWS Connection
+                        tags:
+                          - env:prod
+                          - team:action-platform
                       id: 00000000-0000-0000-0000-000000000001
                       type: action_connection
               schema:
@@ -122939,6 +122969,9 @@ paths:
                         integration:
                           type: AWS
                         name: My AWS Connection
+                        tags:
+                          - env:prod
+                          - team:action-platform
                       id: 00000000-0000-0000-0000-000000000002
                       type: action_connection
               schema:
@@ -122988,6 +123021,9 @@ paths:
                       integration:
                         type: AWS
                       name: My AWS Connection
+                      tags:
+                        - env:prod
+                        - team:action-platform
                     type: action_connection
             schema:
               $ref: "#/components/schemas/UpdateActionConnectionRequest"
@@ -123005,6 +123041,9 @@ paths:
                         integration:
                           type: AWS
                         name: My AWS Connection
+                        tags:
+                          - env:prod
+                          - team:action-platform
                       id: 00000000-0000-0000-0000-000000000003
                       type: action_connection
               schema:
