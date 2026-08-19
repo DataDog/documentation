@@ -75,7 +75,7 @@ This feature is available starting from the following versions of each language'
 
 ## Examples
 
-{{% collapse-content title="Java" level="h4" %}}
+{{% collapse-content title="Java" level="h3" %}}
 
 ### Input validator
 
@@ -201,7 +201,7 @@ applies for both methods
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Node.js" level="h4" %}}
+{{% collapse-content title="Node.js" level="h3" %}}
 
 ### Input validator
 
@@ -301,7 +301,7 @@ The following security control definition affects every `sql-sanitizer` package 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title=".NET" level="h4" %}}
+{{% collapse-content title=".NET" level="h3" %}}
 
 ### General syntax
 `TYPE:SECURE_MARKS:Assembly:Class:Method(ParameterTypes)[:ParameterIndexes]`
@@ -357,7 +357,7 @@ Parameter indexes are comma-separated. If no parameter index is provided, the va
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Python" level="h4" %}}
+{{% collapse-content title="Python" level="h3" %}}
 
 ### Input validator
 

@@ -10,6 +10,9 @@ further_reading:
 - link: "/security/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Sensitive Data Scanner"
+- link: "https://www.datadoghq.com/blog/runtime-prioritization-engine/"
+  tag: "Blog"
+  text: "Prioritize security findings with the Datadog Runtime Prioritization Engine"
 ---
 
 ## Overview
