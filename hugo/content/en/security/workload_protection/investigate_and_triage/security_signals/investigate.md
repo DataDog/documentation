@@ -1,5 +1,5 @@
 ---
-title: Investigate
+title: Investigate Security Signals
 disable_toc: false
 ---
 
@@ -24,9 +24,9 @@ From the graph, you can pivot to other telemetry sources, such as Code Security 
 
 ### Correlated events
 
-Use **Correlated events** on the investigation graph to expand the view beyond the initial signal. Correlated events groups runtime activity that belongs to the same process lineage or exploitation chain using [variables][2].
+Use **Correlated events** on the investigation graph to expand the view beyond the initial signal. It uses [variables][2] to group runtime activity that belongs to the same process lineage or exploitation chain.
 
-Each event detected by Workload Protection is tagged with a correlation key that associates it with others in the same execution chain. This grouping helps you focus on the broader compromise attempt instead of responding to isolated alerts.
+Each event detected by Workload Protection is tagged with a correlation key that associates it with other events in the same execution chain. This grouping helps you focus on the broader compromise attempt instead of responding to isolated alerts.
 
 Workload Protection supports built-in Execution Context layers for common runtime scenarios, including:
 
@@ -45,13 +45,13 @@ This helps you prioritize response efforts and understand which adjacent workloa
 
 ### Events timeline
 
-The **Events timeline** presents a chronological narrative of every event within a correlated threat story. It combines correlated events, triage statuses, responses, and recommended actions into a single view so you can retrace an attacker's movements from the initial exploit to subsequent actions without switching between dashboards.
+The **Events timeline** presents a chronological narrative of every event within a correlated threat story. It combines correlated events, triage statuses, responses, and recommended actions into a single view. Use it to retrace an attacker's movements from the initial exploit to subsequent actions without switching between views.
 
 Each event in the timeline includes contextual details and links to correlated metrics, logs, and traces.
 
 ## Context
 
-The **Context** tab summarizes the key attributes of the host where the signal triggered and links to related metrics, processes, and other information to help you assess the affected resource.
+The **Context** tab summarizes the key attributes of the host where the signal was triggered and links to related metrics, processes, and other information to help you assess the affected resource.
 
 ## Signal JSON
 
@@ -63,7 +63,7 @@ Use Signal JSON when you need to:
 - Build automations or integrations that consume signal data through the [Datadog API][4].
 - Share the full signal payload with colleagues or external tools during an investigation.
 
-**Note**: Signal JSON is most useful for advanced users who want to query signals programmatically. For most investigations, the investigation graph, timeline, and context tabs provide the information you need.
+<div class="alert alert-info">Signal JSON is most useful for advanced users who want to query signals programmatically. For most investigations, the investigation graph, timeline, and context tabs provide the information you need.</div>
 
 [1]: https://app.datadoghq.com/security/workload-protection/signals
 [2]: /security/workload_protection/detect_and_monitor/agent_rules/variables_and_actions
