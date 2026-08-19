@@ -1731,14 +1731,14 @@ menu:
       url: dashboards/graph_insights/correlations/
       parent: dashboards_graph_insights
       weight: 601
-    - name: Watchdog Explains
-      identifier: dashboards_watchdog_explains
-      url: dashboards/graph_insights/watchdog_explains/
-      parent: dashboards_graph_insights
-      weight: 602
     - name: Investigate Anomalies
       identifier: dashboards_investigate_anomalies
       url: dashboards/graph_insights/investigate_anomalies/
+      parent: dashboards_graph_insights
+      weight: 602
+    - name: Watchdog Explains
+      identifier: dashboards_watchdog_explains
+      url: dashboards/graph_insights/watchdog_explains/
       parent: dashboards_graph_insights
       weight: 603
     - name: Template Variables

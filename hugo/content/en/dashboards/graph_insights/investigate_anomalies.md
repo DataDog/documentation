@@ -27,14 +27,6 @@ Datadog does not run anomaly detection on:
 - Dashboards in print mode
 - Dashboards where you turned off {{< ui >}}Auto-detect issues{{< /ui >}}
 
-<!-- NOTE (regions): `site_support_id: dashboard_anomaly_detection` is set here with a matching
-[gov,gov2] entry in hugo/config/_default/params.yaml. Ethan Lipkind confirmed gov users get no
-dashboard anomaly highlighting and cannot reach Investigate with AI. Watchdog Explains IS still
-available to them, which is why it lives on its own page rather than here.
-Still unconfirmed: uk1 and ap2. Ethan said "I think not uk1 or ap2" and the flag is mid rollout
-to all commercial DCs, so it is deliberately not documented — a hedge plus a moving target is
-worse than silence. Revisit if he confirms. -->
-
 ## How Datadog detects anomalies
 
 Datadog applies anomaly detection to the graphs on your dashboard by analyzing both the shape and value of the underlying timeseries. It identifies deviations from historical patterns, flagging spikes, dips, or gradual drifts that don't align with expected behavior.
@@ -49,18 +41,6 @@ Click {{< ui >}}Investigate{{< /ui >}} at the top of the dashboard to see the is
 
 Anomalies occurring across several widgets at once are grouped into one issue, such as `Anomalies co-occur on 18 widgets`.
 
-<!-- TODO (screenshot): capture the Investigate menu showing the issue list and the
-Auto-detect issues toggle. Must come from a demo org, NOT preprod, and must not contain
-real cost figures or account data. -->
-
-<!-- NOTE (resolved, deliberately not documented): the four-separate-anomalies-collapsing-into-one
-behavior Olivia observed is a mid-migration artifact. GroupedInsightsProvider.tsx runs both a
-widget-driven client path and a feature-flagged backend path (isBackendPoweredFlowEnabled ->
-useBackendPoweredDashboardInvestigation returns groupedInsights). Individual findings register
-client-side, then backend grouping arrives. Behavior therefore varies by org and DNV-667
-(Backend-Powered Dashboard Investigations) is still open, so documenting the sequence would age
-badly. The end state (issues can span multiple widgets) is documented above instead. -->
-
 ## Review an anomaly
 
 Detected anomalies are highlighted in pink on the graph.
@@ -69,9 +49,6 @@ Detected anomalies are highlighted in pink on the graph.
 1. Click the chip to expand it. The expanded chip contains:
    - **Influential tags**: the tags contributing most to the anomaly.
    - **Next steps**: where you can open the anomaly in Watchdog Explains or hand it to Bits Investigation.
-
-<!-- TODO (screenshot): capture an expanded anomaly chip showing Influential tags and
-Next steps. Demo org only. -->
 
 ## Analyze a single graph with Watchdog Explains
 
