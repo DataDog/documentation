@@ -320,7 +320,7 @@ Checks if an attribute or expression is null.
 
 ### Regex
 
-Regex functions match or transform a value using a regular expression (regex). Patterns support the same regex constructs as [regex extraction][2] (literals, character classes, quantifiers, and so on). Unlike extraction, capture groups here do not need a name: `regexp_replace` can reference an unnamed group positionally with `$1` through `$9`.
+Regex functions match or transform a value using a regular expression (regex). Patterns support the same regex constructs as [regex extraction][1] (literals, character classes, quantifiers, and so on). Unlike extraction, capture groups here do not need a name: `regexp_replace` can reference an unnamed group positionally with `$1` through `$9`.
 
 <h4>regexp_like(<i>str</i> value, <i>str</i> pattern)</h4>
 
