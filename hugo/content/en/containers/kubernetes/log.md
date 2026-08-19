@@ -25,6 +25,9 @@ further_reading:
 - link: "/containers/troubleshooting/log-collection"
   tag: "Documentation"
   text: "Container Log Collection Troubleshooting"
+- link: "https://www.datadoghq.com/architecture/monitoring-container-apps-logs/"
+  tag: "Architecture Center"
+  text: "Monitoring Container Apps - Logs"
 ---
 
 This page discusses collecting logs from Kubernetes log files.
