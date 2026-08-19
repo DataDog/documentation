@@ -66,6 +66,7 @@ Click {{< ui >}}Add Tags{{< /ui >}} to open the tag enrichment rule modal pre-po
 - **Metadata updates**: Updating or adding Entity Metadata to services while enrichment rules are enabled, including the default rules, automatically updates those tags.
 - **Rule processing order**: Tag enrichment rules are applied in the order in which they were created. Rules at the top of the list take precedence over rules below them.
 - **Interaction with remapping rules**: Tag enrichment rules are applied after service remapping rules. If a service remapping rule modifies the `service` tag, enrichment uses the updated service name when looking up IDP metadata.
+- **Primary tags** Tag enrichment applies after primary tags resolution, so enriched tags cannot be used as primary tags.
 
 ## Further reading
 
