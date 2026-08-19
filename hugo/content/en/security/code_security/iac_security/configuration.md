@@ -18,7 +18,7 @@ further_reading:
     text: "IaC Security Rules"
 ---
 
-Infrastructure as Code (IaC) Security detects IaC misconfigurations. By default, IaC Security scans repositories with [all supported rules][3]. You can customize which rules run and on which paths, as well as their severities and categories. Configure these settings under the `iac` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
+Infrastructure as Code (IaC) Security detects IaC misconfigurations. By default, IaC Security scans repositories with [all supported rules][3]. You can customize which rules run and on which paths, as well as their severities and rule types. Configure these settings under the `iac` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
 
 For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][1].
 
@@ -26,7 +26,7 @@ For information on configuration locations, precedence, and merging, see [Code S
 
 You can configure IaC Security using:
 
-- Datadog or a `code-security.datadog.yaml` file for repository-wide rule, severity, category, and path settings. Use this method when you want the same configuration to apply across a repository or organization.
+- Datadog or a `code-security.datadog.yaml` file for repository-wide rule, severity, rule type, and path settings. Use this method when you want the same configuration to apply across a repository or organization.
 - Inline comments for local, file-specific exclusions that should stay with the IaC file. Use this method when an exception applies to a specific line, block, or file.
 
 ## Configuration format
@@ -64,10 +64,10 @@ iac:
     only-severities:
       - high
       - critical
-    # Do not report findings in these categories.
+    # Do not report findings with these rule types.
     ignore-categories:
       - "Best Practices"
-    # Report only findings in these categories.
+    # Report only findings with these rule types.
     only-categories:
       - "Encryption"
     # Do not run rules from these platforms.
@@ -136,8 +136,8 @@ The `global-config` object controls repository-wide settings:
 | `ignore-paths` | Array | File paths or glob patterns to exclude. Matching files are not analyzed. |
 | `only-severities` | Array | Severity levels to report. Findings with other severities are not reported. |
 | `ignore-severities` | Array | Severity levels to ignore. |
-| `only-categories` | Array | Categories to report. Findings in other categories are not reported. |
-| `ignore-categories` | Array | Categories to ignore. |
+| `only-categories` | Array | Rule types to report. Findings with other rule types are not reported. |
+| `ignore-categories` | Array | Rule types to ignore. |
 | `ignore-platforms` | Array | Platforms to skip. Rules from these platforms are not applied. |
 | `only-platforms` | Array | Platforms to scan. Rules from other platforms are not applied. |
 
@@ -175,9 +175,9 @@ iac:
       - "**/config.file"
 {{< /code-block >}}
 
-### Categories
+### Rule types
 
-Use `ignore-categories` to ignore findings in specific categories. Use `only-categories` to report only specific categories.
+Use `ignore-categories` to ignore findings with specific rule types. Use `only-categories` to report only specific rule types.
 
 **Possible values:**
 
