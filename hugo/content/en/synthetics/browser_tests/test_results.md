@@ -4,9 +4,6 @@ description: View Synthetic browser test results and compare successful or faile
 aliases:
  - "/synthetics/apm/browser_tests"
 further_reading:
-- link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
-  tag: "Blog"
-  text: "Monitor Core Web Vitals with Synthetic Monitoring"
 - link: "/synthetics/guide/explore-rum-through-synthetics/"
   tag: "Documentation"
   text: "Explore RUM & Session Replay in Synthetics"
@@ -16,6 +13,12 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing"
   tag: "Learning Center"
   text: "Getting Started with Synthetic Monitoring & Browser Testing"
+- link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
+  tag: "Blog"
+  text: "Monitor Core Web Vitals with Synthetic Monitoring"
+- link: "https://www.datadoghq.com/blog/bits-investigation-synthetic-tests/"
+  tag: "Blog"
+  text: "Triage synthetic test failures faster with Bits Investigation"
 
 ---
 
