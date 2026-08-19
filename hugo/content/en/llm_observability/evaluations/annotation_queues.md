@@ -92,7 +92,9 @@ Traces matching the rule's filters are added to the queue as they arrive. Annota
 
 ### Accessing your queues
 
-Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Experiment{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2] to see all available annotation queues. Click on a queue to see the trace list, then click {{< ui >}}Review{{< /ui >}} to begin annotating. When an annotation task is newly assigned to you, Datadog sends an email with the queue name, the user who assigned it, and a direct link to open the assigned interaction. To opt out, disable Agent Observability annotation assignment emails in [Personal Settings email subscriptions][15].
+Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Experiment{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2] to see all available annotation queues. Click on a queue to see the trace list, then click {{< ui >}}Review{{< /ui >}} to begin annotating.
+
+**Note**: When an annotation task is newly assigned to you, Datadog sends an email with the queue name, the user who assigned it, and a direct link to open the assigned interaction. To opt out, disable Agent Observability annotation assignment emails in [Personal Settings email subscriptions][15].
 
 Review Mode displays:
 - {{< ui >}}Full trace context{{< /ui >}} (right panel):
