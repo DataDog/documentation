@@ -358,4 +358,5 @@ By default, only the first match is replaced. Two optional arguments change that
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[2]: /logs/explorer/calculated_fields/extractions/#regex
+
+[1]: /logs/explorer/calculated_fields/extractions/#regex
