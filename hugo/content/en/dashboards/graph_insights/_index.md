@@ -31,7 +31,7 @@ Datadog detects anomalies on the timeseries graphs of your dashboard and groups 
 - What is the source of the spike?
 - Does this anomaly affect everyone, or is it an isolated incident?
 
-From there, you can delegate root cause analysis to Bits Investigation. This replaces Watchdog Explains, which analyzed one anomaly at a time.
+From there, you can open the anomaly in Watchdog Explains for tag-level analysis, or delegate root cause analysis to Bits Investigation.
 
 For more information, see [Investigate Dashboard Anomalies][2].
 

@@ -1,6 +1,6 @@
 ---
 title: Investigate Dashboard Anomalies
-description: Automatically detect and group anomalies on dashboard graphs, identify the tags contributing to them, and delegate root cause analysis to Bits Investigation.
+description: Automatically detect and group anomalies on dashboard graphs, identify the tags contributing to them, and investigate with Watchdog Explains or Bits Investigation.
 aliases:
     - /graphing/correlations/
     - /dashboards/correlations/
@@ -21,9 +21,7 @@ get_unsupported_regions.html). Bits Investigation is already [gov,gov2]. -->
 
 ## Overview
 
-Datadog detects anomalies on your dashboard's timeseries graphs, groups co-occurring anomalies into issues, and identifies the tags contributing most to each. You can then delegate root cause analysis to [Bits Investigation][1].
-
-This replaces Watchdog Explains, which analyzed one anomaly at a time.
+Datadog detects anomalies on your dashboard's timeseries graphs, groups co-occurring anomalies into issues, and identifies the tags contributing most to each. From an anomaly you can either open it in [Watchdog Explains](#watchdog-explains) for tag-level analysis, or delegate root cause analysis to [Bits Investigation][1].
 
 <div class="alert alert-info">Anomaly detection is available for <a href="/dashboards/widgets/timeseries/">Timeseries widgets</a> with {{< ui >}}Metrics{{< /ui >}} data (avg, sum, min, and max aggregation). Widgets using functions such as <code>cumsum</code>, <code>anomalies</code>, or <code>outliers</code> are not eligible.</div>
 
@@ -70,10 +68,25 @@ Detected anomalies are highlighted in pink on the graph.
 1. Hover over a highlighted region. A chip appears summarizing the anomaly and how far it deviates from the expected range, for example: `The spike is 70% higher than the expected range as inferred from the past 3 weeks of data.`
 1. Click the chip to expand it. The expanded chip contains:
    - **Influential tags**: the tags contributing most to the anomaly.
-   - **Next steps**: where you can hand the anomaly to Bits Investigation.
+   - **Next steps**: where you can open the anomaly in Watchdog Explains or hand it to Bits Investigation.
 
 <!-- TODO (screenshot): capture an expanded anomaly chip showing Influential tags and
 Next steps. Demo org only. -->
+
+From here you can take either of two paths, described in the following sections. Watchdog Explains keeps you on the graph and lets you test which tags account for the change. Bits Investigation leaves the dashboard and produces a written root cause analysis.
+
+## Watchdog Explains
+
+Watchdog Explains analyzes a single anomaly on one graph, comparing timeseries data across each applicable tag group against the source graph to show which tags contribute to the change.
+
+Open a compatible timeseries graph in fullscreen to use it. From a detected anomaly, the expanded chip's {{< ui >}}Next steps{{< /ui >}} section can take you there directly.
+
+Clicking a tag shows the graph with and without that dimension, so you can confirm whether removing it flattens the spike. Use this to identify causes such as a specific customer, service, or environment.
+
+<!-- TODO (verify): is Watchdog Explains reachable in fullscreen in all DCs, or only where the
+dashboard-level highlighting flag is not yet enabled? Ethan confirmed gov users reach it this way.
+Also pending from Omar: whether Watchdog Explains is on a deprecation path, which would change
+whether this page nudges readers toward Bits Investigation instead. -->
 
 ## Investigate root cause with Bits Investigation
 
