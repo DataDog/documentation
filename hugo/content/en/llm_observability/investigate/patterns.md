@@ -104,13 +104,22 @@ Expand parent topics to see their sub-topics and examine specific areas of your 
 
 ### Drill into a topic
 
-Click any topic name to open the detail view. The detail view shows a summary of what the topic represents, the total interaction count, and an interactions table with the child topic label, input text, and timestamp for each interaction. Search the table by keyword to find specific examples.
+Click any topic name to open its detail view. Use the breadcrumbs or click a node in the {{< ui >}}Topic Map{{< /ui >}} to navigate the topic hierarchy. The map highlights the selected branch and shows each topic's interaction count and, when available, traffic change since the previous run.
 
+{{< img src="llm_observability/patterns_topic_details.png" alt="The topic detail view showing a pattern summary and an interactive topic map with interaction counts and traffic changes." style="width:100%;" >}}
 
-{{< img src="llm_observability/patterns_topic_details.png" alt="The topic detail view showing a summary of the topic, the total interaction count, and a table of interactions with child topic label, input text, and timestamp." style="width:100%;" >}}
+The detail view includes:
+
+- {{< ui >}}Pattern Summary{{< /ui >}}: Highlights traffic trends, online evaluation health, operational outliers, dataset coverage gaps, and recommended next steps.
+- {{< ui >}}Scorecard{{< /ui >}}: Summarizes traffic volume and share, cost, error rate, median latency, and dataset coverage.
+- {{< ui >}}Dataset Coverage Detail{{< /ui >}}: Shows coverage status and attribution by dataset. Review recommended cases to close coverage gaps, or open the managed dataset when automatic dataset curation is enabled.
+- {{< ui >}}Evaluations{{< /ui >}}: Summarizes each online evaluation with its key result and a chart over time. Open matching spans to investigate specific results.
+- {{< ui >}}Interactions{{< /ui >}}: Lists the inputs and outputs assigned to the topic, along with their sub-topic, timestamp, recommendation status, and evaluation results. Filter with a full-text or facet query, configure evaluation columns, or click a row to open its trace details.
+
+{{< img src="llm_observability/patterns_topic_details_scorecard.png" alt="The topic detail view showing the scorecard, dataset coverage details, and interactions table." style="width:100%;" >}}
 
 ### Export and act on interactions
-From the interactions table inside a topic's detail view, you can act on the interactions in that cluster:
+Select one or more rows in the interactions table to act on those interactions:
 
 - **Download as CSV:** Export the interactions as a CSV file.
 - **Add to Dataset:** Send the interactions to a [Dataset][2] to build evaluation test cases from real production traffic.
