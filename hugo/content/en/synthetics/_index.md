@@ -92,6 +92,13 @@ Use [Synthetic Test Suites][26] to organize multiple tests into logical collecti
 
 {{< img src="synthetics/test_suites/test_suite_summary.png" alt="Synthetic Monitoring Test Suite summary page" style="width:100%;">}}
 
+## Explore Bits Testing and Goal-Based Testing
+
+Use [Bits Testing][27] to explore your application, map critical user journeys, and generate covering Synthetic tests, including [Goal-Based tests][28] that check users can reach a goal using non-deterministic, agentic testing.
+
+{{< img src="synthetics/bits_testing/TODO_bits_testing_landing.png" alt="TODO: screenshot of a Bits Testing exploration graph" style="width:100%;">}}
+<!-- TODO: replace with a real screenshot before merge -->
+
 ## Launch private locations
 
 Use [Synthetic private locations][15] to monitor internal APIs and websites or create custom locations in areas that are mission-critical to your business.
@@ -179,3 +186,5 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [24]: /synthetics/notifications/
 [25]: /synthetics/network_path_tests/
 [26]: /synthetics/test_suites/
+[27]: /synthetics/bits_testing/
+[28]: /synthetics/goal_based_testing/

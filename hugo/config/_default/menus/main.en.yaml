@@ -9012,11 +9012,21 @@ menu:
       parent: synthetics
       identifier: synthetics_test_suites
       weight: 6
+    - name: Bits Testing
+      url: synthetics/bits_testing/
+      parent: synthetics
+      identifier: synthetics_bits_testing
+      weight: 7
+    - name: Goal-Based Testing
+      url: synthetics/goal_based_testing/
+      parent: synthetics
+      identifier: synthetics_goal_based_testing
+      weight: 8
     - name: Platform
       url: synthetics/platform/
       parent: synthetics
       identifier: synthetics_platform
-      weight: 7
+      weight: 9
     - name: Dashboards
       url: synthetics/platform/dashboards
       parent: synthetics_platform
@@ -9086,7 +9096,7 @@ menu:
       url: synthetics/explore/
       parent: synthetics
       identifier: synthetics_explore
-      weight: 8
+      weight: 10
     - name: Saved Views
       url: synthetics/explore/saved_views
       parent: synthetics_explore
@@ -9126,12 +9136,12 @@ menu:
       url: synthetics/guide/
       parent: synthetics
       identifier: synthetics_guides
-      weight: 9
+      weight: 11
     - name: Notifications
       url: synthetics/notifications/
       parent: synthetics
       identifier: synthetics_notifications
-      weight: 10
+      weight: 12
     - name: Template Variables
       url: synthetics/notifications/template_variables/
       parent: synthetics_notifications
@@ -9176,12 +9186,12 @@ menu:
       url: synthetics/troubleshooting/
       parent: synthetics
       identifier: synthetics_troubleshooting
-      weight: 11
+      weight: 13
     - name: Data Security
       identifier: data_security_synthetics
       url: data_security/synthetics/
       parent: synthetics
-      weight: 12
+      weight: 14
     - name: Continuous Testing
       url: continuous_testing/
       pre: continuous-testing
