@@ -71,15 +71,17 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 
 **Requirements**:
 - Datadog Agent **7.79.0 or later**
-- Linux only (eBPF dependency)
+- Linux only (eBPF dependency), on kernel **4.14.0 or later** or a distribution with backported eBPF features. See [Workload Protection setup][7] for supported distributions.
+- The Agent container must run in the host PID namespace (`--pid host`)
 - Applies to operating system packages in container image vulnerability findings
 
 **Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][4] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
 
-Add `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` to your Docker run command:
+Add `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` and `--pid host` to your Docker run command:
 
 {{< code-block lang="shell" >}}
 docker run -d --name dd-agent \
+  --pid host \
   [... other flags ...] \
   -e DD_SBOM_ENABLED=true \
   -e DD_SBOM_CONTAINER_IMAGE_ENABLED=true \
@@ -96,3 +98,4 @@ docker run -d --name dd-agent \
 [4]: /security/workload_protection/
 [5]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
 [6]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals
+[7]: /security/workload_protection/setup/

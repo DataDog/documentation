@@ -206,7 +206,8 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 
 **Requirements**:
 - Datadog Agent **7.79.0 or later**. On Kubernetes, use **7.81.0 or later** for the most complete signal coverage.
-- Linux only (eBPF dependency).
+- Linux only (eBPF dependency), on kernel **4.14.0 or later** or a distribution with backported eBPF features. See [Workload Protection setup][11] for supported distributions.
+- `hostPID: true` on the Agent pod. Namespaces that enforce the PodSecurity `baseline` or `restricted` standard reject pods with `hostPID: true`, so run the Agent in a namespace that allows the `privileged` standard.
 - Applies to operating system packages in container image vulnerability findings.
 
 **Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][8] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
@@ -276,6 +277,31 @@ Restart the Agent.
 
 {{< /tabs >}}
 
+### Tune runtime enrichment on large clusters
+
+The Agent re-sends a container image SBOM when it observes new package usage in that image, so enabling runtime package prioritization increases the number of SBOM events the Agent sends. On clusters running many container images, Datadog recommends raising the enrichment interval from its default of `1m`:
+
+```yaml
+# system-probe.yaml
+runtime_security_config:
+  sbom:
+    enrichment_interval: 30m
+    forward_interval: 1m
+```
+
+With Helm, the Datadog Operator, or a DaemonSet, set the equivalent environment variables on the `system-probe` container:
+
+```yaml
+- name: DD_RUNTIME_SECURITY_CONFIG_SBOM_ENRICHMENT_INTERVAL
+  value: "30m"
+- name: DD_RUNTIME_SECURITY_CONFIG_SBOM_FORWARD_INTERVAL
+  value: "1m"
+```
+
+A longer `enrichment_interval` sends fewer events, and runtime signals take longer to appear on new findings.
+
+Also review the memory limit on the `system-probe` container. Datadog recommends at least `900Mi` on nodes running many container images.
+
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats
 [3]: /security/cloud_security_management/vulnerabilities
@@ -286,3 +312,4 @@ Restart the Agent.
 [8]: /security/workload_protection/
 [9]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
 [10]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals
+[11]: /security/workload_protection/setup/
