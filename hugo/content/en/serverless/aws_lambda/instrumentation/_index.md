@@ -27,6 +27,10 @@ Instrument your AWS Lambda applications with a Datadog Lambda Extension to colle
 
 ## Quick start
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">This feature is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 To get started, [sign up for a Datadog account][1] if you don’t already have one. Then, follow the [in-app installation flow in Fleet Automation][8] for AWS Lambda to instrument your Lambda functions. This quick-start configuration enables your functions to send real-time metrics, logs, and traces to Datadog.
 
 A sample application is [available on GitHub][6] with instructions on how to deploy with multiple runtimes and infrastructure-as-code tools.
@@ -67,7 +71,7 @@ Help me monitor my AWS Lambda functions with Datadog.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Instrumentation instructions
+## Manual Instrumentation
 
 {{< card-grid card_width="30%" image_width="200" >}}
   {{< image-card href="/serverless/installation/python/" src="integrations_logos/python.png" alt="Python" >}}
