@@ -244,9 +244,9 @@ Check for any rules blocking UDP traffic on your configured ports. For example:`
    ```
 
    **Solution**:
-   Starting with Agent v7.71.0, the Agent can bind to privileged ports (below `1024`) by default, because its systemd unit sets `AmbientCapabilities=CAP_NET_BIND_SERVICE`. If you see this error on v7.71.0 or later, confirm the capability is present with `systemctl show datadog-agent -p AmbientCapabilities`.
+   Starting with Agent v7.71.0, the Agent can bind to privileged ports (below `1024`) by default because its systemd unit sets `AmbientCapabilities=CAP_NET_BIND_SERVICE`. If you see this error on v7.71.0 or later, confirm the capability is present with `systemctl show datadog-agent -p AmbientCapabilities`.
 
-   Do not use `setcap` to grant the capability on v7.71.0 or later. A file capability makes the Agent run in secure-execution mode for the `dd-agent` user, which prevents it from loading its bundled libraries (for example, `libdatadog-agent-rtloader.so: cannot open shared object file`). See [Using the default SNMP Trap port 162][8] for details.
+   Do not use `setcap` to grant the capability on v7.71.0 or later. A file capability makes the Agent run in secure-execution mode for the `dd-agent` user, which prevents it from loading its bundled libraries, such as `libdatadog-agent-rtloader.so: cannot open shared object file`. See [Using the default SNMP Trap port 162][8] for details.
 
    On Agent versions earlier than v7.71.0, add a net bind capability to the Agent binary:
 
