@@ -89,6 +89,23 @@ These ingestion paths do not use a host-based Agent or Collector. Set the cloud 
 
 If you run the DDOT Collector as a sidecar on ECS Fargate or EKS Fargate rather than sending to an OTLP intake endpoint, see [Fargate sidecar deployments](#fargate-sidecar-deployments).
 
+## Diagnose hostname issues
+
+Datadog emits the `datadog.apm.hostname_issue` gauge when an APM trace hostname is missing, resembles an ephemeral Kubernetes pod, or differs from the hostname reported by the Datadog Agent. This diagnostic metric helps identify hostname configuration problems; it does not affect billing.
+
+A trace has at most one `issue_type`. Use the table to identify the problem and select the appropriate action:
+
+| `issue_type` | What it indicates | Recommended action |
+|---|---|---|
+| `pod_like_gateway_mismatch` | The trace hostname differs from the Agent hostname and resembles a Kubernetes pod name. | Follow the [gateway recommendations](#collector-exporting-through-a-gateway). Detect the Kubernetes node in the node-level Collector and preserve those resource attributes through the gateway. |
+| `gateway_hostname_mismatch` | The trace hostname differs from the Agent hostname. | Follow the [gateway recommendations](#collector-exporting-through-a-gateway) and preserve hostname resource attributes through the gateway. |
+| `empty_hostname` | Datadog did not receive a usable hostname for the trace. | Follow the [recommendation for your ingestion path](#hostname-recommendations) and provide the required host or platform resource attributes. |
+| `pod_like_hostname` | The trace hostname resembles an ephemeral Kubernetes pod name. | Configure resource detection for your [ingestion path](#hostname-recommendations) so that telemetry identifies the node, host, or platform instead of the pod. |
+
+Available metric tags include `issue_type`, `host`, `env`, `service`, `version`, and `span_source`. Affected spans receive the same `issue_type` tag, which you can use to find example traces and inspect their resource attributes.
+
+The pod-like issue types use common Kubernetes pod naming patterns as a heuristic. After updating your configuration, inspect new traces to confirm that they no longer have the issue type.
+
 ## Datadog Exporter configuration
 
 The Datadog Exporter uses the [resource detection processor][2] and the [Kubernetes attributes processor][3] to collect host and container resource attributes. Add the appropriate processors to the relevant metrics, traces, and logs pipelines.
