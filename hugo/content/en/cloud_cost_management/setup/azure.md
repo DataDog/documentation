@@ -206,21 +206,20 @@ To resolve this, add Datadog's webhook IPs to your network allowlist by visiting
 ### Configure Cloud Cost in Datadog
 Navigate to [Setup & Configuration][3] and follow the steps.
 
-### Migrate exports after changing billing agreements
+### Migrate exports from an EA to an MCA
 
 Azure does not automatically migrate cost export definitions from an Enterprise Agreement (EA) to a Microsoft Customer Agreement (MCA). For more information, see Microsoft's [MCA onboarding documentation][15].
 
-This migration process preserves historical EA data for Datadog configurations that use a billing account, subscription, or resource group scope.
+The following process preserves historical EA data for Datadog configurations that use a billing account, subscription, or resource group scope.
 
-**Note**: For a billing account scope, Datadog retains the EA billing account ID in the configuration.
-
-1. Record the following settings for both the actual and amortized EA exports:
+1. Record the following settings for both the actual and the amortized EA exports:
    * Export name, including capitalization
    * Storage account
    * Storage container
    * Storage directory and export prefix
    * Dataset version, format, and compression type
-1. Leave the Azure Cloud Cost Management configuration in Datadog enabled and unchanged.
+1. After the final EA-period exports run, disable the scheduled EA exports, but keep their definitions. Do not allow the EA and MCA scheduled exports to write to the same destination at the same time.
+1. Leave the Azure Cloud Cost Management configuration in Datadog enabled and unchanged. For a billing account scope, Datadog retains the EA ID.
 1. After the MCA becomes active, recreate the actual and amortized exports at the corresponding MCA scope using Terraform or the Azure portal. Use the export names, storage account, container, directory, and prefix recorded from the EA exports.
    * For Terraform, follow the [Terraform setup flow][19] through the Azure resource HCL steps. Do not apply new Datadog HCL or replace the existing Cloud Cost Management configuration.
    * For the Azure portal, follow the [manual cost export instructions][17].
@@ -365,5 +364,5 @@ For example, to view cost and utilization for each Azure VM, you can make a tabl
 [15]: https://learn.microsoft.com/en-us/azure/cost-management-billing/microsoft-customer-agreement/onboard-microsoft-customer-agreement
 [16]: /help/
 [17]: ?tab=manual#generate-cost-exports
-[18]: #migrate-exports-after-changing-billing-agreements
+[18]: #migrate-exports-from-an-ea-to-an-mca
 [19]: ?tab=terraform
