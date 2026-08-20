@@ -2,18 +2,16 @@ import { useEffect, useRef, useState } from "preact/hooks";
 import type { JSX } from "preact";
 import styles from "./ImgController.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
+import type { SizingProps } from "./imgTypes";
 
 const cl = classListFactory(styles);
 
-interface ImgControllerProps {
+interface ImgControllerProps extends SizingProps {
   imageUrl: string;
   srcset: string;
   popupHref: string;
   alt?: string;
   caption?: string;
-  width?: string;
-  height?: string;
-  widthPercent?: number;
   inline?: boolean;
   popup?: boolean;
 }
@@ -65,12 +63,6 @@ function applyLightboxResize(
   imageElement.style.height = `${height}px`;
   dialogElement.style.width = `${width}px`;
   dialogElement.style.height = `${height}px`;
-}
-
-interface SizingProps {
-  width?: string;
-  height?: string;
-  widthPercent?: number;
 }
 
 function PictureImage({
