@@ -14567,9 +14567,9 @@ menu:
       url: /api/latest/llm-observability/
       identifier: llm-observability
       generated: true
-    - name: List events for an LLM Observability experiment
-      url: /api/latest/llm-observability/list-events-for-an-llm-observability-experiment/
-      identifier: llm-observability-list-events-for-an-llm-observability-experiment
+    - name: List events for an Agent Observability experiment
+      url: /api/latest/llm-observability/list-events-for-an-agent-observability-experiment/
+      identifier: llm-observability-list-events-for-an-agent-observability-experiment
       parent: llm-observability
       generated: true
       params:
@@ -14580,9 +14580,9 @@ menu:
         unstable:
           - v2
         order: 30
-    - name: Upload records to an LLM Observability dataset
-      url: /api/latest/llm-observability/upload-records-to-an-llm-observability-dataset/
-      identifier: llm-observability-upload-records-to-an-llm-observability-dataset
+    - name: Upload records to an Agent Observability dataset
+      url: /api/latest/llm-observability/upload-records-to-an-agent-observability-dataset/
+      identifier: llm-observability-upload-records-to-an-agent-observability-dataset
       parent: llm-observability
       generated: true
       params:
@@ -14593,9 +14593,9 @@ menu:
         unstable:
           - v2
         order: 48
-    - name: List LLM Observability experiment events (v2)
-      url: /api/latest/llm-observability/list-llm-observability-experiment-events-v2/
-      identifier: llm-observability-list-llm-observability-experiment-events-v2
+    - name: List Agent Observability experiment events (v2)
+      url: /api/latest/llm-observability/list-agent-observability-experiment-events-v2/
+      identifier: llm-observability-list-agent-observability-experiment-events-v2
       parent: llm-observability
       generated: true
       params:
@@ -14606,9 +14606,9 @@ menu:
         unstable:
           - v2
         order: 50
-    - name: List LLM Observability dataset versions
-      url: /api/latest/llm-observability/list-llm-observability-dataset-versions/
-      identifier: llm-observability-list-llm-observability-dataset-versions
+    - name: List Agent Observability dataset versions
+      url: /api/latest/llm-observability/list-agent-observability-dataset-versions/
+      identifier: llm-observability-list-agent-observability-dataset-versions
       parent: llm-observability
       generated: true
       params:
@@ -14619,9 +14619,9 @@ menu:
         unstable:
           - v2
         order: 43
-    - name: Restore an LLM Observability dataset version
-      url: /api/latest/llm-observability/restore-an-llm-observability-dataset-version/
-      identifier: llm-observability-restore-an-llm-observability-dataset-version
+    - name: Restore an Agent Observability dataset version
+      url: /api/latest/llm-observability/restore-an-agent-observability-dataset-version/
+      identifier: llm-observability-restore-an-agent-observability-dataset-version
       parent: llm-observability
       generated: true
       params:
@@ -14632,9 +14632,9 @@ menu:
         unstable:
           - v2
         order: 47
-    - name: Delete LLM Observability dataset records
-      url: /api/latest/llm-observability/delete-llm-observability-dataset-records/
-      identifier: llm-observability-delete-llm-observability-dataset-records
+    - name: Delete Agent Observability dataset records
+      url: /api/latest/llm-observability/delete-agent-observability-dataset-records/
+      identifier: llm-observability-delete-agent-observability-dataset-records
       parent: llm-observability
       generated: true
       params:
@@ -14645,9 +14645,9 @@ menu:
         unstable:
           - v2
         order: 12
-    - name: Append records to an LLM Observability dataset
-      url: /api/latest/llm-observability/append-records-to-an-llm-observability-dataset/
-      identifier: llm-observability-append-records-to-an-llm-observability-dataset
+    - name: Append records to an Agent Observability dataset
+      url: /api/latest/llm-observability/append-records-to-an-agent-observability-dataset/
+      identifier: llm-observability-append-records-to-an-agent-observability-dataset
       parent: llm-observability
       generated: true
       params:
@@ -14658,9 +14658,9 @@ menu:
         unstable:
           - v2
         order: 8
-    - name: Update LLM Observability dataset records
-      url: /api/latest/llm-observability/update-llm-observability-dataset-records/
-      identifier: llm-observability-update-llm-observability-dataset-records
+    - name: Update Agent Observability dataset records
+      url: /api/latest/llm-observability/update-agent-observability-dataset-records/
+      identifier: llm-observability-update-agent-observability-dataset-records
       parent: llm-observability
       generated: true
       params:
@@ -14671,9 +14671,9 @@ menu:
         unstable:
           - v2
         order: 10
-    - name: List LLM Observability dataset records
-      url: /api/latest/llm-observability/list-llm-observability-dataset-records/
-      identifier: llm-observability-list-llm-observability-dataset-records
+    - name: List Agent Observability dataset records
+      url: /api/latest/llm-observability/list-agent-observability-dataset-records/
+      identifier: llm-observability-list-agent-observability-dataset-records
       parent: llm-observability
       generated: true
       params:
@@ -14684,9 +14684,9 @@ menu:
         unstable:
           - v2
         order: 7
-    - name: Export an LLM Observability dataset
-      url: /api/latest/llm-observability/export-an-llm-observability-dataset/
-      identifier: llm-observability-export-an-llm-observability-dataset
+    - name: Export an Agent Observability dataset
+      url: /api/latest/llm-observability/export-an-agent-observability-dataset/
+      identifier: llm-observability-export-an-agent-observability-dataset
       parent: llm-observability
       generated: true
       params:
@@ -14697,9 +14697,9 @@ menu:
         unstable:
           - v2
         order: 44
-    - name: Unlock LLM Observability dataset draft state
-      url: /api/latest/llm-observability/unlock-llm-observability-dataset-draft-state/
-      identifier: llm-observability-unlock-llm-observability-dataset-draft-state
+    - name: Unlock Agent Observability dataset draft state
+      url: /api/latest/llm-observability/unlock-agent-observability-dataset-draft-state/
+      identifier: llm-observability-unlock-agent-observability-dataset-draft-state
       parent: llm-observability
       generated: true
       params:
@@ -14710,9 +14710,9 @@ menu:
         unstable:
           - v2
         order: 42
-    - name: Lock LLM Observability dataset draft state
-      url: /api/latest/llm-observability/lock-llm-observability-dataset-draft-state/
-      identifier: llm-observability-lock-llm-observability-dataset-draft-state
+    - name: Lock Agent Observability dataset draft state
+      url: /api/latest/llm-observability/lock-agent-observability-dataset-draft-state/
+      identifier: llm-observability-lock-agent-observability-dataset-draft-state
       parent: llm-observability
       generated: true
       params:
@@ -14723,9 +14723,9 @@ menu:
         unstable:
           - v2
         order: 41
-    - name: Get LLM Observability dataset draft state
-      url: /api/latest/llm-observability/get-llm-observability-dataset-draft-state/
-      identifier: llm-observability-get-llm-observability-dataset-draft-state
+    - name: Get Agent Observability dataset draft state
+      url: /api/latest/llm-observability/get-agent-observability-dataset-draft-state/
+      identifier: llm-observability-get-agent-observability-dataset-draft-state
       parent: llm-observability
       generated: true
       params:
@@ -14736,9 +14736,9 @@ menu:
         unstable:
           - v2
         order: 40
-    - name: Clone an LLM Observability dataset
-      url: /api/latest/llm-observability/clone-an-llm-observability-dataset/
-      identifier: llm-observability-clone-an-llm-observability-dataset
+    - name: Clone an Agent Observability dataset
+      url: /api/latest/llm-observability/clone-an-agent-observability-dataset/
+      identifier: llm-observability-clone-an-agent-observability-dataset
       parent: llm-observability
       generated: true
       params:
@@ -14749,9 +14749,9 @@ menu:
         unstable:
           - v2
         order: 46
-    - name: Batch update LLM Observability dataset records
-      url: /api/latest/llm-observability/batch-update-llm-observability-dataset-records/
-      identifier: llm-observability-batch-update-llm-observability-dataset-records
+    - name: Batch update Agent Observability dataset records
+      url: /api/latest/llm-observability/batch-update-agent-observability-dataset-records/
+      identifier: llm-observability-batch-update-agent-observability-dataset-records
       parent: llm-observability
       generated: true
       params:
@@ -14762,9 +14762,9 @@ menu:
         unstable:
           - v2
         order: 45
-    - name: Update an LLM Observability dataset
-      url: /api/latest/llm-observability/update-an-llm-observability-dataset/
-      identifier: llm-observability-update-an-llm-observability-dataset
+    - name: Update an Agent Observability dataset
+      url: /api/latest/llm-observability/update-an-agent-observability-dataset/
+      identifier: llm-observability-update-an-agent-observability-dataset
       parent: llm-observability
       generated: true
       params:
@@ -14775,9 +14775,9 @@ menu:
         unstable:
           - v2
         order: 9
-    - name: Delete LLM Observability datasets
-      url: /api/latest/llm-observability/delete-llm-observability-datasets/
-      identifier: llm-observability-delete-llm-observability-datasets
+    - name: Delete Agent Observability datasets
+      url: /api/latest/llm-observability/delete-agent-observability-datasets/
+      identifier: llm-observability-delete-agent-observability-datasets
       parent: llm-observability
       generated: true
       params:
@@ -14788,9 +14788,9 @@ menu:
         unstable:
           - v2
         order: 11
-    - name: Create an LLM Observability dataset
-      url: /api/latest/llm-observability/create-an-llm-observability-dataset/
-      identifier: llm-observability-create-an-llm-observability-dataset
+    - name: Create an Agent Observability dataset
+      url: /api/latest/llm-observability/create-an-agent-observability-dataset/
+      identifier: llm-observability-create-an-agent-observability-dataset
       parent: llm-observability
       generated: true
       params:
@@ -14801,9 +14801,9 @@ menu:
         unstable:
           - v2
         order: 6
-    - name: List LLM Observability datasets
-      url: /api/latest/llm-observability/list-llm-observability-datasets/
-      identifier: llm-observability-list-llm-observability-datasets
+    - name: List Agent Observability datasets
+      url: /api/latest/llm-observability/list-agent-observability-datasets/
+      identifier: llm-observability-list-agent-observability-datasets
       parent: llm-observability
       generated: true
       params:
@@ -14944,9 +14944,9 @@ menu:
         unstable:
           - v2
         order: 59
-    - name: Search LLM Observability spans
-      url: /api/latest/llm-observability/search-llm-observability-spans/
-      identifier: llm-observability-search-llm-observability-spans
+    - name: Search Agent Observability spans
+      url: /api/latest/llm-observability/search-agent-observability-spans/
+      identifier: llm-observability-search-agent-observability-spans
       parent: llm-observability
       generated: true
       params:
@@ -14957,9 +14957,9 @@ menu:
         unstable:
           - v2
         order: 35
-    - name: List LLM Observability spans
-      url: /api/latest/llm-observability/list-llm-observability-spans/
-      identifier: llm-observability-list-llm-observability-spans
+    - name: List Agent Observability spans
+      url: /api/latest/llm-observability/list-agent-observability-spans/
+      identifier: llm-observability-list-agent-observability-spans
       parent: llm-observability
       generated: true
       params:
@@ -14970,9 +14970,9 @@ menu:
         unstable:
           - v2
         order: 34
-    - name: Update a specific LLM Observability prompt version
-      url: /api/latest/llm-observability/update-a-specific-llm-observability-prompt-version/
-      identifier: llm-observability-update-a-specific-llm-observability-prompt-version
+    - name: Update an Agent Observability prompt version
+      url: /api/latest/llm-observability/update-an-agent-observability-prompt-version/
+      identifier: llm-observability-update-an-agent-observability-prompt-version
       parent: llm-observability
       generated: true
       params:
@@ -14983,9 +14983,9 @@ menu:
         unstable:
           - v2
         order: 71
-    - name: Get a specific LLM Observability prompt version
-      url: /api/latest/llm-observability/get-a-specific-llm-observability-prompt-version/
-      identifier: llm-observability-get-a-specific-llm-observability-prompt-version
+    - name: Get a specific Agent Observability prompt version
+      url: /api/latest/llm-observability/get-a-specific-agent-observability-prompt-version/
+      identifier: llm-observability-get-a-specific-agent-observability-prompt-version
       parent: llm-observability
       generated: true
       params:
@@ -14996,9 +14996,9 @@ menu:
         unstable:
           - v2
         order: 70
-    - name: Create a new LLM Observability prompt version
-      url: /api/latest/llm-observability/create-a-new-llm-observability-prompt-version/
-      identifier: llm-observability-create-a-new-llm-observability-prompt-version
+    - name: Create a new Agent Observability prompt version
+      url: /api/latest/llm-observability/create-a-new-agent-observability-prompt-version/
+      identifier: llm-observability-create-a-new-agent-observability-prompt-version
       parent: llm-observability
       generated: true
       params:
@@ -15009,9 +15009,9 @@ menu:
         unstable:
           - v2
         order: 69
-    - name: List versions of an LLM Observability prompt
-      url: /api/latest/llm-observability/list-versions-of-an-llm-observability-prompt/
-      identifier: llm-observability-list-versions-of-an-llm-observability-prompt
+    - name: List versions of an Agent Observability prompt
+      url: /api/latest/llm-observability/list-versions-of-an-agent-observability-prompt/
+      identifier: llm-observability-list-versions-of-an-agent-observability-prompt
       parent: llm-observability
       generated: true
       params:
@@ -15022,9 +15022,9 @@ menu:
         unstable:
           - v2
         order: 68
-    - name: Update an LLM Observability prompt
-      url: /api/latest/llm-observability/update-an-llm-observability-prompt/
-      identifier: llm-observability-update-an-llm-observability-prompt
+    - name: Update an Agent Observability prompt
+      url: /api/latest/llm-observability/update-an-agent-observability-prompt/
+      identifier: llm-observability-update-an-agent-observability-prompt
       parent: llm-observability
       generated: true
       params:
@@ -15035,9 +15035,9 @@ menu:
         unstable:
           - v2
         order: 66
-    - name: Get an LLM Observability prompt
-      url: /api/latest/llm-observability/get-an-llm-observability-prompt/
-      identifier: llm-observability-get-an-llm-observability-prompt
+    - name: Get an Agent Observability prompt
+      url: /api/latest/llm-observability/get-an-agent-observability-prompt/
+      identifier: llm-observability-get-an-agent-observability-prompt
       parent: llm-observability
       generated: true
       params:
@@ -15048,9 +15048,9 @@ menu:
         unstable:
           - v2
         order: 65
-    - name: Delete an LLM Observability prompt
-      url: /api/latest/llm-observability/delete-an-llm-observability-prompt/
-      identifier: llm-observability-delete-an-llm-observability-prompt
+    - name: Delete an Agent Observability prompt
+      url: /api/latest/llm-observability/delete-an-agent-observability-prompt/
+      identifier: llm-observability-delete-an-agent-observability-prompt
       parent: llm-observability
       generated: true
       params:
@@ -15061,9 +15061,9 @@ menu:
         unstable:
           - v2
         order: 67
-    - name: Create an LLM Observability prompt
-      url: /api/latest/llm-observability/create-an-llm-observability-prompt/
-      identifier: llm-observability-create-an-llm-observability-prompt
+    - name: Create an Agent Observability prompt
+      url: /api/latest/llm-observability/create-an-agent-observability-prompt/
+      identifier: llm-observability-create-an-agent-observability-prompt
       parent: llm-observability
       generated: true
       params:
@@ -15074,9 +15074,9 @@ menu:
         unstable:
           - v2
         order: 64
-    - name: List LLM Observability prompts
-      url: /api/latest/llm-observability/list-llm-observability-prompts/
-      identifier: llm-observability-list-llm-observability-prompts
+    - name: List Agent Observability prompts
+      url: /api/latest/llm-observability/list-agent-observability-prompts/
+      identifier: llm-observability-list-agent-observability-prompts
       parent: llm-observability
       generated: true
       params:
@@ -15087,9 +15087,9 @@ menu:
         unstable:
           - v2
         order: 63
-    - name: Update an LLM Observability project
-      url: /api/latest/llm-observability/update-an-llm-observability-project/
-      identifier: llm-observability-update-an-llm-observability-project
+    - name: Update an Agent Observability project
+      url: /api/latest/llm-observability/update-an-agent-observability-project/
+      identifier: llm-observability-update-an-agent-observability-project
       parent: llm-observability
       generated: true
       params:
@@ -15100,9 +15100,9 @@ menu:
         unstable:
           - v2
         order: 3
-    - name: Delete LLM Observability projects
-      url: /api/latest/llm-observability/delete-llm-observability-projects/
-      identifier: llm-observability-delete-llm-observability-projects
+    - name: Delete Agent Observability projects
+      url: /api/latest/llm-observability/delete-agent-observability-projects/
+      identifier: llm-observability-delete-agent-observability-projects
       parent: llm-observability
       generated: true
       params:
@@ -15113,9 +15113,9 @@ menu:
         unstable:
           - v2
         order: 4
-    - name: Create an LLM Observability project
-      url: /api/latest/llm-observability/create-an-llm-observability-project/
-      identifier: llm-observability-create-an-llm-observability-project
+    - name: Create an Agent Observability project
+      url: /api/latest/llm-observability/create-an-agent-observability-project/
+      identifier: llm-observability-create-an-agent-observability-project
       parent: llm-observability
       generated: true
       params:
@@ -15126,9 +15126,9 @@ menu:
         unstable:
           - v2
         order: 2
-    - name: List LLM Observability projects
-      url: /api/latest/llm-observability/list-llm-observability-projects/
-      identifier: llm-observability-list-llm-observability-projects
+    - name: List Agent Observability projects
+      url: /api/latest/llm-observability/list-agent-observability-projects/
+      identifier: llm-observability-list-agent-observability-projects
       parent: llm-observability
       generated: true
       params:
@@ -15178,9 +15178,9 @@ menu:
         unstable:
           - v2
         order: 36
-    - name: Push events for an LLM Observability experiment
-      url: /api/latest/llm-observability/push-events-for-an-llm-observability-experiment/
-      identifier: llm-observability-push-events-for-an-llm-observability-experiment
+    - name: Push events for an Agent Observability experiment
+      url: /api/latest/llm-observability/push-events-for-an-agent-observability-experiment/
+      identifier: llm-observability-push-events-for-an-agent-observability-experiment
       parent: llm-observability
       generated: true
       params:
@@ -15191,9 +15191,9 @@ menu:
         unstable:
           - v2
         order: 17
-    - name: List LLM Observability experiment spans (v1)
-      url: /api/latest/llm-observability/list-llm-observability-experiment-spans-v1/
-      identifier: llm-observability-list-llm-observability-experiment-spans-v1
+    - name: List Agent Observability experiment spans (v1)
+      url: /api/latest/llm-observability/list-agent-observability-experiment-spans-v1/
+      identifier: llm-observability-list-agent-observability-experiment-spans-v1
       parent: llm-observability
       generated: true
       params:
@@ -15204,9 +15204,9 @@ menu:
         unstable:
           - v2
         order: 49
-    - name: Update an LLM Observability experiment
-      url: /api/latest/llm-observability/update-an-llm-observability-experiment/
-      identifier: llm-observability-update-an-llm-observability-experiment
+    - name: Update an Agent Observability experiment
+      url: /api/latest/llm-observability/update-an-agent-observability-experiment/
+      identifier: llm-observability-update-an-agent-observability-experiment
       parent: llm-observability
       generated: true
       params:
@@ -15217,9 +15217,9 @@ menu:
         unstable:
           - v2
         order: 15
-    - name: Delete LLM Observability experiments
-      url: /api/latest/llm-observability/delete-llm-observability-experiments/
-      identifier: llm-observability-delete-llm-observability-experiments
+    - name: Delete Agent Observability experiments
+      url: /api/latest/llm-observability/delete-agent-observability-experiments/
+      identifier: llm-observability-delete-agent-observability-experiments
       parent: llm-observability
       generated: true
       params:
@@ -15230,9 +15230,9 @@ menu:
         unstable:
           - v2
         order: 16
-    - name: Create an LLM Observability experiment
-      url: /api/latest/llm-observability/create-an-llm-observability-experiment/
-      identifier: llm-observability-create-an-llm-observability-experiment
+    - name: Create an Agent Observability experiment
+      url: /api/latest/llm-observability/create-an-agent-observability-experiment/
+      identifier: llm-observability-create-an-agent-observability-experiment
       parent: llm-observability
       generated: true
       params:
@@ -15243,9 +15243,9 @@ menu:
         unstable:
           - v2
         order: 14
-    - name: List LLM Observability experiments
-      url: /api/latest/llm-observability/list-llm-observability-experiments/
-      identifier: llm-observability-list-llm-observability-experiments
+    - name: List Agent Observability experiments
+      url: /api/latest/llm-observability/list-agent-observability-experiments/
+      identifier: llm-observability-list-agent-observability-experiments
       parent: llm-observability
       generated: true
       params:
@@ -15269,9 +15269,9 @@ menu:
         unstable:
           - v2
         order: 32
-    - name: Search LLM Observability experimentation entities
-      url: /api/latest/llm-observability/search-llm-observability-experimentation-entities/
-      identifier: llm-observability-search-llm-observability-experimentation-entities
+    - name: Search Agent Observability experimentation
+      url: /api/latest/llm-observability/search-agent-observability-experimentation/
+      identifier: llm-observability-search-agent-observability-experimentation
       parent: llm-observability
       generated: true
       params:
@@ -15282,9 +15282,9 @@ menu:
         unstable:
           - v2
         order: 31
-    - name: Aggregate LLM Observability experimentation
-      url: /api/latest/llm-observability/aggregate-llm-observability-experimentation/
-      identifier: llm-observability-aggregate-llm-observability-experimentation
+    - name: Aggregate Agent Observability experimentation
+      url: /api/latest/llm-observability/aggregate-agent-observability-experimentation/
+      identifier: llm-observability-aggregate-agent-observability-experimentation
       parent: llm-observability
       generated: true
       params:
@@ -15386,9 +15386,9 @@ menu:
         unstable:
           - v2
         order: 23
-    - name: Update an LLM Observability annotation queue
-      url: /api/latest/llm-observability/update-an-llm-observability-annotation-queue/
-      identifier: llm-observability-update-an-llm-observability-annotation-queue
+    - name: Update an Agent Observability annotation queue
+      url: /api/latest/llm-observability/update-an-agent-observability-annotation-queue/
+      identifier: llm-observability-update-an-agent-observability-annotation-queue
       parent: llm-observability
       generated: true
       params:
@@ -15399,9 +15399,9 @@ menu:
         unstable:
           - v2
         order: 20
-    - name: Delete an LLM Observability annotation queue
-      url: /api/latest/llm-observability/delete-an-llm-observability-annotation-queue/
-      identifier: llm-observability-delete-an-llm-observability-annotation-queue
+    - name: Delete an Agent Observability annotation queue
+      url: /api/latest/llm-observability/delete-an-agent-observability-annotation-queue/
+      identifier: llm-observability-delete-an-agent-observability-annotation-queue
       parent: llm-observability
       generated: true
       params:
@@ -15412,9 +15412,9 @@ menu:
         unstable:
           - v2
         order: 21
-    - name: Create an LLM Observability annotation queue
-      url: /api/latest/llm-observability/create-an-llm-observability-annotation-queue/
-      identifier: llm-observability-create-an-llm-observability-annotation-queue
+    - name: Create an Agent Observability annotation queue
+      url: /api/latest/llm-observability/create-an-agent-observability-annotation-queue/
+      identifier: llm-observability-create-an-agent-observability-annotation-queue
       parent: llm-observability
       generated: true
       params:
@@ -15425,9 +15425,9 @@ menu:
         unstable:
           - v2
         order: 19
-    - name: List LLM Observability annotation queues
-      url: /api/latest/llm-observability/list-llm-observability-annotation-queues/
-      identifier: llm-observability-list-llm-observability-annotation-queues
+    - name: List Agent Observability annotation queues
+      url: /api/latest/llm-observability/list-agent-observability-annotation-queues/
+      identifier: llm-observability-list-agent-observability-annotation-queues
       parent: llm-observability
       generated: true
       params:
