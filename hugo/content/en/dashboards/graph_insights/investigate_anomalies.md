@@ -15,7 +15,7 @@ further_reading:
 
 Datadog detects anomalies across your dashboard's timeseries graphs, groups co-occurring anomalies into issues, and identifies the tags contributing most to each. From an anomaly, you can narrow down the cause on a single graph with [Watchdog Explains][2], or delegate root cause analysis to [Bits Investigation][1].
 
-<div class="alert alert-info">Anomaly detection is available for <a href="/dashboards/widgets/timeseries/">Timeseries widgets</a> with {{< ui >}}Metrics{{< /ui >}} data (avg, sum, min, and max aggregation). Widgets using functions such as <code>cumsum</code>, <code>anomalies</code>, or <code>outliers</code> are not eligible.</div>
+<div class="alert alert-info">Anomaly detection is available for <a href="/dashboards/widgets/timeseries/">Timeseries widgets</a> with {{< ui >}}Metrics{{< /ui >}} data (<code>avg</code>, <code>sum</code>, <code>min</code>, and <code>max</code> aggregation). Widgets using functions such as <code>cumsum</code>, <code>anomalies</code>, or <code>outliers</code> are not eligible.</div>
 
 Detection runs when you open a dashboard, and issues appear within about 20 seconds. If Datadog detects no anomalies, the {{< ui >}}Investigate{{< /ui >}} menu and the controls described on this page do not appear.
 
@@ -70,11 +70,11 @@ For more information, see [Watchdog Explains][2].
 
 Click {{< ui >}}Investigate With AI{{< /ui >}} from an expanded anomaly chip, from the {{< ui >}}Investigate{{< /ui >}} menu, or from a Watchdog Explains finding. Datadog opens [Bits Investigation][1] in a new tab, where it analyzes the anomaly and reports a root cause, an impact assessment, and a timeline.
 
-After one or more related investigations exist, the button reads {{< ui >}}See _N_ Related Investigations{{< /ui >}}, where _N_ is the count. Clicking it opens a filtered list of investigations rather than a single investigation. To open one, click {{< ui >}}Review Completed Investigation{{< /ui >}}.
+If related investigations already exist, the button reads {{< ui >}}See _N_ Related Investigations{{< /ui >}}, where _N_ is the count. Click the button to open a filtered list of investigations. To open a single investigation, click {{< ui >}}Review Completed Investigation{{< /ui >}}.
 
 <div class="alert alert-info">The related-investigations count is scoped to the whole dashboard and time range, not to the anomaly you are viewing. A count of one can mean an investigation started from a different graph on the same dashboard.</div>
 
-Investigations started this way record {{< ui >}}Dashboard Anomaly{{< /ui >}} as their source and carry a `dashboard_id` tag. Use either to find them later in the Bits Investigation list.
+Investigations started this way record {{< ui >}}Dashboard Anomaly{{< /ui >}} as their source and carry a `dashboard_id` tag. Use the source or the tag to find an investigation later in the Bits Investigation list.
 
 ## Turn off anomaly detection
 

@@ -37,7 +37,7 @@ For more information, see the [Watchdog Explains][2] documentation.
 
 <div class="alert alert-info">Anomaly detection is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with the <strong>Metric</strong> data source.</div>
 
-Datadog detects anomalies across the graphs on your dashboard and groups anomalies that occur together into issues. For each issue, it identifies the tags contributing most to the change. From there you can analyze a single graph in Watchdog Explains, or delegate root cause analysis to Bits Investigation.
+Datadog detects anomalies across the graphs on your dashboard and groups those that occur together into issues. For each issue, Datadog identifies the tags that contribute most to the anomaly. You can analyze a single graph with Watchdog Explains, or delegate root cause analysis to Bits Investigation.
 
 For more information, see [Investigate Dashboard Anomalies][3].
 
