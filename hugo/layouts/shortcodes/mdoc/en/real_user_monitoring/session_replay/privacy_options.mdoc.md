@@ -477,7 +477,7 @@ Select the `mask_large_only` setting, which replaces images with dimensions that
 Select the `MASK_LARGE_ONLY` setting, which replaces images considered to be content images with a "Content Image" placeholder:
 
 - On Android, images with dimensions that exceed 100x100dp. These dimensions refer to the drawable resource, not the view's size.
-- On iOS, non-bundled images. In SwiftUI, the SDK uses a heuristic instead: if an image exceeds 100×100 points, it is assumed to be non-bundled and is masked.
+- On iOS, non-bundled images. In SwiftUI, the SDK uses a heuristic instead: if an image exceeds 100×100 pts, it is assumed to be non-bundled and is masked.
 
 ```kotlin {% filename="Application.kt" collapsible=true %}
 val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
@@ -1516,7 +1516,7 @@ Sensitive text can be detected in the following components.
 
 <!-- Kotlin Multiplatform -->
 {% if equals($platform, "kotlin_multiplatform") %}
-Sensitive text can be detected in the following components.
+Sensitive text can be detected in the following components:
 
 {% table %}
 - Component
@@ -1546,7 +1546,7 @@ Sensitive text can be detected in the following components.
 <!-- Flutter -->
 {% if equals($platform, "flutter") %}
 Sensitive text is detected by checking the `obscureText` and `keyboardType` members of the `EditableText` widget,
-which are provided by most `TextField`-like Widgets.
+which are provided by most `TextField`-like widgets.
 
 The following `TextInputType`s are considered sensitive:
 
@@ -1617,10 +1617,11 @@ This includes the below.
   - Value Picker (iOS, Android)
   - Segment (iOS)
   - Drop Down List (Android)
-- Notable exclusions:
-  - Placeholder (hint) texts in Text Field, Text View, and Edit Text (not entered by the user)
-  - Non-editable texts in Text View (iOS)
-  - Month, day, and year labels in Date Picker (generic values)
+
+Notable exclusions:
+- Placeholder (hint) texts in Text Field, Text View, and Edit Text (not entered by the user)
+- Non-editable texts in Text View (iOS)
+- Month, day, and year labels in Date Picker (generic values)
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
@@ -1794,7 +1795,7 @@ This includes:
 
 <!-- Kotlin Multiplatform -->
 {% if equals($platform, "kotlin_multiplatform") %}
-**Shapes**
+##### Shapes
 
 {% table %}
 - Type
@@ -1813,7 +1814,7 @@ This includes:
 - iOS, Android
 {% /table %}
 
-**Text attributes**
+##### Text attributes
 
 {% table %}
 - Type
