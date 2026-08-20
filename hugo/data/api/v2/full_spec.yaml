@@ -121620,6 +121620,7 @@ components:
             incident_write: Create, view, and manage incidents in Datadog.
             integrations_read: View configured integrations and their settings.
             logs_modify_indexes: Modify log indexes, filters, exclusion filters, and configurations.
+            logs_read_data: Read log data.
             logs_read_index_data: Read indexed log data.
             manage_integrations: Install, uninstall, and configure integrations.
             metrics_read: View custom metrics.
@@ -167147,6 +167148,11 @@ paths:
           $ref: "#/components/responses/NotAuthorizedResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - logs_read_data
       summary: Aggregate events
       tags: ["Logs"]
       x-codegen-request-body-name: body
@@ -169062,6 +169068,11 @@ paths:
           $ref: "#/components/responses/NotAuthorizedResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - logs_read_data
       summary: Search logs (POST)
       tags: ["Logs"]
       x-codegen-request-body-name: body
