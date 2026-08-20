@@ -10,7 +10,7 @@ further_reading:
   - link: /llm_observability/improve/datasets
     tag: Documentation
     text: Build datasets from production traces
-  - link: /api/latest/llm-observability/
+  - link: /api/latest/agent-observability/
     tag: API
     text: Agent Observability API reference
 ---

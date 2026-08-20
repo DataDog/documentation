@@ -298,7 +298,7 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: RDS Instance
       recommendation_type: Downsize RDS Instance Provisioned IOPS
-      recommendation_description: RDS instances using less than 80% of provisioned IOPS over the past two weeks.
+      recommendation_description: RDS instances using less than 80% of provisioned IOPS over the past two weeks. Not applicable to Amazon Aurora instances, which do not have a configurable provisioned IOPS setting.
       recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: AWS
