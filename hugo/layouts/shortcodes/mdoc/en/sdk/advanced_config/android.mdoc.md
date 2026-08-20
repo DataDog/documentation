@@ -46,6 +46,8 @@ public void onPause() {
 
 ### Custom actions
 
+For setup steps covering both automatic and manual action tracking, see [Track user interactions][17].
+
 In addition to [tracking actions automatically][5], you can also track specific custom user actions (such as taps, clicks, and scrolls) with `RumMonitor#addAction`. For continuous action tracking (for example, tracking a user scrolling a list), use `RumMonitor#startAction` and `RumMonitor#stopAction`.
 
 The action type should be one of the following: "custom", "click", "tap", "scroll", "swipe", "back".
@@ -739,3 +741,4 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [14]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#setup
 [15]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=android
 [16]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android
+[17]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=android

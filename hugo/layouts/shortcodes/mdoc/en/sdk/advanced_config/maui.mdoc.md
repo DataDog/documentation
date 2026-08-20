@@ -64,6 +64,8 @@ DdRum.RemoveViewAttribute("screen_variant");
 
 ### Custom actions
 
+For setup steps, see [Track user interactions][7].
+
 In addition to [tracking actions automatically](#customize-automatic-tracking), you can track specific custom user actions (such as taps, clicks, and scrolls) with `DdRum.AddAction`. For continuous action tracking (for example, a user scrolling a list), use `StartAction` and `StopAction`.
 
 ```csharp
@@ -329,3 +331,4 @@ DdTrace.Enable(new DdTraceConfiguration
 [4]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
 [5]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=maui
 [6]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=maui
+[7]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=maui

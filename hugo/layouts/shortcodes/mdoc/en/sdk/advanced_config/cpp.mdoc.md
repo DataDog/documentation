@@ -50,6 +50,8 @@ dd_rum_stop_view(rum, "gameplay_level1", NULL);
 
 ### Track actions
 
+For setup steps, see [Track user interactions][7].
+
 Actions record user interactions in the context of the current view. The SDK supports two kinds:
 
 - **Discrete actions** (`AddAction`): momentary events such as a button press. No explicit stop is required.
@@ -520,3 +522,4 @@ dd_core_destroy(core);
 [4]: /getting_started/site/
 [5]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=cpp
 [6]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=cpp
+[7]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=cpp

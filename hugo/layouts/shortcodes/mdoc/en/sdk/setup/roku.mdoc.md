@@ -76,6 +76,8 @@ To split [user sessions][7] into logical steps, manually start a View using the 
 
 ### Track RUM Actions
 
+For setup steps, see [Track user interactions][9].
+
 RUM Actions represent the interactions your users have with your channel. You can forward actions to Datadog as follows:
 
 ```vb.net
@@ -112,3 +114,4 @@ This means that even if users open your application while offline, no data is lo
 [6]: /real_user_monitoring/application_monitoring/roku/advanced_configuration/#enrich-user-sessions
 [7]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=roku
 [8]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=roku
+[9]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=roku
