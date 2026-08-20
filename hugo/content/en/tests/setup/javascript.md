@@ -417,6 +417,24 @@ it('renders a hello world', () => {
 
 For more information about custom measures, see the [Add Custom Measures Guide][5].
 
+### Failure screenshots
+
+<div class="alert alert-info">Failure screenshots are in Preview.</div>
+
+When a Cypress test fails, the tracer can upload the failure screenshot that Cypress captures so it appears alongside the test result in Datadog. Set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` to `true` (default `false`) when you run your tests:
+
+{{< code-block lang="shell" >}}
+DD_TEST_FAILURE_SCREENSHOTS_ENABLED=true DD_TEST_SESSION_NAME=ui-tests yarn test:ui
+{{< /code-block >}}
+
+Uploaded screenshots appear in the **Media** tab of the test details side panel.
+
+Requirements and limitations:
+
+- Supported for Cypress only.
+- Uploads work in [agentless mode](#configuring-reporting-method) or in Agent mode with a recent version of the Datadog Agent.
+- Uploads are best-effort: a failed screenshot upload never fails your test run.
+
 ### Cypress - RUM integration
 
 If the browser application being tested is instrumented using [Browser Monitoring][6], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][7].
