@@ -122289,7 +122289,7 @@ paths:
           appKeyAuth: []
       summary: List custom evaluator configurations
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 72
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -122334,7 +122334,7 @@ paths:
           appKeyAuth: []
       summary: Delete a custom evaluator configuration
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 27
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -122409,7 +122409,7 @@ paths:
           appKeyAuth: []
       summary: Get a custom evaluator configuration
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 25
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -122523,7 +122523,7 @@ paths:
           appKeyAuth: []
       summary: Create or update a custom evaluator configuration
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 26
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -161360,7 +161360,7 @@ paths:
           appKeyAuth: []
       summary: Get annotated interactions by content IDs
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 39
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -161432,7 +161432,7 @@ paths:
           appKeyAuth: []
       summary: List Agent Observability annotation queues
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 18
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -161529,7 +161529,7 @@ paths:
           appKeyAuth: []
       summary: Create an Agent Observability annotation queue
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 19
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -161568,7 +161568,7 @@ paths:
           appKeyAuth: []
       summary: Delete an Agent Observability annotation queue
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 21
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -161647,7 +161647,7 @@ paths:
           appKeyAuth: []
       summary: Update an Agent Observability annotation queue
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 20
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -161708,7 +161708,7 @@ paths:
           appKeyAuth: []
       summary: Get annotated queue interactions
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 23
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -161798,7 +161798,7 @@ paths:
           appKeyAuth: []
       summary: Create or update annotations
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 28
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -161885,7 +161885,7 @@ paths:
           appKeyAuth: []
       summary: Delete annotations
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 29
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -162005,7 +162005,7 @@ paths:
           appKeyAuth: []
       summary: Add annotation queue interactions
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 22
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -162066,7 +162066,7 @@ paths:
           appKeyAuth: []
       summary: Delete annotation queue interactions
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 24
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -162137,7 +162137,7 @@ paths:
           appKeyAuth: []
       summary: Get annotation queue label schema
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 51
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -162283,7 +162283,7 @@ paths:
           appKeyAuth: []
       summary: Update annotation queue label schema
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 52
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -162371,7 +162371,7 @@ paths:
           appKeyAuth: []
       summary: Aggregate Agent Observability experimentation
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 33
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -162482,7 +162482,7 @@ paths:
           appKeyAuth: []
       summary: Search Agent Observability experimentation
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 31
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -162576,7 +162576,7 @@ paths:
           appKeyAuth: []
       summary: Simple search experimentation entities
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 32
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -162702,7 +162702,7 @@ paths:
           appKeyAuth: []
       summary: List Agent Observability experiments
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 13
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -162794,7 +162794,7 @@ paths:
           appKeyAuth: []
       summary: Create an Agent Observability experiment
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 14
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -162846,7 +162846,7 @@ paths:
           appKeyAuth: []
       summary: Delete Agent Observability experiments
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 16
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -162922,7 +162922,7 @@ paths:
           appKeyAuth: []
       summary: Update an Agent Observability experiment
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 15
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -162994,7 +162994,7 @@ paths:
           appKeyAuth: []
       summary: List Agent Observability experiment spans (v1)
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 49
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -163066,7 +163066,7 @@ paths:
           appKeyAuth: []
       summary: Push events for an Agent Observability experiment
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 17
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -163119,7 +163119,7 @@ paths:
           appKeyAuth: []
       summary: List LLM integration accounts
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 36
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
@@ -163204,7 +163204,7 @@ paths:
           appKeyAuth: []
       summary: Run an LLM inference
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 38
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
@@ -163262,7 +163262,7 @@ paths:
           appKeyAuth: []
       summary: List LLM integration models
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 37
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
@@ -163336,7 +163336,7 @@ paths:
           appKeyAuth: []
       summary: List Agent Observability projects
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 1
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -163418,7 +163418,7 @@ paths:
           appKeyAuth: []
       summary: Create an Agent Observability project
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 2
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -163470,7 +163470,7 @@ paths:
           appKeyAuth: []
       summary: Delete Agent Observability projects
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 4
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -163542,7 +163542,7 @@ paths:
           appKeyAuth: []
       summary: Update an Agent Observability project
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 3
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -163601,7 +163601,7 @@ paths:
           appKeyAuth: []
       summary: List Agent Observability prompts
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 63
       x-permission:
         operator: OR
@@ -163689,7 +163689,7 @@ paths:
           appKeyAuth: []
       summary: Create an Agent Observability prompt
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 64
       x-permission:
         operator: AND
@@ -163750,7 +163750,7 @@ paths:
           appKeyAuth: []
       summary: Delete an Agent Observability prompt
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 67
       x-permission:
         operator: AND
@@ -163816,7 +163816,7 @@ paths:
           appKeyAuth: []
       summary: Get an Agent Observability prompt
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 65
       x-permission:
         operator: OR
@@ -163900,7 +163900,7 @@ paths:
           appKeyAuth: []
       summary: Update an Agent Observability prompt
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 66
       x-permission:
         operator: AND
@@ -163970,7 +163970,7 @@ paths:
           appKeyAuth: []
       summary: List versions of an Agent Observability prompt
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 68
       x-permission:
         operator: OR
@@ -164060,7 +164060,7 @@ paths:
           appKeyAuth: []
       summary: Create a new Agent Observability prompt version
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 69
       x-permission:
         operator: AND
@@ -164137,7 +164137,7 @@ paths:
           appKeyAuth: []
       summary: Get a specific Agent Observability prompt version
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 70
       x-permission:
         operator: OR
@@ -164224,7 +164224,7 @@ paths:
           appKeyAuth: []
       summary: Update an Agent Observability prompt version
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 71
       x-permission:
         operator: AND
@@ -164384,7 +164384,7 @@ paths:
           appKeyAuth: []
       summary: List Agent Observability spans
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 34
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -164484,7 +164484,7 @@ paths:
           appKeyAuth: []
       summary: Search Agent Observability spans
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 35
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -164561,7 +164561,7 @@ paths:
           appKeyAuth: []
       summary: List patterns clustered points
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 59
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -164625,7 +164625,7 @@ paths:
           appKeyAuth: []
       summary: List patterns configurations
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 62
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -164710,7 +164710,7 @@ paths:
           appKeyAuth: []
       summary: Create or update a patterns configuration
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 53
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -164778,7 +164778,7 @@ paths:
           appKeyAuth: []
       summary: Get a patterns configuration
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 61
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -164829,7 +164829,7 @@ paths:
           appKeyAuth: []
       summary: Delete a patterns configuration
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 54
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -164896,7 +164896,7 @@ paths:
           appKeyAuth: []
       summary: List patterns runs
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 57
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -164972,7 +164972,7 @@ paths:
           appKeyAuth: []
       summary: Trigger a patterns run
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 55
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -165046,7 +165046,7 @@ paths:
           appKeyAuth: []
       summary: Get patterns run status
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 56
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -165127,7 +165127,7 @@ paths:
           appKeyAuth: []
       summary: List patterns topics
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 58
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -165220,7 +165220,7 @@ paths:
           appKeyAuth: []
       summary: List patterns topics with clustered points
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 60
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -165303,7 +165303,7 @@ paths:
           appKeyAuth: []
       summary: List Agent Observability datasets
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 5
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -165397,7 +165397,7 @@ paths:
           appKeyAuth: []
       summary: Create an Agent Observability dataset
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 6
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -165457,7 +165457,7 @@ paths:
           appKeyAuth: []
       summary: Delete Agent Observability datasets
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 11
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -165532,7 +165532,7 @@ paths:
           appKeyAuth: []
       summary: Update an Agent Observability dataset
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 9
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -165648,7 +165648,7 @@ paths:
           appKeyAuth: []
       summary: Batch update Agent Observability dataset records
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 45
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -165745,7 +165745,7 @@ paths:
           appKeyAuth: []
       summary: Clone an Agent Observability dataset
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 46
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -165826,7 +165826,7 @@ paths:
           appKeyAuth: []
       summary: Get Agent Observability dataset draft state
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 40
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -165907,7 +165907,7 @@ paths:
           appKeyAuth: []
       summary: Lock Agent Observability dataset draft state
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 41
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -165971,7 +165971,7 @@ paths:
           appKeyAuth: []
       summary: Unlock Agent Observability dataset draft state
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 42
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -166054,7 +166054,7 @@ paths:
           appKeyAuth: []
       summary: Export an Agent Observability dataset
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 44
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -166134,7 +166134,7 @@ paths:
           appKeyAuth: []
       summary: List Agent Observability dataset records
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 7
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -166212,7 +166212,7 @@ paths:
           appKeyAuth: []
       summary: Update Agent Observability dataset records
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 10
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -166307,7 +166307,7 @@ paths:
           appKeyAuth: []
       summary: Append records to an Agent Observability dataset
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 8
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -166368,7 +166368,7 @@ paths:
           appKeyAuth: []
       summary: Delete Agent Observability dataset records
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 12
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -166447,7 +166447,7 @@ paths:
           appKeyAuth: []
       summary: Restore an Agent Observability dataset version
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 47
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -166531,7 +166531,7 @@ paths:
           appKeyAuth: []
       summary: List Agent Observability dataset versions
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 43
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -166606,7 +166606,7 @@ paths:
           appKeyAuth: []
       summary: List Agent Observability experiment events (v2)
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 50
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -166712,7 +166712,7 @@ paths:
           appKeyAuth: []
       summary: Upload records to an Agent Observability dataset
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 48
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -166799,7 +166799,7 @@ paths:
           appKeyAuth: []
       summary: List events for an Agent Observability experiment
       tags:
-        - LLM Observability
+        - Agent Observability
       x-menu-order: 30
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
@@ -218544,6 +218544,9 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/actions/datastore
     name: Actions Datastores
+  - description: >-
+      Manage Agent Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations.
+    name: Agent Observability
   - description: |-
       Datadog Agentless Scanning provides visibility into risks and vulnerabilities
       within your hosts, running containers, and serverless functions—all without
@@ -218823,9 +218826,6 @@ tags:
       description: Find out more at
       url: "https://docs.datadoghq.com/account_management/api-app-keys/"
     name: Key Management
-  - description: >-
-      Manage Agent Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations.
-    name: LLM Observability
   - description: |-
       Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
     name: Logs
