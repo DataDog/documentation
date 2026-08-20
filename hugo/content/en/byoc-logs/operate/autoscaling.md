@@ -73,6 +73,18 @@ Default compactor HPA settings:
 | `compactor.autoscaling.maxReplicas` | `10` | Maximum number of compactor pods |
 | CPU target | `80%` | Average CPU utilization target across compactor pods |
 
+## Override the defaults
+
+Set `minReplicas` and `maxReplicas` alongside `enabled` to size the scaling range for your workload. Use the [Cluster Sizing][1] guide to pick a maximum that your node capacity supports:
+
+```yaml
+indexer:
+  autoscaling:
+    enabled: true
+    minReplicas: 4
+    maxReplicas: 20
+```
+
 ## Apply the configuration
 
 Add the autoscaling values to your BYOC Logs values file, then upgrade your release:
@@ -105,3 +117,5 @@ If the HPA reports missing CPU metrics, check that the metrics API is running an
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /byoc-logs/operate/sizing/
