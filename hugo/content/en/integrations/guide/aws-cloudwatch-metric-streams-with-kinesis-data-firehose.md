@@ -176,6 +176,12 @@ Because the metric does not report when a stream stops delivering data, monitor 
 
 To resolve any issues encountered while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][6].
 
+### Delivery stream contains data from other sources
+
+The delivery stream connected to Datadog must receive data only from your CloudWatch Metric Stream. If another source, such as a CloudWatch log group subscription filter, writes to the delivery stream, Datadog can't decode the mixed payload.
+
+To fix this, use a dedicated delivery stream for your CloudWatch Metric Stream and remove any log group subscription filters that target it.
+
 ## Further Reading
  {{< partial name="whats-next/whats-next.html" >}}
 
