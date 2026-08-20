@@ -24,7 +24,7 @@ This page explains how to check that the optimizations offered by Test Optimizat
 
 These optimizations require a [supported native library][12]. JUnit XML uploads are not supported.
 
-## Validate locally with a coding agent
+## Option 1: validate locally with a coding agent
 
 Local coding-agent validation is in the Preview release stage and supports only JavaScript and TypeScript projects that use the npm [`dd-trace` package][15]. A local coding agent is an AI assistant that can inspect and run commands in your local repository.
 
@@ -38,9 +38,13 @@ Pass this prompt to your local coding agent:
 Locate the installed dd-trace package, then read and execute its ci/runbook.md.
 ```
 
-The coding-agent method is a local check that does not exercise the entire Datadog workflow. To validate the full Prevention, Mitigation, and Remediation workflows, or to validate a language other than JavaScript or TypeScript, complete the following steps.
+The coding-agent method is a local check that does not exercise the entire Datadog workflow. To validate the full [Prevention](#step-2-prevention), [Mitigation](#step-3-mitigation), and [Remediation](#step-4-remediation) workflows, or to validate a language other than JavaScript or TypeScript, use Option 2.
 
-## Set up validation
+## Option 2: validate the full workflow
+
+This option validates the complete Test Optimization workflow in Datadog. Complete each step in order because the [Prevention](#step-2-prevention), [Mitigation](#step-3-mitigation), and [Remediation](#step-4-remediation) phases use the same branch and test.
+
+### Step 1: set up validation
 
 This guide walks you through making local changes and committing them for CI to run. It uses a dedicated test service and branch to minimize the validation workflow's impact on other developers in the repository.
 
@@ -92,358 +96,356 @@ This guide walks you through making local changes and committing them for CI to 
 
    {{< img src="pr_gates/setup/pr_gate_scope.png" alt="New flaky PR gate scope" style="width:100%" >}}
 
-## Prevention
+### Step 2: prevention
 
 [Early Flake Detection][1] detects new flaky tests. [New Flaky Test PR Gates][2] block them from reaching your default branch.
 
-To validate prevention, add a test that fails on the first attempt and passes on retries. The test name must contain both `flaky` and `validation` so you can identify it in Datadog.
+1. Add a test that fails on the first attempt and passes on retries. The test name must contain both `flaky` and `validation` so you can identify it in Datadog.
 
-{{< tabs >}}
-{{% tab "JavaScript" %}}
+   {{< tabs >}}
+   {{% tab "JavaScript" %}}
 
-```javascript
-const fs = require('node:fs');
-const os = require('node:os');
-const path = require('node:path');
+   ```javascript
+   const fs = require('node:fs');
+   const os = require('node:os');
+   const path = require('node:path');
 
-test('flaky validation test', () => {
-    const marker = path.join(os.tmpdir(), 'dd-validation-flaky');
-    if (!fs.existsSync(marker)) {
-        fs.writeFileSync(marker, '1');
-        throw new Error('first attempt fails so Datadog can retry it');
-    }
-});
-```
+   test('flaky validation test', () => {
+       const marker = path.join(os.tmpdir(), 'dd-validation-flaky');
+       if (!fs.existsSync(marker)) {
+           fs.writeFileSync(marker, '1');
+           throw new Error('first attempt fails so Datadog can retry it');
+       }
+   });
+   ```
 
-{{% /tab %}}
-{{% tab "Python" %}}
+   {{% /tab %}}
+   {{% tab "Python" %}}
 
-```python
-from pathlib import Path
-from tempfile import gettempdir
+   ```python
+   from pathlib import Path
+   from tempfile import gettempdir
 
 
-def test_flaky_validation_test():
-    marker = Path(gettempdir()) / "dd-validation-flaky"
-    if not marker.exists():
-        marker.write_text("1")
-        raise AssertionError("first attempt fails so Datadog can retry it")
-```
+   def test_flaky_validation_test():
+       marker = Path(gettempdir()) / "dd-validation-flaky"
+       if not marker.exists():
+           marker.write_text("1")
+           raise AssertionError("first attempt fails so Datadog can retry it")
+   ```
 
-{{% /tab %}}
-{{% tab "Java" %}}
+   {{% /tab %}}
+   {{% tab "Java" %}}
 
-```java
-import static org.junit.jupiter.api.Assertions.fail;
+   ```java
+   import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import org.junit.jupiter.api.Test;
+   import java.io.IOException;
+   import java.nio.file.Files;
+   import java.nio.file.Path;
+   import java.nio.file.Paths;
+   import org.junit.jupiter.api.Test;
 
-class ValidationFlakyTest {
-    @Test
-    void flakyValidationTest() throws IOException {
-        Path marker = Paths.get(
-            System.getProperty("java.io.tmpdir"),
-            "dd-validation-flaky"
-        );
-        if (Files.notExists(marker)) {
-            Files.write(marker, new byte[] { '1' });
-            fail("first attempt fails so Datadog can retry it");
-        }
-    }
-}
-```
+   class ValidationFlakyTest {
+       @Test
+       void flakyValidationTest() throws IOException {
+           Path marker = Paths.get(
+               System.getProperty("java.io.tmpdir"),
+               "dd-validation-flaky"
+           );
+           if (Files.notExists(marker)) {
+               Files.write(marker, new byte[] { '1' });
+               fail("first attempt fails so Datadog can retry it");
+           }
+       }
+   }
+   ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+   {{% /tab %}}
+   {{% tab "Ruby" %}}
 
-```ruby
-require 'tmpdir'
+   ```ruby
+   require 'tmpdir'
 
-RSpec.describe 'validation flaky tests' do
-  it 'flaky validation test' do
-    marker = File.join(Dir.tmpdir, 'dd-validation-flaky')
-    unless File.exist?(marker)
-      File.write(marker, '1')
-      raise 'first attempt fails so Datadog can retry it'
-    end
-  end
-end
-```
+   RSpec.describe 'validation flaky tests' do
+     it 'flaky validation test' do
+       marker = File.join(Dir.tmpdir, 'dd-validation-flaky')
+       unless File.exist?(marker)
+         File.write(marker, '1')
+         raise 'first attempt fails so Datadog can retry it'
+       end
+     end
+   end
+   ```
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+   {{% /tab %}}
+   {{% tab ".NET" %}}
 
-```csharp
-using System.IO;
-using Xunit;
+   ```csharp
+   using System.IO;
+   using Xunit;
 
-public class ValidationFlakyTests
-{
-    [Fact]
-    public void FlakyValidationTest()
-    {
-        var marker = Path.Combine(Path.GetTempPath(), "dd-validation-flaky");
-        if (!File.Exists(marker))
-        {
-            File.WriteAllText(marker, "1");
-            throw new System.Exception("first attempt fails so Datadog can retry it");
-        }
-    }
-}
-```
+   public class ValidationFlakyTests
+   {
+       [Fact]
+       public void FlakyValidationTest()
+       {
+           var marker = Path.Combine(Path.GetTempPath(), "dd-validation-flaky");
+           if (!File.Exists(marker))
+           {
+               File.WriteAllText(marker, "1");
+               throw new System.Exception("first attempt fails so Datadog can retry it");
+           }
+       }
+   }
+   ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+   {{% /tab %}}
+   {{% tab "Go" %}}
 
-```go
-package validation
+   ```go
+   package validation
 
-import (
-    "errors"
-    "os"
-    "path/filepath"
-    "testing"
-)
+   import (
+       "errors"
+       "os"
+       "path/filepath"
+       "testing"
+   )
 
-func TestFlakyValidationTest(t *testing.T) {
-    marker := filepath.Join(os.TempDir(), "dd-validation-flaky")
-    if _, err := os.Stat(marker); errors.Is(err, os.ErrNotExist) {
-        if writeErr := os.WriteFile(marker, []byte("1"), 0600); writeErr != nil {
-            t.Fatal(writeErr)
-        }
-        t.Fatal("first attempt fails so Datadog can retry it")
-    }
-}
-```
+   func TestFlakyValidationTest(t *testing.T) {
+       marker := filepath.Join(os.TempDir(), "dd-validation-flaky")
+       if _, err := os.Stat(marker); errors.Is(err, os.ErrNotExist) {
+           if writeErr := os.WriteFile(marker, []byte("1"), 0600); writeErr != nil {
+               t.Fatal(writeErr)
+           }
+           t.Fatal("first attempt fails so Datadog can retry it")
+       }
+   }
+   ```
 
-{{% /tab %}}
-{{% tab "Swift" %}}
+   {{% /tab %}}
+   {{% tab "Swift" %}}
 
-```swift
-import XCTest
+   ```swift
+   import XCTest
 
-final class ValidationFlakyTests: XCTestCase {
-    func testFlakyValidationTest() throws {
-        let marker = FileManager.default.temporaryDirectory
-            .appendingPathComponent("dd-validation-flaky")
-        if !FileManager.default.fileExists(atPath: marker.path) {
-            try "1".write(to: marker, atomically: true, encoding: .utf8)
-            XCTFail("first attempt fails so Datadog can retry it")
-        }
-    }
-}
-```
+   final class ValidationFlakyTests: XCTestCase {
+       func testFlakyValidationTest() throws {
+           let marker = FileManager.default.temporaryDirectory
+               .appendingPathComponent("dd-validation-flaky")
+           if !FileManager.default.fileExists(atPath: marker.path) {
+               try "1".write(to: marker, atomically: true, encoding: .utf8)
+               XCTFail("first attempt fails so Datadog can retry it")
+           }
+       }
+   }
+   ```
 
-{{% /tab %}}
-{{< /tabs >}}
+   {{% /tab %}}
+   {{< /tabs >}}
 
-Commit and push the test, then open a pull request from the validation branch:
+2. Commit and push the test, then open a pull request from the validation branch:
 
-```bash
-git add -A
-git commit -m "Validate Test Optimization prevention"
-git push origin validate-test-optimization
-```
+   ```bash
+   git add -A
+   git commit -m "Validate Test Optimization prevention"
+   git push origin validate-test-optimization
+   ```
 
-Wait for CI to run. Early Flake Detection retries the new test, and the New Flaky Test PR Gate evaluates the result. In the GitHub checks for your pull request, confirm that the New Flaky Test PR Gate fails:
+3. Wait for CI to run. Early Flake Detection retries the new test, and the New Flaky Test PR Gate evaluates the result. In the GitHub checks for your pull request, confirm that the New Flaky Test PR Gate fails:
 
-{{< img src="pr_gates/setup/failed_pr_gate.png" alt="GitHub pull request check failing because a new flaky test is detected" style="width:100%" >}}
+   {{< img src="pr_gates/setup/failed_pr_gate.png" alt="GitHub pull request check failing because a new flaky test is detected" style="width:100%" >}}
 
-Click the failing GitHub check and confirm that the test is included in the list of new flaky tests:
+4. Click the failing GitHub check and confirm that the test is included in the list of new flaky tests:
 
-{{< img src="pr_gates/setup/pr_gate_detail.png" alt="Datadog PR gate detail view" style="width:100%" >}}
+   {{< img src="pr_gates/setup/pr_gate_detail.png" alt="Datadog PR gate detail view" style="width:100%" >}}
 
-In [Test Runs][7], confirm that Early Flake Detection retried the test and detected it as a new flaky test. The query uses the following filters:
+5. In [Test Runs][7], confirm that Early Flake Detection retried the test and detected it as a new flaky test. The query uses the following filters:
 
-- `@test.name:*flaky*validation*`
-- `@git.branch:validate-test-optimization`
-- `@test.retry_reason:early_flake_detection`
-- `@test.test_management.is_new_flaky:true`
+   - `@test.name:*flaky*validation*`
+   - `@git.branch:validate-test-optimization`
+   - `@test.retry_reason:early_flake_detection`
+   - `@test.test_management.is_new_flaky:true`
 
-## Mitigation
+### Step 3: mitigation
 
 Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5], and [Flaky Test Policies][6]. These features retry flaky tests and quarantine known flaky failures so they do not block CI.
 
-In the same test that you added for Prevention, change the marker filename from `dd-validation-flaky` to `dd-validation-flaky-mitigation`. Do not rename the test function or test case. The new marker causes another intentional first-attempt failure. Keeping the test name unchanged lets Datadog associate the run with the flaky test detected during Prevention. No additional Datadog configuration is required; Auto Test Retries and Flaky Test Management handle the test during this run.
+1. In the same test that you added for [Prevention](#step-2-prevention), change the marker filename from `dd-validation-flaky` to `dd-validation-flaky-mitigation`. Do not rename the test function or test case. The new marker causes another intentional first-attempt failure. Keeping the test name unchanged lets Datadog associate the run with the flaky test detected during [Prevention](#step-2-prevention). No additional Datadog configuration is required; Auto Test Retries and Flaky Test Management handle the test during this run. Update the test for your language:
 
-Update the test for your language:
+   {{< tabs >}}
+   {{% tab "JavaScript" %}}
 
-{{< tabs >}}
-{{% tab "JavaScript" %}}
+   ```javascript
+   const fs = require('node:fs');
+   const os = require('node:os');
+   const path = require('node:path');
 
-```javascript
-const fs = require('node:fs');
-const os = require('node:os');
-const path = require('node:path');
+   test('flaky validation test', () => {
+       // Changed from dd-validation-flaky.
+       const marker = path.join(os.tmpdir(), 'dd-validation-flaky-mitigation');
+       if (!fs.existsSync(marker)) {
+           fs.writeFileSync(marker, '1');
+           throw new Error('first attempt fails so Datadog can retry it');
+       }
+   });
+   ```
 
-test('flaky validation test', () => {
-    // Changed from dd-validation-flaky.
-    const marker = path.join(os.tmpdir(), 'dd-validation-flaky-mitigation');
-    if (!fs.existsSync(marker)) {
-        fs.writeFileSync(marker, '1');
-        throw new Error('first attempt fails so Datadog can retry it');
-    }
-});
-```
+   {{% /tab %}}
+   {{% tab "Python" %}}
 
-{{% /tab %}}
-{{% tab "Python" %}}
-
-```python
-from pathlib import Path
-from tempfile import gettempdir
+   ```python
+   from pathlib import Path
+   from tempfile import gettempdir
 
 
-def test_flaky_validation_test():
-    # Changed from dd-validation-flaky.
-    marker = Path(gettempdir()) / "dd-validation-flaky-mitigation"
-    if not marker.exists():
-        marker.write_text("1")
-        raise AssertionError("first attempt fails so Datadog can retry it")
-```
+   def test_flaky_validation_test():
+       # Changed from dd-validation-flaky.
+       marker = Path(gettempdir()) / "dd-validation-flaky-mitigation"
+       if not marker.exists():
+           marker.write_text("1")
+           raise AssertionError("first attempt fails so Datadog can retry it")
+   ```
 
-{{% /tab %}}
-{{% tab "Java" %}}
+   {{% /tab %}}
+   {{% tab "Java" %}}
 
-```java
-import static org.junit.jupiter.api.Assertions.fail;
+   ```java
+   import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import org.junit.jupiter.api.Test;
+   import java.io.IOException;
+   import java.nio.file.Files;
+   import java.nio.file.Path;
+   import java.nio.file.Paths;
+   import org.junit.jupiter.api.Test;
 
-class ValidationFlakyTest {
-    @Test
-    void flakyValidationTest() throws IOException {
-        // Changed from dd-validation-flaky.
-        Path marker = Paths.get(
-            System.getProperty("java.io.tmpdir"),
-            "dd-validation-flaky-mitigation"
-        );
-        if (Files.notExists(marker)) {
-            Files.write(marker, new byte[] { '1' });
-            fail("first attempt fails so Datadog can retry it");
-        }
-    }
-}
-```
+   class ValidationFlakyTest {
+       @Test
+       void flakyValidationTest() throws IOException {
+           // Changed from dd-validation-flaky.
+           Path marker = Paths.get(
+               System.getProperty("java.io.tmpdir"),
+               "dd-validation-flaky-mitigation"
+           );
+           if (Files.notExists(marker)) {
+               Files.write(marker, new byte[] { '1' });
+               fail("first attempt fails so Datadog can retry it");
+           }
+       }
+   }
+   ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+   {{% /tab %}}
+   {{% tab "Ruby" %}}
 
-```ruby
-require 'tmpdir'
+   ```ruby
+   require 'tmpdir'
 
-RSpec.describe 'validation flaky tests' do
-  it 'flaky validation test' do
-    # Changed from dd-validation-flaky.
-    marker = File.join(Dir.tmpdir, 'dd-validation-flaky-mitigation')
-    unless File.exist?(marker)
-      File.write(marker, '1')
-      raise 'first attempt fails so Datadog can retry it'
-    end
-  end
-end
-```
+   RSpec.describe 'validation flaky tests' do
+     it 'flaky validation test' do
+       # Changed from dd-validation-flaky.
+       marker = File.join(Dir.tmpdir, 'dd-validation-flaky-mitigation')
+       unless File.exist?(marker)
+         File.write(marker, '1')
+         raise 'first attempt fails so Datadog can retry it'
+       end
+     end
+   end
+   ```
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+   {{% /tab %}}
+   {{% tab ".NET" %}}
 
-```csharp
-using System.IO;
-using Xunit;
+   ```csharp
+   using System.IO;
+   using Xunit;
 
-public class ValidationFlakyTests
-{
-    [Fact]
-    public void FlakyValidationTest()
-    {
-        // Changed from dd-validation-flaky.
-        var marker = Path.Combine(Path.GetTempPath(), "dd-validation-flaky-mitigation");
-        if (!File.Exists(marker))
-        {
-            File.WriteAllText(marker, "1");
-            throw new System.Exception("first attempt fails so Datadog can retry it");
-        }
-    }
-}
-```
+   public class ValidationFlakyTests
+   {
+       [Fact]
+       public void FlakyValidationTest()
+       {
+           // Changed from dd-validation-flaky.
+           var marker = Path.Combine(Path.GetTempPath(), "dd-validation-flaky-mitigation");
+           if (!File.Exists(marker))
+           {
+               File.WriteAllText(marker, "1");
+               throw new System.Exception("first attempt fails so Datadog can retry it");
+           }
+       }
+   }
+   ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+   {{% /tab %}}
+   {{% tab "Go" %}}
 
-```go
-package validation
+   ```go
+   package validation
 
-import (
-    "errors"
-    "os"
-    "path/filepath"
-    "testing"
-)
+   import (
+       "errors"
+       "os"
+       "path/filepath"
+       "testing"
+   )
 
-func TestFlakyValidationTest(t *testing.T) {
-    // Changed from dd-validation-flaky.
-    marker := filepath.Join(os.TempDir(), "dd-validation-flaky-mitigation")
-    if _, err := os.Stat(marker); errors.Is(err, os.ErrNotExist) {
-        if writeErr := os.WriteFile(marker, []byte("1"), 0600); writeErr != nil {
-            t.Fatal(writeErr)
-        }
-        t.Fatal("first attempt fails so Datadog can retry it")
-    }
-}
-```
+   func TestFlakyValidationTest(t *testing.T) {
+       // Changed from dd-validation-flaky.
+       marker := filepath.Join(os.TempDir(), "dd-validation-flaky-mitigation")
+       if _, err := os.Stat(marker); errors.Is(err, os.ErrNotExist) {
+           if writeErr := os.WriteFile(marker, []byte("1"), 0600); writeErr != nil {
+               t.Fatal(writeErr)
+           }
+           t.Fatal("first attempt fails so Datadog can retry it")
+       }
+   }
+   ```
 
-{{% /tab %}}
-{{% tab "Swift" %}}
+   {{% /tab %}}
+   {{% tab "Swift" %}}
 
-```swift
-import XCTest
+   ```swift
+   import XCTest
 
-final class ValidationFlakyTests: XCTestCase {
-    func testFlakyValidationTest() throws {
-        // Changed from dd-validation-flaky.
-        let marker = FileManager.default.temporaryDirectory
-            .appendingPathComponent("dd-validation-flaky-mitigation")
-        if !FileManager.default.fileExists(atPath: marker.path) {
-            try "1".write(to: marker, atomically: true, encoding: .utf8)
-            XCTFail("first attempt fails so Datadog can retry it")
-        }
-    }
-}
-```
+   final class ValidationFlakyTests: XCTestCase {
+       func testFlakyValidationTest() throws {
+           // Changed from dd-validation-flaky.
+           let marker = FileManager.default.temporaryDirectory
+               .appendingPathComponent("dd-validation-flaky-mitigation")
+           if !FileManager.default.fileExists(atPath: marker.path) {
+               try "1".write(to: marker, atomically: true, encoding: .utf8)
+               XCTFail("first attempt fails so Datadog can retry it")
+           }
+       }
+   }
+   ```
 
-{{% /tab %}}
-{{< /tabs >}}
+   {{% /tab %}}
+   {{< /tabs >}}
 
-Commit and push the change on the same branch:
+2. Commit and push the change on the same branch:
 
-```bash
-git add -A
-git commit -m "Validate Test Optimization mitigation"
-git push origin validate-test-optimization
-```
+   ```bash
+   git add -A
+   git commit -m "Validate Test Optimization mitigation"
+   git push origin validate-test-optimization
+   ```
 
-Wait for CI to run, then confirm the following results:
+3. Wait for CI to run, then confirm the following results:
 
-- In [Test Runs][8], Auto Test Retries reruns the test after its first failed attempt, and the test passes on retry. Use the following filters:
-  - `@test.name:*flaky*validation*`
-  - `@git.branch:validate-test-optimization`
-  - `@test.retry_reason:auto_test_retry`
-- In [Flaky Test Management][9], the test appears as {{< ui >}}QUARANTINED{{< /ui >}}. Its failures no longer block the test job. Use the following filters:
-  - `@test.name:*flaky*validation*`
-  - `first_flaked_branch:validate-test-optimization`
-  - `flaky_test_state:quarantined`
+   - In [Test Runs][8], Auto Test Retries reruns the test after its first failed attempt, and the test passes on retry. Use the following filters:
+     - `@test.name:*flaky*validation*`
+     - `@git.branch:validate-test-optimization`
+     - `@test.retry_reason:auto_test_retry`
+   - In [Flaky Test Management][9], the test appears as {{< ui >}}QUARANTINED{{< /ui >}}. Its failures no longer block the test job. Use the following filters:
+     - `@test.name:*flaky*validation*`
+     - `first_flaked_branch:validate-test-optimization`
+     - `flaky_test_state:quarantined`
 
-## Remediation
+### Step 4: remediation
 
-Test Optimization helps remediate flaky tests through Attempt to Fix and Bits AI auto fixes. This section validates the Attempt to Fix workflow by fixing the same test used for Prevention and Mitigation.
+Test Optimization helps remediate flaky tests through Attempt to Fix and Bits AI auto fixes. This section validates the Attempt to Fix workflow by fixing the same test used for [Prevention](#step-2-prevention) and [Mitigation](#step-3-mitigation).
 
 1. In [Flaky Test Management][9], open the quarantined validation test.
 2. Click {{< ui >}}Actions{{< /ui >}}, select {{< ui >}}Link commit to fix{{< /ui >}}, and copy the generated key (it starts with `DD_`).
@@ -538,9 +540,12 @@ Test Optimization helps remediate flaky tests through Attempt to Fix and Bits AI
      - `first_flaked_branch:validate-test-optimization`
      - `fix_in_progress:true`
 
-After validation is complete, close the pull request without merging and delete the `validate-test-optimization` branch.
+### Step 5: post-validation cleanup
 
-The [New Flaky Test PR Gate][2] remains active for the entire repository. The gate is non-blocking by default, but notify the team that owns the repository before leaving it active. You can also enable the Test Optimization features configured for the `validate-test-optimization` service at the repository level.
+1. Close the pull request without merging.
+2. Delete the `validate-test-optimization` branch. The branch-specific Quarantine auto-rule no longer applies after the branch is deleted, and the dedicated validation service no longer receives test executions.
+3. Notify the team that owns the repository that the [New Flaky Test PR Gate][2] remains active for the entire repository. The gate is non-blocking by default.
+4. Optionally, enable the Test Optimization features configured for the `validate-test-optimization` service at the repository level.
 
 ## Further reading
 
