@@ -330,7 +330,7 @@ The `llmobs` toolset includes the following tools:
 ### Experiment tools
 
 `create_llmobs_experiment`
-: Create a new LLM Observability experiment object in a project. Records the experiment (so events and metrics can be reported against it) without running any model inference. Requires `project_id` and `experiment_name`. Returns the created `experiment_id` and its resolved name. Use `submit_llmobs_experiment_events` to attach evaluation metrics, or `update_llmobs_experiment` to change its properties.
+: Create a new Agent Observability experiment object in a project. Records the experiment (so events and metrics can be reported against it) without running any model inference. Requires `project_id` and `experiment_name`. Returns the created `experiment_id` and its resolved name. Use `submit_llmobs_experiment_events` to attach evaluation metrics, or `update_llmobs_experiment` to change its properties.
 
 `get_llmobs_experiment_summary`
 : Get a high-level experiment summary with pre-computed statistics for all evaluation metrics. Start here before using other experiment tools.
@@ -367,10 +367,10 @@ The `llmobs` toolset includes the following tools:
 ### Project and dataset tools
 
 `list_llmobs_projects`
-: List all LLM Observability experiments projects for the org, sorted by creation date (newest first). Returns each project's `id`, `name`, and timestamps, plus pagination fields (`next_cursor`, `truncated`). Use this to discover project names and IDs when you don't already know them.
+: List all Agent Observability experiments projects for the org, sorted by creation date (newest first). Returns each project's `id`, `name`, and timestamps, plus pagination fields (`next_cursor`, `truncated`). Use this to discover project names and IDs when you don't already know them.
 
 `get_llmobs_project`
-: Look up an LLM Observability experiments project by ID or name. Use this to resolve a `project_id` UUID before calling dataset tools.
+: Look up an Agent Observability experiments project by ID or name. Use this to resolve a `project_id` UUID before calling dataset tools.
 
 `list_llmobs_datasets`
 : List datasets within a project, with optional ID or name filter. Returns dataset metadata and pagination fields. Use this before `get_llmobs_dataset_records` or `add_llmobs_dataset_records` — those tools require a dataset UUID.
