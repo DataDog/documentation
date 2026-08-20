@@ -2361,7 +2361,7 @@ Retrieves a lightweight summary of a workflow execution instance by default. Set
 ### `get_datadog_workflow_step_data`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Retrieves execution data for one workflow step. The response includes status, inputs, timestamps, truncation metadata, and evaluated inputs and outputs when available. Set `includeExecutionContext` to `true` to include the context used to evaluate expressions. A zero-based `loopIndex` is required for any loop step or step inside a loop. It selects an iteration for a while-loop step or a step inside a loop. For a for-loop or parallel-loop step itself, the response contains aggregate iteration data.
+Retrieves execution data for one workflow step. The response includes status, inputs, timestamps, truncation metadata, and evaluated inputs and outputs when available. Set `includeExecutionContext` to `true` to include the context used to evaluate expressions. A zero-based `loopIndex`, which selects an iteration to inspect, is required for a while-loop step or step inside a loop. For a for-loop or parallel-loop step itself, the response contains aggregate iteration data.
 
 - Debug the Slack channel used by the `send-slack-message` step in this workflow execution.
 - Inspect zero-based iteration `3` (the fourth iteration) of the `retry-until-complete` while-loop step.
