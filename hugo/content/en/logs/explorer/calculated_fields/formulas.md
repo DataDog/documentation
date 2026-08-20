@@ -335,16 +335,17 @@ Returns `true` when the pattern matches anywhere in the value, and `false` other
 {{% /collapse-content %}}
 
 
-<h4>regexp_replace(<i>str</i> value, <i>str</i> pattern, <i>str</i> replacement, [<i>int</i> start, <i>int</i> N])</h4>
+<h4>regexp_replace(<i>str</i> input, <i>str</i> pattern, <i>str</i> replacement, [<i>int</i> start, <i>int</i> N])</h4>
 
-Returns the value with matched text replaced. Use `$1` through `$9` in the replacement to insert a capture group's match, or `${name}` for a named group. Formula arguments are double-quoted string literals, so a backslash must itself be escaped: write a literal `$` as `"\\$"`, and likewise use `"\\d"` rather than `"\d"` for shorthand classes in the pattern.
-
-By default, only the first match is replaced. Two optional arguments change that:
+Returns `input` with matched text replaced. Use `$1` through `$9` in `replacement` to insert a capture group's match, or `${name}` for a named group. Formula arguments are double-quoted string literals, so a backslash must itself be escaped: write a literal `$` as `"\\$"`, and likewise use `"\\d"` rather than `"\d"` for shorthand classes in `pattern`.
 
 | Argument | Meaning |
 |---|---|
-| `start` | The character position to start matching from, counting from 1. Defaults to the first character |
-| `N` | Which match to replace. `1` (the default) replaces the first match; `N` replaces the Nth match; `0` replaces every match |
+| `input` | The text to transform |
+| `pattern` | The regex pattern to match |
+| `replacement` | The regex transformation pattern, often using capture groups |
+| `start` | Optional. The character index to begin matching from, counting from 0. Defaults to `0` |
+| `N` | Optional. The maximum number of matches to replace. Defaults to `1`. `0` replaces every match |
 
 {{% collapse-content title="Example" level="h5" expanded=false %}}
 
