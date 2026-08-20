@@ -49,14 +49,21 @@ Applying the `moving_rollup()` function to a query allows you to combine points 
 
 When graphing, Datadog sets a limit on the number of points per timeseries. To retain visual clarity, a series can have up to 1,500 points. To respect this limit, Datadog rolls up datapoints automatically, defaulting to the `avg` method, effectively displaying the average of all datapoints within a time interval for a given metric. The default rollup time interval varies depending on how the data is visualized. See the following chart to reference these default time intervals:
 
-| Time frame          | Rollup Interval, Line Graph | Rollup Interval, Bar Graph | Rollup Interval, API |
-|---------------------|-----------------------------|----------------------------|----------------------|
-| The past hour       | 20s                         | 1m                         | 20s                  |
-| The past four hours    | 1m                          | 2m                         | 1m                   |
-| The past day        | 5m                          | 20m                        | 5m                   |
-| The past two days     | 10m                         | 30m                        | 10m                  |
-| The past week       | 1hr                         | 2hr                        | 1hr                  |
-| The past month      | 4hr                         | 12hr                       | 4hr                  |
+| Time frame       | Rollup Interval, Line/Area Graph | Rollup Interval, Bar Graph | Rollup Interval, API |
+|------------------|----------------------------------|----------------------------|----------------------|
+| Past 1 minute    | 1s                               | 1s                         | 1s                   |
+| Past 5 minutes   | 2s                               | 5s                         | 2s                   |
+| Past 15 minutes  | 5s                               | 10s                        | 5s                   |
+| Past 30 minutes  | 10s                              | 30s                        | 10s                  |
+| Past 1 hour      | 20s                              | 1m                         | 20s                  |
+| Past 4 hours     | 1m                               | 2m                         | 1m                   |
+| Past 1 day       | 5m                               | 20m                        | 5m                   |
+| Past 2 days      | 10m                              | 30m                        | 10m                  |
+| Past 1 week      | 1h                               | 2h                         | 1h                   |
+| Past 1 month     | 4h                               | 12h                        | 4h                   |
+| Past 3 months    | 12h                              | 1d                         | 12h                  |
+| Past 6 months    | 1d                               | 1d                         | 1d                   |
+| Past 1 year      | 1d                               | 1w                         | 1d                   |
 
 A custom `.rollup()` function can be used to specify the type of time aggregation applied (`avg`, `min`, `max`, `count`, or `sum`) and optionally the time interval to rollup. Using this function, you can set the rollup time interval to a different value than the defaults, up to a limit of 1,500 points. This supports up to one point per minute over a day.
 
