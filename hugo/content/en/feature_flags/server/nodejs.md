@@ -29,7 +29,7 @@ further_reading:
 
 This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management. Starting in `dd-trace` 5.116.0 and 6.5.0, it loads flag configuration directly from the Datadog-managed CDN by default.
 
-Agentless delivery changes only the flag configuration source. Node.js sends experiment exposure events through a supported local Event Platform Proxy (EVP) relay. It does not emit EVP flag evaluation events.
+Agentless delivery changes only the flag configuration source. Node.js sends experiment exposure events through a supported local Event Platform Proxy (EVP) relay. In `dd-trace` 5.116.0 and 6.5.0, Node.js does not emit EVP flag evaluation events.
 
 ## Getting started
 

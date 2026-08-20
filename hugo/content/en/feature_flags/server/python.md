@@ -28,7 +28,7 @@ This page describes how to instrument your Python application with the Datadog F
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
-Agentless delivery changes only the flag configuration source. Python sends experiment exposures and aggregated Event Platform Proxy (EVP) flag evaluation events through a supported local relay.
+<div class="alert alert-info">Agentless delivery changes only the flag configuration source. Python sends experiment exposures and aggregated Event Platform Proxy (EVP) flag evaluation events through a supported local relay.</div>
 
 ## Prerequisites
 
