@@ -43,7 +43,7 @@ In addition to the ACL permissions listed in [Prerequisites](#acl-permissions), 
 |---------------|---------------|-----------|
 | `*`           | `TOPIC`       | `Read`    |
 
-To prevent reading messages from certain topics, provide a more specific resource name.
+The `*` resource name grants `Read` access to all topics. To restrict the Agent to specific topics, replace `*` with those topic names.
 
 ### Remote configuration
 
