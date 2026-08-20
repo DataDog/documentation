@@ -13,6 +13,9 @@ further_reading:
 - link: "mcp_server/setup"
   tag: "Documentation"
   text: "Set Up the Datadog MCP Server"
+- link: "https://www.datadoghq.com/blog/datadog-mcp-apps/"
+  tag: "Blog"
+  text: "Datadog MCP Apps: Interactive experiences in AI workflows"
 ---
 
 The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolsets][1], which allow you to use only the tools you need, saving valuable context window space.
@@ -407,7 +410,7 @@ Translates a natural-language description into an Audit Trail query string. If y
 - Create an Audit Trail query to show when the dashboard `abc123` was deleted.
 - Generate an Audit Trail query to check which actions were executed through the Datadog MCP server.
 
-## Cases
+## Cases (Work Management)
 
 Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
 
@@ -2337,3 +2340,7 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [70]: /data_observability/
 [71]: /account_management/audit_trail/
 [72]: /actions/forms/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

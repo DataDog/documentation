@@ -1,5 +1,26 @@
 # Hugo
 
+# Pre-Hugo-reorganization files left at the repository root. The canonical
+# project files now live under /hugo; do not add root-level copies back to Git.
+/.hugo_build.lock
+/.yarn/
+/_vendor/
+/agent_config_types_list.txt
+/content/
+/data/
+/examples/
+/hugpython/
+/integrations_data/
+/layouts/
+/local/
+/Makefile.config
+/node_modules/
+/playwright-report/
+/public/
+/resources/
+/static/
+/test-results/
+
 # htmltest tmp files
 bin/htmltest
 htmltest_report.txt

@@ -20,6 +20,7 @@ cascade:
 
 {{< header-list header="General guides" >}}
     {{< nextlink href="incident_response/incident_management/guides/test_incidents" >}}Using test incidents for training and testing{{< /nextlink >}}
+    {{< nextlink href="incident_response/incident_management/guides/manage_with_terraform" >}}Manage Incident Management with Terraform{{< /nextlink >}}
 {{< /header-list >}}
 
 

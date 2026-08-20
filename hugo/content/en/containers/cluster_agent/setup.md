@@ -18,6 +18,15 @@ further_reading:
 - link: "/agent/cluster_agent/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting the Datadog Cluster Agent"
+- link: "https://www.datadoghq.com/architecture/kubernetes-workload-autoscaling-with-datadog/"
+  tag: "Architecture Center"
+  text: "Kubernetes workload autoscaling with Datadog"
+- link: "https://www.datadoghq.com/architecture/efficient-kubernetes-monitoring-with-the-datadog-cluster-agent/"
+  tag: "Architecture Center"
+  text: "Efficient Kubernetes Monitoring with the Datadog Cluster Agent"
+- link: "https://www.datadoghq.com/architecture/real-world-applications-of-the-datadog-cluster-agent-part-one/"
+  tag: "Architecture Center"
+  text: "Real-world applications of the Datadog Cluster Agent (Part 1)"
 algolia:
   tags: ['cluster agent']
 ---

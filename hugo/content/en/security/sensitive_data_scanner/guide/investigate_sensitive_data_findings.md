@@ -50,7 +50,7 @@ To investigate a log finding:
 3. At the top of the panel, check {{< ui >}}First Detected{{< /ui >}} and {{< ui >}}Last Detected{{< /ui >}} to understand how long the exposure has been active.
 4. In the summary section, review {{< ui >}}Match State{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, {{< ui >}}Environment{{< /ui >}}, and {{< ui >}}Total matches{{< /ui >}} to understand the scope of the exposure.
 5. Review the {{< ui >}}Logs Pattern{{< /ui >}} to understand the format of the log line where sensitive data was detected.
-6. In the {{< ui >}}Example Logs{{< /ui >}} section, review up to 5 representative examples of affected logs. When an example log expires it is replaced with the next matching event. Click {{< ui >}}Show log{{< /ui >}} to expand an example and inspect its log message, fields, and attributes inline. By default, example logs are stored for 3 days and are accessible to all users with the Data Scanner Read permission. To store these representative logs for a different period, contact [Support][1].
+6. In the {{< ui >}}Example Logs{{< /ui >}} section, review up to 5 representative examples of affected logs. When an example log expires it is replaced with the next matching event. Click {{< ui >}}Show log{{< /ui >}} to expand an example and inspect its log message, fields, and attributes inline. By default, example logs are stored for <span class="d-none site-region-container" data-region="us,us3,us5,eu,ap1,ap2,uk1">3 days</span><span class="d-none site-region-container" data-region="gov,gov2">7 days</span> and are accessible to all users with the Data Scanner Read permission. To store these representative logs for a different period, contact [Support][1].
 7. Review {{< ui >}}Matches Trend{{< /ui >}} to see how match volume has changed over the past week. Use {{< ui >}}Related Access and Configuration Events{{< /ui >}} to check whether recent access events or changes to the scanning group or scanning rule line up with changes in match volume.
 
 Additionally, you can:
@@ -91,7 +91,7 @@ Additionally, you can also:
 
 {{< img src="sensitive_data_scanner/investigate_sensitive_data_issues/case_mgmt_02_01_2024.png" alt="The case page showing information about the security finding, the assignee and creator of the case, and a timeline of events" style="width:60%;">}}
 
-[1]: /incident_response/case_management/
+[1]: /incident_response/work_management/
 [2]: /incident_response/incident_management/
 [3]: /account_management/audit_trail
 

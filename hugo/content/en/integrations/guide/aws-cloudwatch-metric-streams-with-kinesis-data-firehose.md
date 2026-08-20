@@ -158,6 +158,20 @@ If you set streaming up through the [AWS Console](?tab=awsconsole#installation):
 
 Once the resources are deleted, wait for five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog's [AWS integration page][5] and verify that the disabled regions are not displayed under **CloudWatch Metric Streams** for the specified AWS account.
 
+### Monitor stream health
+
+Datadog submits the `datadog.aws_metric_streams.data_received` metric when it receives data from a CloudWatch metric stream. Use this metric to confirm that AWS is sending metrics and that Datadog is receiving them.
+
+`datadog.aws_metric_streams.data_received`
+: **Type**: Gauge<br>
+Reports a value of `1` when Datadog receives data from a CloudWatch metric stream, and does not report when Datadog receives no data. Tagged with `stream_arn`, `stream_name`, `aws_account`, and `region`. How often the metric reports depends on your data volume and the buffering configuration of your Firehose delivery stream.
+
+For a cross-account stream, the metric stream and the Firehose delivery stream are in the monitoring account. The `aws_account` tag identifies the monitoring account, not the source accounts that the metrics come from.
+
+To check whether a stream is delivering data, query this metric in the [Metrics Explorer][8] and group by `stream_name` or `stream_arn`.
+
+Because the metric does not report when a stream stops delivering data, monitor it for the transition from reporting to no data. Create a [metric monitor][9] on `datadog.aws_metric_streams.data_received`, group it by `stream_arn`, and enable missing data notifications. For the configuration steps, see [Set up an alert for when a specific tag stops reporting][10].
+
 ## Troubleshooting
 
 To resolve any issues encountered while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][6].
@@ -172,3 +186,6 @@ To resolve any issues encountered while setting up Metric Streams or the associa
 [5]: https://app.datadoghq.com/integrations/amazon-web-services
 [6]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
 [7]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
+[8]: https://app.datadoghq.com/metric/explorer
+[9]: /monitors/types/metric/
+[10]: /monitors/guide/set-up-an-alert-for-when-a-specific-tag-stops-reporting/
