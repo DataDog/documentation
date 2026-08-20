@@ -266,7 +266,7 @@ app.get('/my-endpoint', async (req, res) => {
 
 The browser SDK uses whatever evaluation context is set for every flag evaluation. You can update that context with `OpenFeature.setContext()` when the user logs in or their attributes change. The server SDK instead passes a new evaluation context into each flag evaluation call, since one process handles many different users.
 
-For other server languages, see the [Datadog Server SDK documentation][2].
+For other server languages, see [Server-Side Feature Flags][2].
 
 [1]: /feature_flags/
 [2]: /feature_flags/server/
