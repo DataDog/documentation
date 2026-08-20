@@ -1,6 +1,6 @@
 ---
 title: Workflow Automation MCP Tools
-description: Use AI agents to build, manage, run, and debug Workflow Automations with the Datadog MCP Server's workflows toolset.
+description: Use AI agents to build, manage, run, and debug workflows with the Datadog MCP Server's workflows toolset.
 further_reading:
 - link: "mcp_server/setup"
   tag: "Documentation"
@@ -18,9 +18,21 @@ further_reading:
 
 ## Overview
 
-The [Datadog MCP Server][1] lets AI agents build and manage Workflow Automations through the [Model Context Protocol (MCP)][2].
+The [Datadog MCP Server][1] lets AI agents build and manage workflows through the [Model Context Protocol (MCP)][2].
 
 The `workflows` toolset gives AI clients such as Claude Code, Cursor, and OpenAI Codex access to your workflows, Action Catalog, workflow schema, and execution data. Using natural language, you can create and update workflows, validate their specifications, run published workflows, and investigate execution results.
+
+## Use cases
+
+Use the `workflows` toolset to build automations that:
+
+- **Investigate monitor alerts**: When a service error-rate monitor alerts, run Bits Investigation to correlate latency, recent deployments, and downstream service health, then send the findings to the owning team in Slack.
+- **Use custom agents**: Create a custom Bits Agent Builder agent for a specialized system, such as payments, data pipelines, or Kubernetes, and invoke it from a workflow whenever an alert requires that domain expertise.
+- **Automate incident escalation**: When a critical incident is declared, gather relevant service context, page the appropriate on-call team, create a case, and notify stakeholders.
+- **Investigate deployment regressions**: After a deployment, compare current service behavior with recent changes and, when a likely regression is found, start a Bits Code session to investigate the relevant code and propose a fix.
+- **Trigger remediation from an alert**: When a monitor detects a known failure condition, run a remediation action such as restarting a service, invoking an AWS Lambda function, or calling an internal remediation endpoint.
+- **Create code fixes**: Investigate an issue, have Bits Code propose a code change, require human review, and implement the change after the proposed fix is approved.
+- **Escalate high-severity security findings**: When a critical finding is detected, create a case or ticket, notify the owning team, and page the appropriate responder.
 
 ## Quickstart
 
@@ -37,7 +49,7 @@ https://mcp.datadoghq.com/v1/mcp?toolsets=core,workflows
 
 1. After connecting, you can make requests, and your AI client calls the appropriate tools on your behalf.
     - "Find workflows owned by my team that are triggered by monitor alerts."
-    - "Create a workflow that runs a Bits Investigation agent when this monitor alerts, then posts the findings to Slack."
+    - "Create a workflow that runs Bits Investigation when this monitor alerts, then posts the findings to Slack."
     - "Debug my last failing workflow run."
 
 ## Permissions
@@ -52,18 +64,14 @@ Workflow Automation MCP tools use the user's existing Datadog permissions. Opera
 
 ## Available tools
 
-The `workflows` toolset exposes the following tools, grouped by the part of the workflow lifecycle they support: finding and inspecting workflows, discovering specifications and actions, creating and managing workflows, validating specifications, running and inspecting executions, and debugging steps. When you make an automation request in natural language, your AI client calls these tools and chains their results together on your behalf to produce your desired output. See the [Datadog MCP Server tools reference][5] for full details on each tool, including permissions and example requests.
+The `workflows` toolset exposes the following tools, grouped by the part of the workflow life cycle they support. This includes finding and inspecting workflows, discovering specifications and actions, creating and managing workflows, validating specifications, running and inspecting executions, and debugging steps. When you make an automation request in natural language, your AI client calls these tools on your behalf. It chains their results together to produce your desired output. See the [Datadog MCP Server tools reference][5] for full details on each tool, including permissions and example requests.
 
 ### Workflow discovery
-
-Use these tools to check what already exists, such as finding whether a workflow already escalates the on-call team when a critical incident is declared, before you build a new one.
 
 - [`list_datadog_workflows`][6]
 - [`get_datadog_workflow`][7]
 
 ### Specification and action discovery
-
-Use these tools to find the building blocks for that workflow: pull the specification schema needed to write it, then search the action catalog for a step such as the Run Agent action or a remediation action like restarting a service.
 
 - [`get_datadog_workflow_spec_schema`][8]
 - [`search_datadog_workflow_actions`][9]
@@ -71,21 +79,15 @@ Use these tools to find the building blocks for that workflow: pull the specific
 
 ### Workflow creation and management
 
-Use these tools to build or update the workflow with those pieces, for example so a monitor alert triggers the custom agent's investigation, then automatically escalates and pages the right team.
-
 - [`create_datadog_workflow`][11]
 - [`update_datadog_workflow`][12]
 - [`delete_datadog_workflow`][13]
 
 ### Workflow validation
 
-Use this tool to check that the updated specification is structurally valid before you create or publish it, catching errors early even though it doesn't verify credentials, permissions, or third-party runtime behavior.
-
 - [`validate_datadog_workflow`][14]
 
 ### Workflow execution
-
-Use these tools to run the workflow on demand and track it, such as triggering it with the invocation context "investigating a checkout-api deployment regression," then checking its status or canceling the run if it's no longer needed.
 
 - [`execute_datadog_workflow`][15]
 - [`get_datadog_workflow_instance`][16]
@@ -93,8 +95,6 @@ Use these tools to run the workflow on demand and track it, such as triggering i
 - [`cancel_datadog_workflow_instance`][18]
 
 ### Execution debugging
-
-Use this tool to step through that run, such as tracing why a high-severity security finding didn't page the expected on-call responder.
 
 - [`get_datadog_workflow_step_data`][19]
 
