@@ -25,6 +25,8 @@ Use Observability Pipelines' Datadog Agent source to receive {{< tooltip text="l
 
 **Note**: If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector to collect logs or metrics, you must [use the OpenTelemetry source to send that data to Observability Pipelines][4].
 
+**Note**: Logs and metrics received through this source are tagged with `ddsource`, not `source`. When you write processor queries or filters based on the log source, use `ddsource` instead of `source`.
+
 ## Prerequisites
 
 {{% observability_pipelines/prerequisites/datadog_agent %}}

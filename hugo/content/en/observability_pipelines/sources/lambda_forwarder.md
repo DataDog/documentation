@@ -12,6 +12,8 @@ This document walks through how to send AWS vended logs with the Datadog Lambda 
 
 See [Datadog Forwarder][1] to learn more about it.
 
+**Note**: Logs received through this source are tagged with `ddsource`, not `source`. When you write processor queries or filters based on the log source, use `ddsource` instead of `source`.
+
 ## Set up a pipeline
 
 {{% observability_pipelines/lambda_forwarder/pipeline_setup %}}
