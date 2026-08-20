@@ -103,7 +103,7 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 - Datadog Agent **7.79.0 or later**
 - Linux only (eBPF dependency). See [Workload Protection setup][11] for supported distributions and kernel versions.
 - Enabling this setting starts `system-probe` if it is not already running
-- Applies to operating system packages in container image vulnerability findings
+- Applies to container image vulnerability findings for packages installed by an operating system package manager (`apt`/`dpkg`, `yum`/`dnf`/`rpm`, or `apk`). Application library packages, such as npm, pip, or Maven, and binaries installed outside a package manager do not receive runtime signals.
 
 **Note**: Runtime package prioritization runs independently of [Workload Protection][7] and does not affect its usage.
 
