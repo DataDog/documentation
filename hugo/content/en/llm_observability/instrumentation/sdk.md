@@ -2693,7 +2693,7 @@ public class MyJavaClass {
 
 ## Span processing
 
-To modify input and output data on spans, you can configure a processor function. The processor function has access to span tags to enable conditional input/output modification. Processor functions can either return the modified span to emit it, or return `None`/`null` to prevent the span from being emitted entirely. This is useful for filtering out spans that contain sensitive data or meet certain criteria.
+To modify input and output data on spans, you can configure a processor function. The processor function has access to span tags to enable conditional input, output, and metadata modification. Processor functions can either return the modified span to emit it, or return `None`/`null` to prevent the span from being emitted entirely. This is useful for filtering out spans that contain sensitive data or meet certain criteria.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -2745,6 +2745,24 @@ def call_openai():
     with LLMObs.annotation_context(tags={"no_input": "true"}):
         # make call to openai
         ...
+{{< /code-block >}}
+
+### Example: redacting span metadata
+
+Integrations and manual annotations can record sensitive values in a span's metadata, such as tool configuration or request parameters. A span processor can remove or redact those values before the span is emitted.
+
+Internal Datadog fields, such as cost data, are not exposed through `metadata` and cannot be modified by a processor.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs import LLMObsSpan
+
+def redact_metadata_processor(span: LLMObsSpan) -> LLMObsSpan:
+    # Drop the tool config recorded by auto-instrumentation
+    span.metadata.pop("tool_config", None)
+    return span
+
+LLMObs.register_processor(redact_metadata_processor)
 {{< /code-block >}}
 
 ### Example: preventing spans from being emitted
