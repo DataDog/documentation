@@ -166,3 +166,4 @@ Continuous Integration pipelines and tests
 [23]: /database_monitoring/data_collected/#sensitive-information
 [24]: /getting_started/tagging/
 [25]: /tracing/glossary/
+[26]: /security/sensitive_data_scanner/setup/telemetry_data/?tab=logs#mask-action
