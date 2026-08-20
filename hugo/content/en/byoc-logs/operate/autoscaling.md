@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-The `datadog/cloudprem` Helm chart can create Horizontal Pod Autoscalers (HPAs) for BYOC Logs indexers and standalone compactors. HPAs are disabled by default.
+The `datadog/cloudprem` Helm chart can create Horizontal Pod Autoscalers (HPAs) for BYOC Logs indexers and standalone compactors. HPAs are disabled by default. The chart also supports searcher autoscaling under `searcher.autoscaling`, which is tuned for query latency rather than throughput and is not covered here.
 
 ## Before you begin
 
