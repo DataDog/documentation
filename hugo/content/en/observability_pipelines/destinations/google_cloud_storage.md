@@ -47,7 +47,7 @@ After you select the Google Cloud Storage destination in the pipeline UI:
 Enter a prefix that you want to apply to all key objects.
 
 - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
-- See [template syntax][7] if you want to route logs to different object keys based on specific fields in your logs.
+- See [template syntax][7] if you want to route logs to different object keys based on specific fields in your logs. This **Prefix** field is the only place to configure template syntax for this destination; the path you optionally enter when [configuring Log Archives](#configure-log-archives) must be a static string.
   - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
 
 #### Metadata
