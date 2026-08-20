@@ -2256,7 +2256,7 @@ Tools for [Workflow Automation][39], including creating and managing workflows, 
 ### `list_datadog_workflows`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Lists [Workflow Automation][39] workflows and returns metadata by default. Matches a workflow name, creator name, or handle against a plain-text query, or filters by a single tag. Results can be filtered by trigger type, limited to published workflows, sorted, and paginated, and can optionally include full workflow specifications.
+Lists and searches [Workflow Automation][39] workflows by name, creator, handle, tag, or trigger type. Results include metadata by default and can optionally include complete workflow specifications.
 
 - Show me published workflows tagged with `team:platform`.
 - List workflows that have an agent trigger configured.
@@ -2265,7 +2265,7 @@ Lists [Workflow Automation][39] workflows and returns metadata by default. Match
 ### `get_datadog_workflow`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Retrieves the authoritative current definition of a workflow by ID. The result includes metadata, publication state, tags, and a complete specification with its input schema, triggers, steps, and connections.
+Retrieves a workflow by ID, including its metadata and complete specification. Returns a saved draft when one exists, otherwise the base specification.
 
 - Get the full details for workflow `00000000-0000-0000-0000-000000000000`.
 - Show me the input parameters and steps for workflow `00000000-0000-0000-0000-000000000000`.
@@ -2274,7 +2274,7 @@ Retrieves the authoritative current definition of a workflow by ID. The result i
 ### `search_datadog_workflow_actions`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Searches the Workflow Automation action catalog by bundle or integration, title, keyword, or description. Each result includes an action ID; use `get_datadog_workflow_action` to retrieve its authoritative contract before adding it to a workflow specification.
+Searches the Workflow Automation action catalog by bundle or integration, title, keyword, or description. Each result includes an action ID; use `get_datadog_workflow_action` to retrieve its contract before adding it to a workflow specification.
 
 - Find workflow actions for sending and reacting to Slack messages.
 - Search for an action that lists Amazon S3 buckets.
@@ -2283,7 +2283,7 @@ Searches the Workflow Automation action catalog by bundle or integration, title,
 ### `get_datadog_workflow_action`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Retrieves the authoritative definition of a Workflow Automation action by action ID. The definition includes resolved input and output schemas, input field order, keywords, and action-specific instructions for building a workflow step.
+Retrieves the definition of a Workflow Automation action by action ID. The definition includes resolved input and output schemas, input field order, keywords, and action-specific instructions for building a workflow step.
 
 - Get the definition of the `com.datadoghq.http.request` action.
 - List the required inputs for this workflow action.
@@ -2308,7 +2308,7 @@ Checks a complete workflow specification without creating or modifying a workflo
 ### `create_datadog_workflow`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Write`*\
-Creates a [Workflow Automation][39] workflow from a complete specification and optionally publishes it immediately. Workflows are unpublished by default. A successful call confirms that the workflow was saved, but does not verify its runtime behavior.
+Creates an unpublished [Workflow Automation][39] workflow from a complete specification.
 
 - Create a workflow that posts a Slack message when triggered by an agent.
 - Build a workflow with a schedule trigger that runs every day at 9 AM.
@@ -2317,11 +2317,27 @@ Creates a [Workflow Automation][39] workflow from a complete specification and o
 ### `update_datadog_workflow`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Write`*\
-Updates a [Workflow Automation][39] workflow by ID and returns the updated workflow. Only provided top-level fields change. A provided specification or tag list fully replaces the existing value rather than merging with it. Use `get_datadog_workflow` first and preserve every existing step, trigger, input, connection, display value, or tag that should remain.
+Updates a [Workflow Automation][39] workflow by ID. Provided specifications and tag lists replace the existing values, while omitted fields remain unchanged. Specification updates are saved as drafts unless the workflow is unpublished and has no saved draft.
 
-- Get the deployment rollback workflow, add an agent trigger to its complete specification, and publish it.
+- Get the deployment rollback workflow, add an agent trigger to its complete specification, then publish the saved draft.
 - Get the incident escalation workflow and add a notification step while preserving the rest of its specification.
 - Get this workflow's existing tags, then replace them with the complete list including `team:platform`.
+
+### `publish_datadog_workflow`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Write`*\
+Publishes a workflow by ID. If a saved draft exists, it replaces the base specification and is removed. Otherwise, the existing unpublished base specification is published.
+
+- Publish the saved draft of the deployment rollback workflow.
+- Publish the newly created incident escalation workflow.
+
+### `unpublish_datadog_workflow`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Write`*\
+Unpublishes a workflow by ID to stop new automatic executions while preserving its base specification and any saved draft. This does not cancel executions already in progress; use `cancel_datadog_workflow_instance` for those.
+
+- Unpublish the deployment workflow while changes are reviewed.
+- Stop new scheduled runs of the incident escalation workflow without canceling its running instance.
 
 ### `delete_datadog_workflow`
 *Toolset: **workflows***\
@@ -2334,7 +2350,7 @@ Permanently deletes a workflow by ID. This tool requires explicit user confirmat
 ### `execute_datadog_workflow`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Run`*\
-Starts a new execution of a published or unpublished workflow by ID. The workflow must have an agent trigger. Workflow actions can modify external systems, so confirm with the user before invoking this tool. Pass workflow input values through the optional `triggerPayload`. Use `invocationContext` for a brief explanation of why the workflow is being run. Do not include secrets, credentials, or sensitive conversational content. Each successful call starts a separate run, returns its workflow ID, instance ID, and URL, and does not wait for completion.
+Starts a new execution of a published or unpublished workflow that has an agent trigger. Runs the saved draft when one exists, otherwise the base specification. Workflow actions can modify external systems, so confirm with the user before invoking this tool.
 
 - Run the incident escalation workflow with `service` set to `checkout-api` and `severity` set to `high`.
 - Execute the deployment rollback workflow for the payments service.
@@ -2343,7 +2359,7 @@ Starts a new execution of a published or unpublished workflow by ID. The workflo
 ### `list_datadog_workflow_instances`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Lists a workflow's execution history, with the most recent instances first by default. Supports filtering by execution status, sorting, and pagination, and returns a lightweight summary with each instance's ID, timestamps, status, and tags. Use `get_datadog_workflow_instance` for a detailed execution record.
+Lists a workflow's execution history, with filters for execution status and whether the base or draft specification was used. Use `get_datadog_workflow_instance` for details.
 
 - List the most recent executions of this workflow.
 - List all failed instances of the deployment workflow.
@@ -2352,7 +2368,7 @@ Lists a workflow's execution history, with the most recent instances first by de
 ### `get_datadog_workflow_instance`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Retrieves a lightweight summary of a workflow execution instance by default. Set `includeDetails` to `true` to return the raw execution record. The record includes the workflow definition and source, step-state associations, inputs, and outputs. Use `get_datadog_workflow_step_data` to inspect one step's execution data.
+Retrieves a lightweight summary of a workflow execution instance, with an option to include the detailed execution record. Use `get_datadog_workflow_step_data` to inspect one step.
 
 - What's the status of the workflow execution I triggered?
 - Did the incident escalation workflow complete successfully?
@@ -2361,7 +2377,7 @@ Retrieves a lightweight summary of a workflow execution instance by default. Set
 ### `get_datadog_workflow_step_data`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Retrieves execution data for one workflow step. The response includes status, inputs, timestamps, truncation metadata, and evaluated inputs and outputs when available. Set `includeExecutionContext` to `true` to include the context used to evaluate expressions. A zero-based `loopIndex`, which selects an iteration to inspect, is required for a while-loop step or step inside a loop. For a for-loop or parallel-loop step itself, the response contains aggregate iteration data.
+Retrieves execution data for one workflow step, with optional execution context and iteration data for loop steps.
 
 - Debug the Slack channel used by the `send-slack-message` step in this workflow execution.
 - Inspect zero-based iteration `3` (the fourth iteration) of the `retry-until-complete` while-loop step.
