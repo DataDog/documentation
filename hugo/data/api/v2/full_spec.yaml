@@ -144829,6 +144829,11 @@ paths:
           $ref: "#/components/responses/NotAuthorizedResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - events_read
       summary: Search events
       tags: ["Events"]
       x-codegen-request-body-name: body
