@@ -85,7 +85,7 @@ searcher:
 
 When searcher autoscaling is enabled, `searcher.replicaCount` is ignored and the HPA controls the number of searcher pods.
 
-The searcher CPU target is lower than the indexer and compactor targets because search is latency-sensitive: keeping average utilization low leaves headroom for query bursts. The searcher HPA also applies a 60-second scale-up stabilization window.
+The searcher CPU target is lower than the indexer and compactor targets because search is latency-sensitive. Keeping average utilization low leaves headroom for query bursts. The searcher HPA also applies a 60-second scale-up stabilization window.
 
 Default searcher HPA settings:
 
