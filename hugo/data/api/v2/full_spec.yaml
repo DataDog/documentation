@@ -118356,7 +118356,10 @@ components:
       description: Request to create or update a targeting rule (allocation) for a feature flag environment.
       properties:
         experiment_id:
-          description: The experiment ID for experiment-linked allocations.
+          description: |-
+            The experiment ID linked to the allocation. For `FEATURE_GATE` allocations,
+            a non-null value denotes a standard experiment. For `CANARY` allocations,
+            Datadog manages this value. Omit it when creating a canary allocation.
           example: "550e8400-e29b-41d4-a716-446655440030"
           nullable: true
           type: string
@@ -145968,6 +145971,11 @@ paths:
       description: |-
         Updates targeting rules (allocations) for a specific feature flag in a specific environment.
         This operation replaces the existing allocation set with the request payload.
+        Creating, updating, or deleting a standard experiment allocation—an allocation with
+        `type: FEATURE_GATE` and a non-null `experiment_id`—also requires the
+        `product_analytics_experiments_write` permission. This additional permission is not
+        required for `CANARY` allocations, exposure schedules, or guardrail metrics unless
+        the same operation also mutates a standard experiment allocation.
       operationId: UpdateAllocationsForFeatureFlagInEnvironment
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -146041,7 +146049,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
-          description: Forbidden
+          description: |-
+            Forbidden. The caller is missing the `feature_flag_config_write` permission.
+            This error is also returned when the operation mutates a standard experiment allocation and the caller is missing the `product_analytics_experiments_write` permission.
         "404":
           content:
             application/json:
