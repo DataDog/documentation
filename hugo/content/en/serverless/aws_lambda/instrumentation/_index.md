@@ -31,7 +31,7 @@ To get started, [sign up for a Datadog account][1] if you don’t already have o
 
 A sample application is [available on GitHub][6] with instructions on how to deploy with multiple runtimes and infrastructure-as-code tools.
 
-The quick start process configures your Lambda functions on the fly. To instrument Lambda functions permanently, see the detailed instructions in the next sections.
+The quick start process configures your Lambda functions on the fly. To instrument Lambda functions permanently, see the sections below for agentic onboarding or manual instrumentation.
 
 ## Set up with agentic onboarding
 
