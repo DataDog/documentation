@@ -170,6 +170,8 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: Vertical scaling recommendations are applied to new pods through the [Admission Controller](/containers/cluster_agent/admission_controller/) mutating webhook. The Admission Controller is enabled by default. If you disable it, horizontal scaling continues to work but vertical scaling has no effect.
+
 ### Idle cost and savings estimates
 
 {{< tabs >}}
@@ -210,6 +212,63 @@ _Fixed cost values are subject to refinement over time._
 {{% /tab %}}
 {{< /tabs >}}
 
+### In-place vertical scaling
+
+By default, applying a vertical recommendation requires a full pod rollout: the pod template is updated, Kubernetes recreates the pods, and the new resources take effect as those pods are admitted. For slow-starting or latency-sensitive services, that is a meaningful disruption.
+
+In-place vertical scaling instead updates container resources on the running pods through the Kubernetes [pod resize subresource](https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/), so most resizes happen with no restart. This requires Datadog Cluster Agent 7.78+.
+
+With `applyPolicy.update.strategy: Auto` (the default), the controller resizes in place wherever the cluster supports it and falls back to a rollout otherwise. To force rollout-based vertical scaling for a workload, set `applyPolicy.update.strategy: TriggerRollout` on its `DatadogPodAutoscaler`. To tune how long the controller waits before evicting a pending resize or falling back to a rollout, see the [DatadogPodAutoscaler manifest reference][15].
+
+#### Kubernetes support
+
+The `InPlacePodVerticalScaling` feature gate must be enabled on **both** the API server and the kubelet; a cluster can have one without the other.
+
+| Kubernetes version | Feature gate |
+|---|---|
+| 1.27 - 1.32 | Alpha, disabled by default |
+| 1.33 - 1.34 | Beta, enabled by default |
+| 1.35+ | GA, gate removed |
+
+#### Enable in-place vertical scaling
+
+Enable the feature on the Cluster Agent. This also grants the Cluster Agent the permissions it needs to resize and, where necessary, evict pods.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+```yaml
+spec:
+  features:
+    autoscaling:
+      workload:
+        enabled: true
+        inPlaceVerticalScaling:
+          enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+```yaml
+datadog:
+  autoscaling:
+    workload:
+      enabled: true
+      inPlaceVerticalScaling:
+        enabled: true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Behavior and limitations
+
+- **`resizePolicy` stays under your control.** Datadog never sets or overrides the container-level `resizePolicy`; it is immutable after pod creation and is an application-level decision. When unset, Kubernetes defaults to `NotRequired` for CPU and memory, meaning resize without restart. Set `RestartContainer` per resource on containers that cannot absorb a live change.
+- **Kubernetes limitations apply.** Only CPU and memory can be resized; QoS class cannot change; requests and limits can be changed but not removed entirely; Windows pods and pods under static CPU or memory manager policies are excluded. See the [upstream limitations](https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/#limitations).
+- **Burstable mode still requires a rollout.** Burstable mode removes the CPU limit, and in-place resize can change a limit but not remove one. See the [DatadogPodAutoscaler manifest reference][15].
+- If a resize is infeasible or stays pending, the pod is evicted through the Kubernetes Eviction API, which respects PodDisruptionBudgets.
+
 ## Usage
 
 ### Identify resources to rightsize
@@ -249,7 +308,7 @@ The Setup wizard is best for trying autoscaling on a single workload, getting ha
 
 #### Path B: GitOps
 
-Define a `DatadogPodAutoscaler` custom resource that targets your workload and apply it through whatever tooling you already use to ship Kubernetes manifests, whether that's `kubectl apply`, Helm, ArgoCD, Terraform, or another GitOps tool. Authoring the manifest is the same regardless of delivery mechanism. See the [example configurations](#example-datadogpodautoscaler-configurations) below for ready-to-edit starting points covering cost optimization, balanced scaling, vertical-only resizing, and custom-query horizontal scaling.
+Define a `DatadogPodAutoscaler` custom resource that targets your workload and apply it through whatever tooling you already use to ship Kubernetes manifests, whether that's `kubectl apply`, Helm, ArgoCD, Terraform, or another GitOps tool. Authoring the manifest is the same regardless of delivery mechanism. See the [example configurations](#example-datadogpodautoscaler-configurations) below for ready-to-edit starting points covering cost optimization, balanced scaling, vertical-only resizing, and custom-query horizontal scaling. For a complete reference of the manifest fields and options, including options the UI does not expose, see the [DatadogPodAutoscaler manifest reference][15].
 
 For tool-specific guides, see:
 
@@ -258,7 +317,7 @@ For tool-specific guides, see:
 
 ### Example DatadogPodAutoscaler configurations
 
-The following examples demonstrate common `DatadogPodAutoscaler` configurations for different scaling strategies. Use them as starting points and adjust the values to match your workload's requirements. If you would rather pick a template in the UI, follow [Path A](#path-a-datadog-ui-setup-wizard) above.
+The following examples demonstrate common `DatadogPodAutoscaler` configurations for different scaling strategies. Use them as starting points and adjust the values to match your workload's requirements. If you would rather pick a template in the UI, follow [Path A](#path-a-datadog-ui-setup-wizard) above. For the full range of manifest fields and options not shown here, see the [DatadogPodAutoscaler manifest reference][15].
 
 {{< tabs >}}
 {{% tab "Optimize Cost" %}}
@@ -361,15 +420,7 @@ spec:
 
 Pick this template when a workload can't be scaled horizontally, or when you want pure rightsizing without changing replica counts. Common cases are singleton services, stateful workloads, and leader-elected components. The defining setting is `scaleDown.strategy: Disabled` and `scaleUp.strategy: Disabled`, which leaves only `update.strategy: Auto` to apply CPU and memory recommendations.
 
-By default, the controller applies vertical recommendations by triggering a rollout (evict and recreate pods). Cluster Agent **7.78+** also supports **in-place pod resizing**, which updates a pod's CPU and memory requests and limits without restarting it. In-place resize is opt-in: set `autoscaling.workload.in_place_vertical_scaling.enabled: true` on the Cluster Agent (or set the environment variable `DD_AUTOSCALING_WORKLOAD_IN_PLACE_VERTICAL_SCALING_ENABLED=true`).
-
-Your cluster must also expose the `pods/resize` subresource. This is the default in Kubernetes 1.33+ where the `InPlacePodVerticalScaling` feature gate is beta. On Kubernetes 1.27 to 1.32, the feature gate must be enabled on `kube-apiserver` and every `kubelet`.
-
-When both prerequisites are met:
-
-- **Default**: Workloads with `applyPolicy.update.strategy: Auto` (the default) resize in place.
-- **Fallback**: If the kubelet reports a resize as `Infeasible`, the controller falls back to a rollout.
-- **Opt-out**: To force a workload to always use rollout-based vertical scaling regardless of the cluster setting, set `applyPolicy.update.strategy: TriggerRollout` on its `DatadogPodAutoscaler`.
+By default, the controller applies vertical recommendations by triggering a rollout (evict and recreate pods). Cluster Agent **7.78+** also supports **in-place pod resizing**, which updates a pod's CPU and memory requests and limits without restarting it. With `applyPolicy.update.strategy: Auto` (the default), the controller resizes in place wherever the cluster supports it and falls back to a rollout otherwise. To force rollout-based vertical scaling, set `applyPolicy.update.strategy: TriggerRollout`. For enablement, Kubernetes requirements, and behavior, see [In-place vertical scaling](#in-place-vertical-scaling).
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -468,6 +519,14 @@ spec:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+The examples above cover the most common strategies. The manifest supports additional options that the templates don't show, including:
+
+- **CPU rightsizing** alongside memory (`constraints.containers[].controlledResources`). When a workload combines horizontal and vertical scaling, vertical recommendations cover memory only by default.
+- **Burstable mode** (`spec.options.burstable`) to remove CPU limits on spiky workloads while still right-sizing CPU requests.
+- **Per-container bounds** (`minAllowed` and `maxAllowed`), request-only rightsizing (`controlledValues: RequestsOnly`), and per-container targeting for horizontal scaling (`ContainerResource` objectives).
+
+For the full field reference, see the [DatadogPodAutoscaler manifest reference][15].
 
 ### Cluster profiles
 
@@ -636,7 +695,7 @@ Datadog computes vertical scaling recommendations for CPU and memory by analyzin
 - **8-day lookback window**: All recommendations consider usage data from the past 8 days, providing enough history to capture weekly traffic patterns while remaining responsive to changes.
 - **Decaying weights**: For Burstable-class request recommendations (CPU or memory), older samples are weighted less heavily, so the recommendation adapts faster to recent usage shifts.
 - **Safety margins**: Every recommendation includes a margin above observed usage (5 to 10%) to provide a buffer against unexpected spikes.
-- **OOMKill response**: When memory is Guaranteed-class (request equals limit) and an OOMKill occurs, a 20% bump is applied to reduce the likelihood of repeated out-of-memory failures.
+- **OOMKill response**: When an OOMKill occurs, the memory limit is raised (by 20% by default) and re-applied on each subsequent OOMKill until the workload stabilizes, reducing the likelihood of repeated out-of-memory failures. Change the ratio with `spec.options.outOfMemory.bumpUpRatio`; see the [DatadogPodAutoscaler manifest reference][15].
 - **Guaranteed-class preservation**: When a resource has request equal to limit, Datadog uses the more conservative (limit-level) computation for both, ensuring recommendations do not introduce a gap between request and limit.
 
 ## Further reading
@@ -657,3 +716,4 @@ Datadog computes vertical scaling recommendations for CPU and memory by analyzin
 [12]: /containers/guide/manage-datadogpodautoscaler-with-argocd/
 [13]: /containers/guide/manage-datdadogpodautoscaler-with-terraform/
 [14]: https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/
+[15]: /containers/autoscaling/manifest/
