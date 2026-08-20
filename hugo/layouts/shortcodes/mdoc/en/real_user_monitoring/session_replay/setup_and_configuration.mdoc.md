@@ -305,7 +305,7 @@ DdSdkReactNative.initialize(configuration)
 
 During this step, you can also configure multiple [privacy levels][17] that apply to Session Replays.
 
-### Step 4 - (iOS only) Update your iOS pods.
+### Step 4 - (iOS only) Update your iOS pods
 
 ```shell
 cd ios && pod install
@@ -313,7 +313,7 @@ cd ios && pod install
 
 ### Step 5 - Rebuild your app
 
-Rebuild your iOS and Android apps
+Rebuild your iOS and Android apps.
 
 ### Impact on app performance
 

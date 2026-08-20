@@ -79,7 +79,7 @@ Datadog Session Replay for Flutter is in Preview.
 Mobile Session Replay only supports native frameworks. Within these frameworks, there may be certain components or screens missing, such as:
 
 - Certain system elements, such as `actionBar`, progress bars, and spinners
-- Rich system contents, such as video players, music player, and map widgets
+- Rich system contents, such as video players, music players, and map widgets
 - Views that use direct canvas drawing
 - Advanced text styling
 {% /if %}
@@ -103,7 +103,7 @@ Mobile Session Replay only supports native frameworks. Within these frameworks, 
 
 - SwiftUI is supported through an **experimental** feature. If this experimental support is **not enabled**, SwiftUI screens may appear blank or incomplete.
 - Certain system elements, such as `actionBar` on Android, progress bars, and spinners
-- Rich system contents, such as video players, music player, and map widgets
+- Rich system contents, such as video players, music players, and map widgets
 - Views that use direct canvas drawing
 - Advanced text styling
 {% /if %}
@@ -114,7 +114,7 @@ Mobile Session Replay only supports native frameworks. Within these frameworks, 
 Mobile Session Replay records the native view hierarchy that React Native renders. Within these frameworks, there may be certain components or screens missing, such as:
 
 - Certain system elements, such as `actionBar` on Android, progress bars, and spinners
-- Rich system contents, such as video players, music player, and map widgets
+- Rich system contents, such as video players, music players, and map widgets
 - Views that use direct canvas drawing
 - Advanced text styling
 {% /if %}
@@ -154,7 +154,11 @@ Learn more about [image privacy settings][10].
 
 <!-- Kotlin Multiplatform -->
 {% if equals($platform, "kotlin_multiplatform") %}
-Image visibility depends on your SDK privacy configuration. If `MASK_LARGE_ONLY` is used, only images up to 100x100dp on Android, and bundled images with UIKit and images up to 100x100 pts on SwiftUI, are captured. All other images are replaced by a "Content Image" placeholder in the UI.
+Image visibility depends on your SDK privacy configuration. If `MASK_LARGE_ONLY` is used, the following images are captured:
+- On Android, images up to 100x100dp
+- On iOS, bundled images with UIKit, and images up to 100x100 pts on SwiftUI
+
+All other images are replaced by a "Content Image" placeholder in the UI.
 
 Learn more about [image privacy settings][11].
 {% /if %}
@@ -163,8 +167,8 @@ Learn more about [image privacy settings][11].
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
 Image visibility depends on your SDK privacy configuration:
-- On iOS, if `MASK_NON_BUNDLED_ONLY` is enabled, only bundled images with UIKit and images up to 100x100 pts on SwiftUI are captured.
 - On Android, if `MASK_LARGE_ONLY` is used, only images up to 100x100dp are captured.
+- On iOS, if `MASK_NON_BUNDLED_ONLY` is enabled, only bundled images with UIKit and images up to 100x100 pts on SwiftUI are captured.
 
 All other images are replaced by a "Content Image" placeholder in the UI.
 

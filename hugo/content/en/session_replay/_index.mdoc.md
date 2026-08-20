@@ -1,6 +1,6 @@
 ---
 title: Session Replay
-description: Learn about how to capture and visually replay your users' web browsing or mobile app experience with Session Replay.
+description: Learn how to capture and visually replay your users' web browsing or mobile app experience with Session Replay.
 aliases:
 - /real_user_monitoring/guide/session-replay-getting-started/
 - /real_user_monitoring/session_replay/
@@ -39,7 +39,7 @@ further_reading:
   text: 'Visualize your Product Analytics data in the Analytics Explorer'
 - link: '/integrations/content_security_policy_logs'
   tag: 'Documentation'
-  text: 'Detect and aggregate CSP violations with Datadog'
+  text: 'Detect and aggregate Content Security Policy violations with Datadog'
 - link: "https://learn.datadoghq.com/courses/intro-to-rum"
   tag: "Learning Center"
   text: "Intro to Real User Monitoring (RUM)"
@@ -48,19 +48,19 @@ further_reading:
 
 ## Overview
 
-Session Replay expands your user experience monitoring by allowing you to capture and visually replay the web browsing or mobile app experience of your users. Session Replay is available in both [RUM][1] and [Product Analytics][2], helping you identify and reproduce errors, understand user journeys, and gain insights into your application's usage patterns and design pitfalls.
+Session Replay expands your user experience monitoring by allowing you to capture and visually replay your users' web browsing or mobile app experiences. Session Replay is available in both [RUM][1] and [Product Analytics][2], helping you identify and reproduce errors, understand user journeys, and gain insights into your application's usage patterns and design pitfalls.
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}
 ## Browser Session Replay
 
-Browser Session Replay expands your user experience monitoring by allowing you to capture and visually replay the web browsing experience of your users. Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your web application's usage patterns and design pitfalls.
+Browser Session Replay expands your user experience monitoring by allowing you to capture and visually replay the web browsing experience of your users, and analyze it in combination with RUM performance data.
 
 The RUM Browser SDK is [open source][3] and uses the open source [rrweb][4] project.
 
 ### How the Session Replay recorder works
 
-The Session Replay recorder is part of the RUM Browser SDK. The recorder takes a snapshot of the browser's DOM and CSS by tailing and recording events happening on a web page (such as DOM modification, mouse move, clicks, and input events) along with these events' timestamps.
+The Session Replay recorder is part of the RUM Browser SDK. The recorder takes a snapshot of the browser's DOM and CSS by tailing and recording events happening on a web page (such as DOM modification, mouse move, click, and input events) along with these events' timestamps.
 
 Datadog then rebuilds the web page and re-applies the recorded events at the appropriate time in the replay view.
 
@@ -241,11 +241,11 @@ Learn more about [Dev Tools][11].
 [2]: /product_analytics/
 [3]: https://github.com/DataDog/browser-sdk
 [4]: https://www.rrweb.io/
-[5]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
+[5]: https://github.com/DataDog/browser-sdk/blob/main/packages/browser-rum/BROWSER_SUPPORT.md
 [6]: /help/
 [7]: /session_replay/playlists
 [8]: /notebooks/
 [9]: /account_management/audit_trail/
-[10]: /rum/replay/playlists/my-watch-history
+[10]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history
 [11]: /session_replay/dev_tools
 [12]: /session_replay/heatmaps
