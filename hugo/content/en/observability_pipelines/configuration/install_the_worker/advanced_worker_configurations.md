@@ -106,7 +106,7 @@ Use the `VECTOR_HOSTNAME` environment variable to assign a unique hostname and h
 
 Configure your load balancer's health check with the `/health` endpoint to check that the Worker is up and running. See [Load balancer configurations][13] for more recommendations on setting up a load balancer in front of the Worker.
 
-For Kubernetes, the liveness and readiness probes are already enabled in the [helm chart][9] and [values.yaml][10] file. By default, these probes check a TCP socket on the Worker API port instead of the `/health` endpoint.
+For Kubernetes, the liveness and readiness probes are enabled in the [helm chart][9] and [values.yaml][10] file by default. These probes check a TCP socket on the Worker API port instead of the `/health` endpoint.
 
 For other installations such as VM-based ones, you must set `DD_OP_API_ENABLED` to `true` and set `DD_OP_API_ADDRESS` to `0.0.0.0:8686` to expose the `/health` endpoint. An example configuration:
 
