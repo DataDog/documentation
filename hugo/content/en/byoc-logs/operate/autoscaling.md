@@ -112,7 +112,7 @@ kubectl describe hpa <RELEASE_NAME>-compactor -n <NAMESPACE_NAME>
 
 `<RELEASE_NAME>-indexer` and `<RELEASE_NAME>-compactor` are the default HPA names created by the chart. If you set `nameOverride` or `fullnameOverride`, use the resulting names instead.
 
-If the HPA reports missing CPU metrics, check that the metrics API is running and that the target pods have CPU requests.
+If `kubectl get hpa` shows `<unknown>` in the `TARGETS` column, the HPA cannot read CPU metrics. Check that the metrics API is running and that the target pods have CPU requests.
 
 ## Further reading
 
