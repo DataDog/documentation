@@ -2256,7 +2256,7 @@ Tools for [Workflow Automation][39], including creating and managing workflows, 
 ### `list_datadog_workflows`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Lists [Workflow Automation][39] workflows and returns metadata by default. Use one plain-text query to match a workflow name, creator name, or handle, or use one tag query. Results can be filtered by trigger type, limited to published workflows, sorted, paginated, and optionally include full workflow specifications.
+Lists [Workflow Automation][39] workflows and returns metadata by default. Matches a workflow name, creator name, or handle against a plain-text query, or filters by a single tag. Results can be filtered by trigger type, limited to published workflows, sorted, and paginated, and can optionally include full workflow specifications.
 
 - Show me published workflows tagged with `team:platform`.
 - List workflows that have an agent trigger configured.
