@@ -24,6 +24,7 @@ The `datadog/cloudprem` Helm chart can create Horizontal Pod Autoscalers (HPAs) 
 This guide assumes that you have:
 
 - A BYOC Logs deployment installed with the `datadog/cloudprem` Helm chart.
+- Chart version `0.4.6` or later for standalone compactor autoscaling.
 - Kubernetes Metrics Server, or another metrics API implementation, installed in the cluster.
 - Enough node capacity for the maximum number of indexer and compactor pods.
 - CPU requests configured for autoscaled workloads.
