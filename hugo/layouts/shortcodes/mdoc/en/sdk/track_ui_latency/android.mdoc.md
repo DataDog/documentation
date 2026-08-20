@@ -1,4 +1,4 @@
-### Time to network settled
+## Time to network settled
 
 Time to Network Settled (TNS) is calculated automatically. It measures the time between the start of a view and the completion of all resources that started within 100ms of the view's start.
 
@@ -15,7 +15,7 @@ val rumConfig = RumConfiguration.Builder(applicationId)
 
 For more control over which resources count as "initial," implement your own `InitialResourceIdentifier`.
 
-### Interaction to next view
+## Interaction to next view
 
 Interaction to Next View (INV) is calculated automatically. It uses the last tap, click, or swipe action occurring within a 3-second threshold before the view starts.
 
@@ -32,7 +32,7 @@ val rumConfig = RumConfiguration.Builder(applicationId)
 
 For more control over which interactions count as the "last interaction," implement your own `LastInteractionIdentifier`.
 
-### View loading time
+## View loading time
 
 To notify the SDK that your view finished loading, call `addViewLoadingTime(override=)` through `GlobalRumMonitor` when your view is fully loaded and displayed:
 
@@ -61,7 +61,7 @@ public void onViewLoaded() {
 
 Use `override` to replace the previously calculated loading time for the current view. This API is experimental and might change.
 
-### Custom timings
+## Custom timings
 
 To measure how long a specific part of your app takes, such as a hero image appearing, use `addTiming`:
 
@@ -86,11 +86,11 @@ public void onHeroImageLoaded() {
 {% /tab %}
 {% /tabs %}
 
-### Understanding performance timings
+## Understanding performance timings
 
 All view timings are measured relative to the view's start. The exact moment a view starts depends on the type of instrumentation used for tracking views. For more details, see [Views instrumentation versus app life cycle](/real_user_monitoring/application_monitoring/android/data_collected/#views_instrumentation_versus_app_lifecycle).
 
-### Troubleshooting
+## Troubleshooting
 
 When using the default `TimeBasedInitialResourceIdentifier` and `TimeBasedInteractionIdentifier`, TNS and INV timings may be missing in specific cases:
 
@@ -99,7 +99,7 @@ When using the default `TimeBasedInitialResourceIdentifier` and `TimeBasedIntera
 
 To maximize the accuracy of TNS and INV, consider adjusting time thresholds in the default predicates to align with your app's behavior, or implement custom predicates tailored to your needs.
 
-### Mobile vitals
+## Mobile vitals
 
 The following telemetry provides insight into your application's performance, inspired by frameworks such as [Android Vitals](https://developer.android.com/topic/performance/vitals). Mobile Vitals range from poor, moderate, to good. View them by navigating to {% ui %}Digital Experience{% /ui %} > {% ui %}Performance Summary{% /ui %} and selecting your application.
 

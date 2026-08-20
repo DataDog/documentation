@@ -1,6 +1,6 @@
 View loading time, Time to Network Settled, Interaction to Next View, and custom timings aren't available for the .NET MAUI SDK yet.
 
-### Mobile vitals
+## Mobile vitals
 
 A .NET MAUI app runs on top of the native Android or iOS runtime, so RUM reports Mobile Vitals for the underlying platform. Mobile Vitals range from poor, moderate, to good. View them by navigating to {% ui %}Digital Experience{% /ui %} > {% ui %}Performance Summary{% /ui %} and selecting your application. Select the tab that matches the platform your app is running on.
 

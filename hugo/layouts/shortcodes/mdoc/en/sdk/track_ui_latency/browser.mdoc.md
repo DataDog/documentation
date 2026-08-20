@@ -1,8 +1,8 @@
-### Core web vitals
+## Core web vitals
 
-<div class="alert alert-danger">
-  Datadog's Core Web Vitals telemetry is available from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.2.0+.
-</div>
+{% alert level="danger" %}
+Datadog's Core Web Vitals telemetry is available from the [@datadog/browser-rum](https://github.com/DataDog/browser-sdk) package v2.2.0+.
+{% /alert %}
 
 The Browser SDK automatically collects [Core Web Vitals](https://web.dev/vitals/) (Largest Contentful Paint, Interaction to Next Paint, and Cumulative Layout Shift) for every view. No setup is required. These are a set of three KPIs designed to monitor a site's user experience, focusing on load performance, interactivity, and visual stability. Each KPI comes with guidance on the range of values that translate to good user experience. Datadog recommends monitoring the 75th percentile for these KPIs.
 
@@ -15,7 +15,7 @@ The Browser SDK automatically collects [Core Web Vitals](https://web.dev/vitals/
 | [Interaction To Next Paint](https://web.dev/inp/) | Interactivity | Longest duration between a user's interaction with the page and the next paint. Requires RUM SDK v5.1.0. | <200ms |
 | [Cumulative Layout Shift](https://web.dev/cls/) | Visual stability | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means that no shifts are happening. | <0.1 |
 
-#### Core web vitals target elements
+### Core web vitals target elements
 
 Identifying what element triggered a high Core Web Vitals KPI is the first step in understanding the root cause and being able to improve performance. RUM reports the element that is associated with each Core Web Vital instance:
 
@@ -24,7 +24,7 @@ Identifying what element triggered a high Core Web Vitals KPI is the first step 
 - For First Input Delay, RUM reports the CSS selector of the first element the user interacted with.
 - For Cumulative Layout Shift, RUM reports the CSS selector of the most shifted element contributing to the CLS.
 
-#### When each core web vital is collected
+### When each core web vital is collected
 
 The RUM Browser SDK reports each Core Web Vital under different conditions. If a vital is missing from a view event, the SDK most likely did not capture a value for it.
 
@@ -37,7 +37,7 @@ The RUM Browser SDK reports each Core Web Vital under different conditions. If a
 
 Values are captured up to the point of backgrounding; they are not discarded if a page is later hidden. A page that is hidden at view start (for example, opened in a background tab) emits no LCP or FCP.
 
-#### Troubleshooting missing core web vitals
+### Troubleshooting missing core web vitals
 
 If a Core Web Vital is missing from a view in the [RUM Explorer](/real_user_monitoring/explorer/), check the following:
 
@@ -54,13 +54,15 @@ To check that the SDK is collecting vitals:
 2. In the {% ui %}Network{% /ui %} tab, look for view events being sent to the Datadog intake.
 3. In the [RUM Explorer](/real_user_monitoring/explorer/), open the view event in question and confirm it has the expected `@view.*` attributes.
 
-#### Diagnose Core Web Vitals with subparts
+### Diagnose Core Web Vitals with subparts
 
 Largest Contentful Paint and Interaction to Next Paint break down into subparts, each isolating a specific phase of the metric. Use subpart data to identify which phase contributes most to a slow LCP or INP.
 
-##### Largest Contentful Paint subparts
+#### Largest Contentful Paint subparts
 
-<div class="alert alert-info">These attributes require Browser SDK v6.32.0 or later.</div>
+{% alert level="info" %}
+These attributes require Browser SDK v6.32.0 or later.
+{% /alert %}
 
 LCP breaks down into four phases. Time to First Byte is collected separately as `view.first_byte`. The remaining three subparts are collected under `view.performance.lcp.sub_parts`:
 
@@ -71,9 +73,11 @@ LCP breaks down into four phases. Time to First Byte is collected separately as 
 | Resource load time | `view.performance.lcp.sub_parts.load_time` | Time to load the LCP resource, affected by image format, compression, and network conditions. `0` when the LCP element does not require a resource. |
 | Render delay | `view.performance.lcp.sub_parts.render_delay` | Time between the LCP resource finishing loading and the LCP element being painted. High values indicate long tasks or blocking JavaScript or CSS. |
 
-##### Interaction to Next Paint subparts
+#### Interaction to Next Paint subparts
 
-<div class="alert alert-info">These attributes require Browser SDK v6.33.0 or later.</div>
+{% alert level="info" %}
+These attributes require Browser SDK v6.33.0 or later.
+{% /alert %}
 
 INP breaks down into three phases, collected under `view.performance.inp.sub_parts`:
 
@@ -83,11 +87,11 @@ INP breaks down into three phases, collected under `view.performance.inp.sub_par
 | Processing duration | `view.performance.inp.sub_parts.processing_duration` | Duration of the event handler execution. High values indicate complex or synchronous handler work. |
 | Presentation delay | `view.performance.inp.sub_parts.presentation_delay` | Time the browser took to render the next frame. High values indicate expensive style, layout, paint, or composite operations. |
 
-### View loading time
+## View loading time
 
 The SDK automatically calculates `view.loading_time` by watching for network requests and DOM mutations.
 
-#### How loading time is calculated
+### How loading time is calculated
 
 For single page applications (SPAs), the RUM Browser SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If an interaction on your web page leads to a different URL without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks URL changes using the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History). The `loading_time` KPI works for both `initial_load` and `route_change` navigation:
 
@@ -96,7 +100,7 @@ For single page applications (SPAs), the RUM Browser SDK differentiates between 
   - The difference between `navigationStart` and the first time the page has no activity. See [How page activity is calculated](#how-page-activity-is-calculated) for details.
 - **SPA Route Change**: Loading Time is equal to the difference between the URL change and the first time the page has no activity. See [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
-#### Manually set the loading time
+### Manually set the loading time
 
 If the automatic calculation doesn't accurately reflect when your view finished loading, set it manually with `setViewLoadingTime`. Call this when your view is fully loaded and displayed to the user. The loading time is computed as the elapsed time since the current view started:
 
@@ -106,7 +110,7 @@ window.DD_RUM.setViewLoadingTime()
 
 Each call replaces any previously set value (last-call-wins), and stops the automatic detection for that view. After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
 
-#### How page activity is calculated
+### How page activity is calculated
 
 The RUM Browser SDK tracks the page activity to estimate the time until the interface is stable again. The page is considered to have activity when:
 
@@ -147,13 +151,13 @@ You can also ignore specific DOM mutations by marking an element (or one of its 
 </div>
 ```
 
-#### Hash SPA navigation
+### Hash SPA navigation
 
 The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
 
-### Custom vitals and timings
+## Custom vitals and timings
 
-#### Measure component-level performance with custom vitals
+### Measure component-level performance with custom vitals
 
 Use the `customVital` API to measure the performance of your application at the component level. For example, you can measure how long it takes for part of your page to render or for a component to respond to a user interaction. **Note**: Custom vital names must contain only letters, digits, or the characters `- _ . @ $`.
 
@@ -188,7 +192,7 @@ window.DD_RUM.addDurationVital("dropdownRendering", {startTime: 1707755888000, d
 
 **Note**: The `startTime` parameter expects a UNIX timestamp in milliseconds (the number of milliseconds since January 1, 1970).
 
-#### Track additional performance timings
+### Track additional performance timings
 
 On top of RUM's default performance timing, you may measure where your application is spending its time with greater flexibility. The `addTiming` API provides a way to add extra performance timing. To add a timestamp relative to the start of the current view (such as when a hero image appears), use `addTiming`:
 
@@ -234,7 +238,7 @@ document.addEventListener("scroll", function handler() {
 });
 ```
 
-### All performance telemetry
+## All performance telemetry
 
 | Attribute | Type | Description |
 |---|---|---|

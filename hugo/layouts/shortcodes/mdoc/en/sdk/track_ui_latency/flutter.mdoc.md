@@ -1,4 +1,4 @@
-### View loading time
+## View loading time
 
 To notify the SDK that your view finished loading, call `addViewLoadingTime` on `DatadogSdk.instance.rum` when your view is fully loaded and ready to display:
 
@@ -8,7 +8,7 @@ DatadogSdk.instance.rum?.addViewLoadingTime(override);
 
 Use `override` to replace the previously calculated loading time for the current view. This API is experimental and might change.
 
-### Custom timings
+## Custom timings
 
 To measure how long a specific part of your app takes, such as a hero image appearing, use `addTiming`:
 
@@ -22,7 +22,7 @@ To [create a measure](/real_user_monitoring/explorer/search/#setup-facets-and-me
 
 Time to Network Settled and Interaction to Next View aren't available for the Flutter SDK yet.
 
-### Mobile vitals
+## Mobile vitals
 
 The following telemetry provides insight into your application's performance. Mobile Vitals range from poor, moderate, to good. View them by navigating to {% ui %}Digital Experience{% /ui %} > {% ui %}Performance Summary{% /ui %} and selecting your application.
 
