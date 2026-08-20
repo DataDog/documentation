@@ -58,11 +58,9 @@ Declare an incident from [Secret Scanning][15] by clicking **Declare incident** 
 
 {{< img src="/incident_response/incident_management/investigate/declare/declare-secrets.png" alt="Your image description" style="width:90%;" >}}
 
-## From a case
+## From a work item
 
-Declare an incident from [Case Management][5]. From the individual case detail page, click **Declare incident** to escalate a case to an incident.
-
-{{< img src="incident_response/incident_management/investigate/declare/declare_case_management.png" alt="An example case page highlighting the Declare Incident button at the top of the page" style="width:90%;" >}}
+Declare an incident from [Work Management][5]. From the individual work item detail page, click **Declare incident** to escalate a work item to an incident.
 
 ## From a graph
 You can declare an incident directly from a graph by clicking the export button on the graph and then clicking **Declare incident**. The incident creation modal appears, and the graph is added to the incident as a signal.
@@ -123,7 +121,7 @@ You can declare an incident from individual Handoff Notification cards.
 [2]: /incident_response/incident_management/setup_and_configuration/information
 [3]: /security/workload_protection/security_signals/#declare-an-incident
 [4]:/security/workload_protection/security_signals/#declare-an-incident
-[5]: /incident_response/case_management/view_and_manage
+[5]: /incident_response/work_management/view_and_manage
 [6]: /dashboards/guide/datadog_clipboard
 [7]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [8]: https://app.datadoghq.com/synthetics/tests
