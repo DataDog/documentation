@@ -52,7 +52,7 @@ npm install @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 yarn add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 {{< /code-block >}}
 
-**Note**: For React applications, also install `@openfeature/react-sdk`. See [React Feature Flags][7]. For server-side implementations, see [Server-side and dynamic context](#server-side-and-dynamic-context) below, or the [Datadog Server SDK documentation][2] for other languages.
+**Note**: For React applications, also install `@openfeature/react-sdk`. See [React Feature Flags][7]. For server-side implementations, see the [Server-side and dynamic context](#server-side-and-dynamic-context) section, or [Server-Side Feature Flags][2] for other languages.
 
 ## Initialization
 
