@@ -1,4 +1,4 @@
-### Manually track RUM actions
+## Manually track RUM actions
 
 You can manually track RUM actions:
 

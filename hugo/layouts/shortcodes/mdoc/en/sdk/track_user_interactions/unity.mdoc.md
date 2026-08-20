@@ -1,4 +1,4 @@
-### Track user actions
+## Track user actions
 
 You can track specific user actions such as taps, clicks, and scrolls using `DdRum.AddAction`.
 

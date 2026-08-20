@@ -330,6 +330,8 @@ DdRum.stopView('<view-key>', { custom: 42 }, Date.now());
 
 ### Manually track RUM actions
 
+For setup steps, see [Track user interactions][27].
+
 You can manually track RUM actions:
 
 ```javascript
@@ -735,3 +737,4 @@ See [Monitor hybrid React Native applications][19].
 [24]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=react_native
 [25]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=react_native
 [26]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=react_native
+[27]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=react_native

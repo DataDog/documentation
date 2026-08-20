@@ -39,6 +39,8 @@ After the timing is sent, the timing is accessible as `@view.custom_timings.<tim
 
 ### Custom actions
 
+For setup steps covering action tracking, see [Track user interactions][14].
+
 In addition to [tracking actions automatically][5], you can also track specific custom user actions (such as taps, clicks, and scrolls) with `RumMonitor#addAction`. For continuous action tracking (for example, tracking a user scrolling a list), use `RumMonitor#startAction` and `RumMonitor#stopAction`.
 
 The action type should be one of the following: "custom", "click", "tap", "scroll", "swipe", "back".
@@ -430,4 +432,5 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [11]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=kotlin_multiplatform
 [12]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=kotlin_multiplatform
 [13]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=kotlin_multiplatform
+[14]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=kotlin_multiplatform
 [a1]: https://docs.datadoghq.com/help/

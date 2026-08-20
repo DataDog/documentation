@@ -1,4 +1,4 @@
-### Custom actions
+## Custom actions
 
 In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API.
 
@@ -41,13 +41,13 @@ let rum = RUMMonitor.shared()
 
 For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
-### Automatically track user actions
+## Automatically track user actions
 
-#### UIKit
+### UIKit
 
 To automatically track user tap actions with UIKit, set the `uiKitActionsPredicate` option when enabling RUM.
 
-#### SwiftUI
+### SwiftUI
 
 To automatically track user tap actions in SwiftUI, enable the `swiftUIActionsPredicate` option when enabling RUM.
 
@@ -102,7 +102,7 @@ DDDefaultSwiftUIRUMActionsPredicate *swiftUIActionsPredicate = [[DDDefaultSwiftU
 {% /tab %}
 {% /tabs %}
 
-#### Action reporting by iOS version
+### Action reporting by iOS version
 
 The table below shows how iOS 17 and iOS 18 report different user interactions.
 

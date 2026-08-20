@@ -33,6 +33,8 @@ If you select `Enable Automatic Scene Tracking`, Datadog hooks into Unity's `Sce
 
 ### Track user actions
 
+For setup steps, see [Track user interactions][6].
+
 You can track specific user actions such as taps, clicks, and scrolls using `DdRum.AddAction`.
 
 To manually register instantaneous RUM actions such as `RumActionType.Tap`, use `DdRum.AddAction()`. For continuous RUM actions such as `RumActionType.Scroll`, use `DdRum.StartAction()` or `DdRum.StopAction()`.
@@ -157,3 +159,4 @@ DatadogSdk.instance.ClearAllData();
 [3]: /real_user_monitoring/application_monitoring/unity/data_collected/
 [4]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=unity
 [5]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=unity
+[6]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=unity

@@ -69,6 +69,8 @@ For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom actions
 
+For setup steps covering both automatic and manual action tracking, see [Track user interactions][13].
+
 In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API.
 
 To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:)`.
@@ -1187,3 +1189,4 @@ Calling this method disables the SDK and all active features, such as RUM. To re
 [10]: /real_user_monitoring/application_monitoring/ios/data_collected/#resource-attributes
 [11]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=ios
 [12]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios
+[13]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=ios
