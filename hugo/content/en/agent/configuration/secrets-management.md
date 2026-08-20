@@ -121,7 +121,7 @@ secret_backend_config:
 
 ##### All `aws_session` options
 
-The following `aws_session` fields configure how the Agent authenticates to AWS. All fields are optional—when none are set, the Agent uses the [default credential chain](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html) (instance profile, environment variables, shared config file, and so on).
+The following `aws_session` fields configure how the Agent authenticates to AWS. All fields are optional—when none are set, the Agent uses the [default credential chain][1007] (instance profile, environment variables, shared config file, and so on).
 
 | Field | Description |
 |---|---|
@@ -390,7 +390,7 @@ property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 
 ##### All `aws_session` options
 
-The following `aws_session` fields configure how the Agent authenticates to AWS. All fields are optional—when none are set, the Agent uses the [default credential chain](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html) (instance profile, environment variables, shared config file, and so on).
+The following `aws_session` fields configure how the Agent authenticates to AWS. All fields are optional—when none are set, the Agent uses the [default credential chain][1007] (instance profile, environment variables, shared config file, and so on).
 
 | Field | Description |
 |---|---|
@@ -432,9 +432,6 @@ agents:
 ```
 
 <div class="alert alert-info"> You must include the <code>serviceAccountAnnotations</code> to grant the Agent permissions to access the AWS SSM parameter. </div>
-
-<br>
-
 
 ##### Cluster check: without cluster check runners enabled
 ```sh
@@ -494,7 +491,6 @@ Configure the Datadog Agent to use AWS SSM to resolve secrets with the Datadog O
 
 ##### Integration check
 
-
 ```sh
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -526,9 +522,6 @@ spec:
 ```
 
 <div class="alert alert-info"> You must include the <code>serviceAccountAnnotations</code> to grant the Agent permissions to access the AWS SSM parameter. </div>
-
-<br>
-
 
 ##### Cluster check: without cluster check runners enabled
 
@@ -657,7 +650,7 @@ api_key: "ENC[secretKeyNameInKeyVault]"
 
 ##### All `azure_session` options
 
-The following `azure_session` fields control how the Agent authenticates to Azure. All fields are optional—the Agent falls back to [Default Azure Credential](https://learn.microsoft.com/en-us/azure/developer/go/azure-sdk-authentication) (environment variables, Workload Identity, system-assigned Managed Identity, Azure CLI, and so on) when none are set.
+The following `azure_session` fields control how the Agent authenticates to Azure. All fields are optional—the Agent falls back to [Default Azure Credential][2001] (environment variables, Workload Identity, system-assigned Managed Identity, Azure CLI, and so on) when none are set.
 
 | Field | Description |
 |---|---|
@@ -1259,7 +1252,7 @@ secret_backend_config:
 
 Configure the Datadog Agent to use HashiCorp Vault to resolve secrets in Helm using the following configuration. This uses Vault's `kubernetes` auth method, which relies on the Agent's automatically mounted ServiceAccount token, so no extra Kubernetes RBAC or annotations are required.
 
-**Note**: In your Vault server, enable the `kubernetes` auth method and bind `vault_kubernetes_role` to the Agent's ServiceAccount name and namespace. See the [Kubernetes auth method instructions](#kubernetes-auth-method-instructions) above and the official [HashiCorp Vault Kubernetes auth method documentation](https://developer.hashicorp.com/vault/docs/auth/kubernetes) for more information.
+**Note**: In your Vault server, enable the `kubernetes` auth method and bind `vault_kubernetes_role` to the Agent's ServiceAccount name and namespace. See the [Kubernetes auth method instructions](#kubernetes-auth-method-instructions) above and the official [HashiCorp Vault Kubernetes auth method documentation][3005] for more information.
 
 ##### Integration check
 
@@ -1330,7 +1323,7 @@ clusterChecksRunner:
 
 Configure the Datadog Agent to use HashiCorp Vault to resolve secrets with the Datadog Operator using the following configuration. This uses Vault's `kubernetes` auth method, which relies on the Agent's automatically mounted ServiceAccount token, so no extra Kubernetes RBAC or annotations are required.
 
-**Note**: The native `secretBackend` fields require Datadog Operator v1.29.0+. In your Vault server, enable the `kubernetes` auth method and bind `vault_kubernetes_role` to the Agent's ServiceAccount name and namespace. See the [Kubernetes auth method instructions](#kubernetes-auth-method-instructions) above and the official [HashiCorp Vault Kubernetes auth method documentation](https://developer.hashicorp.com/vault/docs/auth/kubernetes) for more information.
+**Note**: The native `secretBackend` fields require Datadog Operator v1.29.0+. In your Vault server, enable the `kubernetes` auth method and bind `vault_kubernetes_role` to the Agent's ServiceAccount name and namespace. See the [Kubernetes auth method instructions](#kubernetes-auth-method-instructions) above and the official [HashiCorp Vault Kubernetes auth method documentation][3005] for more information.
 
 ##### Integration check
 
@@ -2719,15 +2712,18 @@ instances:
 [1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 [1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+[1007]: https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html
 
 <!-- Azure KeyVault Links -->
 [2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
+[2001]: https://learn.microsoft.com/en-us/azure/developer/go/azure-sdk-authentication
 
 <!-- HashiCorp Vault Links -->
 [3000]: https://learn.hashicorp.com/tutorials/vault/static-secrets
 [3001]: https://developer.hashicorp.com/
 [3003]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 [3004]: https://developer.hashicorp.com/vault/docs/auth/aws#iam-authentication-inferences
+[3005]: https://developer.hashicorp.com/vault/docs/auth/kubernetes
 
 <!-- File Backend Links (JSON/YAML) -->
 [4001]: https://en.wikipedia.org/wiki/JSON
