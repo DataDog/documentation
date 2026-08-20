@@ -27,8 +27,6 @@ further_reading:
 
 Workload Protection acts on threats by terminating processes and containers or blocking network traffic. The Datadog Agent runs these actions automatically when an Agent rule matches, or when you trigger them manually from a signal. Both methods depend on Agent enforcement.
 
-For more information about where response fits in the detection pipeline, see [How Workload Protection works][7].
-
 ## Response requirements
 
 Response actions run in the Agent, so both automated and manual response depend on Agent settings and on the right RBAC permissions.
@@ -72,7 +70,7 @@ To check whether automated response applies to a rule that generated a signal:
 
 ### Configure automated response on Agent rules
 
-By default, all out-of-the-box (OOTB) Agent rules, such as crypto mining rules, are active. You must configure the automated response action manually.
+By default, all out-of-the-box (OOTB) Agent rules are active without automated response. You must configure the automated response action manually in order to kill processes.
 
 #### Protection states
 
@@ -103,8 +101,6 @@ Any automated response is listed in the Response table, along with manually subm
 ## Manual response {#response}
 
 Manual response lets you protect your infrastructure from the signal side panel after Workload Protection generates a [signal][6]. Use manual response if you do not want an Agent rule to terminate processes automatically.
-
-<div class="alert alert-info">Manual response and Agent enforcement capabilities depend on your Datadog subscription and organization settings. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> if you are unsure whether the feature is enabled for your account.</div>
 
 {{< img src="security/workload_protection/respond_and_report/response_actions.png" alt="Response section showing isolate container and kill container actions with ISOLATED and KILLED statuses" style="width:100%;" >}}
 
@@ -152,4 +148,3 @@ When a response action runs, the Agent records it in the Response table, along w
 [4]: /security/workload_protection/setup/advanced_configuration
 [5]: /account_management/rbac/permissions
 [6]: /security/workload_protection/investigate_and_triage/security_signals
-[7]: /security/workload_protection/#responding-to-threats

@@ -40,8 +40,6 @@ The following settings can be configured under `runtime_security_config` in the 
 | `DD_RUNTIME_SECURITY_CONFIG_HASH_RESOLVER_HASH_ALGORITHMS` | `runtime_security_config.hash_resolver.hash_algorithms` | []model.HashAlgorithm | ["sha1", "sha256", "ssdeep"] | HashResolverHashAlgorithms defines the hashes that hash resolver needs to compute |
 | `DD_RUNTIME_SECURITY_CONFIG_HASH_RESOLVER_MAX_FILE_SIZE` | `runtime_security_config.hash_resolver.max_file_size` | int64 | 5242880 | HashResolverMaxFileSize defines the maximum size of the files that the hash resolver is allowed to hash |
 | `DD_RUNTIME_SECURITY_CONFIG_HASH_RESOLVER_MAX_HASH_RATE` | `runtime_security_config.hash_resolver.max_hash_rate` | int | 500 | HashResolverMaxHashRate defines the rate at which the hash resolver may compute hashes |
-| `DD_RUNTIME_SECURITY_CONFIG_HASH_RESOLVER_REPLACE` | `runtime_security_config.hash_resolver.replace` | map[string]string | {} | HashResolverReplace is used to apply specific hash to specific file path |
-| `DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_DUMP_POLICIES` | `runtime_security_config.remote_configuration.dump_policies` | bool | false | RemoteConfigurationDumpPolicies defines whether to dump remote config policy |
 | `DD_RUNTIME_SECURITY_CONFIG_USER_SESSIONS_SSH_ENABLED` | `runtime_security_config.user_sessions.ssh.enabled` | bool | true | SSHUserSessionsEnabled defines if SSH user session features should be enabled |
 
 ### `system-probe` advanced settings

@@ -66,7 +66,7 @@ The process tree shows the full ancestry of the event, starting from `systemd` a
 
 ### JSON
 
-The {{< ui >}}JSON{{< /ui >}} tab displays the raw event payload with the complete set of event attributes collected by the Agent. Use JSON when you need the most detailed view of the event data, for example, to write advanced queries in the [Agent Events Explorer][13], or share the full event payload during an investigation.
+The {{< ui >}}JSON{{< /ui >}} tab displays the raw event payload with the complete set of event attributes collected by the Agent. Use JSON when you need the most detailed view of the event data, for example, to write advanced queries in the [Agent Events Explorer][13], or share the full event payload during an investigation. To filter in and out any field, you can click on it from the JSON.
 
 ## Further reading
 

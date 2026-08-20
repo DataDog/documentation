@@ -20,6 +20,8 @@ For what happens to the activity the Agent collects, see [How Workload Protectio
 
 Workload Protection relies on the Datadog Agent to monitor your workloads and collect security relevant events for threats detection and security posture monitoring.
 
+<div class="alert alert-info">Datadog does not recommend running Workload Protection on an organization or sub-organization that does not have Infrastructure Monitoring enabled.</div>
+
 ### Agent options
 
 Workload Protection offers 3 different flavors depending on your environment and operating system:
@@ -48,7 +50,8 @@ On Linux, you need to look at the Linux kernel version and distribution version,
 **Notes:**
 
 - Custom kernel builds might modify critical hook points that the Agent requires to properly function. Support isn't guaranteed.
-- Datadog requires, at minimum, platforms that have underlying Linux kernel versions of 4.14.0+ or have eBPF features backported (for example, Centos/RHEL 7 with kernel 3.10 has eBPF features backported, so it is supported).
+- Workload Protection requires Linux kernel version 4.14.0 or higher.
+- On distributions with a lower kernel version, Workload Protection can run in degraded mode when eBPF features are backported. For example, CentOS/RHEL 7 uses kernel 3.10 with backported eBPF features and is supported.
 - For compatibility issues with a custom Kubernetes network plugin like Cilium or Calico, see [Troubleshooting Workload Protection][2].
 
 #### Supported cloud environments
@@ -60,7 +63,6 @@ On Linux, you need to look at the Linux kernel version and distribution version,
 | Amazon Elastic Container Service (ECS)  | ✅                    |
 | AWS Fargate                             | ✅ (using the cws-instrumentation tracer)                    |
 | Azure Virtual Machines (Azure VMs)      | ✅                    |
-| Azure Kubernetes Service (AKS)          | ✅                    |
 | Google Compute Engine (GCE)             | ✅                    |
 | Google Kubernetes Engine (GKE)          | ✅                    |
 

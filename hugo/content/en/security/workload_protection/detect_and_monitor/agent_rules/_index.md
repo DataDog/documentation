@@ -14,11 +14,14 @@ Workload Protection includes out-of-the-box (OOTB) Agent rules, called default r
 
 You can deploy default rules selectively to environments or workloads, clone them to customize their expressions, refine their filtering logic, or add actions. For deployment options, see [Policy Management][2].
 
-To create an Agent rule and threat detection rule together, use the {{< ui >}}Assisted rule creator{{< /ui >}} or manual flow. See [Create the custom Agent and detection rules together][3] in the [Detection Rules][4] documentation.
+Agent rules can collect contextual telemetry or match high-confidence activity and execute Agent actions. Backend detection rules analyze Agent events and generate security signals.
 
 ## Write custom Agent rules in SECL
 
-Workload Protection Agent rules use a custom expression language called SECL to specify which events to observe, match, and send to Datadog based on runtime context. For more information, see the [SECL guide][5].
+Workload Protection Agent rules use a custom expression language called SecL to specify which events to observe, match, and send to Datadog based on runtime context. For more information, see the [SecL guide][5].
+
+To create an Agent rule and threat detection rule together, use the Assisted rule creator or manual flow. See [Create the custom Agent and detection rules together][3] in the [Detection Rules][4] documentation.
+
 
 ## Deploy Agent rules with policies
 

@@ -22,7 +22,7 @@ In addition to the out-of-the-box (OOTB) [default Agent rules][7], you can write
 4. Click the policy to open it.
 5. In {{< ui >}}New Rule{{< /ui >}}, add custom Agent rules to the policy. To create an Agent rule, see [Create a custom Agent rule][14].
 6. Click {{< ui >}}Edit{{< /ui >}} next to {{< ui >}}Deployed on 0 agents{{< /ui >}}.
-7. Add [tags][18] to the policy to target specific infrastructure.
+7. Add [tags][17] to the policy to target specific infrastructure.
 8. To deploy the policy, toggle the switch next to {{< ui >}}Policy is disabled{{< /ui >}} and confirm. This uses [Remote Configuration](#remote-configuration), as detailed below in that page.
 
 ### Pin a Datadog-managed policy to its current version
@@ -38,7 +38,7 @@ To pin a policy, do the following:
 1. Go to [Policies][3].
 2. Click a Datadog-managed policy.
 3. In {{< ui >}}Version{{< /ui >}}, click the pin option.
-   If your infrastructure is running Agents below version 7.71.0, an outdated agents warning appears. View and upgrade your Agent version in [Fleet Automation][19].
+   If your infrastructure is running Agents below version 7.71.0, an outdated agents warning appears. View and upgrade your Agent version in [Fleet Automation][18].
 4. Click {{< ui >}}Pin{{< /ui >}}. To unpin the policy version, click the pin option again.
 
 ### Conflicting rules
@@ -47,9 +47,7 @@ When two policies deployed to the same host contain the same rule with a differe
 
 ### Apply tags
 
-[Tags][15] are the target location where the policy is applied (environments, clusters, hosts, etc.). Add custom tags to policies to target the policy rules at certain portions of your infrastructure.
-
-Tags identify two things: the Agents using the policy and the infrastructure where those Agents apply the policy. For example, if a policy has the tag `cluster_name:mycluster` the Agents in that cluster use the policy on the hosts in that cluster.
+Tags define where a policy applies, such as environments, clusters, or hosts. Add tags to a policy to limit its rules to part of your infrastructure.
 
 1. Go to [Agent Configuration][6].
 2. Open a policy and click {{< ui >}}Edit{{< /ui >}}.
@@ -59,15 +57,15 @@ When you add tags, Datadog displays how many agents the tags target as well the 
 
 ## Create a custom Agent rule {#create-a-custom-agent-rule}
 
-You can create a custom Agent rule and deploy it as part of a custom policy. Later, when defining a custom [detection rule][21], you reference the custom Agent rule and add expression parameters.
+You can create a custom Agent rule and deploy it as part of a custom policy. Later, when defining a custom [detection rule][19], you reference the custom Agent rule and add expression parameters.
 Custom Agent rules are deployed to the Agent in a custom policy separate from the default policies. The custom policy contains only custom Agent rules.
 
 1. Go to [Agent Configuration][6].
 2. Create a policy or open an existing one.
-3. With the policy open, in {{< ui >}}Actions{{< /ui >}}, select {{< ui >}}Manual rule creator{{< /ui >}} to open the Agent rule editor. The same editor is also available from the [Agent rules][24] page in Datadog. To use the {{< ui >}}Assisted rule creator{{< /ui >}} wizard instead—which walks you through both the Agent rule and the threat detection rule—see [Create the custom Agent and detection rules together][23].
+3. With the policy open, in {{< ui >}}Actions{{< /ui >}}, select {{< ui >}}Manual rule creator{{< /ui >}} to open the Agent rule editor. The same editor is also available from the [Agent rules][21] page in Datadog. To use the {{< ui >}}Assisted rule creator{{< /ui >}} wizard instead—which walks you through both the Agent rule and the threat detection rule—see [Create the custom Agent and detection rules together][20].
 4. Enter a {{< ui >}}Name{{< /ui >}} and {{< ui >}}Description{{< /ui >}} for the rule.
-5. In {{< ui >}}Expression{{< /ui >}}, define the match using [Datadog Security Language (SECL)][16].
-6. (Optional) Add variables or actions that run when the rule matches an event. See [Variables and actions][25].
+5. In {{< ui >}}Expression{{< /ui >}}, define the match using [Datadog Security Language (SECL)][15].
+6. (Optional) Add variables or actions that run when the rule matches an event. See [Variables and actions][22].
 7. Click {{< ui >}}Create Agent Rule{{< /ui >}}. You are returned to the policy.
 
 After you create a custom Agent rule, the change is saved along with other pending rule updates. To apply the change to your environment, deploy the updated custom policy to the Agent.
@@ -84,13 +82,13 @@ You can use **Remote Configuration** in the Datadog UI to automatically deploy t
 
 #### Deployment strategies
 
-To roll out a change to Agent rules or policies with Remote Configuration, you can choose between two strategies: deploy the change instantly to all your hosts, or stagger the deployment in steps using a managed deploy. Monitor deployments from the [Deployments page][26].
+To roll out a change to Agent rules or policies with Remote Configuration, you can choose between two strategies: deploy the change instantly to all your hosts, or stagger the deployment in steps using a managed deploy. Monitor deployments from the [Deployments page][23].
 
 ##### Deploy instantly
 
 Deploy instantly sends the updated policy to all hosts in scope at the same time, without staged validation. This generally takes a few minutes, and is best when you want the change applied everywhere right away.
 
-Select {{< ui >}}Deploy instantly{{< /ui >}}, then click {{< ui >}}Update Policy{{< /ui >}}. Track the progress from the [Deployments page][26].
+Select {{< ui >}}Deploy instantly{{< /ui >}}, then click {{< ui >}}Update Policy{{< /ui >}}. Track the progress from the [Deployments page][23].
 
 ##### Managed deployment
 
@@ -101,7 +99,7 @@ A managed deployment rolls out your change in stages so you can validate it on a
 3. Under {{< ui >}}Set up monitoring and delay time{{< /ui >}}, select one or more monitors to check during the deployment. If a monitor alerts while the deployment is in progress, the rollout pauses. Then set the delay time to wait before continuing to the next stage.
 4. Under {{< ui >}}Set deployment window{{< /ui >}}, set the days, times, and timezone when the deployment can run. If the deployment runs past a window, it pauses and resumes in the next one.
 5. (Optional) Under {{< ui >}}Add a description{{< /ui >}}, add a description for the deployment.
-6. Click {{< ui >}}Update Policy{{< /ui >}} to start the rollout. Track the progress from the [Deployments page][26].
+6. Click {{< ui >}}Update Policy{{< /ui >}} to start the rollout. Track the progress from the [Deployments page][23].
 
 ### Manual deployment
 
@@ -164,7 +162,7 @@ To apply the changes, do **one** of the following:
 3. Set the status to {{< ui >}}Inactive{{< /ui >}}.
 4. Click {{< ui >}}Save Changes{{< /ui >}}.
 
-Deleting a rule from [Rules configuration][24] removes it from **all policies** that included that rule.
+Deleting a rule from [Rules configuration][21] removes it from **all policies** that included that rule.
 
 ## RBAC for custom rule management
 
@@ -180,20 +178,18 @@ Here are some important [role and permissions][11] to use for custom rules RBAC:
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [7]: /security/workload_protection/detect_and_monitor/agent_rules/#ootb-rules
 [8]: /security/workload_protection/
-[20]: /security/default_rules/#cat-workload-security
 [9]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
 [11]: /account_management/rbac/permissions/
 [12]: /security/workload_protection/respond_and_report/#automated-response
 [13]: #disable-default-agent-rules
 [14]: #create-a-custom-agent-rule
-[15]: https://app.datadoghq.com/cost/settings/tags
-[16]: /security/workload_protection/detect_and_monitor/agent_rules/secl_guide/
-[17]: #prioritize-policies
-[18]: #apply-tags
-[19]: https://app.datadoghq.com/fleet
-[21]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules
-[23]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules/#create-the-custom-agent-and-detection-rules-together
-[24]: https://app.datadoghq.com/security/workload-protection/agent-rules
-[25]: /security/workload_protection/detect_and_monitor/agent_rules/variables_and_actions
-[26]: https://app.datadoghq.com/security/workload-protection/deployments
+[15]: /security/workload_protection/detect_and_monitor/agent_rules/secl_guide/
+[16]: #prioritize-policies
+[17]: #apply-tags
+[18]: https://app.datadoghq.com/fleet
+[19]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules
+[20]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules/#create-the-custom-agent-and-detection-rules-together
+[21]: https://app.datadoghq.com/security/workload-protection/agent-rules
+[22]: /security/workload_protection/detect_and_monitor/agent_rules/variables_and_actions
+[23]: https://app.datadoghq.com/security/workload-protection/deployments

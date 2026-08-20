@@ -11,14 +11,14 @@ Actions are defined in Agent policy files (`.policy`) under the `actions` field 
 When you create an Agent rule in Datadog, you can configure <code>hash</code>, <code>kill</code> (<a href="/security/workload_protection/respond_and_report/#automated-response">automated response</a>), and <code>set</code> actions. From a security signal, you can manually apply <code>kill</code> or <code>network_filter</code> to a targeted threat with <a href="/security/workload_protection/respond_and_report/#response">manual response</a>.
 </div>
 
-| Action           | Purpose                                          | Platform       | Requires enforcement |
-| ---------------- | ------------------------------------------------ | -------------- | -------------------- |
-| `set`            | Store state in a variable for use by other rules | Linux, Windows | No                   |
-| `kill`           | Terminate a process                              | Linux, Windows | Yes                  |
-| `hash`           | Compute hashes of a file                         | Linux          | No                   |
-| `log`            | Write a message to the Agent log                 | Linux, Windows | No                   |
-| `coredump`       | Capture forensic state (process, mount, dentry)  | Linux          | No                   |
-| `network_filter` | Drop network traffic matching a BPF filter       | Linux          | Yes                  |
+| Action           | Purpose                                               | Platform       | Requires enforcement |
+| ---------------- | ----------------------------------------------------- | -------------- | -------------------- |
+| `set`            | Store state in a variable for use by other rules      | Linux, Windows | No                   |
+| `kill`           | Terminate a process                                   | Linux, Windows | Yes                  |
+| `hash`           | Compute hashes of a file                              | Linux          | No                   |
+| `log`            | Write a message to the Agent log                      | Linux, Windows | No                   |
+| `coredump`       | Capture forensic state (process, mount, dentry)       | Linux          | No                   |
+| `network_filter` | Monitor or drop network traffic matching a BPF filter | Linux          | Yes                  |
 
 
 ## Syntax
@@ -126,6 +126,43 @@ rules:
 
 {{< /code-block >}}
 
+Create a correlation rule:
+
+Use `private` to keep internal state out of security events, and `scope_field` to bind a variable to a process other than the one that triggered the event (for example, the target of a `cgroup_write` event):
+
+{{< code-block lang="yaml" >}}
+rules:
+  - id: init_correlation_key
+    expression: cgroup_write.file.path != "" && ${process.correlation_key} == ""
+    actions:
+      - set:
+          name: correlation_key
+          default_value: ""
+          expression: '"attack_${builtins.uuid4}"'
+          scope: process
+          scope_field: cgroup_write.pid
+          inherited: true
+          private: true
+  - id: detect_correlated_file_access
+    expression: open.file.path == "/etc/shadow" && ${process.correlation_key} != ""
+{{< /code-block >}}
+
+Compute a value from an expression:
+Use `expression` with `default_value` to define the variable type and store a computed result.
+
+{{< code-block lang="yaml" >}}
+rules:
+  - id: record_exec_context
+    expression: exec.file.path in ["/tmp/evil"]
+    actions:
+      - set:
+          name: exec_context
+          default_value: ""
+          expression: '"cmd_${process.pid}_${exec.file.name}"'
+          scope: process
+          ttl: 5m
+{{< /code-block >}}
+
 ## `kill`: terminate a process
 
 Use `kill` to actively stop malicious activity. The Agent sends a POSIX signal to the target process, container, or cgroup.
@@ -146,7 +183,7 @@ Both approaches require [Agent enforcement][3], which is enabled by default. See
 
 ### Requirements
 
-- Enforcement must be enabled in the Agent configuration (`runtime_security.enforcement.enabled`). See [Advanced configuration][5].
+- Enforcement must be enabled in the Agent configuration (`runtime_security_config.enforcement.enabled`). See [Advanced configuration][5].
 - Kill actions are rejected at policy load time if enforcement is globally disabled.
 - Supported signals include `SIGKILL`, `SIGTERM`, `SIGHUP`, `SIGINT`, and other standard POSIX signal names.
 
@@ -165,16 +202,15 @@ Both approaches require [Agent enforcement][3], which is enabled by default. See
 
 The Agent includes disarmers to prevent runaway kill loops during automated response. If too many kill actions fire against the same container or executable within a configured period, subsequent kills for that target are suppressed until the period expires.
 
-Certain binaries can also be excluded from enforcement through `runtime_security.enforcement.exclude_binaries`.
+Certain binaries can also be excluded from enforcement through `runtime_security_config.enforcement.exclude_binaries`.
 
 ### Example
 
 {{< code-block lang="yaml" >}}
 rules:
-  - id: block_reverse_shell
+  - id: block_ping_process
     expression: >-
-      exec.file.name in ["nc", "ncat", "bash"] &&
-      process.ancestors.file.name not in ["sshd"]
+      exec.file.name == "ping"
     actions:
       - kill:
           signal: SIGKILL
@@ -199,9 +235,9 @@ When a `kill` action runs, the Agent attaches an action report to the triggering
 | `exited_at` | Time the target process exited (when applicable) |
 | `ttr` | Elapsed time from process creation to exit |
 
-To count how many times a `kill` action ran after a rule match, use the `datadog.runtime_security.rules.action_performed` metric with tags `rule_id:<rule_id>` and `action_name:kill`.
+To count how many times a `kill` action ran after a rule match, use the `datadog.runtime_security_config.rules.action_performed` metric with tags `rule_id:<rule_id>` and `action_name:kill`.
 
-## `network_filter`: block network traffic
+## `network_filter`: monitor or block network traffic
 
 Use `network_filter` to drop packets matching a BPF filter expression for the offending process or cgroup. This is network isolation at the host level.
 
@@ -264,7 +300,7 @@ When the kernel drops a packet that matches an active filter, the Agent can emit
 
 #### Metrics
 
-To track drop counts reliably, use the `datadog.runtime_security.network.raw_packet.dropped` metric.
+To track drop counts reliably, use the `datadog.runtime_security_config.network.raw_packet.dropped` metric.
 
 ## `hash`: compute file hashes
 
@@ -337,8 +373,8 @@ Use `coredump` to snapshot internal Agent state at the time of a rule match. The
 
 ### When to use it
 
-- Deep forensic investigation of an attack in progress.
-- Capture process tree, mount table, or dentry cache state alongside the triggering event.
+- Mostly used for debug purposes.
+- Capture internal context caches such as process tree, mount table, or dentry cache state alongside the triggering event.
 
 ### Platform
 

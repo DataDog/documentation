@@ -16,9 +16,9 @@ Use the following instructions to enable Workload Protection.
 - Access to AWS Management Console
 - AWS Fargate ECS or EKS workloads
 
-<div class="alert alert-info">For additional performance and reliability insights, Datadog recommends enabling Infrastructure Monitoring.</div>
-
 ## Images
+
+On AWS Fargate, Workload Protection cannot use eBPF because Fargate does not provide access to the host kernel. The Datadog Agent alone cannot trace your application containers in this environment. In addition to the Agent, we use the `cws-instrumentation` image to instrument your workload with ptrace and collect runtime security events.
 
 - `cws-instrumentation-init`: `public.ecr.aws/datadog/cws-instrumentation:latest`
 - `datadog-agent`: `public.ecr.aws/datadog/agent:latest`
@@ -30,10 +30,10 @@ Use the following instructions to enable Workload Protection.
 
 ### AWS Console
 
-1. Sign in to [AWS Management Console][6].
+1. Sign in to [AWS Management Console][11].
 2. Navigate to the ECS section.
 3. On the left menu, select **Task Definitions**, and then select **Create new Task Definition with JSON**. Alternatively, choose an existing Fargate task definition.
-4. To create a task definition, use the JSON definition, or the [AWS CLI method](#aws-cli).
+4. To create a task definition, use the [Datadog ECS task patcher][12] to patch an existing task definition automatically. Alternatively, manually author the JSON definition or use the [AWS CLI method](#aws-cli).
 5. Click **Create** to create the task definition.
 
 ### AWS CLI
@@ -178,7 +178,8 @@ Use the following instructions to enable Workload Protection.
 aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-agent-ecs-fargate.json
 {{< /code-block >}}
 
-### Datadog Cloud Security
+### Enable Vulnerability Management
+
 1. In Datadog, navigate to [Cloud Security > Setup > Cloud Integrations > AWS][9].
 2. Enable Vulnerability Management by deploying the [Datadog Agentless scanner][10] on your AWS accounts hosting your Amazon ECR.
 
@@ -187,6 +188,8 @@ aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/security/configuration/csm/setup?active_steps=cloud-accounts&active_sub_step=aws&vuln_container_enabled=true&vuln_host_enabled=true&vuln_lambda_enabled=true
 [10]: /security/cloud_security_management/setup/agentless_scanning/enable/?tab=existingawsaccount#set-up-aws-cloudformation
+[11]: https://aws.amazon.com/console
+[12]: https://github.com/DataDog/datadog-agent-ecs-task-patcher
 
 
 {{% /tab %}}
@@ -276,15 +279,18 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Verify that the Agent is sending events to Cloud Security
+## Verify that the Agent is sending events to Workload Protection
 
-When you enable Cloud Security on AWS Fargate ECS or EKS, the Agent sends an agent event to Datadog to confirm that the default ruleset has been successfully deployed. To view the agent event, navigate to the [Agent Events][11] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
+### Check the ruleset_loaded event
 
-<div class="alert alert-info">You can also verify the Agent is sending events to Cloud Security by manually triggering an AWS Fargate security signal.</div>
+When you enable Cloud Security on AWS Fargate ECS or EKS, the Agent sends an agent event to Datadog to confirm that the default ruleset has been successfully deployed. To view the agent event, navigate to the [Agent Events][11] page in Datadog and search for `@agent.rule_id:ruleset_loaded`. At the right of the query, select {{< ui >}}All events{{< /ui >}} instead of {{< ui >}}Security events{{< /ui >}}; otherwise, `ruleset_loaded` events are filtered out.
+
+### Trigger a security signal
+You can also verify the Agent is sending events to Cloud Security by manually triggering an AWS Fargate security signal.
 
 In the task definition, replace the "workload" container with the following:
 
-{{< code-block lang="yaml" collapsible="true" >}}
+{{< code-block lang="json" collapsible="true" >}}
             "name": "cws-signal-test",
             "image": "ubuntu:latest",
             "entryPoint": [
