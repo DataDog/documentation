@@ -1,8 +1,8 @@
-### Automated error reporting
+## Automated error reporting
 
 After you enable RUM, the Roku SDK automatically captures crashes and reports them the next time your channel launches.
 
-### Manual error reporting
+## Manual error reporting
 
 To report an error whenever an operation might throw an exception, forward it to Datadog:
 

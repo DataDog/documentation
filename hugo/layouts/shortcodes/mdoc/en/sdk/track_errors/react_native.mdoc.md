@@ -1,4 +1,4 @@
-### Automated error reporting
+## Automated error reporting
 
 To report JavaScript crashes and errors, set `trackErrors` to `true` in your RUM configuration. To also report crashes that originate from native iOS or Android code, set `nativeCrashReportEnabled` to `true`:
 
@@ -20,7 +20,7 @@ const config = new DatadogProviderConfiguration(
 );
 ```
 
-### Get deobfuscated stack traces
+## Get deobfuscated stack traces
 
 Upload your source maps and symbol files so Datadog can deobfuscate your crash reports. See [React Native Crash Reporting and Error Tracking][1] for the full setup, including Metro configuration and build-phase scripts for iOS and Android.
 

@@ -1,4 +1,4 @@
-### Automated error reporting
+## Automated error reporting
 
 To report crashes (such as `SIGSEGV`/`SIGABRT` on Linux/macOS, or structured exceptions on Windows), register the `CrashReporting` feature before starting the core:
 
@@ -37,7 +37,7 @@ dd_core_start(core);
 
 By default, crashes are captured in-process. See [C++ Crash Reporting and Error Tracking][1] for the available crash reporting modes and their trade-offs.
 
-### Get symbolicated crash reports
+## Get symbolicated crash reports
 
 Upload your debug symbols to Datadog so stack traces can be symbolicated. See [Symbolication][2] in the C++ Crash Reporting and Error Tracking guide for the full setup.
 
