@@ -848,6 +848,10 @@ To trace an agent execution, use the function decorator `ddtrace.llmobs.decorato
 : optional - _string_
 <br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
 
+`version`
+: optional - _string_
+<br/>Identifies the version of the agent. Recorded as the `agent_version` tag on the agent span only, not on its child spans.
+
 `session_id`
 : optional - _string_
 <br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
@@ -862,10 +866,19 @@ To trace an agent execution, use the function decorator `ddtrace.llmobs.decorato
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import agent
 
-@agent
+@agent(version="v3")
 def react_agent():
     ... # user application logic
     return
+{{< /code-block >}}
+
+Or use a context manager to trace an agent execution inline:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+with LLMObs.agent(name="weather-agent", version="v3"):
+    ... # user application logic
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -1380,6 +1393,10 @@ The `LLMObs.annotate()` method accepts the following arguments:
 `tool_definitions`
 : optional - _list of dictionaries_
 <br />List of tool definition dictionaries for function calling scenarios. Each tool definition should have a required `"name": "..."` key and optional `"description": "..."` and `"schema": {...}` keys.
+
+`agent`
+: optional - _dictionary_
+<br />A dictionary with the format `{"version": "..."}` that sets the version of an agent span. You can also import the `Agent` typed dictionary from `ddtrace.llmobs` and pass it in as the `agent` argument. This applies only when annotating an agent span, where the version is recorded as the `agent_version` tag.
 
 `metadata`
 : optional - _dictionary_
@@ -1907,6 +1924,10 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 : optional - _dictionary_
 <br />A dictionary that represents the prompt used for an LLM call. See the [Prompt object](#prompt-tracking-arguments) documentation for the complete schema and supported keys. You can also import the `Prompt` object from `ddtrace.llmobs.utils` and pass it in as the `prompt` argument. **Note**: This argument only applies to LLM spans.
 
+`agent`
+: optional - _dictionary_
+<br />A dictionary with the format `{"version": "..."}` that sets the agent version. You can also import the `Agent` typed dictionary from `ddtrace.llmobs` and pass it in as the `agent` argument. **Note**: This argument only applies to agent spans, where the version is recorded as the `agent_version` tag.
+
 `tags`
 : optional - _dictionary_
 <br />A dictionary of JSON serializable key-value pairs that users can add as tags on the span. Example keys: `session`, `env`, `system`, and `version`. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
@@ -1945,6 +1966,15 @@ def rag_workflow(user_question):
         completion = openai_client.chat.completions.create(...)
     return completion.choices[0].message.content
 
+{{< /code-block >}}
+
+To set the version on auto-instrumented agent spans, pass the `agent` argument. Only agent spans started within the context are tagged with the version. Other span kinds are unaffected.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+with LLMObs.annotation_context(agent={"version": "v3"}):
+    result = agent_executor.invoke("What's the weather?")  # auto-instrumented framework call
 {{< /code-block >}}
 
 {{% /tab %}}
