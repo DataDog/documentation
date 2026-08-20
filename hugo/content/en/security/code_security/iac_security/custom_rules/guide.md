@@ -1,30 +1,29 @@
 ---
-title: Custom IaC Rule Reference
+title: IaC Custom Rule Reference
 description: Reference the Rego contract, parsed inputs, shared libraries, finding fields, and testing practices for custom IaC rules.
-further_reading:
-  - link: "/security/code_security/iac_security/custom_rules/"
-    tag: "Documentation"
-    text: "Custom IaC rules"
-  - link: "/security/code_security/iac_security/custom_rules/tutorial/"
-    tag: "Documentation"
-    text: "Create your first custom IaC rule"
-  - link: "https://www.openpolicyagent.org/docs/policy-language"
-    tag: "External Site"
-    text: "Learn the Rego policy language"
 ---
 
-This reference builds on [Create Your First Custom IaC Rule][1] and describes the rule contract, parsed inputs, and platform-specific patterns.
+{{% site-region region="gov,gov2" %}}
+<div class="alert alert-danger">This product is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{% /site-region %}}
+
+This reference for IaC custom rules describes the rule contract, parsed inputs, and platform-specific patterns.
+
+For guidance on creating custom rules and an example of creating a rule from scratch, see [IaC Custom Rules][2].
 
 ## Rule contract
 
-Datadog evaluates custom rules as Rego v1. Every custom rule must:
+Datadog evaluates custom rules as [Rego][1] v1. Every custom rule must:
 
-1. Declare `package datadog`.
-2. Define at least one partial set rule named `DatadogPolicy`.
-3. Add one `result` object to `DatadogPolicy` for each violation.
-4. Set every [required result field](#result-fields).
+- Declare `package datadog`.
+- Define at least one partial set rule named `DatadogPolicy`.
 
-The following Terraform rule satisfies the contract:
+   You can define multiple `DatadogPolicy` rules in the same policy. Each successful evaluation produces a separate finding.
+
+- Add one `result` object to `DatadogPolicy` for each violation.
+- Set every [required result field](#result-fields).
+
+This Terraform rule satisfies the contract:
 
 ```rego
 package datadog
@@ -44,20 +43,6 @@ DatadogPolicy contains result if {
 	}
 }
 ```
-
-You can define multiple `DatadogPolicy` rules in the same policy. Each successful evaluation produces a separate finding.
-
-## Validation
-
-The editor checks more than Rego syntax. Before evaluating a sample, Datadog verifies that the policy:
-
-- Uses `package datadog` and defines `DatadogPolicy`.
-- Sets every required result field.
-- Uses the correct number of arguments in `sprintf` calls.
-- Compiles with the common and selected-platform libraries.
-- Does not call restricted built-ins such as `http.send` or `opa.runtime`.
-
-Fix all reported errors before interpreting an evaluation with no findings. Validation errors mean the policy did not run successfully.
 
 ## Parsed input
 
@@ -112,16 +97,31 @@ Use `removal` to delete the content identified by the finding location. Set `rem
 
 If a rule cannot provide a reliable automated edit, omit both remediation fields and explain the manual fix in the rule description.
 
+### Finding locations
+
+`searchKey` is a scanner-specific source locator, not a Rego path. Its format depends on the platform.
+
+On several platforms, default rules wrap inserted values in double braces inside the format string, for example <code>sprintf("run=&#123;&#123;%s&#125;&#125;", [run])</code>. That produces locators such as `run={{checkout}}`. The platform input patterns include equivalent `concat` or nested `sprintf` constructions you can paste into the editor.
+
+Use the most precise stable location available:
+
+- Point to the exact insecure attribute when it exists.
+- For a missing attribute, point to the containing resource or properties block.
+- Include identifying values with `={{...}}` when a file can contain repeated keys.
+- Include workload, task, stage, job, or container identity when reporting a nested object.
+
+Imprecise locators such as `"tasks"` or `"metadata.name"` can highlight the wrong line when a file contains multiple resources or containers. Use the editor's marker to verify the location against a representative sample.
+
 ## Shared libraries
 
-Custom rules can import Datadog's common and platform libraries:
+Custom rules can import common and platform Datadog libraries:
 
 ```rego
 import data.generic.common as common_lib
 import data.generic.terraform as tf_lib
 ```
 
-The following platform packages are available:
+These platform packages are available:
 
 - `data.generic.ansible`
 - `data.generic.cicd`
@@ -268,28 +268,13 @@ Terraform `searchKey` values usually start with the resource type and label:
 
 Provider versions may move configuration into separate resources. Use an equivalent default rule as a starting point when the check must cover multiple provider versions, modules, related resources, or Terraform plan JSON. A rule that checks only an explicit attribute value, such as `Suspended` versioning status, does not detect missing resources.
 
-## Set the finding location
-
-`searchKey` is a scanner-specific source locator, not a Rego path. Its format depends on the platform.
-
-On several platforms, default rules wrap inserted values in double braces inside the format string, for example <code>sprintf("run=&#123;&#123;%s&#125;&#125;", [run])</code>. That produces locators such as `run={{checkout}}`. The platform examples above show equivalent `concat` or nested `sprintf` constructions you can paste into the editor.
-
-Use the most precise stable location available:
-
-- Point to the exact insecure attribute when it exists.
-- For a missing attribute, point to the containing resource or properties block.
-- Include identifying values with `={{...}}` when a file can contain repeated keys.
-- Include workload, task, stage, job, or container identity when reporting a nested object.
-
-Imprecise locators such as `"tasks"` or `"metadata.name"` can highlight the wrong line when a file contains multiple resources or containers. Use the editor's marker to verify the location against a representative sample.
-
-## Correlate resources carefully
+## Resource correlation
 
 Some checks compare multiple resources, modules, jobs, or workloads. Avoid unconstrained joins across all of `input.document`, because they can associate unrelated resources and produce duplicate findings.
 
 Preserve document, namespace, workflow, build-stage, and resource-reference constraints when adapting an existing rule.
 
-## Test the rule
+## Test coverage
 
 Test at least the following:
 
@@ -300,8 +285,15 @@ Test at least the following:
 - Alternate syntax supported by the platform, such as Ansible module aliases or GitHub Actions trigger forms.
 - Related resources in separate scopes when the rule performs correlation.
 
-## Further reading
+## Validation
 
-{{< partial name="whats-next/whats-next.html" >}}
+The editor checks more than Rego syntax. Before evaluating a sample, Datadog verifies that the policy meets the requirements in the [Rule contract](#rule-contract) section, and additionally that it:
 
-[1]: /security/code_security/iac_security/custom_rules/tutorial/
+- Uses the correct number of arguments in `sprintf` calls.
+- Compiles with the common and selected-platform libraries.
+- Does not call restricted built-ins such as `http.send` or `opa.runtime`.
+
+Fix all reported errors before interpreting an evaluation with no findings. Validation errors mean the policy didn't run successfully.
+
+[1]: https://www.openpolicyagent.org/docs/policy-language
+[2]: /security/code_security/iac_security/custom_rules/
