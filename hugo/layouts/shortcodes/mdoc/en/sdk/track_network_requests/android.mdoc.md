@@ -1,4 +1,4 @@
-### Automated resource collection
+## Automated resource collection
 
 To automatically track network requests as RUM resources, add the [EventListener][1] factory to your `OkHttpClient`:
 
@@ -23,7 +23,7 @@ val cronetEngine = CronetEngine.Builder(context)
     .build()
 ```
 
-### Manual resource collection
+## Manual resource collection
 
 To track a custom resource such as a third-party provider API, start and stop it around the load:
 

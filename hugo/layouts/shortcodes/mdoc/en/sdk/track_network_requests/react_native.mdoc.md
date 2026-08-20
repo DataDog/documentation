@@ -1,4 +1,4 @@
-### Automated resource collection
+## Automated resource collection
 
 To automatically track network requests as RUM resources, set `trackResources` to `true` in your RUM configuration:
 
@@ -14,7 +14,7 @@ rumConfiguration: {
 
 This automatically tracks [XMLHttpRequest][1] and Fetch requests as resources. Use `firstPartyHosts` to enable distributed tracing for requests made to those hosts.
 
-### Manual resource collection
+## Manual resource collection
 
 To track a custom resource around its load, start and stop it:
 

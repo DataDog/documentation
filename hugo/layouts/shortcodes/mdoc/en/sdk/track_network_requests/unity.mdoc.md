@@ -1,4 +1,4 @@
-### Automated resource collection
+## Automated resource collection
 
 Use `DatadogTrackedWebRequest` as a drop-in replacement for `UnityWebRequest` to automatically track HTTP calls as resources:
 
@@ -7,7 +7,7 @@ var request = DatadogTrackedWebRequest.Get("https://api.example.com/users");
 yield return request.SendWebRequest();
 ```
 
-### Manual resource collection
+## Manual resource collection
 
 To track a custom resource such as a third-party provider API, start and stop it around the load:
 

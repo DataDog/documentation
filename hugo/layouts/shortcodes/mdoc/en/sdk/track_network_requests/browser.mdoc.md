@@ -1,4 +1,4 @@
-### Automated resource collection
+## Automated resource collection
 
 After you enable RUM, the Browser SDK automatically collects [XMLHttpRequest][1] and Fetch requests. It also collects images, CSS files, JavaScript assets, and font files loaded by the page.
 

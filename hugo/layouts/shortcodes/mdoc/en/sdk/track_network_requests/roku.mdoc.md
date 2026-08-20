@@ -1,4 +1,4 @@
-### Automated resource collection
+## Automated resource collection
 
 For synchronous requests made with a `roUrlTransfer` node, use Datadog's `datadogroku_DdUrlTransfer` wrapper to track the resource automatically. This wrapper supports most features of the `roUrlTransfer` component, but doesn't support asynchronous network calls.
 
@@ -10,7 +10,7 @@ ddUrlTransfer.EnableHostVerification(false)
 result = ddUrlTransfer.GetToString()
 ```
 
-### Manual resource collection
+## Manual resource collection
 
 Asynchronous `roUrlTransfer` requests aren't automatically instrumented. Track the resource manually by forwarding the `roUrlEvent` to `addResource`:
 

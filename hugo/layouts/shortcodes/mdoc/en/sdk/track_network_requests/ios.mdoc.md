@@ -1,4 +1,4 @@
-### Automated resource collection
+## Automated resource collection
 
 To automatically track network requests as RUM resources, enable `URLSessionInstrumentation` for the first-party hosts you want to trace:
 
@@ -13,7 +13,7 @@ URLSessionInstrumentation.enable(
 
 To also collect a detailed network-timing breakdown for each resource, call `URLSessionInstrumentation.enableDurationBreakdown()` as well.
 
-### Manual resource collection
+## Manual resource collection
 
 To track a custom resource such as a request made outside `URLSession`, start and stop it around the load:
 
