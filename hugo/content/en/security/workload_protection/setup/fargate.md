@@ -283,10 +283,10 @@ spec:
 
 ### Check the ruleset_loaded event
 
-When you enable Cloud Security on AWS Fargate ECS or EKS, the Agent sends an agent event to Datadog to confirm that the default ruleset has been successfully deployed. To view the agent event, navigate to the [Agent Events][11] page in Datadog and search for `@agent.rule_id:ruleset_loaded`. At the right of the query, select {{< ui >}}All events{{< /ui >}} instead of {{< ui >}}Security events{{< /ui >}}; otherwise, `ruleset_loaded` events are filtered out.
+When you enable Workload Protection on AWS Fargate ECS or EKS, the Agent sends an agent event to Datadog to confirm that the default ruleset has been successfully deployed. To view the agent event, navigate to the [Agent Events][11] page in Datadog and search for `@agent.rule_id:ruleset_loaded`. At the right of the query, select {{< ui >}}All events{{< /ui >}} instead of {{< ui >}}Security events{{< /ui >}}; otherwise, `ruleset_loaded` events are filtered out.
 
 ### Trigger a security signal
-You can also verify the Agent is sending events to Cloud Security by manually triggering an AWS Fargate security signal.
+You can also verify the Agent is sending events to Workload Protection by manually triggering an AWS Fargate security signal.
 
 In the task definition, replace the "workload" container with the following:
 
