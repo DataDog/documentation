@@ -148,6 +148,10 @@ For [component metrics][10] and [processor buffer metrics][11] emitted by all pr
 : **Description**: The number of metrics generated from log events by the processor.
 : **Metric type**: count
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /metrics/custom_metrics/
 [2]: /account_management/billing/custom_metrics/
 [3]: /metrics/types/
