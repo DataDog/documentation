@@ -298,9 +298,12 @@ Cancel the collection job when the observing component stops. For example, colle
 
 The `Flags.enable()` API accepts optional configuration with the options listed below. These settings apply globally to all providers:
 
+By default, each assignment request attempt has a one-second timeout, and the SDK retries transient failures once. Transient failures include network errors, timeouts, HTTP 408, HTTP 429, and HTTP 5xx responses.
+
 {{< code-block lang="kotlin" >}}
 val config = FlagsConfiguration.Builder()
-    // configure options here
+    .assignmentRequestTimeout(2_000)
+    .assignmentRequestRetryCount(2)
     .build()
 
 Flags.enable(config)
@@ -322,6 +325,12 @@ Flags.enable(config)
   * **Debug builds** with `gracefulModeEnabled = false`: The SDK raises `IllegalStateException` for incorrect API usage, enforcing a fail-fast approach that helps detect configuration mistakes early.
 
   You can adjust `gracefulModeEnabled()` depending on your development or QA phase.
+
+`assignmentRequestTimeout()`
+: Sets the timeout for each assignment request attempt, in milliseconds. The default is `1000`. Values less than or equal to `0` use the default.
+
+`assignmentRequestRetryCount()`
+: Sets the number of retries after the first attempt. The default is `1`. Set this option to `0` to disable retries. Negative values are treated as `0`.
 
 ### Per-provider configuration
 
