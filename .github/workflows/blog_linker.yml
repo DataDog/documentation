@@ -154,7 +154,8 @@ jobs:
             --head "$branch" \
             --title "Add blog links to further_reading (week of ${date_stamp})" \
             --body-file pr_body.md \
-            --label "WORK IN PROGRESS"
+            --label "WORK IN PROGRESS" \
+            --reviewer jeff-morgan-dd
 
       - name: Upload summary
         if: always()
