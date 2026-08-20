@@ -7,6 +7,12 @@ further_reading:
 - link: "/observability_pipelines/configuration/set_up_pipelines/"
   tag: "Documentation"
   text: "Set up pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-google-secops/"
+  tag: "Blog"
+  text: "Normalize security logs to Google SecOps UDM with Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/mitre-attack-enrichment-packs-observability-pipelines/"
+  tag: "Blog"
+  text: "Automatically enrich security logs with MITRE ATT&CK context before they reach your SIEM"
 products:
 - name: Logs
   icon: logs
@@ -14,6 +20,9 @@ products:
 - name: Metrics
   icon: metrics
   url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
+- name: Traces
+  icon: apm
+  url: /observability_pipelines/configuration/?tab=traces#pipeline-types
 ---
 
 {{< product-availability >}}

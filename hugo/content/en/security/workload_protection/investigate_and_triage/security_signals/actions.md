@@ -70,7 +70,7 @@ Network isolation requires enforcement to be enabled on the Agent, along with th
 [1]: /security/detection_rules/
 [2]: https://app.datadoghq.com/security/signals
 [3]: https://app.datadoghq.com/security/workload-protection/signals
-[4]: /incident_response/case_management/
+[4]: /incident_response/work_management/
 [5]: /incident_response/incident_management/
 [6]: /security/cloud_security_management/workflows
 [7]: /service_management/workflows

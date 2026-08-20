@@ -20,7 +20,7 @@ further_reading:
 
 {{< img src="observability_pipelines/setup/pipeline_ui.png" alt="The pipelines page with a source going to two processors groups and two destinations" style="width:100%;" >}}
 
-Observability Pipelines lets you collect and process logs and metrics within your own infrastructure, and then route them to different destinations. A pipeline consists of three core components:
+Observability Pipelines lets you collect and process {{< tooltip text="logs, metrics, and traces" tooltip="Contact your account manager to discuss use cases and pricing." >}} within your own infrastructure, and then route them to different destinations. A pipeline consists of three core components:
 
 - [Source][1]: Receives data from a tool like the Datadog Agent.
 - [Processors][2]: Transform, enrich, or filter data.
@@ -119,6 +119,17 @@ See [Metric Types][3] for more information.
 [2]: /observability_pipelines/configuration/set_up_pipelines/
 [3]: /metrics/types/?tab=gauge#metric-types
 [4]: https://opentelemetry.io/docs/specs/otel/metrics/data-model/#temporality
+
+{{% /tab %}}
+
+{{% tab "Traces" %}}
+
+You can ingest, process, and send {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} to different destinations using the [Trace Sampling][1] template.
+
+See [Set Up Pipelines][2] for more information on setting up a source, processors, and destinations.
+
+[1]: /observability_pipelines/configuration/explore_templates/?tab=traces#trace-sampling
+[2]: /observability_pipelines/configuration/set_up_pipelines/
 
 {{% /tab %}}
 {{< /tabs >}}

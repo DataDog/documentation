@@ -16,7 +16,7 @@ Live call routing is provisioned by Datadog. To enable it for your organization,
 
 ## Overview
 
-Live call routing connects phone calls to your On-Call Team. When someone calls your dedicated number, the system handles the call according to your configuration. 
+Live call routing connects phone calls to your On-Call Team. When someone calls your dedicated number, the system handles the call according to your configuration.
 
 Datadog On-Call supports two routing types:
 
@@ -37,7 +37,7 @@ Each live call route includes:
 
 ### Keypad options
 
-Keypad options offer callers a menu when they dial your routing number. 
+Keypad options offer callers a menu when they dial your routing number.
 
 You can configure up to nine options per route. Each option maps a key (1-9) to an On-Call Team and triggers that team's paging process. To improve usability:
 - Use option 1 for the most critical team or escalation path.
@@ -46,13 +46,13 @@ You can configure up to nine options per route. Each option maps a key (1-9) to 
 
 ## Routing types
 
-Datadog On-Call supports two routing types: direct call routing and voicemail routing. 
+Datadog On-Call supports two routing types: direct call routing and voicemail routing.
 
 ### Direct call routing
 
 In direct call routing, the system follows the On-Call Team's escalation policy to connect the caller to the first available responder.
 
-Responders must have valid phone numbers in their profiles; On-Call skips any responders that don't.
+Responders must have valid phone numbers supporting voice notifications in their profiles; On-Call skips any responders that don't.
 
 Responders then have the following options:
 - Press `1` to acknowledge the call.
@@ -79,7 +79,7 @@ For direct call routing, escalation proceeds as follows:
   - Check that responders' phone numbers are valid, reachable, and configured with appropriate voicemail settings.
   - Verify that calls successfully connect to available responders.
 
-### Voicemail routing 
+### Voicemail routing
 
 In voicemail routing, callers are prompted to leave a voicemail message.
 
@@ -112,8 +112,7 @@ If a keypad option is not routing calls correctly:
 If calls are not reaching a responder or no Page is created:
 - Confirm that the On-Call Team has an active escalation policy with at least one escalation level defined.
 - Verify that all responders in the escalation policy have a valid phone number in their profile. On-Call skips responders without a phone number.
-- Check that each responder's phone number is reachable and not blocked or forwarded to an unavailable destination.
-- Confirm that each team member has notification preferences configured to receive Pages.
+- Check that each responder's phone number supports voice notifications and is reachable and not blocked or forwarded to an unavailable destination.
 
 ### Voicemail routing: voicemail not converting to a Page
 
