@@ -72,16 +72,16 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 **Requirements**:
 - Datadog Agent **7.79.0 or later**
 - Linux only (eBPF dependency). See [Workload Protection setup][7] for supported distributions and kernel versions.
-- The Agent container must run in the host PID namespace (`--pid host`)
+- The host `/proc` must be mounted into the Agent container (`-v /proc/:/host/proc/:ro`), as in the command above
+- Enabling this setting starts `system-probe` if it is not already running
 - Applies to operating system packages in container image vulnerability findings
 
 **Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][4] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
 
-Add `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` and `--pid host` to your Docker run command:
+Add `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` to your Docker run command:
 
 {{< code-block lang="shell" >}}
 docker run -d --name dd-agent \
-  --pid host \
   [... other flags ...] \
   -e DD_SBOM_ENABLED=true \
   -e DD_SBOM_CONTAINER_IMAGE_ENABLED=true \
@@ -90,7 +90,7 @@ docker run -d --name dd-agent \
   registry.datadoghq.com/agent:7
 {{< /code-block >}}
 
-To verify the setup, confirm that the SBOM section of the [Agent status output][8] reports container image scanning as enabled, then filter vulnerability findings by [runtime signals][6] to confirm the signals are arriving.
+To verify the setup, confirm that the `sbom` check is listed under **Collector** in the [Agent status output][8], then filter vulnerability findings by [runtime signals][6] to confirm the signals are arriving.
 
 **Note**: `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package prioritization runs independently of [Workload Protection][4] and does not affect its usage.
 

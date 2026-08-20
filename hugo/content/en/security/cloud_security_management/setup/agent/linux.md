@@ -102,6 +102,7 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 **Requirements**:
 - Datadog Agent **7.79.0 or later**
 - Linux only (eBPF dependency). See [Workload Protection setup][11] for supported distributions and kernel versions.
+- Enabling this setting starts `system-probe` if it is not already running
 - Applies to operating system packages in container image vulnerability findings
 
 **Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][7] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
@@ -130,9 +131,9 @@ runtime_security_config:
     forward_interval: 1m
 {{< /code-block >}}
 
-A longer `enrichment_interval` sends fewer events, and runtime signals take longer to appear on new findings.
+A longer `enrichment_interval` sends fewer events. A package's first observation is unaffected; only repeat observations of an already-seen package are throttled.
 
-To verify the setup, confirm that the SBOM section of the [Agent status output][10] reports container image scanning as enabled, then filter vulnerability findings by [runtime signals][9] to confirm the signals are arriving.
+To verify the setup, confirm that the `sbom` check is listed under **Collector** in the [Agent status output][10], then filter vulnerability findings by [runtime signals][9] to confirm the signals are arriving.
 
 **Notes**:
 

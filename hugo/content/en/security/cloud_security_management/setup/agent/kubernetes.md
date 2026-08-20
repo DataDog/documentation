@@ -207,7 +207,7 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 **Requirements**:
 - Datadog Agent **7.79.0 or later**. On Kubernetes, use **7.81.0 or later** for the most complete signal coverage.
 - Linux only (eBPF dependency). See [Workload Protection setup][11] for supported distributions and kernel versions.
-- `hostPID: true` on the Agent pod. Namespaces that enforce the PodSecurity `baseline` or `restricted` standard reject pods with `hostPID: true`, so run the Agent in a namespace that allows the `privileged` standard.
+- Enabling this setting starts `system-probe` if it is not already running. On nodes that do not currently run it, plan for the additional container.
 - Applies to operating system packages in container image vulnerability findings.
 
 **Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][8] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
@@ -298,13 +298,13 @@ With Helm, the Datadog Operator, or a DaemonSet, set the equivalent environment 
   value: "1m"
 ```
 
-A longer `enrichment_interval` sends fewer events, and runtime signals take longer to appear on new findings.
+A longer `enrichment_interval` sends fewer events. A package's first observation is unaffected; only repeat observations of an already-seen package are throttled.
 
-Runtime package prioritization runs in the `system-probe` container, which uses more memory on nodes running many container images. Monitor its memory usage after enabling and adjust its limit to suit your workloads.
+Runtime package prioritization runs in the `system-probe` container. Monitor its memory usage after enabling and adjust its limit to suit your workloads.
 
 ### Verify the setup
 
-Confirm that the `system-probe` container is running on the node, and that the SBOM section of the [Agent status output][12] reports container image scanning as enabled. Then filter vulnerability findings by [runtime signals][10] to confirm the signals are arriving.
+Confirm that the `system-probe` container is running on the node, and that the `sbom` check is listed under **Collector** in the [Agent status output][12]. Then filter vulnerability findings by [runtime signals][10] to confirm the signals are arriving.
 
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats
