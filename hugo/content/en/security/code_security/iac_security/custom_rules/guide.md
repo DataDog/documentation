@@ -3,10 +3,6 @@ title: IaC Custom Rule Reference
 description: Reference the Rego contract, parsed inputs, shared libraries, finding fields, and testing practices for custom IaC rules.
 ---
 
-{{% site-region region="gov,gov2" %}}
-<div class="alert alert-danger">This product is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{% /site-region %}}
-
 This reference for IaC custom rules describes the rule contract, parsed inputs, and platform-specific patterns.
 
 For guidance on creating custom rules and an example of creating a rule from scratch, see [IaC Custom Rules][2].

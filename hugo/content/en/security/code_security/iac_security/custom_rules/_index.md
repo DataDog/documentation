@@ -5,14 +5,6 @@ algolia:
   tags: ['iac security', 'infrastructure as code', 'custom rule', 'rego']
 ---
 
-<!-- REVIEW-Q: Added the gov/gov2 unsupported-site banner to match the IaC Rules
-     page and github_actions.md. Confirm this is correct. If custom rules ARE
-     available on gov sites, remove it here and from the reference page. -->
-
-{{% site-region region="gov,gov2" %}}
-<div class="alert alert-danger">This product is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{% /site-region %}}
-
 Create custom security rules to enforce requirements specific to your organization. Custom rules use [Rego][1], the policy language from Open Policy Agent (OPA), and run alongside default Datadog rules during IaC scans.
 
 <!-- REVIEW-Q: What role or permission does a user need to create and publish a
