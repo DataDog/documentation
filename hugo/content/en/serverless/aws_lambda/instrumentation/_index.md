@@ -31,30 +31,13 @@ To get started, [sign up for a Datadog account][1] if you don’t already have o
 
 A sample application is [available on GitHub][6] with instructions on how to deploy with multiple runtimes and infrastructure-as-code tools.
 
-The quick start process configures your Lambda functions on the fly. To instrument Lambda functions permanently, see the detailed instructions in the next section.
-
-## Instrumentation instructions
-
-{{< card-grid card_width="30%" image_width="200" >}}
-  {{< image-card href="/serverless/installation/python/" src="integrations_logos/python.png" alt="Python" >}}
-  {{< image-card href="/serverless/installation/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
-  {{< image-card href="/serverless/installation/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
-  {{< image-card href="/serverless/installation/java/" src="integrations_logos/java.png" alt="Java" >}}
-  {{< image-card href="/serverless/installation/go/" src="integrations_logos/go-metro.png" alt="go" >}}
-  {{< image-card href="/serverless/installation/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
-{{< /card-grid >}}
-
-## Advanced configurations
-
-After you're done with instrumentation and you've set up telemetry collection, you can use [Configure Serverless Monitoring for AWS Lambda][3] to:
-
-- connect your metrics, traces, and logs using tags
-- collect telemetry from AWS resources such as API Gateway, AppSync, and Step Functions
-- capture the request and response payloads for individual Lambda invocations
-- link errors of your Lambda functions to your source code
-- filter or scrub sensitive information from logs or traces
+The quick start process configures your Lambda functions on the fly. To instrument Lambda functions permanently, see the detailed instructions in the next sections.
 
 ## Set up with agentic onboarding
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">This feature is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Use agentic onboarding to set up monitoring for your Lambda functions with AI assistance. Agentic onboarding detects your project's frameworks, applies the required configuration in place, and verifies that data is flowing. Two complementary paths use the same Datadog account:
 
@@ -83,6 +66,27 @@ Help me monitor my AWS Lambda functions with Datadog.
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Instrumentation instructions
+
+{{< card-grid card_width="30%" image_width="200" >}}
+  {{< image-card href="/serverless/installation/python/" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/serverless/installation/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/serverless/installation/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/serverless/installation/java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/serverless/installation/go/" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="/serverless/installation/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+{{< /card-grid >}}
+
+## Advanced configurations
+
+After you're done with instrumentation and you've set up telemetry collection, you can use [Configure Serverless Monitoring for AWS Lambda][3] to:
+
+- connect your metrics, traces, and logs using tags
+- collect telemetry from AWS resources such as API Gateway, AppSync, and Step Functions
+- capture the request and response payloads for individual Lambda invocations
+- link errors of your Lambda functions to your source code
+- filter or scrub sensitive information from logs or traces
 
 ## Further Reading
 
