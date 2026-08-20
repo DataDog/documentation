@@ -13,7 +13,7 @@ This document describes how to use the Datadog Lambda Extension to send AWS vend
 
 See [Datadog Lambda Extension][1] to learn more about it.
 
-**Note**: Logs received through this source are tagged with `ddsource`, not `source`. When you write processor queries or filters based on the log source, use `ddsource` instead of `source`.
+**Note**: The Datadog Lambda Extension sends logs tagged with `ddsource`, not `source`. When you define processor queries or filters for these logs, use `ddsource` instead of `source`.
 
 ## Set up a pipeline
 
