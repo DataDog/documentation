@@ -72,8 +72,6 @@ Default compactor HPA settings:
 | `compactor.autoscaling.maxReplicas` | `10` | Maximum number of compactor pods |
 | CPU target | `80%` | Average CPU utilization target across compactor pods |
 
-For the complete list of HPA values, see the [CloudPrem Helm chart default values][1].
-
 ## Apply the configuration
 
 Add the autoscaling values to your BYOC Logs values file, then upgrade your release:
@@ -104,5 +102,3 @@ If the HPA reports missing CPU metrics, check that the metrics API is running an
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/values.yaml
