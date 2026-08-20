@@ -90,6 +90,8 @@ docker run -d --name dd-agent \
   registry.datadoghq.com/agent:7
 {{< /code-block >}}
 
+To verify the setup, confirm that the SBOM section of the [Agent status output][8] reports container image scanning as enabled, then filter vulnerability findings by [runtime signals][6] to confirm the signals are arriving.
+
 **Note**: `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package prioritization runs independently of [Workload Protection][4] and does not affect its usage.
 
 [1]: /security/cloud_security_management/misconfigurations/
@@ -99,3 +101,4 @@ docker run -d --name dd-agent \
 [5]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
 [6]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals
 [7]: /security/workload_protection/setup/
+[8]: /agent/configuration/agent-commands/#agent-information

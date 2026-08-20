@@ -300,7 +300,11 @@ With Helm, the Datadog Operator, or a DaemonSet, set the equivalent environment 
 
 A longer `enrichment_interval` sends fewer events, and runtime signals take longer to appear on new findings.
 
-Also review the memory limit on the `system-probe` container. Datadog recommends at least `900Mi` on nodes running many container images.
+Runtime package prioritization runs in the `system-probe` container, which uses more memory on nodes running many container images. Monitor its memory usage after enabling and adjust its limit to suit your workloads.
+
+### Verify the setup
+
+Confirm that the `system-probe` container is running on the node, and that the SBOM section of the [Agent status output][12] reports container image scanning as enabled. Then filter vulnerability findings by [runtime signals][10] to confirm the signals are arriving.
 
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats
@@ -313,3 +317,4 @@ Also review the memory limit on the `system-probe` container. Datadog recommends
 [9]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
 [10]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals
 [11]: /security/workload_protection/setup/
+[12]: /agent/configuration/agent-commands/#agent-information

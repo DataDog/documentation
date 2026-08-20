@@ -101,7 +101,7 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 
 **Requirements**:
 - Datadog Agent **7.79.0 or later**
-- Linux only (eBPF dependency), on kernel **4.14.0 or later** or a distribution with backported eBPF features. See [Workload Protection setup][10] for supported distributions.
+- Linux only (eBPF dependency), on kernel **4.14.0 or later** or a distribution with backported eBPF features. See [Workload Protection setup][11] for supported distributions.
 - Applies to operating system packages in container image vulnerability findings
 
 **Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][7] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
@@ -132,6 +132,8 @@ runtime_security_config:
 
 A longer `enrichment_interval` sends fewer events, and runtime signals take longer to appear on new findings.
 
+To verify the setup, confirm that the SBOM section of the [Agent status output][10] reports container image scanning as enabled, then filter vulnerability findings by [runtime signals][9] to confirm the signals are arriving.
+
 **Notes**:
 
 - You can also use the following [Agent install script][5] to automatically enable Misconfigurations and Threat Detection:
@@ -157,4 +159,5 @@ sudo chgrp dd-agent /etc/datadog-agent/security-agent.yaml
 [7]: /security/workload_protection/
 [8]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
 [9]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals
-[10]: /security/workload_protection/setup/
+[10]: /agent/configuration/agent-commands/#agent-information
+[11]: /security/workload_protection/setup/
