@@ -28,7 +28,7 @@ Generating metrics from your high-volume logs or spans is a cost-effective way t
 
 Use the Generate Metrics processor to generate count, gauge, or distribution metrics from logs or spans that match a query, and send the metrics to your destination. You can generate metrics:
 
-- From Logs to track trends, such as KPIs, over long periods of time
+- From logs to track trends, such as KPIs, over long periods of time
 - From spans to track long-term trends in application performance
 
 **Note**: The metrics generated from logs or spans and routed to Datadog are [custom metrics][1] and billed accordingly. See [Custom Metrics Billing][2] for more information.
