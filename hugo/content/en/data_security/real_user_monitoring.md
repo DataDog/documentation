@@ -158,3 +158,4 @@ See [privacy options specific to Session Replay][19]. Masking in Session Replay 
 [18]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 [19]: /session_replay/privacy_options?platform=browser
 [20]: https://www.datadoghq.com/private-beta/product-analytics/
+[21]: /security/sensitive_data_scanner/setup/telemetry_data/?tab=logs#mask-action
