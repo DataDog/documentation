@@ -272,10 +272,48 @@ Workload Identity Federation for the Datadog Agent is available for customers on
 Workload Identity Federation for the Agent allows you to authenticate your Agent using AWS credentials instead of managing static API keys. The Agent exchanges an AWS authentication proof for a managed API key that Datadog automatically rotates.
 
 **Requirements**:
-- Version `7.78.0` or later of the Datadog Agent.
-- The Agent runs in an AWS environment with access to AWS credentials (for example, an EC2 instance with an IAM role, ECS task, or EKS pod).
+- Version `7.78.0` or later of the Datadog Agent. The credential sources available to you depend on your Agent version and on which Agent component sends the data. See [Supported credential sources for the Agent](#supported-credential-sources-for-the-agent).
+- The Agent runs in an AWS environment with access to AWS credentials.
 - You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
 - Your account has the `workload_identity_federation_config_read` and `workload_identity_federation_config_write` permissions.
+
+### Supported credential sources for the Agent
+
+<div class="alert alert-info">This section applies to the Datadog Agent only. The Datadog Terraform provider and the Datadog API clients resolve AWS credentials differently, and support a different set of sources.</div>
+
+The Agent looks for AWS credentials in the following sources, in this order. The first source that provides credentials is used.
+
+| Credential source | Environment variables |
+| --- | --- |
+| [Static credentials][11] | `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` |
+| [EC2 instance role][7] (retrieved through IMDS) | None |
+| [EKS IAM roles for service accounts (IRSA)][8] | `AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE` |
+| [ECS task role][9] and [EKS Pod Identity][10] | `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` or `AWS_CONTAINER_CREDENTIALS_FULL_URI` |
+
+The Agent does not read shared AWS configuration files or named profiles (`AWS_PROFILE`, `~/.aws`). This differs from the Terraform provider, which does support AWS credential files.
+
+#### Agent version support by component
+
+Which credential sources you can use depends on the Agent version and on the component that sends the data. Each cell is the first Agent version in which that combination works.
+
+| Agent component | Static credentials | EC2 instance role | EKS IRSA, ECS task role, EKS Pod Identity |
+| --- | --- | --- | --- |
+| Core Agent (metrics, logs, and checks) | `7.78.0` | `7.78.0` | `7.82.0` |
+| Cluster Agent | `7.78.0` | `7.78.0` | `7.82.0` |
+| Process Agent | `7.78.0` | `7.78.0` | `7.82.0` |
+| Security Agent | `7.78.0` | `7.78.0` | `7.82.0` |
+| Datadog Installer | `7.78.0` | `7.78.0` | `7.82.0` |
+| APM (trace Agent) | `7.78.0` | `7.83.0` | `7.83.0` |
+| Standalone DogStatsD | `7.78.0` | `7.83.0` | `7.83.0` |
+| Private Action Runner | `7.78.0` | `7.83.0` | `7.83.0` |
+| IoT Agent | `7.78.0` | `7.83.0` | `7.83.0` |
+| Heroku Agent | `7.78.0` | `7.83.0` | `7.83.0` |
+
+<div class="alert alert-warning">Agent <code>7.83.0</code> is not released yet. These entries describe expected behavior and may change.</div>
+
+On Agent `7.82.0` and earlier, APM on an EKS pod or ECS task requires static credentials in environment variables. Without them, the trace Agent falls back to the `api_key` in `datadog.yaml`. See [Fallback behavior](#fallback-behavior).
+
+Workload Identity Federation is not available in the OpenTelemetry Collector (DDOT) or the AWS Lambda extension. These require a statically configured `api_key`.
 
 Setting up Workload Identity Federation for the Agent involves two parts:
 1. [Configuring your AWS intake mapping in Datadog](#configure-aws-intake-mapping-in-datadog)
@@ -460,3 +498,8 @@ delegated_auth:
 [4]: https://app.datadoghq.com/integrations/amazon-web-services
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html
 [6]: https://app.datadoghq.com/organization-settings/workload-identity-federation
+[7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
+[8]: https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
+[9]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+[10]: https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html
+[11]: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html
