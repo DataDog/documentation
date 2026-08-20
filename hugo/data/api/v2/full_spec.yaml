@@ -60202,6 +60202,12 @@ components:
           description: Status of the source span. Included only when metrics are requested.
           example: ok
           type: string
+        timestamp:
+          description: >-
+            Unix timestamp of the source span in milliseconds. Included only when metrics are requested.
+          example: 1711000123456
+          format: int64
+          type: integer
         total_tokens:
           description: Total number of tokens of the source span. Included only when metrics are requested.
           example: 192
@@ -164976,6 +164982,7 @@ paths:
                                 output_tokens: 64
                                 span_id: "1234567890123456789"
                                 status: ok
+                                timestamp: 1711000123456
                                 total_tokens: 192
                             created_at: "2024-01-15T10:44:00Z"
                             description: "Questions about invoices, charges, and refunds."
