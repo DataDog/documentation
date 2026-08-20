@@ -16,7 +16,7 @@ on:
       since:
         description: 'Look back this many days for blog posts'
         required: false
-        default: '7'
+        default: '14'
       dry_run:
         description: 'Report what would change without opening a PR'
         type: boolean
@@ -36,8 +36,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      # The cron is weekly, so 7 days. The script's own default is 14.
-      SINCE: ${{ inputs.since || '7' }}
+      # Two weeks, against a weekly cron: every post falls in two runs, so a
+      # dropped or failed run doesn't lose a week. The script skips posts
+      # already linked, so the second pass is a no-op.
+      SINCE: ${{ inputs.since || '14' }}
     steps:
       # Read access to websites-images, where the script lives.
       - name: Get token for websites-images
