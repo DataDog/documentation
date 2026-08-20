@@ -1,5 +1,6 @@
 ---
 title: Findings
+description: Review and triage Workload Protection findings to address runtime security posture issues.
 disable_toc: false
 further_reading:
   - link: "/security/workload_protection/detect_and_monitor/detection_and_finding_rules/finding_rules"

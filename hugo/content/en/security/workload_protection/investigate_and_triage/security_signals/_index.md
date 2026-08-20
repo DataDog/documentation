@@ -1,5 +1,6 @@
 ---
 title: Signals
+description: Search, filter, and triage the security signals that Workload Protection detection rules generate.
 disable_toc: false
 aliases:
   - /security/threats/security_signals

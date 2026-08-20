@@ -1,5 +1,6 @@
 ---
 title: Content Packs
+description: Enable Datadog-curated Content Packs to deploy optional detections for specific software stacks and threat vectors.
 disable_toc: false
 further_reading:
 - link: "/security/workload_protection/detect_and_monitor/agent_rules/policy_management"
@@ -36,7 +37,7 @@ Depending on the Content Pack, a bundle can include:
 1. Go to [Content Packs][1].
 2. Browse the available Content Packs and select one.
 3. Review the included Agent rules, detection rules, and deployment requirements.
-4. Click **Enable** to activate the Content Pack and go to the associated policy page.
+4. Click {{< ui >}}Enable{{< /ui >}} to activate the Content Pack and go to the associated policy page.
 
 Enabling a Content Pack adds its associated policy and rules to your organization. To start detecting threats, deploy the associated policy to your infrastructure.
 
@@ -46,7 +47,7 @@ Content Packs deploy through [policies][4]. After you enable a Content Pack, sco
 
 1. Go to [Policies][6].
 2. Open the policy associated with the Content Pack you enabled.
-3. Click **Edit** next to the deployment scope.
+3. Click {{< ui >}}Edit{{< /ui >}} next to the deployment scope.
 4. Add [tags][7] to target specific hosts, clusters, or environments.
 5. Toggle the policy to enabled and confirm deployment.
 
@@ -56,7 +57,7 @@ For more information about policy deployment, see [Policy management][4].
 
 1. Go to [Content Packs][1].
 2. Browse the available Content Packs and select one that is activated.
-3. Click **Deactivate** to remove the associated policy from the policy page.
+3. Click {{< ui >}}Deactivate{{< /ui >}} to remove the associated policy from the policy page.
 
 [1]: https://app.datadoghq.com/security/workload-protection/overview#content-packs
 [2]: /security/workload_protection/detect_and_monitor/agent_rules

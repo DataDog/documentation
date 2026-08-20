@@ -1,5 +1,6 @@
 ---
 title: Setting up Workload Protection on AWS Fargate
+description: Enable Workload Protection on AWS Fargate ECS and EKS workloads.
 aliases:
   - /security/workload_protection/guide/ebpf-free-agent
 disable_toc: false
@@ -19,8 +20,8 @@ Use the following instructions to enable Workload Protection.
 
 ## Images
 
-* `cws-instrumentation-init`: `public.ecr.aws/datadog/cws-instrumentation:latest`
-* `datadog-agent`: `public.ecr.aws/datadog/agent:latest`
+- `cws-instrumentation-init`: `public.ecr.aws/datadog/cws-instrumentation:latest`
+- `datadog-agent`: `public.ecr.aws/datadog/agent:latest`
 
 ## Installation
 
@@ -194,7 +195,7 @@ aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-
 
 To collect data from your AWS Fargate pods, you must run the Agent as a sidecar of your application pod and set up Role-Based Access Control (RBAC) rules.
 
-<div class="alert alert-info">If the Agent is running as a sidecar, it can only communicate with containers on the same pod. Run an Agent for every pod you wish to monitor.</div>
+<div class="alert alert-info">If the Agent is running as a sidecar, it can only communicate with containers on the same pod. Run an Agent for every pod you want to monitor.</div>
 
 ### Set up RBAC rules
 
@@ -277,7 +278,7 @@ spec:
 
 ## Verify that the Agent is sending events to Cloud Security
 
-When you enable Cloud Security on AWS Fargate ECS or EKS, the Agent sends an agent event to Datadog to confirm that the default ruleset has been successfully deployed. To view the agent event, navigate to the [Agent Events][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
+When you enable Cloud Security on AWS Fargate ECS or EKS, the Agent sends an agent event to Datadog to confirm that the default ruleset has been successfully deployed. To view the agent event, navigate to the [Agent Events][11] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
 
 <div class="alert alert-info">You can also verify the Agent is sending events to Cloud Security by manually triggering an AWS Fargate security signal.</div>
 
@@ -296,3 +297,5 @@ In the task definition, replace the "workload" container with the following:
                 "apt update;apt install -y curl; while true; do curl https://google.com; sleep 5; done"
             ],
 {{< /code-block >}}
+
+[11]: https://app.datadoghq.com/security/agent-events

@@ -1,5 +1,6 @@
 ---
 title: Triage and Act on Security Signals
+description: Triage, escalate, automate, and respond to a Workload Protection signal from the signal side panel.
 disable_toc: false
 ---
 

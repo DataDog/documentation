@@ -1,5 +1,6 @@
 ---
 title: Agent Events
+description: Search and analyze the runtime activity that the Datadog Agent sends to Datadog as Agent events.
 disable_toc: false
 aliases:
   - /security/threats/investigate_agent_events
@@ -15,32 +16,32 @@ further_reading:
 
 The Datadog Agent evaluates system activity on the Agent host. When activity matches an Agent rule expression, the Agent generates an event and passes it to the Datadog backend.
 
-With the [Agent Events explorer][13], you can investigate Agent events separately from signals. Review what happened, where it occurred, and which Agent rule matched using the event side panel. You can also explore the investigation graph, process tree, and raw JSON payload, and view triage and response instructions for the matching rule.
+With the [Agent Events Explorer][13], you can investigate Agent events separately from signals. Review what happened, where it occurred, and which Agent rule matched using the event side panel. You can also explore the investigation graph, process tree, and raw JSON payload, and view triage and response instructions for the matching rule.
 
 ## Investigate Agent events
 
 To investigate an Agent event:
 
-1. Go to the [Agent Events explorer][13]. Agent events are queried and displayed using the standard explorer controls in the Datadog [Events Explorer][14].
+1. Go to the [Agent Events Explorer][13]. Agent events are queried and displayed using the standard explorer controls in the Datadog [Events Explorer][14].
 2. Select an Agent event. The side panel opens with tabs that help you investigate the event.
 
 ### Overview
 
-The **Overview** tab summarizes the event and is often the best place to start your investigation.
+The {{< ui >}}Overview{{< /ui >}} tab summarizes the event and is often the best place to start your investigation.
 
 {{< img src="security/workload_protection/investigate_and_triage/agent_events/agent_event_overview.png" alt="Agent event side panel Overview tab showing What, Where, Agent rule, and Investigation graph sections" width="100%">}}
 
 The Overview tab includes the following sections:
 
-- **What**: A human-readable description of the detected activity. For example, *A user executed the clang command on host i-0d85f97942d947ca9*.
-- **Where**: The infrastructure context where the event occurred, including cloud provider, account, region, host, Kubernetes cluster, namespace, pod, container, and image.
-- **Agent rule**: The Agent rule that matched the event, including the rule name, event name, deployment policies, policy version, and rule expression.
-- **Investigation graph**: A preview of the investigation graph at the bottom of the Overview tab.
-- **Process tree**: The complete process lineage from the system init process to the process that triggered the event.
+- {{< ui >}}What{{< /ui >}}: A human-readable description of the detected activity. For example, *A user executed the clang command on host i-0d85f97942d947ca9*.
+- {{< ui >}}Where{{< /ui >}}: The infrastructure context where the event occurred, including cloud provider, account, region, host, Kubernetes cluster, namespace, pod, container, and image.
+- {{< ui >}}Agent rule{{< /ui >}}: The Agent rule that matched the event, including the rule name, event name, deployment policies, policy version, and rule expression.
+- {{< ui >}}Investigation graph{{< /ui >}}: A preview of the investigation graph at the bottom of the Overview tab.
+- {{< ui >}}Process tree{{< /ui >}}: The complete process lineage from the system init process to the process that triggered the event.
 
 #### Investigation graph
 
-The **Investigation graph** is an interactive visualization that maps the infrastructure and processes involved in the event. It provides a compact overview of the attack chain by highlighting the most relevant entities and processes.
+The {{< ui >}}Investigation graph{{< /ui >}} is an interactive visualization that maps the infrastructure and processes involved in the event. It provides a compact overview of the attack chain by highlighting the most relevant entities and processes.
 
 {{< img src="security/workload_protection/investigate_and_triage/agent_events/agent_event_investigation_graph.png" alt="Investigation graph showing host, Kubernetes pod, container, image, and main process execution path" width="100%">}}
 
@@ -50,22 +51,22 @@ Use the investigation graph to understand how the detected activity fits into th
 
 #### Process tree
 
-The **Process tree** lists the complete process lineage from the system init process to the process that triggered the event.
+The {{< ui >}}Process tree{{< /ui >}} lists the complete process lineage from the system init process to the process that triggered the event.
 
 {{< img src="security/workload_protection/investigate_and_triage/agent_events/agent_event_process_tree.png" alt="Process tree listing the full process chain from systemd to the process that triggered the event" width="100%">}}
 
 For each process in the chain, the process tree displays:
 
-- **Path**: The executable path and command-line arguments.
-- **PID**: The process ID.
-- **PPID**: The parent process ID.
-- **User**: The user context under which the process ran.
+- {{< ui >}}Path{{< /ui >}}: The executable path and command-line arguments.
+- {{< ui >}}PID{{< /ui >}}: The process ID.
+- {{< ui >}}PPID{{< /ui >}}: The parent process ID.
+- {{< ui >}}User{{< /ui >}}: The user context under which the process ran.
 
 The process tree shows the full ancestry of the event, starting from `systemd` and continuing through intermediate processes—such as `containerd`, `runc`, and workload-specific processes—down to the command that matched the Agent rule. This helps you reconstruct the exact execution path that led to the detection.
 
 ### JSON
 
-The **JSON** tab displays the raw event payload with the complete set of event attributes collected by the Agent. Use JSON when you need the most detailed view of the event data, for example, to write advanced queries in the [Agent Events explorer][13], or share the full event payload during an investigation.
+The {{< ui >}}JSON{{< /ui >}} tab displays the raw event payload with the complete set of event attributes collected by the Agent. Use JSON when you need the most detailed view of the event data, for example, to write advanced queries in the [Agent Events Explorer][13], or share the full event payload during an investigation.
 
 ## Further reading
 

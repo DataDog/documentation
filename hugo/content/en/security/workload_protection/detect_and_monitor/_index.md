@@ -1,5 +1,6 @@
 ---
 title: Detect and Monitor
+description: Understand the Agent rules, detection rules, finding rules, threat intelligence, and Content Packs that Workload Protection uses to detect threats.
 aliases:
   - /security/workload_protection/workload_security_rules
   - /security/threats/workload_security_rules
@@ -8,8 +9,6 @@ aliases:
 disable_toc: false
 ---
 
-## Overview
-
 Workload Protection evaluates your workload activity against several kinds of rules. Together they detect threats, assess your runtime security posture, and provide granular audit capabilities. Agent rules select which activity reaches Datadog. Detection rules and finding rules analyze that activity. Threat intelligence enriches it with reputation context, and Content Packs bundle optional rules for specific software stacks and threat vectors.
 
 For how these rules fit together in the detection pipeline, see [How Workload Protection works][19].
@@ -17,10 +16,10 @@ For how these rules fit together in the detection pipeline, see [How Workload Pr
 ## Agent rules
 
 [Agent rules][1] define which system activity is sent to the Datadog backend for further analysis:
-- [SecL guide][15] for writing custom agent rules with the SecL expression language
+- [SECL guide][15] for writing custom agent rules with the SECL expression language
 - [Policy management][9] for deploying custom and default agent rules
 - [Variables and actions][16] for stateful detections and additional telemetry collection
-- [Linux expressions][17] and [Windows expressions][18] for the full set of queryable SecL fields
+- [Linux expressions][17] and [Windows expressions][18] for the full set of queryable SECL fields
 
 ## Detection and finding rules
 
@@ -32,7 +31,7 @@ For how these rules fit together in the detection pipeline, see [How Workload Pr
 ## Threat intelligence
 
 Workload Protection uses threat intelligence databases to enrich your [Agent Events][2] and detect malware and known malicious entities. The [Threat Intelligence][7] page helps you:
-- Explore the threat intelligence databases that are provided Out Of The Box (OOTB) to Workload Protection
+- Explore the threat intelligence databases that are provided out-of-the-box (OOTB) with Workload Protection
 - Import your own threat intelligence database and configure it to work with Workload Protection
 
 ## Content Packs

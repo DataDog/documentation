@@ -1,5 +1,6 @@
 ---
 title: Setting up Workload Protection on Docker
+description: Enable Workload Protection on Docker with the Datadog Agent.
 aliases:
   - /security/workload_protection/setup/agent/docker
 disable_toc: false

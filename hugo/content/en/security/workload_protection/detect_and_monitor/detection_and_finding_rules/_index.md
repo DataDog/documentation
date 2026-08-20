@@ -1,9 +1,8 @@
 ---
 title: Detection and Finding Rules
+description: Compare the backend detection rules and finding rules that Workload Protection uses to analyze Agent events.
 disable_toc: false
 ---
-
-## Overview
 
 After the Agent forwards [Agent events][1] to Datadog, backend rules analyze that telemetry to produce security outcomes. Workload Protection provides two types of backend rules:
 
