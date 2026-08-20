@@ -101,9 +101,9 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 
 **Requirements**:
 - Datadog Agent **7.79.0 or later**
-- Linux only (eBPF dependency). See [Workload Protection setup][11] for supported distributions and kernel versions.
+- Linux only (eBPF dependency). See [Workload Protection setup][10] for supported distributions and kernel versions.
 - Enabling this setting starts `system-probe` if it is not already running
-- Applies to container image vulnerability findings for packages installed by an operating system package manager (`apt`/`dpkg`, `yum`/`dnf`/`rpm`, or `apk`). Application library packages, such as npm, pip, or Maven, and binaries installed outside a package manager do not receive runtime signals.
+- Applies to packages installed by an operating system package manager (`apt`, `yum`, or `apk`) in container image vulnerability findings. Application libraries, such as npm or pip packages, do not receive runtime signals.
 
 **Note**: Runtime package prioritization runs independently of [Workload Protection][7] and does not affect its usage.
 
@@ -122,7 +122,9 @@ sbom:
 
 Restart the Agent after applying the changes.
 
-The Agent re-sends a container image SBOM when it observes new package usage in that image, so enabling runtime package prioritization increases the number of SBOM events the Agent sends. On hosts running many container images, raise the enrichment interval from its default of `1m`:
+To verify the setup, filter vulnerability findings by [runtime signals][9]. Signals appear within a few minutes of a package running.
+
+Runtime package prioritization increases the number of SBOM events the Agent sends. On hosts running many container images, raise the enrichment interval from its default of `1m`:
 
 {{< code-block lang="bash" filename="/etc/datadog-agent/system-probe.yaml" disable_copy="false" collapsible="true" >}}
 runtime_security_config:
@@ -131,9 +133,7 @@ runtime_security_config:
     forward_interval: 1m
 {{< /code-block >}}
 
-A longer `enrichment_interval` sends fewer events. A package's first observation is unaffected; only repeat observations of an already-seen package are throttled.
-
-To verify the setup, confirm that the `sbom` check is listed under **Collector** in the [Agent status output][10], then filter vulnerability findings by [runtime signals][9] to confirm the signals are arriving.
+A longer interval sends fewer events. First observations are unaffected; only repeat observations of the same package are throttled.
 
 **Notes**:
 
@@ -160,5 +160,4 @@ sudo chgrp dd-agent /etc/datadog-agent/security-agent.yaml
 [7]: /security/workload_protection/
 [8]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
 [9]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals
-[10]: /agent/configuration/agent-commands/#agent-information
-[11]: /security/workload_protection/setup/
+[10]: /security/workload_protection/setup/

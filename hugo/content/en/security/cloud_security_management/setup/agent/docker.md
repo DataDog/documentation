@@ -72,9 +72,9 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 **Requirements**:
 - Datadog Agent **7.79.0 or later**
 - Linux only (eBPF dependency). See [Workload Protection setup][7] for supported distributions and kernel versions.
-- The host `/proc` must be mounted into the Agent container (`-v /proc/:/host/proc/:ro`), as in the command above
+- The host `/proc` mounted into the Agent container (`-v /proc/:/host/proc/:ro`)
 - Enabling this setting starts `system-probe` if it is not already running
-- Applies to container image vulnerability findings for packages installed by an operating system package manager (`apt`/`dpkg`, `yum`/`dnf`/`rpm`, or `apk`). Application library packages, such as npm, pip, or Maven, and binaries installed outside a package manager do not receive runtime signals.
+- Applies to packages installed by an operating system package manager (`apt`, `yum`, or `apk`) in container image vulnerability findings. Application libraries, such as npm or pip packages, do not receive runtime signals.
 
 **Note**: Runtime package prioritization runs independently of [Workload Protection][4] and does not affect its usage.
 
@@ -90,25 +90,16 @@ docker run -d --name dd-agent \
   registry.datadoghq.com/agent:7
 {{< /code-block >}}
 
-The Agent re-sends a container image SBOM when it observes new package usage in that image, so enabling runtime package prioritization increases the number of SBOM events the Agent sends. On hosts running many container images, raise the enrichment interval from its default of `1m` in `system-probe.yaml`:
+To verify the setup, filter vulnerability findings by [runtime signals][6]. Signals appear within a few minutes of a package running.
 
-{{< code-block lang="yaml" filename="/etc/datadog-agent/system-probe.yaml" >}}
-runtime_security_config:
-  sbom:
-    enrichment_interval: 30m
-    forward_interval: 1m
-{{< /code-block >}}
-
-Or set the equivalent environment variables on the Agent container:
+Runtime package prioritization increases the number of SBOM events the Agent sends. On hosts running many container images, raise the enrichment interval from its default of `1m`:
 
 {{< code-block lang="shell" >}}
   -e DD_RUNTIME_SECURITY_CONFIG_SBOM_ENRICHMENT_INTERVAL=30m \
   -e DD_RUNTIME_SECURITY_CONFIG_SBOM_FORWARD_INTERVAL=1m \
 {{< /code-block >}}
 
-A longer `enrichment_interval` sends fewer events. A package's first observation is unaffected; only repeat observations of an already-seen package are throttled.
-
-To verify the setup, confirm that the `sbom` check is listed under **Collector** in the [Agent status output][8], then filter vulnerability findings by [runtime signals][6] to confirm the signals are arriving.
+A longer interval sends fewer events. First observations are unaffected; only repeat observations of the same package are throttled.
 
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats
@@ -117,4 +108,3 @@ To verify the setup, confirm that the `sbom` check is listed under **Collector**
 [5]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
 [6]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals
 [7]: /security/workload_protection/setup/
-[8]: /agent/configuration/agent-commands/#agent-information

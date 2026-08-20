@@ -207,8 +207,8 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 **Requirements**:
 - Datadog Agent **7.79.0 or later**. On Kubernetes, use **7.81.0 or later** for the most complete signal coverage.
 - Linux only (eBPF dependency). See [Workload Protection setup][11] for supported distributions and kernel versions.
-- Enabling this setting starts `system-probe` if it is not already running. On nodes that do not currently run it, plan for the additional container.
-- Applies to container image vulnerability findings for packages installed by an operating system package manager (`apt`/`dpkg`, `yum`/`dnf`/`rpm`, or `apk`). Application library packages, such as npm, pip, or Maven, and binaries installed outside a package manager do not receive runtime signals.
+- Enabling this setting starts `system-probe` if it is not already running.
+- Applies to packages installed by an operating system package manager (`apt`, `yum`, or `apk`) in container image vulnerability findings. Application libraries, such as npm or pip packages, do not receive runtime signals.
 
 **Note**: Runtime package prioritization runs independently of [Workload Protection][8] and does not affect its usage.
 
@@ -277,19 +277,11 @@ Restart the Agent.
 
 {{< /tabs >}}
 
-### Tune runtime enrichment on large clusters
+To verify the setup, filter vulnerability findings by [runtime signals][10]. Signals appear within a few minutes of a package running.
 
-The Agent re-sends a container image SBOM when it observes new package usage in that image, so enabling runtime package prioritization increases the number of SBOM events the Agent sends. On clusters running many container images, Datadog recommends raising the enrichment interval from its default of `1m`:
+### Tune event volume on large clusters
 
-```yaml
-# system-probe.yaml
-runtime_security_config:
-  sbom:
-    enrichment_interval: 30m
-    forward_interval: 1m
-```
-
-With Helm, the Datadog Operator, or a DaemonSet, set the equivalent environment variables on the `system-probe` container, which reads this configuration:
+Runtime package prioritization increases the number of SBOM events the Agent sends. On clusters running many container images, Datadog recommends raising the enrichment interval from its default of `1m`, by setting these environment variables on the `system-probe` container:
 
 ```yaml
 - name: DD_RUNTIME_SECURITY_CONFIG_SBOM_ENRICHMENT_INTERVAL
@@ -298,13 +290,9 @@ With Helm, the Datadog Operator, or a DaemonSet, set the equivalent environment 
   value: "1m"
 ```
 
-A longer `enrichment_interval` sends fewer events. A package's first observation is unaffected; only repeat observations of an already-seen package are throttled.
+A longer interval sends fewer events. First observations are unaffected; only repeat observations of the same package are throttled.
 
-Runtime package prioritization runs in the `system-probe` container. Monitor its memory usage after enabling and adjust its limit to suit your workloads.
-
-### Verify the setup
-
-Confirm that the `system-probe` container is running on the node, and that the `sbom` check is listed under **Collector** in the [Agent status output][12]. Then filter vulnerability findings by [runtime signals][10] to confirm the signals are arriving.
+Monitor `system-probe` memory usage after enabling, and adjust its limit to suit your workloads.
 
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats
@@ -317,4 +305,3 @@ Confirm that the `system-probe` container is running on the node, and that the `
 [9]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
 [10]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals
 [11]: /security/workload_protection/setup/
-[12]: /agent/configuration/agent-commands/#agent-information
