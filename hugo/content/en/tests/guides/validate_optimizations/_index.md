@@ -68,15 +68,15 @@ This guide walks you through making local changes and committing them for CI to 
    git add -A
    git commit -m "Configure Test Optimization validation service"
    git push -u origin validate-test-optimization
-   
+   ```
 
 4. After CI finishes, go to the [CI/CD Repositories settings][3] and select the repository you are validating.
 
    {{< img src="pr_gates/setup/ci_cd_repositories_settings.png" alt="CI/CD Repositories settings filtered to the repository being validated" style="width:100%" >}}
 
-5. In the upper-right corner of the slide-out panel, click {{< ui >}}Test Services{{< /ui >}}.
+5. In the upper-right corner of the slide-out panel, click {{< ui >}}Test Service{{< /ui >}}.
 
-   {{< img src="pr_gates/setup/repository_settings_test_services.png" alt="Repository Settings with the Test Services button in the upper-right corner" style="width:100%" >}}
+   {{< img src="pr_gates/setup/repository_settings_test_services.png" alt="Repository Settings with the Test Service button in the upper-right corner" style="width:100%" >}}
 
 6. In {{< ui >}}Test service overrides{{< /ui >}}, select the `validate-test-optimization` service.
 
@@ -90,7 +90,7 @@ This guide walks you through making local changes and committing them for CI to 
 
    {{< img src="pr_gates/setup/flaky_test_policies_quarantine.png" alt="Repository settings showing the Configure button for the Quarantine flaky test policy" style="width:100%" >}}
 
-9. Expand {{< ui >}}Quarantine{{< /ui >}}, then enable the second auto-rule: **If an Active flaky test flakes in the `validate-test-optimization` branch, then move to Quarantined**.
+9. Enable the second auto-rule: **If an Active flaky test flakes in the `validate-test-optimization` branch, then move to Quarantined**.
 
    {{< img src="pr_gates/setup/quarantine_branch_policy.png" alt="Quarantine policy configured for active flaky tests on the validate-test-optimization branch" style="width:100%" >}}
 
@@ -448,7 +448,7 @@ Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5
 
 ### Step 4: Remediation
 
-Test Optimization helps remediate flaky tests through Attempt to Fix and Bits AI auto fixes. This section validates the Attempt to Fix workflow by fixing the same test used for [Prevention](#step-2-prevention) and [Mitigation](#step-3-mitigation).
+Test Optimization helps remediate flaky tests through Attempt to Fix and [Bits AI-powered flaky test fixes][16]. This section validates the Attempt to Fix workflow by fixing the same test used for [Prevention](#step-2-prevention) and [Mitigation](#step-3-mitigation).
 
 1. In [Flaky Test Management][9], open the quarantined validation test.
 2. Click {{< ui >}}Actions{{< /ui >}}, select {{< ui >}}Link commit to fix{{< /ui >}}, and copy the generated key (it starts with `DD_`).
@@ -556,7 +556,7 @@ Test Optimization helps remediate flaky tests through Attempt to Fix and Bits AI
 
 [1]: /tests/flaky_tests/early_flake_detection
 [2]: /tests/guides/setup_new_flaky_pr_gate
-[3]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
+[3]: https://app.datadoghq.com/ci/settings/ci-cd/repositories?tab=repository
 [4]: /tests/flaky_tests/auto_test_retries
 [5]: /tests/flaky_management
 [6]: /tests/flaky_management/#configure-policies-to-automate-the-flaky-test-lifecycle
@@ -569,3 +569,4 @@ Test Optimization helps remediate flaky tests through Attempt to Fix and Bits AI
 [13]: /tests/test_impact_analysis/
 [14]: https://app.datadoghq.com/ci/test/flaky/explorer?query=%40test.name%3A%2Aflaky%2Avalidation%2A%20first_flaked_branch%3Avalidate-test-optimization%20fix_in_progress%3Atrue
 [15]: https://www.npmjs.com/package/dd-trace
+[16]: /tests/flaky_management/#bits-ai-powered-flaky-test-fixes
