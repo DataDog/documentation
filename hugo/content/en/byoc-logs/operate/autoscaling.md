@@ -41,7 +41,7 @@ indexer:
     enabled: true
 ```
 
-When indexer autoscaling is enabled, `indexer.replicaCount` is ignored and the HPA controls the number of indexer pods.
+When you enable indexer autoscaling, the HPA controls the number of indexer pods and ignores `indexer.replicaCount`.
 
 Default indexer HPA settings:
 
@@ -63,7 +63,7 @@ compactor:
     enabled: true
 ```
 
-The compactor HPA is created only when both `enableStandaloneCompactors` and `compactor.autoscaling.enabled` are set to `true`. When compactor autoscaling is enabled, `compactor.replicaCount` is ignored and the HPA controls the number of compactor pods.
+The chart creates the compactor HPA only when you set both `enableStandaloneCompactors` and `compactor.autoscaling.enabled` to `true`. When you enable compactor autoscaling, the HPA controls the number of compactor pods and ignores `compactor.replicaCount`.
 
 Default compactor HPA settings:
 
@@ -83,7 +83,7 @@ searcher:
     enabled: true
 ```
 
-When searcher autoscaling is enabled, `searcher.replicaCount` is ignored and the HPA controls the number of searcher pods.
+When you enable searcher autoscaling, the HPA controls the number of searcher pods and ignores `searcher.replicaCount`.
 
 The searcher CPU target is lower than the indexer and compactor targets because search is latency-sensitive. Keeping average utilization low leaves headroom for query bursts. The searcher HPA also applies a 60-second scale-up stabilization window.
 
