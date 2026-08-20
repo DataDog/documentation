@@ -71,7 +71,7 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 
 **Requirements**:
 - Datadog Agent **7.79.0 or later**
-- Linux only (eBPF dependency), on kernel **4.14.0 or later** or a distribution with backported eBPF features. See [Workload Protection setup][7] for supported distributions.
+- Linux only (eBPF dependency). See [Workload Protection setup][7] for supported distributions and kernel versions.
 - The Agent container must run in the host PID namespace (`--pid host`)
 - Applies to operating system packages in container image vulnerability findings
 

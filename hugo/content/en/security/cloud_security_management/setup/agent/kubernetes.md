@@ -206,7 +206,7 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 
 **Requirements**:
 - Datadog Agent **7.79.0 or later**. On Kubernetes, use **7.81.0 or later** for the most complete signal coverage.
-- Linux only (eBPF dependency), on kernel **4.14.0 or later** or a distribution with backported eBPF features. See [Workload Protection setup][11] for supported distributions.
+- Linux only (eBPF dependency). See [Workload Protection setup][11] for supported distributions and kernel versions.
 - `hostPID: true` on the Agent pod. Namespaces that enforce the PodSecurity `baseline` or `restricted` standard reject pods with `hostPID: true`, so run the Agent in a namespace that allows the `privileged` standard.
 - Applies to operating system packages in container image vulnerability findings.
 
@@ -289,7 +289,7 @@ runtime_security_config:
     forward_interval: 1m
 ```
 
-With Helm, the Datadog Operator, or a DaemonSet, set the equivalent environment variables on the `system-probe` container:
+With Helm, the Datadog Operator, or a DaemonSet, set the equivalent environment variables on the `system-probe` container, which reads this configuration:
 
 ```yaml
 - name: DD_RUNTIME_SECURITY_CONFIG_SBOM_ENRICHMENT_INTERVAL
