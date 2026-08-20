@@ -7201,131 +7201,511 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_packs
       weight: 5
+    - name: Abnormal.ai - Abuse Campaigns
+      url: observability_pipelines/packs/abnormal_ai_abuse_campaigns/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_abnormal_ai_abuse_campaigns
+      weight: 501
+    - name: Abnormal.ai - Abuse Mailbox Messages Not Analyzed
+      url: observability_pipelines/packs/abnormal_ai_abuse_mailbox_messages/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_abnormal_ai_abuse_mailbox_messages
+      weight: 502
+    - name: Abnormal.ai - Audit Logs
+      url: observability_pipelines/packs/abnormal_ai_audit_logs/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_abnormal_ai_audit_logs
+      weight: 503
+    - name: Abnormal.ai - Threats
+      url: observability_pipelines/packs/abnormal_ai_threats/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_abnormal_ai_threats
+      weight: 504
+    - name: Active Directory
+      url: observability_pipelines/packs/active_directory/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_active_directory
+      weight: 505
     - name: Akamai CDN
       url: observability_pipelines/packs/akamai_cdn/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_akamai_cdn
-      weight: 501
-    - name: Amazon CloudFront
-      url: observability_pipelines/packs/amazon_cloudfront/
+      weight: 506
+    - name: AlphaSOC Findings
+      url: observability_pipelines/packs/alphasoc_findings/
       parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_amazon_cloudfront
-      weight: 502
+      identifier: observability_pipelines_packs_alphasoc_findings
+      weight: 507
+    - name: Amazon Connect
+      url: observability_pipelines/packs/amazon_connect/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_amazon_connect
+      weight: 508
     - name: Amazon VPC Flow Logs
       url: observability_pipelines/packs/amazon_vpc_flow_logs/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_amazon_vpc_flow_logs
-      weight: 503
+      weight: 509
+    - name: Argo CD
+      url: observability_pipelines/packs/argo_cd/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_argo_cd
+      weight: 510
+    - name: Auth0
+      url: observability_pipelines/packs/auth0/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_auth0
+      weight: 511
+    - name: Aviatrix Controller API Audit
+      url: observability_pipelines/packs/aviatrix_controller_api_audit/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_controller_api_audit
+      weight: 512
+    - name: Aviatrix FQDN Firewall
+      url: observability_pipelines/packs/aviatrix_fqdn_firewall/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_fqdn_firewall
+      weight: 513
+    - name: Aviatrix Gateway Network Stats
+      url: observability_pipelines/packs/aviatrix_gateway_network_stats/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_gateway_network_stats
+      weight: 514
+    - name: Aviatrix Gateway System Stats
+      url: observability_pipelines/packs/aviatrix_gateway_system_stats/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_gateway_system_stats
+      weight: 515
+    - name: Aviatrix L4 Microsegmentation
+      url: observability_pipelines/packs/aviatrix_l4_microsegmentation/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_l4_microsegmentation
+      weight: 516
+    - name: Aviatrix L7/TLS Inspection
+      url: observability_pipelines/packs/aviatrix_l7_tls_inspection/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_l7_tls_inspection
+      weight: 517
+    - name: Aviatrix Suricata IDS/IPS
+      url: observability_pipelines/packs/aviatrix_suricata_ids_ips/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_suricata_ids_ips
+      weight: 518
+    - name: Aviatrix Tunnel Status
+      url: observability_pipelines/packs/aviatrix_tunnel_status/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_tunnel_status
+      weight: 519
+    - name: Aviatrix VPN Session
+      url: observability_pipelines/packs/aviatrix_vpn_session/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_vpn_session
+      weight: 520
     - name: AWS Application Load Balancer Logs
       url: observability_pipelines/packs/aws_alb/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_aws_alb
-      weight: 504
+      weight: 521
+    - name: Amazon CloudFront
+      url: observability_pipelines/packs/amazon_cloudfront/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_amazon_cloudfront
+      weight: 522
     - name: AWS CloudTrail
       url: observability_pipelines/packs/aws_cloudtrail/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_aws_cloudtrail
-      weight: 505
+      weight: 523
+    - name: AWS CloudWatch Logs
+      url: observability_pipelines/packs/aws_cloudwatch_logs/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aws_cloudwatch_logs
+      weight: 524
+    - name: AWS Config
+      url: observability_pipelines/packs/aws_config/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aws_config
+      weight: 525
     - name: AWS Elastic Load Balancer Logs
       url: observability_pipelines/packs/aws_elb/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_aws_elb
-      weight: 506
+      weight: 526
+    - name: AWS GuardDuty
+      url: observability_pipelines/packs/aws_guardduty/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aws_guardduty
+      weight: 527
+    - name: AWS Lambda
+      url: observability_pipelines/packs/aws_lambda/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aws_lambda
+      weight: 528
     - name: AWS Network Load Balancer Logs
       url: observability_pipelines/packs/aws_nlb/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_aws_nlb
-      weight: 507
+      weight: 529
+    - name: AWS Route 53
+      url: observability_pipelines/packs/aws_route_53/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aws_route_53
+      weight: 530
+    - name: AWS Security Hub
+      url: observability_pipelines/packs/aws_security_hub/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aws_security_hub
+      weight: 531
+    - name: AWS WAF
+      url: observability_pipelines/packs/aws_waf/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aws_waf
+      weight: 532
+    - name: Azure NSG
+      url: observability_pipelines/packs/azure_nsg/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_azure_nsg
+      weight: 533
+    - name: BlueCat DNS
+      url: observability_pipelines/packs/bluecat_dns/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_bluecat_dns
+      weight: 534
+    - name: Check Point
+      url: observability_pipelines/packs/checkpoint/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_checkpoint
+      weight: 535
+    - name: Cisco ACI
+      url: observability_pipelines/packs/cisco_aci/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_cisco_aci
+      weight: 536
     - name: Cisco ASA
       url: observability_pipelines/packs/cisco_asa/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_cisco_asa
-      weight: 508
+      weight: 537
+    - name: Cisco ASA - Google SecOps
+      url: observability_pipelines/packs/cisco_asa_google_secops/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_cisco_asa_google_secops
+      weight: 538
+    - name: Cisco ASA - Microsoft Sentinel
+      url: observability_pipelines/packs/cisco_asa_microsoft_sentinel/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_cisco_asa_microsoft_sentinel
+      weight: 539
+    - name: Cisco FTD
+      url: observability_pipelines/packs/cisco_ftd/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_cisco_ftd
+      weight: 540
+    - name: Cisco IOS
+      url: observability_pipelines/packs/cisco_ios/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_cisco_ios
+      weight: 541
+    - name: Cisco IOS Traceback
+      url: observability_pipelines/packs/cisco_ios_traceback/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_cisco_ios_traceback
+      weight: 542
+    - name: Cisco Meraki
+      url: observability_pipelines/packs/cisco_meraki/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_cisco_meraki
+      weight: 543
+    - name: Cisco Meraki - Microsoft Sentinel
+      url: observability_pipelines/packs/cisco_meraki_microsoft_sentinel/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_cisco_meraki_microsoft_sentinel
+      weight: 544
     - name: Cloudflare
       url: observability_pipelines/packs/cloudflare/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_cloudflare
-      weight: 509
+      weight: 545
+    - name: CrowdStrike FDR
+      url: observability_pipelines/packs/crowdstrike/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_crowdstrike
+      weight: 546
+    - name: DNS Stream
+      url: observability_pipelines/packs/dns_stream/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_dns_stream
+      weight: 547
+    - name: Exabeam - Cisco ASA
+      url: observability_pipelines/packs/exabeam_cisco_asa/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_exabeam_cisco_asa
+      weight: 548
+    - name: Exabeam - CrowdStrike FDR
+      url: observability_pipelines/packs/exabeam_crowdstrike_fdr/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_exabeam_crowdstrike_fdr
+      weight: 549
+    - name: Exabeam - Fortinet FortiGate
+      url: observability_pipelines/packs/exabeam_fortinet_fortigate/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_exabeam_fortinet_fortigate
+      weight: 550
+    - name: Exabeam - Palo Alto
+      url: observability_pipelines/packs/exabeam_palo_alto/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_exabeam_palo_alto
+      weight: 551
+    - name: Exabeam - SentinelOne Cloud Funnel
+      url: observability_pipelines/packs/exabeam_sentinelone_cloud_funnel/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_exabeam_sentinelone_cloud_funnel
+      weight: 552
+    - name: Exabeam - Windows
+      url: observability_pipelines/packs/exabeam_windows/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_exabeam_windows
+      weight: 553
+    - name: Exabeam - Zscaler
+      url: observability_pipelines/packs/exabeam_zscaler/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_exabeam_zscaler
+      weight: 554
+    - name: ExtraHop
+      url: observability_pipelines/packs/extrahop/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_extrahop
+      weight: 555
+    - name: ExtraHop - Microsoft Sentinel
+      url: observability_pipelines/packs/extrahop_microsoft_sentinel/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_extrahop_microsoft_sentinel
+      weight: 556
     - name: F5
       url: observability_pipelines/packs/f5/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_f5
-      weight: 510
+      weight: 557
     - name: Fastly
       url: observability_pipelines/packs/fastly/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_fastly
-      weight: 511
+      weight: 558
+    - name: Fortinet - Microsoft Sentinel
+      url: observability_pipelines/packs/fortinet_microsoft_sentinel/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_fortinet_microsoft_sentinel
+      weight: 559
     - name: Fortinet Firewall
       url: observability_pipelines/packs/fortinet_firewall/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_fortinet_firewall
-      weight: 512
+      weight: 560
+    - name: GCP Firewall
+      url: observability_pipelines/packs/gcp_firewall/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_gcp_firewall
+      weight: 561
+    - name: Google Cloud Audit
+      url: observability_pipelines/packs/google_cloud_audit/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_google_cloud_audit
+      weight: 562
+    - name: Google SecOps - AWS VPC
+      url: observability_pipelines/packs/google_secops_aws_vpc/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_google_secops_aws_vpc
+      weight: 563
+    - name: Google SecOps - Fortinet Firewall
+      url: observability_pipelines/packs/google_secops_fortinet_firewall/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_google_secops_fortinet_firewall
+      weight: 564
+    - name: Google SecOps - Palo Alto Firewall
+      url: observability_pipelines/packs/google_secops_palo_alto_firewall/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_google_secops_palo_alto_firewall
+      weight: 565
+    - name: Google SecOps - Windows Event Log
+      url: observability_pipelines/packs/google_secops_windows_event_log/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_google_secops_windows_event_log
+      weight: 566
     - name: HAProxy Ingress
       url: observability_pipelines/packs/haproxy_ingress/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_haproxy_ingress
-      weight: 513
+      weight: 567
     - name: Infoblox
       url: observability_pipelines/packs/infoblox/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_infoblox
-      weight: 514
+      weight: 568
     - name: Istio Proxy
       url: observability_pipelines/packs/istio_proxy/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_istio_proxy
-      weight: 515
+      weight: 569
     - name: Juniper SRX Firewall Traffic Logs
       url: observability_pipelines/packs/juniper_srx_traffic/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_juniper_srx_traffic
-      weight: 516
+      weight: 570
+    - name: Kube Proxy
+      url: observability_pipelines/packs/kube_proxy/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_kube_proxy
+      weight: 571
+    - name: Microsoft DNS
+      url: observability_pipelines/packs/microsoft_dns/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_microsoft_dns
+      weight: 572
+    - name: MITRE ATT&CK AWS WAF Enrichment
+      url: observability_pipelines/packs/mitre_attack_aws_waf_enrichment/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_mitre_attack_aws_waf_enrichment
+      weight: 573
+    - name: MITRE ATT&CK CloudTrail Enrichment
+      url: observability_pipelines/packs/mitre_attack_cloudtrail_enrichment/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_mitre_attack_cloudtrail_enrichment
+      weight: 574
+    - name: MITRE ATT&CK FortiGate Enrichment
+      url: observability_pipelines/packs/mitre_attack_fortigate_enrichment/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_mitre_attack_fortigate_enrichment
+      weight: 575
+    - name: MITRE ATT&CK Okta Enrichment
+      url: observability_pipelines/packs/mitre_attack_okta_enrichment/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_mitre_attack_okta_enrichment
+      weight: 576
+    - name: MITRE ATT&CK Palo Alto Enrichment
+      url: observability_pipelines/packs/mitre_attack_palo_alto_enrichment/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_mitre_attack_palo_alto_enrichment
+      weight: 577
+    - name: MITRE ATT&CK Windows Enrichment
+      url: observability_pipelines/packs/mitre_attack_windows_enrichment/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_mitre_attack_windows_enrichment
+      weight: 578
     - name: Netskope
       url: observability_pipelines/packs/netskope/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_netskope
-      weight: 517
+      weight: 579
     - name: NGINX
       url: observability_pipelines/packs/nginx/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_nginx
-      weight: 518
+      weight: 580
     - name: Okta
       url: observability_pipelines/packs/okta/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_okta
-      weight: 519
+      weight: 581
+    - name: OpenAI - Audit Logs
+      url: observability_pipelines/packs/openai_audit_logs/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_openai_audit_logs
+      weight: 582
+    - name: OpenTelemetry Logs
+      url: observability_pipelines/packs/opentelemetry_logs/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_opentelemetry_logs
+      weight: 583
+    - name: Orca Security
+      url: observability_pipelines/packs/orca_security/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_orca_security
+      weight: 584
+    - name: Palo Alto Cortex
+      url: observability_pipelines/packs/palo_alto_cortex/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_palo_alto_cortex
+      weight: 585
     - name: Palo Alto Firewall
       url: observability_pipelines/packs/palo_alto_firewall/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_palo_alto_firewall
-      weight: 520
+      weight: 586
+    - name: Palo Alto Networks - Microsoft Sentinel
+      url: observability_pipelines/packs/palo_alto_microsoft_sentinel/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_palo_alto_microsoft_sentinel
+      weight: 587
+    - name: Palo Alto Networks - XSIAM
+      url: observability_pipelines/packs/palo_alto_xsiam/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_palo_alto_xsiam
+      weight: 588
+    - name: Proofpoint Email Security
+      url: observability_pipelines/packs/proofpoint_email_security/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_proofpoint_email_security
+      weight: 589
+    - name: Qualys Detections
+      url: observability_pipelines/packs/qualys_detections/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_qualys_detections
+      weight: 590
+    - name: SentinelOne Cloud Funnel EDR
+      url: observability_pipelines/packs/sentinel_one/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_sentinel_one
+      weight: 591
+    - name: Syslog
+      url: observability_pipelines/packs/syslog/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_syslog
+      weight: 592
+    - name: Windows DNS Log
+      url: observability_pipelines/packs/windows_dns_log/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_windows_dns_log
+      weight: 593
+    - name: Windows Office 365
+      url: observability_pipelines/packs/windows_office_365/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_windows_office_365
+      weight: 594
     - name: Windows XML
       url: observability_pipelines/packs/windows_xml/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_windows_xml
-      weight: 521
+      weight: 595
+    - name: WinEventLog
+      url: observability_pipelines/packs/wineventlog/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_wineventlog
+      weight: 596
     - name: ZScaler ZIA DNS
       url: observability_pipelines/packs/zscaler_zia_dns/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_zscaler_zia_dns
-      weight: 522
+      weight: 597
     - name: Zscaler ZIA Firewall
       url: observability_pipelines/packs/zscaler_zia_firewall/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_zscaler_zia_firewall
-      weight: 523
+      weight: 598
     - name: Zscaler ZIA Tunnel
       url: observability_pipelines/packs/zscaler_zia_tunnel/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_zscaler_zia_tunnel
-      weight: 524
+      weight: 599
     - name: Zscaler ZIA Web Logs
       url: observability_pipelines/packs/zscaler_zia_web_logs/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_zscaler_zia_web_logs
-      weight: 525
+      weight: 600
+    - name: Zscaler ZPA
+      url: observability_pipelines/packs/zscaler_zpa/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_zscaler_zpa
+      weight: 601
     - name: Replay
       url: observability_pipelines/replay/
       parent: observability_pipelines
