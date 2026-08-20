@@ -38,6 +38,8 @@ By enabling frustration signals, Datadog collects all three signal types by defa
 
 ## Requirements
 
+For setup steps, see [Track frustration signals][11].
+
 First, you need the Browser RUM SDK version >= 4.14.0.
 
 To start collecting frustration signals, add the following to your SDK configuration:
@@ -167,4 +169,5 @@ To provide feedback or submit a feature request, contact <a href="/help/">Datado
 [8]: /session_replay/browser/
 [9]: /monitors/types/real_user_monitoring/
 [10]: mailto:success@datadoghq.com
+[11]: /real_user_monitoring/setup/enable_rum/track_frustration_signals/?platform=browser
 
