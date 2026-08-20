@@ -1,5 +1,6 @@
 ---
 title: Environment Variables
+description: Find the environment variables available for Observability Pipelines sources, processors, and destinations.
 disable_toc: false
 aliases:
     - /observability_pipelines/environment_variables/
