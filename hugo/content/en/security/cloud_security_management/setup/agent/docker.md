@@ -74,7 +74,7 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 - Linux only (eBPF dependency). See [Workload Protection setup][7] for supported distributions and kernel versions.
 - The host `/proc` mounted into the Agent container (`-v /proc/:/host/proc/:ro`)
 - Enabling this setting starts `system-probe` if it is not already running
-- Applies to packages installed by an operating system package manager (`apt`, `yum`, or `apk`) in container image vulnerability findings. Application libraries, such as npm or pip packages, do not receive runtime signals.
+- Applies to packages installed by an operating system package manager (`apt`, `yum`, or `apk`) in container image vulnerability findings.
 
 **Note**: Runtime package prioritization runs independently of [Workload Protection][4] and does not affect its usage.
 
@@ -90,7 +90,7 @@ docker run -d --name dd-agent \
   registry.datadoghq.com/agent:7
 {{< /code-block >}}
 
-To verify the setup, filter vulnerability findings by [runtime signals][6]. Signals appear within a few minutes of a package running.
+To verify the setup, filter vulnerability findings by [runtime signals][6].
 
 Runtime package prioritization increases the number of SBOM events the Agent sends. On hosts running many container images, raise the enrichment interval from its default of `1m`:
 

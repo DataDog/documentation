@@ -103,7 +103,7 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 - Datadog Agent **7.79.0 or later**
 - Linux only (eBPF dependency). See [Workload Protection setup][10] for supported distributions and kernel versions.
 - Enabling this setting starts `system-probe` if it is not already running
-- Applies to packages installed by an operating system package manager (`apt`, `yum`, or `apk`) in container image vulnerability findings. Application libraries, such as npm or pip packages, do not receive runtime signals.
+- Applies to packages installed by an operating system package manager (`apt`, `yum`, or `apk`) in container image vulnerability findings.
 
 **Note**: Runtime package prioritization runs independently of [Workload Protection][7] and does not affect its usage.
 
@@ -122,7 +122,7 @@ sbom:
 
 Restart the Agent after applying the changes.
 
-To verify the setup, filter vulnerability findings by [runtime signals][9]. Signals appear within a few minutes of a package running.
+To verify the setup, filter vulnerability findings by [runtime signals][9].
 
 Runtime package prioritization increases the number of SBOM events the Agent sends. On hosts running many container images, raise the enrichment interval from its default of `1m`:
 
