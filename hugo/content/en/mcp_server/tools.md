@@ -2308,7 +2308,7 @@ Checks a complete workflow specification without creating or modifying a workflo
 ### `create_datadog_workflow`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Write`*\
-Creates a [Workflow Automation][39] workflow from a complete specification and can publish it immediately. Workflows are unpublished by default. A successful call confirms that the workflow was saved, but does not verify its runtime behavior.
+Creates a [Workflow Automation][39] workflow from a complete specification and optionally publishes it immediately. Workflows are unpublished by default. A successful call confirms that the workflow was saved, but does not verify its runtime behavior.
 
 - Create a workflow that posts a Slack message when triggered by an agent.
 - Build a workflow with a schedule trigger that runs every day at 9 AM.
