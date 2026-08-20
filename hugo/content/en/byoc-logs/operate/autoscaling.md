@@ -21,7 +21,7 @@ The `datadog/cloudprem` Helm chart creates Horizontal Pod Autoscalers (HPAs) for
 
 ## Before you begin
 
-This guide assumes that you have:
+Before you enable autoscaling, you need:
 
 - A BYOC Logs deployment installed with the `datadog/cloudprem` Helm chart.
 - Chart version `0.4.6` or later for standalone compactor autoscaling.
