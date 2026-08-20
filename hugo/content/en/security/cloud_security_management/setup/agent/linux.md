@@ -51,7 +51,7 @@ sbom:
       enabled: true
 {{< /code-block >}}
 
-**Note**: `enrichment.usage.enabled: true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package prioritization runs independently of [Workload Protection][7] and does not affect its usage. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for more details.
+**Note**: `enrichment.usage.enabled: true` requires Datadog Agent **7.79.0 or later**. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for requirements and tuning.
 
 {{< code-block lang="bash" filename="/etc/datadog-agent/security-agent.yaml" disable_copy="false" collapsible="true" >}}
 compliance_config:
@@ -105,7 +105,7 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 - Enabling this setting starts `system-probe` if it is not already running
 - Applies to operating system packages in container image vulnerability findings
 
-**Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][7] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
+**Note**: Runtime package prioritization runs independently of [Workload Protection][7] and does not affect its usage.
 
 Add the `enrichment` block to the `sbom` section of your `datadog.yaml` file:
 

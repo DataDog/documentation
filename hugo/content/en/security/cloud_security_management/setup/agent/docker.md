@@ -76,7 +76,7 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 - Enabling this setting starts `system-probe` if it is not already running
 - Applies to operating system packages in container image vulnerability findings
 
-**Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][4] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
+**Note**: Runtime package prioritization runs independently of [Workload Protection][4] and does not affect its usage.
 
 Add `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` to your Docker run command:
 
@@ -90,9 +90,25 @@ docker run -d --name dd-agent \
   registry.datadoghq.com/agent:7
 {{< /code-block >}}
 
-To verify the setup, confirm that the `sbom` check is listed under **Collector** in the [Agent status output][8], then filter vulnerability findings by [runtime signals][6] to confirm the signals are arriving.
+The Agent re-sends a container image SBOM when it observes new package usage in that image, so enabling runtime package prioritization increases the number of SBOM events the Agent sends. On hosts running many container images, raise the enrichment interval from its default of `1m` in `system-probe.yaml`:
 
-**Note**: `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package prioritization runs independently of [Workload Protection][4] and does not affect its usage.
+{{< code-block lang="yaml" filename="/etc/datadog-agent/system-probe.yaml" >}}
+runtime_security_config:
+  sbom:
+    enrichment_interval: 30m
+    forward_interval: 1m
+{{< /code-block >}}
+
+Or set the equivalent environment variables on the Agent container:
+
+{{< code-block lang="shell" >}}
+  -e DD_RUNTIME_SECURITY_CONFIG_SBOM_ENRICHMENT_INTERVAL=30m \
+  -e DD_RUNTIME_SECURITY_CONFIG_SBOM_FORWARD_INTERVAL=1m \
+{{< /code-block >}}
+
+A longer `enrichment_interval` sends fewer events. A package's first observation is unaffected; only repeat observations of an already-seen package are throttled.
+
+To verify the setup, confirm that the `sbom` check is listed under **Collector** in the [Agent status output][8], then filter vulnerability findings by [runtime signals][6] to confirm the signals are arriving.
 
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats
