@@ -11,6 +11,10 @@ Database Monitoring for MongoDB captures slow operations from either MongoDB slo
 
 Database Monitoring for MongoDB gathers operation samples using the `currentOp` command. This command provides information about operations that are currently being executed on the MongoDB instance. Additionally, Database Monitoring collects explain plans for the read operation samples using the `explain` command, offering detailed insights into the query execution plans.
 
+Operations against the `admin` database and `hello` and heartbeat commands are not collected as samples.
+
+Explain plans are not generated for operations against system databases (`admin`, `config`, `local`), write operations (insert/update/delete/getMore), and other unexplainable operations, such as `listIndexes` and `dbStats`.
+
 ### Replication state changes
 
 Database Monitoring for MongoDB generates an event each time there is a change in the replication state within the MongoDB instance. This ensures that any changes in replication are promptly detected and reported.
