@@ -122,11 +122,12 @@ Extractions run before formulas, so a calculated field formula can reference a f
 
 ### Write a regex extraction pattern
 
-A pattern must follow three rules:
+A pattern must follow four rules:
 
 - It must contain at least one capture group.
 - Every capture group must be named. Use `(?<name>…)`, not `(…)`. Use `(?:…)` to group without creating a field.
 - Each name must be unique. The name becomes the name of the extracted field.
+- Each name must start with a letter, and contain only letters and digits (`[A-Za-z][A-Za-z0-9]*`). Names like `client_ip`, `http.status`, or `client-ip` are not valid capture group names.
 
 Given this log line:
 

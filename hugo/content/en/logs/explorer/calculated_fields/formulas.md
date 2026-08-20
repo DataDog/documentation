@@ -337,7 +337,7 @@ Returns `true` when the pattern matches anywhere in the value, and `false` other
 
 <h4>regexp_replace(<i>str</i> value, <i>str</i> pattern, <i>str</i> replacement, [<i>int</i> start, <i>int</i> N])</h4>
 
-Returns the value with matched text replaced. Use `$1` through `$9` in the replacement to insert a capture group's match, or `${name}` for a named group. To write a literal `$`, escape it as `\$`.
+Returns the value with matched text replaced. Use `$1` through `$9` in the replacement to insert a capture group's match, or `${name}` for a named group. Formula arguments are double-quoted string literals, so a backslash must itself be escaped: write a literal `$` as `"\\$"`, and likewise use `"\\d"` rather than `"\d"` for shorthand classes in the pattern.
 
 By default, only the first match is replaced. Two optional arguments change that:
 
