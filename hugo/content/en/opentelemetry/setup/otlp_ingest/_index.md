@@ -7,6 +7,9 @@ further_reading:
 - link: "/opentelemetry/setup"
   tag: "Documentation"
   text: "Send Data to Datadog"
+- link: "https://www.datadoghq.com/blog/native-otel-with-datadog/"
+  tag: "Blog"
+  text: "Use OpenTelemetry-native observability with Datadog from ingestion to investigation"
 ---
 
 ## Overview

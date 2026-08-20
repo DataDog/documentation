@@ -15,10 +15,6 @@ further_reading:
 
 ---
 
-{{< callout url="https://www.datadoghq.com/" btn_hidden="true">}}
-Prompt Management is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Prompt Management provides a centralized registry for the prompts used by your LLM applications. Instead of hardcoding prompt templates in application code or configuration files, create, version, and update prompts through Agent Observability, then retrieve them at runtime.
@@ -30,6 +26,7 @@ Prompt Management works alongside [Prompt Tracking][1]. When Agent Observability
 ## Prerequisites
 
 - Python 3.9 or later.
+- ddtrace>=4.13.0
 - Your [Datadog site][2] and a [Datadog API key][3]. The API key is required for prompt retrieval even if traces are sent through the Datadog Agent.
 - A [Datadog application key][4] with the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions to resolve prompts by environment. If you select an existing application key in Datadog, ensure that it has these permissions.
 - To manage prompts through the API or Python SDK, the application key also requires the `llm_observability_write` and `feature_flag_config_write` permissions.
@@ -286,7 +283,41 @@ Use `LLMObs.list_prompts()` and `LLMObs.list_prompt_versions()` to inspect manag
 
 ### Use the API
 
-Use the Prompt Management API to create, retrieve, update, and delete prompts and prompt versions. See the [LLM Observability API reference][8] for endpoint schemas, request media types, and examples.
+Use the Prompt Management API to create, retrieve, update, and delete prompts and prompt versions. See the [Agent Observability API reference][8] for endpoint schemas, request media types, and examples.
+
+## Advanced usage
+
+### Serve multiple versions from one environment
+
+Prompt Management builds on Datadog's Feature Flags product. Each environment resolves `get_prompt()` calls to a default version, and can also serve a different version to calls that match a targeting rule.
+
+For example, roll out an unstable prompt version to a subset of users in `production` with a targeting rule, while everyone else keeps getting the stable version:
+
+```python
+## DD_ENV=production
+prompt = LLMObs.get_prompt("my-prompt")               # resolves to the stable version
+prompt = LLMObs.get_prompt("my-prompt", tag="unstable") # resolves to the unstable version
+```
+
+To configure this:
+
+1. On the prompt's version list, hover over an environment and click {{< ui >}}Targeting Rules{{< /ui >}}.
+
+   {{< img src="llm_observability/monitoring/prompt-environment-targeting-rules-link.png" alt="An environment panel showing the environment currently serving one prompt version, with a link to Targeting Rules." style="width:60%;" >}}
+
+2. Click {{< ui >}}Add Targeting Rule{{< /ui >}}.
+
+   {{< img src="llm_observability/monitoring/prompt-targeting-rules-default-version.png" alt="The Targeting Rules panel for an environment, showing the default version served when no rules match and an Add Targeting Rule button." style="width:100%;" >}}
+
+3. Define the rule filter. For example, match calls to `get_prompt()` that pass the attribute `tag=unstable`, and set the resulting variant to the unstable prompt version.
+
+   {{< img src="llm_observability/monitoring/prompt-targeting-rule-tag-filter.png" alt="The targeting rule filter builder, matching a tag attribute set to unstable." style="width:100%;" >}}
+
+4. Save the rule. Calls with `tag=unstable` resolve to the matched version; all other calls fall back to the default version.
+
+Pass the attributes referenced by your targeting rules as keyword arguments to `get_prompt()`. Calls that don't pass a matching attribute continue to resolve to the environment's default version.
+
+To retrieve an exact version regardless of any targeting rule, pass `version` as described in [Select a version](#select-a-version).
 
 ## Further reading
 

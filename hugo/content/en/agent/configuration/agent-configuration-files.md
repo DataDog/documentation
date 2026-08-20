@@ -23,8 +23,6 @@ The location of the Agent configuration file differs depending on the operating 
 | macOS                                | `/opt/datadog-agent/etc/datadog.yaml`      |
 | Windows                              | `%ProgramData%\Datadog\datadog.yaml` |
 
-See the [sample `config_template.yaml` file][1] for all available configuration options.
-
 ## Agent configuration directory
 
 Configuration files for Agent checks and integrations are stored in the `conf.d` directory. The location of the directory differs depending on the operating system.
@@ -71,5 +69,4 @@ For log collection, the Agent does not accept multiple YAML files that point to 
 
 JMX Agent checks have an additional `metrics.yaml` file in their configuration folder. It is a list of all the beans that the Datadog Agent collects by default. This way, you do not need to list all of the beans manually when you configure a check through [Docker labels or k8s annotations][2].
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [2]: /agent/kubernetes/integrations/#configuration
