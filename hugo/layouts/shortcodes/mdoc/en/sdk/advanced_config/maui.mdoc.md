@@ -11,6 +11,8 @@ If you have not set up the SDK yet, follow the [in-app setup instructions][1] or
 
 ### Custom views
 
+For setup steps covering both automatic and manual view tracking, see [Track navigation][6].
+
 In addition to [tracking views automatically](#customize-automatic-tracking), you can track specific views manually. Stop tracking when the view is no longer visible.
 
 ```csharp
@@ -326,3 +328,4 @@ DdTrace.Enable(new DdTraceConfiguration
 [3]: /real_user_monitoring/application_monitoring/maui/data_collected
 [4]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
 [5]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=maui
+[6]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=maui

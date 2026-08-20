@@ -11,6 +11,8 @@ Android RUM automatically tracks attributes such as user activity, screens, erro
 
 ### Custom views
 
+For setup steps covering both automatic and manual view tracking, see [Track navigation][16].
+
 In addition to [tracking views automatically][4], you can also track specific distinct views (such as activities and fragments) when they become visible and interactive in the `onResume()` lifecycle. Stop tracking when the view is no longer visible. Most often, this method should be called in the frontmost `Activity` or `Fragment`:
 
 {% tabs %}
@@ -736,3 +738,4 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [13]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#interaction-to-next-view
 [14]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#setup
 [15]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=android
+[16]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android

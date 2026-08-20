@@ -27,6 +27,8 @@ The percentage rate at which Datadog sends internal telemetry data. A value of 1
 
 ### Automatic view tracking
 
+For setup steps covering both automatic and manual view tracking, see [Track navigation][5].
+
 If you select `Enable Automatic Scene Tracking`, Datadog hooks into Unity's `SceneManager` to detect scenes loading and unloading, and start RUM Views appropriately. If you are using methods to move between scenes other than `SceneManager`, or would like to track changes in views that occur without `SceneManager`, you need to track views manually using `DdRum.StartView` and `DdRum.StopView`.
 
 ### Track user actions
@@ -154,3 +156,4 @@ DatadogSdk.instance.ClearAllData();
 [2]: /real_user_monitoring/application_monitoring/unity/setup/
 [3]: /real_user_monitoring/application_monitoring/unity/data_collected/
 [4]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=unity
+[5]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=unity

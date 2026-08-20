@@ -123,6 +123,8 @@ Starting with [version 4.13.0][16], you can also optionally define the associate
 
 ## Manually track pageviews
 
+For setup steps covering both automatic and manual view tracking, see [Track navigation][25].
+
 The following example manually tracks the pageviews on the `checkout` page in a RUM application. No service or version can be specified.
 
 <!-- NPM -->
@@ -1637,3 +1639,4 @@ The `service` and `version` tags representing each micro frontend can also be fo
 [22]: https://github.com/DataDog/build-plugins?tab=readme-ov-file#usage
 [23]: https://github.com/DataDog/build-plugins
 [24]: /real_user_monitoring/rum_without_limits/
+[25]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=browser

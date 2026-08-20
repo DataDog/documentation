@@ -1,6 +1,6 @@
-### Custom views
+## Custom views
 
-In addition to [tracking views automatically][4], you can also track specific distinct views (such as activities and fragments) when they become visible and interactive in the `onResume()` lifecycle. Stop tracking when the view is no longer visible. Most often, this method should be called in the frontmost `Activity` or `Fragment`:
+In addition to [tracking views automatically][4], you can also track specific distinct views (such as activities and fragments) when they become visible and interactive in the `onResume()` life cycle. Stop tracking when the view is no longer visible. Most often, this method should be called in the frontmost `Activity` or `Fragment`:
 
 {% tabs %}
 {% tab label="Kotlin" %}
@@ -31,7 +31,7 @@ public void onPause() {
 {% /tab %}
 {% /tabs %}
 
-### Automatically track views
+## Automatically track views
 
 To automatically track your views (such as activities and fragments), provide a tracking strategy at initialization. Depending on your application's architecture, you can choose one of the following strategies:
 
