@@ -51,7 +51,7 @@ sbom:
       enabled: true
 {{< /code-block >}}
 
-**Note**: `enrichment.usage.enabled: true` requires Datadog Agent **7.79.0 or later**. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for requirements and tuning.
+**Note**: `enrichment.usage.enabled: true` requires Datadog Agent **7.79.0 or later**. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for requirements.
 
 {{< code-block lang="bash" filename="/etc/datadog-agent/security-agent.yaml" disable_copy="false" collapsible="true" >}}
 compliance_config:
@@ -123,17 +123,6 @@ sbom:
 Restart the Agent after applying the changes.
 
 To verify the setup, filter vulnerability findings by [runtime signals][9].
-
-Runtime package prioritization increases the number of SBOM events the Agent sends. On hosts running many container images, raise the enrichment interval from its default of `1m`:
-
-{{< code-block lang="bash" filename="/etc/datadog-agent/system-probe.yaml" disable_copy="false" collapsible="true" >}}
-runtime_security_config:
-  sbom:
-    enrichment_interval: 30m
-    forward_interval: 1m
-{{< /code-block >}}
-
-A longer interval sends fewer events. First observations are unaffected; only repeat observations of the same package are throttled.
 
 **Notes**:
 

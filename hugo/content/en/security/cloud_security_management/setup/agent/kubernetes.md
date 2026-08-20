@@ -166,7 +166,7 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
 
 {{< /tabs >}}
 
-**Note**: `enrichment.usage.enabled: true` requires Datadog Agent **7.79.0 or later**. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for requirements and tuning.
+**Note**: `enrichment.usage.enabled: true` requires Datadog Agent **7.79.0 or later**. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for requirements.
 
 **Note**: The `languages` analyzer requires Datadog Agent **7.70 or later**. When enabled, it detects vulnerabilities in application libraries managed by the package managers below, in addition to OS packages. When the `analyzers` field is omitted, Datadog only scans OS packages for container images.
 
@@ -278,19 +278,6 @@ Restart the Agent.
 {{< /tabs >}}
 
 To verify the setup, filter vulnerability findings by [runtime signals][10].
-
-### Tune event volume on large clusters
-
-Runtime package prioritization increases the number of SBOM events the Agent sends. On clusters running many container images, Datadog recommends raising the enrichment interval from its default of `1m`, by setting these environment variables on the `system-probe` container:
-
-```yaml
-- name: DD_RUNTIME_SECURITY_CONFIG_SBOM_ENRICHMENT_INTERVAL
-  value: "30m"
-- name: DD_RUNTIME_SECURITY_CONFIG_SBOM_FORWARD_INTERVAL
-  value: "1m"
-```
-
-A longer interval sends fewer events. First observations are unaffected; only repeat observations of the same package are throttled.
 
 Monitor `system-probe` memory usage after enabling, and adjust its limit to suit your workloads.
 

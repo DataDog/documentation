@@ -92,15 +92,6 @@ docker run -d --name dd-agent \
 
 To verify the setup, filter vulnerability findings by [runtime signals][6].
 
-Runtime package prioritization increases the number of SBOM events the Agent sends. On hosts running many container images, raise the enrichment interval from its default of `1m`:
-
-{{< code-block lang="shell" >}}
-  -e DD_RUNTIME_SECURITY_CONFIG_SBOM_ENRICHMENT_INTERVAL=30m \
-  -e DD_RUNTIME_SECURITY_CONFIG_SBOM_FORWARD_INTERVAL=1m \
-{{< /code-block >}}
-
-A longer interval sends fewer events. First observations are unaffected; only repeat observations of the same package are throttled.
-
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats
 [3]: /security/cloud_security_management/setup#supported-deployment-types-and-features
