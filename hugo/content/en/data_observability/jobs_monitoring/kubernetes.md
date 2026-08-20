@@ -286,6 +286,15 @@ spark.driver.extraJavaOptions=-Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.versio
 spark.executor.extraJavaOptions=-Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION>
 ```
 
+### Add custom tags
+
+To add arbitrary custom tags, pass a comma-separated list of `key:value` pairs with the `-Ddd.tags` JVM option, the same way as the tags above:
+
+```
+spark.driver.extraJavaOptions=-Ddd.tags=team:data_engineering,cost_center:analytics
+spark.executor.extraJavaOptions=-Ddd.tags=team:data_engineering,cost_center:analytics
+```
+
 ### Tag spans at runtime
 
 {{% djm-runtime-tagging %}}

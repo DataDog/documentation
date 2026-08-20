@@ -631,6 +631,9 @@ with DAG(
 
 With `user_defined_macros` set on the DAG, the `{{ lineage_*() }}` and `{{ lineage_root_*() }}` calls in your task templates resolve to values that match the built-in macros shipped with provider 2.3.0+, so downstream Spark or dbt jobs can link to the Airflow root parent in Datadog.
 
+### Custom tags
+
+DAG-level `tags` (the `tags=[...]` parameter on your DAG definition) are captured automatically and appear as filterable tags on the corresponding job in Jobs Monitoring — no additional configuration is required. Airflow doesn't have a native task-level tagging concept, so there's nothing to configure at the task level.
 
 ## Further Reading
 
