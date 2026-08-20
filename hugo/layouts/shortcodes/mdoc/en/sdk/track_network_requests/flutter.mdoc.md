@@ -1,4 +1,4 @@
-### Automated resource collection
+## Automated resource collection
 
 To automatically track network requests as RUM resources, use the [Datadog Tracking HTTP Client][1] package and call `enableHttpTracking()` after RUM is enabled:
 
@@ -14,7 +14,7 @@ If your app runs network calls from a background isolate, use `attachToBackgroun
 
 For gRPC, GraphQL, or Dio-specific instrumentation, see [Flutter Integrated Libraries][2].
 
-### Manual resource collection
+## Manual resource collection
 
 To track a custom resource around its load, start and stop it:
 

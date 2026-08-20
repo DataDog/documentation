@@ -1,4 +1,4 @@
-### Manual resource collection
+## Manual resource collection
 
 The C++ and C SDKs don't instrument an HTTP client automatically. Track resources by starting and stopping them around the network operation. Each resource is identified by a `key` string that must be unique among all concurrently active resources; this is how `StopResource` and `StopResourceWithError` identify which request has completed.
 

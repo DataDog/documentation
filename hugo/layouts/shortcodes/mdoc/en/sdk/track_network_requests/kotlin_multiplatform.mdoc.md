@@ -1,4 +1,4 @@
-### Automated resource collection
+## Automated resource collection
 
 To automatically track network requests made with Ktor as RUM resources, add the provided Datadog Ktor plugin:
 
@@ -33,7 +33,7 @@ class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
 
 Pass the provider to `datadogKtorPlugin` with the `rumResourceAttributesProvider` argument.
 
-### Manual resource collection
+## Manual resource collection
 
 To track a custom resource such as a request made outside Ktor, start and stop it around the load:
 

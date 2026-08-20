@@ -1,8 +1,8 @@
-### Automated resource collection
+## Automated resource collection
 
 The MAUI SDK automatically tracks network requests as resources by default, using a `DiagnosticListener`.
 
-### Manual resource collection
+## Manual resource collection
 
 To track a custom resource such as a third-party provider API, start and stop it around the load:
 

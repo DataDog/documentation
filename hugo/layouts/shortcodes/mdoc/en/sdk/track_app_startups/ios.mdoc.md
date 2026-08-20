@@ -1,8 +1,8 @@
-### Automated tracking
+## Automated tracking
 
 The iOS SDK automatically creates an `ApplicationLaunch` view during initialization and measures the time to initial display (TTID) for it. No setup is required for TTID.
 
-### Manual tracking
+## Manual tracking
 
 Every app defines "fully drawn" differently, so the SDK doesn't automatically measure the time to full display (TTFD). Call `RUMMonitor.shared().reportAppFullyDisplayed()` when your app reaches that state:
 
