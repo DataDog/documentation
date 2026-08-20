@@ -208,8 +208,6 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 - Datadog Agent **7.79.0 or later**. On Kubernetes, use **7.81.0 or later** for the most complete signal coverage.
 - Linux only (eBPF dependency). See [Workload Protection setup][11] for supported distributions and kernel versions.
 
-**Note**: On Agent versions earlier than 7.79.0, this feature is enabled through [Workload Protection][8] and affects its usage. From 7.79.0 it runs independently.
-
 Runtime signals apply to packages installed by an operating system package manager (`apt`, `yum`, or `apk`) in container image vulnerability findings.
 
 {{< tabs >}}

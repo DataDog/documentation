@@ -73,8 +73,6 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 - Datadog Agent **7.79.0 or later**
 - Linux only (eBPF dependency). See [Workload Protection setup][7] for supported distributions and kernel versions.
 
-**Note**: On Agent versions earlier than 7.79.0, this feature is enabled through [Workload Protection][4] and affects its usage. From 7.79.0 it runs independently.
-
 Runtime signals apply to packages installed by an operating system package manager (`apt`, `yum`, or `apk`) in container image vulnerability findings.
 
 Add `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` to your Docker run command:
