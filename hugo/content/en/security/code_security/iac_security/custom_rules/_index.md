@@ -49,11 +49,6 @@ Clone a default rule when you want to modify an existing check, evaluate the sam
 
    Only published rules run in IaC scans.
 
-<!-- REVIEW-Q: Creating from scratch has a "Test the rule" step, but cloning
-     doesn't — even though step 2 has the reader edit the copied policy and
-     sample file. Should this procedure include a test step before saving, or
-     point to "Test the rule"? -->
-
 ## Create a rule from scratch
 
 Create a rule from scratch when you need a focused check and you understand the parsed structure for your platform. The editor provides a starter policy and sample file.
