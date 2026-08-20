@@ -336,6 +336,6 @@ The scaffolding tool requires Node.js 20.12.0 or later. If you see errors even o
 [19]: https://nodejs.org
 [20]: https://github.com/datadog-labs/agent-skills/tree/main/dd-apps/datadog-app
 [21]: https://github.com/datadog-labs/agent-skills/blob/main/README.md
-[22]: https://github.com/vercel-labs/skills-cli
+[22]: https://github.com/vercel-labs/skills
 [23]: https://www.npmjs.com/package/@datadog/druids
 [24]: https://www.npmjs.com/package/@datadog/apps-backend
