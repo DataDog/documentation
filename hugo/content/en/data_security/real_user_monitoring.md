@@ -132,7 +132,7 @@ In addition to removing client IPs, you can also choose to disable the collectio
 [Sensitive Data Scanner][17] allows you to proactively search and scrub sensitive data upon ingestion by Datadog. RUM events are scanned on the stream before any data is stored within Datadog. The tool has the power to scrub, hash, or partially redact PII data before it is stored. It works by applying out-of-the-box or customer-developed pattern matching rules. If you've enabled this feature, you can find it on the [{{< ui >}}Manage Sensitive Data{{< /ui >}} page][18].
 
 ## Session Replay-specific privacy options
-See [privacy options specific to Session Replay][19].
+See [privacy options specific to Session Replay][19]. Masking in Session Replay is permanent: masked values never leave the device and cannot be recovered later. This differs from [Sensitive Data Scanner masking][17], which allows users with the `Data Scanner Unmask` permission to view the original value.
 
 ### Further Reading
 

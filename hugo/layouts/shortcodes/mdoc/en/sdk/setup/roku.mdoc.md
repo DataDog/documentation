@@ -3,9 +3,9 @@ This partial contains setup instructions for the Roku SDK.
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-This page describes how to instrument your applications for [Real User Monitoring (RUM)][1] with the Roku SDK. RUM includes Error Tracking by default, but if you have purchased Error Tracking as a standalone product, see the [Error Tracking setup guide][2] for specific steps.
+This page describes how to instrument your Roku channels with the Datadog Roku SDK.
 
-The Datadog Roku SDK supports BrightScript channels for Roku OS 10 and higher.
+The Roku SDK supports [Real User Monitoring (RUM)][1] and [Error Tracking][2] for BrightScript channels on Roku OS 10 and higher.
 
 ## Setup
 
@@ -28,24 +28,9 @@ and unzipping it in your project's root folder.
 Make sure you have a `roku_modules/datadogroku` subfolder in both the `components` and `source` folders of your project.
 {% /step %}
 
-{% step title="Specify application details in the UI" %}
-
-1. Navigate to [{% ui %}Digital Experience{% /ui %} > {% ui %}Add an Application{% /ui %}][5].
-2. Select {% ui %}Roku{% /ui %} as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Roku Data Collected][6].
-
-{% alert level="info" %}
-If you've purchased Error Tracking as a standalone product (without RUM), navigate to [{% ui %}Error Tracking{% /ui %} > {% ui %}Settings{% /ui %} > {% ui %}Browser and Mobile{% /ui %} > {% ui %}Add an Application{% /ui %}][7] instead.
-{% /alert %}
-
-To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][8] to configure the `dd-sdk-roku` library, they are exposed client-side in the Roku channel's BrightScript code.
-
-For more information about setting up a client token, see the [Client Token documentation][9].
-{% /step %}
-
 {% step title="Initialize the library" %}
 
-In the initialization snippet, set an environment name. For more information, see [Using Tags][10].
+In the initialization snippet, set an environment name. For more information, see [Using Tags][5].
 
 ```vb.net
 sub RunUserInterface(args as dynamic)
@@ -68,7 +53,7 @@ end sub
 
 #### Sample session rates
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Roku SDK][11]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Roku SDK][6]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 {% /step %}
 
 {% /stepper %}
@@ -79,7 +64,9 @@ See [**Track RUM Resources**](#track-rum-resources) to enable automatic tracking
 
 ### Track Views
 
-To split [user sessions][12] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new View.
+For setup steps covering view tracking, see [Track navigation][8].
+
+To split [user sessions][7] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new View.
 
 ```vb.net
     viewName = "VideoDetails"
@@ -121,12 +108,7 @@ This means that even if users open your application while offline, no data is lo
 [2]: /error_tracking/frontend/mobile/roku/
 [3]: https://github.com/rokucommunity/ropm
 [4]: https://github.com/DataDog/dd-sdk-roku
-[5]: https://app.datadoghq.com/rum/application/create
-[6]: /real_user_monitoring/application_monitoring/roku/data_collected
-[7]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[8]: /account_management/api-app-keys/#api-keys
-[9]: /account_management/api-app-keys/#client-tokens
-[10]: /getting_started/tagging/using_tags/#rum--session-replay
-[11]: /real_user_monitoring/application_monitoring/roku/advanced_configuration/#enrich-user-sessions
-[12]: /real_user_monitoring/application_monitoring/roku/data_collected
-
+[5]: /getting_started/tagging/using_tags/#rum--session-replay
+[6]: /real_user_monitoring/application_monitoring/roku/advanced_configuration/#enrich-user-sessions
+[7]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=roku
+[8]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=roku

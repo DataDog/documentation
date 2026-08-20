@@ -23,13 +23,8 @@ The RUM Browser SDK collects resources and assets for every RUM view (page load)
 RUM Resources inherit from all the context related to the active RUM View at the time of collection.
 
 ## Early data collection
-The `trackEarlyRequests` SDK init parameter allows you to capture:
 
-* Unhandled rejections and uncaught exception errors when the SDK is first evaluated.
-* XHR and Fetch requests regardless of SDK loading status.
-
-
-To enable early data collection, set `trackEarlyRequests` to `true` in your Browser SDK initialization script. This feature requires Browser SDK v6.21.0+.
+The `trackEarlyRequests` SDK init parameter allows you to capture unhandled rejections, uncaught exceptions, and XHR/Fetch requests that occur before the SDK finishes loading. For setup instructions, see [Track network requests][11].
 
 <div class="alert alert-danger">
   If you are using <code>beforeSend</code> with <code>trackEarlyRequests</code> enabled, properties associated with the request can be undefined. 
@@ -66,25 +61,7 @@ The Browser SDK can automatically enrich GraphQL requests with operation-specifi
 
 ### Setup
 
-Configure `allowedGraphQlUrls` during SDK initialization to specify which endpoints should be treated as GraphQL:
-
-```javascript
-import { datadogRum } from '@datadog/browser-rum'
-
-datadogRum.init({
-    applicationId: '<DATADOG_APPLICATION_ID>',
-    clientToken: '<DATADOG_CLIENT_TOKEN>',
-    site: 'datadoghq.com',
-    allowedGraphQlUrls: [
-        // String: matches any URL starting with the value
-        "https://api.example.com/graphql",
-        // RegExp: tests against the full URL
-        /\/graphql$/,
-        // Function: evaluates with the URL as parameter, returning true for a match
-        (url) => url.includes("graphql")
-    ]
-})
-```
+Configure `allowedGraphQlUrls` during SDK initialization to specify which endpoints should be treated as GraphQL. For a basic setup example, see [Track network requests][11].
 
 ### Advanced options
 
@@ -180,3 +157,4 @@ To collect the resource status code, add the `Access-Control-Allow-Origin` HTTP 
 [8]: /real_user_monitoring/application_monitoring/browser/data_collected/#graphql-attributes
 [9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#modify-the-content-of-a-rum-event
 [10]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackresourceheaders
+[11]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=browser

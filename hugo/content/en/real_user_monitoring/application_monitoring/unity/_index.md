@@ -31,6 +31,6 @@ To get started with RUM for Unity, create an application and configure the Unity
   {{< nextlink href="/real_user_monitoring/application_monitoring/unity/error_tracking">}}<u>Crash Reporting</u>: Add native crash reporting, get deobfuscated stack traces, then test your implementation{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/unity/advanced_configuration">}}<u>Advanced Configuration</u>:Enrich user sessions, manage events and data, track custom global attributes and widgets, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/unity/data_collected">}}<u>Data Collected</u>:Review data that the Unity SDK collects.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/unity/mobile_vitals">}}<u>Mobile Vitals</u>: View mobile vitals, which help compute insights about your mobile application.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=unity">}}<u>Track UI Latency</u>: View mobile vitals, which help compute insights about your mobile application.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/unity/troubleshooting">}}<u>Troubleshooting</u>: Common troubleshooting Unity SDK issues.{{< /nextlink >}}
 {{< /whatsnext >}}

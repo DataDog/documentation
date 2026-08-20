@@ -977,7 +977,7 @@ attributes:
     domain: View (Browser)
     
   - name: view.loading_type
-    description: The type of page load, `initial_load` or `route_change`. For more information, see the [single page applications support docs](/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa).
+    description: The type of page load, `initial_load` or `route_change`. For more information, see the [single page applications support docs](/real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#view-loading-time).
     product_source:
       - icon-rum
       - browser

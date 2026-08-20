@@ -11,6 +11,8 @@ If you have not set up the SDK yet, follow the [in-app setup instructions][1] or
 
 ### Custom views
 
+For setup steps covering both automatic and manual view tracking, see [Track navigation][6].
+
 In addition to [tracking views automatically](#customize-automatic-tracking), you can track specific views manually. Stop tracking when the view is no longer visible.
 
 ```csharp
@@ -76,6 +78,8 @@ DdRum.StopAction(RumActionType.Scroll, "Feed Scroll");
 
 ### Custom resources
 
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][5].
+
 In addition to [tracking resources automatically](#customize-automatic-tracking), you can track specific custom resources (such as network requests and third-party provider APIs) with `DdRum.StartResource` and `DdRum.StopResource`. Provide a stable resource key, the HTTP method, and the URL when you start, and the status code, kind, and size when you stop.
 
 ```csharp
@@ -120,28 +124,7 @@ In addition to the [default RUM attributes][3] captured by the SDK, you can atta
 
 ### Track user sessions
 
-Adding user information to your RUM sessions helps you:
-* Follow the journey of a given user
-* Identify which users are most impacted by errors
-* Monitor performance for your most important users
-
-| Attribute | Type | Description |
-|---|---|---|
-| `usr.id` | String | (Required) Unique user identifier. |
-| `usr.name` | String | (Optional) User friendly name, displayed by default in the RUM UI. |
-| `usr.email` | String | (Optional) User email, displayed in the RUM UI when the user name isn't present. |
-
-```csharp
-// Set the user (id is required)
-DdSdk.SetUserInfo("user-123", "Jane Doe", "jane@example.com",
-    new Dictionary<string, object> { { "plan", "premium" } });
-
-// Append extra fields to the user later (merges with what's already there)
-DdSdk.AddUserExtraInfo(new Dictionary<string, object> { { "subscription", "annual" } });
-
-// Clear the user (for example, on sign-out)
-DdSdk.ClearUserInfo();
-```
+See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=maui) for instructions on adding user information to your RUM sessions.
 
 ### Track account sessions
 
@@ -344,3 +327,5 @@ DdTrace.Enable(new DdTraceConfiguration
 [2]: /real_user_monitoring/application_monitoring/maui/setup
 [3]: /real_user_monitoring/application_monitoring/maui/data_collected
 [4]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[5]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=maui
+[6]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=maui

@@ -123,6 +123,8 @@ Starting with [version 4.13.0][16], you can also optionally define the associate
 
 ## Manually track pageviews
 
+For setup steps covering both automatic and manual view tracking, see [Track navigation][25].
+
 The following example manually tracks the pageviews on the `checkout` page in a RUM application. No service or version can be specified.
 
 <!-- NPM -->
@@ -697,210 +699,7 @@ window.DD_RUM &&
 
 ## User session
 
-Adding user information to your RUM sessions helps you:
-
-- Follow the journey of a given user
-- Know which users are the most impacted by errors
-- Monitor performance for your most important users
-
-{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" /%}
-
-<!-- Version must meet 6.4.0 -->
-{% if semverIsAtLeast($rum_browser_sdk_version, "6.4.0") %}
-In versions 6.4.0 and above, the following attributes are available:
-
-| Attribute  | Type | Required |  Description                                                                                              |
-|------------|------|------|----------------------------------------------------------------------------------------------------|
-| `usr.id`    | String | Yes | Unique user identifier.                                                                                  |
-| `usr.name`  | String | No | User friendly name, displayed by default in the RUM UI.                                                  |
-| `usr.email` | String | No | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
-
-**Note**: 'Public User' is displayed in the RUM UI when `usr.name` is not set, even if `usr.email` and `usr.id` are defined.
-{% /if %}
-<!-- ends  6.4.0 -->
-
-<!-- Version must not meet 6.4.0 -->
-{% if not(semverIsAtLeast($rum_browser_sdk_version, "6.4.0")) %}
-The below attributes are optional in versions before 6.4.0, but Datadog strongly recommends providing at least one of them. For example, you should set the user ID on your sessions to see relevant data on some default RUM dashboards, which rely on `usr.id` as part of the query.
-
-| Attribute  | Type | Description                                                                                              |
-|------------|------|----------------------------------------------------------------------------------------------------|
-| `usr.id`    | String | Unique user identifier.                                                                                  |
-| `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  |
-| `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
-
-**Note**: 'Public User' is displayed in the RUM UI when `usr.name` is not set, even if `usr.email` and `usr.id` are defined.
-
-Increase your filtering capabilities by adding extra attributes on top of the recommended ones. For instance, add information about the user plan, or which user group they belong to.
-
-When making changes to the user session object, all RUM events collected after the change contain the updated information.
-
-**Note**: Deleting the user session information, as in a logout, retains the user information on the last view before the logout, but not on later views or the session level as the session data uses the last view's values.
-{% /if %}
-<!-- ends not 6.4.0 -->
-
-### Identify user session
-
-`datadogRum.setUser(<USER_CONFIG_OBJECT>)`
-<!-- NPM -->
-{% if equals($lib_src, "npm") %}
-```javascript
-datadogRum.setUser({
-    id: '1234',
-    name: 'John Doe',
-    email: 'john@doe.com',
-    plan: 'premium',
-    ...
-})
-```
-{% /if %}
-
-<!-- CDN async -->
-{% if equals($lib_src, "cdn_async") %}
-```javascript
-window.DD_RUM.onReady(function() {
-    window.DD_RUM.setUser({
-        id: '1234',
-        name: 'John Doe',
-        email: 'john@doe.com',
-        plan: 'premium',
-        ...
-    })
-})
-```
-{% /if %}
-
-<!-- CDN sync -->
-{% if equals($lib_src, "cdn_sync") %}
-```javascript
-window.DD_RUM && window.DD_RUM.setUser({
-    id: '1234',
-    name: 'John Doe',
-    email: 'john@doe.com',
-    plan: 'premium',
-    ...
-})
-```
-{% /if %}
-
-### Access user session
-
-`datadogRum.getUser()`
-<!-- NPM -->
-{% if equals($lib_src, "npm") %}
-```javascript
-datadogRum.getUser()
-```
-{% /if %}
-
-<!-- CDN async -->
-{% if equals($lib_src, "cdn_async") %}
-```javascript
-window.DD_RUM.onReady(function() {
-    window.DD_RUM.getUser()
-})
-```
-{% /if %}
-
-<!-- CDN sync -->
-{% if equals($lib_src, "cdn_sync") %}
-```javascript
-window.DD_RUM && window.DD_RUM.getUser()
-```
-{% /if %}
-
-### Add/Override user session property
-
-`datadogRum.setUserProperty('<USER_KEY>', <USER_VALUE>)`
-<!-- NPM -->
-{% if equals($lib_src, "npm") %}
-```javascript
-datadogRum.setUserProperty('name', 'John Doe')
-```
-{% /if %}
-
-<!-- CDN async -->
-{% if equals($lib_src, "cdn_async") %}
-```javascript
-window.DD_RUM.onReady(function() {
-    window.DD_RUM.setUserProperty('name', 'John Doe')
-})
-```
-{% /if %}
-
-<!-- CDN sync -->
-{% if equals($lib_src, "cdn_sync") %}
-```javascript
-window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe')
-```
-{% /if %}
-
-### Remove user session property
-
-`datadogRum.removeUserProperty('<USER_KEY>')`
-<!-- NPM -->
-{% if equals($lib_src, "npm") %}
-```javascript
-datadogRum.removeUserProperty('name')
-```
-{% /if %}
-
-<!-- CDN async -->
-{% if equals($lib_src, "cdn_async") %}
-```javascript
-window.DD_RUM.onReady(function() {
-    window.DD_RUM.removeUserProperty('name')
-})
-```
-{% /if %}
-
-<!-- CDN sync -->
-{% if equals($lib_src, "cdn_sync") %}
-```javascript
-window.DD_RUM && window.DD_RUM.removeUserProperty('name')
-```
-{% /if %}
-
-### Clear user session property
-
-`datadogRum.clearUser()`
-<!-- NPM -->
-{% if equals($lib_src, "npm") %}
-```javascript
-datadogRum.clearUser()
-```
-{% /if %}
-
-<!-- CDN async -->
-{% if equals($lib_src, "cdn_async") %}
-```javascript
-window.DD_RUM.onReady(function() {
-    window.DD_RUM.clearUser()
-})
-```
-{% /if %}
-
-<!-- CDN sync -->
-{% if equals($lib_src, "cdn_sync") %}
-```javascript
-window.DD_RUM && window.DD_RUM.clearUser()
-```
-{% /if %}
-
-### Track unauthenticated users
-
-For unauthenticated visitors or users who have not yet logged in, the RUM SDK automatically tracks activity using `usr.anonymous_id`. This lets you analyze user behavior without requiring authentication.
-
-`usr.anonymous_id` is a randomly generated UUID (v4). It is not derived from any user PII, IP address, device fingerprint, or hardware identifier.
-
-The ID has the following properties:
-
-- **Lifetime**: Persists for up to one year across sessions in the Datadog session cookie (`_dd_s_v2`).
-- **Scope**: Per-browser and per-domain. Incognito mode, cookie clearing, or switching browsers or devices produces a new `anonymous_id`.
-
-The ID resets if the user revokes tracking consent with `setTrackingConsent('not-granted')` or clears cookies.
-
-**Note**: `usr.anonymous_id` is enabled by default. To disable it, set [`trackAnonymousUser: false`](https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackanonymoususer) in your `init` config.
+See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=browser) for instructions on adding user information to your RUM sessions, and on accessing, updating, or clearing user session properties.
 
 ## Account
 
@@ -1817,7 +1616,7 @@ The `service` and `version` tags representing each micro frontend can also be fo
 - `rum.measure.operation.duration`
 
 [1]: /real_user_monitoring/application_monitoring/browser/data_collected/
-[2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
+[2]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
 [4]: /real_user_monitoring/application_monitoring/browser/setup/
 [5]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
@@ -1840,3 +1639,4 @@ The `service` and `version` tags representing each micro frontend can also be fo
 [22]: https://github.com/DataDog/build-plugins?tab=readme-ov-file#usage
 [23]: https://github.com/DataDog/build-plugins
 [24]: /real_user_monitoring/rum_without_limits/
+[25]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=browser
