@@ -237,13 +237,13 @@ To backfill data after an EA-to-MCA migration, use the agreement that covered th
 * For dates before the MCA effective date, run the one-time actual and amortized exports from the previous EA scope.
 * For dates on or after the MCA effective date, run the one-time actual and amortized exports from the MCA scope.
 
-If the previous EA scope is unavailable, contact Microsoft Support to request the historical exports. If you changed an export name or destination, or deleted and recreated the Datadog configuration, contact [Datadog Support][16]. Do not create additional one-time or scheduled exports until Support reviews the configuration.
+If the previous EA scope is unavailable, contact Microsoft Support to request the historical exports. If you changed an export name or destination, or deleted and recreated the Datadog configuration, contact [Datadog Support][16]. Do not create additional one-time or scheduled exports until Datadog Support reviews the configuration.
 
 ### Getting historical data
 
 Azure exports cost data starting from the month you created the export. Datadog automatically ingests up to 15 months of available historical cost data from these exports. You can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
 
-If you migrated from an EA to an MCA, follow the [migration instructions][18] before running a historical export.
+**Note**: If you migrated from an EA to an MCA, follow the [migration instructions][18] before running a historical export.
 
 1. Complete the instructions in the **Setup** and **Configure Cloud Cost in Datadog** sections above.
 1. Wait up to 24 hours for cost data to appear in Datadog to ensure the integration is working end-to-end before beginning the backfill process. **Note:** If you have already completed setup, and cost data is appearing in Datadog, you can proceed directly to the backfill steps below.
