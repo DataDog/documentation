@@ -1,4 +1,4 @@
-### Custom views
+## Custom views
 
 In addition to [tracking views automatically](#automatically-track-views), you can also track specific distinct views such as `viewControllers` when they become visible and interactive. Stop tracking when the view is no longer visible using the following methods in `RUMMonitor.shared()`:
 
@@ -54,11 +54,11 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
 
 For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
-### Automatically track views
+## Automatically track views
 
 You can automatically track views with UIKit and SwiftUI.
 
-#### UIKit
+### UIKit
 
 To automatically track views (`UIViewControllers`), use the `uiKitViewsPredicate` option when enabling RUM. By default, views are named with the view controller's class name. To customize it, provide your own implementation of the `predicate` which conforms to `UIKitRUMViewsPredicate` protocol:
 
@@ -178,7 +178,7 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 
 **Note**: The RUM iOS SDK calls `rumView(for:)` many times while your app is running. Datadog recommends keeping its implementation fast and single-threaded.
 
-#### SwiftUI
+### SwiftUI
 
 To automatically track views with SwiftUI, use the `swiftUIViewsPredicate` option when enabling RUM.
 

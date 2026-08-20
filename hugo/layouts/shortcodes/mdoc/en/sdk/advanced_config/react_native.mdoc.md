@@ -318,6 +318,8 @@ DdLogs.error('Lorem ipsum dolor sit amet…', {});
 
 ### Manually track RUM views
 
+For setup steps covering both automatic and manual view tracking, see [Track navigation][26].
+
 To manually track RUM Views, provide a `view key`, `view name`, and `action name` at initialization. Depending on your needs, you can choose one of the following strategies:
 
 ```javascript
@@ -732,3 +734,4 @@ See [Monitor hybrid React Native applications][19].
 [23]: #trace-configuration
 [24]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=react_native
 [25]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=react_native
+[26]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=react_native

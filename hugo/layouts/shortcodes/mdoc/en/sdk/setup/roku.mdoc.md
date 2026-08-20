@@ -64,6 +64,8 @@ See [**Track RUM Resources**](#track-rum-resources) to enable automatic tracking
 
 ### Track Views
 
+For setup steps covering view tracking, see [Track navigation][8].
+
 To split [user sessions][7] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new View.
 
 ```vb.net
@@ -109,3 +111,4 @@ This means that even if users open your application while offline, no data is lo
 [5]: /getting_started/tagging/using_tags/#rum--session-replay
 [6]: /real_user_monitoring/application_monitoring/roku/advanced_configuration/#enrich-user-sessions
 [7]: /real_user_monitoring/application_monitoring/roku/data_collected
+[8]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=roku

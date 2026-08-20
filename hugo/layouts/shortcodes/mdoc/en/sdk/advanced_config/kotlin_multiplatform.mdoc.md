@@ -11,6 +11,8 @@ Kotlin Multiplatform RUM automatically tracks attributes such as user activity, 
 
 ### Custom views
 
+For setup steps covering both automatic and manual view tracking, see [Track navigation][13].
+
 In addition to [tracking views automatically][4], you can also track specific distinct views (such as activities and fragments) manually. Stop tracking when the view is no longer visible.
 
 ```kotlin
@@ -427,4 +429,5 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [11]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=kotlin_multiplatform
 [12]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=kotlin_multiplatform
+[13]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=kotlin_multiplatform
 [a1]: https://docs.datadoghq.com/help/

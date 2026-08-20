@@ -11,6 +11,8 @@ The C++ SDK is a low-level library that is not coupled to a UI framework. As suc
 
 ### Track views
 
+For setup steps covering view tracking, see [Track navigation][6].
+
 A RUM session is organized into views. Each view represents a distinct user-facing screen, scene, or state in your application. All actions, resources, and errors are associated with the current view.
 
 Each view has a string `key` that uniquely identifies it within your application. An optional `name` provides a human-readable label in the Datadog UI; if omitted, `name` defaults to the value of `key`. Only one view is active at a time: `StartView` implicitly stops the previous view.
@@ -517,3 +519,4 @@ dd_core_destroy(core);
 [3]: /real_user_monitoring/operations_monitoring/
 [4]: /getting_started/site/
 [5]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=cpp
+[6]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=cpp

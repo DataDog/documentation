@@ -11,6 +11,8 @@ iOS RUM automatically tracks attributes such as user activity, screens, errors, 
 
 ### Custom views
 
+For setup steps covering both automatic and manual view tracking, see [Track navigation][11].
+
 In addition to [tracking views automatically](#automatically-track-views), you can also track specific distinct views such as `viewControllers` when they become visible and interactive. Stop tracking when the view is no longer visible using the following methods in `RUMMonitor.shared()`:
 
 - `.startView(viewController:)`
@@ -1163,3 +1165,4 @@ Calling this method disables the SDK and all active features, such as RUM. To re
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [9]: /real_user_monitoring/application_monitoring/ios/setup
 [10]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=ios
+[11]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios
