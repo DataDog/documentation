@@ -100,11 +100,11 @@ After setting up the Azure DevOps integration, enable IaC Security for your repo
 
 If you don't use GitHub Actions, GitLab CI/CD, or Azure DevOps, you can run the [Datadog IaC Scanner][8] directly in your CI pipeline. Upload IaC scan results to Datadog using the [`datadog-ci` CLI][9].
 
-**If you are running IaC Security on a non-GitHub repository**, help ensure that the first scan runs on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, attempt an upload for your repository. Then manually override the default branch in [{{< ui >}}Repository Settings{{< /ui >}}][10]. Afterward, uploads from non-default branches succeed.
+**If you are running IaC Security on a non-GitHub repository**, run the first scan on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, upload a first scan for your repository. Then, manually override the default branch in [{{< ui >}}Repository Settings{{< /ui >}}][10]. Afterward, uploads from non-default branches succeed.
 
-Prerequisites:
+### Prerequisites
 
-- Node.js and npm
+- Node.js 20 or later and npm
 - `curl`
 - `tar`
 - Permission to install the scanner in `/usr/local/bin`
@@ -113,8 +113,8 @@ Configure the following environment variables:
 
 | Name         | Description                                                                                                                                                 | Required | Default         |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------- |
-| `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][4] and should be stored as a secret.                                               | Yes      |                 |
-| `DD_APP_KEY` | Your application key. This key, created by your [Datadog organization][4], should include the `code_analysis_read` scope and be stored as a secret. | Yes      |                 |
+| `DD_API_KEY` | Your Datadog API key. Create this key in your [Datadog organization][4] and store the key as a secret.                                                     | Yes      |                 |
+| `DD_APP_KEY` | Your application key. Create this key in your [Datadog organization][4] and include the `code_analysis_read` scope. Store the key as a secret.              | Yes      |                 |
 | `DD_SITE`    | The [Datadog site][5] to send information to. Your Datadog site is `datadoghq.com`.                                                                         | No       | `datadoghq.com` |
 
 Add the following to your CI pipeline:
@@ -126,13 +126,13 @@ export DD_SITE="datadoghq.com"
 # Install dependencies
 npm install -g @datadog/datadog-ci
 
-# Download the latest DataDog IaC Scanner
+# Download the latest Datadog IaC Scanner (x86_64/amd64 Linux; see GitHub Releases for arm64 and other platforms)
 export IAC_SCANNER_URL="https://github.com/DataDog/datadog-iac-scanner/releases/latest/download/datadog-iac-scanner_linux_amd64.tar.gz"
 curl -L "${IAC_SCANNER_URL}" -o /tmp/datadog-iac-scanner.tar.gz
 tar xfz /tmp/datadog-iac-scanner.tar.gz -C /tmp
 mv /tmp/datadog-iac-scanner /usr/local/bin/datadog-iac-scanner
 
-# Run the DataDog IaC scanner
+# Run the Datadog IaC scanner
 exit_code=0
 /usr/local/bin/datadog-iac-scanner scan -p . -o /tmp || exit_code=$?
 if [ $exit_code -lt 20 -o $exit_code -gt 60 ]; then echo "IaC scan failed" ; exit $exit_code ; fi
@@ -142,7 +142,7 @@ datadog-ci sarif upload /tmp/datadog-iac-scanner-result.sarif
 ```
 
 <div class="alert alert-info">
-  This example uses the x86_64 Linux version of the Datadog IaC Scanner. If you're using a different OS or architecture, select the appropriate release from the <a href="https://github.com/DataDog/datadog-iac-scanner/releases">GitHub Releases</a> page and update the <code>IAC_SCANNER_URL</code> value.
+  This example uses the x86_64 (amd64) Linux version of the Datadog IaC Scanner. The scanner also supports arm64 Linux, as well as macOS and Windows. If you're using a different OS or architecture, select the appropriate release from the <a href="https://github.com/DataDog/datadog-iac-scanner/releases">GitHub Releases</a> page and update the <code>IAC_SCANNER_URL</code> value.
 </div>
 
 ## Upload third-party static analysis results to IaC Security
