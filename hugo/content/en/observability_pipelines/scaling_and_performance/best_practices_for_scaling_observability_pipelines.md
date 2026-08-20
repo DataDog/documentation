@@ -185,7 +185,7 @@ When configuring clients and load balancers, Datadog recommends the following ge
 
 - Use a simple round-robin load balancing strategy.
 - Do not enable cross-zone load balancing unless the traffic across zones is very imbalanced.
-- Configure load balancers to use Observability Pipelines Worker's health API endpoint for target health.
+- Configure load balancers to use Observability Pipelines Worker's health API endpoint for target health. See [Enable the health check endpoint and the liveness and readiness probes][11] to set up the `/health` endpoint.
 - Ensure that your Observability Pipelines Worker instances automatically register or de-register as they scale.
 - Enable keep-alive with no more than one minute idle timeout for both your clients and load balancers.
 - If supported, enable connection concurrency and pooling on your agents. If that is not supported, consider the unified architecture which deploys Observability Pipelines Worker at the edge. Connection pooling ensures large volumes of data are spread across multiple connections to help balance traffic.
@@ -227,3 +227,4 @@ Auto-scaling should be based on average CPU utilization. For the vast majority o
 [8]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html
 [9]: https://www.datadoghq.com/architecture/op-vm-deployment/
 [10]: https://www.datadoghq.com/architecture/observability-pipelines-kubernetes-deployment/
+[11]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes
