@@ -209,7 +209,7 @@ In Datadog:
 
 <div class="alert alert-warning">Setting <code>enableExposureLogging</code> to <code>true</code> can impact <a href="/real_user_monitoring/">RUM</a> costs, as it sends exposure events to Datadog through RUM. Exposure logging is on by default for client SDKs.</div>
 
-2. **Server SDKs**: Exposure logging is on by default. Evaluation logging is off by default. To send evaluation metrics from server SDKs, enable OpenTelemetry metrics (for example, `DD_METRICS_OTEL_ENABLED=true`) and follow the language-specific guidance in the [Datadog Server SDK documentation][2].
+2. **Server SDKs**: Exposure logging is on by default. Evaluation logging is off by default. To send evaluation metrics from server SDKs, enable OpenTelemetry metrics (for example, `DD_METRICS_OTEL_ENABLED=true`) and follow the language-specific guidance in [Server-Side Feature Flags][2].
 
 ## Server-side and dynamic context {#server-side-and-dynamic-context}
 
