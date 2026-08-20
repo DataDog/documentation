@@ -974,7 +974,7 @@ components:
       schema:
         type: string
     LLMObsAnnotationQueueIDPathParameter:
-      description: The ID of the LLM Observability annotation queue.
+      description: The ID of the Agent Observability annotation queue.
       example: "00000000-0000-0000-0000-000000000001"
       in: path
       name: queue_id
@@ -982,7 +982,7 @@ components:
       schema:
         type: string
     LLMObsDatasetIDPathParameter:
-      description: The ID of the LLM Observability dataset.
+      description: The ID of the Agent Observability dataset.
       example: "9f64e5c7-dc5a-45c8-a17c-1b85f0bec97d"
       in: path
       name: dataset_id
@@ -990,7 +990,7 @@ components:
       schema:
         type: string
     LLMObsEvalNamePathParameter:
-      description: The name of the custom LLM Observability evaluator configuration.
+      description: The name of the custom Agent Observability evaluator configuration.
       example: "my-custom-evaluator"
       in: path
       name: eval_name
@@ -998,7 +998,7 @@ components:
       schema:
         type: string
     LLMObsExperimentIDPathParameter:
-      description: The ID of the LLM Observability experiment.
+      description: The ID of the Agent Observability experiment.
       example: "3fd6b5e0-8910-4b1c-a7d0-5b84de329012"
       in: path
       name: experiment_id
@@ -1066,7 +1066,7 @@ components:
       schema:
         type: string
     LLMObsProjectIDPathParameter:
-      description: The ID of the LLM Observability project.
+      description: The ID of the Agent Observability project.
       example: "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
       in: path
       name: project_id
@@ -1074,7 +1074,7 @@ components:
       schema:
         type: string
     LLMObsPromptIDPathParameter:
-      description: The customer-provided identifier of the LLM Observability prompt.
+      description: The customer-provided identifier of the Agent Observability prompt.
       example: "customer-support-assistant"
       in: path
       name: prompt_id
@@ -1090,7 +1090,7 @@ components:
       schema:
         type: string
     LLMObsPromptVersionPathParameter:
-      description: The version number of the LLM Observability prompt.
+      description: The version number of the Agent Observability prompt.
       example: 1
       in: path
       name: version
@@ -55988,7 +55988,7 @@ components:
         - $ref: "#/components/schemas/LLMObsAnnotationLabelValueStringArray"
         - $ref: "#/components/schemas/AnyValueBoolean"
     LLMObsAnnotationQueueDataAttributesRequest:
-      description: Attributes for creating an LLM Observability annotation queue.
+      description: Attributes for creating an Agent Observability annotation queue.
       properties:
         annotation_schema:
           $ref: "#/components/schemas/LLMObsAnnotationSchema"
@@ -56009,7 +56009,7 @@ components:
         - project_id
       type: object
     LLMObsAnnotationQueueDataAttributesResponse:
-      description: Attributes of an LLM Observability annotation queue.
+      description: Attributes of an Agent Observability annotation queue.
       properties:
         annotation_schema:
           $ref: "#/components/schemas/LLMObsAnnotationSchema"
@@ -56058,7 +56058,7 @@ components:
         - owned_by
       type: object
     LLMObsAnnotationQueueDataRequest:
-      description: Data object for creating an LLM Observability annotation queue.
+      description: Data object for creating an Agent Observability annotation queue.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsAnnotationQueueDataAttributesRequest"
@@ -56069,7 +56069,7 @@ components:
         - attributes
       type: object
     LLMObsAnnotationQueueDataResponse:
-      description: Data object for an LLM Observability annotation queue.
+      description: Data object for an Agent Observability annotation queue.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsAnnotationQueueDataAttributesResponse"
@@ -56153,7 +56153,7 @@ components:
         - attributes
       type: object
     LLMObsAnnotationQueueInteractionsRequest:
-      description: Request to add interactions to an LLM Observability annotation queue.
+      description: Request to add interactions to an Agent Observability annotation queue.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsAnnotationQueueInteractionsDataRequest"
@@ -56236,7 +56236,7 @@ components:
         - data
       type: object
     LLMObsAnnotationQueueRequest:
-      description: Request to create an LLM Observability annotation queue.
+      description: Request to create an Agent Observability annotation queue.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsAnnotationQueueDataRequest"
@@ -56244,7 +56244,7 @@ components:
         - data
       type: object
     LLMObsAnnotationQueueResponse:
-      description: Response containing a single LLM Observability annotation queue.
+      description: Response containing a single Agent Observability annotation queue.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsAnnotationQueueDataResponse"
@@ -56252,7 +56252,7 @@ components:
         - data
       type: object
     LLMObsAnnotationQueueType:
-      description: Resource type of an LLM Observability annotation queue.
+      description: Resource type of an Agent Observability annotation queue.
       enum:
         - queues
       example: queues
@@ -56260,7 +56260,7 @@ components:
       x-enum-varnames:
         - QUEUES
     LLMObsAnnotationQueueUpdateDataAttributesRequest:
-      description: Attributes for updating an LLM Observability annotation queue. All fields are optional.
+      description: Attributes for updating an Agent Observability annotation queue. All fields are optional.
       properties:
         annotation_schema:
           $ref: "#/components/schemas/LLMObsAnnotationSchema"
@@ -56274,7 +56274,7 @@ components:
           type: string
       type: object
     LLMObsAnnotationQueueUpdateDataRequest:
-      description: Data object for updating an LLM Observability annotation queue.
+      description: Data object for updating an Agent Observability annotation queue.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsAnnotationQueueUpdateDataAttributesRequest"
@@ -56285,7 +56285,7 @@ components:
         - attributes
       type: object
     LLMObsAnnotationQueueUpdateRequest:
-      description: Request to update an LLM Observability annotation queue.
+      description: Request to update an Agent Observability annotation queue.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsAnnotationQueueUpdateDataRequest"
@@ -56293,7 +56293,7 @@ components:
         - data
       type: object
     LLMObsAnnotationQueuesResponse:
-      description: Response containing a list of LLM Observability annotation queues.
+      description: Response containing a list of Agent Observability annotation queues.
       properties:
         data:
           description: List of annotation queues.
@@ -56386,7 +56386,7 @@ components:
         - data
       type: object
     LLMObsAnnotationsType:
-      description: Resource type for LLM Observability annotations.
+      description: Resource type for Agent Observability annotations.
       enum:
         - annotations
       example: annotations
@@ -56620,7 +56620,7 @@ components:
       minItems: 1
       type: array
     LLMObsCreatePromptData:
-      description: Data object for creating an LLM Observability prompt.
+      description: Data object for creating an Agent Observability prompt.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsCreatePromptDataAttributes"
@@ -56632,7 +56632,7 @@ components:
       type: object
     LLMObsCreatePromptDataAttributes:
       description: >-
-        Attributes for creating an LLM Observability prompt and its first version. `prompt_id` and `template` are required; all other attributes are optional.
+        Attributes for creating an Agent Observability prompt and its first version. `prompt_id` and `template` are required; all other attributes are optional.
       properties:
         description:
           description: Optional description of the prompt.
@@ -56668,7 +56668,7 @@ components:
         - template
       type: object
     LLMObsCreatePromptRequest:
-      description: Request to create an LLM Observability prompt.
+      description: Request to create an Agent Observability prompt.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsCreatePromptData"
@@ -56676,7 +56676,7 @@ components:
         - data
       type: object
     LLMObsCreatePromptVersionData:
-      description: Data object for creating an LLM Observability prompt version.
+      description: Data object for creating an Agent Observability prompt version.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsCreatePromptVersionDataAttributes"
@@ -56688,7 +56688,7 @@ components:
       type: object
     LLMObsCreatePromptVersionDataAttributes:
       description: >-
-        Attributes for creating a new version of an LLM Observability prompt. `template` is required; all other attributes are optional.
+        Attributes for creating a new version of an Agent Observability prompt. `template` is required; all other attributes are optional.
       properties:
         description:
           description: Optional description of this version.
@@ -56714,7 +56714,7 @@ components:
         - template
       type: object
     LLMObsCreatePromptVersionRequest:
-      description: Request to create a new version of an LLM Observability prompt.
+      description: Request to create a new version of an Agent Observability prompt.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsCreatePromptVersionData"
@@ -56761,7 +56761,7 @@ components:
           type: boolean
       type: object
     LLMObsCustomEvalConfigAttributes:
-      description: Attributes of a custom LLM Observability evaluator configuration.
+      description: Attributes of a custom Agent Observability evaluator configuration.
       properties:
         category:
           description: Category of the evaluator.
@@ -56809,7 +56809,7 @@ components:
           type: string
       type: object
     LLMObsCustomEvalConfigData:
-      description: Data object for a custom LLM Observability evaluator configuration.
+      description: Data object for a custom Agent Observability evaluator configuration.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsCustomEvalConfigAttributes"
@@ -56953,7 +56953,7 @@ components:
           $ref: "#/components/schemas/LLMObsCustomEvalConfigVertexAIOptions"
       type: object
     LLMObsCustomEvalConfigListResponse:
-      description: Response containing a list of custom LLM Observability evaluator configurations.
+      description: Response containing a list of custom Agent Observability evaluator configurations.
       properties:
         data:
           description: List of custom evaluator configuration data objects.
@@ -57060,7 +57060,7 @@ components:
           type: string
       type: object
     LLMObsCustomEvalConfigResponse:
-      description: Response containing a custom LLM Observability evaluator configuration.
+      description: Response containing a custom Agent Observability evaluator configuration.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsCustomEvalConfigData"
@@ -57109,7 +57109,7 @@ components:
         - enabled
       type: object
     LLMObsCustomEvalConfigType:
-      description: Type of the custom LLM Observability evaluator configuration resource.
+      description: Type of the custom Agent Observability evaluator configuration resource.
       enum:
         - evaluator_config
       example: "evaluator_config"
@@ -57117,7 +57117,7 @@ components:
       x-enum-varnames:
         - EVALUATOR_CONFIG
     LLMObsCustomEvalConfigUpdateAttributes:
-      description: Attributes for creating or updating a custom LLM Observability evaluator configuration.
+      description: Attributes for creating or updating a custom Agent Observability evaluator configuration.
       properties:
         category:
           description: Category of the evaluator.
@@ -57137,7 +57137,7 @@ components:
         - target
       type: object
     LLMObsCustomEvalConfigUpdateData:
-      description: Data object for creating or updating a custom LLM Observability evaluator configuration.
+      description: Data object for creating or updating a custom Agent Observability evaluator configuration.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsCustomEvalConfigUpdateAttributes"
@@ -57152,7 +57152,7 @@ components:
         - attributes
       type: object
     LLMObsCustomEvalConfigUpdateRequest:
-      description: Request to create or update a custom LLM Observability evaluator configuration.
+      description: Request to create or update a custom Agent Observability evaluator configuration.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsCustomEvalConfigUpdateData"
@@ -57180,7 +57180,7 @@ components:
           type: string
       type: object
     LLMObsDatasetBatchUpdateDataAttributesRequest:
-      description: Attributes for batch-updating records in an LLM Observability dataset.
+      description: Attributes for batch-updating records in an Agent Observability dataset.
       properties:
         create_new_version:
           description: Whether to create a new dataset version when applying the batch update. Defaults to `true`.
@@ -57196,7 +57196,7 @@ components:
           $ref: "#/components/schemas/LLMObsDatasetBatchUpdateUpdateRecords"
       type: object
     LLMObsDatasetBatchUpdateDataRequest:
-      description: Data object for batch-updating records in an LLM Observability dataset.
+      description: Data object for batch-updating records in an Agent Observability dataset.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsDatasetBatchUpdateDataAttributesRequest"
@@ -57218,7 +57218,7 @@ components:
         type: string
       type: array
     LLMObsDatasetBatchUpdateInsertRecord:
-      description: A record to insert as part of a batch update on an LLM Observability dataset.
+      description: A record to insert as part of a batch update on an Agent Observability dataset.
       properties:
         expected_output:
           $ref: "#/components/schemas/AnyValue"
@@ -57245,7 +57245,7 @@ components:
         $ref: "#/components/schemas/LLMObsDatasetBatchUpdateInsertRecord"
       type: array
     LLMObsDatasetBatchUpdateRequest:
-      description: Request to batch-insert, update, and delete records in an LLM Observability dataset.
+      description: Request to batch-insert, update, and delete records in an Agent Observability dataset.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsDatasetBatchUpdateDataRequest"
@@ -57253,7 +57253,7 @@ components:
         - data
       type: object
     LLMObsDatasetBatchUpdateUpdateRecord:
-      description: A record update payload as part of a batch update on an LLM Observability dataset.
+      description: A record update payload as part of a batch update on an Agent Observability dataset.
       properties:
         expected_output:
           $ref: "#/components/schemas/AnyValue"
@@ -57278,7 +57278,7 @@ components:
         $ref: "#/components/schemas/LLMObsDatasetBatchUpdateUpdateRecord"
       type: array
     LLMObsDatasetCloneDataAttributesRequest:
-      description: Attributes for cloning an LLM Observability dataset.
+      description: Attributes for cloning an Agent Observability dataset.
       properties:
         description:
           description: Description of the cloned dataset.
@@ -57292,7 +57292,7 @@ components:
         - name
       type: object
     LLMObsDatasetCloneDataRequest:
-      description: Data object for cloning an LLM Observability dataset.
+      description: Data object for cloning an Agent Observability dataset.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsDatasetCloneDataAttributesRequest"
@@ -57308,7 +57308,7 @@ components:
         - attributes
       type: object
     LLMObsDatasetCloneRequest:
-      description: Request to clone an LLM Observability dataset.
+      description: Request to clone an Agent Observability dataset.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsDatasetCloneDataRequest"
@@ -57316,7 +57316,7 @@ components:
         - data
       type: object
     LLMObsDatasetDataAttributesRequest:
-      description: Attributes for creating an LLM Observability dataset.
+      description: Attributes for creating an Agent Observability dataset.
       properties:
         description:
           description: Description of the dataset.
@@ -57333,7 +57333,7 @@ components:
         - name
       type: object
     LLMObsDatasetDataAttributesResponse:
-      description: Attributes of an LLM Observability dataset.
+      description: Attributes of an Agent Observability dataset.
       properties:
         created_at:
           description: Timestamp when the dataset was created.
@@ -57373,7 +57373,7 @@ components:
         - updated_at
       type: object
     LLMObsDatasetDataRequest:
-      description: Data object for creating an LLM Observability dataset.
+      description: Data object for creating an Agent Observability dataset.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsDatasetDataAttributesRequest"
@@ -57384,7 +57384,7 @@ components:
         - attributes
       type: object
     LLMObsDatasetDataResponse:
-      description: Data object for an LLM Observability dataset.
+      description: Data object for an Agent Observability dataset.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsDatasetDataAttributesResponse"
@@ -57400,7 +57400,7 @@ components:
         - attributes
       type: object
     LLMObsDatasetDraftStateData:
-      description: Data object for an LLM Observability dataset draft state.
+      description: Data object for an Agent Observability dataset draft state.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsDatasetDraftStateDataAttributes"
@@ -57416,7 +57416,7 @@ components:
         - attributes
       type: object
     LLMObsDatasetDraftStateDataAttributes:
-      description: Attributes of an LLM Observability dataset draft state.
+      description: Attributes of an Agent Observability dataset draft state.
       properties:
         drafting_since:
           description: Timestamp when the dataset draft session started.
@@ -57430,7 +57430,7 @@ components:
         - drafting_since
       type: object
     LLMObsDatasetDraftStateResponse:
-      description: Response containing the draft state of an LLM Observability dataset.
+      description: Response containing the draft state of an Agent Observability dataset.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsDatasetDraftStateData"
@@ -57438,7 +57438,7 @@ components:
         - data
       type: object
     LLMObsDatasetDraftStateType:
-      description: Resource type of an LLM Observability dataset draft state.
+      description: Resource type of an Agent Observability dataset draft state.
       enum:
         - draft_state_data
       example: draft_state_data
@@ -57473,7 +57473,7 @@ components:
       type: object
     LLMObsDatasetExportFormat:
       default: csv
-      description: Supported export format for an LLM Observability dataset.
+      description: Supported export format for an Agent Observability dataset.
       enum:
         - csv
       example: csv
@@ -57481,7 +57481,7 @@ components:
       x-enum-varnames:
         - CSV
     LLMObsDatasetRecordDataResponse:
-      description: A single LLM Observability dataset record.
+      description: A single Agent Observability dataset record.
       properties:
         created_at:
           description: Timestamp when the record was created.
@@ -57520,7 +57520,7 @@ components:
         - updated_at
       type: object
     LLMObsDatasetRecordItem:
-      description: A single record to append to an LLM Observability dataset.
+      description: A single record to append to an Agent Observability dataset.
       properties:
         expected_output:
           $ref: "#/components/schemas/AnyValue"
@@ -57550,7 +57550,7 @@ components:
         type: string
       type: array
     LLMObsDatasetRecordUpdateItem:
-      description: A record update payload for an LLM Observability dataset.
+      description: A record update payload for an Agent Observability dataset.
       properties:
         expected_output:
           $ref: "#/components/schemas/AnyValue"
@@ -57568,7 +57568,7 @@ components:
         - id
       type: object
     LLMObsDatasetRecordsDataAttributesRequest:
-      description: Attributes for appending records to an LLM Observability dataset.
+      description: Attributes for appending records to an Agent Observability dataset.
       properties:
         deduplicate:
           description: Whether to deduplicate records before appending. Defaults to `true`.
@@ -57582,7 +57582,7 @@ components:
         - records
       type: object
     LLMObsDatasetRecordsDataRequest:
-      description: Data object for appending records to an LLM Observability dataset.
+      description: Data object for appending records to an Agent Observability dataset.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsDatasetRecordsDataAttributesRequest"
@@ -57593,7 +57593,7 @@ components:
         - attributes
       type: object
     LLMObsDatasetRecordsListResponse:
-      description: Response containing a paginated list of LLM Observability dataset records.
+      description: Response containing a paginated list of Agent Observability dataset records.
       properties:
         data:
           description: List of dataset records.
@@ -57628,7 +57628,7 @@ components:
         - data
       type: object
     LLMObsDatasetRecordsRequest:
-      description: Request to append records to an LLM Observability dataset.
+      description: Request to append records to an Agent Observability dataset.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsDatasetRecordsDataRequest"
@@ -57636,7 +57636,7 @@ components:
         - data
       type: object
     LLMObsDatasetRecordsUpdateDataAttributesRequest:
-      description: Attributes for updating records in an LLM Observability dataset.
+      description: Attributes for updating records in an Agent Observability dataset.
       properties:
         records:
           description: List of records to update.
@@ -57647,7 +57647,7 @@ components:
         - records
       type: object
     LLMObsDatasetRecordsUpdateDataRequest:
-      description: Data object for updating records in an LLM Observability dataset.
+      description: Data object for updating records in an Agent Observability dataset.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsDatasetRecordsUpdateDataAttributesRequest"
@@ -57658,7 +57658,7 @@ components:
         - attributes
       type: object
     LLMObsDatasetRecordsUpdateRequest:
-      description: Request to update records in an LLM Observability dataset.
+      description: Request to update records in an Agent Observability dataset.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsDatasetRecordsUpdateDataRequest"
@@ -57674,7 +57674,7 @@ components:
           type: string
       type: object
     LLMObsDatasetRequest:
-      description: Request to create an LLM Observability dataset.
+      description: Request to create an Agent Observability dataset.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsDatasetDataRequest"
@@ -57682,7 +57682,7 @@ components:
         - data
       type: object
     LLMObsDatasetResponse:
-      description: Response containing a single LLM Observability dataset.
+      description: Response containing a single Agent Observability dataset.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsDatasetDataResponse"
@@ -57690,7 +57690,7 @@ components:
         - data
       type: object
     LLMObsDatasetRestoreVersionDataAttributesRequest:
-      description: Attributes for restoring an LLM Observability dataset to a previous version.
+      description: Attributes for restoring an Agent Observability dataset to a previous version.
       properties:
         dataset_version:
           description: Version number of the dataset to restore. Must be between 0 and the current version of the dataset, inclusive.
@@ -57702,7 +57702,7 @@ components:
         - dataset_version
       type: object
     LLMObsDatasetRestoreVersionDataRequest:
-      description: Data object for restoring an LLM Observability dataset to a previous version.
+      description: Data object for restoring an Agent Observability dataset to a previous version.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsDatasetRestoreVersionDataAttributesRequest"
@@ -57718,7 +57718,7 @@ components:
         - attributes
       type: object
     LLMObsDatasetRestoreVersionRequest:
-      description: Request to restore an LLM Observability dataset to a previous version.
+      description: Request to restore an Agent Observability dataset to a previous version.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsDatasetRestoreVersionDataRequest"
@@ -57726,7 +57726,7 @@ components:
         - data
       type: object
     LLMObsDatasetType:
-      description: Resource type of an LLM Observability dataset.
+      description: Resource type of an Agent Observability dataset.
       enum:
         - datasets
       example: datasets
@@ -57734,7 +57734,7 @@ components:
       x-enum-varnames:
         - DATASETS
     LLMObsDatasetUpdateDataAttributesRequest:
-      description: Attributes for updating an LLM Observability dataset.
+      description: Attributes for updating an Agent Observability dataset.
       properties:
         description:
           description: Updated description of the dataset.
@@ -57748,7 +57748,7 @@ components:
           type: string
       type: object
     LLMObsDatasetUpdateDataRequest:
-      description: Data object for updating an LLM Observability dataset.
+      description: Data object for updating an Agent Observability dataset.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsDatasetUpdateDataAttributesRequest"
@@ -57759,7 +57759,7 @@ components:
         - attributes
       type: object
     LLMObsDatasetUpdateRequest:
-      description: Request to partially update an LLM Observability dataset.
+      description: Request to partially update an Agent Observability dataset.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsDatasetUpdateDataRequest"
@@ -57767,7 +57767,7 @@ components:
         - data
       type: object
     LLMObsDatasetVersionData:
-      description: Data object for an LLM Observability dataset version.
+      description: Data object for an Agent Observability dataset version.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsDatasetVersionDataAttributes"
@@ -57783,7 +57783,7 @@ components:
         - attributes
       type: object
     LLMObsDatasetVersionDataAttributes:
-      description: Attributes of an LLM Observability dataset version.
+      description: Attributes of an Agent Observability dataset version.
       properties:
         dataset_id:
           description: Unique identifier of the dataset this version belongs to.
@@ -57807,7 +57807,7 @@ components:
         - last_used
       type: object
     LLMObsDatasetVersionType:
-      description: Resource type of an LLM Observability dataset version.
+      description: Resource type of an Agent Observability dataset version.
       enum:
         - dataset_version
       example: dataset_version
@@ -57815,7 +57815,7 @@ components:
       x-enum-varnames:
         - DATASET_VERSION
     LLMObsDatasetVersionsResponse:
-      description: Response containing the active versions of an LLM Observability dataset.
+      description: Response containing the active versions of an Agent Observability dataset.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsDatasetVersionsResponseData"
@@ -57828,7 +57828,7 @@ components:
         $ref: "#/components/schemas/LLMObsDatasetVersionData"
       type: array
     LLMObsDatasetsResponse:
-      description: Response containing a list of LLM Observability datasets.
+      description: Response containing a list of Agent Observability datasets.
       properties:
         data:
           description: List of datasets.
@@ -57883,7 +57883,7 @@ components:
         - attributes
       type: object
     LLMObsDeleteAnnotationQueueInteractionsRequest:
-      description: Request to delete interactions from an LLM Observability annotation queue.
+      description: Request to delete interactions from an Agent Observability annotation queue.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsDeleteAnnotationQueueInteractionsDataRequest"
@@ -57970,7 +57970,7 @@ components:
         - data
       type: object
     LLMObsDeleteDatasetRecordsDataAttributesRequest:
-      description: Attributes for deleting records from an LLM Observability dataset.
+      description: Attributes for deleting records from an Agent Observability dataset.
       properties:
         record_ids:
           description: List of record IDs to delete.
@@ -57984,7 +57984,7 @@ components:
         - record_ids
       type: object
     LLMObsDeleteDatasetRecordsDataRequest:
-      description: Data object for deleting records from an LLM Observability dataset.
+      description: Data object for deleting records from an Agent Observability dataset.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsDeleteDatasetRecordsDataAttributesRequest"
@@ -57995,7 +57995,7 @@ components:
         - attributes
       type: object
     LLMObsDeleteDatasetRecordsRequest:
-      description: Request to delete records from an LLM Observability dataset.
+      description: Request to delete records from an Agent Observability dataset.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsDeleteDatasetRecordsDataRequest"
@@ -58003,7 +58003,7 @@ components:
         - data
       type: object
     LLMObsDeleteDatasetsDataAttributesRequest:
-      description: Attributes for deleting LLM Observability datasets.
+      description: Attributes for deleting Agent Observability datasets.
       properties:
         dataset_ids:
           description: List of dataset IDs to delete.
@@ -58017,7 +58017,7 @@ components:
         - dataset_ids
       type: object
     LLMObsDeleteDatasetsDataRequest:
-      description: Data object for deleting LLM Observability datasets.
+      description: Data object for deleting Agent Observability datasets.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsDeleteDatasetsDataAttributesRequest"
@@ -58028,7 +58028,7 @@ components:
         - attributes
       type: object
     LLMObsDeleteDatasetsRequest:
-      description: Request to delete one or more LLM Observability datasets.
+      description: Request to delete one or more Agent Observability datasets.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsDeleteDatasetsDataRequest"
@@ -58036,7 +58036,7 @@ components:
         - data
       type: object
     LLMObsDeleteExperimentsDataAttributesRequest:
-      description: Attributes for deleting LLM Observability experiments.
+      description: Attributes for deleting Agent Observability experiments.
       properties:
         experiment_ids:
           description: List of experiment IDs to delete.
@@ -58050,7 +58050,7 @@ components:
         - experiment_ids
       type: object
     LLMObsDeleteExperimentsDataRequest:
-      description: Data object for deleting LLM Observability experiments.
+      description: Data object for deleting Agent Observability experiments.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsDeleteExperimentsDataAttributesRequest"
@@ -58061,7 +58061,7 @@ components:
         - attributes
       type: object
     LLMObsDeleteExperimentsRequest:
-      description: Request to delete one or more LLM Observability experiments.
+      description: Request to delete one or more Agent Observability experiments.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsDeleteExperimentsDataRequest"
@@ -58069,7 +58069,7 @@ components:
         - data
       type: object
     LLMObsDeleteProjectsDataAttributesRequest:
-      description: Attributes for deleting LLM Observability projects.
+      description: Attributes for deleting Agent Observability projects.
       properties:
         project_ids:
           description: List of project IDs to delete.
@@ -58083,7 +58083,7 @@ components:
         - project_ids
       type: object
     LLMObsDeleteProjectsDataRequest:
-      description: Data object for deleting LLM Observability projects.
+      description: Data object for deleting Agent Observability projects.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsDeleteProjectsDataAttributesRequest"
@@ -58094,7 +58094,7 @@ components:
         - attributes
       type: object
     LLMObsDeleteProjectsRequest:
-      description: Request to delete one or more LLM Observability projects.
+      description: Request to delete one or more Agent Observability projects.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsDeleteProjectsDataRequest"
@@ -58102,7 +58102,7 @@ components:
         - data
       type: object
     LLMObsDeletedPromptData:
-      description: Data object confirming that an LLM Observability prompt was deleted.
+      description: Data object confirming that an Agent Observability prompt was deleted.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsDeletedPromptDataAttributes"
@@ -58118,7 +58118,7 @@ components:
         - attributes
       type: object
     LLMObsDeletedPromptDataAttributes:
-      description: Attributes confirming that an LLM Observability prompt was deleted.
+      description: Attributes confirming that an Agent Observability prompt was deleted.
       properties:
         deleted_at:
           description: Timestamp when the prompt was deleted.
@@ -58134,7 +58134,7 @@ components:
         - deleted_at
       type: object
     LLMObsDeletedPromptResponse:
-      description: Response confirming that an LLM Observability prompt was deleted.
+      description: Response confirming that an Agent Observability prompt was deleted.
       example:
         data:
           attributes:
@@ -58224,7 +58224,7 @@ components:
       x-enum-varnames:
         - DISPLAY_BLOCK
     LLMObsEventType:
-      description: Resource type for LLM Observability experiment events.
+      description: Resource type for Agent Observability experiment events.
       enum:
         - events
       example: events
@@ -58232,7 +58232,7 @@ components:
       x-enum-varnames:
         - EVENTS
     LLMObsExperimentDataAttributesRequest:
-      description: Attributes for creating an LLM Observability experiment.
+      description: Attributes for creating an Agent Observability experiment.
       properties:
         config:
           additionalProperties: {}
@@ -58278,7 +58278,7 @@ components:
         - name
       type: object
     LLMObsExperimentDataAttributesResponse:
-      description: Attributes of an LLM Observability experiment.
+      description: Attributes of an Agent Observability experiment.
       properties:
         aggregate_data:
           additionalProperties: {}
@@ -58371,7 +58371,7 @@ components:
         - updated_at
       type: object
     LLMObsExperimentDataRequest:
-      description: Data object for creating an LLM Observability experiment.
+      description: Data object for creating an Agent Observability experiment.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsExperimentDataAttributesRequest"
@@ -58382,7 +58382,7 @@ components:
         - attributes
       type: object
     LLMObsExperimentDataResponse:
-      description: Data object for an LLM Observability experiment.
+      description: Data object for an Agent Observability experiment.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsExperimentDataAttributesResponse"
@@ -58492,7 +58492,7 @@ components:
         - attributes
       type: object
     LLMObsExperimentEventsRequest:
-      description: Request to push spans and metrics for an LLM Observability experiment.
+      description: Request to push spans and metrics for an Agent Observability experiment.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsExperimentEventsDataRequest"
@@ -58551,7 +58551,7 @@ components:
         - data
       type: object
     LLMObsExperimentMetric:
-      description: A metric associated with an LLM Observability experiment span.
+      description: A metric associated with an Agent Observability experiment span.
       properties:
         assessment:
           $ref: "#/components/schemas/LLMObsMetricAssessment"
@@ -58613,7 +58613,7 @@ components:
           type: string
       type: object
     LLMObsExperimentRequest:
-      description: Request to create an LLM Observability experiment.
+      description: Request to create an Agent Observability experiment.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsExperimentDataRequest"
@@ -58621,7 +58621,7 @@ components:
         - data
       type: object
     LLMObsExperimentResponse:
-      description: Response containing a single LLM Observability experiment.
+      description: Response containing a single Agent Observability experiment.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsExperimentDataResponse"
@@ -58629,7 +58629,7 @@ components:
         - data
       type: object
     LLMObsExperimentRunDataResponse:
-      description: Data object for an LLM Observability experiment run.
+      description: Data object for an Agent Observability experiment run.
       properties:
         aggregate_data:
           additionalProperties: {}
@@ -58657,7 +58657,7 @@ components:
           type: integer
       type: object
     LLMObsExperimentSpan:
-      description: A span associated with an LLM Observability experiment.
+      description: A span associated with an Agent Observability experiment.
       properties:
         dataset_id:
           description: Dataset ID associated with this span.
@@ -58843,7 +58843,7 @@ components:
         - data
       type: object
     LLMObsExperimentStatus:
-      description: Execution status of an LLM Observability experiment.
+      description: Execution status of an Agent Observability experiment.
       enum:
         - running
         - completed
@@ -58857,7 +58857,7 @@ components:
         - FAILED
         - INTERRUPTED
     LLMObsExperimentType:
-      description: Resource type of an LLM Observability experiment.
+      description: Resource type of an Agent Observability experiment.
       enum:
         - experiments
       example: experiments
@@ -58865,7 +58865,7 @@ components:
       x-enum-varnames:
         - EXPERIMENTS
     LLMObsExperimentUpdateDataAttributesRequest:
-      description: Attributes for updating an LLM Observability experiment.
+      description: Attributes for updating an Agent Observability experiment.
       properties:
         dataset_id:
           description: Updated identifier of the dataset used in this experiment.
@@ -58888,7 +58888,7 @@ components:
           $ref: "#/components/schemas/LLMObsExperimentStatus"
       type: object
     LLMObsExperimentUpdateDataRequest:
-      description: Data object for updating an LLM Observability experiment.
+      description: Data object for updating an Agent Observability experiment.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsExperimentUpdateDataAttributesRequest"
@@ -58899,7 +58899,7 @@ components:
         - attributes
       type: object
     LLMObsExperimentUpdateRequest:
-      description: Request to partially update an LLM Observability experiment.
+      description: Request to partially update an Agent Observability experiment.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsExperimentUpdateDataRequest"
@@ -59047,7 +59047,7 @@ components:
         - field
       type: object
     LLMObsExperimentationAnalyticsRequest:
-      description: Request to run an analytics aggregation over LLM Observability experimentation data.
+      description: Request to run an analytics aggregation over Agent Observability experimentation data.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsExperimentationAnalyticsDataRequest"
@@ -59238,7 +59238,7 @@ components:
         - attributes
       type: object
     LLMObsExperimentationSearchRequest:
-      description: Request to search across LLM Observability experimentation entities using cursor-based pagination.
+      description: Request to search across Agent Observability experimentation entities using cursor-based pagination.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsExperimentationSearchDataRequest"
@@ -59370,7 +59370,7 @@ components:
           type: integer
       type: object
     LLMObsExperimentationSimpleSearchRequest:
-      description: Request to search across LLM Observability experimentation entities using offset-based pagination.
+      description: Request to search across Agent Observability experimentation entities using offset-based pagination.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsExperimentationSimpleSearchDataRequest"
@@ -59418,7 +59418,7 @@ components:
       x-enum-varnames:
         - EXPERIMENTATION
     LLMObsExperimentsResponse:
-      description: Response containing a list of LLM Observability experiments.
+      description: Response containing a list of Agent Observability experiments.
       properties:
         data:
           description: List of experiments.
@@ -60036,7 +60036,7 @@ components:
         - BOOLEAN
         - TEXT
     LLMObsMetricAssessment:
-      description: Assessment result for an LLM Observability experiment metric.
+      description: Assessment result for an Agent Observability experiment metric.
       enum:
         - pass
         - fail
@@ -60046,7 +60046,7 @@ components:
         - PASS
         - FAIL
     LLMObsMetricScoreType:
-      description: Type of metric recorded for an LLM Observability experiment.
+      description: Type of metric recorded for an Agent Observability experiment.
       enum:
         - score
         - categorical
@@ -60221,7 +60221,7 @@ components:
         $ref: "#/components/schemas/LLMObsPatternsClusteredPoint"
       type: array
     LLMObsPatternsClusteredPointsResponse:
-      description: Response containing the clustered points of an LLM Observability topic.
+      description: Response containing the clustered points of an Agent Observability topic.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsPatternsClusteredPointsResponseData"
@@ -60229,7 +60229,7 @@ components:
         - data
       type: object
     LLMObsPatternsClusteredPointsResponseAttributes:
-      description: Attributes of an LLM Observability patterns clustered points response.
+      description: Attributes of an Agent Observability patterns clustered points response.
       properties:
         next_page_token:
           description: Pagination token for the next page of points. Null if there are no more pages.
@@ -60248,7 +60248,7 @@ components:
         - points
       type: object
     LLMObsPatternsClusteredPointsResponseData:
-      description: Data object of an LLM Observability patterns clustered points response.
+      description: Data object of an Agent Observability patterns clustered points response.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsPatternsClusteredPointsResponseAttributes"
@@ -60264,7 +60264,7 @@ components:
         - attributes
       type: object
     LLMObsPatternsClusteredPointsType:
-      description: Resource type of an LLM Observability patterns clustered points response.
+      description: Resource type of an Agent Observability patterns clustered points response.
       enum:
         - clustered_points_response
       example: clustered_points_response
@@ -60272,7 +60272,7 @@ components:
       x-enum-varnames:
         - CLUSTERED_POINTS_RESPONSE
     LLMObsPatternsConfigAttributes:
-      description: Attributes of an LLM Observability patterns configuration.
+      description: Attributes of an Agent Observability patterns configuration.
       properties:
         account_id:
           description: Integration account ID for a bring-your-own-model configuration.
@@ -60344,7 +60344,7 @@ components:
         - updated_at
       type: object
     LLMObsPatternsConfigItem:
-      description: A single LLM Observability patterns configuration in a list response.
+      description: A single Agent Observability patterns configuration in a list response.
       properties:
         account_id:
           description: Integration account ID for a bring-your-own-model configuration.
@@ -60426,7 +60426,7 @@ components:
         $ref: "#/components/schemas/LLMObsPatternsConfigItem"
       type: array
     LLMObsPatternsConfigResponse:
-      description: Response containing a single LLM Observability patterns configuration.
+      description: Response containing a single Agent Observability patterns configuration.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsPatternsConfigResponseData"
@@ -60434,7 +60434,7 @@ components:
         - data
       type: object
     LLMObsPatternsConfigResponseData:
-      description: Data object of an LLM Observability patterns configuration.
+      description: Data object of an Agent Observability patterns configuration.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsPatternsConfigAttributes"
@@ -60487,7 +60487,7 @@ components:
           type: number
       type: object
     LLMObsPatternsConfigType:
-      description: Resource type of an LLM Observability patterns configuration.
+      description: Resource type of an Agent Observability patterns configuration.
       enum:
         - topic_discovery_configs
       example: topic_discovery_configs
@@ -60495,7 +60495,7 @@ components:
       x-enum-varnames:
         - TOPIC_DISCOVERY_CONFIGS
     LLMObsPatternsConfigUpsertRequest:
-      description: Request to create or update an LLM Observability patterns configuration.
+      description: Request to create or update an Agent Observability patterns configuration.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsPatternsConfigUpsertRequestData"
@@ -60503,7 +60503,7 @@ components:
         - data
       type: object
     LLMObsPatternsConfigUpsertRequestAttributes:
-      description: Attributes for creating or updating an LLM Observability patterns configuration.
+      description: Attributes for creating or updating an Agent Observability patterns configuration.
       properties:
         account_id:
           description: Integration account ID for a bring-your-own-model configuration.
@@ -60562,7 +60562,7 @@ components:
         - hierarchy_depth
       type: object
     LLMObsPatternsConfigUpsertRequestData:
-      description: Data object for creating or updating an LLM Observability patterns configuration.
+      description: Data object for creating or updating an Agent Observability patterns configuration.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsPatternsConfigUpsertRequestAttributes"
@@ -60573,7 +60573,7 @@ components:
         - attributes
       type: object
     LLMObsPatternsConfigsListType:
-      description: Resource type of a list of LLM Observability patterns configurations.
+      description: Resource type of a list of Agent Observability patterns configurations.
       enum:
         - list_topic_discovery_configs_response
       example: list_topic_discovery_configs_response
@@ -60581,7 +60581,7 @@ components:
       x-enum-varnames:
         - LIST_TOPIC_DISCOVERY_CONFIGS_RESPONSE
     LLMObsPatternsConfigsResponse:
-      description: Response containing a list of LLM Observability patterns configurations.
+      description: Response containing a list of Agent Observability patterns configurations.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsPatternsConfigsResponseData"
@@ -60589,7 +60589,7 @@ components:
         - data
       type: object
     LLMObsPatternsConfigsResponseAttributes:
-      description: Attributes of a list of LLM Observability patterns configurations.
+      description: Attributes of a list of Agent Observability patterns configurations.
       properties:
         configs:
           $ref: "#/components/schemas/LLMObsPatternsConfigItemsList"
@@ -60597,7 +60597,7 @@ components:
         - configs
       type: object
     LLMObsPatternsConfigsResponseData:
-      description: Data object of a list of LLM Observability patterns configurations.
+      description: Data object of a list of Agent Observability patterns configurations.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsPatternsConfigsResponseAttributes"
@@ -60618,7 +60618,7 @@ components:
         $ref: "#/components/schemas/LLMObsPatternsActivityProgress"
       type: array
     LLMObsPatternsRequestType:
-      description: Resource type for triggering an LLM Observability patterns run.
+      description: Resource type for triggering an Agent Observability patterns run.
       enum:
         - topic_discovery
       example: topic_discovery
@@ -60626,7 +60626,7 @@ components:
       x-enum-varnames:
         - TOPIC_DISCOVERY
     LLMObsPatternsRunStatusResponse:
-      description: Response containing the status of an LLM Observability patterns run.
+      description: Response containing the status of an Agent Observability patterns run.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsPatternsRunStatusResponseData"
@@ -60634,7 +60634,7 @@ components:
         - data
       type: object
     LLMObsPatternsRunStatusResponseAttributes:
-      description: Attributes of an LLM Observability patterns run status.
+      description: Attributes of an Agent Observability patterns run status.
       properties:
         created_at:
           description: Timestamp when the run was created.
@@ -60658,7 +60658,7 @@ components:
         - progress
       type: object
     LLMObsPatternsRunStatusResponseData:
-      description: Data object of an LLM Observability patterns run status response.
+      description: Data object of an Agent Observability patterns run status response.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsPatternsRunStatusResponseAttributes"
@@ -60674,7 +60674,7 @@ components:
         - attributes
       type: object
     LLMObsPatternsRunStatusType:
-      description: Resource type of an LLM Observability patterns run status.
+      description: Resource type of an Agent Observability patterns run status.
       enum:
         - topic_discovery_run_status
       example: topic_discovery_run_status
@@ -60682,7 +60682,7 @@ components:
       x-enum-varnames:
         - TOPIC_DISCOVERY_RUN_STATUS
     LLMObsPatternsRunSummary:
-      description: Summary of an LLM Observability patterns run.
+      description: Summary of an Agent Observability patterns run.
       properties:
         completed_at:
           description: Timestamp when the run completed. Null if the run has not completed.
@@ -60716,7 +60716,7 @@ components:
         $ref: "#/components/schemas/LLMObsPatternsRunSummary"
       type: array
     LLMObsPatternsRunsListType:
-      description: Resource type of a list of LLM Observability patterns runs.
+      description: Resource type of a list of Agent Observability patterns runs.
       enum:
         - list_topic_discovery_runs_response
       example: list_topic_discovery_runs_response
@@ -60724,7 +60724,7 @@ components:
       x-enum-varnames:
         - LIST_TOPIC_DISCOVERY_RUNS_RESPONSE
     LLMObsPatternsRunsResponse:
-      description: Response containing the completed runs of an LLM Observability patterns configuration.
+      description: Response containing the completed runs of an Agent Observability patterns configuration.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsPatternsRunsResponseData"
@@ -60732,7 +60732,7 @@ components:
         - data
       type: object
     LLMObsPatternsRunsResponseAttributes:
-      description: Attributes of an LLM Observability patterns runs response.
+      description: Attributes of an Agent Observability patterns runs response.
       properties:
         runs:
           $ref: "#/components/schemas/LLMObsPatternsRunsList"
@@ -60740,7 +60740,7 @@ components:
         - runs
       type: object
     LLMObsPatternsRunsResponseData:
-      description: Data object of an LLM Observability patterns runs response.
+      description: Data object of an Agent Observability patterns runs response.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsPatternsRunsResponseAttributes"
@@ -60756,7 +60756,7 @@ components:
         - attributes
       type: object
     LLMObsPatternsTopic:
-      description: A topic discovered by an LLM Observability patterns run.
+      description: A topic discovered by an Agent Observability patterns run.
       properties:
         created_at:
           description: Timestamp when the topic was created.
@@ -60816,7 +60816,7 @@ components:
       type: object
     LLMObsPatternsTopicWithClusteredPoints:
       description: |-
-        A topic discovered by an LLM Observability patterns run, including the
+        A topic discovered by an Agent Observability patterns run, including the
         clustered points attached to leaf topics.
       properties:
         cluster_points:
@@ -60883,7 +60883,7 @@ components:
         $ref: "#/components/schemas/LLMObsPatternsTopic"
       type: array
     LLMObsPatternsTopicsResponse:
-      description: Response containing the topics discovered by an LLM Observability patterns run.
+      description: Response containing the topics discovered by an Agent Observability patterns run.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsPatternsTopicsResponseData"
@@ -60891,7 +60891,7 @@ components:
         - data
       type: object
     LLMObsPatternsTopicsResponseAttributes:
-      description: Attributes of an LLM Observability patterns topics response.
+      description: Attributes of an Agent Observability patterns topics response.
       properties:
         completed_at:
           description: Timestamp when the run completed. Null if the run has not completed.
@@ -60928,7 +60928,7 @@ components:
         - topics
       type: object
     LLMObsPatternsTopicsResponseData:
-      description: Data object of an LLM Observability patterns topics response.
+      description: Data object of an Agent Observability patterns topics response.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsPatternsTopicsResponseAttributes"
@@ -60944,7 +60944,7 @@ components:
         - attributes
       type: object
     LLMObsPatternsTopicsType:
-      description: Resource type of an LLM Observability patterns topics response.
+      description: Resource type of an Agent Observability patterns topics response.
       enum:
         - get_topics_response
       example: get_topics_response
@@ -60959,7 +60959,7 @@ components:
     LLMObsPatternsTopicsWithClusteredPointsResponse:
       description: |-
         Response containing the topics, and the clustered points of their leaf topics,
-        discovered by an LLM Observability patterns run.
+        discovered by an Agent Observability patterns run.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsPatternsTopicsWithClusteredPointsResponseData"
@@ -60967,7 +60967,7 @@ components:
         - data
       type: object
     LLMObsPatternsTopicsWithClusteredPointsResponseAttributes:
-      description: Attributes of an LLM Observability patterns topics-with-clustered-points response.
+      description: Attributes of an Agent Observability patterns topics-with-clustered-points response.
       properties:
         completed_at:
           description: Timestamp when the run completed. Null if the run has not completed.
@@ -61004,7 +61004,7 @@ components:
         - topics
       type: object
     LLMObsPatternsTopicsWithClusteredPointsResponseData:
-      description: Data object of an LLM Observability patterns topics-with-clustered-points response.
+      description: Data object of an Agent Observability patterns topics-with-clustered-points response.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsPatternsTopicsWithClusteredPointsResponseAttributes"
@@ -61020,7 +61020,7 @@ components:
         - attributes
       type: object
     LLMObsPatternsTopicsWithClusteredPointsType:
-      description: Resource type of an LLM Observability patterns topics-with-clustered-points response.
+      description: Resource type of an Agent Observability patterns topics-with-clustered-points response.
       enum:
         - get_topics_with_cluster_points_response
       example: get_topics_with_cluster_points_response
@@ -61028,7 +61028,7 @@ components:
       x-enum-varnames:
         - GET_TOPICS_WITH_CLUSTER_POINTS_RESPONSE
     LLMObsPatternsTriggerRequest:
-      description: Request to trigger an LLM Observability patterns run.
+      description: Request to trigger an Agent Observability patterns run.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsPatternsTriggerRequestData"
@@ -61036,7 +61036,7 @@ components:
         - data
       type: object
     LLMObsPatternsTriggerRequestAttributes:
-      description: Attributes for triggering an LLM Observability patterns run.
+      description: Attributes for triggering an Agent Observability patterns run.
       properties:
         config_id:
           description: The ID of the patterns configuration to run.
@@ -61046,7 +61046,7 @@ components:
         - config_id
       type: object
     LLMObsPatternsTriggerRequestData:
-      description: Data object for triggering an LLM Observability patterns run.
+      description: Data object for triggering an Agent Observability patterns run.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsPatternsTriggerRequestAttributes"
@@ -61057,7 +61057,7 @@ components:
         - attributes
       type: object
     LLMObsPatternsTriggerResponse:
-      description: Response after triggering an LLM Observability patterns run.
+      description: Response after triggering an Agent Observability patterns run.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsPatternsTriggerResponseData"
@@ -61065,7 +61065,7 @@ components:
         - data
       type: object
     LLMObsPatternsTriggerResponseAttributes:
-      description: Attributes of an LLM Observability patterns trigger response.
+      description: Attributes of an Agent Observability patterns trigger response.
       properties:
         config_id:
           description: The ID of the patterns configuration that was run.
@@ -61085,7 +61085,7 @@ components:
         - status
       type: object
     LLMObsPatternsTriggerResponseData:
-      description: Data object of an LLM Observability patterns trigger response.
+      description: Data object of an Agent Observability patterns trigger response.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsPatternsTriggerResponseAttributes"
@@ -61101,7 +61101,7 @@ components:
         - attributes
       type: object
     LLMObsPatternsTriggerResponseType:
-      description: Resource type of an LLM Observability patterns trigger response.
+      description: Resource type of an Agent Observability patterns trigger response.
       enum:
         - topic_discovery_run
       example: topic_discovery_run
@@ -61109,7 +61109,7 @@ components:
       x-enum-varnames:
         - TOPIC_DISCOVERY_RUN
     LLMObsProjectDataAttributesRequest:
-      description: Attributes for creating an LLM Observability project.
+      description: Attributes for creating an Agent Observability project.
       properties:
         description:
           description: Description of the project.
@@ -61122,7 +61122,7 @@ components:
         - name
       type: object
     LLMObsProjectDataAttributesResponse:
-      description: Attributes of an LLM Observability project.
+      description: Attributes of an Agent Observability project.
       properties:
         created_at:
           description: Timestamp when the project was created.
@@ -61150,7 +61150,7 @@ components:
         - updated_at
       type: object
     LLMObsProjectDataRequest:
-      description: Data object for creating an LLM Observability project.
+      description: Data object for creating an Agent Observability project.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsProjectDataAttributesRequest"
@@ -61161,7 +61161,7 @@ components:
         - attributes
       type: object
     LLMObsProjectDataResponse:
-      description: Data object for an LLM Observability project.
+      description: Data object for an Agent Observability project.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsProjectDataAttributesResponse"
@@ -61177,7 +61177,7 @@ components:
         - attributes
       type: object
     LLMObsProjectRequest:
-      description: Request to create an LLM Observability project.
+      description: Request to create an Agent Observability project.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsProjectDataRequest"
@@ -61185,7 +61185,7 @@ components:
         - data
       type: object
     LLMObsProjectResponse:
-      description: Response containing a single LLM Observability project.
+      description: Response containing a single Agent Observability project.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsProjectDataResponse"
@@ -61193,7 +61193,7 @@ components:
         - data
       type: object
     LLMObsProjectType:
-      description: Resource type of an LLM Observability project.
+      description: Resource type of an Agent Observability project.
       enum:
         - projects
       example: projects
@@ -61201,7 +61201,7 @@ components:
       x-enum-varnames:
         - PROJECTS
     LLMObsProjectUpdateDataAttributesRequest:
-      description: Attributes for updating an LLM Observability project.
+      description: Attributes for updating an Agent Observability project.
       properties:
         description:
           description: Updated description of the project.
@@ -61211,7 +61211,7 @@ components:
           type: string
       type: object
     LLMObsProjectUpdateDataRequest:
-      description: Data object for updating an LLM Observability project.
+      description: Data object for updating an Agent Observability project.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsProjectUpdateDataAttributesRequest"
@@ -61222,7 +61222,7 @@ components:
         - attributes
       type: object
     LLMObsProjectUpdateRequest:
-      description: Request to partially update an LLM Observability project.
+      description: Request to partially update an Agent Observability project.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsProjectUpdateDataRequest"
@@ -61230,7 +61230,7 @@ components:
         - data
       type: object
     LLMObsProjectsResponse:
-      description: Response containing a list of LLM Observability projects.
+      description: Response containing a list of Agent Observability projects.
       properties:
         data:
           description: List of projects.
@@ -61265,7 +61265,7 @@ components:
       type: array
       x-generate-alias-as-model: true
     LLMObsPromptData:
-      description: Data object for an LLM Observability prompt.
+      description: Data object for an Agent Observability prompt.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsPromptDataAttributes"
@@ -61281,7 +61281,7 @@ components:
         - attributes
       type: object
     LLMObsPromptDataAttributes:
-      description: Attributes of an LLM Observability prompt registry entry.
+      description: Attributes of an Agent Observability prompt registry entry.
       properties:
         author:
           description: UUID of the user who authored the prompt.
@@ -61366,7 +61366,7 @@ components:
         - id
       type: object
     LLMObsPromptResponse:
-      description: Response containing a single LLM Observability prompt.
+      description: Response containing a single Agent Observability prompt.
       example:
         data:
           attributes:
@@ -61399,7 +61399,7 @@ components:
         - REGISTRY
         - CODE
     LLMObsPromptSDKData:
-      description: Data object for a flattened LLM Observability prompt version returned for SDK consumption.
+      description: Data object for a flattened Agent Observability prompt version returned for SDK consumption.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsPromptSDKDataAttributes"
@@ -61448,7 +61448,7 @@ components:
           type: string
       type: object
     LLMObsPromptSDKResponse:
-      description: Response containing a flattened LLM Observability prompt version for SDK consumption.
+      description: Response containing a flattened Agent Observability prompt version for SDK consumption.
       example:
         data:
           attributes:
@@ -61480,7 +61480,7 @@ components:
       pattern: ".*\\S.*"
       type: string
     LLMObsPromptType:
-      description: Resource type of an LLM Observability prompt.
+      description: Resource type of an Agent Observability prompt.
       enum:
         - prompt-templates
       example: prompt-templates
@@ -61488,7 +61488,7 @@ components:
       x-enum-varnames:
         - PROMPT_TEMPLATES
     LLMObsPromptVersionData:
-      description: Data object for a specific version of an LLM Observability prompt.
+      description: Data object for a specific version of an Agent Observability prompt.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsPromptVersionDataAttributes"
@@ -61504,7 +61504,7 @@ components:
         - attributes
       type: object
     LLMObsPromptVersionDataAttributes:
-      description: Attributes of a specific version of an LLM Observability prompt.
+      description: Attributes of a specific version of an Agent Observability prompt.
       properties:
         author:
           description: UUID of the user who authored this version.
@@ -61574,7 +61574,7 @@ components:
         - version
       type: object
     LLMObsPromptVersionLabel:
-      description: A label attached to an LLM Observability prompt version.
+      description: A label attached to an Agent Observability prompt version.
       enum:
         - production
         - development
@@ -61666,7 +61666,7 @@ components:
         - version
       type: object
     LLMObsPromptVersionResponse:
-      description: Response containing a specific version of an LLM Observability prompt.
+      description: Response containing a specific version of an Agent Observability prompt.
       example:
         data:
           attributes:
@@ -61691,7 +61691,7 @@ components:
         - data
       type: object
     LLMObsPromptVersionType:
-      description: Resource type of an LLM Observability prompt version.
+      description: Resource type of an Agent Observability prompt version.
       enum:
         - prompt-template-versions
       example: prompt-template-versions
@@ -61699,7 +61699,7 @@ components:
       x-enum-varnames:
         - PROMPT_TEMPLATE_VERSIONS
     LLMObsPromptVersionsResponse:
-      description: Response containing the versions of an LLM Observability prompt.
+      description: Response containing the versions of an Agent Observability prompt.
       example:
         data:
           - attributes:
@@ -61732,7 +61732,7 @@ components:
         - data
       type: object
     LLMObsPromptsResponse:
-      description: Response containing a list of LLM Observability prompts.
+      description: Response containing a list of Agent Observability prompts.
       example:
         data:
           - attributes:
@@ -61750,7 +61750,7 @@ components:
             type: prompt-templates
       properties:
         data:
-          description: List of LLM Observability prompts.
+          description: List of Agent Observability prompts.
           items:
             $ref: "#/components/schemas/LLMObsPromptData"
           type: array
@@ -61758,7 +61758,7 @@ components:
         - data
       type: object
     LLMObsRecordType:
-      description: Resource type of LLM Observability dataset records.
+      description: Resource type of Agent Observability dataset records.
       enum:
         - records
       example: records
@@ -61766,7 +61766,7 @@ components:
       x-enum-varnames:
         - RECORDS
     LLMObsSearchSpansRequest:
-      description: Request body for searching LLM Observability spans.
+      description: Request body for searching Agent Observability spans.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsSearchSpansRequestData"
@@ -61774,7 +61774,7 @@ components:
         - data
       type: object
     LLMObsSearchSpansRequestAttributes:
-      description: Attributes of an LLM Observability spans search request.
+      description: Attributes of an Agent Observability spans search request.
       properties:
         filter:
           $ref: "#/components/schemas/LLMObsSpanFilter"
@@ -61788,7 +61788,7 @@ components:
           type: string
       type: object
     LLMObsSearchSpansRequestData:
-      description: Data object for an LLM Observability spans search request.
+      description: Data object for an Agent Observability spans search request.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsSearchSpansRequestAttributes"
@@ -61799,7 +61799,7 @@ components:
         - attributes
       type: object
     LLMObsSearchSpansRequestType:
-      description: Resource type for an LLM Observability spans search request.
+      description: Resource type for an Agent Observability spans search request.
       enum:
         - spans
       example: spans
@@ -61807,7 +61807,7 @@ components:
       x-enum-varnames:
         - SPANS
     LLMObsSpanAttributes:
-      description: Attributes of an LLM Observability span.
+      description: Attributes of an Agent Observability span.
       properties:
         duration:
           description: Duration of the span in nanoseconds.
@@ -61897,7 +61897,7 @@ components:
         - span_kind
       type: object
     LLMObsSpanData:
-      description: A single LLM Observability span.
+      description: A single Agent Observability span.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsSpanAttributes"
@@ -61913,7 +61913,7 @@ components:
         - attributes
       type: object
     LLMObsSpanEvaluationMetric:
-      description: An evaluation metric associated with an LLM Observability span.
+      description: An evaluation metric associated with an Agent Observability span.
       properties:
         assessment:
           description: Assessment result (e.g., pass or fail).
@@ -61938,7 +61938,7 @@ components:
           description: Value of the evaluation result.
       type: object
     LLMObsSpanFilter:
-      description: Filter criteria for an LLM Observability span search.
+      description: Filter criteria for an Agent Observability span search.
       properties:
         from:
           description: Start of the time range. Accepts ISO 8601 or relative format (e.g., `now-15m`). Defaults to `now-15m`.
@@ -61950,7 +61950,7 @@ components:
           type: string
         query:
           description: >-
-            Search query using LLM Observability query syntax. Supports attribute filters using the field:value syntax (e.g. session_id, trace_id, ml_app, meta.span.kind). When provided, structured field filters (`span_id`, `trace_id`, etc.) are ignored.
+            Search query using Agent Observability query syntax. Supports attribute filters using the field:value syntax (e.g. session_id, trace_id, ml_app, meta.span.kind). When provided, structured field filters (`span_id`, `trace_id`, etc.) are ignored.
           example: "@session_id:abc123def456"
           type: string
         span_id:
@@ -61980,7 +61980,7 @@ components:
           type: string
       type: object
     LLMObsSpanIO:
-      description: Input or output content of an LLM Observability span.
+      description: Input or output content of an Agent Observability span.
       properties:
         messages:
           description: List of messages in the input or output.
@@ -62091,7 +62091,7 @@ components:
           type: string
       type: object
     LLMObsSpanType:
-      description: Resource type for an LLM Observability span.
+      description: Resource type for an Agent Observability span.
       enum:
         - span
       example: span
@@ -62099,7 +62099,7 @@ components:
       x-enum-varnames:
         - SPAN
     LLMObsSpansResponse:
-      description: Response containing a list of LLM Observability spans.
+      description: Response containing a list of Agent Observability spans.
       properties:
         data:
           description: List of spans matching the query.
@@ -62251,7 +62251,7 @@ components:
         - EXPERIMENT_TRACE
         - SESSION
     LLMObsUpdatePromptData:
-      description: Data object for updating an LLM Observability prompt.
+      description: Data object for updating an Agent Observability prompt.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsUpdatePromptDataAttributes"
@@ -62264,7 +62264,7 @@ components:
     LLMObsUpdatePromptDataAttributes:
       additionalProperties: false
       description: >-
-        Attributes for updating an LLM Observability prompt. At least one of `title` or `description` must be provided; both attributes are optional individually.
+        Attributes for updating an Agent Observability prompt. At least one of `title` or `description` must be provided; both attributes are optional individually.
       minProperties: 1
       properties:
         description:
@@ -62275,7 +62275,7 @@ components:
           type: string
       type: object
     LLMObsUpdatePromptRequest:
-      description: Request to update an LLM Observability prompt's metadata.
+      description: Request to update an Agent Observability prompt's metadata.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsUpdatePromptData"
@@ -62283,7 +62283,7 @@ components:
         - data
       type: object
     LLMObsUpdatePromptVersionData:
-      description: Data object for updating an LLM Observability prompt version.
+      description: Data object for updating an Agent Observability prompt version.
       properties:
         attributes:
           $ref: "#/components/schemas/LLMObsUpdatePromptVersionDataAttributes"
@@ -62296,7 +62296,7 @@ components:
     LLMObsUpdatePromptVersionDataAttributes:
       additionalProperties: false
       description: >-
-        Attributes for updating an LLM Observability prompt version. At least one of `description`, `labels`, or `env_ids` must be provided; all three attributes are optional individually.
+        Attributes for updating an Agent Observability prompt version. At least one of `description`, `labels`, or `env_ids` must be provided; all three attributes are optional individually.
       minProperties: 1
       properties:
         description:
@@ -62316,7 +62316,7 @@ components:
           type: array
       type: object
     LLMObsUpdatePromptVersionRequest:
-      description: Request to update an LLM Observability prompt version's metadata or feature-flag environments.
+      description: Request to update an Agent Observability prompt version's metadata or feature-flag environments.
       properties:
         data:
           $ref: "#/components/schemas/LLMObsUpdatePromptVersionData"
@@ -121782,7 +121782,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/unstable/llm-obs/config/evaluators/custom:
     get:
-      description: List all custom LLM Observability evaluator configurations for the organization.
+      description: List all custom Agent Observability evaluator configurations for the organization.
       operationId: ListLLMObsCustomEvalConfigs
       responses:
         "200":
@@ -121844,7 +121844,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/unstable/llm-obs/config/evaluators/custom/{eval_name}:
     delete:
-      description: Delete a custom LLM Observability evaluator configuration by its name.
+      description: Delete a custom Agent Observability evaluator configuration by its name.
       operationId: DeleteLLMObsCustomEvalConfig
       parameters:
         - $ref: "#/components/parameters/LLMObsEvalNamePathParameter"
@@ -121888,7 +121888,7 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
-      description: Retrieve a custom LLM Observability evaluator configuration by its name.
+      description: Retrieve a custom Agent Observability evaluator configuration by its name.
       operationId: GetLLMObsCustomEvalConfig
       parameters:
         - $ref: "#/components/parameters/LLMObsEvalNamePathParameter"
@@ -121963,7 +121963,7 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
-      description: Create or update a custom LLM Observability evaluator configuration by its name.
+      description: Create or update a custom Agent Observability evaluator configuration by its name.
       operationId: UpdateLLMObsCustomEvalConfig
       parameters:
         - $ref: "#/components/parameters/LLMObsEvalNamePathParameter"
@@ -160978,7 +160978,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: List LLM Observability annotation queues
+      summary: List Agent Observability annotation queues
       tags:
         - LLM Observability
       x-menu-order: 18
@@ -161075,7 +161075,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Create an LLM Observability annotation queue
+      summary: Create an Agent Observability annotation queue
       tags:
         - LLM Observability
       x-menu-order: 19
@@ -161114,7 +161114,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Delete an LLM Observability annotation queue
+      summary: Delete an Agent Observability annotation queue
       tags:
         - LLM Observability
       x-menu-order: 21
@@ -161193,7 +161193,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Update an LLM Observability annotation queue
+      summary: Update an Agent Observability annotation queue
       tags:
         - LLM Observability
       x-menu-order: 20
@@ -161839,7 +161839,7 @@ paths:
   /api/v2/llm-obs/v1/experimentation/analytics:
     post:
       description: |-
-        Execute an analytics aggregation over LLM Observability experimentation data.
+        Execute an analytics aggregation over Agent Observability experimentation data.
         Use this endpoint to compute metrics (for example average eval scores) grouped by fields such as `span_id` or `experiment_id`.
 
         At least one `compute` definition and one `index` must be provided.
@@ -161917,7 +161917,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Aggregate LLM Observability experimentation
+      summary: Aggregate Agent Observability experimentation
       tags:
         - LLM Observability
       x-menu-order: 33
@@ -161927,7 +161927,7 @@ paths:
   /api/v2/llm-obs/v1/experimentation/search:
     post:
       description: |-
-        Search across LLM Observability experimentation entities — projects, datasets, dataset records, experiments, and experiment runs — using cursor-based pagination.
+        Search across Agent Observability experimentation entities — projects, datasets, dataset records, experiments, and experiment runs — using cursor-based pagination.
 
         The `filter.scope` field controls which entity types are returned. At least one valid scope must be provided.
 
@@ -162028,7 +162028,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Search LLM Observability experimentation entities
+      summary: Search Agent Observability experimentation
       tags:
         - LLM Observability
       x-menu-order: 31
@@ -162038,7 +162038,7 @@ paths:
   /api/v2/llm-obs/v1/experimentation/simple-search:
     post:
       description: |-
-        Search across LLM Observability experimentation entities using offset-based (page-number) pagination.
+        Search across Agent Observability experimentation entities using offset-based (page-number) pagination.
         Use this endpoint when you need total page count or want to navigate to a specific page number.
 
         The `filter.scope` field controls which entity types are returned. At least one valid scope must be provided.
@@ -162131,7 +162131,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/experiments:
     get:
-      description: List all LLM Observability experiments sorted by creation date, newest first.
+      description: List all Agent Observability experiments sorted by creation date, newest first.
       operationId: ListLLMObsExperiments
       parameters:
         - description: Filter experiments by project ID. Required if `filter[dataset_id]` is not provided.
@@ -162248,7 +162248,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: List LLM Observability experiments
+      summary: List Agent Observability experiments
       tags:
         - LLM Observability
       x-menu-order: 13
@@ -162256,7 +162256,7 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Create a new LLM Observability experiment.
+      description: Create a new Agent Observability experiment.
       operationId: CreateLLMObsExperiment
       requestBody:
         content:
@@ -162340,7 +162340,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Create an LLM Observability experiment
+      summary: Create an Agent Observability experiment
       tags:
         - LLM Observability
       x-menu-order: 14
@@ -162349,7 +162349,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/experiments/delete:
     post:
-      description: Delete one or more LLM Observability experiments.
+      description: Delete one or more Agent Observability experiments.
       operationId: DeleteLLMObsExperiments
       requestBody:
         content:
@@ -162392,7 +162392,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Delete LLM Observability experiments
+      summary: Delete Agent Observability experiments
       tags:
         - LLM Observability
       x-menu-order: 16
@@ -162401,7 +162401,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/experiments/{experiment_id}:
     patch:
-      description: Partially update an existing LLM Observability experiment.
+      description: Partially update an existing Agent Observability experiment.
       operationId: UpdateLLMObsExperiment
       parameters:
         - $ref: "#/components/parameters/LLMObsExperimentIDPathParameter"
@@ -162468,7 +162468,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Update an LLM Observability experiment
+      summary: Update an Agent Observability experiment
       tags:
         - LLM Observability
       x-menu-order: 15
@@ -162540,7 +162540,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: List LLM Observability experiment spans (v1)
+      summary: List Agent Observability experiment spans (v1)
       tags:
         - LLM Observability
       x-menu-order: 49
@@ -162548,7 +162548,7 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Push spans and metrics for an LLM Observability experiment.
+      description: Push spans and metrics for an Agent Observability experiment.
       operationId: CreateLLMObsExperimentEvents
       parameters:
         - $ref: "#/components/parameters/LLMObsExperimentIDPathParameter"
@@ -162612,7 +162612,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Push events for an LLM Observability experiment
+      summary: Push events for an Agent Observability experiment
       tags:
         - LLM Observability
       x-menu-order: 17
@@ -162817,7 +162817,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/projects:
     get:
-      description: List all LLM Observability projects sorted by creation date, newest first.
+      description: List all Agent Observability projects sorted by creation date, newest first.
       operationId: ListLLMObsProjects
       parameters:
         - description: Filter projects by project ID.
@@ -162882,7 +162882,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: List LLM Observability projects
+      summary: List Agent Observability projects
       tags:
         - LLM Observability
       x-menu-order: 1
@@ -162890,7 +162890,7 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Create a new LLM Observability project. Returns the existing project if a name conflict occurs.
+      description: Create a new Agent Observability project. Returns the existing project if a name conflict occurs.
       operationId: CreateLLMObsProject
       requestBody:
         content:
@@ -162964,7 +162964,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Create an LLM Observability project
+      summary: Create an Agent Observability project
       tags:
         - LLM Observability
       x-menu-order: 2
@@ -162973,7 +162973,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/projects/delete:
     post:
-      description: Delete one or more LLM Observability projects.
+      description: Delete one or more Agent Observability projects.
       operationId: DeleteLLMObsProjects
       requestBody:
         content:
@@ -163016,7 +163016,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Delete LLM Observability projects
+      summary: Delete Agent Observability projects
       tags:
         - LLM Observability
       x-menu-order: 4
@@ -163025,7 +163025,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/projects/{project_id}:
     patch:
-      description: Partially update an existing LLM Observability project.
+      description: Partially update an existing Agent Observability project.
       operationId: UpdateLLMObsProject
       parameters:
         - $ref: "#/components/parameters/LLMObsProjectIDPathParameter"
@@ -163088,7 +163088,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Update an LLM Observability project
+      summary: Update an Agent Observability project
       tags:
         - LLM Observability
       x-menu-order: 3
@@ -163097,7 +163097,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/prompts:
     get:
-      description: List all LLM Observability prompts in the prompt registry for the organization.
+      description: List all Agent Observability prompts in the prompt registry for the organization.
       operationId: ListLLMObsPrompts
       parameters:
         - description: Optional filter for prompts by prompt ID.
@@ -163147,7 +163147,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: List LLM Observability prompts
+      summary: List Agent Observability prompts
       tags:
         - LLM Observability
       x-menu-order: 63
@@ -163159,7 +163159,7 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Create a new prompt (and its first version) in the LLM Observability prompt registry.
+      description: Create a new prompt (and its first version) in the Agent Observability prompt registry.
       operationId: CreateLLMObsPrompt
       requestBody:
         content:
@@ -163235,7 +163235,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Create an LLM Observability prompt
+      summary: Create an Agent Observability prompt
       tags:
         - LLM Observability
       x-menu-order: 64
@@ -163253,7 +163253,7 @@ paths:
   /api/v2/llm-obs/v1/prompts/{prompt_id}:
     delete:
       description: >-
-        Soft-delete an LLM Observability prompt. The prompt's version rows are retained, but they are no longer accessible through the public prompt registry endpoints.
+        Soft-delete an Agent Observability prompt. The prompt's version rows are retained, but they are no longer accessible through the public prompt registry endpoints.
       operationId: DeleteLLMObsPrompt
       parameters:
         - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
@@ -163296,7 +163296,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Delete an LLM Observability prompt
+      summary: Delete an Agent Observability prompt
       tags:
         - LLM Observability
       x-menu-order: 67
@@ -163312,7 +163312,7 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
-      description: Get the latest version of an LLM Observability prompt by prompt ID.
+      description: Get the latest version of an Agent Observability prompt by prompt ID.
       operationId: GetLLMObsPrompt
       parameters:
         - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
@@ -163362,7 +163362,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Get an LLM Observability prompt
+      summary: Get an Agent Observability prompt
       tags:
         - LLM Observability
       x-menu-order: 65
@@ -163374,7 +163374,7 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
-      description: Update the title, the description, or both, for an LLM Observability prompt.
+      description: Update the title, the description, or both, for an Agent Observability prompt.
       operationId: UpdateLLMObsPrompt
       parameters:
         - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
@@ -163446,7 +163446,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Update an LLM Observability prompt
+      summary: Update an Agent Observability prompt
       tags:
         - LLM Observability
       x-menu-order: 66
@@ -163464,7 +163464,7 @@ paths:
   /api/v2/llm-obs/v1/prompts/{prompt_id}/versions:
     get:
       description: >-
-        List all versions of an LLM Observability prompt, ordered newest to oldest. If the prompt does not exist, is not registered, or is archived, the response contains an empty list.
+        List all versions of an Agent Observability prompt, ordered newest to oldest. If the prompt does not exist, is not registered, or is archived, the response contains an empty list.
       operationId: ListLLMObsPromptVersions
       parameters:
         - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
@@ -163516,7 +163516,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: List versions of an LLM Observability prompt
+      summary: List versions of an Agent Observability prompt
       tags:
         - LLM Observability
       x-menu-order: 68
@@ -163528,7 +163528,7 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Create a new version of an existing LLM Observability prompt.
+      description: Create a new version of an existing Agent Observability prompt.
       operationId: CreateLLMObsPromptVersion
       parameters:
         - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
@@ -163606,7 +163606,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Create a new LLM Observability prompt version
+      summary: Create a new Agent Observability prompt version
       tags:
         - LLM Observability
       x-menu-order: 69
@@ -163623,7 +163623,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/prompts/{prompt_id}/versions/{version}:
     get:
-      description: Get the full template of a single, specific version of an LLM Observability prompt.
+      description: Get the full template of a single, specific version of an Agent Observability prompt.
       operationId: GetLLMObsPromptVersion
       parameters:
         - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
@@ -163683,7 +163683,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Get a specific LLM Observability prompt version
+      summary: Get a specific Agent Observability prompt version
       tags:
         - LLM Observability
       x-menu-order: 70
@@ -163696,7 +163696,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: >-
-        Update the description, the feature-flag environments, or both, for a specific version of an LLM Observability prompt.
+        Update the description, the feature-flag environments, or both, for a specific version of an Agent Observability prompt.
       operationId: UpdateLLMObsPromptVersion
       parameters:
         - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
@@ -163770,7 +163770,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Update a specific LLM Observability prompt version
+      summary: Update an Agent Observability prompt version
       tags:
         - LLM Observability
       x-menu-order: 71
@@ -163787,7 +163787,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/spans/events:
     get:
-      description: List LLM Observability spans matching the specified filters.
+      description: List Agent Observability spans matching the specified filters.
       operationId: ListLLMObsSpans
       parameters:
         - description: Start of the time range. Accepts ISO 8601 or relative format (e.g., `now-15m`). Defaults to `now-15m`.
@@ -163803,7 +163803,7 @@ paths:
             example: "now"
             type: string
         - description: >-
-            Search query using LLM Observability query syntax. Supports attribute filters using the field:value syntax (e.g. session_id, trace_id, ml_app, meta.span.kind). When provided, structured field filters (`filter[span_id]`, `filter[trace_id]`, etc.) are ignored.
+            Search query using Agent Observability query syntax. Supports attribute filters using the field:value syntax (e.g. session_id, trace_id, ml_app, meta.span.kind). When provided, structured field filters (`filter[span_id]`, `filter[trace_id]`, etc.) are ignored.
           in: query
           name: filter[query]
           schema:
@@ -163930,7 +163930,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: List LLM Observability spans
+      summary: List Agent Observability spans
       tags:
         - LLM Observability
       x-menu-order: 34
@@ -163939,7 +163939,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/spans/events/search:
     post:
-      description: Search LLM Observability spans using structured filters in the request body.
+      description: Search Agent Observability spans using structured filters in the request body.
       operationId: SearchLLMObsSpans
       requestBody:
         content:
@@ -164030,7 +164030,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Search LLM Observability spans
+      summary: Search Agent Observability spans
       tags:
         - LLM Observability
       x-menu-order: 35
@@ -164775,7 +164775,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/{project_id}/datasets:
     get:
-      description: List all LLM Observability datasets for a project, sorted by creation date, newest first.
+      description: List all Agent Observability datasets for a project, sorted by creation date, newest first.
       operationId: ListLLMObsDatasets
       parameters:
         - $ref: "#/components/parameters/LLMObsProjectIDPathParameter"
@@ -164849,7 +164849,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: List LLM Observability datasets
+      summary: List Agent Observability datasets
       tags:
         - LLM Observability
       x-menu-order: 5
@@ -164857,7 +164857,7 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Create a new LLM Observability dataset within the specified project.
+      description: Create a new Agent Observability dataset within the specified project.
       operationId: CreateLLMObsDataset
       parameters:
         - $ref: "#/components/parameters/LLMObsProjectIDPathParameter"
@@ -164943,7 +164943,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Create an LLM Observability dataset
+      summary: Create an Agent Observability dataset
       tags:
         - LLM Observability
       x-menu-order: 6
@@ -164952,7 +164952,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/{project_id}/datasets/delete:
     post:
-      description: Delete one or more LLM Observability datasets within the specified project.
+      description: Delete one or more Agent Observability datasets within the specified project.
       operationId: DeleteLLMObsDatasets
       parameters:
         - $ref: "#/components/parameters/LLMObsProjectIDPathParameter"
@@ -165003,7 +165003,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Delete LLM Observability datasets
+      summary: Delete Agent Observability datasets
       tags:
         - LLM Observability
       x-menu-order: 11
@@ -165012,7 +165012,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/{project_id}/datasets/{dataset_id}:
     patch:
-      description: Partially update an existing LLM Observability dataset within the specified project.
+      description: Partially update an existing Agent Observability dataset within the specified project.
       operationId: UpdateLLMObsDataset
       parameters:
         - $ref: "#/components/parameters/LLMObsProjectIDPathParameter"
@@ -165078,7 +165078,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Update an LLM Observability dataset
+      summary: Update an Agent Observability dataset
       tags:
         - LLM Observability
       x-menu-order: 9
@@ -165090,14 +165090,14 @@ paths:
       description: Insert, update, and delete records in a single dataset operation. By default, a new dataset version is created when the batch is applied.
       operationId: BatchUpdateLLMObsDataset
       parameters:
-        - description: The ID of the LLM Observability project.
+        - description: The ID of the Agent Observability project.
           example: "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
           in: path
           name: project_id
           required: true
           schema:
             type: string
-        - description: The ID of the LLM Observability dataset.
+        - description: The ID of the Agent Observability dataset.
           example: "9f64e5c7-dc5a-45c8-a17c-1b85f0bec97d"
           in: path
           name: dataset_id
@@ -165194,7 +165194,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Batch update LLM Observability dataset records
+      summary: Batch update Agent Observability dataset records
       tags:
         - LLM Observability
       x-menu-order: 45
@@ -165206,14 +165206,14 @@ paths:
       description: Clone a dataset, copying its current records into a new dataset within the same project.
       operationId: CloneLLMObsDataset
       parameters:
-        - description: The ID of the LLM Observability project.
+        - description: The ID of the Agent Observability project.
           example: "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
           in: path
           name: project_id
           required: true
           schema:
             type: string
-        - description: The ID of the source LLM Observability dataset to clone.
+        - description: The ID of the source Agent Observability dataset to clone.
           example: "9f64e5c7-dc5a-45c8-a17c-1b85f0bec97d"
           in: path
           name: dataset_id
@@ -165291,7 +165291,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Clone an LLM Observability dataset
+      summary: Clone an Agent Observability dataset
       tags:
         - LLM Observability
       x-menu-order: 46
@@ -165303,14 +165303,14 @@ paths:
       description: Retrieve the draft state of a dataset, including whether it is currently locked for editing and which user holds the lock.
       operationId: GetLLMObsDatasetDraftState
       parameters:
-        - description: The ID of the LLM Observability project.
+        - description: The ID of the Agent Observability project.
           example: "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
           in: path
           name: project_id
           required: true
           schema:
             type: string
-        - description: The ID of the LLM Observability dataset.
+        - description: The ID of the Agent Observability dataset.
           example: "9f64e5c7-dc5a-45c8-a17c-1b85f0bec97d"
           in: path
           name: dataset_id
@@ -165372,7 +165372,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Get LLM Observability dataset draft state
+      summary: Get Agent Observability dataset draft state
       tags:
         - LLM Observability
       x-menu-order: 40
@@ -165384,14 +165384,14 @@ paths:
       description: Acquire the draft lock on a dataset for the calling user. The lock prevents other users from concurrently editing the dataset draft.
       operationId: LockLLMObsDatasetDraftState
       parameters:
-        - description: The ID of the LLM Observability project.
+        - description: The ID of the Agent Observability project.
           example: "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
           in: path
           name: project_id
           required: true
           schema:
             type: string
-        - description: The ID of the LLM Observability dataset.
+        - description: The ID of the Agent Observability dataset.
           example: "9f64e5c7-dc5a-45c8-a17c-1b85f0bec97d"
           in: path
           name: dataset_id
@@ -165453,7 +165453,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Lock LLM Observability dataset draft state
+      summary: Lock Agent Observability dataset draft state
       tags:
         - LLM Observability
       x-menu-order: 41
@@ -165465,14 +165465,14 @@ paths:
       description: Release the draft lock on a dataset held by the calling user, allowing other users to edit the dataset draft.
       operationId: UnlockLLMObsDatasetDraftState
       parameters:
-        - description: The ID of the LLM Observability project.
+        - description: The ID of the Agent Observability project.
           example: "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
           in: path
           name: project_id
           required: true
           schema:
             type: string
-        - description: The ID of the LLM Observability dataset.
+        - description: The ID of the Agent Observability dataset.
           example: "9f64e5c7-dc5a-45c8-a17c-1b85f0bec97d"
           in: path
           name: dataset_id
@@ -165517,7 +165517,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Unlock LLM Observability dataset draft state
+      summary: Unlock Agent Observability dataset draft state
       tags:
         - LLM Observability
       x-menu-order: 42
@@ -165529,14 +165529,14 @@ paths:
       description: Download the contents of a dataset as a CSV file. The download is streamed and includes one row per dataset record.
       operationId: ExportLLMObsDataset
       parameters:
-        - description: The ID of the LLM Observability project.
+        - description: The ID of the Agent Observability project.
           example: "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
           in: path
           name: project_id
           required: true
           schema:
             type: string
-        - description: The ID of the LLM Observability dataset.
+        - description: The ID of the Agent Observability dataset.
           example: "9f64e5c7-dc5a-45c8-a17c-1b85f0bec97d"
           in: path
           name: dataset_id
@@ -165600,7 +165600,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Export an LLM Observability dataset
+      summary: Export an Agent Observability dataset
       tags:
         - LLM Observability
       x-menu-order: 44
@@ -165609,7 +165609,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/{project_id}/datasets/{dataset_id}/records:
     get:
-      description: List all records in an LLM Observability dataset, sorted by creation date, newest first.
+      description: List all records in an Agent Observability dataset, sorted by creation date, newest first.
       operationId: ListLLMObsDatasetRecords
       parameters:
         - $ref: "#/components/parameters/LLMObsProjectIDPathParameter"
@@ -165680,7 +165680,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: List LLM Observability dataset records
+      summary: List Agent Observability dataset records
       tags:
         - LLM Observability
       x-menu-order: 7
@@ -165688,7 +165688,7 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
-      description: Update one or more existing records in an LLM Observability dataset.
+      description: Update one or more existing records in an Agent Observability dataset.
       operationId: UpdateLLMObsDatasetRecords
       parameters:
         - $ref: "#/components/parameters/LLMObsProjectIDPathParameter"
@@ -165758,7 +165758,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Update LLM Observability dataset records
+      summary: Update Agent Observability dataset records
       tags:
         - LLM Observability
       x-menu-order: 10
@@ -165766,7 +165766,7 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Append one or more records to an LLM Observability dataset.
+      description: Append one or more records to an Agent Observability dataset.
       operationId: CreateLLMObsDatasetRecords
       parameters:
         - $ref: "#/components/parameters/LLMObsProjectIDPathParameter"
@@ -165853,7 +165853,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Append records to an LLM Observability dataset
+      summary: Append records to an Agent Observability dataset
       tags:
         - LLM Observability
       x-menu-order: 8
@@ -165862,7 +165862,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/{project_id}/datasets/{dataset_id}/records/delete:
     post:
-      description: Delete one or more records from an LLM Observability dataset.
+      description: Delete one or more records from an Agent Observability dataset.
       operationId: DeleteLLMObsDatasetRecords
       parameters:
         - $ref: "#/components/parameters/LLMObsProjectIDPathParameter"
@@ -165914,7 +165914,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Delete LLM Observability dataset records
+      summary: Delete Agent Observability dataset records
       tags:
         - LLM Observability
       x-menu-order: 12
@@ -165926,14 +165926,14 @@ paths:
       description: Restore a dataset to a previous version. The dataset's current version is bumped, and its records are replaced with the records from the specified prior version.
       operationId: RestoreLLMObsDatasetVersion
       parameters:
-        - description: The ID of the LLM Observability project.
+        - description: The ID of the Agent Observability project.
           example: "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
           in: path
           name: project_id
           required: true
           schema:
             type: string
-        - description: The ID of the LLM Observability dataset.
+        - description: The ID of the Agent Observability dataset.
           example: "9f64e5c7-dc5a-45c8-a17c-1b85f0bec97d"
           in: path
           name: dataset_id
@@ -165993,7 +165993,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Restore an LLM Observability dataset version
+      summary: Restore an Agent Observability dataset version
       tags:
         - LLM Observability
       x-menu-order: 47
@@ -166005,14 +166005,14 @@ paths:
       description: List the active versions of a dataset. A version is created each time a dataset is referenced by an experiment run.
       operationId: ListLLMObsDatasetVersions
       parameters:
-        - description: The ID of the LLM Observability project.
+        - description: The ID of the Agent Observability project.
           example: "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
           in: path
           name: project_id
           required: true
           schema:
             type: string
-        - description: The ID of the LLM Observability dataset.
+        - description: The ID of the Agent Observability dataset.
           example: "9f64e5c7-dc5a-45c8-a17c-1b85f0bec97d"
           in: path
           name: dataset_id
@@ -166077,7 +166077,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: List LLM Observability dataset versions
+      summary: List Agent Observability dataset versions
       tags:
         - LLM Observability
       x-menu-order: 43
@@ -166152,7 +166152,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: List LLM Observability experiment events (v2)
+      summary: List Agent Observability experiment events (v2)
       tags:
         - LLM Observability
       x-menu-order: 50
@@ -166171,14 +166171,14 @@ paths:
           - `error`: terminal event with a JSON body containing an error `message`.
       operationId: UploadLLMObsDatasetRecordsFile
       parameters:
-        - description: The ID of the LLM Observability project.
+        - description: The ID of the Agent Observability project.
           example: "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
           in: path
           name: project_id
           required: true
           schema:
             type: string
-        - description: The ID of the LLM Observability dataset.
+        - description: The ID of the Agent Observability dataset.
           example: "9f64e5c7-dc5a-45c8-a17c-1b85f0bec97d"
           in: path
           name: dataset_id
@@ -166258,7 +166258,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: Upload records to an LLM Observability dataset
+      summary: Upload records to an Agent Observability dataset
       tags:
         - LLM Observability
       x-menu-order: 48
@@ -166345,7 +166345,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
-      summary: List events for an LLM Observability experiment
+      summary: List events for an Agent Observability experiment
       tags:
         - LLM Observability
       x-menu-order: 30
@@ -217723,7 +217723,7 @@ tags:
       url: "https://docs.datadoghq.com/account_management/api-app-keys/"
     name: Key Management
   - description: >-
-      Manage LLM Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations.
+      Manage Agent Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations.
     name: LLM Observability
   - description: |-
       Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
