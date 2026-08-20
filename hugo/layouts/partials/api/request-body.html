@@ -80,17 +80,7 @@
                       {{ $versionedJson := ($s.Get "versionedJson") }}
                       {{ $isVersionedSchema := index $schema "x-datadog-api-versioned" | default false }}
                       {{ $renderVersioned := and $isVersionedSchema $isDateVersioned (gt (len $apiVersionsList) 0) (gt (len $versionedHtml) 0) }}
-                      {{ $showSchemaPanel := and $isDateVersioned (gt (len $apiVersionsList) 0) }}
-
-                      <div class="{{ if $showSchemaPanel }}api-schema-panel{{ end }}">
-                      {{ if $showSchemaPanel }}
-                      <div class="api-schema-toolbar">
-                          <div class="api-schema-namespace">
-                              <span class="api-schema-namespace-label">Schema</span>
-                              <code>{{ $version }} / <span class="api-version-header-value" data-operation-id="{{ $operationid }}">{{ $baseVersion }}</span></code>
-                          </div>
-                      {{ end }}
-                      <ul class="nav nav-tabs border-none response-toggle {{ if $showSchemaPanel }}api-schema-tabs{{ end }}">
+                      <ul class="nav nav-tabs border-none response-toggle">
                           <li class="nav-item">
                               <a class="nav-link me-1  js-model-link active" href="#" data-bs-toggle="tab">{{ i18n "model" }}</a>
                           </li>
@@ -98,11 +88,7 @@
                               <a class="nav-link me-1  js-example-link"  href="#" data-bs-toggle="tab">{{ i18n "example" }}</a>
                           </li>
                       </ul>
-                      {{ if $showSchemaPanel }}
-                      </div>
-                      {{ end }}
-
-                      <div class="tab-content {{ if $showSchemaPanel }}api-schema-panel-body{{ end }}">
+                      <div class="tab-content">
                           <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $operationid | lower }}-request-model" data-title="{{ i18n "model" }}">
 
                               {{ if $renderVersioned }}
@@ -210,7 +196,6 @@
                               </div>
                               {{ end }}
                           </div>
-                      </div>
                       </div>
                   {{ end }}
               {{ end }}

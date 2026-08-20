@@ -55,11 +55,13 @@
     {{ $topBaseVersion := $.Scratch.Get "baseVersion" }}
     {{ $topApiMajorVersion := $.Scratch.Get "apiMajorVersion" }}
 
-    <div class="api-operation-header d-flex flex-wrap align-items-center justify-content-between mb-1">
-      <h1 class="api-task-description mb-0" id="{{ $anchorStr | anchorize }}">
-          {{- $anchorStr -}}
-      </h1>
-      <div class="api-operation-header-actions d-flex align-items-center">
+    <div class="row align-items-start mb-1">
+      <div class="col-11 col-xl-9">
+          <h1 class="api-task-description mb-0" id="{{ $anchorStr | anchorize }}">
+              {{- $anchorStr -}}
+          </h1>
+      </div>
+      <div class="col-1 col-xl-3 d-flex justify-content-end align-items-center">
           {{ partial "api/api-copy-btn.html" . }}
       </div>
     </div>

@@ -11,30 +11,17 @@
 
 <h3 class="mt-3 mb-2">{{ i18n "response" }}</h3>
 
-<div class="{{ if $isDateVersioned }}api-response-panel{{ end }}">
-<ul class="nav nav-tabs border-none response-toggle px-0 {{ if $isDateVersioned }}api-response-status-tabs{{ end }}" style="z-index: 10;">
-    {{ if $isDateVersioned }}
-        <li class="api-response-status-label">Status</li>
-    {{ end }}
+<ul class="nav nav-tabs border-none response-toggle px-0" style="z-index: 10;">
     {{ $count := 0}}
     {{ range $response_code, $response := $responses }}
-        {{ $statusDescription := $response.description | default "" }}
-        {{ with $translate_action.responses }}
-            {{ with index . $response_code }}
-                {{ $statusDescription = .description | default $statusDescription }}
-            {{ end }}
-        {{ end }}
         <li class="nav-item">
-            <a class="nav-link me-1 {{ if eq $count 0}}active{{end}}" href="#{{ $operationid }}-{{ $response_code }}-{{ $version }}" data-bs-toggle="tab" data-bs-target="#{{ $operationid }}-{{ $response_code }}-{{ $version }}">
-                <span class="api-response-status-code">{{ $response_code }}</span>
-                {{ with $statusDescription }}<span class="api-response-status-description">{{ . }}</span>{{ end }}
-            </a>
+            <a class="nav-link me-1  {{ if eq $count 0}}active{{end}}"  href="#{{ $operationid }}-{{ $response_code }}-{{ $version }}"  data-bs-toggle="tab" data-bs-target="#{{ $operationid }}-{{ $response_code }}-{{ $version }}">{{ $response_code }}</a>
         </li>
         {{ $count = add $count 1 }}
     {{ end }}
 </ul>
 
-<div class="tab-content mb-3 {{ if $isDateVersioned }}api-response-tab-content{{ end }}">
+<div class="tab-content mb-3">
     {{ $count := 0}}
     {{ range $response_code, $response := $responses }}
 
@@ -45,9 +32,7 @@
         <div role="tabpanel" class="tab-pane {{ if eq $count 0}} active {{end}}" id="{{ $operationid }}-{{ $response_code }}-{{ $version }}" data-title="{{ $response_code }}">
             {{ with $response.content }}
 
-                {{ if not $isDateVersioned }}
-                    <p class="mb-2">{{ $translate_action_response.description | default $response.description }}</p>
-                {{ end }}
+                <p class="mb-2">{{ $translate_action_response.description | default $response.description }}</p>
 
                 {{ range $content := . }}
 
@@ -133,17 +118,7 @@
 
                             {{ $isVersionedSchema := index $schema "x-datadog-api-versioned" | default false }}
                             {{ $renderVersioned := and $isVersionedSchema $isDateVersioned (gt (len $apiVersionsList) 0) (gt (len $versionedHtml) 0) }}
-                            {{ $showSchemaPanel := and $isDateVersioned (gt (len $apiVersionsList) 0) }}
-
-                            <div class="{{ if $showSchemaPanel }}api-schema-panel{{ end }}">
-                            {{ if $showSchemaPanel }}
-                            <div class="api-schema-toolbar">
-                                <div class="api-schema-namespace">
-                                    <span class="api-schema-namespace-label">Schema</span>
-                                    <code>{{ $version }} / <span class="api-version-header-value" data-operation-id="{{ $operationid }}">{{ $baseVersion }}</span></code>
-                                </div>
-                            {{ end }}
-                            <ul class="nav nav-tabs border-none response-toggle px-0 {{ if $showSchemaPanel }}api-schema-tabs{{ end }}">
+                            <ul class="nav nav-tabs border-none response-toggle px-0">
                                 <li class="nav-item">
                                     <a class="nav-link me-1  js-model-link active"  href="#" data-bs-toggle="tab">{{ i18n "model" }}</a>
                                 </li>
@@ -151,11 +126,7 @@
                                     <a class="nav-link me-1  js-example-link"  href="#" data-bs-toggle="tab">{{ i18n "example" }}</a>
                                 </li>
                             </ul>
-                            {{ if $showSchemaPanel }}
-                            </div>
-                            {{ end }}
-
-                            <div class="tab-content {{ if $showSchemaPanel }}api-schema-panel-body{{ end }}">
+                            <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $operationid }}-{{ $response_code }}-model" data-title="{{ i18n "model" }}">
 
                                     {{ with $schema.description }}
@@ -225,18 +196,14 @@
                                     {{ end }}
                                 </div>
                             </div>
-                            </div>
 
                         {{ end }}
                     {{ end }}
                 {{ end }}
             {{ else }}
-                {{ if not $isDateVersioned }}
-                    <p class="mb-2">{{ $response.description | default "No response content" }}</p>
-                {{ end }}
+                <p class="mb-2">{{ $response.description | default "No response content" }}</p>
             {{ end}}
         </div>
         {{ $count = add $count 1 }}
     {{ end }}
-</div>
 </div>

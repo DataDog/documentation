@@ -295,51 +295,34 @@ function getVersionLifecycle(block, version) {
     const entry = meta[version] || {};
     const remaining = daysUntil(entry.eol);
     const eolPast = remaining !== null && remaining < 0;
-    const eolSoon = remaining !== null && remaining >= 0 && remaining <= 90;
     return {
         deprecated: !!entry.deprecated,
-        eol: entry.eol || '',
         eolPast,
-        urgent: eolPast || eolSoon,
     };
 }
 
 const apiVersionBlocks = document.querySelectorAll('.api-version-block');
 
 // Applies `version` to an operation and updates
-// every piece of UI that reflects it: the chip, dropdown selection, and the
+// every piece of UI that reflects it: the button, dropdown selection, and the
 // underlying versioned panes / curl header.
 function applyApiVersion(operationId, version) {
     const block = document.querySelector(`.api-version-block[data-operation-id="${operationId}"]`);
     if (!block) return;
-    const { latestVersion } = block.dataset;
-    const isLatest = version === latestVersion;
     const lifecycle = getVersionLifecycle(block, version);
 
     const label = block.querySelector('.js-api-version-label');
     if (label) label.textContent = version;
 
-    const dot = block.querySelector('.js-api-version-dot');
-    if (dot) {
-        dot.classList.toggle('api-version-dot-green', isLatest);
-        dot.classList.toggle('api-version-dot-amber', !isLatest);
-    }
-
-    const chipPill = block.querySelector('.js-api-version-chip-pill');
-    if (chipPill) {
-        chipPill.classList.toggle('d-none', !lifecycle.deprecated);
-        chipPill.classList.toggle('is-urgent', lifecycle.urgent);
-        chipPill.textContent = lifecycle.eolPast ? 'End of life' : 'Deprecated';
-    }
-
-    const toggle = block.querySelector('.js-api-version-toggle');
-    if (toggle) {
-        toggle.classList.toggle('is-deprecated', lifecycle.deprecated);
+    const lifecycleLabel = block.querySelector('.js-api-version-lifecycle');
+    if (lifecycleLabel) {
+        lifecycleLabel.classList.toggle('d-none', !lifecycle.deprecated);
+        lifecycleLabel.textContent = lifecycle.eolPast ? 'End of life' : 'Deprecated';
     }
 
     block.querySelectorAll('.js-api-version-item').forEach((item) => {
         const selected = item.dataset.apiDateVersion === version;
-        item.classList.toggle('active', selected);
+        item.setAttribute('aria-current', selected ? 'true' : 'false');
         const check = item.querySelector('.js-api-version-check');
         if (check) check.classList.toggle('d-none', !selected);
     });

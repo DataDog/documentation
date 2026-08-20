@@ -11,7 +11,7 @@
 {{- $codeExampleLookup := (index (index $context.Site.Data.api $version) "CodeExamples") -}}
 
 <h3 class="mb-2">{{ i18n "code_example" }}</h3>
-<div class="programming-lang-wrapper js-code-snippet-wrapper {{ if $isDateVersioned }}api-code-panel{{ end }}" >
+<div class="programming-lang-wrapper js-code-snippet-wrapper" >
 
 {{ $codeLangs := slice "curl" }}
 
@@ -38,15 +38,7 @@
 {{ end }}
 {{ $codeLangs = $codeLangs | uniq }}
 
-{{ if $isDateVersioned }}
-<div class="api-code-toolbar">
-  <span class="api-code-toolbar-label">Language</span>
-{{ end }}
 {{ partial "code-lang-tabs" (dict "context" $context "codeLangs" $codeLangs ) }}
-{{ if $isDateVersioned }}
-</div>
-<div class="api-code-panel-body">
-{{ end }}
 
 {{ define "partials/code-example-instructions" }}
   {{ $context := .context }}
@@ -331,8 +323,5 @@
     {{ end }}
   {{ end }}
 
-{{ end }}
-{{ if $isDateVersioned }}
-</div>
 {{ end }}
 </div>

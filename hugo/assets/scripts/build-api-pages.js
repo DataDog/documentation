@@ -730,7 +730,6 @@ const filterExampleJson = (actionType, data) => {
   const requiredKeys = getInitialRequiredData(data);
 
   // just return the example in additionalProperties cases with example
-  // just return the example in additionalProperties cases with example
   // just return the example if theres a top-level example and its response
   if(data.additionalProperties && data.example || data.example && actionType === 'response') {
     return data.example;
