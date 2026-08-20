@@ -1,4 +1,4 @@
-### Automated error reporting
+## Automated error reporting
 
 After you enable RUM, the Android SDK automatically reports uncaught exceptions and crashes.
 
@@ -19,7 +19,7 @@ To also report native crashes reached through the Android NDK, add the Datadog N
 NdkCrashReports.enable()
 ```
 
-### Get deobfuscated crash reports
+## Get deobfuscated crash reports
 
 Upload your ProGuard/R8 mapping files and NDK symbol files so Datadog can deobfuscate your crash reports. See [Android Crash Reporting and Error Tracking][1] for the full setup, including the Gradle plugin and upload tasks.
 

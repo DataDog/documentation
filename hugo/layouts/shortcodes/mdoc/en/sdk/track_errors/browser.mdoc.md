@@ -1,8 +1,8 @@
-### Automated error reporting
+## Automated error reporting
 
 After you enable RUM, the Browser SDK automatically captures unhandled JavaScript errors, unhandled promise rejections, and reported errors (such as CSP violations and deprecations). For details on error sources, attributes, and troubleshooting, see [Browser Error Tracking][1].
 
-### Manual error reporting
+## Manual error reporting
 
 To report an error manually, use the `addError` API:
 

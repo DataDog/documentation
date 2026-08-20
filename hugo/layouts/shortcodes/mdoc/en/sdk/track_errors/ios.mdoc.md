@@ -1,4 +1,4 @@
-### Automated error reporting
+## Automated error reporting
 
 To report fatal crashes, add the Crash Reporting module and enable it after initializing the SDK:
 
@@ -33,7 +33,7 @@ RUM.enable(
 )
 ```
 
-### Get symbolicated crash reports
+## Get symbolicated crash reports
 
 Upload your `.dSYM` files so Datadog can symbolicate your crash reports. See [iOS Crash Reporting and Error Tracking][1] for the full setup, including `datadog-ci`, Fastlane, and GitHub Actions upload options.
 
