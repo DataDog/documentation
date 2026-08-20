@@ -5,12 +5,15 @@ aliases:
 - /service_management/case_management/notifications_integrations/
 - /incident_response/case_management/notifications_integrations/
 further_reading:
-- link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
-  tag: "Blog"
-  text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
 - link: "/incident_response/work_management/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting third-party integrations"
+- link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
+  tag: "Blog"
+  text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
+- link: "https://www.datadoghq.com/blog/forms-case-management-requests/"
+  tag: "Blog"
+  text: "Simplify request flows with Datadog Forms and Case Management"
 ---
 
 ## Overview
