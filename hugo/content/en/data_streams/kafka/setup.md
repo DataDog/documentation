@@ -37,11 +37,13 @@ This section applies only if you want to view Kafka message payloads in the {{< 
 
 ### Additional ACL permission
 
-In addition to the ACL permissions listed in [Prerequisites](#acl-permissions), the Datadog Agent user requires:
+In addition to the ACL permissions listed in [Prerequisites](#acl-permissions), the Datadog Agent user requires the `READ` permission for topics:
 
 | Resource Name | Resource Type | Operation |
 |---------------|---------------|-----------|
 | `*`           | `TOPIC`       | `Read`    |
+
+To prevent reading messages from certain topics, provide a more specific resource name.
 
 ### Remote configuration
 
