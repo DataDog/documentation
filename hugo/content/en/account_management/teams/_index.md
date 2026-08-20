@@ -105,10 +105,10 @@ The team filter scopes your view to the teams you select. It appears on list pag
 The filter groups values into three sections:
 
 - **Your teams**: the Datadog Teams you belong to, shown as a hierarchy at the top of the filter.
-- {{< ui >}}All Teams{{< /ui >}}: every Datadog Team in your organization, including teams you do not belong to.
+- **All Teams**: every Datadog Team in your organization, including teams you do not belong to.
 - **Team tags**: `team` tag values on your data that have no matching Datadog Team. These appear in their own section.
 
-{{< img src="account_management/teams/team-filter.png" alt="Team filter with a search box, a parent team expanded to show two selected subteams, and an All Teams section below." style="width:35%;" >}}
+{{< img src="/account_management/teams/team-filter.png" alt="Team filter with a search box, a parent team expanded to show two selected subteams, and an All Teams section below." style="width:35%;" >}}
 
 The team filter works by adding team-based search terms to the search query. After you make a selection, you can see the team-based search terms it adds in the search bar. To stop filtering by team, clear your selection.
 
