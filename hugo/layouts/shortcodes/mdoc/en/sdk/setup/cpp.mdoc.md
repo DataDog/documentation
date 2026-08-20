@@ -3,8 +3,6 @@ This partial contains setup instructions for the C++ SDK.
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-## Overview
-
 This page describes how to instrument your C++ applications with the Datadog C++ SDK for [Real User Monitoring (RUM)][1].
 
 ## Prerequisites

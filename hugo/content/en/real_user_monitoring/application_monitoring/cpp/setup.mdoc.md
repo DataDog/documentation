@@ -16,4 +16,6 @@ further_reading:
   text: Explore Datadog RUM
 ---
 
+## Overview
+
 {% partial file="sdk/setup/cpp.mdoc.md" /%}
