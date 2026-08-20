@@ -691,6 +691,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 - Without `URLSessionInstrumentation`, network requests are still tracked. Enabling it provides detailed timing breakdown for performance analysis.
 - In registered-delegate mode (`URLSessionInstrumentation.enableDurationBreakdown`), the `data` parameter passed to `resourceAttributesProvider` is subject to constraints. See below for full details.
 - To filter out specific requests from being tracked, use the `resourceEventMapper` in `RUM.Configuration` (see [Modify or drop RUM events](#modify-or-drop-rum-events)).
+- When a resource is served from the device's local cache, it is reported with `resource.local_cache_hit: true` (see [Resource attributes][10]). This signal is only available in registered-delegate instrumentation mode; it cannot be reported when using automatic/completion-handler swizzling.
 
 {% alert level="info" %}
 Be mindful of delegate retention.
@@ -1195,3 +1196,4 @@ Calling this method disables the SDK and all active features, such as RUM. To re
 [7]: https://www.ntppool.org/en/
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [9]: /real_user_monitoring/application_monitoring/ios/setup
+[10]: /real_user_monitoring/application_monitoring/ios/data_collected/#resource-attributes
