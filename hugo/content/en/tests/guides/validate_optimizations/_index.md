@@ -24,11 +24,13 @@ This page explains how to check that the optimizations offered by Test Optimizat
 
 These optimizations require a [supported native library][12]. JUnit XML uploads are not supported.
 
-## Option 1: validate locally with a coding agent
+## Option 1: Validate locally with a coding agent
 
-Local coding-agent validation is in the Preview release stage and supports only JavaScript and TypeScript projects that use the npm [`dd-trace` package][15]. A local coding agent is an AI assistant that can inspect and run commands in your local repository.
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+  Local coding-agent validation is in Preview, and supports only JavaScript and TypeScript projects that use the npm [`dd-trace` package][15].
+{{< /callout >}}
 
-Ask a local coding agent to inspect your installed `dd-trace` package and run its Test Optimization validation runbook. This method checks local library compatibility and CI configuration. It also checks Early Flake Detection, Auto Test Retries, and Test Management without changing Datadog settings or sending validation results to Datadog.
+Using the provided prompt below, ask a local coding agent (an AI assistant that can inspect and run commands in your local repository) to inspect your installed `dd-trace` package and run its Test Optimization validation runbook. This method checks local library compatibility and CI configuration. It also checks Early Flake Detection, Auto Test Retries, and Test Management without changing Datadog settings or sending validation results to Datadog.
 
 The runbook is at `ci/runbook.md` relative to the installed `dd-trace` package root.
 
@@ -38,13 +40,13 @@ Pass this prompt to your local coding agent:
 Locate the installed dd-trace package, then read and execute its ci/runbook.md.
 ```
 
-The coding-agent method is a local check that does not exercise the entire Datadog workflow. To validate the full [Prevention](#step-2-prevention), [Mitigation](#step-3-mitigation), and [Remediation](#step-4-remediation) workflows, or to validate a language other than JavaScript or TypeScript, use Option 2.
+This coding-agent method is a local check that does not exercise the entire Datadog workflow. To validate the full [Prevention](#step-2-prevention), [Mitigation](#step-3-mitigation), and [Remediation](#step-4-remediation) workflows, or to validate a language other than JavaScript or TypeScript, use [Option 2, below](#option-2-validate-the-full-workflow).
 
-## Option 2: validate the full workflow
+## Option 2: Validate the full workflow
 
-This option validates the complete Test Optimization workflow in Datadog. Complete each step in order because the [Prevention](#step-2-prevention), [Mitigation](#step-3-mitigation), and [Remediation](#step-4-remediation) phases use the same branch and test.
+This validation workflow checks the complete Test Optimization workflow in Datadog. Perform these validations ([Prevention](#step-2-prevention), [Mitigation](#step-3-mitigation), and [Remediation](#step-4-remediation)) in order, as they use the same branch and test.
 
-### Step 1: set up validation
+### Step 1: Set up validation
 
 This guide walks you through making local changes and committing them for CI to run. It uses a dedicated test service and branch to minimize the validation workflow's impact on other developers in the repository.
 
@@ -60,19 +62,19 @@ This guide walks you through making local changes and committing them for CI to 
    git checkout -b validate-test-optimization
    ```
 
-3. Commit the CI configuration change that sets `DD_SERVICE`, then push the validation branch to trigger a test execution. Datadog detects the `validate-test-optimization` service when the tests report under that name:
+3. Commit the CI configuration change that sets `DD_SERVICE`, then push the validation branch to trigger a test execution:
 
    ```bash
    git add -A
    git commit -m "Configure Test Optimization validation service"
    git push -u origin validate-test-optimization
-   ```
+   
 
 4. After CI finishes, go to the [CI/CD Repositories settings][3] and select the repository you are validating.
 
    {{< img src="pr_gates/setup/ci_cd_repositories_settings.png" alt="CI/CD Repositories settings filtered to the repository being validated" style="width:100%" >}}
 
-5. Click {{< ui >}}Test Services{{< /ui >}} in the upper-right corner.
+5. In the upper-right corner of the slide-out panel, click {{< ui >}}Test Services{{< /ui >}}.
 
    {{< img src="pr_gates/setup/repository_settings_test_services.png" alt="Repository Settings with the Test Services button in the upper-right corner" style="width:100%" >}}
 
@@ -83,24 +85,25 @@ This guide walks you through making local changes and committing them for CI to 
 7. Configure the following service overrides:
    - Enable [Early Flake Detection][1].
    - Enable [Auto Test Retries][4].
-   - Disable [Test Impact Analysis][13] so it does not skip the validation test.
-8. Return to the repository settings. [Flaky Test Policies][6] apply to every test service in the repository, not to an individual test service. To limit the validation policy's impact, configure it only for the `validate-test-optimization` branch. Under {{< ui >}}Flaky Test Policies{{< /ui >}}, click {{< ui >}}Configure{{< /ui >}} for {{< ui >}}Quarantine{{< /ui >}}.
+   - Disable [Test Impact Analysis][13] (so it does not skip the validation test).
+8. Return to the repository settings. [Flaky Test Policies][6] apply to every test service in the repository, not to an individual test service. To limit the validation policy's impact, configure it only for the `validate-test-optimization` branch. Under {{< ui >}}Flaky Test Policies{{< /ui >}}, on the {{< ui >}}Quarantine{{< /ui >}} tile, click {{< ui >}}Configure{{< /ui >}}.
 
    {{< img src="pr_gates/setup/flaky_test_policies_quarantine.png" alt="Repository settings showing the Configure button for the Quarantine flaky test policy" style="width:100%" >}}
 
-9. Expand {{< ui >}}Quarantine{{< /ui >}}, then enable the second auto-rule: **If an Active flaky test flakes in the `validate-test-optimization` branch, then move to Quarantined**. Click {{< ui >}}Save{{< /ui >}}.
+9. Expand {{< ui >}}Quarantine{{< /ui >}}, then enable the second auto-rule: **If an Active flaky test flakes in the `validate-test-optimization` branch, then move to Quarantined**.
 
    {{< img src="pr_gates/setup/quarantine_branch_policy.png" alt="Quarantine policy configured for active flaky tests on the validate-test-optimization branch" style="width:100%" >}}
 
-10. Create a [New Flaky Test PR Gate][11] and scope it to the repository you are validating.
+10. Click {{< ui >}}Save{{< /ui >}}. 
+11. Create a [New Flaky Test PR Gate][11] and scope it to the repository you are validating.
 
    {{< img src="pr_gates/setup/pr_gate_scope.png" alt="New flaky PR gate scope" style="width:100%" >}}
 
-### Step 2: prevention
+### Step 2: Prevention
 
 [Early Flake Detection][1] detects new flaky tests. [New Flaky Test PR Gates][2] block them from reaching your default branch.
 
-1. Add a test that fails on the first attempt and passes on retries. The test name must contain both `flaky` and `validation` so you can identify it in Datadog.
+1. Add a test that fails on the first attempt and passes on retries (optionally using the code provided below). The test name must contain both `flaky` and `validation` so you can identify it in Datadog.
 
    {{< tabs >}}
    {{% tab "JavaScript" %}}
@@ -261,14 +264,14 @@ This guide walks you through making local changes and committing them for CI to 
 
    {{< img src="pr_gates/setup/pr_gate_detail.png" alt="Datadog PR gate detail view" style="width:100%" >}}
 
-5. In [Test Runs][7], confirm that Early Flake Detection retried the test and detected it as a new flaky test. The query uses the following filters:
+5. In [Test Runs][7], confirm that Early Flake Detection retried the test and detected it as a new flaky test using [this query][7], which uses the following filters:
 
    - `@test.name:*flaky*validation*`
    - `@git.branch:validate-test-optimization`
    - `@test.retry_reason:early_flake_detection`
    - `@test.test_management.is_new_flaky:true`
 
-### Step 3: mitigation
+### Step 3: Mitigation
 
 Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5], and [Flaky Test Policies][6]. These features retry flaky tests and quarantine known flaky failures so they do not block CI.
 
@@ -434,16 +437,16 @@ Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5
 
 3. Wait for CI to run, then confirm the following results:
 
-   - In [Test Runs][8], Auto Test Retries reruns the test after its first failed attempt, and the test passes on retry. Use the following filters:
+   - In [Test Runs][8], Auto Test Retries reruns the test after its first failed attempt, and the test passes on retry. Use [this query][8], with the following filters:
      - `@test.name:*flaky*validation*`
      - `@git.branch:validate-test-optimization`
      - `@test.retry_reason:auto_test_retry`
-   - In [Flaky Test Management][9], the test appears as {{< ui >}}QUARANTINED{{< /ui >}}. Its failures no longer block the test job. Use the following filters:
+   - In [Flaky Test Management][9], the test appears as {{< ui >}}QUARANTINED{{< /ui >}}. Its failures no longer block the test job. Use [this query][9], with the following filters:
      - `@test.name:*flaky*validation*`
      - `first_flaked_branch:validate-test-optimization`
      - `flaky_test_state:quarantined`
 
-### Step 4: remediation
+### Step 4: Remediation
 
 Test Optimization helps remediate flaky tests through Attempt to Fix and Bits AI auto fixes. This section validates the Attempt to Fix workflow by fixing the same test used for [Prevention](#step-2-prevention) and [Mitigation](#step-3-mitigation).
 
@@ -531,16 +534,16 @@ Test Optimization helps remediate flaky tests through Attempt to Fix and Bits AI
 
 5. Wait for CI to finish, then confirm the following results:
 
-   - In [Test Runs][10], Attempt to Fix retried the fix candidate, and every attempt passed. Use the following filters:
+   - In [Test Runs][10], Attempt to Fix retried the fix candidate, and every attempt passed. Use [this query][10], which has the following filters:
      - `@test.name:*flaky*validation*`
      - `@git.branch:validate-test-optimization`
      - `@test.test_management.is_attempt_to_fix:true`
-   - In [Flaky Test Management][14], the test is marked {{< ui >}}Fix in progress{{< /ui >}}. Use the following filters:
+   - In [Flaky Test Management][14], the test is marked {{< ui >}}Fix in progress{{< /ui >}}. Use [this query][14], which has the following filters:
      - `@test.name:*flaky*validation*`
      - `first_flaked_branch:validate-test-optimization`
      - `fix_in_progress:true`
 
-### Step 5: post-validation cleanup
+### Step 5: Post-validation cleanup
 
 1. Close the pull request without merging.
 2. Delete the `validate-test-optimization` branch. The branch-specific Quarantine auto-rule no longer applies after the branch is deleted, and the dedicated validation service no longer receives test executions.
