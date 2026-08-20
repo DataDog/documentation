@@ -144,10 +144,23 @@ The App and API Protection Service Extension deployment requires several compone
     touch main.tf variables.tf
     ```
 
-2. Add the following code to your `main.tf` file. This file defines all the infrastructure components needed for the App and API Protection Service Extension, including network rules, VM instances, and load balancer configuration:
+2. Add the following code to your `main.tf` file. This file defines the `google-beta` provider, network rules, VM instances, and load balancer configuration. Configure `forward_attributes = ["source.ip"]` on the traffic extension to provide the client address observed by the load balancer for App and API Protection client-IP attribution:
 
    ```hcl
    # main.tf
+
+   terraform {
+     required_providers {
+       google-beta = {
+         source  = "hashicorp/google-beta"
+         version = ">= 7.39.0"
+       }
+     }
+   }
+
+   provider "google-beta" {
+     region = var.region
+   }
 
    #----------------------------------------------------------
    # Network Configuration
@@ -337,16 +350,21 @@ The App and API Protection Service Extension deployment requires several compone
    # GCP Service Extension
    #----------------------------------------------------------
 
-   # GCP Service Extension configuration for traffic interception
-   resource "google_network_services_lb_traffic_extension" "default" {
-     name        = "${var.project_prefix}-service-extension"
-     description = "Datadog App and API Protection Service Extension"
-     location    = "global"
+    # GCP Service Extension configuration for traffic interception
+    resource "google_network_services_lb_traffic_extension" "default" {
+      provider    = google-beta
+      name        = "${var.project_prefix}-service-extension"
+      description = "Datadog App and API Protection Service Extension"
+      location    = "global"
 
-     load_balancing_scheme = "EXTERNAL_MANAGED"
-     forwarding_rules      = [var.load_balancer_forwarding_rule]
+      load_balancing_scheme = "EXTERNAL_MANAGED"
+      forwarding_rules      = [var.load_balancer_forwarding_rule]
 
-     extension_chains {
+      # Forward source.ip to provide the client address observed by the load balancer
+      # for App & API Protection client-IP attribution.
+      forward_attributes = ["source.ip"]
+
+      extension_chains {
        name = "${var.project_prefix}-service-extension-chain"
 
        match_condition {
