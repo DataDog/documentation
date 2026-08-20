@@ -1,4 +1,4 @@
-### Time to network settled
+## Time to network settled
 
 Time to Network Settled (TNS) is calculated automatically. It measures the time between the start of a view and the completion of all resources that started within 100ms of the view's start.
 
@@ -17,7 +17,7 @@ RUM.enable(
 
 For more control over which resources count as "initial," implement your own `NetworkSettledResourcePredicate`.
 
-### Interaction to next view
+## Interaction to next view
 
 Interaction to Next View (INV) is calculated automatically. It uses the last tap, click, or swipe action occurring within a 3-second threshold before the view starts.
 
@@ -36,7 +36,7 @@ RUM.enable(
 
 For more control over which interactions count as the "last interaction," implement your own `NextViewActionPredicate`.
 
-### View loading time
+## View loading time
 
 To notify the SDK that your view finished loading, call `addViewLoadingTime(override:)` through `RUMMonitor.shared()` when your view is fully loaded and displayed:
 
@@ -59,7 +59,7 @@ RUMMonitor.shared().addViewLoadingTime(override: false)
 
 Use `override` to replace the previously calculated loading time for the current view. This API is experimental and might change.
 
-### Custom timings
+## Custom timings
 
 To measure how long a specific part of your app takes, such as a hero image appearing, use `addTiming(name:)`:
 
@@ -82,11 +82,11 @@ RUMMonitor.shared().addTiming(name: "hero_image")
 
 To [create a measure](/real_user_monitoring/explorer/search/#setup-facets-and-measures) from a custom timing in the RUM Explorer, use the `@view.custom_timings.<timing_name>` attribute.
 
-### Understanding performance timings
+## Understanding performance timings
 
 All view timings are measured relative to the view's start. The exact moment a view starts depends on the type of instrumentation used for tracking views. For more details, see [Views instrumentation versus app life cycle](/real_user_monitoring/application_monitoring/ios/data_collected/#views-instrumentation-versus-app-lifecycle).
 
-### Troubleshooting
+## Troubleshooting
 
 When using the default `TimeBasedTNSResourcePredicate` and `TimeBasedINVActionPredicate`, TNS and INV timings may be missing in specific cases:
 
@@ -95,7 +95,7 @@ When using the default `TimeBasedTNSResourcePredicate` and `TimeBasedINVActionPr
 
 To maximize the accuracy of TNS and INV, consider adjusting time thresholds in the default predicates to align with your app's behavior, or implement custom predicates tailored to your needs.
 
-### Mobile vitals
+## Mobile vitals
 
 The following telemetry provides insight into your application's performance, inspired by frameworks such as [Apple's MetricKit](https://developer.apple.com/documentation/metrickit). Mobile Vitals range from poor, moderate, to good. View them by navigating to {% ui %}Digital Experience{% /ui %} > {% ui %}Performance Summary{% /ui %} and selecting your application.
 

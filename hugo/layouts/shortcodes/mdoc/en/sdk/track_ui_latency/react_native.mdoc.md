@@ -1,4 +1,4 @@
-### Time to network settled
+## Time to network settled
 
 Time to Network Settled (TNS) is calculated automatically. It measures the time between the start of a view and the completion of all resources that started within a threshold of the view's start.
 
@@ -11,7 +11,7 @@ DdSdkReactNative.initialize({
 })
 ```
 
-### View loading time
+## View loading time
 
 To notify the SDK that your view finished loading, call `addViewLoadingTime` on `DdRum` when your view is fully loaded and ready to display:
 
@@ -21,7 +21,7 @@ DdRum.addViewLoadingTime(true);
 
 Use the `overwrite` parameter to replace the previously calculated loading time for the current view. This API is experimental.
 
-### Custom timings
+## Custom timings
 
 To measure how long a specific part of your app takes, add a custom timing:
 
@@ -31,7 +31,7 @@ DdRum.addTiming('<timing-name>');
 
 Interaction to Next View isn't available for the React Native SDK yet.
 
-### Mobile vitals
+## Mobile vitals
 
 The following telemetry provides insight into your application's performance. Mobile Vitals range from poor, moderate, to good. View them by navigating to {% ui %}Digital Experience{% /ui %} > {% ui %}Performance Summary{% /ui %} and selecting your application.
 

@@ -1,4 +1,4 @@
-### Custom timings
+## Custom timings
 
 To measure how long a specific part of your app takes, such as a hero image appearing, use `addTiming`:
 

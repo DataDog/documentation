@@ -1,6 +1,6 @@
 View loading time, Time to Network Settled, Interaction to Next View, and custom timings aren't available for the Unity SDK yet.
 
-### Mobile vitals
+## Mobile vitals
 
 The following telemetry provides insight into your application's performance. Mobile Vitals range from poor, moderate, to good. View them by navigating to {% ui %}Digital Experience{% /ui %} > {% ui %}Performance Summary{% /ui %} and selecting your application.
 
