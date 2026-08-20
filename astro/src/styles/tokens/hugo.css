@@ -134,6 +134,11 @@
   --hugo-modal-overlay: rgba(0, 0, 0, 0.5);
   --hugo-modal-border-radius: 6px;
   --hugo-modal-max-width: 500px;
+
+  /* Hugo image border/lightbox spinner */
+  --hugo-img-border-gray: #d6d6d6;   /* matches Hugo's $ddgray */
+  --hugo-lightbox-spinner-track: rgba(234, 234, 234, 0.5);
+  --hugo-lightbox-spinner-active: #ffffff;
 }
 
 /* When a banner is configured, BaseLayout adds `announcement` to <body>; the

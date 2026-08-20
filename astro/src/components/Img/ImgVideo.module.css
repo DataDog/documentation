@@ -5,6 +5,5 @@
 .img__video {
   max-width: 100%;
   height: auto;
-  /* matches Hugo's $ddgray (#d6d6d6); no equivalent design token exists yet */
-  border: 1px solid #d6d6d6;
+  border: 1px solid var(--hugo-img-border-gray);
 }
