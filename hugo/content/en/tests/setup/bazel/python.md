@@ -29,8 +29,8 @@ Use the following minimum versions:
 
 | Component | Version |
 |---|---|
-| `datadog-rules-test-optimization` | `>=1.2.0` |
-| `datadog-rules-test-optimization-python` | `>=1.2.0` |
+| `datadog-rules-test-optimization` | `>=1.3.0` |
+| `datadog-rules-test-optimization-python` | `>=1.3.0` |
 | Python runtime example | `>=3.12` |
 
 The repository that consumes the Bazel rule owns Python toolchains, `pytest`, `ddtrace`, and lockfiles.
@@ -49,23 +49,23 @@ Before setting up Test Optimization for Python tests in Bazel:
 Add the core module and the Python companion module to `MODULE.bazel`:
 
 ```starlark
-bazel_dep(name = "datadog-rules-test-optimization", version = "1.2.0")
+bazel_dep(name = "datadog-rules-test-optimization", version = "1.3.0")
 git_override(
     module_name = "datadog-rules-test-optimization",
     remote = "https://github.com/DataDog/rules_test_optimization.git",
-    commit = "69953536d4ef1252c8181c267d16c61263f0aa4c",
+    commit = "<RULES_TEST_OPTIMIZATION_RELEASE_COMMIT>",
 )
 
-bazel_dep(name = "datadog-rules-test-optimization-python", version = "1.2.0")
+bazel_dep(name = "datadog-rules-test-optimization-python", version = "1.3.0")
 git_override(
     module_name = "datadog-rules-test-optimization-python",
     remote = "https://github.com/DataDog/rules_test_optimization.git",
-    commit = "69953536d4ef1252c8181c267d16c61263f0aa4c",
+    commit = "<RULES_TEST_OPTIMIZATION_RELEASE_COMMIT>",
     strip_prefix = "modules/python",
 )
 ```
 
-Use the same commit SHA for the core module and the Python companion module.
+Use the same release commit SHA for the core module and the Python companion module.
 
 ## Use `WORKSPACE` mode
 
@@ -77,7 +77,7 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 git_repository(
     name = "datadog-rules-test-optimization",
     remote = "https://github.com/DataDog/rules_test_optimization.git",
-    commit = "69953536d4ef1252c8181c267d16c61263f0aa4c",
+    commit = "<RULES_TEST_OPTIMIZATION_RELEASE_COMMIT>",
 )
 
 load(
@@ -86,7 +86,7 @@ load(
 )
 
 datadog_python_test_optimization_workspace_repositories(
-    rto_commit = "69953536d4ef1252c8181c267d16c61263f0aa4c",
+    rto_commit = "<RULES_TEST_OPTIMIZATION_RELEASE_COMMIT>",
     rules_python_repo_name = "rules_python",
 )
 ```
@@ -201,7 +201,9 @@ common:test-optimization --repo_env=DD_GIT_BRANCH
 common:test-optimization --repo_env=DD_GIT_TAG
 common:test-optimization --repo_env=DD_GIT_COMMIT_SHA
 common:test-optimization --repo_env=DD_PR_NUMBER
-test:test-optimization --remote_download_outputs=all
+test:test-optimization --remote_download_minimal
+test:test-optimization --remote_download_regex=.*test[.]outputs.*
+test:test-optimization --zip_undeclared_test_outputs
 ```
 
 Run tests, validate local payloads, validate enrichment, and upload:
@@ -212,6 +214,8 @@ bazel run --config=test-optimization //tools/test_optimization:dd_test_optimizat
 bazel run --config=test-optimization //tools/test_optimization:dd_upload_payloads -- --dry-run --validate-enrichment
 DD_API_KEY=<DATADOG_API_KEY> DD_SITE=<DATADOG_SITE> bazel run --config=test-optimization //tools/test_optimization:dd_upload_payloads
 ```
+
+For CI with remote cache or remote execution, pass a unique BEP file from each `bazel test` invocation to the doctor and uploader. See the [Bazel upload flow][3].
 
 Do not pass upload credentials, upload endpoints, or `DD_GIT_*` values through `--test_env`.
 
@@ -285,7 +289,7 @@ This can happen when the instrumented target did not run, test outputs were not 
 To fix this issue:
 
 1. Run the exact `dd_topt_py_test` target before running the doctor.
-1. For remote execution, add `test:test-optimization --remote_download_outputs=all` to `.bazelrc`.
+1. For remote execution, use the BEP-based upload flow on the [Bazel setup page][3].
 1. Confirm the target depends on both `pytest` and `ddtrace`.
 
 ### `consumer_runner` fails during analysis
@@ -300,3 +304,4 @@ To fix this issue, pass your repository's Python test wrapper with `py_test_rule
 
 [1]: /tests/test_impact_analysis/
 [2]: /code_coverage/configuration/
+[3]: /tests/setup/bazel/#upload-payloads
