@@ -1774,6 +1774,23 @@ components:
       required: true
       schema:
         type: string
+    RumRetentionQuotaScopeIDParameter:
+      description: |-
+        The identifier of the scope the retention quota configuration applies to.
+        For the `application` scope, this is the RUM application ID.
+      in: path
+      name: scope_id
+      required: true
+      schema:
+        example: cd73a516-a481-4af5-8352-9b577465c77b
+        type: string
+    RumRetentionQuotaScopeTypeParameter:
+      description: The type of scope the retention quota configuration applies to.
+      in: path
+      name: scope_type
+      required: true
+      schema:
+        $ref: "#/components/schemas/RumRetentionQuotaScopeType"
     SAMLConfigurationUUIDPathParameter:
       description: The UUID of the SAML configuration.
       in: path
@@ -91330,6 +91347,180 @@ components:
             $ref: "#/components/schemas/RumRetentionFilterData"
           type: array
       type: object
+    RumRetentionQuotaAdaptiveConfig:
+      description: The configuration used when `mode` is `adaptive`.
+      properties:
+        max_retention_rate:
+          description: The maximum fraction of sessions to retain, in the range `(0, 1]`.
+          example: 0.5
+          exclusiveMinimum: true
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+      required:
+        - max_retention_rate
+      type: object
+    RumRetentionQuotaConfigAttributes:
+      description: The RUM retention quota configuration properties.
+      properties:
+        adaptive:
+          $ref: "#/components/schemas/RumRetentionQuotaAdaptiveConfig"
+        custom:
+          $ref: "#/components/schemas/RumRetentionQuotaCustomConfig"
+        mode:
+          $ref: "#/components/schemas/RumRetentionQuotaMode"
+        org_id:
+          description: The ID of the organization the retention quota configuration belongs to.
+          example: 2
+          format: int64
+          type: integer
+        updated_at:
+          description: The date the retention quota configuration was last updated.
+          example: "2026-03-04T15:37:54.951447Z"
+          format: date-time
+          type: string
+        updated_by:
+          description: The handle of the user who last updated the retention quota configuration.
+          example: test@example.com
+          type: string
+      required:
+        - mode
+        - org_id
+      type: object
+    RumRetentionQuotaConfigData:
+      description: The RUM retention quota configuration object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumRetentionQuotaConfigAttributes"
+        id:
+          description: The identifier of the scope the retention quota configuration applies to.
+          example: cd73a516-a481-4af5-8352-9b577465c77b
+          type: string
+        type:
+          $ref: "#/components/schemas/RumRetentionQuotaConfigType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    RumRetentionQuotaConfigResponse:
+      description: The RUM retention quota configuration response.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumRetentionQuotaConfigData"
+      required:
+        - data
+      type: object
+    RumRetentionQuotaConfigType:
+      default: rum_quota_config
+      description: The type of the resource, always `rum_quota_config`.
+      enum:
+        - rum_quota_config
+      example: rum_quota_config
+      type: string
+      x-enum-varnames: ["RUM_QUOTA_CONFIG"]
+    RumRetentionQuotaConfigUpdateAttributes:
+      description: The RUM retention quota configuration properties to create or update.
+      properties:
+        adaptive:
+          $ref: "#/components/schemas/RumRetentionQuotaAdaptiveConfig"
+        custom:
+          $ref: "#/components/schemas/RumRetentionQuotaCustomConfig"
+        mode:
+          $ref: "#/components/schemas/RumRetentionQuotaMode"
+      required:
+        - mode
+      type: object
+    RumRetentionQuotaConfigUpdateData:
+      description: The RUM retention quota configuration to create or update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumRetentionQuotaConfigUpdateAttributes"
+        id:
+          description: |-
+            The identifier of the scope the retention quota configuration applies to.
+            Must match `scope_id` in the path.
+          example: cd73a516-a481-4af5-8352-9b577465c77b
+          type: string
+        type:
+          $ref: "#/components/schemas/RumRetentionQuotaConfigType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    RumRetentionQuotaConfigUpdateRequest:
+      description: The body of a request to create or update a RUM retention quota configuration.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumRetentionQuotaConfigUpdateData"
+      required:
+        - data
+      type: object
+    RumRetentionQuotaCustomConfig:
+      description: The configuration used when `mode` is `custom`.
+      properties:
+        daily_reset_time:
+          description: The time of day when the daily quota resets, in `HH:MM` 24-hour format.
+          example: "08:00"
+          pattern: "^([01]\\d|2[0-3]):[0-5]\\d$"
+          type: string
+        daily_reset_timezone:
+          description: The timezone offset used for the daily reset time, in `±HH:MM` format.
+          example: "+09:00"
+          pattern: "^[+-](0\\d|1[0-4]):[0-5]\\d$"
+          type: string
+        quota_reached_action:
+          $ref: "#/components/schemas/RumRetentionQuotaReachedAction"
+        session_limit:
+          description: The maximum number of sessions allowed within the window. Must be at least `1000`.
+          example: 1000000
+          format: int64
+          minimum: 1000
+          type: integer
+        window_type:
+          $ref: "#/components/schemas/RumRetentionQuotaWindowType"
+      required:
+        - window_type
+        - session_limit
+        - daily_reset_time
+        - daily_reset_timezone
+        - quota_reached_action
+      type: object
+    RumRetentionQuotaMode:
+      description: |-
+        The retention quota mode. `custom` enforces a fixed session limit, while
+        `adaptive` dynamically adjusts retention.
+      enum:
+        - custom
+        - adaptive
+      example: custom
+      type: string
+      x-enum-varnames: ["CUSTOM", "ADAPTIVE"]
+    RumRetentionQuotaReachedAction:
+      description: The action to take when the session quota is reached.
+      enum:
+        - stop
+        - slowdown
+      example: stop
+      type: string
+      x-enum-varnames: ["STOP", "SLOWDOWN"]
+    RumRetentionQuotaScopeType:
+      default: application
+      description: The type of scope the retention quota configuration applies to.
+      enum:
+        - application
+      example: application
+      type: string
+      x-enum-varnames: ["APPLICATION"]
+    RumRetentionQuotaWindowType:
+      description: The window type over which the session limit is enforced.
+      enum:
+        - daily
+      example: daily
+      type: string
+      x-enum-varnames: ["DAILY"]
     RumSdkConfigAllowedTracingUrlList:
       description: A list of URL configurations for distributed tracing.
       items:
@@ -103566,6 +103757,267 @@ components:
       required:
         - type
       type: object
+    SeverityModifierRuleAction:
+      description: |-
+        The action to take when a severity modifier rule matches a finding. This is a discriminated union on `type`: `set` assigns a fixed severity, while `shift` moves the severity up or down by one rank.
+
+        A severity modifier rule's `rule.query` must not filter on `@severity` or on the `@severity_details.user_adjusted.*` namespace.
+
+        Use `@severity_details.adjusted.value` instead, which reflects the severity before user-defined adjustments.
+      oneOf:
+        - $ref: "#/components/schemas/SeverityModifierRuleSetAction"
+        - $ref: "#/components/schemas/SeverityModifierRuleShiftAction"
+    SeverityModifierRuleAttributesCreate:
+      description: Attributes for creating or updating a severity modifier rule.
+      properties:
+        action:
+          $ref: "#/components/schemas/SeverityModifierRuleAction"
+        enabled:
+          description: Whether the severity modifier rule is enabled.
+          example: true
+          type: boolean
+        name:
+          description: The name of the severity modifier rule.
+          example: "Downgrade misconfigurations in dev"
+          maxLength: 255
+          minLength: 1
+          type: string
+        rule:
+          $ref: "#/components/schemas/AutomationRuleScope"
+      required:
+        - name
+        - rule
+        - action
+      type: object
+    SeverityModifierRuleAttributesResponse:
+      description: Attributes of a severity modifier rule as returned by the API.
+      properties:
+        action:
+          $ref: "#/components/schemas/SeverityModifierRuleAction"
+        created_at:
+          description: The Unix timestamp in milliseconds when the rule was created.
+          example: 1722439510282
+          format: int64
+          type: integer
+        created_by:
+          $ref: "#/components/schemas/AutomationRuleCreatedBy"
+        enabled:
+          description: Whether the severity modifier rule is enabled.
+          example: true
+          type: boolean
+        modified_at:
+          description: The Unix timestamp in milliseconds when the rule was last modified.
+          example: 1722439510282
+          format: int64
+          type: integer
+        modified_by:
+          $ref: "#/components/schemas/AutomationRuleModifiedBy"
+        name:
+          description: The name of the severity modifier rule.
+          example: "Downgrade misconfigurations in dev"
+          maxLength: 255
+          minLength: 1
+          type: string
+        rule:
+          $ref: "#/components/schemas/AutomationRuleScope"
+      required:
+        - name
+        - enabled
+        - rule
+        - action
+        - created_at
+        - created_by
+        - modified_at
+        - modified_by
+      type: object
+    SeverityModifierRuleCreateRequest:
+      description: The body of a severity modifier rule create request.
+      properties:
+        data:
+          $ref: "#/components/schemas/SeverityModifierRuleDataCreate"
+      required:
+        - data
+      type: object
+    SeverityModifierRuleDataCreate:
+      description: The data object for a severity modifier rule create or update request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SeverityModifierRuleAttributesCreate"
+        type:
+          $ref: "#/components/schemas/SeverityModifierRuleType"
+      required:
+        - type
+        - attributes
+      type: object
+    SeverityModifierRuleDataResponse:
+      description: The data object for a severity modifier rule as returned by the API.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SeverityModifierRuleAttributesResponse"
+        id:
+          description: The ID of the severity modifier rule.
+          example: "00000000-0000-0000-0000-000000000000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SeverityModifierRuleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SeverityModifierRuleReorderData:
+      description: The ordered list of severity modifier rules; every rule must be included.
+      items:
+        $ref: "#/components/schemas/SeverityModifierRuleReorderItem"
+      type: array
+    SeverityModifierRuleReorderItem:
+      description: A reference to a severity modifier rule used for reordering.
+      properties:
+        id:
+          description: The ID of the automation rule.
+          example: "00000000-0000-0000-0000-000000000000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SeverityModifierRuleType"
+      required:
+        - type
+        - id
+      type: object
+    SeverityModifierRuleReorderRequest:
+      description: The body of a severity modifier rule reorder request.
+      properties:
+        data:
+          $ref: "#/components/schemas/SeverityModifierRuleReorderData"
+      required:
+        - data
+      type: object
+    SeverityModifierRuleReorderResponse:
+      description: The response of a severity modifier rule reorder request.
+      properties:
+        data:
+          $ref: "#/components/schemas/SeverityModifierRuleReorderData"
+      required:
+        - data
+      type: object
+    SeverityModifierRuleResponse:
+      description: A single severity modifier rule response.
+      properties:
+        data:
+          $ref: "#/components/schemas/SeverityModifierRuleDataResponse"
+      required:
+        - data
+      type: object
+    SeverityModifierRuleSetAction:
+      description: Sets matched findings to a fixed severity.
+      properties:
+        description:
+          description: An optional free-form explanation for the severity change.
+          example: "Lower severity for dev environment noise"
+          maxLength: 20000
+          type: string
+        severity:
+          $ref: "#/components/schemas/SeverityModifierSeverity"
+        type:
+          $ref: "#/components/schemas/SeverityModifierRuleSetActionType"
+      required:
+        - type
+        - severity
+      type: object
+    SeverityModifierRuleSetActionType:
+      description: The type of a severity modifier rule action that sets a fixed severity.
+      enum:
+        - set
+      example: set
+      type: string
+      x-enum-varnames:
+        - SET
+    SeverityModifierRuleShiftAction:
+      description: Shifts matched findings up or down by one severity rank.
+      properties:
+        description:
+          description: An optional free-form explanation for the severity change.
+          example: "Lower severity for dev environment noise"
+          maxLength: 20000
+          type: string
+        severity_delta:
+          $ref: "#/components/schemas/SeverityModifierSeverityDelta"
+        type:
+          $ref: "#/components/schemas/SeverityModifierRuleShiftActionType"
+      required:
+        - type
+        - severity_delta
+      type: object
+    SeverityModifierRuleShiftActionType:
+      description: The type of a severity modifier rule action that shifts the severity by one rank.
+      enum:
+        - shift
+      example: shift
+      type: string
+      x-enum-varnames:
+        - SHIFT
+    SeverityModifierRuleType:
+      description: The JSON:API type for severity modifier rules.
+      enum:
+        - severity_modifier_rules
+      example: severity_modifier_rules
+      type: string
+      x-enum-varnames:
+        - SEVERITY_MODIFIER_RULES
+    SeverityModifierRuleUpdateRequest:
+      description: The body of a severity modifier rule update request.
+      properties:
+        data:
+          $ref: "#/components/schemas/SeverityModifierRuleDataCreate"
+      required:
+        - data
+      type: object
+    SeverityModifierRulesDataList:
+      description: A list of severity modifier rule data objects.
+      items:
+        $ref: "#/components/schemas/SeverityModifierRuleDataResponse"
+      type: array
+    SeverityModifierRulesResponse:
+      description: A list of severity modifier rules with pagination metadata.
+      properties:
+        data:
+          $ref: "#/components/schemas/SeverityModifierRulesDataList"
+        links:
+          $ref: "#/components/schemas/SecurityAutomationRulesLinks"
+        meta:
+          $ref: "#/components/schemas/SecurityAutomationRulesMeta"
+      required:
+        - data
+        - meta
+        - links
+      type: object
+    SeverityModifierSeverity:
+      description: The severity to assign to matched findings. `info_none` is not supported for the `iac_misconfiguration`, `runtime_code_vulnerability`, `secret`, or `static_code_vulnerability` finding types.
+      enum:
+        - info_none
+        - low
+        - medium
+        - high
+        - critical
+      example: low
+      type: string
+      x-enum-varnames:
+        - INFO_NONE
+        - LOW
+        - MEDIUM
+        - HIGH
+        - CRITICAL
+    SeverityModifierSeverityDelta:
+      description: The direction in which to shift the severity of matched findings by one rank.
+      enum:
+        - up_one
+        - down_one
+      example: up_one
+      type: string
+      x-enum-varnames:
+        - UP_ONE
+        - DOWN_ONE
     SharedDashboardGlobalTime:
       additionalProperties: {}
       description: Default time range configuration for the shared dashboard.
@@ -185949,6 +186401,202 @@ paths:
         - Rum Metrics
       x-codegen-request-body-name: body
       x-menu-order: 4
+  /api/v2/rum/config/retention-quota/{scope_type}/{scope_id}:
+    delete:
+      description: Delete the RUM retention quota configuration for a given scope.
+      operationId: DeleteRumQuotaConfig
+      parameters:
+        - $ref: "#/components/parameters/RumRetentionQuotaScopeTypeParameter"
+        - $ref: "#/components/parameters/RumRetentionQuotaScopeIDParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a RUM retention quota configuration
+      tags:
+        - RUM Retention Quota
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_write
+    get:
+      description: Get the RUM retention quota configuration for a given scope.
+      operationId: GetRumQuotaConfig
+      parameters:
+        - $ref: "#/components/parameters/RumRetentionQuotaScopeTypeParameter"
+        - $ref: "#/components/parameters/RumRetentionQuotaScopeIDParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        custom:
+                          daily_reset_time: "08:00"
+                          daily_reset_timezone: "+09:00"
+                          quota_reached_action: stop
+                          session_limit: 1000000
+                          window_type: daily
+                        mode: custom
+                        org_id: 2
+                        updated_at: "2026-03-04T15:37:54.951447Z"
+                        updated_by: test@example.com
+                      id: cd73a516-a481-4af5-8352-9b577465c77b
+                      type: rum_quota_config
+              schema:
+                $ref: "#/components/schemas/RumRetentionQuotaConfigResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a RUM retention quota configuration
+      tags:
+        - RUM Retention Quota
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
+    put:
+      description: |-
+        Create or update the RUM retention quota configuration for a given scope.
+        Returns the retention quota configuration object when the request is successful.
+      operationId: UpsertRumQuotaConfig
+      parameters:
+        - $ref: "#/components/parameters/RumRetentionQuotaScopeTypeParameter"
+        - $ref: "#/components/parameters/RumRetentionQuotaScopeIDParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      custom:
+                        daily_reset_time: "08:00"
+                        daily_reset_timezone: "+09:00"
+                        quota_reached_action: stop
+                        session_limit: 1000000
+                        window_type: daily
+                      mode: custom
+                    id: cd73a516-a481-4af5-8352-9b577465c77b
+                    type: rum_quota_config
+            schema:
+              $ref: "#/components/schemas/RumRetentionQuotaConfigUpdateRequest"
+        description: The definition of the RUM retention quota configuration to create or update.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        custom:
+                          daily_reset_time: "08:00"
+                          daily_reset_timezone: "+09:00"
+                          quota_reached_action: stop
+                          session_limit: 1000000
+                          window_type: daily
+                        mode: custom
+                        org_id: 2
+                        updated_at: "2026-03-04T21:52:53.526022Z"
+                        updated_by: test@example.com
+                      id: cd73a516-a481-4af5-8352-9b577465c77b
+                      type: rum_quota_config
+              schema:
+                $ref: "#/components/schemas/RumRetentionQuotaConfigResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create or update a RUM retention quota config
+      tags:
+        - RUM Retention Quota
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_write
   /api/v2/rum/events:
     get:
       description: |-
@@ -191744,6 +192392,459 @@ paths:
         - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 138
+      x-permission:
+        operator: OR
+        permissions:
+          - security_pipelines_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security/findings/automation/severity_modifier_rules:
+    get:
+      description: Get all severity modifier rules for the current organization.
+      operationId: ListSecurityFindingsAutomationSeverityModifierRules
+      parameters:
+        - description: The number of rules per page. Maximum is 1000.
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 1000
+            example: 10
+            format: int64
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The page number to return.
+          in: query
+          name: page[number]
+          required: false
+          schema:
+            default: 0
+            example: 0
+            format: int64
+            minimum: 0
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          action:
+                            description: "Lower severity for dev environment noise"
+                            severity: low
+                            type: set
+                          created_at: 1722439510282
+                          created_by:
+                            id: "00000000-0000-0000-0000-000000000000"
+                            name: "Jane Doe"
+                            type: user
+                          enabled: true
+                          modified_at: 1722439510282
+                          modified_by:
+                            id: "00000000-0000-0000-0000-000000000000"
+                            name: "Jane Doe"
+                            type: user
+                          name: "Downgrade misconfigurations in dev"
+                          rule:
+                            finding_types:
+                              - misconfiguration
+                            query: "env:dev"
+                        id: "00000000-0000-0000-0000-000000000000"
+                        type: severity_modifier_rules
+                    links:
+                      first: "/api/v2/security/findings/automation/severity_modifier_rules?page[size]=1000&page[number]=0"
+                      last: "/api/v2/security/findings/automation/severity_modifier_rules?page[size]=1000&page[number]=0"
+                    meta:
+                      page:
+                        total_filtered_count: 1
+              schema:
+                $ref: "#/components/schemas/SeverityModifierRulesResponse"
+          description: Successfully retrieved the list of severity modifier rules
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get all severity modifier rules
+      tags:
+        - Security Monitoring
+      x-menu-order: 158
+      x-permission:
+        operator: OR
+        permissions:
+          - security_pipelines_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a new severity modifier rule for the current organization.
+      operationId: CreateSecurityFindingsAutomationSeverityModifierRule
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      action:
+                        description: "Lower severity for dev environment noise"
+                        severity: low
+                        type: set
+                      enabled: true
+                      name: "Downgrade misconfigurations in dev"
+                      rule:
+                        finding_types:
+                          - misconfiguration
+                        query: "env:dev"
+                    type: severity_modifier_rules
+            schema:
+              $ref: "#/components/schemas/SeverityModifierRuleCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action:
+                          description: "Lower severity for dev environment noise"
+                          severity: low
+                          type: set
+                        created_at: 1722439510282
+                        created_by:
+                          id: "00000000-0000-0000-0000-000000000000"
+                          name: "Jane Doe"
+                          type: user
+                        enabled: true
+                        modified_at: 1722439510282
+                        modified_by:
+                          id: "00000000-0000-0000-0000-000000000000"
+                          name: "Jane Doe"
+                          type: user
+                        name: "Downgrade misconfigurations in dev"
+                        rule:
+                          finding_types:
+                            - misconfiguration
+                          query: "env:dev"
+                      id: "00000000-0000-0000-0000-000000000000"
+                      type: severity_modifier_rules
+              schema:
+                $ref: "#/components/schemas/SeverityModifierRuleResponse"
+          description: Successfully created the severity modifier rule
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unprocessable Entity
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create a severity modifier rule
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 159
+      x-permission:
+        operator: OR
+        permissions:
+          - security_pipelines_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security/findings/automation/severity_modifier_rules/reorder:
+    post:
+      description: Reorder the list of severity modifier rules for the current organization.
+      operationId: ReorderSecurityFindingsAutomationSeverityModifierRules
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    - id: "00000000-0000-0000-0000-000000000000"
+                      type: severity_modifier_rules
+                    - id: "11111111-1111-1111-1111-111111111111"
+                      type: severity_modifier_rules
+            schema:
+              $ref: "#/components/schemas/SeverityModifierRuleReorderRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - id: "00000000-0000-0000-0000-000000000000"
+                        type: severity_modifier_rules
+                      - id: "11111111-1111-1111-1111-111111111111"
+                        type: severity_modifier_rules
+              schema:
+                $ref: "#/components/schemas/SeverityModifierRuleReorderResponse"
+          description: Successfully reordered the severity modifier rules
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unprocessable Entity
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Reorder severity modifier rules
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 160
+      x-permission:
+        operator: OR
+        permissions:
+          - security_pipelines_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security/findings/automation/severity_modifier_rules/{rule_id}:
+    delete:
+      description: Delete an existing severity modifier rule by ID.
+      operationId: DeleteSecurityFindingsAutomationSeverityModifierRule
+      parameters:
+        - description: The ID of the severity modifier rule.
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            example: "00000000-0000-0000-0000-000000000000"
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: "Rule successfully deleted"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unprocessable Entity
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Delete a severity modifier rule
+      tags:
+        - Security Monitoring
+      x-menu-order: 163
+      x-permission:
+        operator: OR
+        permissions:
+          - security_pipelines_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get the details of a severity modifier rule by ID.
+      operationId: GetSecurityFindingsAutomationSeverityModifierRule
+      parameters:
+        - description: The ID of the severity modifier rule.
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            example: "00000000-0000-0000-0000-000000000000"
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action:
+                          description: "Lower severity for dev environment noise"
+                          severity: low
+                          type: set
+                        created_at: 1722439510282
+                        created_by:
+                          id: "00000000-0000-0000-0000-000000000000"
+                          name: "Jane Doe"
+                          type: user
+                        enabled: true
+                        modified_at: 1722439510282
+                        modified_by:
+                          id: "00000000-0000-0000-0000-000000000000"
+                          name: "Jane Doe"
+                          type: user
+                        name: "Downgrade misconfigurations in dev"
+                        rule:
+                          finding_types:
+                            - misconfiguration
+                          query: "env:dev"
+                      id: "00000000-0000-0000-0000-000000000000"
+                      type: severity_modifier_rules
+              schema:
+                $ref: "#/components/schemas/SeverityModifierRuleResponse"
+          description: Successfully retrieved the severity modifier rule
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unprocessable Entity
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get a severity modifier rule
+      tags:
+        - Security Monitoring
+      x-menu-order: 161
+      x-permission:
+        operator: OR
+        permissions:
+          - security_pipelines_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    put:
+      description: Update an existing severity modifier rule by ID.
+      operationId: UpdateSecurityFindingsAutomationSeverityModifierRule
+      parameters:
+        - description: The ID of the severity modifier rule.
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            example: "00000000-0000-0000-0000-000000000000"
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      action:
+                        severity_delta: down_one
+                        type: shift
+                      enabled: false
+                      name: "Downgrade misconfigurations in dev"
+                      rule:
+                        finding_types:
+                          - misconfiguration
+                        query: "env:dev"
+                    type: severity_modifier_rules
+            schema:
+              $ref: "#/components/schemas/SeverityModifierRuleUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action:
+                          severity_delta: down_one
+                          type: shift
+                        created_at: 1722439510282
+                        created_by:
+                          id: "00000000-0000-0000-0000-000000000000"
+                          name: "Jane Doe"
+                          type: user
+                        enabled: false
+                        modified_at: 1722439510999
+                        modified_by:
+                          id: "00000000-0000-0000-0000-000000000000"
+                          name: "Jane Doe"
+                          type: user
+                        name: "Downgrade misconfigurations in dev"
+                        rule:
+                          finding_types:
+                            - misconfiguration
+                          query: "env:dev"
+                      id: "00000000-0000-0000-0000-000000000000"
+                      type: severity_modifier_rules
+              schema:
+                $ref: "#/components/schemas/SeverityModifierRuleResponse"
+          description: Successfully updated the severity modifier rule
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unprocessable Entity
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Update a severity modifier rule
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 162
       x-permission:
         operator: OR
         permissions:
@@ -217911,6 +219012,9 @@ tags:
       description: Find out more at
       url: https://docs.datadoghq.com/real_user_monitoring/
     name: RUM Remote Config
+  - description: |-
+      Manage RUM retention quota configurations for your organization's RUM applications.
+    name: RUM Retention Quota
   - description: View and manage Reference Tables in your organization.
     name: Reference Tables
   - description: |-

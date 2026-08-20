@@ -4518,6 +4518,84 @@ menu:
         unstable:
           - v2
         order: 146
+    - name: Update a severity modifier rule
+      url: /api/latest/security-monitoring/update-a-severity-modifier-rule/
+      identifier: security-monitoring-update-a-severity-modifier-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityFindingsAutomationSeverityModifierRule
+        unstable:
+          - v2
+        order: 162
+    - name: Get a severity modifier rule
+      url: /api/latest/security-monitoring/get-a-severity-modifier-rule/
+      identifier: security-monitoring-get-a-severity-modifier-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityFindingsAutomationSeverityModifierRule
+        unstable:
+          - v2
+        order: 161
+    - name: Delete a severity modifier rule
+      url: /api/latest/security-monitoring/delete-a-severity-modifier-rule/
+      identifier: security-monitoring-delete-a-severity-modifier-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityFindingsAutomationSeverityModifierRule
+        unstable:
+          - v2
+        order: 163
+    - name: Reorder severity modifier rules
+      url: /api/latest/security-monitoring/reorder-severity-modifier-rules/
+      identifier: security-monitoring-reorder-severity-modifier-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ReorderSecurityFindingsAutomationSeverityModifierRules
+        unstable:
+          - v2
+        order: 160
+    - name: Create a severity modifier rule
+      url: /api/latest/security-monitoring/create-a-severity-modifier-rule/
+      identifier: security-monitoring-create-a-severity-modifier-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityFindingsAutomationSeverityModifierRule
+        unstable:
+          - v2
+        order: 159
+    - name: Get all severity modifier rules
+      url: /api/latest/security-monitoring/get-all-severity-modifier-rules/
+      identifier: security-monitoring-get-all-severity-modifier-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityFindingsAutomationSeverityModifierRules
+        unstable:
+          - v2
+        order: 158
     - name: Update a mute rule
       url: /api/latest/security-monitoring/update-a-mute-rule/
       identifier: security-monitoring-update-a-mute-rule
@@ -17972,6 +18050,46 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: RUM Retention Quota
+      url: /api/latest/rum-retention-quota/
+      identifier: rum-retention-quota
+      generated: true
+    - name: Create or update a RUM retention quota config
+      url: /api/latest/rum-retention-quota/create-or-update-a-rum-retention-quota-config/
+      identifier: rum-retention-quota-create-or-update-a-rum-retention-quota-config
+      parent: rum-retention-quota
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertRumQuotaConfig
+        unstable: []
+        order: 2
+    - name: Get a RUM retention quota configuration
+      url: /api/latest/rum-retention-quota/get-a-rum-retention-quota-configuration/
+      identifier: rum-retention-quota-get-a-rum-retention-quota-configuration
+      parent: rum-retention-quota
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumQuotaConfig
+        unstable: []
+        order: 1
+    - name: Delete a RUM retention quota configuration
+      url: /api/latest/rum-retention-quota/delete-a-rum-retention-quota-configuration/
+      identifier: rum-retention-quota-delete-a-rum-retention-quota-configuration
+      parent: rum-retention-quota
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRumQuotaConfig
+        unstable: []
+        order: 3
     - name: Reference Tables
       url: /api/latest/reference-tables/
       identifier: reference-tables
