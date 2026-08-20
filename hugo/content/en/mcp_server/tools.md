@@ -2274,7 +2274,7 @@ Retrieves a workflow by ID, including its metadata and complete specification. R
 ### `search_datadog_workflow_actions`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Searches the Workflow Automation action catalog by bundle or integration, title, keyword, or description. Each result includes an action ID; use `get_datadog_workflow_action` to retrieve its contract before adding it to a workflow specification.
+Searches the Workflow Automation action catalog with a free-text query and ranks matching actions by relevance. Each result includes an action ID; use `get_datadog_workflow_action` to retrieve its contract before adding it to a workflow specification.
 
 - Find workflow actions for sending and reacting to Slack messages.
 - Search for an action that lists Amazon S3 buckets.
@@ -2283,7 +2283,7 @@ Searches the Workflow Automation action catalog by bundle or integration, title,
 ### `get_datadog_workflow_action`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Retrieves the definition of a Workflow Automation action by action ID. The definition includes resolved input and output schemas, input field order, keywords, and action-specific instructions for building a workflow step.
+Retrieves the definition of a Workflow Automation action by action ID. The definition includes resolved input and output schemas and action-specific instructions for building a workflow step.
 
 - Get the definition of the `com.datadoghq.http.request` action.
 - List the required inputs for this workflow action.
@@ -2317,7 +2317,7 @@ Creates an unpublished [Workflow Automation][39] workflow from a complete specif
 ### `update_datadog_workflow`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Write`*\
-Updates a [Workflow Automation][39] workflow by ID. Provided specifications and tag lists replace the existing values, while omitted fields remain unchanged. Specification updates are saved as drafts unless the workflow is unpublished and has no saved draft.
+Updates a [Workflow Automation][39] workflow by ID. Provided specifications and tag lists replace the existing values, while omitted fields remain unchanged. Specification updates are saved as drafts.
 
 - Get the deployment rollback workflow, add an agent trigger to its complete specification, then publish the saved draft.
 - Get the incident escalation workflow and add a notification step while preserving the rest of its specification.
@@ -2350,7 +2350,7 @@ Permanently deletes a workflow by ID. This tool requires explicit user confirmat
 ### `execute_datadog_workflow`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Run`*\
-Starts a new execution of a published or unpublished workflow that has an agent trigger. Runs the saved draft when one exists, otherwise the base specification. Workflow actions can modify external systems, so confirm with the user before invoking this tool.
+Starts a new execution of a workflow that has an agent trigger. Runs the saved draft when one exists, otherwise the base specification.
 
 - Run the incident escalation workflow with `service` set to `checkout-api` and `severity` set to `high`.
 - Execute the deployment rollback workflow for the payments service.
@@ -2359,7 +2359,7 @@ Starts a new execution of a published or unpublished workflow that has an agent 
 ### `list_datadog_workflow_instances`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Lists a workflow's execution history, with filters for execution status and whether the base or draft specification was used. Use `get_datadog_workflow_instance` for details.
+Lists a workflow's execution history, with filters for execution status. Use `get_datadog_workflow_instance` for details.
 
 - List the most recent executions of this workflow.
 - List all failed instances of the deployment workflow.
@@ -2377,7 +2377,7 @@ Retrieves a lightweight summary of a workflow execution instance, with an option
 ### `get_datadog_workflow_step_data`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Retrieves execution data for one workflow step, with optional execution context and iteration data for loop steps.
+Retrieves execution data for one workflow step, with optional execution context.
 
 - Debug the Slack channel used by the `send-slack-message` step in this workflow execution.
 - Inspect zero-based iteration `3` (the fourth iteration) of the `retry-until-complete` while-loop step.
