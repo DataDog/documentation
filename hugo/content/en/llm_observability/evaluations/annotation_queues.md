@@ -390,10 +390,10 @@ Build benchmark datasets with human-verified labels for regression testing and c
 [3]: /llm_observability/experiments/datasets
 [4]: /api/latest/agent-observability/
 [5]: /llm_observability/evaluations/export_api/?tab=model#api-standards
-[6]: /api/latest/agent-observability/#list-llm-observability-annotation-queues
-[7]: /api/latest/agent-observability/#create-an-llm-observability-annotation-queue
-[8]: /api/latest/agent-observability/#update-an-llm-observability-annotation-queue
-[9]: /api/latest/agent-observability/#delete-an-llm-observability-annotation-queue
+[6]: /api/latest/agent-observability/#list-agent-observability-annotation-queues
+[7]: /api/latest/agent-observability/#create-an-agent-observability-annotation-queue
+[8]: /api/latest/agent-observability/#update-an-agent-observability-annotation-queue
+[9]: /api/latest/agent-observability/#delete-an-agent-observability-annotation-queue
 [10]: /api/latest/agent-observability/#add-annotation-queue-interactions
 [11]: /api/latest/agent-observability/#delete-annotation-queue-interactions
 [12]: /api/latest/agent-observability/#get-annotated-queue-interactions
