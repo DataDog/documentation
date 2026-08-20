@@ -8,7 +8,7 @@ further_reading:
   - link: "/security/code_security/iac_security/custom_rules/tutorial/"
     tag: "Documentation"
     text: "Create your first custom IaC rule"
-  - link: "https://www.openpolicyagent.org/docs/latest/policy-language/"
+  - link: "https://www.openpolicyagent.org/docs/policy-language"
     tag: "External Site"
     text: "Learn the Rego policy language"
 ---
@@ -130,7 +130,7 @@ The following platform packages are available:
 - `data.generic.k8s`
 - `data.generic.terraform`
 
-Shared libraries handle behavior that is difficult to reproduce with direct field access, including Ansible module aliases, GitHub Actions trigger forms, Kubernetes workload pod specifications, Terraform resource names, and CloudFormation references.
+Shared libraries handle behavior that is difficult to reproduce with direct field access. Examples include Ansible module aliases, GitHub Actions trigger forms, Kubernetes workload pod specifications, Terraform resource names, and CloudFormation references.
 
 ## Platform input patterns
 
@@ -291,14 +291,14 @@ Preserve document, namespace, workflow, build-stage, and resource-reference cons
 
 ## Test the rule
 
-Test at least:
+Test at least the following:
 
-1. A configuration that must produce a finding.
-2. A compliant configuration that must not produce a finding.
-3. Missing and explicit values when defaults matter.
-4. Multiple resources in one file.
-5. Alternate syntax supported by the platform, such as Ansible module aliases or GitHub Actions trigger forms.
-6. Related resources in separate scopes when the rule performs correlation.
+- A configuration that must produce a finding.
+- A compliant configuration that must not produce a finding.
+- Missing and explicit values when defaults matter.
+- Multiple resources in one file.
+- Alternate syntax supported by the platform, such as Ansible module aliases or GitHub Actions trigger forms.
+- Related resources in separate scopes when the rule performs correlation.
 
 ## Further reading
 

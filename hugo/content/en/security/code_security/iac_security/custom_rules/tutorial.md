@@ -15,15 +15,19 @@ further_reading:
 
 ## Overview
 
-This tutorial creates a Terraform rule that detects an `aws_s3_bucket_versioning` resource whose status is explicitly set to `Suspended`. The rule reports the insecure attribute and provides a suggested remediation.
+In this tutorial, you create a Terraform rule that detects an `aws_s3_bucket_versioning` resource whose status is explicitly set to `Suspended`. The rule reports the insecure attribute and provides a suggested remediation.
+
+<!-- REVIEW-Q: Does this tutorial need a prerequisites section? Specifically the
+     role or permission required to create and publish a rule, and whether IaC
+     Security needs to be set up first. -->
 
 ## Create the rule
 
-1. Navigate to the [IaC Rules][1] page.
+1. Go to the [IaC Rules][1] page.
 2. Click {{< ui >}}Create rule{{< /ui >}}.
 3. Enter a rule name, such as `S3 bucket versioning is suspended`.
 4. Select **Terraform** as the platform.
-5. Select a category and severity. You can also set **AWS** as the provider and specify a CWE.
+5. Select a category and severity. You can also set **AWS** as the provider and specify a Common Weakness Enumeration (CWE) identifier.
 
 ## Add a sample file
 

@@ -15,9 +15,22 @@ further_reading:
     text: "Explore IaC Security rules"
 ---
 
+<!-- REVIEW-Q: The IaC Rules page and github_actions.md both carry the gov/gov2
+     "not supported for your selected Datadog site" banner. Should these three
+     custom rules pages carry it too? -->
+
 ## Overview
 
 You can create custom Infrastructure as Code (IaC) Security rules to enforce requirements specific to your organization. Custom rules use [Rego][1], the policy language from Open Policy Agent (OPA), and run alongside Datadog's default rules during IaC scans.
+
+<!-- REVIEW-Q: What role or permission does a user need to create and publish a
+     custom rule? Is the rule editor available on all IaC Security plans? If you
+     confirm, I'll add a prerequisites line here. -->
+
+<!-- REVIEW-Q: This page uses "rule" and "policy" for what look like two
+     different things (the rule object vs. the Rego block inside it). Is that the
+     UI's own distinction? If so, worth stating once here so the tutorial's
+     "save the rule" / "the policy reports no findings" reads intentionally. -->
 
 Custom rules support the following platforms:
 
@@ -29,6 +42,11 @@ Custom rules support the following platforms:
 - Terraform
 
 ## Choose how to start
+
+<!-- REVIEW-Q: This section sets up two paths, but only cloning gets a procedure
+     below; the from-scratch path goes to the tutorial. Do you want a short
+     "Create a rule from scratch" procedure here as well, or should this section
+     say plainly that cloning is the path this page covers? -->
 
 Create a rule from scratch when you need a focused check and understand the parsed structure for the selected platform. The editor provides a starter policy and sample file.
 
@@ -57,7 +75,7 @@ Updating a rule creates a revision. You can review previous revisions and restor
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.openpolicyagent.org/docs/latest/policy-language/
+[1]: https://www.openpolicyagent.org/docs/policy-language
 [2]: /security/code_security/iac_security/custom_rules/tutorial/
 [3]: /security/code_security/iac_security/custom_rules/guide/
 [4]: https://app.datadoghq.com/security/code-security/detection-coverage/iac
