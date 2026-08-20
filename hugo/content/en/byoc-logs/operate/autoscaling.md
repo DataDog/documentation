@@ -26,7 +26,9 @@ This guide assumes that you have:
 - A BYOC Logs deployment installed with the `datadog/cloudprem` Helm chart.
 - Kubernetes Metrics Server, or another metrics API implementation, installed in the cluster.
 - Enough node capacity for the maximum number of indexer and compactor pods.
-- CPU requests configured for autoscaled workloads. CPU-based HPA calculations use the pod CPU request. Indexers derive CPU requests from `indexer.podSize` or `indexer.resources.requests.cpu`. For standalone compactors, configure `compactor.resources.requests.cpu`.
+- CPU requests configured for autoscaled workloads.
+
+CPU-based HPA calculations use the pod CPU request. Indexers get CPU requests from `indexer.podSize` or `indexer.resources.requests.cpu`. For standalone compactors, configure `compactor.resources.requests.cpu`.
 
 ## Enable indexer autoscaling
 
