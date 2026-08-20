@@ -3,13 +3,13 @@ title: Troubleshooting Workload Protection
 description: Troubleshoot Workload Protection, including Agent flares, self tests, and network plugin compatibility.
 ---
 
-If you experience issues with Workload Protection, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support](/help/).
+If you experience issues with Workload Protection, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
 
 ## Security Agent flare
 
 <div class="alert alert-warning">From Agent <code>7.77</code>, the <code>security-agent</code> runtime component for Workload Protection is deprecated and is no longer required. The standalone <code>security-agent flare</code> command does not work when the Security Agent process is not running. Use the core Agent <code>flare</code> command instead.</div>
 
-Similar to the [Agent flare](/agent/troubleshooting/send_a_flare/?tab=agent), you can send necessary troubleshooting information to the Datadog support team with one flare command.
+Similar to the [Agent flare][3], you can send necessary troubleshooting information to the Datadog support team with one flare command.
 
 The flare asks for confirmation before upload, so you may review the content before the Security Agent sends it.
 
@@ -231,4 +231,6 @@ Modify the `system-probe.yaml` and `security-agent.yaml` to disable the runtime 
     {{< /code-block >}}
 3. Restart your agents.
 
+[1]: /help/
 [2]: https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/
+[3]: /agent/troubleshooting/send_a_flare/?tab=agent
