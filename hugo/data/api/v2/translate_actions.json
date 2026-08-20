@@ -5067,6 +5067,20 @@
     "request_description": "New definition of the RUM-based metric.",
     "request_schema_description": "The new RUM-based metric body."
   },
+  "DeleteRumQuotaConfig": {
+    "description": "Delete the RUM retention quota configuration for a given scope.",
+    "summary": "Delete a RUM retention quota configuration"
+  },
+  "GetRumQuotaConfig": {
+    "description": "Get the RUM retention quota configuration for a given scope.",
+    "summary": "Get a RUM retention quota configuration"
+  },
+  "UpsertRumQuotaConfig": {
+    "description": "Create or update the RUM retention quota configuration for a given scope.\nReturns the retention quota configuration object when the request is successful.",
+    "summary": "Create or update a RUM retention quota config",
+    "request_description": "The definition of the RUM retention quota configuration to create or update.",
+    "request_schema_description": "The body of a request to create or update a RUM retention quota configuration."
+  },
   "ListRUMEvents": {
     "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
     "summary": "Get a list of RUM events"
