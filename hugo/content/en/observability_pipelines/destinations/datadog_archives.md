@@ -94,6 +94,7 @@ If you already have Datadog Log Archives configured, skip to [Set up the destina
 1. Select the AWS account that your bucket is in.
 1. Enter the name of the S3 bucket.
 1. Optionally, enter a path.
+    - **Note**: This path must be a static string. It does not support template syntax, such as `{{ tag_name }}`. To route logs to different object keys based on specific log fields, configure the **Prefix** field when you [set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline) instead.
 1. Check the confirmation statement.
 1. Optionally, add tags and define the maximum scan size for rehydration. See [Advanced settings][18] for more information.
 1. Click **Save**.
@@ -110,7 +111,7 @@ After you select the Datadog Archives destination in the pipeline UI:
 1. Enter the AWS region the S3 bucket is in.
 1. Enter the key prefix.
     - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
-    - See [template syntax][8] if you want to route logs to different object keys based on specific fields in your logs.
+    - See [template syntax][8] if you want to route logs to different object keys based on specific fields in your logs. This **Prefix** field is the only place to configure template syntax for this destination; the path you optionally enter when [configuring Log Archives](#configure-log-archives) must be a static string.
      - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
 1. Select the storage class for your S3 bucket in the {{< ui >}}Storage Class{{< /ui >}} dropdown menu. If you are going to archive and rehydrate your logs:
     - **Note**: Rehydration only supports the following [storage classes][9]:
