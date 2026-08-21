@@ -8810,7 +8810,7 @@ menu:
       parent: workload_protection_setup
       identifier: workload_protection_setup_windows
       weight: 70
-    - name: Advanced configuration
+    - name: Advanced Configuration
       url: security/workload_protection/setup/advanced_configuration
       parent: workload_protection_setup
       identifier: workload_protection_setup_advanced_configuration
@@ -8865,17 +8865,17 @@ menu:
       parent: workload_protection_detect_and_monitor_detection_and_finding_rules
       identifier: workload_protection_detect_and_monitor_detection_and_finding_rules_finding_rules
       weight: 20
-    - name: Linux backend syntax
+    - name: Linux Backend Syntax
       url: security/workload_protection/backend_linux
       parent: workload_protection_detect_and_monitor_detection_and_finding_rules
       identifier: workload_protection_detect_and_monitor_detection_and_finding_rules_backend_linux
       weight: 30
-    - name: Windows backend syntax
+    - name: Windows Backend Syntax
       url: security/workload_protection/backend_windows
       parent: workload_protection_detect_and_monitor_detection_and_finding_rules
       identifier: workload_protection_detect_and_monitor_detection_and_finding_rules_backend_windows
       weight: 40
-    - name: Threat intelligence
+    - name: Threat Intelligence
       url: security/workload_protection/detect_and_monitor/threat_intelligence
       parent: workload_protection_detect_and_monitor
       identifier: workload_protection_detect_and_monitor_threat_intelligence
