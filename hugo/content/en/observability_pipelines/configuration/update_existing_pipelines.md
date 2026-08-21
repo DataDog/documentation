@@ -208,13 +208,7 @@ On the Worker installation page:
 {{% /tab %}}
 {{% tab "OpenTelemetry" %}}
 
-**Metrics**
-
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_metrics %}}
-
-**Traces**
-
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_traces %}}
 
 {{% /tab %}}
 {{% tab "Prometheus" %}}
