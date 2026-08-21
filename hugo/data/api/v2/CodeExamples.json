@@ -2040,6 +2040,20 @@
       "description": "Update a RUM retention filter returns \"Updated\" response"
     }
   ],
+  "CreateTeamsOwnershipMappingsBatch": [
+    {
+      "group": "rum_teams_ownership",
+      "suffix": "",
+      "description": "Bulk create and remove teams ownership mappings returns \"OK\" response"
+    }
+  ],
+  "CreateTeamsOwnershipMapping": [
+    {
+      "group": "rum_teams_ownership",
+      "suffix": "_1881412984",
+      "description": "Create teams ownership mapping returns \"Created\" response"
+    }
+  ],
   "CreateScorecardRule": [
     {
       "group": "scorecards",
