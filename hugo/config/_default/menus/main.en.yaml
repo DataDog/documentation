@@ -3136,11 +3136,11 @@ menu:
       parent: action_catalog
       identifier: private_actions
       weight: 2
-    - name: Use Private Actions
-      url: actions/private_actions/use_private_actions/
+    - name: Set Up in the Datadog Agent
+      url: actions/private_actions/set_up_agent_based/
       parent: private_actions
-      identifier: use_private_actions
-      weight: 201
+      identifier: set_up_agent_based
+      weight: 2
     - name: Run a Script
       url: actions/private_actions/run_script/
       parent: private_actions
