@@ -78,7 +78,7 @@ An Agent rule can be in one of the following states:
 
 - **Inactive:** The Agent does not monitor for the rule events and does not send detections to the Datadog backend.
 - **Active:** This is the default setting for enabled rules. The Agent monitors for the enabled rule and displays detections in [Signals][1].
-- **Active with automated response:** The Agent monitors for the enabled rule, terminates matching processes or containers, and displays detections in [Signals][1].
+- **Active with automated response:** The Agent monitors for the enabled rule, terminates matching processes, and displays detections in [Signals][1].
 
 <div class="alert alert-info">Automated response is applied to all threats detected after automated response is enabled. Automated response is not retroactive.</div>
 
@@ -110,7 +110,7 @@ Confirm that each environment with hosts or containers running the Workload Prot
 
 - Datadog **Agent 7.78** or later on the hosts that should execute response actions.
 - [**Remote Configuration**][3] is enabled so response policies can be delivered to the Agent.
-- Enforcement is enabled in `system-probe` as described in [Configure Agent enforcement](#configure-agent-enforcement).
+- Enforcement is enabled by default in `system-probe` as described in [Configure Agent enforcement](#configure-agent-enforcement).
 
 ### Available actions
 

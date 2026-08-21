@@ -43,7 +43,7 @@ To pin a policy, do the following:
 
 ### Conflicting rules
 
-When two policies deployed to the same host contain the same rule with a different status, the most severe action is taken (Blocking > Monitoring > Disabled).
+When two policies deployed to the same host contain the same rule with a different status (active and inactive), the rule will be considered active.
 
 ### Apply tags
 

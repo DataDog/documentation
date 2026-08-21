@@ -51,7 +51,7 @@ On Linux, you need to look at the Linux kernel version and distribution version,
 
 - Custom kernel builds might modify critical hook points that the Agent requires to properly function. Support isn't guaranteed.
 - Workload Protection requires Linux kernel version 4.14.0 or higher.
-- On distributions with a lower kernel version, Workload Protection can run in degraded mode when eBPF features are backported. For example, CentOS/RHEL 7 uses kernel 3.10 with backported eBPF features and is supported.
+- On distributions with an older kernel version, Workload Protection can run if the required eBPF features have been backported. However, it will operate in a degraded mode, as some features may require a more recent kernel version. For example, CentOS/RHEL 7 uses kernel 3.10 with backported eBPF features and is supported, but some features, such as network monitoring, are disabled.
 - For compatibility issues with a custom Kubernetes network plugin like Cilium or Calico, see [Troubleshooting Workload Protection][2].
 
 #### Supported cloud environments
