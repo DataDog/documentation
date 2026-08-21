@@ -118,7 +118,7 @@ gcloud eventarc triggers create order-processor-trigger \
   --destination-run-service=order-processor \
   --destination-run-region=us-central1 \
   --event-filters="type=google.cloud.pubsub.topic.v1.messagePublished" \
-  --event-filters="topic=projects/my-project/topics/orders" \
+  --transport-topic=projects/my-project/topics/orders \
   --location=us-central1
 {{< /code-block >}}
 
