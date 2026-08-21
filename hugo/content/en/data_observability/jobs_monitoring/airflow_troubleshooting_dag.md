@@ -99,7 +99,6 @@ def generate_validation_summary():
                  validation_results["package_version"])
     else:
         log.error("✗ OpenLineage not installed properly")
-        log.error("  All subsequent checks were skipped.")
         log.info("========================================")
         log.error("Critical issues found. OpenLineage events will not be sent properly.")
         return False
@@ -950,7 +949,7 @@ Use this table to resolve common failures:
 
 | Log message | Cause | Resolution |
 |---|---|---|
-| `✗ OpenLineage not installed properly` | The OpenLineage package is missing or corrupted. All subsequent checks were skipped. | Confirm `apache-airflow-providers-openlineage` is included in your Airflow installation. For Amazon MWAA, see [Upgrade OpenLineage provider on Amazon MWAA][3]. |
+| `✗ OpenLineage not installed properly` | The OpenLineage package is missing or corrupted. | Confirm `apache-airflow-providers-openlineage` is included in your Airflow installation. For Amazon MWAA, see [Upgrade OpenLineage provider on Amazon MWAA][3]. |
 | `✗ OpenLineage provider is turned off` | The provider is explicitly disabled by `AIRFLOW__OPENLINEAGE__DISABLED`, `OPENLINEAGE_DISABLED`, or `openlineage.disabled` in airflow.cfg. | Remove or set the disable variable to `false`. |
 | `✗ OpenLineage provider is not active (no transport configuration found)` | No transport configuration was found. | Follow the [Airflow setup guide][2] to configure a transport. |
 | `✗ Failed to resolve active transport` | The transport could not be instantiated. | Verify the transport configuration is valid and the provider is active. |
