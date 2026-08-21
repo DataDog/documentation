@@ -8,220 +8,229 @@ algolia:
   - tools
 aliases:
 - /es/bits_ai/mcp_server/tools/
-description: Navega por todas las herramientas disponibles en el Servidor MCP de Datadog,
-  organizadas por conjunto de herramientas, con ejemplos de indicaciones.
+description: Explore todas las herramientas disponibles en el Servidor Datadog MCP,
+  organizadas por conjunto de herramientas, con ejemplos de prompts.
 further_reading:
 - link: mcp_server
   tag: Documentación
-  text: Servidor MCP de Datadog
+  text: Servidor Datadog MCP
 - link: mcp_server/setup
   tag: Documentación
-  text: Configura el Servidor MCP de Datadog
-title: Herramientas del Servidor MCP de Datadog
+  text: Configurar el Servidor Datadog MCP
+title: Herramientas del Servidor Datadog MCP
 ---
-Las siguientes herramientas están disponibles en el Servidor MCP de Datadog. Cada entrada incluye el conjunto de herramientas requerido, permisos y ejemplos de indicaciones. Las herramientas están agrupadas por [conjuntos de herramientas][1], lo que te permite usar solo las herramientas que necesitas, ahorrando valioso espacio en la ventana de contexto.
+Las siguientes herramientas están disponibles en el Servidor Datadog MCP. Cada entrada incluye el conjunto de herramientas requerido, los permisos y ejemplos de prompts. Las herramientas están agrupadas por [conjuntos de herramientas][1], lo que le permite usar solo las herramientas que necesita, ahorrando un valioso espacio en la ventana de contexto.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-Para habilitar herramientas específicas del producto, incluye el parámetro de consulta `toolsets` al final de la URL del endpoint que utilizas para conectarte al Servidor MCP de Datadog. Por ejemplo, según el [sitio de Datadog][2] que seleccionaste ({{< region-param key="dd_site_name" >}}), esta URL habilita _solo_ herramientas de APM y Observabilidad del Agente:
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+Para habilitar herramientas específicas del producto, incluya el parámetro de consulta `toolsets` al final de la URL del endpoint que utiliza para conectarse al Servidor Datadog MCP. Por ejemplo, según el [sitio de Datadog][2] seleccionado ({{< region-param key="dd_site_name" >}}), esta URL habilita _solo_ las herramientas de APM y Agent Observability:
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-También puedes excluir herramientas específicas con el parámetro de consulta `omit_tools`.
+También puede excluir herramientas específicas con el parámetro de consulta `omit_tools`.
 
 [2]: /es/getting_started/site/
 {{< /site-region >}}
 
-Consulta [Configura el Servidor MCP de Datadog][1] para obtener más información sobre cómo conectarte al Servidor MCP, habilitar conjuntos de herramientas y omitir herramientas específicas.
+Consulte [Configurar el Servidor Datadog MCP][1] para obtener más información sobre cómo conectarse al Servidor Datadog MCP, habilitar conjuntos de herramientas y omitir herramientas específicas.
 
-<div class="alert alert-info">Las herramientas del Servidor MCP de Datadog están en un desarrollo significativo y están sujetas a cambios. Utiliza <a href="https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform">este formulario de retroalimentación</a> para compartir cualquier comentario, casos de uso o problemas encontrados con tus indicaciones y consultas.</div>
+<div class="alert alert-info">Las herramientas del Servidor Datadog MCP están en desarrollo significativo y están sujetas a cambios. Utilice <a href="https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform">este formulario de comentarios</a> para compartir cualquier comentario, caso de uso o problema encontrado con sus prompts y consultas.</div>
 
 ## Herramientas principales {#core-tools}
 
-El conjunto de herramientas predeterminado para registros, métricas, trazas, tableros, seguimientos, incidentes, servidores, servicios, eventos y notebooks.
+El conjunto de herramientas predeterminado para registros, métricas, trazas, tableros, monitores, incidentes, hosts, servicios, eventos y notebooks.
 
 ### `search_datadog_events` {#search-datadog-events}
-*Conjunto de herramientas: **núcleo***\
+*Conjunto de herramientas: **core***\
 *Permisos requeridos: `Events` y `Timeseries`*\
-Busca eventos como alertas de seguimiento, notificaciones de despliegue, cambios en la infraestructura, hallazgos de seguridad y cambios en el estado del servicio.
+Busca eventos como alertas de monitoreo, notificaciones de implementación, cambios en la infraestructura, hallazgos de seguridad y cambios en el estado del servicio.
 
-- Muéstrame todos los eventos de despliegue de las últimas 24 horas.
+- Muestre todos los eventos de implementación de las últimas 24 horas.
 - Encuentra eventos relacionados con nuestro entorno de producción con estado de error.
 - Obtén eventos etiquetados con `service:api` de la última hora.
 
-**Nota**: Consulta la [API de Gestión de Eventos][15] para más detalles.
+**Nota**: Consulte la [Event Management API][15] para obtener más detalles.
 
 ### `get_datadog_incident` {#get-datadog-incident}
-*Conjunto de herramientas: **núcleo***\
+*Conjunto de herramientas: **core***\
 *Permisos requeridos: `Incidents Read`*\
 Recupera información detallada sobre un incidente.
 
-- Obtén detalles del incidente ABC123.
+- Obtenga los detalles del incidente ABC123.
 - ¿Cuál es el estado del incidente ABC123?
-- Recupera toda la información sobre el incidente de Redis de ayer.
+- Recupere la información completa sobre el incidente de Redis de ayer.
 
 **Nota**: La herramienta está operativa, pero no incluye datos de la línea de tiempo del incidente.
 
 ### `get_datadog_metric` {#get-datadog-metric}
-*Conjunto de herramientas: **núcleo***\
+*Conjunto de herramientas: **core***\
 *Permisos requeridos: `Cloud Cost Management Read` o `Metrics` o `Timeseries`*\
-Consulta y analiza datos métricos históricos o en tiempo real, apoyando consultas personalizadas y agregaciones.
+Consulta y analiza datos de métricas históricos o en tiempo real, admitiendo consultas y agregaciones personalizadas.
 
-- Muéstrame las métricas de utilización de CPU para todos los hosts en las últimas 4 horas.
-- Obtén métricas de latencia de Redis para el entorno de producción.
+- Muestre las métricas de utilización de CPU para todos los hosts en las últimas 4 horas.
+- Obtenga las métricas de latencia de Redis para el entorno de producción.
 - ¿Cuánto cambiaron mis costos en la nube de enero a febrero?
 
 ### `get_datadog_metric_context` {#get-datadog-metric-context}
-*Conjunto de herramientas: **núcleo***\
+*Conjunto de herramientas: **core***\
 *Permisos requeridos: `Cloud Cost Management Read` o `Metrics`*\
-Recupera información detallada sobre una métrica, incluyendo metadatos, etiquetas disponibles y valores de etiquetas para filtrar y agrupar.
+Recupera información detallada sobre una métrica, incluyendo metadatos, etiquetas disponibles y valores de etiqueta para filtrar y agrupar.
 
 - ¿Qué etiquetas están disponibles para la métrica `system.cpu.user`?
-- Muéstrame todos los valores posibles para la etiqueta `env` en `redis.info.latency_ms`.
+- Muestre todos los valores posibles para la etiqueta `env` en `redis.info.latency_ms`.
 - Obtén metadatos y dimensiones para la métrica `requests.count`.
 
 ### `search_datadog_monitors` {#search-datadog-monitors}
-*Conjunto de herramientas: **núcleo***\
+*Conjunto de herramientas: **core***\
 *Permisos requeridos: `Monitors Read`*\
 Recupera información sobre los monitores de Datadog, incluyendo sus estados, umbrales y condiciones de alerta.
 
-- Lista todos los monitores que están actualmente alertando.
-- Muéstrame los monitores relacionados con nuestro servicio de pagos.
-- Encuentra monitores etiquetados con `team:infrastructure`.
+- Enumera todos los monitores que están enviando alertas actualmente.
+- Muéstrame los monitores relacionados con nuestro servicio de pago.
+- Busque monitores etiquetados con `team:infrastructure`.
 
 ### `get_datadog_trace` {#get-datadog-trace}
-*Conjunto de herramientas: **núcleo***\
+*Conjunto de herramientas: **core***\
 *Permisos requeridos: `APM Read`*\
 Obtiene una traza completa de Datadog APM usando un ID de traza.
 
-- Obtén la traza completa para el ID 7d5d747be160e280504c099d984bcfe0.
+- Obtenga la traza completa para el ID 7d5d747be160e280504c099d984bcfe0.
 - Muéstrame todos los tramos para la traza abc123 con información de tiempo.
-- Recupera detalles de la traza incluyendo consultas a la base de datos para el ID xyz789.
+- Recupere los detalles de la traza, incluidas las consultas de base de datos para el ID xyz789.
 
-**Nota**: Las trazas grandes con miles de tramos pueden ser truncadas (y se indicará como tal) sin una forma de recuperar todos los tramos.
+**Nota**: Las trazas grandes con miles de tramos pueden truncarse (y se indicarán como tales) sin forma de recuperar todos los tramos.
 
 ### `search_datadog_dashboards` {#search-datadog-dashboards}
-*Conjunto de herramientas: **núcleo***\
+*Conjunto de herramientas: **core***\
 *Permisos requeridos: `Dashboards Read` y `User Access Read`*\
-Lista de tableros de Datadog disponibles y detalles clave.
+Enumera los tableros de Datadog disponibles y los detalles clave.
 
 - Muéstrame todos los tableros disponibles en nuestra cuenta.
-- Lista de tableros relacionados con la monitorización de infraestructura.
-- Encuentra tableros compartidos para el equipo de ingeniería.
+- Enumera los tableros relacionados con el monitoreo de infraestructura.
+- Busca tableros compartidos para el equipo de ingeniería.
 
-**Nota**: Esta herramienta enumera tableros relevantes, pero proporciona detalles limitados sobre su contenido. Usa `get_datadog_dashboard` para recuperar definiciones completas de widgets.
+**Nota**: Esta herramienta enumera los tableros relevantes pero proporciona detalles limitados sobre su contenido. Use `get_datadog_dashboard` para recuperar las definiciones completas de los widgets.
 
 ### `get_datadog_notebook` {#get-datadog-notebook}
 *Conjunto de herramientas: **core***\
 *Permisos requeridos: `Notebooks Read`*\
 Recupera información detallada sobre un notebook específico por ID, incluyendo nombre, estado y autor.
 
-- Obtén detalles del notebook abc-123-def.
-- Muéstrame el contenido del notebook de depuración de ayer.
+- Obtenga los detalles del notebook abc-123-def.
+- Muestre el contenido del notebook de depuración de ayer.
 
 ### `search_datadog_notebooks` {#search-datadog-notebooks}
 *Conjunto de herramientas: **core***\
 *Permisos requeridos: `Notebooks Read`*\
-Lista y busca notebooks de Datadog con filtrado por autor, etiquetas y contenido.
+Enumera y busca notebooks de Datadog con filtrado por autor, etiquetas y contenido.
 
-- Muéstrame todos los notebooks creados por el equipo de plataforma.
-- Encuentra notebooks relacionados con la investigación de rendimiento.
-- Lista los notebooks etiquetados con `incident-response`.
+- Muestre todos los notebooks creados por el equipo de plataforma.
+- Busque notebooks relacionados con la investigación de rendimiento.
+- Enumere los notebooks etiquetados con `incident-response`.
 
 ### `search_datadog_hosts` {#search-datadog-hosts}
-*Conjunto de herramientas: **núcleo***\
+*Conjunto de herramientas: **core***\
 *Permisos requeridos: `Hosts Read` y `Timeseries`*\
-Lista y proporciona información sobre los servidores monitoreados, soportando filtrado y búsqueda.
+Enumera y proporciona información sobre los hosts monitoreados, permitiendo filtrar y buscar.
 
-- Muéstrame todos los servidores en nuestro entorno de producción.
-- Lista los servidores no saludables que no han reportado en la última hora.
-- Obtén todos los servidores etiquetados con `role:database`.
+- Muestre todos los hosts en nuestro entorno de producción.
+- Enumere los hosts en mal estado que no han reportado en la última hora.
+- Obtenga todos los hosts etiquetados con `role:database`.
 
 ### `search_datadog_incidents` {#search-datadog-incidents}
 *Conjunto de herramientas: **core***\
 *Permisos requeridos: `Incidents Read`*\
-Recupera una lista de incidentes de Datadog, incluyendo su estado, severidad y metadatos.
+Recupera una lista de incidentes de Datadog, incluyendo su estado, gravedad y metadatos.
 
-- Muéstrame todos los incidentes activos por severidad.
-- Lista los incidentes resueltos de la última semana.
-- Encuentra incidentes que impactan a los clientes.
+- Muestre todos los incidentes activos por gravedad.
+- Enumere los incidentes resueltos de la última semana.
+- Busque incidentes que afecten a los clientes.
 
 ### `search_datadog_metrics` {#search-datadog-metrics}
 *Conjunto de herramientas: **core***\
 *Permisos requeridos: `Metrics`*\
-Lista las métricas disponibles, con opciones para filtrar y metadatos.
+Enumera las métricas disponibles, con opciones de filtrado y metadatos.
 
-- Muéstrame todas las métricas de Redis disponibles.
-- Lista las métricas relacionadas con la CPU para nuestra infraestructura.
-- Encuentra métricas etiquetadas con `service:api`.
+- Muestre todas las métricas de Redis disponibles.
+- Enumere las métricas relacionadas con la CPU para nuestra infraestructura.
+- Busque métricas etiquetadas con `service:api`.
 
 ### `search_datadog_services` {#search-datadog-services}
 *Conjunto de herramientas: **core***\
 *Permisos requeridos: `Service Catalog Read`*\
-Lista los servicios en el Catálogo de Datadog con detalles e información del equipo.
+Enumera los servicios en el Catálogo de Datadog con detalles e información del equipo.
 
-- Muéstrame todos los servicios en nuestra arquitectura de microservicios.
-- Lista los servicios propiedad del equipo de plataforma.
-- Encuentra servicios relacionados con el procesamiento de pagos.
+- Muestre todos los servicios en nuestra microservices architecture.
+- Enumere los servicios propiedad del equipo de plataforma.
+- Encuentre servicios relacionados con el procesamiento de pagos.
 
 ### `search_datadog_service_dependencies` {#search-datadog-service-dependencies}
 *Conjunto de herramientas: **core***\
 *Permisos requeridos: `APM Read` y `Service Catalog Read` y `Teams Read`*\
 Recupera las dependencias de servicio (ascendentes/descendentes) y los servicios propiedad de un equipo.
 
-- Muéstreme todos los servicios ascendentes que llaman al servicio de checkout.
-- ¿De qué servicios descendentes depende la API de pagos?
-- Liste todos los servicios que pertenecen al equipo de plataforma.
+- Muestre todos los servicios ascendentes que llaman al servicio de pago.
+- ¿De qué servicios descendentes depende la API de pago?
+- Enumere todos los servicios que pertenecen al equipo de plataforma.
 
 ### `search_datadog_spans` {#search-datadog-spans}
-*Conjunto de herramientas: **núcleo***\
+*Conjunto de herramientas: **core***\
 *Permisos requeridos: `APM Read`*\
-Recupera los tramos de las trazas de APM con filtros como servicio, tiempo, recurso, etc.
+Recupera tramos de trazas de APM con filtros como servicio, tiempo, recurso, etcétera.
 
-- Muéstreme los tramos con errores del servicio de checkout.
-- Encuentra consultas lentas a la base de datos en los últimos 30 minutos.
-- Obtén tramos para solicitudes de API fallidas a nuestro servicio de pago.
+- Muéstreme los tramos con errores del servicio de pago.
+- Encuentra consultas de base de datos lentas en los últimos 30 minutos.
+- Obtén los tramos de las solicitudes de API fallidas a nuestro servicio de pago.
 
 ### `analyze_datadog_logs` {#analyze-datadog-logs}
-*Conjunto de herramientas: **núcleo***\
+*Conjunto de herramientas: **core***\
 *Permisos requeridos: `Logs Read Data` y `Logs Read Index Data` y `Timeseries`*\
-Analiza los registros de Datadog utilizando consultas SQL para conteo, agregaciones y análisis numérico. Utiliza esto para análisis estadístico.
+Analiza los Datadog Logs usando consultas SQL para conteos, agregaciones y análisis numérico. Usa esto para análisis estadístico.
 
-- Cuenta los registros de errores por servicio en la última hora.
-- Muéstrame los 10 códigos de estado HTTP principales con sus conteos.
-- ¿Qué servicios estaban registrando más durante ese período de tiempo?
+- Cuenta los registros de error por servicio en la última hora.
+- Muéstreme los 10 códigos de estado HTTP principales con sus conteos.
+- ¿Qué servicios registraban la mayor cantidad de actividad durante ese período de tiempo?
 
 ### `search_datadog_logs` {#search-datadog-logs}
-*Conjunto de herramientas: **núcleo***\
+*Conjunto de herramientas: **core***\
 *Permisos requeridos: `Logs Read Data` y `Logs Read Index Data`*\
-Busca registros con filtros (tiempo, consulta, servicio, host, nivel de almacenamiento, etc.) y devuelve los detalles del registro. Renombrado de `get_logs`.
+Busca registros con filtros (tiempo, consulta, servicio, host, nivel de almacenamiento, etcétera) y devuelve los detalles del registro. Renombrado desde `get_logs`.
 
-- Muéstrame los registros de errores del servicio nginx en la última hora.
-- Encuentra registros que contengan 'tiempo de conexión agotado' de nuestro servicio de API.
-- Obtén todos los registros de código de estado 500 de producción.
+- Muéstreme los registros de error del servicio nginx en la última hora.
+- Encuentre registros que contengan 'connection timeout' de nuestro servicio de API.
+- Obtenga todos los registros de código de estado 500 de producción.
 
 ### `search_datadog_rum_events` {#search-datadog-rum-events}
-*Conjunto de herramientas: **núcleo***\
+*Conjunto de herramientas: **core**, **RUM***\
 *Permisos requeridos: `RUM Apps Read`*\
-Busca eventos de RUM de Datadog utilizando sintaxis de consulta avanzada.
+Busque eventos de RUM de Datadog usando sintaxis de consulta avanzada.
 
 - Muestra errores de JavaScript y advertencias de consola en RUM.
-- Encuentra páginas que se están cargando lentamente (más de 3 segundos).
-- Muestra interacciones recientes de usuarios en las páginas de detalles del producto.
+- Encuentra páginas que se cargan lentamente (más de 3 segundos).
+- Muestra interacciones recientes de usuarios en páginas de detalles de productos.
+
+### `aggregate_rum_events` {#aggregate-rum-events}
+*Conjunto de herramientas: **core**, **RUM***\
+*Permisos requeridos: `RUM Apps Read`*\
+Agrega eventos de RUM para calcular conteos, sumas, promedios, mínimos, máximos, cardinalidad y percentiles, con soporte para agrupación. Úselo para análisis estadístico y datos de tendencias, no para inspeccionar eventos individuales.
+
+- Cuente los errores de JavaScript por página en las últimas 24 horas.
+- Muéstreme el tiempo de carga p95 agrupado por país para mi aplicación principal de RUM.
+- ¿Cuántas sesiones tuvieron un fallo de Core Web Vitals esta semana?
 
 ### `create_datadog_notebook` {#create-datadog-notebook}
-*Conjunto de herramientas: **núcleo***\
+*Conjunto de herramientas: **core***\
 *Permisos requeridos: `Notebooks Read` y `Notebooks Write`*\
 Crea un nuevo notebook de Datadog.
 
-- Cree un notebook para documentar la investigación sobre el aumento de latencia del servicio de checkout.
-- Crea un nuevo notebook para nuestra revisión de rendimiento semanal.
+- Cree un notebook para documentar la investigación sobre el pico de latencia del servicio de pago.
+- Cree un nuevo notebook para nuestra revisión de rendimiento semanal.
 
 ### `edit_datadog_notebook` {#edit-datadog-notebook}
 *Conjunto de herramientas: **núcleo***\
 *Permisos requeridos: `Notebooks Read` y `Notebooks Write`*\
-Edite un notebook existente de Datadog.
+Edite un notebook de Datadog existente.
 
-- Agregue una sección al notebook abc-123-def con los últimos resultados del análisis de registros.
+- Agregue una sección al notebook abc-123-def con los resultados del análisis de registros más recientes.
 - Actualice el notebook de respuesta a incidentes con los hallazgos de hoy.
 
 ## Alerting {#alerting}
@@ -231,7 +240,7 @@ Herramientas para validar monitores, buscar grupos de monitores y recuperar plan
 ### `validate_datadog_monitor` {#validate-datadog-monitor}
 *Conjunto de herramientas: **Alerting***\
 *Permisos requeridos: `Monitors Read`*\
-Valide una definición de monitor para verificar su corrección antes de crearla o actualizarla.
+Valida la definición de un monitor para verificar su exactitud antes de crearlo o actualizarlo.
 
 - Valide esta definición de monitor antes de que la cree.
 - Verifique si la sintaxis de mi consulta de monitor es correcta.
@@ -241,87 +250,87 @@ Valide una definición de monitor para verificar su corrección antes de crearla
 *Permisos requeridos: `Monitors Read`*\
 Recupera las plantillas de monitor disponibles para ayudarte a crear monitores.
 
-- Muéstreme las plantillas de monitor disponibles.
+- Muéstrame las plantillas de monitor disponibles.
 - ¿Qué plantillas puedo usar para crear un nuevo monitor?
 
 ### `search_datadog_monitor_groups` {#search-datadog-monitor-groups}
 *Conjunto de herramientas: **Alerting***\
 *Permisos requeridos: `Monitors Read`*\
-Busque grupos de monitoreo por nombre o criterios.
+Busca grupos de monitores por nombre o criterios.
 
-- Muéstreme todos los grupos de monitoreo en un estado de alerta.
-- Encuentre grupos de monitoreo relacionados con el servicio de checkout.
+- Muéstrame todos los grupos de monitores en estado de alerta.
+- Encuentra grupos de monitores relacionados con el servicio de pago.
 
 ### `search_datadog_slos` {#search-datadog-slos}
 *Conjunto de herramientas: **Alerting***\
 *Permisos requeridos: `SLOs Read`*\
-Las búsquedas de SLOs de Datadog se realizan por nombre, etiquetas o tipo. Soporta la sintaxis de consulta para filtrar por servicio, equipo u otros atributos.
+Busque SLO de Datadog por nombre, etiquetas o tipo. Admite sintaxis de consulta para filtrar por servicio, equipo u otros atributos.
 
-- Busca SLOs relacionados con `service:checkout`.
-- Lista todos los SLOs etiquetados con `team:backend`.
-- Lista SLOs para el servicio de pagos.
+- Busque SLO relacionados con `service:checkout`.
+- Enumere todos los SLO etiquetados con `team:backend`.
+- Enumere los SLO para el servicio de pago.
 
 ### `create_datadog_monitor` {#create-datadog-monitor}
-*Conjunto de herramientas: **alerta***\
+*Conjunto de herramientas: **Alerting***\
 *Permisos requeridos: `Monitors Write`*\
-Cree un monitor de Datadog en modo borrador. Los monitores creados con esta herramienta no envían notificaciones y están configurados en prioridad 5 (baja). Utilice `validate_datadog_monitor` para verificar la definición antes de crear y `get_datadog_monitor_templates` para ejemplos de sintaxis de consulta. Después de la creación, publique el monitor en la interfaz de usuario de Datadog.
+Crea un monitor de Datadog en modo borrador. Los monitores creados con esta herramienta no envían notificaciones y se establecen en prioridad 5 (baja). Úselo `validate_datadog_monitor` para verificar la definición antes de crear y `get_datadog_monitor_templates` para ver ejemplos de sintaxis de consulta. Después de la creación, publique el monitor en la interfaz de usuario de Datadog.
 
-- Cree un monitor de alerta de métrica para el alto uso de CPU en el servicio web.
+- Cree un monitor de alerta para el uso elevado de CPU en el servicio web.
 - Configure un monitor de alerta de registro para picos de errores en el servicio de pagos.
-- Cree un monitor para rastrear la latencia p95 para el punto de conexión de checkout.
+- Cree un monitor para rastrear la latencia p95 para el punto final de pago.
 
 ### `get_monitor_coverage` {#get-monitor-coverage}
-*Conjunto de herramientas: **Alerting***\
+*Conjunto de herramientas: **alertas***\
 *Permisos requeridos: `Monitors Read`*\
-Encuentre brechas y cobertura de monitoreo para servicios o hosts. Devuelve qué señales (como tasa de errores, latencia y tasa de solicitudes) están cubiertas por monitores existentes y cuáles están faltando. Utilice `create_datadog_monitor` para llenar brechas.
+Encuentra brechas de monitoreo y cobertura para servicios o hosts. Devuelve qué señales (como tasa de error, latencia y tasa de solicitudes) están cubiertas por los monitores existentes y cuáles faltan. Úselo con `create_datadog_monitor` para llenar los vacíos.
 
 - Obtenga cobertura de monitoreo para `service:checkout`.
-- ¿Qué brechas de monitoreo existen para `host:web-01`?
-- Encuentre servicios que carecen de monitores de tasa de errores.
+- ¿Qué vacíos de monitoreo existen para `host:web-01`?
+- Encuentre servicios a los que les faltan monitores de tasa de error.
 
 ## APM {#apm}
 
-Herramientas para análisis de trazas [APM][50], búsqueda de spans, información de Watchdog e investigación de rendimiento.
+Herramientas para el análisis profundo de trazas [APM][50], búsqueda de tramos, perspectivas de Watchdog e investigación de rendimiento.
 
-<div class="alert alert-info">El <code>apm</code> El conjunto de herramientas está en vista previa. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Regístrese para acceder.</a></div>
+<div class="alert alert-info">El <code>apm</code> El conjunto de herramientas está en vista previa. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Regístrese para obtener acceso.</a></div>
 
 ### `apm_search_spans` {#apm-search-spans}
-*Conjunto de herramientas: **apm***\
+*Conjunto de herramientas: **APM***\
 *Permisos requeridos: `APM Read`*\
-Busque tramos utilizando la sintaxis de consulta APM, con soporte para paginación y filtrado de etiquetas.
+Busque tramos utilizando la sintaxis de consulta de APM, con soporte para paginación y filtrado de etiquetas.
 
-- Muéstreme tramos con errores del servicio de checkout en la última hora.
-- Encuentre consultas lentas a la base de datos que tomen más de 2 segundos.
+- Muéstreme los tramos con errores del servicio de pago en la última hora.
+- Encuentre consultas de base de datos lentas que tardan más de 2 segundos.
 - Busque tramos con `service:payments` y `status:error`.
 
 ### `apm_query_trace` {#apm-query-trace}
-*Conjunto de herramientas: **apm***\
+*Conjunto de herramientas: **APM***\
 *Permisos requeridos: `APM Read`*\
-Consulta los datos de tramo de una traza para filtrar, agregar o clasificar tramos, como encontrar los tramos con mayor tiempo propio o rastrear un error hasta su servicio de origen.
+Consulta los datos de tramos de una traza para filtrar, agregar o clasificar tramos, como encontrar los tramos con mayor tiempo propio o rastrear un error hasta su servicio de origen.
 
 - Encuentre los 5 tramos principales por tiempo propio en la traza `abc123`.
-- Muestre todos los mensajes de error y sus servicios de origen en la traza `abc123`.
-- ¿Qué llamadas a la base de datos en esta traza tomaron más de 500 ms?
+- Muéstreme todos los mensajes de error y sus servicios de origen en la traza `abc123`.
+- ¿Qué llamadas a la base de datos en esta traza tardaron más de 500ms?
 
 ### `apm_discover_span_tags` {#apm-discover-span-tags}
-*Conjunto de herramientas: **apm***\
+*Conjunto de herramientas: **APM***\
 *Permisos requeridos: `APM Read`*\
-Descubra las claves de etiqueta disponibles en los tramos dentro de un rango de tiempo.
+Descubre las claves de etiqueta disponibles en los tramos dentro de un rango de tiempo.
 
 - ¿Qué etiquetas están disponibles en los tramos para `service:checkout`?
 - Muéstreme las claves de etiqueta por las que puedo filtrar en APM.
 
 ### `apm_get_primary_tag_keys` {#apm-get-primary-tag-keys}
-*Conjunto de herramientas: **apm***\
+*Conjunto de herramientas: **APM***\
 *Permisos requeridos: `APM Read`*\
-Recupera las claves de etiqueta primarias configuradas para la organización.
+Recupera las claves de etiqueta principales configuradas para la organización.
 
-- ¿Cuáles son las claves principales de etiqueta de mi organización?
+- ¿Cuáles son las claves de etiqueta principales de mi organización?
 
 ### `apm_search_watchdog_stories` {#apm-search-watchdog-stories}
 *Conjunto de herramientas: **apm***\
 *Permisos requeridos: `APM Read`*\
-Busca historias de detección de anomalías de Watchdog para un servicio dentro de un rango de tiempo, proporcionando información impulsada por IA sobre latencia, tasa de errores y anomalías de tráfico.
+Busca historias de detección de anomalías de Watchdog para un servicio dentro de un rango de tiempo, proporcionando información basada en IA sobre anomalías de latencia, tasa de error y tráfico.
 
 - Muéstrame las anomalías de Watchdog para el servicio de checkout en las últimas 24 horas.
 - ¿Se han detectado anomalías de latencia para mi servicio de API?
@@ -329,1231 +338,1899 @@ Busca historias de detección de anomalías de Watchdog para un servicio dentro 
 ### `apm_get_watchdog_story` {#apm-get-watchdog-story}
 *Conjunto de herramientas: **apm***\
 *Permisos requeridos: `APM Read`*\
-Recupera información detallada sobre una historia específica de Watchdog por su ID.
+Recupera información detallada sobre una historia específica de Watchdog mediante su ID.
 
-- Obtén los detalles de la historia de Watchdog `abc123`.
+- Obtenga los detalles de la historia de Watchdog `abc123`.
 
 ### `apm_latency_bottleneck_summary` {#apm-latency-bottleneck-summary}
 *Conjunto de herramientas: **apm***\
 *Permisos requeridos: `APM Read`*\
-Analiza los cuellos de botella de latencia a través de trazas en un período de anomalía utilizando cálculos de tiempo propio. Identifica qué combinaciones de servicios y recursos consumen más tiempo propio, detecta patrones de llamadas en cascada y revela las causas raíz de los picos de latencia.
+Analiza los cuellos de botella de latencia en las trazas durante un período de anomalía utilizando cálculos de tiempo propio. Identifica qué combinaciones de servicio y recurso consumen la mayor cantidad de tiempo propio, detecta patrones de llamadas en cascada y revela las causas raíz de los picos de latencia.
 
-- Resume los cuellos de botella de latencia para el servicio de checkout entre las 2 p.m. y las 3 p.m. de hoy.
-- ¿Qué está consumiendo más tiempo propio en el servicio de pagos durante este pico de latencia?
-- Identifica cuáles son los puntos de conexión que son los principales cuellos de botella para `service:api` entre las 10:00 y las 10:30.
+- Resuma los cuellos de botella de latencia para el servicio de checkout entre las 2pm y las 3pm de hoy.
+- ¿Qué está consumiendo la mayor cantidad de tiempo propio en el servicio de pagos durante este pico de latencia?
+- Identifique qué endpoints son los principales cuellos de botella para `service:api` entre las 10:00 y las 10:30.
 
 ### `get_change_stories` {#get-change-stories}
 *Conjunto de herramientas: **apm***\
-Recupera historias de cambios de la API de Seguimiento de Cambios para servicios APM. Utiliza esto para identificar qué cambió (despliegues, banderas de características, actualizaciones de configuración y eventos de infraestructura) durante un rango de tiempo y correlacionar cambios con problemas de rendimiento o incidentes.
+Recupera historias de cambios de la API de seguimiento de cambios para servicios de APM. Utilice esto para identificar qué cambió (implementaciones, feature flags, actualizaciones de configuración y eventos de infraestructura) durante un rango de tiempo y correlacionar los cambios con problemas de rendimiento o incidentes.
 
-- Muéstrame los despliegues y cambios recientes para el servicio de pagos.
+- Muéstrame las implementaciones y cambios recientes para el servicio de pagos.
 - ¿Qué cambios de infraestructura ocurrieron alrededor del momento de este pico de latencia?
-- Encuentra cambios en banderas de características y configuraciones para el servicio de checkout en la última hora.
+- Encuentre cambios en feature flag y configuración para el servicio de checkout en la última hora.
 
 ### `semantic_search_change_stories` {#semantic-search-change-stories}
 *Conjunto de herramientas: **apm***\
-Busca historias de cambios utilizando lenguaje natural y búsqueda semántica impulsada por IA. Utilice esto para encontrar cambios en banderas de características o despliegues relacionados con un comportamiento, un problema reportado por un usuario, o una parte del producto que está investigando.
+Busca historias de cambios utilizando lenguaje natural y búsqueda semántica basada en IA. Utilice esto para encontrar feature flag o cambios en implementaciones relacionados con un comportamiento, un problema reportado por el usuario o una parte del producto que esté investigando.
 
-- ¿Qué cambió recientemente que podría afectar la carga del tablero para usuarios en prueba?
-- ¿Qué banderas podrían impactar la autenticación en la página de configuración de facturación?
-- Encuentra cambios relacionados con datos de telemetría faltantes en la última semana.
+- ¿Qué cambió recientemente que podría afectar la carga del tablero para los usuarios de prueba?
+- ¿Qué feature flags podrían afectar la autenticación en la página de configuración de facturación?
+- Encuentre cambios relacionados con la falta de datos de telemetría en la última semana.
 
 ### `apm_search_recommendations` {#apm-search-recommendations}
 *Conjunto de herramientas: **apm***\
 *Permisos requeridos: `APM Read`*\
 Busca recomendaciones de APM de Datadog.
 
-- Muéstrame recomendaciones de APM para mis servicios.
+- Muéstreme las recomendaciones de APM para mis servicios.
 - ¿Hay alguna sugerencia de optimización para mi aplicación?
 
 ### `apm_get_recommendation` {#apm-get-recommendation}
 *Conjunto de herramientas: **apm***\
 *Permisos requeridos: `APM Read`*\
-Recupera detalles completos de una recomendación específica de APM por ID.
+Recupera los detalles completos de una recomendación de APM específica por ID.
 
-- Obtén los detalles de la recomendación `abc123`.
+- Obtenga los detalles de la recomendación `abc123`.
+
+## Audit Trail {#audit-trail}
+
+Herramientas para [Audit Trail][71], que incluyen la búsqueda y recuperación de eventos de Audit Trail y la creación de consultas de búsqueda de Audit Trail.
+
+### `search_audit_events` {#search-audit-events}
+*Conjunto de herramientas: **audit-trail***\
+*Permisos requeridos: `Audit Trail Read`*\
+Busca eventos de Audit Trail utilizando la sintaxis de consulta de Datadog con soporte para paginación. Úselo cuando necesite encontrar y filtrar eventos por atributos específicos. Devuelve eventos de Audit Trail sin metadatos ni valores de activos anteriores o nuevos, a menos que se solicite.
+
+- ¿Quién eliminó el monitor `abc123`?
+- ¿Ha habido intentos fallidos de inicio de sesión en Datadog durante la última semana?
+- Busque en Audit Trail para ver si hubo notificaciones de filtración de clave de API este mes.
+
+### `list_audit_events` {#list-audit-events}
+*Conjunto de herramientas: **audit-trail***\
+*Permisos requeridos: `Audit Trail Read`*\
+Enumere los eventos de Audit Trail durante un intervalo de tiempo con soporte para paginación y una consulta opcional. Úselo para escanear eventos recientes de Audit Trail. Devuelve eventos de Audit Trail sin metadatos ni valores de activos anteriores o nuevos, a menos que se solicite.
+
+- Muéstreme los eventos de Audit Trail de la última hora.
+
+### `build_audit_trail_query` {#build-audit-trail-query}
+*Conjunto de herramientas: **audit-trail***\
+*Permisos requeridos: `Audit Trail Read`*\
+Traduce una descripción en lenguaje natural a una cadena de consulta de Audit Trail. Si no está seguro de la sintaxis de consulta al buscar eventos de Audit Trail, utilice esta herramienta primero con una descripción de los eventos que desea recuperar, luego pase la consulta devuelta y las marcas de tiempo directamente a `search_audit_events`.
+
+- Proporcione una consulta de Audit Trail para ver quién creó nuevos monitores en las últimas 2 semanas.
+- Cree una consulta de Audit Trail para mostrar cuándo se eliminó el dashboard `abc123`.
+- Genere una consulta de Audit Trail para verificar qué acciones se ejecutaron a través del servidor Datadog MCP.
 
 ## Casos {#cases}
 
-Herramientas para [Case Management][38], incluyendo la creación, búsqueda y actualización de casos; gestión de proyectos; y vinculación de problemas de Jira.
+Herramientas para [Case Management][38], que incluyen la creación, búsqueda y actualización de casos; la gestión de proyectos; y la vinculación de incidencias de Jira.
 
 ### `search_datadog_cases` {#search-datadog-cases}
 *Conjunto de herramientas: **casos***\
 *Permisos requeridos: `Cases Read`*\
-Busca casos de [Case Management][38] con filtros que incluyen estado, prioridad, proyecto y asignado. Soporta filtrado por rango de tiempo y paginación.
+Busca casos en [Case Management][38] con filtros que incluyen estado, prioridad, proyecto y responsable. Admite filtrado por rango de tiempo y paginación.
 
 - Muéstrame todos los casos abiertos asignados a mí.
-- ¿Hay algún caso P1 abierto en el proyecto Security Reviews?
+- ¿Hay algún caso P1 abierto en el proyecto de Revisiones de Seguridad?
 - Muéstrame todos los casos abiertos esta semana relacionados con el servicio de pago.
 
 ### `get_datadog_case` {#get-datadog-case}
 *Conjunto de herramientas: **casos***\
 *Permisos requeridos: `Cases Read`*\
-Recupera información detallada sobre un caso específico por ID o clave, incluyendo título, estado, prioridad, asignado y marcas de tiempo. Opcionalmente incluye actividad de la línea de tiempo (comentarios y cambios de estado) y atributos personalizados.
+Recupera información detallada sobre un caso específico por ID o clave, incluyendo título, estado, prioridad, responsable y marcas de tiempo. Opcionalmente incluye la actividad de la línea de tiempo (comentarios y cambios de estado) y atributos personalizados.
 
 - ¿Cuál es la última actualización sobre CASE-1234? Muéstrame la línea de tiempo completa.
 - ¿Quién está trabajando en este caso y qué progreso se ha hecho hasta ahora?
-- Muestra los detalles y todos los comentarios para el caso de migración de base de datos.
+- Muestre los detalles y todos los comentarios para el caso de migración de base de datos.
 
 ### `create_datadog_case` {#create-datadog-case}
 *Conjunto de herramientas: **casos***\
 *Permisos requeridos: `Cases Write`*\
-Crea un nuevo caso de [Case Management][38] con un título, proyecto y campos opcionales como descripción, prioridad y asignado.
+Crea un nuevo caso de [Case Management][38] con un título, proyecto y campos opcionales como descripción, prioridad y responsable.
 
-- Estoy viendo un aumento de latencia en el servicio de checkout. Crea un caso P2 para rastrear la investigación.
-- Abre un caso de Security Review para la actividad de inicio de sesión sospechosa que encontramos en los registros.
+- Estoy viendo un pico de latencia en el servicio de checkout. Cree un caso P2 para realizar el seguimiento de la investigación.
+- Abra un caso de revisión de seguridad para la actividad de inicio de sesión sospechosa que encontramos en los registros.
 
 ### `update_datadog_case` {#update-datadog-case}
 *Conjunto de herramientas: **casos***\
 *Permisos requeridos: `Cases Write`*\
-Actualiza los campos de un caso existente, como estado, prioridad, título, descripción, asignado, fecha de vencimiento y atributos personalizados. Solo se actualizan los campos que proporciones.
+Actualiza los campos de un caso existente, como el estado, la prioridad, el título, la descripción, el responsable, la fecha de entrega y los atributos personalizados. Solo se actualizan los campos que proporciones.
 
-- Este problema ahora afecta al cliente. Escala el caso CASE-1234 a P1.
-- Marca el caso de migración de base de datos como resuelto.
-- Establece una fecha de vencimiento para el final de la semana en el caso CASE-1234.
+- Este problema ahora afecta al cliente. Escale CASE-1234 a P1.
+- Marque el caso de migración de base de datos como resuelto.
+- Establezca una fecha de entrega para el final de la semana en CASE-1234.
 
 ### `add_comment_to_datadog_case` {#add-comment-to-datadog-case}
-*Conjunto de herramientas: **casos***\
+*Conjunto de herramientas: **cases***\
 *Permisos requeridos: `Cases Write`*\
 Agrega un comentario a la línea de tiempo de un caso. Los comentarios admiten formato markdown.
 
-- Agrega una nota al caso resumiendo lo que encontramos en los registros y trazas.
-- Publica una actualización de que el hotfix ha sido implementado y estamos haciendo seguimiento.
-- Documenta los hallazgos del análisis de la causa raíz en este caso.
+- Agregue una nota al caso resumiendo lo que encontramos en los registros y trazas.
+- Publique una actualización indicando que el hotfix ha sido implementado y que lo estamos monitoreando.
+- Documente los hallazgos del análisis de causa raíz en este caso.
 
 ### `link_jira_issue_to_datadog_case` {#link-jira-issue-to-datadog-case}
 *Conjunto de herramientas: **casos***\
 *Permisos requeridos: `Cases Write`*
 
-- Vincula el ticket de Jira para la migración de infraestructura a este caso para que podamos rastrear ambos juntos.
-- Conecta PROJ-456 al caso de Datadog para que el equipo de ingeniería tenga visibilidad.
+- Vincule el ticket de Jira para la migración de infraestructura a este caso para que podamos rastrear ambos juntos.
+- Conecte PROJ-456 al caso de Datadog para que el equipo de ingeniería tenga visibilidad.
 
 ### `list_datadog_case_projects` {#list-datadog-case-projects}
 *Conjunto de herramientas: **casos***\
 *Permisos requeridos: `Cases Read`*\
-Lista los proyectos disponibles de [Case Management][38] con filtrado opcional por nombre o clave.
+Enumera los proyectos disponibles en [Case Management][38] con filtrado opcional por nombre o clave.
 
 - ¿Qué proyectos están disponibles en Case Management?
-- ¿Hay un proyecto relacionado con la seguridad en Case Management?
+- ¿Hay algún proyecto relacionado con seguridad en Case Management?
 
 ### `get_datadog_case_project` {#get-datadog-case-project}
 *Conjunto de herramientas: **casos***\
 *Permisos requeridos: `Cases Read`*\
-Recupera detalles de un proyecto de Case Management específico por ID.
+Recupera los detalles de un proyecto de caso específico por ID.
 
 - ¿De qué proyecto forma parte este caso?
 
 ### `search_datadog_users` {#search-datadog-users}
 *Conjunto de herramientas: **casos***\
 *Permisos requeridos: `User Access Read`*\
-Busca usuarios de Datadog por correo electrónico, nombre o identificador. Útil para encontrar a la persona adecuada a la que asignar un caso.
+Busca usuarios de Datadog por correo electrónico, nombre o identificador. Útil para encontrar a la persona adecuada a quien asignar un caso.
 
-- Encuentra la cuenta de usuario de Datadog para jane.doe@example.com.
+- Encuentre la cuenta de usuario de Datadog para jane.doe@example.com.
+
+## Cloud Cost Management {#cloud-cost-management}
+
+Herramientas para [Cloud Cost Management][64], incluida la lista de recomendaciones de ahorro de costos clasificadas por el ahorro diario potencial estimado.
+
+### `cost_recommendations` {#cost-recommendations}
+*Conjunto de herramientas: **costo***\
+*Permisos requeridos: `Cloud Cost Management Read`*\
+Enumera las recomendaciones de ahorro de costos de Cloud Cost Management de una organización, clasificadas por el ahorro diario potencial estimado (primero las más altas). Admite filtrado por facetas por proveedor de nube, tipo de recomendación, estado, umbral de ahorro y etiquetas de recursos, junto con paginación y un resumen del recuento total y el ahorro diario potencial total.
+
+#### Ejemplos de consultas: {#examples-of-queries}
+
+- ¿Cuáles son mis principales recomendaciones de ahorro de costos en la nube?
+- ¿Cuánto podría ahorrar por día y cuántas recomendaciones abiertas tengo?
+- ¿Cuál de nuestras optimizaciones de clúster de Kubernetes ya tiene el equipo en marcha?
 
 ## Ejecución de código {#code-execution}
 
-Una única herramienta que ejecuta TypeScript escrito por agentes en un entorno controlado por Datadog con acceso directo a las APIs de Datadog, para investigaciones de múltiples señales y exploración de datos ad-hoc en una sola llamada.
+Una única herramienta que ejecuta TypeScript creado por el agente en un entorno aislado administrado por Datadog con acceso directo a las API de Datadog, para la investigación de múltiples señales y la exploración de datos ad-hoc en una sola llamada.
 
-<div class="alert alert-info">El <code>code-exec</code> El conjunto de herramientas está en vista previa. <a href="https://www.datadoghq.com/product-preview/mcp-codexec/">Regístrese</a> para la vista previa o contacte a <a href="/help">Datadog support</a> para solicitar acceso.</div>
+<div class="alert alert-info">El <code>code-exec</code> conjunto de herramientas está en vista previa. <a href="https://www.datadoghq.com/product-preview/mcp-codexec/">Regístrese</a> para la vista previa o contacte a <a href="/help">soporte de Datadog</a> para solicitar acceso.</div>
 
-El código ejecutado por este conjunto de herramientas se ejecuta contra sus APIs de Datadog utilizando su propia identidad de usuario. El entorno aplica sus [permisos de rol existentes][56] a cada llamada a la API, por lo que un agente solo puede leer o modificar datos a los que ya puede acceder en Datadog.
+El código ejecutado por este conjunto de herramientas se ejecuta contra sus APIs de Datadog utilizando su propia identidad de usuario. El entorno aislado aplica sus [permisos de rol][56] existentes a cada llamada de API, por lo que un agente solo puede leer o modificar datos a los que usted ya puede acceder en Datadog.
 
 ### `execute_code` {#execute-code}
-*Conjunto de herramientas: **ejecución-de-código***\
+*Conjunto de herramientas: **code-exec***\
 *Permisos requeridos: Cualquier permiso de rol específico del producto necesario para acceder a los recursos subyacentes de Datadog con los que interactúa el código ejecutado (por ejemplo, `Logs Read` para leer registros).*\
-Ejecuta TypeScript escrito por agentes de IA en un sandbox gestionado por Datadog. El código recibe un `dd.*` espacio de nombres con herramientas para consultar registros, métricas, trazas, servicios, eventos de cambio, incidentes, monitores, Dashboards y otras APIs de Datadog, y devuelve un valor estructurado al agente. Esto puede reducir la cantidad de viajes de ida y vuelta necesarios para investigaciones de múltiples señales y exploración de datos ad-hoc.
+Ejecuta TypeScript creado por un agente de IA en un entorno aislado gestionado por Datadog. El código recibe un espacio de nombres `dd.*` con asistentes para consultar registros, métricas, trazas, servicios, eventos de cambio, incidentes, monitores, tableros y otras APIs de Datadog, y devuelve un valor estructurado al agente. Esto puede reducir la cantidad de viajes de ida y vuelta necesarios para investigaciones de señales múltiples y exploración de datos ad-hoc.
 
-- Para el `checkout-api` servicio en las últimas dos horas, extraiga registros de errores, métricas de latencia y despliegues recientes y indíqueme qué despliegue coincide con el pico de errores.
-- Compare los conteos de tramos de error, alertas de Monitors y cambios de configuración para el `payments` servicio durante el último día, e identifique cualquier elemento que se haya movido al mismo tiempo.
-- Para `auth-service`, correlacione los principales patrones de error en los registros con las métricas de CPU y memoria de la última hora para determinar si los errores se deben a la presión de recursos.
+- Para el servicio `checkout-api` en las últimas dos horas, extraiga los registros de errores, las métricas de latencia y las implementaciones recientes, y dígame qué implementación coincide con el pico de errores.
+- Compare los conteos de tramos de error, las alertas de monitores y los cambios de configuración para el servicio `payments` durante el último día, e identifique cualquier cosa que se haya movido al mismo tiempo.
+- Para `auth-service`, correlacione los patrones de error principales en los registros con las métricas de CPU y memoria de la última hora para ver si los errores siguen la presión de los recursos.
 
 ## Dashboards {#dashboards}
 
-Herramientas para recuperar, crear, actualizar y eliminar [dashboards][46], además de referencia y validación del esquema de widgets.
+Herramientas para recuperar, crear, actualizar y eliminar [Dashboards][46], además de referencia y validación del esquema de widgets.
 
 ### `get_datadog_dashboard` {#get-datadog-dashboard}
-*Conjunto de herramientas: **core**, **Dashboards***\
+*Conjunto de herramientas: **core**, **dashboards***\
 *Permisos requeridos: `Dashboards Read` y `User Access Read`*\
-Recupera un [dashboard][46] de Datadog por ID, devolviendo su título, descripción, etiquetas y widgets. Utilice `search_datadog_dashboards` primero para encontrar los IDs de los Dashboards.
+Recupera un [Dashboard][46] de Datadog por ID, devolviendo su título, descripción, etiquetas y widgets. Use `search_datadog_dashboards` primero para encontrar los IDs de dashboard.
 
-- Obtenga los detalles completos del Dashboard `ps7-mn3-kwf`.
-- Muéstreme los widgets y el diseño del Dashboard de visión general de infraestructura.
-- Recupere las variables de plantilla configuradas en este Dashboard.
+- Obtenga los detalles completos del dashboard `ps7-mn3-kwf`.
+- Muéstreme los widgets y el diseño del dashboard de descripción general de la infraestructura.
+- Recupere las variables de plantilla configuradas en este dashboard.
 
 ### `upsert_datadog_dashboard` {#upsert-datadog-dashboard}
-*Conjunto de herramientas: **core**, **Dashboards***\
+*Conjunto de herramientas: **core**, **dashboards***\
 *Permisos requeridos: `Dashboards Read` y `Dashboards Write`*\
-Crea o actualiza un [dashboard][46] de Datadog. Para actualizar un Dashboard existente, proporcione el ID del Dashboard; omítalo para crear uno nuevo. Llame a `get_widget_reference` para los esquemas de widgets antes de construir widgets.
+Crea o actualiza un [dashboard][46] de Datadog. Para actualizar un [dashboard] existente, proporcione el ID del dashboard; omítalo para crear uno nuevo. Llame a `get_widget_reference` para obtener esquemas de widgets antes de crear widgets.
 
-- Cree un Dashboard que muestre el uso de CPU y memoria en todos los hosts.
-- Agregue un widget de series temporales para la tasa de errores al Dashboard `abc-123-def`.
-- Actualice el título y la descripción de mi Dashboard de visión general de servicio.
+- Cree un dashboard que muestre el uso de CPU y memoria en todos los hosts.
+- Agregue un widget de series temporales para la tasa de error al dashboard `abc-123-def`.
+- Actualice el título y la descripción de mi dashboard de resumen de servicio.
 
 ### `delete_datadog_dashboard` {#delete-datadog-dashboard}
-*Conjunto de herramientas: **Dashboards***\
+*Conjunto de herramientas: **dashboards***\
 *Permisos requeridos: `Dashboards Read` y `Dashboards Write`*\
-Elimine permanentemente un [dashboard][46] de Datadog por ID. Esta acción no se puede deshacer. Utilice `search_datadog_dashboards` primero para encontrar los IDs de los Dashboards.
+Elimina permanentemente un [dashboard][46] de Datadog por ID. Esta acción no se puede deshacer. Use `search_datadog_dashboards` primero para encontrar los IDs de dashboard.
 
-- Elimine el Dashboard `ps7-mn3-kwf`.
-- Elimine el antiguo Dashboard del entorno de staging.
+- Elimine el dashboard `ps7-mn3-kwf`.
+- Elimine el dashboard del entorno de ensayo antiguo.
 
 ### `get_widget_reference` {#get-widget-reference}
-*Conjunto de herramientas: **Dashboards***\
+*Conjunto de herramientas: **dashboards***\
 *Permisos requeridos: `Dashboards Read` o `Dashboards Write` o `Notebooks Read`*\
-Devuelve esquemas e instrucciones de construcción para los tipos de widgets de Dashboard. Las definiciones de widgets son objetos JSON; esta herramienta devuelve definiciones de tipo TypeScript que representan sus esquemas junto con instrucciones de construcción que cubren patrones de consulta, sintaxis de fórmulas y errores comunes. Llame a esto antes de generar widgets con `upsert_datadog_dashboard`.
+Devuelve esquemas e instrucciones de creación para tipos de widgets de dashboard. Las definiciones de widgets son objetos JSON; esta herramienta devuelve definiciones de tipo TypeScript que representan sus esquemas junto con instrucciones de creación que cubren patrones de consulta, sintaxis de fórmulas y errores comunes. Llame a esto antes de generar widgets con `upsert_datadog_dashboard`.
 
 - Obtenga el esquema para un widget de series temporales.
-- Muéstreme cómo construir un widget de lista de los mejores y un widget de tabla de consulta.
-- ¿Cuál es el esquema para el widget de diagrama de dispersión?
+- Muéstreme cómo crear un widget de lista superior y una tabla de consulta.
+- ¿Cuál es el esquema para el widget de gráfico de dispersión?
 
 ### `validate_dashboard_widget` {#validate-dashboard-widget}
 *Conjunto de herramientas: **tableros***\
 *Permisos requeridos: `Dashboards Read` o `Dashboards Write` o `Notebooks Read`*\
-Valida una definición de widget contra el esquema del tablero. Utiliza esto para verificar el JSON del widget antes de pasarlo a `upsert_datadog_dashboard`.
+Valida una definición de widget contra el esquema del tablero. Usa esto para verificar el JSON del widget antes de pasarlo a `upsert_datadog_dashboard`.
 
 - Valida mi definición de widget de series temporales antes de crear el tablero.
-- Verifica si el JSON de este widget de tabla de consulta es correcto.
+- Verifica si este JSON de widget de tabla es correcto.
 
 ### `ask_widget_expert` {#ask-widget-expert}
 *Conjunto de herramientas: **tableros***\
 *Permisos requeridos: `Dashboards Read` o `Dashboards Write` o `Notebooks Read`*\
-Hazle una pregunta a un experto en widgets de Datadog sobre la configuración de widgets, esquemas, sintaxis de consultas, uso de campos, depuración o problemas comunes. Mejor para preguntas específicas: búsquedas de esquemas, aclaraciones de campos, depuración de una definición de widget existente o comprensión de cómo funciona un tipo específico de widget.
+Haga una pregunta a un experto en widgets de Datadog sobre la configuración de widgets, esquemas, sintaxis de consultas, uso de campos, depuración o dificultades. Ideal para preguntas específicas: consultas de esquemas, aclaraciones de campos, depuración de una definición de widget existente o comprensión de cómo funciona un tipo de widget específico.
 
-- ¿Qué formato de respuesta debo usar para una lista de los mejores?
-- ¿Cuál es el esquema para el widget de diagrama de dispersión?
+- ¿Qué response_format debo usar para una lista superior?
+- ¿Cuál es el esquema para el widget de gráfico de dispersión?
 - Ayúdeme a depurar por qué este widget muestra valores fraccionarios cuando debería ser un conteo.
-- ¿Cómo se configura una serie temporal para mostrar tanto barras como líneas?
+- ¿Cómo configuro un widget de series temporales para mostrar tanto barras como líneas?
 
-## DBM {#database-monitoring}
+## Data Observability {#data-observability}
 
-Herramientas para interactuar con [DBM][26].
+Herramientas para [Data Observability][70], que incluyen búsqueda en el catálogo de datos, análisis de linaje, monitoreo de la calidad de los datos y recomendaciones de costo y rendimiento para almacenes de datos y trabajos de Spark.
+
+### `search_data_entities` {#search-data-entities}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `Monitors Read` o `APM Read`*\
+Busca entidades de datos en el catálogo de datos por nombre, búsqueda de texto completo o filtros (plataforma, esquema, base de datos, cuenta).
+
+- Encuentra tablas llamadas \"orders\" en Snowflake.
+- Enumere todos los modelos dbt que comiencen con `stg_`.
+- ¿Qué esquemas existen en mi proyecto de BigQuery?
+
+### `get_data_catalog_schema` {#get-data-catalog-schema}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `Monitors Read` o `APM Read`*\
+Devuelve el esquema de tipo de entidad para cada plataforma con datos en el catálogo: tipos de entidad, jerarquía de contención, atributos filtrables y métricas predeterminadas.
+
+- ¿Qué plataformas están conectadas a Data Observability?
+- ¿Qué tipos de entidad existen para Databricks?
+- ¿Qué métricas están disponibles para una entidad de tabla?
+
+### `get_data_entity_details` {#get-data-entity-details}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `Monitors Read` o `APM Read`*\
+Obtiene los detalles completos y atributos (propietario, etiquetas, atributos personalizados, plataforma, esquema, base de datos, cuenta) para una o más entidades de datos por ID.
+
+- Obtenga los atributos completos de esta entidad de tabla.
+- ¿Quién es el propietario de este conjunto de datos?
+
+### `get_data_entity_hierarchy` {#get-data-entity-hierarchy}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `Monitors Read` o `APM Read`*\
+Obtiene la jerarquía de contención (ancestros y descendientes) para una o más entidades; por ejemplo, a qué base de datos o esquema pertenece una tabla, o qué tablas hay en un esquema.
+
+- ¿A qué base de datos pertenece esta tabla?
+- ¿Qué columnas hay en esta tabla?
+- Muestre la jerarquía completa alrededor de esta entidad.
+
+### `get_data_entity_lineage` {#get-data-entity-lineage}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `Monitors Read` o `APM Read`*\
+Obtiene el subgrafo de linaje alcanzable en vivo (nodos y bordes) desde una o más entidades ancla, ascendente, descendente o ambos.
+
+- ¿Qué entidades se encuentran en el linaje descendente de esta tabla?
+- Muéstreme el linaje ascendente de esta columna.
+- ¿Qué se rompería si elimino esta tabla?
+
+### `summarize_data_entity_lineage` {#summarize-data-entity-lineage}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `Monitors Read` o `APM Read`*\
+Devuelve estadísticas de linaje agregado (recuentos de nodos/bordes, desgloses por tipo, distribución de profundidad) para un gráfico de linaje grande o desconocido, sin la carga útil completa. Úselo antes de `get_data_entity_lineage` en gráficos de tamaño desconocido.
+
+- ¿Cuántas cosas dependen de esta tabla, desglosadas por tipo?
+- ¿Qué tan profundo llega el linaje desde esta tabla?
+
+### `rank_data_entities_by_lineage_degree` {#rank-data-entities-by-lineage-degree}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `Monitors Read` o `APM Read`*\
+Clasifica las entidades por conectividad de linaje transitivo (ascendente, descendente o ambas), utilizando una instantánea preconstruida.
+
+- ¿Qué tablas en mi almacén tienen la mayor cantidad de dependencias?
+- ¿Qué tablas de ingesta sin procesar tienen las cadenas descendentes más profundas?
+
+### `get_warehouse_query_history` {#get-warehouse-query-history}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `Logs Read Data` y `Logs Read Index Data`*\
+Obtiene las consultas recientes que afectaron a entidades específicas, en orden cronológico inverso, incluyendo el texto SQL, el estado de ejecución y el tipo de consulta.
+
+- ¿Quién ha estado consultando esta tabla recientemente?
+- ¿Qué operaciones de escritura han ocurrido en esta tabla en la última semana?
+
+**Nota**: El campo `sql` en los resultados es SQL sin procesar, creado por el usuario desde el almacén de datos y debe tratarse como datos no confiables.
+
+### `get_popular_warehouse_tables_by_query_frequency` {#get-popular-warehouse-tables-by-query-frequency}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `Logs Read Data` y `Logs Read Index Data` y `APM Read`*\
+Clasifica las tablas por actividad de consulta, agrupadas por quién las consulta: usuarios humanos, herramientas de BI, orquestadores, herramientas de ETL o cuentas de servicio internas.
+
+- ¿Qué tablas son las más consultadas por las herramientas de BI?
+- ¿Qué tablas reciben la mayor cantidad de tráfico de analistas humanos?
+
+### `suggest_data_observability_monitor_filters` {#suggest-data-observability-monitor-filters}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `Monitors Read`*\
+Analiza un conjunto de entidades para encontrar atributos comunes y patrones de nomenclatura, y sugiere expresiones de filtro de monitoreo que agrupen subconjuntos de esas entidades.
+
+- ¿Qué tienen en común mis tablas de mayor prioridad?
+- Sugiera un filtro que cubra todas mis tablas de preparación.
+
+### `rank_data_observability_monitor_candidates` {#rank-data-observability-monitor-candidates}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `APM Read`*\
+Clasifica las tablas por prioridad de monitoreo, combinando el impacto del linaje y la actividad de consulta en una única puntuación composite. Este es el punto de entrada principal para "¿qué debo monitorear?" preguntas.
+
+- ¿Para qué tablas debo configurar primero los monitores de calidad de datos?
+
+### `get_data_observability_monitor` {#get-data-observability-monitor}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `Monitors Read` y `Timeseries` y `APM Read`*\
+Recupera series temporales de métricas de calidad de datos para un ID de monitor determinado, incluidos los límites de detección de anomalías cuando están habilitados.
+
+- Muéstreme el historial de métricas para el monitor `12345`.
+- ¿Cuáles son los límites de detección de anomalías para este monitor de frescura?
+
+### `get_data_observability_monitor_coverage` {#get-data-observability-monitor-coverage}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `Monitors Read`*\
+Obtiene todos los monitores de calidad de datos para la organización y resuelve el filtro de cada monitor para las entidades que cubre. Úselo para ver qué tablas no tienen ningún monitoreo.
+
+- ¿Cuáles de mis tablas no están cubiertas por ningún monitor de calidad de datos?
+
+### `get_data_observability_monitor_group_statuses` {#get-data-observability-monitor-group-statuses}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `APM Read`*\
+Consulta el estado actual de alerta y advertencia de los grupos de monitoreo de calidad de datos.
+
+- ¿Qué tablas están fallando actualmente en sus comprobaciones de calidad de datos?
+
+### `get_entity_tags` / `update_entity_tags` {#get-entity-tags-update-entity-tags}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `APM Read` o `Monitors Read` (obtener); `Data Observability Catalog Write` (actualizar)*\
+Obtiene o establece etiquetas personalizadas definidas por el usuario en entidades de datos.
+
+- ¿Qué etiquetas tiene esta tabla?
+- Etiquete esta tabla con `owner:data-platform-team`.
+
+### `get_entity_descriptions` / `update_entity_description` {#get-entity-descriptions-update-entity-description}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `APM Read` o `Monitors Read` (obtener); `Data Observability Catalog Write` (actualizar)*\
+Obtiene o establece descripciones personalizadas definidas por el usuario en entidades de datos.
+
+- ¿Cuál es la descripción de esta tabla?
+- Establezca una descripción que explique para qué se utiliza esta tabla.
+
+### `get_spark_job_health` {#get-spark-job-health}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `APM Read`*\
+Recupera métricas de salud detalladas (duración, tiempo de CPU del ejecutor, mezcla, derrame, etapas más críticas) para una sola ejecución de trabajo de Spark o Databricks.
+
+- ¿Por qué este trabajo de Spark se ejecutó lentamente?
+- Muéstrame las peores etapas para la ejecución más reciente de este trabajo.
+
+### `get_spark_sql_plan` {#get-spark-sql-plan}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `APM Read`*\
+Recupera el plan de ejecución física de Spark SQL para una etapa, incluyendo estrategias de unión, información de mezcla y métricas por nodo.
+
+- Muéstrame el plan de ejecución para esta etapa de Spark.
+
+### `list_data_observability_recommendations` {#list-data-observability-recommendations}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `APM Read`*\
+Enumera las recomendaciones de optimización de costos y rendimiento para trabajos y consultas de datos (Spark, Databricks, Snowflake, BigQuery), con ahorros estimados de costo y duración. Devuelve resúmenes ligeros con paginación de cursor.
+
+- ¿Qué recomendaciones de ahorro de costos tengo para mis trabajos de Databricks?
+- ¿Hay alguna recomendación para reducir la asimetría de datos en mis trabajos de Spark?
+
+### `get_data_observability_recommendation` {#get-data-observability-recommendation}
+*Conjunto de herramientas: **data-observability***\
+*Permisos requeridos: `APM Read`*\
+Recupera los detalles completos de una recomendación específica de Data Observability por ID, incluyendo su cuerpo estructurado que describe el problema, la evidencia y el cambio propuesto.
+
+- Obtenga los detalles de la recomendación `abc123`.
+
+## Database Monitoring {#database-monitoring}
+
+Herramientas para interactuar con [Database Monitoring][26].
 
 ### `find_datadog_database_instances` {#find-datadog-database-instances}
 *Conjunto de herramientas: **dbm***\
 *Permisos requeridos: `Database Monitoring Read`*\
-Descubre y clasifica instancias de base de datos para la investigación de DBM. Llama a esto antes de otras herramientas de DBM que requieran un parámetro `database_instance`. Acepta un ID de traza o un ID de tramo de APM, etiquetas, o ambos para encontrar instancias coincidentes, luego evalúa y clasifica su salud.
+Descubre y clasifica instancias de bases de datos para la investigación de DBM. Llame a esto antes que otras herramientas de DBM que requieran un parámetro `database_instance`. Acepta una traza de APM o un ID de tramo, etiquetas, o ambos para encontrar instancias coincidentes, luego evalúa y clasifica su estado de salud.
 
 - Encuentre instancias de base de datos correlacionadas con la traza `abc123` de hace una hora.
 - ¿Qué instancias de PostgreSQL coinciden con `cluster_name:payments-prod`?
-- Clasifique instancias de base de datos para el servicio `checkout-api` según su salud.
+- Clasifique las instancias de base de datos para el servicio `checkout-api` por estado de salud.
 
 ### `get_datadog_database_calling_services` {#get-datadog-database-calling-services}
 *Conjunto de herramientas: **dbm***\
 *Permisos requeridos: `Database Monitoring Read`*\
-Identifica los servicios y recursos de APM ascendentes que realizan consultas a la base de datos. Correlaciona la actividad de la base de datos con las trazas de la aplicación para el análisis de causa raíz a través de la frontera entre APM y la base de datos.
+Identifica servicios y recursos de APM ascendentes que llaman a consultas de base de datos. Correlaciona la actividad de la base de datos con las trazas de la aplicación para el análisis de causa raíz a través del límite entre APM y la base de datos.
 
 - ¿Qué servicios están llamando a las consultas más lentas en `db-prod-1`?
-- Encuentre al principal llamador de la firma de consulta `abc123def`.
-- Muéstreme los recursos de APM que generan carga en la base de datos de pagos.
+- Encuentra el origen principal de la firma de consulta `abc123def`.
+- Muéstrame los recursos de APM que generan carga en la base de datos de pagos.
 
 ### `get_datadog_database_explain_plans` {#get-datadog-database-explain-plans}
 *Conjunto de herramientas: **dbm***\
 *Permisos requeridos: `Database Monitoring Read`*\
-Recupera planes de explicación de PostgreSQL para una firma de consulta dentro de un marco de tiempo. Devuelve estructuras de plan simplificadas con árboles de operadores, uso de índices y costos estimados, ordenados por costo.
+Recupera los planes de explicación de PostgreSQL para una firma de consulta dentro de un marco de tiempo. Devuelve estructuras de plan simplificadas con árboles de operadores, uso de índices y costos estimados, ordenados por costo.
 
-- Obtenga planes de explicación para la firma de consulta `abc123def` en `db-prod-1`.
+- Obtenga los planes de explicación para la firma de consulta `abc123def` en `db-prod-1`.
 - Muéstreme los planes de ejecución más costosos para esta consulta lenta.
-- ¿Qué variaciones de plan tiene la firma de consulta `xyz789` en el último día?
+- ¿Qué variaciones de plan tiene la firma de consulta `xyz789` durante el último día?
 
 ### `get_datadog_database_health_signals` {#get-datadog-database-health-signals}
 *Conjunto de herramientas: **dbm***\
 *Permisos requeridos: `Database Monitoring Read`*\
-Ejecuta verificaciones de salud para detectar posibles problemas de PostgreSQL, como saturación de CPU, reinicios, latencia de consultas y bloqueos. Compara un marco de tiempo de regresión contra un período base.
+Ejecuta comprobaciones de estado para detectar posibles problemas de PostgreSQL, como saturación de CPU, reinicios, latencia de consultas y bloqueos. Compara un marco de tiempo de regresión con un período de referencia.
 
-- Ejecuta verificaciones de salud en `db-prod-1` durante la última hora en comparación con la hora anterior.
-- Verifica la salud de la base de datos alrededor del marco de tiempo del incidente.
+- Ejecute comprobaciones de estado en `db-prod-1` para la última hora en comparación con la hora anterior.
+- Verifique el estado de la base de datos alrededor del marco de tiempo del incidente.
 - ¿Qué señales explican la regresión en la base de datos de pagos?
 
 ### `get_datadog_database_query_performance` {#get-datadog-database-query-performance}
 *Conjunto de herramientas: **dbm***\
 *Permisos requeridos: `Database Monitoring Read`*\
-Analiza el rendimiento de una consulta específica de PostgreSQL. Devuelve el rendimiento, la latencia promedio, el tiempo de ejecución, las filas por ejecución, la tasa de aciertos en caché, las estadísticas de I/O, la actividad de conexión, los eventos de espera y la duración de la transacción, con estadísticas generales y análisis por intervalos de tiempo.
+Analiza el rendimiento de una consulta específica de PostgreSQL. Devuelve el rendimiento, la latencia promedio, el tiempo de ejecución, las filas por ejecución, la tasa de aciertos de caché, las estadísticas de E/S, la actividad de conexión, los eventos de espera y la duración de la transacción, con estadísticas generales y análisis por intervalos de tiempo.
 
-- Analiza el rendimiento de la firma de consulta `abc123def` durante la última hora.
-- ¿Por qué es lenta esta consulta en la instancia de PostgreSQL de producción?
-- Muestra los eventos de espera y la tasa de aciertos en caché para la firma de consulta `xyz789`.
+- Analice el rendimiento de la firma de consulta `abc123def` durante la última hora.
+- ¿Por qué esta consulta es lenta en la instancia de producción de PostgreSQL?
+- Muéstreme los eventos de espera y la tasa de aciertos de caché para la firma de consulta `xyz789`.
 
 ### `get_datadog_database_query_statement` {#get-datadog-database-query-statement}
 *Conjunto de herramientas: **dbm***\
 *Permisos requeridos: `Database Monitoring Read`*\
-Recupera el texto de la declaración SQL para una firma de consulta dada. Utilice esto para mapear los hashes de firma de vuelta al SQL concreto para investigación e informes.
+Recupera el texto de la sentencia SQL para una firma de consulta determinada. Utilice esto para asignar hashes de firma de nuevo al SQL concreto para investigación y generación de informes.
 
 - Obtenga el SQL para la firma de consulta `abc123def`.
-- Muéstrame la declaración detrás de este hash de consulta en `db-prod-1`.
+- Muéstreme la sentencia detrás de este hash de consulta en `db-prod-1`.
 - ¿A qué consulta corresponde la firma `xyz789`?
 
 ### `get_datadog_database_recommendations` {#get-datadog-database-recommendations}
-*Conjunto de herramientas: **dbm***\
+*Conjunto de herramientas: **Database Monitoring***\
 *Permisos requeridos: `Database Monitoring Read`*\
-Recupera recomendaciones de base de datos en vivo para una base de datos, consulta, tabla, host o índice. Devuelve las recomendaciones coincidentes con estado, severidad y un bloque de contexto normalizado que resalta instancias afectadas, firmas de consulta, tablas, índices, servicios, planes e identificadores de infraestructura.
+Recupera recomendaciones de base de datos en tiempo real para una base de datos, consulta, tabla, host o índice. Devuelve las recomendaciones coincidentes con estado, gravedad y un bloque de alcance normalizado que resalta las instancias afectadas, firmas de consulta, tablas, índices, servicios, planes e identificadores de infraestructura.
 
-- Muestre las recomendaciones de base de datos abiertas para `db-prod-1`.
-- Enumere las recomendaciones de índice faltantes en la base de datos de pagos.
-- Obtenga recomendaciones de alta severidad para la firma de consulta `abc123def`.
+- Muéstreme recomendaciones de base de datos abiertas para `db-prod-1`.
+- Liste recomendaciones de índices faltantes en la base de datos de pagos.
+- Obtenga recomendaciones de alta gravedad para la firma de consulta `abc123def`.
 
 ### `get_datadog_database_schemas` {#get-datadog-database-schemas}
-*Conjunto de herramientas: **dbm***\
+*Conjunto de herramientas: **Database Monitoring***\
 *Permisos requeridos: `Database Monitoring Read`*\
-Recupera definiciones de esquema (columnas, índices, claves foráneas, particiones) para uno o más objetos de base de datos. Acepta nombres de tabla con calificadores opcionales de esquema, base de datos e instancia.
+Obtiene definiciones de esquema (columnas, índices, claves foráneas, particiones) para uno o más objetos de base de datos. Acepta nombres de tabla con calificadores opcionales de esquema, base de datos e instancia.
 
-- Muéstrame el esquema de la tabla `orders`.
+- Muéstreme el esquema para la tabla `orders`.
 - Obtenga columnas e índices para `public.users` en `db-prod-1`.
-- Obtenga claves foráneas para la `payments` tabla.
+- Obtenga claves foráneas para la tabla `payments`.
 
 ### `optimize_datadog_database_query` {#optimize-datadog-database-query}
-*Conjunto de herramientas: **dbm***\
+*Conjunto de herramientas: **Database Monitoring***\
 *Permisos requeridos: `Database Monitoring Read`*\
-Analiza una consulta de PostgreSQL en busca de oportunidades de optimización utilizando reglas determinísticas. Devuelve reescrituras de consultas, detección de anti-patrones (`SELECT *`, `OFFSET` sin `ORDER BY`, `ORDER BY` sin `LIMIT`), sugerencias de índices faltantes y análisis del impacto de inactividad en transacciones. Acepta texto SQL o una firma de consulta.
+Analiza una consulta de PostgreSQL en busca de oportunidades de optimización utilizando reglas deterministas. Devuelve reescrituras de consultas, detección de antipatrones (`SELECT *`, `OFFSET` sin `ORDER BY`, `ORDER BY` sin `LIMIT`), sugerencias de índices faltantes y análisis de impacto de transacciones inactivas. Acepta texto SQL o una firma de consulta.
 
 - Optimice la firma de consulta `abc123def` en la base de datos de pagos.
-- Verifique este SQL en busca de índices faltantes y anti-patrones.
+- Revise este SQL en busca de índices faltantes y antipatrones.
 - Sugiera reescrituras para la consulta más lenta en `db-prod-1`.
 
 ### `search_datadog_database_plans` {#search-datadog-database-plans}
-*Conjunto de herramientas: **dbm***\
+*Conjunto de herramientas: **Database Monitoring***\
 *Permisos requeridos: `Database Monitoring Read`*\
-Busca planes de ejecución de consultas [Monitoreo de Base de Datos][26], que muestran cómo el motor de base de datos ejecuta consultas, incluyendo el uso de índices, estrategias de unión y estimaciones de costos. Utilice esto para analizar el rendimiento de las consultas e identificar oportunidades de optimización.
+Busque planes de ejecución de consultas en [Database Monitoring][26], los cuales muestran cómo el motor de base de datos ejecuta las consultas, incluyendo el uso de índices, estrategias de unión y estimaciones de costo. Utilice esto para analizar el rendimiento de las consultas e identificar oportunidades de optimización.
 
-- Muéstreme los planes de ejecución para consultas lentas en `host:db-prod-1` de la última hora.
-- Encuentre planes de consulta con `@db.plan.type:explain_analyze` para la base de datos de producción.
-- Obtenga planes de ejecución para consultas por `@db.user:app_user` con una duración mayor a 1 segundo.
+- Muéstreme los planes de ejecución para las consultas lentas en `host:db-prod-1` de la última hora.
+- Busque planes de consulta con `@db.plan.type:explain_analyze` para la base de datos de producción.
+- Obtenga los planes de ejecución para las consultas por `@db.user:app_user` con una duración mayor a 1 segundo.
 
 ### `search_datadog_database_samples` {#search-datadog-database-samples}
 *Conjunto de herramientas: **dbm***\
 *Permisos requeridos: `Database Monitoring Read`*\
-Busca [Monitoreo de Base de Datos][26] muestras de consultas, que representan ejecuciones individuales de consultas con métricas de rendimiento. Utilice esto para analizar patrones de actividad en la base de datos, identificar consultas lentas e investigar problemas de rendimiento de la base de datos.
+Busca muestras de consultas en [Database Monitoring][26], las cuales representan ejecuciones de consultas individuales con métricas de rendimiento. Utilice esto para analizar patrones de actividad de la base de datos, identificar consultas lentas e investigar problemas de rendimiento de la base de datos.
 
-- Muéstreme muestras de consultas con `@duration:>1000000000` (duración mayor a 1 segundo) de `db:mydb`.
-- Encuentre consultas lentas en `host:db-prod-1` filtradas por `@db.user:app_user`.
-- Obtenga muestras recientes de consultas para `@db.query_signature:abc123def` y analice patrones de rendimiento.
+- Muéstrame muestras de consultas con `@duration:>1000000000` (duración mayor a 1 segundo) de `db:mydb`.
+- Encuentra consultas lentas en `host:db-prod-1` filtradas por `@db.user:app_user`.
+- Obtenga muestras de consultas recientes para `@db.query_signature:abc123def` y analiza los patrones de rendimiento.
 
 ## DDSQL {#ddsql}
 
-Herramientas para consultar datos de Datadog usando [DDSQL][41], un dialecto SQL con soporte para recursos de infraestructura, registros, métricas, RUM, spans y otras fuentes de datos de Datadog.
+Herramientas para consultar datos de Datadog mediante [DDSQL][41], un dialecto de SQL con soporte para recursos de infraestructura, registros, métricas, RUM, tramos y otras fuentes de datos de Datadog.
 
 ### `ddsql_get_spec` {#ddsql-get-spec}
 *Conjunto de herramientas: **ddsql***\
-Obtiene una especificación compacta de capacidades de DDSQL, incluyendo funciones SQL soportadas, palabras clave SQL y diferencias específicas de DDSQL con respecto a PostgreSQL estándar. Llame a esta herramienta antes de componer consultas para entender la sintaxis soportada.
+Obtiene una especificación compacta de las capacidades de DDSQL, incluyendo funciones SQL compatibles, palabras clave de SQL y las diferencias específicas de DDSQL respecto al PostgreSQL estándar. Utilice esta herramienta antes de redactar consultas para comprender la sintaxis admitida.
 
-- ¿Qué funciones SQL son soportadas en DDSQL?
-- Muéstreme las reglas de sintaxis de consultas de DDSQL y las diferencias con PostgreSQL.
+- ¿Qué funciones SQL son compatibles en DDSQL?
+- Muéstrame las reglas de sintaxis de consultas de DDSQL y las diferencias con PostgreSQL.
 - ¿Qué funciones de agregación puedo usar en DDSQL?
 
 ### `ddsql_schema_search_tables` {#ddsql-schema-search-tables}
 *Conjunto de herramientas: **ddsql***\
-Busca conjuntos de datos de DDSQL y devuelve tablas (fuentes de datos públicas y tablas de referencia) y métricas disponibles.
+Busca conjuntos de datos de DDSQL y devuelve tablas (fuentes de datos públicas y tablas de referencia) y las métricas disponibles.
 
 - ¿Qué tablas están disponibles para consultar en DDSQL?
-- Busque tablas de DDSQL relacionadas con Kubernetes.
-- Muéstreme las métricas disponibles que puedo consultar con DDSQL.
+- Busca tablas de DDSQL relacionadas con Kubernetes.
+- Muéstrame las métricas disponibles que puedo consultar con DDSQL.
 
 ### `ddsql_schema_get_table_columns` {#ddsql-schema-get-table-columns}
 *Conjunto de herramientas: **ddsql***\
 Obtiene columnas SQL estáticas para una tabla de DDSQL a partir de los metadatos del esquema.
 
 - ¿Qué columnas están disponibles en la tabla `aws.ec2_instance`?
-- Muéstreme el esquema de la tabla `k8s.pods`.
+- Muéstrame el esquema de la tabla `k8s.pods`.
 
 ### `ddsql_schema_search_unstructured_fields` {#ddsql-schema-search-unstructured-fields}
 *Conjunto de herramientas: **ddsql***\
-Busque y clasifique campos para fuentes no estructuradas de DDSQL, como registros, RUM y spans, ordenados por frecuencia. Utilice esta herramienta para el descubrimiento de esquemas en fuentes buscables antes de recurrir a `ddsql_schema_get_table_columns`.
+Busca y clasifica campos para fuentes de DDSQL no estructuradas, como registros, RUM y tramos, ordenados por frecuencia. Utiliza esta herramienta para el descubrimiento de esquemas en fuentes buscables antes de recurrir a `ddsql_schema_get_table_columns`.
 
 - ¿Qué campos están disponibles en los registros de DDSQL?
-- Encuentre campos relacionados con `service` en mis datos de RUM.
-- Muéstreme los campos más comunes en mis datos de span.
+- Encuentra campos relacionados con `service` en mis datos de RUM.
+- Muéstrame los campos más comunes en mis datos de tramos.
 
 ### `ddsql_run_query` {#ddsql-run-query}
 *Conjunto de herramientas: **ddsql***\
-Ejecuta una consulta DDSQL y devuelve los resultados. Soporta el uso de sintaxis SQL para consultar recursos de infraestructura, registros, métricas, RUM, spans y otras fuentes de datos de Datadog. Consulte el [DDSQL Reference][42] para detalles de sintaxis.
+Ejecuta una consulta de DDSQL y devuelve los resultados. Admite el uso de sintaxis SQL para consultar recursos de infraestructura, registros, métricas, RUM, tramos y otras fuentes de datos de Datadog. Consulta la [Referencia de DDSQL][42] para obtener detalles sobre la sintaxis.
 
-- ¿Cuántas instancias de EC2 están en ejecución en cada región de AWS?
-- Muéstreme los 10 principales servicios por conteo de registros de error en la última hora.
-- Consulta el uso promedio de CPU agrupado por host en las últimas 24 horas.
+- ¿Cuántas instancias EC2 se están ejecutando en cada región de AWS?
+- Muéstrame los 10 servicios principales por recuento de registros de errores en la última hora.
+- Consulta el uso promedio de CPU agrupado por host durante las últimas 24 horas.
 
 ### `ddsql_create_link` {#ddsql-create-link}
 *Conjunto de herramientas: **ddsql***\
-Genera un enlace de interfaz de usuario de Datadog al [Editor de DDSQL][41] con una consulta dada pre-poblada.
+Genera un enlace de la interfaz de usuario de Datadog al [Editor de DDSQL][41] con una consulta determinada precargada.
 
-- Genere un enlace al [DDSQL Editor] para esta consulta.
-- Cree un enlace compartible al [DDSQL Editor] con mi consulta de infraestructura.
+- Genera un enlace al DDSQL Editor para esta consulta.
+- Crea un enlace compartible al DDSQL Editor con mi consulta de infraestructura.
 
 ## Error Tracking {#error-tracking}
 
-Herramientas para interactuar con Datadog [Error Tracking][49].
+Herramientas para interactuar con el [Error Tracking][49] de Datadog.
 
 ### `search_datadog_error_tracking_issues` {#search-datadog-error-tracking-issues}
-*Conjunto de herramientas: **Error Tracking***\
+*Conjunto de herramientas: **error-tracking***\
 *Permisos requeridos: `Error Tracking Read`*\
-Busca incidencias de Error Tracking a través de fuentes de datos (RUM, registros, trazas).
+Busca problemas de Error Tracking en todas las fuentes de datos (RUM, registros, trazas).
 
-- Muéstrame todas las incidencias de Error Tracking en el servicio de pago de las últimas 24 horas.
+- Muéstrame todos los problemas de Error Tracking en el servicio de pago de la última hora.
 - ¿Cuáles son los errores más comunes en mi aplicación durante la última semana?
-- Encuentra incidencias de Error Tracking en el entorno de producción con `service:api`.
+- Encuentra problemas de Error Tracking en el entorno de producción con `service:api`.
 
 ### `get_datadog_error_tracking_issue` {#get-datadog-error-tracking-issue}
-*Conjunto de herramientas: **Error Tracking***\
+*Conjunto de herramientas: **error-tracking***\
 *Permisos requeridos: `Cases Read` y `Error Tracking Read`*\
-Recupera información detallada sobre una incidencia específica de Error Tracking de Datadog.
+Recupera información detallada sobre un problema de Error Tracking específico de Datadog.
 
-- Ayúdame a resolver la incidencia de Error Tracking `550e8400-e29b-41d4-a716-446655440000`.
-- ¿Cuál es el impacto de la incidencia de Error Tracking `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f`?
-- Crea un caso de prueba para reproducir la incidencia de Error Tracking `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
+- Ayúdame a resolver el problema de Error Tracking `550e8400-e29b-41d4-a716-446655440000`.
+- ¿Cuál es el impacto del problema de Error Tracking `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f`?
+- Crea un caso de prueba para reproducir el problema de Error Tracking `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
 
 ### `analyze_datadog_error_tracking_errors` {#analyze-datadog-error-tracking-errors}
-*Conjunto de herramientas: **seguimiento de errores***\
+*Conjunto de herramientas: **error-tracking***\
 *Permisos requeridos: `Error Tracking Read` y `Timeseries`*\
-Analiza los errores de Error Tracking de Datadog utilizando consultas SQL para conteo, agregaciones y análisis numérico. Opera sobre muestras individuales de errores, no sobre incidencias (grupos de errores).
+Analiza errores de Error Tracking de Datadog mediante consultas SQL para conteo, agregaciones y análisis numérico. Opera sobre muestras de errores individuales, no sobre problemas (grupos de errores).
 
 - Cuenta los errores por servicio en la última hora.
-- Muéstrame los principales tipos de errores en el servicio de pago durante la última semana.
-- Desglosa los errores por versión para identificar qué despliegue introdujo una incidencia.
+- Muéstrame los principales tipos de error en el servicio de pago durante la última semana.
+- Desglosa los errores por versión para identificar qué implementación introdujo un problema.
 
 ### `update_datadog_error_tracking_issue` {#update-datadog-error-tracking-issue}
-*Conjunto de herramientas: **seguimiento de errores***\
+*Conjunto de herramientas: **error-tracking***\
 *Permisos requeridos: `Cases Read`, `Cases Write`, `Error Tracking Read` y `Error Tracking Write`*\
-Actualiza el estado o el asignado de una incidencia de Error Tracking en Datadog.
+Actualiza el estado o el responsable de un problema de Error Tracking en Datadog.
 
-- Marca la incidencia de Error Tracking `550e8400-e29b-41d4-a716-446655440000` como resuelta.
-- Asigna la incidencia de Error Tracking `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` a mí.
-- Establece el estado de la incidencia de Error Tracking `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f` como ignorada.
+- Marcar el problema de Error Tracking `550e8400-e29b-41d4-a716-446655440000` como resuelto.
+- Asignarme el problema de Error Tracking `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f`.
+- Establecer el estado del problema de Error Tracking `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f` como ignorado.
+
+### `manage_datadog_error_tracking_issue_comments` {#manage-datadog-error-tracking-issue-comments}
+*Conjunto de herramientas: **error-tracking***\
+*Permisos requeridos: `Cases Read`, `Cases Write`, `Error Tracking Read` y `Error Tracking Write`*\
+Agrega, actualiza o elimina un comentario en un problema de Error Tracking de Datadog.
+
+- Agrega un comentario al problema de Error Tracking `550e8400-e29b-41d4-a716-446655440000` que diga "Investigando esto ahora".
+- Actualiza el comentario que acabamos de agregar para que diga "Corregido en la versión 2.3.1".
+- Elimina el comentario que acabamos de agregar de ese problema.
+
+## Experimentos {#experiments}
+
+Herramientas para gestionar y analizar [Experiments][62], incluyendo la creación y conclusión de experimentos, la ejecución de diagnósticos y la investigación de movimientos de métricas.
+
+<div class="alert alert-info">El <code>experiments</code> conjunto de herramientas no está habilitado de forma predeterminada. Consulta <a href="/mcp_server/setup">Configurar el servidor Datadog MCP</a> para obtener instrucciones sobre cómo habilitar los conjuntos de herramientas.</div>
+
+### `list_experiments` {#list-experiments}
+*Conjunto de herramientas: **experiments***\
+*Permisos requeridos: `Product Analytics Experiments Read`*\
+Enumera los experimentos de la organización, con búsqueda opcional por nombre, límite y desplazamiento para la paginación.
+
+- Muéstrame todos los experimentos en ejecución.
+- Busca experimentos con "checkout" en el nombre.
+
+### `get_experiment` {#get-experiment}
+*Conjunto de herramientas: **experiments***\
+*Permisos requeridos: `Product Analytics Experiments Read`*\
+Obtiene un experimento individual por ID, incluyendo el estado, la bandera de función vinculada, el tipo de sujeto, la métrica principal, las fechas de asignación y la decisión.
+
+- Obtén los detalles del experimento `abc123`.
+- ¿Cuál es el estado actual y la bandera vinculada para el experimento `abc123`?
+
+### `create_experiment` {#create-experiment}
+*Conjunto de herramientas: **experiments***\
+*Permisos requeridos: `Product Analytics Experiments Write`*\
+Crea un nuevo experimento con un nombre, hipótesis, tipo de sujeto y métrica principal.
+
+- Crea un experimento llamado "New Checkout Flow" para probar si el rediseño mejora la tasa de conversión.
+
+### `link_feature_flag_to_experiment` {#link-feature-flag-to-experiment}
+*Conjunto de herramientas: **experiments***\
+*Permisos requeridos: `Product Analytics Experiments Write`*\
+Vincula un feature flag a un experimento.
+
+- Vincular feature flag `new-checkout-flow` al experimento `abc123`.
+
+### `start_experiment` {#start-experiment}
+*Conjunto de herramientas: **experiments***\
+*Permisos requeridos: `Product Analytics Experiments Write`*\
+Inicia un experimento. Requiere un Feature Flag vinculado con una asignación activa, un tipo de sujeto y una métrica principal.
+
+- Iniciar experimento `abc123`.
+
+### `conclude_experiment` {#conclude-experiment}
+*Conjunto de herramientas: **experiments***\
+*Permisos requeridos: `Product Analytics Experiments Write`*\
+Concluye un experimento en ejecución con una decisión permanente de variante ganadora.
+
+- Concluir experimento `abc123` con la variante de tratamiento como ganadora.
+
+### `cancel_experiment` {#cancel-experiment}
+*Conjunto de herramientas: **experiments***\
+*Permisos requeridos: `Product Analytics Experiments Write`*\
+Cancela un experimento en ejecución con un motivo obligatorio.
+
+- Cancelar el experimento `abc123` porque se detectó un problema de SRM.
+
+### `get_experiment_diagnostics` {#get-experiment-diagnostics}
+*Conjunto de herramientas: **experiments***\
+*Permisos requeridos: `Product Analytics Experiments Read`*\
+Devuelve un resumen de salud de un experimento antes de interpretar los resultados: estado de discrepancia en la proporción de la muestra (SRM), total de sujetos, recuentos y fracciones de exposición por variante, y estado de salud por métrica, incluidas las métricas poco fiables y sin datos. Llame a esto antes de `get_experiment_results`; si `srm.has_warning` es verdadero, las comparaciones a nivel de variante no son seguras de interpretar.
+
+- Ejecute diagnósticos en el experimento `abc123` antes de revisar los resultados.
+- ¿Existe una discrepancia en la proporción de la muestra en el experimento `abc123`?
+
+### `get_experiment_results` {#get-experiment-results}
+*Conjunto de herramientas: **experimentos***\
+*Permisos requeridos: `Product Analytics Experiments Read`*\
+Devuelve los resultados calculados por variante y por métrica. El campo `verdict` (`better`, `worse`, `inconclusive` o `unreliable`) es definitivo; no vuelva a calcular la significancia a partir de valores p sin procesar o intervalos de confianza.
+
+- Muéstreme los resultados del experimento `abc123`.
+- ¿Cuál es el veredicto sobre la métrica principal para el experimento `abc123`?
+
+### `explore_experiment_results` {#explore-experiment-results}
+*Conjunto de herramientas: **experiments***\
+*Permisos requeridos: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
+Segmenta los resultados por una propiedad de asignación (tipo de dispositivo, país, nivel de plan, etcétera) o a lo largo del tiempo. Úselo después de `get_experiment_results` para un análisis más profundo.
+
+- Desglose los resultados del experimento `abc123` por tipo de dispositivo.
+- ¿Cómo fue la tendencia del incremento para el experimento `abc123` durante las últimas dos semanas?
+
+### `list_experiment_segmentation_properties` {#list-experiment-segmentation-properties}
+*Conjunto de herramientas: **experiments***\
+*Permisos requeridos: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
+Enumera las propiedades de asignación por las que se puede dividir un experimento. Llame a esto antes de `explore_experiment_results` para obtener identificadores de propiedad válidos; no los adivine.
+
+- ¿Qué propiedades de segmentación puedo usar para desglosar el experimento `abc123`?
+
+### `get_experiment_segmentation_property_values` {#get-experiment-segmentation-property-values}
+*Conjunto de herramientas: **experiments***\
+*Permisos requeridos: `Product Analytics Experiments Read`, `Product Analytics Metrics Read`*\
+Devuelve los valores concretos para una propiedad de segmentación (por ejemplo, `["mobile", "desktop", "tablet"]` para el tipo de dispositivo). Úselo antes de filtrar en `explore_experiment_results` para evitar cadenas de filtro no válidas.
+
+- ¿Qué valores están disponibles para la propiedad de tipo de dispositivo en el experimento `abc123`?
+
+### `get_metric_definition` {#get-metric-definition}
+*Conjunto de herramientas: **experiments***\
+*Permisos requeridos: `Product Analytics Metrics Read`*\
+Devuelve la definición de una métrica de experimento: la consulta de eventos subyacente, la fuente de datos y la herramienta Datadog MCP recomendada para investigar por qué cambió la métrica. Para métricas provenientes de `datadog`, la respuesta incluye un campo `recommended_tool_call` con los parámetros estructurados necesarios para consultar los datos de eventos sin procesar. No son para métricas de infraestructura de Datadog o APM; utilice `get_datadog_metric` para ellas.
+
+- ¿Cuál es la consulta de eventos detrás de la métrica principal para el experimento `abc123`?
+- ¿Qué herramienta Datadog MCP debo usar para investigar por qué cambió esta métrica?
+
+### `diagnose_experiment_run_failure` {#diagnose-experiment-run-failure}
+*Conjunto de herramientas: **experiments***\
+*Permisos requeridos: `Product Analytics Experiments Read`*\
+Diagnostica por qué falló la ejecución más reciente (o una específica) de la pipeline de análisis de un experimento. Devuelve la tarea de causa raíz, una explicación categorizada del fallo y los siguientes pasos prácticos. Utilice `get_experiment_diagnostics` para problemas de calidad de resultados y SRM en su lugar.
+
+- ¿Por qué falló la ejecución de análisis más reciente para el experimento `abc123`?
+- Diagnostique el fallo de la pipeline para el experimento `abc123`.
 
 ## Feature Flags {#feature-flags}
 
-Herramientas para gestionar [Feature Flags][51], incluyendo la creación, listado y actualización de Feature Flags y sus entornos.
+Herramientas para administrar [Feature Flags][51], incluyendo la creación, el listado y la actualización de Feature Flags y sus entornos.
 
 ### `list_datadog_feature_flags` {#list-datadog-feature-flags}
-*Conjunto de herramientas: **banderas-de-características***\
+*Conjunto de herramientas: **feature-flags***\
 *Permisos requeridos: `Feature Flag Environment Read` y `Feature Flag Read`*\
-Lista las Feature Flags con soporte de paginación.
+Enumera los Feature Flags con soporte de paginación.
 
-- Muéstrame todas las Feature Flags en mi organización.
-- Lista las Feature Flags para el servicio de pago.
+- Muéstreme todos los Feature Flags en mi organización.
+- Enumere los Feature Flags para el checkout service.
 
 ### `get_datadog_feature_flag` {#get-datadog-feature-flag}
-*Conjunto de herramientas: **banderas de características***\
+*Conjunto de herramientas: **feature-flags***\
 *Permisos requeridos: `Feature Flag Environment Read` y `Feature Flag Read`*\
-Recupera detalles sobre una Feature Flag específica.
+Obtiene detalles sobre un Feature Flag específico.
 
-- Obtén detalles para la Feature Flag `dark-mode-enabled`.
-- ¿Cuáles son las configuraciones actuales para la Feature Flag `new-checkout-flow`?
+- Obtenga los detalles del Feature Flag `dark-mode-enabled`.
+- ¿Cuáles son los ajustes actuales para el Feature Flag `new-checkout-flow`?
 
 ### `create_datadog_feature_flag` {#create-datadog-feature-flag}
-*Conjunto de herramientas: **Feature Flags***\
+*Conjunto de herramientas: **feature-flags***\
 *Permisos requeridos: `Feature Flag Environment Read` y `Feature Flag Write`*\
-Crea una nueva Feature Flag.
+Crea un nuevo Feature Flag.
 
-- Crea una Feature Flag llamada `enable-new-dashboard` para un despliegue gradual.
-- Configura una nueva Feature Flag booleana para la característica beta.
+- Cree un Feature Flag llamado `enable-new-dashboard` para un despliegue gradual.
+- Configure un nuevo Feature Flag booleano para la beta feature.
 
 ### `list_datadog_feature_flag_environments` {#list-datadog-feature-flag-environments}
-*Conjunto de herramientas: **flags de características***\
+*Conjunto de herramientas: **feature-flags***\
 *Permisos requeridos: `Feature Flag Environment Read`*\
-Lista los entornos configurados para Feature Flags.
+Enumera los entornos configurados para los Feature Flags.
 
-- Muéstrame los entornos de Feature Flags disponibles.
-- ¿A qué entornos puedo dirigir las Feature Flags?
+- Muéstreme los entornos de Feature Flags disponibles.
+- ¿A qué entornos puedo dirigir los Feature Flags?
 
 ### `list_datadog_feature_flag_allocations` {#list-datadog-feature-flag-allocations}
-*Conjunto de herramientas: **Feature Flags***\
+*Conjunto de herramientas: **feature-flags***\
 *Permisos requeridos: `Feature Flag Environment Read` y `Feature Flag Read`*\
-Lista las asignaciones para una Feature Flag en un entorno específico.
+Enumera las asignaciones para un Feature Flag en un entorno específico.
 
-- Muéstrame las reglas de asignación para el flag `new-checkout-flow` en producción.
+- Muéstreme las reglas de asignación para el Feature Flag `new-checkout-flow` en producción.
 
 ### `update_datadog_feature_flag_environment` {#update-datadog-feature-flag-environment}
-*Conjunto de herramientas: **Feature Flags***\
+*Conjunto de herramientas: **feature-flags***\
 *Permisos requeridos: `Feature Flag Environment Read` y `Feature Flag Write`*\
-Actualiza la configuración de un flag de características en un entorno específico.
+Actualiza una configuración de Feature Flag en un entorno específico.
 
-- Habilita la Feature Flag `dark-mode` en el entorno de pruebas.
-- Despliega la Feature Flag `new-checkout-flow` al 50% de los usuarios en producción.
+- Habilite la clave de etiqueta `dark-mode` en el entorno de pruebas.
+- Implemente la clave de etiqueta `new-checkout-flow` al 50% de los usuarios en producción.
 
 ### `check_datadog_flag_implementation` {#check-datadog-flag-implementation}
-*Conjunto de herramientas: **flags de características***\
+*Conjunto de herramientas: **feature-flags***\
 *Permisos requeridos: `Feature Flag Environment Read` y `Feature Flag Read`*\
-Verifica si una Feature Flag está implementada en el código.
+Comprueba si una clave de etiqueta está implementada en el código.
 
-- Verifica que la Feature Flag `enable-new-dashboard` esté implementada en mi base de código.
+- Verifique que la clave de etiqueta `enable-new-dashboard` esté implementada en mi base de código.
 
 ### `sync_datadog_feature_flag_allocations` {#sync-datadog-feature-flag-allocations}
-*Conjunto de herramientas: **flags de características***\
+*Conjunto de herramientas: **feature-flags***\
 *Permisos requeridos: `Feature Flag Write`*\
-Sincroniza las asignaciones de flags de características para un entorno específico.
+Sincroniza las asignaciones de claves de etiqueta para un entorno específico.
 
-- Sincroniza las asignaciones para el flag `new-checkout-flow` en producción.
+- Sincronice las asignaciones para la clave de etiqueta `new-checkout-flow` en producción.
 
 ## Kubernetes {#kubernetes}
 
 Herramientas para buscar y describir recursos de [Kubernetes][55] y recuperar manifiestos en todos los clústeres.
 
 ### `search_datadog_k8s_resources` {#search-datadog-k8s-resources}
-*Conjunto de herramientas: **Kubernetes***\
+*Conjunto de herramientas: **kubernetes***\
 *Permisos requeridos: `Hosts Read` y `Teams Read`*\
-Busca recursos de [Kubernetes][55] en todos los clústeres. Utiliza esta herramienta en lugar de `kubectl` para determinar el estado de los recursos de Kubernetes, como implementaciones, pods, nodos, etc. Esta herramienta no requiere acceso al clúster local, funciona en todos los clústeres y devuelve datos enriquecidos con etiquetas. Puedes incluir claves de etiqueta específicas en cada resultado e incluir nombres de recursos padres para investigar relaciones entre recursos (por ejemplo, la implementación a la que pertenece un pod).
+Busca recursos de [Kubernetes][55] en todos los clústeres. Use esta herramienta en lugar de `kubectl` para determinar el estado de los recursos de Kubernetes como implementaciones, pods, nodos, etc. Esta herramienta no requiere acceso al clúster local, funciona en todos los clústeres y devuelve datos enriquecidos con etiquetas. Puede incluir claves de etiqueta específicas en cada resultado e incluir nombres de recursos principales para investigar las relaciones entre los recursos (por ejemplo, la implementación a la que pertenece un pod).
 
-- Muéstrame todos los pods en el espacio de nombres `production` con estado `CrashLoopBackOff`.
-- Encuentra despliegues con rollout en curso en el clúster `general2`.
-- Lista todos los nodos en mi clúster ordenados por uso de CPU.
-- Agrupa los despliegues por `service` y `env` para ver cómo se distribuyen mis servicios entre los entornos.
+- Muéstreme todos los pods en el espacio de nombres `production` con estado `CrashLoopBackOff`.
+- Encuentre implementaciones con despliegues en curso en el clúster `general2`.
+- Enumere todos los nodos en mi clúster ordenados por uso de CPU.
+- Agrupe las implementaciones por `service` y `env` para ver cómo se distribuyen mis servicios en los entornos.
 
 ### `describe_datadog_k8s_resource` {#describe-datadog-k8s-resource}
 *Conjunto de herramientas: **kubernetes***\
 *Permisos requeridos: `Hosts Read`*\
-Obtiene información detallada sobre un recurso específico de [Kubernetes][55], incluyendo detalles específicos del recurso como solicitudes y límites de CPU y memoria, y opcionalmente etiquetas, anotaciones, historial de manifiestos, recursos padres y un enlace profundo al [Kubernetes Explorer][55]. Utiliza esta herramienta en lugar de `kubectl describe`. Identifica un recurso por su UID de una búsqueda anterior o proporcionando identificadores de recurso (clúster, espacio de nombres y nombre del recurso). Para el manifiesto completo en bruto, utiliza `get_datadog_k8s_manifest`.
+Obtiene información detallada sobre un recurso específico de [Kubernetes][55], incluidos detalles específicos del recurso como solicitudes y límites de CPU y memoria, y opcionalmente etiquetas, labels, annotations, historial de manifiestos, recursos principales y un enlace directo al [Explorer de Kubernetes][55]. Utilice esta herramienta en lugar de `kubectl describe`. Identifique un recurso por su UID de una búsqueda anterior o proporcionando identificadores de recurso (clúster, espacio de nombres y nombre del recurso). Para el manifiesto sin procesar completo, use `get_datadog_k8s_manifest`.
 
-- Describe el pod `my-app` en el clúster `prod`, espacio de nombres `default`.
-- Obtén detalles para el despliegue `api-server` en el espacio de nombres `default`, clúster `staging`.
-- Muéstrame las etiquetas y anotaciones para este recurso de Kubernetes.
+- Describa el pod `my-app` en el clúster `prod`, espacio de nombres `default`.
+- Obtenga detalles para el despliegue `api-server` en el espacio de nombres `default`, clúster `staging`.
+- Muéstreme las etiquetas y anotaciones para este recurso de Kubernetes.
 
 ### `get_datadog_k8s_manifest` {#get-datadog-k8s-manifest}
-*Conjunto de herramientas: **kubernetes***\
+*Conjunto de herramientas: **Kubernetes***\
 *Permisos requeridos: `Hosts Read`*\
-Recupera el manifiesto YAML para un recurso específico de [Kubernetes][55]. Utiliza esta herramienta en lugar de `kubectl get -o yaml`. Soporta la extracción de subárboles específicos con una expresión `kubectl` JSONPath y un modo conciso que omite `status` y `managedFields` para reducir el tamaño de la respuesta.
+Recupera el manifiesto YAML para un recurso específico de [Kubernetes][55]. Utilice esta herramienta en lugar de `kubectl get -o yaml`. Admite la extracción de subárboles específicos con una expresión JSONPath `kubectl` y un modo conciso que omite `status` y `managedFields` para reducir el tamaño de la respuesta.
 
-- Obtén el manifiesto para el pod `my-app` en el clúster `prod`, espacio de nombres `default`.
-- Muéstrame los puertos de contenedor para el despliegue `api-server` en el espacio de nombres `default`, clúster `staging`.
-- Obtén las imágenes de contenedor del manifiesto del pod `my-app`.
+- Obtenga el manifiesto para el pod `my-app` en el clúster `prod`, espacio de nombres `default`.
+- Muéstreme los puertos del container para el despliegue `api-server` en el espacio de nombres `default`, clúster `staging`.
+- Obtenga las Container Images del manifiesto del pod `my-app`.
 
-## Redes {#networks}
+## networks {#networks}
 
-Herramientas para el análisis de [Cloud Network Monitoring][31] y [Network Device Monitoring][32].
+Herramientas para el análisis de Cloud Network Monitoring [31] y Network Device Monitoring [32].
 
 ### `analyze_cloud_network_monitoring` {#analyze-cloud-network-monitoring}
-*Conjunto de herramientas: **redes***\
+*Conjunto de herramientas: **networks***\
 *Permisos requeridos: `Network Connections Read`*\
-Investiga problemas a nivel de red utilizando datos de [Cloud Network Monitoring][31], analizando datos de flujo de red para detectar anomalías como tasas de retransmisión elevadas.
+Investiga problemas a nivel de red utilizando datos de [Cloud Network Monitoring][31], analizando los datos de flujo de red para detectar anomalías como tasas de retransmisión elevadas.
 
-- Analiza el tráfico de red entre mis servidores web y el clúster de bases de datos.
+- Analice el tráfico de red entre mis servidores web y el clúster de base de datos.
 - ¿Existen problemas de retransmisión entre `service:api` y `service:payments`?
-- Investiga los datos de flujo de red en busca de anomalías en el entorno de producción.
+- Investigue los datos de flujo de red en busca de anomalías en el entorno de producción.
 
 ### `search_ndm_devices` {#search-ndm-devices}
-*Conjunto de herramientas: **redes***\
+*Conjunto de herramientas: **networks***\
 *Permisos requeridos: `NDM Read`*\
-Busca dispositivos de red (enrutadores, conmutadores, cortafuegos) monitoreados por Datadog [Network Device Monitoring][32].
+Busca dispositivos de red (enrutadores, conmutadores, firewalls) monitoreados por Datadog Network Device Monitoring [32].
 
-- Muéstrame todos los dispositivos de red en el centro de datos `us-east-1`.
-- Encuentra cortafuegos que están reportando errores.
-- Lista todos los conmutadores monitoreados y sus estados.
+- Muéstreme todos los dispositivos de red en el centro de datos `us-east-1`.
+- Encuentre los firewalls que reportan errores.
+- Enumere todos los conmutadores monitoreados y sus estados.
 
 ### `get_ndm_device` {#get-ndm-device}
-*Conjunto de herramientas: **redes***\
+*Conjunto de herramientas: **networks***\
 *Permisos requeridos: `NDM Read`*\
-Recupera información detallada sobre un dispositivo de red específico por su ID de dispositivo.
+Recupera información detallada sobre un dispositivo de red específico mediante su ID de dispositivo.
 
-- Obtén detalles del dispositivo de red `device:abc123`.
-- Muéstrame la configuración y el estado de este enrutador.
+- Obtenga los detalles del dispositivo de red `device:abc123`.
+- Muéstreme la configuración y el estado de este enrutador.
 
 ### `search_ndm_interfaces` {#search-ndm-interfaces}
-*Conjunto de herramientas: **redes***\
+*Conjunto de herramientas: **networks***\
 *Permisos requeridos: `NDM Read`*\
-Recupera todas las interfaces de red para un dispositivo específico.
+Recupera todas las interfaces de red de un dispositivo específico.
 
-- Muéstrame todas las interfaces en el dispositivo `device:abc123`.
-- Lista los estados de las interfaces de mi enrutador principal.
+- Muéstreme todas las interfaces del dispositivo `device:abc123`.
+- Enumere los estados de las interfaces de mi enrutador principal.
 
-## Integración {#onboarding}
+## Incorporación {#onboarding}
 
-Herramientas de incorporación para la configuración y puesta en marcha guiada de Datadog.
+Herramientas de incorporación con Agent para la configuración y el ajuste guiados de Datadog.
 
 ### `browser_onboarding` {#browser-onboarding}
-*Conjunto de herramientas: **integración***\
+*Conjunto de herramientas: **incorporación***\
 *Permisos requeridos: `RUM Apps Read`*\
-Te guía a través de la incorporación de Browser RUM a Datadog.
+Lo guía a través de la incorporación de Browser RUM a Datadog.
 
-- Ayúdame a configurar la monitorización de Browser RUM para mi aplicación web.
+- Ayúdeme a configurar el monitoreo de Browser RUM para mi aplicación web.
 
 ### `devices_onboarding` {#devices-onboarding}
 *Conjunto de herramientas: **incorporación***\
 *Permisos requeridos: `RUM Apps Read`*\
-Te guía a través de la incorporación de dispositivos a la monitorización de Datadog.
+Lo guía a través de la incorporación de dispositivos al monitoreo de Datadog.
 
-- Ayúdame a configurar la monitorización de dispositivos en Datadog.
+- Ayúdeme a configurar el monitoreo de dispositivos en Datadog.
 
 ### `kubernetes_onboarding` {#kubernetes-onboarding}
-*Conjunto de herramientas: **integración***\
+*Conjunto de herramientas: **incorporación***\
 *Permisos requeridos: Ninguno*\
-Te guía a través de la incorporación de clústeres de Kubernetes a Datadog.
+Lo guía a través de la incorporación de clústeres de Kubernetes a Datadog.
 
-- Ayúdame a configurar la monitorización de Datadog para mi clúster de Kubernetes.
+- Ayúdeme a configurar el monitoreo de Datadog para mi clúster de Kubernetes.
 
 ### `llm_observability_onboarding` {#llm-observability-onboarding}
 *Conjunto de herramientas: **incorporación***\
-Te guía a través de la incorporación de la Observabilidad del Agente en Datadog.
+Lo guía a través de la incorporación de Agent Observability en Datadog.
 
-- Ayúdame a configurar la Observabilidad del Agente para mi aplicación de IA.
+- Ayúdeme a configurar Agent Observability para mi aplicación de IA.
 
 ### `test_optimization_onboarding` {#test-optimization-onboarding}
 *Conjunto de herramientas: **incorporación***\
 *Permisos requeridos: Ninguno*\
-Te guía a través de la incorporación de la Optimización de Pruebas en Datadog.
+Lo guía a través de la incorporación de Test Optimization en Datadog.
 
-- Ayúdame a configurar la Optimización de Pruebas para mi pipeline de CI.
+- Ayúdeme a configurar Test Optimization para mi pipeline de CI.
 
 ### `serverless_onboarding` {#serverless-onboarding}
 *Conjunto de herramientas: **incorporación***\
 *Permisos requeridos: Ninguno*\
-Te guía a través de la incorporación de aplicaciones sin servidor a Datadog, incluyendo funciones de AWS Lambda y servicios de GCP Cloud Run y funciones de Cloud Run (Gen 2).
+Lo guía a través de la incorporación de aplicaciones sin servidor a Datadog, incluyendo funciones de AWS Lambda y GCP Cloud Run y funciones de Cloud Run (Gen 2).
 
-- Ayúdame a monitorear mis funciones de AWS Lambda con Datadog.
-- Ayúdame a monitorear mis servicios de GCP Cloud Run con Datadog.
-- Ayúdame a monitorear mis funciones de GCP Cloud Run con Datadog.
+- Ayúdeme a monitorear mis funciones de AWS Lambda con Datadog.
+- Ayúdeme a monitorear mis servicios de GCP Cloud Run con Datadog.
+- Ayúdeme a monitorear mis funciones de GCP Cloud Run con Datadog.
 
 ### `source_map_uploads` {#source-map-uploads}
 *Conjunto de herramientas: **incorporación***\
-Te guía a través de la carga de mapas del código fuente para el mapeo de errores de RUM.
+Lo guía a través de la carga de mapas del código fuente para el mapeo de errores de RUM.
 
-- Ayúdame a cargar mapas del código fuente para que mis errores de RUM muestren el código fuente original.
+- Ayúdeme a cargar mapas del código fuente para que mis errores de RUM muestren el código fuente original.
+
+## Product Analytics {#product-analytics}
+
+Herramientas para consultar datos de [Product Analytics][68], incluyendo búsqueda de vocabulario de la organización, búsqueda semántica, agregaciones, recorridos, rutas y retención.
+
+<div class="alert alert-info">El <code>product-analytics</code> conjunto de herramientas no está habilitado de forma predeterminada. Consulta <a href="/mcp_server/setup">Configurar el servidor Datadog MCP</a> para obtener instrucciones sobre cómo habilitar los conjuntos de herramientas.</div>
+
+### `search_product_analytics_events` {#search-product-analytics-events}
+*Conjunto de herramientas: **product-analytics***\
+*Permisos requeridos: `RUM Apps Read`*\
+Encuentra vistas y acciones de Product Analytics que coincidan con una descripción en lenguaje natural mediante búsqueda semántica, incluyendo acciones etiquetadas seleccionadas por la organización.
+
+- Encuentra la vista y la acción para agregar un artículo al carrito.
+- ¿Cuál es el evento para completar el checkout?
+
+### `search_product_analytics_org_entities` {#search-product-analytics-org-entities}
+*Conjunto de herramientas: **product-analytics***\
+*Permisos requeridos: `RUM Apps Read`*\
+Busca entidades de Product Analytics específicas de la organización por nombre o palabra clave (feature flags, context attribute keys, saved charts y segmentos).
+
+- Encuentre el segmento para "power users".
+- ¿Qué feature flags están disponibles para filtrar los datos de Product Analytics?
+
+**Nota**: Utilice la expresión de filtro de segmento devuelta por esta herramienta textualmente en lugar de construir una manualmente.
+
+### `get_product_analytics_saved_chart` {#get-product-analytics-saved-chart}
+*Conjunto de herramientas: **product-analytics***\
+*Permisos requeridos: `RUM Apps Read` y `Product Analytics Saved Widgets Read`*\
+Recupera la definición completa de un gráfico de Product Analytics guardado por ID, incluidos sus parámetros de consulta, filtros e intervalo de tiempo. Utilice `search_product_analytics_org_entities` primero para encontrar el ID del gráfico.
+
+- Cargue el gráfico guardado `abc-123-def` y muéstreme sus parámetros de consulta.
+- Reproduzca el gráfico guardado de "retención semanal" con un rango de tiempo actualizado.
+
+### `aggregate_product_analytics_events` {#aggregate-product-analytics-events}
+*Conjunto de herramientas: **product-analytics***\
+*Permisos requeridos: `RUM Apps Read`*\
+Agrega datos de eventos de Product Analytics como un escalar o series temporales, admitiendo cálculos de conteo, cardinalidad, promedio, suma, mínimo, máximo y percentil con agrupación opcional.
+
+- ¿Cuántas sesiones tuvimos hoy?
+- Muéstreme los usuarios activos diarios durante los últimos 30 días.
+
+### `run_product_analytics_journey` {#run-product-analytics-journey}
+*Conjunto de herramientas: **Product Analytics***\
+*Permisos requeridos: `RUM Apps Read`*\
+Ejecuta consultas de embudo, series temporales, escalares, listas y abandono a través de un recorrido de usuario de varios pasos, rastreado a nivel de usuario, sesión o cuenta.
+
+- ¿Cuál es la tasa de conversión desde ver un producto hasta completar el checkout?
+- Muéstreme los usuarios que abandonaron entre agregar al carrito y el checkout.
+
+### `run_product_analytics_pathway` {#run-product-analytics-pathway}
+*Conjunto de herramientas: **Product Analytics***\
+*Permisos requeridos: `RUM Apps Read`*\
+Ejecuta un análisis de Sankey (ruta) que muestra cómo navegan los usuarios entre vistas, comenzando desde una vista de origen o conduciendo a una vista de destino.
+
+- ¿Cuáles son las rutas más comunes que toman los usuarios después de llegar a la página de inicio?
+- Muéstrame las rutas que conducen a la página de pago.
+
+### `run_product_analytics_retention` {#run-product-analytics-retention}
+*Conjunto de herramientas: **Product Analytics***\
+*Permisos requeridos: `RUM Apps Read`*\
+Ejecuta consultas de retención en los datos de Product Analytics como una cuadrícula de cohorte, curva de retención, series temporales o valor escalar, rastreados a nivel de usuario o cuenta.
+
+- Muéstrame la cuadrícula de retención semanal para los usuarios que se registraron en el último trimestre.
+- ¿Cuál es la tasa de retención del día 7 para los usuarios que se unieron en enero?
 
 ## Perfilado {#profiling}
-Herramientas de solo lectura para descubrir, explorar y analizar datos de [Continuous Profiler][62] a través de servicios, entornos de ejecución y trazas.
+Herramientas de solo lectura para descubrir, explorar y analizar datos de [Continuous Profiler][62] en servicios, entornos de ejecución y trazas.
 
 ### `get_profiling_profile_types` {#get-profiling-profile-types}
-*Conjunto de herramientas: **perfilado***\
+*Conjunto de herramientas: **profiling***\
 *Permisos requeridos: `Continuous Profiler Read`*\
-Devuelve los tipos de perfil y familias disponibles para un contexto de consulta determinado (cadena de consulta y rango de tiempo) o para un contexto de traza o tramo. Utiliza esto primero para descubrir qué es consultable.
+Devuelve los tipos y familias de perfil disponibles para un contexto de consulta determinado (cadena de consulta y rango de tiempo) o un contexto de traza/span. Usa esto primero para descubrir qué se puede consultar.
 
 - Muéstrame qué tipos de perfil están disponibles para `service:checkout-api` en la última hora.
 - ¿Qué familias de perfil están disponibles para la traza `7d5d747be160e280504c099d984bcfe0`?
-- Lista los tipos de perfil disponibles en mi entorno de producción.
+- Enumera los tipos de perfil disponibles en mi entorno de producción.
 
 ### `get_profiling_services` {#get-profiling-services}
-*Conjunto de herramientas: **perfilado***\
+*Conjunto de herramientas: **profiling***\
 *Permisos requeridos: `Continuous Profiler Read`*\
-Lista los servicios perfilados y sus familias de perfil en contexto. Los resultados no están ordenados y no implican importancia o nivel de actividad.
+Enumera los servicios perfilados y sus familias de perfilado en el ámbito. Los resultados no están ordenados y no implican importancia ni nivel de actividad.
 
-- Lista todos los servicios con perfilado habilitado en producción.
-- Muéstrame qué servicios tienen datos de perfilado de JVM.
+- Enumere todos los servicios con profiling habilitado en producción.
+- Muéstreme qué servicios tienen datos de profiling de JVM.
 - ¿Qué servicios están perfilados en el entorno del equipo de pagos?
 
 ### `get_profiling_runtime_ids` {#get-profiling-runtime-ids}
 *Conjunto de herramientas: **perfilado***\
 *Permisos requeridos: `Continuous Profiler Read`*\
-Devuelve los identificadores de tiempo de ejecución perfilados individuales (procesos o contenedores) en contexto. Por defecto, se establece en el top-1 por CPU; el parámetro de límite controla cuántos.
+Devuelve los ID de tiempo de ejecución perfilados individuales (procesos o contenedores) en el ámbito. El valor predeterminado es el top 1 por CPU; el parámetro de límite controla cuántos.
 
-- Muéstrame los 10 principales identificadores de tiempo de ejecución por CPU para `service:checkout-api`.
-- Obtén el tiempo de ejecución con mayor CPU para mi servicio de Go.
-- Lista los identificadores de tiempo de ejecución perfilados para el servicio de pagos en la última hora.
+- Muéstrame los 10 principales ID de tiempo de ejecución por CPU para `service:checkout-api`.
+- Obtenga el runtime con mayor uso de CPU para mi servicio Go.
+- Enumere los ID de tiempo de ejecución perfilados para el servicio de pagos en la última hora.
 
 ### `get_profiling_service_insights` {#get-profiling-service-insights}
 *Conjunto de herramientas: **perfilado***\
 *Permisos requeridos: `Continuous Profiler Read`*\
-Devuelve información de servicio precomputada, incluyendo un resumen de alto nivel, señales contextuales (métodos afectados, paquetes, procesos) y pasos recomendados a seguir.
+Devuelve información sobre el servicio precalculada, que incluye un resumen de alto nivel, señales contextuales (métodos, paquetes, procesos afectados) y los siguientes pasos recomendados.
 
-- Muéstrame las percepciones de perfilado para `service:checkout-api`.
-- ¿Qué problemas de rendimiento están señalados en el servicio de pagos?
-- Obtén recomendaciones de perfilado para mi servicio de Java.
+- Muéstrame información de perfilado para `service:checkout-api`.
+- ¿Qué problemas de rendimiento están marcados en el servicio de pagos?
+- Obtenga recomendaciones de profiling para mi servicio Java.
 
 ### `explore_profiling_flame_graph` {#explore-profiling-flame-graph}
 *Conjunto de herramientas: **perfilado***\
 *Permisos requeridos: `Continuous Profiler Read`*\
-Devuelve las trazas de pila top-N por contribución de valor para un tipo de perfil determinado. Soporta filtrado por marco, punto de conexión o expresión regular de atributo. Servicio único. Acepta ya sea `service:family` o un traceContext.
+Devuelve las N principales trazas de pila por contribución de valor para un tipo de perfil determinado. Admite filtrado por frame, endpoint o attribute regex. Servicio único. Acepta `service:family` o un traceContext.
 
-- Muéstrame el gráfico de llamas de la CPU para `service:checkout-api` en la última hora.
-- Encuentra los principales puntos críticos de asignación para el servicio de pagos.
-- Explora el gráfico de llamas para la traza `7d5d747be160e280504c099d984bcfe0`.
+- Muéstreme el CPU flame graph para `service:checkout-api` durante la última hora.
+- Encuentre los principales puntos críticos de asignación para el servicio de pagos.
+- Explore el flame graph para la traza `7d5d747be160e280504c099d984bcfe0`.
 
 ### `explore_profiling_call_graph` {#explore-profiling-call-graph}
 *Conjunto de herramientas: **perfilado***\
 *Permisos requeridos: `Continuous Profiler Read`*\
-Devuelve una vista del gráfico de llamadas (bordes de llamador a llamado) de funciones críticas para un tipo de perfil dado. Por defecto, muestra los 20 nodos principales, un corte del 5% y 5 bordes por nodo. Servicio único.
+Devuelve una vista de gráfico de llamadas (bordes de llamador a llamado) de funciones activas para un tipo de perfil determinado. El valor predeterminado es de 20 nodos principales, un límite del 5% y 5 bordes por nodo. Servicio único.
 
-- Muéstrame el gráfico de llamadas para funciones críticas de CPU en `service:checkout-api`.
-- ¿Qué funciones llaman a los caminos más lentos en mi servicio de Go?
-- Obtén el gráfico de llamadas de asignación para el servicio de pagos.
+- Muéstreme el gráfico de llamadas para funciones de CPU activas en `service:checkout-api`.
+- ¿Qué funciones llaman a las rutas más lentas en mi servicio de Go?
+- Obtenga el allocation call graph para el servicio de pagos.
 
 ### `explore_profiling_timeline` {#explore-profiling-timeline}
-*Conjunto de herramientas: **perfilado***\
+*Conjunto de herramientas: **profiling***\
 *Permisos requeridos: `Continuous Profiler Read`*\
-Devuelve una línea de tiempo de grupos de carriles (hilos, recolección de basura, etc.) con actividad de CPU y E/S. Soporta un modo de camino crítico (solo Go; requiere traceContext) para identificar cuellos de botella de latencia dentro de un tramo.
+Devuelve una línea de tiempo de grupos de carriles (hilos, recolección de basura, etcétera) con actividad de CPU y E/S. Admite un modo de ruta crítica (solo Go; requiere traceContext) para identificar cuellos de botella de latencia dentro de un tramo.
 
-- Muéstrame la línea de tiempo de hilos para `service:checkout-api` en los últimos 15 minutos.
-- Encuentra la ruta crítica para la traza `abc123` en mi servicio de Go.
-- Explora la recolección de basura y la actividad de la CPU alrededor del pico de latencia.
+- Muéstreme la línea de tiempo de hilos para `service:checkout-api` durante los últimos 15 minutos.
+- Encuentre la ruta crítica para la traza `abc123` en mi servicio de Go.
+- Explore la recolección de basura y la actividad de CPU alrededor del pico de latencia.
 
 ### `get_profiling_timeseries` {#get-profiling-timeseries}
-*Conjunto de herramientas: **perfilado***\
+*Conjunto de herramientas: **profiling***\
 *Permisos requeridos: `Continuous Profiler Read`*\
-Devuelve datos de perfilado agregados como series temporales (métricas de tasa). Mejor para tendencias, comparación entre servicios y detección de regresiones. Soporta groupBy en campos de marco, contextos y etiquetas.
+Devuelve datos de perfilado agregados como series temporales (métricas de tasa). Ideal para tendencias, comparación entre servicios y detección de regresiones. Admite groupBy en campos de frame, contexts y tags.
 
-- Muéstrame las series temporales del perfil de CPU para `service:checkout-api` en las últimas 24 horas.
-- Compara las tasas de asignación entre mis servicios de Java agrupados por versión.
-- Detecta regresiones de perfil en la última semana agrupadas por despliegue.
+- Muéstreme las series temporales del CPU profile para `service:checkout-api` durante las últimas 24 horas.
+- Compara las tasas de asignación en mis servicios de Java agrupadas por versión.
+- Detecte regresiones de perfil durante la última semana agrupadas por despliegue.
 
 ### `get_profiling_tag_names` {#get-profiling-tag-names}
-*Conjunto de herramientas: **perfilado***\
+*Conjunto de herramientas: **profiling***\
 *Permisos requeridos: `Continuous Profiler Read`*\
-Descubre los nombres de etiquetas disponibles (como servicio, host, env, versión, familia, runtime-id, kube_*) para filtrar datos de perfilado. Devuelve hasta 50 resultados, ordenados por relevancia.
+Descubre nombres de etiquetas disponibles (como service, host, env, version, family, runtime-id, kube_*) para filtrar datos de perfilado. Devuelve hasta 50 resultados, ordenados por relevancia.
 
 - ¿Qué nombres de etiquetas están disponibles para filtrar datos de perfilado en producción?
-- Lista los nombres de etiquetas de perfilado para `service:checkout-api`.
+- Enumere los nombres de etiquetas de perfilado para `service:checkout-api`.
 
 ### `get_profiling_tag_values` {#get-profiling-tag-values}
-*Conjunto de herramientas: **perfilado***\
+*Conjunto de herramientas: **profiling***\
 *Permisos requeridos: `Continuous Profiler Read`*\
 Devuelve valores para una etiqueta de perfilado específica (por ejemplo, todos los valores de la etiqueta de servicio). Devuelve hasta 50 resultados, ordenados por frecuencia.
 
-- ¿Qué versiones del servicio de pagos tenemos datos de perfilado en la última hora?
+- ¿De qué versiones del servicio de pagos tenemos datos de perfilado en la última hora?
 - ¿Cuáles son los dos centros de datos con más datos de perfilado disponibles para `service:checkout-api`?
 
 ### `get_profiling_fields` {#get-profiling-fields}
-*Conjunto de herramientas: **perfilado***\
+*Conjunto de herramientas: **profiling***\
 *Permisos requeridos: `Continuous Profiler Read`*\
-Descubre campos de facetas de marco y contexto (como `@stack.function` y `@labels.trace_endpoint`) utilizables en `get_profiling_timeseries` parámetros groupBy y filter. Limitado por sampleType.
+Descubre campos de faceta de marco y contexto (como `@stack.function` y `@labels.trace_endpoint`) utilizables en los parámetros `get_profiling_timeseries` groupBy y filter. Delimitado por sampleType.
 
-- ¿Qué campos de marco puedo agrupar para perfiles de CPU?
-- Muéstrame los campos de facetas disponibles para perfiles de asignación.
-- Lista los campos de contexto por los que puedo filtrar series temporales para `service:checkout-api`.
+- ¿Con qué campos de marco puedo agrupar los perfiles de CPU?
+- Muéstreme los campos de faceta disponibles para perfiles de asignación.
+- Enumere los campos de contexto por los que puedo filtrar series temporales para `service:checkout-api`.
 
 ### `get_profiling_field_values` {#get-profiling-field-values}
-*Conjunto de herramientas: **perfilado***\
+*Conjunto de herramientas: **profiling***\
 *Permisos requeridos: `Continuous Profiler Read`*\
-Devuelve valores para un marco específico o campo de contexto descubierto con `get_profiling_fields`. Ordenado por frecuencia.
+Devuelve valores para un marco o campo de contexto específico descubierto con `get_profiling_fields`. Ordenado por frecuencia.
 
-- Muéstrame los valores principales para `@stack.function` en mis perfiles de CPU.
-- Obtén los valores principales de los puntos de conexión de `@labels.trace_endpoint`.
-- Lista los valores para el campo de paquete en los perfiles de asignación.
+- Muéstreme los valores principales para `@stack.function` en mis perfiles de CPU.
+- Obtenga los valores de punto final principales de `@labels.trace_endpoint`.
+- Liste los valores para el campo de paquete en perfiles de asignación.
 
-## Tablas de referencia {#reference-tables}
+## Reference Tables {#reference-tables}
 
-Herramientas para gestionar [tablas de referencia][45], incluyendo listar tablas, leer filas, agregar filas y crear tablas desde el almacenamiento en la nube.
+Herramientas para administrar [Reference Tables][45], que incluyen listar tablas, leer filas, insertar o actualizar filas, y crear tablas sincronizadas desde archivos de almacenamiento en la nube o como tablas vacías que usted completa directamente.
 
 ### `list_reference_tables` {#list-reference-tables}
-*Conjunto de herramientas: **tablas de referencia***\
-Lista y busca [tablas de referencia][45] en la organización, con filtrado opcional por nombre y ordenamiento.
+*Conjunto de herramientas: **reference-tables***\
+Lista y busca [Reference Tables][45] en la organización, con filtrado opcional por nombre y ordenamiento.
 
-- Lista todas las tablas de referencia en mi organización.
-- Encuentra tablas de referencia con `customer` en el nombre.
-- Muéstrame las tablas de referencia ordenadas por la última fecha de actualización.
+- Liste todas las Reference Tables en mi organización.
+- Encuentre Reference Tables con `customer` en el nombre.
+- Muéstreme las Reference Tables ordenadas por hora de última actualización.
+
+### `list_reference_table_rows` {#list-reference-table-rows}
+*Conjunto de herramientas: **reference-tables***\
+Enumere todas las filas en una Reference Table con filtrado y paginación opcionales. Use `list_reference_tables` primero para encontrar el ID y el esquema de la Reference Table.
+
+- Enumere todas las filas en la Reference Table `ip_allowlist`.
+- Muéstreme las primeras 50 filas de la Reference Table `customer_tiers`.
 
 ### `get_reference_table_rows` {#get-reference-table-rows}
-*Conjunto de herramientas: **tablas de referencia***\
-Recupera filas específicas de una tabla de referencia por sus valores de clave primaria. Usa `list_reference_tables` primero para encontrar el ID de la tabla y el esquema.
+*Conjunto de herramientas: **reference-tables***\
+Recupera filas específicas de una Reference Table mediante sus valores de clave primaria. Use `list_reference_tables` primero para encontrar el ID y el esquema de la Reference Table.
 
-- Obtén las filas con las claves primarias `user001` y `user002` de la tabla de referencia de usuarios.
-- Busca la entrada para el ID de cuenta `acct-123` en la tabla de cuentas.
+- Obtenga las filas con las claves primarias `user001` y `user002` de la Reference Table de usuarios.
+- Busque la entrada para el ID de cuenta `acct-123` en la Reference Table de cuentas.
 
 ### `append_reference_table_rows` {#append-reference-table-rows}
-*Conjunto de herramientas: **tablas de referencia***\
-Agrega nuevas filas a una tabla de referencia existente. Esta operación solo agrega filas y no modifica ni elimina datos existentes. Cada fila debe incluir todos los campos requeridos del esquema de la tabla, incluyendo el campo de clave primaria.
+*Conjunto de herramientas: **reference-tables***\
+Agrega nuevas filas a una Reference Table existente. Esta operación solo agrega filas y no modifica ni elimina datos existentes. Cada fila debe incluir todos los campos obligatorios del esquema de la Reference Table, incluido el campo de clave primaria. Si es posible que las filas ya existan, use `upsert_reference_table_rows` en su lugar.
 
-- Agrega una nueva fila para el usuario `user003` con nombre `Carol` y edad `28` a la tabla de usuarios.
-- Agrega estas cinco nuevas entradas de cuenta a la tabla de referencia de cuentas.
+- Agregue una nueva fila para el usuario `user003` con el nombre `Carol` y la edad `28` a la Reference Table de usuarios.
+- Agregue estas cinco nuevas entradas de cuenta a la Reference Table de cuentas.
+
+### `upsert_reference_table_rows` {#upsert-reference-table-rows}
+*Conjunto de herramientas: **reference-tables***\
+Inserta nuevas filas o actualiza filas existentes en una Reference Table. Si ya existe una fila con la misma clave principal, sus valores se sobrescriben. Use esto en lugar de `append_reference_table_rows` cuando las filas ya puedan existir.
+
+- Actualice el nivel de la cuenta `acct-123` en la Reference Table `customer_tiers`.
+- Agregue o actualice estas diez entradas de servicio en la Reference Table `service_catalog`.
 
 ### `create_reference_table` {#create-reference-table}
-*Conjunto de herramientas: **tablas de referencia***\
-Crea una nueva tabla de referencia respaldada por un archivo CSV en Amazon S3, Google Cloud Storage o Azure Blob Storage. Solo se admiten los tipos de campo `INT32` y `STRING`.
+*Conjunto de herramientas: **reference-tables***\
+Crea una nueva Reference Table. Admite dos modos: `LOCAL_FILE` crea una Reference Table vacía que puede completar con `append_reference_table_rows` o `upsert_reference_table_rows`. Los modos respaldados por la nube (`S3`, `GCS`, `AZURE`) se sincronizan desde un archivo CSV en Amazon S3, Google Cloud Storage o Azure Blob Storage. Solo se admiten los tipos de campo `INT32` y `STRING`.
 
-- Crea una tabla de referencia llamada `ip_allowlist` desde el archivo `allowlist.csv` en mi bucket S3 `my-data-bucket`.
-- Configura una nueva tabla de referencia respaldada por GCS llamada `customer_tiers` con sincronización automática habilitada.
+- Cree una tabla de referencia vacía llamada `service_catalog` con campos para el nombre del servicio, el equipo propietario y el nivel.
+- Cree una tabla de referencia llamada `ip_allowlist` a partir del archivo `allowlist.csv` en mi bucket de S3 `my-data-bucket`.
+- Configure una nueva Reference Table respaldada por GCS llamada `customer_tiers` con la sincronización automática habilitada.
 
-## Acciones Remotas {#remote-actions}
+## Remote Actions {#remote-actions}
 
-<div class="alert alert-info">El <code>remote-actions</code> el conjunto de herramientas está en vista previa. <a href="https://www.datadoghq.com/product-preview/datadog-agent-mcp/">Regístrese para obtener acceso.</a></div>
+<div class="alert alert-info">El <code>remote-actions</code> El conjunto de herramientas está en versión preliminar. <a href="https://www.datadoghq.com/product-preview/datadog-agent-mcp/">Regístrese para obtener acceso.</a></div>
 
-Herramientas para ejecutar diagnósticos de solo lectura en hosts instrumentados con el Agente de Datadog. Los comandos llegan al host a través del Ejecutador de Acción Privada (PAR) utilizando un [intérprete de shell restringido][63]. Todos los comandos se ejecutan como funciones seguras de Go sin acceso de escritura, sin ejecución de binarios externos y sin salida de red. La lista de comandos permitidos se controla por versión del Agente desde el backend de Datadog.
+Herramientas para ejecutar diagnósticos de solo lectura en hosts instrumentados con el Datadog Agent. Los comandos llegan al host a través del Private Action Runner (PAR) utilizando un [intérprete de shell restringido][63]. Todos los comandos se ejecutan como funciones integradas seguras de Go sin acceso de escritura, sin ejecución de binarios externos y sin salida de red. La lista de comandos permitidos se controla por versión del Agent desde el backend de Datadog.
 
 ### `datadog_remote_action_restricted_shell_run_command` {#datadog-remote-action-restricted-shell-run-command}
-*Conjunto de herramientas: **acciones remotas***\
+*Conjunto de herramientas: **remote-actions***\
 *Permisos requeridos: `Connections Resolve` y `Private Action Runner Contribute`*\
-Ejecuta un comando de shell de solo lectura en un host especificado. Los comandos soportados incluyen: `cat`, `ls`, `head`, `tail`, `find`, `grep`, `sed`, `cut`, `sort`, `uniq`, `wc`, `ping`, `ss` y `ip`. Soporta tuberías, bucles, condicionales, asignación de variables y globbing.
+Ejecuta un comando de shell de solo lectura en un host especificado. Los comandos admitidos incluyen: `cat`, `ls`, `head`, `tail`, `find`, `grep`, `sed`, `cut`, `sort`, `uniq`, `wc`, `ping`, `ss` y `ip`. Admite tuberías, bucles, condicionales, asignación de variables y globbing.
 
-- Muéstrame las últimas 100 líneas del registro del Agente de Datadog en el host `prod-web-01`.
-- Encuentra todas las entradas de ERROR en `/var/log/app/` en el host `db-replica-3` de la última hora.
-- Obtén el contenido de `/etc/datadog-agent/datadog.yaml` en el host `prod-worker-07`.
+- Muéstreme las últimas 100 líneas del registro del Datadog Agent en el host `prod-web-01`.
+- Busque todas las entradas ERROR en `/var/log/app/` en el host `db-replica-3` de la última hora.
+- Obtenga el contenido de `/etc/datadog-agent/datadog.yaml` en el host `prod-worker-07`.
 
 ## RUM {#rum}
 
-Herramientas para [Real User Monitoring][58], incluyendo la resolución de aplicaciones, el resumen del rendimiento, la presentación de información agregada para vistas, la exploración de métricas y la inspección de la configuración de la aplicación.
-
-<div class="alert alert-info">El <code>rum</code> el conjunto de herramientas está en Vista Previa. Contacte a <a href="/help">soporte de Datadog</a> para solicitar acceso.</div>
+Herramientas para [Real User Monitoring][58], que incluyen la resolución de aplicaciones, el resumen del rendimiento, la presentación de información agregada para vistas, la exploración de métricas, la inspección de la configuración de aplicaciones, la gestión de filtros de retención y la gestión de métricas RUM personalizadas.
 
 ### `search_rum_applications` {#search-rum-applications}
-*Conjunto de herramientas: **RUM***\
+*Conjunto de herramientas: **rum***\
 *Permisos requeridos: `RUM Apps Read`*\
-Lista sus aplicaciones RUM y resuelve el `application_id` a utilizar para las llamadas posteriores a la herramienta RUM.
+Enumere sus aplicaciones RUM y resuelva el `application_id` para usar en llamadas posteriores a herramientas RUM.
 
-- Encuentre la aplicación RUM llamada "checkout-web" y devuelva su ID de aplicación.
-- Liste todas sus aplicaciones RUM.
+- Busque la aplicación RUM llamada "checkout-web" y devuelva su ID de aplicación.
+- Enumere todas mis aplicaciones RUM.
 
 ### `get_rum_summary` {#get-rum-summary}
-*Conjunto de herramientas: **RUM***\
+*Conjunto de herramientas: **rum***\
 *Permisos requeridos: `RUM Apps Read` y `Timeseries`*\
-Devuelve un resumen de métricas vitales para una aplicación RUM, con diferencias de período a período.
+Devuelve un resumen de las métricas vitales para una aplicación RUM, con diferencias periodo a periodo.
 
 - Resuma el rendimiento de la aplicación RUM "checkout-web" durante las últimas 24 horas.
-- ¿Cómo cambiaron los Core Web Vitals en su aplicación RUM principal de semana a semana?
+- ¿Cómo cambiaron las Core Web Vitals en mi aplicación RUM principal semana tras semana?
 
 ### `get_rum_insight` {#get-rum-insight}
-*Conjunto de herramientas: **RUM***\
+*Toolset: **rum***\
 *Permisos requeridos: `RUM Apps Read`*\
-Devuelve información agregada para Vistas RUM: cascada, tareas largas, distribuciones vitales y análisis de etiquetas.
+Devuelve información agregada para las vistas RUM: cascada, tareas largas, distribuciones vitales y análisis de etiquetas.
 
-- Para la vista `/checkout` en la aplicación "shop", muéstreme la cascada de recursos agregada durante la última hora.
+- Para la vista `/checkout` en la aplicación "shop", muéstreme la cascada de recursos agregada de la última hora.
 - Desglose la distribución de INP por tipo de dispositivo para la página de inicio.
 
 ### `search_rum_metrics` {#search-rum-metrics}
 *Conjunto de herramientas: **RUM***\
 *Permisos requeridos: `RUM Apps Read`*\
-Explora las métricas de RUM para una aplicación, incluyendo métricas predeterminadas y métricas personalizadas.
+Explora métricas RUM para una aplicación, incluyendo métricas predeterminadas y métricas personalizadas.
 
-- Liste las métricas personalizadas de RUM definidas en la aplicación "checkout-web".
-- Muéstreme las métricas de RUM disponibles relacionadas con el tiempo de carga de página en mi aplicación principal.
+- Enumere las métricas RUM personalizadas definidas en la aplicación \"checkout-web\".
+- Muéstreme las métricas RUM disponibles relacionadas con el tiempo de carga de página en mi aplicación principal.
+
+### `upsert_rum_metric` {#upsert-rum-metric}
+*Conjunto de herramientas: **RUM***\
+*Permisos requeridos: `RUM Apps Read` y `RUM Generate Metrics`*\
+Crea o actualiza una métrica RUM personalizada. Verifica los campos inmutables antes de actualizar una métrica existente. Esta operación es idempotente.
+
+- Cree una métrica de distribución `rum.view.lcp_by_country` que rastree el p95 LCP para eventos de vista, agrupados por país.
+- Actualice el filtro en `rum.error.checkout_errors` para excluir el tráfico de prueba Synthetic.
+
+### `delete_rum_metric` {#delete-rum-metric}
+*Conjunto de herramientas: **RUM***\
+*Permisos requeridos: `RUM Apps Read` y `RUM Generate Metrics`*\
+Elimina permanentemente una métrica RUM personalizada por ID. Esta operación es idempotente.
+
+- Elimine la métrica RUM personalizada `rum.view.my_custom_metric`.
+- Elimine la métrica RUM `rum.view.legacy_page_views` de mi organización.
 
 ### `search_rum_retention_filters` {#search-rum-retention-filters}
 *Conjunto de herramientas: **RUM***\
 *Permisos requeridos: `RUM Retention Filters Read`*\
-Liste los filtros de retención configurados en una aplicación de RUM. Solo lectura; disponible para clientes de [RUM without Limits][59].
+Enumera los filtros de retención configurados en una aplicación de RUM. Solo lectura; disponible para clientes de [RUM without Limits][59].
 
-- Liste los filtros de retención configurados en la aplicación "checkout-web".
+- Enumere los filtros de retención configurados en la aplicación \"checkout-web\".
 - ¿Qué filtros de retención tengo en mi aplicación principal de RUM?
+
+### `append_new_rum_retention_filter` {#append-new-rum-retention-filter}
+*Conjunto de herramientas: **RUM***\
+*Permisos requeridos: `RUM Retention Filters Write` o `Product Analytics Apps Write`*\
+Crea un filtro de retención de RUM, añadido al final del orden de evaluación. Los filtros de retención controlan qué eventos de RUM se indexan y retienen, lo cual afecta la facturación. Confirme el cambio antes de aplicarlo.
+
+- Cree un filtro de retención en \"checkout-web\" que retenga el 100% de los eventos de error.
+- Agregue un filtro a mi aplicación principal de RUM que mantenga todas las sesiones que coincidan con `@view.url_path:/checkout`.
+
+### `update_rum_retention_filter` {#update-rum-retention-filter}
+*Conjunto de herramientas: **RUM***\
+*Permisos requeridos: `RUM Retention Filters Write` o `Product Analytics Apps Write`*\
+Actualiza los atributos de un filtro de retención de RUM existente, como su nombre, tipo de evento, consulta, tasa de muestreo o estado de habilitación. Confirme el cambio antes de aplicarlo.
+
+- Aumente la tasa de muestreo del filtro de retención \"checkout errors\" al 100%.
+- Deshabilite el filtro de retención \"long tasks\" en mi aplicación RUM principal.
+
+### `reorder_rum_retention_filters` {#reorder-rum-retention-filters}
+*Conjunto de herramientas: **RUM***\
+*Permisos requeridos: `RUM Retention Filters Write` o `Product Analytics Apps Write`*\
+Establece el orden de evaluación completo de los filtros de retención de una aplicación RUM. Los filtros se evalúan de arriba hacia abajo y cada evento se detiene en la primera coincidencia, por lo que el orden determina qué tasa de muestreo se aplica. Confirme el nuevo orden antes de aplicar.
+
+- Mueva el filtro de retención \"checkout errors\" por encima del filtro general en \"checkout-web\".
+- Reordene mis filtros de retención para que los filtros específicos se evalúen antes que los generales.
+
+### `delete_rum_retention_filter` {#delete-rum-retention-filter}
+*Conjunto de herramientas: **RUM***\
+*Permisos requeridos: `RUM Retention Filters Write` o `Product Analytics Apps Write`*\
+Elimina permanentemente un filtro de retención de RUM por ID. Confirme la eliminación antes de aplicar. Esta operación es idempotente.
+
+- Elimine el filtro de retención \"legacy sessions\" de \"checkout-web\".
+- Elimine el filtro de retención con ID `abc-123-def` de mi aplicación RUM principal.
 
 ## Seguridad {#security}
 
-Herramientas para escaneo de seguridad de código, analizando, buscando y clasificando [señales de seguridad][53], gestionando [reglas de detección][60] y [supresiones][61], y analizando [hallazgos de seguridad][54].
+Herramientas para el escaneo, análisis, búsqueda y clasificación de seguridad de código [security signals][53], investigación de indicadores de [IoC Explorer][67], gestión de [detection rules][60] y [suppressions][61], y análisis de [security findings][54].
 
 ### `datadog_secrets_scan` {#datadog-secrets-scan}
 *Conjunto de herramientas: **seguridad***\
 Escanea el código en busca de secretos y credenciales codificados, detectando claves de AWS, claves de API, contraseñas, tokens, claves privadas y credenciales de base de datos.
 
-- Escanee mi código en busca de secretos codificados.
-- Verifique si hay claves de API o contraseñas incluidas en este archivo.
+- Escanea mi código en busca de secretos codificados.
+- Compruebe si hay claves de API o contraseñas incluidas en este archivo.
 
 ### `get_datadog_security_signals_schema` {#get-datadog-security-signals-schema}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Signals Read`*\
-Devuelve los campos disponibles y sus tipos para señales de seguridad. Los tipos de señales se mapean a `@workflow.rule.type` valores como `Log Detection`, `Application Security` y `Workload Security`.
+Devuelve los campos disponibles y sus tipos para las señales de seguridad. Los tipos de señal se asignan a valores de `@workflow.rule.type` tales como `Log Detection`, `Application Security` y `Workload Security`.
 
-- ¿Qué campos puedo usar para filtrar señales de seguridad?
-- Muéstreme los campos disponibles para señales de Cloud SIEM.
+- ¿Qué campos puedo usar para filtrar las señales de seguridad?
+- Muéstreme los campos disponibles para las señales de Cloud SIEM.
 - ¿Qué valores de enumeración son válidos para el campo de tipo de regla de señal?
 
 ### `search_datadog_security_signals` {#search-datadog-security-signals}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Signals Read`*\
-Busque y recupere señales de seguridad de Datadog Security Monitoring, incluyendo señales de Cloud SIEM, señales de App & API Protection y señales de Workload Protection.
+Busca y recupera señales de seguridad de Datadog Security Monitoring, incluyendo señales de Cloud SIEM, señales de App & API Protection y señales de Workload Protection.
 
-- Muéstreme señales de seguridad de las últimas 24 horas.
+- Muéstreme las señales de seguridad de las últimas 24 horas.
 - Encuentre señales de seguridad de alta severidad relacionadas con mi entorno de producción.
-- Liste señales de Cloud SIEM activadas por intentos de inicio de sesión sospechosos.
+- Liste las señales de Cloud SIEM activadas por intentos de inicio de sesión sospechosos.
 
 ### `analyze_datadog_security_signals` {#analyze-datadog-security-signals}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Signals Read` y `Timeseries`*\
-Analiza señales de seguridad utilizando consultas SQL para agregaciones, agrupaciones y análisis de tendencias. Utilícelo para conteos, top-N y desgloses a lo largo del tiempo. Para listar o recuperar señales específicas, utilice `search_datadog_security_signals` o `get_datadog_security_signal`.
+Analiza señales de seguridad usando consultas SQL para agregaciones, agrupaciones y análisis de tendencias. Úselo para conteos, top-N y desgloses a lo largo del tiempo. Para listar o recuperar señales específicas, utilice `search_datadog_security_signals` o `get_datadog_security_signal`.
 
 - Muéstreme las 10 principales reglas de SIEM por conteo de señales en los últimos 7 días.
-- Cuente señales de seguridad altas y críticas agrupadas por severidad.
+- Cuente las señales de seguridad altas y críticas agrupadas por severidad.
 - ¿Cuántas señales de App & API Protection se activaron por servicio ayer?
 
 ### `get_datadog_security_signal` {#get-datadog-security-signal}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Signals Read`*\
-Recupera los detalles completos de una única señal de seguridad por ID, incluyendo atributos, información de reglas, estado de triage, etiquetas y correlaciones de incidencias.
+Recupera los detalles completos de una sola señal de seguridad por ID, incluyendo atributos, información de la regla, estado de triaje, etiquetas y correlaciones de casos.
 
 - Obtenga los detalles completos de la señal de seguridad `AwAAAZ27F1BUjY4rPQAAABhBWjI3RjFCVWpZNHJBQUFBSGFNQVZBQUFBR1Bu`.
-- Muéstreme la regla, el estado de triage y las incidencias vinculadas para esta señal.
+- Muéstreme la regla, el estado de triaje y los casos vinculados para esta señal.
 
 ### `update_datadog_security_signals_triage` {#update-datadog-security-signals-triage}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Signals Write`*\
-Actualiza el estado de triage o el asignatario de una o más señales de seguridad en bloque (hasta 500 señales). Acepta una lista de IDs de señales o una consulta de filtro que coincida con todas las señales a actualizar.
+Actualiza el estado de clasificación o el responsable de una o más señales de seguridad de forma masiva (hasta 500 señales). Acepta una lista de IDs de señal o una consulta de filtro que coincida con todas las señales a actualizar.
 
 - Archive todas las señales de la regla "Brute Force Login" en las últimas 24 horas.
 - Establezca todas las señales abiertas para `service:checkout` como en revisión y asígnelas a mí.
-- Marque la señal `AwAAAZ27F1BUjY4rPQAAABhBWjI3RjFCVWpZNHJBQUFBSGFNQVZBQUFBR1Bu` como archivada con la razón "testing".
+- Marque la señal `AwAAAZ27F1BUjY4rPQAAABhBWjI3RjFCVWpZNHJBQUFBSGFNQVZBQUFBR1Bu` como archivada con el motivo "testing".
+
+### `search_datadog_security_ioc_indicators` {#search-datadog-security-ioc-indicators}
+*Herramientas: **seguridad***\
+*Permisos requeridos: `Security Signals Read`*\
+Enumere los indicadores de [IoC Explorer][67] (IP, dominios, URL, hashes de archivos) que coincidan con las fuentes de inteligencia de amenazas. Empareje con `get_datadog_security_ioc_indicator` para obtener detalles completos y `update_datadog_security_ioc_indicator_triage` para marcar como revisado.
+
+- Muéstreme los indicadores de IP maliciosos con la puntuación más alta.
+- Enumere los indicadores de IoC en la categoría `residential_proxy` con una puntuación media o superior.
+- Muéstreme los indicadores de amenazas que aún no se han revisado.
+
+### `get_datadog_security_ioc_indicator` {#get-datadog-security-ioc-indicator}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Security Signals Read`*\
+Recupere los detalles completos de un indicador de [IoC Explorer][67] por valor (puntuación, categoría, información de AS, GeoIP, fuentes de registro, recuentos de señales).
+
+- Obtenga los detalles del indicador de amenazas `192.0.2.1`.
+- Muéstreme todo lo que sabemos sobre `malicious.example.com`.
+
+### `update_datadog_security_ioc_indicator_triage` {#update-datadog-security-ioc-indicator-triage}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Security Signals Write`*\
+Establezca el estado de triaje de un indicador de [IoC Explorer][67].
+
+- Marque el indicador `192.0.2.1` como revisado.
+- Vuelva a establecer `evil-domain.example.com` como no revisado.
+
+### `get_datadog_security_ioc_schema` {#get-datadog-security-ioc-schema}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Security Signals Read`*\
+Descubra los campos filtrables y sus valores para [IoC Explorer][67]. Omita `filter` para enumerar los campos disponibles; proporcione `filter` para obtener `[{value, count}]` para ese campo. Utilice `query` para limitar los conteos a un subconjunto de indicadores.
+
+- ¿Qué campos están disponibles para los filtros de indicadores de IoC?
+- Muéstreme los tipos de indicadores disponibles y cuántos existen de cada uno.
+- Obtenga los valores para el filtro `categories` limitado a indicadores de puntuación alta.
 
 ### `get_datadog_security_detection_rules_schema` {#get-datadog-security-detection-rules-schema}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Monitoring Rules Read`*\
-Devuelve la referencia de autoría y el esquema para las reglas de detección. Cubre los tipos de reglas soportadas, métodos de detección, sintaxis de consulta, convenciones de etiquetas y facetas de búsqueda válidas. Utilícelo antes de autorizar o consultar reglas de detección. Tipos de reglas actualmente soportados: detección de registros, seguridad de API y AppSec.
+Devuelve la referencia de creación y el esquema para las reglas de detección. Cubre los tipos de reglas admitidos, los métodos de detección, la sintaxis de consulta, las convenciones de etiquetas y las facetas de búsqueda válidas. Utilice esto antes de crear o consultar reglas de detección. Tipos de reglas admitidos actualmente: detección de registros, seguridad de API y AppSec.
 
 - ¿Qué campos y opciones están disponibles al crear una regla de detección de umbral?
-- Muéstreme el esquema para las reglas de detección de secuencias.
+- Muéstreme el esquema para las reglas de detección de secuencia.
 - ¿Qué convenciones de etiquetas y sintaxis de consulta utiliza la API de reglas de detección?
 
-### `list_datadog_security_detection_rules` {#list-datadog-security-detection-rules}
-*Conjunto de herramientas: **seguridad***\
+### `get_datadog_security_detection_rules` {#get-datadog-security-detection-rules}
+*Conjunto de herramientas: **security***\
 *Permisos requeridos: `Security Monitoring Rules Read`*\
-Liste las reglas de detección para la organización. Las reglas de detección definen las condiciones bajo las cuales se generan señales de seguridad. Acepta una consulta de texto libre opcional para filtrar resultados del lado del servidor. Utilícelo (`get_datadog_security_detection_rule`) para obtener la definición completa de una regla específica.
+Recupera las reglas de detección de seguridad. Admite dos modos: proporciona `rule_id` para obtener la definición completa de una sola regla por ID, u omite `rule_id` para listar las reglas (opcionalmente filtradas con `query` y limitadas por token con `max_tokens`). Los dos modos son mutuamente excluyentes.
 
-- Liste todas las reglas de detección de Cloud SIEM habilitadas.
-- Muéstreme las reglas de detección etiquetadas con `source:cloudtrail`.
-- ¿Qué reglas están configuradas para la detección de viajes imposibles?
-
-### `get_datadog_security_detection_rule` {#get-datadog-security-detection-rule}
-*Conjunto de herramientas: **seguridad***\
-*Permisos requeridos: `Security Monitoring Rules Read`*\
-Recupera la definición completa de una única regla de detección por ID, incluyendo consultas, casos, opciones, filtros y metadatos. Utilícelo (`list_datadog_security_detection_rules`) para encontrar los IDs de las reglas.
-
-- Obtenga la definición completa de la regla de detección `abc-123-def`.
-- Muéstreme las consultas y las incidencias para la regla que genera esta señal.
+- Lista todas las reglas de detección de Cloud SIEM habilitadas.
+- Muéstrame las reglas de detección etiquetadas con `source:cloudtrail`.
+- Obtén la definición completa de la regla de detección `abc-123-def`.
 - ¿Qué umbrales y campos de agrupación utiliza esta regla de detección?
+
+### `create_datadog_security_detection_rule` {#create-datadog-security-detection-rule}
+*Conjunto de herramientas: **security***\
+*Permisos requeridos: `Security Monitoring Rules Write`*\
+Crea una nueva regla de detección. Llama primero a `get_datadog_security_detection_rules_schema` para obtener la gramática de la carga útil y, a continuación, proporciona una carga útil de regla completa. Si la operación tiene éxito, devuelve la regla completa, incluido su ID asignado por el servidor.
+
+- Crea una regla de detección de umbral que se active cuando ocurran más de 10 inicios de sesión fallidos desde la misma IP en 5 minutos.
+- Crea una nueva regla de detección de registros para CloudTrail que alerte sobre la escalada de privilegios de IAM.
+- Crea una regla de detección para `source:nginx` que genere una señal cuando la tasa de error supere las 100 por minuto.
+
+### `update_datadog_security_detection_rule` {#update-datadog-security-detection-rule}
+*Conjunto de herramientas: **security***\
+*Permisos requeridos: `Security Monitoring Rules Write`*\
+Actualiza una regla de detección personalizada existente reemplazándola por completo. Llama primero a `get_datadog_security_detection_rules` para obtener el cuerpo de la regla actual, modifica los campos que necesites y envía el objeto actualizado completo. No se pueden actualizar las reglas predeterminadas proporcionadas por Datadog.
+
+- Habilita la regla de detección `abc-123-def`.
+- Deshabilita la regla de detección de fuerza bruta.
+- Actualiza el umbral de mi regla de detección de fuerza bruta de 10 a 20 inicios de sesión fallidos.
+- Agrega un nuevo caso a la regla de detección `abc-123-def` que se active con gravedad crítica.
+- Cambia el campo de agrupación de esta regla de `@usr.ip` a `@network.client.ip`.
+
+### `delete_datadog_security_detection_rules` {#delete-datadog-security-detection-rules}
+*Conjunto de herramientas: **security***\
+*Permisos requeridos: `Security Monitoring Rules Write`*\
+Elimina una o más reglas de detección personalizadas por ID. Solo se pueden eliminar las reglas personalizadas (no predeterminadas). Las reglas predeterminadas devuelven 403. Cada regla se autoriza individualmente; los errores aparecen en `failed_rules` sin abortar el lote.
+
+- Eliminar la regla de detección `abc-123-def`.
+- Eliminar estas tres reglas de detección de prueba que creé anteriormente.
 
 ### `get_datadog_security_suppressions` {#get-datadog-security-suppressions}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Monitoring Suppressions Read`*\
-Recupera las supresiones de seguimiento de seguridad. Soporta tres modos: listar todas las supresiones, obtener una sola supresión por ID, o obtener supresiones que afectan a una regla de detección específica. Las supresiones evitan que las reglas de detección generen señales para condiciones coincidentes.
+Recupera supresiones de monitoreo de seguridad. Admite tres modos: listar todas las supresiones, obtener una sola supresión por ID u obtener supresiones que afecten a una regla de detección específica. Las supresiones evitan que las reglas de detección generen señales para condiciones coincidentes.
 
-- Liste todas las supresiones activas.
-- Muéstreme las supresiones para la regla de detección `abc-123-def`.
-- Obtenga los detalles completos de la supresión `sup-456-xyz`.
+- Listar todas las supresiones activas.
+- Muéstrame las supresiones para la regla de detección `abc-123-def`.
+- Obtener los detalles completos de la supresión `sup-456-xyz`.
 
 ### `create_datadog_security_suppression` {#create-datadog-security-suppression}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Monitoring Suppressions Write`*\
-Crea una nueva regla de supresión que evita que una regla de detección genere señales para condiciones específicas. Al menos uno de `suppression_query` o `data_exclusion_query` debe ser proporcionado.
+Crea una nueva regla de supresión que evita que una regla de detección genere señales para condiciones específicas. Se debe proporcionar al menos uno de `suppression_query` o `data_exclusion_query`.
 
-- Suprima señales de la regla de fuerza bruta para la IP `10.0.0.1`.
-- Cree una supresión para la regla de detección de anomalías que ignore el entorno `staging`.
-- Suprima señales de la regla `abc-123-def` donde `@usr.email` coincide con nuestras cuentas de prueba.
+- Suprimir señales de la regla de fuerza bruta para la IP `10.0.0.1`.
+- Crear una supresión para la regla de detección de anomalía que ignore el entorno `staging`.
+- Suprima las señales de la regla `abc-123-def` donde `@usr.email` coincida con nuestras cuentas de prueba.
 
 ### `update_datadog_security_suppression` {#update-datadog-security-suppression}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Monitoring Suppressions Write`*\
-Actualiza una regla de supresión existente. Solo cambia los campos proporcionados. Proporcionar `version` habilita el control de concurrencia optimista para evitar sobrescribir ediciones concurrentes.
+Actualiza una regla de supresión existente. Solo cambia los campos proporcionados. Proporcionar `version` habilita el control de concurrencia optimista para evitar sobrescribir ediciones simultáneas.
 
-- Actualice la supresión para la regla de fuerza bruta para también excluir `10.0.0.2`.
-- Cambie la fecha de expiración de la supresión `sup-456-xyz` al próximo trimestre.
-- Desactive la supresión para la regla de detección de anomalías sin eliminarla.
+- Actualice la supresión de la regla de fuerza bruta para excluir también `10.0.0.2`.
+- Cambie la fecha de vencimiento de la supresión `sup-456-xyz` al próximo trimestre.
+- Deshabilite la supresión de la regla de detección de anomalía sin eliminarla.
 
 ### `delete_datadog_security_suppression` {#delete-datadog-security-suppression}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Monitoring Suppressions Write`*\
 Elimina una regla de supresión.
 
-- Elimina la supresión `sup-456-xyz`.
-- Elimina la supresión que estaba silenciando la regla de detección de fuerza bruta.
+- Elimine la supresión `sup-456-xyz`.
+- Elimine la supresión que silenciaba la regla de detección de fuerza bruta.
 
 ### `get_datadog_security_findings_schema` {#get-datadog-security-findings-schema}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Monitoring Findings Read`*\
-Devuelve el esquema (campos disponibles y sus tipos) para hallazgos de seguridad. Llama a esto primero antes de usar `analyze_datadog_security_findings` para descubrir campos consultables. Soporta filtrado por tipo de hallazgo y controla el tamaño de la respuesta.
+Devuelve el esquema (campos disponibles y sus tipos) para los hallazgos de seguridad. Llame a esto primero antes de usar `analyze_datadog_security_findings` para descubrir los campos consultables. Admite el filtrado por tipo de hallazgo y el control del tamaño de la respuesta.
 
 - ¿Qué campos están disponibles para los hallazgos de seguridad?
-- Muéstrame el esquema para los hallazgos de vulnerabilidad de la biblioteca.
-- Obtén el esquema completo incluyendo descripciones para los hallazgos de mala configuración.
+- Muéstrame el esquema para los hallazgos de vulnerabilidad de biblioteca.
+- Obtén el esquema completo, incluidas las descripciones para los hallazgos de configuración incorrecta.
 
 ### `analyze_datadog_security_findings` {#analyze-datadog-security-findings}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Monitoring Findings Read` y `Timeseries`*\
-Herramienta principal para analizar hallazgos de seguridad utilizando consultas SQL. Consulta datos en vivo de las últimas 24 horas con agregaciones SQL flexibles, filtrado y agrupamiento. Llama a `get_datadog_security_findings_schema` primero para descubrir los campos disponibles, luego usa esta herramienta para consultar.
+Herramienta principal para analizar hallazgos de seguridad mediante consultas SQL. Consulta datos en tiempo real de las últimas 24 horas con agregaciones, filtrado y agrupación SQL flexibles. Llame primero a `get_datadog_security_findings_schema` para descubrir los campos disponibles, luego use esta herramienta para consultar.
 
-- Muéstrame las 10 reglas con los hallazgos más críticos.
-- Cuenta los hallazgos abiertos agrupados por severidad y tipo de hallazgo.
-- Encuentra vulnerabilidades de biblioteca con exploits disponibles, agrupados por recurso.
+- Muéstrame las 10 reglas principales con los hallazgos más críticos.
+- Cuente los hallazgos abiertos agrupados por gravedad y tipo de hallazgo.
+- Encuentre vulnerabilidades de biblioteca con exploits disponibles, agrupadas por recurso.
 
 ### `search_datadog_security_findings` {#search-datadog-security-findings}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Monitoring Findings Read`*\
-Herramienta de respaldo para recuperar detalles completos de hallazgos de seguridad. Prefiere `analyze_datadog_security_findings` para la mayoría de las tareas de análisis. Utiliza esta herramienta solo cuando necesites encontrar objetos completos o cuando las consultas SQL sean insuficientes.
+Herramienta de respaldo para recuperar detalles completos de hallazgos de seguridad. Prefiera `analyze_datadog_security_findings` para la mayoría de las tareas de análisis. Utilice esta herramienta solo cuando necesite objetos de hallazgo completos o cuando las consultas SQL sean insuficientes.
 
-- Obtén detalles completos sobre hallazgos críticos en mi entorno de AWS.
-- Recupera objetos de hallazgos completos para una regla específica.
-- Lista todos los hallazgos de riesgo de identidad abiertos con metadatos completos.
+- Obtenga detalles completos de los hallazgos críticos en mi entorno de AWS.
+- Recupere objetos de hallazgo completos para una regla específica.
+- Liste todos los hallazgos de riesgo de identidad abiertos con metadatos completos.
 
 ### `get_datadog_security_findings_ticket_suggestions` {#get-datadog-security-findings-ticket-suggestions}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Monitoring Findings Read`, `Cases Read`*\
-Devuelve sugerencias de proyectos clasificadas para la gestión de incidencias de hallazgos de seguridad. Muestra los proyectos disponibles de Case Management, Jira y ServiceNow con datos de uso de 30 días. Llama a esto antes de `create_datadog_security_findings_ticket` para descubrir qué proyecto utilizar.
+Devuelve sugerencias de proyecto clasificadas para la creación de tickets de hallazgos de seguridad. Muestre los proyecto disponibles de Case Management, Jira, Linear y ServiceNow con datos de uso de 30 días. Llame a esto antes de `create_datadog_security_findings_ticket` para descubrir qué proyecto usar.
 
-- ¿Qué proyectos de Jira puedo usar para crear tickets para hallazgos de seguridad?
-- Muéstrame los proyectos disponibles de ServiceNow para tickets.
-- ¿Cuáles son los proyectos de Case Management más utilizados para hallazgos?
+- ¿Qué proyecto de Jira puedo usar para crear tickets para hallazgos de seguridad?
+- Muéstreme los proyecto de ServiceNow disponibles para la creación de tickets.
+- ¿A qué proyecto de Linear puedo enviar hallazgos?
+- ¿Qué proyecto de Case Management es el más utilizado para hallazgos?
 
 ### `create_datadog_security_findings_ticket` {#create-datadog-security-findings-ticket}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Monitoring Findings Write`, `Cases Read`, `Cases Write`*\
-Crea un caso de Case Management, una incidencia de Jira o un ticket de ServiceNow para hallazgos de seguridad. Requiere ID de hallazgos específicos y un ID de proyecto. Usa `get_datadog_security_findings_ticket_suggestions` primero para descubrir los proyectos disponibles.
+Cree un caso de Case Management, un issue de Jira, un issue de Linear o un ticket de ServiceNow para hallazgos de seguridad. Requiere IDs de hallazgo específicos y un ID de proyecto. Utilice `get_datadog_security_findings_ticket_suggestions` primero para descubrir los proyecto disponibles.
 
-- Crea un ticket de Jira para estos hallazgos críticos en el proyecto SECURITY.
-- Abre un caso de Case Management para los hallazgos de esta regla.
-- Crea un ticket de ServiceNow para estas vulnerabilidades de la biblioteca.
+- Cree un ticket de Jira para estos hallazgos críticos en el proyecto SECURITY.
+- Abra un caso de Case Management para los hallazgos de esta regla.
+- Cree un issue de Linear para estos hallazgos de alta severidad.
+- Cree un ticket de ServiceNow para estas vulnerabilidades de biblioteca.
 
 ### `detach_datadog_security_findings_ticket` {#detach-datadog-security-findings-ticket}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Monitoring Findings Write`, `Cases Write`*\
-Desvincula los hallazgos de seguridad de su caso o ticket asociado. Dado que los tickets de Jira y ServiceNow están vinculados a través de la gestión de casos, desvincular el caso también desvincula cualquier ticket posterior.
+Desvincule los hallazgos de seguridad de su caso o ticket vinculado. Dado que los tickets de Jira y ServiceNow están vinculados a través de Case Management, desvincular el caso también desvincula cualquier ticket relacionado.
 
-- Desvincula estos hallazgos de su ticket de Jira asociado.
-- Elimina la asociación del caso para estos hallazgos.
+- Desvincule estos hallazgos de su ticket de Jira vinculado.
+- Elimine la asociación de caso para estos hallazgos.
 
 ### `mute_datadog_security_findings` {#mute-datadog-security-findings}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Monitoring Findings Write`*\
-Silencia o reanuda los hallazgos de seguridad para suprimirlos de alertas y tableros. Requiere un motivo de silencio (`PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK` o `OTHER`) y admite una descripción opcional y una fecha de expiración.
+Silencie o reactive hallazgos de seguridad para suprimirlos de alertas y paneles. Requiere un motivo de silencio (`PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK` o `OTHER`) y admite una descripción y una fecha de vencimiento opcionales.
 
-- Silencia estos hallazgos como falsos positivos.
-- Silencia esta mala configuración como riesgo aceptado con una expiración de 90 días.
-- Reanuda los hallazgos que fueron marcados previamente como pendientes de solución.
+- Silencie estos hallazgos como falsos positivos.
+- Silencie esta configuración incorrecta como riesgo aceptado con una fecha de vencimiento de 90 días.
+- Reactive los hallazgos que se marcaron previamente como pendientes de corrección.
 
 ### `assign_datadog_security_findings` {#assign-datadog-security-findings}
 *Conjunto de herramientas: **seguridad***\
 *Permisos requeridos: `Security Monitoring Findings Write`*\
-Asigna o desasigna hallazgos de seguridad a un usuario. La asignación se propaga a cualquier caso vinculado. Omitir el ID del asignado para desasignar.
+Asigne o desasigne hallazgos de seguridad a un usuario. La asignación se propaga a cualquier caso vinculado. Omita el ID del asignado para desasignar.
 
-- Asigna estos hallazgos críticos al líder del equipo de seguridad.
-- Desasigna hallazgos que ya no son relevantes.
-- Asigna todos los hallazgos de esta regla a mí.
+- Asigne estos hallazgos críticos al líder del equipo de seguridad.
+- Desasigne los hallazgos que ya no sean relevantes.
+- Asígneme todos los hallazgos de esta regla.
+
+### `list_datadog_security_findings_automation_rules` {#list-datadog-security-findings-automation-rules}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Security Pipelines Read`*\
+Enumere las reglas de automatización de hallazgos de seguridad de un tipo determinado (`mute`, `due_date`, `ticket_creation` o `severity_modifier`).
+
+- Enumere todas las reglas de automatización de silencio para hallazgos de seguridad.
+- Muéstreme las reglas de creación de tickets.
+- ¿Qué reglas de automatización de fechas límite están configuradas?
+
+### `create_datadog_security_findings_automation_rule` {#create-datadog-security-findings-automation-rule}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Security Pipelines Write` y `Security Monitoring Findings Read`*\
+Cree una regla de automatización de hallazgos de seguridad. Elija un `rule_type`: `mute` (suprimir hallazgos), `due_date` (establecer fechas límite de remediación), `severity_modifier` (ajustar la gravedad del hallazgo) o `ticket_creation` (crear automáticamente tickets de Jira o de Case Management).
+
+- Cree una regla para silenciar automáticamente los hallazgos de configuración incorrecta de falsos positivos en el entorno de pruebas.
+- Establezca fechas límite de remediación de 30 días para vulnerabilidades de bibliotecas de alta gravedad.
+- Cree automáticamente tickets de Jira para hallazgos críticos en el proyecto SECURITY.
+
+### `update_datadog_security_findings_automation_rule` {#update-datadog-security-findings-automation-rule}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Security Pipelines Write`*\
+Actualice una regla de automatización existente. Admite actualizaciones parciales, por lo que solo se cambian los campos proporcionados. Úsela para habilitar o deshabilitar reglas, cambiarles el nombre, ajustar filtros o modificar parámetros de acción.
+
+- Habilite la regla de automatización que silencia los hallazgos del entorno de pruebas.
+- Cambie la regla de fecha de vencimiento para dar a los hallazgos críticos 14 días en lugar de 30.
+- Actualice la regla de creación de tickets para apuntar a un proyecto de Jira diferente.
+
+### `delete_datadog_security_findings_automation_rule` {#delete-datadog-security-findings-automation-rule}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Security Pipelines Write`*\
+Elimine permanentemente una regla de automatización de hallazgos de seguridad por ID.
+
+- Elimine la regla de modificador de gravedad `abc-123-def`.
+- Elimine la regla de silencio que ya no es necesaria.
+
+### `reorder_datadog_security_findings_automation_rules` {#reorder-datadog-security-findings-automation-rules}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Security Pipelines Write`*\
+Mueva una regla de automatización hacia arriba o hacia abajo en la lista. Las reglas se aplican en orden, por lo que la posición de una regla establece su prioridad.
+
+- Mueva la regla de silencio `abc-123-def` a la parte superior de la lista.
+- Reduzca la prioridad de esta regla de fecha de vencimiento en dos posiciones.
+
+### `get_datadog_security_trace_passlist` {#get-datadog-security-trace-passlist}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Application Security Management Protect Read`*\
+Devuelve todas las entradas de filtro de exclusión (lista de permitidos) de WAF para que la organización revise las supresiones existentes.
+
+- Enumere todas las entradas de la lista de permitidos de App & API Protection.
+- Muéstreme los filtros de exclusión de WAF activos.
+- Verifique las supresiones de la lista de permitidos existentes antes de agregar una nueva.
+
+### `upsert_datadog_security_trace_passlist` {#upsert-datadog-security-trace-passlist}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Application Security Management Protect Write`*\
+Crea o actualiza una entrada de filtro de exclusión (lista de permitidos) de WAF para suprimir reglas ruidosas en un servicio o punto final específico.
+
+- Agregue una entrada de lista de permitidos de WAF para el servicio "checkout-service" en el punto final "/api/pay" para ignorar la regla "sqli-detection".
+- Actualice el filtro de exclusión para suprimir la regla "xss-rule" para el servicio "auth-api".
+- Cree una entrada de lista de permitidos de AppSec que coincida con el ID de regla "lfi-attack" en "/v1/users".
+
+### `delete_datadog_security_trace_passlist` {#delete-datadog-security-trace-passlist}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Application Security Management Protect Write`*\
+Elimine una entrada de filtro de exclusión (lista de permitidos) de WAF existente.
+
+- Elimine el filtro de exclusión de WAF "passlist-abc-123".
+- Elimine la entrada de la lista de permitidos que coincide con la regla "sqli-detection" en "/api/pay".
+
+### `get_datadog_security_aap_denylist` {#get-datadog-security-aap-denylist}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Application Security Management Protect Read`*\
+Enumere las IP, los usuarios y los agentes de usuario bloqueados (entradas de la lista de denegados), con filtrado opcional.
+
+- Enumera todas las entidades bloqueadas en la lista de denegados de AppSec.
+- Muéstreme las direcciones IP bloqueadas de ayer.
+- Compruebe si la IP "198.51.100.42" está en la lista de denegados de seguridad.
+
+### `upsert_datadog_security_aap_denylist` {#upsert-datadog-security-aap-denylist}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Application Security Management Protect Write`*\
+Agrega o actualiza un bloqueo de lista de denegación para una IP, usuario o agente de usuario con una fecha de vencimiento.
+
+- Bloquee la IP "198.51.100.42" en la lista de denegación durante 24 horas.
+- Agregue al usuario "attacker_user_99" a la lista de denegación de entidades bloqueadas.
+- Cree una entrada en la lista de denegación para el agente de usuario "MaliciousScanner/1.0" con una fecha de vencimiento establecida para la próxima semana.
+
+### `unblock_datadog_security_aap_denylist` {#unblock-datadog-security-aap-denylist}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Application Security Management Protect Write`*\
+Desbloquea una entidad previamente incluida en la lista de denegación estableciendo su expiración en el pasado.
+
+- Desbloquee la IP "198.51.100.42" de la lista de denegación.
+- Elimine al usuario "attacker_user_99" de la lista de entidades bloqueadas.
+
+### `get_datadog_security_aap_custom_rules` {#get-datadog-security-aap-custom-rules}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Application Security Management Protect Read`*\
+Recupera una regla WAF personalizada de App & API Protection (AAP) por ID o lista reglas personalizadas. Admite filtrado por categoría, estado, servicio y entorno.
+
+- Listar reglas de WAF personalizadas que se aplican al servicio \"checkout-service\" en producción.
+- Obtenga la regla personalizada de AAP "rule-xyz-123".
+
+### `upsert_datadog_security_aap_custom_rule` {#upsert-datadog-security-aap-custom-rule}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Application Security Management Protect Write`*\
+Crea o actualiza una regla de WAF personalizada de AAP en la categoría de intento de ataque o lógica de negocio. Las reglas nuevas no pueden bloquear tráfico: cree la regla en modo de monitoreo, luego actualícela al modo de bloqueo después de confirmar sus coincidencias.
+
+- Cree una regla WAF de monitoreo personalizada para solicitudes a la ruta "/admin".
+- Actualice la regla personalizada de AAP "rule-xyz-123" para bloquear el tráfico coincidente.
+- Deshabilite la regla personalizada "rule-xyz-123" sin eliminarla.
+
+### `delete_datadog_security_aap_custom_rule` {#delete-datadog-security-aap-custom-rule}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Application Security Management Protect Write`*\
+Elimine permanentemente una regla WAF personalizada de AAP por ID.
+
+- Elimine la regla WAF personalizada "rule-xyz-123".
+- Elimine la regla personalizada de AAP que monitorea las solicitudes a "/admin".
+
+### `get_datadog_security_aap_blocking_config` {#get-datadog-security-aap-blocking-config}
+*Conjunto de herramientas: **seguridad***\
+*Permisos requeridos: `Application Security Management Protect Read`*\
+Recupera la configuración de aplicación de bloqueo y lista de denegación de AAP para toda la organización.
+
+- ¿Está habilitado el bloqueo de AAP para la organización?
+- ¿Se aplica la lista de denegación de AAP?
+- Muéstrame la configuración de bloqueo de AAP.
+
+## Session Replay {#session-replay}
+
+Herramientas para buscar grabaciones de Session Replay[69] y resumir la actividad de la sesión.
+
+### `search_replays` {#search-replays}
+*Conjunto de herramientas: **session-replay***\
+*Permisos requeridos: `RUM Apps Read`*\
+Busca grabaciones de Session Replay y devuelve las sesiones coincidentes. Admite el filtrado por identidad de usuario, dispositivo, recuento de errores o cualquier faceta de RUM, y la búsqueda de recorridos para sesiones que siguieron una secuencia específica de vistas o acciones.
+
+- Encuentra reproducciones de sesiones con más de 2 errores en las últimas 24 horas.
+- Muéstrame reproducciones de usuarios que siguieron el recorrido de pago pero no lo completaron.
+
+### `get_replay_summary` {#get-replay-summary}
+*Conjunto de herramientas: **session-replay***\
+*Permisos requeridos: `RUM Apps Read` y `RUM Session Replay Read`*\
+Genera una narración cronológica impulsada por IA de lo que hizo un usuario durante una reproducción de sesión específica (páginas visitadas, acciones realizadas y momentos clave), organizada en capítulos. Normalmente se invoca después de `search_replays` para profundizar en una sesión de interés.
+
+- Resume lo que sucedió en la sesión `abc-123-def`.
+- Dame una narración paso a paso de la reproducción para el usuario que informó un error de pago.
 
 ## Entrega de software {#software-delivery}
 
-Herramientas para interactuar con Software Delivery ([CI Visibility][48] y [Test Optimization][24]).
+Herramientas para interactuar con la Entrega de software ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65] y [DORA metrics][66]).
 
 ### `search_datadog_ci_pipeline_events` {#search-datadog-ci-pipeline-events}
-*Conjunto de herramientas: **entrega-de-software***\
+*Conjunto de herramientas: **software-delivery***\
 *Permisos requeridos: `CI Visibility Read`*\
 Busca eventos de CI con filtros y devuelve detalles sobre ellos.
 
-- Muéstrame todos los pipelines para mi commit `58b1488`.
-- Muéstrame la última falla del pipeline en la rama `my-branch`.
-- Propón una solución para el trabajo `integration-test` que falla cada vez en mi rama `my-branch`.
+- Muéstrame todas las pipelines para mi commit `58b1488`.
+- Muéstrame la falla de pipeline más reciente en la rama `my-branch`.
+- Proponga una solución para el trabajo `integration-test` que falla cada vez en mi rama `my-branch`.
 
 ### `aggregate_datadog_ci_pipeline_events` {#aggregate-datadog-ci-pipeline-events}
 *Conjunto de herramientas: **software-delivery***\
 *Permisos requeridos: `CI Visibility Read`*\
-Agrega eventos de pipeline de CI para producir estadísticas, métricas y análisis agrupados.
+Agrupa eventos de CI pipeline para producir estadísticas, métricas y análisis agrupados.
 
 - ¿Cuál es la duración promedio de los trabajos en los últimos 7 días?
-- ¿Cuántos pipelines fallidos ha habido en las últimas 2 semanas?
-- Muéstrame el percentil 95 de la duración de los pipelines, agrupados por nombre de pipeline.
+- ¿Cuántas pipelines fallidas ha habido en las últimas 2 semanas?
+- Muéstrame el percentil 95 de la duración de los pipelines agrupados por nombre de pipeline.
 
 ### `get_datadog_flaky_tests` {#get-datadog-flaky-tests}
 *Conjunto de herramientas: **software-delivery***\
 *Permisos requeridos: `Test Optimization Read`*\
-Busca en Datadog [Test Optimization][24] pruebas inestables y devuelve detalles de triaje (tasa de fallos, categoría, propietarios, historial, impacto en CI), con paginación y ordenamiento.
+Busca en Datadog [Test Optimization][24] pruebas inestables y devuelve detalles de clasificación (tasa de fallos, categoría, propietarios, historial, impacto en CI), con paginación y ordenamiento.
 
-- Encuentra pruebas inestables activas para el servicio de pago propiedad de `@team-abc`, ordenadas por tasa de fallos.
-- Muestra pruebas inestables en la rama `main` para el repositorio `github.com/org/repo`, más recientes primero.
-- Lista pruebas inestables en la categoría `timeout` con alta tasa de fallos (50%+) para que pueda priorizar las correcciones.
+- Busca pruebas inestables activas para el servicio de checkout propiedad de `@team-abc`, ordenadas por tasa de fallos.
+- Muéstrame las pruebas inestables en la rama `main` para el repositorio `github.com/org/repo`, de la más reciente a la más antigua.
+- Enumera las pruebas inestables en la categoría `timeout` con una tasa de fallos alta (50%+) para que pueda priorizar las correcciones.
 
 ### `update_datadog_flaky_test_states` {#update-datadog-flaky-test-states}
 *Conjunto de herramientas: **software-delivery***\
 *Permisos requeridos: `Test Optimization Write`*\
-Establece el estado de una o más pruebas inestables a `quarantined` (suprimir fallos), `disabled` (saltar prueba), `fixed` (marcar como resuelto) o `active` (restaurar). Esta es una operación de escritura que requiere aprobación explícita del usuario. Todos los cambios de estado son reversibles.
+Establezca el estado de una o más pruebas inestables en `quarantined` (suprimir fallas), `disabled` (omitir prueba), `fixed` (marcar como resuelto) o `active` (restaurar). Esta es una operación de escritura que requiere la aprobación explícita del usuario. Todos los cambios de estado son reversibles.
 
-- Cuarentena todas las pruebas inestables activas en el repositorio `checkout-service`.
-- Marca la prueba inestable `AuthServiceTest::testLogin` como corregida.
-- Desactiva las pruebas inestables propiedad de `@team-payments` con una tasa de fallos superior al 50%.
+- Ponga en cuarentena todas las pruebas inestables activas en el repositorio `checkout-service`.
+- Marque la prueba inestable `AuthServiceTest::testLogin` como corregida.
+- Deshabilite las pruebas inestables propiedad de `@team-payments` con una tasa de fallos superior al 50%.
 
 ### `aggregate_datadog_test_events` {#aggregate-datadog-test-events}
 *Conjunto de herramientas: **software-delivery***\
 *Permisos requeridos: `Test Optimization Read`*\
-Agrega eventos de Test Optimization de Datadog para cuantificar la confiabilidad y las tendencias de rendimiento con funciones de agregación, métricas opcionales, facetas de agrupamiento y niveles de prueba configurables.
+Agrupa eventos de Datadog Test Optimization para cuantificar las tendencias de confiabilidad y rendimiento con funciones de agregación, métricas opcionales, facetas de group-by y niveles de test configurables.
 
-- Cuenta el número de pruebas fallidas en la última semana, agrupadas por rama.
-- Muéstrame la duración del percentil 95 para cada conjunto de pruebas para identificar las más lentas.
-- Cuenta todas las pruebas aprobadas y fallidas, agrupadas por propietarios de código.
+- Cuente el número de pruebas fallidas durante la última semana, agrupadas por rama.
+- Muéstreme la duración del percentil 95 para cada conjunto de pruebas para identificar las más lentas.
+- Cuente todas las pruebas aprobadas y fallidas, agrupadas por propietarios del código.
 
 ### `search_datadog_test_events` {#search-datadog-test-events}
 *Conjunto de herramientas: **software-delivery***\
 *Permisos requeridos: `Test Optimization Read`*\
-Busca eventos de prueba [Test Optimization][24] con filtros y devuelve detalles sobre ellos.
+Busque eventos de pruebas [Test Optimization][24] con filtros y devuelva detalles sobre ellos.
 
-- Muéstrame las pruebas fallidas en la rama `main` de las últimas 24 horas.
-- Obtén las ejecuciones de prueba para el commit `abc123` para ver cuáles pasaron y cuáles fallaron.
-- Muéstrame todas las ejecuciones de prueba inestables para el servicio de checkout.
-- Encuentra las pruebas a cargo de `@team-name` que están fallando.
+- Muéstreme las ejecuciones de prueba fallidas en la rama `main` de las últimas 24 horas.
+- Obtenga las ejecuciones de prueba para la confirmación `abc123` para ver qué pasó y qué falló.
+- Muéstreme todas las ejecución de prueba inestables para el servicio de checkout.
+- Encuentre las ejecuciones de prueba propiedad de `@team-name` que están fallando.
 
 ### `get_datadog_code_coverage_branch_summary` {#get-datadog-code-coverage-branch-summary}
-*Conjunto de herramientas: **software-delivery***\
+*Conjunto de herramientas: software-delivery**software-delivery***\
 *Permisos requeridos: `Code Coverage read`*\
-Obtiene métricas agregadas del resumen de cobertura de código para una rama de repositorio, incluyendo cobertura total, cobertura de parches y desgloses de servicio/propietario de código.
+Obtiene métricas resumidas de Code Coverage agregadas para una rama de repositorio, incluyendo la cobertura total, la cobertura de parches y los desgloses por servicio/propietario del código.
 
-- ¿Cuál es la cobertura de código en la rama `main` para `github.com/my-org/my-repo`?
-- Muéstrame el resumen de cobertura para la rama `release/1.x` de `github.com/my-org/my-repo`.
+- ¿Cuál es el Code Coverage en la rama `main` para `github.com/my-org/my-repo`?
+- Muéstrame el resumen de Code Coverage para la rama `release/1.x` de `github.com/my-org/my-repo`.
 
 ### `get_datadog_code_coverage_commit_summary` {#get-datadog-code-coverage-commit-summary}
 *Conjunto de herramientas: **software-delivery***\
 *Permisos requeridos: `Code Coverage read`*\
-Obtiene métricas agregadas del resumen de cobertura de código para un commit de repositorio, incluyendo cobertura total, cobertura de parches y desgloses de servicio/propietario de código.
+Obtiene métricas resumidas de cobertura de código agregadas para una confirmación de repositorio, incluyendo la cobertura total, la cobertura de parches y los desgloses por servicio/propietario del código.
 
-- Muéstrame la cobertura de código para el commit `abc123abc123abc123abc123abc123abc123abcd` en `github.com/my-org/my-repo`.
-- ¿Cuál es la cobertura de parches para el último commit en mi rama?
+- Muéstrame el Code Coverage para la confirmación `abc123abc123abc123abc123abc123abc123abcd` en `github.com/my-org/my-repo`.
+- ¿Cuál es la cobertura de parches para la confirmación más reciente en mi rama?
+
+### `get_datadog_code_coverage_pr_summary` {#get-datadog-code-coverage-pr-summary}
+*Conjunto de herramientas: **software-delivery***\
+*Permisos requeridos: `Code Coverage read`*\
+Obtiene métricas resumidas de Code Coverage agregadas para una solicitud de extracción, incluyendo la cobertura total, la cobertura de parches y los desgloses por servicio o propietario del código.
+
+- Muéstrame el Code Coverage para la PR #123 en `github.com/my-org/my-repo`.
+- ¿Cuál es la cobertura de parches para la solicitud de extracción #456 en `github.com/my-org/my-repo`?
+
+### `get_datadog_code_coverage_files` {#get-datadog-code-coverage-files}
+*Conjunto de herramientas: **software-delivery***\
+*Permisos requeridos: `Code Coverage read`*\
+Obtiene los datos de líneas de Code Coverage por archivo para una confirmación de repositorio, rama o solicitud de extracción. Devuelve las líneas ejecutables, las líneas cubiertas y las líneas añadidas para cada archivo. Se debe proporcionar exactamente uno de `commit_sha`, `branch` o `pr_number`. Se puede proporcionar como máximo uno de `service`, `codeowner` o `flag` para filtrar los resultados.
+
+- Muéstrame el Code Coverage por archivo para la PR #123 en `github.com/my-org/my-repo`.
+- Obtén el Code Coverage de archivos modificados para la confirmación `abc123abc123abc123abc123abc123abc123abcd` en `github.com/my-org/my-repo`.
+- Muestra el Code Coverage para la rama `main` de `github.com/my-org/my-repo`, filtrada por el propietario del código `@my-org/my-team`.`
 
 ### `get_datadog_test_optimization_settings` {#get-datadog-test-optimization-settings}
 *Conjunto de herramientas: **software-delivery***\
 *Permisos requeridos: `Test Optimization Read`*\
-Recupera las características de Test Optimization que están habilitadas para un servicio, incluyendo Test Impact Analysis (ITR), Early Flake Detection (EFD), Auto Test Retries (ATR), Failed Test Replay, Code Coverage collection y PR Comments.
+Recupera las funciones de Test Optimization que están habilitadas para un servicio, incluyendo Test Impact Analysis (ITR), Early Flake Detection (EFD), Auto Test Retries (ATR), Failed Test Replay, Code Coverage collection y PR Comments.
 
-- ¿Qué características de Test Optimization están habilitadas para el `auth-service`?
-- Muéstrame la configuración de Test Optimization para mi servicio de checkout.
+- ¿Qué funciones de Test Optimization están habilitadas para `auth-service`?
+- Muéstrame la configuración de Test Optimization para mi servicio de pago.
 
 ### `get_datadog_flaky_tests_management_policies` {#get-datadog-flaky-tests-management-policies}
-*Conjunto de herramientas: **entrega de software***\
-*Permisos Requeridos: `Test Optimization Read`*\
-Recupera las políticas de Flaky Tests Management configuradas para un repositorio, incluyendo auto-quarantine windows, branch rules, failure rate thresholds, disable policies y retry settings.
+*Conjunto de herramientas: **software-delivery***\
+*Permisos requeridos: `Test Optimization Read`*\
+Recupera las políticas de Flaky Tests Management configuradas para un repositorio, incluyendo ventanas de cuarentena automática, reglas de rama, umbrales de tasa de fallos, políticas de desactivación y configuraciones de reintento.
 
 - Muéstrame las políticas de Flaky Tests Management para `github.com/my-org/my-repo`.
-- ¿Qué reglas de auto-cuarentena están configuradas para el repositorio del servicio de checkout?
+- ¿Qué reglas de cuarentena automática están configuradas para el repositorio del checkout service?
 
 ### `search_dora_deployments` {#search-dora-deployments}
-*Conjunto de herramientas: **entrega de software***\
-*Permisos Requeridos: `DORA Metrics Read`*\
-Busca eventos de despliegue DORA con filtros, o recupera detalles completos para un solo despliegue por ID.
+*Conjunto de herramientas: **software-delivery***\
+*Permisos requeridos: `DORA Metrics Read`*\
+Busca eventos de despliegue DORA con filtros, u obtiene detalles completos de un solo despliegue por ID.
 
 - Muéstrame los despliegues para el servicio `checkout` en los últimos 7 días.
-- Obtén detalles para el despliegue DORA `abc123`.
-- Encuentra despliegues fallidos en el entorno de producción este mes.
+- Obtén los detalles del despliegue DORA `abc123`.
+- Encuentra los despliegues fallidos en el entorno de producción este mes.
 
 ### `aggregate_dora_deployments` {#aggregate-dora-deployments}
-*Conjunto de herramientas: **entrega de software***\
+*Conjunto de herramientas: **software-delivery***\
 *Permisos requeridos: `Timeseries`*\
-Devuelve métricas DORA (frecuencia de despliegue, tiempo de entrega de cambios, tasa de fallos de cambios, tiempo de recuperación) para un servicio, equipo o repositorio, como valores escalares o series temporales. Utilice para preguntas sobre el rendimiento de entrega de software durante un período de tiempo.
+Devuelve métricas DORA (frecuencia de despliegue, tiempo de entrega de cambios, tasa de fallos en cambios, tiempo de recuperación) para un servicio, equipo o repositorio, como valores escalares o series temporales. Úselo para preguntas sobre el rendimiento de la entrega de software durante un período de tiempo.
 
-- ¿Cuál es la frecuencia de despliegue y la tasa de fallos de cambios para el servicio `checkout` en los últimos 30 días?
-- Muéstrame la tendencia del tiempo de entrega de cambios para el servicio `payments` en el último trimestre.
+- ¿Cuál es la frecuencia de despliegue y la tasa de fallos en cambios para el servicio `checkout` en los últimos 30 días?
+- Muéstrame la tendencia del tiempo de entrega de cambios para el servicio `payments` durante el último trimestre.
 - Obtén las cuatro métricas DORA para el equipo `auth-service`.
 
 ## Synthetics {#synthetics}
 
-Herramientas para interactuar con Datadog [Synthetic tests][47].
+Herramientas para interactuar con [pruebas Synthetic][47] de Datadog.
 
 ### `get_synthetics_tests` {#get-synthetics-tests}
 *Conjunto de herramientas: **Synthetics***\
 *Permisos requeridos: `Synthetics Read`*\
-Busca Datadog Synthetic HTTP API tests.
+Busca pruebas Synthetic HTTP API de Datadog.
 
-- Ayúdame a entender por qué la prueba Synthetic en el punto de conexión `/v1/my/tested/endpoint` está fallando.
-- Hay una interrupción; encuentre todos los Synthetic tests que están fallando en el dominio `api.mycompany.com`.
-- ¿Los Synthetic tests en mi sitio web `api.mycompany.com` siguen funcionando en la última hora?
+- Ayúdame a entender por qué está fallando la prueba Synthetic en el endpoint `/v1/my/tested/endpoint`.
+- Hay una interrupción; busca todas las pruebas Synthetic que están fallando en el dominio `api.mycompany.com`.
+- ¿Las pruebas Synthetic en mi sitio web `api.mycompany.com` siguen funcionando en la última hora?
 
 ### `edit_synthetics_tests` {#edit-synthetics-tests}
-*Conjunto de herramientas: **sintéticos***\
+*Conjunto de herramientas: **Synthetics***\
 *Permisos requeridos: `Synthetics Global Variable Read` y `Synthetics Read` y `Synthetics Write`*\
-Edita los Datadog Synthetic HTTP API tests.
+Edita pruebas Synthetic HTTP API de Datadog.
 
-- Mejora las afirmaciones de la prueba Synthetic definida en el punto de conexión `/v1/my/tested/endpoint`.
-- Pausa la prueba `aaa-bbb-ccc` y establece las ubicaciones solo en ubicaciones europeas.
-- Agrega la etiqueta de mi equipo a la prueba `aaa-bbb-ccc`.
+- Mejore las aserciones de la prueba Synthetic definida en mi endpoint `/v1/my/tested/endpoint`.
+- Pause la prueba `aaa-bbb-ccc` y establezca las ubicaciones únicamente en Europa.
+- Agregue la etiqueta de mi equipo a la prueba `aaa-bbb-ccc`.
 
 ### `synthetics_test_wizard` {#synthetics-test-wizard}
-*Conjunto de herramientas: **sintéticos***\
+*Conjunto de herramientas: **Synthetics***\
 *Permisos requeridos: `Synthetics Global Variable Read` y `Synthetics Read` y `Synthetics Write`*\
-Previsualiza y crea Datadog Synthetic HTTP API Tests.
+Obtenga una vista previa y cree pruebas Synthetic HTTP API de Datadog.
 
-- Crea Datadog Synthetic tests en cada punto de conexión definido en este archivo de código.
-- Crea una prueba Synthetic en `/path/to/endpoint`.
-- Crea una prueba Synthetic que verifique si mi dominio `mycompany.com` permanece activo.
+- Cree pruebas Synthetic en cada endpoint definido en este archivo de código.
+- Cree una prueba Synthetic en `/path/to/endpoint`.
+- Cree una prueba Synthetic que verifique si mi dominio `mycompany.com` permanece activo.
 
 ## Widgets {#widgets}
 
-Herramientas para la visualización, validación y conversión de tipo de widgets de [Dashboard][46] y [notebook][57].
+Herramientas para la visualización, validación y conversión de tipos de widgets de [tablero][46] y [notebook][57].
 
 ### `get_widget` {#get-widget}
 *Conjunto de herramientas: **widgets***\
 *Permisos requeridos: `Dashboards Read` o `Timeseries` o `Monitors Read` o `APM Read` o `RUM Apps Read`*\
-Recupera y visualiza métricas, trazas, registros y otros datos de Datadog como gráficos interactivos. Soporta tres modos: búsqueda de panel, definición directa o resolución de URL.
+Recupera y visualiza métricas, trazas, registros y otros datos de Datadog como gráficos interactivos. Admite tres modos: búsqueda de tablero, definición directa o resolución de URL.
 
-- Muestra la serie temporal de uso de CPU para `service:api` en la última hora.
-- Obtén los datos del widget `2228368921512806` en el Dashboard `abc-123-def`.
-- Visualiza los datos de este enlace de compartición de Datadog.
-
-### `get_widget_reference_compressed` {#get-widget-reference-compressed}
-*Conjunto de herramientas: **widgets***\
-*Permisos requeridos: `Dashboards Read` o `Dashboards Write` o `Notebooks Read` o `Notebooks Write`*\
-Devuelve esquemas de TypeScript comprimidos e instrucciones de construcción para tipos de widgets. Llama antes de generar el JSON del widget. Al construir widgets de grupo, incluye tanto `group` como cualquier tipo de widget hijo previsto en una sola llamada para evitar duplicados.
-
-- Obtén el esquema comprimido para un widget de series temporales.
-- Muestra las instrucciones de construcción para widgets de lista principal y tabla de consulta.
+- Muestra las series temporales de uso de CPU para `service:api` durante la última hora.
+- Obtén los datos del widget para el widget `2228368921512806` en el tablero `abc-123-def`.
+- Visualiza los datos de este enlace compartido de Datadog.
 
 ### `search_datadog_widgets` {#search-datadog-widgets}
 *Conjunto de herramientas: **widgets***\
 *Permisos requeridos: `Dashboards Read` o `Dashboards Write` o `Notebooks Read` o `Notebooks Write`*\
-Busca y recupera información sobre widgets en los Dashboards de Datadog, incluyendo sus IDs, títulos y consultas subyacentes.
+Busca y recupera información sobre widgets en los tableros de Datadog, incluyendo sus identificadores, títulos y consultas subyacentes.
 
 - Encuentra todos los widgets de series temporales que consultan la métrica `system.cpu.user`.
-- Busca widgets relacionados con las tasas de error en todos los Dashboards.
+- Busca widgets relacionados con tasas de error en todos los tableros.
 
 ### `swap_widget_type` {#swap-widget-type}
 *Conjunto de herramientas: **widgets***\
 *Permisos requeridos: `Dashboards Read` o `Dashboards Write` o `Notebooks Read` o `Notebooks Write`*\
-Convierte una definición de widget de un tipo de visualización a otro mientras preserva las consultas. Soporta tipos de widgets basados en solicitudes de fórmulas: series temporales, valor de consulta, lista principal, tabla de consulta, treemap, sunburst, distribución, mapa de calor, geomapa y lista de flujo.
+Convierte una definición de widget de un tipo de visualización a otro mientras conserva las consultas. Admite tipos de widgets basados en solicitudes de fórmulas: series temporales, valor de consulta, lista principal, tabla de consulta, mapa de árbol, gráfico de rayos de sol, distribución, mapa de calor, mapa geográfico y flujo de lista.
 
-- Convierte este widget de series temporales a una lista principal.
-- Cambia el widget de tabla de consulta a una visualización de treemap.
+- Convierte este widget de series temporales en una lista principal.
+- Cambie el widget de tabla a una visualización de mapa de árbol.
 
 ### `validate_notebook_cell` {#validate-notebook-cell}
 *Conjunto de herramientas: **widgets***\
 *Permisos requeridos: `Timeseries`*\
-Valida las definiciones de widgets de celdas de notebook, incluyendo la corrección SQL para celdas de análisis_sql. Al validar una celda de análisis_sql, incluya sus widgets de fuente de datos aguas arriba para que el punto de conexión pueda verificar las expresiones SQL contra sus esquemas.
+Valida las definiciones de widget de celda de notebook, incluida la exactitud de SQL para celdas analysis_sql. Al validar una celda analysis_sql, incluya sus widgets de fuente de datos ascendentes para que el punto final pueda verificar las expresiones SQL contra sus esquemas.
 
-- Valide estas definiciones de celdas de notebook antes de guardar.
-- Verifique si la celda de análisis SQL hace referencia a columnas válidas del widget aguas arriba.
+- Valide estas definiciones de celda de notebook antes de guardar.
+- Verifique si la celda de SQL de análisis hace referencia a columnas válidas del widget ascendente.
 
 ### `validate_notebook_cells` {#validate-notebook-cells}
 *Conjunto de herramientas: **widgets***\
 *Permisos requeridos: `Timeseries`*\
-Valida múltiples definiciones de widgets de celdas de notebook en una sola llamada, incluyendo la corrección SQL para las celdas de análisis_sql.
+Valida múltiples definiciones de widget de celda de notebook en una sola llamada, incluida la exactitud de SQL para celdas analysis_sql.
 
 - Valide todas las celdas en este notebook antes de publicar.
-- Verifique estas tres celdas de análisis en busca de errores SQL.
+- Verifique estas tres celdas de análisis en busca de errores de SQL.
 
 ### `verify_widget_data` {#verify-widget-data}
 *Conjunto de herramientas: **widgets***\
 *Permisos requeridos: `Dashboards Read` o `Timeseries` o `Monitors Read` o `APM Read` o `RUM Apps Read`*\
-Verifica si las definiciones de widgets devuelven datos para la última hora. Llame después de agregar widgets a un dashboard para confirmar que las consultas devuelven datos reales. Devuelve un resultado por cada widget que indica si se encontraron datos, proporcionando un motivo en caso negativo.
+Verifica si las definiciones de los widgets devuelven datos de la última hora. Llame después de agregar widgets a un tablero para confirmar que las consultas devuelvan datos reales. Devuelve un resultado por widget indicando si se encontraron datos, con una razón en caso contrario.
 
-- Verifique si estas definiciones de widgets devuelven datos.
-- Verifique que los widgets agregados al dashboard muestren métricas reales.
+- Compruebe si estas definiciones de widget devuelven datos.
+- Verifique que los widgets agregados al tablero muestren métricas reales.
 
 ### `visualize_tabular_data` {#visualize-tabular-data}
 *Conjunto de herramientas: **widgets***\
 *Permisos requeridos: No se requieren permisos específicos.*\
-Representa datos tabulares como una visualización interactiva (sunburst, treemap o lista principal). Utilice después de agregar datos de consultas para visualizar relaciones jerárquicas o clasificaciones.
+Representa datos tabulares como una visualización interactiva (sunburst, treemap o lista principal). Úselo después de agregar datos de consultas para visualizar relaciones jerárquicas o clasificaciones.
 
-- Visualice estos datos métricos agrupados como un gráfico de sunburst.
-- Muestre estos datos agregados como un desglose en treemap.
+- Visualice estos datos de métricas agrupados como un gráfico sunburst.
+- Muestre estos datos agregados como un desglose de mapa de árbol.
 
 ## Flujos de trabajo {#workflows}
 
-Herramientas para [Workflow Automation][39], que incluyen listar, inspeccionar, ejecutar y configurar flujos de trabajo para uso de agentes.
+Herramientas para [Workflow Automation][39], que incluyen listar, inspeccionar, ejecutar y configurar flujos de trabajo para el uso del agente.
 
 ### `list_datadog_workflows` {#list-datadog-workflows}
 *Conjunto de herramientas: **flujos de trabajo***\
 *Permisos requeridos: `Workflows Read`*\
-Lista y busca flujos de trabajo de [Workflow Automation][39]. Soporta filtrado por nombre, etiquetas, propietario, identificador y tipo de activador (como `monitor`, `schedule`, `api` o `incident`). Los resultados pueden ser ordenados por campos como `name` o `updatedAt`.
+Lista y busca flujos de trabajo de [Workflow Automation][39]. Admite filtrado por nombre, etiquetas, propietario, identificador y tipo de activador (como `monitor`, `schedule`, `api` o `incident`). Los resultados se pueden ordenar por campos como `name` o `updatedAt`.
 
 - Muéstreme todos los flujos de trabajo publicados etiquetados con `team:platform`.
-- Liste los flujos de trabajo que tengan un disparador de agente configurado.
-- Encuentre todos los flujos de trabajo relacionados con la respuesta a incidentes que sean propiedad de Alice Smith.
+- Enumere los flujos de trabajo que tienen configurado un activador de agente.
+- Busque todos los flujos de trabajo relacionados con la respuesta a incidente que sean propiedad de Alice Smith.
 
 ### `get_datadog_workflow` {#get-datadog-workflow}
 *Conjunto de herramientas: **flujos de trabajo***\
 *Permisos requeridos: `Workflows Read`*\
-Recupera información detallada sobre un flujo de trabajo específico, incluyendo sus disparadores, pasos, conexiones y esquema de entrada.
+Recupera información detallada sobre un flujo de trabajo específico, incluidos sus activadores, pasos, conexiones y esquema de entrada.
 
-- Obtenga los detalles completos para el flujo de trabajo `00000000-0000-0000-0000-000000000000`.
-- Muéstreme los parámetros de entrada y pasos para el flujo de trabajo de reversión de implementación.
-- ¿Qué disparadores están configurados para este flujo de trabajo?
+- Obtenga los detalles completos del flujo de trabajo `00000000-0000-0000-0000-000000000000`.
+- Muéstreme los parámetros de entrada y los pasos para el flujo de trabajo de reversión de implementación.
+- ¿Qué activadores están configurados para este flujo de trabajo?
 
 ### `execute_datadog_workflow` {#execute-datadog-workflow}
 *Conjunto de herramientas: **flujos de trabajo***\
 *Permisos requeridos: `Workflows Run`*\
-Ejecute un flujo de trabajo publicado que tenga un disparador de agente, con parámetros de entrada opcionales que coincidan con el esquema de entrada del flujo de trabajo.
+Ejecute un flujo de trabajo publicado que tiene un activador de agente, con parámetros de entrada opcionales que coinciden con el esquema de entrada del flujo de trabajo.
 
-- Ejecute el flujo de trabajo de escalamiento de incidentes para el servicio `checkout-api` con severidad `high`.
+- Ejecute el flujo de trabajo de escalamiento de incidente para el servicio `checkout-api` con gravedad `high`.
 - Ejecute el flujo de trabajo de reversión de implementación para el servicio de pagos.
-- Dispare el flujo de trabajo de notificación On-Call con el contexto de esta investigación.
+- Inicie el flujo de trabajo de notificación de guardia con el contexto de esta investigación.
 
-**Nota**: El flujo de trabajo debe estar publicado y tener un disparador de agente configurado. Utilice `update_datadog_workflow_with_agent_trigger` para agregar uno si es necesario.
+**Nota**: El flujo de trabajo debe estar publicado y tener configurado un activador de agente. Utilice `update_datadog_workflow_with_agent_trigger` para agregar uno si es necesario.
 
 ### `get_datadog_workflow_instance` {#get-datadog-workflow-instance}
 *Conjunto de herramientas: **flujos de trabajo***\
 *Permisos requeridos: `Workflows Read`*\
 Recupera el estado y los detalles de una instancia de ejecución de flujo de trabajo, incluidos los resultados de los pasos y las salidas.
 
-- ¿Cuál es el estado de la ejecución del flujo de trabajo que disparó?
-- ¿Se completó con éxito el flujo de trabajo de escalamiento de incidentes?
-- Muéstreme las salidas detalladas de la instancia de flujo de trabajo `00000000-0000-0000-0000-000000000000`.
+- ¿Cuál es el estado de la ejecución del flujo de trabajo que inicié?
+- ¿Se completó correctamente el flujo de trabajo de escalamiento de incidente?
+- Muéstreme los resultados detallados de la instancia de flujo de trabajo `00000000-0000-0000-0000-000000000000`.
 
 ### `update_datadog_workflow_with_agent_trigger` {#update-datadog-workflow-with-agent-trigger}
 *Conjunto de herramientas: **flujos de trabajo***\
 *Permisos requeridos: `Workflows Write`*\
-Agrega un disparador de agente a un flujo de trabajo y lo publica, permitiendo que el flujo de trabajo sea ejecutado por agentes de IA.
+Agregue un activador de agente a un flujo de trabajo y publíquelo, permitiendo que el flujo de trabajo sea ejecutado por agentes de IA.
 
-- Agregue un disparador de agente al flujo de trabajo de reversión de implementación para que pueda ejecutarlo desde aquí.
-- Configure el flujo de trabajo de respuesta a incidentes para que pueda ser activado por un agente.
+- Agregue un activador de agente al flujo de trabajo de reversión de implementación para que pueda ejecutarlo desde aquí.
+- Configure el flujo de trabajo de respuesta a incidente para que pueda ser activado por un agente.
 
 [1]: /es/mcp_server/setup#toolsets
 [15]: /es/api/latest/events/
@@ -1582,4 +2259,13 @@ Agrega un disparador de agente a un flujo de trabajo y lo publica, permitiendo q
 [57]: /es/notebooks/
 [58]: /es/real_user_monitoring/
 [59]: /es/real_user_monitoring/rum_without_limits/
+[62]: /es/experiments/
 [63]: /es/agent/guide/rshell/
+[64]: /es/cloud_cost_management/
+[65]: /es/code_coverage/
+[66]: /es/delivery_performance/dora_metrics/
+[67]: /es/security/cloud_siem/triage_and_investigate/ioc_explorer/
+[68]: /es/product_analytics/
+[69]: /es/session_replay/
+[70]: /es/data_observability/
+[71]: /es/account_management/audit_trail/

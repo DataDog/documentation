@@ -11,13 +11,13 @@ aliases:
 description: Datadog、B3、W3C Trace Context のヘッダーを抽出・挿入し、分散型トレーシングのコンテキストを伝搬させます。
 further_reading:
 - link: tracing/glossary/
-  tag: よくあるご質問
+  tag: ドキュメント
   text: APM の用語を理解する
 - link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
   tag: ブログ
   text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
 - link: /opentelemetry/guide/otel_api_tracing_interoperability
-  tag: よくあるご質問
+  tag: ドキュメント
   text: OpenTelemetry API と Datadog でインスツルメントされたトレースの相互運用性
 title: トレースコンテキスト伝搬
 type: multi-code-lang
@@ -56,7 +56,6 @@ type: multi-code-lang
 `restart`: SDK は常に新しいトレースを開始します。受信した分散トレースヘッダーが有効なトレースコンテキストを表している場合、そのトレースコンテキストはサービスエントリスパンのスパンリンクとして表現されます (`continue` 設定の親スパンとは異なります)。<br>
 `ignore`: SDK は常に新しいトレースを開始し、受信したすべての分散トレースヘッダーは無視されます。<br>
 **デフォルト**: `continue` <br>
-**注**: これは、.NET、Node.js、Python、および Java ライブラリでのみ実装されています。
 
 ### 高度な構成 {#advanced-configuration}
 
@@ -642,7 +641,7 @@ Datadog Rust SDK は、OpenTelemetry (OTel) SDK をベースに構築されて�
 
 `DD_TRACE_PROPAGATION_STYLE` 環境変数を設定することで、使用する伝播形式を制御できます。カンマ区切りでリストを提供することも可能です。
 
-たとえば、以下のとおりです。
+たとえば、次のようにします。
 
 ```bash
 # To support both W3C and Datadog
