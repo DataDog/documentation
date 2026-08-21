@@ -4549,6 +4549,12 @@
     "request_description": "",
     "request_schema_description": "Request body for querying accounts with optional filtering, column selection, and sorting."
   },
+  "QueryProductAnalyticsList": {
+    "description": "List the individual event records matching an analytics query.\nUse `columns` to choose the attributes returned on each row, `sort` to order the rows,\nand `limit` to cap how many are returned.",
+    "summary": "List analytics events",
+    "request_description": "",
+    "request_schema_description": "Request for listing the individual event records matching an analytics query."
+  },
   "QueryProductAnalyticsScalar": {
     "description": "Compute scalar analytics results for Product Analytics data.\nReturns aggregated values (counts, averages, percentiles) optionally grouped by facets.",
     "summary": "Compute scalar analytics",
@@ -4560,6 +4566,60 @@
     "summary": "Compute timeseries analytics",
     "request_description": "",
     "request_schema_description": "Request for computing analytics results (scalar or timeseries)."
+  },
+  "QueryProductAnalyticsJourneyFunnel": {
+    "description": "Compute a funnel over an ordered sequence of Product Analytics events.\nReturns the per-step conversion counts, conversion rates, and elapsed times,\noptionally segmented by group-by facets.",
+    "summary": "Compute journey funnel analysis",
+    "request_description": "",
+    "request_schema_description": "Request body for a journey funnel analysis."
+  },
+  "QueryProductAnalyticsJourneyList": {
+    "description": "Return the individual sessions that reached, or dropped off at, a given step of the journey.\nEach row contains the identity join key, the event timestamp, and the columns requested\nin `entity_columns`.",
+    "summary": "List journey entities",
+    "request_description": "",
+    "request_schema_description": "Request body for a journey list query."
+  },
+  "QueryProductAnalyticsJourneyScalar": {
+    "description": "Compute scalar results for a journey query, such as the conversion count,\nthe conversion rate, or the time to convert, optionally segmented by group-by facets.",
+    "summary": "Compute journey scalar analytics",
+    "request_description": "",
+    "request_schema_description": "Request body for a journey scalar query."
+  },
+  "QueryProductAnalyticsJourneyTimeseries": {
+    "description": "Compute timeseries results for a journey query.\nReturns one series per group-by combination, bucketed by the requested interval.",
+    "summary": "Compute journey timeseries analytics",
+    "request_description": "",
+    "request_schema_description": "Request body for a journey timeseries query."
+  },
+  "QueryProductAnalyticsRetentionGrid": {
+    "description": "Compute a retention grid, showing how much of each cohort came back over each subsequent period.\nRows are cohorts, columns are return periods, and each cell holds the count and rate of entities that returned.",
+    "summary": "Compute a retention grid",
+    "request_description": "The retention grid query.",
+    "request_schema_description": "Request body for a retention grid query."
+  },
+  "QueryProductAnalyticsRetentionList": {
+    "description": "List the individual users or accounts counted in one cell of the retention grid.\nSet `computation_scope` to the cohort and return period you want to examine.",
+    "summary": "List the entities behind a retention cell",
+    "request_description": "The retention list query.",
+    "request_schema_description": "Request body listing the individual entities behind one cell of the retention grid."
+  },
+  "QueryProductAnalyticsRetentionScalar": {
+    "description": "Compute retention as a single value per group, suitable for a query value or top list widget.",
+    "summary": "Compute retention scalar values",
+    "request_description": "The retention scalar query.",
+    "request_schema_description": "Request body for a retention scalar or retention timeseries query."
+  },
+  "QueryProductAnalyticsRetentionTimeseries": {
+    "description": "Compute retention as a series of values over time, using the same query definition as the\nretention grid.",
+    "summary": "Compute retention timeseries",
+    "request_description": "The retention timeseries query.",
+    "request_schema_description": "Request body for a retention scalar or retention timeseries query."
+  },
+  "QueryProductAnalyticsSankey": {
+    "description": "Compute a Sankey diagram of how sessions flow between the values of two facets,\nshowing where users continue and where they drop off at each step.",
+    "summary": "Compute a Sankey diagram",
+    "request_description": "The Sankey diagram query.",
+    "request_schema_description": "Request body for a Sankey diagram query."
   },
   "QueryEventFilteredUsers": {
     "description": "Query users filtered by both user properties and event platform data",
