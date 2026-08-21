@@ -13,7 +13,7 @@ Use Calculated Fields Extractions to extract values from your logs in the Log Ex
 
 ## Overview
 
-Calculated Fields Extractions lets you apply Grok parsing rules at query time in the Log Explorer. This lets you to extract values from raw log messages or attributes without modifying pipelines or re-ingesting data. You can generate extraction rules automatically with AI-powered parsing, or manually define your own Grok patterns to match your specific needs. You can also write an extraction pattern as a regular expression (regex) with named capture groups. See the [Regex](#regex) section.
+Calculated Fields Extractions lets you apply Grok parsing rules at query time in the Log Explorer. This lets you extract values from raw log messages or attributes without modifying pipelines or re-ingesting data. You can generate extraction rules automatically with AI-powered parsing, or manually define your own Grok patterns to match your specific needs. You can also write an extraction pattern as a [regular expression (regex)](#regex) with named capture groups.
 
 To create an extraction calculated field, see [Create a calculated field][1].
 
@@ -97,15 +97,17 @@ country=%{word:country} duration=%{integer:duration} path=%{notSpace:request_pat
 
 ## Regex
 
-In addition to Grok patterns, you can write an extraction pattern as a regular expression (regex) with named capture groups. Datadog evaluates the pattern when you run a query. This means nothing is reindexed, and you can add, edit, or remove a pattern at any time.
+In addition to Grok patterns, you can write an extraction pattern as a regex with named capture groups. Datadog evaluates the pattern when you run a query. This means no data is reindexed, and you can add, edit, or remove a pattern at any time.
 
 Extractions run before formulas, so a calculated field formula can reference a field that an extraction produces. The reverse is not possible: you cannot extract from a calculated field.
 
+Extracted values are always strings. Unlike a Grok rule such as `%{integer:status}`, regex extraction does not convert types. To use an extracted value as a number, reference it in an arithmetic formula.
+
 ### Supported syntax
 
-| Feature | Example | What it matches |
+| Feature | Example | Description |
 |---|---|---|
-| Literal text | `error` | Those characters, exactly |
+| Literal text | `error` | The literal characters |
 | Any character | `.` | Any single character |
 | Character classes | `[a-z0-9]`, `[^abc]` | Any one character in the set, or any one character not in the set |
 | Shorthand classes | `\d`, `\w`, `\s`, `\D`, `\W`, `\S` | A digit, word character, or whitespace character, and their negations |
@@ -120,39 +122,39 @@ Extractions run before formulas, so a calculated field formula can reference a f
 | Character escapes | `\n`, `\r`, `\t` | Newline, carriage return, tab |
 | Metacharacter escapes | `\.`, `\*`, `\(` | The character itself, rather than its special meaning |
 
-### Write a regex extraction pattern
+### Capture group rules
 
 A pattern must follow four rules:
 
 - It must contain at least one capture group.
-- Every capture group must be named. Use `(?<name>…)`, not `(…)`. Use `(?:…)` to group without creating a field.
+- Every capture group must be named.
+  - Use `(?<name>…)`, not `(…)`.
+  - Use `(?:…)` to group without creating a field.
 - Each name must be unique. The name becomes the name of the extracted field.
 - Each name must start with a letter, and contain only letters and digits (`[A-Za-z][A-Za-z0-9]*`). Names like `client_ip`, `http.status`, or `client-ip` are not valid capture group names.
 
-Given this log line:
+### Example
+
+**Log line**:
 
 ```plaintext
 10.0.0.14 GET /api/v1/orders 503
 ```
 
-this pattern:
+**Extraction regex pattern**:
 
 ```plaintext
 (?<ip>\S+) (?<method>\S+) (?<path>\S+) (?<status>\d+)
 ```
 
-produces four fields you can filter, group, and sort by:
+**Resulting calculated fields**:
 
-| Field | Value |
-|---|---|
-| `ip` | `10.0.0.14` |
-| `method` | `GET` |
-| `path` | `/api/v1/orders` |
-| `status` | `503` |
+- `#ip = 10.0.0.14`
+- `#method = GET`
+- `#path = /api/v1/orders`
+- `#status = 503`
 
-Logs where the pattern does not match have no value for those fields.
-
-Extracted values are always strings. Unlike a Grok rule such as `%{integer:status}`, regex extraction does not convert types. To use the value as a number, reference it in an arithmetic formula.
+You can filter, group, and sort by these fields. Logs where the pattern does not match have no value for them.
 
 ## Further reading
 
