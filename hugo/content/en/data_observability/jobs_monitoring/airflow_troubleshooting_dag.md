@@ -26,7 +26,7 @@ The DAG checks the following:
 | Package installation | OpenLineage package is installed and importable |
 | Package version | Installed version compared to the latest available on PyPI |
 | Listener accessibility | OpenLineage plugin listener can be loaded by Airflow |
-| Enabled state | OpenLineage is not disabled by environment variable or Airflow config |
+| Provider active | OpenLineage provider is active and not explicitly disabled |
 | Transport configuration | A valid transport is configured (HTTP or Datadog) |
 | Datadog endpoint | Transport URL points to a Datadog intake endpoint |
 | Network connectivity | TCP connection to the configured backend URL succeeds |
@@ -417,7 +417,7 @@ def check_provider_enabled():
     # No explicit flag — provider is inactive because no transport config was found
     log.error(
         "OpenLineage provider is not active: no transport configuration was found. "
-        "Please refer to https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/guides/user.html"
+        "Please refer to https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html"
     )
     validation_results["inactive_reason"] = "no_config"
 
@@ -922,11 +922,12 @@ This Airflow installation is running on Amazon MWAA
 
 ### Validation summary
 
-The validation summary appears at the end of the task log. Each line starts with one of three symbols:
+The validation summary appears at the end of the task log. Each line starts with one of four symbols:
 
 - `✓`: Check passed.
 - `✗`: Check failed (events are not sent to Datadog).
 - `!`: Warning (may indicate a configuration issue).
+- `-`: Check skipped (a prerequisite check failed).
 
 The following output indicates a healthy setup:
 
@@ -949,14 +950,14 @@ Use this table to resolve common failures:
 
 | Log message | Cause | Resolution |
 |---|---|---|
-| `✗ OpenLineage not installed properly` | The OpenLineage package is missing or corrupted. | Confirm `apache-airflow-providers-openlineage` is included in your Airflow installation. For Amazon MWAA, see [Upgrade OpenLineage provider on Amazon MWAA][3]. |
-| `✗ OpenLineage provider is turned off` | The provider is explicitly disabled by `AIRFLOW__OPENLINEAGE__DISABLED`, `OPENLINEAGE_DISABLED`, or `openlineage.disabled` in airflow.cfg. | Remove or set the disable variable to `false`. |
-| `✗ OpenLineage provider is not active (no transport configuration found)` | No transport configuration was found. | Follow the [Airflow setup guide][2] to configure a transport. |
-| `✗ Failed to resolve active transport` | The transport could not be instantiated. | Verify the transport configuration is valid and the provider is active. |
+| `✗ OpenLineage not installed properly` | The OpenLineage package is missing or corrupted. All remaining checks are skipped. | Confirm `apache-airflow-providers-openlineage` is included in your Airflow installation. For Amazon MWAA, see [Upgrade OpenLineage provider on Amazon MWAA][3]. |
+| `✗ OpenLineage provider is turned off` | The provider is explicitly disabled by `AIRFLOW__OPENLINEAGE__DISABLED`, `OPENLINEAGE_DISABLED`, or `openlineage.disabled` in `airflow.cfg`. | Remove the setting, or set it to `false`. |
+| `✗ OpenLineage provider is not active (no transport configuration found)` | The provider deactivates itself when no transport configuration is present, even though nothing explicitly disabled it. | Follow the [Airflow setup guide][2] to configure a transport. |
+| `✗ Failed to resolve active transport` | The transport could not be instantiated from the resolved configuration. | Verify the transport configuration is valid and well-formed. Check the task log for the underlying error. |
 | `✗ Transport Type: Console (won't send events to Datadog)` | Transport is set to `console`. | Change the transport to `datadog` or `http` pointing to the Datadog intake URL. |
 | `! Transport does not appear to point to a Datadog endpoint` | The transport URL does not match a known Datadog domain. | Verify the URL points to a Datadog intake endpoint. |
 | `✗ Network connectivity check failed` | Airflow workers cannot reach the Datadog intake endpoint. | Check firewall or network policies; confirm the URL and port 443 are accessible. |
-| `✗ OpenLineage listener is not accessible` | The provider plugin cannot be imported, no listeners are registered, or multiple listeners are found. The specific cause is logged earlier in the task log. | Confirm the package is installed on **both scheduler and worker** pods/processes. If the plugin loaded but no listeners are active, check provider version compatibility. |
+| `✗ OpenLineage listener is not accessible` | The provider plugin cannot be imported, no listeners are registered, or multiple listeners are found. The specific cause is logged earlier in the task log. | Confirm the package is installed on **both scheduler and worker** pods or processes. If the plugin loaded but no listeners are active, check provider version compatibility. |
 | `! Configuration conflicts detected` | Multiple transport or config file sources are active. | Remove duplicate configurations and keep one authoritative source. |
 
 **Note**: If `✗ OpenLineage listener is not accessible` appears together with package installation failures, the package is likely installed only on the scheduler and not on the workers. OpenLineage requires the provider on both.
