@@ -447,6 +447,17 @@ var config = Flags.Configuration()
 Flags.enable(with: config)
 {{< /code-block >}}
 
+By default, each assignment request attempt has a one-second timeout, and the SDK retries transient failures once. Transient failures include network errors, timeouts, HTTP 408, HTTP 429, and HTTP 5xx responses.
+
+To change these limits, update the configuration before you enable Flags:
+
+{{< code-block lang="swift" >}}
+var config = Flags.Configuration()
+config.assignmentRequestTimeout = 2.0
+config.assignmentRequestRetryCount = 2
+Flags.enable(with: config)
+{{< /code-block >}}
+
 `trackExposures`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. If you only need local evaluation without telemetry, you can disable this option.
 
@@ -475,6 +486,12 @@ Flags.enable(with: config)
 
 `customFlagsHeaders`
 : Sets additional HTTP headers to attach to requests made to `customFlagsEndpoint`. It can be useful for authentication or routing when using your own flags service.
+
+`assignmentRequestTimeout`
+: The timeout for each assignment request attempt, in seconds. The default is `1.0`. Values less than or equal to `0` use the default.
+
+`assignmentRequestRetryCount`
+: The number of retries after the first attempt. The default is `1`. Set this option to `0` to disable retries. Negative values are treated as `0`.
 
 ## Testing
 
