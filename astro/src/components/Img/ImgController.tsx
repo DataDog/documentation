@@ -2,7 +2,6 @@ import type { ComponentChildren } from "preact";
 import styles from "./ImgController.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import Lightbox from "./Lightbox";
-import type { type } from "@testing-library/user-event/dist/cjs/utility/type.js";
 
 const cl = classListFactory(styles);
 

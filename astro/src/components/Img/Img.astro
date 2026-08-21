@@ -22,30 +22,34 @@ const imageUrl = `${IMAGES_URL}/images/${src}`;
 
 const srcset = `${imageUrl}?auto=format&fit=max&w=850 1x, ${imageUrl}?auto=format&fit=max&w=850&dpr=2 2x`;
 const popupHref = `${imageUrl}?fit=max&auto=format`;
+
+const imgControllerProps = {
+  alt,
+  caption,
+  width,
+  height,
+  widthPercent,
+  inline,
+  popup,
+  srcset,
+  popupHref,
+  imageUrl,
+};
+
+const needsLightbox = !inline && popup;
 ---
 
 {
   video ? (
     <ImgVideo
-      client:idle
       imageUrl={imageUrl}
       width={width}
       height={height}
       widthPercent={widthPercent}
     />
+  ) : needsLightbox ? (
+    <ImgController client:idle {...imgControllerProps} />
   ) : (
-    <ImgController
-      client:idle
-      imageUrl={imageUrl}
-      srcset={srcset}
-      popupHref={popupHref}
-      alt={alt}
-      caption={caption}
-      width={width}
-      height={height}
-      widthPercent={widthPercent}
-      inline={inline}
-      popup={popup}
-    />
+    <ImgController {...imgControllerProps} />
   )
 }
