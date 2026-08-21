@@ -14,7 +14,7 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/automations-annotation-queues"
     tag: "Blog"
     text: "Annotate traces to improve LLM quality with Datadog LLM Observability"
-  - link: /api/latest/llm-observability/
+  - link: /api/latest/agent-observability/
     tag: API
     text: Agent Observability API reference
 ---
@@ -388,15 +388,15 @@ Build benchmark datasets with human-verified labels for regression testing and c
 [1]: https://app.datadoghq.com/llm/traces
 [2]: https://app.datadoghq.com/llm/annotations/queues
 [3]: /llm_observability/experiments/datasets
-[4]: /api/latest/llm-observability/
+[4]: /api/latest/agent-observability/
 [5]: /llm_observability/evaluations/export_api/?tab=model#api-standards
-[6]: /api/latest/llm-observability/#list-llm-observability-annotation-queues
-[7]: /api/latest/llm-observability/#create-an-llm-observability-annotation-queue
-[8]: /api/latest/llm-observability/#update-an-llm-observability-annotation-queue
-[9]: /api/latest/llm-observability/#delete-an-llm-observability-annotation-queue
-[10]: /api/latest/llm-observability/#add-annotation-queue-interactions
-[11]: /api/latest/llm-observability/#delete-annotation-queue-interactions
-[12]: /api/latest/llm-observability/#get-annotated-queue-interactions
-[13]: /api/latest/llm-observability/#get-annotation-queue-label-schema
-[14]: /api/latest/llm-observability/#update-annotation-queue-label-schema
+[6]: /api/latest/agent-observability/#list-agent-observability-annotation-queues
+[7]: /api/latest/agent-observability/#create-an-agent-observability-annotation-queue
+[8]: /api/latest/agent-observability/#update-an-agent-observability-annotation-queue
+[9]: /api/latest/agent-observability/#delete-an-agent-observability-annotation-queue
+[10]: /api/latest/agent-observability/#add-annotation-queue-interactions
+[11]: /api/latest/agent-observability/#delete-annotation-queue-interactions
+[12]: /api/latest/agent-observability/#get-annotated-queue-interactions
+[13]: /api/latest/agent-observability/#get-annotation-queue-label-schema
+[14]: /api/latest/agent-observability/#update-annotation-queue-label-schema
 [15]: /account_management/#email-subscriptions
