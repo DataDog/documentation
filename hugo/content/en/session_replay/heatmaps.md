@@ -172,12 +172,28 @@ To remove the currently saved screenshot and revert to an auto-picked one from a
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-unpin-screenshot-1.png" alt="Click unpin to remove the currently pinned screenshot." style="width:100%;">}}
 
+### Analyzing heatmaps beyond replay retention
+
+In Product Analytics, Datadog retains click data for 15 months and Session Replays for 30 days by default. To view a heatmap for a period older than your replay retention:
+
+1. Set the date range to a period within the last 30 days, so a heatmap renders with a background from a recent replay.
+1. Click {{< ui >}}Save{{< /ui >}} on the current screenshot to pin it.
+1. Set the date range back to the period you want to analyze.
+
+Your older click data appears on the pinned screenshot. You can also use {{< ui >}}Take new screenshot{{< /ui >}} to capture a specific state from your live application.
+
+**Note**: The background reflects your application as it looked recently, not as it looked during the period you are analyzing. If your page layout changed in between, clicks can appear over the wrong elements.
+
 ## Data retention
 
-The time periods you can view in a heatmap depend on where you access it:
+A heatmap combines two pieces of data. Datadog retains each for a different period:
 
-- **RUM**: Session Replay heatmaps use RUM click data (RUM action events), which has a 30-day retention period.
-- **Product Analytics**: Heatmaps use Product Analytics click data, which has a 15-month retention period.
+- **The overlay** (clicks and scrolls). In RUM, the overlay uses RUM action events, which Datadog retains for 30 days. In Product Analytics, it uses Product Analytics click data, which Datadog retains for 15 months.
+- **The background screenshot**, which Datadog captures from Session Replay and retains for 30 days by default.
+
+A heatmap needs both to render. If you select a time frame where click data still exists but no replay remains to use as a background, the heatmap shows "No Replay Data" even though you can still query those actions in the Analytics Explorer.
+
+If you expect to analyze a view over a period longer than 30 days, save a screenshot for it while replays are still available. When you save a screenshot, Datadog extends the retention of the replay behind it to 15 months, so the heatmap keeps rendering for as long as your Product Analytics click data exists. See [Analyzing heatmaps beyond replay retention](#analyzing-heatmaps-beyond-replay-retention).
 
 ## Next steps
 
@@ -203,7 +219,11 @@ The tooltip on the icon says element is not visible. This means that the element
 
 ### After attempting to create a heatmap, I see a "No Replay Data" state appear.
 
-The "No Replay Data" state means that Datadog could not find any Session Replays to use as a heatmap background that matches the current search filters. If you just started to record sessions with the [Browser SDK][2], it may also take a few minutes for the Session Replay to be available for viewing.
+The "No Replay Data" state means that Datadog could not find any Session Replay to use as a heatmap background. Common causes:
+
+- Your selected time frame is older than your Session Replay retention, which is 30 days by default. Click data can still exist, but no replay remains to use as a background. See [Analyzing heatmaps beyond replay retention](#analyzing-heatmaps-beyond-replay-retention).
+- No replay matches your current search filters.
+- You recently started recording with the [Browser SDK][2], and the replay is not yet available. This can take a few minutes.
 
 ### After attempting to create a heatmap, I see a "Not enough data to generate a heatmap" state appear.
 
