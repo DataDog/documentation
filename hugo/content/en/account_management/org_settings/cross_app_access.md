@@ -34,7 +34,7 @@ Setup moves values in both directions between Datadog and Okta. Two of them are 
 | Value                               | Direction       | Where you enter it                                                                        |
 | ----------------------------------- | --------------- | ----------------------------------------------------------------------------------------- |
 | Datadog organization UUID           | Datadog to Okta | Datadog application in Okta, {{< ui >}}Resource Server{{< /ui >}} tab, {{< ui >}}Audience/tenant ID{{< /ui >}}              |
-| Claude client ID                    | Datadog to Okta | Okta AI Agent, {{< ui >}}Resource Connection{{< /ui >}}, {{< ui >}}Client ID at resource{{< /ui >}}                         |
+| Agent client ID                     | Datadog to Okta | Okta AI Agent, {{< ui >}}Resource Connection{{< /ui >}}, {{< ui >}}Client ID at resource{{< /ui >}}                         |
 | Datadog resource URL and issuer URL | Datadog to Okta | Datadog application in Okta, {{< ui >}}Resource Server{{< /ui >}} tab, {{< ui >}}Resource URL{{< /ui >}} and {{< ui >}}Issuer URL{{< /ui >}} |
 | Okta tenant issuer URL              | Okta to Datadog | Datadog, {{< ui >}}Organization Settings > Cross-App Access{{< /ui >}}, {{< ui >}}Issuer URL{{< /ui >}}                      |
 
@@ -72,11 +72,13 @@ Click {{< ui >}}Remove{{< /ui >}} to unset the issuer. Datadog stops accepting t
 
 Copy the value in the {{< ui >}}Org UUID{{< /ui >}} field. Okta sends this value as the `aud_tenant` claim, which tells Datadog which organization a token targets when several organizations share one Okta tenant. It is not the same as the company ID that Okta asks for elsewhere.
 
-### Copy the Claude client ID
+### Copy the agent client ID
 
-The {{< ui >}}Registered client IDs{{< /ui >}} table lists each agent and the OAuth client ID it uses. Copy the client ID for Claude. You enter it in Okta as {{< ui >}}Client ID at resource{{< /ui >}}.
+The {{< ui >}}Registered client IDs{{< /ui >}} table lists every agent Datadog supports for Cross-App Access and the OAuth client ID each one uses. Copy the client ID for the agent you are setting up. You enter it in Okta as {{< ui >}}Client ID at resource{{< /ui >}}.
 
-Click {{< ui >}}Manage app{{< /ui >}} on a row to open the scope settings for that client. See [Control scopes in Datadog](#control-scopes-in-datadog).
+Datadog adds agents to this table as it supports them, so check the table rather than reusing a client ID from another source.
+
+Click {{< ui >}}Manage app{{< /ui >}} on a row to open the scope settings for that agent. See [Control scopes in Datadog](#control-scopes-in-datadog).
 
 {{% collapse-content title="Optional: configure with the API" level="h3" expanded=false %}}
 
@@ -163,7 +165,7 @@ On the Claude AI Agent, add the Claude SAML application as a delegated caller, t
 
    | Okta field                | Value                                                                                                |
    | ------------------------- | ---------------------------------------------------------------------------------------------------- |
-   | {{< ui >}}Client ID at resource{{< /ui >}} | The Claude client ID you copied from [{{< ui >}}Registered client IDs{{< /ui >}}](#copy-the-claude-client-id)         |
+   | {{< ui >}}Client ID at resource{{< /ui >}} | The Claude client ID you copied from [{{< ui >}}Registered client IDs{{< /ui >}}](#copy-the-agent-client-id)          |
    | {{< ui >}}Scope Condition{{< /ui >}}       | {{< ui >}}Allow all{{< /ui >}}, the only supported value. See [Control scopes in Datadog](#control-scopes-in-datadog) |
 
 4. Activate the agent from the {{< ui >}}Actions{{< /ui >}} menu.
