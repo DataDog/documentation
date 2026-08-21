@@ -186,7 +186,7 @@ Your older click data appears on the pinned screenshot. You can also use {{< ui 
 
 ## Data retention
 
-A heatmap combines two pieces of data, and Datadog retains each for a different period:
+A heatmap combines two pieces of data (the **overlay** - clicks and scrolls, and the **background screenshot**), and Datadog retains each for a different period:
 
 | Data | Source | Retention |
 | ---- | ------ | --------- |
