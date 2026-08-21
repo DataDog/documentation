@@ -848,9 +848,7 @@ URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 
 When [tracking network requests automatically](#automatically-track-network-requests), you can exclude specific URLs from RUM Resource tracking by setting `disallowList` on `RUM.Configuration.URLSessionTracking`. Use this parameter to exclude noisy or low-value endpoints, such as health checks or polling requests.
 
-Patterns are plain strings matched against the full request URL. A pattern without `*` must match the URL exactly. A pattern can contain one or more `*` wildcards, each matching any sequence of characters:
-
-The full request URL includes the query string. A `*` matches any characters, including `/`, so it is not limited to a single path segment.
+The SDK matches each pattern against the full request URL, including the query string. A pattern with no `*` must match the URL exactly. A pattern can include one or more `*` wildcards. Each `*` matches any sequence of characters, including `/`, so a pattern is not limited to a single path segment.
 
 ```swift
 RUM.enable(
