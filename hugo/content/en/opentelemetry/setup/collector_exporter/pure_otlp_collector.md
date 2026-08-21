@@ -1,9 +1,10 @@
 ---
-title: Set Up the Community OpenTelemetry Collector
+title: Set Up the Pure OpenTelemetry Collector
 aliases:
 - /opentelemetry/setup/collector_exporter/oss_setup/
+- /opentelemetry/setup/collector_exporter/community_collector/
 private: true
-description: 'Send OpenTelemetry data to Datadog using the Community OpenTelemetry Collector'
+description: 'Send OpenTelemetry data to Datadog using the Pure OpenTelemetry Collector'
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/"
   tag: "External Site"
@@ -18,11 +19,11 @@ further_reading:
 
 ## Overview
 
-Send traces, metrics, and logs to Datadog using the Community OpenTelemetry Collector, which is based on the [OpenTelemetry Collector Contrib][1] distribution and standard OpenTelemetry components. This setup uses the following key components:
+Send traces, metrics, and logs to Datadog using the Pure OpenTelemetry Collector, which is based on the [OpenTelemetry Collector Contrib][1] distribution and standard OpenTelemetry components. This setup uses the following key components:
 
 - **OTLP HTTP exporter**: Sends telemetry to Datadog's OTLP intake endpoints.
 - **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Service Catalog and Service Page.
-- **Resource detection processor**: Extracts host and cloud metadata for hostname resolution and tagging in Datadog.
+- **Resource detection processor**: Detects host and cloud resource attributes, which Datadog uses for hostname resolution and tagging.
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running any OpenTelemetry Collector with OTLP HTTP exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
 
@@ -32,7 +33,7 @@ Send traces, metrics, and logs to Datadog using the Community OpenTelemetry Coll
 
 This setup supports bare metal, VMs, Docker, and Kubernetes. Supported managed Kubernetes distributions include Amazon EKS (including Auto Mode), Google GKE (Standard and Autopilot), and Azure AKS (including Automatic).
 
-This setup does not support serverless or task-based container runtimes such as ECS Fargate or AWS Lambda. For supported Datadog features, see the [feature compatibility table][7] under **OTel SDK + Community OTel Collector**.
+This setup does not support serverless or task-based container runtimes such as ECS Fargate or AWS Lambda. For supported Datadog features, see the [feature compatibility table][7] under **OTel SDK + Pure OTel Collector**.
 
 - [OpenTelemetry Collector Contrib][1] v0.154.0 or later
 - A [Datadog API key][2]
@@ -64,7 +65,7 @@ receivers:
         endpoint: 0.0.0.0:4317
       http:
         endpoint: 0.0.0.0:4318
-  # Collect host-level metrics for the Infrastructure List
+  # Collect host system metrics (CPU, memory, disk, network); populates the Infrastructure List
   host_metrics:
     collection_interval: 10s
     scrapers:
@@ -98,7 +99,7 @@ receivers:
       processes: {}
 
 processors:
-  # Detect host and cloud metadata for hostname resolution and tagging
+  # Detect host and cloud resource attributes for hostname resolution and tagging
   resource_detection:
     detectors: [env, system]
     timeout: 2s
@@ -167,7 +168,7 @@ exporters:
     endpoint: https://otlp.${env:DD_SITE}
     headers:
       dd-api-key: ${env:DD_API_KEY}
-      # Send resource attributes and scope metadata as metric tags
+      # Map resource attributes and instrumentation scope metadata to Datadog metric tags
       dd-otel-metric-config: >-
         {
         "resource_attributes_as_tags": true,
@@ -253,7 +254,7 @@ receivers:
         endpoint: 0.0.0.0:4317
       http:
         endpoint: 0.0.0.0:4318
-  # Collect host-level metrics for the Infrastructure List
+  # Collect host system metrics (CPU, memory, disk, network); populates the Infrastructure List
   # root_path maps to the host filesystem mounted at /hostfs
   host_metrics:
     root_path: /hostfs
@@ -289,7 +290,7 @@ receivers:
       processes: {}
 
 processors:
-  # Detect host and cloud metadata for hostname resolution and tagging
+  # Detect host and cloud resource attributes for hostname resolution and tagging
   resource_detection:
     detectors: [env]
     timeout: 2s
@@ -358,7 +359,7 @@ exporters:
     endpoint: https://otlp.${env:DD_SITE}
     headers:
       dd-api-key: ${env:DD_API_KEY}
-      # Send resource attributes and scope metadata as metric tags
+      # Map resource attributes and instrumentation scope metadata to Datadog metric tags
       dd-otel-metric-config: >-
         {
         "resource_attributes_as_tags": true,
@@ -454,7 +455,7 @@ receivers:
         endpoint: 0.0.0.0:4317
       http:
         endpoint: 0.0.0.0:4318
-  # Collect host-level metrics for the Infrastructure List
+  # Collect host system metrics (CPU, memory, disk, network); populates the Infrastructure List
   # root_path maps to the host filesystem mounted at /hostfs
   host_metrics:
     root_path: /hostfs
@@ -502,7 +503,7 @@ receivers:
       - volume
 
 processors:
-  # Detect host and cloud metadata for hostname resolution and tagging
+  # Detect host and cloud resource attributes for hostname resolution and tagging
   resource_detection:
     detectors: [env, system]
     timeout: 2s
@@ -617,7 +618,7 @@ exporters:
     endpoint: https://otlp.${env:DD_SITE}
     headers:
       dd-api-key: ${env:DD_API_KEY}
-      # Send resource attributes and scope metadata as metric tags
+      # Map resource attributes and instrumentation scope metadata to Datadog metric tags
       dd-otel-metric-config: >-
         {
         "resource_attributes_as_tags": true,
@@ -877,7 +878,7 @@ env:
 {{% /tab %}}
 {{< /tabs >}}
 
-Apply [Unified Service Tagging][4] by setting the `service.name`, `deployment.environment.name`, and `service.version` resource attributes in your application's OpenTelemetry configuration.
+Set the `service.name`, `deployment.environment.name`, and `service.version` resource attributes in your application's OpenTelemetry configuration. Datadog maps these to [Unified Service Tagging][4], which correlates your traces, metrics, and logs.
 
 ## Verify the setup
 
@@ -930,7 +931,7 @@ Example with instrumentation metrics enabled:
 }
 ```
 
-<div class="alert alert-info">The recommended Community OTel Collector configuration uses the <code>span_metrics</code> connector to generate the RED metrics that power APM views. The <code>trace_metrics.instrumentation_metrics_calc</code> and <code>raw_instrumentation_metrics_drop</code> fields support an alternative configuration for setups that derive APM trace metrics from HTTP instrumentation metrics instead. Do not enable <code>instrumentation_metrics_calc</code> alongside the <code>span_metrics</code> connector, as this computes trace metrics from both sources.</div>
+<div class="alert alert-info">The recommended Pure OTel Collector configuration uses the <code>span_metrics</code> connector to generate the RED metrics that power APM views. The <code>trace_metrics.instrumentation_metrics_calc</code> and <code>raw_instrumentation_metrics_drop</code> fields support an alternative configuration for setups that derive APM trace metrics from HTTP instrumentation metrics instead. Do not enable <code>instrumentation_metrics_calc</code> alongside the <code>span_metrics</code> connector, as this computes trace metrics from both sources.</div>
 
 ### Datadog extension
 
