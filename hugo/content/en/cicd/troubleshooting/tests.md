@@ -1,5 +1,7 @@
 ---
 title: Test Optimization Troubleshooting
+aliases:
+  - /tests/troubleshooting/
 further_reading:
   - link: "/continuous_integration/tests"
     tag: "Documentation"
