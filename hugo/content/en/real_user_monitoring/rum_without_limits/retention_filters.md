@@ -48,8 +48,8 @@ The logical flow of retention filters is the following:
 
 **Notes**:
 
-- If an event does not match any filters, or if it matches a filter but the decision is made not to retain the session based on the configured retention rate, future events from the same session will continue to be evaluated. As a result, the session may eventually be retained.
-- Be cautious when defining filters on event attributes that update over time. For example, a filter retaining sessions with fewer than two errors might mistakenly retain sessions, as error counts update in real-time, and all sessions start at zero. Either use "greater than or equal to" (≥) conditions for fields that update, such as `@session.error.count >= 2`, or ensure the Session and View objects that are mutable are complete before evaluating them against the retention filters, by adding `@session.is_active: false` or `@view.is_active: false`.
+- If an event does not match any filters, or if it matches a filter but the retention rate does not sample it in, later events from the same session are still evaluated, so the session may eventually be retained.
+- Be cautious with filters on attributes that update over time. A filter on sessions with fewer than two errors matches almost everything, because error counts start at zero and update in real time. Either use "greater than or equal to" (≥) conditions, such as `@session.error.count >= 2`, or wait for the object to be complete by adding `@session.is_active: false` or `@view.is_active: false`.
 - Events are not necessarily evaluated in the order they happened: event `B` can be evaluated before event `A`. All events are eventually evaluated against the list of retention filters to prevent gaps.
 
 ## Types of filters
