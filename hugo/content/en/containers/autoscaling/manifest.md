@@ -136,12 +136,12 @@ Most vertical options are expressed through `spec.constraints.containers[]`:
 
 | Field | Type | Default | Meaning |
 |---|---|---|---|
-| `name` | string, **required** | N/A | Container name, or `"*"` to match every container that has no entry of its own (see [Exclude a container](#exclude-a-container)) |
+| `name` | string, **required** | - | Container name, or `"*"` to match every container that has no entry of its own (see [Exclude a container](#exclude-a-container)) |
 | `enabled` | bool | `true` | `false` disables resource autoscaling for this container |
 | `controlledResources` | list of `cpu`, `memory` | `[cpu, memory]` | Which resources receive vertical recommendations. An empty list is equivalent to `enabled: false` |
 | `controlledValues` | enum | `RequestsAndLimits` | Whether recommendations write both requests _and_ limits, or requests only |
-| `minAllowed` | resource map | None | Lower bound for the container's requests |
-| `maxAllowed` | resource map | None | Upper bound for the container's requests |
+| `minAllowed` | resource map | - | Lower bound for the container's requests |
+| `maxAllowed` | resource map | - | Upper bound for the container's requests |
 
 If `constraints.containers` is omitted entirely, resource scaling is enabled for **all** containers, with no bounds.
 
@@ -199,7 +199,7 @@ spec:
           utilization: 65
 ```
 
-This requires a recent Agent version; see the requirements in [Kubernetes Autoscaling][2]. On older Agents, the field is accepted by the CRD but has no effect.
+This feature requires Datadog Cluster Agent 7.78.0+. On older versions, the `controlledResources` field is accepted by the CRD but has no effect.
 
 ## Remove CPU limits with burstable mode
 
@@ -246,52 +246,6 @@ Before enabling it:
 - Without a CPU limit, a container can consume available node CPU. Kernel CPU shares still apply.
 - Burstable mode **takes precedence over** `controlledValues` for CPU limits. If both are set, burstable wins.
 
-### Apply burstable mode to many workloads
-
-To onboard a whole category of workloads (every JVM service, for example), set the option in a `DatadogPodAutoscalerClusterProfile` template. It propagates to every DPA the profile generates, and removing it propagates the removal. For more information about profiles, see [Cluster profiles][4].
-
-```yaml
-apiVersion: datadoghq.com/v1alpha2
-kind: DatadogPodAutoscalerClusterProfile
-metadata:
-  name: java-burstable
-spec:
-  template:
-    options:
-      burstable: true
-    applyPolicy:
-      mode: Apply
-      update:
-        strategy: Auto
-    constraints:
-      minReplicas: 2
-      maxReplicas: 25
-      containers:
-        - name: "*"
-          enabled: true
-    objectives:
-      - type: PodResource
-        podResource:
-          name: cpu
-          value:
-            type: Utilization
-            utilization: 80
-```
-
-Then label the workloads that use it:
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: order-service
-  namespace: production
-  labels:
-    autoscaling.datadoghq.com/profile: java-burstable
-```
-
-To verify, run `kubectl -n production get dpa -o yaml` and confirm the generated DPA carries `spec.options.burstable: true`.
-
 ## Tune the OOMKill memory bump
 
 After an OOMKill, the memory limit is raised by **20%** relative to the limit in force at the time. The bump is applied immediately and re-applied on each subsequent OOMKill until the workload stabilizes. This is a self-correcting ratchet rather than a one-time adjustment.
@@ -307,13 +261,7 @@ spec:
 
 Quote the value: it is a Kubernetes quantity, not a floating-point number.
 
-**When to raise it.** If a container runs out of memory very fast (roughly **under 30 seconds**), the Agent may not capture the memory peak before the restart, so recommendations cannot ratchet upward and the crash loop persists.
-
-If you hit that situation:
-
-1. Confirm the OOM check is enabled on the Agent.
-2. Raise `bumpUpRatio`.
-3. Set a `minAllowed` memory floor (see [Set per-container bounds](#set-per-container-bounds)) so the limit cannot fall back below a safe value between recommendation cycles.
+**When to raise it.** Raise the ratio for workloads whose memory usage can peak sharply above previous peaks. A larger bump reaches the right memory limit faster and avoids several successive bumps before the workload stabilizes. When you raise it, also set a `minAllowed` memory floor (see [Set per-container bounds](#set-per-container-bounds)) so the limit cannot fall back below a safe value between recommendation cycles.
 
 ## Right-size requests only
 
@@ -622,60 +570,7 @@ metadata:
     ad.datadoghq.com/tags: '{"team": "my-team", "tier": "critical"}'
 ```
 
-This adds the tags to the autoscaling telemetry emitted for this DPA.
-
-## Troubleshooting
-
-### `objectives length must be exactly 1, got 2`
-
-```text
-Invalid configuration: invalid horizontal policy: objectives length must be exactly 1, got 2
-reason: RecommendationError
-```
-
-`objectives` configures **horizontal** scaling only and accepts exactly one entry. The CRD accepts multiple entries syntactically, but the controller does not run. The most common cause is trying to combine a CPU objective and a memory objective; choose one.
-
-Two things worth knowing when this occurs:
-
-- The single-objective limit applies to horizontal scaling only. Vertical rightsizing still covers CPU and memory independently.
-- When the horizontal policy is invalid, vertical rightsizing **continues to run**. Set `applyPolicy.mode: Preview` if you want everything frozen while you fix the configuration.
-
-### Nothing vertical is happening
-
-Check that `applyPolicy.update.strategy` is set to `Auto`. Without it, no vertical recommendation is applied regardless of what `constraints.containers` says. Then confirm the Admission Controller is enabled; see [Kubernetes Autoscaling][2].
-
-### Only memory is being right-sized
-
-This is expected default behavior. See [Right-size CPU and memory](#right-size-cpu-and-memory).
-
-### The DPA exists but `.status` stays empty
-
-Workload Autoscaling is most likely not enabled on the Cluster Agent. See [Kubernetes Autoscaling][2].
-
-### Deleting a DPA
-
-- `spec.owner: Local` (created in-cluster): delete it from the cluster.
-- Created from the Datadog UI (`spec.owner: Remote`): delete it from the UI. Deleting it in-cluster only causes it to be recreated.
-- **Delete the DPA before deleting the target workload**, otherwise it is left orphaned and is harder to clean up.
-
-### Multi-region deployments
-
-A DPA has no cross-cluster awareness. Each cluster scales independently within the same `minReplicas` and `maxReplicas`. Clusters under different load diverge, which is expected.
-
-### Manifest managers (Helm, Argo CD, Flux)
-
-- Horizontal scaling writes `replicas` through the `scale` subresource (the equivalent of `kubectl scale`), which manifest managers tolerate well. Remove any static `replicas:` from your manifest after you switch to Apply mode.
-- Vertical scaling can reach pods two ways. In-place resize and the admission controller's mutating webhook apply resources to pods without rewriting the workload manifest, so no drift is reported. Rollout-based vertical scaling updates the target Deployment or StatefulSet, which a GitOps tool can detect as drift. If you use Argo CD, configure it to ignore the fields the Cluster Agent owns; see [Manage DatadogPodAutoscaler with ArgoCD][5].
-
-## Rollout checklist
-
-1. Confirm the cluster prerequisites: Workload Autoscaling and the Admission Controller enabled on the Cluster Agent (see [Kubernetes Autoscaling][2]). Without this, the DPA applies cleanly and then does nothing.
-2. Generate a baseline in the UI ({{< ui >}}Configure Recommendation{{< /ui >}} > {{< ui >}}Export Recommendation{{< /ui >}}).
-3. Add the manifest options you need from this page.
-4. Commit with `applyPolicy.mode: Preview`, leaving any existing HPA or VPA in place.
-5. Watch the recommendations in the Autoscaling UI for at least one full traffic cycle.
-6. Switch to `mode: Apply`, disable the previous autoscaler, and remove any static `replicas`.
-7. If you use multidimensional scaling, confirm that both CPU and memory recommendations are being applied.
+This adds the tags to the autoscaling telemetry emitted for this DPA. For the list of metrics the Cluster Agent emits, see the [Datadog Cluster Agent integration][8].
 
 ## Further reading
 
@@ -684,7 +579,6 @@ A DPA has no cross-cluster awareness. Each cluster scales independently within t
 [1]: https://app.datadoghq.com/orchestration/scaling/workload
 [2]: /containers/autoscaling/
 [3]: /containers/autoscaling/#in-place-vertical-scaling
-[4]: /containers/autoscaling/#cluster-profiles
-[5]: /containers/guide/manage-datadogpodautoscaler-with-argocd/
 [7]: https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/
+[8]: /integrations/datadog-cluster-agent/#metrics
 [9]: /help/
