@@ -76,14 +76,15 @@ validation_results = {
     "is_astronomer": None,
     "is_datadog": None,
     "is_listener_accessible": None,
-    "is_disabled": None,
+    "provider_active": None,
+    "inactive_reason": None,  # "explicit" | "no_config" | None
     "config_path": None,
     "transport": None,
     "transport_type": None,
     "transport_config": None,
     "transport_url": None,
     "conflicts": [],
-    "connectivity": None
+    "connectivity": None,
 }
 
 
@@ -91,54 +92,31 @@ def generate_validation_summary():
     """Generate a summary of all validation checks performed."""
     log.info("===== OpenLineage Validation Summary =====")
 
+    # --- Installation ---
     if validation_results["installed_package"]:
         log.info("✓ OpenLineage Package: %s version %s",
                  validation_results["installed_package"],
                  validation_results["package_version"])
     else:
         log.error("✗ OpenLineage not installed properly")
+        log.error("  All subsequent checks were skipped.")
+        log.info("========================================")
+        log.error("Critical issues found. OpenLineage events will not be sent properly.")
+        return False
 
-    if validation_results["is_disabled"]:
-        log.error("✗ OpenLineage is disabled")
-    else:
-        log.info("✓ OpenLineage is enabled")
-
-    if validation_results["is_listener_accessible"]:
-        log.info("✓ OpenLineage listener is accessible")
-    else:
-        log.error("✗ OpenLineage listener is not accessible")
-
-    if validation_results["transport"] and validation_results["transport_config"]:
-        config = validation_results["transport_config"]
-        transport_type = validation_results["transport_type"]
-
-        if transport_type == "http":
-            log.info("✓ Transport Type: HTTP")
-        elif transport_type == "datadog":
-            log.info("✓ Transport Type: Datadog")
-        elif transport_type == "console":
-            log.error("✗ Transport Type: Console (won't send events to Datadog)")
-        elif transport_type == "composite":
-            has_http_transport = False
-            for name, nested_transports in config.get("transports", {}).items():
-                if nested_transports.get("type", "") == "http":
-                    has_http_transport = True
-                    log.info("✓ Composite Transport with HTTP transport: `%s`", name)
-            if not has_http_transport:
-                log.error("✗ Composite Transport is set up without HTTP transport")
+    # --- Provider Status ---
+    if validation_results["provider_active"] is True:
+        log.info("✓ OpenLineage provider is active")
+    elif validation_results["provider_active"] is False:
+        if validation_results["inactive_reason"] == "explicit":
+            log.error("✗ OpenLineage provider is turned off")
+            log.error("  Check and remove whichever of these is set: "
+                      "AIRFLOW__OPENLINEAGE__DISABLED, OPENLINEAGE_DISABLED, "
+                      "or openlineage.disabled in airflow.cfg")
         else:
-            log.error("✗ Unknown transport type: %s", transport_type)
+            log.error("✗ OpenLineage provider is not active (no transport configuration found)")
 
-        if validation_results.get("is_datadog"):
-             log.info("✓ Integration: Datadog")
-    else:
-        log.error("✗ No transport configured")
-
-    if validation_results["connectivity"]:
-        log.info("✓ Network connectivity to backend is successful")
-    else:
-        log.error("✗ Network connectivity check failed")
-
+    # --- Configuration (always runs) ---
     if validation_results["conflicts"]:
         log.warning("! Configuration conflicts detected:")
         for conflict in validation_results["conflicts"]:
@@ -146,18 +124,65 @@ def generate_validation_summary():
     else:
         log.info("✓ No configuration conflicts detected")
 
+    # --- Live Transport, Connectivity, Listener ---
+    # These only ran when the provider was active — group them and propagate N/A together.
+    if validation_results["provider_active"] is False:
+        log.warning("- Live transport:   N/A (provider not active — fix provider status first)")
+        log.warning("- Network:          N/A (provider not active — fix provider status first)")
+        log.warning("- Listener:         N/A (provider not active — fix provider status first)")
+    else:
+        if validation_results["transport"] and validation_results["transport_config"]:
+            config = validation_results["transport_config"]
+            transport_type = validation_results["transport_type"]
+
+            if transport_type == "http":
+                log.info("✓ Transport Type: HTTP")
+            elif transport_type == "datadog":
+                log.info("✓ Transport Type: Datadog")
+            elif transport_type == "console":
+                log.error("✗ Transport Type: Console (won't send events to Datadog)")
+            elif transport_type == "composite":
+                has_http_transport = False
+                for name, nested_transports in config.get("transports", {}).items():
+                    if nested_transports.get("type", "") == "http":
+                        has_http_transport = True
+                        log.info("✓ Composite Transport with HTTP transport: `%s`", name)
+                if not has_http_transport:
+                    log.error("✗ Composite Transport is set up without HTTP transport")
+            else:
+                log.error("✗ Unknown transport type: %s", transport_type)
+
+            if validation_results.get("is_datadog"):
+                log.info("✓ Integration: Datadog")
+            else:
+                log.warning("! Transport does not appear to point to a Datadog endpoint")
+        else:
+            log.error("✗ Failed to resolve active transport")
+
+        if validation_results["connectivity"] is True:
+            log.info("✓ Network connectivity to backend is successful")
+        elif validation_results["connectivity"] is False:
+            log.error("✗ Network connectivity check failed")
+
+        if validation_results["is_listener_accessible"] is True:
+            log.info("✓ OpenLineage listener is accessible")
+        elif validation_results["is_listener_accessible"] is False:
+            log.error("✗ OpenLineage listener is not accessible")
+
+    # --- Platform Info ---
     if validation_results["is_mwaa"]:
         log.info("ℹ Running on Amazon MWAA")
-
     if validation_results.get("is_astronomer"):
         log.info("ℹ Running on Astronomer")
 
     log.info("========================================")
 
     critical_error = (
-        validation_results["is_disabled"] or
-        not validation_results["is_listener_accessible"] or
-        not validation_results["transport"]
+        validation_results["provider_active"] is False
+        or validation_results["is_listener_accessible"] is False
+        or (validation_results["provider_active"] and not validation_results["transport"])
+        or validation_results["connectivity"] is False
+        or validation_results["transport_type"] == "console"
     )
 
     if critical_error:
@@ -175,9 +200,9 @@ def print_environment_info():
 
     ol_python_ver = _get_installed_package_version("openlineage-python")
     if ol_python_ver:
-         log.info(f"OpenLineage Python Version: {ol_python_ver}")
+        log.info(f"OpenLineage Python Version: {ol_python_ver}")
     else:
-         log.info("OpenLineage Python Version: Not Found")
+        log.info("OpenLineage Python Version: Not Found")
 
     if _provider_can_be_used():
         provider = "apache-airflow-providers-openlineage"
@@ -190,7 +215,6 @@ def print_environment_info():
     else:
         log.info(f"OpenLineage Provider Version: Not Found ({provider})")
 
-    # Run platform checks
     check_mwaa_status()
     check_astronomer_status()
 
@@ -201,32 +225,35 @@ def validate_setup() -> None:
     """Run all validation checks for OpenLineage configuration."""
     log.info("Starting OpenLineage validation...")
 
-    # Print environment info
+    # 1. Environment info
     print_environment_info()
 
-    # Check package installation
-    if _provider_can_be_used():
-        validate_installation("apache-airflow-providers-openlineage")
-    else:
-        validate_installation("openlineage-airflow")
+    # 2. Installation check — prerequisite for everything else
+    package_name = "apache-airflow-providers-openlineage" if _provider_can_be_used() else "openlineage-airflow"
+    if not validate_installation(package_name):
+        generate_validation_summary()
+        return
 
-    # Check listener and validation
-    is_listener_accessible()
-    is_ol_disabled()
+    # 3. Disabled check
+    check_provider_enabled()
 
-    # Check for configuration conflicts
+    # 4. Static transport checks — env vars, config files, transport source logging.
+    # No OL dependency, always run regardless of disabled state.
     check_configuration_conflicts()
+    validate_transport_config()
 
-    # Check connection configuration
-    validate_connection()
+    # 5+6. Live transport resolution, network connectivity, and listener check all require
+    # the provider to be active. When inactive, the plugin registers no listeners, so all
+    # three would fail for the same upstream reason — skip them as a group.
+    if validation_results["provider_active"]:
+        resolve_transport()
+        check_network_connectivity()
+        is_listener_accessible()
+    else:
+        log.warning("Skipping live transport resolution, network connectivity, and listener check: "
+                    "provider is not active. Address the transport configuration first.")
 
-    # Check for Datadog
-    check_is_datadog()
-
-    # Check network connectivity (using transport URL from previous steps)
-    check_network_connectivity()
-
-    # Generate validation summary
+    # 7. Summary
     generate_validation_summary()
 
 
@@ -237,7 +264,7 @@ try:
         start_date=datetime.datetime(2025, 1, 1),
         schedule_interval="@once",
     )
-except Exception as e:
+except Exception:
     dag = DAG(
         dag_id="openlineage_preflight_check_dag",
         description="A DAG to check OpenLineage setup and configurations",
@@ -245,7 +272,8 @@ except Exception as e:
         schedule="@once",
     )
 
-validate_setup = PythonOperator(
+# Named differently from validate_setup() to avoid overwriting the function reference
+validate_setup_task = PythonOperator(
     task_id="validate_setup",
     python_callable=validate_setup,
     dag=dag,
@@ -259,11 +287,10 @@ def validate_installation(package_name: str) -> bool:
             log.error(f"Failed to get installed version for `{package_name}`. Skipping version check.")
             return False
 
-        # Store in global results
         validation_results["installed_package"] = package_name
         validation_results["package_version"] = str(package_version)
 
-    except Exception as e:
+    except Exception:
         log.exception(f"Failed to get installed version for `{package_name}`.")
         return False
 
@@ -298,7 +325,7 @@ def check_mwaa_status():
             'MWAA_COMMAND': os.getenv('MWAA_COMMAND'),
             'AIRFLOW_ENV_NAME': os.getenv('AIRFLOW_ENV_NAME'),
             'AWS_REGION': os.getenv('AWS_REGION'),
-            'AIRFLOW_VERSION': os.getenv('AIRFLOW_VERSION')
+            'AIRFLOW_VERSION': os.getenv('AIRFLOW_VERSION'),
         }
         log.info(f"MWAA Environment Details: {mwaa_env}")
     else:
@@ -329,7 +356,7 @@ def is_listener_accessible():
     if _provider_can_be_used():
         try:
             from airflow.providers.openlineage.plugins.openlineage import OpenLineageProviderPlugin as plugin
-        except ImportError as e:
+        except ImportError:
             log.error("OpenLineage provider is not accessible: can't import airflow.providers.openlineage.plugins.openlineage.OpenLineageProviderPlugin")
             log.error("Please check if the provider is properly configured.")
             log.error("The installation docs can be found at https://docs.datadoghq.com/data_jobs/airflow/")
@@ -338,70 +365,84 @@ def is_listener_accessible():
     else:
         try:
             from openlineage.airflow.plugin import OpenLineagePlugin as plugin
-        except ImportError as e:
+        except ImportError:
             log.error("OpenLineage is not accessible: can't import openlineage.airflow.plugin.OpenLineagePlugin")
             log.error("Please check if the provider is properly configured.")
             log.error("The installation docs can be found at https://docs.datadoghq.com/data_jobs/airflow/")
             validation_results["is_listener_accessible"] = False
             return False
 
-    if len(plugin.listeners) == 1:
-        validation_results["is_listener_accessible"] = True
-        return True
+    num_listeners = len(plugin.listeners)
+    if num_listeners == 0:
+        log.error("OpenLineage listener is not registered. The plugin loaded but no listeners are active.")
+        validation_results["is_listener_accessible"] = False
+        return False
+    elif num_listeners > 1:
+        log.error("OpenLineage has unexpected multiple listeners registered: %s", plugin.listeners)
+        validation_results["is_listener_accessible"] = False
+        return False
 
-    log.error("OpenLineage is not accessible: multiple listeners found. %s", plugin.listeners)
-    validation_results["is_listener_accessible"] = False
-    return False
+    validation_results["is_listener_accessible"] = True
+    return True
 
 
-def is_ol_disabled():
+def check_provider_enabled():
     if _provider_can_be_used():
         try:
-            # apache-airflow-providers-openlineage >= 1.7.0
             from airflow.providers.openlineage.conf import is_disabled
         except ImportError:
-            # apache-airflow-providers-openlineage < 1.7.0
             from airflow.providers.openlineage.plugins.openlineage import _is_disabled as is_disabled
     else:
         from openlineage.airflow.plugin import _is_disabled as is_disabled
 
-    is_disabled_result = is_disabled()
-    validation_results["is_disabled"] = is_disabled_result
+    is_inactive = is_disabled()
+    validation_results["provider_active"] = not is_inactive
 
-    if is_disabled_result:
-        if _provider_can_be_used() and os.getenv("AIRFLOW__OPENLINEAGE__DISABLED", "false").lower() == "true":
-            log.error("OpenLineage is disabled in Airflow Config by environment variable AIRFLOW__OPENLINEAGE__DISABLED")
-            return True
-        elif conf.getboolean("openlineage", "disabled", fallback=False):
-            log.error("OpenLineage is disabled in Airflow Config: openlineage.disabled")
-            return True
-        elif os.getenv("OPENLINEAGE_DISABLED", "false").lower() == "true":
-            log.error(
-                "OpenLineage is disabled due to the environment variable OPENLINEAGE_DISABLED"
-            )
-            return True
-        log.error(
-            "OpenLineage is disabled because required config/env variables are not set. "
-            "Please refer to "
-            "https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/guides/user.html"
-        )
-        return True
-    return False
+    if not is_inactive:
+        return
+
+    # Determine whether it was explicitly turned off or just has no transport config
+    if _provider_can_be_used() and os.getenv("AIRFLOW__OPENLINEAGE__DISABLED", "false").lower() == "true":
+        log.error("OpenLineage provider is turned off via AIRFLOW__OPENLINEAGE__DISABLED")
+        validation_results["inactive_reason"] = "explicit"
+        return
+    if conf.getboolean("openlineage", "disabled", fallback=False):
+        log.error("OpenLineage provider is turned off via openlineage.disabled in airflow.cfg")
+        validation_results["inactive_reason"] = "explicit"
+        return
+    if os.getenv("OPENLINEAGE_DISABLED", "false").lower() == "true":
+        log.error("OpenLineage provider is turned off via OPENLINEAGE_DISABLED")
+        validation_results["inactive_reason"] = "explicit"
+        return
+
+    # No explicit flag — provider is inactive because no transport config was found
+    log.error(
+        "OpenLineage provider is not active: no transport configuration was found. "
+        "Please refer to https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/guides/user.html"
+    )
+    validation_results["inactive_reason"] = "no_config"
 
 
-def validate_connection() -> bool:
-    """Validate the OpenLineage connection configuration."""
+def validate_transport_config() -> None:
+    """Check static transport configuration — env vars, config files, transport source logging.
+
+    No OL package dependency; safe to run regardless of disabled state.
+    """
     _validate_config_set()
 
-    config_files = [
-        "openlineage.yml",
-        "~/.openlineage/openlineage.yml"
-    ]
-
-    for file_path in config_files:
+    for file_path in ["openlineage.yml", "~/.openlineage/openlineage.yml"]:
         if _check_openlineage_yml(file_path):
             break
 
+    _verify_transport_source()
+
+
+def resolve_transport() -> bool:
+    """Instantiate the OL plugin to get the active transport object and validate it.
+
+    Requires OL to be enabled — listeners list is empty when disabled, so this will
+    always fail if called in that state. Gate this call in validate_setup().
+    """
     try:
         transport = _get_configured_transport()
         if transport is None:
@@ -416,45 +457,50 @@ def validate_connection() -> bool:
         validation_results["transport_config"] = config
 
         if transport.kind == "http":
-            validation_results["transport_url"] = config.get("url")
+            url = config.get("url")
+            validation_results["transport_url"] = url
+            validation_results["is_datadog"] = _is_datadog_url(url) if url else False
+            if url and not validation_results["is_datadog"]:
+                log.warning("HTTP transport URL does not point to a known Datadog endpoint: %s", url)
+        elif transport.kind == "datadog":
+            validation_results["is_datadog"] = True
         elif transport.kind == "composite":
             transport_valid = False
             for key, value in config.get("transports", {}).items():
                 log.info("Checking nested transport `%s`", key)
                 transport_valid = _verify_transport(value)
                 if value.get("type") == "http":
-                    validation_results["transport_url"] = value.get("url")
+                    url = value.get("url")
+                    validation_results["transport_url"] = url
+                    validation_results["is_datadog"] = _is_datadog_url(url) if url else False
                     break
             return transport_valid
 
-        _verify_transport_source()
         return True
 
-
     except Exception as e:
-        log.error("There was an error when trying to validate connection: %s", e)
+        log.error("There was an error when trying to resolve transport: %s", e)
         log.exception("Full traceback:")
         return False
 
 
 def _validate_config_set():
-    if config_path := os.getenv("OPENLINEAGE_CONFIG"):
-        log.info("Found OpenLineage config path: env variable OPENLINEAGE_CONFIG is set to: %s", config_path)
-        validation_results["config_path"] = config_path
-    elif config_path := os.getenv("AIRFLOW__OPENLINEAGE__CONFIG", "") and _provider_can_be_used():
-        log.info("Found OpenLineage config path: env variable AIRFLOW__OPENLINEAGE__CONFIG is set to: %s", config_path)
-        validation_results["config_path"] = config_path
-    elif config_path := conf.get("openlineage", "config_path", fallback="") and _provider_can_be_used():
-        log.info("Found OpenLineage config path: Airflow config openlineage.config_path is set to: %s", config_path)
-        validation_results["config_path"] = config_path
+    config_path = None
 
+    if env_path := os.getenv("OPENLINEAGE_CONFIG"):
+        log.info("Found OpenLineage config path: env variable OPENLINEAGE_CONFIG is set to: %s", env_path)
+        config_path = env_path
+    elif _provider_can_be_used() and (env_path := os.getenv("AIRFLOW__OPENLINEAGE__CONFIG")):
+        log.info("Found OpenLineage config path: env variable AIRFLOW__OPENLINEAGE__CONFIG is set to: %s", env_path)
+        config_path = env_path
+    elif _provider_can_be_used() and (cfg_path := conf.get("openlineage", "config_path", fallback="")):
+        log.info("Found OpenLineage config path: Airflow config openlineage.config_path is set to: %s", cfg_path)
+        config_path = cfg_path
 
     if config_path:
+        validation_results["config_path"] = config_path
         if not _check_openlineage_yml(config_path):
-            log.error(
-                "Config file is empty or does not exist: `%s`",
-                config_path,
-            )
+            log.error("Config file is empty or does not exist: `%s`", config_path)
             return False
         log.info("OpenLineage config file `%s` is valid.", config_path)
         return True
@@ -463,41 +509,24 @@ def _validate_config_set():
     return True
 
 
-def check_is_datadog():
-    """Check if the transport is configured for Datadog."""
-    # We rely on validate_connection being run first
-    transport_type = validation_results.get("transport_type")
-    transport_url = validation_results.get("transport_url", "")
-
-    is_datadog = False
-
-    if transport_type == "datadog":
-        is_datadog = True
-    elif transport_type == "http" and transport_url:
-        # Check for known Datadog domains
-        datadog_domains = [
-            "datadoghq.com",
-            "datadoghq.eu",
-            "datad0g.com",
-            "datad0g.eu",
-            "us3.datadoghq.com",
-            "us5.datadoghq.com",
-            "ap1.datadoghq.com"
-        ]
-        if any(domain in transport_url for domain in datadog_domains):
-            is_datadog = True
-            log.info("Transport type is HTTP but URL points to Datadog. Considered as Datadog transport.")
-
-    validation_results["is_datadog"] = is_datadog
-    return is_datadog
+def _is_datadog_url(url: str) -> bool:
+    """Check if a URL points to a known Datadog domain."""
+    datadog_domains = [
+        "datadoghq.com",
+        "datadoghq.eu",
+        "datad0g.com",
+        "datad0g.eu",
+        "us3.datadoghq.com",
+        "us5.datadoghq.com",
+        "ap1.datadoghq.com",
+        "ap2.datadoghq.com",
+        "uk1.datadoghq.com",
+    ]
+    return any(domain in url for domain in datadog_domains)
 
 
 def _redact_api_keys(obj) -> None:
-    """Recursively search and redact API keys in a dictionary.
-
-    This function modifies the dictionary in place, redacting any values where
-    the key contains 'api_key' (case insensitive).
-    """
+    """Recursively redact API keys and auth values in a dictionary (in-place)."""
     if isinstance(obj, dict):
         for key, value in obj.items():
             if isinstance(key, str) and ("api_key" in key.lower() or "auth" in key.lower()):
@@ -515,7 +544,7 @@ def _verify_transport_source() -> None:
         if endpoint := os.getenv("OPENLINEAGE_ENDPOINT"):
             url = urljoin(url, endpoint)
             log.info("OPENLINEAGE_ENDPOINT is set to: `%s`", url)
-        log.info("Final URL that is configured by env variables is set to: `%s`", url)
+        log.info("Final URL configured by env variables: `%s`", url)
 
         if os.getenv("OPENLINEAGE_API_KEY"):
             log.info("OPENLINEAGE_API_KEY is set [value redacted]")
@@ -549,7 +578,7 @@ def _verify_transport_source() -> None:
             except json.JSONDecodeError:
                 log.error("AIRFLOW__OPENLINEAGE__TRANSPORT is set but contains invalid JSON: `%s`", transport_var)
         else:
-            log.info("AIRFLOW__OPENLINEAGE__TRANSPORT variable is not set.")
+            log.info("AIRFLOW__OPENLINEAGE__TRANSPORT is not set.")
 
         for key, value in os.environ.items():
             if key.startswith("AIRFLOW__OPENLINEAGE__TRANSPORT_"):
@@ -566,6 +595,13 @@ def _verify_transport_source() -> None:
         else:
             log.info("Airflow config openlineage.transport is not set.")
 
+        conn_id = os.getenv("AIRFLOW__OPENLINEAGE__CONN_ID") or conf.get("openlineage", "conn_id", fallback="")
+        if conn_id:
+            log.info("OpenLineage Airflow connection configured: conn_id=`%s`", conn_id)
+            _check_connection_transport(conn_id)
+        else:
+            log.info("No OpenLineage Airflow connection configured (AIRFLOW__OPENLINEAGE__CONN_ID / openlineage.conn_id).")
+
 
 def _check_openlineage_yml(file_path) -> bool:
     log.info("Checking OpenLineage config file: `%s`", file_path)
@@ -577,9 +613,9 @@ def _check_openlineage_yml(file_path) -> bool:
             log.error(f"Empty openlineage.yml file: `{file_path}`")
             return False
         log.info(
-                f"File found at `{file_path}` with the following content: `{content}`. "
-                "Make sure the configuration is correct."
-            )
+            f"File found at `{file_path}` with the following content: `{content}`. "
+            "Make sure the configuration is correct."
+        )
         return True
     return False
 
@@ -591,13 +627,45 @@ def _get_configured_transport():
             transport = OpenLineageProviderPlugin().listeners[0].adapter.get_or_create_openlineage_client().transport
         else:
             from openlineage.airflow.plugin import OpenLineagePlugin
-            transport = (
-                OpenLineagePlugin.listeners[0].adapter.get_or_create_openlineage_client().transport
-            )
+            transport = OpenLineagePlugin.listeners[0].adapter.get_or_create_openlineage_client().transport
     except Exception as e:
         log.error("There was an error when trying to get OpenLineage Transport: %s", e)
         return None
     return transport
+
+
+def _check_connection_transport(conn_id: str) -> str | None:
+    """Validate an OpenLineage Airflow connection and return its URL if resolvable."""
+    try:
+        from airflow.hooks.base import BaseHook
+        conn = BaseHook.get_connection(conn_id)
+
+        schema = conn.schema or "https"
+        host = conn.host
+        if not host:
+            log.error("Connection `%s` has no host configured", conn_id)
+            return None
+
+        url = f"{schema}://{host}"
+        if conn.port:
+            url += f":{conn.port}"
+
+        log.info("Connection `%s` URL: %s", conn_id, url)
+
+        if conn.password:
+            log.info("Connection `%s` has a password configured [value redacted]", conn_id)
+        else:
+            log.warning("Connection `%s` has no password configured", conn_id)
+
+        if _is_datadog_url(url):
+            log.info("Connection `%s` points to a Datadog endpoint", conn_id)
+        else:
+            log.warning("Connection `%s` does not appear to point to a Datadog endpoint", conn_id)
+
+        return url
+    except Exception as e:
+        log.error("Failed to retrieve Airflow connection `%s`: %s", conn_id, e)
+        return None
 
 
 def _verify_transport(config: dict, name: str = ""):
@@ -625,7 +693,7 @@ def _verify_transport(config: dict, name: str = ""):
         valid_transports = 0
 
         for i, transport_config in enumerate(transports):
-            log.info("Checking nested transport #%d...", i+1)
+            log.info("Checking nested transport #%d...", i + 1)
             if _verify_transport(transport_config):
                 valid_transports += 1
 
@@ -655,7 +723,6 @@ def _verify_http_backend(config: dict, name: str = ""):
         return False
     log.info("HTTP transport URL is configured: %s", config.get("url"))
 
-    log.info("HTTP transport %s auth: %s", name, config.get("auth"))
     if config.get("auth") is not None:
         log.info("HTTP transport %s has API key authentication configured", name)
     else:
@@ -703,9 +770,8 @@ def _is_mwaa_environment() -> bool:
         'AIRFLOW_ENV_ID',
         'AWS_EXECUTION_ENV',
         'MWAA_AIRFLOW_COMPONENT',
-        'AIRFLOW_ENV_NAME'
+        'AIRFLOW_ENV_NAME',
     ]
-
     return any(var in os.environ for var in mwaa_indicators)
 
 
@@ -716,7 +782,6 @@ def _is_astronomer_environment() -> bool:
         'ASTRONOMER_DEPLOYMENT_ID',
         'ASTRONOMER_WORKSPACE_ID',
     ]
-
     return any(var in os.environ for var in astro_indicators)
 
 
@@ -787,6 +852,11 @@ def check_configuration_conflicts():
 
     if os.getenv("OPENLINEAGE_URL"):
         transport_sources.append("OPENLINEAGE_URL environment variable")
+
+    if _provider_can_be_used():
+        conn_id = os.getenv("AIRFLOW__OPENLINEAGE__CONN_ID") or conf.get("openlineage", "conn_id", fallback="")
+        if conn_id:
+            transport_sources.append(f"Airflow connection (conn_id={conn_id})")
 
     if len(transport_sources) > 1:
         conflict_msg = "Multiple transport configurations found: " + ", ".join(transport_sources)
@@ -866,12 +936,12 @@ The following output indicates a healthy setup:
 ```
 ===== OpenLineage Validation Summary =====
 ✓ OpenLineage Package: apache-airflow-providers-openlineage version 2.7.3
-✓ OpenLineage is enabled
-✓ OpenLineage listener is accessible
+✓ OpenLineage provider is active
+✓ No configuration conflicts detected
 ✓ Transport Type: Datadog
 ✓ Integration: Datadog
 ✓ Network connectivity to backend is successful
-✓ No configuration conflicts detected
+✓ OpenLineage listener is accessible
 ========================================
 OpenLineage appears to be configured properly, but check the logs for warnings
 ```
@@ -882,12 +952,14 @@ Use this table to resolve common failures:
 
 | Log message | Cause | Resolution |
 |---|---|---|
-| `✗ OpenLineage not installed properly` | The OpenLineage package is missing or corrupted. | Confirm `apache-airflow-providers-openlineage` is included in your Airflow installation. For Amazon MWAA, see [Upgrade OpenLineage provider on Amazon MWAA][3]. |
-| `✗ OpenLineage is disabled` | `AIRFLOW__OPENLINEAGE__DISABLED=true` or `OPENLINEAGE_DISABLED=true` is set, or required transport configuration is missing. | Remove or set the disable variable to `false`, and verify that the transport is configured properly. |
-| `✗ OpenLineage listener is not accessible` | The provider plugin cannot be imported. | Confirm the package is installed on **both scheduler and worker** pods/processes. |
-| `✗ No transport configured` | No transport environment variables are set. | Follow the [Airflow setup guide][2] to configure a transport. |
+| `✗ OpenLineage not installed properly` | The OpenLineage package is missing or corrupted. All subsequent checks were skipped. | Confirm `apache-airflow-providers-openlineage` is included in your Airflow installation. For Amazon MWAA, see [Upgrade OpenLineage provider on Amazon MWAA][3]. |
+| `✗ OpenLineage provider is turned off` | The provider is explicitly disabled by `AIRFLOW__OPENLINEAGE__DISABLED`, `OPENLINEAGE_DISABLED`, or `openlineage.disabled` in airflow.cfg. | Remove or set the disable variable to `false`. |
+| `✗ OpenLineage provider is not active (no transport configuration found)` | No transport configuration was found. | Follow the [Airflow setup guide][2] to configure a transport. |
+| `✗ Failed to resolve active transport` | The transport could not be instantiated. | Verify the transport configuration is valid and the provider is active. |
 | `✗ Transport Type: Console (won't send events to Datadog)` | Transport is set to `console`. | Change the transport to `datadog` or `http` pointing to the Datadog intake URL. |
+| `! Transport does not appear to point to a Datadog endpoint` | The transport URL does not match a known Datadog domain. | Verify the URL points to a Datadog intake endpoint. |
 | `✗ Network connectivity check failed` | Airflow workers cannot reach the Datadog intake endpoint. | Check firewall or network policies; confirm the URL and port 443 are accessible. |
+| `✗ OpenLineage listener is not accessible` | The provider plugin cannot be imported, no listeners are registered, or multiple listeners are found. The specific cause is logged earlier in the task log. | Confirm the package is installed on **both scheduler and worker** pods/processes. If the plugin loaded but no listeners are active, check provider version compatibility. |
 | `! Configuration conflicts detected` | Multiple transport or config file sources are active. | Remove duplicate configurations and keep one authoritative source. |
 
 **Note**: If `✗ OpenLineage listener is not accessible` appears together with package installation failures, the package is likely installed only on the scheduler and not on the workers. OpenLineage requires the provider on both.
