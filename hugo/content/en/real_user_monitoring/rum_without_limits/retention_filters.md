@@ -86,7 +86,7 @@ There are three permanent retention filters:
 
 ## Exclusion filters
 
-{{< callout header="Preview" btn_hidden="true" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/rum-exclusion-filters/" btn_hidden="false" header="Join the Preview!">}}
 Exclusion filters are in Preview.
 {{< /callout >}}
 
