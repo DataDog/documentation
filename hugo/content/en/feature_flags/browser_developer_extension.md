@@ -15,8 +15,6 @@ further_reading:
 
 ## Overview
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
-
 The [Datadog Browser SDK developer extension][1] for Chrome includes a **Feature Flags** tab. The tab lists your organization's feature flags and lets you override them locally in your browser. Use it to see how your application behaves under different flag values, without changing flag configuration in Datadog.
 
 Overrides apply only to your browser. They are never sent to Datadog and don't affect other users.
@@ -58,7 +56,7 @@ const provider = new DatadogProvider({
 await OpenFeature.setProviderAndWait(new DatadogDevtools(provider));
 {{< /code-block >}}
 
-Set `site` to the [Datadog site][2] your organization uses.
+Set `site` to the [Datadog site][2] your organization uses. Use the same site you select in the extension's dropdown. If they differ, you browse and pick variants from one organization's flag catalog while your application resolves flags against another.
 
 The wrapper accepts any OpenFeature provider, so you can also use it over an `InMemoryProvider` in a local development build. If your application registers providers for multiple domains, wrap each one.
 
