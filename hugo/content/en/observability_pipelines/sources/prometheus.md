@@ -9,9 +9,14 @@ products:
 
 {{< product-availability >}}
 
+{{< callout url="#"
+ btn_hidden="true" header="false">}}
+Prometheus source is in Preview. Contact your account manager to request access.
+{{< /callout >}}
+
 ## Overview
 
-Use Observability Pipelines' {{< tooltip text=" Prometheus source" tooltip="Contact your account manager to request access." >}} to receive metrics pushed by your Prometheus clients.
+Use Observability Pipelines' Prometheus source to receive metrics pushed by your Prometheus clients.
 
 ## Setup
 

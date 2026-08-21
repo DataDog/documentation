@@ -24,7 +24,7 @@ products:
 
 ## Overview
 
-Use Observability Pipelines' OpenTelemetry (OTel) source to collect {{< tooltip text="logs, metrics, or traces" tooltip="Contact your account manager to discuss use cases and pricing." >}} from your OTel Collector through HTTP or gRPC.
+Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs, metrics, or traces ({{< tooltip text="in Preview" tooltip="Traces Pipeline is in Preview. Contact your account manager to request access." >}}) from your OTel Collector through HTTP or gRPC.
 
 **Notes**:
 - If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector, use the OpenTelemetry source to [send data to Observability Pipelines](#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).

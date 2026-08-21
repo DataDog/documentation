@@ -12,7 +12,7 @@ products:
 
 ## Overview
 
-Use Observability Pipelines' {{< tooltip text="Datadog APM destination" tooltip="Contact your account manager to request access." >}} to send traces to Datadog.
+Use Observability Pipelines' Datadog APM destination ({{< tooltip text="in Preview" tooltip="Datadog APM destination is in Preview. Contact your account manager to request access." >}}) to send traces to Datadog.
 
 ## Setup
 
