@@ -5,12 +5,15 @@ aliases:
 - /service_management/case_management/notifications_integrations/
 - /incident_response/case_management/notifications_integrations/
 further_reading:
-- link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
-  tag: "Blog"
-  text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
 - link: "/incident_response/work_management/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting third-party integrations"
+- link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
+  tag: "Blog"
+  text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
+- link: "https://www.datadoghq.com/blog/forms-case-management-requests/"
+  tag: "Blog"
+  text: "Simplify request flows with Datadog Forms and Case Management"
 ---
 
 ## Overview
@@ -92,7 +95,7 @@ To automatically trigger a page, configure automated paging rules in your projec
 ## Third party tickets
 In Project Settings, you can manage membership, configure the auto-closing of work items, and set up third-party integrations like Jira and ServiceNow.
 
-{{% collapse-content title="Jira Configuration" level="h3" expanded=false %}}
+{{% collapse-content title="Jira Configuration" level="h3" expanded=false id="jira" %}}
 1. Ensure the Jira integration is configured.
 1. In Work Management project settings, enable **Jira** for manual Jira issue creation from the project.
 1. Select a Jira account, a project to create issues in, and the desired issue type (such as story, epic, bug, or task).

@@ -1,7 +1,10 @@
 ---
 title: Agentic Onboarding Setup
 description: Instrument your applications with Datadog using the AI Setup CLI or the Datadog MCP Server.
-
+further_reading:
+- link: "https://www.datadoghq.com/blog/serverless-agentic-onboarding/"
+  tag: "Blog"
+  text: "Instrument serverless apps with agentic onboarding"
 ---
 
 ## Overview
@@ -244,3 +247,7 @@ Confirm data is flowing in the Datadog UI for the product you set up:
 [16]: /getting_started/site/
 [17]: https://www.anthropic.com/claude-code
 [18]: https://cursor.com/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
