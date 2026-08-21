@@ -67033,7 +67033,7 @@ components:
     MetricEstimateType:
       default: count_or_gauge
       description: |-
-        Estimate type based on the queried configuration. By default, `count_or_gauge` is returned. `distribution` is returned for distribution metrics without percentiles enabled. Lastly, `percentile` is returned if `filter[pct]=true` is queried with a distribution metric.
+        Estimate type based on the queried configuration. `count_or_gauge` is returned by default, and `distribution` is returned for distribution metrics. The `filter[pct]` query parameter has no effect on this value.
       enum:
         - count_or_gauge
         - distribution
@@ -172696,6 +172696,14 @@ paths:
           required: false
           schema:
             type: string
+        - description: |-
+            When `true`, `filter[groups]` is treated as an exclude list instead of an include list. Defaults to `false`.
+          example: false
+          in: query
+          name: filter[exclude_tags_mode]
+          required: false
+          schema:
+            type: boolean
         - description: The number of hours of look back (from now) to estimate cardinality with. If unspecified, it defaults to 0 hours.
           example: 49
           in: query
@@ -172715,7 +172723,7 @@ paths:
             format: int32
             maximum: 9
             type: integer
-        - description: A boolean, for distribution metrics only, to estimate cardinality if the metric includes additional percentile aggregators.
+        - description: Deprecated. This query parameter has no effect on the estimate.
           example: true
           in: query
           name: filter[pct]
