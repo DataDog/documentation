@@ -60,7 +60,7 @@
         "highlight.js": "^11.11.1",
         "hugo-bin": "0.148.0",
         "instantsearch.js": "^4.74.1",
-        "js-cookie": "^2.2.1",
+        "js-cookie": "^3.0.8",
         "js-yaml": "^3.14.1",
         "jshint": "2.13.6",
         "jshint-stylish": "2.2.1",
