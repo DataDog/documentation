@@ -1,6 +1,6 @@
 ---
 title: Graph Insights
-description: Discover potential root causes using Metric Correlations and Watchdog Explains to analyze irregular metric behavior.
+description: Discover potential root causes using Metric Correlations, Watchdog Explains, and dashboard anomaly detection to analyze irregular metric behavior.
 disable_toc: false
 further_reading:
 - link: "/watchdog/insights/"
@@ -33,9 +33,18 @@ Datadog collects various types of data to provide insights into application perf
 
 For more information, see the [Watchdog Explains][2] documentation.
 
+## Dashboard anomaly detection
+
+<div class="alert alert-info">Anomaly detection is available for <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widgets</a> with the <strong>Metric</strong> data source.</div>
+
+Datadog detects anomalies across the graphs on your dashboard and groups those that occur together into issues. For each issue, Datadog identifies the tags that contribute most to the anomaly. You can analyze a single graph with Watchdog Explains, or delegate root cause analysis to Bits Investigation.
+
+For more information, see [Investigate Dashboard Anomalies][3].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/graph_insights/correlations/
 [2]: /dashboards/graph_insights/watchdog_explains/
+[3]: /dashboards/graph_insights/investigate_anomalies/

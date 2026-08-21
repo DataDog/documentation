@@ -18,4 +18,5 @@ cascade:
     {{< nextlink href="/feature_flags/guide/migrate_from_launchdarkly" >}}Migrate Your Feature Flags from LaunchDarkly{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/migrate_from_statsig" >}}Migrate Your Feature Flags from Statsig{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/headless_cms" >}}Integrate Feature Flags with a Headless CMS{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/guide/estimating_and_managing_costs" >}}Estimate and Manage Feature Flags Costs{{< /nextlink >}}
 {{< /whatsnext >}}
