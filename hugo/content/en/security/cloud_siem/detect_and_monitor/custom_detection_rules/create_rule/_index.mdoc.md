@@ -38,18 +38,18 @@ aliases:
 
 ### Understand rule creation options
 
-Before creating a rule, you have to choose three options:
+Before creating a rule, you must choose three options:
 {% collapse-content title="Detection method" level="h4" expanded=false id="detection-methods" %}
 The event to monitor for:
 
 **Threshold**
-: Define a query for the activity you want to detect. Then, configure how many matches should generate a signal: set the threshold to 1 for signature-based detections, or use a higher value to alert on patterns of repeated activity. This is the most common starting point when building a new rule.
+: Detects when a query for a specific activity occurs a number of times you define. Set the threshold to 1 for signature-based detections, or use a higher value to alert on patterns of alerted activity. This is the most common starting point when building a rule.
 
 **New Value**
 : Triggers when one or more tracked attributes take on a value not seen during the learning period; for example, an account logging in from a country, IP, and device it's never used before.
 
 **Anomaly**
-: Detects unexpected spikes or upward shifts, but not drop-offs, in log activity, accounting for daily and weekly seasonality. An example detection could be a spike in outbound traffic from a database server at 2 pm, far outside its normal nightly backup window.
+: Detects unexpected spikes or upward shifts, but not drop-offs, in log activity, accounting for daily and weekly seasonality. An example detection could be a spike in outbound traffic from a database server at 2 PM, far outside its normal nightly backup window.
 
 **Content Anomaly**
 : Attackers hide intent in fields the rest of the log looks normal in; for example, encoded commands, oddly long URLs, or suspicious user agents. Content Anomaly inspects those fields and flags content that doesn't match what you usually see.
@@ -93,7 +93,7 @@ The options you choose impact the steps required to create the rule. Use the fil
 
 {% table %}
 * **Detection method**
-* **Rule Types** {% colspan=3 %}
+* **Rule types** {% colspan=3 %}
 ---
 * 
 * **Real-time rule**
@@ -269,7 +269,7 @@ For the current step and the next step:
    {% /alert %}
 1. Follow the instructions in [Add step](#add-step) to complete the step.
    {% alert level="info" %}
-   You can select different `group by` fields between steps. For example, link `@usr.email`from an earlier step to `@ip.address` in a later step.
+   You can select different `group by` fields between steps. For example, link `@usr.email` from an earlier step to `@ip.address` in a later step.
    {% /alert %}
 1. Click **Add Step** if you want to add more steps.
 
@@ -605,7 +605,7 @@ For the current step and the next step:
    {% /alert %}
 1. Follow the instructions in [Add step](#add-step) to complete the step.
    {% alert level="info" %}
-   You can select different `group by` fields between steps. For example, link `@usr.email`from an earlier step to `@ip.address` in a later step.
+   You can select different `group by` fields between steps. For example, link `@usr.email` from an earlier step to `@ip.address` in a later step.
    {% /alert %}
 1. Click **Add Step** if you want to add more steps.
 
@@ -1137,19 +1137,17 @@ In the **Learning Period Alerts** dropdown, choose whether you want Cloud SIEM t
 
 <!-- Historical job AND sequence -->
 {% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_detection_method, "sequence")) %}
-#### Rule multi-triggering {% #rule-multi-triggering-rt-sequence %}
+#### Rule multi-triggering {% #rule-multi-triggering-historical-sequence %}
 
-{% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
+{% partial file="security/cloud_siem/job_multi_triggering.mdoc.md" /%}
 
-#### Decrease severity for non-production environments {% #decrease-severity-rt-sequence %}
 
-{% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
-#### Enable optional group by {% #enable-group-by-rt-sequence %}
+#### Enable optional group by {% #enable-group-by-historical-sequence %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 
-#### Group signals {% #group-signals-rt-sequence %}
+#### Group signals {% #group-signals-historical-sequence %}
 
 {% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}

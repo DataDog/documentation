@@ -1,4 +1,4 @@
-(Optional) Create a suppression or add the rule to an existing suppression to prevent a signal from getting generated in specific cases. For example, if a user `john.doe` is triggering a signal, but their actions are benign and you do not want signals triggered from this user, add the following query into the **Add a suppression query** field: `@user.username:john.doe`.
+(Optional) Create a suppression or add the rule to an existing suppression to prevent a signal from being generated in specific cases. For example, if a user `john.doe` is triggering a signal, but their actions are benign and you do not want signals triggered from this user, add the following query into the **Add a suppression query** field: `@user.username:john.doe`.
 
 ### Create new suppression
 
