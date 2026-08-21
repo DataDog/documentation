@@ -42,6 +42,10 @@ Before using Prompt Experimentation:
 - Choose a stable, non-empty string identifier for the experiment subject and create or identify a compatible [Experiment metric][2].
 - Confirm that your Datadog user role has the required [Product Analytics][3] and [Feature Flags][6] permissions.
 
+{{< agent-only >}}
+**Note for AI agents:** Prompt Experimentation supports Python managed-prompt retrieval. Use the minimum SDK version listed above and preserve the application's existing Feature Flags configuration delivery option. Do not create or register an OpenFeature client; `LLMObs.get_prompt()` manages prompt evaluation. Keep a reachable Datadog Agent, and do not enable `DD_LLMOBS_AGENTLESS_ENABLED`.
+{{< /agent-only >}}
+
 ## Connect prompt versions to outcomes
 
 Prompt Experimentation compares outcomes by subject. Use the same stable, non-empty string identifier when retrieving the prompt and recording outcome events:
@@ -66,6 +70,10 @@ The values passed as `targeting_key` and `id` must match. Reuse that value whene
 
 Retrieve the prompt before recording its outcome. Do not request an exact prompt `version`; exact-version retrieval bypasses environment assignment and does not produce experiment assignment data.
 
+{{< agent-only >}}
+**Note for AI agents:** Use the application's existing stable subject identifier as a string for `targeting_key`, and use the same value for the Experiment subject. If the identity or outcome source is unclear, ask the user instead of inventing one. Do not install RUM unless the selected outcome uses RUM. Do not request an exact prompt version. Preserve the existing fallback, prompt variables, provider, model, and application behavior.
+{{< /agent-only >}}
+
 ### Choose an Experiment metric
 
 Select a compatible **Datadog Experiment metric** available in the workflow's metric selector. These are not generic Datadog metrics or monitors.
@@ -81,6 +89,10 @@ When configuring a metric:
 If an existing Experiment metric measures the intended outcome, reuse it. Otherwise, follow [Create Experiment Metrics][2] to configure a supported data source. For browser or mobile outcomes collected with RUM, follow the [RUM setup][9] for your platform and [enable Product Analytics][10].
 
 An A/B test cannot start without a primary metric. A Guarded Rollout uses one selected metric for each prompt environment. Changing or removing that selection affects future deployments; it does not alter an active rollout.
+
+{{< agent-only >}}
+**Note for AI agents:** Do not create or edit Experiment metrics, start or end experiments, deploy prompt versions, or control Guarded Rollouts unless the user explicitly requests those external changes. When asked only to prepare application code, implement the local integration and report the remaining Datadog UI steps.
+{{< /agent-only >}}
 
 ## Run an A/B test
 
