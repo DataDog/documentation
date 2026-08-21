@@ -207,7 +207,7 @@ In Datadog, flag telemetry falls into two categories:
 
 **Exposure logging** records that a subject received a specific flag variant. Each exposure event includes the flag key, variant served, and evaluation context. Use exposure data to analyze experiment results and feature adoption.
 
-**Evaluation logging** records how often each variant is returned. Client SDKs send aggregated evaluation telemetry by default. Server SDKs emit the `feature_flag.evaluations` metric when evaluation logging is enabled.
+**Evaluation logging** records how often each variant is returned. Client SDKs send aggregated evaluation counts by default. Server SDKs emit the `feature_flag.evaluations` metric only after you enable evaluation logging.
 
 Exposure logging tracks which variant a subject saw. Evaluation logging measures how frequently each variant is returned across your application.
 
