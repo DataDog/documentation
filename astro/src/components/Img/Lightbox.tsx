@@ -13,9 +13,10 @@ interface DisplayedImage {
 
 interface LightboxProps {
   imageUrl: string;
+  popupHref: string;
   alt?: string;
   caption?: string;
-  children: (onTriggerClick: (e: MouseEvent) => void) => ComponentChildren;
+  children: ComponentChildren;
 }
 
 /**
@@ -69,13 +70,17 @@ function buildViewportSizedUrl(imageUrl: string): string {
 }
 
 /**
- * Owns the overlay/dialog markup and all lightbox state. The trigger element
- * (a popup link, normally) is supplied via `children`, a render function that
- * receives the click handler to wire up — this keeps the trigger's own markup
- * (figure/caption/link) outside Lightbox, since only the overlay is common
- * between images that show a lightbox and those that don't.
+ * Wraps its children in a click-to-open trigger link and owns the overlay,
+ * dialog, and all lightbox state. Callers pass the media to display inside
+ * the trigger as plain children; the click wiring is internal.
  */
-export default function Lightbox({ imageUrl, alt, caption, children }: LightboxProps) {
+export default function Lightbox({
+  imageUrl,
+  popupHref,
+  alt,
+  caption,
+  children,
+}: LightboxProps) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [displayed, setDisplayed] = useState<DisplayedImage | null>(null);
@@ -158,7 +163,13 @@ export default function Lightbox({ imageUrl, alt, caption, children }: LightboxP
 
   return (
     <>
-      {children(handleTriggerClick)}
+      <a
+        href={popupHref}
+        class={cl("img__link", "img__link--popup")}
+        onClick={handleTriggerClick}
+      >
+        {children}
+      </a>
       <div
         ref={overlayRef}
         class={cl("img-lightbox__overlay")}

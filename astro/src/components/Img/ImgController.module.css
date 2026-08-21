@@ -7,7 +7,3 @@
   height: auto;
   border: 1px solid var(--hugo-img-border-gray);
 }
-
-.img__link--popup {
-  cursor: zoom-in;
-}

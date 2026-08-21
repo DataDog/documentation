@@ -1,3 +1,4 @@
+import type { ComponentChildren } from "preact";
 import styles from "./ImgController.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import type { SizingProps } from "./imgTypes";
@@ -36,49 +37,16 @@ function PictureImage({
   );
 }
 
-interface PopupImageProps extends SizingProps {
-  srcset: string;
-  alt?: string;
-  caption?: string;
-  popup: boolean;
-  popupHref: string;
-  onTriggerClick: (e: MouseEvent) => void;
-}
-
-function PopupImage({
-  srcset,
-  alt,
+function Figure({
   caption,
-  popup,
-  popupHref,
-  width,
-  height,
-  widthPercent,
-  onTriggerClick,
-}: PopupImageProps) {
-  const image = (
-    <PictureImage
-      srcset={srcset}
-      alt={alt}
-      width={width}
-      height={height}
-      widthPercent={widthPercent}
-    />
-  );
-
+  children,
+}: {
+  caption?: string;
+  children: ComponentChildren;
+}) {
   return (
     <figure class={cl("img__figure")}>
-      {popup ? (
-        <a
-          href={popupHref}
-          class={cl("img__link", "img__link--popup")}
-          onClick={onTriggerClick}
-        >
-          {image}
-        </a>
-      ) : (
-        image
-      )}
+      {children}
       {caption && <figcaption class={cl("img__caption")}>{caption}</figcaption>}
     </figure>
   );
@@ -96,49 +64,32 @@ export default function ImgController({
   inline = false,
   popup = true,
 }: ImgControllerProps) {
-  if (inline) {
-    return (
-      <PictureImage
-        srcset={srcset}
-        alt={alt}
-        width={width}
-        height={height}
-        widthPercent={widthPercent}
-      />
-    );
-  }
+  const image = (
+    <PictureImage
+      srcset={srcset}
+      alt={alt}
+      width={width}
+      height={height}
+      widthPercent={widthPercent}
+    />
+  );
 
-  if (!popup) {
-    return (
-      <PopupImage
-        srcset={srcset}
-        alt={alt}
-        caption={caption}
-        popup={popup}
-        popupHref={popupHref}
-        width={width}
-        height={height}
-        widthPercent={widthPercent}
-        onTriggerClick={() => {}}
-      />
-    );
-  }
+  if (inline) return image;
 
   return (
-    <Lightbox imageUrl={imageUrl} alt={alt} caption={caption}>
-      {(onTriggerClick) => (
-        <PopupImage
-          srcset={srcset}
+    <Figure caption={caption}>
+      {popup ? (
+        <Lightbox
+          imageUrl={imageUrl}
+          popupHref={popupHref}
           alt={alt}
           caption={caption}
-          popup={popup}
-          popupHref={popupHref}
-          width={width}
-          height={height}
-          widthPercent={widthPercent}
-          onTriggerClick={onTriggerClick}
-        />
+        >
+          {image}
+        </Lightbox>
+      ) : (
+        image
       )}
-    </Lightbox>
+    </Figure>
   );
 }
