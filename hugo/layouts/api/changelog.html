@@ -11,21 +11,13 @@
   "deprecation" (dict "label" "Deprecation" "color" "warning")
 }}
 
-{{/* Flatten all entries once so we can compute counts and the product list. */}}
+{{/* Flatten all entries once so we can compute the total change count. */}}
 {{ $allEntries := slice }}
 {{ range $versions }}
   {{ range .entries }}
     {{ $allEntries = $allEntries | append . }}
   {{ end }}
 {{ end }}
-
-{{ $allTags := slice }}
-{{ range $allEntries }}
-  {{ if not (in $allTags .tag) }}
-    {{ $allTags = $allTags | append .tag }}
-  {{ end }}
-{{ end }}
-{{ $allTags = sort $allTags }}
 
 <div class="col-12 api-changelog py-3">
 
@@ -59,15 +51,6 @@
         <button type="button" class="api-changelog-tab" data-changelog-filter="deprecation">Deprecation</button>
       </div>
       <div class="api-changelog-filter-divider"></div>
-      <div class="api-changelog-filter-group">
-        <label for="api-changelog-product-filter" class="api-changelog-filter-label">Product</label>
-        <select id="api-changelog-product-filter" class="api-changelog-select">
-          <option value="all">All products</option>
-          {{ range $allTags }}
-            <option value="{{ . }}">{{ . }}</option>
-          {{ end }}
-        </select>
-      </div>
       <div class="api-changelog-filter-group">
         <label for="api-changelog-version-filter" class="api-changelog-filter-label">Version range</label>
         <select id="api-changelog-version-filter" class="api-changelog-select">
@@ -123,7 +106,7 @@
               {{/* Fall back to a labeled, neutral pill for any unrecognized/missing type
                    instead of rendering an empty "bg-" class with no label. */}}
               {{ $meta := index $typeMeta .type | default (dict "label" (.type | default "Change") "color" "info") }}
-              <article class="api-changelog-entry" data-type="{{ .type }}" data-bucket="{{ .type }}" data-tag="{{ .tag }}">
+              <article class="api-changelog-entry" data-type="{{ .type }}" data-bucket="{{ .type }}">
                 <span class="api-changelog-pill bg-{{ $meta.color }}">{{ $meta.label }}</span>
                 <div class="api-changelog-entry-body">
                   <div class="api-changelog-entry-meta">
@@ -142,7 +125,7 @@
 
     <div id="api-changelog-empty-state" class="api-changelog-empty d-none">
       <p class="api-changelog-empty-title">No changes match your filters</p>
-      <p class="api-changelog-empty-subtitle">Try removing a type or product filter.</p>
+      <p class="api-changelog-empty-subtitle">Try removing a type or version filter.</p>
       <button type="button" class="api-changelog-clear" data-changelog-reset>Clear filters</button>
     </div>
 

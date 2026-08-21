@@ -176,7 +176,6 @@ const changelogRoot = document.querySelector('.api-changelog');
 
 if (changelogRoot) {
     const filterTabs = changelogRoot.querySelectorAll('[data-changelog-filter]');
-    const productSelect = document.getElementById('api-changelog-product-filter');
     const versionSelect = document.getElementById('api-changelog-version-filter');
     const versionSections = changelogRoot.querySelectorAll('.api-changelog-version');
     const shownCountEl = document.getElementById('api-changelog-shown-count');
@@ -185,7 +184,6 @@ if (changelogRoot) {
     const emptyState = document.getElementById('api-changelog-empty-state');
 
     let activeBucket = 'all';
-    let activeProduct = 'all';
     let activeVersionFloor = 'all';
 
     function applyChangelogFilters() {
@@ -199,8 +197,7 @@ if (changelogRoot) {
 
             section.querySelectorAll('.api-changelog-entry').forEach((entry) => {
                 const matches = !versionHidden
-                    && (activeBucket === 'all' || entry.dataset.bucket === activeBucket)
-                    && (activeProduct === 'all' || entry.dataset.tag === activeProduct);
+                    && (activeBucket === 'all' || entry.dataset.bucket === activeBucket);
                 entry.classList.toggle('d-none', !matches);
 
                 if (matches) {
@@ -225,7 +222,7 @@ if (changelogRoot) {
         if (versionCountEl) versionCountEl.textContent = shownVersionCount;
         if (emptyState) emptyState.classList.toggle('d-none', shownCount !== 0);
 
-        const isFiltered = activeBucket !== 'all' || activeProduct !== 'all' || activeVersionFloor !== 'all';
+        const isFiltered = activeBucket !== 'all' || activeVersionFloor !== 'all';
         clearButtons.forEach((button) => {
             if (button.id === 'api-changelog-clear-filters') button.classList.toggle('d-none', !isFiltered);
         });
@@ -239,13 +236,6 @@ if (changelogRoot) {
         });
     });
 
-    if (productSelect) {
-        productSelect.addEventListener('change', () => {
-            activeProduct = productSelect.value;
-            applyChangelogFilters();
-        });
-    }
-
     if (versionSelect) {
         versionSelect.addEventListener('change', () => {
             activeVersionFloor = versionSelect.value;
@@ -256,10 +246,8 @@ if (changelogRoot) {
     clearButtons.forEach((button) => {
         button.addEventListener('click', () => {
             activeBucket = 'all';
-            activeProduct = 'all';
             activeVersionFloor = 'all';
             filterTabs.forEach((t) => t.classList.toggle('is-active', t.dataset.changelogFilter === 'all'));
-            if (productSelect) productSelect.value = 'all';
             if (versionSelect) versionSelect.value = 'all';
             applyChangelogFilters();
         });
