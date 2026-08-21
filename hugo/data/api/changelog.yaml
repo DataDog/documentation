@@ -1,0 +1,102 @@
+# Placeholder changelog data for the /api/changelog POC.
+# In a real implementation this would be generated from the x-datadog-api-versioning
+# extension in the OpenAPI spec rather than hand-authored here.
+versions:
+  - date: "2026-09-01"
+    why_upgrade: >-
+      Removes the deprecated monitor `notify_no_data` boolean and adds ordered log search, at
+      the cost of one breaking change for existing monitor-update integrations.
+    entries:
+      - type: breaking
+        tag: Monitors
+        method: patch
+        path: /api/v1/monitor/{id}
+        description: >-
+          Removed the deprecated `notify_no_data` boolean. Use `no_data_timeframe` to control
+          no-data alerting; requests sending `notify_no_data` return a 400.
+      - type: addition
+        tag: Logs
+        method: post
+        path: /api/v2/logs/events/search
+        description: >-
+          Added a `sort` parameter to log search, allowing results to be ordered by any indexed
+          attribute in ascending or descending order.
+      - type: deprecation
+        tag: Dashboards
+        method: put
+        path: /api/v1/dashboard/{id}
+        description: >-
+          `is_read_only` is deprecated in favor of `restricted_roles`. It continues to work but
+          is scheduled for removal in a future version.
+  - date: "2026-08-01"
+    why_upgrade: >-
+      Renames the incident `state` enum and adds bulk metric tag configuration plus
+      suppression details on detection rules. Update stored incident state values before adopting.
+    entries:
+      - type: breaking
+        tag: Incidents
+        method: patch
+        path: /api/v2/incidents/{id}
+        description: >-
+          The `state` enum was renamed: `active` becomes `declared` and `stable` becomes `resolved`.
+          Update stored values before adopting this version.
+      - type: addition
+        tag: Metrics
+        method: post
+        path: /api/v2/metrics/config/bulk-tags
+        description: >-
+          New bulk tag configuration endpoint lets you add or remove tag keys across multiple
+          metrics in a single request.
+      - type: addition
+        tag: Security
+        method: get
+        path: /api/v2/security_monitoring/rules
+        description: >-
+          Detection rule responses include a `suppressions` field describing exclusion
+          queries applied to the rule.
+  - date: "2026-07-01"
+    why_upgrade: >-
+      Nests dashboard widgets under `attributes.widgets` to align with the v2 resource format,
+      and lets monitor edit permissions be scoped to specific roles at creation time.
+    entries:
+      - type: breaking
+        tag: Dashboards
+        method: get
+        path: /api/v1/dashboard/{id}
+        description: >-
+          The response envelope changed — widgets are nested under `attributes.widgets`
+          rather than at the top level, aligning with the v2 resource format.
+      - type: deprecation
+        tag: APM
+        method: get
+        path: /api/v2/apm/services
+        description: >-
+          The `env` query parameter is deprecated. Use `filter[env]` instead; the old parameter
+          is honored but no longer documented.
+      - type: addition
+        tag: Monitors
+        method: post
+        path: /api/v1/monitor
+        description: >-
+          Added `restricted_roles` to monitor payloads so monitor edit permissions can be scoped
+          to specific roles at creation time.
+  - date: "2026-06-01"
+    default: true
+    why_upgrade: >-
+      Establishes the stable baseline for date-based versioning, including the `service_account`
+      user type for programmatic access not tied to an individual person.
+    entries:
+      - type: addition
+        tag: Users
+        method: post
+        path: /api/v2/users
+        description: >-
+          Introduced the `service_account` user type for programmatic access that is not tied to
+          an individual person.
+      - type: addition
+        tag: Logs
+        method: post
+        path: /api/v2/logs/events/search
+        description: >-
+          Established the stable baseline for date-based versioning. All subsequent versions are
+          derived from this default.
