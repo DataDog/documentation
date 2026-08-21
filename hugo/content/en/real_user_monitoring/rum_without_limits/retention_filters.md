@@ -34,7 +34,13 @@ The **retention rate** specifies the percentage of matching sessions you want to
 
 Your configuration is made of three types of filters: [permanent retention filters](#permanent-retention-filters), [exclusion filters](#exclusion-filters), and [custom retention filters](#custom-retention-filters). See [Types of filters](#types-of-filters) for the path an event takes through them.
 
-To configure your filters, navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}][3], create a RUM application or click an existing application, and go to {{< ui >}}Product Settings{{< /ui >}} > {{< ui >}}Retention Filters{{< /ui >}}. From any RUM page, you can also click {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Retention Filters{{< /ui >}} in the top right corner for direct access.
+To configure your filters, click {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Retention Filters{{< /ui >}} in the top right corner of any RUM page for direct access.
+
+You can also:
+
+1. Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}][3].
+1. Create a RUM application or click an existing application.
+1. Under Product Settings, go to the {{< ui >}}Retention Filters{{< /ui >}} page.
 
 ## How it works
 
