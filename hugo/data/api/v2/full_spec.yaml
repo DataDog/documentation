@@ -7185,13 +7185,14 @@ components:
         - fixes
       type: object
     Annotation:
-      description: "A list of annotations used in the workflow. These are like sticky notes for your workflow!"
+      description: A text annotation displayed on the workflow canvas.
       properties:
         display:
           $ref: "#/components/schemas/AnnotationDisplay"
         id:
-          description: The `Annotation` `id`.
+          description: The unique identifier of this annotation within the workflow.
           example: ""
+          minLength: 1
           type: string
         markdownTextAnnotation:
           $ref: "#/components/schemas/AnnotationMarkdownTextAnnotation"
@@ -7348,28 +7349,28 @@ components:
         - attributes
       type: object
     AnnotationDisplay:
-      description: The definition of `AnnotationDisplay` object.
+      description: The annotation's position and size on the workflow canvas.
       properties:
         bounds:
           $ref: "#/components/schemas/AnnotationDisplayBounds"
       type: object
     AnnotationDisplayBounds:
-      description: The definition of `AnnotationDisplayBounds` object.
+      description: Canvas coordinates and dimensions for an annotation on the workflow canvas.
       properties:
         height:
-          description: The `bounds` `height`.
+          description: The annotation's height on the canvas.
           format: double
           type: number
         width:
-          description: The `bounds` `width`.
+          description: The annotation's width on the canvas.
           format: double
           type: number
         x:
-          description: The `bounds` `x`.
+          description: The annotation's horizontal canvas coordinate.
           format: double
           type: number
         y:
-          description: The `bounds` `y`.
+          description: The annotation's vertical canvas coordinate.
           format: double
           type: number
       type: object
@@ -7453,10 +7454,11 @@ components:
         - POINT_IN_TIME
         - TIME_REGION
     AnnotationMarkdownTextAnnotation:
-      description: The definition of `AnnotationMarkdownTextAnnotation` object.
+      description: Markdown content displayed in an annotation.
       properties:
         text:
-          description: The `markdownTextAnnotation` `text`.
+          description: The annotation's Markdown content.
+          maxLength: 3000
           type: string
       type: object
     AnnotationRequestData:
@@ -108548,9 +108550,10 @@ components:
       description: A complete Workflow Automation definition, including its triggers, steps, and connections.
       properties:
         annotations:
-          description: "A list of annotations used in the workflow. These are like sticky notes for your workflow!"
+          description: Up to 100 text annotations displayed on the workflow canvas.
           items:
             $ref: "#/components/schemas/Annotation"
+          maxItems: 100
           type: array
         connectionEnvs:
           description: A list of connections or connection groups used in the workflow.
