@@ -443,6 +443,10 @@
     "name": "Rum Retention Filters",
     "description": "Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization."
   },
+  "rum-teams-ownership": {
+    "name": "Rum Teams Ownership",
+    "description": "Manage teams ownership mappings between RUM views and the teams that own them.\nSee <https://docs.datadoghq.com/real_user_monitoring/ownership_of_views/>."
+  },
   "scim": {
     "name": "SCIM",
     "description": "Provision Datadog users and teams using SCIM APIs.\n\nNote: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information."
