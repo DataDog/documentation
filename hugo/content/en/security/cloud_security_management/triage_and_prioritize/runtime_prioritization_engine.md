@@ -55,7 +55,7 @@ When ownership is known, the engine can route findings to the right team instead
 
 ## Filter findings by runtime signals
 
-Datadog adds the runtime signals it observes to vulnerability findings. Search, filter, and group by these signals in the [Vulnerability Explorer][11], combined with any other criteria.
+Datadog adds the runtime signals it observes to vulnerability findings. Use these signals in the [Vulnerability Explorer][11], combined with any other criteria.
 
 ### Package is running
 
@@ -79,20 +79,33 @@ Signals persist for the lifetime of an image version: after a package is observe
 
 ### Image is running
 
-Datadog adds an image-level runtime signal to every container image vulnerability finding, with no additional configuration. Search, filter, and group by these tags:
+Datadog adds the **Container Image Running** signal to every container image vulnerability finding, with no additional Agent configuration. Search, filter, and group by this tag:
 
 | Signal | Tag |
 |---|---|
 | Image detected running in the last 12 hours | `@risk.is_image_running:true` |
-| Time the image was last detected running | `@risk_details.is_image_running.evidence.detected_at` |
 
-Datadog detects running images from [Live Containers][12] on hosts where the Datadog Agent is deployed, and from the cloud provider's service inventory for images covered by [Agentless Scanning][13]. Detection is periodic, so short-lived workloads such as CI jobs and batch tasks are not always detected. Act on `true`; `false` means Datadog did not detect the image running in the last 12 hours, not that the image is stopped.
-
-`@risk.is_image_running` is always `true` or `false` on container image findings, and absent on host, host image, and serverless findings. To prioritize running images across every asset type, exclude the findings known to be stopped instead of matching on `true`:
+The tag is always `true` or `false` on container image findings, and absent on host, host image, and serverless findings. To prioritize running images across all asset types, exclude what is known to be stopped:
 
 ```
 -@risk.is_image_running:false
 ```
+
+For a window other than 12 hours, query `@risk_details.is_image_running.evidence.detected_at`, the time of the last detection in epoch milliseconds. This field has no facet and is independent of `@risk.is_image_running`.
+
+How Datadog detects a running image depends on how the image is scanned:
+
+| | Agent | Agentless |
+|---|---|---|
+| **Requires** | [Cloud Security vulnerability scanning][14] and [container monitoring][12] enabled on the Agent. | [Agentless Scanning][13] on the cloud account. |
+| **Registries** | Any. | Amazon ECR, Azure Container Registry, or Google Artifact Registry. See [compatibility][15]. |
+| **Source** | [Live Containers][12] reporting. | The cloud provider's service inventory, read at scan time. |
+
+Without container monitoring, or for an image in an unsupported registry, the tag reads `false`.
+
+Each detection restarts the 12-hour window, so a continuously running image does not read `false`. Nothing reports a stop and detection is periodic, so act on `true` and treat `false` as weaker evidence, especially for short-lived workloads such as CI jobs. The signal attaches to a specific image digest and does not change severity.
+
+The severity breakdown shows how long ago Datadog last detected the image running. When the tag is `true`, the vulnerability side panel lists that image's containers from [Live Containers][12], including ones that have since exited. Live Containers does not monitor Agentless-scanned workloads, so no containers appear for them.
 
 ## Get started
 
@@ -117,3 +130,5 @@ Datadog detects running images from [Live Containers][12] on hosts where the Dat
 [11]: https://app.datadoghq.com/security/csm/vm
 [12]: /containers/
 [13]: /security/cloud_security_management/setup/agentless_scanning/
+[14]: /security/cloud_security_management/vulnerabilities/
+[15]: /security/cloud_security_management/setup/agentless_scanning/compatibility/
