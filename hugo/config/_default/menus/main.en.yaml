@@ -8226,11 +8226,6 @@ menu:
       url: /security/code_security/iac_security/custom_rules/
       parent: code_security_iac_security
       weight: 100004
-    - name: IaC Custom Rule Tutorial
-      identifier: code_security_iac_security_custom_rules_tutorial
-      url: /security/code_security/iac_security/custom_rules/tutorial/
-      parent: code_security_iac_security
-      weight: 100005
     - name: IaC Custom Rule Reference
       identifier: code_security_iac_security_custom_rules_guide
       url: /security/code_security/iac_security/custom_rules/guide/
