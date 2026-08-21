@@ -28,6 +28,8 @@ These optimizations require a [supported native library][12]. JUnit XML uploads 
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
   Local coding-agent validation is in Preview, and supports only JavaScript and TypeScript projects that use the npm [`dd-trace` package][15].
+  
+  [15]: https://www.npmjs.com/package/dd-trace
 {{< /callout >}}
 
 Using the provided prompt below, ask a local coding agent (an AI assistant that can inspect and run commands in your local repository) to inspect your installed `dd-trace` package and run its Test Optimization validation runbook. This method checks local library compatibility and CI configuration. It also checks Early Flake Detection, Auto Test Retries, and Test Management without changing Datadog settings or sending validation results to Datadog.
@@ -568,5 +570,4 @@ Test Optimization helps remediate flaky tests through Attempt to Fix and [Bits A
 [12]: /tests/
 [13]: /tests/test_impact_analysis/
 [14]: https://app.datadoghq.com/ci/test/flaky/explorer?query=%40test.name%3A%2Aflaky%2Avalidation%2A%20first_flaked_branch%3Avalidate-test-optimization%20fix_in_progress%3Atrue
-[15]: https://www.npmjs.com/package/dd-trace
 [16]: /tests/flaky_management/#bits-ai-powered-flaky-test-fixes
