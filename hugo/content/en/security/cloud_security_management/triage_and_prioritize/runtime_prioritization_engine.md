@@ -55,7 +55,7 @@ When ownership is known, the engine can route findings to the right team instead
 
 ## Filter findings by runtime signals
 
-When [Runtime Package Prioritization][4] is enabled, Datadog adds the runtime signals it observes to container image vulnerability findings for packages installed by an operating system package manager (`apt`, `yum`, or `apk`), so you can search, filter, and group by them:
+When [Runtime Package Prioritization][4] is enabled, Datadog adds the runtime signals it observes to container image vulnerability findings for packages installed by an operating system package manager (`apt`, `yum`, or `apk`). Search, filter, and group by these tags:
 
 | Signal | Tag |
 |---|---|
@@ -75,7 +75,7 @@ Signals persist for the lifetime of an image version: after a package is observe
 
 ## Get started
 
-1. Deploy the Datadog Agent version 7.79 or later with Cloud Security enabled. On Kubernetes, use 7.81.0 or later for the most complete signal coverage. See [Setting Up Cloud Security][3].
+1. Deploy the Datadog Agent, version **7.79.0** or later, with Cloud Security enabled. On Kubernetes, use **7.81.0** or later for the most complete signal coverage. See [Setting Up Cloud Security][3].
 2. Enable Runtime Package Prioritization on the Agent to surface the *Package is running* signal on vulnerability findings. See the instructions to do so for [Kubernetes][4], [Docker][9], or [Linux][10] deployments.
 3. Open the [{{< ui >}}Cloud Security Summary{{< /ui >}}][5] in Datadog. Prioritized findings are surfaced at the top of each funnel and in the [{{< ui >}}Security Inbox{{< /ui >}}][6].
 
