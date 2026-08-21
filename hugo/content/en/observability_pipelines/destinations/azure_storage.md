@@ -53,6 +53,7 @@ Create an [Azure storage account][13] if you don't already have one.
 1. Enter the name of the storage account.
 1. Enter the name of the container you created earlier.
 1. Optionally, enter a path.
+    - **Note**: This path must be a static string. It does not support template syntax, such as `{{ tag_name }}`. To route logs to different object keys based on specific log fields, configure the **Prefix** field when you [set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline) instead.
 1. Optionally, set permissions, add tags, and define the maximum scan size for rehydration. See [Advanced settings][17] for more information.
 1. Click **Save**.
 

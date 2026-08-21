@@ -53,6 +53,7 @@ You need to have Datadog's [Google Cloud Platform integration][3] installed to s
 1. Select the project.
 1. Enter the name of the storage bucket you created earlier.
 1. Optionally, enter a path.
+    - **Note**: This path must be a static string. It does not support template syntax, such as `{{ tag_name }}`. To route logs to different object keys based on specific log fields, configure the **Prefix** field when you [set up the destination for your pipeline](#set-up-the-destinations) instead.
 1. Optionally, set permissions, add tags, and define the maximum scan size for rehydration. See [Advanced settings][20] for more information.
 1. Click **Save**.
 

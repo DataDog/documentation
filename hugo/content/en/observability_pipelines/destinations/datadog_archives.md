@@ -94,6 +94,7 @@ If you already have Datadog Log Archives configured, skip to [Set up the destina
 1. Select the AWS account that your bucket is in.
 1. Enter the name of the S3 bucket.
 1. Optionally, enter a path.
+    - **Note**: This path must be a static string. It does not support template syntax, such as `{{ tag_name }}`. To route logs to different object keys based on specific log fields, configure the **Prefix** field when you [set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline) instead.
 1. Check the confirmation statement.
 1. Optionally, add tags and define the maximum scan size for rehydration. See [Advanced settings][18] for more information.
 1. Click **Save**.

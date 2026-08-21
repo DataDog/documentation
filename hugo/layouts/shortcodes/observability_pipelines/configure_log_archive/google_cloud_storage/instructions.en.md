@@ -25,7 +25,6 @@
 1. Select the project.
 1. Enter the name of the storage bucket you created earlier.
 1. Optionally, enter a path.
-    - **Note**: This path must be a static string. It does not support template syntax (for example, `{{ tag_name }}`). To route logs to different object keys based on specific log fields, configure the **Prefix** field when you [set up the Google Cloud Storage destination for your pipeline][9097] instead.
 1. Optionally, set permissions, add tags, and define the maximum scan size for rehydration. See [Advanced settings][9095] for more information.
 1. Click **Save**.
 
@@ -37,4 +36,3 @@ See the [Log Archives documentation][9096] for additional information.
 [9094]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [9095]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
 [9096]: /logs/log_configuration/archives
-[9097]: /observability_pipelines/destinations/google_cloud_storage/#set-up-the-destinations
