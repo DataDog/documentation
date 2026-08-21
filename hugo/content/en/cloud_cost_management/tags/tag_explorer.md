@@ -41,7 +41,7 @@ See the respective documentation for your cloud provider:
 
 ## Search and manage tags
 
-Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Analyze{{< /ui >}} > {{< ui >}}Tags{{< /ui >}}][2] to search tags from your cloud provider bills, [Custom Costs][4], [Datadog costs][5], [SaaS cost integrations][6], and [Tag Pipelines][3].
+Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Analyze{{< /ui >}}][2] and select the {{< ui >}}Tags{{< /ui >}} tab to search tags from your cloud provider bills, [Custom Costs][4], [Datadog costs][5], [SaaS cost integrations][6], and [Tag Pipelines][3].
 
 To see the tags for one provider, select it from the {{< ui >}}Provider{{< /ui >}} dropdown menu in the top left corner. Use the {{< ui >}}Tag Sources{{< /ui >}} panel to narrow the results further by where each tag originates.
 
@@ -88,7 +88,7 @@ Tag descriptions are visible to all members of your organization and appear in t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /cloud_cost_management/
-[2]: https://app.datadoghq.com/cost/tags
+[2]: https://app.datadoghq.com/cost/analyze/tags
 [3]: /cloud_cost_management/allocation/tag_pipelines
 [4]: /cloud_cost_management/setup/custom
 [5]: /cloud_cost_management/datadog_costs
