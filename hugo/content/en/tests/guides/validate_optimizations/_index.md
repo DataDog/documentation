@@ -72,6 +72,8 @@ This guide walks you through making local changes and committing them for CI to 
    git push -u origin validate-test-optimization
    ```
 
+   Datadog detects the `validate-test-optimization` service when the tests report under that name.
+
 4. After CI finishes, go to the [CI/CD Repositories settings][3] and select the repository you are validating.
 
    {{< img src="pr_gates/setup/ci_cd_repositories_settings.png" alt="CI/CD Repositories settings filtered to the repository being validated" style="width:100%" >}}
