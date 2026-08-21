@@ -47,7 +47,7 @@ function Figure({
   return (
     <figure class={cl("img__figure")}>
       {children}
-      {caption && <figcaption class={cl("img__caption")}>{caption}</figcaption>}
+      {caption && <figcaption>{caption}</figcaption>}
     </figure>
   );
 }
