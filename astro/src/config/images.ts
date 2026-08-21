@@ -1,2 +1,6 @@
-// TODO: make this environment-dependent (e.g. a staging CDN for preview builds)
-export const IMAGES_URL = "https://imgix.datadoghq.com";
+const PROD_IMAGES_URL = "https://docs.dd-static.net";
+const STAGING_IMAGES_URL = "https://docs-staging.dd-static.net";
+
+const isLive = process.env.CI_ENVIRONMENT_NAME === "live";
+
+export const IMAGES_URL = isLive ? PROD_IMAGES_URL : STAGING_IMAGES_URL;
