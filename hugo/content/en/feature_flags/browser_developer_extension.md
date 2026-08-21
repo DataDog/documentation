@@ -56,7 +56,7 @@ const provider = new DatadogProvider({
 await OpenFeature.setProviderAndWait(new DatadogDevtools(provider));
 {{< /code-block >}}
 
-Set `site` to the [Datadog site][2] your organization uses. Use the same site you select in the extension's dropdown. If they differ, you browse and pick variants from one organization's flag catalog while your application resolves flags against another.
+Set `site` to the [Datadog site][2] your organization uses. Use the same site you select in the extension's dropdown. If they differ, you browse and pick variants from one organization's flag catalog while your application resolves flags against a different organization's catalog.
 
 The wrapper accepts any OpenFeature provider, so you can also use it over an `InMemoryProvider` in a local development build. If your application registers providers for multiple domains, wrap each one.
 
