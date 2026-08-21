@@ -47,6 +47,7 @@ The available functions are categorized as follows:
 - [Arithmetic](#arithmetic)
 - [String](#string)
 - [Logical](#logical)
+- [Regex](#regex)
 
 
 ### Arithmetic
@@ -315,7 +316,48 @@ Checks if an attribute or expression is null.
 
 {{% /collapse-content %}}
 
+---
+
+### Regex
+
+Regex functions match or transform a value using a regular expression (regex). Patterns support the same regex constructs as [regex extraction][1], such as literals, character classes, and quantifiers. Escaping differs: an extraction pattern is a bare field, while a pattern here is a double-quoted string argument. Unlike extraction, capture groups here do not need a name: `regexp_replace` can reference an unnamed group positionally with `$1` through `$9`.
+
+<h4>regexp_like(<i>str</i> value, <i>str</i> pattern)</h4>
+
+Returns `true` when the pattern matches anywhere in the value, and `false` otherwise.
+
+{{% collapse-content title="Example" level="h5" expanded=false %}}
+
+| Example  | Formula | Result |
+|----------|-------------|---------|
+| A log event has the following attribute:<br>`message` = "connection timeout after 30s" | `#is_timeout = regexp_like(message, "timeout\|deadline exceeded")` | `#is_timeout` = "true" |
+
+{{% /collapse-content %}}
+
+
+<h4>regexp_replace(<i>str</i> input, <i>str</i> pattern, <i>str</i> replacement, [<i>int</i> start, <i>int</i> N])</h4>
+
+Returns `input` with matched text replaced. Use `$1` through `$9` in `replacement` to insert a capture group's match, or `${name}` for a named group. Formula arguments are double-quoted string literals, so you need to escape backslashes. For example, write `"\\d"` rather than `"\d"` for shorthand classes in `pattern`. To insert a literal `$` in `replacement`, escape its special meaning with `\$`, then escape that backslash for the string literal: `"\\$"`.
+
+| Argument | Meaning |
+|---|---|
+| `input` | The text to transform |
+| `pattern` | The regex pattern to match |
+| `replacement` | The regex transformation pattern, often using capture groups |
+| `start` | Optional. The zero-based character index to begin matching from. Defaults to `0` |
+| `N` | Optional. The maximum number of matches to replace. Defaults to `1`. `0` replaces every match |
+
+{{% collapse-content title="Example" level="h5" expanded=false %}}
+
+| Example  | Formula | Result |
+|----------|-------------|---------|
+| A log event has the following attribute:<br>`@path` = "/api/v1/orders" | `#resource = regexp_replace(@path, "^/api/v[0-9]+/(.*)$", "$1")` | `#resource` = "orders" |
+
+{{% /collapse-content %}}
+
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/explorer/calculated_fields/extractions/#regex
