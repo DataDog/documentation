@@ -100,7 +100,7 @@ After setting up the Azure DevOps integration, enable IaC Security for your repo
 
 If you don't use GitHub Actions, GitLab CI/CD, or Azure DevOps, you can run the [Datadog IaC Scanner][8] directly in your CI pipeline. Upload IaC scan results to Datadog using the [`datadog-ci` CLI][9].
 
-**If you are running IaC Security on a non-GitHub repository**, run the first scan on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, upload a first scan for your repository. Then, manually override the default branch in [{{< ui >}}Repository Settings{{< /ui >}}][10]. Afterward, uploads from non-default branches succeed.
+**If you are running IaC Security on a non-GitHub repository**, run the first scan on your default branch. If your default branch uses a name other than `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, upload a first scan for your repository. Then, manually override the default branch in [{{< ui >}}Repository Settings{{< /ui >}}][10] so that future scans from non-default branches are uploaded and correctly processed.
 
 ### Prerequisites
 
