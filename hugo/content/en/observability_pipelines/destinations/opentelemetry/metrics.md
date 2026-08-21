@@ -8,7 +8,7 @@ weight: 1
 
 {{< callout url="#"
  btn_hidden="true" header="false">}}
-OpenTelemetry destination is in Preview. Contact your account manager to request access.
+The OpenTelemetry destination is in Preview. Contact your account manager to request access.
 {{< /callout >}}
 
 ## Overview
