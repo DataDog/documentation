@@ -34,14 +34,6 @@ The **retention rate** specifies the percentage of matching sessions you want to
 
 Your configuration is made of three types of filters: [permanent retention filters](#permanent-retention-filters), [exclusion filters](#exclusion-filters), and [custom retention filters](#custom-retention-filters). See [Types of filters](#types-of-filters) for the path an event takes through them.
 
-To configure your filters, click {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Retention Filters{{< /ui >}} in the top right corner of any RUM page for direct access.
-
-You can also:
-
-1. Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}][3].
-1. Create a RUM application or click an existing application.
-1. Under Product Settings, go to the {{< ui >}}Retention Filters{{< /ui >}} page.
-
 ## How it works
 
 A session is stored as soon as a retention filter matches one of its constituting events based on the predefined query, and samples it in based on the configured retention rate.
@@ -91,28 +83,6 @@ There are three permanent retention filters:
 
 <div class="alert alert-info">The RUM-APM Flat Sampling permanent retention filter only applies with the following SDKs: <br> - Browser 6.5.0+ <br> - Android 3.0.0+ <br> - iOS 3.3.0+ <br> - React Native 3.0.0+ <br> - Flutter 3.0.0+ <br></div>
 
-## Custom retention filters
-
-Custom retention filters are the filters you create and control. Each one pairs an event type with a query and a retention rate, and each one can retain sessions.
-
-<!-- TODO(screenshot): the Custom Retention Filters section of the Retention Filters page, in the new grouped UI. -->
-
-### Excluding sessions using retention filters
-
-Custom retention filters specify which sessions to keep, rather than which to exclude. You cannot set a retention percentage to 0% (the minimum is 0.1%). Additionally, setting low retention percentages is not an effective exclusion strategy because sessions may still be retained by other filters in your configuration.
-
-To keep a single filter from matching a subset of events, add exclusions **inside that filter's query**. For example:
-
-- Adding `-version:(1* OR 2*)` to a retention filter ensures that filter never keeps events from older versions 1 and 2 of your application.
-- Adding `-@device.type:Bot` to a retention filter excludes search engine crawlers and other self-declared bots from that filter.
-- Adding `-@geo.country:"South Korea"` to a retention filter excludes sessions from South Korea from that filter.
-
-In-query exclusions only apply to the filter that contains them. Because any other filter can still retain the same session, excluding events across your whole configuration this way means repeating the exclusion in **every** filter, and repeating it again each time you add a filter.
-
-To exclude events across all of your custom retention filters at once, use [exclusion filters](#exclusion-filters) instead.
-
-**Note**: Events matching an exclusion filter never reach your custom retention filters, and therefore never trigger the retention of their session.
-
 ## Exclusion filters
 
 {{< callout header="Preview" btn_hidden="true" >}}
@@ -136,7 +106,39 @@ A predefined exclusion filter at the top of the list targets the errors you [ign
 
 You can enable or disable this filter, but you cannot edit it or delete it.
 
-## Creating a filter
+## Custom retention filters
+
+Custom retention filters are the filters you create and control. Each one pairs an event type with a query and a retention rate, and each one can retain sessions.
+
+<!-- TODO(screenshot): the Custom Retention Filters section of the Retention Filters page, in the new grouped UI. -->
+
+### Excluding sessions using retention filters
+
+Custom retention filters specify which sessions to keep, rather than which to exclude. You cannot set a retention percentage to 0% (the minimum is 0.1%). Additionally, setting low retention percentages is not an effective exclusion strategy because sessions may still be retained by other filters in your configuration.
+
+To keep a single filter from matching a subset of events, add exclusions **inside that filter's query**. For example:
+
+- Adding `-version:(1* OR 2*)` to a retention filter ensures that filter never keeps events from older versions 1 and 2 of your application.
+- Adding `-@device.type:Bot` to a retention filter excludes search engine crawlers and other self-declared bots from that filter.
+- Adding `-@geo.country:"South Korea"` to a retention filter excludes sessions from South Korea from that filter.
+
+In-query exclusions only apply to the filter that contains them. Because any other filter can still retain the same session, excluding events across your whole configuration this way means repeating the exclusion in **every** filter, and repeating it again each time you add a filter.
+
+To exclude events across all of your custom retention filters at once, use [exclusion filters](#exclusion-filters) instead.
+
+**Note**: Events matching an exclusion filter never reach your custom retention filters, and therefore never trigger the retention of their session.
+
+## Setup
+
+To configure your filters, click {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Retention Filters{{< /ui >}} in the top right corner of any RUM page for direct access.
+
+You can also:
+
+1. Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}][3].
+1. Create a RUM application or click an existing application.
+1. Under Product Settings, go to the {{< ui >}}Retention Filters{{< /ui >}} page.
+
+### Creating a filter
 
 To create a retention filter or an exclusion filter:
 
@@ -149,44 +151,44 @@ A new custom retention filter gets added to the bottom of the custom retention f
 
 Creating a filter requires the same permissions for both types of filters.
 
-## Modifying filters
+### Modifying filters
 
 {{< img src="real_user_monitoring/rum_without_limits/modifying-filters.png" alt="Hover over a retention filter to modify it." style="width:100%" >}}
 
-### Edit a filter
+#### Edit a filter
 
 To modify an existing filter:
 
 1. Hover over the filter and click the {{< ui >}}Edit{{< /ui >}} icon.
 1. Click {{< ui >}}Save Changes{{< /ui >}}.
 
-### Duplicate a filter
+#### Duplicate a filter
 
 To duplicate a filter:
 
 1. Hover over the filter and click the {{< ui >}}Duplicate{{< /ui >}} icon.
 1. Make any modifications you want to the filter, then click {{< ui >}}Save Changes{{< /ui >}}.
 
-### Delete a filter
+#### Delete a filter
 
 To delete a filter:
 
 1. Hover over the filter and click the {{< ui >}}Delete{{< /ui >}} icon.
 1. Click {{< ui >}}Confirm{{< /ui >}}.
 
-### Disable a filter
+#### Disable a filter
 
 Disabled filters simply ignore events. A disabled custom retention filter makes no sampling decision, and a disabled exclusion filter excludes no event.
 
 Use the toggle to the right of the filter to disable or enable it.
 
-### Reorder filters
+#### Reorder filters
 
 Drag and drop filters to reorder filters to their new position.
 
 Reordering only applies to custom retention filters, as the order of exclusion filters does not matter.
 
-## Capping retention with quotas
+### Capping retention with quotas
 
 To cap the total number of sessions retained per day across your retention filters, see [Retention Quotas][9].
 
