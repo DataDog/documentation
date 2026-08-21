@@ -1,5 +1,6 @@
 ---
 title: Processors
+description: "Learn about the processors available for parsing, structuring, and enriching logs, metrics, and traces in Observability Pipelines."
 disable_toc: false
 further_reading:
 - link: https://www.datadoghq.com/blog/rehydrate-archived-logs-with-observability-pipelines

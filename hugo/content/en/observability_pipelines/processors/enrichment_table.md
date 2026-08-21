@@ -1,5 +1,6 @@
 ---
 title: Enrichment Table Processor
+description: "Learn how to use the Enrichment Table processor to add context to logs with lookup datasets."
 disable_toc: false
 products:
 - name: Logs

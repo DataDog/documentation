@@ -1,5 +1,6 @@
 ---
 title: Parse XML Processor
+description: "Learn how to use the Parse XML processor to parse XML data so it can be processed and sent to destinations."
 disable_toc: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"

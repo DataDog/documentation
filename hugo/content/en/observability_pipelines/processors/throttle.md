@@ -1,5 +1,6 @@
 ---
 title: Throttle Processor
+description: "Learn how to use the Throttle processor to set a limit on the number of logs sent within a specific time window."
 disable_toc: false
 products:
 - name: Logs

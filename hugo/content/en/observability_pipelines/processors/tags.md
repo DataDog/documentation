@@ -1,5 +1,6 @@
 ---
 title: Tags Processor
+description: "Learn how to use the Tags processor to exclude or include specific tags in the Datadog tags array for logs from the Datadog Agent."
 disable_toc: false
 aliases:
   - /observability_pipelines/processors/tag_control/logs/

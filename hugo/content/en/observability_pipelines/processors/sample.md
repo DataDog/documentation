@@ -1,5 +1,6 @@
 ---
 title: Sample Processor
+description: "Learn how to use the Sample processor to keep a representative subset of logs or traces and drop the rest at a defined rate."
 disable_toc: false
 products:
 - name: Logs

@@ -1,5 +1,6 @@
 ---
 title: Remap to OCSF Processor
+description: "Learn how to use the Remap to OCSF processor to map logs to Open Cybersecurity Schema Framework (OCSF) events."
 disable_toc: false
 products:
 - name: Logs

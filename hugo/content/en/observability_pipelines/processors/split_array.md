@@ -1,5 +1,6 @@
 ---
 title: Split Array Processor
+description: "Learn how to use the Split Array processor to split nested arrays into distinct events so you can query, filter, alert, and visualize the data."
 disable_toc: false
 products:
 - name: Logs

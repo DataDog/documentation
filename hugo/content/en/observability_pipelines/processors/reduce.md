@@ -1,5 +1,6 @@
 ---
 title: Reduce Processor
+description: "Learn how to use the Reduce processor to group multiple log events into a single log based on specified fields and merge strategies."
 disable_toc: false
 products:
 - name: Logs

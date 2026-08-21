@@ -1,5 +1,6 @@
 ---
 title: Edit Tags Processor
+description: "Learn how to use the Edit Tags processor to add or rename tags on your metrics."
 disable_toc: false
 products:
 - name: Metrics
