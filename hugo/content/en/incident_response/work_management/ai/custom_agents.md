@@ -52,7 +52,7 @@ Use [work item automation rules][3] to assign work items to agents automatically
 1. Select **Assign Agent** and choose the custom agent to assign matching work items to.
 1. Enable and name your rule.
 
-**Note:** Agents will run using the permissions of the user who assigned the agent to the work item.
+**Note**: Agents run using the permissions of the user who assigned the agent to the work item.
 
 ## Further reading
 
