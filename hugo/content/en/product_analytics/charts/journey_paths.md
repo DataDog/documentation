@@ -6,9 +6,9 @@ description: See the most common paths users take between two events, including 
 Journey paths show the most common paths users take between selected events.
 
 Use journey paths to:
-- See what views and actions users typically go through between a starting event and a target event.
-- Compare the paths taken by users who converted against the paths taken by users who dropped off.
-- Investigate branching paths, including detours that skip directly from one step to another.
+- See how users navigate key journeys and complete workflows.
+- Understand whether users are converting efficiently or taking unexpected detours.
+- Investigate where and why users drop off.
 
 {{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_conversion_chart.png" alt="A rendered Journey Paths chart showing the top paths users take between two views" style="width:100%;" >}}
 
@@ -24,7 +24,7 @@ Use journey paths to:
 
 ## Analyze a journey paths chart
 
-After you define steps in a journey, the chart displays the most common paths that sessions took between them.
+After you define steps in a journey, the chart displays the most common paths that users took between them.
 
 Each path shows the percentage and number of sessions that followed that path, and the average time spent on it. Paths with no listed events represent sessions that went directly from the start event to the end event with no intermediate views or actions in between.
 
@@ -32,7 +32,7 @@ Each path shows the percentage and number of sessions that followed that path, a
 
 You can refine journey path charts in various ways to zero in on the paths you want to analyze.
 
-1. Use the {{< ui >}}Converted{{< /ui >}} / {{< ui >}}Dropped{{< /ui >}} selector to switch between paths that reached the final step and those that dropped off. Dropoff paths have no end node, and their total session count reflects a subset of the full starting population. 
+1. Use the {{< ui >}}Converted{{< /ui >}} / {{< ui >}}Dropped{{< /ui >}} selector to switch between paths that reached the final step and those that dropped off. Dropoff paths have no end node.
 
 2. In journeys with multiple steps, use the step selector to choose which pair of steps to analyze paths between.  
 

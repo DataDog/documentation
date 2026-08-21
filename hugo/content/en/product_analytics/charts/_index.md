@@ -43,7 +43,7 @@ For example, you can determine if there was there a performance issue that cause
 
 {{< img src="/product_analytics/overview_analytic_ga.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
 
-[Analytics][1] let you explore how your product is being used. You can create a widget in a dashboard out of that visualization and dive deeper into subsets of the events list depending on the interactions that the visualization enables. 
+[Analytics][1] let you explore how your product is being used. You can analyze sessions, events, and user profiles, then break down, compare, and visualize the data in a variety of chart types.
 
 
 ## Further reading
