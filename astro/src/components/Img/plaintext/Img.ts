@@ -3,9 +3,7 @@
  *
  * Mirrors the authored `{% img %}` tag shape rather than a plain Markdown
  * image, since `src` here is the resolved full-size CDN URL, not the
- * content-relative path authors write. Layout-only attributes (`width`,
- * `height`, `widthPercent`, `popup`) are dropped: none of them affect a
- * plaintext consumer.
+ * content-relative path authors write.
  */
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
