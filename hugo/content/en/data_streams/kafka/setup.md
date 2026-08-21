@@ -13,6 +13,9 @@ Datadog Agent version 7.78 or later is required.
 
 ### ACL permissions
 
+{{< tabs >}}
+{{% tab "ACLs" %}}
+
 If your Kafka cluster uses ACLs, the Datadog Agent user requires the following minimum permissions:
 
 | Resource Name | Resource Type | Operation        |
@@ -22,6 +25,20 @@ If your Kafka cluster uses ACLs, the Datadog Agent user requires the following m
 | `*`           | `TOPIC`       | `Describe`       |
 | `*`           | `TOPIC`       | `DescribeConfigs` |
 | `*`           | `GROUP`       | `Describe`       |
+
+{{% /tab %}}
+{{% tab "Confluent Platform roles" %}}
+
+If your Confluent Platform cluster uses RBAC instead of native ACLs, grant the Datadog Agent's principal the following role bindings:
+
+| Role            | Resource scope       |
+|-----------------|----------------------|
+| `Operator`      | `Cluster` (the Kafka cluster) |
+| `DeveloperRead` | All topics           |
+| `DeveloperRead` | All consumer groups  |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Setup
 
@@ -37,7 +54,9 @@ This section applies only if you want to view Kafka message payloads in the {{< 
 
 ### Additional ACL permission
 
-In addition to the ACL permissions listed in [Prerequisites](#acl-permissions), the Datadog Agent user requires:
+If your cluster uses Confluent Platform RBAC, no additional role binding is needed: the `DeveloperRead` role from [Prerequisites](#acl-permissions) already includes `Read` on the scoped topics.
+
+If your cluster uses native ACLs, in addition to the permissions listed in [Prerequisites](#acl-permissions), the Datadog Agent user requires:
 
 | Resource Name | Resource Type | Operation |
 |---------------|---------------|-----------|
