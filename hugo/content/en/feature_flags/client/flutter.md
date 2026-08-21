@@ -292,9 +292,13 @@ DatadogFlagsConfiguration(
   trackExposures: true,
   trackEvaluations: true,
   evaluationFlushInterval: const Duration(seconds: 10),
+  assignmentRequestTimeout: const Duration(seconds: 2),
+  assignmentRequestRetryCount: 2,
   store: myStore,
 );
 {{< /code-block >}}
+
+By default, each assignment request attempt has a one-second timeout, and the SDK retries transient failures once. Transient failures include network errors, timeouts, HTTP 408, HTTP 429, and HTTP 5xx responses.
 
 `trackExposures`
 : When `true` (default), the SDK records exposure events for successful evaluations whose assignments are marked for logging. Set to `false` to disable exposure tracking.
@@ -304,6 +308,12 @@ DatadogFlagsConfiguration(
 
 `evaluationFlushInterval`
 : The interval at which aggregated flag evaluation telemetry is sent to Datadog. Accepted values are between 1 and 60 seconds. The default is 10 seconds.
+
+`assignmentRequestTimeout`
+: The timeout for each assignment request attempt. The default is one second. Values less than or equal to zero use the default.
+
+`assignmentRequestRetryCount`
+: The number of retries after the first attempt. The default is `1`. Set this option to `0` to disable retries. Negative values are treated as `0`.
 
 `store`
 : Optional last-known assignment storage. The SDK can use matching stored assignments while a fresh network request is in progress or unavailable.
