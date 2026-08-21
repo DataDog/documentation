@@ -2712,7 +2712,7 @@ The `LLMObs.submit_feedback()` method accepts the following arguments:
 
 `value`
 : required - _string, numeric type, boolean, or dict_
-<br />The value of the feedback. Must be a string (`metric_type==categorical` or `metric_type==text`), integer/float (`metric_type==score`), boolean (`metric_type==boolean`), or dict (`metric_type==json`).
+<br />The value of the feedback. Must be a string (`metric_type==categorical` or `metric_type==text`), integer or float (`metric_type==score`), boolean (`metric_type==boolean`), or dict (`metric_type==json`).
 
 `submitter`
 : required - _dictionary_
@@ -2738,7 +2738,7 @@ The `LLMObs.submit_feedback()` method accepts the following arguments:
 : optional - _string_
 <br />A customer-defined key associated with this feedback, such as an incident ID or a ticket ID. To connect the feedback to your spans, first annotate them with a `feedback_join_key` tag holding the same value. See [Enriching spans](#enriching-spans).
 
-   **Note**: Exactly one of `span`, `span_id`, `trace_id`, `session_id`, or `feedback_join_key` is required. Supplying more than one, or none, raises a ValueError.
+   **Note**: Exactly one of `span`, `span_id`, `trace_id`, `session_id`, or `feedback_join_key` is required. Supplying more than one, or none, raises a `ValueError`.
 
 `ml_app`
 : optional - _string_
@@ -2746,7 +2746,7 @@ The `LLMObs.submit_feedback()` method accepts the following arguments:
 
 `timestamp_ms`
 : optional - _integer_
-<br />The unix timestamp in milliseconds when the feedback was generated. If not provided, this defaults to the current time.
+<br />The Unix timestamp in milliseconds when the feedback was generated. If not provided, this defaults to the current time.
 
 `tags`
 : optional - _dictionary_
@@ -2840,7 +2840,7 @@ The `llmobs.submitFeedback()` method accepts an options object with the followin
 : optional - _string_
 <br />A customer-defined key to attach the feedback to, such as an incident ID or a ticket ID. Set the same key on your spans to connect the feedback to them.
 
-   **Note**: Exactly one of `span`, `spanId`, `traceId`, `sessionId`, or `feedbackJoinKey` is required.
+   **Note**: Exactly one of `span`, `spanId`, `traceId`, `sessionId`, or `feedbackJoinKey` is required. Supplying more than one, or none, throws an error.
 
 `mlApp`
 : optional - _string_
@@ -2848,7 +2848,7 @@ The `llmobs.submitFeedback()` method accepts an options object with the followin
 
 `timestampMs`
 : optional - _number_
-<br />The unix timestamp in milliseconds when the feedback was generated. If not provided, this defaults to the current time.
+<br />The Unix timestamp in milliseconds when the feedback was generated. If not provided, this defaults to the current time.
 
 `tags`
 : optional - _object_
@@ -2915,7 +2915,7 @@ The builder accepts the following methods:
 
 `submitter(String id, String type)` or `submitter(Submitter submitter)`
 : required
-<br />Identifies who submitted the feedback. The `id` must be a non-empty string. The `type` is an optional qualifier, such as `end_user`.
+<br />Identifies who submitted the feedback. The `id` must be a non-empty string. The `type` is an optional qualifier, such as `user`.
 
 `span(LLMObsSpan span)`, `spanId(String)`, `traceId(String)`, `sessionId(String)`, or `feedbackJoinKey(String)`
 : required
@@ -2927,7 +2927,7 @@ The builder accepts the following methods:
 
 `timestampMs(long timestampMs)`
 : optional
-<br />The unix timestamp in milliseconds when the feedback was generated. If not provided, this defaults to the current time.
+<br />The Unix timestamp in milliseconds when the feedback was generated. If not provided, this defaults to the current time.
 
 `tags(Map<String, Object> tags)` or `tag(String key, Object value)`
 : optional
