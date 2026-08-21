@@ -124,7 +124,7 @@ Extracted values are always strings. Unlike a Grok rule such as `%{integer:statu
 
 ### Capture group rules
 
-A pattern must follow four rules:
+A pattern must follow these rules:
 
 - It must contain at least one capture group.
 - Every capture group must be named.
