@@ -80,7 +80,7 @@ You can add or edit descriptions for any tag in the Tag Explorer to provide cont
 
 Tag descriptions are visible to all members of your organization and appear in the following locations:
 
-- {{< ui >}}Tag Explorer{{< /ui >}}: Descriptions are displayed in the tag table alongside each tag key.
+- {{< ui >}}Tags{{< /ui >}}: Descriptions are displayed in the tag table alongside each tag key.
 - {{< ui >}}Group-by selectors{{< /ui >}}: When selecting tags to group by across Cloud Cost Management, descriptions appear in the dropdown menu to help users choose the right tag.
 
 ## Further reading
