@@ -514,8 +514,6 @@ def _is_datadog_url(url: str) -> bool:
     datadog_domains = [
         "datadoghq.com",
         "datadoghq.eu",
-        "datad0g.com",
-        "datad0g.eu",
         "us3.datadoghq.com",
         "us5.datadoghq.com",
         "ap1.datadoghq.com",
