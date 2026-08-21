@@ -27,42 +27,35 @@ Goal-Based Testing is a Synthetic test type that uses prompted, non-deterministi
 
 Unlike a browser test, a Goal-Based test doesn't follow a fixed, recorded set of steps. Instead, an agent explores your application, trying multiple paths toward the goal you describe.
 
-<div class="alert alert-info">Goal-Based Testing is in Preview. The experience may change as Datadog iterates on customer feedback.</div>
-
 ## Create a Goal-Based test
 
-Goal-Based tests are created in either of the following ways:
+You can create a Goal-Based test in two ways:
 
-- Generated automatically by [Bits Testing][1] as part of a journey's test suite.
-- Created manually by clicking {{< ui >}}New Test{{< /ui >}} and selecting Goal-Based test.
+- Let [Bits Testing][1] generate one automatically as part of a journey's test suite.
+- Create one manually by clicking {{< ui >}}New Test{{< /ui >}} and selecting Goal-Based test.
 
-{{< img src="synthetics/goal_based_testing/goal_based_test_type_selection.png" alt="The New Synthetics Test dialog with Goal-Based Test selected" style="width:100%;" >}}
+{{< img src="synthetics/goal_based_testing/goal_based_test_type_selection.png" alt="The New Synthetics Test dialog with Goal-Based Test selected" style="width:50%;" >}}
 
 When creating a Goal-Based test manually, provide:
 
 - A **starting URL** for the application under test.
-- A **goal**, written as a prompt in plain English (for example, "Ask the support chatbot for a product recommendation").
+- A **goal**, written as a prompt in plain language (for example, "Ask the support chatbot for a product recommendation").
 - A **location** to run the test from. See [supported locations](#supported-locations).
 - Optionally, an [Agent Profile][2] to reuse variables such as login credentials.
 
-{{< img src="synthetics/goal_based_testing/goal_based_test_creation.png" alt="The New Goal-Based Test panel with starting URL and goal fields" style="width:100%;" >}}
+{{< img src="synthetics/goal_based_testing/goal_based_test_creation.png" alt="The New Goal-Based Test panel with starting URL and goal fields" style="width:60%;" >}}
 
 ### Supported locations
 
-Goal-Based tests run only from the following cloud locations:
+Goal-Based tests run only from the Datadog managed locations listed in [Run Bits Testing][4].
 
-- Frankfurt (GCP: `gcp:europe-west3`)
-- N. Virginia (AWS: `aws:us-east-1`)
-- Ohio (AWS: `aws:us-east-2`)
-- Virginia (Azure: `azure:eastus`)
+For pricing, see [Bits Testing billing][3].
 
-For pricing and Private Locations details, see the [Bits Testing FAQ][3].
-
-## How it works
+## How Goal-Based Testing evaluates a run
 
 After you start a Goal-Based test, the agent explores your application from the starting URL, branching across the different paths a user might take toward the goal.
 
-When the run finishes, the test reports a **Pass** or **Fail** result, based on whether one of the explored branches reached the goal or ran into an error. Alongside the result, Goal-Based Testing shows:
+When the run finishes, the test reports a **Pass** result if one of the explored branches reached the goal. It reports a **Fail** result if no branch reached the goal or the agent ran into an error. Alongside the result, Goal-Based Testing shows:
 
 - A summary explaining the rationale behind the Pass or Fail result.
 - Step-by-step navigation through the actions the agent took, so you can review exactly what it tried.
@@ -78,7 +71,7 @@ After the first run completes, click the {{< ui >}}Edit test{{< /ui >}} icon to:
 - Add tags.
 - Change the selected Agent Profile.
 
-{{< img src="synthetics/goal_based_testing/goal_based_test_schedule.png" alt="The Goal-Based test edit page with the user goal and scheduling options" style="width:100%;" >}}
+{{< img src="synthetics/goal_based_testing/goal_based_test_schedule.png" alt="The Goal-Based test edit page with the user goal and scheduling options" style="width:80%;" >}}
 
 ## Further reading
 
@@ -86,4 +79,5 @@ After the first run completes, click the {{< ui >}}Edit test{{< /ui >}} icon to:
 
 [1]: /synthetics/bits_testing/
 [2]: /synthetics/bits_testing/#agent-profiles
-[3]: /synthetics/bits_testing/#faq
+[3]: /synthetics/bits_testing/#billing
+[4]: /synthetics/bits_testing/#run-bits-testing
