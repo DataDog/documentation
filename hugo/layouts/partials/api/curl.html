@@ -183,7 +183,7 @@
 {{- /* Render requestBody example JSON "-d @- << EOF ... EOF" */ -}}
 {{ " \\" }}
 <span class="o">-d</span> <span class="n">@-</span> <span class="o"><<</span> <span class="n">EOF</span>
-<span class="s1">{{ .exampleValue | default $body | default (.dollarScratch.Get "jsonRequestBody") }}</span>
+<span class="s1">{{ $body | default .exampleValue | default (.dollarScratch.Get "jsonRequestBody") }}</span>
 <span class="n">EOF</span>
 {{- end -}}
 <br/>
