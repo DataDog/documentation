@@ -395,7 +395,7 @@ Your application appears as pending on the Applications page until Datadog start
 [5]: https://app.datadoghq.com/rum/list
 [6]: https://www.npmjs.com/package/@datadog/browser-rum
 [7]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
-[8]: /real_user_monitoring/application_monitoring/browser
+[8]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#user-tracking-consent
 [9]: /integrations/content_security_policy_logs/
 [10]: /agentic_onboarding/setup/
 [11]: /real_user_monitoring/application_monitoring/browser/data_collected/

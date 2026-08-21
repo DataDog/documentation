@@ -53,10 +53,9 @@ type: multi-code-lang
 `DD_TRACE_PROPAGATION_BEHAVIOR_EXTRACT`
 수신된 분산 트레이싱 헤더를 서비스 수준에서 어떻게 처리할지 지정합니다. 허용되는 값:<br>
 `continue`: 수신된 분산 트레이스 헤더가 유효한 트레이싱 컨텍스트를 나타내면 SDK는 기존 분산 트레이스를 계속합니다.<br>
-`restart`: SDK는 항상 새로운 트레이스를 시작합니다. 수신된 분산 트레이싱 헤더가 유효한 트레이스 컨텍스트를 나타내면 해당 트레이스 컨텍스트는 서비스 진입 스팬에서 스팬 링크로 표시됩니다(`continue` 구성의 상위 스팬과는 반대).<br>
+`restart`: SDK는 항상 새로운 트레이스를 시작합니다. 수신된 분산 트레이싱 헤더가 유효한 트레이스 컨텍스트를 나타내면 해당 트레이스 컨텍스트는 서비스 진입 스팬에서 스팬 링크로 표시됩니다(`continue` 구성에서 상위 스팬으로 표시되는 것과는 다름).<br>
 `ignore`: SDK는 항상 새로운 트레이스를 시작하며 모든 수신된 분산 트레이싱 헤더는 무시됩니다.<br>
 **기본값**: `continue` <br>
-**참고**: 이는 .NET, Node.js, Python 및 Java 라이브러리에서만 구현됩니다.
 
 ### 고급 구성 {#advanced-configuration}
 
@@ -642,7 +641,7 @@ Datadog Rust SDK는 OpenTelemetry(OTel) SDK를 기반으로 구축되었습니�
 
 사용할 전파 형식은 `DD_TRACE_PROPAGATION_STYLE` 환경 변수로 제어할 수 있습니다. 쉼표로 구분된 목록을 제공할 수 있습니다.
 
-예:
+예를 들면 다음과 같습니다.
 
 ```bash
 # To support both W3C and Datadog

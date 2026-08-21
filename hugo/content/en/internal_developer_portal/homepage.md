@@ -1,7 +1,7 @@
 ---
 title: Homepage
 site_support_id: idp
-description: The Internal Developer Portal Homepage gives you a centralized view of your team's entities, GitHub pull requests, Jira tickets, and Datadog Cases in one place.
+description: The Internal Developer Portal Homepage gives you a centralized view of your team's entities, GitHub pull requests, Jira tickets, and Datadog Work Items in one place.
 aliases:  
 - /software_catalog/developer_homepage  
 - /internal_developer_portal/developer_homepage  
@@ -9,6 +9,9 @@ further_reading:
 - link: "/integrations/github/"  
   tag: "Documentation"  
   text: "Learn about the GitHub Integration"   
+- link: "https://www.datadoghq.com/blog/datadog-idp-homepage/"
+  tag: "Blog"
+  text: "Start your day with the IDP Homepage"
 
 ---
 
@@ -64,9 +67,7 @@ If you have multiple GitHub orgs connected within Datadog, users must have the D
 
 ## Your tickets
 
-{{< img src="tracing/software_catalog/homepage_tickets.png" alt="Your Tickets section showing Jira and Cases tabs with items assigned to the user" style="width:100%;" >}}
-
-The **Your Tickets** section consolidates the items assigned to you across Jira and Datadog Case Management, so you can track your open work without leaving the Homepage. Switch between the **Jira** and **Cases** tabs to view each source, and use **Display** to change how items are shown.
+The **Your Tickets** section consolidates the items assigned to you across Jira and Datadog Work Management, so you can track your open work without leaving the Homepage. Switch between the **Jira** and **Cases** tabs to view each source, and use **Display** to change how items are shown.
 
 ### Jira
 
@@ -81,11 +82,11 @@ The **Jira** tab lists the Jira tickets assigned to you, grouped by status categ
 - **Due**
 - **Assignee**
 
-### Cases
+### Work Items
 
-The **Cases** tab lists the Datadog Case Management cases assigned to you, grouped by status: **Open**, **In Progress**, and **Closed**. Each group shows a count.
+The **Work Items** tab lists the Datadog Work Management work items assigned to you, grouped by status: **Open**, **In Progress**, and **Closed**. Each group shows a count.
 
-Each case includes:
+Each work item includes:
 
 - **Case key**
 - **Title** (with a comment count when comments exist)
@@ -95,7 +96,7 @@ Each case includes:
 - **Due date**
 - **Assignee**
 
-Cases appear automatically when they are assigned to you. For more information, see [Case Management][4].
+Work items appear automatically when they are assigned to you. For more information, see [Work Management][4].
 
 ## Services and entities
 
