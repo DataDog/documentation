@@ -1,5 +1,6 @@
 ---
 title: Datadog Agent Source
+description: Learn how to collect logs, metrics, or traces from the Datadog Agent using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs
