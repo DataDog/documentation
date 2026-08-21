@@ -1,14 +1,16 @@
-export interface SizingProps {
-  width?: string;
-  height?: string;
-  widthPercent?: number;
-}
-
-export interface ImgTagProps extends SizingProps {
+export interface ImgTagProps {
   src: string;
   alt?: string;
   caption?: string;
   video?: boolean;
   inline?: boolean;
   popup?: boolean;
+  width?: string;
+  height?: string;
+  widthPercent?: number;
 }
+
+export type SizingProps = Pick<
+  ImgTagProps,
+  "width" | "height" | "widthPercent"
+>;
