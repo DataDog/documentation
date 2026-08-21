@@ -90,6 +90,8 @@ These are the available sources:
 {{% /tab %}}
 {{% tab "Traces" %}}
 
+<div class="alert alert-info">Traces Pipeline is in Preview. Contact your account manager to request access.</div>
+
 - [Datadog Agent][1]
 - [OpenTelemetry][2]
 
