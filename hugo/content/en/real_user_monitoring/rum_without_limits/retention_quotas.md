@@ -50,6 +50,12 @@ The retention filters page shows a breakdown of retained user sessions, includin
 
 {{< img src="real_user_monitoring/rum_without_limits/retention-quotas-usage.png" alt="A daily breakdown chart showing user sessions retained by custom filters, sessions retained by permanent filters, and sessions blocked once the quota was reached." style="width:100%" >}}
 
+## API
+
+Retention quotas can also be managed through [APIs][1].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /api/latest/rum-retention-quota/

@@ -1,0 +1,168 @@
+name: Blog linker
+
+# Adds Datadog blog post links to the further_reading section of the docs pages
+# each post references, then opens a draft PR with the result.
+#
+# The script itself lives in DataDog/websites-images
+# (services/webops-site-build/bin/docs-ci/blog_linker.py) and is fetched at run
+# time, so this workflow always uses the current version.
+
+on:
+  schedule:
+    # Tuesdays at 12:00 UTC (08:00 ET)
+    - cron: '0 12 * * 2'
+  workflow_dispatch:
+    inputs:
+      since:
+        description: 'Look back this many days for blog posts'
+        required: false
+        default: '14'
+      dry_run:
+        description: 'Report what would change without opening a PR'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: blog-linker
+  cancel-in-progress: false
+
+jobs:
+  link:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      # Two weeks, against a weekly cron: every post falls in two runs, so a
+      # dropped or failed run doesn't lose a week. The script skips posts
+      # already linked, so the second pass is a no-op.
+      SINCE: ${{ inputs.since || '14' }}
+    steps:
+      # Read access to websites-images, where the script lives.
+      - name: Get token for websites-images
+        id: sts-scripts
+        uses: DataDog/dd-octo-sts-action@96a25462dbcb10ebf0bfd6e2ccc917d2ab235b9a # v1.0.4
+        with:
+          scope: DataDog/websites-images
+          policy: documentation.blog-linker
+
+      # Write access to this repo, so the branch and PR are created by an
+      # identity that triggers the normal PR checks (Vale and the rest).
+      - name: Get token for documentation
+        id: sts-docs
+        uses: DataDog/dd-octo-sts-action@96a25462dbcb10ebf0bfd6e2ccc917d2ab235b9a # v1.0.4
+        with:
+          scope: DataDog/documentation
+          policy: documentation.blog-linker-write
+
+      - name: Check out documentation
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          token: ${{ steps.sts-docs.outputs.token }}
+
+      - name: Fetch the blog linker script
+        env:
+          GH_TOKEN: ${{ steps.sts-scripts.outputs.token }}
+        run: |
+          set -euo pipefail
+          tmp=$(mktemp -d)
+          git clone --depth 1 --filter=blob:none --sparse \
+            "https://x-access-token:${GH_TOKEN}@github.com/DataDog/websites-images.git" "$tmp"
+          git -C "$tmp" sparse-checkout set services/webops-site-build/bin/docs-ci
+          cp "$tmp/services/webops-site-build/bin/docs-ci/blog_linker.py" ./blog_linker.py
+          rm -rf "$tmp"
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install feedparser requests beautifulsoup4 ruamel.yaml
+
+      - name: Run the blog linker
+        env:
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          args=(--since "$SINCE")
+          if [ "$DRY_RUN" = "true" ]; then
+            args+=(--dry-run)
+          fi
+          python ./blog_linker.py "${args[@]}" | tee summary.txt
+
+      # The script only writes to hugo/content/en. Scoping to that path keeps
+      # the workflow's own files (blog_linker.py, summary.txt) out of the commit.
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet -- hugo/content/en; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No docs pages changed. Nothing to open a PR for."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git diff --stat -- hugo/content/en
+          fi
+
+      - name: Open a draft PR
+        if: steps.changes.outputs.changed == 'true' && inputs.dry_run != true
+        env:
+          GH_TOKEN: ${{ steps.sts-docs.outputs.token }}
+        run: |
+          set -euo pipefail
+          date_stamp=$(date -u +%Y-%m-%d)
+          branch="blog-linker/weekly-${date_stamp}"
+
+          git config user.name "dd-octo-sts[bot]"
+          git config user.email "200755185+dd-octo-sts[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          # Same path scope as the check above: content changes only.
+          git add -- hugo/content/en
+          git commit -m "Add blog links to further_reading (week of ${date_stamp})"
+          git push origin "$branch"
+
+          {
+            echo '### What does this PR do? What is the motivation?'
+            echo
+            echo "Adds Datadog blog post links to the \`further_reading\` section of the docs pages"
+            echo "those posts reference. Opened automatically by the [blog linker workflow][1];"
+            echo "covers posts from the last ${SINCE} days."
+            echo
+            echo '<details><summary>Script output</summary>'
+            echo
+            echo '```'
+            cat summary.txt
+            echo '```'
+            echo
+            echo '</details>'
+            echo
+            echo '### Merge readiness'
+            echo
+            echo '- [ ] Ready for merge'
+            echo
+            echo '### Additional notes'
+            echo
+            echo 'Each entry pairs a blog post with a docs page that post links to.'
+            echo
+            echo "[1]: https://github.com/DataDog/documentation/blob/master/.github/workflows/blog_linker.yml"
+          } > pr_body.md
+
+          gh pr create \
+            --draft \
+            --base master \
+            --head "$branch" \
+            --title "Add blog links to further_reading (week of ${date_stamp})" \
+            --body-file pr_body.md \
+            --label "WORK IN PROGRESS" \
+            --reviewer jeff-morgan-dd
+
+      - name: Upload summary
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: blog-linker-summary
+          path: summary.txt
+          if-no-files-found: ignore

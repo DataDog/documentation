@@ -1731,11 +1731,16 @@ menu:
       url: dashboards/graph_insights/correlations/
       parent: dashboards_graph_insights
       weight: 601
+    - name: Investigate Anomalies
+      identifier: dashboards_investigate_anomalies
+      url: dashboards/graph_insights/investigate_anomalies/
+      parent: dashboards_graph_insights
+      weight: 602
     - name: Watchdog Explains
       identifier: dashboards_watchdog_explains
       url: dashboards/graph_insights/watchdog_explains/
       parent: dashboards_graph_insights
-      weight: 602
+      weight: 603
     - name: Template Variables
       url: dashboards/template_variables/
       parent: dashboards
@@ -2966,6 +2971,11 @@ menu:
       parent: workflows
       identifier: workflows_limits
       weight: 11
+    - name: MCP Tools
+      url: actions/workflows/mcp_tools/
+      parent: workflows
+      identifier: workflows_mcp_tools
+      weight: 12
     - name: Apps
       url: actions/datadog_apps/
       pre: dev-code
