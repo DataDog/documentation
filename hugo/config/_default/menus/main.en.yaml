@@ -7236,80 +7236,80 @@ menu:
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_alphasoc_findings
       weight: 507
-    - name: Amazon Connect
-      url: observability_pipelines/packs/amazon_connect/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_amazon_connect
-      weight: 508
-    - name: Amazon VPC Flow Logs
-      url: observability_pipelines/packs/amazon_vpc_flow_logs/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_amazon_vpc_flow_logs
-      weight: 509
-    - name: Argo CD
-      url: observability_pipelines/packs/argo_cd/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_argo_cd
-      weight: 510
-    - name: Auth0
-      url: observability_pipelines/packs/auth0/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_auth0
-      weight: 511
-    - name: Aviatrix Controller API Audit
-      url: observability_pipelines/packs/aviatrix_controller_api_audit/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_aviatrix_controller_api_audit
-      weight: 512
-    - name: Aviatrix FQDN Firewall
-      url: observability_pipelines/packs/aviatrix_fqdn_firewall/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_aviatrix_fqdn_firewall
-      weight: 513
-    - name: Aviatrix Gateway Network Stats
-      url: observability_pipelines/packs/aviatrix_gateway_network_stats/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_aviatrix_gateway_network_stats
-      weight: 514
-    - name: Aviatrix Gateway System Stats
-      url: observability_pipelines/packs/aviatrix_gateway_system_stats/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_aviatrix_gateway_system_stats
-      weight: 515
-    - name: Aviatrix L4 Microsegmentation
-      url: observability_pipelines/packs/aviatrix_l4_microsegmentation/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_aviatrix_l4_microsegmentation
-      weight: 516
-    - name: Aviatrix L7/TLS Inspection
-      url: observability_pipelines/packs/aviatrix_l7_tls_inspection/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_aviatrix_l7_tls_inspection
-      weight: 517
-    - name: Aviatrix Suricata IDS/IPS
-      url: observability_pipelines/packs/aviatrix_suricata_ids_ips/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_aviatrix_suricata_ids_ips
-      weight: 518
-    - name: Aviatrix Tunnel Status
-      url: observability_pipelines/packs/aviatrix_tunnel_status/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_aviatrix_tunnel_status
-      weight: 519
-    - name: Aviatrix VPN Session
-      url: observability_pipelines/packs/aviatrix_vpn_session/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_aviatrix_vpn_session
-      weight: 520
-    - name: AWS Application Load Balancer Logs
-      url: observability_pipelines/packs/aws_alb/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_aws_alb
-      weight: 521
     - name: Amazon CloudFront
       url: observability_pipelines/packs/amazon_cloudfront/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_amazon_cloudfront
+      weight: 508
+    - name: Amazon Connect
+      url: observability_pipelines/packs/amazon_connect/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_amazon_connect
+      weight: 509
+    - name: Amazon VPC Flow Logs
+      url: observability_pipelines/packs/amazon_vpc_flow_logs/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_amazon_vpc_flow_logs
+      weight: 510
+    - name: Argo CD
+      url: observability_pipelines/packs/argo_cd/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_argo_cd
+      weight: 511
+    - name: Auth0
+      url: observability_pipelines/packs/auth0/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_auth0
+      weight: 512
+    - name: Aviatrix Controller API Audit
+      url: observability_pipelines/packs/aviatrix_controller_api_audit/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_controller_api_audit
+      weight: 513
+    - name: Aviatrix FQDN Firewall
+      url: observability_pipelines/packs/aviatrix_fqdn_firewall/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_fqdn_firewall
+      weight: 514
+    - name: Aviatrix Gateway Network Stats
+      url: observability_pipelines/packs/aviatrix_gateway_network_stats/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_gateway_network_stats
+      weight: 515
+    - name: Aviatrix Gateway System Stats
+      url: observability_pipelines/packs/aviatrix_gateway_system_stats/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_gateway_system_stats
+      weight: 516
+    - name: Aviatrix L4 Microsegmentation
+      url: observability_pipelines/packs/aviatrix_l4_microsegmentation/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_l4_microsegmentation
+      weight: 517
+    - name: Aviatrix L7/TLS Inspection
+      url: observability_pipelines/packs/aviatrix_l7_tls_inspection/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_l7_tls_inspection
+      weight: 518
+    - name: Aviatrix Suricata IDS/IPS
+      url: observability_pipelines/packs/aviatrix_suricata_ids_ips/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_suricata_ids_ips
+      weight: 519
+    - name: Aviatrix Tunnel Status
+      url: observability_pipelines/packs/aviatrix_tunnel_status/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_tunnel_status
+      weight: 520
+    - name: Aviatrix VPN Session
+      url: observability_pipelines/packs/aviatrix_vpn_session/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aviatrix_vpn_session
+      weight: 521
+    - name: AWS Application Load Balancer Logs
+      url: observability_pipelines/packs/aws_alb/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aws_alb
       weight: 522
     - name: AWS CloudTrail
       url: observability_pipelines/packs/aws_cloudtrail/
