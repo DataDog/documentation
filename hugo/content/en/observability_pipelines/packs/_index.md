@@ -464,12 +464,6 @@ Packs help teams:
 - **Maintain consistency** in parsing and field mapping across environments and destinations
 - **Accelerate setup** by applying ready-to-use configurations for common sources
 
-## Available packs
-
-Search or filter the table by source or destination. Select a pack name for details.
-
-{{< multifilter-search >}}
-
 ## Setup
 
 To set up packs:
@@ -486,6 +480,12 @@ To set up packs:
         1. Click {{< ui >}}Add to Existing Pipeline{{< /ui >}}.
             1. The pack is added to the last processor group in your pipeline.
             1. Click on the group to review the individual processors and edit them as needed. See [Processors][2] for more information.
+
+## Available packs
+
+Search or filter the table by source or destination. Select a pack name for details.
+
+{{< multifilter-search >}}
 
 ## Further reading
 
