@@ -539,6 +539,54 @@ You can:
 - View aggregate results in the Agent Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression
 
+### Evaluation Traces table (Health tab)
+
+The **Health** tab of a published custom LLM-as-a-judge evaluation includes an **Evaluation Traces** table at the bottom of the page. This table shows one row per individual LLM-as-Judge run, so you can inspect, search, and debug each evaluation run directly without leaving the Health tab.
+
+Each row in the table contains the following columns:
+
+| Column | Description |
+|---|---|
+| **Status** | Blank for successful runs; a red error icon on failure. Hover over the icon to see the error message. |
+| **Evaluated At** | Timestamp of when the judge ran. |
+| **Evaluated** | The name (or ID) of the span, trace, or session that was judged. |
+| **Result** | Pass/fail pill with the evaluation value; a **View JSON** link for JSON-type evaluations. |
+| **Duration** | How long the judge LLM call took. |
+| **Total Tokens** | Total token count for the judge run. |
+| **Cost** | Estimated cost of the judge run. |
+
+The following columns are hidden by default and can be toggled through the **Columns** menu in the table toolbar:
+
+- **Input** (input token count)
+- **Output** (output token count)
+- **Model** (model name and provider badge)
+
+#### Filtering and searching
+
+Above the table, use the following controls to narrow results:
+
+- **Search bar**: Filter by facets or free-text queries using Datadog query syntax (for example, `@meta.metadata.assessment:fail`).
+- **Status** toggle: Filter to **All**, **OK**, or **Errors**.
+- **Pass/Fail** toggle: Filter to **All**, **Pass**, or **Fail** assessments.
+- **Category** dropdown (categorical evaluations only): Appears once category values have loaded; filter to a specific categorical result value.
+
+All filters apply server-side over the full time range, so paging and sorting reflect the full filtered result set.
+
+#### Sorting
+
+Click any sortable column header (Evaluated At, Status, Duration, Total Tokens, Cost, Input, Output) to sort the full result set server-side. Sorting is performed over the complete time window, not only the loaded page.
+
+#### Inspecting individual judge runs
+
+Click any row to open that judge run's trace in a side panel. From there you can review the full judge span, including the input sent to the judge LLM, the structured output, the reasoning (if enabled), and links to the evaluated span, trace, or session.
+
+For JSON-type evaluations, click **View JSON** in the **Result** column to open a formatted JSON viewer side panel.
+
+#### Empty and error states
+
+- If no judge runs match the active filters and time range, the table shows a descriptive empty-state message explaining which filters are active.
+- If the table fails to load or takes longer than expected, an error or "still loading" message appears with a **Retry** button.
+
 ## Using in experiments
 
 To reuse a custom LLM-as-a-judge evaluation in a local [LLM Experiment][8], reference it by name using `RemoteEvaluator` from the SDK:
