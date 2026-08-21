@@ -1,5 +1,5 @@
 ---
-title: Funnel Analysis
+title: Funnel
 disable_toc: false
 aliases:
 - /real_user_monitoring/funnel_analysis

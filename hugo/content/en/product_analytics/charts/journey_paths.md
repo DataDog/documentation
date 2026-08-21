@@ -1,5 +1,5 @@
 ---
-title: Journey Paths Analysis
+title: Journey Paths
 description: See the most common paths users take between two events, including paths for sessions that dropped off before reaching the second event.
 ---
 
