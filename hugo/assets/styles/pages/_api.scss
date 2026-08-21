@@ -1,6 +1,81 @@
 // API
 $ddpurple: #632ca6;
+// Keep the per-operation selector aligned with the method and path it controls.
+.api-operation-request-line {
+    gap: 1rem;
 
+    .api-url-info {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+}
+
+.api-version-block {
+    flex: 0 0 auto;
+}
+
+.api-version-selector {
+    .dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding-right: 10px;
+        font-weight: 400;
+        border-bottom: none !important;
+    }
+}
+
+.api-version-selector.language-region-select-container {
+    .btn {
+        width: auto;
+        min-width: 220px;
+    }
+
+    .dropdown-menu {
+        width: max-content;
+        min-width: 260px;
+    }
+}
+
+.api-version-item-meta {
+    color: $gray;
+    font-size: 14px;
+}
+
+.api-version-check {
+    margin-left: auto;
+}
+
+.api-version-lifecycle {
+    margin-left: 0.5rem;
+    font-size: 14px;
+}
+
+.api-version-menu-notice {
+    max-width: 300px;
+    white-space: normal;
+}
+// Schema field annotations communicate changes between adjacent API versions.
+.schema-change-marker {
+    margin-left: 0.375rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.schema-change-marker-new {
+    color: $brand-success;
+}
+
+.schema-change-marker-removed {
+    color: $gray;
+}
+
+.row.isRemoved {
+    > .first-column > .table-row > .key,
+    .table-row .key {
+        text-decoration: line-through;
+    }
+}
 // Both endpoint and category pages: flush right alongside the h1.
 .main-api .api-copy-btn,
 .api-intro-header .api-copy-btn {

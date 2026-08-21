@@ -1,0 +1,21 @@
+{{/* Render an SDK example variant for every supported date-based API version. */}}
+{{ $body := .body }}
+{{ $lang := .lang }}
+{{ $operationId := .operationId }}
+{{ $apiMajorVersion := .apiMajorVersion }}
+{{ $isDateVersioned := .isDateVersioned | default false }}
+{{ $apiVersionsList := .apiVersionsList | default slice }}
+{{ $baseVersion := .baseVersion | default "" }}
+
+{{ if and $isDateVersioned (gt (len $apiVersionsList) 0) }}
+  {{ range $apiVersionsList }}
+    {{ $versionedBody := partial "api/version-code-namespace.html" (dict "body" $body "language" $lang.name "apiMajorVersion" $apiMajorVersion "date" .date) }}
+    <div class="api-versioned-pane api-versioned-code-pane {{ if ne .date $baseVersion }}d-none{{ end }}"
+         data-api-date-version="{{ .date }}"
+         data-operation-id="{{ $operationId }}">
+      {{ highlight $versionedBody $lang.syntax "" }}
+    </div>
+  {{ end }}
+{{ else }}
+  {{ highlight $body $lang.syntax "" }}
+{{ end }}
