@@ -32,7 +32,7 @@ Clone a default rule when you want to modify an existing check, evaluate the sam
 
    Draft rules don't run in scans. To publish a draft later, open it from the IaC Rules page and publish it.
 
-By default, published rules run in subsequent IaC scans where the specified platform applies. To refine how rules are applied, see the [IaC Security configuration][5].
+By default, published rules run in subsequent IaC scans where the specified platform applies. To refine how rules are applied, see [IaC Security Configuration][5].
 
 ## Create a rule from scratch
 
@@ -154,7 +154,7 @@ Set `versioning_configuration.status` to `Enabled`.
 - Click {{< ui >}}Save as draft{{< /ui >}} to save the rule without publishing it. Draft rules don't run in scans. To publish a draft later, open it from the IaC Rules page and publish it.
 - Click {{< ui >}}Save and publish{{< /ui >}} to publish the rule immediately.
 
-By default, published rules run in subsequent IaC scans where the specified platform applies. To refine how rules are applied, see the [IaC Security configuration][5].
+By default, published rules run in subsequent IaC scans where the specified platform applies. To refine how rules are applied, see [IaC Security Configuration][5].
 
 ## Rule revisions
 
