@@ -205,7 +205,7 @@ In Statsig, checking a gate automatically logs an exposure.
 
 In Datadog, flag telemetry falls into two categories:
 
-**Exposure logging** records that a subject received a specific flag variant. Each exposure event includes the flag key, variant served, and evaluation context. Use exposure data to analyze experiment results and feature adoption.
+**Exposure logging** records that a subject received a specific flag variant, variant served, and evaluation served. Use exposure data to analyze experiment results and feature adoption.
 
 **Evaluation logging** records how often each variant is returned. Client SDKs send aggregated evaluation counts by default. Server SDKs emit the `feature_flag.evaluations` metric only after you enable evaluation logging.
 
