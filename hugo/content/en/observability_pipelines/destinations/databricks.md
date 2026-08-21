@@ -1,5 +1,6 @@
 ---
 title: Databricks (Zerobus) Destination
+description: Learn how to send logs to a Databricks Unity Catalog table using the Databricks (Zerobus) destination.
 disable_toc: false
 products:
 - name: Logs

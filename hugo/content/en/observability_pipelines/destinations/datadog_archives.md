@@ -1,5 +1,6 @@
 ---
 title: Datadog Archives Destination
+description: Learn how to send logs to Amazon S3 in Datadog-rehydratable format for archiving and rehydration.
 disable_toc: false
 products:
 - name: Logs
@@ -83,7 +84,21 @@ If you already have Datadog Log Archives configured, skip to [Set up the destina
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% observability_pipelines/configure_log_archive/amazon_s3/connect_s3_to_datadog_log_archives %}}
+### Connect the S3 bucket to Datadog Log Archives
+
+1. Navigate to Datadog [Log Forwarding][17].
+1. Click **New archive**.
+1. Enter a descriptive archive name.
+1. Add a query that filters out all logs going through log pipelines so that none of those logs go into this archive. For example, add the query `observability_pipelines_read_only_archive`, assuming no logs going through the pipeline have that tag added.
+1. Select **AWS S3**.
+1. Select the AWS account that your bucket is in.
+1. Enter the name of the S3 bucket.
+1. Optionally, enter a path.
+1. Check the confirmation statement.
+1. Optionally, add tags and define the maximum scan size for rehydration. See [Advanced settings][18] for more information.
+1. Click **Save**.
+
+See the [Log Archives documentation][1] for additional information.
 
 ## Set up the destination for your pipeline
 
@@ -199,3 +214,5 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [14]: /api/latest/observability-pipelines/
 [16]: /logs/explorer/archive_search/
 [15]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[17]: https://app.datadoghq.com/logs/pipelines/log-forwarding
+[18]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
