@@ -45,6 +45,8 @@ Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Analyze{{< /ui >}}][2] 
 
 To see the tags for one provider, select it from the {{< ui >}}Provider{{< /ui >}} dropdown menu in the top left corner. Use the {{< ui >}}Tag Sources{{< /ui >}} panel to narrow the results further by where each tag originates.
 
+{{< img src="cloud_cost/tag_explorer/dropdown_2.png" alt="The Provider dropdown menu open on the Tags tab, next to the Month, Cost Type, and Allocations Enabled filters" style="width:100%;" >}}
+
 Tags are available for the following providers:
 
 - AWS
