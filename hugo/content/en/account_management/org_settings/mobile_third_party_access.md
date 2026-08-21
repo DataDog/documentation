@@ -49,15 +49,24 @@ Revoking a user's OAuth access to an application removes all access to that appl
 
 ### Application Scope Management
 
-Enable Application Scope Management to modify the allowed scopes for an application. Adding or removing a scope affects access to this application for all users in your organization. Disabling a scope revokes any existing authorizations for applications that have the scope granted.
+Enable Application Scope Management to modify the allowed scopes for an application. Application Scope Management is available for the Datadog Mobile App and MCP applications.
 
-Only MCP applications support Application Scope Management.
+Adding or removing a scope affects access to the application for all users in your organization. Disabling a scope revokes existing authorizations that include the scope. Affected users must re-authorize the application to regain access with the remaining allowed scopes.
+
+Use {{< ui >}}Automatically allow new scopes{{< /ui >}} to control how Application Scope Management handles scopes that the application requests in the future:
+
+- When selected, future scopes are allowed without an administrator updating the configuration. Only scopes that you disable remain blocked.
+- When cleared, future scopes are disabled until an administrator allows them.
+
+For the Datadog Mobile App, required scopes are always allowed and cannot be disabled.
 
 1. On the {{< ui >}}Mobile and Third-Party Access{{< /ui >}} page, click an application to open its detail view.
 
 2. Select the {{< ui >}}Scopes{{< /ui >}} tab and use the {{< ui >}}Allowed{{< /ui >}} checkbox for each scope to control whether to grant the application that scope.
 
-3. Click {{< ui >}}Enable{{< /ui >}} to save the scope configuration.
+3. Select or clear {{< ui >}}Automatically allow new scopes{{< /ui >}} to choose how to handle future scopes.
+
+4. Click {{< ui >}}Enable{{< /ui >}} or {{< ui >}}Save{{< /ui >}} to save the scope configuration.
 
 {{< img src="account_management/mobile_third_party_access/scope-restrictions-enable.png" alt="Application Scope Management view with Enable and Restore to Full Access buttons" style="width:100%;">}}
 
