@@ -41,12 +41,12 @@ To set up the filter processor:
 For metrics pipelines, you can search for and {{< tooltip text="filter out custom metrics" tooltip="Contact your account manager to request access." >}} that have not been queried in the selected time frame.
 
 1. In the Filter processor, click {{< ui >}}Select Unused Metrics to Filter{{< /ui >}}.
-1. Select the time frame in the dropdown menu to check metric queries against. For example, if you select `90d`, the Observability Pipelines Worker looks for metrics that have not been queried in the last 90 days.
-1. In the {{< ui >}}Asset usage{{< /ui >}} dropdown menu, select whether to find metrics used in assets, such as dashboards and monitors.
+1. Select the time frame in the dropdown menu to check metric queries against (**30**, **60**, **90**, **120**, **150**, or **180** days). For example, if you select `**90d**, the Observability Pipelines Worker looks for metrics that have not been queried in the last 90 days.
+1. In the {{< ui >}}Asset usage{{< /ui >}} dropdown menu, select whether to find metrics used in assets, such as dashboards, monitors, or notebooks.
 1. In the list of metrics found:
     - Check the {{< ui >}}Vol/Mo{{< /ui >}} column to see the metric's monthly ingested volume for the entire organization. **Note**: This volume reflects usage across your entire organization, not just this pipeline.
     - Check the {{< ui >}}Origin{{< /ui >}} column to see which product sent the custom metric.
-    - In the {{< ui >}}Asset usage{{< /ui >}} column, hover over the asset usage total for a metric to see which assets are using that metric. Click on an asset to go to that asset.
+    - In the {{< ui >}}Asset usage{{< /ui >}} column, hover over the asset usage total for a metric to see which assets are using that metric. Click on an asset to go to that asset, such as a dashboard, monitor, or notebook.
     - In the search bar, enter a metric name to find it in the list.
 1. Select the custom metrics in the list to filter them out. The selected metrics are added to the {{< ui >}}Filter query{{< /ui >}} field. You can also manually update and add to the filter query.
 1. Click {{< ui >}}Save Filters{{< /ui >}}.
