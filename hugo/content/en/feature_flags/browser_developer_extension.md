@@ -15,6 +15,8 @@ further_reading:
 
 ## Overview
 
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
+
 The [Datadog Browser SDK developer extension][1] for Chrome includes a **Feature Flags** tab. The tab lists your organization's feature flags and lets you override them locally in your browser. Use it to see how your application behaves under different flag values, without changing flag configuration in Datadog.
 
 Overrides apply only to your browser. They are never sent to Datadog and don't affect other users.
@@ -28,7 +30,7 @@ The extension includes other tabs for inspecting Browser SDK behavior. This page
 Before you begin, you need:
 
 - Google Chrome.
-- Access to feature flags in a Datadog organization on the US1 site (`datadoghq.com`). Other [Datadog sites][2] are not supported.
+- Access to feature flags in a Datadog organization on a commercial [Datadog site][2]: US1 (`datadoghq.com`), US3 (`us3.datadoghq.com`), US5 (`us5.datadoghq.com`), EU1 (`datadoghq.eu`), AP1 (`ap1.datadoghq.com`), or AP2 (`ap2.datadoghq.com`). Datadog for Government sites are not supported.
 - A browser application instrumented with the [Datadog Feature Flags SDK for JavaScript][3].
 - The `DatadogDevtools` wrapper composed into your OpenFeature provider stack. See [Add the DatadogDevtools wrapper](#add-the-datadogdevtools-wrapper).
 
@@ -49,12 +51,14 @@ import { OpenFeature } from '@openfeature/web-sdk';
 const provider = new DatadogProvider({
   applicationId: '<APPLICATION_ID>',
   clientToken: '<CLIENT_TOKEN>',
-  site: 'datadoghq.com',
+  site: '<DATADOG_SITE>',
   env: '<ENV_NAME>',
 });
 
 await OpenFeature.setProviderAndWait(new DatadogDevtools(provider));
 {{< /code-block >}}
+
+Set `site` to the [Datadog site][2] your organization uses.
 
 The wrapper accepts any OpenFeature provider, so you can also use it over an `InMemoryProvider` in a local development build. If your application registers providers for multiple domains, wrap each one.
 
@@ -79,7 +83,7 @@ An override whose value doesn't match its declared type is ignored, and the wrap
 2. Open Chrome DevTools (`Cmd+Opt+I` on Mac, `F12` on Windows or Linux).
 3. Select the **Browser SDK** panel. If you don't see it, select the overflow menu (`»`) in the DevTools tab bar.
 4. Select the **Feature Flags** tab.
-5. Choose your Datadog site, then click **Sign in to Datadog**.
+5. Select your Datadog site from the dropdown, then click **Sign in to Datadog**. Select the site before you sign in: it determines which Datadog organization the sign-in and the flag list come from.
 
 {{< img src="feature_flags/devtools_extension/flags-tab-connect.png" alt="The Feature Flags tab sign-in screen, showing the Datadog site dropdown set to US1 and the Sign in to Datadog button." style="width:100%;" >}}
 
@@ -105,7 +109,14 @@ To override a flag from the list, click one of its variant buttons.
 
 To set a value that isn't defined as a variant, expand **Add a custom override**. Enter the flag key, select the value type, and enter the value. Applying a key that already has an override replaces the existing value. A value that doesn't match the flag's type is rejected.
 
-Overridden flags move into a highlighted **Local overrides** section at the top of the list, which shows how many are active. The selected variant is highlighted, and each row has a revert control to remove that single override. To remove every override at once, click **Clear all** at the bottom of the tab.
+Overridden flags move into a highlighted **Local overrides** section at the top of the list, which shows how many are active. The selected variant is highlighted, and each row has a revert control to remove that single override. To remove overrides in bulk, click **Clear all** at the bottom of the tab. See [Clear all overrides](#clear-all-overrides).
+
+An override row can also carry a warning:
+
+| Warning | Description |
+| --- | --- |
+| Row highlighted in red | The stored override's type doesn't match the flag's type, so the override doesn't apply. Type-mismatched overrides are ignored when the provider initializes and logged as a browser console warning; the tab surfaces the mismatch before you reload. |
+| Dimmed note under the flag key | The flag is no longer in your organization's flag catalog, because it was archived or deleted after the override was set. The override still resolves. The note is informational. |
 
 {{< img src="feature_flags/devtools_extension/flags-tab-local-overrides.png" alt="The Feature Flags tab with two active overrides highlighted in a Local overrides section at the top of the list, above the Clear all and Refresh Page buttons." style="width:100%;" >}}
 
@@ -115,9 +126,26 @@ Overrides are saved as soon as you set them, but `DatadogDevtools` reads them on
 
 ## Manage overrides
 
-Overrides persist independently of your Datadog sign-in. Signing out, closing DevTools, and restarting your browser all leave them in place. When a page has overrides and you are signed out, the connect screen shows how many are active.
+Overrides persist independently of your Datadog sign-in. Signing out, closing DevTools, and restarting your browser all leave them in place. When a page has overrides and you are signed out, the connect screen shows how many overrides are stored for the page. It also offers **Clear all**, so that you can remove them without signing in.
 
 Revert individual overrides or click **Clear all** when you finish testing, then refresh the page so that your application resolves flags from Datadog again.
+
+### Overrides are scoped to a Datadog site
+
+Overrides are stored separately for each Datadog site. An override you set while connected to one site doesn't apply while you are connected to another.
+
+Selecting a different site in the dropdown changes which overrides apply. The tab shows a **Reload to apply `<SITE>`'s overrides** banner: the page keeps using the overrides it loaded with until you reload it. Selecting the original site again restores that site's overrides. Switching sites doesn't delete any overrides.
+
+### Clear all overrides
+
+**Clear all** removes overrides in bulk and asks you to confirm first. What it removes depends on whether you are signed in:
+
+| State | Scope |
+| --- | --- |
+| Signed in | Removes the overrides for the connected site only. Other sites' overrides are left in place. |
+| Signed out | Removes every site's overrides, because there is no connected site to scope the action to. The confirmation message states this. |
+
+After you clear overrides, the tab prompts you to reload. The page keeps applying the cleared overrides until you do.
 
 ## Further reading
 
