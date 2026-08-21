@@ -115,12 +115,13 @@ The **GitLab** tab consolidates your personal action items from GitHub, displayi
 
 Each merge request includes: 
 
-- **Project and MR number**
-- **Title**
-- **Status**
-- **Pipeline status**
-- **Assignee / Reviewer**
-- **Last Updated timestamp**
+- **Title and MR number**, with the author who opened it
+- **Project or repository context** and **labels**
+- **Status** (for example, Open, Draft, or Merged)
+- **Pipeline status**, including pipeline failures and other merge blockers
+- **Reviewers, approvers, and review state**
+- **Comment counts**, including resolved and unresolved discussion counts
+- **Age**, shown as the time since the last update
 
 Like GitHub, this tab requires two setup steps, in order: an administrator connects the GitLab integration for the organization, and each user signs in with their own GitLab account. After you authorize access, the tab loads your merge requests, grouped by status. 
 
