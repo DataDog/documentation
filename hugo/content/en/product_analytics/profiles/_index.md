@@ -5,6 +5,9 @@ further_reading:
 - link: "/product_analytics/"
   tag: "Documentation"
   text: "Product Analytics"
+- link: "https://www.datadoghq.com/blog/product-analytics-account-segments/"
+  tag: "Blog"
+  text: "Investigate account-level churn risk with Product Analytics account segments"
 ---
 
 ## Overview

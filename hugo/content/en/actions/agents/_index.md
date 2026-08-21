@@ -20,6 +20,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/bits-agent-builder/"
   tag: "Blog"
   text: "Introducing Bits Agent Builder: Build agentic workflows for alert response and remediation"
+- link: "https://www.datadoghq.com/blog/work-management/"
+  tag: "Blog"
+  text: "Centralize human and agentic work with Datadog Work Management"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Work Management integration is in Preview" >}}
