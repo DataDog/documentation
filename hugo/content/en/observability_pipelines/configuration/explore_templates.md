@@ -83,7 +83,7 @@ To help you manage the quality and volume of your metrics, use the Metric Tag Go
 
 ### Trace Sampling
 
-Use the Trace Sampling template to ingest, process, and route your traces ({{< tooltip text="in Preview" tooltip="Traces Pipeline is in Preview. Contact your account manager to request access." >}}) telemetry data to control costs while retaining the traces you need for troubleshooting and analysis.
+Use the Trace Sampling template to ingest, process, and route your traces telemetry data to control costs while retaining the traces you need for troubleshooting and analysis.
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -127,7 +127,7 @@ See [Metric Types][3] for more information.
 
 <div class="alert alert-info">Traces Pipeline is in Preview. Contact your account manager to request access.</div>
 
-You can ingest, process, and send traces ({{< tooltip text="in Preview" tooltip="Traces Pipeline is in Preview. Contact your account manager to request access." >}}) to different destinations using the [Trace Sampling][1] template.
+You can ingest, process, and send traces to different destinations using the [Trace Sampling][1] template.
 
 See [Set Up Pipelines][2] for more information on setting up a source, processors, and destinations.
 
