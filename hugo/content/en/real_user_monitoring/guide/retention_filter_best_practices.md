@@ -99,7 +99,9 @@ A fallback filter at the bottom of your list captures a small percentage of sess
 
 ### Excluding sessions
 
-See [Excluding sessions using retention filters][3].
+To keep a single filter from matching a subset of events, add the exclusion inside that filter's query. See [Excluding sessions using retention filters][3].
+
+To exclude events across all of your custom retention filters at once, without repeating the same exclusion in every query, use [exclusion filters][4] instead.
 
 ## Suggested retention filters and use cases
 Below we describe the set of default filters, suggested filters, and their typical use cases.
@@ -126,5 +128,6 @@ Below we describe the set of default filters, suggested filters, and their typic
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/
-[2]: /real_user_monitoring/rum_without_limits/retention_filters/#logic
+[2]: /real_user_monitoring/rum_without_limits/retention_filters/#how-it-works
 [3]: /real_user_monitoring/rum_without_limits/retention_filters#excluding-sessions-using-retention-filters
+[4]: /real_user_monitoring/rum_without_limits/retention_filters#exclusion-filters
