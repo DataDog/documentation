@@ -21,7 +21,7 @@ products:
 
 ## Overview
 
-Generating metrics from your high-volume logs or spans is a cost-effective way to summarize data, including:
+Generating metrics from your high-volume logs or spans ({{< tooltip text="in Preview" tooltip="Traces Pipeline is in Preview. Contact your account manager to request access." >}}) is a cost-effective way to summarize data, including:
 
 - Logs such as CDN logs, VPC flow logs, firewall logs, and network logs
 - Traces from complex production applications
