@@ -5,16 +5,9 @@ algolia:
   tags: ['iac security', 'infrastructure as code', 'custom rule', 'rego']
 ---
 
-Create custom security rules to enforce requirements specific to your organization. Custom rules use [Rego][1], the policy language from Open Policy Agent (OPA), and run alongside default Datadog rules during IaC scans.
+Create custom security rules to enforce requirements specific to your organization.
 
-<!-- REVIEW-Q: What role or permission does a user need to create and publish a
-     custom rule? Is the rule editor available on all IaC Security plans? If you
-     confirm, I'll add a prerequisites line here. -->
-
-<!-- REVIEW-Q: This page uses "rule" and "policy" for what look like two
-     different things (the rule object vs. the Rego block inside it). Is that the
-     UI's own distinction? If so, worth stating once here so the tutorial's
-     "save the rule" / "the policy reports no findings" reads intentionally. -->
+Custom rules use [Rego][1], the policy language from Open Policy Agent (OPA), and run alongside default Datadog rules during IaC scans. The *rule* is the saved object (metadata, sample, description), while the *policy* is the Rego block evaluated in the editor.
 
 Custom rules are available for these platforms:
 
@@ -25,11 +18,9 @@ Custom rules are available for these platforms:
 - Kubernetes
 - Terraform
 
-For details about rule contract, parsed inputs, and platform-specific patterns, see the [IaC Custom Rule Reference][2].
+Creating, editing, or publishing custom rules requires the `appsec_vm_write` permission. For more information, see [Role Based Access Control][6]. For details about rule contract, parsed inputs, and platform-specific patterns, see the [IaC Custom Rule Reference][2].
 
 There are two options for creating custom rules: cloning an existing rule or creating a rule from scratch.
-
-Updating a rule creates a revision. You can review previous revisions and restore an earlier version from the rule's details panel. <!--REVIEW-Q: Is this a third option? Not sure how this aside fits in.-->
 
 ## Clone an existing rule
 
@@ -37,9 +28,11 @@ Clone a default rule when you want to modify an existing check, evaluate the sam
 
 1. On the IaC Rules page, find a default or custom rule for the same platform and resource type and select {{< ui >}}Clone{{< /ui >}} from the rule's actions menu.
 1. Update the copied metadata, policy, sample file, and description.
-1. Save the rule as a draft or publish it.
+1. Click {{< ui >}}Save as draft{{< /ui >}} to save the rule without publishing it, or click {{< ui >}}Save and publish{{< /ui >}} to publish the rule immediately.
 
-   Only published rules run in IaC scans.
+   Draft rules don't run in scans. To publish a draft later, open it from the IaC Rules page and publish it.
+
+Published rules run in subsequent IaC scans where the specified platform applies. To limit scans to specific rule IDs or to exclude a rule, use `use-rules` or `ignore-rules` in the [IaC Security configuration][5].
 
 ## Create a rule from scratch
 
@@ -91,7 +84,7 @@ The detection condition is the expression that must be true for the rule to repo
 versioning.versioning_configuration.status == "Suspended"
 ```
 
-If the status field is missing, the rule does not report a finding. See [Parsed input][3] for details.
+If the status field is missing, the rule doesn't report a finding. See [Parsed input][3] for details.
 
 ### Build the finding
 
@@ -135,16 +128,16 @@ DatadogPolicy contains result if {
 ### Test the rule
 
 1. Click {{< ui >}}Run{{< /ui >}}.
-2. Confirm that the editor reports one finding on the `status` attribute.
-3. Change `status` in the sample from `Suspended` to `Enabled`.
-4. Click {{< ui >}}Run{{< /ui >}} and confirm that the policy reports no findings.
-5. Restore `status` to `Suspended` and run the policy again before saving the example.
+1. Confirm that the editor reports one finding on the `status` attribute.
+1. Change `status` in the sample from `Suspended` to `Enabled`.
+1. Click {{< ui >}}Run{{< /ui >}} and confirm that the policy reports no findings.
+1. Restore `status` to `Suspended` and run the policy again before saving the example.
 
 If the editor reports an error instead of an evaluation result, see [Validation][4].
 
-### Describe and save the rule
+### Describe the rule
 
-Under {{< ui >}}Say what's happening{{< /ui >}}, add:
+Use the {{< ui >}}Say what's happening{{< /ui >}} field to provide a description and remediation advice, for example:
 
 ```markdown
 ## Description
@@ -156,12 +149,24 @@ Suspending S3 bucket versioning prevents new object versions from being created 
 Set `versioning_configuration.status` to `Enabled`.
 ```
 
-Click {{< ui >}}Save as draft{{< /ui >}} to review the rule, or click {{< ui >}}Save and publish{{< /ui >}} to enable it for subsequent scans.
+### Save the rule
+
+- Click {{< ui >}}Save as draft{{< /ui >}} to save the rule without publishing it. Draft rules don't run in scans. To publish a draft later, open it from the IaC Rules page and publish it.
+- Click {{< ui >}}Save and publish{{< /ui >}} to publish the rule immediately.
 
 Published rules run in subsequent IaC scans where the specified platform applies. To limit scans to specific rule IDs or to exclude a rule, use `use-rules` or `ignore-rules` in the [IaC Security configuration][5].
+
+## Rule revisions
+
+Editing a rule creates a new revision. From the rule's details panel, you can:
+
+- Review the rule's revision history.
+- Compare any two revisions to see what changed.
+- Restore an earlier revision to make it the rule's current state.
 
 [1]: https://www.openpolicyagent.org/docs/policy-language
 [2]: /security/code_security/iac_security/custom_rules/guide/
 [3]: /security/code_security/iac_security/custom_rules/guide/#parsed-input
 [4]: /security/code_security/iac_security/custom_rules/guide/#validation
 [5]: /security/code_security/iac_security/configuration/#rule-configuration
+[6]: /account_management/rbac/permissions/#cloud-security-platform
