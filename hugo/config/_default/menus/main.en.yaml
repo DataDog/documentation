@@ -1731,11 +1731,16 @@ menu:
       url: dashboards/graph_insights/correlations/
       parent: dashboards_graph_insights
       weight: 601
+    - name: Investigate Anomalies
+      identifier: dashboards_investigate_anomalies
+      url: dashboards/graph_insights/investigate_anomalies/
+      parent: dashboards_graph_insights
+      weight: 602
     - name: Watchdog Explains
       identifier: dashboards_watchdog_explains
       url: dashboards/graph_insights/watchdog_explains/
       parent: dashboards_graph_insights
-      weight: 602
+      weight: 603
     - name: Template Variables
       url: dashboards/template_variables/
       parent: dashboards
@@ -2481,8 +2486,8 @@ menu:
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_linear
       weight: 101
-    - name: Case Management
-      url: error_tracking/ticketing_systems/case_management
+    - name: Work Management
+      url: error_tracking/ticketing_systems/work_management
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_case_management
       weight: 102
@@ -2836,64 +2841,64 @@ menu:
       parent: incident_response_heading
       identifier: status_pages
       weight: 40000
-    - name: Case Management
-      url: incident_response/case_management/
+    - name: Work Management
+      url: incident_response/work_management/
       pre: case-management
       parent: incident_response_heading
       identifier: case_management
       weight: 60000
     - name: Projects
-      url: incident_response/case_management/projects
+      url: incident_response/work_management/projects
       parent: case_management
       identifier: case_management_projects
       weight: 1
     - name: Settings
-      url: incident_response/case_management/settings
+      url: incident_response/work_management/settings
       parent: case_management_projects
       identifier: case_management_settings
       weight: 102
-    - name: Create a Case
-      url: incident_response/case_management/create_case
+    - name: Create a Work Item
+      url: incident_response/work_management/create_work_item
       parent: case_management
       identifier: case_management_create_case
       weight: 2
     - name: Customization
-      url: incident_response/case_management/customization
+      url: incident_response/work_management/customization
       parent: case_management
       identifier: case_management_customization
       weight: 3
-    - name: View and Manage Cases
-      url: incident_response/case_management/view_and_manage
+    - name: View and Manage Work Items
+      url: incident_response/work_management/view_and_manage
       parent: case_management
       identifier: case_management_view_and_manage
       weight: 4
     - name: Notifications and Integrations
-      url: incident_response/case_management/notifications_integrations
+      url: incident_response/work_management/notifications_integrations
       parent: case_management
       identifier: case_management_notifications_and_integrations
       weight: 5
-    - name: Case Automation Rules
-      url: incident_response/case_management/automation_rules
+    - name: Work Item Automation Rules
+      url: incident_response/work_management/automation_rules
       parent: case_management
       identifier: case_management_automation_rules
       weight: 6
-    - name: Case Approvals
-      url: incident_response/case_management/approvals
+    - name: Work Item Approvals
+      url: incident_response/work_management/approvals
       parent: case_management
       identifier: case_management_approvals
       weight: 7
     - name: AI Tools
-      url: incident_response/case_management/ai
+      url: incident_response/work_management/ai
       parent: case_management
       identifier: case_management_ai
       weight: 8
     - name: Custom Agents
-      url: incident_response/case_management/ai/custom_agents
+      url: incident_response/work_management/ai/custom_agents
       parent: case_management_ai
       identifier: case_management_ai_custom_agents
       weight: 801
     - name: Troubleshooting
-      url: incident_response/case_management/troubleshooting
+      url: incident_response/work_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
       weight: 9
@@ -2966,6 +2971,11 @@ menu:
       parent: workflows
       identifier: workflows_limits
       weight: 11
+    - name: MCP Tools
+      url: actions/workflows/mcp_tools/
+      parent: workflows
+      identifier: workflows_mcp_tools
+      weight: 12
     - name: Apps
       url: actions/datadog_apps/
       pre: dev-code
@@ -3307,7 +3317,7 @@ menu:
       parent: containers
       identifier: containers_autoscaling
       weight: 2
-    - name: Cluster 
+    - name: Cluster
       url: containers/autoscaling/cluster
       parent: containers_autoscaling
       identifier: containers_autoscaling_cluster
@@ -3512,41 +3522,51 @@ menu:
       identifier: containers_datadog_operator_configuration
       parent: containers_datadog_operator
       weight: 803
+    - name: Datadog Agent Profiles
+      url: containers/datadog_operator/datadog_agent_profiles
+      identifier: containers_datadog_operator_agent_profiles
+      parent: containers_datadog_operator
+      weight: 804
+    - name: Providers
+      url: containers/datadog_operator/providers
+      identifier: containers_datadog_operator_providers
+      parent: containers_datadog_operator
+      weight: 805
     - name: Custom Checks
       url: containers/datadog_operator/custom_check
       identifier: containers_datadog_operator_customchecks
       parent: containers_datadog_operator
-      weight: 804
+      weight: 806
     - name: Data Collected
       url: containers/datadog_operator/data_collected
       identifier: containers_datadog_operator_datacollected
       parent: containers_datadog_operator
-      weight: 805
+      weight: 807
     - name: Secret Management
       url: containers/datadog_operator/secret_management
       identifier: containers_datadog_operator_secretmanagement
       parent: containers_datadog_operator
-      weight: 806
+      weight: 808
     - name: DatadogDashboard CRD
       url: containers/datadog_operator/crd_dashboard
       identifier: containers_datadog_operator_crd_dashboard
       parent: containers_datadog_operator
-      weight: 807
+      weight: 809
     - name: DatadogGenericResource CRD
       url: containers/datadog_operator/crd_ddgr
       identifier: containers_datadog_operator_crd_ddgr
       parent: containers_datadog_operator
-      weight: 808
+      weight: 810
     - name: DatadogMonitor CRD
       url: containers/datadog_operator/crd_monitor
       identifier: containers_datadog_operator_crd_monitor
       parent: containers_datadog_operator
-      weight: 809
+      weight: 811
     - name: DatadogSLO CRD
       url: containers/datadog_operator/crd_slo
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
-      weight: 810
+      weight: 812
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers
@@ -4242,16 +4262,21 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_recommendations
       weight: 7
-    - name: Cost Optimization Automation
+    - name: Cost Optimization Automations
       url: cloud_cost_management/recommendations/cost_optimization_automation
       parent: cloud_cost_recommendations
       identifier: cloud_cost_optimization_automation
       weight: 700
+    - name: Notifications
+      url: cloud_cost_management/recommendations/notifications
+      parent: cloud_cost_recommendations
+      identifier: cloud_cost_notifications
+      weight: 701
     - name: Custom Recommendations
       url: cloud_cost_management/recommendations/custom_recommendations
       parent: cloud_cost_recommendations
       identifier: cloud_cost_custom_recommendations
-      weight: 701
+      weight: 702
     - name: Planning
       url: cloud_cost_management/planning
       parent: cloud_cost
@@ -5395,6 +5420,11 @@ menu:
       identifier: business_intelligence_integrations
       parent: quality_monitoring
       weight: 300000
+    - name: Hex
+      url: data_observability/quality_monitoring/business_intelligence/hex
+      identifier: business_intelligence_integrations_hex
+      parent: business_intelligence_integrations
+      weight: 250000
     - name: Looker
       url: data_observability/quality_monitoring/business_intelligence/looker
       identifier: business_intelligence_integrations_looker
@@ -6458,56 +6488,66 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_variants
       weight: 302
+    - name: Evaluation Context
+      url: feature_flags/concepts/evaluation_context
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_evaluation_context
+      weight: 303
     - name: Targeting Rules and Filters
       url: feature_flags/concepts/targeting_rules
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_targeting_rules
-      weight: 303
+      weight: 304
     - name: Targeting Attributes
       url: feature_flags/concepts/targeting_attributes
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_targeting_attributes
-      weight: 304
+      weight: 305
     - name: Scheduled Rollouts
       url: feature_flags/concepts/scheduled_rollouts
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_scheduled_rollouts
-      weight: 305
+      weight: 306
     - name: Saved Filters
       url: feature_flags/concepts/saved_filters
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_saved_filters
-      weight: 306
+      weight: 307
     - name: Traffic Splitting and Randomization
       url: feature_flags/concepts/traffic_splitting
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_traffic_splitting
-      weight: 307
+      weight: 308
     - name: Distribution Channels
       url: feature_flags/concepts/distribution_channels
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_distribution_channels
-      weight: 308
+      weight: 309
     - name: Configuration Sources
       url: feature_flags/concepts/configuration_sources
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_configuration_sources
-      weight: 309
+      weight: 310
+    - name: Monthly Flag Configuration Requests
+      url: feature_flags/concepts/monthly_flag_configuration_requests
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_mfcr
+      weight: 311
     - name: Flag History
       url: feature_flags/concepts/flag_history
       parent: feature_flags_concepts
       identifier: feature_flags_history
-      weight: 310
+      weight: 312
     - name: Feature Flag Graphs
       url: feature_flags/concepts/flag_graphs
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
-      weight: 311
+      weight: 313
     - name: Stale Flags
       url: feature_flags/concepts/stale_flags
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
-      weight: 312
+      weight: 314
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
@@ -6558,16 +6598,21 @@ menu:
       parent: feature_flags_implementation_patterns
       identifier: feature_flags_implementation_patterns_serverless
       weight: 502
+    - name: Browser Developer Extension
+      url: feature_flags/browser_developer_extension
+      parent: feature_flags
+      identifier: feature_flags_browser_developer_extension
+      weight: 6
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
       identifier: feature_flags_mcp_server
-      weight: 6
+      weight: 7
     - name: Guides
       url: feature_flags/guide
       parent: feature_flags
       identifier: feature_flags_guide
-      weight: 7
+      weight: 8
     - name: Source Code Integration
       url: source_code/
       pre: dev-code
@@ -7286,16 +7331,21 @@ menu:
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_zscaler_zia_web_logs
       weight: 525
+    - name: Replay
+      url: observability_pipelines/replay/
+      parent: observability_pipelines
+      identifier: observability_pipelines_replay
+      weight: 6
     - name: Search Syntax
       url: observability_pipelines/search_syntax/logs/
       parent: observability_pipelines
       identifier: observability_pipelines_logs_search_syntax
-      weight: 6
+      weight: 7
     - name: Scaling and Performance
       url: observability_pipelines/scaling_and_performance/
       parent: observability_pipelines
       identifier: observability_pipelines_scaling_and_performance
-      weight: 7
+      weight: 8
     - name: Buffering and Backpressure
       url: observability_pipelines/scaling_and_performance/buffering_and_backpressure/
       parent: observability_pipelines_scaling_and_performance
@@ -7310,7 +7360,7 @@ menu:
       url: observability_pipelines/monitoring_and_troubleshooting/
       parent: observability_pipelines
       identifier: observability_pipelines_monitoring_and_troubleshooting
-      weight: 8
+      weight: 9
     - name: Worker CLI Commands
       url: observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
       parent: observability_pipelines_monitoring_and_troubleshooting
@@ -7335,7 +7385,7 @@ menu:
       url: observability_pipelines/guide/
       parent: observability_pipelines
       identifier: observability_pipelines_guide
-      weight: 9
+      weight: 10
     - name: Upgrade Worker Guide
       url: observability_pipelines/guide/upgrade_worker/
       parent: observability_pipelines_guide
@@ -8734,82 +8784,157 @@ menu:
       url: security/workload_protection/setup
       parent: workload_protection
       identifier: workload_protection_setup
-      weight: 100
-    - name: Deploy the Agent
-      url: security/workload_protection/setup/agent
+      weight: 90
+    - name: Docker
+      url: security/workload_protection/setup/docker
       parent: workload_protection_setup
-      identifier: workload_protection_workload_setup_agent
-      weight: 1
-    - name: Workload Protection Agent Variables
-      url: security/workload_protection/setup/agent_variables
+      identifier: workload_protection_setup_docker
+      weight: 10
+    - name: Kubernetes
+      url: security/workload_protection/setup/kubernetes
       parent: workload_protection_setup
-      identifier: workload_protection_agent_variables
-      weight: 2
-    - name: Detection Rules
-      url: security/workload_protection/workload_security_rules
+      identifier: workload_protection_setup_kubernetes
+      weight: 20
+    - name: ECS (EC2 compute)
+      url: security/workload_protection/setup/ecs_ec2
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_ecs_ec2
+      weight: 30
+    - name: Linux
+      url: security/workload_protection/setup/linux_ebpf
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_linux_ebpf
+      weight: 40
+    - name: Fargate
+      url: security/workload_protection/setup/fargate
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_fargate
+      weight: 50
+    - name: Windows
+      url: security/workload_protection/setup/windows
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_windows
+      weight: 70
+    - name: Advanced Configuration
+      url: security/workload_protection/setup/advanced_configuration
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_advanced_configuration
+      weight: 80
+    - name: Detect and Monitor
+      url: security/workload_protection/detect_and_monitor
       parent: workload_protection
-      identifier: workload_protection_workload_security_rules
-      weight: 201
-    - name: OOTB Rules
-      url: /security/workload_protection/setup/ootb_rules
-      parent: workload_protection_workload_security_rules
-      identifier: workload_protection_ootb_rules
-      weight: 100
-    - name: Custom Rules
-      url: security/workload_protection/workload_security_rules/custom_rules
-      parent: workload_protection_workload_security_rules
-      identifier: workload_protection_custom_rules
-      weight: 101
-    - name: Investigate Security Signals
-      url: security/workload_protection/security_signals
-      parent: workload_protection
-      identifier: workload_protection_security_signals
-      weight: 202
-    - name: Investigate Agent Events
-      url: security/workload_protection/investigate_agent_events
-      parent: workload_protection
-      identifier: workload_protection_agent_events
-      weight: 203
-    - name: Creating Agent Rule Expressions
-      url: security/workload_protection/agent_expressions
-      parent: workload_protection
-      identifier: workload_protection_agent_expressions
-      weight: 204
-    - name: Writing Custom Rule Expressions
-      url: security/workload_protection/secl_auth_guide
-      parent: workload_protection_agent_expressions
-      identifier: workload_protection_secl_guide
-      weight: 1
-    - name: Linux Syntax
+      identifier: workload_protection_detect_and_monitor
+      weight: 91
+    - name: Agent Rules
+      url: security/workload_protection/detect_and_monitor/agent_rules
+      parent: workload_protection_detect_and_monitor
+      identifier: workload_protection_detect_and_monitor_agent_rules
+      weight: 10
+    - name: SECL guide
+      url: security/workload_protection/detect_and_monitor/agent_rules/secl_guide
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_secl_guide
+      weight: 10
+    - name: Policy Management
+      url: security/workload_protection/detect_and_monitor/agent_rules/policy_management
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_policy_management
+      weight: 20
+    - name: Variables and actions
+      url: security/workload_protection/detect_and_monitor/agent_rules/variables_and_actions
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_variables_and_actions
+      weight: 30
+    - name: Linux syntax
       url: security/workload_protection/linux_expressions
-      parent: workload_protection_agent_expressions
-      identifier: linux_expressions
-      weight: 2
-    - name: Windows Syntax
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_linux_expressions
+      weight: 40
+    - name: Windows syntax
       url: security/workload_protection/windows_expressions
-      parent: workload_protection_agent_expressions
-      identifier: windows_expressions
-      weight: 3
-    - name: Coverage and Posture Management
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_windows_expressions
+      weight: 50
+    - name: Detection and Finding Rules
+      url: security/workload_protection/detect_and_monitor/detection_and_finding_rules
+      parent: workload_protection_detect_and_monitor
+      identifier: workload_protection_detect_and_monitor_detection_and_finding_rules
+      weight: 20
+    - name: Detection Rules
+      url: security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules
+      parent: workload_protection_detect_and_monitor_detection_and_finding_rules
+      identifier: workload_protection_detect_and_monitor_detection_and_finding_rules_detection_rules
+      weight: 10
+    - name: Finding Rules
+      url: security/workload_protection/detect_and_monitor/detection_and_finding_rules/finding_rules
+      parent: workload_protection_detect_and_monitor_detection_and_finding_rules
+      identifier: workload_protection_detect_and_monitor_detection_and_finding_rules_finding_rules
+      weight: 20
+    - name: Linux Backend Syntax
+      url: security/workload_protection/backend_linux
+      parent: workload_protection_detect_and_monitor_detection_and_finding_rules
+      identifier: workload_protection_detect_and_monitor_detection_and_finding_rules_backend_linux
+      weight: 30
+    - name: Windows Backend Syntax
+      url: security/workload_protection/backend_windows
+      parent: workload_protection_detect_and_monitor_detection_and_finding_rules
+      identifier: workload_protection_detect_and_monitor_detection_and_finding_rules_backend_windows
+      weight: 40
+    - name: Threat Intelligence
+      url: security/workload_protection/detect_and_monitor/threat_intelligence
+      parent: workload_protection_detect_and_monitor
+      identifier: workload_protection_detect_and_monitor_threat_intelligence
+      weight: 40
+    - name: Content Packs
+      url: security/workload_protection/detect_and_monitor/content_packs
+      parent: workload_protection_detect_and_monitor
+      identifier: workload_protection_detect_and_monitor_content_packs
+      weight: 50
+    - name: Investigate and Triage
+      url: security/workload_protection/investigate_and_triage
+      parent: workload_protection
+      identifier: workload_protection_investigate_and_triage
+      weight: 92
+    - name: Agent Events
+      url: security/workload_protection/investigate_and_triage/agent_events
+      parent: workload_protection_investigate_and_triage
+      identifier: workload_protection_investigate_and_triage_agent_events
+      weight: 10
+    - name: Signals
+      url: security/workload_protection/investigate_and_triage/security_signals
+      parent: workload_protection_investigate_and_triage
+      identifier: workload_protection_investigate_and_triage_security_signals
+      weight: 20
+    - name: Investigate Security Signals
+      url: security/workload_protection/investigate_and_triage/security_signals/investigate
+      parent: workload_protection_investigate_and_triage_security_signals
+      identifier: workload_protection_investigate_and_triage_security_signals_investigate
+      weight: 10
+    - name: Triage and Act on Security Signals
+      url: security/workload_protection/investigate_and_triage/security_signals/actions
+      parent: workload_protection_investigate_and_triage_security_signals
+      identifier: workload_protection_investigate_and_triage_security_signals_actions
+      weight: 20
+    - name: Findings
+      url: security/workload_protection/investigate_and_triage/security_findings
+      parent: workload_protection_investigate_and_triage
+      identifier: workload_protection_investigate_and_triage_security_findings
+      weight: 30
+    - name: Respond to Threats
+      url: security/workload_protection/respond_and_report
+      parent: workload_protection
+      identifier: workload_protection_respond_and_report
+      weight: 93
+    - name: Coverage
       url: security/workload_protection/inventory
       parent: workload_protection
       identifier: workload_protection_inventory
       weight: 205
-    - name: Hosts and Containers
-      url: security/workload_protection/inventory/hosts_and_containers
+    - name: Review and Improve Coverage
+      url: security/workload_protection/inventory/review_improve_coverage
       parent: workload_protection_inventory
-      identifier: workload_protection_hosts_and_containers
-      weight: 1
-    - name: Serverless
-      url: security/workload_protection/inventory/serverless
-      parent: workload_protection_inventory
-      identifier: workload_protection_serverless
-      weight: 2
-    - name: Coverage
-      url: security/workload_protection/inventory/coverage_map
-      parent: workload_protection_inventory
-      identifier: workload_protection_coverage_map
-      weight: 3
+      identifier: workload_protection_inventory_review_improve_coverage
+      weight: 10
     - name: Guides
       url: security/workload_protection/guide
       parent: workload_protection
@@ -10374,6 +10499,11 @@ menu:
       parent: organization_settings
       identifier: account_management_org_settings_smtp_configuration
       weight: 309
+    - name: Cross-App Access
+      url: account_management/org_settings/cross_app_access
+      parent: organization_settings
+      identifier: account_management_org_settings_cross_app_access
+      weight: 310
     - name: Access Control
       url: account_management/rbac/
       parent: account_management
@@ -10699,6 +10829,12 @@ menu:
       url: account_management/workload_identity_federation/
       parent: account_management
       weight: 18
+    - name: Disaster Recovery
+      url: disaster_recovery/
+      pre: disaster-recovery-wui
+      identifier: disaster_recovery
+      parent: administration_heading
+      weight: 15000
     - name: Data Security
       url: data_security/
       pre: security-lock
