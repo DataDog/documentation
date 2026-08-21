@@ -143,7 +143,7 @@ docker run \
 Deploy the Helm chart:
 
 ```bash
-helm upgrade --install datadog-par datadog/private-action-runner -f values.yaml
+helm upgrade --install <RELEASE_NAME> datadog/private-action-runner -f values.yaml
 ```
 
 {{% /tab %}}
@@ -208,7 +208,7 @@ services:
 1. Apply the updated values:
 
    ```bash
-   helm upgrade --install datadog-par datadog/private-action-runner -f values.yaml
+   helm upgrade --install <RELEASE_NAME> datadog/private-action-runner -f values.yaml
    ```
 
 {{% /tab %}}
