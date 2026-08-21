@@ -1,7 +1,6 @@
 ---
-title: Private Actions Overview
+title: Private Actions
 description: Allow workflows and apps to interact with private network services using private action runners with secure authentication.
-disable_toc: false
 aliases:
 - service_management/workflows/private_actions/
 - service_management/app_builder/private_actions/
@@ -29,30 +28,43 @@ further_reading:
   text: "How we created a single app to automate repetitive tasks with Datadog Workflow Automation, Datastore, and App Builder"
 ---
 
-Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing them to the public internet. To use private actions, you must install a private action runner on a host in your network and pair the runner with a [connection][1].
+## Overview
 
-The recommended way to install a private action runner is through the [Datadog Agent][2] (version `7.77.0` or later). This method supports Linux, Windows, and Kubernetes environments. Alternatively, you can install the runner as a standalone Docker container or [Kubernetes][3] deployment. See [Use Private Actions][4] for installation instructions.
+Private actions allow you to run actions against services hosted on your private network without exposing them to the public internet. Datadog products that use private actions include Workflow Automation, App Builder, Datadog MCP, and Bits AI investigations.
 
-<div class="alert alert-danger">To install a private action runner, your organization must have <a href="/remote_configuration">Remote Configuration</a> enabled.</div>
+Private actions rely on two layers:
 
-When you first start the runner, it generates a private key for authentication with Datadog's servers. This private key is never accessible by Datadog and ensures you exclusive access. Datadog uses a public key derived from the private key as the means to authenticate specific runners.
+- The **authorization layer** is managed in Datadog. It defines which users and products can run which actions on which runners, and grants or denies each action before it reaches a runner. The actions a runner is allowed to run are also restricted on the Agent side, by the actions allowlist in the Agent configuration (`datadog.yaml`).
+- The **execution layer** is the private action runner. It runs in your network, receives action tasks from Datadog, runs each task against the target service, and returns the result to Datadog.
 
-## How it works
+## Private action runner
 
-The private action runner continuously polls for tasks from your Datadog account, executes them by interacting with your internal service, and reports the result back to Datadog.
+The private action runner is the component you deploy in your environment to run private actions. It opens an outbound connection to Datadog, continuously polls for action tasks, runs each task against your internal service, and reports the result back to Datadog.
 
-{{< img src="actions/private_actions/private_action_runner_-_diagram_workflow.png" alt="Overview diagram illustrating how Private actions work" style="width:90%;" >}}
+<!-- {{< img src="actions/private_actions/private_action_runner_-_diagram_workflow.png" alt="Overview diagram illustrating how Private actions work" style="width:90%;" >}} -->
 
-## Monitor your Private Action Runners with Datadog Metrics
+The private action runner is available in two forms: a standalone runner that you deploy and manage yourself and a runner built into the Datadog Agent.
 
-While setting up your Private Action Runners, you can enable observability metrics to monitor your runners' health and private action usage. These metrics can be used in Datadog products like Dashboards and Monitors. To get started quickly, you can use the provided [out-of-the-box Dashboard][5].
+
+| | Runner in the Datadog Agent | Standalone runner |
+|---|---|---|
+| **What it is** | A component of the Datadog Agent, turned on with a single configuration flag. | A dedicated binary you can install and manage independently of the Datadog Agent. |
+| **Best when** | You already run the Datadog Agent and want to manage the runner through the Agent lifecycle. | You need an integration that is not yet available in the Agent. |
+| **Status** | Recommended for new deployments. | Supported (maintenance mode). |
+
+<div class="alert alert-tip">The recommended path for most users is to run the private action runner in the Datadog Agent.</div>
+
+## Authorization
+
+Private actions are authorized through either Connections or Execution Groups, depending on the runner type and the level of access control you need. The authorization model a runner uses is determined when the runner is enrolled and is based on the runner's ownership. Datadog offers two authorization models:
+
+- **Connections** are available for both the standalone runner and the runner in the Agent. They can be attached to only one runner. A connection can store credentials for a service.
+- **Execution Groups** apply to runners in the Datadog Agent and are built for managing access at scale. Instead of creating a separate connection for each integration on each runner, you use Agent tags to target many runners at once. Execution Groups also give you fine-grained control: you can allow or deny specific actions or sets of actions, and apply integration-specific scopes, such as the target Kubernetes namespaces for a Kubernetes action.
+
+<!-- ## Monitor your Private Action Runners with Datadog Metrics
+
+While setting up your Private Action Runners, you can enable observability metrics to monitor your runners' health and private action usage. These metrics can be used in Datadog products like Dashboards and Monitors. To get started quickly, you can use the provided [out-of-the-box Dashboard][5]. -->
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /actions/connections/
-[2]: /agent/
-[3]: https://github.com/DataDog/helm-charts/tree/main/charts/private-action-runner
-[4]: /actions/private_actions/use_private_actions
-[5]: https://app.datadoghq.com/dash/integration/private_actions_runner
