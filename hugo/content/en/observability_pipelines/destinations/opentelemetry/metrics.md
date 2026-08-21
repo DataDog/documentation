@@ -1,10 +1,13 @@
 ---
-title: OpenTelemetry Metrics Destination
+title: OpenTelemetry Destination
 disable_toc: false
-code_lang: metrics
-type: multi-code-lang
-weight: 1
+products:
+- name: Metrics
+  icon: metrics
+  url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
 ---
+
+{{< product-availability >}}
 
 ## Overview
 
