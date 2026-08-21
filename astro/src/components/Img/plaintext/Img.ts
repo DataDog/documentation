@@ -10,14 +10,12 @@
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import { tag } from "@lib/plaintext/helpers";
+import type { ImgTagProps } from "../imgTypes";
 
-export interface ImgNodeInput {
-  src: string;
-  alt?: string;
-  caption?: string;
-  video?: boolean;
-  inline?: boolean;
-}
+export type ImgNodeInput = Pick<
+  ImgTagProps,
+  "src" | "alt" | "caption" | "video" | "inline"
+>;
 
 export function imgNode({
   src,

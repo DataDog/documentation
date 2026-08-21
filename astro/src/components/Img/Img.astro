@@ -2,16 +2,9 @@
 import ImgController from "./ImgController";
 import ImgVideo from "./ImgVideo";
 import { IMAGES_URL } from "@config/images";
-import type { SizingProps } from "./imgTypes";
+import type { ImgTagProps } from "./imgTypes";
 
-interface Props extends SizingProps {
-  src: string;
-  alt?: string;
-  caption?: string;
-  video?: boolean;
-  inline?: boolean;
-  popup?: boolean;
-}
+interface Props extends ImgTagProps {}
 
 const {
   src,
