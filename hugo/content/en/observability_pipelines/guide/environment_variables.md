@@ -1,5 +1,6 @@
 ---
 title: Environment Variables
+description: Find the environment variables available for Observability Pipelines sources, processors, and destinations.
 disable_toc: false
 aliases:
     - /observability_pipelines/environment_variables/
@@ -49,6 +50,9 @@ Some Observability Pipelines components require setting up environment variables
 ### OpenTelemetry
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/opentelemetry %}}
 
+### Prometheus
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/prometheus %}}
+
 ### Socket
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/socket %}}
@@ -90,6 +94,9 @@ Some Observability Pipelines components require setting up environment variables
 ### Databricks (Zerobus)
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/databricks_zerobus %}}
 
+### Datadog APM
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+
 ### Datadog Logs
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 
@@ -124,6 +131,17 @@ Some Observability Pipelines components require setting up environment variables
 
 ### OpenSearch
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
+
+### OpenTelemetry
+
+**Metrics**
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_metrics %}}
+
+**Traces**
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_traces %}}
+
+### Prometheus
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/prometheus %}}
 
 ### SentinelOne
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sentinelone %}}

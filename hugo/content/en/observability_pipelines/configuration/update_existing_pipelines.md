@@ -1,5 +1,6 @@
 ---
 title: Update Existing Pipelines
+description: Learn how to update and deploy changes to an existing Observability Pipelines pipeline's source, destination, and processor settings.
 disable_toc: false
 aliases:
   - /observability_pipelines/update_existing_pipelines/
@@ -82,6 +83,11 @@ On the Worker installation page:
 {{% tab "OpenTelemetry" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/opentelemetry %}}
+
+{{% /tab %}}
+{{% tab "Prometheus" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/prometheus %}}
 
 {{% /tab %}}
 {{% tab "Socket" %}}
@@ -199,6 +205,22 @@ On the Worker installation page:
 {{% tab "OpenSearch" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
+
+{{% /tab %}}
+{{% tab "OpenTelemetry" %}}
+
+**Metrics**
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_metrics %}}
+
+**Traces**
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_traces %}}
+
+{{% /tab %}}
+{{% tab "Prometheus" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/prometheus %}}
 
 {{% /tab %}}
 {{% tab "SentinelOne" %}}

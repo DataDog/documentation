@@ -262,7 +262,7 @@ These permissions are either globally enabled by default for all users, or only 
 * If this user has scoped [Read Index Data](#logs_read_index_data) permission on `audit` and `errors` indexes, this user only sees `service:api` logs within these indexes.
 * If this user has [livetail](#logs_live_tail) permission, this user only sees `service:api` logs in the livetail.
 
-{{% collapse-content title="logs_read_index_data" level="h4" expanded=false %}}
+{{% collapse-content title="logs_read_index_data" level="h3" expanded=false %}}
 
 Grants a role read access on some number of log indexes. Can be set either globally or limited to a subset of log indexes.
 
@@ -304,7 +304,7 @@ curl -X POST \
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="logs_live_tail" level="h4" expanded=false %}}
+{{% collapse-content title="logs_live_tail" level="h3" expanded=false %}}
 
 Grants a role the ability to use the [Live Tail][16] feature.
 
@@ -312,7 +312,7 @@ This permission is global, and grants access to the livetail regardless of [Log 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="logs_write_processors" level="h4" expanded=false %}}
+{{% collapse-content title="logs_write_processors" level="h3" expanded=false %}}
 
 
 This permission is only available to users who were previously granted access (grandfathered in). 
