@@ -49,7 +49,7 @@ Setup moves values in both directions between Datadog and Okta. Two of them are 
 
 Complete the Datadog steps before the Okta steps. Datadog rejects tokens for organizations that have not enabled Cross-App Access, so configuring Okta first produces failures until you finish here.
 
-Navigate to [{{< ui >}}Organization Settings > Cross-App Access{{< /ui >}}](https://app.datadoghq.com/organization-settings/cross-app-access). This page holds every Datadog-side setting, and it also shows the two values you carry over to Okta.
+Navigate to [{{< ui >}}Organization Settings > Cross-App Access{{< /ui >}}](https://app.datadoghq.com/organization-settings/cross-app-access).
 
 {{< img src="account_management/cross_app_access/cross-app-access-settings.png" alt="Cross-App Access page in Organization Settings, showing the enablement status, the Issuer URL field, the Org UUID, and the Registered client IDs table" style="width:100%;">}}
 
