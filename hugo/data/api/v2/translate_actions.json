@@ -4674,7 +4674,7 @@
     "request_schema_description": "A wrapper request around one scalar query to be executed."
   },
   "QueryTimeseriesData": {
-    "description": "Query timeseries data across various data sources and\nprocess the data by applying formulas and functions.",
+    "description": "Query timeseries data across various data sources and\nprocess the data by applying formulas and functions. Datadog recommends\nusing this endpoint over the v1 `/api/v1/query` endpoint for querying\ntimeseries data.",
     "summary": "Query timeseries data across multiple products",
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
