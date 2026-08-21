@@ -1,5 +1,6 @@
 ---
 title: Datadog APM Destination
+description: Learn how to send traces to Datadog using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Traces
