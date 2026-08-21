@@ -38,7 +38,11 @@ To set up the filter processor:
 
 ### Filter out custom metrics in metrics pipelines
 
-For metrics pipelines, you can search for and {{< tooltip text="filter out custom metrics" tooltip="Contact your account manager to request access." >}} that have not been queried in the selected time frame.
+{{< callout url="#" btn_hidden="true" header="false">}}
+Filtering out unused metrics is in Preview. Contact your account manager to request access.
+{{< /callout >}}
+
+For metrics pipelines, you can search for and filter out custom metrics that have not been queried in the selected time frame.
 
 1. In the Filter processor, click {{< ui >}}Select Unused Metrics to Filter{{< /ui >}}.
 1. Select the time frame in the dropdown menu to check metric queries against (**30**, **60**, **90**, **120**, **150**, or **180** days). For example, if you select `**90d**, the Observability Pipelines Worker looks for metrics that have not been queried in the last 90 days.
