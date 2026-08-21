@@ -12,7 +12,7 @@ products:
 
 {{< callout url="#"
  btn_hidden="true" header="false">}}
-Datadog APM destination is in Preview. Contact your account manager to request access.
+The Datadog APM destination is in Preview. Contact your account manager to request access.
 {{< /callout >}}
 
 ## Overview

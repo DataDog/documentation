@@ -9,7 +9,7 @@ weight: 2
 
 {{< callout url="#"
  btn_hidden="true" header="false">}}
-OpenTelemetry Traces destination is in Preview. Contact your account manager to request access.
+The OpenTelemetry Traces destination is in Preview. Contact your account manager to request access.
 {{< /callout >}}
 
 ## Overview
