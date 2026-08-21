@@ -43,7 +43,7 @@ A session is stored as soon as a retention filter matches one of its constitutin
 The logical flow of retention filters is the following:
 
 - Each event is evaluated against your filters in sequence.
-- When an event matches a filter, the retention rate decides whether its whole session is retained. Either way, the event is not evaluated against the following filters, which is why the **order of retention filters matters**.
+- When an event matches a filter, the retention rate decides retention for the whole session. Either way, the event is not evaluated against the following filters, which is why the **order of retention filters matters**.
 - Once a session is retained, it is available in the Session Explorer and other RUM pages, and its later events are kept automatically instead of going through the filters.
 
 **Notes**:
