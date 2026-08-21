@@ -6,6 +6,7 @@ aliases:
 - service_management/workflows/private_actions/use_private_actions
 - service_management/app_builder/private_actions/use_private_actions
 - actions/private_actions/use_private_actions/
+- actions/private_actions/update_private_action_runner/
 further_reading:
 - link: "actions/private_actions/"
   tag: "Documentation"
