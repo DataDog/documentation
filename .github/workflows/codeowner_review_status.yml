@@ -53,11 +53,12 @@ jobs:
             const DOCUMENTATION_TEAM = 'documentation';
             const WEBOPSTEAM = 'webops-platform';
             
-            // Get all reviews
-            const { data: reviews } = await github.rest.pulls.listReviews({
+            // Get all reviews (paginated: PRs can exceed the 30-item default page size)
+            const reviews = await github.paginate(github.rest.pulls.listReviews, {
               owner,
               repo,
               pull_number: number,
+              per_page: 100,
             });
 
             // Track latest review state per user (ignore commented state)
@@ -87,6 +88,7 @@ jobs:
                 owner,
                 repo,
                 pull_number: number,
+                per_page: 100,
               });
               
               // Check if documentation or webops-platform teams are currently in requested reviewers
@@ -95,14 +97,16 @@ jobs:
               );
               
               // Also check if any documentation or webops-platform team member has reviewed (indicating they were requested)
-              const { data: docTeamMembers } = await github.rest.teams.listMembersInOrg({
+              const docTeamMembers = await github.paginate(github.rest.teams.listMembersInOrg, {
                 org: owner,
                 team_slug: DOCUMENTATION_TEAM,
+                per_page: 100,
               });
-              
-              const { data: webopsTeamMembers } = await github.rest.teams.listMembersInOrg({
+
+              const webopsTeamMembers = await github.paginate(github.rest.teams.listMembersInOrg, {
                 org: owner,
                 team_slug: WEBOPSTEAM,
+                per_page: 100,
               });
               
               const teamMembers = [...docTeamMembers, ...webopsTeamMembers];
