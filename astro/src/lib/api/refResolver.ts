@@ -74,6 +74,166 @@ export function resolveRef(spec: any, refString: string): any {
 }
 
 /* ------------------------------------------------------------------ */
+/*  oneOf / anyOf option labels                                        */
+/*                                                                     */
+/*  Ports the discriminant-based labeling introduced in Hugo by         */
+/*  DataDog/documentation#38288 ("Widgets: better oneOf schema          */
+/*  support"). Instead of positional `Option N` labels, a union branch  */
+/*  is labeled `<type=toplist>` when the branches can be told apart by  */
+/*  a single-value string enum property. Branches that can't be named   */
+/*  uniquely fall back to `Object N`, matching Hugo.                    */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Group items by a derived key. Stands in for `Map.groupBy()` (ES2024), which
+ * isn't in this project's TS lib target; mirrors the Hugo-side shim.
+ */
+function groupBy<T, K>(
+  items: T[],
+  keyFn: (item: T, i: number) => K,
+): Map<K, T[]> {
+  const map = new Map<K, T[]>();
+  items.forEach((item, i) => {
+    const key = keyFn(item, i);
+    const group = map.get(key);
+    if (group) {
+      group.push(item);
+    } else {
+      map.set(key, [item]);
+    }
+  });
+  return map;
+}
+
+/**
+ * Read a branch's property schema, following a single `$ref` hop.
+ *
+ * Hugo works on a fully dereferenced spec, so `item.properties.type` is
+ * already the enum schema. In the raw spec it is usually a `$ref` (e.g.
+ * `#/components/schemas/AlertValueWidgetDefinitionType`), so it has to be
+ * resolved before the enum can be inspected.
+ */
+function resolveProperty(spec: any, item: any, name: string): any {
+  const prop = item?.properties?.[name];
+  if (prop?.$ref) {
+    return resolveRef(spec, prop.$ref) ?? prop;
+  }
+  return prop;
+}
+
+/**
+ * Returns `<discriminant=value>` when the branch's `discriminant` property is
+ * a single-value string enum, otherwise `undefined`.
+ *
+ * Unlike the Hugo implementation this returns raw `<`/`>` rather than HTML
+ * entities: Astro escapes the label when rendering it, and the plaintext
+ * renderer needs the unescaped form.
+ */
+function getMaybeConstTypeName(
+  spec: any,
+  item: any,
+  discriminant: string,
+): string | undefined {
+  const type = resolveProperty(spec, item, discriminant);
+  if (type && type.type === "string" && type.enum && type.enum.length === 1) {
+    return `<${discriminant}=${type.enum[0]}>`;
+  }
+  return undefined;
+}
+
+/**
+ * Auto-detect the best discriminant property across a set of union branches.
+ *
+ * A property is a candidate discriminant when every branch either omits it or
+ * defines it as a string enum.
+ *
+ * Preference order:
+ *  1. The first candidate that covers every branch (all-defined + unique).
+ *  2. Otherwise, the candidate covering the most branches, provided it covers
+ *     all-but-one branch or at least 75% of branches.
+ *
+ * Branches must already be `$ref`-resolved; their property schemas need not
+ * be. Mirrors `getBestDiscriminant` in Hugo's
+ * `assets/scripts/build-api-pages.js`.
+ *
+ * @param spec   The full parsed OpenAPI spec object (for property `$ref`s).
+ * @param items  Resolved `oneOf`/`anyOf` branch schemas.
+ * @returns The discriminant property name, or `undefined` if none qualifies.
+ */
+export function getBestDiscriminant(
+  spec: any,
+  items: any[],
+): string | undefined {
+  const candidates = Array.from(
+    new Set(items.flatMap((item) => Object.keys(item?.properties ?? {}))),
+  );
+  const enumCandidates = candidates.filter((d) =>
+    items.some((item) => {
+      const prop = resolveProperty(spec, item, d);
+      return prop && prop.type === "string" && prop.enum?.length === 1;
+    }),
+  );
+  const onlyEnumCandidates = enumCandidates.filter(
+    (d) =>
+      !items.some((item) => {
+        const prop = resolveProperty(spec, item, d);
+        return prop && (prop.type !== "string" || !prop.enum);
+      }),
+  );
+
+  const countedCandidates = onlyEnumCandidates.map((d) => {
+    const byName = groupBy(items, (item) =>
+      getMaybeConstTypeName(spec, item, d),
+    );
+    const nUnique = [...byName].reduce(
+      (acc, [value, arr]) => acc + (value && arr.length === 1 ? 1 : 0),
+      0,
+    );
+    return { name: d, nUnique };
+  });
+  countedCandidates.sort((a, b) => b.nUnique - a.nUnique);
+
+  const bestCandidate = countedCandidates[0];
+  if (!bestCandidate) return undefined;
+
+  const { name, nUnique } = bestCandidate;
+  if (nUnique >= items.length - 1 || nUnique / items.length >= 0.75) {
+    return name;
+  }
+
+  return undefined;
+}
+
+/**
+ * Build the display label for each branch of a `oneOf`/`anyOf`, positionally
+ * aligned with `variants`.
+ *
+ * Hugo operates on a fully dereferenced spec, so it can read `item.properties`
+ * directly; Astro resolves lazily, so each branch's `$ref` is resolved here
+ * before inspecting it.
+ *
+ * @param spec      The full parsed OpenAPI spec object.
+ * @param variants  The raw `oneOf`/`anyOf` branch schemas (may be `$ref`s).
+ * @returns One label per variant, e.g. `["<type=toplist>", "Object 2"]`.
+ */
+export function unionOptionLabels(spec: any, variants: any[]): string[] {
+  const items = variants.map((variant) =>
+    variant?.$ref ? (resolveRef(spec, variant.$ref) ?? variant) : variant,
+  );
+
+  const discriminant = getBestDiscriminant(spec, items);
+  const names = items.map((item) =>
+    discriminant ? getMaybeConstTypeName(spec, item, discriminant) : undefined,
+  );
+  const byName = groupBy(names, (name) => name);
+
+  // Keep a name only when it uniquely identifies one branch.
+  return names.map((name, i) =>
+    name && byName.get(name)?.length === 1 ? name : `Object ${i + 1}`,
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Schema → SchemaField[] conversion                                  */
 /* ------------------------------------------------------------------ */
 
@@ -209,9 +369,10 @@ export function schemaToFields(
   const unionKey = schema.oneOf ? "oneOf" : schema.anyOf ? "anyOf" : null;
   if (unionKey) {
     const variants: any[] = schema[unionKey];
+    const labels = unionOptionLabels(spec, variants);
     const unionOptions = variants.map((variant: any, idx: number) => {
       return {
-        label: `Option ${idx + 1}`,
+        label: labels[idx],
         description: variantDescription(spec, variant),
         fields: schemaToFields(spec, variant, new Set(visited), level + 2),
       };
@@ -410,10 +571,11 @@ function refName(refString: string): string {
 }
 
 /**
- * The description shown for a `oneOf`/`anyOf` option row. Options are labeled
- * positionally ("Option N", matching Hugo), so the variant's own description
- * (e.g. "The definition of `AWSIntegration` object.") is the only place the
- * underlying schema name survives. Resolves a single `$ref` hop to reach it.
+ * The description shown for a `oneOf`/`anyOf` option row. Option labels are
+ * derived from a discriminant property or fall back to `Object N` (matching
+ * Hugo), so the variant's own description (e.g. "The definition of
+ * `AWSIntegration` object.") is the only place the underlying schema name
+ * survives. Resolves a single `$ref` hop to reach it.
  */
 function variantDescription(spec: any, variant: any): string {
   let resolved = variant;
@@ -474,9 +636,10 @@ function propertyToField(
   const unionKey = resolved.oneOf ? "oneOf" : resolved.anyOf ? "anyOf" : null;
   if (unionKey) {
     const variants: any[] = resolved[unionKey];
+    const labels = unionOptionLabels(spec, variants);
     const unionOptions = variants.map((variant: any, idx: number) => {
       return {
-        label: `Option ${idx + 1}`,
+        label: labels[idx],
         description: variantDescription(spec, variant),
         fields: schemaToFields(spec, variant, new Set(nextVisited), level + 2),
       };
