@@ -3146,6 +3146,11 @@ menu:
       parent: private_actions
       identifier: set_up_standalone
       weight: 3
+    - name: Enrollment and Ownership
+      url: actions/private_actions/enroll_runner/
+      parent: private_actions
+      identifier: enroll_runner
+      weight: 4
     - name: Run a Script
       url: actions/private_actions/run_script/
       parent: private_actions
