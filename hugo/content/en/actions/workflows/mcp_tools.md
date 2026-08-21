@@ -84,9 +84,6 @@ The `workflows` toolset exposes the following tools, grouped by the part of the 
 - [`publish_datadog_workflow`][13]
 - [`unpublish_datadog_workflow`][14]
 - [`delete_datadog_workflow`][15]
-
-### Workflow validation
-
 - [`validate_datadog_workflow`][16]
 
 ### Workflow execution
@@ -95,9 +92,6 @@ The `workflows` toolset exposes the following tools, grouped by the part of the 
 - [`get_datadog_workflow_instance`][18]
 - [`list_datadog_workflow_instances`][19]
 - [`cancel_datadog_workflow_instance`][20]
-
-### Execution debugging
-
 - [`get_datadog_workflow_step_data`][21]
 
 ## Further reading
