@@ -77,6 +77,10 @@ Learn how to monitor agentic LLM applications, which use multiple tools or chain
 
 [Prompt Management][7] provides a centralized registry for the prompts used by your LLM applications. Create and version prompts in Datadog, through the Python SDK, or through the API, then retrieve them at runtime with the SDK. This decouples prompt iteration from your application's deployment cycle. See the [Prompt Management documentation][7] for details.
 
+### Prompt Experimentation
+
+[Prompt Experimentation][8] compares managed prompt versions with A/B tests and deploys versions progressively with Guarded Rollouts that pause when Datadog detects a regression.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -88,3 +92,4 @@ Learn how to monitor agentic LLM applications, which use multiple tools or chain
 [5]: /llm_observability/evaluations/
 [6]: https://app.datadoghq.com/dash/integration/llm_operational_insights?fromUser=false&refresh_mode=sliding&from_ts=1758905575629&to_ts=1758909175629&live=true
 [7]: /llm_observability/monitoring/prompt_management
+[8]: /llm_observability/monitoring/prompt_experimentation
