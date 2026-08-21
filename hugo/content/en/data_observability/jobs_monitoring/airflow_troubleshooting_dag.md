@@ -417,7 +417,7 @@ def check_provider_enabled():
     # No explicit flag — provider is inactive because no transport config was found
     log.error(
         "OpenLineage provider is not active: no transport configuration was found. "
-        "Please refer to https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html"
+        "See https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html"
     )
     validation_results["inactive_reason"] = "no_config"
 
