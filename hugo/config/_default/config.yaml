@@ -142,8 +142,6 @@ module:
         - 'shortcodes/mdoc/*'
     - source: data
       target: data
-    - source: static
-      target: assets
     - source: assets
       target: assets
     - source: i18n
