@@ -97,7 +97,7 @@ country=%{word:country} duration=%{integer:duration} path=%{notSpace:request_pat
 
 ## Regex
 
-In addition to Grok patterns, you can write an extraction pattern as a regular expression (regex) with named capture groups. Datadog evaluates the pattern when you run a query, so nothing is reindexed, and you can add, edit, or remove a pattern at any time.
+In addition to Grok patterns, you can write an extraction pattern as a regular expression (regex) with named capture groups. Datadog evaluates the pattern when you run a query. This means nothing is reindexed, and you can add, edit, or remove a pattern at any time.
 
 Extractions run before formulas, so a calculated field formula can reference a field that an extraction produces. The reverse is not possible: you cannot extract from a calculated field.
 
