@@ -34,6 +34,8 @@ The **retention rate** specifies the percentage of matching sessions you want to
 
 Your configuration is made of three types of filters: [permanent retention filters](#permanent-retention-filters), [exclusion filters](#exclusion-filters), and [custom retention filters](#custom-retention-filters). See [Types of filters](#types-of-filters) for the path an event takes through them.
 
+To configure your filters, navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}][3], create a RUM application or click an existing application, and go to {{< ui >}}Product Settings{{< /ui >}} > {{< ui >}}Retention Filters{{< /ui >}}. From any RUM page, you can also click {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Retention Filters{{< /ui >}} in the top right corner for direct access.
+
 ## How it works
 
 A session is stored as soon as a retention filter matches one of its constituting events based on the predefined query, and samples it in based on the configured retention rate.
@@ -58,21 +60,16 @@ The logical flow of retention filters is the following:
 Every RUM event follows the same path through your configuration:
 
 1. The event is evaluated against the **permanent retention filters**. These are predefined and cannot be edited. If the event matches one, its session is retained.
-1. The event is evaluated against the **exclusion filters**. If the event matches one, it is not evaluated any further, and it can never be the reason its session is retained.
+1. The event is evaluated against the **exclusion filters**. If the event matches one, it is not evaluated any further.
 1. If the event matches no exclusion filter, it is evaluated against your **custom retention filters**, in order. If the event matches one and the retention rate samples it in, its session is retained.
 
 The three types differ in what a match does:
 
-| Filter type                | When an event matches                                                | Scope       |
-| -------------------------- | -------------------------------------------------------------------- | ----------- |
-| Permanent retention filter | The session is retained, and is not subject to RUM billing.           | Session     |
-| Exclusion filter           | The event skips the evaluation against custom retention filters.      | **Event**   |
-| Custom retention filter    | The session is retained, according to the configured retention rate.  | Session     |
-
-This scope difference is the most important distinction to keep in mind:
-
-- Retention filters, permanent or custom, act on the **session**. A single matching event retains every event in that session.
-- Exclusion filters act on the **event only**. Matching an exclusion filter does not drop the event's session: another event from the same session can still match a custom retention filter and retain the whole session, including the excluded event.
+| Filter type                | When an event matches                                                |
+| -------------------------- | -------------------------------------------------------------------- |
+| Permanent retention filter | The session is retained.                                              |
+| Exclusion filter           | The event skips the evaluation against custom retention filters.      |
+| Custom retention filter    | The session is retained, according to the configured retention rate.  |
 
 ## Permanent retention filters
 
@@ -92,58 +89,11 @@ There are three permanent retention filters:
 
 Custom retention filters are the filters you create and control. Each one pairs an event type with a query and a retention rate, and each one can retain sessions.
 
-### Creating a retention filter
-
-To create a retention filter:
-
-1. Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}][3].
-1. Create a RUM application or click an existing application.
-1. Under Product Settings, go to the {{< ui >}}Retention Filters{{< /ui >}} page.
-1. Click the {{< ui >}}+ Add Retention Filter{{< /ui >}} button.
-1. Give the retention filter a descriptive name.
-1. Select an event type from the dropdown and enter a query. Any query that can be written in the [RUM Explorer][4] works with retention filters.
-1. Optionally, set a retention rate against sessions that match the retention query. You can click {{< ui >}}Generate Estimate{{< /ui >}} to help guide you in setting this rate.
-
-The new filter gets added to the bottom of the Retention Filters list. It takes seconds for Datadog to propagate a new filter and start making sampling decisions.
-
-### Modifying filters
-
-{{< img src="real_user_monitoring/rum_without_limits/modifying-filters.png" alt="Hover over a retention filter to modify it." style="width:100%" >}}
-
-#### Edit a filter
-
-To modify an existing filter:
-
-1. Hover over the filter and click the {{< ui >}}Edit{{< /ui >}} icon.
-1. Click {{< ui >}}Save Changes{{< /ui >}}.
-
-#### Duplicate a filter
-
-To duplicate a filter:
-
-1. Hover over the filter and click the {{< ui >}}Duplicate{{< /ui >}} icon.
-1. Make any modifications you want to the filter, then click {{< ui >}}Save Changes{{< /ui >}}.
-
-#### Delete a filter
-
-To delete a retention filter:
-
-1. Hover over the filter and click the {{< ui >}}Delete{{< /ui >}} icon.
-1. Click {{< ui >}}Confirm{{< /ui >}}.
-
-#### Disable a filter
-
-Disabled filters simply ignore events and do not make any sampling decisions. Events flowing in the list will skip disabled filters.
-
-Use the toggle to the right of the filter to disable or enable it.
-
-#### Reorder filters
-
-Drag and drop filters to reorder filters to their new position.
+<!-- TODO(screenshot): the Custom Retention Filters section of the Retention Filters page, in the new grouped UI. -->
 
 ### Excluding sessions using retention filters
 
-Custom retention filters specify which sessions to keep, rather than which to exclude. You cannot set a retention percentage to 0% (the default is 1%). Additionally, setting low retention percentages is not an effective exclusion strategy because sessions may still be retained by other filters in your configuration.
+Custom retention filters specify which sessions to keep, rather than which to exclude. You cannot set a retention percentage to 0% (the minimum is 0.1%). Additionally, setting low retention percentages is not an effective exclusion strategy because sessions may still be retained by other filters in your configuration.
 
 To keep a single filter from matching a subset of events, add exclusions **inside that filter's query**. For example:
 
@@ -163,7 +113,7 @@ To exclude events across all of your custom retention filters at once, use [excl
 Exclusion filters are in Preview.
 {{< /callout >}}
 
-Exclusion filters remove events from retention evaluation across your entire configuration. An event that matches an exclusion filter is not evaluated against your custom retention filters, so it can never be the reason its session is retained.
+Exclusion filters make targeted events skip the evaluation against custom retention filters. They are applied after the permanent retention filters.
 
 Use them when the same events are irrelevant to all of your custom retention filters, for example self-declared bot traffic, a retired application version, or a known noisy error.
 
@@ -172,36 +122,73 @@ Use them when the same events are irrelevant to all of your custom retention fil
 An exclusion filter is made of an event type and a query, like a custom retention filter, with two differences:
 
 - An exclusion filter can target **All events** instead of a single event type, which lets you exclude on attributes shared by every event, such as `@device.type` or `@geo.country`.
-- An exclusion filter has no retention rate and no [cross-product filter](#cross-product-retention-filters). It either matches an event or it does not, so the **order of exclusion filters does not matter**.
-
-### Creating an exclusion filter
-
-To create an exclusion filter:
-
-1. Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}][3].
-1. Click an existing application.
-1. Under Product Settings, go to the {{< ui >}}Retention Filters{{< /ui >}} page.
-1. In the {{< ui >}}Exclusion Filters{{< /ui >}} section, add a filter.
-1. Give the exclusion filter a descriptive name.
-1. Select an event type from the dropdown, or select {{< ui >}}All events{{< /ui >}}, and enter a query. Any query that can be written in the [RUM Explorer][4] works with exclusion filters.
-
-Creating, editing, and deleting exclusion filters requires the same permissions as custom retention filters.
+- An exclusion filter has no retention rate. It either matches an event or it does not, so the **order of exclusion filters does not matter**.
 
 ### Excluding errors ignored in Error Tracking
 
 A predefined exclusion filter at the top of the list targets the errors you [ignored or excluded in Error Tracking][10], so that you do not have to maintain the same exclusions in two places.
 
-You can enable or disable this filter, but you cannot delete it.
+You can enable or disable this filter, but you cannot edit it or delete it.
+
+## Creating a filter
+
+To create a retention filter or an exclusion filter:
+
+1. In the section for the type of filter you want to create, click the {{< ui >}}+ Add Filter{{< /ui >}} button.
+1. Give the filter a descriptive name.
+1. Select an event type from the dropdown and enter a query. Any query that can be written in the [RUM Explorer][4] works. Exclusion filters can also target {{< ui >}}All events{{< /ui >}}.
+1. For a custom retention filter, optionally set a retention rate against sessions that match the query. You can click {{< ui >}}Generate Estimate{{< /ui >}} to help guide you in setting this rate. Exclusion filters have no retention rate.
+
+A new custom retention filter gets added to the bottom of the custom retention filters list. It takes seconds for Datadog to propagate a new filter and start applying it.
+
+Creating a filter requires the same permissions for both types of filters.
+
+## Modifying filters
+
+{{< img src="real_user_monitoring/rum_without_limits/modifying-filters.png" alt="Hover over a retention filter to modify it." style="width:100%" >}}
+
+### Edit a filter
+
+To modify an existing filter:
+
+1. Hover over the filter and click the {{< ui >}}Edit{{< /ui >}} icon.
+1. Click {{< ui >}}Save Changes{{< /ui >}}.
+
+### Duplicate a filter
+
+To duplicate a filter:
+
+1. Hover over the filter and click the {{< ui >}}Duplicate{{< /ui >}} icon.
+1. Make any modifications you want to the filter, then click {{< ui >}}Save Changes{{< /ui >}}.
+
+### Delete a filter
+
+To delete a filter:
+
+1. Hover over the filter and click the {{< ui >}}Delete{{< /ui >}} icon.
+1. Click {{< ui >}}Confirm{{< /ui >}}.
+
+### Disable a filter
+
+Disabled filters simply ignore events. A disabled custom retention filter makes no sampling decision, and a disabled exclusion filter excludes no event.
+
+Use the toggle to the right of the filter to disable or enable it.
+
+### Reorder filters
+
+Drag and drop filters to reorder filters to their new position.
+
+Reordering only applies to custom retention filters, as the order of exclusion filters does not matter.
 
 ## Capping retention with quotas
 
-To cap the total number of sessions retained per day across your retention filters, see [Control Costs with Retention Quotas][9].
+To cap the total number of sessions retained per day across your retention filters, see [Retention Quotas][9].
 
 ## How retention filters work with replays
 
 You can manage session sampling with replays using retention filters. Whenever a session with replays is billed, both the session events and the video recording are kept and billed. This means that if you collect 100% of sessions and 100% of replays from SDKs, whenever a retention filter keeps a session, Datadog keeps and charges for both the session and the replay.
 
-**Note**: Though Datadog's mobile SDKs also provide APIs to conditionally start and stop the recording (instead of relying on a flat sample rate), only the replays that are force-recorded by the Browser SDK are retained by default.
+**Note**: Though Datadog's mobile SDKs also provide [APIs to conditionally start and stop the recording][2] (instead of relying on a flat sample rate), only the replays that are force-recorded by the Browser SDK are retained by default.
 
 ## Cross-product retention filters
 
@@ -231,10 +218,6 @@ If you have configured the SDK to sample 40% of traces, then the outcome is the 
 - 60% of ingested RUM sessions with at least one error are retained.
 - 25% x 40% = 10% of these retained sessions have their APM traces indexed.
 
-<div class="alert alert-info">Cross-product retention filters only apply to sessions retained by the corresponding RUM retention filter. This means filters order matters for both RUM retention and cross-product filters.<br><br>
-
-For more information, see <a href="/real_user_monitoring/rum_without_limits/retention_filters/#how-it-works">How it works</a>.</div>
-
 ### Cross-product retention filters on permanent filters
 
 Cross-product retention filters are also available on the <a href="/real_user_monitoring/rum_without_limits/retention_filters/#permanent-retention-filters">Permanent Retention Filters</a>. The APM traces filter is **only editable on Synthetic Monitoring Sessions and Sessions with forced replays filters**.
@@ -247,7 +230,7 @@ See [Retention Filter Best Practices][5].
 
 ## API
 
-Retention filters and cross-product retention filters can be managed through [APIs][6] or Datadog's dedicated [Terraform modules][7].
+Filters and cross-product retention filters can be managed through [APIs][6] or Datadog's dedicated [Terraform modules][7].
 
 ## Next steps
 
