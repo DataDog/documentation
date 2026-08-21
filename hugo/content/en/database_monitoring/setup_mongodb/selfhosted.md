@@ -196,7 +196,7 @@ Refer to the [MongoDB integration documentation][2] for a comprehensive list of 
 ### Query Metrics
 
 <div class="alert alert-info">
-  This requires Datadog Agent v7.78 or later and MongoDB 8.0+ for self hosted.
+  This requires Datadog Agent v7.78 or later and MongoDB 8.0+ for self hosted. MongoDB 8.0.16+ provides additional WiredTiger cache eviction metrics.
 </div>
 
 Query metrics provide insights into the performance of your MongoDB operations. For more information, see [Query Metrics][3].
