@@ -34,11 +34,6 @@ function applyLightboxResize(
   const parentWidth = (window.innerWidth / 100) * 90;
   const parentHeight = (window.innerHeight / 100) * 90;
 
-  imageElement.style.width = "";
-  imageElement.style.height = "";
-  dialogElement.style.width = "";
-  dialogElement.style.height = "";
-
   let ratio = Math.max(
     naturalWidth / (parentWidth - 1),
     naturalHeight / (parentHeight - 1),
