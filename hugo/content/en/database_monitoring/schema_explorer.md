@@ -27,6 +27,58 @@ instances:
     # dbname: '<DB_NAME>'
 ```
 
+### Tuning schema collection
+
+The `collect_schemas` options available and their defaults differ by database engine.
+
+**PostgreSQL**
+
+| Option | Default | Description |
+|---|---|---|
+| `enabled` | `true` | Set to `false` to disable schema collection. |
+| `max_tables` | `300` | Maximum number of tables the Agent collects from the instance. Tables beyond this limit are not collected. |
+| `max_columns` | `50` | Maximum number of columns the Agent collects per table. |
+| `max_query_duration` | `60` | Maximum duration, in seconds, of the query that collects schema information. |
+| `collection_interval` | `600` | Interval, in seconds, between schema collection runs. |
+
+```yaml
+collect_schemas:
+  enabled: true
+  max_tables: 1000
+```
+
+<div class="alert alert-warning">Each partition of a partitioned table counts as a separate table toward PostgreSQL's <code>max_tables</code> limit. For example, if <code>table_1</code> is partitioned into <code>partition_a.table_1</code> and <code>partition_b.table_1</code>, it counts as two tables, not one. Heavily partitioned databases can reach the default limit of 300 with far fewer logical tables than expected. If tables are missing from the Schemas page, raise <code>max_tables</code> to account for the total partition count. See <a href="/database_monitoring/setup_postgres/advanced_configuration/#handling-many-relations">Handling many relations</a> for more information.</div>
+
+Raising `max_tables` increases the cost of each collection run. On instances with a large number of tables, also consider raising `max_query_duration` and `collection_interval` to reduce load on the database.
+
+**SQL Server**
+
+| Option | Default | Description |
+|---|---|---|
+| `enabled` | `false` | Set to `true` to enable schema collection. |
+| `max_tables` | `300` | Maximum number of tables the Agent collects from the instance. Tables beyond this limit are not collected. |
+| `collection_interval` | `600` | Interval, in seconds, between schema collection runs. |
+
+```yaml
+collect_schemas:
+  enabled: true
+  max_tables: 1000
+```
+
+**MySQL**
+
+| Option | Default | Description |
+|---|---|---|
+| `enabled` | `false` | Set to `true` to enable schema collection. |
+| `collection_interval` | `600` | Interval, in seconds, between schema collection runs. |
+| `max_execution_time` | `60` | Maximum duration, in seconds, of the query that collects schema information. |
+
+```yaml
+collect_schemas:
+  enabled: true
+  collection_interval: 300
+```
+
 ## Tables overview
 
 The Tables overview lists all tracked tables across your databases, grouped by table name, with the following columns:

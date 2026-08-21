@@ -39,6 +39,8 @@ instances:
       replace_digits: true
 ```
 
+Partitioning also affects schema collection. Each partition counts individually toward the `max_tables` limit for `collect_schemas`, so partitioned databases may need a higher limit for full coverage. See [Tuning schema collection][2] for details.
+
 ## Raising the sampling rate
 
 If you have queries that are relatively infrequent or execute quickly, raise the sampling rate by lowering the `collection_interval` value to collect explain plans more frequently.
@@ -75,8 +77,9 @@ instances:
 | --- | --- | --- |
 | `enabled` | `false` | Set to `true` to enable column statistics collection. |
 | `collection_interval` | `3600` | Lower for more responsive statistics (at the cost of more queries against `pg_stats`); raise on very large or busy clusters to reduce query load. |
-| `max_tables` | `500` | Raise if you monitor a database with more than 500 tables and want full coverage; lower to cap collection cost. |
+| `max_tables` | `500` | Raise if you monitor a database with more than 500 tables and want full coverage; lower to cap collection cost. This limit is separate from the `max_tables` option under `collect_schemas`, which defaults to `300`. |
 
 For column statistics to populate, the underlying tables must have had `ANALYZE` (or autoanalyze) run against them at least once — `pg_stats` is empty for tables with no collected statistics.
 
 [1]: /database_monitoring/setup_postgres/selfhosted/#create-the-column-statistics-function
+[2]: /database_monitoring/schema_explorer/#tuning-schema-collection
