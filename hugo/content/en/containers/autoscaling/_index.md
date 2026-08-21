@@ -216,19 +216,11 @@ _Fixed cost values are subject to refinement over time._
 
 By default, applying a vertical recommendation requires a full pod rollout: the pod template is updated, Kubernetes recreates the pods, and the new resources take effect as those pods are admitted. For slow-starting or latency-sensitive services, that is a meaningful disruption.
 
-In-place vertical scaling instead updates container resources on the running pods through the Kubernetes [pod resize subresource](https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/), so most resizes happen with no restart. This requires Datadog Cluster Agent 7.78+.
+In-place vertical scaling instead updates container resources on the running pods through the Kubernetes [pod resize subresource](https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/), so most resizes happen with no restart. In-place vertical scaling is supported on Kubernetes 1.33+, where the `InPlacePodVerticalScaling` feature gate is enabled by default. It requires Datadog Cluster Agent 7.78+.
+
+A resize takes effect on the running container without restarting the application process. Applications that read their CPU or memory requests and limits only at startup do not see the new values until they restart, and environment variables populated from resource fields through the [downward API](https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/) are not refreshed on an in-place resize. Keep this in mind for workloads that size internal components (thread pools, heap, or caches) from their resource requests or limits.
 
 With `applyPolicy.update.strategy: Auto` (the default), the controller resizes in place wherever the cluster supports it and falls back to a rollout otherwise. To force rollout-based vertical scaling for a workload, set `applyPolicy.update.strategy: TriggerRollout` on its `DatadogPodAutoscaler`. To tune how long the controller waits before evicting a pending resize or falling back to a rollout, see the [DatadogPodAutoscaler manifest reference][15].
-
-#### Kubernetes support
-
-The `InPlacePodVerticalScaling` feature gate must be enabled on **both** the API server and the kubelet; a cluster can have one without the other.
-
-| Kubernetes version | Feature gate |
-|---|---|
-| 1.27 - 1.32 | Alpha, disabled by default |
-| 1.33 - 1.34 | Beta, enabled by default |
-| 1.35+ | GA, gate removed |
 
 #### Enable in-place vertical scaling
 

@@ -19,8 +19,6 @@ This page covers the configuration options available in the manifest. It uses AP
 
 For setup and prerequisites, see [Kubernetes Autoscaling][2]. That page covers enabling Workload Autoscaling and the Admission Controller on the Datadog Cluster Agent, required Agent versions, and enabling [in-place vertical scaling][3].
 
-**Feature status labels:** features on this page are generally available unless marked **Preview**, **Beta**, or **Experimental**. Preview and Beta features are available and supported, but their field names and behavior may still change. Experimental features are available but not recommended for production without contacting [Datadog Support][9] first.
-
 ## Anatomy of a manifest
 
 The following annotated skeleton shows the structure of a `DatadogPodAutoscaler`. Every field is optional except `targetRef`.
@@ -29,23 +27,23 @@ The following annotated skeleton shows the structure of a `DatadogPodAutoscaler`
 apiVersion: datadoghq.com/v1alpha2
 kind: DatadogPodAutoscaler
 metadata:
-  name: my-app                      # conventionally the workload name
-  namespace: my-namespace           # must match the target workload
-  annotations:
+  name: my-app                      # required: conventionally the workload name
+  namespace: my-namespace           # required: must match the target workload
+  annotations:                      # optional
     ad.datadoghq.com/tags: '{"team": "my-team"}'   # optional: tags on this DPA's telemetry
 spec:
-  owner: Local                      # Local = this manifest is the source of truth (use for GitOps)
+  owner: Local                      # optional: Local = this manifest is the source of truth (use for GitOps)
                                     # Remote = created and managed from the Datadog UI
 
-  targetRef:                        # the workload being autoscaled - one DPA per workload
+  targetRef:                        # required: the workload being autoscaled - one DPA per workload
     apiVersion: apps/v1
     kind: Deployment
     name: my-app
 
-  applyPolicy:
+  applyPolicy:                      # optional
     mode: Apply                     # Apply | Preview (Preview = compute recommendations, change nothing)
 
-    scaleUp:                        # horizontal, upward
+    scaleUp:                        # optional: horizontal, upward
       strategy: Max                 # Max | Min | Disabled
       stabilizationWindowSeconds: 600
       rules:
@@ -53,7 +51,7 @@ spec:
           value: 50
           periodSeconds: 120        # 1..3600
 
-    scaleDown:                      # horizontal, downward
+    scaleDown:                      # optional: horizontal, downward
       strategy: Max
       stabilizationWindowSeconds: 600
       rules:
@@ -61,15 +59,15 @@ spec:
           value: 10
           periodSeconds: 1800
 
-    update:                         # vertical
+    update:                         # optional: vertical
       strategy: Auto                # Auto | Disabled | TriggerRollout
       # resizePendingPeriod: 600    # see Vertical rollout timing
       # rolloutFallbackDelay: 900   # see Vertical rollout timing
 
-  constraints:
+  constraints:                      # optional
     minReplicas: 3
     maxReplicas: 100
-    containers:                     # per-container vertical configuration
+    containers:                     # optional: per-container vertical configuration
       - name: "*"                   # "*" matches all containers
         enabled: true
         controlledResources: [cpu, memory]
@@ -81,7 +79,7 @@ spec:
           cpu: "4"
           memory: 8Gi
 
-  objectives:                       # HORIZONTAL only. Exactly one entry.
+  objectives:                       # optional: configures horizontal scaling (also used by multidimensional). Exactly one entry.
     - type: ContainerResource       # PodResource | ContainerResource | CustomQuery
       containerResource:
         container: my-app
@@ -90,14 +88,14 @@ spec:
           type: Utilization         # Utilization | AbsoluteValue
           utilization: 65
 
-  fallback:                         # in-cluster horizontal fallback if recommendations go stale
+  fallback:                         # optional: in-cluster horizontal fallback if recommendations go stale
     horizontal:
       enabled: true
       direction: ScaleUp            # ScaleUp | ScaleDown | All (default ScaleUp)
       triggers:
         staleRecommendationThresholdSeconds: 600   # 100..3600, default 600
 
-  options:
+  options:                          # optional
     burstable: false                # true = remove CPU limits, keep CPU request recommendations
     outOfMemory:
       bumpUpRatio: "1.2"            # +20% memory limit after an OOMKill (default)
@@ -146,8 +144,6 @@ Most vertical options are expressed through `spec.constraints.containers[]`:
 If `constraints.containers` is omitted entirely, resource scaling is enabled for **all** containers, with no bounds.
 
 ## Right-size CPU and memory
-
-**Status: Preview.**
 
 When a DPA combines horizontal scaling (`objectives`) with vertical scaling (`update.strategy: Auto`), the default behavior is to produce vertical recommendations for **memory only**. CPU requests and limits are left untouched, and the `VerticalAbleToRecommend` condition may show as `Unknown`.
 
@@ -202,8 +198,6 @@ spec:
 This feature requires Datadog Cluster Agent 7.78.0+. On older versions, the `controlledResources` field is accepted by the CRD but has no effect.
 
 ## Remove CPU limits with burstable mode
-
-**Status: Beta.**
 
 CPU limit recommendations are derived from sustained usage percentiles over a multi-day window. A short warm-up spike (a JVM starting up, for example) is statistically invisible in that window, so the recommended CPU limit can land too low and the application is throttled at the wrong moment. Memory is not affected in the same way, because peak memory usage gives a reliable ceiling.
 
@@ -452,7 +446,7 @@ Points to be aware of:
 - `restartPolicy: Always` is what distinguishes them. Ordinary init containers (those that run to completion before the application starts) are not native sidecars and are not managed by a DPA.
 - **Cost and savings figures may under-count native sidecars.** Their resource requests are reported under a separate aggregation, so the cost figures shown for a workload with native sidecars can look inconsistent with its observed usage. This is a known limitation that affects the cost display only; recommendations are unaffected.
 - **Injected sidecars** (such as Istio's) are added by a mutating admission webhook at pod level and never appear in the Deployment manifest. They are still picked up, because the container list is reconciled from running pods rather than from the workload manifest alone.
-- **Agent-level container exclusions take precedence.** If a sidecar is filtered out of collection on the Agent, no metrics exist for it and no recommendation can be produced. Recommendations for the rest of the pod are unaffected, but that container is reported as missing data.
+- **Do not exclude autoscaled containers from Agent collection.** A `DatadogPodAutoscaler` relies on the metrics the Agent collects for the containers it manages. If a container in an autoscaled workload is filtered out through the Agent's container discovery configuration, no metrics exist for it and it cannot be right-sized. Confirm that no container in an autoscaled workload is excluded from collection. For how inclusion and exclusion rules work, see [Container Discovery Management][10].
 
 ## Additional manifest options
 
@@ -474,7 +468,7 @@ spec:
     scaleUp:
       strategy: Max
     scaleDown:
-      strategy: Disabled     # never scale in
+      strategy: Disabled     # never scale down
     update:
       strategy: Auto
 ```
@@ -560,7 +554,7 @@ Scale on any Datadog metric rather than CPU or memory:
 
 `source` may also be `ApmMetrics`, with fields such as `service`, `resourceName`, `operationName`, and `stat`.
 
-Custom queries are supported for **horizontal-only** scaling. Combining a custom query **with vertical scaling is experimental**, because the autoscaler cannot infer which dimension an arbitrary query should act on. Contact [Datadog Support][9] before relying on it.
+Custom queries are supported for **horizontal scaling only**. Combining a custom query with vertical scaling is **not supported**, because the autoscaler cannot infer which dimension an arbitrary query should act on.
 
 ### Tag a DPA's telemetry
 
@@ -582,3 +576,4 @@ This adds the tags to the autoscaling telemetry emitted for this DPA. For the li
 [7]: https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/
 [8]: /integrations/datadog-cluster-agent/#metrics
 [9]: /help/
+[10]: /containers/guide/container-discovery-management/
