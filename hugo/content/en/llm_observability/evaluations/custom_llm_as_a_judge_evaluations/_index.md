@@ -531,13 +531,48 @@ For example:
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_4.png" alt="The Agent Observability Traces view. In the search box, the user has entered `@evaluation.budget-guru-intent-classifier.value:budgeting_question` and results are populated below." style="width:100%;" >}}
 
-
 You can:
 - Filter traces by evaluation results (example, `@evaluation.helpfulness-check.value`)
 - Filter by pass/fail assessment status (example, `@evaluation.helpfulness-check.assessment:fail`)
 - Use evaluation results as [facets][3]
 - View aggregate results in the Agent Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression
+
+### Performance tab
+
+Use the {{< ui >}}Performance{{< /ui >}} tab to measure how your agentic service performs against an evaluation. Get a high-level overview, identify passing and failing traces, and find patterns in failure scenarios.
+
+#### Performance cards
+
+Cards summarize the results over the selected time range. Each card header includes a fullscreen button (the resize icon) to view the chart in full-screen mode.
+
+For boolean evaluations:
+
+- **% True**: The percentage of `true` results, shown as a scalar with a trend compared to the prior period. The {{< ui >}}True Spans{{< /ui >}} and {{< ui >}}False Spans{{< /ui >}} buttons open the Trace Explorer filtered to the matching boolean value.
+- **Result Distribution**: The true and false breakdown over time, shown as a line chart with a total-spans scalar and a prior-period trend. This card also includes {{< ui >}}True Spans{{< /ui >}} and {{< ui >}}False Spans{{< /ui >}} links to the Trace Explorer.
+
+For all evaluations:
+
+- **Spans Evaluated Over Time**: The total number of evaluated spans over the selected time range, shown as a scalar with a prior-period trend. This card uses the same query as the evaluated spans list below it.
+
+#### Evaluated spans
+
+The {{< ui >}}Evaluated Spans{{< /ui >}} table (or {{< ui >}}Evaluated Traces{{< /ui >}} for trace-scoped evaluations) lists the spans or traces that the evaluation ran on.
+
+- For boolean evaluations, {{< ui >}}True{{< /ui >}} and {{< ui >}}False{{< /ui >}} toggle filters appear above the table.
+- Assessment (pass/fail), boolean value, and category filters are disabled when there is no evaluated data in the selected time range.
+- A {{< ui >}}View in Trace Explorer{{< /ui >}} button in the table header opens the current filtered view in the Trace Explorer, mirroring the table's active filters (pass/fail assessment, boolean value, or category).
+
+#### Pattern Analysis
+
+<div class="alert alert-info">Pattern Analysis is in Preview.</div>
+
+The {{< ui >}}Pattern Analysis{{< /ui >}} section clusters the reasoning text from failed evaluations into ranked themes. This helps you identify the most common failure modes without reading each evaluation reason one by one.
+
+- After you configure and run Pattern Analysis, the results panel shows ranked clusters of reasoning patterns with their interaction counts.
+- If no clusters are found, the panel prompts you to re-run with more spans or a higher sampling rate and provides a {{< ui >}}Re-run{{< /ui >}} button.
+
+Pattern Analysis is not available for session-scoped evaluations.
 
 ## Using in experiments
 
