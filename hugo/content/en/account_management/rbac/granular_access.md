@@ -17,7 +17,7 @@ Use the different principals to control access patterns in your organization and
 | [Apps][13]                                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [AWS Accounts][11]                               | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Azure App Registrations][11]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Case Management projects][10]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Work Management projects][10]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Connections][14]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Connection Groups][15]                          | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Critical Assets][26]                            | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -59,7 +59,7 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [7]: /security/suppressions/#restrict-edit-permissions
 [8]: /service_level_objectives/#permissions
 [9]: /synthetics/browser_tests/#permissions
-[10]: /incident_response/case_management/settings#granular-access-control
+[10]: /incident_response/work_management/settings#granular-access-control
 [11]: /getting_started/integrations/#granular-access-control
 [12]: /reference_tables/#permissions
 [13]: /actions/app_builder/access_and_auth/#restrict-access-to-a-specific-app

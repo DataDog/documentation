@@ -75,7 +75,7 @@ Click {{< ui >}}New Reference Table +{{< /ui >}}, then upload a CSV file, name t
 {{% /tab %}}
 {{% tab "Cloud storage" %}}
 
-{{% collapse-content title="Amazon S3" level="h4" id="amazon-s3" %}}
+{{% collapse-content title="Amazon S3" level="h3" id="amazon-s3" %}}
 
 Reference Tables can automatically pull a CSV file from an Amazon S3 bucket to keep your data up to date. The integration looks for changes to the CSV file in S3, and when the file is updated it replaces the Reference Table with the new data. This also enables API updating with the S3 API once the initial Reference Table is configured. **Note**: Reference Tables are not replaced if the content of the CSV file is unchanged.
 
@@ -116,7 +116,7 @@ Click {{< ui >}}New Reference Table +{{< /ui >}}, then add a name, select {{< ui
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#installation
 
 {{% /collapse-content %}}
-{{% collapse-content title="Azure storage" level="h4" id="azure-storage" %}}
+{{% collapse-content title="Azure storage" level="h3" id="azure-storage" %}}
 
 1. If you haven't already, set up the [Azure integration][1] within the subscription that holds the storage account from which you want to import your Reference Table. This involves [creating an app registration that Datadog can][2] integrate with.
 2. In the Azure Portal, select the storage account that stores your Reference Table files.
@@ -140,7 +140,7 @@ For more information, see the [Azure integration documentation][4].
 [4]: /integrations/azure/
 
 {{% /collapse-content %}}
-{{% collapse-content title="Google Cloud storage" level="h4" id="google-cloud-storage" %}}
+{{% collapse-content title="Google Cloud storage" level="h3" id="google-cloud-storage" %}}
 
 ### Google Cloud storage
 
@@ -170,7 +170,7 @@ After reviewing and assigning the role, you can import into Reference Tables fro
 [2]: /integrations/google_cloud_platform/#1-create-your-google-cloud-service-account
 
 {{% /collapse-content %}}
-{{% collapse-content title="Terraform" level="h4" id="terraform" %}}
+{{% collapse-content title="Terraform" level="h3" id="terraform" %}}
 
 Use the [`datadog_reference_table`][9] resource to manage reference tables as infrastructure as code. Configure the resource with your table schema, primary keys, and cloud storage access details.
 
