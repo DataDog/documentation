@@ -97,7 +97,7 @@ country=%{word:country} duration=%{integer:duration} path=%{notSpace:request_pat
 
 ## Regex
 
-In addition to Grok patterns, you can write an extraction pattern as a regex with named capture groups. Datadog evaluates the pattern when you run a query. This means no data is reindexed, and you can add, edit, or remove a pattern at any time.
+Datadog evaluates the regex pattern when you run a query. This means no data is reindexed, and you can add, edit, or remove a pattern at any time.
 
 Extractions run before formulas, so a calculated field formula can reference a field that an extraction produces. The reverse is not possible: you cannot extract from a calculated field.
 
@@ -122,6 +122,10 @@ Extracted values are always strings. Unlike a Grok rule such as `%{integer:statu
 | Character escapes | `\n`, `\r`, `\t` | Newline, carriage return, tab |
 | Metacharacter escapes | `\.`, `\*`, `\(` | The character itself, rather than its special meaning |
 
+Constructs that are not listed, such as lookahead (`(?=…)`), lookbehind (`(?<=…)`), and backreferences (`\1`), are not supported.
+
+Write patterns with a single backslash, as shown. In [formula regex functions][2], a pattern is a quoted string argument and each backslash must be doubled.
+
 ### Capture group rules
 
 A pattern must follow these rules:
@@ -144,20 +148,21 @@ A pattern must follow these rules:
 **Extraction regex pattern**:
 
 ```plaintext
-(?<ip>\S+) (?<method>\S+) (?<path>\S+) (?<status>\d+)
+(?<ip>\S+) (?<method>\S+) /api/(?:v\d+)/(?<resource>\S+) (?<status>\d+)
 ```
 
 **Resulting calculated fields**:
 
 - `#ip = 10.0.0.14`
 - `#method = GET`
-- `#path = /api/v1/orders`
+- `#resource = orders`
 - `#status = 503`
 
-You can filter, group, and sort by these fields. Logs where the pattern does not match have no value for them.
+The `(?:v\d+)` group matches the API version segment without creating a field for it. You can filter, group, and sort by the extracted fields. Logs where the pattern does not match have no value for them.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/calculated_fields/#create-a-calculated-field
+[2]: /logs/explorer/calculated_fields/formulas/#regex
