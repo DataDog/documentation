@@ -107,6 +107,20 @@
                                           .key {
                                               margin-left: 100px;
                                           }
+                                          &.hasChildData {
+                                            .isNested {
+                                                .key {
+                                                    margin-left: 120px;
+                                                }
+                                            }
+                                            &.hasChildData {
+                                              .isNested {
+                                                  .key {
+                                                      margin-left: 140px;
+                                                  }
+                                              }
+                                            }
+                                          }
                                       }
                                     }
                                 }
