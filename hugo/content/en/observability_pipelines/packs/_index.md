@@ -1,16 +1,535 @@
 ---
 title: Packs
-description: Learn more about Observability Pipelines Packs
+description: Browse Observability Pipelines packs by source, destination, and type.
 disable_toc: false
-private: true
-cascade:
-    private: true
 
 further_reading:
   - link: https://www.datadoghq.com/blog/rehydrate-archived-logs-with-observability-pipelines
     tag: Blog
     text: Rehydrate archived logs in any SIEM or logging vendor with Observability Pipelines
 
+multifiltersearch:
+  # "id" must match the corresponding key in the "data" object
+  headers:
+    - name: Pack
+      id: pack
+    - name: Source
+      id: source
+      filter_by: true
+    - name: Destination
+      id: destination
+      filter_by: true
+    - name: Type
+      id: type
+      filter_by: true
+    - name: Description
+      id: description
+  data:
+    - pack: "[Abnormal.ai - Abuse Campaigns](/observability_pipelines/packs/abnormal_ai_abuse_campaigns/)"
+      source: "Abnormal.ai"
+      destination: "Any destination"
+      type: "Processing"
+      description: "This pack flags malicious abuse-mailbox campaigns and failed remediation attempts across reported messages."
+    - pack: "[Abnormal.ai - Abuse Mailbox Messages Not Analyzed](/observability_pipelines/packs/abnormal_ai_abuse_mailbox_messages/)"
+      source: "Abnormal.ai"
+      destination: "Any destination"
+      type: "Processing"
+      description: "This pack tracks the backlog of user-reported abuse mailbox messages Abnormal.ai did not analyze."
+    - pack: "[Abnormal.ai - Audit Logs](/observability_pipelines/packs/abnormal_ai_audit_logs/)"
+      source: "Abnormal.ai"
+      destination: "Any destination"
+      type: "Processing"
+      description: "This pack flags failed admin actions and mass remediation events from the Abnormal.ai portal audit trail."
+    - pack: "[Abnormal.ai - Threats](/observability_pipelines/packs/abnormal_ai_threats/)"
+      source: "Abnormal.ai"
+      destination: "Any destination"
+      type: "Processing"
+      description: "This pack flags unremediated high-risk email threats like business email compromise (BEC), extortion, and credential phishing targeting VIPs."
+    - pack: "[Active Directory](/observability_pipelines/packs/active_directory/)"
+      source: "Active Directory"
+      destination: "Any destination"
+      type: "Processing"
+      description: "This pack processes Active Directory Domain Services events, including Kerberos authentication, directory-service changes, and DCSync replication abuse."
+    - pack: "[Akamai CDN](/observability_pipelines/packs/akamai_cdn/)"
+      source: "Akamai"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Akamai logs show client requests and responses at the edge."
+    - pack: "[AlphaSOC Findings](/observability_pipelines/packs/alphasoc_findings/)"
+      source: "AlphaSOC"
+      destination: "Any destination"
+      type: "Processing"
+      description: "AlphaSOC findings flag DNS and IP threats detected across your network."
+    - pack: "[Amazon CloudFront](/observability_pipelines/packs/amazon_cloudfront/)"
+      source: "AWS"
+      destination: "Any destination"
+      type: "Processing"
+      description: "AWS CloudFront logs show requests, cache use, and edge activity."
+    - pack: "[Amazon Connect](/observability_pipelines/packs/amazon_connect/)"
+      source: "AWS"
+      destination: "Any destination"
+      type: "Processing"
+      description: "This pack extracts contact and agent signals from Amazon Connect logs, flagging abandoned calls and fraud risk."
+    - pack: "[Amazon VPC Flow Logs](/observability_pipelines/packs/amazon_vpc_flow_logs/)"
+      source: "AWS"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Amazon VPC Flow Logs capture network traffic between VPC resources."
+    - pack: "[Argo CD](/observability_pipelines/packs/argo_cd/)"
+      source: "Argo CD"
+      destination: "Any destination"
+      type: "Processing"
+      description: "This pack processes Argo CD sync, health, and RBAC events from the application controller and API server."
+    - pack: "[Auth0](/observability_pipelines/packs/auth0/)"
+      source: "Auth0"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Auth0 logs cover login, signup, MFA, and API activity."
+    - pack: "[Aviatrix Controller API Audit](/observability_pipelines/packs/aviatrix_controller_api_audit/)"
+      source: "Aviatrix"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Aviatrix Controller audit logs capture API commands, user attribution, and results."
+    - pack: "[Aviatrix FQDN Firewall](/observability_pipelines/packs/aviatrix_fqdn_firewall/)"
+      source: "Aviatrix"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Aviatrix FQDN firewall logs capture egress domain requests and policy enforcement."
+    - pack: "[Aviatrix Gateway Network Stats](/observability_pipelines/packs/aviatrix_gateway_network_stats/)"
+      source: "Aviatrix"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Aviatrix gateway net stats logs expose per-interface rx/tx bytes, packet counts, and network drop events."
+    - pack: "[Aviatrix Gateway System Stats](/observability_pipelines/packs/aviatrix_gateway_system_stats/)"
+      source: "Aviatrix"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Aviatrix gateway system stats expose per-gateway CPU, memory, and disk utilization across cloud gateways."
+    - pack: "[Aviatrix L4 Microsegmentation](/observability_pipelines/packs/aviatrix_l4_microsegmentation/)"
+      source: "Aviatrix"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Aviatrix DCF microsegmentation logs capture east-west policy enforcement across cloud gateways."
+    - pack: "[Aviatrix L7/TLS Inspection](/observability_pipelines/packs/aviatrix_l7_tls_inspection/)"
+      source: "Aviatrix"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Aviatrix L7/TLS inspection logs capture TLS session context and policy enforcement."
+    - pack: "[Aviatrix Suricata IDS/IPS](/observability_pipelines/packs/aviatrix_suricata_ids_ips/)"
+      source: "Aviatrix"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Aviatrix Suricata IDS/IPS alerts capture signature hits on gateway network traffic."
+    - pack: "[Aviatrix Tunnel Status](/observability_pipelines/packs/aviatrix_tunnel_status/)"
+      source: "Aviatrix"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Aviatrix tunnel status logs capture Site2Cloud and transit link state changes, events, and failure causes."
+    - pack: "[Aviatrix VPN Session](/observability_pipelines/packs/aviatrix_vpn_session/)"
+      source: "Aviatrix"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Aviatrix VPN gateway logs capture per-user session lifecycles, auth events, and gateway traffic volumes."
+    - pack: "[AWS Application Load Balancer Logs](/observability_pipelines/packs/aws_alb/)"
+      source: "AWS"
+      destination: "Any destination"
+      type: "Processing"
+      description: "AWS ALBs capture HTTP request activity routed through them."
+    - pack: "[AWS CloudTrail](/observability_pipelines/packs/aws_cloudtrail/)"
+      source: "AWS"
+      destination: "Any destination"
+      type: "Processing"
+      description: "AWS CloudTrail records API calls and account activity across AWS services."
+    - pack: "[AWS CloudWatch Logs](/observability_pipelines/packs/aws_cloudwatch_logs/)"
+      source: "AWS"
+      destination: "Any destination"
+      type: "Processing"
+      description: "AWS CloudWatch Logs captures log streams from Lambda, ECS, and more."
+    - pack: "[AWS Config](/observability_pipelines/packs/aws_config/)"
+      source: "AWS"
+      destination: "Any destination"
+      type: "Processing"
+      description: "AWS Config monitors and records resource configuration changes."
+    - pack: "[AWS Elastic Load Balancer Logs](/observability_pipelines/packs/aws_elb/)"
+      source: "AWS"
+      destination: "Any destination"
+      type: "Processing"
+      description: "AWS ELBs captures HTTP and HTTPS requests from Classic Load Balancers."
+    - pack: "[AWS GuardDuty](/observability_pipelines/packs/aws_guardduty/)"
+      source: "AWS"
+      destination: "Any destination"
+      type: "Processing"
+      description: "AWS GuardDuty detects threats in your AWS account."
+    - pack: "[AWS Lambda](/observability_pipelines/packs/aws_lambda/)"
+      source: "AWS"
+      destination: "Any destination"
+      type: "Processing"
+      description: "AWS Lambda logs capture invocations, errors, and cold starts."
+    - pack: "[AWS Network Load Balancer Logs](/observability_pipelines/packs/aws_nlb/)"
+      source: "AWS"
+      destination: "Any destination"
+      type: "Processing"
+      description: "AWS NLBs captures connection activity and performance data."
+    - pack: "[AWS Route 53](/observability_pipelines/packs/aws_route_53/)"
+      source: "AWS"
+      destination: "Any destination"
+      type: "Processing"
+      description: "AWS Route 53 captures DNS queries across your AWS infrastructure."
+    - pack: "[AWS Security Hub](/observability_pipelines/packs/aws_security_hub/)"
+      source: "AWS"
+      destination: "Any destination"
+      type: "Processing"
+      description: "AWS Security Hub aggregates security findings across AWS."
+    - pack: "[AWS WAF](/observability_pipelines/packs/aws_waf/)"
+      source: "AWS"
+      destination: "Any destination"
+      type: "Processing"
+      description: "AWS WAF captures AWS WAF logs from CloudWatch, S3, or Firehose."
+    - pack: "[Azure NSG](/observability_pipelines/packs/azure_nsg/)"
+      source: "Azure"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Azure Network Security Group v2 flow logs record per-connection decisions and byte counts."
+    - pack: "[BlueCat DNS](/observability_pipelines/packs/bluecat_dns/)"
+      source: "BlueCat"
+      destination: "Any destination"
+      type: "Processing"
+      description: "BlueCat BDDS syslog captures DNS queries and DHCP leases."
+    - pack: "[Check Point](/observability_pipelines/packs/checkpoint/)"
+      source: "Check Point"
+      destination: "Any destination"
+      type: "Processing"
+      description: "This pack processes Check Point logs in CEF format, with or without syslog prefix."
+    - pack: "[Cisco ACI](/observability_pipelines/packs/cisco_aci/)"
+      source: "Cisco"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Cisco ACI syslog events capture fabric health, endpoint moves, and admin activity."
+    - pack: "[Cisco ASA](/observability_pipelines/packs/cisco_asa/)"
+      source: "Cisco"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Cisco ASA firewall logs capture syslog events for traffic, VPNs, and security alerts."
+    - pack: "[Cisco ASA - Google SecOps](/observability_pipelines/packs/cisco_asa_google_secops/)"
+      source: "Cisco"
+      destination: "Google SecOps"
+      type: "Destination mapping"
+      description: "This pack maps Cisco ASA syslog events to the UDM schema in Google Security Operations."
+    - pack: "[Cisco ASA - Microsoft Sentinel](/observability_pipelines/packs/cisco_asa_microsoft_sentinel/)"
+      source: "Cisco"
+      destination: "Microsoft Sentinel"
+      type: "Destination mapping"
+      description: "This pack maps parsed Cisco ASA syslog events to the CommonSecurityLog schema in Microsoft Sentinel."
+    - pack: "[Cisco FTD](/observability_pipelines/packs/cisco_ftd/)"
+      source: "Cisco"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Cisco FTD syslog events cover access control, intrusion prevention, file detection, and VPN."
+    - pack: "[Cisco IOS](/observability_pipelines/packs/cisco_ios/)"
+      source: "Cisco"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Cisco IOS syslog captures security, auth, and routing events."
+    - pack: "[Cisco IOS Traceback](/observability_pipelines/packs/cisco_ios_traceback/)"
+      source: "Cisco"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Cisco IOS traceback events signal software faults, memory failures, and CPU issues."
+    - pack: "[Cisco Meraki](/observability_pipelines/packs/cisco_meraki/)"
+      source: "Cisco"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Cisco Meraki captures appliance events, flows, VPN firewall, NAT flows, and URL activity."
+    - pack: "[Cisco Meraki - Microsoft Sentinel](/observability_pipelines/packs/cisco_meraki_microsoft_sentinel/)"
+      source: "Cisco"
+      destination: "Microsoft Sentinel"
+      type: "Destination mapping"
+      description: "This pack maps parsed Cisco Meraki syslog events to the Syslog table schema in Microsoft Sentinel."
+    - pack: "[Cloudflare](/observability_pipelines/packs/cloudflare/)"
+      source: "Cloudflare"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Cloudflare logs show edge traffic, performance, and security."
+    - pack: "[CrowdStrike FDR](/observability_pipelines/packs/crowdstrike/)"
+      source: "CrowdStrike"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Falcon Data Replicator (FDR) provides endpoint detection and response."
+    - pack: "[DNS Stream](/observability_pipelines/packs/dns_stream/)"
+      source: "DNS Stream"
+      destination: "Any destination"
+      type: "Processing"
+      description: "This vendor-neutral DNS query/response stream includes tunneling and DGA beaconing indicators."
+    - pack: "[Exabeam - Cisco ASA](/observability_pipelines/packs/exabeam_cisco_asa/)"
+      source: "Cisco"
+      destination: "Exabeam"
+      type: "Destination mapping"
+      description: "This pack processes Cisco ASA firewall logs sent to Exabeam and filters by ASA code to drop non-actionable syslog noise."
+    - pack: "[Exabeam - CrowdStrike FDR](/observability_pipelines/packs/exabeam_crowdstrike_fdr/)"
+      source: "CrowdStrike"
+      destination: "Exabeam"
+      type: "Destination mapping"
+      description: "This pack processes CrowdStrike Falcon Data Replicator events sent to Exabeam and drops sensor and telemetry noise."
+    - pack: "[Exabeam - Fortinet FortiGate](/observability_pipelines/packs/exabeam_fortinet_fortigate/)"
+      source: "Fortinet"
+      destination: "Exabeam"
+      type: "Destination mapping"
+      description: "This pack processes FortiGate firewall logs sent to Exabeam and filters out routine traffic and health-check noise."
+    - pack: "[Exabeam - Palo Alto](/observability_pipelines/packs/exabeam_palo_alto/)"
+      source: "Palo Alto"
+      destination: "Exabeam"
+      type: "Destination mapping"
+      description: "This pack processes PAN-OS syslog sent to Exabeam and filters empty and duplicate-start traffic logs, leaving raw CSV untouched."
+    - pack: "[Exabeam - SentinelOne Cloud Funnel](/observability_pipelines/packs/exabeam_sentinelone_cloud_funnel/)"
+      source: "SentinelOne"
+      destination: "Exabeam"
+      type: "Destination mapping"
+      description: "This pack processes SentinelOne EDR events sent to Exabeam and samples high-volume event types to reduce ingest costs."
+    - pack: "[Exabeam - Windows](/observability_pipelines/packs/exabeam_windows/)"
+      source: "Windows"
+      destination: "Exabeam"
+      type: "Destination mapping"
+      description: "This pack processes Windows Event Logs sent to Exabeam and filters to codes Exabeam parsers use, keeping raw XML intact for parsing."
+    - pack: "[Exabeam - Zscaler](/observability_pipelines/packs/exabeam_zscaler/)"
+      source: "Zscaler"
+      destination: "Exabeam"
+      type: "Destination mapping"
+      description: "This pack processes Zscaler ZIA web, ZIA DNS, and ZPA logs sent to Exabeam and filters and samples routine traffic."
+    - pack: "[ExtraHop](/observability_pipelines/packs/extrahop/)"
+      source: "ExtraHop"
+      destination: "Any destination"
+      type: "Processing"
+      description: "ExtraHop Reveal(x) detections surface network threats and behavioral anomalies."
+    - pack: "[ExtraHop - Microsoft Sentinel](/observability_pipelines/packs/extrahop_microsoft_sentinel/)"
+      source: "ExtraHop"
+      destination: "Microsoft Sentinel"
+      type: "Destination mapping"
+      description: "This pack tags ExtraHop Reveal(x) network detections with severity and IPs for Microsoft Sentinel ingestion."
+    - pack: "[F5](/observability_pipelines/packs/f5/)"
+      source: "F5"
+      destination: "Any destination"
+      type: "Processing"
+      description: "F5 logs capture traffic, security policy, and intrusion events."
+    - pack: "[Fastly](/observability_pipelines/packs/fastly/)"
+      source: "Fastly"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Fastly CDN logs record client requests, cache states, and delivery performance."
+    - pack: "[Fortinet - Microsoft Sentinel](/observability_pipelines/packs/fortinet_microsoft_sentinel/)"
+      source: "Fortinet"
+      destination: "Microsoft Sentinel"
+      type: "Destination mapping"
+      description: "This pack maps FortiGate logs to the CommonSecurityLog schema in Microsoft Sentinel."
+    - pack: "[Fortinet Firewall](/observability_pipelines/packs/fortinet_firewall/)"
+      source: "Fortinet"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Fortinet firewall logs record allowed, denied, and other network traffic."
+    - pack: "[GCP Firewall](/observability_pipelines/packs/gcp_firewall/)"
+      source: "Google Cloud"
+      destination: "Any destination"
+      type: "Processing"
+      description: "GCP VPC Firewall logs record allowed and denied traffic."
+    - pack: "[Google Cloud Audit](/observability_pipelines/packs/google_cloud_audit/)"
+      source: "Google Cloud"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Google Cloud Audit logs capture admin activity and policy violations."
+    - pack: "[Google SecOps - AWS VPC](/observability_pipelines/packs/google_secops_aws_vpc/)"
+      source: "AWS"
+      destination: "Google SecOps"
+      type: "Destination mapping"
+      description: "This pack maps AWS VPC flow records to the UDM schema in Google Security Operations."
+    - pack: "[Google SecOps - Fortinet Firewall](/observability_pipelines/packs/google_secops_fortinet_firewall/)"
+      source: "Fortinet"
+      destination: "Google SecOps"
+      type: "Destination mapping"
+      description: "This pack maps Fortinet firewall logs to the UDM schema in Google Security Operations."
+    - pack: "[Google SecOps - Palo Alto Firewall](/observability_pipelines/packs/google_secops_palo_alto_firewall/)"
+      source: "Palo Alto"
+      destination: "Google SecOps"
+      type: "Destination mapping"
+      description: "This pack remaps PAN-OS logs to the UDM schema in Google Security Operations."
+    - pack: "[Google SecOps - Windows Event Log](/observability_pipelines/packs/google_secops_windows_event_log/)"
+      source: "Windows"
+      destination: "Google SecOps"
+      type: "Destination mapping"
+      description: "This pack maps Windows security events to the UDM schema in Google Security Operations."
+    - pack: "[HAProxy Ingress](/observability_pipelines/packs/haproxy_ingress/)"
+      source: "HAProxy"
+      destination: "Any destination"
+      type: "Processing"
+      description: "HAProxy Ingress logs record how Kubernetes ingress traffic is routed and served."
+    - pack: "[Infoblox](/observability_pipelines/packs/infoblox/)"
+      source: "Infoblox"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Infoblox NIOS syslog captures DNS, DHCP, audit, and CEF activity from appliances."
+    - pack: "[Istio Proxy](/observability_pipelines/packs/istio_proxy/)"
+      source: "Istio"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Istio Proxy logs capture inbound and outbound traffic handled by Envoy."
+    - pack: "[Juniper SRX Firewall Traffic Logs](/observability_pipelines/packs/juniper_srx_traffic/)"
+      source: "Juniper"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Juniper SRX Firewall records network session data."
+    - pack: "[Kube Proxy](/observability_pipelines/packs/kube_proxy/)"
+      source: "Kubernetes"
+      destination: "Any destination"
+      type: "Processing"
+      description: "This pack keeps kube-proxy errors and warnings only, dropping routine iptables sync noise fired every cycle."
+    - pack: "[Microsoft DNS](/observability_pipelines/packs/microsoft_dns/)"
+      source: "Microsoft"
+      destination: "Any destination"
+      type: "Processing"
+      description: "This pack parses the classic Windows DNS Server debug text log (dns.log) and decodes query names and response codes."
+    - pack: "[MITRE ATT&CK AWS WAF Enrichment](/observability_pipelines/packs/mitre_attack_aws_waf_enrichment/)"
+      source: "AWS"
+      destination: "Any destination"
+      type: "Enrichment"
+      description: "This pack tags AWS WAF logs with MITRE ATT&CK tactics and techniques."
+    - pack: "[MITRE ATT&CK CloudTrail Enrichment](/observability_pipelines/packs/mitre_attack_cloudtrail_enrichment/)"
+      source: "AWS"
+      destination: "Any destination"
+      type: "Enrichment"
+      description: "This pack tags CloudTrail logs with MITRE ATT&CK tactics and techniques."
+    - pack: "[MITRE ATT&CK FortiGate Enrichment](/observability_pipelines/packs/mitre_attack_fortigate_enrichment/)"
+      source: "Fortinet"
+      destination: "Any destination"
+      type: "Enrichment"
+      description: "This pack tags FortiGate logs with MITRE ATT&CK tactics and techniques."
+    - pack: "[MITRE ATT&CK Okta Enrichment](/observability_pipelines/packs/mitre_attack_okta_enrichment/)"
+      source: "Okta"
+      destination: "Any destination"
+      type: "Enrichment"
+      description: "This pack tags Okta logs with MITRE ATT&CK tactics and techniques."
+    - pack: "[MITRE ATT&CK Palo Alto Enrichment](/observability_pipelines/packs/mitre_attack_palo_alto_enrichment/)"
+      source: "Palo Alto"
+      destination: "Any destination"
+      type: "Enrichment"
+      description: "This pack tags Palo Alto logs with MITRE ATT&CK tactics and techniques."
+    - pack: "[MITRE ATT&CK Windows Enrichment](/observability_pipelines/packs/mitre_attack_windows_enrichment/)"
+      source: "Windows"
+      destination: "Any destination"
+      type: "Enrichment"
+      description: "This pack tags Windows event logs with MITRE ATT&CK tactics and techniques."
+    - pack: "[Netskope](/observability_pipelines/packs/netskope/)"
+      source: "Netskope"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Netskope logs capture cloud app use, policies, and security events."
+    - pack: "[NGINX](/observability_pipelines/packs/nginx/)"
+      source: "NGINX"
+      destination: "Any destination"
+      type: "Processing"
+      description: "NGINX logs record client requests, responses, and errors from the web server."
+    - pack: "[Okta](/observability_pipelines/packs/okta/)"
+      source: "Okta"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Okta logs show authentication, user activity, and policy events."
+    - pack: "[OpenAI - Audit Logs](/observability_pipelines/packs/openai_audit_logs/)"
+      source: "OpenAI"
+      destination: "Any destination"
+      type: "Processing"
+      description: "This pack flags failed logins, new API keys, and privilege changes from OpenAI organization audit logs."
+    - pack: "[OpenTelemetry Logs](/observability_pipelines/packs/opentelemetry_logs/)"
+      source: "OpenTelemetry"
+      destination: "Any destination"
+      type: "Processing"
+      description: "OTLP/JSON logs nest events under resourceLogs, scopeLogs, and logRecords arrays, three levels deep per payload."
+    - pack: "[Orca Security](/observability_pipelines/packs/orca_security/)"
+      source: "Orca Security"
+      destination: "Any destination"
+      type: "Processing"
+      description: "This pack normalizes Orca Security cloud findings for SIEM and data lake routing."
+    - pack: "[Palo Alto Cortex](/observability_pipelines/packs/palo_alto_cortex/)"
+      source: "Palo Alto"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Cortex XDR alerts include severity, MITRE ATT&CK mapping, and source/destination context."
+    - pack: "[Palo Alto Firewall](/observability_pipelines/packs/palo_alto_firewall/)"
+      source: "Palo Alto"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Palo Alto firewall logs capture traffic, threat, and system events."
+    - pack: "[Palo Alto Networks - Microsoft Sentinel](/observability_pipelines/packs/palo_alto_microsoft_sentinel/)"
+      source: "Palo Alto"
+      destination: "Microsoft Sentinel"
+      type: "Destination mapping"
+      description: "This pack maps PAN-OS logs to the CommonSecurityLog schema in Microsoft Sentinel."
+    - pack: "[Palo Alto Networks - XSIAM](/observability_pipelines/packs/palo_alto_xsiam/)"
+      source: "Palo Alto"
+      destination: "Cortex XSIAM"
+      type: "Destination mapping"
+      description: "This pack remaps PAN-OS logs to the Cortex XSIAM flat JSON schema."
+    - pack: "[Proofpoint Email Security](/observability_pipelines/packs/proofpoint_email_security/)"
+      source: "Proofpoint"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Proofpoint Email Security logs capture email threats, phishing, and malware detections."
+    - pack: "[Qualys Detections](/observability_pipelines/packs/qualys_detections/)"
+      source: "Qualys"
+      destination: "Any destination"
+      type: "Processing"
+      description: "This pack surfaces new, confirmed, and reopened Qualys vulnerability detections, dropping low-severity noise."
+    - pack: "[SentinelOne Cloud Funnel EDR](/observability_pipelines/packs/sentinel_one/)"
+      source: "SentinelOne"
+      destination: "Any destination"
+      type: "Processing"
+      description: "SentinelOne Cloud Funnel streams EDR and Deep Visibility events as JSON to cloud storage."
+    - pack: "[Syslog](/observability_pipelines/packs/syslog/)"
+      source: "Syslog"
+      destination: "Any destination"
+      type: "Processing"
+      description: "This pack parses generic RFC 3164/5424 syslog with severity mapping and a log-volume metric."
+    - pack: "[Windows DNS Log](/observability_pipelines/packs/windows_dns_log/)"
+      source: "Windows"
+      destination: "Any destination"
+      type: "Processing"
+      description: "The Windows DNS Server analytic log covers queries, zone transfers, and dynamic updates."
+    - pack: "[Windows Office 365](/observability_pipelines/packs/windows_office_365/)"
+      source: "Microsoft"
+      destination: "Any destination"
+      type: "Processing"
+      description: "This pack flags high-risk Microsoft 365 (M365) Unified Audit Log events: mail-forwarding rules, delegation, and role changes."
+    - pack: "[Windows XML](/observability_pipelines/packs/windows_xml/)"
+      source: "Windows"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Windows Event logs capture system, application, and security activity from Windows hosts."
+    - pack: "[WinEventLog](/observability_pipelines/packs/wineventlog/)"
+      source: "Windows"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Windows Event Log captures authentication, process creation, and account management events."
+    - pack: "[ZScaler ZIA DNS](/observability_pipelines/packs/zscaler_zia_dns/)"
+      source: "Zscaler"
+      destination: "Any destination"
+      type: "Processing"
+      description: "ZScaler Internet Access (ZIA) DNS logs capture org-wide DNS activity and policy actions."
+    - pack: "[Zscaler ZIA Firewall](/observability_pipelines/packs/zscaler_zia_firewall/)"
+      source: "Zscaler"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Zscaler Internet Access (ZIA) Firewall logs show network traffic and security events."
+    - pack: "[Zscaler ZIA Tunnel](/observability_pipelines/packs/zscaler_zia_tunnel/)"
+      source: "Zscaler"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Zscaler Internet Access (ZIA) Tunnel logs show tunnel health, traffic, and key events."
+    - pack: "[Zscaler ZIA Web Logs](/observability_pipelines/packs/zscaler_zia_web_logs/)"
+      source: "Zscaler"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Zscaler Internet Access (ZIA) Web Logs capture user web activity and security actions."
+    - pack: "[Zscaler ZPA](/observability_pipelines/packs/zscaler_zpa/)"
+      source: "Zscaler"
+      destination: "Any destination"
+      type: "Processing"
+      description: "Zscaler Private Access captures private app access, sessions, and connections."
 ---
 
 ## Overview
@@ -32,7 +551,7 @@ Observability Pipelines Packs provide predefined configurations to help you make
 
 ### What Packs do
 
-Each Pack includes source-specific configurations that defines:
+Each Pack includes source-specific configurations that define:
 
 - **Fields that can safely be removed** to reduce payload size
 - **Logs that can be dropped**, such as duplicate events or health checks
@@ -49,111 +568,15 @@ Packs help teams:
 - **Maintain consistency** in parsing and field mapping across environments and destinations
 - **Accelerate setup** by applying ready-to-use configurations for common sources
 
-## Packs
+## Available packs
 
-These packs are available:
+Search or filter the table by source, destination, or type. Select a pack name for details.
 
-- [Abnormal.ai - Abuse Campaigns][4]
-- [Abnormal.ai - Abuse Mailbox Messages Not Analyzed][5]
-- [Abnormal.ai - Audit Logs][6]
-- [Abnormal.ai - Threats][7]
-- [Active Directory][8]
-- [Akamai CDN][9]
-- [AlphaSOC Findings][10]
-- [Amazon Connect][11]
-- [Amazon VPC Flow Logs][12]
-- [Argo CD][13]
-- [Auth0][14]
-- [Aviatrix Controller API Audit][15]
-- [Aviatrix FQDN Firewall][16]
-- [Aviatrix Gateway Network Stats][17]
-- [Aviatrix Gateway System Stats][18]
-- [Aviatrix L4 Microsegmentation][19]
-- [Aviatrix L7/TLS Inspection][20]
-- [Aviatrix Suricata IDS/IPS][21]
-- [Aviatrix Tunnel Status][22]
-- [Aviatrix VPN Session][23]
-- [AWS Application Load Balancer Logs][24]
-- [AWS CloudFront][25]
-- [AWS CloudTrail][26]
-- [AWS CloudWatch Logs][27]
-- [AWS Config][28]
-- [AWS Elastic Load Balancer Logs][29]
-- [AWS GuardDuty][30]
-- [AWS Lambda][31]
-- [AWS Network Load Balancer Logs][32]
-- [AWS Route 53][33]
-- [AWS Security Hub][34]
-- [AWS WAF][35]
-- [Azure NSG][36]
-- [BlueCat DNS][37]
-- [Check Point][38]
-- [Cisco ACI][39]
-- [Cisco ASA][40]
-- [Cisco ASA - Google SecOps][41]
-- [Cisco ASA - Microsoft Sentinel][42]
-- [Cisco FTD][43]
-- [Cisco IOS][44]
-- [Cisco IOS Traceback][45]
-- [Cisco Meraki][46]
-- [Cisco Meraki - Microsoft Sentinel][47]
-- [Cloudflare][48]
-- [CrowdStrike FDR][49]
-- [DNS Stream][50]
-- [Exabeam - Cisco ASA][51]
-- [Exabeam - CrowdStrike FDR][52]
-- [Exabeam - Fortinet FortiGate][53]
-- [Exabeam - Palo Alto][54]
-- [Exabeam - SentinelOne Cloud Funnel][55]
-- [Exabeam - Windows][56]
-- [Exabeam - Zscaler][57]
-- [ExtraHop][58]
-- [ExtraHop - Microsoft Sentinel][59]
-- [F5][60]
-- [Fastly][61]
-- [Fortinet - Microsoft Sentinel][62]
-- [Fortinet Firewall][63]
-- [GCP Firewall][64]
-- [Google Cloud Audit][65]
-- [Google SecOps - AWS VPC][66]
-- [Google SecOps - Fortinet Firewall][67]
-- [Google SecOps - Palo Alto Firewall][68]
-- [Google SecOps - Windows Event Log][69]
-- [HAProxy Ingress][70]
-- [Infoblox][71]
-- [Istio Proxy][72]
-- [Juniper SRX Firewall Traffic Logs][73]
-- [Kube Proxy][74]
-- [Microsoft DNS][75]
-- [MITRE ATT&CK AWS WAF Enrichment][76]
-- [MITRE ATT&CK CloudTrail Enrichment][77]
-- [MITRE ATT&CK FortiGate Enrichment][78]
-- [MITRE ATT&CK Okta Enrichment][79]
-- [MITRE ATT&CK Palo Alto Enrichment][80]
-- [MITRE ATT&CK Windows Enrichment][81]
-- [Netskope][82]
-- [NGINX][83]
-- [Okta][84]
-- [OpenAI - Audit Logs][85]
-- [OpenTelemetry Logs][86]
-- [Orca Security][87]
-- [Palo Alto Cortex][88]
-- [Palo Alto Firewall][89]
-- [Palo Alto Networks - Microsoft Sentinel][90]
-- [Palo Alto Networks - XSIAM][91]
-- [Proofpoint Email Security][92]
-- [Qualys Detections][93]
-- [SentinelOne Cloud Funnel EDR][94]
-- [Syslog][95]
-- [Windows DNS Log][96]
-- [Windows Office 365][97]
-- [Windows XML][98]
-- [WinEventLog][99]
-- [ZScaler ZIA DNS][100]
-- [Zscaler ZIA Firewall][101]
-- [Zscaler ZIA Tunnel][102]
-- [Zscaler ZIA Web Logs][103]
-- [Zscaler ZPA][104]
+- **Processing**: Parse, filter, and sample logs from a source.
+- **Destination mapping**: Normalize logs for a specific destination such as Microsoft Sentinel, Google SecOps, Exabeam, or Cortex XSIAM.
+- **Enrichment**: Tag logs with MITRE ATT&CK tactics and techniques.
+
+{{< multifilter-search >}}
 
 ## Setup
 
@@ -162,7 +585,7 @@ To set up packs:
 1. Navigate to the [Pipelines][1] page.
 1. Click {{< ui >}}Packs{{< /ui >}}.
 1. Click the pack you want to set up.
-1. You can either create a new pipeline from the pack or add the pack to an existing pipelines.
+1. You can either create a new pipeline from the pack or add the pack to an existing pipeline.
     - If you clicked {{< ui >}}Add to New Pipeline{{< /ui >}}, in the new pipeline that was created:
         - Click the processor group that was added to see the individual processors that the pack added and edit them as needed. See [Processors][2] for more information.
         - See [Set Up Pipelines][3] for information on setting up the rest of the pipeline.
@@ -172,111 +595,10 @@ To set up packs:
             1. The pack is added to the last processor group in your pipeline.
             1. Click on the group to review the individual processors and edit them as needed. See [Processors][2] for more information.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/processors/
-[3]: /observability_pipelines/set_up_pipelines/
-[4]: /observability_pipelines/packs/abnormal_ai_abuse_campaigns/
-[5]: /observability_pipelines/packs/abnormal_ai_abuse_mailbox_messages/
-[6]: /observability_pipelines/packs/abnormal_ai_audit_logs/
-[7]: /observability_pipelines/packs/abnormal_ai_threats/
-[8]: /observability_pipelines/packs/active_directory/
-[9]: /observability_pipelines/packs/akamai_cdn/
-[10]: /observability_pipelines/packs/alphasoc_findings/
-[11]: /observability_pipelines/packs/amazon_connect/
-[12]: /observability_pipelines/packs/amazon_vpc_flow_logs/
-[13]: /observability_pipelines/packs/argo_cd/
-[14]: /observability_pipelines/packs/auth0/
-[15]: /observability_pipelines/packs/aviatrix_controller_api_audit/
-[16]: /observability_pipelines/packs/aviatrix_fqdn_firewall/
-[17]: /observability_pipelines/packs/aviatrix_gateway_network_stats/
-[18]: /observability_pipelines/packs/aviatrix_gateway_system_stats/
-[19]: /observability_pipelines/packs/aviatrix_l4_microsegmentation/
-[20]: /observability_pipelines/packs/aviatrix_l7_tls_inspection/
-[21]: /observability_pipelines/packs/aviatrix_suricata_ids_ips/
-[22]: /observability_pipelines/packs/aviatrix_tunnel_status/
-[23]: /observability_pipelines/packs/aviatrix_vpn_session/
-[24]: /observability_pipelines/packs/aws_alb/
-[25]: /observability_pipelines/packs/amazon_cloudfront/
-[26]: /observability_pipelines/packs/aws_cloudtrail/
-[27]: /observability_pipelines/packs/aws_cloudwatch_logs/
-[28]: /observability_pipelines/packs/aws_config/
-[29]: /observability_pipelines/packs/aws_elb/
-[30]: /observability_pipelines/packs/aws_guardduty/
-[31]: /observability_pipelines/packs/aws_lambda/
-[32]: /observability_pipelines/packs/aws_nlb/
-[33]: /observability_pipelines/packs/aws_route_53/
-[34]: /observability_pipelines/packs/aws_security_hub/
-[35]: /observability_pipelines/packs/aws_waf/
-[36]: /observability_pipelines/packs/azure_nsg/
-[37]: /observability_pipelines/packs/bluecat_dns/
-[38]: /observability_pipelines/packs/checkpoint/
-[39]: /observability_pipelines/packs/cisco_aci/
-[40]: /observability_pipelines/packs/cisco_asa/
-[41]: /observability_pipelines/packs/cisco_asa_google_secops/
-[42]: /observability_pipelines/packs/cisco_asa_microsoft_sentinel/
-[43]: /observability_pipelines/packs/cisco_ftd/
-[44]: /observability_pipelines/packs/cisco_ios/
-[45]: /observability_pipelines/packs/cisco_ios_traceback/
-[46]: /observability_pipelines/packs/cisco_meraki/
-[47]: /observability_pipelines/packs/cisco_meraki_microsoft_sentinel/
-[48]: /observability_pipelines/packs/cloudflare/
-[49]: /observability_pipelines/packs/crowdstrike/
-[50]: /observability_pipelines/packs/dns_stream/
-[51]: /observability_pipelines/packs/exabeam_cisco_asa/
-[52]: /observability_pipelines/packs/exabeam_crowdstrike_fdr/
-[53]: /observability_pipelines/packs/exabeam_fortinet_fortigate/
-[54]: /observability_pipelines/packs/exabeam_palo_alto/
-[55]: /observability_pipelines/packs/exabeam_sentinelone_cloud_funnel/
-[56]: /observability_pipelines/packs/exabeam_windows/
-[57]: /observability_pipelines/packs/exabeam_zscaler/
-[58]: /observability_pipelines/packs/extrahop/
-[59]: /observability_pipelines/packs/extrahop_microsoft_sentinel/
-[60]: /observability_pipelines/packs/f5/
-[61]: /observability_pipelines/packs/fastly/
-[62]: /observability_pipelines/packs/fortinet_microsoft_sentinel/
-[63]: /observability_pipelines/packs/fortinet_firewall/
-[64]: /observability_pipelines/packs/gcp_firewall/
-[65]: /observability_pipelines/packs/google_cloud_audit/
-[66]: /observability_pipelines/packs/google_secops_aws_vpc/
-[67]: /observability_pipelines/packs/google_secops_fortinet_firewall/
-[68]: /observability_pipelines/packs/google_secops_palo_alto_firewall/
-[69]: /observability_pipelines/packs/google_secops_windows_event_log/
-[70]: /observability_pipelines/packs/haproxy_ingress/
-[71]: /observability_pipelines/packs/infoblox/
-[72]: /observability_pipelines/packs/istio_proxy/
-[73]: /observability_pipelines/packs/juniper_srx_traffic/
-[74]: /observability_pipelines/packs/kube_proxy/
-[75]: /observability_pipelines/packs/microsoft_dns/
-[76]: /observability_pipelines/packs/mitre_attack_aws_waf_enrichment/
-[77]: /observability_pipelines/packs/mitre_attack_cloudtrail_enrichment/
-[78]: /observability_pipelines/packs/mitre_attack_fortigate_enrichment/
-[79]: /observability_pipelines/packs/mitre_attack_okta_enrichment/
-[80]: /observability_pipelines/packs/mitre_attack_palo_alto_enrichment/
-[81]: /observability_pipelines/packs/mitre_attack_windows_enrichment/
-[82]: /observability_pipelines/packs/netskope/
-[83]: /observability_pipelines/packs/nginx/
-[84]: /observability_pipelines/packs/okta/
-[85]: /observability_pipelines/packs/openai_audit_logs/
-[86]: /observability_pipelines/packs/opentelemetry_logs/
-[87]: /observability_pipelines/packs/orca_security/
-[88]: /observability_pipelines/packs/palo_alto_cortex/
-[89]: /observability_pipelines/packs/palo_alto_firewall/
-[90]: /observability_pipelines/packs/palo_alto_microsoft_sentinel/
-[91]: /observability_pipelines/packs/palo_alto_xsiam/
-[92]: /observability_pipelines/packs/proofpoint_email_security/
-[93]: /observability_pipelines/packs/qualys_detections/
-[94]: /observability_pipelines/packs/sentinel_one/
-[95]: /observability_pipelines/packs/syslog/
-[96]: /observability_pipelines/packs/windows_dns_log/
-[97]: /observability_pipelines/packs/windows_office_365/
-[98]: /observability_pipelines/packs/windows_xml/
-[99]: /observability_pipelines/packs/wineventlog/
-[100]: /observability_pipelines/packs/zscaler_zia_dns/
-[101]: /observability_pipelines/packs/zscaler_zia_firewall/
-[102]: /observability_pipelines/packs/zscaler_zia_tunnel/
-[103]: /observability_pipelines/packs/zscaler_zia_web_logs/
-[104]: /observability_pipelines/packs/zscaler_zpa/
+[3]: /observability_pipelines/configuration/set_up_pipelines/
