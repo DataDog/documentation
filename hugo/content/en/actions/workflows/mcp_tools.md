@@ -45,7 +45,7 @@ Use the `workflows` toolset to build automations that:
 https://mcp.datadoghq.com/v1/mcp?toolsets=core,workflows
 {{< /code-block >}}
 
-    **Note**: If you authenticate using an application key, enable [Actions API access][3] for that key from [**Organization Settings > Application Keys**][20]. Actions API access is disabled for application keys by default and is required to access the Workflow Automation APIs.
+    **Note**: If you authenticate using an application key, enable [Actions API access][3] for that key from [**Organization Settings > Application Keys**][4]. Actions API access is disabled for application keys by default and is required to access the Workflow Automation APIs.
 
 1. After connecting, you can make requests, and your AI client calls the appropriate tools on your behalf.
     - "Find workflows owned by my team that are triggered by monitor alerts."
@@ -81,22 +81,24 @@ The `workflows` toolset exposes the following tools, grouped by the part of the 
 
 - [`create_datadog_workflow`][11]
 - [`update_datadog_workflow`][12]
-- [`delete_datadog_workflow`][13]
+- [`publish_datadog_workflow`][13]
+- [`unpublish_datadog_workflow`][14]
+- [`delete_datadog_workflow`][15]
 
 ### Workflow validation
 
-- [`validate_datadog_workflow`][14]
+- [`validate_datadog_workflow`][16]
 
 ### Workflow execution
 
-- [`execute_datadog_workflow`][15]
-- [`get_datadog_workflow_instance`][16]
-- [`list_datadog_workflow_instances`][17]
-- [`cancel_datadog_workflow_instance`][18]
+- [`execute_datadog_workflow`][17]
+- [`get_datadog_workflow_instance`][18]
+- [`list_datadog_workflow_instances`][19]
+- [`cancel_datadog_workflow_instance`][20]
 
 ### Execution debugging
 
-- [`get_datadog_workflow_step_data`][19]
+- [`get_datadog_workflow_step_data`][21]
 
 ## Further reading
 
@@ -105,7 +107,7 @@ The `workflows` toolset exposes the following tools, grouped by the part of the 
 [1]: /mcp_server/setup/
 [2]: https://modelcontextprotocol.io/
 [3]: /account_management/api-app-keys/#actions-api-access
-[4]: /actions/actions_catalog/
+[4]: https://app.datadoghq.com/organization-settings/application-keys
 [5]: /mcp_server/tools/#workflows
 [6]: /mcp_server/tools/#list_datadog_workflows
 [7]: /mcp_server/tools/#get_datadog_workflow
@@ -114,11 +116,13 @@ The `workflows` toolset exposes the following tools, grouped by the part of the 
 [10]: /mcp_server/tools/#get_datadog_workflow_action
 [11]: /mcp_server/tools/#create_datadog_workflow
 [12]: /mcp_server/tools/#update_datadog_workflow
-[13]: /mcp_server/tools/#delete_datadog_workflow
-[14]: /mcp_server/tools/#validate_datadog_workflow
-[15]: /mcp_server/tools/#execute_datadog_workflow
-[16]: /mcp_server/tools/#get_datadog_workflow_instance
-[17]: /mcp_server/tools/#list_datadog_workflow_instances
-[18]: /mcp_server/tools/#cancel_datadog_workflow_instance
-[19]: /mcp_server/tools/#get_datadog_workflow_step_data
-[20]: https://app.datadoghq.com/organization-settings/application-keys
+[13]: /mcp_server/tools/#publish_datadog_workflow
+[14]: /mcp_server/tools/#unpublish_datadog_workflow
+[15]: /mcp_server/tools/#delete_datadog_workflow
+[16]: /mcp_server/tools/#validate_datadog_workflow
+[17]: /mcp_server/tools/#execute_datadog_workflow
+[18]: /mcp_server/tools/#get_datadog_workflow_instance
+[19]: /mcp_server/tools/#list_datadog_workflow_instances
+[20]: /mcp_server/tools/#cancel_datadog_workflow_instance
+[21]: /mcp_server/tools/#get_datadog_workflow_step_data
+[22]: /actions/actions_catalog/
