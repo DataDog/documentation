@@ -17,7 +17,7 @@ The `DatadogPodAutoscaler` (DPA) custom resource defines autoscaling behavior fo
 
 This page covers the configuration options available in the manifest. It uses API version `datadoghq.com/v1alpha2`.
 
-For setup and prerequisites—enabling Workload Autoscaling and the Admission Controller on the Datadog Cluster Agent, required Agent versions, and enabling [in-place vertical scaling][3]—see [Kubernetes Autoscaling][2].
+For setup and prerequisites, see [Kubernetes Autoscaling][2]. That page covers enabling Workload Autoscaling and the Admission Controller on the Datadog Cluster Agent, required Agent versions, and enabling [in-place vertical scaling][3].
 
 **Feature status labels:** features on this page are generally available unless marked **Preview**, **Beta**, or **Experimental**. Preview and Beta features are available and supported, but their field names and behavior may still change. Experimental features are available but not recommended for production without contacting [Datadog Support][9] first.
 
@@ -136,12 +136,12 @@ Most vertical options are expressed through `spec.constraints.containers[]`:
 
 | Field | Type | Default | Meaning |
 |---|---|---|---|
-| `name` | string, **required** | — | Container name, or `"*"` to match every container that has no entry of its own (see [Exclude a container](#exclude-a-container)) |
+| `name` | string, **required** | N/A | Container name, or `"*"` to match every container that has no entry of its own (see [Exclude a container](#exclude-a-container)) |
 | `enabled` | bool | `true` | `false` disables resource autoscaling for this container |
 | `controlledResources` | list of `cpu`, `memory` | `[cpu, memory]` | Which resources receive vertical recommendations. An empty list is equivalent to `enabled: false` |
 | `controlledValues` | enum | `RequestsAndLimits` | Whether recommendations write both requests _and_ limits, or requests only |
-| `minAllowed` | resource map | — | Lower bound for the container's requests |
-| `maxAllowed` | resource map | — | Upper bound for the container's requests |
+| `minAllowed` | resource map | None | Lower bound for the container's requests |
+| `maxAllowed` | resource map | None | Upper bound for the container's requests |
 
 If `constraints.containers` is omitted entirely, resource scaling is enabled for **all** containers, with no bounds.
 
@@ -205,7 +205,7 @@ This requires a recent Agent version; see the requirements in [Kubernetes Autosc
 
 **Status: Beta.**
 
-CPU limit recommendations are derived from sustained usage percentiles over a multi-day window. A short warm-up spike—a JVM starting up, for example—is statistically invisible in that window, so the recommended CPU limit can land too low and the application is throttled at the wrong moment. Memory is not affected in the same way, because peak memory usage gives a reliable ceiling.
+CPU limit recommendations are derived from sustained usage percentiles over a multi-day window. A short warm-up spike (a JVM starting up, for example) is statistically invisible in that window, so the recommended CPU limit can land too low and the application is throttled at the wrong moment. Memory is not affected in the same way, because peak memory usage gives a reliable ceiling.
 
 Burstable mode **removes CPU limits entirely** while still applying CPU _request_ recommendations:
 
@@ -294,7 +294,7 @@ To verify, run `kubectl -n production get dpa -o yaml` and confirm the generated
 
 ## Tune the OOMKill memory bump
 
-After an OOMKill, the memory limit is raised by **20%** relative to the limit in force at the time. The bump is applied immediately and re-applied on each subsequent OOMKill until the workload stabilizes—a self-correcting ratchet rather than a one-time adjustment.
+After an OOMKill, the memory limit is raised by **20%** relative to the limit in force at the time. The bump is applied immediately and re-applied on each subsequent OOMKill until the workload stabilizes. This is a self-correcting ratchet rather than a one-time adjustment.
 
 To change the ratio:
 
@@ -317,7 +317,7 @@ If you hit that situation:
 
 ## Right-size requests only
 
-If you have deliberately tuned limits—for burst headroom, a platform requirement, or a QoS guarantee—and want Datadog to right-size only **requests**, use `controlledValues: RequestsOnly`.
+If you have deliberately tuned limits (for burst headroom, a platform requirement, or a QoS guarantee) and want Datadog to right-size only **requests**, use `controlledValues: RequestsOnly`.
 
 ```yaml
 spec:
@@ -407,7 +407,7 @@ spec:
         enabled: false
 ```
 
-**How `"*"` and named entries combine:** the `"*"` entry applies to every container that does **not** have a named entry. A container with its own named entry takes only the settings declared under that name—the two are **not merged**, so the wildcard contributes nothing to it.
+**How `"*"` and named entries combine:** the `"*"` entry applies to every container that does **not** have a named entry. A container with its own named entry takes only the settings declared under that name. The two are **not merged**, so the wildcard contributes nothing to it.
 
 In the example above, `istio-proxy` is governed solely by `enabled: false` and does not inherit `controlledResources` from the wildcard. Every other container in the pod uses the wildcard entry.
 
@@ -501,7 +501,7 @@ spec:
 
 Points to be aware of:
 
-- `restartPolicy: Always` is what distinguishes them. Ordinary init containers—those that run to completion before the application starts—are not native sidecars and are not managed by a DPA.
+- `restartPolicy: Always` is what distinguishes them. Ordinary init containers (those that run to completion before the application starts) are not native sidecars and are not managed by a DPA.
 - **Cost and savings figures may under-count native sidecars.** Their resource requests are reported under a separate aggregation, so the cost figures shown for a workload with native sidecars can look inconsistent with its observed usage. This is a known limitation that affects the cost display only; recommendations are unaffected.
 - **Injected sidecars** (such as Istio's) are added by a mutating admission webhook at pod level and never appear in the Deployment manifest. They are still picked up, because the container list is reconciled from running pods rather than from the workload manifest alone.
 - **Agent-level container exclusions take precedence.** If a sidecar is filtered out of collection on the Agent, no metrics exist for it and no recommendation can be produced. Recommendations for the rest of the pod are unaffected, but that container is reported as missing data.
@@ -548,7 +548,7 @@ spec:
 
 | Field | Controls |
 |---|---|
-| `resizePendingPeriod` | How long to wait before evicting a pod when the kubelet reports the resize as pending—the resize was accepted but is not progressing, often because the node lacks headroom |
+| `resizePendingPeriod` | How long to wait before evicting a pod when the kubelet reports the resize as pending (accepted but not progressing, often because the node lacks headroom) |
 | `rolloutFallbackDelay` | How long to wait before falling back to a full rollout when evictions are blocked, typically by a PodDisruptionBudget |
 
 Both are optional and accept 1 to 3600 seconds. Leaving them unset uses the controller's built-in defaults.
@@ -664,12 +664,12 @@ A DPA has no cross-cluster awareness. Each cluster scales independently within t
 
 ### Manifest managers (Helm, Argo CD, Flux)
 
-- Horizontal scaling writes `replicas` through the `scale` subresource—the equivalent of `kubectl scale`, which manifest managers tolerate well. Remove any static `replicas:` from your manifest after you switch to Apply mode.
+- Horizontal scaling writes `replicas` through the `scale` subresource (the equivalent of `kubectl scale`), which manifest managers tolerate well. Remove any static `replicas:` from your manifest after you switch to Apply mode.
 - Vertical scaling can reach pods two ways. In-place resize and the admission controller's mutating webhook apply resources to pods without rewriting the workload manifest, so no drift is reported. Rollout-based vertical scaling updates the target Deployment or StatefulSet, which a GitOps tool can detect as drift. If you use Argo CD, configure it to ignore the fields the Cluster Agent owns; see [Manage DatadogPodAutoscaler with ArgoCD][5].
 
 ## Rollout checklist
 
-1. Confirm the cluster prerequisites—Workload Autoscaling and the Admission Controller enabled on the Cluster Agent (see [Kubernetes Autoscaling][2]). Without this, the DPA applies cleanly and then does nothing.
+1. Confirm the cluster prerequisites: Workload Autoscaling and the Admission Controller enabled on the Cluster Agent (see [Kubernetes Autoscaling][2]). Without this, the DPA applies cleanly and then does nothing.
 2. Generate a baseline in the UI ({{< ui >}}Configure Recommendation{{< /ui >}} > {{< ui >}}Export Recommendation{{< /ui >}}).
 3. Add the manifest options you need from this page.
 4. Commit with `applyPolicy.mode: Preview`, leaving any existing HPA or VPA in place.

@@ -478,7 +478,7 @@ spec:
                   type: Percent
                   value: 50
             stabilizationWindowSeconds: 130
-        # Vertical updates disabled — horizontal only
+        # Vertical updates disabled, horizontal only
         update:
             strategy: Disabled
     constraints:
@@ -617,7 +617,7 @@ The template body accepts the same fields as a `DatadogPodAutoscaler` spec, minu
 
 #### Activation precedence
 
-Cluster Agent 7.79.0+ adds namespace-level activation, the `excluded` opt-out, and the precedence rule between them. On Cluster Agent 7.78.0, only the workload-level label is read — the rules below that involve namespaces or the `excluded` value do not apply.
+Cluster Agent 7.79.0+ adds namespace-level activation, the `excluded` opt-out, and the precedence rule between them. On Cluster Agent 7.78.0, only the workload-level label is read. The rules below that involve namespaces or the `excluded` value do not apply.
 
 - **Workload labels take precedence over namespace labels.** If a namespace is labeled `autoscaling.datadoghq.com/profile=ns-profile` and a workload inside it is labeled `autoscaling.datadoghq.com/profile=workload-profile`, the workload uses `workload-profile`.
 - **Opt out with `excluded`.** Set `autoscaling.datadoghq.com/profile: excluded` on a workload to exempt it when its namespace is labeled. This is useful for stateful or critical workloads in an otherwise opted-in namespace.
