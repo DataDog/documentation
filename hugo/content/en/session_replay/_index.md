@@ -95,6 +95,11 @@ To extend Session Replay data retention to 15 months, you can enable {{< ui >}}E
 
 To access any Session Replay at a later time, Datadog recommends saving the URL or adding it to a [Playlist][7].
 
+Datadog also extends retention to 15 months automatically when a replay is used elsewhere in the product:
+
+- Adding a replay to a [Playlist][7].
+- Saving a replay as a heatmap screenshot. See [Analyzing heatmaps beyond replay retention][12].
+
 Extended Retention only applies to Session Replay and does not include associated events. The 15 months start when Extended Retention is enabled, not when the session is collected.
 
 You can disable Extended Retention at any time. If the session replay is still within its default 30 days of retention, the replay expires at the end of the initial 30 day window. If you disable Extended Retention on a session replay that is older than 30 days, the replay immediately expires.
@@ -140,3 +145,4 @@ Learn more about [Dev Tools][11].
 [9]: /account_management/audit_trail/
 [10]: /rum/replay/playlists/my-watch-history
 [11]: /session_replay/dev_tools
+[12]: /session_replay/heatmaps/#analyzing-heatmaps-beyond-replay-retention
