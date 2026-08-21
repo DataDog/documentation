@@ -10,9 +10,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-risk-management"
   tag: "Blog"
   text: "How we centralize and remediate risks with Datadog Case Management"
-- link: "https://www.datadoghq.com/blog/work-management/"
-  tag: "Blog"
-  text: "Centralize human and agentic work with Datadog Work Management"
 ---
 
 ## Overview

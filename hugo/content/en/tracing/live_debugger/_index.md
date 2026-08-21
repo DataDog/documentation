@@ -35,9 +35,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
   tag: "Blog"
   text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
-- link: "https://www.datadoghq.com/blog/engineering/improving-apm-java-startup-with-a-prefix-trie/"
-  tag: "Blog"
-  text: "How we improved APM Java startup by encoding a prefix trie as a JVM constant"
 ---
 
 ## Overview

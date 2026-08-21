@@ -24,9 +24,6 @@ further_reading:
 - link: "/monitors/types/apm/"
   tag: "Documentation"
   text: "Learn about APM monitors"
-- link: "https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/"
-  tag: "Blog"
-  text: "How CISA’s BOD 26-04 changes vulnerability prioritization"
 ---
 
 {{< jqmath-vanilla >}}
