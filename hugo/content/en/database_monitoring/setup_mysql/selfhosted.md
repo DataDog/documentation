@@ -90,6 +90,8 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
+**Note**: For MariaDB, the Agent automatically detects and monitors all replication channels when no specific `replication_channel` is configured. Each channel is tagged with `channel:<connection_name>`.
+
 {{% /tab %}}
 {{% tab "MySQL 5.6" %}}
 
