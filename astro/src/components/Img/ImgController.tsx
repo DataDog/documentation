@@ -1,12 +1,11 @@
 import type { ComponentChildren } from "preact";
 import styles from "./ImgController.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
-import type { SizingProps } from "./imgTypes";
 import Lightbox from "./Lightbox";
 
 const cl = classListFactory(styles);
 
-interface ImgControllerProps extends SizingProps {
+interface ImgControllerProps {
   imageUrl: string;
   srcset: string;
   popupHref: string;
@@ -14,6 +13,17 @@ interface ImgControllerProps extends SizingProps {
   caption?: string;
   inline?: boolean;
   popup?: boolean;
+  width?: string;
+  height?: string;
+  widthPercent?: number;
+}
+
+interface PictureImageProps {
+  srcset: string;
+  alt?: string;
+  width?: string;
+  height?: string;
+  widthPercent?: number;
 }
 
 function PictureImage({
@@ -22,7 +32,7 @@ function PictureImage({
   width,
   height,
   widthPercent,
-}: SizingProps & { srcset: string; alt?: string }) {
+}: PictureImageProps) {
   return (
     <picture>
       <img

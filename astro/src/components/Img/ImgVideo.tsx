@@ -1,11 +1,13 @@
 import styles from "./ImgVideo.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
-import type { SizingProps } from "./imgTypes";
 
 const cl = classListFactory(styles);
 
-interface ImgVideoProps extends SizingProps {
+interface ImgVideoProps {
   imageUrl: string;
+  width?: string;
+  height?: string;
+  widthPercent?: number;
 }
 
 export default function ImgVideo({

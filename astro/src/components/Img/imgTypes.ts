@@ -9,8 +9,3 @@ export interface ImgTagProps {
   height?: string;
   widthPercent?: number;
 }
-
-export type SizingProps = Pick<
-  ImgTagProps,
-  "width" | "height" | "widthPercent"
->;
