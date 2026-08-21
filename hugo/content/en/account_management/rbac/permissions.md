@@ -11,6 +11,9 @@ further_reading:
     - link: '/api/v2/roles/#list-permissions'
       tag: 'Documentation'
       text: 'Manage your permissions with the Permission API'
+    - link: "https://www.datadoghq.com/blog/product-analytics-account-segments/"
+      tag: "Blog"
+      text: "Investigate account-level churn risk with Product Analytics account segments"
 algolia:
     rank: 80
     category: Documentation

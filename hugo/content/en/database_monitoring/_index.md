@@ -8,12 +8,12 @@ further_reading:
 - link: "/database_monitoring/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting"
-- link: "https://dtdg.co/fe"
-  tag: "Foundation Enablement"
-  text: "Join an interactive session to level up your Database Monitoring"
 - link: "https://learn.datadoghq.com/courses/database-monitoring"
   tag: "Learning Center"
   text: "Monitoring a Postgres Database with Datadog DBM"
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session to level up your Database Monitoring"
 - link: "https://www.datadoghq.com/blog/map-postgresql-explain-plan-nodes-to-sql-with-datadog/"
   tag: "Blog"
   text: "Diagnose slow PostgreSQL queries faster with explain plan correlation"
@@ -41,6 +41,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-database-research/"
   tag: "Blog"
   text: "How microservice architectures have shaped the usage of database technologies"
+- link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
+  tag: "Blog"
+  text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
 algolia:
   tags: ['database monitoring', 'dbm']
 cascade:

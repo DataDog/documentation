@@ -5,6 +5,10 @@ aliases:
 - /static_analysis/github_pull_requests
 - /code_analysis/github_pull_requests/
 - /security/code_security/dev_tool_int/github_pull_requests/
+further_reading:
+- link: "https://www.datadoghq.com/blog/ai-native-sast-detect-llm-vulnerabilities/"
+  tag: "Blog"
+  text: "Detect vulnerabilities in LLM applications with Datadog’s AI-native SAST"
 ---
 
 ## Overview
@@ -150,3 +154,7 @@ When configuring PR comments, you can:
 [9]: https://docs.datadoghq.com/integrations/azure-devops-source-code/#source-code-functionality
 [10]: /quality_gates/?tab=staticanalysis#setup
 [11]: /integrations/guide/source-code-integration/?tab=codesecurity#pr-comments
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

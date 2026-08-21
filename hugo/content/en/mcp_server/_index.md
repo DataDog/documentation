@@ -28,6 +28,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/openai-datadog-ai-devops-agent/"
   tag: "Blog"
   text: "Datadog + OpenAI: Codex CLI integration for AI‑assisted DevOps"
+- link: "https://www.datadoghq.com/blog/serverless-agentic-onboarding/"
+  tag: "Blog"
+  text: "Instrument serverless apps with agentic onboarding"
 algolia:
   tags: ["mcp", "mcp server"]
   rank: 90

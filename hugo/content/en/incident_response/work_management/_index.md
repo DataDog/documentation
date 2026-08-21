@@ -23,6 +23,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-service-management/"
   tag: "Blog"
   text: "Ensure high service availability with Datadog Service Management"
+- link: "https://www.datadoghq.com/blog/work-management/"
+  tag: "Blog"
+  text: "Centralize human and agentic work with Datadog Work Management"
+- link: "https://www.datadoghq.com/blog/systemic-risk-ai-agents-datadog/"
+  tag: "Blog"
+  text: "From signals to systemic risk: Building Risk AI"
 algolia:
   tags: ['inbox', 'work management', 'case management']
 ---
