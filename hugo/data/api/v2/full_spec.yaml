@@ -949,6 +949,13 @@ components:
       required: true
       schema:
         type: string
+    IntegrationAccountIdParameter:
+      description: Unique identifier of the integration account.
+      in: path
+      name: account_id
+      required: true
+      schema:
+        type: string
     IssueIDPathParameter:
       description: The identifier of the issue.
       example: "c1726a66-1f64-11ee-b338-da7ad0900002"
@@ -34756,6 +34763,440 @@ components:
         - score
         - severity
       type: object
+    ElasticCloudAuthentication:
+      description: >-
+        Authentication methods supported by the Elastic Cloud monitoring interface. Exactly one is set, selected by its `type`.
+      oneOf:
+        - $ref: "#/components/schemas/ElasticCloudBasicAuth"
+    ElasticCloudBasicAuth:
+      description: Username & password authentication for Elastic Cloud.
+      properties:
+        password:
+          description: Password used to authenticate against the deployment. This field is not returned by the API.
+          example: your-password
+          type: string
+          writeOnly: true
+        type:
+          $ref: "#/components/schemas/ElasticCloudBasicAuthType"
+        username:
+          description: Username used to authenticate against the deployment.
+          example: datadog
+          type: string
+      required:
+        - type
+        - username
+        - password
+      type: object
+    ElasticCloudBasicAuthType:
+      default: basic
+      description: Authentication method discriminator.
+      enum:
+        - basic
+      example: basic
+      type: string
+      x-enum-varnames:
+        - BASIC
+    ElasticCloudCcmAccountAttributes:
+      description: >-
+        Attributes of an Elastic Cloud CCM (Cloud Cost Management) account. The configuration is hoisted directly onto the attributes; there is no interface wrapper because the `elastic-cloud-ccm` interface is fixed by the endpoint path.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ElasticCloudCcmAuthentication"
+        dataflows:
+          description: Dataflows for the Elastic Cloud CCM interface.
+          items:
+            $ref: "#/components/schemas/ElasticCloudCcmDataflow"
+          type: array
+        name:
+          description: Human-readable name of the account.
+          example: elastic-cloud-ccm-prod
+          type: string
+        permissions:
+          $ref: "#/components/schemas/IntegrationAccountPermissions"
+        settings:
+          $ref: "#/components/schemas/ElasticCloudCcmSettings"
+      required:
+        - name
+        - authentication
+      type: object
+    ElasticCloudCcmAccountCreateData:
+      description: Data envelope for creating an Elastic Cloud CCM account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ElasticCloudCcmAccountAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    ElasticCloudCcmAccountData:
+      description: Data envelope of an Elastic Cloud CCM account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ElasticCloudCcmAccountAttributes"
+        id:
+          description: Server-generated unique identifier of the integration account.
+          example: 953a0060-81ec-4221-aed4-d4733b59cd96
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ElasticCloudCcmAccountRequest:
+      description: Request payload to create an Elastic Cloud CCM (Cloud Cost Management) account.
+      properties:
+        data:
+          $ref: "#/components/schemas/ElasticCloudCcmAccountCreateData"
+      required:
+        - data
+      type: object
+    ElasticCloudCcmAccountResponse:
+      description: Response payload for a single Elastic Cloud CCM account.
+      properties:
+        data:
+          $ref: "#/components/schemas/ElasticCloudCcmAccountData"
+      type: object
+    ElasticCloudCcmAccountUpdateAttributes:
+      description: >-
+        Updatable attributes of an Elastic Cloud CCM account. Every field is optional; only the fields provided are changed.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ElasticCloudCcmAuthentication"
+        dataflows:
+          description: Dataflows for the Elastic Cloud CCM interface.
+          items:
+            $ref: "#/components/schemas/ElasticCloudCcmDataflow"
+          type: array
+        name:
+          description: Human-readable name of the account.
+          example: elastic-cloud-ccm-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/ElasticCloudCcmSettingsUpdate"
+      type: object
+    ElasticCloudCcmAccountUpdateData:
+      description: Data envelope for updating an Elastic Cloud CCM account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ElasticCloudCcmAccountUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    ElasticCloudCcmAccountUpdateRequest:
+      description: Request payload to update an Elastic Cloud CCM account as a partial merge.
+      properties:
+        data:
+          $ref: "#/components/schemas/ElasticCloudCcmAccountUpdateData"
+      required:
+        - data
+      type: object
+    ElasticCloudCcmAccountsResponse:
+      description: Response payload for a list of Elastic Cloud CCM accounts.
+      properties:
+        data:
+          description: List of Elastic Cloud CCM accounts.
+          items:
+            $ref: "#/components/schemas/ElasticCloudCcmAccountData"
+          type: array
+      type: object
+    ElasticCloudCcmAuthentication:
+      description: >-
+        Authentication methods supported by the Elastic Cloud CCM interface. Exactly one is set, selected by its `type`.
+      oneOf:
+        - $ref: "#/components/schemas/ElasticCloudCcmTokenAuth"
+    ElasticCloudCcmDataflow:
+      description: An Elastic Cloud CCM dataflow toggle. The set of dataflow ids is fixed by the interface schema.
+      properties:
+        enabled:
+          description: Whether the dataflow is enabled.
+          example: true
+          type: boolean
+        id:
+          $ref: "#/components/schemas/ElasticCloudCcmDataflowId"
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      required:
+        - id
+      type: object
+    ElasticCloudCcmDataflowId:
+      description: Identifier of an Elastic Cloud CCM dataflow.
+      enum:
+        - elastic-cloud-cost-data
+      example: elastic-cloud-cost-data
+      type: string
+      x-enum-varnames:
+        - COST_DATA
+    ElasticCloudCcmSettings:
+      description: Elastic Cloud CCM interface settings.
+      properties:
+        elastic_org_id:
+          description: Your Elastic Cloud organization ID, found in your organization settings.
+          example: "2079364244"
+          type: string
+      required:
+        - elastic_org_id
+      type: object
+    ElasticCloudCcmSettingsUpdate:
+      description: Partial Elastic Cloud CCM interface settings for updates.
+      properties:
+        elastic_org_id:
+          description: Your Elastic Cloud organization ID, found in your organization settings.
+          example: "2079364244"
+          type: string
+      type: object
+    ElasticCloudCcmTokenAuth:
+      description: Encrypted token (bearer token) authentication for Elastic Cloud CCM.
+      properties:
+        api_key:
+          description: >-
+            Billing API key. An Elastic Cloud API key with read access to both Billing and Deployments. Create one under Organization settings > API Keys. This field is not returned by the API.
+          example: your-billing-api-key
+          type: string
+          writeOnly: true
+        type:
+          $ref: "#/components/schemas/ElasticCloudCcmTokenAuthType"
+      required:
+        - type
+        - api_key
+      type: object
+    ElasticCloudCcmTokenAuthType:
+      default: bearer_token
+      description: Authentication method discriminator.
+      enum:
+        - bearer_token
+      example: bearer_token
+      type: string
+      x-enum-varnames:
+        - BEARER_TOKEN
+    ElasticCloudDataflow:
+      description: An Elastic Cloud monitoring dataflow toggle. The set of dataflow ids is fixed by the interface schema.
+      properties:
+        enabled:
+          description: Whether the dataflow is enabled.
+          example: true
+          type: boolean
+        id:
+          $ref: "#/components/schemas/ElasticCloudDataflowId"
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      required:
+        - id
+      type: object
+    ElasticCloudDataflowId:
+      description: Identifier of an Elastic Cloud monitoring dataflow.
+      enum:
+        - elastic-cloud-metrics
+      example: elastic-cloud-metrics
+      type: string
+      x-enum-varnames:
+        - METRICS
+    ElasticCloudMonitoringAccountAttributes:
+      description: >-
+        Attributes of an Elastic Cloud monitoring account. The configuration is hoisted directly onto the attributes; there is no interface wrapper because the `elastic-cloud` interface is fixed by the endpoint path.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ElasticCloudAuthentication"
+        dataflows:
+          description: Dataflows for the Elastic Cloud monitoring interface.
+          items:
+            $ref: "#/components/schemas/ElasticCloudDataflow"
+          type: array
+        name:
+          description: Human-readable name of the account.
+          example: elastic-cloud-prod
+          type: string
+        permissions:
+          $ref: "#/components/schemas/IntegrationAccountPermissions"
+        settings:
+          $ref: "#/components/schemas/ElasticCloudSettings"
+      required:
+        - name
+        - authentication
+      type: object
+    ElasticCloudMonitoringAccountCreateData:
+      description: Data envelope for creating an Elastic Cloud monitoring account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ElasticCloudMonitoringAccountAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    ElasticCloudMonitoringAccountData:
+      description: Data envelope of an Elastic Cloud monitoring account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ElasticCloudMonitoringAccountAttributes"
+        id:
+          description: Server-generated unique identifier of the integration account.
+          example: 953a0060-81ec-4221-aed4-d4733b59cd96
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ElasticCloudMonitoringAccountRequest:
+      description: Request payload to create an Elastic Cloud monitoring account.
+      properties:
+        data:
+          $ref: "#/components/schemas/ElasticCloudMonitoringAccountCreateData"
+      required:
+        - data
+      type: object
+    ElasticCloudMonitoringAccountResponse:
+      description: Response payload for a single Elastic Cloud monitoring account.
+      properties:
+        data:
+          $ref: "#/components/schemas/ElasticCloudMonitoringAccountData"
+      type: object
+    ElasticCloudMonitoringAccountUpdateAttributes:
+      description: >-
+        Updatable attributes of an Elastic Cloud monitoring account. Every field is optional; only the fields provided are changed.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ElasticCloudAuthentication"
+        dataflows:
+          description: Dataflows for the Elastic Cloud monitoring interface.
+          items:
+            $ref: "#/components/schemas/ElasticCloudDataflow"
+          type: array
+        name:
+          description: Human-readable name of the account.
+          example: elastic-cloud-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/ElasticCloudSettingsUpdate"
+      type: object
+    ElasticCloudMonitoringAccountUpdateData:
+      description: Data envelope for updating an Elastic Cloud monitoring account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ElasticCloudMonitoringAccountUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    ElasticCloudMonitoringAccountUpdateRequest:
+      description: Request payload to update an Elastic Cloud monitoring account as a partial merge.
+      properties:
+        data:
+          $ref: "#/components/schemas/ElasticCloudMonitoringAccountUpdateData"
+      required:
+        - data
+      type: object
+    ElasticCloudMonitoringAccountsResponse:
+      description: Response payload for a list of Elastic Cloud monitoring accounts.
+      properties:
+        data:
+          description: List of Elastic Cloud monitoring accounts.
+          items:
+            $ref: "#/components/schemas/ElasticCloudMonitoringAccountData"
+          type: array
+      type: object
+    ElasticCloudSettings:
+      description: Elastic Cloud monitoring interface settings.
+      properties:
+        cat_allocation_stats_enabled:
+          description: Enable to collect shard allocation metrics.
+          example: false
+          type: boolean
+        detailed_index_stats_enabled:
+          description: Enable to collect index-specific stats.
+          example: false
+          type: boolean
+        index_stats_enabled:
+          description: Enable to collect metrics about the indices in your cluster.
+          example: false
+          type: boolean
+        pending_task_stats_enabled:
+          description: Enable to collect metrics about pending tasks.
+          example: false
+          type: boolean
+        pshard_graceful_to_enabled:
+          description: Enable to collect all metrics even if primary shard metric collection times out.
+          example: false
+          type: boolean
+        pshard_stats_enabled:
+          description: Enable to collect metrics over primary shards.
+          example: false
+          type: boolean
+        slm_stats_enabled:
+          description: Enable to collect snapshot lifecycle management metrics.
+          example: false
+          type: boolean
+        tags:
+          description: Custom tags for this deployment.
+          example:
+            - env:prod
+          items:
+            type: string
+          type: array
+        url:
+          description: Deployment URL.
+          example: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+          type: string
+      required:
+        - url
+      type: object
+    ElasticCloudSettingsUpdate:
+      description: Partial Elastic Cloud monitoring interface settings for updates.
+      properties:
+        cat_allocation_stats_enabled:
+          description: Enable to collect shard allocation metrics.
+          example: false
+          type: boolean
+        detailed_index_stats_enabled:
+          description: Enable to collect index-specific stats.
+          example: false
+          type: boolean
+        index_stats_enabled:
+          description: Enable to collect metrics about the indices in your cluster.
+          example: false
+          type: boolean
+        pending_task_stats_enabled:
+          description: Enable to collect metrics about pending tasks.
+          example: false
+          type: boolean
+        pshard_graceful_to_enabled:
+          description: Enable to collect all metrics even if primary shard metric collection times out.
+          example: false
+          type: boolean
+        pshard_stats_enabled:
+          description: Enable to collect metrics over primary shards.
+          example: false
+          type: boolean
+        slm_stats_enabled:
+          description: Enable to collect snapshot lifecycle management metrics.
+          example: false
+          type: boolean
+        tags:
+          description: Custom tags for this deployment.
+          example:
+            - env:prod
+          items:
+            type: string
+          type: array
+        url:
+          description: Deployment URL.
+          example: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+          type: string
+      type: object
     EmailTypeType:
       description: The type of email.
       enum:
@@ -52933,6 +53374,58 @@ components:
         - id
         - attributes
       type: object
+    IntegrationAccountDataflowHealth:
+      description: Collection health of a single dataflow.
+      enum:
+        - DATAFLOW_HEALTH_OK
+        - DATAFLOW_HEALTH_BROKEN
+        - DATAFLOW_HEALTH_UNKNOWN
+      example: DATAFLOW_HEALTH_OK
+      type: string
+      x-enum-varnames:
+        - OK
+        - BROKEN
+        - UNKNOWN
+    IntegrationAccountDataflowStatus:
+      description: Read-only, server-computed collection status of a dataflow.
+      properties:
+        health:
+          $ref: "#/components/schemas/IntegrationAccountDataflowHealth"
+        message:
+          description: Human-readable detail, populated when the dataflow is not healthy.
+          example: ""
+          type: string
+        updated_at:
+          description: Time the status was last computed.
+          example: "2026-06-25T08:30:50Z"
+          format: date-time
+          type: string
+      readOnly: true
+      type: object
+    IntegrationAccountPermissions:
+      description: Read-only permission information for the account, derived from its restriction policy.
+      properties:
+        resource_id:
+          description: Restriction-policy resource identifier of this account.
+          example: "integration-account:twilio:953a0060-81ec-4221-aed4-d4733b59cd96"
+          readOnly: true
+          type: string
+        user_can_edit:
+          description: Whether the requesting user may edit this account.
+          example: true
+          readOnly: true
+          type: boolean
+      readOnly: true
+      type: object
+    IntegrationAccountType:
+      default: integration-account
+      description: JSON:API resource type for an integration account. Always `integration-account`.
+      enum:
+        - integration-account
+      example: integration-account
+      type: string
+      x-enum-varnames:
+        - INTEGRATION_ACCOUNT
     IntegrationAttributes:
       description: Attributes for an integration.
       properties:
@@ -118720,6 +119213,206 @@ components:
       type: string
       x-enum-varnames:
         - TRIGGER_WORKFLOW_AUTOMATION
+    TwilioAccountAttributes:
+      description: >-
+        Attributes of a Twilio integration account. The Twilio configuration is hoisted directly onto the attributes; there is no interface wrapper because the `twilio` interface is fixed by the endpoint path.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/TwilioAuthentication"
+        dataflows:
+          description: Dataflows for the Twilio interface.
+          items:
+            $ref: "#/components/schemas/TwilioDataflow"
+          type: array
+        name:
+          description: Human-readable name of the account.
+          example: twilio-prod
+          type: string
+        permissions:
+          $ref: "#/components/schemas/IntegrationAccountPermissions"
+        settings:
+          $ref: "#/components/schemas/TwilioSettings"
+      required:
+        - name
+        - authentication
+      type: object
+    TwilioAccountCreateData:
+      description: Data envelope for creating a Twilio integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TwilioAccountAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    TwilioAccountData:
+      description: Data envelope of a Twilio integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TwilioAccountAttributes"
+        id:
+          description: Server-generated unique identifier of the integration account.
+          example: 953a0060-81ec-4221-aed4-d4733b59cd96
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TwilioAccountRequest:
+      description: Request payload to create a Twilio integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/TwilioAccountCreateData"
+      required:
+        - data
+      type: object
+    TwilioAccountResponse:
+      description: Response payload for a single Twilio integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/TwilioAccountData"
+      type: object
+    TwilioAccountUpdateAttributes:
+      description: >-
+        Updatable attributes of a Twilio integration account. Every field is optional; only the fields provided are changed.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/TwilioAuthentication"
+        dataflows:
+          description: Dataflows for the Twilio interface.
+          items:
+            $ref: "#/components/schemas/TwilioDataflow"
+          type: array
+        name:
+          description: Human-readable name of the account.
+          example: twilio-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/TwilioSettingsUpdate"
+      type: object
+    TwilioAccountUpdateData:
+      description: Data envelope for updating a Twilio integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TwilioAccountUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    TwilioAccountUpdateRequest:
+      description: Request payload to update a Twilio integration account as a partial merge.
+      properties:
+        data:
+          $ref: "#/components/schemas/TwilioAccountUpdateData"
+      required:
+        - data
+      type: object
+    TwilioAccountsResponse:
+      description: Response payload for a list of Twilio integration accounts.
+      properties:
+        data:
+          description: List of Twilio integration accounts.
+          items:
+            $ref: "#/components/schemas/TwilioAccountData"
+          type: array
+      type: object
+    TwilioAuthentication:
+      description: >-
+        Authentication methods supported by the Twilio interface. Exactly one is set, selected by its `type`.
+      oneOf:
+        - $ref: "#/components/schemas/TwilioBasicAuth"
+    TwilioBasicAuth:
+      description: API Key & Secret authentication for Twilio.
+      properties:
+        api_key:
+          description: Twilio API Key SID for authentication. Create from Twilio Console > Account > API Keys & Tokens.
+          example: SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          type: string
+        api_key_token:
+          description: Twilio API Key Secret (token) corresponding to the API Key SID. This field is not returned by the API.
+          example: your-api-key-secret
+          type: string
+          writeOnly: true
+        type:
+          $ref: "#/components/schemas/TwilioBasicAuthType"
+      required:
+        - type
+        - api_key
+        - api_key_token
+      type: object
+    TwilioBasicAuthType:
+      default: basic
+      description: Authentication method discriminator.
+      enum:
+        - basic
+      example: basic
+      type: string
+      x-enum-varnames:
+        - BASIC
+    TwilioDataflow:
+      description: A Twilio dataflow toggle. The set of dataflow ids is fixed by the interface schema.
+      properties:
+        enabled:
+          description: Whether the dataflow is enabled.
+          example: true
+          type: boolean
+        id:
+          $ref: "#/components/schemas/TwilioDataflowId"
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      required:
+        - id
+      type: object
+    TwilioDataflowId:
+      description: Identifier of a Twilio dataflow.
+      enum:
+        - twilio-cloud-cost-metrics
+        - twilio-events-logs
+        - twilio-messages-logs
+        - twilio-alerts-logs
+        - twilio-call-summaries-logs
+      example: twilio-messages-logs
+      type: string
+      x-enum-varnames:
+        - CLOUD_COST_METRICS
+        - EVENTS_LOGS
+        - MESSAGES_LOGS
+        - ALERTS_LOGS
+        - CALL_SUMMARIES_LOGS
+    TwilioSettings:
+      description: Twilio interface settings.
+      properties:
+        account_sid:
+          description: Twilio Account SID that uniquely identifies your Twilio account.
+          example: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          type: string
+        censor_logs:
+          description: When enabled, phone numbers in the `to` field and SMS message bodies are censored for privacy.
+          example: true
+          type: boolean
+      required:
+        - account_sid
+      type: object
+    TwilioSettingsUpdate:
+      description: Partial Twilio interface settings for updates.
+      properties:
+        account_sid:
+          description: Twilio Account SID that uniquely identifies your Twilio account.
+          example: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          type: string
+        censor_logs:
+          description: When enabled, phone numbers in the `to` field and SMS message bodies are censored for privacy.
+          example: true
+          type: boolean
+      type: object
     UCConfigPair:
       description: The definition of `UCConfigPair` object.
       example:
@@ -162681,6 +163374,474 @@ paths:
         operator: OR
         permissions:
           - manage_integrations
+  /api/v2/integrations/elastic-cloud/interfaces/elastic-cloud-ccm/accounts:
+    get:
+      description: List the Elastic Cloud CCM (Cloud Cost Management) accounts.
+      operationId: ListElasticCloudCcmAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            type: bearer_token
+                          dataflows:
+                            - enabled: true
+                              id: elastic-cloud-cost-data
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-06-25T08:30:50Z"
+                          name: elastic-cloud-ccm-prod
+                          permissions:
+                            resource_id: "integration-account:elastic-cloud-ccm:953a0060-81ec-4221-aed4-d4733b59cd96"
+                            user_can_edit: true
+                          settings:
+                            elastic_org_id: "2079364244"
+                        id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/ElasticCloudCcmAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Elastic Cloud CCM accounts
+      tags:
+        - Elastic Cloud Cloud Cost Management
+      x-menu-order: 1
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create an Elastic Cloud CCM (Cloud Cost Management) account.
+      operationId: CreateElasticCloudCcmAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElasticCloudCcmAccountRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          type: bearer_token
+                        dataflows:
+                          - enabled: true
+                            id: elastic-cloud-cost-data
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: elastic-cloud-ccm-prod
+                        permissions:
+                          resource_id: "integration-account:elastic-cloud-ccm:953a0060-81ec-4221-aed4-d4733b59cd96"
+                          user_can_edit: true
+                        settings:
+                          elastic_org_id: "2079364244"
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ElasticCloudCcmAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create an Elastic Cloud CCM account
+      tags:
+        - Elastic Cloud Cloud Cost Management
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integrations/elastic-cloud/interfaces/elastic-cloud-ccm/accounts/{account_id}:
+    delete:
+      description: Delete an Elastic Cloud CCM (Cloud Cost Management) account.
+      operationId: DeleteElasticCloudCcmAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an Elastic Cloud CCM account
+      tags:
+        - Elastic Cloud Cloud Cost Management
+      x-menu-order: 5
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a single Elastic Cloud CCM (Cloud Cost Management) account.
+      operationId: GetElasticCloudCcmAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          type: bearer_token
+                        dataflows:
+                          - enabled: true
+                            id: elastic-cloud-cost-data
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: elastic-cloud-ccm-prod
+                        permissions:
+                          resource_id: "integration-account:elastic-cloud-ccm:953a0060-81ec-4221-aed4-d4733b59cd96"
+                          user_can_edit: true
+                        settings:
+                          elastic_org_id: "2079364244"
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ElasticCloudCcmAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get an Elastic Cloud CCM account
+      tags:
+        - Elastic Cloud Cloud Cost Management
+      x-menu-order: 3
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: >-
+        Update an Elastic Cloud CCM account. The update is a partial merge: only the fields provided are changed, so a name-only or settings-only update does not need to resend the full payload or write-only credentials.
+      operationId: UpdateElasticCloudCcmAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElasticCloudCcmAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          type: bearer_token
+                        dataflows:
+                          - enabled: true
+                            id: elastic-cloud-cost-data
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: elastic-cloud-ccm-prod
+                        permissions:
+                          resource_id: "integration-account:elastic-cloud-ccm:953a0060-81ec-4221-aed4-d4733b59cd96"
+                          user_can_edit: true
+                        settings:
+                          elastic_org_id: "2079364244"
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ElasticCloudCcmAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update an Elastic Cloud CCM account
+      tags:
+        - Elastic Cloud Cloud Cost Management
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integrations/elastic-cloud/interfaces/elastic-cloud/accounts:
+    get:
+      description: List the Elastic Cloud monitoring accounts.
+      operationId: ListElasticCloudMonitoringAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            type: basic
+                            username: datadog
+                          dataflows:
+                            - enabled: true
+                              id: elastic-cloud-metrics
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-06-25T08:30:50Z"
+                          name: elastic-cloud-prod
+                          permissions:
+                            resource_id: "integration-account:elastic-cloud:953a0060-81ec-4221-aed4-d4733b59cd96"
+                            user_can_edit: true
+                          settings:
+                            tags:
+                              - env:prod
+                            url: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+                        id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/ElasticCloudMonitoringAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Elastic Cloud monitoring accounts
+      tags:
+        - Elastic Cloud Monitoring
+      x-menu-order: 1
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create an Elastic Cloud monitoring account.
+      operationId: CreateElasticCloudMonitoringAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElasticCloudMonitoringAccountRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          type: basic
+                          username: datadog
+                        dataflows:
+                          - enabled: true
+                            id: elastic-cloud-metrics
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: elastic-cloud-prod
+                        permissions:
+                          resource_id: "integration-account:elastic-cloud:953a0060-81ec-4221-aed4-d4733b59cd96"
+                          user_can_edit: true
+                        settings:
+                          tags:
+                            - env:prod
+                          url: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ElasticCloudMonitoringAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create an Elastic Cloud monitoring account
+      tags:
+        - Elastic Cloud Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integrations/elastic-cloud/interfaces/elastic-cloud/accounts/{account_id}:
+    delete:
+      description: Delete an Elastic Cloud monitoring account.
+      operationId: DeleteElasticCloudMonitoringAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an Elastic Cloud monitoring account
+      tags:
+        - Elastic Cloud Monitoring
+      x-menu-order: 5
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a single Elastic Cloud monitoring account.
+      operationId: GetElasticCloudMonitoringAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          type: basic
+                          username: datadog
+                        dataflows:
+                          - enabled: true
+                            id: elastic-cloud-metrics
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: elastic-cloud-prod
+                        permissions:
+                          resource_id: "integration-account:elastic-cloud:953a0060-81ec-4221-aed4-d4733b59cd96"
+                          user_can_edit: true
+                        settings:
+                          tags:
+                            - env:prod
+                          url: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ElasticCloudMonitoringAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get an Elastic Cloud monitoring account
+      tags:
+        - Elastic Cloud Monitoring
+      x-menu-order: 3
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: >-
+        Update an Elastic Cloud monitoring account. The update is a partial merge: only the fields provided are changed, so a name-only or settings-only update does not need to resend the full payload or write-only credentials.
+      operationId: UpdateElasticCloudMonitoringAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElasticCloudMonitoringAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          type: basic
+                          username: datadog
+                        dataflows:
+                          - enabled: true
+                            id: elastic-cloud-metrics
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: elastic-cloud-prod
+                        permissions:
+                          resource_id: "integration-account:elastic-cloud:953a0060-81ec-4221-aed4-d4733b59cd96"
+                          user_can_edit: true
+                        settings:
+                          tags:
+                            - env:prod
+                          url: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ElasticCloudMonitoringAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update an Elastic Cloud monitoring account
+      tags:
+        - Elastic Cloud Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integrations/fastly/accounts:
     get:
       description: List Fastly accounts.
@@ -163319,6 +164480,242 @@ paths:
         operator: OR
         permissions:
           - manage_integrations
+  /api/v2/integrations/twilio/interfaces/twilio/accounts:
+    get:
+      description: List the Twilio integration accounts.
+      operationId: ListTwilioAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            api_key: SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                            type: basic
+                          dataflows:
+                            - enabled: true
+                              id: twilio-messages-logs
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-06-25T08:30:50Z"
+                          name: twilio-prod
+                          permissions:
+                            resource_id: "integration-account:twilio:953a0060-81ec-4221-aed4-d4733b59cd96"
+                            user_can_edit: true
+                          settings:
+                            account_sid: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                            censor_logs: true
+                        id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/TwilioAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Twilio integration accounts
+      tags:
+        - Twilio Integration Accounts
+      x-menu-order: 1
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a Twilio integration account.
+      operationId: CreateTwilioAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TwilioAccountRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          api_key: SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                          type: basic
+                        dataflows:
+                          - enabled: true
+                            id: twilio-messages-logs
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: twilio-prod
+                        permissions:
+                          resource_id: "integration-account:twilio:953a0060-81ec-4221-aed4-d4733b59cd96"
+                          user_can_edit: true
+                        settings:
+                          account_sid: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                          censor_logs: true
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/TwilioAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a Twilio integration account
+      tags:
+        - Twilio Integration Accounts
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integrations/twilio/interfaces/twilio/accounts/{account_id}:
+    delete:
+      description: Delete a Twilio integration account.
+      operationId: DeleteTwilioAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a Twilio integration account
+      tags:
+        - Twilio Integration Accounts
+      x-menu-order: 5
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a single Twilio integration account.
+      operationId: GetTwilioAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          api_key: SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                          type: basic
+                        dataflows:
+                          - enabled: true
+                            id: twilio-messages-logs
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: twilio-prod
+                        permissions:
+                          resource_id: "integration-account:twilio:953a0060-81ec-4221-aed4-d4733b59cd96"
+                          user_can_edit: true
+                        settings:
+                          account_sid: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                          censor_logs: true
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/TwilioAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a Twilio integration account
+      tags:
+        - Twilio Integration Accounts
+      x-menu-order: 3
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: >-
+        Update a Twilio integration account. The update is a partial merge: only the fields provided are changed, so a name-only or settings-only update does not need to resend the full payload or write-only credentials.
+      operationId: UpdateTwilioAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TwilioAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          api_key: SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                          type: basic
+                        dataflows:
+                          - enabled: true
+                            id: twilio-messages-logs
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: twilio-prod
+                        permissions:
+                          resource_id: "integration-account:twilio:953a0060-81ec-4221-aed4-d4733b59cd96"
+                          user_can_edit: true
+                        settings:
+                          account_sid: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                          censor_logs: true
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/TwilioAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a Twilio integration account
+      tags:
+        - Twilio Integration Accounts
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/ip_allowlist:
     get:
       description: Returns the IP allowlist and its enabled or disabled state.
@@ -221646,6 +223043,12 @@ tags:
       scopes from alerting. Downtime settings, which can be scheduled with start and
       end times, prevent all alerting related to specified Datadog tags.
     name: Downtimes
+  - description: >-
+      Manage Elastic Cloud accounts for the Cloud Cost Management interface (`elastic-cloud-ccm`), served by the Account Management Service (AMS). Concrete, strongly typed CRUD operations for the Cloud Cost Management interface.
+    name: Elastic Cloud Cloud Cost Management
+  - description: >-
+      Manage Elastic Cloud accounts for the monitoring interface (`elastic-cloud`), served by the Account Management Service (AMS). Concrete, strongly typed CRUD operations for the monitoring interface.
+    name: Elastic Cloud Monitoring
   - description: Manage per-integration configurations for the Internal Developer Portal (IDP). These configurations control which external resources (for example, GitHub repositories, Jira projects, or PagerDuty services) are synced as entities into the Software Catalog.
     name: Entity Integration Configs
   - description: Retrieves security risk scores for entities in your organization.
@@ -222084,6 +223487,9 @@ tags:
   - description: |-
       Search and manage flaky tests through Test Optimization. See the [Test Optimization page](https://docs.datadoghq.com/tests/) for more information.
     name: Test Optimization
+  - description: >-
+      Manage Twilio accounts for the Twilio `twilio` interface, served by the Account Management Service (AMS). Concrete, strongly typed CRUD operations for the single Twilio interface.
+    name: Twilio Integration Accounts
   - description: |-
       The usage metering API allows you to get hourly, daily, and
       monthly usage across multiple facets of Datadog.

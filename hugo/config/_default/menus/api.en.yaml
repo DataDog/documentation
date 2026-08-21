@@ -12794,6 +12794,144 @@ menu:
           - GetDomainAllowlist
         unstable: []
         order: 1
+    - name: Elastic Cloud Cloud Cost Management
+      url: /api/latest/elastic-cloud-cloud-cost-management/
+      identifier: elastic-cloud-cloud-cost-management
+      generated: true
+    - name: Update an Elastic Cloud CCM account
+      url: /api/latest/elastic-cloud-cloud-cost-management/update-an-elastic-cloud-ccm-account/
+      identifier: elastic-cloud-cloud-cost-management-update-an-elastic-cloud-ccm-account
+      parent: elastic-cloud-cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateElasticCloudCcmAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get an Elastic Cloud CCM account
+      url: /api/latest/elastic-cloud-cloud-cost-management/get-an-elastic-cloud-ccm-account/
+      identifier: elastic-cloud-cloud-cost-management-get-an-elastic-cloud-ccm-account
+      parent: elastic-cloud-cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetElasticCloudCcmAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete an Elastic Cloud CCM account
+      url: /api/latest/elastic-cloud-cloud-cost-management/delete-an-elastic-cloud-ccm-account/
+      identifier: elastic-cloud-cloud-cost-management-delete-an-elastic-cloud-ccm-account
+      parent: elastic-cloud-cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteElasticCloudCcmAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create an Elastic Cloud CCM account
+      url: /api/latest/elastic-cloud-cloud-cost-management/create-an-elastic-cloud-ccm-account/
+      identifier: elastic-cloud-cloud-cost-management-create-an-elastic-cloud-ccm-account
+      parent: elastic-cloud-cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateElasticCloudCcmAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Elastic Cloud CCM accounts
+      url: /api/latest/elastic-cloud-cloud-cost-management/list-elastic-cloud-ccm-accounts/
+      identifier: elastic-cloud-cloud-cost-management-list-elastic-cloud-ccm-accounts
+      parent: elastic-cloud-cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListElasticCloudCcmAccounts
+        unstable:
+          - v2
+        order: 1
+    - name: Elastic Cloud Monitoring
+      url: /api/latest/elastic-cloud-monitoring/
+      identifier: elastic-cloud-monitoring
+      generated: true
+    - name: Update an Elastic Cloud monitoring account
+      url: /api/latest/elastic-cloud-monitoring/update-an-elastic-cloud-monitoring-account/
+      identifier: elastic-cloud-monitoring-update-an-elastic-cloud-monitoring-account
+      parent: elastic-cloud-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateElasticCloudMonitoringAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get an Elastic Cloud monitoring account
+      url: /api/latest/elastic-cloud-monitoring/get-an-elastic-cloud-monitoring-account/
+      identifier: elastic-cloud-monitoring-get-an-elastic-cloud-monitoring-account
+      parent: elastic-cloud-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetElasticCloudMonitoringAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete an Elastic Cloud monitoring account
+      url: /api/latest/elastic-cloud-monitoring/delete-an-elastic-cloud-monitoring-account/
+      identifier: elastic-cloud-monitoring-delete-an-elastic-cloud-monitoring-account
+      parent: elastic-cloud-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteElasticCloudMonitoringAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create an Elastic Cloud monitoring account
+      url: /api/latest/elastic-cloud-monitoring/create-an-elastic-cloud-monitoring-account/
+      identifier: elastic-cloud-monitoring-create-an-elastic-cloud-monitoring-account
+      parent: elastic-cloud-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateElasticCloudMonitoringAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Elastic Cloud monitoring accounts
+      url: /api/latest/elastic-cloud-monitoring/list-elastic-cloud-monitoring-accounts/
+      identifier: elastic-cloud-monitoring-list-elastic-cloud-monitoring-accounts
+      parent: elastic-cloud-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListElasticCloudMonitoringAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Entity Integration Configs
       url: /api/latest/entity-integration-configs/
       identifier: entity-integration-configs
@@ -21958,6 +22096,75 @@ menu:
           - UpdateFlakyTestsManagementPolicies
         unstable: []
         order: 7
+    - name: Twilio Integration Accounts
+      url: /api/latest/twilio-integration-accounts/
+      identifier: twilio-integration-accounts
+      generated: true
+    - name: Update a Twilio integration account
+      url: /api/latest/twilio-integration-accounts/update-a-twilio-integration-account/
+      identifier: twilio-integration-accounts-update-a-twilio-integration-account
+      parent: twilio-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTwilioAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Twilio integration account
+      url: /api/latest/twilio-integration-accounts/get-a-twilio-integration-account/
+      identifier: twilio-integration-accounts-get-a-twilio-integration-account
+      parent: twilio-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTwilioAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Twilio integration account
+      url: /api/latest/twilio-integration-accounts/delete-a-twilio-integration-account/
+      identifier: twilio-integration-accounts-delete-a-twilio-integration-account
+      parent: twilio-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTwilioAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Twilio integration account
+      url: /api/latest/twilio-integration-accounts/create-a-twilio-integration-account/
+      identifier: twilio-integration-accounts-create-a-twilio-integration-account
+      parent: twilio-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTwilioAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Twilio integration accounts
+      url: /api/latest/twilio-integration-accounts/list-twilio-integration-accounts/
+      identifier: twilio-integration-accounts-list-twilio-integration-accounts
+      parent: twilio-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTwilioAccounts
+        unstable:
+          - v2
+        order: 1
     - name: User Authorized Clients
       url: /api/latest/user-authorized-clients/
       identifier: user-authorized-clients

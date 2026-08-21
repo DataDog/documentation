@@ -3169,6 +3169,54 @@
     "request_description": "Confluent payload",
     "request_schema_description": "The JSON:API request for updating a Confluent resource."
   },
+  "ListElasticCloudCcmAccounts": {
+    "description": "List the Elastic Cloud CCM (Cloud Cost Management) accounts.",
+    "summary": "List Elastic Cloud CCM accounts"
+  },
+  "CreateElasticCloudCcmAccount": {
+    "description": "Create an Elastic Cloud CCM (Cloud Cost Management) account.",
+    "summary": "Create an Elastic Cloud CCM account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an Elastic Cloud CCM (Cloud Cost Management) account."
+  },
+  "DeleteElasticCloudCcmAccount": {
+    "description": "Delete an Elastic Cloud CCM (Cloud Cost Management) account.",
+    "summary": "Delete an Elastic Cloud CCM account"
+  },
+  "GetElasticCloudCcmAccount": {
+    "description": "Get a single Elastic Cloud CCM (Cloud Cost Management) account.",
+    "summary": "Get an Elastic Cloud CCM account"
+  },
+  "UpdateElasticCloudCcmAccount": {
+    "description": "Update an Elastic Cloud CCM account. The update is a partial merge: only the fields provided are changed, so a name-only or settings-only update does not need to resend the full payload or write-only credentials.",
+    "summary": "Update an Elastic Cloud CCM account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an Elastic Cloud CCM account as a partial merge."
+  },
+  "ListElasticCloudMonitoringAccounts": {
+    "description": "List the Elastic Cloud monitoring accounts.",
+    "summary": "List Elastic Cloud monitoring accounts"
+  },
+  "CreateElasticCloudMonitoringAccount": {
+    "description": "Create an Elastic Cloud monitoring account.",
+    "summary": "Create an Elastic Cloud monitoring account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an Elastic Cloud monitoring account."
+  },
+  "DeleteElasticCloudMonitoringAccount": {
+    "description": "Delete an Elastic Cloud monitoring account.",
+    "summary": "Delete an Elastic Cloud monitoring account"
+  },
+  "GetElasticCloudMonitoringAccount": {
+    "description": "Get a single Elastic Cloud monitoring account.",
+    "summary": "Get an Elastic Cloud monitoring account"
+  },
+  "UpdateElasticCloudMonitoringAccount": {
+    "description": "Update an Elastic Cloud monitoring account. The update is a partial merge: only the fields provided are changed, so a name-only or settings-only update does not need to resend the full payload or write-only credentials.",
+    "summary": "Update an Elastic Cloud monitoring account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an Elastic Cloud monitoring account as a partial merge."
+  },
   "ListFastlyAccounts": {
     "description": "List Fastly accounts.",
     "summary": "List Fastly accounts"
@@ -3240,6 +3288,30 @@
     "summary": "Update Okta account",
     "request_description": "",
     "request_schema_description": "Payload schema when updating an Okta account."
+  },
+  "ListTwilioAccounts": {
+    "description": "List the Twilio integration accounts.",
+    "summary": "List Twilio integration accounts"
+  },
+  "CreateTwilioAccount": {
+    "description": "Create a Twilio integration account.",
+    "summary": "Create a Twilio integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Twilio integration account."
+  },
+  "DeleteTwilioAccount": {
+    "description": "Delete a Twilio integration account.",
+    "summary": "Delete a Twilio integration account"
+  },
+  "GetTwilioAccount": {
+    "description": "Get a single Twilio integration account.",
+    "summary": "Get a Twilio integration account"
+  },
+  "UpdateTwilioAccount": {
+    "description": "Update a Twilio integration account. The update is a partial merge: only the fields provided are changed, so a name-only or settings-only update does not need to resend the full payload or write-only credentials.",
+    "summary": "Update a Twilio integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Twilio integration account as a partial merge."
   },
   "GetIPAllowlist": {
     "description": "Returns the IP allowlist and its enabled or disabled state.",
