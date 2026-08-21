@@ -2,21 +2,9 @@ import type { ComponentChildren } from "preact";
 import styles from "./ImgController.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import Lightbox from "./Lightbox";
+import type { type } from "@testing-library/user-event/dist/cjs/utility/type.js";
 
 const cl = classListFactory(styles);
-
-interface ImgControllerProps {
-  imageUrl: string;
-  srcset: string;
-  popupHref: string;
-  alt?: string;
-  caption?: string;
-  inline?: boolean;
-  popup?: boolean;
-  width?: string;
-  height?: string;
-  widthPercent?: number;
-}
 
 interface PictureImageProps {
   srcset: string;
@@ -25,6 +13,14 @@ interface PictureImageProps {
   height?: string;
   widthPercent?: number;
 }
+
+type ImgControllerProps = PictureImageProps & {
+  imageUrl: string;
+  popupHref: string;
+  caption?: string;
+  inline?: boolean;
+  popup?: boolean;
+};
 
 function PictureImage({
   srcset,

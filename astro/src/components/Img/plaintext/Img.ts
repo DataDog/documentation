@@ -10,18 +10,13 @@ import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import { tag } from "@lib/plaintext/helpers";
 import type { ImgTagProps } from "../imgTypes";
 
-export type ImgNodeInput = Pick<
-  ImgTagProps,
-  "src" | "alt" | "caption" | "video" | "inline"
->;
-
 export function imgNode({
   src,
   alt,
   caption,
   video,
   inline,
-}: ImgNodeInput): MarkdocNode {
+}: ImgTagProps): MarkdocNode {
   const attributes: Record<string, unknown> = { src };
   if (alt) attributes.alt = alt;
   if (video) attributes.video = true;
