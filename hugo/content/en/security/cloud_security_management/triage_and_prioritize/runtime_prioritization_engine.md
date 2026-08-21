@@ -55,7 +55,11 @@ When ownership is known, the engine can route findings to the right team instead
 
 ## Filter findings by runtime signals
 
-When [Runtime Package Prioritization][4] is enabled, Datadog adds the runtime signals it observes to container image vulnerability findings for packages installed by an operating system package manager (`apt`, `yum`, or `apk`). Search, filter, and group by these tags:
+Datadog adds the runtime signals it observes to vulnerability findings. Search, filter, and group by these signals in the [Vulnerability Explorer][11], combined with any other criteria.
+
+### Package is running
+
+When [Runtime Package Prioritization][4] is enabled, Datadog adds package-level runtime signals to container image vulnerability findings for packages installed by an operating system package manager (`apt`, `yum`, or `apk`). Search, filter, and group by these tags:
 
 | Signal | Tag |
 |---|---|
@@ -65,13 +69,30 @@ When [Runtime Package Prioritization][4] is enabled, Datadog adds the runtime si
 
 Datadog adds a tag when it observes a signal. An absent tag means Datadog did not observe the signal; it does not mean the package is unused. Use the tags to prioritize what to fix first, not to rule findings out.
 
-Use the tags in the [Vulnerability Explorer][11], combined with any other criteria. For example, high and critical vulnerabilities that are running and have a fix available:
+For example, high and critical vulnerabilities that are running and have a fix available:
 
 ```
 @risk.is_package_running:true @severity:(high OR critical) @remediation.is_available:true
 ```
 
 Signals persist for the lifetime of an image version: after a package is observed running, findings for that image keep the signal. Because container images are immutable, the signal reflects what has run in that image. When the image is no longer deployed, its findings age out and close.
+
+### Image is running
+
+Datadog adds an image-level runtime signal to every container image vulnerability finding, with no additional configuration. Search, filter, and group by these tags:
+
+| Signal | Tag |
+|---|---|
+| Image detected running in the last 12 hours | `@risk.is_image_running:true` |
+| Time the image was last detected running | `@risk_details.is_image_running.evidence.detected_at` |
+
+Datadog detects running images from [Live Containers][12] on hosts where the Datadog Agent is deployed, and from the cloud provider's service inventory for images covered by [Agentless Scanning][13]. Detection is periodic, so short-lived workloads such as CI jobs and batch tasks are not always detected. Act on `true`; `false` means Datadog did not detect the image running in the last 12 hours, not that the image is stopped.
+
+`@risk.is_image_running` is always `true` or `false` on container image findings, and absent on host, host image, and serverless findings. To prioritize running images across every asset type, exclude the findings known to be stopped instead of matching on `true`:
+
+```
+-@risk.is_image_running:false
+```
 
 ## Get started
 
@@ -94,3 +115,5 @@ Signals persist for the lifetime of an image version: after a package is observe
 [9]: /security/cloud_security_management/setup/agent/docker/#runtime-package-prioritization-preview
 [10]: /security/cloud_security_management/setup/agent/linux/#runtime-package-prioritization-preview
 [11]: https://app.datadoghq.com/security/csm/vm
+[12]: /containers/
+[13]: /security/cloud_security_management/setup/agentless_scanning/
