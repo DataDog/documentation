@@ -166,6 +166,8 @@ Set the listener address environment variables to the following default values. 
 {{% /tab %}}
 {{% tab "Traces" %}}
 
+<div class="alert alert-info">Traces Pipeline is in Preview. Contact your account manager to request access.</div>
+
 ### HTTP configuration example
 
 The Worker exposes the HTTP endpoint on port 4318, which is the default port. You can configure the port value in the Worker.
@@ -289,6 +291,8 @@ To send metrics from the Datadog Distribution of the OpenTelemetry (DDOT) Collec
 
 {{% /tab %}}
 {{% tab "Traces" %}}
+
+<div class="alert alert-info">Traces Pipeline is in Preview. Contact your account manager to request access.</div>
 
 To send traces from the Datadog Distribution of the OpenTelemetry (DDOT) Collector:
 1. Deploy the DDOT Collector using Helm. See [Install the DDOT Collector as a Kubernetes DaemonSet][5] for instructions.
