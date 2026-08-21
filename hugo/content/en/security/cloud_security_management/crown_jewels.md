@@ -10,12 +10,10 @@ further_reading:
 - link: "/security/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Sensitive Data Scanner"
+- link: "https://www.datadoghq.com/blog/runtime-prioritization-engine/"
+  tag: "Blog"
+  text: "Prioritize security findings with the Datadog Runtime Prioritization Engine"
 ---
-
-{{< callout url=https://www.datadoghq.com/product-preview/runtime-prioritization-engine/
- btn_hidden="false" header="Join the Preview!">}}
-Crown Jewels is in Preview. Use this form to submit your request today.
-{{< /callout >}}
 
 ## Overview
 

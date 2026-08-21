@@ -31,6 +31,10 @@
     "name": "Actions Datastores",
     "description": "Leverage the Actions Datastore API to create, modify, and delete\nitems in datastores owned by your organization."
   },
+  "agent-observability": {
+    "name": "Agent Observability",
+    "description": "Manage Agent Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations."
+  },
   "agentless-scanning": {
     "name": "Agentless Scanning",
     "description": "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin your hosts, running containers, and serverless functions—all without\nrequiring teams to install Agents on every host or where Agents cannot be installed.\nAgentless offers also Sensitive Data Scanning capabilities on your storage.\nGo to https://www.datadoghq.com/blog/agentless-scanning/ to learn more."
@@ -58,6 +62,10 @@
   "bits-ai": {
     "name": "Bits AI",
     "description": "Use the Bits AI endpoints to retrieve AI-powered investigations."
+  },
+  "ci-visibility-github-accounts": {
+    "name": "CI Visibility GitHub Accounts",
+    "description": "Manage CI Visibility opt-in status for your GitHub accounts and repositories. See the\n[CI Visibility GitHub Actions setup page](https://docs.datadoghq.com/continuous_integration/pipelines/github/)\nfor more information."
   },
   "ci-visibility-pipelines": {
     "name": "CI Visibility Pipelines",
@@ -89,7 +97,7 @@
   },
   "case-management": {
     "name": "Case Management",
-    "description": "View and manage cases and projects within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+    "description": "**Note**: Work Management is the UI name for Case Management. These API endpoints and permissions use `case` terminology.\n\nView and manage work items and projects within Work Management. For more information, see [Work Management](https://docs.datadoghq.com/incident_response/work_management/)."
   },
   "case-management-attribute": {
     "name": "Case Management Attribute",
@@ -203,6 +211,10 @@
     "name": "Events",
     "description": "The Event Management API allows you to programmatically post events to the Events Explorer and fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/) for more information.\n\n**Update to Datadog monitor events `aggregation_key` starting March 1, 2025:** The Datadog monitor events `aggregation_key` is unique to each Monitor ID. Starting March 1st, this key will also include Monitor Group, making it unique per *Monitor ID and Monitor Group*. If you're using monitor events `aggregation_key` in dashboard queries or the Event API, you must migrate to use `@monitor.id`. Reach out to [support](https://www.datadoghq.com/support/) if you have any question."
   },
+  "execution-policy": {
+    "name": "Execution Policy",
+    "description": "Execution policies control which actions Datadog Action Platform is allowed to run\nagainst your infrastructure, and where. Each policy pairs an effect (allow or deny)\nwith a pattern of actions, and can scope that decision to specific Kubernetes\nnamespaces, scripts, or remote shell paths."
+  },
   "fastly-integration": {
     "name": "Fastly Integration",
     "description": "Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information."
@@ -258,10 +270,6 @@
   "key-management": {
     "name": "Key Management",
     "description": "Manage your Datadog API and application keys. You need an API key and an\napplication key for a user with the required permissions to interact with these endpoints.\n\nConsult the following pages to view and manage your keys:\n\n- [API Keys](https://app.datadoghq.com/organization-settings/api-keys)\n- [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)"
-  },
-  "llm-observability": {
-    "name": "LLM Observability",
-    "description": "Manage LLM Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations."
   },
   "logs": {
     "name": "Logs",
@@ -382,6 +390,10 @@
   "rum-remote-config": {
     "name": "RUM Remote Config",
     "description": "Manage [RUM SDK configurations](https://docs.datadoghq.com/real_user_monitoring/) delivered to RUM applications via Remote Configuration."
+  },
+  "rum-retention-quota": {
+    "name": "RUM Retention Quota",
+    "description": "Manage RUM retention quota configurations for your organization's RUM applications."
   },
   "reference-tables": {
     "name": "Reference Tables",

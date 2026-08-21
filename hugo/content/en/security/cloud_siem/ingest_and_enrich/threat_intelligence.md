@@ -63,7 +63,7 @@ Threat intelligence is supported in the CSV format. It requires a table for each
 | intention       | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.       | true     | malicious                                                                 |
 | source          | text | The name of the source and the link to its site, such as your team and your team's wiki. | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
 
-<div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:</div>
+<div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:
 
 ```
 ip_address,additional_data,category,intention,source
@@ -71,6 +71,7 @@ ip_address,additional_data,category,intention,source
 192.0.2.2,"{""ref"":""hxxp://example.org""}",scanner,suspicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 192.0.2.3,"{""ref"":""hxxp://example.org""}",scanner,suspicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 ```
+</div>
 
 #### CSV structure for domains
 
@@ -135,6 +136,7 @@ AWS account ID feeds are useful for tracking compromised or suspicious AWS accou
 | `source`          | json | The name of the source and the link to its site, such as your team and your team's wiki. | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
 
 <div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:
+
 ```
 aws_account_id,additional_data,category,intention,source
 123456789012,"{""ref"":""hxxp://example.org""}",scanner,suspicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"

@@ -815,7 +815,7 @@ service_monitoring_config:
 
 The following systems or services require additional configuration:
 
-{{< collapse-content title="Non-containerized services on Linux" level="h4" >}}
+{{< collapse-content title="Non-containerized services on Linux" level="h3" >}}
 <div class="alert alert-info">
 APM Basic is available to monitor services running bare-metal on Linux virtual machines.
 </div>
@@ -845,7 +845,7 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="Go TLS Monitoring" level="h4" >}}
+{{< collapse-content title="Go TLS Monitoring" level="h3" >}}
 <div class="alert alert-info">
 APM Basic is in Preview to monitor TLS encrypted traffic from services implemented in Golang.
 </div>
@@ -893,7 +893,7 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="Node.js TLS Monitoring" level="h4" >}}
+{{< collapse-content title="Node.js TLS Monitoring" level="h3" >}}
 
 <div class="alert alert-info">
 APM Basic is in Preview to monitor HTTP, HTTP/2, and gRPC requests from services implemented in Node.js.
@@ -937,7 +937,7 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="Istio Monitoring" level="h4" >}}
+{{< collapse-content title="Istio Monitoring" level="h3" >}}
 
 APM Basic is available to monitor services behind <a href="https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/">Istio mTLS</a> and to capture encrypted HTTPs, HTTP/2, and gRPC traffic.
 
@@ -980,7 +980,7 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="HTTP/2 monitoring" level="h4" >}}
+{{< collapse-content title="HTTP/2 monitoring" level="h3" >}}
 APM Basic can capture HTTP/2 and gRPC traffic.
 
 <strong>Note</strong>:
@@ -1022,10 +1022,10 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="Kafka Monitoring (Preview)" level="h4" >}}
+{{< collapse-content title="Kafka Console (Preview)" level="h3" >}}
 
 <div class="alert alert-info">
-Kafka Monitoring is available in <strong>Preview</strong>.
+Kafka Console is available in <strong>Preview</strong>.
 </div>
 
 <strong>Note</strong>:

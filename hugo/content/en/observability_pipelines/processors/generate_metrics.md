@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-Many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Generating metrics from your logs is a cost-effective way to summarize log data from high-volume logs, such as CDN logs, VPC flow logs, firewall logs, and network logs. Use the Generate Metrics processor to generate count, gauge, or distribution metrics from logs that match a query, and send the metrics to your destination.
+Many types of logs are used to track trends, such as KPIs, over long periods of time. Generating metrics from your logs is a cost-effective way to summarize log data from high-volume logs, such as CDN logs, VPC flow logs, firewall logs, and network logs. Use the Generate Metrics processor to generate count, gauge, or distribution metrics from logs that match a query, and send the metrics to your destination.
 
 **Note**: The metrics generated from logs and routed to Datadog are [custom metrics][1] and billed accordingly. See [Custom Metrics Billing][2] for more information.
 
@@ -121,7 +121,7 @@ To convert a string timestamp to timestamp format:
 
 For [component metrics][10] and [processor buffer metrics][11] emitted by all processors, see the [Pipelines Usage Metrics][12] documentation.
 
-### Generate Metrics metrics
+### Generate Metrics processor metrics
 
 - Use the `component_id` tag to filter or group by individual components.
 - The `component_type` tag is `generate_metrics` for this processor's metrics.

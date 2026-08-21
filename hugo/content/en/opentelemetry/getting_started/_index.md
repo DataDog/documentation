@@ -11,6 +11,9 @@ further_reading:
 - link: "/opentelemetry/guide"
   tag: "Documentation"
   text: "OpenTelemetry Guides"
+- link: "https://www.datadoghq.com/blog/native-otel-with-datadog/"
+  tag: "Blog"
+  text: "Use OpenTelemetry-native observability with Datadog from ingestion to investigation"
 ---
 
 {{< learning-center-callout header="Try \"Understanding OpenTelemetry\" in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/understanding-opentelemetry" hide_image="false" >}}
