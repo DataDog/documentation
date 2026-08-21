@@ -54,6 +54,8 @@ The logical flow of retention filters is the following:
 
 ## Types of filters
 
+{{< img src="real_user_monitoring/rum_without_limits/retention-filters-types.png" alt="The three filter groups on the Retention Filters page: Permanent Filters, Exclusion Filters, and Custom Retention Filters." style="width:100%" >}}
+
 Every RUM event follows the same path through your configuration:
 
 1. The event is evaluated against the **permanent retention filters**. These are predefined and cannot be edited. If the event matches one, its session is retained.
@@ -72,7 +74,7 @@ The three types differ in what a match does:
 
 Permanent retention filters are predefined retention filters that cannot be modified, disabled, or deleted. They are positioned at the top of your retention filters list.
 
-{{< img src="real_user_monitoring/rum_without_limits/permanent-retention-filters.png" alt="The three permanent retention filters shown at the top of the retention filter list." style="width:100%" >}}
+{{< img src="real_user_monitoring/rum_without_limits/permanent-retention-filters.png" alt="The Permanent Filters group expanded, showing the RUM-APM Flat Sampling, Synthetics Sessions, and Sessions with forced replays filters." style="width:100%" >}}
 
 There are three permanent retention filters:
 
@@ -88,15 +90,17 @@ There are three permanent retention filters:
 Exclusion filters are in Preview.
 {{< /callout >}}
 
+{{< img src="real_user_monitoring/rum_without_limits/exclusion-filters.png" alt="The Exclusion Filters group expanded, showing the predefined Error Tracking filter and two custom exclusion filters with their event types and queries." style="width:100%" >}}
+
 Exclusion filters make targeted events skip the evaluation against custom retention filters. They are applied after the permanent retention filters.
 
 Use them when the same events are irrelevant to all of your custom retention filters, for example self-declared bot traffic, a retired application version, or a known noisy error.
 
 <div class="alert alert-warning">Exclusion filters apply to the <strong>event</strong>, not to the session. Excluding an event does not drop its session: if another event from the same session matches a custom retention filter, the whole session is retained, including the excluded event.</div>
 
-An exclusion filter is made of an event type and a query, like a custom retention filter, with two differences:
+An exclusion filter is made of an event type and a query, like retention filters, with two differences:
 
-- An exclusion filter can target **All events** instead of a single event type, which lets you exclude on attributes shared by every event, such as `@device.type` or `@geo.country`.
+- An exclusion filter can target **All events** instead of a single event type, which lets you exclude on attributes or tags shared by every event, such as `@device.type` or `@geo.country`.
 - An exclusion filter has no retention rate. It either matches an event or it does not, so the **order of exclusion filters does not matter**.
 
 ### Excluding errors ignored in Error Tracking
@@ -107,9 +111,9 @@ You can enable or disable this filter, but you cannot edit it or delete it.
 
 ## Custom retention filters
 
-Custom retention filters are the filters you create and control. Each one pairs an event type with a query and a retention rate, and each one can retain sessions.
+{{< img src="real_user_monitoring/rum_without_limits/custom-retention-filters.png" alt="The Custom Retention Filters group expanded, showing two ordered filters with their event types, retention rates, and retained session counts." style="width:100%" >}}
 
-<!-- TODO(screenshot): the Custom Retention Filters section of the Retention Filters page, in the new grouped UI. -->
+Custom retention filters are the filters you create and control. Each one pairs an event type with a query and a retention rate, and each one can retain sessions.
 
 ### Excluding sessions using retention filters
 
