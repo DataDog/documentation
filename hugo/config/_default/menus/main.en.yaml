@@ -8121,7 +8121,7 @@ menu:
       url: /security/code_security/secret_scanning/generic_ci_providers/
       parent: sec_secret_scanning
       weight: 2
-    - name: Rule Configuration
+    - name: Configuration
       identifier: sec_secret_scanning_configuration
       url: /security/code_security/secret_scanning/configuration/
       parent: sec_secret_scanning
