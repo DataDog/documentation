@@ -52,6 +52,10 @@ After your Collector is running, use these guides to configure specific receiver
     <h3>Tune Batch and Memory Settings</h3>
     Optimize your Collector's performance and resource consumption by configuring the batch processor and memory limiter.
     {{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/integrations/kubernetes_metrics/" >}}
+    <h3>Monitor Kubernetes</h3>
+    Use complete reference configurations to collect Kubernetes infrastructure metrics and populate Kubernetes Explorer.
+    {{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading
