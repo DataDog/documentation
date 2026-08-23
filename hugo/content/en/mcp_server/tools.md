@@ -157,6 +157,7 @@ Lists available metrics, with options for filtering and metadata.
 *Toolset: **core***\
 *Permissions Required: `Service Catalog Read`; `APM Read` for dependency relationships; `Teams Read` for current-user team ownership*\
 Searches services in Datadog's Software Catalog, including ownership and direct upstream or downstream dependencies.
+If this tool is not available, use `search_datadog_services` for service lookup or `search_datadog_service_dependencies` for dependency lookup.
 
 - Show me all services in our microservices architecture.
 - List services owned by the platform team.
