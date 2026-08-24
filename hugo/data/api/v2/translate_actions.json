@@ -1640,6 +1640,20 @@
     "request_description": "",
     "request_schema_description": "Wrapper for a DDSQL tabular query fetch request."
   },
+  "CreateDataDeletionRequest": {
+    "description": "Creates a data deletion request by providing a query and a timeframe targeting the proper data.",
+    "summary": "Creates a data deletion request",
+    "request_description": "",
+    "request_schema_description": "Object needed to create a data deletion request."
+  },
+  "GetDataDeletionRequests": {
+    "description": "Gets a list of data deletion requests based on several filter parameters.",
+    "summary": "Gets a list of data deletion requests"
+  },
+  "CancelDataDeletionRequest": {
+    "description": "Cancels a data deletion request by providing its ID.",
+    "summary": "Cancels a data deletion request"
+  },
   "ListDeploymentGates": {
     "description": "Returns a paginated list of all deployment gates for the organization.\nUse `page[cursor]` and `page[size]` query parameters to paginate through results.",
     "summary": "Get all deployment gates"
@@ -4674,7 +4688,7 @@
     "request_schema_description": "A wrapper request around one scalar query to be executed."
   },
   "QueryTimeseriesData": {
-    "description": "Query timeseries data across various data sources and\nprocess the data by applying formulas and functions.",
+    "description": "Query timeseries data across various data sources and\nprocess the data by applying formulas and functions. Datadog recommends\nusing this endpoint over the v1 `/api/v1/query` endpoint for querying\ntimeseries data.",
     "summary": "Query timeseries data across multiple products",
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
