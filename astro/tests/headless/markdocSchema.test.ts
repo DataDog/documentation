@@ -37,4 +37,22 @@ describe("img tag schema validate()", () => {
     const errors = validate({ attributes: {} });
     expect(errors).toHaveLength(0);
   });
+
+  it("errors when video is combined with caption", () => {
+    const errors = validate({
+      attributes: { video: true, caption: "A caption" },
+    });
+    expect(errors).toHaveLength(1);
+    expect(errors[0].level).toBe("error");
+  });
+
+  it("allows video without caption", () => {
+    const errors = validate({ attributes: { video: true } });
+    expect(errors).toHaveLength(0);
+  });
+
+  it("allows caption without video", () => {
+    const errors = validate({ attributes: { caption: "A caption" } });
+    expect(errors).toHaveLength(0);
+  });
 });

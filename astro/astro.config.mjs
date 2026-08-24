@@ -19,7 +19,7 @@ import { llmsTxt } from "./src/integrations/llmsTxt.ts";
 
 const websitesModules = realpathSync(
   fileURLToPath(
-    new URL("../../../../../../dd/websites-modules", import.meta.url),
+    new URL("../../websites-modules", import.meta.url),
   ),
 );
 const hugoSite = fileURLToPath(new URL("../hugo", import.meta.url));
