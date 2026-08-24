@@ -77,25 +77,6 @@ For findings that have a CVSS score (Container Image Vulnerability, Host Vulnera
 
 {{< img src="security/manual_severity_adjustment/severity_breakdown.png" alt="A finding side panel showing the severity breakdown, with the original severity, CVSS score, and CVSS vector; the user who made the adjustment; and the resulting severity level and adjusted CVSS score" style="width:100%;" >}}
 
-## Severity floors by finding type
-
-Not all finding types use the same severity scale. The following table shows the lowest severity you can manually adjust a finding to:
-
-| Finding type | Lowest severity |
-|---|---|
-| API Security | Info |
-| Attack Path | Info |
-| Identity Risk | Info |
-| Misconfiguration | Info |
-| Workload Activity | Info |
-| Container Image Vulnerability | None |
-| Host Vulnerability | None |
-| Library Vulnerability | None |
-| Infrastructure as Code | Low |
-| Runtime Code Vulnerability | Low |
-| Secret | Low |
-| Static Code Vulnerability | Low |
-
 ## Vulnerability findings and CVSS scores
 
 For vulnerability findings that have a Datadog-adjusted CVSS score, manually adjusting the severity also updates the adjusted score stored in `@severity_details.user_adjusted`. The updated score is set to approximately the midpoint of the target severity's CVSS v3 range:
