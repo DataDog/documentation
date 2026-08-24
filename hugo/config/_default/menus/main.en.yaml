@@ -8639,6 +8639,26 @@ menu:
       identifier: ai_guard_sdk
       parent: ai_guard_setup
       weight: 3
+    - name: Python
+      url: /security/ai_guard/setup/sdk/python/
+      identifier: ai_guard_sdk_python
+      parent: ai_guard_sdk
+      weight: 1
+    - name: Node.js
+      url: /security/ai_guard/setup/sdk/nodejs/
+      identifier: ai_guard_sdk_nodejs
+      parent: ai_guard_sdk
+      weight: 2
+    - name: Java
+      url: /security/ai_guard/setup/sdk/java/
+      identifier: ai_guard_sdk_java
+      parent: ai_guard_sdk
+      weight: 3
+    - name: Ruby
+      url: /security/ai_guard/setup/sdk/ruby/
+      identifier: ai_guard_sdk_ruby
+      parent: ai_guard_sdk
+      weight: 4
     - name: HTTP API
       url: /security/ai_guard/setup/http_api/
       identifier: ai_guard_http_api
