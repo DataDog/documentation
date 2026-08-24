@@ -1,7 +1,7 @@
 ---
 title: Homepage
 site_support_id: idp
-description: The Internal Developer Portal Homepage gives you a centralized view of your team's entities, GitHub pull requests, Jira tickets, and Datadog Work Items in one place.
+description: The Internal Developer Portal Homepage gives you a centralized view of your team's entities, GitHub pull requests, GitLab merge requests, Jira and Linear tickets, and Datadog Work Items in one place.
 aliases:  
 - /software_catalog/developer_homepage  
 - /internal_developer_portal/developer_homepage  
@@ -23,7 +23,7 @@ further_reading:
   text: "Learn about the Linear integration"
 ---
 
-{{< img src="tracing/software_catalog/idp_homepage.png" alt="The IDP Homepage showing pull requests awaiting review and assigned tickets." style="width:100%;" >}}
+{{< img src="tracing/software_catalog/idp_homepage_2.png" alt="The IDP Homepage showing pull requests awaiting review and assigned tickets." style="width:100%;" >}}
 
 ## Overview
 
@@ -36,12 +36,19 @@ With this view, you can:
 
 ## Prerequisites
 
-The Homepage aggregates data from your Datadog integrations. To populate the task sections, configure the following integrations and webhooks before using the Homepage:
+The Homepage aggregates data from your Datadog integrations. Configure the following before using the Homepage.
 
-- **GitHub**: An administrator installs and configures the GitHub integration, and sets up a GitHub webhook so that repository events (such as pull request activity) reach Datadog in real time. The **GitHub PRs** section requires this webhook to display current pull request data. Each user also signs in with their own GitHub account to load the pull requests relevant to them. For setup steps, see [GitHub][1].
-- **GitLab**: An administrator installs and configures the GitLab integration and sets up a GitLab webhook so that repository events (such as merge request activity) reach Datadog in real time. The **GitLab** tab in the **Your PRs** section requires this integration to display current merge request data. Each user also signs in with their own GitLab account to load the merge requests relevant to them. For setup steps, see [GitLab][2]. 
-- **Jira**: Configure the Jira integration, and set up a Jira webhook so that issue events reach Datadog. The **Jira** tab in the **Your Tickets** section requires this webhook to display your assigned issues. For setup steps, see [Configure a Jira webhook][3].
-- **Linear**: An administrator installs the Linear integration and sets up a Linear webhook so that issue events reach Datadog. The **Linear** tab in the **Your Tickets** section requires this integration to display your assigned issues. After setup, Datadog detects your assigned issues automatically. For setup steps, see [Configure a Linear webhook][4].
+**GitHub**
+Required for the **GitHub** tab in **Your PRs**. An administrator configures the GitHub integration and webhook, and each user signs in with their GitHub account. [Set up the GitHub integration][1].
+
+**GitLab Source Code**
+Required for the **GitLab** tab in **Your PRs**. An administrator configures the GitLab Source Code integration and webhook, and each user signs in with their GitLab account. [Set up the GitLab Source Code integration][2].
+
+**Jira**
+Required for the **Jira** tab in **Your Tickets**. An administrator configures the Jira integration and webhook. [Set up the Jira webhook][3].
+
+**Linear**
+Required for the **Linear** tab in **Your Tickets**. An administrator configures the Linear integration and webhook. [Set up the Linear webhook][4].
 
 ## Configure the Homepage 
 
@@ -99,8 +106,6 @@ If your organization has not configured the GitHub integration, this tab display
 - Statuses: Read
 - Checks: Read
 
-The tab also requires a configured GitHub webhook so that pull request events reach Datadog in real time. For setup steps, see [GitHub][1]. 
-
 If you have multiple GitHub orgs connected within Datadog, users must have the Datadog Integrations Read Permissions to toggle between orgs.
 
 ### GitLab
@@ -147,7 +152,6 @@ The **Jira** tab lists the Jira tickets assigned to you, grouped by status categ
 - **Updated**
 - **Priority**
 - **Due**
-- **Assignee**
 
 After setup, your assigned tickets appear automatically. For setup steps, see [Configure a Jira webhook][3].
 
@@ -206,8 +210,8 @@ Each entity includes the following information:
 
 In addition to the built-in sections, the **Apps** section lets you add custom apps to the Homepage, so you can bring together the data and actions you find most useful, whether they come from Datadog, an internal tool, or a third-party service. Datadog provides two ways to build these apps: 
 
-- **App Builder**: A low-code, drag-and-drop builder for internal tools. Apps combine prebuilt UI components, Datadog data sources (such as metrics, logs, and monitors), and out-of-the-box actions for services such as GitHub and AWS. For more information, see [App Builder][5].
-- **Datadog Apps**: A code-based path for apps you build locally with React and TypeScript (or JavaScript), using a CLI and your standard development workflow. Choose Datadog Apps when you need team collaboration with source control and CI/CD, AI-assisted local development, integration with services beyond the Action Catalog, or full control over the app's UI and logic. For more information, see [Datadog Apps][6].
+- **App Builder**: A low-code, drag-and-drop builder for internal tools. Apps combine prebuilt UI components, Datadog data sources (such as metrics, logs, and monitors), and out-of-the-box actions for services such as GitHub and AWS. For more information, see [App Builder][7].
+- **Datadog Apps**: A code-based path for apps you build locally with React and TypeScript (or JavaScript), using a CLI and your standard development workflow. Choose Datadog Apps when you need team collaboration with source control and CI/CD, AI-assisted local development, integration with services beyond the Action Catalog, or full control over the app's UI and logic. For more information, see [Datadog Apps][8].
 
 To make a custom app available here, first publish it and define its permissions so that your team can view and use it.
 
