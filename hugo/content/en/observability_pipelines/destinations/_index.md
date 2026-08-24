@@ -1,13 +1,12 @@
 ---
 title: Destinations
 description: Learn about the destinations available for the Observability Pipelines Worker.
-aliases:
-  - /observability_pipelines/destinations/prometheus
 disable_toc: false
 aliases:
   - /observability_pipelines/destinations/datadog_apm/
   - /observability_pipelines/destinations/opentelemetry/traces/
   - /observability_pipelines/destinations/opentelemetry/metrics/
+  - /observability_pipelines/destinations/prometheus/
 further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
