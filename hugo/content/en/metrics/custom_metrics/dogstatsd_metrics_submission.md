@@ -28,7 +28,7 @@ While StatsD accepts only metrics, DogStatsD accepts all three of the major Data
 
 ## Functions
 
-After you [install DogStatsD][1], the following functions are available for submitting your metrics to Datadog depending on their metric type. The functions have the following shared parameters:
+After you [install DogStatsD][1], the following functions are available for submitting your metrics to Datadog depending on their metric type. Functions and their signatures vary by client. Depending on the client, functions accept the following parameters:
 
 | Parameter        | Type            | Required | Description                                                                                                                                                                                    |
 |------------------|-----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -37,6 +37,8 @@ After you [install DogStatsD][1], the following functions are available for subm
 | `<SAMPLE_RATE>`  | Double          | No       | The sample rate to apply to the metric. Takes a value between `0` (everything is sampled, so nothing is sent) and `1` (no sample). See the [Sample Rate section](#sample-rates) to learn more. |
 | `<TAGS>`         | List of strings | No       | A list of tags to apply to the metric. See the [Metrics Tagging](#metric-tagging) section to learn more.                                                                                       |
 | `<CARDINALITY>`  | Enum            | No       | The [cardinality][10] of tags to assign to this metric.                                                                                                                               |
+
+**Node.js:** The tracer's DogStatsD client exposes `increment`, `decrement`, `gauge`, `histogram`, and `distribution`. These functions accept `<METRIC_NAME>`, `<METRIC_VALUE>`, and `<TAGS>` only. The client does not support `<SAMPLE_RATE>`, `<CARDINALITY>`, `count`, `set`, or `timed`.
 
 ### COUNT
 
