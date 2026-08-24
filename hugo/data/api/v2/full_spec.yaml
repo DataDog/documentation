@@ -123989,6 +123989,7 @@ components:
             apm_service_catalog_write: Add, modify, and delete service catalog definitions when those definitions are maintained by Datadog.
             appsec_vm_read: View infrastructure, application code, and library vulnerability findings.
             aws_configurations_manage: Manage AWS integration account configurations and related integration settings.
+            billing_edit: Edit your organization's billing information.
             billing_read: View your organization's billing information.
             bits_investigations_read: View Bits AI investigations.
             bits_investigations_write: Create and manage Bits AI investigations.
