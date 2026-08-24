@@ -48,7 +48,7 @@ collect_schemas:
   max_tables: 1000
 ```
 
-Whether partitions count toward PostgreSQL's <code>max_tables</code> limit depends on the partitioning method. Declarative partitioning (<code>PARTITION BY</code>, PostgreSQL 10 and later) counts a table once regardless of partition count, but inheritance partitioning (<code>INHERITS</code>, the only option on PostgreSQL 9.6) counts the parent and each child separately. This means inheritance-partitioned databases can reach the default limit of 300 with far fewer logical tables than expected, crowding out other tables. If tables are missing from the Schemas page, check for inheritance partitioning and raise <code>max_tables</code> accordingly.
+<div class="alert alert-info">Whether partitions count toward PostgreSQL's <code>max_tables</code> limit depends on the partitioning method. Declarative partitioning (<code>PARTITION BY</code>, PostgreSQL 10 and later) counts a table once regardless of partition count, but inheritance partitioning (<code>INHERITS</code>, the only option on PostgreSQL 9.6) counts the parent and each child separately. This means inheritance-partitioned databases can reach the default limit of 300 with far fewer logical tables than expected, crowding out other tables. If tables are missing from the Schemas page, check for inheritance partitioning and raise <code>max_tables</code> accordingly.</div>
 
 Raising `max_tables` increases the cost of each collection run. On instances with a large number of tables, also consider raising `max_query_duration` and `collection_interval` to reduce load on the database.
 {{% /tab %}}
