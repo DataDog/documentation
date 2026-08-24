@@ -1,5 +1,6 @@
 ---
 title: Sources
+description: Learn about the sources available for the Observability Pipelines Worker.
 disable_toc: false
 further_reading:
 - link: "/observability_pipelines/configuration/set_up_pipelines/"
@@ -89,6 +90,8 @@ These are the available sources:
 
 {{% /tab %}}
 {{% tab "Traces" %}}
+
+<div class="alert alert-info">Traces Pipeline is in Preview. Contact your account manager to request access.</div>
 
 - [Datadog Agent][1]
 - [OpenTelemetry][2]

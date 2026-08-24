@@ -95,7 +95,7 @@ To automatically trigger a page, configure automated paging rules in your projec
 ## Third party tickets
 In Project Settings, you can manage membership, configure the auto-closing of work items, and set up third-party integrations like Jira and ServiceNow.
 
-{{% collapse-content title="Jira Configuration" level="h3" expanded=false %}}
+{{% collapse-content title="Jira Configuration" level="h3" expanded=false id="jira" %}}
 1. Ensure the Jira integration is configured.
 1. In Work Management project settings, enable **Jira** for manual Jira issue creation from the project.
 1. Select a Jira account, a project to create issues in, and the desired issue type (such as story, epic, bug, or task).

@@ -97,7 +97,7 @@
   },
   "case-management": {
     "name": "Case Management",
-    "description": "View and manage cases and projects within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+    "description": "**Note**: Work Management is the UI name for Case Management. These API endpoints and permissions use `case` terminology.\n\nView and manage work items and projects within Work Management. For more information, see [Work Management](https://docs.datadoghq.com/incident_response/work_management/)."
   },
   "case-management-attribute": {
     "name": "Case Management Attribute",
@@ -174,6 +174,10 @@
   "dashboards": {
     "name": "Dashboards",
     "description": "Get usage statistics for the dashboards in your organization, including view\ncounts, last-edit times, widget counts, and quality scores. See the\n[Dashboards documentation](https://docs.datadoghq.com/dashboards/) for more\ninformation."
+  },
+  "data-deletion": {
+    "name": "Data Deletion",
+    "description": "The Data Deletion API allows the user to target and delete data from the allowed products. It's enabled for Logs and depends on the `logs_delete_data` permission."
   },
   "data-observability": {
     "name": "Data Observability",
@@ -391,8 +395,8 @@
     "name": "RUM Remote Config",
     "description": "Manage [RUM SDK configurations](https://docs.datadoghq.com/real_user_monitoring/) delivered to RUM applications via Remote Configuration."
   },
-  "rum-retention-quota": {
-    "name": "RUM Retention Quota",
+  "rum-retention-quotas": {
+    "name": "RUM Retention Quotas",
     "description": "Manage RUM retention quota configurations for your organization's RUM applications."
   },
   "reference-tables": {
@@ -442,6 +446,10 @@
   "rum-retention-filters": {
     "name": "Rum Retention Filters",
     "description": "Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization."
+  },
+  "rum-teams-ownership": {
+    "name": "Rum Teams Ownership",
+    "description": "Manage teams ownership mappings between RUM views and the teams that own them.\nSee <https://docs.datadoghq.com/real_user_monitoring/ownership_of_views/>."
   },
   "scim": {
     "name": "SCIM",

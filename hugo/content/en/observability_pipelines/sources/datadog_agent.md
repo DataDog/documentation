@@ -1,5 +1,6 @@
 ---
 title: Datadog Agent Source
+description: Learn how to collect logs, metrics, or traces from the Datadog Agent using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs
@@ -21,9 +22,11 @@ further_reading:
 
 ## Overview
 
-Use Observability Pipelines' Datadog Agent source to receive {{< tooltip text="logs, metrics, or traces" tooltip="Contact your account manager to discuss use cases and pricing." >}} from the Datadog Agent.
+Use Observability Pipelines' Datadog Agent source to receive logs, metrics, or traces ({{< tooltip text="in Preview" tooltip="Traces Pipeline is in Preview. Contact your account manager to request access." >}}) from the Datadog Agent.
 
-**Note**: If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector to collect logs or metrics, you must [use the OpenTelemetry source to send that data to Observability Pipelines][4].
+**Notes**:
+- If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector to collect logs or metrics, you must [use the OpenTelemetry source to send that data to Observability Pipelines][4].
+- The Datadog Agent sends logs and metrics tagged with `ddsource` and `ddtags`, not `source` and `tags`. When you define processor queries or filters for these events, use `ddsource` and `ddtags` instead.
 
 ## Prerequisites
 
@@ -152,6 +155,8 @@ datadog:
 {{% /tab %}}
 
 {{% tab "Traces" %}}
+
+<div class="alert alert-info">Traces Pipeline is in Preview. Contact your account manager to request access.</div>
 
 Use the Agent configuration file or the Agent Helm chart values file to connect the Datadog Agent to the Observability Pipelines Worker.
 

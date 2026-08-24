@@ -1,5 +1,6 @@
 ---
 title: Set Up Pipelines
+description: Learn how to set up an Observability Pipelines pipeline's source, processors, and destinations.
 disable_toc: false
 aliases:
   - /observability_pipelines/set_up_pipelines/
@@ -112,6 +113,8 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 
 {{% /tab %}}
 {{% tab "Traces" %}}
+
+<div class="alert alert-info">Traces Pipeline is in Preview. Contact your account manager to request access.</div>
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the [Trace Sampling][2] template, or click {{< ui >}}New Pipeline{{< /ui >}} and select {{< ui >}}Traces Pipeline{{< /ui >}}.

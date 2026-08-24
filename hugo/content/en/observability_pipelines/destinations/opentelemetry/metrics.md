@@ -1,14 +1,19 @@
 ---
-title: OpenTelemetry Destination
+title: OpenTelemetry Metrics Destination
 disable_toc: false
 code_lang: metrics
 type: multi-code-lang
 weight: 1
 ---
 
+{{< callout url="#"
+ btn_hidden="true" header="false">}}
+The OpenTelemetry destination is in Preview. Contact your account manager to request access.
+{{< /callout >}}
+
 ## Overview
 
-Use Observability Pipelines' {{< tooltip text=" OpenTelemetry destination" tooltip="Contact your account manager to request access." >}} to send metrics over HTTP/S to an OpenTelemetry (OTel) Collector or another OpenTelemetry Protocol (OTLP)-compatible endpoint.
+Use Observability Pipelines' OpenTelemetry destination to send metrics over HTTP/S to an OpenTelemetry (OTel) Collector or another OpenTelemetry Protocol (OTLP)-compatible endpoint.
 
 ## Set up destination
 

@@ -12507,6 +12507,46 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Data Deletion
+      url: /api/latest/data-deletion/
+      identifier: data-deletion
+      generated: true
+    - name: Cancels a data deletion request
+      url: /api/latest/data-deletion/cancels-a-data-deletion-request/
+      identifier: data-deletion-cancels-a-data-deletion-request
+      parent: data-deletion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelDataDeletionRequest
+        unstable: []
+        order: 2
+    - name: Gets a list of data deletion requests
+      url: /api/latest/data-deletion/gets-a-list-of-data-deletion-requests/
+      identifier: data-deletion-gets-a-list-of-data-deletion-requests
+      parent: data-deletion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDataDeletionRequests
+        unstable: []
+        order: 3
+    - name: Creates a data deletion request
+      url: /api/latest/data-deletion/creates-a-data-deletion-request/
+      identifier: data-deletion-creates-a-data-deletion-request
+      parent: data-deletion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDataDeletionRequest
+        unstable: []
+        order: 1
     - name: Data Observability
       url: /api/latest/data-observability/
       identifier: data-observability
@@ -17587,6 +17627,123 @@ menu:
       url: /api/latest/product-analytics/
       identifier: product-analytics
       generated: true
+    - name: Compute a Sankey diagram
+      url: /api/latest/product-analytics/compute-a-sankey-diagram/
+      identifier: product-analytics-compute-a-sankey-diagram
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsSankey
+        unstable:
+          - v2
+        order: 13
+    - name: Compute retention timeseries
+      url: /api/latest/product-analytics/compute-retention-timeseries/
+      identifier: product-analytics-compute-retention-timeseries
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsRetentionTimeseries
+        unstable:
+          - v2
+        order: 10
+    - name: Compute retention scalar values
+      url: /api/latest/product-analytics/compute-retention-scalar-values/
+      identifier: product-analytics-compute-retention-scalar-values
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsRetentionScalar
+        unstable:
+          - v2
+        order: 11
+    - name: List the entities behind a retention cell
+      url: /api/latest/product-analytics/list-the-entities-behind-a-retention-cell/
+      identifier: product-analytics-list-the-entities-behind-a-retention-cell
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsRetentionList
+        unstable:
+          - v2
+        order: 12
+    - name: Compute a retention grid
+      url: /api/latest/product-analytics/compute-a-retention-grid/
+      identifier: product-analytics-compute-a-retention-grid
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsRetentionGrid
+        unstable:
+          - v2
+        order: 9
+    - name: Compute journey timeseries analytics
+      url: /api/latest/product-analytics/compute-journey-timeseries-analytics/
+      identifier: product-analytics-compute-journey-timeseries-analytics
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsJourneyTimeseries
+        unstable:
+          - v2
+        order: 6
+    - name: Compute journey scalar analytics
+      url: /api/latest/product-analytics/compute-journey-scalar-analytics/
+      identifier: product-analytics-compute-journey-scalar-analytics
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsJourneyScalar
+        unstable:
+          - v2
+        order: 7
+    - name: List journey entities
+      url: /api/latest/product-analytics/list-journey-entities/
+      identifier: product-analytics-list-journey-entities
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsJourneyList
+        unstable:
+          - v2
+        order: 8
+    - name: Compute journey funnel analysis
+      url: /api/latest/product-analytics/compute-journey-funnel-analysis/
+      identifier: product-analytics-compute-journey-funnel-analysis
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsJourneyFunnel
+        unstable:
+          - v2
+        order: 5
     - name: Compute timeseries analytics
       url: /api/latest/product-analytics/compute-timeseries-analytics/
       identifier: product-analytics-compute-timeseries-analytics
@@ -17611,6 +17768,19 @@ menu:
           - QueryProductAnalyticsScalar
         unstable: []
         order: 2
+    - name: List analytics events
+      url: /api/latest/product-analytics/list-analytics-events/
+      identifier: product-analytics-list-analytics-events
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsList
+        unstable:
+          - v2
+        order: 4
     - name: Send server-side events
       url: /api/latest/product-analytics/send-server-side-events/
       identifier: product-analytics-send-server-side-events
@@ -18050,14 +18220,14 @@ menu:
         unstable:
           - v2
         order: 1
-    - name: RUM Retention Quota
-      url: /api/latest/rum-retention-quota/
-      identifier: rum-retention-quota
+    - name: RUM Retention Quotas
+      url: /api/latest/rum-retention-quotas/
+      identifier: rum-retention-quotas
       generated: true
     - name: Create or update a RUM retention quota config
-      url: /api/latest/rum-retention-quota/create-or-update-a-rum-retention-quota-config/
-      identifier: rum-retention-quota-create-or-update-a-rum-retention-quota-config
-      parent: rum-retention-quota
+      url: /api/latest/rum-retention-quotas/create-or-update-a-rum-retention-quota-config/
+      identifier: rum-retention-quotas-create-or-update-a-rum-retention-quota-config
+      parent: rum-retention-quotas
       generated: true
       params:
         versions:
@@ -18067,9 +18237,9 @@ menu:
         unstable: []
         order: 2
     - name: Get a RUM retention quota configuration
-      url: /api/latest/rum-retention-quota/get-a-rum-retention-quota-configuration/
-      identifier: rum-retention-quota-get-a-rum-retention-quota-configuration
-      parent: rum-retention-quota
+      url: /api/latest/rum-retention-quotas/get-a-rum-retention-quota-configuration/
+      identifier: rum-retention-quotas-get-a-rum-retention-quota-configuration
+      parent: rum-retention-quotas
       generated: true
       params:
         versions:
@@ -18079,9 +18249,9 @@ menu:
         unstable: []
         order: 1
     - name: Delete a RUM retention quota configuration
-      url: /api/latest/rum-retention-quota/delete-a-rum-retention-quota-configuration/
-      identifier: rum-retention-quota-delete-a-rum-retention-quota-configuration
-      parent: rum-retention-quota
+      url: /api/latest/rum-retention-quotas/delete-a-rum-retention-quota-configuration/
+      identifier: rum-retention-quotas-delete-a-rum-retention-quota-configuration
+      parent: rum-retention-quotas
       generated: true
       params:
         versions:
@@ -19112,6 +19282,88 @@ menu:
           - OrderRetentionFilters
         unstable: []
         order: 6
+    - name: Rum Teams Ownership
+      url: /api/latest/rum-teams-ownership/
+      identifier: rum-teams-ownership
+      generated: true
+    - name: List teams ownership rules
+      url: /api/latest/rum-teams-ownership/list-teams-ownership-rules/
+      identifier: rum-teams-ownership-list-teams-ownership-rules
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamsOwnershipRules
+        unstable:
+          - v2
+        order: 5
+    - name: Get a teams ownership mapping
+      url: /api/latest/rum-teams-ownership/get-a-teams-ownership-mapping/
+      identifier: rum-teams-ownership-get-a-teams-ownership-mapping
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamsOwnershipMapping
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a teams ownership mapping
+      url: /api/latest/rum-teams-ownership/delete-a-teams-ownership-mapping/
+      identifier: rum-teams-ownership-delete-a-teams-ownership-mapping
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTeamsOwnershipMapping
+        unstable:
+          - v2
+        order: 4
+    - name: Bulk create and remove teams ownership mappings
+      url: /api/latest/rum-teams-ownership/bulk-create-and-remove-teams-ownership-mappings/
+      identifier: rum-teams-ownership-bulk-create-and-remove-teams-ownership-mappings
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamsOwnershipMappingsBatch
+        unstable:
+          - v2
+        order: 6
+    - name: Create a teams ownership mapping
+      url: /api/latest/rum-teams-ownership/create-a-teams-ownership-mapping/
+      identifier: rum-teams-ownership-create-a-teams-ownership-mapping
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamsOwnershipMapping
+        unstable:
+          - v2
+        order: 2
+    - name: List teams ownership mappings
+      url: /api/latest/rum-teams-ownership/list-teams-ownership-mappings/
+      identifier: rum-teams-ownership-list-teams-ownership-mappings
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamsOwnershipMappings
+        unstable:
+          - v2
+        order: 1
     - name: SCIM
       url: /api/latest/scim/
       identifier: scim

@@ -1,5 +1,6 @@
 ---
 title: Socket Source
+description: Learn how to collect logs sent over a TCP or UDP socket connection using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs
