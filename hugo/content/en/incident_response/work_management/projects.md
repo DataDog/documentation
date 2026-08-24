@@ -8,6 +8,9 @@ further_reading:
 - link: "incident_response/work_management/create_work_item"
   tag: "Documentation"
   text: "Create a work item"
+- link: "https://www.datadoghq.com/blog/forms-case-management-requests/"
+  tag: "Blog"
+  text: "Simplify request flows with Datadog Forms and Case Management"
 ---
 
 ## Overview

@@ -42,6 +42,12 @@ Then, choose one of two paths to instrument your application with the `serverles
 
 ## Set up with agentic onboarding
 
+{% site-region region="gov,gov2" %}
+{% alert level="danger" %}
+This feature is not supported for your selected [Datadog site](/getting_started/site) ({% region-param key="dd_site_name" /%}).
+{% /alert %}
+{% /site-region %}
+
 Two paths use the same [Datadog account][1]:
 
 - **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.

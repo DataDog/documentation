@@ -22,7 +22,7 @@ products:
 
 ## Overview
 
-The Sensitive Data Scanner processor scans logs or {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} to detect and redact or hash sensitive information such as PII, PCI, and custom sensitive data. You can pick from Datadog's library of predefined rules, or input custom Regex rules to scan for sensitive data.
+The Sensitive Data Scanner processor scans logs or traces ({{< tooltip text="in Preview" tooltip="Traces Pipeline is in Preview. Contact your account manager to request access." >}}) to detect and redact or hash sensitive information such as PII, PCI, and custom sensitive data. You can pick from Datadog's library of predefined rules, or input custom Regex rules to scan for sensitive data.
 
 You can set up the pipeline and processor in the [UI](#set-up-the-processor-in-the-ui), [API][10], or [Terraform](#set-up-the-processor-using-terraform).
 

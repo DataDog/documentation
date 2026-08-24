@@ -4518,6 +4518,84 @@ menu:
         unstable:
           - v2
         order: 146
+    - name: Update a severity modifier rule
+      url: /api/latest/security-monitoring/update-a-severity-modifier-rule/
+      identifier: security-monitoring-update-a-severity-modifier-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityFindingsAutomationSeverityModifierRule
+        unstable:
+          - v2
+        order: 162
+    - name: Get a severity modifier rule
+      url: /api/latest/security-monitoring/get-a-severity-modifier-rule/
+      identifier: security-monitoring-get-a-severity-modifier-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityFindingsAutomationSeverityModifierRule
+        unstable:
+          - v2
+        order: 161
+    - name: Delete a severity modifier rule
+      url: /api/latest/security-monitoring/delete-a-severity-modifier-rule/
+      identifier: security-monitoring-delete-a-severity-modifier-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityFindingsAutomationSeverityModifierRule
+        unstable:
+          - v2
+        order: 163
+    - name: Reorder severity modifier rules
+      url: /api/latest/security-monitoring/reorder-severity-modifier-rules/
+      identifier: security-monitoring-reorder-severity-modifier-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ReorderSecurityFindingsAutomationSeverityModifierRules
+        unstable:
+          - v2
+        order: 160
+    - name: Create a severity modifier rule
+      url: /api/latest/security-monitoring/create-a-severity-modifier-rule/
+      identifier: security-monitoring-create-a-severity-modifier-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityFindingsAutomationSeverityModifierRule
+        unstable:
+          - v2
+        order: 159
+    - name: Get all severity modifier rules
+      url: /api/latest/security-monitoring/get-all-severity-modifier-rules/
+      identifier: security-monitoring-get-all-severity-modifier-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityFindingsAutomationSeverityModifierRules
+        unstable:
+          - v2
+        order: 158
     - name: Update a mute rule
       url: /api/latest/security-monitoring/update-a-mute-rule/
       identifier: security-monitoring-update-a-mute-rule
@@ -7540,6 +7618,946 @@ menu:
           - ListDatastores
         unstable: []
         order: 1
+    - name: Agent Observability
+      url: /api/latest/agent-observability/
+      identifier: agent-observability
+      generated: true
+    - name: List events for an Agent Observability experiment
+      url: /api/latest/agent-observability/list-events-for-an-agent-observability-experiment/
+      identifier: agent-observability-list-events-for-an-agent-observability-experiment
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsExperimentEvents
+        unstable:
+          - v2
+        order: 30
+    - name: Upload records to an Agent Observability dataset
+      url: /api/latest/agent-observability/upload-records-to-an-agent-observability-dataset/
+      identifier: agent-observability-upload-records-to-an-agent-observability-dataset
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UploadLLMObsDatasetRecordsFile
+        unstable:
+          - v2
+        order: 48
+    - name: List Agent Observability experiment events (v2)
+      url: /api/latest/agent-observability/list-agent-observability-experiment-events-v2/
+      identifier: agent-observability-list-agent-observability-experiment-events-v2
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsExperimentEventsV2
+        unstable:
+          - v2
+        order: 50
+    - name: List Agent Observability dataset versions
+      url: /api/latest/agent-observability/list-agent-observability-dataset-versions/
+      identifier: agent-observability-list-agent-observability-dataset-versions
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsDatasetVersions
+        unstable:
+          - v2
+        order: 43
+    - name: Restore an Agent Observability dataset version
+      url: /api/latest/agent-observability/restore-an-agent-observability-dataset-version/
+      identifier: agent-observability-restore-an-agent-observability-dataset-version
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RestoreLLMObsDatasetVersion
+        unstable:
+          - v2
+        order: 47
+    - name: Delete Agent Observability dataset records
+      url: /api/latest/agent-observability/delete-agent-observability-dataset-records/
+      identifier: agent-observability-delete-agent-observability-dataset-records
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsDatasetRecords
+        unstable:
+          - v2
+        order: 12
+    - name: Append records to an Agent Observability dataset
+      url: /api/latest/agent-observability/append-records-to-an-agent-observability-dataset/
+      identifier: agent-observability-append-records-to-an-agent-observability-dataset
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsDatasetRecords
+        unstable:
+          - v2
+        order: 8
+    - name: Update Agent Observability dataset records
+      url: /api/latest/agent-observability/update-agent-observability-dataset-records/
+      identifier: agent-observability-update-agent-observability-dataset-records
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsDatasetRecords
+        unstable:
+          - v2
+        order: 10
+    - name: List Agent Observability dataset records
+      url: /api/latest/agent-observability/list-agent-observability-dataset-records/
+      identifier: agent-observability-list-agent-observability-dataset-records
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsDatasetRecords
+        unstable:
+          - v2
+        order: 7
+    - name: Export an Agent Observability dataset
+      url: /api/latest/agent-observability/export-an-agent-observability-dataset/
+      identifier: agent-observability-export-an-agent-observability-dataset
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ExportLLMObsDataset
+        unstable:
+          - v2
+        order: 44
+    - name: Unlock Agent Observability dataset draft state
+      url: /api/latest/agent-observability/unlock-agent-observability-dataset-draft-state/
+      identifier: agent-observability-unlock-agent-observability-dataset-draft-state
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnlockLLMObsDatasetDraftState
+        unstable:
+          - v2
+        order: 42
+    - name: Lock Agent Observability dataset draft state
+      url: /api/latest/agent-observability/lock-agent-observability-dataset-draft-state/
+      identifier: agent-observability-lock-agent-observability-dataset-draft-state
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - LockLLMObsDatasetDraftState
+        unstable:
+          - v2
+        order: 41
+    - name: Get Agent Observability dataset draft state
+      url: /api/latest/agent-observability/get-agent-observability-dataset-draft-state/
+      identifier: agent-observability-get-agent-observability-dataset-draft-state
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsDatasetDraftState
+        unstable:
+          - v2
+        order: 40
+    - name: Clone an Agent Observability dataset
+      url: /api/latest/agent-observability/clone-an-agent-observability-dataset/
+      identifier: agent-observability-clone-an-agent-observability-dataset
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CloneLLMObsDataset
+        unstable:
+          - v2
+        order: 46
+    - name: Batch update Agent Observability dataset records
+      url: /api/latest/agent-observability/batch-update-agent-observability-dataset-records/
+      identifier: agent-observability-batch-update-agent-observability-dataset-records
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BatchUpdateLLMObsDataset
+        unstable:
+          - v2
+        order: 45
+    - name: Update an Agent Observability dataset
+      url: /api/latest/agent-observability/update-an-agent-observability-dataset/
+      identifier: agent-observability-update-an-agent-observability-dataset
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsDataset
+        unstable:
+          - v2
+        order: 9
+    - name: Delete Agent Observability datasets
+      url: /api/latest/agent-observability/delete-agent-observability-datasets/
+      identifier: agent-observability-delete-agent-observability-datasets
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsDatasets
+        unstable:
+          - v2
+        order: 11
+    - name: Create an Agent Observability dataset
+      url: /api/latest/agent-observability/create-an-agent-observability-dataset/
+      identifier: agent-observability-create-an-agent-observability-dataset
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsDataset
+        unstable:
+          - v2
+        order: 6
+    - name: List Agent Observability datasets
+      url: /api/latest/agent-observability/list-agent-observability-datasets/
+      identifier: agent-observability-list-agent-observability-datasets
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsDatasets
+        unstable:
+          - v2
+        order: 5
+    - name: List patterns topics with clustered points
+      url: /api/latest/agent-observability/list-patterns-topics-with-clustered-points/
+      identifier: agent-observability-list-patterns-topics-with-clustered-points
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsTopicsWithClusteredPoints
+        unstable:
+          - v2
+        order: 60
+    - name: List patterns topics
+      url: /api/latest/agent-observability/list-patterns-topics/
+      identifier: agent-observability-list-patterns-topics
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsTopics
+        unstable:
+          - v2
+        order: 58
+    - name: Get patterns run status
+      url: /api/latest/agent-observability/get-patterns-run-status/
+      identifier: agent-observability-get-patterns-run-status
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsPatternsRunStatus
+        unstable:
+          - v2
+        order: 56
+    - name: Trigger a patterns run
+      url: /api/latest/agent-observability/trigger-a-patterns-run/
+      identifier: agent-observability-trigger-a-patterns-run
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TriggerLLMObsPatterns
+        unstable:
+          - v2
+        order: 55
+    - name: List patterns runs
+      url: /api/latest/agent-observability/list-patterns-runs/
+      identifier: agent-observability-list-patterns-runs
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsRuns
+        unstable:
+          - v2
+        order: 57
+    - name: Delete a patterns configuration
+      url: /api/latest/agent-observability/delete-a-patterns-configuration/
+      identifier: agent-observability-delete-a-patterns-configuration
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsPatternsConfig
+        unstable:
+          - v2
+        order: 54
+    - name: Get a patterns configuration
+      url: /api/latest/agent-observability/get-a-patterns-configuration/
+      identifier: agent-observability-get-a-patterns-configuration
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsPatternsConfig
+        unstable:
+          - v2
+        order: 61
+    - name: Create or update a patterns configuration
+      url: /api/latest/agent-observability/create-or-update-a-patterns-configuration/
+      identifier: agent-observability-create-or-update-a-patterns-configuration
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertLLMObsPatternsConfig
+        unstable:
+          - v2
+        order: 53
+    - name: List patterns configurations
+      url: /api/latest/agent-observability/list-patterns-configurations/
+      identifier: agent-observability-list-patterns-configurations
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsConfigs
+        unstable:
+          - v2
+        order: 62
+    - name: List patterns clustered points
+      url: /api/latest/agent-observability/list-patterns-clustered-points/
+      identifier: agent-observability-list-patterns-clustered-points
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPatternsClusteredPoints
+        unstable:
+          - v2
+        order: 59
+    - name: Search Agent Observability spans
+      url: /api/latest/agent-observability/search-agent-observability-spans/
+      identifier: agent-observability-search-agent-observability-spans
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchLLMObsSpans
+        unstable:
+          - v2
+        order: 35
+    - name: List Agent Observability spans
+      url: /api/latest/agent-observability/list-agent-observability-spans/
+      identifier: agent-observability-list-agent-observability-spans
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsSpans
+        unstable:
+          - v2
+        order: 34
+    - name: Update an Agent Observability prompt version
+      url: /api/latest/agent-observability/update-an-agent-observability-prompt-version/
+      identifier: agent-observability-update-an-agent-observability-prompt-version
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsPromptVersion
+        unstable:
+          - v2
+        order: 71
+    - name: Get a specific Agent Observability prompt version
+      url: /api/latest/agent-observability/get-a-specific-agent-observability-prompt-version/
+      identifier: agent-observability-get-a-specific-agent-observability-prompt-version
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsPromptVersion
+        unstable:
+          - v2
+        order: 70
+    - name: Create a new Agent Observability prompt version
+      url: /api/latest/agent-observability/create-a-new-agent-observability-prompt-version/
+      identifier: agent-observability-create-a-new-agent-observability-prompt-version
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsPromptVersion
+        unstable:
+          - v2
+        order: 69
+    - name: List versions of an Agent Observability prompt
+      url: /api/latest/agent-observability/list-versions-of-an-agent-observability-prompt/
+      identifier: agent-observability-list-versions-of-an-agent-observability-prompt
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPromptVersions
+        unstable:
+          - v2
+        order: 68
+    - name: Update an Agent Observability prompt
+      url: /api/latest/agent-observability/update-an-agent-observability-prompt/
+      identifier: agent-observability-update-an-agent-observability-prompt
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsPrompt
+        unstable:
+          - v2
+        order: 66
+    - name: Get an Agent Observability prompt
+      url: /api/latest/agent-observability/get-an-agent-observability-prompt/
+      identifier: agent-observability-get-an-agent-observability-prompt
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsPrompt
+        unstable:
+          - v2
+        order: 65
+    - name: Delete an Agent Observability prompt
+      url: /api/latest/agent-observability/delete-an-agent-observability-prompt/
+      identifier: agent-observability-delete-an-agent-observability-prompt
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsPrompt
+        unstable:
+          - v2
+        order: 67
+    - name: Create an Agent Observability prompt
+      url: /api/latest/agent-observability/create-an-agent-observability-prompt/
+      identifier: agent-observability-create-an-agent-observability-prompt
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsPrompt
+        unstable:
+          - v2
+        order: 64
+    - name: List Agent Observability prompts
+      url: /api/latest/agent-observability/list-agent-observability-prompts/
+      identifier: agent-observability-list-agent-observability-prompts
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPrompts
+        unstable:
+          - v2
+        order: 63
+    - name: Update an Agent Observability project
+      url: /api/latest/agent-observability/update-an-agent-observability-project/
+      identifier: agent-observability-update-an-agent-observability-project
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsProject
+        unstable:
+          - v2
+        order: 3
+    - name: Delete Agent Observability projects
+      url: /api/latest/agent-observability/delete-agent-observability-projects/
+      identifier: agent-observability-delete-agent-observability-projects
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsProjects
+        unstable:
+          - v2
+        order: 4
+    - name: Create an Agent Observability project
+      url: /api/latest/agent-observability/create-an-agent-observability-project/
+      identifier: agent-observability-create-an-agent-observability-project
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsProject
+        unstable:
+          - v2
+        order: 2
+    - name: List Agent Observability projects
+      url: /api/latest/agent-observability/list-agent-observability-projects/
+      identifier: agent-observability-list-agent-observability-projects
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsProjects
+        unstable:
+          - v2
+        order: 1
+    - name: List LLM integration models
+      url: /api/latest/agent-observability/list-llm-integration-models/
+      identifier: agent-observability-list-llm-integration-models
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsIntegrationModels
+        unstable:
+          - v2
+        order: 37
+    - name: Run an LLM inference
+      url: /api/latest/agent-observability/run-an-llm-inference/
+      identifier: agent-observability-run-an-llm-inference
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsIntegrationInference
+        unstable:
+          - v2
+        order: 38
+    - name: List LLM integration accounts
+      url: /api/latest/agent-observability/list-llm-integration-accounts/
+      identifier: agent-observability-list-llm-integration-accounts
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsIntegrationAccounts
+        unstable:
+          - v2
+        order: 36
+    - name: Push events for an Agent Observability experiment
+      url: /api/latest/agent-observability/push-events-for-an-agent-observability-experiment/
+      identifier: agent-observability-push-events-for-an-agent-observability-experiment
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsExperimentEvents
+        unstable:
+          - v2
+        order: 17
+    - name: List Agent Observability experiment spans (v1)
+      url: /api/latest/agent-observability/list-agent-observability-experiment-spans-v1/
+      identifier: agent-observability-list-agent-observability-experiment-spans-v1
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsExperimentEventsV1
+        unstable:
+          - v2
+        order: 49
+    - name: Update an Agent Observability experiment
+      url: /api/latest/agent-observability/update-an-agent-observability-experiment/
+      identifier: agent-observability-update-an-agent-observability-experiment
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsExperiment
+        unstable:
+          - v2
+        order: 15
+    - name: Delete Agent Observability experiments
+      url: /api/latest/agent-observability/delete-agent-observability-experiments/
+      identifier: agent-observability-delete-agent-observability-experiments
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsExperiments
+        unstable:
+          - v2
+        order: 16
+    - name: Create an Agent Observability experiment
+      url: /api/latest/agent-observability/create-an-agent-observability-experiment/
+      identifier: agent-observability-create-an-agent-observability-experiment
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsExperiment
+        unstable:
+          - v2
+        order: 14
+    - name: List Agent Observability experiments
+      url: /api/latest/agent-observability/list-agent-observability-experiments/
+      identifier: agent-observability-list-agent-observability-experiments
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsExperiments
+        unstable:
+          - v2
+        order: 13
+    - name: Simple search experimentation entities
+      url: /api/latest/agent-observability/simple-search-experimentation-entities/
+      identifier: agent-observability-simple-search-experimentation-entities
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SimpleSearchLLMObsExperimentation
+        unstable:
+          - v2
+        order: 32
+    - name: Search Agent Observability experimentation
+      url: /api/latest/agent-observability/search-agent-observability-experimentation/
+      identifier: agent-observability-search-agent-observability-experimentation
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchLLMObsExperimentation
+        unstable:
+          - v2
+        order: 31
+    - name: Aggregate Agent Observability experimentation
+      url: /api/latest/agent-observability/aggregate-agent-observability-experimentation/
+      identifier: agent-observability-aggregate-agent-observability-experimentation
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AggregateLLMObsExperimentation
+        unstable:
+          - v2
+        order: 33
+    - name: Update annotation queue label schema
+      url: /api/latest/agent-observability/update-annotation-queue-label-schema/
+      identifier: agent-observability-update-annotation-queue-label-schema
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsAnnotationQueueLabelSchema
+        unstable:
+          - v2
+        order: 52
+    - name: Get annotation queue label schema
+      url: /api/latest/agent-observability/get-annotation-queue-label-schema/
+      identifier: agent-observability-get-annotation-queue-label-schema
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsAnnotationQueueLabelSchema
+        unstable:
+          - v2
+        order: 51
+    - name: Delete annotation queue interactions
+      url: /api/latest/agent-observability/delete-annotation-queue-interactions/
+      identifier: agent-observability-delete-annotation-queue-interactions
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsAnnotationQueueInteractions
+        unstable:
+          - v2
+        order: 24
+    - name: Add annotation queue interactions
+      url: /api/latest/agent-observability/add-annotation-queue-interactions/
+      identifier: agent-observability-add-annotation-queue-interactions
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsAnnotationQueueInteractions
+        unstable:
+          - v2
+        order: 22
+    - name: Delete annotations
+      url: /api/latest/agent-observability/delete-annotations/
+      identifier: agent-observability-delete-annotations
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsAnnotations
+        unstable:
+          - v2
+        order: 29
+    - name: Create or update annotations
+      url: /api/latest/agent-observability/create-or-update-annotations/
+      identifier: agent-observability-create-or-update-annotations
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertLLMObsAnnotations
+        unstable:
+          - v2
+        order: 28
+    - name: Get annotated queue interactions
+      url: /api/latest/agent-observability/get-annotated-queue-interactions/
+      identifier: agent-observability-get-annotated-queue-interactions
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsAnnotatedInteractions
+        unstable:
+          - v2
+        order: 23
+    - name: Update an Agent Observability annotation queue
+      url: /api/latest/agent-observability/update-an-agent-observability-annotation-queue/
+      identifier: agent-observability-update-an-agent-observability-annotation-queue
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsAnnotationQueue
+        unstable:
+          - v2
+        order: 20
+    - name: Delete an Agent Observability annotation queue
+      url: /api/latest/agent-observability/delete-an-agent-observability-annotation-queue/
+      identifier: agent-observability-delete-an-agent-observability-annotation-queue
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsAnnotationQueue
+        unstable:
+          - v2
+        order: 21
+    - name: Create an Agent Observability annotation queue
+      url: /api/latest/agent-observability/create-an-agent-observability-annotation-queue/
+      identifier: agent-observability-create-an-agent-observability-annotation-queue
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsAnnotationQueue
+        unstable:
+          - v2
+        order: 19
+    - name: List Agent Observability annotation queues
+      url: /api/latest/agent-observability/list-agent-observability-annotation-queues/
+      identifier: agent-observability-list-agent-observability-annotation-queues
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsAnnotationQueues
+        unstable:
+          - v2
+        order: 18
+    - name: Get annotated interactions by content IDs
+      url: /api/latest/agent-observability/get-annotated-interactions-by-content-ids/
+      identifier: agent-observability-get-annotated-interactions-by-content-ids
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsAnnotatedInteractionsByTraceIDs
+        unstable:
+          - v2
+        order: 39
+    - name: Create or update a custom evaluator configuration
+      url: /api/latest/agent-observability/create-or-update-a-custom-evaluator-configuration/
+      identifier: agent-observability-create-or-update-a-custom-evaluator-configuration
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsCustomEvalConfig
+        unstable:
+          - v2
+        order: 26
+    - name: Get a custom evaluator configuration
+      url: /api/latest/agent-observability/get-a-custom-evaluator-configuration/
+      identifier: agent-observability-get-a-custom-evaluator-configuration
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsCustomEvalConfig
+        unstable:
+          - v2
+        order: 25
+    - name: Delete a custom evaluator configuration
+      url: /api/latest/agent-observability/delete-a-custom-evaluator-configuration/
+      identifier: agent-observability-delete-a-custom-evaluator-configuration
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsCustomEvalConfig
+        unstable:
+          - v2
+        order: 27
+    - name: List custom evaluator configurations
+      url: /api/latest/agent-observability/list-custom-evaluator-configurations/
+      identifier: agent-observability-list-custom-evaluator-configurations
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsCustomEvalConfigs
+        unstable:
+          - v2
+        order: 72
     - name: Agentless Scanning
       url: /api/latest/agentless-scanning/
       identifier: agentless-scanning
@@ -11489,6 +12507,46 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Data Deletion
+      url: /api/latest/data-deletion/
+      identifier: data-deletion
+      generated: true
+    - name: Cancels a data deletion request
+      url: /api/latest/data-deletion/cancels-a-data-deletion-request/
+      identifier: data-deletion-cancels-a-data-deletion-request
+      parent: data-deletion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelDataDeletionRequest
+        unstable: []
+        order: 2
+    - name: Gets a list of data deletion requests
+      url: /api/latest/data-deletion/gets-a-list-of-data-deletion-requests/
+      identifier: data-deletion-gets-a-list-of-data-deletion-requests
+      parent: data-deletion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDataDeletionRequests
+        unstable: []
+        order: 3
+    - name: Creates a data deletion request
+      url: /api/latest/data-deletion/creates-a-data-deletion-request/
+      identifier: data-deletion-creates-a-data-deletion-request
+      parent: data-deletion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDataDeletionRequest
+        unstable: []
+        order: 1
     - name: Data Observability
       url: /api/latest/data-observability/
       identifier: data-observability
@@ -11913,6 +12971,75 @@ menu:
           - SearchIssues
         unstable: []
         order: 1
+    - name: Execution Policy
+      url: /api/latest/execution-policy/
+      identifier: execution-policy
+      generated: true
+    - name: Update an execution policy
+      url: /api/latest/execution-policy/update-an-execution-policy/
+      identifier: execution-policy-update-an-execution-policy
+      parent: execution-policy
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateExecutionPolicy
+        unstable:
+          - v2
+        order: 12
+    - name: Get an execution policy
+      url: /api/latest/execution-policy/get-an-execution-policy/
+      identifier: execution-policy-get-an-execution-policy
+      parent: execution-policy
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetExecutionPolicy
+        unstable:
+          - v2
+        order: 11
+    - name: Delete an execution policy
+      url: /api/latest/execution-policy/delete-an-execution-policy/
+      identifier: execution-policy-delete-an-execution-policy
+      parent: execution-policy
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteExecutionPolicy
+        unstable:
+          - v2
+        order: 13
+    - name: Create an execution policy
+      url: /api/latest/execution-policy/create-an-execution-policy/
+      identifier: execution-policy-create-an-execution-policy
+      parent: execution-policy
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateExecutionPolicy
+        unstable:
+          - v2
+        order: 10
+    - name: List execution policies
+      url: /api/latest/execution-policy/list-execution-policies/
+      identifier: execution-policy-list-execution-policies
+      parent: execution-policy
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListExecutionPolicies
+        unstable:
+          - v2
+        order: 9
     - name: Fastly Integration
       url: /api/latest/fastly-integration/
       identifier: fastly-integration
@@ -14416,946 +15543,6 @@ menu:
         unstable:
           - v2
         order: 7
-    - name: LLM Observability
-      url: /api/latest/llm-observability/
-      identifier: llm-observability
-      generated: true
-    - name: List events for an LLM Observability experiment
-      url: /api/latest/llm-observability/list-events-for-an-llm-observability-experiment/
-      identifier: llm-observability-list-events-for-an-llm-observability-experiment
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsExperimentEvents
-        unstable:
-          - v2
-        order: 30
-    - name: Upload records to an LLM Observability dataset
-      url: /api/latest/llm-observability/upload-records-to-an-llm-observability-dataset/
-      identifier: llm-observability-upload-records-to-an-llm-observability-dataset
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UploadLLMObsDatasetRecordsFile
-        unstable:
-          - v2
-        order: 48
-    - name: List LLM Observability experiment events (v2)
-      url: /api/latest/llm-observability/list-llm-observability-experiment-events-v2/
-      identifier: llm-observability-list-llm-observability-experiment-events-v2
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsExperimentEventsV2
-        unstable:
-          - v2
-        order: 50
-    - name: List LLM Observability dataset versions
-      url: /api/latest/llm-observability/list-llm-observability-dataset-versions/
-      identifier: llm-observability-list-llm-observability-dataset-versions
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsDatasetVersions
-        unstable:
-          - v2
-        order: 43
-    - name: Restore an LLM Observability dataset version
-      url: /api/latest/llm-observability/restore-an-llm-observability-dataset-version/
-      identifier: llm-observability-restore-an-llm-observability-dataset-version
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - RestoreLLMObsDatasetVersion
-        unstable:
-          - v2
-        order: 47
-    - name: Delete LLM Observability dataset records
-      url: /api/latest/llm-observability/delete-llm-observability-dataset-records/
-      identifier: llm-observability-delete-llm-observability-dataset-records
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteLLMObsDatasetRecords
-        unstable:
-          - v2
-        order: 12
-    - name: Append records to an LLM Observability dataset
-      url: /api/latest/llm-observability/append-records-to-an-llm-observability-dataset/
-      identifier: llm-observability-append-records-to-an-llm-observability-dataset
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateLLMObsDatasetRecords
-        unstable:
-          - v2
-        order: 8
-    - name: Update LLM Observability dataset records
-      url: /api/latest/llm-observability/update-llm-observability-dataset-records/
-      identifier: llm-observability-update-llm-observability-dataset-records
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateLLMObsDatasetRecords
-        unstable:
-          - v2
-        order: 10
-    - name: List LLM Observability dataset records
-      url: /api/latest/llm-observability/list-llm-observability-dataset-records/
-      identifier: llm-observability-list-llm-observability-dataset-records
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsDatasetRecords
-        unstable:
-          - v2
-        order: 7
-    - name: Export an LLM Observability dataset
-      url: /api/latest/llm-observability/export-an-llm-observability-dataset/
-      identifier: llm-observability-export-an-llm-observability-dataset
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ExportLLMObsDataset
-        unstable:
-          - v2
-        order: 44
-    - name: Unlock LLM Observability dataset draft state
-      url: /api/latest/llm-observability/unlock-llm-observability-dataset-draft-state/
-      identifier: llm-observability-unlock-llm-observability-dataset-draft-state
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UnlockLLMObsDatasetDraftState
-        unstable:
-          - v2
-        order: 42
-    - name: Lock LLM Observability dataset draft state
-      url: /api/latest/llm-observability/lock-llm-observability-dataset-draft-state/
-      identifier: llm-observability-lock-llm-observability-dataset-draft-state
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - LockLLMObsDatasetDraftState
-        unstable:
-          - v2
-        order: 41
-    - name: Get LLM Observability dataset draft state
-      url: /api/latest/llm-observability/get-llm-observability-dataset-draft-state/
-      identifier: llm-observability-get-llm-observability-dataset-draft-state
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetLLMObsDatasetDraftState
-        unstable:
-          - v2
-        order: 40
-    - name: Clone an LLM Observability dataset
-      url: /api/latest/llm-observability/clone-an-llm-observability-dataset/
-      identifier: llm-observability-clone-an-llm-observability-dataset
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CloneLLMObsDataset
-        unstable:
-          - v2
-        order: 46
-    - name: Batch update LLM Observability dataset records
-      url: /api/latest/llm-observability/batch-update-llm-observability-dataset-records/
-      identifier: llm-observability-batch-update-llm-observability-dataset-records
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - BatchUpdateLLMObsDataset
-        unstable:
-          - v2
-        order: 45
-    - name: Update an LLM Observability dataset
-      url: /api/latest/llm-observability/update-an-llm-observability-dataset/
-      identifier: llm-observability-update-an-llm-observability-dataset
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateLLMObsDataset
-        unstable:
-          - v2
-        order: 9
-    - name: Delete LLM Observability datasets
-      url: /api/latest/llm-observability/delete-llm-observability-datasets/
-      identifier: llm-observability-delete-llm-observability-datasets
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteLLMObsDatasets
-        unstable:
-          - v2
-        order: 11
-    - name: Create an LLM Observability dataset
-      url: /api/latest/llm-observability/create-an-llm-observability-dataset/
-      identifier: llm-observability-create-an-llm-observability-dataset
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateLLMObsDataset
-        unstable:
-          - v2
-        order: 6
-    - name: List LLM Observability datasets
-      url: /api/latest/llm-observability/list-llm-observability-datasets/
-      identifier: llm-observability-list-llm-observability-datasets
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsDatasets
-        unstable:
-          - v2
-        order: 5
-    - name: List patterns topics with clustered points
-      url: /api/latest/llm-observability/list-patterns-topics-with-clustered-points/
-      identifier: llm-observability-list-patterns-topics-with-clustered-points
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsPatternsTopicsWithClusteredPoints
-        unstable:
-          - v2
-        order: 60
-    - name: List patterns topics
-      url: /api/latest/llm-observability/list-patterns-topics/
-      identifier: llm-observability-list-patterns-topics
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsPatternsTopics
-        unstable:
-          - v2
-        order: 58
-    - name: Get patterns run status
-      url: /api/latest/llm-observability/get-patterns-run-status/
-      identifier: llm-observability-get-patterns-run-status
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetLLMObsPatternsRunStatus
-        unstable:
-          - v2
-        order: 56
-    - name: Trigger a patterns run
-      url: /api/latest/llm-observability/trigger-a-patterns-run/
-      identifier: llm-observability-trigger-a-patterns-run
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - TriggerLLMObsPatterns
-        unstable:
-          - v2
-        order: 55
-    - name: List patterns runs
-      url: /api/latest/llm-observability/list-patterns-runs/
-      identifier: llm-observability-list-patterns-runs
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsPatternsRuns
-        unstable:
-          - v2
-        order: 57
-    - name: Delete a patterns configuration
-      url: /api/latest/llm-observability/delete-a-patterns-configuration/
-      identifier: llm-observability-delete-a-patterns-configuration
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteLLMObsPatternsConfig
-        unstable:
-          - v2
-        order: 54
-    - name: Get a patterns configuration
-      url: /api/latest/llm-observability/get-a-patterns-configuration/
-      identifier: llm-observability-get-a-patterns-configuration
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetLLMObsPatternsConfig
-        unstable:
-          - v2
-        order: 61
-    - name: Create or update a patterns configuration
-      url: /api/latest/llm-observability/create-or-update-a-patterns-configuration/
-      identifier: llm-observability-create-or-update-a-patterns-configuration
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpsertLLMObsPatternsConfig
-        unstable:
-          - v2
-        order: 53
-    - name: List patterns configurations
-      url: /api/latest/llm-observability/list-patterns-configurations/
-      identifier: llm-observability-list-patterns-configurations
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsPatternsConfigs
-        unstable:
-          - v2
-        order: 62
-    - name: List patterns clustered points
-      url: /api/latest/llm-observability/list-patterns-clustered-points/
-      identifier: llm-observability-list-patterns-clustered-points
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsPatternsClusteredPoints
-        unstable:
-          - v2
-        order: 59
-    - name: Search LLM Observability spans
-      url: /api/latest/llm-observability/search-llm-observability-spans/
-      identifier: llm-observability-search-llm-observability-spans
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - SearchLLMObsSpans
-        unstable:
-          - v2
-        order: 35
-    - name: List LLM Observability spans
-      url: /api/latest/llm-observability/list-llm-observability-spans/
-      identifier: llm-observability-list-llm-observability-spans
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsSpans
-        unstable:
-          - v2
-        order: 34
-    - name: Update a specific LLM Observability prompt version
-      url: /api/latest/llm-observability/update-a-specific-llm-observability-prompt-version/
-      identifier: llm-observability-update-a-specific-llm-observability-prompt-version
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateLLMObsPromptVersion
-        unstable:
-          - v2
-        order: 71
-    - name: Get a specific LLM Observability prompt version
-      url: /api/latest/llm-observability/get-a-specific-llm-observability-prompt-version/
-      identifier: llm-observability-get-a-specific-llm-observability-prompt-version
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetLLMObsPromptVersion
-        unstable:
-          - v2
-        order: 70
-    - name: Create a new LLM Observability prompt version
-      url: /api/latest/llm-observability/create-a-new-llm-observability-prompt-version/
-      identifier: llm-observability-create-a-new-llm-observability-prompt-version
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateLLMObsPromptVersion
-        unstable:
-          - v2
-        order: 69
-    - name: List versions of an LLM Observability prompt
-      url: /api/latest/llm-observability/list-versions-of-an-llm-observability-prompt/
-      identifier: llm-observability-list-versions-of-an-llm-observability-prompt
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsPromptVersions
-        unstable:
-          - v2
-        order: 68
-    - name: Update an LLM Observability prompt
-      url: /api/latest/llm-observability/update-an-llm-observability-prompt/
-      identifier: llm-observability-update-an-llm-observability-prompt
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateLLMObsPrompt
-        unstable:
-          - v2
-        order: 66
-    - name: Get an LLM Observability prompt
-      url: /api/latest/llm-observability/get-an-llm-observability-prompt/
-      identifier: llm-observability-get-an-llm-observability-prompt
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetLLMObsPrompt
-        unstable:
-          - v2
-        order: 65
-    - name: Delete an LLM Observability prompt
-      url: /api/latest/llm-observability/delete-an-llm-observability-prompt/
-      identifier: llm-observability-delete-an-llm-observability-prompt
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteLLMObsPrompt
-        unstable:
-          - v2
-        order: 67
-    - name: Create an LLM Observability prompt
-      url: /api/latest/llm-observability/create-an-llm-observability-prompt/
-      identifier: llm-observability-create-an-llm-observability-prompt
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateLLMObsPrompt
-        unstable:
-          - v2
-        order: 64
-    - name: List LLM Observability prompts
-      url: /api/latest/llm-observability/list-llm-observability-prompts/
-      identifier: llm-observability-list-llm-observability-prompts
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsPrompts
-        unstable:
-          - v2
-        order: 63
-    - name: Update an LLM Observability project
-      url: /api/latest/llm-observability/update-an-llm-observability-project/
-      identifier: llm-observability-update-an-llm-observability-project
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateLLMObsProject
-        unstable:
-          - v2
-        order: 3
-    - name: Delete LLM Observability projects
-      url: /api/latest/llm-observability/delete-llm-observability-projects/
-      identifier: llm-observability-delete-llm-observability-projects
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteLLMObsProjects
-        unstable:
-          - v2
-        order: 4
-    - name: Create an LLM Observability project
-      url: /api/latest/llm-observability/create-an-llm-observability-project/
-      identifier: llm-observability-create-an-llm-observability-project
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateLLMObsProject
-        unstable:
-          - v2
-        order: 2
-    - name: List LLM Observability projects
-      url: /api/latest/llm-observability/list-llm-observability-projects/
-      identifier: llm-observability-list-llm-observability-projects
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsProjects
-        unstable:
-          - v2
-        order: 1
-    - name: List LLM integration models
-      url: /api/latest/llm-observability/list-llm-integration-models/
-      identifier: llm-observability-list-llm-integration-models
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsIntegrationModels
-        unstable:
-          - v2
-        order: 37
-    - name: Run an LLM inference
-      url: /api/latest/llm-observability/run-an-llm-inference/
-      identifier: llm-observability-run-an-llm-inference
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateLLMObsIntegrationInference
-        unstable:
-          - v2
-        order: 38
-    - name: List LLM integration accounts
-      url: /api/latest/llm-observability/list-llm-integration-accounts/
-      identifier: llm-observability-list-llm-integration-accounts
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsIntegrationAccounts
-        unstable:
-          - v2
-        order: 36
-    - name: Push events for an LLM Observability experiment
-      url: /api/latest/llm-observability/push-events-for-an-llm-observability-experiment/
-      identifier: llm-observability-push-events-for-an-llm-observability-experiment
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateLLMObsExperimentEvents
-        unstable:
-          - v2
-        order: 17
-    - name: List LLM Observability experiment spans (v1)
-      url: /api/latest/llm-observability/list-llm-observability-experiment-spans-v1/
-      identifier: llm-observability-list-llm-observability-experiment-spans-v1
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsExperimentEventsV1
-        unstable:
-          - v2
-        order: 49
-    - name: Update an LLM Observability experiment
-      url: /api/latest/llm-observability/update-an-llm-observability-experiment/
-      identifier: llm-observability-update-an-llm-observability-experiment
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateLLMObsExperiment
-        unstable:
-          - v2
-        order: 15
-    - name: Delete LLM Observability experiments
-      url: /api/latest/llm-observability/delete-llm-observability-experiments/
-      identifier: llm-observability-delete-llm-observability-experiments
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteLLMObsExperiments
-        unstable:
-          - v2
-        order: 16
-    - name: Create an LLM Observability experiment
-      url: /api/latest/llm-observability/create-an-llm-observability-experiment/
-      identifier: llm-observability-create-an-llm-observability-experiment
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateLLMObsExperiment
-        unstable:
-          - v2
-        order: 14
-    - name: List LLM Observability experiments
-      url: /api/latest/llm-observability/list-llm-observability-experiments/
-      identifier: llm-observability-list-llm-observability-experiments
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsExperiments
-        unstable:
-          - v2
-        order: 13
-    - name: Simple search experimentation entities
-      url: /api/latest/llm-observability/simple-search-experimentation-entities/
-      identifier: llm-observability-simple-search-experimentation-entities
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - SimpleSearchLLMObsExperimentation
-        unstable:
-          - v2
-        order: 32
-    - name: Search LLM Observability experimentation entities
-      url: /api/latest/llm-observability/search-llm-observability-experimentation-entities/
-      identifier: llm-observability-search-llm-observability-experimentation-entities
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - SearchLLMObsExperimentation
-        unstable:
-          - v2
-        order: 31
-    - name: Aggregate LLM Observability experimentation
-      url: /api/latest/llm-observability/aggregate-llm-observability-experimentation/
-      identifier: llm-observability-aggregate-llm-observability-experimentation
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - AggregateLLMObsExperimentation
-        unstable:
-          - v2
-        order: 33
-    - name: Update annotation queue label schema
-      url: /api/latest/llm-observability/update-annotation-queue-label-schema/
-      identifier: llm-observability-update-annotation-queue-label-schema
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateLLMObsAnnotationQueueLabelSchema
-        unstable:
-          - v2
-        order: 52
-    - name: Get annotation queue label schema
-      url: /api/latest/llm-observability/get-annotation-queue-label-schema/
-      identifier: llm-observability-get-annotation-queue-label-schema
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetLLMObsAnnotationQueueLabelSchema
-        unstable:
-          - v2
-        order: 51
-    - name: Delete annotation queue interactions
-      url: /api/latest/llm-observability/delete-annotation-queue-interactions/
-      identifier: llm-observability-delete-annotation-queue-interactions
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteLLMObsAnnotationQueueInteractions
-        unstable:
-          - v2
-        order: 24
-    - name: Add annotation queue interactions
-      url: /api/latest/llm-observability/add-annotation-queue-interactions/
-      identifier: llm-observability-add-annotation-queue-interactions
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateLLMObsAnnotationQueueInteractions
-        unstable:
-          - v2
-        order: 22
-    - name: Delete annotations
-      url: /api/latest/llm-observability/delete-annotations/
-      identifier: llm-observability-delete-annotations
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteLLMObsAnnotations
-        unstable:
-          - v2
-        order: 29
-    - name: Create or update annotations
-      url: /api/latest/llm-observability/create-or-update-annotations/
-      identifier: llm-observability-create-or-update-annotations
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpsertLLMObsAnnotations
-        unstable:
-          - v2
-        order: 28
-    - name: Get annotated queue interactions
-      url: /api/latest/llm-observability/get-annotated-queue-interactions/
-      identifier: llm-observability-get-annotated-queue-interactions
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetLLMObsAnnotatedInteractions
-        unstable:
-          - v2
-        order: 23
-    - name: Update an LLM Observability annotation queue
-      url: /api/latest/llm-observability/update-an-llm-observability-annotation-queue/
-      identifier: llm-observability-update-an-llm-observability-annotation-queue
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateLLMObsAnnotationQueue
-        unstable:
-          - v2
-        order: 20
-    - name: Delete an LLM Observability annotation queue
-      url: /api/latest/llm-observability/delete-an-llm-observability-annotation-queue/
-      identifier: llm-observability-delete-an-llm-observability-annotation-queue
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteLLMObsAnnotationQueue
-        unstable:
-          - v2
-        order: 21
-    - name: Create an LLM Observability annotation queue
-      url: /api/latest/llm-observability/create-an-llm-observability-annotation-queue/
-      identifier: llm-observability-create-an-llm-observability-annotation-queue
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateLLMObsAnnotationQueue
-        unstable:
-          - v2
-        order: 19
-    - name: List LLM Observability annotation queues
-      url: /api/latest/llm-observability/list-llm-observability-annotation-queues/
-      identifier: llm-observability-list-llm-observability-annotation-queues
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsAnnotationQueues
-        unstable:
-          - v2
-        order: 18
-    - name: Get annotated interactions by content IDs
-      url: /api/latest/llm-observability/get-annotated-interactions-by-content-ids/
-      identifier: llm-observability-get-annotated-interactions-by-content-ids
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetLLMObsAnnotatedInteractionsByTraceIDs
-        unstable:
-          - v2
-        order: 39
-    - name: Create or update a custom evaluator configuration
-      url: /api/latest/llm-observability/create-or-update-a-custom-evaluator-configuration/
-      identifier: llm-observability-create-or-update-a-custom-evaluator-configuration
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateLLMObsCustomEvalConfig
-        unstable:
-          - v2
-        order: 26
-    - name: Get a custom evaluator configuration
-      url: /api/latest/llm-observability/get-a-custom-evaluator-configuration/
-      identifier: llm-observability-get-a-custom-evaluator-configuration
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetLLMObsCustomEvalConfig
-        unstable:
-          - v2
-        order: 25
-    - name: Delete a custom evaluator configuration
-      url: /api/latest/llm-observability/delete-a-custom-evaluator-configuration/
-      identifier: llm-observability-delete-a-custom-evaluator-configuration
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteLLMObsCustomEvalConfig
-        unstable:
-          - v2
-        order: 27
-    - name: List custom evaluator configurations
-      url: /api/latest/llm-observability/list-custom-evaluator-configurations/
-      identifier: llm-observability-list-custom-evaluator-configurations
-      parent: llm-observability
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListLLMObsCustomEvalConfigs
-        unstable:
-          - v2
-        order: 72
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives
@@ -17440,6 +17627,123 @@ menu:
       url: /api/latest/product-analytics/
       identifier: product-analytics
       generated: true
+    - name: Compute a Sankey diagram
+      url: /api/latest/product-analytics/compute-a-sankey-diagram/
+      identifier: product-analytics-compute-a-sankey-diagram
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsSankey
+        unstable:
+          - v2
+        order: 13
+    - name: Compute retention timeseries
+      url: /api/latest/product-analytics/compute-retention-timeseries/
+      identifier: product-analytics-compute-retention-timeseries
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsRetentionTimeseries
+        unstable:
+          - v2
+        order: 10
+    - name: Compute retention scalar values
+      url: /api/latest/product-analytics/compute-retention-scalar-values/
+      identifier: product-analytics-compute-retention-scalar-values
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsRetentionScalar
+        unstable:
+          - v2
+        order: 11
+    - name: List the entities behind a retention cell
+      url: /api/latest/product-analytics/list-the-entities-behind-a-retention-cell/
+      identifier: product-analytics-list-the-entities-behind-a-retention-cell
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsRetentionList
+        unstable:
+          - v2
+        order: 12
+    - name: Compute a retention grid
+      url: /api/latest/product-analytics/compute-a-retention-grid/
+      identifier: product-analytics-compute-a-retention-grid
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsRetentionGrid
+        unstable:
+          - v2
+        order: 9
+    - name: Compute journey timeseries analytics
+      url: /api/latest/product-analytics/compute-journey-timeseries-analytics/
+      identifier: product-analytics-compute-journey-timeseries-analytics
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsJourneyTimeseries
+        unstable:
+          - v2
+        order: 6
+    - name: Compute journey scalar analytics
+      url: /api/latest/product-analytics/compute-journey-scalar-analytics/
+      identifier: product-analytics-compute-journey-scalar-analytics
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsJourneyScalar
+        unstable:
+          - v2
+        order: 7
+    - name: List journey entities
+      url: /api/latest/product-analytics/list-journey-entities/
+      identifier: product-analytics-list-journey-entities
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsJourneyList
+        unstable:
+          - v2
+        order: 8
+    - name: Compute journey funnel analysis
+      url: /api/latest/product-analytics/compute-journey-funnel-analysis/
+      identifier: product-analytics-compute-journey-funnel-analysis
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsJourneyFunnel
+        unstable:
+          - v2
+        order: 5
     - name: Compute timeseries analytics
       url: /api/latest/product-analytics/compute-timeseries-analytics/
       identifier: product-analytics-compute-timeseries-analytics
@@ -17464,6 +17768,19 @@ menu:
           - QueryProductAnalyticsScalar
         unstable: []
         order: 2
+    - name: List analytics events
+      url: /api/latest/product-analytics/list-analytics-events/
+      identifier: product-analytics-list-analytics-events
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsList
+        unstable:
+          - v2
+        order: 4
     - name: Send server-side events
       url: /api/latest/product-analytics/send-server-side-events/
       identifier: product-analytics-send-server-side-events
@@ -17903,6 +18220,46 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: RUM Retention Quota
+      url: /api/latest/rum-retention-quota/
+      identifier: rum-retention-quota
+      generated: true
+    - name: Create or update a RUM retention quota config
+      url: /api/latest/rum-retention-quota/create-or-update-a-rum-retention-quota-config/
+      identifier: rum-retention-quota-create-or-update-a-rum-retention-quota-config
+      parent: rum-retention-quota
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertRumQuotaConfig
+        unstable: []
+        order: 2
+    - name: Get a RUM retention quota configuration
+      url: /api/latest/rum-retention-quota/get-a-rum-retention-quota-configuration/
+      identifier: rum-retention-quota-get-a-rum-retention-quota-configuration
+      parent: rum-retention-quota
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumQuotaConfig
+        unstable: []
+        order: 1
+    - name: Delete a RUM retention quota configuration
+      url: /api/latest/rum-retention-quota/delete-a-rum-retention-quota-configuration/
+      identifier: rum-retention-quota-delete-a-rum-retention-quota-configuration
+      parent: rum-retention-quota
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRumQuotaConfig
+        unstable: []
+        order: 3
     - name: Reference Tables
       url: /api/latest/reference-tables/
       identifier: reference-tables
@@ -18925,6 +19282,88 @@ menu:
           - OrderRetentionFilters
         unstable: []
         order: 6
+    - name: Rum Teams Ownership
+      url: /api/latest/rum-teams-ownership/
+      identifier: rum-teams-ownership
+      generated: true
+    - name: List teams ownership rules
+      url: /api/latest/rum-teams-ownership/list-teams-ownership-rules/
+      identifier: rum-teams-ownership-list-teams-ownership-rules
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamsOwnershipRules
+        unstable:
+          - v2
+        order: 5
+    - name: Get a teams ownership mapping
+      url: /api/latest/rum-teams-ownership/get-a-teams-ownership-mapping/
+      identifier: rum-teams-ownership-get-a-teams-ownership-mapping
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamsOwnershipMapping
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a teams ownership mapping
+      url: /api/latest/rum-teams-ownership/delete-a-teams-ownership-mapping/
+      identifier: rum-teams-ownership-delete-a-teams-ownership-mapping
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTeamsOwnershipMapping
+        unstable:
+          - v2
+        order: 4
+    - name: Bulk create and remove teams ownership mappings
+      url: /api/latest/rum-teams-ownership/bulk-create-and-remove-teams-ownership-mappings/
+      identifier: rum-teams-ownership-bulk-create-and-remove-teams-ownership-mappings
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamsOwnershipMappingsBatch
+        unstable:
+          - v2
+        order: 6
+    - name: Create a teams ownership mapping
+      url: /api/latest/rum-teams-ownership/create-a-teams-ownership-mapping/
+      identifier: rum-teams-ownership-create-a-teams-ownership-mapping
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamsOwnershipMapping
+        unstable:
+          - v2
+        order: 2
+    - name: List teams ownership mappings
+      url: /api/latest/rum-teams-ownership/list-teams-ownership-mappings/
+      identifier: rum-teams-ownership-list-teams-ownership-mappings
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamsOwnershipMappings
+        unstable:
+          - v2
+        order: 1
     - name: SCIM
       url: /api/latest/scim/
       identifier: scim

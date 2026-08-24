@@ -8,6 +8,9 @@ further_reading:
 - link: "/product_analytics/"
   tag: "Documentation"
   text: "Product Analytics"
+- link: "/feature_flags/guide/apm_trace_enrichment/"
+  tag: "Guide"
+  text: "Set Up APM Trace Enrichment for Feature Flags"
 - link: "https://www.datadoghq.com/blog/product-signal-latency-gap/"
   tag: "Blog"
   text: "The product signal latency gap slowing your growth"
@@ -100,3 +103,4 @@ Datadog applies statistical analysis to compare variants and estimate lift. When
 [19]: /experiments/statistics/global_lift
 [20]: /experiments/diagnostics/
 [21]: /experiments/protocols/
+
