@@ -9,8 +9,7 @@ products:
 
 {{< product-availability >}}
 
-{{< callout url="#"
- btn_hidden="true" header="false">}}
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
 The Prometheus source is in Preview. Contact your account manager to request access.
 {{< /callout >}}
 

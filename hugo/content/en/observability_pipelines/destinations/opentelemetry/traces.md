@@ -7,8 +7,7 @@ type: multi-code-lang
 weight: 2
 ---
 
-{{< callout url="#"
- btn_hidden="true" header="false">}}
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
 The OpenTelemetry Traces destination is in Preview. Contact your account manager to request access.
 {{< /callout >}}
 

@@ -6,8 +6,7 @@ type: multi-code-lang
 weight: 1
 ---
 
-{{< callout url="#"
- btn_hidden="true" header="false">}}
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
 The OpenTelemetry destination is in Preview. Contact your account manager to request access.
 {{< /callout >}}
 

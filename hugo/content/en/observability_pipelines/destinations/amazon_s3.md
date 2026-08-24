@@ -10,7 +10,7 @@ products:
 
 {{< product-availability >}}
 
-{{< callout url="#" btn_hidden="true" header="false">}}
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
 The Amazon S3 destination is in Preview. Contact your account manager for access.
 {{< /callout >}}
 
