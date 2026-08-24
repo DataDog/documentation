@@ -89,5 +89,40 @@ export default {
     "agent-only": {
       attributes: {},
     },
+    img: {
+      selfClosing: true,
+      attributes: {
+        src: { type: String, required: true },
+        alt: { type: String },
+        caption: { type: String },
+        width: { type: String },
+        height: { type: String },
+        widthPercent: { type: Number },
+        video: { type: Boolean, default: false },
+        inline: { type: Boolean, default: false },
+        popup: { type: Boolean, default: true },
+      },
+      validate(node) {
+        const { widthPercent, width, height, video, caption } = node.attributes;
+        const errors = [];
+        if (widthPercent != null && (width != null || height != null)) {
+          errors.push({
+            id: "img-widthPercent-conflict",
+            level: "error",
+            message:
+              "The `widthPercent` attribute can't be combined with `width` or `height`.",
+          });
+        }
+        if (video && caption != null) {
+          errors.push({
+            id: "img-video-caption-conflict",
+            level: "error",
+            message:
+              "The `caption` attribute is not supported on video images.",
+          });
+        }
+        return errors;
+      },
+    },
   },
 };

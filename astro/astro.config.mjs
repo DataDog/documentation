@@ -86,7 +86,15 @@ export default defineConfig({
     // doesn't misread language-specific import syntax (e.g. Go's `import (...)`)
     // as JavaScript dynamic imports. The ?raw glob in codeExampleLoader.ts
     // still works correctly with these extensions marked as assets.
-    assetsInclude: ["**/*.go", "**/*.java", "**/*.py", "**/*.pybeta", "**/*.rb", "**/*.rbbeta", "**/*.rs"],
+    assetsInclude: [
+      "**/*.go",
+      "**/*.java",
+      "**/*.py",
+      "**/*.pybeta",
+      "**/*.rb",
+      "**/*.rbbeta",
+      "**/*.rs",
+    ],
     server: {
       fs: {
         allow: [astroSite, hugoSite, websitesModules],
@@ -98,7 +106,7 @@ export default defineConfig({
     },
     define: {
       __HUGO_DOCS_ORIGIN__: JSON.stringify(deriveHugoDocsUrl()),
-      __CI_ENV__: JSON.stringify(process.env.CI_ENVIRONMENT_NAME ?? ''),
+      __CI_ENV__: JSON.stringify(process.env.CI_ENVIRONMENT_NAME ?? ""),
     },
     resolve: {
       alias: {

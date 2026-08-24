@@ -228,5 +228,9 @@ export default defineMarkdocConfig({
       render: component("./src/components/AgentOnly/AgentOnly.astro"),
       ...schema.tags["agent-only"],
     },
+    img: {
+      render: component("./src/components/Img/Img.astro"),
+      ...schema.tags.img,
+    },
   },
 });

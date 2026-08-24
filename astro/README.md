@@ -6,6 +6,7 @@ This is the next-generation Datadog documentation site, built with Astro 7, Mark
 
 - Node.js >= 22.12 (see [`.nvmrc`](.nvmrc); `nvm use` picks it up)
 - Yarn 4 via Corepack (pinned by the `packageManager` field). Enable it once with `corepack enable`.
+- Playwright for the browser tests: `npx playwright install`.
 
 ## Getting started
 
