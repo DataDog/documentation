@@ -1537,6 +1537,13 @@ components:
         default: created_at
         example: "-created_at"
         type: string
+    ProductName:
+      description: Name of the product to be deleted. Only `logs` is supported.
+      in: path
+      name: product
+      required: true
+      schema:
+        type: string
     ProjectIDPathParameter:
       description: Project UUID.
       example: "e555e290-ed65-49bd-ae18-8acbfcf18db7"
@@ -1609,6 +1616,13 @@ components:
       description: The ID of the report job.
       in: path
       name: report_id
+      required: true
+      schema:
+        type: string
+    RequestId:
+      description: ID of the deletion request.
+      in: path
+      name: id
       required: true
       schema:
         type: string
@@ -7185,13 +7199,14 @@ components:
         - fixes
       type: object
     Annotation:
-      description: "A list of annotations used in the workflow. These are like sticky notes for your workflow!"
+      description: A text annotation displayed on the workflow canvas.
       properties:
         display:
           $ref: "#/components/schemas/AnnotationDisplay"
         id:
-          description: The `Annotation` `id`.
+          description: The unique identifier of this annotation within the workflow.
           example: ""
+          minLength: 1
           type: string
         markdownTextAnnotation:
           $ref: "#/components/schemas/AnnotationMarkdownTextAnnotation"
@@ -7348,28 +7363,28 @@ components:
         - attributes
       type: object
     AnnotationDisplay:
-      description: The definition of `AnnotationDisplay` object.
+      description: The annotation's position and size on the workflow canvas.
       properties:
         bounds:
           $ref: "#/components/schemas/AnnotationDisplayBounds"
       type: object
     AnnotationDisplayBounds:
-      description: The definition of `AnnotationDisplayBounds` object.
+      description: Canvas coordinates and dimensions for an annotation on the workflow canvas.
       properties:
         height:
-          description: The `bounds` `height`.
+          description: The annotation's height on the canvas.
           format: double
           type: number
         width:
-          description: The `bounds` `width`.
+          description: The annotation's width on the canvas.
           format: double
           type: number
         x:
-          description: The `bounds` `x`.
+          description: The annotation's horizontal canvas coordinate.
           format: double
           type: number
         y:
-          description: The `bounds` `y`.
+          description: The annotation's vertical canvas coordinate.
           format: double
           type: number
       type: object
@@ -7453,10 +7468,11 @@ components:
         - POINT_IN_TIME
         - TIME_REGION
     AnnotationMarkdownTextAnnotation:
-      description: The definition of `AnnotationMarkdownTextAnnotation` object.
+      description: Markdown content displayed in an annotation.
       properties:
         text:
-          description: The `markdownTextAnnotation` `text`.
+          description: The annotation's Markdown content.
+          maxLength: 3000
           type: string
       type: object
     AnnotationRequestData:
@@ -15825,6 +15841,14 @@ components:
       type: string
       x-enum-varnames:
         - CAMPAIGN
+    CancelDataDeletionResponseBody:
+      description: The response from the cancel data deletion request endpoint.
+      properties:
+        data:
+          $ref: "#/components/schemas/DataDeletionResponseItem"
+        meta:
+          $ref: "#/components/schemas/DataDeletionResponseMeta"
+      type: object
     Case:
       description: A case
       properties:
@@ -24318,6 +24342,79 @@ components:
       required:
         - data
       type: object
+    CreateDataDeletionRequestBody:
+      description: Object needed to create a data deletion request.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateDataDeletionRequestBodyData"
+      required:
+        - data
+      type: object
+    CreateDataDeletionRequestBodyAttributes:
+      description: Attributes for creating a data deletion request.
+      properties:
+        displayed_total:
+          description: Total number of elements to be deleted as displayed to the user.
+          example: 100
+          format: int64
+          minimum: 1
+          type: integer
+        from:
+          description: Start of requested time window, milliseconds since Unix epoch.
+          example: 1672527600000
+          format: int64
+          type: integer
+        indexes:
+          description: List of indexes for the search. If not provided, the search is performed in all indexes.
+          example: ["test-index", "test-index-2"]
+          items:
+            description: Individual index.
+            type: string
+          type: array
+        query:
+          additionalProperties:
+            type: string
+          description: Query for creating a data deletion request.
+          example: {"host": "abc", "service": "xyz"}
+          type: object
+        to:
+          description: End of requested time window, milliseconds since Unix epoch.
+          example: 1704063600000
+          format: int64
+          type: integer
+      required:
+        - query
+        - from
+        - to
+        - displayed_total
+      type: object
+    CreateDataDeletionRequestBodyData:
+      description: Data needed to create a data deletion request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateDataDeletionRequestBodyAttributes"
+        type:
+          $ref: "#/components/schemas/CreateDataDeletionRequestBodyDataType"
+      required:
+        - attributes
+        - type
+      type: object
+    CreateDataDeletionRequestBodyDataType:
+      description: The deletion request type.
+      enum:
+        - create_deletion_req
+      example: "create_deletion_req"
+      type: string
+      x-enum-varnames:
+        - CREATE_DELETION_REQ
+    CreateDataDeletionResponseBody:
+      description: The response from the create data deletion request endpoint.
+      properties:
+        data:
+          $ref: "#/components/schemas/DataDeletionResponseItem"
+        meta:
+          $ref: "#/components/schemas/DataDeletionResponseMeta"
+      type: object
     CreateDegradationRequest:
       description: Request object for creating a degradation.
       example:
@@ -30850,6 +30947,144 @@ components:
       required:
         - destination_key
         - source_keys
+      type: object
+    DataDeletionResponseItem:
+      description: The created data deletion request information.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DataDeletionResponseItemAttributes"
+        id:
+          description: The ID of the created data deletion request.
+          example: "1"
+          type: string
+        type:
+          description: The type of the request created.
+          example: "deletion_request"
+          type: string
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DataDeletionResponseItemAttributes:
+      description: Deletion attribute for data deletion response.
+      properties:
+        created_at:
+          description: Creation time of the deletion request.
+          example: "2024-01-01T00:00:00.000000Z"
+          type: string
+        created_by:
+          description: User who created the deletion request.
+          example: "test.user@datadoghq.com"
+          type: string
+        customer_message:
+          description: A message for the customer regarding the deletion request, if any.
+          example: "Your deletion request is being processed."
+          type: string
+        displayed_total:
+          description: Total number of elements to be deleted as displayed to the user.
+          example: 100
+          format: int64
+          type: integer
+        error_category:
+          description: The category of the error for the deletion request, if any.
+          example: "validation_error"
+          type: string
+        from_time:
+          description: Start of requested time window, milliseconds since Unix epoch.
+          example: 1672527600000
+          format: int64
+          type: integer
+        indexes:
+          description: List of indexes for the search. If not provided, the search is performed in all indexes.
+          example: ["test-index", "test-index-2"]
+          items:
+            description: Individual index.
+            type: string
+          type: array
+        is_created:
+          description: Whether the deletion request is fully created or not. It can take several minutes to fully create a deletion request depending on the target query and timeframe.
+          example: true
+          type: boolean
+        org_id:
+          description: Organization ID.
+          example: 321813
+          format: int64
+          type: integer
+        product:
+          description: Product name.
+          example: "logs"
+          type: string
+        query:
+          description: Query for creating a data deletion request.
+          example: "service:xyz host:abc"
+          type: string
+        starting_at:
+          description: Starting time of the process to delete the requested data.
+          example: "2024-01-01T02:00:00.000000Z"
+          type: string
+        status:
+          description: Status of the deletion request.
+          example: "pending"
+          type: string
+        to_time:
+          description: End of requested time window, milliseconds since Unix epoch.
+          example: 1704063600000
+          format: int64
+          type: integer
+        total_unrestricted:
+          description: Total number of elements to be deleted. Only the data accessible to the current user that matches the query and timeframe provided will be deleted.
+          example: 100
+          format: int64
+          type: integer
+        updated_at:
+          description: Update time of the deletion request.
+          example: "2024-01-01T00:00:00.000000Z"
+          type: string
+      required:
+        - created_at
+        - created_by
+        - from_time
+        - is_created
+        - org_id
+        - product
+        - query
+        - starting_at
+        - status
+        - to_time
+        - total_unrestricted
+        - displayed_total
+        - updated_at
+      type: object
+    DataDeletionResponseMeta:
+      description: The metadata of the data deletion response.
+      properties:
+        count_product:
+          additionalProperties:
+            format: int64
+            type: integer
+          description: The total deletion requests created by product.
+          example: {"logs": 8}
+          type: object
+        count_status:
+          additionalProperties:
+            format: int64
+            type: integer
+          description: The total deletion requests created by status.
+          example: {"completed": 10, "pending": 5}
+          type: object
+        next_page:
+          description: The next page when searching deletion requests created in the current organization.
+          example: "cGFnZTI="
+          type: string
+        product:
+          description: The product of the deletion request.
+          example: "logs"
+          type: string
+        request_status:
+          description: The status of the executed request.
+          example: "canceled"
+          type: string
       type: object
     DataExportConfig:
       description: AWS Cost and Usage Report data export configuration.
@@ -43848,6 +44083,17 @@ components:
           $ref: "#/components/schemas/FullCustomFrameworkData"
       required:
         - data
+      type: object
+    GetDataDeletionsResponseBody:
+      description: The response from the get data deletion requests endpoint.
+      properties:
+        data:
+          description: The list of data deletion requests that matches the query.
+          items:
+            $ref: "#/components/schemas/DataDeletionResponseItem"
+          type: array
+        meta:
+          $ref: "#/components/schemas/DataDeletionResponseMeta"
       type: object
     GetDataObservabilityMonitorRunStatusResponse:
       description: The response for getting the status of a data observability monitor run.
@@ -67033,7 +67279,7 @@ components:
     MetricEstimateType:
       default: count_or_gauge
       description: |-
-        Estimate type based on the queried configuration. By default, `count_or_gauge` is returned. `distribution` is returned for distribution metrics without percentiles enabled. Lastly, `percentile` is returned if `filter[pct]=true` is queried with a distribution metric.
+        Estimate type based on the queried configuration. `count_or_gauge` is returned by default, and `distribution` is returned for distribution metrics. The `filter[pct]` query parameter has no effect on this value.
       enum:
         - count_or_gauge
         - distribution
@@ -83615,6 +83861,166 @@ components:
         - name
         - metric
       type: object
+    ProductAnalyticsAnalyticsListQuery:
+      description: |-
+        The analytics list query definition. It selects the events to return with `query`, then
+        chooses the columns on each event row, the sort applied to those rows, and a row limit.
+        Unlike the scalar and timeseries queries, a list query returns raw event rows rather than
+        aggregates, so it takes no compute or group-by rule.
+      properties:
+        audience_filters:
+          $ref: "#/components/schemas/ProductAnalyticsAudienceFilters"
+        columns:
+          description: Attribute columns to include in each event row.
+          items:
+            description: The name of an attribute to return as a column.
+            type: string
+          type: array
+        limit:
+          description: Maximum number of event rows to return.
+          example: 100
+          format: int64
+          maximum: 1000
+          minimum: 1
+          type: integer
+        query:
+          $ref: "#/components/schemas/ProductAnalyticsBaseQuery"
+        sort:
+          $ref: "#/components/schemas/ProductAnalyticsAnalyticsListSort"
+      required:
+        - query
+      type: object
+    ProductAnalyticsAnalyticsListRecord:
+      additionalProperties:
+        description: The value of one column of the event row.
+      description: A single event row, keyed by column name.
+      type: object
+    ProductAnalyticsAnalyticsListRequest:
+      description: Request for listing the individual event records matching an analytics query.
+      example:
+        data:
+          attributes:
+            from: 1771232048460
+            query:
+              columns:
+                - "@view.name"
+              limit: 100
+              query:
+                data_source: product_analytics
+                search:
+                  query: "@type:view"
+            to: 1771836848262
+          type: formula_analytics_extended_list_request
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsAnalyticsListRequestData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsAnalyticsListRequestAttributes:
+      description: Attributes for an analytics list request.
+      properties:
+        from:
+          description: Start time in epoch milliseconds. Must be less than `to`.
+          example: 1771232048460
+          format: int64
+          type: integer
+        query:
+          $ref: "#/components/schemas/ProductAnalyticsAnalyticsListQuery"
+        to:
+          description: End time in epoch milliseconds.
+          example: 1771836848262
+          format: int64
+          type: integer
+      required:
+        - from
+        - to
+        - query
+      type: object
+    ProductAnalyticsAnalyticsListRequestData:
+      description: Data object for an analytics list request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsAnalyticsListRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsAnalyticsListRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsAnalyticsListRequestType:
+      description: The resource type for analytics list requests.
+      enum:
+        - formula_analytics_extended_list_request
+      example: formula_analytics_extended_list_request
+      type: string
+      x-enum-varnames:
+        - FORMULA_ANALYTICS_EXTENDED_LIST_REQUEST
+    ProductAnalyticsAnalyticsListResponse:
+      description: Response for an analytics list query, containing individual event records.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsAnalyticsListResponseData"
+        meta:
+          $ref: "#/components/schemas/ProductAnalyticsResponseMeta"
+      required:
+        - data
+      type: object
+    ProductAnalyticsAnalyticsListResponseAttributes:
+      description: Attributes of an analytics list response, containing the matching event rows.
+      properties:
+        records:
+          description: The event rows, each holding the values of the requested columns.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsAnalyticsListRecord"
+          type: array
+        total_count:
+          description: Total number of records matching the query, before the row limit is applied.
+          format: int64
+          type: integer
+      type: object
+    ProductAnalyticsAnalyticsListResponseData:
+      description: Data object for an analytics list response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsAnalyticsListResponseAttributes"
+        id:
+          description: Unique identifier for this response data object.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsAnalyticsListResponseType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsAnalyticsListResponseType:
+      description: The resource type identifier for an analytics list response.
+      enum:
+        - list_response
+      example: list_response
+      type: string
+      x-enum-varnames:
+        - LIST_RESPONSE
+    ProductAnalyticsAnalyticsListSort:
+      description: The sort applied to the returned event rows.
+      properties:
+        facet:
+          description: Name of the facet to sort the rows by.
+          type: string
+        order:
+          $ref: "#/components/schemas/ProductAnalyticsAnalyticsListSortOrder"
+      type: object
+    ProductAnalyticsAnalyticsListSortOrder:
+      description: The direction rows are sorted in.
+      enum:
+        - asc
+        - desc
+      type: string
+      x-enum-varnames:
+        - ASC
+        - DESC
     ProductAnalyticsAnalyticsQuery:
       description: The analytics query definition containing a base query, compute rule, and optional grouping.
       properties:
@@ -83628,7 +84034,10 @@ components:
             $ref: "#/components/schemas/ProductAnalyticsGroupBy"
           type: array
         indexes:
-          description: Restrict the query to specific indexes. Max 1 entry.
+          deprecated: true
+          description: |-
+            Deprecated. Index selection is a rollout detail and will be removed.
+            Do not set this field.
           items:
             description: Index name to restrict the query to.
             type: string
@@ -83666,6 +84075,10 @@ components:
       properties:
         enforced_execution_type:
           $ref: "#/components/schemas/ProductAnalyticsExecutionType"
+          deprecated: true
+          description: |-
+            Deprecated. Selects the internal query execution infrastructure and will be removed.
+            Do not set this field.
         from:
           description: Start time in epoch milliseconds. Must be less than `to`.
           example: 1771232048460
@@ -83674,7 +84087,7 @@ components:
         query:
           $ref: "#/components/schemas/ProductAnalyticsAnalyticsQuery"
         request_id:
-          description: Optional request ID for multi-step query continuation.
+          description: Unique identifier of the query.
           type: string
         to:
           description: End time in epoch milliseconds.
@@ -83750,7 +84163,7 @@ components:
           type: string
         segment_id:
           description: UUID of the segment to filter by.
-          example: ""
+          example: 00000000-0000-0000-0000-000000000000
           format: uuid
           type: string
       required:
@@ -83779,6 +84192,50 @@ components:
       oneOf:
         - $ref: "#/components/schemas/ProductAnalyticsEventQuery"
         - $ref: "#/components/schemas/ProductAnalyticsOccurrenceQuery"
+    ProductAnalyticsCalendarInterval:
+      description: A calendar-aligned bucket definition, such as "every 1 week starting on Monday".
+      properties:
+        alignment:
+          description: |-
+            Where each bucket starts within the calendar unit. Use an hour for `day` (for example `1am` or `14`),
+            a day name for `week` (for example `monday`), or an ordinal for `month` (for example `1st`).
+          example: monday
+          type: string
+        quantity:
+          description: Number of calendar units per bucket.
+          example: 1
+          format: int64
+          minimum: 1
+          type: integer
+        timezone:
+          description: Timezone used to align the buckets.
+          example: UTC
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsCalendarIntervalType"
+      required:
+        - type
+      type: object
+    ProductAnalyticsCalendarIntervalType:
+      description: Calendar unit used to bucket cohorts.
+      enum:
+        - minute
+        - hour
+        - day
+        - week
+        - month
+        - quarter
+        - year
+      example: week
+      type: string
+      x-enum-varnames:
+        - MINUTE
+        - HOUR
+        - DAY
+        - WEEK
+        - MONTH
+        - QUARTER
+        - YEAR
     ProductAnalyticsCompute:
       description: A compute rule for aggregating data.
       properties:
@@ -83787,7 +84244,9 @@ components:
           example: count
           type: string
         interval:
-          description: Time bucket size in milliseconds. Required for timeseries queries.
+          description: |-
+            Time bucket size in milliseconds. Required for timeseries queries; ignored by the
+            scalar endpoint, which returns a single value.
           example: 3600000
           format: int64
           type: integer
@@ -83797,6 +84256,29 @@ components:
           type: string
       required:
         - aggregation
+      type: object
+    ProductAnalyticsElapsedTime:
+      description: Elapsed time statistics (min/max/avg in milliseconds).
+      properties:
+        avg:
+          description: Average elapsed time to reach the next step, in milliseconds.
+          example: 5100
+          format: int64
+          type: integer
+        max:
+          description: Maximum elapsed time to reach the next step, in milliseconds.
+          example: 42000
+          format: int64
+          type: integer
+        min:
+          description: Minimum elapsed time to reach the next step, in milliseconds.
+          example: 900
+          format: int64
+          type: integer
+      required:
+        - min
+        - max
+        - avg
       type: object
     ProductAnalyticsEventQuery:
       description: A standard Product Analytics event query.
@@ -83838,6 +84320,215 @@ components:
         - BACKGROUND
         - TRINO_MULTISTEP
         - MATERIALIZED_VIEW
+    ProductAnalyticsFormulaJourneyQuery:
+      description: Query definition for a journey timeseries request.
+      properties:
+        compute:
+          $ref: "#/components/schemas/ProductAnalyticsGraphQueryCompute"
+        group_by:
+          description: Segments the results by the values of one or more facets.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsGraphQueryGroupBy"
+          type: array
+        query_id:
+          description: Caller-defined identifier echoed back in the results.
+          type: string
+        search:
+          $ref: "#/components/schemas/ProductAnalyticsJourneySearch"
+      required:
+        - search
+        - compute
+      type: object
+    ProductAnalyticsFormulaJourneyRequest:
+      description: Request body for a journey timeseries query.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsFormulaJourneyRequestData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsFormulaJourneyRequestAttributes:
+      description: Attributes of a journey timeseries request.
+      properties:
+        from:
+          description: Start of the query window, in epoch milliseconds.
+          example: 1756425600000
+          format: int64
+          type: integer
+        interval:
+          description: Time bucket interval in milliseconds.
+          format: int64
+          type: integer
+        query:
+          $ref: "#/components/schemas/ProductAnalyticsFormulaJourneyQuery"
+        to:
+          description: End of the query window, in epoch milliseconds.
+          example: 1756857600000
+          format: int64
+          type: integer
+      required:
+        - from
+        - to
+        - query
+      type: object
+    ProductAnalyticsFormulaJourneyRequestData:
+      description: |-
+        The single JSON:API resource carrying a journey timeseries query. Its attributes hold the time
+        window, the bucket interval that splits it, and the journey metric to compute per bucket.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsFormulaJourneyRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsFormulaJourneyRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsFormulaJourneyRequestType:
+      description: The resource type identifier for a journey timeseries or scalar request.
+      enum:
+        - formula_journey_request
+      example: formula_journey_request
+      type: string
+      x-enum-varnames:
+        - FORMULA_JOURNEY_REQUEST
+    ProductAnalyticsFormulaRetentionQuery:
+      description: Query definition for a retention scalar or retention timeseries request.
+      properties:
+        computation_scope:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionScope"
+        compute:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionCompute"
+        group_by:
+          description: Splits the results by the values of one or more facets.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsRetentionGroupBy"
+          type: array
+        search:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionSearch"
+      required:
+        - search
+        - compute
+      type: object
+    ProductAnalyticsFormulaRetentionRequest:
+      description: Request body for a retention scalar or retention timeseries query.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsFormulaRetentionRequestData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsFormulaRetentionRequestAttributes:
+      description: Attributes of a retention scalar or retention timeseries request.
+      properties:
+        exclude_anonymous_traffic:
+          default: false
+          description: Whether to exclude sessions that are not tied to an identified user.
+          type: boolean
+        from:
+          description: Start of the query window, in epoch milliseconds.
+          example: 1756425600000
+          format: int64
+          type: integer
+        query:
+          $ref: "#/components/schemas/ProductAnalyticsFormulaRetentionQuery"
+        to:
+          description: End of the query window, in epoch milliseconds.
+          example: 1756857600000
+          format: int64
+          type: integer
+      required:
+        - from
+        - to
+        - query
+      type: object
+    ProductAnalyticsFormulaRetentionRequestData:
+      description: |-
+        The single JSON:API resource carrying a retention scalar or timeseries query. Its attributes
+        hold the time window to query and the retention query definition to evaluate.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsFormulaRetentionRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsFormulaRetentionRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsFormulaRetentionRequestType:
+      description: The resource type identifier for a retention scalar or retention timeseries request.
+      enum:
+        - formula_retention_request
+      example: formula_retention_request
+      type: string
+      x-enum-varnames:
+        - FORMULA_RETENTION_REQUEST
+    ProductAnalyticsGraphQueryCompute:
+      description: Defines the metric computed over the journey.
+      properties:
+        aggregation:
+          description: |-
+            Aggregation function: `count`, `cardinality`, `avg`, `median`, `min`, `max`, `sum`,
+            or a percentile of the form `pc<N>` such as `pc95`. Defaults to `cardinality`.
+          example: count
+          pattern: "^(count|cardinality|avg|median|min|max|sum|pc[0-9]{1,2})$"
+          type: string
+        interval:
+          description: Time bucket interval in milliseconds, used by timeseries queries.
+          format: int64
+          type: integer
+        metric:
+          description: |-
+            Metric to aggregate on. Use a facet path such as `@view.time_spent`, or one of the
+            journey metrics `__dd.conversion`, `__dd.conversion_rate`, `__dd.time_to_convert`,
+            or `__dd.dropoff_rate`. Defaults to `__dd.conversion`.
+          type: string
+        target:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyTarget"
+      required:
+        - aggregation
+      type: object
+    ProductAnalyticsGraphQueryGroupBy:
+      description: Segments journey results by the values of a facet.
+      properties:
+        facet:
+          description: Attribute path to group by.
+          example: "@geo.country"
+          type: string
+        limit:
+          description: Maximum number of groups to return. Omit it to let the service choose.
+          format: int64
+          minimum: 1
+          type: integer
+        should_exclude_missing:
+          default: false
+          description: Whether to exclude entities that have no value for this facet.
+          type: boolean
+        sort:
+          $ref: "#/components/schemas/ProductAnalyticsGroupBySort"
+        source:
+          $ref: "#/components/schemas/ProductAnalyticsGraphQueryGroupBySource"
+        target:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyTarget"
+        value_filters:
+          description: Restricts the results to these facet values.
+          items:
+            description: A facet value to keep.
+            type: string
+          type: array
+      required:
+        - facet
+      type: object
+    ProductAnalyticsGraphQueryGroupBySource:
+      description: Audience dimension to group by, instead of an event facet.
+      enum:
+        - product_analytics_audience_filters.users
+        - product_analytics_audience_filters.accounts
+      example: product_analytics_audience_filters.users
+      type: string
+      x-enum-varnames:
+        - USERS
+        - ACCOUNTS
     ProductAnalyticsGroupBy:
       description: A group-by rule for segmenting results by facet values.
       properties:
@@ -83897,6 +84588,783 @@ components:
           description: The interval type (e.g., fixed or auto-computed bucket size).
           type: string
       type: object
+    ProductAnalyticsJoinKeys:
+      description: Identity join keys used to stitch events belonging to the same user or session.
+      properties:
+        primary:
+          description: Primary identity join key. Defaults to `@session.id`.
+          example: "@session.id"
+          type: string
+        secondary:
+          description: Additional identity join keys.
+          items:
+            description: An identity join key facet.
+            type: string
+          type: array
+      type: object
+    ProductAnalyticsJourneyAudienceAccountQuery:
+      description: A named sub-query selecting a set of accounts.
+      properties:
+        name:
+          description: Unique name for this sub-query, referenced from `formula`.
+          example: enterprise_accounts
+          type: string
+        query:
+          description: Search query selecting the accounts.
+          type: string
+      required:
+        - name
+      type: object
+    ProductAnalyticsJourneyAudienceFilters:
+      description: |-
+        Restricts the journey to an audience built from named sub-queries.
+        Sub-query names must be unique across `users`, `segments`, and `accounts`.
+      properties:
+        accounts:
+          description: Named account sub-queries.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsJourneyAudienceAccountQuery"
+          type: array
+        formula:
+          description: |-
+            Boolean expression combining the sub-query names with `AND`, `OR`, and `NOT`.
+            When empty, all sub-queries are combined with `AND`.
+          example: power_users AND NOT trial_segment
+          type: string
+        segments:
+          description: Named segment sub-queries.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsJourneyAudienceSegmentQuery"
+          type: array
+        users:
+          description: Named user sub-queries.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsJourneyAudienceUserQuery"
+          type: array
+      type: object
+    ProductAnalyticsJourneyAudienceSegmentQuery:
+      description: A named sub-query selecting a saved segment.
+      properties:
+        name:
+          description: Unique name for this sub-query, referenced from `formula`.
+          example: trial_segment
+          type: string
+        segment_id:
+          description: Identifier of the saved segment.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      required:
+        - name
+        - segment_id
+      type: object
+    ProductAnalyticsJourneyAudienceUserQuery:
+      description: A named sub-query selecting a set of users.
+      properties:
+        name:
+          description: Unique name for this sub-query, referenced from `formula`.
+          example: power_users
+          type: string
+        query:
+          description: Search query selecting the users.
+          type: string
+      required:
+        - name
+      type: object
+    ProductAnalyticsJourneyComputedColumn:
+      description: |-
+        A computed column added to each row. Requesting `first_conversion_timestamps` adds one
+        `<node alias>_timestamp` key per step.
+      properties:
+        name:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyComputedColumnName"
+      required:
+        - name
+      type: object
+    ProductAnalyticsJourneyComputedColumnName:
+      description: Name of a computed column to add to each row.
+      enum:
+        - first_conversion_timestamps
+      example: first_conversion_timestamps
+      type: string
+      x-enum-varnames:
+        - FIRST_CONVERSION_TIMESTAMPS
+    ProductAnalyticsJourneyConversionType:
+      description: Whether to return the entities that converted at the target step, or those that dropped off.
+      enum:
+        - conversion
+        - drop-off
+      example: conversion
+      type: string
+      x-enum-varnames:
+        - CONVERSION
+        - DROP_OFF
+    ProductAnalyticsJourneyEntity:
+      description: The kind of entity returned by a journey list query.
+      enum:
+        - session
+        - user
+        - account
+      example: session
+      type: string
+      x-enum-varnames:
+        - SESSION
+        - USER
+        - ACCOUNT
+    ProductAnalyticsJourneyFunnelCompute:
+      description: Defines the metric computed at each funnel step.
+      properties:
+        aggregation:
+          description: |-
+            Aggregation function: `count`, `cardinality`, `avg`, `median`, `min`, `max`, `sum`,
+            or a percentile of the form `pc<N>` such as `pc95`. Defaults to `cardinality`.
+          pattern: "^(count|cardinality|avg|median|min|max|sum|pc[0-9]{1,2})$"
+          type: string
+        metric:
+          description: Metric to aggregate on. Defaults to the identity join key.
+          type: string
+      type: object
+    ProductAnalyticsJourneyFunnelQuery:
+      description: Query definition for a journey funnel request.
+      properties:
+        compute:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyFunnelCompute"
+        group_by:
+          description: Segments the funnel by the values of one or more facets.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsGraphQueryGroupBy"
+          type: array
+        search:
+          $ref: "#/components/schemas/ProductAnalyticsJourneySearch"
+      required:
+        - search
+      type: object
+    ProductAnalyticsJourneyFunnelRequest:
+      description: Request body for a journey funnel analysis.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyFunnelRequestData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsJourneyFunnelRequestAttributes:
+      description: Attributes of a journey funnel request.
+      properties:
+        exclude_anonymous_traffic:
+          default: false
+          description: Whether to exclude sessions that are not tied to an identified user.
+          type: boolean
+        from:
+          description: Start of the query window, in epoch milliseconds.
+          example: 1756425600000
+          format: int64
+          type: integer
+        query:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyFunnelQuery"
+        to:
+          description: End of the query window, in epoch milliseconds.
+          example: 1756857600000
+          format: int64
+          type: integer
+      required:
+        - from
+        - to
+        - query
+      type: object
+    ProductAnalyticsJourneyFunnelRequestData:
+      description: |-
+        The single JSON:API resource carrying a funnel query. Its attributes hold the time window to
+        query and the journey whose step-to-step conversion should be measured.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyFunnelRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsJourneyFunnelResponse:
+      description: Response for a journey funnel analysis.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyFunnelResponseData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsJourneyFunnelResponseAttributes:
+      description: Attributes of a journey funnel response.
+      properties:
+        end_to_end_conversion_rate:
+          description: Conversion rate from the first step to the last step.
+          example: 0.42
+          format: double
+          type: number
+        end_to_end_elapsed_time:
+          $ref: "#/components/schemas/ProductAnalyticsElapsedTime"
+        funnel_steps:
+          description: The funnel steps, in the order given by the search expression.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsJourneyFunnelStep"
+          type: array
+        initial_count:
+          description: Number of entities that entered the funnel.
+          example: 1200
+          format: int64
+          type: integer
+      required:
+        - initial_count
+        - end_to_end_conversion_rate
+        - end_to_end_elapsed_time
+        - funnel_steps
+      type: object
+    ProductAnalyticsJourneyFunnelResponseData:
+      description: |-
+        The single JSON:API resource holding a computed funnel. Its attributes contain the number of
+        entities that entered, the end-to-end conversion, and one entry per funnel step.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyFunnelResponseAttributes"
+        id:
+          description: Identifier of this result.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyFunnelResponseType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsJourneyFunnelResponseType:
+      description: The resource type identifier for a journey funnel response.
+      enum:
+        - funnel_response
+      example: funnel_response
+      type: string
+      x-enum-varnames:
+        - FUNNEL_RESPONSE
+    ProductAnalyticsJourneyFunnelStep:
+      description: A single step of the funnel with its conversion counts and timings.
+      properties:
+        elapsed_time_to_next_step:
+          $ref: "#/components/schemas/ProductAnalyticsElapsedTime"
+        groups:
+          description: Breakdown of this step by the requested group-by facets.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsJourneyFunnelStepGroup"
+          type: array
+        label:
+          description: Label of the step, derived from the node alias.
+          example: A
+          type: string
+        unit:
+          description: Unit of the elapsed time values.
+          example: millisecond
+          type: string
+        value:
+          description: Value of the computed metric at this step.
+          example: 1200
+          format: double
+          type: number
+      required:
+        - value
+        - label
+        - unit
+        - elapsed_time_to_next_step
+        - groups
+      type: object
+    ProductAnalyticsJourneyFunnelStepGroup:
+      description: Breakdown of a funnel step for one combination of group-by values.
+      properties:
+        conversion_count:
+          description: Number of entities in this group that reached the next step.
+          example: 210
+          format: int64
+          type: integer
+        elapsed_time_to_next_step:
+          $ref: "#/components/schemas/ProductAnalyticsElapsedTime"
+        group_tags:
+          description: Group-by values identifying this cohort.
+          example:
+            - United States
+          items:
+            description: A group-by value.
+            type: string
+          type: array
+        value:
+          description: Value of the computed metric for this group at this step.
+          example: 480
+          format: double
+          type: number
+      required:
+        - group_tags
+        - value
+        - conversion_count
+        - elapsed_time_to_next_step
+      type: object
+    ProductAnalyticsJourneyListQuery:
+      description: Query definition for a journey list request.
+      properties:
+        computed_columns:
+          description: Computed columns to add to each row.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsJourneyComputedColumn"
+          type: array
+        conversion_type:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyConversionType"
+        entity_columns:
+          description: Attribute columns to return for each row, in addition to the identity join key and `timestamp`.
+          items:
+            description: An attribute column to return.
+            type: string
+          type: array
+        entity_filters:
+          description: Additional search query applied to the returned rows.
+          type: string
+        group_by:
+          description: Segments the results by the values of one or more facets.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsGraphQueryGroupBy"
+          type: array
+        limit:
+          description: Maximum number of rows to return. Omit it to let the service choose.
+          format: int64
+          minimum: 1
+          type: integer
+        search:
+          $ref: "#/components/schemas/ProductAnalyticsJourneySearch"
+        sort:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyListSort"
+        target:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyTarget"
+      required:
+        - search
+      type: object
+    ProductAnalyticsJourneyListRecord:
+      additionalProperties: {}
+      description: |-
+        A single row. Keys are the returned column names: the identity join key, `timestamp`,
+        each entry of `entity_columns`, and any computed columns. A value is null when the
+        column has no value for that row.
+      type: object
+    ProductAnalyticsJourneyListRequest:
+      description: Request body for a journey list query.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyListRequestData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsJourneyListRequestAttributes:
+      description: Attributes of a journey list request.
+      properties:
+        from:
+          description: Start of the query window, in epoch milliseconds.
+          example: 1756425600000
+          format: int64
+          type: integer
+        query:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyListQuery"
+        to:
+          description: End of the query window, in epoch milliseconds.
+          example: 1756857600000
+          format: int64
+          type: integer
+      required:
+        - from
+        - to
+        - query
+      type: object
+    ProductAnalyticsJourneyListRequestData:
+      description: |-
+        The single JSON:API resource carrying a journey list query. Its attributes hold the time window
+        and the journey whose matching entities should be listed, one row each.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyListRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyListRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsJourneyListRequestType:
+      description: The resource type identifier for a journey list request.
+      enum:
+        - journey_list_request
+      example: journey_list_request
+      type: string
+      x-enum-varnames:
+        - JOURNEY_LIST_REQUEST
+    ProductAnalyticsJourneyListResponse:
+      description: Response for a journey list query.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyListResponseData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsJourneyListResponseAttributes:
+      description: Attributes of a journey list response.
+      properties:
+        entity:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyEntity"
+        records:
+          description: The returned rows.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsJourneyListRecord"
+          type: array
+        total_count:
+          description: Total number of rows matching the query, ignoring `limit`.
+          example: 231
+          format: int64
+          type: integer
+      required:
+        - entity
+        - total_count
+        - records
+      type: object
+    ProductAnalyticsJourneyListResponseData:
+      description: |-
+        The single JSON:API resource holding the entities matching a journey. Its attributes contain
+        the returned rows and the total number of rows that matched, ignoring `limit`.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyListResponseAttributes"
+        id:
+          description: Identifier of this result.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyListResponseType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsJourneyListResponseType:
+      description: The resource type identifier for a journey list response.
+      enum:
+        - journey_list_response
+      example: journey_list_response
+      type: string
+      x-enum-varnames:
+        - JOURNEY_LIST_RESPONSE
+    ProductAnalyticsJourneyListSort:
+      description: |-
+        Sort configuration for the returned rows. The sort is applied only when `facet`
+        is one of the returned columns; otherwise it is ignored.
+      properties:
+        facet:
+          description: Column to sort on.
+          type: string
+        order:
+          $ref: "#/components/schemas/QuerySortOrder"
+      type: object
+    ProductAnalyticsJourneyNodeTarget:
+      description: A reference to a single step of the journey.
+      properties:
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyNodeTargetType"
+        value:
+          description: Alias of the targeted node.
+          example: A
+          type: string
+      required:
+        - type
+        - value
+      type: object
+    ProductAnalyticsJourneyNodeTargetType:
+      description: The discriminator identifying a target that references a single step.
+      enum:
+        - node
+      example: node
+      type: string
+      x-enum-varnames:
+        - NODE
+    ProductAnalyticsJourneyPathTarget:
+      description: A reference to the range of steps between two nodes of the journey.
+      properties:
+        end:
+          description: Alias of the node the path ends at.
+          example: B
+          type: string
+        start:
+          description: Alias of the node the path starts at.
+          example: A
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyPathTargetType"
+      required:
+        - type
+        - start
+        - end
+      type: object
+    ProductAnalyticsJourneyPathTargetType:
+      description: The discriminator identifying a target that references a range of steps.
+      enum:
+        - path
+      example: path
+      type: string
+      x-enum-varnames:
+        - PATH
+    ProductAnalyticsJourneyRequestType:
+      description: The resource type identifier for a journey funnel request.
+      enum:
+        - journey_request
+      example: journey_request
+      type: string
+      x-enum-varnames:
+        - JOURNEY_REQUEST
+    ProductAnalyticsJourneyScalarCompute:
+      description: Defines the metric computed over the journey for a scalar query.
+      properties:
+        aggregation:
+          description: |-
+            Aggregation function: `count`, `cardinality`, `avg`, `median`, `min`, `max`, `sum`,
+            or a percentile of the form `pc<N>` such as `pc95`. Defaults to `cardinality`.
+          example: count
+          pattern: "^(count|cardinality|avg|median|min|max|sum|pc[0-9]{1,2})$"
+          type: string
+        metric:
+          description: |-
+            Metric to aggregate on. Use a facet path such as `@view.time_spent`, or one of the
+            journey metrics `__dd.conversion`, `__dd.conversion_rate`, `__dd.time_to_convert`,
+            or `__dd.dropoff_rate`. Defaults to `__dd.conversion`.
+          type: string
+        target:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyTarget"
+      required:
+        - aggregation
+      type: object
+    ProductAnalyticsJourneyScalarQuery:
+      description: Query definition for a journey scalar request.
+      properties:
+        compute:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyScalarCompute"
+        group_by:
+          description: Segments the results by the values of one or more facets.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsGraphQueryGroupBy"
+          type: array
+        query_id:
+          description: Caller-defined identifier echoed back in the results.
+          type: string
+        search:
+          $ref: "#/components/schemas/ProductAnalyticsJourneySearch"
+      required:
+        - search
+        - compute
+      type: object
+    ProductAnalyticsJourneyScalarRequest:
+      description: Request body for a journey scalar query.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyScalarRequestData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsJourneyScalarRequestAttributes:
+      description: Attributes of a journey scalar request.
+      properties:
+        from:
+          description: Start of the query window, in epoch milliseconds.
+          example: 1756425600000
+          format: int64
+          type: integer
+        query:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyScalarQuery"
+        to:
+          description: End of the query window, in epoch milliseconds.
+          example: 1756857600000
+          format: int64
+          type: integer
+      required:
+        - from
+        - to
+        - query
+      type: object
+    ProductAnalyticsJourneyScalarRequestData:
+      description: |-
+        The single JSON:API resource carrying a journey scalar query. Its attributes hold the time
+        window and the journey metric to reduce to one value over that window.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyScalarRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsFormulaJourneyRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsJourneyScalarResponse:
+      description: Response for a journey scalar query.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyScalarResponseData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsJourneyScalarResponseData:
+      description: |-
+        The single JSON:API resource holding journey scalar results. Its attributes contain one value
+        per group, suitable for a query value or top list widget.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsScalarResponseAttributes"
+        id:
+          description: Identifier of this result.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyScalarResponseType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsJourneyScalarResponseType:
+      description: The resource type identifier for a journey scalar response.
+      enum:
+        - journey_scalar_response
+      example: journey_scalar_response
+      type: string
+      x-enum-varnames:
+        - JOURNEY_SCALAR_RESPONSE
+    ProductAnalyticsJourneySearch:
+      description: Defines the steps of the journey and the filters applied to it.
+      properties:
+        expression:
+          description: Expression combining the node aliases in order, for example `A -> B -> C`.
+          example: A -> B
+          type: string
+        filters:
+          $ref: "#/components/schemas/ProductAnalyticsJourneySearchFilters"
+        join_keys:
+          $ref: "#/components/schemas/ProductAnalyticsJoinKeys"
+        node_objects:
+          additionalProperties:
+            $ref: "#/components/schemas/ProductAnalyticsBaseQuery"
+          description: |-
+            Map of node alias to the query matching that step of the journey.
+            Every alias used in `expression` must have an entry here.
+          example:
+            A:
+              data_source: product_analytics
+              search:
+                query: "@type:view @view.name:Login"
+            B:
+              data_source: product_analytics
+              search:
+                query: "@type:action @action.target.name:Submit"
+          type: object
+      required:
+        - expression
+        - node_objects
+      type: object
+    ProductAnalyticsJourneySearchFilters:
+      description: Filters applied on top of the journey step expression.
+      properties:
+        audience_filters:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyAudienceFilters"
+        graph_filters:
+          description: Filters on journey-level metrics such as time to convert.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsJourneySearchGraphFilter"
+          type: array
+        string_filter:
+          description: Free-text search query applied to the whole journey.
+          type: string
+      type: object
+    ProductAnalyticsJourneySearchGraphFilter:
+      description: A filter applied to a step, or a range of steps, of the journey graph.
+      properties:
+        name:
+          $ref: "#/components/schemas/ProductAnalyticsJourneySearchGraphFilterName"
+        operator:
+          $ref: "#/components/schemas/ProductAnalyticsJourneySearchGraphFilterOperator"
+        target:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyTarget"
+        value:
+          description: Value compared against the metric. Durations are expressed in milliseconds.
+          example: 60000
+          format: int64
+          type: integer
+      required:
+        - name
+        - operator
+        - value
+      type: object
+    ProductAnalyticsJourneySearchGraphFilterName:
+      description: The journey-level metric the graph filter applies to.
+      enum:
+        - __dd.time_to_convert
+        - __dd.session
+        - __dd.dropoff_rate
+      example: __dd.time_to_convert
+      type: string
+      x-enum-varnames:
+        - TIME_TO_CONVERT
+        - SESSION
+        - DROPOFF_RATE
+    ProductAnalyticsJourneySearchGraphFilterOperator:
+      description: Comparison operator applied to the graph filter value.
+      enum:
+        - "="
+        - "<"
+        - ">"
+        - "<="
+        - ">="
+      example: "<="
+      type: string
+      x-enum-varnames:
+        - EQUAL
+        - LESS_THAN
+        - GREATER_THAN
+        - LESS_THAN_OR_EQUAL
+        - GREATER_THAN_OR_EQUAL
+    ProductAnalyticsJourneyTarget:
+      description: |-
+        A reference to a step, or a range of steps, in the journey.
+        Use a `node` target to name a single step, or a `path` target to name the range
+        between two steps.
+      oneOf:
+        - $ref: "#/components/schemas/ProductAnalyticsJourneyNodeTarget"
+        - $ref: "#/components/schemas/ProductAnalyticsJourneyPathTarget"
+    ProductAnalyticsJourneyTimeseriesResponse:
+      description: Response for a journey timeseries query.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyTimeseriesResponseData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsJourneyTimeseriesResponseData:
+      description: |-
+        The single JSON:API resource holding journey timeseries results. Its attributes contain one
+        series per group along with the timestamps the points fall on.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsTimeseriesResponseAttributes"
+        id:
+          description: Identifier of this result.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyTimeseriesResponseType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsJourneyTimeseriesResponseType:
+      description: The resource type identifier for a journey timeseries response.
+      enum:
+        - journey_timeseries_response
+      example: journey_timeseries_response
+      type: string
+      x-enum-varnames:
+        - JOURNEY_TIMESERIES_RESPONSE
     ProductAnalyticsOccurrenceFilter:
       description: Filter for occurrence-based queries.
       properties:
@@ -83950,7 +85418,7 @@ components:
       description: Metadata for a Product Analytics query response.
       properties:
         request_id:
-          description: Unique identifier for the request, used for multi-step query continuation.
+          description: Unique identifier of the query.
           type: string
         status:
           $ref: "#/components/schemas/ProductAnalyticsResponseMetaStatus"
@@ -83966,6 +85434,942 @@ components:
         - DONE
         - RUNNING
         - TIMEOUT
+    ProductAnalyticsRetentionAggregationTarget:
+      description: Selects the rolled-up row that aggregates every cohort, rather than a single cohort.
+      properties:
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionAggregationTargetType"
+        value:
+          description: The aggregation that produced the rolled-up row.
+          example: weighted_avg
+          type: string
+      required:
+        - type
+        - value
+      type: object
+    ProductAnalyticsRetentionAggregationTargetType:
+      description: The discriminator identifying a target selected by aggregation.
+      enum:
+        - aggregation
+      example: aggregation
+      type: string
+      x-enum-varnames:
+        - AGGREGATION
+    ProductAnalyticsRetentionCalendarTimeInterval:
+      description: A retention interval aligned to calendar boundaries.
+      properties:
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionCalendarTimeIntervalType"
+        value:
+          $ref: "#/components/schemas/ProductAnalyticsCalendarInterval"
+      required:
+        - type
+        - value
+      type: object
+    ProductAnalyticsRetentionCalendarTimeIntervalType:
+      description: The discriminator identifying a calendar-aligned retention interval.
+      enum:
+        - calendar
+      example: calendar
+      type: string
+      x-enum-varnames:
+        - CALENDAR
+    ProductAnalyticsRetentionCellScope:
+      description: Narrows a retention query to a single cell, at the intersection of one cohort and one return period.
+      properties:
+        cohort_target:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionCohortTarget"
+        return_period_target:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionIndexTarget"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionCellScopeType"
+      required:
+        - type
+        - cohort_target
+        - return_period_target
+      type: object
+    ProductAnalyticsRetentionCellScopeType:
+      description: The discriminator identifying a scope narrowed to one grid cell.
+      enum:
+        - cell
+      example: cell
+      type: string
+      x-enum-varnames:
+        - CELL
+    ProductAnalyticsRetentionCohortCriteria:
+      description: Defines the event that places an entity into a cohort, and how cohorts are bucketed over time.
+      properties:
+        base_query:
+          $ref: "#/components/schemas/ProductAnalyticsBaseQuery"
+        time_interval:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionTimeInterval"
+      required:
+        - base_query
+        - time_interval
+      type: object
+    ProductAnalyticsRetentionCohortScope:
+      description: Narrows a retention query to a single cohort row.
+      properties:
+        target:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionCohortTarget"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionCohortScopeType"
+      required:
+        - type
+        - target
+      type: object
+    ProductAnalyticsRetentionCohortScopeType:
+      description: The discriminator identifying a scope narrowed to one cohort.
+      enum:
+        - cohort
+      example: cohort
+      type: string
+      x-enum-varnames:
+        - COHORT
+    ProductAnalyticsRetentionCohortTarget:
+      description: Selects a cohort, either by index or by the aggregation that rolls all cohorts together.
+      oneOf:
+        - $ref: "#/components/schemas/ProductAnalyticsRetentionIndexTarget"
+        - $ref: "#/components/schemas/ProductAnalyticsRetentionAggregationTarget"
+    ProductAnalyticsRetentionCompute:
+      description: The metric and aggregation applied to a retention query.
+      properties:
+        aggregation:
+          description: The aggregation function applied to the metric, such as `count` or `avg`.
+          example: count
+          type: string
+        metric:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionComputeMetric"
+      required:
+        - metric
+        - aggregation
+      type: object
+    ProductAnalyticsRetentionComputeMetric:
+      description: The retention metric to compute, either an absolute count or a rate.
+      enum:
+        - "__dd.retention"
+        - "__dd.retention_rate"
+      example: "__dd.retention_rate"
+      type: string
+      x-enum-varnames:
+        - RETENTION
+        - RETENTION_RATE
+    ProductAnalyticsRetentionEntity:
+      description: The entity whose retention is measured.
+      enum:
+        - "@usr.id"
+        - "@account.id"
+      example: "@usr.id"
+      type: string
+      x-enum-varnames:
+        - USER_ID
+        - ACCOUNT_ID
+    ProductAnalyticsRetentionFilters:
+      description: Filters narrowing the events considered by a retention query.
+      properties:
+        audience_filters:
+          $ref: "#/components/schemas/ProductAnalyticsAudienceFilters"
+        string_filter:
+          description: Free-text search query applied to the events.
+          type: string
+      type: object
+    ProductAnalyticsRetentionFixedTimeInterval:
+      description: A retention interval of fixed length, such as "7 days".
+      properties:
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionFixedTimeIntervalType"
+        unit:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionFixedTimeIntervalUnit"
+        value:
+          description: Length of the interval, expressed in `unit`.
+          example: 7
+          exclusiveMinimum: true
+          format: double
+          minimum: 0
+          type: number
+      required:
+        - type
+        - value
+        - unit
+      type: object
+    ProductAnalyticsRetentionFixedTimeIntervalType:
+      description: The discriminator identifying a fixed-length retention interval.
+      enum:
+        - fixed
+      example: fixed
+      type: string
+      x-enum-varnames:
+        - FIXED
+    ProductAnalyticsRetentionFixedTimeIntervalUnit:
+      description: Time unit for a fixed-length retention interval.
+      enum:
+        - day
+        - week
+        - month
+      example: day
+      type: string
+      x-enum-varnames:
+        - DAY
+        - WEEK
+        - MONTH
+    ProductAnalyticsRetentionGridCohort:
+      description: One row of the retention grid, holding the results for a single cohort.
+      properties:
+        cells:
+          description: The cells of the row, one per return period.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsRetentionGridCohortCell"
+          type: array
+        cohort_end_time:
+          description: End of the cohort window, in epoch milliseconds.
+          format: int64
+          type: integer
+        cohort_index:
+          description: Zero-based index of the cohort in the grid.
+          format: int64
+          type: integer
+        cohort_size:
+          description: Number of entities in the cohort.
+          format: int64
+          type: integer
+        cohort_start_time:
+          description: Start of the cohort window, in epoch milliseconds.
+          format: int64
+          type: integer
+        group_tags:
+          description: The group-by facet values that identify this row.
+          items:
+            description: A tag value for a group-by facet.
+            type: string
+          type: array
+        name:
+          description: Label identifying the cohort, such as the week it started.
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionGridCohortType"
+        unit:
+          description: Unit definitions for the cell values.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsUnit"
+          type: array
+      type: object
+    ProductAnalyticsRetentionGridCohortCell:
+      description: |-
+        One cell of the retention grid, holding the result for a single cohort over a single return period.
+        Aggregated rows omit the time and count fields.
+      properties:
+        cell_count:
+          description: Number of entities that returned during the period.
+          format: int64
+          type: integer
+        cell_rate:
+          description: Fraction of the cohort that returned, between `0` and `1`.
+          format: double
+          type: number
+        cell_relative_value_change:
+          description: Change in the metric relative to the cohort baseline.
+          format: double
+          nullable: true
+          type: number
+        cell_value:
+          description: Value of the computed metric, when a metric other than the retention rate is requested.
+          format: double
+          nullable: true
+          type: number
+        is_partial_data:
+          description: Whether the return period is still open, so the numbers are not yet final.
+          type: boolean
+        return_period_end_time:
+          description: End of the return period, in epoch milliseconds.
+          format: int64
+          type: integer
+        return_period_index:
+          description: Zero-based index of the return period this cell belongs to.
+          format: int64
+          type: integer
+        return_period_start_time:
+          description: Start of the return period, in epoch milliseconds.
+          format: int64
+          type: integer
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionGridCohortType"
+      type: object
+    ProductAnalyticsRetentionGridCohortType:
+      description: |-
+        Whether the row holds one cohort's own numbers, or the weighted roll-up across every cohort.
+      enum:
+        - raw
+        - aggregated
+      example: raw
+      type: string
+      x-enum-varnames:
+        - RAW
+        - AGGREGATED
+    ProductAnalyticsRetentionGridQuery:
+      description: Query definition for a retention grid or retention metadata request.
+      properties:
+        computation_scope:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionScope"
+        compute:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionCompute"
+        group_by:
+          description: Splits the results by the values of one or more facets.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsRetentionGroupBy"
+          type: array
+        search:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionSearch"
+      required:
+        - search
+        - compute
+      type: object
+    ProductAnalyticsRetentionGridRequest:
+      description: Request body for a retention grid query.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionGridRequestData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsRetentionGridRequestAttributes:
+      description: Attributes of a retention grid request.
+      properties:
+        exclude_anonymous_traffic:
+          default: false
+          description: Whether to exclude sessions that are not tied to an identified user.
+          type: boolean
+        from:
+          description: Start of the query window, in epoch milliseconds.
+          example: 1756425600000
+          format: int64
+          type: integer
+        query:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionGridQuery"
+        to:
+          description: End of the query window, in epoch milliseconds.
+          example: 1756857600000
+          format: int64
+          type: integer
+      required:
+        - from
+        - to
+        - query
+      type: object
+    ProductAnalyticsRetentionGridRequestData:
+      description: |-
+        The single JSON:API resource carrying a retention grid query. Its attributes hold the time
+        window to query and the cohort and return criteria that define the grid.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionGridRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionGridRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsRetentionGridRequestType:
+      description: The resource type identifier for a retention grid request.
+      enum:
+        - retention_grid_request
+      example: retention_grid_request
+      type: string
+      x-enum-varnames:
+        - RETENTION_GRID_REQUEST
+    ProductAnalyticsRetentionGridResponse:
+      description: Response for a retention grid query.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionGridResponseData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsRetentionGridResponseAttributes:
+      description: Attributes of a retention grid response, containing the cohort rows and the period columns.
+      properties:
+        cohorts:
+          description: The cohorts forming the rows of the grid.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsRetentionGridCohort"
+          type: array
+        retention_entity:
+          description: The entity whose retention was measured.
+          type: string
+        retention_periods:
+          description: The return periods forming the columns of the grid.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsRetentionPeriod"
+          type: array
+        unit:
+          description: Unit definitions for the grid values.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsUnit"
+          type: array
+      type: object
+    ProductAnalyticsRetentionGridResponseData:
+      description: |-
+        The single JSON:API resource holding a computed retention grid. Its attributes contain the
+        return periods forming the columns and the cohorts forming the rows.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionGridResponseAttributes"
+        id:
+          description: Unique identifier for this response data object.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionGridResponseType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsRetentionGridResponseType:
+      description: The resource type identifier for a retention grid response.
+      enum:
+        - retention_grid_response
+      example: retention_grid_response
+      type: string
+      x-enum-varnames:
+        - RETENTION_GRID_RESPONSE
+    ProductAnalyticsRetentionGroupBy:
+      description: Splits retention results by the values of a facet.
+      properties:
+        facet:
+          description: The attribute path to group by.
+          example: "@geo.country"
+          type: string
+        limit:
+          description: Maximum number of groups to return. Omit it to let the service choose.
+          example: 10
+          format: int64
+          minimum: 1
+          type: integer
+        should_exclude_missing:
+          default: false
+          description: Whether to drop entities that have no value for the facet.
+          type: boolean
+        sort:
+          $ref: "#/components/schemas/ProductAnalyticsGroupBySort"
+        source:
+          description: Audience source backing the group-by, when grouping by an audience rather than a facet.
+          type: string
+        target:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionGroupByTarget"
+      required:
+        - target
+        - facet
+      type: object
+    ProductAnalyticsRetentionGroupByTarget:
+      description: Which axis of the retention grid a group-by applies to.
+      enum:
+        - cohort
+        - return_period
+      example: cohort
+      type: string
+      x-enum-varnames:
+        - COHORT
+        - RETURN_PERIOD
+    ProductAnalyticsRetentionIndexTarget:
+      description: Selects a cohort or return period by its zero-based position in the grid.
+      properties:
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionIndexTargetType"
+        value:
+          description: Zero-based index of the targeted cohort or return period.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+        - type
+        - value
+      type: object
+    ProductAnalyticsRetentionIndexTargetType:
+      description: The discriminator identifying a target selected by index.
+      enum:
+        - index
+      example: index
+      type: string
+      x-enum-varnames:
+        - INDEX
+    ProductAnalyticsRetentionListColumn:
+      description: A column to include in each returned entity row.
+      properties:
+        field:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionListColumnField"
+      type: object
+    ProductAnalyticsRetentionListColumnField:
+      description: The attribute selected for a column.
+      properties:
+        path:
+          description: Attribute path of the column.
+          example: "@usr.email"
+          type: string
+      type: object
+    ProductAnalyticsRetentionListQuery:
+      description: Query definition for a retention list request.
+      properties:
+        columns:
+          description: The attribute columns to include in each returned row.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsRetentionListColumn"
+          type: array
+        computation_scope:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionCellScope"
+        limit:
+          description: Maximum number of rows to return. Use `0` for no limit.
+          example: 100
+          format: int64
+          minimum: 0
+          type: integer
+        search:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionSearch"
+      required:
+        - search
+        - computation_scope
+      type: object
+    ProductAnalyticsRetentionListRecord:
+      additionalProperties: {}
+      description: A single entity row, keyed by the requested column paths.
+      type: object
+    ProductAnalyticsRetentionListRequest:
+      description: Request body listing the individual entities behind one cell of the retention grid.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionListRequestData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsRetentionListRequestAttributes:
+      description: Attributes of a retention list request.
+      properties:
+        from:
+          description: Start of the query window, in epoch milliseconds.
+          example: 1756425600000
+          format: int64
+          type: integer
+        query:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionListQuery"
+        to:
+          description: End of the query window, in epoch milliseconds.
+          example: 1756857600000
+          format: int64
+          type: integer
+      required:
+        - from
+        - to
+        - query
+      type: object
+    ProductAnalyticsRetentionListRequestData:
+      description: |-
+        The single JSON:API resource carrying a retention list query. Its attributes hold the time
+        window, the cell to list, and the columns to return for each entity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionListRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionListRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsRetentionListRequestType:
+      description: The resource type identifier for a retention list request.
+      enum:
+        - retention_list_request
+      example: retention_list_request
+      type: string
+      x-enum-varnames:
+        - RETENTION_LIST_REQUEST
+    ProductAnalyticsRetentionListResponse:
+      description: Response for a retention list query.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionListResponseData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsRetentionListResponseAttributes:
+      description: Attributes of a retention list response, containing the matching entity rows.
+      properties:
+        records:
+          description: The matching entity rows.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsRetentionListRecord"
+          type: array
+        retention_entity:
+          description: The entity whose retention was measured.
+          type: string
+      type: object
+    ProductAnalyticsRetentionListResponseData:
+      description: |-
+        The single JSON:API resource holding the entities behind one retention cell. Its attributes
+        contain the entity whose retention was measured and one row per matching entity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionListResponseAttributes"
+        id:
+          description: Unique identifier for this response data object.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionListResponseType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsRetentionListResponseType:
+      description: The resource type identifier for a retention list response.
+      enum:
+        - retention_list_response
+      example: retention_list_response
+      type: string
+      x-enum-varnames:
+        - RETENTION_LIST_RESPONSE
+    ProductAnalyticsRetentionPeriod:
+      description: A return period definition, such as "1 week".
+      properties:
+        unit:
+          description: Time unit of the period, such as `day`, `week`, `month`, or `year`.
+          example: week
+          type: string
+        value:
+          description: Length of the period, expressed in `unit`.
+          example: 1
+          format: int64
+          type: integer
+      type: object
+    ProductAnalyticsRetentionReturnCondition:
+      description: |-
+        When an entity counts as having returned. Use `conversion_on` to count only entities that
+        returned during the period itself, or `conversion_on_or_after` to also count later returns.
+      enum:
+        - conversion_on
+        - conversion_on_or_after
+      example: conversion_on_or_after
+      type: string
+      x-enum-varnames:
+        - CONVERSION_ON
+        - CONVERSION_ON_OR_AFTER
+    ProductAnalyticsRetentionReturnCriteria:
+      description: Defines the event that counts as a return, and the window in which it must occur.
+      properties:
+        base_query:
+          $ref: "#/components/schemas/ProductAnalyticsBaseQuery"
+        time_interval:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionTimeInterval"
+      required:
+        - base_query
+      type: object
+    ProductAnalyticsRetentionReturnPeriodScope:
+      description: Narrows a retention query to a single return-period column.
+      properties:
+        target:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionIndexTarget"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionReturnPeriodScopeType"
+      required:
+        - type
+        - target
+      type: object
+    ProductAnalyticsRetentionReturnPeriodScopeType:
+      description: The discriminator identifying a scope narrowed to one return period.
+      enum:
+        - return_period
+      example: return_period
+      type: string
+      x-enum-varnames:
+        - RETURN_PERIOD
+    ProductAnalyticsRetentionScope:
+      description: |-
+        Restricts a retention query to part of the grid, so that results can be examined in detail.
+        Omit it to compute the whole grid.
+      oneOf:
+        - $ref: "#/components/schemas/ProductAnalyticsRetentionCohortScope"
+        - $ref: "#/components/schemas/ProductAnalyticsRetentionReturnPeriodScope"
+        - $ref: "#/components/schemas/ProductAnalyticsRetentionCellScope"
+    ProductAnalyticsRetentionSearch:
+      description: Defines the cohort and return criteria that make up a retention query.
+      properties:
+        cohort_criteria:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionCohortCriteria"
+        filters:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionFilters"
+        retention_entity:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionEntity"
+        return_condition:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionReturnCondition"
+        return_criteria:
+          $ref: "#/components/schemas/ProductAnalyticsRetentionReturnCriteria"
+      required:
+        - cohort_criteria
+        - retention_entity
+        - return_condition
+      type: object
+    ProductAnalyticsRetentionTimeInterval:
+      description: |-
+        A retention interval, either aligned to calendar boundaries or of a fixed length.
+        Cohort criteria use calendar intervals; return criteria use fixed intervals.
+      oneOf:
+        - $ref: "#/components/schemas/ProductAnalyticsRetentionCalendarTimeInterval"
+        - $ref: "#/components/schemas/ProductAnalyticsRetentionFixedTimeInterval"
+    ProductAnalyticsSankeyAggregatedNode:
+      description: One of the nodes rolled up into an aggregated node, retained so the roll-up can be broken down.
+      properties:
+        id:
+          description: Unique identifier for the node.
+          type: string
+        incoming_value:
+          description: Number of sessions entering the node.
+          format: int64
+          type: integer
+        name:
+          description: The facet value the node represents.
+          type: string
+        outgoing_value:
+          description: Number of sessions leaving the node.
+          format: int64
+          type: integer
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsSankeyAggregatedNodeType"
+        value:
+          description: Number of sessions passing through the node.
+          format: int64
+          type: integer
+      type: object
+    ProductAnalyticsSankeyAggregatedNodeType:
+      description: The resource type identifier for a node rolled up into an aggregated node.
+      enum:
+        - aggregated
+      type: string
+      x-enum-varnames:
+        - AGGREGATED
+    ProductAnalyticsSankeyDefinition:
+      description: The shape of the Sankey diagram, expressed as the facets to flow between and how many steps to show.
+      properties:
+        entries_per_step:
+          description: |-
+            Maximum number of nodes to keep in each column. Remaining values are rolled up into an
+            aggregated node. Omit it, or send `0`, to use the default of `5`.
+          example: 10
+          format: int64
+          maximum: 10
+          minimum: 0
+          type: integer
+        number_of_steps:
+          description: |-
+            Number of intermediate columns between the source and the target.
+            Omit it, or send `0`, to use the default of `5`.
+          example: 3
+          format: int64
+          maximum: 10
+          minimum: 0
+          type: integer
+        source:
+          description: Facet forming the first column of the diagram.
+          example: "@view.name"
+          type: string
+        target:
+          description: Facet forming the last column of the diagram.
+          example: "@view.name"
+          type: string
+      required:
+        - source
+        - target
+      type: object
+    ProductAnalyticsSankeyLink:
+      description: A link of the Sankey diagram, representing the sessions flowing between two nodes.
+      properties:
+        column:
+          description: Zero-based index of the column the link starts from.
+          format: int64
+          type: integer
+        id:
+          description: Unique identifier for the link.
+          type: string
+        source:
+          description: Identifier of the node the link starts at.
+          type: string
+        target:
+          description: Identifier of the node the link ends at.
+          type: string
+        value:
+          description: Number of sessions flowing along the link.
+          format: int64
+          type: integer
+      type: object
+    ProductAnalyticsSankeyNode:
+      description: A node of the Sankey diagram, representing one facet value in one column.
+      properties:
+        aggregated_nodes:
+          description: The nodes rolled up into this one, when the node is an aggregate.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsSankeyAggregatedNode"
+          type: array
+        column:
+          description: Zero-based index of the column the node sits in.
+          format: int64
+          type: integer
+        dropoff_value:
+          description: Number of sessions that ended at the node.
+          format: int64
+          type: integer
+        id:
+          description: Unique identifier for the node.
+          type: string
+        incoming_value:
+          description: Number of sessions entering the node.
+          format: int64
+          type: integer
+        name:
+          description: The facet value the node represents.
+          type: string
+        outgoing_value:
+          description: Number of sessions leaving the node.
+          format: int64
+          type: integer
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsSankeyNodeType"
+        value:
+          description: Number of sessions passing through the node.
+          format: int64
+          type: integer
+      type: object
+    ProductAnalyticsSankeyNodeType:
+      description: |-
+        The kind of node. `regular` is a single facet value, `other` rolls up the values that did not
+        fit within `entries_per_step`, and `dropoff` collects the sessions that ended at this column.
+      enum:
+        - regular
+        - other
+        - dropoff
+      type: string
+      x-enum-varnames:
+        - REGULAR
+        - OTHER
+        - DROPOFF
+    ProductAnalyticsSankeyRequest:
+      description: Request body for a Sankey diagram query.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsSankeyRequestData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsSankeyRequestAttributes:
+      description: Attributes of a Sankey request.
+      properties:
+        definition:
+          $ref: "#/components/schemas/ProductAnalyticsSankeyDefinition"
+        search:
+          $ref: "#/components/schemas/ProductAnalyticsSankeySearch"
+        time:
+          $ref: "#/components/schemas/ProductAnalyticsSankeyTime"
+      required:
+        - time
+        - search
+        - definition
+      type: object
+    ProductAnalyticsSankeyRequestData:
+      description: |-
+        The single JSON:API resource carrying a Sankey query. Its attributes hold the time window to
+        query, the search that selects the sessions, and the definition of the diagram to build.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsSankeyRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsSankeyRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsSankeyRequestType:
+      description: The resource type identifier for a Sankey request.
+      enum:
+        - sankey_request
+      example: sankey_request
+      type: string
+      x-enum-varnames:
+        - SANKEY_REQUEST
+    ProductAnalyticsSankeyResponse:
+      description: Response for a Sankey diagram query.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsSankeyResponseData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsSankeyResponseAttributes:
+      description: Attributes of a Sankey response, containing the nodes and the links between them.
+      properties:
+        links:
+          description: The links of the diagram, one per pair of connected nodes.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsSankeyLink"
+          type: array
+        nodes:
+          description: The nodes of the diagram, one per facet value and column.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsSankeyNode"
+          type: array
+      type: object
+    ProductAnalyticsSankeyResponseData:
+      description: |-
+        The single JSON:API resource holding a computed Sankey diagram. Its attributes contain the
+        nodes of every column and the links that carry sessions between them.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsSankeyResponseAttributes"
+        id:
+          description: Unique identifier for this response data object.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsSankeyResponseType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsSankeyResponseType:
+      description: The resource type identifier for a Sankey response.
+      enum:
+        - sankey_response
+      example: sankey_response
+      type: string
+      x-enum-varnames:
+        - SANKEY_RESPONSE
+    ProductAnalyticsSankeySearch:
+      description: Selects the sessions a Sankey diagram is built from.
+      properties:
+        audience_filters:
+          $ref: "#/components/schemas/ProductAnalyticsAudienceFilters"
+        join_keys:
+          $ref: "#/components/schemas/ProductAnalyticsJoinKeys"
+        query:
+          description: Datadog search query restricting the events considered.
+          example: "@type:view"
+          type: string
+      type: object
+    ProductAnalyticsSankeyTime:
+      description: The time window a Sankey query covers.
+      properties:
+        from:
+          description: Start of the query window, in epoch milliseconds.
+          example: 1756425600000
+          format: int64
+          type: integer
+        to:
+          description: End of the query window, in epoch milliseconds.
+          example: 1756857600000
+          format: int64
+          type: integer
+      required:
+        - from
+        - to
+      type: object
     ProductAnalyticsScalarColumn:
       description: A column in a scalar response.
       properties:
@@ -84170,7 +86574,9 @@ components:
           $ref: "#/components/schemas/ProductAnalyticsResponseMeta"
       type: object
     ProductAnalyticsTimeseriesResponseAttributes:
-      description: Attributes of a timeseries analytics response, containing series data, timestamps, and interval definitions.
+      description: |-
+        Attributes of a timeseries analytics response, containing series data, timestamps, and
+        interval definitions.
       properties:
         intervals:
           description: Interval definitions describing the time buckets used in the response.
@@ -106388,9 +108794,10 @@ components:
       description: A complete Workflow Automation definition, including its triggers, steps, and connections.
       properties:
         annotations:
-          description: "A list of annotations used in the workflow. These are like sticky notes for your workflow!"
+          description: Up to 100 text annotations displayed on the workflow canvas.
           items:
             $ref: "#/components/schemas/Annotation"
+          maxItems: 100
           type: array
         connectionEnvs:
           description: A list of connections or connection groups used in the workflow.
@@ -121582,6 +123989,7 @@ components:
             apm_service_catalog_write: Add, modify, and delete service catalog definitions when those definitions are maintained by Datadog.
             appsec_vm_read: View infrastructure, application code, and library vulnerability findings.
             aws_configurations_manage: Manage AWS integration account configurations and related integration settings.
+            billing_edit: Edit your organization's billing information.
             billing_read: View your organization's billing information.
             bits_investigations_read: View Bits AI investigations.
             bits_investigations_write: Create and manage Bits AI investigations.
@@ -142317,6 +144725,255 @@ paths:
       tags:
         - DDSQL
       x-menu-order: 2
+  /api/v2/deletion/data/{product}:
+    post:
+      description: Creates a data deletion request by providing a query and a timeframe targeting the proper data.
+      operationId: CreateDataDeletionRequest
+      parameters:
+        - $ref: "#/components/parameters/ProductName"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      displayed_total: 100
+                      from: 1672527600000
+                      indexes:
+                        - test-index
+                        - test-index-2
+                      query:
+                        host: abc
+                        service: xyz
+                      to: 1704063600000
+                    type: create_deletion_req
+            schema:
+              $ref: "#/components/schemas/CreateDataDeletionRequestBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-01T00:00:00.000000Z"
+                        created_by: test@example.com
+                        displayed_total: 100
+                        from_time: 1672527600000
+                        is_created: true
+                        org_id: 123
+                        product: logs
+                        query: "service:xyz host:abc"
+                        starting_at: "2024-01-01T02:00:00.000000Z"
+                        status: pending
+                        to_time: 1704063600000
+                        total_unrestricted: 100
+                        updated_at: "2024-01-01T00:00:00.000000Z"
+                      id: "1"
+                      type: deletion_request
+                    meta:
+                      product: logs
+                      request_status: pending
+              schema:
+                $ref: "#/components/schemas/CreateDataDeletionResponseBody"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Precondition failed error
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Internal server error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Creates a data deletion request
+      tags:
+        - Data Deletion
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - logs_delete_data
+  /api/v2/deletion/requests:
+    get:
+      description: Gets a list of data deletion requests based on several filter parameters.
+      operationId: GetDataDeletionRequests
+      parameters:
+        - description: |-
+            The next page of the previous search. If the next_page parameter is included, the rest of the query elements are ignored.
+          example: "cGFnZTI="
+          in: query
+          name: next_page
+          required: false
+          schema:
+            type: string
+        - description: Retrieve only the requests related to the given product.
+          example: "logs"
+          in: query
+          name: product
+          required: false
+          schema:
+            type: string
+        - description: Retrieve only the requests that matches the given query.
+          example: "service:xyz host:abc"
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: Retrieve only the requests with the given status.
+          example: "pending"
+          in: query
+          name: status
+          required: false
+          schema:
+            type: string
+        - description: Sets the page size of the search.
+          example: "50"
+          in: query
+          name: page_size
+          required: false
+          schema:
+            default: 50
+            format: int64
+            maximum: 50
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-01T00:00:00.000000Z"
+                          created_by: test@example.com
+                          displayed_total: 100
+                          from_time: 1672527600000
+                          is_created: true
+                          org_id: 123
+                          product: logs
+                          query: "service:xyz host:abc"
+                          starting_at: "2024-01-01T02:00:00.000000Z"
+                          status: pending
+                          to_time: 1704063600000
+                          total_unrestricted: 100
+                          updated_at: "2024-01-01T00:00:00.000000Z"
+                        id: "1"
+                        type: deletion_request
+                    meta:
+                      next_page: "cGFnZTI="
+                      product: logs
+              schema:
+                $ref: "#/components/schemas/GetDataDeletionsResponseBody"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Internal server error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Gets a list of data deletion requests
+      tags:
+        - Data Deletion
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - logs_delete_data
+  /api/v2/deletion/requests/{id}/cancel:
+    put:
+      description: Cancels a data deletion request by providing its ID.
+      operationId: CancelDataDeletionRequest
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-01T00:00:00.000000Z"
+                        created_by: test@example.com
+                        displayed_total: 100
+                        from_time: 1672527600000
+                        is_created: true
+                        org_id: 123
+                        product: logs
+                        query: "service:xyz host:abc"
+                        starting_at: "2024-01-01T02:00:00.000000Z"
+                        status: canceled
+                        to_time: 1704063600000
+                        total_unrestricted: 100
+                        updated_at: "2024-01-01T00:00:00.000000Z"
+                      id: "1"
+                      type: deletion_request
+                    meta:
+                      product: logs
+                      request_status: canceled
+              schema:
+                $ref: "#/components/schemas/CancelDataDeletionResponseBody"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Precondition failed error
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Internal server error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Cancels a data deletion request
+      tags:
+        - Data Deletion
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - logs_delete_data
   /api/v2/deployment_gates:
     get:
       description: |-
@@ -170536,6 +173193,14 @@ paths:
           required: false
           schema:
             type: string
+        - description: |-
+            When `true`, `filter[groups]` is treated as an exclude list instead of an include list. Defaults to `false`.
+          example: false
+          in: query
+          name: filter[exclude_tags_mode]
+          required: false
+          schema:
+            type: boolean
         - description: The number of hours of look back (from now) to estimate cardinality with. If unspecified, it defaults to 0 hours.
           example: 49
           in: query
@@ -170555,7 +173220,7 @@ paths:
             format: int32
             maximum: 9
             type: integer
-        - description: A boolean, for distribution metrics only, to estimate cardinality if the metric includes additional percentile aggregators.
+        - description: Deprecated. This query parameter has no effect on the estimate.
           example: true
           in: query
           name: filter[pct]
@@ -180423,6 +183088,69 @@ paths:
         - Rum Audience Management
       x-menu-order: 1
       x-unstable: "**Note**: This endpoint may be subject to changes."
+  /api/v2/product-analytics/analytics/list:
+    post:
+      description: |-
+        List the individual event records matching an analytics query.
+        Use `columns` to choose the attributes returned on each row, `sort` to order the rows,
+        and `limit` to cap how many are returned.
+      operationId: QueryProductAnalyticsList
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      from: 1771232048460
+                      query:
+                        columns:
+                          - "@view.name"
+                        limit: 100
+                        query:
+                          data_source: product_analytics
+                          search:
+                            query: "@type:view"
+                      to: 1771836848262
+                    type: formula_analytics_extended_list_request
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsAnalyticsListRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        records: []
+                        total_count: 0
+                      id: abc-123
+                      type: list_response
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsAnalyticsListResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List analytics events
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/product-analytics/analytics/scalar:
     post:
       description: |-
@@ -180539,6 +183267,676 @@ paths:
         operator: OR
         permissions:
           - rum_apps_read
+  /api/v2/product-analytics/journey/funnel:
+    post:
+      description: |-
+        Compute a funnel over an ordered sequence of Product Analytics events.
+        Returns the per-step conversion counts, conversion rates, and elapsed times,
+        optionally segmented by group-by facets.
+      operationId: QueryProductAnalyticsJourneyFunnel
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      from: 1756425600000
+                      query:
+                        compute:
+                          aggregation: count
+                        search:
+                          expression: A -> B
+                          node_objects:
+                            A:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:view @view.name:Login"
+                            B:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:action @action.target.name:Submit"
+                      to: 1756857600000
+                    type: journey_request
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsJourneyFunnelRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        end_to_end_conversion_rate: 0.42
+                        end_to_end_elapsed_time:
+                          avg: 9400
+                          max: 86400
+                          min: 1200
+                        funnel_steps:
+                          - elapsed_time_to_next_step:
+                              avg: 5100
+                              max: 42000
+                              min: 900
+                            groups: []
+                            label: A
+                            unit: millisecond
+                            value: 1200
+                        initial_count: 1200
+                      id: 00000000-0000-0000-0000-000000000000
+                      type: funnel_response
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsJourneyFunnelResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Compute journey funnel analysis
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/journey/list:
+    post:
+      description: |-
+        Return the individual sessions that reached, or dropped off at, a given step of the journey.
+        Each row contains the identity join key, the event timestamp, and the columns requested
+        in `entity_columns`.
+      operationId: QueryProductAnalyticsJourneyList
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      from: 1756425600000
+                      query:
+                        entity_columns:
+                          - "@usr.name"
+                        limit: 50
+                        search:
+                          expression: A -> B
+                          node_objects:
+                            A:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:view @view.name:Login"
+                            B:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:action @action.target.name:Submit"
+                      to: 1756857600000
+                    type: journey_list_request
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsJourneyListRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        entity: session
+                        records:
+                          - "@session.id": 00000000-0000-0000-0000-000000000001
+                            "@usr.name": Jane Doe
+                            timestamp: 1756425600000
+                        total_count: 231
+                      id: 00000000-0000-0000-0000-000000000000
+                      type: journey_list_response
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsJourneyListResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List journey entities
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/journey/scalar:
+    post:
+      description: |-
+        Compute scalar results for a journey query, such as the conversion count,
+        the conversion rate, or the time to convert, optionally segmented by group-by facets.
+      operationId: QueryProductAnalyticsJourneyScalar
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      from: 1756425600000
+                      query:
+                        compute:
+                          aggregation: count
+                          metric: __dd.conversion_rate
+                        search:
+                          expression: A -> B
+                          node_objects:
+                            A:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:view @view.name:Login"
+                            B:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:action @action.target.name:Submit"
+                      to: 1756857600000
+                    type: formula_journey_request
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsJourneyScalarRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        columns: []
+                      id: 00000000-0000-0000-0000-000000000000
+                      type: journey_scalar_response
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsJourneyScalarResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Compute journey scalar analytics
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/journey/timeseries:
+    post:
+      description: |-
+        Compute timeseries results for a journey query.
+        Returns one series per group-by combination, bucketed by the requested interval.
+      operationId: QueryProductAnalyticsJourneyTimeseries
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      from: 1756425600000
+                      interval: 3600000
+                      query:
+                        compute:
+                          aggregation: count
+                        search:
+                          expression: A -> B
+                          node_objects:
+                            A:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:view @view.name:Login"
+                            B:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:action @action.target.name:Submit"
+                      to: 1756857600000
+                    type: formula_journey_request
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsFormulaJourneyRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        series: []
+                        times: []
+                      id: 00000000-0000-0000-0000-000000000000
+                      type: journey_timeseries_response
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsJourneyTimeseriesResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Compute journey timeseries analytics
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/retention/grid:
+    post:
+      description: |-
+        Compute a retention grid, showing how much of each cohort came back over each subsequent period.
+        Rows are cohorts, columns are return periods, and each cell holds the count and rate of entities that returned.
+      operationId: QueryProductAnalyticsRetentionGrid
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      from: 1756425600000
+                      query:
+                        compute:
+                          aggregation: count
+                          metric: "__dd.retention_rate"
+                        search:
+                          cohort_criteria:
+                            base_query:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:view @view.name:Signup"
+                            time_interval:
+                              type: calendar
+                              value:
+                                alignment: monday
+                                quantity: 1
+                                timezone: UTC
+                                type: week
+                          retention_entity: "@usr.id"
+                          return_condition: conversion_on_or_after
+                          return_criteria:
+                            base_query:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:view"
+                      to: 1756857600000
+                    type: retention_grid_request
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsRetentionGridRequest"
+        description: The retention grid query.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        cohorts: []
+                        retention_entity: "@usr.id"
+                        retention_periods: []
+                      id: 00000000-0000-0000-0000-000000000000
+                      type: retention_grid_response
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsRetentionGridResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Compute a retention grid
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/retention/list:
+    post:
+      description: |-
+        List the individual users or accounts counted in one cell of the retention grid.
+        Set `computation_scope` to the cohort and return period you want to examine.
+      operationId: QueryProductAnalyticsRetentionList
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      from: 1756425600000
+                      query:
+                        columns:
+                          - field:
+                              path: "@usr.email"
+                        computation_scope:
+                          cohort_target:
+                            type: index
+                            value: 0
+                          return_period_target:
+                            type: index
+                            value: 1
+                          type: cell
+                        limit: 100
+                        search:
+                          cohort_criteria:
+                            base_query:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:view @view.name:Signup"
+                            time_interval:
+                              type: calendar
+                              value:
+                                quantity: 1
+                                type: week
+                          retention_entity: "@usr.id"
+                          return_condition: conversion_on_or_after
+                      to: 1756857600000
+                    type: retention_list_request
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsRetentionListRequest"
+        description: The retention list query.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        records: []
+                        retention_entity: "@usr.id"
+                      id: 00000000-0000-0000-0000-000000000000
+                      type: retention_list_response
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsRetentionListResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List the entities behind a retention cell
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/retention/scalar:
+    post:
+      description: Compute retention as a single value per group, suitable for a query value or top list widget.
+      operationId: QueryProductAnalyticsRetentionScalar
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      from: 1756425600000
+                      query:
+                        compute:
+                          aggregation: count
+                          metric: "__dd.retention_rate"
+                        search:
+                          cohort_criteria:
+                            base_query:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:view @view.name:Signup"
+                            time_interval:
+                              type: calendar
+                              value:
+                                alignment: monday
+                                quantity: 1
+                                timezone: UTC
+                                type: week
+                          retention_entity: "@usr.id"
+                          return_condition: conversion_on_or_after
+                          return_criteria:
+                            base_query:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:view"
+                      to: 1756857600000
+                    type: formula_retention_request
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsFormulaRetentionRequest"
+        description: The retention scalar query.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        columns: []
+                      type: scalar_response
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsScalarResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Compute retention scalar values
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/retention/timeseries:
+    post:
+      description: |-
+        Compute retention as a series of values over time, using the same query definition as the
+        retention grid.
+      operationId: QueryProductAnalyticsRetentionTimeseries
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      from: 1756425600000
+                      query:
+                        compute:
+                          aggregation: count
+                          metric: "__dd.retention_rate"
+                        search:
+                          cohort_criteria:
+                            base_query:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:view @view.name:Signup"
+                            time_interval:
+                              type: calendar
+                              value:
+                                alignment: monday
+                                quantity: 1
+                                timezone: UTC
+                                type: week
+                          retention_entity: "@usr.id"
+                          return_condition: conversion_on_or_after
+                          return_criteria:
+                            base_query:
+                              data_source: product_analytics
+                              search:
+                                query: "@type:view"
+                      to: 1756857600000
+                    type: formula_retention_request
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsFormulaRetentionRequest"
+        description: The retention timeseries query.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        series: []
+                        times: []
+                      type: timeseries_response
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsTimeseriesResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Compute retention timeseries
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/sankey:
+    post:
+      description: |-
+        Compute a Sankey diagram of how sessions flow between the values of two facets,
+        showing where users continue and where they drop off at each step.
+      operationId: QueryProductAnalyticsSankey
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      definition:
+                        entries_per_step: 10
+                        number_of_steps: 3
+                        source: "@view.name"
+                        target: "@view.name"
+                      search:
+                        query: "@type:view"
+                      time:
+                        from: 1756425600000
+                        to: 1756857600000
+                    type: sankey_request
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsSankeyRequest"
+        description: The Sankey diagram query.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        links: []
+                        nodes: []
+                      id: 00000000-0000-0000-0000-000000000000
+                      type: sankey_response
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsSankeyResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Compute a Sankey diagram
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/product-analytics/users/event_filtered_query:
     post:
       description: Query users filtered by both user properties and event platform data
@@ -181157,7 +184555,9 @@ paths:
     post:
       description: |-
         Query timeseries data across various data sources and
-        process the data by applying formulas and functions.
+        process the data by applying formulas and functions. Datadog recommends
+        using this endpoint over the v1 `/api/v1/query` endpoint for querying
+        timeseries data.
       operationId: QueryTimeseriesData
       requestBody:
         content:
@@ -218637,7 +222037,11 @@ tags:
 
       **Note**: These endpoints are split based on whether you are using the US1-FED site or not. Please reference the specific resource for the site you are using.
     name: "CSM Threats"
-  - description: View and manage cases and projects within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information.
+  - description: >-
+      **Note**: Work Management is the UI name for Case Management. These API endpoints and permissions use `case` terminology.
+
+
+      View and manage work items and projects within Work Management. For more information, see [Work Management](https://docs.datadoghq.com/incident_response/work_management/).
     name: Case Management
   - description: >-
       View and configure custom attributes within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information.
@@ -218716,6 +222120,9 @@ tags:
       [Dashboards documentation](https://docs.datadoghq.com/dashboards/) for more
       information.
     name: Dashboards
+  - description: |-
+      The Data Deletion API allows the user to target and delete data from the allowed products. It's enabled for Logs and depends on the `logs_delete_data` permission.
+    name: Data Deletion
   - description: Manage and run data observability monitors.
     name: Data Observability
   - description: |-
