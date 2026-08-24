@@ -115,7 +115,7 @@ You can enable or disable this filter, but you cannot edit it or delete it.
 
 Custom retention filters are the filters you create and control. Each one pairs an event type with a query and a retention rate, and each one can retain sessions.
 
-### Excluding sessions using retention filters
+### Excluding events with a filter query
 
 Custom retention filters specify which sessions to keep, rather than which to exclude. You cannot set a retention percentage to 0% (the minimum is 0.1%). Additionally, setting low retention percentages is not an effective exclusion strategy because sessions may still be retained by other filters in your configuration.
 
