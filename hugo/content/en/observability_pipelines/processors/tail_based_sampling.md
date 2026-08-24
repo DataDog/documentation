@@ -1,6 +1,6 @@
 ---
 title: Tail-Based Sampling Processor
-description: "Learn how to use the Tail-Based Sampling processor to decide whether the Worker keeps a completed trace based on sampling policies you define."
+description: Learn how to use the Tail-Based Sampling processor to decide whether the Worker keeps a completed trace based on sampling policies you define.
 disable_toc: false
 products:
 - name: Traces

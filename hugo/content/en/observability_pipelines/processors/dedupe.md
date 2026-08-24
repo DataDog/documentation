@@ -1,6 +1,6 @@
 ---
 title: Deduplicate Processor
-description: "Learn how to use the Deduplicate processor to remove copies of log data and reduce volume and noise."
+description: Learn how to use the Deduplicate processor to remove copies of log data and reduce volume and noise.
 disable_toc: false
 products:
 - name: Logs
