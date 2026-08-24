@@ -103,18 +103,25 @@ export default {
         popup: { type: Boolean, default: true },
       },
       validate(node) {
-        const { widthPercent, width, height } = node.attributes;
+        const { widthPercent, width, height, video, caption } = node.attributes;
+        const errors = [];
         if (widthPercent != null && (width != null || height != null)) {
-          return [
-            {
-              id: "img-widthPercent-conflict",
-              level: "error",
-              message:
-                "The `widthPercent` attribute can't be combined with `width` or `height`.",
-            },
-          ];
+          errors.push({
+            id: "img-widthPercent-conflict",
+            level: "error",
+            message:
+              "The `widthPercent` attribute can't be combined with `width` or `height`.",
+          });
         }
-        return [];
+        if (video && caption != null) {
+          errors.push({
+            id: "img-video-caption-conflict",
+            level: "error",
+            message:
+              "The `caption` attribute is not supported on video images.",
+          });
+        }
+        return errors;
       },
     },
   },
