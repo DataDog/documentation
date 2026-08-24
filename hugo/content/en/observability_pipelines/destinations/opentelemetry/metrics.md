@@ -1,5 +1,5 @@
 ---
-title: OpenTelemetry Destination
+title: OpenTelemetry Metrics Destination
 disable_toc: false
 products:
 - name: Metrics
