@@ -1,7 +1,19 @@
 ---
 title: Migrate Your Feature Flags from Statsig
-description: Learn how to migrate feature flags from Statsig to Datadog.
+description: Learn how to migrate feature flags from Statsig to Datadog Feature Flags.
+further_reading:
+- link: "/feature_flags/"
+  tag: "Documentation"
+  text: "Feature Flags Overview"
+- link: "/feature_flags/client/"
+  tag: "Documentation"
+  text: "Client-Side Feature Flags"
+- link: "/feature_flags/server/"
+  tag: "Documentation"
+  text: "Server-Side Feature Flags"
 ---
+
+## Overview
 
 This guide outlines the process for migrating your feature flagging logic from Statsig to [Datadog Feature Flags][1]. It covers conceptual mappings, SDK installation, initialization, and flag evaluation.
 
@@ -141,11 +153,11 @@ const title = config.get('title', 'Welcome');
 
 ### Datadog (new)
 
-{{< code-block lang="javascript" >}}
+{{< code-block lang="typescript" >}}
 const client = OpenFeature.getClient();
 
 // Assuming your Datadog flag 'banner_config' returns a JSON object variant
-const bannerConfig = client.getObjectValue('banner_config', { title: 'Welcome' });
+const bannerConfig = client.getObjectValue<{ title: string }>('banner_config', { title: 'Welcome' });
 const title = bannerConfig.title;
 {{< /code-block >}}
 
@@ -163,10 +175,10 @@ const discount = layer.get('discount', 0.1);
 
 ### Datadog (new)
 
-{{< code-block lang="javascript" >}}
+{{< code-block lang="typescript" >}}
 const client = OpenFeature.getClient();
 
-const promoConfig = client.getObjectValue('user_promo_experiments', {
+const promoConfig = client.getObjectValue<{ title: string; discount: number }>('user_promo_experiments', {
   title: 'Welcome!',
   discount: 0.1,
 });
@@ -209,11 +221,9 @@ In Datadog, flag telemetry falls into two categories:
 
 **Evaluation logging** records how often each variant is returned. Client SDKs send aggregated evaluation counts by default. Server SDKs emit the `feature_flag.evaluations` metric only after you enable evaluation logging.
 
-Exposure logging tracks which variant a subject saw. Evaluation logging measures how frequently each variant is returned across your application.
+1. **Client SDKs**: Exposure logging is enabled by default. The SDK sends exposure events to the exposures intake. You can view them in the **Feature Flags** list. Set `enableExposureLogging: false` in the `DatadogProvider` config if you do not need exposure tracking.
 
-1. **Client SDKs**: Exposure logging is enabled by default. Exposure events are sent to Datadog RUM. You can view them in the **Feature Flags** list or the **RUM** explorer. Set `enableExposureLogging: false` in the `DatadogProvider` config if you do not need exposure tracking.
-
-<div class="alert alert-warning">Setting <code>enableExposureLogging</code> to <code>true</code> can impact <a href="/real_user_monitoring/">RUM</a> costs, as it sends exposure events to Datadog through RUM. Exposure logging is on by default for client SDKs.</div>
+<div class="alert alert-warning">Setting <code>enableRumFeatureFlagTracking</code> to <code>true</code> can impact <a href="/real_user_monitoring/">RUM</a> costs, as it adds flag evaluations to RUM events. Both <code>enableExposureLogging</code> and <code>enableRumFeatureFlagTracking</code> are on by default for client SDKs.</div>
 
 2. **Server SDKs**: Exposure logging is on by default. Evaluation logging is off by default. To send evaluation metrics from server SDKs, enable OpenTelemetry metrics (for example, `DD_METRICS_OTEL_ENABLED=true`) and follow the language-specific guidance in [Server-Side Feature Flags][2].
 
@@ -227,9 +237,6 @@ Configure the required environment variables before initializing the server SDK:
 DD_API_KEY=<DATADOG_API_KEY>
 DD_SITE=<DATADOG_SITE>
 DD_ENV=<ENVIRONMENT_NAME>
-DD_SERVICE=<YOUR_SERVICE_NAME>
-DD_REMOTE_CONFIG_ENABLED=true
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 {{< /code-block >}}
 
 See [Server-Side Feature Flags][2] for the full list of Agent and application configuration options.
@@ -243,8 +250,10 @@ npm install dd-trace @openfeature/server-sdk
 Register the provider through the Datadog tracer:
 
 {{< code-block lang="javascript" >}}
-const tracer = require('dd-trace').init();
-const { OpenFeature } = require('@openfeature/server-sdk');
+import tracer from 'dd-trace';
+import { OpenFeature } from '@openfeature/server-sdk';
+
+tracer.init();
 
 await OpenFeature.setProviderAndWait(tracer.openfeature);
 {{< /code-block >}}
@@ -252,7 +261,8 @@ await OpenFeature.setProviderAndWait(tracer.openfeature);
 ### Statsig (old)
 
 {{< code-block lang="javascript" >}}
-const isEnabled = client.checkGate('new_homepage_design');
+// The Statsig server SDK takes the user in each call
+const isEnabled = statsig.checkGate(user, 'new_homepage_design');
 {{< /code-block >}}
 
 ### Datadog (new)
@@ -278,6 +288,6 @@ For other server languages, see [Server-Side Feature Flags][2].
 [2]: /feature_flags/server/
 [3]: /feature_flags/server/nodejs/
 [4]: /account_management/api-app-keys/
-[5]: /product_analytics/experimentation/
+[5]: /experiments/
 [6]: https://openfeature.dev/
 [7]: /feature_flags/client/react/
