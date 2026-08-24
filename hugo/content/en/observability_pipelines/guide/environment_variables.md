@@ -140,9 +140,6 @@ Some Observability Pipelines components require setting up environment variables
 **Traces**
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_traces %}}
 
-### Prometheus
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/prometheus %}}
-
 ### SentinelOne
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sentinelone %}}
 

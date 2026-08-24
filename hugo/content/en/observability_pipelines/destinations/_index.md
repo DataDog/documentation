@@ -1,6 +1,8 @@
 ---
 title: Destinations
 description: Learn about the destinations available for the Observability Pipelines Worker.
+aliases:
+  - /observability_pipelines/destinations/prometheus
 disable_toc: false
 further_reading:
 - link: "logs/processing/pipelines"

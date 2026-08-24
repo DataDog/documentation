@@ -218,11 +218,6 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_traces %}}
 
 {{% /tab %}}
-{{% tab "Prometheus" %}}
-
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/prometheus %}}
-
-{{% /tab %}}
 {{% tab "SentinelOne" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sentinelone %}}
