@@ -1537,6 +1537,13 @@ components:
         default: created_at
         example: "-created_at"
         type: string
+    ProductName:
+      description: Name of the product to be deleted. Only `logs` is supported.
+      in: path
+      name: product
+      required: true
+      schema:
+        type: string
     ProjectIDPathParameter:
       description: Project UUID.
       example: "e555e290-ed65-49bd-ae18-8acbfcf18db7"
@@ -1609,6 +1616,13 @@ components:
       description: The ID of the report job.
       in: path
       name: report_id
+      required: true
+      schema:
+        type: string
+    RequestId:
+      description: ID of the deletion request.
+      in: path
+      name: id
       required: true
       schema:
         type: string
@@ -1785,7 +1799,9 @@ components:
         example: cd73a516-a481-4af5-8352-9b577465c77b
         type: string
     RumRetentionQuotaScopeTypeParameter:
-      description: The type of scope the retention quota configuration applies to.
+      description: |-
+        The type of scope the retention quota configuration applies to.
+        `application` is the only supported scope type.
       in: path
       name: scope_type
       required: true
@@ -2005,6 +2021,46 @@ components:
       description: The Cloud Cost Management tag key. Tag keys can contain forward slashes (for example, `kubernetes/instance`).
       in: path
       name: tag_key
+      required: true
+      schema:
+        type: string
+    TeamsOwnershipFilterApplicationIdParameter:
+      description: Filter mappings by RUM application ID. Each value must be a valid UUID.
+      in: query
+      name: filter[application_id]
+      schema:
+        items:
+          format: uuid
+          type: string
+        type: array
+    TeamsOwnershipFilterServiceParameter:
+      description: Filter mappings by RUM application service name.
+      in: query
+      name: filter[service]
+      schema:
+        items:
+          type: string
+        type: array
+    TeamsOwnershipFilterTeamHandleParameter:
+      description: Filter mappings by owning team handle.
+      in: query
+      name: filter[team_handle]
+      schema:
+        items:
+          type: string
+        type: array
+    TeamsOwnershipFilterViewNameParameter:
+      description: Filter mappings by RUM view name.
+      in: query
+      name: filter[view_name]
+      schema:
+        items:
+          type: string
+        type: array
+    TeamsOwnershipMappingIdParameter:
+      description: The ID of the teams ownership mapping.
+      in: path
+      name: id
       required: true
       schema:
         type: string
@@ -7185,13 +7241,14 @@ components:
         - fixes
       type: object
     Annotation:
-      description: "A list of annotations used in the workflow. These are like sticky notes for your workflow!"
+      description: A text annotation displayed on the workflow canvas.
       properties:
         display:
           $ref: "#/components/schemas/AnnotationDisplay"
         id:
-          description: The `Annotation` `id`.
+          description: The unique identifier of this annotation within the workflow.
           example: ""
+          minLength: 1
           type: string
         markdownTextAnnotation:
           $ref: "#/components/schemas/AnnotationMarkdownTextAnnotation"
@@ -7348,28 +7405,28 @@ components:
         - attributes
       type: object
     AnnotationDisplay:
-      description: The definition of `AnnotationDisplay` object.
+      description: The annotation's position and size on the workflow canvas.
       properties:
         bounds:
           $ref: "#/components/schemas/AnnotationDisplayBounds"
       type: object
     AnnotationDisplayBounds:
-      description: The definition of `AnnotationDisplayBounds` object.
+      description: Canvas coordinates and dimensions for an annotation on the workflow canvas.
       properties:
         height:
-          description: The `bounds` `height`.
+          description: The annotation's height on the canvas.
           format: double
           type: number
         width:
-          description: The `bounds` `width`.
+          description: The annotation's width on the canvas.
           format: double
           type: number
         x:
-          description: The `bounds` `x`.
+          description: The annotation's horizontal canvas coordinate.
           format: double
           type: number
         y:
-          description: The `bounds` `y`.
+          description: The annotation's vertical canvas coordinate.
           format: double
           type: number
       type: object
@@ -7453,10 +7510,11 @@ components:
         - POINT_IN_TIME
         - TIME_REGION
     AnnotationMarkdownTextAnnotation:
-      description: The definition of `AnnotationMarkdownTextAnnotation` object.
+      description: Markdown content displayed in an annotation.
       properties:
         text:
-          description: The `markdownTextAnnotation` `text`.
+          description: The annotation's Markdown content.
+          maxLength: 3000
           type: string
       type: object
     AnnotationRequestData:
@@ -15825,6 +15883,14 @@ components:
       type: string
       x-enum-varnames:
         - CAMPAIGN
+    CancelDataDeletionResponseBody:
+      description: The response from the cancel data deletion request endpoint.
+      properties:
+        data:
+          $ref: "#/components/schemas/DataDeletionResponseItem"
+        meta:
+          $ref: "#/components/schemas/DataDeletionResponseMeta"
+      type: object
     Case:
       description: A case
       properties:
@@ -24318,6 +24384,79 @@ components:
       required:
         - data
       type: object
+    CreateDataDeletionRequestBody:
+      description: Object needed to create a data deletion request.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateDataDeletionRequestBodyData"
+      required:
+        - data
+      type: object
+    CreateDataDeletionRequestBodyAttributes:
+      description: Attributes for creating a data deletion request.
+      properties:
+        displayed_total:
+          description: Total number of elements to be deleted as displayed to the user.
+          example: 100
+          format: int64
+          minimum: 1
+          type: integer
+        from:
+          description: Start of requested time window, milliseconds since Unix epoch.
+          example: 1672527600000
+          format: int64
+          type: integer
+        indexes:
+          description: List of indexes for the search. If not provided, the search is performed in all indexes.
+          example: ["test-index", "test-index-2"]
+          items:
+            description: Individual index.
+            type: string
+          type: array
+        query:
+          additionalProperties:
+            type: string
+          description: Query for creating a data deletion request.
+          example: {"host": "abc", "service": "xyz"}
+          type: object
+        to:
+          description: End of requested time window, milliseconds since Unix epoch.
+          example: 1704063600000
+          format: int64
+          type: integer
+      required:
+        - query
+        - from
+        - to
+        - displayed_total
+      type: object
+    CreateDataDeletionRequestBodyData:
+      description: Data needed to create a data deletion request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateDataDeletionRequestBodyAttributes"
+        type:
+          $ref: "#/components/schemas/CreateDataDeletionRequestBodyDataType"
+      required:
+        - attributes
+        - type
+      type: object
+    CreateDataDeletionRequestBodyDataType:
+      description: The deletion request type.
+      enum:
+        - create_deletion_req
+      example: "create_deletion_req"
+      type: string
+      x-enum-varnames:
+        - CREATE_DELETION_REQ
+    CreateDataDeletionResponseBody:
+      description: The response from the create data deletion request endpoint.
+      properties:
+        data:
+          $ref: "#/components/schemas/DataDeletionResponseItem"
+        meta:
+          $ref: "#/components/schemas/DataDeletionResponseMeta"
+      type: object
     CreateDegradationRequest:
       description: Request object for creating a degradation.
       example:
@@ -30850,6 +30989,144 @@ components:
       required:
         - destination_key
         - source_keys
+      type: object
+    DataDeletionResponseItem:
+      description: The created data deletion request information.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DataDeletionResponseItemAttributes"
+        id:
+          description: The ID of the created data deletion request.
+          example: "1"
+          type: string
+        type:
+          description: The type of the request created.
+          example: "deletion_request"
+          type: string
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DataDeletionResponseItemAttributes:
+      description: Deletion attribute for data deletion response.
+      properties:
+        created_at:
+          description: Creation time of the deletion request.
+          example: "2024-01-01T00:00:00.000000Z"
+          type: string
+        created_by:
+          description: User who created the deletion request.
+          example: "test.user@datadoghq.com"
+          type: string
+        customer_message:
+          description: A message for the customer regarding the deletion request, if any.
+          example: "Your deletion request is being processed."
+          type: string
+        displayed_total:
+          description: Total number of elements to be deleted as displayed to the user.
+          example: 100
+          format: int64
+          type: integer
+        error_category:
+          description: The category of the error for the deletion request, if any.
+          example: "validation_error"
+          type: string
+        from_time:
+          description: Start of requested time window, milliseconds since Unix epoch.
+          example: 1672527600000
+          format: int64
+          type: integer
+        indexes:
+          description: List of indexes for the search. If not provided, the search is performed in all indexes.
+          example: ["test-index", "test-index-2"]
+          items:
+            description: Individual index.
+            type: string
+          type: array
+        is_created:
+          description: Whether the deletion request is fully created or not. It can take several minutes to fully create a deletion request depending on the target query and timeframe.
+          example: true
+          type: boolean
+        org_id:
+          description: Organization ID.
+          example: 321813
+          format: int64
+          type: integer
+        product:
+          description: Product name.
+          example: "logs"
+          type: string
+        query:
+          description: Query for creating a data deletion request.
+          example: "service:xyz host:abc"
+          type: string
+        starting_at:
+          description: Starting time of the process to delete the requested data.
+          example: "2024-01-01T02:00:00.000000Z"
+          type: string
+        status:
+          description: Status of the deletion request.
+          example: "pending"
+          type: string
+        to_time:
+          description: End of requested time window, milliseconds since Unix epoch.
+          example: 1704063600000
+          format: int64
+          type: integer
+        total_unrestricted:
+          description: Total number of elements to be deleted. Only the data accessible to the current user that matches the query and timeframe provided will be deleted.
+          example: 100
+          format: int64
+          type: integer
+        updated_at:
+          description: Update time of the deletion request.
+          example: "2024-01-01T00:00:00.000000Z"
+          type: string
+      required:
+        - created_at
+        - created_by
+        - from_time
+        - is_created
+        - org_id
+        - product
+        - query
+        - starting_at
+        - status
+        - to_time
+        - total_unrestricted
+        - displayed_total
+        - updated_at
+      type: object
+    DataDeletionResponseMeta:
+      description: The metadata of the data deletion response.
+      properties:
+        count_product:
+          additionalProperties:
+            format: int64
+            type: integer
+          description: The total deletion requests created by product.
+          example: {"logs": 8}
+          type: object
+        count_status:
+          additionalProperties:
+            format: int64
+            type: integer
+          description: The total deletion requests created by status.
+          example: {"completed": 10, "pending": 5}
+          type: object
+        next_page:
+          description: The next page when searching deletion requests created in the current organization.
+          example: "cGFnZTI="
+          type: string
+        product:
+          description: The product of the deletion request.
+          example: "logs"
+          type: string
+        request_status:
+          description: The status of the executed request.
+          example: "canceled"
+          type: string
       type: object
     DataExportConfig:
       description: AWS Cost and Usage Report data export configuration.
@@ -43848,6 +44125,17 @@ components:
           $ref: "#/components/schemas/FullCustomFrameworkData"
       required:
         - data
+      type: object
+    GetDataDeletionsResponseBody:
+      description: The response from the get data deletion requests endpoint.
+      properties:
+        data:
+          description: The list of data deletion requests that matches the query.
+          items:
+            $ref: "#/components/schemas/DataDeletionResponseItem"
+          type: array
+        meta:
+          $ref: "#/components/schemas/DataDeletionResponseMeta"
       type: object
     GetDataObservabilityMonitorRunStatusResponse:
       description: The response for getting the status of a data observability monitor run.
@@ -67033,7 +67321,7 @@ components:
     MetricEstimateType:
       default: count_or_gauge
       description: |-
-        Estimate type based on the queried configuration. By default, `count_or_gauge` is returned. `distribution` is returned for distribution metrics without percentiles enabled. Lastly, `percentile` is returned if `filter[pct]=true` is queried with a distribution metric.
+        Estimate type based on the queried configuration. `count_or_gauge` is returned by default, and `distribution` is returned for distribution metrics. The `filter[pct]` query parameter has no effect on this value.
       enum:
         - count_or_gauge
         - distribution
@@ -93507,25 +93795,9 @@ components:
             $ref: "#/components/schemas/RumRetentionFilterData"
           type: array
       type: object
-    RumRetentionQuotaAdaptiveConfig:
-      description: The configuration used when `mode` is `adaptive`.
-      properties:
-        max_retention_rate:
-          description: The maximum fraction of sessions to retain, in the range `(0, 1]`.
-          example: 0.5
-          exclusiveMinimum: true
-          format: double
-          maximum: 1
-          minimum: 0
-          type: number
-      required:
-        - max_retention_rate
-      type: object
     RumRetentionQuotaConfigAttributes:
       description: The RUM retention quota configuration properties.
       properties:
-        adaptive:
-          $ref: "#/components/schemas/RumRetentionQuotaAdaptiveConfig"
         custom:
           $ref: "#/components/schemas/RumRetentionQuotaCustomConfig"
         mode:
@@ -93583,8 +93855,6 @@ components:
     RumRetentionQuotaConfigUpdateAttributes:
       description: The RUM retention quota configuration properties to create or update.
       properties:
-        adaptive:
-          $ref: "#/components/schemas/RumRetentionQuotaAdaptiveConfig"
         custom:
           $ref: "#/components/schemas/RumRetentionQuotaCustomConfig"
         mode:
@@ -93650,14 +93920,13 @@ components:
       type: object
     RumRetentionQuotaMode:
       description: |-
-        The retention quota mode. `custom` enforces a fixed session limit, while
-        `adaptive` dynamically adjusts retention.
+        The retention quota mode. `custom` enforces a fixed session limit.
+        `custom` is the only supported mode.
       enum:
         - custom
-        - adaptive
       example: custom
       type: string
-      x-enum-varnames: ["CUSTOM", "ADAPTIVE"]
+      x-enum-varnames: ["CUSTOM"]
     RumRetentionQuotaReachedAction:
       description: The action to take when the session quota is reached.
       enum:
@@ -93668,7 +93937,9 @@ components:
       x-enum-varnames: ["STOP", "SLOWDOWN"]
     RumRetentionQuotaScopeType:
       default: application
-      description: The type of scope the retention quota configuration applies to.
+      description: |-
+        The type of scope the retention quota configuration applies to.
+        `application` is the only supported scope type.
       enum:
         - application
       example: application
@@ -108548,9 +108819,10 @@ components:
       description: A complete Workflow Automation definition, including its triggers, steps, and connections.
       properties:
         annotations:
-          description: "A list of annotations used in the workflow. These are like sticky notes for your workflow!"
+          description: Up to 100 text annotations displayed on the workflow canvas.
           items:
             $ref: "#/components/schemas/Annotation"
+          maxItems: 100
           type: array
         connectionEnvs:
           description: A list of connections or connection groups used in the workflow.
@@ -116981,6 +117253,431 @@ components:
           example: "number_size"
           type: string
       type: object
+    TeamsOwnershipMappingBatchError:
+      description: An error encountered while validating or applying an operation.
+      properties:
+        detail:
+          description: A human-readable explanation specific to this error.
+          example: "prefix match_type is not enabled for this org"
+          type: string
+        status:
+          description: The HTTP status code applicable to this error.
+          example: "400"
+          type: string
+        title:
+          description: A short, human-readable summary of the error.
+          example: "Bad Request"
+          type: string
+      required:
+        - status
+        - title
+      type: object
+    TeamsOwnershipMappingBatchOperation:
+      description: A single add or remove operation, applied atomically with every other operation in the request.
+      properties:
+        data:
+          $ref: "#/components/schemas/TeamsOwnershipMappingBatchOperationData"
+        op:
+          $ref: "#/components/schemas/TeamsOwnershipMappingBatchOperationOp"
+        ref:
+          $ref: "#/components/schemas/TeamsOwnershipMappingBatchOperationRef"
+      required:
+        - op
+      type: object
+    TeamsOwnershipMappingBatchOperationData:
+      description: The mapping to add. Required when `op` is `add`.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TeamsOwnershipMappingBatchOperationDataAttributes"
+        type:
+          $ref: "#/components/schemas/TeamsOwnershipMappingType"
+      required:
+        - type
+        - attributes
+      type: object
+    TeamsOwnershipMappingBatchOperationDataAttributes:
+      description: |-
+        The attributes of the mapping to add. `team_handle` and `view_name` are required
+        when `op` is `add`. At least one of `service` or `application_id` must be provided.
+      properties:
+        application_id:
+          description: |-
+            The ID of the RUM application this mapping applies to.
+            For browser applications, provide the real application UUID — the team is applied to the view regardless of service.
+            For mobile applications, omit this field (or set it to the nil UUID `00000000-0000-0000-0000-000000000000`) — the team is applied to the view and service combination across all applications.
+          example: "11111111-2222-3333-4444-555555555555"
+          format: uuid
+          type: string
+        match_type:
+          $ref: "#/components/schemas/TeamsOwnershipMatchType"
+        service:
+          description: The RUM application's service name. For browser applications, this is optional. For mobile applications, this is required and scopes the ownership to a specific service.
+          example: "web-checkout"
+          type: string
+        team_handle:
+          description: The handle of the team that owns the matched RUM views.
+          example: "team-rum"
+          type: string
+        view_name:
+          description: The RUM view name to match, or its prefix when `match_type` is `prefix`.
+          example: "/checkout"
+          type: string
+      type: object
+    TeamsOwnershipMappingBatchOperationOp:
+      description: Whether this operation adds a new mapping or removes an existing one.
+      enum:
+        - add
+        - remove
+      example: add
+      type: string
+      x-enum-varnames: ["ADD", "REMOVE"]
+    TeamsOwnershipMappingBatchOperationRef:
+      description: Identifies an existing mapping to remove. Required when `op` is `remove`.
+      properties:
+        id:
+          description: The ID of the mapping to remove.
+          example: "456"
+          type: string
+        type:
+          $ref: "#/components/schemas/TeamsOwnershipMappingType"
+      required:
+        - type
+        - id
+      type: object
+    TeamsOwnershipMappingBatchRequest:
+      description: The request body for bulk-creating and bulk-removing teams ownership mappings.
+      properties:
+        atomic:operations:
+          description: The list of add and remove operations to apply atomically.
+          items:
+            $ref: "#/components/schemas/TeamsOwnershipMappingBatchOperation"
+          type: array
+      required:
+        - atomic:operations
+      type: object
+    TeamsOwnershipMappingBatchResponse:
+      description: |-
+        The response body for the bulk create and remove operation. On success, `atomic:results`
+        contains one entry per operation. Add results appear before remove results and may not match
+        request order. Correlate add results by their `type` and `id` rather than by array position.
+        On failure, no operations were applied and `errors` describes what went wrong.
+      properties:
+        atomic:results:
+          description: |-
+            The result of each operation.
+            Add operations are processed first, then remove operations, so results may not appear
+            in the same order as the request. Present only on success.
+          items:
+            $ref: "#/components/schemas/TeamsOwnershipMappingBatchResult"
+          type: array
+        errors:
+          description: The validation or processing errors encountered. Present only when the request could not be completed.
+          items:
+            $ref: "#/components/schemas/TeamsOwnershipMappingBatchError"
+          type: array
+      type: object
+    TeamsOwnershipMappingBatchResult:
+      description: |-
+        The result of a single operation.
+        Add operations are processed first, then remove operations, so results may not appear
+        in the same order as the request. Empty for `remove` operations.
+      properties:
+        data:
+          $ref: "#/components/schemas/TeamsOwnershipMappingBatchResultData"
+      type: object
+    TeamsOwnershipMappingBatchResultData:
+      description: The mapping created by an `add` operation.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TeamsOwnershipMappingBatchResultDataAttributes"
+        id:
+          description: The unique identifier of the teams ownership mapping.
+          example: "123"
+          type: string
+        type:
+          $ref: "#/components/schemas/TeamsOwnershipMappingType"
+      required:
+        - type
+        - id
+        - attributes
+      type: object
+    TeamsOwnershipMappingBatchResultDataAttributes:
+      description: The attributes of a mapping created by an `add` operation.
+      properties:
+        application_id:
+          description: The ID of the RUM application, when one was provided.
+          example: "11111111-2222-3333-4444-555555555555"
+          format: uuid
+          type: string
+        created_at:
+          description: Timestamp when the mapping was created.
+          example: "2026-01-15T09:30:00.000Z"
+          format: date-time
+          type: string
+        created_by:
+          description: The UUID of the user who created the mapping.
+          example: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+          type: string
+        match_type:
+          $ref: "#/components/schemas/TeamsOwnershipMatchType"
+        org_id:
+          description: The ID of the organization that owns this mapping.
+          example: 123456
+          format: int64
+          type: integer
+        service:
+          description: The RUM application's service name, when one was provided.
+          example: "web-checkout"
+          type: string
+        team_handle:
+          description: The handle of the team that owns the matched RUM views.
+          example: "team-rum"
+          type: string
+        view_name:
+          description: The RUM view name to match, or its prefix when `match_type` is `prefix`.
+          example: "/checkout"
+          type: string
+      required:
+        - team_handle
+        - view_name
+        - org_id
+        - created_at
+        - created_by
+        - match_type
+      type: object
+    TeamsOwnershipMappingCreateData:
+      description: The JSON:API data envelope for a teams ownership mapping create request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TeamsOwnershipMappingCreateDataAttributes"
+        type:
+          $ref: "#/components/schemas/TeamsOwnershipMappingType"
+      required:
+        - type
+        - attributes
+      type: object
+    TeamsOwnershipMappingCreateDataAttributes:
+      description: The attributes of the teams ownership mapping to create.
+      properties:
+        application_id:
+          description: |-
+            The ID of the RUM application this mapping applies to.
+            For browser applications, provide the real application UUID — the team is applied to the view regardless of service.
+            For mobile applications, omit this field (or set it to the nil UUID `00000000-0000-0000-0000-000000000000`) — the team is applied to the view and service combination across all applications.
+          example: "11111111-2222-3333-4444-555555555555"
+          format: uuid
+          type: string
+        match_type:
+          $ref: "#/components/schemas/TeamsOwnershipMatchType"
+        service:
+          description: The RUM application's service name. For browser applications, this is optional. For mobile applications, this is required and scopes the ownership to a specific service.
+          example: "web-checkout"
+          type: string
+        team_handle:
+          description: The handle of the team that owns the matched RUM views.
+          example: "team-rum"
+          type: string
+        view_name:
+          description: The RUM view name to match, or its prefix when `match_type` is `prefix`.
+          example: "/checkout"
+          type: string
+      required:
+        - team_handle
+        - view_name
+      type: object
+    TeamsOwnershipMappingCreateRequest:
+      description: The request body for creating a teams ownership mapping.
+      properties:
+        data:
+          $ref: "#/components/schemas/TeamsOwnershipMappingCreateData"
+      required:
+        - data
+      type: object
+    TeamsOwnershipMappingResponse:
+      description: The response body for a single teams ownership mapping.
+      properties:
+        data:
+          $ref: "#/components/schemas/TeamsOwnershipMappingResponseData"
+      required:
+        - data
+      type: object
+    TeamsOwnershipMappingResponseAttributes:
+      description: The attributes of a teams ownership mapping.
+      properties:
+        application_id:
+          description: |-
+            The ID of the RUM application this mapping applies to.
+            For browser applications, this is the real application UUID.
+            For mobile applications, this is the nil UUID `00000000-0000-0000-0000-000000000000` (wildcard), meaning the ownership applies across all applications.
+          example: "11111111-2222-3333-4444-555555555555"
+          type: string
+        created_at:
+          description: Timestamp when the mapping was created.
+          example: "2026-01-15T09:30:00.000Z"
+          format: date-time
+          type: string
+        created_by:
+          description: The UUID of the user who created the mapping.
+          example: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+          type: string
+        match_type:
+          $ref: "#/components/schemas/TeamsOwnershipMatchType"
+        org_id:
+          description: The ID of the organization that owns this mapping.
+          example: 123456
+          format: int64
+          type: integer
+        service:
+          description: The RUM application's service name. For browser applications, may be empty. For mobile applications, this is the service that scopes the ownership.
+          example: "web-checkout"
+          type: string
+        team_handle:
+          description: The handle of the team that owns the matched RUM views.
+          example: "team-rum"
+          type: string
+        view_name:
+          description: The RUM view name to match, or its prefix when `match_type` is `prefix`.
+          example: "/checkout"
+          type: string
+      required:
+        - team_handle
+        - view_name
+        - service
+        - application_id
+        - org_id
+        - created_at
+        - created_by
+        - match_type
+      type: object
+    TeamsOwnershipMappingResponseData:
+      description: The JSON:API data envelope for a teams ownership mapping.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TeamsOwnershipMappingResponseAttributes"
+        id:
+          description: The unique identifier of the teams ownership mapping.
+          example: "123"
+          type: string
+        type:
+          $ref: "#/components/schemas/TeamsOwnershipMappingType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TeamsOwnershipMappingType:
+      default: teams_ownership_mappings
+      description: The type of the resource. The value should always be teams_ownership_mappings.
+      enum:
+        - teams_ownership_mappings
+      example: teams_ownership_mappings
+      type: string
+      x-enum-varnames: ["TEAMS_OWNERSHIP_MAPPINGS"]
+    TeamsOwnershipMappingsResponse:
+      description: The response body for a list of teams ownership mappings.
+      properties:
+        data:
+          description: A list of teams ownership mappings.
+          items:
+            $ref: "#/components/schemas/TeamsOwnershipMappingResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    TeamsOwnershipMatchType:
+      default: exact
+      description: How the `view_name` is matched against RUM view names.
+      enum:
+        - exact
+        - prefix
+      example: exact
+      type: string
+      x-enum-varnames: ["EXACT", "PREFIX"]
+    TeamsOwnershipRuleResponseAttributes:
+      description: The attributes of a teams ownership rule.
+      properties:
+        application_id:
+          description: |-
+            The ID of the RUM application this mapping applies to.
+            For browser applications, this is the real application UUID.
+            For mobile applications, this is the nil UUID `00000000-0000-0000-0000-000000000000` (wildcard), meaning the ownership applies across all applications.
+          example: "11111111-2222-3333-4444-555555555555"
+          type: string
+        match_type:
+          $ref: "#/components/schemas/TeamsOwnershipMatchType"
+        service:
+          description: The RUM application's service name. For browser applications, may be empty. For mobile applications, this is the service that scopes the ownership.
+          example: "web-checkout"
+          type: string
+        teams:
+          description: The teams that own the matched views, each paired with the ID of its underlying mapping.
+          items:
+            $ref: "#/components/schemas/TeamsOwnershipRuleTeamMapping"
+          type: array
+        view_name:
+          description: The RUM view name to match, or its prefix when `match_type` is `prefix`.
+          example: "/checkout"
+          type: string
+      required:
+        - teams
+        - view_name
+        - service
+        - application_id
+        - match_type
+      type: object
+    TeamsOwnershipRuleResponseData:
+      description: The JSON:API data envelope for a teams ownership rule.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TeamsOwnershipRuleResponseAttributes"
+        id:
+          description: |-
+            A deterministic identifier derived from the rule's grouping key.
+            This ID cannot be used to delete the rule directly; delete individual mappings
+            using the `mapping_id` under `teams` instead.
+          example: "3b1e2f7a9c4d6e8f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f"
+          type: string
+        type:
+          $ref: "#/components/schemas/TeamsOwnershipRuleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TeamsOwnershipRuleTeamMapping:
+      description: An individual team's ownership entry within a teams ownership rule.
+      properties:
+        mapping_id:
+          description: The ID of the underlying mapping, used to delete this team's ownership individually.
+          example: "123"
+          type: string
+        team_handle:
+          description: The handle of the owning team.
+          example: "team-rum"
+          type: string
+      required:
+        - team_handle
+        - mapping_id
+      type: object
+    TeamsOwnershipRuleType:
+      default: teams_ownership_grouped_mappings
+      description: The type of the resource. The value should always be teams_ownership_grouped_mappings.
+      enum:
+        - teams_ownership_grouped_mappings
+      example: teams_ownership_grouped_mappings
+      type: string
+      x-enum-varnames: ["TEAMS_OWNERSHIP_GROUPED_MAPPINGS"]
+    TeamsOwnershipRulesResponse:
+      description: The response body for a list of teams ownership rules.
+      properties:
+        data:
+          description: A list of teams ownership rules.
+          items:
+            $ref: "#/components/schemas/TeamsOwnershipRuleResponseData"
+          type: array
+      required:
+        - data
+      type: object
     TeamsResponse:
       description: Response with multiple teams
       properties:
@@ -123742,6 +124439,7 @@ components:
             apm_service_catalog_write: Add, modify, and delete service catalog definitions when those definitions are maintained by Datadog.
             appsec_vm_read: View infrastructure, application code, and library vulnerability findings.
             aws_configurations_manage: Manage AWS integration account configurations and related integration settings.
+            billing_edit: Edit your organization's billing information.
             billing_read: View your organization's billing information.
             bits_investigations_read: View Bits AI investigations.
             bits_investigations_write: Create and manage Bits AI investigations.
@@ -144477,6 +145175,255 @@ paths:
       tags:
         - DDSQL
       x-menu-order: 2
+  /api/v2/deletion/data/{product}:
+    post:
+      description: Creates a data deletion request by providing a query and a timeframe targeting the proper data.
+      operationId: CreateDataDeletionRequest
+      parameters:
+        - $ref: "#/components/parameters/ProductName"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      displayed_total: 100
+                      from: 1672527600000
+                      indexes:
+                        - test-index
+                        - test-index-2
+                      query:
+                        host: abc
+                        service: xyz
+                      to: 1704063600000
+                    type: create_deletion_req
+            schema:
+              $ref: "#/components/schemas/CreateDataDeletionRequestBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-01T00:00:00.000000Z"
+                        created_by: test@example.com
+                        displayed_total: 100
+                        from_time: 1672527600000
+                        is_created: true
+                        org_id: 123
+                        product: logs
+                        query: "service:xyz host:abc"
+                        starting_at: "2024-01-01T02:00:00.000000Z"
+                        status: pending
+                        to_time: 1704063600000
+                        total_unrestricted: 100
+                        updated_at: "2024-01-01T00:00:00.000000Z"
+                      id: "1"
+                      type: deletion_request
+                    meta:
+                      product: logs
+                      request_status: pending
+              schema:
+                $ref: "#/components/schemas/CreateDataDeletionResponseBody"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Precondition failed error
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Internal server error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Creates a data deletion request
+      tags:
+        - Data Deletion
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - logs_delete_data
+  /api/v2/deletion/requests:
+    get:
+      description: Gets a list of data deletion requests based on several filter parameters.
+      operationId: GetDataDeletionRequests
+      parameters:
+        - description: |-
+            The next page of the previous search. If the next_page parameter is included, the rest of the query elements are ignored.
+          example: "cGFnZTI="
+          in: query
+          name: next_page
+          required: false
+          schema:
+            type: string
+        - description: Retrieve only the requests related to the given product.
+          example: "logs"
+          in: query
+          name: product
+          required: false
+          schema:
+            type: string
+        - description: Retrieve only the requests that matches the given query.
+          example: "service:xyz host:abc"
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: Retrieve only the requests with the given status.
+          example: "pending"
+          in: query
+          name: status
+          required: false
+          schema:
+            type: string
+        - description: Sets the page size of the search.
+          example: "50"
+          in: query
+          name: page_size
+          required: false
+          schema:
+            default: 50
+            format: int64
+            maximum: 50
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-01T00:00:00.000000Z"
+                          created_by: test@example.com
+                          displayed_total: 100
+                          from_time: 1672527600000
+                          is_created: true
+                          org_id: 123
+                          product: logs
+                          query: "service:xyz host:abc"
+                          starting_at: "2024-01-01T02:00:00.000000Z"
+                          status: pending
+                          to_time: 1704063600000
+                          total_unrestricted: 100
+                          updated_at: "2024-01-01T00:00:00.000000Z"
+                        id: "1"
+                        type: deletion_request
+                    meta:
+                      next_page: "cGFnZTI="
+                      product: logs
+              schema:
+                $ref: "#/components/schemas/GetDataDeletionsResponseBody"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Internal server error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Gets a list of data deletion requests
+      tags:
+        - Data Deletion
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - logs_delete_data
+  /api/v2/deletion/requests/{id}/cancel:
+    put:
+      description: Cancels a data deletion request by providing its ID.
+      operationId: CancelDataDeletionRequest
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-01T00:00:00.000000Z"
+                        created_by: test@example.com
+                        displayed_total: 100
+                        from_time: 1672527600000
+                        is_created: true
+                        org_id: 123
+                        product: logs
+                        query: "service:xyz host:abc"
+                        starting_at: "2024-01-01T02:00:00.000000Z"
+                        status: canceled
+                        to_time: 1704063600000
+                        total_unrestricted: 100
+                        updated_at: "2024-01-01T00:00:00.000000Z"
+                      id: "1"
+                      type: deletion_request
+                    meta:
+                      product: logs
+                      request_status: canceled
+              schema:
+                $ref: "#/components/schemas/CancelDataDeletionResponseBody"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Precondition failed error
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Internal server error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Cancels a data deletion request
+      tags:
+        - Data Deletion
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - logs_delete_data
   /api/v2/deployment_gates:
     get:
       description: |-
@@ -172696,6 +173643,14 @@ paths:
           required: false
           schema:
             type: string
+        - description: |-
+            When `true`, `filter[groups]` is treated as an exclude list instead of an include list. Defaults to `false`.
+          example: false
+          in: query
+          name: filter[exclude_tags_mode]
+          required: false
+          schema:
+            type: boolean
         - description: The number of hours of look back (from now) to estimate cardinality with. If unspecified, it defaults to 0 hours.
           example: 49
           in: query
@@ -172715,7 +173670,7 @@ paths:
             format: int32
             maximum: 9
             type: integer
-        - description: A boolean, for distribution metrics only, to estimate cardinality if the metric includes additional percentile aggregators.
+        - description: Deprecated. This query parameter has no effect on the estimate.
           example: true
           in: query
           name: filter[pct]
@@ -184050,7 +185005,9 @@ paths:
     post:
       description: |-
         Query timeseries data across various data sources and
-        process the data by applying formulas and functions.
+        process the data by applying formulas and functions. Datadog recommends
+        using this endpoint over the v1 `/api/v1/query` endpoint for querying
+        timeseries data.
       operationId: QueryTimeseriesData
       requestBody:
         content:
@@ -189348,7 +190305,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a RUM retention quota configuration
       tags:
-        - RUM Retention Quota
+        - RUM Retention Quotas
       x-menu-order: 3
       x-permission:
         operator: OR
@@ -189412,7 +190369,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a RUM retention quota configuration
       tags:
-        - RUM Retention Quota
+        - RUM Retention Quotas
       x-menu-order: 1
       x-permission:
         operator: OR
@@ -189499,13 +190456,320 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create or update a RUM retention quota config
       tags:
-        - RUM Retention Quota
+        - RUM Retention Quotas
       x-codegen-request-body-name: body
       x-menu-order: 2
       x-permission:
         operator: OR
         permissions:
           - rum_retention_filters_write
+  /api/v2/rum/config/teams-ownership/mappings:
+    get:
+      description: Get the list of teams ownership mappings for your organization, optionally filtered.
+      operationId: ListTeamsOwnershipMappings
+      parameters:
+        - $ref: "#/components/parameters/TeamsOwnershipFilterViewNameParameter"
+        - $ref: "#/components/parameters/TeamsOwnershipFilterTeamHandleParameter"
+        - $ref: "#/components/parameters/TeamsOwnershipFilterApplicationIdParameter"
+        - $ref: "#/components/parameters/TeamsOwnershipFilterServiceParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          application_id: "11111111-2222-3333-4444-555555555555"
+                          created_at: "2026-01-15T09:30:00.000Z"
+                          created_by: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+                          match_type: "exact"
+                          org_id: 123456
+                          service: "web-checkout"
+                          team_handle: "team-rum"
+                          view_name: "/checkout"
+                        id: "123"
+                        type: teams_ownership_mappings
+              schema:
+                $ref: "#/components/schemas/TeamsOwnershipMappingsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List teams ownership mappings
+      tags:
+        - Rum Teams Ownership
+      x-menu-order: 1
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Create a teams ownership mapping for your organization.
+        Returns the teams ownership mapping object from the request body when the request is successful.
+      operationId: CreateTeamsOwnershipMapping
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      application_id: "11111111-2222-3333-4444-555555555555"
+                      match_type: "exact"
+                      service: "web-checkout"
+                      team_handle: "team-rum"
+                      view_name: "/checkout"
+                    type: teams_ownership_mappings
+            schema:
+              $ref: "#/components/schemas/TeamsOwnershipMappingCreateRequest"
+        description: The definition of the teams ownership mapping to create.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        application_id: "11111111-2222-3333-4444-555555555555"
+                        created_at: "2026-01-15T09:30:00.000Z"
+                        created_by: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+                        match_type: "exact"
+                        org_id: 123456
+                        service: "web-checkout"
+                        team_handle: "team-rum"
+                        view_name: "/checkout"
+                      id: "123"
+                      type: teams_ownership_mappings
+              schema:
+                $ref: "#/components/schemas/TeamsOwnershipMappingResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a teams ownership mapping
+      tags:
+        - Rum Teams Ownership
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rum/config/teams-ownership/mappings/operations:
+    post:
+      description: |-
+        Add and remove teams ownership mappings for your organization in a single atomic request, following
+        the JSON:API [atomic operations extension](https://jsonapi.org/ext/atomic/).
+        Operations are applied together: if any operation is invalid, none of the operations are applied.
+        Add operations are processed before remove operations, so results may not appear in the same
+        order as the request.
+      operationId: CreateTeamsOwnershipMappingsBatch
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  atomic:operations:
+                    - data:
+                        attributes:
+                          application_id: "11111111-2222-3333-4444-555555555555"
+                          match_type: "exact"
+                          service: "web-checkout"
+                          team_handle: "team-rum"
+                          view_name: "/checkout"
+                        type: teams_ownership_mappings
+                      op: add
+                    - op: remove
+                      ref:
+                        id: "456"
+                        type: teams_ownership_mappings
+            schema:
+              $ref: "#/components/schemas/TeamsOwnershipMappingBatchRequest"
+        description: The list of add and remove operations to apply atomically.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    atomic:results:
+                      - data:
+                          attributes:
+                            application_id: "11111111-2222-3333-4444-555555555555"
+                            created_at: "2026-01-15T09:30:00.000Z"
+                            created_by: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+                            match_type: "exact"
+                            org_id: 123456
+                            service: "web-checkout"
+                            team_handle: "team-rum"
+                            view_name: "/checkout"
+                          id: "123"
+                          type: teams_ownership_mappings
+                      - {}
+              schema:
+                $ref: "#/components/schemas/TeamsOwnershipMappingBatchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    errors:
+                      - detail: "prefix match_type is not enabled for this org"
+                        status: "400"
+                        title: "Bad Request"
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: |-
+            Bad Request. One or more operations failed validation, so none of the operations were applied.
+            Errors are returned in the JSON:API atomic operations error format rather than the standard error response.
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found. One or more mappings requested for removal do not exist.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict. One or more mappings requested for creation already exist.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Bulk create and remove teams ownership mappings
+      tags:
+        - Rum Teams Ownership
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rum/config/teams-ownership/mappings/{id}:
+    delete:
+      description: Delete a specific teams ownership mapping from your organization.
+      operationId: DeleteTeamsOwnershipMapping
+      parameters:
+        - $ref: "#/components/parameters/TeamsOwnershipMappingIdParameter"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a teams ownership mapping
+      tags:
+        - Rum Teams Ownership
+      x-menu-order: 4
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a specific teams ownership mapping from your organization.
+      operationId: GetTeamsOwnershipMapping
+      parameters:
+        - $ref: "#/components/parameters/TeamsOwnershipMappingIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        application_id: "11111111-2222-3333-4444-555555555555"
+                        created_at: "2026-01-15T09:30:00.000Z"
+                        created_by: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+                        match_type: "exact"
+                        org_id: 123456
+                        service: "web-checkout"
+                        team_handle: "team-rum"
+                        view_name: "/checkout"
+                      id: "123"
+                      type: teams_ownership_mappings
+              schema:
+                $ref: "#/components/schemas/TeamsOwnershipMappingResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a teams ownership mapping
+      tags:
+        - Rum Teams Ownership
+      x-menu-order: 3
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rum/config/teams-ownership/rules:
+    get:
+      description: |-
+        Get the list of teams ownership rules for your organization, optionally filtered.
+        Rules group the underlying mappings by `view_name`, `application_id`, `service`, and `match_type`,
+        collapsing every team that owns the same view into a single entry.
+      operationId: ListTeamsOwnershipRules
+      parameters:
+        - $ref: "#/components/parameters/TeamsOwnershipFilterViewNameParameter"
+        - $ref: "#/components/parameters/TeamsOwnershipFilterTeamHandleParameter"
+        - $ref: "#/components/parameters/TeamsOwnershipFilterApplicationIdParameter"
+        - $ref: "#/components/parameters/TeamsOwnershipFilterServiceParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          application_id: "11111111-2222-3333-4444-555555555555"
+                          match_type: "exact"
+                          service: "web-checkout"
+                          teams:
+                            - mapping_id: "123"
+                              team_handle: "team-rum"
+                          view_name: "/checkout"
+                        id: "3b1e2f7a9c4d6e8f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f"
+                        type: teams_ownership_grouped_mappings
+              schema:
+                $ref: "#/components/schemas/TeamsOwnershipRulesResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List teams ownership rules
+      tags:
+        - Rum Teams Ownership
+      x-menu-order: 5
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/rum/events:
     get:
       description: |-
@@ -221613,6 +222877,9 @@ tags:
       [Dashboards documentation](https://docs.datadoghq.com/dashboards/) for more
       information.
     name: Dashboards
+  - description: |-
+      The Data Deletion API allows the user to target and delete data from the allowed products. It's enabled for Logs and depends on the `logs_delete_data` permission.
+    name: Data Deletion
   - description: Manage and run data observability monitors.
     name: Data Observability
   - description: |-
@@ -221927,7 +223194,7 @@ tags:
     name: RUM Remote Config
   - description: |-
       Manage RUM retention quota configurations for your organization's RUM applications.
-    name: RUM Retention Quota
+    name: RUM Retention Quotas
   - description: View and manage Reference Tables in your organization.
     name: Reference Tables
   - description: |-
@@ -221975,6 +223242,10 @@ tags:
   - description: |-
       Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization.
     name: Rum Retention Filters
+  - description: |-
+      Manage teams ownership mappings between RUM views and the teams that own them.
+      See <https://docs.datadoghq.com/real_user_monitoring/ownership_of_views/>.
+    name: Rum Teams Ownership
   - description: |-
       Provision Datadog users and teams using SCIM APIs.
 
