@@ -79,25 +79,9 @@ The **Your PRs** section consolidates your personal action items from source con
 
 ### GitHub
 
-The **GitHub** tab consolidates your personal action items from GitHub, displaying PRs in the following states:
+The **GitHub** tab surfaces the pull requests that need your attention, grouped by review state, so you can act on them without leaving the Homepage. 
 
-- **Needs your review**
-- **Returned to you**  
-- **Approved**  
-- **Waiting for reviewers**
-- **Drafts**
-- **Recently merged**
-
-Each PR includes:
-
-- **Repository and PR number**  
-- **Title**  
-- **Status** (Open / Draft / Merged)  
-- **Assignee / Reviewer**  
-
-After you sign in with your GitHub account, the tab loads your pull requests, grouped by status.
-
-If your organization has not configured the GitHub integration, this tab displays an empty state with a prompt to enable it from the [GitHub integration tile][1]. To read PRs from GitHub, this integration requires the following permissions:
+After you sign in with your GitHub account, the tab loads your pull requests, grouped by status. If your organization has not configured the GitHub integration, this tab displays an empty state with a prompt to enable it from the [GitHub integration tile][1]. To read PRs from GitHub, this integration requires the following permissions:
 
 - Members: Read
 - Metadata: Read
@@ -110,28 +94,9 @@ If you have multiple GitHub orgs connected within Datadog, users must have the D
 
 ### GitLab
 
-The **GitLab** tab consolidates your personal action items from GitLab, displaying merge requests in the following states:
+The **GitLab** tab surfaces the merge requests that need your attention, grouped by review state. For each one, it shows review and approval status, pipeline status and merge blockers, and resolved and unresolved discussion counts. 
 
-- **Needs your review**
-- **Returned to you**
-- **Approved**
-- **Waiting for reviewers**
-- **Drafts**
-- **Recently merged**
-
-Each merge request includes: 
-
-- **Title and MR number**, with the author who opened it
-- **Project or repository context** and **labels**
-- **Status** (for example, Open, Draft, or Merged)
-- **Pipeline status**, including pipeline failures and other merge blockers
-- **Reviewers, approvers, and review state**
-- **Comment counts**, including resolved and unresolved discussion counts
-- **Age**, shown as the time since the last update
-
-After you sign in with your GitLab account, the tab loads your merge requests, grouped by status. For setup steps, see [GitLab Source Code][2].
-
-If your organization has not configured the GitLab Source Code integration, this tab displays an empty state with a prompt to enable it from the [GitLab Source Code integration tile][2].
+After you sign in with your GitLab account, the tab loads your merge requests, grouped by status. If your organization has not configured the GitLab Source Code integration, this tab displays an empty state with a prompt to enable it from the [GitLab Source Code integration tile][2].
 
 If you have multiple GitLab instances connected within Datadog, use the **Instance** selector to choose which instance to view. 
 
@@ -143,68 +108,21 @@ The **Your Tickets** section consolidates the items assigned to you across Jira,
 
 ### Jira
 
-The **Jira** tab lists the Jira tickets assigned to you, grouped by status category: **To Do**, **In Progress**, and **Done**. Each ticket includes: 
-
-- **Key**
-- **Title** (with a comment count when comments exist)
-- **Status** 
-- **Created**
-- **Updated**
-- **Priority**
-- **Due**
-
-After setup, your assigned tickets appear automatically. For setup steps, see [Configure a Jira webhook][3].
+The **Jira** tab lists the Jira tickets assigned to you, grouped by status. After setup, your assigned tickets appear automatically. For setup steps, see [Configure a Jira webhook][3].
 
 ### Linear
 
-The **Linear** tab lists the Linear issues assigned to you, grouped by status category: **To Do**, **In Progress**, and **Done**. Each issue includes: 
-
-- **Key**
-- **Title**
-- **Status**
-- **Created**
-- **Updated**
-- **Priority**
-- **Due**
-
-After setup, your assigned issues appear automatically. For setup steps, see [Configure a Linear webhook][4].
+The **Linear** tab lists the Linear issues assigned to you, grouped by status. After setup, your assigned issues appear automatically. For setup steps, see [Configure a Linear webhook][4].
 
 ### Work Items
 
-The **Work Items** tab lists the Datadog Work Management work items assigned to you, grouped by status: **Open**, **In Progress**, and **Closed**. Each group shows a count.
-
-Each work item includes:
-
-- **Case key**
-- **Title** (with a comment count when comments exist)
-- **Status**
-- **Updated**
-- **Priority**
-- **Due date**
-- **Assignee**
-
-Work items appear automatically when they are assigned to you. For more information, see [Work Management][6].
+The **Work Items** tab lists the Datadog Work Management work items assigned to you, grouped by status. Work items appear automatically when they are assigned to you. For more information, see [Work Management][6].
 
 ## Services and entities
 
 {{< img src="tracing/software_catalog/services_entities_table.png" alt="Services & entities for the user" style="width:100%;" >}}  
 
-The **Services & Entities** section displays your team's key services and entities, aggregated automatically from linked Datadog products and integrations. You can filter by recently viewed entities, entities owned by your team, or entities you've favorited.
-
-Each entity includes the following information:
-
-| Field | Description |
-|--------|-------------|
-| **Type** | The entity type (for example, Service, Monitor, or Incident). |
-| **Name** | The entity's display name or identifier. |
-| **Scorecards** | A summary of the entity's health based on reliability, performance, and error budgets. |
-| **Last Deploy** | The most recent deployment detected by APM or CI integrations. |
-| **Monitors** | The number and status of monitors associated with the entity. |
-| **Issues** | Active issues related to the entity, aggregated from linked tracking tools. |
-| **Incidents** | Open incidents associated with the team's entities. |
-| **Dashboards** | Key dashboards linked to the entity. |
-| **On-Call** | The current on-call responder for the team or entity. |
-
+The **Services & Entities** section displays your team's key services and entities, aggregated automatically from linked Datadog products and integrations. Each entry summarizes operational context for the entity, such as scorecard health, recent deployments, monitor and incident status, linked dashboards, and current on-call. You can filter by recently viewed entities, entities owned by your team, or entities you've favorited. 
 
 ## Extend the Homepage with custom apps 
 
