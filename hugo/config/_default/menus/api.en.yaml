@@ -19282,6 +19282,88 @@ menu:
           - OrderRetentionFilters
         unstable: []
         order: 6
+    - name: Rum Teams Ownership
+      url: /api/latest/rum-teams-ownership/
+      identifier: rum-teams-ownership
+      generated: true
+    - name: List teams ownership rules
+      url: /api/latest/rum-teams-ownership/list-teams-ownership-rules/
+      identifier: rum-teams-ownership-list-teams-ownership-rules
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamsOwnershipRules
+        unstable:
+          - v2
+        order: 5
+    - name: Get a teams ownership mapping
+      url: /api/latest/rum-teams-ownership/get-a-teams-ownership-mapping/
+      identifier: rum-teams-ownership-get-a-teams-ownership-mapping
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamsOwnershipMapping
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a teams ownership mapping
+      url: /api/latest/rum-teams-ownership/delete-a-teams-ownership-mapping/
+      identifier: rum-teams-ownership-delete-a-teams-ownership-mapping
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTeamsOwnershipMapping
+        unstable:
+          - v2
+        order: 4
+    - name: Bulk create and remove teams ownership mappings
+      url: /api/latest/rum-teams-ownership/bulk-create-and-remove-teams-ownership-mappings/
+      identifier: rum-teams-ownership-bulk-create-and-remove-teams-ownership-mappings
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamsOwnershipMappingsBatch
+        unstable:
+          - v2
+        order: 6
+    - name: Create a teams ownership mapping
+      url: /api/latest/rum-teams-ownership/create-a-teams-ownership-mapping/
+      identifier: rum-teams-ownership-create-a-teams-ownership-mapping
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamsOwnershipMapping
+        unstable:
+          - v2
+        order: 2
+    - name: List teams ownership mappings
+      url: /api/latest/rum-teams-ownership/list-teams-ownership-mappings/
+      identifier: rum-teams-ownership-list-teams-ownership-mappings
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamsOwnershipMappings
+        unstable:
+          - v2
+        order: 1
     - name: SCIM
       url: /api/latest/scim/
       identifier: scim
