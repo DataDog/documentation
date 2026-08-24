@@ -7891,11 +7891,16 @@ menu:
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_threat_intelligence
       weight: 102
+    - name: Global Known-Good Indicators
+      url: security/cloud_siem/ingest_and_enrich/global_known_good_indicators
+      parent: cloud_siem_ingest_and_enrich
+      identifier: cloud_siem_global_known_good_indicators
+      weight: 103
     - name: Open Cybersecurity Schema Framework
       url: security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_open_cybersecurity_schema_framework
-      weight: 103
+      weight: 104
     - name: OCSF Processor
       url: security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/ocsf_processor
       parent: cloud_siem_open_cybersecurity_schema_framework
