@@ -31439,7 +31439,7 @@ components:
           type: string
         dataset_id:
           description: The identifier of the dataset, or `null` if not set.
-          example: "MW5vdGVib29rX2NlbGw6ZDI0ZTM2MWMtZDFlNC00NDYwLWIyOWUtNTg3YTczMzA3MDFm"
+          example: "MW5vdGVib29rX2NlbGw6MDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAw"
           nullable: true
           type: string
         description:
@@ -123989,7 +123989,6 @@ components:
             apm_service_catalog_write: Add, modify, and delete service catalog definitions when those definitions are maintained by Datadog.
             appsec_vm_read: View infrastructure, application code, and library vulnerability findings.
             aws_configurations_manage: Manage AWS integration account configurations and related integration settings.
-            billing_edit: Edit your organization's billing information.
             billing_read: View your organization's billing information.
             bits_investigations_read: View Bits AI investigations.
             bits_investigations_write: Create and manage Bits AI investigations.
@@ -186897,7 +186896,7 @@ paths:
       operationId: ListDatasetReportSchedules
       parameters:
         - description: The identifier of the published dataset to retrieve report schedules for.
-          example: "MW5vdGVib29rX2NlbGw6ZDI0ZTM2MWMtZDFlNC00NDYwLWIyOWUtNTg3YTczMzA3MDFm"
+          example: "MW5vdGVib29rX2NlbGw6MDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAw"
           in: path
           name: dataset_id
           required: true
@@ -186913,7 +186912,7 @@ paths:
                     data:
                       - attributes:
                           cell_id: "sevhjcis"
-                          dataset_id: "MW5vdGVib29rX2NlbGw6ZDI0ZTM2MWMtZDFlNC00NDYwLWIyOWUtNTg3YTczMzA3MDFm"
+                          dataset_id: "MW5vdGVib29rX2NlbGw6MDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAw"
                           description: "This is a scheduled notebook dataset report."
                           file_row_limit: 5000
                           inline_row_limit: 10
