@@ -11,19 +11,19 @@ further_reading:
   text: "Start your day with the IDP Homepage"
 - link: "/integrations/github/"  
   tag: "Documentation"  
-  text: "Learn about the GitHub Integration"
+  text: "Learn about the GitHub integration"
 - link: "/integrations/gitlab-source-code/"  
   tag: "Documentation"  
-  text: "Learn about the GitLab Integration"
+  text: "Learn about the GitLab Source Code integration"
 - link: "/integrations/jira/#configure-a-jira-webhook"  
   tag: "Documentation"  
-  text: "Learn about the Jira Integration"
+  text: "Learn about the Jira integration"
 - link: "/integrations/linear/#configure-a-linear-webhook"  
   tag: "Documentation"  
-  text: "Learn about the Linear Integration"
+  text: "Learn about the Linear integration"
 ---
 
-{{< img src="tracing/software_catalog/idp_homepage.png" alt="IDP Homepage showing a personalized view of pull requests awaiting review and tickets" style="width:100%;" >}} 
+{{< img src="tracing/software_catalog/idp_homepage.png" alt="The IDP Homepage showing pull requests awaiting review and assigned tickets." style="width:100%;" >}}
 
 ## Overview
 
@@ -45,11 +45,11 @@ The Homepage aggregates data from your Datadog integrations. To populate the tas
 
 ## Configure the Homepage 
 
-To personalize the Homepage, click **Configure** at the top of the [IDP Homepage][5]. The **Homepage settings** panel opens with two tabs: **Section layout** and **Integrations**. After you make changes, click **Save** to apply them, or **Cancel** to discard them. 
+Click **Configure** at the top of the [IDP Homepage][5] to personalize the page. The **Homepage settings** panel opens with two tabs: **Section layout** and **Integrations**. After you make changes, click **Save** to apply them, or **Cancel** to discard them.
 
 ### Section layout
 
-The **Section layout** tab controls which sections appear on the Homepage and the order in which they display. The available sections are **Your PRs**, **Your Tickets**, **Services & Entities**, and **Apps**. 
+The **Section layout** tab controls which sections appear on the Homepage and the order in which they display. The available sections are: **Your PRs**, **Your Tickets**, **Services & Entities**, and **Apps**.
 
 - To reorder a section, drag it by its handle to a new position.
 - To show or hide a section, click the visibility icon next to it.
@@ -57,7 +57,7 @@ The **Section layout** tab controls which sections appear on the Homepage and th
 
 ### Integrations 
 
-The **Integrations** tab controls which integrations are enabled and what each one shows on the Homepage. Integrations are grouped by the section they populate, such as **PRs** and **Work Items**. 
+The **Integrations** tab controls which integrations are enabled and what each shows on the Homepage. Integrations are grouped by the section they populate, such as **PRs** and **Work Items**.
 
 Each integration has a toggle to enable or disable it. When you disable an integration, its data no longer appears on the Homepage. Depending on the integration, you can also: 
 
@@ -66,9 +66,9 @@ Each integration has a toggle to enable or disable it. When you disable an integ
 
 ## Your PRs
 
-The **Your PRs** section consolidates your personal action items from source control, so you can track the pull requests and merge requests assigned to you without leaving the Homepage. Switch between the **GitHub** and **GitLab** tabs to view each source
+The **Your PRs** section consolidates your personal action items from source control, so you can track the pull requests and merge requests assigned to you without leaving the Homepage. Switch between the **GitHub** and **GitLab** tabs to view each source.
 
-{{< img src="tracing/software_catalog/your_prs_table.png" alt="PRs assigned to the user" style="width:100%;" >}}  
+{{< img src="tracing/software_catalog/your_prs_table.png" alt="The Your PRs section showing GitHub pull requests grouped by status." style="width:100%;" >}}
 
 ### GitHub
 
@@ -78,7 +78,8 @@ The **GitHub** tab consolidates your personal action items from GitHub, displayi
 - **Returned to you**  
 - **Approved**  
 - **Waiting for reviewers**
-- **Recently merged**  
+- **Drafts**
+- **Recently merged**
 
 Each PR includes:
 
@@ -87,7 +88,7 @@ Each PR includes:
 - **Status** (Open / Draft / Merged)  
 - **Assignee / Reviewer**  
 
-This tab requires two setup steps, in order: an administrator connects the GitHub integration for the organization, and each user signs in with their own GitHub account. After you authorize access, the tab loads your pull requests, grouped by status. 
+After you sign in with your GitHub account, the tab loads your pull requests, grouped by status.
 
 If your organization has not configured the GitHub integration, this tab displays an empty state with a prompt to enable it from the [GitHub integration tile][1]. To read PRs from GitHub, this integration requires the following permissions:
 
@@ -104,7 +105,7 @@ If you have multiple GitHub orgs connected within Datadog, users must have the D
 
 ### GitLab
 
-The **GitLab** tab consolidates your personal action items from GitHub, displaying merge requests in the following states: 
+The **GitLab** tab consolidates your personal action items from GitLab, displaying merge requests in the following states:
 
 - **Needs your review**
 - **Returned to you**
@@ -123,9 +124,9 @@ Each merge request includes:
 - **Comment counts**, including resolved and unresolved discussion counts
 - **Age**, shown as the time since the last update
 
-Like GitHub, this tab requires two setup steps, in order: an administrator connects the GitLab integration for the organization, and each user signs in with their own GitLab account. After you authorize access, the tab loads your merge requests, grouped by status. 
+After you sign in with your GitLab account, the tab loads your merge requests, grouped by status. For setup steps, see [GitLab Source Code][2].
 
-If your organization has not configured the GitLab integration, this tab displays an empty state with a prompt to enable it from the GitLab integration tile. For setup steps, see [GitLab Source Code][2]. 
+If your organization has not configured the GitLab Source Code integration, this tab displays an empty state with a prompt to enable it from the [GitLab Source Code integration tile][2].
 
 If you have multiple GitLab instances connected within Datadog, use the **Instance** selector to choose which instance to view. 
 
@@ -133,7 +134,7 @@ If you have multiple GitLab instances connected within Datadog, use the **Instan
 
 The **Your Tickets** section consolidates the items assigned to you across Jira, Linear, and Datadog Work Management, so you can track your open work without leaving the Homepage. Switch between the **Jira**, **Linear**, and **Work Items** tabs to view each source, and use **Display** to change how items are shown.
 
-{{< img src="tracing/software_catalog/your_tickets_table.png" alt="Tickets assigned to the user" style="width:100%;" >}}  
+{{< img src="tracing/software_catalog/your_tickets_table.png" alt="The Your Tickets section showing Jira tickets grouped by status." style="width:100%;" >}}
 
 ### Jira
 
@@ -148,7 +149,7 @@ The **Jira** tab lists the Jira tickets assigned to you, grouped by status categ
 - **Due**
 - **Assignee**
 
-An administrator configures the Jira integration and sets up a Jira webhook so that issue events reach Datadog. After setup, your assigned tickets appear automatically. For setup steps, see [Configure a Jira webhook][3].
+After setup, your assigned tickets appear automatically. For setup steps, see [Configure a Jira webhook][3].
 
 ### Linear
 
@@ -162,7 +163,7 @@ The **Linear** tab lists the Linear issues assigned to you, grouped by status ca
 - **Priority**
 - **Due**
 
-An administrator authorizes the Linear integration for the organization. After setup, Datadog detects your assigned issues, and they appear automatically. For setup steps, see [Linear][4]. 
+After setup, your assigned issues appear automatically. For setup steps, see [Configure a Linear webhook][4].
 
 ### Work Items
 
