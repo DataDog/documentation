@@ -31,7 +31,8 @@ instances:
 
 The `collect_schemas` options available and their defaults differ by database engine.
 
-**PostgreSQL**
+{{< tabs >}}
+{{% tab "Postgres" %}}
 
 | Option | Default | Description |
 |---|---|---|
@@ -50,8 +51,9 @@ collect_schemas:
 <div class="alert alert-warning">Whether partitions count toward PostgreSQL's <code>max_tables</code> limit depends on the partitioning style. Tables using native declarative partitioning (<code>PARTITION BY</code>, available in PostgreSQL 10 and later) count as a single table, regardless of how many partitions they have. Tables partitioned using table inheritance (<code>INHERITS</code>)—the only partitioning method on PostgreSQL 9.6, and still supported on later versions—are reported as separate tables: the parent and each child table count individually toward <code>max_tables</code>. Heavily inheritance-partitioned databases can reach the default limit of 300 with far fewer logical tables than expected, and can crowd out unrelated tables from collection. If tables are missing from the Schemas page, check whether the database uses inheritance-based partitioning and raise <code>max_tables</code> to account for the total partition count. See <a href="/database_monitoring/setup_postgres/advanced_configuration/#handling-many-relations">Handling many relations</a> for more information.</div>
 
 Raising `max_tables` increases the cost of each collection run. On instances with a large number of tables, also consider raising `max_query_duration` and `collection_interval` to reduce load on the database.
+{{% /tab %}}
 
-**SQL Server**
+{{% tab "SQL Server" %}}
 
 | Option | Default | Description |
 |---|---|---|
@@ -64,8 +66,9 @@ collect_schemas:
   enabled: true
   max_tables: 1000
 ```
+{{% /tab %}}
 
-**MySQL**
+{{% tab "MySQL" %}}
 
 | Option | Default | Description |
 |---|---|---|
@@ -78,6 +81,8 @@ collect_schemas:
   enabled: true
   collection_interval: 300
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Tables overview
 
