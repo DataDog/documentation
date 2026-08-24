@@ -6876,11 +6876,6 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_opentelemetry
       weight: 214
-    - name: Prometheus
-      url: observability_pipelines/sources/prometheus/
-      parent: observability_pipelines_sources
-      identifier: observability_pipelines_sources_prometheus
-      weight: 215
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
@@ -7046,11 +7041,6 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tag_cardinality_control
       weight: 322
-    - name: Tail-Based Sampling
-      url: observability_pipelines/processors/tail_based_sampling
-      parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_tail_based_sampling
-      weight: 323
     - name: Throttle
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
@@ -7096,11 +7086,6 @@ menu:
       url: observability_pipelines/destinations/databricks/
       parent: observability_pipelines_destinations
       weight: 407
-    - name: Datadog APM
-      identifier: observability_pipelines_datadog_apm
-      url: observability_pipelines/destinations/datadog_apm/
-      parent: observability_pipelines_destinations
-      weight: 408
     - name: Datadog Archives
       identifier: observability_pipelines_destinations_datadog_archives
       url: observability_pipelines/destinations/datadog_archives/
@@ -7166,11 +7151,6 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
       weight: 421
-    - name: OpenTelemetry
-      url: observability_pipelines/destinations/opentelemetry/metrics/
-      parent: observability_pipelines_destinations
-      identifier: observability_pipelines_destinations_opentelemetry
-      weight: 422
     - name: Prometheus
       url: /observability_pipelines/destinations/prometheus/
       parent: observability_pipelines_destinations

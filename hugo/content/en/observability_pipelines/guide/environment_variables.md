@@ -50,9 +50,6 @@ Some Observability Pipelines components require setting up environment variables
 ### OpenTelemetry
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/opentelemetry %}}
 
-### Prometheus
-{{% observability_pipelines/configure_existing_pipelines/source_env_vars/prometheus %}}
-
 ### Socket
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/socket %}}
@@ -131,14 +128,6 @@ Some Observability Pipelines components require setting up environment variables
 
 ### OpenSearch
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
-
-### OpenTelemetry
-
-**Metrics**
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_metrics %}}
-
-**Traces**
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_traces %}}
 
 ### Prometheus
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/prometheus %}}
