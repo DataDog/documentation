@@ -292,8 +292,8 @@ You must have edit access to restore general access to a restricted application.
 [7]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#core-web-vitals
 [8]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=ios#mobile-vitals
 [9]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#mobile-vitals
-[10]: /real_user_monitoring/application_monitoring/ios/web_view_tracking/
-[11]: /real_user_monitoring/application_monitoring/android/web_view_tracking/
+[10]: /real_user_monitoring/setup/enrich_rum_data/track_navigation_across_web_views/?platform=ios
+[11]: /real_user_monitoring/setup/enrich_rum_data/track_navigation_across_web_views/?platform=android
 [12]: /session_replay/browser/
 [13]: /session_replay/privacy_options?platform=browser
 [14]: /session_replay/dev_tools

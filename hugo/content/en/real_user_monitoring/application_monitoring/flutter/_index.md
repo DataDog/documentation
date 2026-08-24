@@ -29,7 +29,7 @@ To get started with RUM for Flutter, create an application and configure the Flu
   {{< nextlink href="/real_user_monitoring/application_monitoring/flutter/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes and widgets, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=flutter">}}<u>Track UI Latency</u>: Monitor view timings and mobile vitals to understand your app's performance from a user's perspective.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/flutter/frustration_signals">}}<u>Frustration Signals</u>: Identify the highest points of user friction in your Flutter application.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/flutter/web_view_tracking/?tab=flutter">}}
+  {{< nextlink href="/real_user_monitoring/setup/enrich_rum_data/track_navigation_across_web_views/?platform=flutter">}}
   <u>Web View tracking</u>: Monitor web views and eliminate blind spots in your mobile applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/flutter/integrated_libraries">}}
   <u>Integrated Libraries</u>: Import integrated libraries for your Flutter applications.{{< /nextlink >}}
