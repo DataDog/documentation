@@ -44,7 +44,7 @@ The logical flow of retention filters is the following:
 
 - Each event is evaluated against your filters in sequence.
 - When an event matches a filter, the retention rate decides retention for the whole session. Either way, the event is not evaluated against the following filters, which is why the **order of retention filters matters**.
-- Once a session is retained, it is available in the Session Explorer and other RUM pages, and its later events are kept automatically instead of going through the filters.
+- After a session is retained, it is available in the Session Explorer and other RUM pages, and its later events are kept automatically instead of going through the filters.
 
 **Notes**:
 
@@ -121,7 +121,7 @@ Custom retention filters specify which sessions to keep, rather than which to ex
 
 To keep a single filter from matching a subset of events, add exclusions **inside that filter's query**. For example:
 
-- Adding `-version:(1* OR 2*)` to a retention filter ensures that filter never keeps events from older versions 1 and 2 of your application.
+- Adding `-version:(1* OR 2*)` to a retention filter helps ensure that filter never keeps events from older versions 1 and 2 of your application.
 - Adding `-@device.type:Bot` to a retention filter excludes search engine crawlers and other self-declared bots from that filter.
 - Adding `-@geo.country:"South Korea"` to a retention filter excludes sessions from South Korea from that filter.
 
@@ -181,7 +181,7 @@ To delete a filter:
 
 #### Disable a filter
 
-Disabled filters simply ignore events. A disabled custom retention filter makes no sampling decision, and a disabled exclusion filter excludes no event.
+Disabled filters ignore events. A disabled custom retention filter makes no sampling decision, and a disabled exclusion filter excludes no event.
 
 Use the toggle to the right of the filter to disable or enable it.
 
