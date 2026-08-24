@@ -95704,6 +95704,8 @@ components:
           type: array
         repository:
           $ref: "#/components/schemas/ScaRequestDataAttributesRepository"
+        scan_start_timestamp:
+          $ref: "#/components/schemas/ScaRequestDataAttributesScanStartTimestamp"
         service:
           description: The name of the service or application being analyzed.
           type: string
@@ -95754,24 +95756,26 @@ components:
           type: array
         group:
           description: The group or organization namespace of the dependency (e.g., Maven group ID).
+          nullable: true
           type: string
         is_dev:
           description: Indicates whether this is a development-only dependency not used in production.
           type: boolean
         is_direct:
           description: Indicates whether this is a direct dependency (as opposed to a transitive one).
+          nullable: true
           type: boolean
         language:
           description: The programming language ecosystem of this dependency (e.g., java, python, javascript).
           type: string
         locations:
-          description: The list of source file locations where this dependency is declared.
-          items:
-            $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItems"
-          type: array
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocations"
         name:
           description: The name of the dependency package.
           type: string
+        opaque:
+          description: Indicates whether dependency details are intentionally opaque.
+          type: boolean
         package_manager:
           description: The package manager responsible for this dependency (e.g., maven, pip, npm).
           type: string
@@ -95783,21 +95787,43 @@ components:
           items:
             $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsReachableSymbolPropertiesItems"
           type: array
+        requires_transitive_enrichment:
+          description: Indicates whether this dependency requires transitive dependency enrichment.
+          type: boolean
+        target_frameworks:
+          description: The target framework identifiers associated with this dependency.
+          items:
+            description: A target framework identifier.
+            type: string
+          type: array
         version:
           description: The version of the dependency.
+          nullable: true
+          type: string
+        version_constraint:
+          description: Indicates whether the version value represents a version constraint.
+          type: boolean
+        version_range:
+          description: The version range associated with this dependency when a manifest declares a range.
           type: string
       type: object
+    ScaRequestDataAttributesDependenciesItemsLocations:
+      description: The list of source file locations where this dependency is declared.
+      items:
+        $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItems"
+      nullable: true
+      type: array
     ScaRequestDataAttributesDependenciesItemsLocationsItems:
       description: The source code location where a dependency is declared, including block, name, namespace, and version positions within the file.
       properties:
         block:
           $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition"
         name:
-          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition"
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsNullableFilePosition"
         namespace:
-          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition"
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsNullableFilePosition"
         version:
-          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition"
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsNullableFilePosition"
       type: object
     ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition:
       description: A range within a file defined by a start and end position, along with the file name.
@@ -95806,6 +95832,24 @@ components:
           $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition"
         file_name:
           description: The name or path of the file containing this location.
+          type: string
+        role:
+          description: The semantic role associated with this file location.
+          type: string
+        start:
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition"
+      type: object
+    ScaRequestDataAttributesDependenciesItemsLocationsItemsNullableFilePosition:
+      description: A nullable range within a file defined by a start and end position, along with the file name.
+      nullable: true
+      properties:
+        end:
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition"
+        file_name:
+          description: The name or path of the file containing this location.
+          type: string
+        role:
+          description: The semantic role associated with this file location.
           type: string
         start:
           $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition"
@@ -95863,6 +95907,20 @@ components:
         url:
           description: The URL of the repository.
           type: string
+      type: object
+    ScaRequestDataAttributesScanStartTimestamp:
+      description: The time when the SCA scan started.
+      nullable: true
+      properties:
+        nanos:
+          description: Non-negative fractions of a second at nanosecond resolution.
+          format: int32
+          maximum: 2147483647
+          type: integer
+        seconds:
+          description: Seconds of UTC time since Unix epoch.
+          format: int64
+          type: integer
       type: object
     ScaRequestDataAttributesVulnerabilitiesItems:
       description: A vulnerability entry from the Software Bill of Materials (SBOM), describing a known security issue and the components it affects.
