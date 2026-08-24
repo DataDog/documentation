@@ -403,7 +403,7 @@ Nothing special is required. They appear as containers and can be bounded, exclu
 
 ### Native sidecars (`spec.initContainers` with `restartPolicy: Always`)
 
-Kubernetes 1.29+ allows a long-running sidecar to be declared in `initContainers` with `restartPolicy: Always`, the [native sidecar][7] pattern. It runs for the pod's whole lifetime but lives in a different field of the pod spec:
+Kubernetes 1.29+ allows a long-running sidecar to be declared in `initContainers` with `restartPolicy: Always`, the [native sidecar][4] pattern. It runs for the pod's whole lifetime but lives in a different field of the pod spec:
 
 ```yaml
 apiVersion: apps/v1
@@ -446,7 +446,7 @@ Points to be aware of:
 - `restartPolicy: Always` is what distinguishes them. Ordinary init containers (those that run to completion before the application starts) are not native sidecars and are not managed by a DPA.
 - **Cost and savings figures may under-count native sidecars.** Their resource requests are reported under a separate aggregation, so the cost figures shown for a workload with native sidecars can look inconsistent with its observed usage. This is a known limitation that affects the cost display only; recommendations are unaffected.
 - **Injected sidecars** (such as Istio's) are added by a mutating admission webhook at pod level and never appear in the Deployment manifest. They are still picked up, because the container list is reconciled from running pods rather than from the workload manifest alone.
-- **Do not exclude autoscaled containers from Agent collection.** A `DatadogPodAutoscaler` relies on the metrics the Agent collects for the containers it manages. If a container in an autoscaled workload is filtered out through the Agent's container discovery configuration, no metrics exist for it and it cannot be right-sized. Confirm that no container in an autoscaled workload is excluded from collection. For how inclusion and exclusion rules work, see [Container Discovery Management][10].
+- **Do not exclude autoscaled containers from Agent collection.** A `DatadogPodAutoscaler` relies on the metrics the Agent collects for the containers it manages. If a container in an autoscaled workload is filtered out through the Agent's container discovery configuration, no metrics exist for it and it cannot be right-sized. Confirm that no container in an autoscaled workload is excluded from collection. For how inclusion and exclusion rules work, see [Container Discovery Management][7].
 
 ## Additional manifest options
 
@@ -473,7 +473,7 @@ spec:
       strategy: Auto
 ```
 
-For vertical-only scaling, set both horizontal strategies to `Disabled`, set `update.strategy: Auto`, and omit `objectives`.
+For vertical-only scaling, omit `objectives` and set `update.strategy: Auto`, as in the [Choose a scaling mode](#choose-a-scaling-mode) table. With no `objectives`, horizontal scaling has no target to act on, so you do not also need to set `scaleUp` and `scaleDown` to `Disabled`.
 
 ### Vertical rollout timing
 
@@ -515,7 +515,7 @@ spec:
 
 Fallback recommendations are computed inside the cluster from Agent-collected metrics, so scaling continues if Datadog cannot deliver a recommendation within the threshold.
 
-This feature also requires cluster-side configuration on both the Cluster Agent and the node Agents. See [Kubernetes Autoscaling][2] or contact [Datadog Support][9].
+This feature also requires cluster-side configuration on both the Cluster Agent and the node Agents. See [Kubernetes Autoscaling][2] or contact [Datadog Support][6].
 
 ### Absolute-value objectives
 
@@ -564,7 +564,7 @@ metadata:
     ad.datadoghq.com/tags: '{"team": "my-team", "tier": "critical"}'
 ```
 
-This adds the tags to the autoscaling telemetry emitted for this DPA. For the list of metrics the Cluster Agent emits, see the [Datadog Cluster Agent integration][8].
+This adds the tags to the autoscaling telemetry emitted for this DPA. For the list of metrics the Cluster Agent emits, see the [Datadog Cluster Agent integration][5].
 
 ## Further reading
 
@@ -573,7 +573,7 @@ This adds the tags to the autoscaling telemetry emitted for this DPA. For the li
 [1]: https://app.datadoghq.com/orchestration/scaling/workload
 [2]: /containers/autoscaling/
 [3]: /containers/autoscaling/#in-place-vertical-scaling
-[7]: https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/
-[8]: /integrations/datadog-cluster-agent/#metrics
-[9]: /help/
-[10]: /containers/guide/container-discovery-management/
+[4]: https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/
+[5]: /integrations/datadog-cluster-agent/#metrics
+[6]: /help/
+[7]: /containers/guide/container-discovery-management/

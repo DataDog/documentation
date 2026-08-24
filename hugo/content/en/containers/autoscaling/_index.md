@@ -216,9 +216,9 @@ _Fixed cost values are subject to refinement over time._
 
 By default, applying a vertical recommendation requires a full pod rollout: the pod template is updated, Kubernetes recreates the pods, and the new resources take effect as those pods are admitted. For slow-starting or latency-sensitive services, that is a meaningful disruption.
 
-In-place vertical scaling instead updates container resources on the running pods through the Kubernetes [pod resize subresource](https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/), so most resizes happen with no restart. In-place vertical scaling is supported on Kubernetes 1.33+, where the `InPlacePodVerticalScaling` feature gate is enabled by default. It requires Datadog Cluster Agent 7.78+.
+In-place vertical scaling instead updates container resources on the running pods through the Kubernetes [pod resize subresource][16], so most resizes happen with no restart. In-place vertical scaling is supported on Kubernetes 1.33+, where the `InPlacePodVerticalScaling` feature gate is enabled by default. It requires Datadog Cluster Agent 7.78+.
 
-A resize takes effect on the running container without restarting the application process. Applications that read their CPU or memory requests and limits only at startup do not see the new values until they restart, and environment variables populated from resource fields through the [downward API](https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/) are not refreshed on an in-place resize. Keep this in mind for workloads that size internal components (thread pools, heap, or caches) from their resource requests or limits.
+A resize takes effect on the running container without restarting the application process. Applications that read their CPU or memory requests and limits only at startup do not see the new values until they restart, and environment variables populated from resource fields through the [downward API][17] are not refreshed on an in-place resize. Keep this in mind for workloads that size internal components (thread pools, heap, or caches) from their resource requests or limits.
 
 With `applyPolicy.update.strategy: Auto` (the default), the controller resizes in place wherever the cluster supports it and falls back to a rollout otherwise. To force rollout-based vertical scaling for a workload, set `applyPolicy.update.strategy: TriggerRollout` on its `DatadogPodAutoscaler`. To tune how long the controller waits before evicting a pending resize or falling back to a rollout, see the [DatadogPodAutoscaler manifest reference][15].
 
@@ -257,7 +257,11 @@ datadog:
 #### Behavior and limitations
 
 - **`resizePolicy` stays under your control.** Datadog never sets or overrides the container-level `resizePolicy`; it is immutable after pod creation and is an application-level decision. When unset, Kubernetes defaults to `NotRequired` for CPU and memory, meaning resize without restart. Set `RestartContainer` per resource on containers that cannot absorb a live change.
-- **Kubernetes limitations apply.** Only CPU and memory can be resized; QoS class cannot change; requests and limits can be changed but not removed entirely; Windows pods and pods under static CPU or memory manager policies are excluded. See the [upstream limitations](https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/#limitations).
+- **Kubernetes limitations apply.** See the [upstream limitations][18]:
+    - Only CPU and memory can be resized.
+    - QoS class cannot change.
+    - Requests and limits can be changed but not removed entirely.
+    - Windows pods and pods under static CPU or memory manager policies are excluded.
 - **Burstable mode still requires a rollout.** Burstable mode removes the CPU limit, and in-place resize can change a limit but not remove one. See the [DatadogPodAutoscaler manifest reference][15].
 - If a resize is infeasible or stays pending, the pod is evicted through the Kubernetes Eviction API, which respects PodDisruptionBudgets.
 
@@ -709,3 +713,6 @@ Datadog computes vertical scaling recommendations for CPU and memory by analyzin
 [13]: /containers/guide/manage-datdadogpodautoscaler-with-terraform/
 [14]: https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/
 [15]: /containers/autoscaling/manifest/
+[16]: https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/
+[17]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
+[18]: https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/#limitations
