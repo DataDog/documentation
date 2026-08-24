@@ -133,7 +133,7 @@ The metric description helps you understand what a metric represents, why it exi
 <div class="alert alert-info">AI-generated metric descriptions are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-For custom metrics, Datadog can automatically generate descriptions using available context, including the metric’s name, meaningful tags, query activity, and connected source code. To use source code as additional context, install Datadog’s [GitHub][36], [GitLab][37], or [Azure DevOps][38] integration and connect your [repositories][39].
+For custom metrics, Datadog can automatically generate descriptions using available context, including the metric's name, meaningful tags, query activity, and connected source code. To use source code as additional context, install Datadog's [GitHub][36], [GitLab][37], or [Azure DevOps][38] integration and connect your [repositories][39].
 
 {{< img src="metrics/summary/metric_ai_generated_descriptions_03062026.png" alt="AI generated descriptions in Metrics sidepanel" style="width:80%;">}}
 
