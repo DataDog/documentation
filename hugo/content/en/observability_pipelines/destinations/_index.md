@@ -6,6 +6,7 @@ aliases:
   - /observability_pipelines/destinations/datadog_apm/
   - /observability_pipelines/destinations/opentelemetry/traces/
   - /observability_pipelines/destinations/opentelemetry/metrics/
+  - /observability_pipelines/destinations/prometheus/
 further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
@@ -83,7 +84,6 @@ These are the available destinations:
 - [Elasticsearch][2]
 - [HTTP/S Client][3]
 - [OpenTelemetry][5]
-- [Prometheus][6]
 - [Splunk HEC][4]
 
 [1]: /observability_pipelines/destinations/datadog_metrics/
@@ -91,7 +91,6 @@ These are the available destinations:
 [3]: /observability_pipelines/destinations/http_client/
 [4]: /observability_pipelines/destinations/splunk_hec/metrics
 [5]: /observability_pipelines/destinations/opentelemetry/metrics
-[6]: /observability_pipelines/destinations/prometheus/
 
 {{% /tab %}}
 {{< /tabs >}}
