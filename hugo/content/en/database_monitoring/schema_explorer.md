@@ -36,7 +36,7 @@ The `collect_schemas` options available and their defaults differ by database en
 
 | Option | Default | Description |
 |---|---|---|
-| `enabled` | `true` | Set to `false` to disable schema collection. |
+| `enabled` | `true` | Set to `false` to disable schema collection. Enabled by default for Datadog Agent versions 7.80.0 and later. |
 | `max_tables` | `300` | Maximum number of tables the Agent collects from the instance. Tables beyond this limit are not collected. |
 | `max_columns` | `50` | Maximum number of columns the Agent collects per table. |
 | `max_query_duration` | `60` | Maximum duration, in seconds, of the query that collects schema information. |
