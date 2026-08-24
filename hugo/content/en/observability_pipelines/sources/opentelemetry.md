@@ -1,5 +1,6 @@
 ---
 title: OpenTelemetry Source
+description: Learn how to collect logs, metrics, or traces from an OpenTelemetry Collector using the Observability Pipelines Worker.
 disable_toc: false
 further_reading:
   - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines

@@ -1,5 +1,6 @@
 ---
 title: Amazon Data Firehose Source
+description: Learn how to collect logs from Amazon Data Firehose using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs
