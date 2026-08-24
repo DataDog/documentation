@@ -1,5 +1,6 @@
 ---
 title: Prometheus Source
+description: Learn how to collect metrics pushed by Prometheus clients using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Metrics
