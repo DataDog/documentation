@@ -33935,6 +33935,21 @@ components:
           format: int64
           type: integer
       type: object
+    DeviceTagsBySource:
+      description: Tags associated with a device from a specific source.
+      properties:
+        source:
+          description: The source of the tags.
+          example: user
+          type: string
+        tags:
+          description: The list of tags for the source.
+          example: ["tag:test", "tag:testbis"]
+          items:
+            description: A tag string in `key:value` format.
+            type: string
+          type: array
+      type: object
     DevicesListData:
       description: The devices list data
       properties:
@@ -64450,6 +64465,12 @@ components:
     ListTagsResponseDataAttributes:
       description: The definition of ListTagsResponseDataAttributes object.
       properties:
+        by_source:
+          description: The list of device tags grouped by source.
+          items:
+            $ref: "#/components/schemas/DeviceTagsBySource"
+          readOnly: true
+          type: array
         tags:
           description: The list of tags
           example: ["tag:test", "tag:testbis"]
@@ -176181,6 +176202,20 @@ paths:
           content:
             application/json:
               examples:
+                by_source:
+                  value:
+                    data:
+                      attributes:
+                        by_source:
+                          - source: user
+                            tags:
+                              - "tag:test"
+                              - "tag:testbis"
+                          - source: snmp
+                            tags:
+                              - "device_ip:1.2.3.4"
+                      id: foiwf7rgw38fh
+                      type: tags
                 default:
                   value:
                     data:
