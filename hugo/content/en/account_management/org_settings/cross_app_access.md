@@ -35,7 +35,7 @@ Setup moves values in both directions between Datadog and Okta. Two of them are 
 | ----------------------------------- | --------------- | ----------------------------------------------------------------------------------------- |
 | Datadog organization UUID           | Datadog to Okta | Datadog application in Okta: {{< ui >}}Resource Server{{< /ui >}} tab > {{< ui >}}Audience/tenant ID{{< /ui >}}              |
 | Agent client ID                     | Datadog to Okta | Okta AI Agent, {{< ui >}}Resource Connection{{< /ui >}}, {{< ui >}}Client ID at resource{{< /ui >}}                         |
-| Datadog resource URL and issuer URL | Datadog to Okta | Datadog application in Okta, {{< ui >}}Resource Server{{< /ui >}} tab, {{< ui >}}Resource URL{{< /ui >}} and {{< ui >}}Issuer URL{{< /ui >}} |
+| Datadog resource URL and issuer URL | Datadog to Okta | Datadog application in Okta: {{< ui >}}Resource Server{{< /ui >}} tab > {{< ui >}}Resource URL{{< /ui >}} and {{< ui >}}Issuer URL{{< /ui >}} |
 | Okta tenant issuer URL              | Okta to Datadog | Datadog: {{< ui >}}Organization Settings > Cross-App Access{{< /ui >}}, {{< ui >}}Issuer URL{{< /ui >}}                      |
 
 ## Prerequisites
