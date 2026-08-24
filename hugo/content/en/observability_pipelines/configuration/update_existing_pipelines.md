@@ -85,11 +85,6 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/opentelemetry %}}
 
 {{% /tab %}}
-{{% tab "Prometheus" %}}
-
-{{% observability_pipelines/configure_existing_pipelines/source_env_vars/prometheus %}}
-
-{{% /tab %}}
 {{% tab "Socket" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/socket %}}
