@@ -73,7 +73,7 @@ You can configure Datadog to send you notifications as soon as it detects new th
    <div class="alert alert-info">This step is optional, but if you don't enter any attributes, the notification defaults to sending alerts for all entities.</div>
 1. Under {{< ui >}}Set notification conditions{{< /ui >}}, set the trigger condition based on entity severity or risk score value:
    - {{< ui >}}Entity severity{{< /ui >}}: Triggers a notification when an entity reaches a certain severity level. Select an operator, then select a severity level. For the risk score that corresponds to each severity level, see [Entity severity thresholds](#entity-severity-thresholds).
-   - {{< ui >}}Risk score value{{< /ui >}}: Triggers a notification when the entity's risk score crosses a specific risk score value. Specify the risk score threshold to trigger notifications for.
+   - {{< ui >}}Risk score value{{< /ui >}}: Triggers a notification when the entity's risk score crosses a specified threshold. Specify the threshold for notifications.
 1. Under {{< ui >}}Configure notification{{< /ui >}}, enter a name for the notification, add a custom message body, and specify recipients to send it to.
    - Optionally, you can also turn on re-notifications, and specify the period of time that should pass before Datadog re-notifies the recipients that the risk insight still meets the criteria you specified.
 1. To verify your setup, click {{< ui >}}Test Notification{{< /ui >}} to send a test notification to the configured recipients.
