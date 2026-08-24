@@ -11,14 +11,32 @@ work. Everything else is a parameter.
     npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
     {{< /skill-callout >}}
 
+The command renders through `highlight` as an ordinary shell code block, so it
+picks up the site's standard styling and the hover copy button that
+copy-code.js appends to every fenced shell block. The card supplies only the
+surrounding heading and prose.
+
 @param {string} title Card heading. Optional.
-@param {string} text Supporting sentence, rendered as markdown. Optional.
-@param {string} action_name Action name reported to RUM for the copy button.
-    Optional.
+@param {string} text Supporting sentence, rendered as markdown so backticks
+    become inline code. Optional.
+@param {string} action_name Action name reported to RUM, so this command's copy
+    button is distinguishable from other copy buttons on the page. Optional.
 */ -}}
-{{- partial "skill-callout.html" (dict
-    "title" (.Get "title")
-    "text" (.Get "text")
-    "command" .Inner
-    "action_name" (.Get "action_name")
-) -}}
+{{- $command := trim .Inner "\n\r\t " -}}
+{{- if not $command -}}
+    {{- errorf "skill-callout: needs the install command as inner content (called from %s)" .Page.File.Path -}}
+{{- end -}}
+<div class="skill-callout">
+    {{- with .Get "title" }}
+    <p class="skill-callout__title">{{ . }}</p>
+    {{- end }}
+    {{- with .Get "text" }}
+    <div class="skill-callout__text">{{ . | markdownify }}</div>
+    {{- end }}
+    {{- /* Inner content arrives with a leading newline, which would render a
+         blank first line and be copied along with the command. Trimmed above;
+         internal newlines are preserved. */ -}}
+    <div class="skill-callout__command"{{ with .Get "action_name" }} data-dd-action-name="{{ . }}"{{ end }}>
+        {{ highlight $command "shell" "" }}
+    </div>
+</div>
