@@ -203,7 +203,7 @@ Or pass it on the command line:
 mongod --setParameter internalQueryStatsSampleRate=1.0
 {{< /code-block >}}
 
-To enable it at runtime without restarting, run the following against each `mongod` or `mongos` process. This change is not persistent and resets when the server restarts:
+To enable it at runtime without restarting (not persistent — resets on restart), run:
 
 {{< code-block lang="javascript" >}}
 db.adminCommand({setParameter: 1, internalQueryStatsSampleRate: 1.0})
