@@ -1117,7 +1117,7 @@ Checks if a feature flag is implemented in code.
 ### `sync_datadog_feature_flag_allocations`
 *Toolset: **feature-flags***\
 *Permissions Required: `Feature Flag Write`*\
-Syncs feature flag allocations for a specific environment.
+Syncs feature flag allocations for a specific environment. This replaces all existing allocations for the flag in that environment. Confirm the change before applying.
 
 - Sync the allocations for flag `new-checkout-flow` in production.
 

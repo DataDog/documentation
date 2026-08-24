@@ -1,5 +1,6 @@
 ---
 title: Install the Worker
+description: Install and set up the Observability Pipelines Worker on your platform.
 disable_toc: false
 aliases:
     - /observability_pipelines/install_the_worker/

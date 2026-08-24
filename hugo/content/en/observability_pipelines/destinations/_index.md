@@ -1,5 +1,6 @@
 ---
 title: Destinations
+description: Learn about the destinations available for the Observability Pipelines Worker.
 disable_toc: false
 aliases:
   - /observability_pipelines/destinations/datadog_apm/
