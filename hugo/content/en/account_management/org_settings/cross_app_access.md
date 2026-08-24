@@ -74,7 +74,7 @@ Copy the value in the {{< ui >}}Org UUID{{< /ui >}} field. Okta sends this value
 
 ### Copy the agent client ID
 
-The {{< ui >}}Registered client IDs{{< /ui >}} table lists every agent Datadog supports for Cross-App Access and the OAuth client ID each one uses. Copy the client ID for the agent you are setting up. You enter it in Okta as {{< ui >}}Client ID at resource{{< /ui >}}.
+The {{< ui >}}Registered client IDs{{< /ui >}} table lists every agent Datadog supports for Cross-App Access and the OAuth client ID each one uses. Copy the client ID for the agent you are setting up. You will enter it in Okta as {{< ui >}}Client ID at resource{{< /ui >}}.
 
 Datadog adds agents to this table as it supports them, so check the table rather than reusing a client ID from another source.
 
