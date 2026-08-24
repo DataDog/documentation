@@ -38,7 +38,7 @@ After you [install DogStatsD][1], the following functions are available for subm
 | `<TAGS>`         | List of strings | No       | A list of tags to apply to the metric. See the [Metrics Tagging](#metric-tagging) section to learn more.                                                                                       |
 | `<CARDINALITY>`  | Enum            | No       | The [cardinality][10] of tags to assign to this metric.                                                                                                                               |
 
-**Node.js:** The tracer's DogStatsD client exposes `increment`, `decrement`, `gauge`, `histogram`, and `distribution`. These functions accept `<METRIC_NAME>`, `<METRIC_VALUE>`, and `<TAGS>` only. The client does not support `<SAMPLE_RATE>`, `<CARDINALITY>`, `count`, `set`, or `timed`.
+**Node.js:** The tracer's DogStatsD client accepts `<METRIC_NAME>`, `<METRIC_VALUE>`, and `<TAGS>` only. It does not accept `<SAMPLE_RATE>` or `<CARDINALITY>`.
 
 ### COUNT
 
