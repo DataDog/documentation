@@ -5,6 +5,7 @@ disable_toc: false
 aliases:
   - /observability_pipelines/destinations/datadog_apm/
   - /observability_pipelines/destinations/opentelemetry/traces/
+  - /observability_pipelines/destinations/opentelemetry/metrics/
 further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
