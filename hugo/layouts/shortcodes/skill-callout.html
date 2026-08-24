@@ -1,0 +1,24 @@
+{{- /*
+Promotes an agent skill install command in a bordered card.
+
+The install command is the shortcode's inner content, so multi-line commands
+work. Everything else is a parameter.
+
+    {{< skill-callout
+        title="Set up APM with an agent"
+        text="Install the `dd-apm` skill in your AI coding agent for guided APM setup."
+        action_name="copy_dd_apm_skill_install_cmd" >}}
+    npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
+    {{< /skill-callout >}}
+
+@param {string} title Card heading. Optional.
+@param {string} text Supporting sentence, rendered as markdown. Optional.
+@param {string} action_name Action name reported to RUM for the copy button.
+    Optional.
+*/ -}}
+{{- partial "skill-callout.html" (dict
+    "title" (.Get "title")
+    "text" (.Get "text")
+    "command" .Inner
+    "action_name" (.Get "action_name")
+) -}}
