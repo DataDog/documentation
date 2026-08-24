@@ -15,7 +15,7 @@ further_reading:
 
 The `DatadogPodAutoscaler` (DPA) custom resource defines autoscaling behavior for a single Kubernetes workload. The [Autoscaling UI][1] with {{< ui >}}Export Recommendation{{< /ui >}} is a good place to start: configure a workload, then copy the generated manifest. Editing the manifest directly gives you access to every field in the custom resource definition (CRD) and makes the DPA a normal part of your GitOps workflow, where the manifest is the reviewed, versioned source of truth.
 
-This page covers the configuration options available in the manifest. It uses API version `datadoghq.com/v1alpha2`.
+This page covers the configuration options available in the manifest. Examples on this page use API version `datadoghq.com/v1alpha2`.
 
 For setup and prerequisites, see [Kubernetes Autoscaling][2]. That page covers enabling Workload Autoscaling and the Admission Controller on the Datadog Cluster Agent, required Agent versions, and enabling [in-place vertical scaling][3].
 
@@ -279,7 +279,7 @@ Interactions to be aware of:
 
 - On a container where `request == limit`, lowering the request breaks the Guaranteed QoS class. If you need Guaranteed, keep `RequestsAndLimits`; the recommender handles `request == limit` containers explicitly.
 - Burstable mode overrides this for CPU limits (see [Remove CPU limits with burstable mode](#remove-cpu-limits-with-burstable-mode)).
-- **OOMKill handling still adjusts the memory limit.** `RequestsOnly` does not suppress the memory bump, and cannot: Kubernetes rejects a container whose request exceeds its limit, so raising the request without raising the limit would produce an invalid pod. Read `RequestsOnly` as "limits are not _right-sized_", not "limits are never modified". See [Tune the OOMKill memory bump](#tune-the-oomkill-memory-bump).
+- **OOMKill handling still adjusts the memory limit.** `RequestsOnly` does not suppress the memory bump. If a request is raised close to the current limit, Kubernetes rejects any pod whose request exceeds its limit, so the limit is bumped to keep the spec valid. Read `RequestsOnly` as "limits are not _right-sized_", not "limits are never modified". See [Tune the OOMKill memory bump](#tune-the-oomkill-memory-bump).
 
 Choosing a combination:
 
@@ -353,7 +353,7 @@ spec:
 
 In the example above, `istio-proxy` is governed solely by `enabled: false` and does not inherit `controlledResources` from the wildcard. Every other container in the pod uses the wildcard entry.
 
-**Note**: if you add a named entry only to set a bound, repeat any wildcard settings you still want. In the example below, `my-app` falls back to the default `RequestsAndLimits` rather than the `RequestsOnly` set on the wildcard:
+**Note**: If you add a named entry only to set a bound, repeat any wildcard settings you still want. In the example below, `my-app` falls back to the default `RequestsAndLimits` rather than the `RequestsOnly` set on the wildcard:
 
 ```yaml
       - name: "*"

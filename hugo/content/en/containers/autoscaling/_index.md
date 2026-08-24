@@ -519,7 +519,7 @@ spec:
 The examples above cover the most common strategies. The manifest supports additional options that the templates don't show, including:
 
 - **CPU rightsizing** alongside memory (`constraints.containers[].controlledResources`). When a workload combines horizontal and vertical scaling, vertical recommendations cover memory only by default.
-- **Burstable mode** (`spec.options.burstable`) to remove CPU limits on spiky workloads while still right-sizing CPU requests.
+- **Burstable mode** (`spec.options.burstable`) to remove CPU limits on spiky workloads while still rightsizing CPU requests.
 - **Per-container bounds** (`minAllowed` and `maxAllowed`), request-only rightsizing (`controlledValues: RequestsOnly`), and per-container targeting for horizontal scaling (`ContainerResource` objectives).
 
 For the full field reference, see the [DatadogPodAutoscaler manifest reference][15].
