@@ -39,7 +39,7 @@ instances:
       replace_digits: true
 ```
 
-Partitioning also affects schema collection. Each partition counts individually toward the `max_tables` limit for `collect_schemas`, so partitioned databases may need a higher limit for full coverage. See [Tuning schema collection][2] for details.
+Partitioning also affects schema collection. Tables partitioned with native declarative partitioning (`PARTITION BY`) count as a single table toward the `max_tables` limit for `collect_schemas`, regardless of partition count. Tables partitioned using table inheritance (`INHERITS`), such as the `daily_aggregates_*` tables above, count each partition individually, so databases using this pattern may need a higher `max_tables` limit for full coverage. See [Tuning schema collection][2] for details.
 
 ## Raising the sampling rate
 
