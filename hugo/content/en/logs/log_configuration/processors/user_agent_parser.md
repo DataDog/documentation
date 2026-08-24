@@ -22,7 +22,7 @@ The User-Agent Parser allows you to extract useful information, for example, bro
 
 ## Before and after state of logs
 
-{{% collapse-content title="Example: Parsing the User Agent in custom application logs" level="h4" %}}
+{{% collapse-content title="Example: Parsing the User Agent in custom application logs" level="h3" %}}
 
 **Before:**
 

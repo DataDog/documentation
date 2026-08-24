@@ -72,7 +72,7 @@ Request GET https://app.datadoghq.com/users was answered with response 200
 
 ## Before and after state of logs
 
-{{% collapse-content title="Example: Constructing a readable message with the String Builder Processor" level="h4" %}}
+{{% collapse-content title="Example: Constructing a readable message with the String Builder Processor" level="h3" %}}
 
 **Before:**
 

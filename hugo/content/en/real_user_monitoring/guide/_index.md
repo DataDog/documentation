@@ -26,6 +26,11 @@ cascade:
     {{< nextlink href="real_user_monitoring/guide/best-practices-tracing-native-ios-android-apps" >}}Best practices for tracing native iOS and Android apps{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Operations Monitoring:" >}}
+    {{< nextlink href="real_user_monitoring/guide/best-practices-for-operations-setup" >}}Best practices for setting up RUM operations{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/best-practices-for-creating-slos-on-operations" >}}Best practices for creating SLOs for RUM operations{{< /nextlink >}}
+{{< /whatsnext >}}
+
 {{< whatsnext desc="Browser RUM:" >}}
     {{< nextlink href="real_user_monitoring/guide/send-custom-user-actions" >}}Send custom user actions{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/identify-bots-in-the-ui" >}}Identify bots in the RUM Explorer{{< /nextlink >}}

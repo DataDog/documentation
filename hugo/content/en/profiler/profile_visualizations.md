@@ -59,7 +59,7 @@ The width of a frame represents how much of the total CPU it consumed. On the ri
 
 By default, darker frames indicate higher CPU usage, while lighter frames signify lower usage; the most resource-intensive methods are grouped on the leftmost side of the flame graph.
 
-Flame graphs can be included in Dashboards and Notebooks with the [Profiling Flame Graph Widget][5].
+Flame graphs can be included in Dashboards and Notebooks with the [Profiling Flame Graph Widget][5]. Profiling data that was exported to a Notebook is retained for one year.
 
 ### Timeline view
 

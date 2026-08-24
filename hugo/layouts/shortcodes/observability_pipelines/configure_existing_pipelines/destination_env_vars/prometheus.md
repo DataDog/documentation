@@ -1,0 +1,10 @@
+- Prometheus endpoint URL:
+	- The default environment variable is `DD_OP_DESTINATION_PROMETHEUS_ENDPOINT`.
+- Prometheus TLS passphrase (when enabled):
+	- The default environment variable is `DD_OP_DESTINATION_PROMETHEUS_KEY_PASS`.
+- If you are using basic authentication:
+	- Prometheus endpoint authentication username and password.
+	- The default environment variable is `DD_OP_DESTINATION_PROMETHEUS_USERNAME` and `DD_OP_DESTINATION_PROMETHEUS_PASSWORD`.
+- If you are using bearer authentication:
+	- Prometheus endpoint bearer token.
+	- The default environment variable is `DD_OP_DESTINATION_PROMETHEUS_BEARER_TOKEN`.
