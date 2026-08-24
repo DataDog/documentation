@@ -9396,6 +9396,11 @@ menu:
       parent: rum_setup_enrich_rum_data
       identifier: rum_setup_enrich_rum_data_modify_or_drop_rum_events
       weight: 3
+    - name: Track navigation across web views
+      url: real_user_monitoring/setup/enrich_rum_data/track_navigation_across_web_views/
+      parent: rum_setup_enrich_rum_data
+      identifier: rum_setup_enrich_rum_data_track_navigation_across_web_views
+      weight: 4
     - name: Application Monitoring
       url: real_user_monitoring/application_monitoring/
       parent: rum
