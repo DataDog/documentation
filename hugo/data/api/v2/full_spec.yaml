@@ -1460,7 +1460,7 @@ components:
         format: int64
         type: integer
     PageSize:
-      description: Size for a given page. The maximum allowed value is 100.
+      description: Number of items to return per page. The maximum allowed value is 100.
       in: query
       name: page[size]
       required: false
@@ -7751,7 +7751,7 @@ components:
       description: An arbitrary object value with additional properties.
       type: object
     AnyValueString:
-      description: A scalar string value.
+      description: A scalar value represented as a string.
       type: string
     ApiID:
       description: API identifier.
