@@ -984,7 +984,7 @@ Links a feature flag to an experiment.
 ### `start_experiment`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Read` and `Product Analytics Experiments Write`*\
-Starts a standard experiment from its saved configuration with Datadog feature flag or bring-your-own-flag assignment. The tool checks readiness before starting. If setup is incomplete, it returns every blocker it can detect with an action to resolve each blocker and does not change the experiment. For warehouse native experiments, configure variants and run dates before using this tool because it accepts only the experiment ID.
+Starts a standard experiment from its saved configuration with Datadog feature flag or warehouse-native assignment. The tool checks readiness before starting. If setup is incomplete, it returns every blocker it can detect with an action to resolve each blocker and does not change the experiment. For warehouse-native experiments, configure variants and run dates before using this tool, because it accepts only the experiment ID.
 
 - Start experiment `abc123`.
 
