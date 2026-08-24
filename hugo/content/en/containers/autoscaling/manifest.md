@@ -279,7 +279,7 @@ Interactions to be aware of:
 
 - On a container where `request == limit`, lowering the request breaks the Guaranteed QoS class. If you need Guaranteed, keep `RequestsAndLimits`; the recommender handles `request == limit` containers explicitly.
 - Burstable mode overrides this for CPU limits (see [Remove CPU limits with burstable mode](#remove-cpu-limits-with-burstable-mode)).
-- **OOMKill handling still adjusts the memory limit.** `RequestsOnly` does not suppress the memory bump. If a request is raised close to the current limit, Kubernetes rejects any pod whose request exceeds its limit, so the limit is bumped to keep the spec valid. Read `RequestsOnly` as "limits are not _right-sized_", not "limits are never modified". See [Tune the OOMKill memory bump](#tune-the-oomkill-memory-bump).
+- **OOMKill handling still adjusts the memory limit.** `RequestsOnly` does not suppress the memory bump. After an OOMKill, the memory limit is raised, and the request is potentially raised with it (Kubernetes rejects any pod whose request exceeds its limit). Read `RequestsOnly` as "limits are not _right-sized_", not "limits are never modified". See [Tune the OOMKill memory bump](#tune-the-oomkill-memory-bump).
 
 Choosing a combination:
 
