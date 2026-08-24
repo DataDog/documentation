@@ -289,7 +289,7 @@ dd_rum_remove_view_attribute(rum, "ui.variant");
 
 ### User information
 
-See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=cpp) for instructions on adding user information to your RUM sessions.
+See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=cpp) for instructions on adding user information to your RUM sessions.
 
 ### Account information
 

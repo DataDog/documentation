@@ -9295,11 +9295,6 @@ menu:
       parent: rum_setup
       identifier: rum_setup_enable
       weight: 3
-    - name: Manage sessions
-      url: real_user_monitoring/setup/enable_rum/manage_sessions/
-      parent: rum_setup_enable
-      identifier: rum_setup_enable_manage_sessions
-      weight: 301
     - name: Track errors and crashes
       url: real_user_monitoring/setup/enable_rum/track_errors/
       parent: rum_setup_enable
@@ -9336,7 +9331,7 @@ menu:
       identifier: rum_setup_enable_track_frustration_signals
       weight: 308
     - name: Collect Session Replays
-      url: real_user_monitoring/setup/session_replays/
+      url: session_replay/
       parent: rum_setup
       identifier: rum_setup_session_replays
       weight: 4
@@ -9345,11 +9340,36 @@ menu:
       parent: rum_setup
       identifier: rum_setup_additional_plugins
       weight: 5
+    - name: Data Collected
+      url: real_user_monitoring/setup/data_collected/
+      parent: rum
+      identifier: rum_setup_data_collected
+      weight: 2
+    - name: Enrich RUM Data
+      url: real_user_monitoring/setup/enrich_rum_data/
+      parent: rum
+      identifier: rum_setup_enrich_rum_data
+      weight: 3
+    - name: Add custom context
+      url: real_user_monitoring/setup/enrich_rum_data/add_custom_context/
+      parent: rum_setup_enrich_rum_data
+      identifier: rum_setup_enrich_rum_data_add_custom_context
+      weight: 1
+    - name: Track user IDs
+      url: real_user_monitoring/setup/enable_rum/manage_sessions/
+      parent: rum_setup_enrich_rum_data
+      identifier: rum_setup_enrich_rum_data_track_user_ids
+      weight: 2
+    - name: Modify or drop RUM events client-side
+      url: real_user_monitoring/setup/enrich_rum_data/modify_or_drop_rum_events/
+      parent: rum_setup_enrich_rum_data
+      identifier: rum_setup_enrich_rum_data_modify_or_drop_rum_events
+      weight: 3
     - name: Application Monitoring
       url: real_user_monitoring/application_monitoring/
       parent: rum
       identifier: application_monitoring
-      weight: 2
+      weight: 4
     - name: Browser
       url: real_user_monitoring/application_monitoring/browser/
       parent: application_monitoring
@@ -9375,16 +9395,6 @@ menu:
       parent: rum_browser
       identifier: rum_advanced
       weight: 102
-    - name: Build Plugins
-      url: real_user_monitoring/application_monitoring/browser/build_plugins/
-      parent: rum_browser
-      identifier: rum_browser_build_plugins
-      weight: 103
-    - name: Data Collected
-      url: real_user_monitoring/application_monitoring/browser/data_collected/
-      parent: rum_browser
-      identifier: rum_data_collected
-      weight: 104
     - name: Optimizing Performance
       url: real_user_monitoring/application_monitoring/browser/optimizing_performance/
       parent: rum_browser
@@ -9445,11 +9455,6 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_advanced_config
       weight: 105
-    - name: Data Collected
-      url: real_user_monitoring/application_monitoring/android/data_collected
-      parent: rum_mobile_android
-      identifier: rum_mobile_android_data_collected
-      weight: 106
     - name: Frustration Signals
       url: real_user_monitoring/application_monitoring/android/frustration_signals
       parent: rum_mobile_android
@@ -9505,11 +9510,6 @@ menu:
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_advanced_config
       weight: 105
-    - name: Data Collected
-      url: real_user_monitoring/application_monitoring/ios/data_collected
-      parent: rum_mobile_ios
-      identifier: rum_mobile_ios_data_collected
-      weight: 106
     - name: Frustration Signals
       url: real_user_monitoring/application_monitoring/ios/frustration_signals
       parent: rum_mobile_ios
@@ -9530,11 +9530,6 @@ menu:
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_troubleshooting
       weight: 111
-    - name: Supported Versions
-      url: real_user_monitoring/application_monitoring/ios/supported_versions
-      parent: rum_mobile_ios
-      identifier: rum_mobile_ios_supported_versions
-      weight: 112
     - name: SDK Performance Impact
       url: real_user_monitoring/application_monitoring/ios/sdk_performance_impact
       parent: rum_mobile_ios
@@ -9560,11 +9555,6 @@ menu:
       parent: rum_mobile_flutter
       identifier: rum_mobile_flutter_advanced_config
       weight: 103
-    - name: Data Collected
-      url: real_user_monitoring/application_monitoring/flutter/data_collected
-      parent: rum_mobile_flutter
-      identifier: rum_mobile_flutter_data_collected
-      weight: 104
     - name: Frustration Signals
       url: real_user_monitoring/application_monitoring/flutter/frustration_signals
       parent: rum_mobile_flutter
@@ -9605,11 +9595,6 @@ menu:
       parent: rum_mobile_kotlin
       identifier: rum_mobile_kotlin_advanced_config
       weight: 103
-    - name: Data Collected
-      url: real_user_monitoring/application_monitoring/kotlin_multiplatform/data_collected
-      parent: rum_mobile_kotlin
-      identifier: rum_mobile_kotlin_data_collected
-      weight: 104
     - name: Frustration Signals
       url: real_user_monitoring/application_monitoring/kotlin_multiplatform/frustration_signals
       parent: rum_mobile_kotlin
@@ -9650,11 +9635,6 @@ menu:
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_advanced_config
       weight: 103
-    - name: Data Collected
-      url: real_user_monitoring/application_monitoring/react_native/data_collected
-      parent: rum_mobile_react_native
-      identifier: rum_mobile_react_data_collected
-      weight: 104
     - name: Frustration Signals
       url: real_user_monitoring/application_monitoring/react_native/frustration_signals
       parent: rum_mobile_react_native
@@ -9695,11 +9675,6 @@ menu:
       parent: rum_cpp
       identifier: rum_cpp_advanced_configuration
       weight: 103
-    - name: Data Collected
-      url: real_user_monitoring/application_monitoring/cpp/data_collected
-      parent: rum_cpp
-      identifier: rum_cpp_data_collected
-      weight: 104
     - name: Advanced Build Configuration
       url: real_user_monitoring/application_monitoring/cpp/advanced_build_configuration
       parent: rum_cpp
@@ -9735,11 +9710,6 @@ menu:
       parent: rum_mobile_roku
       identifier: rum_mobile_roku_advanced_configuration
       weight: 103
-    - name: Data Collected
-      url: real_user_monitoring/application_monitoring/roku/data_collected
-      parent: rum_mobile_roku
-      identifier: rum_mobile_roku_data_collected
-      weight: 104
     - name: Web View Tracking
       url: real_user_monitoring/application_monitoring/roku/web_view_tracking
       parent: rum_mobile_roku
@@ -9765,11 +9735,6 @@ menu:
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_advanced_configuration
       weight: 103
-    - name: Data Collected
-      url: real_user_monitoring/application_monitoring/unity/data_collected
-      parent: rum_mobile_unity
-      identifier: rum_mobile_unity_data_collected
-      weight: 104
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/unity/troubleshooting
       parent: rum_mobile_unity
@@ -9795,11 +9760,6 @@ menu:
       parent: rum_mobile_maui
       identifier: rum_mobile_maui_advanced_config
       weight: 103
-    - name: Data Collected
-      url: real_user_monitoring/application_monitoring/maui/data_collected
-      parent: rum_mobile_maui
-      identifier: rum_mobile_maui_data_collected
-      weight: 104
     - name: Frustration Signals
       url: real_user_monitoring/application_monitoring/maui/frustration_signals
       parent: rum_mobile_maui

@@ -70,7 +70,7 @@ window.DD_RUM.init({
 
 When enabled, all action names are replaced with `Masked Element`. Action names explicitly set with the `data-dd-action-name` attribute are still displayed, allowing you to selectively expose specific action names while keeping others masked.
 
-<div class="alert alert-info">If your application uses a JavaScript bundler, the <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/action_name_deobfuscation">Action Name Deobfuscation build plugin</a> automatically restores readable action names in minified builds.</div>
+<div class="alert alert-info">If your application uses a JavaScript bundler, the <a href="/real_user_monitoring/setup/additional_plugins/#action-name-deobfuscation">Action Name Deobfuscation build plugin</a> automatically restores readable action names in minified builds.</div>
 
 ## Action timing telemetry
 
@@ -164,7 +164,7 @@ As a best practice, if you expect a high volume of user actions, consider adjust
 [2]: /data_security/real_user_monitoring/#mask-action-names
 [3]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
 [4]: /real_user_monitoring/application_monitoring/browser/frustration_signals/
-[5]: /real_user_monitoring/application_monitoring/browser/data_collected/#default-attributes
+[5]: /real_user_monitoring/setup/data_collected/?platform=browser#default-attributes
 [6]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
 [7]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
 [8]: /real_user_monitoring/guide/send-rum-custom-actions

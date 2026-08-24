@@ -128,7 +128,7 @@ To set a custom global attribute, use `DdRum.AddAttribute`.
 
 ### Track user sessions
 
-See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=unity) for instructions on adding user information to your RUM sessions.
+See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=unity) for instructions on adding user information to your RUM sessions.
 
 ### Add custom user attributes
 
@@ -156,7 +156,7 @@ DatadogSdk.instance.ClearAllData();
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/unity/setup/
-[3]: /real_user_monitoring/application_monitoring/unity/data_collected/
+[3]: /real_user_monitoring/setup/data_collected/?platform=unity
 [4]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=unity
 [5]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=unity
 [6]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=unity

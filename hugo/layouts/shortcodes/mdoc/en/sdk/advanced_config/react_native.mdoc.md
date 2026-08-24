@@ -407,7 +407,7 @@ You can attach user information to all RUM events to get more detailed informati
 
 ### Track user sessions
 
-See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=react_native) for instructions on adding user information to your RUM sessions.
+See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=react_native) for instructions on adding user information to your RUM sessions.
 
 ### Global attributes
 

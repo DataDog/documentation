@@ -126,7 +126,7 @@ In addition to the [default RUM attributes][3] captured by the SDK, you can atta
 
 ### Track user sessions
 
-See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=maui) for instructions on adding user information to your RUM sessions.
+See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=maui) for instructions on adding user information to your RUM sessions.
 
 ### Track account sessions
 
@@ -327,7 +327,7 @@ DdTrace.Enable(new DdTraceConfiguration
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/maui/setup
-[3]: /real_user_monitoring/application_monitoring/maui/data_collected
+[3]: /real_user_monitoring/setup/data_collected/?platform=maui
 [4]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
 [5]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=maui
 [6]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=maui

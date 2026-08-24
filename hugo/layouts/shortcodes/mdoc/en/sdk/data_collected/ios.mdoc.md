@@ -263,6 +263,85 @@ Network errors include information about failing HTTP requests. The following fa
 
 Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][10], which can't be read by any other app installed on the device.
 
+## Appendix
+
+The Datadog iOS SDK is the single SDK for instrumenting Real User Monitoring on all Apple platforms: iOS, iPadOS, tvOS, watchOS, and visionOS. Use this section to confirm the minimum OS version, dependency manager, and Datadog modules available for each platform.
+
+### Supported versions
+
+The RUM iOS SDK supports the following platforms and versions:
+
+| Platform | Supported | Version | Notes |
+|--------|-------------|---------|-------|
+| iOS | {% x/ %} | 12+ | |
+| iPadOS | {% x/ %} | 12+ | |
+| tvOS | {% x/ %} | 12+ | |
+| visionOS | {% x/ %} | 1.0+ | |
+| watchOS | {% x/ %} | 7.0+ | |
+| macOS (Designed for iPad) | {% x/ %} | 11+ | |
+| macOS (Catalyst) | partially supported | 12+ | Catalyst is supported in build mode only, which means that macOS targets build, but functionalities for the SDK might not work for this target. |
+| macOS | | 12+ | macOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**: `DatadogRUM`, `DatadogSessionReplay`, and `DatadogObjc`, which heavily depend on `UIKit`, do not build on macOS. |
+| Linux | | n/a | |
+
+#### Module support by platform
+
+| Module | iOS | tvOS | watchOS | visionOS | Notes |
+|--------|-----|------|---------|----------|-------|
+| DatadogCore | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | |
+| DatadogLogs | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | |
+| DatadogTrace | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | |
+| DatadogCrashReporting | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | |
+| DatadogRUM | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | watchOS: automatic view/action tracking, frame rate monitoring, and memory warning detection are not available. |
+| DatadogFlags | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | |
+| DatadogProfiling | {% x/ %} | {% x/ %} | | {% x/ %} | Not available on watchOS. The profiling module requires system-level APIs that watchOS does not support. |
+| DatadogSessionReplay | {% x/ %} | | | | Not available on tvOS, watchOS, and visionOS. SessionReplay requires rendering capabilities not available on these platforms. |
+| DatadogWebViewTracking | {% x/ %} | | | {% x/ %} | Not available on tvOS and watchOS. WebViewTracking requires browser rendering capabilities not available on these platforms. |
+
+### Supported platforms
+
+#### Xcode
+
+The SDK is built using the most recent version of [Xcode][11], but is always backwards compatible with the [lowest supported Xcode version][12] for App Store submission.
+
+#### Dependency managers
+
+The iOS SDK supports the following dependency managers:
+
+- [Swift Package Manager][13]
+- [Cocoapods][14]
+- [Carthage][15]
+
+#### Languages
+
+| Language | Version |
+|----------|---------|
+| UIKit | 5.* |
+| Objective-C | 2.0 |
+
+#### UI framework instrumentation
+
+| Framework | Automatic | Manual |
+|--------|-------|-------|
+| UIKit | {% x/ %} | {% x/ %} |
+| SwiftUI | {% x/ %} | {% x/ %} |
+
+#### Network compatibility
+
+| Framework | Automatic | Manual |
+|--------|-------|-------|
+| URLSession | {% x/ %} | {% x/ %} |
+| [Alamofire][16] | {% x/ %} | {% x/ %} |
+| [Apollo GraphQL][17] | {% x/ %} | {% x/ %} |
+| [SDWebImage][18] | {% x/ %} | {% x/ %} |
+| [OpenAPI Generator][19] | {% x/ %} | {% x/ %} |
+| SwiftNIO | | |
+
+#### Dependencies
+
+The Datadog RUM SDK depends on the following third-party library:
+
+- [KSCrash][20] 2.5.0
+
 [1]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#custom-actions
 [2]: https://developer.apple.com/documentation/uikit/app_and_environment/responding_to_the_launch_of_your_app/about_the_app_launch_sequence
 [3]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/?tab=swift#automatically-track-views
@@ -273,3 +352,13 @@ Before data is uploaded to Datadog, it is stored in cleartext in the cache direc
 [8]: /data_security/real_user_monitoring/#geolocation
 [9]: /data_security/real_user_monitoring/#ip-address
 [10]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
+[11]: https://developer.apple.com/xcode/
+[12]: https://developer.apple.com/news/?id=fxu2qp7b
+[13]: /real_user_monitoring/application_monitoring/ios/setup/?tab=swiftpackagemanagerspm#declare-the-sdk-as-a-dependency
+[14]: /real_user_monitoring/application_monitoring/ios/setup/?tab=cocoapods#declare-the-sdk-as-a-dependency
+[15]: /real_user_monitoring/application_monitoring/ios/setup/?tab=carthage#declare-the-sdk-as-a-dependency
+[16]: /real_user_monitoring/application_monitoring/ios/integrated_libraries/#alamofire
+[17]: /real_user_monitoring/application_monitoring/ios/integrated_libraries/#apollo-graphql
+[18]: /real_user_monitoring/application_monitoring/ios/integrated_libraries#sdwebimage
+[19]: /real_user_monitoring/application_monitoring/ios/integrated_libraries#openapi-generator
+[20]: https://github.com/kstenerud/KSCrash

@@ -299,7 +299,7 @@ To connect RUM with your backend traces:
 
 [1]: https://nextjs.org/
 [2]: https://app.datadoghq.com/rum/performance-monitoring
-[3]: /real_user_monitoring/application_monitoring/browser/data_collected/
+[3]: /real_user_monitoring/setup/data_collected/?platform=browser
 [4]: /real_user_monitoring/platform/dashboards/
 [5]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#setup-rum
 [6]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#opentelemetry-support
@@ -308,6 +308,6 @@ To connect RUM with your backend traces:
 [9]: https://nextjs.org/docs/app/building-your-application/rendering/client-components
 [10]: https://nextjs.org/docs/pages
 [11]: https://nextjs.org/docs/pages/building-your-application/routing/custom-app
-[12]: /real_user_monitoring/application_monitoring/browser/data_collected/
+[12]: /real_user_monitoring/setup/data_collected/?platform=browser
 [13]: /real_user_monitoring/platform/dashboards/
 [14]: https://app.datadoghq.com/rum/sessions

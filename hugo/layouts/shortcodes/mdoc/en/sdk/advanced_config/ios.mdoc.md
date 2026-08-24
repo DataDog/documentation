@@ -219,7 +219,7 @@ For better performance in bulk operations (modifying multiple attributes at once
 
 ### Track user sessions
 
-See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=ios) for instructions on adding user information to your RUM sessions.
+See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=ios) for instructions on adding user information to your RUM sessions.
 
 ## Track background events
 
@@ -1159,10 +1159,10 @@ Calling this method disables the SDK and all active features, such as RUM. To re
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/ios
-[3]: /real_user_monitoring/application_monitoring/ios/data_collected/
+[3]: /real_user_monitoring/setup/data_collected/?platform=ios
 [4]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift
-[5]: /real_user_monitoring/application_monitoring/ios/data_collected/?tab=error#error-attributes
-[6]: /real_user_monitoring/application_monitoring/ios/data_collected/?tab=session#default-attributes
+[5]: /real_user_monitoring/setup/data_collected/?platform=ios&tab=error#error-attributes
+[6]: /real_user_monitoring/setup/data_collected/?platform=ios&tab=session#default-attributes
 [7]: https://www.ntppool.org/en/
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [9]: /real_user_monitoring/application_monitoring/ios/setup

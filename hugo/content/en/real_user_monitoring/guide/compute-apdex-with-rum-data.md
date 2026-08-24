@@ -9,7 +9,7 @@ further_reading:
     - link: '/real_user_monitoring/explorer'
       tag: 'Documentation'
       text: 'RUM Dashboards'
-    - link: '/real_user_monitoring/application_monitoring/browser/data_collected'
+    - link: '/real_user_monitoring/setup/data_collected/?platform=browser'
       tag: 'Documentation'
       text: 'RUM Browser Data Collected'
     - link: '/real_user_monitoring/android/data_collected'
