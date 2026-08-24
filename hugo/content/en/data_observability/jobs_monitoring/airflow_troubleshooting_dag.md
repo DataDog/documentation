@@ -922,7 +922,7 @@ This Airflow installation is running on Amazon MWAA
 
 ### Validation summary
 
-The validation summary appears at the end of the task log. Each line starts with one of four symbols:
+The validation summary appears at the end of the task log. Each line starts with one of the following symbols:
 
 - `✓`: Check passed.
 - `✗`: Check failed (events are not sent to Datadog).
