@@ -7854,6 +7854,11 @@ menu:
       parent: security_platform
       identifier: security_assignee_management
       weight: 11
+    - name: Severity Adjustment
+      url: security/manual_severity_adjustment
+      parent: security_platform
+      identifier: security_manual_severity_adjustment
+      weight: 12
     - name: Research Feed
       url: security/research_feed
       parent: security_platform
