@@ -7,9 +7,14 @@ type: multi-code-lang
 weight: 2
 ---
 
+{{< callout url="#"
+ btn_hidden="true" header="false">}}
+The OpenTelemetry Traces destination is in Preview. Contact your account manager to request access.
+{{< /callout >}}
+
 ## Overview
 
-Use Observability Pipelines' {{< tooltip text="OpenTelemetry Traces destination" tooltip="Contact your account manager to request access." >}} to send traces to an OpenTelemetry (OTel) Collector.
+Use Observability Pipelines' OpenTelemetry Traces destination to send traces to an OpenTelemetry (OTel) Collector.
 
 <div class="alert alert-info">You must use an OpenTelemetry source to use the OpenTelemetry Traces destination.</div>
 
