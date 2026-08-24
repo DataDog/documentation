@@ -12,5 +12,5 @@ Most Unity Monitoring data is collected by native Datadog iOS and Android SDKs f
 * For iOS event-specific telemetry and attributes, see [RUM iOS Data Collected][1].
 * For Android event-specific telemetry and attributes, see [RUM Android Data Collected][2].
 
-[1]: /real_user_monitoring/application_monitoring/ios/data_collected/#event-specific-attributes
-[2]: /real_user_monitoring/application_monitoring/android/data_collected/#event-specific-attributes
+[1]: /real_user_monitoring/setup/data_collected/?platform=ios#event-specific-attributes
+[2]: /real_user_monitoring/setup/data_collected/?platform=android#event-specific-attributes

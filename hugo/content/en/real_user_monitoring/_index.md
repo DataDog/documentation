@@ -6,7 +6,7 @@ aliases:
   - /real_user_monitoring/installation
   - /real_user_monitoring/faq/
 further_reading:
-- link: "/real_user_monitoring/application_monitoring/browser/data_collected/"
+- link: "/real_user_monitoring/setup/data_collected/?platform=browser"
   tag: "Documentation"
   text: "RUM Browser Data Collected"
 - link: "https://learn.datadoghq.com/courses/intro-to-rum"

@@ -4,7 +4,7 @@ Frustration signals require Browser RUM SDK version 4.14.0 or higher.
 
 To start collecting frustration signals, add the following to your SDK configuration:
 
-{{% collapse-content title="Latest version" level="h4" expanded=true %}}
+{% collapse-content title="Latest version" level="h4" expanded=true %}
 
 ```javascript
 window.DD_RUM.init({
@@ -12,9 +12,9 @@ window.DD_RUM.init({
 })
 ```
 
-{{% /collapse-content %}}
+{% /collapse-content %}
 
-{{% collapse-content title="Before v5.0.0" level="h4" expanded=false %}}
+{% collapse-content title="Before v5.0.0" level="h4" expanded=false %}
 
 ```javascript
 window.DD_RUM.init({
@@ -25,7 +25,7 @@ window.DD_RUM.init({
 
 Frustration signals require actions. Enabling `trackFrustrations` automatically enables `trackUserInteractions`.
 
-{{% /collapse-content %}}
+{% /collapse-content %}
 
 By enabling frustration signals, Datadog collects all three signal types (rage clicks, dead clicks, and error clicks) by default.
 

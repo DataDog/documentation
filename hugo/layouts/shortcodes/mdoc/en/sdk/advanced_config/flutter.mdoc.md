@@ -359,7 +359,7 @@ To set a custom global attribute, use `DdRum.addAttribute`.
 
 ### Track user sessions
 
-See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=flutter) for instructions on adding user information to your RUM sessions.
+See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=flutter) for instructions on adding user information to your RUM sessions.
 
 ### Add custom user attributes
 
@@ -504,7 +504,7 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 [11]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
 [12]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
 [13]: /serverless/aws_lambda/distributed_tracing/
-[14]: /real_user_monitoring/application_monitoring/flutter/data_collected
+[14]: /real_user_monitoring/setup/data_collected/?platform=flutter
 [15]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
 [16]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
 [17]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/

@@ -38,4 +38,4 @@ DatadogSdk.instance.addUserExtraInfo({
 ```
 
 [1]: https://app.datadoghq.com/rum/application/create
-[14]: /real_user_monitoring/application_monitoring/flutter/data_collected
+[14]: /real_user_monitoring/setup/data_collected/?platform=flutter
