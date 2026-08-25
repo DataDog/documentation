@@ -5694,7 +5694,7 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
       weight: 50305
-    - name: Configure
+    - name: Configure Agent Observability
       url: llm_observability/configure/
       parent: llm_obs
       identifier: llm_obs_configure
