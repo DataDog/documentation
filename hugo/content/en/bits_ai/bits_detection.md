@@ -28,7 +28,7 @@ Your team's existing monitors stay in place. Bits Detection works alongside them
 You can enable Bits Detection for additional services from several entry points:
 
 #### Option 1: Bits Detection Coverage Page {#enable-from-bits-ai}
-1. In Datadog, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Detection{{< /ui >}}][5] and and click {{< ui >}}Enable New Detection Coverage{{< /ui >}}.
+1. In Datadog, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Detection{{< /ui >}}][5] and click {{< ui >}}Enable New Detection Coverage{{< /ui >}}.
 1. Filter the service list to find services you'd like to enable, and select one or more services from the list.
 1. Set up a notification destination so the team knows when Bits finds a critical degradation.
 1. Review the managed coverage after initialization completes. You receive an email when your new health posture is ready.
