@@ -2118,6 +2118,34 @@
     "request_description": "",
     "request_schema_description": "A request to update the organization-wide governance notification settings."
   },
+  "ListTagRules": {
+    "description": "Retrieve all tag rules for the organization. Optionally include disabled or deleted\nrules, filter by telemetry source, and include each rule's current compliance score\nvia the `include=score` query parameter.",
+    "summary": "List tag rules"
+  },
+  "CreateTagRule": {
+    "description": "Create a new tag rule for the organization. The caller's organization is derived from\nthe authenticated user; cross-organization creation is not supported. Fields such as\n`rule_id`, `version`, and the timestamp/audit fields are assigned by the server.",
+    "summary": "Create a tag rule",
+    "request_description": "",
+    "request_schema_description": "Payload for creating a new tag rule."
+  },
+  "DeleteTagRule": {
+    "description": "Delete a tag rule. By default the rule is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe rule permanently.",
+    "summary": "Delete a tag rule"
+  },
+  "GetTagRule": {
+    "description": "Retrieve a single tag rule by ID. Optionally include the rule's current compliance\nscore via the `include=score` query parameter. Rules belonging to other organizations\ncannot be retrieved.",
+    "summary": "Get a tag rule"
+  },
+  "UpdateTagRule": {
+    "description": "Update one or more attributes of an existing tag rule. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The rule's\n`source` cannot be changed after creation.",
+    "summary": "Update a tag rule",
+    "request_description": "",
+    "request_schema_description": "Payload for updating an existing tag rule. Only the supplied fields are modified."
+  },
+  "GetTagRuleScore": {
+    "description": "Retrieve the compliance score for a single tag rule. The score is computed over the\nrequested time window (or a source-appropriate default) and represents the percentage of\ntelemetry within that window that conforms to the rule. A `null` score indicates that\nno relevant telemetry was found.",
+    "summary": "Get a tag rule compliance score"
+  },
   "GetHamrOrgConnection": {
     "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",
     "summary": "Get HAMR organization connection"
@@ -2609,6 +2637,54 @@
     "summary": "Update an incident timestamp override",
     "request_description": "Timestamp override patch payload.",
     "request_schema_description": "Request payload for patching a timestamp override."
+  },
+  "ListElasticCloudIntegrationAccounts": {
+    "description": "List Elastic Cloud integration accounts.",
+    "summary": "List Elastic Cloud integration accounts"
+  },
+  "CreateElasticCloudIntegrationAccount": {
+    "description": "Create an Elastic Cloud integration account.",
+    "summary": "Create an Elastic Cloud integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an Elastic Cloud integration account."
+  },
+  "DeleteElasticCloudIntegrationAccount": {
+    "description": "Delete an Elastic Cloud integration account.",
+    "summary": "Delete an Elastic Cloud integration account"
+  },
+  "GetElasticCloudIntegrationAccount": {
+    "description": "Get an Elastic Cloud integration account.",
+    "summary": "Get an Elastic Cloud integration account"
+  },
+  "UpdateElasticCloudIntegrationAccount": {
+    "description": "Update an Elastic Cloud integration account. Only the fields provided are changed.",
+    "summary": "Update an Elastic Cloud integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an Elastic Cloud integration account."
+  },
+  "ListTwilioIntegrationAccounts": {
+    "description": "List Twilio integration accounts.",
+    "summary": "List Twilio integration accounts"
+  },
+  "CreateTwilioIntegrationAccount": {
+    "description": "Create a Twilio integration account.",
+    "summary": "Create a Twilio integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Twilio integration account."
+  },
+  "DeleteTwilioIntegrationAccount": {
+    "description": "Delete a Twilio integration account.",
+    "summary": "Delete a Twilio integration account"
+  },
+  "GetTwilioIntegrationAccount": {
+    "description": "Get a Twilio integration account.",
+    "summary": "Get a Twilio integration account"
+  },
+  "UpdateTwilioIntegrationAccount": {
+    "description": "Update a Twilio integration account. Only the fields provided are changed.",
+    "summary": "Update a Twilio integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Twilio integration account."
   },
   "ListAWSAccounts": {
     "description": "Get a list of AWS Account Integration Configs.",
@@ -5059,6 +5135,30 @@
     "request_description": "The definition of the new RUM retention filter.",
     "request_schema_description": "The RUM retention filter body to create."
   },
+  "ListExclusionFilters": {
+    "description": "Get the list of exclusion filters for a RUM application.\nThe built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`) is always returned first.",
+    "summary": "Get all RUM exclusion filters"
+  },
+  "CreateExclusionFilter": {
+    "description": "Create an exclusion filter for a RUM application.\nReturns the created exclusion filter when the request is successful.",
+    "summary": "Create a RUM exclusion filter",
+    "request_description": "The definition of the new RUM exclusion filter.",
+    "request_schema_description": "The exclusion filter body to create."
+  },
+  "DeleteExclusionFilter": {
+    "description": "Delete an exclusion filter for a RUM application.\nThe built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`) cannot be deleted;\nattempting to do so returns a `405 Method Not Allowed` response.",
+    "summary": "Delete a RUM exclusion filter"
+  },
+  "GetExclusionFilter": {
+    "description": "Get a single exclusion filter for a RUM application.",
+    "summary": "Get a RUM exclusion filter"
+  },
+  "UpdateExclusionFilter": {
+    "description": "Update an exclusion filter for a RUM application.\nFor the built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`), only `enabled` can be\nupdated; `name`, `event_type`, and `query` must be omitted.\nReturns the updated exclusion filter when the request is successful.",
+    "summary": "Update a RUM exclusion filter",
+    "request_description": "New definition of the RUM exclusion filter.",
+    "request_schema_description": "The exclusion filter body to update."
+  },
   "ListPermanentRetentionFilters": {
     "description": "Get the list of permanent RUM retention filters for a RUM application.\nPermanent retention filters are predefined filters that cannot be created or deleted.\nFor each filter, the `editability` block indicates which cross-product fields can be updated.",
     "summary": "Get all permanent RUM retention filters"
@@ -7004,34 +7104,6 @@
     "summary": "Patch a global variable",
     "request_description": "JSON Patch document with operations to apply.",
     "request_schema_description": "JSON Patch request for global variable."
-  },
-  "ListTagPolicies": {
-    "description": "Retrieve all tag policies for the organization. Optionally include disabled or deleted\npolicies, filter by telemetry source, and include each policy's current compliance score\nvia the `include=score` query parameter.",
-    "summary": "List tag policies"
-  },
-  "CreateTagPolicy": {
-    "description": "Create a new tag policy for the organization. The caller's organization is derived from\nthe authenticated user; cross-organization creation is not supported. Fields such as\n`policy_id`, `version`, and the timestamp/audit fields are assigned by the server.",
-    "summary": "Create a tag policy",
-    "request_description": "",
-    "request_schema_description": "Payload for creating a new tag policy."
-  },
-  "DeleteTagPolicy": {
-    "description": "Delete a tag policy. By default the policy is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe policy permanently.",
-    "summary": "Delete a tag policy"
-  },
-  "GetTagPolicy": {
-    "description": "Retrieve a single tag policy by ID. Optionally include the policy's current compliance\nscore via the `include=score` query parameter. Policies belonging to other organizations\ncannot be retrieved.",
-    "summary": "Get a tag policy"
-  },
-  "UpdateTagPolicy": {
-    "description": "Update one or more attributes of an existing tag policy. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The policy's\n`source` cannot be changed after creation.",
-    "summary": "Update a tag policy",
-    "request_description": "",
-    "request_schema_description": "Payload for updating an existing tag policy. Only the supplied fields are modified."
-  },
-  "GetTagPolicyScore": {
-    "description": "Retrieve the compliance score for a single tag policy. The score is computed over the\nrequested time window (or a source-appropriate default) and represents the percentage of\ntelemetry within that window that conforms to the policy. A `null` score indicates that\nno relevant telemetry was found.",
-    "summary": "Get a tag policy compliance score"
   },
   "ListTagPipelinesRulesets": {
     "description": "List all tag pipeline rulesets - Retrieve a list of all tag pipeline rulesets for the organization",

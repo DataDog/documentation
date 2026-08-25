@@ -119,6 +119,7 @@
 /*/session_replay/privacy_options.md
 /*/session_replay/setup_and_configuration.md
 /*/session_replay/troubleshooting.md
+/*/security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/_index.md
 /*/dd_e2e/cdocs/components/stepper_customizable.md
 /*/serverless/azure_container_apps/_index.md
 /*/serverless/azure_container_apps/manual_instrumentation/_index.md
