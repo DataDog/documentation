@@ -505,7 +505,7 @@ Databricks masks SQL query text for any principal that is not an account adminis
 
 Add the service principal to `databricks_pii_access` to use the following capabilities, which read query text:
 
-- **Serverless job monitoring**: monitoring jobs that run on [serverless compute][34], where no Datadog Agent runs on the cluster.
+- **Serverless job monitoring**: Monitoring jobs that run on [serverless compute][34], where no Datadog Agent runs on the cluster.
 - **Query and SQL warehouse monitoring and optimization**: visibility into the queries running on your SQL warehouses, and the recommendations Datadog generates from them.
 
 Databricks cost data, job monitoring on all-purpose and job clusters, and table-level [Quality Monitoring][35] metrics do not depend on query text and are unaffected.
