@@ -105,6 +105,12 @@ Click on a library with a vulnerability to open a side panel that contains infor
 
 <!-- {{< img src="code_security/software_composition_analysis/sca-violation.png" alt="Side panel for a SCA violation" style="width:80%;">}} -->
 
+#### View impacted infrastructure
+
+For Runtime SCA vulnerabilities, select a vulnerability to open its side panel, then select the {{< ui >}}Impacted Infrastructure{{< /ui >}} tab. This tab lists the hosts where the affected library version runs, along with the associated services, environments, and last deployment time.
+
+Select {{< ui >}}View Host{{< /ui >}} to investigate a host, or select {{< ui >}}View Vulnerabilities in Cloud Security{{< /ui >}} to review its open host vulnerabilities.
+
 ### Remediation
 
 Datadog SCA supports using coding agents and [Bits Code][31] to apply fixes for vulnerable libraries. You can also use [Bits Code Automation][32] to automatically generate fixes for vulnerabilities as they are found or on a schedule.
