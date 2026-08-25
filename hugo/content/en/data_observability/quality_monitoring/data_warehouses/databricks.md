@@ -46,6 +46,8 @@ GRANT USE SCHEMA ON CATALOG system TO `<application_id>`;
 GRANT SELECT ON CATALOG system TO `<application_id>`;
 ```
 
+These grants cover the whole `system` catalog, which includes the [query history system table][4] (`system.query.history`). Datadog reads query history from this table to build lineage between your tables and to give you visibility into the queries running against them. To read the query text in that table, the service principal also needs the group membership described in [Step 3](#step-3---grant-access-to-query-text).
+
 Then, grant read-only access to the scope of data you want to monitor:
 
 {{< tabs >}}
@@ -80,6 +82,28 @@ These permissions are needed for the following reasons:
 - `GRANT USE SCHEMA` is required to enumerate tables and monitor schema-level health.
 - `GRANT SELECT` is required for data quality monitoring, such as custom SQL or distribution checks.
 
+### Step 3 - Grant access to query text
+
+Databricks masks SQL query text for any principal that is not an account administrator or a member of the `databricks_pii_access` account-level group. For a masked principal, query text is returned as `<Redacted>` in the `statement_text` column of `system.query.history`, the [Query History API][5], the [List Queries API][6], and audit log events that capture SQL statement text.
+
+Add the service principal to `databricks_pii_access` to use the following capabilities, which read query text:
+
+- **Databricks serverless job monitoring**: monitoring jobs that run on [serverless compute][7], where no Datadog Agent runs on the cluster.
+- **Query and SQL warehouse monitoring and optimization**: visibility into the queries running on your SQL warehouses, and the recommendations Datadog generates from them.
+
+Lineage and query-level visibility built from query history are also affected. Table-level metrics such as freshness, row count, and column statistics read table data and metadata rather than query text, so they work without this membership.
+
+Group membership is required in addition to the `system` catalog grants in [Step 2](#step-2---grant-access). A principal that is in the group but lacks `SELECT` on `CATALOG system` still cannot read query history.
+
+To create the group and add the service principal:
+
+1. The `databricks_pii_access` group does not exist in a Databricks account by default, and workspace administrators are not members of it automatically. Create it with the exact name `databricks_pii_access`, which is case-sensitive:
+   - If you do not manage groups with SCIM or an external identity provider, go to {{< ui >}}Account Console{{< /ui >}} > {{< ui >}}User Management{{< /ui >}} > {{< ui >}}Groups{{< /ui >}} > {{< ui >}}Add Group{{< /ui >}}.
+   - If you manage groups with SCIM or an external identity provider, create the group there instead.
+1. Add the service principal from [Step 1](#step-1---connect-the-databricks-integration-tile) to the group.
+
+For more details, see the Databricks documentation on [managing account-level groups][8].
+
 ## Next steps
 
 After you configure the integration, Datadog begins syncing your metadata and column-level lineage in the background. Initial syncs can take several hours depending on the size of your Databricks deployment.
@@ -93,3 +117,8 @@ After the initial sync completes, create a [Data Observability monitor][3] to st
 [1]: /data_observability/jobs_monitoring/databricks/
 [2]: /integrations/databricks/
 [3]: /monitors/types/data_observability/
+[4]: https://docs.databricks.com/aws/en/admin/system-tables/query-history
+[5]: https://docs.databricks.com/api/workspace/queryhistory/list
+[6]: https://docs.databricks.com/api/workspace/queries/list
+[7]: https://docs.databricks.com/aws/en/compute/serverless/
+[8]: https://docs.databricks.com/aws/en/admin/users-groups/groups
