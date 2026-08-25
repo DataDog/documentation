@@ -23,7 +23,7 @@ If you already have or prefer to use a secret in Secrets Manager, you can set th
 ```shell
 export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
 ```
-4. Install your Lambda function with Agent Observability (this requires at least version 77 of the Datadog Extension layer)
+4. Instrument your Lambda function with Agent Observability (this requires at least version 77 of the Datadog Extension layer)
 {{< tabs >}}
 {{% tab "Python" %}}
 ```shell
