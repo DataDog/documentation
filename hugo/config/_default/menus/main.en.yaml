@@ -5559,22 +5559,22 @@ menu:
       parent: llm_obs
       identifier: llm_obs_build_with_ai
       weight: 2
-    - name: Instrument
+    - name: Agent Observability Instrumentation
       url: llm_observability/instrument/
       parent: llm_obs
       identifier: llm_obs_instrumentation
       weight: 3
-    - name: Automatic Instrumentation
+    - name: Automatic Instrumentation for Agent Observability
       url: llm_observability/instrument/auto_instrumentation
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_auto
       weight: 301
-    - name: SDK Reference
+    - name: Agent Observability SDK Reference
       url: llm_observability/instrument/sdk
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_sdk
       weight: 302
-    - name: API Reference
+    - name: HTTP API Reference
       url: llm_observability/instrument/api
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_api
@@ -5589,22 +5589,22 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_agentic
       weight: 305
-    - name: Python
+    - name: Python Application Agentic Instrumentation
       url: llm_observability/instrument/agentic/python
       parent: llm_obs_instrumentation_agentic
       identifier: llm_obs_instrumentation_agentic_python
       weight: 30501
-    - name: Node.js
+    - name: Node.js Application Agentic Instrumentation
       url: llm_observability/instrument/agentic/nodejs
       parent: llm_obs_instrumentation_agentic
       identifier: llm_obs_instrumentation_agentic_nodejs
       weight: 30502
-    - name: Java
+    - name: Java Application Agentic Instrumentation
       url: llm_observability/instrument/agentic/java
       parent: llm_obs_instrumentation_agentic
       identifier: llm_obs_instrumentation_agentic_java
       weight: 30503
-    - name: Agent Observability and APM
+    - name: Correlating Agent Observability and APM
       url: llm_observability/instrument/agent_observability_and_apm
       parent: llm_obs_instrumentation
       identifier: llm_obs_correlate_apm
@@ -5649,7 +5649,7 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_evaluations_export_api
       weight: 406
-    - name: Improve
+    - name: Improve Your Application
       url: llm_observability/improve/
       parent: llm_obs
       identifier: llm_obs_improve
@@ -5714,6 +5714,11 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_language_mismatch
       weight: 60102
+    - name: Sensitive Data Scanner
+      url: llm_observability/configure/evaluations/managed_evaluations/security_and_safety_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_sensitive_data_scanner
+      weight: 60103
     - name: End-User Feedback
       url: llm_observability/configure/evaluations/end_user_feedback
       parent: llm_obs_evaluations
@@ -5754,41 +5759,6 @@ menu:
       parent: llm_obs
       identifier: llm_obs_guide
       weight: 9
-    - name: Using the Datadog-CrewAI Integration
-      url: llm_observability/guide/crewai_guide
-      parent: llm_obs_guide
-      identifier: llm_obs_guide_crewai
-      weight: 901
-    - name: Trace an LLM Application in AWS Lambda
-      url: llm_observability/guide/trace-an-llm-application-in-aws-lambda
-      parent: llm_obs_guide
-      identifier: llm_obs_guide_aws_lambda
-      weight: 902
-    - name: Evaluation Developer Guide
-      url: llm_observability/configure/evaluations/evaluation_developer_guide
-      parent: llm_obs_guide
-      identifier: llm_obs_guide_evaluation_developer_guide
-      weight: 903
-    - name: Instrument a Next.js Application
-      url: llm_observability/guide/nextjs_guide
-      parent: llm_obs_guide
-      identifier: llm_obs_guide_nextjs
-      weight: 903
-    - name: Monitor Proxy Services
-      url: llm_observability/guide/monitor_proxy_services
-      parent: llm_obs_guide
-      identifier: llm_obs_guide_monitor_proxy_services
-      weight: 904
-    - name: Agent Monitoring
-      url: llm_observability/guide/agent_monitoring
-      parent: llm_obs_guide
-      identifier: llm_obs_guide_agent_monitoring
-      weight: 905
-    - name: Monitor MCP Clients
-      url: llm_observability/guide/monitor_mcp_client
-      parent: llm_obs_guide
-      identifier: llm_obs_guide_monitor_mcp_client
-      weight: 906
     - name: GPU Monitoring
       url: gpu_monitoring/
       pre: gpu-monitoring-wui

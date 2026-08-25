@@ -1,5 +1,5 @@
 ---
-title: Java
+title: Java Application Agentic Instrumentation
 aliases:
 - /llm_observability/instrumentation/agentic/java/
 ---
