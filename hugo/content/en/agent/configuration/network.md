@@ -98,8 +98,13 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
+[End User Device Monitoring][103]
+: `softinv-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+`eudm-intake.`{{< region-param key="dd_site" code="true" >}
+
 [101]: /remote_configuration
 [102]: /database_monitoring/
+[103]: /infrastructure/end_user_device_monitoring/
 
 {{% /site-region %}}
 
