@@ -2610,6 +2610,54 @@
     "request_description": "Timestamp override patch payload.",
     "request_schema_description": "Request payload for patching a timestamp override."
   },
+  "ListElasticCloudIntegrationAccounts": {
+    "description": "List Elastic Cloud integration accounts.",
+    "summary": "List Elastic Cloud integration accounts"
+  },
+  "CreateElasticCloudIntegrationAccount": {
+    "description": "Create an Elastic Cloud integration account.",
+    "summary": "Create an Elastic Cloud integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an Elastic Cloud integration account."
+  },
+  "DeleteElasticCloudIntegrationAccount": {
+    "description": "Delete an Elastic Cloud integration account.",
+    "summary": "Delete an Elastic Cloud integration account"
+  },
+  "GetElasticCloudIntegrationAccount": {
+    "description": "Get an Elastic Cloud integration account.",
+    "summary": "Get an Elastic Cloud integration account"
+  },
+  "UpdateElasticCloudIntegrationAccount": {
+    "description": "Update an Elastic Cloud integration account. Only the fields provided are changed.",
+    "summary": "Update an Elastic Cloud integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an Elastic Cloud integration account."
+  },
+  "ListTwilioIntegrationAccounts": {
+    "description": "List Twilio integration accounts.",
+    "summary": "List Twilio integration accounts"
+  },
+  "CreateTwilioIntegrationAccount": {
+    "description": "Create a Twilio integration account.",
+    "summary": "Create a Twilio integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Twilio integration account."
+  },
+  "DeleteTwilioIntegrationAccount": {
+    "description": "Delete a Twilio integration account.",
+    "summary": "Delete a Twilio integration account"
+  },
+  "GetTwilioIntegrationAccount": {
+    "description": "Get a Twilio integration account.",
+    "summary": "Get a Twilio integration account"
+  },
+  "UpdateTwilioIntegrationAccount": {
+    "description": "Update a Twilio integration account. Only the fields provided are changed.",
+    "summary": "Update a Twilio integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Twilio integration account."
+  },
   "ListAWSAccounts": {
     "description": "Get a list of AWS Account Integration Configs.",
     "summary": "List all AWS integrations"

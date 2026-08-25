@@ -12834,6 +12834,75 @@ menu:
           - GetDomainAllowlist
         unstable: []
         order: 1
+    - name: Elastic Cloud Integration Accounts
+      url: /api/latest/elastic-cloud-integration-accounts/
+      identifier: elastic-cloud-integration-accounts
+      generated: true
+    - name: Update an Elastic Cloud integration account
+      url: /api/latest/elastic-cloud-integration-accounts/update-an-elastic-cloud-integration-account/
+      identifier: elastic-cloud-integration-accounts-update-an-elastic-cloud-integration-account
+      parent: elastic-cloud-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateElasticCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get an Elastic Cloud integration account
+      url: /api/latest/elastic-cloud-integration-accounts/get-an-elastic-cloud-integration-account/
+      identifier: elastic-cloud-integration-accounts-get-an-elastic-cloud-integration-account
+      parent: elastic-cloud-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetElasticCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete an Elastic Cloud integration account
+      url: /api/latest/elastic-cloud-integration-accounts/delete-an-elastic-cloud-integration-account/
+      identifier: elastic-cloud-integration-accounts-delete-an-elastic-cloud-integration-account
+      parent: elastic-cloud-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteElasticCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create an Elastic Cloud integration account
+      url: /api/latest/elastic-cloud-integration-accounts/create-an-elastic-cloud-integration-account/
+      identifier: elastic-cloud-integration-accounts-create-an-elastic-cloud-integration-account
+      parent: elastic-cloud-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateElasticCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Elastic Cloud integration accounts
+      url: /api/latest/elastic-cloud-integration-accounts/list-elastic-cloud-integration-accounts/
+      identifier: elastic-cloud-integration-accounts-list-elastic-cloud-integration-accounts
+      parent: elastic-cloud-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListElasticCloudIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Entity Integration Configs
       url: /api/latest/entity-integration-configs/
       identifier: entity-integration-configs
@@ -22145,6 +22214,75 @@ menu:
           - UpdateFlakyTestsManagementPolicies
         unstable: []
         order: 7
+    - name: Twilio Integration Accounts
+      url: /api/latest/twilio-integration-accounts/
+      identifier: twilio-integration-accounts
+      generated: true
+    - name: Update a Twilio integration account
+      url: /api/latest/twilio-integration-accounts/update-a-twilio-integration-account/
+      identifier: twilio-integration-accounts-update-a-twilio-integration-account
+      parent: twilio-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTwilioIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Twilio integration account
+      url: /api/latest/twilio-integration-accounts/get-a-twilio-integration-account/
+      identifier: twilio-integration-accounts-get-a-twilio-integration-account
+      parent: twilio-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTwilioIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Twilio integration account
+      url: /api/latest/twilio-integration-accounts/delete-a-twilio-integration-account/
+      identifier: twilio-integration-accounts-delete-a-twilio-integration-account
+      parent: twilio-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTwilioIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Twilio integration account
+      url: /api/latest/twilio-integration-accounts/create-a-twilio-integration-account/
+      identifier: twilio-integration-accounts-create-a-twilio-integration-account
+      parent: twilio-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTwilioIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Twilio integration accounts
+      url: /api/latest/twilio-integration-accounts/list-twilio-integration-accounts/
+      identifier: twilio-integration-accounts-list-twilio-integration-accounts
+      parent: twilio-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTwilioIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: User Authorized Clients
       url: /api/latest/user-authorized-clients/
       identifier: user-authorized-clients

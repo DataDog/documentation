@@ -949,6 +949,13 @@ components:
       required: true
       schema:
         type: string
+    IntegrationAccountIdParameter:
+      description: Unique identifier of the integration account.
+      in: path
+      name: account_id
+      required: true
+      schema:
+        type: string
     IssueIDPathParameter:
       description: The identifier of the issue.
       example: "c1726a66-1f64-11ee-b338-da7ad0900002"
@@ -35057,6 +35064,363 @@ components:
         - score
         - severity
       type: object
+    ElasticCloudDetailedIndexStatsIntegrationDataflowRequest:
+      description: The Elastic Cloud detailed index stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    ElasticCloudDetailedIndexStatsIntegrationDataflowResponse:
+      description: The Elastic Cloud detailed index stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ElasticCloudIndexStatsIntegrationDataflowRequest:
+      description: The Elastic Cloud index stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    ElasticCloudIndexStatsIntegrationDataflowResponse:
+      description: The Elastic Cloud index stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ElasticCloudIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the Elastic Cloud integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/IntegrationAccountBasicAuthRequest"
+    ElasticCloudIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the Elastic Cloud integration account.
+      oneOf:
+        - $ref: "#/components/schemas/IntegrationAccountBasicAuthResponse"
+    ElasticCloudIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the Elastic Cloud integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/IntegrationAccountBasicAuthUpdate"
+    ElasticCloudIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create an Elastic Cloud integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/ElasticCloudIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Elastic Cloud integration account.
+          example: elastic-cloud-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    ElasticCloudIntegrationAccountCreateData:
+      description: Data envelope for creating an Elastic Cloud integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    ElasticCloudIntegrationAccountCreateRequest:
+      description: Request payload to create an Elastic Cloud integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    ElasticCloudIntegrationAccountResponse:
+      description: Response payload for a single Elastic Cloud integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    ElasticCloudIntegrationAccountResponseAttributes:
+      description: Attributes of an Elastic Cloud integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/ElasticCloudIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the Elastic Cloud integration account.
+          example: elastic-cloud-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    ElasticCloudIntegrationAccountResponseData:
+      description: Data envelope of an Elastic Cloud integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the Elastic Cloud integration account.
+          example: 953a0060-81ec-4221-aed4-d4733b59cd96
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    ElasticCloudIntegrationAccountSettingsRequest:
+      description: Settings for creating the Elastic Cloud integration account.
+      properties:
+        tags:
+          description: Comma-separated list of custom tags for this Elastic Cloud deployment.
+          example: "env:prod,team:saasint"
+          type: string
+        url:
+          description: Elastic Cloud deployment URL.
+          example: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+          type: string
+      required:
+        - url
+      type: object
+    ElasticCloudIntegrationAccountSettingsResponse:
+      description: Settings configured on the Elastic Cloud integration account.
+      properties:
+        tags:
+          description: Comma-separated list of custom tags for this Elastic Cloud deployment.
+          example: "env:prod,team:saasint"
+          type: string
+        url:
+          description: Elastic Cloud deployment URL.
+          example: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+          type: string
+      required:
+        - url
+      type: object
+    ElasticCloudIntegrationAccountSettingsUpdate:
+      description: Settings for updating the Elastic Cloud integration account. Only the fields provided are changed.
+      properties:
+        tags:
+          description: Comma-separated list of custom tags for this Elastic Cloud deployment.
+          example: "env:prod,team:saasint"
+          type: string
+        url:
+          description: Elastic Cloud deployment URL.
+          example: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+          type: string
+      type: object
+    ElasticCloudIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update an Elastic Cloud integration account. Every field is optional; only the fields provided are changed. When `dataflows` is provided, only the dataflow ids included in the request are modified; dataflows omitted from the map keep their current configuration.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/ElasticCloudIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Elastic Cloud integration account.
+          example: elastic-cloud-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountSettingsUpdate"
+      type: object
+    ElasticCloudIntegrationAccountUpdateData:
+      description: Data envelope for updating an Elastic Cloud integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the Elastic Cloud integration account to update.
+          example: 953a0060-81ec-4221-aed4-d4733b59cd96
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ElasticCloudIntegrationAccountUpdateRequest:
+      description: Request payload to update an Elastic Cloud integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    ElasticCloudIntegrationAccountsResponse:
+      description: Response payload for a list of Elastic Cloud integration accounts.
+      properties:
+        data:
+          description: List of Elastic Cloud integration accounts.
+          items:
+            $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    ElasticCloudIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: Dataflows to configure on the Elastic Cloud integration account, keyed by dataflow id.
+      properties:
+        elastic-cloud-detailed-index-stats:
+          $ref: "#/components/schemas/ElasticCloudDetailedIndexStatsIntegrationDataflowRequest"
+        elastic-cloud-index-stats:
+          $ref: "#/components/schemas/ElasticCloudIndexStatsIntegrationDataflowRequest"
+        elastic-cloud-pending-task-stats:
+          $ref: "#/components/schemas/ElasticCloudPendingTaskStatsIntegrationDataflowRequest"
+        elastic-cloud-primary-shard-graceful-timeout:
+          $ref: "#/components/schemas/ElasticCloudPrimaryShardGracefulTimeoutIntegrationDataflowRequest"
+        elastic-cloud-primary-shard-stats:
+          $ref: "#/components/schemas/ElasticCloudPrimaryShardStatsIntegrationDataflowRequest"
+        elastic-cloud-shard-allocation-stats:
+          $ref: "#/components/schemas/ElasticCloudShardAllocationStatsIntegrationDataflowRequest"
+        elastic-cloud-slm-stats:
+          $ref: "#/components/schemas/ElasticCloudSlmStatsIntegrationDataflowRequest"
+      type: object
+    ElasticCloudIntegrationDataflowsResponse:
+      description: Dataflows configured on the Elastic Cloud integration account, keyed by dataflow id.
+      properties:
+        elastic-cloud-detailed-index-stats:
+          $ref: "#/components/schemas/ElasticCloudDetailedIndexStatsIntegrationDataflowResponse"
+        elastic-cloud-index-stats:
+          $ref: "#/components/schemas/ElasticCloudIndexStatsIntegrationDataflowResponse"
+        elastic-cloud-metrics:
+          $ref: "#/components/schemas/ElasticCloudMetricsIntegrationDataflowResponse"
+        elastic-cloud-pending-task-stats:
+          $ref: "#/components/schemas/ElasticCloudPendingTaskStatsIntegrationDataflowResponse"
+        elastic-cloud-primary-shard-graceful-timeout:
+          $ref: "#/components/schemas/ElasticCloudPrimaryShardGracefulTimeoutIntegrationDataflowResponse"
+        elastic-cloud-primary-shard-stats:
+          $ref: "#/components/schemas/ElasticCloudPrimaryShardStatsIntegrationDataflowResponse"
+        elastic-cloud-shard-allocation-stats:
+          $ref: "#/components/schemas/ElasticCloudShardAllocationStatsIntegrationDataflowResponse"
+        elastic-cloud-slm-stats:
+          $ref: "#/components/schemas/ElasticCloudSlmStatsIntegrationDataflowResponse"
+      type: object
+    ElasticCloudMetricsIntegrationDataflowResponse:
+      description: The Elastic Cloud metrics dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          readOnly: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ElasticCloudPendingTaskStatsIntegrationDataflowRequest:
+      description: The Elastic Cloud pending task stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    ElasticCloudPendingTaskStatsIntegrationDataflowResponse:
+      description: The Elastic Cloud pending task stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ElasticCloudPrimaryShardGracefulTimeoutIntegrationDataflowRequest:
+      description: The Elastic Cloud primary shard graceful timeout dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    ElasticCloudPrimaryShardGracefulTimeoutIntegrationDataflowResponse:
+      description: The Elastic Cloud primary shard graceful timeout dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ElasticCloudPrimaryShardStatsIntegrationDataflowRequest:
+      description: The Elastic Cloud primary shard stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    ElasticCloudPrimaryShardStatsIntegrationDataflowResponse:
+      description: The Elastic Cloud primary shard stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ElasticCloudShardAllocationStatsIntegrationDataflowRequest:
+      description: The Elastic Cloud shard allocation stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    ElasticCloudShardAllocationStatsIntegrationDataflowResponse:
+      description: The Elastic Cloud shard allocation stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ElasticCloudSlmStatsIntegrationDataflowRequest:
+      description: The Elastic Cloud snapshot lifecycle management stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    ElasticCloudSlmStatsIntegrationDataflowResponse:
+      description: The Elastic Cloud snapshot lifecycle management stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
     EmailTypeType:
       description: The type of email.
       enum:
@@ -53245,6 +53609,101 @@ components:
         - id
         - attributes
       type: object
+    IntegrationAccountBasicAuthRequest:
+      description: Username and password authentication.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/IntegrationAccountBasicAuthType"
+        password:
+          description: Secret password or private key.
+          example: your-password
+          type: string
+          writeOnly: true
+        username:
+          description: Non-secret username or public identifier for the credential pair.
+          example: datadog
+          type: string
+      required:
+        - auth_type
+        - username
+        - password
+      type: object
+    IntegrationAccountBasicAuthResponse:
+      description: The basic authentication method and username configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/IntegrationAccountBasicAuthType"
+        username:
+          description: Non-secret username or public identifier for the credential pair.
+          example: datadog
+          type: string
+      required:
+        - auth_type
+        - username
+      type: object
+    IntegrationAccountBasicAuthType:
+      default: basic
+      description: The authentication method type.
+      enum:
+        - basic
+      example: basic
+      type: string
+      x-enum-varnames:
+        - BASIC
+    IntegrationAccountBasicAuthUpdate:
+      description: Username and password authentication. Only the fields provided are changed; omit `password` to keep the stored one.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/IntegrationAccountBasicAuthType"
+        password:
+          description: Secret password or private key.
+          example: your-password
+          type: string
+          writeOnly: true
+        username:
+          description: Non-secret username or public identifier for the credential pair.
+          example: datadog
+          type: string
+      required:
+        - auth_type
+      type: object
+    IntegrationAccountDataflowHealth:
+      description: Collection health of a single dataflow.
+      enum:
+        - DATAFLOW_HEALTH_OK
+        - DATAFLOW_HEALTH_BROKEN
+        - DATAFLOW_HEALTH_UNKNOWN
+      example: DATAFLOW_HEALTH_OK
+      type: string
+      x-enum-varnames:
+        - OK
+        - BROKEN
+        - UNKNOWN
+    IntegrationAccountDataflowStatus:
+      description: Read-only collection status of a dataflow.
+      properties:
+        health:
+          $ref: "#/components/schemas/IntegrationAccountDataflowHealth"
+        message:
+          description: Human-readable detail, populated when the dataflow is not healthy.
+          example: ""
+          type: string
+        updated_at:
+          description: Time the status was last computed.
+          example: "2026-06-25T08:30:50Z"
+          format: date-time
+          type: string
+      readOnly: true
+      type: object
+    IntegrationAccountType:
+      default: integration-account
+      description: The type of the integration account resource. Always `integration-account`.
+      enum:
+        - integration-account
+      example: integration-account
+      type: string
+      x-enum-varnames:
+        - INTEGRATION_ACCOUNT
     IntegrationAttributes:
       description: Attributes for an integration.
       properties:
@@ -119633,6 +120092,306 @@ components:
       type: string
       x-enum-varnames:
         - TRIGGER_WORKFLOW_AUTOMATION
+    TwilioAlertsLogsIntegrationDataflowRequest:
+      description: The Twilio alerts logs dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    TwilioAlertsLogsIntegrationDataflowResponse:
+      description: The Twilio alerts logs dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    TwilioCallSummariesLogsIntegrationDataflowRequest:
+      description: The Twilio call summaries logs dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    TwilioCallSummariesLogsIntegrationDataflowResponse:
+      description: The Twilio call summaries logs dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    TwilioCloudCostMetricsIntegrationDataflowRequest:
+      description: The Twilio cloud cost metrics dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    TwilioCloudCostMetricsIntegrationDataflowResponse:
+      description: The Twilio cloud cost metrics dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    TwilioEventsLogsIntegrationDataflowRequest:
+      description: The Twilio events logs dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    TwilioEventsLogsIntegrationDataflowResponse:
+      description: The Twilio events logs dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    TwilioIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the Twilio integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/IntegrationAccountBasicAuthRequest"
+    TwilioIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the Twilio integration account.
+      oneOf:
+        - $ref: "#/components/schemas/IntegrationAccountBasicAuthResponse"
+    TwilioIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the Twilio integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/IntegrationAccountBasicAuthUpdate"
+    TwilioIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a Twilio integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/TwilioIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/TwilioIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Twilio integration account.
+          example: twilio-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/TwilioIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    TwilioIntegrationAccountCreateData:
+      description: Data envelope for creating a Twilio integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TwilioIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    TwilioIntegrationAccountCreateRequest:
+      description: Request payload to create a Twilio integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/TwilioIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    TwilioIntegrationAccountResponse:
+      description: Response payload for a single Twilio integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/TwilioIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    TwilioIntegrationAccountResponseAttributes:
+      description: Attributes of a Twilio integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/TwilioIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/TwilioIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the Twilio integration account.
+          example: twilio-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/TwilioIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    TwilioIntegrationAccountResponseData:
+      description: Data envelope of a Twilio integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TwilioIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the Twilio integration account.
+          example: 953a0060-81ec-4221-aed4-d4733b59cd96
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    TwilioIntegrationAccountSettingsRequest:
+      description: Settings for creating the Twilio integration account.
+      properties:
+        account_sid:
+          description: Twilio Account SID that uniquely identifies your Twilio account.
+          example: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          type: string
+        censor_logs:
+          description: When enabled, Twilio phone numbers in the `to` field and SMS message bodies are censored for privacy.
+          example: true
+          type: boolean
+      required:
+        - account_sid
+      type: object
+    TwilioIntegrationAccountSettingsResponse:
+      description: Settings configured on the Twilio integration account.
+      properties:
+        account_sid:
+          description: Twilio Account SID that uniquely identifies your Twilio account.
+          example: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          type: string
+        censor_logs:
+          description: When enabled, Twilio phone numbers in the `to` field and SMS message bodies are censored for privacy.
+          example: true
+          type: boolean
+      required:
+        - account_sid
+      type: object
+    TwilioIntegrationAccountSettingsUpdate:
+      description: Settings for updating the Twilio integration account. Only the fields provided are changed.
+      properties:
+        account_sid:
+          description: Twilio Account SID that uniquely identifies your Twilio account.
+          example: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          type: string
+        censor_logs:
+          description: When enabled, Twilio phone numbers in the `to` field and SMS message bodies are censored for privacy.
+          example: true
+          type: boolean
+      type: object
+    TwilioIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a Twilio integration account. Every field is optional; only the fields provided are changed. When `dataflows` is provided, only the dataflow ids included in the request are modified; dataflows omitted from the map keep their current configuration.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/TwilioIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/TwilioIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Twilio integration account.
+          example: twilio-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/TwilioIntegrationAccountSettingsUpdate"
+      type: object
+    TwilioIntegrationAccountUpdateData:
+      description: Data envelope for updating a Twilio integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TwilioIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the Twilio integration account to update.
+          example: 953a0060-81ec-4221-aed4-d4733b59cd96
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TwilioIntegrationAccountUpdateRequest:
+      description: Request payload to update a Twilio integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/TwilioIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    TwilioIntegrationAccountsResponse:
+      description: Response payload for a list of Twilio integration accounts.
+      properties:
+        data:
+          description: List of Twilio integration accounts.
+          items:
+            $ref: "#/components/schemas/TwilioIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    TwilioIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: Dataflows to configure on the Twilio integration account, keyed by dataflow id.
+      properties:
+        twilio-alerts-logs:
+          $ref: "#/components/schemas/TwilioAlertsLogsIntegrationDataflowRequest"
+        twilio-call-summaries-logs:
+          $ref: "#/components/schemas/TwilioCallSummariesLogsIntegrationDataflowRequest"
+        twilio-cloud-cost-metrics:
+          $ref: "#/components/schemas/TwilioCloudCostMetricsIntegrationDataflowRequest"
+        twilio-events-logs:
+          $ref: "#/components/schemas/TwilioEventsLogsIntegrationDataflowRequest"
+        twilio-messages-logs:
+          $ref: "#/components/schemas/TwilioMessagesLogsIntegrationDataflowRequest"
+      type: object
+    TwilioIntegrationDataflowsResponse:
+      description: Dataflows configured on the Twilio integration account, keyed by dataflow id.
+      properties:
+        twilio-alerts-logs:
+          $ref: "#/components/schemas/TwilioAlertsLogsIntegrationDataflowResponse"
+        twilio-call-summaries-logs:
+          $ref: "#/components/schemas/TwilioCallSummariesLogsIntegrationDataflowResponse"
+        twilio-cloud-cost-metrics:
+          $ref: "#/components/schemas/TwilioCloudCostMetricsIntegrationDataflowResponse"
+        twilio-events-logs:
+          $ref: "#/components/schemas/TwilioEventsLogsIntegrationDataflowResponse"
+        twilio-messages-logs:
+          $ref: "#/components/schemas/TwilioMessagesLogsIntegrationDataflowResponse"
+      type: object
+    TwilioMessagesLogsIntegrationDataflowRequest:
+      description: The Twilio messages logs dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    TwilioMessagesLogsIntegrationDataflowResponse:
+      description: The Twilio messages logs dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
     UCConfigPair:
       description: The definition of `UCConfigPair` object.
       example:
@@ -158619,6 +159378,508 @@ paths:
           - incident_write
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/elastic-cloud/accounts:
+    get:
+      description: List Elastic Cloud integration accounts.
+      operationId: ListElasticCloudIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: basic
+                            username: datadog
+                          dataflows:
+                            elastic-cloud-metrics:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-06-25T08:30:50Z"
+                            elastic-cloud-primary-shard-stats:
+                              enabled: false
+                          name: elastic-cloud-prod
+                          settings:
+                            tags: "env:prod,team:saasint"
+                            url: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+                        id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/ElasticCloudIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Elastic Cloud integration accounts
+      tags:
+        - Elastic Cloud Integration Accounts
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create an Elastic Cloud integration account.
+      operationId: CreateElasticCloudIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElasticCloudIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: basic
+                          username: datadog
+                        dataflows:
+                          elastic-cloud-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                          elastic-cloud-primary-shard-stats:
+                            enabled: false
+                        name: elastic-cloud-prod
+                        settings:
+                          tags: "env:prod,team:saasint"
+                          url: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create an Elastic Cloud integration account
+      tags:
+        - Elastic Cloud Integration Accounts
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/elastic-cloud/accounts/{account_id}:
+    delete:
+      description: Delete an Elastic Cloud integration account.
+      operationId: DeleteElasticCloudIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an Elastic Cloud integration account
+      tags:
+        - Elastic Cloud Integration Accounts
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get an Elastic Cloud integration account.
+      operationId: GetElasticCloudIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: basic
+                          username: datadog
+                        dataflows:
+                          elastic-cloud-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                          elastic-cloud-primary-shard-stats:
+                            enabled: false
+                        name: elastic-cloud-prod
+                        settings:
+                          tags: "env:prod,team:saasint"
+                          url: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get an Elastic Cloud integration account
+      tags:
+        - Elastic Cloud Integration Accounts
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update an Elastic Cloud integration account. Only the fields provided are changed.
+      operationId: UpdateElasticCloudIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElasticCloudIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: basic
+                          username: datadog
+                        dataflows:
+                          elastic-cloud-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                          elastic-cloud-primary-shard-stats:
+                            enabled: false
+                        name: elastic-cloud-prod
+                        settings:
+                          tags: "env:prod,team:saasint"
+                          url: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update an Elastic Cloud integration account
+      tags:
+        - Elastic Cloud Integration Accounts
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/twilio/accounts:
+    get:
+      description: List Twilio integration accounts.
+      operationId: ListTwilioIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: basic
+                            username: SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                          dataflows:
+                            twilio-messages-logs:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-06-25T08:30:50Z"
+                          name: twilio-prod
+                          settings:
+                            account_sid: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                            censor_logs: true
+                        id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/TwilioIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Twilio integration accounts
+      tags:
+        - Twilio Integration Accounts
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a Twilio integration account.
+      operationId: CreateTwilioIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TwilioIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: basic
+                          username: SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                        dataflows:
+                          twilio-messages-logs:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: twilio-prod
+                        settings:
+                          account_sid: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                          censor_logs: true
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/TwilioIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a Twilio integration account
+      tags:
+        - Twilio Integration Accounts
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/twilio/accounts/{account_id}:
+    delete:
+      description: Delete a Twilio integration account.
+      operationId: DeleteTwilioIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a Twilio integration account
+      tags:
+        - Twilio Integration Accounts
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a Twilio integration account.
+      operationId: GetTwilioIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: basic
+                          username: SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                        dataflows:
+                          twilio-messages-logs:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: twilio-prod
+                        settings:
+                          account_sid: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                          censor_logs: true
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/TwilioIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a Twilio integration account
+      tags:
+        - Twilio Integration Accounts
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a Twilio integration account. Only the fields provided are changed.
+      operationId: UpdateTwilioIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TwilioIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: basic
+                          username: SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                        dataflows:
+                          twilio-messages-logs:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: twilio-prod
+                        settings:
+                          account_sid: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                          censor_logs: true
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/TwilioIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a Twilio integration account
+      tags:
+        - Twilio Integration Accounts
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration/aws/accounts:
     get:
@@ -223371,6 +224632,17 @@ tags:
       scopes from alerting. Downtime settings, which can be scheduled with start and
       end times, prevent all alerting related to specified Datadog tags.
     name: Downtimes
+  - description: |-
+      Manage your Datadog Elastic Cloud integration accounts directly through the Datadog API.
+      Create, update, and delete accounts, configure authentication and settings, and
+      enable or disable dataflows such as cluster metrics, index stats, shard stats,
+      pending tasks, and snapshot lifecycle management stats. See the
+      [Elastic Cloud integration page](https://docs.datadoghq.com/integrations/elastic-cloud/) for
+      more information.
+    externalDocs:
+      description: Elastic Cloud integration.
+      url: https://docs.datadoghq.com/integrations/elastic-cloud/
+    name: Elastic Cloud Integration Accounts
   - description: Manage per-integration configurations for the Internal Developer Portal (IDP). These configurations control which external resources (for example, GitHub repositories, Jira projects, or PagerDuty services) are synced as entities into the Software Catalog.
     name: Entity Integration Configs
   - description: Retrieves security risk scores for entities in your organization.
@@ -223813,6 +225085,17 @@ tags:
   - description: |-
       Search and manage flaky tests through Test Optimization. See the [Test Optimization page](https://docs.datadoghq.com/tests/) for more information.
     name: Test Optimization
+  - description: |-
+      Manage your Datadog Twilio integration accounts directly through the Datadog API.
+      Create, update, and delete accounts, configure authentication and settings, and
+      enable or disable dataflows such as message logs, event logs, alerts, call
+      summaries, and Cloud Cost Management metrics. See the
+      [Twilio integration page](https://docs.datadoghq.com/integrations/twilio/) for
+      more information.
+    externalDocs:
+      description: Twilio integration.
+      url: https://docs.datadoghq.com/integrations/twilio/
+    name: Twilio Integration Accounts
   - description: |-
       The usage metering API allows you to get hourly, daily, and
       monthly usage across multiple facets of Datadog.
