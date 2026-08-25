@@ -19,7 +19,7 @@ Supported Agent versions
 : 7.46+
 
 Data privacy
-: Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third parties that have been granted access to the database.
+: Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third parties that have been granted access to the database. In `dynamic_service` mode, a low-cardinality hash of the application's core attributes is also stored in the database comments.
 
 
 Datadog SDK integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
@@ -28,8 +28,24 @@ Datadog SDK integrations support a *Propagation Mode*, which controls the amount
 |:-----------------|:------------|
 | `full` | Sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations. |
 | `service` | Sends the service name, allowing you to understand which services contribute to database load. |
+| `dynamic_service` | Like `service`, but also injects a low-cardinality hash of the application's core attributes (such as container tags) that Datadog uses to resolve the service in the backend. This keeps service attribution accurate when service names are defined dynamically. Recommended for containerized workloads. |
 | `disabled` | Disables propagation and does not send any information from applications. |
 
+**Note**: Like `service` mode, `dynamic_service` does not propagate trace IDs, so it does not support investigating individual traces from DBM. Use `full` mode if you need per-trace investigation.
+
+**Supported languages for `dynamic_service` mode**
+
+`dynamic_service` mode is supported for the same databases as `service` mode for each language. It requires the following minimum tracer versions:
+
+| Language | Min tracer version |
+|:---------|:-------------------|
+| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.63.0 |
+| **.NET** | [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) >= 3.48.0 |
+| **Node.js** | [dd-trace-js](https://github.com/DataDog/dd-trace-js) >= 5.105.0 |
+| **Ruby** | [dd-trace-rb](https://github.com/dataDog/dd-trace-rb) >= 2.35.0 |
+| **PHP** | [dd-trace-php](https://github.com/DataDog/dd-trace-php) >= 1.21.0 |
+
+Go and Python are not currently supported.
 
 **Supported databases**
 
@@ -134,6 +150,8 @@ Datadog recommends setting the obfuscation mode to `obfuscate_and_normalize` for
 ```
 
 <div class="alert alert-warning">Changing the obfuscation mode may alter the normalized SQL text. If you have monitors based on SQL text in APM traces, you may need to update them.</div>
+
+The examples below use `DD_DBM_PROPAGATION_MODE=full`. Set the value to the [propagation mode](#before-you-begin) you want (`full`, `service`, or `dynamic_service`); the configuration is otherwise identical.
 
 {{< tabs >}}
 {{% tab "Go" %}}
