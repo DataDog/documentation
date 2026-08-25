@@ -1,0 +1,62 @@
+---
+title: Add Environment Variables Processor
+disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+---
+
+{{< product-availability >}}
+
+## Overview
+
+Use this processor to add an environment variable field name and value to the log message.
+
+## Setup
+
+To set up this processor:
+
+1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] for more information.
+   - Only logs matching the filter are processed.
+   - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+1. Enter the field name for the environment variable.
+1. Enter the environment variable name.
+1. Click {{< ui >}}Add Environment Variable{{< /ui >}} if you want to add another environment variable.
+
+### Blocked environment variables
+
+Environment variables that match any of the following patterns are blocked from being added to log messages because the environment variable could contain sensitive data.
+
+- `CONNECTIONSTRING` / `CONNECTION-STRING` / `CONNECTION_STRING`
+- `AUTH`
+- `CERT`
+- `CLIENTID` / `CLIENT-ID` / `CLIENT_ID`
+- `CREDENTIALS`
+- `DATABASEURL` / `DATABASE-URL` / `DATABASE_URL`
+- `DBURL` / `DB-URL` / `DB_URL`
+- `KEY`
+- `OAUTH`
+- `PASSWORD`
+- `PWD`
+- `ROOT`
+- `SECRET`
+- `TOKEN`
+- `USER`
+
+The environment variable is matched to the pattern and not the literal word. For example, `PASSWORD` blocks environment variables like `USER_PASSWORD` and `PASSWORD_SECRET` from getting added to the log messages.
+
+### Allowlist
+
+After you have added processors to your pipeline and clicked {{< ui >}}Next: Install{{< /ui >}}, in the {{< ui >}}Add environment variable processor(s) allowlist{{< /ui >}} field, enter a comma-separated list of environment variables you want to pull values from and use with this processor.
+
+The allowlist is stored in the environment variable `DD_OP_PROCESSOR_ADD_ENV_VARS_ALLOWLIST`.
+
+## Health metrics
+
+For [component metrics][2] and [processor buffer metrics][3] emitted by all processors, see the [Pipelines Usage Metrics][4] documentation. To filter or group by Add Environment Variables processor metrics, use the tag `component_type:add_env_vars`.
+
+[1]: /observability_pipelines/search_syntax/logs/
+[2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

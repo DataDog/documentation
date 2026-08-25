@@ -1,0 +1,142 @@
+---
+title: Parse XML Processor
+disable_toc: false
+further_reading:
+- link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+  tag: "Blog"
+  text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
+  tag: "Blog"
+  text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-parsing-xml-logs/"
+  tag: "Blog"
+  text: "Simplify XML log collection and processing with Observability Pipelines"
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+---
+
+{{< product-availability >}}
+
+## Overview
+
+This processor parses Extensible Markup Language (XML) so the data can be processed and sent to different destinations. XML is a log format used to store and transport structured data. It is organized in a tree-like structure to represent nested information and uses tags and attributes to define the data. For example, this is XML data using only tags (`<recipe>`,`<type>`, and `<name>`) and no attributes:
+
+```xml
+<recipe>
+    <type>pasta</type>
+    <name>Carbonara</name>
+</recipe>
+```
+
+This is an XML example where the tag `recipe` has the attribute `type`:
+
+```xml
+<recipe>
+    <recipe type="pasta">
+    <name>Carbonara</name>
+</recipe>
+```
+
+The following image shows a Windows Event 4625 log in XML, next to the same log parsed and output in JSON. By parsing the XML log, the size of the log event was reduced by approximately 30%.
+
+{{< img src="observability_pipelines/processors/xml-side-by-side.png" alt="The XML log and the resulting parsed log in JSON" style="width:80%;" >}}
+
+## Setup
+
+To set up this processor:
+
+1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] for more information.
+   - Only logs matching the filter are processed.
+   - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+1. Enter the path to the log field on which you want to parse XML. Use the path notation `<OUTER_FIELD>.<INNER_FIELD>` to match subfields. See the [Path notation example](#path-notation-example-parse-xml) below.
+1. Optionally, in the `Enter text key` field, input the key name to use for the text node when XML attributes are appended. See the [text key example](#text-key-example). If the field is left empty, `value` is used as the key name.
+1. Optionally, select {{< ui >}}Always use text key{{< /ui >}} if you want to store text inside an object using the text key even when no attributes exist.
+1. Optionally, toggle {{< ui >}}Include XML attributes{{< /ui >}} on if you want to include XML attributes. You can then choose to add the attribute prefix you want to use. See [attribute prefix example](#attribute-prefix-example). If the field is left empty, the original attribute key is used.
+1. Optionally, select if you want to convert data types into numbers, Booleans, or nulls.
+    - If {{< ui >}}Numbers{{< /ui >}} is selected, numbers are parsed as integers and floats.
+    - If {{< ui >}}Booleans{{< /ui >}} is selected, `true` and `false` are parsed as Booleans.
+    - If {{< ui >}}Nulls{{< /ui >}} is selected, the string `null` is parsed as null.
+
+### Path notation example {#path-notation-example-parse-xml}
+
+{{% observability_pipelines/path_notation %}}
+
+{{% observability_pipelines/path_notation_dots %}}
+
+### Always use text key example
+
+If {{< ui >}}Always use text key{{< /ui >}} is selected, the text key is the default (`value`), and you have the following XML:
+
+```xml
+<recipe>
+    <recipe type="pasta">
+    <name>Carbonara</name>
+</recipe>
+```
+
+The XML is converted to:
+
+```json
+{
+    "recipe": {
+        "type": "pasta",
+        "value": "Carbonara"
+        }
+}
+```
+
+### Text key example
+
+If the key is `text` and you have the following XML:
+
+```xml
+<recipe>
+    <recipe type="pasta">
+    <name>Carbonara</name>
+</recipe>
+```
+
+The XML is converted to:
+
+```json
+{
+    "recipe": {
+        "type": "pasta",
+        "text": "Carbonara"
+        }
+}
+```
+
+### Attribute prefix example
+
+If you enable {{< ui >}}Include XML attributes{{< /ui >}}, the attribute is added as a prefix to each XML attribute. For example, if the attribute prefix is `@` and you have the following XML:
+
+```xml
+<recipe type="pasta">Carbonara</recipe>
+```
+
+Then it is converted to the JSON:
+
+```json
+{
+    "recipe": {
+        "@type": "pasta",
+        "<text key>": "Carbonara"
+        }
+}
+```
+
+## Health metrics
+
+For [component metrics][2] and [processor buffer metrics][3] emitted by all processors, see the [Pipelines Usage Metrics][4] documentation. To filter or group by Parse processor metrics, use the tag `component_type:parse`.
+
+[1]: /observability_pipelines/search_syntax/logs/
+[2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

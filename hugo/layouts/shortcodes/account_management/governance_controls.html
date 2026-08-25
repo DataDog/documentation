@@ -1,0 +1,39 @@
+{{/*
+    Renders the Governance Console controls for a single usage concern as a
+    definition list, from data/governance_controls.json.
+
+    Note:
+    - json file sourced from websites-sources: https://github.com/ddoghq/websites-sources/tree/main/data/governance_controls.json
+    - the generator publishes controls with release_status != "dev".
+    - call this once per section. The intro prose for each section stays in
+      controls.md; only the control entries are generated.
+
+    @param usage_concern: string - which group to render. One of "Security",
+                          "Cost Optimization" or "Data Hygiene". Must match a
+                          key in the data file.
+*/}}
+
+{{- $usage_concern := .Get "usage_concern" -}}
+{{- $controls := index $.Site.Data.governance_controls $usage_concern -}}
+
+{{- if not $controls -}}
+    {{- $groups := slice -}}
+    {{- range $group, $_ := $.Site.Data.governance_controls -}}
+        {{- $groups = $groups | append $group -}}
+    {{- end -}}
+    {{- errorf "governance_controls: no controls found for usage_concern %q in data/governance_controls.json. Available groups: %v" $usage_concern $groups -}}
+{{- end -}}
+
+{{/* Markup mirrors what a markdown definition list compiles to, so the
+     generated entries render identically to the hand-written ones they
+     replaced. */}}
+<dl>
+{{- range $controls }}
+<dt>{{ .name }}</dt>
+<dd>{{ .description }}<br/><br/>
+{{ if .enforcement }}{{ range .enforcement }}<p><strong>Enforcement</strong>: {{ . }}</p>
+{{ end }}{{ else }}<p><em>This control does not support enforcement.</em></p>
+{{ end -}}
+</dd>
+{{- end }}
+</dl>
