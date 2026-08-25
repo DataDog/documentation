@@ -44,7 +44,7 @@ datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Invoke your Lambda function and verify that Agent Observability traces are visible in the Datadog UI.
+5. Invoke your Lambda function and verify that Agent Observability traces are visible in the Datadog UI.
 
 Manually flush Agent Observability traces by using the `flush` method before the Lambda function returns.
 
