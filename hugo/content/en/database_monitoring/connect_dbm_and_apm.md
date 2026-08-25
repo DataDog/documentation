@@ -28,12 +28,14 @@ Datadog SDK integrations support a *Propagation Mode*, which controls the amount
 |:-----------------|:------------|
 | `full` | Sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations. |
 | `service` | Sends the service name, allowing you to understand which services contribute to database load. |
-| `dynamic_service` | Sends the service name and a low-cardinality hash of the application's core attributes (such as container tags). This keeps service attribution accurate when service names are defined dynamically. Recommended for containerized workloads. |
+| `dynamic_service` | Sends the service name and a low-cardinality hash of the application's core attributes (such as container tags). This keeps service attribution accurate when service names are defined dynamically. Use this mode for containerized workloads. |
 | `disabled` | Disables propagation and does not send any information from applications. |
 
 **Note**: Like `service` mode, `dynamic_service` does not propagate trace IDs, so it does not support investigating individual traces from DBM. Use `full` mode if you need per-trace investigation.
 
 **Supported databases**
+
+Each propagation mode column lists the minimum tracer version. An em dash (—) indicates that the mode is not supported.
 
 {{< tabs >}}
 {{% tab "Postgres" %}}
