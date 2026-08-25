@@ -5559,27 +5559,27 @@ menu:
       parent: llm_obs
       identifier: llm_obs_build_with_ai
       weight: 2
-    - name: Agent Observability Instrumentation
+    - name: Instrument
       url: llm_observability/instrument/
       parent: llm_obs
       identifier: llm_obs_instrumentation
       weight: 3
-    - name: Automatic Instrumentation for Agent Observability
+    - name: Automatic
       url: llm_observability/instrument/auto_instrumentation
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_auto
       weight: 301
-    - name: Agent Observability SDK Reference
+    - name: SDK Reference
       url: llm_observability/instrument/sdk
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_sdk
       weight: 302
-    - name: HTTP API Reference
+    - name: HTTP API
       url: llm_observability/instrument/api
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_api
       weight: 303
-    - name: OpenTelemetry Instrumentation
+    - name: OpenTelemetry
       url: llm_observability/instrument/otel_instrumentation
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_otel
@@ -5589,22 +5589,22 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_agentic
       weight: 305
-    - name: Python Application Agentic Instrumentation
+    - name: Python
       url: llm_observability/instrument/agentic/python
       parent: llm_obs_instrumentation_agentic
       identifier: llm_obs_instrumentation_agentic_python
       weight: 30501
-    - name: Node.js Application Agentic Instrumentation
+    - name: Node.js
       url: llm_observability/instrument/agentic/nodejs
       parent: llm_obs_instrumentation_agentic
       identifier: llm_obs_instrumentation_agentic_nodejs
       weight: 30502
-    - name: Java Application Agentic Instrumentation
+    - name: Java
       url: llm_observability/instrument/agentic/java
       parent: llm_obs_instrumentation_agentic
       identifier: llm_obs_instrumentation_agentic_java
       weight: 30503
-    - name: Correlating Agent Observability and APM
+    - name: Correlate with APM
       url: llm_observability/instrument/agent_observability_and_apm
       parent: llm_obs_instrumentation
       identifier: llm_obs_correlate_apm
@@ -5649,7 +5649,7 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_evaluations_export_api
       weight: 406
-    - name: Improve Your Application
+    - name: Improve
       url: llm_observability/improve/
       parent: llm_obs
       identifier: llm_obs_improve
@@ -5694,7 +5694,7 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
       weight: 50305
-    - name: Configure Agent Observability
+    - name: Configure
       url: llm_observability/configure/
       parent: llm_obs
       identifier: llm_obs_configure
