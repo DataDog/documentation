@@ -96,8 +96,7 @@ Use [Synthetic Test Suites][26] to organize multiple tests into logical collecti
 
 Use [Bits Testing][27] to explore your application, map critical user journeys, and generate Synthetic tests that cover them, including [Goal-Based tests][28] that verify users can reach a goal using non-deterministic, agentic testing.
 
-{{< img src="synthetics/bits_testing/TODO_bits_testing_landing.png" alt="TODO: screenshot of a Bits Testing exploration graph" style="width:100%;">}}
-<!-- TODO: replace with a real screenshot before merge -->
+{{< img src="synthetics/bits_testing/bits_testing_landing.png" alt="The Bits Testing landing page with a prompt to describe the test coverage you want" style="width:100%;">}}
 
 ## Launch private locations
 

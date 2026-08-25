@@ -71,7 +71,7 @@ After the first run completes, click the {{< ui >}}Edit test{{< /ui >}} icon to:
 - Add tags.
 - Change the selected Agent Profile.
 
-{{< img src="synthetics/goal_based_testing/goal_based_test_schedule.png" alt="The Goal-Based test edit page with the user goal and scheduling options" style="width:80%;" >}}
+{{< img src="synthetics/goal_based_testing/goal_based_test_schedule.png" alt="The Scheduling step of the Goal-Based test creation wizard, with recurrence interval options" style="width:80%;" >}}
 
 ## Further reading
 
