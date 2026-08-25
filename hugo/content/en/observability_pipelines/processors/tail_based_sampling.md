@@ -9,6 +9,11 @@ products:
 
 {{< product-availability >}}
 
+{{< callout url="#"
+ btn_hidden="true" header="false">}}
+The Tail-Based Sampling processor is in Preview. Contact your account manager to request access.
+{{< /callout >}}
+
 ## Overview
 
 The Tail-based Sampling processor determines whether the Worker keeps a completed trace based on sampling policies that you define. This processor can sample based on the full context of a trace, such as its status code, latency, or associated events.

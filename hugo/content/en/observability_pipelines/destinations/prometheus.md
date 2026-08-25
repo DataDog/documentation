@@ -1,5 +1,6 @@
 ---
 title: Prometheus Destination
+description: Learn how to send metrics to Prometheus using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Metrics
@@ -9,9 +10,14 @@ products:
 
 {{< product-availability >}}
 
+{{< callout url="#"
+ btn_hidden="true" header="false">}}
+The Prometheus destination is in Preview. Contact your account manager to request access.
+{{< /callout >}}
+
 ## Overview
 
-Use Observability Pipelines' {{< tooltip text="Prometheus destination" tooltip="Contact your account manager to request access." >}} to send metrics to Prometheus.
+Use Observability Pipelines' Prometheus destination to send metrics to Prometheus.
 
 ## Set up destination
 

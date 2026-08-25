@@ -1,5 +1,6 @@
 ---
 title: Datadog APM Destination
+description: Learn how to send traces to Datadog using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Traces
@@ -9,9 +10,14 @@ products:
 
 {{< product-availability >}}
 
+{{< callout url="#"
+ btn_hidden="true" header="false">}}
+The Datadog APM destination is in Preview. Contact your account manager to request access.
+{{< /callout >}}
+
 ## Overview
 
-Use Observability Pipelines' {{< tooltip text="Datadog APM destination" tooltip="Contact your account manager to request access." >}} to send traces to Datadog.
+Use Observability Pipelines' Datadog APM destination to send traces to Datadog.
 
 ## Setup
 

@@ -23,7 +23,7 @@ If you already have or prefer to use a secret in Secrets Manager, you can set th
 ```shell
 export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
 ```
-4. Install your Lambda function with Agent Observability (this requires at least version 77 of the Datadog Extension layer)
+4. Instrument your Lambda function with Agent Observability (this requires at least version 77 of the Datadog Extension layer)
 {{< tabs >}}
 {{% tab "Python" %}}
 ```shell
@@ -44,7 +44,7 @@ datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Invoke your Lambda function and verify that Agent Observability traces are visible in the Datadog UI.
+5. Invoke your Lambda function and verify that Agent Observability traces are visible in the Datadog UI.
 
 Manually flush Agent Observability traces by using the `flush` method before the Lambda function returns.
 

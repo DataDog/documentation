@@ -14,7 +14,7 @@ products:
 
 ## Overview
 
-This processor samples your logs or {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} for a representative subset at the rate that you define, dropping the remaining events. As an example, you can use this processor to sample 20% of events from a noisy non-critical service.
+This processor samples your logs or traces ({{< tooltip text="in Preview" tooltip="Traces Pipeline is in Preview. Contact your account manager to request access." >}}) for a representative subset at the rate that you define, dropping the remaining events. As an example, you can use this processor to sample 20% of events from a noisy non-critical service.
 
 The sampling only applies to events that match your filter query and does not impact other events. If an event is dropped at this processor, the event is not sent to subsequent processors.
 
