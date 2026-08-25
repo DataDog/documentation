@@ -54,9 +54,10 @@ Click a session to view its details and continue working with Bits Code. To remo
 Bits Code supports the following source code providers:
 - **GitHub**: GitHub.com, [GitHub Enterprise Cloud][30], [GitHub Enterprise Cloud with data residency][31], and [GitHub Enterprise Server][38].
 - **GitLab**: GitLab.com and GitLab Self-Managed.
+- **Azure DevOps**: Azure DevOps Services.
 
-The following plans are not supported:
-- **Azure DevOps**: Neither Azure DevOps Cloud nor Azure DevOps Server (On-Prem) is supported by Bits Code. Datadog [Source Code Integration][37] does not support Azure DevOps Server (On-Prem).
+The following are not supported:
+- **Azure DevOps**: Azure DevOps Server (On-Prem). Datadog [Source Code Integration][37] does not support Azure DevOps Server (On-Prem).
 - **Bitbucket**: Neither Bitbucket.org, Bitbucket Data Center, nor Bitbucket Data Server (On-Prem) are supported by Bits Code. Datadog [Source Code Integration][37] does not support On-Prem Bitbucket deployments.
 
 ## Supported Datadog products
@@ -109,7 +110,7 @@ Bits Code also [ingests custom instructions][33] defined in your repository and 
 
 Bits Code integrates with [source code providers](#supported-source-code-providers) to:
 - Create pull or merge requests, generating titles and descriptions based on your repository's pull or merge request template
-- Iterate on pull requests in response to comments (GitHub only); mention `@Datadog` in a comment to prompt Bits for updates
+- Start or continue Bits Code sessions from GitHub or Azure DevOps pull request comments. Mention `@Datadog` in a comment to prompt Bits Code for updates, including on Azure DevOps pull requests Bits Code did not create
 - Monitor CI logs and pull or merge request state to fix failures and merge blockers
 
 Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is working on in {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][7].

@@ -65,6 +65,15 @@ Set up Bits Code for one of the [supported source code providers][11].
 [7]: https://docs.gitlab.com/user/profile/personal_access_tokens/
 {{% /tab %}}
 
+{{% tab "Azure DevOps" %}}
+1. Install and configure the [Azure DevOps Source Code integration][1] for Azure DevOps Services. For full installation and configuration steps, see the [Azure DevOps Source Code integration guide][2].
+1. To start or continue Bits Code sessions from Azure DevOps pull request comments, mention `@Datadog`. The commenter needs the [`Bits Code Write` (`bits_dev_write`) permission][3] and write access to the repository.
+
+[1]: https://app.datadoghq.com/integrations/azure-devops-source-code/
+[2]: /integrations/azure-devops-source-code/
+[3]: /account_management/rbac/permissions/#bits-ai
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Additional configuration  
