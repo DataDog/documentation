@@ -122,9 +122,9 @@ Use **Group by** to aggregate findings by up to two fields at once. The inbox gr
 
 Click the gear icon above the table to add, remove, or reorder columns. The default columns are finding type, title, severity, risks, resource, and triage status.
 
-**Note**: Column options are available on an ungrouped table, and inside the nested table that opens when you expand a group. They are unavailable on the outer table of a grouped view, because those rows represent groups rather than individual findings.
+**Note**: Column options are available on an ungrouped table, and inside the nested table that opens when you expand a group. They are unavailable on the outer table of a grouped view.
 
-### Save a view
+### Saved views
 
 Save the current combination of filters, grouping, and columns as a saved view, so you can return to it later or share it with your team. Saved views are listed in the sidebar.
 
