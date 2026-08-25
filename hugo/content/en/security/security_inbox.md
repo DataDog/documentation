@@ -142,18 +142,6 @@ Select one or more findings to act on them together:
 
 Bulk selection is available on an ungrouped table and inside an expanded group. Click any finding to open its side panel, which shows the full detection detail and remediation guidance for that finding type.
 
-## Remediate by action
-
-The **Actions** tab organizes the inbox around the fix rather than the finding. Instead of a list of individual vulnerabilities, it lists the remediation actions available to you—such as a package update, a base image bump, or an image update—and how many open findings each action closes. Use this view to find the single change that resolves the largest number of findings.
-
-Select an action to see:
-
-- **Suggested Fix**: the change to make, including the target version for a package or image upgrade.
-- **Findings this closes**: the open findings that the action resolves.
-- **Next Step**: a summary of the risk and the recommended action.
-
-You can create a security case directly from this panel to hand the work to the owning team.
-
 ## Report on your inbox
 
 The **Reporting** tab shows a dashboard of Security Inbox trends over time, including finding volume, severity mix, and remediation progress. Use it to review your security posture in recurring team meetings and to check whether remediation is keeping pace with detection.
