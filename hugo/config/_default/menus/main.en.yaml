@@ -9416,6 +9416,11 @@ menu:
       parent: rum_setup_enrich_rum_data
       identifier: rum_setup_enrich_rum_data_track_feature_flags
       weight: 7
+    - name: Define view owners
+      url: real_user_monitoring/setup/enrich_rum_data/define_view_owners/
+      parent: rum_setup_enrich_rum_data
+      identifier: rum_setup_enrich_rum_data_define_view_owners
+      weight: 8
     - name: Application Monitoring
       url: real_user_monitoring/application_monitoring/
       parent: rum
