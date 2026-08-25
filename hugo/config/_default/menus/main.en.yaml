@@ -9390,11 +9390,31 @@ menu:
       parent: rum_setup_enrich_rum_data
       identifier: rum_setup_enrich_rum_data_define_view_owners
       weight: 8
+    - name: Enable GeoIP enrichment
+      url: real_user_monitoring/setup/enrich_rum_data/enable_geoip_enrichment/
+      parent: rum_setup_enrich_rum_data
+      identifier: rum_setup_enrich_rum_data_enable_geoip_enrichment
+      weight: 9
+    - name: Measure health with metrics
+      url: real_user_monitoring/setup/measure_health_with_metrics/
+      parent: rum
+      identifier: rum_setup_measure_health_with_metrics
+      weight: 4
+    - name: Out-of-the-box metrics
+      url: real_user_monitoring/setup/measure_health_with_metrics/out_of_the_box_metrics/
+      parent: rum_setup_measure_health_with_metrics
+      identifier: rum_setup_measure_health_with_metrics_out_of_the_box_metrics
+      weight: 1
+    - name: Create custom metrics
+      url: real_user_monitoring/setup/measure_health_with_metrics/create_custom_metrics/
+      parent: rum_setup_measure_health_with_metrics
+      identifier: rum_setup_measure_health_with_metrics_create_custom_metrics
+      weight: 2
     - name: Application Monitoring
       url: real_user_monitoring/application_monitoring/
       parent: rum
       identifier: application_monitoring
-      weight: 4
+      weight: 5
     - name: Browser
       url: real_user_monitoring/application_monitoring/browser/
       parent: application_monitoring
@@ -9799,7 +9819,7 @@ menu:
       identifier: real_user_monitoring_platform
       url: real_user_monitoring/platform
       parent: rum
-      weight: 4
+      weight: 6
     - name: Dashboards
       url: real_user_monitoring/platform/dashboards/
       parent: real_user_monitoring_platform
@@ -9839,7 +9859,7 @@ menu:
       url: real_user_monitoring/explorer/
       parent: rum
       identifier: rum_explorer
-      weight: 5
+      weight: 7
     - name: Search RUM Events
       url: real_user_monitoring/explorer/search/
       parent: rum_explorer
@@ -9884,7 +9904,7 @@ menu:
       url: /real_user_monitoring/correlate_with_other_telemetry/
       parent: rum
       identifier: rum_correlate_with_other_telemetry
-      weight: 6
+      weight: 8
     - name: Correlate LLM with RUM
       url: /real_user_monitoring/correlate_with_other_telemetry/llm_observability
       parent: rum_correlate_with_other_telemetry
@@ -9914,7 +9934,7 @@ menu:
       url: real_user_monitoring/feature_flag_tracking
       parent: rum
       identifier: rum_feature_flag_tracking
-      weight: 7
+      weight: 9
     - name: Setup
       url: real_user_monitoring/feature_flag_tracking/setup
       parent: rum_feature_flag_tracking
@@ -9929,7 +9949,7 @@ menu:
       url: real_user_monitoring/error_tracking/
       parent: rum
       identifier: rum_error_tracking
-      weight: 8
+      weight: 10
     - name: Explorer
       url: real_user_monitoring/error_tracking/explorer/
       parent: rum_error_tracking
@@ -9974,7 +9994,7 @@ menu:
       url: real_user_monitoring/ai_investigations/
       parent: rum
       identifier: rum_ai_investigations
-      weight: 9
+      weight: 11
     - name: Single-View AI Investigation
       url: real_user_monitoring/ai_investigations/single_view_ai_investigation/
       parent: rum_ai_investigations
@@ -9994,7 +10014,7 @@ menu:
       url: real_user_monitoring/rum_without_limits/
       parent: rum
       identifier: rum_without_limits
-      weight: 10
+      weight: 12
     - name: Metrics
       url: real_user_monitoring/rum_without_limits/metrics
       parent: rum_without_limits
@@ -10014,32 +10034,32 @@ menu:
       url: real_user_monitoring/operations_monitoring/
       parent: rum
       identifier: rum_operations_monitoring
-      weight: 11
+      weight: 13
     - name: Managed Archive
       url: real_user_monitoring/managed_archive/
       parent: rum
       identifier: rum_managed_archive
-      weight: 12
+      weight: 14
     - name: Export Pipelines
       url: real_user_monitoring/rum_export/
       parent: rum
       identifier: rum_export
-      weight: 13
+      weight: 15
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
       parent: rum
       identifier: rum_ownership_of_views
-      weight: 14
+      weight: 16
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 15
+      weight: 17
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 16
+      weight: 18
     - name: Product Analytics
       url: product_analytics/
       pre: product-analytics
