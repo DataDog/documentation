@@ -37,7 +37,17 @@ products:
   icon: security-workload-security
 ---
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 {{< product-availability >}}
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+{{< product-availability names="App and API Protection,Workload Protection" >}}
+{{< /site-region >}}
+
+{{< site-region region="gov2" >}}
+{{< product-availability names="Workload Protection" >}}
+{{< /site-region >}}
 
 Security Inbox provides a consolidated, actionable list of your most important security findings. It correlates and contextualizes findings from across Datadog security products—vulnerabilities, misconfigurations, identity risks, and attack paths—into a single prioritized view of the work that most reduces risk in your environment.
 
@@ -75,6 +85,10 @@ Inbox rules can match any of the following finding types:
 | [API Security][19] | App and API Protection |
 
 Security Inbox shows only the finding types you have permission to read. A finding you cannot open in its own explorer does not appear in your inbox.
+
+{{% site-region region="gov,gov2" %}}
+**Note**: Cloud Security and Code Security are not available on this site, so their finding types do not reach Security Inbox.
+{{% /site-region %}}
 
 ### Detected risks
 
@@ -150,6 +164,10 @@ To act on several findings at once, select them and use:
 - **Assignee**: set or clear the [assignee][23] on the selected findings.
 - **Muting**: mute findings that you have assessed and accepted.
 - **Severity**: adjust the severity of the selected findings.
+
+{{% site-region region="gov,gov2" %}}
+**Note**: Linear is not available on this site.
+{{% /site-region %}}
 
 Bulk selection is available on an ungrouped table and inside an expanded group. Click any finding to open its side panel, which shows the full detection detail and remediation guidance for that finding type.
 
