@@ -10974,6 +10974,10 @@ components:
           description: Operating system name.
           example: ubuntu
           type: string
+        version:
+          description: Operating system version.
+          example: "24.04"
+          type: string
       required:
         - name
       type: object
@@ -96282,8 +96286,11 @@ components:
           description: The ID of the scanned asset metadata.
           example: "Host|i-0fc7edef1ab26d7ef"
           type: string
+        type:
+          $ref: "#/components/schemas/ScannedAssetMetadataType"
       required:
         - id
+        - type
         - attributes
       type: object
     ScannedAssetMetadataAsset:
@@ -96338,6 +96345,14 @@ components:
       required:
         - timestamp
       type: object
+    ScannedAssetMetadataType:
+      description: The JSON:API type.
+      enum:
+        - scanned-assets-metadata
+      example: scanned-assets-metadata
+      type: string
+      x-enum-varnames:
+        - SCANNED_ASSETS_METADATA
     ScannedAssetsMetadata:
       description: The expected response schema when listing scanned assets metadata.
       properties:
@@ -109055,7 +109070,8 @@ components:
         - "1.3"
         - "1.4"
         - "1.5"
-      example: "1.5"
+        - "1.6"
+      example: "1.6"
       type: string
       x-enum-varnames:
         - ONE_ZERO
@@ -109064,6 +109080,7 @@ components:
         - ONE_THREE
         - ONE_FOUR
         - ONE_FIVE
+        - ONE_SIX
     SplitAPIKey:
       description: The definition of the `SplitAPIKey` object.
       properties:
@@ -123497,10 +123514,12 @@ components:
         - ReflectionInjection
         - RiskyLicense
         - SessionRewriting
+        - SessionRewritting
         - SessionTimeout
         - SqlInjection
         - Ssrf
         - StackTraceLeak
+        - TemplateInjection
         - TrustBoundaryViolation
         - Unmaintained
         - UntrustedDeserialization
@@ -123542,10 +123561,12 @@ components:
         - REFLECTION_INJECTION
         - RISKY_LICENSE
         - SESSION_REWRITING
+        - SESSION_REWRITTING
         - SESSION_TIMEOUT
         - SQL_INJECTION
         - SSRF
         - STACK_TRACE_LEAK
+        - TEMPLATE_INJECTION
         - TRUST_BOUNDARY_VIOLATION
         - UNMAINTAINED
         - UNTRUSTED_DESERIALIZATION
@@ -198844,7 +198865,7 @@ paths:
                         dependencies: []
                         metadata: {}
                         serialNumber: urn:uuid:abc-123
-                        specVersion: "1.5"
+                        specVersion: "1.6"
                         version: 1
                       id: "github.com/datadog/datadog-agent"
                       type: sboms
@@ -198991,6 +199012,7 @@ paths:
                           last_success:
                             env: prod
                         id: "Host|i-0fc7edef1ab26d7ef"
+                        type: scanned-assets-metadata
               schema:
                 $ref: "#/components/schemas/ScannedAssetsMetadata"
           description: OK
