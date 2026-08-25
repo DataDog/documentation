@@ -53,10 +53,10 @@ Enable Application Scope Management to modify the allowed scopes for an applicat
 
 Adding or removing a scope affects access to the application for all users in your organization. Disabling a scope revokes existing authorizations that include the scope. Affected users must re-authorize the application to regain access with the remaining allowed scopes.
 
-Use {{< ui >}}Automatically allow new scopes{{< /ui >}} to control how Application Scope Management handles scopes that the application requests in the future:
+Use {{< ui >}}Automatically allow new scopes{{< /ui >}} to choose how Datadog handles scopes that the application starts requesting after you save the configuration:
 
-- When selected, future scopes are allowed without an administrator updating the configuration. Only scopes that you disable remain blocked.
-- When cleared, future scopes are disabled until an administrator allows them.
+- When selected, Datadog allows newly requested scopes automatically. Scopes that you explicitly disable remain blocked.
+- When cleared, Datadog blocks newly requested scopes until an administrator allows them.
 
 For the Datadog Mobile App, required scopes are always allowed and cannot be disabled.
 
@@ -64,7 +64,7 @@ For the Datadog Mobile App, required scopes are always allowed and cannot be dis
 
 2. Select the {{< ui >}}Scopes{{< /ui >}} tab and use the {{< ui >}}Allowed{{< /ui >}} checkbox for each scope to control whether to grant the application that scope.
 
-3. Select or clear {{< ui >}}Automatically allow new scopes{{< /ui >}} to choose how to handle future scopes.
+3. Select or clear {{< ui >}}Automatically allow new scopes{{< /ui >}} to choose whether Datadog automatically allows scopes that the application starts requesting after you save.
 
 4. Click {{< ui >}}Enable{{< /ui >}} or {{< ui >}}Save{{< /ui >}} to save the scope configuration.
 
