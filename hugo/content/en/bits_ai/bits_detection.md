@@ -55,6 +55,7 @@ Use the sections below to review coverage, configure alert routing, and provide 
 Use the Bits Detection Coverage Page, Service Page, or Monitor List to review how Bits Detection is monitoring your system.
 
 **Bits Detection Coverage Page**
+
 To review all scopes where Bits Detection is active, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Detection{{< /ui >}}][5]. Each row is a detection scope showing the number of critical endpoints and managed monitors Bits maintains, when the scope last alerted, whether alert notifications are configured, and whether auto-investigate is enabled. Selecting a scope opens its Bits Detection Details, where you can review health status over a chosen time window, the endpoints Bits considers critical—each with a justification explaining why it was selected, the monitors Bits manages, and the scope's alert history.
 
 From the Coverage page, you can:
