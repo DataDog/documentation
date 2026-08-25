@@ -41,34 +41,34 @@ menu:
       url: /partners/multi_tenant_billing/
       identifier: multi-tenant-billing
       weight: 4
-    - name: Centralized Usage Metrics
-      url: /partners/multi_tenant_billing/centralized-usage-metrics/
-      identifier: multi-tenant-billing-centralized-usage-metrics
-      parent: multi-tenant-billing
-      weight: 10
-    - name: Cost and Usage Visibility
-      url: /partners/multi_tenant_billing/cost-and-usage-visibility/
-      identifier: multi-tenant-billing-cost-and-usage-visibility
-      parent: multi-tenant-billing
-      weight: 20
-    - name: Customer Contracts Management (Preview)
-      url: /partners/multi_tenant_billing/customer-contracts-management/
-      identifier: multi-tenant-billing-customer-contracts-management
-      parent: multi-tenant-billing
-      weight: 30
-    - name: Customer Pricing Management (Preview)
-      url: /partners/multi_tenant_billing/customer-pricing-management/
-      identifier: multi-tenant-billing-customer-pricing-management
-      parent: multi-tenant-billing
-      weight: 40
     - name: Onboarding a New Customer
       url: /partners/multi_tenant_billing/customer-onboarding/
       identifier: multi-tenant-billing-customer-onboarding
       parent: multi-tenant-billing
-      weight: 50
+      weight: 10
     - name: Trial Org Provisioning
       url: /partners/multi_tenant_billing/trial-org-provisioning/
       identifier: multi-tenant-billing-trial-org-provisioning
+      parent: multi-tenant-billing
+      weight: 20
+    - name: Cost and Usage Visibility
+      url: /partners/multi_tenant_billing/cost-and-usage-visibility/
+      identifier: multi-tenant-billing-cost-and-usage-visibility
+      parent: multi-tenant-billing
+      weight: 30
+    - name: Centralized Usage Metrics
+      url: /partners/multi_tenant_billing/centralized-usage-metrics/
+      identifier: multi-tenant-billing-centralized-usage-metrics
+      parent: multi-tenant-billing
+      weight: 40
+    - name: Customer Pricing Management (Preview)
+      url: /partners/multi_tenant_billing/customer-pricing-management/
+      identifier: multi-tenant-billing-customer-pricing-management
+      parent: multi-tenant-billing
+      weight: 50
+    - name: Customer Contracts Management (Preview)
+      url: /partners/multi_tenant_billing/customer-contracts-management/
+      identifier: multi-tenant-billing-customer-contracts-management
       parent: multi-tenant-billing
       weight: 60
     - name: Troubleshooting

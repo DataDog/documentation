@@ -49,7 +49,7 @@ sum:datadog.usage.infra.hosts{*} by {child_org_name}
 
 To match Plan & Usage totals, use a 1-hour rollup for host-style products and graph in UTC, since Plan & Usage reports in UTC.
 
-## Related pages
+## Related docs
 
 - [Cost and Usage Visibility][2]: cost and billable usage data across connected customer orgs.
 

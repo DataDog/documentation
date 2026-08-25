@@ -46,13 +46,13 @@ Here are some ways an Admin Org can help:
 
 | Use case | Capability |
 |---|---|
-| Monitor cost and usage across all customers in one place. | [Cost and Usage Visibility][2]: view estimated, historical, and projected cost and billable usage data. |
 | Self-serve Trial Org creation for prospective customers. | [Trial Org Provisioning][3]: create Trial Orgs directly from an Admin Org. |
+| Monitor cost and usage across all customers in one place. | [Cost and Usage Visibility][2]: view estimated, historical, and projected cost and billable usage data. |
 | Track usage metrics across the book of business. | [Centralized Usage Metrics][8]: roll customer usage metrics up into an Admin Org. |
 | Let customers see their estimated costs based on the partner's pricing. (Preview) | [Customer Pricing Management][9]: configure per-customer pricing. |
 | Manage the book of business in one place. (Preview) | [Customer Contracts Management][10]: track customers, contracts, invoices, and renewals. |
 
-<div class="alert alert-info">Preview capabilities are available to a limited set of partners while Datadog validates them. Contact <a href="mailto:partner-support@datadoghq.com">partner-support@datadoghq.com</a> to join a preview.</div>
+<div class="alert alert-info">Preview capabilities are available to a limited set of partners. Contact <a href="mailto:partner-support@datadoghq.com">partner-support@datadoghq.com</a> to join a preview.</div>
 
 ## Troubleshooting
 
