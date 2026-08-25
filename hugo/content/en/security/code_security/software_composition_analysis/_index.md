@@ -109,7 +109,7 @@ Click on a library with a vulnerability to open a side panel that contains infor
 
 For Runtime SCA vulnerabilities, select a vulnerability to open its side panel, then select the {{< ui >}}Impacted Infrastructure{{< /ui >}} tab. This tab lists the hosts where the affected library version runs, along with the associated services, environments, and last deployment time.
 
-Select {{< ui >}}View Host{{< /ui >}} to investigate a host, or select {{< ui >}}View Vulnerabilities in Cloud Security{{< /ui >}} to review its open host vulnerabilities.
+Select {{< ui >}}View Host{{< /ui >}} to investigate a host, or select {{< ui >}}View Vulnerabilities in Cloud Security{{< /ui >}} to review the host's open vulnerabilities.
 
 ### Remediation
 
