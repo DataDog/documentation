@@ -55,6 +55,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq"
   tag: "Blog"
   text: "How we cut our NLQ agent debugging time from hours to minutes with LLM Observability"
+- link: "https://www.datadoghq.com/blog/systemic-risk-ai-agents-datadog/"
+  tag: "Blog"
+  text: "From signals to systemic risk: Building Risk AI"
 
 ---
 

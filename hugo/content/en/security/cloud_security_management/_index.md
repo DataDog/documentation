@@ -54,6 +54,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-security-oci"
     tag: "Blog"
     text: "Protect your OCI resources with Datadog Cloud Security"
+  - link: "https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/"
+    tag: "Blog"
+    text: "How CISA’s BOD 26-04 changes vulnerability prioritization"
 algolia:
   tags: ['csm', 'cloud security management', 'inbox']
 cascade:

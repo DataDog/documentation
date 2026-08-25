@@ -28,6 +28,9 @@ further_reading:
   - link: "/api/latest/security-monitoring/#create-cases-for-security-findings"
     tag: "API"
     text: "Ticketing integration API"
+  - link: "https://www.datadoghq.com/blog/work-management/"
+    tag: "Blog"
+    text: "Centralize human and agentic work with Datadog Work Management"
 aliases:
 - /security/cloud_security_management/review_remediate/jira
 ---
@@ -361,3 +364,7 @@ Users can also [create Jira issues for security findings][18] and [attach securi
 [23]: /integrations/linear/
 [24]: /incident_response/case_management/troubleshooting/
 [30]: /security/assignee_management/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
