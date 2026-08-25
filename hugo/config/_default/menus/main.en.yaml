@@ -9375,6 +9375,16 @@ menu:
       parent: rum_setup_enrich_rum_data
       identifier: rum_setup_enrich_rum_data_track_frontend_to_backend_traces
       weight: 5
+    - name: Collect frontend profiles
+      url: real_user_monitoring/setup/enrich_rum_data/collect_frontend_profiles/
+      parent: rum_setup_enrich_rum_data
+      identifier: rum_setup_enrich_rum_data_collect_frontend_profiles
+      weight: 6
+    - name: Track feature flags
+      url: real_user_monitoring/setup/enrich_rum_data/track_feature_flags/
+      parent: rum_setup_enrich_rum_data
+      identifier: rum_setup_enrich_rum_data_track_feature_flags
+      weight: 7
     - name: Application Monitoring
       url: real_user_monitoring/application_monitoring/
       parent: rum
