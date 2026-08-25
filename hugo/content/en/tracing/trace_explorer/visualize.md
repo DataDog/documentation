@@ -133,4 +133,4 @@ For example, you can use request flow maps to identify high-traffic services or 
 [7]: /tracing/services/services_map/
 [8]: /tracing/trace_explorer/
 [9]: /tracing/services/deployment_tracking/#shadow-deploys
-[10]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum
+[10]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser

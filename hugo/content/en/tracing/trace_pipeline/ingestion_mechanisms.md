@@ -912,7 +912,7 @@ Depending on your setup with the OpenTelemetry SDKs (using the OpenTelemetry Col
 [4]: /tracing/glossary/#trace-root-span
 [5]: /tracing/trace_pipeline/ingestion_controls/
 [6]: /tracing/trace_pipeline/generate_metrics/
-[7]: /real_user_monitoring/correlate_with_other_telemetry/apm/
+[7]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/
 [8]: https://github.com/DataDog/browser-sdk/releases/tag/v4.30.0
 [9]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.11.0
 [10]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.13.0

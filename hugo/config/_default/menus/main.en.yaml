@@ -868,7 +868,7 @@ menu:
       parent: otel_explore
       weight: 702
     - name: RUM and Traces
-      url: /opentelemetry/correlate/rum_and_traces/
+      url: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/
       identifier: otel_rum
       parent: otel_explore
       weight: 703
@@ -4594,7 +4594,7 @@ menu:
       identifier: tracing_connect_logs
       weight: 502
     - name: Correlate RUM and Traces
-      url: /tracing/other_telemetry/rum
+      url: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/
       parent: tracing_other_telemetry
       identifier: tracing_connect_rum
       weight: 503
@@ -9370,6 +9370,11 @@ menu:
       parent: rum_setup_enrich_rum_data
       identifier: rum_setup_enrich_rum_data_track_navigation_across_web_views
       weight: 4
+    - name: Track frontend-to-backend traces
+      url: real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/
+      parent: rum_setup_enrich_rum_data
+      identifier: rum_setup_enrich_rum_data_track_frontend_to_backend_traces
+      weight: 5
     - name: Application Monitoring
       url: real_user_monitoring/application_monitoring/
       parent: rum
@@ -9886,7 +9891,7 @@ menu:
       identifier: rum_correlate_with_other_telemetry_synthetics
       weight: 607
     - name: Correlate Traces with RUM
-      url: /real_user_monitoring/correlate_with_other_telemetry/apm
+      url: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_apm
       weight: 608
