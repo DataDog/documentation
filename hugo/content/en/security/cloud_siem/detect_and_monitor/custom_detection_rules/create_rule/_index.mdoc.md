@@ -473,9 +473,9 @@ You can use SQL syntax to write historical jobs for additional flexibility, cons
 Datadog applies conditions to the results your SQL queries return. It evaluates each query result against the conditions you define in the [job conditions](#set-conditions) section, such as a count threshold or group-by attribute. It generates a job result when the query results meet those conditions.
 
 {% alert level="info" %}
-Historical jobs contain information from when the job ran and do not update automatically. When you view a signal that was detected using a SQL query, in the **Queries** section of the side panel, you can click the dataset to see when the dataset was last updated.
+Historical jobs contain information from when the job ran and do not update automatically. When you view a job result that was detected using a SQL query, in the **Queries** section of the side panel, you can click the dataset to see when the dataset was last updated.
 
-If the dataset was updated after the signal was created, you need to run the historical job again to get updated signals.
+If the dataset was updated after the job result was created, you need to run the historical job again to get updated job results.
 {% /alert %}
 {% /if %}
 
