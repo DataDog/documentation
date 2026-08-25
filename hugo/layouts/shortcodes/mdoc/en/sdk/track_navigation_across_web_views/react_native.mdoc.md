@@ -24,7 +24,7 @@ Set up the RUM Browser SDK on the web page you want rendered on your mobile appl
 
    ```javascript
    <WebView
-       source={{ uri: 'https://www.example.com' }}
+       source={ { uri: 'https://www.example.com' } }
        allowedHosts={['example.com']}
    />
    ```

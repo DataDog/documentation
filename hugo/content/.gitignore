@@ -130,3 +130,4 @@
 /*/real_user_monitoring/setup/enrich_rum_data/add_custom_context.md
 /*/real_user_monitoring/setup/enrich_rum_data/modify_or_drop_rum_events.md
 /*/real_user_monitoring/setup/enrich_rum_data/track_navigation_across_web_views.md
+/*/real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces.md

@@ -118,7 +118,7 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/integrations/runtime_metrics/
-[2]: /real_user_monitoring/correlate_with_other_telemetry/apm/
+[2]: /opentelemetry/correlate/rum_and_traces/
 [3]: /network_monitoring/cloud_network_monitoring/setup/
 [4]: /infrastructure/process/
 [5]: /integrations/guide/source-code-integration/?tab=go#configure-telemetry-tagging
@@ -138,7 +138,7 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [19]: /opentelemetry/correlate/
 [20]: /containers/monitoring/kubernetes_explorer/
 [21]: /network_monitoring/performance/
-[22]: /opentelemetry/correlate/rum_and_traces/?tab=browserrum#opentelemetry-support
+[22]: /opentelemetry/correlate/rum_and_traces/?platform=browser#opentelemetry-support
 [23]: /tracing/metrics/runtime_metrics/
 [24]: /integrations/guide/source-code-integration/
 [25]: /tracing/trace_collection/span_links/
