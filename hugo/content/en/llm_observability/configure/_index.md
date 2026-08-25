@@ -1,5 +1,5 @@
 ---
-title: Configure
+title: Configure Agent Observability
 description: Configure evaluations, prompt management, and automation rules for Agent Observability.
 ---
 
