@@ -142,6 +142,51 @@ If you're getting started, you can click these links to automatically apply comm
 {% if and(equals($cloud_siem_detection_rule_detection_method, "sequence"),equals($cloud_siem_detection_rule_type, "real_time_rule")) %}Select **Real-time rule**, which also automatically selects **Event/rule query** as the query language.{% /if %}<!-- Step to select sequence/real-time rule, which defaults to event/rule query -->
 {% if and(equals($cloud_siem_detection_rule_detection_method, "sequence"),equals($cloud_siem_detection_rule_type, "historical_job")) %}Select **Historical job**, which also automatically selects **Event/rule query** as the query language. Under **Select Logs Index and Timerange**, select the parameters for your historical query.{% /if %}<!-- Step to select sequence/historical job, which defaults to event/rule query -->
 
+{% if equals($cloud_siem_detection_threshold_sql_rule_query_language, "sql") %}
+## Use datasets in your query
+In Datadog, SQL queries are compatible with data stored in [datasets][6].
+- **Datasets** are reusable resources that specify the field names and types for a given source. When writing a SQL detection rule, you reference a dataset instead of defining the schema inline, making it faster to write new rules and easier to maintain them over time.
+- **OOTB OCSF datasets** are built-in datasets provided by Datadog for all log sources. They are normalized to the Open Cybersecurity Schema Framework (OCSF), including AWS CloudTrail, Okta, Microsoft 365, and others. These are automatically available in all organizations, so teams writing SQL rules against OCSF-normalized sources can skip schema definitions entirely. Each OOTB OCSF dataset corresponds with an [OCSF v1.7.0 schema category][12].
+
+If you have the [Security Dataset Write][10] permission, you can create custom datasets to format data already stored in tables for the following data types:
+- Logs
+- Audit Trail logs
+- Events
+- Security signals
+- Spans
+- RUM events
+- Product Analytics events
+- Cloud Network data
+- NetFlow data
+- Reference tables
+- Infrastructure tables
+
+### Create a dataset
+
+To create a custom dataset:
+1. In Datadog, go to **Cloud SIEM** > **Settings** > [**Datasets**][11].
+1. Click **Create Dataset**. In the Create Dataset window that opens, enter the following:
+   - Enter an optional **Description**.
+   - Replace `my_new_dataset` with a **Name**.
+   - Under **Select columns**, search for and select the columns you want in your dataset.
+   - Beside each column name in your dataset, you can click the **More options** button to move the column's position in the dataset. Alternatively, you can click **Edit column** to edit the column's path, add an alias, and data type.
+1. Click **Create Dataset**. The Create Dataset window closes and the dataset appears in your list of security datasets.
+
+### Delete or edit a dataset
+
+{% alert level="info" %}
+- You can delete or edit custom datasets, but not OOTB OCSF datasets.
+- You can only delete datasets that aren't used in any detection rules.
+{% /alert %}
+
+1. In Datadog, go to **Cloud SIEM** > **Settings** > [**Datasets**][11].
+1. Beside the dataset you want to delete or edit, click the **More options** button.
+   - To delete the dataset, click **Delete**. In the confirmation window that opens, click **Delete**.
+   - To view detection rules that use this dataset, click the **View dependent detection rules** count. If you want to delete the dataset, you must delete these rules or use a different dataset for them first.
+   - To edit the dataset, click **See details**. In the Reviewing Dataset panel that opens, click **Edit Dataset**. Make the required changes, then click **Save Changes**.
+     - Every time you edit a dataset, Datadog saves the old version in the dataset's version history. In the Reviewing Dataset panel, you can compare versions and copy the source JSON for any version.
+{% /if %}
+
 ## Define your search query
 
 <!-- Real-time rule AND threshold -->
@@ -296,19 +341,6 @@ For the current step and the next step:
 {% if equals($cloud_siem_detection_threshold_sql_rule_query_language, "sql") %}
 You can use SQL syntax to write detection rules for additional flexibility, consistency, and portability. For information on the available syntax, see [DDSQL Reference][5].
 
-In Datadog, SQL queries are compatible with data stored in [datasets][6]. You can create datasets to format data already stored in tables for the following data types:
-- Logs
-- Audit Trail logs
-- Events
-- Security signals
-- Spans
-- RUM events
-- Product Analytics events
-- Cloud Network data
-- NetFlow data
-- Reference tables
-- Infrastructure tables
-
 {% img src="security/security_monitoring/detection_rules/sql-ocsf-query-example.png" alt="Example of a SQL dataset and query" style="width:100%;" /%}
 
 1. Under **Define Datasets**, choose one or more datasets to use in your query. In the dropdown, you can select an existing published dataset to either use or clone, or click the **New** icon to create a dataset from scratch.
@@ -431,19 +463,6 @@ All logs and events matching this query are analyzed for potential impossible tr
 {% if equals($cloud_siem_detection_threshold_sql_rule_query_language, "sql") %}
 You can use SQL syntax to write historical jobs for additional flexibility, consistency, and portability. For information on the available syntax, see [DDSQL Reference][5].
 
-In Datadog, SQL queries are compatible with data stored in [datasets][6]. You can create datasets to format data already stored in tables for the following data types:
-- Logs
-- Audit Trail logs
-- Events
-- Security signals
-- Spans
-- RUM events
-- Product Analytics events
-- Cloud Network data
-- NetFlow data
-- Reference tables
-- Infrastructure tables
-
 {% img src="security/security_monitoring/detection_rules/sql-ocsf-query-example.png" alt="Example of a SQL dataset and query" style="width:100%;" /%}
 
 1. Under **Define Datasets**, choose one or more datasets to use in your query. In the dropdown, you can select an existing published dataset to either use or clone, or click the **New** icon to create a dataset from scratch.
@@ -452,6 +471,12 @@ In Datadog, SQL queries are compatible with data stored in [datasets][6]. You ca
 1. Under **Write Queries**, enter one or more SQL queries. For more information, see [DDSQL Reference][5]. Click **Preview** to see a list of matching results.
 
 Datadog applies conditions to the results your SQL queries return. It evaluates each query result against the conditions you define in the [job conditions](#set-conditions) section, such as a count threshold or group-by attribute. It generates a job result when the query results meet those conditions.
+
+{% alert level="info" %}
+Historical jobs contain information from when the job ran and do not update automatically. When you view a signal that was detected using a SQL query, in the **Queries** section of the side panel, you can click the dataset to see when the dataset was last updated.
+
+If the dataset was updated after the signal was created, you need to run the historical job again to get updated signals.
+{% /alert %}
 {% /if %}
 
 {% /if %}
@@ -1140,3 +1165,6 @@ To write a custom RRULE for your detection rule:
 [7]: /logs/explorer/calculated_fields/
 [8]: https://icalendar.org/rrule-tool.html
 [9]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[10]: /account_management/rbac/permissions/#cloud-security-platform
+[11]: https://app.datadoghq.com/security/configuration/datasets
+[12]: https://schema.ocsf.io/1.7.0/
