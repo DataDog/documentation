@@ -97,7 +97,7 @@ Group membership is required in addition to the `system` catalog grants in [Step
 
 To create the group and add the service principal:
 
-1. The `databricks_pii_access` group does not exist in a Databricks account by default, and workspace administrators are not members of it automatically. Create it with the exact name `databricks_pii_access`, which is case-sensitive:
+1. The `databricks_pii_access` group does not exist in a Databricks account by default, and workspace administrators are not members of it automatically. Create it with the exact name `databricks_pii_access`, which is case-sensitive.
    - If you do not manage groups with SCIM or an external identity provider, go to {{< ui >}}Account Console{{< /ui >}} > {{< ui >}}User Management{{< /ui >}} > {{< ui >}}Groups{{< /ui >}} > {{< ui >}}Add Group{{< /ui >}}.
    - If you manage groups with SCIM or an external identity provider, create the group there instead.
 1. Add the service principal from [Step 1](#step-1---connect-the-databricks-integration-tile) to the group.
