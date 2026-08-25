@@ -32,6 +32,9 @@ products:
 - name: App and API Protection
   url: /security/application_security/
   icon: app-sec
+- name: Workload Protection
+  url: /security/workload_protection/
+  icon: security-workload-security
 ---
 
 {{< product-availability >}}
@@ -42,7 +45,7 @@ Security Inbox answers three questions:
 
 - **What should my team work on next?** Findings are ranked by severity, then by correlated risk, then by the number of resources and services they affect.
 - **What is overdue?** Due date rules attach remediation deadlines to findings, so you can track progress against the service level agreements (SLAs) your organization commits to.
-- **Why is this finding in my inbox?** Every finding reaches the inbox through an inbox rule that you can inspect, disable, or replace.
+- **Why is this finding in my inbox?** Every finding reaches the inbox through an inbox rule. You can review the default rules, disable the ones that do not fit your organization, and create your own.
 
 {{< img src="security/security_inbox_8.png" alt="The Security Inbox shows prioritized security findings with severity, triage status, and remediation SLA summaries" width="100%">}}
 
@@ -95,7 +98,7 @@ Security Inbox ranks findings by considering the severity of a finding first, fo
 
 ## Track remediation against due dates
 
-[Due date rules][12] assign a remediation deadline to a finding based on its severity and type. When due dates are configured, the **Remediation SLA** panel at the top of Security Inbox reports progress against them:
+[Due date rules][12] assign a remediation deadline to a finding based on its severity and type. When due dates are configured, the **Remediation SLA** card at the top of Security Inbox reports progress against them:
 
 | Status | Meaning |
 |---|---|
@@ -103,9 +106,9 @@ Security Inbox ranks findings by considering the severity of a finding first, fo
 | Due soon | The finding is due within the next seven days. |
 | Not due yet | The finding is due in more than seven days. |
 
-Click a status to filter the list to those findings. You can also filter on **Overdue Status** from the filter bar. If your organization has no enabled due date rules, this panel prompts you to create one.
+Click a status to filter the list to those findings. You can also filter on **Overdue Status** from the filter bar.
 
-Two other panels summarize the same set of findings:
+Two other cards summarize the same set of findings:
 
 - **Severity**: the number of Critical and High findings.
 - **Status**: **Pending triage** counts findings with no ticket and no assignee. **In flight** counts findings that have at least one.
@@ -130,13 +133,21 @@ Save the current combination of filters, grouping, and columns as a saved view, 
 
 ### Export
 
-Click the download icon above the table to export the current result set as a CSV file.
+Click **Export** above the table to export your findings to other tools:
+
+- **Export to Sheets**: send the findings to [Datadog Sheets][21] for deeper exploration and reporting.
+- **Open in DDSQL Editor**: open the equivalent query in the [DDSQL Editor][22] for complex aggregations and custom analysis.
+- **Download as CSV**: download the findings as a CSV file.
+- **Copy as cURL**: copy the equivalent API request to your clipboard.
 
 ## Triage and remediate
 
-Select one or more findings to act on them together:
+The **Triage** column carries actions for a single finding. Click **Assign** to set an [assignee][23], or **Add Ticket** to create or link a ticket, without leaving the table.
 
-- **Ticketing**: create Jira tickets or Datadog Security Cases for the selected findings, or unlink existing ones.
+To act on several findings at once, select them and use:
+
+- **Ticketing**: create a Jira issue, a ServiceNow incident, a Linear issue, or a Datadog security case for the selected findings, or unlink an existing one. For setup and bidirectional syncing, see [Ticketing Integrations][20].
+- **Assignee**: set or clear the [assignee][23] on the selected findings.
 - **Muting**: mute findings that you have assessed and accepted.
 - **Severity**: adjust the severity of the selected findings.
 
@@ -193,3 +204,7 @@ For more information, see [Add to Security Inbox Rules][11] and [Set Due Date Ru
 [17]: /security/code_security/iac_security/
 [18]: /security/code_security/secret_scanning/
 [19]: /security/application_security/api_posture/
+[20]: /security/ticketing_integrations/
+[21]: /sheets/
+[22]: /ddsql_editor/
+[23]: /security/assignee_management/
