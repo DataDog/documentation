@@ -33,7 +33,7 @@ You can enable Bits Detection for additional services from several entry points:
 1. Set up a notification destination so the team knows when Bits finds a critical degradation.
 1. Review the managed coverage after initialization completes. You receive an email when your new health posture is ready.
 
-#### Option 2: Service Page {#enable-from-service-page}
+### Option 2: Service Page {#enable-from-service-page}
 
 1. In Datadog, go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}}][2] and select a service.
 1. Open the service's monitoring overview from the monitor status bar or the Bits Detection card.
