@@ -72,12 +72,12 @@ You may create a maximum of 100 Restricted Datasets under the Enterprise plan, a
 - Workload Protection Agent Events
 
 The following are available as a Preview upon request:
-- Containers
 - Custom metrics
     - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
 - Database Monitoring
 - Hosts
 - Processes
+- Containers
 
 ## Advanced configuration
 
