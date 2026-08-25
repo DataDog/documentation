@@ -44,7 +44,7 @@ Security Inbox answers three questions:
 - **What is overdue?** Due date rules attach remediation deadlines to findings, so you can track progress against the service level agreements (SLAs) your organization commits to.
 - **Why is this finding in my inbox?** Every finding reaches the inbox through an inbox rule that you can inspect, disable, or replace.
 
-{{< img src="security/security_inbox_7.png" alt="The Security Inbox shows prioritized security issues for remediation" width="100%">}}
+{{< img src="security/security_inbox_8.png" alt="The Security Inbox shows prioritized security findings with severity, triage status, and remediation SLA summaries" width="100%">}}
 
 ## What appears in Security Inbox
 
