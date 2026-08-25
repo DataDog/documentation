@@ -36,19 +36,12 @@ With this view, you can:
 
 ## Prerequisites
 
-The Homepage aggregates data from your Datadog integrations. Configure the following before using the Homepage.
+The Homepage aggregates data from your Datadog integrations. Configure the following before using the Homepage:
 
-**GitHub**
-Required for the **GitHub** tab in **Your PRs**. An administrator configures the GitHub integration and webhook, and each user signs in with their GitHub account. [Set up the GitHub integration][1].
-
-**GitLab Source Code**
-Required for the **GitLab** tab in **Your PRs**. An administrator configures the GitLab Source Code integration and webhook, and each user signs in with their GitLab account. [Set up the GitLab Source Code integration][2].
-
-**Jira**
-Required for the **Jira** tab in **Your Tickets**. An administrator configures the Jira integration and webhook. [Set up the Jira webhook][3].
-
-**Linear**
-Required for the **Linear** tab in **Your Tickets**. An administrator configures the Linear integration and webhook. [Set up the Linear webhook][4].
+- **GitHub**: Required for the **GitHub** tab in **Your PRs**. An administrator configures the [GitHub integration][1] and webhook, and each user signs in with their GitHub account.
+- **GitLab Source Code**: Required for the **GitLab** tab in **Your PRs**. An administrator configures the [GitLab Source Code integration][2] and webhook, and each user signs in with their GitLab account.
+- **Jira**: Required for the **Jira** tab in **Your Tickets**. An administrator [configures the Jira webhook][3].
+- **Linear**: Required for the **Linear** tab in **Your Tickets**. An administrator [configures the Linear webhook][4].
 
 ## Configure the Homepage 
 
@@ -90,7 +83,7 @@ After you sign in with your GitHub account, the tab loads your pull requests, gr
 - Statuses: Read
 - Checks: Read
 
-If you have multiple GitHub orgs connected within Datadog, users must have the Datadog Integrations Read Permissions to toggle between orgs.
+If multiple GitHub organizations are connected in Datadog, you need the Integrations Read permission to switch between them.
 
 ### GitLab
 
@@ -108,11 +101,11 @@ The **Your Tickets** section consolidates the items assigned to you across Jira,
 
 ### Jira
 
-The **Jira** tab lists the Jira tickets assigned to you, grouped by status. After setup, your assigned tickets appear automatically. For setup steps, see [Configure a Jira webhook][3].
+The **Jira** tab lists the Jira tickets assigned to you, grouped by status. After setup, your assigned tickets appear automatically.
 
 ### Linear
 
-The **Linear** tab lists the Linear issues assigned to you, grouped by status. After setup, your assigned issues appear automatically. For setup steps, see [Configure a Linear webhook][4].
+The **Linear** tab lists the Linear issues assigned to you, grouped by status. After setup, your assigned issues appear automatically.
 
 ### Work Items
 
@@ -120,7 +113,7 @@ The **Work Items** tab lists the Datadog Work Management work items assigned to 
 
 ## Services and entities
 
-{{< img src="tracing/software_catalog/services_entities_table.png" alt="Services & entities for the user" style="width:100%;" >}}  
+{{< img src="tracing/software_catalog/services_entities_table_2.png" alt="The Services and entities section showing team services with scorecard, monitor, and on-call information." style="width:100%;" >}}
 
 The **Services & Entities** section displays your team's key services and entities, aggregated automatically from linked Datadog products and integrations. Each entry summarizes operational context for the entity, such as scorecard health, recent deployments, monitor and incident status, linked dashboards, and current on-call. You can filter by recently viewed entities, entities owned by your team, or entities you've favorited. 
 
