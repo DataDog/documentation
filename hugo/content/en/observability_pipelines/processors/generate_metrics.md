@@ -52,7 +52,7 @@ Click {{< ui >}}Manage Metrics{{< /ui >}} to create new metrics or edit existing
    - **Note**: Since a single processor can generate multiple metrics, you can define a different filter query for each metric.
 1. Enter a name for the metric.
 1. In the {{< ui >}}Define parameters{{< /ui >}} section, select the metric type (**Count**, **Gauge**, or **Distribution**). See the [Count metric example](#count-metric-example) and [Distribution metric example](#distribution-metric-example). Also see [Metrics Types](#metrics-types) for more information.
-    - For **Gauge** and **Distribution** metric types, select a event field which has a numeric (or parseable numeric string) value that is used for the value of the generated metric.
+    - For **Gauge** and **Distribution** metric types, select an event field which has a numeric (or parseable numeric string) value that is used for the value of the generated metric.
     - For the **Distribution** metric type, the event field's value can be an array of (parseable) numerics, which is used for the generated metric's sample set.
     - The {{< ui >}}Group by{{< /ui >}} field determines how the metric values are grouped together. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region. The fields listed in the {{< ui >}}Group by{{< /ui >}} setting are set as tags on the configured metric.
 1. Click {{< ui >}}Add Metric{{< /ui >}}.
