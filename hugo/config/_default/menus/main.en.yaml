@@ -7151,6 +7151,11 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
       weight: 421
+    - name: OpenTelemetry
+      url: observability_pipelines/destinations/opentelemetry/metrics/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_destinations_opentelemetry
+      weight: 422
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
