@@ -28,7 +28,7 @@ For example, if you have a datapoint that is 3,000,000,000:
 
 For metrics shipped by an out-of-the-box integration, you can check whether a
 unit is already defined by looking at that integration's Data Collected
-table: metric names followed by `Shown as <unit>` already have a unit set by
+table: metric names followed by *Shown as \<unit\>* already have a unit set by
 the integration. Metrics without this notation do not have a unit configured
 by default, and you need to set one manually using the steps below.
 
