@@ -722,7 +722,7 @@
     "request_schema_description": "Object describing the IdP configuration."
   },
   "QueryMetrics": {
-    "description": "Query timeseries points.",
+    "description": "Query timeseries points. Datadog recommends using the v2\n`/api/v2/query/timeseries` endpoint over this endpoint for\nquerying timeseries data.",
     "summary": "Query timeseries points"
   },
   "ListMetrics": {
