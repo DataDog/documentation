@@ -56,7 +56,7 @@ helm repo update
 helm upgrade datadog-operator datadog/datadog-operator
 ```
 
-3. Add the `agent.datadoghq.com/instrumentation-crd-enabled` annotation to your `DatadogAgent` resource.
+3. Add the `agent.datadoghq.com/instrumentation-crd-enabled` annotation to your `DatadogAgent` resource. The Cluster Agent must be v7.82.0 or later.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
