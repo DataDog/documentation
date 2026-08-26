@@ -37,9 +37,7 @@ To set customer pricing, you need:
    {{< img src="account_management/plan_and_usage/customer-pricing-default-rule.png" alt="Default pricing rule configuration for non-contracted products" >}}
 7. Click {{< ui >}}Save{{< /ui >}} to save a draft. Drafts are visible only within your Datadog admin organization. Review your entries, then click {{< ui >}}Publish{{< /ui >}}.
 
-After you publish, cost visibility is enabled for that customer within 24 hours. The customer can then see their estimated costs in their Datadog organization, based on their usage and the rates you provide. Published prices are effective as of the most recent change to the customer's contract, whether that is a new contract or a terms modification to an existing one.
-
-**Note**: On-demand costs for off-contract ingest SKUs can run up to approximately 3% higher than actual cost.
+After you publish, cost visibility is enabled for that customer within 24 hours. The customer can then see their estimated and historical costs in their Datadog organization, based on their usage and the rates you provide. Published prices are effective as of the most recent change to the customer's contract, whether that is a new contract or a terms modification to an existing one.
 
 ## Update pricing
 
@@ -50,7 +48,7 @@ To change a customer's rates after publishing, return to the {{< ui >}}Customer 
 To appear in the customer dropdown, a customer must have an eligible resell contract. Customer Pricing does not support the following contract types and organizations:
 
 - **Legacy managed service provider (MSP) contracts**, where many customers are covered by a single contract.
-- **Cloud Marketplace contracts without a drawdown agreement**, for customers purchasing through AWS, Azure, or Google Cloud Marketplace.
+- **Cloud Marketplace contracts without a drawdown agreement**, for customers purchasing through AWS, Google Cloud, or Azure Marketplace.
 - **Contracts where the customer procures through two channel partners at the same time.** For example, Datadog to Partner 1 to Partner 2 to the customer.
 - **GovCloud organizations.**
 
