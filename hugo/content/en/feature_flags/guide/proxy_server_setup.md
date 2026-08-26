@@ -40,9 +40,7 @@ The examples below use the US1 Datadog site (`datadoghq.com`). Replace the intak
 
 NGINX works as a relay proxy on any infrastructure: cloud VMs, Kubernetes, Docker, or bare metal.
 
-### Flag configuration and mobile event relay
-
-Add the following `server` block to your NGINX configuration. The proxy_pass directives forward flag configuration requests to the Datadog CDN and mobile SDK event requests to the Datadog API.
+Add the following `server` block to your NGINX configuration. The `proxy_pass` directives forward flag configuration requests to the Datadog CDN and event requests to the appropriate Datadog intake.
 
 {{< code-block lang="nginx" filename="nginx.conf" >}}
 server {
@@ -75,20 +73,41 @@ server {
         proxy_pass_request_headers on;
         proxy_pass_request_body on;
     }
+
+    # Browser SDK event relay
+    # Works when the browser SDK proxy option is set to a function (see SDK setup below)
+    location ~* ^/browser/api/v2/ {
+        proxy_pass https://browser-intake-datadoghq.com;
+        proxy_ssl_server_name on;
+        proxy_set_header Host browser-intake-datadoghq.com;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_pass_request_headers on;
+        proxy_pass_request_body on;
+    }
 }
 {{< /code-block >}}
 
-After deploying this configuration, set the SDK custom endpoints as follows:
+After deploying, set the SDK options as follows:
 
 | SDK option | Value |
 |---|---|
-| Flag config (`useCustomFlagEndpoint` / `customFlagsEndpoint` / `customFlagsEndpoint`) | `https://proxy.example.com/precompute-assignments` |
+| Flag config (`useCustomFlagEndpoint` / `customFlagsEndpoint`) | `https://proxy.example.com/precompute-assignments` |
 | Exposures (`useCustomExposureEndpoint` / `customExposureEndpoint`) | `https://proxy.example.com/api/v2/exposures` |
 | Evaluations (`useCustomEvaluationEndpoint` / `customEvaluationEndpoint`) | `https://proxy.example.com/api/v2/flagevaluation` |
+| Browser events (`proxy`, function form) | see below |
 
-### Browser event relay
+For browser events, use the function form of the `proxy` option. This passes the decoded path directly to the proxy URL, so NGINX can forward without any scripting:
 
-The Browser SDK uses a `ddforward` query parameter to encode the target path. Forwarding these requests requires decoding that parameter in a script. Use the [Cloudflare Worker](#cloudflare-worker) or [Next.js](#nextjs-vercel) implementations for browser event relay. For an NGINX-only setup, use [OpenResty][2], which adds Lua scripting to NGINX.
+{{< code-block lang="javascript" filename="index.js" >}}
+DatadogBrowserFlagging.init({
+    clientToken: '<CLIENT_TOKEN>',
+    site: '<DATADOG_SITE>',
+    flaggingProxy: 'https://proxy.example.com/precompute-assignments',
+    proxy: ({ path, parameters }) => `https://proxy.example.com/browser${path}?${parameters}`,
+});
+{{< /code-block >}}
+
+The `/browser` prefix routes browser intake requests to the dedicated location block, keeping them separate from the mobile event paths.
 
 {{% /tab %}}
 
