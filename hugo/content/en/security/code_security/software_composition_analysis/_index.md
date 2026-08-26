@@ -103,7 +103,7 @@ The {{< ui >}}Impacted services{{< /ui >}} section lists the services where Runt
 
 ##### Impacted infrastructure
 
-When Runtime SCA detects impacted services, the {{< ui >}}Impacted Infrastructure{{< /ui >}} section lists the hosts where the affected library version runs, along with the associated services, environments, and last deployment time.
+When Runtime SCA detects impacted services, the {{< ui >}}Impacted Infrastructure{{< /ui >}} section lists the hosts where the affected library version runs. It also shows associated services, environments, and last deployment time.
 
 To investigate the affected infrastructure:
 
