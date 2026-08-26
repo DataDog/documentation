@@ -103,9 +103,14 @@ The {{< ui >}}Impacted services{{< /ui >}} section lists the services where Runt
 
 ##### Impacted infrastructure
 
-When Runtime SCA detects impacted services, the {{< ui >}}Impacted Infrastructure{{< /ui >}} section lists the hosts where the affected library version runs, along with the associated services, environments, and last deployment time. Select a host count in {{< ui >}}Impacted services{{< /ui >}} to filter this section to that service.
+When Runtime SCA detects impacted services, the {{< ui >}}Impacted Infrastructure{{< /ui >}} section lists the hosts where the affected library version runs, along with the associated services, environments, and last deployment time.
 
-Select {{< ui >}}View Host{{< /ui >}} to investigate a host, or select {{< ui >}}View Vulnerabilities in Cloud Security{{< /ui >}} to review the host's open vulnerabilities.
+To investigate the affected infrastructure:
+
+1. In {{< ui >}}Impacted services{{< /ui >}}, select a host count to filter {{< ui >}}Impacted Infrastructure{{< /ui >}} to that service.
+1. Review the affected hosts, services, environments, and last deployment time.
+1. Select {{< ui >}}View Host{{< /ui >}} to investigate a host.
+1. Select {{< ui >}}View Vulnerabilities in Cloud Security{{< /ui >}} to review the host's open vulnerabilities.
 
 ### View findings by repository
 
