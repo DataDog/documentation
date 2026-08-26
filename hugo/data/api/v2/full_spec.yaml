@@ -16549,6 +16549,30 @@ components:
       required:
         - data
       type: object
+    CaseInvestigationNotebookCreateData:
+      description: Case investigation notebook creation data.
+      properties:
+        type:
+          $ref: "#/components/schemas/CaseInvestigationNotebookResourceType"
+      required:
+        - type
+      type: object
+    CaseInvestigationNotebookCreateRequest:
+      description: Case investigation notebook creation request.
+      properties:
+        data:
+          $ref: "#/components/schemas/CaseInvestigationNotebookCreateData"
+      required:
+        - data
+      type: object
+    CaseInvestigationNotebookResourceType:
+      description: Case investigation notebook resource type.
+      enum:
+        - notebook
+      example: notebook
+      type: string
+      x-enum-varnames:
+        - NOTEBOOK
     CaseLink:
       description: "A directional link representing a relationship between two entities. At least one entity must be a case."
       properties:
@@ -71314,30 +71338,6 @@ components:
       type: string
       x-enum-varnames:
         - GET_NODE_TYPES_RESPONSE
-    NotebookCreateData:
-      description: Notebook creation data
-      properties:
-        type:
-          $ref: "#/components/schemas/NotebookResourceType"
-      required:
-        - type
-      type: object
-    NotebookCreateRequest:
-      description: Notebook creation request
-      properties:
-        data:
-          $ref: "#/components/schemas/NotebookCreateData"
-      required:
-        - data
-      type: object
-    NotebookResourceType:
-      description: Notebook resource type
-      enum:
-        - notebook
-      example: notebook
-      type: string
-      x-enum-varnames:
-        - NOTEBOOK
     NotebookTriggerWrapper:
       description: "Schema for a Notebook-based trigger."
       properties:
@@ -135326,7 +135326,7 @@ paths:
       x-menu-order: 53
   /api/v2/cases/{case_id}/relationships/notebook:
     post:
-      description: Create a new investigation notebook and link it to a case
+      description: Create a new investigation notebook and link it to a case.
       operationId: CreateCaseNotebook
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -135339,8 +135339,8 @@ paths:
                   data:
                     type: notebook
             schema:
-              $ref: "#/components/schemas/NotebookCreateRequest"
-        description: Notebook creation request
+              $ref: "#/components/schemas/CaseInvestigationNotebookCreateRequest"
+        description: Case investigation notebook creation request.
         required: true
       responses:
         "204":
