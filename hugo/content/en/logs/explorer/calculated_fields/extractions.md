@@ -155,7 +155,7 @@ This pattern follows the capture group rules:
 
 - Four groups have a name: `ip`, `method`, `resource`, and `status`.
 - Each name is unique.
-- Each name uses only letters.
+- Each name uses only letters and digits.
 - The group `(?:v\d+)` has no name. It groups the version segment, but does not create a field.
 
 **Resulting calculated fields**:
@@ -173,8 +173,7 @@ Each pattern below breaks one capture group rule.
 
 | Pattern | Problem |
 |---|---|
-| `\S+ \S+ \S+ \S+` | No named group. A pattern needs at least one. |
-| `(\S+) (?<method>\S+)` | The first group has no name. Add a name, or use `(?:...)` to group without a name. |
+| `(?:\S+) (?:\S+) (?:\S+) (?:\S+)` | No named group. A pattern needs at least one. |
 | `(?<ip>\S+) (?<ip>\S+)` | The name `ip` is used twice. Each name must be unique. |
 | `(?<client-ip>\S+)` | The name has a hyphen. A name can have only letters and digits. |
 | `(?<1status>\d+)` | The name starts with a digit. A name must start with a letter. |
