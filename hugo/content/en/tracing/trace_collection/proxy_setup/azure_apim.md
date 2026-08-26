@@ -13,6 +13,9 @@ further_reading:
 - link: "/tracing/trace_collection/trace_context_propagation/"
   tag: "Documentation"
   text: "Trace Context Propagation"
+- link: "https://www.datadoghq.com/blog/trace-azure-managed-services-dotnet/"
+  tag: "Blog"
+  text: "Trace Azure-managed services in .NET applications with Datadog"
 ---
 
 Datadog APM can create **inferred spans** for requests that pass through Azure API Management to your backend services. The spans enable end-to-end traces, service maps, and sampling based on the API Management gateway.

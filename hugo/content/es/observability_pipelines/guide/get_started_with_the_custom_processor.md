@@ -1,47 +1,49 @@
 ---
+description: Aprenda a usar las funciones del Procesador personalizado, como la codificación
+  y decodificación Base64, y vea ejemplos de scripts para casos de uso comunes de
+  transformación de registros.
 disable_toc: false
 further_reading:
-- link: observability_pipelines/processors/custom_processor/
+- link: /observability_pipelines/processors/custom_processor/
   tag: Documentación
-  text: Más información sobre el procesador personalizado
-- link: observability_pipelines/set_up_pipelines/
+  text: Obtenga más información sobre el Procesador personalizado
+- link: /observability_pipelines/set_up_pipelines/
   tag: Documentación
-  text: Configurar pipelines
+  text: Configure Pipelines
 - link: https://www.datadoghq.com/blog/migrate-historical-logs/
   tag: Blog
-  text: Migrar logs históricos de Splunk y Elasticsearch utilizando Observability
+  text: Migre registros históricos desde Splunk y Elasticsearch usando Observability
     Pipelines
-title: Empezando con el procesador personalizado
+title: Comience con el Procesador personalizado
 ---
+## Descripción general {#overview}
 
-## Información general
+Observability Pipelines le permite transformar sus registros antes de enviarlos a sus destinos. Use el Procesador personalizado para crear scripts con funciones personalizadas que modifiquen condicionalmente campos, valores y eventos de registro.
 
-Observability Pipelines te permite transformar tus logs antes de enviarlos a tus destinos. Utiliza el procesador personalizado para crear scripts con funciones personalizadas que modifiquen condicionalmente los campos, los valores y los eventos de logs.
-
-Esta guía te explica cómo utilizar las siguientes funciones en el script de tu procesador personalizado:
+Esta guía lo orienta sobre cómo usar las siguientes funciones en su script del Procesador personalizado:
 
 - [Decodificar Base64](#decode-base64)
 - [Decodificar un evento Base64 completo](#decode-an-entire-base64-encoded-event)
 - [Codificar Base64](#encode-base64)
 
-También incluye scripts de ejemplo que abordan casos de uso frecuentes, como:
+También revisa ejemplos de scripts que abordan casos de uso comunes, tales como:
 
-- [Reasignar marcas de tiempo de logs históricos)(#remap-timestamps-for-historical-logs)
-- [Extraer un campo de la matriz de etiquetas (tags) de Datadog (`ddtags`)](#extract-a-field-from-the-datadog-tags-array)
+- [Reasignar marcas de tiempo para registros históricos](#remap-timestamps-for-historical-logs)
+- [Extraer un campo de la matriz de etiquetas de Datadog (`ddtags`)](#extract-a-field-from-the-datadog-tags-array)
 - [Hacer referencia al valor de otro campo](#reference-another-fields-value)
-- [Eliminar atributos que contengan valores nulos](#remove-attributes-containing-null-values)
-- [Fusionar atributos anidados en el nivel raíz](#merge-nested-attributes-to-root-level)
-- [Serializar logs salientes en formato _raw](#serialize-outbound-logs-in-_raw-format)
+- [Eliminar atributos que contienen valores nulos](#remove-attributes-containing-null-values)
+- [Fusionar atributos anidados al nivel raíz](#merge-nested-attributes-to-root-level)
+- [Serializar registros salientes en formato _raw](#serialize-outbound-logs-in-_raw-format)
 
-## Decodificar Base64
+## Decodificar Base64 {#decode-base64}
 
-Para los campos o eventos de logs entrantes codificados en Base64, utiliza la función [`decode_base64`][1] para descodificar el campo o evento. La sintaxis de esta función también funciona para [`decode_base16`][1].
+Para campos de registro o eventos entrantes codificados en Base64, use la función [`decode_base64`][1] para decodificar el campo o evento. La sintaxis de esta función también funciona para [`decode_base16`][1].
 
-### Ejemplo
+### Ejemplo {#example}
 
-#### Entrada
+#### Entrada {#input}
 
-Ejemplo de evento de log que contiene un campo Base64 para decodificar:
+Ejemplo de evento de registro que contiene un campo Base64 para decodificar:
 
 ```json
 {
@@ -53,24 +55,24 @@ Ejemplo de evento de log que contiene un campo Base64 para decodificar:
 }
 ```
 
-#### Función personalizada
+#### Función personalizada {#custom-function}
 
-Utiliza la función `decode_base64` para decodificar `payload` y almacenar el resultado en un nuevo campo llamado `decoded_payload`.
+Utilice la función `decode_base64` para decodificar `payload` y almacenar el resultado en un nuevo campo llamado `decoded_payload`.
 
 ```yaml
 .decoded_payload = decode_base64!(.payload)
 ```
 
 
-Alternativamente, puedes reescribir el valor original `payload` con el valor decodificado sustituyendo `decoded_payload` en la función anterior por `payload`.
+Alternativamente, puede sobrescribir el valor original de `payload` con el valor decodificado reemplazando `decoded_payload` en la función anterior con `payload`.
 
 ```yaml
 .payload = decode_base64!(.payload)
 ```
 
-#### Salida
+#### Salida {#output}
 
-El resultado cuando se utiliza `decoded_payload` para almacenar el valor decodificado.
+La salida cuando utiliza `decoded_payload` para almacenar el valor decodificado.
 
 ```json
 {
@@ -83,11 +85,11 @@ El resultado cuando se utiliza `decoded_payload` para almacenar el valor decodif
 }
 ```
 
-## Decodificar un evento completo codificado en Base64
+## Decodificar un evento completo codificado en Base64 {#decode-an-entire-base64-encoded-event}
 
-### Ejemplo
+### Ejemplo {#example-1}
 
-#### Entrada
+#### Entrada {#input-1}
 
 Ejemplo de entrada de un evento codificado en Base64:
 
@@ -97,7 +99,7 @@ Ejemplo de entrada de un evento codificado en Base64:
 }
 ```
 
-#### Función personalizada
+#### Función personalizada {#custom-function-1}
 
 El script para decodificar todo el evento codificado en Base64 `raw`.
 
@@ -107,9 +109,9 @@ El script para decodificar todo el evento codificado en Base64 `raw`.
 . = .full_event
 ```
 
-**Nota:** La sintaxis `. = .full_event` es una forma abreviada de sustituir todo el evento por el contenido de un campo.
+**Nota:** La sintaxis `. = .full_event` es una abreviatura para reemplazar todo el evento con el contenido de un campo.
 
-#### Salida
+#### Salida {#output-1}
 
 ```json
 {
@@ -119,15 +121,15 @@ El script para decodificar todo el evento codificado en Base64 `raw`.
 }
 ```
 
-## Codificar Base64
+## Codificar Base64 {#encode-base64}
 
-Para los campos o eventos de logs salientes codificados en Base64, utiliza la función [`encode_base64`][1] para decodificar el campo o evento. La sintaxis de esta función también funciona para [`encode_base16`][3].
+Para campos de registro salientes o eventos que desee codificar en Base64, utilice la función [`encode_base64`][2] para codificar el campo o evento. La sintaxis de esta función también funciona para [`encode_base16`][3].
 
-### Ejemplo
+### Ejemplo {#example-2}
 
-#### Entrada
+#### Entrada {#input-2}
 
-Ejemplo de evento de log que contiene un campo `message` que debes codificar en Base64:
+Ejemplo de evento de registro que contiene el campo `message` que desea codificar en Base64:
 
 ```json
 {
@@ -139,23 +141,23 @@ Ejemplo de evento de log que contiene un campo `message` que debes codificar en 
 }
 ```
 
-#### Función personalizada
+#### Función personalizada {#custom-function-2}
 
-Utiliza la función `encode_base64` para decodificar `message` y almacenar el resultado en un nuevo campo llamado `encoded_message`.
+Utilice la función `encode_base64` para decodificar `message` y almacenar el resultado en un nuevo campo llamado `encoded_message`.
 
 ```yaml
 .encoded_message = encode_base64!(.message)
 ```
 
-Alternativamente, puedes sobreescribir el campo del valor original (`message`) con el valor decodificado sustituyendo `encoded_message` en la función anterior por `message`.
+Alternativamente, puede sobrescribir el campo de mensaje original (`message`) con el valor decodificado reemplazando `encoded_message` en la función anterior con `message`.
 
 ```yaml
 .message = encode_base64!(.message)
 ```
 
-#### Salida
+#### Salida {#output-2}
 
-El resultado cuando se utiliza `encoded_message` para almacenar el valor codificado.
+La salida cuando utiliza `encoded_message` para almacenar el valor codificado.
 
 ```json
 {
@@ -167,15 +169,15 @@ El resultado cuando se utiliza `encoded_message` para almacenar el valor codific
 }
 ```
 
-## Reasignación de marcas de tiempo para logs históricos
+## Reasignar marcas de tiempo para registros históricos {#remap-timestamps-for-historical-logs}
 
-Si quieres migrar logs archivados de otras plataformas, es esencial asegurarte de que esos logs tienen la marca de tiempo histórica correcta. La reasignación de logs con marcas de tiempo históricas te permite gestionar logs más antiguos almacenados con fines de cumplimiento, auditoría y archivado.
+Si desea migrar registros archivados de otras plataformas, es esencial asegurarse de que esos registros tengan la marca de tiempo histórica correcta. Reasignar registros con marcas de tiempo históricas le permite manejar registros más antiguos almacenados para fines de cumplimiento, auditoría y archivo.
 
-### Ejemplo
+### Ejemplo {#example-3}
 
-#### Entrada
+#### Entrada {#input-3}
 
-Si el Worker no encuentra el campo `timestamp` en un log, se utiliza la marca de tiempo de cuando el Worker recibió el log. Este es un ejemplo de log que muestra la marca de tiempo de cuando el Worker recibió el log, así como la marca de tiempo histórica del log (`historical_ts`), que es el valor que el Worker busca.
+Si el Worker no encuentra el campo `timestamp` en un registro, se utiliza la marca de tiempo de cuando el Worker recibió el registro. Este es un ejemplo de un registro que muestra la marca de tiempo de cuando el Worker recibió el registro, así como la marca de tiempo histórica del registro (`historical_ts`), que es el valor que el Worker está buscando.
 
 ```json
 {
@@ -186,9 +188,9 @@ Si el Worker no encuentra el campo `timestamp` en un log, se utiliza la marca de
 }
 ```
 
-#### Función personalizada
+#### Función personalizada {#custom-function-3}
 
-En el ejemplo anterior, puedes crear una función que almacene la marca de tiempo ingerida en un nuevo campo y reasigne `timestamp` al valor `historical_ts`.
+Para el ejemplo anterior, puede crear una función para almacenar la marca de tiempo ingerida en un nuevo campo y reasignar `timestamp` al valor `historical_ts`.
 
 ```yaml
 #Create a new field for the ingested/processed timestamp
@@ -202,7 +204,7 @@ del(.historical_ts)
 
 ```
 
-#### Salida
+#### Salida {#output-3}
 
 ```json
 {
@@ -213,15 +215,15 @@ del(.historical_ts)
 }
 ```
 
-## Extraer un campo de la matriz de etiquetas de Datadog 
+## Extraer un campo de la matriz de etiquetas de Datadog {#extract-a-field-from-the-datadog-tags-array}
 
-Los campos anidados dentro de la matriz de etiquetas de Datadog (`ddtags`) pueden contener información útil. Es posible que quieras extraer estos campos como pares clave-valor de nivel superior o como valores para otros campos.
+Los campos anidados dentro de la matriz de etiquetas (`ddtags`) de Datadog pueden contener información útil. Es posible que desee extraer estos campos como pares clave-valor de nivel superior, o como valores para otros campos.
 
-### Ejemplo
+### Ejemplo {#example-4}
 
-#### Entrada
+#### Entrada {#input-4}
 
-Log de ejemplo que contiene la matriz `ddtags` con etiquetas de Datadog.
+Registro de muestra que contiene la matriz `ddtags` con etiquetas de Datadog.
 
 ```json
 {
@@ -242,7 +244,7 @@ Log de ejemplo que contiene la matriz `ddtags` con etiquetas de Datadog.
 }
 ```
 
-#### Función personalizada para extraer el campo env
+#### Función personalizada para extraer el campo env {#custom-function-to-extract-the-env-field}
 
 ```yaml
 #Extract a tag from ddtags array and elevate as log attribute
@@ -256,7 +258,7 @@ del(.my_tag)
 
 ```
 
-#### Salida
+#### Salida {#output-4}
 
 ```json
 {
@@ -277,16 +279,135 @@ del(.my_tag)
    "timestamp": "2025-005-27T05:26:18.205Z"
 }
 ```
+## Agregar una etiqueta al evento de registro {#add-a-tag-to-the-log-event}
 
-## Hacer referencia al valor de otro campo
+Las etiquetas se utilizan para correlacionar registros con otros servicios y telemetría. Se almacenan en matrices como pares `key:value` encerrados entre comillas (por ejemplo, `"service:payments-app"`). Para los registros de Datadog específicamente, las etiquetas están anidadas dentro de la matriz de etiquetas (`ddtags`) de Datadog. Utilice los siguientes scripts a continuación para convertir una etiqueta de un atributo existente o agregar una nueva etiqueta.
 
-Si quieres que el valor de un campo se base en otro campo, puedes hacer referencia dinámicamente al valor del otro campo.
+### Ejemplo para convertir un atributo en una etiqueta {#example-to-convert-an-attribute-to-a-tag}
 
-### Ejemplo
+#### Entrada {#input-5}
 
-#### Entrada
+En este ejemplo, el registro de muestra contiene una matriz `ddtags`, y usted desea agregar el campo `service` como una etiqueta. 
 
-En este ejemplo, tienes un campo de servicio que contiene un nombre de servicio incorrecto y tú quieres utilizar el valor de `app_id` para el servicio.
+```json
+{
+    "timestamp": "2025-005-27T05:26:18.205Z",
+    "status": "info",
+    "service": "chaos-engineering",
+    "ddsource": "python",
+    "hostname": "gke-prod-node-abc123.internal",
+    "message": "2025-05-27 05:26:17,609 -- Sending request to rails: checkout_v2",
+    "source_type": "datadog_agent",
+    "ddtags": [
+        "env:prod",
+        "team:sre",
+        "version:1.0.0",
+        "pod_name:load-generator-main-abcde"
+    ]
+}
+```
+
+#### Función personalizada para convertir el atributo `service` en una etiqueta {#custom-function-to-convert-the-service-attribute-to-a-tag}
+
+```yaml
+# First, check if the attribute 'ddtags' exists. You can replace 'ddtags' with the name of any array
+if !exists(.ddtags) {
+    .ddtags = []
+}
+
+# This example checks if 'service' exists, then adds the templatized value of service as a tag. Also, it converts the service value to a string
+if exists(.service) {
+  .ddtags = push(array!(.ddtags), "service:" + to_string!({{.service}}) )
+}
+
+```
+
+#### Salida {#output-5}
+
+```json
+{
+    "timestamp": "2025-005-27T05:26:18.205Z",
+    "status": "info",
+    "service": "chaos-engineering",
+    "ddsource": "python",
+    "hostname": "gke-prod-node-abc123.internal",
+    "message": "2025-05-27 05:26:17,609 -- Sending request to rails: checkout_v2",
+    "source_type": "datadog_agent",
+    "ddtags": [
+        "env:prod",
+        "team:sre",
+        "version:1.0.0",
+        "pod_name:load-generator-main-abcde"
+    ]
+}
+```
+### Ejemplo para crear y agregar una etiqueta {#example-to-create-and-add-a-tag}
+
+#### Entrada {#input-6}
+
+En este ejemplo, el registro de muestra contiene la matriz `ddtags`, y usted desea crear una etiqueta llamada `"system:service-mesh"` y anexarla a la matriz.
+
+```json
+{
+    "timestamp": "2025-005-27T05:26:18.205Z",
+    "status": "info",
+    "service": "chaos-engineering",
+    "ddsource": "python",
+    "hostname": "gke-prod-node-abc123.internal",
+    "message": "2025-05-27 05:26:17,609 -- Sending request to rails: checkout_v2",
+    "source_type": "datadog_agent",
+    "ddtags": [
+        "env:prod",
+        "team:sre",
+        "version:1.0.0",
+        "pod_name:load-generator-main-abcde"
+    ]
+}
+```
+
+#### Función personalizada para crear y agregar la etiqueta `system` {#custom-function-to-create-and-add-the-system-tag}
+
+```yaml
+# First, check if the attribute 'ddtags' exists. You can replace 'ddtags' with the name of any array
+if !exists(.ddtags) {
+    .ddtags = []
+}
+
+# Appends a new tag to the array by defining a separate key:value pair
+.ddtags = push(array!(.ddtags), "system:service-mesh")
+
+```
+
+#### Salida {#output-6}
+
+```json
+{
+	"ddsource": "python",
+	"ddtags": [
+		"env:prod",
+		"team:sre",
+		"version:1.0.0",
+		"pod_name:load-generator-main-abcde",
+		"system:service-mesh"
+	],
+	"hostname": "gke-prod-node-abc123.internal",
+	"message": "2025-05-27 05:26:17,609 -- Sending request to rails: checkout_v2",
+	"service": "chaos-engineering",
+	"source_type": "datadog_agent",
+	"status": "info",
+	"timestamp": "2025-005-27T05:26:18.205Z"
+}
+```
+
+## Hacer referencia al valor de otro campo {#reference-another-fields-value}
+
+Si desea que el valor de un campo se base en otro campo, puede hacer referencia dinámicamente al valor del otro campo.
+
+### Ejemplo {#example-5}
+
+#### Entrada {#input-7}
+
+Para este ejemplo, usted tiene un campo de servicio que contiene un nombre de servicio incorrecto, y desea utilizar el valor de `app_id` para el servicio en su lugar.
 
 ```json
 {
@@ -297,14 +418,14 @@ En este ejemplo, tienes un campo de servicio que contiene un nombre de servicio 
 }
 ```
 
-#### Función personalizada
+#### Función personalizada {#custom-function-4}
 
 ```yaml
 #Overwrite service to be the value of app_id
 .service = {{.app_id}}
 ```
 
-#### Salida
+#### Salida {#output-7}
 
 ```json
 {
@@ -315,9 +436,9 @@ En este ejemplo, tienes un campo de servicio que contiene un nombre de servicio 
 }
 ```
 
-## Eliminar atributos que contienen valores nulos
+## Eliminar atributos que contienen valores nulos {#remove-attributes-containing-null-values}
 
-Los atributos con valores nulos o vacíos pueden sobrecargar innecesariamente tu log. Elimina los valores nulos para recortar el log y enviar solo los atributos que proporcionan información. En el script siguiente, la sección `empty_patterns` contiene la lista de patrones vacíos que debes comprobar en tus logs. Puedes añadir y eliminar patrones para adaptarlos a tu caso de uso.
+Los atributos con valores nulos o vacíos pueden añadir un peso innecesario a sus registros. Elimine los valores nulos para reducir el registro y enviar solo los atributos que proporcionan información. En el script a continuación, la sección `empty_patterns` contiene la lista de patrones vacíos que se deben buscar en sus registros. Puede agregar y eliminar patrones para adaptarlos a su caso de uso.
 
 ```json
 # Define your empty patterns
@@ -337,11 +458,11 @@ empty_patterns = ["null", "NULL", "N/A", "n/a", "none", "NONE", "-", "undefined"
 })
 ```
 
-## Fusionar atributos anidados en el nivel raíz
+## Fusionar atributos anidados al nivel raíz {#merge-nested-attributes-to-root-level}
 
-La selección de objetos o campos anidados en una consulta de filtro puede requerir la definición de varias rutas. Esto es habitual cuando se trabaja con el campo de mensaje, en el que el contenido analizado resultante está anidado en un objeto. Cuando se utiliza la sintaxis de filtro de Observability Pipelines' el acceso a un campo anidado requiere la notación `<OUTER_PATH>.<INNER_PATH>`.
+Apuntar a objetos o campos anidados en una consulta de filtro puede requerir que defina múltiples rutas. Esto es común cuando se trabaja con el campo de mensaje, donde los contenidos analizados resultantes están anidados en un objeto. Cuando utiliza la sintaxis de filtro de Observability Pipelines, acceder a un campo anidado requiere la notación `<OUTER_PATH>.<INNER_PATH>`.
 
-Por ejemplo, este log contiene un mensaje convertido en cadena JSON:
+Por ejemplo, este registro contiene un mensaje JSON convertido en cadena:
 
 ```json
 {
@@ -359,7 +480,7 @@ Por ejemplo, este log contiene un mensaje convertido en cadena JSON:
 }
 ```
 
-Este es el resultado después de analizar el campo `message`. El contenido analizado se anida en el objeto `message`.
+Esta es la salida después de que se haya analizado el campo `message`. El contenido analizado está anidado en el objeto `message`.
 
 ```json
 {
@@ -384,9 +505,9 @@ Este es el resultado después de analizar el campo `message`. El contenido anali
    "user_id": "12345"
 }
 ```
-En este caso, para filtrar por `event_type`, es necesario especificar `@message.event_type`. Para filtrar directamente por `event_type` u otro campo dentro de un objeto, Datadog recomienda aplanar el objeto hasta el nivel raíz.
+En este caso, para filtrar por `event_type`, necesita especificar `@message.event_type`. Para filtrar directamente por `event_type` u otro campo dentro de un objeto, Datadog recomienda aplanar el objeto al nivel raíz.
 
-Para fusionar los eventos del objeto `message` en el nivel raíz, utiliza este script:
+Para fusionar los eventos del objeto `message` al nivel raíz, utilice este script:
 
 ```json
 if is_object(.message) {
@@ -395,9 +516,9 @@ if is_object(.message) {
 }
 ```
 
-**Nota**: Este script funciona con cualquier objeto JSON. Solo tienes que sustituir el atributo `message` por el nombre del campo que estás intentando aplanar.
+**Nota**: Este script funciona con cualquier objeto JSON. Solo necesita reemplazar el atributo `message` con el nombre del campo que intenta aplanar.
 
-El resultado es el log con atributos aplanados que puedes filtrar directamente:
+Esto da como resultado el registro con atributos aplanados que puede filtrar directamente:
 
 ```json
 {
@@ -421,17 +542,17 @@ El resultado es el log con atributos aplanados que puedes filtrar directamente:
 }
 ```
 
-**Nota**: Si aplanas el campo del mensaje, el log resultante ya no tendrá un objeto de mensaje. Esto significa que si el log se envía a Datadog, cuando veas el log en Explorador de logs, no verás una sección **Log Message** (Mensaje de log) en el panel lateral del log.
+**Nota**: Si aplana el campo de mensaje, el registro resultante ya no tiene un objeto de mensaje. Esto significa que si el registro se envía a Datadog, cuando vea el registro en Log Explorer, no verá una sección {{< ui >}}Log Message{{< /ui >}} en el panel lateral del registro.
 
-## Serializar logs salientes en formato _raw
+## Serialice los registros salientes en formato _raw {#serialize-outbound-logs-in-raw-format}
 
-Splunk y CrowdStrike prefieren un formato llamado `_raw` para la ingesta de logs. El envío de datos en `_raw` normaliza tus logs y te permite beneficiarte de sus dashboards, monitores y contenidos de detección de amenazas predefinidos. Para garantizar que se aplica el formato de log `_raw`, puedes serializar el evento saliente en `_raw`.
+Splunk y CrowdStrike prefieren un formato llamado `_raw` para la ingesta de registros. Enviar datos en `_raw` normaliza sus registros y le permite beneficiarse de sus tableros, seguimientos y contenido de detección de amenazas listos para usar. Para asegurarse de que se aplique el formato de registro `_raw`, puede serializar el evento saliente en `_raw`.
 
 **Notas**:
-- Debes añadir otros pasos de procesamiento, reasignación y análisis antes de serializar tus logs en formato `_raw`.
-- Selecciona `Raw` como opción de codificación cuando configures el destino Splunk HEC o CrowdStrike.
+- Debe agregar otros pasos de parseo, reasignación y análisis antes de serializar sus registros en formato `_raw`.
+- Para asegurarse de que sus registros se enruten correctamente después de la serialización, configure su destino preferido con {{< ui >}}Raw{{< /ui >}} como tipo de codificación. 
 
-Un ejemplo de log de entrada:
+Un ejemplo de registro:
 
 ```json
 {
@@ -456,12 +577,12 @@ Esta función personalizada serializa el evento en formato `_raw`:
 
 ```json
 # Serialize the entire event into _raw
-._raw = encode_key_value(.)
+._raw = encode_key_value!(.)
 # Only keep _raw
 . = { "_raw": ._raw }
 ```
 
-Este es el resultado del ejemplo de log después de haber sido procesado por el script personalizado:
+Esta es la salida del registro de ejemplo después de haber sido procesada por el script personalizado:
 
 ```json
 {
@@ -469,7 +590,7 @@ Este es el resultado del ejemplo de log después de haber sido procesado por el 
 }
 ```
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -3,6 +3,10 @@ title: Bits Code Setup
 aliases:
 - /bits_ai/bits_ai_dev_agent/setup/
 disable_toc: false
+further_reading:
+- link: "https://www.datadoghq.com/blog/bits-code/"
+  tag: "Blog"
+  text: "Turn Datadog findings into automated code fixes with Bits Code"
 ---
 
 ## Overview
@@ -118,7 +122,7 @@ The default allowlist includes the following domains. This list will evolve over
 | Clojure/JVM | `repo.clojars.org` |
 | Go | `pkg.go.dev`, `proxy.golang.org`, `sum.golang.org`, `vuln.go.dev` |
 | Java/JVM | `repo1.maven.org` |
-| JavaScript/TypeScript | `registry.npmjs.org`, `registry.yarnpkg.com` |
+| JavaScript/TypeScript | `registry.npmjs.org`, `registry.yarnpkg.com`, `repo.yarnpkg.com` |
 | .NET/C# | `api.nuget.org` |
 | PHP | `packagist.org`, `repo.packagist.org` |
 | Python | `files.pythonhosted.org`, `pypi.org`, `pypi.python.org`, `pythonhosted.org` |
@@ -162,3 +166,7 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [8]: /bits_ai/bits_code/
 [11]: /bits_ai/bits_code/#supported-source-code-providers
 [12]: /bits_ai/bits_code/#custom-agent-skills-and-instructions
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

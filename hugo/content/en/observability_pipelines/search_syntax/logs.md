@@ -103,6 +103,10 @@ Here are some attribute search syntax examples and logs that match the syntax:
 
 If you want the query to search for a literal `.` in the attribute key, wrap the key in escaped quotes in the search query. For example, the search query `"service.status":disabled` matches the event `{"service.status": "disabled"}`.
 
+#### `ddsource` and `ddtags`
+
+The Datadog Agent, Datadog Lambda Forwarder, and Datadog Lambda Extension sources send logs and metrics tagged with `ddsource` and `ddtags`, not `source` and `tags`. When you define processor queries or filters for events from these sources, use `ddsource` and `ddtags` instead.
+
 ### Arrays
 
 In the following example, CloudWatch logs for Windows contain an array of JSON objects under `Event.EventData.Data`.

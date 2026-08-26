@@ -53,6 +53,41 @@ traits:
   type: text
   internal_notes: For example, HTTP, gRPC, or SOCKS.
 
+- id: cloud_siem_detection_rule_type
+  label: "Rule type"
+  type: text
+  internal_notes: The rule type a user wants to use when creating a custom detection rule for Cloud SIEM.
+
+- id: cloud_siem_detection_rule_detection_method
+  label: "Detection method"
+  type: text
+  internal_notes: The detection method a user wants to use when creating a custom detection rule for Cloud SIEM.
+
+- id: cloud_siem_detection_rule_query_language
+  label: "Query language"
+  type: text
+  internal_notes: The search query language a user wants to use when creating a custom detection rule for Cloud SIEM.
+
+- id: cloud_siem_detection_threshold_rule_query_language
+  label: "Query language"
+  type: text
+  internal_notes: The search query language a user wants to use when creating a custom detection rule for Cloud SIEM, when the search query type is threshold AND the rule type is real-time rule.
+
+- id: cloud_siem_detection_threshold_sql_rule_query_language
+  label: "Query language"
+  type: text
+  internal_notes: The search query language a user wants to use when creating a custom detection rule for Cloud SIEM, when the search query type is threshold AND the rule type is either scheduled rule or historical job.
+
+- id: cloud_siem_detection_sequence_rule_query_language
+  label: "Query language"
+  type: text
+  internal_notes: The search query language a user wants to use when creating a custom detection rule for Cloud SIEM, when the search query type is sequence.
+
+- id: cloud_siem_detection_signal_correlation_rule_query_language
+  label: "Query language"
+  type: text
+  internal_notes: The search query language a user wants to use when creating a custom detection rule for Cloud SIEM, when the search query type is signal correlation.
+
 - id: interface
   label: Interface
   type: text
