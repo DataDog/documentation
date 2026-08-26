@@ -246,8 +246,6 @@ The cost of an EBS volume has three components: IOPS, throughput, and storage. E
 | Workload idle | Cost of provisioned IOPS, throughput, or storage that are reserved and allocated but not used by workloads. Storage cost is based on the maximum amount of volume storage used that day, while IOPS and throughput costs are based on the average amount of volume storage used that day. This is the difference between the total resources requested and the average usage. **Note:** This tag is only available if you have enabled {% ui %}Resource Collection{% /ui %} in your [AWS Integration][21]. To prevent being charged for {% ui %}Cloud Security Posture Management{% /ui %}, ensure that during the {% ui %}Resource Collection{% /ui %} setup, the {% ui %}Cloud Security Posture Management{% /ui %} box is unchecked. |
 | Cluster idle | Cost of provisioned IOPS, throughput, or storage that are not reserved by any pods that day. This is the difference between the total cost of the resources and what is allocated to workloads. |
 
-**Note**: Persistent volume allocation is only supported in Kubernetes clusters, and is only available for pods that are part of a Kubernetes StatefulSet.
-
 ### Data transfer
 
 Costs are allocated into the following spend types:
@@ -284,8 +282,6 @@ The cost of an Azure Managed Disk can include storage, provisioned IOPS, and pro
 | Workload idle | Cost of provisioned storage, IOPS, or throughput reserved for a workload but not used. This is the difference between the provisioned capacity allocated to the workload and its usage. |
 | Cluster idle | Cost of provisioned storage, IOPS, or throughput not allocated to any pod that day. |
 
-**Note**: Persistent volume allocation is only supported in Kubernetes clusters, and is only available for pods that are part of a Kubernetes StatefulSet.
-
 {% /if %}
 
 <!-- Google -->
@@ -313,8 +309,6 @@ The cost of a Google Cloud persistent disk can include storage, provisioned IOPS
 | Usage | Cost of provisioned storage, IOPS, or throughput used by workloads. Storage usage is based on the maximum storage used that day. IOPS and throughput usage are based on the average operations and bytes transferred that day. |
 | Workload idle | Cost of provisioned storage, IOPS, or throughput reserved for a workload but not used. This is the difference between the provisioned capacity allocated to the workload and its usage. |
 | Cluster idle | Cost of provisioned storage, IOPS, or throughput not allocated to any pod that day. |
-
-**Note**: Persistent volume allocation is only supported in Kubernetes clusters, and is only available for pods that are part of a Kubernetes StatefulSet.
 
 {% /if %}
 
