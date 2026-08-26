@@ -49,6 +49,14 @@ Security Inbox answers three questions:
 
 {{< img src="security/security_inbox_8.png" alt="The Security Inbox shows prioritized security findings with severity, triage status, and remediation SLA summaries" width="100%">}}
 
+{{% site-region region="gov" %}}
+**Note**: Some of the products that feed Security Inbox are not available on this site. Cloud Security and Code Security findings do not reach the inbox, and Linear is unavailable for ticketing.
+{{% /site-region %}}
+
+{{% site-region region="gov2" %}}
+**Note**: Some of the products that feed Security Inbox are not available on this site. Cloud Security, Code Security, and App and API Protection findings do not reach the inbox. Linear ticketing, Datadog Case Management, and assignee management are also unavailable.
+{{% /site-region %}}
+
 ## What appears in Security Inbox
 
 Inbox rules control which findings reach Security Inbox. Datadog provides a set of default inbox rules, compiled by the Datadog Security Research team, that surface the findings most likely to represent real risk. You can review these rules, turn individual rules off, and add rules of your own.
@@ -75,10 +83,6 @@ Inbox rules can match any of the following finding types:
 | [API Security][19] | App and API Protection |
 
 Security Inbox shows only the finding types you have permission to read. A finding you cannot open in its own explorer does not appear in your inbox.
-
-{{% site-region region="gov,gov2" %}}
-**Note**: Cloud Security and Code Security are not available on this site, so their finding types do not reach Security Inbox.
-{{% /site-region %}}
 
 ### Detected risks
 
@@ -154,14 +158,6 @@ To act on several findings at once, select them and use:
 - **Assignee**: set or clear the [assignee][23] on the selected findings.
 - **Muting**: mute findings that you have assessed and accepted.
 - **Severity**: adjust the severity of the selected findings.
-
-{{% site-region region="gov,gov2" %}}
-**Note**: Linear is not available on this site.
-{{% /site-region %}}
-
-{{% site-region region="gov2" %}}
-**Note**: Datadog Case Management and assignee management are not available on this site, so security cases and assignees are unavailable in Security Inbox.
-{{% /site-region %}}
 
 Bulk selection is available on an ungrouped table and inside an expanded group. Click any finding to open its side panel, which shows the full detection detail and remediation guidance for that finding type.
 
