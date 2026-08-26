@@ -32,41 +32,35 @@ You can manually adjust the severity of findings in the following products:
 - [App and API Protection][4]
 - [Workload Protection][5]
 
+## Permissions
+
+To adjust the severity of findings, you must have the `security_monitoring_findings_write` or `appsec_vm_write` permission. See [Role Based Access Control][6] for more information about Datadog's default roles and granular role-based access control permissions.
+
 ## Adjust the severity of a finding
 
+{{< img src="security/manual_severity_adjustment/finding_side_panel_button.png" alt="A finding's side panel with the Adjust Severity option highlighted in the overflow menu" style="width:100%;" >}}
+
 1. Open a finding.
-2. Click {{< ui >}}Adjust Severity{{< /ui >}}. The **Adjust Severity** window opens.
-
-   {{< img src="security/manual_severity_adjustment/adjust_severity_button.png" alt="The Adjust Severity window open on a finding, with a severity not yet selected" style="width:100%;" >}}
-
-3. Select the new severity; for example, **Critical**.
+2. Click {{< ui >}}Adjust Severity{{< /ui >}}. The **Adjust Severity** dialog opens.
+3. Select the new severity, for example, **Critical**.
 4. Enter an optional description.
-
-   {{< img src="security/manual_severity_adjustment/adjust_severity_modal.png" alt="The Adjust Severity window with Critical selected as the new severity and a custom description entered" style="width:100%;" >}}
-
-5. Click {{< ui >}}Adjust Severity{{< /ui >}} to confirm. The **Adjust Severity** window closes.
+5. Click {{< ui >}}Adjust Severity{{< /ui >}}.
 
 To automatically adjust the severity of findings that meet certain criteria, see [Severity Modifier Rules][1].
 
-## Adjust severity of multiple findings at once
+## Adjust the severity of multiple findings
 
-To adjust the severity of several findings in a single action:
+To adjust the severity of multiple findings at once:
 
 1. In the findings explorer, select up to 50 findings.
-2. Click {{< ui >}}Severity{{< /ui >}}. The **Adjust Severity** window opens.
-
-   {{< img src="security/manual_severity_adjustment/bulk_severity_button.png" alt="The Adjust Severity window open for multiple selected findings, with a severity not yet selected" style="width:100%;" >}}
-
-3. Select the new severity; for example, **Critical**.
+2. Click {{< ui >}}Severity{{< /ui >}}. The **Adjust Severity** dialog opens.
+3. Select the new severity, for example, **Critical**.
 4. Enter an optional description.
-
-   {{< img src="security/manual_severity_adjustment/bulk_severity_modal.png" alt="The Adjust Severity window for multiple selected findings, with Critical selected as the new severity and a custom description entered" style="width:100%;" >}}
-
-5. Click {{< ui >}}Adjust Severity{{< /ui >}} to confirm. The **Adjust Severity** window closes.
+5. Click {{< ui >}}Adjust Severity{{< /ui >}}.
 
 ## Identify modified findings
 
-Findings with a manually adjusted severity display a visual indicator in explorer list views and in the finding's side panel header. Hover over the indicator to see who adjusted the severity, and any description entered.
+Findings with a manually adjusted severity display a visual indicator in explorer list views and in the finding's side panel header. Hover over the indicator to see who adjusted the severity and any description they entered.
 
 {{< img src="security/manual_severity_adjustment/severity_pill_popover.png" alt="A severity pill showing a severity increase, with a pop-over displaying who adjusted the severity and the description entered" style="width:65%;" >}}
 
@@ -90,10 +84,6 @@ For vulnerability findings that have a Datadog-adjusted CVSS score, manually adj
 | Critical | 9.0–10.0 |
 
 The original CVSS vector is never modified. No synthetic vector is generated to match the adjusted score.
-
-## Permissions
-
-To adjust the severity of findings, you must have the `security_monitoring_findings_write` or `appsec_vm_write` permission. See [Role Based Access Control][6] for more information about Datadog's default roles and granular role-based access control permissions.
 
 ## Further reading
 
