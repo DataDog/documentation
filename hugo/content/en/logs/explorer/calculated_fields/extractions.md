@@ -145,7 +145,7 @@ A pattern must follow these rules:
 10.0.0.14 GET /api/v1/orders 503
 ```
 
-**Extraction regex pattern**:
+**Regex pattern**:
 
 ```plaintext
 (?<ip>\S+) (?<method>\S+) /api/(?:v\d+)/(?<resource>\S+) (?<status>\d+)
