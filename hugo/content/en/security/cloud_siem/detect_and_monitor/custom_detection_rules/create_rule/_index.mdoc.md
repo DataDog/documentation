@@ -164,13 +164,13 @@ If you have the [Security Dataset Write][10] permission, you can create custom d
 ### Create a dataset
 
 To create a custom dataset:
-1. In Datadog, go to **Cloud SIEM** > **Settings** > [**Datasets**][11].
-1. Click **Create Dataset**. In the Create Dataset window that opens, enter the following:
-   - Enter an optional **Description**.
-   - Replace `my_new_dataset` with a **Name**.
-   - Under **Select columns**, search for and select the columns you want in your dataset.
-   - Beside each column name in your dataset, you can click the **More options** button to move the column's position in the dataset. Alternatively, you can click **Edit column** to edit the column's path, add an alias, and data type.
-1. Click **Create Dataset**. The Create Dataset window closes and the dataset appears in your list of security datasets.
+1. In Datadog, go to {% ui %}Cloud SIEM{% /ui %} > {% ui %}Settings{% /ui %} > [{% ui %}Datasets{% /ui %}][11].
+1. Click {% ui %}Create Dataset{% /ui %}. In the Create Dataset window that opens, enter the following:
+   - Enter an optional {% ui %}Description{% /ui %}.
+   - Replace `my_new_dataset` with a {% ui %}Name{% /ui %}.
+   - Under {% ui %}Select columns{% /ui %}, search for and select the columns you want in your dataset.
+   - Beside each column name in your dataset, you can click the {% ui %}More options{% /ui %} button to move the column's position in the dataset. Alternatively, you can click {% ui %}Edit column{% /ui %} to edit the column's path, add an alias, and data type.
+1. Click {% ui %}Create Dataset{% /ui %}. The Create Dataset window closes and the dataset appears in your list of security datasets.
 
 ### Delete or edit a dataset
 
@@ -179,10 +179,10 @@ To create a custom dataset:
 - You can only delete datasets that aren't used in any detection rules.
 {% /alert %}
 
-1. In Datadog, go to **Cloud SIEM** > **Settings** > [**Datasets**][11].
-1. Beside the dataset you want to delete or edit, click the **More options** button.
-   - To delete the dataset, click **Delete**. In the confirmation window that opens, click **Delete**.
-   - To view detection rules that use this dataset, click the **View dependent detection rules** count. If you want to delete the dataset, you must delete these rules or use a different dataset for them first.
+1. In Datadog, go to {% ui %}Cloud SIEM{% /ui %} > {% ui %}Settings{% /ui %} > [{% ui %}Datasets{% /ui %}][11].
+1. Beside the dataset you want to delete or edit, click the {% ui %}More options{% /ui %} button.
+   - To delete the dataset, click {% ui %}Delete{% /ui %}. In the confirmation window that opens, click {% ui %}Delete{% /ui %}.
+   - To view detection rules that use this dataset, click the {% ui %}View dependent detection rules{% /ui %} count. If you want to delete the dataset, you must delete these rules or use a different dataset for them first.
    - To edit the dataset, click **See details**. In the Reviewing Dataset panel that opens, click **Edit Dataset**. Make the required changes, then click **Save Changes**.
      - Every time you edit a dataset, Datadog saves the old version in the dataset's version history. In the Reviewing Dataset panel, you can compare versions and copy the source JSON for any version.
 {% /if %}
@@ -473,7 +473,7 @@ You can use SQL syntax to write historical jobs for additional flexibility, cons
 Datadog applies conditions to the results your SQL queries return. It evaluates each query result against the conditions you define in the [job conditions](#set-conditions) section, such as a count threshold or group-by attribute. It generates a job result when the query results meet those conditions.
 
 {% alert level="info" %}
-Historical jobs contain information from when the job ran and do not update automatically. When you view a job result that was detected using a SQL query, in the **Queries** section of the side panel, you can click the dataset to see when the dataset was last updated.
+Historical jobs contain information from when the job ran and do not update automatically. When you view a job result that was detected using a SQL query, in the {% ui %}Queries{% /ui %} section of the side panel, you can click the dataset to see when the dataset was last updated.
 
 If the dataset was updated after the job result was created, you need to run the historical job again to get updated job results.
 {% /alert %}
