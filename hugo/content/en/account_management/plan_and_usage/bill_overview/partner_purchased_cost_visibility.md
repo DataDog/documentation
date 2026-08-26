@@ -1,6 +1,6 @@
 ---
 title: Cost Visibility for Customers Who Purchase Through a Partner
-description: Reseller customers can view estimated Datadog costs in Bill Overview using the rates their partner provides, with a daily breakdown and product- and sub-org-level detail.
+description: If you purchase Datadog through a partner, view your estimated Datadog costs in Bill Overview, with a daily breakdown and product- and sub-organization-level detail.
 further_reading:
 - link: "/account_management/plan_and_usage/bill_overview/"
   tag: "Documentation"
@@ -27,7 +27,7 @@ Your partner shares your rates with Datadog. Datadog uses those rates and your u
 
 ## Limitations
 
-The following limitations apply to End Customer Cost Visibility.
+The following limitations apply.
 
 ### Feature availability
 
