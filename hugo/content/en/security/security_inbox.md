@@ -167,7 +167,7 @@ Bulk selection is available on an ungrouped table and inside an expanded group. 
 
 ## Report on your inbox
 
-The **Reporting** tab shows a dashboard of Security Inbox trends over time, including finding volume, severity mix, and remediation progress. Use it to review your security posture in recurring team meetings and to check whether remediation is keeping pace with detection.
+The **Reporting** tab shows a dashboard of Security Inbox trends over time, so you can track whether remediation is keeping pace with detection.
 
 ## Use the security context map to identify and mitigate vulnerabilities
 
