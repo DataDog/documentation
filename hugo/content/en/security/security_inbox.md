@@ -169,6 +169,10 @@ To act on several findings at once, select them and use:
 **Note**: Linear is not available on this site.
 {{% /site-region %}}
 
+{{% site-region region="gov2" %}}
+**Note**: Datadog Case Management and assignee management are not available on this site, so security cases and assignees are unavailable in Security Inbox.
+{{% /site-region %}}
+
 Bulk selection is available on an ungrouped table and inside an expanded group. Click any finding to open its side panel, which shows the full detection detail and remediation guidance for that finding type.
 
 ## Report on your inbox
