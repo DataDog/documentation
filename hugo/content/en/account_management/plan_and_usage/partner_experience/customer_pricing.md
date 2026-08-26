@@ -27,31 +27,31 @@ To set customer pricing, you need:
 1. Log in to your Datadog admin organization.
 2. Navigate to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Pricing{{< /ui >}}.
    {{< img src="account_management/plan_and_usage/customer-pricing-nav.png" alt="Customer Pricing tab in the Plan & Usage section" >}}
-3. Select a customer from the dropdown. All of your reseller customers are listed.
+3. Select a customer from the dropdown. Customers with an eligible resell contract are listed.
    {{< img src="account_management/plan_and_usage/customer-pricing-select-customer.png" alt="Customer selection dropdown listing reseller customers" >}}
 4. Review the customer's contracted products and corresponding sales prices in the table.
 5. Click {{< ui >}}Edit{{< /ui >}} and enter the customer's prices for each contracted product. You can edit prices in bulk, individually, or a combination of both.
    {{< img src="account_management/plan_and_usage/customer-pricing-edit-bulk.png" alt="Bulk price editing controls for a customer's contracted products" >}}
    {{< img src="account_management/plan_and_usage/customer-pricing-edit-individual.png" alt="Individual draft price fields for each contracted product" >}}
-6. Set a default pricing rule for products that are not on the customer's contract. For example, bill at list price or apply a percentage markup to the sales price.
+6. Set a default pricing rule for products that are not on the customer's contract. By default, on-demand rates for non-contracted products are set to the Datadog list price. You can instead apply a percentage markup to the sales price, and optionally cap the marked-up rates at the Datadog list price.
    {{< img src="account_management/plan_and_usage/customer-pricing-default-rule.png" alt="Default pricing rule configuration for non-contracted products" >}}
-7. Click {{< ui >}}Save Draft{{< /ui >}}, review your entries, and then click {{< ui >}}Publish{{< /ui >}}.
+7. Click {{< ui >}}Save{{< /ui >}} to save a draft. Drafts are visible only within your Datadog admin organization. Review your entries, then click {{< ui >}}Publish{{< /ui >}}.
 
-After you publish, cost visibility is enabled for that customer within 24 hours. The customer can then see their estimated costs in their Datadog organization, based on their usage and the rates you provide.
+After you publish, cost visibility is enabled for that customer within 24 hours. The customer can then see their estimated costs in their Datadog organization, based on their usage and the rates you provide. Published prices are effective as of the most recent change to the customer's contract, whether that is a new contract or a terms modification to an existing one.
 
-Products that are not on the customer's contract are billed using the default pricing rule you configured for that customer.
+**Note**: On-demand costs for off-contract ingest SKUs can run up to approximately 3% higher than actual cost.
 
 ## Update pricing
 
-To change a customer's rates after publishing, return to the {{< ui >}}Customer Pricing{{< /ui >}} page, edit the values, and republish.
+To change a customer's rates after publishing, return to the {{< ui >}}Customer Pricing{{< /ui >}} page, edit the values, and republish. Updates can take up to 24 hours to become visible to the customer.
 
 ## Limitations
 
-Cost visibility is not available for the following customers, and publishing rates for them has no effect:
+To appear in the customer dropdown, a customer must have an eligible resell contract. Customer Pricing does not support the following contract types and organizations:
 
-- **Legacy managed service provider (MSP) contracts** (many customers under a single contract). These customers do not appear in the customer dropdown.
-- **Cloud Marketplace customers without a drawdown contract.** Customers purchasing through AWS, Azure, or Google Cloud Marketplace without a drawdown agreement.
-- **Customers procuring through two channel partners at the same time.** For example, Datadog to Partner 1 to Partner 2 to the customer.
+- **Legacy managed service provider (MSP) contracts**, where many customers are covered by a single contract.
+- **Cloud Marketplace contracts without a drawdown agreement**, for customers purchasing through AWS, Azure, or Google Cloud Marketplace.
+- **Contracts where the customer procures through two channel partners at the same time.** For example, Datadog to Partner 1 to Partner 2 to the customer.
 - **GovCloud organizations.**
 
 For the full list of limitations, including feature availability and cost accuracy caveats, see [Cost Visibility for Customers Who Purchase Through a Partner][1].
