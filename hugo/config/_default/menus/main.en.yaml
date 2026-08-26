@@ -3131,46 +3131,46 @@ menu:
       parent: action_catalog
       identifier: private_actions
       weight: 2
-    - name: Get Started
+    - name: Getting Started
       url: actions/private_actions/getting_started/
       parent: private_actions
-      identifier: getting_started
-      weight: 1
+      identifier: private_actions_getting_started
+      weight: 201
     - name: Set Up in the Datadog Agent
       url: actions/private_actions/set_up_agent_based/
       parent: private_actions
-      identifier: set_up_agent_based
-      weight: 2
+      identifier: private_actions_set_up_agent_based
+      weight: 202
     - name: Set Up a Standalone Runner
       url: actions/private_actions/set_up_standalone/
       parent: private_actions
-      identifier: set_up_standalone
-      weight: 3
+      identifier: private_actions_set_up_standalone
+      weight: 203
     - name: Enrollment and Ownership
       url: actions/private_actions/enroll_runner/
       parent: private_actions
-      identifier: enroll_runner
-      weight: 4
+      identifier: private_actions_enroll_runner
+      weight: 204
     - name: Authorize Private Actions
       url: actions/private_actions/authorize_private_actions/
       parent: private_actions
-      identifier: authorize_private_actions
-      weight: 5
+      identifier: private_actions_authorize_private_actions
+      weight: 205
     - name: Execution Policies
       url: actions/private_actions/execution_policies/
       parent: private_actions
-      identifier: execution_policies
-      weight: 6
+      identifier: private_actions_execution_policies
+      weight: 206
     - name: Run a Script
       url: actions/private_actions/run_script/
       parent: private_actions
-      identifier: run_script
-      weight: 7
-    - name: Runner Reference
+      identifier: private_actions_run_script
+      weight: 207
+    - name: Reference
       url: actions/private_actions/reference/
       parent: private_actions
       identifier: private_actions_reference
-      weight: 8
+      weight: 208
     - name: Cloudcraft
       url: datadog_cloudcraft/
       pre: cloudcraft
