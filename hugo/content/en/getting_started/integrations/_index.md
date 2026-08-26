@@ -222,7 +222,7 @@ logging
 : The file that lists and stores the metrics collected by each integration.
 
 metrics
-: The list of what is collected from your system by each integration. You can find the metrics for each integration in that integration's `metadata.csv` file, and in the **Data Collected** table on the integration's documentation page. In that table, a metric listed with *Shown as \<unit\>* already has a unit defined in the integration's metadata; a metric without this notation does not have a unit set by default, and you need to configure one manually on the [metric summary][48] page. For more information about metrics, see the [Metrics][42] developer page. You can also set up [custom metrics][43], so if the integration doesn't offer a metric out of the box, you can usually add it.
+: The list of what is collected from your system by each integration. You can find the metrics for each integration in that integration's `metadata.csv` file and in the **Data Collected** table on the integration's documentation page. In that table, a metric listed with *Shown as \<unit\>* already has a unit defined in the integration's metadata. A metric without this notation does not have a unit set by default, so you need to configure one manually on the [metric summary][48] page. For more information about metrics, see the [Metrics][42] developer page. You can also set up [custom metrics][43], so if the integration doesn't offer a metric out of the box, you can usually add it.
 
 parameters
 : Use the parameters in the `conf.yaml` file to control accesses between your integration data source and the Agent. The individual integrations `conf.yaml.example` file has all of the required and not required parameters listed.
