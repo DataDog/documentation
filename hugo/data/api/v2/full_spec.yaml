@@ -36178,6 +36178,7 @@ components:
         - $ref: "#/components/schemas/EntityV3Queue"
         - $ref: "#/components/schemas/EntityV3System"
         - $ref: "#/components/schemas/EntityV3API"
+        - $ref: "#/components/schemas/EntityV3Repository"
     EntityV3API:
       additionalProperties: false
       description: Schema for API entities.
@@ -36651,6 +36652,88 @@ components:
           type: string
         type:
           description: The type of queue.
+          type: string
+      type: object
+    EntityV3Repository:
+      additionalProperties: false
+      description: Schema for repository entities.
+      properties:
+        apiVersion:
+          $ref: "#/components/schemas/EntityV3APIVersion"
+        datadog:
+          $ref: "#/components/schemas/EntityV3RepositoryDatadog"
+        extensions:
+          additionalProperties: {}
+          description: Custom extensions. This is the free-formed field to send client-side metadata. No Datadog features are affected by this field.
+          type: object
+        integrations:
+          $ref: "#/components/schemas/EntityV3Integrations"
+        kind:
+          $ref: "#/components/schemas/EntityV3RepositoryKind"
+        metadata:
+          $ref: "#/components/schemas/EntityV3Metadata"
+        spec:
+          $ref: "#/components/schemas/EntityV3RepositorySpec"
+      required:
+        - apiVersion
+        - kind
+        - metadata
+      type: object
+    EntityV3RepositoryDatadog:
+      additionalProperties: false
+      description: Datadog product integrations for the repository entity.
+      properties:
+        codeLocations:
+          $ref: "#/components/schemas/EntityV3DatadogCodeLocations"
+        events:
+          $ref: "#/components/schemas/EntityV3DatadogEvents"
+        logs:
+          $ref: "#/components/schemas/EntityV3DatadogLogs"
+        performanceData:
+          $ref: "#/components/schemas/EntityV3DatadogPerformance"
+        pipelines:
+          $ref: "#/components/schemas/EntityV3DatadogPipelines"
+      type: object
+    EntityV3RepositoryKind:
+      description: The definition of Entity V3 Repository Kind object.
+      enum:
+        - repository
+      example: repository
+      type: string
+      x-enum-varnames:
+        - REPOSITORY
+    EntityV3RepositorySpec:
+      additionalProperties: false
+      description: The definition of Entity V3 Repository Spec object.
+      properties:
+        componentOf:
+          description: A list of components the repository is a part of.
+          items:
+            description: A component entity reference string.
+            type: string
+          type: array
+        dependencyOf:
+          description: A list of components that the repository is a dependency of.
+          items:
+            description: A component entity reference string.
+            type: string
+          type: array
+        dependsOn:
+          description: A list of components that the repository depends on.
+          items:
+            description: A component entity reference string.
+            type: string
+          type: array
+        lifecycle:
+          description: The lifecycle state of the repository.
+          minLength: 1
+          type: string
+        tier:
+          description: The importance of the repository.
+          minLength: 1
+          type: string
+        type:
+          description: The type of repository.
           type: string
       type: object
     EntityV3Service:
