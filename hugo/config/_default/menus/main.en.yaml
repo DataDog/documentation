@@ -3161,7 +3161,7 @@ menu:
       parent: private_actions
       identifier: run_script
       weight: 7
-    - name: Reference
+    - name: Runner Reference
       url: actions/private_actions/reference/
       parent: private_actions
       identifier: private_actions_reference
