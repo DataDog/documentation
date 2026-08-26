@@ -2,21 +2,15 @@
 title: Proxy Feature Flag SDK Traffic
 description: Route Datadog Feature Flag SDK network requests through a proxy on your own domain.
 further_reading:
+- link: "/feature_flags/guide/proxy_server_setup/"
+  tag: "Guide"
+  text: "Set Up a Proxy Server for Feature Flag SDK Traffic"
 - link: "/feature_flags/client/"
   tag: "Documentation"
   text: "Client-Side Feature Flags"
-- link: "/feature_flags/client/android/"
-  tag: "Documentation"
-  text: "Android Feature Flags"
-- link: "/feature_flags/client/ios/"
-  tag: "Documentation"
-  text: "iOS Feature Flags"
-- link: "/feature_flags/client/reactnative/"
-  tag: "Documentation"
-  text: "React Native Feature Flags"
-- link: "/feature_flags/client/javascript/"
-  tag: "Documentation"
-  text: "Browser Feature Flags"
+- link: "/real_user_monitoring/guide/proxy-rum-data/"
+  tag: "Guide"
+  text: "Proxy Browser RUM Data"
 ---
 
 ## Overview
