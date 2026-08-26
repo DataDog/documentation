@@ -54,7 +54,7 @@ Click a session to view its details and continue working with Bits Code. To remo
 Bits Code supports the following source code providers:
 - **GitHub**: GitHub.com, [GitHub Enterprise Cloud][30], [GitHub Enterprise Cloud with data residency][31], and [GitHub Enterprise Server][38].
 - **GitLab**: GitLab.com and GitLab Self-Managed.
-- **Azure DevOps**: [Azure DevOps Cloud][39] organizations are supported.
+- **Azure DevOps Cloud**: [dev.azure.com and *.visualstudio.com][39].
 
 The following plans are not supported:
 - **Azure DevOps Server**: On-premises instances are not supported by Bits Code or Datadog [Source Code Integration][37].
