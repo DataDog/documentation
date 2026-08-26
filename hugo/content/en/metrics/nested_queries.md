@@ -93,6 +93,7 @@ Additional layers of space aggregation support:
 - `sum by`
 - `min by`
 - `max by`
+- `count by`
 - `arbitrary percentile pXX` (`p75, p99, p99.99, etc.`)
 - `stddev by`
 
