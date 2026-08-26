@@ -14,6 +14,7 @@ aliases:
 ### Prerequisites
 
 * [Datadog Agent v7.34.0 or later][10]
+* [MRI (CRuby)][11]. Other Ruby implementations are not supported.
 
 ### Supported libraries
 
@@ -49,3 +50,4 @@ Data Streams Monitoring propagates context through message headers. If you are u
 [3]: https://pypi.org/project/confluent-kafka/
 [5]: https://pypi.org/project/kombu/
 [6]: /data_streams/manual_instrumentation/?tab=ruby
+[11]: https://www.ruby-lang.org/
