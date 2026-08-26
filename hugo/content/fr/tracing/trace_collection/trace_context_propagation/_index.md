@@ -58,7 +58,6 @@ Utilisez les variables d'environnement suivantes pour configurer les formats de 
 `restart` : Le SDK commencera toujours une nouvelle trace. Si les en-têtes de traçage distribués entrants représentent un contexte de trace valide, ce contexte de trace sera représenté comme un lien de span sur les spans d'entrée de service (par opposition au span parent dans la configuration `continue`).<br>
 `ignore` : Le SDK commencera toujours une nouvelle trace et tous les en-têtes de traçage distribués entrants sont ignorés.<br>
 **Par défaut** : `continue` <br>
-**Remarque** : Ceci n'est implémenté que dans les bibliothèques .NET, Node.js, Python et Java.
 
 ### Configuration avancée {#advanced-configuration}
 
