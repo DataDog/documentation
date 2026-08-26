@@ -30,7 +30,7 @@ For metrics shipped by an out-of-the-box integration, you can check whether a
 unit is already defined by looking at that integration's Data Collected
 table: metric names followed by *Shown as \<unit\>* already have a unit set by
 the integration. Metrics without this notation do not have a unit configured
-by default, and you need to set one manually using the steps below.
+by default, so you need to set one manually using the steps below.
 
 Click the full screen button on the top right-hand corner of the graph to see the units displayed at the bottom:
 
