@@ -65,6 +65,22 @@ Set up Bits Code for one of the [supported source code providers][11].
 [7]: https://docs.gitlab.com/user/profile/personal_access_tokens/
 {{% /tab %}}
 
+{{% tab "Azure DevOps" %}}
+1. Install the [Azure DevOps Source Code integration][1]. For full installation and configuration steps, see the [Azure DevOps Source Code integration guide][2].
+1. Verify that the Microsoft Entra app's service principal is a Project Contributor on each project, or belongs to a custom group with the following [repository permissions][3]:
+   - Contribute
+   - Contribute to pull requests
+   - Create branch
+   - Read
+
+   If [commit author email validation][4] is enabled, add `no-reply@dtdg.co` to the allowed email addresses. Bits Code uses this address for commits it creates.
+
+[1]: https://app.datadoghq.com/integrations/azure-devops-source-code
+[2]: /integrations/azure-devops-source-code/
+[3]: https://learn.microsoft.com/en-us/azure/devops/repos/git/set-git-repository-permissions
+[4]: https://learn.microsoft.com/en-us/azure/devops/repos/git/repository-settings#commit-author-email-validation-policy
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Additional configuration  
