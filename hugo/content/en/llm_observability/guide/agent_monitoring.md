@@ -5,6 +5,9 @@ aliases:
   - /llm_observability/agent_monitoring
   - /llm_observability/monitoring/agent_monitoring/
 further_reading:
+  - link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
+    tag: "Learning Center"
+    text: "Investigate with LLM Observability"
   - link: "https://www.datadoghq.com/blog/openai-agents-llm-observability/"
     tag: "Blog"
     text: "Monitor your OpenAI agents with Datadog LLM Observability"
@@ -14,9 +17,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/llm-observability-bedrock-agents/"
     tag: "Blog"
     text: "Monitor agents built on Amazon Bedrock with Datadog LLM Observability"
-  - link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
-    tag: "Learning Center"
-    text: "Investigate with LLM Observability"
+  - link: "https://www.datadoghq.com/blog/langgraph-agent-monitoring/"
+    tag: "Blog"
+    text: "Monitoring LangGraph agents with Datadog: a practical guide"
 ---
 
 ## Overview

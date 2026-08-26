@@ -22,6 +22,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications"
   tag: "Learning Center"
   text: "Tracing LLM Applications"
+- link: "https://www.datadoghq.com/blog/patterns-agent-observability/"
+  tag: "Blog"
+  text: "Understand production LLM behavior with Patterns in Agent Observability"
 ---
 
 

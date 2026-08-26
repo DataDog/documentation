@@ -26,7 +26,7 @@ further_reading:
 Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][1], configure your response to:
 - Craft an actionable message.
 - Trigger a workflow or create a workflow from a monitor.
-- [Automatically create a case][2].
+- [Automatically create a work item][2].
 - Automatically create an incident.
 
 ## Constructing effective titles and messages
@@ -67,7 +67,7 @@ Steps to free up disk space on {{host.name}}: <-- tag variable
 ## Notification recipients
 Datadog recommends using [monitor notification rules][22] to manage monitor notifications. With notification rules you can automate which notification recipients are added to a monitor based on predefined sets of conditions. Create different rules to route monitor alerts based on the tags of the monitor notification so you don't have to manually set up recipients nor notification routing logic for each individual monitor.
 
-In both notification rules and individual monitors, you can use an `@notification` to add a team member, integration, workflow, or case to your notification. As you type, Datadog auto-recommends existing options in a drop-down menu. Click an option to add it to your notification. Alternatively, click {{< ui >}}@ Add Mention{{< /ui >}}, {{< ui >}}Add Workflow{{< /ui >}}, or {{< ui >}}Add Case{{< /ui >}}.
+In both notification rules and individual monitors, you can use an `@notification` to add a team member, integration, workflow, or work item to your notification. As you type, Datadog auto-recommends existing options in a drop-down menu. Click an option to add it to your notification. Alternatively, click {{< ui >}}@ Add Mention{{< /ui >}}, {{< ui >}}Add Workflow{{< /ui >}}, or {{< ui >}}Add Case{{< /ui >}}.
 
 An @notification must have a space between it and the last line character:
 
@@ -226,7 +226,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/configuration
-[2]: /incident_response/case_management/create_case/#automatic-case-creation
+[2]: /incident_response/work_management/create_work_item/#automatic-work-item-creation
 [3]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
 [4]: http://daringfireball.net/projects/markdown/syntax
 [5]: /monitors/notify/variables/

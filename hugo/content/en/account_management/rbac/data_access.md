@@ -77,6 +77,7 @@ The following are available as a Preview upon request:
 - Database Monitoring
 - Hosts
 - Processes
+- Containers
 
 ## Advanced configuration
 

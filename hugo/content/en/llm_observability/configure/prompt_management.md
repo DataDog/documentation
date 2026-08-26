@@ -285,7 +285,7 @@ Use `LLMObs.list_prompts()` and `LLMObs.list_prompt_versions()` to inspect manag
 
 ### Use the API
 
-Use the Prompt Management API to create, retrieve, update, and delete prompts and prompt versions. See the [LLM Observability API reference][8] for endpoint schemas, request media types, and examples.
+Use the Prompt Management API to create, retrieve, update, and delete prompts and prompt versions. See the [Agent Observability API reference][8] for endpoint schemas, request media types, and examples.
 
 ## Advanced usage
 
@@ -332,5 +332,5 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 [5]: /llm_observability/instrument/sdk/?tab=python
 [6]: /llm_observability/instrument/auto_instrumentation/?tab=python
 [7]: /llm_observability/instrument/sdk/?tab=python#manual-instrumentation
-[8]: /api/latest/llm-observability/
+[8]: /api/latest/agent-observability/
 [9]: /api/latest/feature-flags/list-environments/

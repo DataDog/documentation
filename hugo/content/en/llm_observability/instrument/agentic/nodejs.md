@@ -1,5 +1,5 @@
 ---
-title: Node.js
+title: Node.js Application Agentic Instrumentation
 aliases:
 - /llm_observability/instrumentation/agentic/nodejs/
 ---

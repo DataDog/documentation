@@ -46,7 +46,7 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 2. Click {{< ui >}}Configure API integration{{< /ui >}}.
 3. Select {{< ui >}}Enable API integration{{< /ui >}}.
 4. Complete the {{< ui >}}Credentials{{< /ui >}} section as follows:
-    - {{< ui >}}Base URL{{< /ui >}}: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim` **Note:** Use the appropriate subdomain for your site. To find your URL, see [Datadog sites][3].
+    - {{< ui >}}Base URL{{< /ui >}}: `{{< region-param key="dd_api" >}}/api/v2/scim` **Note:** Use the API host for your site, not the app host. For the SCIM endpoints for each site, see the [SCIM API reference][3].
     - {{< ui >}}API Token{{< /ui >}}: Use a valid Datadog application key. You can create an application key on [your organization settings page][4]. To maintain continuous access to your data, use a [service account][5] application key.
 
 {{< img src="/account_management/scim/okta-admin-credentials.png" alt="Okta Admin Credentials configuration screen">}}
@@ -154,7 +154,7 @@ This procedure allows you to manage team membership in Datadog instead of Okta a
 
 [1]: /account_management/scim/
 [2]: /account_management/scim/#using-a-service-account-with-scim
-[3]: /getting_started/site
+[3]: /api/latest/scim/
 [4]: https://app.datadoghq.com/organization-settings/application-keys
 [5]: /account_management/org_settings/service_accounts
 [6]: /account_management/teams/manage/#manage-teams-through-an-identity-provider

@@ -16,7 +16,7 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/automations-annotation-queues"
     tag: "Blog"
     text: "Annotate traces to improve LLM quality with Datadog LLM Observability"
-  - link: /api/latest/llm-observability/
+  - link: /api/latest/agent-observability/
     tag: API
     text: Agent Observability API reference
 ---
@@ -96,6 +96,8 @@ Traces matching the rule's filters are added to the queue as they arrive. Annota
 
 Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Experiment{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2] to see all available annotation queues. Click on a queue to see the trace list, then click {{< ui >}}Review{{< /ui >}} to begin annotating.
 
+**Note**: When an annotation task is newly assigned to you, Datadog sends an email with the queue name, the user who assigned it, and a direct link to open the assigned interaction. To opt out, disable Agent Observability annotation assignment emails in [Personal Settings email subscriptions][15].
+
 Review Mode displays:
 - {{< ui >}}Full trace context{{< /ui >}} (right panel):
   - Complete span tree with inputs, outputs, metadata
@@ -133,6 +135,17 @@ For each trace:
 ### Tracking queue progress
 
 The Annotations list page displays a progress bar for each queue showing the ratio of reviewed interactions to total interactions. Use this to monitor annotation completion across queues at a glance.
+
+### Managing queue access
+
+Queue owners manage the reviewer list, access settings, and assignments from the queue details. Only the queue owner can change the reviewer list, access settings, or assignments.
+
+Access restrictions apply independently, so you can enable either restriction or both:
+- Reviewer restriction limits unassigned interactions to designated reviewers.
+- Assignee restriction limits assigned interactions to their assignees.
+- When both restrictions are enabled, reviewers can annotate unassigned interactions and assignees can annotate their assigned interactions.
+
+The queue owner retains access and can annotate all interactions.
 
 ### Filtering traces by annotation labels
 
@@ -377,14 +390,15 @@ Build benchmark datasets with human-verified labels for regression testing and c
 [1]: https://app.datadoghq.com/llm/traces
 [2]: https://app.datadoghq.com/llm/annotations/queues
 [3]: /llm_observability/improve/datasets
-[4]: /api/latest/llm-observability/
+[4]: /api/latest/agent-observability/
 [5]: /llm_observability/investigate/export_api/?tab=model#api-standards
-[6]: /api/latest/llm-observability/#list-llm-observability-annotation-queues
-[7]: /api/latest/llm-observability/#create-an-llm-observability-annotation-queue
-[8]: /api/latest/llm-observability/#update-an-llm-observability-annotation-queue
-[9]: /api/latest/llm-observability/#delete-an-llm-observability-annotation-queue
-[10]: /api/latest/llm-observability/#add-annotation-queue-interactions
-[11]: /api/latest/llm-observability/#delete-annotation-queue-interactions
-[12]: /api/latest/llm-observability/#get-annotated-queue-interactions
-[13]: /api/latest/llm-observability/#get-annotation-queue-label-schema
-[14]: /api/latest/llm-observability/#update-annotation-queue-label-schema
+[6]: /api/latest/agent-observability/#list-agent-observability-annotation-queues
+[7]: /api/latest/agent-observability/#create-an-agent-observability-annotation-queue
+[8]: /api/latest/agent-observability/#update-an-agent-observability-annotation-queue
+[9]: /api/latest/agent-observability/#delete-an-agent-observability-annotation-queue
+[10]: /api/latest/agent-observability/#add-annotation-queue-interactions
+[11]: /api/latest/agent-observability/#delete-annotation-queue-interactions
+[12]: /api/latest/agent-observability/#get-annotated-queue-interactions
+[13]: /api/latest/agent-observability/#get-annotation-queue-label-schema
+[14]: /api/latest/agent-observability/#update-annotation-queue-label-schema
+[15]: /account_management/#email-subscriptions

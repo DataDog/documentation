@@ -604,9 +604,9 @@ You can use basic CRUD operations to manipulate managed evaluation configs, afte
 [8]: /llm_observability/improve/experiments
 [9]: /llm_observability/guide/evaluation_developer_guide/#using-managed-evaluators
 [10]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
-[11]: /api/latest/llm-observability/#get-a-custom-evaluator-configuration
-[12]: /api/latest/llm-observability/#create-or-update-a-custom-evaluator-configuration
-[13]: /api/latest/llm-observability/#delete-a-custom-evaluator-configuration
+[11]: /api/latest/agent-observability/#get-a-custom-evaluator-configuration
+[12]: /api/latest/agent-observability/#create-or-update-a-custom-evaluator-configuration
+[13]: /api/latest/agent-observability/#delete-a-custom-evaluator-configuration
 [14]: /account_management/api-app-keys
 [15]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/prompt_templating
 [16]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/trace_level_evaluations

@@ -7,6 +7,9 @@ further_reading:
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
+- link: "https://www.datadoghq.com/blog/service-remapping/"
+  tag: "Blog"
+  text: "Comprehensively connect your service data with Service Remapping"
 ---
 
 ## Overview
