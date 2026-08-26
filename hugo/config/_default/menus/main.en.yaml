@@ -3131,6 +3131,11 @@ menu:
       parent: actions_connections
       identifier: actions_google_workspace
       weight: 103
+    - name: GitHub App Connection
+      url: actions/connections/github_app/
+      parent: actions_connections
+      identifier: actions_github_app
+      weight: 104
     - name: Private Actions
       url: actions/private_actions/
       parent: action_catalog
