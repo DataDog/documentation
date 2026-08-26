@@ -27,6 +27,7 @@ You can run Datadog Static Code Analysis (SAST) scans directly on Datadog infras
 - [GitHub][18] (excluding repositories that use [Git Large File Storage][17])
 - [GitLab.com and GitLab Self-Managed][20]
 - [Azure DevOps][19]
+- [Bitbucket Cloud][21]
 
 To get started, navigate to the [{{< ui >}}Code Security{{< /ui >}} page][1].
 
@@ -43,7 +44,7 @@ Next, run Static Code Analysis by following instructions for your chosen CI prov
 {{< /whatsnext >}}
 
 ## Select your source code management provider
-Datadog Static Code Analysis supports all source code management providers, with native support for GitHub, GitLab, and Azure DevOps.
+Datadog Static Code Analysis supports all source code management providers, with native support for GitHub, GitLab, Azure DevOps, and Bitbucket Cloud.
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
@@ -80,6 +81,13 @@ See the [Azure source code setup instructions][4] to connect Azure DevOps reposi
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /integrations/azure-devops-source-code/#setup
 [5]: /getting_started/site/
+
+{{% /tab %}}
+{{% tab "Bitbucket" %}}
+
+See the [Bitbucket source code setup instructions][23] to connect Bitbucket Cloud workspaces to Datadog.
+
+[23]: /integrations/bitbucket-source-code/#setup
 
 {{% /tab %}}
 {{% tab "Other" %}}
@@ -270,6 +278,7 @@ Datadog stores findings in accordance with our [Data Retention Periods](https://
 [18]: /security/code_security/static_analysis/setup/?tab=github#select-your-source-code-management-provider
 [19]: /security/code_security/static_analysis/setup/?tab=azuredevops#select-your-source-code-management-provider
 [20]: /security/code_security/static_analysis/setup/?tab=gitlab#select-your-source-code-management-provider
+[21]: /security/code_security/static_analysis/setup/?tab=bitbucket#select-your-source-code-management-provider
 [22]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#migrating-to-v30
 [24]: https://docs.datadoghq.com/account_management/teams/
 [25]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md

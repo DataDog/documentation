@@ -17,7 +17,7 @@ further_reading:
     text: "IaC Security Rules"
 ---
 
-Use the following instructions to enable Infrastructure as Code (IaC) Security for Code Security. IaC Security supports multiple IaC configurations stored in GitHub, GitLab, or Azure DevOps repositories.
+Use the following instructions to enable Infrastructure as Code (IaC) Security for Code Security. IaC Security supports multiple IaC configurations stored in GitHub, GitLab, Azure DevOps, or Bitbucket Cloud repositories.
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
@@ -89,6 +89,30 @@ After setting up the Azure DevOps integration, enable IaC Security for your repo
     - To enable it for a single repository, toggle the {{< ui >}}IaC{{< /ui >}} switch to ON for that repository.
 
 [1]: /integrations/azure-devops-source-code/#source-code-functionality
+[2]: https://app.datadoghq.com/security/configuration/code-security/setup
+
+{{% /tab %}}
+{{% tab "Bitbucket" %}}
+
+### Install the Bitbucket integration
+
+To connect your Bitbucket Cloud workspace and enable PR comments, see the setup instructions in [Bitbucket Source Code][1].
+
+### Enable IaC Security for your repositories
+
+After setting up the Bitbucket integration, enable IaC Security for your repositories.
+
+1. On the [Code Security Setup page][2], expand the {{< ui >}}Activate scanning for your repositories{{< /ui >}} section.
+1. Under {{< ui >}}Select your source code management provider{{< /ui >}}, select {{< ui >}}Bitbucket{{< /ui >}}.
+1. Under {{< ui >}}Select where your scans should run{{< /ui >}}, select {{< ui >}}Datadog{{< /ui >}}.
+1. Under {{< ui >}}Connect your Bitbucket repositories{{< /ui >}}, do one of the following:
+    - To connect a new Bitbucket Cloud workspace, click {{< ui >}}Connect Bitbucket Account{{< /ui >}}.
+    - To enable IaC Security for an existing workspace, click {{< ui >}}Select repositories{{< /ui >}}, or {{< ui >}}Edit{{< /ui >}} if Code Security is already enabled.
+1. To enable IaC Security, do one of the following:
+    - To enable it for all repositories, toggle {{< ui >}}Enable Infrastructure as Code Scanning (IaC){{< /ui >}} to the ON position.
+    - To enable it for a single repository, toggle the {{< ui >}}IaC{{< /ui >}} switch to ON for that repository.
+
+[1]: /integrations/bitbucket-source-code/#setup
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
 
 {{% /tab %}}
