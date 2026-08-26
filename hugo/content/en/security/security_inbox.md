@@ -37,17 +37,7 @@ products:
   icon: security-workload-security
 ---
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 {{< product-availability >}}
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-{{< product-availability names="App and API Protection,Workload Protection" >}}
-{{< /site-region >}}
-
-{{< site-region region="gov2" >}}
-{{< product-availability names="Workload Protection" >}}
-{{< /site-region >}}
 
 Security Inbox provides a consolidated, actionable list of your most important security findings. It correlates and contextualizes findings from across Datadog security products—vulnerabilities, misconfigurations, identity risks, and attack paths—into a single prioritized view of the work that most reduces risk in your environment.
 
