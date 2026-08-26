@@ -6663,9 +6663,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/fix-inline-image/cdocs-hugo-integration-v4.4.3.tgz":
+"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v4.4.3.tgz":
   version: 4.4.3
-  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/fix-inline-image/cdocs-hugo-integration-v4.4.3.tgz"
+  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v4.4.3.tgz"
   dependencies:
     "@prettier/sync": "npm:^0.6.1"
     "@types/markdown-it": "npm:^14.1.2"
@@ -7741,7 +7741,7 @@ __metadata:
     acorn: "npm:^7.4.1"
     alpinejs: "npm:^3.13.7"
     bootstrap: "npm:^5.2"
-    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/fix-inline-image/cdocs-hugo-integration-v4.4.3.tgz"
+    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v4.4.3.tgz"
     cross-env: "npm:^5.2.1"
     del: "npm:4.1.1"
     eslint: "npm:^6.8.0"
