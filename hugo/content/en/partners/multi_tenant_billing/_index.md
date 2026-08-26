@@ -10,7 +10,7 @@ cascade:
 
 As a Datadog Solution Provider, you can use a **Partner Admin Organization** (Admin Org) to view and monitor cost and usage across customer organizations, provision trial organizations, and view billing across the customer base. An Admin Org is separate from any customer organization and is owned by Datadog; partners are invited to it with a Partner Role.
 
-<div class="alert alert-info">By default, an Admin Org grants read-only access to cost and usage data for connected customer organizations, and personal or internal Datadog usage on the Admin Org is not supported. The Preview capabilities below add supported pricing and contract-management workflows.</div>
+<div class="alert alert-info">By default, an Admin Org grants read-only access to cost and usage data for connected customer organizations, and personal or internal Datadog usage on the Admin Org is not supported. The Preview capability below adds supported pricing workflows.</div>
 
 A customer organization is connected to an Admin Org automatically when its Datadog contract includes the partnership and is active. After connecting, a customer's usage and cost data is visible from the Admin Org, across all Datadog sites (for example, AP1, EU1, US1, US3, US5), except US1-FED, which requires its own Admin Org for regulatory purposes.
 
@@ -50,7 +50,7 @@ Here are some ways an Admin Org can help:
 | Monitor cost and usage across all customers in one place. | [Cost and Usage Visibility][2]: view estimated, historical, and projected cost and billable usage data. |
 | Track usage metrics across the book of business. | [Centralized Usage Metrics][8]: roll customer usage metrics up into an Admin Org. |
 | Let customers see their estimated costs based on the partner's pricing. (Preview) | [Customer Pricing][9]: configure per-customer pricing. |
-| Manage the book of business in one place. (Preview) | [Customer Contracts][10]: track customers, contracts, invoices, and renewals. |
+| Manage the book of business in one place. | [Customer Contracts][10]: track customers, contracts, invoices, and renewals. |
 
 <div class="alert alert-info">Preview capabilities are available to a limited set of partners. Contact <a href="mailto:partner-support@datadoghq.com">partner-support@datadoghq.com</a> to join a preview.</div>
 

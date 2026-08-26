@@ -1,11 +1,15 @@
 ---
-title: Customer Contracts Management (Preview)
+title: Customer Contracts
 description: "Manage the partner's book of business - customers, contracts, and invoices - from an Admin Org."
 ---
 
+<div class="alert alert-danger">
+Customer Contracts is in Preview.
+</div>
+
 ## Overview
 
-Customer Contracts Management is in preview. It gives a partner a single place to manage customers, contracts, and invoices for their book of business with Datadog. Partners can look up this information directly, instead of relying on the partner account team for routine lookups.
+Customer Contracts gives a partner a single place to manage customers, contracts, and invoices for their book of business with Datadog. Partners can look up this information directly, instead of relying on the partner account team for routine lookups.
 
 Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}} in the Admin Org, or directly to [app.datadoghq.com/billing/customer-contracts][3].
 
