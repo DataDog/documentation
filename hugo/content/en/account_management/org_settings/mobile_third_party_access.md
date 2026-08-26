@@ -68,7 +68,7 @@ For the Datadog Mobile App, required scopes are always allowed and cannot be dis
 
 4. Click {{< ui >}}Enable{{< /ui >}} or {{< ui >}}Save{{< /ui >}} to save the scope configuration.
 
-{{< img src="account_management/mobile_third_party_access/scope-restrictions-enable.png" alt="Application Scope Management view with Enable and Restore to Full Access buttons" style="width:100%;">}}
+{{< img src="account_management/mobile_third_party_access/scope-restrictions-enable.png" alt="Application Scope Management view showing Automatically allow new scopes and allowed scope controls" style="width:100%;">}}
 
 ## Further Reading
 
