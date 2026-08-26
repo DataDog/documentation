@@ -15,10 +15,6 @@ further_reading:
       text: 'Configure SAML single sign-on'
 ---
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-  Cross-App Access is in Preview. Okta gates access to the preview and enables it for your tenant, and the Okta capabilities this setup depends on are not generally available yet. Any Datadog organization can enable Cross-App Access on the Datadog side today.
-{{< /callout >}}
-
 ## Overview
 
 Cross-App Access (XAA) lets AI agents call the Datadog API on behalf of users your organization already authorized in Okta. Without it, every user authorizes the agent individually through a browser consent screen. With it, your Okta administrator grants that access once, centrally, and users skip the per-user consent step.
@@ -43,7 +39,7 @@ Setup moves values in both directions between Datadog and Okta. Two of them are 
 - Your organization uses Okta for SAML single sign-on to Datadog. Cross-App Access resolves users through your existing SAML connection, so it does not work without one. See [Configure SAML single sign-on](/account_management/saml/).
 - Each user who uses Claude exists in your Datadog organization and is assigned to both the Claude application and the Datadog application in Okta.
 - You have the `org_management` permission in Datadog. To configure Cross-App Access through the API instead of the UI, you also need a [Personal Access Token](/account_management/personal-access-tokens/) (PAT), used as `DD_TOKEN` in the examples.
-- Your Okta tenant has the {{< ui >}}AI Agent Identity Assertion{{< /ui >}} and {{< ui >}}Agent to Agent Connections{{< /ui >}} Early Access features enabled, and you have Okta Super Administrator access.
+- Your Okta tenant has the {{< ui >}}AI Agent Identity Assertion{{< /ui >}} and {{< ui >}}Agent to Agent Connections{{< /ui >}} features enabled, and you have Okta Super Administrator access.
 
 ## Configure Cross-App Access in Datadog
 
