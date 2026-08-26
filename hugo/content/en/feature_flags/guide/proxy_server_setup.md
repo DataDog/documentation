@@ -22,7 +22,7 @@ Two types of requests must be forwarded:
 1. **Flag configuration requests**: POST to the Datadog CDN to fetch precomputed flag assignments. The SDK sends the evaluation context in the request body. Your proxy forwards the body and headers unchanged.
 2. **Event requests** (exposures and evaluations): POST to Datadog intake endpoints. Mobile SDKs send to fixed paths on the Datadog API. The Browser SDK uses a `ddforward` query parameter that encodes the target path and parameters, which your proxy must decode and use to construct the final Datadog URL.
 
-The examples below use the US1 Datadog site (`datadoghq.com`). Replace the intake origins with the values for your [Datadog site][1] if needed:
+The examples below use the Datadog site selected in the site dropdown on this page. The reference table shows the intake origins for each site:
 
 | Datadog site | Flag CDN origin | Mobile intake origin | Browser intake origin |
 |---|---|---|---|
@@ -51,27 +51,27 @@ server {
 
     # Flag configuration relay (all platforms)
     location /precompute-assignments {
-        proxy_pass https://preview.ff-cdn.datadoghq.com/precompute-assignments;
+        proxy_pass https://preview.ff-cdn.{{< region-param key="dd_site" code="true" >}}/precompute-assignments;
         proxy_ssl_server_name on;
-        proxy_set_header Host preview.ff-cdn.datadoghq.com;
+        proxy_set_header Host preview.ff-cdn.{{< region-param key="dd_site" code="true" >}};
         proxy_pass_request_headers on;
         proxy_pass_request_body on;
     }
 
     # Mobile SDK event relay: exposures
     location /api/v2/exposures {
-        proxy_pass https://api.datadoghq.com/api/v2/exposures;
+        proxy_pass {{< region-param key="dd_api" code="true" >}}/api/v2/exposures;
         proxy_ssl_server_name on;
-        proxy_set_header Host api.datadoghq.com;
+        proxy_set_header Host api.{{< region-param key="dd_site" code="true" >}};
         proxy_pass_request_headers on;
         proxy_pass_request_body on;
     }
 
     # Mobile SDK event relay: evaluations
     location /api/v2/flagevaluation {
-        proxy_pass https://api.datadoghq.com/api/v2/flagevaluation;
+        proxy_pass {{< region-param key="dd_api" code="true" >}}/api/v2/flagevaluation;
         proxy_ssl_server_name on;
-        proxy_set_header Host api.datadoghq.com;
+        proxy_set_header Host api.{{< region-param key="dd_site" code="true" >}};
         proxy_pass_request_headers on;
         proxy_pass_request_body on;
     }
@@ -105,7 +105,13 @@ Add this location block to the OpenResty server configuration alongside the stan
                 return
             end
 
-            local target = "https://browser-intake-datadoghq.com" .. ddforward
+            -- Compute browser intake host from Datadog site
+            local site = "{{< region-param key="dd_site" code="true" >}}"
+            local parts = {}
+            for p in site:gmatch("[^%.]+") do table.insert(parts, p) end
+            local tld = table.remove(parts)
+            local intake_host = "browser-intake-" .. table.concat(parts, "-") .. "." .. tld
+            local target = "https://" .. intake_host .. ddforward
 
             ngx.req.read_body()
             local httpc = http.new()
@@ -134,7 +140,7 @@ Set the browser SDK `proxy` option to route events through this endpoint:
 {{< code-block lang="javascript" filename="index.js" >}}
 DatadogBrowserFlagging.init({
     clientToken: '<CLIENT_TOKEN>',
-    site: '<DATADOG_SITE>',
+    site: '{{< region-param key="dd_site" code="true" >}}',
     flaggingProxy: 'https://proxy.example.com/precompute-assignments',
     proxy: 'https://proxy.example.com/intake',
 });
@@ -149,10 +155,12 @@ A Cloudflare Worker handles all request types in a single script and runs at the
 Create a Worker in your Cloudflare dashboard and deploy the following script. Update `DATADOG_SITE` if your Datadog site is not US1.
 
 {{< code-block lang="javascript" filename="worker.js" >}}
-const DATADOG_SITE = 'datadoghq.com';
+const DATADOG_SITE = '{{< region-param key="dd_site" code="true" >}}';
 const FLAG_CDN_ORIGIN = `preview.ff-cdn.${DATADOG_SITE}`;
 const MOBILE_INTAKE_ORIGIN = `api.${DATADOG_SITE}`;
-const BROWSER_INTAKE_ORIGIN = `browser-intake-${DATADOG_SITE.replace('.', '-')}.${DATADOG_SITE.split('.').pop()}`;
+const _parts = DATADOG_SITE.split('.');
+const _tld = _parts.pop();
+const BROWSER_INTAKE_ORIGIN = `browser-intake-${_parts.join('-')}.${_tld}`;
 
 export default {
   async fetch(request) {
@@ -220,7 +228,7 @@ Create one API route for flag configuration and one for events. Update `DATADOG_
 ### Flag configuration route
 
 {{< code-block lang="typescript" filename="app/api/flag-config/route.ts" >}}
-const FLAG_CDN = `https://preview.ff-cdn.datadoghq.com/precompute-assignments`;
+const FLAG_CDN = `https://preview.ff-cdn.{{< region-param key="dd_site" code="true" >}}/precompute-assignments`;
 
 export async function POST(req: Request) {
   const headers: HeadersInit = {
@@ -250,8 +258,11 @@ export async function POST(req: Request) {
 {{< code-block lang="typescript" filename="app/api/intake/route.ts" >}}
 import { NextRequest, NextResponse } from 'next/server';
 
-const MOBILE_INTAKE = 'https://api.datadoghq.com';
-const BROWSER_INTAKE = 'https://browser-intake-datadoghq.com';
+const SITE = '{{< region-param key="dd_site" code="true" >}}';
+const MOBILE_INTAKE = `https://api.${SITE}`;
+const _parts = SITE.split('.');
+const _tld = _parts.pop();
+const BROWSER_INTAKE = `https://browser-intake-${_parts.join('-')}.${_tld}`;
 
 export async function POST(req: NextRequest) {
   const { pathname, searchParams } = req.nextUrl;

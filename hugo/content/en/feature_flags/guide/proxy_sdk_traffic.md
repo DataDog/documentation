@@ -70,8 +70,8 @@ Your proxy must forward each request to the corresponding Datadog intake endpoin
 
 | Proxy path | Forward to |
 |---|---|
-| `/api/v2/exposures` | `https://api.datadoghq.com/api/v2/exposures` |
-| `/api/v2/flagevaluation` | `https://api.datadoghq.com/api/v2/flagevaluation` |
+| `/api/v2/exposures` | `{{< region-param key="dd_api" code="true" >}}/api/v2/exposures` |
+| `/api/v2/flagevaluation` | `{{< region-param key="dd_api" code="true" >}}/api/v2/flagevaluation` |
 
 {{% /tab %}}
 
@@ -122,8 +122,8 @@ Your proxy must forward each request to the corresponding Datadog intake endpoin
 
 | Proxy path | Forward to |
 |---|---|
-| `/api/v2/exposures` | `https://api.datadoghq.com/api/v2/exposures` |
-| `/api/v2/flagevaluation` | `https://api.datadoghq.com/api/v2/flagevaluation` |
+| `/api/v2/exposures` | `{{< region-param key="dd_api" code="true" >}}/api/v2/exposures` |
+| `/api/v2/flagevaluation` | `{{< region-param key="dd_api" code="true" >}}/api/v2/flagevaluation` |
 
 {{% /tab %}}
 
@@ -158,7 +158,7 @@ await DdFlags.enable({
 });
 {{< /code-block >}}
 
-Your proxy must forward exposure requests to `https://api.datadoghq.com/api/v2/exposures` for your [Datadog site][1].
+Your proxy must forward exposure requests to `{{< region-param key="dd_api" code="true" >}}/api/v2/exposures`.
 
 {{% /tab %}}
 
@@ -175,7 +175,7 @@ import { DatadogBrowserFlagging } from '@datadog/browser-flagging';
 
 DatadogBrowserFlagging.init({
     clientToken: '<CLIENT_TOKEN>',
-    site: '<DATADOG_SITE>',
+    site: '{{< region-param key="dd_site" code="true" >}}',
     flaggingProxy: 'https://proxy.example.com/flag-config',
 });
 {{< /code-block >}}
@@ -187,7 +187,7 @@ To add custom headers to the flag configuration request (for example, for authen
 {{< code-block lang="javascript" filename="index.js" >}}
 DatadogBrowserFlagging.init({
     clientToken: '<CLIENT_TOKEN>',
-    site: '<DATADOG_SITE>',
+    site: '{{< region-param key="dd_site" code="true" >}}',
     flaggingProxy: 'https://proxy.example.com/flag-config',
     customHeaders: { 'X-Proxy-Token': '<YOUR_PROXY_TOKEN>' },
 });
@@ -200,7 +200,7 @@ Browser flag event data (exposures and evaluations) is sent through the standard
 {{< code-block lang="javascript" filename="index.js" >}}
 DatadogBrowserFlagging.init({
     clientToken: '<CLIENT_TOKEN>',
-    site: '<DATADOG_SITE>',
+    site: '{{< region-param key="dd_site" code="true" >}}',
     flaggingProxy: 'https://proxy.example.com/flag-config',
     proxy: 'https://proxy.example.com/intake',
 });
@@ -220,7 +220,7 @@ https://browser-intake-datadoghq.com/api/v2/exposures?ddsource=browser...
 
 The intake origin varies by [Datadog site][1]. For example, for `datadoghq.eu` it is `https://browser-intake-datadoghq.eu`. Forward the POST body unchanged and add an `X-Forwarded-For` header with the client IP for accurate geolocation. Remove any sensitive headers such as `cookie` before forwarding.
 
-The `proxy` option also accepts a function that receives the decoded `path` and `parameters` and returns the full proxy URL. See [Proxy Browser RUM Data][2] for the full function signature.
+The `proxy` option also accepts a function that receives the decoded `path` and `parameters` and returns the full proxy URL. See [Proxy Browser RUM Data](/real_user_monitoring/guide/proxy-rum-data/) for the full function signature.
 
 {{% /tab %}}
 
@@ -231,4 +231,3 @@ The `proxy` option also accepts a function that receives the decoded `path` and 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/
-[2]: /real_user_monitoring/guide/proxy-rum-data/
