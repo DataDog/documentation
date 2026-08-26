@@ -66,10 +66,12 @@ The following table presents the list of collected features and the minimal Agen
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
+| Data Transfer Cost Allocation | 7.58.0 | 7.58.0 |
 
 1. Configure the Azure Cost Management integration on the [Cloud Cost Setup page][2].
 1. Install the [Datadog Agent][3] in a Kubernetes environment and ensure that you enable the [Orchestrator Explorer][4] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][10].
+1. To enable data transfer cost allocation, set up [Cloud Network Monitoring][9]. **Note**: Additional charges apply.
 
 **Note**: GPU Container Cost Allocation only supports pod requests in the format `nvidia.com/gpu`.
 
@@ -86,10 +88,12 @@ The following table presents the list of collected features and the minimal Agen
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
+| Data Transfer Cost Allocation | 7.58.0 | 7.58.0 |
 
 1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][2].
 1. Install the [Datadog Agent][3] in a Kubernetes environment and ensure that you enable the [Orchestrator Explorer][4] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][10].
+1. To enable data transfer cost allocation, set up [Cloud Network Monitoring][9]. **Note**: Additional charges apply.
 
 **Note**: GPU Container Cost Allocation only supports pod requests in the format `nvidia.com/gpu`.
 
@@ -169,6 +173,16 @@ Next, Datadog looks at all of the pods running on that node for the day. The cos
 
 All other costs are given the same value and tags as the source metric `azure.cost.amortized`.
 
+### Data transfer
+
+For Kubernetes data transfer allocation, a Kubernetes node is joined with eligible data transfer charges for Azure VMs and VM scale sets. The node's cluster name and node tags are added to the data transfer cost.
+
+Next, Datadog examines the daily [workload resources][16] running on that node. The cost is allocated to the workload level according to network traffic volume and enriched with the workload's tags. Eligible charges include availability zone, virtual network peering, cross-region, global, and internet data transfer. Charges for networking products such as NAT gateways, load balancers, VPN gateways, and Private Link are not allocated.
+
+[Cloud Network Monitoring][9] must be enabled on all Azure hosts for accurate data transfer cost allocation. Costs that cannot be matched to monitored traffic are tagged with `allocated_spend_type:not_monitored`.
+
+Datadog supports data transfer cost allocation using [standard workload resources][16] only. For [custom workload resources][17], data transfer costs can be allocated to the cluster level, but not the node or namespace level.
+
 {% /if %}
 
 <!-- Google -->
@@ -187,6 +201,16 @@ Next, Datadog looks at all of the pods running on that node for the day. The cos
 **Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][13] and [pods][14].
 
 All other costs are given the same value and tags as the source metric `gcp.cost.amortized`.
+
+### Data transfer
+
+For Kubernetes data transfer allocation, a Kubernetes node is joined with eligible data transfer charges for Google Compute Engine instances. The node's cluster name and node tags are added to the data transfer cost.
+
+Next, Datadog examines the daily [workload resources][16] running on that node. The cost is allocated to the workload level according to network traffic volume and enriched with the workload's tags. Eligible charges include inter-zone, inter-region, and internet data transfer. Charges for networking products such as Cloud NAT, load balancers, Cloud VPN, Cloud Interconnect, and storage transfer are not allocated.
+
+[Cloud Network Monitoring][9] must be enabled on all Google Cloud hosts for accurate data transfer cost allocation. Costs that cannot be matched to monitored traffic are tagged with `allocated_spend_type:not_monitored`.
+
+Datadog supports data transfer cost allocation using [standard workload resources][16] only. For [custom workload resources][17], data transfer costs can be allocated to the cluster level, but not the node or namespace level.
 
 ### Agentless Kubernetes costs
 
@@ -260,6 +284,13 @@ Costs are allocated into the following spend types:
 | Workload idle | Cost of resources (such as memory, CPU, and GPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
 | Cluster idle | Cost of resources (such as memory, CPU, and GPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
 
+### Data transfer
+
+| Spend type | Description    |
+| -----------| -----------    |
+| Usage | Cost of data transfer monitored by Cloud Network Monitoring and allocated to workloads. |
+| Not monitored | Cost of eligible data transfer that could not be matched to Cloud Network Monitoring traffic. This cost is not allocated to a workload. |
+
 {% /if %}
 
 <!-- Google -->
@@ -277,6 +308,13 @@ Costs are allocated into the following spend types:
 | Workload idle | Cost of resources (such as memory, CPU, and GPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
 | Cluster idle | Cost of resources (such as memory, CPU, and GPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
 | Not monitored | Cost of resources where the spend type is unknown. To resolve this, install the Datadog Agent on these clusters or nodes. |
+
+### Data transfer
+
+| Spend type | Description    |
+| -----------| -----------    |
+| Usage | Cost of data transfer monitored by Cloud Network Monitoring and allocated to workloads. |
+| Not monitored | Cost of eligible data transfer that could not be matched to Cloud Network Monitoring traffic. This cost is not allocated to a workload. |
 
 {% /if %}
 
@@ -350,7 +388,7 @@ Depending on the cloud provider, certain resources may or may not be available f
 | {% tooltip contents="Storage resources within a cluster, provisioned by administrators or dynamically, that persist data independently of pod life cycles." %} Persistent volumes {% /tooltip %} | {% x/ %} |  |  |
 | {% tooltip contents="Cost of associated fees charged by the cloud provider for managing the cluster, such as fees for managed Kubernetes services or other container orchestration options." %} Managed service fees {% /tooltip %} | {% x/ %} | {% x/ %} | {% x/ %} |
 | ECS costs | {% x/ %} | N/A | N/A |
-| Data transfer costs | {% x/ %} | Limited* | Limited* |
+| Data transfer costs | {% x/ %} | {% x/ %} | {% x/ %} |
 | GPU | {% x/ %} | {% x/ %} | {% x/ %}  |
 | {% tooltip contents="Directly-attached storage resources for a node." %} Local storage {% /tooltip %} |  | Limited* | Limited* |
 
@@ -374,7 +412,7 @@ When the prerequisites are met, the following cost metrics automatically appear.
 
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
-| `azure.cost.amortized.shared.resources.allocated` | Azure VM costs allocated by the CPU & memory used by a pod or container task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated Azure costs. <br> *Based on `azure.cost.amortized`* |
+| `azure.cost.amortized.shared.resources.allocated` | Azure VM costs allocated by the CPU & memory used by a pod or container task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated data transfer costs. <br> *Based on `azure.cost.amortized`* |
 
 {% /if %}
 <!-- Google -->
@@ -382,7 +420,7 @@ When the prerequisites are met, the following cost metrics automatically appear.
 
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
-| `gcp.cost.amortized.shared.resources.allocated` | Google Compute Engine costs allocated by the CPU & memory used by a pod, using 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. This allocation method is used when the bill does not already provide a specific split between CPU and memory usage. <br> *Based on `gcp.cost.amortized`* |
+| `gcp.cost.amortized.shared.resources.allocated` | Google Compute Engine costs allocated by the CPU & memory used by a pod, using 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. This allocation method is used when the bill does not already provide a specific split between CPU and memory usage. Also includes allocated data transfer costs. <br> *Based on `gcp.cost.amortized`* |
 
 {% /if %}
 
@@ -474,7 +512,21 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 | `kube_stateful_set` | The name of the Kubernetes StatefulSet. |
 | `pod_name` | The name of any individual pod. |
 | `allocated_resource:data_transfer` | The tracking and allocation of costs associated with data transfer activities used by Azure services or workloads. |
+| `allocated_spend_type:not_monitored` | Identifies eligible data transfer costs that could not be matched to Cloud Network Monitoring traffic. |
 | `allocated_resource:local_storage`         | The tracking and allocation of costs at a host level associated with local storage resources used by Azure services or workloads.                             |
+
+#### Data transfer
+
+The following out-of-the-box tags are applied to data transfer costs allocated to Kubernetes workloads:
+
+| Out-of-the-box tag | Description |
+| --- | --- |
+| `source_availability_zone` | The availability zone where data transfer originated. |
+| `source_availability_zone_id` | The availability zone ID where data transfer originated. |
+| `source_region` | The region where data transfer originated. |
+| `destination_availability_zone` | The availability zone where data transfer was sent. |
+| `destination_availability_zone_id` | The availability zone ID where data transfer was sent. |
+| `destination_region` | The region where data transfer was sent. |
 
 {% /if %}
 <!-- Google -->
@@ -488,10 +540,23 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 | `kube_deployment` | The name of the Kubernetes Deployment. |
 | `kube_stateful_set` | The name of the Kubernetes StatefulSet. |
 | `pod_name` | The name of any individual pod. |
-| `allocated_spend_type:not_monitored` | The tracking and allocation of [Agentless Kubernetes costs](#agentless-kubernetes-costs) associated with resources used by Google Cloud services or workloads, and the Datadog Agent is not monitoring those resources. |
+| `allocated_spend_type:not_monitored` | Identifies [Agentless Kubernetes costs](#agentless-kubernetes-costs) or eligible data transfer costs that the Datadog Agent and Cloud Network Monitoring are not monitoring. |
 | `allocated_resource:data_transfer` | The tracking and allocation of costs associated with data transfer activities used by Google Cloud services or workloads. |
 | `allocated_resource:gpu` | The tracking and allocation of costs at a host level associated with GPU resources used by Google Cloud services or workloads. |
 | `allocated_resource:local_storage` | The tracking and allocation of costs at a host level associated with local storage resources used by Google Cloud services or workloads. |
+
+#### Data transfer
+
+The following out-of-the-box tags are applied to data transfer costs allocated to Kubernetes workloads:
+
+| Out-of-the-box tag | Description |
+| --- | --- |
+| `source_availability_zone` | The availability zone where data transfer originated. |
+| `source_availability_zone_id` | The availability zone ID where data transfer originated. |
+| `source_region` | The region where data transfer originated. |
+| `destination_availability_zone` | The availability zone where data transfer was sent. |
+| `destination_availability_zone_id` | The availability zone ID where data transfer was sent. |
+| `destination_region` | The region where data transfer was sent. |
 
 {% /if %}
 
