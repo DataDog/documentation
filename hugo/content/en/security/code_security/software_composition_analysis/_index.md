@@ -89,11 +89,15 @@ To assist in prioritizing remediation, Datadog modifies the base CVSS score into
 | Exploit availability              | Availability of public exploits for the vulnerability.               | Decreased if no exploit is available.                  |
 | Exploitation probability (EPSS)   | Likelihood of real-world exploitation based on EPSS data.            | Decreased when the probability of exploitation is low. |
 
-#### View impacted services
+#### View runtime vulnerabilities
 
-Runtime SCA identifies vulnerable library versions that are loaded by running services. Select a vulnerability in Vulnerabilities Explorer to open its side panel. The {{< ui >}}Impacted Services{{< /ui >}} tab lists the services where Datadog detected the affected library version, the number of impacted hosts, and when Datadog last detected it.
+Runtime SCA identifies vulnerable library versions that are loaded by running services. Click on a vulnerability in Vulnerabilities Explorer to open its side panel.
 
-#### View impacted infrastructure
+##### View impacted services
+
+The {{< ui >}}Impacted Services{{< /ui >}} tab lists the services where Datadog detected the affected library version, the number of impacted hosts, and when Datadog last detected it.
+
+##### View impacted infrastructure
 
 To view the affected infrastructure, select the host count in {{< ui >}}Impacted Services{{< /ui >}}, or select the {{< ui >}}Impacted Infrastructure{{< /ui >}} tab. This tab lists the hosts where the affected library version runs, along with the associated services, environments, and last deployment time.
 
