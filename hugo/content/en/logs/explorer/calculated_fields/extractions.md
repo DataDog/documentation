@@ -151,6 +151,13 @@ A pattern must follow these rules:
 (?<ip>\S+) (?<method>\S+) /api/(?:v\d+)/(?<resource>\S+) (?<status>\d+)
 ```
 
+This pattern follows the capture group rules:
+
+- Four groups have a name: `ip`, `method`, `resource`, and `status`.
+- Each name is unique.
+- Each name uses only letters.
+- The group `(?:v\d+)` has no name. It groups the version segment, but does not create a field.
+
 **Resulting calculated fields**:
 
 - `#ip = 10.0.0.14`
@@ -158,7 +165,19 @@ A pattern must follow these rules:
 - `#resource = orders`
 - `#status = 503`
 
-The `(?:v\d+)` group matches the API version segment without creating a field for it. You can filter, group, and sort by the extracted fields. Logs where the pattern does not match have no value for them.
+You can filter, group, and sort by the extracted fields. Logs where the pattern does not match have no value for them.
+
+### Invalid patterns
+
+Each pattern below breaks one capture group rule.
+
+| Pattern | Problem |
+|---|---|
+| `\S+ \S+ \S+ \S+` | No named group. A pattern needs at least one. |
+| `(\S+) (?<method>\S+)` | The first group has no name. Add a name, or use `(?:...)` to group without a name. |
+| `(?<ip>\S+) (?<ip>\S+)` | The name `ip` is used twice. Each name must be unique. |
+| `(?<client-ip>\S+)` | The name has a hyphen. A name can have only letters and digits. |
+| `(?<1status>\d+)` | The name starts with a digit. A name must start with a letter. |
 
 ## Further reading
 
