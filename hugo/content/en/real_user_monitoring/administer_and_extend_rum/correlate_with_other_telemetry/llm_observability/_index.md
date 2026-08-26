@@ -1,6 +1,8 @@
 ---
 title: Correlate Agent Observability with RUM
 description: "Connect RUM sessions with Agent Observability to track user interactions with AI agents and understand the complete user journey."
+aliases:
+- /real_user_monitoring/correlate_with_other_telemetry/llm_observability/
 further_reading:
   - link: "/llm_observability/sdk"
     tag: "Documentation"

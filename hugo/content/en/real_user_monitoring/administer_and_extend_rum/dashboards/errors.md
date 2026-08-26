@@ -3,6 +3,7 @@ title: RUM Error Dashboards
 description: "Monitor and analyze RUM errors with comprehensive dashboards showing error trends, affected users, and stack trace information."
 aliases:
 - '/real_user_monitoring/platform/dashboards/errors_dashboard'
+- '/real_user_monitoring/platform/dashboards/errors'
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'

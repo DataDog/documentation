@@ -80,4 +80,4 @@ After an investigation completes, you can act on findings without leaving the pa
 [5]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/
 [6]: /real_user_monitoring/explorer/search/
 [7]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/
-[8]: /real_user_monitoring/correlate_with_other_telemetry/profiling/
+[8]: /real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/profiling/
