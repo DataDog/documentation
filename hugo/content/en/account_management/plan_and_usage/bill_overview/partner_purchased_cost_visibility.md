@@ -1,6 +1,6 @@
 ---
 title: Cost Visibility for Customers Who Purchase Through a Partner
-description: If you purchase Datadog through a partner, view your estimated Datadog costs in Bill Overview, with a daily breakdown and product- and sub-organization-level detail.
+description: If you purchase Datadog through a partner, view your estimated month-to-date and historical Datadog costs in Bill Overview, with a daily breakdown and product- and sub-organization-level detail.
 further_reading:
 - link: "/account_management/plan_and_usage/bill_overview/"
   tag: "Documentation"
@@ -10,13 +10,14 @@ further_reading:
   text: "Plan & Usage"
 ---
 
-If you purchase Datadog through a partner, you can get greater visibility into your Datadog costs through the [Bill Overview][1] page in your Datadog organization. Bill Overview provides a single view of your estimated month-to-date costs, a daily cost breakdown, and the ability to group costs by product and sub-organization, so you can understand your Datadog spending at any point during the billing period.
+If you purchase Datadog through a partner, you can get greater visibility into your Datadog costs through the [Bill Overview][1] page in your Datadog organization. Bill Overview provides a single view of your estimated month-to-date and historical costs, a daily cost breakdown, and the ability to group costs by product and sub-organization, so you can understand your Datadog spending at any point during the billing period.
 
 {{< img src="account_management/plan_and_usage/bill-overview-main-light.png" alt="Bill Overview page showing the cost summary header and Daily Cost Breakdown stacked bar chart" >}}
 
 ## Key features
 
 - **Estimated month-to-date cost**: See a running total of your Datadog costs at any point during the month, without waiting for your invoice.
+- **Historical cost**: Review costs for previous months after each month closes. Data goes back 15 months, or to your most recent contract change if that is more recent.
 - **Daily cost breakdown**: View a day-by-day bar chart of your costs to spot usage changes as they happen.
 - **Group by product**: Break down costs by product category and billing dimension, such as infrastructure hosts, indexed logs, or custom metrics.
 - **Group by sub-organization**: If you use multiple Datadog sub-organizations, filter and view costs for each one individually.
@@ -39,7 +40,7 @@ Your partner shares your rates with Datadog. Datadog uses those rates and your u
 
 - **Tiered on-demand pricing is not supported.** Cost data is not shown for the active Error Tracking and LLM Observability SKUs.
 - **Percent-based products are not supported.** Cost data is not shown for the Audit Trail or Premier Support SKUs.
-- **All costs are estimated.** In most cases, the estimated costs in Bill Overview match your partner invoice. Minor differences (a few cents) can occur because of nuances in billing calculations. If you notice significant discrepancies, contact your partner.
+- **All costs are estimated.** Costs are calculated from the rates your partner provides, so historical costs are estimates as well, even after a month closes. In most cases, the costs in Bill Overview match your partner invoice. Minor differences (a few cents) can occur because of nuances in billing calculations. If you notice significant discrepancies, contact your partner.
 
 ## Further reading
 
