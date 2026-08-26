@@ -108,7 +108,7 @@ Extracted values are always strings. Unlike a Grok rule such as `%{integer:statu
 | Feature | Example | Description |
 |---|---|---|
 | Literal text | `error` | The literal characters |
-| Any character | `.` | Any single character |
+| Any character | `.` | Any character except a newline |
 | Character classes | `[a-z0-9]`, `[^abc]` | Any one character in the set, or any one character not in the set |
 | Shorthand classes | `\d`, `\w`, `\s`, `\D`, `\W`, `\S` | A digit, word character, or whitespace character, and their negations |
 | Unicode property classes | `\p{L}+` | Characters by Unicode property, such as any letter |
@@ -117,12 +117,14 @@ Extracted values are always strings. Unlike a Grok rule such as `%{integer:statu
 | Named capture groups | `(?<status>\d+)` | Captures the match under a name. Required for extraction |
 | Quantifiers | `a*`, `a+`, `a?`, `a{2,4}` | Repetition: zero or more, one or more, optional, or a bounded range. Matches as much as possible |
 | Lazy quantifiers | `.*?end` | The same repetition, but matching as little as possible |
-| Anchors | `^ERROR`, `timeout$` | The start or the end of the value |
+| Anchors | `^ERROR`, `timeout$` | The start or the end of the value, not each line |
 | Word boundaries | `\berror\b` | A position between a word and a non-word character, so `error` matches but `errors` does not |
 | Character escapes | `\n`, `\r`, `\t` | Newline, carriage return, tab |
 | Metacharacter escapes | `\.`, `\*`, `\(` | The character itself, rather than its special meaning |
 
 Constructs that are not listed, such as lookahead (`(?=…)`), lookbehind (`(?<=…)`), and backreferences (`\1`), are not supported.
+
+A value can contain multiple lines, such as a stack trace. To match a newline with `.`, add `(?s)` to the start of the pattern. To match `^` and `$` at the start and end of each line, add `(?m)` to the start of the pattern.
 
 Write patterns with a single backslash, as shown. In [formula regex functions][2], a pattern is a quoted string argument and each backslash must be doubled.
 
