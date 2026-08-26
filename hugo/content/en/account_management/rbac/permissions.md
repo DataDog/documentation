@@ -61,7 +61,7 @@ To remove any of the following restricted permissions through the [Create Role][
 | `cd_visibility_read` | View CD Visibility deployment data.                                    |
 | `appsec_vm_read`     | View Application Security vulnerability findings.                      |
 
-The following restricted permissions cannot be removed by default. To make them removable, enable [Minimal Access Roles](#minimal-access-roles-preview):
+The following restricted permissions cannot be removed by default from either the UI or the API. To make them removable, enable [Minimal Access Roles](#minimal-access-roles-preview):
 
 | Name                             | Description                                                       |
 |----------------------------------|-------------------------------------------------------------------|
