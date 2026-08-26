@@ -32,7 +32,7 @@ To set customer pricing, you need:
 4. Review the customer's contracted products and corresponding sales prices in the table.
 5. Click {{< ui >}}Edit{{< /ui >}} and enter the customer's prices for each contracted product. You can edit prices in bulk, individually, or a combination of both.
    {{< img src="account_management/plan_and_usage/customer-pricing-edit-bulk.png" alt="Bulk price editing controls for a customer's contracted products" >}}
-   {{< img src="account_management/plan_and_usage/customer-pricing-edit-individual.png" alt="Individual price editing for a single contracted product" >}}
+   {{< img src="account_management/plan_and_usage/customer-pricing-edit-individual.png" alt="Individual draft price fields for each contracted product" >}}
 6. Set a default pricing rule for products that are not on the customer's contract. For example, bill at list price or apply a percentage markup to the sales price.
    {{< img src="account_management/plan_and_usage/customer-pricing-default-rule.png" alt="Default pricing rule configuration for non-contracted products" >}}
 7. Click {{< ui >}}Save Draft{{< /ui >}}, review your entries, and then click {{< ui >}}Publish{{< /ui >}}.
