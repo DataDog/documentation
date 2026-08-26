@@ -28,7 +28,7 @@ Execution Policies give you two main advantages when you authorize private actio
 - **Manage access at scale.** With [Connections][2], you create one connection per integration on each runner, which becomes hard to manage across a large fleet. Execution Policies let you control access to many runners at once by selecting Agents with tags. A single policy can also list more than one set of target Agents, so the same rule can cover several teams or environments without being duplicated.
 - **Fine-grained control.** You can allow or deny specific actions or sets of actions, and apply integration-specific scopes, such as limiting a Kubernetes policy to specific target namespaces.
 
-Execution Policies apply to private action runners running **inside the Datadog Agent** that were enrolled as *ownerless*: enrolled using an API key that has the Private Action Runner capability, rather than being tied to a specific user. Runners enrolled this way are authorized through Execution Policies instead of [Connections][2]. For how a runner becomes ownerless, see [Enrollment and ownership][6].
+Execution Policies apply to private action runners running **inside the Datadog Agent** that were enrolled as *ownerless*: enrolled using an API key that has the Private Action Runner capability, rather than being tied to a specific user. For how a runner becomes ownerless, see [Enrollment and ownership][6].
 
 ## Prerequisites
 
@@ -136,7 +136,7 @@ Execution Policies store no credentials. They answer *where* actions can run, *w
 3. Set the **Rule** to **Allow** or **Deny**.
 4. Under **Actions**, choose an integration and the actions to include. You can select specific actions, use globs to match multiple, or use the **read-only** / **write-capable** selectors.
 5. Optionally set a scope. For Kubernetes, set **Target Namespaces** to limit the policy to specific namespaces.
-6. Under **Targets**, add one or more tag selectors for the Agents this policy applies to. An Agent must carry all the tags in a target to match it. To target every Agent that has a private action runner enabled, use `*` on its own. Add more than one target if the same policy should apply to more than one set of Agents. Datadog shows how many Agents match as you edit.
+6. Under **Targets**, add one or more tag selectors for the Agents this policy applies to. An Agent must carry all the tags in a target to match it. To target every Agent that has a private action runner enabled, use a wildcard `*` on its own. Add more than one target to apply the same policy to more than one set of Agents.
 7. Under **Access**, set who can view, edit, and who the policy applies to. See [Access](#access).
 8. Click **Create**.
 
