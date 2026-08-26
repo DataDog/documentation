@@ -5549,245 +5549,216 @@ menu:
       parent: llm_obs
       identifier: llm_obs_quickstart
       weight: 1
-    - name: Instrumentation
-      url: llm_observability/instrumentation/
+    - name: Terms and Concepts
+      url: llm_observability/quickstart/terms/
+      parent: llm_obs_quickstart
+      identifier: llm_obs_terms
+      weight: 101
+    - name: Build with AI
+      url: llm_observability/build_with_ai/
+      parent: llm_obs
+      identifier: llm_obs_build_with_ai
+      weight: 2
+    - name: Instrument
+      url: llm_observability/instrument/
       parent: llm_obs
       identifier: llm_obs_instrumentation
-      weight: 2
+      weight: 3
     - name: Automatic
-      url: llm_observability/instrumentation/auto_instrumentation
+      url: llm_observability/instrument/auto_instrumentation
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_auto
-      weight: 201
+      weight: 301
     - name: SDK Reference
-      url: llm_observability/instrumentation/sdk
+      url: llm_observability/instrument/sdk
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_sdk
-      weight: 202
+      weight: 302
     - name: HTTP API
-      url: llm_observability/instrumentation/api
+      url: llm_observability/instrument/api
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_api
-      weight: 203
+      weight: 303
     - name: OpenTelemetry
-      url: llm_observability/instrumentation/otel_instrumentation
+      url: llm_observability/instrument/otel_instrumentation
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_otel
-      weight: 204
-    - name: Tracing Proxy Services
-      url: llm_observability/trace_proxy_services
+      weight: 304
+    - name: Agentic Instrumentation
+      url: llm_observability/instrument/agentic/
       parent: llm_obs_instrumentation
-      identifier: llm_obs_instrumentation_trace_proxy_services
-      weight: 205
-    - name: Lapdog
-      url: llm_observability/lapdog
-      parent: llm_obs
-      identifier: llm_obs_lapdog
-      weight: 3
-    - name: Monitoring
-      url: llm_observability/monitoring
+      identifier: llm_obs_instrumentation_agentic
+      weight: 305
+    - name: Python
+      url: llm_observability/instrument/agentic/python
+      parent: llm_obs_instrumentation_agentic
+      identifier: llm_obs_instrumentation_agentic_python
+      weight: 30501
+    - name: Node.js
+      url: llm_observability/instrument/agentic/nodejs
+      parent: llm_obs_instrumentation_agentic
+      identifier: llm_obs_instrumentation_agentic_nodejs
+      weight: 30502
+    - name: Java
+      url: llm_observability/instrument/agentic/java
+      parent: llm_obs_instrumentation_agentic
+      identifier: llm_obs_instrumentation_agentic_java
+      weight: 30503
+    - name: Correlate with APM
+      url: llm_observability/instrument/agent_observability_and_apm
+      parent: llm_obs_instrumentation
+      identifier: llm_obs_correlate_apm
+      weight: 310
+    - name: Prompt Tracking
+      url: llm_observability/instrument/prompt_tracking
+      parent: llm_obs_instrumentation
+      identifier: llm_obs_prompt_tracking
+      weight: 311
+    - name: Investigate
+      url: llm_observability/investigate/
       parent: llm_obs
       identifier: llm_obs_monitoring
       weight: 4
     - name: Querying spans and traces
-      url: llm_observability/monitoring/querying
+      url: llm_observability/investigate/querying
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_querying
-      weight: 301
-    - name: Correlate with APM
-      url: llm_observability/monitoring/llm_observability_and_apm
-      parent: llm_obs_monitoring
-      identifier: llm_obs_correlate_apm
-      weight: 302
-    - name: Patterns
-      url: llm_observability/monitoring/patterns/
-      parent: llm_obs_monitoring
-      identifier: llm_obs_patterns
-      weight: 303
-    - name: Agent Monitoring
-      url: llm_observability/monitoring/agent_monitoring
-      parent: llm_obs_monitoring
-      identifier: llm_obs_agent_monitoring
-      weight: 304
+      weight: 401
     - name: Cost
-      url: llm_observability/monitoring/cost
+      url: llm_observability/investigate/cost
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_cost
-    - name: MCP Clients
-      url: llm_observability/monitoring/mcp_client
-      parent: llm_obs_monitoring
-      identifier: llm_obs_mcp_client
-      weight: 305
-    - name: Prompt Tracking
-      url: llm_observability/monitoring/prompt_tracking
-      parent: llm_obs_monitoring
-      identifier: llm_obs_prompt_tracking
-      weight: 306
-    - name: Prompt Management
-      url: llm_observability/monitoring/prompt_management
-      parent: llm_obs_monitoring
-      identifier: llm_obs_prompt_management
-      weight: 307
+      weight: 402
     - name: Metrics
-      url: llm_observability/monitoring/metrics
+      url: llm_observability/investigate/metrics
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_metrics
-      weight: 308
-    - name: Automation Rules
-      url: llm_observability/monitoring/automation_rules
+      weight: 403
+    - name: Patterns
+      url: llm_observability/investigate/patterns/
       parent: llm_obs_monitoring
-      identifier: llm_obs_monitoring_automation_rules
-      weight: 309
-    - name: Evaluations
-      url: llm_observability/evaluations/
-      parent: llm_obs
-      identifier: llm_obs_evaluations
-      weight: 5
-    - name: Custom LLM-as-a-Judge
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations
-      weight: 400
-    - name: Language Mismatch
-      url: llm_observability/evaluations/managed_evaluations/language_mismatch
-      parent: llm_obs_evaluations
-      identifier: llm_obs_language_mismatch
-      weight: 401
-    - name: Sensitive Data Scanner
-      url: llm_observability/evaluations/sensitive_data_scanner
-      parent: llm_obs_evaluations
-      identifier: llm_obs_sensitive_data_scanner
-      weight: 402
-    - name: External Evaluations
-      url: llm_observability/evaluations/external_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_external_evaluations
-      weight: 403
-    - name: End-User Feedback
-      url: llm_observability/evaluations/end_user_feedback
-      parent: llm_obs_evaluations
-      identifier: llm_obs_end_user_feedback
-      weight: 4030
-    - name: Developer Guide
-      url: llm_observability/evaluations/evaluation_developer_guide
-      parent: llm_obs_evaluations
-      identifier: llm_obs_evaluation_developer_guide
-      weight: 4031
-    - name: Connect Your LLM Provider
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_connect_to_account
-      weight: 40100
-    - name: Template Evaluations
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_template
-      weight: 40101
-    - name: Session-Level Evaluations
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/session_level_evaluations
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_session_level
-      weight: 40102
-    - name: Trace-Level Evaluations
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_trace_level
-      weight: 40103
-    - name: Prompt Templating
-      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/prompt_templating
-      parent: llm_obs_custom_llm_as_a_judge_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations_prompt_templating
-      weight: 40104
-    - name: NeMo
-      url: llm_observability/evaluations/submit_nemo_evaluations
-      parent: llm_obs_external_evaluations
-      identifier: llm_obs_submit_nemo_evaluations
-      weight: 40201
-    - name: DeepEval Evaluations
-      url: llm_observability/evaluations/deepeval_evaluations
-      parent: llm_obs_external_evaluations
-      identifier: llm_obs_deepeval_evaluations
-      weight: 40301
-    - name: Pydantic Evaluations
-      url: llm_observability/evaluations/pydantic_evaluations
-      parent: llm_obs_external_evaluations
-      identifier: llm_obs_pydantic_evaluations
-      weight: 40302
-    - name: Annotation Queues
-      url: llm_observability/evaluations/annotation_queues
-      parent: llm_obs_evaluations
-      identifier: llm_obs_annotation_queues
-      weight: 403
-    - name: Compatibility
-      url: llm_observability/evaluations/evaluation_compatibility
-      parent: llm_obs_evaluations
-      identifier: llm_obs_evaluation_compatibility
+      identifier: llm_obs_patterns
       weight: 404
-    - name: Export API
-      url: llm_observability/evaluations/export_api
-      parent: llm_obs_evaluations
-      identifier: llm_obs_evaluations_export_api
+    - name: Annotation Queues
+      url: llm_observability/investigate/annotation_queues
+      parent: llm_obs_monitoring
+      identifier: llm_obs_annotation_queues
       weight: 405
-    - name: Experiments
-      url: llm_observability/experiments
+    - name: Export API
+      url: llm_observability/investigate/export_api
+      parent: llm_obs_monitoring
+      identifier: llm_obs_evaluations_export_api
+      weight: 406
+    - name: Improve
+      url: llm_observability/improve/
       parent: llm_obs
-      identifier: llm_obs_experiments
-      weight: 6
-    - name: Setup and Usage
-      url: llm_observability/experiments/setup
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_setup
+      identifier: llm_obs_improve
+      weight: 5
+    - name: Playground
+      url: llm_observability/improve/playground
+      parent: llm_obs_improve
+      identifier: llm_obs_playground
       weight: 501
     - name: Datasets
-      url: llm_observability/experiments/datasets
-      parent: llm_obs_experiments
+      url: llm_observability/improve/datasets
+      parent: llm_obs_improve
       identifier: llm_obs_experiments_datasets
       weight: 502
+    - name: Experiments
+      url: llm_observability/improve/experiments
+      parent: llm_obs_improve
+      identifier: llm_obs_experiments
+      weight: 503
+    - name: Setup and Usage
+      url: llm_observability/improve/experiments/setup
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_setup
+      weight: 50301
     - name: Analyzing Results
-      url: llm_observability/experiments/analyzing_results
+      url: llm_observability/improve/experiments/analyzing_results
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_analyzing_results
-      weight: 503
+      weight: 50302
     - name: Advanced Experiment Runs
-      url: llm_observability/experiments/advanced_runs
+      url: llm_observability/improve/experiments/advanced_runs
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_advanced_runs
-      weight: 504
-    - name: Experiments API
-      url: llm_observability/experiments/api
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_api
-      weight: 505
+      weight: 50303
     - name: Prompt Optimization
-      url: llm_observability/experiments/prompt_optimization
+      url: llm_observability/improve/experiments/prompt_optimization
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_prompt_optimization
-      weight: 506
-    - name: Playground
-      url: llm_observability/playground
+      weight: 50304
+    - name: Experiments API
+      url: llm_observability/improve/experiments/api
       parent: llm_obs_experiments
-      identifier: llm_obs_playground
-      weight: 507
-    - name: MCP Server
-      url: llm_observability/mcp_server
+      identifier: llm_obs_experiments_api
+      weight: 50305
+    - name: Configure
+      url: llm_observability/configure/
       parent: llm_obs
-      identifier: llm_obs_mcp_server
-      weight: 7
-    - name: Data Security and RBAC
-      url: llm_observability/data_security_and_rbac
+      identifier: llm_obs_configure
+      weight: 6
+    - name: Evaluations
+      url: llm_observability/configure/evaluations/
+      parent: llm_obs_configure
+      identifier: llm_obs_evaluations
+      weight: 601
+    - name: Custom LLM-as-a-Judge
+      url: llm_observability/configure/evaluations/llm_as_a_judge_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations
+      weight: 60101
+    - name: Language Mismatch
+      url: llm_observability/configure/evaluations/language_mismatch
+      parent: llm_obs_evaluations
+      identifier: llm_obs_language_mismatch
+      weight: 60102
+    - name: Sensitive Data Scanner
+      url: llm_observability/configure/evaluations/managed_evaluations/security_and_safety_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_sensitive_data_scanner
+      weight: 60103
+    - name: End-User Feedback
+      url: llm_observability/configure/evaluations/end_user_feedback
+      parent: llm_obs_evaluations
+      identifier: llm_obs_end_user_feedback
+      weight: 60104
+    - name: Compatibility
+      url: llm_observability/configure/evaluations/compatibility
+      parent: llm_obs_evaluations
+      identifier: llm_obs_evaluation_compatibility
+      weight: 60106
+    - name: External Evaluations
+      url: llm_observability/configure/evaluations/external_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_external_evaluations
+      weight: 60107
+    - name: Prompt Management
+      url: llm_observability/configure/prompt_management
+      parent: llm_obs_configure
+      identifier: llm_obs_prompt_management
+      weight: 602
+    - name: Automation Rules
+      url: llm_observability/configure/automation_rules
+      parent: llm_obs_configure
+      identifier: llm_obs_monitoring_automation_rules
+      weight: 603
+    - name: Data Privacy, Security, and RBAC
+      url: llm_observability/data_privacy_security_and_rbac
       parent: llm_obs
       identifier: llm_obs_data_security_and_rbac
-      weight: 8
-    - name: Terms and Concepts
-      url: llm_observability/terms/
+      weight: 7
+    - name: Lapdog
+      url: llm_observability/lapdog
       parent: llm_obs
-      identifier: llm_obs_terms
-      weight: 9
+      identifier: llm_obs_lapdog
+      weight: 8
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 10
+      weight: 9
     - name: GPU Monitoring
       url: gpu_monitoring/
       pre: gpu-monitoring-wui
@@ -6876,11 +6847,6 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_opentelemetry
       weight: 214
-    - name: Prometheus
-      url: observability_pipelines/sources/prometheus/
-      parent: observability_pipelines_sources
-      identifier: observability_pipelines_sources_prometheus
-      weight: 215
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
@@ -7046,11 +7012,6 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tag_cardinality_control
       weight: 322
-    - name: Tail-Based Sampling
-      url: observability_pipelines/processors/tail_based_sampling
-      parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_tail_based_sampling
-      weight: 323
     - name: Throttle
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
@@ -7096,11 +7057,6 @@ menu:
       url: observability_pipelines/destinations/databricks/
       parent: observability_pipelines_destinations
       weight: 407
-    - name: Datadog APM
-      identifier: observability_pipelines_datadog_apm
-      url: observability_pipelines/destinations/datadog_apm/
-      parent: observability_pipelines_destinations
-      weight: 408
     - name: Datadog Archives
       identifier: observability_pipelines_destinations_datadog_archives
       url: observability_pipelines/destinations/datadog_archives/
@@ -7166,16 +7122,6 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
       weight: 421
-    - name: OpenTelemetry
-      url: observability_pipelines/destinations/opentelemetry/metrics/
-      parent: observability_pipelines_destinations
-      identifier: observability_pipelines_destinations_opentelemetry
-      weight: 422
-    - name: Prometheus
-      url: /observability_pipelines/destinations/prometheus/
-      parent: observability_pipelines_destinations
-      identifier: observability_pipelines_prometheus
-      weight: 423
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
@@ -7206,131 +7152,6 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_packs
       weight: 5
-    - name: Akamai CDN
-      url: observability_pipelines/packs/akamai_cdn/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_akamai_cdn
-      weight: 501
-    - name: Amazon CloudFront
-      url: observability_pipelines/packs/amazon_cloudfront/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_amazon_cloudfront
-      weight: 502
-    - name: Amazon VPC Flow Logs
-      url: observability_pipelines/packs/amazon_vpc_flow_logs/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_amazon_vpc_flow_logs
-      weight: 503
-    - name: AWS Application Load Balancer Logs
-      url: observability_pipelines/packs/aws_alb/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_aws_alb
-      weight: 504
-    - name: AWS CloudTrail
-      url: observability_pipelines/packs/aws_cloudtrail/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_aws_cloudtrail
-      weight: 505
-    - name: AWS Elastic Load Balancer Logs
-      url: observability_pipelines/packs/aws_elb/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_aws_elb
-      weight: 506
-    - name: AWS Network Load Balancer Logs
-      url: observability_pipelines/packs/aws_nlb/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_aws_nlb
-      weight: 507
-    - name: Cisco ASA
-      url: observability_pipelines/packs/cisco_asa/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_cisco_asa
-      weight: 508
-    - name: Cloudflare
-      url: observability_pipelines/packs/cloudflare/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_cloudflare
-      weight: 509
-    - name: F5
-      url: observability_pipelines/packs/f5/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_f5
-      weight: 510
-    - name: Fastly
-      url: observability_pipelines/packs/fastly/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_fastly
-      weight: 511
-    - name: Fortinet Firewall
-      url: observability_pipelines/packs/fortinet_firewall/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_fortinet_firewall
-      weight: 512
-    - name: HAProxy Ingress
-      url: observability_pipelines/packs/haproxy_ingress/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_haproxy_ingress
-      weight: 513
-    - name: Infoblox
-      url: observability_pipelines/packs/infoblox/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_infoblox
-      weight: 514
-    - name: Istio Proxy
-      url: observability_pipelines/packs/istio_proxy/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_istio_proxy
-      weight: 515
-    - name: Juniper SRX Firewall Traffic Logs
-      url: observability_pipelines/packs/juniper_srx_traffic/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_juniper_srx_traffic
-      weight: 516
-    - name: Netskope
-      url: observability_pipelines/packs/netskope/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_netskope
-      weight: 517
-    - name: NGINX
-      url: observability_pipelines/packs/nginx/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_nginx
-      weight: 518
-    - name: Okta
-      url: observability_pipelines/packs/okta/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_okta
-      weight: 519
-    - name: Palo Alto Firewall
-      url: observability_pipelines/packs/palo_alto_firewall/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_palo_alto_firewall
-      weight: 520
-    - name: Windows XML
-      url: observability_pipelines/packs/windows_xml/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_windows_xml
-      weight: 521
-    - name: ZScaler ZIA DNS
-      url: observability_pipelines/packs/zscaler_zia_dns/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_zscaler_zia_dns
-      weight: 522
-    - name: Zscaler ZIA Firewall
-      url: observability_pipelines/packs/zscaler_zia_firewall/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_zscaler_zia_firewall
-      weight: 523
-    - name: Zscaler ZIA Tunnel
-      url: observability_pipelines/packs/zscaler_zia_tunnel/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_zscaler_zia_tunnel
-      weight: 524
-    - name: Zscaler ZIA Web Logs
-      url: observability_pipelines/packs/zscaler_zia_web_logs/
-      parent: observability_pipelines_packs
-      identifier: observability_pipelines_packs_zscaler_zia_web_logs
-      weight: 525
     - name: Replay
       url: observability_pipelines/replay/
       parent: observability_pipelines
@@ -7979,6 +7800,11 @@ menu:
       parent: security_platform
       identifier: security_assignee_management
       weight: 11
+    - name: Severity Adjustment
+      url: security/manual_severity_adjustment
+      parent: security_platform
+      identifier: security_manual_severity_adjustment
+      weight: 12
     - name: Research Feed
       url: security/research_feed
       parent: security_platform
@@ -8041,9 +7867,9 @@ menu:
       identifier: cloud_siem_custom_detection_rules
       weight: 202
     - name: Create Rule
-      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule
+      url: security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule
       parent: cloud_siem_custom_detection_rules
-      identifier: cloud_siem_real_time_rule
+      identifier: cloud_siem_create_custom_detection_rule
       weight: 2021
     - name: Anomaly
       url: security/cloud_siem/detect_and_monitor/custom_detection_rules/anomaly
@@ -8296,6 +8122,16 @@ menu:
       url: /security/code_security/iac_security/iac_rules/
       parent: code_security_iac_security
       weight: 100003
+    - name: IaC Custom Rules
+      identifier: code_security_iac_security_custom_rules
+      url: /security/code_security/iac_security/custom_rules/
+      parent: code_security_iac_security
+      weight: 100004
+    - name: IaC Custom Rule Reference
+      identifier: code_security_iac_security_custom_rules_guide
+      url: /security/code_security/iac_security/custom_rules/guide/
+      parent: code_security_iac_security
+      weight: 100006
     - name: Developer Tool Integrations
       identifier: dev_tool_int
       url: /security/code_security/dev_tool_int/
@@ -8784,82 +8620,157 @@ menu:
       url: security/workload_protection/setup
       parent: workload_protection
       identifier: workload_protection_setup
-      weight: 100
-    - name: Deploy the Agent
-      url: security/workload_protection/setup/agent
+      weight: 90
+    - name: Docker
+      url: security/workload_protection/setup/docker
       parent: workload_protection_setup
-      identifier: workload_protection_workload_setup_agent
-      weight: 1
-    - name: Workload Protection Agent Variables
-      url: security/workload_protection/setup/agent_variables
+      identifier: workload_protection_setup_docker
+      weight: 10
+    - name: Kubernetes
+      url: security/workload_protection/setup/kubernetes
       parent: workload_protection_setup
-      identifier: workload_protection_agent_variables
-      weight: 2
-    - name: Detection Rules
-      url: security/workload_protection/workload_security_rules
+      identifier: workload_protection_setup_kubernetes
+      weight: 20
+    - name: ECS (EC2 compute)
+      url: security/workload_protection/setup/ecs_ec2
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_ecs_ec2
+      weight: 30
+    - name: Linux
+      url: security/workload_protection/setup/linux_ebpf
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_linux_ebpf
+      weight: 40
+    - name: Fargate
+      url: security/workload_protection/setup/fargate
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_fargate
+      weight: 50
+    - name: Windows
+      url: security/workload_protection/setup/windows
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_windows
+      weight: 70
+    - name: Advanced Configuration
+      url: security/workload_protection/setup/advanced_configuration
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_advanced_configuration
+      weight: 80
+    - name: Detect and Monitor
+      url: security/workload_protection/detect_and_monitor
       parent: workload_protection
-      identifier: workload_protection_workload_security_rules
-      weight: 201
-    - name: OOTB Rules
-      url: /security/workload_protection/setup/ootb_rules
-      parent: workload_protection_workload_security_rules
-      identifier: workload_protection_ootb_rules
-      weight: 100
-    - name: Custom Rules
-      url: security/workload_protection/workload_security_rules/custom_rules
-      parent: workload_protection_workload_security_rules
-      identifier: workload_protection_custom_rules
-      weight: 101
-    - name: Investigate Security Signals
-      url: security/workload_protection/security_signals
-      parent: workload_protection
-      identifier: workload_protection_security_signals
-      weight: 202
-    - name: Investigate Agent Events
-      url: security/workload_protection/investigate_agent_events
-      parent: workload_protection
-      identifier: workload_protection_agent_events
-      weight: 203
-    - name: Creating Agent Rule Expressions
-      url: security/workload_protection/agent_expressions
-      parent: workload_protection
-      identifier: workload_protection_agent_expressions
-      weight: 204
-    - name: Writing Custom Rule Expressions
-      url: security/workload_protection/secl_auth_guide
-      parent: workload_protection_agent_expressions
-      identifier: workload_protection_secl_guide
-      weight: 1
-    - name: Linux Syntax
+      identifier: workload_protection_detect_and_monitor
+      weight: 91
+    - name: Agent Rules
+      url: security/workload_protection/detect_and_monitor/agent_rules
+      parent: workload_protection_detect_and_monitor
+      identifier: workload_protection_detect_and_monitor_agent_rules
+      weight: 10
+    - name: SECL guide
+      url: security/workload_protection/detect_and_monitor/agent_rules/secl_guide
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_secl_guide
+      weight: 10
+    - name: Policy Management
+      url: security/workload_protection/detect_and_monitor/agent_rules/policy_management
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_policy_management
+      weight: 20
+    - name: Variables and actions
+      url: security/workload_protection/detect_and_monitor/agent_rules/variables_and_actions
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_variables_and_actions
+      weight: 30
+    - name: Linux syntax
       url: security/workload_protection/linux_expressions
-      parent: workload_protection_agent_expressions
-      identifier: linux_expressions
-      weight: 2
-    - name: Windows Syntax
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_linux_expressions
+      weight: 40
+    - name: Windows syntax
       url: security/workload_protection/windows_expressions
-      parent: workload_protection_agent_expressions
-      identifier: windows_expressions
-      weight: 3
-    - name: Coverage and Posture Management
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_windows_expressions
+      weight: 50
+    - name: Detection and Finding Rules
+      url: security/workload_protection/detect_and_monitor/detection_and_finding_rules
+      parent: workload_protection_detect_and_monitor
+      identifier: workload_protection_detect_and_monitor_detection_and_finding_rules
+      weight: 20
+    - name: Detection Rules
+      url: security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules
+      parent: workload_protection_detect_and_monitor_detection_and_finding_rules
+      identifier: workload_protection_detect_and_monitor_detection_and_finding_rules_detection_rules
+      weight: 10
+    - name: Finding Rules
+      url: security/workload_protection/detect_and_monitor/detection_and_finding_rules/finding_rules
+      parent: workload_protection_detect_and_monitor_detection_and_finding_rules
+      identifier: workload_protection_detect_and_monitor_detection_and_finding_rules_finding_rules
+      weight: 20
+    - name: Linux Backend Syntax
+      url: security/workload_protection/backend_linux
+      parent: workload_protection_detect_and_monitor_detection_and_finding_rules
+      identifier: workload_protection_detect_and_monitor_detection_and_finding_rules_backend_linux
+      weight: 30
+    - name: Windows Backend Syntax
+      url: security/workload_protection/backend_windows
+      parent: workload_protection_detect_and_monitor_detection_and_finding_rules
+      identifier: workload_protection_detect_and_monitor_detection_and_finding_rules_backend_windows
+      weight: 40
+    - name: Threat Intelligence
+      url: security/workload_protection/detect_and_monitor/threat_intelligence
+      parent: workload_protection_detect_and_monitor
+      identifier: workload_protection_detect_and_monitor_threat_intelligence
+      weight: 40
+    - name: Content Packs
+      url: security/workload_protection/detect_and_monitor/content_packs
+      parent: workload_protection_detect_and_monitor
+      identifier: workload_protection_detect_and_monitor_content_packs
+      weight: 50
+    - name: Investigate and Triage
+      url: security/workload_protection/investigate_and_triage
+      parent: workload_protection
+      identifier: workload_protection_investigate_and_triage
+      weight: 92
+    - name: Agent Events
+      url: security/workload_protection/investigate_and_triage/agent_events
+      parent: workload_protection_investigate_and_triage
+      identifier: workload_protection_investigate_and_triage_agent_events
+      weight: 10
+    - name: Signals
+      url: security/workload_protection/investigate_and_triage/security_signals
+      parent: workload_protection_investigate_and_triage
+      identifier: workload_protection_investigate_and_triage_security_signals
+      weight: 20
+    - name: Investigate Security Signals
+      url: security/workload_protection/investigate_and_triage/security_signals/investigate
+      parent: workload_protection_investigate_and_triage_security_signals
+      identifier: workload_protection_investigate_and_triage_security_signals_investigate
+      weight: 10
+    - name: Triage and Act on Security Signals
+      url: security/workload_protection/investigate_and_triage/security_signals/actions
+      parent: workload_protection_investigate_and_triage_security_signals
+      identifier: workload_protection_investigate_and_triage_security_signals_actions
+      weight: 20
+    - name: Findings
+      url: security/workload_protection/investigate_and_triage/security_findings
+      parent: workload_protection_investigate_and_triage
+      identifier: workload_protection_investigate_and_triage_security_findings
+      weight: 30
+    - name: Respond to Threats
+      url: security/workload_protection/respond_and_report
+      parent: workload_protection
+      identifier: workload_protection_respond_and_report
+      weight: 93
+    - name: Coverage
       url: security/workload_protection/inventory
       parent: workload_protection
       identifier: workload_protection_inventory
       weight: 205
-    - name: Hosts and Containers
-      url: security/workload_protection/inventory/hosts_and_containers
+    - name: Review and Improve Coverage
+      url: security/workload_protection/inventory/review_improve_coverage
       parent: workload_protection_inventory
-      identifier: workload_protection_hosts_and_containers
-      weight: 1
-    - name: Serverless
-      url: security/workload_protection/inventory/serverless
-      parent: workload_protection_inventory
-      identifier: workload_protection_serverless
-      weight: 2
-    - name: Coverage
-      url: security/workload_protection/inventory/coverage_map
-      parent: workload_protection_inventory
-      identifier: workload_protection_coverage_map
-      weight: 3
+      identifier: workload_protection_inventory_review_improve_coverage
+      weight: 10
     - name: Guides
       url: security/workload_protection/guide
       parent: workload_protection
@@ -9052,11 +8963,21 @@ menu:
       parent: synthetics
       identifier: synthetics_test_suites
       weight: 6
+    - name: Bits Testing
+      url: synthetics/bits_testing/
+      parent: synthetics
+      identifier: synthetics_bits_testing
+      weight: 7
+    - name: Goal-Based Testing
+      url: synthetics/goal_based_testing/
+      parent: synthetics
+      identifier: synthetics_goal_based_testing
+      weight: 8
     - name: Platform
       url: synthetics/platform/
       parent: synthetics
       identifier: synthetics_platform
-      weight: 7
+      weight: 9
     - name: Dashboards
       url: synthetics/platform/dashboards
       parent: synthetics_platform
@@ -9126,7 +9047,7 @@ menu:
       url: synthetics/explore/
       parent: synthetics
       identifier: synthetics_explore
-      weight: 8
+      weight: 10
     - name: Saved Views
       url: synthetics/explore/saved_views
       parent: synthetics_explore
@@ -9166,12 +9087,12 @@ menu:
       url: synthetics/guide/
       parent: synthetics
       identifier: synthetics_guides
-      weight: 9
+      weight: 11
     - name: Notifications
       url: synthetics/notifications/
       parent: synthetics
       identifier: synthetics_notifications
-      weight: 10
+      weight: 12
     - name: Template Variables
       url: synthetics/notifications/template_variables/
       parent: synthetics_notifications
@@ -9216,12 +9137,12 @@ menu:
       url: synthetics/troubleshooting/
       parent: synthetics
       identifier: synthetics_troubleshooting
-      weight: 11
+      weight: 13
     - name: Data Security
       identifier: data_security_synthetics
       url: data_security/synthetics/
       parent: synthetics
-      weight: 12
+      weight: 14
     - name: Continuous Testing
       url: continuous_testing/
       pre: continuous-testing

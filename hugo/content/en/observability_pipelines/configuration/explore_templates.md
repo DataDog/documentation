@@ -1,5 +1,6 @@
 ---
 title: Explore Templates
+description: Learn about the out-of-the-box logs, metrics, and traces templates available for building and deploying pipelines in the Observability Pipelines UI.
 disable_toc: false
 further_reading:
 - link: "observability_pipelines/set_up_pipelines#set-up-a-pipeline"
@@ -74,13 +75,6 @@ When you have logs from different services and applications, you might need to s
 Metrics capture signals about your environment and offer insight into your system health, business workflows, and security activities. These metrics are sent from your various applications, network devices, and nodes, but the value of individual metrics can vary significantly.
 
 To help you manage the quality and volume of your metrics, use the Metric Tag Governance template to process them in Observability Pipelines before sending them to your destinations. You can use processors to keep only the metrics you need, standardize metrics tagging, and remove unwanted tags to prevent high cardinality.
-
-{{% /tab %}}
-{{% tab "Traces" %}}
-
-### Trace Sampling
-
-Use the Trace Sampling template to ingest, process, and route your {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} telemetry data to control costs while retaining the traces you need for troubleshooting and analysis.
 
 {{% /tab %}}
 {{< /tabs >}}
