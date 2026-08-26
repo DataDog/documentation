@@ -37,7 +37,7 @@ Upgrade to  **v7.82+**  of the Datadog Agent and Cluster Agent and install the `
 
 ## Setup
 
-The `DatadogInstrumentation` controller runs in the Cluster Agent and is disabled by default. Enable it with the Datadog Operator or Helm.
+The `DatadogInstrumentation` controller runs in the Cluster Agent. It is enabled by default for Agent and Cluster Agent v7.82.0 or later. This default applies with Datadog Operator v1.30.0+ and Datadog Helm chart v3.241.0+.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -54,7 +54,7 @@ helm repo update
 helm upgrade datadog-operator datadog/datadog-operator
 ```
 
-3. Add the `agent.datadoghq.com/instrumentation-crd-enabled` annotation to your `DatadogAgent` resource. The Cluster Agent must be v7.82.0 or later.
+3. If you use Datadog Operator v1.29, add the `agent.datadoghq.com/instrumentation-crd-enabled` annotation to your `DatadogAgent` resource. With Datadog Operator v1.30.0+, the controller is enabled by default.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -68,7 +68,7 @@ spec:
     [...]
 ```
 
-4. Apply the change:
+4. If you added the annotation, apply the change:
 
 ```shell
 kubectl apply -f datadog-agent.yaml
@@ -85,7 +85,7 @@ The Operator sets the required Cluster Agent and Node Agent environment variable
 helm repo update
 ```
 
-2. In your `datadog-values.yaml` file, enable the controller:
+2. If you use Datadog Helm chart v3.236.0 through v3.240.x, enable the controller in your `datadog-values.yaml` file. With Datadog Helm chart v3.241.0+, the controller is enabled by default.
 
 ```yaml
 datadog:
