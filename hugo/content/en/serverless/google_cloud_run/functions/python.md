@@ -103,6 +103,8 @@ import ddtrace.auto
 
 Set `DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED=true` in the application container. This creates an inferred `gcp.pubsub.receive` span for the push request.
 
+Google Cloud Pub/Sub push subscription tracing requires `ddtrace` version 4.8.0 or later.
+
 {{% gcr-pubsub-push-tracing %}}
 
 ## Troubleshooting
