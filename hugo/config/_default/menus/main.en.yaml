@@ -3317,7 +3317,7 @@ menu:
       parent: containers
       identifier: containers_autoscaling
       weight: 2
-    - name: Manifest reference
+    - name: Manifest Reference
       url: containers/autoscaling/manifest
       parent: containers_autoscaling
       identifier: containers_autoscaling_manifest

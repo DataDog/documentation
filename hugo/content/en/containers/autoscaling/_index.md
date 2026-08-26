@@ -263,7 +263,7 @@ datadog:
     - Requests and limits can be changed but not removed entirely.
     - Windows pods and pods under static CPU or memory manager policies are excluded.
 - **Burstable mode still requires a rollout.** Burstable mode removes the CPU limit, and in-place resize can change a limit but not remove one. See the [DatadogPodAutoscaler manifest reference][15].
-- If a resize is infeasible or stays pending, the pod is evicted through the Kubernetes Eviction API, which respects PodDisruptionBudgets.
+- If a resize cannot be completed or remains pending, the pod is evicted through the Kubernetes Eviction API, which respects PodDisruptionBudgets.
 
 ## Usage
 

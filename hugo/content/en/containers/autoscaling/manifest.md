@@ -147,7 +147,7 @@ If `constraints.containers` is omitted entirely, resource scaling is enabled for
 
 When a DPA combines horizontal scaling (`objectives`) with vertical scaling (`update.strategy: Auto`), the default behavior is to produce vertical recommendations for **memory only**. CPU requests and limits are left untouched, and the `VerticalAbleToRecommend` condition may show as `Unknown`.
 
-If you have seen a DPA right-size memory while leaving CPU unchanged, this is the reason. It is not related to Quality of Service (QoS) class preservation.
+If a DPA right-sizes memory while leaving CPU unchanged, this is the reason. It is not related to Quality of Service (QoS) class preservation.
 
 Use `controlledResources` to declare which resources receive vertical recommendations:
 
@@ -199,7 +199,7 @@ This feature requires Datadog Cluster Agent 7.78.0+. On older versions, the `con
 
 ## Remove CPU limits with burstable mode
 
-CPU limit recommendations are derived from sustained usage percentiles over a multi-day window. A short warm-up spike (a JVM starting up, for example) is statistically invisible in that window, so the recommended CPU limit can land too low and the application is throttled at the wrong moment. Memory is not affected in the same way, because peak memory usage gives a reliable ceiling.
+CPU limit recommendations are derived from sustained usage percentiles over a multi-day window. A short warm-up spike (for example, during JVM startup) has little effect on those percentiles, so the recommended CPU limit can be too low and cause the application to be throttled at the wrong moment. Memory is not affected in the same way because peak memory usage provides a reliable ceiling.
 
 Burstable mode **removes CPU limits entirely** while still applying CPU _request_ recommendations:
 
@@ -223,7 +223,7 @@ spec:
     burstable: true
 ```
 
-If `options.burstable` is left unset, the Cluster Agent's cluster-wide default applies. Set it explicitly to `false` to opt a single workload out of that default.
+If `options.burstable` is left unset, the Cluster Agent's cluster-wide default applies. Set it explicitly to `false` to opt a single workload out of the default behavior.
 
 Effect on the pod:
 
@@ -242,7 +242,7 @@ Before enabling it:
 
 ## Tune the OOMKill memory bump
 
-After an OOMKill, the memory limit is raised by **20%** relative to the limit in force at the time. The bump is applied immediately and re-applied on each subsequent OOMKill until the workload stabilizes. This is a self-correcting ratchet rather than a one-time adjustment.
+After an OOMKill, the memory limit is raised by 20% relative to the limit in force at the time. The increase is applied immediately and repeated after each subsequent OOMKill until the workload stabilizes.
 
 To change the ratio:
 
@@ -293,7 +293,7 @@ Choosing a combination:
 
 ## Set per-container bounds
 
-`minAllowed` and `maxAllowed` are guard-rails on the requests the recommender may produce. They are recommended for latency-sensitive workloads, and advisable whenever you change the OOM bump ratio (see [Tune the OOMKill memory bump](#tune-the-oomkill-memory-bump)), so memory cannot drift below a safe floor between recommendation cycles.
+`minAllowed` and `maxAllowed` constrain the resource requests that the recommender can produce. They are recommended for latency-sensitive workloads. They are also recommended when you change the OOM bump ratio (see [Tune the OOMKill memory bump](#tune-the-oomkill-memory-bump)) to prevent memory requests from falling below a safe minimum between recommendation cycles.
 
 ```yaml
 spec:
@@ -315,7 +315,7 @@ spec:
 
 ## Exclude a container
 
-There are two distinct things you may want to exclude a container from.
+You can exclude a container from vertical recommendations, the horizontal signal, or both.
 
 ### Exclude a container from vertical recommendations
 
@@ -329,7 +329,7 @@ spec:
         enabled: false          # resources for this container are never modified
 ```
 
-Equivalent, if you prefer to be explicit:
+You can also specify the equivalent configuration explicitly:
 
 ```yaml
       - name: istio-proxy
@@ -379,7 +379,7 @@ In the example above, `istio-proxy` is governed solely by `enabled: false` and d
           utilization: 65
 ```
 
-compared with:
+The following pod-level configuration can produce misleading results when sidecars are present:
 
 ```yaml
   objectives:
@@ -393,17 +393,18 @@ compared with:
           utilization: 65
 ```
 
-**Rule of thumb:** if the pod has any sidecar, use `ContainerResource` scoped to the main container. Reserve `PodResource` for genuinely single-container pods.
+**Recommendation**: If the pod has any sidecar, use `ContainerResource` scoped to the main container. Reserve `PodResource` for single-container pods.
 
 ## Configure sidecars
 
 ### Ordinary sidecars (`spec.containers`)
 
-Nothing special is required. They appear as containers and can be bounded, excluded, or targeted like any other; see [Exclude a container](#exclude-a-container).
+Nothing special is required. They can be bounded, excluded, or targeted like any other container; see [Exclude a container](#exclude-a-container).
+
 
 ### Native sidecars (`spec.initContainers` with `restartPolicy: Always`)
 
-Kubernetes 1.29+ allows a long-running sidecar to be declared in `initContainers` with `restartPolicy: Always`, the [native sidecar][4] pattern. It runs for the pod's whole lifetime but lives in a different field of the pod spec:
+Kubernetes 1.29+ supports long-running sidecars declared in `initContainers` with `restartPolicy: Always`, known as the [native sidecar][4] pattern. A native sidecar runs for the pod's entire lifetime.
 
 ```yaml
 apiVersion: apps/v1
