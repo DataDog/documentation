@@ -1640,6 +1640,20 @@
     "request_description": "",
     "request_schema_description": "Wrapper for a DDSQL tabular query fetch request."
   },
+  "CreateDataDeletionRequest": {
+    "description": "Creates a data deletion request by providing a query and a timeframe targeting the proper data.",
+    "summary": "Creates a data deletion request",
+    "request_description": "",
+    "request_schema_description": "Object needed to create a data deletion request."
+  },
+  "GetDataDeletionRequests": {
+    "description": "Gets a list of data deletion requests based on several filter parameters.",
+    "summary": "Gets a list of data deletion requests"
+  },
+  "CancelDataDeletionRequest": {
+    "description": "Cancels a data deletion request by providing its ID.",
+    "summary": "Cancels a data deletion request"
+  },
   "ListDeploymentGates": {
     "description": "Returns a paginated list of all deployment gates for the organization.\nUse `page[cursor]` and `page[size]` query parameters to paginate through results.",
     "summary": "Get all deployment gates"
@@ -2103,6 +2117,34 @@
     "summary": "Update notification settings",
     "request_description": "",
     "request_schema_description": "A request to update the organization-wide governance notification settings."
+  },
+  "ListTagRules": {
+    "description": "Retrieve all tag rules for the organization. Optionally include disabled or deleted\nrules, filter by telemetry source, and include each rule's current compliance score\nvia the `include=score` query parameter.",
+    "summary": "List tag rules"
+  },
+  "CreateTagRule": {
+    "description": "Create a new tag rule for the organization. The caller's organization is derived from\nthe authenticated user; cross-organization creation is not supported. Fields such as\n`rule_id`, `version`, and the timestamp/audit fields are assigned by the server.",
+    "summary": "Create a tag rule",
+    "request_description": "",
+    "request_schema_description": "Payload for creating a new tag rule."
+  },
+  "DeleteTagRule": {
+    "description": "Delete a tag rule. By default the rule is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe rule permanently.",
+    "summary": "Delete a tag rule"
+  },
+  "GetTagRule": {
+    "description": "Retrieve a single tag rule by ID. Optionally include the rule's current compliance\nscore via the `include=score` query parameter. Rules belonging to other organizations\ncannot be retrieved.",
+    "summary": "Get a tag rule"
+  },
+  "UpdateTagRule": {
+    "description": "Update one or more attributes of an existing tag rule. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The rule's\n`source` cannot be changed after creation.",
+    "summary": "Update a tag rule",
+    "request_description": "",
+    "request_schema_description": "Payload for updating an existing tag rule. Only the supplied fields are modified."
+  },
+  "GetTagRuleScore": {
+    "description": "Retrieve the compliance score for a single tag rule. The score is computed over the\nrequested time window (or a source-appropriate default) and represents the percentage of\ntelemetry within that window that conforms to the rule. A `null` score indicates that\nno relevant telemetry was found.",
+    "summary": "Get a tag rule compliance score"
   },
   "GetHamrOrgConnection": {
     "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",
@@ -2595,6 +2637,54 @@
     "summary": "Update an incident timestamp override",
     "request_description": "Timestamp override patch payload.",
     "request_schema_description": "Request payload for patching a timestamp override."
+  },
+  "ListElasticCloudIntegrationAccounts": {
+    "description": "List Elastic Cloud integration accounts.",
+    "summary": "List Elastic Cloud integration accounts"
+  },
+  "CreateElasticCloudIntegrationAccount": {
+    "description": "Create an Elastic Cloud integration account.",
+    "summary": "Create an Elastic Cloud integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an Elastic Cloud integration account."
+  },
+  "DeleteElasticCloudIntegrationAccount": {
+    "description": "Delete an Elastic Cloud integration account.",
+    "summary": "Delete an Elastic Cloud integration account"
+  },
+  "GetElasticCloudIntegrationAccount": {
+    "description": "Get an Elastic Cloud integration account.",
+    "summary": "Get an Elastic Cloud integration account"
+  },
+  "UpdateElasticCloudIntegrationAccount": {
+    "description": "Update an Elastic Cloud integration account. Only the fields provided are changed.",
+    "summary": "Update an Elastic Cloud integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an Elastic Cloud integration account."
+  },
+  "ListTwilioIntegrationAccounts": {
+    "description": "List Twilio integration accounts.",
+    "summary": "List Twilio integration accounts"
+  },
+  "CreateTwilioIntegrationAccount": {
+    "description": "Create a Twilio integration account.",
+    "summary": "Create a Twilio integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Twilio integration account."
+  },
+  "DeleteTwilioIntegrationAccount": {
+    "description": "Delete a Twilio integration account.",
+    "summary": "Delete a Twilio integration account"
+  },
+  "GetTwilioIntegrationAccount": {
+    "description": "Get a Twilio integration account.",
+    "summary": "Get a Twilio integration account"
+  },
+  "UpdateTwilioIntegrationAccount": {
+    "description": "Update a Twilio integration account. Only the fields provided are changed.",
+    "summary": "Update a Twilio integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Twilio integration account."
   },
   "ListAWSAccounts": {
     "description": "Get a list of AWS Account Integration Configs.",
@@ -4549,6 +4639,12 @@
     "request_description": "",
     "request_schema_description": "Request body for querying accounts with optional filtering, column selection, and sorting."
   },
+  "QueryProductAnalyticsList": {
+    "description": "List the individual event records matching an analytics query.\nUse `columns` to choose the attributes returned on each row, `sort` to order the rows,\nand `limit` to cap how many are returned.",
+    "summary": "List analytics events",
+    "request_description": "",
+    "request_schema_description": "Request for listing the individual event records matching an analytics query."
+  },
   "QueryProductAnalyticsScalar": {
     "description": "Compute scalar analytics results for Product Analytics data.\nReturns aggregated values (counts, averages, percentiles) optionally grouped by facets.",
     "summary": "Compute scalar analytics",
@@ -4560,6 +4656,60 @@
     "summary": "Compute timeseries analytics",
     "request_description": "",
     "request_schema_description": "Request for computing analytics results (scalar or timeseries)."
+  },
+  "QueryProductAnalyticsJourneyFunnel": {
+    "description": "Compute a funnel over an ordered sequence of Product Analytics events.\nReturns the per-step conversion counts, conversion rates, and elapsed times,\noptionally segmented by group-by facets.",
+    "summary": "Compute journey funnel analysis",
+    "request_description": "",
+    "request_schema_description": "Request body for a journey funnel analysis."
+  },
+  "QueryProductAnalyticsJourneyList": {
+    "description": "Return the individual sessions that reached, or dropped off at, a given step of the journey.\nEach row contains the identity join key, the event timestamp, and the columns requested\nin `entity_columns`.",
+    "summary": "List journey entities",
+    "request_description": "",
+    "request_schema_description": "Request body for a journey list query."
+  },
+  "QueryProductAnalyticsJourneyScalar": {
+    "description": "Compute scalar results for a journey query, such as the conversion count,\nthe conversion rate, or the time to convert, optionally segmented by group-by facets.",
+    "summary": "Compute journey scalar analytics",
+    "request_description": "",
+    "request_schema_description": "Request body for a journey scalar query."
+  },
+  "QueryProductAnalyticsJourneyTimeseries": {
+    "description": "Compute timeseries results for a journey query.\nReturns one series per group-by combination, bucketed by the requested interval.",
+    "summary": "Compute journey timeseries analytics",
+    "request_description": "",
+    "request_schema_description": "Request body for a journey timeseries query."
+  },
+  "QueryProductAnalyticsRetentionGrid": {
+    "description": "Compute a retention grid, showing how much of each cohort came back over each subsequent period.\nRows are cohorts, columns are return periods, and each cell holds the count and rate of entities that returned.",
+    "summary": "Compute a retention grid",
+    "request_description": "The retention grid query.",
+    "request_schema_description": "Request body for a retention grid query."
+  },
+  "QueryProductAnalyticsRetentionList": {
+    "description": "List the individual users or accounts counted in one cell of the retention grid.\nSet `computation_scope` to the cohort and return period you want to examine.",
+    "summary": "List the entities behind a retention cell",
+    "request_description": "The retention list query.",
+    "request_schema_description": "Request body listing the individual entities behind one cell of the retention grid."
+  },
+  "QueryProductAnalyticsRetentionScalar": {
+    "description": "Compute retention as a single value per group, suitable for a query value or top list widget.",
+    "summary": "Compute retention scalar values",
+    "request_description": "The retention scalar query.",
+    "request_schema_description": "Request body for a retention scalar or retention timeseries query."
+  },
+  "QueryProductAnalyticsRetentionTimeseries": {
+    "description": "Compute retention as a series of values over time, using the same query definition as the\nretention grid.",
+    "summary": "Compute retention timeseries",
+    "request_description": "The retention timeseries query.",
+    "request_schema_description": "Request body for a retention scalar or retention timeseries query."
+  },
+  "QueryProductAnalyticsSankey": {
+    "description": "Compute a Sankey diagram of how sessions flow between the values of two facets,\nshowing where users continue and where they drop off at each step.",
+    "summary": "Compute a Sankey diagram",
+    "request_description": "The Sankey diagram query.",
+    "request_schema_description": "Request body for a Sankey diagram query."
   },
   "QueryEventFilteredUsers": {
     "description": "Query users filtered by both user properties and event platform data",
@@ -4614,7 +4764,7 @@
     "request_schema_description": "A wrapper request around one scalar query to be executed."
   },
   "QueryTimeseriesData": {
-    "description": "Query timeseries data across various data sources and\nprocess the data by applying formulas and functions.",
+    "description": "Query timeseries data across various data sources and\nprocess the data by applying formulas and functions. Datadog recommends\nusing this endpoint over the v1 `/api/v1/query` endpoint for querying\ntimeseries data.",
     "summary": "Query timeseries data across multiple products",
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
@@ -4985,6 +5135,30 @@
     "request_description": "The definition of the new RUM retention filter.",
     "request_schema_description": "The RUM retention filter body to create."
   },
+  "ListExclusionFilters": {
+    "description": "Get the list of exclusion filters for a RUM application.\nThe built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`) is always returned first.",
+    "summary": "Get all RUM exclusion filters"
+  },
+  "CreateExclusionFilter": {
+    "description": "Create an exclusion filter for a RUM application.\nReturns the created exclusion filter when the request is successful.",
+    "summary": "Create a RUM exclusion filter",
+    "request_description": "The definition of the new RUM exclusion filter.",
+    "request_schema_description": "The exclusion filter body to create."
+  },
+  "DeleteExclusionFilter": {
+    "description": "Delete an exclusion filter for a RUM application.\nThe built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`) cannot be deleted;\nattempting to do so returns a `405 Method Not Allowed` response.",
+    "summary": "Delete a RUM exclusion filter"
+  },
+  "GetExclusionFilter": {
+    "description": "Get a single exclusion filter for a RUM application.",
+    "summary": "Get a RUM exclusion filter"
+  },
+  "UpdateExclusionFilter": {
+    "description": "Update an exclusion filter for a RUM application.\nFor the built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`), only `enabled` can be\nupdated; `name`, `event_type`, and `query` must be omitted.\nReturns the updated exclusion filter when the request is successful.",
+    "summary": "Update a RUM exclusion filter",
+    "request_description": "New definition of the RUM exclusion filter.",
+    "request_schema_description": "The exclusion filter body to update."
+  },
   "ListPermanentRetentionFilters": {
     "description": "Get the list of permanent RUM retention filters for a RUM application.\nPermanent retention filters are predefined filters that cannot be created or deleted.\nFor each filter, the `editability` block indicates which cross-product fields can be updated.",
     "summary": "Get all permanent RUM retention filters"
@@ -5080,6 +5254,34 @@
     "summary": "Create or update a RUM retention quota config",
     "request_description": "The definition of the RUM retention quota configuration to create or update.",
     "request_schema_description": "The body of a request to create or update a RUM retention quota configuration."
+  },
+  "ListTeamsOwnershipMappings": {
+    "description": "Get the list of teams ownership mappings for your organization, optionally filtered.",
+    "summary": "List teams ownership mappings"
+  },
+  "CreateTeamsOwnershipMapping": {
+    "description": "Create a teams ownership mapping for your organization.\nReturns the teams ownership mapping object from the request body when the request is successful.",
+    "summary": "Create a teams ownership mapping",
+    "request_description": "The definition of the teams ownership mapping to create.",
+    "request_schema_description": "The request body for creating a teams ownership mapping."
+  },
+  "CreateTeamsOwnershipMappingsBatch": {
+    "description": "Add and remove teams ownership mappings for your organization in a single atomic request, following\nthe JSON:API [atomic operations extension](https://jsonapi.org/ext/atomic/).\nOperations are applied together: if any operation is invalid, none of the operations are applied.\nAdd operations are processed before remove operations, so results may not appear in the same\norder as the request.",
+    "summary": "Bulk create and remove teams ownership mappings",
+    "request_description": "The list of add and remove operations to apply atomically.",
+    "request_schema_description": "The request body for bulk-creating and bulk-removing teams ownership mappings."
+  },
+  "DeleteTeamsOwnershipMapping": {
+    "description": "Delete a specific teams ownership mapping from your organization.",
+    "summary": "Delete a teams ownership mapping"
+  },
+  "GetTeamsOwnershipMapping": {
+    "description": "Get a specific teams ownership mapping from your organization.",
+    "summary": "Get a teams ownership mapping"
+  },
+  "ListTeamsOwnershipRules": {
+    "description": "Get the list of teams ownership rules for your organization, optionally filtered.\nRules group the underlying mappings by `view_name`, `application_id`, `service`, and `match_type`,\ncollapsing every team that owns the same view into a single entry.",
+    "summary": "List teams ownership rules"
   },
   "ListRUMEvents": {
     "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
@@ -6902,34 +7104,6 @@
     "summary": "Patch a global variable",
     "request_description": "JSON Patch document with operations to apply.",
     "request_schema_description": "JSON Patch request for global variable."
-  },
-  "ListTagPolicies": {
-    "description": "Retrieve all tag policies for the organization. Optionally include disabled or deleted\npolicies, filter by telemetry source, and include each policy's current compliance score\nvia the `include=score` query parameter.",
-    "summary": "List tag policies"
-  },
-  "CreateTagPolicy": {
-    "description": "Create a new tag policy for the organization. The caller's organization is derived from\nthe authenticated user; cross-organization creation is not supported. Fields such as\n`policy_id`, `version`, and the timestamp/audit fields are assigned by the server.",
-    "summary": "Create a tag policy",
-    "request_description": "",
-    "request_schema_description": "Payload for creating a new tag policy."
-  },
-  "DeleteTagPolicy": {
-    "description": "Delete a tag policy. By default the policy is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe policy permanently.",
-    "summary": "Delete a tag policy"
-  },
-  "GetTagPolicy": {
-    "description": "Retrieve a single tag policy by ID. Optionally include the policy's current compliance\nscore via the `include=score` query parameter. Policies belonging to other organizations\ncannot be retrieved.",
-    "summary": "Get a tag policy"
-  },
-  "UpdateTagPolicy": {
-    "description": "Update one or more attributes of an existing tag policy. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The policy's\n`source` cannot be changed after creation.",
-    "summary": "Update a tag policy",
-    "request_description": "",
-    "request_schema_description": "Payload for updating an existing tag policy. Only the supplied fields are modified."
-  },
-  "GetTagPolicyScore": {
-    "description": "Retrieve the compliance score for a single tag policy. The score is computed over the\nrequested time window (or a source-appropriate default) and represents the percentage of\ntelemetry within that window that conforms to the policy. A `null` score indicates that\nno relevant telemetry was found.",
-    "summary": "Get a tag policy compliance score"
   },
   "ListTagPipelinesRulesets": {
     "description": "List all tag pipeline rulesets - Retrieve a list of all tag pipeline rulesets for the organization",
