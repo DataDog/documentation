@@ -89,17 +89,21 @@ To assist in prioritizing remediation, Datadog modifies the base CVSS score into
 | Exploit availability              | Availability of public exploits for the vulnerability.               | Decreased if no exploit is available.                  |
 | Exploitation probability (EPSS)   | Likelihood of real-world exploitation based on EPSS data.            | Decreased when the probability of exploitation is low. |
 
-#### View runtime vulnerabilities
+#### View vulnerability details
 
-Runtime SCA identifies vulnerable library versions that are loaded by running services. Click on a vulnerability in Vulnerabilities Explorer to open its side panel.
+Click on a vulnerability in Vulnerabilities Explorer to open its side panel.
 
-##### View impacted services
+##### Repositories
 
-The {{< ui >}}Impacted Services{{< /ui >}} tab lists the services where Datadog detected the affected library version, the number of impacted hosts, and when Datadog last detected it.
+The {{< ui >}}Repositories{{< /ui >}} section lists the files and repositories where Static SCA detected the library vulnerability. For each finding, it displays associated services and teams, the finding status, and triage actions. Expand a row to view its severity breakdown and, when available, reachable locations.
 
-##### View impacted infrastructure
+##### Impacted services
 
-To view the affected infrastructure, select the host count in {{< ui >}}Impacted Services{{< /ui >}}, or select the {{< ui >}}Impacted Infrastructure{{< /ui >}} tab. This tab lists the hosts where the affected library version runs, along with the associated services, environments, and last deployment time.
+The {{< ui >}}Impacted services{{< /ui >}} section lists the services where Runtime SCA detected the library vulnerability. For each service, it displays environments, dependency details, reachability, associated teams, finding status, and when Datadog last detected it.
+
+##### Impacted infrastructure
+
+When Runtime SCA detects impacted services, the {{< ui >}}Impacted Infrastructure{{< /ui >}} section lists the hosts where the affected library version runs, along with the associated services, environments, and last deployment time. Select a host count in {{< ui >}}Impacted services{{< /ui >}} to filter this section to that service.
 
 Select {{< ui >}}View Host{{< /ui >}} to investigate a host, or select {{< ui >}}View Vulnerabilities in Cloud Security{{< /ui >}} to review the host's open vulnerabilities.
 
