@@ -33838,6 +33838,10 @@ components:
     DetachCaseRequestData:
       description: Data for detaching security findings from their case.
       properties:
+        id:
+          description: Unique identifier of the case.
+          example: "c1234567-89ab-cdef-0123-456789abcdef"
+          type: string
         relationships:
           $ref: "#/components/schemas/DetachCaseRequestDataRelationships"
         type:
