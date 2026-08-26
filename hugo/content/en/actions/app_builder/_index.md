@@ -7,7 +7,6 @@ aliases:
     - /developers/ui_extensions/
     - /developers/faq/ui_extensions
     - /service_management/app_builder/
-    - /internal_developer_portal/plugins/
 further_reading:
 - link: "/actions/datadog_apps/"
   tag: "Documentation"
