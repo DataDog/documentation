@@ -2255,6 +2255,11 @@ menu:
       parent: internal_developer_portal
       identifier: external_provider_status
       weight: 7
+    - name: Plugins
+      url: internal_developer_portal/plugins
+      parent: internal_developer_portal
+      identifier: idp_plugins
+      weight: 8
     - name: Les intégrations
       url: internal_developer_portal/integrations
       parent: internal_developer_portal
