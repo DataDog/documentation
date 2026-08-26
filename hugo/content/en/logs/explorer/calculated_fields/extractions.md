@@ -117,7 +117,7 @@ Extracted values are always strings. Unlike a Grok rule such as `%{integer:statu
 | Named capture groups | `(?<status>\d+)` | Captures the match under a name. Required for extraction |
 | Quantifiers | `a*`, `a+`, `a?`, `a{2,4}` | Repetition: zero or more, one or more, optional, or a bounded range. Matches as much as possible |
 | Lazy quantifiers | `.*?end` | The same repetition, but matching as little as possible |
-| Anchors | `^ERROR`, `timeout$` | The start or the end of the value, not each line |
+| Anchors | `^ERROR`, `timeout$` | The start or the end of the value |
 | Word boundaries | `\berror\b` | A position between a word and a non-word character, so `error` matches but `errors` does not |
 | Character escapes | `\n`, `\r`, `\t` | Newline, carriage return, tab |
 | Metacharacter escapes | `\.`, `\*`, `\(` | The character itself, rather than its special meaning |
