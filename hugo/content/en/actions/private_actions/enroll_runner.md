@@ -41,7 +41,7 @@ You enroll a runner in one of two ways. The credential you enroll with sets the 
 
 A runner enrolled with an **API key that has the Private Action Runner capability** is **ownerless**: it has no individual owner. Ownerless runners are authorized with [Execution Policies][1], which control access by Agent tags across your fleet. Ownerless enrollment applies to runners in the Datadog Agent.
 
-The **Private Action Runner** capability is shown with a badge, similar to Remote Configuration. Managing it requires the appropriate key-management and runner permissions.
+The **Private Action Runner** capability is shown with a badge, similar to Remote Configuration. Managing it requires the API key permissions **API Keys Read** (`api_keys_read`) and **API Keys Write** (`api_keys_write`). For more information, see [API and application key permissions][9].
 
 To enroll an ownerless runner:
 
@@ -136,3 +136,4 @@ To rotate the credentials of a private runner without redeploying, run `/opt/dat
 [6]: /account_management/rbac/
 [7]: /account_management/rbac/permissions/#app-builder--workflow-automation
 [8]: /actions/private_actions/reference/
+[9]: /account_management/rbac/permissions/#api-and-application-keys
