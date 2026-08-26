@@ -66,6 +66,7 @@ The following table presents the list of collected features and the minimal Agen
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
+| Azure Persistent Volume Allocation | 7.46.0 | 1.11.0 |
 
 1. Configure the Azure Cost Management integration on the [Cloud Cost Setup page][2].
 1. Install the [Datadog Agent][3] in a Kubernetes environment and ensure that you enable the [Orchestrator Explorer][4] in your Agent configuration.
@@ -86,6 +87,7 @@ The following table presents the list of collected features and the minimal Agen
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
+| Google Cloud Persistent Volume Allocation | 7.46.0 | 1.11.0 |
 
 1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][2].
 1. Install the [Datadog Agent][3] in a Kubernetes environment and ensure that you enable the [Orchestrator Explorer][4] in your Agent configuration.
@@ -169,6 +171,12 @@ Next, Datadog looks at all of the pods running on that node for the day. The cos
 
 All other costs are given the same value and tags as the source metric `azure.cost.amortized`.
 
+### Persistent volume storage
+
+For Kubernetes persistent volume storage allocation, Persistent Volumes (PV), Persistent Volume Claims (PVC), nodes, and pods are joined with their associated Azure Managed Disk costs. All associated PV, PVC, node, and pod tags are added to the disk cost line items.
+
+Next, Datadog examines all pods that claimed the volume that day. The cost of the volume is allocated to each pod based on the resources it used and the length of time it ran. These resources include provisioned storage capacity, IOPS, and throughput. The allocated cost is enriched with all of the pod's tags.
+
 {% /if %}
 
 <!-- Google -->
@@ -187,6 +195,12 @@ Next, Datadog looks at all of the pods running on that node for the day. The cos
 **Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][13] and [pods][14].
 
 All other costs are given the same value and tags as the source metric `gcp.cost.amortized`.
+
+### Persistent volume storage
+
+For Kubernetes persistent volume storage allocation, Persistent Volumes (PV), Persistent Volume Claims (PVC), nodes, and pods are joined with their associated Google Cloud persistent disk costs. All associated PV, PVC, node, and pod tags are added to the disk cost line items.
+
+Next, Datadog examines all pods that claimed the volume that day. The cost of the volume is allocated to each pod based on the resources it used and the length of time it ran. These resources include provisioned storage capacity, IOPS, and throughput. The allocated cost is enriched with all of the pod's tags.
 
 ### Agentless Kubernetes costs
 
@@ -260,6 +274,18 @@ Costs are allocated into the following spend types:
 | Workload idle | Cost of resources (such as memory, CPU, and GPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
 | Cluster idle | Cost of resources (such as memory, CPU, and GPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
 
+### Persistent volume
+
+The cost of an Azure Managed Disk can include storage, provisioned IOPS, and provisioned throughput. Each component is allocated according to a pod's usage when the volume is mounted.
+
+| Spend type | Description    |
+| -----------| -----------    |
+| Usage | Cost of provisioned storage, IOPS, or throughput used by workloads. Storage usage is based on the maximum storage used that day. IOPS and throughput usage are based on the average operations and bytes transferred that day. |
+| Workload idle | Cost of provisioned storage, IOPS, or throughput reserved for a workload but not used. This is the difference between the provisioned capacity allocated to the workload and its usage. |
+| Cluster idle | Cost of provisioned storage, IOPS, or throughput not allocated to any pod that day. |
+
+**Note**: Persistent volume allocation is only supported in Kubernetes clusters, and is only available for pods that are part of a Kubernetes StatefulSet.
+
 {% /if %}
 
 <!-- Google -->
@@ -277,6 +303,18 @@ Costs are allocated into the following spend types:
 | Workload idle | Cost of resources (such as memory, CPU, and GPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
 | Cluster idle | Cost of resources (such as memory, CPU, and GPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
 | Not monitored | Cost of resources where the spend type is unknown. To resolve this, install the Datadog Agent on these clusters or nodes. |
+
+### Persistent volume
+
+The cost of a Google Cloud persistent disk can include storage, provisioned IOPS, and provisioned throughput. Each component is allocated according to a pod's usage when the volume is mounted.
+
+| Spend type | Description    |
+| -----------| -----------    |
+| Usage | Cost of provisioned storage, IOPS, or throughput used by workloads. Storage usage is based on the maximum storage used that day. IOPS and throughput usage are based on the average operations and bytes transferred that day. |
+| Workload idle | Cost of provisioned storage, IOPS, or throughput reserved for a workload but not used. This is the difference between the provisioned capacity allocated to the workload and its usage. |
+| Cluster idle | Cost of provisioned storage, IOPS, or throughput not allocated to any pod that day. |
+
+**Note**: Persistent volume allocation is only supported in Kubernetes clusters, and is only available for pods that are part of a Kubernetes StatefulSet.
 
 {% /if %}
 
@@ -347,7 +385,7 @@ Depending on the cloud provider, certain resources may or may not be available f
 |---:|---:|---|---|
 | CPU | {% x/ %} | {% x/ %} | {% x/ %} |
 | Memory | {% x/ %} | {% x/ %} | {% x/ %} |
-| {% tooltip contents="Storage resources within a cluster, provisioned by administrators or dynamically, that persist data independently of pod life cycles." %} Persistent volumes {% /tooltip %} | {% x/ %} |  |  |
+| {% tooltip contents="Storage resources within a cluster, provisioned by administrators or dynamically, that persist data independently of pod life cycles." %} Persistent volumes {% /tooltip %} | {% x/ %} | {% x/ %} | {% x/ %} |
 | {% tooltip contents="Cost of associated fees charged by the cloud provider for managing the cluster, such as fees for managed Kubernetes services or other container orchestration options." %} Managed service fees {% /tooltip %} | {% x/ %} | {% x/ %} | {% x/ %} |
 | ECS costs | {% x/ %} | N/A | N/A |
 | Data transfer costs | {% x/ %} | Limited* | Limited* |
@@ -374,7 +412,7 @@ When the prerequisites are met, the following cost metrics automatically appear.
 
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
-| `azure.cost.amortized.shared.resources.allocated` | Azure VM costs allocated by the CPU & memory used by a pod or container task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated Azure costs. <br> *Based on `azure.cost.amortized`* |
+| `azure.cost.amortized.shared.resources.allocated` | Azure VM costs allocated by the CPU & memory used by a pod or container task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated Azure Managed Disk costs. <br> *Based on `azure.cost.amortized`* |
 
 {% /if %}
 <!-- Google -->
@@ -382,7 +420,7 @@ When the prerequisites are met, the following cost metrics automatically appear.
 
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
-| `gcp.cost.amortized.shared.resources.allocated` | Google Compute Engine costs allocated by the CPU & memory used by a pod, using 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. This allocation method is used when the bill does not already provide a specific split between CPU and memory usage. <br> *Based on `gcp.cost.amortized`* |
+| `gcp.cost.amortized.shared.resources.allocated` | Google Compute Engine costs allocated by the CPU & memory used by a pod, using 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. This allocation method is used when the bill does not already provide a specific split between CPU and memory usage. Also includes allocated Google Cloud persistent disk costs. <br> *Based on `gcp.cost.amortized`* |
 
 {% /if %}
 
@@ -476,6 +514,18 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 | `allocated_resource:data_transfer` | The tracking and allocation of costs associated with data transfer activities used by Azure services or workloads. |
 | `allocated_resource:local_storage`         | The tracking and allocation of costs at a host level associated with local storage resources used by Azure services or workloads.                             |
 
+#### Persistent volume
+
+In addition to Kubernetes pod and node tags, the following out-of-the-box tags are applied to persistent volume cost metrics:
+
+| Out-of-the-box tag | Description |
+| --- | --- |
+| `persistent_volume_reclaim_policy` | The Kubernetes reclaim policy on the Persistent Volume. |
+| `storage_class_name` | The Kubernetes Storage Class used to instantiate the Persistent Volume. |
+| `volume_mode` | The Volume Mode of the Persistent Volume. |
+| `azure_disk_storage_account_type` | The Azure storage account type for the managed disk. |
+| `allocated_resource:persistent_volume` | Identifies costs allocated from an Azure Managed Disk to a Persistent Volume. |
+
 {% /if %}
 <!-- Google -->
 {% if equals($platform, "google") %}
@@ -492,6 +542,18 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 | `allocated_resource:data_transfer` | The tracking and allocation of costs associated with data transfer activities used by Google Cloud services or workloads. |
 | `allocated_resource:gpu` | The tracking and allocation of costs at a host level associated with GPU resources used by Google Cloud services or workloads. |
 | `allocated_resource:local_storage` | The tracking and allocation of costs at a host level associated with local storage resources used by Google Cloud services or workloads. |
+
+#### Persistent volume
+
+In addition to Kubernetes pod and node tags, the following out-of-the-box tags are applied to persistent volume cost metrics:
+
+| Out-of-the-box tag | Description |
+| --- | --- |
+| `persistent_volume_reclaim_policy` | The Kubernetes reclaim policy on the Persistent Volume. |
+| `storage_class_name` | The Kubernetes Storage Class used to instantiate the Persistent Volume. |
+| `volume_mode` | The Volume Mode of the Persistent Volume. |
+| `gcp_disk_type` | The Google Cloud disk type for the persistent disk. |
+| `allocated_resource:persistent_volume` | Identifies costs allocated from a Google Cloud persistent disk to a Persistent Volume. |
 
 {% /if %}
 
