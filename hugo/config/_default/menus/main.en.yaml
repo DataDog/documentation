@@ -10530,7 +10530,7 @@ menu:
       url: account_management/plan_and_usage/bill_overview/
       parent: account_management_plan_and_usage
       weight: 1400
-    - name: Buying Through a Partner
+    - name: Cost Visibility Through a Partner
       identifier: account_management_partner_purchased_cost_visibility
       url: account_management/plan_and_usage/bill_overview/partner_purchased_cost_visibility/
       parent: account_management_bill_overview
