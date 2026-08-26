@@ -40,6 +40,7 @@ To create an incident type:
     {{< nextlink href="/incident_response/incident_management/setup_and_configuration/responder_types" >}}Responder Types{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/setup_and_configuration/templates" >}}Templates{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/setup_and_configuration/automations" >}}Automations{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/setup_and_configuration/transition_forms" >}}Transition Forms{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/incidents/settings
