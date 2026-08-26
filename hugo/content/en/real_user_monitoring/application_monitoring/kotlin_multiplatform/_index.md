@@ -33,7 +33,7 @@ To get started with RUM for Kotlin Multiplatform, create an application and conf
   {{< nextlink href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes and widgets, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=kotlin_multiplatform">}}<u>Track UI Latency</u>: Monitor view timings and mobile vitals to understand your app's performance from a user's perspective.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/frustration_signals">}}<u>Frustration Signals</u>: Identify the highest points of user friction in your Kotlin Multiplatform application.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/setup/enrich_rum_data/track_navigation_across_web_views/?platform=kotlin_multiplatform">}}<u>Web View Tracking</u>: Monitor web views and eliminate blind spots in your mobile applications.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=kotlin_multiplatform">}}<u>Web View Tracking</u>: Monitor web views and eliminate blind spots in your mobile applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/integrated_libraries">}}
   <u>Integrated Libraries</u>: Import integrated libraries for your Kotlin Multiplatform applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/troubleshooting">}}

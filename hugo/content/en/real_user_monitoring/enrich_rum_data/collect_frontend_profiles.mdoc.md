@@ -1,5 +1,5 @@
 ---
-title: Collect frontend profiles
+title: Collect Frontend Profiles
 description: "Use profiling with RUM to understand application performance issues affecting user experience."
 content_filters:
   - trait_id: platform

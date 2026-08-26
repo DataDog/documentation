@@ -12,7 +12,7 @@ further_reading:
 RUM SDKs automatically track attributes such as user activity, views, errors, and network requests. Add custom context and attributes to your RUM events to filter and group information about observed user behavior with code-level information, such as backend services or error logs.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/real_user_monitoring/setup/enrich_rum_data/add_custom_context/" >}}
+    {{< nextlink href="/real_user_monitoring/enrich_rum_data/add_custom_context/" >}}
     <h3>Add custom context</h3>
     Add custom attributes to your RUM events.
     {{< /nextlink >}}

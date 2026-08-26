@@ -1,5 +1,5 @@
 ---
-title: Remotely configure RUM using LaunchDarkly
+title: Remotely Configure RUM Using LaunchDarkly
 
 beta: false
 private: true

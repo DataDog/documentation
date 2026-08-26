@@ -37,5 +37,5 @@ Follow the data from Synthetic tests directly through to the root causes by digg
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/correlate_with_other_telemetry/logs/
-[2]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/
+[2]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/
 [3]: /synthetics/guide/explore-rum-through-synthetics/

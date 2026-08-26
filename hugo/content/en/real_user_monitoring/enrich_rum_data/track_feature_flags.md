@@ -1,5 +1,5 @@
 ---
-title: Track feature flags
+title: Track Feature Flags
 description: "Track feature flag usage and performance impact in RUM to maintain release safety and optimize user experience with controlled rollouts."
 beta: true
 further_reading:
