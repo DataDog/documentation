@@ -5628,16 +5628,21 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_prompt_management
       weight: 307
+    - name: Prompt Experimentation
+      url: llm_observability/monitoring/prompt_experimentation
+      parent: llm_obs_monitoring
+      identifier: llm_obs_prompt_experimentation
+      weight: 308
     - name: Metrics
       url: llm_observability/monitoring/metrics
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_metrics
-      weight: 308
+      weight: 309
     - name: Automation Rules
       url: llm_observability/monitoring/automation_rules
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_automation_rules
-      weight: 309
+      weight: 310
     - name: Evaluations
       url: llm_observability/evaluations/
       parent: llm_obs
