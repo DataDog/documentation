@@ -170,7 +170,7 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Vertical scaling recommendations are applied to new pods through the [Admission Controller](/containers/cluster_agent/admission_controller/) mutating webhook. The Admission Controller is enabled by default. If you disable it, horizontal scaling continues to work but vertical scaling has no effect.
+**Note**: Vertical scaling recommendations are applied to new pods through the [Admission Controller][19] mutating webhook. The Admission Controller is enabled by default. If you disable it, horizontal scaling continues to work but vertical scaling has no effect.
 
 ### Idle cost and savings estimates
 
@@ -716,3 +716,4 @@ Datadog computes vertical scaling recommendations for CPU and memory by analyzin
 [16]: https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/
 [17]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
 [18]: https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/#limitations
+[19]: /containers/cluster_agent/admission_controller/
