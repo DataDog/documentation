@@ -35,8 +35,6 @@ Datadog SDK integrations support a *Propagation Mode*, which controls the amount
 
 **Supported databases**
 
-Each entry lists only supported propagation modes and their minimum tracer versions.
-
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
@@ -138,8 +136,6 @@ Datadog recommends setting the obfuscation mode to `obfuscate_and_normalize` for
 ```
 
 <div class="alert alert-warning">Changing the obfuscation mode may alter the normalized SQL text. If you have monitors based on SQL text in APM traces, you may need to update them.</div>
-
-The examples below use `DD_DBM_PROPAGATION_MODE=full`. Set `DD_DBM_PROPAGATION_MODE` to a mode supported for your language and database; the configuration is otherwise identical.
 
 {{< tabs >}}
 {{% tab "Go" %}}
