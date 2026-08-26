@@ -1,5 +1,5 @@
 ---
-title: Create custom metrics
+title: Create Custom Metrics
 description: "Create custom metrics from your RUM events."
 further_reading:
 - link: "/real_user_monitoring/"

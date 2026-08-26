@@ -1,5 +1,5 @@
 ---
-title: Track navigation across web views
+title: Track Navigation Across Web Views
 description: "Track user journeys across web and native components in hybrid mobile applications with RUM Web View Tracking."
 content_filters:
   - trait_id: platform

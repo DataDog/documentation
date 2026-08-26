@@ -204,4 +204,4 @@ Spans indexed by the intelligent retention filter are **excluded** from APM trac
 [17]: /dynamic_instrumentation/
 [18]: https://app.datadoghq.com/apm/traces/retention-filters
 [19]: /monitors/types/apm/?tab=traceanalytics
-[20]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/
+[20]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/

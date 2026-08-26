@@ -1,5 +1,5 @@
 ---
-title: Track user interactions
+title: Track User Interactions
 content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options

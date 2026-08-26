@@ -1,5 +1,5 @@
 ---
-title: Modify or drop RUM events client-side
+title: Modify or Drop RUM Events Client-Side
 description: "Modify attributes on RUM events or drop them entirely before they're sent to Datadog, using event mappers or the beforeSend API."
 content_filters:
   - trait_id: platform
