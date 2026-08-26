@@ -100,7 +100,7 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 
 [End User Device Monitoring][103]
 : `softinv-intake.`{{< region-param key="dd_site" code="true" >}}<br>
-`eudm-intake.`{{< region-param key="dd_site" code="true" >}
+`eudm-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [101]: /remote_configuration
 [102]: /database_monitoring/
