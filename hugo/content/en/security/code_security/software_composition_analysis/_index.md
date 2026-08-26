@@ -74,7 +74,7 @@ When Datadog identifies a public exploit for a vulnerability from any of these s
 
 ### Review and prioritize vulnerabilities
 
-The [Vulnerabilities Explorer][11] provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST, IAST, Secrets Scanning, and IaC). Each vulnerability can be detected in the latest scanned commit on a repository's default branch, affect a running service, or both. Select a vulnerability to open its side panel. Depending on the available evidence, the side panel can show repository findings, impacted services, or both.
+The [Vulnerabilities Explorer][11] provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST, IAST, Secrets Scanning, and IaC). All vulnerabilities in the explorer are either detected on the default branch at the last commit of a scanned repository, or are affecting a running service.
 
 #### Datadog severity score
 
@@ -89,7 +89,17 @@ To assist in prioritizing remediation, Datadog modifies the base CVSS score into
 | Exploit availability              | Availability of public exploits for the vulnerability.               | Decreased if no exploit is available.                  |
 | Exploitation probability (EPSS)   | Likelihood of real-world exploitation based on EPSS data.            | Decreased when the probability of exploitation is low. |
 
-#### View findings by repository
+#### View impacted services
+
+Runtime SCA identifies vulnerable library versions that are loaded by running services. Select a vulnerability in Vulnerabilities Explorer to open its side panel. The {{< ui >}}Impacted Services{{< /ui >}} tab lists the services where Datadog detected the affected library version, the number of impacted hosts, and when Datadog last detected it.
+
+#### View impacted infrastructure
+
+To view the affected infrastructure, select the host count in {{< ui >}}Impacted Services{{< /ui >}}, or select the {{< ui >}}Impacted Infrastructure{{< /ui >}} tab. This tab lists the hosts where the affected library version runs, along with the associated services, environments, and last deployment time.
+
+Select {{< ui >}}View Host{{< /ui >}} to investigate a host, or select {{< ui >}}View Vulnerabilities in Cloud Security{{< /ui >}} to review the host's open vulnerabilities.
+
+### View findings by repository
 
 The [Repositories Explorer][12] provides a repository-centric view of all scan results across Static Code Analysis (SAST), Software Composition Analysis (SCA), Secrets Scanning, and Infrastructure as Code (IaC). Click on a repository to analyze {{< ui >}}Library Vulnerabilities{{< /ui >}} and {{< ui >}}Library Catalog{{< /ui >}} results from SCA scoped to your chosen branch and commit.
 * The {{< ui >}}Library Vulnerabilities{{< /ui >}} tab contains the vulnerable library versions found by Datadog SCA
@@ -104,16 +114,6 @@ Every row represents a unique library and version combination. Each combination 
 Click on a library with a vulnerability to open a side panel that contains information about remediation steps.
 
 <!-- {{< img src="code_security/software_composition_analysis/sca-violation.png" alt="Side panel for a SCA violation" style="width:80%;">}} -->
-
-#### View impacted services
-
-Runtime SCA identifies vulnerable library versions that are loaded by running services. The {{< ui >}}Impacted Services{{< /ui >}} tab lists the services where Datadog detected the affected library version, the number of impacted hosts, and when Datadog last detected it.
-
-#### View impacted infrastructure
-
-To view the affected infrastructure, select the host count in {{< ui >}}Impacted Services{{< /ui >}}, or select the {{< ui >}}Impacted Infrastructure{{< /ui >}} tab. This tab lists the hosts where the affected library version runs, along with the associated services, environments, and last deployment time.
-
-Select {{< ui >}}View Host{{< /ui >}} to investigate a host, or select {{< ui >}}View Vulnerabilities in Cloud Security{{< /ui >}} to review the host's open vulnerabilities.
 
 ### Remediation
 
