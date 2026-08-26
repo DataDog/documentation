@@ -27,12 +27,10 @@ Your partner shares your rates with Datadog. Datadog uses those rates and your u
 
 ## Limitations
 
-The following limitations apply.
-
 ### Feature availability
 
 - **Advanced cost visibility features are not supported.** This includes projected costs, Cost by Tag, and [Datadog Costs][2] in Cloud Cost Management.
-- **Cloud Marketplace customers without a drawdown contract are not supported.** If you purchase Datadog through AWS, Azure, or Google Cloud Marketplace and do not have a drawdown agreement, cost visibility is not available. This is a platform-wide limitation that also affects some direct customers.
+- **Cloud Marketplace customers without a drawdown contract are not supported.** If you purchase Datadog through AWS, Google Cloud, or Azure Marketplace and do not have a drawdown agreement, cost visibility is not available. This is a platform-wide limitation that also affects some direct customers.
 - **Legacy managed service provider (MSP) contracts (many customers under a single contract) are not supported.**
 - **Customers procuring through two channel partners at the same time are not supported.** If your Datadog products flow through two resellers (for example, Datadog to Partner 1 to Partner 2 to you), cost visibility is not available.
 - **GovCloud organizations are not supported.**
