@@ -740,5 +740,5 @@ See [Advanced Configuration][7].
 [13]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-network-requests
 [14]: https://docs.datadoghq.com/help/
 [15]: /real_user_monitoring/android/data_collected/
-[16]: /real_user_monitoring/platform/dashboards/
+[16]: /real_user_monitoring/administer_and_extend_rum/dashboards/
 [17]: https://app.datadoghq.com/rum/list

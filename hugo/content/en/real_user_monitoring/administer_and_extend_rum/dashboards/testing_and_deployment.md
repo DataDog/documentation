@@ -4,6 +4,7 @@ description: Learn about the out-of-the-box RUM testing and deployment dashboard
 aliases:
 - '/real_user_monitoring/dashboards/testing_coverage'
 - '/real_user_monitoring/platform/dashboards/testing_coverage'
+- '/real_user_monitoring/platform/dashboards/testing_and_deployment'
 further_reading:
 - link: '/real_user_monitoring/'
   tag: 'Documentation'

@@ -1,6 +1,8 @@
 ---
 title: Connect RUM and Logs
 description: "Correlate RUM events with logs to get full visibility into frontend and backend issues across your application stack."
+aliases:
+- /real_user_monitoring/correlate_with_other_telemetry/logs/
 further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"

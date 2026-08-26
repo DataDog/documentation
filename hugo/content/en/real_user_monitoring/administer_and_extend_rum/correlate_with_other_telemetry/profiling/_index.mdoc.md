@@ -9,6 +9,7 @@ aliases:
   - /real_user_monitoring/correlate_with_other_telemetry/profiling/browser_profiling
   - /real_user_monitoring/correlate_with_other_telemetry/profiling/ios_profiling
   - /real_user_monitoring/correlate_with_other_telemetry/profiling/android_profiling
+  - /real_user_monitoring/correlate_with_other_telemetry/profiling/
 further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"

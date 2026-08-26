@@ -300,7 +300,7 @@ To connect RUM with your backend traces:
 [1]: https://nextjs.org/
 [2]: https://app.datadoghq.com/rum/performance-monitoring
 [3]: /real_user_monitoring/setup/data_collected/?platform=browser
-[4]: /real_user_monitoring/platform/dashboards/
+[4]: /real_user_monitoring/administer_and_extend_rum/dashboards/
 [5]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser#setup
 [6]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser#opentelemetry-support
 [7]: https://vercel.com
@@ -309,5 +309,5 @@ To connect RUM with your backend traces:
 [10]: https://nextjs.org/docs/pages
 [11]: https://nextjs.org/docs/pages/building-your-application/routing/custom-app
 [12]: /real_user_monitoring/setup/data_collected/?platform=browser
-[13]: /real_user_monitoring/platform/dashboards/
+[13]: /real_user_monitoring/administer_and_extend_rum/dashboards/
 [14]: https://app.datadoghq.com/rum/sessions
