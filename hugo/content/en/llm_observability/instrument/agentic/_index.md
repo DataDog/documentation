@@ -70,6 +70,79 @@ Follow the instructions for the detected language:
 | Java | [Java Application Agentic Instrumentation](/llm_observability/instrument/agentic/java.md) |
 | OpenTelemetry | [OpenTelemetry Instrumentation](/llm_observability/instrument/otel_instrumentation.md) |
 
+## Share agent context for check recommendations
+
+Complete this step only when the initial Datadog onboarding prompt includes an agent-context upload URL, upload token, and schema version.
+
+After instrumentation:
+
+1. Inspect only the repository files needed to understand the agent's purpose, tools, explicit behavioral rules, and handoff conditions.
+2. Include only expectations directly supported by a cited prompt, instruction, policy, or test. Record one atomic behavior per expectation, express it in terms observable in agent input or output, trace context, tool calls, tool results, or their order, and omit ambiguous or conflicting rules rather than guessing.
+3. Build a bounded JSON summary using the schema version from the onboarding prompt and this exact shape:
+
+   ```json
+   {
+     "schema_version": "<schema-version-from-the-onboarding-prompt>",
+     "context": {
+       "agent_summary": "A short description of the agent",
+       "capabilities": [
+         {
+           "name": "...",
+           "description": "...",
+           "source_reference_ids": ["source-1"]
+         }
+       ],
+       "tools": [
+         {
+           "name": "...",
+           "purpose": "...",
+           "source_reference_ids": ["source-1"]
+         }
+       ],
+       "behavioral_expectations": [
+         {
+           "id": "expectation-1",
+           "behavior": "...",
+           "applicability": "...",
+           "failure": "...",
+           "observable_signals": ["agent_input", "agent_output"],
+           "source_reference_ids": ["source-1"]
+         }
+       ],
+       "handoff_conditions": [
+         {
+           "id": "handoff-1",
+           "condition": "...",
+           "destination": "...",
+           "observable_signals": ["agent_input", "agent_output"],
+           "source_reference_ids": ["source-1"]
+         }
+       ],
+       "source_references": [
+         {
+           "id": "source-1",
+           "source_kind": "prompt",
+           "path": "relative/path",
+           "line_start": 1,
+           "line_end": 10,
+           "description": "Why this source supports the summary"
+         }
+       ]
+     }
+   }
+   ```
+
+   Give every behavioral expectation and handoff condition a unique `id` containing only letters, numbers, hyphens, or underscores. The ID is local to this upload and lets each recommended check cite its evidence. Use `source_kind` only from `prompt`, `instruction`, `policy`, `test`, `tool_definition`, or `implementation`. Use `observable_signals` only from `agent_input`, `agent_output`, `trace_context`, `tool_call`, `tool_result`, or `tool_order`.
+
+4. Send the JSON once to the upload URL from the onboarding prompt. Use `POST`, set `Content-Type: application/json`, and pass the upload token only in the `Authorization: Bearer <upload-token>` header.
+
+Follow these security requirements:
+
+- Treat the upload token as a one-time secret. Do not write it to source files, configuration, shell history, output, or logs.
+- Upload only the structured summary. Do not upload raw source code, full prompts, secrets, credentials, environment variables, customer data, trace contents, or arbitrary metadata.
+- Use repository-relative source paths and the smallest useful line ranges. Source references identify the evidence; they must not copy its contents.
+- If the upload fails, continue instrumentation and tell the user that Datadog did not receive the optional context. Do not retry with broader data.
+
 ## Instrument prompts and offer Prompt Management
 
 Prompt Tracking is part of the default Agent Observability instrumentation. Identify the prompt-construction boundary for each selected LLM call and preserve the prompt template separately from its dynamic variables.
