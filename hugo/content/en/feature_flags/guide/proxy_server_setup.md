@@ -40,7 +40,9 @@ The examples below use the US1 Datadog site (`datadoghq.com`). Replace the intak
 
 NGINX works as a relay proxy on any infrastructure: cloud VMs, Kubernetes, Docker, or bare metal.
 
-Add the following `server` block to your NGINX configuration. The `proxy_pass` directives forward flag configuration requests to the Datadog CDN and event requests to the appropriate Datadog intake.
+### Flag configuration and mobile event relay
+
+Add the following `server` block to your NGINX configuration.
 
 {{< code-block lang="nginx" filename="nginx.conf" >}}
 server {
@@ -73,17 +75,6 @@ server {
         proxy_pass_request_headers on;
         proxy_pass_request_body on;
     }
-
-    # Browser SDK event relay
-    # Works when the browser SDK proxy option is set to a function (see SDK setup below)
-    location ~* ^/browser/api/v2/ {
-        proxy_pass https://browser-intake-datadoghq.com;
-        proxy_ssl_server_name on;
-        proxy_set_header Host browser-intake-datadoghq.com;
-        proxy_set_header X-Forwarded-For $remote_addr;
-        proxy_pass_request_headers on;
-        proxy_pass_request_body on;
-    }
 }
 {{< /code-block >}}
 
@@ -94,20 +85,60 @@ After deploying, set the SDK options as follows:
 | Flag config (`useCustomFlagEndpoint` / `customFlagsEndpoint`) | `https://proxy.example.com/precompute-assignments` |
 | Exposures (`useCustomExposureEndpoint` / `customExposureEndpoint`) | `https://proxy.example.com/api/v2/exposures` |
 | Evaluations (`useCustomEvaluationEndpoint` / `customEvaluationEndpoint`) | `https://proxy.example.com/api/v2/flagevaluation` |
-| Browser events (`proxy`, function form) | see below |
 
-For browser events, use the function form of the `proxy` option. This passes the decoded path directly to the proxy URL, so NGINX can forward without any scripting:
+### Browser event relay
+
+The Browser SDK appends a `ddforward` query parameter containing the URL-encoded target path. Standard NGINX cannot decode this parameter in a `proxy_pass` directive. Use [OpenResty][2], which extends NGINX with Lua scripting, to handle browser events.
+
+Add this location block to the OpenResty server configuration alongside the standard NGINX blocks above. The Lua code requires the [`lua-resty-http`][3] library.
+
+{{< code-block lang="nginx" filename="nginx.conf" >}}
+    # Browser SDK event relay (OpenResty + lua-resty-http required)
+    location /intake {
+        content_by_lua_block {
+            local http = require("resty.http")
+            local args = ngx.req.get_uri_args()
+            local ddforward = args["ddforward"]
+            if not ddforward then
+                ngx.status = 400
+                ngx.say("missing ddforward")
+                return
+            end
+
+            local target = "https://browser-intake-datadoghq.com" .. ddforward
+
+            ngx.req.read_body()
+            local httpc = http.new()
+            local res, err = httpc:request_uri(target, {
+                method  = "POST",
+                body    = ngx.req.get_body_data(),
+                headers = {
+                    ["Content-Type"]    = ngx.var.http_content_type,
+                    ["X-Forwarded-For"] = ngx.var.remote_addr,
+                },
+                ssl_verify = true,
+            })
+            if err then
+                ngx.status = 502
+                ngx.say("upstream error")
+                return
+            end
+            ngx.status = res.status
+            ngx.print(res.body)
+        }
+    }
+{{< /code-block >}}
+
+Set the browser SDK `proxy` option to route events through this endpoint:
 
 {{< code-block lang="javascript" filename="index.js" >}}
 DatadogBrowserFlagging.init({
     clientToken: '<CLIENT_TOKEN>',
     site: '<DATADOG_SITE>',
     flaggingProxy: 'https://proxy.example.com/precompute-assignments',
-    proxy: ({ path, parameters }) => `https://proxy.example.com/browser${path}?${parameters}`,
+    proxy: 'https://proxy.example.com/intake',
 });
 {{< /code-block >}}
-
-The `/browser` prefix routes browser intake requests to the dedicated location block, keeping them separate from the mobile event paths.
 
 {{% /tab %}}
 
@@ -276,3 +307,4 @@ After deploying, set the SDK options as follows (replace `proxy.example.com` wit
 
 [1]: /getting_started/site/
 [2]: https://openresty.org/
+[3]: https://github.com/ledgetech/lua-resty-http

@@ -220,18 +220,7 @@ https://browser-intake-datadoghq.com/api/v2/exposures?ddsource=browser...
 
 The intake origin varies by [Datadog site][1]. For example, for `datadoghq.eu` it is `https://browser-intake-datadoghq.eu`. Forward the POST body unchanged and add an `X-Forwarded-For` header with the client IP for accurate geolocation. Remove any sensitive headers such as `cookie` before forwarding.
 
-The `proxy` option also accepts a function. The function receives the decoded `path` (for example, `/api/v2/exposures`) and `parameters` (for example, `ddsource=browser&...`) and returns the full proxy URL. This form lets reverse proxies such as NGINX route requests without decoding `ddforward`:
-
-{{< code-block lang="javascript" filename="index.js" >}}
-DatadogBrowserFlagging.init({
-    clientToken: '<CLIENT_TOKEN>',
-    site: '<DATADOG_SITE>',
-    flaggingProxy: 'https://proxy.example.com/flag-config',
-    proxy: ({ path, parameters }) => `https://proxy.example.com/intake${path}?${parameters}`,
-});
-{{< /code-block >}}
-
-See [Proxy Browser RUM Data][2] for the full proxy function specification.
+The `proxy` option also accepts a function that receives the decoded `path` and `parameters` and returns the full proxy URL. See [Proxy Browser RUM Data][2] for the full function signature.
 
 {{% /tab %}}
 
