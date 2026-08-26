@@ -55,7 +55,7 @@ To stop prompting responders at a status, delete that status's form.
 
 ## Choose which fields appear
 
-A form can hold up to ten fields, of two kinds:
+A form can hold up to 20 fields, of two kinds:
 
 **Property fields**
 : Any [property field][6] defined for the incident type, including default fields such as **Severity**, **Summary**, and **Root Cause**. You cannot add the incident's status to a form.
@@ -89,11 +89,13 @@ Transition forms reference other parts of your incident type configuration, so d
 
 ## Relationship to property field settings
 
-Transition forms replace the per-field **Required at declaration** and **Prompt user** options described in [Property Fields][6]. Those options are deprecated. Move each field that uses them onto the transition form for the status where you want responders to answer it.
+Transition forms replace the per-field **Required at declaration** and **Prompt user** options described in [Property Fields][6]. Those options are deprecated.
+
+Fields that were already set to be collected at `Stable`, `Resolved`, or `Completed` appear as optional fields on the corresponding transition form. Move any remaining field that uses the deprecated options onto the transition form for the status where you want responders to answer it, and mark it required there if you need a value.
 
 ## Behavior outside the UI
 
-Transition forms apply to status changes that responders make in the Datadog UI, in [Slack][11], and in [Microsoft Teams][12]. They do not apply to status changes made through the [Incident Management API][13] or through [Workflow Automation][10]. An automation that resolves an incident does so without filling out the `Resolved` form.
+Transition forms apply to status changes that responders make in the Datadog UI and in [Slack][11]. They do not apply to status changes made through the [Incident Management API][12] or through [Workflow Automation][10]. An automation that resolves an incident does so without filling out the `Resolved` form.
 
 ## Further reading
 
@@ -110,5 +112,4 @@ Transition forms apply to status changes that responders make in the Datadog UI,
 [9]: /incident_response/incident_management/setup_and_configuration/notification_rules
 [10]: /incident_response/incident_management/setup_and_configuration/automations
 [11]: /incident_response/incident_management/setup_and_configuration/integrations/slack
-[12]: /incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams
-[13]: /api/latest/incidents/
+[12]: /api/latest/incidents/
