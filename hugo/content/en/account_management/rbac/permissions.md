@@ -121,7 +121,7 @@ Enabling Minimal Access Roles makes the following permissions removable from cus
 - User Self Profile Write (`user_self_profile_write`)
 - Static Analysis Settings Read (`static_analysis_settings_read`)
 
-If you use `default_permissions_opt_out` to remove restricted permissions in your Terraform resources, update that automation to include these additional permissions before enabling Minimal Access Roles.
+If you use `default_permissions_opt_out` to remove restricted permissions from your Terraform resources, update the automation to account for these additional permissions as needed before enabling Minimal Access Roles to avoid regressions.
 
 ## Permissions list
 
