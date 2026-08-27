@@ -64,6 +64,34 @@ This table compares the differences between the memory and disk buffer.
 | Data loss due to an unexpected restart or crash          | All buffered data is lost | All buffered data is retained        |
 | Data loss on graceful shutdown                           | All buffered data is lost | None, all data in the pipeline is flushed to disk before exit  |
 
+### Changing or removing destination buffers
+
+When you update a running pipeline, the Worker handles existing buffered events based on the destination's previous and new buffer configurations. A destination is considered the same destination if it has the same component ID.
+
+#### Changing a destination
+
+| Previous buffer | Updated buffer | What happens |
+| --------------- | -------------- | ------------ |
+| Memory or disk | Unchanged | The updated destination reuses the buffer and processes its backlog. If the destination endpoint changed, buffered events are sent to the new endpoint. |
+| Memory | Changed memory or disk | The previous destination drains in the background while the updated destination starts with a new buffer. If the Worker stops before the drain completes, events remaining in the previous memory buffer are lost. |
+| Disk | Changed disk | The updated destination opens the existing disk buffer and processes its persisted events. |
+| Disk | Memory | The updated destination starts with a new memory buffer. Persisted events remain on disk but are inactive. |
+
+#### Removing a destination
+
+| Buffer | What happens |
+| ------ | ------------ |
+| Memory | The destination drains in the background. If the Worker stops before the drain completes, events remaining in memory are lost. |
+| Disk | The destination drains in the background. If the Worker restarts before the drain completes, the remaining events stay persisted on disk but become inactive. |
+
+Background draining continues only while the same Worker process is running. A pipeline update can complete before a background drain finishes.
+
+#### Recovering an inactive disk buffer
+
+To resume processing persisted events, re-add a disk-buffered destination with the same component ID. Before re-adding the destination, wait for the previous background drain to stop and release the buffer lock, or restart the Worker.
+
+If an update introduces a resource conflict, the update waits for the previous destination to stop. This waiting applies only to destinations changed or removed by the current update. A later update does not wait for a destination that is still draining after an earlier update.
+
 ### Using buffers with multiple destinations
 
 After your events are sent through your processors, the events go through a fanout to all of your pipeline's destinations. If backpressure propagates to the fanout from any destination, **all** destinations are blocked. No additional events are sent by any destination until the blocked destination resumes sending events successfully.
