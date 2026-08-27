@@ -11,7 +11,7 @@ Customer Contracts is in Preview.
 
 Customer Contracts gives a partner a single place to manage customers, contracts, and invoices for their book of business with Datadog. Partners can look up this information directly, instead of relying on the partner account team for routine lookups.
 
-Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}} in the Admin Org, or directly to [app.datadoghq.com/billing/customer-contracts][3]. This requires an Admin Org; see [Requesting an Admin Org][2] if one isn't set up yet.
+Go to {{< ui >}}[Plan & Usage > Customer Contracts][3]{{< /ui >}} in the Admin Org (See [Requesting an Admin Org][2] if one isn't set up yet).
 
 {{< img src="account_management/plan_and_usage/customer-contracts-list.png" alt="Customer Contracts tab under Plan & Usage in an Admin Org, listing customers and contracts" style="width:100%;" >}}
 
