@@ -131,7 +131,7 @@ Install the gems with `bundle install`. These gems provide the OpenTelemetry met
 
 ### Endpoint configuration
 
-`DD_TRACE_AGENT_URL` and the standard `serverless-init` listener on port 8126 do not configure the OTLP metric endpoint. Configure the OTLP endpoint separately as described below.
+`DD_TRACE_AGENT_URL` and the standard `serverless-init` listener on port 8126 do not configure the OTLP metric endpoint. Configure the OTLP endpoint separately, as described in the following section.
 
 By default, most tracers send OTLP metrics to the Agent at `DD_AGENT_HOST` on port `4318` (HTTP). If your application already sets `DD_AGENT_HOST` to reach the Agent, no endpoint configuration is required.
 

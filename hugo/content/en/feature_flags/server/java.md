@@ -28,7 +28,7 @@ This page describes how to add Datadog Feature Flags to a Java application. Star
 
 The Datadog provider implements the [OpenFeature](https://openfeature.dev/) standard. It uses `dd-java-agent` for configuration delivery. Agentless delivery removes the external Datadog Agent requirement, but `dd-java-agent` must still load in the JVM.
 
-Agentless delivery changes only the flag configuration source. Java 1.65.0 sends experiment exposure events through a supported local Event Platform Proxy (EVP) relay. Starting in version 1.66.0, it also sends aggregate EVP flag evaluation events. It prefers a compatible local relay and sends both event types directly when no compatible relay is available.
+Agentless delivery changes only the flag configuration source. Java 1.65.0 sends experiment exposure events through a supported local Event Platform Proxy (EVP) relay. Starting in version 1.66.0, the SDK also sends aggregated EVP flag evaluation events. In 1.66.0 and later, the SDK prefers a compatible local relay and sends both event types directly when no compatible relay is available.
 
 ## Compatibility requirements
 

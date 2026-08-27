@@ -84,22 +84,21 @@ The `feature_flag.evaluations` metric is a separate OpenTelemetry (OTLP) signal.
 
 ### Configure serverless-init
 
-Complete the [Serverless Monitoring][11] setup for your platform. Those instructions provide the supported in-container and sidecar configurations, required environment variables, and network settings.
+1. Complete the [Serverless Monitoring][11] setup for your platform. Those instructions provide the supported in-container and sidecar configurations, required environment variables, and network settings.
 
-Then apply these Feature Flags requirements:
-
-- Use `serverless-init` 1.9.13 or later. Earlier versions do not support the required EVP route.
-- Keep `DD_API_KEY` and `DD_SITE` in the application environment for agentless CDN configuration delivery. A sidecar also needs them for telemetry egress.
-- Do not configure a Feature Flags-specific endpoint. The SDK uses the standard tracer connection configured by the Serverless Monitoring setup.
-- Node.js and Java call `GET /info` on the tracer URL to discover the local EVP proxy. Python sends supported EVP events to the same URL without this discovery request.
+1. Apply these Feature Flags requirements:
+   - Use `serverless-init` 1.9.13 or later. Earlier versions do not support the required EVP route.
+   - Keep `DD_API_KEY` and `DD_SITE` in the application environment for agentless CDN configuration delivery. A sidecar also needs them for telemetry egress.
+   - Do not configure an endpoint specific to Feature Flags. The SDK uses the standard tracer connection configured by the Serverless Monitoring setup.
+   - Node.js and Java call `GET /info` on the tracer URL to discover the local EVP proxy. Python sends supported EVP events to the same URL without this discovery request.
 
 ### Verify telemetry egress
 
 1. Initialize the OpenFeature provider and confirm that it reaches a ready state.
-2. Evaluate a flag associated with an experiment. Then confirm that the experiment receives an exposure event.
+2. Evaluate a flag associated with an experiment, then confirm that the experiment receives an exposure event.
 3. When you use a local relay, check the application and `serverless-init` logs for connection errors to port 8126.
 4. For Java 1.66.0 and Python 4.14.0, confirm that `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` is not set to `false` when you need EVP flag evaluation events.
-5. If you use the `feature_flag.evaluations` metric, validate its separate OTLP path with the [metrics setup guide][10].
+5. If you use the `feature_flag.evaluations` metric, validate its separate OTLP path with [Set Up Server-Side Flag Evaluation Metrics][10].
 
 ## Agent-backed Remote Configuration
 
