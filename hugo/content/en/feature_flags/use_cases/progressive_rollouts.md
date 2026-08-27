@@ -36,7 +36,7 @@ Monitor progress with evaluation tracking and configure notifications for rollou
 
 ## Canaries
 
-A canary is a progressive rollout that includes **guardrail metrics**. Guardrail metrics measure standard key performance indicators (KPIs) such as error rate and long task count.
+A canary is a progressive rollout that includes **guardrail metrics**. Guardrail metrics measure key performance indicators (KPIs), such as error rate, latency, and long task count.
 
 ### How canaries work
 
@@ -45,18 +45,46 @@ When guardrail metrics are configured, the rollout monitors metrics in both grou
 - **Treatment**: Subjects receiving the variant you are rolling out
 - **Control**: Subjects not receiving the treatment variant
 
-When the canary detects a statistically significant change in any guardrail metric, it automatically **pauses** or **stops** the rollout.
+When the canary detects a statistically significant adverse change in a guardrail metric, it automatically **pauses** or **stops** the rollout.
+
+### Use APM guardrail metrics
+
+APM guardrail metrics use retained spans to compare application performance between the control and treatment groups. You can monitor:
+
+- Mean span duration
+- Error rate
+- P90 span duration
+- Mean of a numeric span attribute
+
+[APM trace enrichment][1] is required before you add an APM metric to a canary. Enrichment records the flag allocation, variant, and subject on each trace so the canary can associate APM data with the correct group.
+
+After you enable enrichment:
+
+1. Verify that the application evaluates the feature flag during traced requests.
+2. In Trace Explorer, confirm that root spans contain the decoded `@feature_flags.<flag_key>` attribute.
+3. Create an APM metric with a span query that matches the requests you want to monitor.
+4. Select the APM metric as a guardrail when you configure the canary.
+
+Canary analysis uses the retained sample of matching traces. If the retained volume is low, the canary waits until it has enough sampled subjects and events to make a decision. To increase the random retained sample, configure temporary trace retention for the canary. Temporary retention does not recover traces dropped before they reach Datadog.
+
+<!-- IMAGE PLACEHOLDER: Add a screenshot showing the APM metric creation flow for a canary guardrail. -->
 
 ### Configure a canary rollout
 
 1. Create a progressive rollout targeting rule as described in the [Configure a progressive rollout](#configure-a-progressive-rollout) section.
 2. Add guardrail metrics to the rollout configuration.
-3. Choose whether guardrail failures should pause or stop the rollout.
+3. For an APM guardrail, configure temporary trace retention if you want to increase the retained sample.
+4. Choose whether guardrail failures should pause or stop the rollout.
 
 {{< img src="feature_flags/canary-rollout-config.png" alt="Canary rollout configuration showing rollout steps with guardrail metrics and a control variant." style="width:90%;" >}}
+
+<!-- IMAGE PLACEHOLDER: Replace or supplement the image above with the canary configuration that includes an APM guardrail and temporary trace retention. -->
 
 ## Best practices
 
 - Configure notifications on the flag to be alerted when the rollout starts, pauses, or stops.
-- For canaries, notifications fire when a guardrail metric pauses or stops the rollout — configure these before starting the rollout so you're alerted immediately if a regression is detected.
+- Configure canary notifications before starting the rollout. Notifications alert you when a guardrail metric pauses or stops the rollout.
 - Use evaluation tracking to monitor how many subjects are receiving each variant as the rollout progresses.
+- For APM guardrails, review sampled-subject and sampled-event readiness before increasing rollout exposure.
+
+[1]: /feature_flags/guide/apm_trace_enrichment/
