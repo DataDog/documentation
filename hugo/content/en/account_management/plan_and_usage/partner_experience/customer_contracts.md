@@ -11,9 +11,11 @@ Customer Contracts is in Preview.
 
 Customer Contracts gives a partner a single place to manage customers, contracts, and invoices for their book of business with Datadog. Partners can look up this information directly, instead of relying on the partner account team for routine lookups.
 
-Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}} in the Admin Org, or directly to [app.datadoghq.com/billing/customer-contracts][3].
+Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}} in the Admin Org, or directly to [app.datadoghq.com/billing/customer-contracts][3]. This requires an Admin Org; see [Requesting an Admin Org][2] if one isn't set up yet.
 
 {{< img src="account_management/plan_and_usage/customer-contracts-list.png" alt="Customer Contracts tab under Plan & Usage in an Admin Org, listing customers and contracts" style="width:100%;" >}}
+
+**Note**: The Billing Read permission is required to view Customer Contracts.
 
 ## What's included
 
@@ -31,16 +33,12 @@ Invoices are listed per customer with issue and due dates, amount, and payment s
 
 {{< img src="account_management/plan_and_usage/customer-contracts-invoices.png" alt="Customer Contracts invoices tab listing invoice numbers, dates, amounts, and status for a customer" style="width:100%;" >}}
 
-## FAQ
+## Further Reading
 
-**I don't have an Admin Org. How do I get one?**
-
-See [Requesting an Admin Org][2].
-
-**Who can access Customer Contracts?**
-
-Users with the Billing Read permission in the Admin Org can view Customer Contracts.
+- [Requesting an Admin Org][2]
+- [Multi-Tenant Usage Metering and Billing][4]
 
 [1]: /account_management/plan_and_usage/partner_experience/customer_pricing/
 [2]: /partners/multi_tenant_billing/#requesting-an-admin-org
 [3]: https://app.datadoghq.com/billing/customer-contracts
+[4]: /partners/multi_tenant_billing/
