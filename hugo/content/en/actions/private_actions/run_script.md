@@ -33,7 +33,7 @@ The private action runner can run **predefined scripts**, which are shell comman
 
 **For Agent-based runners:**
 - Datadog Agent 7.81.0 or later. See [Set up a private action runner in the Datadog Agent][1].
-- `com.datadoghq.script.runPredefinedScript` (Linux) or `com.datadoghq.script.runPredefinedPowershellScript` (Windows) in the runner's actions allowlist.
+- Add `com.datadoghq.script.runPredefinedScript` (Linux) or `com.datadoghq.script.runPredefinedPowershellScript` (Windows) to the runner's actions allowlist.
 
 **For standalone runners:**
 - A standalone runner. See [Set up a standalone private action runner][2].
@@ -201,8 +201,6 @@ Finally, apply the manifest:
 kubectl apply -f datadog-agent.yaml
 ```
 
-An ownerless runner's identity, and the credentials it uses to authenticate, can be rotated without redeploying. See [Rotating private runner credentials][4].
-
 ### Owned runner (Connection-based)
 
 {{< tabs >}}
@@ -210,21 +208,21 @@ An ownerless runner's identity, and the credentials it uses to authenticate, can
 
 #### Configure the connection
 
-If you selected `com.datadoghq.script.runPredefinedScript` in the runner's actions allowlist, you should already have a **Script** connection linked to your runner. Otherwise, create a connection and specify `/etc/datadog-agent/private-action-runner/script-config.yaml` as the **path to file**. For more information, see [Handling private action credentials][5].
+If you selected `com.datadoghq.script.runPredefinedScript` in the runner's actions allowlist, you should already have a **Script** connection linked to your runner. Otherwise, create a connection and specify `/etc/datadog-agent/private-action-runner/script-config.yaml` as the **path to file**. For more information, see [Handling private action credentials][4].
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
 #### Configure the connection
 
-If you selected `com.datadoghq.script.runPredefinedPowershellScript` in the runner's actions allowlist, you should already have a **Script** connection linked to your runner. Otherwise, create a connection and specify `C:\ProgramData\Datadog\private-action-runner\powershell-script-config.yaml` as the **path to file**. For more information, see [Handling private action credentials][5].
+If you selected `com.datadoghq.script.runPredefinedPowershellScript` in the runner's actions allowlist, you should already have a **Script** connection linked to your runner. Otherwise, create a connection and specify `C:\ProgramData\Datadog\private-action-runner\powershell-script-config.yaml` as the **path to file**. For more information, see [Handling private action credentials][4].
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Standalone
 
-A standalone runner is always owned and authorized with [Connections][6].
+A standalone runner is always owned and authorized with [Connections][5].
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -355,6 +353,5 @@ inside the runner.
 [1]: /actions/private_actions/set_up_agent_based/
 [2]: /actions/private_actions/set_up_standalone/
 [3]: /actions/private_actions/execution_policies/
-[4]: /actions/private_actions/enroll_runner/#rotating-private-runner-credentials
-[5]: /actions/connections/private_action_credentials/
-[6]: /actions/connections/
+[4]: /actions/connections/private_action_credentials/
+[5]: /actions/connections/
