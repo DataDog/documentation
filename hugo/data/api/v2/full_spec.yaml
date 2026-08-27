@@ -13003,6 +13003,8 @@ components:
           type: string
         buffer:
           $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
+        compression:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureStorageDestinationCompression"
         connection_string_key:
           description: Name of the environment variable or secret that holds the Azure Storage connection string.
           example: AZURE_STORAGE_CONNECTION_STRING
@@ -72575,6 +72577,8 @@ components:
           type: string
         buffer:
           $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
+        compression:
+          $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationCompression"
         id:
           description: Unique identifier for the destination component.
           example: amazon-s3-destination
@@ -72616,6 +72620,63 @@ components:
         - storage_class
       type: object
       x-pipeline-types: [logs]
+    ObservabilityPipelineAmazonS3DestinationCompression:
+      description: |-
+        Compression configuration for archived logs. When omitted, logs are compressed with gzip
+        for backward compatibility.
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationCompressionZstd"
+        - $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationCompressionGzip"
+    ObservabilityPipelineAmazonS3DestinationCompressionGzip:
+      description: Gzip compression.
+      properties:
+        algorithm:
+          $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationCompressionGzipType"
+        level:
+          description: Gzip compression level. Valid values range from `1` to `9`.
+          example: 6
+          format: int64
+          maximum: 9
+          minimum: 1
+          type: integer
+      required:
+        - algorithm
+        - level
+      type: object
+    ObservabilityPipelineAmazonS3DestinationCompressionGzipType:
+      default: gzip
+      description: The compression type. Always `gzip`.
+      enum:
+        - gzip
+      example: gzip
+      type: string
+      x-enum-varnames:
+        - GZIP
+    ObservabilityPipelineAmazonS3DestinationCompressionZstd:
+      description: Zstd compression.
+      properties:
+        algorithm:
+          $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationCompressionZstdType"
+        level:
+          description: Zstd compression level. Valid values range from `1` to` 21`.
+          example: 3
+          format: int64
+          maximum: 21
+          minimum: 1
+          type: integer
+      required:
+        - algorithm
+        - level
+      type: object
+    ObservabilityPipelineAmazonS3DestinationCompressionZstdType:
+      default: zstd
+      description: The compression type. Always `zstd`.
+      enum:
+        - zstd
+      example: zstd
+      type: string
+      x-enum-varnames:
+        - ZSTD
     ObservabilityPipelineAmazonS3DestinationServerSideEncryption:
       description: Server-side encryption type for Amazon S3.
       enum:
@@ -72977,6 +73038,63 @@ components:
           description: A session identifier used for logging and tracing the assumed role session.
           type: string
       type: object
+    ObservabilityPipelineAzureStorageDestinationCompression:
+      description: |-
+        Compression configuration for archived logs. When omitted, logs are compressed with gzip
+        for backward compatibility.
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureStorageDestinationCompressionZstd"
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureStorageDestinationCompressionGzip"
+    ObservabilityPipelineAzureStorageDestinationCompressionGzip:
+      description: Gzip compression.
+      properties:
+        algorithm:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureStorageDestinationCompressionGzipType"
+        level:
+          description: Gzip compression level. Valid values range from `1` to `9`.
+          example: 6
+          format: int64
+          maximum: 9
+          minimum: 1
+          type: integer
+      required:
+        - algorithm
+        - level
+      type: object
+    ObservabilityPipelineAzureStorageDestinationCompressionGzipType:
+      default: gzip
+      description: The compression type. Always `gzip`.
+      enum:
+        - gzip
+      example: gzip
+      type: string
+      x-enum-varnames:
+        - GZIP
+    ObservabilityPipelineAzureStorageDestinationCompressionZstd:
+      description: Zstd compression.
+      properties:
+        algorithm:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureStorageDestinationCompressionZstdType"
+        level:
+          description: Zstd compression level. Valid values range from `1` to `21`.
+          example: 3
+          format: int64
+          maximum: 21
+          minimum: 1
+          type: integer
+      required:
+        - algorithm
+        - level
+      type: object
+    ObservabilityPipelineAzureStorageDestinationCompressionZstdType:
+      default: zstd
+      description: The compression type. Always `zstd`.
+      enum:
+        - zstd
+      example: zstd
+      type: string
+      x-enum-varnames:
+        - ZSTD
     ObservabilityPipelineBufferOptions:
       description: Configuration for buffer settings on destination components.
       oneOf:
@@ -74755,6 +74873,8 @@ components:
           type: string
         buffer:
           $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
+        compression:
+          $ref: "#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestinationCompression"
         id:
           description: Unique identifier for the destination component.
           example: gcs-destination
@@ -74804,6 +74924,63 @@ components:
         - AUTHENTICATEDNOT_READ
         - BUCKETNOT_OWNERNOT_READ
         - BUCKETNOT_OWNERNOT_FULLNOT_CONTROL
+    ObservabilityPipelineGoogleCloudStorageDestinationCompression:
+      description: |-
+        Compression configuration for archived logs. When omitted, logs are compressed with gzip
+        for backward compatibility.
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestinationCompressionZstd"
+        - $ref: "#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestinationCompressionGzip"
+    ObservabilityPipelineGoogleCloudStorageDestinationCompressionGzip:
+      description: Gzip compression.
+      properties:
+        algorithm:
+          $ref: "#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestinationCompressionGzipType"
+        level:
+          description: Gzip compression level. Valid values range from `1` to `9`.
+          example: 6
+          format: int64
+          maximum: 9
+          minimum: 1
+          type: integer
+      required:
+        - algorithm
+        - level
+      type: object
+    ObservabilityPipelineGoogleCloudStorageDestinationCompressionGzipType:
+      default: gzip
+      description: The compression type. Always `gzip`.
+      enum:
+        - gzip
+      example: gzip
+      type: string
+      x-enum-varnames:
+        - GZIP
+    ObservabilityPipelineGoogleCloudStorageDestinationCompressionZstd:
+      description: Zstd compression.
+      properties:
+        algorithm:
+          $ref: "#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestinationCompressionZstdType"
+        level:
+          description: Zstd compression level. Valid values range from `1` to `21`.
+          example: 3
+          format: int64
+          maximum: 21
+          minimum: 1
+          type: integer
+      required:
+        - algorithm
+        - level
+      type: object
+    ObservabilityPipelineGoogleCloudStorageDestinationCompressionZstdType:
+      default: zstd
+      description: The compression type. Always `zstd`.
+      enum:
+        - zstd
+      example: zstd
+      type: string
+      x-enum-varnames:
+        - ZSTD
     ObservabilityPipelineGoogleCloudStorageDestinationStorageClass:
       description: Storage class used for objects stored in GCS.
       enum:
