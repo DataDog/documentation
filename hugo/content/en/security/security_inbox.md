@@ -50,11 +50,11 @@ Security Inbox answers three questions:
 {{< img src="security/security_inbox_8.png" alt="The Security Inbox shows prioritized security findings with severity, triage status, and remediation SLA summaries" width="100%">}}
 
 {{% site-region region="gov" %}}
-**Note**: Some of the products that feed Security Inbox are not available on this site. Code Security findings do not reach the inbox, and Linear is unavailable for ticketing.
+<div class="alert alert-danger">Some of the products that feed Security Inbox are not available on this site ({{< region-param key="dd_site_name" >}}). Code Security findings do not reach the inbox, and Linear is unavailable for ticketing.</div>
 {{% /site-region %}}
 
 {{% site-region region="gov2" %}}
-**Note**: Some of the products that feed Security Inbox are not available on this site. Code Security and App and API Protection findings do not reach the inbox. Linear ticketing, Datadog Case Management, and assignee management are also unavailable.
+<div class="alert alert-danger">Some of the products that feed Security Inbox are not available on this site ({{< region-param key="dd_site_name" >}}). Code Security and App and API Protection findings do not reach the inbox. Linear ticketing, Datadog Case Management, and assignee management are also unavailable.</div>
 {{% /site-region %}}
 
 ## What appears in Security Inbox
@@ -118,14 +118,16 @@ Click a status to filter the list to those findings. You can also filter on **Ov
 
 Two other cards summarize the same set of findings:
 
-- **Severity**: the number of Critical and High findings.
-- **Status**: **Pending triage** counts findings with no ticket and no assignee. **In flight** counts findings that have at least one.
+- **Severity**: The number of Critical and High findings.
+- **Status**:
+  - **Pending triage**: The number of findings with no ticket and no assignee.
+  - **In flight**: The number of findings that have at least one.
 
 ## Investigate findings
 
 ### Filter and group
 
-Use the filter bar to narrow the inbox by any facet in the findings schema, including severity, finding type, service, team, and resource. To filter on an attribute that is not offered as a facet, type its name into the **Edit Filters** menu and add it as a custom filter.
+Apply filters to narrow the inbox by any facet in the findings schema, including team, severity, finding type, service, and resource. To filter on an attribute that is not offered as a facet, type its name into the **Edit Filters** menu and add it as a custom filter.
 
 Use **Group by** to aggregate findings by up to two fields at once. The inbox groups by finding title by default, which collapses every occurrence of the same underlying issue into a single row. Set **Group by** to **None** to see one row per finding.
 
@@ -133,20 +135,20 @@ Use **Group by** to aggregate findings by up to two fields at once. The inbox gr
 
 Click the gear icon above the table to add, remove, or reorder columns. The default columns are finding type, title, severity, risks, resource, and triage status.
 
-**Note**: Column options are available on an ungrouped table, and inside the nested table that opens when you expand a group. They are unavailable on the outer table of a grouped view.
+<div class="alert alert-info">Column options are available on ungrouped tables, and on tables inside expanded groups. They are unavailable on the outer table of a grouped view.</div>
 
 ### Saved views
 
-Save the current combination of filters, grouping, and columns as a saved view, so you can return to it later or share it with your team. Saved views are listed in the sidebar.
+Save the current combination of filters, grouping, and columns as a saved view, so you can return to it later or share it with your team. Saved views are listed in the **Views** sidebar.
 
 ### Export
 
 Click **Export** above the table to export your findings to other tools:
 
-- **Export to Sheets**: send the findings to [Datadog Sheets][21] for deeper exploration and reporting.
-- **Open in DDSQL Editor**: open the equivalent query in the [DDSQL Editor][22] for complex aggregations and custom analysis.
-- **Download as CSV**: download the findings as a CSV file.
-- **Copy as cURL**: copy the equivalent API request to your clipboard.
+- **Export to Sheets**: Send the findings to [Datadog Sheets][21] for deeper exploration and reporting.
+- **Open in DDSQL Editor**: Open the equivalent query in the [DDSQL Editor][22] for complex aggregations and custom analysis.
+- **Download as CSV**: Download the findings as a CSV file.
+- **Copy as cURL**: Copy the equivalent API request to your clipboard.
 
 ## Triage and remediate
 
@@ -154,12 +156,12 @@ The **Triage** column carries actions for a single finding. Click **Assign** to 
 
 To act on several findings at once, select them and use:
 
-- **Ticketing**: create a Jira issue, a ServiceNow incident, a Linear issue, or a Datadog security case for the selected findings, or unlink an existing one. For setup and bidirectional syncing, see [Ticketing Integrations][20].
-- **Assignee**: set or clear the [assignee][23] on the selected findings.
-- **Muting**: mute findings that you have assessed and accepted.
-- **Severity**: adjust the severity of the selected findings.
+- **Ticketing**: Create a Jira issue, a ServiceNow incident, a Linear issue, or a Datadog security case for the selected findings; or unlink an existing one. For setup and bidirectional syncing, see [Ticketing Integrations][20].
+- **Assignee**: Set or clear the [assignee][23] on the selected findings.
+- **Muting**: Mute findings that you have assessed and accepted.
+- **Severity**: Adjust the severity of the selected findings.
 
-Bulk selection is available on an ungrouped table and inside an expanded group. Click any finding to open its side panel, which shows the full detection detail and remediation guidance for that finding type.
+Bulk selection is available on ungrouped tables and inside expanded groups. Click any finding to open its side panel, which shows the full detection detail and remediation guidance for that finding type.
 
 ## Report on your inbox
 
@@ -178,9 +180,9 @@ Key features include:
 
 ## Customize Security Inbox
 
-[Automation Pipelines][13] let you configure the rules that decide what reaches your inbox and when it is due. Use them to:
+[Automation Pipelines][13] let you configure the rules that decide what reaches your inbox and when remediations are due for each finding. Use automations to:
 
-- **Resurface issues not captured by default**: Highlight issues that the default rules do not match, so no critical issue is overlooked.
+- **Resurface findings not captured by default**: Use custom rules to highlight findings that the default rules do not match, to ensure critical findings are not overlooked.
 - **Strengthen compliance and address key system concerns**: Address concerns affecting regulatory compliance or important business systems, regardless of severity.
 - **Prioritize current risks**: Focus on immediate threats, such as identity risks after an incident or industry-wide vulnerabilities.
 - **Enforce remediation timelines**: Attach due dates by severity, so overdue work is visible to the whole team.

@@ -79,9 +79,9 @@ Assign remediation deadlines to findings to improve accountability and stay comp
 
 ### Customize the Security Inbox to highlight what's important to your organization
 
-Datadog provides a set of default inbox rules that populate the Security Inbox. You can review them, disable the ones that do not fit your organization, and add your own rules that define which findings are highlighted. This allows you to:
+Datadog provides a set of default inbox rules that populate the Security Inbox. You can review those rules, disable the ones that do not fit your organization, and add your own rules that define which findings are highlighted. This allows you to:
 
-- **Resurface findings not captured by default**: Highlight findings that the default rules do not match, to ensure critical findings are not overlooked.
+- **Resurface findings not captured by default**: Use custom rules to highlight findings that the default rules do not match, to ensure critical findings are not overlooked.
 - **Strengthen compliance and address key system concerns**: Address concerns affecting regulatory compliance or important business systems, regardless of severity.
 - **Prioritize current risks**: Focus on immediate threats, such as identity risks after an incident, or industry-wide findings.
 

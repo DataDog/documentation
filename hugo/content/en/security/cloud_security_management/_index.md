@@ -113,7 +113,7 @@ Improve your organization's score by remediating misconfigurations, either by re
 
 ## Explore and remediate issues
 
-For an overview of your security findings across Cloud Security, Code Security, App and API Protection, and Workload Protection, sorted by importance, use the [Security Inbox][14].
+For an overview of your security findings, sorted by importance, across Cloud Security, Code Security, App and API Protection, and Workload Protection, use the [Security Inbox][14].
 
 To get more detail, use [Findings][7] to review and remediate your organization's security findings concerning misconfigurations, vulnerabilities, and identity risks. View detailed information about a finding, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
