@@ -52,8 +52,6 @@ Here are some ways an Admin Org can help:
 | Let customers see their estimated costs based on the partner's pricing. | [Customer Pricing][9]: configure per-customer pricing. |
 | Manage the book of business in one place. | [Customer Contracts][10]: track customers, contracts, invoices, and renewals. |
 
-<div class="alert alert-info">Preview capabilities are available to a limited set of partners. Contact <a href="mailto:partner-support@datadoghq.com">partner-support@datadoghq.com</a> to join a preview.</div>
-
 ## Troubleshooting
 
 For help with common Admin Org and Trial Org issues, see [Troubleshooting][7].
