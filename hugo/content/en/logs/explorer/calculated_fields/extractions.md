@@ -117,12 +117,12 @@ Extracted values are always strings. Unlike a Grok rule such as `%{integer:statu
 | Named capture groups | `(?<status>\d+)` | Captures the match under a name. Required for extraction |
 | Quantifiers | `a*`, `a+`, `a?`, `a{2,4}` | Repetition: zero or more, one or more, optional, or a bounded range. Matches as much as possible |
 | Lazy quantifiers | `.*?end` | The same repetition, but matching as little as possible |
-| Anchors | `^ERROR`, `timeout$` | The start or the end of the value |
+| Anchors | `^ERROR`, `timeout$` | By default, the start or the end of the whole value |
 | Word boundaries | `\berror\b` | A position between a word and a non-word character, so `error` matches but `errors` does not |
 | Character escapes | `\n`, `\r`, `\t` | Newline, carriage return, tab |
 | Metacharacter escapes | `\.`, `\*`, `\(` | The character itself, rather than its special meaning |
 
-Constructs that are not listed, such as lookahead (`(?=…)`), lookbehind (`(?<=…)`), and backreferences (`\1`), are not supported.
+Only the constructs listed here are supported. A pattern that uses any other construct might still run, but its behavior is not guaranteed.
 
 A value can contain multiple lines, such as a stack trace. To match a newline with `.`, add `(?s)` to the start of the pattern. To match `^` and `$` at the start and end of each line, add `(?m)` to the start of the pattern.
 
@@ -177,7 +177,7 @@ Each pattern below breaks one capture group rule.
 |---|---|
 | `(?:\S+) (?:\S+) (?:\S+) (?:\S+)` | No named group. A pattern needs at least one. |
 | `(?<ip>\S+) (?<ip>\S+)` | The name `ip` is used twice. Each name must be unique. |
-| `(?<client-ip>\S+)` | The name has a hyphen. A name can have only letters and digits. |
+| `(?<client_ip>\S+)` | The name has an underscore. A name can have only letters and digits. |
 | `(?<1status>\d+)` | The name starts with a digit. A name must start with a letter. |
 
 ## Further reading
