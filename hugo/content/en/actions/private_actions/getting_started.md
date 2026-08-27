@@ -109,11 +109,11 @@ Datadog provisions **default Execution Policies** in your organization. These po
 
 ## Step 4: Run your first action
 
-Run a read-only Kubernetes action against your new runner from the Action Catalog. The Action Catalog runs an action the same way a workflow step does; you choose a target Agent, provide inputs, and run.
+Run a read-only Kubernetes action against your new runner from the Action Catalog. The Action Catalog runs an action the same way a workflow step does; you choose a target Agent, provide inputs, and run the action.
 
 1. In the Datadog Action Catalog, open [List Pods][8] (`com.datadoghq.kubernetes.core.listPod`).
 1. Under **Configure connection**, select the **Target** tab (instead of **Connection**).
-1. Set **Orch Cluster ID** to the orchestration cluster ID of the cluster running your runner.
+1. Set **Orch Cluster ID** to the orchestration cluster ID of the cluster running your runner. You can find the orchestration cluster ID among the tags of your cluster in [Fleet Automation's Fleet View][11].
 1. Under **Configure inputs**, enter the **Namespace** to list pods from. You can also set **Field selector**, **Label selector**, or **Limit**.
 1. Click **Run**. The results appear in the panel.
 
@@ -139,3 +139,4 @@ This guide uses Datadog's default Execution Policies, which authorize read-only 
 [8]: https://app.datadoghq.com/actions/action-catalog#com.datadoghq.kubernetes/com.datadoghq.kubernetes.core/com.datadoghq.kubernetes.core.listPod
 [9]: /actions/private_actions/execution_policies/#use-an-execution-policy-in-a-workflow
 [10]: /actions/private_actions/execution_policies/
+[11]: https://app.datadoghq.com/fleet?view_by=clusters
