@@ -25,7 +25,7 @@ The Astro site only serves API docs. To browse it inside the full Hugo site (hea
 In three terminals, from the repo root:
 
 ```bash
-make start-proxied        # Hugo on :1313, baseURL set to :1314
+cd hugo && make start-proxied   # Hugo on :1313, baseURL set to :1314
 ```
 
 ```bash
@@ -127,7 +127,7 @@ The pure functions (`renderCdocPlaintext`, the AST filter) take an injected part
 
 ### Notes / current limitations
 
-- **Adapter.** On-demand rendering runs under `npm run dev` without an adapter. A production `astro build` needs a server adapter (deferred pending an Astro upgrade), so `npm run build` / `npm run preview` do not yet serve cdocs.
+- **Adapter.** The `@astrojs/node` adapter (`output: "server"` in [astro.config.mjs](astro.config.mjs)) makes on-demand rendering available in `yarn build` / `yarn preview` as well as `yarn dev`, so cdocs render the same way in all three.
 - **`cdocs-data` install.** The package is installed from an S3 tarball declared in [package.json](package.json) (same mechanism as `cdocs-hugo-integration`). Its bare name collides with a security-holding public-npm squat, so the supply-chain firewall flags it; scoping the internal package (e.g. `@datadog/cdocs-data`) is the durable fix.
 
 ## Auditing guidelines

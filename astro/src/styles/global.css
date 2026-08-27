@@ -3,8 +3,8 @@
 /* Font faces */
 @font-face {
   font-family: 'NationalWeb';
-  src: url('/fonts/NationalWeb-Light.woff2') format('woff2'),
-       url('/fonts/NationalWeb-Light.woff') format('woff');
+  src: url('../assets/fonts/NationalWeb-Light.woff2') format('woff2'),
+       url('../assets/fonts/NationalWeb-Light.woff') format('woff');
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -12,8 +12,8 @@
 
 @font-face {
   font-family: 'NationalWeb';
-  src: url('/fonts/NationalWeb-Book.woff2') format('woff2'),
-       url('/fonts/NationalWeb-Book.woff') format('woff');
+  src: url('../assets/fonts/NationalWeb-Book.woff2') format('woff2'),
+       url('../assets/fonts/NationalWeb-Book.woff') format('woff');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -21,8 +21,8 @@
 
 @font-face {
   font-family: 'NationalWeb';
-  src: url('/fonts/NationalWeb-Medium.woff2') format('woff2'),
-       url('/fonts/NationalWeb-Medium.woff') format('woff');
+  src: url('../assets/fonts/NationalWeb-Medium.woff2') format('woff2'),
+       url('../assets/fonts/NationalWeb-Medium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -30,8 +30,8 @@
 
 @font-face {
   font-family: 'NationalWeb';
-  src: url('/fonts/NationalWeb-Semibold.woff2') format('woff2'),
-       url('/fonts/NationalWeb-Semibold.woff') format('woff');
+  src: url('../assets/fonts/NationalWeb-Semibold.woff2') format('woff2'),
+       url('../assets/fonts/NationalWeb-Semibold.woff') format('woff');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -39,8 +39,8 @@
 
 @font-face {
   font-family: 'NationalWeb';
-  src: url('/fonts/NationalWeb-Bold.woff2') format('woff2'),
-       url('/fonts/NationalWeb-Bold.woff') format('woff');
+  src: url('../assets/fonts/NationalWeb-Bold.woff2') format('woff2'),
+       url('../assets/fonts/NationalWeb-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -48,7 +48,7 @@
 
 @font-face {
   font-family: 'RobotoMono-Regular';
-  src: url('/fonts/RobotoMono-Regular.woff') format('woff');
+  src: url('../assets/fonts/RobotoMono-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;

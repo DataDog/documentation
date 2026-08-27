@@ -39,11 +39,17 @@ This site will eventually have tens of thousands of pages, with most of them ren
 
 ## Stay inside `astro/`
 
-Do not edit any files outside the `astro/` directory. Everything outside this folder belongs to the live Hugo site.
+Everything outside this folder belongs to the live Hugo site — do not edit it, with the following exceptions, needed to route/deploy the Astro `/api` app alongside Hugo:
 
-This applies even when the Astro work would benefit from it. For example: if an Astro component needs a translation key that doesn't yet exist in `i18n/en.json`, **do not add it**. Hardcode the English string with a `TODO` comment so the key can be added authoritatively later.
+- Root `Caddyfile` (local dev router).
+- `hugo/Makefile` — dev/deploy targets only (e.g. `start-proxied`), never content or build-script targets.
+- `.github/workflows/preview_link.yml`.
+- `hugo/local/bin/py/preview_links.py` and `hugo/local/bin/py/preview-links-template.mako`.
+- Only at the later Hugo-`/api`-cutover step (see the router plan's Handoff section): `hugo/config/{preview,live}/config.yaml` and `hugo/content/en/api/_index.md`.
 
-If a task seems to require a Hugo-side change, stop and ask first.
+Beyond that list, this applies even when the Astro work would benefit from it. For example: if an Astro component needs a translation key that doesn't yet exist in `i18n/en.json`, **do not add it**. Hardcode the English string with a `TODO` comment so the key can be added authoritatively later.
+
+If a task seems to require any other Hugo-side change, stop and ask first.
 
 ## Commands
 

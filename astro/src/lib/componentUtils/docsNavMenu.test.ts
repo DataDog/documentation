@@ -1,9 +1,19 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import {
   getDocsNavTree,
   findActiveSectionIdentifier,
+  findActivePageIdentifier,
   type DocsNavNode,
 } from "./docsNavMenu";
+
+const ORIGINAL_ENV = { ...process.env };
+
+function resetEnv() {
+  for (const key of Object.keys(process.env)) {
+    delete process.env[key];
+  }
+  Object.assign(process.env, ORIGINAL_ENV);
+}
 
 function findByIdentifier(
   nodes: DocsNavNode[],
@@ -117,5 +127,37 @@ describe("findActiveSectionIdentifier", () => {
     expect(
       findActiveSectionIdentifier(jaTree, "/ja/api/latest/action-connection/"),
     ).toBe("essentials_heading");
+  });
+});
+
+describe("getDocsNavTree hrefs stay prefix-free under a preview branch", () => {
+  beforeEach(resetEnv);
+  afterEach(resetEnv);
+
+  // Regression test for Finding 7: MobileNavSection concatenates these hrefs
+  // onto HUGO_ORIGIN, which already carries the branch prefix. If hrefs from
+  // this module ever picked up the branch prefix themselves, that
+  // concatenation would double it.
+  it("never emits the branch segment, so callers that prepend HUGO_ORIGIN see it exactly once", () => {
+    process.env.CI_ENVIRONMENT_NAME = "preview";
+    process.env.CI_COMMIT_REF_NAME = "devin.ford/my-cool-thing";
+
+    const tree = getDocsNavTree();
+    const hugoOrigin = "https://docs-staging.datadoghq.com/devin.ford/my-cool-thing";
+
+    function assertPrefixedOnce(node: DocsNavNode) {
+      if (node.href) {
+        expect(node.href.startsWith("/devin.ford/my-cool-thing")).toBe(false);
+        const composed = `${hugoOrigin}${node.href}`;
+        expect(composed.match(/devin\.ford\/my-cool-thing/g)?.length).toBe(1);
+      }
+      for (const child of node.children) {
+        assertPrefixedOnce(child);
+      }
+    }
+
+    for (const section of tree) {
+      assertPrefixedOnce(section);
+    }
   });
 });

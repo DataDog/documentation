@@ -4,11 +4,11 @@ import { buildLlmsTree } from "../lib/pagesListing/llmsTree";
 import { LlmsIndexSchema } from "../lib/pagesListing/types";
 
 const SIDECAR = "llms-index.json";
-const INDEX_FILE = "llms.txt";
+const INDEX_FILE = "api/llms.txt";
 
 /**
- * Emits the whole llms.txt tree after the build: `dist/client/llms.txt` plus one
- * detail file per section (and its `part_N` splits).
+ * Emits the whole llms.txt tree after the build: `dist/client/api/llms.txt`
+ * plus one detail file per section (and its `part_N` splits).
  *
  * The `llms-index.json` route emits the resolved page-source structure during the
  * build — that step has to run inside Vite, since the sources reach the API spec
@@ -56,7 +56,9 @@ export function llmsTxt(): AstroIntegration {
         );
         const { index, detailFiles } = buildLlmsTree(llmsIndex, site);
 
-        await writeFile(new URL(INDEX_FILE, clientDir), index, "utf8");
+        const indexUrl = new URL(INDEX_FILE, clientDir);
+        await mkdir(new URL(".", indexUrl), { recursive: true });
+        await writeFile(indexUrl, index, "utf8");
         for (const [urlPath, contents] of detailFiles) {
           await writeDetailFile(clientDir, urlPath, contents);
         }

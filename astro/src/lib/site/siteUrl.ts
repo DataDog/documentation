@@ -13,10 +13,33 @@ export const IS_PROXIED = process.env.PROXIED === "1";
 export const PROXY_PORT = 1314;
 export const ASTRO_DEV_PORT = 4321;
 
+/**
+ * The GitLab-native branch/ref name. Hugo and CI already set this
+ * (`hugo/config/preview/config.yaml`, `hugo/Makefile`'s `config` target) — it is
+ * the single source of truth for the preview path prefix. Trimmed of leading and
+ * trailing slashes so callers can join it into a path without worrying about
+ * double slashes.
+ */
+export function branchRef(): string | undefined {
+  const raw = process.env.CI_COMMIT_REF_NAME;
+  if (!raw) {
+    return undefined;
+  }
+  const trimmed = raw.replace(/^\/+/, "").replace(/\/+$/, "");
+  return trimmed === "" ? undefined : trimmed;
+}
+
 export function deriveSiteUrl(): string {
   const env = process.env.CI_ENVIRONMENT_NAME;
   if (env === "preview") {
-    return `https://docs-staging.datadoghq.com/${process.env.BRANCH}`;
+    const ref = branchRef();
+    if (!ref) {
+      throw new Error(
+        "CI_ENVIRONMENT_NAME=preview but CI_COMMIT_REF_NAME is unset. " +
+          "The preview site URL needs the branch/ref to build the path prefix.",
+      );
+    }
+    return `https://docs-staging.datadoghq.com/${ref}`;
   }
   if (env === "live") {
     return "https://docs.datadoghq.com";
@@ -36,6 +59,16 @@ export function deriveSiteUrl(): string {
  * llms.txt links.
  */
 export function absoluteUrl(urlPath: string, site: string | URL): string {
+  if (import.meta.env?.DEV) {
+    const sitePath = new URL(site).pathname.replace(/^\/|\/$/g, "");
+    if (sitePath && urlPath.replace(/^\//, "").startsWith(`${sitePath}/`)) {
+      throw new Error(
+        `absoluteUrl: "${urlPath}" already starts with the site's own path ` +
+          `("${sitePath}"). Pass a prefix-free path — absoluteUrl adds the ` +
+          `branch prefix from \`site\`; do not compose it with \`pathPrefix()\`.`,
+      );
+    }
+  }
   return new URL(urlPath.replace(/^\//, ""), siteBase(site)).href;
 }
 

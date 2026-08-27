@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
     - 'hugo/content/en/**.md'
+    - 'astro/**'
 
 permissions:
   contents: read

@@ -14,7 +14,7 @@
  */
 import { parse as parseYaml } from "yaml";
 import { z } from "zod";
-import { DEFAULT_LOCALE, localizedHref, type Locale } from "@lib/i18n/locale";
+import { DEFAULT_LOCALE, localePrefix, type Locale } from "@lib/i18n/locale";
 
 // ---------------------------------------------------------------------------
 // Raw schema (internal)
@@ -83,7 +83,7 @@ function resolveUrl(url: string | undefined, lang: Locale): string | null {
   if (url.startsWith("#")) {
     return url;
   }
-  return localizedHref(lang, `/${url.replace(/^\/+/, "")}`);
+  return localePrefix(lang) + `/${url.replace(/^\/+/, "")}`;
 }
 
 // Hugo treats weight 0 (and missing) as "sort last", not first.
@@ -106,7 +106,7 @@ function buildTree(entries: MenuEntry[], lang: Locale): DocsNavNode[] {
       identifier: entry.identifier ?? `${entry.name}-${index}`,
       label: entry.name,
       // Childless, link-less items mirror Hugo's fallback to the docs home.
-      href: resolveUrl(entry.url, lang) ?? (children.length ? null : localizedHref(lang, "/")),
+      href: resolveUrl(entry.url, lang) ?? (children.length ? null : `${localePrefix(lang)}/`),
       children,
     };
   };
