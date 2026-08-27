@@ -61,21 +61,22 @@ For the full schema and all available options, see the [Deployment Gates API ref
 
 {{< tabs >}}
 {{% tab "Monitor" %}}
-The Monitor rule evaluates the state of a set of monitors over a configurable period of time. It fails if at any time during the evaluation period:
+The Monitor rule evaluates the state of a set of monitors over a configurable period of time. Select monitors with either `query` or `monitor_ids`; the two options are mutually exclusive. The rule can fail if at any time during the evaluation period:
 
-- No monitors match the query.
-- More than 50 monitors match the query.
-- Any matching monitor is in `ALERT` or `NO_DATA` state.
+- No monitor groups match the configured selection.
+- More than 300 monitors match the configured selection.
+- Any matching monitor group is in `ALERT` or `NO_DATA` state.
 
 **Options**:
 
-- `query`: The monitor search query, based on the [Search Monitor syntax][1]. Filter on monitor tags:
+- `query`: A monitor search query based on the [Search Monitor syntax][1]. Filter on monitor tags:
   - Monitor static tags: `service:transaction-backend`
   - Tags within the monitor's query: `scope:"service:transaction-backend"`
   - Tags within a [monitor grouping][2]: `group:"service:transaction-backend"`
-- `duration`: The period of time (in seconds) for which the matching monitors are evaluated. Default is 0 (monitors are evaluated instantly). Maximum is 7200 seconds (2 hours).
+- `monitor_ids`: A list of specific monitors. Each item contains a decimal monitor `id` and a `groups` array of exact group names. An empty `groups` array evaluates all groups for that monitor.
+- `duration`: The period of time (in seconds) for which the selected monitors are evaluated. Default is 0 (monitors are evaluated instantly). Maximum is 7200 seconds (2 hours).
 
-Example inline rule:
+Example inline rules:
 
 ```json
 {
@@ -88,9 +89,24 @@ Example inline rule:
 }
 ```
 
+```json
+{
+  "type": "monitor",
+  "name": "Specific monitors",
+  "options": {
+    "monitor_ids": [
+      {"id": "12345678", "groups": []},
+      {"id": "87654321", "groups": ["service:api"]}
+    ],
+    "duration": 300
+  }
+}
+```
+
 **Notes**:
-- `group` filters evaluate only matching groups.
-- Muted monitors are automatically excluded from the evaluation (the query always includes `muted:false`).
+- `group` query filters and `monitor_ids[].groups` evaluate only matching groups.
+- A missing, deleted, inaccessible, or otherwise unmatched explicit monitor ID follows the same no-matching-groups behavior as a query that returns no groups.
+- Muted monitors are automatically excluded from both selection modes.
 
 [1]: /monitors/manage/search/
 [2]: /monitors/manage/#triggered-monitors
