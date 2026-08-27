@@ -1780,14 +1780,11 @@ components:
         - INVITE
         - EMBED
     DashboardSummary:
-      description: Dashboard summary response.
-      properties:
-        dashboards:
-          description: List of dashboard definitions.
-          items:
-            $ref: "#/components/schemas/DashboardSummaryDefinition"
-          type: array
-      type: object
+      description: Dashboard summary response with API-versioned representations.
+      oneOf:
+        - $ref: "#/components/schemas/DashboardSummary_V1"
+        - $ref: "#/components/schemas/DashboardSummary_20270101"
+      x-datadog-api-versioned: true
     DashboardSummaryDefinition:
       description: Dashboard definition.
       properties:
@@ -1824,6 +1821,108 @@ components:
         url:
           description: URL of the dashboard.
           type: string
+      type: object
+    DashboardSummaryDefinition_20270101:
+      description: Dashboard definition.
+      properties:
+        author:
+          $ref: "#/components/schemas/Creator"
+        created:
+          description: Date of creation of the dashboard.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        icon:
+          description: URL to the icon of the dashboard.
+          nullable: true
+          readOnly: true
+          type: string
+        id:
+          $ref: "#/components/schemas/DashboardSummaryID_20270101"
+        integration_id:
+          description: The short name of the integration.
+          nullable: true
+          readOnly: true
+          type: string
+        is_favorite:
+          description: Whether the dashboard is in the favorites.
+          readOnly: true
+          type: boolean
+        is_read_only:
+          description: Whether the dashboard is read only.
+          readOnly: true
+          type: boolean
+        is_shared:
+          description: Whether the dashboard is publicly shared.
+          readOnly: true
+          type: boolean
+        last_view_date:
+          description: Date when the dashboard was last viewed.
+          nullable: true
+          readOnly: true
+          type: string
+        modified:
+          description: Date of last edition of the dashboard.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        popularity:
+          description: Popularity of the dashboard.
+          format: int32
+          maximum: 5
+          readOnly: true
+          type: integer
+        tags:
+          description: List of team names representing ownership of the dashboard.
+          items:
+            description: The name of a Datadog team, formatted as `team:<name>`.
+            type: string
+          nullable: true
+          readOnly: true
+          type: array
+        title:
+          description: Title of the dashboard.
+          readOnly: true
+          type: string
+        type:
+          description: The type of the dashboard.
+          readOnly: true
+          type: string
+        url:
+          description: URL path to the dashboard.
+          readOnly: true
+          type: string
+      type: object
+    DashboardSummaryID_20270101:
+      description: ID of the dashboard.
+      oneOf:
+        - type: string
+        - format: int64
+          type: integer
+    DashboardSummary_20270101:
+      description: Dashboard summary response.
+      properties:
+        dashboards:
+          description: List of dashboard definitions.
+          items:
+            $ref: "#/components/schemas/DashboardSummaryDefinition_20270101"
+          type: array
+        total:
+          description: Number of dashboards.
+          format: int64
+          readOnly: true
+          type: integer
+      type: object
+    DashboardSummary_V1:
+      description: Dashboard summary response.
+      properties:
+        dashboards:
+          description: List of dashboard definitions.
+          items:
+            $ref: "#/components/schemas/DashboardSummaryDefinition"
+          type: array
       type: object
     DashboardTab:
       description: Dashboard tab for organizing widgets.
