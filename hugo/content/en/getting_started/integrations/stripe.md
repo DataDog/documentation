@@ -5,9 +5,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/datadog-stripe-projects/'
       tag: 'Blog'
       text: 'Provision Datadog on Stripe Projects'
-    - link: 'https://docs.stripe.com/projects'
+    - link: 'https://docs.stripe.com/cli'
       tag: 'Documentation'
-      text: 'Stripe Projects CLI documentation'
+      text: 'Stripe CLI documentation'
 ---
 
 <div class="alert alert-info">Datadog provisioning through Stripe Projects is limited to the US1 site. The email address on your Stripe account must not already be associated with a Datadog account.</div>
