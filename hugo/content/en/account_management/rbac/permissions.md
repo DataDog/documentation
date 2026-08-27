@@ -44,9 +44,9 @@ Preview mode gives your organization's administrators the ability to opt into ce
 
 ### Restricted permissions
 
-Restricted permissions are tied to core parts of the Datadog experience and are included on every role by default. Removing a restricted permission can limit users' ability to interact with Datadog in expected ways—for example, viewing or editing their own profile, or accessing standard platform functionality.
+Restricted permissions are tied to core parts of the Datadog experience and are automatically assigned to every role by default. Removing a restricted permission can limit users' ability to interact with Datadog in expected ways—for example, viewing or editing their own profile, or accessing standard platform functionality.
 
-To remove any of the following restricted permissions through the [Create Role][4] or [Update Role][5] API, set `default_permissions_opt_out: true` in the request body:
+To remove any of the following permissions through the [Create Role][4] or [Update Role][5] API, set `default_permissions_opt_out: true` in the request body:
 
 - Dashboards Read (`dashboards_read`)
 - Monitors Read (`monitors_read`)
@@ -59,17 +59,17 @@ To remove any of the following restricted permissions through the [Create Role][
 - CD Visibility Read (`cd_visibility_read`)
 - Vulnerability Management Read (`appsec_vm_read`)
 
-The following restricted permissions cannot be removed by default from either the UI or the API. To make them removable, enable [Minimal Access Roles](#minimal-access-roles-preview):
+By default, the following restricted permissions cannot be removed through the UI or API. To remove these permissions from a role, enable [Minimal Access Roles (Preview)](#minimal-access-roles-preview):
 
 - Built-In Features (`built_in_features`)
 - Metrics Read (`metrics_read`)
 - Timeseries Query (`timeseries_query`)
 - Events Read (`events_read`)
-- Application Security Management Vulnerability Management Library Read (`appsec_vm_library_read`)
 - Hosts Read (`hosts_read`)
 - User Self Profile Read (`user_self_profile_read`)
 - User Self Profile Write (`user_self_profile_write`)
 - Static Analysis Settings Read (`static_analysis_settings_read`)
+- Application Security Management Vulnerability Management Library Read (`appsec_vm_library_read`)
 
 ## Roles
 
@@ -105,23 +105,23 @@ If the custom role is configured to receive automatic updates, your custom role 
 
 <div class="alert alert-info">Minimal Access Roles is in Preview. To request access, contact your Datadog account representative.</div>
 
-Minimal Access Roles give your organization finer-grained control over what users can do in Datadog.
+Minimal Access Roles give your organization more granular control over what users can do in Datadog.
 
-By default, every role includes a foundational set of [restricted permissions](#restricted-permissions), such as reading metrics, viewing hosts, and querying timeseries data. These permissions appear on every role, are selected by default, and cannot normally be removed. Removing them can degrade the in-app experience: a user assigned only a Minimal Access Role may see incomplete or misleading errors on some Datadog pages.
+By default, every role includes a foundational set of [restricted permissions](#restricted-permissions). These permissions are automatically assigned to every role and typically cannot be removed, as they support core functionality across Datadog. Users with only a Minimal Access Role may experience limited functionality or unexpected errors on certain Datadog pages.
 
-Enabling Minimal Access Roles makes the following permissions removable from custom roles, so you can create highly restricted roles suited to specialized workflows:
+Enabling Minimal Access Roles makes the following permissions removable from custom roles, allowing you to create highly restricted roles for specialized workflows:
 
 - Built-In Features (`built_in_features`)
 - Metrics Read (`metrics_read`)
 - Timeseries Query (`timeseries_query`)
 - Events Read (`events_read`)
-- Application Security Management Vulnerability Management Library Read (`appsec_vm_library_read`)
 - Hosts Read (`hosts_read`)
 - User Self Profile Read (`user_self_profile_read`)
 - User Self Profile Write (`user_self_profile_write`)
 - Static Analysis Settings Read (`static_analysis_settings_read`)
+- Application Security Management Vulnerability Management Library Read (`appsec_vm_library_read`)
 
-If you use `default_permissions_opt_out` to remove restricted permissions from your Terraform resources, update the automation to account for these additional permissions as needed before enabling Minimal Access Roles to avoid regressions.
+If you use `default_permissions_opt_out` to remove restricted permissions from Terraform resources, update your automation to account for these additional permissions before enabling Minimal Access Roles. This helps prevent unintended changes to existing access configurations.
 
 ## Permissions list
 
