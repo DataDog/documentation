@@ -59,7 +59,7 @@ To remove the following permissions through the [Create Role][4] or [Update a Ro
 - CD Visibility Read (`cd_visibility_read`)
 - Vulnerability Management Read (`appsec_vm_read`)
 
-By default, the following restricted permissions cannot be removed through the UI or API. To additionally unassign these permissions from a role, enable [Minimal Access Roles (Preview)](#minimal-access-roles-preview):
+By default, the following restricted permissions cannot be removed through the UI or API. Enable [Minimal Access Roles (Preview)](#minimal-access-roles-preview) to make them removable and include them in the permissions removed by `default_permissions_opt_out: true`:
 
 - Built-In Features (`built_in_features`)
 - Metrics Read (`metrics_read`)
