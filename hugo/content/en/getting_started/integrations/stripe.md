@@ -8,9 +8,6 @@ further_reading:
     - link: 'https://docs.stripe.com/projects'
       tag: 'Documentation'
       text: 'Stripe Projects CLI documentation'
-    - link: '/getting_started/agent/'
-      tag: 'Documentation'
-      text: 'Getting Started with the Datadog Agent'
 ---
 
 <div class="alert alert-info">Datadog provisioning through Stripe Projects is limited to the US1 site. The email address on your Stripe account must not already be associated with a Datadog account.</div>
@@ -57,13 +54,9 @@ Use [Stripe Projects][1] to provision and manage Datadog from the Stripe CLI. Th
 
 1. Confirm that your `.env` file contains your Datadog API key, site, and organization name.
 
-### Send data to Datadog
-
-Use the API key and site in your `.env` file to configure the [Datadog Agent][3] or a [Datadog library][4] for your application.
-
 ### Access Datadog
 
-1. Go to the [Datadog login page][5].
+1. Go to the [Datadog login page](https://app.datadoghq.com/account/login).
 1. Select **Sign in with Google** if you use a Google account to sign in to Stripe. Otherwise, select **Forgot password?** and enter the email address from your Stripe account to set a Datadog password.
 
 ## Upgrade your plan
@@ -91,6 +84,3 @@ This stops management of your Datadog organization through Stripe Projects. It d
 
 [1]: https://docs.stripe.com/projects
 [2]: https://docs.stripe.com/cli/install
-[3]: /getting_started/agent/
-[4]: /libraries/
-[5]: https://app.datadoghq.com/account/login
