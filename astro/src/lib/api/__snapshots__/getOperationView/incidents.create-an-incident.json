@@ -98,7 +98,7 @@
                         "description": "The timeline cell's attributes for a create request.",
                         "unionOptions": [
                           {
-                            "label": "Option 1",
+                            "label": "<cell_type=markdown>",
                             "description": "Timeline cell data for Markdown timeline cells for a create request.",
                             "fields": [
                               {
@@ -978,7 +978,7 @@
                   "description": "An object related to an incident that is included in the response.",
                   "unionOptions": [
                     {
-                      "label": "Option 1",
+                      "label": "<type=users>",
                       "description": "User object returned by the API.",
                       "fields": [
                         {
@@ -1054,7 +1054,7 @@
                       ]
                     },
                     {
-                      "label": "Option 2",
+                      "label": "<type=incident_attachments>",
                       "description": "Attachment data from a response.",
                       "fields": [
                         {

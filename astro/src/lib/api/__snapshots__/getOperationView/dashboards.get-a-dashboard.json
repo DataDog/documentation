@@ -324,7 +324,7 @@
                   "description": "[Definition of the widget](https://docs.datadoghq.com/dashboards/widgets/).",
                   "unionOptions": [
                     {
-                      "label": "Option 1",
+                      "label": "<type=alert_value>",
                       "description": "Alert values are query values showing the current value of the metric in any monitor defined on your system.",
                       "fields": [
                         {
@@ -416,7 +416,7 @@
                       ]
                     },
                     {
-                      "label": "Option 2",
+                      "label": "<type=timeseries>",
                       "description": "The timeseries visualization allows you to display the evolution of one or more metrics, log events, or Indexed Spans over time.",
                       "fields": [
                         {
@@ -1322,7 +1322,7 @@
                                       "description": "Number format unit.",
                                       "unionOptions": [
                                         {
-                                          "label": "Option 1",
+                                          "label": "<type=canonical_unit>",
                                           "description": "Canonical unit.",
                                           "fields": [
                                             {
@@ -1355,7 +1355,7 @@
                                           ]
                                         },
                                         {
-                                          "label": "Option 2",
+                                          "label": "<type=custom_unit_label>",
                                           "description": "Custom unit.",
                                           "fields": [
                                             {
@@ -2045,7 +2045,7 @@
                                   "description": "A formula and function query.",
                                   "unionOptions": [
                                     {
-                                      "label": "Option 1",
+                                      "label": "<data_source=metrics>",
                                       "description": "A formula and functions metrics query.",
                                       "fields": [
                                         {
@@ -2116,7 +2116,7 @@
                                       ]
                                     },
                                     {
-                                      "label": "Option 2",
+                                      "label": "Object 2",
                                       "description": "A formula and functions events query.",
                                       "fields": [
                                         {
@@ -2207,7 +2207,7 @@
                                           "description": "Group by configuration for a formula and functions events query. Accepts either a list of facet objects or a flat object that specifies a list of facet fields.",
                                           "unionOptions": [
                                             {
-                                              "label": "Option 1",
+                                              "label": "Object 1",
                                               "description": "List of objects used to group by.",
                                               "fields": [
                                                 {
@@ -2247,7 +2247,7 @@
                                               ]
                                             },
                                             {
-                                              "label": "Option 2",
+                                              "label": "Object 2",
                                               "description": "Flat group by configuration using multiple event facet fields.",
                                               "fields": [
                                                 {
@@ -2368,7 +2368,7 @@
                                       ]
                                     },
                                     {
-                                      "label": "Option 3",
+                                      "label": "Object 3",
                                       "description": "Process query using formulas and functions.",
                                       "fields": [
                                         {
@@ -2473,7 +2473,7 @@
                                       ]
                                     },
                                     {
-                                      "label": "Option 4",
+                                      "label": "<data_source=apm_dependency_stats>",
                                       "description": "A formula and functions APM dependency stats query.",
                                       "fields": [
                                         {
@@ -2579,7 +2579,7 @@
                                       ]
                                     },
                                     {
-                                      "label": "Option 5",
+                                      "label": "<data_source=apm_resource_stats>",
                                       "description": "APM resource stats query using formulas and functions.",
                                       "fields": [
                                         {
@@ -2689,7 +2689,7 @@
                                       ]
                                     },
                                     {
-                                      "label": "Option 6",
+                                      "label": "<data_source=apm_metrics>",
                                       "description": "A formula and functions APM metrics query.",
                                       "fields": [
                                         {
@@ -2819,7 +2819,7 @@
                                       ]
                                     },
                                     {
-                                      "label": "Option 7",
+                                      "label": "<data_source=slo>",
                                       "description": "A formula and functions metrics query.",
                                       "fields": [
                                         {
@@ -2911,7 +2911,7 @@
                                       ]
                                     },
                                     {
-                                      "label": "Option 8",
+                                      "label": "<data_source=cloud_cost>",
                                       "description": "A formula and functions Cloud Cost query.",
                                       "fields": [
                                         {
@@ -3456,7 +3456,7 @@
                           "description": "Time setting for the widget.",
                           "unionOptions": [
                             {
-                              "label": "Option 1",
+                              "label": "Object 1",
                               "description": "Wrapper for live span",
                               "fields": [
                                 {
@@ -3497,7 +3497,7 @@
                               ]
                             },
                             {
-                              "label": "Option 2",
+                              "label": "<type=live>",
                               "description": "Used for arbitrary live span times, such as 17 minutes or 6 hours.",
                               "fields": [
                                 {
@@ -3546,7 +3546,7 @@
                               ]
                             },
                             {
-                              "label": "Option 3",
+                              "label": "<type=fixed>",
                               "description": "Used for fixed span times, such as 'March 1 to March 7'.",
                               "fields": [
                                 {
@@ -3685,7 +3685,7 @@
                       ]
                     },
                     {
-                      "label": "Option 3",
+                      "label": "<type=group>",
                       "description": "The group widget allows you to keep similar graphs together on your dashboard. Each group has a custom header, can hold one to many graphs, and is collapsible.",
                       "fields": [
                         {

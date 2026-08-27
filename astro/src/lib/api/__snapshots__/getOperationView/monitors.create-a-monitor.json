@@ -703,7 +703,7 @@
                     "description": "A formula and function query.",
                     "unionOptions": [
                       {
-                        "label": "Option 1",
+                        "label": "Object 1",
                         "description": "A formula and functions events query.",
                         "fields": [
                           {
@@ -898,7 +898,7 @@
                         ]
                       },
                       {
-                        "label": "Option 2",
+                        "label": "Object 2",
                         "description": "A formula and functions cost query.",
                         "fields": [
                           {
@@ -952,7 +952,7 @@
                         ]
                       },
                       {
-                        "label": "Option 3",
+                        "label": "Object 3",
                         "description": "A formula and functions data quality query.",
                         "fields": [
                           {
@@ -1072,7 +1072,7 @@
                         ]
                       },
                       {
-                        "label": "Option 4",
+                        "label": "Object 4",
                         "description": "A formula and functions aggregate augmented query. Used to enrich base query results with data from a reference table.",
                         "fields": [
                           {
@@ -1084,7 +1084,7 @@
                             "description": "Augment query for aggregate augmented queries. Can be an events query or a reference table query.",
                             "unionOptions": [
                               {
-                                "label": "Option 1",
+                                "label": "Object 1",
                                 "description": "A formula and functions events query.",
                                 "fields": [
                                   {
@@ -1279,7 +1279,7 @@
                                 ]
                               },
                               {
-                                "label": "Option 2",
+                                "label": "<data_source=reference_table>",
                                 "description": "A reference table query for use in aggregate queries.",
                                 "fields": [
                                   {
@@ -1356,7 +1356,7 @@
                             "description": "Base query for aggregate queries. Can be an events query or a metrics query.",
                             "unionOptions": [
                               {
-                                "label": "Option 1",
+                                "label": "Object 1",
                                 "description": "A formula and functions events query.",
                                 "fields": [
                                   {
@@ -1551,7 +1551,7 @@
                                 ]
                               },
                               {
-                                "label": "Option 2",
+                                "label": "Object 2",
                                 "description": "A formula and functions metrics query for use in aggregate queries.",
                                 "fields": [
                                   {
@@ -1803,7 +1803,7 @@
                         ]
                       },
                       {
-                        "label": "Option 5",
+                        "label": "Object 5",
                         "description": "A formula and functions aggregate filtered query. Used to filter base query results using data from another source.",
                         "fields": [
                           {
@@ -1815,7 +1815,7 @@
                             "description": "Base query for aggregate queries. Can be an events query or a metrics query.",
                             "unionOptions": [
                               {
-                                "label": "Option 1",
+                                "label": "Object 1",
                                 "description": "A formula and functions events query.",
                                 "fields": [
                                   {
@@ -2010,7 +2010,7 @@
                                 ]
                               },
                               {
-                                "label": "Option 2",
+                                "label": "Object 2",
                                 "description": "A formula and functions metrics query for use in aggregate queries.",
                                 "fields": [
                                   {
@@ -2143,7 +2143,7 @@
                             "description": "Filter query for aggregate filtered queries. Can be an events query or a reference table query.",
                             "unionOptions": [
                               {
-                                "label": "Option 1",
+                                "label": "Object 1",
                                 "description": "A formula and functions events query.",
                                 "fields": [
                                   {
@@ -2338,7 +2338,7 @@
                                 ]
                               },
                               {
-                                "label": "Option 2",
+                                "label": "<data_source=reference_table>",
                                 "description": "A reference table query for use in aggregate queries.",
                                 "fields": [
                                   {
@@ -3318,7 +3318,7 @@
                       "description": "A formula and function query.",
                       "unionOptions": [
                         {
-                          "label": "Option 1",
+                          "label": "Object 1",
                           "description": "A formula and functions events query.",
                           "fields": [
                             {
@@ -3513,7 +3513,7 @@
                           ]
                         },
                         {
-                          "label": "Option 2",
+                          "label": "Object 2",
                           "description": "A formula and functions cost query.",
                           "fields": [
                             {
@@ -3567,7 +3567,7 @@
                           ]
                         },
                         {
-                          "label": "Option 3",
+                          "label": "Object 3",
                           "description": "A formula and functions data quality query.",
                           "fields": [
                             {
@@ -3687,7 +3687,7 @@
                           ]
                         },
                         {
-                          "label": "Option 4",
+                          "label": "Object 4",
                           "description": "A formula and functions aggregate augmented query. Used to enrich base query results with data from a reference table.",
                           "fields": [
                             {
@@ -3699,7 +3699,7 @@
                               "description": "Augment query for aggregate augmented queries. Can be an events query or a reference table query.",
                               "unionOptions": [
                                 {
-                                  "label": "Option 1",
+                                  "label": "Object 1",
                                   "description": "A formula and functions events query.",
                                   "fields": [
                                     {
@@ -3894,7 +3894,7 @@
                                   ]
                                 },
                                 {
-                                  "label": "Option 2",
+                                  "label": "<data_source=reference_table>",
                                   "description": "A reference table query for use in aggregate queries.",
                                   "fields": [
                                     {
@@ -3971,7 +3971,7 @@
                               "description": "Base query for aggregate queries. Can be an events query or a metrics query.",
                               "unionOptions": [
                                 {
-                                  "label": "Option 1",
+                                  "label": "Object 1",
                                   "description": "A formula and functions events query.",
                                   "fields": [
                                     {
@@ -4166,7 +4166,7 @@
                                   ]
                                 },
                                 {
-                                  "label": "Option 2",
+                                  "label": "Object 2",
                                   "description": "A formula and functions metrics query for use in aggregate queries.",
                                   "fields": [
                                     {
@@ -4418,7 +4418,7 @@
                           ]
                         },
                         {
-                          "label": "Option 5",
+                          "label": "Object 5",
                           "description": "A formula and functions aggregate filtered query. Used to filter base query results using data from another source.",
                           "fields": [
                             {
@@ -4430,7 +4430,7 @@
                               "description": "Base query for aggregate queries. Can be an events query or a metrics query.",
                               "unionOptions": [
                                 {
-                                  "label": "Option 1",
+                                  "label": "Object 1",
                                   "description": "A formula and functions events query.",
                                   "fields": [
                                     {
@@ -4625,7 +4625,7 @@
                                   ]
                                 },
                                 {
-                                  "label": "Option 2",
+                                  "label": "Object 2",
                                   "description": "A formula and functions metrics query for use in aggregate queries.",
                                   "fields": [
                                     {
@@ -4758,7 +4758,7 @@
                               "description": "Filter query for aggregate filtered queries. Can be an events query or a reference table query.",
                               "unionOptions": [
                                 {
-                                  "label": "Option 1",
+                                  "label": "Object 1",
                                   "description": "A formula and functions events query.",
                                   "fields": [
                                     {
@@ -4953,7 +4953,7 @@
                                   ]
                                 },
                                 {
-                                  "label": "Option 2",
+                                  "label": "<data_source=reference_table>",
                                   "description": "A reference table query for use in aggregate queries.",
                                   "fields": [
                                     {
