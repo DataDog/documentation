@@ -44,9 +44,9 @@ Preview mode gives your organization's administrators the ability to opt into ce
 
 ### Restricted permissions
 
-Restricted permissions are tied to core parts of the Datadog experience and are automatically assigned to every role by default. Removing a restricted permission can limit users' ability to interact with Datadog in expected ways—for example, viewing or editing their own profile, or accessing standard platform functionality.
+Restricted permissions support core parts of the Datadog experience and are automatically assigned to every role by default. Removing these default permissions can affect how users interact with Datadog. For example, users may be unable to view or edit their profile, or access standard platform functionality.
 
-To remove any of the following permissions through the [Create Role][4] or [Update Role][5] API, set `default_permissions_opt_out: true` in the request body:
+To remove the following permissions through the [Create Role][4] or [Update a Role][5] API, set `default_permissions_opt_out: true` in the request body:
 
 - Dashboards Read (`dashboards_read`)
 - Monitors Read (`monitors_read`)
@@ -59,7 +59,7 @@ To remove any of the following permissions through the [Create Role][4] or [Upda
 - CD Visibility Read (`cd_visibility_read`)
 - Vulnerability Management Read (`appsec_vm_read`)
 
-By default, the following restricted permissions cannot be removed through the UI or API. To remove these permissions from a role, enable [Minimal Access Roles (Preview)](#minimal-access-roles-preview):
+By default, the following restricted permissions cannot be removed through the UI or API. To additionally unassign these permissions from a role, enable [Minimal Access Roles (Preview)](#minimal-access-roles-preview):
 
 - Built-In Features (`built_in_features`)
 - Metrics Read (`metrics_read`)
@@ -103,7 +103,7 @@ If the custom role is configured to receive automatic updates, your custom role 
 
 ### Minimal Access Roles (Preview)
 
-<div class="alert alert-info">Minimal Access Roles is in Preview. To request access, contact your Datadog account representative.</div>
+<div class="alert alert-info">Minimal Access Roles is in Preview. Contact your Datadog representative to request access.</div>
 
 Minimal Access Roles give your organization more granular control over what users can do in Datadog.
 
