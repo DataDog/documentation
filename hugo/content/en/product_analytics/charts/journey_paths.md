@@ -28,7 +28,7 @@ After you define steps in a journey, the chart displays the most common paths th
 
 Each path shows the percentage and number of sessions that followed that path, and the average time spent on it. Paths with no listed events represent sessions that went directly from the start event to the end event with no intermediate views or actions in between.
 
-{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_customization.png" alt="A Journey Paths chart with numbered callouts for the converted/dropped selector, step selector, time range, event type toggles, View more, the path options menu, and the More Paths/Fewer Paths controls" style="width:100%;" >}}
+{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_customization.png" alt="A Journey Paths chart with numbered callouts for the converted/dropped selector, step selector, time range, event type toggles, View more, the path options menu, and the More Paths/Fewer Paths controls." style="width:100%;" >}}
 
 You can refine journey path charts in various ways to zero in on the paths you want to analyze.
 
