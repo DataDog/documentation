@@ -13,7 +13,7 @@ Customer Contracts gives a partner a single place to manage customers, contracts
 
 Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}} in the Admin Org; see [Requesting an Admin Org][2] if one isn't set up yet.
 
-{{< img src="account_management/plan_and_usage/customer-contracts-list.png" alt="Customer Contracts tab under Plan & Usage in an Admin Org, listing customers and contracts" style="width:100%;" >}}
+{{< img src="partners/multi_tenant_billing/customer_contracts.png" alt="Customer Contracts tab under Plan & Usage in an Admin Org, listing customers and contracts" style="width:100%;" >}}
 
 **Note**: The Billing Read permission is required to view Customer Contracts.
 
@@ -27,17 +27,15 @@ Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}
 - Whether [Customer Pricing][1] is enabled for each customer, not yet configured, or needs an update after a contract change.
 - Key contacts per customer: the Datadog CSM, the Datadog AE, the partner account team, and the billing contact receiving invoices.
 
-{{< img src="account_management/plan_and_usage/customer-contracts-detail.png" alt="Customer Contracts detail panel showing spend overview, drawdown depletion, contract info, and contacts for a customer" style="width:100%;" >}}
+{{< img src="partners/multi_tenant_billing/customer_contracts_detail.png" alt="Customer Contracts detail panel showing spend overview, drawdown depletion, contract info, and contacts for a customer" style="width:100%;" >}}
 
 Invoices are listed per customer with issue and due dates, amount, and payment status, and roll up into overdue counts and totals on the main Customer Contracts page:
 
-{{< img src="account_management/plan_and_usage/customer-contracts-invoices.png" alt="Customer Contracts invoices tab listing invoice numbers, dates, amounts, and status for a customer" style="width:100%;" >}}
+{{< img src="partners/multi_tenant_billing/customer_contracts_invoices.png" alt="Customer Contracts invoices tab listing invoice numbers, dates, amounts, and status for a customer" style="width:100%;" >}}
 
-## Further Reading
+## Related docs
 
 - [Requesting an Admin Org][2]
-- [Multi-Tenant Usage Metering and Billing][4]
 
 [1]: /account_management/plan_and_usage/partner_experience/customer_pricing/
 [2]: /partners/multi_tenant_billing/#requesting-an-admin-org
-[4]: /partners/multi_tenant_billing/

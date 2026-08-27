@@ -10540,11 +10540,6 @@ menu:
       url: account_management/plan_and_usage/partner_experience/
       parent: account_management_plan_and_usage
       weight: 1403
-    - name: Customer Contracts
-      identifier: account_management_partner_experience_customer_contracts
-      url: account_management/plan_and_usage/partner_experience/customer_contracts/
-      parent: account_management_partner_experience
-      weight: 1
     - name: Billing
       identifier: account_management_billing
       url: account_management/billing/

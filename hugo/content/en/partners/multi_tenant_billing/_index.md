@@ -67,4 +67,4 @@ For help with common Admin Org and Trial Org issues, see [Troubleshooting][7].
 [16]: mailto:partner-support@datadoghq.com
 [17]: https://partners.datadoghq.com/s/login/
 [9]: /account_management/plan_and_usage/partner_experience/customer_pricing/
-[10]: /account_management/plan_and_usage/partner_experience/customer_contracts/
+[10]: /partners/multi_tenant_billing/customer-contracts-management/

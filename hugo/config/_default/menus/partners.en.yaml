@@ -61,6 +61,11 @@ menu:
       identifier: multi-tenant-billing-centralized-usage-metrics
       parent: multi-tenant-billing
       weight: 40
+    - name: Customer Contracts
+      url: /partners/multi_tenant_billing/customer-contracts-management/
+      identifier: multi-tenant-billing-customer-contracts-management
+      parent: multi-tenant-billing
+      weight: 50
     - name: Troubleshooting
       url: /partners/multi_tenant_billing/troubleshooting/
       identifier: multi-tenant-billing-troubleshooting
