@@ -48,6 +48,11 @@ After you associate a view with a team, Datadog automatically attributes new eve
 
 {{< img src="/real_user_monitoring/ownership_of_views/ownership-application-management-2.png" alt="View of the Team Ownership page, where you can assign different pages of your application to specific teams." >}}
 
+## Manage Ownership of Views with the Datadog API
+
+Ownership of views can also be configured through the [Datadog API](https://docs.datadoghq.com/api/latest/rum-teams-ownership/).
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
