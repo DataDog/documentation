@@ -219682,9 +219682,11 @@ paths:
                         connected_team:
                           data:
                             id: "@GitHubOrg/team-handle"
+                            type: github_team
                         team:
                           data:
                             id: 87654321-4321-8765-dcba-210987654321
+                            type: team
                       type: team_connection
             schema:
               $ref: "#/components/schemas/TeamConnectionCreateRequest"
