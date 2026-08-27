@@ -16,6 +16,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
   tag: "Blog"
   text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"
+- link: "https://www.datadoghq.com/architecture/efficient-kubernetes-monitoring-with-the-datadog-cluster-agent/"
+  tag: "Architecture Center"
+  text: "Efficient Kubernetes Monitoring with the Datadog Cluster Agent"
+- link: "https://www.datadoghq.com/architecture/real-world-applications-of-the-datadog-cluster-agent-part-one/"
+  tag: "Architecture Center"
+  text: "Real-world applications of the Datadog Cluster Agent (Part 1)"
 ---
 
 ## Overview

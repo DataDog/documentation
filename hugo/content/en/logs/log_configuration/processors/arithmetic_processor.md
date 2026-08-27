@@ -30,7 +30,7 @@ The arithmetic processor is used to calculate values using log attributes. The m
 
 ## Before and after state of logs
 
-{{% collapse-content title="Example: Converting duration from nanoseconds to milliseconds" level="h4" %}}
+{{% collapse-content title="Example: Converting duration from nanoseconds to milliseconds" level="h3" %}}
 
 **Before:**
 

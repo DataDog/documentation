@@ -1,5 +1,6 @@
 ---
 title: Explore Templates
+description: Learn about the out-of-the-box logs, metrics, and traces templates available for building and deploying pipelines in the Observability Pipelines UI.
 disable_toc: false
 further_reading:
 - link: "observability_pipelines/set_up_pipelines#set-up-a-pipeline"

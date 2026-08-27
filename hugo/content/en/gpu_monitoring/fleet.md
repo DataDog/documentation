@@ -68,7 +68,7 @@ The summary graph provides out-of-the-box (OOTB) visualizations for key telemetr
 
 Expand this section below to see a table of the available options and what they represent.
 
-{{% collapse-content title="See full list of Provisioning summary graph options" level="h4" expanded=false id="provisioning-summary-graph-table" %}}
+{{% collapse-content title="See full list of Provisioning summary graph options" level="h5" expanded=false id="provisioning-summary-graph-table" %}}
 | Option              | Definition                                                |
 | -------------------- | ---------------------------------------------------------- |
 | Provisioned Devices  | Breakdown of provisioned devices and active devices.       |
@@ -93,7 +93,7 @@ The summary graph provides out-of-the-box (OOTB) visualizations for key telemetr
 
 Expand the section below to see a table of the available options and what they represent.
 
-{{% collapse-content title="See full list of Performance summary graph options" level="h4" expanded=false id="performance-summary-graph-table" %}}
+{{% collapse-content title="See full list of Performance summary graph options" level="h5" expanded=false id="performance-summary-graph-table" %}}
 | Option              | Definition                                                                                                                                                                                                              |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | CPU Util            | Percentage of time the CPU spent running user space processes.                                                                                                                                                        |
@@ -120,7 +120,7 @@ This table breaks down your GPU-powered infrastructure by any tag of your choosi
 
 You can click on the gear icon to customize which metrics are displayed within the table. Expand the section below to see a full list of the available metrics. 
 
-{{% collapse-content title="See the full list of available metrics" level="h4" expanded=false id="metric-full-list" %}}
+{{% collapse-content title="See the full list of available metrics" level="h3" expanded=false id="metric-full-list" %}}
 | Metric                   | Definition                                                                                                                                                                                                              | Metric Name                                        | Provisioning Tab | Performance Tab |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ---------------- | --------------- |
 | Idle Cost                | (Only nonzero for time frames longer than 2 days) The cost of GPU resources that are reserved and allocated, but not used.                                                                                              | `gpu_monitoring.estimated_idle_cost`               | ✓                 | ✓               |
