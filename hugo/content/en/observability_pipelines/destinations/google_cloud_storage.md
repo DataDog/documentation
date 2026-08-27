@@ -86,6 +86,10 @@ Enter a prefix that you want to apply to all key objects.
 1. Click {{< ui >}}Add Header{{< /ui >}} to add metadata.
 1. Enter values for the header name and value.
 
+#### Compression
+
+Select the compression algorithm for your archived logs in the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}). Gzip is the default.
+
 #### Buffering
 
 {{% observability_pipelines/destination_buffer %}}

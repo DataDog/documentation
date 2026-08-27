@@ -81,6 +81,10 @@ Enter a prefix that you want to apply to all key objects.
 - See [template syntax][6] if you want to route logs to different object keys based on specific fields in your logs.
 	- **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
 
+#### Compression
+
+Select the compression algorithm for your archived logs in the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}). Gzip is the default.
+
 #### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
