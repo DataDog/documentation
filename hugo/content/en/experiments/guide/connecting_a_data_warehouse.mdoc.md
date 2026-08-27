@@ -529,7 +529,7 @@ The examples in this guide use `datadog_experiments_user` and `datadog_experimen
 
 ### Create a dedicated service user and role in Snowflake
 
-1. Use the [Snowflake documentation][18] to create a public-private key pair for enhanced authentication. Datadog only supports unencrypted private keys.
+1. Use the [Snowflake documentation][18] to create a public-private key pair for enhanced authentication. Datadog supports both unencrypted private keys and passphrase-protected PKCS#8 private keys.
 1. Run the following commands in Snowflake to create the user and role in the service account. Replace `<public_key>` with the public key you generated in the previous step.
 
 ```sql
@@ -596,7 +596,7 @@ To connect your Snowflake account to Datadog for warehouse-native experiment ana
 1. Add your {% ui %}Account URL{% /ui %}. To find your account URL, see the [Snowflake guide][19].
 1. Toggle off all resources (these are not needed for experiment analysis).
 1. Enter the Snowflake {% ui %}User Name{% /ui %} you created in [Step 1](#step-1-prepare-the-snowflake-service-account) (for example, `datadog_experiments_user`).
-1. Scroll to the {% ui %}Configure a key pair authentication{% /ui %} section and upload your unencrypted {% ui %}private key{% /ui %}.
+1. Scroll to the {% ui %}Configure a key pair authentication{% /ui %} section and upload your {% ui %}private key{% /ui %}. If your private key is passphrase-protected, enter the passphrase in the {% ui %}Private Key Password{% /ui %} field.
 1. Click {% ui %}Save{% /ui %}.
 
 {% alert %}

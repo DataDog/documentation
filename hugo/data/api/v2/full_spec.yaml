@@ -949,6 +949,13 @@ components:
       required: true
       schema:
         type: string
+    IntegrationAccountIdParameter:
+      description: Unique identifier of the integration account.
+      in: path
+      name: account_id
+      required: true
+      schema:
+        type: string
     IssueIDPathParameter:
       description: The identifier of the issue.
       example: "c1726a66-1f64-11ee-b338-da7ad0900002"
@@ -1460,7 +1467,7 @@ components:
         format: int64
         type: integer
     PageSize:
-      description: Size for a given page. The maximum allowed value is 100.
+      description: Number of items to return per page. The maximum allowed value is 100.
       in: query
       name: page[size]
       required: false
@@ -1767,6 +1774,20 @@ components:
       required: true
       schema:
         type: string
+    RumExclusionFilterApplicationIDParameter:
+      description: RUM application ID.
+      in: path
+      name: app_id
+      required: true
+      schema:
+        type: string
+    RumExclusionFilterIDParameter:
+      description: Exclusion filter ID.
+      in: path
+      name: ef_id
+      required: true
+      schema:
+        type: string
     RumMetricIDParameter:
       description: The name of the RUM-based metric.
       in: path
@@ -1799,7 +1820,9 @@ components:
         example: cd73a516-a481-4af5-8352-9b577465c77b
         type: string
     RumRetentionQuotaScopeTypeParameter:
-      description: The type of scope the retention quota configuration applies to.
+      description: |-
+        The type of scope the retention quota configuration applies to.
+        `application` is the only supported scope type.
       in: path
       name: scope_type
       required: true
@@ -2022,6 +2045,46 @@ components:
       required: true
       schema:
         type: string
+    TeamsOwnershipFilterApplicationIdParameter:
+      description: Filter mappings by RUM application ID. Each value must be a valid UUID.
+      in: query
+      name: filter[application_id]
+      schema:
+        items:
+          format: uuid
+          type: string
+        type: array
+    TeamsOwnershipFilterServiceParameter:
+      description: Filter mappings by RUM application service name.
+      in: query
+      name: filter[service]
+      schema:
+        items:
+          type: string
+        type: array
+    TeamsOwnershipFilterTeamHandleParameter:
+      description: Filter mappings by owning team handle.
+      in: query
+      name: filter[team_handle]
+      schema:
+        items:
+          type: string
+        type: array
+    TeamsOwnershipFilterViewNameParameter:
+      description: Filter mappings by RUM view name.
+      in: query
+      name: filter[view_name]
+      schema:
+        items:
+          type: string
+        type: array
+    TeamsOwnershipMappingIdParameter:
+      description: The ID of the teams ownership mapping.
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
     ToTimestamp:
       description: The ending timestamp for the SLO status query in epoch seconds.
       in: query
@@ -2239,6 +2302,12 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Failed Precondition
+    RumExclusionFilterMethodNotAllowedResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/APIErrorResponse"
+      description: Method Not Allowed
     SpansBadRequestResponse:
       content:
         application/json:
@@ -7199,13 +7268,14 @@ components:
         - fixes
       type: object
     Annotation:
-      description: "A list of annotations used in the workflow. These are like sticky notes for your workflow!"
+      description: A text annotation displayed on the workflow canvas.
       properties:
         display:
           $ref: "#/components/schemas/AnnotationDisplay"
         id:
-          description: The `Annotation` `id`.
+          description: The unique identifier of this annotation within the workflow.
           example: ""
+          minLength: 1
           type: string
         markdownTextAnnotation:
           $ref: "#/components/schemas/AnnotationMarkdownTextAnnotation"
@@ -7362,28 +7432,28 @@ components:
         - attributes
       type: object
     AnnotationDisplay:
-      description: The definition of `AnnotationDisplay` object.
+      description: The annotation's position and size on the workflow canvas.
       properties:
         bounds:
           $ref: "#/components/schemas/AnnotationDisplayBounds"
       type: object
     AnnotationDisplayBounds:
-      description: The definition of `AnnotationDisplayBounds` object.
+      description: Canvas coordinates and dimensions for an annotation on the workflow canvas.
       properties:
         height:
-          description: The `bounds` `height`.
+          description: The annotation's height on the canvas.
           format: double
           type: number
         width:
-          description: The `bounds` `width`.
+          description: The annotation's width on the canvas.
           format: double
           type: number
         x:
-          description: The `bounds` `x`.
+          description: The annotation's horizontal canvas coordinate.
           format: double
           type: number
         y:
-          description: The `bounds` `y`.
+          description: The annotation's vertical canvas coordinate.
           format: double
           type: number
       type: object
@@ -7467,10 +7537,11 @@ components:
         - POINT_IN_TIME
         - TIME_REGION
     AnnotationMarkdownTextAnnotation:
-      description: The definition of `AnnotationMarkdownTextAnnotation` object.
+      description: Markdown content displayed in an annotation.
       properties:
         text:
-          description: The `markdownTextAnnotation` `text`.
+          description: The annotation's Markdown content.
+          maxLength: 3000
           type: string
       type: object
     AnnotationRequestData:
@@ -7751,7 +7822,7 @@ components:
       description: An arbitrary object value with additional properties.
       type: object
     AnyValueString:
-      description: A scalar string value.
+      description: A scalar value represented as a string.
       type: string
     ApiID:
       description: API identifier.
@@ -10909,6 +10980,10 @@ components:
         name:
           description: Operating system name.
           example: ubuntu
+          type: string
+        version:
+          description: Operating system version.
+          example: "24.04"
           type: string
       required:
         - name
@@ -33633,10 +33708,27 @@ components:
           example: 3600
           format: int64
           type: integer
+        fail_on_no_data:
+          default: true
+          description: Whether the rule should fail if a matching monitor group is in a NO DATA state.
+          example: false
+          type: boolean
+        fail_on_no_groups_found:
+          default: false
+          description: Whether the rule should fail if no monitor groups are found for the query.
+          example: false
+          type: boolean
         query:
           description: Monitors that match this query are evaluated.
           example: "service:my-service env:prod"
           type: string
+        warmup:
+          default: 0
+          description: Seconds to wait after a deployment starts before evaluating the monitor's status.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
       required:
         - query
       type: object
@@ -34988,6 +35080,363 @@ components:
       required:
         - score
         - severity
+      type: object
+    ElasticCloudDetailedIndexStatsIntegrationDataflowRequest:
+      description: The Elastic Cloud detailed index stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    ElasticCloudDetailedIndexStatsIntegrationDataflowResponse:
+      description: The Elastic Cloud detailed index stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ElasticCloudIndexStatsIntegrationDataflowRequest:
+      description: The Elastic Cloud index stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    ElasticCloudIndexStatsIntegrationDataflowResponse:
+      description: The Elastic Cloud index stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ElasticCloudIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the Elastic Cloud integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/IntegrationAccountBasicAuthRequest"
+    ElasticCloudIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the Elastic Cloud integration account.
+      oneOf:
+        - $ref: "#/components/schemas/IntegrationAccountBasicAuthResponse"
+    ElasticCloudIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the Elastic Cloud integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/IntegrationAccountBasicAuthUpdate"
+    ElasticCloudIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create an Elastic Cloud integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/ElasticCloudIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Elastic Cloud integration account.
+          example: elastic-cloud-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    ElasticCloudIntegrationAccountCreateData:
+      description: Data envelope for creating an Elastic Cloud integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    ElasticCloudIntegrationAccountCreateRequest:
+      description: Request payload to create an Elastic Cloud integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    ElasticCloudIntegrationAccountResponse:
+      description: Response payload for a single Elastic Cloud integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    ElasticCloudIntegrationAccountResponseAttributes:
+      description: Attributes of an Elastic Cloud integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/ElasticCloudIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the Elastic Cloud integration account.
+          example: elastic-cloud-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    ElasticCloudIntegrationAccountResponseData:
+      description: Data envelope of an Elastic Cloud integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the Elastic Cloud integration account.
+          example: 953a0060-81ec-4221-aed4-d4733b59cd96
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    ElasticCloudIntegrationAccountSettingsRequest:
+      description: Settings for creating the Elastic Cloud integration account.
+      properties:
+        tags:
+          description: Comma-separated list of custom tags for this Elastic Cloud deployment.
+          example: "env:prod,team:saasint"
+          type: string
+        url:
+          description: Elastic Cloud deployment URL.
+          example: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+          type: string
+      required:
+        - url
+      type: object
+    ElasticCloudIntegrationAccountSettingsResponse:
+      description: Settings configured on the Elastic Cloud integration account.
+      properties:
+        tags:
+          description: Comma-separated list of custom tags for this Elastic Cloud deployment.
+          example: "env:prod,team:saasint"
+          type: string
+        url:
+          description: Elastic Cloud deployment URL.
+          example: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+          type: string
+      required:
+        - url
+      type: object
+    ElasticCloudIntegrationAccountSettingsUpdate:
+      description: Settings for updating the Elastic Cloud integration account. Only the fields provided are changed.
+      properties:
+        tags:
+          description: Comma-separated list of custom tags for this Elastic Cloud deployment.
+          example: "env:prod,team:saasint"
+          type: string
+        url:
+          description: Elastic Cloud deployment URL.
+          example: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+          type: string
+      type: object
+    ElasticCloudIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update an Elastic Cloud integration account. Every field is optional; only the fields provided are changed. When `dataflows` is provided, only the dataflow ids included in the request are modified; dataflows omitted from the map keep their current configuration.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/ElasticCloudIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Elastic Cloud integration account.
+          example: elastic-cloud-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountSettingsUpdate"
+      type: object
+    ElasticCloudIntegrationAccountUpdateData:
+      description: Data envelope for updating an Elastic Cloud integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the Elastic Cloud integration account to update.
+          example: 953a0060-81ec-4221-aed4-d4733b59cd96
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ElasticCloudIntegrationAccountUpdateRequest:
+      description: Request payload to update an Elastic Cloud integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    ElasticCloudIntegrationAccountsResponse:
+      description: Response payload for a list of Elastic Cloud integration accounts.
+      properties:
+        data:
+          description: List of Elastic Cloud integration accounts.
+          items:
+            $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    ElasticCloudIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: Dataflows to configure on the Elastic Cloud integration account, keyed by dataflow id.
+      properties:
+        elastic-cloud-detailed-index-stats:
+          $ref: "#/components/schemas/ElasticCloudDetailedIndexStatsIntegrationDataflowRequest"
+        elastic-cloud-index-stats:
+          $ref: "#/components/schemas/ElasticCloudIndexStatsIntegrationDataflowRequest"
+        elastic-cloud-pending-task-stats:
+          $ref: "#/components/schemas/ElasticCloudPendingTaskStatsIntegrationDataflowRequest"
+        elastic-cloud-primary-shard-graceful-timeout:
+          $ref: "#/components/schemas/ElasticCloudPrimaryShardGracefulTimeoutIntegrationDataflowRequest"
+        elastic-cloud-primary-shard-stats:
+          $ref: "#/components/schemas/ElasticCloudPrimaryShardStatsIntegrationDataflowRequest"
+        elastic-cloud-shard-allocation-stats:
+          $ref: "#/components/schemas/ElasticCloudShardAllocationStatsIntegrationDataflowRequest"
+        elastic-cloud-slm-stats:
+          $ref: "#/components/schemas/ElasticCloudSlmStatsIntegrationDataflowRequest"
+      type: object
+    ElasticCloudIntegrationDataflowsResponse:
+      description: Dataflows configured on the Elastic Cloud integration account, keyed by dataflow id.
+      properties:
+        elastic-cloud-detailed-index-stats:
+          $ref: "#/components/schemas/ElasticCloudDetailedIndexStatsIntegrationDataflowResponse"
+        elastic-cloud-index-stats:
+          $ref: "#/components/schemas/ElasticCloudIndexStatsIntegrationDataflowResponse"
+        elastic-cloud-metrics:
+          $ref: "#/components/schemas/ElasticCloudMetricsIntegrationDataflowResponse"
+        elastic-cloud-pending-task-stats:
+          $ref: "#/components/schemas/ElasticCloudPendingTaskStatsIntegrationDataflowResponse"
+        elastic-cloud-primary-shard-graceful-timeout:
+          $ref: "#/components/schemas/ElasticCloudPrimaryShardGracefulTimeoutIntegrationDataflowResponse"
+        elastic-cloud-primary-shard-stats:
+          $ref: "#/components/schemas/ElasticCloudPrimaryShardStatsIntegrationDataflowResponse"
+        elastic-cloud-shard-allocation-stats:
+          $ref: "#/components/schemas/ElasticCloudShardAllocationStatsIntegrationDataflowResponse"
+        elastic-cloud-slm-stats:
+          $ref: "#/components/schemas/ElasticCloudSlmStatsIntegrationDataflowResponse"
+      type: object
+    ElasticCloudMetricsIntegrationDataflowResponse:
+      description: The Elastic Cloud metrics dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          readOnly: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ElasticCloudPendingTaskStatsIntegrationDataflowRequest:
+      description: The Elastic Cloud pending task stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    ElasticCloudPendingTaskStatsIntegrationDataflowResponse:
+      description: The Elastic Cloud pending task stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ElasticCloudPrimaryShardGracefulTimeoutIntegrationDataflowRequest:
+      description: The Elastic Cloud primary shard graceful timeout dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    ElasticCloudPrimaryShardGracefulTimeoutIntegrationDataflowResponse:
+      description: The Elastic Cloud primary shard graceful timeout dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ElasticCloudPrimaryShardStatsIntegrationDataflowRequest:
+      description: The Elastic Cloud primary shard stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    ElasticCloudPrimaryShardStatsIntegrationDataflowResponse:
+      description: The Elastic Cloud primary shard stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ElasticCloudShardAllocationStatsIntegrationDataflowRequest:
+      description: The Elastic Cloud shard allocation stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    ElasticCloudShardAllocationStatsIntegrationDataflowResponse:
+      description: The Elastic Cloud shard allocation stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ElasticCloudSlmStatsIntegrationDataflowRequest:
+      description: The Elastic Cloud snapshot lifecycle management stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    ElasticCloudSlmStatsIntegrationDataflowResponse:
+      description: The Elastic Cloud snapshot lifecycle management stats dataflow.
+      properties:
+        enabled:
+          description: Whether the Elastic Cloud dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
       type: object
     EmailTypeType:
       description: The type of email.
@@ -53177,6 +53626,101 @@ components:
         - id
         - attributes
       type: object
+    IntegrationAccountBasicAuthRequest:
+      description: Username and password authentication.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/IntegrationAccountBasicAuthType"
+        password:
+          description: Secret password or private key.
+          example: your-password
+          type: string
+          writeOnly: true
+        username:
+          description: Non-secret username or public identifier for the credential pair.
+          example: datadog
+          type: string
+      required:
+        - auth_type
+        - username
+        - password
+      type: object
+    IntegrationAccountBasicAuthResponse:
+      description: The basic authentication method and username configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/IntegrationAccountBasicAuthType"
+        username:
+          description: Non-secret username or public identifier for the credential pair.
+          example: datadog
+          type: string
+      required:
+        - auth_type
+        - username
+      type: object
+    IntegrationAccountBasicAuthType:
+      default: basic
+      description: The authentication method type.
+      enum:
+        - basic
+      example: basic
+      type: string
+      x-enum-varnames:
+        - BASIC
+    IntegrationAccountBasicAuthUpdate:
+      description: Username and password authentication. Only the fields provided are changed; omit `password` to keep the stored one.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/IntegrationAccountBasicAuthType"
+        password:
+          description: Secret password or private key.
+          example: your-password
+          type: string
+          writeOnly: true
+        username:
+          description: Non-secret username or public identifier for the credential pair.
+          example: datadog
+          type: string
+      required:
+        - auth_type
+      type: object
+    IntegrationAccountDataflowHealth:
+      description: Collection health of a single dataflow.
+      enum:
+        - DATAFLOW_HEALTH_OK
+        - DATAFLOW_HEALTH_BROKEN
+        - DATAFLOW_HEALTH_UNKNOWN
+      example: DATAFLOW_HEALTH_OK
+      type: string
+      x-enum-varnames:
+        - OK
+        - BROKEN
+        - UNKNOWN
+    IntegrationAccountDataflowStatus:
+      description: Read-only collection status of a dataflow.
+      properties:
+        health:
+          $ref: "#/components/schemas/IntegrationAccountDataflowHealth"
+        message:
+          description: Human-readable detail, populated when the dataflow is not healthy.
+          example: ""
+          type: string
+        updated_at:
+          description: Time the status was last computed.
+          example: "2026-06-25T08:30:50Z"
+          format: date-time
+          type: string
+      readOnly: true
+      type: object
+    IntegrationAccountType:
+      default: integration-account
+      description: The type of the integration account resource. Always `integration-account`.
+      enum:
+        - integration-account
+      example: integration-account
+      type: string
+      x-enum-varnames:
+        - INTEGRATION_ACCOUNT
     IntegrationAttributes:
       description: Attributes for an integration.
       properties:
@@ -93226,6 +93770,185 @@ components:
           minimum: 0
           type: number
       type: object
+    RumExclusionFilterAttributes:
+      description: The attributes of an exclusion filter.
+      properties:
+        enabled:
+          $ref: "#/components/schemas/RumExclusionFilterEnabled"
+        event_type:
+          $ref: "#/components/schemas/RumExclusionFilterEventType"
+        name:
+          $ref: "#/components/schemas/RumExclusionFilterName"
+        query:
+          $ref: "#/components/schemas/RumExclusionFilterQuery"
+      type: object
+    RumExclusionFilterCreateAttributes:
+      description: The attributes of an exclusion filter to create.
+      properties:
+        enabled:
+          description: Whether the exclusion filter is active. Defaults to `true`.
+          example: true
+          type: boolean
+        event_type:
+          $ref: "#/components/schemas/RumExclusionFilterEventType"
+        name:
+          $ref: "#/components/schemas/RumExclusionFilterName"
+        query:
+          $ref: "#/components/schemas/RumExclusionFilterQuery"
+      required:
+        - name
+      type: object
+    RumExclusionFilterCreateData:
+      description: The new exclusion filter properties to create.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumExclusionFilterCreateAttributes"
+        type:
+          $ref: "#/components/schemas/RumExclusionFilterType"
+      required:
+        - type
+        - attributes
+      type: object
+    RumExclusionFilterCreateRequest:
+      description: The exclusion filter body to create.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumExclusionFilterCreateData"
+      required:
+        - data
+      type: object
+    RumExclusionFilterData:
+      description: An exclusion filter.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumExclusionFilterAttributes"
+        id:
+          description: The ID of the exclusion filter.
+          example: "051601eb-54a0-abc0-03f9-cc02efa18892"
+          type: string
+        meta:
+          $ref: "#/components/schemas/RumExclusionFilterMeta"
+        type:
+          $ref: "#/components/schemas/RumExclusionFilterType"
+      required:
+        - id
+        - type
+      type: object
+    RumExclusionFilterEnabled:
+      description: Whether the exclusion filter is active.
+      example: true
+      type: boolean
+    RumExclusionFilterEventType:
+      description: The type of RUM events to filter on.
+      enum:
+        - session
+        - view
+        - action
+        - error
+        - resource
+        - long_task
+        - vital
+      example: error
+      type: string
+      x-enum-varnames:
+        - SESSION
+        - VIEW
+        - ACTION
+        - ERROR
+        - RESOURCE
+        - LONG_TASK
+        - VITAL
+    RumExclusionFilterMeta:
+      description: Metadata about the exclusion filter.
+      properties:
+        enabled_at:
+          description: Unix epoch (in milliseconds) when the exclusion filter was last enabled.
+          example: 1735689600000
+          format: int64
+          type: integer
+        updated_at:
+          description: Unix epoch (in milliseconds) of the last update.
+          example: 1735689600000
+          format: int64
+          type: integer
+        updated_by_handle:
+          description: Handle of the user who last updated the exclusion filter.
+          example: jane.doe@example.com
+          type: string
+      type: object
+    RumExclusionFilterName:
+      description: The name of the exclusion filter.
+      example: Exclude noisy browser extension errors
+      type: string
+    RumExclusionFilterQuery:
+      description: |-
+        Additional query used to further restrict which RUM events are excluded.
+        Combined with `event_type` when both are provided.
+      example: "@error.message:*extension*"
+      type: string
+    RumExclusionFilterResponse:
+      description: An exclusion filter response body.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumExclusionFilterData"
+      type: object
+    RumExclusionFilterType:
+      default: exclusion_filters
+      description: The resource type. The value must be `exclusion_filters`.
+      enum:
+        - exclusion_filters
+      example: exclusion_filters
+      type: string
+      x-enum-varnames:
+        - EXCLUSION_FILTERS
+    RumExclusionFilterUpdateAttributes:
+      description: |-
+        The attributes of an exclusion filter that can be updated.
+        For the built-in Error Tracking exclusion filter, only `enabled` can be set;
+        `name`, `event_type`, and `query` must be omitted.
+      properties:
+        enabled:
+          $ref: "#/components/schemas/RumExclusionFilterEnabled"
+        event_type:
+          $ref: "#/components/schemas/RumExclusionFilterEventType"
+        name:
+          $ref: "#/components/schemas/RumExclusionFilterName"
+        query:
+          $ref: "#/components/schemas/RumExclusionFilterQuery"
+      type: object
+    RumExclusionFilterUpdateData:
+      description: The exclusion filter properties to update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumExclusionFilterUpdateAttributes"
+        id:
+          description: The ID of the exclusion filter. Must match the `ef_id` path parameter.
+          example: "051601eb-54a0-abc0-03f9-cc02efa18892"
+          type: string
+        type:
+          $ref: "#/components/schemas/RumExclusionFilterType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    RumExclusionFilterUpdateRequest:
+      description: The exclusion filter body to update.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumExclusionFilterUpdateData"
+      required:
+        - data
+      type: object
+    RumExclusionFiltersResponse:
+      description: All exclusion filters for a RUM application.
+      properties:
+        data:
+          description: A list of exclusion filters.
+          items:
+            $ref: "#/components/schemas/RumExclusionFilterData"
+          type: array
+      type: object
     RumMetricCompute:
       description: The compute rule to compute the RUM-based metric.
       properties:
@@ -93751,25 +94474,9 @@ components:
             $ref: "#/components/schemas/RumRetentionFilterData"
           type: array
       type: object
-    RumRetentionQuotaAdaptiveConfig:
-      description: The configuration used when `mode` is `adaptive`.
-      properties:
-        max_retention_rate:
-          description: The maximum fraction of sessions to retain, in the range `(0, 1]`.
-          example: 0.5
-          exclusiveMinimum: true
-          format: double
-          maximum: 1
-          minimum: 0
-          type: number
-      required:
-        - max_retention_rate
-      type: object
     RumRetentionQuotaConfigAttributes:
       description: The RUM retention quota configuration properties.
       properties:
-        adaptive:
-          $ref: "#/components/schemas/RumRetentionQuotaAdaptiveConfig"
         custom:
           $ref: "#/components/schemas/RumRetentionQuotaCustomConfig"
         mode:
@@ -93827,8 +94534,6 @@ components:
     RumRetentionQuotaConfigUpdateAttributes:
       description: The RUM retention quota configuration properties to create or update.
       properties:
-        adaptive:
-          $ref: "#/components/schemas/RumRetentionQuotaAdaptiveConfig"
         custom:
           $ref: "#/components/schemas/RumRetentionQuotaCustomConfig"
         mode:
@@ -93894,14 +94599,13 @@ components:
       type: object
     RumRetentionQuotaMode:
       description: |-
-        The retention quota mode. `custom` enforces a fixed session limit, while
-        `adaptive` dynamically adjusts retention.
+        The retention quota mode. `custom` enforces a fixed session limit.
+        `custom` is the only supported mode.
       enum:
         - custom
-        - adaptive
       example: custom
       type: string
-      x-enum-varnames: ["CUSTOM", "ADAPTIVE"]
+      x-enum-varnames: ["CUSTOM"]
     RumRetentionQuotaReachedAction:
       description: The action to take when the session quota is reached.
       enum:
@@ -93912,7 +94616,9 @@ components:
       x-enum-varnames: ["STOP", "SLOWDOWN"]
     RumRetentionQuotaScopeType:
       default: application
-      description: The type of scope the retention quota configuration applies to.
+      description: |-
+        The type of scope the retention quota configuration applies to.
+        `application` is the only supported scope type.
       enum:
         - application
       example: application
@@ -96056,8 +96762,11 @@ components:
           description: The ID of the scanned asset metadata.
           example: "Host|i-0fc7edef1ab26d7ef"
           type: string
+        type:
+          $ref: "#/components/schemas/ScannedAssetMetadataType"
       required:
         - id
+        - type
         - attributes
       type: object
     ScannedAssetMetadataAsset:
@@ -96112,6 +96821,14 @@ components:
       required:
         - timestamp
       type: object
+    ScannedAssetMetadataType:
+      description: The JSON:API type.
+      enum:
+        - scanned-assets-metadata
+      example: scanned-assets-metadata
+      type: string
+      x-enum-varnames:
+        - SCANNED_ASSETS_METADATA
     ScannedAssetsMetadata:
       description: The expected response schema when listing scanned assets metadata.
       properties:
@@ -108792,9 +109509,10 @@ components:
       description: A complete Workflow Automation definition, including its triggers, steps, and connections.
       properties:
         annotations:
-          description: "A list of annotations used in the workflow. These are like sticky notes for your workflow!"
+          description: Up to 100 text annotations displayed on the workflow canvas.
           items:
             $ref: "#/components/schemas/Annotation"
+          maxItems: 100
           type: array
         connectionEnvs:
           description: A list of connections or connection groups used in the workflow.
@@ -108828,7 +109546,8 @@ components:
         - "1.3"
         - "1.4"
         - "1.5"
-      example: "1.5"
+        - "1.6"
+      example: "1.6"
       type: string
       x-enum-varnames:
         - ONE_ZERO
@@ -108837,6 +109556,7 @@ components:
         - ONE_THREE
         - ONE_FOUR
         - ONE_FIVE
+        - ONE_SIX
     SplitAPIKey:
       description: The definition of the `SplitAPIKey` object.
       properties:
@@ -115168,72 +115888,62 @@ components:
           format: int64
           type: integer
       type: object
-    TagPoliciesListResponse:
-      description: A page of tag policies.
-      properties:
-        data:
-          $ref: "#/components/schemas/TagPolicyDataArray"
-        included:
-          $ref: "#/components/schemas/TagPolicyIncludedResources"
-      required:
-        - data
-      type: object
-    TagPolicyAttributes:
-      description: The attributes of a tag policy resource.
+    TagRuleAttributes:
+      description: The attributes of a tag rule resource.
       properties:
         created_at:
-          description: The RFC 3339 timestamp at which the policy was created.
+          description: The RFC 3339 timestamp at which the rule was created.
           example: "2026-05-21T22:11:06.108696Z"
           format: date-time
           type: string
         created_by:
-          description: The identifier of the user who created the policy.
+          description: The identifier of the user who created the rule.
           example: "test-user"
           type: string
         deleted_at:
-          description: The RFC 3339 timestamp at which the policy was soft-deleted. `null` if the policy has not been deleted. Only present when `include_deleted=true` is requested.
+          description: The RFC 3339 timestamp at which the rule was soft-deleted. `null` if the rule has not been deleted. Only present when `include_deleted=true` is requested.
           format: date-time
           nullable: true
           type: string
         deleted_by:
-          description: The identifier of the user who soft-deleted the policy. `null` if the policy has not been deleted.
+          description: The identifier of the user who soft-deleted the rule. `null` if the rule has not been deleted.
           nullable: true
           type: string
         enabled:
-          description: Whether the policy is currently enforced.
+          description: Whether the rule is currently enforced.
           example: true
           type: boolean
         modified_at:
-          description: The RFC 3339 timestamp at which the policy was last modified.
+          description: The RFC 3339 timestamp at which the rule was last modified.
           example: "2026-05-21T22:11:06.108696Z"
           format: date-time
           type: string
         modified_by:
-          description: The identifier of the user who last modified the policy.
+          description: The identifier of the user who last modified the rule.
           example: "test-user"
           type: string
-        negated:
-          description: When `true`, the policy matches tag values that do NOT match any of the supplied patterns.
-          example: false
-          type: boolean
-        policy_name:
-          description: Human-readable name for the tag policy.
+        name:
+          description: Human-readable name for the tag rule.
           example: "Service tag must be one of api or web"
           type: string
-        policy_type:
-          $ref: "#/components/schemas/TagPolicyType"
+        negated:
+          description: When `true`, the rule matches tag values that do NOT match any of the supplied patterns.
+          example: false
+          type: boolean
         required:
           description: When `true`, telemetry without this tag is treated as a violation.
           example: true
           type: boolean
+        rule_type:
+          $ref: "#/components/schemas/TagRuleType"
         scope:
-          description: The scope the policy applies within.
+          description: The scope the rule applies within.
           example: "env"
           type: string
         source:
-          $ref: "#/components/schemas/TagPolicySource"
+          $ref: "#/components/schemas/TagRuleSource"
         tag_key:
-          description: The tag key that the policy governs.
+          description: The tag key that the rule governs.
           example: "service"
           type: string
         tag_value_patterns:
@@ -115251,7 +115961,7 @@ components:
           format: int64
           type: integer
       required:
-        - policy_name
+        - name
         - source
         - scope
         - tag_key
@@ -115259,44 +115969,44 @@ components:
         - negated
         - required
         - enabled
-        - policy_type
+        - rule_type
         - version
         - created_at
         - created_by
         - modified_at
         - modified_by
       type: object
-    TagPolicyCreateAttributes:
-      description: Attributes that can be supplied when creating a tag policy.
+    TagRuleCreateAttributes:
+      description: Attributes that can be supplied when creating a tag rule.
       properties:
         enabled:
-          description: Whether the policy is currently enforced. Defaults to `true` for newly created policies.
+          description: Whether the rule is currently enforced. Defaults to `true` for newly created rules.
           example: true
           type: boolean
-        negated:
-          description: When `true`, the policy matches tag values that do NOT match any of the supplied patterns. Defaults to `false`.
-          example: false
-          type: boolean
-        policy_name:
-          description: Human-readable name for the tag policy.
+        name:
+          description: Human-readable name for the tag rule.
           example: "Service tag must be one of api or web"
           type: string
-        policy_type:
-          $ref: "#/components/schemas/TagPolicyCreateType"
+        negated:
+          description: When `true`, the rule matches tag values that do NOT match any of the supplied patterns. Defaults to `false`.
+          example: false
+          type: boolean
         required:
           description: When `true`, telemetry without this tag is treated as a violation. Defaults to `false`.
           example: true
           type: boolean
+        rule_type:
+          $ref: "#/components/schemas/TagRuleCreateType"
         scope:
           description: |-
-            The scope the policy applies within. Typically an environment, team, or
-            organization-level identifier used to limit where the policy is enforced.
+            The scope the rule applies within. Typically an environment, team, or
+            organization-level identifier used to limit where the rule is enforced.
           example: "env"
           type: string
         source:
-          $ref: "#/components/schemas/TagPolicySource"
+          $ref: "#/components/schemas/TagRuleSource"
         tag_key:
-          description: The tag key that the policy governs (for example, `service`).
+          description: The tag key that the rule governs (for example, `service`).
           example: "service"
           type: string
         tag_value_patterns:
@@ -115312,35 +116022,35 @@ components:
           minItems: 1
           type: array
       required:
-        - policy_name
+        - name
         - source
         - scope
         - tag_key
         - tag_value_patterns
-        - policy_type
+        - rule_type
       type: object
-    TagPolicyCreateData:
-      description: Data object for creating a tag policy.
+    TagRuleCreateData:
+      description: Data object for creating a tag rule.
       properties:
         attributes:
-          $ref: "#/components/schemas/TagPolicyCreateAttributes"
+          $ref: "#/components/schemas/TagRuleCreateAttributes"
         type:
-          $ref: "#/components/schemas/TagPolicyResourceType"
+          $ref: "#/components/schemas/TagRuleResourceType"
       required:
         - type
         - attributes
       type: object
-    TagPolicyCreateRequest:
-      description: Payload for creating a new tag policy.
+    TagRuleCreateRequest:
+      description: Payload for creating a new tag rule.
       properties:
         data:
-          $ref: "#/components/schemas/TagPolicyCreateData"
+          $ref: "#/components/schemas/TagRuleCreateData"
       required:
         - data
       type: object
-    TagPolicyCreateType:
+    TagRuleCreateType:
       description: |-
-        The policy type allowed when creating a tag policy. Only `surfacing` is accepted at
+        The rule type allowed when creating a tag rule. Only `surfacing` is accepted at
         creation time.
       enum:
         - surfacing
@@ -115348,72 +116058,72 @@ components:
       type: string
       x-enum-varnames:
         - SURFACING
-    TagPolicyData:
-      description: A tag policy resource.
+    TagRuleData:
+      description: A tag rule resource.
       properties:
         attributes:
-          $ref: "#/components/schemas/TagPolicyAttributes"
+          $ref: "#/components/schemas/TagRuleAttributes"
         id:
-          description: The unique identifier of the tag policy.
+          description: The unique identifier of the tag rule.
           example: "123"
           type: string
         relationships:
-          $ref: "#/components/schemas/TagPolicyRelationships"
+          $ref: "#/components/schemas/TagRuleRelationships"
         type:
-          $ref: "#/components/schemas/TagPolicyResourceType"
+          $ref: "#/components/schemas/TagRuleResourceType"
       required:
         - type
         - id
         - attributes
       type: object
-    TagPolicyDataArray:
-      description: An array of tag policy data objects.
+    TagRuleDataArray:
+      description: An array of tag rule data objects.
       items:
-        $ref: "#/components/schemas/TagPolicyData"
+        $ref: "#/components/schemas/TagRuleData"
       type: array
-    TagPolicyInclude:
-      description: A related resource to include alongside a tag policy in the response. Currently the only supported value is `score`.
+    TagRuleInclude:
+      description: A related resource to include alongside a tag rule in the response. Currently the only supported value is `score`.
       enum:
         - score
       example: "score"
       type: string
       x-enum-varnames:
         - SCORE
-    TagPolicyIncludedResources:
-      description: Related resources fetched alongside the primary tag policies. Populated when an `include` query parameter is supplied.
+    TagRuleIncludedResources:
+      description: Related resources fetched alongside the primary tag rules. Populated when an `include` query parameter is supplied.
       items:
-        $ref: "#/components/schemas/TagPolicyScoreData"
+        $ref: "#/components/schemas/TagRuleScoreData"
       type: array
-    TagPolicyRelationships:
-      description: Related resources for a tag policy. Only present when the corresponding `include` query parameter is supplied.
+    TagRuleRelationships:
+      description: Related resources for a tag rule. Only present when the corresponding `include` query parameter is supplied.
       properties:
         score:
-          $ref: "#/components/schemas/TagPolicyScoreRelationship"
+          $ref: "#/components/schemas/TagRuleScoreRelationship"
       type: object
-    TagPolicyResourceType:
-      description: JSON:API resource type for a tag policy.
+    TagRuleResourceType:
+      description: JSON:API resource type for a tag rule.
       enum:
-        - tag_policy
-      example: "tag_policy"
+        - tag_rule
+      example: "tag_rule"
       type: string
       x-enum-varnames:
-        - TAG_POLICY
-    TagPolicyResponse:
-      description: A single tag policy.
+        - TAG_RULE
+    TagRuleResponse:
+      description: A single tag rule.
       properties:
         data:
-          $ref: "#/components/schemas/TagPolicyData"
+          $ref: "#/components/schemas/TagRuleData"
         included:
-          $ref: "#/components/schemas/TagPolicyIncludedResources"
+          $ref: "#/components/schemas/TagRuleIncludedResources"
       required:
         - data
       type: object
-    TagPolicyScoreAttributes:
-      description: Attributes of a tag policy compliance score.
+    TagRuleScoreAttributes:
+      description: Attributes of a tag rule compliance score.
       properties:
         score:
           description: |-
-            The compliance score for the policy over the requested time window, as a percentage
+            The compliance score for the rule over the requested time window, as a percentage
             between 0 and 100. `null` indicates that no relevant telemetry was found.
           example: 80
           format: double
@@ -115430,7 +116140,7 @@ components:
           format: int64
           type: integer
         version:
-          description: The version of the tag policy that the score was computed against.
+          description: The version of the tag rule that the score was computed against.
           example: 1
           format: int64
           type: integer
@@ -115440,31 +116150,31 @@ components:
         - ts_end
         - version
       type: object
-    TagPolicyScoreData:
-      description: A compliance score resource for a tag policy.
+    TagRuleScoreData:
+      description: A compliance score resource for a tag rule.
       properties:
         attributes:
-          $ref: "#/components/schemas/TagPolicyScoreAttributes"
+          $ref: "#/components/schemas/TagRuleScoreAttributes"
         id:
           description: The unique identifier of the compliance score resource.
           example: "123-v1-1779315066097-1779401466097"
           type: string
         type:
-          $ref: "#/components/schemas/TagPolicyScoreResourceType"
+          $ref: "#/components/schemas/TagRuleScoreResourceType"
       required:
         - type
         - id
         - attributes
       type: object
-    TagPolicyScoreRelationship:
-      description: A relationship to the compliance score resource for this policy.
+    TagRuleScoreRelationship:
+      description: A relationship to the compliance score resource for this rule.
       properties:
         data:
-          $ref: "#/components/schemas/TagPolicyScoreRelationshipData"
+          $ref: "#/components/schemas/TagRuleScoreRelationshipData"
       required:
         - data
       type: object
-    TagPolicyScoreRelationshipData:
+    TagRuleScoreRelationshipData:
       description: Identifier of the related compliance score resource.
       properties:
         id:
@@ -115472,29 +116182,29 @@ components:
           example: "123-v1-1779315066097-1779401466097"
           type: string
         type:
-          $ref: "#/components/schemas/TagPolicyScoreResourceType"
+          $ref: "#/components/schemas/TagRuleScoreResourceType"
       required:
         - type
         - id
       type: object
-    TagPolicyScoreResourceType:
-      description: JSON:API resource type for a tag policy compliance score.
+    TagRuleScoreResourceType:
+      description: JSON:API resource type for a tag rule compliance score.
       enum:
-        - tag_policy_score
-      example: "tag_policy_score"
+        - tag_rule_score
+      example: "tag_rule_score"
       type: string
       x-enum-varnames:
-        - TAG_POLICY_SCORE
-    TagPolicyScoreResponse:
-      description: A tag policy compliance score.
+        - TAG_RULE_SCORE
+    TagRuleScoreResponse:
+      description: A tag rule compliance score.
       properties:
         data:
-          $ref: "#/components/schemas/TagPolicyScoreData"
+          $ref: "#/components/schemas/TagRuleScoreData"
       required:
         - data
       type: object
-    TagPolicySource:
-      description: The telemetry source that a tag policy applies to.
+    TagRuleSource:
+      description: The telemetry source that a tag rule applies to.
       enum:
         - logs
         - spans
@@ -115509,9 +116219,9 @@ components:
         - METRICS
         - RUM
         - FEED
-    TagPolicyType:
+    TagRuleType:
       description: |-
-        How the policy is enforced. `blocking` rejects telemetry that violates the policy.
+        How the rule is enforced. `blocking` rejects telemetry that violates the rule.
         `surfacing` only highlights non-compliant telemetry without blocking it.
       enum:
         - blocking
@@ -115521,30 +116231,30 @@ components:
       x-enum-varnames:
         - BLOCKING
         - SURFACING
-    TagPolicyUpdateAttributes:
+    TagRuleUpdateAttributes:
       description: |-
-        Mutable attributes of a tag policy. Each field is optional; omitting a field leaves its
-        current value unchanged. The `source` of a policy cannot be changed.
+        Mutable attributes of a tag rule. Each field is optional; omitting a field leaves its
+        current value unchanged. The `source` of a rule cannot be changed.
       properties:
         enabled:
-          description: Whether the policy is currently enforced.
+          description: Whether the rule is currently enforced.
           type: boolean
-        negated:
-          description: When `true`, the policy matches tag values that do NOT match any of the supplied patterns.
-          type: boolean
-        policy_name:
-          description: Human-readable name for the tag policy.
+        name:
+          description: Human-readable name for the tag rule.
           type: string
-        policy_type:
-          $ref: "#/components/schemas/TagPolicyType"
+        negated:
+          description: When `true`, the rule matches tag values that do NOT match any of the supplied patterns.
+          type: boolean
         required:
           description: When `true`, telemetry without this tag is treated as a violation.
           type: boolean
+        rule_type:
+          $ref: "#/components/schemas/TagRuleType"
         scope:
-          description: The scope the policy applies within.
+          description: The scope the rule applies within.
           type: string
         tag_key:
-          description: The tag key that the policy governs.
+          description: The tag key that the rule governs.
           type: string
         tag_value_patterns:
           description: One or more patterns that valid values for the tag key must match.
@@ -115553,26 +116263,36 @@ components:
             type: string
           type: array
       type: object
-    TagPolicyUpdateData:
-      description: Data object for updating a tag policy.
+    TagRuleUpdateData:
+      description: Data object for updating a tag rule.
       properties:
         attributes:
-          $ref: "#/components/schemas/TagPolicyUpdateAttributes"
+          $ref: "#/components/schemas/TagRuleUpdateAttributes"
         id:
-          description: The unique identifier of the tag policy being updated.
+          description: The unique identifier of the tag rule being updated.
           example: "123"
           type: string
         type:
-          $ref: "#/components/schemas/TagPolicyResourceType"
+          $ref: "#/components/schemas/TagRuleResourceType"
       required:
         - type
         - id
       type: object
-    TagPolicyUpdateRequest:
-      description: Payload for updating an existing tag policy. Only the supplied fields are modified.
+    TagRuleUpdateRequest:
+      description: Payload for updating an existing tag rule. Only the supplied fields are modified.
       properties:
         data:
-          $ref: "#/components/schemas/TagPolicyUpdateData"
+          $ref: "#/components/schemas/TagRuleUpdateData"
+      required:
+        - data
+      type: object
+    TagRulesListResponse:
+      description: A page of tag rules.
+      properties:
+        data:
+          $ref: "#/components/schemas/TagRuleDataArray"
+        included:
+          $ref: "#/components/schemas/TagRuleIncludedResources"
       required:
         - data
       type: object
@@ -117224,6 +117944,431 @@ components:
           description: Pagination type.
           example: "number_size"
           type: string
+      type: object
+    TeamsOwnershipMappingBatchError:
+      description: An error encountered while validating or applying an operation.
+      properties:
+        detail:
+          description: A human-readable explanation specific to this error.
+          example: "prefix match_type is not enabled for this org"
+          type: string
+        status:
+          description: The HTTP status code applicable to this error.
+          example: "400"
+          type: string
+        title:
+          description: A short, human-readable summary of the error.
+          example: "Bad Request"
+          type: string
+      required:
+        - status
+        - title
+      type: object
+    TeamsOwnershipMappingBatchOperation:
+      description: A single add or remove operation, applied atomically with every other operation in the request.
+      properties:
+        data:
+          $ref: "#/components/schemas/TeamsOwnershipMappingBatchOperationData"
+        op:
+          $ref: "#/components/schemas/TeamsOwnershipMappingBatchOperationOp"
+        ref:
+          $ref: "#/components/schemas/TeamsOwnershipMappingBatchOperationRef"
+      required:
+        - op
+      type: object
+    TeamsOwnershipMappingBatchOperationData:
+      description: The mapping to add. Required when `op` is `add`.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TeamsOwnershipMappingBatchOperationDataAttributes"
+        type:
+          $ref: "#/components/schemas/TeamsOwnershipMappingType"
+      required:
+        - type
+        - attributes
+      type: object
+    TeamsOwnershipMappingBatchOperationDataAttributes:
+      description: |-
+        The attributes of the mapping to add. `team_handle` and `view_name` are required
+        when `op` is `add`. At least one of `service` or `application_id` must be provided.
+      properties:
+        application_id:
+          description: |-
+            The ID of the RUM application this mapping applies to.
+            For browser applications, provide the real application UUID — the team is applied to the view regardless of service.
+            For mobile applications, omit this field (or set it to the nil UUID `00000000-0000-0000-0000-000000000000`) — the team is applied to the view and service combination across all applications.
+          example: "11111111-2222-3333-4444-555555555555"
+          format: uuid
+          type: string
+        match_type:
+          $ref: "#/components/schemas/TeamsOwnershipMatchType"
+        service:
+          description: The RUM application's service name. For browser applications, this is optional. For mobile applications, this is required and scopes the ownership to a specific service.
+          example: "web-checkout"
+          type: string
+        team_handle:
+          description: The handle of the team that owns the matched RUM views.
+          example: "team-rum"
+          type: string
+        view_name:
+          description: The RUM view name to match, or its prefix when `match_type` is `prefix`.
+          example: "/checkout"
+          type: string
+      type: object
+    TeamsOwnershipMappingBatchOperationOp:
+      description: Whether this operation adds a new mapping or removes an existing one.
+      enum:
+        - add
+        - remove
+      example: add
+      type: string
+      x-enum-varnames: ["ADD", "REMOVE"]
+    TeamsOwnershipMappingBatchOperationRef:
+      description: Identifies an existing mapping to remove. Required when `op` is `remove`.
+      properties:
+        id:
+          description: The ID of the mapping to remove.
+          example: "456"
+          type: string
+        type:
+          $ref: "#/components/schemas/TeamsOwnershipMappingType"
+      required:
+        - type
+        - id
+      type: object
+    TeamsOwnershipMappingBatchRequest:
+      description: The request body for bulk-creating and bulk-removing teams ownership mappings.
+      properties:
+        atomic:operations:
+          description: The list of add and remove operations to apply atomically.
+          items:
+            $ref: "#/components/schemas/TeamsOwnershipMappingBatchOperation"
+          type: array
+      required:
+        - atomic:operations
+      type: object
+    TeamsOwnershipMappingBatchResponse:
+      description: |-
+        The response body for the bulk create and remove operation. On success, `atomic:results`
+        contains one entry per operation. Add results appear before remove results and may not match
+        request order. Correlate add results by their `type` and `id` rather than by array position.
+        On failure, no operations were applied and `errors` describes what went wrong.
+      properties:
+        atomic:results:
+          description: |-
+            The result of each operation.
+            Add operations are processed first, then remove operations, so results may not appear
+            in the same order as the request. Present only on success.
+          items:
+            $ref: "#/components/schemas/TeamsOwnershipMappingBatchResult"
+          type: array
+        errors:
+          description: The validation or processing errors encountered. Present only when the request could not be completed.
+          items:
+            $ref: "#/components/schemas/TeamsOwnershipMappingBatchError"
+          type: array
+      type: object
+    TeamsOwnershipMappingBatchResult:
+      description: |-
+        The result of a single operation.
+        Add operations are processed first, then remove operations, so results may not appear
+        in the same order as the request. Empty for `remove` operations.
+      properties:
+        data:
+          $ref: "#/components/schemas/TeamsOwnershipMappingBatchResultData"
+      type: object
+    TeamsOwnershipMappingBatchResultData:
+      description: The mapping created by an `add` operation.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TeamsOwnershipMappingBatchResultDataAttributes"
+        id:
+          description: The unique identifier of the teams ownership mapping.
+          example: "123"
+          type: string
+        type:
+          $ref: "#/components/schemas/TeamsOwnershipMappingType"
+      required:
+        - type
+        - id
+        - attributes
+      type: object
+    TeamsOwnershipMappingBatchResultDataAttributes:
+      description: The attributes of a mapping created by an `add` operation.
+      properties:
+        application_id:
+          description: The ID of the RUM application, when one was provided.
+          example: "11111111-2222-3333-4444-555555555555"
+          format: uuid
+          type: string
+        created_at:
+          description: Timestamp when the mapping was created.
+          example: "2026-01-15T09:30:00.000Z"
+          format: date-time
+          type: string
+        created_by:
+          description: The UUID of the user who created the mapping.
+          example: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+          type: string
+        match_type:
+          $ref: "#/components/schemas/TeamsOwnershipMatchType"
+        org_id:
+          description: The ID of the organization that owns this mapping.
+          example: 123456
+          format: int64
+          type: integer
+        service:
+          description: The RUM application's service name, when one was provided.
+          example: "web-checkout"
+          type: string
+        team_handle:
+          description: The handle of the team that owns the matched RUM views.
+          example: "team-rum"
+          type: string
+        view_name:
+          description: The RUM view name to match, or its prefix when `match_type` is `prefix`.
+          example: "/checkout"
+          type: string
+      required:
+        - team_handle
+        - view_name
+        - org_id
+        - created_at
+        - created_by
+        - match_type
+      type: object
+    TeamsOwnershipMappingCreateData:
+      description: The JSON:API data envelope for a teams ownership mapping create request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TeamsOwnershipMappingCreateDataAttributes"
+        type:
+          $ref: "#/components/schemas/TeamsOwnershipMappingType"
+      required:
+        - type
+        - attributes
+      type: object
+    TeamsOwnershipMappingCreateDataAttributes:
+      description: The attributes of the teams ownership mapping to create.
+      properties:
+        application_id:
+          description: |-
+            The ID of the RUM application this mapping applies to.
+            For browser applications, provide the real application UUID — the team is applied to the view regardless of service.
+            For mobile applications, omit this field (or set it to the nil UUID `00000000-0000-0000-0000-000000000000`) — the team is applied to the view and service combination across all applications.
+          example: "11111111-2222-3333-4444-555555555555"
+          format: uuid
+          type: string
+        match_type:
+          $ref: "#/components/schemas/TeamsOwnershipMatchType"
+        service:
+          description: The RUM application's service name. For browser applications, this is optional. For mobile applications, this is required and scopes the ownership to a specific service.
+          example: "web-checkout"
+          type: string
+        team_handle:
+          description: The handle of the team that owns the matched RUM views.
+          example: "team-rum"
+          type: string
+        view_name:
+          description: The RUM view name to match, or its prefix when `match_type` is `prefix`.
+          example: "/checkout"
+          type: string
+      required:
+        - team_handle
+        - view_name
+      type: object
+    TeamsOwnershipMappingCreateRequest:
+      description: The request body for creating a teams ownership mapping.
+      properties:
+        data:
+          $ref: "#/components/schemas/TeamsOwnershipMappingCreateData"
+      required:
+        - data
+      type: object
+    TeamsOwnershipMappingResponse:
+      description: The response body for a single teams ownership mapping.
+      properties:
+        data:
+          $ref: "#/components/schemas/TeamsOwnershipMappingResponseData"
+      required:
+        - data
+      type: object
+    TeamsOwnershipMappingResponseAttributes:
+      description: The attributes of a teams ownership mapping.
+      properties:
+        application_id:
+          description: |-
+            The ID of the RUM application this mapping applies to.
+            For browser applications, this is the real application UUID.
+            For mobile applications, this is the nil UUID `00000000-0000-0000-0000-000000000000` (wildcard), meaning the ownership applies across all applications.
+          example: "11111111-2222-3333-4444-555555555555"
+          type: string
+        created_at:
+          description: Timestamp when the mapping was created.
+          example: "2026-01-15T09:30:00.000Z"
+          format: date-time
+          type: string
+        created_by:
+          description: The UUID of the user who created the mapping.
+          example: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+          type: string
+        match_type:
+          $ref: "#/components/schemas/TeamsOwnershipMatchType"
+        org_id:
+          description: The ID of the organization that owns this mapping.
+          example: 123456
+          format: int64
+          type: integer
+        service:
+          description: The RUM application's service name. For browser applications, may be empty. For mobile applications, this is the service that scopes the ownership.
+          example: "web-checkout"
+          type: string
+        team_handle:
+          description: The handle of the team that owns the matched RUM views.
+          example: "team-rum"
+          type: string
+        view_name:
+          description: The RUM view name to match, or its prefix when `match_type` is `prefix`.
+          example: "/checkout"
+          type: string
+      required:
+        - team_handle
+        - view_name
+        - service
+        - application_id
+        - org_id
+        - created_at
+        - created_by
+        - match_type
+      type: object
+    TeamsOwnershipMappingResponseData:
+      description: The JSON:API data envelope for a teams ownership mapping.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TeamsOwnershipMappingResponseAttributes"
+        id:
+          description: The unique identifier of the teams ownership mapping.
+          example: "123"
+          type: string
+        type:
+          $ref: "#/components/schemas/TeamsOwnershipMappingType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TeamsOwnershipMappingType:
+      default: teams_ownership_mappings
+      description: The type of the resource. The value should always be teams_ownership_mappings.
+      enum:
+        - teams_ownership_mappings
+      example: teams_ownership_mappings
+      type: string
+      x-enum-varnames: ["TEAMS_OWNERSHIP_MAPPINGS"]
+    TeamsOwnershipMappingsResponse:
+      description: The response body for a list of teams ownership mappings.
+      properties:
+        data:
+          description: A list of teams ownership mappings.
+          items:
+            $ref: "#/components/schemas/TeamsOwnershipMappingResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    TeamsOwnershipMatchType:
+      default: exact
+      description: How the `view_name` is matched against RUM view names.
+      enum:
+        - exact
+        - prefix
+      example: exact
+      type: string
+      x-enum-varnames: ["EXACT", "PREFIX"]
+    TeamsOwnershipRuleResponseAttributes:
+      description: The attributes of a teams ownership rule.
+      properties:
+        application_id:
+          description: |-
+            The ID of the RUM application this mapping applies to.
+            For browser applications, this is the real application UUID.
+            For mobile applications, this is the nil UUID `00000000-0000-0000-0000-000000000000` (wildcard), meaning the ownership applies across all applications.
+          example: "11111111-2222-3333-4444-555555555555"
+          type: string
+        match_type:
+          $ref: "#/components/schemas/TeamsOwnershipMatchType"
+        service:
+          description: The RUM application's service name. For browser applications, may be empty. For mobile applications, this is the service that scopes the ownership.
+          example: "web-checkout"
+          type: string
+        teams:
+          description: The teams that own the matched views, each paired with the ID of its underlying mapping.
+          items:
+            $ref: "#/components/schemas/TeamsOwnershipRuleTeamMapping"
+          type: array
+        view_name:
+          description: The RUM view name to match, or its prefix when `match_type` is `prefix`.
+          example: "/checkout"
+          type: string
+      required:
+        - teams
+        - view_name
+        - service
+        - application_id
+        - match_type
+      type: object
+    TeamsOwnershipRuleResponseData:
+      description: The JSON:API data envelope for a teams ownership rule.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TeamsOwnershipRuleResponseAttributes"
+        id:
+          description: |-
+            A deterministic identifier derived from the rule's grouping key.
+            This ID cannot be used to delete the rule directly; delete individual mappings
+            using the `mapping_id` under `teams` instead.
+          example: "3b1e2f7a9c4d6e8f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f"
+          type: string
+        type:
+          $ref: "#/components/schemas/TeamsOwnershipRuleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TeamsOwnershipRuleTeamMapping:
+      description: An individual team's ownership entry within a teams ownership rule.
+      properties:
+        mapping_id:
+          description: The ID of the underlying mapping, used to delete this team's ownership individually.
+          example: "123"
+          type: string
+        team_handle:
+          description: The handle of the owning team.
+          example: "team-rum"
+          type: string
+      required:
+        - team_handle
+        - mapping_id
+      type: object
+    TeamsOwnershipRuleType:
+      default: teams_ownership_grouped_mappings
+      description: The type of the resource. The value should always be teams_ownership_grouped_mappings.
+      enum:
+        - teams_ownership_grouped_mappings
+      example: teams_ownership_grouped_mappings
+      type: string
+      x-enum-varnames: ["TEAMS_OWNERSHIP_GROUPED_MAPPINGS"]
+    TeamsOwnershipRulesResponse:
+      description: The response body for a list of teams ownership rules.
+      properties:
+        data:
+          description: A list of teams ownership rules.
+          items:
+            $ref: "#/components/schemas/TeamsOwnershipRuleResponseData"
+          type: array
+      required:
+        - data
       type: object
     TeamsResponse:
       description: Response with multiple teams
@@ -118964,6 +120109,306 @@ components:
       type: string
       x-enum-varnames:
         - TRIGGER_WORKFLOW_AUTOMATION
+    TwilioAlertsLogsIntegrationDataflowRequest:
+      description: The Twilio alerts logs dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    TwilioAlertsLogsIntegrationDataflowResponse:
+      description: The Twilio alerts logs dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    TwilioCallSummariesLogsIntegrationDataflowRequest:
+      description: The Twilio call summaries logs dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    TwilioCallSummariesLogsIntegrationDataflowResponse:
+      description: The Twilio call summaries logs dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    TwilioCloudCostMetricsIntegrationDataflowRequest:
+      description: The Twilio cloud cost metrics dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    TwilioCloudCostMetricsIntegrationDataflowResponse:
+      description: The Twilio cloud cost metrics dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    TwilioEventsLogsIntegrationDataflowRequest:
+      description: The Twilio events logs dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    TwilioEventsLogsIntegrationDataflowResponse:
+      description: The Twilio events logs dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    TwilioIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the Twilio integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/IntegrationAccountBasicAuthRequest"
+    TwilioIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the Twilio integration account.
+      oneOf:
+        - $ref: "#/components/schemas/IntegrationAccountBasicAuthResponse"
+    TwilioIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the Twilio integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/IntegrationAccountBasicAuthUpdate"
+    TwilioIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a Twilio integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/TwilioIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/TwilioIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Twilio integration account.
+          example: twilio-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/TwilioIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    TwilioIntegrationAccountCreateData:
+      description: Data envelope for creating a Twilio integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TwilioIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    TwilioIntegrationAccountCreateRequest:
+      description: Request payload to create a Twilio integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/TwilioIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    TwilioIntegrationAccountResponse:
+      description: Response payload for a single Twilio integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/TwilioIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    TwilioIntegrationAccountResponseAttributes:
+      description: Attributes of a Twilio integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/TwilioIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/TwilioIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the Twilio integration account.
+          example: twilio-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/TwilioIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    TwilioIntegrationAccountResponseData:
+      description: Data envelope of a Twilio integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TwilioIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the Twilio integration account.
+          example: 953a0060-81ec-4221-aed4-d4733b59cd96
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    TwilioIntegrationAccountSettingsRequest:
+      description: Settings for creating the Twilio integration account.
+      properties:
+        account_sid:
+          description: Twilio Account SID that uniquely identifies your Twilio account.
+          example: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          type: string
+        censor_logs:
+          description: When enabled, Twilio phone numbers in the `to` field and SMS message bodies are censored for privacy.
+          example: true
+          type: boolean
+      required:
+        - account_sid
+      type: object
+    TwilioIntegrationAccountSettingsResponse:
+      description: Settings configured on the Twilio integration account.
+      properties:
+        account_sid:
+          description: Twilio Account SID that uniquely identifies your Twilio account.
+          example: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          type: string
+        censor_logs:
+          description: When enabled, Twilio phone numbers in the `to` field and SMS message bodies are censored for privacy.
+          example: true
+          type: boolean
+      required:
+        - account_sid
+      type: object
+    TwilioIntegrationAccountSettingsUpdate:
+      description: Settings for updating the Twilio integration account. Only the fields provided are changed.
+      properties:
+        account_sid:
+          description: Twilio Account SID that uniquely identifies your Twilio account.
+          example: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          type: string
+        censor_logs:
+          description: When enabled, Twilio phone numbers in the `to` field and SMS message bodies are censored for privacy.
+          example: true
+          type: boolean
+      type: object
+    TwilioIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a Twilio integration account. Every field is optional; only the fields provided are changed. When `dataflows` is provided, only the dataflow ids included in the request are modified; dataflows omitted from the map keep their current configuration.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/TwilioIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/TwilioIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Twilio integration account.
+          example: twilio-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/TwilioIntegrationAccountSettingsUpdate"
+      type: object
+    TwilioIntegrationAccountUpdateData:
+      description: Data envelope for updating a Twilio integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TwilioIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the Twilio integration account to update.
+          example: 953a0060-81ec-4221-aed4-d4733b59cd96
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TwilioIntegrationAccountUpdateRequest:
+      description: Request payload to update a Twilio integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/TwilioIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    TwilioIntegrationAccountsResponse:
+      description: Response payload for a list of Twilio integration accounts.
+      properties:
+        data:
+          description: List of Twilio integration accounts.
+          items:
+            $ref: "#/components/schemas/TwilioIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    TwilioIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: Dataflows to configure on the Twilio integration account, keyed by dataflow id.
+      properties:
+        twilio-alerts-logs:
+          $ref: "#/components/schemas/TwilioAlertsLogsIntegrationDataflowRequest"
+        twilio-call-summaries-logs:
+          $ref: "#/components/schemas/TwilioCallSummariesLogsIntegrationDataflowRequest"
+        twilio-cloud-cost-metrics:
+          $ref: "#/components/schemas/TwilioCloudCostMetricsIntegrationDataflowRequest"
+        twilio-events-logs:
+          $ref: "#/components/schemas/TwilioEventsLogsIntegrationDataflowRequest"
+        twilio-messages-logs:
+          $ref: "#/components/schemas/TwilioMessagesLogsIntegrationDataflowRequest"
+      type: object
+    TwilioIntegrationDataflowsResponse:
+      description: Dataflows configured on the Twilio integration account, keyed by dataflow id.
+      properties:
+        twilio-alerts-logs:
+          $ref: "#/components/schemas/TwilioAlertsLogsIntegrationDataflowResponse"
+        twilio-call-summaries-logs:
+          $ref: "#/components/schemas/TwilioCallSummariesLogsIntegrationDataflowResponse"
+        twilio-cloud-cost-metrics:
+          $ref: "#/components/schemas/TwilioCloudCostMetricsIntegrationDataflowResponse"
+        twilio-events-logs:
+          $ref: "#/components/schemas/TwilioEventsLogsIntegrationDataflowResponse"
+        twilio-messages-logs:
+          $ref: "#/components/schemas/TwilioMessagesLogsIntegrationDataflowResponse"
+      type: object
+    TwilioMessagesLogsIntegrationDataflowRequest:
+      description: The Twilio messages logs dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    TwilioMessagesLogsIntegrationDataflowResponse:
+      description: The Twilio messages logs dataflow.
+      properties:
+        enabled:
+          description: Whether the Twilio dataflow is enabled.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
     UCConfigPair:
       description: The definition of `UCConfigPair` object.
       example:
@@ -122845,10 +124290,12 @@ components:
         - ReflectionInjection
         - RiskyLicense
         - SessionRewriting
+        - SessionRewritting
         - SessionTimeout
         - SqlInjection
         - Ssrf
         - StackTraceLeak
+        - TemplateInjection
         - TrustBoundaryViolation
         - Unmaintained
         - UntrustedDeserialization
@@ -122890,10 +124337,12 @@ components:
         - REFLECTION_INJECTION
         - RISKY_LICENSE
         - SESSION_REWRITING
+        - SESSION_REWRITTING
         - SESSION_TIMEOUT
         - SQL_INJECTION
         - SSRF
         - STACK_TRACE_LEAK
+        - TEMPLATE_INJECTION
         - TRUST_BOUNDARY_VIOLATION
         - UNMAINTAINED
         - UNTRUSTED_DESERIALIZATION
@@ -123979,6 +125428,9 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            ai_gateway_config_read: View AI Gateway configuration.
+            ai_gateway_config_write: Create, update, and delete AI Gateway configuration.
+            ai_gateway_usage: Use AI Gateway and view configuration applicable to the authenticated user.
             apm_api_catalog_read: View API catalog and API definitions.
             apm_api_catalog_write: Add, modify, and delete API catalog definitions.
             apm_read: Read and query APM and Trace Analytics.
@@ -123986,6 +125438,7 @@ components:
             apm_service_catalog_write: Add, modify, and delete service catalog definitions when those definitions are maintained by Datadog.
             appsec_vm_read: View infrastructure, application code, and library vulnerability findings.
             aws_configurations_manage: Manage AWS integration account configurations and related integration settings.
+            billing_edit: Edit your organization's billing information.
             billing_read: View your organization's billing information.
             bits_investigations_read: View Bits AI investigations.
             bits_investigations_write: Create and manage Bits AI investigations.
@@ -151849,6 +153302,610 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/governance/tag_rules:
+    get:
+      description: |-
+        Retrieve all tag rules for the organization. Optionally include disabled or deleted
+        rules, filter by telemetry source, and include each rule's current compliance score
+        via the `include=score` query parameter.
+      operationId: ListTagRules
+      parameters:
+        - description: Whether to include rules that are currently disabled. Defaults to `false`.
+          example: false
+          in: query
+          name: include_disabled
+          required: false
+          schema:
+            type: boolean
+        - description: Whether to include rules that have been soft-deleted. Defaults to `false`.
+          example: false
+          in: query
+          name: include_deleted
+          required: false
+          schema:
+            type: boolean
+        - description: Comma-separated list of related resources to include alongside each rule in the response. Currently the only supported value is `score`.
+          example: "score"
+          in: query
+          name: include
+          required: false
+          schema:
+            $ref: "#/components/schemas/TagRuleInclude"
+        - description: Restrict the result set to rules whose source matches the given value.
+          in: query
+          name: filter[source]
+          required: false
+          schema:
+            $ref: "#/components/schemas/TagRuleSource"
+        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to a recent window appropriate for the source.
+          example: 1779315066097
+          in: query
+          name: ts_start
+          required: false
+          schema:
+            format: int64
+            type: integer
+        - description: End of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Must be in the past and greater than `ts_start`.
+          example: 1779401466097
+          in: query
+          name: ts_end
+          required: false
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-05-21T22:11:06.108696Z"
+                          created_by: "test-user"
+                          enabled: true
+                          modified_at: "2026-05-21T22:11:06.108696Z"
+                          modified_by: "test-user"
+                          name: "Service tag must be one of api or web"
+                          negated: false
+                          required: true
+                          rule_type: "surfacing"
+                          scope: "env"
+                          source: "logs"
+                          tag_key: "service"
+                          tag_value_patterns:
+                            - "api"
+                            - "web"
+                          version: 1
+                        id: "123"
+                        relationships:
+                          score:
+                            data:
+                              id: "123-v1-1779315066097-1779401466097"
+                              type: "tag_rule_score"
+                        type: "tag_rule"
+                    included:
+                      - attributes:
+                          score: 80
+                          ts_end: 1779401466097
+                          ts_start: 1779315066097
+                          version: 1
+                        id: "123-v1-1779315066097-1779401466097"
+                        type: "tag_rule_score"
+              schema:
+                $ref: "#/components/schemas/TagRulesListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: List tag rules
+      tags:
+        - Tag Rules
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - telemetry_rules_read
+          - metrics_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Create a new tag rule for the organization. The caller's organization is derived from
+        the authenticated user; cross-organization creation is not supported. Fields such as
+        `rule_id`, `version`, and the timestamp/audit fields are assigned by the server.
+      operationId: CreateTagRule
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      enabled: true
+                      name: "Service tag must be one of api or web"
+                      negated: false
+                      required: true
+                      rule_type: "surfacing"
+                      scope: "env"
+                      source: "logs"
+                      tag_key: "service"
+                      tag_value_patterns:
+                        - "api"
+                        - "web"
+                    type: "tag_rule"
+            schema:
+              $ref: "#/components/schemas/TagRuleCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-05-21T22:11:06.108696Z"
+                        created_by: "test-user"
+                        enabled: true
+                        modified_at: "2026-05-21T22:11:06.108696Z"
+                        modified_by: "test-user"
+                        name: "Service tag must be one of api or web"
+                        negated: false
+                        required: true
+                        rule_type: "surfacing"
+                        scope: "env"
+                        source: "logs"
+                        tag_key: "service"
+                        tag_value_patterns:
+                          - "api"
+                          - "web"
+                        version: 1
+                      id: "123"
+                      type: "tag_rule"
+              schema:
+                $ref: "#/components/schemas/TagRuleResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create a tag rule
+      tags:
+        - Tag Rules
+      x-menu-order: 2
+      "x-permission":
+        operator: AND
+        permissions:
+          - telemetry_rules_create
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/governance/tag_rules/{rule_id}:
+    delete:
+      description: |-
+        Delete a tag rule. By default the rule is soft-deleted so it can be recovered later
+        and so that historical score data remains queryable. Pass `hard_delete=true` to remove
+        the rule permanently.
+      operationId: DeleteTagRule
+      parameters:
+        - description: The unique identifier of the tag rule to delete.
+          example: "123"
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            type: string
+        - description: Whether to permanently delete the rule instead of performing a soft delete. Defaults to `false`.
+          example: false
+          in: query
+          name: hard_delete
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Delete a tag rule
+      tags:
+        - Tag Rules
+      x-menu-order: 5
+      "x-permission":
+        operator: AND
+        permissions:
+          - telemetry_rules_create
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: |-
+        Retrieve a single tag rule by ID. Optionally include the rule's current compliance
+        score via the `include=score` query parameter. Rules belonging to other organizations
+        cannot be retrieved.
+      operationId: GetTagRule
+      parameters:
+        - description: The unique identifier of the tag rule.
+          example: "123"
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            type: string
+        - description: Comma-separated list of related resources to include alongside the rule. Currently the only supported value is `score`.
+          example: "score"
+          in: query
+          name: include
+          required: false
+          schema:
+            $ref: "#/components/schemas/TagRuleInclude"
+        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds.
+          example: 1779315066097
+          in: query
+          name: ts_start
+          required: false
+          schema:
+            format: int64
+            type: integer
+        - description: End of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Must be in the past and greater than `ts_start`.
+          example: 1779401466097
+          in: query
+          name: ts_end
+          required: false
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-05-21T22:11:06.108696Z"
+                        created_by: "test-user"
+                        enabled: true
+                        modified_at: "2026-05-21T22:11:06.108696Z"
+                        modified_by: "test-user"
+                        name: "Service tag must be one of api or web"
+                        negated: false
+                        required: true
+                        rule_type: "surfacing"
+                        scope: "env"
+                        source: "logs"
+                        tag_key: "service"
+                        tag_value_patterns:
+                          - "api"
+                          - "web"
+                        version: 1
+                      id: "123"
+                      relationships:
+                        score:
+                          data:
+                            id: "123-v1-1779315066097-1779401466097"
+                            type: "tag_rule_score"
+                      type: "tag_rule"
+                    included:
+                      - attributes:
+                          score: 80
+                          ts_end: 1779401466097
+                          ts_start: 1779315066097
+                          version: 1
+                        id: "123-v1-1779315066097-1779401466097"
+                        type: "tag_rule_score"
+              schema:
+                $ref: "#/components/schemas/TagRuleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get a tag rule
+      tags:
+        - Tag Rules
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - telemetry_rules_read
+          - metrics_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: |-
+        Update one or more attributes of an existing tag rule. Only the fields supplied in the
+        request body are modified; omitted fields retain their current values. The rule's
+        `source` cannot be changed after creation.
+      operationId: UpdateTagRule
+      parameters:
+        - description: The unique identifier of the tag rule to update.
+          example: "123"
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      enabled: true
+                      name: "Service tag must be one of api, web, or worker"
+                    id: "123"
+                    type: "tag_rule"
+            schema:
+              $ref: "#/components/schemas/TagRuleUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-05-21T22:11:06.108696Z"
+                        created_by: "test-user"
+                        enabled: true
+                        modified_at: "2026-05-21T22:25:01.000000Z"
+                        modified_by: "test-user"
+                        name: "Service tag must be one of api, web, or worker"
+                        negated: false
+                        required: true
+                        rule_type: "surfacing"
+                        scope: "env"
+                        source: "logs"
+                        tag_key: "service"
+                        tag_value_patterns:
+                          - "api"
+                          - "web"
+                        version: 2
+                      id: "123"
+                      type: "tag_rule"
+              schema:
+                $ref: "#/components/schemas/TagRuleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Update a tag rule
+      tags:
+        - Tag Rules
+      x-menu-order: 4
+      "x-permission":
+        operator: AND
+        permissions:
+          - telemetry_rules_create
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/governance/tag_rules/{rule_id}/score:
+    get:
+      description: |-
+        Retrieve the compliance score for a single tag rule. The score is computed over the
+        requested time window (or a source-appropriate default) and represents the percentage of
+        telemetry within that window that conforms to the rule. A `null` score indicates that
+        no relevant telemetry was found.
+      operationId: GetTagRuleScore
+      parameters:
+        - description: The unique identifier of the tag rule.
+          example: "123"
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            type: string
+        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds.
+          example: 1779315066097
+          in: query
+          name: ts_start
+          required: false
+          schema:
+            format: int64
+            type: integer
+        - description: End of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Must be in the past and greater than `ts_start`.
+          example: 1779401466097
+          in: query
+          name: ts_end
+          required: false
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        score: 80
+                        ts_end: 1779401466097
+                        ts_start: 1779315066097
+                        version: 1
+                      id: "123-v1-1779315066097-1779401466097"
+                      type: "tag_rule_score"
+              schema:
+                $ref: "#/components/schemas/TagRuleScoreResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get a tag rule compliance score
+      tags:
+        - Tag Rules
+      x-menu-order: 6
+      "x-permission":
+        operator: OR
+        permissions:
+          - telemetry_rules_read
+          - metrics_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/hamr:
     get:
       description: |-
@@ -157945,6 +160002,508 @@ paths:
           - incident_write
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/elastic-cloud/accounts:
+    get:
+      description: List Elastic Cloud integration accounts.
+      operationId: ListElasticCloudIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: basic
+                            username: datadog
+                          dataflows:
+                            elastic-cloud-metrics:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-06-25T08:30:50Z"
+                            elastic-cloud-primary-shard-stats:
+                              enabled: false
+                          name: elastic-cloud-prod
+                          settings:
+                            tags: "env:prod,team:saasint"
+                            url: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+                        id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/ElasticCloudIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Elastic Cloud integration accounts
+      tags:
+        - Elastic Cloud Integration Accounts
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create an Elastic Cloud integration account.
+      operationId: CreateElasticCloudIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElasticCloudIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: basic
+                          username: datadog
+                        dataflows:
+                          elastic-cloud-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                          elastic-cloud-primary-shard-stats:
+                            enabled: false
+                        name: elastic-cloud-prod
+                        settings:
+                          tags: "env:prod,team:saasint"
+                          url: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create an Elastic Cloud integration account
+      tags:
+        - Elastic Cloud Integration Accounts
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/elastic-cloud/accounts/{account_id}:
+    delete:
+      description: Delete an Elastic Cloud integration account.
+      operationId: DeleteElasticCloudIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an Elastic Cloud integration account
+      tags:
+        - Elastic Cloud Integration Accounts
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get an Elastic Cloud integration account.
+      operationId: GetElasticCloudIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: basic
+                          username: datadog
+                        dataflows:
+                          elastic-cloud-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                          elastic-cloud-primary-shard-stats:
+                            enabled: false
+                        name: elastic-cloud-prod
+                        settings:
+                          tags: "env:prod,team:saasint"
+                          url: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get an Elastic Cloud integration account
+      tags:
+        - Elastic Cloud Integration Accounts
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update an Elastic Cloud integration account. Only the fields provided are changed.
+      operationId: UpdateElasticCloudIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ElasticCloudIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: basic
+                          username: datadog
+                        dataflows:
+                          elastic-cloud-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                          elastic-cloud-primary-shard-stats:
+                            enabled: false
+                        name: elastic-cloud-prod
+                        settings:
+                          tags: "env:prod,team:saasint"
+                          url: "https://example.es.us-central1.gcp.cloud.es.io:9243"
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ElasticCloudIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update an Elastic Cloud integration account
+      tags:
+        - Elastic Cloud Integration Accounts
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/twilio/accounts:
+    get:
+      description: List Twilio integration accounts.
+      operationId: ListTwilioIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: basic
+                            username: SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                          dataflows:
+                            twilio-messages-logs:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-06-25T08:30:50Z"
+                          name: twilio-prod
+                          settings:
+                            account_sid: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                            censor_logs: true
+                        id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/TwilioIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Twilio integration accounts
+      tags:
+        - Twilio Integration Accounts
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a Twilio integration account.
+      operationId: CreateTwilioIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TwilioIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: basic
+                          username: SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                        dataflows:
+                          twilio-messages-logs:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: twilio-prod
+                        settings:
+                          account_sid: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                          censor_logs: true
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/TwilioIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a Twilio integration account
+      tags:
+        - Twilio Integration Accounts
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/twilio/accounts/{account_id}:
+    delete:
+      description: Delete a Twilio integration account.
+      operationId: DeleteTwilioIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a Twilio integration account
+      tags:
+        - Twilio Integration Accounts
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a Twilio integration account.
+      operationId: GetTwilioIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: basic
+                          username: SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                        dataflows:
+                          twilio-messages-logs:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: twilio-prod
+                        settings:
+                          account_sid: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                          censor_logs: true
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/TwilioIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a Twilio integration account
+      tags:
+        - Twilio Integration Accounts
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a Twilio integration account. Only the fields provided are changed.
+      operationId: UpdateTwilioIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TwilioIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: basic
+                          username: SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                        dataflows:
+                          twilio-messages-logs:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: twilio-prod
+                        settings:
+                          account_sid: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                          censor_logs: true
+                      id: 953a0060-81ec-4221-aed4-d4733b59cd96
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/TwilioIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a Twilio integration account
+      tags:
+        - Twilio Integration Accounts
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration/aws/accounts:
     get:
@@ -189008,6 +191567,253 @@ paths:
         - Rum Retention Filters
       x-codegen-request-body-name: body
       x-menu-order: 3
+  /api/v2/rum/applications/{app_id}/retention_filters/exclusion:
+    get:
+      description: |-
+        Get the list of exclusion filters for a RUM application.
+        The built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`) is always returned first.
+      operationId: ListExclusionFilters
+      parameters:
+        - $ref: "#/components/parameters/RumExclusionFilterApplicationIDParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          enabled: true
+                          name: Ignored / Excluded errors from Error Tracking
+                        id: error_tracking_exclusion_filter
+                        meta:
+                          enabled_at: 1735689600000
+                          updated_at: 1735689600000
+                          updated_by_handle: jane.doe@example.com
+                        type: exclusion_filters
+                      - attributes:
+                          enabled: true
+                          event_type: error
+                          name: Exclude noisy browser extension errors
+                          query: "@error.message:*extension*"
+                        id: "051601eb-54a0-abc0-03f9-cc02efa18892"
+                        meta:
+                          enabled_at: 1735689600000
+                          updated_at: 1735689600000
+                          updated_by_handle: jane.doe@example.com
+                        type: exclusion_filters
+              schema:
+                $ref: "#/components/schemas/RumExclusionFiltersResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get all RUM exclusion filters
+      tags:
+        - Rum Retention Filters
+      x-menu-order: 10
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Create an exclusion filter for a RUM application.
+        Returns the created exclusion filter when the request is successful.
+      operationId: CreateExclusionFilter
+      parameters:
+        - $ref: "#/components/parameters/RumExclusionFilterApplicationIDParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      enabled: true
+                      event_type: error
+                      name: Exclude noisy browser extension errors
+                      query: "@error.message:*extension*"
+                    type: exclusion_filters
+            schema:
+              $ref: "#/components/schemas/RumExclusionFilterCreateRequest"
+        description: The definition of the new RUM exclusion filter.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        enabled: true
+                        event_type: error
+                        name: Exclude noisy browser extension errors
+                        query: "@error.message:*extension*"
+                      id: "051601eb-54a0-abc0-03f9-cc02efa18892"
+                      meta:
+                        enabled_at: 1735689600000
+                        updated_at: 1735689600000
+                        updated_by_handle: jane.doe@example.com
+                      type: exclusion_filters
+              schema:
+                $ref: "#/components/schemas/RumExclusionFilterResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a RUM exclusion filter
+      tags:
+        - Rum Retention Filters
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rum/applications/{app_id}/retention_filters/exclusion/{ef_id}:
+    delete:
+      description: |-
+        Delete an exclusion filter for a RUM application.
+        The built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`) cannot be deleted;
+        attempting to do so returns a `405 Method Not Allowed` response.
+      operationId: DeleteExclusionFilter
+      parameters:
+        - $ref: "#/components/parameters/RumExclusionFilterApplicationIDParameter"
+        - $ref: "#/components/parameters/RumExclusionFilterIDParameter"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "405":
+          $ref: "#/components/responses/RumExclusionFilterMethodNotAllowedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a RUM exclusion filter
+      tags:
+        - Rum Retention Filters
+      x-menu-order: 14
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a single exclusion filter for a RUM application.
+      operationId: GetExclusionFilter
+      parameters:
+        - $ref: "#/components/parameters/RumExclusionFilterApplicationIDParameter"
+        - $ref: "#/components/parameters/RumExclusionFilterIDParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        enabled: true
+                        event_type: error
+                        name: Exclude noisy browser extension errors
+                        query: "@error.message:*extension*"
+                      id: "051601eb-54a0-abc0-03f9-cc02efa18892"
+                      meta:
+                        enabled_at: 1735689600000
+                        updated_at: 1735689600000
+                        updated_by_handle: jane.doe@example.com
+                      type: exclusion_filters
+              schema:
+                $ref: "#/components/schemas/RumExclusionFilterResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a RUM exclusion filter
+      tags:
+        - Rum Retention Filters
+      x-menu-order: 11
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: |-
+        Update an exclusion filter for a RUM application.
+        For the built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`), only `enabled` can be
+        updated; `name`, `event_type`, and `query` must be omitted.
+        Returns the updated exclusion filter when the request is successful.
+      operationId: UpdateExclusionFilter
+      parameters:
+        - $ref: "#/components/parameters/RumExclusionFilterApplicationIDParameter"
+        - $ref: "#/components/parameters/RumExclusionFilterIDParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      enabled: false
+                      event_type: error
+                      name: Exclude noisy browser extension errors
+                      query: "@error.message:*extension*"
+                    id: "051601eb-54a0-abc0-03f9-cc02efa18892"
+                    type: exclusion_filters
+            schema:
+              $ref: "#/components/schemas/RumExclusionFilterUpdateRequest"
+        description: New definition of the RUM exclusion filter.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        enabled: false
+                        event_type: error
+                        name: Exclude noisy browser extension errors
+                        query: "@error.message:*extension*"
+                      id: "051601eb-54a0-abc0-03f9-cc02efa18892"
+                      meta:
+                        enabled_at: 1735689600000
+                        updated_at: 1735689600000
+                        updated_by_handle: jane.doe@example.com
+                      type: exclusion_filters
+              schema:
+                $ref: "#/components/schemas/RumExclusionFilterResponse"
+          description: Updated
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "409":
+          $ref: "#/components/responses/ConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a RUM exclusion filter
+      tags:
+        - Rum Retention Filters
+      x-codegen-request-body-name: body
+      x-menu-order: 13
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/rum/applications/{app_id}/retention_filters/permanent:
     get:
       description: |-
@@ -189851,7 +192657,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a RUM retention quota configuration
       tags:
-        - RUM Retention Quota
+        - RUM Retention Quotas
       x-menu-order: 3
       x-permission:
         operator: OR
@@ -189915,7 +192721,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a RUM retention quota configuration
       tags:
-        - RUM Retention Quota
+        - RUM Retention Quotas
       x-menu-order: 1
       x-permission:
         operator: OR
@@ -190002,13 +192808,320 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create or update a RUM retention quota config
       tags:
-        - RUM Retention Quota
+        - RUM Retention Quotas
       x-codegen-request-body-name: body
       x-menu-order: 2
       x-permission:
         operator: OR
         permissions:
           - rum_retention_filters_write
+  /api/v2/rum/config/teams-ownership/mappings:
+    get:
+      description: Get the list of teams ownership mappings for your organization, optionally filtered.
+      operationId: ListTeamsOwnershipMappings
+      parameters:
+        - $ref: "#/components/parameters/TeamsOwnershipFilterViewNameParameter"
+        - $ref: "#/components/parameters/TeamsOwnershipFilterTeamHandleParameter"
+        - $ref: "#/components/parameters/TeamsOwnershipFilterApplicationIdParameter"
+        - $ref: "#/components/parameters/TeamsOwnershipFilterServiceParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          application_id: "11111111-2222-3333-4444-555555555555"
+                          created_at: "2026-01-15T09:30:00.000Z"
+                          created_by: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+                          match_type: "exact"
+                          org_id: 123456
+                          service: "web-checkout"
+                          team_handle: "team-rum"
+                          view_name: "/checkout"
+                        id: "123"
+                        type: teams_ownership_mappings
+              schema:
+                $ref: "#/components/schemas/TeamsOwnershipMappingsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List teams ownership mappings
+      tags:
+        - Rum Teams Ownership
+      x-menu-order: 1
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Create a teams ownership mapping for your organization.
+        Returns the teams ownership mapping object from the request body when the request is successful.
+      operationId: CreateTeamsOwnershipMapping
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      application_id: "11111111-2222-3333-4444-555555555555"
+                      match_type: "exact"
+                      service: "web-checkout"
+                      team_handle: "team-rum"
+                      view_name: "/checkout"
+                    type: teams_ownership_mappings
+            schema:
+              $ref: "#/components/schemas/TeamsOwnershipMappingCreateRequest"
+        description: The definition of the teams ownership mapping to create.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        application_id: "11111111-2222-3333-4444-555555555555"
+                        created_at: "2026-01-15T09:30:00.000Z"
+                        created_by: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+                        match_type: "exact"
+                        org_id: 123456
+                        service: "web-checkout"
+                        team_handle: "team-rum"
+                        view_name: "/checkout"
+                      id: "123"
+                      type: teams_ownership_mappings
+              schema:
+                $ref: "#/components/schemas/TeamsOwnershipMappingResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a teams ownership mapping
+      tags:
+        - Rum Teams Ownership
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rum/config/teams-ownership/mappings/operations:
+    post:
+      description: |-
+        Add and remove teams ownership mappings for your organization in a single atomic request, following
+        the JSON:API [atomic operations extension](https://jsonapi.org/ext/atomic/).
+        Operations are applied together: if any operation is invalid, none of the operations are applied.
+        Add operations are processed before remove operations, so results may not appear in the same
+        order as the request.
+      operationId: CreateTeamsOwnershipMappingsBatch
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  atomic:operations:
+                    - data:
+                        attributes:
+                          application_id: "11111111-2222-3333-4444-555555555555"
+                          match_type: "exact"
+                          service: "web-checkout"
+                          team_handle: "team-rum"
+                          view_name: "/checkout"
+                        type: teams_ownership_mappings
+                      op: add
+                    - op: remove
+                      ref:
+                        id: "456"
+                        type: teams_ownership_mappings
+            schema:
+              $ref: "#/components/schemas/TeamsOwnershipMappingBatchRequest"
+        description: The list of add and remove operations to apply atomically.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    atomic:results:
+                      - data:
+                          attributes:
+                            application_id: "11111111-2222-3333-4444-555555555555"
+                            created_at: "2026-01-15T09:30:00.000Z"
+                            created_by: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+                            match_type: "exact"
+                            org_id: 123456
+                            service: "web-checkout"
+                            team_handle: "team-rum"
+                            view_name: "/checkout"
+                          id: "123"
+                          type: teams_ownership_mappings
+                      - {}
+              schema:
+                $ref: "#/components/schemas/TeamsOwnershipMappingBatchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    errors:
+                      - detail: "prefix match_type is not enabled for this org"
+                        status: "400"
+                        title: "Bad Request"
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: |-
+            Bad Request. One or more operations failed validation, so none of the operations were applied.
+            Errors are returned in the JSON:API atomic operations error format rather than the standard error response.
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found. One or more mappings requested for removal do not exist.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict. One or more mappings requested for creation already exist.
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Bulk create and remove teams ownership mappings
+      tags:
+        - Rum Teams Ownership
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rum/config/teams-ownership/mappings/{id}:
+    delete:
+      description: Delete a specific teams ownership mapping from your organization.
+      operationId: DeleteTeamsOwnershipMapping
+      parameters:
+        - $ref: "#/components/parameters/TeamsOwnershipMappingIdParameter"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a teams ownership mapping
+      tags:
+        - Rum Teams Ownership
+      x-menu-order: 4
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a specific teams ownership mapping from your organization.
+      operationId: GetTeamsOwnershipMapping
+      parameters:
+        - $ref: "#/components/parameters/TeamsOwnershipMappingIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        application_id: "11111111-2222-3333-4444-555555555555"
+                        created_at: "2026-01-15T09:30:00.000Z"
+                        created_by: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+                        match_type: "exact"
+                        org_id: 123456
+                        service: "web-checkout"
+                        team_handle: "team-rum"
+                        view_name: "/checkout"
+                      id: "123"
+                      type: teams_ownership_mappings
+              schema:
+                $ref: "#/components/schemas/TeamsOwnershipMappingResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a teams ownership mapping
+      tags:
+        - Rum Teams Ownership
+      x-menu-order: 3
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rum/config/teams-ownership/rules:
+    get:
+      description: |-
+        Get the list of teams ownership rules for your organization, optionally filtered.
+        Rules group the underlying mappings by `view_name`, `application_id`, `service`, and `match_type`,
+        collapsing every team that owns the same view into a single entry.
+      operationId: ListTeamsOwnershipRules
+      parameters:
+        - $ref: "#/components/parameters/TeamsOwnershipFilterViewNameParameter"
+        - $ref: "#/components/parameters/TeamsOwnershipFilterTeamHandleParameter"
+        - $ref: "#/components/parameters/TeamsOwnershipFilterApplicationIdParameter"
+        - $ref: "#/components/parameters/TeamsOwnershipFilterServiceParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          application_id: "11111111-2222-3333-4444-555555555555"
+                          match_type: "exact"
+                          service: "web-checkout"
+                          teams:
+                            - mapping_id: "123"
+                              team_handle: "team-rum"
+                          view_name: "/checkout"
+                        id: "3b1e2f7a9c4d6e8f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f"
+                        type: teams_ownership_grouped_mappings
+              schema:
+                $ref: "#/components/schemas/TeamsOwnershipRulesResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List teams ownership rules
+      tags:
+        - Rum Teams Ownership
+      x-menu-order: 5
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/rum/events:
     get:
       description: |-
@@ -197637,7 +200750,7 @@ paths:
                         dependencies: []
                         metadata: {}
                         serialNumber: urn:uuid:abc-123
-                        specVersion: "1.5"
+                        specVersion: "1.6"
                         version: 1
                       id: "github.com/datadog/datadog-agent"
                       type: sboms
@@ -197784,6 +200897,7 @@ paths:
                           last_success:
                             env: prod
                         id: "Host|i-0fc7edef1ab26d7ef"
+                        type: scanned-assets-metadata
               schema:
                 $ref: "#/components/schemas/ScannedAssetsMetadata"
           description: OK
@@ -215657,610 +218771,6 @@ paths:
         operator: OR
         permissions:
           - synthetics_global_variable_write
-  /api/v2/tag_policies:
-    get:
-      description: |-
-        Retrieve all tag policies for the organization. Optionally include disabled or deleted
-        policies, filter by telemetry source, and include each policy's current compliance score
-        via the `include=score` query parameter.
-      operationId: ListTagPolicies
-      parameters:
-        - description: Whether to include policies that are currently disabled. Defaults to `false`.
-          example: false
-          in: query
-          name: include_disabled
-          required: false
-          schema:
-            type: boolean
-        - description: Whether to include policies that have been soft-deleted. Defaults to `false`.
-          example: false
-          in: query
-          name: include_deleted
-          required: false
-          schema:
-            type: boolean
-        - description: Comma-separated list of related resources to include alongside each policy in the response. Currently the only supported value is `score`.
-          example: "score"
-          in: query
-          name: include
-          required: false
-          schema:
-            $ref: "#/components/schemas/TagPolicyInclude"
-        - description: Restrict the result set to policies whose source matches the given value.
-          in: query
-          name: filter[source]
-          required: false
-          schema:
-            $ref: "#/components/schemas/TagPolicySource"
-        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Defaults to a recent window appropriate for the source.
-          example: 1779315066097
-          in: query
-          name: ts_start
-          required: false
-          schema:
-            format: int64
-            type: integer
-        - description: End of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Must be in the past and greater than `ts_start`.
-          example: 1779401466097
-          in: query
-          name: ts_end
-          required: false
-          schema:
-            format: int64
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      - attributes:
-                          created_at: "2026-05-21T22:11:06.108696Z"
-                          created_by: "test-user"
-                          enabled: true
-                          modified_at: "2026-05-21T22:11:06.108696Z"
-                          modified_by: "test-user"
-                          negated: false
-                          policy_name: "Service tag must be one of api or web"
-                          policy_type: "surfacing"
-                          required: true
-                          scope: "env"
-                          source: "logs"
-                          tag_key: "service"
-                          tag_value_patterns:
-                            - "api"
-                            - "web"
-                          version: 1
-                        id: "123"
-                        relationships:
-                          score:
-                            data:
-                              id: "123-v1-1779315066097-1779401466097"
-                              type: "tag_policy_score"
-                        type: "tag_policy"
-                    included:
-                      - attributes:
-                          score: 80
-                          ts_end: 1779401466097
-                          ts_start: 1779315066097
-                          version: 1
-                        id: "123-v1-1779315066097-1779401466097"
-                        type: "tag_policy_score"
-              schema:
-                $ref: "#/components/schemas/TagPoliciesListResponse"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-      summary: List tag policies
-      tags:
-        - Tag Policies
-      x-menu-order: 1
-      "x-permission":
-        operator: OR
-        permissions:
-          - telemetry_rules_read
-          - metrics_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-    post:
-      description: |-
-        Create a new tag policy for the organization. The caller's organization is derived from
-        the authenticated user; cross-organization creation is not supported. Fields such as
-        `policy_id`, `version`, and the timestamp/audit fields are assigned by the server.
-      operationId: CreateTagPolicy
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      enabled: true
-                      negated: false
-                      policy_name: "Service tag must be one of api or web"
-                      policy_type: "surfacing"
-                      required: true
-                      scope: "env"
-                      source: "logs"
-                      tag_key: "service"
-                      tag_value_patterns:
-                        - "api"
-                        - "web"
-                    type: "tag_policy"
-            schema:
-              $ref: "#/components/schemas/TagPolicyCreateRequest"
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        created_at: "2026-05-21T22:11:06.108696Z"
-                        created_by: "test-user"
-                        enabled: true
-                        modified_at: "2026-05-21T22:11:06.108696Z"
-                        modified_by: "test-user"
-                        negated: false
-                        policy_name: "Service tag must be one of api or web"
-                        policy_type: "surfacing"
-                        required: true
-                        scope: "env"
-                        source: "logs"
-                        tag_key: "service"
-                        tag_value_patterns:
-                          - "api"
-                          - "web"
-                        version: 1
-                      id: "123"
-                      type: "tag_policy"
-              schema:
-                $ref: "#/components/schemas/TagPolicyResponse"
-          description: Created
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Conflict
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-      summary: Create a tag policy
-      tags:
-        - Tag Policies
-      x-menu-order: 2
-      "x-permission":
-        operator: AND
-        permissions:
-          - telemetry_rules_create
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/tag_policies/{policy_id}:
-    delete:
-      description: |-
-        Delete a tag policy. By default the policy is soft-deleted so it can be recovered later
-        and so that historical score data remains queryable. Pass `hard_delete=true` to remove
-        the policy permanently.
-      operationId: DeleteTagPolicy
-      parameters:
-        - description: The unique identifier of the tag policy to delete.
-          example: "123"
-          in: path
-          name: policy_id
-          required: true
-          schema:
-            type: string
-        - description: Whether to permanently delete the policy instead of performing a soft delete. Defaults to `false`.
-          example: false
-          in: query
-          name: hard_delete
-          required: false
-          schema:
-            type: boolean
-      responses:
-        "204":
-          description: No Content
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Not Found
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-      summary: Delete a tag policy
-      tags:
-        - Tag Policies
-      x-menu-order: 5
-      "x-permission":
-        operator: AND
-        permissions:
-          - telemetry_rules_create
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-    get:
-      description: |-
-        Retrieve a single tag policy by ID. Optionally include the policy's current compliance
-        score via the `include=score` query parameter. Policies belonging to other organizations
-        cannot be retrieved.
-      operationId: GetTagPolicy
-      parameters:
-        - description: The unique identifier of the tag policy.
-          example: "123"
-          in: path
-          name: policy_id
-          required: true
-          schema:
-            type: string
-        - description: Comma-separated list of related resources to include alongside the policy. Currently the only supported value is `score`.
-          example: "score"
-          in: query
-          name: include
-          required: false
-          schema:
-            $ref: "#/components/schemas/TagPolicyInclude"
-        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds.
-          example: 1779315066097
-          in: query
-          name: ts_start
-          required: false
-          schema:
-            format: int64
-            type: integer
-        - description: End of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Must be in the past and greater than `ts_start`.
-          example: 1779401466097
-          in: query
-          name: ts_end
-          required: false
-          schema:
-            format: int64
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        created_at: "2026-05-21T22:11:06.108696Z"
-                        created_by: "test-user"
-                        enabled: true
-                        modified_at: "2026-05-21T22:11:06.108696Z"
-                        modified_by: "test-user"
-                        negated: false
-                        policy_name: "Service tag must be one of api or web"
-                        policy_type: "surfacing"
-                        required: true
-                        scope: "env"
-                        source: "logs"
-                        tag_key: "service"
-                        tag_value_patterns:
-                          - "api"
-                          - "web"
-                        version: 1
-                      id: "123"
-                      relationships:
-                        score:
-                          data:
-                            id: "123-v1-1779315066097-1779401466097"
-                            type: "tag_policy_score"
-                      type: "tag_policy"
-                    included:
-                      - attributes:
-                          score: 80
-                          ts_end: 1779401466097
-                          ts_start: 1779315066097
-                          version: 1
-                        id: "123-v1-1779315066097-1779401466097"
-                        type: "tag_policy_score"
-              schema:
-                $ref: "#/components/schemas/TagPolicyResponse"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Not Found
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-      summary: Get a tag policy
-      tags:
-        - Tag Policies
-      x-menu-order: 3
-      "x-permission":
-        operator: OR
-        permissions:
-          - telemetry_rules_read
-          - metrics_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-    patch:
-      description: |-
-        Update one or more attributes of an existing tag policy. Only the fields supplied in the
-        request body are modified; omitted fields retain their current values. The policy's
-        `source` cannot be changed after creation.
-      operationId: UpdateTagPolicy
-      parameters:
-        - description: The unique identifier of the tag policy to update.
-          example: "123"
-          in: path
-          name: policy_id
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      enabled: true
-                      policy_name: "Service tag must be one of api, web, or worker"
-                    id: "123"
-                    type: "tag_policy"
-            schema:
-              $ref: "#/components/schemas/TagPolicyUpdateRequest"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        created_at: "2026-05-21T22:11:06.108696Z"
-                        created_by: "test-user"
-                        enabled: true
-                        modified_at: "2026-05-21T22:25:01.000000Z"
-                        modified_by: "test-user"
-                        negated: false
-                        policy_name: "Service tag must be one of api, web, or worker"
-                        policy_type: "surfacing"
-                        required: true
-                        scope: "env"
-                        source: "logs"
-                        tag_key: "service"
-                        tag_value_patterns:
-                          - "api"
-                          - "web"
-                        version: 2
-                      id: "123"
-                      type: "tag_policy"
-              schema:
-                $ref: "#/components/schemas/TagPolicyResponse"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Not Found
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-      summary: Update a tag policy
-      tags:
-        - Tag Policies
-      x-menu-order: 4
-      "x-permission":
-        operator: AND
-        permissions:
-          - telemetry_rules_create
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/tag_policies/{policy_id}/score:
-    get:
-      description: |-
-        Retrieve the compliance score for a single tag policy. The score is computed over the
-        requested time window (or a source-appropriate default) and represents the percentage of
-        telemetry within that window that conforms to the policy. A `null` score indicates that
-        no relevant telemetry was found.
-      operationId: GetTagPolicyScore
-      parameters:
-        - description: The unique identifier of the tag policy.
-          example: "123"
-          in: path
-          name: policy_id
-          required: true
-          schema:
-            type: string
-        - description: Start of the time window used for compliance score computation, as a Unix timestamp in milliseconds.
-          example: 1779315066097
-          in: query
-          name: ts_start
-          required: false
-          schema:
-            format: int64
-            type: integer
-        - description: End of the time window used for compliance score computation, as a Unix timestamp in milliseconds. Must be in the past and greater than `ts_start`.
-          example: 1779401466097
-          in: query
-          name: ts_end
-          required: false
-          schema:
-            format: int64
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        score: 80
-                        ts_end: 1779401466097
-                        ts_start: 1779315066097
-                        version: 1
-                      id: "123-v1-1779315066097-1779401466097"
-                      type: "tag_policy_score"
-              schema:
-                $ref: "#/components/schemas/TagPolicyScoreResponse"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Not Found
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - apiKeyAuth: []
-          appKeyAuth: []
-      summary: Get a tag policy compliance score
-      tags:
-        - Tag Policies
-      x-menu-order: 6
-      "x-permission":
-        operator: OR
-        permissions:
-          - telemetry_rules_read
-          - metrics_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/tags/enrichment:
     get:
       description: List all tag pipeline rulesets - Retrieve a list of all tag pipeline rulesets for the organization
@@ -217175,9 +219685,11 @@ paths:
                         connected_team:
                           data:
                             id: "@GitHubOrg/team-handle"
+                            type: github_team
                         team:
                           data:
                             id: 87654321-4321-8765-dcba-210987654321
+                            type: team
                       type: team_connection
             schema:
               $ref: "#/components/schemas/TeamConnectionCreateRequest"
@@ -222142,6 +224654,17 @@ tags:
       scopes from alerting. Downtime settings, which can be scheduled with start and
       end times, prevent all alerting related to specified Datadog tags.
     name: Downtimes
+  - description: |-
+      Manage your Datadog Elastic Cloud integration accounts directly through the Datadog API.
+      Create, update, and delete accounts, configure authentication and settings, and
+      enable or disable dataflows such as cluster metrics, index stats, shard stats,
+      pending tasks, and snapshot lifecycle management stats. See the
+      [Elastic Cloud integration page](https://docs.datadoghq.com/integrations/elastic-cloud/) for
+      more information.
+    externalDocs:
+      description: Elastic Cloud integration.
+      url: https://docs.datadoghq.com/integrations/elastic-cloud/
+    name: Elastic Cloud Integration Accounts
   - description: Manage per-integration configurations for the Internal Developer Portal (IDP). These configurations control which external resources (for example, GitHub repositories, Jira projects, or PagerDuty services) are synced as entities into the Software Catalog.
     name: Entity Integration Configs
   - description: Retrieves security risk scores for entities in your organization.
@@ -222433,7 +224956,7 @@ tags:
     name: RUM Remote Config
   - description: |-
       Manage RUM retention quota configurations for your organization's RUM applications.
-    name: RUM Retention Quota
+    name: RUM Retention Quotas
   - description: View and manage Reference Tables in your organization.
     name: Reference Tables
   - description: |-
@@ -222481,6 +225004,10 @@ tags:
   - description: |-
       Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization.
     name: Rum Retention Filters
+  - description: |-
+      Manage teams ownership mappings between RUM views and the teams that own them.
+      See <https://docs.datadoghq.com/real_user_monitoring/ownership_of_views/>.
+    name: Rum Teams Ownership
   - description: |-
       Provision Datadog users and teams using SCIM APIs.
 
@@ -222569,17 +225096,28 @@ tags:
       For more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/).
     name: Synthetics
   - description: |-
-      Tag Policies define rules that govern which tag values are accepted for a given tag key,
-      scoped to a particular telemetry source (such as logs, spans, or metrics). Policies can be
-      `blocking` (data not matching the policy is rejected) or `surfacing` (matching data is
-      highlighted but not blocked). Each policy reports a compliance `score` derived from how
-      much recent telemetry adheres to the policy.
-    name: Tag Policies
+      Tag Rules define rules that govern which tag values are accepted for a given tag key,
+      scoped to a particular telemetry source (such as logs, spans, or metrics). Rules can be
+      `blocking` (data not matching the rule is rejected) or `surfacing` (matching data is
+      highlighted but not blocked). Each rule reports a compliance `score` derived from how
+      much recent telemetry adheres to the rule.
+    name: Tag Rules
   - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information.
     name: Teams
   - description: |-
       Search and manage flaky tests through Test Optimization. See the [Test Optimization page](https://docs.datadoghq.com/tests/) for more information.
     name: Test Optimization
+  - description: |-
+      Manage your Datadog Twilio integration accounts directly through the Datadog API.
+      Create, update, and delete accounts, configure authentication and settings, and
+      enable or disable dataflows such as message logs, event logs, alerts, call
+      summaries, and Cloud Cost Management metrics. See the
+      [Twilio integration page](https://docs.datadoghq.com/integrations/twilio/) for
+      more information.
+    externalDocs:
+      description: Twilio integration.
+      url: https://docs.datadoghq.com/integrations/twilio/
+    name: Twilio Integration Accounts
   - description: |-
       The usage metering API allows you to get hourly, daily, and
       monthly usage across multiple facets of Datadog.
