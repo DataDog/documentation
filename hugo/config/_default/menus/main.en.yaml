@@ -3141,6 +3141,11 @@ menu:
       parent: private_actions
       identifier: set_up_agent_based
       weight: 2
+    - name: Set Up a Standalone Runner
+      url: actions/private_actions/set_up_standalone/
+      parent: private_actions
+      identifier: set_up_standalone
+      weight: 3
     - name: Run a Script
       url: actions/private_actions/run_script/
       parent: private_actions
