@@ -83,14 +83,14 @@ When you create an Execution Policy, you become its Editor. If a policy has no A
 
 ## Create an Execution Policy
 
-1. Go to [**Actions > Execution Policies**][4] and click **New Execution Policy**.
-2. Enter a **Name** (for example, `Team A Production`) and an optional **Description**.
-3. Set the **Rule** to **Allow** or **Deny**.
-4. Under **Actions**, choose an integration and the actions to include. You can select specific actions, use globs to match multiple, or use the **read-only** / **write-capable** selectors.
-5. Optionally set a scope. For Kubernetes, set **Target Namespaces** to limit the policy to specific namespaces.
-6. Under **Targets**, add one or more tag selectors for the Agents this policy applies to. An Agent must carry all the tags in a target to match it. To target every Agent that has a private action runner enabled, use a wildcard `*` on its own. Add more than one target to apply the same policy to more than one set of Agents. For more information, see the [Targets](#targets) section.
+1. Go to [**Actions > Execution Policies**][4] and click on **Create Execution Policy**.
+2. Enter a **Name** (for example, `Read-only Kubernetes`) or use the auto-generated one.
+3. Set the **Effect** to **Allow** or **Deny**.
+4. Under **Actions**, choose an integration and the actions to include. You can select specific actions, select whole bundles, or use the special **All actions** / **All read-only** selectors.
+5. Optionally set a scope. For example, for Kubernetes, set **Target Namespaces** to limit the policy to specific namespaces.
+6. Under **Targets**, add one or more tags to select the Agents this policy applies to. An Agent must carry all the tags in a target to match it. To target every Agent that has an ownerless private action runner enabled, use a wildcard `*` on its own. Add more than one target to apply the same policy to more than one set of Agents. For more information, see the [Targets](#targets) section.
 7. Under **Access**, set who can view, edit, and who the policy applies to. For more information, see the [Access](#access) section.
-8. Click **Create**.
+8. Click on **Create**.
 
 ## Use an Execution Policy in a workflow
 
