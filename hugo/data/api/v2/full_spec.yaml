@@ -33708,10 +33708,27 @@ components:
           example: 3600
           format: int64
           type: integer
+        fail_on_no_data:
+          default: true
+          description: Whether the rule should fail if a matching monitor group is in a NO DATA state.
+          example: false
+          type: boolean
+        fail_on_no_groups_found:
+          default: false
+          description: Whether the rule should fail if no monitor groups are found for the query.
+          example: false
+          type: boolean
         query:
           description: Monitors that match this query are evaluated.
           example: "service:my-service env:prod"
           type: string
+        warmup:
+          default: 0
+          description: Seconds to wait after a deployment starts before evaluating the monitor's status.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
       required:
         - query
       type: object
