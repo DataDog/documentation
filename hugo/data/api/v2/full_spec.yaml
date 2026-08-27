@@ -125428,6 +125428,9 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            ai_gateway_config_read: View AI Gateway configuration.
+            ai_gateway_config_write: Create, update, and delete AI Gateway configuration.
+            ai_gateway_usage: Use AI Gateway and view configuration applicable to the authenticated user.
             apm_api_catalog_read: View API catalog and API definitions.
             apm_api_catalog_write: Add, modify, and delete API catalog definitions.
             apm_read: Read and query APM and Trace Analytics.
