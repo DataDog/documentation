@@ -680,14 +680,14 @@ No specific configuration is required.
 
 ## vSphere Kubernetes Service (VKS) {#VKS}
 
-VKS requires the same small configuration changes as TKG, plus a namespace label for the privileged Pod Security Standard. Before deploying the Datadog Agent, replace `<namespace>` with the namespace where you deploy `datadog-agent` and run:
+VKS requires the namespace that the Datadog Agent is deployed to use the privileged Pod Security Standard. Before deploying the Datadog Agent, replace `<namespace>` with the namespace where you deploy `datadog-agent` and run:
 
 ```shell
 kubectl label --overwrite ns <namespace> \
   pod-security.kubernetes.io/enforce=privileged
 ```
 
-For Agent configuration, setting a toleration is required for the controller to schedule the Node Agent on the `master` nodes.
+Use the following configuration to enable Kubernetes event collection and kube-state-metrics core, disable Kubelet TLS verification for self-signed certificates, and add a toleration so the Agent can be scheduled on control plane nodes.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
