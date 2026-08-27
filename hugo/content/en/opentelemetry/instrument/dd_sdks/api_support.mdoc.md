@@ -138,7 +138,7 @@ This approach works with the existing OpenTelemetry SDK. When you enable this fe
 - **Datadog SDK**: dd-trace-dotnet version 3.30.0 or later.
 {% /if %}
 {% if equals($prog_lang, "node_js") %}
-- **Datadog SDK**: `dd-trace-js` version 5.81.0 or later.
+- **Datadog SDK**: `dd-trace-js` version 7.0.0 or later for metrics life cycle methods. Basic OTel Metrics API support requires version 5.81.0 or later.
 - **OpenTelemetry API**: `@opentelemetry/api` version 1.0.0 to 1.10.0. (The Datadog SDK provides the implementation for this API).
 {% /if %}
 {% if equals($prog_lang, "python") %}
@@ -163,7 +163,7 @@ The OpenTelemetry Metrics SDK for Ruby is currently in [alpha implementation](ht
 - **Rust**: MSRV 1.84 or later.
 {% /if %}
 {% if equals($prog_lang, "java") %}
-- **Datadog SDK**: `dd-trace-java` version 1.61.0 or later.
+- **Datadog SDK**: `dd-trace-java` version 1.66.0 or later for metrics life cycle methods. Basic OTel Metrics API support requires version 1.61.0 or later.
 {% /if %}
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
 {% if includes($prog_lang, ["dot_net", "node_js", "python", "ruby", "go", "java"]) %}
@@ -491,6 +491,54 @@ LongCounter counter = meter.counterBuilder("http.requests_total").build();
 // Record measurements
 counter.add(1, Attributes.builder().put("method", "GET").put("status_code", "200").build());
 ```
+{% /if %}
+
+{% if includes($prog_lang, ["node_js", "python", "java"]) %}
+
+### Flush metrics in short-lived processes
+
+Metrics are normally exported on a schedule. Before a short-lived process exits, call `forceFlush` to wait for metrics recorded so far. Call `shutdown` to perform a final export and stop the metric provider.
+
+{% if equals($prog_lang, "node_js") %}
+Set `OTEL_EXPORTER_OTLP_METRICS_TIMEOUT` to bound each export. The value is in milliseconds.
+
+```javascript
+const meterProvider = metrics.getMeterProvider();
+
+await meterProvider.forceFlush();
+await meterProvider.shutdown();
+```
+
+For TypeScript, cast the provider to the Datadog implementation type:
+
+```typescript
+import type { opentelemetry as DatadogOpenTelemetry } from 'dd-trace';
+
+const meterProvider = metrics.getMeterProvider() as DatadogOpenTelemetry.MeterProvider;
+```
+{% /if %}
+
+{% if equals($prog_lang, "python") %}
+```python
+meter_provider = metrics.get_meter_provider()
+
+if not meter_provider.force_flush(timeout_millis=10_000):
+    raise RuntimeError("metric export timed out")
+
+meter_provider.shutdown(timeout_millis=10_000)
+```
+{% /if %}
+
+{% if equals($prog_lang, "java") %}
+```java
+import datadog.trace.api.metrics.OpenTelemetryMetrics;
+import java.util.concurrent.TimeUnit;
+
+boolean exported = OpenTelemetryMetrics.forceFlush().get(10, TimeUnit.SECONDS);
+boolean finalExport = OpenTelemetryMetrics.shutdown().get(10, TimeUnit.SECONDS);
+```
+{% /if %}
+
 {% /if %}
 
 ### Create a histogram
