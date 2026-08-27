@@ -1,5 +1,5 @@
 ---
-title: Enrollment and ownership
+title: Enrollment and Ownership
 description: How a private action runner enrolls with Datadog, how enrollment sets the runner's ownership, and how ownership determines which authorization model the runner uses.
 further_reading:
 - link: "actions/private_actions/set_up_agent_based"

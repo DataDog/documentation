@@ -1,11 +1,12 @@
 ---
-title: Set up a private action runner in the Datadog Agent
+title: Set Up a Private Action Runner in the Datadog Agent
 description: Install, enroll, manage, and update a private action runner that runs inside the Datadog Agent.
 disable_toc: false
 aliases:
 - service_management/workflows/private_actions/use_private_actions
 - service_management/app_builder/private_actions/use_private_actions
 - actions/private_actions/use_private_actions/
+- actions/private_actions/update_private_action_runner/
 further_reading:
 - link: "actions/private_actions/"
   tag: "Documentation"
@@ -75,7 +76,7 @@ DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST=com.datadoghq.kubernetes.*,com.datado
 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-`DD_APP_KEY` enrolls the runner as owned, the same as Fleet Automation. The application key needs the `on_prem_runner_write` scope. `DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST` takes a comma-separated list. Use bundle wildcards to allow the actions an in-Agent runner can run: `com.datadoghq.kubernetes.*` and `com.datadoghq.remoteaction.*`. To rely on the runner's built-in default actions instead (read-only Remote Action actions, plus a set of read-only Kubernetes actions on the Cluster Agent), leave the allowlist unset.
+`DD_APP_KEY` enrolls the runner as owned, the same as Fleet Automation. The application key needs the `on_prem_runner_write` scope. `DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST` takes a comma-separated list. Use bundle wildcards to allow the actions a runner in the Datadog Agent can run: `com.datadoghq.kubernetes.*` and `com.datadoghq.remoteaction.*`. To rely on the runner's built-in default actions instead (read-only Remote Action actions, plus a set of read-only Kubernetes actions on the Cluster Agent), leave the allowlist unset.
 
 After installation, go to [Private Action Runners][1] to verify your runner appears on the list.
 

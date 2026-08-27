@@ -1,5 +1,5 @@
 ---
-title: Set up a standalone private action runner
+title: Set Up a Standalone Private Action Runner
 description: Install, connect, manage, and update a standalone private action runner that you deploy and manage yourself with Docker or Helm.
 disable_toc: false
 further_reading:

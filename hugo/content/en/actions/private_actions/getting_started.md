@@ -1,5 +1,5 @@
 ---
-title: Getting started with private actions
+title: Getting Started with Private Actions
 description: Deploy a private action runner in the Datadog Agent with the Datadog Operator, then run your first action using Datadog's default Execution Policies.
 further_reading:
 - link: "actions/private_actions"
@@ -117,7 +117,7 @@ Run a read-only Kubernetes action against your new runner from the Action Catalo
 1. Under **Configure inputs**, enter the **Namespace** to list pods from. You can also set **Field selector**, **Label selector**, or **Limit**.
 1. Click **Run**. The results appear in the panel.
 
-{{< img src="actions/private_actions/getting_started/run_action_action_catalog.png" alt="The List Pods action in the Action Catalog, with the connection set to Target and an Orch Cluster ID, namespace inputs, and a Run button" style="width:58%;" >}}
+{{< img src="actions/private_actions/getting_started/run_action_action_catalog.png" alt="The List Pods action in the Action Catalog, with the connection set to Target and an Orch Cluster ID entered" style="width:58%;" >}}
 
 The action runs on your runner and returns its result. To run the same action from a workflow instead, add a private action step in Workflow Automation and choose **Target** in its connection picker. See [Use an Execution Policy in a workflow][9].
 
@@ -135,7 +135,7 @@ This guide uses Datadog's default Execution Policies, which authorize read-only 
 [4]: /actions/private_actions/set_up_agent_based/
 [5]: /actions/private_actions/enroll_runner/
 [6]: https://app.datadoghq.com/actions/private-action-runners
-[7]: /actions/private_actions/execution_policies/#datadog-default-execution-policies
+[7]: /actions/private_actions/execution_policies/#default-execution-policies
 [8]: https://app.datadoghq.com/actions/action-catalog#com.datadoghq.kubernetes/com.datadoghq.kubernetes.core/com.datadoghq.kubernetes.core.listPod
 [9]: /actions/private_actions/execution_policies/#use-an-execution-policy-in-a-workflow
 [10]: /actions/private_actions/execution_policies/

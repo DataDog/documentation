@@ -85,7 +85,6 @@ To configure this connection, specify the endpoint URL:
 
 {{< img src="actions/private_actions/par-http-no-auth-credentials.png" alt="An HTTP connection without authentication" style="width:80%;" >}}
 
-[101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS
 {{% /tab %}}
 
 {{% tab "GitLab" %}}

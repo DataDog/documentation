@@ -1,5 +1,5 @@
 ---
-title: Run a script with the private action runner
+title: Run a Script with the Private Action Runner
 description: Use the private action runner to run predefined scripts in your private network, including the configuration required for ownerless, Execution-Policy-authorized runners.
 further_reading:
 - link: "actions/private_actions/set_up_agent_based"
@@ -144,7 +144,7 @@ When a runner is enrolled as ownerless and authorized by [Execution Policies][3]
 
 #### Delivering the config on Kubernetes
 
-On Kubernetes, provide the script configuration file to the in-Agent runner as a ConfigMap. Mount it into the runner container at the fixed path. The Cluster Agent runner uses the Linux path above.
+On Kubernetes, provide the script configuration file to the runner in the Datadog Agent as a ConfigMap. Mount it into the runner container at the fixed path. The Cluster Agent runner uses the Linux path above.
 
 First, create a ConfigMap that holds your script configuration:
 
@@ -230,10 +230,8 @@ A standalone runner is always owned and authorized with [Connections][5].
 1. After [setting up a runner][2], navigate to **Connections**.
 1. Click **New Connection** and select **Script**.
 1. Enter a connection name, and in the **Private Action Runner** dropdown, select your runner.
-1. Copy the credential file template into your runner's configuration directory with the commands
-   you want to run.
-1. In **Path to file**, confirm the file path matches the path on your runner's file system (the
-   default is sufficient in most cases).
+1. Copy the credential file template into your runner's configuration directory with the commands you want to run.
+1. In **Path to file**, confirm the file path matches the path on your runner's file system (the default is sufficient in most cases).
 1. Click **Next, Confirm Access**, configure permissions, then click **Create**.
 1. Select this connection when using the script action in your workflows or apps.
 

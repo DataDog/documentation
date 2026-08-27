@@ -126,7 +126,7 @@ The default Execution Policies cover read-only actions only. To run write-capabl
 
 ## Authorization workflow
 
-Because authorization happens in Datadog before a task is dispatched, the runner only executes actions that have already been authorized. When a private action is requested against an in-Agent runner:
+Because authorization happens in Datadog before a task is dispatched, the runner only executes actions that have already been authorized. When a private action is requested against a runner in the Datadog Agent:
 
 1. Datadog identifies the **target Agent** (by hostname or orchestration cluster ID) and its tags.
 2. Datadog finds the Execution Policies whose **Targets** match those tags.
