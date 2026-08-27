@@ -10,7 +10,7 @@ Use journey paths to:
 - Understand whether users are converting efficiently or taking unexpected detours.
 - Investigate where and why users drop off.
 
-{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_conversion_chart.png" alt="A rendered Journey Paths chart showing the top paths users take between two views" style="width:100%;" >}}
+{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_conversion_chart.png" alt="A rendered Journey Paths chart showing the top paths users take between two views." style="width:100%;" >}}
 
 ## Create a journey paths chart
 
