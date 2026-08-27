@@ -60,7 +60,7 @@ service:
     metrics:
       receivers: [hostmetrics]
       processors: [resourcedetection]
-      exporters: [datadog]
+      exporters: [otlp_http]
 ```
 
 {{% /tab %}}
@@ -106,7 +106,7 @@ receivers:
 
 ## Data collected
 
-Host Metrics are collected by the [host metrics receiver][4]. For information about setting up the receiver, see [OpenTelemetry Collector Datadog Exporter][5].
+Host metrics are collected by the [host metrics receiver][4]. For information about setting up the receiver, see [Set Up the OpenTelemetry Collector][5].
 
 The metrics, mapped to Datadog metrics, are used in the following views:
 - [Infrastructure Host Map][6]
@@ -184,5 +184,3 @@ Value: 1153183744
 [8]: /opentelemetry/collector_exporter/#out-of-the-box-dashboards
 [9]: /tracing/trace_explorer/trace_view/?tab=hostinfo
 [10]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
-
-

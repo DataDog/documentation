@@ -16,7 +16,7 @@ The OpenTelemetry Collector exposes internal telemetry as metrics. You can colle
 
 You can send the Collector's health metrics to Datadog with two approaches:
 
-- **Prometheus**: Scrape the Collector's internal Prometheus endpoint with the [Prometheus receiver][1] and forward the metrics through a metrics pipeline to the Datadog Exporter.
+- **Prometheus**: Scrape the Collector's internal Prometheus endpoint with the [Prometheus receiver][1] and forward the metrics through a metrics pipeline. The example on this page uses the supported Datadog Exporter.
 - **OTLP**: Configure the Collector's internal telemetry to export metrics directly to the [Datadog OTLP metrics intake endpoint][4] over OTLP HTTP.
 
 ## Setup
@@ -26,9 +26,9 @@ You can send the Collector's health metrics to Datadog with two approaches:
 The following tabs cover two approaches: a Prometheus-style scrape and a direct OTLP push. After configuring the pipeline, see the [Configuration reference](#configuration-reference) for all available options.
 
 {{< tabs >}}
-{{% tab "Prometheus" %}}
+{{% tab "Prometheus with Datadog Exporter" %}}
 
-Configure the Collector to expose its internal metrics on a Prometheus pull endpoint. Scrape that endpoint with the [Prometheus receiver][101] and route the data through a metrics pipeline to the [Datadog Exporter][102].
+Configure the Collector to expose its internal metrics on a Prometheus pull endpoint. Scrape that endpoint with the [Prometheus receiver][101] and route the data through a metrics pipeline to the [Datadog Exporter][102]. The Datadog Exporter remains fully supported for existing configurations.
 
 ```yaml
 receivers:

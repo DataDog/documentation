@@ -18,9 +18,9 @@ further_reading:
 
 ## Overview
 
-Datadog's OpenTelemetry Protocol (OTLP) logs intake API endpoint allows you to send logs directly to Datadog. With this feature, you don't need to run the [Datadog Agent][2] or [OpenTelemetry Collector + Datadog Exporter][1].
+Datadog's OpenTelemetry Protocol (OTLP) logs intake API endpoint allows applications, managed platforms, and OpenTelemetry Collectors to send logs to Datadog over OTLP HTTP.
 
-Choose this option for a straightforward setup to send logs directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
+Use the direct configuration on this page when you need to send logs without the [Datadog Agent][2] or an OpenTelemetry Collector. For production deployments with a standalone Collector, use [Set Up the OpenTelemetry Collector][1].
 
 <div class="alert alert-info">If you are sending logs from a managed platform (Cloudflare, Vercel, Heroku, and others), see <a href="/opentelemetry/setup/otlp_ingest/managed_platforms/">Managed platforms</a> for the correct endpoint configuration.</div>
 
@@ -81,24 +81,7 @@ logExporter, err := otlploghttp.New(
 
 ## OpenTelemetry Collector
 
-If you are using the OpenTelemetry Collector and don't want to use the Datadog Exporter, you can configure [`otlphttpexporter`][4] to export logs to the Datadog OTLP logs intake endpoint.
-
-Configure your `config.yaml` like this:
-
-```yaml
-exporters:
-  otlphttp:
-    logs_endpoint: ${YOUR_ENDPOINT} // Replace this with the correct endpoint
-    headers:
-      dd-api-key: ${env:DD_API_KEY}
-
-service:
-  pipelines:
-    logs:
-      receivers: [otlp]
-      processors: [batch]
-      exporters: [otlphttp]
-```
+Configure the [recommended OpenTelemetry Collector setup][1] to export logs to this endpoint. The configuration includes resource detection, batching, and the required authentication header.
 
 ## Troubleshooting
 

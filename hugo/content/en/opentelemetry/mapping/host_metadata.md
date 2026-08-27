@@ -9,19 +9,15 @@ further_reading:
   text: "OpenTelemetry Support in Datadog"
 ---
 
-<div class="alert alert-info">
-This feature is in Preview. If you have any feedback, contact <a href="/help/">Datadog support</a>.
-</div>
-
 ## Overview
 
-The Datadog Exporter collects host metadata and sends it to Datadog by default, where you can see it in the [Infrastructure List][6]. For most deployments, such as running the Collector as an agent on each host, host information is populated automatically and you do not need to follow the configuration on this page.
+The recommended OpenTelemetry Collector configuration collects host metadata with the host metrics receiver and resource detection processor, then reports the Collector through the Datadog Extension. You can view these hosts in the [Infrastructure List][6]. For most deployments, such as running the Collector as an agent on each host, host information is populated automatically and you do not need to follow the manual configuration on this page.
 
 <div class="alert alert-info">The manual configuration described on this page is primarily for <a href="https://opentelemetry.io/docs/collector/deployment/gateway/">gateway deployments</a>, where the Collector that exports to Datadog runs separately from the hosts it reports on. In these setups, explicitly tag your resources so that the correct host metadata reaches Datadog. If you run the Collector as an agent on each host, host metadata is collected by default and you can skip this configuration.</div>
 
-The Datadog Exporter supports sending system information about your hosts to Datadog. You can send this information in OTLP through the ['Resource' field][1] as part of any of the existing signals. This is supported under any [deployment pattern][9] including gateway deploys.
+Send system information about hosts in OTLP through the [`Resource` field][1] as part of any signal. Datadog supports this information under any [deployment pattern][9], including gateway deployments.
 
-<div class="alert alert-danger">Only metadata sent through the Datadog Exporter populates the Infrastructure Host List. Metadata sent using the direct OTLP ingest endpoint does not support this feature.</div>
+<div class="alert alert-danger">Direct OTLP ingest without an OpenTelemetry Collector does not populate the Infrastructure List. Use the recommended Collector configuration or the Datadog Exporter to report host metadata.</div>
 
 Datadog uses [OpenTelemetry semantic conventions][2] to recognize system information about your hosts. Follow the instructions for [setting up for host metrics][3] to send the necessary metrics and resource attributes to Datadog. Alternatively, you can manually send this information in the way that best fits your infrastructure.
 
@@ -58,7 +54,7 @@ You must explicitly tag all your resources with a host-identifying attribute. Th
 
 ## Supported conventions
 
-The Datadog exporter supports both resource attribute-level semantic conventions and system metrics-level semantic conventions. Supported resource attribute semantic conventions are mainly under [the `host.` namespace][4] and [the `os.` namespace][8]. All supported system metrics-level semantic conventions are under [the `system.` namespace][5].
+Datadog supports both resource attribute-level semantic conventions and system metrics-level semantic conventions. Supported resource attribute semantic conventions are mainly under [the `host.` namespace][4] and [the `os.` namespace][8]. All supported system metrics-level semantic conventions are under [the `system.` namespace][5].
 
 ### General system conventions
 

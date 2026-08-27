@@ -18,9 +18,9 @@ further_reading:
 
 ## Overview
 
-Datadog's OpenTelemetry protocol (OTLP) intake API endpoint allows you to send traces directly to Datadog. With this feature, you don't need to run the [Datadog Agent][2] or [OpenTelemetry Collector + Datadog Exporter][1].
+Datadog's OpenTelemetry Protocol (OTLP) traces intake API endpoint allows applications, managed platforms, and OpenTelemetry Collectors to send traces to Datadog over OTLP HTTP.
 
-You might prefer this option if you're looking for a straightforward setup and want to send traces directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
+Use the direct configuration on this page when you need to send traces without the [Datadog Agent][2] or an OpenTelemetry Collector. For production deployments with a standalone Collector, use [Set Up the OpenTelemetry Collector][1].
 
 For serverless workloads, see [OTLP Intake for Serverless][8]. For managed platforms such as Cloudflare, Vercel, and Heroku, see [OTLP Intake for Managed Platforms][9].
 
@@ -164,7 +164,7 @@ For example:
 ```
 ## OpenTelemetry Collector
 
-If you are using an OpenTelemetry Collector and don't want to use the Datadog Exporter, you need a specific configuration to get the best product experience. To get set up, see [OpenTelemetry Native Instrumentation][10].
+Configure the [recommended OpenTelemetry Collector setup][10] to export traces to this endpoint and generate APM trace metrics before sampling.
 
 ## Troubleshooting
 
@@ -241,4 +241,4 @@ This ensures that the span operation names are consistent across the Datadog OTL
 [7]: /tracing/metrics/
 [8]: /opentelemetry/setup/otlp_ingest/serverless/
 [9]: /opentelemetry/setup/otlp_ingest/managed_platforms/
-[10]: https://www.datadoghq.com/product-preview/otel-native-instrumentation/
+[10]: /opentelemetry/setup/collector_exporter/install/

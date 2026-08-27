@@ -36,7 +36,7 @@ receivers:
 
 {{% tab "Kubernetes" %}}
 
-The Kafka metrics receiver needs to be used in a collector in `deployment` mode with a single replica. This ensures that the same metric is not collected multiple times. The collector in deployment mode can then leverage the Datadog Exporter to export the metrics directly to Datadog, or leverage the OTLP exporter to forward the metrics to another collector instance. 
+Use the Kafka metrics receiver in a Collector running in `deployment` mode with a single replica. This prevents the same metric from being collected multiple times. The Collector can export metrics directly to Datadog over OTLP HTTP or forward them to another Collector instance.
 
 Add the following lines to `values.yaml`:
 ```yaml
@@ -93,7 +93,7 @@ receivers:
 
 {{% tab "Kubernetes" %}}
 
-The JMX receiver needs to be used in a collector in `deployment` mode with a single replica. This ensures that the same metric is not collected multiple times. The collector in deployment mode can then leverage the Datadog Exporter to export the metrics directly to Datadog, or leverage the OTLP exporter to forward the metrics to another collector instance. 
+Use the JMX receiver in a Collector running in `deployment` mode with a single replica. This prevents the same metric from being collected multiple times. The Collector can export metrics directly to Datadog over OTLP HTTP or forward them to another Collector instance.
 
 The JMX Receiver has the following requirements:
 - JRE is available on the host in which you are running the collector.

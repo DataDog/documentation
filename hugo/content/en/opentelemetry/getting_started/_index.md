@@ -31,7 +31,7 @@ These guides provide two hands-on ways to learn how to send OpenTelemetry data t
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/getting_started/datadog_example" >}}
     <h3>Explore OTel with a Datadog Example</h3>
-    Follow a step-by-step guide using a simple, Datadog-provided Java application. This is the quickest way to see how the OTLP receiver and Datadog Exporter work together.
+    Follow a step-by-step guide using a Datadog-provided Java application and the supported Datadog Exporter setup.
     {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/getting_started/otel_demo_to_datadog" >}}
     <h3>Set up the Official OpenTelemetry Demo</h3>
