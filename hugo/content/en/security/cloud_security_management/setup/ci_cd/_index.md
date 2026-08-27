@@ -190,6 +190,10 @@ datadog-security-cli image myapp:latest --output json
 
 ## Link Dockerfile to vulnerabilities
 
+<div class="alert alert-info">
+Linking a Dockerfile to vulnerabilities is only supported when scanning with the Datadog Security CLI in CI/CD. This feature is not available for images scanned by the Datadog Agent or through agentless scanning.
+</div>
+
 To enable Datadog to link detected vulnerabilities back to the source code (Dockerfile), you must include specific **OCI image annotations** when building your container image.
 
 This allows Datadog to:
