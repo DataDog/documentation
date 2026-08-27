@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-To edit your OpenTelemetry Collector batch and memory settings, configure the [batch processor][1] in your Datadog Exporter.
+To manage the OpenTelemetry Collector's memory use, configure the memory limiter processor. The recommended OTLP HTTP exporter configuration handles batching in the exporter's sending queue. If you use the Datadog Exporter, configure the [batch processor][1].
 
 For more information, see the OpenTelemetry project documentation for the [batch processor][1].
 
@@ -66,7 +66,7 @@ None.
 
 ## Full example configuration
 
-For a full working example configuration with the Datadog exporter, see [`batch-memory.yaml`][2].
+For a full working example that uses the Datadog Exporter, see [`batch-memory.yaml`][2]. The Datadog Exporter remains fully supported for existing configurations.
 
 ## Example logging output
 

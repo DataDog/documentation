@@ -1,6 +1,6 @@
 ---
 title: Install and Configure the OpenTelemetry Collector
-description: 'Send OpenTelemetry data to the OpenTelemetry Collector and Datadog Exporter'
+description: 'Send OpenTelemetry data from the OpenTelemetry Collector to Datadog using OTLP'
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"
@@ -18,12 +18,12 @@ This method is best for users who prefer to use OTel Collector distributions fro
 
 ## Setup
 
-To begin, install the OpenTelemetry Collector and configure it with the Datadog Exporter. This guide walks you through the initial setup required before proceeding to more specific configuration topics.
+To begin, install the OpenTelemetry Collector Contrib distribution and configure the OTLP HTTP exporter and `span_metrics` connector. This guide walks you through the initial setup required before proceeding to more specific configuration topics.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/collector_exporter/install" >}}
     <h3>Install and Configure the Collector</h3>
-    Follow the initial setup steps to get a Collector running with the Datadog Exporter.
+    Follow the initial setup steps to send telemetry from the Collector to Datadog over OTLP.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -32,10 +32,6 @@ To begin, install the OpenTelemetry Collector and configure it with the Datadog 
 After your Collector is running, use these guides to configure specific receivers and processors to collect and enrich your telemetry data.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/collector_exporter/deploy" >}}
-    <h3>Deploy the Collector</h3>
-    Learn how to run the Collector in various environments, including on a host, in Docker, or as a DaemonSet or Gateway in Kubernetes.
-    {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/config/hostname_tagging" >}}
     <h3>Configure Hostname and Tagging</h3>
     Use resource detection and Kubernetes attributes processors to ensure proper hostname resolution and apply critical tags for correlating telemetry in Datadog.
@@ -54,8 +50,13 @@ After your Collector is running, use these guides to configure specific receiver
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Existing Datadog Exporter and Connector configurations
+
+The Datadog Exporter and Datadog Connector remain fully supported. Existing configurations do not need to migrate. To configure or maintain this setup, see [Configure the Datadog Exporter and Connector][2].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/setup/ddot_collector/install/
+[2]: /opentelemetry/setup/collector_exporter/datadog_exporter/

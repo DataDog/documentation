@@ -757,11 +757,6 @@ menu:
       identifier: otel-setup-collector-exporter
       parent: otel_collect
       weight: 402
-    - name: Deploy
-      url: /opentelemetry/setup/collector_exporter/deploy
-      identifier: otel-setup-collector-exporter-deploy
-      parent: otel-setup-collector-exporter
-      weight: 40211
     - name: Batch and Memory Settings
       url: opentelemetry/config/collector_batch_memory/
       identifier: otel_batch_memory

@@ -1,5 +1,5 @@
 ---
-title: Deploy the OpenTelemetry Collector
+title: Deploy the OpenTelemetry Collector with the Datadog Exporter
 aliases:
 - /opentelemetry/collector_exporter/deployment
 further_reading:
@@ -12,6 +12,8 @@ further_reading:
 ---
 
 This page guides you through various deployment options for the OpenTelemetry Collector with the Datadog Exporter, allowing you to send traces, metrics, and logs to Datadog.
+
+<div class="alert alert-info">The Datadog Exporter remains fully supported. For new OpenTelemetry Collector configurations, Datadog recommends the <a href="/opentelemetry/setup/collector_exporter/install/">OTLP HTTP exporter and <code>span_metrics</code> connector setup</a>, which includes deployment instructions for hosts, Docker, and Kubernetes.</div>
 
 ## Deploy the Collector
 

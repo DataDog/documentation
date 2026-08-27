@@ -120,11 +120,11 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 ### Option 2: Use the OpenTelemetry Collector
 
-{{< img src="/opentelemetry/setup/otel-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running OpenTelemetry Collector with Datadog Exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/oss-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to a host running the OpenTelemetry Collector, which forwards data to Datadog over OTLP." style="width:100%;" >}}
 
-**Best for**: New or existing OTel users wanting a completely vendor-neutral setup.
+**Best for**: New or existing OTel users who want to manage their own OpenTelemetry Collector.
 
-- Complete vendor neutrality for sending OpenTelemetry data to Datadog
+- OTLP-based telemetry pipeline without the Datadog Exporter or Datadog Connector
 - Flexible configuration options like tail-based sampling and data transformations
 
 {{< whatsnext desc=" " >}}

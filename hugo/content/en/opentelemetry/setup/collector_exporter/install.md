@@ -1,315 +1,982 @@
 ---
 title: Set Up the OpenTelemetry Collector
 aliases:
-- /tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
-- /tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
-- /opentelemetry/otel_collector_datadog_exporter/
+- /opentelemetry/setup/collector_exporter/oss_setup/
+- /opentelemetry/setup/collector_exporter/community_collector/
 - /opentelemetry/collector_exporter/
-- /opentelemetry/collector_exporter/otel_collector_datadog_exporter
-description: 'Send OpenTelemetry data to the OpenTelemetry Collector and Datadog Exporter'
+description: 'Send OpenTelemetry data to Datadog using the OpenTelemetry Collector and OTLP'
 further_reading:
-- link: "/opentelemetry/integrations/datadog_extension/"
-  tag: "Documentation"
-  text: "Enable the Datadog Extension to inspect collector configurations in Fleet Automation"
-- link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
-  tag: "Blog"
-  text: "Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using Datadog Exporter"
-- link: "https://www.datadoghq.com/blog/native-otel-with-datadog/"
-  tag: "Blog"
-  text: "Use OpenTelemetry-native observability with Datadog from ingestion to investigation"
 - link: "https://opentelemetry.io/docs/collector/"
   tag: "External Site"
   text: "Collector documentation"
+- link: "/opentelemetry/config/hostname_tagging"
+  tag: "Documentation"
+  text: "Configure Hostname and Tagging"
+- link: "/opentelemetry/config/log_collection"
+  tag: "Documentation"
+  text: "Set up Log Collection"
+- link: "/opentelemetry/config/collector_batch_memory"
+  tag: "Documentation"
+  text: "Tune Batch and Memory Settings"
 ---
 
 ## Overview
 
-The OpenTelemetry Collector enables you to collect, process, and export telemetry data from your applications in a vendor-neutral way. When configured with the [Datadog Exporter][1] and [Datadog Connector][29], you can send your traces, logs, and metrics to Datadog without the Datadog Agent.
+Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector Contrib distribution. This setup uses an OTLP-based telemetry pipeline with the following key components:
 
-- **Datadog Exporter**: Forwards trace, metric, and logs data from OpenTelemetry SDKs to Datadog (without the Datadog Agent)
-- **Datadog Connector**: Calculates Trace Metrics from collected span data
+- **OTLP HTTP exporter**: Sends telemetry to Datadog's OTLP intake endpoints.
+- **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Service Catalog and Service Page.
+- **Resource detection processor**: Detects host and cloud resource attributes, which Datadog uses for hostname resolution and tagging.
+- **Datadog extension**: Reports Collector metadata for host enrichment. It does not export telemetry data.
 
-{{< img src="/opentelemetry/setup/otel-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running OpenTelemetry Collector with Datadog Exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/oss-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running any OpenTelemetry Collector with OTLP HTTP exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
 
-<div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table</a> under <b>Full OTel</b>.</div>
+<div class="alert alert-info">Already using the Datadog Exporter and Datadog Connector? These components remain fully supported, and existing configurations do not need to migrate. See <a href="/opentelemetry/setup/collector_exporter/datadog_exporter/">Configure the Datadog Exporter and Connector</a>.</div>
+
+## Prerequisites
+
+This setup supports bare metal, VMs, Docker, and Kubernetes. Supported managed Kubernetes distributions include Amazon EKS (including Auto Mode), Google GKE (Standard and Autopilot), and Azure AKS (including Automatic).
+
+This setup does not support serverless or task-based container runtimes such as ECS Fargate, EKS Fargate, or AWS Lambda. For supported Datadog features, see the [feature compatibility table][7] under **OTel SDK + OpenTelemetry Collector**.
+
+- [OpenTelemetry Collector Contrib][1] v0.154.0 or later
+- A [Datadog API key][2]
+- Your [Datadog site][3] (for example, `datadoghq.com` or `datadoghq.eu`)
 
 ## Install and configure
 
-### 1 - Download the OpenTelemetry Collector
+### 1. Download the OpenTelemetry Collector
 
-Download the latest release of the OpenTelemetry Collector Contrib distribution, from [the project's repository][3].
+Download the latest release of the OpenTelemetry Collector Contrib distribution from the [releases page][100].
 
-### 2 - Configure the Datadog Exporter and Connector
+### 2. Create the Collector configuration
 
-To use the Datadog Exporter and Datadog Connector, configure them in your [OpenTelemetry Collector configuration][4]:
+Create a configuration file named `collector.yaml`. The configuration varies depending on your environment. Select the tab that matches your setup:
 
-1. Create a configuration file named `collector.yaml`.
-1. Use the following example file to get started.
-1. Set your Datadog API key as the `DD_API_KEY` environment variable.
+{{< tabs >}}
+{{% tab "Host" %}}
 
-{{% otel-endpoint-note %}}
+Use this configuration for an uncontainerized Collector running directly on a host (bare metal or VM).
 
-<div class="alert alert-warning">AWS EKS Fargate is not a supported environment for the OpenTelemetry Collector at this time. Deploying the Collector on EKS Fargate will result in incorrect infrastructure host billing.</div>
+Set the `DD_API_KEY` and `DD_SITE` environment variables before starting the Collector.
 
 ```yaml
 receivers:
+  # Receive telemetry from OpenTelemetry-instrumented applications
   otlp:
     protocols:
-      http:
-        endpoint: 0.0.0.0:4318
       grpc:
         endpoint: 0.0.0.0:4317
-  # The hostmetrics receiver is required to get correct infrastructure metrics in Datadog.
-  hostmetrics:
+      http:
+        endpoint: 0.0.0.0:4318
+  # Collect host system metrics (CPU, memory, disk, network); populates the Infrastructure List
+  host_metrics:
     collection_interval: 10s
     scrapers:
-      paging:
-        metrics:
-          system.paging.utilization:
-            enabled: true
       cpu:
         metrics:
           system.cpu.utilization:
             enabled: true
-      disk:
+          system.cpu.physical.count:
+            enabled: true
+          system.cpu.logical.count:
+            enabled: true
+          system.cpu.frequency:
+            enabled: true
+      memory:
+        metrics:
+          system.memory.limit:
+            enabled: true
+      paging:
+        metrics:
+          system.paging.utilization:
+            enabled: true
+          system.paging.usage:
+            enabled: true
+      disk: {}
       filesystem:
         metrics:
           system.filesystem.utilization:
             enabled: true
-      load:
-      memory:
-      network:
-      processes:
-  # The prometheus receiver scrapes metrics needed for the OpenTelemetry Collector Dashboard.
-  prometheus:
-    config:
-      scrape_configs:
-      - job_name: 'otelcol'
-        scrape_interval: 10s
-        static_configs:
-        - targets: ['0.0.0.0:8888']
-
-  filelog:
-    include_file_path: true
-    poll_interval: 500ms
-    include:
-      - /var/log/**/*example*/*.log
+      load: {}
+      network: {}
+      processes: {}
 
 processors:
-  batch:
-    send_batch_max_size: 100
-    send_batch_size: 10
-    timeout: 10s
+  # Detect host and cloud resource attributes for hostname resolution and tagging
+  resource_detection:
+    detectors: [env, system]
+    timeout: 2s
+    override: true # Disable if incoming attributes (especially host.name) are verified correct
+  # Convert cumulative metrics to delta temporality for Datadog
+  cumulativetodelta: {}
 
 connectors:
-  datadog/connector:
+  # Separate trace processing from sampling so span metrics are computed on all traces
+  forward/traces_sample: {}
+  # Generate RED (Rate, Error, Duration) metrics from traces for APM
+  span_metrics:
+    aggregation_temporality: AGGREGATION_TEMPORALITY_DELTA
+    add_resource_attributes: true
+    histogram:
+      exponential: {}
+      unit: s
+    dimensions:
+      ## Unified Service Tagging
+      - name: deployment.environment.name
+      - name: service.version
+      - name: http.response.status_code
+      ## Container tags
+      - name: container.id
+      ## Host name inference
+      - name: aws.ecs.launchtype
+      - name: aws.ecs.task.arn
+      - name: cloud.provider
+      - name: cloud.account.id
+      - name: host.id
+      - name: host.name
+      - name: k8s.node.name
+      - name: k8s.cluster.name
+      - name: azure.resourcegroup.name
+      ## Peer service inference
+      - name: aws.s3.bucket
+      - name: db.namespace
+      - name: messaging.destination.name
+      - name: messaging.system
+      - name: server.address
+      ## Operation name inference
+      - name: operation.name
+      - name: http.request.method
+      - name: http.method
+      - name: db.system
+      - name: messaging.operation
+      - name: rpc.system
+      - name: rpc.service
+      - name: faas.invoked_provider
+      - name: faas.invoked_name
+      - name: faas.trigger
+      - name: graphql.operation.type
+      - name: network.protocol.name
+      ## Resource name inference
+      - name: resource.name
+      - name: http.route
+      - name: messaging.destination
+      - name: rpc.method
+      - name: graphql.operation.name
+      - name: db.statement
+      - name: db.query.text
 
 exporters:
-  datadog/exporter:
+  # Send telemetry to Datadog's OTLP intake endpoints
+  otlp_http:
+    endpoint: https://otlp.${env:DD_SITE}
+    headers:
+      dd-api-key: ${env:DD_API_KEY}
+      # Map resource attributes and instrumentation scope metadata to Datadog metric tags
+      dd-otel-metric-config: >-
+        {
+        "resource_attributes_as_tags": true,
+        "instrumentation_scope_metadata_as_tags": true
+        }
+    compression: zstd
+    compression_params:
+      level: 3 # Must be set explicitly for zstd; the default uses the lowest compression level
+    sending_queue:
+      batch:
+        sizer: bytes
+        min_size: 2097152 # Start flushing batches at 2MiB (2 * 1024 * 1024)
+        max_size: 4194304 # Split large batches at 4MiB (4 * 1024 * 1024)
+
+extensions:
+  # Report Collector metadata to Datadog for host enrichment
+  datadog:
     api:
-      site: {{< region-param key="dd_site" >}}
+      site: ${env:DD_SITE}
       key: ${env:DD_API_KEY}
+    deployment_type: daemonset
 
 service:
+  extensions:
+    - datadog
   pipelines:
+    logs:
+      receivers: [otlp]
+      processors: [resource_detection]
+      exporters: [otlp_http]
     metrics:
-      receivers: [hostmetrics, prometheus, otlp, datadog/connector]
-      processors: [batch]
-      exporters: [datadog/exporter]
+      receivers: [otlp, host_metrics]
+      processors: [resource_detection, cumulativetodelta]
+      exporters: [otlp_http]
     traces:
       receivers: [otlp]
-      processors: [batch]
-      exporters: [datadog/connector, datadog/exporter]
+      processors: [resource_detection]
+      exporters: [forward/traces_sample, span_metrics]
+    traces/sample:
+      receivers: [forward/traces_sample]
+      # Add sampling processors here (for example, tail_sampling) before exporting traces
+      exporters: [otlp_http]
+    metrics/span_metrics:
+      receivers: [span_metrics]
+      exporters: [otlp_http]
+  telemetry:
+    # Route Collector self-monitoring metrics through its own pipelines
+    metrics:
+      readers:
+        - periodic:
+            exporter:
+              otlp:
+                protocol: http/protobuf
+                endpoint: http://localhost:4318
+```
+
+For cloud-specific environments, add the appropriate resource detection detector:
+- **Amazon EC2**: `detectors: [ec2, env, system]`
+- **Google Cloud**: `detectors: [gcp, env, system]`
+- **Azure**: `detectors: [azure, env, system]`
+
+See the [full configuration files][500] for an optional config to gather additional metadata about the system.
+
+[500]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
+
+{{% /tab %}}
+
+{{% tab "Docker" %}}
+
+Use this configuration for a containerized Collector. The `host_metrics` receiver requires mounting the host filesystem at `/hostfs`.
+
+Set the following environment variables before starting the Collector:
+
+- `DD_API_KEY` and `DD_SITE`
+- `OTEL_RESOURCE_ATTRIBUTES`: The Collector cannot detect host information from inside a container, so provide it here (for example, `host.name=<YOUR_HOST_NAME>`).
+
+```yaml
+receivers:
+  # Receive telemetry from OpenTelemetry-instrumented applications
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+  # Collect host system metrics (CPU, memory, disk, network); populates the Infrastructure List
+  # root_path maps to the host filesystem mounted at /hostfs
+  host_metrics:
+    root_path: /hostfs
+    collection_interval: 10s
+    scrapers:
+      cpu:
+        metrics:
+          system.cpu.utilization:
+            enabled: true
+          system.cpu.physical.count:
+            enabled: true
+          system.cpu.logical.count:
+            enabled: true
+          system.cpu.frequency:
+            enabled: true
+      memory:
+        metrics:
+          system.memory.limit:
+            enabled: true
+      paging:
+        metrics:
+          system.paging.utilization:
+            enabled: true
+          system.paging.usage:
+            enabled: true
+      disk: {}
+      filesystem:
+        metrics:
+          system.filesystem.utilization:
+            enabled: true
+      load: {}
+      network: {}
+      processes: {}
+
+processors:
+  # Detect host and cloud resource attributes for hostname resolution and tagging
+  resource_detection:
+    detectors: [env]
+    timeout: 2s
+    override: true # Disable if incoming attributes (especially host.name) are verified correct
+  # Convert cumulative metrics to delta temporality for Datadog
+  cumulativetodelta: {}
+
+connectors:
+  # Separate trace processing from sampling so span metrics are computed on all traces
+  forward/traces_sample: {}
+  # Generate RED (Rate, Error, Duration) metrics from traces for APM
+  span_metrics:
+    aggregation_temporality: AGGREGATION_TEMPORALITY_DELTA
+    add_resource_attributes: true
+    histogram:
+      exponential: {}
+      unit: s
+    dimensions:
+      ## Unified Service Tagging
+      - name: deployment.environment.name
+      - name: service.version
+      - name: http.response.status_code
+      ## Container tags
+      - name: container.id
+      ## Host name inference
+      - name: aws.ecs.launchtype
+      - name: aws.ecs.task.arn
+      - name: cloud.provider
+      - name: cloud.account.id
+      - name: host.id
+      - name: host.name
+      - name: k8s.node.name
+      - name: k8s.cluster.name
+      - name: azure.resourcegroup.name
+      ## Peer service inference
+      - name: aws.s3.bucket
+      - name: db.namespace
+      - name: messaging.destination.name
+      - name: messaging.system
+      - name: server.address
+      ## Operation name inference
+      - name: operation.name
+      - name: http.request.method
+      - name: http.method
+      - name: db.system
+      - name: messaging.operation
+      - name: rpc.system
+      - name: rpc.service
+      - name: faas.invoked_provider
+      - name: faas.invoked_name
+      - name: faas.trigger
+      - name: graphql.operation.type
+      - name: network.protocol.name
+      ## Resource name inference
+      - name: resource.name
+      - name: http.route
+      - name: messaging.destination
+      - name: rpc.method
+      - name: graphql.operation.name
+      - name: db.statement
+      - name: db.query.text
+
+exporters:
+  # Send telemetry to Datadog's OTLP intake endpoints
+  otlp_http:
+    endpoint: https://otlp.${env:DD_SITE}
+    headers:
+      dd-api-key: ${env:DD_API_KEY}
+      # Map resource attributes and instrumentation scope metadata to Datadog metric tags
+      dd-otel-metric-config: >-
+        {
+        "resource_attributes_as_tags": true,
+        "instrumentation_scope_metadata_as_tags": true
+        }
+    compression: zstd
+    compression_params:
+      level: 3 # Must be set explicitly for zstd; the default uses the lowest compression level
+    sending_queue:
+      batch:
+        sizer: bytes
+        min_size: 2097152 # Start flushing batches at 2MiB (2 * 1024 * 1024)
+        max_size: 4194304 # Split large batches at 4MiB (4 * 1024 * 1024)
+
+extensions:
+  # Report Collector metadata to Datadog for host enrichment
+  datadog:
+    api:
+      site: ${env:DD_SITE}
+      key: ${env:DD_API_KEY}
+    deployment_type: daemonset
+
+service:
+  extensions:
+    - datadog
+  pipelines:
     logs:
-      receivers: [otlp, filelog]
-      processors: [batch]
-      exporters: [datadog/exporter]
+      receivers: [otlp]
+      processors: [resource_detection]
+      exporters: [otlp_http]
+    metrics:
+      receivers: [otlp, host_metrics]
+      processors: [resource_detection, cumulativetodelta]
+      exporters: [otlp_http]
+    traces:
+      receivers: [otlp]
+      processors: [resource_detection]
+      exporters: [forward/traces_sample, span_metrics]
+    traces/sample:
+      receivers: [forward/traces_sample]
+      # Add sampling processors here (for example, tail_sampling) before exporting traces
+      exporters: [otlp_http]
+    metrics/span_metrics:
+      receivers: [span_metrics]
+      exporters: [otlp_http]
+  telemetry:
+    # Route Collector self-monitoring metrics through its own pipelines
+    metrics:
+      readers:
+        - periodic:
+            exporter:
+              otlp:
+                protocol: http/protobuf
+                endpoint: http://localhost:4318
 ```
 
-This basic configuration enables the receiving of OTLP data over HTTP and gRPC, and sets up a [batch processor][5].
+Run the Collector with the host filesystem mounted:
 
-For a complete list of configuration options for the Datadog Exporter, see the [fully documented example configuration file][8]. Additional options like `api::site` and `host_metadata` settings may be relevant depending on your deployment.
-
-#### Batch processor configuration
-
-The batch processor is required for non-development environments. The exact configuration depends on your specific workload and signal types.
-
-Configure the batch processor based on Datadog's intake limits:
-
-- Trace intake: 3.2MB
-- Log intake: [5MB uncompressed][6]
-- Metrics V2 intake: [500KB or 5MB after decompression][7]
-
-You may get `413 - Request Entity Too Large` errors if you batch too much telemetry data in the batch processor.
-
-### 3 - Configure your application
-
-To get better metadata for traces and for smooth integration with Datadog:
-
-- **Use resource detectors**: If they are provided by the language SDK, attach container information as resource attributes. For example, in Go, use the [`WithContainer()`][9] resource option.
-
-- **Apply [Unified Service Tagging][10]**: Make sure you've configured your application with the appropriate resource attributes for unified service tagging. This ties Datadog telemetry together with tags for service name, deployment environment, and service version. The application should set these tags using the OpenTelemetry semantic conventions: `service.name`, `deployment.environment`, and `service.version`.
-
-### 4 - Configure the logger for your application
-
-{{< img src="logs/log_collection/otel_collector_logs.png" alt="A diagram showing the host, container, or application sending data to the filelog receiver in the collector and the Datadog Exporter in the collector sending the data to the Datadog backend" style="width:100%;">}}
-
-Since the OpenTelemetry SDKs' logging functionality is not fully supported (see your specific language in the [OpenTelemetry documentation][11] for more information), Datadog recommends using a standard logging library for your application. Follow the language-specific [Log Collection documentation][12] to set up the appropriate logger in your application. Datadog strongly encourages setting up your logging library to output your logs in JSON to avoid the need for [custom parsing rules][13].
-
-#### Configure the filelog receiver
-
-Configure the filelog receiver using [operators][14]. For example, if there is a service `checkoutservice` that is writing logs to `/var/log/pods/services/checkout/0.log`, a sample log might look like this:
-
-```
-{"level":"info","message":"order confirmation email sent to \"jack@example.com\"","service":"checkoutservice","span_id":"197492ff2b4e1c65","timestamp":"2022-10-10T22:17:14.841359661Z","trace_id":"e12c408e028299900d48a9dd29b0dc4c"}
+```shell
+docker run \
+    -p 4317:4317 \
+    -p 4318:4318 \
+    -e DD_API_KEY \
+    -e DD_SITE \
+    -e OTEL_RESOURCE_ATTRIBUTES \
+    -v /:/hostfs:ro \
+    -v $(pwd)/collector.yaml:/etc/otelcol-contrib/config.yaml \
+    otel/opentelemetry-collector-contrib:0.154.0 \
+    --config /etc/otelcol-contrib/config.yaml
 ```
 
-Example filelog configuration:
+{{% /tab %}}
 
+{{% tab "Kubernetes (DaemonSet)" %}}
+
+Use this configuration for a Collector deployed as a Kubernetes DaemonSet in a non-cloud environment. It includes the `k8s_attributes` processor for enriching telemetry with Kubernetes metadata and the `kubelet_stats` receiver for node, pod, container, and volume metrics. On a managed Kubernetes distribution, apply the changes described in [Managed Kubernetes distributions](#managed-kubernetes-distributions) after the configuration.
+
+Set the following environment variables in the Collector pod spec, using the Kubernetes downward API where noted:
+
+- `DD_API_KEY` and `DD_SITE`
+- `K8S_NODE_NAME`: The name of the Kubernetes node, used by the `kubelet_stats` receiver. Set it from the `spec.nodeName` field.
+- `MY_POD_IP`: The pod IP, used by the `health_check` extension. Set it from the `status.podIP` field.
+- `OTEL_RESOURCE_ATTRIBUTES`: The Collector cannot determine the host name from inside a container, so provide host information here (for example, `k8s.node.name=$(K8S_NODE_NAME)`). The `$(VAR)` syntax is expanded by Kubernetes, so set this in the pod spec rather than in a shell.
+
+Mount the host filesystem at `/hostfs` so the `host_metrics` receiver can collect host metrics.
+
+```yaml
+receivers:
+  # Receive telemetry from OpenTelemetry-instrumented applications
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+  # Collect host system metrics (CPU, memory, disk, network); populates the Infrastructure List
+  # root_path maps to the host filesystem mounted at /hostfs
+  host_metrics:
+    root_path: /hostfs
+    collection_interval: 10s
+    scrapers:
+      cpu:
+        metrics:
+          system.cpu.utilization:
+            enabled: true
+          system.cpu.physical.count:
+            enabled: true
+          system.cpu.logical.count:
+            enabled: true
+          system.cpu.frequency:
+            enabled: true
+      memory:
+        metrics:
+          system.memory.limit:
+            enabled: true
+      paging:
+        metrics:
+          system.paging.utilization:
+            enabled: true
+          system.paging.usage:
+            enabled: true
+      disk: {}
+      filesystem:
+        metrics:
+          system.filesystem.utilization:
+            enabled: true
+      load: {}
+      network: {}
+      processes: {}
+  # Collect node, pod, container, and volume metrics from the kubelet
+  kubelet_stats:
+    collection_interval: 15s
+    auth_type: "serviceAccount"
+    endpoint: "${env:K8S_NODE_NAME}:10250"
+    node: "${env:K8S_NODE_NAME}"
+    insecure_skip_verify: true
+    metric_groups:
+      - node
+      - pod
+      - container
+      - volume
+
+processors:
+  # Detect host and cloud resource attributes for hostname resolution and tagging
+  resource_detection:
+    detectors: [env, system]
+    timeout: 2s
+    override: true # Disable if incoming attributes (especially host.name) are verified correct
+    system:
+      resource_attributes:
+        host.name:
+          enabled: false # Containers report inaccurate host names
+  # Convert cumulative metrics to delta temporality for Datadog
+  cumulativetodelta: {}
+  # Convert selected delta metrics to rates
+  deltatorate:
+    metrics:
+      - k8s.pod.network.io
+      - k8s.pod.network.errors
+  # Enrich telemetry with Kubernetes pod and container metadata
+  k8s_attributes:
+    extract:
+      otel_annotations: true
+      metadata:
+        - k8s.node.name
+        - k8s.namespace.name
+        - service.namespace
+        - service.name
+        - service.version
+        - service.instance.id
+        - k8s.deployment.name
+        - k8s.replicaset.name
+        - k8s.daemonset.name
+        - k8s.statefulset.name
+        - k8s.cronjob.name
+        - k8s.job.name
+        - k8s.pod.uid
+        - k8s.pod.name
+        - container.id
+        - k8s.container.name
+        - container.image.name
+        - container.image.tag
+    pod_association:
+      - sources:
+          - from: resource_attribute
+            name: k8s.pod.uid
+      - sources:
+          - from: resource_attribute
+            name: k8s.pod.ip
+      - sources:
+          - from: resource_attribute
+            name: k8s.pod.name
+          - from: resource_attribute
+            name: k8s.namespace.name
+      - sources:
+          - from: connection
+
+connectors:
+  # Separate trace processing from sampling so span metrics are computed on all traces
+  forward/traces_sample: {}
+  # Generate RED (Rate, Error, Duration) metrics from traces for APM
+  span_metrics:
+    aggregation_temporality: AGGREGATION_TEMPORALITY_DELTA
+    add_resource_attributes: true
+    histogram:
+      exponential: {}
+      unit: s
+    dimensions:
+      ## Unified Service Tagging
+      - name: deployment.environment.name
+      - name: service.version
+      - name: http.response.status_code
+      ## Container tags
+      - name: container.id
+      ## Host name inference
+      - name: aws.ecs.launchtype
+      - name: aws.ecs.task.arn
+      - name: cloud.provider
+      - name: cloud.account.id
+      - name: host.id
+      - name: host.name
+      - name: k8s.node.name
+      - name: k8s.cluster.name
+      - name: azure.resourcegroup.name
+      ## Peer service inference
+      - name: aws.s3.bucket
+      - name: db.namespace
+      - name: messaging.destination.name
+      - name: messaging.system
+      - name: server.address
+      ## Operation name inference
+      - name: operation.name
+      - name: http.request.method
+      - name: http.method
+      - name: db.system
+      - name: messaging.operation
+      - name: rpc.system
+      - name: rpc.service
+      - name: faas.invoked_provider
+      - name: faas.invoked_name
+      - name: faas.trigger
+      - name: graphql.operation.type
+      - name: network.protocol.name
+      ## Resource name inference
+      - name: resource.name
+      - name: http.route
+      - name: messaging.destination
+      - name: rpc.method
+      - name: graphql.operation.name
+      - name: db.statement
+      - name: db.query.text
+
+exporters:
+  # Send telemetry to Datadog's OTLP intake endpoints
+  otlp_http:
+    endpoint: https://otlp.${env:DD_SITE}
+    headers:
+      dd-api-key: ${env:DD_API_KEY}
+      # Map resource attributes and instrumentation scope metadata to Datadog metric tags
+      dd-otel-metric-config: >-
+        {
+        "resource_attributes_as_tags": true,
+        "instrumentation_scope_metadata_as_tags": true
+        }
+    compression: zstd
+    compression_params:
+      level: 3 # Must be set explicitly for zstd; the default uses the lowest compression level
+    sending_queue:
+      batch:
+        sizer: bytes
+        min_size: 2097152 # Start flushing batches at 2MiB (2 * 1024 * 1024)
+        max_size: 4194304 # Split large batches at 4MiB (4 * 1024 * 1024)
+
+extensions:
+  # Required for Kubernetes liveness/readiness probes
+  health_check:
+    endpoint: ${env:MY_POD_IP}:13133
+  # Report Collector metadata to Datadog for host enrichment
+  datadog:
+    api:
+      site: ${env:DD_SITE}
+      key: ${env:DD_API_KEY}
+    deployment_type: daemonset
+
+service:
+  extensions:
+    - health_check
+    - datadog
+  pipelines:
+    logs:
+      receivers: [otlp]
+      processors: [k8s_attributes, resource_detection]
+      exporters: [otlp_http]
+    metrics:
+      receivers: [otlp, host_metrics, kubelet_stats]
+      processors: [k8s_attributes, resource_detection, cumulativetodelta, deltatorate]
+      exporters: [otlp_http]
+    traces:
+      receivers: [otlp]
+      processors: [k8s_attributes, resource_detection]
+      exporters: [forward/traces_sample, span_metrics]
+    traces/sample:
+      receivers: [forward/traces_sample]
+      # Add sampling processors here (for example, tail_sampling) before exporting traces
+      exporters: [otlp_http]
+    metrics/span_metrics:
+      receivers: [span_metrics]
+      exporters: [otlp_http]
+  telemetry:
+    # Route Collector self-monitoring metrics through its own pipelines
+    metrics:
+      readers:
+        - periodic:
+            exporter:
+              otlp:
+                protocol: http/protobuf
+                endpoint: http://localhost:4318
 ```
-filelog:
-   include:
-     - /var/log/pods/**/*checkout*/*.log
-   start_at: end
-   poll_interval: 500ms
-   operators:
-     - id: parse_log
-       type: json_parser
-       parse_from: body
-     - id: trace
-       type: trace_parser
-       trace_id:
-         parse_from: attributes.trace_id
-       span_id:
-         parse_from: attributes.span_id
-   attributes:
-     ddtags: env:staging
+
+This configuration requires a ServiceAccount bound to a ClusterRole that grants `get`, `list`, and `watch` on `pods`, `namespaces`, `nodes`, `nodes/stats`, and `replicasets`. The `k8s_attributes` processor reads pod metadata, and the `kubelet_stats` receiver reads `nodes/stats`. See the [Kubernetes Attributes Processor documentation][101] for RBAC setup instructions, and add `nodes/stats` to the rules it lists.
+
+#### Managed Kubernetes distributions
+
+On a managed Kubernetes distribution, replace the `resource_detection` processor in the previous configuration with the variant for your environment. The cloud detectors provide host information, so you do not need to set `OTEL_RESOURCE_ATTRIBUTES`.
+
+##### Amazon EKS
+
+```yaml
+processors:
+  resource_detection:
+    detectors: [eks, ec2, env, system]
+    timeout: 15s
+    override: true
+    eks:
+      resource_attributes:
+        k8s.cluster.name: { enabled: true }
+    ec2:
+      tags: ['^kubernetes\.io/cluster/.*$']
+    system:
+      resource_attributes:
+        host.name:
+          enabled: false
 ```
 
-- `include`: The list of files the receiver tails
-- `start_at: end`: Signals to read newly written content
-- `poll_internal`: Sets the poll frequency
-- Operators:
-    - `json_parser`: Parses JSON logs. By default, the filelog receiver converts each log line into a log record, which is the `body` of the logs' [data model][15]. Then, the `json_parser` converts the JSON body into attributes in the data model.
-    - `trace_parser`: Extract the `trace_id` and `span_id` from the log to correlate logs and traces in Datadog.
+The `ec2` and `eks` detectors need access to the IMDS endpoint from inside a container. Set the IMDS token hop limit to 2 in your node launch template or in your account settings. The `timeout` is raised to `15s` to allow for IMDS latency.
 
-#### Remap OTel's `service.name` attribute to `service` for logs
+##### Amazon EKS Auto Mode
 
-For Datadog Exporter versions 0.83.0 and later, the `service` field of OTel logs is populated as [OTel semantic convention][25] `service.name`. However, `service.name` is not one of the default [service attributes][26] in Datadog's log preprocessing.
-
-To get the `service` field correctly populated in your logs, you can specify `service.name` to be the source of a log's service by setting a [log service remapper processor][27].
-
-{{% collapse-content title="Optional: Using Kubernetes" level="h4" %}}
-
-<div class="alert alert-warning">AWS EKS Fargate is not a supported environment for the OpenTelemetry Collector at this time. Deploying the Collector on EKS Fargate will result in incorrect infrastructure host billing.</div>
-
-There are multiple ways to deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure. For the filelog receiver to work, the [Agent/DaemonSet deployment][16] is the recommended deployment method.
-
-In containerized environments, applications write logs to `stdout` or `stderr`. Kubernetes collects the logs and writes them to a standard location. You need to mount the location on the host node into the Collector for the filelog receiver. Below is an [extension example][17] with the mounts required for sending logs.
-
-```
-apiVersion: apps/v1
-metadata:
-  name: otel-agent
-  labels:
-    app: opentelemetry
-    component: otel-collector
-spec:
-  template:
-    metadata:
-      labels:
-        app: opentelemetry
-        component: otel-collector
-    spec:
-      containers:
-        - name: collector
-          command:
-            - "/otelcol-contrib"
-            - "--config=/conf/otel-agent-config.yaml"
-          image: otel/opentelemetry-collector-contrib:0.71.0
-          env:
-            - name: POD_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.podIP
-            # The k8s.pod.ip is used to associate pods for k8sattributes
-            - name: OTEL_RESOURCE_ATTRIBUTES
-              value: "k8s.pod.ip=$(POD_IP)"
-          ports:
-            - containerPort: 4318 # default port for OpenTelemetry HTTP receiver.
-              hostPort: 4318
-            - containerPort: 4317 # default port for OpenTelemetry gRPC receiver.
-              hostPort: 4317
-            - containerPort: 8888 # Default endpoint for querying metrics.
-          volumeMounts:
-            - name: otel-agent-config-vol
-              mountPath: /conf
-            - name: varlogpods
-              mountPath: /var/log/pods
-              readOnly: true
-            - name: varlibdockercontainers
-              mountPath: /var/lib/docker/containers
-              readOnly: true
-      volumes:
-        - name: otel-agent-config-vol
-          configMap:
-            name: otel-agent-conf
-            items:
-              - key: otel-agent-config
-                path: otel-agent-config.yaml
-        # Mount nodes log file location.
-        - name: varlogpods
-          hostPath:
-            path: /var/log/pods
-        - name: varlibdockercontainers
-          hostPath:
-            path: /var/lib/docker/containers
+```yaml
+processors:
+  resource_detection:
+    detectors: [eks, env, system]
+    timeout: 15s
+    override: true
+    eks:
+      resource_attributes:
+        k8s.cluster.name: { enabled: true }
+        host.id: { enabled: true } # Required for host name inference
+        cloud.account.id: { enabled: true }
+        cloud.availability_zone: { enabled: true }
+        cloud.region: { enabled: true }
+        host.image.id: { enabled: true }
+        host.type: { enabled: true }
+      node_from_env_var: K8S_NODE_NAME
+    system:
+      resource_attributes:
+        host.name:
+          enabled: false
 ```
 
-{{% /collapse-content %}}
+The `eks` detector requires a Pod Identity association that assigns the Collector an IAM role with the `EC2:DescribeInstances` permission.
 
-## Out-of-the-box Datadog Exporter configuration
+##### Google GKE
 
-You can find working examples of out-of-the-box configuration for Datadog Exporter in the [`exporter/datadogexporter/examples` folder][31] in the OpenTelemetry Collector Contrib project. See the full configuration example file, [`ootb-ec2.yaml`][30]. **Note**: This example is for applications running directly on an EC2 host. For containerized applications, see the [deployment documentation][33].
+```yaml
+processors:
+  resource_detection:
+    detectors: [gcp, env, system]
+    timeout: 2s
+    override: true
+    system:
+      resource_attributes:
+        host.name:
+          enabled: false
+```
 
-Configure each of the following components to suit your needs:
+On older GKE versions, the `gcp` detector may not return a host name. If that happens, supply the node name as `host.name` in `OTEL_RESOURCE_ATTRIBUTES`.
 
-{{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/collector_exporter/otlp_receiver/" >}}OTLP Receiver{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/collector_exporter/hostname_tagging/" >}}Hostname and Tags{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/collector_exporter/collector_batch_memory/" >}}Batch and Memory Settings{{< /nextlink >}}
-{{< /whatsnext >}}
+##### Azure AKS
 
-## Validate your collector configurations in Fleet Automation
+```yaml
+processors:
+  resource_detection:
+    detectors: [aks, azure, env, system]
+    timeout: 2s
+    override: true
+    aks:
+      resource_attributes:
+        k8s.cluster.name: { enabled: true }
+    system:
+      resource_attributes:
+        host.name:
+          enabled: false
+```
 
-Inspect and troubleshoot your OpenTelemetry Collector configurations in Fleet Automation by enabling the Datadog Extension. 
+##### GKE Autopilot and AKS Automatic
+
+These modes do not allow mounting `/hostfs` or using host ports. Use the GKE or AKS `resource_detection` processor, then make these additional changes:
+
+- Remove the `host_metrics` receiver from the `receivers` block and from the `metrics` pipeline. Node, pod, container, and volume metrics still come from the `kubelet_stats` receiver.
+- Disable host ports on the Collector and expose it through a node-local Service instead. Point your applications at that Service rather than at the host IP shown in [Configure your application](#4-configure-your-application).
+
+For the complete configuration files for each environment, see the [`opentelemetry-examples` repository][501].
+
+[101]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor#role-based-access-control
+[501]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
+
+{{% /tab %}}
+
+{{% tab "Kubernetes (Helm chart)" %}}
+
+You can deploy the Collector as a DaemonSet in Kubernetes using the [official OpenTelemetry Collector Helm chart][102] v0.147.1 or later. The values files below set up the required mounts, environment variables, and RBAC resources.
+
+1. Create a Kubernetes secret with your Datadog API key:
+
+   ```shell
+   kubectl create secret generic datadog-secrets --from-literal=api-key='<YOUR_API_KEY>'
+   ```
+
+1. Add the OpenTelemetry Helm repository:
+
+   ```shell
+   helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
+   ```
+
+1. Download the example values file for your environment and save it as `values.yaml`. If your Datadog site is not `datadoghq.com`, update the `DD_SITE` value in `values.yaml` before installing.
+
+   | Environment | Values file |
+   |---|---|
+   | Kubernetes (non-cloud) | [`daemonset.yaml`][103] |
+   | Amazon EKS | [`daemonset-eks.yaml`][104] |
+   | Amazon EKS Auto Mode | [`daemonset-eks-auto.yaml`][105] |
+   | Google GKE | [`daemonset-gke.yaml`][106] |
+   | Google GKE Autopilot | [`daemonset-gke-autopilot.yaml`][107] |
+   | Azure AKS | [`daemonset-aks.yaml`][108] |
+   | Azure AKS Automatic | [`daemonset-aks-automatic.yaml`][109] |
+
+   On Amazon EKS, the values files cannot configure the required AWS-side settings. Apply the following outside of Helm:
+
+   - **Amazon EKS**: The `ec2` and `eks` detectors need access to the IMDS endpoint from inside a container. Set the IMDS token hop limit to 2 in your node launch template or in your account settings.
+   - **Amazon EKS Auto Mode**: The `eks` detector requires a Pod Identity association that assigns the Collector an IAM role with the `EC2:DescribeInstances` permission.
+
+1. Install the Collector:
+
+   ```shell
+   helm install otelcol open-telemetry/opentelemetry-collector --values values.yaml
+   ```
+
+[102]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector
+[103]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset.yaml
+[104]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-eks.yaml
+[105]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-eks-auto.yaml
+[106]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-gke.yaml
+[107]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-gke-autopilot.yaml
+[108]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-aks.yaml
+[109]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-aks-automatic.yaml
+
+{{% /tab %}}
+{{< /tabs >}}
+
+<div class="alert alert-info">For production deployments, configure the <a href="/opentelemetry/config/collector_batch_memory/">memory limiter</a> based on the memory available to the Collector.</div>
+
+### 3. Run the Collector
+
+Start the Collector. If you are using Docker or Kubernetes, the run command is included in the [Create the collector configuration](#2-create-the-collector-configuration) section.
+
+For Host installations, run:
+
+```shell
+DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=<YOUR_API_KEY> \
+  otelcol-contrib --config collector.yaml
+```
+
+### 4. Configure your application
+
+Configure your OpenTelemetry-instrumented application to send data to the Collector. Set the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to point to the Collector:
+
+{{< tabs >}}
+{{% tab "Host" %}}
+```shell
+export OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4318"
+export OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"
+```
+{{% /tab %}}
+
+{{% tab "Docker" %}}
+Set the following environment variables in your application container:
+```
+OTEL_EXPORTER_OTLP_ENDPOINT=http://<collector-hostname>:4318
+OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+```
+Both containers must be on the same network. If you use Docker Compose, this is handled automatically.
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+In your application deployment manifest, configure the endpoint using the host IP:
+```yaml
+env:
+  - name: HOST_IP
+    valueFrom:
+      fieldRef:
+        fieldPath: status.hostIP
+  - name: OTEL_EXPORTER_OTLP_ENDPOINT
+    value: "http://$(HOST_IP):4318"
+  - name: OTEL_EXPORTER_OTLP_PROTOCOL
+    value: "http/protobuf"
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+Set the `service.name`, `deployment.environment.name`, and `service.version` resource attributes in your application's OpenTelemetry configuration. Datadog maps these to [Unified Service Tagging][4], which correlates your traces, metrics, and logs.
+
+## Verify the setup
+
+After your application sends telemetry to the Collector, verify that data appears in Datadog:
+
+1. In Datadog, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}} and confirm that your `service.name` appears.
+2. Open {{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}} and search for your service.
+3. Go to {{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Infrastructure List{{< /ui >}} and confirm that the host running the Collector appears.
+4. If you send logs through OTLP, go to {{< ui >}}Logs Explorer{{< /ui >}} and search for your service name.
+5. In [Fleet Automation][9], confirm that the Collector and its configuration appear.
+
+## Key components
+
+### Span metrics connector
+
+The `span_metrics` connector generates RED metrics from trace data. These metrics power APM features including the Service Catalog, Service Page, and Resource Page. The connector is configured with dimensions that enable Datadog to compute host tags, peer services, and operation names from your traces.
+
+For a complete list of dimensions included in the recommended configuration, including those related to container tags, see the [full configuration files][5] in the `opentelemetry-examples` repository. Those files also show how to replace groups of container tag dimensions with glob patterns, such as `- glob: container.**`.
+
+### OTLP HTTP exporter
+
+The `otlp_http` exporter sends telemetry data to Datadog's OTLP intake endpoints. Key configuration details:
+
+- **Endpoint**: `https://otlp.<YOUR_DD_SITE>` for traces, logs, and metrics.
+- **Compression**: `zstd` is recommended for reduced bandwidth usage. When using `zstd`, set `compression_params.level` explicitly, because the default uses the lowest compression level.
+- **Batching**: The `sending_queue.batch` settings begin flushing at 2 MiB and split serialized batches at 4 MiB. If you receive a 413 response, reduce these sizes.
+
+#### `dd-otel-metric-config` header {#dd-otel-metric-config-header}
+
+The `dd-otel-metric-config` header is a JSON payload sent with metrics requests that configures how Datadog processes OTLP metrics. Set it in the `headers` section of the `otlp_http` exporter.
+
+| Field | Type | Default | Description |
+|---|---|---|---|
+| `resource_attributes_as_tags` | Boolean | `false` | Propagates OTLP resource attributes as Datadog tags on emitted metrics. |
+| `instrumentation_scope_metadata_as_tags` | Boolean | `false` | Propagates OTLP instrumentation scope metadata (scope name and version) as tags on emitted metrics. |
+| `trace_metrics.namespace` | String | `traces.span.metrics` | Namespace prefix applied to trace-derived metrics. |
+| `trace_metrics.instrumentation_metrics_calc` | Boolean | `false` | When `true`, routes supported HTTP instrumentation metrics to power APM trace metrics. |
+| `raw_instrumentation_metrics_drop` | Boolean | `false` | When `true`, drops the raw HTTP instrumentation metrics from the regular metrics intake after routing them for APM trace metrics. Only applies when `trace_metrics.instrumentation_metrics_calc` is `true`. |
+
+Example with instrumentation metrics enabled:
+
+```json
+{
+  "trace_metrics": {
+    "namespace": "myapp.traces",
+    "instrumentation_metrics_calc": true
+  },
+  "raw_instrumentation_metrics_drop": false,
+  "resource_attributes_as_tags": true,
+  "instrumentation_scope_metadata_as_tags": false
+}
+```
+
+<div class="alert alert-info">The recommended OpenTelemetry Collector configuration uses the <code>span_metrics</code> connector to generate the RED metrics that power APM views. The <code>trace_metrics.instrumentation_metrics_calc</code> and <code>raw_instrumentation_metrics_drop</code> fields support an alternative configuration for setups that derive APM trace metrics from HTTP instrumentation metrics instead. Do not enable <code>instrumentation_metrics_calc</code> alongside the <code>span_metrics</code> connector, as this computes trace metrics from both sources.</div>
+
+### Datadog extension
+
+The `datadog` extension sends Collector metadata to Datadog for host enrichment. It does not export telemetry data. All telemetry flows through the OTLP HTTP exporter. This extension is part of the [OpenTelemetry Collector Contrib][1] project and handles API key validation and deployment type reporting.
+
+### Cumulative-to-delta processor
+
+The `cumulativetodelta` processor converts cumulative metrics to delta temporality, which is [Datadog's recommended configuration][6] for OpenTelemetry metrics.
+
+### Kubelet stats receiver
+
+In Kubernetes deployments, the `kubelet_stats` receiver collects node, pod, container, and volume metrics from the kubelet on each node. The `deltatorate` processor converts the pod network metrics it produces to rates.
+
+### Self-monitoring telemetry
+
+The configuration sends the Collector's own metrics back to its local OTLP receiver (`http://localhost:4318`). This routes the Collector's internal metrics through its own pipelines so they are enriched with resource attributes before being exported to Datadog.
+
+## OTLP intake limits
+
+Datadog enforces the following limits when ingesting OTLP data. Data that exceeds a limit is rejected or dropped as noted.
+
+**Payload size**
+: Each intake endpoint enforces a maximum payload size per request. Requests above the limit are rejected with an `HTTP 413 Request Entity Too Large` response. If you receive a 413, reduce the batch size or flush more frequently so each request stays under the limit. For the payload size limit of each endpoint, see [Intake limits][8].
+
+**Histogram bucket count**
+: Each histogram datapoint is validated on ingestion, with a maximum per-bucket count (the number of observations in any single bucket) of 2,147,483,647 (2<sup>31</sup> − 1). If any bucket exceeds this, the entire datapoint is dropped.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
-[3]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest
-[4]: https://opentelemetry.io/docs/collector/configuration/
-[5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/processor/batchprocessor/README.md
-[6]: /api/latest/logs/
-[7]: /api/latest/metrics/#submit-metrics
-[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
-[9]: https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainer
-[10]: /getting_started/tagging/unified_service_tagging/
-[11]: https://opentelemetry.io/docs/instrumentation/
-[12]: /logs/log_collection/?tab=host
-[13]: /logs/log_configuration/parsing/
-[14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/pkg/stanza/docs/operators
-[15]: https://opentelemetry.io/docs/reference/specification/logs/data-model/
-[16]: https://opentelemetry.io/docs/collector/deployment/#agent
-[17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml
-[25]: https://opentelemetry.io/docs/specs/semconv/resource/#service
-[26]: /logs/log_configuration/pipelines/?tab=service#service-attribute
-[27]: /logs/log_configuration/processors/service_remapper/
-[28]: /opentelemetry/schema_semantics/hostname/
-[29]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector
-[30]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/ootb-ec2.yaml
-[31]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/
-[32]: /opentelemetry/compatibility/
-[33]: /opentelemetry/collector_exporter/deployment
+[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib
+[2]: /account_management/api-app-keys/
+[3]: /getting_started/site/
+[4]: /getting_started/tagging/unified_service_tagging/
+[5]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
+[6]: /opentelemetry/guide/otlp_delta_temporality/
+[7]: /opentelemetry/compatibility/
+[8]: /opentelemetry/setup/otlp_ingest/#intake-limits
+[9]: https://app.datadoghq.com/fleet
+[100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest

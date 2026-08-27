@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-To extract the correct hostname and host tags, Datadog Exporter uses the [resource detection processor][2] and the [Kubernetes attributes processor][3]. These processors allow for extracting information from hosts and containers in the form of [resource semantic conventions][1], which is then used to build the hostname, host tags, and container tags. These tags enable automatic correlation among telemetry signals and tag-based navigation for filtering and grouping telemetry data within Datadog.
+To extract the correct hostname and host tags, configure the [resource detection processor][2] and the [Kubernetes attributes processor][3] in the OpenTelemetry Collector. These processors extract information from hosts and containers as [resource semantic conventions][1]. Datadog uses this metadata to build the hostname, host tags, and container tags. These tags enable automatic correlation among telemetry signals and tag-based navigation for filtering and grouping telemetry data within Datadog.
 
 For more information, see the OpenTelemetry project documentation for the [resource detection][2] and [Kubernetes attributes][3] processors.
 
