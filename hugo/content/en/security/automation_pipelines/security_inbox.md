@@ -30,7 +30,7 @@ Configure inbox rules to manage your Security Inbox effectively, ensuring only t
 
 ## Default inbox rules
 
-Datadog provides a set of default inbox rules, compiled by the Datadog Security Research team, that populate your [Security Inbox][3] out of the box. These rules cover the findings most likely to represent real risk in a typical environment.
+Datadog provides a set of default inbox rules, compiled by the Datadog Security Research team, that populate your [Security Inbox][3] automatically. These rules cover the findings most likely to represent real risk in a typical environment.
 
 Default rules appear alongside your own rules on the [Findings Automation][2] page. You can disable a default rule if it does not match how your organization triages, and you can add your own rules to cover cases the defaults miss.
 

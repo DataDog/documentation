@@ -61,6 +61,8 @@ Security Inbox answers three questions:
 
 Inbox rules control which findings reach Security Inbox. Datadog provides a set of default inbox rules, compiled by the Datadog Security Research team, that surface the findings most likely to represent real risk. You can review these rules, turn individual rules off, and add rules of your own.
 
+Rules are evaluated in order. For each finding, Datadog checks your rules from the top until one matches, and then stops. If no rule matches, the finding does not enter the inbox.
+
 To see the rules that populate your inbox, click **Customize inbox** in the Security Inbox filter bar, or go to **Security** > **Settings** > [**Findings Automation**][24].
 
 ### Supported finding types
@@ -186,8 +188,6 @@ Key features include:
 - **Strengthen compliance and address key system concerns**: Address concerns affecting regulatory compliance or important business systems, regardless of severity.
 - **Prioritize current risks**: Focus on immediate threats, such as identity risks after an incident or industry-wide vulnerabilities.
 - **Enforce remediation timelines**: Attach due dates by severity, so overdue work is visible to the whole team.
-
-Rules are evaluated in order. For each finding, Datadog checks your rules from the top until one matches, and then stops. If no rule matches, the finding does not enter the inbox.
 
 For more information, see [Add to Security Inbox Rules][11] and [Set Due Date Rules][12].
 
