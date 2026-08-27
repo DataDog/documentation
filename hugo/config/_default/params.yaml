@@ -382,6 +382,7 @@ unsupported_sites:
   linear_error_tracking: [gov,gov2]
   live_debugger: [gov,gov2]
   llm_observability: [gov,gov2]
+  dd.llm_observability.dataset: [gov,gov2]
   mcp_server: [gov,gov2]
   mobile_app_testing: [gov,gov2]
   nebius-cloud: [gov,gov2]
