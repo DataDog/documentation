@@ -184255,6 +184255,19 @@ paths:
       description: |-
         Returns a list of all permissions, including name, description, and ID.
       operationId: ListPermissions
+      parameters:
+        - description: |-
+            Set to `true` to return all permissions, including both permissions
+            that can be assigned to user roles and permissions that can only be
+            used as scopes for OAuth clients and scoped credentials. When `false`
+            (default), only permissions that can be assigned to user roles are
+            returned.
+          example: false
+          in: query
+          name: include_scopes
+          required: false
+          schema:
+            type: boolean
       responses:
         "200":
           content:
