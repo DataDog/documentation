@@ -11,7 +11,7 @@ further_reading:
   - link: '/real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/'
     tag: Documentation
     text: Out-of-the-box metrics
-  - link: '/real_user_monitoring/data_lifecycle_and_cost_management/control_volumes_with_quotas/'
+  - link: '/real_user_monitoring/retain_and_recover_valuable_sessions/control_volumes_with_quotas/'
     tag: Documentation
     text: Control volumes with quotas
   - link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
@@ -167,11 +167,11 @@ If you have configured the SDK to sample 40% of traces, then the outcome is the 
 
 <div class="alert alert-info">Cross-product retention filters only apply to sessions retained by the corresponding RUM retention filter. This means filters order matters for both RUM retention and cross-product filters.<br><br>
 
-For more information, see <a href="/real_user_monitoring/data_lifecycle_and_cost_management/configure_retention_filters/#how-it-works">How it works</a>.</div>
+For more information, see <a href="/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/#how-it-works">How it works</a>.</div>
 
 ### Cross-product retention filters on permanent filters
 
-Cross-product retention filters are also available on the <a href="/real_user_monitoring/data_lifecycle_and_cost_management/configure_retention_filters/#permanent-retention-filters">Permanent Retention Filters</a>. The APM traces filter is **only editable on Synthetic Monitoring Sessions and Sessions with forced replays filters**.
+Cross-product retention filters are also available on the <a href="/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/#permanent-retention-filters">Permanent Retention Filters</a>. The APM traces filter is **only editable on Synthetic Monitoring Sessions and Sessions with forced replays filters**.
 
 <div class="alert alert-danger">APM traces indexed through a cross-product retention filter on the Synthetics or Forced Replay permanent filters are subject to APM billing.</div>
 
@@ -199,4 +199,4 @@ Analyze performance with [out-of-the-box metrics][8].
 [6]: /api/latest/rum-retention-filters/
 [7]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/data-sources/rum_retention_filters
 [8]: /real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/
-[9]: /real_user_monitoring/data_lifecycle_and_cost_management/control_volumes_with_quotas/
+[9]: /real_user_monitoring/retain_and_recover_valuable_sessions/control_volumes_with_quotas/

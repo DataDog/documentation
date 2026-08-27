@@ -9306,6 +9306,11 @@ menu:
       identifier: rum
       parent: digital_experience_heading
       weight: 30000
+    - name: RUM Terms and Concepts
+      url: real_user_monitoring/rum_terms_and_concepts/
+      parent: rum
+      identifier: rum_terms_and_concepts
+      weight: 0
     - name: Setup RUM
       url: real_user_monitoring/setup/
       parent: rum
@@ -9441,25 +9446,25 @@ menu:
       parent: rum_setup_measure_health_with_metrics
       identifier: rum_setup_measure_health_with_metrics_create_custom_metrics
       weight: 2
-    - name: Data Lifecycle and Cost Management
-      url: real_user_monitoring/data_lifecycle_and_cost_management/
+    - name: Retain and Recover Valuable Sessions
+      url: real_user_monitoring/retain_and_recover_valuable_sessions/
       parent: rum
-      identifier: rum_data_lifecycle_and_cost_management
+      identifier: rum_retain_and_recover_valuable_sessions
       weight: 5
     - name: Configure Retention Filters
-      url: real_user_monitoring/data_lifecycle_and_cost_management/configure_retention_filters/
-      parent: rum_data_lifecycle_and_cost_management
-      identifier: rum_data_lifecycle_and_cost_management_configure_retention_filters
+      url: real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
+      parent: rum_retain_and_recover_valuable_sessions
+      identifier: rum_retain_and_recover_valuable_sessions_configure_retention_filters
       weight: 1
     - name: Control Volumes with Quotas
-      url: real_user_monitoring/data_lifecycle_and_cost_management/control_volumes_with_quotas/
-      parent: rum_data_lifecycle_and_cost_management
-      identifier: rum_data_lifecycle_and_cost_management_control_volumes_with_quotas
+      url: real_user_monitoring/retain_and_recover_valuable_sessions/control_volumes_with_quotas/
+      parent: rum_retain_and_recover_valuable_sessions
+      identifier: rum_retain_and_recover_valuable_sessions_control_volumes_with_quotas
       weight: 2
     - name: Recover Sessions from Managed Archives
-      url: real_user_monitoring/data_lifecycle_and_cost_management/recover_sessions_from_managed_archives/
-      parent: rum_data_lifecycle_and_cost_management
-      identifier: rum_data_lifecycle_and_cost_management_recover_sessions_from_managed_archives
+      url: real_user_monitoring/retain_and_recover_valuable_sessions/recover_sessions_from_managed_archives/
+      parent: rum_retain_and_recover_valuable_sessions
+      identifier: rum_retain_and_recover_valuable_sessions_recover_sessions_from_managed_archives
       weight: 3
     - name: Investigate Problems
       url: real_user_monitoring/investigate_problems/
