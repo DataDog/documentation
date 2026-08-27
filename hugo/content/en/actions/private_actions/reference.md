@@ -43,7 +43,7 @@ This matrix shows, for each integration, its availability in each runner type an
 | Integration | Runner in the Agent | Authorizable through<br>Execution Policies | Standalone runner |
 |---|:---:|:---:|:---:|
 | Kubernetes | {{< X >}} | {{< X >}} | {{< X >}} |
-| Remote Action (rshell + network path) | {{< X >}} | {{< X >}} | {{< X >}} |
+| Remote Action (for example, rshell) | {{< X >}} | {{< X >}} | {{< X >}} |
 | Script | {{< X >}} | {{< X >}} | {{< X >}} |
 | HTTP | {{< X >}} |  | {{< X >}} |
 | GitLab | {{< X >}} |  | {{< X >}} |
@@ -52,7 +52,7 @@ This matrix shows, for each integration, its availability in each runner type an
 | PostgreSQL |  |  | {{< X >}} |
 | Temporal | {{< X >}} |  | {{< X >}} |
 
-- **Remote Action** is the integration family under the `com.datadoghq.remoteaction` prefix. It includes network path actions and the rshell bundle, whose `runCommand` action runs shell commands through a restricted shell.
+- **Remote Action** is the integration family under the `com.datadoghq.remoteaction` prefix. It includes the rshell bundle, whose `runCommand` action runs shell commands through a restricted shell. See [Agent Restricted Shell (rshell)][8]
 - **Script** actions are limited to *predefined* scripts declared in the runner's `script-config.yaml`. To configure script actions (`runPredefinedScript` for Linux or `runPredefinedPowershellScript` for Windows), see [Run a script with a private action runner][5].
 
 {{% collapse-content title="Available actions by runner type" level="h3" %}}
@@ -78,3 +78,4 @@ For the full set of credential file formats and examples, see [Handling private 
 [5]: /actions/private_actions/run_script/
 [6]: /actions/connections/
 [7]: /actions/connections/private_action_credentials/
+[8]: /agent/guide/rshell/
