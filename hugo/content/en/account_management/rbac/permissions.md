@@ -109,7 +109,7 @@ Minimal Access Roles give your organization more granular control over what user
 
 By default, every role includes a foundational set of [restricted permissions](#restricted-permissions). These permissions are automatically assigned to every role and typically cannot be removed, as they support core functionality across Datadog. Users with only a Minimal Access Role may experience limited functionality or unexpected errors on certain Datadog pages.
 
-Enabling Minimal Access Roles makes the following permissions removable from custom roles, allowing you to create highly restricted roles for specialized workflows:
+Enabling Minimal Access Roles makes the following permissions removable from custom roles, allowing you to create restricted roles for specialized workflows:
 
 - Built-In Features (`built_in_features`)
 - Metrics Read (`metrics_read`)
