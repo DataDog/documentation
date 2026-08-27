@@ -680,7 +680,7 @@ No specific configuration is required.
 
 ## vSphere Kubernetes Service (VKS) {#VKS}
 
-VKS requires the namespace that the Datadog Agent is deployed to use the privileged Pod Security Standard. Before deploying the Datadog Agent, replace `<namespace>` with the namespace where you deploy `datadog-agent` and run:
+VKS requires the namespace where the Datadog Agent is deployed to use the privileged Pod Security Standard. Before deploying the Datadog Agent, replace `<namespace>` with the namespace where you deploy `datadog-agent` and run:
 
 ```shell
 kubectl label --overwrite ns <namespace> \
