@@ -23,9 +23,6 @@ further_reading:
 - link: "security/suppressions/"
   tag: "Documentation"
   text: "Suppressions"
-- link: "https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/"
-  tag: "Blog"
-  text: "How CISA’s BOD 26-04 changes vulnerability prioritization"
 algolia:
   tags: ["mcp", "mcp server", "security", "security signals", "security findings", "detection rules", "suppressions", "ioc", "ioc explorer", "indicators of compromise"]
 ---

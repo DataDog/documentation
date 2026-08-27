@@ -19,9 +19,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/a-practical-guide-to-react-error-monitoring/"
   tag: "Blog"
   text: "A practical guide to React error monitoring"
-- link: "https://www.datadoghq.com/blog/work-management/"
-  tag: "Blog"
-  text: "Centralize human and agentic work with Datadog Work Management"
 ---
 
 ## Overview
