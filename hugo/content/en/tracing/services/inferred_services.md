@@ -88,7 +88,9 @@ If you are using Helm, include these environment variables in your `values.yaml`
 {{% /tab %}}
 {{% tab "OpenTelemetry Collector" %}}
 
-For the OpenTelemetry Collector, the minimum recommended version is `opentelemetry-collector-contrib` [v0.95.0][1] or later. In that case, update this configuration:
+For new OpenTelemetry Collector configurations, use the recommended [`span_metrics` connector configuration][6]. It includes the dimensions Datadog uses to infer peer services.
+
+The Datadog Connector remains fully supported for existing configurations. For `opentelemetry-collector-contrib` [v0.95.0][1] or later, update this configuration:
 
 {{< code-block lang="yaml"  collapsible="true" >}}
 
@@ -118,6 +120,7 @@ exporters:
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.95.0
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L375-L395
+[6]: /opentelemetry/setup/collector_exporter/install/#span-metrics-connector
 {{% /tab %}}
 {{< /tabs >}}
 

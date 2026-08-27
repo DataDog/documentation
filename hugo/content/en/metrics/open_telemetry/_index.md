@@ -40,7 +40,7 @@ For more information, read [Query Across Datadog and OpenTelemetry Metrics][7].
 
 ## OTLP metric types
 
-The Datadog Agent and the OpenTelemetry Collector Datadog exporter can ingest metrics in the OpenTelemetry format (OTLP), which can be produced by OpenTelemetry-instrumented applications. 
+The Datadog Agent and Datadog OTLP intake can ingest metrics in the OpenTelemetry format (OTLP), which can be produced by OpenTelemetry-instrumented applications. Configure the OpenTelemetry Collector with the OTLP HTTP exporter to send metrics to the intake.
 
 For more information, read [OTLP metric types][10].
 

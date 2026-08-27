@@ -17,9 +17,9 @@ aliases:
 
 ## Overview
 
-The Datadog Agent and the OpenTelemetry Collector OTLP Exporter can ingest metrics in the OpenTelemetry format (OTLP), which can be produced by OpenTelemetry-instrumented applications. 
+The Datadog Agent and Datadog OTLP intake can ingest metrics in the OpenTelemetry format (OTLP), which can be produced by OpenTelemetry-instrumented applications.
 
-The following OTLP metric types can be ingested by the Datadog Agent and the OpenTelemetry Collector OTLP Exporter:
+The Datadog Agent and Datadog OTLP intake support the following OTLP metric types:
 - Sums
 - Gauges
 - Histograms
@@ -111,9 +111,9 @@ An OTLP Summary is a legacy type that conveys quantile information about a popul
 
 OTLP supports two kinds of attributes: datapoint-level attributes and resource attributes. These attributes may follow OpenTelemetry semantic conventions and have well-known semantics.
 
-The Datadog Agent and the OpenTelemetry Collector OTLP Exporter map the datapoints-level attributes as tags. Resource attributes following OpenTelemetry semantic conventions are mapped to the equivalent Datadog conventions if they exist.
+The Datadog Agent and Datadog OTLP intake map datapoint-level attributes as tags. Resource attributes that follow OpenTelemetry semantic conventions are mapped to the equivalent Datadog conventions if they exist.
 
-You may add all resource attributes as tags by using the `resource_attributes_as_tags` flag.
+To add all resource attributes as tags when using the Collector's OTLP HTTP exporter, configure `resource_attributes_as_tags` in the [`dd-otel-metric-config` header][6].
 
 ### Example
 
@@ -202,3 +202,4 @@ Suppose you are submitting a legacy OTLP Summary metric, `request.response_time.
 [3]: /opentelemetry/guide/otlp_delta_temporality/
 [4]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
 [5]: /metrics/distributions/
+[6]: /opentelemetry/setup/collector_exporter/install/#dd-otel-metric-config-header
