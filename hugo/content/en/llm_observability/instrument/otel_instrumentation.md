@@ -865,7 +865,7 @@ Mapping warnings are detected at ingestion. They do not affect billing or span r
 
 A span can display warnings not listed in the following table if Datadog adds checks. These render with a generated title based on the check that triggered the warning.
 
-The **Search value** column lists the value stored on the span. Use it with the `@collection_errors` attribute to find flagged spans, for example `@collection_errors:otel_warning_missing_model_name`. The UI strips the `otel_warning_` prefix when it displays a warning, so the label you see does not match the value you search for.
+The **Search value** column lists the value stored on the span. Use it with the `@collection_errors` attribute to find flagged spans, for example `@collection_errors:otel_warning_missing_model_name`.
 
 | Warning | Search value (`@collection_errors:`) | Attribute | Fix |
 |---------|--------------------------------------|-----------|-----|
