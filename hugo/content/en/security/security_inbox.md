@@ -61,7 +61,7 @@ Security Inbox answers three questions:
 
 Inbox rules control which findings reach Security Inbox. Datadog provides a set of default inbox rules, compiled by the Datadog Security Research team, that surface the findings most likely to represent real risk. You can review these rules, turn individual rules off, and add rules of your own.
 
-To see the rules that populate your inbox, click **Customize inbox** in the Security Inbox filter bar, or go to **Security** > **Settings** > [Findings Automation][11].
+To see the rules that populate your inbox, click **Customize inbox** in the Security Inbox filter bar, or go to **Security** > **Settings** > [**Findings Automation**][24].
 
 ### Supported finding types
 
@@ -218,3 +218,4 @@ For more information, see [Add to Security Inbox Rules][11] and [Set Due Date Ru
 [21]: /sheets/
 [22]: /ddsql_editor/
 [23]: /security/assignee_management/
+[24]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=add_to_inbox
