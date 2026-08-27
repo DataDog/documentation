@@ -13,6 +13,9 @@ further_reading:
 - link: "/metrics/guide/custom_metrics_governance/"
   tag: "Guide"
   text: "Best practices for custom metrics governance"
+- link: "https://www.datadoghq.com/blog/infinite-cardinality-metrics/"
+  tag: "Blog"
+  text: "Infinite Cardinality Metrics: Custom metrics built for modern systems"
 algolia:
   tags: ['custom metrics billing', 'metric name pricing']
 ---

@@ -1,5 +1,6 @@
 ---
 title: OpenSearch Destination
+description: Learn how to send logs to OpenSearch using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

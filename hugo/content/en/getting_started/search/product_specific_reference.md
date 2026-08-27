@@ -33,7 +33,7 @@ For more information, see [Advanced Filtering][1].
 * Metric namespace filtering for organized queries
 * **Case-sensitive matching** for metric names
 
-{{% collapse-content title="Syntax examples" level="h5" expanded=false %}}
+{{% collapse-content title="Syntax examples" level="h3" expanded=false %}}
 ```text
 # Filter metrics by tag
 system.cpu.idle{host:prod-*}
@@ -69,7 +69,7 @@ For a complete reference for log search operators, wildcards, facets, and advanc
 * Advanced boolean operators (AND, OR, NOT) and grouping
 * Range queries for numerical values and timestamps
 
-{{% collapse-content title="Syntax examples" level="h5" expanded=false %}}
+{{% collapse-content title="Syntax examples" level="h3" expanded=false %}}
 ```text
 # Search for error messages containing "timeout"
 status:error "timeout"
@@ -101,7 +101,7 @@ To learn more about querying spans and traces with service, resource, and tag fi
 * Duration-based queries for performance analysis
 * Error tracking with status codes and error messages
 
-{{% collapse-content title="Syntax examples" level="h5" expanded=false %}}
+{{% collapse-content title="Syntax examples" level="h3" expanded=false %}}
 ```text
 # Find errors in a specific service
 service:payment-api status:error

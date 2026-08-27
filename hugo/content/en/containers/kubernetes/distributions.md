@@ -38,6 +38,7 @@ These configurations can then be customized to add any Datadog feature.
 * [Red Hat OpenShift](#Openshift)
 * [Rancher](#Rancher)
 * [Oracle Container Engine for Kubernetes (OKE)](#OKE)
+* [vSphere Kubernetes Service (VKS)](#VKS)
 * [vSphere Tanzu Kubernetes Grid (TKG)](#TKG)
 
 ## AWS Elastic Kubernetes Service (EKS) {#EKS}
@@ -676,6 +677,80 @@ agents:
 ## Oracle Container Engine for Kubernetes (OKE) {#OKE}
 
 No specific configuration is required.
+
+## vSphere Kubernetes Service (VKS) {#VKS}
+
+VKS requires the namespace where the Datadog Agent is deployed to use the privileged Pod Security Standard. Before deploying the Datadog Agent, replace `<namespace>` with the namespace where you deploy `datadog-agent` and run:
+
+```shell
+kubectl label --overwrite ns <namespace> \
+  pod-security.kubernetes.io/enforce=privileged
+```
+
+Use the following configuration to enable Kubernetes event collection and kube-state-metrics core, disable Kubelet TLS verification for self-signed certificates, and add a toleration so the Agent can be scheduled on control plane nodes.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+DatadogAgent Kubernetes Resource:
+
+```yaml
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  features:
+    eventCollection:
+      collectKubernetesEvents: true
+    kubeStateMetricsCore:
+      enabled: true
+  global:
+    clusterName: <CLUSTER_NAME>
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+    kubelet:
+      tlsVerify: false
+  override:
+    nodeAgent:
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Custom `datadog-values.yaml`:
+
+```yaml
+datadog:
+  clusterName: <CLUSTER_NAME>
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  kubelet:
+    # Set tlsVerify to false since the Kubelet certificates are self-signed
+    tlsVerify: false
+  # Disable the `kube-state-metrics` dependency chart installation.
+  kubeStateMetricsEnabled: false
+  # Enable the new `kubernetes_state_core` check.
+  kubeStateMetricsCore:
+    enabled: true
+# Add a toleration so that the agent can be scheduled on the control plane nodes.
+agents:
+  tolerations:
+    - key: node-role.kubernetes.io/master
+      effect: NoSchedule
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## vSphere Tanzu Kubernetes Grid (TKG) {#TKG}
 

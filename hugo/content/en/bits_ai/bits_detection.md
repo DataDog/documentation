@@ -25,7 +25,15 @@ After you enable Bits Detection, it initializes monitoring for the 100 most crit
 
 Your team's existing monitors stay in place. Bits Detection works alongside them, adding adaptive coverage for the parts of your system that change too quickly to model by hand.
 
-To enable Bits Detection for additional services:
+You can enable Bits Detection for additional services from several entry points:
+
+### Option 1: Bits Detection Coverage Page {#enable-from-bits-ai}
+1. In Datadog, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Detection{{< /ui >}}][5] and click {{< ui >}}Enable New Detection Coverage{{< /ui >}}.
+1. Filter the service list to find services you'd like to enable, and select one or more services from the list.
+1. Set up a notification destination so the team knows when Bits finds a critical degradation.
+1. Review the managed coverage after initialization completes. You receive an email when your new health posture is ready.
+
+### Option 2: Service Page {#enable-from-service-page}
 
 1. In Datadog, go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}}][2] and select a service.
 1. Open the service's monitoring overview from the monitor status bar or the Bits Detection card.
@@ -44,7 +52,20 @@ Use the sections below to review coverage, configure alert routing, and provide 
 
 ### Review Bits Detection monitoring
 
-Use the Service Page or Monitor List to review how Bits Detection is monitoring your system.
+Use the Bits Detection Coverage Page, Service Page, or Monitor List to review how Bits Detection is monitoring your system.
+
+**Bits Detection Coverage Page**
+
+To review all scopes where Bits Detection is active, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Detection{{< /ui >}}][5]. Each row is a detection scope showing the number of critical endpoints and managed monitors Bits maintains, when the scope last alerted, whether alert notifications are configured, and whether auto-investigate is enabled. Select a scope to open its Bits Detection Details, where you can review the health status over a chosen time window, the endpoints Bits considers critical (each with a justification explaining why it was selected), the monitors Bits manages, and the scope's alert history.
+
+From the Coverage page, you can:
+
+- Review Bits Detection health status for all covered services.
+- Enable new detection coverage by selecting the services you want Bits to monitor.
+- View details for a managed scope.
+- Review the critical endpoints covered by Bits Detection.
+- Mark an endpoint as not critical.
+- Manage alert notification rules.
 
 **Service Page**
 
@@ -104,6 +125,7 @@ Bits Detection uses criticality to determine which resources should have managed
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help
-[2]: https://www.app.datadoghq.com/apm/services
+[2]: https://app.datadoghq.com/apm/services
 [3]: https://app.datadoghq.com/monitors/manage?bits_monitors=true
 [4]: /bits_ai/bits_investigation/
+[5]: https://app.datadoghq.com/bits-ai/detection/scopes

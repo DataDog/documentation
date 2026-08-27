@@ -65,7 +65,7 @@ The diagram below provides a reference architecture for forwarding logs from Azu
 
 For setup instructions, see the [Azure Automated Log Forwarding Setup guide][29].
 
-{{% collapse-content title="Event Hub log forwarding (legacy)" level="h4" expanded=false id="legacy-event-hub-log-forwarding" %}}
+{{% collapse-content title="Event Hub log forwarding (legacy)" level="h3" expanded=false id="legacy-event-hub-log-forwarding" %}}
 
 The following reference architecture applies to existing Event Hub log forwarding setups. For new deployments, use [automated log forwarding][29] instead.
 
@@ -90,7 +90,7 @@ For especially high log volumes, you may consider adding additional Event Hub an
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Commands to install the Azure Datadog Extension" level="h4" expanded=false id="azure-datadog-extension-commands" %}}
+{{% collapse-content title="Commands to install the Azure Datadog Extension" level="h3" expanded=false id="azure-datadog-extension-commands" %}}
 ## Install on Azure
 
 Datadog provides an Azure extension to assist with Agent deployment on Azure instances:
@@ -257,7 +257,7 @@ az connectedmachine extension create --name <NAME> --machine-name <MACHINE_NAME>
 More information on the syntax to set Azure `connectedmachine` extensions can be found in the [az connectedmachine extension][12] page.
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Azure count metrics" level="h4" expanded=false id="azure-count-metrics" %}}
+{{% collapse-content title="Azure count metrics" level="h3" expanded=false id="azure-count-metrics" %}}
 Datadog generates an additional metric for each resource monitored with the [Azure integration][23]: `azure.*.count`. For example, Azure Virtual Machines monitored by Datadog reports `azure.vm.count`.
 
 The `azure.*.count` metric is an improvement over `azure.*.status`, which is deprecated.
@@ -305,17 +305,17 @@ If you see a status of `query_failed` you need to enable the Resource Health pro
 
 ## Azure integration troubleshooting
 
-{{% collapse-content title="Find your tenant name" level="h4" expanded=false id="troubleshooting-find-your-tenant-name" %}}
+{{% collapse-content title="Find your tenant name" level="h3" expanded=false id="troubleshooting-find-your-tenant-name" %}}
 1. Navigate to [portal.azure.com][24].
 2. In the left sidebar, select **Azure Active Directory**.
 3. Under **Basic information**, find the **Name** value.
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Unable to log in" level="h4" expanded=false id="troubleshooting-unable-to-login" %}}
+{{% collapse-content title="Unable to log in" level="h3" expanded=false id="troubleshooting-unable-to-login" %}}
 If you experience an error logging in while trying to install the Azure integration, contact [Datadog support][36]. When possible, attach a screenshot.
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Missing metrics" level="h4" expanded=false id="troubleshooting-missing-metrics" %}}
+{{% collapse-content title="Missing metrics" level="h3" expanded=false id="troubleshooting-missing-metrics" %}}
 Ensure you completed the installation process, which includes giving read permissions to the Azure application for the subscriptions you want to monitor.
 
 For ARM deployed virtual machines, you must also turn on Diagnostics and select the VM metrics you would like to collect. See **Enable Diagnostics** below for instructions.
@@ -341,7 +341,7 @@ Turning on Diagnostics allows ARM deployed VMs to collect logging information wh
     {{< img src="integrations/guide/azure_troubleshooting/azure_enable_diagnostics.png" alt="azure diagnostics settings overview displayed with No storage account highlighted under Pick a storage account and enable guest level monitoring enabled" style="width:70%">}}
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Discrepancy between your data in Azure and Datadog" level="h4" expanded=false id="troubleshooting-metric-discrepancy" %}}
+{{% collapse-content title="Discrepancy between your data in Azure and Datadog" level="h3" expanded=false id="troubleshooting-metric-discrepancy" %}}
 Datadog's Azure integration collects all metrics from [Azure Monitor][27]. Metrics are collected with all available dimensions (which are mapped to tags in Datadog), the highest time granularity, and the primary aggregation type.
 
 The sections below describe two important distinctions to be aware of, as well as steps to [reconcile the discrepancy](#reconcile-the-discrepancy).
@@ -396,13 +396,13 @@ Diagnostic setting not present:
 
 #### Automated log forwarding troubleshooting
 
-{{% collapse-content title="Check for naming conflicts" level="h4" expanded=false id="troubleshooting-logs-naming-conflicts" %}}
+{{% collapse-content title="Check for naming conflicts" level="h5" expanded=false id="troubleshooting-logs-naming-conflicts" %}}
 If you have Azure resources with the same resource name as one of the default parameters, it can lead to naming conflicts. Azure does not allow resources to share resource names within an individual subscription. Datadog recommends renaming the default parameter with a unique name that does not already exist within your environment.
 
 **Note**: If you are rerunning the template due to this failure, Datadog recommends also removing the entire resource group to create a fresh deployment. 
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Ensure the resource provider is registered" level="h4" expanded=false id="troubleshooting-logs-unregistered-resource-provider" %}}
+{{% collapse-content title="Ensure the resource provider is registered" level="h5" expanded=false id="troubleshooting-logs-unregistered-resource-provider" %}}
 If your template deployment is failing due to the error `The subscription is not registered to use namespace 'Microsoft.EventHub'`:
 
 Azure has resource providers for each of its services, such as `Microsoft.EventHub` for Azure Event Hubs. If your Azure subscription is not registered to a required resource provider, the script fails. 
@@ -416,7 +416,7 @@ az provider register --namespace <RESOURCE_PROVIDER_NAME>
 {{< /code-block >}}
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Check DD_SITE and DD_API_KEY values" level="h4" expanded=false id="troubleshooting-logs-check-site-and-api-key-alf" %}}
+{{% collapse-content title="Check DD_SITE and DD_API_KEY values" level="h5" expanded=false id="troubleshooting-logs-check-site-and-api-key-alf" %}}
 If all logs are missing, verify your [Datadog site][33] and API key:
 
 1. In the resource group where the automated log forwarding resources were deployed, go to **Settings > Deployments**.
@@ -424,11 +424,11 @@ If all logs are missing, verify your [Datadog site][33] and API key:
 3. Click **Redeploy** to check and modify the values.
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Verify logs are present in the storage account container" level="h4" expanded=false id="troubleshooting-logs-verify-logs-in-storage-account" %}}
+{{% collapse-content title="Verify logs are present in the storage account container" level="h5" expanded=false id="troubleshooting-logs-verify-logs-in-storage-account" %}}
 For missing Azure resource logs, find the ARM-deployed storage account in the resource's region and check the container with the expected logs.
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Inspect the containerAppConsole logs of the forwarder jobs" level="h4" expanded=false id="troubleshooting-logs-inspect-forwarder-job-logs" %}}
+{{% collapse-content title="Inspect the containerAppConsole logs of the forwarder jobs" level="h5" expanded=false id="troubleshooting-logs-inspect-forwarder-job-logs" %}}
 [Container App Console logs][32] help you diagnose application errors and exceptions. To inspect the logs, enable logging within the Container Apps environment in the same region as your resources that are missing logs.
 {{% /collapse-content %}} 
 
@@ -436,17 +436,17 @@ For missing Azure resource logs, find the ARM-deployed storage account in the re
 
 #### Blob Storage log forwarding troubleshooting
 
-{{% collapse-content title="Check DD_SITE and DD_API_KEY values" level="h4" expanded=false id="troubleshooting-logs-check-site-and-api-key-bs" %}}
+{{% collapse-content title="Check DD_SITE and DD_API_KEY values" level="h5" expanded=false id="troubleshooting-logs-check-site-and-api-key-bs" %}}
 If you are missing all logs, ensure that:
    - The [selected Datadog site][33] is correct
    - The configured [API key][9] belongs to the correct Datadog organization
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Verify the forwarder config" level="h4" expanded=false id="troubleshooting-logs-verify-forwarder-config" %}}
+{{% collapse-content title="Verify the forwarder config" level="h5" expanded=false id="troubleshooting-logs-verify-forwarder-config" %}}
 Ensure that the forwarder is using the latest version, running Node.js 22 LTS or later on Windows OS. The code is publicly available at [index.js][19]
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Inspect the Blob Trigger" level="h4" expanded=false id="troubleshooting-logs-inspect-blob-trigger" %}}
+{{% collapse-content title="Inspect the Blob Trigger" level="h5" expanded=false id="troubleshooting-logs-inspect-blob-trigger" %}}
 Verify the Blob Storage trigger is configured with the following options:
 
 - **Binding Type**: `Azure Blob Storage`
@@ -455,7 +455,7 @@ Verify the Blob Storage trigger is configured with the following options:
 - **Storage account connection**: The name of the application setting containing the storage account connection string
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Inspect Blob Storage metrics" level="h4" expanded=false id="troubleshooting-logs-inspect-blob-metrics" %}}
+{{% collapse-content title="Inspect Blob Storage metrics" level="h5" expanded=false id="troubleshooting-logs-inspect-blob-metrics" %}}
 Ensure that Blob Storage is receiving data:
 : `azure.storage_storageaccounts_blobservices.ingress`
 
@@ -471,7 +471,7 @@ For the `azure.storage_storageaccounts_blobservices.transactions` metric, you ca
    - `azure.storage_storageaccounts_blobservices.transactions{!responsetype:success , apiname:put*} by {responsetype}`
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Inspect function metrics" level="h4" expanded=false id="troubleshooting-logs-inspect-function-metrics-bs" %}}
+{{% collapse-content title="Inspect function metrics" level="h5" expanded=false id="troubleshooting-logs-inspect-function-metrics-bs" %}}
 Check if the function app is encountering execution issues, data receipt or transmission issues, or error status codes by inspecting the following metrics:
 
 Ensure that the function is receiving data:
@@ -488,7 +488,7 @@ Ensure that the function's requests are not receiving error status codes:
 : `azure.functions.http5xx`
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Diagnostic settings not automatically added to resources or Activity Logs" level="h4" expanded=false id="troubleshooting-logs-diagnostic-settings-not-added" %}}
+{{% collapse-content title="Diagnostic settings not automatically added to resources or Activity Logs" level="h5" expanded=false id="troubleshooting-logs-diagnostic-settings-not-added" %}}
 
 If a diagnostic setting has not been added automatically to your resources or Activity Logs, check if:
    - The [maximum number of diagnostic settings][25] has been reached
@@ -499,7 +499,7 @@ If a diagnostic setting has not been added automatically to your resources or Ac
 
 #### Azure Native integration log forwarding troubleshooting
 
-{{% collapse-content title="Check resource logs tag rules" level="h4" expanded=false id="troubleshooting-logs-check-resource-logs-tag-rules" %}}
+{{% collapse-content title="Check resource logs tag rules" level="h5" expanded=false id="troubleshooting-logs-check-resource-logs-tag-rules" %}}
 Check that any tag rules in the Datadog resource configuration match the tags set on your resource logs.
 
 If there are no issues with the tag rules, contact [Datadog Support][36] and share the following information:
@@ -513,7 +513,7 @@ If there are no issues with the tag rules, contact [Datadog Support][36] and sha
 
 #### Event Hub log forwarding troubleshooting
    
-{{% collapse-content title="Check if the resource provider is unregistered" level="h4" expanded=false id="troubleshooting-logs-check-resource-provider-registration" %}}
+{{% collapse-content title="Check if the resource provider is unregistered" level="h5" expanded=false id="troubleshooting-logs-check-resource-provider-registration" %}}
 
 If your template deployment is failing due to the error `The subscription is not registered to use namespace 'Microsoft.EventHub'`:
 
@@ -528,7 +528,7 @@ az provider register --namespace <RESOURCE_PROVIDER_NAME>
 {{< /code-block >}}
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Check DD_SITE and DD_API_KEY values" level="h4" expanded=false id="troubleshooting-logs-check-site-and-api-key-eh" %}}
+{{% collapse-content title="Check DD_SITE and DD_API_KEY values" level="h5" expanded=false id="troubleshooting-logs-check-site-and-api-key-eh" %}}
 If you are missing all logs, ensure that:
    - The [selected Datadog site][33] is correct
    - The configured [API key][9] belongs to the correct Datadog organization
@@ -536,7 +536,7 @@ If you are missing all logs, ensure that:
 **Note**: if the Datadog site and API key have been set in the function app settings, your app may restart if they are modified. 
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Identify potential Event Hub bottlenecks" level="h4" expanded=false id="troubleshooting-logs-check-event-hub-bottlenecks" %}}
+{{% collapse-content title="Identify potential Event Hub bottlenecks" level="h5" expanded=false id="troubleshooting-logs-check-event-hub-bottlenecks" %}}
 A spike in incoming messages with a drop in outgoing ones suggests a bottleneck. Use these metrics to investigate:
 
 Check for incoming messages:
@@ -565,7 +565,7 @@ To remediate the bottleneck, you can either:
    - Split the log forwarder into multiple pipelines in Datadog, with each one processing a specific subset of resources based on rules such as priority. This increases the number of logs that can be handled simultaneously.
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Inspect function metrics" level="h4" expanded=false id="inspect-function-metrics-eh" %}}
+{{% collapse-content title="Inspect function metrics" level="h5" expanded=false id="inspect-function-metrics-eh" %}}
 Ensure the function app is executing by looking at the following function metrics:
 
 Check the function execution count:
