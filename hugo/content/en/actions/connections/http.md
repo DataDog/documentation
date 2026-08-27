@@ -191,4 +191,4 @@ To configure a private HTTP request:
 [3]: https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc#the-default-scope
 [4]: https://chat.datadoghq.com/
 [5]: /actions/private_actions
-[6]: /actions/private_actions/private_action_credentials/?tab=httpsaction#credential-files
+[6]: /actions/connections/private_action_credentials/?tab=httpsaction#credential-files

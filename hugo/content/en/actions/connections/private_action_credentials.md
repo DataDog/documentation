@@ -4,6 +4,7 @@ description: Configure credentials for private actions including HTTP, Jenkins, 
 aliases:
 - service_management/workflows/private_actions/private_action_credentials
 - service_management/app_builder/private_actions/private_action_credentials
+- actions/private_actions/private_action_credentials/
 disable_toc: false
 ---
 

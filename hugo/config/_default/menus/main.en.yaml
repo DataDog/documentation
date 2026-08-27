@@ -3121,6 +3121,11 @@ menu:
       parent: actions_connections
       identifier: actions_google_workspace
       weight: 103
+    - name: Private Action Credentials
+      url: actions/connections/private_action_credentials/
+      parent: actions_connections
+      identifier: private_actions_creds
+      weight: 104
     - name: Private Actions
       url: actions/private_actions/
       parent: action_catalog
@@ -3141,11 +3146,6 @@ menu:
       parent: private_actions
       identifier: update_private_action_runner
       weight: 203
-    - name: Private Action Credentials
-      url: actions/private_actions/private_action_credentials/
-      parent: private_actions
-      identifier: private_actions_creds
-      weight: 204
     - name: Cloudcraft
       url: datadog_cloudcraft/
       pre: cloudcraft
