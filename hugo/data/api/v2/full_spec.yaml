@@ -77662,12 +77662,15 @@ components:
           description: |-
             If `true`, Splunk tries to extract timestamps from incoming log events.
             If `false`, Splunk assigns the time the event was received.
+            Only applies when `endpoint_target` is `event`; cannot be `true` when `endpoint_target` is `raw`.
           example: true
           type: boolean
         buffer:
           $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
         encoding:
           $ref: "#/components/schemas/ObservabilityPipelineSplunkHecDestinationEncoding"
+        endpoint_target:
+          $ref: "#/components/schemas/ObservabilityPipelineSplunkHecDestinationEndpointTarget"
         endpoint_url_key:
           description: Name of the environment variable or secret that holds the Splunk HEC endpoint URL.
           example: SPLUNK_HEC_ENDPOINT_URL
@@ -77722,6 +77725,16 @@ components:
       x-enum-varnames:
         - JSON
         - RAW_MESSAGE
+    ObservabilityPipelineSplunkHecDestinationEndpointTarget:
+      description: The Splunk HEC endpoint to send events to. Use `event` to send structured events to the `/event` endpoint, or `raw` to send the raw message to the `/raw` endpoint.
+      enum:
+        - event
+        - raw
+      example: event
+      type: string
+      x-enum-varnames:
+        - EVENT
+        - RAW
     ObservabilityPipelineSplunkHecDestinationTokenStrategy:
       description: Controls how the Splunk HEC token is supplied. Use `custom` to provide a token with `token_key`, or `from_source` to forward the token received from an upstream Splunk HEC source.
       enum:
