@@ -180,6 +180,12 @@ Each pattern below breaks one capture group rule.
 | `(?<client_ip>\S+)` | The name has an underscore. A name can have only letters and digits. |
 | `(?<1status>\d+)` | The name starts with a digit. A name must start with a letter. |
 
+### Pattern performance
+
+Datadog matches a pattern fastest when it can tell where a match must start. A pattern that begins with `^` or with literal text gives it that starting point. A pattern that begins with `.*` does not, so it is tried at every position in the value.
+
+On a short value the difference is negligible. On a large value, such as a stack trace, an unanchored pattern can slow the query. It can also fail the query with an error rather than returning no match. Anchor the pattern with `^` where the value has a predictable start, and avoid wrapping a literal in `.*` on both sides.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
