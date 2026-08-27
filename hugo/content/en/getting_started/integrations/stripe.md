@@ -54,12 +54,7 @@ Use [Stripe Projects][1] to provision and manage Datadog from the Stripe CLI. Th
 
 1. Confirm that your `.env` file contains your Datadog API key, site, and organization name.
 
-### Access Datadog
-
-1. Go to the [Datadog login page](https://app.datadoghq.com/account/login).
-1. Select **Sign in with Google** if you use a Google account to sign in to Stripe. Otherwise, select **Forgot password?** and enter the email address from your Stripe account to set a Datadog password.
-
-### Upgrade Your Plan
+### Upgrade your plan
 
 If your Stripe account has a saved payment method, upgrade your Datadog plan to pay-as-you-go with one command:
 
@@ -77,6 +72,11 @@ stripe projects env --pull
 ```
 
 This stops management of your Datadog organization through Stripe Projects. It doesn't delete your Datadog account or organization.
+
+## Access Datadog
+
+1. Go to the [Datadog login page](https://app.datadoghq.com/account/login).
+1. Select **Sign in with Google** if you use a Google account to sign in to Stripe. Otherwise, select **Forgot password?** and enter the email address from your Stripe account to set a Datadog password.
 
 ## Further Reading
 
