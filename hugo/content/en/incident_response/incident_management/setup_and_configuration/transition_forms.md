@@ -1,5 +1,6 @@
 ---
 title: Transition Forms
+description: Prompt incident responders to fill out specific fields on status changes.
 ---
 
 ## Overview
