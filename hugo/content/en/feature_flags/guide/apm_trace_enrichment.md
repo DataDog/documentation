@@ -21,7 +21,7 @@ further_reading:
 APM trace enrichment automatically attaches feature flag evaluation data to your APM traces. When a feature flag is evaluated during a traced request, the SDK records which flags were evaluated and which variants were returned. This data is written to the root span and processed server-side so you can:
 
 - **Filter traces by flag variant** in [Trace Explorer][1] using `@feature_flags.<flag_key>:<variant>` facets.
-- **Use APM latency, error rate, and numeric span attributes as guardrail metrics** for canary rollouts.
+- **Use span duration, error rate, and numeric span attributes as guardrail metrics** for canary rollouts.
 - **Debug flag-related issues** by seeing which flags were active when an error occurred.
 
 <div class="alert alert-warning">APM trace enrichment is experimental and may change in a future release.</div>
@@ -201,7 +201,7 @@ Canary rollouts support the following APM guardrail metrics:
 - P90 span duration
 - Mean of a numeric span attribute
 
-Canary analysis uses retained traces that match the APM metric query. A low retained-trace volume can delay a decision until enough sampled subjects and events are available. You can optionally configure temporary trace retention for the canary to increase the random retained sample.
+Canary analysis uses retained traces that match the APM metric query. A low retained-trace volume can delay a decision until enough sampled subjects and events are available. To increase the random retained sample, configure temporary trace retention for the canary.
 
 {{< img src="feature_flags/apm_canaries/apm-canary-metric-monitored-with-retention.png" alt="Canary configuration with a P90 span duration guardrail, abort action, temporary APM trace retention, and a control variant." style="width:90%;" >}}
 

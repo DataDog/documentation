@@ -65,7 +65,7 @@ After you enable enrichment:
 3. Create an APM metric with a span query that matches the requests you want to monitor.
 4. Select the APM metric as a guardrail when you configure the canary.
 
-Canary analysis uses the retained sample of matching traces. If the retained volume is low, the canary waits until it has enough sampled subjects and events to make a decision. To increase the random retained sample, configure temporary trace retention for the canary. Temporary retention does not recover traces dropped before they reach Datadog.
+Canary analysis uses the retained sample of matching traces. If the retained-trace volume is low, the canary waits until it has enough sampled subjects and events to make a decision. To increase the random retained sample, configure temporary trace retention for the canary. Temporary retention does not recover traces dropped before they reach Datadog.
 
 {{< img src="feature_flags/apm_canaries/apm-metric-create-flow-1.png" alt="Metric creation flow with APM Spans selected and supported APM guardrail metric types, including P90 span duration." style="width:90%;" >}}
 
@@ -87,6 +87,6 @@ Canary analysis uses the retained sample of matching traces. If the retained vol
 - Configure notifications on the flag to be alerted when the rollout starts, pauses, or stops.
 - Configure canary notifications before starting the rollout. Notifications alert you when a guardrail metric pauses or stops the rollout.
 - Use evaluation tracking to monitor how many subjects are receiving each variant as the rollout progresses.
-- For APM guardrails, review sampled-subject and sampled-event readiness before increasing rollout exposure.
+- For APM guardrails, confirm that the retained sample contains enough sampled subjects and events before increasing rollout exposure.
 
 [1]: /feature_flags/guide/apm_trace_enrichment/
