@@ -264,6 +264,9 @@ dataset = LLMObs.pull_dataset("capitals-of-the-world")
 
 {{% tab "Node.js" %}}
 ```javascript
+const tracer = require('dd-trace').init()
+const { experiments } = tracer.llmobs
+
 const dataset = await experiments.pullDataset('capitals-of-the-world')
 ```
 {{% /tab %}}
