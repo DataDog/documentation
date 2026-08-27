@@ -5,9 +5,19 @@ further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
   tag: 'Documentation'
   text: 'Learn about RUM'
+- link: '/real_user_monitoring/guide/best-practices-for-operations-setup/'
+  tag: 'Guide'
+  text: 'Best practices for setting up Operations Monitoring'
+- link: '/real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/'
+  tag: 'Guide'
+  text: 'Best practices for creating SLOs for RUM operations'  
 ---
 
 ## Overview
+
+{{< callout header="Preview" btn_hidden="true" >}}
+Operations Monitoring is in Preview.
+{{< /callout >}}
 
 {{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-overview-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
 

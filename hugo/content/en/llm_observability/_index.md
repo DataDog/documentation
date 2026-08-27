@@ -132,12 +132,12 @@ See the [Setup documentation][5] for instructions on instrumenting your LLM appl
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/llm/traces
-[2]: /llm_observability/terms
+[2]: /llm_observability/quickstart/terms
 [3]: /llm_observability/setup/sdk
 [4]: /llm_observability/setup/api
 [5]: /llm_observability/setup
 [6]: /llm_observability/quickstart
 [7]: https://app.datadoghq.com/dash/integration/llm_operational_insights
 [8]: /llm_observability/setup/auto_instrumentation
-[9]: /llm_observability/evaluations/managed_evaluations
-[10]: /llm_observability/monitoring/patterns
+[9]: /llm_observability/configure/evaluations/managed_evaluations
+[10]: /llm_observability/investigate/patterns

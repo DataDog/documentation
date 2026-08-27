@@ -14,6 +14,9 @@ further_reading:
 - link: "/feature_flags/concepts/traffic_splitting"
   tag: "Documentation"
   text: "Traffic Splitting and Randomization"
+- link: "/feature_flags/concepts/evaluation_context"
+  tag: "Documentation"
+  text: "Evaluation Context"
 - link: "/feature_flags/concepts/environments"
   tag: "Documentation"
   text: "Environments"
@@ -64,82 +67,16 @@ SDKs do not evaluate targeting rules when the flag is <b>disabled</b> or <b>over
 
 ## Filters and evaluation context
 
-Filters use attributes from your SDK's **evaluation context**. Define attributes when you set the evaluation context before evaluating flags. Attributes must be flat primitive values (strings, numbers, Booleans). Nested objects and arrays are not supported.
+Filters use attributes from your SDK's [evaluation context][4]. Define attributes when you set the evaluation context before evaluating flags. Attributes must be flat primitive values (strings, numbers, Booleans). Nested objects and arrays are not supported.
 
 When you build a filter, the attribute field suggests attributes your organization has already defined or that your SDKs have sent recently. See [Targeting Attributes][2] to define reusable attributes with a data type, which also determines the operators available for that attribute.
 
-### Example evaluation contexts and filters
-
-With the following evaluation context, you can build filters with different operators, such as equality, **is one of**, **is not**, or numeric comparisons:
-
-**Evaluation context:**
-
-{{< programming-lang-wrapper langs="javascript,python,go" >}}
-
-{{< programming-lang lang="javascript" >}}
-
-```javascript
-await OpenFeature.setContext({
-  targetingKey: 'user-123',
-  user_id: 'user-123',
-  user_role: 'admin',
-  email: 'user@example.com',
-  country: 'US',
-  tier: 'premium',
-  account_age_days: 120,
-});
-```
-
-{{< /programming-lang >}}
-
-{{< programming-lang lang="python" >}}
-
-```python
-from openfeature.evaluation_context import EvaluationContext
-
-eval_ctx = EvaluationContext(
-    targeting_key="user-123",
-    attributes={
-        "user_id": "user-123",
-        "user_role": "admin",
-        "email": "user@example.com",
-        "country": "US",
-        "tier": "premium",
-        "account_age_days": 120,
-    },
-)
-```
-
-{{< /programming-lang >}}
-
-{{< programming-lang lang="go" >}}
-
-```go
-evalCtx := openfeature.NewEvaluationContext(
-    "user-123",
-    map[string]interface{}{
-        "user_id":          "user-123",
-        "user_role":        "admin",
-        "email":            "user@example.com",
-        "country":          "US",
-        "tier":             "premium",
-        "account_age_days": 120,
-    },
-)
-```
-
-{{< /programming-lang >}}
-
-{{< /programming-lang-wrapper >}}
-
-#### Example filters
+Given an evaluation context with `country`, `tier`, `user_role`, and `account_age_days` attributes, you can build filters with different operators, such as equality, **is one of**, **is not**, or numeric comparisons:
 
 - `country` **is one of** `US`, `CA`
 - `tier` **equals** `premium`
 - `user_role` **is not** `guest`
 - `account_age_days` **greater than** `90`
-
-**Note**: Other SDKs follow the same pattern. See your platform's [client](/feature_flags/client/) or [server](/feature_flags/server/) SDK documentation for evaluation context setup.
 
 ## Rule hierarchy
 
@@ -155,3 +92,4 @@ Targeting rules are evaluated **in order** from top to bottom:
 
 [1]: /feature_flags/concepts/saved_filters/
 [2]: /feature_flags/concepts/targeting_attributes/
+[4]: /feature_flags/concepts/evaluation_context/
