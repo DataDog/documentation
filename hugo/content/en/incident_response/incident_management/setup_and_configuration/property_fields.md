@@ -70,7 +70,7 @@ If you mark a field as "Required at Declaration," users are required to enter a 
 
 ### Prompt user
 
-**Note**: This option is deprecated. Use [transition forms][14] to prompt responders for a field when an incident moves to a given status.
+**Note**: The "Prompt user" option is deprecated. To prompt responders for a field when an incident moves to a given status, use [transition forms][14] instead.
 
 Incident Management can be configured to prompt responders to set particular fields when changing the incident's state. To set this behavior for a field, edit the field's "Prompt user" option.
 
