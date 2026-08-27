@@ -67,7 +67,9 @@ After you enable enrichment:
 
 Canary analysis uses the retained sample of matching traces. If the retained volume is low, the canary waits until it has enough sampled subjects and events to make a decision. To increase the random retained sample, configure temporary trace retention for the canary. Temporary retention does not recover traces dropped before they reach Datadog.
 
-<!-- IMAGE PLACEHOLDER: Add a screenshot showing the APM metric creation flow for a canary guardrail. -->
+{{< img src="feature_flags/apm_canaries/apm-metric-create-flow-1.png" alt="Metric creation flow with APM Spans selected and supported APM guardrail metric types, including P90 span duration." style="width:90%;" >}}
+
+{{< img src="feature_flags/apm_canaries/apm-metric-create-flow-2.png" alt="APM metric creation flow with an APM span query and matching span preview." style="width:90%;" >}}
 
 ### Configure a canary rollout
 
@@ -78,7 +80,7 @@ Canary analysis uses the retained sample of matching traces. If the retained vol
 
 {{< img src="feature_flags/canary-rollout-config.png" alt="Canary rollout configuration showing rollout steps with guardrail metrics and a control variant." style="width:90%;" >}}
 
-<!-- IMAGE PLACEHOLDER: Replace or supplement the image above with the canary configuration that includes an APM guardrail and temporary trace retention. -->
+{{< img src="feature_flags/apm_canaries/apm-canary-metric-monitored-with-retention.png" alt="Canary configuration with a P90 span duration guardrail, abort action, temporary APM trace retention, and a control variant." style="width:90%;" >}}
 
 ## Best practices
 

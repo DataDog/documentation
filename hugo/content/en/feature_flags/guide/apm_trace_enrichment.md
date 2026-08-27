@@ -203,7 +203,7 @@ Canary rollouts support the following APM guardrail metrics:
 
 Canary analysis uses retained traces that match the APM metric query. A low retained-trace volume can delay a decision until enough sampled subjects and events are available. You can optionally configure temporary trace retention for the canary to increase the random retained sample.
 
-<!-- IMAGE PLACEHOLDER: Add a screenshot showing an APM metric selected as a canary guardrail. -->
+{{< img src="feature_flags/apm_canaries/apm-canary-metric-monitored-with-retention.png" alt="Canary configuration with a P90 span duration guardrail, abort action, temporary APM trace retention, and a control variant." style="width:90%;" >}}
 
 For setup instructions, see [Progressive Rollouts and Canaries][4].
 
