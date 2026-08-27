@@ -28,22 +28,22 @@
     "summary": "List all fleet tracers"
   },
   "ListLLMObsCustomEvalConfigs": {
-    "description": "List all custom LLM Observability evaluator configurations for the organization.",
+    "description": "List all custom Agent Observability evaluator configurations for the organization.",
     "summary": "List custom evaluator configurations"
   },
   "DeleteLLMObsCustomEvalConfig": {
-    "description": "Delete a custom LLM Observability evaluator configuration by its name.",
+    "description": "Delete a custom Agent Observability evaluator configuration by its name.",
     "summary": "Delete a custom evaluator configuration"
   },
   "GetLLMObsCustomEvalConfig": {
-    "description": "Retrieve a custom LLM Observability evaluator configuration by its name.",
+    "description": "Retrieve a custom Agent Observability evaluator configuration by its name.",
     "summary": "Get a custom evaluator configuration"
   },
   "UpdateLLMObsCustomEvalConfig": {
-    "description": "Create or update a custom LLM Observability evaluator configuration by its name.",
+    "description": "Create or update a custom Agent Observability evaluator configuration by its name.",
     "summary": "Create or update a custom evaluator configuration",
     "request_description": "Custom evaluator configuration payload.",
-    "request_schema_description": "Request to create or update a custom LLM Observability evaluator configuration."
+    "request_schema_description": "Request to create or update a custom Agent Observability evaluator configuration."
   },
   "ListDatastores": {
     "description": "Lists all datastores for the organization.",
@@ -1640,6 +1640,20 @@
     "request_description": "",
     "request_schema_description": "Wrapper for a DDSQL tabular query fetch request."
   },
+  "CreateDataDeletionRequest": {
+    "description": "Creates a data deletion request by providing a query and a timeframe targeting the proper data.",
+    "summary": "Creates a data deletion request",
+    "request_description": "",
+    "request_schema_description": "Object needed to create a data deletion request."
+  },
+  "GetDataDeletionRequests": {
+    "description": "Gets a list of data deletion requests based on several filter parameters.",
+    "summary": "Gets a list of data deletion requests"
+  },
+  "CancelDataDeletionRequest": {
+    "description": "Cancels a data deletion request by providing its ID.",
+    "summary": "Cancels a data deletion request"
+  },
   "ListDeploymentGates": {
     "description": "Returns a paginated list of all deployment gates for the organization.\nUse `page[cursor]` and `page[size]` query parameters to paginate through results.",
     "summary": "Get all deployment gates"
@@ -2103,6 +2117,34 @@
     "summary": "Update notification settings",
     "request_description": "",
     "request_schema_description": "A request to update the organization-wide governance notification settings."
+  },
+  "ListTagRules": {
+    "description": "Retrieve all tag rules for the organization. Optionally include disabled or deleted\nrules, filter by telemetry source, and include each rule's current compliance score\nvia the `include=score` query parameter.",
+    "summary": "List tag rules"
+  },
+  "CreateTagRule": {
+    "description": "Create a new tag rule for the organization. The caller's organization is derived from\nthe authenticated user; cross-organization creation is not supported. Fields such as\n`rule_id`, `version`, and the timestamp/audit fields are assigned by the server.",
+    "summary": "Create a tag rule",
+    "request_description": "",
+    "request_schema_description": "Payload for creating a new tag rule."
+  },
+  "DeleteTagRule": {
+    "description": "Delete a tag rule. By default the rule is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe rule permanently.",
+    "summary": "Delete a tag rule"
+  },
+  "GetTagRule": {
+    "description": "Retrieve a single tag rule by ID. Optionally include the rule's current compliance\nscore via the `include=score` query parameter. Rules belonging to other organizations\ncannot be retrieved.",
+    "summary": "Get a tag rule"
+  },
+  "UpdateTagRule": {
+    "description": "Update one or more attributes of an existing tag rule. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The rule's\n`source` cannot be changed after creation.",
+    "summary": "Update a tag rule",
+    "request_description": "",
+    "request_schema_description": "Payload for updating an existing tag rule. Only the supplied fields are modified."
+  },
+  "GetTagRuleScore": {
+    "description": "Retrieve the compliance score for a single tag rule. The score is computed over the\nrequested time window (or a source-appropriate default) and represents the percentage of\ntelemetry within that window that conforms to the rule. A `null` score indicates that\nno relevant telemetry was found.",
+    "summary": "Get a tag rule compliance score"
   },
   "GetHamrOrgConnection": {
     "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",
@@ -2595,6 +2637,54 @@
     "summary": "Update an incident timestamp override",
     "request_description": "Timestamp override patch payload.",
     "request_schema_description": "Request payload for patching a timestamp override."
+  },
+  "ListElasticCloudIntegrationAccounts": {
+    "description": "List Elastic Cloud integration accounts.",
+    "summary": "List Elastic Cloud integration accounts"
+  },
+  "CreateElasticCloudIntegrationAccount": {
+    "description": "Create an Elastic Cloud integration account.",
+    "summary": "Create an Elastic Cloud integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an Elastic Cloud integration account."
+  },
+  "DeleteElasticCloudIntegrationAccount": {
+    "description": "Delete an Elastic Cloud integration account.",
+    "summary": "Delete an Elastic Cloud integration account"
+  },
+  "GetElasticCloudIntegrationAccount": {
+    "description": "Get an Elastic Cloud integration account.",
+    "summary": "Get an Elastic Cloud integration account"
+  },
+  "UpdateElasticCloudIntegrationAccount": {
+    "description": "Update an Elastic Cloud integration account. Only the fields provided are changed.",
+    "summary": "Update an Elastic Cloud integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an Elastic Cloud integration account."
+  },
+  "ListTwilioIntegrationAccounts": {
+    "description": "List Twilio integration accounts.",
+    "summary": "List Twilio integration accounts"
+  },
+  "CreateTwilioIntegrationAccount": {
+    "description": "Create a Twilio integration account.",
+    "summary": "Create a Twilio integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Twilio integration account."
+  },
+  "DeleteTwilioIntegrationAccount": {
+    "description": "Delete a Twilio integration account.",
+    "summary": "Delete a Twilio integration account"
+  },
+  "GetTwilioIntegrationAccount": {
+    "description": "Get a Twilio integration account.",
+    "summary": "Get a Twilio integration account"
+  },
+  "UpdateTwilioIntegrationAccount": {
+    "description": "Update a Twilio integration account. Only the fields provided are changed.",
+    "summary": "Update a Twilio integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Twilio integration account."
   },
   "ListAWSAccounts": {
     "description": "Get a list of AWS Account Integration Configs.",
@@ -3257,23 +3347,23 @@
   },
   "ListLLMObsAnnotationQueues": {
     "description": "List annotation queues. Optionally filter by project ID or queue IDs. These parameters are mutually exclusive.\nIf neither is provided, all queues in the organization are returned.",
-    "summary": "List LLM Observability annotation queues"
+    "summary": "List Agent Observability annotation queues"
   },
   "CreateLLMObsAnnotationQueue": {
     "description": "Create an annotation queue. The `name` and `project_id` fields are required.\nAn optional `annotation_schema` can be provided to define the labels for the queue.\nFields such as `created_by`, `owned_by`, `created_at`, `modified_by`,\nand `modified_at` are inferred by the backend.",
-    "summary": "Create an LLM Observability annotation queue",
+    "summary": "Create an Agent Observability annotation queue",
     "request_description": "Create annotation queue payload.",
-    "request_schema_description": "Request to create an LLM Observability annotation queue."
+    "request_schema_description": "Request to create an Agent Observability annotation queue."
   },
   "DeleteLLMObsAnnotationQueue": {
     "description": "Delete an annotation queue by its ID.",
-    "summary": "Delete an LLM Observability annotation queue"
+    "summary": "Delete an Agent Observability annotation queue"
   },
   "UpdateLLMObsAnnotationQueue": {
     "description": "Partially update an annotation queue. The `name`, `description`, and `annotation_schema` fields can be updated.",
-    "summary": "Update an LLM Observability annotation queue",
+    "summary": "Update an Agent Observability annotation queue",
     "request_description": "Update annotation queue payload.",
-    "request_schema_description": "Request to update an LLM Observability annotation queue."
+    "request_schema_description": "Request to update an Agent Observability annotation queue."
   },
   "GetLLMObsAnnotatedInteractions": {
     "description": "Retrieve all interactions (traces and sessions) and their annotations for a given annotation queue.",
@@ -3295,13 +3385,13 @@
     "description": "Add one or more interactions to an annotation queue. At least one\ninteraction must be provided. Each interaction has a `type`:\n\n- `trace`, `experiment_trace`, `session`: `content_id` references the\n  upstream entity; the server fetches the actual content.\n- `display_block`: omit `content_id` and provide the rendered content\n  in `display_block`. The server generates `content_id` as a\n  deterministic hash of the block list.\n\nItems of different types can be mixed in a single request.",
     "summary": "Add annotation queue interactions",
     "request_description": "Add interactions payload.",
-    "request_schema_description": "Request to add interactions to an LLM Observability annotation queue."
+    "request_schema_description": "Request to add interactions to an Agent Observability annotation queue."
   },
   "DeleteLLMObsAnnotationQueueInteractions": {
     "description": "Delete one or more interactions from an annotation queue.",
     "summary": "Delete annotation queue interactions",
     "request_description": "Delete interactions payload.",
-    "request_schema_description": "Request to delete interactions from an LLM Observability annotation queue."
+    "request_schema_description": "Request to delete interactions from an Agent Observability annotation queue."
   },
   "GetLLMObsAnnotationQueueLabelSchema": {
     "description": "Retrieve the label schema for a given annotation queue.",
@@ -3314,54 +3404,54 @@
     "request_schema_description": "Request to update the label schema of an annotation queue."
   },
   "AggregateLLMObsExperimentation": {
-    "description": "Execute an analytics aggregation over LLM Observability experimentation data.\nUse this endpoint to compute metrics (for example average eval scores) grouped by fields such as `span_id` or `experiment_id`.\n\nAt least one `compute` definition and one `index` must be provided.",
-    "summary": "Aggregate LLM Observability experimentation",
+    "description": "Execute an analytics aggregation over Agent Observability experimentation data.\nUse this endpoint to compute metrics (for example average eval scores) grouped by fields such as `span_id` or `experiment_id`.\n\nAt least one `compute` definition and one `index` must be provided.",
+    "summary": "Aggregate Agent Observability experimentation",
     "request_description": "Analytics payload.",
-    "request_schema_description": "Request to run an analytics aggregation over LLM Observability experimentation data."
+    "request_schema_description": "Request to run an analytics aggregation over Agent Observability experimentation data."
   },
   "SearchLLMObsExperimentation": {
-    "description": "Search across LLM Observability experimentation entities — projects, datasets, dataset records, experiments, and experiment runs — using cursor-based pagination.\n\nThe `filter.scope` field controls which entity types are returned. At least one valid scope must be provided.\n\nReturns `200 OK` when all results fit in a single page. Returns `206 Partial Content` with a cursor in `meta.after` when additional pages are available.",
-    "summary": "Search LLM Observability experimentation entities",
+    "description": "Search across Agent Observability experimentation entities — projects, datasets, dataset records, experiments, and experiment runs — using cursor-based pagination.\n\nThe `filter.scope` field controls which entity types are returned. At least one valid scope must be provided.\n\nReturns `200 OK` when all results fit in a single page. Returns `206 Partial Content` with a cursor in `meta.after` when additional pages are available.",
+    "summary": "Search Agent Observability experimentation",
     "request_description": "Experimentation search payload.",
-    "request_schema_description": "Request to search across LLM Observability experimentation entities using cursor-based pagination."
+    "request_schema_description": "Request to search across Agent Observability experimentation entities using cursor-based pagination."
   },
   "SimpleSearchLLMObsExperimentation": {
-    "description": "Search across LLM Observability experimentation entities using offset-based (page-number) pagination.\nUse this endpoint when you need total page count or want to navigate to a specific page number.\n\nThe `filter.scope` field controls which entity types are returned. At least one valid scope must be provided.",
+    "description": "Search across Agent Observability experimentation entities using offset-based (page-number) pagination.\nUse this endpoint when you need total page count or want to navigate to a specific page number.\n\nThe `filter.scope` field controls which entity types are returned. At least one valid scope must be provided.",
     "summary": "Simple search experimentation entities",
     "request_description": "Simple search payload.",
-    "request_schema_description": "Request to search across LLM Observability experimentation entities using offset-based pagination."
+    "request_schema_description": "Request to search across Agent Observability experimentation entities using offset-based pagination."
   },
   "ListLLMObsExperiments": {
-    "description": "List all LLM Observability experiments sorted by creation date, newest first.",
-    "summary": "List LLM Observability experiments"
+    "description": "List all Agent Observability experiments sorted by creation date, newest first.",
+    "summary": "List Agent Observability experiments"
   },
   "CreateLLMObsExperiment": {
-    "description": "Create a new LLM Observability experiment.",
-    "summary": "Create an LLM Observability experiment",
+    "description": "Create a new Agent Observability experiment.",
+    "summary": "Create an Agent Observability experiment",
     "request_description": "Create experiment payload.",
-    "request_schema_description": "Request to create an LLM Observability experiment."
+    "request_schema_description": "Request to create an Agent Observability experiment."
   },
   "DeleteLLMObsExperiments": {
-    "description": "Delete one or more LLM Observability experiments.",
-    "summary": "Delete LLM Observability experiments",
+    "description": "Delete one or more Agent Observability experiments.",
+    "summary": "Delete Agent Observability experiments",
     "request_description": "Delete experiments payload.",
-    "request_schema_description": "Request to delete one or more LLM Observability experiments."
+    "request_schema_description": "Request to delete one or more Agent Observability experiments."
   },
   "UpdateLLMObsExperiment": {
-    "description": "Partially update an existing LLM Observability experiment.",
-    "summary": "Update an LLM Observability experiment",
+    "description": "Partially update an existing Agent Observability experiment.",
+    "summary": "Update an Agent Observability experiment",
     "request_description": "Update experiment payload.",
-    "request_schema_description": "Request to partially update an LLM Observability experiment."
+    "request_schema_description": "Request to partially update an Agent Observability experiment."
   },
   "ListLLMObsExperimentEventsV1": {
     "description": "Retrieve spans with their evaluation metrics for a given experiment. Returns spans only, with no summary metrics and no pagination. Deprecated in favor of `ListLLMObsExperimentEventsV3`.",
-    "summary": "List LLM Observability experiment spans (v1)"
+    "summary": "List Agent Observability experiment spans (v1)"
   },
   "CreateLLMObsExperimentEvents": {
-    "description": "Push spans and metrics for an LLM Observability experiment.",
-    "summary": "Push events for an LLM Observability experiment",
+    "description": "Push spans and metrics for an Agent Observability experiment.",
+    "summary": "Push events for an Agent Observability experiment",
     "request_description": "Experiment events payload.",
-    "request_schema_description": "Request to push spans and metrics for an LLM Observability experiment."
+    "request_schema_description": "Request to push spans and metrics for an Agent Observability experiment."
   },
   "ListLLMObsIntegrationAccounts": {
     "description": "Retrieve the list of configured accounts for the specified LLM provider integration.",
@@ -3378,80 +3468,80 @@
     "summary": "List LLM integration models"
   },
   "ListLLMObsProjects": {
-    "description": "List all LLM Observability projects sorted by creation date, newest first.",
-    "summary": "List LLM Observability projects"
+    "description": "List all Agent Observability projects sorted by creation date, newest first.",
+    "summary": "List Agent Observability projects"
   },
   "CreateLLMObsProject": {
-    "description": "Create a new LLM Observability project. Returns the existing project if a name conflict occurs.",
-    "summary": "Create an LLM Observability project",
+    "description": "Create a new Agent Observability project. Returns the existing project if a name conflict occurs.",
+    "summary": "Create an Agent Observability project",
     "request_description": "Create project payload.",
-    "request_schema_description": "Request to create an LLM Observability project."
+    "request_schema_description": "Request to create an Agent Observability project."
   },
   "DeleteLLMObsProjects": {
-    "description": "Delete one or more LLM Observability projects.",
-    "summary": "Delete LLM Observability projects",
+    "description": "Delete one or more Agent Observability projects.",
+    "summary": "Delete Agent Observability projects",
     "request_description": "Delete projects payload.",
-    "request_schema_description": "Request to delete one or more LLM Observability projects."
+    "request_schema_description": "Request to delete one or more Agent Observability projects."
   },
   "UpdateLLMObsProject": {
-    "description": "Partially update an existing LLM Observability project.",
-    "summary": "Update an LLM Observability project",
+    "description": "Partially update an existing Agent Observability project.",
+    "summary": "Update an Agent Observability project",
     "request_description": "Update project payload.",
-    "request_schema_description": "Request to partially update an LLM Observability project."
+    "request_schema_description": "Request to partially update an Agent Observability project."
   },
   "ListLLMObsPrompts": {
-    "description": "List all LLM Observability prompts in the prompt registry for the organization.",
-    "summary": "List LLM Observability prompts"
+    "description": "List all Agent Observability prompts in the prompt registry for the organization.",
+    "summary": "List Agent Observability prompts"
   },
   "CreateLLMObsPrompt": {
-    "description": "Create a new prompt (and its first version) in the LLM Observability prompt registry.",
-    "summary": "Create an LLM Observability prompt",
+    "description": "Create a new prompt (and its first version) in the Agent Observability prompt registry.",
+    "summary": "Create an Agent Observability prompt",
     "request_description": "Create prompt payload.",
-    "request_schema_description": "Request to create an LLM Observability prompt."
+    "request_schema_description": "Request to create an Agent Observability prompt."
   },
   "DeleteLLMObsPrompt": {
-    "description": "Soft-delete an LLM Observability prompt. The prompt's version rows are retained, but they are no longer accessible through the public prompt registry endpoints.",
-    "summary": "Delete an LLM Observability prompt"
+    "description": "Soft-delete an Agent Observability prompt. The prompt's version rows are retained, but they are no longer accessible through the public prompt registry endpoints.",
+    "summary": "Delete an Agent Observability prompt"
   },
   "GetLLMObsPrompt": {
-    "description": "Get the latest version of an LLM Observability prompt by prompt ID.",
-    "summary": "Get an LLM Observability prompt"
+    "description": "Get the latest version of an Agent Observability prompt by prompt ID.",
+    "summary": "Get an Agent Observability prompt"
   },
   "UpdateLLMObsPrompt": {
-    "description": "Update the title, the description, or both, for an LLM Observability prompt.",
-    "summary": "Update an LLM Observability prompt",
+    "description": "Update the title, the description, or both, for an Agent Observability prompt.",
+    "summary": "Update an Agent Observability prompt",
     "request_description": "Update prompt payload.",
-    "request_schema_description": "Request to update an LLM Observability prompt's metadata."
+    "request_schema_description": "Request to update an Agent Observability prompt's metadata."
   },
   "ListLLMObsPromptVersions": {
-    "description": "List all versions of an LLM Observability prompt, ordered newest to oldest. If the prompt does not exist, is not registered, or is archived, the response contains an empty list.",
-    "summary": "List versions of an LLM Observability prompt"
+    "description": "List all versions of an Agent Observability prompt, ordered newest to oldest. If the prompt does not exist, is not registered, or is archived, the response contains an empty list.",
+    "summary": "List versions of an Agent Observability prompt"
   },
   "CreateLLMObsPromptVersion": {
-    "description": "Create a new version of an existing LLM Observability prompt.",
-    "summary": "Create a new LLM Observability prompt version",
+    "description": "Create a new version of an existing Agent Observability prompt.",
+    "summary": "Create a new Agent Observability prompt version",
     "request_description": "Create prompt version payload.",
-    "request_schema_description": "Request to create a new version of an LLM Observability prompt."
+    "request_schema_description": "Request to create a new version of an Agent Observability prompt."
   },
   "GetLLMObsPromptVersion": {
-    "description": "Get the full template of a single, specific version of an LLM Observability prompt.",
-    "summary": "Get a specific LLM Observability prompt version"
+    "description": "Get the full template of a single, specific version of an Agent Observability prompt.",
+    "summary": "Get a specific Agent Observability prompt version"
   },
   "UpdateLLMObsPromptVersion": {
-    "description": "Update the description, the feature-flag environments, or both, for a specific version of an LLM Observability prompt.",
-    "summary": "Update a specific LLM Observability prompt version",
+    "description": "Update the description, the feature-flag environments, or both, for a specific version of an Agent Observability prompt.",
+    "summary": "Update an Agent Observability prompt version",
     "request_description": "Update prompt version payload.",
-    "request_schema_description": "Request to update an LLM Observability prompt version's metadata or feature-flag environments."
+    "request_schema_description": "Request to update an Agent Observability prompt version's metadata or feature-flag environments."
   },
   "ListLLMObsSpans": {
-    "description": "List LLM Observability spans matching the specified filters.",
-    "summary": "List LLM Observability spans"
+    "description": "List Agent Observability spans matching the specified filters.",
+    "summary": "List Agent Observability spans"
   },
   "SearchLLMObsSpans": {
-    "description": "Search LLM Observability spans using structured filters in the request body.",
-    "summary": "Search LLM Observability spans",
+    "description": "Search Agent Observability spans using structured filters in the request body.",
+    "summary": "Search Agent Observability spans",
     "request_description": "Search spans payload.",
-    "request_schema_description": "Request body for searching LLM Observability spans."
+    "request_schema_description": "Request body for searching Agent Observability spans."
   },
   "ListLLMObsPatternsClusteredPoints": {
     "description": "List the data points grouped into a topic. For a parent topic, points from all\nof its leaf topics are returned.",
@@ -3465,7 +3555,7 @@
     "description": "Create a new patterns configuration, or update an existing one when a configuration ID is provided.",
     "summary": "Create or update a patterns configuration",
     "request_description": "Patterns configuration payload.",
-    "request_schema_description": "Request to create or update an LLM Observability patterns configuration."
+    "request_schema_description": "Request to create or update an Agent Observability patterns configuration."
   },
   "GetLLMObsPatternsConfig": {
     "description": "Retrieve the patterns configuration for the organization.",
@@ -3483,7 +3573,7 @@
     "description": "Start a patterns run for a given configuration. The run executes asynchronously.",
     "summary": "Trigger a patterns run",
     "request_description": "Trigger patterns payload.",
-    "request_schema_description": "Request to trigger an LLM Observability patterns run."
+    "request_schema_description": "Request to trigger an Agent Observability patterns run."
   },
   "GetLLMObsPatternsRunStatus": {
     "description": "Retrieve the status and step-by-step progress of the current or most recent\npatterns run for a configuration.",
@@ -3498,100 +3588,100 @@
     "summary": "List patterns topics with clustered points"
   },
   "ListLLMObsDatasets": {
-    "description": "List all LLM Observability datasets for a project, sorted by creation date, newest first.",
-    "summary": "List LLM Observability datasets"
+    "description": "List all Agent Observability datasets for a project, sorted by creation date, newest first.",
+    "summary": "List Agent Observability datasets"
   },
   "CreateLLMObsDataset": {
-    "description": "Create a new LLM Observability dataset within the specified project.",
-    "summary": "Create an LLM Observability dataset",
+    "description": "Create a new Agent Observability dataset within the specified project.",
+    "summary": "Create an Agent Observability dataset",
     "request_description": "Create dataset payload.",
-    "request_schema_description": "Request to create an LLM Observability dataset."
+    "request_schema_description": "Request to create an Agent Observability dataset."
   },
   "DeleteLLMObsDatasets": {
-    "description": "Delete one or more LLM Observability datasets within the specified project.",
-    "summary": "Delete LLM Observability datasets",
+    "description": "Delete one or more Agent Observability datasets within the specified project.",
+    "summary": "Delete Agent Observability datasets",
     "request_description": "Delete datasets payload.",
-    "request_schema_description": "Request to delete one or more LLM Observability datasets."
+    "request_schema_description": "Request to delete one or more Agent Observability datasets."
   },
   "UpdateLLMObsDataset": {
-    "description": "Partially update an existing LLM Observability dataset within the specified project.",
-    "summary": "Update an LLM Observability dataset",
+    "description": "Partially update an existing Agent Observability dataset within the specified project.",
+    "summary": "Update an Agent Observability dataset",
     "request_description": "Update dataset payload.",
-    "request_schema_description": "Request to partially update an LLM Observability dataset."
+    "request_schema_description": "Request to partially update an Agent Observability dataset."
   },
   "BatchUpdateLLMObsDataset": {
     "description": "Insert, update, and delete records in a single dataset operation. By default, a new dataset version is created when the batch is applied.",
-    "summary": "Batch update LLM Observability dataset records",
+    "summary": "Batch update Agent Observability dataset records",
     "request_description": "Batch update payload.",
-    "request_schema_description": "Request to batch-insert, update, and delete records in an LLM Observability dataset."
+    "request_schema_description": "Request to batch-insert, update, and delete records in an Agent Observability dataset."
   },
   "CloneLLMObsDataset": {
     "description": "Clone a dataset, copying its current records into a new dataset within the same project.",
-    "summary": "Clone an LLM Observability dataset",
+    "summary": "Clone an Agent Observability dataset",
     "request_description": "Clone dataset payload.",
-    "request_schema_description": "Request to clone an LLM Observability dataset."
+    "request_schema_description": "Request to clone an Agent Observability dataset."
   },
   "GetLLMObsDatasetDraftState": {
     "description": "Retrieve the draft state of a dataset, including whether it is currently locked for editing and which user holds the lock.",
-    "summary": "Get LLM Observability dataset draft state"
+    "summary": "Get Agent Observability dataset draft state"
   },
   "LockLLMObsDatasetDraftState": {
     "description": "Acquire the draft lock on a dataset for the calling user. The lock prevents other users from concurrently editing the dataset draft.",
-    "summary": "Lock LLM Observability dataset draft state"
+    "summary": "Lock Agent Observability dataset draft state"
   },
   "UnlockLLMObsDatasetDraftState": {
     "description": "Release the draft lock on a dataset held by the calling user, allowing other users to edit the dataset draft.",
-    "summary": "Unlock LLM Observability dataset draft state"
+    "summary": "Unlock Agent Observability dataset draft state"
   },
   "ExportLLMObsDataset": {
     "description": "Download the contents of a dataset as a CSV file. The download is streamed and includes one row per dataset record.",
-    "summary": "Export an LLM Observability dataset"
+    "summary": "Export an Agent Observability dataset"
   },
   "ListLLMObsDatasetRecords": {
-    "description": "List all records in an LLM Observability dataset, sorted by creation date, newest first.",
-    "summary": "List LLM Observability dataset records"
+    "description": "List all records in an Agent Observability dataset, sorted by creation date, newest first.",
+    "summary": "List Agent Observability dataset records"
   },
   "UpdateLLMObsDatasetRecords": {
-    "description": "Update one or more existing records in an LLM Observability dataset.",
-    "summary": "Update LLM Observability dataset records",
+    "description": "Update one or more existing records in an Agent Observability dataset.",
+    "summary": "Update Agent Observability dataset records",
     "request_description": "Update records payload.",
-    "request_schema_description": "Request to update records in an LLM Observability dataset."
+    "request_schema_description": "Request to update records in an Agent Observability dataset."
   },
   "CreateLLMObsDatasetRecords": {
-    "description": "Append one or more records to an LLM Observability dataset.",
-    "summary": "Append records to an LLM Observability dataset",
+    "description": "Append one or more records to an Agent Observability dataset.",
+    "summary": "Append records to an Agent Observability dataset",
     "request_description": "Append records payload.",
-    "request_schema_description": "Request to append records to an LLM Observability dataset."
+    "request_schema_description": "Request to append records to an Agent Observability dataset."
   },
   "DeleteLLMObsDatasetRecords": {
-    "description": "Delete one or more records from an LLM Observability dataset.",
-    "summary": "Delete LLM Observability dataset records",
+    "description": "Delete one or more records from an Agent Observability dataset.",
+    "summary": "Delete Agent Observability dataset records",
     "request_description": "Delete records payload.",
-    "request_schema_description": "Request to delete records from an LLM Observability dataset."
+    "request_schema_description": "Request to delete records from an Agent Observability dataset."
   },
   "RestoreLLMObsDatasetVersion": {
     "description": "Restore a dataset to a previous version. The dataset's current version is bumped, and its records are replaced with the records from the specified prior version.",
-    "summary": "Restore an LLM Observability dataset version",
+    "summary": "Restore an Agent Observability dataset version",
     "request_description": "Restore dataset version payload.",
-    "request_schema_description": "Request to restore an LLM Observability dataset to a previous version."
+    "request_schema_description": "Request to restore an Agent Observability dataset to a previous version."
   },
   "ListLLMObsDatasetVersions": {
     "description": "List the active versions of a dataset. A version is created each time a dataset is referenced by an experiment run.",
-    "summary": "List LLM Observability dataset versions"
+    "summary": "List Agent Observability dataset versions"
   },
   "ListLLMObsExperimentEventsV2": {
     "description": "Retrieve spans and experiment-level summary metrics for a given experiment. Returns the full events payload without pagination. Deprecated: use `ListLLMObsExperimentEventsV3` instead.",
-    "summary": "List LLM Observability experiment events (v2)"
+    "summary": "List Agent Observability experiment events (v2)"
   },
   "UploadLLMObsDatasetRecordsFile": {
     "description": "Upload records to a dataset from a file. The request is a `multipart/form-data` upload containing a single `file` part.\nCurrently only CSV is supported. The CSV must include an `input` column. Optional columns are `id`, `expected_output`, `metadata`, and `tags`.\n\nThe response is a Server-Sent Events stream (`text/event-stream`) emitting progress updates while records are processed. The stream emits the following named events:\n  - `progress`: incremental record counts written so far.\n  - `completed`: terminal event with a JSON body containing `records_created`.\n  - `error`: terminal event with a JSON body containing an error `message`.",
-    "summary": "Upload records to an LLM Observability dataset",
+    "summary": "Upload records to an Agent Observability dataset",
     "request_description": "Multipart upload payload containing the records file.",
     "request_schema_description": "Multipart payload for uploading dataset records from a file."
   },
   "ListLLMObsExperimentEvents": {
     "description": "Retrieve spans and experiment-level summary metrics for a given experiment with cursor-based pagination.",
-    "summary": "List events for an LLM Observability experiment"
+    "summary": "List events for an Agent Observability experiment"
   },
   "UpdateLoginOrgConfigsMaxSessionDuration": {
     "description": "Update the maximum session duration for the current organization.\nThe duration is specified in seconds.",
@@ -4549,6 +4639,12 @@
     "request_description": "",
     "request_schema_description": "Request body for querying accounts with optional filtering, column selection, and sorting."
   },
+  "QueryProductAnalyticsList": {
+    "description": "List the individual event records matching an analytics query.\nUse `columns` to choose the attributes returned on each row, `sort` to order the rows,\nand `limit` to cap how many are returned.",
+    "summary": "List analytics events",
+    "request_description": "",
+    "request_schema_description": "Request for listing the individual event records matching an analytics query."
+  },
   "QueryProductAnalyticsScalar": {
     "description": "Compute scalar analytics results for Product Analytics data.\nReturns aggregated values (counts, averages, percentiles) optionally grouped by facets.",
     "summary": "Compute scalar analytics",
@@ -4560,6 +4656,60 @@
     "summary": "Compute timeseries analytics",
     "request_description": "",
     "request_schema_description": "Request for computing analytics results (scalar or timeseries)."
+  },
+  "QueryProductAnalyticsJourneyFunnel": {
+    "description": "Compute a funnel over an ordered sequence of Product Analytics events.\nReturns the per-step conversion counts, conversion rates, and elapsed times,\noptionally segmented by group-by facets.",
+    "summary": "Compute journey funnel analysis",
+    "request_description": "",
+    "request_schema_description": "Request body for a journey funnel analysis."
+  },
+  "QueryProductAnalyticsJourneyList": {
+    "description": "Return the individual sessions that reached, or dropped off at, a given step of the journey.\nEach row contains the identity join key, the event timestamp, and the columns requested\nin `entity_columns`.",
+    "summary": "List journey entities",
+    "request_description": "",
+    "request_schema_description": "Request body for a journey list query."
+  },
+  "QueryProductAnalyticsJourneyScalar": {
+    "description": "Compute scalar results for a journey query, such as the conversion count,\nthe conversion rate, or the time to convert, optionally segmented by group-by facets.",
+    "summary": "Compute journey scalar analytics",
+    "request_description": "",
+    "request_schema_description": "Request body for a journey scalar query."
+  },
+  "QueryProductAnalyticsJourneyTimeseries": {
+    "description": "Compute timeseries results for a journey query.\nReturns one series per group-by combination, bucketed by the requested interval.",
+    "summary": "Compute journey timeseries analytics",
+    "request_description": "",
+    "request_schema_description": "Request body for a journey timeseries query."
+  },
+  "QueryProductAnalyticsRetentionGrid": {
+    "description": "Compute a retention grid, showing how much of each cohort came back over each subsequent period.\nRows are cohorts, columns are return periods, and each cell holds the count and rate of entities that returned.",
+    "summary": "Compute a retention grid",
+    "request_description": "The retention grid query.",
+    "request_schema_description": "Request body for a retention grid query."
+  },
+  "QueryProductAnalyticsRetentionList": {
+    "description": "List the individual users or accounts counted in one cell of the retention grid.\nSet `computation_scope` to the cohort and return period you want to examine.",
+    "summary": "List the entities behind a retention cell",
+    "request_description": "The retention list query.",
+    "request_schema_description": "Request body listing the individual entities behind one cell of the retention grid."
+  },
+  "QueryProductAnalyticsRetentionScalar": {
+    "description": "Compute retention as a single value per group, suitable for a query value or top list widget.",
+    "summary": "Compute retention scalar values",
+    "request_description": "The retention scalar query.",
+    "request_schema_description": "Request body for a retention scalar or retention timeseries query."
+  },
+  "QueryProductAnalyticsRetentionTimeseries": {
+    "description": "Compute retention as a series of values over time, using the same query definition as the\nretention grid.",
+    "summary": "Compute retention timeseries",
+    "request_description": "The retention timeseries query.",
+    "request_schema_description": "Request body for a retention scalar or retention timeseries query."
+  },
+  "QueryProductAnalyticsSankey": {
+    "description": "Compute a Sankey diagram of how sessions flow between the values of two facets,\nshowing where users continue and where they drop off at each step.",
+    "summary": "Compute a Sankey diagram",
+    "request_description": "The Sankey diagram query.",
+    "request_schema_description": "Request body for a Sankey diagram query."
   },
   "QueryEventFilteredUsers": {
     "description": "Query users filtered by both user properties and event platform data",
@@ -4614,7 +4764,7 @@
     "request_schema_description": "A wrapper request around one scalar query to be executed."
   },
   "QueryTimeseriesData": {
-    "description": "Query timeseries data across various data sources and\nprocess the data by applying formulas and functions.",
+    "description": "Query timeseries data across various data sources and\nprocess the data by applying formulas and functions. Datadog recommends\nusing this endpoint over the v1 `/api/v1/query` endpoint for querying\ntimeseries data.",
     "summary": "Query timeseries data across multiple products",
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
@@ -4985,6 +5135,30 @@
     "request_description": "The definition of the new RUM retention filter.",
     "request_schema_description": "The RUM retention filter body to create."
   },
+  "ListExclusionFilters": {
+    "description": "Get the list of exclusion filters for a RUM application.\nThe built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`) is always returned first.",
+    "summary": "Get all RUM exclusion filters"
+  },
+  "CreateExclusionFilter": {
+    "description": "Create an exclusion filter for a RUM application.\nReturns the created exclusion filter when the request is successful.",
+    "summary": "Create a RUM exclusion filter",
+    "request_description": "The definition of the new RUM exclusion filter.",
+    "request_schema_description": "The exclusion filter body to create."
+  },
+  "DeleteExclusionFilter": {
+    "description": "Delete an exclusion filter for a RUM application.\nThe built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`) cannot be deleted;\nattempting to do so returns a `405 Method Not Allowed` response.",
+    "summary": "Delete a RUM exclusion filter"
+  },
+  "GetExclusionFilter": {
+    "description": "Get a single exclusion filter for a RUM application.",
+    "summary": "Get a RUM exclusion filter"
+  },
+  "UpdateExclusionFilter": {
+    "description": "Update an exclusion filter for a RUM application.\nFor the built-in Error Tracking exclusion filter (`error_tracking_exclusion_filter`), only `enabled` can be\nupdated; `name`, `event_type`, and `query` must be omitted.\nReturns the updated exclusion filter when the request is successful.",
+    "summary": "Update a RUM exclusion filter",
+    "request_description": "New definition of the RUM exclusion filter.",
+    "request_schema_description": "The exclusion filter body to update."
+  },
   "ListPermanentRetentionFilters": {
     "description": "Get the list of permanent RUM retention filters for a RUM application.\nPermanent retention filters are predefined filters that cannot be created or deleted.\nFor each filter, the `editability` block indicates which cross-product fields can be updated.",
     "summary": "Get all permanent RUM retention filters"
@@ -5066,6 +5240,48 @@
     "summary": "Update a RUM-based metric",
     "request_description": "New definition of the RUM-based metric.",
     "request_schema_description": "The new RUM-based metric body."
+  },
+  "DeleteRumQuotaConfig": {
+    "description": "Delete the RUM retention quota configuration for a given scope.",
+    "summary": "Delete a RUM retention quota configuration"
+  },
+  "GetRumQuotaConfig": {
+    "description": "Get the RUM retention quota configuration for a given scope.",
+    "summary": "Get a RUM retention quota configuration"
+  },
+  "UpsertRumQuotaConfig": {
+    "description": "Create or update the RUM retention quota configuration for a given scope.\nReturns the retention quota configuration object when the request is successful.",
+    "summary": "Create or update a RUM retention quota config",
+    "request_description": "The definition of the RUM retention quota configuration to create or update.",
+    "request_schema_description": "The body of a request to create or update a RUM retention quota configuration."
+  },
+  "ListTeamsOwnershipMappings": {
+    "description": "Get the list of teams ownership mappings for your organization, optionally filtered.",
+    "summary": "List teams ownership mappings"
+  },
+  "CreateTeamsOwnershipMapping": {
+    "description": "Create a teams ownership mapping for your organization.\nReturns the teams ownership mapping object from the request body when the request is successful.",
+    "summary": "Create a teams ownership mapping",
+    "request_description": "The definition of the teams ownership mapping to create.",
+    "request_schema_description": "The request body for creating a teams ownership mapping."
+  },
+  "CreateTeamsOwnershipMappingsBatch": {
+    "description": "Add and remove teams ownership mappings for your organization in a single atomic request, following\nthe JSON:API [atomic operations extension](https://jsonapi.org/ext/atomic/).\nOperations are applied together: if any operation is invalid, none of the operations are applied.\nAdd operations are processed before remove operations, so results may not appear in the same\norder as the request.",
+    "summary": "Bulk create and remove teams ownership mappings",
+    "request_description": "The list of add and remove operations to apply atomically.",
+    "request_schema_description": "The request body for bulk-creating and bulk-removing teams ownership mappings."
+  },
+  "DeleteTeamsOwnershipMapping": {
+    "description": "Delete a specific teams ownership mapping from your organization.",
+    "summary": "Delete a teams ownership mapping"
+  },
+  "GetTeamsOwnershipMapping": {
+    "description": "Get a specific teams ownership mapping from your organization.",
+    "summary": "Get a teams ownership mapping"
+  },
+  "ListTeamsOwnershipRules": {
+    "description": "Get the list of teams ownership rules for your organization, optionally filtered.\nRules group the underlying mappings by `view_name`, `application_id`, `service`, and `match_type`,\ncollapsing every team that owns the same view into a single entry.",
+    "summary": "List teams ownership rules"
   },
   "ListRUMEvents": {
     "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
@@ -5472,6 +5688,36 @@
     "summary": "Update a mute rule",
     "request_description": "",
     "request_schema_description": "The body of a mute rule update request."
+  },
+  "ListSecurityFindingsAutomationSeverityModifierRules": {
+    "description": "Get all severity modifier rules for the current organization.",
+    "summary": "Get all severity modifier rules"
+  },
+  "CreateSecurityFindingsAutomationSeverityModifierRule": {
+    "description": "Create a new severity modifier rule for the current organization.",
+    "summary": "Create a severity modifier rule",
+    "request_description": "",
+    "request_schema_description": "The body of a severity modifier rule create request."
+  },
+  "ReorderSecurityFindingsAutomationSeverityModifierRules": {
+    "description": "Reorder the list of severity modifier rules for the current organization.",
+    "summary": "Reorder severity modifier rules",
+    "request_description": "",
+    "request_schema_description": "The body of a severity modifier rule reorder request."
+  },
+  "DeleteSecurityFindingsAutomationSeverityModifierRule": {
+    "description": "Delete an existing severity modifier rule by ID.",
+    "summary": "Delete a severity modifier rule"
+  },
+  "GetSecurityFindingsAutomationSeverityModifierRule": {
+    "description": "Get the details of a severity modifier rule by ID.",
+    "summary": "Get a severity modifier rule"
+  },
+  "UpdateSecurityFindingsAutomationSeverityModifierRule": {
+    "description": "Update an existing severity modifier rule by ID.",
+    "summary": "Update a severity modifier rule",
+    "request_description": "",
+    "request_schema_description": "The body of a severity modifier rule update request."
   },
   "ListSecurityFindingsAutomationTicketCreationRules": {
     "description": "Get all ticket creation rules for the current organization.",
@@ -6858,34 +7104,6 @@
     "summary": "Patch a global variable",
     "request_description": "JSON Patch document with operations to apply.",
     "request_schema_description": "JSON Patch request for global variable."
-  },
-  "ListTagPolicies": {
-    "description": "Retrieve all tag policies for the organization. Optionally include disabled or deleted\npolicies, filter by telemetry source, and include each policy's current compliance score\nvia the `include=score` query parameter.",
-    "summary": "List tag policies"
-  },
-  "CreateTagPolicy": {
-    "description": "Create a new tag policy for the organization. The caller's organization is derived from\nthe authenticated user; cross-organization creation is not supported. Fields such as\n`policy_id`, `version`, and the timestamp/audit fields are assigned by the server.",
-    "summary": "Create a tag policy",
-    "request_description": "",
-    "request_schema_description": "Payload for creating a new tag policy."
-  },
-  "DeleteTagPolicy": {
-    "description": "Delete a tag policy. By default the policy is soft-deleted so it can be recovered later\nand so that historical score data remains queryable. Pass `hard_delete=true` to remove\nthe policy permanently.",
-    "summary": "Delete a tag policy"
-  },
-  "GetTagPolicy": {
-    "description": "Retrieve a single tag policy by ID. Optionally include the policy's current compliance\nscore via the `include=score` query parameter. Policies belonging to other organizations\ncannot be retrieved.",
-    "summary": "Get a tag policy"
-  },
-  "UpdateTagPolicy": {
-    "description": "Update one or more attributes of an existing tag policy. Only the fields supplied in the\nrequest body are modified; omitted fields retain their current values. The policy's\n`source` cannot be changed after creation.",
-    "summary": "Update a tag policy",
-    "request_description": "",
-    "request_schema_description": "Payload for updating an existing tag policy. Only the supplied fields are modified."
-  },
-  "GetTagPolicyScore": {
-    "description": "Retrieve the compliance score for a single tag policy. The score is computed over the\nrequested time window (or a source-appropriate default) and represents the percentage of\ntelemetry within that window that conforms to the policy. A `null` score indicates that\nno relevant telemetry was found.",
-    "summary": "Get a tag policy compliance score"
   },
   "ListTagPipelinesRulesets": {
     "description": "List all tag pipeline rulesets - Retrieve a list of all tag pipeline rulesets for the organization",
