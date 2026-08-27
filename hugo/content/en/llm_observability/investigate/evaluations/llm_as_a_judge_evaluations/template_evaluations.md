@@ -21,6 +21,7 @@ aliases:
   - /llm_observability/evaluations/managed_evaluations/session_level_evaluations
   - /llm_observability/configure/evaluations/managed_evaluations/session_level_evaluations
   - /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations/
+  - /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations/
 ---
 
 Datadog provides LLM-as-a-judge templates for the following evaluations: [Failure to Answer][16], [Goal Completeness][22], [Hallucination][25], [Prompt Injection][14], [Sentiment][12], [Tool Argument Correctness][23], [Tool Selection][24], [Topic Relevancy][15], and [Toxicity][13]. After you select a template, you can modify any aspect of the evaluation. 
@@ -398,18 +399,18 @@ result = triage_agent.run_sync(
 [9]: https://arxiv.org/pdf/2309.11998
 [10]: /security/sensitive_data_scanner/
 [11]: https://app.datadoghq.com/llm/evaluations
-[12]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#sentiment
-[13]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#toxicity
-[14]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#prompt-injection
-[15]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#topic-relevancy
-[16]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#failure-to-answer
-[17]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/
-[18]: /llm_observability/configure/evaluations/managed_evaluations/#create-new-evaluations
-[19]: /llm_observability/configure/evaluations/managed_evaluations/#edit-existing-evaluations
+[12]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#sentiment
+[13]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#toxicity
+[14]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#prompt-injection
+[15]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#topic-relevancy
+[16]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#failure-to-answer
+[17]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/
+[18]: /llm_observability/investigate/evaluations/managed_evaluations/#create-new-evaluations
+[19]: /llm_observability/investigate/evaluations/managed_evaluations/#edit-existing-evaluations
 [20]: https://github.com/DataDog/llm-observability/blob/main/evaluation_examples/1-tool-selection-demo.py
 [21]: https://github.com/DataDog/llm-observability/blob/main/evaluation_examples/2-tool-argument-correctness-demo.py
-[22]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#goal-completeness
-[23]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#tool-argument-correctness
-[24]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#tool-selection
-[25]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination
+[22]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#goal-completeness
+[23]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#tool-argument-correctness
+[24]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#tool-selection
+[25]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination
 [26]: /llm_observability/instrument/sdk?tab=python#prompt-tracking

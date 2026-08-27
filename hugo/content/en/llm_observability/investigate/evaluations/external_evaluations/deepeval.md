@@ -2,9 +2,10 @@
 title: DeepEval Evaluations
 aliases:
 - /llm_observability/evaluations/deepeval_evaluations/
+- /llm_observability/configure/evaluations/external_evaluations/deepeval/
 description: Use DeepEval evaluations with Agent Observability Experiments.
 further_reading:
-- link: "/llm_observability/configure/evaluations/external_evaluations"
+- link: "/llm_observability/investigate/evaluations/external_evaluations"
   tag: "Documentation"
   text: "Submit Evaluations"
 - link: "https://www.datadoghq.com/blog/using-evaluation-frameworks-with-agent-observability/"

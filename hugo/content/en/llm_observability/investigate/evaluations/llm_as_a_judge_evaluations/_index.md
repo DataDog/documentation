@@ -2,6 +2,7 @@
 title: Custom LLM-as-a-Judge Evaluations
 aliases:
 - /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/
+- /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/
 description: How to create custom LLM-as-a-judge evaluations, and how to use these evaluation results across Agent Observability.
 further_reading:
 - link: "https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/"
@@ -19,7 +20,7 @@ further_reading:
 - link: "/llm_observability/setup"
   tag: "Documentation"
   text: "Learn how to set up Agent Observability"
-- link: "/llm_observability/configure/evaluations/managed_evaluations"
+- link: "/llm_observability/investigate/evaluations/managed_evaluations"
   tag: "Documentation"
   text: "Learn about managed evaluations"
 - link: "https://huggingface.co/learn/cookbook/llm_judge"
@@ -37,7 +38,7 @@ Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another
 
 You can create and manage custom evaluations from the [Evaluations page][1] in Agent Observability. You can provide an evaluation description to generate an evaluation, use and build on existing [template LLM-as-a-judge evaluations][7] we provide, or start from scratch. You can enable tracing to see traces from your evaluations.
 
-<div class="alert alert-info">If you already have an <code>LLMJudge</code> defined in the SDK, you can publish it directly to Datadog without rebuilding the configuration in the UI. See <a href="/llm_observability/guide/evaluation_developer_guide/#publishing-an-llmjudge-as-a-datadog-managed-evaluation">Publishing an LLMJudge as a Datadog managed evaluation</a>.</div>
+<div class="alert alert-info">If you already have an <code>LLMJudge</code> defined in the SDK, you can publish it directly to Datadog without rebuilding the configuration in the UI. See <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/#publishing-an-llmjudge-as-a-datadog-managed-evaluation">Publishing an LLMJudge as a Datadog managed evaluation</a>.</div>
 
 Learn more about the [compatibility requirements][6].
 
@@ -595,21 +596,20 @@ You can use basic CRUD operations to manipulate managed evaluation configs, afte
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/llm/evaluations
-[2]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/connect_to_account
+[2]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/connect_to_account
 [3]: /events/explorer/facets/
 [4]: /monitors/
 [5]: https://arxiv.org/abs/2504.00050
-[6]: /llm_observability/configure/evaluations/compatibility
-[7]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations/
+[6]: /llm_observability/investigate/evaluations/compatibility
+[7]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations/
 [8]: /llm_observability/improve/experiments
-[9]: /llm_observability/guide/evaluation_developer_guide/#using-managed-evaluators
+[9]: /llm_observability/investigate/evaluations/evaluation_developer_guide/#using-managed-evaluators
 [10]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
 [11]: /api/latest/agent-observability/#get-a-custom-evaluator-configuration
 [12]: /api/latest/agent-observability/#create-or-update-a-custom-evaluator-configuration
 [13]: /api/latest/agent-observability/#delete-a-custom-evaluator-configuration
 [14]: /account_management/api-app-keys
-[15]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/prompt_templating
-[16]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/trace_level_evaluations
-[17]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/session_level_evaluations
+[15]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/prompt_templating
+[16]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/trace_level_evaluations
+[17]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/session_level_evaluations
 [18]: https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations
-

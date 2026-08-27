@@ -14,6 +14,7 @@ aliases:
     - /llm_observability/evaluations/managed_evaluations/quality_evaluations
     - /llm_observability/configure/evaluations/managed_evaluations/quality_evaluations
     - /llm_observability/evaluations/managed_evaluations/language_mismatch/
+    - /llm_observability/configure/evaluations/language_mismatch/
 ---
 
 This check identifies instances where the LLM generates responses in a different language or dialect than the one used by the user, which can lead to confusion or miscommunication. This check ensures that the LLM's responses are clear, relevant, and appropriate for the user's linguistic preferences and needs.
@@ -29,4 +30,3 @@ Afrikaans, Albanian, Arabic, Armenian, Azerbaijani, Belarusian, Bengali, Norwegi
 | Evaluation Stage | Evaluation Method | Evaluation Definition |
 |---|---|---|
 | Evaluated on Input and Output | Evaluated using Open Source Model | Language Mismatch flags whether each prompt-response pair demonstrates that the LLM application answered the user's question in the same language that the user used.  |
-

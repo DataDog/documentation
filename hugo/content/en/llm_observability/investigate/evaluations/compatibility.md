@@ -2,6 +2,7 @@
 title: Evaluation compatibility
 aliases:
 - /llm_observability/evaluations/evaluation_compatibility/
+- /llm_observability/configure/evaluations/compatibility/
 description: Learn about the compatibility requirements for evaluations.
 ---
 
@@ -45,14 +46,14 @@ Existing templates for custom LLM-as-a-judge evaluations are supported for the f
 | [Goal Completeness][3]          | Fully supported | All third party LLM providers | LLM only |
 
 
-[1]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#tool-selection
-[2]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#tool-argument-correctness
-[3]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#goal-completeness
-[4]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination
-[5]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#failure-to-answer
-[6]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#sentiment
-[7]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#toxicity
-[8]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#prompt-injection
-[9]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#topic-relevancy
-[10]: /llm_observability/configure/evaluations/managed_evaluations#language-mismatch
-[11]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations#define-the-evaluation-output
+[1]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#tool-selection
+[2]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#tool-argument-correctness
+[3]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#goal-completeness
+[4]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination
+[5]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#failure-to-answer
+[6]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#sentiment
+[7]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#toxicity
+[8]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#prompt-injection
+[9]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#topic-relevancy
+[10]: /llm_observability/investigate/evaluations/language_mismatch
+[11]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations#define-the-evaluation-output

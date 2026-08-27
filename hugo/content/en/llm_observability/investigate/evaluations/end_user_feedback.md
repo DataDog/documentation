@@ -2,12 +2,13 @@
 title: End-User Feedback
 aliases:
 - /llm_observability/evaluations/end_user_feedback/
+- /llm_observability/configure/evaluations/end_user_feedback/
 description: Submit end-user feedback to Agent Observability and connect it to spans, traces, sessions, or external entities.
 further_reading:
     - link: '/llm_observability/instrument/api/#evaluations-api'
       tag: 'Documentation'
       text: 'Learn about the Evaluations API'
-    - link: '/llm_observability/configure/evaluations/external_evaluations'
+    - link: '/llm_observability/investigate/evaluations/external_evaluations'
       tag: 'Documentation'
       text: 'Learn about submitting external evaluations'
     - link: '/llm_observability/investigate/annotation_queues'
@@ -120,7 +121,7 @@ To create a dashboard widget for feedback, create the widget as you would for an
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/configure/evaluations/external_evaluations
+[1]: /llm_observability/investigate/evaluations/external_evaluations
 [2]: /llm_observability/investigate/annotation_queues
 [3]: /llm_observability/instrument/api/#evaluations-api
 [4]: /llm_observability/instrument/sdk/?tab=python#enriching-spans

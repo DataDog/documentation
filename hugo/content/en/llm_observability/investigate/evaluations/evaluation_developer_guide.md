@@ -3,9 +3,10 @@ title: Evaluation Developer Guide
 aliases:
   - /llm_observability/guide/evaluation_developer_guide
   - /llm_observability/evaluations/evaluation_developer_guide/
+  - /llm_observability/configure/evaluations/evaluation_developer_guide/
 description: Learn how to build custom evaluators using the Agent Observability SDK.
 further_reading:
-    - link: '/llm_observability/configure/evaluations/external_evaluations'
+    - link: '/llm_observability/investigate/evaluations/external_evaluations'
       tag: 'Documentation'
       text: 'Learn about submitting external evaluations'
     - link: '/llm_observability/setup/sdk/python'
@@ -646,7 +647,7 @@ except RemoteEvaluatorError as e:
 
 ## Using evaluators in production
 
-<div class="alert alert-info">This section covers evaluations you run and submit manually from your application code. To have Datadog run evaluations automatically on production traces, see <a href="/llm_observability/configure/evaluations/llm_as_a_judge_evaluations">Custom LLM-as-a-Judge Evaluations</a> instead.</div>
+<div class="alert alert-info">This section covers evaluations you run and submit manually from your application code. To have Datadog run evaluations automatically on production traces, see <a href="/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations">Custom LLM-as-a-Judge Evaluations</a> instead.</div>
 
 To submit evaluations from your application code, construct the `EvaluatorContext` yourself, call the evaluator, and submit the result with `LLMObs.submit_evaluation()`. You can also submit evaluations through the HTTP API.
 
@@ -776,11 +777,11 @@ When submitting evaluations for [OpenTelemetry-instrumented spans][3], include t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/configure/evaluations/external_evaluations
+[1]: /llm_observability/investigate/evaluations/external_evaluations
 [2]: /llm_observability/instrument/api/#evaluations-api
 [3]: /llm_observability/instrument/otel_instrumentation
 [4]: /llm_observability/improve/experiments
-[5]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations
-[6]: /llm_observability/configure/evaluations/external_evaluations/deepeval/
-[7]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations#configure-the-prompt
-[8]: /llm_observability/configure/evaluations/external_evaluations/pydantic
+[5]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations
+[6]: /llm_observability/investigate/evaluations/external_evaluations/deepeval/
+[7]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations#configure-the-prompt
+[8]: /llm_observability/investigate/evaluations/external_evaluations/pydantic

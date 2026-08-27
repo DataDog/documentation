@@ -19,7 +19,7 @@ Agent Observability supports ingesting OpenTelemetry traces that follow either t
 
 ### Evaluations
 
-To send [external evaluations directly to the API](/llm_observability/configure/evaluations/external_evaluations#submitting-external-evaluations-with-the-api) for OpenTelemetry spans, include the `source:otel` tag in the evaluation. When referencing spans, provide `span_id` and `trace_id` as decimal strings. OpenTelemetry uses hexadecimal IDs natively, so convert them to decimal before submitting evaluations. For example, use Python's `int(hex_span_id, 16)` to convert a hex span ID to its decimal equivalent.
+To send [external evaluations directly to the API](/llm_observability/investigate/evaluations/external_evaluations#submitting-external-evaluations-with-the-api) for OpenTelemetry spans, include the `source:otel` tag in the evaluation. When referencing spans, provide `span_id` and `trace_id` as decimal strings. OpenTelemetry uses hexadecimal IDs natively, so convert them to decimal before submitting evaluations. For example, use Python's `int(hex_span_id, 16)` to convert a hex span ID to its decimal equivalent.
 
 ### Prompt Tracking
 
@@ -941,7 +941,7 @@ with tracer.start_as_current_span("my-span") as span:
 [3]: https://app.datadoghq.com/llm/traces
 [4]: /help/
 [5]: https://pypi.org/project/strands-agents/
-[6]: /llm_observability/configure/evaluations/external_evaluations
+[6]: /llm_observability/investigate/evaluations/external_evaluations
 [7]: https://strandsagents.com/latest/
 [8]: /account_management/rbac/data_access/
 [9]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links

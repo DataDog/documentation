@@ -5,6 +5,7 @@ aliases:
     - /tracing/llm_observability/evaluations/
     - /llm_observability/configuration/
     - /llm_observability/evaluations/
+    - /llm_observability/configure/evaluations/
 
 further_reading:
   - link: https://www.datadoghq.com/blog/llm-prompt-tracking
@@ -67,15 +68,15 @@ Agent Observability offers an [Export API][9] that you can use to retrieve spans
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations
-[2]: /llm_observability/configure/evaluations/managed_evaluations
-[3]: /llm_observability/configure/evaluations/external_evaluations
-[5]: /llm_observability/configure/evaluations/external_evaluations/nemo
+[1]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations
+[2]: /llm_observability/investigate/evaluations/managed_evaluations
+[3]: /llm_observability/investigate/evaluations/external_evaluations
+[5]: /llm_observability/investigate/evaluations/external_evaluations/nemo
 [6]: /security/sensitive_data_scanner/
 [7]: /account_management/rbac/permissions/#llm-observability
 [8]: https://app.datadoghq.com/llm/evaluations
 [9]: /llm_observability/investigate/export_api
-[10]: /llm_observability/guide/evaluation_developer_guide
+[10]: /llm_observability/investigate/evaluations/evaluation_developer_guide
 [11]: /llm_observability/investigate/annotation_queues
 [12]: /security/sensitive_data_scanner/scanning_rules/library_rules/
-[13]: /llm_observability/configure/evaluations/end_user_feedback
+[13]: /llm_observability/investigate/evaluations/end_user_feedback
