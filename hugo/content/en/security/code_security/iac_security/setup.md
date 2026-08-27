@@ -17,7 +17,7 @@ further_reading:
     text: "IaC Security Rules"
 ---
 
-Use the following instructions to enable Infrastructure as Code (IaC) Security for Code Security. IaC Security supports multiple IaC configurations stored in GitHub, GitLab, Azure DevOps, or Bitbucket Cloud repositories.
+Use the following instructions to enable Infrastructure as Code (IaC) Security for Code Security. IaC Security supports multiple IaC configurations stored in GitHub, GitLab, Azure DevOps, or Bitbucket Cloud Premium repositories.
 
 {{< tabs >}}
 {{% tab "GitHub" %}}

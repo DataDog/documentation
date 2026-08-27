@@ -97,7 +97,7 @@ If your Java project checks third-party JARs directly into the repository instea
 
 ## Select your source code management provider
 
-Regardless of the scanning mode you use, connect your source code management provider to enable native features such as inline code snippets and pull request comments. Datadog SCA supports all providers and offers native support for GitHub, GitLab, Azure DevOps, and Bitbucket Cloud.
+Regardless of the scanning mode you use, connect your source code management provider to enable native features such as inline code snippets and pull request comments. Datadog SCA supports all providers and offers native support for GitHub, GitLab, Azure DevOps, and Bitbucket Cloud Premium.
 
 {{< tabs >}}
 {{% tab "GitHub" %}}

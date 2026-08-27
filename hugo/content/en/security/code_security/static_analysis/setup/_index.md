@@ -44,7 +44,7 @@ Next, run Static Code Analysis by following instructions for your chosen CI prov
 {{< /whatsnext >}}
 
 ## Select your source code management provider
-Datadog Static Code Analysis supports all source code management providers, with native support for GitHub, GitLab, Azure DevOps, and Bitbucket Cloud.
+Datadog Static Code Analysis supports all source code management providers, with native support for GitHub, GitLab, Azure DevOps, and Bitbucket Cloud Premium.
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
