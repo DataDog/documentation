@@ -72,7 +72,7 @@ DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> DD_LLMOBS_PROJECT_NAME=<
 NODE_OPTIONS="--import dd-trace/initialize.mjs" node <YOUR_APP_ENTRYPOINT>
 ```
 
-For more information, see the [Node.js tracer command-line setup][7].
+For more information, see the [Node.js tracer command-line setup](/llm_observability/instrument/sdk?tab=nodejs#command-line-setup).
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -318,7 +318,7 @@ function task (inputData, config, metadata) {
 {{% /tab %}}
 {{< /tabs >}}
 
-You can trace the different parts of your Experiment task (workflow, tool calls, and so on) using the same tracing APIs you use in production. For Python, see the [custom tracing decorators][2]. For Node.js, use the `llmobs.trace()` API. If you use a [supported Python framework][3] or [supported Node.js framework][8] (OpenAI, Amazon Bedrock, and so on), Agent Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
+You can trace the different parts of your Experiment task (workflow, tool calls, and so on) using the same tracing APIs you use in production. For Python, see the [custom tracing decorators][2]. For Node.js, use the `llmobs.trace()` API. If you use a [supported Python framework][3] or [supported Node.js framework][7] (OpenAI, Amazon Bedrock, and so on), Agent Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -705,8 +705,7 @@ Note: LLM Experiments traces are retained for 90 days.
 [4]: /llm_observability/guide/evaluation_developer_guide
 [5]: /llm_observability/instrument/agent_observability_and_apm/
 [6]: /llm_observability/instrument/otel_instrumentation
-[7]: /llm_observability/instrument/sdk?tab=nodejs#command-line-setup
-[8]: /llm_observability/instrument/auto_instrumentation?tab=nodejs
+[7]: /llm_observability/instrument/auto_instrumentation?tab=nodejs
 
 ## Further reading
 
