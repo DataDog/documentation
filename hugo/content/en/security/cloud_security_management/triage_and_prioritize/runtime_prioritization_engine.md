@@ -98,7 +98,6 @@ Requirements depend on how the image is scanned:
 | | Agent | Agentless |
 |---|---|---|
 | **Requires** | [Cloud Security vulnerability scanning][14] and [container monitoring][12] enabled on the Agent. | [Agentless Scanning][13] on the cloud account. |
-| **Registries** | Any. | See [compatibility][15]. |
 
 For Agent-scanned images, the side panel of a finding in the [Vulnerability Explorer][11] lists the containers that recently ran that image.
 
@@ -126,4 +125,3 @@ For Agent-scanned images, the side panel of a finding in the [Vulnerability Expl
 [12]: /containers/
 [13]: /security/cloud_security_management/setup/agentless_scanning/
 [14]: /security/cloud_security_management/vulnerabilities/
-[15]: /security/cloud_security_management/setup/agentless_scanning/compatibility/
