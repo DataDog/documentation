@@ -3146,6 +3146,11 @@ menu:
       parent: private_actions
       identifier: enroll_runner
       weight: 4
+    - name: Authorize Private Actions
+      url: actions/private_actions/authorize_private_actions/
+      parent: private_actions
+      identifier: authorize_private_actions
+      weight: 5
     - name: Run a Script
       url: actions/private_actions/run_script/
       parent: private_actions
