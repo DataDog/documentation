@@ -92,7 +92,7 @@ After setting up the Azure DevOps integration, enable IaC Security for your repo
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
 
 {{% /tab %}}
-{{% tab "Bitbucket" %}}
+{{% tab "Bitbucket Cloud" %}}
 
 ### Install the Bitbucket integration
 

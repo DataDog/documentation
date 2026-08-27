@@ -83,11 +83,11 @@ See the [Azure source code setup instructions][4] to connect Azure DevOps reposi
 [5]: /getting_started/site/
 
 {{% /tab %}}
-{{% tab "Bitbucket" %}}
+{{% tab "Bitbucket Cloud" %}}
 
-See the [Bitbucket source code setup instructions][23] to connect Bitbucket Cloud workspaces to Datadog.
+See the [Bitbucket source code setup instructions][1] to connect Bitbucket Cloud workspaces to Datadog.
 
-[23]: /integrations/bitbucket-source-code/#setup
+[1]: /integrations/bitbucket-source-code/#setup
 
 {{% /tab %}}
 {{% tab "Other" %}}
@@ -278,7 +278,7 @@ Datadog stores findings in accordance with our [Data Retention Periods](https://
 [18]: /security/code_security/static_analysis/setup/?tab=github#select-your-source-code-management-provider
 [19]: /security/code_security/static_analysis/setup/?tab=azuredevops#select-your-source-code-management-provider
 [20]: /security/code_security/static_analysis/setup/?tab=gitlab#select-your-source-code-management-provider
-[21]: /security/code_security/static_analysis/setup/?tab=bitbucket#select-your-source-code-management-provider
+[21]: /security/code_security/static_analysis/setup/?tab=bitbucketcloud#select-your-source-code-management-provider
 [22]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#migrating-to-v30
 [24]: https://docs.datadoghq.com/account_management/teams/
 [25]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md

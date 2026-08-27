@@ -69,7 +69,7 @@ You can run Datadog Static SCA scans directly on Datadog infrastructure. Support
 - [GitHub](/security/code_security/software_composition_analysis/setup_static/?tab=github#select-your-source-code-management-provider) (excluding repositories that use [Git Large File Storage][21])
 - [GitLab.com and GitLab Self-Managed](/security/code_security/software_composition_analysis/setup_static/?tab=gitlab#select-your-source-code-management-provider)
 - [Azure DevOps](/security/code_security/software_composition_analysis/setup_static/?tab=azuredevops#select-your-source-code-management-provider)
-- [Bitbucket Cloud](/security/code_security/software_composition_analysis/setup_static/?tab=bitbucket#select-your-source-code-management-provider)
+- [Bitbucket Cloud](/security/code_security/software_composition_analysis/setup_static/?tab=bitbucketcloud#select-your-source-code-management-provider)
 
 To get started, navigate to the [{{< ui >}}Code Security{{< /ui >}} page][2].
 
@@ -135,11 +135,11 @@ See the [Azure source code setup instructions][4] to connect Azure DevOps reposi
 [5]: /getting_started/site/
 
 {{% /tab %}}
-{{% tab "Bitbucket" %}}
+{{% tab "Bitbucket Cloud" %}}
 
-See the [Bitbucket source code setup instructions][23] to connect Bitbucket Cloud workspaces to Datadog.
+See the [Bitbucket source code setup instructions][1] to connect Bitbucket Cloud workspaces to Datadog.
 
-[23]: /integrations/bitbucket-source-code/#setup
+[1]: /integrations/bitbucket-source-code/#setup
 
 {{% /tab %}}
 {{% tab "Other" %}}
