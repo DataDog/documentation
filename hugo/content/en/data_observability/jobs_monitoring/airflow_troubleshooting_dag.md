@@ -99,6 +99,7 @@ def generate_validation_summary():
                  validation_results["package_version"])
     else:
         log.error("✗ OpenLineage not installed properly")
+        log.error("  All subsequent checks were skipped.")
         log.info("========================================")
         log.error("Critical issues found. OpenLineage events will not be sent properly.")
         return False
@@ -141,13 +142,20 @@ def generate_validation_summary():
             elif transport_type == "console":
                 log.error("✗ Transport Type: Console (won't send events to Datadog)")
             elif transport_type == "composite":
-                has_http_transport = False
-                for name, nested_transports in config.get("transports", {}).items():
-                    if nested_transports.get("type", "") == "http":
-                        has_http_transport = True
+                has_valid_transport = False
+                nested = config.get("transports", {})
+                if isinstance(nested, list):
+                    nested = {str(i): t for i, t in enumerate(nested)}
+                for name, nested_config in nested.items():
+                    nested_type = nested_config.get("type", "")
+                    if nested_type == "http":
+                        has_valid_transport = True
                         log.info("✓ Composite Transport with HTTP transport: `%s`", name)
-                if not has_http_transport:
-                    log.error("✗ Composite Transport is set up without HTTP transport")
+                    elif nested_type == "datadog":
+                        has_valid_transport = True
+                        log.info("✓ Composite Transport with Datadog transport: `%s`", name)
+                if not has_valid_transport:
+                    log.error("✗ Composite Transport has no HTTP or Datadog transport configured")
             else:
                 log.error("✗ Unknown transport type: %s", transport_type)
 
@@ -417,7 +425,7 @@ def check_provider_enabled():
     # No explicit flag — provider is inactive because no transport config was found
     log.error(
         "OpenLineage provider is not active: no transport configuration was found. "
-        "See https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html"
+        "Please refer to https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/guides/user.html"
     )
     validation_results["inactive_reason"] = "no_config"
 
@@ -463,16 +471,51 @@ def resolve_transport() -> bool:
                 log.warning("HTTP transport URL does not point to a known Datadog endpoint: %s", url)
         elif transport.kind == "datadog":
             validation_results["is_datadog"] = True
+            # DatadogTransport wraps an HttpTransport whose config.url is the
+            # resolved intake endpoint (from SITE_MAPPING or a custom site URL).
+            # Extract it so the connectivity check has a real host to test.
+            intake_url = _get_datadog_intake_url(transport)
+            if intake_url:
+                validation_results["transport_url"] = intake_url
+            else:
+                log.warning("Could not resolve Datadog intake URL from transport; "
+                            "connectivity check will be skipped.")
+            return _verify_datadog_backend(transport)
         elif transport.kind == "composite":
             transport_valid = False
-            for key, value in config.get("transports", {}).items():
+            nested = config.get("transports", {})
+            if isinstance(nested, list):
+                nested = {str(i): t for i, t in enumerate(nested)}
+            live_transports = transport.transports
+            for i, (key, value) in enumerate(nested.items()):
                 log.info("Checking nested transport `%s`", key)
-                transport_valid = _verify_transport(value)
                 if value.get("type") == "http":
+                    transport_valid = _verify_transport(value)
                     url = value.get("url")
                     validation_results["transport_url"] = url
                     validation_results["is_datadog"] = _is_datadog_url(url) if url else False
-                    break
+                elif value.get("type") == "datadog":
+                    validation_results["is_datadog"] = True
+                    # Validate against the live transport object, not the
+                    # serialized/redacted config dict — the API key may have
+                    # been resolved from DD_API_KEY and won't appear in the
+                    # dict, or it will be redacted.
+                    live = live_transports[i] if i < len(live_transports) else None
+                    if live and live.kind == "datadog":
+                        transport_valid = _verify_datadog_backend(live)
+                    else:
+                        transport_valid = _verify_transport(value)
+            # Extract the intake URL from the first live datadog sub-transport
+            # so the connectivity check has a real host to test. The serialized
+            # config has no URL (DatadogTransport resolves it internally), so we
+            # must read it from the live Transport object.
+            if validation_results.get("is_datadog") and not validation_results.get("transport_url"):
+                for nested_transport in transport.transports:
+                    if nested_transport.kind == "datadog":
+                        intake_url = _get_datadog_intake_url(nested_transport)
+                        if intake_url:
+                            validation_results["transport_url"] = intake_url
+                            break
             return transport_valid
 
         return True
@@ -526,7 +569,7 @@ def _redact_api_keys(obj) -> None:
     """Recursively redact API keys and auth values in a dictionary (in-place)."""
     if isinstance(obj, dict):
         for key, value in obj.items():
-            if isinstance(key, str) and ("api_key" in key.lower() or "auth" in key.lower()):
+            if isinstance(key, str) and ("api_key" in key.lower() or "apikey" in key.lower() or "auth" in key.lower()):
                 obj[key] = "[value redacted]"
             else:
                 _redact_api_keys(value)
@@ -598,6 +641,18 @@ def _verify_transport_source() -> None:
             _check_connection_transport(conn_id)
         else:
             log.info("No OpenLineage Airflow connection configured (AIRFLOW__OPENLINEAGE__CONN_ID / openlineage.conn_id).")
+
+def _get_datadog_intake_url(transport) -> str | None:
+    """Extract the resolved intake URL from a DatadogTransport.
+
+    DatadogTransport wraps an HttpTransport (``transport.http``) whose
+    ``config.url`` is the resolved Datadog intake endpoint — either from
+    SITE_MAPPING based on ``config.site`` or a custom URL provided directly.
+    """
+    try:
+        return transport.http.config.url
+    except Exception:
+        return None
 
 
 def _check_openlineage_yml(file_path) -> bool:
@@ -686,6 +741,9 @@ def _verify_transport(config: dict, name: str = ""):
             log.error("Composite transport %s configured but no nested transports defined", name)
             return False
 
+        if isinstance(transports, dict):
+            transports = list(transports.values())
+
         log.info("Found composite transport %s with %d nested transports", name, len(transports))
         valid_transports = 0
 
@@ -703,6 +761,9 @@ def _verify_transport(config: dict, name: str = ""):
 
     elif transport_type == "http":
         return _verify_http_backend(config, name)
+
+    elif transport_type == "datadog":
+        return _verify_datadog_backend(config, name)
 
     elif transport_type == "console":
         log.error("ConsoleTransport is configured. That won't send events to Datadog.")
@@ -724,6 +785,33 @@ def _verify_http_backend(config: dict, name: str = ""):
         log.info("HTTP transport %s has API key authentication configured", name)
     else:
         log.warning("No authentication method found in HTTP transport %s configuration", name)
+
+    return True
+
+def _verify_datadog_backend(transport, name: str = ""):
+    """Log the resolved Datadog transport configuration for human verification.
+
+    DatadogConfig.from_dict raises if apiKey is missing or site is invalid, so
+    transport existence already validates those. The remaining risk is a
+    silently-defaulted site — if DD_SITE is unset and no site is in the config,
+    it defaults to datadoghq.com without warning. Surface the resolved site so
+    the user can confirm it matches their intent.
+
+    Accepts a live DatadogTransport (reads transport.config) or a serialized
+    config dict (fallback for recursive _verify_transport on nested composites).
+    """
+    if hasattr(transport, "config") and hasattr(transport.config, "site"):
+        site = getattr(transport.config, "site", None)
+    elif isinstance(transport, dict):
+        site = transport.get("site")
+    else:
+        site = None
+
+    label = name or "(unnamed)"
+    if site:
+        log.info("Datadog transport %s resolved site: %s", label, site)
+    else:
+        log.info("Datadog transport %s using default site (datadoghq.com)", label)
 
     return True
 
@@ -886,6 +974,7 @@ def check_configuration_conflicts():
 
     validation_results["conflicts"] = conflicts
     return conflicts
+
 ```
 
 ### Trigger the DAG
