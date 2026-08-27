@@ -1,6 +1,6 @@
 ---
 title: Customer Pricing
-description: Partners can set customer-specific pricing from the Customer Pricing page to enable cost visibility for their reseller customers in Datadog.
+description: Set customer-specific pricing from the Customer Pricing page to enable cost visibility for your customers in Datadog.
 further_reading:
 - link: "/account_management/plan_and_usage/bill_overview/partner_purchased_cost_visibility/"
   tag: "Documentation"

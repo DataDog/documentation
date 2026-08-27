@@ -18,7 +18,7 @@ If you purchase Datadog through a partner, you can get greater visibility into y
 
 - **Estimated month-to-date cost**: See a running total of your Datadog costs at any point during the month, without waiting for your invoice.
 - **Historical cost**: Review costs for previous months after each month closes. Data goes back 15 months, or to your most recent contract change if that is more recent.
-- **Daily cost breakdown**: View a day-by-day bar chart of your costs to spot usage changes as they happen.
+- **Daily cost breakdown**: View a day-by-day bar chart of your costs to spot cost changes as they happen.
 - **Group by product**: Break down costs by product category and billing dimension, such as infrastructure hosts, indexed logs, or custom metrics.
 - **Group by sub-organization**: If you use multiple Datadog sub-organizations, filter and view costs for each one individually.
 
