@@ -5,7 +5,7 @@ further_reading:
   - link: '/real_user_monitoring/rum_without_limits/'
     tag: Documentation
     text: RUM without Limits
-  - link: '/real_user_monitoring/data_lifecycle_and_cost_management/configure_retention_filters/'
+  - link: '/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/'
     tag: Documentation
     text: Configure retention filters
   - link: '/real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/'
@@ -40,7 +40,7 @@ To set up a retention quota for an application:
 
 {{< img src="real_user_monitoring/rum_without_limits/retention-quotas-configuration.png" alt="The retention quota configuration panel showing the daily quota threshold, reset time, and behavior options." style="width:65%" >}}
 
-<div class="alert alert-info">Quotas do not apply to sessions retained by <a href="/real_user_monitoring/data_lifecycle_and_cost_management/configure_retention_filters/#permanent-retention-filters">Permanent Retention Filters</a>.</div>
+<div class="alert alert-info">Quotas do not apply to sessions retained by <a href="/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/#permanent-retention-filters">Permanent Retention Filters</a>.</div>
 
 Configuration is done at the application level, which means you can apply different retention strategies per application. Any configuration change (quota limit, retention behavior, reset time) is instantly applied.
 
