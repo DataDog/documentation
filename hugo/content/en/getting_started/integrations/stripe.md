@@ -59,7 +59,7 @@ Use [Stripe Projects][1] to provision and manage Datadog from the Stripe CLI. Th
 1. Go to the [Datadog login page](https://app.datadoghq.com/account/login).
 1. Select **Sign in with Google** if you use a Google account to sign in to Stripe. Otherwise, select **Forgot password?** and enter the email address from your Stripe account to set a Datadog password.
 
-## Upgrade your plan
+### Upgrade Your Plan
 
 If your Stripe account has a saved payment method, upgrade your Datadog plan to pay-as-you-go with one command:
 
@@ -67,7 +67,7 @@ If your Stripe account has a saved payment method, upgrade your Datadog plan to 
 stripe projects upgrade datadog-observability
 ```
 
-## Remove Datadog from Stripe Projects
+### Remove Datadog from Stripe Projects
 
 Remove Datadog from your Stripe project and update your local environment variables:
 
