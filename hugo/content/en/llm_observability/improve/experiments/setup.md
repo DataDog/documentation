@@ -55,7 +55,8 @@ const tracer = require('dd-trace').init({
   service: '<YOUR_SERVICE>',
   site: 'datadoghq.com',
   llmobs: {
-    mlApp: '<YOUR_PROJECT>',
+    mlApp: '<YOUR_ML_APP_NAME>',
+    projectName: '<YOUR_PROJECT>',
     agentlessEnabled: true,
   },
 })
@@ -63,11 +64,11 @@ const tracer = require('dd-trace').init({
 const { experiments } = tracer.llmobs
 ```
 
-The `mlApp` value identifies the project that contains your datasets and experiments. The `llmobs` options enable Agent Observability in code. If you use command-line setup, also provide the application key because experiments use the Experiments API:
+The `projectName` value identifies the Experiments project that contains your datasets and experiments. The `mlApp` value identifies the LLM application used for Agent Observability traces. You can configure these values independently. If `projectName` is not configured, Experiments uses `default-project`; `mlApp` and `service` are not used as Experiments project-name fallbacks. If you use command-line setup, also provide the application key because experiments use the Experiments API:
 
 ```shell
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_APP_KEY=<YOUR_APP_KEY> \
-DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_PROJECT> \
+DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> DD_LLMOBS_PROJECT_NAME=<YOUR_PROJECT> \
 NODE_OPTIONS="--import dd-trace/initialize.mjs" node <YOUR_APP_ENTRYPOINT>
 ```
 
@@ -81,7 +82,7 @@ Your Datadog site is {{< region-param key="dd_site" code="true" >}}. If your sit
 
 ### APM Trace correlation
 
-To correlate your Experiment spans with [APM Traces][5], run Agent Observability through a Datadog Agent and keep `agentless_enabled` set to `False` (the default). The Agent forwards trace data to APM, which enables Experiment ↔ APM Trace correlation.
+To correlate your Experiment spans with [APM Traces][5], run Agent Observability through a Datadog Agent and keep `agentless_enabled` or `agentlessEnabled` set to `False` or `false` (the default). The Agent forwards trace data to APM, which enables Experiment ↔ APM Trace correlation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -102,7 +103,8 @@ const tracer = require('dd-trace').init({
   service: '<YOUR_SERVICE>',
   site: 'datadoghq.com',
   llmobs: {
-    mlApp: '<YOUR_PROJECT>',
+    mlApp: '<YOUR_ML_APP_NAME>',
+    projectName: '<YOUR_PROJECT>',
     agentlessEnabled: false, // default — required for APM Trace correlation
   },
 })
@@ -132,14 +134,51 @@ LLMObs.enable(
 ```javascript
 const tracer = require('dd-trace').init({
   llmobs: {
-    mlApp: '<YOUR_PROJECT>',
+    mlApp: '<YOUR_ML_APP_NAME>',
+    projectName: 'experiments-project',
   },
 })
+
+const { experiments } = tracer.llmobs
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
-For Node.js, the project is created when the experiments client first accesses it. The `mlApp` value is also used as the project name.
+For Node.js, set `llmobs.projectName` to configure the default Experiments project. The equivalent environment variable is `DD_LLMOBS_PROJECT_NAME`. If you do not configure a project name, Experiments uses `default-project`. The `mlApp` and `service` settings are not used as Experiments project-name fallbacks. The project is created when the Experiments client first accesses it.
+
+To use a different project for a specific operation, pass `projectName` to the operation. Use the same project name for a dataset and its experiment:
+
+```javascript
+async function main () {
+  const dataset = experiments.createDataset('capital-cities', {
+    projectName: 'other-project',
+    records: [
+      { inputData: { country: 'France' }, expectedOutput: 'Paris' },
+      { inputData: { country: 'Japan' }, expectedOutput: 'Tokyo' },
+    ],
+  })
+
+  const experiment = experiments.experiment({
+    name: 'capital-cities-test',
+    projectName: 'other-project',
+    dataset,
+    task: (inputData) => ({ France: 'Paris', Japan: 'Tokyo' })[inputData.country],
+    evaluators: {
+      exact_match: (_inputData, outputData, expectedOutput) => outputData === expectedOutput,
+    },
+  })
+
+  const result = await experiment.run()
+  console.log(`View experiment: ${result.url}`)
+}
+
+main().catch((error) => {
+  console.error(error)
+  process.exitCode = 1
+})
+```
+
+You can also pass `projectName` to `pullDataset()` to pull a dataset from another project.
 
 ## Create a dataset
 
