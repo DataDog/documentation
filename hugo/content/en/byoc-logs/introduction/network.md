@@ -37,7 +37,7 @@ If your environment uses an HTTP proxy, BYOC Logs supports standard proxy config
 
 Only **searcher** pods establish the reverse connection. Indexers, the control plane, the metastore, and the janitor do not initiate any connection to Datadog.
 
-<div class="alert alert-warning">Keep at least one searcher pod running when using the reverse connection. If all searcher pods are unavailable or scaled to <code>0</code>, Datadog cannot route queries or index management requests through the reverse connection until a searcher pod starts and reconnects. The BYOC Logs control plane does not provide a fallback reverse connection.</div>
+<div class="alert alert-warning">Keep at least one searcher pod running when using the reverse connection. If all searcher pods are unavailable or scaled to <code>0</code>, Datadog cannot route queries or index management requests through the reverse connection until a searcher pod starts and reconnects.</div>
 
 ## Public ingress (optional)
 
