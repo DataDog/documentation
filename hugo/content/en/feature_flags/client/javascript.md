@@ -226,6 +226,22 @@ The web provider also supports these optional settings:
 | `flaggingProxy` | unset | Fetch flags through a proxy instead of `site`. |
 | `customHeaders` | unset | Add headers to flag-fetch requests. |
 | `overwriteRequestHeaders` | `false` | Replace default request headers with `customHeaders`. |
+| `flagConfigurationFetch` | `globalThis.fetch` | Provide a Fetch-compatible implementation for flag configuration requests. |
+
+### Bound flag configuration requests
+
+The browser provider does not add a timeout or retries by default. Use `withTimeout` and `withRetry` to bound each request attempt and retry transient failures:
+
+{{< code-block lang="javascript" >}}
+import { DatadogProvider, withRetry, withTimeout } from '@datadog/openfeature-browser';
+
+const provider = new DatadogProvider({
+  // Other provider options...
+  flagConfigurationFetch: withRetry(withTimeout(globalThis.fetch, 2_000), 2),
+});
+{{< /code-block >}}
+
+In this example, each attempt has a two-second timeout and `2` allows two retries after the initial request. The timeout includes downloading the response body. Set the timeout or retry count to `0` to disable that behavior; retry counts from `0` to `10` are accepted. Retries cover network errors, timeouts, HTTP 408, and HTTP 5xx responses; caller cancellation and HTTP 429 responses are not retried. `flagConfigurationFetch` applies only to flag configuration requests; it does not affect exposure, aggregated flag evaluation, or RUM telemetry requests.
 
 ## Override flags in your browser
 

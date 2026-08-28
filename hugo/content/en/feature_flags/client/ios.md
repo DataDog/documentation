@@ -444,8 +444,33 @@ The `Flags.enable()` API accepts optional configuration with options listed belo
 
 {{< code-block lang="swift" >}}
 var config = Flags.Configuration()
+config.assignmentRequestTimeout = 2.0
+config.assignmentRequestRetryCount = 2
 Flags.enable(with: config)
 {{< /code-block >}}
+
+`assignmentRequestTimeout`
+: Timeout in seconds for each flag assignment request, including the complete response-body download. The SDK does not add a timeout by default. Set a positive value to enable the timeout; `0` leaves it disabled.
+
+`assignmentRequestRetryCount`
+: Number of retries after the initial flag assignment request. The default is `0`, so the SDK makes only the initial request unless you opt in to retries. Accepted values are from `0` to `10`. Retries cover network errors, timeouts, HTTP 408, and HTTP 5xx responses; HTTP 429 responses are not retried.
+
+<div class="alert alert-info">Assignment request timeout and retry settings apply only to requests that fetch flag assignments. They do not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
+
+For lower-level transport control, compose an assignment-only fetch implementation:
+
+{{< code-block lang="swift" >}}
+let assignmentFetch = Flags.AssignmentRequestFetch
+    .urlSession()
+    .withTimeout(2)
+    .withRetry(2)
+
+var config = Flags.Configuration()
+config.assignmentRequestFetch = assignmentFetch
+Flags.enable(with: config)
+{{< /code-block >}}
+
+The SDK still constructs the URL, body, authentication, and custom headers. A supplied `assignmentRequestFetch` is used verbatim and replaces the scalar timeout and retry settings. In the example, placing `withTimeout` inside `withRetry` gives every attempt its own two-second timeout. The custom transport applies only to assignment requests.
 
 `trackExposures`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. If you only need local evaluation without telemetry, you can disable this option.

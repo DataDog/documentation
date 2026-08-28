@@ -300,11 +300,38 @@ The `Flags.enable()` API accepts optional configuration with the options listed 
 
 {{< code-block lang="kotlin" >}}
 val config = FlagsConfiguration.Builder()
-    // configure options here
+    .assignmentRequestTimeout(2_000L)
+    .assignmentRequestRetryCount(2)
     .build()
 
 Flags.enable(config)
 {{< /code-block >}}
+
+`assignmentRequestTimeout(timeoutMs)`
+: Timeout in milliseconds for each flag assignment request, including the complete response-body download. The SDK does not add a timeout by default. Set a positive value to enable the timeout; `0` leaves it disabled.
+
+`assignmentRequestRetryCount(retryCount)`
+: Number of retries after the initial flag assignment request. The default is `0`, so the SDK makes only the initial request unless you opt in to retries. Accepted values are from `0` to `10`. Retries cover network errors, timeouts, HTTP 408, and HTTP 5xx responses; HTTP 429 responses are not retried.
+
+<div class="alert alert-info">Assignment request timeout and retry settings apply only to requests that fetch flag assignments. They do not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
+
+For lower-level transport control, supply an assignment-only OkHttp call factory:
+
+{{< code-block lang="kotlin" >}}
+import okhttp3.OkHttpClient
+
+val assignmentClient = OkHttpClient.Builder()
+    // Add assignment-specific proxy, TLS, or interceptors here.
+    .build()
+
+val config = FlagsConfiguration.Builder()
+    .assignmentRequestCallFactory(assignmentClient)
+    .assignmentRequestTimeout(2_000L)
+    .assignmentRequestRetryCount(2)
+    .build()
+{{< /code-block >}}
+
+The SDK still constructs the URL, method, body, and authentication headers. The scalar timeout and retry policies compose on top of calls created by the supplied factory. Exposure and evaluation uploads continue to use the SDK transport, and the application retains ownership of the supplied factory and its resources.
 
 `trackExposures()`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. If you only need local evaluation without telemetry, you can disable it with: `trackExposures(false)`.

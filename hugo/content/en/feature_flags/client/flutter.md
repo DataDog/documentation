@@ -289,12 +289,43 @@ print(details.error?.code);
 {{< code-block lang="dart" >}}
 DatadogFlagsConfiguration(
   datadogConfig: datadogConfig,
+  assignmentRequestTimeout: const Duration(seconds: 2),
+  assignmentRequestRetryCount: 2,
   trackExposures: true,
   trackEvaluations: true,
   evaluationFlushInterval: const Duration(seconds: 10),
   store: myStore,
 );
 {{< /code-block >}}
+
+`assignmentRequestTimeout`
+: Timeout for each flag assignment request, including the complete response-body download. The SDK does not add a timeout by default. Set a positive duration to enable the timeout; `Duration.zero` leaves it disabled.
+
+`assignmentRequestRetryCount`
+: Number of retries after the initial flag assignment request. The default is `0`, so the SDK makes only the initial request unless you opt in to retries. Accepted values are from `0` to `10`. Retries cover network errors, timeouts, HTTP 408, and HTTP 5xx responses; HTTP 429 responses are not retried.
+
+<div class="alert alert-info">Assignment request timeout and retry settings apply only to requests that fetch flag assignments. They do not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
+
+For lower-level transport control, compose an assignment-only HTTP client:
+
+{{< code-block lang="dart" >}}
+import 'package:http/http.dart' as http;
+
+final assignmentClient = withAssignmentRequestRetry(
+  withAssignmentRequestTimeout(
+    http.Client(),
+    const Duration(seconds: 2),
+  ),
+  2,
+);
+
+final config = DatadogFlagsConfiguration(
+  datadogConfig: datadogConfig,
+  assignmentRequestHttpClient: assignmentClient,
+);
+{{< /code-block >}}
+
+A supplied `assignmentRequestHttpClient` is used verbatim and replaces the scalar timeout and retry settings. The helpers buffer the complete response, create a fresh request for each retry, and apply only to assignment requests. The application owns and closes the supplied client after disabling Feature Flags.
 
 `trackExposures`
 : When `true` (default), the SDK records exposure events for successful evaluations whose assignments are marked for logging. Set to `false` to disable exposure tracking.
@@ -326,6 +357,8 @@ final configuration = DatadogConfiguration(
 )..addPlugin(
     const DatadogFlagsPluginConfiguration(
       flagsConfiguration: DatadogFlagsConfiguration(
+        assignmentRequestTimeout: Duration(seconds: 2),
+        assignmentRequestRetryCount: 2,
         trackExposures: true,
         trackEvaluations: true,
       ),

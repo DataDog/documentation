@@ -86,6 +86,8 @@ You can set up Feature Flags automatically with the <a href="/feature_flags/feat
 
 Choose the SDK that matches where the flag is evaluated and initialize the Datadog Feature Flags provider.
 
+<div class="alert alert-warning">Client SDKs do not add a flag assignment request timeout or retry by default, so the underlying platform transport remains authoritative. Configure a bounded timeout explicitly when you need a predictable initialization limit, and opt in to retries when appropriate. The browser example below applies a one-second timeout to each attempt and explicitly retries once. The supported SDK guides describe their timeout options and composable transport APIs.</div>
+
 {{< tabs >}}
 {{% tab "JavaScript browser" %}}
 
@@ -100,7 +102,7 @@ Then, add the following to your project to initialize the SDK:
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
 {{< code-block lang="javascript" >}}
-import { DatadogProvider } from '@datadog/openfeature-browser';
+import { DatadogProvider, withRetry, withTimeout } from '@datadog/openfeature-browser';
 import { OpenFeature } from '@openfeature/web-sdk';
 
 // Initialize the provider
@@ -111,7 +113,9 @@ const provider = new DatadogProvider({
     site: '{{< region-param key="dd_site" code="true" >}}',
     env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
     service: '<SERVICE_NAME>',
-    version: '1.0.0'
+    version: '1.0.0',
+    // Bound each configuration request and explicitly opt in to one retry.
+    flagConfigurationFetch: withRetry(withTimeout(globalThis.fetch, 1_000), 1)
 });
 
 // Set the provider

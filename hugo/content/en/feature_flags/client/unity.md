@@ -203,11 +203,34 @@ The `DdFlags.Enable()` API accepts optional configuration with options listed be
 
 {{< code-block lang="csharp" >}}
 DdFlags.Enable(new FlagsConfiguration(
+    assignmentRequestTimeoutSeconds: 2,
+    assignmentRequestRetryCount: 2,
     trackExposures: true,
     trackEvaluations: true,
     evaluationFlushIntervalSeconds: 10.0f
 ));
 {{< /code-block >}}
+
+`assignmentRequestTimeoutSeconds`
+: Timeout in seconds for each flag assignment request, including the complete response-body download. The SDK does not add a timeout by default. Set a positive value to enable the timeout; `0` leaves it disabled.
+
+`assignmentRequestRetryCount`
+: Number of retries after the initial flag assignment request. The default is `0`, so the SDK makes only the initial request unless you opt in to retries. Accepted values are from `0` to `10`. Retries cover network errors, timeouts, HTTP 408, and HTTP 5xx responses; HTTP 429 responses are not retried.
+
+<div class="alert alert-info">Assignment request timeout and retry settings apply only to requests that fetch flag assignments. They do not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
+
+For lower-level transport control, compose an assignment-only transport:
+
+{{< code-block lang="csharp" >}}
+var assignmentTransport = AssignmentRequestTransports.Default
+    .WithTimeout(2)
+    .WithRetry(2);
+
+DdFlags.Enable(new FlagsConfiguration(
+    assignmentRequestTransport: assignmentTransport));
+{{< /code-block >}}
+
+A supplied `assignmentRequestTransport` is used verbatim and replaces the scalar timeout and retry settings. The helpers use fully buffered immutable responses, create a fresh native request for each retry, and apply only to assignment requests. The SDK owns its native requests; the application retains ownership of a custom transport and its resources.
 
 `trackExposures`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. Set to `false` to disable exposure tracking.
