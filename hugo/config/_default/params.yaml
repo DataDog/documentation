@@ -430,3 +430,4 @@ unsupported_sites:
   workflow-automation: [gov,gov2]
   workflows: [gov,gov2]
   workload_security_active_protection: [gov,gov2]
+  work_management_ai_site_support: [gov,gov2]
