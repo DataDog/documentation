@@ -9310,12 +9310,12 @@ menu:
       url: real_user_monitoring/rum_terms_and_concepts/
       parent: rum
       identifier: rum_terms_and_concepts
-      weight: 0
+      weight: 1
     - name: Setup RUM
       url: real_user_monitoring/setup/
       parent: rum
       identifier: rum_setup
-      weight: 1
+      weight: 2
     - name: Create a RUM App
       url: real_user_monitoring/setup/create_application/
       parent: rum_setup
@@ -9875,7 +9875,7 @@ menu:
       url: real_user_monitoring/application_monitoring/cpp
       parent: application_monitoring
       identifier: rum_cpp
-      weight: 205
+      weight: 206
     - name: Setup
       url: real_user_monitoring/application_monitoring/cpp/setup
       parent: rum_cpp
@@ -9910,7 +9910,7 @@ menu:
       url: real_user_monitoring/application_monitoring/roku
       parent: application_monitoring
       identifier: rum_mobile_roku
-      weight: 206
+      weight: 207
     - name: Setup
       url: real_user_monitoring/application_monitoring/roku/setup
       parent: rum_mobile_roku
@@ -9935,7 +9935,7 @@ menu:
       url: real_user_monitoring/application_monitoring/unity
       parent: application_monitoring
       identifier: rum_mobile_unity
-      weight: 207
+      weight: 208
     - name: Setup
       url: real_user_monitoring/application_monitoring/unity/setup
       parent: rum_mobile_unity
@@ -9960,7 +9960,7 @@ menu:
       url: real_user_monitoring/application_monitoring/maui
       parent: application_monitoring
       identifier: rum_mobile_maui
-      weight: 208
+      weight: 209
     - name: Setup
       url: real_user_monitoring/application_monitoring/maui/setup
       parent: rum_mobile_maui
@@ -10051,16 +10051,31 @@ menu:
       url: real_user_monitoring/reference/
       parent: rum
       weight: 9
+    - name: External Resources
+      url: real_user_monitoring/reference/external_resources/
+      parent: rum_reference
+      identifier: rum_reference_external_resources
+      weight: 1
     - name: Integrated Libraries
       url: client_sdks/integrated_libraries/
       parent: rum_reference
       identifier: rum_reference_integrated_libraries
-      weight: 1
+      weight: 2
     - name: SDK Performance Impact
       url: real_user_monitoring/reference/sdk_performance_impact/
       parent: rum_reference
       identifier: rum_reference_sdk_performance_impact
-      weight: 2
+      weight: 3
+    - name: Troubleshooting
+      url: client_sdks/troubleshooting/
+      parent: rum_reference
+      identifier: rum_reference_troubleshooting
+      weight: 4
+    - name: Data Security
+      identifier: real_user_monitoring_data_security
+      url: data_security/real_user_monitoring/
+      parent: rum_reference
+      weight: 5
     - name: Exploring RUM Data
       url: real_user_monitoring/explorer/
       parent: rum
@@ -10231,11 +10246,6 @@ menu:
       parent: rum
       identifier: rum_guides
       weight: 20
-    - name: Data Security
-      identifier: real_user_monitoring_data_security
-      url: data_security/real_user_monitoring/
-      parent: rum
-      weight: 21
     - name: Product Analytics
       url: product_analytics/
       pre: product-analytics
