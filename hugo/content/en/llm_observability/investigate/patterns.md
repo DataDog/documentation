@@ -57,6 +57,7 @@ Each topic shows its interaction volume and share of total traffic. Interactions
 1. Enter a **Name**.
 1. Use the **Application** multi-selector to choose one or more LLM applications to include spans for. Selecting applications automatically updates the underlying span filter query, and editing the query updates the selected applications.
 1. Under **Setup**:
+  1. Select what to **Analyze** with Patterns, individual **Spans** or **Traces**.
   1. (Optional) Write a short **Clustering Instruction** to provide free-form guidance to how Patterns should group interactions and generate topics, such as user intent, agent task or product used. For example, to cluster based on the user intent, you can write "Cluster based on the user intent". Changing this field after a first successful run **will delete the topics found and persisted** in previous Patterns runs. Leave this blank to group interactions by each interaction's main goal.
   1. Select the variables in your interaction you want Patterns to **Cluster on**. Use `{{variable}}` syntax to reference any span field; for example, `{{meta.input.value}}` to analyze patterns by user input, or `{{meta.span.kind}}` to analyze by span kind.
   1. Add precise **Filters** to better select the interactions you want to cluster with Patterns.
