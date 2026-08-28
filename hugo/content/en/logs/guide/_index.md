@@ -41,7 +41,6 @@ cascade:
     {{< nextlink href="/logs/guide/collect-google-cloud-logs-with-push/" >}}Collect Google Cloud logs with a Pub/Sub Push subscription{{< /nextlink >}}
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Collect Heroku Logs{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}Log Collection Troubleshooting Guide{{< /nextlink >}}
-    {{< nextlink href="logs/guide/missing-log-bytes-troubleshooting-guide" >}}Missing Log Bytes Troubleshooting Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/docker-logs-collection-troubleshooting-guide" >}}Docker Log Collection Troubleshooting Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/lambda-logs-collection-troubleshooting-guide" >}}Lambda Log Collection Troubleshooting Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/setting-file-permissions-for-rotating-logs" >}}Setting File Permissions for Rotating Logs (Linux){{< /nextlink >}}
