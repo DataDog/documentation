@@ -86,7 +86,13 @@ final configuration = DatadogConfiguration(
   rumConfiguration: DatadogRumConfiguration(
     applicationId: '<RUM_APPLICATION_ID>',
   ),
-)..addPlugin(const DatadogFlagsPluginConfiguration());
+)..addPlugin(
+    const DatadogFlagsPluginConfiguration(
+      flagsConfiguration: DatadogFlagsConfiguration(
+        assignmentRequestTimeout: Duration(milliseconds: 1500),
+      ),
+    ),
+  );
 
 await DatadogSdk.instance.initialize(configuration, TrackingConsent.granted);
 {{< /code-block >}}
@@ -126,6 +132,7 @@ final datadogFlags = DatadogFlags.instance;
 
 await datadogFlags.enable(
   configuration: DatadogFlagsConfiguration(
+    assignmentRequestTimeout: const Duration(milliseconds: 1500),
     datadogConfig: const DatadogFlagsConfig(
       clientToken: '<CLIENT_TOKEN>',
       env: '<ENV_NAME>',
@@ -289,7 +296,7 @@ print(details.error?.code);
 {{< code-block lang="dart" >}}
 DatadogFlagsConfiguration(
   datadogConfig: datadogConfig,
-  assignmentRequestTimeout: const Duration(seconds: 2),
+  assignmentRequestTimeout: const Duration(milliseconds: 1500),
   assignmentRequestRetryCount: 2,
   trackExposures: true,
   trackEvaluations: true,
@@ -314,7 +321,7 @@ import 'package:http/http.dart' as http;
 final assignmentClient = withAssignmentRequestRetry(
   withAssignmentRequestTimeout(
     http.Client(),
-    const Duration(seconds: 2),
+    const Duration(milliseconds: 1500),
   ),
   2,
 );
@@ -357,7 +364,7 @@ final configuration = DatadogConfiguration(
 )..addPlugin(
     const DatadogFlagsPluginConfiguration(
       flagsConfiguration: DatadogFlagsConfiguration(
-        assignmentRequestTimeout: Duration(seconds: 2),
+        assignmentRequestTimeout: Duration(milliseconds: 1500),
         assignmentRequestRetryCount: 2,
         trackExposures: true,
         trackEvaluations: true,
@@ -424,6 +431,7 @@ Future<void> initializeFlags() async {
 
   await datadogFlags.enable(
     configuration: DatadogFlagsConfiguration(
+      assignmentRequestTimeout: const Duration(milliseconds: 1500),
       datadogConfig: const DatadogFlagsConfig(
         clientToken: '<CLIENT_TOKEN>',
         env: '<ENV_NAME>',

@@ -40,8 +40,12 @@ val configuration = Configuration.Builder(
     .build()
 Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 
-// 3. Enable Feature Flags
-Flags.enable()
+// 3. Enable Feature Flags with a bounded assignment request timeout
+Flags.enable(
+    FlagsConfiguration.Builder()
+        .assignmentRequestTimeout(1_500L)
+        .build()
+)
 
 // 4. Create and set up the OpenFeature provider
 val provider = FlagsClient.Builder().build().asOpenFeatureProvider()
@@ -98,8 +102,13 @@ After initializing Datadog, enable `Flags` to attach it to the current Datadog A
 
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.Flags
+import com.datadog.android.flags.FlagsConfiguration
 
-Flags.enable()
+val flagsConfiguration = FlagsConfiguration.Builder()
+    .assignmentRequestTimeout(1_500L)
+    .build()
+
+Flags.enable(flagsConfiguration)
 {{< /code-block >}}
 
 You can also pass a configuration object; see [Advanced configuration](#advanced-configuration).
@@ -300,7 +309,7 @@ The `Flags.enable()` API accepts optional configuration with the options listed 
 
 {{< code-block lang="kotlin" >}}
 val config = FlagsConfiguration.Builder()
-    .assignmentRequestTimeout(2_000L)
+    .assignmentRequestTimeout(1_500L)
     .assignmentRequestRetryCount(2)
     .build()
 
@@ -326,7 +335,7 @@ val assignmentClient = OkHttpClient.Builder()
 
 val config = FlagsConfiguration.Builder()
     .assignmentRequestCallFactory(assignmentClient)
-    .assignmentRequestTimeout(2_000L)
+    .assignmentRequestTimeout(1_500L)
     .assignmentRequestRetryCount(2)
     .build()
 {{< /code-block >}}

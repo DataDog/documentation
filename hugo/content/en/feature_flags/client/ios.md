@@ -99,7 +99,9 @@ After initializing Datadog, enable `Flags` to attach it to the current Datadog i
 {{< code-block lang="swift" >}}
 import DatadogFlags
 
-Flags.enable()
+var flagsConfiguration = Flags.Configuration()
+flagsConfiguration.assignmentRequestTimeout = 1.5
+Flags.enable(with: flagsConfiguration)
 {{< /code-block >}}
 
 You can also pass a configuration object; see [Advanced configuration](#advanced-configuration).
@@ -328,7 +330,9 @@ Datadog.initialize(
     trackingConsent: .granted
 )
 
-Flags.enable()
+var flagsConfiguration = Flags.Configuration()
+flagsConfiguration.assignmentRequestTimeout = 1.5
+Flags.enable(with: flagsConfiguration)
 
 let context = MutableContext(targetingKey: "user-123")
 let provider = DatadogProvider()
@@ -444,7 +448,7 @@ The `Flags.enable()` API accepts optional configuration with options listed belo
 
 {{< code-block lang="swift" >}}
 var config = Flags.Configuration()
-config.assignmentRequestTimeout = 2.0
+config.assignmentRequestTimeout = 1.5
 config.assignmentRequestRetryCount = 2
 Flags.enable(with: config)
 {{< /code-block >}}
@@ -462,7 +466,7 @@ For lower-level transport control, compose an assignment-only fetch implementati
 {{< code-block lang="swift" >}}
 let assignmentFetch = Flags.AssignmentRequestFetch
     .urlSession()
-    .withTimeout(2)
+    .withTimeout(1.5)
     .withRetry(2)
 
 var config = Flags.Configuration()
@@ -470,7 +474,7 @@ config.assignmentRequestFetch = assignmentFetch
 Flags.enable(with: config)
 {{< /code-block >}}
 
-The SDK still constructs the URL, body, authentication, and custom headers. A supplied `assignmentRequestFetch` is used verbatim and replaces the scalar timeout and retry settings. In the example, placing `withTimeout` inside `withRetry` gives every attempt its own two-second timeout. The custom transport applies only to assignment requests.
+The SDK still constructs the URL, body, authentication, and custom headers. A supplied `assignmentRequestFetch` is used verbatim and replaces the scalar timeout and retry settings. In the example, placing `withTimeout` inside `withRetry` gives every attempt its own 1.5-second timeout. The custom transport applies only to assignment requests.
 
 `trackExposures`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. If you only need local evaluation without telemetry, you can disable this option.

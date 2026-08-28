@@ -53,7 +53,7 @@ Create a `DatadogProvider` instance with your Datadog credentials. For live Brow
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
 ```javascript
-import { DatadogProvider } from '@datadog/openfeature-browser';
+import { DatadogProvider, withTimeout } from '@datadog/openfeature-browser';
 import { OpenFeature } from '@openfeature/web-sdk';
 
 const provider = new DatadogProvider({
@@ -65,6 +65,7 @@ const provider = new DatadogProvider({
   clientToken: '<CLIENT_TOKEN>',
   site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
+  flagConfigurationFetch: withTimeout(globalThis.fetch, 1_500),
 });
 ```
 
@@ -170,7 +171,7 @@ console.log(details.errorCode);   // Error code, if evaluation failed
 Here's a complete example showing how to set up and use Datadog Feature Flags in a JavaScript application:
 
 ```javascript
-import { DatadogProvider } from '@datadog/openfeature-browser';
+import { DatadogProvider, withTimeout } from '@datadog/openfeature-browser';
 import { OpenFeature } from '@openfeature/web-sdk';
 
 // Initialize the Datadog provider
@@ -179,6 +180,7 @@ const provider = new DatadogProvider({
   clientToken: '<CLIENT_TOKEN>',
   site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
+  flagConfigurationFetch: withTimeout(globalThis.fetch, 1_500),
 });
 
 // Set the evaluation context
@@ -237,11 +239,11 @@ import { DatadogProvider, withRetry, withTimeout } from '@datadog/openfeature-br
 
 const provider = new DatadogProvider({
   // Other provider options...
-  flagConfigurationFetch: withRetry(withTimeout(globalThis.fetch, 2_000), 2),
+  flagConfigurationFetch: withRetry(withTimeout(globalThis.fetch, 1_500), 2),
 });
 {{< /code-block >}}
 
-In this example, each attempt has a two-second timeout and `2` allows two retries after the initial request. The timeout includes downloading the response body. Set the timeout or retry count to `0` to disable that behavior; retry counts from `0` to `10` are accepted. Retries cover network errors, timeouts, HTTP 408, and HTTP 5xx responses; caller cancellation and HTTP 429 responses are not retried. `flagConfigurationFetch` applies only to flag configuration requests; it does not affect exposure, aggregated flag evaluation, or RUM telemetry requests.
+In this example, each attempt has a 1.5-second timeout and `2` allows two retries after the initial request. The timeout includes downloading the response body. Set the timeout or retry count to `0` to disable that behavior; retry counts from `0` to `10` are accepted. Retries cover network errors, timeouts, HTTP 408, and HTTP 5xx responses; caller cancellation and HTTP 429 responses are not retried. `flagConfigurationFetch` applies only to flag configuration requests; it does not affect exposure, aggregated flag evaluation, or RUM telemetry requests.
 
 ## Override flags in your browser
 

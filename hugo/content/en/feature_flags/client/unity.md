@@ -52,7 +52,9 @@ After initializing Datadog, enable `Flags` to attach it to the current Datadog U
 {{< code-block lang="csharp" >}}
 using Datadog.Unity.Flags;
 
-DdFlags.Enable();
+DdFlags.Enable(new FlagsConfiguration(
+    assignmentRequestTimeoutSeconds: 1,
+    assignmentRequestRetryCount: 0));
 {{< /code-block >}}
 
 You can also pass a configuration object; see [Advanced configuration](#advanced-configuration).
@@ -203,7 +205,7 @@ The `DdFlags.Enable()` API accepts optional configuration with options listed be
 
 {{< code-block lang="csharp" >}}
 DdFlags.Enable(new FlagsConfiguration(
-    assignmentRequestTimeoutSeconds: 2,
+    assignmentRequestTimeoutSeconds: 1,
     assignmentRequestRetryCount: 2,
     trackExposures: true,
     trackEvaluations: true,
@@ -223,7 +225,7 @@ For lower-level transport control, compose an assignment-only transport:
 
 {{< code-block lang="csharp" >}}
 var assignmentTransport = AssignmentRequestTransports.Default
-    .WithTimeout(2)
+    .WithTimeout(1)
     .WithRetry(2);
 
 DdFlags.Enable(new FlagsConfiguration(
