@@ -30,6 +30,14 @@ export function branchRef(): string | undefined {
 }
 
 export function deriveSiteUrl(): string {
+  // Explicit override, checked first. Used by the websites deployment platform
+  // build, which serves at the root of its own CloudFront distribution rather
+  // than under a branch path on docs-staging — the pair to `DOCS_PATH_PREFIX`
+  // in `pathPrefix.ts`.
+  const override = process.env.DOCS_SITE_URL;
+  if (override) {
+    return override.replace(/\/+$/, "");
+  }
   const env = process.env.CI_ENVIRONMENT_NAME;
   if (env === "preview") {
     const ref = branchRef();

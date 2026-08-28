@@ -26,7 +26,10 @@ import { readdir } from "node:fs/promises";
  */
 
 const API_ROUTE = /^\/(?:(?:fr|ja|ko|es)\/)?api(?:\/|$)/;
-const CONTAINED_PATH = /^(?:api|fr\/api|ja\/api|ko\/api|es\/api)\//;
+// `_astro` is Astro's default asset directory and the one the deployment
+// platform's router treats as a cacheable static fast-path. Everything else
+// must stay inside the app's own `/api` namespace.
+const CONTAINED_PATH = /^(?:_astro|api|fr\/api|ja\/api|ko\/api|es\/api)\//;
 // Page pathnames arrive without a leading slash (`api/latest/dashboards/`).
 // English only, matching `scripts/verifyDist.mjs`, so translated output can't
 // inflate the count past the floor.

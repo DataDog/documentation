@@ -97,4 +97,22 @@ describe("deriveSiteUrl", () => {
     process.env.CI_ENVIRONMENT_NAME = "live";
     expect(deriveSiteUrl()).toBe("https://docs.datadoghq.com");
   });
+
+  it("honors DOCS_SITE_URL ahead of every other branch", () => {
+    process.env.CI_ENVIRONMENT_NAME = "preview";
+    process.env.CI_COMMIT_REF_NAME = "devin.ford/my-cool-thing";
+    process.env.DOCS_SITE_URL = "https://d111111abcdef8.cloudfront.net";
+    expect(deriveSiteUrl()).toBe("https://d111111abcdef8.cloudfront.net");
+  });
+
+  it("strips a trailing slash from DOCS_SITE_URL", () => {
+    process.env.DOCS_SITE_URL = "https://d111111abcdef8.cloudfront.net/";
+    expect(deriveSiteUrl()).toBe("https://d111111abcdef8.cloudfront.net");
+  });
+
+  it("ignores an empty DOCS_SITE_URL rather than emitting an empty site", () => {
+    process.env.CI_ENVIRONMENT_NAME = "live";
+    process.env.DOCS_SITE_URL = "";
+    expect(deriveSiteUrl()).toBe("https://docs.datadoghq.com");
+  });
 });

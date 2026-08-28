@@ -18,7 +18,7 @@
 import { readdir, stat } from "node:fs/promises";
 import { join } from "node:path";
 
-const CONTAINED_PATH = /^(?:api|fr\/api|ja\/api|ko\/api|es\/api)\//;
+const CONTAINED_PATH = /^(?:_astro|api|fr\/api|ja\/api|ko\/api|es\/api)\//;
 
 const args = process.argv.slice(2);
 const positional = args.filter((arg) => !arg.startsWith("--"));

@@ -80,12 +80,15 @@ export default defineConfig({
   devToolbar: { enabled: false },
   build: {
     inlineStylesheets: "always",
-    // Keeps every hashed bundle inside the /api namespace, so no new
-    // root-level CloudFront concern is introduced by the overlay.
-    assets: "api/_astro",
-    // Prefixes hashed bundle URLs (and url()s in built/inlined CSS) with the
-    // preview branch segment. site's own path already carries it for
-    // canonical/absolute URLs; this is the equivalent for build.assets.
+    // Astro's default `_astro`, deliberately. The websites deployment platform's
+    // CloudFront router hardcodes /_astro/, /images/ and /fonts/ as its S3
+    // fast-path, with matching long-cache behaviors; anything else falls through
+    // to the generic route and loses asset caching. This used to be `api/_astro`
+    // to keep the overlay out of the shared Hugo bucket's root — the app now
+    // deploys to its own bucket, so that constraint is gone.
+    // Prefixes hashed bundle URLs (and url()s in built/inlined CSS). Empty on
+    // the platform, which serves at its distribution root; site's own path
+    // carries the equivalent for canonical/absolute URLs.
     assetsPrefix: pathPrefix() || undefined,
   },
   i18n: {

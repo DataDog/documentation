@@ -46,14 +46,15 @@ describe("findUncontainedPaths", () => {
     expect(offenders).toEqual(["index.html", "favicon.ico"]);
   });
 
-  it("allows every locale-prefixed /api subtree", () => {
+  it("allows every locale-prefixed /api subtree, plus the _astro assets", () => {
     const offenders = findUncontainedPaths([
       "api/latest/dashboards/index.html",
       "fr/api/latest/dashboards/index.html",
       "ja/api/latest/dashboards/index.html",
       "ko/api/latest/dashboards/index.html",
       "es/api/latest/dashboards/index.html",
-      "api/_astro/chunk.abc123.js",
+      "_astro/chunk.abc123.js",
+      "_astro/NationalWeb-Light.dKg0S4Gx.woff2",
     ]);
     expect(offenders).toEqual([]);
   });
