@@ -5,7 +5,7 @@ description: Prompt incident responders to fill out specific fields on status ch
 
 ## Overview
 
-As an incident progresses through status changes, you can guide responders to fill out fields on the incident with transition forms. These forms help ensure that information about the incident is collected at the right time in the incident response process. When a responder transitions an incident to a status, they are prompted to fill out the form configured for that status.
+Any time an incident progresses through status changes, you can guide responders to fill out fields on the incident with transition forms. These forms help ensure that information about the incident is collected at the right time in the incident response process.
 
 {{< img src="/incident_response/incident_management/setup_and_configuration/status_transition_form.png" alt="Status Change form prompting for the required Teams and Postmortem Owner fields when moving an incident to Resolved" style="width:70%;" >}}
 
