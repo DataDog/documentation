@@ -30,10 +30,10 @@ Most `ddtest` settings can be passed as a CLI flag or as an environment variable
 **Supported values:** `rspec`, `minitest`, `pytest`, `jest`
 
 `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`
-: Overrides the default test command for Ruby and JavaScript. `ddtest` appends selected test files and framework-specific flags to the command. For pytest, use `PYTEST_ADDOPTS` instead. For more information, see [Custom test commands](#custom-test-commands).<br/>
+: Overrides the default test command. `ddtest` appends selected test files and framework-specific flags to the command. Supported for Ruby, JavaScript, and Python. Python support requires ddtest 1.7.0 or later. For ddtest versions prior to 1.7.0 with pytest, the command cannot be changed. Pass extra flags with `PYTEST_ADDOPTS`. For more information, see [Custom test commands](#custom-test-commands).<br/>
 **CLI flag:** `--command`<br/>
 **Default:** Empty<br/>
-**Example:** `bundle exec rspec --profile`, `pnpm jest --runInBand`
+**Example:** `bundle exec rspec --profile`, `pnpm jest --runInBand`, `pytest`
 
 `DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM`
 : Minimum CI node or worker count `ddtest` considers when planning.<br/>
@@ -158,7 +158,7 @@ When using `--command`, do not include test files in the command. `ddtest` appen
 
 Do not include the `--` separator in `--command`. If the command contains `--`, `ddtest` emits a warning and removes the separator and everything after it.
 
-For pytest, `ddtest` runs `python -m pytest` and appends selected test files. Use `PYTEST_ADDOPTS` to pass additional pytest flags. `ddtest` appends `--ddtrace` to `PYTEST_ADDOPTS` automatically so the `ddtrace` pytest plugin loads without changing your pytest config.
+For pytest, `ddtest` runs `python -m pytest <files>` by default. Since 1.7.0, set `--command` to override the base command. For example, `--command pytest` runs the `pytest` console script instead of `python -m pytest`. `ddtest` runs `<command> <files>` and does not add `-m pytest`. To pass extra pytest flags without changing the base command, use `PYTEST_ADDOPTS`. `ddtest` appends `--ddtrace` to `PYTEST_ADDOPTS` automatically so the `ddtrace` pytest plugin loads without changing your pytest config.
 
 For Jest, `ddtest` prepends `-r dd-trace/ci/init` to `NODE_OPTIONS` for worker processes unless it is already present, so the `dd-trace` package must be installed in the project where `ddtest` runs.
 
@@ -170,7 +170,7 @@ For pytest, `ddtest` discovers test files using this priority:
 2. Pytest configuration from `pytest.ini`, `pyproject.toml`, `tox.ini`, or `setup.cfg`, using `testpaths` and `python_files`.
 3. The built-in pattern `**/{test_*,*_test}.py`.
 
-Pytest does not have an equivalent to RSpec's pattern flag, so `ddtest` resolves the pattern to explicit file paths before invoking `python -m pytest`.
+Pytest does not have an equivalent to RSpec's pattern flag, so `ddtest` resolves the pattern to explicit file paths before invoking the configured pytest command. The default is `python -m pytest`. Since 1.7.0, `--command` overrides it.
 
 ## Jest test discovery and instrumentation
 
