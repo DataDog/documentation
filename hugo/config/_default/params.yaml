@@ -288,6 +288,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  cloudcraft_apm_overlay: [gov, gov2]
   code_locations: [gov, gov2]
   ownership_of_views: [gov, gov2]
   ai_credit_limits: [gov, gov2]
