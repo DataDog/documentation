@@ -445,12 +445,12 @@ To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` envi
 [10]: https://docs.cypress.io/app/references/configuration#Screenshots
 {{% /tab %}}
 
-{{% tab "Vitest/WebdriverIO" %}}
+{{% tab "Vitest" %}}
 <div class="alert alert-danger">
   <strong>Note</strong>: <a href="https://github.com/vitest-dev/vitest?tab=readme-ov-file#features">Vitest is ESM first</a>, so its configuration is different from other test frameworks.
 </div>
 
-Use a Node.js version supported by your `dd-trace` major version for Vitest and WebdriverIO instrumentation:
+Use a Node.js version supported by your `dd-trace` major version for Vitest instrumentation:
 
 - `dd-trace` v5 requires Node.js 18.19+ or Node.js 20.6+.
 - `dd-trace` v6 requires Node.js 22 or later.
@@ -466,13 +466,12 @@ NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_TEST_SESSION
 {{< code-block lang="json" filename="package.json" >}}
 {
   "scripts": {
-    "test:vitest": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" vitest run",
-    "test:webdriverio": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" wdio run ./wdio.conf.js"
+    "test": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" vitest run"
   }
 }
 {{< /code-block >}}
 
-### Adding custom tags or measures to Vitest tests
+### Adding custom tags or measures to tests
 
 You can add custom tags to your tests by using the current active span:
 
@@ -501,6 +500,70 @@ test('sum function can sum', () => {
   testSpan.setTag('memory_allocations', 16)
 
   expect(1 + 2).toBe(3)
+})
+```
+
+For more information about custom measures, see the [Add Custom Measures Guide][2].
+
+[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /tests/guides/add_custom_measures/?tab=javascripttypescript
+{{% /tab %}}
+
+{{% tab "WebdriverIO" %}}
+Use a Node.js version supported by your `dd-trace` major version for WebdriverIO instrumentation:
+
+- `dd-trace` v5 requires Node.js 18.19+ or Node.js 20.6+.
+- `dd-trace` v6 requires Node.js 22 or later.
+
+Set the `NODE_OPTIONS` environment variable to `--import dd-trace/register.js -r dd-trace/ci/init`. Run your tests as you normally would, optionally specifying a name for your test session with `DD_TEST_SESSION_NAME`:
+
+```bash
+NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_TEST_SESSION_NAME=e2e-tests yarn test:e2e
+```
+
+**Note**: If you set a value for `NODE_OPTIONS`, make sure it does not overwrite `--import dd-trace/register.js -r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
+
+{{< code-block lang="json" filename="package.json" >}}
+{
+  "scripts": {
+    "test:e2e": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" wdio run ./wdio.conf.js"
+  }
+}
+{{< /code-block >}}
+
+### Adding custom tags or measures to tests
+
+You can add custom tags to your tests by using the current active span:
+
+```javascript
+import tracer from 'dd-trace'
+
+describe('home page', () => {
+  it('displays the heading', async () => {
+    const testSpan = tracer.scope().active()
+    testSpan.setTag('team_owner', 'my_team')
+
+    await browser.url('/')
+    await expect($('h1')).toBeDisplayed()
+  })
+})
+```
+
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
+
+You can also add custom measures to your tests by using the current active span:
+
+```javascript
+import tracer from 'dd-trace'
+
+describe('home page', () => {
+  it('displays the heading', async () => {
+    const testSpan = tracer.scope().active()
+    testSpan.setTag('memory_allocations', 16)
+
+    await browser.url('/')
+    await expect($('h1')).toBeDisplayed()
+  })
 })
 ```
 
