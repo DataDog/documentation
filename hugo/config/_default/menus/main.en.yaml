@@ -752,16 +752,11 @@ menu:
       identifier: otel-setup-ddot-migrate
       parent: otel-setup-ddot
       weight: 4013
-    - name: Other Setup Options
-      url: /opentelemetry/setup/
-      identifier: otel-setup-other
-      parent: otel_collect
-      weight: 402
     - name: OpenTelemetry Collector
       url: /opentelemetry/setup/collector_exporter/
       identifier: otel-setup-collector-exporter
-      parent: otel-setup-other
-      weight: 4021
+      parent: otel_collect
+      weight: 402
     - name: Deploy
       url: /opentelemetry/setup/collector_exporter/deploy
       identifier: otel-setup-collector-exporter-deploy
@@ -790,13 +785,13 @@ menu:
     - name: OTLP Ingest in the Agent
       url: /opentelemetry/setup/otlp_ingest_in_the_agent
       identifier: otel-setup-otlp-ingest
-      parent: otel-setup-other
-      weight: 4022
+      parent: otel_collect
+      weight: 403
     - name: Direct OTLP Ingest
       url: /opentelemetry/setup/otlp_ingest
       identifier: otel-setup-intake-endpoint
-      parent: otel-setup-other
-      weight: 4023
+      parent: otel_collect
+      weight: 404
     - name: Logs Endpoint
       url: /opentelemetry/setup/otlp_ingest/logs
       parent: otel-setup-intake-endpoint
@@ -2714,16 +2709,21 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_property_fields
       weight: 202
+    - name: Transition Forms
+      url: incident_response/incident_management/setup_and_configuration/transition_forms
+      parent: incidents_settings
+      identifier: incidents_settings_transition_forms
+      weight: 203
     - name: Responder Types
       url: incident_response/incident_management/setup_and_configuration/responder_types
       parent: incidents_settings
       identifier: incidents_settings_responder_types
-      weight: 203
+      weight: 204
     - name: Automations
       url: incident_response/incident_management/setup_and_configuration/automations
       parent: incidents_settings
       identifier: incidents_settings_automations
-      weight: 204
+      weight: 205
     - name: Notification Rules
       url: incident_response/incident_management/setup_and_configuration/notification_rules
       parent: incidents_settings
@@ -7664,36 +7664,41 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_sizing
       weight: 600
+    - name: Autoscaling
+      url: /byoc-logs/operate/autoscaling
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_autoscaling
+      weight: 601
     - name: Monitoring
       url: /byoc-logs/operate/monitoring
       parent: cloudprem_operate
       identifier: cloudprem_operate_monitoring
-      weight: 601
+      weight: 602
     - name: Search Logs
       url: /byoc-logs/operate/search_logs
       parent: cloudprem_operate
       identifier: cloudprem_operate_search
-      weight: 602
+      weight: 603
     - name: Production Best Practices
       url: /byoc-logs/operate/best_practices
       parent: cloudprem_operate
       identifier: cloudprem_operate_best_practices
-      weight: 603
+      weight: 604
     - name: Disk Buffer Durability
       url: /byoc-logs/operate/disk_buffer_durability
       parent: cloudprem_operate
       identifier: cloudprem_operate_disk_buffer_durability
-      weight: 604
+      weight: 605
     - name: Releases and Updates
       url: /byoc-logs/operate/updates
       parent: cloudprem_operate
       identifier: cloudprem_operate_updates
-      weight: 605
+      weight: 606
     - name: Troubleshooting
       url: /byoc-logs/operate/troubleshooting
       parent: cloudprem_operate
       identifier: cloudprem_operate_troubleshooting
-      weight: 606
+      weight: 607
     - name: Guides
       url: /byoc-logs/guides/
       parent: cloudprem
@@ -10052,26 +10057,31 @@ menu:
       parent: pa_charts
       identifier: pa_chart_basics
       weight: 101
-    - name: Pathways Diagram
-      url: product_analytics/charts/pathways
-      parent: pa_charts
-      identifier: pa_pathways
-      weight: 102
-    - name: Funnel Analysis
+    - name: Funnel
       url: product_analytics/charts/funnel_analysis
       parent: pa_charts
       identifier: pa_funnel_analysis
+      weight: 102
+    - name: Journey Paths
+      url: product_analytics/charts/journey_paths
+      parent: pa_charts
+      identifier: pa_journey_paths
       weight: 103
-    - name: Retention Analysis
+    - name: Pathways
+      url: product_analytics/charts/pathways
+      parent: pa_charts
+      identifier: pa_pathways
+      weight: 104
+    - name: Retention
       url: product_analytics/charts/retention_analysis
       parent: pa_charts
       identifier: pa_user_retention
-      weight: 104
-    - name: Analytics Explorer
+      weight: 105
+    - name: Analytics
       url: product_analytics/charts/analytics_explorer
       parent: pa_charts
       identifier: pa_analytics_explorer
-      weight: 105
+      weight: 106
     - name: Dashboards
       url: product_analytics/dashboards
       parent: product_analytics
