@@ -37,12 +37,13 @@ Upgrade to  **v7.82+**  of the Datadog Agent and Cluster Agent and install the `
 
 ## Setup
 
-The `DatadogInstrumentation` controller runs in the Cluster Agent.
+To use `DatadogInstrumentation` (DDI), a controller in your Agent must be enabled to track and reconcile each CR.
+
+<div class="alert alert-info">Skip setup if you're using `v1.30+` of the Datadog Operator or `v3.241.0+` of the Datadog Helm Chart. The DDI controller
+is enabled by default, requiring no setup.</div>
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-
-**Note**: Starting in Datadog Operator v1.30.0, the controller is enabled by default. If you use v1.30.0 or later, skip the following setup steps.
 
 1. Update your Helm repositories:
 
@@ -80,8 +81,6 @@ The Operator sets the required Cluster Agent and Node Agent environment variable
 
 {{% /tab %}}
 {{% tab "Helm" %}}
-
-**Note**: Starting in Datadog Helm chart v3.241.0, the controller is enabled by default. If you use v3.241.0 or later, skip the following setup steps.
 
 1. Update your Helm repositories:
 
