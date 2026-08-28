@@ -103,6 +103,10 @@ Toggle the switch to enable {{< ui >}}Compression{{< /ui >}}. Select a compressi
 {{% /tab %}}
 {{< /tabs >}}
 
+## Health metrics
+
+See [Component metrics][10] and [Destination buffer metrics][11] for more information on metrics emitted by all destinations.
+
 ## How the destination works
 
 ### Event batching
@@ -122,3 +126,5 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [7]: /observability_pipelines/configuration/set_up_pipelines/
 [8]: /api/latest/observability-pipelines/
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[11]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics

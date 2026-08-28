@@ -53,6 +53,10 @@ After you select the New Relic destination in the pipeline UI:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Health metrics
+
+See [Component metrics][6] and [Destination buffer metrics][7] for more information on metrics emitted by all destinations.
+
 ## How the destination works
 
 ### Event batching
@@ -68,3 +72,5 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [3]: /observability_pipelines/configuration/set_up_pipelines/
 [4]: /api/latest/observability-pipelines/
 [5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[7]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics
