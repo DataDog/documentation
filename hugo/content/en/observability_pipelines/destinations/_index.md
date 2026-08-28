@@ -103,15 +103,15 @@ When the Observability Pipelines Worker cannot resolve the field with the templa
 
 The following table lists the destinations and fields that support template syntax, and what happens when the Worker cannot resolve the field:
 
-| Destination       | Fields that support template syntax | Behavior when the field cannot be resolved                                                                                 |
-|-------------------|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| Amazon Opensearch | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
+| Destination       | Fields that support template syntax                        | Behavior when the field cannot be resolved                                                                                 |
+|-------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| Amazon Opensearch | Index (Bulk mode)<br><br>Type, Dataset, Namespace (Data streams mode) | The Worker writes logs to the `datadog-op` index.<br><br>The Worker drops the logs. |
 | Datadog Archives  | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Azure Blob        | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
-| Elasticsearch     | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
+| Elasticsearch     | Index (Bulk mode)<br><br>Type, Dataset, Namespace (Data streams mode) | The Worker writes logs to the `datadog-op` index.<br><br>The Worker drops the logs. |
 | Google Chronicle  | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
 | Google Cloud      | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
-| Opensearch        | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
+| Opensearch        | Index (Bulk mode)<br><br>Type, Dataset, Namespace (Data streams mode) | The Worker writes logs to the `datadog-op` index.<br><br>The Worker drops the logs. |
 | Prometheus*        | Tenant ID                           | The Worker drops the metric.  |
 | Splunk HEC        | Index<br>Source type                | The Worker sends the logs to the default index configured in Splunk.<br>The Worker defaults to the `httpevent` sourcetype. |
 
