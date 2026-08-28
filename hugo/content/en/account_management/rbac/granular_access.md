@@ -32,6 +32,7 @@ Use the different principals to control access patterns in your organization and
 | [Logs Pipelines][24]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Monitors][3]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Notebooks][4]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [OCI Integration Configurations][27]             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Observability Pipelines][23]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [On-Call][22]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Private Action Runner][18]                      | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -76,3 +77,4 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [24]: /logs/log_configuration/pipelines/#pipeline-permissions
 [25]: /getting_started/feature_flags/
 [26]: /security/cloud_siem/detect_and_monitor/critical_assets/#restrict-edit-permissions
+[27]: /integrations/oracle_cloud_infrastructure/#limit-edit-access
