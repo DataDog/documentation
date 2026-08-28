@@ -182,7 +182,7 @@ import { DatadogBrowserFlagging } from '@datadog/browser-flagging';
 DatadogBrowserFlagging.init({
     clientToken: '<CLIENT_TOKEN>',
     site: '{{< region-param key="dd_site" code="true" >}}',
-    flaggingProxy: 'https://proxy.example.com/flag-config',
+    flaggingProxy: 'https://proxy.example.com/precompute-assignments',
 });
 {{< /code-block >}}
 
@@ -194,7 +194,7 @@ To add custom headers to the flag configuration request (for example, for authen
 DatadogBrowserFlagging.init({
     clientToken: '<CLIENT_TOKEN>',
     site: '{{< region-param key="dd_site" code="true" >}}',
-    flaggingProxy: 'https://proxy.example.com/flag-config',
+    flaggingProxy: 'https://proxy.example.com/precompute-assignments',
     customHeaders: { 'X-Proxy-Token': '<YOUR_PROXY_TOKEN>' },
 });
 {{< /code-block >}}
@@ -207,7 +207,7 @@ Browser flag event data (exposures and evaluations) is sent through the standard
 DatadogBrowserFlagging.init({
     clientToken: '<CLIENT_TOKEN>',
     site: '{{< region-param key="dd_site" code="true" >}}',
-    flaggingProxy: 'https://proxy.example.com/flag-config',
+    flaggingProxy: 'https://proxy.example.com/precompute-assignments',
     proxy: 'https://proxy.example.com/intake',
 });
 {{< /code-block >}}

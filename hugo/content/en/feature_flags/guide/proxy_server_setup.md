@@ -31,6 +31,8 @@ The examples below use the Datadog site selected in the site dropdown on this pa
 | US3 | `preview.ff-cdn.us3.datadoghq.com` | `api.us3.datadoghq.com` | `browser-intake-us3-datadoghq.com` |
 | US5 | `preview.ff-cdn.us5.datadoghq.com` | `api.us5.datadoghq.com` | `browser-intake-us5-datadoghq.com` |
 | AP1 | `preview.ff-cdn.ap1.datadoghq.com` | `api.ap1.datadoghq.com` | `browser-intake-ap1-datadoghq.com` |
+| AP2 | `preview.ff-cdn.ap2.datadoghq.com` | `api.ap2.datadoghq.com` | `browser-intake-ap2-datadoghq.com` |
+| UK1 | `preview.ff-cdn.uk1.datadoghq.com` | `api.uk1.datadoghq.com` | `browser-intake-uk1-datadoghq.com` |
 
 ## Choose a proxy implementation
 
@@ -48,13 +50,14 @@ Add the following `server` block to your NGINX configuration.
 server {
     listen 443 ssl;
     server_name proxy.example.com;
+    # ssl_certificate     /etc/ssl/certs/proxy.example.com.crt;
+    # ssl_certificate_key /etc/ssl/private/proxy.example.com.key;
 
     # Flag configuration relay (all platforms)
     location /precompute-assignments {
         proxy_pass https://preview.ff-cdn.{{< region-param key="dd_site" code="true" >}}/precompute-assignments;
         proxy_ssl_server_name on;
         proxy_set_header Host preview.ff-cdn.{{< region-param key="dd_site" code="true" >}};
-        proxy_pass_request_headers on;
         proxy_pass_request_body on;
     }
 
@@ -63,7 +66,6 @@ server {
         proxy_pass {{< region-param key="dd_api" code="true" >}}/api/v2/exposures;
         proxy_ssl_server_name on;
         proxy_set_header Host api.{{< region-param key="dd_site" code="true" >}};
-        proxy_pass_request_headers on;
         proxy_pass_request_body on;
     }
 
@@ -72,7 +74,6 @@ server {
         proxy_pass {{< region-param key="dd_api" code="true" >}}/api/v2/flagevaluation;
         proxy_ssl_server_name on;
         proxy_set_header Host api.{{< region-param key="dd_site" code="true" >}};
-        proxy_pass_request_headers on;
         proxy_pass_request_body on;
     }
 }
@@ -223,7 +224,7 @@ After deploying, configure a custom domain for your Worker (for example, `proxy.
 
 Next.js API routes work as a relay proxy when deployed on Vercel or any Node.js hosting platform.
 
-Create one API route for flag configuration and one for events. Update `DATADOG_SITE` if your Datadog site is not US1.
+Create three API routes: one for flag configuration, one for mobile events, and one for browser events.
 
 ### Flag configuration route
 
@@ -253,43 +254,64 @@ export async function POST(req: Request) {
 }
 {{< /code-block >}}
 
-### Event route (mobile and browser)
+### Mobile event route
+
+A catch-all route handles both `/api/v2/exposures` and `/api/v2/flagevaluation` and forwards each to the Datadog mobile intake.
+
+{{< code-block lang="typescript" filename="app/api/v2/[...path]/route.ts" >}}
+import { NextRequest } from 'next/server';
+
+const SITE = '{{< region-param key="dd_site" code="true" >}}';
+const MOBILE_INTAKE = `https://api.${SITE}`;
+
+export async function POST(
+  req: NextRequest,
+  { params }: { params: { path: string[] } }
+) {
+  const subpath = params.path.join('/');
+  const targetUrl = `${MOBILE_INTAKE}/api/v2/${subpath}`;
+  const clientIp = req.headers.get('x-forwarded-for') ?? req.headers.get('x-real-ip') ?? '';
+
+  const response = await fetch(targetUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': req.headers.get('Content-Type') ?? 'application/octet-stream',
+      'X-Forwarded-For': clientIp,
+    },
+    body: req.body,
+    // @ts-ignore
+    duplex: 'half',
+  });
+
+  return new Response(response.body, { status: response.status });
+}
+{{< /code-block >}}
+
+### Browser event route
 
 {{< code-block lang="typescript" filename="app/api/intake/route.ts" >}}
 import { NextRequest, NextResponse } from 'next/server';
 
 const SITE = '{{< region-param key="dd_site" code="true" >}}';
-const MOBILE_INTAKE = `https://api.${SITE}`;
 const _parts = SITE.split('.');
 const _tld = _parts.pop();
 const BROWSER_INTAKE = `https://browser-intake-${_parts.join('-')}.${_tld}`;
 
 export async function POST(req: NextRequest) {
-  const { pathname, searchParams } = req.nextUrl;
-  const ddforward = searchParams.get('ddforward');
-  const clientIp =
-    req.headers.get('x-forwarded-for') ?? req.headers.get('x-real-ip') ?? '';
-
-  let targetUrl: string;
-
-  if (ddforward) {
-    // Browser SDK event: decode ddforward and forward to browser intake
-    targetUrl = `${BROWSER_INTAKE}${ddforward}`;
-  } else if (pathname.startsWith('/api/v2/')) {
-    // Mobile SDK event: forward to mobile intake
-    targetUrl = `${MOBILE_INTAKE}${pathname}`;
-  } else {
-    return NextResponse.json({ error: 'not found' }, { status: 404 });
+  const ddforward = req.nextUrl.searchParams.get('ddforward');
+  if (!ddforward) {
+    return NextResponse.json({ error: 'missing ddforward' }, { status: 400 });
   }
 
-  const forwardedHeaders: HeadersInit = {
-    'Content-Type': req.headers.get('Content-Type') ?? 'application/octet-stream',
-    'X-Forwarded-For': clientIp,
-  };
+  const targetUrl = `${BROWSER_INTAKE}${ddforward}`;
+  const clientIp = req.headers.get('x-forwarded-for') ?? req.headers.get('x-real-ip') ?? '';
 
   const response = await fetch(targetUrl, {
     method: 'POST',
-    headers: forwardedHeaders,
+    headers: {
+      'Content-Type': req.headers.get('Content-Type') ?? 'application/octet-stream',
+      'X-Forwarded-For': clientIp,
+    },
     body: req.body,
     // @ts-ignore
     duplex: 'half',
@@ -304,8 +326,8 @@ After deploying, set the SDK options as follows (replace `proxy.example.com` wit
 | SDK option | Value |
 |---|---|
 | Flag config | `https://proxy.example.com/api/flag-config` |
-| Exposures (mobile) | `https://proxy.example.com/api/intake/api/v2/exposures` |
-| Evaluations (mobile) | `https://proxy.example.com/api/intake/api/v2/flagevaluation` |
+| Exposures (mobile) | `https://proxy.example.com/api/v2/exposures` |
+| Evaluations (mobile) | `https://proxy.example.com/api/v2/flagevaluation` |
 | Browser events (`proxy`) | `https://proxy.example.com/api/intake` |
 
 {{% /tab %}}
