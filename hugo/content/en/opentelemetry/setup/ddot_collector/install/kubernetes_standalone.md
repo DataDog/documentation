@@ -770,7 +770,7 @@ To apply later changes, run `helm upgrade node-collector open-telemetry/opentele
 
 ## Install the core Datadog Agent alongside DDOT
 
-If you also want to run the core Datadog Agent on the same nodes as the standalone DDOT Collector — for example, to collect infrastructure metrics, APM, or logs through the core Agent while DDOT handles OTLP ingestion — you can install it separately using the [Datadog Operator][57].
+If you want to run the core Datadog Agent on the same nodes as the standalone DDOT Collector—for example, to collect infrastructure metrics, APM, or logs through the core Agent while DDOT handles OTLP ingestion—you can install it separately using the [Datadog Operator][57].
 
 By default, the Datadog Operator Helm chart watches <code>DatadogAgent</code> resources only in the namespace where the Operator is installed (<code>watchNamespaces: []</code>). If the <code>DatadogAgent</code> resource is in a different namespace than the Operator, for example, to keep it separate from the <code>OpenTelemetryCollector</code> resource's namespace, set <code>watchNamespaces</code> to include the namespace where the <code>DatadogAgent</code> resource is created:
 <pre><code>helm upgrade datadog-operator datadog/datadog-operator \
