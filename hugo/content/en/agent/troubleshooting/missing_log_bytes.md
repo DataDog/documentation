@@ -1,6 +1,6 @@
 ---
-title: Missing Log Bytes
-description: "Find out why the Datadog Agent is losing log data when files rotate, and adjust your Agent configuration to prevent it."
+title: Troubleshoot Missing Log Bytes
+description: "Investigate unread log data reported after file rotation and identify backpressure in the Datadog Agent logs pipeline."
 further_reading:
 - link: "/agent/logs/log_transport/"
   tag: "Documentation"
@@ -16,49 +16,48 @@ further_reading:
   text: "Send an Agent Flare"
 ---
 
-The Datadog Agent tails your log files and sends what it reads to Datadog. When a file is rotated or deleted before the Agent finishes reading it, whatever the Agent had not read yet is gone. The Agent reports this as missing log bytes.
+On Linux and macOS, the Datadog Agent continues reading a rotated log file for `logs_config.close_timeout`, which defaults to 60 seconds. If the Agent has not reached the end of the file when this timeout expires, it closes the file and reports the unread portion as missing log bytes.
 
-This usually means the Agent cannot send logs as fast as your applications write them. Instead of dropping data, the Agent slows down how fast it reads from your files. If a file rotates before the Agent catches up, the unread portion is deleted with the old file.
+Missing log bytes indicate that file rotation outpaced the Agent's reads during the close window. Backpressure in the logs pipeline can slow those reads, but rotation frequency and the volume written to an individual file also affect whether the Agent finishes before the timeout.
 
-**Note**: The Agent reports unread bytes after rotation when tailing files on Linux and macOS.
+If the steps on this page do not resolve the issue, [contact Datadog Support](#contact-datadog-support).
 
-If you try the steps below and continue to have trouble, [contact Datadog Support](#reach-out-to-datadog-support).
+## Possible causes
 
-## Common causes of missing log bytes
+- The Agent cannot deliver payloads to the Datadog intake because of network, proxy, authentication, or intake errors.
+- The time required to send payloads is limiting throughput.
+- Encoding, batching, or compression is limiting a logs pipeline.
+- Processing rules or multi-line processing are limiting a logs pipeline.
+- The affected file rotates before the Agent can read the data written during the rotation interval, even when the downstream pipeline is not saturated.
 
-- The Agent cannot reach the Datadog intake fast enough. High network latency, intermittent connectivity, a proxy that rate-limits or buffers, or repeated errors from the intake all have this effect. This is the most common cause. See [Sending to Datadog](#sending-to-datadog).
-- The Agent is sending logs over TCP instead of HTTPS. TCP sends logs without batching or compression, which limits throughput. See [Sending to Datadog](#sending-to-datadog).
-- Compression and batching are using more CPU than the host can spare at your log volume. See [Batching and compression](#batching-and-compression).
-- Processing rules or multi-line detection are expensive enough to slow the Agent down on every message. See [Log processing](#log-processing).
-- Log files rotate faster than the Agent can finish reading them, even when everything else is keeping up. See [Immediate mitigation](#immediate-mitigation).
+## Diagnose missing log bytes
 
-## Diagnosis
+1. Search the Agent log for [rotation warnings](#confirm-missing-bytes-from-rotation). Record the affected file paths, timestamps, and number of unread bytes.
+2. If you use Agent 7.82.0 or later, run the [status command][1] and inspect [Logs Agent Backpressure](#interpret-logs-agent-backpressure). Compare the retained history with the warning timestamps.
+3. If several components are saturated, start with the furthest downstream component. Backpressure propagates toward the file tailer, so an upstream component can appear busy because a downstream component is not accepting data.
+4. Apply one relevant change from [Tune the Agent](#tune-the-agent), restart the Agent, and [verify the result](#verify-the-result) under representative log volume.
 
-1. Search the Agent log for [rotation warnings](#rotation-warnings) to confirm that bytes are missing, and note which files and times are affected.
-2. Run the [status command][1] and read the [Logs Agent Backpressure](#logs-agent-backpressure-status) section to find which part of log collection is falling behind.
-3. Fix the lowest saturated component in that table first. The components above it show low numbers because they are waiting on it, so changing their settings has no effect. Apply the matching changes from [Agent configuration](#agent-configuration).
+### Confirm missing bytes from rotation
 
-### Rotation warnings
-
-The Agent writes a warning each time it closes a rotated file that still had unread data:
+The Agent writes a warning when the rotation close timeout expires and the rotated file still contains unread data:
 
 ```text
 WARN | After rotation close timeout (60s), there were 148213 bytes remaining unread for file "/var/log/app/app.log". These unread logs are now lost. Consider increasing DD_LOGS_CONFIG_CLOSE_TIMEOUT
 ```
 
-Search your Agent log for these warnings:
+Search the Agent log for the warning text:
 
 {{< code-block lang="shell" >}}grep "remaining unread" /var/log/datadog/agent.log{{< /code-block >}}
 
-### Logs Agent Backpressure status
+The warning confirms file-rotation loss. It does not identify which logs pipeline component, if any, caused the Agent to fall behind.
 
-Starting in Agent 7.82.0, the [status command][1] includes a **Logs Agent Backpressure** section that shows which part of log collection is falling behind. It keeps about 10 hours of history, so you can still identify the cause after the problem has passed.
+### Interpret Logs Agent Backpressure
+
+Agent versions 7.82.0 and later include a **Logs Agent Backpressure** section in the [status command][1]. The section reports recent utilization for the processor, batching strategy, sender workers, and destinations. It retains peak utilization for approximately 10 hours and detailed saturation duration for 30 minutes.
 
 {{< code-block lang="shell" >}}sudo datadog-agent status{{< /code-block >}}
 
-You can also find this section in `status.log` inside [an Agent flare][2].
-
-On Agent versions earlier than 7.82.0, this section is not available. Upgrade the Agent to identify the responsible component, or start with [Sending to Datadog](#sending-to-datadog), which covers the most common cause.
+You can also find the section in `status.log` inside [an Agent flare][2]. The history is stored in memory and resets when the Agent restarts. Take a flare before restarting an Agent that you are diagnosing.
 
 ```text
 Logs Agent Backpressure
@@ -74,40 +73,35 @@ Logs Agent Backpressure
   destination_reliable_0 q0s0     93%       82/93%        71/93%         93%       93%       93%        3m20s            12:09:42
 ```
 
-In this example, `destination_reliable_0` is saturated, which means the Agent cannot send to Datadog fast enough. The `processor`, `strategy`, and `worker` rows are low because they are all waiting on it.
+In this example, `destination_reliable_0` is saturated. Start by investigating delivery to the intake before changing processor or batching settings.
 
 #### Overall state
 
 | State | Meaning |
 | --- | --- |
-| `HEALTHY` | Nothing is falling behind, and nothing has in the last 30 minutes. |
-| `WARNING` | Nothing is falling behind, but something was in the last 30 minutes. Compare `Last saturated` against the time your logs went missing. |
-| `SATURATED` | Something is falling behind. |
+| `HEALTHY` | No component is saturated and none was saturated in the last 30 minutes. |
+| `WARNING` | No component is saturated, but at least one was saturated in the last 30 minutes. Compare `Last saturated` with the missing-bytes warning timestamps. |
+| `SATURATED` | At least one component reached the saturation threshold within the current 15-second window. |
+
+Saturation means that a component spent at least 90% of its sampled time working instead of waiting. Saturation alone does not mean that logs were lost. Use the rotation warning as the loss signal and the table to identify a possible constraint.
 
 #### Table columns
 
-Each row is one part of log collection. The percentages show how much of its time that component spends working instead of waiting. They are not CPU usage: a component waiting on the network reads close to 100% while using almost no CPU. A component is considered saturated at 90% or above.
-
 | Column | Meaning |
 | --- | --- |
-| `Component` | The part of log collection this row describes. See the table in [Agent configuration](#agent-configuration). |
-| `Instance` | Which copy of that component. The Agent runs several of each in parallel. |
-| `Current` | How busy the component has been over roughly the last 15 seconds. |
-| `5m`, `30m`, `2h`, `5h`, `10h` | Averages and peaks over longer windows. |
-| `30m saturated` | How long the component spent at 90% or above in the last 30 minutes. |
-| `Last saturated` | When the component was last at 90% or above. A `-` means it never has been. |
+| `Component` | The logs pipeline stage. See [Choose a tuning action](#choose-a-tuning-action). |
+| `Instance` | The pipeline or destination instance. |
+| `Current` | Utilization smoothed over approximately 15 seconds. |
+| `5m avg/max` and `30m avg/max` | Average and peak utilization during the stated window. |
+| `2h max`, `5h max`, and `10h max` | Peak utilization during the stated window. |
+| `30m saturated` | Time spent at or above 90% utilization during the last 30 minutes. |
+| `Last saturated` | Time of the latest retained saturation sample. A `-` means that no retained sample is available. |
 
-Backpressure often clears before you run the status command, so the history columns are frequently the only evidence left. This history is held in memory and resets when the Agent restarts. Take [a flare][2] before restarting an Agent you are troubleshooting.
+If one instance is saturated and its peers are not, compare the log sources assigned to that pipeline. A high-volume source remains on one pipeline, so adding pipelines does not divide that source across CPUs. Saturation across several instances can indicate a broader CPU, delivery, or capacity constraint.
 
-If only one instance of a component is saturated, a single high-volume log source is usually responsible. If every instance is saturated, the Agent has reached a limit that affects all of your logs.
+## Limit loss during investigation
 
-## Immediate mitigation
-
-Configuration changes take time to have an effect, and rotation continues in the meantime. Apply the settings in this section alongside the changes in [Agent configuration](#agent-configuration).
-
-Every change on this page requires an Agent restart to take effect. Restarting also clears the backpressure history, so take [a flare][2] before you restart an Agent you are still diagnosing. For restart commands, see [Start, stop, and restart the Agent][3].
-
-Raising `close_timeout` gives the Agent more time to finish reading a file after it rotates. Raising `open_files_limit` helps when the Agent tails more files than it has slots for, which is common with wildcard paths:
+Increase `close_timeout` to give the Agent more time to drain a rotated file while you investigate the throughput constraint. The following example increases the window from 60 seconds to 180 seconds:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -115,72 +109,67 @@ Raising `close_timeout` gives the Agent more time to finish reading a file after
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
 logs_config:
   close_timeout: 180
-  open_files_limit: 750
 {{< /code-block >}}
 
 {{% /tab %}}
-{{% tab "Environment variables" %}}
+{{% tab "Environment variable" %}}
 
 ```shell
 DD_LOGS_CONFIG_CLOSE_TIMEOUT=180
-DD_LOGS_CONFIG_OPEN_FILES_LIMIT=750
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-`close_timeout` defaults to `60` seconds. `open_files_limit` defaults to `500`, or `200` on macOS. For more on file limits, see [Increase the Number of Log Files Tailed by the Agent][4].
+Choose a value that gives the Agent enough time to drain the unread bytes under representative volume. Increase the value in measured increments and compare the unread byte count in new warnings after each test. A longer timeout keeps rotated files open longer and can increase file descriptor and disk usage when files rotate frequently.
 
-Neither setting fixes the underlying throughput problem. They widen the window the Agent has to catch up.
+`close_timeout` does not increase sustained throughput. If the warning continues, reduce the rate at which the application writes to or rotates the affected file, or address the saturated component.
 
-You can also change how your applications rotate logs. Keeping rotated files on disk longer, or rotating at a larger size, gives the Agent more time to catch up.
+If the Agent does not tail some matching files at all, investigate `logs_config.open_files_limit` separately. The default is `500`, or `200` on macOS. Before increasing it, compare the **CoreAgentProcessOpenFiles** and **OSFileLimit** values in the status output. For configuration details, see [Increase the Number of Log Files Tailed by the Agent][3].
 
-## Agent configuration
+## Tune the Agent
 
-Find the saturated component from the status output, then apply the matching changes.
+Every configuration change in this section requires an Agent restart. For restart commands, see [Start, stop, and restart the Agent][10]. Change one group of settings at a time so that you can attribute the result. Increasing parallelism or buffers can raise CPU, memory, file descriptor, network bandwidth, and connection usage.
 
-| Component | What it means | Where to start |
+### Choose a tuning action
+
+| Component | Interpretation | Start with |
 | --- | --- | --- |
-| `destination_reliable_N` | The Agent cannot send to Datadog fast enough. | [Sending to Datadog](#sending-to-datadog) |
-| `strategy` | Batching and compressing logs is the constraint. | [Batching and compression](#batching-and-compression) |
-| `worker` | Sending is backed up. Almost always caused by the destination. | [Sending to Datadog](#sending-to-datadog) |
-| `processor` | Processing each log line is the constraint. | [Log processing](#log-processing) |
+| `destination_reliable_N` | The HTTP destination is busy sending or retrying payloads. | [Check intake delivery](#check-intake-delivery) |
+| `worker` | Sender workers are not draining payloads as fast as the batching strategy produces them. | [Check intake delivery](#check-intake-delivery), then [adjust HTTP send concurrency](#adjust-http-send-concurrency) if delivery succeeds without persistent errors |
+| `strategy` | Encoding, batching, or compression is limiting the pipeline. | [Reduce compression work](#reduce-compression-work) or [add logs pipelines](#add-logs-pipelines) |
+| `processor` | Per-message processing is limiting the pipeline. | [Reduce log processing](#reduce-log-processing) or [add logs pipelines](#add-logs-pipelines) |
 
-All of the settings below belong under `logs_config` in your `datadog.yaml` file. Most of them ship with the Agent. For their defaults and environment variables, see the **Log collection Configuration** section of the [example configuration file][5].
+### Check intake delivery
 
-**Note**: Some settings on this page are not listed in the example configuration file. They are still valid.
+Confirm the active transport in the **Logs Agent** section of the status output. HTTPS supports batching, compression, and concurrent sends. TCP does not use these mechanisms.
 
-### Sending to Datadog
+The Agent can use TCP when an HTTP connectivity check fails or when `force_use_tcp`, `socks5_proxy_address`, or `additional_endpoints` is configured. Resolve HTTP connectivity before setting `force_use_http`; forcing HTTP on a network that does not permit it stops log delivery.
 
-This is the most common origin of the problem.
+When a destination is saturated, inspect the Agent log and the **RetryCount** and **RetryTimeSpent** status values. Fix authentication errors, rejected payloads, proxy limits, DNS failures, and connection failures before tuning concurrency. More concurrent sends do not correct persistent delivery errors.
 
-First, confirm the Agent is using HTTPS rather than TCP. The **Logs Agent** section of the status output shows the active transport. The Agent tests HTTPS connectivity at startup and falls back to TCP if that test fails. TCP limits throughput because it sends logs without batching or compression. Setting `force_use_http` prevents the fallback:
+- Check whether a [proxy][5] rate-limits, buffers, or limits simultaneous connections.
+- Check that your network allows traffic to the [log intake endpoints][6].
+- Confirm that the configured [Datadog site][4] is correct.
+
+### Adjust HTTP send concurrency
+
+Use `batch_max_concurrent_send` only for HTTPS delivery. The setting accepts nonnegative integers. A positive value sets fixed send concurrency per logs pipeline, so the approximate total is `logs_config.pipelines × batch_max_concurrent_send`. The default value `0` uses the concurrency behavior provided by the installed Agent version.
+
+On Agent 7.82.x, `0` allows concurrency to scale from one to 10 sends per pipeline based on intake latency. Setting the value to `10` fixes concurrency at that existing upper bound; it does not raise the maximum.
+
+For example, the following configuration tests 20 concurrent sends per pipeline. With four logs pipelines, the Agent can make approximately 80 concurrent sends. The value `20` is an example for a controlled test, not a general target:
 
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
 logs_config:
-  force_use_http: true
+  batch_max_concurrent_send: 20
 {{< /code-block >}}
 
-Also check whether `force_use_tcp`, `socks5_proxy_address`, or `additional_endpoints` are set, since each can put the Agent back on TCP.
+Increase this value only when `worker` or `destination_reliable_N` is saturated, deliveries are succeeding, and the host has network and connection capacity. Monitor proxy connection limits, destination errors, Agent memory, and whether missing-bytes warnings stop. Lower the value if errors or resource usage increase.
 
-Next, look at how many payloads the Agent sends at once. The further your hosts are from your [Datadog site][6], the longer each payload takes to acknowledge. Filling that time requires more concurrency. The Agent scales concurrency automatically up to an internal limit. Raising `batch_max_concurrent_send` sets a fixed level above that limit:
+### Reduce compression work
 
-{{< code-block lang="yaml" filename="datadog.yaml" >}}
-logs_config:
-  batch_max_concurrent_send: 10
-{{< /code-block >}}
-
-If saturation continues, the constraint is likely outside the Agent:
-
-- Check whether a [proxy][7] between your hosts and Datadog is rate-limiting or buffering logs.
-- Check that your network allows traffic to the [log intake endpoints][8] without added latency.
-- Check the Agent log for repeated errors from the intake. The Agent retries failed sends indefinitely, so a persistent error appears as sustained saturation rather than immediate data loss. Fix the error rather than tuning around it.
-
-### Batching and compression
-
-Compression is the most CPU-intensive part of log collection and can use a full core at high volume.
-
-The Agent compresses with zstd at level `1` by default, which is already the cheapest setting. If you have raised the compression level or switched to gzip, lowering it returns CPU to the Agent at the cost of more bandwidth:
+The Agent uses zstd compression level `1` by default. If you configured gzip or a higher compression level, first restore the defaults:
 
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
 logs_config:
@@ -188,20 +177,31 @@ logs_config:
   zstd_compression_level: 1
 {{< /code-block >}}
 
-The Agent spreads your log sources across four pipelines by default, one per CPU. A single high-volume source stays on one pipeline and can only use one CPU for compression. If your volume is spread across many sources and the destination rows are healthy, adding pipelines gives the Agent more CPUs to work with:
+If `strategy` remains saturated and the host is CPU-constrained, test disabling compression only when the network and intake path can accept the additional bytes:
+
+{{< code-block lang="yaml" filename="datadog.yaml" >}}
+logs_config:
+  use_compression: false
+{{< /code-block >}}
+
+Disabling compression can move the constraint from CPU to network delivery. Re-enable compression if destination utilization, bandwidth, or delivery latency increases.
+
+### Add logs pipelines
+
+The Agent uses up to four logs pipelines by default, limited by the number of logical CPUs available to the Agent. Additional pipelines can improve parallelism when multiple log sources are distributed across the pipelines and CPU is available.
+
+For example, test eight pipelines on a host with at least eight logical CPUs available to the Agent. The value `8` is an example, not a general target:
 
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
 logs_config:
   pipelines: 8
 {{< /code-block >}}
 
-You can also adjust how the Agent groups logs into batches with `batch_wait` (default `5` seconds), `batch_max_content_size` (default 5 MB, measured before compression), and `batch_max_size` (default `1000` logs).
+Do not set more pipelines than the CPU capacity available to the Agent without workload-specific testing. Additional pipelines increase memory use and can multiply HTTP send concurrency. They do not split one log source across pipelines.
 
-### Log processing
+### Reduce log processing
 
-Processing cost comes from the number of [processing rules][9] you have configured and the complexity of their patterns.
-
-Global processing rules run against every log the Agent collects, so their cost multiplies with your total volume. Moving a rule to the specific source it applies to is usually the largest improvement available:
+[Processing rules][7] consume work for each matching message. Global rules run against every log collected by the Agent. When a rule applies to one source, move it to that source's integration configuration:
 
 {{< code-block lang="yaml" filename="conf.d/myapp.d/conf.yaml" >}}
 logs:
@@ -215,13 +215,24 @@ logs:
         pattern: \[DEBUG\]
 {{< /code-block >}}
 
-[Auto multi-line detection][10] also adds per-message cost. On high-volume sources with unpredictable formats, configuring an explicit multi-line pattern is cheaper than automatic detection.
+Review overlapping rules and patterns that scan large portions of each message. If you do not need [auto multi-line detection][8], disable it:
 
-Also check whether the host has CPU available. Other workloads competing with the Agent produce the same result.
+{{< code-block lang="yaml" filename="datadog.yaml" >}}
+logs_config:
+  auto_multi_line_detection: false
+{{< /code-block >}}
 
-## Log volume reduction
+If the source has a known multi-line format, configure a source-specific pattern and compare processor utilization before and after the change.
 
-If no single change is enough, send fewer logs. Use an `exclude_at_match` processing rule to drop logs you do not need before they leave the host:
+### Buffer short bursts
+
+The advanced `message_channel_size` and `payload_channel_size` settings control in-memory queues between logs pipeline stages. Larger buffers can absorb short bursts, but they do not increase sustained processing or delivery capacity. They also increase memory use and can delay when backpressure becomes visible.
+
+Adjust these settings only after identifying bursty traffic and confirming that CPU and destination throughput can drain the queued data. For workload-specific values, [contact Datadog Support](#contact-datadog-support).
+
+## Reduce log volume
+
+If the Agent cannot process the required volume within the available host and network capacity, filter logs that you do not need. An `exclude_at_match` processing rule drops matching logs before they leave the host:
 
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
 logs_config:
@@ -231,38 +242,38 @@ logs_config:
       pattern: GET /health
 {{< /code-block >}}
 
-Filtering or sampling at the application level, before logs are written to disk, avoids the cost entirely.
+Filtering or sampling in the application avoids writing the excluded logs to disk and removes their processing cost from the Agent.
 
-## Verification
+## Verify the result
 
-After the Agent restarts, confirm that your changes had an effect:
+After restarting the Agent, test during representative log volume:
 
-1. Wait through a period of typical log volume, then run the status command again:
+1. Run the status command:
    {{< code-block lang="shell" >}}sudo datadog-agent status{{< /code-block >}}
-2. Check that the component you changed reports below 90%. **Overall state** reports `WARNING` for 30 minutes after saturation clears, so allow that time to pass before expecting `HEALTHY`.
-3. Search the Agent log for new rotation warnings:
+2. Confirm that the targeted component spends less time at or above 90% utilization. The overall state remains `WARNING` for up to 30 minutes after saturation clears.
+3. Check the Agent log for rotation warnings with timestamps later than the restart:
    {{< code-block lang="shell" >}}grep "remaining unread" /var/log/datadog/agent.log{{< /code-block >}}
+4. Compare unread byte counts in new warnings, retry counts, Agent CPU and memory, network bandwidth, and open connections with the baseline you recorded.
 
-If the same component is still saturated, apply the next change in its section. If a different component has become the lowest saturated one, move to that section.
+If the same component remains saturated and new rotation warnings appear, revert changes that did not help and test the next relevant adjustment. If the furthest downstream saturated component changes, investigate that component before increasing the previous setting again.
 
-## Reach out to Datadog Support
+## Contact Datadog Support
 
-If the steps above do not resolve the issue, [contact Datadog Support][11]. Take [a flare][2] while the pipeline is saturated, since the backpressure history resets when the Agent restarts.
+If the steps on this page do not resolve the issue, [contact Datadog Support][9]. Take [a flare][2] while the pipeline is saturated and before restarting the Agent.
 
-Include which component was saturated, the times your logs went missing, and any configuration changes you have already made.
+Include the affected file paths, warning timestamps and byte counts, saturated components, Agent version, active logs configuration, and changes already tested.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/configuration/agent-commands/#agent-status-and-information
 [2]: /agent/troubleshooting/send_a_flare/
-[3]: /agent/configuration/agent-commands/#restart-the-agent
-[4]: /logs/guide/increase-number-of-log-files-tailed/
-[5]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
-[6]: /getting_started/site/
-[7]: /agent/configuration/proxy/
-[8]: /agent/configuration/network/
-[9]: /agent/logs/advanced_log_collection/
-[10]: /agent/logs/auto_multiline_detection/
-[11]: /help/
+[3]: /logs/guide/increase-number-of-log-files-tailed/
+[4]: /getting_started/site/
+[5]: /agent/configuration/proxy/
+[6]: /agent/configuration/network/
+[7]: /agent/logs/advanced_log_collection/
+[8]: /agent/logs/auto_multiline_detection/
+[9]: /help/
+[10]: /agent/configuration/agent-commands/#restart-the-agent
