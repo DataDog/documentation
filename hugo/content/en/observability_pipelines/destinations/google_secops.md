@@ -61,7 +61,7 @@ After you select the Google SecOps destination in the pipeline UI:
 
 ## Health metrics
 
-For [component metrics][11] and [destination buffer metrics][12] emitted by all destinations, see the [Pipelines Usage Metrics][13] documentation. To filter or group by Google SecOps destination metrics, use the tag `component_type:gcp_chronicle_unstructured`.
+See [Component metrics][11] and [Destination buffer metrics][12] for more information on metrics emitted by all destinations. To filter or group by Google SecOps destination metrics, use the tag `component_type:gcp_chronicle_unstructured`.
 
 ## How the destination works
 
@@ -85,4 +85,3 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [10]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
-[13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

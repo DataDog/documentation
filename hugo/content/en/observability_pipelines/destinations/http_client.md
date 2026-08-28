@@ -83,7 +83,7 @@ Toggle the switch to {{< ui >}}Enable Compression{{< /ui >}}. If enabled:
 
 ## Health metrics
 
-For [component metrics][6] and [destination buffer metrics][7] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation. To filter or group by HTTP Client destination metrics, use the tag `component_type:http`.
+See [Component metrics][6] and [Destination buffer metrics][7] for more information on metrics emitted by all destinations. To filter or group by HTTP Client destination metrics, use the tag `component_type:http`.
 
 ## How the destination works
 
@@ -102,4 +102,3 @@ A batch of events is flushed when one of these conditions occurs. See [Destinati
 [5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
-[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

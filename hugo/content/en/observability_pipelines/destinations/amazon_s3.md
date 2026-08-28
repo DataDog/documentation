@@ -142,7 +142,7 @@ You can route logs from Observability Pipelines to Snowflake using the Amazon S3
 
 ## Health metrics
 
-For [component metrics][12] and [destination buffer metrics][13] emitted by all destinations, see the [Pipelines Usage Metrics][14] documentation. To filter or group by Amazon S3 destination metrics, use the tag `component_type:amazon_s3_generic`.
+See [Component metrics][12] and [Destination buffer metrics][13] for more information on metrics emitted by all destinations. To filter or group by Amazon S3 destination metrics, use the tag `component_type:amazon_s3_generic`.
 
 ## How the destination works
 
@@ -181,4 +181,3 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [11]: /observability_pipelines/configuration/set_up_pipelines/
 [12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
-[14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

@@ -80,7 +80,7 @@ After you select the Amazon OpenSearch destination in the pipeline UI:
 
 ## Health metrics
 
-For [component metrics][9] and [destination buffer metrics][10] emitted by all destinations, see the [Pipelines Usage Metrics][11] documentation. To filter or group by Elasticsearch destination metrics, use the tag `component_type:elasticsearch`.
+See [Component metrics][9] and [Destination buffer metrics][10] for more information on metrics emitted by all destinations. To filter or group by Elasticsearch destination metrics, use the tag `component_type:elasticsearch`.
 
 ## How the destination works
 
@@ -102,4 +102,3 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [8]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
-[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

@@ -106,7 +106,7 @@ Alternatively, click {{< ui >}}Review Configured Organizations{{< /ui >}} in the
 
 ## Health metrics
 
-For [component metrics][7] and [destination buffer metrics][8] emitted by all destinations, see the [Pipelines Usage Metrics][9] documentation.
+See [Component metrics][7] and [Destination buffer metrics][8] for more information on metrics emitted by all destinations.
 
 {{< site-region region="us,ap1,ap2,uk1" >}}
 
@@ -206,5 +206,4 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
-[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
 [10]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes

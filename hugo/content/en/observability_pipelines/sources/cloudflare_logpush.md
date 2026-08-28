@@ -86,7 +86,7 @@ After your Logpush job has been successfully created, you can view your Cloudfla
 
 ## Health metrics
 
-For [component metrics][8] and [source buffer metrics][9] emitted by all sources, see the [Pipelines Usage Metrics][10] documentation. Since you use the HTTP Server source to send logs from Cloudflare Logpush to Observability pipelines, use the `component_type:http_server` tag to filter the relevant metrics.
+See [Component metrics][8] and [Source buffer metrics][9] for more information on metrics emitted by all sources. Since you use the HTTP Server source to send logs from Cloudflare Logpush to Observability pipelines, use the `component_type:http_server` tag to filter the relevant metrics.
 
 [1]: https://www.cloudflare.com/en-in/ips/
 [2]: https://app.datadoghq.com/observability-pipelines
@@ -97,4 +97,3 @@ For [component metrics][8] and [source buffer metrics][9] emitted by all sources
 [7]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
-[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
