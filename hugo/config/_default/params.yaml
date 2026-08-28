@@ -288,6 +288,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  code_locations: [gov, gov2]
   ownership_of_views: [gov, gov2]
   ai_credit_limits: [gov, gov2]
   amazon-security-lake: [gov, gov2]
