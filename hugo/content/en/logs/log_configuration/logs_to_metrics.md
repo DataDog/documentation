@@ -46,7 +46,7 @@ You can also create metrics from an Analytics search by selecting the {{< ui >}}
 
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="Create a Logs to metric" style="width:80%;">}}
 
-1. {{< ui >}}Input a query to filter the log stream{{< /ui >}}: Write the query using the [Log Explorer search syntax][6]. The stream filter query is evaluated against the log stream at ingest time, not against indexed logs. Not every Log Explorer search feature is supported. A query that returns results in the Log Explorer can still match no logs here. [Full-text search][12] (`*:search_term`) is not supported. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation. The index must be excluded from the query.
+1. {{< ui >}}Input a query to filter the log stream{{< /ui >}}: Write the query using the [Log Explorer search syntax][6]. Datadog evaluates the stream filter query against the log stream at ingest time, not against indexed logs. The filter does not support every Log Explorer search feature, including [full-text search][12] (`*:search_term`). A query that returns results in the Log Explorer can still match no logs here. Aggregation only considers logs ingested with a timestamp within the past 20 minutes. Exclude the index from the query.
 
    After you save the metric, confirm that it produces datapoints in the [Metrics Explorer][13] before you rely on it. If the query matches logs in the Log Explorer but the metric stays empty, rewrite the term as a quoted phrase, for example `message:"Database operation failed."`.
 2. {{< ui >}}Select the field you would like to track{{< /ui >}}: Select `*` to generate a count of all logs matching your query or enter a log attribute (for example, `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][7], the value of the metric is the value of the log attribute.
@@ -54,7 +54,7 @@ You can also create metrics from an Analytics search by selecting the {{< ui >}}
 4. {{< ui >}}Add percentile aggregations{{< /ui >}}: For distribution metrics, you can optionally generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered custom metrics, and [billed accordingly][9].
 5. {{< ui >}}Name your metric{{< /ui >}}: Log-based metric names must follow the [custom metric naming convention][10].
 
-**Note**: Datapoints for log-based metrics are generated at 10-second intervals. When you create a [dashboard graph][11] for log-based metrics, the `count unique` parameter is based on the values within the 10-second interval.
+**Note**: Datadog generates datapoints for log-based metrics at 10-second intervals. When you create a [dashboard graph][11] for log-based metrics, the `count unique` parameter uses the values within the 10-second interval.
 
 {{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="The timeseries graph configuration page with the count unique query parameter highlighted" style="width:80%;">}}
 
