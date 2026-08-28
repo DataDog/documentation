@@ -70,13 +70,11 @@ If you mark a field as "Required at Declaration," users are required to enter a 
 
 ### Prompt user
 
-**Note**: The "Prompt user" option is deprecated. To prompt responders for a field when an incident moves to a given status, use [transition forms][14] instead.
+Incident Management can be configured to prompt responders to set particular fields when changing the incident's state.
 
-Incident Management can be configured to prompt responders to set particular fields when changing the incident's state. To set this behavior for a field, edit the field's "Prompt user" option.
+**During declaration**: To prompt responders to enter a value for the field during declaration, edit the field's "Prompt user" option.
 
-**During declaration**: Users are prompted to enter a value for the field during declaration and at all state changes if the field is empty.
-
-To prompt responders for a field when an incident moves to a given status, use [transition forms][14].
+**When the incident is moved to Stable/Resolved/Completed**: To prompt users for a field when an incident moves to a given status, use [transition forms][14].
 
 ### Custom fields in search and analytics
 
