@@ -34,7 +34,8 @@ further_reading:
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 12.0.0 |
 | Playwright | >= 1.38.0 |
-| Vitest | >= 1.6.0 | [`test.concurrent`](https://vitest.dev/api/#test-concurrent) is supported from `dd-trace>=6.1.0`. |
+| Vitest | >= 1.6.0 | [`test.concurrent`](https://vitest.dev/api/#test-concurrent) is supported from `dd-trace>=6.1.0`. [Browser mode](https://vitest.dev/guide/browser/) is supported from `dd-trace>=6.8.0`. |
+| WebdriverIO | >= 9.0.0 | Supported with the Mocha and Jasmine framework adapters from `dd-trace>=6.10.0`. |
 
 `dd-trace` v6 requires Node.js 22 or later.
 
@@ -48,7 +49,8 @@ further_reading:
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 6.7.0 |
 | Playwright | >= 1.18.0 |
-| Vitest | >= 1.6.0 | Supported from `dd-trace>=5.18.0`. [`test.concurrent`](https://vitest.dev/api/#test-concurrent) is supported from `dd-trace>=5.112.0`. |
+| Vitest | >= 1.6.0 | Supported from `dd-trace>=5.18.0`. [`test.concurrent`](https://vitest.dev/api/#test-concurrent) is supported from `dd-trace>=5.112.0`. [Browser mode](https://vitest.dev/guide/browser/) is supported from `dd-trace>=5.119.0`. |
+| WebdriverIO | >= 9.0.0 | Supported with the Mocha and Jasmine framework adapters from `dd-trace>=5.121.0`. |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -443,12 +445,13 @@ To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` envi
 [10]: https://docs.cypress.io/app/references/configuration#Screenshots
 {{% /tab %}}
 
-{{% tab "Vitest" %}}
+{{% tab "Vitest/WebdriverIO" %}}
 <div class="alert alert-danger">
   <strong>Note</strong>: <a href="https://github.com/vitest-dev/vitest?tab=readme-ov-file#features">Vitest is ESM first</a>, so its configuration is different from other test frameworks.
 </div>
 
-Use a Node.js version supported by your `dd-trace` major version for Vitest instrumentation:
+Use a Node.js version supported by your `dd-trace` major version for Vitest and WebdriverIO instrumentation:
+
 - `dd-trace` v5 requires Node.js 18.19+ or Node.js 20.6+.
 - `dd-trace` v6 requires Node.js 22 or later.
 
@@ -463,12 +466,13 @@ NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_TEST_SESSION
 {{< code-block lang="json" filename="package.json" >}}
 {
   "scripts": {
-    "test": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" vitest run"
+    "test:vitest": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" vitest run",
+    "test:webdriverio": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" wdio run ./wdio.conf.js"
   }
 }
 {{< /code-block >}}
 
-### Adding custom tags or measures to tests
+### Adding custom tags or measures to Vitest tests
 
 You can add custom tags to your tests by using the current active span:
 
@@ -626,7 +630,7 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
   <strong>Note</strong>: The manual testing API is available starting in <code>dd-trace</code> versions <code>5.23.0</code> and <code>4.47.0</code>.
 </div>
 
-If you use Jest, Mocha, Cypress, Playwright, Cucumber, or Vitest, **do not use the manual testing API**, as Test Optimization automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
+If you use Jest, Mocha, Cypress, Playwright, Cucumber, Vitest, or WebdriverIO, **do not use the manual testing API**. Test Optimization automatically instruments these frameworks and sends the test results to Datadog. The manual testing API is **incompatible** with supported testing frameworks.
 
 Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
 
@@ -763,9 +767,6 @@ Jest's [--forceExit][15] option may cause data loss. Datadog tries to send data 
 ### Mocha's `--exit`
 Mocha's [--exit][16] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--exit` with caution.
 
-### Vitest's browser mode
-Vitest's [browser mode][17] is not supported.
-
 ### Vitest's test duration overhead
 
 By default, Vitest's [`isolate`][21] option is `true`, so each test file runs in its own fork or thread. Vitest is ESM-first and relies on [import-in-the-middle][20] for instrumentation, which incurs a setup cost every time a suite starts. With isolation, that setup cost is repeated for every file. The effect is largest when you have many small, fast suites, because setup time can dominate wall-clock time.
@@ -856,7 +857,6 @@ The test session name should be unique within a repository to help you distingui
 [13]: https://docs.cypress.io/app/core-concepts/test-isolation
 [15]: https://jestjs.io/docs/cli#--forceexit
 [16]: https://mochajs.org/running/cli/#--exit
-[17]: https://vitest.dev/guide/browser/
 [18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [19]: https://www.npmjs.com/package/mocha-each
 [20]: https://github.com/nodejs/import-in-the-middle
