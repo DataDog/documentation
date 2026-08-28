@@ -15,7 +15,7 @@ To set up transition forms, you must have the `Incident Settings Write` permissi
 
 ## Configure a transition form
 
-1. Navigate to [**Incidents > Settings**][2].
+1. In Datadog, navigate to **Incidents** > [**Settings**][2].
 1. Select an incident type from the list.
 1. Click the **Transition Forms** tab.
 1. Select the status you want to configure.
