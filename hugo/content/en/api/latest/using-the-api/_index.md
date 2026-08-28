@@ -104,7 +104,7 @@ You can also use the Datadog API to manage your account programmatically:
 [33]: /api/v1/key-management/
 [34]: /api/v1/usage-metering/
 [35]: /api/v1/ip-ranges/
-[36]: /llm_observability/evaluations/export_api
+[36]: /llm_observability/investigate/export_api
 [37]: /api/latest/cloudflare-integration/
 [38]: /api/latest/fastly-integration/
 [39]: /api/latest/jira-integration/

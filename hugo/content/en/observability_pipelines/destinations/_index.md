@@ -2,6 +2,11 @@
 title: Destinations
 description: Learn about the destinations available for the Observability Pipelines Worker.
 disable_toc: false
+aliases:
+  - /observability_pipelines/destinations/datadog_apm/
+  - /observability_pipelines/destinations/opentelemetry/traces/
+  - /observability_pipelines/destinations/opentelemetry/metrics/
+  - /observability_pipelines/destinations/prometheus/
 further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
@@ -10,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Use the Observability Pipelines Worker to send your processed {{< tooltip text="logs, metrics, and traces" tooltip="Contact your account manager to discuss use cases and pricing." >}} to different destinations. Most Observability Pipelines destinations send events in batches to the downstream integration. See [Event batching](#event-batching) for more information. Some Observability Pipelines destinations also have fields that support template syntax, so you can set these fields based on specific fields. See [Template syntax](#template-syntax) for more information.
+Use the Observability Pipelines Worker to send your processed logs and metrics to different destinations. Most Observability Pipelines destinations send events in batches to the downstream integration. See [Event batching](#event-batching) for more information. Some Observability Pipelines destinations also have fields that support template syntax, so you can set these fields based on specific fields. See [Template syntax](#template-syntax) for more information.
 
 Select a destination in the left navigation menu to see more information about it.
 
@@ -79,7 +84,6 @@ These are the available destinations:
 - [Elasticsearch][2]
 - [HTTP/S Client][3]
 - [OpenTelemetry][5]
-- [Prometheus][6]
 - [Splunk HEC][4]
 
 [1]: /observability_pipelines/destinations/datadog_metrics/
@@ -87,16 +91,6 @@ These are the available destinations:
 [3]: /observability_pipelines/destinations/http_client/
 [4]: /observability_pipelines/destinations/splunk_hec/metrics
 [5]: /observability_pipelines/destinations/opentelemetry/metrics
-[6]: /observability_pipelines/destinations/prometheus/
-
-{{% /tab %}}
-{{% tab "Traces" %}}
-
-- [Datadog APM][1]
-- [OpenTelemetry Traces][2]
-
-[1]: /observability_pipelines/destinations/datadog_apm/
-[2]: /observability_pipelines/destinations/opentelemetry/traces
 
 {{% /tab %}}
 {{< /tabs >}}
