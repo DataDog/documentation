@@ -75,6 +75,13 @@ describe("prefixed", () => {
     expect(prefixed("/")).toBe("/devin.ford/my-cool-thing/");
   });
 
+  it("treats a slashless path as root-relative rather than concatenating it", () => {
+    setPreview("devin.ford/my-cool-thing");
+    expect(prefixed("api/latest/dashboards/")).toBe(
+      "/devin.ford/my-cool-thing/api/latest/dashboards/",
+    );
+  });
+
   it("is idempotent", () => {
     setPreview("devin.ford/my-cool-thing");
     const once = prefixed("/api/latest/");

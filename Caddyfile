@@ -7,7 +7,7 @@
 # then `caddy run` from the repo root. Browse http://localhost:1314.
 :1314 {
 	# The API docs, in every locale, plus Vite's dev/HMR machinery.
-	@astro path /api /api/* /fr/api/* /ja/api/* /ko/api/* /es/api/* /dd_e2e/* /@vite/* /@id/* /@fs/* /node_modules/* /src/*
+	@astro path /api /api/* /fr/api /fr/api/* /ja/api /ja/api/* /ko/api /ko/api/* /es/api /es/api/* /dd_e2e/* /@vite/* /@id/* /@fs/* /node_modules/* /src/*
 
 	handle @astro {
 		reverse_proxy localhost:4321

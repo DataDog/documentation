@@ -4,6 +4,8 @@ on:
     paths:
     - 'hugo/content/en/**.md'
     - 'astro/**'
+    # Spec changes regenerate the API pages without touching any markdown.
+    - 'hugo/data/api/**'
 
 permissions:
   contents: read

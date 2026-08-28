@@ -51,8 +51,11 @@ export function prefixed(path: string): string {
   if (!prefix || EXTERNAL_HREF.test(path)) {
     return path;
   }
-  if (path === prefix || path.startsWith(`${prefix}/`)) {
-    return path;
+  // A caller that drops the leading slash still means a root-relative link, so
+  // treat it as one rather than gluing it onto the end of the prefix.
+  const rooted = path.startsWith("/") ? path : `/${path}`;
+  if (rooted === prefix || rooted.startsWith(`${prefix}/`)) {
+    return rooted;
   }
-  return path === "/" ? `${prefix}/` : `${prefix}${path}`;
+  return rooted === "/" ? `${prefix}/` : `${prefix}${rooted}`;
 }

@@ -51,6 +51,24 @@ Beyond that list, this applies even when the Astro work would benefit from it. F
 
 If a task seems to require any other Hugo-side change, stop and ask first.
 
+## No deploy code in this repo
+
+This repository is public and holds no execution logic for deployment. Hugo's deploy
+is *declared* in `hugo/config/{preview,live}/config.yaml` and *executed* entirely by
+tooling from the CI image. Astro's deploy follows the same rule: it lives as job
+`script:` steps in `DataDog/documentation-ci`.
+
+Nothing under `astro/` may contain:
+
+- calls to the `aws` CLI or an AWS SDK
+- S3 bucket names or key prefixes
+- CloudFront distribution IDs, or invalidation logic
+- IAM role ARNs, role assumption, or any credential handling
+
+`astro/scripts/verifyDist.mjs` is the boundary: it verifies the *shape* of
+`dist/client` and knows nothing about where that output is uploaded. Build-output
+verification belongs here; anything that talks to a cloud provider does not.
+
 ## Commands
 
 - `yarn dev` — Start dev server on port 4321
@@ -59,7 +77,7 @@ If a task seems to require any other Hugo-side change, stop and ask first.
 
 ## Stack
 
-- **Astro 5** — Static site generator
+- **Astro 7** — Static site generator
 - **Markdoc** — Content authoring format (`.mdoc` files)
 - **Preact** — UI components (TSX)
 - **TypeScript** — Strict mode
