@@ -101,4 +101,4 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [7]: /api/latest/observability-pipelines/
 [8]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[10]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics

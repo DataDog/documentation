@@ -135,7 +135,7 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [11]: /api/latest/observability-pipelines/
 [12]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[14]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics
 [16]: https://console.cloud.google.com/storage
 [17]: https://console.cloud.google.com/iam-admin/serviceaccounts
 [18]: https://cloud.google.com/iam/docs/keys-create-delete#creating

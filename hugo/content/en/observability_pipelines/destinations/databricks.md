@@ -202,5 +202,5 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [12]: /observability_pipelines/processors/custom_processor#setup
 [13]: /observability_pipelines/processors/custom_processor/#parse_timestamp
 [14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[15]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[15]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics
 [17]: /observability_pipelines/processors/custom_processor/

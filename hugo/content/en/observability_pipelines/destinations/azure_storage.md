@@ -129,7 +129,7 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [8]: /api/latest/observability-pipelines/
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[11]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics
 [13]: https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal
 [14]: https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts
 [15]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-immutability-policies-manage
