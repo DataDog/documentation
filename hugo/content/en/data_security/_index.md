@@ -102,7 +102,7 @@ Synthetic testing simulates requests and business transactions from testing loca
 
 You can modify the data collected by Real User Monitoring in the browser to protect personally identifiable information and to sample the RUM data you're collecting. Read [Modifying RUM Data and Context][21] for details.
  
-Session Replay privacy options default to protecting end-user privacy and preventing sensitive organizational information from being collected. Read about masking, overriding, and hiding elements from a session replay in [Session Replay Privacy Options][22].
+Session Replay privacy options default to protecting end-user privacy and preventing sensitive organizational information from being collected. Read about masking, overriding, and hiding elements from a session replay in [Session Replay Privacy Options][22]. Session Replay masking is permanent: Masked values never leave the device and cannot be unmasked later. This differs from the [Sensitive Data Scanner Mask action][26], which obfuscates matching values on ingestion and allows users with the `Data Scanner Unmask` permission to view the original value.
 
 ### Database Monitoring
 
@@ -166,3 +166,4 @@ Continuous Integration pipelines and tests
 [23]: /database_monitoring/data_collected/#sensitive-information
 [24]: /getting_started/tagging/
 [25]: /tracing/glossary/
+[26]: /security/sensitive_data_scanner/setup/telemetry_data/?tab=logs#mask-action

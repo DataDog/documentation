@@ -288,6 +288,8 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  ownership_of_views: [gov, gov2]
+  ai_credit_limits: [gov, gov2]
   amazon-security-lake: [gov, gov2]
   resource_catalog_policies: [gov, gov2]
   runtime_prioritization_engine: [gov, gov2]
@@ -319,6 +321,7 @@ unsupported_sites:
   bits_ai_sre: [gov,gov2]
   bits_data_analysis: [gov,gov2]
   bits_investigation: [gov,gov2]
+  dashboard_anomaly_detection: [gov,gov2]
   bits_remediation: [gov,gov2]
   byoti: [gov, gov2]
   case_management: [gov2]
@@ -336,6 +339,7 @@ unsupported_sites:
   continuous_integration: [gov,gov2]
   correlation: [gov,gov2] #Event management correlation
   coterm: [gov,gov2]
+  cross_app_access: [gov,gov2]
   csm_jira: [us,us3,us5,eu,ap1,ap2,uk1]
   cpp_log_collection: [gov,gov2]
   data_jobs: [gov,gov2]
@@ -410,7 +414,7 @@ unsupported_sites:
   safety_center: [gov,gov2]
   scaleway: [gov,gov2]
   service_override_removal: [gov,gov2]
-  service_remapping_rules: [gov,gov2]
+  service_remapping_rules: [gov2]
   setup_remote_config: [gov,gov2]
   snmp_profile_manager: [gov,gov2]
   software_delivery_mcp_tools: [gov,gov2]

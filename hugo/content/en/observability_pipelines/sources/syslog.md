@@ -1,5 +1,6 @@
 ---
 title: Syslog Source
+description: Learn how to collect logs sent to rsyslog or syslog-ng using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

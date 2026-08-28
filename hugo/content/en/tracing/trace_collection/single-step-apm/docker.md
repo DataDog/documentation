@@ -21,37 +21,54 @@ In a Docker Linux container, use Single Step Instrumentation (SSI) for APM to in
 
 <div class="alert alert-info">Before proceeding, confirm that your environment is compatible by reviewing the <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI compatibility guide.</a></div>
 
-To enable APM in a Docker Linux container:
+To install the Datadog Agent and enable SSI in a Docker Linux environment, run the following commands on your Docker host (not inside an application container).
 
-1. In Datadog, go to the [Install the Datadog Agent on Docker][15] page.
-1. In the {{< ui >}}Customize my agent install command{{< /ui >}} section, go to {{< ui >}}Additional configuration{{< /ui >}} > {{< ui >}}Application Observability{{< /ui >}}, and turn on {{< ui >}}APM Instrumentation{{< /ui >}}.
-  
-   {{< img src="tracing/trace_collection/docker-apm-instrumentation-toggle.png" alt="The 'Customize your agent install command' section of in-app instructions for installing the Datadog Agent on Docker" style="width:100%;" >}}
+1. Install the Docker instrumentation components without installing a host Agent:
 
-1. Copy and run the Agent installation command in your Docker container. If the Agent is already running, redeploy the Agent container using the new command.
-1. Restart your applications.
+   ```shell
+   DD_APM_INSTRUMENTATION_ENABLED=docker \
+   DD_NO_AGENT_INSTALL=true \
+   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   ```
+
+1. Run or redeploy the Agent container. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][1]:
+
+   ```shell
+   docker run -d --name dd-agent \
+     -e DD_API_KEY=<YOUR_DD_API_KEY> \
+     -e DD_SITE="{{< region-param key="dd_site" >}}" \
+     -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
+     -e DD_APM_ENABLED=true \
+     -e DD_APM_NON_LOCAL_TRAFFIC=true \
+     -e DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket \
+     -e DD_DOGSTATSD_SOCKET=/var/run/datadog/dsd.socket \
+     -v /var/run/datadog:/var/run/datadog \
+     -v /var/run/docker.sock:/var/run/docker.sock:ro \
+     -v /proc/:/host/proc/:ro \
+     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+     -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
+     registry.datadoghq.com/agent:7
+   ```
+
+   **Note**: Run only one Datadog Agent per node. If a Datadog Agent container already exists, update its definition (or your Docker Compose file) with these settings and recreate it, rather than starting a second Agent. For rootless Docker, set the correct Docker socket in `docker_config.yaml`.
+
+1. Recreate your application containers.
+
+   Instrumentation is applied when a container is created, so restarting an existing container with `docker stop` and `docker start` does not instrument it. Remove your application containers and run them again.
 
 <div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
 
+### Generate the command from Datadog
+
+To get a command pre-filled with your API key and site, go to the [Install the Datadog Agent on Docker][15] page. In the {{< ui >}}Customize my agent install command{{< /ui >}} section, go to {{< ui >}}Additional configuration{{< /ui >}} > {{< ui >}}Application Observability{{< /ui >}}, and turn on {{< ui >}}APM Instrumentation{{< /ui >}}. Then copy and run the generated command.
+
+{{< img src="tracing/trace_collection/docker-apm-instrumentation-toggle.png" alt="The 'Customize your agent install command' section of in-app instructions for installing the Datadog Agent on Docker" style="width:100%;" >}}
+
 ## Set SDK tracer versions
 
-By default, Single Step Instrumentation installs the latest major versions of Datadog SDKs. Minor version updates are applied automatically when they become available.
+By default, Single Step Instrumentation installs the latest major versions of the Datadog SDKs, and applies minor updates automatically when they become available.
 
-You may want to customize SDK versions based on your application's language version or specific environment requirements. You can control the major and minor versions used by customizing library versions during setup.
-
-To customize tracer versions:
-
-1. In Datadog, go to the [Install the Datadog Agent on Docker][15] page.
-1. After you turn on {{< ui >}}APM Instrumentation{{< /ui >}}, click {{< ui >}}Customize library versions{{< /ui >}}.
-
-   {{< img src="tracing/trace_collection/apm-instrumentation-version-pinning.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Docker" style="width:100%;" >}}
-
-1. Find your language(s) and use the dropdown to either:
-   - Pin an exact tracer version, or
-   - Select the major version you want to use.
-1. Copy and run the updated installation command.
-
-Available versions are listed in source repositories for each language:
+To pin specific versions, add the `DD_APM_INSTRUMENTATION_LIBRARIES` variable with comma-separated `language:major` pairs to the component installation command. Available versions are listed in the source repositories for each language:
 
 - [Java][8] (`java`)
 - [Node.js][9] (`js`)
@@ -59,6 +76,42 @@ Available versions are listed in source repositories for each language:
 - [.NET][11] (`dotnet`)
 - [Ruby][12] (`ruby`)
 - [PHP][13] (`php`)
+
+You can also select versions from dropdowns in Datadog: on the [Install the Datadog Agent on Docker][15] page, after you turn on {{< ui >}}APM Instrumentation{{< /ui >}}, click {{< ui >}}Customize library versions{{< /ui >}}.
+
+{{< img src="tracing/trace_collection/apm-instrumentation-version-pinning.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Docker" style="width:100%;" >}}
+
+## Verify the installation
+
+1. Confirm the Docker daemon is using the Datadog runtime:
+
+   ```shell
+   docker system info --format '{{.DefaultRuntime}}'
+   ```
+
+   The output must be `dd-shim`. If it is `runc` or anything else, the instrumentation components did not install successfully, and your applications are not instrumented regardless of whether the Agent is healthy. Re-run the installation command, and confirm that the Docker daemon was running when you ran it.
+
+1. Confirm the Agent container is running:
+
+   ```shell
+   docker ps --filter name=dd-agent
+   ```
+
+1. Confirm the Agent is healthy and the APM Agent is running:
+
+   ```shell
+   docker exec dd-agent agent status
+   ```
+
+   Check the **APM Agent** section of the output.
+
+1. Confirm that an application container is using the Datadog runtime. Replace `<CONTAINER_NAME>` with the name of one of your application containers:
+
+   ```shell
+   docker inspect <CONTAINER_NAME> --format '{{.HostConfig.Runtime}}'
+   ```
+
+1. After your applications receive traffic, confirm your services appear on the [APM Services page][18]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][17].
 
 ## Configure Unified Service Tags
 
@@ -121,6 +174,7 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=docker
 [16]: /getting_started/tagging/unified_service_tagging/?tab=docker#containerized-environment
 [17]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
+[18]: https://app.datadoghq.com/apm/services
 
 
 

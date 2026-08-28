@@ -26,85 +26,44 @@ On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install 
 
 ### New Agent installation
 
-If you don't yet have a Datadog Agent installed, follow these steps to install the Agent and enable SSI simultaneously.
+If you don't yet have a Datadog Agent installed, install the Agent and enable SSI in one step.
 
-1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
-2. In the {{< ui >}}Customize your Agent coverage{{< /ui >}} section, go to {{< ui >}}Core Observability{{< /ui >}} and turn on {{< ui >}}Application Performance Monitoring{{< /ui >}}.
-   
-   {{< img src="tracing/trace_collection/enable_apm.png" alt="The 'Customize your Agent coverage' section of in-app instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
-
-{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-3. (Optional) By default, SSI installs the latest SDK versions. To use specific versions instead:
-
-   Click {{< ui >}}Customize Library Versions{{< /ui >}}, then select your desired version for each language from the dropdowns. You can select an exact version or a major version, which uses the latest minor release available when the installation command is run.
-
-   {{< img src="tracing/trace_collection/customize_library_versions.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
-
-   Available versions are listed in source repositories for each language: [Java][8] (`java`), [Node.js][9] (`js`), [Python][10] (`python`), [.NET][11] (`dotnet`), [Ruby][12] (`ruby`), [PHP][13] (`php`).
-
-[8]: https://github.com/DataDog/dd-trace-java/releases
-[9]: https://github.com/DataDog/dd-trace-js/releases
-[10]: https://github.com/DataDog/dd-trace-py/releases
-[11]: https://github.com/DataDog/dd-trace-dotnet/releases
-[12]: https://github.com/DataDog/dd-trace-rb/releases
-[13]: https://github.com/DataDog/dd-trace-php/releases
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-3. (Optional) By default, SSI installs the latest SDK versions. To use specific versions instead, set your desired library versions with the `DD_APM_INSTRUMENTATION_LIBRARIES` variable in your Agent installation command:
+1. Run the following command on your Linux host or VM:
 
    ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY>
-   DD_SITE="US1-FED"
-   DD_APM_INSTRUMENTATION_ENABLED=host
-   DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1"
+   DD_API_KEY=<YOUR_DD_API_KEY> \
+   DD_SITE="{{< region-param key="dd_site" >}}" \
+   DD_APM_INSTRUMENTATION_ENABLED=host \
    bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 
-   Available versions are listed in source repositories for each language: [Java][8] (`java`), [Node.js][9] (`js`), [Python][10] (`python`), [.NET][11] (`dotnet`), [Ruby][12] (`ruby`), [PHP][13] (`php`).
+   Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][22]. The command installs or updates the Agent and the SSI packages.
 
-[8]: https://github.com/DataDog/dd-trace-java/releases
-[9]: https://github.com/DataDog/dd-trace-js/releases
-[10]: https://github.com/DataDog/dd-trace-py/releases
-[11]: https://github.com/DataDog/dd-trace-dotnet/releases
-[12]: https://github.com/DataDog/dd-trace-rb/releases
-[13]: https://github.com/DataDog/dd-trace-php/releases
+   By default, SSI installs the latest SDK versions. To pin specific versions, add the `DD_APM_INSTRUMENTATION_LIBRARIES` variable with comma-separated `language:major` pairs. Available versions are listed in the source repositories for each language: [Java][8] (`java`), [Node.js][9] (`js`), [Python][10] (`python`), [.NET][11] (`dotnet`), [Ruby][12] (`ruby`), [PHP][13] (`php`).
 
-{{< /site-region >}}
-
-{{< site-region region="gov2" >}}
-
-3. (Optional) By default, SSI installs the latest SDK versions. To use specific versions instead, set your desired library versions with the `DD_APM_INSTRUMENTATION_LIBRARIES` variable in your Agent installation command:
-
-   ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY>
-   DD_SITE="US2-FED"
-   DD_APM_INSTRUMENTATION_ENABLED=host
-   DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1"
-   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
-   ```
-
-   Available versions are listed in source repositories for each language: [Java][8] (`java`), [Node.js][9] (`js`), [Python][10] (`python`), [.NET][11] (`dotnet`), [Ruby][12] (`ruby`), [PHP][13] (`php`).
-
-[8]: https://github.com/DataDog/dd-trace-java/releases
-[9]: https://github.com/DataDog/dd-trace-js/releases
-[10]: https://github.com/DataDog/dd-trace-py/releases
-[11]: https://github.com/DataDog/dd-trace-dotnet/releases
-[12]: https://github.com/DataDog/dd-trace-rb/releases
-[13]: https://github.com/DataDog/dd-trace-php/releases
-
-{{< /site-region >}}
-
-4. Copy and run the Agent installation command on your Linux host or VM.
-5. Restart your applications.
+1. Restart your applications.
 
 <div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
 
+#### Generate the command from Datadog
+
+To get a command pre-filled with your API key and site, go to the [Install the Datadog Agent on Linux][15] page and turn on {{< ui >}}Application Performance Monitoring{{< /ui >}} under {{< ui >}}Core Observability{{< /ui >}}.
+
+{{< img src="tracing/trace_collection/enable_apm.png" alt="The 'Customize your Agent coverage' section of in-app instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+To select SDK versions from dropdowns, click {{< ui >}}Customize Library Versions{{< /ui >}}.
+
+{{< img src="tracing/trace_collection/customize_library_versions.png" alt="The 'Customize library versions' dropdown in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
+{{< /site-region >}}
+
+Then copy and run the generated command.
+
 ### Existing Agent installation
 
-If you already have a Datadog Agent installed, use Fleet Automation to enable SSI.
+If you already have a Datadog Agent installed, re-run the Agent installation command from [New Agent installation](#new-agent-installation) on the host. The command updates the existing Agent and enables SSI.
+
+Alternatively, use Fleet Automation to enable SSI from Datadog:
 
 1. In Datadog, go to [**Fleet Automation > Configuration**][21].
 1. Click {{< ui >}}Configure Agents{{< /ui >}}.
@@ -122,6 +81,24 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 
 1. Click **Next**.
 1. Review your configuration and click {{< ui >}}Deploy Configuration{{< /ui >}}.
+
+## Verify the installation
+
+1. Confirm the Agent is running:
+
+   ```shell
+   sudo datadog-agent status
+   ```
+
+1. Confirm that SSI injection is armed on the host:
+
+   ```shell
+   cat /etc/ld.so.preload && ls /opt/datadog-packages/ | grep apm
+   ```
+
+   The output lists the APM injector library in `/etc/ld.so.preload` and one or more `datadog-apm-*` packages.
+
+1. After your applications receive traffic, confirm your services appear on the [APM Services page][23]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][19].
 
 ## Configure Unified Service Tags
 
@@ -255,3 +232,5 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [19]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [20]: https://app.datadoghq.com/apm/service-setup/workload-selection
 [21]: https://app.datadoghq.com/fleet/agent-management
+[22]: https://app.datadoghq.com/organization-settings/api-keys
+[23]: https://app.datadoghq.com/apm/services
