@@ -76,7 +76,7 @@ Incident Management can be configured to prompt responders to set particular fie
 
 **During declaration**: Users are prompted to enter a value for the field during declaration and at all state changes if the field is empty.
 
-**When the incident is moved to Stable/Resolved/Completed**: Users are prompted to enter a value for the field when moving the incident to the selected state and any later state. For example, if you select "When the incident is moved to Stable," users are prompted to fill out the field when moving incidents to Stable, Resolved, or Completed.
+To prompt responders for a field when an incident moves to a given status, use [transition forms][14].
 
 ### Custom fields in search and analytics
 
