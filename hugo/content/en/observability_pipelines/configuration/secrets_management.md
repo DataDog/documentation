@@ -147,7 +147,7 @@ To access your Key Vault, create a Managed Identity and assign it to your VM. Th
 After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets using Azure Key Vault:
 
 ```yaml
-backend_type: azure.keyvault
+backend_type: azure
 backend_config:
   keyvaulturl: <key_vault_url>
 ```
@@ -163,7 +163,7 @@ Before you [install the Worker][1], add the bootstrap configuration to the [`dat
 bootstrap:
   config:
     secret:
-      backend_type: azure.keyvault
+      backend_type: azure
       backend_config:
         keyvaulturl: <key_vault_url>
 ```
