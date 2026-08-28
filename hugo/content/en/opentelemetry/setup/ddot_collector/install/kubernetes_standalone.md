@@ -772,15 +772,13 @@ To apply later changes, run `helm upgrade node-collector open-telemetry/opentele
 
 If you also want to run the core Datadog Agent on the same nodes as the standalone DDOT Collector — for example, to collect infrastructure metrics, APM, or logs through the core Agent while DDOT handles OTLP ingestion — you can install it separately using the [Datadog Operator][57].
 
-<div class="alert alert-info">
-<strong>Namespace scoping:</strong> The Datadog Operator Helm chart, by default, only watches <code>DatadogAgent</code> resources in the namespace where the Operator itself is installed (<code>watchNamespaces: []</code>). If you create your <code>DatadogAgent</code> resource in a different namespace than the Operator—for example, to keep it separate from the <code>OpenTelemetryCollector</code> resource's namespace—the resource silently never reconciles: no error and no Kubernetes event are produced, and <code>status</code> on the resource stays empty. Either install the <code>DatadogAgent</code> resource in the same namespace as the Datadog Operator, or set <code>watchNamespaces</code> to include the namespace where you create the resource:
-
+By default, the Datadog Operator Helm chart watches <code>DatadogAgent</code> resources only in the namespace where the Operator is installed (<code>watchNamespaces: []</code>). If the <code>DatadogAgent</code> resource is in a different namespace than the Operator, for example, to keep it separate from the <code>OpenTelemetryCollector</code> resource's namespace, set <code>watchNamespaces</code> to include the namespace where the <code>DatadogAgent</code> resource is created:
 <pre><code>helm upgrade datadog-operator datadog/datadog-operator \
   -n &lt;OPERATOR_NAMESPACE&gt; \
   --reuse-values \
   --set 'watchNamespaces[0]=&lt;DATADOG_AGENT_NAMESPACE&gt;'
 </code></pre>
-</div>
+If the Operator doesn't watch the namespace where the <code>DatadogAgent</code> resource is created, the resource silently fails to reconcile, with no error, no Kubernetes event, and no status update to indicate the problem.
 
 ## Send your telemetry to Datadog
 
