@@ -436,7 +436,7 @@ The `llmobs` toolset includes the following tools:
 : Remove traces from an annotation queue.
 
 `get_llmobs_annotated_interactions`
-: Get the annotated interactions in an annotation queue along with the labels annotators applied to them.
+: Get the annotated interactions in an annotation queue along with the labels that annotators applied to them.
 
 `get_llmobs_annotations_by_content_ids`
 : Get the annotations applied to specific traces or sessions by their content IDs.
