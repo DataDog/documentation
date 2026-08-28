@@ -112,7 +112,9 @@ describe("countCategoryPages", () => {
   // matter how many categories the spec produced. Pages are the generated output.
   it("counts one page per generated category, not one per route pattern", () => {
     const categories = ["dashboards", "metrics", "monitors", "logs"];
-    expect(countCategoryPages(categories.map((c) => `api/latest/${c}/`))).toBe(4);
+    expect(countCategoryPages(categories.map((c) => `api/latest/${c}/`))).toBe(
+      4,
+    );
   });
 
   it("is zero when nothing matches", () => {

@@ -92,7 +92,9 @@ async function listFilesRecursive(dir: URL, prefix = ""): Promise<string[]> {
   for (const entry of entries) {
     const relative = prefix ? `${prefix}/${entry.name}` : entry.name;
     if (entry.isDirectory()) {
-      files.push(...(await listFilesRecursive(new URL(`${entry.name}/`, dir), relative)));
+      files.push(
+        ...(await listFilesRecursive(new URL(`${entry.name}/`, dir), relative)),
+      );
     } else {
       files.push(relative);
     }

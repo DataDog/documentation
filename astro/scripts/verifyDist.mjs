@@ -23,7 +23,9 @@ const CONTAINED_PATH = /^(?:_astro|api|fr\/api|ja\/api|ko\/api|es\/api)\//;
 const args = process.argv.slice(2);
 const positional = args.filter((arg) => !arg.startsWith("--"));
 const distDir = positional[0] ?? "dist/client";
-const minCategoriesArg = args.find((arg) => arg.startsWith("--min-categories="));
+const minCategoriesArg = args.find((arg) =>
+  arg.startsWith("--min-categories="),
+);
 const minCategoryCount = minCategoriesArg
   ? Number(minCategoriesArg.split("=")[1])
   : 150;
@@ -34,7 +36,9 @@ async function listFilesRecursive(dir, prefix = "") {
   for (const entry of entries) {
     const relative = prefix ? `${prefix}/${entry.name}` : entry.name;
     if (entry.isDirectory()) {
-      files.push(...(await listFilesRecursive(join(dir, entry.name), relative)));
+      files.push(
+        ...(await listFilesRecursive(join(dir, entry.name), relative)),
+      );
     } else {
       files.push(relative);
     }
@@ -45,14 +49,18 @@ async function listFilesRecursive(dir, prefix = "") {
 async function main() {
   const resolvedDistDir = await stat(distDir).catch(() => null);
   if (!resolvedDistDir?.isDirectory()) {
-    console.error(`verify:dist: ${distDir} does not exist or is not a directory.`);
+    console.error(
+      `verify:dist: ${distDir} does not exist or is not a directory.`,
+    );
     process.exit(1);
   }
 
   const problems = [];
   const filePaths = await listFilesRecursive(distDir);
 
-  const uncontained = filePaths.filter((filePath) => !CONTAINED_PATH.test(filePath));
+  const uncontained = filePaths.filter(
+    (filePath) => !CONTAINED_PATH.test(filePath),
+  );
   if (uncontained.length > 0) {
     problems.push(
       `Containment guard: the following emitted files fall outside ` +
