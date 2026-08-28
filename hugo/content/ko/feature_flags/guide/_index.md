@@ -16,4 +16,5 @@ title: Feature Flags 가이드
     {{< nextlink href="/feature_flags/guide/migrate_from_launchdarkly" >}}LaunchDarkly에서 Feature Flags 마이그레이션하기{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/migrate_from_statsig" >}}Statsig에서 Feature Flags 마이그레이션하기{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/headless_cms" >}}Feature Flags와 헤드리스 CMS 통합{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/guide/estimating_and_managing_costs" >}}Feature Flags 비용 추정 및 관리{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -20,13 +20,39 @@ further_reading:
   text: 'Datadog MCP 서버: serverless_onboarding 도구'
 title: 컨테이너용 계측 방법 선택
 ---
-## Datadog MCP 서버 사용 {#use-the-datadog-mcp-server}
+## 에이전트 기반 온보딩으로 설정 {#set-up-with-agentic-onboarding}
 
-[Datadog MCP 서버][3]를 사용하여 AI 지원으로 Cloud Run 컨테이너의 모니터링을 설정하세요. 연결한 후 다음과 같은 프롬프트를 시도해 보세요.
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">이 기능은 선택한 <a href="/getting_started/site">Datadog 사이트</a>({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
+{{< /site-region >}}
+
+에이전트 기반 온보딩을 사용하여 AI 지원으로 Cloud Run 컨테이너의 모니터링을 설정하십시오. 에이전트 기반 온보딩은 프로젝트의 프레임워크를 감지하고, 필요한 구성을 적용하며, 데이터가 정상적으로 전송되는지 확인합니다. 상호 보완적인 두 가지 경로에서 동일한 Datadog 계정을 사용합니다.
+
+- **AI 설정 CLI**: 독립형 터미널 도구입니다. MCP 서버를 설치하고 싶지 않을 때 사용하세요.
+- **MCP 서버**: Claude Code 또는 Cursor와 같은 코딩 어시스턴트를 통해 IDE에서 설정하세요.
+
+{{< tabs >}}
+{{% tab "AI 설정 CLI" %}}
+
+프로젝트 디렉토리에서 CLI를 실행하세요(Node.js 22+ 필요). 이는 Datadog 계정을 연결한 다음 Cloud Run 서비스를 계측합니다:
 
 ```shell
+npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run
+```
+
+대화형으로 실행하려면 `--product`를 생략하고, Datadog 사이트를 지정하려면 `--site`를 추가하세요.
+
+{{% /tab %}}
+{{% tab "MCP 서버" %}}
+
+Datadog MCP의 [`serverless_onboarding`](https://docs.datadoghq.com/ko/agentic_onboarding/setup/?tab=serverlessmonitoring#mcp-server) 도구를 사용하여 AI 지원으로 Cloud Run 컨테이너의 모니터링을 설정하십시오. 연결한 후 다음과 같은 프롬프트를 시도해 보세요.
+
+```
 Help me monitor my GCP Cloud Run services with Datadog using Terraform.
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## 수동 계측 {#manual-instrumentation}
 Datadog으로 Google Cloud Run 컨테이너를 연동하려면 두 가지 옵션 중 하나를 선택하세요.
@@ -46,7 +72,7 @@ Datadog으로 Google Cloud Run 컨테이너를 연동하려면 두 가지 옵션
 | 로깅                       | stdout/stderr에 직접 액세스합니다.                             | 공유 볼륨 + 로그 라이브러리를 통해 로그 파일로 라우팅합니다. 처리되지 않은 예외는 자동으로 로그 라이브러리에서 처리되지 않기 때문에 추가적인 대응이 필요합니다. |
 | 실패 격리             | 드물게 Datadog Agent의 버그가 앱에 영향을 미칠 수 있습니다.   | Datadog Agent의 결함이 격리됩니다.                                                                                                                           |
 
-## 추가 자료 {#further-reading}
+## 참고 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
