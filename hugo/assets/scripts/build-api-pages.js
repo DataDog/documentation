@@ -977,6 +977,10 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
     if (typeof data === 'object') {
       Object.entries(data).forEach(([key, value]) => {
 
+        if(tableType === "response" && value.writeOnly) {
+          return;
+        }
+
         // calculate child data in advance
         // we do this here so that we can add classes to html with this knowledge
         let childData = null;

@@ -2640,6 +2640,25 @@ describe(`descColumn`, () => {
 
 describe(`rowRecursive`, () => {
 
+  it('should hide writeonly fields in response models', () => {
+    const mockData = {
+      "secretField": {
+        "type": "string",
+        "writeOnly": true
+      },
+      "visibleField": {
+        "type": "string"
+      }
+    };
+
+    const response = bp.rowRecursive("response", mockData, false);
+    const request = bp.rowRecursive("request", mockData, false);
+
+    expect(response).not.toContain('secretField');
+    expect(response).toContain('visibleField');
+    expect(request).toContain('secretField');
+  });
+
   it('should handle fields named required (properties->required)', () => {
     /*
     Required fields are usually an array of string e.g ['foo'.'bar']
