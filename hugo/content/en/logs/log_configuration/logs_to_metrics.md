@@ -46,13 +46,15 @@ You can also create metrics from an Analytics search by selecting the {{< ui >}}
 
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="Create a Logs to metric" style="width:80%;">}}
 
-1. {{< ui >}}Input a query to filter the log stream{{< /ui >}}: The query syntax is the same as for the [Log Explorer Search][6]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation. The index must be excluded from the query.
+1. {{< ui >}}Input a query to filter the log stream{{< /ui >}}: Write the query using the [Log Explorer search syntax][6]. The stream filter query is evaluated against the log stream at ingest time, not against indexed logs. Not every Log Explorer search feature is supported. A query that returns results in the Log Explorer can still match no logs here. [Full-text search][12] (`*:search_term`) is not supported. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation. The index must be excluded from the query.
+
+   After you save the metric, confirm that it produces datapoints in the [Metrics Explorer][13] before you rely on it. If the query matches logs in the Log Explorer but the metric stays empty, replace wildcard and escaped-space constructs with a quoted phrase. For example, use `message:"Database operation failed."` rather than `message:*Database\ operation\ failed.*`.
 2. {{< ui >}}Select the field you would like to track{{< /ui >}}: Select `*` to generate a count of all logs matching your query or enter a log attribute (for example, `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][7], the value of the metric is the value of the log attribute.
 3. {{< ui >}}Add dimensions to `group by`{{< /ui >}}: By default, metrics generated from logs do not have any tags unless explicitly added. Any attribute or tag dimension that exists in your logs (for example, `@network.bytes_written`, `env`) can be used to create metric [tags][8]. Metric tags names are equal to the originating attribute or tag name, without the @.
 4. {{< ui >}}Add percentile aggregations{{< /ui >}}: For distribution metrics, you can optionally generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered custom metrics, and [billed accordingly][9].
 5. {{< ui >}}Name your metric{{< /ui >}}: Log-based metric names must follow the [custom metric naming convention][10].
 
-**Note**: Data points for log-based metrics are generated at 10-second intervals. When you create a [dashboard graph][11] for log-based metrics, the `count unique` parameter is based on the values within the 10-second interval.
+**Note**: Datapoints for log-based metrics are generated at 10-second intervals. When you create a [dashboard graph][11] for log-based metrics, the `count unique` parameter is based on the values within the 10-second interval.
 
 {{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="The timeseries graph configuration page with the count unique query parameter highlighted" style="width:80%;">}}
 
@@ -108,3 +110,5 @@ An extra `status` tag is available on the `datadog.estimated_usage.logs.ingested
 [9]: /account_management/billing/custom_metrics/?tab=countrategauge
 [10]: /metrics/custom_metrics/#naming-custom-metrics
 [11]: /dashboards/querying/
+[12]: /logs/explorer/search_syntax/#full-text-search
+[13]: /metrics/explorer/
