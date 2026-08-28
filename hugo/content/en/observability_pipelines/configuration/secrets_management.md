@@ -41,7 +41,7 @@ Datadog recommends using the [instance profile method][1] of retrieving secrets 
 After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets using AWS Secrets Manager:
 
 ```yaml
-backend_type: aws.secrets
+backend_type: aws
 backend_config:
   aws_session:
     aws_region: <region_name>
@@ -58,7 +58,7 @@ Before you [install the Worker][1], add the bootstrap configuration to the [`dat
 bootstrap:
   config:
     secret:
-      backend_type: aws.secrets
+      backend_type: aws
       backend_config:
         aws_session:
           aws_region: <region_name>
