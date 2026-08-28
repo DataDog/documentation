@@ -36,11 +36,8 @@ An ownerless runner enrolls with an API key that has the Private Action Runner c
 
 1. In Datadog, go to **[Organization Settings > API Keys][3]** and create or select an API key.
 1. On the key, next to **PAR** (the Private Action Runner capability), click **Enable**.
-
    {{< img src="actions/private_actions/getting_started/api_key_par_capability.png" alt="An API key details panel with the PAR capability being enabled, next to the Remote Config setting" style="width:60%;" >}}
-
 1. Store the key value in a Kubernetes secret that the Agent reads:
-
    ```bash
    kubectl create secret generic datadog-secret \
      --from-literal api-key=<DD_API_KEY>
@@ -88,7 +85,7 @@ Apply the manifest:
 kubectl apply -f datadog-agent.yaml
 ```
 
-Because `api_key_only_enrollment` is set and you provide only an API key, each runner self-enrolls as **ownerless** on startup, which means it is authorized with Execution Policies. For the other deployment options and install methods, see [Set up a private action runner in the Datadog Agent][4]. To learn more about enrollment, see [Enrollment and ownership][5].
+Because `api_key_only_enrollment` is set and you provide only an API key, each runner self-enrolls as **ownerless** on startup, which means it is authorized with Execution Policies. This manifest is the minimal Operator setup for this guide; for the full runner configuration, other install methods (Host, Windows, Helm), and the complete field reference, see [Set up a private action runner in the Datadog Agent][4]. To learn more about enrollment, see [Enrollment and ownership][5].
 
 The `actions_allowlist` entries in the example use bundle wildcards to allow the actions this guide uses. To use the runner's built-in read-only actions instead, leave `actions_allowlist` empty. The runner then enables its default action set, which includes read-only Remote Action network and shell actions, plus a set of read-only Kubernetes actions on the Cluster Agent.
 
@@ -96,14 +93,13 @@ The `actions_allowlist` entries in the example use bundle wildcards to allow the
 
 In Datadog, go to [Private Action Runners][6]. Verify your new runner appears in the list.
 
-You can also check the Agent logs:
+You can also check the Cluster Agent logs to confirm the runner started:
 
 ```bash
-# Cluster Agent runner
-kubectl logs deployment/datadog-cluster-agent -c cluster-agent | grep -i private
-# Node Agent runner
-kubectl logs daemonset/datadog-agent -c agent | grep -i private
+kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=1000 | grep private
 ```
+
+For node Agent logs and other platforms, see [Debugging with logs][12].
 
 Datadog provisions **default Execution Policies** in your organization. These policies use a target selector of `*`, so they automatically cover every Agent that runs a private action runner, including the one you deployed. This is what authorizes read-only actions with no Execution Policy setup of your own. See [Datadog Default Execution Policies][7].
 
@@ -116,8 +112,7 @@ Run a read-only Kubernetes action against your new runner from the Action Catalo
 1. Set **Orch Cluster ID** to the orchestration cluster ID of the cluster running your runner. You can find the orchestration cluster ID among the tags of your cluster in [Fleet Automation's Fleet View][11].
 1. Under **Configure inputs**, enter the **Namespace** to list pods from. You can also set **Field selector**, **Label selector**, or **Limit**.
 1. Click **Run**. The results appear in the panel.
-
-{{< img src="actions/private_actions/getting_started/run_action_action_catalog.png" alt="The List Pods action in the Action Catalog, with the connection set to Target and an Orch Cluster ID entered" style="width:58%;" >}}
+  {{< img src="actions/private_actions/getting_started/run_action_action_catalog.png" alt="The List Pods action in the Action Catalog, with the connection set to Target and an Orch Cluster ID entered" style="width:80%;" >}}
 
 The action runs on your runner and returns its result. To run the same action from a workflow instead, add a private action step in Workflow Automation and choose **Target** in its connection picker. See [Use an Execution Policy in a workflow][9].
 
@@ -140,3 +135,4 @@ This guide uses Datadog's default Execution Policies, which authorize read-only 
 [9]: /actions/private_actions/execution_policies/#use-an-execution-policy-in-a-workflow
 [10]: /actions/private_actions/execution_policies/
 [11]: https://app.datadoghq.com/fleet?view_by=clusters
+[12]: /actions/private_actions/set_up_agent_based/#debugging-with-logs
