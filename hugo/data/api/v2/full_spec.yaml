@@ -37539,11 +37539,16 @@ components:
           type: integer
       type: object
     Event:
+      additionalProperties: {}
       description: The metadata associated with a request.
       properties:
         id:
           description: Event ID.
           example: "6509751066204996294"
+          type: string
+        integration_id:
+          description: The integration ID of the event.
+          example: "custom-events"
           type: string
         name:
           description: The event name.
@@ -37557,8 +37562,13 @@ components:
           description: Event type.
           example: "error_tracking_alert"
           type: string
+        uid:
+          description: A unique identifier for the event. You can use this identifier to query or reference the event.
+          example: "AaBJ4QimAABPmEWRwc_8yAAA"
+          type: string
       type: object
     EventAttributes:
+      additionalProperties: {}
       description: Object description of attributes from your event.
       properties:
         aggregation_key:
@@ -37808,16 +37818,27 @@ components:
         - CUSTOM_EVENTS
     EventPriority:
       description: |-
-        The priority of the event's monitor. For example, `normal` or `low`.
+        The priority of the event alert. Legacy events use `normal` or `low`.
+        Alert events use `1` (highest priority) through `5` (lowest priority).
       enum:
         - normal
         - low
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
       example: "normal"
       nullable: true
       type: string
       x-enum-varnames:
         - NORMAL
         - LOW
+        - PRIORITY_ONE
+        - PRIORITY_TWO
+        - PRIORITY_THREE
+        - PRIORITY_FOUR
+        - PRIORITY_FIVE
     EventResponse:
       description: The object description of an event after being processed and stored by Datadog.
       properties:
@@ -37853,13 +37874,15 @@ components:
       type: object
     EventStatusType:
       description: |-
-        If an alert event is enabled, its status is one of the following:
-        `failure`, `error`, `warning`, `info`, `success`, `user_update`,
-        `recommendation`, or `snapshot`.
+        The event status. Legacy events can use `failure`, `error`, `warning`,
+        `info`, `success`, `user_update`, `recommendation`, or `snapshot`.
+        Alert events can use `error`, `warn`, or `ok`.
       enum:
         - failure
         - error
+        - warn
         - warning
+        - ok
         - info
         - success
         - user_update
@@ -37870,7 +37893,9 @@ components:
       x-enum-varnames:
         - FAILURE
         - ERROR
+        - WARN
         - WARNING
+        - OK
         - INFO
         - SUCCESS
         - USER_UPDATE
@@ -38125,7 +38150,7 @@ components:
           type: string
         limit:
           default: 10
-          description: The maximum number of logs in the response.
+          description: The maximum number of events in the response.
           example: 25
           format: int32
           maximum: 1000
