@@ -67,9 +67,7 @@ grep "remaining unread" /var/log/datadog/agent.log
 
 The Agent also counts lost bytes in the `logs.bytes_missed` internal telemetry metric. See [Agent telemetry collection][2].
 
-{{< note >}}
-The Agent reports remaining unread bytes after rotation when tailing files on Linux and macOS.
-{{< /note >}}
+**Note**: The Agent reports remaining unread bytes after rotation when tailing files on Linux and macOS.
 
 ## Logs Agent Backpressure status
 
@@ -159,9 +157,7 @@ Work the most downstream saturated component first. Every option below is an exi
 | `worker` | Concurrent senders are pinned dispatching batches. |
 | `processor` | Per-message processing is CPU-bound on the host. |
 
-{{< note >}}
-The default values listed below can change between Agent releases. Confirm them against your deployed Agent version.
-{{< /note >}}
+**Note**: The default values listed below can change between Agent releases. Confirm them against your deployed Agent version.
 
 ### destination_reliable_N
 
