@@ -289,6 +289,10 @@ core_product:
 # Unsupported sites for each product
 unsupported_sites:
   remediate_with_ai: [gov, gov2]
+  cloudcraft_apm_overlay: [gov, gov2]
+  code_locations: [gov, gov2]
+  ownership_of_views: [gov, gov2]
+  ai_credit_limits: [gov, gov2]
   amazon-security-lake: [gov, gov2]
   resource_catalog_policies: [gov, gov2]
   runtime_prioritization_engine: [gov, gov2]
@@ -383,6 +387,7 @@ unsupported_sites:
   linear_error_tracking: [gov,gov2]
   live_debugger: [gov,gov2]
   llm_observability: [gov,gov2]
+  dd.llm_observability.dataset: [gov,gov2]
   mcp_server: [gov,gov2]
   mobile_app_testing: [gov,gov2]
   nebius-cloud: [gov,gov2]
@@ -429,3 +434,4 @@ unsupported_sites:
   workflow-automation: [gov,gov2]
   workflows: [gov,gov2]
   workload_security_active_protection: [gov,gov2]
+  work_management_ai_site_support: [gov,gov2]
