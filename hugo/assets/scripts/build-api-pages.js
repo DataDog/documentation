@@ -359,11 +359,10 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
         }
       }
 
-      if(actionType === "request" && value.readOnly) {
-        // skip
-      } else if(actionType === "curl" && value.readOnly) {
-        // skip
-      } else {
+      const shouldSkip = ((actionType === "request" || actionType === "curl") && value.readOnly)
+        || (actionType === "response" && value.writeOnly);
+
+      if(!shouldSkip) {
 
         let prefixType = '';
         let suffixType = '';
