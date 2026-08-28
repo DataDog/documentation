@@ -3504,7 +3504,7 @@
     "summary": "Delete an Agent Observability prompt"
   },
   "GetLLMObsPrompt": {
-    "description": "Get the latest version of an Agent Observability prompt by prompt ID.",
+    "description": "Get an Agent Observability prompt by prompt ID. When `environment` is omitted, this returns the latest version or uses the deprecated `label` behavior and requires `llm_observability_read`. When `environment` is supplied, it must be a nonempty `DD_ENV` value, cannot be combined with `label`, and additionally requires `feature_flag_config_read` and `feature_flag_environment_config_read`. An empty environment or combining it with `label` returns 400, and missing either additional permission returns 403. A missing prompt or deployment returns 404 without falling back to the latest version. An environment resolution failure returns 500.",
     "summary": "Get an Agent Observability prompt"
   },
   "UpdateLLMObsPrompt": {
