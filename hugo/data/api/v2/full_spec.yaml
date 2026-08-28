@@ -19082,6 +19082,11 @@ components:
           format: int32
           maximum: 2147483647
           type: integer
+        contentPackUpdateAvailable:
+          description: "Whether a content pack update is available for the policy."
+          example: false
+          nullable: true
+          type: boolean
         datadogManaged:
           description: "Whether the policy is managed by Datadog"
           example: false
@@ -19148,6 +19153,10 @@ components:
           format: int32
           maximum: 2147483647
           type: integer
+        sourceDefaultPolicyId:
+          description: "The ID of the Datadog-managed default policy this policy is sourced from."
+          example: "threat-detection.policy"
+          type: string
         updateDate:
           description: "Timestamp in milliseconds when the policy was last updated"
           example: 1624366480320
@@ -19330,6 +19339,9 @@ components:
     CloudWorkloadSecurityAgentRuleAction:
       description: "The action the rule can perform if triggered"
       properties:
+        disabled:
+          description: "Whether the action is disabled."
+          type: boolean
         filter:
           description: "SECL expression used to target the container to apply the action on"
           type: string
@@ -19385,6 +19397,9 @@ components:
           type: string
         scope:
           description: "The scope of the set action."
+          type: string
+        scope_field:
+          description: "The scope field of the set action."
           type: string
         size:
           description: "The size of the set action."
