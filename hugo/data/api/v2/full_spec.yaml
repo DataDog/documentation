@@ -9311,6 +9311,7 @@ components:
         - server.response.headers.no_cookies
         - server.response.trailers
         - server.response.body
+        - server.response.body.raw
         - grpc.server.request.metadata
         - grpc.server.request.message
         - grpc.server.method
@@ -9347,6 +9348,7 @@ components:
         - SERVER_RESPONSE_HEADERS_NO_COOKIES
         - SERVER_RESPONSE_TRAILERS
         - SERVER_RESPONSE_BODY
+        - SERVER_RESPONSE_BODY_RAW
         - GRPC_SERVER_REQUEST_METADATA
         - GRPC_SERVER_REQUEST_MESSAGE
         - GRPC_SERVER_METHOD
