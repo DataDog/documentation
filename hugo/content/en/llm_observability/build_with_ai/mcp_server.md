@@ -424,7 +424,7 @@ The `llmobs` toolset includes the following tools:
 : Delete an annotation queue.
 
 `get_llmobs_annotation_label_schema`
-: Get the label schema for an annotation queue, which defines the labels annotators apply during review.
+: Get the label schema for an annotation queue, which defines the labels that annotators apply during review.
 
 `update_llmobs_annotation_label_schema`
 : Create or replace the label schema for an annotation queue.
