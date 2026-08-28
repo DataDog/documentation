@@ -41,18 +41,18 @@ For monitor alert investigations, a summary of the findings is available on the 
 <div class="alert alert-info">
 The Microsoft Teams integration with Bits Investigation is in Preview for all customers.</div>
 
-### Datadog Case Management
+### Datadog Work Management
 
-Datadog Case Management provides a centralized workspace for triaging, tracking, and remediating issues detected by Datadog and third-party integrations. Bits Investigation automatically delivers its investigation findings to Jira and ServiceNow through Case Management.
+Datadog Work Management provides a centralized workspace for triaging, tracking, and remediating issues detected by Datadog and third-party integrations. Bits Investigation automatically delivers its investigation findings to Jira and ServiceNow through Work Management.
 
-To set up Case Management, and the Jira and ServiceNow integrations:
-1. Create a [Case Management project][5] for your team.
-1. In Datadog, go to [{{< ui >}}Case Management{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][6]. In the list of projects, expand your project, go to {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Datadog Monitors{{< /ui >}}, and turn on the {{< ui >}}Enable Datadog Monitors integration for this project{{< /ui >}} toggle. This generates your project's unique handle: `@case-{project_name}`.
-1. On the same page, under {{< ui >}}Integrations{{< /ui >}}, set up the Case Management Jira and/or ServiceNow integrations. When a new case is created, Case Management can automatically open the corresponding Jira ticket or ServiceNow incident.
+To set up Work Management, and the Jira and ServiceNow integrations:
+1. Create a [Work Management project][5] for your team.
+1. In Datadog, go to [{{< ui >}}Work Management{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][6]. In the list of projects, expand your project, go to {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Datadog Monitors{{< /ui >}}, and turn on the {{< ui >}}Enable Datadog Monitors integration for this project{{< /ui >}} toggle. This generates your project's unique handle: `@case-{project_name}`.
+1. On the same page, under {{< ui >}}Integrations{{< /ui >}}, set up the Work Management Jira and/or ServiceNow integrations. When a new work item is created, Work Management can automatically open the corresponding Jira ticket or ServiceNow incident.
 1. In your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@case-{project_name}` handle. When the monitor triggers:
-   - Datadog automatically creates a new case
-   - The case creates a linked Jira ticket or ServiceNow incident
-   - Bits writes its investigation findings directly to the case, which gets appended to Jira as a timeline comment or ServiceNow as a work note
+   - Datadog automatically creates a new work item
+   - The work item creates a linked Jira ticket or ServiceNow incident
+   - Bits writes its investigation findings directly to the work item, which gets appended to Jira as a timeline comment or ServiceNow as a work note
 
 ### Datadog On-Call
 
@@ -140,8 +140,8 @@ You can trigger and retrieve investigations programmatically [via API][18].
 [2]: /monitors/notify
 [3]: https://docs.datadoghq.com/integrations/slack/?tab=datadogforslack
 [4]: https://app.datadoghq.com/bits-ai/settings/integrations
-[5]: /incident_response/case_management/projects
-[6]: https://app.datadoghq.com/cases/settings
+[5]: /incident_response/work_management/projects
+[6]: https://app.datadoghq.com/work/settings
 [7]: https://app.datadoghq.com/integrations/confluence
 [8]: /account_management/rbac
 [9]: /bits_ai/bits_investigation/investigate_issues#manually-start-an-investigation

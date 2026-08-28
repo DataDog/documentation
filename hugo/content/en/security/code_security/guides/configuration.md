@@ -42,7 +42,7 @@ iac:
   # Infrastructure as Code (IaC) Security configuration
 ```
 
-The `sast`, `sca`, and `iac` sections are optional. Any configuration location, including the org level, repository level, or repository file, can include one or more sections. For the full schema for each section, see [Static Code Analysis (SAST) Configuration][1], [Software Composition Analysis (SCA) Configuration][2], and [Infrastructure as Code (IaC) Security Configuration][3].
+The `sast`, `sca`, and `iac` sections are optional. Any configuration location, including the org level, repository level, or repository file, can include one or more sections. The `sast` section also controls AI-native SAST rulesets for Datadog-hosted scans. For the full schema for each section and AI-native SAST ruleset names, see [Static Code Analysis (SAST) Configuration][1], [Software Composition Analysis (SCA) Configuration][2], and [Infrastructure as Code (IaC) Security Configuration][3].
 
 ## Where to define configurations
 

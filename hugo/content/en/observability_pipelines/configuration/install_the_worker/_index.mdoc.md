@@ -1,5 +1,6 @@
 ---
 title: Install the Worker
+description: Install and set up the Observability Pipelines Worker on your platform.
 disable_toc: false
 aliases:
     - /observability_pipelines/install_the_worker/
@@ -46,7 +47,7 @@ For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or
 
 {% /if %}
 
-The Observability Pipelines Worker is software that runs in your environment to centrally aggregate and process your logs and metrics ({% glossary-tooltip term="preview" case="title" /%}), and then route them to different destinations.
+The Observability Pipelines Worker is software that runs in your environment to centrally aggregate and process your logs and metrics, and then route them to different destinations.
 
 <!-- Kubernetes - Overview -->
 {% if equals($platform, "kubernetes") %}

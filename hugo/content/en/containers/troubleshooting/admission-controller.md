@@ -11,6 +11,9 @@ further_reading:
 - link: "/tracing/trace_collection/library_injection_local/?tab=kubernetes"
   tag: "Documentation"
   text: "Kubernetes Library Injection"
+- link: "https://www.datadoghq.com/architecture/instrument-your-app-using-the-datadog-operator-and-admission-controller/"
+  tag: "Architecture Center"
+  text: "Instrument your app using the Datadog Operator and Admission Controller"
 ---
 
 ## Overview

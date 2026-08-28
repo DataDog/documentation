@@ -36,7 +36,7 @@ To set this up for BigQuery, connect a BigQuery service account to Datadog and c
 
 Datadog connects to BigQuery through a Google Cloud service account. If you already have a service account connected to Datadog, skip to [Step 1](#step-1-prepare-the-google-cloud-resources). Otherwise, expand the section below to create one.
 
-{% collapse-content title="Create a Google Cloud service account" level="h4" %}
+{% collapse-content title="Create a Google Cloud service account" level="h3" %}
 
 1. Open your [Google Cloud console][4].
 1. Navigate to {% ui %}IAM & Admin{% /ui %} > {% ui %}Service Accounts{% /ui %}.
@@ -139,7 +139,7 @@ To set this up for Databricks, connect a Databricks service account to Datadog a
 
 Datadog Experiments connects to Databricks through the [Datadog Databricks integration][11]. If you already have a Databricks integration configured for the workspace you plan to use, skip to [Step 1](#step-1-grant-permissions-to-the-service-principal). Otherwise, expand the section below to create a service principal.
 
-{% collapse-content title="Create a Databricks service principal" level="h4" %}
+{% collapse-content title="Create a Databricks service principal" level="h3" %}
 
 **In your Databricks Workspace**:
 
@@ -276,7 +276,7 @@ To set this up for Amazon Redshift, connect a Redshift cluster to Datadog using 
 
 Datadog Experiments connects to Redshift through [Datadog's Amazon Web Services (AWS) integration][14]. If you already have the AWS integration configured for the account containing your Redshift cluster, skip to [Step 1](#step-1-prepare-the-redshift-cluster).
 
-{% collapse-content title="Set up the AWS integration" level="h4" %}
+{% collapse-content title="Set up the AWS integration" level="h3" %}
 
 {% alert %}
 Adding an AWS account requires the **AWS Configurations Manage** permission. If your organization uses custom roles, verify that your role includes this permission.
@@ -529,7 +529,7 @@ The examples in this guide use `datadog_experiments_user` and `datadog_experimen
 
 ### Create a dedicated service user and role in Snowflake
 
-1. Use the [Snowflake documentation][18] to create a public-private key pair for enhanced authentication. Datadog only supports unencrypted private keys.
+1. Use the [Snowflake documentation][18] to create a public-private key pair for enhanced authentication. Datadog supports both unencrypted private keys and passphrase-protected PKCS#8 private keys.
 1. Run the following commands in Snowflake to create the user and role in the service account. Replace `<public_key>` with the public key you generated in the previous step.
 
 ```sql
@@ -596,7 +596,7 @@ To connect your Snowflake account to Datadog for warehouse-native experiment ana
 1. Add your {% ui %}Account URL{% /ui %}. To find your account URL, see the [Snowflake guide][19].
 1. Toggle off all resources (these are not needed for experiment analysis).
 1. Enter the Snowflake {% ui %}User Name{% /ui %} you created in [Step 1](#step-1-prepare-the-snowflake-service-account) (for example, `datadog_experiments_user`).
-1. Scroll to the {% ui %}Configure a key pair authentication{% /ui %} section and upload your unencrypted {% ui %}private key{% /ui %}.
+1. Scroll to the {% ui %}Configure a key pair authentication{% /ui %} section and upload your {% ui %}private key{% /ui %}. If your private key is passphrase-protected, enter the passphrase in the {% ui %}Private Key Password{% /ui %} field.
 1. Click {% ui %}Save{% /ui %}.
 
 {% alert %}

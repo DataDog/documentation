@@ -4,6 +4,10 @@ aliases:
 - /tracing/services/inferred_entity_remapping_rules/
 - /tracing/services/renaming_rules/
 site_support_id: service_remapping_rules
+further_reading:
+- link: "https://www.datadoghq.com/blog/service-remapping/"
+  tag: "Blog"
+  text: "Comprehensively connect your service data with Service Remapping"
 ---
 
 ## Overview
@@ -14,7 +18,7 @@ Update how your services appear across Datadog without changing tracer configura
 
 ## Prerequisites
 
-You must have the `apm_service_renaming_write` permission to create remapping rules. See [Permissions][1] for details on Datadog role-based access control.
+You must have the **APM Service Remapping Write** permission (`apm_service_renaming_write`) to create, edit, and delete remapping rules. See [Permissions][1] for details on Datadog role-based access control.
 
 ### Tracer version requirements
 
@@ -95,3 +99,7 @@ Remapping rules are applied across APM, Logs, Metrics, USM, DSM, DJM, DBM, Profi
 [14]: https://app.datadoghq.com/software
 [15]: /tracing/services/service_override_removal
 [16]: https://github.com/DataDog/dd-trace-js/releases/tag/v3.37.0
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

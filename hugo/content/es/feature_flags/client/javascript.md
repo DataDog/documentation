@@ -1,28 +1,30 @@
 ---
-description: Configura indicadores de funciones de Datadog para aplicaciones JavaScript
-  de navegador.
+description: Configure las Feature Flags de Datadog para aplicaciones JavaScript de
+  navegador.
 further_reading:
 - link: /feature_flags/client/
   tag: Documentación
-  text: Indicadores de funciones del lado del cliente
+  text: Feature Flags del lado del cliente
 - link: https://openfeature.dev/docs/reference/sdks/client/web/
   tag: OpenFeature
-  text: Kit de desarrollo de software (SDK) web de OpenFeature
+  text: SDK web de OpenFeature
 - link: /real_user_monitoring/application_monitoring/browser/
   tag: Documentación
-  text: Monitorización del navegador
-title: Indicadores de funciones de JavaScript
+  text: Browser Monitoring
+- link: /feature_flags/browser_developer_extension/
+  tag: Documentación
+  text: Extensión para desarrolladores de navegador
+title: Feature Flags de JavaScript
 ---
+## Descripción general {#overview}
 
-## Información general
+Esta página describe cómo instrumentar su aplicación JavaScript de navegador con el SDK de Feature Flags de Datadog. Las Feature Flags de Datadog proporcionan una forma unificada de controlar de forma remota la disponibilidad de funciones en su aplicación, experimentar de forma segura y ofrecer nuevas experiencias con confianza.
 
-En esta page (página) se describe cómo instrumentar tu aplicación JavaScript de navegador con los el kit de desarrollo de software (SDK) de indicadores de funciones de Datadog. Los indicadores de funciones de Datadog proporcionan una forma unificada de controlar remotamente la disponibilidad de funciones en tu aplicación, experimentar de forma segura y ofrecer nuevas experiencias con confianza.
+El SDK de Feature Flags de Datadog para JavaScript está construido sobre [OpenFeature][1], un estándar abierto para la gestión de Feature Flags. Esta guía explica cómo instalar el SDK, configurar el proveedor de Datadog y evaluar Feature Flags en su aplicación.
 
-El kit de desarrollo de software (SDK) de indicadores de funciones de Datadog para JavaScript se compila en [OpenFeature][1], un estándar abierto para la gestión de indicadores de funciones. En esta guía se explica cómo instalar el kit de desarrollo de software (SDK), configurar el proveedor Datadog y evaluar los indicadores en tu aplicación.
+## Instalación {#installation}
 
-## Instalación
-
-Instala el proveedor OpenFeature y el kit de desarrollo de software (SDK) de OpenFeature Web de Datadog utilizando tu gestor de paquetes preferido:
+Instale el proveedor de OpenFeature de Datadog y el SDK web de OpenFeature utilizando su gestor de paquetes preferido:
 
 {{< tabs >}}
 {{% tab "npm" %}}
@@ -44,25 +46,33 @@ pnpm add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 {{% /tab %}}
 {{< /tabs >}}
 
-## Inicializar el proveedor
+## Inicialice el proveedor {#initialize-the-provider}
 
-Crea una instancia de `DatadogProvider` con tus credenciales de Datadog:
+Cree una instancia de `DatadogProvider` con sus credenciales de Datadog. Para la configuración en vivo de los Browser Feature Flags, se requieren `applicationId`, `clientToken`, `site` y `env`. Para crear un token de cliente, consulte [Client tokens][2].
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Los Browser Feature Flags no son compatibles con el <a href="/getting_started/site">Datadog site</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
 ```javascript
 import { DatadogProvider } from '@datadog/openfeature-browser';
 import { OpenFeature } from '@openfeature/web-sdk';
 
 const provider = new DatadogProvider({
+  // Required
+  // applicationId is a unique identifier to distinguish multiple frontend applications.
+  // This should match the app ID you provide to your RUM SDK.
   applicationId: '<APPLICATION_ID>',
+  // Required
   clientToken: '<CLIENT_TOKEN>',
   site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
 });
 ```
 
-## Definir el contexto de evaluación
+## Establezca el contexto de evaluación {#set-the-evaluation-context}
 
-Define a quién o a qué se aplica la evaluación del indicador utilizando un contexto de evaluación. El contexto de evaluación incluye información del usuario o de la sesión que se utiliza para determinar qué variantes del indicador deben devolverse. Haz referencia a estos atributos en tus reglas de orientación para controlar quién ve cada variante.
+Defina a quién o a qué se aplica la evaluación de las Feature Flags mediante un contexto de evaluación. El contexto de evaluación incluye información del usuario o de la sesión utilizada para determinar qué variaciones de las Feature Flags deben devolverse. Haga referencia a estos atributos en sus reglas de segmentación para controlar quién ve cada variante.
+
+<div class="alert alert-warning">Datadog Feature Flags requiere que los atributos del contexto de evaluación sean valores primitivos planos: cadenas, números y booleanos. No pase objetos o arreglos anidados; no son compatibles y pueden provocar que se pierdan los datos de exposición.</div>
 
 {{< code-block lang="javascript" >}}
 const evaluationContext = {
@@ -75,23 +85,25 @@ const evaluationContext = {
 await OpenFeature.setProviderAndWait(provider, evaluationContext);
 {{< /code-block >}}
 
-<div class="alert alert-info">La <code>targetingKey</code> se utiliza como sujeto de aleatorización para la orientación basada en el porcentaje. Cuando un indicador se dirige a un porcentaje de sujetos (por ejemplo, 50 %), la <code>targetingKey</code> determina en qué "bucket" cae un usuario. Los usuarios con la misma <code>targetingKey</code> siempre reciben la misma variante para un indicador determinado.</div>
+<div class="alert alert-info">El <code>targetingKey</code> se utiliza como sujeto de aleatorización para la segmentación basada en porcentajes. Cuando un Feature Flag segmenta un porcentaje de sujetos (por ejemplo, 50%), el <code>targetingKey</code> determina en qué bucket cae un usuario. Los usuarios con el mismo <code>targetingKey</code> siempre reciben la misma variante para un Feature Flag determinado.</div>
 
-## Evaluar indicadores
+La mayoría de las aplicaciones ejecutan varias tareas asíncronas al inicio, como obtener datos de otro servicio o cargar la configuración. Este ejemplo muestra solo la inicialización de las Feature Flags. Como práctica recomendada, inicie todas sus promesas de inicio juntas y espérelas como grupo (por ejemplo, con `Promise.all`) justo antes de que se necesiten los resultados, en lugar de esperar cada una secuencialmente. Esto mantiene el tiempo total de inicio cerca de la tarea más lenta en lugar de la suma de todas ellas.
 
-Una vez inicializado el proveedor, puedes evaluar los indicadores en cualquier lugar de tu aplicación. La evaluación de los indicadores es _local e instantánea_: el kit de desarrollo de software (SDK) utiliza datos almacenados en caché local, por lo que no se producen solicitudes de red al evaluar los indicadores.
+## Evaluar Feature Flags {#evaluate-flags}
 
-### Conseguir un cliente
+Después de que el proveedor se inicialice, puede evaluar Feature Flags en cualquier parte de su aplicación. La evaluación de Feature Flags es _local e instantánea_: el SDK utiliza datos almacenados en caché localmente, por lo que no se producen solicitudes de red al evaluar Feature Flags.
 
-Recuperar el cliente OpenFeature para evaluar los indicadores:
+### Obtener un cliente {#get-a-client}
+
+Recupere el cliente de OpenFeature para evaluar Feature Flags:
 
 {{< code-block lang="javascript" >}}
 const client = OpenFeature.getClient();
 {{< /code-block >}}
 
-### Indicadores booleanos
+### Feature Flags booleanos {#boolean-flags}
 
-Utiliza `getBooleanValue(key, defaultValue)` para los indicadores que representan condiciones de activado/desactivado o true/false:
+Use `getBooleanValue(key, defaultValue)` para Feature Flags que representan condiciones de encendido/apagado o verdadero/falso:
 
 {{< code-block lang="javascript" >}}
 const isNewCheckoutEnabled = client.getBooleanValue('checkout_new', false);
@@ -103,9 +115,9 @@ if (isNewCheckoutEnabled) {
 }
 {{< /code-block >}}
 
-### Indicadores de cadena
+### Feature Flags de cadena {#string-flags}
 
-Utiliza `getStringValue(key, defaultValue)` para los indicadores que seleccionan entre múltiples variantes o cadenas de configuración:
+Use `getStringValue(key, defaultValue)` para Feature Flags que seleccionan entre múltiples variantes o cadenas de configuración:
 
 {{< code-block lang="javascript" >}}
 const theme = client.getStringValue('ui_theme', 'light');
@@ -120,18 +132,18 @@ switch (theme) {
 }
 {{< /code-block >}}
 
-### Indicadores numéricos
+### Feature Flags numéricos {#number-flags}
 
-Utiliza `getNumberValue(key, defaultValue)` para indicadores numéricos como límites, porcentajes o multiplicadores:
+Use `getNumberValue(key, defaultValue)` para Feature Flags numéricos como límites, porcentajes o multiplicadores:
 
 {{< code-block lang="javascript" >}}
 const maxItems = client.getNumberValue('cart_items_max', 20);
 const priceMultiplier = client.getNumberValue('pricing_multiplier', 1.0);
 {{< /code-block >}}
 
-### Indicadores de objetos
+### Feature Flags de objeto {#object-flags}
 
-Utiliza `getObjectValue(key, defaultValue)` para los datos de configuración estructurados:
+Use `getObjectValue(key, defaultValue)` para Feature Flags que proporcionen datos de configuración estructurados:
 
 {{< code-block lang="javascript" >}}
 const config = client.getObjectValue('promo_banner_config', {
@@ -140,22 +152,22 @@ const config = client.getObjectValue('promo_banner_config', {
 });
 {{< /code-block >}}
 
-### Detalles de la evaluación de indicadores
+### Detalles de evaluación de Feature Flags {#flag-evaluation-details}
 
-Si necesitas algo más que el valor del indicador, utiliza los métodos detallados. Estos devuelven el valor evaluado y los metadatos que explican la evaluación:
+Cuando necesite más que solo el valor de una Feature Flag, use los métodos de detalle. Estos devuelven tanto el valor evaluado como los metadatos que explican la evaluación:
 
 {{< code-block lang="javascript" >}}
 const details = client.getBooleanDetails('checkout_new', false);
 
-console.log(details.value);       // Valor (true o false)
-console.log(details.variant);     // Nombre de la variante, si correspondiera
-console.log(details.reason);      // ¿Por qué se seleccionó este valor?
-console.log(details.errorCode);   // Código de error, si falló la evaluación
+console.log(details.value);       // Evaluated value (true or false)
+console.log(details.variant);     // Variant name, if applicable
+console.log(details.reason);      // Why this value was chosen
+console.log(details.errorCode);   // Error code, if evaluation failed
 {{< /code-block >}}
 
-## Ejemplo completo
+## Ejemplo completo {#complete-example}
 
-Este es un ejemplo completo en el que se muestra cómo configurar y utilizar indicadores de funciones de Datadog en una aplicación JavaScript:
+Aquí tiene un ejemplo completo que muestra cómo configurar y usar Datadog Feature Flags en una aplicación JavaScript:
 
 ```javascript
 import { DatadogProvider } from '@datadog/openfeature-browser';
@@ -187,9 +199,9 @@ if (showNewFeature) {
 }
 ```
 
-## Actualizar el contexto de evaluación
+## Actualizar el contexto de evaluación {#update-the-evaluation-context}
 
-Para actualizar el contexto de evaluación después de la inicialización (por ejemplo, cuando un usuario inicia sesión), utiliza `OpenFeature.setContext()`:
+Para actualizar el contexto de evaluación después de la inicialización (por ejemplo, cuando un usuario inicia sesión), use `OpenFeature.setContext()`:
 
 {{< code-block lang="javascript" >}}
 await OpenFeature.setContext({
@@ -200,8 +212,73 @@ await OpenFeature.setContext({
 });
 {{< /code-block >}}
 
-## Referencias adicionales
+## Configurar las opciones del proveedor del navegador {#configure-browser-provider-options}
+
+El proveedor web también admite estas configuraciones opcionales:
+
+| Opción | Predeterminado | Uso |
+| --- | --- | --- |
+| `enableExposureLogging` | `true` | Enviar eventos de exposición a la ingesta de exposiciones. |
+| `enableFlagEvaluationTracking` | `true` | Enviar telemetría de evaluación agregada. |
+| `enableRumFeatureFlagTracking` | `true` | Agregar evaluaciones de Feature Flags a los eventos de RUM cuando Browser RUM esté disponible. Habilitar esta opción puede aumentar el conteo de eventos facturados de RUM. |
+| `flagEvaluationTrackingInterval` | `10000` ms | Intervalo de vaciado para la telemetría de evaluación. |
+| `initialFlagsConfiguration` | `{}` | Bootstrap con Feature Flags precalculados. |
+| `flaggingProxy` | unset | Obtener Feature Flags a través de un proxy en lugar de `site`. |
+| `customHeaders` | unset | Agregar encabezados a las solicitudes de obtención de Feature Flags. |
+| `overwriteRequestHeaders` | `false` | Reemplazar los encabezados de solicitud predeterminados con `customHeaders`. |
+
+## Anule los Feature Flags en su navegador {#override-flags-in-your-browser}
+
+Para explorar los Feature Flags de su organización y anularlos localmente mientras desarrolla, incorpore el `DatadogDevtools` wrapper en su pila de proveedores y utilice la pestaña **Feature Flags** en la [extensión para desarrolladores del Datadog Browser SDK][3].
+
+## Pruebas {#testing}
+
+Puede realizar pruebas en un entorno de prueba dedicado de Datadog con el `DatadogProvider` real, o cambiarlo por el `InMemoryProvider` de OpenFeature para controlar los valores de los Feature Flags directamente en el código de prueba. Esta sección muestra el enfoque en memoria, el cual mantiene las pruebas herméticas y sin conexión. `InMemoryProvider` se exporta directamente desde `@openfeature/web-sdk`, por lo que no se requiere ninguna dependencia adicional.
+
+A diferencia del SDK del lado del servidor, el Web SDK evalúa los Feature Flags de forma sincrónica después de la inicialización. Aun así, `await` `setProviderAndWait` una vez en `beforeEach` para asegurarse de que el proveedor esté listo.
+
+{{< code-block lang="javascript" >}}
+import { beforeEach, afterAll, expect, test } from 'vitest';
+import { OpenFeature, TypedInMemoryProvider } from '@openfeature/web-sdk';
+
+const flags = {
+  new_checkout_button: {
+    variants: { on: true, off: false },
+    defaultVariant: 'on',
+    disabled: false,
+  },
+  ui_theme: {
+    variants: { dark: 'dark', light: 'light' },
+    defaultVariant: 'light',
+    disabled: false,
+  },
+};
+
+beforeEach(async () => {
+  await OpenFeature.setProviderAndWait(new TypedInMemoryProvider(flags));
+});
+
+afterAll(async () => {
+  await OpenFeature.close();
+});
+
+test('new checkout button is enabled by default', () => {
+  const client = OpenFeature.getClient();
+  expect(client.getBooleanValue('new_checkout_button', false)).toBe(true);
+});
+
+test('missing flag returns default', () => {
+  const client = OpenFeature.getClient();
+  expect(client.getBooleanValue('does-not-exist', false)).toBe(false);
+});
+{{< /code-block >}}
+
+La estructura de Feature Flags del Web SDK requiere `variants`, `defaultVariant` y `disabled`. Omitir cualquiera de estos hace que falle la compilación de TypeScript; en tiempo de ejecución, evaluar una clave de Feature Flag desconocida devuelve el valor predeterminado proporcionado. Prefiera `TypedInMemoryProvider` en lugar del obsoleto `InMemoryProvider` para configuraciones de Feature Flags con verificación de tipos. El mismo patrón de prueba funciona con Jest + jsdom; intercambie las importaciones de `vitest` por `@jest/globals` y añada `jest-environment-jsdom` a su proyecto.
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openfeature.dev/
+[2]: /es/account_management/api-app-keys/#client-tokens
+[3]: /es/feature_flags/browser_developer_extension/
