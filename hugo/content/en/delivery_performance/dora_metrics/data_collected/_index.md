@@ -86,6 +86,22 @@ For more information about using custom tags in DORA Metrics, see [DORA Metrics 
 | `Deploy Time`       | Duration from start of deployment to end of deployment. |
 | `Number of Commits`       | Count of commits included in the pull request. |
 | `Number of Reviewers`       | Count of reviewers who reviewed the pull request. |
+| `Number of Files Changed` | Count of files changed in the pull request. Only available for GitHub. |
+| `Number of Lines Added` | Count of lines added in the pull request. Only available for GitHub. |
+| `Number of Lines Deleted` | Count of lines deleted in the pull request. Only available for GitHub. |
+| `Total Number of Lines Changed` | Total count of lines added and deleted in the pull request. Only available for GitHub. |
+| `Time to First Human Review` | Duration until the pull request receives its first review from a human. Only available for GitHub. |
+| `Number of Comments` | Count of comments on the pull request. Only available for GitHub. |
+| `Number of Human Comments` | Count of comments on the pull request from humans. Only available for GitHub. |
+| `Fully Automated` | Boolean indicating whether the pull request was created and merged without human involvement. |
+| `Creator Bot Type` | Type of bot that created the pull request. |
+| `Creator Bot Name` | Name of the bot that created the pull request. |
+| `Time CI Failing` | Total duration that CI remained in a failing state across commits in the pull request. Requires CI Visibility. |
+| `Test Session Duration` | Total duration of test sessions for the pull request's head or merge commit. Requires Test Optimization. |
+| `Test Session Duration After Approval` | Total duration of test sessions for the pull request's head or merge commit after the pull request was approved. Requires Test Optimization. |
+| `Time to Pass` | Duration from the first CI attempt until the first successful pipeline execution for the pull request's head or merge commit. Requires CI Visibility. |
+| `Time to Pass After Approval` | Duration from the first CI attempt after pull request approval until the first successful pipeline execution for the pull request's head or merge commit. Requires CI Visibility. |
+| `Patch Coverage` | Percentage of new or modified lines in the pull request's head or merge commit that are covered by tests. Requires Code Coverage. |
 
 
 ### Commit fields
@@ -98,6 +114,9 @@ For more information about using custom tags in DORA Metrics, see [DORA Metrics 
 | `Merge Time`       | Duration from PR approval to merging. |
 | `Time to Deploy`       | Duration from merging to start of deployment. |
 | `Deploy Time`       | Duration from start of deployment to end of deployment. |
+| `Has Failed Jobs` | Boolean indicating whether any CI job execution failed for the commit, including failures that passed after a retry. Requires CI Visibility. |
+| `Has Failed Tests` | Boolean indicating whether any test execution failed because of a non-flaky test in the commit. Requires Test Optimization. |
+| `Has New Flaky Tests` | Boolean indicating whether any new flaky tests were detected in the commit's test sessions. Requires Test Optimization. |
 
 
 

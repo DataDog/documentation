@@ -9311,6 +9311,7 @@ components:
         - server.response.headers.no_cookies
         - server.response.trailers
         - server.response.body
+        - server.response.body.raw
         - grpc.server.request.metadata
         - grpc.server.request.message
         - grpc.server.method
@@ -9347,6 +9348,7 @@ components:
         - SERVER_RESPONSE_HEADERS_NO_COOKIES
         - SERVER_RESPONSE_TRAILERS
         - SERVER_RESPONSE_BODY
+        - SERVER_RESPONSE_BODY_RAW
         - GRPC_SERVER_REQUEST_METADATA
         - GRPC_SERVER_REQUEST_MESSAGE
         - GRPC_SERVER_METHOD
@@ -56461,6 +56463,10 @@ components:
           items:
             $ref: "#/components/schemas/LLMObsAnnotationItem"
           type: array
+        can_annotate:
+          description: Whether the current caller can annotate this interaction.
+          example: true
+          type: boolean
         content_id:
           description: Upstream entity identifier (trace ID, session ID, or deterministic display_block ID).
           example: "trace-abc-123"
@@ -56499,6 +56505,7 @@ components:
         - modified_at
         - queue_id
         - queue_name
+        - can_annotate
         - annotations
       type: object
     LLMObsAnnotatedInteractionItem:
@@ -56563,6 +56570,7 @@ components:
           description: List of interactions with their annotations.
           example:
             - annotations: []
+              can_annotate: true
               content_id: trace-abc-123
               id: "interaction-456"
               type: trace
@@ -56621,6 +56629,8 @@ components:
           description: ID of the annotation that failed, if applicable.
           example: "00000000-0000-0000-0000-000000000000"
           type: string
+        code:
+          $ref: "#/components/schemas/LLMObsAnnotationErrorCode"
         error:
           description: Error message.
           example: "interaction not found"
@@ -56633,6 +56643,14 @@ components:
         - interaction_id
         - error
       type: object
+    LLMObsAnnotationErrorCode:
+      description: Stable error code. `permission_denied` indicates the item was rejected by queue access rules.
+      enum:
+        - permission_denied
+      example: permission_denied
+      type: string
+      x-enum-varnames:
+        - PERMISSION_DENIED
     LLMObsAnnotationItem:
       description: A single annotation on an interaction.
       properties:
@@ -56811,6 +56829,21 @@ components:
           description: Identifier of the project this queue belongs to.
           example: "00000000-0000-0000-0000-000000000002"
           type: string
+        restrict_to_assignees:
+          description: Whether annotation access is restricted to assigned users.
+          example: false
+          type: boolean
+        restrict_to_reviewers:
+          description: Whether annotation access is restricted to queue reviewers.
+          example: true
+          type: boolean
+        reviewer_emails:
+          description: Email addresses of reviewers who can access the annotation queue.
+          example:
+            - "reviewer@example.com"
+          items:
+            type: string
+          type: array
       required:
         - name
         - project_id
@@ -56820,6 +56853,11 @@ components:
       properties:
         annotation_schema:
           $ref: "#/components/schemas/LLMObsAnnotationSchema"
+        can_manage_access:
+          description: Whether the current caller can manage access for the annotation queue.
+          example: true
+          readOnly: true
+          type: boolean
         created_at:
           description: Timestamp when the queue was created.
           example: "2024-01-15T10:30:00Z"
@@ -56854,6 +56892,23 @@ components:
           description: Identifier of the project this queue belongs to.
           example: "00000000-0000-0000-0000-000000000002"
           type: string
+        restrict_to_assignees:
+          description: Whether annotation access is restricted to assigned users.
+          example: false
+          type: boolean
+        restrict_to_reviewers:
+          description: Whether annotation access is restricted to queue reviewers.
+          example: true
+          type: boolean
+        reviewer_emails:
+          description: |-
+            Email addresses of reviewers for the annotation queue. Returned only
+            when the caller can manage queue access.
+          example:
+            - "reviewer@example.com"
+          items:
+            type: string
+          type: array
       required:
         - name
         - project_id
@@ -56863,6 +56918,9 @@ components:
         - modified_by
         - modified_at
         - owned_by
+        - restrict_to_reviewers
+        - restrict_to_assignees
+        - can_manage_access
       type: object
     LLMObsAnnotationQueueDataRequest:
       description: Data object for creating an Agent Observability annotation queue.
@@ -57079,6 +57137,21 @@ components:
           description: Updated name of the annotation queue.
           example: "Updated queue name"
           type: string
+        restrict_to_assignees:
+          description: Whether annotation access is restricted to assigned users.
+          example: false
+          type: boolean
+        restrict_to_reviewers:
+          description: Whether annotation access is restricted to queue reviewers.
+          example: true
+          type: boolean
+        reviewer_emails:
+          description: Updated email addresses of reviewers who can access the annotation queue.
+          example:
+            - "reviewer@example.com"
+          items:
+            type: string
+          type: array
       type: object
     LLMObsAnnotationQueueUpdateDataRequest:
       description: Data object for updating an Agent Observability annotation queue.
@@ -58963,6 +59036,10 @@ components:
           items:
             $ref: "#/components/schemas/LLMObsAnnotationItem"
           type: array
+        can_annotate:
+          description: Whether the current caller can annotate this interaction.
+          example: true
+          type: boolean
         content_id:
           description: Server-generated deterministic identifier derived from the block list.
           example: "9a87f3e2b1d4c5a6f8b3e2d1c4a7b5f6e3d2a1c4b7e5f8a3d6c2e1b4a7d5f8c2"
@@ -58979,6 +59056,7 @@ components:
         - id
         - type
         - content_id
+        - can_annotate
         - annotations
         - display_block
       type: object
@@ -62969,6 +63047,10 @@ components:
           items:
             $ref: "#/components/schemas/LLMObsAnnotationItem"
           type: array
+        can_annotate:
+          description: Whether the current caller can annotate this interaction.
+          example: true
+          type: boolean
         content_id:
           description: Upstream entity identifier supplied by the caller.
           example: "trace-abc-123"
@@ -62995,6 +63077,7 @@ components:
         - content_id
         - created_at
         - modified_at
+        - can_annotate
         - annotations
       type: object
     LLMObsTraceInteractionItem:
@@ -63455,7 +63538,8 @@ components:
         - name
       type: object
     LicensesListResponse:
-      description: The top-level response object returned by the licenses list endpoint, containing the array of supported SPDX licenses.
+      description: >-
+        The top-level response object returned by the licenses list endpoint, containing the array of supported SPDX licenses.
       properties:
         data:
           $ref: "#/components/schemas/LicensesListResponseData"
@@ -67240,7 +67324,8 @@ components:
         - attributes
       type: object
     McpScanRequestResponseDataAttributes:
-      description: The attributes returned when a scan request has been accepted, containing the job identifier used to poll for results.
+      description: >-
+        The attributes returned when a scan request has been accepted, containing the job identifier used to poll for results.
       properties:
         job_id:
           description: The job identifier assigned to the scan, used to retrieve the scan result.
@@ -91571,7 +91656,8 @@ components:
           $ref: "#/components/schemas/ResolveVulnerableSymbolsRequestData"
       type: object
     ResolveVulnerableSymbolsRequestData:
-      description: The data object in a request to resolve vulnerable symbols, containing the package PURLs and request type.
+      description: >-
+        The data object in a request to resolve vulnerable symbols, containing the package PURLs and request type.
       properties:
         attributes:
           $ref: "#/components/schemas/ResolveVulnerableSymbolsRequestDataAttributes"
@@ -91584,7 +91670,8 @@ components:
         - type
       type: object
     ResolveVulnerableSymbolsRequestDataAttributes:
-      description: The attributes of a request to resolve vulnerable symbols, containing the list of package PURLs to check.
+      description: >-
+        The attributes of a request to resolve vulnerable symbols, containing the list of package PURLs to check.
       properties:
         purls:
           description: The list of Package URLs (PURLs) for which to resolve vulnerable symbols.
@@ -91609,7 +91696,8 @@ components:
           $ref: "#/components/schemas/ResolveVulnerableSymbolsResponseData"
       type: object
     ResolveVulnerableSymbolsResponseData:
-      description: The data object in a response for resolving vulnerable symbols, containing the result attributes and response type.
+      description: >-
+        The data object in a response for resolving vulnerable symbols, containing the result attributes and response type.
       properties:
         attributes:
           $ref: "#/components/schemas/ResolveVulnerableSymbolsResponseDataAttributes"
@@ -91643,7 +91731,8 @@ components:
       description: The result of resolving vulnerable symbols for a specific package, identified by its PURL.
       properties:
         purl:
-          description: The Package URL (PURL) uniquely identifying the package for which vulnerable symbols are resolved.
+          description: >-
+            The Package URL (PURL) uniquely identifying the package for which vulnerable symbols are resolved.
           type: string
         vulnerable_symbols:
           description: The list of vulnerable symbol groups found in this package, organized by advisory.
@@ -96576,7 +96665,8 @@ components:
         - type
       type: object
     ScaRequestDataAttributes:
-      description: The attributes of an SCA request, containing dependency graph data, vulnerability information, and repository context.
+      description: >-
+        The attributes of an SCA request, containing dependency graph data, vulnerability information, and repository context.
       properties:
         commit:
           $ref: "#/components/schemas/ScaRequestDataAttributesCommit"
@@ -96600,14 +96690,13 @@ components:
           type: array
         repository:
           $ref: "#/components/schemas/ScaRequestDataAttributesRepository"
+        scan_start_timestamp:
+          $ref: "#/components/schemas/ScaRequestDataAttributesScanStartTimestamp"
         service:
           description: The name of the service or application being analyzed.
           type: string
         tags:
-          additionalProperties:
-            type: string
-          description: A map of key-value tags providing additional metadata for the SCA scan.
-          type: object
+          $ref: "#/components/schemas/ScaRequestDataAttributesTags"
         vulnerabilities:
           description: The list of vulnerabilities identified in the dependency graph.
           items:
@@ -96615,7 +96704,8 @@ components:
           type: array
       type: object
     ScaRequestDataAttributesCommit:
-      description: Metadata about the commit associated with the SCA scan, including author, committer, and branch information.
+      description: >-
+        Metadata about the commit associated with the SCA scan, including author, committer, and branch information.
       properties:
         author_date:
           description: The date when the commit was authored.
@@ -96650,24 +96740,26 @@ components:
           type: array
         group:
           description: The group or organization namespace of the dependency (e.g., Maven group ID).
+          nullable: true
           type: string
         is_dev:
           description: Indicates whether this is a development-only dependency not used in production.
           type: boolean
         is_direct:
           description: Indicates whether this is a direct dependency (as opposed to a transitive one).
+          nullable: true
           type: boolean
         language:
           description: The programming language ecosystem of this dependency (e.g., java, python, javascript).
           type: string
         locations:
-          description: The list of source file locations where this dependency is declared.
-          items:
-            $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItems"
-          type: array
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocations"
         name:
           description: The name of the dependency package.
           type: string
+        opaque:
+          description: Indicates whether dependency details are intentionally opaque.
+          type: boolean
         package_manager:
           description: The package manager responsible for this dependency (e.g., maven, pip, npm).
           type: string
@@ -96679,21 +96771,44 @@ components:
           items:
             $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsReachableSymbolPropertiesItems"
           type: array
+        requires_transitive_enrichment:
+          description: Indicates whether this dependency requires transitive dependency enrichment.
+          type: boolean
+        target_frameworks:
+          description: The target framework identifiers associated with this dependency.
+          items:
+            description: A target framework identifier.
+            type: string
+          type: array
         version:
           description: The version of the dependency.
+          nullable: true
+          type: string
+        version_constraint:
+          description: Indicates whether the version value represents a version constraint.
+          type: boolean
+        version_range:
+          description: The version range associated with this dependency when a manifest declares a range.
           type: string
       type: object
+    ScaRequestDataAttributesDependenciesItemsLocations:
+      description: The list of source file locations where this dependency is declared.
+      items:
+        $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItems"
+      nullable: true
+      type: array
     ScaRequestDataAttributesDependenciesItemsLocationsItems:
-      description: The source code location where a dependency is declared, including block, name, namespace, and version positions within the file.
+      description: >-
+        The source code location where a dependency is declared, including block, name, namespace, and version positions within the file.
       properties:
         block:
           $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition"
         name:
-          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition"
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsNullableFilePosition"
         namespace:
-          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition"
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsNullableFilePosition"
         version:
-          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition"
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsNullableFilePosition"
       type: object
     ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition:
       description: A range within a file defined by a start and end position, along with the file name.
@@ -96702,6 +96817,24 @@ components:
           $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition"
         file_name:
           description: The name or path of the file containing this location.
+          type: string
+        role:
+          description: The semantic role associated with this file location.
+          type: string
+        start:
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition"
+      type: object
+    ScaRequestDataAttributesDependenciesItemsLocationsItemsNullableFilePosition:
+      description: A nullable range within a file defined by a start and end position, along with the file name.
+      nullable: true
+      properties:
+        end:
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition"
+        file_name:
+          description: The name or path of the file containing this location.
+          type: string
+        role:
+          description: The semantic role associated with this file location.
           type: string
         start:
           $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition"
@@ -96760,8 +96893,51 @@ components:
           description: The URL of the repository.
           type: string
       type: object
+    ScaRequestDataAttributesScanStartTimestamp:
+      additionalProperties: false
+      description: The time when the SCA scan started.
+      nullable: true
+      properties:
+        nanos:
+          description: Non-negative fractions of a second at nanosecond resolution.
+          format: int32
+          maximum: 999999999
+          minimum: 0
+          type: integer
+        seconds:
+          description: Seconds of UTC time since Unix epoch.
+          format: int64
+          type: integer
+      type: object
+    ScaRequestDataAttributesTags:
+      additionalProperties:
+        type: string
+      description: A map of tags providing additional metadata for the SCA scan.
+      properties:
+        tool:
+          $ref: "#/components/schemas/ScaRequestDataAttributesTagsTool"
+      type: object
+    ScaRequestDataAttributesTagsTool:
+      additionalProperties: false
+      description: Tool metadata included in SCA tags.
+      properties:
+        generator:
+          $ref: "#/components/schemas/ScaRequestDataAttributesTagsToolGenerator"
+      type: object
+    ScaRequestDataAttributesTagsToolGenerator:
+      additionalProperties: false
+      description: Metadata about the tool that generated the SCA tags.
+      properties:
+        name:
+          description: The name of the tag generator.
+          type: string
+        version:
+          description: The version of the tag generator.
+          type: string
+      type: object
     ScaRequestDataAttributesVulnerabilitiesItems:
-      description: A vulnerability entry from the Software Bill of Materials (SBOM), describing a known security issue and the components it affects.
+      description: >-
+        A vulnerability entry from the Software Bill of Materials (SBOM), describing a known security issue and the components it affects.
       properties:
         affects:
           description: The list of components affected by this vulnerability.
@@ -125625,7 +125801,8 @@ components:
             apm_api_catalog_write: Add, modify, and delete API catalog definitions.
             apm_read: Read and query APM and Trace Analytics.
             apm_service_catalog_read: View service catalog and service definitions.
-            apm_service_catalog_write: Add, modify, and delete service catalog definitions when those definitions are maintained by Datadog.
+            apm_service_catalog_write: >-
+              Add, modify, and delete service catalog definitions when those definitions are maintained by Datadog.
             appsec_vm_read: View infrastructure, application code, and library vulnerability findings.
             aws_configurations_manage: Manage AWS integration account configurations and related integration settings.
             billing_edit: Edit your organization's billing information.
@@ -125637,8 +125814,10 @@ components:
             cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using the API.
             ci_visibility_read: View CI Visibility.
-            cloud_cost_management_read: View Cloud Cost pages and the cloud cost data source in dashboards and notebooks. For more details, see the Cloud Cost Management docs.
-            cloud_cost_management_write: Configure cloud cost accounts and global customizations. For more details, see the Cloud Cost Management docs.
+            cloud_cost_management_read: >-
+              View Cloud Cost pages and the cloud cost data source in dashboards and notebooks. For more details, see the Cloud Cost Management docs.
+            cloud_cost_management_write: >-
+              Configure cloud cost accounts and global customizations. For more details, see the Cloud Cost Management docs.
             code_analysis_read: View Code Analysis.
             code_coverage_read: View Code Coverage.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data for Profile-Guided Optimization (PGO).
@@ -125647,7 +125826,8 @@ components:
             create_webhooks: Create webhooks integrations.
             dashboards_embed_share: Create, modify, and delete shared dashboards with share type 'embed'.
             dashboards_invite_share: Create, modify, and delete shared dashboards with share type 'invite'.
-            dashboards_public_share: Generate public and authenticated links to share dashboards or embeddable graphs externally.
+            dashboards_public_share: >-
+              Generate public and authenticated links to share dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             data_scanner_read: View Data Scanner configurations.
@@ -125671,19 +125851,22 @@ components:
             logs_read_index_data: Read indexed log data.
             manage_integrations: Install, uninstall, and configure integrations.
             metrics_read: View custom metrics.
-            monitors_downtime: Set downtimes to suppress alerts from any monitor in an organization. Mute and unmute monitors. The ability to write monitors is not required to set downtimes.
+            monitors_downtime: >-
+              Set downtimes to suppress alerts from any monitor in an organization. Mute and unmute monitors. The ability to write monitors is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit, delete, and resolve individual monitors.
             network_connections_read: Read cloud network connections.
             org_connections_read: Read cross organization connections.
             org_connections_write: Create, edit, and delete cross organization connections.
-            org_management: Edit org configurations, including authentication and certain security preferences such as configuring SAML, renaming an org, configuring allowed login methods, creating child orgs, subscribing & unsubscribing from apps in the marketplace, and enabling & disabling Remote Configuration for the entire organization.
+            org_management: >-
+              Edit org configurations, including authentication and certain security preferences such as configuring SAML, renaming an org, configuring allowed login methods, creating child orgs, subscribing & unsubscribing from apps in the marketplace, and enabling & disabling Remote Configuration for the entire organization.
             security_comments_read: Read comments of vulnerabilities.
             security_monitoring_critical_assets_read: Read Critical Assets.
             security_monitoring_critical_assets_write: Write Critical Assets.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
-            security_monitoring_findings_read: View a list of findings that include both misconfigurations and identity risks.
+            security_monitoring_findings_read: >-
+              View a list of findings that include both misconfigurations and identity risks.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -125692,24 +125875,29 @@ components:
             security_pipelines_read: View Security Pipelines.
             security_pipelines_write: Create, edit, and delete CSM Security Pipelines.
             siem_entities_read: View Cloud SIEM entities.
-            slos_corrections: Apply, edit, and delete SLO status corrections. A user with this permission can make status corrections, even if they do not have permission to edit those SLOs.
+            slos_corrections: >-
+              Apply, edit, and delete SLO status corrections. A user with this permission can make status corrections, even if they do not have permission to edit those SLOs.
             slos_read: View SLOs and status corrections.
             slos_write: Create, edit, and delete SLOs.
             synthetics_global_variable_read: View, search, and use Synthetics global variables.
             synthetics_global_variable_write: Create, edit, and delete global variables for Synthetics.
             synthetics_private_location_read: View, search, and use Synthetics private locations.
-            synthetics_private_location_write: Create and delete private locations in addition to having access to the associated installation guidelines.
+            synthetics_private_location_write: >-
+              Create and delete private locations in addition to having access to the associated installation guidelines.
             synthetics_read: List and view configured Synthetic tests and test results.
             synthetics_write: Create, edit, and delete Synthetic tests.
-            teams_manage: Manage Teams. Create, delete, rename, and edit metadata of all Teams. To control Team membership across all Teams, use the User Access Manage permission.
-            teams_read: Read Teams data. A User with this permission can view Team names, metadata, and which Users are on each Team.
+            teams_manage: >-
+              Manage Teams. Create, delete, rename, and edit metadata of all Teams. To control Team membership across all Teams, use the User Access Manage permission.
+            teams_read: >-
+              Read Teams data. A User with this permission can view Team names, metadata, and which Users are on each Team.
             test_optimization_read: View Test Optimization.
             test_optimization_settings_write: Update service settings in Test Optimization.
             test_optimization_write: Update flaky tests from Flaky Tests Management of Test Optimization.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
-            user_access_manage: Disable users, manage user roles, manage SAML-to-role mappings, and configure logs restriction queries.
+            user_access_manage: >-
+              Disable users, manage user roles, manage SAML-to-role mappings, and configure logs restriction queries.
             user_access_read: View users and their roles and settings.
             workflows_read: View workflows.
             workflows_run: Run workflows.
@@ -166724,6 +166912,7 @@ paths:
                                     value: good
                                 modified_at: "0001-01-01T00:00:00Z"
                                 modified_by: "00000000-0000-0000-0000-000000000002"
+                            can_annotate: true
                             content_id: trace-abc-123
                             created_at: "2025-06-01T12:00:00Z"
                             id: interaction-456
@@ -166802,6 +166991,7 @@ paths:
                   value:
                     data:
                       - attributes:
+                          can_manage_access: true
                           created_at: "2024-01-15T10:30:00Z"
                           created_by: 00000000-0000-0000-0000-000000000002
                           description: Queue for annotating customer support traces
@@ -166810,6 +167000,10 @@ paths:
                           name: My annotation queue
                           owned_by: 00000000-0000-0000-0000-000000000002
                           project_id: 00000000-0000-0000-0000-000000000002
+                          restrict_to_assignees: false
+                          restrict_to_reviewers: true
+                          reviewer_emails:
+                            - reviewer@example.com
                         id: 00000000-0000-0000-0000-000000000001
                         type: queues
               schema:
@@ -166849,6 +167043,7 @@ paths:
       description: |-
         Create an annotation queue. The `name` and `project_id` fields are required.
         An optional `annotation_schema` can be provided to define the labels for the queue.
+        Optional access-control fields can restrict annotation access to reviewers or assignees.
         Fields such as `created_by`, `owned_by`, `created_at`, `modified_by`,
         and `modified_at` are inferred by the backend.
       operationId: CreateLLMObsAnnotationQueue
@@ -166863,6 +167058,19 @@ paths:
                       description: Queue for annotating customer support traces
                       name: My annotation queue
                       project_id: 00000000-0000-0000-0000-000000000002
+                    type: queues
+              with_access_controls:
+                summary: Create queue with access controls
+                value:
+                  data:
+                    attributes:
+                      description: Queue for annotating customer support traces
+                      name: Restricted annotation queue
+                      project_id: 00000000-0000-0000-0000-000000000002
+                      restrict_to_assignees: false
+                      restrict_to_reviewers: true
+                      reviewer_emails:
+                        - reviewer@example.com
                     type: queues
               with_schema:
                 summary: Create queue with annotation schema
@@ -166899,6 +167107,7 @@ paths:
                   value:
                     data:
                       attributes:
+                        can_manage_access: true
                         created_at: "2024-01-15T10:30:00Z"
                         created_by: 00000000-0000-0000-0000-000000000002
                         description: Queue for annotating customer support traces
@@ -166907,6 +167116,10 @@ paths:
                         name: My annotation queue
                         owned_by: 00000000-0000-0000-0000-000000000002
                         project_id: 00000000-0000-0000-0000-000000000002
+                        restrict_to_assignees: false
+                        restrict_to_reviewers: true
+                        reviewer_emails:
+                          - reviewer@example.com
                       id: 00000000-0000-0000-0000-000000000001
                       type: queues
               schema:
@@ -166983,7 +167196,9 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: |-
-        Partially update an annotation queue. The `name`, `description`, and `annotation_schema` fields can be updated.
+        Partially update an annotation queue. The `name`, `description`,
+        `annotation_schema`, `reviewer_emails`, `restrict_to_reviewers`, and
+        `restrict_to_assignees` fields can be updated.
       operationId: UpdateLLMObsAnnotationQueue
       parameters:
         - $ref: "#/components/parameters/LLMObsAnnotationQueueIDPathParameter"
@@ -166997,6 +167212,10 @@ paths:
                     attributes:
                       description: Updated description
                       name: Updated queue name
+                      restrict_to_assignees: false
+                      restrict_to_reviewers: true
+                      reviewer_emails:
+                        - reviewer@example.com
                     type: queues
             schema:
               $ref: "#/components/schemas/LLMObsAnnotationQueueUpdateRequest"
@@ -167011,6 +167230,7 @@ paths:
                   value:
                     data:
                       attributes:
+                        can_manage_access: true
                         created_at: "2024-01-15T10:30:00Z"
                         created_by: 00000000-0000-0000-0000-000000000002
                         description: Queue for annotating customer support traces
@@ -167019,6 +167239,10 @@ paths:
                         name: My annotation queue
                         owned_by: 00000000-0000-0000-0000-000000000002
                         project_id: 00000000-0000-0000-0000-000000000002
+                        restrict_to_assignees: false
+                        restrict_to_reviewers: true
+                        reviewer_emails:
+                          - reviewer@example.com
                       id: 00000000-0000-0000-0000-000000000001
                       type: queues
               schema:
@@ -167077,6 +167301,7 @@ paths:
                       attributes:
                         annotated_interactions:
                           - annotations: []
+                            can_annotate: true
                             content_id: trace-abc-123
                             id: interaction-456
                             type: trace
@@ -167128,6 +167353,7 @@ paths:
         by `interaction_id` and the requesting user's identity.
         Results and errors in the response are linked to request items by `interaction_id`.
         Errors for individual items are returned in the `errors` field without blocking the rest of the batch.
+        Requests where every item is denied by queue access rules return `403`.
       operationId: UpsertLLMObsAnnotations
       parameters:
         - $ref: "#/components/parameters/LLMObsAnnotationQueueIDPathParameter"
@@ -167172,9 +167398,31 @@ paths:
                             modified_by: 00000000-0000-0000-0000-000000000002
                       id: 00000000-0000-0000-0000-000000000001
                       type: annotations
+                mixed_access_denied:
+                  summary: Some annotations were denied by queue access rules
+                  value:
+                    data:
+                      attributes:
+                        annotations:
+                          - created_at: "2024-01-15T10:30:00Z"
+                            created_by: 00000000-0000-0000-0000-000000000002
+                            id: 00000000-0000-0000-0000-000000000000
+                            interaction_id: 00000000-0000-0000-0000-000000000001
+                            label_values:
+                              - label_schema_id: abc-123
+                                value: good
+                            modified_at: "2024-01-15T10:30:00Z"
+                            modified_by: 00000000-0000-0000-0000-000000000002
+                        errors:
+                          - code: permission_denied
+                            error: permission denied
+                            interaction_id: 00000000-0000-0000-0000-000000000003
+                      id: 00000000-0000-0000-0000-000000000001
+                      type: annotations
               schema:
                 $ref: "#/components/schemas/LLMObsAnnotationsResponse"
-          description: OK — annotations created or updated. Per-item errors are listed in `errors`.
+          description: >-
+            OK — annotations created or updated. For mixed batches, denied items and other per-item errors are listed in `errors`.
         "400":
           content:
             application/json:
@@ -167192,7 +167440,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
+          description: Forbidden — all request items were denied by queue access rules
         "404":
           content:
             application/json:
