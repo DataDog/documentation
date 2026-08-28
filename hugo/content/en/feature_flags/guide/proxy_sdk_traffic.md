@@ -13,6 +13,10 @@ further_reading:
   text: "Proxy Browser RUM Data"
 ---
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-warning">The Datadog flag configuration CDN is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). Contact your Datadog representative for guidance.</div>
+{{< /site-region >}}
+
 ## Overview
 
 The Datadog Feature Flag SDK makes two types of outbound network requests from your application:
@@ -159,6 +163,8 @@ await DdFlags.enable({
 {{< /code-block >}}
 
 Your proxy must forward exposure requests to `{{< region-param key="dd_api" code="true" >}}/api/v2/exposures`.
+
+**Note**: The React Native SDK does not expose a `customEvaluationEndpoint` option. Evaluation events are sent through the underlying native Android or iOS SDK and cannot be routed through a custom proxy endpoint.
 
 {{% /tab %}}
 
