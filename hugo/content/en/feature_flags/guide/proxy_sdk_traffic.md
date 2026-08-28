@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-warning">The Datadog flag configuration CDN is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). Contact your Datadog representative for guidance.</div>
+<div class="alert alert-danger">Datadog Feature Flags are not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview

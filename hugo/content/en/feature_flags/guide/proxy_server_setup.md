@@ -13,6 +13,10 @@ further_reading:
   text: "Proxy Browser RUM Data"
 ---
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Datadog Feature Flags are not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 A relay proxy sits between your application and Datadog. The Feature Flag SDK sends requests to a URL on your domain, and your proxy forwards them to Datadog.
