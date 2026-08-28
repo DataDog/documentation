@@ -1,6 +1,6 @@
 To get end-to-end distributed traces between Pub/Sub producers and Cloud Run, configure your push subscriptions with the `--push-no-wrapper` and `--push-no-wrapper-write-metadata` flags. This moves message attributes from the JSON body to HTTP headers, allowing Datadog to extract producer trace context and create span links.
 
-For more information, see [Producer-aware tracing for Google Cloud Pub/Sub and Cloud Run](https://www.datadoghq.com/blog/pubsub-cloud-run-tracing/) and [Payload unwrapping](https://cloud.google.com/pubsub/docs/payload-unwrapping) in the Google Cloud documentation.
+For more information, see [Producer-aware tracing for Google Cloud Pub/Sub and Cloud Run][101] and [Payload unwrapping][102] in the Google Cloud documentation.
 
 ### Configure push subscriptions for full trace visibility
 
@@ -60,3 +60,6 @@ Eventarc Pub/Sub triggers use push subscriptions as the underlying delivery mech
      --push-no-wrapper \
      --push-no-wrapper-write-metadata
    ```
+
+[101]: https://www.datadoghq.com/blog/pubsub-cloud-run-tracing/
+[102]: https://cloud.google.com/pubsub/docs/payload-unwrapping
