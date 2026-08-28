@@ -61,7 +61,7 @@ Responders then have the following options:
 
 #### Escalation logic
 
-For direct call routing, the page escalates based on the outcome of each call, not on the **Escalate after X minutes** delay configured in the escalation policy. When every call at an escalation step completes without a responder answering, On-Call escalates to the next step immediately so the caller isn't left waiting. The configured step delay still appears in the escalation policy because a policy can be shared across page types, but it does not apply to direct call routing pages.
+For direct call routing, On-Call calls the responders in each step of the escalation policy. If no one answers, On-Call immediately advances to the next step and calls its responders. It does not wait for the delay configured between steps, helping connect the caller to an available responder as quickly as possible.
 
 Escalation proceeds as follows:
 
