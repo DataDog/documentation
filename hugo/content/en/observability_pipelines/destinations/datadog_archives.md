@@ -14,9 +14,7 @@ products:
 
 Use the Datadog Archives destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format. You can then query these logs with [Archive Search][16]. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access.
 
-**Note**:
-- By default, the Datadog Archives destination compresses logs using gzip. See [Compression](#compression) to select a different algorithm.
-- Use the [Amazon S3][12] destination if you want to send your logs to Amazon S3 in JSON or Parquet format.
+**Note**: Use the [Amazon S3][12] destination if you want to send your logs to Amazon S3 in JSON or Parquet format.
 
 You can also [route logs to Snowflake using the Datadog Archives destination](#route-logs-to-snowflake-using-the-datadog-archives-destination).
 
@@ -125,7 +123,10 @@ After you select the Datadog Archives destination in the pipeline UI:
 
 #### Compression
 
-Select the compression algorithm for your archived logs in the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}). Gzip is the default.
+1. In the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu, select the compression algorithm for your archived logs ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}).
+1. Select the compression level in the dropdown menu. The default is `6` for gzip and `3` for zstd.
+
+**Note**: The default compression algorithm is gzip with a compression level of `6`.
 
 #### Server-side encryption
 

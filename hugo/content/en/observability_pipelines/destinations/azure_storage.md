@@ -83,7 +83,10 @@ Enter a prefix that you want to apply to all key objects.
 
 #### Compression
 
-Select the compression algorithm for your archived logs in the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}). Gzip is the default.
+1. In the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu, select the compression algorithm for your archived logs ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}).
+1. Select the compression level in the dropdown menu. The default is `6` for gzip and `3` for zstd.
+
+**Note**: The default compression algorithm is gzip with a compression level of `6`.
 
 #### Buffering
 
