@@ -22214,6 +22214,23 @@ menu:
           - UpdateFlakyTestsManagementPolicies
         unstable: []
         order: 7
+    - name: Threat Intelligence
+      url: /api/latest/threat-intelligence/
+      identifier: threat-intelligence
+      generated: true
+    - name: Ingest STIX threat intelligence
+      url: /api/latest/threat-intelligence/ingest-stix-threat-intelligence/
+      identifier: threat-intelligence-ingest-stix-threat-intelligence
+      parent: threat-intelligence
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddSTIXThreatIntel
+        unstable:
+          - v2
+        order: 1
     - name: Twilio Integration Accounts
       url: /api/latest/twilio-integration-accounts/
       identifier: twilio-integration-accounts
