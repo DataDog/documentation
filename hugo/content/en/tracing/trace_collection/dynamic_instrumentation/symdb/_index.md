@@ -14,7 +14,7 @@ site_support_id: autocomplete_search
 ---
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Autocomplete and search are in Preview for Python and .NET.
+Autocomplete and search are in Preview for Python, .NET, and Ruby.
 {{< /beta-callout >}}
 
 ## Overview
@@ -43,6 +43,7 @@ Select your runtime below:
   {{< image-card href="/dynamic_instrumentation/symdb/python" src="integrations_logos/python.png" alt="Python" >}}
   {{< image-card href="/dynamic_instrumentation/symdb/dotnet" src="integrations_logos/dotnet-core.png" alt="Dotnet" >}}
   {{< image-card href="/dynamic_instrumentation/symdb/dotnet" src="integrations_logos/dotnet-framework.png" alt="Dotnet" >}}
+  {{< image-card href="/dynamic_instrumentation/symdb/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
 {{< /card-grid >}}
 
 ## Explore autocomplete and search
