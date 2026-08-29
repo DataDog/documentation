@@ -73554,6 +73554,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineSyslogNgDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineDatabricksZerobusDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineDatadogMetricsDestination"
+        - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetryMetricsDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineSplunkHecMetricsDestination"
     ObservabilityPipelineConfigPipelineType:
       default: logs
@@ -76200,6 +76201,49 @@ components:
       type: string
       x-enum-varnames:
         - OPENSEARCH
+    ObservabilityPipelineOpentelemetryMetricsDestination:
+      description: |-
+        The `opentelemetry` destination forwards metrics using the OpenTelemetry Protocol (OTLP) over HTTP.
+
+        **Supported pipeline types:** metrics
+      properties:
+        buffer:
+          $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
+        http_client_uri_key:
+          default: DESTINATION_OTEL_HTTP_CLIENT_URI
+          description: Environment variable name containing the URI of the OTLP HTTP endpoint to send metrics to.
+          example: DESTINATION_OTEL_HTTP_CLIENT_URI
+          type: string
+        id:
+          description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
+          example: opentelemetry-metrics-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input` for this component.
+          example: ["metrics-filter-processor"]
+          items:
+            description: The ID of a component whose output is used as input for this destination.
+            type: string
+          type: array
+        tls:
+          $ref: "#/components/schemas/ObservabilityPipelineTls"
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineOpentelemetryMetricsDestinationType"
+      required:
+        - id
+        - type
+        - inputs
+      type: object
+      x-pipeline-types: [metrics]
+    ObservabilityPipelineOpentelemetryMetricsDestinationType:
+      default: opentelemetry
+      description: The destination type. Always `opentelemetry`.
+      enum:
+        - opentelemetry
+      example: opentelemetry
+      type: string
+      x-enum-varnames:
+        - OPENTELEMETRY
     ObservabilityPipelineOpentelemetrySource:
       description: |-
         The `opentelemetry` source receives telemetry data using the OpenTelemetry Protocol (OTLP) over gRPC and HTTP.
