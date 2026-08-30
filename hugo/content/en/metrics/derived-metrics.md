@@ -7,10 +7,6 @@ further_reading:
   text: "Auto-smooth noisy metrics to reveal trends"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScUkDpqIQNN1G4llFA7JN2qeevIp4wqfyDaa4A7lRCEa9FopQ/viewform?usp=header" >}}
-The Derived Metrics feature is in Preview.
-{{< /callout >}} 
-
 ## Overview
 
 Derived Metrics allow you to save any metrics query as a new metric, so you can simplify and optimize how you work with metrics in Datadog. Instead of repeatedly building complex queries across dashboards, monitors, SLOs, and notebooks, you can create a derived metric once and reuse it across all your assets. Use derived metrics to:
