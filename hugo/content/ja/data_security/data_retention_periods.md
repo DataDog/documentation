@@ -6,249 +6,253 @@ aliases:
 - /ja/developers/faq/data-collection-resolution-retention/
 - /ja/developers/guide/data-collection-resolution-retention
 attributes:
-- data_type: '- **Errors**: 15 days
+- data_type: '- **エラー**: 15 日間
 
-    - **Indexed spans**: 15 or 30 days, determined by customer plan
+    - **インデックス化されたスパン**: 15 日間または 30 日間 (お客様のプランによって決まります)
 
-    - **Services/resources statistics**: 30 days
+    - **サービス/リソース統計**: 30 日間
 
-    - **Viewed traces**: Retained for the duration of the account
+    - **表示済みのトレース**: アカウントの有効期間中保持されます
 
     '
   product: APM
-- data_type: '- **Security signals**: 15 months
+- data_type: '- **セキュリティシグナル**: 15 か月間
 
-    - **Spans**: 90 days
+    - **スパン**: 90 日間
 
     '
   product: App and API Protection
-- data_type: '- **Audit logs (Audit Trail enabled)**: 90 days
+- data_type: '- **監査ログ (Audit Trail が有効な場合)**: 90 日間
 
-    - **Audit logs (Audit Trail disabled)**: 7 days
+    - **監査ログ (Audit Trail が無効な場合)**: 7 日間
 
     '
   product: Audit Trail
-- data_type: '- **Messages**: 15 months
+- data_type: '- **メッセージ**: 15 か月間
 
     '
-  product: Bits AI Assistant
-- data_type: '- **Source Code**: 7 days
+  product: Bits Chat
+- data_type: '- **ソースコード**: 7 日間
 
     '
-  product: Bits AI Dev Agent
-- data_type: '- **Investigations**: Retained for the duration of the account
+  product: Bits Code
+- data_type: '- **調査**: アカウントの有効期間中保持されます
 
     '
-  product: Bits AI SRE
-- data_type: '- **Session, View, Action, and Error Events**: 30 days
+  product: Bits Investigation
+- data_type: '- **セッション、ビュー、アクション、およびエラーイベント**: 30 日間
 
-    - **Resource, Long Task, and Vitals Events**: 15 Days
+    - **リソース、ロングタスク、およびバイタルイベント**: 15 日間
 
     '
   product: Browser RUM
-- data_type: '- **Cases**: Retained for the duration of the account
+- data_type: '- **ケース**: アカウントの有効期間中保持されます
 
     '
   product: Case Management
-- data_type: '- **Deployments**: 30 days
+- data_type: '- **デプロイメント**: 30 日間
 
     '
   product: CD Visibility
-- data_type: '- **Pipelines, stages, jobs, setups, commands**: 15 months
+- data_type: '- **パイプライン、ステージ、ジョブ、セットアップ、コマンド**: 15 か月間
 
     '
   product: CI Pipeline Visibility
-- data_type: '- **Recommendations**: 90 days
+- data_type: '- **コストメトリクス**: 15 か月間
+
+    - **推奨事項**: 90 日間
 
     '
   product: Cloud Cost Management
-- data_type: '- **Findings and resolved vulnerabilities**: 15 months
+- data_type: '- **検出結果および解決済みの脆弱性**: 15 か月間
 
     '
   product: Cloud Security
-- data_type: '- **Signals**: 15 months
+- data_type: '- **シグナル**: 15 か月間
 
-    - **Detections, notifications, suppressions**: Retained for the duration of the
-    account
+    - **検出、通知、抑制**: アカウントの有効期間中保持されます
 
     '
   product: Cloud SIEM
-- data_type: '- **Events**: 90 days
+- data_type: '- **イベント**: 90 日間
 
-    - **Security signals**: 15 months
+    - **セキュリティシグナル**: 15 か月間
 
     '
   product: Workload Protection
-- data_type: '- **Scans**: 15 months
+- data_type: '- **スキャン**: 15 か月間
 
     '
   product: Code Security SAST
-- data_type: '- **Detected vulnerabilities**: 15 months
+- data_type: '- **検出された脆弱性**: 15 か月間
 
     '
   product: Code Security IAST
-- data_type: '- **Container metadata**: 2 hours
+- data_type: '- **コンテナメタデータ**: 2 時間
 
-    - **Live processes and containers**: 36 hours
+    - **ライブプロセスおよびコンテナ**: 36 時間
 
-    - **YAML definitions**: 7 days
+    - **YAML 定義**: 7 日間
 
     '
   product: Container and Process Monitoring
-- data_type: '- **Individual profiles (not opened in the UI)**: 8 days
+- data_type: '- **フレームグラフ、コールグラフ、スレッドタイムライン**: 8 日間
 
-    - **Individual profiles (opened in the UI at least once)**: 1 year
+    - **ノートブックにエクスポートされたフレームグラフ**: 1 年間
 
-    - **Profile metrics**: 90 days
+    - **UI で少なくとも 1 回開かれた個別のプロファイル**: 1 年間
+
+    - **プロファイルメトリクス**: 30 日間
 
     '
   product: Continuous Profiler
-- data_type: '- **Batch results**: 2 months
+- data_type: '- **バッチ結果**: 2 か月間
 
-    - **Test results**: 2 months
+    - **テスト結果**: 2 か月間
 
     '
   product: Continuous Testing
-- data_type: '- **Job traces**: 90 days
+- data_type: '- **ジョブトレース**: 90 日間
 
     '
   product: 'Data Observability: Jobs Monitoring'
-- data_type: '- **Query samples**: 15 days
+- data_type: '- **クエリサンプル**: 15 日間
 
-    - **Query metrics**: 15 months
+    - **クエリメトリクス**: 15 か月間
 
     '
   product: Database Monitoring
-- data_type: '- **Dashboards, Notebooks, Monitors**: Retained for the duration of
-    the account
+- data_type: '- **Dashboards、Notebooks、Monitors**: アカウントの有効期間中保持されます
 
     '
   product: Datadog App
-- data_type: '- **Deployments**: 2 years
+- data_type: '- **デプロイメント**: 2 年間
 
     '
   product: DORA Metrics
-- data_type: '- **Error samples**: 30 days
+- data_type: '- **エラーサンプル**: 30 日間
 
-    - **Issues**: 1 year after last activity
+    - **課題**: 最終アクティビティから 1 年間
 
     '
   product: Error Tracking
-- data_type: '- **Events**: 15 months
+- data_type: '- **イベント**: 15 か月間
 
     '
   product: Event Management
-- data_type: '- **Incidents**: Retained for the duration of the account
+- data_type: '- **インシデント**: アカウントの有効期間中保持されます
 
     '
   product: Incident Management
-- data_type: '- **Production Traces and spans**: 15 (default), 30, 60, or 90 days,
-    determined by customer plan
+- data_type: '- **本番環境のトレースとスパン**: 15 日間 (デフォルト)、30 日間、60 日間、または 90 日間 (お客様のプランによって決まります)
 
-    - **Experiments Traces and spans**: 15 (default), 90, 180, 270, 365 days, determined
-    by customer plan
+    - **実験のトレースとスパン**: 15 日間 (デフォルト)、90 日間、180 日間、270 日間、365 日間 (お客様のプランによって決まります)
 
-    - **Datasets**: 3 years
+    - **データセット**: 3 年間
 
     '
-  product: LLM Observability
-- data_type: '- **Logs**: Determined by customer plan
+  product: Agent Observability
+- data_type: '- **ログ**: お客様のプランによって決まります
+
+    - **Sensitive Data Scanner の例ログ**: <span class="d-none site-region-container"
+    data-region="us,us3,us5,eu,ap1,ap2,uk1">3 日間</span><span class="d-none site-region-container"
+    data-region="gov,gov2">7 日間</span>
 
     '
   product: Log Management
-- data_type: '- **Tags and values**: 15 months
+- data_type: '- **タグと値**: 15 か月間
 
     '
   product: Metrics
-- data_type: '- **Test results (not displayed in UI)**: 2 months
+- data_type: '- **テスト結果 (UI に非表示)**: 2 か月間
 
-    - **Test results (displayed in UI)**: 15 months
+    - **テスト結果 (UI に表示)**: 15 か月間
 
-    - **Mobile application binaries**: Retained for the duration of the account
+    - **モバイルアプリケーションバイナリ**: アカウントの有効期間中保持されます
 
     '
   product: Mobile App Testing
-- data_type: '- **Session, View, Action, and Error Events**: 30 days
+- data_type: '- **セッション、ビュー、アクション、およびエラーイベント**: 30 日間
 
-    - **Resource, Long Task, and Vitals Events**: 15 Days
+    - **リソース、ロングタスク、およびバイタルイベント**: 15 日間
 
     '
   product: Mobile RUM
-- data_type: '- **NetFlow**: 15, 30, 60, or 90 days, determined by customer plan
+- data_type: '- **NetFlow**: 15 日間、30 日間、60 日間、または 90 日間 (お客様のプランによって決まります)
 
-    - **SNMP traps**: Determined by customer plan, default to 15 days
+    - **SNMP トラップ**: お客様のプランによって決まります (デフォルトは 15 日間)
 
     '
   product: Network Device Monitoring
-- data_type: '- **Network traffic**: 14 days
+- data_type: '- **ネットワークトラフィック**: 14 日間
 
     '
   product: Cloud Network Monitoring
-- data_type: '- **Network Path Tests**: 30 days
+- data_type: '- **Network Path Tests**: 30 日間
 
     '
   product: Network Path
-- data_type: '- **Events**: 15 months
+- data_type: '- **イベント**: 15 か月間
 
-    - **User Profiles**: 15 months, or 30 days if <a href="/product_analytics/guide/rum_and_product_analytics/#how-do-i-set-up-product-analytics">Product
-    Analytics is not enabled</a>
+    - **ユーザープロファイル**: 15 か月間。ただし、<a href="/product_analytics/guide/rum_and_product_analytics/#how-do-i-set-up-product-analytics">Product
+    Analytics が有効になっていない</a>場合は 30 日間
 
     '
   product: Product Analytics
-- data_type: '- **Gate evaluations**: 30 days
+- data_type: '- **ゲート評価**: 30 日間
 
     '
-  product: PR Gates
-- data_type: '- **Tables**: Retained for the duration of the account
+  product: Quality Gates
+- data_type: '- **テーブル**: アカウントの有効期間中保持されます
 
     '
   product: Reference Tables
-- data_type: '- **Service metadata**: Retained for the duration of the account
+- data_type: '- **サービスメタデータ**: アカウントの有効期間中保持されます
 
     '
   product: Service Catalog
-- data_type: '- **SLO results**: 15 months
+- data_type: '- **SLO の結果**: 15 か月間
 
     '
   product: Service Level Objectives
-- data_type: '- **Replays (extension option in UI is unchecked)**: 30 days
+- data_type: '- **リプレイ (UI の拡張オプションがオフの場合)**: 30 日間
 
-    - **Replays (extension option in UI is checked)**: 15 months
+    - **リプレイ (UI の拡張オプションがオンの場合)**: 15 か月間
 
     '
   product: Session Replay
-- data_type: '- **Detected vulnerabilities**: 15 months
+- data_type: '- **検出された脆弱性**: 15 か月間
 
     '
   product: Software Composition Analysis (SCA)
-- data_type: '- **Source Code**: 7 days
+- data_type: '- **ソースコード**: 7 日間
 
     '
   product: Source Code Integration
-- data_type: '- **Test results**: 15 months
+- data_type: '- **テスト結果**: 15 か月間
 
     '
   product: Synthetics
-- data_type: '- **Tests**: 3 months
+- data_type: '- **テスト**: 3 か月間
 
     '
   product: Test Visibility & Intelligent Test Runner
-- data_type: '- **Workflows**: 30 days
+- data_type: '- **ワークフロー**: 30 日間
 
     '
   product: Workflow Automation
-content: 以下のテーブルは、データタイプおよび製品ごとのデフォルトのデータ保持期間を示しています。キーワードや説明文で検索して、関心のあるデータタイプや製品を見つけることもできます。収集間隔および最小解決に関する情報については、[Datadog
-  データ収集と解決](/extend/guide/data-collection-resolution) を参照してください。サポートが必要な場合は、[Datadog
+content: 以下の表に、データ型および製品別のデフォルトのデータ保持期間を示します。キーワードや説明文で検索して、目的のデータ型や製品を見つけることもできます。収集間隔と最小解像度の詳細については、[Datadog
+  データ収集と解像度](/extend/guide/data-collection-resolution) を参照してください。まだサポートが必要ですか?[Datadog
   サポート](/help) にお問い合わせください。
 disable_sidebar: true
 filter_all: All
 further_reading:
 - link: /data_security/
   tag: ドキュメント
-  text: Datadog に送信されるデータの主要カテゴリを確認する
+  text: Datadog に送信されるデータの主なカテゴリを確認してください。
 title: データ保持期間
 type: data_retention_periods
 ---
-### 参考資料 {#further-reading}
+### 詳細はこちら {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}

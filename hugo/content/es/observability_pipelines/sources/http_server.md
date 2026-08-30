@@ -1,87 +1,103 @@
 ---
+description: Aprenda a recopilar registros de clientes HTTP utilizando la fuente del
+  servidor HTTP/S de Observability Pipelines Worker.
 disable_toc: false
 products:
 - icon: logs
-  name: Logs
+  name: Registros
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
-title: Fuente del servidor HTTP
+title: Fuente del servidor HTTP/S
 ---
-
 {{< product-availability >}}
 
-Utiliza la fuente del servidor HTTP/S de Observability Pipelines para recopilar logs HTTP del cliente. Selecciona y configura esta fuente cuando [configures un pipeline][1].
+## Descripción general {#overview}
 
-También puedes [enviar logs de AWS con el Datadog Lambda Forwarder a Observability Pipelines](#send-aws-vended-log-with-the-datadog-lambda-forwarder-to-observability-pipelines).
+Utilice la fuente del servidor HTTP/S de Observability Pipelines para recopilar registros de clientes HTTP.
 
-## Requisitos previos
+También puede [enviar registros de AWS vended con el Datadog Lambda Forwarder a Observability Pipelines](#send-aws-vended-logs-with-the-datadog-lambda-forwarder-to-observability-pipelines).
+
+## Requisitos previos {#prerequisites}
 
 {{% observability_pipelines/prerequisites/http_server %}}
 
-## Configurar la fuente en la interfaz de usuario del pipeline
+## Configuración {#setup}
 
-Selecciona y configura esta fuente cuando [configures un pipeline][1]. La siguiente información corresponde a la configuración de la fuente en la interfaz de usuario del pipeline.
+<div class="alert alert-danger">Para la gestión de secretos: Ingrese únicamente los identificadores para la dirección del servidor HTTP/S y, si corresponde, el nombre de usuario y la contraseña para la autorización simple (también conocida como básica) y la frase de contraseña de la clave TLS. <b>No</b> ingrese los valores reales.</div>
 
-Para configurar tu fuente de servidor HTTP/S, introduce lo siguiente:
+Configure esta fuente cuando [configure una canalización][3]. Puede configurar una canalización en la [UI][1], utilizando la [API][4] o con [Terraform][5]. Las instrucciones de esta sección son para configurar la fuente en la interfaz de usuario.
 
-<div class="alert alert-danger">Introduce únicamente los identificadores de la dirección del servidor HTTP y, si procede, el nombre de usuario y la contraseña para la autorización simple (también conocida como básica) y la contraseña de clave TLS. <b>No</b> introduzcas los valores reales.</div>
+Después de seleccionar la fuente del servidor HTTP/S en la UI de la canalización:
 
-1. Introduce el identificador para tu dirección de servidor HTTP. Si lo dejas en blanco, se utilizará el [predeterminado](#set-secrets).
-    - **Nota**: Introduce solo el identificador de la dirección. No introduzcas la dirección real.
-1. Selecciona tu estrategia de autorización. Si has seleccionado **Simple**:
-    - Introduce los identificadores para tu nombre de usuario y contraseña del servidor HTTP. Si lo dejas en blanco, se utilizará el [predeterminado](#set-secrets).
-1. Selecciona el descodificador que deseas utilizar en los mensajes HTTP. Tus logs de cliente HTTP deben tener este formato. **Nota**: Si seleccionas la decodificación `bytes`, el log sin formato se almacena en el campo `message`.
+1. Ingrese el identificador para la dirección de su servidor HTTP/S. Si lo deja en blanco, se utiliza el [predeterminado](#secret-defaults).
+    - **Nota**: Ingrese únicamente el identificador de la dirección. **No** ingrese la dirección real.
+1. Seleccione su estrategia de autorización. Si seleccionó {{< ui >}}Plain{{< /ui >}}:
+    - Ingrese los identificadores de su nombre de usuario y contraseña del servidor HTTP/S. Si lo deja en blanco, se utiliza el [predeterminado](#secret-defaults).
+1. (Opcional) Configure tokens de autenticación. Consulte [Configurar tokens de autenticación](#configure-authentication-tokens) para obtener más detalles.
+1. Seleccione el decodificador que desea utilizar en los mensajes HTTP. Sus registros de cliente HTTP deben estar en este formato. **Nota**: Si selecciona la decodificación `bytes`, el registro sin procesar se almacena en el campo `message`.
 
-### Ajustes opcionales
+{{% observability_pipelines/secrets_env_var_note %}}
 
-Alterna al interruptor para **Enable TLS** (Activar TLS). Si activas TLS, se requieren los siguientes archivos de certificados y claves.<br>**Nota**: Todas las rutas a los archivos son relativas al directorio de datos de configuración, que es `/var/lib/observability-pipelines-worker/config/` por defecto. Consulta [Configuraciones avanzadas del worker][2] para obtener más información. El archivo debe ser propiedad del usuario `observability-pipelines-worker group` y `observability-pipelines-worker` o al menos legible por el grupo o usuario.
-- Introduce el identificador para tu contraseña de clave del servidor HTTP. Si lo dejas en blanco, se utilizará el [predeterminado](#set-secrets).
-- `Server Certificate Path`: la ruta al archivo del certificado que ha sido firmado por el archivo raíz de tu autoridad de certificación (CA) en DER o PEM (X.509).
-- `CA Certificate Path`: la ruta al archivo del certificado que es el archivo raíz de tu autoridad de certificación (CA) en DER o PEM (X.509).
-- `Private Key Path`: la ruta al archivo de clave privada `.key` que pertenece a la ruta de tu certificado de servidor en formato DER o PEM (PKCS #8).
+### Configuración opcional {#optional-settings}
 
-## Establecer secretos
+#### Habilitar TLS {#enable-tls}
+
+{{% observability_pipelines/tls_settings %}}
+
+{{% observability_pipelines/tls_settings_mtls %}}
+
+#### Configurar tokens de autenticación {#configure-authentication-tokens}
+
+Si almacena tokens como credenciales en el encabezado de autorización de su solicitud HTTP, puede configurar el Worker para verificar si las solicitudes HTTP entrantes tienen un token válido. Los eventos de solicitud que no tienen un token válido se descartan. El Worker también puede buscar una ruta de punto de conexión o una dirección IP en lugar de un encabezado.
+
+**Nota**: No puede configurar tokens de autenticación con la estrategia de autorización {{< ui >}}Plain{{< /ui >}}.
+
+{{% observability_pipelines/configure_authentication_tokens %}}
+
+## Valores predeterminados de secretos {#secret-defaults}
 
 {{% observability_pipelines/set_secrets_intro %}}
 
 {{< tabs >}}
-{{% tab "Secrets Management" %}}
+{{% tab "Administración de secretos" %}}
 
-- Identificador de la dirección del servidor HTTP:
-    - Hace referencia a la dirección del socket, como `0.0.0.0:9997`, en la que el worker de Observability Pipelines escucha los logs del cliente HTTP.
-    - El identificador por defecto es `SOURCE_HTTP_SERVER_ADDRESS`.
-- Identificador de frase de contraseña TLS del servidor HTTP (cuando TLS está activado):
-    - El identificador por defecto es `SOURCE_HTTP_SERVER_KEY_PASS`.
-- Si utilizas la autenticación simple:
-    - Identificador del nombre de usuario del servidor HTTP:
-        - El identificador por defecto es `SOURCE_HTTP_SERVER_USERNAME`.
-    - Identificador de contraseña del servidor HTTP:
-        - El identificador por defecto es `SOURCE_HTTP_SERVER_PASSWORD`.
+- Identificador de dirección del servidor HTTP/S:
+	- Hace referencia a la dirección del socket, como `0.0.0.0:9997`, en la que el Observability Pipelines Worker escucha los registros del cliente HTTP.
+	- El identificador predeterminado es `SOURCE_HTTP_SERVER_ADDRESS`.
+- Identificador de frase de contraseña TLS del servidor HTTP/S (cuando TLS está habilitado):
+	- El identificador predeterminado es `SOURCE_HTTP_SERVER_KEY_PASS`.
+- Si está utilizando autenticación simple:
+	- Identificador de nombre de usuario del servidor HTTP/S:
+		- El identificador predeterminado es `SOURCE_HTTP_SERVER_USERNAME`.
+	- Identificador de contraseña del servidor HTTP/S:
+		- El identificador predeterminado es `SOURCE_HTTP_SERVER_PASSWORD`.
 
 {{% /tab %}}
 
-{{% tab "Environment Variables" %}}
+{{% tab "Variables de entorno" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_server %}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Enviar logs de AWS con el Datadog Lambda Forwarder a Observability Pipelines
+## Enviar registros de AWS vended con el Datadog Lambda Forwarder a Observability Pipelines {#send-aws-vended-logs-with-the-datadog-lambda-forwarder-to-observability-pipelines}
 
-Para enviar logs de AWS a Observability Pipelines con la fuente del servidor HTTP/S:
+Para enviar registros de AWS vended a Observability Pipelines con la fuente del servidor HTTP/S:
 
-- [Configura un pipeline con la fuente del servidor HTTP/S](#set-up-a-pipeline).
-- [Despliega el Datadog Forwarder](#deploy-the-datadog-lambda-forwarder).
+- [Configure una canalización con la fuente del servidor HTTP/S](#set-up-a-pipeline)
+- [Implemente el Datadog Forwarder](#deploy-the-datadog-lambda-forwarder).
 
-**Nota**: Esto está disponible para las versiones del worker 2.51 o posteriores.
+**Nota**: Esto está disponible para versiones del Worker 2.51 o posteriores.
 
-### Establecer un pipeline
+### Configure una canalización {#set-up-a-pipeline}
 
 {{% observability_pipelines/lambda_forwarder/pipeline_setup %}}
 
-### Despliegue del Datadog Lambda Forwarder
+### Implemente el Datadog Lambda Forwarder {#deploy-the-datadog-lambda-forwarder}
 
 {{% observability_pipelines/lambda_forwarder/deploy_forwarder %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /es/observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[3]: /es/observability_pipelines/configuration/set_up_pipelines/
+[4]: /es/api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
