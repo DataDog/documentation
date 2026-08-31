@@ -253,7 +253,7 @@ For more information, see [Synthetic Monitoring notifications][9].
 
 ## Record your steps
 
-Tests can be only recorded from [Google Chrome][10] and [Microsoft Edge][18]. To record your test, download the [Datadog Record Test extension][11].
+Tests can be recorded from [Google Chrome][10]. To record your test, download the [Datadog Record Test extension][11]. Because Microsoft Edge is Chromium-based, you can also install the Chrome extension in Edge after you turn on **Allow extensions from other stores**. See Microsoft's [guide to adding extensions from other stores][18] for instructions.
 
 You can switch tabs in a browser test recording to perform an action on your application (such as clicking on a link that opens another tab) and add another test step. Your browser test must interact with the page first (through a click) before it can perform an [assertion][12]. By recording all of the test steps, the browser test can switch tabs automatically at test execution.
 
@@ -363,7 +363,7 @@ Use [granular access control][17] to limit who has access to your test based on 
 | Access level | View test configuration | Edit test configuration | View test results | Run test  | View recording | Edit recording |
 | ------------ | ----------------------- | ----------------------- | ------------------| --------- | -------------- | -------------- |
 | No access    |                         |                         |                   |           |                |                |
-| Viewer       | {{< X >}}               |                         | {{< X >}}         |           |                |                |
+| Viewer       | {{< X >}}               |                         | {{< X >}}         |           | {{< X >}}      |                |
 | Editor       | {{< X >}}               | {{< X >}}               | {{< X >}}         | {{< X >}} | {{< X >}}      | {{< X >}}      |
 
 ## Further Reading
@@ -387,5 +387,5 @@ Use [granular access control][17] to limit who has access to your test based on 
 [15]: /account_management/rbac#custom-roles
 [16]: /account_management/rbac/#create-a-custom-role
 [17]: /account_management/rbac/granular_access
-[18]: https://www.microsoft.com/edge
+[18]: https://support.microsoft.com/en-us/edge/add-turn-off-or-remove-extensions-in-microsoft-edge
 [19]: /synthetics/guide/how-synthetics-monitors-trigger-alerts/

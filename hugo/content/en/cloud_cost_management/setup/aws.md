@@ -28,7 +28,7 @@ To set up Cloud Cost Management in Datadog, you need:
 
 ## Setup
 
-You can setup using the [API][21], [Terraform][22], or directly in Datadog by following the instructions below.
+You can set up using the [API][21], [Terraform][22], the **Set up with AI Agent** guided flow, or directly in Datadog by following the instructions below.
 
 ### Configure the AWS integration
 
@@ -59,8 +59,13 @@ The CloudFormation stack can be configured in three ways depending on your exist
 
 ### Configure the Cost and Usage Report settings
 
-Enter the following details for your Cost and Usage Report:
+If using an existing Cost and Usage Report 2.0 and bucket, select your report from the {{< ui >}}Data Export{{< /ui >}} field and continue to the next step.
 
+{{< img src="cloud_cost/setup/aws_data_export_selector.png" alt="CCM Setup Page with Create Cost and Usage Report and Create S3 Bucket unselected, showing the Data Export selector used to select an existing export" style="width:100%" >}}
+
+Otherwise, enter the following details for your Cost and Usage Report:
+
+* {{< ui >}}Report Content{{< /ui >}}: The version of your Cost and Usage Report (Legacy CUR or CUR 2.0).
 * {{< ui >}}Bucket Name{{< /ui >}}: The S3 bucket name where the report files are stored.
 * {{< ui >}}Bucket Region{{< /ui >}}: The AWS [region code][100] of the region containing your S3 bucket. For example, `us-east-1`.
 * {{< ui >}}Export Path Prefix{{< /ui >}}: The S3 path prefix where report files are stored.
@@ -92,8 +97,13 @@ The Terraform configuration supports three setups depending on your existing AWS
 
 ### Configure the Cost and Usage Report settings
 
-Enter the following details for your Cost and Usage Report:
+If using an existing Cost and Usage Report 2.0 and bucket, select your report from the {{< ui >}}Data Export{{< /ui >}} field and continue to the next step.
 
+{{< img src="cloud_cost/setup/aws_data_export_selector.png" alt="CCM Setup Page with Create Cost and Usage Report and Create S3 Bucket unselected, showing the Data Export selector used to select an existing export" style="width:100%" >}}
+
+Otherwise, enter the following details for your Cost and Usage Report:
+
+* {{< ui >}}Report Content{{< /ui >}}: The version of your Cost and Usage Report (Legacy CUR or CUR 2.0).
 * {{< ui >}}Bucket Name{{< /ui >}}: The S3 bucket name where the report files are stored.
 * {{< ui >}}Bucket Region{{< /ui >}}: The AWS [region code][100] of the region containing your S3 bucket. For example, `us-east-1`.
 * {{< ui >}}Export Path Prefix{{< /ui >}}: The S3 path prefix where report files are stored.
@@ -119,16 +129,15 @@ In the CCM Terraform setup UI, follow the instructions in the {{< ui >}}Apply Te
 
 ### Prerequisite: generate a Cost and Usage Report
 
-[Create a Legacy Cost and Usage Report][201] in AWS under the {{< ui >}}Data Exports{{< /ui >}} section.
-
-Select the Export type {{< ui >}}Legacy CUR export{{< /ui >}}.
+Create either a [Cost and Usage Report 2.0][202] or a [Legacy Cost and Usage Report][201] in AWS under the {{< ui >}}Data Exports{{< /ui >}} section.
 
 Select the following content options:
 
-* Export type: {{< ui >}}Legacy CUR export{{< /ui >}}
+* Export type: {{< ui >}}CUR 2.0 export{{< /ui >}} or {{< ui >}}Legacy CUR export{{< /ui >}}
 * {{< ui >}}Include resource IDs{{< /ui >}}
 * {{< ui >}}Split cost allocation data{{< /ui >}} (Enables ECS Cost Allocation. You must also opt in to [AWS Split Cost Allocation][210] in Cost Explorer preferences).
 * {{< ui >}}Refresh automatically{{< /ui >}}
+* Optional: Enable {{< ui >}}IAM Principal Allocation Data{{< /ui >}} for granular user-level IAM Principal Bedrock Cost Allocation.
 
 Select the following delivery options:
 
@@ -136,9 +145,11 @@ Select the following delivery options:
 * Report versioning: {{< ui >}}Create new report version{{< /ui >}}
 * Compression type: {{< ui >}}GZIP{{< /ui >}} or {{< ui >}}Parquet{{< /ui >}}
 
+**Note**: Datadog only supports one Cost and Usage Report per member account.
+
 ### Locate the Cost and Usage Report
 
-If you have navigated away from the report that you created in the prerequisites section, follow AWS documentation to [view your Data Exports][204]. Select the legacy CUR export that you created, then select {{< ui >}}Edit{{< /ui >}} to see the details of the export.
+If you have navigated away from the report that you created in the prerequisites section, follow AWS documentation to [view your Data Exports][204]. Select the CUR export that you created, then select {{< ui >}}Edit{{< /ui >}} to see the details of the export.
 
 To enable Datadog to locate the Cost and Usage Report, complete the fields with their corresponding details:
 
@@ -148,7 +159,7 @@ To enable Datadog to locate the Cost and Usage Report, complete the fields with 
   * **Note:** The following prefix formats are not supported: empty, starting with `/` (such as `/` or `/cost`), or ending with `/` (such as `cost/`). Prefixes containing `/` in the middle are supported (such as `cost/hourly`).
 * {{< ui >}}Export Name{{< /ui >}}: This is the Export name in the Export name section.
 
-**Note**: Datadog only supports legacy Cost and Usage Reports (CURs) generated by AWS. Do not modify or move the files generated by AWS, or attempt to provide access to files generated by a third party.
+**Note**: Datadog only supports Cost and Usage Reports (CURs) generated by AWS. Do not modify or move the files generated by AWS, or attempt to provide access to files generated by a third party.
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">The AWS Cost and Usage Reports endpoint is used to validate the above fields against the CUR export in your S3 bucket. This endpoint is not FIPS validated.</div>
@@ -222,9 +233,43 @@ Attach the new S3 policy to the Datadog integration role.
 **Note**: It may take between 48 and 72 hours for all available data to populate in your Datadog organization after a complete Cost and Usage Report is generated. If 72 hours have passed and the data has still not yet populated, contact [Datadog Support][18].
 
 [201]: https://docs.aws.amazon.com/cur/latest/userguide/dataexports-create-legacy.html
+[202]: https://docs.aws.amazon.com/cur/latest/userguide/dataexports-create-standard.html
 [204]: https://docs.aws.amazon.com/cur/latest/userguide/dataexports-view.html
 [205]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [210]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
+
+{{% /tab %}}
+
+{{% tab "AI Agent" %}}
+
+The **Set up with AI Agent** flow creates or imports a Cost and Usage Report and generates Terraform for you to review before applying. Datadog provides a setup prompt that you run in your own coding agent, such as Claude Code or Cursor.
+
+### Prerequisites
+
+- An AWS account already connected to Datadog through a role-based integration. Accounts that authenticate with an access key pair are not supported, because the report read policy must attach to an IAM role.
+- The **AWS Configurations Manage** permission.
+- A coding agent installed locally. Datadog provides instructions for Claude Code and Cursor.
+
+### Start the flow in Datadog
+
+1. Navigate to [Setup & Configuration][300], find {{< ui >}}Amazon Web Services{{< /ui >}}, and click {{< ui >}}Add Account{{< /ui >}}.
+2. Select {{< ui >}}Set up with AI agent{{< /ui >}}. Datadog generates a managed API key and application key for the session.
+3. Start your agent:
+    - **Claude Code**: Copy the generated command and run it in your terminal.
+    - **Cursor**: Click {{< ui >}}Open in Cursor{{< /ui >}} to download your credentials and open Cursor with the prompt prefilled.
+4. Leave the Datadog setup page open while the agent works. After Datadog detects your new configuration, the {{< ui >}}Waiting for agent{{< /ui >}} button changes to {{< ui >}}Setup complete{{< /ui >}}. Click it to finish.
+
+### Complete the setup with the agent
+
+1. Choose a Cost and Usage Report format:
+    - **CUR 2.0**: Recommended and selected by default for new reports.
+    - **Legacy CUR**: Available for an existing legacy report or as a fallback.
+2. Select the resources to create. The flow checks for an existing Cost and Usage Report before creating a new one. You can:
+    - Create a Cost and Usage Report and its S3 bucket
+    - Use an existing report and S3 bucket
+3. Review the generated Terraform configuration, then apply it to finish setting up the account.
+
+[300]: https://app.datadoghq.com/cost/setup
 
 {{% /tab %}}
 
@@ -362,6 +407,8 @@ To ensure consistency, Datadog normalizes tag keys using underscores and lowerca
 |lineItem/ResourceId|i-12345678a9b12cd3e|line_item/resource_id:i-12345678a9b12cd3e|
 |product/region|us-east-1|product/region:us-east-1|
 |product/usagetype|DataTransfer-Regional-Bytes|product/usagetype:DataTransfer-Regional-Bytes|
+
+Refer to the [AWS CUR 2.0 documentation][33] to learn more about additional columns in the CUR 2.0 export.
 
 ### AWS resource tags
 
@@ -525,3 +572,4 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [30]: /cloud_cost_management/recommendations/
 [31]: https://docs.aws.amazon.com/cost-management/latest/userguide/cost-optimization-hub.html
 [32]: /integrations/amazon_web_services/
+[33]: https://docs.aws.amazon.com/cur/latest/userguide/table-dictionary-cur2.html
