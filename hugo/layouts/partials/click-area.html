@@ -1,0 +1,16 @@
+{{- /*
+Wraps rendered content in a div carrying a data-dd-action-name attribute.
+
+The RUM Browser SDK reads data-dd-action-name from the clicked element or any
+of its parents, so clicks inside the wrapper are reported under a stable
+action name instead of the element's visible text. Use it to tell one control
+apart from identical controls elsewhere on the site, such as a single code
+block's Copy button.
+
+@param {string} name Action name reported to RUM.
+@param {template.HTML} content Rendered content to wrap.
+*/ -}}
+{{- if not .name -}}
+    {{- errorf "click-area partial: missing value for required param 'name'" -}}
+{{- end -}}
+<div data-dd-action-name="{{ .name }}">{{ .content }}</div>

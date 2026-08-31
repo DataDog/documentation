@@ -27,7 +27,7 @@ jobs:
       - name: Get list of added static files
         id: getfile
         run: |
-          echo $(git diff --diff-filter=AM --name-only ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} static | xargs) > files.txt
+          echo $(git diff --diff-filter=AM --name-only ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} hugo/static | xargs) > files.txt
           
       - name: Validate filenames
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1

@@ -1,8 +1,8 @@
 # `documentation` repository reorg
 
-## Reorg status
+## Status
 
-Not yet merged. Scheduled to take effect on Thursday, August 6, 2026.
+Merged.
 
 ## Project overview
 
@@ -28,8 +28,24 @@ When an automatic fix is not possible, we'll defer to the author's best judgment
 
 ### Code freeze
 
-We'll declare a code freeze while the reorg is in progress, likely for a few hours on the morning of the reorg. We'll lift the freeze after the reorg changes have been merged, the build is confirmed to be operational, and the open PRs have been processed.
+We'll institute a code freeze while the reorg is in progress, likely for a few hours on the morning of the reorg. We'll lift the freeze after the reorg changes have been merged, the build is confirmed to be operational, and the open PRs have been processed.
+
+### Post migration cleanup
+
+After the migration has been completed:
+- Your local repo will have some redundant files hanging out in the root directory. We've added them to `.gitignore` to prevent anyone from adding them back to the repo, but they take up space and clutter your local directory. 
+- You need to move your `Makefile.config` to the `hugo/` directory.
+
+You can run the following script to clean up your local repo and move the config file into the correct place:
+```sh
+./hugo/scripts/post-migration-cleanup.sh
+```
+
+The script deletes a lot of files, so it take a little while to complete.
 
 ## Owners
 
 This project is owned by the WebOps Platform team (#webops-platform).
+
+
+
