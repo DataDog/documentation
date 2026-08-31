@@ -220,6 +220,9 @@ terraform apply
 - `terraform plan` previews the changes being made.
 - `terraform apply` applies the changes, which creates or updates your pipeline accordingly.
 
+After you deploy the configuration, [install the Worker][10] to send data through the pipeline. A pipeline doesn't process data until at least one Worker is running for it.
+**Note**: You cannot delete an active pipeline. Stop all Workers for the pipeline before you remove its resource block. See [Delete a pipeline][11] for more information.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -233,3 +236,5 @@ terraform apply
 [7]: /api/latest/observability-pipelines/update-a-pipeline/
 [8]: /api/latest/observability-pipelines/delete-a-pipeline/
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline
+[10]: /observability_pipelines/configuration/set_up_pipelines/?tab=logs#set-up-a-pipeline-with-the-api
+[11]: /observability_pipelines/configuration/set_up_pipelines/?tab=logs#delete-a-pipeline
