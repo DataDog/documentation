@@ -71,7 +71,9 @@ You can configure Datadog to send you notifications as soon as it detects new th
    - In Datadog, go to {{< ui >}}Cloud SIEM{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}. Under {{< ui >}}Products{{< /ui >}}, in the {{< ui >}}Cloud SIEM{{< /ui >}} section, click [{{< ui >}}Risk Insights{{< /ui >}}][7]; then, under {{< ui >}}Notification rules{{< /ui >}}, click {{< ui >}}New notification rule{{< /ui >}}.
 1. Under {{< ui >}}Define entity attributes{{< /ui >}}, specify the attributes that should trigger notifications when Datadog detects them on an entity. Beside {{< ui >}}Entities matching{{< /ui >}}, start typing entity attributes and values. As you type, the preview table dynamically displays risk insights that match your criteria.
    <div class="alert alert-info">This step is optional, but if you don't enter any attributes, the notification defaults to sending alerts for all entities.</div>
-1. Under {{< ui >}}Set notification conditions{{< /ui >}}, specify the risk score threshold to trigger notifications for.
+1. Under {{< ui >}}Set notification conditions{{< /ui >}}, set the trigger condition based on entity severity or risk score value:
+   - {{< ui >}}Entity severity{{< /ui >}}: Triggers a notification when an entity reaches a certain severity level. Select an operator, then select a severity level. For the risk score that corresponds to each severity level, see [Entity severity thresholds](#entity-severity-thresholds).
+   - {{< ui >}}Risk score value{{< /ui >}}: Triggers a notification when the entity's risk score crosses a specified threshold. Specify the threshold for notifications.
 1. Under {{< ui >}}Configure notification{{< /ui >}}, enter a name for the notification, add a custom message body, and specify recipients to send it to.
    - Optionally, you can also turn on re-notifications, and specify the period of time that should pass before Datadog re-notifies the recipients that the risk insight still meets the criteria you specified.
 1. To verify your setup, click {{< ui >}}Test Notification{{< /ui >}} to send a test notification to the configured recipients.

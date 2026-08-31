@@ -20,7 +20,7 @@ Use this option when you run workloads on a managed platform where installing a 
 
 <div class="alert alert-danger">Host metadata sent to managed platform endpoints does not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
 
-For hostname recommendations across OpenTelemetry setups, see [Hostname and Tagging][18].
+For hostname recommendations across OpenTelemetry setups, see [Hostname and Tagging][19].
 
 Each endpoint supports the following signal paths:
 
@@ -73,7 +73,7 @@ All endpoints follow the pattern `https://{subdomain}.integrations.otlp.{{< regi
 | Netlify | `netlify` | — |
 | OpenTofu | `opentofu` | — |
 | Retool | `retool` | [Retool performance monitoring][16] |
-| RWX | `rwx` | — |
+| RWX | `rwx` | [RWX OpenTelemetry][17] |
 | Salesforce | `sfdc` | — |
 | Shopify | `shopify` | — |
 | Solace | `solace` | — |
@@ -81,7 +81,7 @@ All endpoints follow the pattern `https://{subdomain}.integrations.otlp.{{< regi
 | Supabase | `supabase` | — |
 | Svix | `svix` | — |
 | Trigger.dev | `triggerdev` | — |
-| Vercel | `vercel` | [Vercel Marketplace][17] |
+| Vercel | `vercel` | [Vercel Marketplace][18] |
 
 To enable OTLP export from a managed platform not listed above, contact your Customer Success Manager.
 
@@ -121,5 +121,6 @@ Sampling controls available in the Collector (tail-based sampling, probabilistic
 [14]: https://modal.com/docs/guide/otel-integration
 [15]: https://docs.mulesoft.com/monitoring/telemetry-exporter
 [16]: https://docs.retool.com/apps/guides/observability/performance-monitoring
-[17]: https://vercel.com/marketplace/datadog
-[18]: /opentelemetry/config/hostname_tagging/#direct-otlp-intake-without-an-agent-or-collector
+[17]: https://www.rwx.com/docs/observability/datadog
+[18]: https://vercel.com/marketplace/datadog
+[19]: /opentelemetry/config/hostname_tagging/#direct-otlp-intake-without-an-agent-or-collector

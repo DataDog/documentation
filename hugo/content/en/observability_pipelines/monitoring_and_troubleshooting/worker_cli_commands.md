@@ -1,5 +1,6 @@
 ---
 title: Worker CLI Commands
+description: Find the run, tap, and top commands and options for the Observability Pipelines Worker command-line interface.
 disable_toc: false
 aliases:
   - /observability_pipelines/install_the_worker/worker_commands/
