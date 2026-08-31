@@ -28,9 +28,9 @@ App and API Protection is in Preview on Datadog Government site US1-FED.
 To try the preview of App and API Protection for Azure API Management, use the following setup instructions.
 {{< /callout >}}
 
-App and API Protection for Azure API Management adds threat detection and blocking to your APIM gateway without any change to your backend code. Azure API Management is a managed service, so it cannot run an in-process tracer. Instead, Datadog provides a small HTTP callout service that the gateway calls from an APIM policy. On each call, the service runs the Datadog Web Application Firewall (WAF) and returns a decision: continue, or block.
+App and API Protection for Azure API Management adds threat detection and blocking to your APIM gateway without any change to your backend code. Azure API Management is a managed service, so it cannot run an in-process tracer. Instead, Datadog provides an HTTP callout service that the gateway calls from an APIM policy. On each call, the service runs the Datadog Web Application Firewall (WAF) and returns a decision: continue or block.
 
-Because protection is applied at the gateway, it covers every API behind that gateway in any language, including third-party and legacy APIs that you do not own.
+Protection applies at the gateway, so it covers every API behind it in any language. That includes third-party and legacy APIs you do not own.
 
 This integration is available starting in Datadog Go tracer v2.8.0.
 
@@ -38,7 +38,7 @@ This integration is available starting in Datadog Go tracer v2.8.0.
 
 Azure API Management evaluates policies on the way in and on the way out. The Datadog policy adds a [`send-request`][1] callout to the Datadog callout service at each stage, then reads the decision back from a policy variable.
 
-Azure uses a four-call pattern:
+The exchange uses four calls:
 
 1. **Inbound, request headers.** The service returns a request ID, Datadog trace propagation headers, and, when body inspection applies, the number of body bytes it accepts.
 2. **Inbound, request body.** Runs only when the previous phase asked for the body.
@@ -60,8 +60,6 @@ For the policy internals, see [Azure API Management policies for App and API Pro
 - Optional: an existing Log Analytics workspace to collect Container Apps logs.
 
 ## Deploy the callout service
-
-The one-click deployment stands up everything the callout service needs and wires it into your existing APIM instance.
 
 [Deploy to Azure][4]
 
@@ -98,14 +96,14 @@ To deploy from the command line or from your own infrastructure-as-code instead,
 
 ## Apply the Datadog policy
 
-The callout service only inspects traffic that the gateway sends to it, so the Datadog policy must be attached to the APIs you want to protect.
+The callout service only inspects traffic the gateway sends to it, so attach the Datadog policy to the APIs you want to protect.
 
 You have two options:
 
 - Set `deployPolicy` to `true` and let the deployment inject the policy for you. The `targetApiIds` parameter selects which APIs receive it, and defaults to all APIs.
 - Apply the provided policy XML yourself in the APIM policy editor, replacing the placeholder host with the hostname of your deployed callout service.
 
-For the policy contents, the scopes you can attach it to, and how a block decision becomes a client response, see [Azure API Management policies for App and API Protection][2].
+For the policy contents, attachment scopes, and how a block becomes a client response, see [Azure API Management policies for App and API Protection][2].
 
 ## Validate the deployment
 
@@ -118,8 +116,6 @@ curl -v https://<apim-gateway-host>/<api-path>
 # Simulated attack: returns 403
 curl -v -A dd-test-scanner-log-block "https://<apim-gateway-host>/<api-path>"
 ```
-
-The first request succeeds. The second returns `403`.
 
 Then confirm the data reached Datadog:
 

@@ -37,9 +37,9 @@ The callout service ships as the container image `ghcr.io/datadog/dd-trace-go/ap
 {{< tabs >}}
 {{% tab "Azure CLI" %}}
 
-The `deploy/azure/deploy.sh` script wraps `az deployment group create` for repeatable rollouts.
+The `deploy/azure/deploy.sh` script wraps `az deployment group create`.
 
-Before deploying, it verifies four things: the Azure CLI is installed and authenticated, Bicep is available, the resource group exists, and the APIM tier is not Consumption. It then runs `az deployment group what-if` so you can preview the changes before they are applied.
+It first checks that the Azure CLI is installed and authenticated, Bicep is available, the resource group exists, and the APIM tier is not Consumption. It then runs `az deployment group what-if` so you can preview the changes before they are applied.
 
 ```shell
 DD_API_KEY=<your-datadog-api-key> \
@@ -166,7 +166,7 @@ If the following variables are unset, the service assigns them at startup:
 | `DD_APPSEC_WAF_TIMEOUT`       | `10ms`    | Per-request WAF evaluation budget.                             |
 | `DD_TRACE_PROPAGATION_STYLE`  | `datadog` | Format of the trace-context headers injected into requests.    |
 
-APM tracing of the callout service is off by default. The value of this integration is the security signal, not a trace of the gateway hop. If a single WAF evaluation exceeds its budget, the request is allowed rather than delayed.
+If a single WAF evaluation exceeds its budget, the request is allowed rather than delayed.
 
 ## Datadog Agent connection
 
@@ -188,7 +188,7 @@ When TLS is enabled, the APIM policy must call the service over `https://`.
 
 ## Health check
 
-The health endpoint answers on its own port so that a gateway or orchestrator probe never competes with callout traffic:
+The health endpoint answers on its own port:
 
 ```shell
 curl -s http://localhost:8081/
@@ -199,7 +199,7 @@ The health endpoint returns `200` whenever the service is running, whatever the 
 
 ## Sizing and performance
 
-Measured on a 0.5 vCPU, 1 GiB Azure Container Apps deployment: the request-headers phase and the response-headers phase each take about 2.4 ms. The full APIM pipeline, including both callouts and the backend, takes about 9.7 ms.
+On a 0.5 vCPU, 1 GiB Azure Container Apps deployment, the request-headers and response-headers phases each take about 2.4 ms. The full APIM pipeline, including both callouts and the backend, takes about 9.7 ms.
 
 Body phases run only when body inspection is enabled and the previous phase asked for the body. The gateway maintains a connection pool to the callout service, so production figures can come in below these numbers.
 

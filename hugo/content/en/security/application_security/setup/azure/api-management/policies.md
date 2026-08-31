@@ -25,7 +25,7 @@ App and API Protection is in Preview on Datadog Government site US1-FED.
 To try the preview of App and API Protection for Azure API Management, use the following setup instructions.
 {{< /callout >}}
 
-Azure API Management drives this integration entirely through policy. The policy calls the Datadog callout service with the native [`send-request`][1] policy, reads the decision from a policy variable, and either forwards the request or returns a block response.
+This integration runs entirely in Azure API Management policy. The policy calls the Datadog callout service with the native [`send-request`][1] policy and reads the decision from a policy variable. It then forwards the request or returns a block response.
 
 Three policy documents are provided in [`deploy/azure/policies`][2]:
 
@@ -101,7 +101,7 @@ Because `return-response` cancels the rest of the pipeline, a block during an in
 
 ## Fail-open behavior
 
-The callout service is never a hard dependency. Every failure path allows traffic through:
+Every failure path allows traffic through:
 
 | Scenario                                                     | Result                                                                                              |
 |--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
@@ -112,9 +112,9 @@ The callout service is never a hard dependency. Every failure path allows traffi
 | The WAF times out, or the processor reports an error         | The service answers `200` with `{}`, and no block is applied                                        |
 | Cached request state passed its time-to-live                 | The orphaned state is released, and traffic continues                                               |
 
-Because every failure path allows traffic, a misconfiguration surfaces as missing security data rather than as broken traffic. When signals are missing, check that the WAF is enabled and that the policy is attached to the API before looking anywhere else.
+When signals are missing, check that the WAF is enabled and that the policy is attached to the API before looking anywhere else.
 
-Policy overhead on the gateway is small. Building the JSON body with `set-body` and parsing the response variable each stay under 0.1 ms, and the conditional evaluation stays under 0.01 ms. The dominant cost is network round-trip time to the callout service.
+Building the JSON body with `set-body` and parsing the response variable each stay under 0.1 ms, and the conditional evaluation stays under 0.01 ms. The dominant cost is network round-trip time to the callout service.
 
 ## Trace context propagation
 
@@ -134,7 +134,7 @@ The callout service appears in APM as the `dd-apim-callout` service, and its spa
 
 When the WAF matches a request, the span also carries App and API Protection tags, including `appsec.event`, `appsec.blocked`, and `http.client_ip`.
 
-The client IP address comes from the value the policy sends in phase 1. If another proxy sits in front of APIM, that value determines `http.client_ip`.
+The client IP address comes from the value the policy sends in phase 1. That value sets `http.client_ip`, even when another proxy sits in front of APIM.
 
 ## Further Reading
 
