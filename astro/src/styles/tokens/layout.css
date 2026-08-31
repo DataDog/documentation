@@ -3,4 +3,9 @@
   --control-height-sm: 2rem;
   --content-max-width: 1440px;
   --sidebar-width: 315px;
+
+  /* Card grid card heights. Component-scoped names are correct here: these
+     are specific to this layout, not a reusable scale. */
+  --card-grid-card-min-height: 100px;
+  --card-grid-card-min-height-titled: 140px;
 }

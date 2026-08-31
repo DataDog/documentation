@@ -20,6 +20,7 @@
   --color-border: #ddd;
   --color-border-strong: #eee;
   --color-border-dark: #c7c7c7;
+  --color-border-card: #dee2e6;
   --color-scrollbar: rgba(0, 0, 0, 0.2);
 
   /* Colors — Status */
@@ -79,5 +80,10 @@
   --color-placeholder-bg: #e9d8f4;
   --color-placeholder-outline: #632ca6;
   --color-placeholder-text: var(--color-placeholder-outline);
+
+  /* Colors — Tooltip. Named as a general primitive rather than
+     --card-grid-tooltip-*, since other components will want tooltips. */
+  --color-tooltip-bg: #000;
+  --color-tooltip-text: #fff;
 }
 
