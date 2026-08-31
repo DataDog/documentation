@@ -46,11 +46,13 @@ Credentials and account authentication that you set up in the following Datadog 
 
 Configure the integration tiles by following instructions in [Datadog Integrations][6].
 
+For GitHub actions, you can use credentials from the integration tile or authenticate with an installation of your own GitHub App. To use your own app, set up a [GitHub App connection][16].
+
 If the integration you need to set up is not listed above, set up connection credentials.
 
 ## Connection credentials
 
-Connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation and App Builder products.
+Connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate a [generic action][8], to use your own GitHub App, or to authenticate any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation and App Builder products.
 
 Connections support the following example use cases:
 - The integration you need is not available as a built-in connection.
@@ -139,6 +141,10 @@ To learn how to restrict connection use, see Access and Authentication for [Work
 
 To connect to an arbitrary service, use the HTTP connection type. For authentication options and setup instructions, see the [HTTP action][10].
 
+## GitHub App connection
+
+To authenticate actions as an installation of your own GitHub App, use the GitHub App credential type for a GitHub connection. For setup instructions, see [GitHub App][16].
+
 ## Connection identifier tags
 
 You can add identifier tags to connections. The tagging rules for connections are based on [Datadog tags][13], with the following additional requirements:
@@ -221,3 +227,4 @@ To delete a connection group:
 [13]: /getting_started/tagging/
 [14]: https://app.datadoghq.com/app-builder/
 [15]: /actions/app_builder/access_and_auth/#restrict-access-to-a-specific-connection
+[16]: /actions/connections/github_app/
