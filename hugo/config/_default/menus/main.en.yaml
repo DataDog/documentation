@@ -4783,6 +4783,11 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_error_grouping
       weight: 1303
+    - name: Stack Traces
+      url: tracing/error_tracking/stack_traces
+      parent: tracing_error_tracking
+      identifier: tracing_error_tracking_stack_traces
+      weight: 1304
     - name: Monitors
       url: tracing/error_tracking/monitors
       parent: tracing_error_tracking
