@@ -82,8 +82,37 @@ describe("card-grid validation", () => {
   });
 
   it("accepts a card with src but no title", () => {
+    // `alt` carries the accessible name here; see the nameless-card test below
+    // for why an image-only card cannot omit every naming attribute.
+    const ids = errorIds(
+      `{% card-grid %}\n{% image-card href="/a/" src="logos/aws.svg" alt="AWS" /%}\n{% /card-grid %}`,
+    );
+
+    expect(ids).toEqual([]);
+  });
+
+  it("rejects an image-only card that has no accessible name", () => {
+    // A link's accessible name comes from its visible title, its aria-label
+    // (which ImageCard fills from `tooltip`), or the alt text of the image
+    // inside it. With `alt` defaulting to "" — the correct value for a
+    // decorative image — a card with none of the three renders as an anchor a
+    // screen reader announces only as "link" (WCAG 4.1.2, Name Role Value).
+    // Verified in a browser: a non-empty alt does name the anchor, an empty
+    // one leaves it nameless.
     const ids = errorIds(
       `{% card-grid %}\n{% image-card href="/a/" src="logos/aws.svg" /%}\n{% /card-grid %}`,
+    );
+
+    expect(ids).toContain("image-card-no-accessible-name");
+  });
+
+  it.each([
+    ["alt", `alt="Amazon Web Services"`],
+    ["title", `title="AWS"`],
+    ["tooltip", `tooltip="Amazon Web Services"`],
+  ])("accepts an image-only card named by %s alone", (_label, attribute) => {
+    const ids = errorIds(
+      `{% card-grid %}\n{% image-card href="/a/" src="logos/aws.svg" ${attribute} /%}\n{% /card-grid %}`,
     );
 
     expect(ids).toEqual([]);

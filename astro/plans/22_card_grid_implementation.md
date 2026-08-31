@@ -85,7 +85,7 @@ Extract the CDN URL construction currently inline in `Img.astro` so `ImageCard.a
 - Consumes: `IMAGES_URL` from `@config/images`.
 - Produces: `buildImageUrl(src: string): { imageUrl: string; srcset: string; popupHref: string }` — used by Task 5 (`ImageCard.astro`).
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `src/lib/images/tests/buildImageUrl.unit.test.ts`:
 
@@ -120,13 +120,13 @@ describe("buildImageUrl", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test and verify it fails**
+- [x] **Step 2: Run the test and verify it fails**
 
 Run: `yarn test:headless-ai src/lib/images/tests/buildImageUrl.unit.test.ts`
 
 Expected: FAIL — cannot resolve `../buildImageUrl`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 Create `src/lib/images/buildImageUrl.ts`:
 
@@ -161,13 +161,13 @@ export function buildImageUrl(src: string): BuiltImageUrls {
 }
 ```
 
-- [ ] **Step 4: Run the test and verify it passes**
+- [x] **Step 4: Run the test and verify it passes**
 
 Run: `yarn test:headless-ai src/lib/images/tests/buildImageUrl.unit.test.ts`
 
 Expected: PASS (3 tests).
 
-- [ ] **Step 5: Refactor `Img.astro` to use the helper**
+- [x] **Step 5: Refactor `Img.astro` to use the helper**
 
 In `src/components/Img/Img.astro`, replace these three lines (currently at 21-23):
 
@@ -190,13 +190,13 @@ Then update the imports at the top of the frontmatter: remove `import { IMAGES_U
 import { buildImageUrl } from "@lib/images/buildImageUrl";
 ```
 
-- [ ] **Step 6: Verify the `Img` tests still pass unchanged**
+- [x] **Step 6: Verify the `Img` tests still pass unchanged**
 
 Run: `yarn test:headless-ai src/components/Img`
 
 Expected: PASS, with no snapshot updates. If a snapshot changed, the helper is not returning identical strings — fix the helper, do not update the snapshot.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add src/lib/images src/components/Img/Img.astro
@@ -221,7 +221,7 @@ Declare both tags' attributes and the four validation errors. No rendering yet �
 
 **The missing `image_width` defaults are load-bearing.** Task 3's transform reads `child.attributes` off the raw AST, which reflects only what the author literally typed. A schema default on the child would make every card look like it set the value explicitly, and the parent could never win the inheritance. The `150` fallback is applied at render time in Task 5 instead. `card_width` is not inherited, so it keeps its schema default.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `src/components/CardGrid/tests/schema.unit.test.ts`:
 
@@ -316,13 +316,13 @@ describe("card-grid validation", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test and verify it fails**
+- [x] **Step 2: Run the test and verify it fails**
 
 Run: `yarn test:headless-ai src/components/CardGrid/tests/schema.unit.test.ts`
 
 Expected: FAIL — the well-formed case reports `tag-undefined` for `card-grid`, and none of the custom error ids appear.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 In `markdoc.schema.mjs`, add these two entries to the `tags` object, immediately after the `img` entry:
 
@@ -405,13 +405,13 @@ In `markdoc.schema.mjs`, add these two entries to the `tags` object, immediately
 
 Markdoc wraps a paragraph around loose text, so the text child may arrive as a `paragraph` node rather than a bare `text` node. If the `card-grid-text-child` test fails after this step, walk one level: treat a `paragraph` child whose concatenated descendant text is non-whitespace the same way. Do not loosen the whitespace test to make it pass.
 
-- [ ] **Step 4: Run the test and verify it passes**
+- [x] **Step 4: Run the test and verify it passes**
 
 Run: `yarn test:headless-ai src/components/CardGrid/tests/schema.unit.test.ts`
 
 Expected: PASS (9 tests).
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add markdoc.schema.mjs src/components/CardGrid/tests/schema.unit.test.ts
@@ -436,7 +436,7 @@ The transform is where `image_width` inheritance and per-card id assignment happ
 
 Note `tooltipLabelsByCardId` — the island needs each card's tooltip text, and the ids alone do not carry it. The spec sketch passes a bare `tooltips` array; a record keyed by card id is used instead so the island cannot mismatch a label to a card.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `src/components/CardGrid/tests/transform.unit.test.ts`:
 
@@ -562,13 +562,13 @@ describe("card-grid transform", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test and verify it fails**
+- [x] **Step 2: Run the test and verify it fails**
 
 Run: `yarn test:headless-ai src/components/CardGrid/tests/transform.unit.test.ts`
 
 Expected: FAIL — `no card-grid tag in transform output`, because the tag is not registered in `markdoc.config.mjs`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 In `markdoc.config.mjs`, add these two entries to the `tags` object, immediately after the `"stepper-finished"` entry:
 
@@ -639,7 +639,7 @@ Note `child.transformAttributes(config)` is used for the card's rendered attribu
 
 `image-card` is self-closing, so the cards are constructed with no children.
 
-- [ ] **Step 4: Create placeholder components so the config resolves**
+- [x] **Step 4: Create placeholder components so the config resolves**
 
 The transform references two component files that do not exist yet. Create minimal versions now; Tasks 4 and 5 fill them in.
 
@@ -663,13 +663,13 @@ const { id, href } = Astro.props;
 <a id={id} href={href}></a>
 ```
 
-- [ ] **Step 5: Run the test and verify it passes**
+- [x] **Step 5: Run the test and verify it passes**
 
 Run: `yarn test:headless-ai src/components/CardGrid/tests/transform.unit.test.ts`
 
 Expected: PASS (10 tests).
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add markdoc.config.mjs src/components/CardGrid
@@ -692,7 +692,7 @@ Add the tokens the components need before writing their CSS, so no hardcoded val
 
 Values are ported from `hugo/assets/styles/components/_cards.scss:37-84`. Existing tokens cover the rest: `--space-md` (1rem gap), `--border-radius` (4px ≈ Hugo's `0.25rem`), `--color-brand` (already `#632ca6`, Hugo's `$ddpurple`), and `--color-text` for the card title.
 
-- [ ] **Step 1: Add the color tokens**
+- [x] **Step 1: Add the color tokens**
 
 In `src/styles/tokens/colors.css`, add to the `:root` block. Put the card border in the "Colors — Surface" group:
 
@@ -709,7 +709,7 @@ and add a new group at the end of the block:
   --color-tooltip-text: #fff;
 ```
 
-- [ ] **Step 2: Add the shadow token**
+- [x] **Step 2: Add the shadow token**
 
 In `src/styles/tokens/shadows.css`, add to the `:root` block:
 
@@ -717,7 +717,7 @@ In `src/styles/tokens/shadows.css`, add to the `:root` block:
   --shadow-card-hover: 0 2px 4px 2px rgba(0, 0, 0, 0.4);
 ```
 
-- [ ] **Step 3: Add the layout tokens**
+- [x] **Step 3: Add the layout tokens**
 
 In `src/styles/tokens/layout.css`, add to the `:root` block:
 
@@ -730,13 +730,13 @@ In `src/styles/tokens/layout.css`, add to the `:root` block:
 
 If `layout.css` has no `:root` block, add these to `src/styles/tokens/spacing.css` instead and note the choice in the commit message.
 
-- [ ] **Step 4: Verify the token files still parse**
+- [x] **Step 4: Verify the token files still parse**
 
 Run: `yarn test:headless-ai src/lib/images/tests/buildImageUrl.unit.test.ts`
 
 Expected: PASS. This is a smoke check that nothing in the style pipeline broke; the test itself is unrelated.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/styles/tokens
@@ -770,7 +770,7 @@ Branch rules:
 | `title` set | `image-card--has-title` modifier on the anchor |
 | `tooltip` set | `aria-label={tooltip}` on the anchor |
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `src/components/CardGrid/tests/ImageCard.unit.test.ts`:
 
@@ -901,13 +901,13 @@ describe("ImageCard component", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test and verify it fails**
+- [x] **Step 2: Run the test and verify it fails**
 
 Run: `yarn test:headless-ai src/components/CardGrid/tests/ImageCard.unit.test.ts`
 
 Expected: FAIL — the placeholder renders a bare anchor with none of these classes.
 
-- [ ] **Step 3: Write the shared types**
+- [x] **Step 3: Write the shared types**
 
 Create `src/components/CardGrid/cardGridTypes.ts`:
 
@@ -941,7 +941,7 @@ export interface CardGridProps {
 export const DEFAULT_IMAGE_WIDTH = 150;
 ```
 
-- [ ] **Step 4: Write the component**
+- [x] **Step 4: Write the component**
 
 Replace `src/components/CardGrid/ImageCard.astro` entirely:
 
@@ -994,7 +994,7 @@ const TitleElement = src ? "p" : "h5";
 </a>
 ```
 
-- [ ] **Step 5: Write the card CSS**
+- [x] **Step 5: Write the card CSS**
 
 Create `src/components/CardGrid/ImageCard.module.css`. Values ported from `hugo/assets/styles/components/_cards.scss:37-84`; Hugo's nine Bootstrap utility classes on the body become four real properties.
 
@@ -1042,13 +1042,13 @@ Create `src/components/CardGrid/ImageCard.module.css`. Values ported from `hugo/
 }
 ```
 
-- [ ] **Step 6: Run the test and verify it passes**
+- [x] **Step 6: Run the test and verify it passes**
 
 Run: `yarn test:headless-ai src/components/CardGrid/tests/ImageCard.unit.test.ts`
 
 Expected: PASS (12 tests).
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add src/components/CardGrid
@@ -1069,7 +1069,7 @@ The grid wrapper, and the conditional hydration decision.
 **Interfaces:**
 - Consumes: `CardGridProps` (Task 5); `CardGridTooltips` (Task 7 — write a minimal stub in Step 3 here, then fill it in during Task 7).
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `src/components/CardGrid/tests/CardGrid.unit.test.ts`:
 
@@ -1135,13 +1135,13 @@ describe("CardGrid component", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test and verify it fails**
+- [x] **Step 2: Run the test and verify it fails**
 
 Run: `yarn test:headless-ai src/components/CardGrid/tests/CardGrid.unit.test.ts`
 
 Expected: FAIL — the placeholder emits no `card-grid` class and no `--card-min-width`.
 
-- [ ] **Step 3: Write a stub island so the import resolves**
+- [x] **Step 3: Write a stub island so the import resolves**
 
 Create `src/components/CardGrid/CardGridTooltips.tsx` as a stub. Task 7 replaces it:
 
@@ -1151,7 +1151,7 @@ export default function CardGridTooltips() {
 }
 ```
 
-- [ ] **Step 4: Write the component**
+- [x] **Step 4: Write the component**
 
 Replace `src/components/CardGrid/CardGrid.astro` entirely:
 
@@ -1191,7 +1191,7 @@ const needsTooltips = tooltipCardIds.length > 0;
 </div>
 ```
 
-- [ ] **Step 5: Write the grid CSS**
+- [x] **Step 5: Write the grid CSS**
 
 Create `src/components/CardGrid/CardGrid.module.css`:
 
@@ -1207,13 +1207,13 @@ Create `src/components/CardGrid/CardGrid.module.css`:
 }
 ```
 
-- [ ] **Step 6: Run the test and verify it passes**
+- [x] **Step 6: Run the test and verify it passes**
 
 Run: `yarn test:headless-ai src/components/CardGrid/tests/CardGrid.unit.test.ts`
 
 Expected: PASS (5 tests).
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add src/components/CardGrid
@@ -1241,7 +1241,7 @@ Design notes to preserve:
 - `mouseenter` / `mouseleave` for pointer, `focus` / `blur` for keyboard, `Escape` to dismiss.
 - **Accessibility divergence, and the reason must stay in a code comment.** Bootstrap moves the `title` attribute into its own markup, leaving the anchor with no accessible name. Instead the anchor carries `aria-label` (Task 5) and the bubble carries `aria-hidden="true"`. `aria-describedby` would double-announce text identical to the label. Without the comment, a future reader will "fix" this into a `role="tooltip"`.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `src/components/CardGrid/tests/CardGridTooltips.unit.test.ts`:
 
@@ -1390,13 +1390,13 @@ describe("CardGridTooltips", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test and verify it fails**
+- [x] **Step 2: Run the test and verify it fails**
 
 Run: `yarn test:headless-ai src/components/CardGrid/tests/CardGridTooltips.unit.test.ts`
 
 Expected: FAIL — the stub renders `null`, so no bubble exists.
 
-- [ ] **Step 3: Write the island**
+- [x] **Step 3: Write the island**
 
 Replace `src/components/CardGrid/CardGridTooltips.tsx` entirely:
 
@@ -1500,7 +1500,7 @@ export default function CardGridTooltips({
 }
 ```
 
-- [ ] **Step 4: Write the bubble CSS**
+- [x] **Step 4: Write the bubble CSS**
 
 Create `src/components/CardGrid/CardGridTooltips.module.css`. `translate(-50%, -100%)` centers the bubble over the card and lifts it above the top edge, matching Bootstrap's `top` placement.
 
@@ -1529,19 +1529,19 @@ Create `src/components/CardGrid/CardGridTooltips.module.css`. `translate(-50%, -
 
 If `--font-size-sm` does not exist in `src/styles/tokens/typography.css`, use the nearest existing small-text token rather than a hardcoded value. Check the file before writing.
 
-- [ ] **Step 5: Run the test and verify it passes**
+- [x] **Step 5: Run the test and verify it passes**
 
 Run: `yarn test:headless-ai src/components/CardGrid/tests/CardGridTooltips.unit.test.ts`
 
 Expected: PASS (8 tests).
 
-- [ ] **Step 6: Re-run the grid test**
+- [x] **Step 6: Re-run the grid test**
 
 Run: `yarn test:headless-ai src/components/CardGrid/tests/CardGrid.unit.test.ts`
 
 Expected: PASS (5 tests) — the real island still SSRs to an `astro-island` wrapper.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add src/components/CardGrid
@@ -1577,7 +1577,7 @@ A `subtitle` appends as `" - <subtitle>"` regardless of which branch produced th
 
 Href resolution: the twin takes hrefs as authored. Absolute-URL resolution and the `.md` suffix are handled by the site-wide link rewriting, not here — do not reimplement `buildCardGridHref`.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `src/components/CardGrid/plaintext/tests/unit.test.ts`:
 
@@ -1674,13 +1674,13 @@ describe("cardGridNode", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test and verify it fails**
+- [x] **Step 2: Run the test and verify it fails**
 
 Run: `yarn test:headless-ai src/components/CardGrid/plaintext/tests/unit.test.ts`
 
 Expected: FAIL — cannot resolve `../CardGrid`.
 
-- [ ] **Step 3: Write the twin**
+- [x] **Step 3: Write the twin**
 
 Create `src/components/CardGrid/plaintext/CardGrid.ts`:
 
@@ -1756,7 +1756,7 @@ export function cardGridNode(cards: PlaintextCard[]): MarkdocNode {
 }
 ```
 
-- [ ] **Step 4: Run the test and verify it passes**
+- [x] **Step 4: Run the test and verify it passes**
 
 Run: `yarn test:headless-ai src/components/CardGrid/plaintext/tests/unit.test.ts`
 
@@ -1764,7 +1764,7 @@ Expected: PASS (10 tests).
 
 If the exact-string assertions in the first test fail on whitespace, adjust the *expected strings* to match what Markdoc's `format()` actually emits — the formatter owns list serialization, and matching it is the point. Do not restructure the AST to force a particular string.
 
-- [ ] **Step 5: Register the twin**
+- [x] **Step 5: Register the twin**
 
 In `src/lib/plaintext/twinTransform.ts`, add the import next to the other component twin imports:
 
@@ -1792,13 +1792,13 @@ Then add this adapter to `twinAdaptersByTag`, after the `img` entry:
   },
 ```
 
-- [ ] **Step 6: Verify the twin transform tests still pass**
+- [x] **Step 6: Verify the twin transform tests still pass**
 
 Run: `yarn test:headless-ai src/lib/plaintext`
 
 Expected: PASS. If `twinTransform.unit.test.ts` has a snapshot covering the full component test page, it may legitimately change now that `card-grid` renders as a link list instead of round-tripping as a raw tag. Read the diff: a link list is correct; anything else is a bug.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add src/components/CardGrid/plaintext src/lib/plaintext/twinTransform.ts
@@ -1829,7 +1829,7 @@ Section order on that page, which the selectors depend on:
 
 So `.card-grid` at index 3 is the tooltip grid, and index 0 has no tooltip.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `src/components/CardGrid/tests/browser.test.ts`:
 
@@ -1925,7 +1925,7 @@ test.describe("CardGrid component", () => {
 });
 ```
 
-- [ ] **Step 2: Run the test and verify the state of each case**
+- [x] **Step 2: Run the test and verify the state of each case**
 
 Run: `yarn test:browser-ai src/components/CardGrid/tests/browser.test.ts`
 
@@ -1933,11 +1933,11 @@ Expected: most cases PASS on the first run, since Tasks 5-7 already built the co
 
 The one case likely to need adjustment is the click-navigation URL: confirm where `/integrations/aws/` actually resolves on the dev server, and correct the expected URL if it redirects.
 
-- [ ] **Step 3: Fix any failures in the components, not the tests**
+- [x] **Step 3: Fix any failures in the components, not the tests**
 
 If a case fails, fix the component. Only change a test when the *expectation* was wrong (a URL that redirects, a grid index that is off by one) — never to accommodate a real defect.
 
-- [ ] **Step 4: Add the visual snapshots**
+- [x] **Step 4: Add the visual snapshots**
 
 Snapshots are generated last because they are rebase-fragile — a lesson from the `Img` build. Append to the same file:
 
@@ -1970,19 +1970,19 @@ test.describe("CardGrid visual snapshots", () => {
 });
 ```
 
-- [ ] **Step 5: Generate the snapshots**
+- [x] **Step 5: Generate the snapshots**
 
 Run: `yarn test:browser-ai src/components/CardGrid/tests/browser.test.ts --update-snapshots`
 
 Then review each generated PNG before committing. A snapshot of a broken layout is worse than no snapshot.
 
-- [ ] **Step 6: Run the browser suite once more against the committed snapshots**
+- [x] **Step 6: Run the browser suite once more against the committed snapshots**
 
 Run: `yarn test:browser-ai src/components/CardGrid/tests/browser.test.ts`
 
 Expected: PASS (11 tests).
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add src/components/CardGrid/tests
@@ -1996,7 +1996,7 @@ git commit -m "Add card-grid browser tests and visual snapshots"
 **Files:**
 - No new files. Possible fixes anywhere touched by Tasks 1-9.
 
-- [ ] **Step 1: Run the full test suite**
+- [x] **Step 1: Run the full test suite**
 
 Run: `yarn test-ai`
 
@@ -2006,7 +2006,7 @@ The most likely regression source is Task 1's `Img.astro` refactor. If an `Img` 
 
 The second most likely is the plaintext twin transform snapshot, which legitimately changes if it covers a page containing a card grid. Read that diff carefully: a flat link list is correct.
 
-- [ ] **Step 2: Check the rendered page by eye**
+- [x] **Step 2: Check the rendered page by eye**
 
 Run: `yarn dev`, then open `http://localhost:4321/dd_e2e/components/card-grid`.
 
@@ -2019,19 +2019,19 @@ Confirm against `hugo/assets/styles/components/_cards.scss:37-84` and the live H
 - The tooltip appears centered above its card.
 - Section 5's two cards are the same, smaller size; section 6's single card is larger.
 
-- [ ] **Step 3: Check the plaintext output by eye**
+- [x] **Step 3: Check the plaintext output by eye**
 
 Open `http://localhost:4321/dd_e2e/components/card-grid.md`.
 
 Every grid should be a flat list of links. Section 4's tooltip card should read `- [aws](/integrations/aws/)` — no title is set there, and the href has no `tab` param, so it falls through to the final path segment.
 
-- [ ] **Step 4: Compare semantics against the cdocs reference**
+- [x] **Step 4: Compare semantics against the cdocs reference**
 
 Open `~/repos/corp-node-packages/packages/cdocs-hugo-integration/test/__snapshots__/validSite/content/en/tags_and_elements/card_grid/_index.md`, which renders the same source document.
 
 Class names and srcset breakpoints differ, for the reasons in spec sections 4 and 6. What must agree, case for case: which title element each card uses, which width each image gets, and which cards carry tooltip markup. **Compare semantics, not bytes.**
 
-- [ ] **Step 5: Commit any fixes**
+- [x] **Step 5: Commit any fixes**
 
 ```bash
 git add -A
@@ -2040,7 +2040,7 @@ git commit -m "Fix regressions found in the card-grid full test run"
 
 Skip this step if nothing needed fixing.
 
-- [ ] **Step 6: Recommend the production build to the user**
+- [x] **Step 6: Recommend the production build to the user**
 
 Do not run it. Tell the user the feature is complete and that `yarn build` is the appropriate final verification before opening a PR.
 
