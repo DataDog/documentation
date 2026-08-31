@@ -26,7 +26,10 @@ describe("CardGrid component", () => {
   it("renders a grid wrapper carrying its id", async () => {
     const html = await renderGrid({});
 
-    expect(html).toContain("card-grid");
+    // Assert on the class attribute, not a bare substring: the id value
+    // ("card-grid-abc123") contains "card-grid" too, so `toContain("card-grid")`
+    // would pass even if the class were never applied.
+    expect(html).toMatch(/class="[^"]*\bcard-grid\b[^"]*"/);
     expect(html).toContain('id="card-grid-abc123"');
   });
 
