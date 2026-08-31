@@ -25,6 +25,10 @@ export default function CardGridTooltips({
   tooltipLabelsByCardId,
 }: Props) {
   const [tooltip, setTooltip] = useState<TooltipState | null>(null);
+  // Marks the point where the card listeners below are actually attached.
+  // Until then a hover lands on a card with no listener and is lost, so tests
+  // (and anything else timing an interaction) need this to be observable.
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     const loaded = loadExternalContext(externalContext);
@@ -66,8 +70,13 @@ export default function CardGridTooltips({
     document.addEventListener("keydown", onEscape);
     teardowns.push(() => document.removeEventListener("keydown", onEscape));
 
+    // Set last: every listener above is attached by this point, so the flag
+    // never advertises readiness the component cannot yet honor.
+    setHydrated(true);
+
     return () => {
       for (const teardown of teardowns) teardown();
+      setHydrated(false);
     };
   }, [externalContext, tooltipLabelsByCardId]);
 
@@ -83,6 +92,7 @@ export default function CardGridTooltips({
     <div
       class={cl("card-grid__tooltip", tooltip && "card-grid__tooltip--visible")}
       aria-hidden="true"
+      data-hydrated={hydrated ? "true" : undefined}
       style={
         tooltip
           ? { top: `${tooltip.top}px`, left: `${tooltip.left}px` }

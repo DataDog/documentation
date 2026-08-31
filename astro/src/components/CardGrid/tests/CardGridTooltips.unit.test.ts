@@ -68,6 +68,16 @@ function mountTooltips() {
 }
 
 describe("CardGridTooltips", () => {
+  it("marks the bubble as hydrated once its listeners are attached", async () => {
+    // The island is client:idle, so a hover before this flag appears finds no
+    // listener and is silently dropped. Browser tests gate on the attribute to
+    // avoid that race, which only works if it tracks real listener readiness.
+    const { bubble } = mountTooltips();
+    await flush();
+
+    expect(bubble().getAttribute("data-hydrated")).toBe("true");
+  });
+
   it("renders a hidden bubble before any interaction", () => {
     const { bubble } = mountTooltips();
 

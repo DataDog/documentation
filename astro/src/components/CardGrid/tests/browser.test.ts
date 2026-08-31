@@ -5,6 +5,22 @@ import { test, expect } from "@playwright/test";
 const TOOLTIP_GRID_INDEX = 3;
 const PLAIN_GRID_INDEX = 0;
 
+/**
+ * The tooltip island is `client:idle`, so its listeners attach whenever the
+ * browser next goes idle. A hover dispatched before then is simply lost: it
+ * fires no `mouseenter` on an element that has no listener yet, and because
+ * Playwright's synthetic hover moves the pointer exactly once, nothing ever
+ * re-triggers it — the assertion then burns its full timeout on a tooltip that
+ * will never open. Under a saturated worker pool idle time arrives late enough
+ * for this to happen regularly, which is why it surfaced only in full runs.
+ *
+ * Waiting for `data-hydrated` (the convention used across this repo — see
+ * Tabs, CodeBlock, and SearchBar's browser tests) closes that window.
+ */
+async function waitForTooltipHydration(grid: import("@playwright/test").Locator) {
+  await expect(grid.locator('.card-grid__tooltip[data-hydrated="true"]')).toBeAttached();
+}
+
 test.describe("CardGrid component", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/dd_e2e/components/card-grid");
@@ -21,6 +37,7 @@ test.describe("CardGrid component", () => {
     const card = grid.locator(".image-card").first();
     const tooltip = grid.locator(".card-grid__tooltip");
 
+    await waitForTooltipHydration(grid);
     await card.hover();
     await expect(tooltip).toHaveClass(/card-grid__tooltip--visible/);
     await expect(tooltip).toHaveText("Amazon Web Services integration");
@@ -33,6 +50,7 @@ test.describe("CardGrid component", () => {
     const grid = page.locator(".card-grid").nth(TOOLTIP_GRID_INDEX);
     const tooltip = grid.locator(".card-grid__tooltip");
 
+    await waitForTooltipHydration(grid);
     await grid.locator(".image-card").first().focus();
 
     await expect(tooltip).toHaveClass(/card-grid__tooltip--visible/);
@@ -42,6 +60,7 @@ test.describe("CardGrid component", () => {
     const grid = page.locator(".card-grid").nth(TOOLTIP_GRID_INDEX);
     const tooltip = grid.locator(".card-grid__tooltip");
 
+    await waitForTooltipHydration(grid);
     await grid.locator(".image-card").first().hover();
     await expect(tooltip).toHaveClass(/card-grid__tooltip--visible/);
 
@@ -110,6 +129,7 @@ test.describe("CardGrid visual snapshots", () => {
     const grid = page.locator(".card-grid").nth(3);
     const tooltip = grid.locator(".card-grid__tooltip");
 
+    await waitForTooltipHydration(grid);
     await grid.locator(".image-card").first().hover();
     await expect(tooltip).toHaveClass(/card-grid__tooltip--visible/);
 
