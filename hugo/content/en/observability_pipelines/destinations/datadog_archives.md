@@ -125,7 +125,7 @@ After you select the Datadog Archives destination in the pipeline UI:
 
 1. In the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu, select the compression algorithm for your archived logs ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}).
     - **Note**: If a compression algorithm is not specified, gzip with a compression level of `6` is used.
-1. You must select a compression level in the dropdown menu. Datadog recommends `6` for gzip and `3` for zstd.
+1. In the {{< ui >}}Compression - Level {{< /ui >}} field, you must enter a compression level. Datadog recommends `6` for gzip and `3` for zstd.
 
 #### Server-side encryption
 
