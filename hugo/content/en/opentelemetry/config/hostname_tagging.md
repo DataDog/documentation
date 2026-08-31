@@ -40,7 +40,7 @@ If incoming telemetry has no valid hostname attributes, Datadog uses the Agent h
 
 ### DDOT Collector exporting directly to Datadog
 
-The DDOT Collector's `infraattributes` processor adds infrastructure attributes and tags to OTLP telemetry. Include it in every signal pipeline. The processor needs resource attributes that identify the source container. If infrastructure tags are missing, see [Infrastructure tags are missing from telemetry][10].
+The DDOT Collector's `infraattributes` processor adds infrastructure attributes and tags to OTLP telemetry. Include it in every signal pipeline. The processor requires resource attributes that identify the source container so it can look up and attach infrastructure tags. See [Infrastructure tags are missing from telemetry][10] for supported attributes and troubleshooting steps.
 
 The rest of the configuration depends on whether the DDOT Collector runs on a host.
 
