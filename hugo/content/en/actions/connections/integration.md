@@ -3,6 +3,7 @@ title: Integration Connections
 description: Use credentials from existing Datadog integrations to authenticate actions in workflows and apps.
 aliases:
 - /actions/connections/aws_integration/
+- /actions/connections/integration_connections/
 disable_toc: false
 further_reading:
 - link: "/actions/connections/"
