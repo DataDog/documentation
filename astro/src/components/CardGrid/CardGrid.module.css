@@ -1,0 +1,9 @@
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--card-min-width), 1fr)
+  );
+  gap: var(--space-md);
+  margin-block: var(--space-md);
+}
