@@ -117,6 +117,14 @@ test.describe("CardGrid visual snapshots", () => {
     // this page it renders above the grid's own top edge. A screenshot scoped
     // to `grid` would clip it entirely, so the region is expanded to the
     // union of the grid's box and the open tooltip's box.
+    //
+    // That union also catches the bottom sliver of the section heading above
+    // the grid, which is deliberate: tightening the region to exclude the
+    // heading risks clipping the bubble itself under font or viewport
+    // variance, which would leave this snapshot silently capturing no tooltip.
+    // So editing the heading text on the fixture page is an expected, harmless
+    // cause of a diff here — re-baseline it rather than reading it as a
+    // component regression.
     const gridBox = await grid.boundingBox();
     const tooltipBox = await tooltip.boundingBox();
     if (!gridBox || !tooltipBox) {
