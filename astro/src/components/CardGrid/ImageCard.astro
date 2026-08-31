@@ -1,5 +1,46 @@
 ---
-const { id, href } = Astro.props;
+import styles from "./ImageCard.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { buildImageUrl } from "@lib/images/buildImageUrl";
+import { DEFAULT_IMAGE_WIDTH, type ImageCardProps } from "./cardGridTypes";
+
+type Props = ImageCardProps;
+
+const cl = classListFactory(styles);
+
+const { id, href, src, alt = "", title, subtitle, tooltip, image_width } =
+  Astro.props;
+
+const imageWidth = image_width ?? DEFAULT_IMAGE_WIDTH;
+const image = src ? buildImageUrl(src) : null;
+
+// Hugo renders a titled image card's title as a paragraph and a title-only
+// card's as an h5 (image-card.html:15). Preserved so the visual weight of a
+// text-only grid matches the Hugo site.
+const TitleElement = src ? "p" : "h5";
 ---
 
-<a id={id} href={href}></a>
+<a
+  id={id}
+  class={cl("image-card", title && "image-card--has-title")}
+  href={href}
+  aria-label={tooltip}
+>
+  <div class={cl("image-card__body")}>
+    {
+      image && (
+        <picture>
+          <img
+            class={cl("image-card__image")}
+            srcset={image.srcset}
+            width={imageWidth}
+            loading="lazy"
+            alt={alt}
+          />
+        </picture>
+      )
+    }
+    {title && <TitleElement class={cl("image-card__title")}>{title}</TitleElement>}
+    {subtitle && <small class={cl("image-card__subtitle")}>{subtitle}</small>}
+  </div>
+</a>
