@@ -148,6 +148,13 @@ You can use Terraform resources to create and deploy a pipeline.
 
 Define a pipeline using the [datadog_observability_pipeline][9] resource. Maintain this file in your version control system to track changes.
 
+Set the following environment variables before you run Terraform, so that credentials aren't stored in your configuration file:
+```shell
+export DD_API_KEY=<DD_API_KEY>
+export DD_APP_KEY=<DD_APP_KEY>
+export DD_HOST={{< region-param key="dd_api" code="true" >}}
+```
+
 Example Terraform pipeline configuration:
 
 ```hcl
@@ -155,14 +162,12 @@ terraform {
   required_providers {
     datadog = {
       source = "DataDog/datadog"
+      version = "~> 3.84"
     }
   }
 }
 
-provider "datadog" {
-  api_key = var.<DD_API_KEY>
-  app_key = var.<DD_APP_KEY>
-}
+provider "datadog" {}
 
 resource "datadog_observability_pipeline" "main" {
   name = "Main Observability Pipeline"
@@ -198,6 +203,8 @@ resource "datadog_observability_pipeline" "main" {
   }
 }
 ```
+
+Replace `service:my-service` with a search query that matches the logs you want the pipeline to process.
 
 ### Deploy a pipeline with Terraform
 
