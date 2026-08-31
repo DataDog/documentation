@@ -222,9 +222,8 @@ If a change does not reduce saturation or the frequency of new rotation warnings
 
 ## Contact Datadog Support
 
-If the steps on this page do not resolve the issue, [contact Datadog Support][9]. Take [a flare][2] while the pipeline is saturated and before restarting the Agent.
+If the steps on this page do not resolve the issue, [contact Datadog Support][9]. Submit [a flare][2] while the pipeline is saturated and before restarting the Agent.
 
-Include the affected file paths, warning timestamps and byte counts, saturated components, Agent version, active logs configuration, and changes already tested.
 
 ## Further reading
 
