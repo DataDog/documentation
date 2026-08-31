@@ -116,7 +116,7 @@ DDOT automatically binds the OpenTelemetry Collector to ports 4317 (grpc) and 43
 
 <div class="alert alert-warning">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
 
-For a complete list of available options, refer to the fully commented reference file at `/etc/datadog-agent/datadog.yaml.example` or the sample [`config_template.yaml`][12] file.
+For a complete list of available options, see the fully commented reference file at `/etc/datadog-agent/datadog.yaml.example`.
 
 When enabling additional Datadog features, always use the Datadog or OpenTelemetry Collector configuration files instead of relying on Datadog environment variables.
 
@@ -336,5 +336,4 @@ View metrics from the DDOT Collector to monitor the Collector health.
 [9]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/src/main/java/com/otel/service/CalendarService.java#L27-L48
 [10]: /opentelemetry/correlate/
 [11]: /opentelemetry/integrations/collector_health_metrics/
-[12]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
 [13]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/run-otel-local.sh

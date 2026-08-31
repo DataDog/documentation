@@ -1,5 +1,6 @@
 ---
 title: Datadog Agent Source
+description: Learn how to collect logs, metrics, or traces from the Datadog Agent using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs
@@ -20,7 +21,9 @@ further_reading:
 
 Use Observability Pipelines' Datadog Agent source to receive logs or metrics from the Datadog Agent.
 
-**Note**: If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector to collect logs or metrics, you must [use the OpenTelemetry source to send that data to Observability Pipelines][4].
+**Notes**:
+- If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector to collect logs or metrics, you must [use the OpenTelemetry source to send that data to Observability Pipelines][4].
+- The Datadog Agent sends logs and metrics tagged with `ddsource` and `ddtags`, not `source` and `tags`. When you define processor queries or filters for these events, use `ddsource` and `ddtags` instead.
 
 ## Prerequisites
 
@@ -71,13 +74,13 @@ Use the Agent configuration file or the Agent Helm chart values file to connect 
 
 **Note**: If your Agent is running in a Docker container, you must exclude Observability Pipelines logs using the `DD_CONTAINER_EXCLUDE_LOGS` environment variable. For Helm, use `datadog.containerExcludeLogs`. This prevents duplicate logs, as the Worker also sends its own logs directly to Datadog. See [Docker Log Collection][1] or [Setting environment variables for Helm][2] for more information.
 
-{{% collapse-content title="Agent configuration file" level="h4" expanded=false id="logs-agent-config-file" %}}
+{{% collapse-content title="Agent configuration file" level="h3" expanded=false id="logs-agent-config-file" %}}
 
 {{% observability_pipelines/log_source_configuration/datadog_agent %}}
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Agent Helm values file" level="h4" expanded=false id="logs-agent-helm-values-file" %}}
+{{% collapse-content title="Agent Helm values file" level="h3" expanded=false id="logs-agent-helm-values-file" %}}
 
 {{% observability_pipelines/log_source_configuration/datadog_agent_kubernetes %}}
 
@@ -94,7 +97,7 @@ Use the Agent configuration file or the Agent Helm chart values file to connect 
 
 **Note**: If your Agent is running in a Docker container, you must exclude Observability Pipelines metrics, such as utilization and events in/out metrics, using the `DD_CONTAINER_EXCLUDE_METRICS` environment variable. For Helm, use `datadog.containerExcludeMetrics`. This prevents duplicate metrics, as the Worker also sends its own metrics directly to Datadog. See [Docker Metrics Collection][1] or [Setting environment variables for Helm][2] for more information.
 
-{{% collapse-content title="Agent configuration file" level="h4" expanded=false id="metrics-agent-config-file" %}}
+{{% collapse-content title="Agent configuration file" level="h3" expanded=false id="metrics-agent-config-file" %}}
 
 To send Datadog Agent metrics to the Observability Pipelines Worker, update your [Agent configuration file][1] with the following:
 
@@ -112,14 +115,14 @@ observability_pipelines_worker:
 
 **Note**: If the Worker is listening for logs on port 8282, you must use another port for metrics, such as 8383.
 
-After you [restart the Agent][2], your observability data should be going to the Worker, processed by the pipeline, and delivered to Datadog.
+After you [restart the Agent][2], your observability data is sent to the Worker, processed by the pipeline, and delivered to Datadog.
 
-[1]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[1]: /agent/configuration/agent-configuration-files/
 [2]: /agent/configuration/agent-commands/#restart-the-agent
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Agent Helm values file" level="h4" expanded=false id="metrics-agent-helm-values-file" %}}
+{{% collapse-content title="Agent Helm values file" level="h3" expanded=false id="metrics-agent-helm-values-file" %}}
 
 To send Datadog Agent metrics to the Observability Pipelines Worker, update your Datadog Helm chart [datadog-values.yaml][1] with the following environment variables. See [Agent Environment Variables][2] for more information.
 
