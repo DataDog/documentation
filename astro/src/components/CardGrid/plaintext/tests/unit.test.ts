@@ -47,10 +47,11 @@ describe("cardGridNode", () => {
   });
 
   it("ignores a trailing slash when taking the final path segment", () => {
-    const withSlash = renderCards([{ href: "/a/b/c/" }]);
-    const withoutSlash = renderCards([{ href: "/a/b/c" }]);
-
-    expect(withSlash).toBe(withoutSlash);
+    // Compare the derived link text, not the whole line: hrefs are emitted
+    // exactly as authored (normalization belongs to the site-wide link
+    // rewriting), so the two outputs legitimately differ in the href itself.
+    expect(renderCards([{ href: "/a/b/c/" }])).toBe("- [c](/a/b/c/)\n");
+    expect(renderCards([{ href: "/a/b/c" }])).toBe("- [c](/a/b/c)\n");
   });
 
   it("appends a subtitle after the title", () => {
