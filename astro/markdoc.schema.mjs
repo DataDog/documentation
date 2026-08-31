@@ -206,7 +206,12 @@ export default {
 
         for (const card of cards) {
           const { src, title } = card.attributes;
-          if (src == null && title == null) {
+          // Trimmed truthiness, not a null check: `src=""` is present but
+          // carries no content, and would otherwise render an empty
+          // clickable box — the very thing this error guards against.
+          const hasSrc = typeof src === "string" && src.trim() !== "";
+          const hasTitle = typeof title === "string" && title.trim() !== "";
+          if (!hasSrc && !hasTitle) {
             errors.push({
               id: "image-card-no-content",
               level: "error",

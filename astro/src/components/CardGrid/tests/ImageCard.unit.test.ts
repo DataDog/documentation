@@ -13,7 +13,10 @@ describe("ImageCard component", () => {
   it("renders an anchor to the card href", async () => {
     const html = await renderCard({ href: "/integrations/aws/", title: "AWS" });
 
-    expect(html).toContain("image-card");
+    // Match the block class as a whole word: a bare substring check also
+    // matches `image-card__body`, so it would pass even if the block class
+    // every browser selector depends on were dropped.
+    expect(html).toMatch(/class="[^"]*\bimage-card\b[^"]*"/);
     expect(html).toContain('href="/integrations/aws/"');
   });
 
@@ -110,6 +113,21 @@ describe("ImageCard component", () => {
     const html = await renderCard({ href: "/a/", src: "logos/a.svg" });
 
     expect(html).not.toContain("aria-label");
+  });
+
+  it("keeps the visible title as the accessible name when both are set", async () => {
+    // WCAG 2.5.3 (Label in Name): an aria-label overrides the visible text as
+    // the accessible name, so a titled card labelled with its tooltip becomes
+    // unreachable by its visible name for screen-reader and voice-control
+    // users. Hugo's `title` attribute was advisory and never did this.
+    const html = await renderCard({
+      href: "/a/",
+      title: "Visible Title",
+      tooltip: "Different tooltip",
+    });
+
+    expect(html).not.toContain("aria-label");
+    expect(html).toContain("Visible Title");
   });
 
   it("does not emit Bootstrap tooltip data attributes", async () => {

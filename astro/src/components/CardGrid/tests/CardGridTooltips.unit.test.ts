@@ -70,8 +70,14 @@ function mountTooltips() {
 describe("CardGridTooltips", () => {
   it("marks the bubble as hydrated once its listeners are attached", async () => {
     // The island is client:idle, so a hover before this flag appears finds no
-    // listener and is silently dropped. Browser tests gate on the attribute to
-    // avoid that race, which only works if it tracks real listener readiness.
+    // listener and is silently dropped; browser tests gate on the attribute to
+    // avoid that race.
+    //
+    // This asserts only that the attribute is emitted. It does NOT prove the
+    // flag is set after the listeners attach: a state update anywhere in the
+    // effect lands on the next render either way, so moving it earlier still
+    // passes this test. The ordering guarantee is enforced by the browser
+    // test, which hovers for real.
     const { bubble } = mountTooltips();
     await flush();
 

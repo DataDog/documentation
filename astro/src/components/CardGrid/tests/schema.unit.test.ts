@@ -70,6 +70,17 @@ describe("card-grid validation", () => {
     expect(ids).toContain("image-card-no-content");
   });
 
+  it("rejects a card whose src and title are empty strings", () => {
+    // An empty attribute is present but carries no content, so a null check
+    // alone lets it through and the card renders as an empty clickable box —
+    // exactly what this error exists to prevent.
+    const ids = errorIds(
+      `{% card-grid %}\n{% image-card href="/a/" src="" title="" /%}\n{% /card-grid %}`,
+    );
+
+    expect(ids).toContain("image-card-no-content");
+  });
+
   it("accepts a card with src but no title", () => {
     const ids = errorIds(
       `{% card-grid %}\n{% image-card href="/a/" src="logos/aws.svg" /%}\n{% /card-grid %}`,
