@@ -24,6 +24,20 @@ function cardAttributes(source: string) {
 }
 
 describe("card-grid transform", () => {
+  it("renders cards that Markdoc grouped into a paragraph", () => {
+    // Two self-closing tags on one line are inline siblings, so Markdoc wraps
+    // them in a paragraph instead of making them direct children of the grid.
+    // The validator already walks into paragraphs and accepts these, so a
+    // transform that only reads direct children would silently drop both
+    // cards and emit an empty grid with no error.
+    const cards = cardAttributes(
+      `{% card-grid %}\n{% image-card href="/a/" title="A" /%} {% image-card href="/b/" title="B" /%}\n{% /card-grid %}`,
+    );
+
+    expect(cards).toHaveLength(2);
+    expect(cards.map((card) => card.title)).toEqual(["A", "B"]);
+  });
+
   it("passes card_width through to the grid", () => {
     const grid = transformGrid(
       `{% card-grid card_width=225 %}\n{% image-card href="/a/" title="A" /%}\n{% /card-grid %}`,

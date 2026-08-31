@@ -7,6 +7,32 @@ import {
 import schema from "./markdoc.schema.mjs";
 import { generateElementId } from "./src/lib/componentUtils/generateElementId.ts";
 
+/**
+ * Yield a tag's children, replacing any paragraph with the nodes inside it.
+ *
+ * Markdoc only makes a tag a direct child when it sits alone on its line.
+ * Two self-closing tags on one line are inline siblings, so Markdoc wraps
+ * them in a paragraph. A transform reading `node.children` directly would
+ * not see them and would silently render nothing, so container tags that
+ * only accept tag children walk through paragraphs instead.
+ *
+ * This works on AST nodes, before `transformChildren`, so callers can still
+ * read raw attributes off each child (`card-grid` needs that for its
+ * `image_width` inheritance).
+ */
+function* childrenUnwrappingParagraphs(node) {
+  for (const child of node.children) {
+    if (child.type === "paragraph") {
+      yield* childrenUnwrappingParagraphs(child);
+    } else if (child.type === "inline") {
+      // Paragraphs hold their content in an `inline` wrapper node.
+      yield* childrenUnwrappingParagraphs(child);
+    } else {
+      yield child;
+    }
+  }
+}
+
 export default defineMarkdocConfig({
   // Custom Markdoc functions for cdocs conditionals. Markdoc's built-in
   // functions (equals, and, or, not) and the built-in `if`/`else`/`partial`
@@ -191,7 +217,7 @@ export default defineMarkdocConfig({
         const tooltipCardIds = [];
         const tooltipLabelsByCardId = {};
 
-        for (const child of node.children) {
+        for (const child of childrenUnwrappingParagraphs(node)) {
           if (child.type !== "tag" || child.tag !== "image-card") continue;
 
           const cardId = `${gridId}-card-${cards.length}`;

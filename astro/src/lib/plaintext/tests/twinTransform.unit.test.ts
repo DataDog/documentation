@@ -8,6 +8,34 @@ describe("renderMdocWithTwins", () => {
     expect(out).toContain("A paragraph.");
   });
 
+  it("renders a card grid as a flat link list", () => {
+    const source = [
+      "{% card-grid %}",
+      '{% image-card href="/a/" title="A" /%}',
+      '{% image-card href="/b/" title="B" /%}',
+      "{% /card-grid %}",
+    ].join("\n");
+    const out = renderMdocWithTwins(source);
+
+    expect(out).toContain("- [A](/a/)");
+    expect(out).toContain("- [B](/b/)");
+  });
+
+  it("renders card-grid cards that Markdoc grouped into a paragraph", () => {
+    // Two self-closing tags on one line become inline siblings inside a
+    // paragraph rather than direct children of the grid. Reading only direct
+    // children would emit an empty list and silently lose both cards.
+    const source = [
+      "{% card-grid %}",
+      '{% image-card href="/a/" title="A" /%} {% image-card href="/b/" title="B" /%}',
+      "{% /card-grid %}",
+    ].join("\n");
+    const out = renderMdocWithTwins(source);
+
+    expect(out).toContain("- [A](/a/)");
+    expect(out).toContain("- [B](/b/)");
+  });
+
   it("renders collapse-content as a heading, not tag markup", () => {
     const source = [
       '{% collapse-content title="Section" %}',
