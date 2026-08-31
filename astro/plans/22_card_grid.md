@@ -192,7 +192,7 @@ Emits a flat unordered list, one item per card, each a single link — matching 
 
 Only `href`, title, and subtitle survive; `src`, `alt`, `image_width`, and `tooltip` are dropped entirely.
 
-Display text, in priority order (`cardGridLink.ts:93-115`):
+Display text, in priority order (from `html-to-mdoc` in the corp-node-packages repo: `packages/html-to-mdoc/src/elementProcessing/processors/utils/cardGridLink.ts`, `buildCardGridDisplayText`):
 
 1. `title`
 2. else the href's `tab` query param — the "same path, different tab" case. Without this, every card in the `mcp_server` grid collapses to `setup`, since they share a pathname.
