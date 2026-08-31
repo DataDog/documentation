@@ -90,7 +90,7 @@ Because your AI client controls what it sends to its model provider, limiting wh
 
 - [Role-based access control (RBAC)][38] to grant permissions by role.
 - [Data Access Control][39] to restrict which users can read sensitive data, such as logs or APM spans.
-- [Log Restriction Queries][40] to limit a role's log access to the subset of logs matching a query.
+- [Log restriction queries][40] to limit a role's log access to the subset of logs matching a query.
 
 Write operations require the corresponding permission, such as `monitors_write`, and the MCP Server checks it on each tool call. A read-only user's call to a write-enabled tool is rejected.
 
