@@ -30747,11 +30747,11 @@ components:
           readOnly: true
           type: integer
         tags:
-          description: List of team names representing ownership of a dashboard.
+          description: Tags associated with the dashboard. Supports up to five team tags and two AI tags.
           items:
-            description: The name of a Datadog team, formatted as `team:<name>`
+            description: A tag of the form `team:<name>` or `ai:<value>`.
             type: string
-          maxItems: 5
+          maxItems: 7
           nullable: true
           readOnly: true
           type: array
