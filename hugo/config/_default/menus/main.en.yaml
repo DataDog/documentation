@@ -3116,7 +3116,7 @@ menu:
       parent: actions_connections
       identifier: actions_http
       weight: 101
-    - name: AWS Integration
+    - name: Integration Connections
       url: actions/connections/aws_integration/
       parent: actions_connections
       identifier: actions_aws_integration
