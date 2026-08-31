@@ -50,6 +50,14 @@ After generating a postmortem:
 - **Datadog Notebooks**: The postmortem embeds directly in the **Post-Incident** tab.
 - **Confluence or Google Drive**: A link appears in the **Post-Incident** tab. Click the link to open the document in the configured destination.
 
+### Generate a postmortem with Workflow Automation
+
+You can also generate a postmortem from a [workflow][5] using the **Generate postmortem** action. The action takes an incident and a postmortem template, and attaches the resulting postmortem to that incident. Use this path to create postmortems as part of an automated post-incident process, such as after an incident moves to resolved.
+
+<div class="alert alert-warning">The AI-generated variables available to postmortem templates, such as <code>{{incident.ai_summary}}</code>, populate only for postmortems generated from the <strong>Post-Incident</strong> tab. A postmortem generated through the <strong>Generate postmortem</strong> workflow action renders these variables empty. To include AI-generated content, generate the postmortem from the <strong>Post-Incident</strong> tab.</div>
+
+For the full list of variables available to postmortem templates, see [Templates][4] and [Incident variables][6].
+
 ## View and edit a postmortem
 
 Postmortems generated as Datadog Notebooks embed directly in the **Post-Incident** tab. You can read and edit the postmortem without leaving the incident view. Changes made in the embedded view are reflected in the underlying notebook.
@@ -97,3 +105,5 @@ To remove a postmortem from an incident, open the **Post-Incident** tab, find th
 [2]: /integrations/confluence/
 [3]: /integrations/google_drive/
 [4]: /incident_response/incident_management/setup_and_configuration/templates
+[5]: /actions/workflows/
+[6]: /incident_response/incident_management/setup_and_configuration/variables/#postmortem-templates
