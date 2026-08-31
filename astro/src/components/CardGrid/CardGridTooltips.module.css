@@ -1,0 +1,20 @@
+.card-grid__tooltip {
+  position: absolute;
+  z-index: 1;
+  transform: translate(-50%, -100%);
+  margin-top: calc(-1 * var(--space-xs));
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--border-radius);
+  background: var(--color-tooltip-bg);
+  color: var(--color-tooltip-text);
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.card-grid__tooltip--visible {
+  opacity: 1;
+  visibility: visible;
+}
