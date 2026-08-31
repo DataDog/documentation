@@ -26,6 +26,10 @@ import {
   type StepInput,
 } from "@components/Stepper/plaintext/Stepper";
 import { imgNode } from "@components/Img/plaintext/Img";
+import {
+  cardGridNode,
+  type PlaintextCard,
+} from "@components/CardGrid/plaintext/CardGrid";
 import { IMAGES_URL } from "@config/images";
 
 /**
@@ -62,6 +66,19 @@ const twinAdaptersByTag: Record<string, TwinAdapter> = {
       caption: attr(node, "caption") as string | undefined,
       video: attr(node, "video") as boolean | undefined,
     });
+  },
+
+  "card-grid": (node) => {
+    const cards: PlaintextCard[] = [];
+    for (const child of node.children) {
+      if (child.type !== "tag" || child.tag !== "image-card") continue;
+      cards.push({
+        href: String(attr(child, "href") ?? ""),
+        title: attr(child, "title") as string | undefined,
+        subtitle: attr(child, "subtitle") as string | undefined,
+      });
+    }
+    return cardGridNode(cards);
   },
 
   stepper: (node) => {
