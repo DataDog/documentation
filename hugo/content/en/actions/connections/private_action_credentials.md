@@ -4,6 +4,7 @@ description: Configure credentials for private actions including HTTP, Jenkins, 
 aliases:
 - service_management/workflows/private_actions/private_action_credentials
 - service_management/app_builder/private_actions/private_action_credentials
+- actions/private_actions/private_action_credentials/
 disable_toc: false
 ---
 
@@ -84,7 +85,6 @@ To configure this connection, specify the endpoint URL:
 
 {{< img src="actions/private_actions/par-http-no-auth-credentials.png" alt="An HTTP connection without authentication" style="width:80%;" >}}
 
-[101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS
 {{% /tab %}}
 
 {{% tab "GitLab" %}}
