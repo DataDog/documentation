@@ -25,11 +25,29 @@ describe('translation overlays', () => {
     expect(op?.summary).toBe('すべての API キーを取得');
   });
 
-  it('returns an empty action overlay when the file is missing (v1 has no ko actions)', () => {
-    const overlay = getTranslationOverlay('v1', 'ko');
+  // `zz` is reserved for private use in ISO 3166 and is never a real content
+  // locale, so no upstream translation drop can ever add these files. Do not
+  // swap in a real locale that merely happens to lack an overlay today: this
+  // test previously used v1/ko and broke the moment translators shipped
+  // `translate_actions.ko.json`.
+  it('returns empty overlays when no file exists for the locale', () => {
+    const overlay = getTranslationOverlay('v1', 'zz');
     expect(Object.keys(overlay.actions).length).toBe(0);
-    // The ko tags file does exist for v1, so tags should still be populated.
-    expect(Object.keys(overlay.tags).length).toBeGreaterThan(0);
+    expect(Object.keys(overlay.tags).length).toBe(0);
+  });
+
+  it('populates tags independently of actions, so one missing file does not blank the other', () => {
+    // Guards the per-file resolution in getTranslationOverlay: `tags` and
+    // `actions` are matched in separate loops, so a locale with only one of
+    // the two files must still return the file it has.
+    const tagsOnly = {
+      tags: { 'aws-integration': { name: 'Translated' } },
+      actions: {},
+    };
+    expect(translateTag(tagsOnly, 'aws-integration', { name: 'Spec' }).name).toBe(
+      'Translated',
+    );
+    expect(translateAction(tagsOnly, 'ListAPIKeys')).toEqual({});
   });
 
   it('translateTag falls back to the spec values when the slug is missing', () => {
