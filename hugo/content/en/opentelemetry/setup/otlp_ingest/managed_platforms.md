@@ -121,4 +121,3 @@ Sampling controls available in the Collector (tail-based sampling, probabilistic
 [16]: https://docs.retool.com/apps/guides/observability/performance-monitoring
 [17]: https://www.rwx.com/docs/observability/datadog
 [18]: https://vercel.com/marketplace/datadog
-
