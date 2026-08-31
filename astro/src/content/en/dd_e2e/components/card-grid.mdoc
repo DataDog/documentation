@@ -30,19 +30,19 @@ type: static
 
 ## Cards inheriting image_width from card-grid
 
-{% card-grid image_width="100" %}
+{% card-grid image_width=100 %}
 {% image-card href="/integrations/gcp/" src="logos/google-cloud-platform.svg" alt="GCP" /%}
 {% image-card href="/integrations/azure/" src="logos/azure.svg" alt="Azure" /%}
 {% /card-grid %}
 
 ## Card overriding image_width
 
-{% card-grid image_width="100" %}
-{% image-card href="/integrations/datadog/" src="logos/dd_logo_n_70x75.png" alt="Datadog" image_width="200" /%}
+{% card-grid image_width=100 %}
+{% image-card href="/integrations/datadog/" src="logos/dd_logo_n_70x75.png" alt="Datadog" image_width=200 /%}
 {% /card-grid %}
 
 ## Custom card_width
 
-{% card-grid card_width="225" %}
+{% card-grid card_width=225 %}
 {% image-card href="/integrations/aws/" src="logos/aws.svg" alt="AWS" /%}
 {% /card-grid %}
