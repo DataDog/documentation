@@ -2714,16 +2714,21 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_property_fields
       weight: 202
+    - name: Transition Forms
+      url: incident_response/incident_management/setup_and_configuration/transition_forms
+      parent: incidents_settings
+      identifier: incidents_settings_transition_forms
+      weight: 203
     - name: Responder Types
       url: incident_response/incident_management/setup_and_configuration/responder_types
       parent: incidents_settings
       identifier: incidents_settings_responder_types
-      weight: 203
+      weight: 204
     - name: Automations
       url: incident_response/incident_management/setup_and_configuration/automations
       parent: incidents_settings
       identifier: incidents_settings_automations
-      weight: 204
+      weight: 205
     - name: Notification Rules
       url: incident_response/incident_management/setup_and_configuration/notification_rules
       parent: incidents_settings
@@ -4783,6 +4788,11 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_error_grouping
       weight: 1303
+    - name: Stack Traces
+      url: tracing/error_tracking/stack_traces
+      parent: tracing_error_tracking
+      identifier: tracing_error_tracking_stack_traces
+      weight: 1304
     - name: Monitors
       url: tracing/error_tracking/monitors
       parent: tracing_error_tracking
@@ -8077,7 +8087,7 @@ menu:
       url: /security/code_security/secret_scanning/generic_ci_providers/
       parent: sec_secret_scanning
       weight: 2
-    - name: Rule Configuration
+    - name: Configuration
       identifier: sec_secret_scanning_configuration
       url: /security/code_security/secret_scanning/configuration/
       parent: sec_secret_scanning
