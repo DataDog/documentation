@@ -56,11 +56,17 @@ describe("MobileNav.astro", () => {
     const doc = await renderMobileNav();
     const icons = doc.querySelectorAll(".mobile-nav__quicknav img");
     expect(icons.length).toBe(3);
+    // Icons are now fingerprinted Vite assets (src/assets/images/nav-icons),
+    // not root-absolute public/ paths, so a preview build under a branch
+    // prefix doesn't 404 on them (Finding 5). Assert on the source file each
+    // src resolves to, not an exact hashed URL.
     const srcs = [...icons].map((img) => img.getAttribute("src"));
-    expect(srcs).toEqual([
-      "/images/icons/nav_home.png",
-      "/images/icons/nav_docs.png",
-      "/images/icons/nav_mobile_api.png",
+    expect(srcs.map((src) => src?.includes("nav_home"))).toEqual([true, false, false]);
+    expect(srcs.map((src) => src?.includes("nav_docs"))).toEqual([false, true, false]);
+    expect(srcs.map((src) => src?.includes("nav_mobile_api"))).toEqual([
+      false,
+      false,
+      true,
     ]);
   });
 

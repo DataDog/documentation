@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import {
   LOCALES,
   DEFAULT_LOCALE,
@@ -10,6 +10,15 @@ import {
 } from './locale';
 
 const NON_DEFAULT = LOCALES.filter((l) => l !== DEFAULT_LOCALE);
+
+const ORIGINAL_ENV = { ...process.env };
+
+function resetEnv() {
+  for (const key of Object.keys(process.env)) {
+    delete process.env[key];
+  }
+  Object.assign(process.env, ORIGINAL_ENV);
+}
 
 describe('locale helpers', () => {
   describe('isLocale', () => {
@@ -51,6 +60,9 @@ describe('locale helpers', () => {
   });
 
   describe('localePrefix', () => {
+    beforeEach(resetEnv);
+    afterEach(resetEnv);
+
     it('returns empty string for the default locale', () => {
       expect(localePrefix(DEFAULT_LOCALE)).toBe('');
     });
@@ -60,10 +72,23 @@ describe('locale helpers', () => {
         expect(localePrefix(lang)).toBe(`/${lang}`);
       }
     });
+
+    it.skipIf(NON_DEFAULT.length === 0)('is unaffected by the preview branch prefix', () => {
+      process.env.CI_ENVIRONMENT_NAME = 'preview';
+      process.env.CI_COMMIT_REF_NAME = 'devin.ford/my-cool-thing';
+      const lang = NON_DEFAULT[0];
+      // Callers that concatenate onto an origin already carrying the branch
+      // prefix (e.g. HUGO_ORIGIN) rely on this staying prefix-free.
+      expect(localePrefix(lang)).toBe(`/${lang}`);
+      expect(localePrefix(DEFAULT_LOCALE)).toBe('');
+    });
   });
 
   describe('localizedHref', () => {
-    it('leaves English paths alone', () => {
+    beforeEach(resetEnv);
+    afterEach(resetEnv);
+
+    it('leaves English paths alone outside preview', () => {
       expect(localizedHref('en', '/api/latest/dashboards/')).toBe('/api/latest/dashboards/');
     });
 
@@ -72,6 +97,26 @@ describe('locale helpers', () => {
       expect(localizedHref(lang, '/api/latest/dashboards/')).toBe(`/${lang}/api/latest/dashboards/`);
       expect(localizedHref(lang, '/')).toBe(`/${lang}/`);
     });
+
+    it('also applies the preview branch prefix', () => {
+      process.env.CI_ENVIRONMENT_NAME = 'preview';
+      process.env.CI_COMMIT_REF_NAME = 'devin.ford/my-cool-thing';
+      expect(localizedHref('en', '/api/latest/dashboards/')).toBe(
+        '/devin.ford/my-cool-thing/api/latest/dashboards/',
+      );
+    });
+
+    it.skipIf(NON_DEFAULT.length === 0)(
+      'combines the locale and the branch prefix exactly once, locale innermost',
+      () => {
+        process.env.CI_ENVIRONMENT_NAME = 'preview';
+        process.env.CI_COMMIT_REF_NAME = 'devin.ford/my-cool-thing';
+        const lang = NON_DEFAULT[0];
+        expect(localizedHref(lang, '/api/latest/dashboards/')).toBe(
+          `/devin.ford/my-cool-thing/${lang}/api/latest/dashboards/`,
+        );
+      },
+    );
   });
 
   describe('stripLocalePrefix', () => {

@@ -1,0 +1,5 @@
+---
+import { prefixed } from "@lib/site/pathPrefix";
+export const prerender = true;
+return Astro.redirect(prefixed("/api/latest/downtimes/"));
+---

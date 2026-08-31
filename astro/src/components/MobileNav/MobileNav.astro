@@ -29,8 +29,23 @@ import {
   resolveOverviewState,
 } from "@lib/api/overviewPages";
 import { CORP_ORIGIN, HUGO_ORIGIN } from "@config/origins";
-import { localizedHref, stripLocalePrefix } from "@lib/i18n/locale";
+import { localizedHref, localePrefix, stripLocalePrefix } from "@lib/i18n/locale";
 import { i18n } from "@lib/i18n/i18n";
+
+const navIconUrlsByName = import.meta.glob<string>(
+  "../../assets/images/nav-icons/*.png",
+  { eager: true, query: "?url", import: "default" },
+);
+
+function navIconUrl(name: string): string {
+  const match = Object.entries(navIconUrlsByName).find(([path]) =>
+    path.endsWith(`/${name}.png`),
+  );
+  if (!match) {
+    throw new Error(`No nav icon found for "${name}" under src/assets/images/nav-icons`);
+  }
+  return match[1];
+}
 
 // All locale-dependent links derive from `pageLang` (read from the URL below),
 // so this component takes no props.
@@ -84,7 +99,7 @@ const activePageId = isApiContext
 // translations exist in the Hugo i18n bundle.
 const quicknav = [
   { label: i18n("home"), href: CORP_ORIGIN, icon: "nav_home", alt: "home" },
-  { label: i18n("docs") || "Docs", href: HUGO_ORIGIN + localizedHref(pageLang, "/"), icon: "nav_docs", alt: "docs" },
+  { label: i18n("docs") || "Docs", href: `${HUGO_ORIGIN}${localePrefix(pageLang)}/`, icon: "nav_docs", alt: "docs" },
   { label: i18n("api"), href: localizedHref(pageLang, "/api/latest/"), icon: "nav_mobile_api", alt: "api" },
 ];
 // TODO: replace hardcoded English with i18n() once authoritative translation
@@ -108,7 +123,7 @@ const searchLabels: SearchBarLabels = {
             <a class={cl("mobile-nav__quicknav-link")} href={item.href}>
               <img
                 class={cl("mobile-nav__quicknav-icon")}
-                src={`/images/icons/${item.icon}.png`}
+                src={navIconUrl(item.icon)}
                 width="21"
                 height="21"
                 loading="lazy"

@@ -4,6 +4,7 @@
  * Mirrors Hugo's `defaultContentLanguageInSubdir: false` URL shape: English at
  * the root (`/api/latest/...`), other locales prefixed (`/{lang}/api/latest/...`).
  */
+import { prefixed } from "../site/pathPrefix";
 
 const ALL_LOCALES = ["en", "fr", "ja", "ko", "es"] as const;
 export type Locale = (typeof ALL_LOCALES)[number];
@@ -59,12 +60,15 @@ export function localePrefix(lang: Locale): string {
 /**
  * Build a localized URL for a path that's expressed without any locale
  * prefix (e.g. `/api/latest/dashboards/`). The path must start with `/`.
+ *
+ * Also applies the preview branch prefix (a no-op outside preview), since
+ * this is the funnel every in-page Astro link goes through. Callers that
+ * concatenate onto an origin which already carries the branch prefix (e.g.
+ * `HUGO_ORIGIN`) must use `localePrefix(lang) + path` instead, or the prefix
+ * gets applied twice.
  */
 export function localizedHref(lang: Locale, path: string): string {
-  if (lang === DEFAULT_LOCALE) {
-    return path;
-  }
-  return `/${lang}${path}`;
+  return prefixed(lang === DEFAULT_LOCALE ? path : `/${lang}${path}`);
 }
 
 /**

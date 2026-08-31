@@ -5,23 +5,22 @@ import node from "@astrojs/node";
 import sitemap from "@astrojs/sitemap";
 import { visualizer } from "rollup-plugin-visualizer";
 import { fileURLToPath } from "node:url";
-import { realpathSync } from "node:fs";
 
 import { LOCALES } from "./src/lib/i18n/locale.ts";
 import { isSitemapPage } from "./src/lib/sitemap/sitemapFilter.ts";
 import {
+  branchRef,
   deriveSiteUrl,
   IS_PROXIED,
   PROXY_PORT,
 } from "./src/lib/site/siteUrl.ts";
+import { pathPrefix } from "./src/lib/site/pathPrefix.ts";
+import { resolveWebsitesModulesPath } from "./src/lib/site/websitesModulesPath.ts";
 import { pagesJson } from "./src/integrations/pagesJson.ts";
 import { llmsTxt } from "./src/integrations/llmsTxt.ts";
+import { staticApiGuard } from "./src/integrations/staticApiGuard.ts";
 
-const websitesModules = realpathSync(
-  fileURLToPath(
-    new URL("../../../../../../dd/websites-modules", import.meta.url),
-  ),
-);
+const websitesModules = resolveWebsitesModulesPath(import.meta.url);
 const hugoSite = fileURLToPath(new URL("../hugo", import.meta.url));
 const astroSite = fileURLToPath(new URL(".", import.meta.url));
 
@@ -32,7 +31,7 @@ const hugoDevPort = 1313;
 function deriveHugoDocsUrl() {
   const env = process.env.CI_ENVIRONMENT_NAME;
   if (env === "preview") {
-    return `https://docs-staging.datadoghq.com/${process.env.BRANCH}`;
+    return `https://docs-staging.datadoghq.com/${branchRef()}`;
   }
   if (env === "live") {
     return "https://docs.datadoghq.com";
@@ -61,13 +60,19 @@ export default defineConfig({
       filenameBase: "api/sitemap",
       filter: isSitemapPage,
     }),
-    // Emits dist/client/pages.json after the build by hashing each emitted .md
-    // from disk (no page body is built twice). Must come after sitemap so the
-    // sidecar is deleted only once every build:done consumer has run.
+    // Emits dist/client/api/pages.json after the build by hashing each emitted
+    // .md from disk (no page body is built twice). Must come after sitemap so
+    // the sidecar is deleted only once every build:done consumer has run.
     pagesJson(),
-    // Emits dist/client/llms.txt and every section detail file after the build,
-    // from the llms-index.json sidecar. Same reasoning as pagesJson for ordering.
+    // Emits dist/client/api/llms.txt and every section detail file after the
+    // build, from the llms-index.json sidecar. Same reasoning as pagesJson for
+    // ordering.
     llmsTxt(),
+    // Fails the build if any /api route stops being prerendered, if anything
+    // is emitted outside api/ or {fr,ja,ko,es}/api/, or if the category count
+    // collapses (spec-parsing regression). Registered last so it inspects the
+    // final output of every other integration above.
+    staticApiGuard(),
   ],
   // The dev toolbar injects its own DOM (extra <h1>s, a fixed app-bar) into the
   // dev server, which pollutes browser-test selectors and screenshots. Disabled
@@ -75,6 +80,16 @@ export default defineConfig({
   devToolbar: { enabled: false },
   build: {
     inlineStylesheets: "always",
+    // Astro's default `_astro`, deliberately. The websites deployment platform's
+    // CloudFront router hardcodes /_astro/, /images/ and /fonts/ as its S3
+    // fast-path, with matching long-cache behaviors; anything else falls through
+    // to the generic route and loses asset caching. This used to be `api/_astro`
+    // to keep the overlay out of the shared Hugo bucket's root — the app now
+    // deploys to its own bucket, so that constraint is gone.
+    // Prefixes hashed bundle URLs (and url()s in built/inlined CSS). Empty on
+    // the platform, which serves at its distribution root; site's own path
+    // carries the equivalent for canonical/absolute URLs.
+    assetsPrefix: pathPrefix() || undefined,
   },
   i18n: {
     defaultLocale: "en",
@@ -107,6 +122,7 @@ export default defineConfig({
     define: {
       __HUGO_DOCS_ORIGIN__: JSON.stringify(deriveHugoDocsUrl()),
       __CI_ENV__: JSON.stringify(process.env.CI_ENVIRONMENT_NAME ?? ""),
+      DOCS_PATH_PREFIX: JSON.stringify(pathPrefix()),
     },
     resolve: {
       alias: {

@@ -46,12 +46,25 @@ def sort_files(file_string):
     return final_array
 
 # It looks like renamed files are counted as removed/added. I'm going to leave "renamed" in for
-# now to see if this behavior is consistent. 
+# now to see if this behavior is consistent.
+deleted = sort_files(args.deleted) if args.deleted else False
+renamed = sort_files(args.renamed) if args.renamed else False
+modified = sort_files(args.modified) if args.modified else False
+added = sort_files(args.added) if args.added else False
+
+# This workflow also runs for astro/** changes, which never touch
+# hugo/content/en/**.md, so none of the four lists above would resolve to
+# anything and the posted comment would otherwise be an empty header with no
+# links. Fall back to the API docs root so an astro-only PR still gets a
+# preview link.
+no_hugo_content_changes = not (deleted or renamed or modified or added)
+
 with open('.github/preview-links-template.md', 'w') as f:
     f.write(comment_template.render(
-                deleted = sort_files(args.deleted) if args.deleted else False,
-                renamed = sort_files(args.renamed) if args.renamed else False,
-                modified = sort_files(args.modified) if args.modified else False,
-                added = sort_files(args.added) if args.added else False
+                deleted = deleted,
+                renamed = renamed,
+                modified = modified,
+                added = added,
+                fallback = no_hugo_content_changes
                 )
             )

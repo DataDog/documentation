@@ -11,6 +11,7 @@ import { getHeaderData, iconHtml } from "@lib/componentUtils/menuData.ts";
 import { generateElementId } from "@lib/componentUtils/generateElementId";
 import { i18n } from "@lib/i18n/i18n";
 import { IMAGES_URL } from "@config/images.ts";
+import { prefixed } from "@lib/site/pathPrefix";
 
 const cl = classListFactory(styles);
 
@@ -111,7 +112,7 @@ const logoPanelLabels = {
             hydrated one and throws a Preact hydration mismatch. The slot is the
             positioning context for the absolutely-positioned panel. */}
         <div class={cl("header__logo-slot")}>
-          <a href="/" id={logoTriggerId} class={cl("header__logo-column")}>
+          <a href={prefixed("/")} id={logoTriggerId} class={cl("header__logo-column")}>
             <img
               height="75"
               class={cl("header__logo-bits")}
@@ -208,7 +209,7 @@ const logoPanelLabels = {
 
       {/* Mobile row */}
       <div class={cl("header__mobile-row")}>
-        <a href="/" class={cl("header__mobile-logo-link")}>
+        <a href={prefixed("/")} class={cl("header__mobile-logo-link")}>
           <img
             src={mobileLogoUrl}
             srcset={mobileLogoSrcset}
