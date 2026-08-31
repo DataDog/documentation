@@ -1,0 +1,134 @@
+import { test, expect } from "@playwright/test";
+
+// Grid order matches the section order in
+// src/content/en/dd_e2e/components/card-grid.mdoc.
+const TOOLTIP_GRID_INDEX = 3;
+const PLAIN_GRID_INDEX = 0;
+
+test.describe("CardGrid component", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/dd_e2e/components/card-grid");
+  });
+
+  test("renders every grid on the page", async ({ page }) => {
+    await expect(page.locator(".card-grid")).toHaveCount(7);
+  });
+
+  test("shows a tooltip on hover and hides it on mouseleave", async ({
+    page,
+  }) => {
+    const grid = page.locator(".card-grid").nth(TOOLTIP_GRID_INDEX);
+    const card = grid.locator(".image-card").first();
+    const tooltip = grid.locator(".card-grid__tooltip");
+
+    await card.hover();
+    await expect(tooltip).toHaveClass(/card-grid__tooltip--visible/);
+    await expect(tooltip).toHaveText("Amazon Web Services integration");
+
+    await page.mouse.move(0, 0);
+    await expect(tooltip).not.toHaveClass(/card-grid__tooltip--visible/);
+  });
+
+  test("shows the tooltip on keyboard focus", async ({ page }) => {
+    const grid = page.locator(".card-grid").nth(TOOLTIP_GRID_INDEX);
+    const tooltip = grid.locator(".card-grid__tooltip");
+
+    await grid.locator(".image-card").first().focus();
+
+    await expect(tooltip).toHaveClass(/card-grid__tooltip--visible/);
+  });
+
+  test("hides the tooltip when Escape is pressed", async ({ page }) => {
+    const grid = page.locator(".card-grid").nth(TOOLTIP_GRID_INDEX);
+    const tooltip = grid.locator(".card-grid__tooltip");
+
+    await grid.locator(".image-card").first().hover();
+    await expect(tooltip).toHaveClass(/card-grid__tooltip--visible/);
+
+    await page.keyboard.press("Escape");
+
+    await expect(tooltip).not.toHaveClass(/card-grid__tooltip--visible/);
+  });
+
+  test("clicking a card navigates, so the tooltip does not swallow the click", async ({
+    page,
+  }) => {
+    const grid = page.locator(".card-grid").nth(TOOLTIP_GRID_INDEX);
+
+    await grid.locator(".image-card").first().click();
+
+    await expect(page).toHaveURL(/\/integrations\/aws\//);
+  });
+
+  test("hydrates no tooltip island in a grid with no tooltips", async ({
+    page,
+  }) => {
+    const grid = page.locator(".card-grid").nth(PLAIN_GRID_INDEX);
+
+    await expect(grid.locator(".card-grid__tooltip")).toHaveCount(0);
+  });
+
+  test("applies the inherited image width to every card in the grid", async ({
+    page,
+  }) => {
+    // Section 5: {% card-grid image_width=100 %} with two cards, neither
+    // setting its own width. (Unquoted numeric literal — Markdoc's Number
+    // schema type does not coerce a quoted string.)
+    const images = page.locator(".card-grid").nth(4).locator(".image-card__image");
+
+    await expect(images).toHaveCount(2);
+    await expect(images.nth(0)).toHaveAttribute("width", "100");
+    await expect(images.nth(1)).toHaveAttribute("width", "100");
+  });
+
+  test("lets a card override the grid's image width", async ({ page }) => {
+    // Section 6: grid sets 100, the single card sets 200.
+    const image = page.locator(".card-grid").nth(5).locator(".image-card__image");
+
+    await expect(image).toHaveAttribute("width", "200");
+  });
+});
+
+test.describe("CardGrid visual snapshots", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/dd_e2e/components/card-grid");
+  });
+
+  test("basic image card", async ({ page }) => {
+    await expect(page.locator(".card-grid").nth(0)).toHaveScreenshot(
+      "card-grid-basic.png",
+    );
+  });
+
+  test("titled and subtitled card", async ({ page }) => {
+    await expect(page.locator(".card-grid").nth(1)).toHaveScreenshot(
+      "card-grid-titled.png",
+    );
+  });
+
+  test("tooltip open", async ({ page }) => {
+    const grid = page.locator(".card-grid").nth(3);
+    const tooltip = grid.locator(".card-grid__tooltip");
+
+    await grid.locator(".image-card").first().hover();
+    await expect(tooltip).toHaveClass(/card-grid__tooltip--visible/);
+
+    // The bubble is positioned above its card (CardGridTooltips.tsx), so on
+    // this page it renders above the grid's own top edge. A screenshot scoped
+    // to `grid` would clip it entirely, so the region is expanded to the
+    // union of the grid's box and the open tooltip's box.
+    const gridBox = await grid.boundingBox();
+    const tooltipBox = await tooltip.boundingBox();
+    if (!gridBox || !tooltipBox) {
+      throw new Error("Expected both the grid and the open tooltip to have a layout box.");
+    }
+    const top = Math.min(gridBox.y, tooltipBox.y);
+    const left = Math.min(gridBox.x, tooltipBox.x);
+    const right = Math.max(gridBox.x + gridBox.width, tooltipBox.x + tooltipBox.width);
+    const bottom = Math.max(gridBox.y + gridBox.height, tooltipBox.y + tooltipBox.height);
+
+    await expect(page).toHaveScreenshot("card-grid-tooltip-open.png", {
+      clip: { x: left, y: top, width: right - left, height: bottom - top },
+    });
+  });
+});
