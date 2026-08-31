@@ -3117,9 +3117,9 @@ menu:
       identifier: actions_http
       weight: 101
     - name: Integration Connections
-      url: actions/connections/aws_integration/
+      url: actions/connections/integration_connections/
       parent: actions_connections
-      identifier: actions_aws_integration
+      identifier: actions_integration_connections
       weight: 102
     - name: Google Workspace
       url: actions/connections/google_workspace/
