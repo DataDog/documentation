@@ -131,7 +131,7 @@ An AWS-Lambda based serverless application being invoked 10 million times in a m
 
 APM Edge Devices is a billing option for monitoring Edge and IoT devices with APM, such as point-of-sale (POS) systems, medical devices, autonomous vehicles, and industrial systems. APM Edge Devices is the same APM product as standard APM billing, with a billing model designed for Edge and IoT device fleets. For pricing, contact [Sales][8] or your [Customer Success Manager][9].
 
-APM Edge Devices requires the standard Datadog Agent. The [Datadog IoT Agent][17] does not support APM.
+APM Edge Devices requires the standard Datadog Agent version 7.75.0 or later. The [Datadog IoT Agent][17] does not support APM.
 
 To identify a device as an APM Edge Device, configure the Datadog Agent to run in APM Edge mode with one of the following methods:
 
