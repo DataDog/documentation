@@ -13,6 +13,10 @@ import {
   getLocaleDefaults,
 } from '@lib/seo';
 import { ClientRouter } from 'astro:transitions';
+import faviconUrl from '../assets/favicon.ico?url';
+import nationalWebLightWoff2 from '../assets/fonts/NationalWeb-Light.woff2?url';
+import nationalWebSemiboldWoff2 from '../assets/fonts/NationalWeb-Semibold.woff2?url';
+import robotoMonoRegularWoff from '../assets/fonts/RobotoMono-Regular.woff?url';
 
 interface Props {
   title: string;
@@ -74,7 +78,7 @@ const hreflangResolved = hreflang?.map((h) => ({
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/png" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href={faviconUrl} />
     <title>{title}</title>
 
     <meta name="description" content={description} />
@@ -107,9 +111,9 @@ const hreflangResolved = hreflang?.map((h) => ({
       <link rel="alternate" hreflang={h.hreflang} href={h.href} />
     ))}
 
-    <link rel="preload" href="/fonts/NationalWeb-Light.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/NationalWeb-Semibold.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/RobotoMono-Regular.woff" as="font" type="font/woff" crossorigin />
+    <link rel="preload" href={nationalWebLightWoff2} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={nationalWebSemiboldWoff2} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={robotoMonoRegularWoff} as="font" type="font/woff" crossorigin />
     <script is:inline>
       (function () {
         // Resolve the active Datadog region before first paint so region-scoped

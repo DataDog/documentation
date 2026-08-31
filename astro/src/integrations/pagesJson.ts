@@ -1,14 +1,14 @@
 import type { AstroConfig, AstroIntegration } from "astro";
-import { readFile, writeFile, rm } from "node:fs/promises";
+import { mkdir, readFile, writeFile, rm } from "node:fs/promises";
 import { buildListingFromIndex } from "../lib/pagesListing/buildListingFromIndex";
 import type { PageIndexEntry } from "../lib/pagesListing/types";
 
 const SIDECAR = "pages-index.json";
-const OUTPUT = "pages.json";
+const OUTPUT = "api/pages.json";
 
 /**
- * Emits `dist/client/pages.json` after the build, hashing each page's plaintext
- * straight from disk instead of rebuilding it.
+ * Emits `dist/client/api/pages.json` after the build, hashing each page's
+ * plaintext straight from disk instead of rebuilding it.
  *
  * The `.md` routes materialize every body exactly once during the static build.
  * The `pages-index.json` route emits a cheap metadata sidecar (no bodies). This
@@ -44,8 +44,10 @@ export function pagesJson(): AstroIntegration {
           readFile(new URL(file, clientDir), "utf8"),
         );
 
+        const outputUrl = new URL(OUTPUT, clientDir);
+        await mkdir(new URL(".", outputUrl), { recursive: true });
         await writeFile(
-          new URL(OUTPUT, clientDir),
+          outputUrl,
           JSON.stringify(listing, null, 2),
           "utf8",
         );

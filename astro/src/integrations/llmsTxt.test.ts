@@ -71,7 +71,7 @@ afterEach(async () => {
 describe("llmsTxt integration", () => {
   it("writes the top-level llms.txt index", async () => {
     await runBuild(SITE);
-    const index = await readOutput("llms.txt");
+    const index = await readOutput("api/llms.txt");
     expect(index.startsWith("# Datadog documentation\n")).toBe(true);
     expect(index).toContain("## API Reference");
     expect(index).toContain(
