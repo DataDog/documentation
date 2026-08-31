@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import styles from "./CardGridTooltips.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import {
@@ -25,7 +25,6 @@ export default function CardGridTooltips({
   tooltipLabelsByCardId,
 }: Props) {
   const [tooltip, setTooltip] = useState<TooltipState | null>(null);
-  const bubbleRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const loaded = loadExternalContext(externalContext);
@@ -82,7 +81,6 @@ export default function CardGridTooltips({
   // tooltip semantics without also removing the aria-label.
   return (
     <div
-      ref={bubbleRef}
       class={cl("card-grid__tooltip", tooltip && "card-grid__tooltip--visible")}
       aria-hidden="true"
       style={
