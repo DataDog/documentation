@@ -1,5 +1,10 @@
 .card-grid__tooltip {
-  position: absolute;
+  /* Fixed, not absolute: the coordinates below come straight from
+     getBoundingClientRect, which is viewport-relative. `absolute` would
+     resolve them against the nearest positioned ancestor instead, and grids
+     often sit inside one (`.tabs` and `.stepper__step` are both
+     `position: relative`), which threw the bubble thousands of pixels off. */
+  position: fixed;
   z-index: 1;
   transform: translate(-50%, -100%);
   margin-top: calc(-1 * var(--space-xs));

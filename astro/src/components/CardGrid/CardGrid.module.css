@@ -2,7 +2,10 @@
   display: grid;
   grid-template-columns: repeat(
     auto-fill,
-    minmax(var(--card-min-width), 1fr)
+    /* Fallback matches the schema's card_width default. Without it, a missing
+       inline style would invalidate the whole declaration and collapse the
+       grid to a single column. */
+    minmax(var(--card-min-width, 150px), 1fr)
   );
   gap: var(--space-md);
   margin-block: var(--space-md);

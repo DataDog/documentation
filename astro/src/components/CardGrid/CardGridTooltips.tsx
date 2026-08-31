@@ -43,8 +43,8 @@ export default function CardGridTooltips({
       const rect = card.getBoundingClientRect();
       setTooltip({
         label,
-        top: rect.top + window.scrollY,
-        left: rect.left + window.scrollX + rect.width / 2,
+        top: rect.top,
+        left: rect.left + rect.width / 2,
       });
     };
 
@@ -83,11 +83,16 @@ export default function CardGridTooltips({
   // One bubble per grid, reused by every card, so only one can ever be visible.
   //
   // aria-hidden is deliberate, and so is the absence of role="tooltip" and
-  // aria-describedby. Each card anchor already carries aria-label with this
-  // exact text (ImageCard.astro), so a described-by relationship would make a
-  // screen reader announce the same string twice. The bubble is purely a
-  // visual affordance for sighted pointer users. Do not "fix" this by adding
-  // tooltip semantics without also removing the aria-label.
+  // aria-describedby. The bubble is purely a visual affordance for sighted
+  // pointer users; the text always reaches assistive tech by another route:
+  //
+  //   - untitled card: the anchor carries aria-label with this exact text
+  //     (ImageCard.astro), so describing it here would announce it twice.
+  //   - titled card: the visible title is the accessible name, and the
+  //     anchor has NO aria-label — overriding a visible name would fail
+  //     WCAG 2.5.3. The tooltip is supplementary, not the card's name.
+  //
+  // Do not add tooltip semantics here without re-checking both branches.
   return (
     <div
       class={cl("card-grid__tooltip", tooltip && "card-grid__tooltip--visible")}

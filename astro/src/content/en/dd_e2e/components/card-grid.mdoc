@@ -46,3 +46,13 @@ type: static
 {% card-grid card_width=225 %}
 {% image-card href="/integrations/aws/" src="integrations_logos/amazon_web_services.png" alt="AWS" /%}
 {% /card-grid %}
+
+## Tooltip inside a positioned ancestor
+
+{% tabs %}
+{% tab label="Inside a tab" %}
+{% card-grid %}
+{% image-card href="/integrations/aws/" src="integrations_logos/amazon_web_services.png" alt="AWS" tooltip="Tooltip inside a tab" /%}
+{% /card-grid %}
+{% /tab %}
+{% /tabs %}

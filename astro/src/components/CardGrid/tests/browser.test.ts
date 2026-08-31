@@ -27,7 +27,40 @@ test.describe("CardGrid component", () => {
   });
 
   test("renders every grid on the page", async ({ page }) => {
-    await expect(page.locator(".card-grid")).toHaveCount(7);
+    await expect(page.locator(".card-grid")).toHaveCount(8);
+  });
+
+  test("positions the tooltip over its card inside a positioned ancestor", async ({
+    page,
+  }) => {
+    // The last grid sits inside a tab pane, and `.tabs`/`.tabs__pane` are both
+    // `position: relative` (Tabs.module.css). An absolutely positioned bubble
+    // using page coordinates would resolve against that ancestor instead of
+    // the page and land far from its card, so this pins the bubble to the card
+    // rather than merely asserting that it opened.
+    const grid = page.locator(".card-grid").last();
+    const tooltip = grid.locator(".card-grid__tooltip");
+
+    await waitForTooltipHydration(grid);
+    const card = grid.locator(".image-card").first();
+    await card.scrollIntoViewIfNeeded();
+    await card.hover();
+    await expect(tooltip).toHaveClass(/card-grid__tooltip--visible/);
+
+    const cardBox = await card.boundingBox();
+    const tooltipBox = await tooltip.boundingBox();
+    if (!cardBox || !tooltipBox) {
+      throw new Error("Expected both the card and the open tooltip to have a layout box.");
+    }
+
+    // Sits just above the card, horizontally centered on it.
+    const gapAboveCard = cardBox.y - (tooltipBox.y + tooltipBox.height);
+    expect(gapAboveCard).toBeGreaterThanOrEqual(0);
+    expect(gapAboveCard).toBeLessThan(20);
+
+    const cardCenterX = cardBox.x + cardBox.width / 2;
+    const tooltipCenterX = tooltipBox.x + tooltipBox.width / 2;
+    expect(Math.abs(tooltipCenterX - cardCenterX)).toBeLessThan(2);
   });
 
   test("shows a tooltip on hover and hides it on mouseleave", async ({
