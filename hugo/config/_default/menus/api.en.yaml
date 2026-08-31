@@ -6277,6 +6277,58 @@ menu:
           - GetUsageSummaryAvailableFields
         unstable: []
         order: 13
+    - name: Update a usage quota
+      url: /api/latest/usage-metering/update-a-usage-quota/
+      identifier: usage-metering-update-a-usage-quota
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateQuota
+        unstable:
+          - v2
+        order: 16
+    - name: Delete a usage quota
+      url: /api/latest/usage-metering/delete-a-usage-quota/
+      identifier: usage-metering-delete-a-usage-quota
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteQuota
+        unstable:
+          - v2
+        order: 17
+    - name: Create or update usage quotas
+      url: /api/latest/usage-metering/create-or-update-usage-quotas/
+      identifier: usage-metering-create-or-update-usage-quotas
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateQuotas
+        unstable:
+          - v2
+        order: 15
+    - name: List usage quotas
+      url: /api/latest/usage-metering/list-usage-quotas/
+      identifier: usage-metering-list-usage-quotas
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListQuotas
+        unstable:
+          - v2
+        order: 14
     - name: Get projected cost across your account
       url: /api/latest/usage-metering/get-projected-cost-across-your-account/
       identifier: usage-metering-get-projected-cost-across-your-account

@@ -7358,6 +7358,26 @@
     "description": "Get projected cost across multi-org and single root-org accounts.\nProjected cost data is only available for the current month and becomes available around the 12th of the month.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get projected cost across your account"
   },
+  "ListQuotas": {
+    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.",
+    "summary": "List usage quotas"
+  },
+  "CreateQuotas": {
+    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated; otherwise, a new quota is created. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.",
+    "summary": "Create or update usage quotas",
+    "request_description": "The usage quotas to create or update.",
+    "request_schema_description": "A JSON:API bulk request containing an array of usage quota resources rather than a single resource."
+  },
+  "DeleteQuota": {
+    "description": "Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.",
+    "summary": "Delete a usage quota"
+  },
+  "UpdateQuota": {
+    "description": "Updates the supplied fields on a usage quota and leaves omitted fields unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.",
+    "summary": "Update a usage quota",
+    "request_description": "The usage quota fields to update. Omitting an attribute leaves its current value unchanged.",
+    "request_schema_description": "Request containing the usage quota resource to update."
+  },
   "GetUsageSummaryAvailableFields": {
     "description": "List the field names returned by `GET /api/v1/usage/summary` at each of its\nthree response levels. Each list contains every key the data endpoint\nemits—both typed fields declared in the OpenAPI spec and untyped keys\nexposed through `additionalProperties` (the latter used for billing\ndimensions and usage types added after the v1 schema freeze).\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\nGo example:\n\n```go\nfields, _, err := api.GetUsageSummaryAvailableFields(ctx)\nattr := fields.Data.GetAttributes()\n\n// resp is the *UsageSummaryResponse returned by api.GetUsageSummary(ctx, ...)\n// Layer 1: UsageSummaryResponse\nfor _, key := range attr.GetResponseFields() {\n    if val, ok := resp.AdditionalProperties[key]; ok {\n        fmt.Println(key, val.(json.Number))\n    }\n}\n// Layer 2: UsageSummaryDate (per month)\nfor _, date := range resp.GetUsage() {\n    for _, key := range attr.GetDateFields() {\n        if val, ok := date.AdditionalProperties[key]; ok {\n            fmt.Println(key, val.(json.Number))\n        }\n    }\n    // Layer 3: UsageSummaryDateOrg (per org per month)\n    for _, org := range date.GetOrgs() {\n        for _, key := range attr.GetDateOrgFields() {\n            if val, ok := org.AdditionalProperties[key]; ok {\n                fmt.Println(key, val.(json.Number))\n            }\n        }\n    }\n}\n```",
     "summary": "Get available fields for usage summary"
