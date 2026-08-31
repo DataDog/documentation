@@ -104,8 +104,7 @@ describe("resolveWebsitesModulesPath", () => {
 
   it("prefers the Hugo module cache over a partial WEBSITES_MODULES_PATH match", () => {
     // The partial-match fallback is a last resort: a complete cached module
-    // must win over an incomplete override. This is the precedence that made
-    // the partial-match test above fail when it leaked the real HUGO_CACHEDIR.
+    // must win over an incomplete override.
     seedRequiredFiles(tmpRoot);
     rmSync(join(tmpRoot, "data", "language_names.yaml"));
     process.env.WEBSITES_MODULES_PATH = tmpRoot;
