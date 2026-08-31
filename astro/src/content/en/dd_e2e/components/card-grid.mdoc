@@ -7,13 +7,13 @@ type: static
 ## Basic card (src, href, alt)
 
 {% card-grid %}
-{% image-card href="/continuous_integration/pipelines/awscodepipeline/" src="logos/aws-codepipeline_small.svg" alt="aws codepipeline" /%}
+{% image-card href="/continuous_integration/pipelines/awscodepipeline/" src="integrations_logos/aws-codepipeline_small.svg" alt="aws codepipeline" /%}
 {% /card-grid %}
 
 ## Card with title and subtitle
 
 {% card-grid %}
-{% image-card href="/integrations/datadog/" src="logos/dd_logo_n_70x75.png" alt="Datadog" title="Datadog" subtitle="The monitoring platform" /%}
+{% image-card href="/integrations/datadog/" src="dd_logo_n_70x75.png" alt="Datadog" title="Datadog" subtitle="The monitoring platform" /%}
 {% /card-grid %}
 
 ## Title-only card (no src)
@@ -25,24 +25,24 @@ type: static
 ## Card with tooltip
 
 {% card-grid %}
-{% image-card href="/integrations/aws/" src="logos/aws.svg" alt="AWS" tooltip="Amazon Web Services integration" /%}
+{% image-card href="/integrations/aws/" src="integrations_logos/amazon_web_services.png" alt="AWS" tooltip="Amazon Web Services integration" /%}
 {% /card-grid %}
 
 ## Cards inheriting image_width from card-grid
 
 {% card-grid image_width=100 %}
-{% image-card href="/integrations/gcp/" src="logos/google-cloud-platform.svg" alt="GCP" /%}
-{% image-card href="/integrations/azure/" src="logos/azure.svg" alt="Azure" /%}
+{% image-card href="/integrations/gcp/" src="integrations_logos/google_cloud_platform.png" alt="GCP" /%}
+{% image-card href="/integrations/azure/" src="integrations_logos/azure.png" alt="Azure" /%}
 {% /card-grid %}
 
 ## Card overriding image_width
 
 {% card-grid image_width=100 %}
-{% image-card href="/integrations/datadog/" src="logos/dd_logo_n_70x75.png" alt="Datadog" image_width=200 /%}
+{% image-card href="/integrations/datadog/" src="dd_logo_n_70x75.png" alt="Datadog" image_width=200 /%}
 {% /card-grid %}
 
 ## Custom card_width
 
 {% card-grid card_width=225 %}
-{% image-card href="/integrations/aws/" src="logos/aws.svg" alt="AWS" /%}
+{% image-card href="/integrations/aws/" src="integrations_logos/amazon_web_services.png" alt="AWS" /%}
 {% /card-grid %}
