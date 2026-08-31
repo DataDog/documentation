@@ -192,7 +192,7 @@ The **Optimization page** surfaces profiling data in several contexts:
 <!-- Android -->
 {% if equals($platform, "android") %}
 
-{% callout header="Preview" btn_hidden="true" %}
+{% callout header="Preview" btn_hidden=true %}
 Android Profiling is in Preview.
 {% /callout %}
 
@@ -305,7 +305,7 @@ Android profiling data is attached to operations events in a RUM session. You ca
 <!-- iOS -->
 {% if equals($platform, "ios") %}
 
-{% callout header="Preview" btn_hidden="true" %}
+{% callout header="Preview" btn_hidden=true %}
 iOS Profiling is in Preview.
 {% /callout %}
 
