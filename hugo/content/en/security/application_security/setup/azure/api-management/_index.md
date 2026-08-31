@@ -61,7 +61,9 @@ For the policy internals, see [Azure API Management policies for App and API Pro
 
 ## Deploy the callout service
 
-[Deploy to Azure][4]
+Click the button below and fill in the form in the Azure portal:
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)][4]
 
 Two parameters are required:
 
