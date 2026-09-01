@@ -59,8 +59,8 @@ The rule deprecation process is as follows:
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
     - Signal side panel's {{< ui >}}Rule Details{{< /ui >}} > {{< ui >}}Playbook{{< /ui >}} section
     - [Rule editor][3] for that specific rule
-2. After the rule is deprecated, the rule remains available for the length of your signal retention period before it is deleted. During this time, you can re-enable the rule by [cloning the rule][3] in the UI. The retention period depends on your [Cloud SIEM product][7]:
-    - Standalone: 12 months
+2. After the rule is deprecated, the rule remains available for the length of your retention period before it is deleted. During this time, you can re-enable the rule by [cloning the rule][3] in the UI. The retention period depends on your [Cloud SIEM product][7]:
+    - Standalone: 365 days (12 months)
     - Add-on with Flex Logs and Legacy: 15 months
 
     Organizations that adopted Standalone before gigabyte-based usage was introduced have a 15-month retention period.

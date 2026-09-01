@@ -12,9 +12,9 @@ Cloud SIEM is available as the following products:
 Standalone is the default product for new Cloud SIEM organizations. In Standalone:
 - Usage is measured in gigabytes of analyzed logs, rather than in millions of analyzed events.
 - Ingestion of logs indexed in the Cloud SIEM index is included in the analyzed log cost, rather than billed separately.
-- Security signals are retained for 12 months.
+- Data is retained for 365 days (12 months), rather than for 15 months.
 
-Organizations that adopted Standalone before gigabyte-based usage was introduced have a 15-month signal retention period. Both are referred to as Standalone in the documentation, because they provide the same features.
+Organizations that adopted Standalone before gigabyte-based usage was introduced have a 15-month retention period. Both are referred to as Standalone in the documentation, because they provide the same features.
 
 There are two ways to see which Cloud SIEM product your organization is using:
 - [Check the Plan & Usage page](#plan-usage)
