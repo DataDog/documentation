@@ -13,7 +13,7 @@ Customer Contracts gives a partner a single place to manage customers, contracts
 
 Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}} in the Admin Org; see [Requesting an Admin Org][2] if one isn't set up yet.
 
-{{< img src="partners/multi_tenant_billing/customer_contracts.png" alt="Customer Contracts tab under Plan & Usage in an Admin Org, listing customers and contracts" style="width:100%;" >}}
+{{< img src="partners/multi_tenant_billing/customer_contracts.png" alt="Customer Contracts tab under Plan & Usage in an Admin Org, listing customers and contracts." style="width:100%;" >}}
 
 **Note**: The Billing Read permission is required to view Customer Contracts.
 
