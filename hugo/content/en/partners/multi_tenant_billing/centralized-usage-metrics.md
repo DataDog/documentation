@@ -5,7 +5,7 @@ description: "Monitor usage metrics across all connected customer organizations 
 
 ## Overview
 
-Centralized Usage Metrics lets the Admin Org oversee usage and estimated usage metrics from every connected customer org. Metrics roll up to the Admin Org tagged by customer, so partners can filter and attribute usage across their entire book of business from a single set of dashboards, monitors, and alerts.
+Centralized Usage Metrics lets the Partner Admin Organization (Admin Org) oversee usage and estimated usage metrics from every connected customer org. Metrics roll up to the Admin Org tagged by customer, so partners can filter and attribute usage across their entire book of business from a single set of dashboards, monitors, and alerts.
 
 Datadog produces two kinds of usage metrics:
 
