@@ -28,7 +28,7 @@ Before requesting an Admin Org, the partner must:
 
 Partners not yet registered can [Register Now][17] on the Datadog Partner Portal.
 
-{{< img src="partners/multi_tenant_billing/partner_portal_registration.png" alt="Datadog Partner Portal registration page" style="width:100%;" >}}
+{{< img src="partners/multi_tenant_billing/partner_portal_registration.png" alt="Datadog Partner Portal registration page." style="width:100%;" >}}
 
 Registered partners can request an Admin Org by contacting [partner-support@datadoghq.com][16]. Include in the request whether the partner also needs the Trial Org Provisioner capability enabled, for self-serve trial organization creation.
 
