@@ -9311,6 +9311,7 @@ components:
         - server.response.headers.no_cookies
         - server.response.trailers
         - server.response.body
+        - server.response.body.raw
         - grpc.server.request.metadata
         - grpc.server.request.message
         - grpc.server.method
@@ -9347,6 +9348,7 @@ components:
         - SERVER_RESPONSE_HEADERS_NO_COOKIES
         - SERVER_RESPONSE_TRAILERS
         - SERVER_RESPONSE_BODY
+        - SERVER_RESPONSE_BODY_RAW
         - GRPC_SERVER_REQUEST_METADATA
         - GRPC_SERVER_REQUEST_MESSAGE
         - GRPC_SERVER_METHOD
@@ -13003,6 +13005,8 @@ components:
           type: string
         buffer:
           $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
+        compression:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureStorageDestinationCompression"
         connection_string_key:
           description: Name of the environment variable or secret that holds the Azure Storage connection string.
           example: AZURE_STORAGE_CONNECTION_STRING
@@ -24861,6 +24865,26 @@ components:
           description: The name of the feature flag.
           example: "Feature Flag ABC123"
           type: string
+        notification_rule_query:
+          description: |-
+            Query used to determine which change events on this feature flag trigger notifications
+            to `rule_targets`. Uses Datadog log search syntax (`AND`, `OR`, `NOT`, parentheses) to
+            match against the `notification_type` facet.
+
+            Supported `notification_type` values for a feature flag are: `flag_enabled_disabled`,
+            `flag_archived`, `flag_approval_required`, `rollout_started`, `rollout_scheduled`,
+            `rollout_step_started`, `rollout_paused_guardrail`, `rollout_paused_user`,
+            `rollout_aborted_guardrail`, `rollout_aborted_user`, `targeting_rule_created`,
+            `targeting_rule_updated`, `targeting_rule_updated_via_filter`, and
+            `targeting_rule_deleted`.
+          example: "notification_type:rollout_started OR notification_type:targeting_rule_updated"
+          nullable: true
+          type: string
+        rule_targets:
+          description: Targets to notify about changes to this feature flag that match `notification_rule_query`.
+          items:
+            $ref: "#/components/schemas/NotificationRuleTarget"
+          type: array
         value_type:
           $ref: "#/components/schemas/ValueType"
         variants:
@@ -33708,10 +33732,27 @@ components:
           example: 3600
           format: int64
           type: integer
+        fail_on_no_data:
+          default: true
+          description: Whether the rule should fail if a matching monitor group is in a NO DATA state.
+          example: false
+          type: boolean
+        fail_on_no_groups_found:
+          default: false
+          description: Whether the rule should fail if no monitor groups are found for the query.
+          example: false
+          type: boolean
         query:
           description: Monitors that match this query are evaluated.
           example: "service:my-service env:prod"
           type: string
+        warmup:
+          default: 0
+          description: Seconds to wait after a deployment starts before evaluating the monitor's status.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
       required:
         - query
       type: object
@@ -33838,6 +33879,10 @@ components:
     DetachCaseRequestData:
       description: Data for detaching security findings from their case.
       properties:
+        id:
+          description: Unique identifier of the detachment request.
+          example: "c1234567-89ab-cdef-0123-456789abcdef"
+          type: string
         relationships:
           $ref: "#/components/schemas/DetachCaseRequestDataRelationships"
         type:
@@ -38245,6 +38290,19 @@ components:
           description: A short human-readable summary of the warning.
           example: "One or several indexes are missing or invalid. Results hold data from the other indexes."
           type: string
+      type: object
+    ExecutionLimit:
+      description: "The maximum number of times to execute a workflow for an incident."
+      properties:
+        count:
+          description: "The maximum number of workflow executions."
+          example: 1
+          format: int32
+          maximum: 9999
+          minimum: 1
+          type: integer
+      required:
+        - count
       type: object
     ExecutionPolicyActionPattern:
       description: The set of actions this policy applies to.
@@ -48429,6 +48487,15 @@ components:
       type: string
       x-enum-varnames:
         - INCIDENT_ATTACHMENTS
+    IncidentCondition:
+      description: "Conditions that determine which incidents trigger the workflow."
+      properties:
+        tagValues:
+          description: "Incident tags and values used to filter matching incidents."
+          items:
+            $ref: "#/components/schemas/IncidentTagValue"
+          type: array
+      type: object
     IncidentConfigurationDataAttributesRequest:
       description: Attributes for creating an incident configuration.
       properties:
@@ -48781,6 +48848,25 @@ components:
           $ref: "#/components/schemas/IncidentCreateData"
       required:
         - data
+      type: object
+    IncidentCreatedTrigger:
+      description: "Trigger a workflow when an incident is declared."
+      properties:
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentCreatedTriggerWrapper:
+      description: "Schema for an incident declared trigger."
+      properties:
+        incidentCreatedTrigger:
+          $ref: "#/components/schemas/IncidentCreatedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentCreatedTrigger
       type: object
     IncidentFieldAttributes:
       description: Dynamic fields for which selections can be made, with field names as keys.
@@ -49461,6 +49547,27 @@ components:
       required:
         - data
       type: object
+    IncidentImpactCreatedTrigger:
+      description: "Trigger a workflow when an impact is created for an incident."
+      properties:
+        executionLimit:
+          $ref: "#/components/schemas/ExecutionLimit"
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentImpactCreatedTriggerWrapper:
+      description: "Schema for an incident impact created trigger."
+      properties:
+        incidentImpactCreatedTrigger:
+          $ref: "#/components/schemas/IncidentImpactCreatedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentImpactCreatedTrigger
+      type: object
     IncidentImpactFieldChoice:
       description: A choice option for a dropdown or multiselect impact field.
       properties:
@@ -49759,6 +49866,27 @@ components:
       type: string
       x-enum-varnames:
         - INCIDENT_IMPACTS
+    IncidentImpactUpdatedTrigger:
+      description: "Trigger a workflow when an impact is updated for an incident."
+      properties:
+        executionLimit:
+          $ref: "#/components/schemas/ExecutionLimit"
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentImpactUpdatedTriggerWrapper:
+      description: "Schema for an incident impact updated trigger."
+      properties:
+        incidentImpactUpdatedTrigger:
+          $ref: "#/components/schemas/IncidentImpactUpdatedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentImpactUpdatedTrigger
+      type: object
     IncidentImpactsResponse:
       description: Response with a list of incident impacts.
       properties:
@@ -50980,6 +51108,27 @@ components:
       type: string
       x-enum-varnames:
         - INCIDENT_POSTMORTEMS
+    IncidentPostmortemUpdatedTrigger:
+      description: "Trigger a workflow when a postmortem is updated for an incident."
+      properties:
+        executionLimit:
+          $ref: "#/components/schemas/ExecutionLimit"
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentPostmortemUpdatedTriggerWrapper:
+      description: "Schema for an incident postmortem updated trigger."
+      properties:
+        incidentPostmortemUpdatedTrigger:
+          $ref: "#/components/schemas/IncidentPostmortemUpdatedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentPostmortemUpdatedTrigger
+      type: object
     IncidentRelatedObject:
       description: Object related to an incident.
       enum:
@@ -51010,6 +51159,27 @@ components:
       type: string
       x-enum-varnames:
         - INCIDENTS
+    IncidentResponderCreatedTrigger:
+      description: "Trigger a workflow when a responder is created for an incident."
+      properties:
+        executionLimit:
+          $ref: "#/components/schemas/ExecutionLimit"
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentResponderCreatedTriggerWrapper:
+      description: "Schema for an incident responder created trigger."
+      properties:
+        incidentResponderCreatedTrigger:
+          $ref: "#/components/schemas/IncidentResponderCreatedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentResponderCreatedTrigger
+      type: object
     IncidentResponderDataAttributesResponse:
       description: Attributes of an incident responder in a response.
       properties:
@@ -51763,6 +51933,55 @@ components:
       required:
         - data
       type: object
+    IncidentSavedTrigger:
+      description: "Trigger a workflow when an incident is declared or updated."
+      properties:
+        executionLimit:
+          $ref: "#/components/schemas/ExecutionLimit"
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        serialExecution:
+          $ref: "#/components/schemas/SerialExecution"
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentSavedTriggerWrapper:
+      description: "Schema for an incident declared or updated trigger."
+      properties:
+        incidentSavedTrigger:
+          $ref: "#/components/schemas/IncidentSavedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentSavedTrigger
+      type: object
+    IncidentScheduleTrigger:
+      description: "Trigger a workflow on a schedule for an incident."
+      properties:
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        rrule:
+          description: "The recurrence rule for the schedule, expressed as an iCalendar `RRULE` string."
+          example: "DTSTART:20241220T151700Z\nRRULE:FREQ=MONTHLY"
+          minLength: 1
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      required:
+        - rrule
+      type: object
+    IncidentScheduleTriggerWrapper:
+      description: "Schema for an incident schedule trigger."
+      properties:
+        incidentScheduleTrigger:
+          $ref: "#/components/schemas/IncidentScheduleTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentScheduleTrigger
+      type: object
     IncidentSearchResponse:
       description: Response with incidents and facets.
       properties:
@@ -52056,6 +52275,24 @@ components:
         - SEV_3
         - SEV_4
         - SEV_5
+    IncidentTagValue:
+      description: "An incident tag and its accepted values."
+      properties:
+        tag:
+          description: "The incident tag to match."
+          example: ""
+          type: string
+        values:
+          description: "The accepted values for the incident tag."
+          example:
+            - ""
+          items:
+            type: string
+          type: array
+      required:
+        - tag
+        - values
+      type: object
     IncidentTimelineCellCreateAttributes:
       description: The timeline cell's attributes for a create request.
       oneOf:
@@ -52475,13 +52712,16 @@ components:
       x-enum-varnames:
         - INCIDENT_TODOS
     IncidentTrigger:
-      description: "Trigger a workflow from an Incident. For automatic triggering a handle must be configured and the workflow must be published."
+      description: "Trigger a workflow from an incident. For automatic triggering a handle must be configured and the workflow must be published."
       properties:
         rateLimit:
           $ref: "#/components/schemas/TriggerRateLimit"
+        version:
+          description: "Version of the incident manual trigger."
+          type: string
       type: object
     IncidentTriggerWrapper:
-      description: "Schema for an Incident-based trigger."
+      description: "Schema for an incident-based trigger."
       properties:
         incidentTrigger:
           $ref: "#/components/schemas/IncidentTrigger"
@@ -55302,7 +55542,7 @@ components:
       description: An array of related resources, returned when the `include` query parameter is used.
       oneOf:
         - $ref: "#/components/schemas/Issue"
-        - $ref: "#/components/schemas/Case"
+        - $ref: "#/components/schemas/IssueCase"
         - $ref: "#/components/schemas/IssueUser"
         - $ref: "#/components/schemas/IssueTeam"
     IssuesSearchResultIssueRelationship:
@@ -56442,6 +56682,10 @@ components:
           items:
             $ref: "#/components/schemas/LLMObsAnnotationItem"
           type: array
+        can_annotate:
+          description: Whether the current caller can annotate this interaction.
+          example: true
+          type: boolean
         content_id:
           description: Upstream entity identifier (trace ID, session ID, or deterministic display_block ID).
           example: "trace-abc-123"
@@ -56480,6 +56724,7 @@ components:
         - modified_at
         - queue_id
         - queue_name
+        - can_annotate
         - annotations
       type: object
     LLMObsAnnotatedInteractionItem:
@@ -56544,6 +56789,7 @@ components:
           description: List of interactions with their annotations.
           example:
             - annotations: []
+              can_annotate: true
               content_id: trace-abc-123
               id: "interaction-456"
               type: trace
@@ -56602,6 +56848,8 @@ components:
           description: ID of the annotation that failed, if applicable.
           example: "00000000-0000-0000-0000-000000000000"
           type: string
+        code:
+          $ref: "#/components/schemas/LLMObsAnnotationErrorCode"
         error:
           description: Error message.
           example: "interaction not found"
@@ -56614,6 +56862,14 @@ components:
         - interaction_id
         - error
       type: object
+    LLMObsAnnotationErrorCode:
+      description: Stable error code. `permission_denied` indicates the item was rejected by queue access rules.
+      enum:
+        - permission_denied
+      example: permission_denied
+      type: string
+      x-enum-varnames:
+        - PERMISSION_DENIED
     LLMObsAnnotationItem:
       description: A single annotation on an interaction.
       properties:
@@ -56792,6 +57048,21 @@ components:
           description: Identifier of the project this queue belongs to.
           example: "00000000-0000-0000-0000-000000000002"
           type: string
+        restrict_to_assignees:
+          description: Whether annotation access is restricted to assigned users.
+          example: false
+          type: boolean
+        restrict_to_reviewers:
+          description: Whether annotation access is restricted to queue reviewers.
+          example: true
+          type: boolean
+        reviewer_emails:
+          description: Email addresses of reviewers who can access the annotation queue.
+          example:
+            - "reviewer@example.com"
+          items:
+            type: string
+          type: array
       required:
         - name
         - project_id
@@ -56801,6 +57072,11 @@ components:
       properties:
         annotation_schema:
           $ref: "#/components/schemas/LLMObsAnnotationSchema"
+        can_manage_access:
+          description: Whether the current caller can manage access for the annotation queue.
+          example: true
+          readOnly: true
+          type: boolean
         created_at:
           description: Timestamp when the queue was created.
           example: "2024-01-15T10:30:00Z"
@@ -56835,6 +57111,23 @@ components:
           description: Identifier of the project this queue belongs to.
           example: "00000000-0000-0000-0000-000000000002"
           type: string
+        restrict_to_assignees:
+          description: Whether annotation access is restricted to assigned users.
+          example: false
+          type: boolean
+        restrict_to_reviewers:
+          description: Whether annotation access is restricted to queue reviewers.
+          example: true
+          type: boolean
+        reviewer_emails:
+          description: |-
+            Email addresses of reviewers for the annotation queue. Returned only
+            when the caller can manage queue access.
+          example:
+            - "reviewer@example.com"
+          items:
+            type: string
+          type: array
       required:
         - name
         - project_id
@@ -56844,6 +57137,9 @@ components:
         - modified_by
         - modified_at
         - owned_by
+        - restrict_to_reviewers
+        - restrict_to_assignees
+        - can_manage_access
       type: object
     LLMObsAnnotationQueueDataRequest:
       description: Data object for creating an Agent Observability annotation queue.
@@ -57060,6 +57356,21 @@ components:
           description: Updated name of the annotation queue.
           example: "Updated queue name"
           type: string
+        restrict_to_assignees:
+          description: Whether annotation access is restricted to assigned users.
+          example: false
+          type: boolean
+        restrict_to_reviewers:
+          description: Whether annotation access is restricted to queue reviewers.
+          example: true
+          type: boolean
+        reviewer_emails:
+          description: Updated email addresses of reviewers who can access the annotation queue.
+          example:
+            - "reviewer@example.com"
+          items:
+            type: string
+          type: array
       type: object
     LLMObsAnnotationQueueUpdateDataRequest:
       description: Data object for updating an Agent Observability annotation queue.
@@ -58944,6 +59255,10 @@ components:
           items:
             $ref: "#/components/schemas/LLMObsAnnotationItem"
           type: array
+        can_annotate:
+          description: Whether the current caller can annotate this interaction.
+          example: true
+          type: boolean
         content_id:
           description: Server-generated deterministic identifier derived from the block list.
           example: "9a87f3e2b1d4c5a6f8b3e2d1c4a7b5f6e3d2a1c4b7e5f8a3d6c2e1b4a7d5f8c2"
@@ -58960,6 +59275,7 @@ components:
         - id
         - type
         - content_id
+        - can_annotate
         - annotations
         - display_block
       type: object
@@ -62950,6 +63266,10 @@ components:
           items:
             $ref: "#/components/schemas/LLMObsAnnotationItem"
           type: array
+        can_annotate:
+          description: Whether the current caller can annotate this interaction.
+          example: true
+          type: boolean
         content_id:
           description: Upstream entity identifier supplied by the caller.
           example: "trace-abc-123"
@@ -62976,6 +63296,7 @@ components:
         - content_id
         - created_at
         - modified_at
+        - can_annotate
         - annotations
       type: object
     LLMObsTraceInteractionItem:
@@ -63436,7 +63757,8 @@ components:
         - name
       type: object
     LicensesListResponse:
-      description: The top-level response object returned by the licenses list endpoint, containing the array of supported SPDX licenses.
+      description: >-
+        The top-level response object returned by the licenses list endpoint, containing the array of supported SPDX licenses.
       properties:
         data:
           $ref: "#/components/schemas/LicensesListResponseData"
@@ -67221,7 +67543,8 @@ components:
         - attributes
       type: object
     McpScanRequestResponseDataAttributes:
-      description: The attributes returned when a scan request has been accepted, containing the job identifier used to poll for results.
+      description: >-
+        The attributes returned when a scan request has been accepted, containing the job identifier used to poll for results.
       properties:
         job_id:
           description: The job identifier assigned to the scan, used to retrieve the scan result.
@@ -71660,6 +71983,109 @@ components:
       type: string
       x-enum-varnames:
         - MANUAL
+    NotificationRuleTarget:
+      description: A notification target that receives change alerts for a feature flag.
+      properties:
+        configuration:
+          $ref: "#/components/schemas/NotificationRuleTargetConfiguration"
+        type:
+          $ref: "#/components/schemas/NotificationRuleTargetType"
+        version:
+          description: Schema version of `configuration`.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - type
+        - version
+        - configuration
+      type: object
+    NotificationRuleTargetConfiguration:
+      description: "Configuration for a notification target. Which fields apply depends on the target's `type`."
+      properties:
+        channel:
+          description: Slack channel name, for a `SLACK_CHANNEL` target.
+          example: "#feature-flags"
+          type: string
+        channel_id:
+          description: |-
+            Slack channel ID for a `SLACK_CHANNEL` target, or Microsoft Teams channel ID
+            for an `MS_TEAMS_CHANNEL` target.
+          example: "C0123456789"
+          type: string
+        channel_name:
+          description: Microsoft Teams channel name, for an `MS_TEAMS_CHANNEL` target.
+          example: "Feature Flags"
+          type: string
+        connector_name:
+          description: Microsoft Teams connector name, for an `MS_TEAMS_CHANNEL` target.
+          example: "datadog-connector"
+          type: string
+        recipient:
+          $ref: "#/components/schemas/NotificationRuleTargetConfigurationRecipient"
+        service_name:
+          description: PagerDuty service name, for a `PAGERDUTY_SERVICE` target.
+          example: "feature-flags-oncall"
+          type: string
+        team_id:
+          description: Microsoft Teams team ID, for an `MS_TEAMS_CHANNEL` target.
+          example: "19:abcdef0123456789@thread.tacv2"
+          type: string
+        team_name:
+          description: Microsoft Teams team name, for an `MS_TEAMS_CHANNEL` target.
+          example: "Engineering"
+          type: string
+        tenant_id:
+          description: Microsoft Teams tenant ID, for an `MS_TEAMS_CHANNEL` target.
+          example: "72f988bf-86f1-41af-91ab-2d7cd011db47"
+          type: string
+        tenant_name:
+          description: Microsoft Teams tenant name, for an `MS_TEAMS_CHANNEL` target.
+          example: "Datadog"
+          type: string
+        username:
+          description: Slack username, for a `SLACK_USER` target.
+          example: "jane.doe"
+          type: string
+        webhook_name:
+          description: Name of the configured webhook, for a `WEBHOOK` target.
+          example: "feature-flags-webhook"
+          type: string
+        workspace:
+          description: Slack workspace name, for a `SLACK_CHANNEL` or `SLACK_USER` target.
+          example: "datadoghq"
+          type: string
+        workspace_id:
+          description: Slack workspace ID, for a `SLACK_CHANNEL` target.
+          example: "T0123456789"
+          type: string
+      type: object
+    NotificationRuleTargetConfigurationRecipient:
+      description: Recipient for an `EMAIL` target.
+      properties:
+        email:
+          description: Email address to notify.
+          example: "user@example.com"
+          type: string
+      type: object
+    NotificationRuleTargetType:
+      description: The type of notification target.
+      enum:
+        - "EMAIL"
+        - "SLACK_CHANNEL"
+        - "SLACK_USER"
+        - "WEBHOOK"
+        - "PAGERDUTY_SERVICE"
+        - "MS_TEAMS_CHANNEL"
+      example: "SLACK_CHANNEL"
+      type: string
+      x-enum-varnames:
+        - EMAIL
+        - SLACK_CHANNEL
+        - SLACK_USER
+        - WEBHOOK
+        - PAGERDUTY_SERVICE
+        - MS_TEAMS_CHANNEL
     NotificationRulesListResponse:
       description: The list of notification rules.
       properties:
@@ -72558,6 +72984,8 @@ components:
           type: string
         buffer:
           $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
+        compression:
+          $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationCompression"
         id:
           description: Unique identifier for the destination component.
           example: amazon-s3-destination
@@ -72599,6 +73027,63 @@ components:
         - storage_class
       type: object
       x-pipeline-types: [logs]
+    ObservabilityPipelineAmazonS3DestinationCompression:
+      description: |-
+        Compression configuration for archived logs. When omitted, logs are compressed with gzip
+        for backward compatibility.
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationCompressionZstd"
+        - $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationCompressionGzip"
+    ObservabilityPipelineAmazonS3DestinationCompressionGzip:
+      description: Gzip compression.
+      properties:
+        algorithm:
+          $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationCompressionGzipType"
+        level:
+          description: Gzip compression level. Valid values range from `1` to `9`.
+          example: 6
+          format: int64
+          maximum: 9
+          minimum: 1
+          type: integer
+      required:
+        - algorithm
+        - level
+      type: object
+    ObservabilityPipelineAmazonS3DestinationCompressionGzipType:
+      default: gzip
+      description: The compression type. Always `gzip`.
+      enum:
+        - gzip
+      example: gzip
+      type: string
+      x-enum-varnames:
+        - GZIP
+    ObservabilityPipelineAmazonS3DestinationCompressionZstd:
+      description: Zstd compression.
+      properties:
+        algorithm:
+          $ref: "#/components/schemas/ObservabilityPipelineAmazonS3DestinationCompressionZstdType"
+        level:
+          description: Zstd compression level. Valid values range from `1` to` 21`.
+          example: 3
+          format: int64
+          maximum: 21
+          minimum: 1
+          type: integer
+      required:
+        - algorithm
+        - level
+      type: object
+    ObservabilityPipelineAmazonS3DestinationCompressionZstdType:
+      default: zstd
+      description: The compression type. Always `zstd`.
+      enum:
+        - zstd
+      example: zstd
+      type: string
+      x-enum-varnames:
+        - ZSTD
     ObservabilityPipelineAmazonS3DestinationServerSideEncryption:
       description: Server-side encryption type for Amazon S3.
       enum:
@@ -72960,6 +73445,63 @@ components:
           description: A session identifier used for logging and tracing the assumed role session.
           type: string
       type: object
+    ObservabilityPipelineAzureStorageDestinationCompression:
+      description: |-
+        Compression configuration for archived logs. When omitted, logs are compressed with gzip
+        for backward compatibility.
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureStorageDestinationCompressionZstd"
+        - $ref: "#/components/schemas/ObservabilityPipelineAzureStorageDestinationCompressionGzip"
+    ObservabilityPipelineAzureStorageDestinationCompressionGzip:
+      description: Gzip compression.
+      properties:
+        algorithm:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureStorageDestinationCompressionGzipType"
+        level:
+          description: Gzip compression level. Valid values range from `1` to `9`.
+          example: 6
+          format: int64
+          maximum: 9
+          minimum: 1
+          type: integer
+      required:
+        - algorithm
+        - level
+      type: object
+    ObservabilityPipelineAzureStorageDestinationCompressionGzipType:
+      default: gzip
+      description: The compression type. Always `gzip`.
+      enum:
+        - gzip
+      example: gzip
+      type: string
+      x-enum-varnames:
+        - GZIP
+    ObservabilityPipelineAzureStorageDestinationCompressionZstd:
+      description: Zstd compression.
+      properties:
+        algorithm:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureStorageDestinationCompressionZstdType"
+        level:
+          description: Zstd compression level. Valid values range from `1` to `21`.
+          example: 3
+          format: int64
+          maximum: 21
+          minimum: 1
+          type: integer
+      required:
+        - algorithm
+        - level
+      type: object
+    ObservabilityPipelineAzureStorageDestinationCompressionZstdType:
+      default: zstd
+      description: The compression type. Always `zstd`.
+      enum:
+        - zstd
+      example: zstd
+      type: string
+      x-enum-varnames:
+        - ZSTD
     ObservabilityPipelineBufferOptions:
       description: Configuration for buffer settings on destination components.
       oneOf:
@@ -73334,6 +73876,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineSyslogNgDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineDatabricksZerobusDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineDatadogMetricsDestination"
+        - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetryMetricsDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineSplunkHecMetricsDestination"
     ObservabilityPipelineConfigPipelineType:
       default: logs
@@ -74738,6 +75281,8 @@ components:
           type: string
         buffer:
           $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
+        compression:
+          $ref: "#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestinationCompression"
         id:
           description: Unique identifier for the destination component.
           example: gcs-destination
@@ -74787,6 +75332,63 @@ components:
         - AUTHENTICATEDNOT_READ
         - BUCKETNOT_OWNERNOT_READ
         - BUCKETNOT_OWNERNOT_FULLNOT_CONTROL
+    ObservabilityPipelineGoogleCloudStorageDestinationCompression:
+      description: |-
+        Compression configuration for archived logs. When omitted, logs are compressed with gzip
+        for backward compatibility.
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestinationCompressionZstd"
+        - $ref: "#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestinationCompressionGzip"
+    ObservabilityPipelineGoogleCloudStorageDestinationCompressionGzip:
+      description: Gzip compression.
+      properties:
+        algorithm:
+          $ref: "#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestinationCompressionGzipType"
+        level:
+          description: Gzip compression level. Valid values range from `1` to `9`.
+          example: 6
+          format: int64
+          maximum: 9
+          minimum: 1
+          type: integer
+      required:
+        - algorithm
+        - level
+      type: object
+    ObservabilityPipelineGoogleCloudStorageDestinationCompressionGzipType:
+      default: gzip
+      description: The compression type. Always `gzip`.
+      enum:
+        - gzip
+      example: gzip
+      type: string
+      x-enum-varnames:
+        - GZIP
+    ObservabilityPipelineGoogleCloudStorageDestinationCompressionZstd:
+      description: Zstd compression.
+      properties:
+        algorithm:
+          $ref: "#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestinationCompressionZstdType"
+        level:
+          description: Zstd compression level. Valid values range from `1` to `21`.
+          example: 3
+          format: int64
+          maximum: 21
+          minimum: 1
+          type: integer
+      required:
+        - algorithm
+        - level
+      type: object
+    ObservabilityPipelineGoogleCloudStorageDestinationCompressionZstdType:
+      default: zstd
+      description: The compression type. Always `zstd`.
+      enum:
+        - zstd
+      example: zstd
+      type: string
+      x-enum-varnames:
+        - ZSTD
     ObservabilityPipelineGoogleCloudStorageDestinationStorageClass:
       description: Storage class used for objects stored in GCS.
       enum:
@@ -75921,6 +76523,49 @@ components:
       type: string
       x-enum-varnames:
         - OPENSEARCH
+    ObservabilityPipelineOpentelemetryMetricsDestination:
+      description: |-
+        The `opentelemetry` destination forwards metrics using the OpenTelemetry Protocol (OTLP) over HTTP.
+
+        **Supported pipeline types:** metrics
+      properties:
+        buffer:
+          $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
+        http_client_uri_key:
+          default: DESTINATION_OTEL_HTTP_CLIENT_URI
+          description: Environment variable name containing the URI of the OTLP HTTP endpoint to send metrics to.
+          example: DESTINATION_OTEL_HTTP_CLIENT_URI
+          type: string
+        id:
+          description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
+          example: opentelemetry-metrics-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input` for this component.
+          example: ["metrics-filter-processor"]
+          items:
+            description: The ID of a component whose output is used as input for this destination.
+            type: string
+          type: array
+        tls:
+          $ref: "#/components/schemas/ObservabilityPipelineTls"
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineOpentelemetryMetricsDestinationType"
+      required:
+        - id
+        - type
+        - inputs
+      type: object
+      x-pipeline-types: [metrics]
+    ObservabilityPipelineOpentelemetryMetricsDestinationType:
+      default: opentelemetry
+      description: The destination type. Always `opentelemetry`.
+      enum:
+        - opentelemetry
+      example: opentelemetry
+      type: string
+      x-enum-varnames:
+        - OPENTELEMETRY
     ObservabilityPipelineOpentelemetrySource:
       description: |-
         The `opentelemetry` source receives telemetry data using the OpenTelemetry Protocol (OTLP) over gRPC and HTTP.
@@ -77468,12 +78113,15 @@ components:
           description: |-
             If `true`, Splunk tries to extract timestamps from incoming log events.
             If `false`, Splunk assigns the time the event was received.
+            Only applies when `endpoint_target` is `event`; cannot be `true` when `endpoint_target` is `raw`.
           example: true
           type: boolean
         buffer:
           $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
         encoding:
           $ref: "#/components/schemas/ObservabilityPipelineSplunkHecDestinationEncoding"
+        endpoint_target:
+          $ref: "#/components/schemas/ObservabilityPipelineSplunkHecDestinationEndpointTarget"
         endpoint_url_key:
           description: Name of the environment variable or secret that holds the Splunk HEC endpoint URL.
           example: SPLUNK_HEC_ENDPOINT_URL
@@ -77528,6 +78176,16 @@ components:
       x-enum-varnames:
         - JSON
         - RAW_MESSAGE
+    ObservabilityPipelineSplunkHecDestinationEndpointTarget:
+      description: The Splunk HEC endpoint to send events to. Use `event` to send structured events to the `/event` endpoint, or `raw` to send the raw message to the `/raw` endpoint.
+      enum:
+        - event
+        - raw
+      example: event
+      type: string
+      x-enum-varnames:
+        - EVENT
+        - RAW
     ObservabilityPipelineSplunkHecDestinationTokenStrategy:
       description: Controls how the Splunk HEC token is supplied. Use `custom` to provide a token with `token_key`, or `from_source` to forward the token received from an upstream Splunk HEC source.
       enum:
@@ -91364,7 +92022,8 @@ components:
           $ref: "#/components/schemas/ResolveVulnerableSymbolsRequestData"
       type: object
     ResolveVulnerableSymbolsRequestData:
-      description: The data object in a request to resolve vulnerable symbols, containing the package PURLs and request type.
+      description: >-
+        The data object in a request to resolve vulnerable symbols, containing the package PURLs and request type.
       properties:
         attributes:
           $ref: "#/components/schemas/ResolveVulnerableSymbolsRequestDataAttributes"
@@ -91377,7 +92036,8 @@ components:
         - type
       type: object
     ResolveVulnerableSymbolsRequestDataAttributes:
-      description: The attributes of a request to resolve vulnerable symbols, containing the list of package PURLs to check.
+      description: >-
+        The attributes of a request to resolve vulnerable symbols, containing the list of package PURLs to check.
       properties:
         purls:
           description: The list of Package URLs (PURLs) for which to resolve vulnerable symbols.
@@ -91402,7 +92062,8 @@ components:
           $ref: "#/components/schemas/ResolveVulnerableSymbolsResponseData"
       type: object
     ResolveVulnerableSymbolsResponseData:
-      description: The data object in a response for resolving vulnerable symbols, containing the result attributes and response type.
+      description: >-
+        The data object in a response for resolving vulnerable symbols, containing the result attributes and response type.
       properties:
         attributes:
           $ref: "#/components/schemas/ResolveVulnerableSymbolsResponseDataAttributes"
@@ -91436,7 +92097,8 @@ components:
       description: The result of resolving vulnerable symbols for a specific package, identified by its PURL.
       properties:
         purl:
-          description: The Package URL (PURL) uniquely identifying the package for which vulnerable symbols are resolved.
+          description: >-
+            The Package URL (PURL) uniquely identifying the package for which vulnerable symbols are resolved.
           type: string
         vulnerable_symbols:
           description: The list of vulnerable symbol groups found in this package, organized by advisory.
@@ -95753,6 +96415,222 @@ components:
           example: "report_id"
           type: string
       type: object
+    STIXBundleRequest:
+      additionalProperties: {}
+      description: A STIX 2.1 bundle containing threat intelligence indicator objects.
+      properties:
+        id:
+          description: The STIX bundle identifier.
+          example: bundle--11111111-1111-4111-8111-111111111111
+          type: string
+        objects:
+          description: >-
+            The STIX objects included in the bundle. Indicator objects are processed and ingested; all other STIX object types are ignored and are not included in the response counters.
+          example:
+            - created: "2026-07-22T12:00:00Z"
+              id: indicator--22222222-2222-4222-8222-222222222222
+              modified: "2026-07-22T12:00:00Z"
+              pattern: "[ipv4-addr:value = '198.51.100.42']"
+              pattern_type: stix
+              spec_version: "2.1"
+              type: indicator
+              valid_from: "2026-07-22T12:00:00Z"
+          items:
+            $ref: "#/components/schemas/STIXObject"
+          type: array
+        spec_version:
+          $ref: "#/components/schemas/STIXSpecVersion"
+        type:
+          $ref: "#/components/schemas/STIXBundleType"
+      required:
+        - type
+        - id
+        - objects
+      type: object
+    STIXBundleType:
+      description: The STIX object type for a bundle.
+      enum:
+        - bundle
+      example: bundle
+      type: string
+      x-enum-varnames:
+        - BUNDLE
+    STIXContentEncoding:
+      description: The content encoding applied to the request body.
+      enum:
+        - gzip
+      example: gzip
+      type: string
+      x-enum-varnames:
+        - GZIP
+    STIXIngestResponse:
+      description: The response from a completed STIX ingestion request.
+      properties:
+        data:
+          $ref: "#/components/schemas/STIXIngestResponseData"
+      required:
+        - data
+      type: object
+    STIXIngestResponseAttributes:
+      description: Counters describing the result of the STIX ingestion request.
+      properties:
+        accepted:
+          description: The number of supported indicators accepted.
+          example: 1
+          format: int64
+          minimum: 0
+          type: integer
+        invalid:
+          description: The number of indicators with patterns that could not be parsed.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        unsupported:
+          description: >-
+            The number of indicator objects with an unsupported STIX version or a pattern that produced no supported observable values.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+        - accepted
+        - unsupported
+        - invalid
+      type: object
+    STIXIngestResponseData:
+      description: The JSON:API resource describing the completed STIX ingestion request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/STIXIngestResponseAttributes"
+        id:
+          description: The normalized vendor identifier.
+          example: acme
+          type: string
+        type:
+          $ref: "#/components/schemas/STIXIngestResponseType"
+      required:
+        - type
+        - id
+        - attributes
+      type: object
+    STIXIngestResponseType:
+      description: The STIX ingestion resource type.
+      enum:
+        - threat-intel-stix-ingest
+      example: threat-intel-stix-ingest
+      type: string
+      x-enum-varnames:
+        - THREAT_INTEL_STIX_INGEST
+    STIXMetadataObject:
+      additionalProperties: {}
+      description: An opaque STIX metadata object.
+      type: object
+    STIXObject:
+      additionalProperties: {}
+      description: >-
+        A STIX 2.1 object. Indicator objects are processed and ingested; all other STIX object types are ignored and are not included in the response counters.
+      properties:
+        confidence:
+          description: The confidence in the correctness of the indicator, from 0 through 100.
+          example: 80
+          format: int32
+          maximum: 100
+          minimum: 0
+          type: integer
+        created:
+          description: The time when the object was created.
+          example: "2026-07-22T12:00:00Z"
+          format: date-time
+          type: string
+        external_references:
+          description: Optional external reference metadata preserved with the indicator but not interpreted during ingestion.
+          items:
+            $ref: "#/components/schemas/STIXMetadataObject"
+          type: array
+        id:
+          description: The STIX object identifier.
+          example: indicator--22222222-2222-4222-8222-222222222222
+          type: string
+        indicator_types:
+          description: The open vocabulary terms that categorize the indicator.
+          example:
+            - malicious-activity
+          items:
+            type: string
+          type: array
+        kill_chain_phases:
+          description: Optional kill chain metadata preserved with the indicator but not interpreted during ingestion.
+          items:
+            $ref: "#/components/schemas/STIXMetadataObject"
+          type: array
+        labels:
+          description: Labels associated with the indicator.
+          example:
+            - synthetic
+          items:
+            type: string
+          type: array
+        modified:
+          description: The time when the object was last modified.
+          example: "2026-07-22T12:00:00Z"
+          format: date-time
+          type: string
+        object_marking_refs:
+          description: References to marking definition objects that apply to the indicator.
+          example:
+            - marking-definition--33333333-3333-4333-8333-333333333333
+          items:
+            type: string
+          type: array
+        pattern:
+          description: The STIX pattern that identifies the observable. Present on indicator objects.
+          example: "[ipv4-addr:value = '198.51.100.42']"
+          type: string
+        pattern_type:
+          $ref: "#/components/schemas/STIXPatternType"
+        revoked:
+          description: Whether the indicator has been revoked.
+          example: false
+          type: boolean
+        spec_version:
+          description: The STIX specification version declared on the object. Objects with an unsupported version are accepted and counted in the `unsupported` response counter.
+          example: "2.1"
+          type: string
+        type:
+          description: The STIX object type.
+          example: indicator
+          type: string
+        valid_from:
+          description: The time from which the indicator is considered valid. Present on indicator objects.
+          example: "2026-07-22T12:00:00Z"
+          format: date-time
+          type: string
+        valid_until:
+          description: The time until which the indicator is considered valid.
+          example: "2027-07-22T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - type
+        - id
+      type: object
+    STIXPatternType:
+      description: The supported STIX pattern language.
+      enum:
+        - stix
+      example: stix
+      type: string
+      x-enum-varnames:
+        - STIX
+    STIXSpecVersion:
+      description: The supported STIX specification version.
+      enum:
+        - "2.1"
+      example: "2.1"
+      type: string
+      x-enum-varnames:
+        - VERSION_2_1
     SalesforceIncidentsOrganizationResponseAttributes:
       description: Attributes of a Salesforce organization connected to the Datadog Salesforce integration.
       properties:
@@ -96369,7 +97247,8 @@ components:
         - type
       type: object
     ScaRequestDataAttributes:
-      description: The attributes of an SCA request, containing dependency graph data, vulnerability information, and repository context.
+      description: >-
+        The attributes of an SCA request, containing dependency graph data, vulnerability information, and repository context.
       properties:
         commit:
           $ref: "#/components/schemas/ScaRequestDataAttributesCommit"
@@ -96393,14 +97272,13 @@ components:
           type: array
         repository:
           $ref: "#/components/schemas/ScaRequestDataAttributesRepository"
+        scan_start_timestamp:
+          $ref: "#/components/schemas/ScaRequestDataAttributesScanStartTimestamp"
         service:
           description: The name of the service or application being analyzed.
           type: string
         tags:
-          additionalProperties:
-            type: string
-          description: A map of key-value tags providing additional metadata for the SCA scan.
-          type: object
+          $ref: "#/components/schemas/ScaRequestDataAttributesTags"
         vulnerabilities:
           description: The list of vulnerabilities identified in the dependency graph.
           items:
@@ -96408,7 +97286,8 @@ components:
           type: array
       type: object
     ScaRequestDataAttributesCommit:
-      description: Metadata about the commit associated with the SCA scan, including author, committer, and branch information.
+      description: >-
+        Metadata about the commit associated with the SCA scan, including author, committer, and branch information.
       properties:
         author_date:
           description: The date when the commit was authored.
@@ -96443,24 +97322,26 @@ components:
           type: array
         group:
           description: The group or organization namespace of the dependency (e.g., Maven group ID).
+          nullable: true
           type: string
         is_dev:
           description: Indicates whether this is a development-only dependency not used in production.
           type: boolean
         is_direct:
           description: Indicates whether this is a direct dependency (as opposed to a transitive one).
+          nullable: true
           type: boolean
         language:
           description: The programming language ecosystem of this dependency (e.g., java, python, javascript).
           type: string
         locations:
-          description: The list of source file locations where this dependency is declared.
-          items:
-            $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItems"
-          type: array
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocations"
         name:
           description: The name of the dependency package.
           type: string
+        opaque:
+          description: Indicates whether dependency details are intentionally opaque.
+          type: boolean
         package_manager:
           description: The package manager responsible for this dependency (e.g., maven, pip, npm).
           type: string
@@ -96472,21 +97353,44 @@ components:
           items:
             $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsReachableSymbolPropertiesItems"
           type: array
+        requires_transitive_enrichment:
+          description: Indicates whether this dependency requires transitive dependency enrichment.
+          type: boolean
+        target_frameworks:
+          description: The target framework identifiers associated with this dependency.
+          items:
+            description: A target framework identifier.
+            type: string
+          type: array
         version:
           description: The version of the dependency.
+          nullable: true
+          type: string
+        version_constraint:
+          description: Indicates whether the version value represents a version constraint.
+          type: boolean
+        version_range:
+          description: The version range associated with this dependency when a manifest declares a range.
           type: string
       type: object
+    ScaRequestDataAttributesDependenciesItemsLocations:
+      description: The list of source file locations where this dependency is declared.
+      items:
+        $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItems"
+      nullable: true
+      type: array
     ScaRequestDataAttributesDependenciesItemsLocationsItems:
-      description: The source code location where a dependency is declared, including block, name, namespace, and version positions within the file.
+      description: >-
+        The source code location where a dependency is declared, including block, name, namespace, and version positions within the file.
       properties:
         block:
           $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition"
         name:
-          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition"
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsNullableFilePosition"
         namespace:
-          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition"
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsNullableFilePosition"
         version:
-          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition"
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsNullableFilePosition"
       type: object
     ScaRequestDataAttributesDependenciesItemsLocationsItemsFilePosition:
       description: A range within a file defined by a start and end position, along with the file name.
@@ -96495,6 +97399,24 @@ components:
           $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition"
         file_name:
           description: The name or path of the file containing this location.
+          type: string
+        role:
+          description: The semantic role associated with this file location.
+          type: string
+        start:
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition"
+      type: object
+    ScaRequestDataAttributesDependenciesItemsLocationsItemsNullableFilePosition:
+      description: A nullable range within a file defined by a start and end position, along with the file name.
+      nullable: true
+      properties:
+        end:
+          $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition"
+        file_name:
+          description: The name or path of the file containing this location.
+          type: string
+        role:
+          description: The semantic role associated with this file location.
           type: string
         start:
           $ref: "#/components/schemas/ScaRequestDataAttributesDependenciesItemsLocationsItemsPosition"
@@ -96553,8 +97475,51 @@ components:
           description: The URL of the repository.
           type: string
       type: object
+    ScaRequestDataAttributesScanStartTimestamp:
+      additionalProperties: false
+      description: The time when the SCA scan started.
+      nullable: true
+      properties:
+        nanos:
+          description: Non-negative fractions of a second at nanosecond resolution.
+          format: int32
+          maximum: 999999999
+          minimum: 0
+          type: integer
+        seconds:
+          description: Seconds of UTC time since Unix epoch.
+          format: int64
+          type: integer
+      type: object
+    ScaRequestDataAttributesTags:
+      additionalProperties:
+        type: string
+      description: A map of tags providing additional metadata for the SCA scan.
+      properties:
+        tool:
+          $ref: "#/components/schemas/ScaRequestDataAttributesTagsTool"
+      type: object
+    ScaRequestDataAttributesTagsTool:
+      additionalProperties: false
+      description: Tool metadata included in SCA tags.
+      properties:
+        generator:
+          $ref: "#/components/schemas/ScaRequestDataAttributesTagsToolGenerator"
+      type: object
+    ScaRequestDataAttributesTagsToolGenerator:
+      additionalProperties: false
+      description: Metadata about the tool that generated the SCA tags.
+      properties:
+        name:
+          description: The name of the tag generator.
+          type: string
+        version:
+          description: The version of the tag generator.
+          type: string
+      type: object
     ScaRequestDataAttributesVulnerabilitiesItems:
-      description: A vulnerability entry from the Software Bill of Materials (SBOM), describing a known security issue and the components it affects.
+      description: >-
+        A vulnerability entry from the Software Bill of Materials (SBOM), describing a known security issue and the components it affects.
       properties:
         affects:
           description: The list of components affected by this vulnerability.
@@ -104920,6 +105885,16 @@ components:
         - REPLACEMENT_STRING
         - PARTIAL_REPLACEMENT_FROM_BEGINNING
         - PARTIAL_REPLACEMENT_FROM_END
+    SerialExecution:
+      description: "Whether to execute the workflow serially for an incident."
+      properties:
+        enabled:
+          description: "Whether serial execution is enabled."
+          example: false
+          type: boolean
+      required:
+        - enabled
+      type: object
     ServiceAccessToken:
       description: Datadog access token.
       properties:
@@ -108003,12 +108978,38 @@ components:
         - channel_name
         - redirect_url
       type: object
+    SlackReactionConfig:
+      description: "Configuration for a Slack emoji reaction trigger."
+      properties:
+        reactionEmoji:
+          description: "The Slack emoji reaction name."
+          example: L
+          minLength: 1
+          type: string
+        teamId:
+          description: "The Slack workspace ID."
+          example: L
+          minLength: 1
+          type: string
+      required:
+        - teamId
+        - reactionEmoji
+      type: object
+    SlackTrigger:
+      description: "Trigger a workflow from Slack. The workflow must be published."
+      properties:
+        reactionTriggers:
+          description: "Slack emoji reactions that trigger the workflow."
+          items:
+            $ref: "#/components/schemas/SlackReactionConfig"
+          type: array
+          uniqueItems: true
+      type: object
     SlackTriggerWrapper:
       description: "Schema for a Slack-based trigger."
       properties:
         slackTrigger:
-          description: "Trigger a workflow from Slack. The workflow must be published."
-          type: object
+          $ref: "#/components/schemas/SlackTrigger"
         startStepNames:
           $ref: "#/components/schemas/StartStepNames"
       required:
@@ -119941,6 +120942,13 @@ components:
         - $ref: "#/components/schemas/DashboardTriggerWrapper"
         - $ref: "#/components/schemas/FormTriggerWrapper"
         - $ref: "#/components/schemas/GithubWebhookTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentCreatedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentImpactCreatedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentImpactUpdatedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentPostmortemUpdatedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentResponderCreatedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentSavedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentScheduleTriggerWrapper"
         - $ref: "#/components/schemas/IncidentTriggerWrapper"
         - $ref: "#/components/schemas/MonitorTriggerWrapper"
         - $ref: "#/components/schemas/NotebookTriggerWrapper"
@@ -122584,6 +123592,249 @@ components:
           items:
             $ref: "#/components/schemas/UsageDataObject"
           type: array
+      type: object
+    UsageQuotaBulkResultAttributes:
+      description: Attributes of a usage quota bulk write result. On success, all fields except `error` are present. On failure, only `error` is present and the other fields are omitted.
+      properties:
+        enforced:
+          description: Whether usage above the limit is actively blocked instead of only tracked or alerted on. Omitted if this item failed to write.
+          example: true
+          type: boolean
+        error:
+          description: An error message describing why this item failed to write. Omitted if this item was written successfully.
+          example: usage_limit is out of range
+          type: string
+        org_public_id:
+          description: The public ID of the organization that owns the quota. Omitted if this item failed to write.
+          example: abcdef12345
+          type: string
+        scope:
+          $ref: "#/components/schemas/UsageQuotaResponseScope"
+        usage_limit:
+          description: The quota limit in the usage units defined by the quota namespace. May be fractional for quotas configured before public writes required whole units. Omitted if this item failed to write.
+          example: 100000
+          format: double
+          type: number
+      type: object
+    UsageQuotaBulkResultData:
+      description: The result of writing one usage quota in a bulk create-or-update request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UsageQuotaBulkResultAttributes"
+        id:
+          description: An opaque usage quota identifier. Clients must pass this value back verbatim in update and delete requests and must not infer any structure from it.
+          example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+          type: string
+        type:
+          $ref: "#/components/schemas/UsageQuotaType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    UsageQuotaBulkResultDataList:
+      description: The results of writing each usage quota in a bulk create-or-update request, in the same order as the request.
+      items:
+        $ref: "#/components/schemas/UsageQuotaBulkResultData"
+      type: array
+    UsageQuotaCreateAttributes:
+      description: Attributes for creating or updating a usage quota by scope.
+      properties:
+        enforced:
+          description: Whether to actively block usage above the limit instead of only tracking or alerting on it.
+          example: true
+          type: boolean
+        scope:
+          $ref: "#/components/schemas/UsageQuotaRequestScope"
+        usage_limit:
+          description: The quota limit to set in the usage units defined by the quota namespace. For an organization-wide quota (scope omitted), the limit must be greater than the usage already recorded in the current period.
+          example: 100000
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+        - usage_limit
+        - enforced
+      type: object
+    UsageQuotaCreateData:
+      description: A usage quota resource to create or update by scope.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UsageQuotaCreateAttributes"
+        type:
+          $ref: "#/components/schemas/UsageQuotaType"
+      required:
+        - type
+        - attributes
+      type: object
+    UsageQuotaCreateDataList:
+      description: A bulk list of usage quota resources to create or update by scope.
+      items:
+        $ref: "#/components/schemas/UsageQuotaCreateData"
+      minItems: 1
+      type: array
+    UsageQuotaRequestScope:
+      additionalProperties:
+        example: jane@example.com
+        type: string
+      description: A namespace-specific key and value identifying what the quota applies to within an organization. The object must contain exactly one entry. Use `"*"` as the value for the default quota applied to entities without a specific quota, or omit the scope for an organization-wide quota. A specific value must identify an existing user handle in the caller's organization when `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's organization or in at least one targeted descendant organization; the quota is then applied only to the organizations where that handle exists, and the request fails only if the handle exists in none of them.
+      example:
+        user_handle: jane@example.com
+      maxProperties: 1
+      minProperties: 1
+      type: object
+    UsageQuotaResponse:
+      description: Response containing a usage quota.
+      properties:
+        data:
+          $ref: "#/components/schemas/UsageQuotaResponseData"
+      required:
+        - data
+      type: object
+    UsageQuotaResponseAttributes:
+      description: Attributes of a usage quota.
+      properties:
+        enforced:
+          description: Whether usage above the limit is actively blocked instead of only tracked or alerted on.
+          example: true
+          type: boolean
+        org_public_id:
+          description: The public ID of the organization that owns the quota.
+          example: abcdef12345
+          type: string
+        scope:
+          $ref: "#/components/schemas/UsageQuotaResponseScope"
+        usage_limit:
+          description: The quota limit in the usage units defined by the quota namespace. May be fractional for quotas configured before public writes required whole units.
+          example: 100000
+          format: double
+          type: number
+      required:
+        - org_public_id
+        - usage_limit
+        - enforced
+      type: object
+    UsageQuotaResponseData:
+      description: A usage quota resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UsageQuotaResponseAttributes"
+        id:
+          description: An opaque usage quota identifier. Clients must pass this value back verbatim in update and delete requests and must not infer any structure from it.
+          example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+          type: string
+        type:
+          $ref: "#/components/schemas/UsageQuotaType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    UsageQuotaResponseDataList:
+      description: A list of usage quota resources.
+      items:
+        $ref: "#/components/schemas/UsageQuotaResponseData"
+      type: array
+    UsageQuotaResponseScope:
+      additionalProperties:
+        example: jane@example.com
+        type: string
+      description: A namespace-specific key and value identifying what the quota applies to within an organization. The object contains exactly one entry. A value of `"*"` identifies the default quota applied to entities without a specific quota. This field is omitted for an organization-wide quota.
+      example:
+        user_handle: jane@example.com
+      maxProperties: 1
+      minProperties: 1
+      type: object
+    UsageQuotaType:
+      description: The JSON:API resource type for a usage quota.
+      enum:
+        - quotas
+      example: quotas
+      type: string
+      x-enum-varnames:
+        - QUOTAS
+    UsageQuotaUpdateAttributes:
+      description: Attributes to update on a usage quota. Omitting a property leaves its current value unchanged.
+      properties:
+        enforced:
+          description: Whether to actively block usage above the limit. Omit this field to leave the current enforcement setting unchanged.
+          example: false
+          nullable: true
+          type: boolean
+        usage_limit:
+          description: The new quota limit in the usage units defined by the quota namespace. For an organization-wide quota (empty scope), the limit must be greater than the usage already recorded in the current period. Omit this field to leave the current limit unchanged.
+          example: 120000
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+      type: object
+    UsageQuotaUpdateData:
+      description: A usage quota resource to update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UsageQuotaUpdateAttributes"
+        id:
+          description: The opaque usage quota identifier, which must match the identifier in the request path.
+          example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+          type: string
+        type:
+          $ref: "#/components/schemas/UsageQuotaType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    UsageQuotaUpdateRequest:
+      description: Request containing the usage quota resource to update.
+      properties:
+        data:
+          $ref: "#/components/schemas/UsageQuotaUpdateData"
+      required:
+        - data
+      type: object
+    UsageQuotasBulkResponse:
+      description: Response containing the result of a bulk usage quota create-or-update request. Returned with a `200` status regardless of whether individual items succeeded or failed; check each item's `error` attribute to determine its outcome.
+      properties:
+        data:
+          $ref: "#/components/schemas/UsageQuotaBulkResultDataList"
+      required:
+        - data
+      type: object
+    UsageQuotasCreateRequest:
+      description: A JSON:API bulk request containing an array of usage quota resources rather than a single resource.
+      properties:
+        data:
+          $ref: "#/components/schemas/UsageQuotaCreateDataList"
+      required:
+        - data
+      type: object
+    UsageQuotasListResponse:
+      description: Response containing a paginated list of usage quotas.
+      properties:
+        data:
+          $ref: "#/components/schemas/UsageQuotaResponseDataList"
+        meta:
+          $ref: "#/components/schemas/UsageQuotasResponseMeta"
+      required:
+        - data
+        - meta
+      type: object
+    UsageQuotasResponseMeta:
+      description: Pagination metadata for a usage quota list response.
+      properties:
+        page:
+          $ref: "#/components/schemas/UsageQuotasResponseMetaPage"
+      required:
+        - page
+      type: object
+    UsageQuotasResponseMetaPage:
+      description: Cursor pagination fields for a usage quota list response.
+      properties:
+        next_cursor:
+          description: An opaque cursor for retrieving the next page. Omitted when there are no more results.
+          example: eyJvZmZzZXQiOjEwMH0=
+          type: string
       type: object
     UsageSummaryAvailableFieldsAttributes:
       description: |-
@@ -125411,11 +126662,15 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            ai_gateway_config_read: View AI Gateway configuration.
+            ai_gateway_config_write: Create, update, and delete AI Gateway configuration.
+            ai_gateway_usage: Use AI Gateway and view configuration applicable to the authenticated user.
             apm_api_catalog_read: View API catalog and API definitions.
             apm_api_catalog_write: Add, modify, and delete API catalog definitions.
             apm_read: Read and query APM and Trace Analytics.
             apm_service_catalog_read: View service catalog and service definitions.
-            apm_service_catalog_write: Add, modify, and delete service catalog definitions when those definitions are maintained by Datadog.
+            apm_service_catalog_write: >-
+              Add, modify, and delete service catalog definitions when those definitions are maintained by Datadog.
             appsec_vm_read: View infrastructure, application code, and library vulnerability findings.
             aws_configurations_manage: Manage AWS integration account configurations and related integration settings.
             billing_edit: Edit your organization's billing information.
@@ -125427,8 +126682,10 @@ components:
             cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using the API.
             ci_visibility_read: View CI Visibility.
-            cloud_cost_management_read: View Cloud Cost pages and the cloud cost data source in dashboards and notebooks. For more details, see the Cloud Cost Management docs.
-            cloud_cost_management_write: Configure cloud cost accounts and global customizations. For more details, see the Cloud Cost Management docs.
+            cloud_cost_management_read: >-
+              View Cloud Cost pages and the cloud cost data source in dashboards and notebooks. For more details, see the Cloud Cost Management docs.
+            cloud_cost_management_write: >-
+              Configure cloud cost accounts and global customizations. For more details, see the Cloud Cost Management docs.
             code_analysis_read: View Code Analysis.
             code_coverage_read: View Code Coverage.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data for Profile-Guided Optimization (PGO).
@@ -125437,7 +126694,8 @@ components:
             create_webhooks: Create webhooks integrations.
             dashboards_embed_share: Create, modify, and delete shared dashboards with share type 'embed'.
             dashboards_invite_share: Create, modify, and delete shared dashboards with share type 'invite'.
-            dashboards_public_share: Generate public and authenticated links to share dashboards or embeddable graphs externally.
+            dashboards_public_share: >-
+              Generate public and authenticated links to share dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             data_scanner_read: View Data Scanner configurations.
@@ -125461,19 +126719,22 @@ components:
             logs_read_index_data: Read indexed log data.
             manage_integrations: Install, uninstall, and configure integrations.
             metrics_read: View custom metrics.
-            monitors_downtime: Set downtimes to suppress alerts from any monitor in an organization. Mute and unmute monitors. The ability to write monitors is not required to set downtimes.
+            monitors_downtime: >-
+              Set downtimes to suppress alerts from any monitor in an organization. Mute and unmute monitors. The ability to write monitors is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit, delete, and resolve individual monitors.
             network_connections_read: Read cloud network connections.
             org_connections_read: Read cross organization connections.
             org_connections_write: Create, edit, and delete cross organization connections.
-            org_management: Edit org configurations, including authentication and certain security preferences such as configuring SAML, renaming an org, configuring allowed login methods, creating child orgs, subscribing & unsubscribing from apps in the marketplace, and enabling & disabling Remote Configuration for the entire organization.
+            org_management: >-
+              Edit org configurations, including authentication and certain security preferences such as configuring SAML, renaming an org, configuring allowed login methods, creating child orgs, subscribing & unsubscribing from apps in the marketplace, and enabling & disabling Remote Configuration for the entire organization.
             security_comments_read: Read comments of vulnerabilities.
             security_monitoring_critical_assets_read: Read Critical Assets.
             security_monitoring_critical_assets_write: Write Critical Assets.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
-            security_monitoring_findings_read: View a list of findings that include both misconfigurations and identity risks.
+            security_monitoring_findings_read: >-
+              View a list of findings that include both misconfigurations and identity risks.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -125482,24 +126743,29 @@ components:
             security_pipelines_read: View Security Pipelines.
             security_pipelines_write: Create, edit, and delete CSM Security Pipelines.
             siem_entities_read: View Cloud SIEM entities.
-            slos_corrections: Apply, edit, and delete SLO status corrections. A user with this permission can make status corrections, even if they do not have permission to edit those SLOs.
+            slos_corrections: >-
+              Apply, edit, and delete SLO status corrections. A user with this permission can make status corrections, even if they do not have permission to edit those SLOs.
             slos_read: View SLOs and status corrections.
             slos_write: Create, edit, and delete SLOs.
             synthetics_global_variable_read: View, search, and use Synthetics global variables.
             synthetics_global_variable_write: Create, edit, and delete global variables for Synthetics.
             synthetics_private_location_read: View, search, and use Synthetics private locations.
-            synthetics_private_location_write: Create and delete private locations in addition to having access to the associated installation guidelines.
+            synthetics_private_location_write: >-
+              Create and delete private locations in addition to having access to the associated installation guidelines.
             synthetics_read: List and view configured Synthetic tests and test results.
             synthetics_write: Create, edit, and delete Synthetic tests.
-            teams_manage: Manage Teams. Create, delete, rename, and edit metadata of all Teams. To control Team membership across all Teams, use the User Access Manage permission.
-            teams_read: Read Teams data. A User with this permission can view Team names, metadata, and which Users are on each Team.
+            teams_manage: >-
+              Manage Teams. Create, delete, rename, and edit metadata of all Teams. To control Team membership across all Teams, use the User Access Manage permission.
+            teams_read: >-
+              Read Teams data. A User with this permission can view Team names, metadata, and which Users are on each Team.
             test_optimization_read: View Test Optimization.
             test_optimization_settings_write: Update service settings in Test Optimization.
             test_optimization_write: Update flaky tests from Flaky Tests Management of Test Optimization.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
-            user_access_manage: Disable users, manage user roles, manage SAML-to-role mappings, and configure logs restriction queries.
+            user_access_manage: >-
+              Disable users, manage user roles, manage SAML-to-role mappings, and configure logs restriction queries.
             user_access_read: View users and their roles and settings.
             workflows_read: View workflows.
             workflows_run: Run workflows.
@@ -166514,6 +167780,7 @@ paths:
                                     value: good
                                 modified_at: "0001-01-01T00:00:00Z"
                                 modified_by: "00000000-0000-0000-0000-000000000002"
+                            can_annotate: true
                             content_id: trace-abc-123
                             created_at: "2025-06-01T12:00:00Z"
                             id: interaction-456
@@ -166592,6 +167859,7 @@ paths:
                   value:
                     data:
                       - attributes:
+                          can_manage_access: true
                           created_at: "2024-01-15T10:30:00Z"
                           created_by: 00000000-0000-0000-0000-000000000002
                           description: Queue for annotating customer support traces
@@ -166600,6 +167868,10 @@ paths:
                           name: My annotation queue
                           owned_by: 00000000-0000-0000-0000-000000000002
                           project_id: 00000000-0000-0000-0000-000000000002
+                          restrict_to_assignees: false
+                          restrict_to_reviewers: true
+                          reviewer_emails:
+                            - reviewer@example.com
                         id: 00000000-0000-0000-0000-000000000001
                         type: queues
               schema:
@@ -166639,6 +167911,7 @@ paths:
       description: |-
         Create an annotation queue. The `name` and `project_id` fields are required.
         An optional `annotation_schema` can be provided to define the labels for the queue.
+        Optional access-control fields can restrict annotation access to reviewers or assignees.
         Fields such as `created_by`, `owned_by`, `created_at`, `modified_by`,
         and `modified_at` are inferred by the backend.
       operationId: CreateLLMObsAnnotationQueue
@@ -166653,6 +167926,19 @@ paths:
                       description: Queue for annotating customer support traces
                       name: My annotation queue
                       project_id: 00000000-0000-0000-0000-000000000002
+                    type: queues
+              with_access_controls:
+                summary: Create queue with access controls
+                value:
+                  data:
+                    attributes:
+                      description: Queue for annotating customer support traces
+                      name: Restricted annotation queue
+                      project_id: 00000000-0000-0000-0000-000000000002
+                      restrict_to_assignees: false
+                      restrict_to_reviewers: true
+                      reviewer_emails:
+                        - reviewer@example.com
                     type: queues
               with_schema:
                 summary: Create queue with annotation schema
@@ -166689,6 +167975,7 @@ paths:
                   value:
                     data:
                       attributes:
+                        can_manage_access: true
                         created_at: "2024-01-15T10:30:00Z"
                         created_by: 00000000-0000-0000-0000-000000000002
                         description: Queue for annotating customer support traces
@@ -166697,6 +167984,10 @@ paths:
                         name: My annotation queue
                         owned_by: 00000000-0000-0000-0000-000000000002
                         project_id: 00000000-0000-0000-0000-000000000002
+                        restrict_to_assignees: false
+                        restrict_to_reviewers: true
+                        reviewer_emails:
+                          - reviewer@example.com
                       id: 00000000-0000-0000-0000-000000000001
                       type: queues
               schema:
@@ -166773,7 +168064,9 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: |-
-        Partially update an annotation queue. The `name`, `description`, and `annotation_schema` fields can be updated.
+        Partially update an annotation queue. The `name`, `description`,
+        `annotation_schema`, `reviewer_emails`, `restrict_to_reviewers`, and
+        `restrict_to_assignees` fields can be updated.
       operationId: UpdateLLMObsAnnotationQueue
       parameters:
         - $ref: "#/components/parameters/LLMObsAnnotationQueueIDPathParameter"
@@ -166787,6 +168080,10 @@ paths:
                     attributes:
                       description: Updated description
                       name: Updated queue name
+                      restrict_to_assignees: false
+                      restrict_to_reviewers: true
+                      reviewer_emails:
+                        - reviewer@example.com
                     type: queues
             schema:
               $ref: "#/components/schemas/LLMObsAnnotationQueueUpdateRequest"
@@ -166801,6 +168098,7 @@ paths:
                   value:
                     data:
                       attributes:
+                        can_manage_access: true
                         created_at: "2024-01-15T10:30:00Z"
                         created_by: 00000000-0000-0000-0000-000000000002
                         description: Queue for annotating customer support traces
@@ -166809,6 +168107,10 @@ paths:
                         name: My annotation queue
                         owned_by: 00000000-0000-0000-0000-000000000002
                         project_id: 00000000-0000-0000-0000-000000000002
+                        restrict_to_assignees: false
+                        restrict_to_reviewers: true
+                        reviewer_emails:
+                          - reviewer@example.com
                       id: 00000000-0000-0000-0000-000000000001
                       type: queues
               schema:
@@ -166867,6 +168169,7 @@ paths:
                       attributes:
                         annotated_interactions:
                           - annotations: []
+                            can_annotate: true
                             content_id: trace-abc-123
                             id: interaction-456
                             type: trace
@@ -166918,6 +168221,7 @@ paths:
         by `interaction_id` and the requesting user's identity.
         Results and errors in the response are linked to request items by `interaction_id`.
         Errors for individual items are returned in the `errors` field without blocking the rest of the batch.
+        Requests where every item is denied by queue access rules return `403`.
       operationId: UpsertLLMObsAnnotations
       parameters:
         - $ref: "#/components/parameters/LLMObsAnnotationQueueIDPathParameter"
@@ -166962,9 +168266,31 @@ paths:
                             modified_by: 00000000-0000-0000-0000-000000000002
                       id: 00000000-0000-0000-0000-000000000001
                       type: annotations
+                mixed_access_denied:
+                  summary: Some annotations were denied by queue access rules
+                  value:
+                    data:
+                      attributes:
+                        annotations:
+                          - created_at: "2024-01-15T10:30:00Z"
+                            created_by: 00000000-0000-0000-0000-000000000002
+                            id: 00000000-0000-0000-0000-000000000000
+                            interaction_id: 00000000-0000-0000-0000-000000000001
+                            label_values:
+                              - label_schema_id: abc-123
+                                value: good
+                            modified_at: "2024-01-15T10:30:00Z"
+                            modified_by: 00000000-0000-0000-0000-000000000002
+                        errors:
+                          - code: permission_denied
+                            error: permission denied
+                            interaction_id: 00000000-0000-0000-0000-000000000003
+                      id: 00000000-0000-0000-0000-000000000001
+                      type: annotations
               schema:
                 $ref: "#/components/schemas/LLMObsAnnotationsResponse"
-          description: OK — annotations created or updated. Per-item errors are listed in `errors`.
+          description: >-
+            OK — annotations created or updated. For mixed batches, denied items and other per-item errors are listed in `errors`.
         "400":
           content:
             application/json:
@@ -166982,7 +168308,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
+          description: Forbidden — all request items were denied by queue access rules
         "404":
           content:
             application/json:
@@ -199812,6 +201138,7 @@ paths:
               default:
                 value:
                   data:
+                    id: c1234567-89ab-cdef-0123-456789abcdef
                     relationships:
                       findings:
                         data:
@@ -201450,6 +202777,121 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_notification_profiles_write
+  /api/v2/security/threat-intel/stix:
+    post:
+      description: |-
+        Ingest a STIX 2.1 bundle containing threat intelligence indicators. Only indicator objects are processed. Supported indicator patterns contain IPv4 addresses, IPv6 addresses, domain names, or SHA-256 file hashes.
+
+        Non-indicator objects are ignored and are not included in the response counters. Indicator objects with unsupported STIX versions or patterns that produce no supported observable values increment the `unsupported` counter. Patterns that cannot be parsed increment the `invalid` counter. Processing is best effort, so valid supported indicators in the same bundle are still added.
+
+        A successful response means ingestion has completed. Reference-table materialization and enrichment happen asynchronously. Requests are limited to 50 MB as received, 100 MB after decompression, and 10 requests per second per API key. Gzip-compressed request bodies are supported.
+      operationId: AddSTIXThreatIntel
+      parameters:
+        - description: >-
+            Vendor identifier for the feed. The value must not exceed 10 characters. Datadog normalizes the accepted value to lowercase, converts non-alphanumeric characters to underscores, and trims leading and trailing underscores.
+          example: acme
+          in: header
+          name: ti_vendor
+          required: true
+          schema:
+            maxLength: 10
+            minLength: 1
+            type: string
+        - description: Content encoding for the request body. Use gzip for a compressed STIX bundle.
+          in: header
+          name: Content-Encoding
+          required: false
+          schema:
+            $ref: "#/components/schemas/STIXContentEncoding"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  id: bundle--11111111-1111-4111-8111-111111111111
+                  objects:
+                    - created: "2026-07-22T12:00:00Z"
+                      id: indicator--22222222-2222-4222-8222-222222222222
+                      modified: "2026-07-22T12:00:00Z"
+                      pattern: "[ipv4-addr:value = '198.51.100.42']"
+                      pattern_type: stix
+                      spec_version: "2.1"
+                      type: indicator
+                      valid_from: "2026-07-22T12:00:00Z"
+                  spec_version: "2.1"
+                  type: bundle
+            schema:
+              $ref: "#/components/schemas/STIXBundleRequest"
+        description: >-
+          A STIX 2.1 bundle containing indicator objects. The request body must not exceed 50 MB as received or 100 MB after decompression.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        accepted: 1
+                        invalid: 0
+                        unsupported: 0
+                      id: acme
+                      type: threat-intel-stix-ingest
+              schema:
+                $ref: "#/components/schemas/STIXIngestResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "413":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: The request body exceeds 50 MB as received or 100 MB after decompression.
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too many requests
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: The STIX ingestion service returned an error while processing the request.
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: The STIX ingestion service is temporarily unavailable.
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Ingest STIX threat intelligence
+      tags:
+        - Threat Intelligence
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - reference_tables_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/vulnerabilities:
     get:
       deprecated: true
@@ -219665,9 +221107,11 @@ paths:
                         connected_team:
                           data:
                             id: "@GitHubOrg/team-handle"
+                            type: github_team
                         team:
                           data:
                             id: 87654321-4321-8765-dcba-210987654321
+                            type: team
                       type: team_connection
             schema:
               $ref: "#/components/schemas/TeamConnectionCreateRequest"
@@ -222100,6 +223544,360 @@ paths:
         permissions:
           - usage_read
           - billing_read
+  /api/v2/usage/quotas/{quota_namespace}:
+    get:
+      description: |-
+        Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+      operationId: ListQuotas
+      parameters:
+        - description: The product-specific namespace whose usage quotas are being managed.
+          in: path
+          name: quota_namespace
+          required: true
+          schema:
+            example: ai_credits
+            type: string
+        - description: Whether to include quotas configured on descendant organizations in the caller's organization hierarchy. Only descendants in the same datacenter are supported.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: false
+            type: boolean
+        - description: An opaque cursor from a previous response's `meta.page.next_cursor` used to retrieve the next page.
+          in: query
+          name: page[cursor]
+          required: false
+          schema:
+            type: string
+        - description: The number of usage quotas to return per page.
+          in: query
+          name: page[limit]
+          required: false
+          schema:
+            default: 100
+            format: int64
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          enforced: true
+                          org_public_id: abcdef12345
+                          scope:
+                            user_handle: jane@example.com
+                          usage_limit: 100000
+                        id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+                        type: quotas
+                    meta:
+                      page:
+                        next_cursor: eyJvZmZzZXQiOjEwMH0=
+              schema:
+                $ref: "#/components/schemas/UsageQuotasListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - user_access_manage
+            - billing_edit
+            - org_management
+      summary: List usage quotas
+      tags:
+        - Usage Metering
+      x-menu-order: 14
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.next_cursor
+        limitParam: page[limit]
+        resultsPath: data
+      "x-permission":
+        operator: AND
+        permissions:
+          - user_access_manage
+          - billing_edit
+          - org_management
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated; otherwise, a new quota is created. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+      operationId: CreateQuotas
+      parameters:
+        - description: The product-specific namespace whose usage quotas are being managed.
+          in: path
+          name: quota_namespace
+          required: true
+          schema:
+            example: ai_credits
+            type: string
+        - description: Whether to write every item in the request to the caller's organization and all of its descendant organizations, instead of only the caller's organization. Only descendants in the same datacenter are supported. For a user-handle scope, the quota is applied only to the caller's organization and to descendant organizations where that user handle exists; the item fails only if the handle exists in none of them.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: false
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                summary: Create or update quotas for the caller's organization.
+                value:
+                  data:
+                    - attributes:
+                        enforced: true
+                        scope:
+                          user_handle: jane@example.com
+                        usage_limit: 100000
+                      type: quotas
+                    - attributes:
+                        enforced: false
+                        scope:
+                          user_handle: "*"
+                        usage_limit: 250000
+                      type: quotas
+            schema:
+              $ref: "#/components/schemas/UsageQuotasCreateRequest"
+        description: The usage quotas to create or update.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          enforced: true
+                          org_public_id: abcdef12345
+                          scope:
+                            user_handle: jane@example.com
+                          usage_limit: 100000
+                        id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+                        type: quotas
+                      - attributes:
+                          error: usage_limit is out of range
+                        id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTp1c2VyQGV4YW1wbGUuY29t"
+                        type: quotas
+              schema:
+                $ref: "#/components/schemas/UsageQuotasBulkResponse"
+          description: OK. The response includes each item's result; see each item's `error` attribute for any that failed to write.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Internal Server Error. Every item in the batch failed to write.
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - user_access_manage
+            - billing_edit
+            - org_management
+      summary: Create or update usage quotas
+      tags:
+        - Usage Metering
+      x-menu-order: 15
+      "x-permission":
+        operator: AND
+        permissions:
+          - user_access_manage
+          - billing_edit
+          - org_management
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/usage/quotas/{quota_namespace}/{id}:
+    delete:
+      description: |-
+        Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+      operationId: DeleteQuota
+      parameters:
+        - description: The product-specific namespace whose usage quotas are being managed.
+          in: path
+          name: quota_namespace
+          required: true
+          schema:
+            example: ai_credits
+            type: string
+        - description: The opaque quota identifier returned by a previous list or create request. Clients must pass this value verbatim.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - user_access_manage
+            - billing_edit
+            - org_management
+      summary: Delete a usage quota
+      tags:
+        - Usage Metering
+      x-menu-order: 17
+      "x-permission":
+        operator: AND
+        permissions:
+          - user_access_manage
+          - billing_edit
+          - org_management
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: |-
+        Updates the supplied fields on a usage quota and leaves omitted fields unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+      operationId: UpdateQuota
+      parameters:
+        - description: The product-specific namespace whose usage quotas are being managed.
+          in: path
+          name: quota_namespace
+          required: true
+          schema:
+            example: ai_credits
+            type: string
+        - description: The opaque quota identifier returned by a previous list or create request. Clients must pass this value verbatim.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      enforced: false
+                      usage_limit: 120000
+                    id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+                    type: quotas
+            schema:
+              $ref: "#/components/schemas/UsageQuotaUpdateRequest"
+        description: The usage quota fields to update. Omitting an attribute leaves its current value unchanged.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        enforced: false
+                        org_public_id: abcdef12345
+                        scope:
+                          user_handle: jane@example.com
+                        usage_limit: 120000
+                      id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+                      type: quotas
+              schema:
+                $ref: "#/components/schemas/UsageQuotaResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request. Returned if the request is malformed, or if the `id` in the request body does not match the `id` in the request path.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - user_access_manage
+            - billing_edit
+            - org_management
+      summary: Update a usage quota
+      tags:
+        - Usage Metering
+      x-menu-order: 16
+      "x-permission":
+        operator: AND
+        permissions:
+          - user_access_manage
+          - billing_edit
+          - org_management
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/usage/summary/available_fields:
     get:
       description: |-
@@ -225085,6 +226883,8 @@ tags:
   - description: |-
       Search and manage flaky tests through Test Optimization. See the [Test Optimization page](https://docs.datadoghq.com/tests/) for more information.
     name: Test Optimization
+  - description: Ingest and manage threat intelligence data for security enrichment and investigation.
+    name: Threat Intelligence
   - description: |-
       Manage your Datadog Twilio integration accounts directly through the Datadog API.
       Create, update, and delete accounts, configure authentication and settings, and
