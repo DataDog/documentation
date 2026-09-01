@@ -757,7 +757,7 @@ menu:
       identifier: otel-setup-collector-exporter
       parent: otel_collect
       weight: 402
-    - name: Batch and Memory Settings
+    - name: Collector Memory Limits
       url: opentelemetry/config/collector_batch_memory/
       identifier: otel_batch_memory
       parent: otel-setup-collector-exporter

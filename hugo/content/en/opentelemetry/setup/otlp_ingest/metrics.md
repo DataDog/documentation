@@ -221,7 +221,30 @@ For example:
 
 ## OpenTelemetry Collector
 
-Configure the [recommended OpenTelemetry Collector setup][1] to export metrics to this endpoint. The configuration includes cumulative-to-delta conversion, metric tagging headers, batching, and host metadata enrichment.
+If your OpenTelemetry Collector distribution does not include all the components used by Datadog's recommended Collector setup, configure its OTLP HTTP exporter directly:
+
+```yaml
+processors:
+  cumulativetodelta: {}
+
+exporters:
+  otlp_http/datadog:
+    metrics_endpoint: {{< region-param key="otlp_metrics_endpoint" >}}
+    headers:
+      dd-api-key: ${env:DD_API_KEY}
+      dd-otel-metric-config: '{"resource_attributes_as_tags": true}'
+
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      processors: [cumulativetodelta]
+      exporters: [otlp_http/datadog]
+```
+
+This example converts cumulative metrics to the delta temporality required by the intake endpoint. Add any receivers and processors required by your Collector distribution.
+
+For a production deployment using OpenTelemetry Collector Contrib, use the [recommended OpenTelemetry Collector setup][1]. It also configures sending-queue batching, resource detection, metric tagging, and host metadata enrichment.
 
 ## Troubleshooting
 

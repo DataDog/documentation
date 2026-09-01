@@ -41,7 +41,7 @@ This approach gives you full control over OpenTelemetry pipelines while also pro
 
 ## Other setup options
 
-Alternative methods are available for specific use cases, such as maintaining a vendor-neutral pipeline or running in non-Kubernetes environments.
+Alternative methods are available for specific use cases, such as running your own OpenTelemetry Collector distribution or operating in non-Kubernetes environments.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}

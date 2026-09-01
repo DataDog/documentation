@@ -39,7 +39,7 @@ The configurations on this page use the [agent deployment pattern][10]: one Coll
 
 This setup supports bare metal, VMs, Docker, and Kubernetes. Supported managed Kubernetes distributions include Amazon EKS (including Auto Mode), Google GKE (Standard and Autopilot), and Azure AKS (including Automatic).
 
-This setup does not support serverless or task-based container runtimes such as ECS Fargate, EKS Fargate, or AWS Lambda. For supported Datadog features, see the [feature compatibility table][7] under **OTel SDK + OpenTelemetry Collector**.
+This setup does not support serverless or task-based container runtimes such as ECS Fargate, EKS Fargate, or AWS Lambda. For supported Datadog features, see the [feature compatibility table][7] under **OTel SDK + Collector (OTLP HTTP)**.
 
 - [OpenTelemetry Collector Contrib][1] v0.154.0 or later
 - A [Datadog API key][2]
@@ -789,7 +789,7 @@ For the complete configuration files for each environment, see the [`opentelemet
 
 {{% tab "Kubernetes (Helm—recommended)" %}}
 
-Use the [official OpenTelemetry Collector Helm chart][102] to deploy the Collector as a DaemonSet in Kubernetes. The example values files are compatible with chart v0.147.1 or later, pin the Collector to v0.154.0, and set up the required mounts, environment variables, RBAC resources, and port exposure.
+Use the [official OpenTelemetry Collector Helm chart][102] to deploy the Collector as a DaemonSet in Kubernetes. The example values files are tested with chart v0.147.1, pin the Collector to v0.154.0, and set up the required mounts, environment variables, RBAC resources, and port exposure.
 
 1. Create a Kubernetes secret with your Datadog API key:
 
@@ -823,7 +823,7 @@ Use the [official OpenTelemetry Collector Helm chart][102] to deploy the Collect
 1. Install the Collector:
 
    ```shell
-   helm install otelcol open-telemetry/opentelemetry-collector --values values.yaml
+   helm install otelcol open-telemetry/opentelemetry-collector --version 0.147.1 --values values.yaml
    ```
 
 [102]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/opentelemetry-collector-0.147.1/charts/opentelemetry-collector
@@ -838,7 +838,7 @@ Use the [official OpenTelemetry Collector Helm chart][102] to deploy the Collect
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">For production deployments, configure the <a href="/opentelemetry/config/collector_batch_memory/">memory limiter</a> based on the memory available to the Collector.</div>
+<div class="alert alert-warning"><strong>Before using this setup in production</strong>, add the <a href="/opentelemetry/config/collector_batch_memory/">memory limiter</a> to every pipeline. The starter configurations above omit it because its limits must be sized for the memory available to your Collector.</div>
 
 ### 3. Run the Collector
 
@@ -908,7 +908,9 @@ After your application sends telemetry to the Collector, verify that data appear
 
 The `span_metrics` connector generates RED metrics from trace data. These metrics power APM features including the Service Catalog, Service Page, and Resource Page. The connector is configured with dimensions that enable Datadog to compute host tags, peer services, and operation names from your traces.
 
-For a complete list of dimensions included in the recommended configuration, including those related to container tags, see the [full configuration files][5] in the `opentelemetry-examples` repository. Those files also show how to replace groups of container tag dimensions with glob patterns, such as `- glob: container.**`.
+Each environment-specific configuration in [Create the Collector configuration](#2-create-the-collector-configuration) includes the complete `span_metrics` connector block. Retain all of its dimensions when adapting the configuration so Datadog can derive the required host tags, peer services, operation names, and resource names.
+
+The [full configuration files][5] also show how to replace groups of container tag dimensions with glob patterns, such as `- glob: container.**`.
 
 ### OTLP HTTP exporter
 

@@ -3,9 +3,9 @@ title: Deploy the OpenTelemetry Collector with the Datadog Exporter
 aliases:
 - /opentelemetry/collector_exporter/deployment
 further_reading:
-- link: "/opentelemetry/setup/collector_exporter/"
+- link: "/opentelemetry/setup/collector_exporter/datadog_exporter/"
   tag: "Documentation"
-  text: "Configuring the OpenTelemetry Collector"
+  text: "Configure the Datadog Exporter and Connector"
 - link: "https://opentelemetry.io/docs/collector/deployment/"
   tag: "External Site"
   text: "OpenTelemetry Collector Deployment"

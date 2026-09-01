@@ -7,6 +7,9 @@ aliases:
 - /opentelemetry/collector_exporter/otel_collector_datadog_exporter
 description: 'Send OpenTelemetry data to Datadog with the Datadog Exporter and Datadog Connector'
 further_reading:
+- link: "/opentelemetry/setup/collector_exporter/deploy/"
+  tag: "Documentation"
+  text: "Deploy the OpenTelemetry Collector with the Datadog Exporter"
 - link: "/opentelemetry/integrations/datadog_extension/"
   tag: "Documentation"
   text: "Enable the Datadog Extension to inspect collector configurations in Fleet Automation"
@@ -31,8 +34,6 @@ The OpenTelemetry Collector enables you to collect, process, and export telemetr
 - **Datadog Connector**: Calculates Trace Metrics from collected span data
 
 {{< img src="/opentelemetry/setup/otel-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running OpenTelemetry Collector with Datadog Exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
-
-<div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table</a> under <b>OTel SDK + OpenTelemetry Collector</b>.</div>
 
 ## Install and configure
 
@@ -278,7 +279,7 @@ Configure each of the following components to suit your needs:
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/collector_exporter/otlp_receiver/" >}}OTLP Receiver{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/collector_exporter/hostname_tagging/" >}}Hostname and Tags{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/collector_exporter/collector_batch_memory/" >}}Batch and Memory Settings{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/collector_exporter/collector_batch_memory/" >}}Collector Memory Limits{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Validate your collector configurations in Fleet Automation

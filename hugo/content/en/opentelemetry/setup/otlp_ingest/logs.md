@@ -81,7 +81,25 @@ logExporter, err := otlploghttp.New(
 
 ## OpenTelemetry Collector
 
-Configure the [recommended OpenTelemetry Collector setup][1] to export logs to this endpoint. The configuration includes resource detection, batching, and the required authentication header.
+If your OpenTelemetry Collector distribution does not include all the components used by Datadog's recommended Collector setup, configure its OTLP HTTP exporter directly:
+
+```yaml
+exporters:
+  otlp_http/datadog:
+    logs_endpoint: {{< region-param key="otlp_logs_endpoint" >}}
+    headers:
+      dd-api-key: ${env:DD_API_KEY}
+
+service:
+  pipelines:
+    logs:
+      receivers: [otlp]
+      exporters: [otlp_http/datadog]
+```
+
+Add any receivers and processors required by your Collector distribution.
+
+For a production deployment using OpenTelemetry Collector Contrib, use the [recommended OpenTelemetry Collector setup][1]. It also configures sending-queue batching, resource detection, and host metadata enrichment.
 
 ## Troubleshooting
 

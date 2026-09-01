@@ -21,7 +21,7 @@ The Datadog Connector remains fully supported for existing configurations. To ma
 
 ## Setup
 
-Use the complete [`span_metrics` configuration][1], including the recommended dimensions for Datadog APM features.
+Select your environment in the [recommended Collector setup][3] and use its complete `span_metrics` connector block, including the dimensions required for Datadog APM features.
 
 ## Data collected
 
@@ -29,7 +29,7 @@ See [Trace Metrics][2].
 
 ## Full example configuration
 
-For a full working example, see the [OpenTelemetry Collector configuration][1].
+For full working example files, see the [`opentelemetry-examples` repository][5].
 
 ## Further reading
 
@@ -38,4 +38,6 @@ For a full working example, see the [OpenTelemetry Collector configuration][1].
 
 [1]: /opentelemetry/setup/collector_exporter/install/#span-metrics-connector
 [2]: /tracing/metrics/metrics_namespace/
+[3]: /opentelemetry/setup/collector_exporter/install/#2-create-the-collector-configuration
 [4]: /opentelemetry/setup/collector_exporter/datadog_exporter/
+[5]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
