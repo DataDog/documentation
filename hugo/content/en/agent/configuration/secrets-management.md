@@ -409,7 +409,7 @@ Configure the Datadog Agent to use AWS SSM to resolve secrets in Helm using the 
 
 ##### Integration check
 
-```sh
+```yaml
 datadog:
   secretBackend:
     type: "aws.ssm"
