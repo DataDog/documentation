@@ -126,7 +126,7 @@ Contact [support][26] to disable Cloud SIEM.
 [5]: /logs/log_configuration/pipelines/
 [6]: https://www.datadoghq.com/blog/monitoring-cloudtrail-logs/
 [7]: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
-[8]: https://app.datadoghq.com/security/landing
+[8]: https://app.datadoghq.com/security/siem/intro
 [9]: https://app.datadoghq.com/security/siem/content-packs
 [10]: https://app.datadoghq.com/security/configuration/siem/log-sources
 [11]: https://app.datadoghq.com/security/configuration/siem/setup

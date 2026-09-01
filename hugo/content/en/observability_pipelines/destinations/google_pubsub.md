@@ -1,5 +1,6 @@
 ---
 title: Google Pub/Sub Destination
+description: Learn how to publish logs to the Google Pub/Sub messaging system using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

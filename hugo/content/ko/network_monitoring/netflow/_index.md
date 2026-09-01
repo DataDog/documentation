@@ -5,6 +5,9 @@ further_reading:
 - link: /network_monitoring/devices/profiles
   tag: 설명서
   text: Network Device Monitoring을 통해 프로필 사용
+- link: /network_monitoring/network_path/setup/#dynamic-tests-for-netflow-experimental
+  tag: 설명서
+  text: NetFlow용 동적 테스트 설정
 - link: https://www.datadoghq.com/blog/monitor-netflow-with-datadog/
   tag: 블로그
   text: Datadog로 NetFlow 트래픽 데이터 모니터링
@@ -25,13 +28,13 @@ NetFlow 뷰는 기기 및 인터페이스별로 집계된 트래픽 메트릭을
 
 왼쪽 탐색을 사용하여 추가 NetFlow 뷰를 탐색하세요.
 
-- **트래픽 양**: 기기 및 인터페이스별 전체 흐름 메트릭입니다.
-- **기기 상태**: 모니터링된 기기의 상태 및 활용도입니다.
-- **흐름**: 개별 흐름 레코드의 세부 정보입니다.
-- **대화**: 집계된 출발지-목적지 쌍입니다.
-- **자율 시스템**: 자율 시스템 번호(ASN)별로 그룹화된 흐름 데이터입니다.
-- **지리적 IP**: 지리적 출처/목적지별로 그룹화된 흐름 데이터입니다.
-- **출발지 포트 / 목적지 포트 / 프로토콜 / 플래그**: 패킷 메타데이터에 따른 트래픽 분류입니다.
+- {{< ui >}}Traffic Volume{{< /ui >}}: 기기 및 인터페이스별 전체 흐름 메트릭입니다.
+- {{< ui >}}Device Health{{< /ui >}}: 모니터링된 기기의 상태 및 활용도입니다.
+- {{< ui >}}Flows{{< /ui >}}: 개별 흐름 레코드의 세부 정보입니다.
+- {{< ui >}}Conversations{{< /ui >}}: 집계된 소스–목적지 쌍입니다.
+- {{< ui >}}Autonomous Systems{{< /ui >}}: 자율 시스템 번호(ASN)별로 그룹화된 흐름 데이터입니다.
+- {{< ui >}}Geo IP{{< /ui >}}: 지리적 소스/목적지별로 그룹화된 흐름 데이터입니다.
+- {{< ui >}}Source Ports / Destination Ports / Protocols / Flags{{< /ui >}}: 패킷 메타데이터별 트래픽 분석입니다.
 
 ## 설치 {#installation}
 
@@ -90,7 +93,7 @@ Datadog은 IANA(인터넷 할당 번호 관리국) 데이터를 사용하여 Net
 
 또한, 특정 애플리케이션에 포트와 프로토콜을 매핑할 수 있도록, 맞춤 보강을 추가할 수 있습니다(예: 특정 포트에서 실행되는 맞춤 서비스의 경우). 이로 인해 네트워크 엔지니어와 그 팀이 인간이 읽을 수 있는 이름으로 NetFlow 데이터를 해석하고 쿼리하는 것이 더 쉬워집니다.
 
-NetFlow의 **Configuration** 탭에서 **+ Add Enrichment**을 클릭하여 사용자 지정 보강이 포함된 CSV 파일을 업로드합니다.
+NetFlow의 {{< ui >}}Configuration{{< /ui >}} 탭에서 {{< ui >}}+ Add Enrichment{{< /ui >}}을 클릭하여 사용자 지정 보강이 포함된 CSV 파일을 업로드합니다.
 
 {{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="NetFlow 구성 탭의 새 보강 매핑 모달" width="100%" >}}
 
@@ -98,35 +101,41 @@ NetFlow의 **Configuration** 탭에서 **+ Add Enrichment**을 클릭하여 사�
 
 또한, 특정 IP 주소에서 실행 중인 서비스를 분류하기 위해, IP와 CIDR을 맞춤 태그에 매핑하는 맞춤 보강을 추가할 수 있습니다. 이로 인해 네트워크 엔지니어와 그 팀이 인간이 읽을 수 있는 이름으로 NetFlow 데이터를 해석하고 쿼리하는 것이 더 쉬워집니다.
 
-[**보강** 설정 페이지][10]에서 **+ Add Enrichment**을 클릭하여 매핑을 수동으로 추가하거나 CSV 파일을 업로드하여 매핑을 일괄 추가합니다.
+[{{< ui >}}Enrichment{{< /ui >}} 설정 페이지][10]에서 {{< ui >}}+ Add Enrichment{{< /ui >}}을 클릭하여 매핑을 수동으로 추가하거나 CSV 파일을 업로드하여 매핑을 일괄 추가합니다.
 
 ### 역방향 DNS 개인 IP 보강 {#reverse-dns-private-ip-enrichment}
 
 소스 또는 목적지 IP 주소와 연결된 호스트 이름에 대한 DNS 조회를 수행하기 위해 Reverse DNS 개인 IP 보강을 활성화합니다. 활성화되면 Agent는 개인 주소 범위 내의 소스 및 목적지 IP에 대해 Reverse DNS 조회를 수행하여 해당 호스트 이름으로 NetFlow 레코드를 보강합니다.
 
-[기본][7]적으로 `datadog.yaml` 파일의 Reverse DNS IP 보강이 비활성화되어 있습니다. 활성화하려면 이 페이지의 [구성](#configuration) 섹션을 참조하세요.
+기본적으로 [`datadog.yaml` 파일][7]의 Reverse DNS IP 보강은 비활성화되어 있습니다. 활성화하려면 이 페이지의 [구성](#configuration) 섹션을 참조하세요.
 
-Reverse DNS IP 보강과 관련된 흐름을 찾으려면 **+ 필터** 메뉴에서 **DNS**를 검색하세요.
+Reverse DNS IP 보강과 관련된 흐름을 찾으려면 {{< ui >}}+ Filter{{< /ui >}} 메뉴에서 DNS를 검색하세요:
 
 {{< img src="network_device_monitoring/netflow/dns_ip_enrichmen_2.png" alt="역 DNS 목적지 및 소스 패싯을 표시하도록 향상된 필터 메뉴" width="100%" >}}
 
-**참고**: 역 DNS 항목은 캐시되며 DNS 쿼리를 최소화하고 DNS 서버의 부하를 줄이기 위해 속도 제한의 적용을 받습니다. 기본 캐싱 및 속도 제한 수정 등 더 많은 구성 옵션은 [전체 구성 파일][8]을 참조하세요.
+**참고**: 역 DNS 항목은 캐시되며 DNS 쿼리를 최소화하고 DNS 서버의 부하를 줄이기 위해 속도 제한의 적용을 받습니다. 기본 캐싱 및 속도 제한 수정 등 더 많은 구성 옵션은 [예제 Agent 구성 파일][7]의 `reverse_dns_enrichment` 섹션을 참조하십시오.
 
 ## IP 세부정보 {#ip-details}
 
-**대화** 보기에서 목적지 IP의 공용 IP 주소를 볼 수 있습니다. IP 위에 마우스를 올리면 IP에 대한 풍부한 메타데이터와 **관련 네트워크 연결 보기** 링크가 표시되어 더 자세한 연결성을 검사할 수 있습니다.
+**대화** 보기에서 목적지 IP의 공용 IP 주소를 볼 수 있습니다. IP 위에 마우스를 올리면 IP에 대한 풍부한 메타데이터와 {{< ui >}}View Related Network Connections{{< /ui >}} 링크가 표시되어 더 자세한 연결성을 검사할 수 있습니다.
 
 {{< img src="network_device_monitoring/netflow/NetFlow_IP_pill.png" alt="IP 주소 위에 마우스를 올리면 IP 세부정보와 관련 네트워크 연결 보기를 표시합니다." width="100%" >}}
 
 ## 흐름 다이어그램 {#flow-diagram}
 
-**Flows** 메뉴를 클릭하고 목록에서 흐름 위에 마우스를 올려 Source IP, Ingress Interface Name, Device name 및 관련 네트워크 연결의 Destination IP에 대한 추가 정보를 확인하여 NetFlow Monitoring에서 흐름을 시작화할 수 있습니다.
+{{< ui >}}Flows{{< /ui >}} 메뉴를 클릭하고 목록에서 흐름 위에 마우스를 올려 소스 IP, Ingress Interface Name, Device name 및 관련 네트워크 연결의 Destination IP에 대한 추가 정보를 확인하여 NetFlow Monitoring에서 흐름을 시각화할 수 있습니다.
 
 {{< img src="network_device_monitoring/netflow/flows.png" alt="NetFlow를 전송하는 기기에서 집계된 흐름 위에 마우스를 올려 관련 네트워크 연결에 접근하세요." width="100%" >}}
 
+## NetFlow용 Network Path {#network-path-for-netflow}
+
+NetFlow용 동적 테스트는 NetFlow 트래픽을 수집하는 Agent에서 NetFlow 레코드에 관찰된 목적지 IP로 Network Path 테스트를 자동으로 실행할 수 있습니다. NetFlow용 동적 테스트를 사용하여 NetFlow 목적지에 홉별 경로 및 지연 시간 컨텍스트를 추가하십시오.
+
+NetFlow용 동적 테스트는 실험적 기능이며 Agent `v7.81+`이(가) 필요합니다. NetFlow용 동적 테스트를 설정하려면 [Network Path 설정][11]을 참조하십시오.
+
 ## NetFlow 모니터링 {#netflow-monitor}
 
-모든 보기에서 **Create Monitor** 아이콘을 클릭하여 [NetFlow 모니터링][6]을 생성합니다. 모니터링을 생성할 때 기기 관점에서 소스 IP 또는 대상 IP와 관련된 다음 패싯을 고려하세요. 이 필드는 네트워크 트래픽 패턴에 대한 통찰력을 제공하고 성능 및 보안을 최적화하는 데 도움이 됩니다.
+모든 보기에서 {{< ui >}}Create Monitor{{< /ui >}} 아이콘을 클릭하여 [NetFlow monitor][6]을 생성합니다. 모니터링을 생성할 때 기기 관점에서 소스 IP 또는 대상 IP와 관련된 다음 패싯을 고려하세요. 이 필드는 네트워크 트래픽 패턴에 대한 통찰력을 제공하고 성능 및 보안을 최적화하는 데 도움이 됩니다.
 
 {{< img src="network_device_monitoring/netflow/create_monitor.png" alt="모니터링 생성 링크가 강조 표시된 NetFlow 모니터링의 흐름 뷰." width="100%" >}}
 
@@ -243,7 +252,7 @@ Reverse DNS IP 보강과 관련된 흐름을 찾으려면 **+ 필터** 메뉴에
 - 소스 및 대상 위젯이 정확한 역할을 반영하도록 실제 시작자와 응답자를 식별합니다.
 - 서버가 잘못된 상위 소스로 나타나는 노이즈를 제거합니다.
 
-스티칭된(양방향) 보기와 스티칭되지 않은(단일 방향) 보기 사이를 전환하려면 엔드포인트 기반 NetFlow 보기로 이동하여 시간 선택기 아래에 표시된 **양방향** 전환 버튼을 사용하세요.
+스티칭된(양방향) 보기와 스티칭되지 않은(단일 방향) 보기 사이를 전환하려면 엔드포인트 기반 NetFlow 보기로 이동하여 시간 선택기 아래에 표시된 {{< ui >}}Bidirectional{{< /ui >}} 전환 버튼을 사용하십시오.
 
 {{< img src="network_device_monitoring/netflow/conversation_stitching.png" alt="NetFlow 보기에서 대화 스티칭 전환 버튼" width="100%" >}}
 
@@ -366,7 +375,7 @@ NetFlow 패킷 드롭은 초당 NetFlow 패킷 수가 많을 때(일반적으로
 [4]: /ko/agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [5]: https://app.datadoghq.com/devices/netflow
 [6]: /ko/monitors/types/netflow/
-[7]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4201
-[8]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4203-L4275
+[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
 [9]: /ko/network_monitoring/devices/troubleshooting#traps-or-flows-not-being-received-at-all
 [10]: https://app.datadoghq.com/devices/settings/enrichment/ip
+[11]: /ko/network_monitoring/network_path/setup/#dynamic-tests-for-netflow-experimental

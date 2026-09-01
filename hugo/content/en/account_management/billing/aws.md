@@ -77,7 +77,7 @@ For technical questions, contact [Datadog support][6].
 For billing questions, contact your [Customer Success][7] Manager.
 
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
-[2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[2]: /agent/configuration/agent-configuration-files/
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: /api/latest/aws-integration/#set-an-aws-tag-filter
 [5]: /infrastructure/
