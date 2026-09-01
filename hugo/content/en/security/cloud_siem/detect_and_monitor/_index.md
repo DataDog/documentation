@@ -59,8 +59,12 @@ The rule deprecation process is as follows:
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
     - Signal side panel's {{< ui >}}Rule Details{{< /ui >}} > {{< ui >}}Playbook{{< /ui >}} section
     - [Rule editor][3] for that specific rule
-2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][3] in the UI.
-3. Once the rule is deleted, you can no longer clone and re-enable it.
+2. After the rule is deprecated, the rule remains available for the length of your signal retention period before it is deleted. During this time, you can re-enable the rule by [cloning the rule][3] in the UI. The retention period depends on your [Cloud SIEM product][7]:
+    - Standalone: 12 months
+    - Add-on with Flex Logs and Legacy: 15 months
+
+    Organizations that adopted Standalone before gigabyte-based usage was introduced have a 15-month retention period.
+3. After the rule is deleted, you can no longer clone and re-enable it.
 
 ## Suppressions
 
@@ -88,3 +92,4 @@ After setting up your detection rules, use the Cloud SIEM [MITRE ATT&CK Map][5] 
 [4]: /security/cloud_siem/detect_and_monitor/suppressions
 [5]: /security/cloud_siem/detection_rules/mitre_attack_map/
 [6]: /security/cloud_siem/detect_and_monitor/critical_assets
+[7]: /security/cloud_siem/guide/determine-cloud-siem-product/
