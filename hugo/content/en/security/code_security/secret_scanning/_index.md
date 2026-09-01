@@ -9,6 +9,9 @@ further_reading:
   - link: https://www.datadoghq.com/blog/code-security-secret-scanning
     tag: Blog
     text: Detect and block exposed credentials with Datadog Secret Scanning
+  - link: "https://www.datadoghq.com/blog/bitbucket-cloud-source-code-integration/"
+    tag: "Blog"
+    text: "Troubleshoot and secure your code faster with Datadog’s Bitbucket Cloud Source Code integration"
 
 ---
 

@@ -19,6 +19,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/cloud-cost-management-oci
   tag: Blog
   text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
+- link: "https://www.datadoghq.com/blog/federal-agencies-ai-spend-cloud-cost-management/"
+  tag: "Blog"
+  text: "Beyond the $1 AI era: How federal agencies can build the evidence for FY27 renewals"
 ---
 
 ## Overview

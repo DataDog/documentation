@@ -7,6 +7,9 @@ further_reading:
   - link: https://www.datadoghq.com/blog/rehydrate-archived-logs-with-observability-pipelines
     tag: Blog
     text: Rehydrate archived logs in any SIEM or logging vendor with Observability Pipelines
+  - link: "https://www.datadoghq.com/blog/tines-observability-pipelines-security-automation/"
+    tag: "Blog"
+    text: "Respond to security threats faster with Tines and Observability Pipelines"
 
 multifiltersearch:
   # "id" must match the corresponding key in the "data" object

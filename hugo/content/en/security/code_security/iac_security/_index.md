@@ -27,6 +27,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/github-actions-iac-security/"
     tag: "Blog"
     text: "Spotting CI/CD misconfigurations before the bots do: Securing GitHub Actions with Datadog IaC Security"
+  - link: "https://www.datadoghq.com/blog/bitbucket-cloud-source-code-integration/"
+    tag: "Blog"
+    text: "Troubleshoot and secure your code faster with Datadog’s Bitbucket Cloud Source Code integration"
 ---
 
 Datadog Infrastructure as Code (IaC) Security detects misconfigurations in IaC configurations before they're deployed. It flags issues such as missing encryption or overly permissive access in files stored in your connected GitHub, GitLab, or Azure DevOps repositories. For more information, see [IaC Security Rules][13].

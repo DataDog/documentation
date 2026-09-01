@@ -28,6 +28,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/openai-datadog-ai-devops-agent/"
   tag: "Blog"
   text: "Datadog + OpenAI: Codex CLI integration for AI‑assisted DevOps"
+- link: "https://www.datadoghq.com/blog/golden-paths-for-ai-agents/"
+  tag: "Blog"
+  text: "How to adapt Golden Paths for autonomous AI agents"
+- link: "https://www.datadoghq.com/blog/live-debugger/"
+  tag: "Blog"
+  text: "Debug live production code without redeploying with Datadog Live Debugger"
 algolia:
   tags: ["mcp", "mcp server"]
   rank: 90

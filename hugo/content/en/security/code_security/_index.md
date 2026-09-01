@@ -32,6 +32,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives/"
   tag: "Blog"
   text: "Using LLMs to filter out false positives from static code analysis"
+- link: "https://www.datadoghq.com/blog/ai-native-sast-detect-llm-vulnerabilities/"
+  tag: "Blog"
+  text: "Detect vulnerabilities in LLM applications with Datadog’s AI-native SAST"
+- link: "https://www.datadoghq.com/blog/bitbucket-cloud-source-code-integration/"
+  tag: "Blog"
+  text: "Troubleshoot and secure your code faster with Datadog’s Bitbucket Cloud Source Code integration"
 aliases:
 - /code_analysis/
 ---
