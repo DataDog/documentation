@@ -5614,6 +5614,11 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_prompt_tracking
       weight: 311
+    - name: Multimodal
+      url: llm_observability/instrument/multimodal
+      parent: llm_obs_instrumentation
+      identifier: llm_obs_multimodal
+      weight: 312
     - name: Investigate
       url: llm_observability/investigate/
       parent: llm_obs

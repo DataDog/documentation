@@ -1435,7 +1435,7 @@ def describe_image(image_bytes):
 
 {{< /code-block >}}
 
-Messages annotated with `audio_parts` or `image_parts` render as inline audio players and images in the trace view:
+Messages annotated with `audio_parts` or `image_parts` render as inline audio players and images in the trace view. For supported formats, size limits, and the integrations that populate these fields automatically, see [Multimodal Support](/llm_observability/instrument/multimodal/).
 
 {{< img src="llm_observability/instrumentation/audio_example.png" alt="An LLM span in the Agent Observability trace view. The input message from the USER shows an inline audio player with the transcript 'Hey, how are you?', and the output ASSISTANT message shows a 'Click to play audio' control with the transcript 'Hey! I'm doing great, thanks for asking. How about you?'." style="width:100%;" >}}
 
@@ -1576,13 +1576,13 @@ describeImage = llmobs.wrap({ kind: 'llm', modelName: 'gpt-4o', modelProvider: '
 
 {{< /code-block >}}
 
-Messages annotated with `audioParts` or `imageParts` render as inline audio players and images in the trace view:
+Messages annotated with `audioParts` or `imageParts` render as inline audio players and images in the trace view. For supported formats, size limits, and the integrations that populate these fields automatically, see [Multimodal Support](/llm_observability/instrument/multimodal/).
 
 {{< img src="llm_observability/instrumentation/audio_example.png" alt="An LLM span in the Agent Observability trace view. The input message from the USER shows an inline audio player with the transcript 'Hey, how are you?', and the output ASSISTANT message shows a 'Click to play audio' control with the transcript 'Hey! I'm doing great, thanks for asking. How about you?'." style="width:100%;" >}}
 
 {{< img src="llm_observability/instrumentation/image_example.png" alt="An LLM span in the Agent Observability trace view. The input USER message shows the prompt 'What is in this image?' with an inline photo of a black puppy, and the output ASSISTANT message describes it as a black Labrador Retriever puppy on a wooden surface." style="width:100%;" >}}
 
-For OpenAI audio chat completions, `audioParts` are also captured automatically by [Datadog's LLM integrations](/llm_observability/instrument/auto_instrumentation/)—no manual annotation required. Unlike `audioParts`, `imageParts` are not currently captured automatically and must be annotated manually; automatic capture is planned for a future release.
+For OpenAI audio chat completions, `audioParts` are also captured automatically by [Datadog's LLM integrations](/llm_observability/instrument/auto_instrumentation/), with no manual annotation required. The Node.js SDK does not capture `imageParts` automatically. Annotate them as shown above.
 
 {{% /tab %}}
 {{% tab "Java" %}}
