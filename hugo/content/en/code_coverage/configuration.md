@@ -20,6 +20,8 @@ further_reading:
 
 You can configure Code Coverage behavior by creating a configuration file named `code-coverage.datadog.yml` or `code-coverage.datadog.yaml` in the root of your repository.
 
+<div class="alert alert-warning">Commit the configuration file and push it to your repository. Datadog reads the file from your repository, so a file that is uncommitted or that exists only on an unpushed commit has no effect. See <a href="#commit-the-configuration-file">Commit the configuration file</a>.</div>
+
 Example configuration file:
 
 ```yaml
@@ -46,6 +48,21 @@ gates:
 comments:
   enabled: true
 ```
+
+## Commit the configuration file
+
+Datadog reads `code-coverage.datadog.yml` from your repository, at the commit that your coverage reports are attached to. Coverage uploads do not contain the contents of the file. They report the file path and the Git hash of its contents, and Datadog reads the file from your repository.
+
+The configuration applies only when both of the following are true:
+
+- **The file is committed.** A file that is uncommitted, staged but not committed, or excluded by `.gitignore` is not part of the commit reported with your coverage data. Datadog finds no configuration and applies default behavior.
+- **The commit that contains the file is pushed.** Datadog cannot read a commit that exists only on a local machine or on a CI runner.
+
+The same requirement applies to every later change. Editing a gate threshold or an `ignore` pattern takes effect for a commit only after that edit is committed and pushed.
+
+Configuration is not applied retroactively. A file added or changed in a later commit does not affect coverage already reported at an earlier commit. The configuration that applies to a report is the one present at the commit the report was attached to.
+
+If your configuration appears to have no effect, check that `git status` reports no uncommitted changes to the file. Then confirm that the commit that adds or modifies it is present on your remote.
 
 ## Services configuration
 
@@ -122,6 +139,8 @@ ignore:
   - "vendor/"             # Exclude vendor directory
 ```
 
+You can also supply this list at upload time with the `--ignored-source-paths` option of `datadog-ci coverage upload`. See [Override the ignore list from the CLI](#override-the-ignore-list-from-the-cli).
+
 ### Exceptions
 
 Add `!` before a pattern to create an exception to your ignore rules. This lets you include specific files or folders that would otherwise be excluded.
@@ -133,6 +152,8 @@ ignore:
 ```
 
 **Important**: Negative patterns take precedence over positive patterns. If any negative pattern matches a file path, that path is _not_ ignored.
+
+<div class="alert alert-warning">A <code>!</code> pattern is an exception to the positive patterns beside it, not a standalone rule. A list containing only <code>!</code> patterns ignores everything those patterns do not match. For example, an ignore list containing only <code>!src/keep/</code> ignores your entire repository apart from <code>src/keep/</code>. Pair every <code>!</code> pattern with the positive pattern it excepts.</div>
 
 ### Examples
 
@@ -165,6 +186,91 @@ ignore:
   - ".*\\.pb\\.go$"       # Regex: exclude protobuf files
 ```
 {{% /collapse-content %}}
+
+### Override the ignore list from the CLI
+
+Instead of committing the list to `code-coverage.datadog.yml`, you can supply it when uploading. Pass `--ignored-source-paths` to `datadog-ci coverage upload` with a comma-separated list of patterns:
+
+{{< code-block lang="shell" >}}
+datadog-ci coverage upload --ignored-source-paths "test/**/*,**/*.pb.go,vendor/" .
+{{< /code-block >}}
+
+The option accepts the same [pattern syntax](#pattern-syntax) and the same `!` [exceptions](#exceptions) as the `ignore` field. Datadog excludes the matching source files from the coverage computation in the same way.
+
+<div class="alert alert-warning">The option <strong>replaces</strong> the <code>ignore</code> field instead of adding to it. When an upload supplies <code>--ignored-source-paths</code>, Datadog applies only those patterns to that upload and disregards the <code>ignore</code> field of <code>code-coverage.datadog.yml</code>. The two lists are not merged, so the option value needs to contain every pattern you want applied.</div>
+
+A supplied list replaces the `ignore` field even when none of its patterns compile. Nothing is excluded in that case, rather than the `ignore` field taking effect again.
+
+The list is scoped to the reports uploaded by that single command. Other uploads for the same commit keep their own lists, or fall back to the `ignore` field when they do not set the option.
+
+Datadog merges every upload for the same commit and flag. A file excluded by one upload still appears in that commit's coverage if another upload includes it. To exclude a file from every upload, use the `ignore` field of `code-coverage.datadog.yml`.
+
+An empty or whitespace-only value is treated as though the option was not passed, and the `ignore` field applies as usual. This keeps an unset CI variable from silently disabling the ignore list of a repository.
+
+#### Separating patterns
+
+Patterns are separated by commas. A comma inside a brace group is part of the pattern, so `**/*.{js,ts}` stays a single pattern:
+
+{{< code-block lang="shell" >}}
+datadog-ci coverage upload --ignored-source-paths "**/*.{js,ts},vendor/" .
+{{< /code-block >}}
+
+This example supplies two patterns: `**/*.{js,ts}` and `vendor/`. The same applies to regex quantifiers such as `.{2,4}`.
+
+Newlines separate patterns as well, which is convenient for multi-line lists supplied through the `DD_COVERAGE_IGNORED_SOURCE_PATHS` environment variable:
+
+{{< code-block lang="shell" >}}
+export DD_COVERAGE_IGNORED_SOURCE_PATHS="test/**/*
+**/*.pb.go
+vendor/"
+
+datadog-ci coverage upload .
+{{< /code-block >}}
+
+Surrounding whitespace is removed from each pattern, and empty entries are dropped.
+
+Because commas are separators, a pattern cannot contain a literal comma outside a brace group. A regex character class is a common case: `^src/[a,b]/.*$` splits into two patterns. Write it as `^src/[ab]/.*$`, or keep the pattern in the `ignore` field of `code-coverage.datadog.yml`.
+
+#### Difference from `--ignored-paths`
+
+`datadog-ci coverage upload` accepts two options with similar names that do different things:
+
+| Option | What it excludes | Where it applies |
+|---|---|---|
+| `--ignored-source-paths` | **Source files**, from the coverage computation. Replaces the `ignore` field. | In Datadog, after the upload |
+| `--ignored-paths` | **Coverage report files**, while the directories you pass are searched for reports. It does not apply to report files you pass explicitly. | In the CLI, before the upload |
+
+Use `--ignored-source-paths` to keep generated or vendored source code out of your coverage percentage. Use `--ignored-paths` to stop the CLI from picking up an unwanted coverage report file while it searches a directory.
+
+#### Limits
+
+A realistic list stays well clear of every limit below. 500 patterns of 80 characters is roughly 40 KB, which every platform accepts.
+
+The CLI accepts up to 2,000 patterns, and up to 1,000 characters per pattern. Exceeding either fails the command, and nothing is uploaded. The error names the limit that was exceeded.
+
+A serialized total above 256 KB fails the same way. Treat that ceiling as a backstop rather than a limit you meet. On most systems, the operating system rejects a value that large before `datadog-ci` starts. See [Operating system limits](#operating-system-limits).
+
+Above 1,000 patterns or 100 KB, the upload still happens and the command prints a warning. A list that large is usually better kept in `code-coverage.datadog.yml`.
+
+The per-pattern limit matches the one Datadog applies. An over-long pattern is rejected up front rather than discarded later. A pattern discarded later could leave the list empty, which would silently bring back the `ignore` field of `code-coverage.datadog.yml`.
+
+#### Operating system limits
+
+Your operating system caps how much can be passed in a command-line argument or an environment variable. On Linux and Windows, that cap is reached before the 256 KB limit of the option itself. The ceilings differ by platform:
+
+| Platform | Limit |
+|---|---|
+| Linux | About 128 KB (131,072 bytes) for any single argument or environment variable. For an environment variable, the `NAME=` prefix counts toward it. |
+| macOS | No per-value limit, but a single combined limit covers all arguments and the entire environment, so a large CI environment reduces the room available. |
+| Windows | 32,767 characters for the whole command line, and 8,191 through `cmd.exe`. The npm and Yarn `.cmd` wrappers run through `cmd.exe`. |
+
+On Linux, exceeding the limit produces an error from the shell, such as `Argument list too long`, rather than a message from `datadog-ci`.
+
+<div class="alert alert-warning">On Windows, an oversized value can fail silently. <code>cmd.exe</code> ignores an inherited environment variable longer than its 8,191-character limit. <code>datadog-ci</code> then receives nothing and behaves as though the option was never set. The <code>ignore</code> field of <code>code-coverage.datadog.yml</code> applies instead, and no error appears. After your first upload, check in Datadog that the files you meant to exclude are absent from the coverage data.</div>
+
+For a list large enough to approach these ceilings, use the `ignore` field of `code-coverage.datadog.yml`. That is the only option with no size ceiling.
+
+The `DD_COVERAGE_IGNORED_SOURCE_PATHS` environment variable is not a way around these limits. On Linux the same per-value ceiling applies to environment variables, however your CI provider sets them. On Windows, a `set` command in `cmd.exe` counts against the command-line cap. Use the environment variable for convenience, such as newline-separated formatting, rather than for size.
 
 ## PR Gates
 
@@ -377,6 +483,8 @@ Simple path prefixes without special characters are treated as prefix matches:
 - `"vendor/"` - Matches all files under vendor directory
 - `"third_party/"` - Matches third-party code
 - `"generated/"` - Matches generated code
+
+**Note**: A prefix matches complete path segments, not any leading substring. `src/module` matches `src/module/foo.js`, but `src/mod` matches nothing under `src/module/`. A partial segment name matches no files and reports no error. To match part of a directory name, use a glob such as `src/mod*/**/*`.
 
 ## Further reading
 
