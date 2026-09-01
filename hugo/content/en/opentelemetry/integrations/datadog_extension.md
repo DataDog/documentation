@@ -254,7 +254,7 @@ The DaemonSet forwards to `monitoring/otelcol-gateway-l2`, the Layer-2 gateway f
 | `tls.insecure_skip_verify` | Skip TLS certificate verification. | `false` |
 
 <div class="alert alert-danger">
-<strong>Hostname matching</strong>: If you specify a custom <code>hostname</code> in the Datadog Extension, it must match the host name in exported telemetry. If you use the Datadog Exporter, its <code>hostname</code> value must also match. Otherwise, Datadog might not correlate telemetry to the correct host, and duplicate hosts can appear.
+<strong>Hostname matching</strong>: If you specify a custom <code>hostname</code> in the Datadog Extension, it must match the host name in exported telemetry. The extension does not infer a hostname from application telemetry in your pipelines; it obtains its hostname from system or cloud-provider APIs or from manual configuration. If you use the Datadog Exporter, its <code>hostname</code> value must also match. Otherwise, Datadog might not correlate telemetry to the correct host, and duplicate hosts can appear.
 </div>
 
 ### Complete configuration example with the Datadog Exporter

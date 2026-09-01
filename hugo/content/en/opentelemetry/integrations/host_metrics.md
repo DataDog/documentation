@@ -21,6 +21,8 @@ For more information, including supported operating systems, see the OpenTelemet
 
 ## Setup
 
+The examples use the canonical component identifiers available in OpenTelemetry Collector Contrib v0.154.0. For an older Collector or another distribution, use the component identifiers supported by that distribution.
+
 {{< tabs >}}
 {{% tab "Host" %}}
 
@@ -28,13 +30,13 @@ Add the following lines to your Collector configuration:
 
 ```yaml
 processors:
-  resourcedetection:
+  resource_detection:
     detectors: [system]
     system:
       hostname_sources: [os]
 
 receivers:
-  hostmetrics:
+  host_metrics:
     collection_interval: 10s
     scrapers:
       paging:
@@ -58,8 +60,8 @@ receivers:
 service:
   pipelines:
     metrics:
-      receivers: [hostmetrics]
-      processors: [resourcedetection]
+      receivers: [host_metrics]
+      processors: [resource_detection]
       exporters: [otlp_http]
 ```
 
@@ -71,7 +73,7 @@ Set up the host metrics receiver on each node from which metrics need to be coll
 
 ```yaml
 receivers:
-  hostmetrics:
+  host_metrics:
     collection_interval: 10s
     scrapers:
       paging:

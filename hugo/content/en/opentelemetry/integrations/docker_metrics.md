@@ -191,7 +191,7 @@ Value: 0.170933
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/docker-stats.yaml
 [4]: /universal_service_monitoring/setup/
 [5]: /opentelemetry/guide/semantic_mapping/
-[6]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#containers-overview-dashboard
+[6]: /opentelemetry/reference/otel_metrics/#out-of-the-box-dashboards
 [7]: /tracing/trace_explorer/trace_view/
 [8]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/golang/calendar/main.go
 [9]: /opentelemetry/mapping/semantic_mapping#unified-service-tagging
