@@ -1260,6 +1260,30 @@ Retrieves all network interfaces for a specific device.
 - Show me all interfaces on device `device:abc123`.
 - List the interface statuses for my core router.
 
+## Notebooks
+
+<div class="alert alert-info">The <code>notebooks</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+
+Extended tools for [notebooks][57], beyond the notebook tools included in the `core` toolset.
+
+### `create_notebook_comments`
+*Toolset: **notebooks***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Creates one or more comments on a notebook in a single call. Supports comment threads anchored to markdown text, threads attached to a widget cell, and replies to an existing comment.
+
+- Comment on the conclusion in this notebook asking for more detail.
+- Leave a comment on the latency graph in notebook abc-123-def.
+- Reply to the open comment thread in this notebook.
+
+### `add_notebooks_to_collection`
+*Toolset: **notebooks***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Adds one or more notebooks to an existing notebook collection.
+
+- Add this notebook to the incident review collection.
+- Put notebooks abc-123-def and ghi-456-jkl into the onboarding collection.
+- Add the notebooks I created today to the weekly report collection.
+
 ## Onboarding
 
 Agentic onboarding tools for guided Datadog setup and configuration.
