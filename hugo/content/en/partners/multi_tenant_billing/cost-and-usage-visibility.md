@@ -27,7 +27,7 @@ Cost and usage data is also available programmatically through the following [Us
 ## Related docs
 
 - [Centralized Usage Metrics][3]: Usage metrics rolled up from every connected customer org.
-- [Trial Org Provisioning][4]: provision trial organizations for prospective customers.
+- [Trial Org Provisioning][4]: Provision trial organizations for prospective customers.
 
 [1]: /account_management/plan_and_usage/partner_experience/
 [2]: /api/latest/usage-metering/
