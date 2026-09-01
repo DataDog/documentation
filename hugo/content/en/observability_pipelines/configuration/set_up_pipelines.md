@@ -99,9 +99,21 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 
 #### Add another processor group
 
-{{< img src="observability_pipelines/setup/another_processor_group_metrics.png" alt="The Pipelines page showing two processor groups sending logs to the same destination" style="width:100%;" >}}
+{{< img src="observability_pipelines/setup/another_processor_group_metrics.png" alt="The Pipelines page showing two processor groups sending metrics to the same destination" style="width:100%;" >}}
 
 {{% observability_pipelines/set_up_pipelines/add_another_processor_group %}}
+
+##### Add another set of processors and destinations
+
+{{< img src="observability_pipelines/setup/another_set_processor_destination_metrics.png" alt="The Pipelines page showing two processor groups sending metrics to two different destinations" style="width:100%;" >}}
+
+{{% observability_pipelines/set_up_pipelines/add_another_set_of_processors_and_destinations %}}
+
+##### Add another destination to a processor group
+
+{{< img src="observability_pipelines/setup/another_destination_metrics.png" alt="The Pipelines page showing one processor group sending metrics to two different destinations" style="width:100%;" >}}
+
+{{% observability_pipelines/set_up_pipelines/add_another_destination %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/explore_templates/?tab=metrics#metric-tag-governance

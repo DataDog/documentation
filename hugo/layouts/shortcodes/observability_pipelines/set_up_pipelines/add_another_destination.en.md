@@ -1,6 +1,6 @@
 If you want to add an additional destination to a processor group, click the plus sign (**+**) to the right of the processor group.
 
-To delete a destination, click on the pencil icon to the top right of the destination, and select **Delete node**.
+To delete a destination, click on the trash icon to the top right of the destination.
 - If you delete a destination from a processor group that has multiple destinations, only the deleted destination is removed.
 - If you delete a destination from a processor group that only has one destination, both the destination and the processor group are removed.
 
