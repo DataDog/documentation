@@ -1162,7 +1162,7 @@ vault write auth/kubernetes/role/<VAULT_ROLE> \
     ttl=1h
 ```
 
-Use this `<VAULT_ROLE>` value for `vault_kubernetes_role` in the Helm and Operator configuration examples below.
+Use this `<VAULT_ROLE>` value for `vault_kubernetes_role` in the Helm and Operator configuration examples.
 
 ##### Configuration example
 
