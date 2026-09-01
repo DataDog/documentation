@@ -2,7 +2,10 @@
 
 title: Monitoring AWS Lambda Durable Functions
 description: Set up Datadog Serverless Monitoring for AWS Lambda Durable Functions.
-
+further_reading:
+- link: "https://www.datadoghq.com/blog/trace-aws-lambda-durable-functions/"
+  tag: "Blog"
+  text: "Trace AWS Lambda durable functions with Datadog"
 ---
 
 Datadog provides full visibility into the metrics, logs, and traces for AWS Lambda Durable Function executions. In a single view, you can monitor your AWS Lambda Durable Functions alongside your other serverless compute services to spot bottlenecks and fix errors.
@@ -205,6 +208,10 @@ sum:aws.lambda.durable_execution_failed{functionname:<FUNCTION_NAME>}.as_count()
 Runtimes other than Node.js and Python are not supported. If you encounter an issue with another runtime, open an issue in the [datadog-lambda-extension GitHub repository][7].
 
 If you encounter an issue with the CloudFormation stack, open an issue in the [cloudformation-template GitHub repository][8].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless/aws_lambda/instrumentation
 [2]: https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=datadog-durable-function-event-forwarder&templateURL=https://datadog-cloudformation-template.s3.amazonaws.com/aws/lambda-durable-function-event-forwarder/latest.yaml
