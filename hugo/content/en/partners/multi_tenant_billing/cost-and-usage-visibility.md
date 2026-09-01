@@ -5,7 +5,7 @@ description: "Monitor cost and billable usage across all connected customer orga
 
 ## Overview
 
-A customer organization connects to the Partner Admin Org (Admin Org) automatically when its contract includes the partnership and is active. After connecting, a customer's usage and cost data becomes visible from the Admin Org, across all Datadog sites the customer uses. The connection is removed automatically 30 days after the contract expires, giving the partner a grace period to retain visibility while the contract is being renewed.
+A customer organization connects to the Partner Admin Organization (Admin Org) automatically when its contract includes the partnership and is active. After connecting, a customer's usage and cost data becomes visible from the Admin Org, across all Datadog sites the customer uses. The connection is removed automatically 30 days after the contract expires, giving the partner a grace period to retain visibility while the contract is being renewed.
 
 **Note**: A Trial Org's usage is not included here until its customer organization is connected this way; see [Trial Org Provisioning][4].
 
