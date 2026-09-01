@@ -1,5 +1,6 @@
 ---
 title: Processors
+description: Learn about the processors available for parsing, structuring, and enriching logs, metrics, and traces in Observability Pipelines.
 disable_toc: false
 aliases:
   - /observability_pipelines/processors/tail_based_sampling/

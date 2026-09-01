@@ -3350,7 +3350,7 @@
     "summary": "List Agent Observability annotation queues"
   },
   "CreateLLMObsAnnotationQueue": {
-    "description": "Create an annotation queue. The `name` and `project_id` fields are required.\nAn optional `annotation_schema` can be provided to define the labels for the queue.\nFields such as `created_by`, `owned_by`, `created_at`, `modified_by`,\nand `modified_at` are inferred by the backend.",
+    "description": "Create an annotation queue. The `name` and `project_id` fields are required.\nAn optional `annotation_schema` can be provided to define the labels for the queue.\nOptional access-control fields can restrict annotation access to reviewers or assignees.\nFields such as `created_by`, `owned_by`, `created_at`, `modified_by`,\nand `modified_at` are inferred by the backend.",
     "summary": "Create an Agent Observability annotation queue",
     "request_description": "Create annotation queue payload.",
     "request_schema_description": "Request to create an Agent Observability annotation queue."
@@ -3360,7 +3360,7 @@
     "summary": "Delete an Agent Observability annotation queue"
   },
   "UpdateLLMObsAnnotationQueue": {
-    "description": "Partially update an annotation queue. The `name`, `description`, and `annotation_schema` fields can be updated.",
+    "description": "Partially update an annotation queue. The `name`, `description`,\n`annotation_schema`, `reviewer_emails`, `restrict_to_reviewers`, and\n`restrict_to_assignees` fields can be updated.",
     "summary": "Update an Agent Observability annotation queue",
     "request_description": "Update annotation queue payload.",
     "request_schema_description": "Request to update an Agent Observability annotation queue."
@@ -3370,7 +3370,7 @@
     "summary": "Get annotated queue interactions"
   },
   "UpsertLLMObsAnnotations": {
-    "description": "Create or update annotations on interactions in a queue. Each annotation is matched\nby `interaction_id` and the requesting user's identity.\nResults and errors in the response are linked to request items by `interaction_id`.\nErrors for individual items are returned in the `errors` field without blocking the rest of the batch.",
+    "description": "Create or update annotations on interactions in a queue. Each annotation is matched\nby `interaction_id` and the requesting user's identity.\nResults and errors in the response are linked to request items by `interaction_id`.\nErrors for individual items are returned in the `errors` field without blocking the rest of the batch.\nRequests where every item is denied by queue access rules return `403`.",
     "summary": "Create or update annotations",
     "request_description": "Payload for creating or updating annotations.",
     "request_schema_description": "Request to create or update annotations on interactions in an annotation queue."
@@ -5865,6 +5865,12 @@
     "request_description": "",
     "request_schema_description": "Body of the notification rule patch request."
   },
+  "AddSTIXThreatIntel": {
+    "description": "Ingest a STIX 2.1 bundle containing threat intelligence indicators. Only indicator objects are processed. Supported indicator patterns contain IPv4 addresses, IPv6 addresses, domain names, or SHA-256 file hashes.\n\nNon-indicator objects are ignored and are not included in the response counters. Indicator objects with unsupported STIX versions or patterns that produce no supported observable values increment the `unsupported` counter. Patterns that cannot be parsed increment the `invalid` counter. Processing is best effort, so valid supported indicators in the same bundle are still added.\n\nA successful response means ingestion has completed. Reference-table materialization and enrichment happen asynchronously. Requests are limited to 50 MB as received, 100 MB after decompression, and 10 requests per second per API key. Gzip-compressed request bodies are supported.",
+    "summary": "Ingest STIX threat intelligence",
+    "request_description": "A STIX 2.1 bundle containing indicator objects. The request body must not exceed 50 MB as received or 100 MB after decompression.",
+    "request_schema_description": "A STIX 2.1 bundle containing threat intelligence indicator objects."
+  },
   "ListVulnerabilities": {
     "description": "Get a list of vulnerabilities.\n\n### Pagination\n\nPagination is enabled by default in both `vulnerabilities` and `assets`. The size of the page varies depending on the endpoint and cannot be modified. To automate the request of the next page, you can use the links section in the response.\n\nThis endpoint will return paginated responses. The pages are stored in the links section of the response:\n\n```JSON\n{\n  \"data\": [...],\n  \"meta\": {...},\n  \"links\": {\n    \"self\": \"https://.../api/v2/security/vulnerabilities\",\n    \"first\": \"https://.../api/v2/security/vulnerabilities?page[number]=1&page[token]=abc\",\n    \"last\": \"https://.../api/v2/security/vulnerabilities?page[number]=43&page[token]=abc\",\n    \"next\": \"https://.../api/v2/security/vulnerabilities?page[number]=2&page[token]=abc\"\n  }\n}\n```\n\n\n- `links.previous` is empty if the first page is requested.\n- `links.next` is empty if the last page is requested.\n\n#### Token\n\nVulnerabilities can be created, updated or deleted at any point in time.\n\nUpon the first request, a token is created to ensure consistency across subsequent paginated requests.\n\nA token is valid only for 24 hours.\n\n#### First request\n\nWe consider a request to be the first request when there is no `page[token]` parameter.\n\nThe response of this first request contains the newly created token in the `links` section.\n\nThis token can then be used in the subsequent paginated requests.\n\n*Note: The first request may take longer to complete than subsequent requests.*\n\n#### Subsequent requests\n\nAny request containing valid `page[token]` and `page[number]` parameters will be considered a subsequent request.\n\nIf the `token` is invalid, a `404` response will be returned.\n\nIf the page `number` is invalid, a `400` response will be returned.\n\nThe returned `token` is valid for all requests in the pagination sequence. To send paginated requests in parallel, reuse the same `token` and change only the `page[number]` parameter.\n\n### Filtering\n\nThe request can include some filter parameters to filter the data to be retrieved. The format of the filter parameters follows the [JSON:API format](https://jsonapi.org/format/#fetching-filtering): `filter[$prop_name]`, where `prop_name` is the property name in the entity being filtered by.\n\nAll filters can include multiple values, where data will be filtered with an OR clause: `filter[title]=Title1,Title2` will filter all vulnerabilities where title is equal to `Title1` OR `Title2`.\n\nString filters are case sensitive.\n\nBoolean filters accept `true` or `false` as values.\n\nNumber filters must include an operator as a second filter input: `filter[$prop_name][$operator]`. For example, for the vulnerabilities endpoint: `filter[cvss.base.score][lte]=8`.\n\nAvailable operators are: `eq` (==), `lt` (<), `lte` (<=), `gt` (>) and `gte` (>=).\n\n### Metadata\n\nFollowing [JSON:API format](https://jsonapi.org/format/#document-meta), object including non-standard meta-information.\n\nThis endpoint includes the meta member in the response. For more details on each of the properties included in this section, check the endpoints response tables.\n\n```JSON\n{\n  \"data\": [...],\n  \"meta\": {\n    \"total\": 1500,\n    \"count\": 18732,\n    \"token\": \"some_token\"\n  },\n  \"links\": {...}\n}\n```\n### Extensions\n\nRequests may include extensions to modify the behavior of the requested endpoint. The filter parameters follow the [JSON:API format](https://jsonapi.org/extensions/#extensions) format: `ext:$extension_name`, where `extension_name` is the name of the modifier that is being applied.\n\nExtensions can only include one value: `ext:modifier=value`.",
     "summary": "List vulnerabilities"
@@ -7351,6 +7357,26 @@
   "GetProjectedCost": {
     "description": "Get projected cost across multi-org and single root-org accounts.\nProjected cost data is only available for the current month and becomes available around the 12th of the month.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get projected cost across your account"
+  },
+  "ListQuotas": {
+    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.",
+    "summary": "List usage quotas"
+  },
+  "CreateQuotas": {
+    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated; otherwise, a new quota is created. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.",
+    "summary": "Create or update usage quotas",
+    "request_description": "The usage quotas to create or update.",
+    "request_schema_description": "A JSON:API bulk request containing an array of usage quota resources rather than a single resource."
+  },
+  "DeleteQuota": {
+    "description": "Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.",
+    "summary": "Delete a usage quota"
+  },
+  "UpdateQuota": {
+    "description": "Updates the supplied fields on a usage quota and leaves omitted fields unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.",
+    "summary": "Update a usage quota",
+    "request_description": "The usage quota fields to update. Omitting an attribute leaves its current value unchanged.",
+    "request_schema_description": "Request containing the usage quota resource to update."
   },
   "GetUsageSummaryAvailableFields": {
     "description": "List the field names returned by `GET /api/v1/usage/summary` at each of its\nthree response levels. Each list contains every key the data endpoint\nemits—both typed fields declared in the OpenAPI spec and untyped keys\nexposed through `additionalProperties` (the latter used for billing\ndimensions and usage types added after the v1 schema freeze).\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\nGo example:\n\n```go\nfields, _, err := api.GetUsageSummaryAvailableFields(ctx)\nattr := fields.Data.GetAttributes()\n\n// resp is the *UsageSummaryResponse returned by api.GetUsageSummary(ctx, ...)\n// Layer 1: UsageSummaryResponse\nfor _, key := range attr.GetResponseFields() {\n    if val, ok := resp.AdditionalProperties[key]; ok {\n        fmt.Println(key, val.(json.Number))\n    }\n}\n// Layer 2: UsageSummaryDate (per month)\nfor _, date := range resp.GetUsage() {\n    for _, key := range attr.GetDateFields() {\n        if val, ok := date.AdditionalProperties[key]; ok {\n            fmt.Println(key, val.(json.Number))\n        }\n    }\n    // Layer 3: UsageSummaryDateOrg (per org per month)\n    for _, org := range date.GetOrgs() {\n        for _, key := range attr.GetDateOrgFields() {\n            if val, ok := org.AdditionalProperties[key]; ok {\n                fmt.Println(key, val.(json.Number))\n            }\n        }\n    }\n}\n```",
