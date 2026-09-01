@@ -32,8 +32,6 @@ App and API Protection for Azure API Management adds threat detection and blocki
 
 Protection applies at the gateway, so it covers every API behind it in any language. That includes third-party and legacy APIs you do not own.
 
-This integration is available starting in Datadog Go tracer v2.8.0.
-
 ## How it works
 
 Azure API Management evaluates policies on the way in and on the way out. The Datadog policy adds a [`send-request`][1] callout to the Datadog callout service at each stage, then reads the decision back from a policy variable.
@@ -45,7 +43,7 @@ The exchange uses four calls:
 3. **Outbound, response headers.**
 4. **Outbound, response body.** Runs only when the previous phase asked for the body.
 
-The request ID ties all four phases to a single WAF evaluation context. If the decision is block, APIM returns the block response to the client and never calls your backend. If the decision is continue, APIM injects Datadog trace-context headers and forwards the request as usual.
+The request ID ties all four phases to a single WAF evaluation context. If an inbound phase returns a block decision, APIM returns the block response to the client and never calls your backend. If an outbound phase returns a block decision, the backend has already run, and APIM replaces its response with the block response. If the decision is continue, APIM injects Datadog trace-context headers and forwards the request as usual.
 
 The integration is fail-open at every stage. Each callout sets `ignore-error="true"`, so if the callout service is unreachable, times out, or answers with anything other than `200`, traffic proceeds unmodified. A misconfiguration shows up as missing security data rather than as broken traffic.
 
@@ -103,7 +101,7 @@ The callout service only inspects traffic the gateway sends to it, so attach the
 You have two options:
 
 - Set `deployPolicy` to `true` and let the deployment inject the policy for you. The `targetApiIds` parameter selects which APIs receive it, and defaults to all APIs.
-- Apply the provided policy XML yourself in the APIM policy editor, replacing the placeholder host with the hostname of your deployed callout service.
+- Apply the provided policy XML yourself in the APIM policy editor. Replace every occurrence of the whole placeholder URL `https://<dd-apim-callout-host>:8080` with the `calloutBaseUrl` output of the deployment, not the hostname alone. That output is `http://<ACA-FQDN>` unless you set `enableHttps` to `true`, and it carries no port. Leaving the `https` scheme or the `:8080` suffix in place makes the policy miss the service and fail open.
 
 For the policy contents, attachment scopes, and how a block becomes a client response, see [Azure API Management policies for App and API Protection][2].
 
@@ -122,14 +120,9 @@ curl -v -A dd-test-scanner-log-block "https://<apim-gateway-host>/<api-path>"
 Then confirm the data reached Datadog:
 
 1. Open [Security > App and API Protection][6]. The simulated attack appears as a signal.
-2. Open [APM > Service Catalog][7] and look for the `dd-apim-callout` service. Its spans carry the tag `component:apim-callout`.
+2. Open [APM > Service Catalog][7] and look for the `apim-callout` service. Its spans carry the tag `component:apim-callout`. To publish it under a different name, set `DD_SERVICE` on the callout container.
 
-To check the callout service itself, request its health endpoint on port `8081`:
-
-```shell
-curl -s http://<callout-host>:8081/
-# {"status":"ok","library":{"language":"golang","version":"2.x.x"}}
-```
+The callout service also exposes a health endpoint on port `8081`. The Container Apps ingress publishes only port `8080`, so that endpoint is reachable from inside the container alone. Azure Container Apps uses it for the liveness and readiness probes. To check it, review replica health in the Azure portal.
 
 ## Performance
 

@@ -41,7 +41,7 @@ Use the full document for a new policy. Use the two fragments when you already h
 
 Azure API Management evaluates policies at global, workspace, product, API, and operation scope, and `<base />` controls both inheritance and ordering between those scopes. Attach the Datadog policy at the scope you want to protect: all APIs, a single product, one API, or one operation.
 
-Before applying the policy, replace the placeholder host `<dd-apim-callout-host>` with the hostname of your deployed callout service. The policy calls `https://<dd-apim-callout-host>:8080/`. The deployment performs this substitution for you when you set `deployPolicy` to `true`, and its `targetApiIds` parameter selects which APIs receive the policy.
+The policy ships with the placeholder URL `https://<dd-apim-callout-host>:8080`. Before applying it, replace every occurrence of that whole URL with the `calloutBaseUrl` output of the deployment. That output is `http://<ACA-FQDN>` unless you set `enableHttps` to `true`, and it carries no port, so replace the entire URL rather than the hostname alone. The deployment performs the same substitution for you when you set `deployPolicy` to `true`, and its `targetApiIds` parameter selects which APIs receive the policy.
 
 The policy has this shape:
 
@@ -130,7 +130,7 @@ The presence of these headers on the backend request confirms that the inbound p
 
 ## Identifying the integration in Datadog
 
-The callout service appears in APM as the `dd-apim-callout` service, and its spans carry the tag `component:apim-callout`.
+The callout service appears in APM as the `apim-callout` service, and its spans carry the tag `component:apim-callout`. To publish it under a different name, set `DD_SERVICE` on the callout container.
 
 When the WAF matches a request, the span also carries App and API Protection tags, including `appsec.event`, `appsec.blocked`, and `http.client_ip`.
 

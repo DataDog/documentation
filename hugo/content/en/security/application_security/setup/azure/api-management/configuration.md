@@ -170,13 +170,22 @@ If a single WAF evaluation exceeds its budget, the request is allowed rather tha
 
 ## Datadog Agent connection
 
-Configure the container to reach your Datadog Agent with the following variables:
+The callout service does not talk to Datadog directly. It sends traces and security events to a Datadog Agent, and the Agent forwards them. These are two separate containers, and each takes its own variables.
 
-| Environment variable | Default value   | Description                           |
-|----------------------|-----------------|---------------------------------------|
-| `DD_AGENT_HOST`      | `localhost`     | Hostname or IP of your Datadog Agent. |
-| `DD_API_KEY`         | (required)      | Your Datadog API key.                 |
-| `DD_SITE`            | `datadoghq.com` | Your Datadog site.                    |
+On the **callout container**:
+
+| Environment variable | Default value | Description                           |
+|----------------------|---------------|---------------------------------------|
+| `DD_AGENT_HOST`      | `localhost`   | Hostname or IP of your Datadog Agent. |
+
+On the **Datadog Agent container**:
+
+| Environment variable | Default value   | Description                          |
+|----------------------|-----------------|--------------------------------------|
+| `DD_API_KEY`         | (required)      | Your Datadog API key.                |
+| `DD_SITE`            | `datadoghq.com` | Your Datadog site.                   |
+
+Do not set `DD_API_KEY` on the callout container. The one-click deployment applies this split for you. The callout container receives `DD_AGENT_HOST`, and the Agent container receives `DD_API_KEY` and `DD_SITE` from the `datadogApiKey` and `datadogSite` parameters.
 
 Your site is {{< region-param key="dd_site" code="true" >}}.
 
