@@ -30,7 +30,7 @@ After submitting, notify the partner account team that a new opportunity was reg
 
 After the opportunity is registered, create a Trial Org for the prospect. This requires an Admin Org with the Trial Org Provisioner capability enabled; see [Requesting an Admin Org][3] if one isn't set up yet.
 
-When selecting a region for the Trial Org, match the prospect's environment where possible: cloud provider, geography, and compliance needs. For example, a prospective Azure customer is a fit for the US3 (Azure) site. Default to US1 if there are no specific constraints, or align with the partner account team when unsure.
+When selecting a region for the Trial Org, match the prospect's environment where possible, considering cloud provider, geography, and compliance needs. For example, a prospective Azure customer is a fit for the US3 (Azure) site. Default to US1 if there are no specific constraints, or align with the partner account team when unsure.
 
 See [Trial Org Provisioning][4] for the full form walkthrough.
 
