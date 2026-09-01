@@ -497,16 +497,18 @@ counter.add(1, Attributes.builder().put("method", "GET").put("status_code", "200
 
 ### Flush metrics in short-lived processes
 
-Metrics are normally exported on a schedule. Before a short-lived process exits, call `forceFlush` to wait for metrics recorded so far. Call `shutdown` to perform a final export and stop the metric provider.
+Metrics are normally exported on a schedule. `ForceFlush` and `Shutdown` are OpenTelemetry Metrics SDK life cycle operations, not Metrics API methods. Python exposes these operations through the OpenTelemetry SDK. The Datadog SDKs for Node.js and Java provide equivalent extensions.
+
+Before a short-lived process exits, call `forceFlush` to wait for metrics recorded so far. After recording is complete, call `shutdown` once to perform a final export and stop metrics export. Don't record more metrics after shutdown.
 
 {% if equals($prog_lang, "node_js") %}
-Set `OTEL_EXPORTER_OTLP_METRICS_TIMEOUT` to bound each export. The value is in milliseconds.
+Pass `timeoutMillis` to bound the operation. If the timeout expires, the Promise rejects, but queued export or shutdown work can continue. `OTEL_EXPORTER_OTLP_METRICS_TIMEOUT` is separate and bounds each OTLP HTTP request. Both values are in milliseconds.
 
 ```javascript
 const meterProvider = metrics.getMeterProvider();
 
-await meterProvider.forceFlush();
-await meterProvider.shutdown();
+await meterProvider.forceFlush({ timeoutMillis: 10_000 });
+await meterProvider.shutdown({ timeoutMillis: 10_000 });
 ```
 
 For TypeScript, cast the provider to the Datadog implementation type:
@@ -523,10 +525,12 @@ const meterProvider = metrics.getMeterProvider() as DatadogOpenTelemetry.MeterPr
 meter_provider = metrics.get_meter_provider()
 
 if not meter_provider.force_flush(timeout_millis=10_000):
-    raise RuntimeError("metric export timed out")
+    raise RuntimeError("metric export failed or timed out")
 
 meter_provider.shutdown(timeout_millis=10_000)
 ```
+
+`force_flush` returns `True` on success. Either operation can fail with an exception if a metric reader fails or its deadline expires. `shutdown` succeeds without a return value.
 {% /if %}
 
 {% if equals($prog_lang, "java") %}
@@ -536,7 +540,13 @@ import java.util.concurrent.TimeUnit;
 
 boolean exported = OpenTelemetryMetrics.forceFlush().get(10, TimeUnit.SECONDS);
 boolean finalExport = OpenTelemetryMetrics.shutdown().get(10, TimeUnit.SECONDS);
+
+if (!exported || !finalExport) {
+  throw new IllegalStateException("Metric export failed or is unavailable");
+}
 ```
+
+These methods are Datadog extensions and don't use or shut down an OpenTelemetry `SdkMeterProvider`. `shutdown()` performs a final export and stops the Datadog metrics export pipeline. A `false` result indicates that the operation failed or metrics export is unavailable. `get` can throw `TimeoutException`; its timeout bounds the caller's wait without cancelling the operation.
 {% /if %}
 
 {% /if %}
