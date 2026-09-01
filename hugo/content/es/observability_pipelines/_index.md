@@ -1,155 +1,180 @@
 ---
+description: Aprenda cómo Observability Pipelines le permite recopilar, procesar y
+  enrutar registros, métricas y trazas dentro de su propia infraestructura hacia destinos
+  como Datadog, Amazon S3, Splunk y Microsoft Sentinel.
 disable_toc: false
 further_reading:
-- link: /logs/log_collection/
-  tag: documentación
-  text: Recopilación de logs e integraciones
-- link: data_security/logs/
-  tag: documentación
-  text: Seguridad de los datos de Log Management
-- link: /sensitive_data_scanner/
-  tag: documentación
-  text: Sensitive Data Scanner
+- link: /observability_pipelines/configuration/explore_templates/
+  tag: Documentación
+  text: Configure Pipelines
+- link: /observability_pipelines/configuration/set_up_pipelines/
+  tag: Documentación
+  text: Explore casos de uso y plantillas
+- link: /observability_pipelines/configuration/install_the_worker/
+  tag: Documentación
+  text: Instale el Observability Pipelines Worker
 - link: /agent/configuration/dual-shipping/#yaml-configuration
-  tag: documentación
-  text: Doble envío con Observability Pipelines
+  tag: Documentación
+  text: Envío dual con Observability Pipelines
 - link: /observability_pipelines/guide/strategies_for_reducing_log_volume/
-  tag: documentación
-  text: Estrategias para reducir el volumen de logs
+  tag: Documentación
+  text: Estrategias para reducir el volumen de registros
+- link: https://learn.datadoghq.com/courses/course-getting-started-observability-pipelines
+  tag: Centro de aprendizaje
+  text: Primeros pasos con Observability Pipelines
+- link: https://www.datadoghq.com/blog/observability-pipelines-reference-tables-log-enrichment/
+  tag: Blog
+  text: Agregue contexto de actualización dinámica a los registros con tablas de referencia
+    y Observability Pipelines
+- link: https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/
+  tag: Blog
+  text: Envíe datos de OTel desde aplicaciones de IA a ClickHouse y Datadog usando
+    Observability Pipelines
 - link: https://www.datadoghq.com/blog/observability-pipelines-sensitive-data-redaction/
-  tag: blog
-  text: Ocultar datos confidenciales de tus logs on-prem utilizando Observability
+  tag: Blog
+  text: Redacte datos confidenciales de sus registros de forma local usando Observability
     Pipelines
 - link: https://www.datadoghq.com/blog/observability-pipelines-dual-ship-logs/
-  tag: blog
-  text: Logs de doble envío con Observability Pipelines de Datadog
+  tag: Blog
+  text: Envío dual de registros con Datadog Observability Pipelines
 - link: https://www.datadoghq.com/blog/observability-pipelines-log-volume-control/
-  tag: blog
-  text: Controlar tus volúmenes de logs con Observability Pipelines de Datadog
+  tag: Blog
+  text: Controle sus volúmenes de registros con Datadog Observability Pipelines
 - link: https://www.datadoghq.com/blog/observability-pipelines-archiving/
-  tag: blog
-  text: Archivar tus logs con Observability Pipelines para una migración simple y
-    rentable a Datadog
+  tag: Blog
+  text: Archive sus registros con Observability Pipelines para una migración sencilla
+    y asequible a Datadog
 - link: https://www.datadoghq.com/blog/observability-pipelines/
   tag: Blog
-  text: Agregar, procesar y enrutar logs fácilmente con Observability Pipelines de
-    Datadog
+  text: Agregue, procese y enrute registros fácilmente con Datadog Observability Pipelines
 - link: https://www.datadoghq.com/blog/observability-pipelines-stream-logs-in-ocsf-format/
   tag: Blog
-  text: Transmitir logs en formato OCSF a tus proveedores de seguridad o data lakes
-    preferidos con Observability Pipelines
+  text: Transmita registros en formato OCSF a sus proveedores de seguridad o lagos
+    de datos preferidos con Observability Pipelines
+- link: https://www.datadoghq.com/blog/observability-pipelines-route-logs-microsoft-sentinel/
+  tag: Blog
+  text: Simplifique su migración de SIEM a Microsoft Sentinel con Datadog Observability
+    Pipelines
+- link: https://www.datadoghq.com/blog/sled-observability-pipelines/
+  tag: Blog
+  text: Cómo las organizaciones estatales, locales y educativas pueden gestionar registros
+    de manera flexible y eficiente usando Datadog Observability Pipelines
+- link: https://www.datadoghq.com/blog/optimize-high-volume-logs/
+  tag: Blog
+  text: Cómo optimizar datos de registro de alto volumen sin comprometer la visibilidad
+- link: https://www.datadoghq.com/blog/archive-search/
+  tag: Blog
+  text: Busque en sus registros históricos de manera más eficiente con Datadog Archive
+    Search
+- link: https://www.datadoghq.com/blog/introducing-datadog-cloudprem/
+  tag: Blog
+  text: Almacene y busque registros a escala de petabytes en su propia infraestructura
+    con Datadog BYOC Logs
+- link: https://www.datadoghq.com/blog/manage-high-volume-logs-with-observability-pipeline-packs/
+  tag: Blog
+  text: Controle los costos de registros en cualquier SIEM o lago de datos utilizando
+    Packs con Observability Pipelines
+- link: https://www.datadoghq.com/blog/observability-pipelines-otel-cost-control/
+  tag: Blog
+  text: Utilice OpenTelemetry con Observability Pipelines para la recopilación de
+    registros y el control de costos neutrales respecto al proveedor
+- link: https://www.datadoghq.com/blog/observability-pipelines-mssp
+  tag: Blog
+  text: Simplifique la recopilación y agregación de registros para MSSP con Datadog
+    Observability Pipelines
+- link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
+  tag: Blog
+  text: Administre el volumen de métricas y las etiquetas en su entorno con Observability
+    Pipelines
 title: Observability Pipelines
 ---
+## Descripción general {#overview}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines no está disponible en el sitio US1-FED Datadog.</div>
-{{< /site-region >}}
+{{< img src="observability_pipelines/op_marketecture_06042025.png" alt="Un gráfico que muestra datos siendo agregados desde una variedad de fuentes, procesados y enriquecidos por el Observability Pipelines Worker en su propio entorno, y luego siendo dirigidos a los destinos de seguridad, análisis y almacenamiento de su elección" style="width:100%;" >}}
+
+Datadog Observability Pipelines le permite recopilar y procesar {{< tooltip text="logs, metrics, and traces" tooltip="Comuníquese con su gerente de cuenta para analizar los casos de uso y los precios." >}} dentro de su propia infraestructura, y luego dirija los datos a diferentes destinos. Le brinda control sobre sus datos de observabilidad antes de que salgan de su entorno.
+
+Con plantillas listas para usar, puede crear canalizaciones que redacten datos confidenciales, enriquezcan datos, filtren eventos ruidosos y dirijan datos a destinos como Datadog, herramientas SIEM o almacenamiento en la nube.
+
+## Componentes clave {#key-components}
+
+### Observability Pipelines Worker {#observability-pipelines-worker}
+
+El Observability Pipelines Worker se ejecuta dentro de su infraestructura para agregar, procesar y dirigir datos.
 
 <div class="alert alert-info">
-Datadog recomienda actualizar Observability Pipelines Worker (OPW) con cada versión menor y de parche o, como mínimo, mensualmente. <br><br> Actualizar a una versión mayor de OPW y mantenerla actualizada es la única manera compatible de obtener las últimas funcionalidades, correcciones y actualizaciones de seguridad de OPW.
+Datadog recomienda que actualice Observability Pipelines Worker (OPW) con cada versión menor y de parche, o, como mínimo, mensualmente. <br><br> Actualizar a una versión principal de OPW y mantenerla actualizada es la única forma admitida de obtener la funcionalidad, las correcciones y las actualizaciones de seguridad más recientes de OPW. Consulte <a href="/observability_pipelines/configuration/install_the_worker/#upgrade-the-worker">Actualizar el Worker</a> para actualizar a la versión más reciente del Worker</a>.
 </div>
 
-## Información general
+### Interfaz de usuario de Observability Pipelines {#observability-pipelines-ui}
 
-{{< img src="observability_pipelines/op_marketecture_11042024.png" alt="Gráfico que muestra el agregado de datos de diferentes fuentes. Estos datos son procesados y enriquecidos por el Observability Pipelines Worker en tu propio entorno y luego son enrutados a los destinos de seguridad, análisis y almacenamiento elegidos." style="width:100%;" >}}
+La interfaz de usuario de Observability Pipelines proporciona un plano de control centralizado donde puede:
 
-Observability Pipelines te permite recopilar y procesar logs dentro de tu propia infraestructura, antes de enrutarlos a las integraciones aguas abajo. Utilza [plantillas] (#start-building-pipelines-with-out-of-the-box-templates) predefinidas para crear y desplegar pipelines basados en tu caso de uso.
+- Cree y edite pipelines con plantillas guiadas.
+- Implemente y administre Workers.
+- Habilite seguimientos para realizar un seguimiento del estado de la canalización.
 
-Observability Pipelines Worker es el software que se ejecuta en tu infraestructura. Agrega, procesa y enruta de forma centralizada tus logs en función de tu caso de uso. Esto significa que puedes ocultar datos confidenciales, preprocesar logs y determinar a qué destinos deben ir, antes de que los logs abandonen tu entorno.
+## Comience {#get-started}
 
-La interfaz de usuario de Observability Pipelines proporciona un plano de control para gestionar tus Observability Pipelines Workers. Desde allí puedes crear, editar y cambiar pipelines en tus Workers. También puedes habilitar monitores para tus pipelines de forma que puedas evaluar su estado.
+1. Navegue a [Observability Pipelines][1].
+1. Seleccione una [plantilla](#common-use-cases-and-templates) según su caso de uso.
+1. Configure su canalización:
+    1. Elija una [fuente][2] de registros.
+    1. Configure [procesadores][3].
+    1. Agregue uno o más [destinos][4].
+1. [Instale el Worker][5] en su entorno
+1. Habilite seguimientos para obtener observabilidad en tiempo real sobre el estado de su canalización.
 
-## Para empezar
+Consulte [Configurar Pipelines][6] para obtener instrucciones detalladas.
 
-Para crear un pipeline:
+## Casos de uso comunes y plantillas {#common-use-cases-and-templates}
 
-1. Ve a [Observability Pipelines][1].
-1. Selecciona una plantilla:
-    - [Control del volumen de logs][2]
-    - [Logs de doble envío][3]
-    - [Logs divididos][4]
-    - [Archivar logs en archivos de Datadog][5]
-    - [Ocultamiento de datos confidenciales][6]
-    - [Enriquecimiento de logs][7]
-    - [Generar métricas][8]
-1. Selecciona y configura tu [fuente][9].
-1. Selecciona y configura tus [destinos][10].
-1. Configura tus [procesadores][11].
-1. Instala Observability Pipelines Worker.
-1. Activa monitores para tu pipeline.
+Observability Pipelines incluye plantillas predefinidas para flujos de trabajo comunes de enrutamiento y transformación de datos. Puede personalizarlas completamente o combinarlas para satisfacer sus necesidades.
 
-Para obtener más información, consulta [Configurar pipelines][12].
+{{< img src="observability_pipelines/eight_templates.png" alt="La interfaz de usuario de Observability Pipelines mostrando las ocho plantillas" style="width:100%;" >}}
 
-Para ver las opciones de arranque y obtener más información sobre la configuración del Worker con Kubernetes, consulta [Configuraciones avanzadas][13].
+### Plantillas {#templates}
 
-## Explorar Observability Pipelines
+{{< tabs >}}
+{{% tab "Logs" %}}
 
-### Crear pipelines con plantillas predefinidas
+| Plantilla | Descripción |
+|----------|-------------|
+| Archivar registros | Almacene registros sin procesar en Amazon S3, Google Cloud Storage o Azure Storage para su retención y rehidratación a largo plazo. |
+| Envío dual de registros | Envíe el mismo flujo de registros a múltiples destinos (por ejemplo, Datadog y un SIEM). |
+| Generar métricas basadas en registros | Convierta registros de alto volumen en métricas de conteo o distribución para reducir las necesidades de almacenamiento. |
+| Enriquecimiento de registros | Agregue metadatos de tablas de referencia o asignaciones estáticas para realizar consultas más efectivas. |
+| Control de volumen de registros | Reduzca el volumen de log indexado filtrando los registros de bajo valor antes de que se almacenen. |
+| Redacción de datos confidenciales | Detecte y elimine información de identificación personal (PII) y secretos mediante reglas integradas o personalizadas. |
+| Dividir registros | Dirija los registros por tipo (por ejemplo, seguridad frente a aplicación) a diferentes herramientas. |
 
-{{< img src="observability_pipelines/templates_20241003.png" alt="Interfaz de usuario de Observability Pipelines que muestra seis plantillas" style="width:100%;" >}}
+{{% /tab %}}
+{{% tab "Métricas" %}}
 
-Las [plantillas](#out-of-the-box-templates) se crean para los siguientes casos de uso:
+| Plantilla | Descripción |
+|----------|-------------|
+| Gobernanza de etiquetas de métricas | Administre la calidad y el volumen de sus métricas conservando solo las que necesita, estandarizando el etiquetado de métricas y eliminando etiquetas no deseadas para evitar una alta cardinalidad. |
 
-#### Control del volumen de logs
+{{% /tab %}}
+{{% tab "Trazas" %}}
 
-Los logs sin procesar son ruidosos, y sólo algunos son útiles para una mayor búsqueda y análisis durante las investigaciones. Utiliza la plantilla Control del volumen de logs para determinar qué logs debes enviar a tu solución indexada, como una solución SIEM o de gestión de logs. Esto te ayudará a aumentar el valor de tus logs indexados y también a mantenerte dentro de tu presupuesto previsto.
+| Plantilla | Descripción |
+|----------|-------------|
+| Muestreo de trazas | Ingeste, procese y enrute trazas para controlar los costos mientras conserva las trazas que necesita para la resolución de problemas y el análisis. |
 
-#### Logs de doble envío
+{{% /tab %}}
+{{< /tabs >}}
 
-A medida que tu organización crece, también cambian tus necesidades de observabilidad de diferentes casos de uso, como la seguridad, el archivado y la gestión de logs. Esto podría llevar a que necesites probar diferentes soluciones de archivado, SIEM y de gestión de logs. Sin embargo, la gestión de pipelines de logs con diferentes soluciones puede ser complicada. Utiliza la plantilla Logs de doble envío para agregar de forma centralizada, procesar y enviar copias de tus logs a diferentes destinos.
+Consulte [Explorar plantillas][7] para obtener más información.
 
-#### Archivar logs
-
-Utiliza la plantilla Archivar logs para almacenar logs en una solución de almacenamiento en la nube (Amazon S3, Google Cloud Storage o Azure Storage). Los logs archivados se almacenan en un formato rehidratable en Datadog, de modo que puedan rehidratarse en Datadog cuando sea necesario. Esto es útil cuando:
-
-- Tienes un gran volumen de logs ruidosos, pero puede que necesites indexarlos en Datadog Log Management ad hoc para una investigación.
-- Estás migrando a Datadog Log Management y quieres contar con un historial de los logs luego de la migración.
-- Tienes una política de conservación para cumplir con los requisitos de cumplimiento, pero no necesariamente necesitas indexar esos logs.
-
-#### Logs divididos
-
-Cuando tengas logs de diferentes servicios y aplicaciones, puede que necesites enviarlos a diferentes servicios posteriores para su consulta, análisis y alertas. Por ejemplo, es posible que quieras enviar logs de seguridad a una solución SIEM y logs de DevOps a Datadog. Utiliza la plantilla Dividir logs para preprocesar tus logs por separado para cada destino antes de enviarlos a los procesos posteriores.
-
-#### Ocultar datos confidenciales
-
-Utiliza la plantilla Ocultar datos confidenciales para detectar y ocultar información confidencial in situ. El procesador de análisis de datos confidenciales de Observability Pipelines proporciona 70 reglas de análisis listas predefinidas, pero también puedes crear tus propias reglas de análisis personalizadas utilizando expresiones regulares. Las reglas OOTB reconocen patrones estándar como números de tarjetas de crédito, direcciones de correo electrónico, direcciones IP, claves API, claves SSH y tokens de acceso.
-
-#### Enriquecimiento de logs
-
-Todos los diferentes servicios, sistemas y aplicaciones de tu organización generan logs que contienen capas de información y tienen diferentes formatos. Esto puede dificultar la extracción a la hora de buscar y analizar los datos que necesitas para una investigación. Utiliza la plantilla Enriquecimiento de logs para estandarizar tus logs y enriquecerlos con información, como los datos de una tabla de referencia.
-
-#### Generar métricas
-
-Algunas fuentes de logs, como los cortafuegos y los dispositivos de red, generan un gran volumen de eventos de logs que contienen datos de logs que no es necesario almacenar. A menudo, sólo quieres ver un resumen de los logs y compararlos con los datos históricos. Las métricas basadas en logs también son una forma rentable de resumir datos de logs de todo tu flujo (stream) de ingestión. Utiliza la plantilla Generar métricas para generar un recuento de métricas de logs que coincidan con una consulta o una métrica de distribución de un valor numérico contenido en los logs, como la duración de una solicitud.
-
-### Crear pipelines en la interfaz de usuario de Observability Pipelines
-
-{{% observability_pipelines/use_case_images/generate_metrics %}}
-
-Crea tus pipelines en la interfaz de usuario de Observability Pipelines. Después de seleccionar una de las plantillas predefinidas, el flujo de trabajo de incorporación te guía a través de la configuración de tu fuente, tus procesadores y tus destinos. La página de instalación proporciona instrucciones sobre cómo instalar el Worker en tu entorno (Docker, Kubernetes, Linux o CloudFormation).
-
-### Activar monitores predefinidos para tus componentes de pipelines
-
-Después de crear tu pipeline de distribución, activa los monitores predefinidos para recibir alertas cuando:
-
-- Aumentan los errores de un componente. Esto podría ocurrir porque el componente está procesando datos en formatos inesperados.
-- El Observability Pipelines Worker tiene un uso elevado de CPU o de memoria.
-- Existen picos en los datos descartados por un componente.
-
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /es/observability_pipelines/log_volume_control/
-[3]: /es/observability_pipelines/dual_ship_logs/
-[4]: /es/observability_pipelines/split_logs/
-[5]: /es/observability_pipelines/archive_logs/
-[6]: /es/observability_pipelines/sensitive_data_redaction/
-[7]: /es/observability_pipelines/log_enrichment/
-[8]: /es/observability_pipelines/set_up_pipelines/generate_metrics/
-[9]: /es/observability_pipelines/sources/
-[10]: /es/observability_pipelines/destinations/
-[11]: /es/observability_pipelines/processors/
-[12]: /es/observability_pipelines/set_up_pipelines/
-[13]: /es/observability_pipelines/advanced_configurations/
+[2]: /es/observability_pipelines/sources/
+[3]: /es/observability_pipelines/processors/
+[4]: /es/observability_pipelines/destinations/
+[5]: /es/observability_pipelines/configuration/install_the_worker/
+[6]: /es/observability_pipelines/configuration/set_up_pipelines/
+[7]: /es/observability_pipelines/configuration/explore_templates/

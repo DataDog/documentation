@@ -801,6 +801,11 @@
       "group": "feature_flags",
       "suffix": "",
       "description": "Create a feature flag returns \"Created\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_2426084719",
+      "description": "Create a feature flag with notification rule targets returns \"Created\" response"
     }
   ],
   "CreateAllocationsForFeatureFlagInEnvironment": [
@@ -1742,6 +1747,11 @@
       "group": "observability_pipelines",
       "suffix": "_3565101276",
       "description": "Validate an observability pipeline with OCSF mapper library mapping returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_1874470273",
+      "description": "Validate an observability pipeline with Splunk HEC destination endpoint_target returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",
@@ -2879,6 +2889,13 @@
       "group": "teams",
       "suffix": "",
       "description": "Update team notification rule returns \"OK\" response"
+    }
+  ],
+  "AddSTIXThreatIntel": [
+    {
+      "group": "threat_intelligence",
+      "suffix": "",
+      "description": "Ingest STIX threat intelligence returns \"OK\" response"
     }
   ],
   "CreateUser": [
