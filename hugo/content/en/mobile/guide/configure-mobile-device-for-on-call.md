@@ -121,7 +121,7 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 
 1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Notification{{< /ui >}} > {{< ui >}}On Call{{< /ui >}}.
 
-2. Toggle on {{< ui >}}Enable Automatic Contact Card Sync{{< /ui >}}. This creates a contact named "Datadog On-Call", which updates regularly with Datadog's latest phone numbers.
+2. Toggle on {{< ui >}}Automatic Contact Card Sync{{< /ui >}}. This creates a contact named "Datadog On-Call", which updates regularly with Datadog's latest phone numbers.
 
 3. After this contact is created, open your iOS system settings and navigate to {{< ui >}}Focus{{< /ui >}} > {{< ui >}}Do Not Disturb{{< /ui >}}.
 
