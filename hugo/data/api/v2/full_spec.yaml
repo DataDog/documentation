@@ -24865,6 +24865,26 @@ components:
           description: The name of the feature flag.
           example: "Feature Flag ABC123"
           type: string
+        notification_rule_query:
+          description: |-
+            Query used to determine which change events on this feature flag trigger notifications
+            to `rule_targets`. Uses Datadog log search syntax (`AND`, `OR`, `NOT`, parentheses) to
+            match against the `notification_type` facet.
+
+            Supported `notification_type` values for a feature flag are: `flag_enabled_disabled`,
+            `flag_archived`, `flag_approval_required`, `rollout_started`, `rollout_scheduled`,
+            `rollout_step_started`, `rollout_paused_guardrail`, `rollout_paused_user`,
+            `rollout_aborted_guardrail`, `rollout_aborted_user`, `targeting_rule_created`,
+            `targeting_rule_updated`, `targeting_rule_updated_via_filter`, and
+            `targeting_rule_deleted`.
+          example: "notification_type:rollout_started OR notification_type:targeting_rule_updated"
+          nullable: true
+          type: string
+        rule_targets:
+          description: Targets to notify about changes to this feature flag that match `notification_rule_query`.
+          items:
+            $ref: "#/components/schemas/NotificationRuleTarget"
+          type: array
         value_type:
           $ref: "#/components/schemas/ValueType"
         variants:
@@ -33859,6 +33879,10 @@ components:
     DetachCaseRequestData:
       description: Data for detaching security findings from their case.
       properties:
+        id:
+          description: Unique identifier of the detachment request.
+          example: "c1234567-89ab-cdef-0123-456789abcdef"
+          type: string
         relationships:
           $ref: "#/components/schemas/DetachCaseRequestDataRelationships"
         type:
@@ -38266,6 +38290,19 @@ components:
           description: A short human-readable summary of the warning.
           example: "One or several indexes are missing or invalid. Results hold data from the other indexes."
           type: string
+      type: object
+    ExecutionLimit:
+      description: "The maximum number of times to execute a workflow for an incident."
+      properties:
+        count:
+          description: "The maximum number of workflow executions."
+          example: 1
+          format: int32
+          maximum: 9999
+          minimum: 1
+          type: integer
+      required:
+        - count
       type: object
     ExecutionPolicyActionPattern:
       description: The set of actions this policy applies to.
@@ -48450,6 +48487,15 @@ components:
       type: string
       x-enum-varnames:
         - INCIDENT_ATTACHMENTS
+    IncidentCondition:
+      description: "Conditions that determine which incidents trigger the workflow."
+      properties:
+        tagValues:
+          description: "Incident tags and values used to filter matching incidents."
+          items:
+            $ref: "#/components/schemas/IncidentTagValue"
+          type: array
+      type: object
     IncidentConfigurationDataAttributesRequest:
       description: Attributes for creating an incident configuration.
       properties:
@@ -48802,6 +48848,25 @@ components:
           $ref: "#/components/schemas/IncidentCreateData"
       required:
         - data
+      type: object
+    IncidentCreatedTrigger:
+      description: "Trigger a workflow when an incident is declared."
+      properties:
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentCreatedTriggerWrapper:
+      description: "Schema for an incident declared trigger."
+      properties:
+        incidentCreatedTrigger:
+          $ref: "#/components/schemas/IncidentCreatedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentCreatedTrigger
       type: object
     IncidentFieldAttributes:
       description: Dynamic fields for which selections can be made, with field names as keys.
@@ -49482,6 +49547,27 @@ components:
       required:
         - data
       type: object
+    IncidentImpactCreatedTrigger:
+      description: "Trigger a workflow when an impact is created for an incident."
+      properties:
+        executionLimit:
+          $ref: "#/components/schemas/ExecutionLimit"
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentImpactCreatedTriggerWrapper:
+      description: "Schema for an incident impact created trigger."
+      properties:
+        incidentImpactCreatedTrigger:
+          $ref: "#/components/schemas/IncidentImpactCreatedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentImpactCreatedTrigger
+      type: object
     IncidentImpactFieldChoice:
       description: A choice option for a dropdown or multiselect impact field.
       properties:
@@ -49780,6 +49866,27 @@ components:
       type: string
       x-enum-varnames:
         - INCIDENT_IMPACTS
+    IncidentImpactUpdatedTrigger:
+      description: "Trigger a workflow when an impact is updated for an incident."
+      properties:
+        executionLimit:
+          $ref: "#/components/schemas/ExecutionLimit"
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentImpactUpdatedTriggerWrapper:
+      description: "Schema for an incident impact updated trigger."
+      properties:
+        incidentImpactUpdatedTrigger:
+          $ref: "#/components/schemas/IncidentImpactUpdatedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentImpactUpdatedTrigger
+      type: object
     IncidentImpactsResponse:
       description: Response with a list of incident impacts.
       properties:
@@ -51001,6 +51108,27 @@ components:
       type: string
       x-enum-varnames:
         - INCIDENT_POSTMORTEMS
+    IncidentPostmortemUpdatedTrigger:
+      description: "Trigger a workflow when a postmortem is updated for an incident."
+      properties:
+        executionLimit:
+          $ref: "#/components/schemas/ExecutionLimit"
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentPostmortemUpdatedTriggerWrapper:
+      description: "Schema for an incident postmortem updated trigger."
+      properties:
+        incidentPostmortemUpdatedTrigger:
+          $ref: "#/components/schemas/IncidentPostmortemUpdatedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentPostmortemUpdatedTrigger
+      type: object
     IncidentRelatedObject:
       description: Object related to an incident.
       enum:
@@ -51031,6 +51159,27 @@ components:
       type: string
       x-enum-varnames:
         - INCIDENTS
+    IncidentResponderCreatedTrigger:
+      description: "Trigger a workflow when a responder is created for an incident."
+      properties:
+        executionLimit:
+          $ref: "#/components/schemas/ExecutionLimit"
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentResponderCreatedTriggerWrapper:
+      description: "Schema for an incident responder created trigger."
+      properties:
+        incidentResponderCreatedTrigger:
+          $ref: "#/components/schemas/IncidentResponderCreatedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentResponderCreatedTrigger
+      type: object
     IncidentResponderDataAttributesResponse:
       description: Attributes of an incident responder in a response.
       properties:
@@ -51784,6 +51933,55 @@ components:
       required:
         - data
       type: object
+    IncidentSavedTrigger:
+      description: "Trigger a workflow when an incident is declared or updated."
+      properties:
+        executionLimit:
+          $ref: "#/components/schemas/ExecutionLimit"
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        serialExecution:
+          $ref: "#/components/schemas/SerialExecution"
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentSavedTriggerWrapper:
+      description: "Schema for an incident declared or updated trigger."
+      properties:
+        incidentSavedTrigger:
+          $ref: "#/components/schemas/IncidentSavedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentSavedTrigger
+      type: object
+    IncidentScheduleTrigger:
+      description: "Trigger a workflow on a schedule for an incident."
+      properties:
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        rrule:
+          description: "The recurrence rule for the schedule, expressed as an iCalendar `RRULE` string."
+          example: "DTSTART:20241220T151700Z\nRRULE:FREQ=MONTHLY"
+          minLength: 1
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      required:
+        - rrule
+      type: object
+    IncidentScheduleTriggerWrapper:
+      description: "Schema for an incident schedule trigger."
+      properties:
+        incidentScheduleTrigger:
+          $ref: "#/components/schemas/IncidentScheduleTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentScheduleTrigger
+      type: object
     IncidentSearchResponse:
       description: Response with incidents and facets.
       properties:
@@ -52077,6 +52275,24 @@ components:
         - SEV_3
         - SEV_4
         - SEV_5
+    IncidentTagValue:
+      description: "An incident tag and its accepted values."
+      properties:
+        tag:
+          description: "The incident tag to match."
+          example: ""
+          type: string
+        values:
+          description: "The accepted values for the incident tag."
+          example:
+            - ""
+          items:
+            type: string
+          type: array
+      required:
+        - tag
+        - values
+      type: object
     IncidentTimelineCellCreateAttributes:
       description: The timeline cell's attributes for a create request.
       oneOf:
@@ -52496,13 +52712,16 @@ components:
       x-enum-varnames:
         - INCIDENT_TODOS
     IncidentTrigger:
-      description: "Trigger a workflow from an Incident. For automatic triggering a handle must be configured and the workflow must be published."
+      description: "Trigger a workflow from an incident. For automatic triggering a handle must be configured and the workflow must be published."
       properties:
         rateLimit:
           $ref: "#/components/schemas/TriggerRateLimit"
+        version:
+          description: "Version of the incident manual trigger."
+          type: string
       type: object
     IncidentTriggerWrapper:
-      description: "Schema for an Incident-based trigger."
+      description: "Schema for an incident-based trigger."
       properties:
         incidentTrigger:
           $ref: "#/components/schemas/IncidentTrigger"
@@ -55323,7 +55542,7 @@ components:
       description: An array of related resources, returned when the `include` query parameter is used.
       oneOf:
         - $ref: "#/components/schemas/Issue"
-        - $ref: "#/components/schemas/Case"
+        - $ref: "#/components/schemas/IssueCase"
         - $ref: "#/components/schemas/IssueUser"
         - $ref: "#/components/schemas/IssueTeam"
     IssuesSearchResultIssueRelationship:
@@ -71764,6 +71983,109 @@ components:
       type: string
       x-enum-varnames:
         - MANUAL
+    NotificationRuleTarget:
+      description: A notification target that receives change alerts for a feature flag.
+      properties:
+        configuration:
+          $ref: "#/components/schemas/NotificationRuleTargetConfiguration"
+        type:
+          $ref: "#/components/schemas/NotificationRuleTargetType"
+        version:
+          description: Schema version of `configuration`.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - type
+        - version
+        - configuration
+      type: object
+    NotificationRuleTargetConfiguration:
+      description: "Configuration for a notification target. Which fields apply depends on the target's `type`."
+      properties:
+        channel:
+          description: Slack channel name, for a `SLACK_CHANNEL` target.
+          example: "#feature-flags"
+          type: string
+        channel_id:
+          description: |-
+            Slack channel ID for a `SLACK_CHANNEL` target, or Microsoft Teams channel ID
+            for an `MS_TEAMS_CHANNEL` target.
+          example: "C0123456789"
+          type: string
+        channel_name:
+          description: Microsoft Teams channel name, for an `MS_TEAMS_CHANNEL` target.
+          example: "Feature Flags"
+          type: string
+        connector_name:
+          description: Microsoft Teams connector name, for an `MS_TEAMS_CHANNEL` target.
+          example: "datadog-connector"
+          type: string
+        recipient:
+          $ref: "#/components/schemas/NotificationRuleTargetConfigurationRecipient"
+        service_name:
+          description: PagerDuty service name, for a `PAGERDUTY_SERVICE` target.
+          example: "feature-flags-oncall"
+          type: string
+        team_id:
+          description: Microsoft Teams team ID, for an `MS_TEAMS_CHANNEL` target.
+          example: "19:abcdef0123456789@thread.tacv2"
+          type: string
+        team_name:
+          description: Microsoft Teams team name, for an `MS_TEAMS_CHANNEL` target.
+          example: "Engineering"
+          type: string
+        tenant_id:
+          description: Microsoft Teams tenant ID, for an `MS_TEAMS_CHANNEL` target.
+          example: "72f988bf-86f1-41af-91ab-2d7cd011db47"
+          type: string
+        tenant_name:
+          description: Microsoft Teams tenant name, for an `MS_TEAMS_CHANNEL` target.
+          example: "Datadog"
+          type: string
+        username:
+          description: Slack username, for a `SLACK_USER` target.
+          example: "jane.doe"
+          type: string
+        webhook_name:
+          description: Name of the configured webhook, for a `WEBHOOK` target.
+          example: "feature-flags-webhook"
+          type: string
+        workspace:
+          description: Slack workspace name, for a `SLACK_CHANNEL` or `SLACK_USER` target.
+          example: "datadoghq"
+          type: string
+        workspace_id:
+          description: Slack workspace ID, for a `SLACK_CHANNEL` target.
+          example: "T0123456789"
+          type: string
+      type: object
+    NotificationRuleTargetConfigurationRecipient:
+      description: Recipient for an `EMAIL` target.
+      properties:
+        email:
+          description: Email address to notify.
+          example: "user@example.com"
+          type: string
+      type: object
+    NotificationRuleTargetType:
+      description: The type of notification target.
+      enum:
+        - "EMAIL"
+        - "SLACK_CHANNEL"
+        - "SLACK_USER"
+        - "WEBHOOK"
+        - "PAGERDUTY_SERVICE"
+        - "MS_TEAMS_CHANNEL"
+      example: "SLACK_CHANNEL"
+      type: string
+      x-enum-varnames:
+        - EMAIL
+        - SLACK_CHANNEL
+        - SLACK_USER
+        - WEBHOOK
+        - PAGERDUTY_SERVICE
+        - MS_TEAMS_CHANNEL
     NotificationRulesListResponse:
       description: The list of notification rules.
       properties:
@@ -105563,6 +105885,16 @@ components:
         - REPLACEMENT_STRING
         - PARTIAL_REPLACEMENT_FROM_BEGINNING
         - PARTIAL_REPLACEMENT_FROM_END
+    SerialExecution:
+      description: "Whether to execute the workflow serially for an incident."
+      properties:
+        enabled:
+          description: "Whether serial execution is enabled."
+          example: false
+          type: boolean
+      required:
+        - enabled
+      type: object
     ServiceAccessToken:
       description: Datadog access token.
       properties:
@@ -108646,12 +108978,38 @@ components:
         - channel_name
         - redirect_url
       type: object
+    SlackReactionConfig:
+      description: "Configuration for a Slack emoji reaction trigger."
+      properties:
+        reactionEmoji:
+          description: "The Slack emoji reaction name."
+          example: L
+          minLength: 1
+          type: string
+        teamId:
+          description: "The Slack workspace ID."
+          example: L
+          minLength: 1
+          type: string
+      required:
+        - teamId
+        - reactionEmoji
+      type: object
+    SlackTrigger:
+      description: "Trigger a workflow from Slack. The workflow must be published."
+      properties:
+        reactionTriggers:
+          description: "Slack emoji reactions that trigger the workflow."
+          items:
+            $ref: "#/components/schemas/SlackReactionConfig"
+          type: array
+          uniqueItems: true
+      type: object
     SlackTriggerWrapper:
       description: "Schema for a Slack-based trigger."
       properties:
         slackTrigger:
-          description: "Trigger a workflow from Slack. The workflow must be published."
-          type: object
+          $ref: "#/components/schemas/SlackTrigger"
         startStepNames:
           $ref: "#/components/schemas/StartStepNames"
       required:
@@ -120584,6 +120942,13 @@ components:
         - $ref: "#/components/schemas/DashboardTriggerWrapper"
         - $ref: "#/components/schemas/FormTriggerWrapper"
         - $ref: "#/components/schemas/GithubWebhookTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentCreatedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentImpactCreatedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentImpactUpdatedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentPostmortemUpdatedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentResponderCreatedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentSavedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentScheduleTriggerWrapper"
         - $ref: "#/components/schemas/IncidentTriggerWrapper"
         - $ref: "#/components/schemas/MonitorTriggerWrapper"
         - $ref: "#/components/schemas/NotebookTriggerWrapper"
@@ -123227,6 +123592,249 @@ components:
           items:
             $ref: "#/components/schemas/UsageDataObject"
           type: array
+      type: object
+    UsageQuotaBulkResultAttributes:
+      description: Attributes of a usage quota bulk write result. On success, all fields except `error` are present. On failure, only `error` is present and the other fields are omitted.
+      properties:
+        enforced:
+          description: Whether usage above the limit is actively blocked instead of only tracked or alerted on. Omitted if this item failed to write.
+          example: true
+          type: boolean
+        error:
+          description: An error message describing why this item failed to write. Omitted if this item was written successfully.
+          example: usage_limit is out of range
+          type: string
+        org_public_id:
+          description: The public ID of the organization that owns the quota. Omitted if this item failed to write.
+          example: abcdef12345
+          type: string
+        scope:
+          $ref: "#/components/schemas/UsageQuotaResponseScope"
+        usage_limit:
+          description: The quota limit in the usage units defined by the quota namespace. May be fractional for quotas configured before public writes required whole units. Omitted if this item failed to write.
+          example: 100000
+          format: double
+          type: number
+      type: object
+    UsageQuotaBulkResultData:
+      description: The result of writing one usage quota in a bulk create-or-update request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UsageQuotaBulkResultAttributes"
+        id:
+          description: An opaque usage quota identifier. Clients must pass this value back verbatim in update and delete requests and must not infer any structure from it.
+          example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+          type: string
+        type:
+          $ref: "#/components/schemas/UsageQuotaType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    UsageQuotaBulkResultDataList:
+      description: The results of writing each usage quota in a bulk create-or-update request, in the same order as the request.
+      items:
+        $ref: "#/components/schemas/UsageQuotaBulkResultData"
+      type: array
+    UsageQuotaCreateAttributes:
+      description: Attributes for creating or updating a usage quota by scope.
+      properties:
+        enforced:
+          description: Whether to actively block usage above the limit instead of only tracking or alerting on it.
+          example: true
+          type: boolean
+        scope:
+          $ref: "#/components/schemas/UsageQuotaRequestScope"
+        usage_limit:
+          description: The quota limit to set in the usage units defined by the quota namespace. For an organization-wide quota (scope omitted), the limit must be greater than the usage already recorded in the current period.
+          example: 100000
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+        - usage_limit
+        - enforced
+      type: object
+    UsageQuotaCreateData:
+      description: A usage quota resource to create or update by scope.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UsageQuotaCreateAttributes"
+        type:
+          $ref: "#/components/schemas/UsageQuotaType"
+      required:
+        - type
+        - attributes
+      type: object
+    UsageQuotaCreateDataList:
+      description: A bulk list of usage quota resources to create or update by scope.
+      items:
+        $ref: "#/components/schemas/UsageQuotaCreateData"
+      minItems: 1
+      type: array
+    UsageQuotaRequestScope:
+      additionalProperties:
+        example: jane@example.com
+        type: string
+      description: A namespace-specific key and value identifying what the quota applies to within an organization. The object must contain exactly one entry. Use `"*"` as the value for the default quota applied to entities without a specific quota, or omit the scope for an organization-wide quota. A specific value must identify an existing user handle in the caller's organization when `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's organization or in at least one targeted descendant organization; the quota is then applied only to the organizations where that handle exists, and the request fails only if the handle exists in none of them.
+      example:
+        user_handle: jane@example.com
+      maxProperties: 1
+      minProperties: 1
+      type: object
+    UsageQuotaResponse:
+      description: Response containing a usage quota.
+      properties:
+        data:
+          $ref: "#/components/schemas/UsageQuotaResponseData"
+      required:
+        - data
+      type: object
+    UsageQuotaResponseAttributes:
+      description: Attributes of a usage quota.
+      properties:
+        enforced:
+          description: Whether usage above the limit is actively blocked instead of only tracked or alerted on.
+          example: true
+          type: boolean
+        org_public_id:
+          description: The public ID of the organization that owns the quota.
+          example: abcdef12345
+          type: string
+        scope:
+          $ref: "#/components/schemas/UsageQuotaResponseScope"
+        usage_limit:
+          description: The quota limit in the usage units defined by the quota namespace. May be fractional for quotas configured before public writes required whole units.
+          example: 100000
+          format: double
+          type: number
+      required:
+        - org_public_id
+        - usage_limit
+        - enforced
+      type: object
+    UsageQuotaResponseData:
+      description: A usage quota resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UsageQuotaResponseAttributes"
+        id:
+          description: An opaque usage quota identifier. Clients must pass this value back verbatim in update and delete requests and must not infer any structure from it.
+          example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+          type: string
+        type:
+          $ref: "#/components/schemas/UsageQuotaType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    UsageQuotaResponseDataList:
+      description: A list of usage quota resources.
+      items:
+        $ref: "#/components/schemas/UsageQuotaResponseData"
+      type: array
+    UsageQuotaResponseScope:
+      additionalProperties:
+        example: jane@example.com
+        type: string
+      description: A namespace-specific key and value identifying what the quota applies to within an organization. The object contains exactly one entry. A value of `"*"` identifies the default quota applied to entities without a specific quota. This field is omitted for an organization-wide quota.
+      example:
+        user_handle: jane@example.com
+      maxProperties: 1
+      minProperties: 1
+      type: object
+    UsageQuotaType:
+      description: The JSON:API resource type for a usage quota.
+      enum:
+        - quotas
+      example: quotas
+      type: string
+      x-enum-varnames:
+        - QUOTAS
+    UsageQuotaUpdateAttributes:
+      description: Attributes to update on a usage quota. Omitting a property leaves its current value unchanged.
+      properties:
+        enforced:
+          description: Whether to actively block usage above the limit. Omit this field to leave the current enforcement setting unchanged.
+          example: false
+          nullable: true
+          type: boolean
+        usage_limit:
+          description: The new quota limit in the usage units defined by the quota namespace. For an organization-wide quota (empty scope), the limit must be greater than the usage already recorded in the current period. Omit this field to leave the current limit unchanged.
+          example: 120000
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+      type: object
+    UsageQuotaUpdateData:
+      description: A usage quota resource to update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UsageQuotaUpdateAttributes"
+        id:
+          description: The opaque usage quota identifier, which must match the identifier in the request path.
+          example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+          type: string
+        type:
+          $ref: "#/components/schemas/UsageQuotaType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    UsageQuotaUpdateRequest:
+      description: Request containing the usage quota resource to update.
+      properties:
+        data:
+          $ref: "#/components/schemas/UsageQuotaUpdateData"
+      required:
+        - data
+      type: object
+    UsageQuotasBulkResponse:
+      description: Response containing the result of a bulk usage quota create-or-update request. Returned with a `200` status regardless of whether individual items succeeded or failed; check each item's `error` attribute to determine its outcome.
+      properties:
+        data:
+          $ref: "#/components/schemas/UsageQuotaBulkResultDataList"
+      required:
+        - data
+      type: object
+    UsageQuotasCreateRequest:
+      description: A JSON:API bulk request containing an array of usage quota resources rather than a single resource.
+      properties:
+        data:
+          $ref: "#/components/schemas/UsageQuotaCreateDataList"
+      required:
+        - data
+      type: object
+    UsageQuotasListResponse:
+      description: Response containing a paginated list of usage quotas.
+      properties:
+        data:
+          $ref: "#/components/schemas/UsageQuotaResponseDataList"
+        meta:
+          $ref: "#/components/schemas/UsageQuotasResponseMeta"
+      required:
+        - data
+        - meta
+      type: object
+    UsageQuotasResponseMeta:
+      description: Pagination metadata for a usage quota list response.
+      properties:
+        page:
+          $ref: "#/components/schemas/UsageQuotasResponseMetaPage"
+      required:
+        - page
+      type: object
+    UsageQuotasResponseMetaPage:
+      description: Cursor pagination fields for a usage quota list response.
+      properties:
+        next_cursor:
+          description: An opaque cursor for retrieving the next page. Omitted when there are no more results.
+          example: eyJvZmZzZXQiOjEwMH0=
+          type: string
       type: object
     UsageSummaryAvailableFieldsAttributes:
       description: |-
@@ -200530,6 +201138,7 @@ paths:
               default:
                 value:
                   data:
+                    id: c1234567-89ab-cdef-0123-456789abcdef
                     relationships:
                       findings:
                         data:
@@ -222935,6 +223544,360 @@ paths:
         permissions:
           - usage_read
           - billing_read
+  /api/v2/usage/quotas/{quota_namespace}:
+    get:
+      description: |-
+        Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+      operationId: ListQuotas
+      parameters:
+        - description: The product-specific namespace whose usage quotas are being managed.
+          in: path
+          name: quota_namespace
+          required: true
+          schema:
+            example: ai_credits
+            type: string
+        - description: Whether to include quotas configured on descendant organizations in the caller's organization hierarchy. Only descendants in the same datacenter are supported.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: false
+            type: boolean
+        - description: An opaque cursor from a previous response's `meta.page.next_cursor` used to retrieve the next page.
+          in: query
+          name: page[cursor]
+          required: false
+          schema:
+            type: string
+        - description: The number of usage quotas to return per page.
+          in: query
+          name: page[limit]
+          required: false
+          schema:
+            default: 100
+            format: int64
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          enforced: true
+                          org_public_id: abcdef12345
+                          scope:
+                            user_handle: jane@example.com
+                          usage_limit: 100000
+                        id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+                        type: quotas
+                    meta:
+                      page:
+                        next_cursor: eyJvZmZzZXQiOjEwMH0=
+              schema:
+                $ref: "#/components/schemas/UsageQuotasListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - user_access_manage
+            - billing_edit
+            - org_management
+      summary: List usage quotas
+      tags:
+        - Usage Metering
+      x-menu-order: 14
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.next_cursor
+        limitParam: page[limit]
+        resultsPath: data
+      "x-permission":
+        operator: AND
+        permissions:
+          - user_access_manage
+          - billing_edit
+          - org_management
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated; otherwise, a new quota is created. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+      operationId: CreateQuotas
+      parameters:
+        - description: The product-specific namespace whose usage quotas are being managed.
+          in: path
+          name: quota_namespace
+          required: true
+          schema:
+            example: ai_credits
+            type: string
+        - description: Whether to write every item in the request to the caller's organization and all of its descendant organizations, instead of only the caller's organization. Only descendants in the same datacenter are supported. For a user-handle scope, the quota is applied only to the caller's organization and to descendant organizations where that user handle exists; the item fails only if the handle exists in none of them.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: false
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                summary: Create or update quotas for the caller's organization.
+                value:
+                  data:
+                    - attributes:
+                        enforced: true
+                        scope:
+                          user_handle: jane@example.com
+                        usage_limit: 100000
+                      type: quotas
+                    - attributes:
+                        enforced: false
+                        scope:
+                          user_handle: "*"
+                        usage_limit: 250000
+                      type: quotas
+            schema:
+              $ref: "#/components/schemas/UsageQuotasCreateRequest"
+        description: The usage quotas to create or update.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          enforced: true
+                          org_public_id: abcdef12345
+                          scope:
+                            user_handle: jane@example.com
+                          usage_limit: 100000
+                        id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+                        type: quotas
+                      - attributes:
+                          error: usage_limit is out of range
+                        id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTp1c2VyQGV4YW1wbGUuY29t"
+                        type: quotas
+              schema:
+                $ref: "#/components/schemas/UsageQuotasBulkResponse"
+          description: OK. The response includes each item's result; see each item's `error` attribute for any that failed to write.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Internal Server Error. Every item in the batch failed to write.
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - user_access_manage
+            - billing_edit
+            - org_management
+      summary: Create or update usage quotas
+      tags:
+        - Usage Metering
+      x-menu-order: 15
+      "x-permission":
+        operator: AND
+        permissions:
+          - user_access_manage
+          - billing_edit
+          - org_management
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/usage/quotas/{quota_namespace}/{id}:
+    delete:
+      description: |-
+        Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+      operationId: DeleteQuota
+      parameters:
+        - description: The product-specific namespace whose usage quotas are being managed.
+          in: path
+          name: quota_namespace
+          required: true
+          schema:
+            example: ai_credits
+            type: string
+        - description: The opaque quota identifier returned by a previous list or create request. Clients must pass this value verbatim.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - user_access_manage
+            - billing_edit
+            - org_management
+      summary: Delete a usage quota
+      tags:
+        - Usage Metering
+      x-menu-order: 17
+      "x-permission":
+        operator: AND
+        permissions:
+          - user_access_manage
+          - billing_edit
+          - org_management
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: |-
+        Updates the supplied fields on a usage quota and leaves omitted fields unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+      operationId: UpdateQuota
+      parameters:
+        - description: The product-specific namespace whose usage quotas are being managed.
+          in: path
+          name: quota_namespace
+          required: true
+          schema:
+            example: ai_credits
+            type: string
+        - description: The opaque quota identifier returned by a previous list or create request. Clients must pass this value verbatim.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      enforced: false
+                      usage_limit: 120000
+                    id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+                    type: quotas
+            schema:
+              $ref: "#/components/schemas/UsageQuotaUpdateRequest"
+        description: The usage quota fields to update. Omitting an attribute leaves its current value unchanged.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        enforced: false
+                        org_public_id: abcdef12345
+                        scope:
+                          user_handle: jane@example.com
+                        usage_limit: 120000
+                      id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+                      type: quotas
+              schema:
+                $ref: "#/components/schemas/UsageQuotaResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request. Returned if the request is malformed, or if the `id` in the request body does not match the `id` in the request path.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - user_access_manage
+            - billing_edit
+            - org_management
+      summary: Update a usage quota
+      tags:
+        - Usage Metering
+      x-menu-order: 16
+      "x-permission":
+        operator: AND
+        permissions:
+          - user_access_manage
+          - billing_edit
+          - org_management
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/usage/summary/available_fields:
     get:
       description: |-
