@@ -45,7 +45,7 @@ sum:datadog.estimated_usage.hosts{*} by {child_org_name}
 sum:datadog.usage.infra.hosts{*} by {child_org_name}
 ```
 
-{{< img src="partners/multi_tenant_billing/usage_metrics_rollup.png" alt="Dashboard querying usage metrics rolled up from customer orgs, filtered by child_org_name" style="width:100%;" >}}
+{{< img src="partners/multi_tenant_billing/usage_metrics_rollup.png" alt="Dashboard querying usage metrics rolled up from customer orgs, filtered by child_org_name." style="width:100%;" >}}
 
 To match Plan & Usage totals, use a 1-hour rollup for host-style products and graph in UTC, since Plan & Usage reports in UTC.
 
