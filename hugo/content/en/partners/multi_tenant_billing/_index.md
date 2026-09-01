@@ -46,7 +46,7 @@ Here are some ways an Admin Org can help:
 
 | Use case | Capability |
 |---|---|
-| Self-serve Trial Org creation for prospective customers. | [Trial Org Provisioning][3]: create Trial Orgs directly from an Admin Org. |
+| Self-serve Trial Org creation for prospective customers. | [Trial Org Provisioning][3]: Create Trial Orgs directly from an Admin Org. |
 | Monitor cost and usage across all customers in one place. | [Cost and Usage Visibility][2]: View estimated, historical, and projected cost and billable usage data. |
 | Track usage metrics across the book of business. | [Centralized Usage Metrics][8]: Roll customer usage metrics up into an Admin Org. |
 | Let customers see their estimated costs based on the partner's pricing. | [Customer Pricing][9]: configure per-customer pricing. |
