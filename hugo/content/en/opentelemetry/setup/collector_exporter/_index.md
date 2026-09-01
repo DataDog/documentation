@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This page provides guides for installing and configuring a standalone OpenTelemetry Collector to send telemetry data to Datadog. The recommended configurations use the agent deployment pattern, with one Collector on each host or Kubernetes node.
+This page provides guides for installing and configuring the OpenTelemetry Collector to send telemetry data to Datadog. The recommended configurations use the agent deployment pattern, with one Collector on each host or Kubernetes node.
 
 This method is best for users who prefer to use OTel Collector distributions from the OpenTelemetry open source community or require advanced processing capabilities not available in other setups. For most use cases the [Datadog Distribution of OTel Collector (DDOT)][1] is the recommended approach.
 
@@ -32,10 +32,6 @@ To begin, install the OpenTelemetry Collector Contrib distribution and configure
 After your Collector is running, use these guides to configure specific receivers and processors to collect and enrich your telemetry data.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/config/hostname_tagging" >}}
-    <h3>Configure Hostname and Tagging</h3>
-    Use resource detection and Kubernetes attributes processors to ensure proper hostname resolution and apply critical tags for correlating telemetry in Datadog.
-    {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/config/log_collection" >}}
     <h3>Set up Log Collection</h3>
     Configure the filelog receiver to collect logs from files and forward them to Datadog, enabling unified logs, metrics, and traces.
@@ -52,7 +48,7 @@ After your Collector is running, use these guides to configure specific receiver
 
 ## Existing Datadog Exporter and Connector configurations
 
-The Datadog Exporter and Datadog Connector remain fully supported. Existing configurations do not need to migrate. To configure or maintain this setup, see [Configure the Datadog Exporter and Connector][2].
+The Datadog Exporter and Datadog Connector remain supported. Existing configurations do not need to migrate. To configure or maintain this setup, see [Configure the Datadog Exporter and Connector][2].
 
 ## Further Reading
 

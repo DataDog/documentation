@@ -12,7 +12,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/docker_metrics.png" alt="OpenTelemetry Docker metrics in a Containers dashboard" style="width:100%;" >}}
 
-To collect container metrics, configure the [Docker stats receiver][1] in the OpenTelemetry Collector and include it in the metrics pipeline that exports data to Datadog.
+To collect container metrics, configure the [Docker stats receiver][1] in your OpenTelemetry Collector and include it in the metrics pipeline that exports data to Datadog.
 
 For more information, see the OpenTelemetry project documentation for [the Docker stats receiver][1].
 
@@ -111,15 +111,15 @@ To correlate traces with container metrics, both telemetry types must share comm
 
 To populate these resource attributes on **traces**:
 
-- You can use a `resourcedetectionprocessor` in your Collector config:
+- You can use the resource detection processor in your Collector configuration:
    ```yaml
    processors:
-      resourcedetection:
+      resource_detection:
          detectors: ["env", "container", "k8s"]
    service:
       pipelines:
          traces:
-            processors: [resourcedetection]
+            processors: [resource_detection]
 
    ```
 
@@ -156,10 +156,6 @@ The following table lists the OpenTelemetry container metrics collected for Data
 
 For the full mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][2].
 
-## Full example configuration
-
-For a full working example that uses the Datadog Exporter, see [`docker-stats.yaml`][3]. The Datadog Exporter remains fully supported for existing configurations.
-
 ## Example logging output
 
 ```
@@ -188,7 +184,6 @@ Value: 0.170933
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver
 [2]: /opentelemetry/guide/metrics_mapping/
-[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/docker-stats.yaml
 [4]: /universal_service_monitoring/setup/
 [5]: /opentelemetry/guide/semantic_mapping/
 [6]: /opentelemetry/reference/otel_metrics/#out-of-the-box-dashboards

@@ -273,10 +273,6 @@ In order to ensure this attribute only gets added to your Kafka logs, use [inclu
 
 For the full mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][9].
 
-## Full example configuration
-
-For a full working example configuration with the Datadog exporter, see [`kafka.yaml`][5].
-
 ## Example logging output
 
 ```
@@ -312,7 +308,6 @@ Please see the following [example application][6] which demonstrates the configu
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/jmxreceiver
 [3]: https://github.com/open-telemetry/opentelemetry-java-contrib/blob/main/jmx-metrics 
 [4]: /opentelemetry/collector_exporter/log_collection
-[5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/kafka.yaml
 [6]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/kafka-metrics
 [7]: https://app.datadoghq.com/dash/integration/50/kafka-zookeeper-and-kafka-consumer-overview
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/attributesprocessor/README.md#includeexclude-filtering

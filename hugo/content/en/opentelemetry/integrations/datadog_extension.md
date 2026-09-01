@@ -49,7 +49,7 @@ service:
 
 ### 2. Configure an active telemetry pipeline
 
-Configure at least one active telemetry pipeline and export its data to Datadog. For new standalone Collector configurations, use the [OTLP HTTP exporter setup][9]. The Datadog Exporter remains fully supported for existing configurations.
+Configure at least one active telemetry pipeline and export its data to Datadog. For the recommended configuration, use the [OTLP HTTP exporter setup][9].
 
 The extension uses Collector and host metadata to associate the reported configuration with the corresponding host in Datadog.
 

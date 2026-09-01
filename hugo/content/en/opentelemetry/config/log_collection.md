@@ -102,10 +102,6 @@ processors:
 Logs from the configured files.
 
 
-## Full example configuration
-
-For a full working example that uses the Datadog Exporter, see [`logs.yaml`][2]. The Datadog Exporter remains fully supported for existing configurations.
-
 ## Example logging output
 
 ```
@@ -159,5 +155,4 @@ Flags: 0
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/filelogreceiver
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/logs.yaml
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor

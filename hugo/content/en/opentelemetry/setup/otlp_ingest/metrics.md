@@ -32,7 +32,7 @@ further_reading:
 
 Datadog's OpenTelemetry Protocol (OTLP) metrics intake API endpoint allows applications, managed platforms, and OpenTelemetry Collectors to send metrics to Datadog over OTLP HTTP.
 
-Use the direct configuration on this page when you need to send metrics without the [Datadog Agent][2] or an OpenTelemetry Collector. For production deployments with a standalone Collector, use [Set Up the OpenTelemetry Collector][1].
+Use the direct configuration on this page when you need to send metrics without the [Datadog Agent][2] or an OpenTelemetry Collector. For production Collector deployments, use [Set Up the OpenTelemetry Collector][1].
 
 This endpoint is particularly useful in the following scenarios:
 

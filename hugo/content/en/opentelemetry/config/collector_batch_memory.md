@@ -12,7 +12,7 @@ further_reading:
 
 For production deployments, configure the [memory limiter processor][3] to manage the OpenTelemetry Collector's memory use. Enable it in every pipeline and make it the first processor so that it can apply backpressure before other processors allocate memory.
 
-The recommended OTLP HTTP exporter configuration handles batching in the exporter's sending queue. Do not add the batch processor to that configuration. If you maintain an existing Datadog Exporter configuration that uses the [batch processor][1], you can continue to use it.
+The recommended OTLP HTTP exporter configuration handles batching in the exporter's sending queue. Do not add the batch processor to that configuration.
 
 ## Setup
 
@@ -46,10 +46,6 @@ Retain any other resource requests or limits required for your deployment.
 
 None.
 
-## Full example configuration
-
-For a legacy batching and memory-limiter example that uses the Datadog Exporter, see [`batch-memory.yaml`][2]. The Datadog Exporter remains fully supported for existing configurations.
-
 ## Example logging output
 
 ```
@@ -63,5 +59,4 @@ Memory usage after GC.
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/batch-memory.yaml
 [3]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/memorylimiterprocessor

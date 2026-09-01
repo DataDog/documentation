@@ -82,8 +82,6 @@ The recommended Collector configuration uses the agent deployment pattern and do
 
 To calculate APM metrics from 100% of application traffic while using Collector-level tail-based sampling, configure the [`span_metrics` connector][1] before the sampling processor.
 
-<div class="alert alert-info">The Datadog Connector remains fully supported for existing configurations.</div>
-
 See the [ingestion volume control guide][8] for information about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
 ### Probabilistic sampling

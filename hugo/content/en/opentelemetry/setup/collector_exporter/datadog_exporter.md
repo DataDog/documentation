@@ -28,7 +28,7 @@ further_reading:
 
 The OpenTelemetry Collector enables you to collect, process, and export telemetry data from your applications in a vendor-neutral way. When configured with the [Datadog Exporter][1] and [Datadog Connector][29], you can send your traces, logs, and metrics to Datadog without the Datadog Agent.
 
-<div class="alert alert-info">The Datadog Exporter and Datadog Connector remain fully supported. For new OpenTelemetry Collector configurations, Datadog recommends the <a href="/opentelemetry/setup/collector_exporter/install/">OTLP HTTP exporter and <code>span_metrics</code> connector setup</a>. Existing configurations do not need to migrate.</div>
+<div class="alert alert-info">For new OpenTelemetry Collector configurations, Datadog recommends the <a href="/opentelemetry/setup/collector_exporter/install/">OTLP HTTP exporter and <code>span_metrics</code> connector setup</a>. The Datadog Exporter and Datadog Connector remain supported, and existing configurations do not need to migrate.</div>
 
 - **Datadog Exporter**: Forwards trace, metric, and logs data from OpenTelemetry SDKs to Datadog (without the Datadog Agent)
 - **Datadog Connector**: Calculates Trace Metrics from collected span data

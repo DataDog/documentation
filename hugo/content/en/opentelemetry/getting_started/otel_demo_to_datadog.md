@@ -22,7 +22,7 @@ algolia:
 
 ## Overview
 
-<div class="alert alert-info">This tutorial uses the Datadog Exporter and Datadog Connector, which remain fully supported. For new production Collector configurations, Datadog recommends the <a href="/opentelemetry/setup/collector_exporter/install/">OTLP HTTP exporter and <code>span_metrics</code> connector setup</a>.</div>
+<div class="alert alert-info">This tutorial uses the Datadog Exporter and Datadog Connector. For the recommended setup for new Collector configurations, see <a href="/opentelemetry/setup/collector_exporter/install/">Set Up the OpenTelemetry Collector</a>.</div>
 
 The [OpenTelemetry Demo][1] is a microservices demo application developed by the community to demonstrate OpenTelemetry (OTel)
 instrumentation and its observability capabilities. It is an e-commerce web page composed of multiple microservices communicating with each other through HTTP and gRPC. All services are instrumented with OpenTelemetry and produce traces, metrics, and logs.

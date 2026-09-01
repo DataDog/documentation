@@ -90,7 +90,7 @@ If you are using Helm, include these environment variables in your `values.yaml`
 
 For new OpenTelemetry Collector configurations, use the recommended [`span_metrics` connector configuration][6]. It includes the dimensions Datadog uses to infer peer services.
 
-The Datadog Connector remains fully supported for existing configurations. For `opentelemetry-collector-contrib` [v0.95.0][1] or later, update this configuration:
+If your configuration uses the Datadog Connector with `opentelemetry-collector-contrib` [v0.95.0][1] or later, update this configuration:
 
 {{< code-block lang="yaml"  collapsible="true" >}}
 

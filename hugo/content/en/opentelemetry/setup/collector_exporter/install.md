@@ -9,9 +9,6 @@ further_reading:
 - link: "https://opentelemetry.io/docs/collector/"
   tag: "External Site"
   text: "Collector documentation"
-- link: "/opentelemetry/config/hostname_tagging"
-  tag: "Documentation"
-  text: "Configure Hostname and Tagging"
 - link: "/opentelemetry/config/log_collection"
   tag: "Documentation"
   text: "Set up Log Collection"
@@ -33,13 +30,13 @@ Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector Cont
 
 The configurations on this page use the [agent deployment pattern][10]: one Collector runs on each host or Kubernetes node and receives telemetry from workloads on that host or node. For a gateway deployment, see the OpenTelemetry [gateway deployment pattern][11]. Stateful processing such as tail-based sampling in a multi-Collector environment requires a gateway architecture that routes all spans for a trace to the same Collector.
 
-<div class="alert alert-info">Already using the Datadog Exporter and Datadog Connector? These components remain fully supported, and existing configurations do not need to migrate. See <a href="/opentelemetry/setup/collector_exporter/datadog_exporter/">Configure the Datadog Exporter and Connector</a>.</div>
+<div class="alert alert-info">Already using the Datadog Exporter and Datadog Connector? These components remain supported, and existing configurations do not need to migrate. See <a href="/opentelemetry/setup/collector_exporter/datadog_exporter/">Configure the Datadog Exporter and Connector</a>.</div>
 
 ## Prerequisites
 
 This setup supports bare metal, VMs, Docker, and Kubernetes. Supported managed Kubernetes distributions include Amazon EKS (including Auto Mode), Google GKE (Standard and Autopilot), and Azure AKS (including Automatic).
 
-This setup does not support serverless or task-based container runtimes such as ECS Fargate, EKS Fargate, or AWS Lambda. For supported Datadog features, see the [feature compatibility table][7] under **OTel SDK + Collector (OTLP HTTP)**.
+This setup does not support serverless or task-based container runtimes such as ECS Fargate, EKS Fargate, or AWS Lambda. For supported Datadog features, see the [feature compatibility table][7] under **OTel SDK + OpenTelemetry Collector**.
 
 - [OpenTelemetry Collector Contrib][1] v0.154.0 or later
 - A [Datadog API key][2]

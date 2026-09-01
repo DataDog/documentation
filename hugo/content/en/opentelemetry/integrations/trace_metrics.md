@@ -17,8 +17,6 @@ further_reading:
 
 To send APM stats such as hits, errors, and duration, set up the [`span_metrics` connector][1]. Configure the connector to receive all traces before any sampling processors so that trace metrics represent unsampled traffic.
 
-The Datadog Connector remains fully supported for existing configurations. To maintain a configuration that uses it, see [Configure the Datadog Exporter and Connector][4].
-
 ## Setup
 
 Select your environment in the [recommended Collector setup][3] and use its complete `span_metrics` connector block, including the dimensions required for Datadog APM features.
@@ -39,5 +37,4 @@ For full working example files, see the [`opentelemetry-examples` repository][5]
 [1]: /opentelemetry/setup/collector_exporter/install/#span-metrics-connector
 [2]: /tracing/metrics/metrics_namespace/
 [3]: /opentelemetry/setup/collector_exporter/install/#2-create-the-collector-configuration
-[4]: /opentelemetry/setup/collector_exporter/datadog_exporter/
 [5]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector

@@ -12,7 +12,7 @@ further_reading:
 
 OpenTelemetry defines certain semantic conventions for resource attributes related to hostnames. If an OpenTelemetry Protocol (OTLP) payload for any signal type has known hostname resource attributes, Datadog honors these conventions and tries to use its value as a hostname. The default hostname resolution algorithm is built with compatibility with the rest of Datadog products in mind, but you can override it if needed.
 
-This algorithm is used in Datadog OTLP intake, the [Datadog Exporter][3], the [OTLP ingest pipeline in the Datadog Agent][2], and the [DDOT Collector][5]. The [recommended standalone Collector configuration][4] uses the [resource detection processor][1] and Datadog Extension to provide the attributes and metadata for accurate hostname resolution.
+This algorithm is used in Datadog OTLP intake, the [Datadog Exporter][3], the [OTLP ingest pipeline in the Datadog Agent][2], and the [DDOT Collector][5]. The [recommended Collector configuration][4] uses the [resource detection processor][1] and Datadog Extension to provide the attributes and metadata for accurate hostname resolution.
 
 ## Conventions used to determine the hostname
 
