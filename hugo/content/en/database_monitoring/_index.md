@@ -41,9 +41,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-database-research/"
   tag: "Blog"
   text: "How microservice architectures have shaped the usage of database technologies"
-- link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
-  tag: "Blog"
-  text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
 algolia:
   tags: ['database monitoring', 'dbm']
 cascade:
