@@ -99,7 +99,7 @@ To add the AWS integration to an action:
 1. Click {{< ui >}}Save{{< /ui >}}.
 
 [1]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html
-[2]: /actions/connections/?tab=workflowautomation#work-with-connections
+[2]: /actions/connections/#create-a-connection
 [4]: https://app.datadoghq.com/integrations
 [5]: https://app.datadoghq.com/workflow
 [6]: /integrations/amazon-web-services/#setup
