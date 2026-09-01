@@ -22,13 +22,13 @@ Datadog provides full visibility into the metrics, logs, and traces for AWS Lamb
     - Datadog Node.js Lambda layer: v142+
     - Datadog Python Lambda layer: v127+
 
-2. Set the following environment variable on your Lambda function:
+2. If you use Datadog Lambda Extension v99, set the following environment variable on your Lambda function. For v100+, the default value is already `5`, so you don't need to set it explicitly.
 
     ```text
     DD_LAMBDA_DURABLE_FUNCTION_LOG_BUFFER_SIZE=5
     ```
 
-    This environment variable configures the Datadog Lambda Extension to buffer logs and enrich them with the durable execution context sent by the Datadog Lambda Library. Set its value to a non-negative integer specifying the maximum number of invocations whose logs are buffered. The default, `0`, disables enrichment, so durable executions do not appear in Datadog.
+    This environment variable configures the Datadog Lambda Extension to buffer logs and enrich them with the durable execution context sent by the Datadog Lambda Library. Set its value to a non-negative integer specifying the maximum number of invocations whose logs are buffered. A value of `0` disables enrichment, so durable executions do not appear in Datadog. In v99, the default is `0`; in v100+, the default is `5`.
 
 ### Forward durable execution events
 
