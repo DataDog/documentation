@@ -1,6 +1,13 @@
 ---
 title: Delete Data
 description: Delete logs data from Datadog with proper permissions, time-based queries, and audit trail logging for compliance.
+further_reading:
+    - link: '/account_management/rbac/'
+      tag: 'Documentation'
+      text: 'Learn about roles and permissions'
+    - link: '/account_management/audit_trail/'
+      tag: 'Documentation'
+      text: 'Monitor user activity with Audit Trail'
 ---
 
 This page explains how to delete sensitive data that should not have been ingested into Datadog.
@@ -57,6 +64,10 @@ To cancel a deletion, click {{< ui >}}Cancel{{< /ui >}} on an {{< ui >}}Upcoming
 ### Audit deletions
 
 Deletions are logged in [Deletion History][5] for 90 days. They are also logged in [Audit Trail][6] alongside the requesting user's details.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/support/
 [2]: /account_management/rbac/permissions/

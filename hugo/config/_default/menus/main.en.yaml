@@ -10480,11 +10480,16 @@ menu:
       identifier: account_management_samle_troubleshooting
       parent: account_management_saml
       weight: 411
+    - name: Delete Data
+      identifier: account_management_delete_data
+      url: account_management/delete_data/
+      parent: account_management
+      weight: 5
     - name: SCIM
       url: account_management/scim/
       parent: account_management
       identifier: account_management_scim
-      weight: 5
+      weight: 6
     - name: Okta
       identifier: account_management_scim_okta
       url: account_management/scim/okta
@@ -10499,22 +10504,22 @@ menu:
       identifier: account_management_api_app_keys
       url: account_management/api-app-keys/
       parent: account_management
-      weight: 6
+      weight: 7
     - name: Personal Access Tokens
       identifier: account_management_personal_access_tokens
       url: account_management/personal-access-tokens/
       parent: account_management
-      weight: 7
+      weight: 8
     - name: Service Access Tokens
       identifier: account_management_service_access_tokens
       url: account_management/service-access-tokens/
       parent: account_management
-      weight: 8
+      weight: 9
     - name: Teams
       identifier: account_management_teams
       url: account_management/teams/
       parent: account_management
-      weight: 9
+      weight: 10
     - name: Team Management
       identifier: account_management_teams_management
       url: account_management/teams/manage/
@@ -10529,7 +10534,7 @@ menu:
       identifier: account_management_governance_console
       url: account_management/governance_console/
       parent: account_management
-      weight: 10
+      weight: 11
     - name: Controls
       identifier: account_management_governance_console_controls
       url: account_management/governance_console/controls
@@ -10539,12 +10544,12 @@ menu:
       identifier: account_management_mfa
       url: account_management/multi-factor_authentication/
       parent: account_management
-      weight: 11
+      weight: 12
     - name: Audit Trail
       url: account_management/audit_trail/
       parent: account_management
       identifier: account_management_audit_trail
-      weight: 12
+      weight: 13
     - name: Events
       url: account_management/audit_trail/events/
       parent: account_management_audit_trail
@@ -10564,12 +10569,12 @@ menu:
       url: account_management/safety_center/
       parent: account_management
       identifier: safety_center
-      weight: 13
+      weight: 14
     - name: Plan & Usage
       url: account_management/plan_and_usage/
       parent: account_management
       identifier: account_management_plan_and_usage
-      weight: 14
+      weight: 15
     - name: Bill Overview
       identifier: account_management_bill_overview
       url: account_management/plan_and_usage/bill_overview/
@@ -10594,7 +10599,7 @@ menu:
       identifier: account_management_billing
       url: account_management/billing/
       parent: account_management
-      weight: 15
+      weight: 16
     - name: Pricing
       url: account_management/billing/pricing
       parent: account_management_billing
@@ -10709,7 +10714,7 @@ menu:
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
       parent: account_management
-      weight: 16
+      weight: 17
     - name: Organization Groups
       identifier: account_management_organization_groups
       url: account_management/organization_groups/
@@ -10719,12 +10724,12 @@ menu:
       identifier: account_management_guides
       url: account_management/guide/
       parent: account_management
-      weight: 17
+      weight: 18
     - name: Workload Identity Federation
       identifier: account_management_workload_identity_federation
       url: account_management/workload_identity_federation/
       parent: account_management
-      weight: 18
+      weight: 19
     - name: Disaster Recovery
       url: disaster_recovery/
       pre: disaster-recovery-wui
