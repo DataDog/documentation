@@ -27,7 +27,7 @@ Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}
 - Whether [Customer Pricing][1] is enabled for each customer, not yet configured, or needs an update after a contract change.
 - Key contacts per customer: the Datadog CSM, the Datadog AE, the partner account team, and the billing contact receiving invoices.
 
-{{< img src="partners/multi_tenant_billing/customer_contracts_detail.png" alt="Customer Contracts detail panel showing spend overview, drawdown depletion, contract info, and contacts for a customer" style="width:100%;" >}}
+{{< img src="partners/multi_tenant_billing/customer_contracts_detail.png" alt="Customer Contracts detail panel showing spend overview, drawdown depletion, contract info, and contacts for a customer." style="width:100%;" >}}
 
 Invoices are listed per customer with issue and due dates, amount, and payment status, and roll up into overdue counts and totals on the main Customer Contracts page:
 
