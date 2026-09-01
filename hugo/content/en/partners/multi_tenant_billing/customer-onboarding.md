@@ -41,7 +41,7 @@ Share the new Trial Org information with the partner account team, so it can be 
 ## Related docs
 
 - [Cost and Usage Visibility][5]: how usage and cost data appears from the Admin Org after a customer organization's contract is activated.
-- [Troubleshooting][6]: common issues along the way.
+- [Troubleshooting][6]: Common issues along the way.
 
 [1]: https://partners.datadoghq.com
 [2]: mailto:partner-support@datadoghq.com
