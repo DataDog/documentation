@@ -1,14 +1,10 @@
 ---
 title: Delete Data
-description: Delete logs and other data from Datadog with proper permissions, time-based queries, and audit trail logging for compliance.
+description: Delete logs data from Datadog with proper permissions, time-based queries, and audit trail logging for compliance.
 private: true
 ---
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-  Deleting data using the UI is in Preview.
-{{< /callout >}} 
-
-This page explains how to delete data from Datadog.
+This page explains how to delete sensitive data that should not have been ingested into Datadog.
 
 ## Delete non-Logs data
 
@@ -18,12 +14,15 @@ To delete data from a product other than Logs, contact [Support][1] with your re
 
 You can delete data from the Logs product using the UI.
 
-### Access deletion
+### Enable deletion feature
 
-To grant an account access to delete data, perform the following steps:
+Logs Data Deletion can only be enabled by Organization Admins. To enable Logs Data Deletion::
+1. Under Organization Settings, go to Preferences.
+2. Toggle on {{< ui >}}Logs Data Deletion{{< /ui >}} and save.
 
+To grant a user the ability to delete logs:
 1. Under Organizational Settings, go to [Roles][3].
-2. Request or create a role that has the {{< ui >}}Delete Data{{< /ui >}} permission for the product you wish to delete data from. For example, to delete data from Logs, request or create a role with the {{< ui >}}Logs Delete Data{{< /ui >}} permission.
+2. Create a role that has the {{< ui >}}Logs Delete Data{{< /ui >}} permission.
 
 ### Start deletions
 
