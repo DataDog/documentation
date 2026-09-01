@@ -11,6 +11,8 @@ Android RUM automatically tracks attributes such as user activity, screens, erro
 
 ### Custom views
 
+For setup steps covering both automatic and manual view tracking, see [Track navigation][16].
+
 In addition to [tracking views automatically][4], you can also track specific distinct views (such as activities and fragments) when they become visible and interactive in the `onResume()` lifecycle. Stop tracking when the view is no longer visible. Most often, this method should be called in the frontmost `Activity` or `Fragment`:
 
 {% tabs %}
@@ -43,6 +45,8 @@ public void onPause() {
 {% /tabs %}
 
 ### Custom actions
+
+For setup steps covering both automatic and manual action tracking, see [Track user interactions][17].
 
 In addition to [tracking actions automatically][5], you can also track specific custom user actions (such as taps, clicks, and scrolls) with `RumMonitor#addAction`. For continuous action tracking (for example, tracking a user scrolling a list), use `RumMonitor#startAction` and `RumMonitor#stopAction`.
 
@@ -154,6 +158,8 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
 {% /tabs %}
 
 ### Custom resources
+
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][15].
 
 In addition to [tracking resources automatically][6], you can also track specific custom resources (such as network requests and third-party provider APIs) with methods (such as `GET` and `POST`) while loading the resource with `RumMonitor#startResource`. Stop tracking with `RumMonitor#stopResource` when it is fully loaded, or `RumMonitor#stopResourceWithError` if an error occurs while loading the resource.
 
@@ -267,24 +273,7 @@ In addition to the [default RUM attributes][3] captured by the RUM Android SDK a
 
 ### Track user sessions
 
-Adding user information to your RUM sessions makes it possible to:
-* Follow the journey of a given user
-* Know which users are the most impacted by errors
-* Monitor performance for your most important users
-
-{% img src="real_user_monitoring/browser/advanced_configuration/user-api-1.png" alt="User attributes of a session in the RUM UI" /%}
-
-| Attribute   | Type   | Description                                                                     |
-| ----------- | ------ | ------------------------------------------------------------------------------- |
-| `usr.id`    | String | (Required) Unique user identifier.                                              |
-| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
-| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
-
-To identify user sessions, use the `setUserInfo` API, for example:
-
-```kotlin
-Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
-```
+See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=android) for instructions on adding user information to your RUM sessions.
 
 ### Track attributes
 
@@ -746,7 +735,10 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [8]: /real_user_monitoring/application_monitoring/android/setup/#sending-data-when-device-is-offline
 [9]: https://github.com/DataDog/dd-sdk-android/blob/eaa15cd344d1723fafaf179fcebf800d6030c6bb/sample/kotlin/src/main/kotlin/com/datadog/android/sample/SampleApplication.kt#L279
 [10]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
-[11]: /real_user_monitoring/application_monitoring/android/monitoring_app_performance/#time-to-network-settled
+[11]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#time-to-network-settled
 [12]: https://square.github.io/okhttp/features/events/
-[13]: /real_user_monitoring/application_monitoring/android/monitoring_app_performance/#interaction-to-next-view
+[13]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#interaction-to-next-view
 [14]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#setup
+[15]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=android
+[16]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android
+[17]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=android

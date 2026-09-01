@@ -27,9 +27,13 @@ The percentage rate at which Datadog sends internal telemetry data. A value of 1
 
 ### Automatic view tracking
 
+For setup steps covering both automatic and manual view tracking, see [Track navigation][5].
+
 If you select `Enable Automatic Scene Tracking`, Datadog hooks into Unity's `SceneManager` to detect scenes loading and unloading, and start RUM Views appropriately. If you are using methods to move between scenes other than `SceneManager`, or would like to track changes in views that occur without `SceneManager`, you need to track views manually using `DdRum.StartView` and `DdRum.StopView`.
 
 ### Track user actions
+
+For setup steps, see [Track user interactions][6].
 
 You can track specific user actions such as taps, clicks, and scrolls using `DdRum.AddAction`.
 
@@ -49,6 +53,8 @@ void DownloadResourceTapped(string resourceName) {
 When using `DdRum.StartAction` and `DdRum.StopAction`, the `type` action must be the same for the Datadog Unity SDK to match an action's start with its completion.
 
 ### Track resources
+
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][4].
 
 Datadog provides `DatadogTrackedWebRequest` as a drop in replacement for `UnityWebRequest` to enable tracking of resources and HTTP calls from your RUM views.
 
@@ -122,27 +128,7 @@ To set a custom global attribute, use `DdRum.AddAttribute`.
 
 ### Track user sessions
 
-Adding user information to your RUM sessions makes it possible to:
-
-* Follow the journey of a given user
-* Know which users are the most impacted by errors
-* Monitor performance for your most important users
-
-{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" style="width:90%" /%}
-
-| Attribute   | Type   | Description                                                                     |
-| ----------- | ------ | ------------------------------------------------------------------------------- |
-| `usr.id`    | String | (Required) Unique user identifier.                                              |
-| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
-| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
-
-To identify user sessions, use `DatadogSdk.SetUserInfo`.
-
-For example:
-
-```csharp
-DatadogSdk.Instance.SetUserInfo("1234", "John Doe", "john@doe.com");
-```
+See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=unity) for instructions on adding user information to your RUM sessions.
 
 ### Add custom user attributes
 
@@ -171,3 +157,6 @@ DatadogSdk.instance.ClearAllData();
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/unity/setup/
 [3]: /real_user_monitoring/application_monitoring/unity/data_collected/
+[4]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=unity
+[5]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=unity
+[6]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=unity

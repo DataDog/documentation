@@ -318,6 +318,8 @@ DdLogs.error('Lorem ipsum dolor sit amet…', {});
 
 ### Manually track RUM views
 
+For setup steps covering both automatic and manual view tracking, see [Track navigation][26].
+
 To manually track RUM Views, provide a `view key`, `view name`, and `action name` at initialization. Depending on your needs, you can choose one of the following strategies:
 
 ```javascript
@@ -327,6 +329,8 @@ DdRum.stopView('<view-key>', { custom: 42 }, Date.now());
 ```
 
 ### Manually track RUM actions
+
+For setup steps, see [Track user interactions][27].
 
 You can manually track RUM actions:
 
@@ -352,6 +356,8 @@ DdRum.addError('<message>', ErrorSource.SOURCE, '<stacktrace>', {}, Date.now());
 
 ### Manually track RUM resources
 
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][24].
+
 You can manually track RUM resources:
 
 ```javascript
@@ -361,6 +367,8 @@ DdRum.stopResource('<res-key>', 200, 'xhr', (size = 1337), {}, Date.now());
 ```
 
 ### Notify the SDK that your view finished loading
+
+For setup steps, see [Track UI latency][25].
 
 You can notify the SDK that your view has finished loading by calling the `addViewLoadingTime` method on `DdRum`.
 Call this method when your view is fully loaded and ready to be displayed to the user:
@@ -399,46 +407,7 @@ You can attach user information to all RUM events to get more detailed informati
 
 ### Track user sessions
 
-Adding user information to your RUM sessions makes it possible to:
-* Follow the journey of a given user
-* Know which users are the most impacted by errors
-* Monitor performance for your most important users
-
-{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" /%}
-
-| Attribute   | Type   | Description                                                                     |
-| ----------- | ------ | ------------------------------------------------------------------------------- |
-| `usr.id`    | String | (Required) Unique user identifier.                                              |
-| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
-| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
-| `usr.extraInfo` | Object | (Optional) Include custom attributes such as subscription type, any user specific information that enhance user context in RUM sessions. |
-
-To identify user sessions, use the `setUserInfo` API, for example:
-
-```js
-DdSdkReactNative.setUserInfo({
-    id: '1337',
-    name: 'John Smith',
-    email: 'john@example.com',
-    extraInfo: {
-        type: 'premium'
-    }
-});
-```
-
-If you want to add or update user information, you can use the following code to modify the existing user's details.
-
-```js
-DdSdkReactNative.addUserExtraInfo({
-    hasPaid: 'true'
-});
-```
-
-If you want to clear the user information (for example, when the user signs out), you can do so by calling the `clearUserInfo` API:
-
-```js
-DdSdkReactNative.clearUserInfo();
-```
+See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=react_native) for instructions on adding user information to your RUM sessions.
 
 ### Global attributes
 
@@ -765,3 +734,7 @@ See [Monitor hybrid React Native applications][19].
 [21]: #rum-configuration
 [22]: #logs-configuration
 [23]: #trace-configuration
+[24]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=react_native
+[25]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=react_native
+[26]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=react_native
+[27]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=react_native

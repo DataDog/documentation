@@ -11,6 +11,8 @@ iOS RUM automatically tracks attributes such as user activity, screens, errors, 
 
 ### Custom views
 
+For setup steps covering both automatic and manual view tracking, see [Track navigation][12].
+
 In addition to [tracking views automatically](#automatically-track-views), you can also track specific distinct views such as `viewControllers` when they become visible and interactive. Stop tracking when the view is no longer visible using the following methods in `RUMMonitor.shared()`:
 
 - `.startView(viewController:)`
@@ -67,6 +69,8 @@ For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom actions
 
+For setup steps covering both automatic and manual action tracking, see [Track user interactions][13].
+
 In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API.
 
 To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:)`.
@@ -109,6 +113,8 @@ let rum = RUMMonitor.shared()
 For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom resources
+
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][11].
 
 In addition to [tracking resources automatically](#automatically-track-network-requests), you can also track specific custom resources such as network requests or third-party provider APIs. This is the recommended approach for third-party libraries that don't expose a `URLSession` delegate. Use the following methods on `RUMMonitor.shared()` to manually collect RUM resources:
 
@@ -213,42 +219,7 @@ For better performance in bulk operations (modifying multiple attributes at once
 
 ### Track user sessions
 
-Adding user information to your RUM sessions makes it possible to:
-
-* Follow the journey of a given user
-* Know which users are the most impacted by errors
-* Monitor performance for your most important users
-
-{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" /%}
-
-| Attribute   | Type   | Description                                                                     |
-| ----------- | ------ | ------------------------------------------------------------------------------- |
-| `usr.id`    | String | (Required) Unique user identifier.                                              |
-| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
-| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
-
-To identify user sessions, use the `Datadog.setUserInfo(id:name:email:)` API.
-
-For example:
-
-{% tabs %}
-{% tab label="Swift" %}
-
-```swift
-import DatadogCore
-
-Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
-```
-
-{% /tab %}
-{% tab label="Objective-C" %}
-
-```objective-c
-[DDDatadog setUserInfoWithId:@"1234" name:@"John Doe" email:@"john@doe.com" extraInfo:@{}];
-```
-
-{% /tab %}
-{% /tabs %}
+See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=ios) for instructions on adding user information to your RUM sessions.
 
 ## Track background events
 
@@ -1216,3 +1187,6 @@ Calling this method disables the SDK and all active features, such as RUM. To re
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [9]: /real_user_monitoring/application_monitoring/ios/setup
 [10]: /real_user_monitoring/application_monitoring/ios/data_collected/#resource-attributes
+[11]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=ios
+[12]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios
+[13]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=ios

@@ -174,6 +174,8 @@ For more information about the data collected, see [Flutter Data Collected][6].
 
 ## Automatically track views
 
+For setup steps covering view tracking, see [Track navigation][14].
+
 If you are using Flutter Navigator v2.0, your setup for automatic view tracking differs depending on your routing middleware. See [Flutter Integrated Libraries][7] for instructions on how to integrate with [go_router][8], [AutoRoute][9], and [Beamer][10].
 
 ### Flutter Navigator v1
@@ -238,6 +240,8 @@ var observer = DatadogNavigationObserver(
 ```
 
 ## Automatically track actions
+
+For setup steps covering both automatic and manual action tracking, see [Track user interactions][15].
 
 Use [`RumUserActionDetector`][12] to track user taps that happen in a given Widget tree:
 
@@ -306,3 +310,5 @@ This means that even if users open your application while offline, no data is lo
 [11]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
 [12]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionDetector-class.html
 [13]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionAnnotation-class.html
+[14]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=flutter
+[15]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=flutter

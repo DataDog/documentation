@@ -189,6 +189,8 @@ If you are using [Datadog Tracking HTTP Client][10] to automatically track resou
 
 ## Automatically track resources
 
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][23].
+
 Use the [Datadog Tracking HTTP Client][10] package to enable automatic tracking of resources and HTTP calls from your views.
 
 Add the package to your `pubspec.yaml` and add the following to your initialization file:
@@ -252,6 +254,8 @@ While [Datadog Tracking HTTP Client][10] can track most common network calls in 
 Flutter RUM automatically tracks attributes such as user activity, views (using the `DatadogNavigationObserver`), errors, native crashes, and network requests (using the Datadog Tracking HTTP Client). See the [RUM Data Collection documentation][14] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
 
 ### Notify the SDK that your view finished loading
+
+For setup steps, see [Track UI latency][24].
 
 iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime` method on `DatadogRum`.
 Call this method when your view is fully loaded and ready to be displayed to the user:
@@ -355,27 +359,7 @@ To set a custom global attribute, use `DdRum.addAttribute`.
 
 ### Track user sessions
 
-Adding user information to your RUM sessions makes it possible to:
-
-* Follow the journey of a given user
-* Know which users are the most impacted by errors
-* Monitor performance for your most important users
-
-{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" style="width:90%" /%}
-
-| Attribute   | Type   | Description                                                                     |
-| ----------- | ------ | ------------------------------------------------------------------------------- |
-| `usr.id`    | String | (Required) Unique user identifier.                                              |
-| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
-| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
-
-To identify user sessions, use `DatadogSdk.setUserInfo`.
-
-For example:
-
-```dart
-DatadogSdk.instance.setUserInfo("1234", "John Doe", "john@doe.com");
-```
+See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=flutter) for instructions on adding user information to your RUM sessions.
 
 ### Add custom user attributes
 
@@ -524,8 +508,10 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 [15]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
 [16]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
 [17]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
-[18]: /real_user_monitoring/application_monitoring/mobile_vitals/?tab=flutter
+[18]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=flutter#mobile-vitals
 [19]: https://pub.dev/packages/datadog_grpc_interceptor
 [20]: https://pub.dev/packages/datadog_gql_link
 [21]: https://pub.dev/packages/datadog_dio
 [22]: /real_user_monitoring/application_monitoring/flutter/integrated_libraries
+[23]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=flutter
+[24]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=flutter

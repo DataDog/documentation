@@ -37,6 +37,8 @@ While there is no explicit cap on the total number of actions that can be collec
 
 ## Track user interactions
 
+For setup steps, see [Track user interactions][9].
+
 To enable automatic click tracking, set `trackUserInteractions: true` in your SDK initialization:
 
 ```javascript
@@ -166,3 +168,4 @@ As a best practice, if you expect a high volume of user actions, consider adjust
 [6]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
 [7]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
 [8]: /real_user_monitoring/guide/send-rum-custom-actions
+[9]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=browser

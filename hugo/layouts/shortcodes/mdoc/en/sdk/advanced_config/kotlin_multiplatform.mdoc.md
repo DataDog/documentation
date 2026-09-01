@@ -11,6 +11,8 @@ Kotlin Multiplatform RUM automatically tracks attributes such as user activity, 
 
 ### Custom views
 
+For setup steps covering both automatic and manual view tracking, see [Track navigation][13].
+
 In addition to [tracking views automatically][4], you can also track specific distinct views (such as activities and fragments) manually. Stop tracking when the view is no longer visible.
 
 ```kotlin
@@ -23,6 +25,8 @@ GlobalRumMonitor.get().stopView(viewKey, viewAttributes)
 
 ### Add your own performance timing
 
+For setup steps, see [Track UI latency][12].
+
 In addition to RUM's default attributes, you can measure where your application is spending its time by using the `addTiming` API. The timing measure is relative to the start of the current RUM view. For example, you can time how long it takes for your hero image to appear:
 
 ```kotlin
@@ -34,6 +38,8 @@ fun onHeroImageLoaded() {
 After the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`. For example: `@view.custom_timings.hero_image`. You must [create a measure][8] before graphing it in RUM analytics or in dashboards.
 
 ### Custom actions
+
+For setup steps covering action tracking, see [Track user interactions][14].
 
 In addition to [tracking actions automatically][5], you can also track specific custom user actions (such as taps, clicks, and scrolls) with `RumMonitor#addAction`. For continuous action tracking (for example, tracking a user scrolling a list), use `RumMonitor#startAction` and `RumMonitor#stopAction`.
 
@@ -73,6 +79,8 @@ val ktorClient = HttpClient {
 ```
 
 ### Custom resources
+
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][11].
 
 In addition to [tracking resources automatically][6], you can also track specific custom resources (such as network requests and third-party provider APIs) with methods (such as `GET` and `POST`) while loading the resource with `RumMonitor#startResource`. Stop tracking with `RumMonitor#stopResource` when it is fully loaded, or `RumMonitor#stopResourceWithError` if an error occurs while loading the resource.
 
@@ -144,24 +152,7 @@ In addition to the [default RUM attributes][3] captured by the RUM Kotlin Multip
 
 ### Track user sessions
 
-Adding user information to your RUM sessions helps you to:
-* Follow the journey of a given user
-* Know which users are the most impacted by errors
-* Monitor performance for your most important users
-
-{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" /%}
-
-| Attribute   | Type   | Description                                                                     |
-| ----------- | ------ | ------------------------------------------------------------------------------- |
-| `usr.id`    | String | (Required) Unique user identifier.                                              |
-| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
-| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
-
-To identify user sessions, use the `setUserInfo` API, for example:
-
-```kotlin
-Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
-```
+See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=kotlin_multiplatform) for instructions on adding user information to your RUM sessions.
 
 ### Track attributes
 
@@ -438,4 +429,8 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [8]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
 [9]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/#sending-data-when-device-is-offline
 [10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[11]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=kotlin_multiplatform
+[12]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=kotlin_multiplatform
+[13]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=kotlin_multiplatform
+[14]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=kotlin_multiplatform
 [a1]: https://docs.datadoghq.com/help/
