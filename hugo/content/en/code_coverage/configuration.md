@@ -328,7 +328,7 @@ comments:
   file_breakdown: true
 {{< /code-block >}}
 
-The breakdown is off by default to keep the comment concise. It has no effect when `comments.enabled` is `false`.
+The breakdown has no effect when `comments.enabled` is `false`.
 
 ## Carryforward
 
