@@ -178,9 +178,9 @@ Value: 1153183744
 [2]: /opentelemetry/guide/metrics_mapping/#host-metrics
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/host-metrics.yaml
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
-[5]: /opentelemetry/otel_collector_datadog_exporter/
+[5]: /opentelemetry/setup/collector_exporter/install/
 [6]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&groupby=availability-zone
 [7]: https://app.datadoghq.com/infrastructure
-[8]: /opentelemetry/collector_exporter/#out-of-the-box-dashboards
+[8]: /opentelemetry/reference/otel_metrics/#out-of-the-box-dashboards
 [9]: /tracing/trace_explorer/trace_view/?tab=hostinfo
 [10]: /opentelemetry/correlate/#prerequisite-unified-service-tagging

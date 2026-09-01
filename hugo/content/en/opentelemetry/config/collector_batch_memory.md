@@ -10,55 +10,45 @@ further_reading:
 
 ## Overview
 
-To manage the OpenTelemetry Collector's memory use, configure the memory limiter processor. The recommended OTLP HTTP exporter configuration handles batching in the exporter's sending queue. If you use the Datadog Exporter, configure the [batch processor][1].
+To manage the OpenTelemetry Collector's memory use, configure the [memory limiter processor][3]. The memory limiter must be enabled in every pipeline and should be the first processor so that it can apply backpressure before other processors allocate memory.
 
-For more information, see the OpenTelemetry project documentation for the [batch processor][1].
+The recommended OTLP HTTP exporter configuration handles batching in the exporter's sending queue. Do not add the batch processor to that configuration. If you maintain an existing Datadog Exporter configuration that uses the [batch processor][1], you can continue to use it.
 
 ## Setup
 
-{{< tabs >}}
-{{% tab "Host" %}}
-Add the following lines to your Collector configuration:
+The following example assumes that the Collector can use up to approximately 1 GiB of memory. Adjust `limit_mib` and `spike_limit_mib` for the memory available to your Collector. Set `limit_mib` below the process or container memory limit so the Collector has headroom before the operating system terminates it.
 
 ```yaml
 processors:
-  batch:
-    # Datadog APM Intake limit is 3.2MB.    
-    send_batch_max_size: 1000
-    send_batch_size: 100
-    timeout: 10s
   memory_limiter:
     check_interval: 1s
-    limit_mib: 1000
+    limit_mib: 800
+    spike_limit_mib: 200
+
+service:
+  pipelines:
+    logs:
+      processors: [memory_limiter, resource_detection]
+    metrics:
+      processors: [memory_limiter, resource_detection, cumulativetodelta]
+    traces:
+      processors: [memory_limiter, resource_detection]
+    traces/sample:
+      processors: [memory_limiter]
+    metrics/span_metrics:
+      processors: [memory_limiter]
 ```
 
-{{% /tab %}}
-
-{{% tab "Kubernetes" %}}
-
-Add the following lines to `values.yaml`:
+For Kubernetes, also set a container memory limit above `limit_mib`. Update the `resources` block in the example Helm `values.yaml` file:
 
 ```yaml
 resources:
+  requests:
+    cpu: 500m
+    memory: 512Mi
   limits:
-    cpu: 512m
     memory: 1Gi
 ```
-
-Add the following in the Collector configuration:
-
-```yaml
-processors:
-  batch:
-    # Datadog APM Intake limit is 3.2MB.    
-    send_batch_max_size: 1000
-    send_batch_size: 100
-    timeout: 10s
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
 
 ## Data collected
 
@@ -82,3 +72,4 @@ Memory usage after GC.
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/batch-memory.yaml
+[3]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/memorylimiterprocessor
