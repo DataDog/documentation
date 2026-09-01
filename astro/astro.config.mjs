@@ -22,6 +22,7 @@ import { staticApiGuard } from "./src/integrations/staticApiGuard.ts";
 
 const websitesModules = resolveWebsitesModulesPath(import.meta.url);
 const hugoSite = fileURLToPath(new URL("../hugo", import.meta.url));
+const shared = fileURLToPath(new URL("../shared", import.meta.url));
 const astroSite = fileURLToPath(new URL(".", import.meta.url));
 
 const hugoDevPort = 1313;
@@ -112,7 +113,7 @@ export default defineConfig({
     ],
     server: {
       fs: {
-        allow: [astroSite, hugoSite, websitesModules],
+        allow: [astroSite, hugoSite, shared, websitesModules],
       },
       ...(IS_PROXIED && {
         origin: `http://localhost:${PROXY_PORT}`,
@@ -127,6 +128,7 @@ export default defineConfig({
     resolve: {
       alias: {
         "@hugo-site": hugoSite,
+        "@shared": shared,
         "@websites-modules": websitesModules,
         "@layouts": fileURLToPath(new URL("./src/layouts", import.meta.url)),
         "@components": fileURLToPath(

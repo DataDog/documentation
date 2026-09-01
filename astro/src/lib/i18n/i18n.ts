@@ -2,10 +2,11 @@
  * i18n helper. Mirrors Hugo's `i18n(key)` call: resolves a lang_key into its
  * "other" string from the per-locale bundle.
  *
- * Two sources are merged: Hugo's `i18n/*.json` at the repo root (the legacy,
- * authoritative bundle) and `websites-modules/i18n/*.yaml` (the newer shared
- * bundle). Hugo wins on key conflicts so we don't silently drift from the
- * Hugo site's translations.
+ * Two sources are merged: the glossary at `shared/i18n/*.json` (the legacy,
+ * authoritative bundle, also mounted by the Hugo site) and
+ * `websites-modules/i18n/*.yaml` (the newer shared bundle). The glossary wins
+ * on key conflicts so we don't silently drift from the Hugo site's
+ * translations.
  *
  * Locale files are loaded eagerly via `import.meta.glob` so missing files are
  * a no-op at runtime — callers fall back to English entry-by-entry, then to
@@ -23,8 +24,8 @@ const yamlModules: Record<string, string> = import.meta.glob<string>(
   { query: "?raw", import: "default", eager: true },
 );
 
-const hugoModules: Record<string, string> = import.meta.glob<string>(
-  "@hugo-site/i18n/*.json",
+const sharedModules: Record<string, string> = import.meta.glob<string>(
+  "@shared/i18n/*.json",
   { query: "?raw", import: "default", eager: true },
 );
 
@@ -53,7 +54,7 @@ function mergeBundle(
 mergeBundle(yamlModules, (raw) => parseYaml(raw, { uniqueKeys: false }) as I18nTable, {
   override: false,
 });
-mergeBundle(hugoModules, (raw) => JSON.parse(raw) as I18nTable, { override: true });
+mergeBundle(sharedModules, (raw) => JSON.parse(raw) as I18nTable, { override: true });
 
 function lookup(lang: Locale, key: string): string | undefined {
   const entry = tables[lang]?.[key];
