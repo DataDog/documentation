@@ -1874,7 +1874,7 @@ secret_backend_config:
 
 ##### Deploying with Helm or the Datadog Operator
 
-To use a file-based secret backend (`file.json`, `file.yaml`, or `file.text`) with Helm or the Datadog Operator, the secret file must be mounted into the Agent container, for example from a Kubernetes Secret exposed as a volume. Configure a volume and volume mount, then point `secretBackend.config` at the mounted path. The following example uses `file.json`; substitute `file.yaml` or `file.text` and the corresponding config key (`file_path` or `secrets_path`) as needed.
+To use a file-based secret backend (`file.json`, `file.yaml`, or `file.text`) with Helm or the Datadog Operator, the secret file must be mounted into the Agent container, for example, from a Kubernetes Secret exposed as a volume. Configure a volume and volume mount, then point `secretBackend.config` at the mounted path. The following example uses `file.json`. Substitute `file.yaml` or `file.text` and the corresponding config key (`file_path` or `secrets_path`) as needed.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
