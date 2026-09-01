@@ -338,6 +338,9 @@ Dedicated endpoints allow users to [create Datadog case for existing security fi
 
 Users can also [create Jira issues for security findings][18] and [attach security findings to a Jira issue][19].
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /incident_response/work_management/
 [2]: /integrations/jira/
@@ -364,7 +367,3 @@ Users can also [create Jira issues for security findings][18] and [attach securi
 [23]: /integrations/linear/
 [24]: /incident_response/case_management/troubleshooting/
 [30]: /security/assignee_management/
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}

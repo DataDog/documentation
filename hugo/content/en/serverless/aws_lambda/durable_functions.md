@@ -209,6 +209,10 @@ Runtimes other than Node.js and Python are not supported. If you encounter an is
 
 If you encounter an issue with the CloudFormation stack, open an issue in the [cloudformation-template GitHub repository][8].
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /serverless/aws_lambda/instrumentation
 [2]: https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=datadog-durable-function-event-forwarder&templateURL=https://datadog-cloudformation-template.s3.amazonaws.com/aws/lambda-durable-function-event-forwarder/latest.yaml
 [3]: /account_management/api-app-keys/#api-keys
@@ -219,7 +223,3 @@ If you encounter an issue with the CloudFormation stack, open an issue in the [c
 [8]: https://github.com/DataDog/cloudformation-template/tree/master/aws_durable_function_event_forwarder
 [9]: /serverless/aws_lambda/logs/#enable-log-collection
 [10]: /serverless/aws_lambda/managed_instances/
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
