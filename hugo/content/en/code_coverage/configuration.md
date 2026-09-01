@@ -45,6 +45,7 @@ gates:
       threshold: 95
 comments:
   enabled: true
+  file_breakdown: true
 ```
 
 ## Services configuration
@@ -295,15 +296,39 @@ gates:
 
 ## PR Comments
 
-By default, Datadog posts a code coverage summary comment on every pull request. You can suppress it on a per-repository basis with the `comments.enabled` field.
+By default, Datadog posts a code coverage summary comment on every pull request. The summary reports the total and patch coverage for the pull request and links to the Code Coverage page in Datadog.
 
-PR Gate checks are not affected by this setting.
+The `comments` block accepts the following fields:
+
+| Field | Type | Default | Description |
+|---|---|---|---|
+| `enabled` | Boolean | `true` | Whether Datadog posts a code coverage comment on pull requests. |
+| `file_breakdown` | Boolean | `false` | Whether the comment includes a per-file table of total and patch coverage. |
+
+PR Gate checks are not affected by these settings.
+
+### Disabling PR comments
+
+You can suppress the comment on a per-repository basis with the `comments.enabled` field:
 
 {{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
 schema-version: v1
 comments:
   enabled: false
 {{< /code-block >}}
+
+### Per-file breakdown
+
+Set `comments.file_breakdown` to `true` to add a table to the comment listing the files changed in the pull request, along with their total coverage and patch coverage:
+
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+comments:
+  enabled: true
+  file_breakdown: true
+{{< /code-block >}}
+
+The breakdown is off by default to keep the comment concise. It has no effect when `comments.enabled` is `false`.
 
 ## Carryforward
 
