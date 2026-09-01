@@ -18,7 +18,7 @@ Use estimated usage metrics to catch usage spikes early, and usage metrics to re
 
 Rolled-up metrics carry two tags:
 
-- `account_name`: the parent org name (the Admin Org).
+- `account_name`: The parent org name (the Admin Org).
 - `child_org_name`: the child org name (the customer organization), relative to the parent.
 
 ## Query usage metrics
