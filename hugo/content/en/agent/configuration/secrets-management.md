@@ -1319,7 +1319,7 @@ clusterChecksRunner:
 
 {{% tab "Operator" %}}
 
-Configure the Datadog Agent to use HashiCorp Vault to resolve secrets with the Datadog Operator using the following configuration. This uses Vault's `kubernetes` auth method, which relies on the Agent's automatically mounted ServiceAccount token, so no extra Kubernetes RBAC or annotations are required.
+Configure the Datadog Agent to use HashiCorp Vault to resolve secrets with the Datadog Operator using the following configuration. This uses Vault's `kubernetes` auth method, which relies on the Agent's automatically mounted ServiceAccount token. No extra Kubernetes RBAC or annotations are required.
 
 **Note**: The native `secretBackend` fields require Datadog Operator v1.29.0+. In your Vault server, enable the `kubernetes` auth method and bind `vault_kubernetes_role` to the Agent's ServiceAccount name and namespace. See the [Kubernetes auth method instructions](#kubernetes-auth-method-instructions) above and the official [HashiCorp Vault Kubernetes auth method documentation][3005] for more information.
 
