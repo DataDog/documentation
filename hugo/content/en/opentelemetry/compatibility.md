@@ -49,7 +49,7 @@ The following table shows feature compatibility across different setups:
 | [Real User Monitoring][22] (RUM) | {{< X >}} | | | |
 | [Source code integration][24] | {{< X >}} | | | |
 
-The **OTel SDK + OpenTelemetry Collector** column reflects Datadog's recommended configuration with the OTLP HTTP exporter and `span_metrics` connector. The Datadog Exporter and Datadog Connector remain fully supported for existing configurations and provide the same feature compatibility.
+The **OTel SDK + OpenTelemetry Collector** column reflects Datadog's recommended configuration with the OTLP HTTP exporter and `span_metrics` connector. The Datadog Exporter and Datadog Connector remain fully supported for existing configurations.
 
 ## API support
 

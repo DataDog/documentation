@@ -78,7 +78,9 @@ To configure tail-based sampling, use the [Tail Sampling Processor][9] or [Proba
 
 A limitation of tail-based sampling is that all spans for a given trace must be received by the same collector instance for effective sampling decisions. If a trace is distributed across multiple collector instances, and tail-based sampling is used, some parts of that trace may not be sent to Datadog.
 
-To calculate APM metrics from 100% of application traffic while using Collector-level tail-based sampling, configure the [`span_metrics` connector][1] before the sampling processor. The recommended Collector configuration separates metric computation from sampling.
+The recommended Collector configuration uses the agent deployment pattern and does not provide trace-aware routing across multiple Collectors. For distributed tail-based sampling, use a [gateway deployment][19] and configure routing so that all spans for a trace reach the same gateway Collector.
+
+To calculate APM metrics from 100% of application traffic while using Collector-level tail-based sampling, configure the [`span_metrics` connector][1] before the sampling processor.
 
 <div class="alert alert-info">The Datadog Connector remains fully supported for existing configurations.</div>
 
@@ -137,8 +139,7 @@ For more information, see [Unified Service Tagging][18].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /opentelemetry/otel_collector_datadog_exporter
-[2]: /opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#step-5---run-the-collector
+[1]: /opentelemetry/setup/collector_exporter/install/
 [3]: /opentelemetry/otlp_ingest_in_the_agent
 [4]: /tracing/metrics/metrics_namespace/
 [5]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
@@ -147,11 +148,10 @@ For more information, see [Unified Service Tagging][18].
 [8]: /tracing/guide/trace_ingestion_volume_control/#effects-of-reducing-trace-ingestion-volume
 [9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
-[11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector#datadog-connector
 [12]: /tracing/trace_pipeline/ingestion_mechanisms/#error-and-rare-traces
 [13]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
-[14]: /opentelemetry/guide/migration/
 [15]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
 [16]: /tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling
 [17]: /opentelemetry/interoperability/otel_api_tracing_interoperability/#128-bit-trace-ids
 [18]: /getting_started/tagging/unified_service_tagging/#opentelemetry
+[19]: https://opentelemetry.io/docs/collector/deploy/gateway/

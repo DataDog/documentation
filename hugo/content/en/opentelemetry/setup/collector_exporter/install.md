@@ -17,7 +17,7 @@ further_reading:
   text: "Set up Log Collection"
 - link: "/opentelemetry/config/collector_batch_memory"
   tag: "Documentation"
-  text: "Tune Batch and Memory Settings"
+  text: "Configure Memory Limits"
 ---
 
 ## Overview
@@ -30,6 +30,8 @@ Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector Cont
 - **Datadog extension**: Reports Collector metadata for host enrichment. It does not export telemetry data.
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running any OpenTelemetry Collector with OTLP HTTP exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
+
+The configurations on this page use the [agent deployment pattern][10]: one Collector runs on each host or Kubernetes node and receives telemetry from workloads on that host or node. For a gateway deployment, see the OpenTelemetry [gateway deployment pattern][11]. Stateful processing such as tail-based sampling in a multi-Collector environment requires a gateway architecture that routes all spans for a trace to the same Collector.
 
 <div class="alert alert-info">Already using the Datadog Exporter and Datadog Connector? These components remain fully supported, and existing configurations do not need to migrate. See <a href="/opentelemetry/setup/collector_exporter/datadog_exporter/">Configure the Datadog Exporter and Connector</a>.</div>
 
@@ -51,7 +53,7 @@ Download the latest release of the OpenTelemetry Collector Contrib distribution 
 
 ### 2. Create the Collector configuration
 
-Create a configuration file named `collector.yaml`. The configuration varies depending on your environment. Select the tab that matches your setup:
+Create a configuration file named `collector.yaml`. The configuration varies depending on your environment. Select the tab that matches your setup. For Kubernetes, use the Helm installation; the DaemonSet configuration tab is a reference for users who maintain their own Kubernetes manifests.
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -236,7 +238,7 @@ For cloud-specific environments, add the appropriate resource detection detector
 
 See the [full configuration files][500] for an optional config to gather additional metadata about the system.
 
-[500]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
+[500]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
 
 {{% /tab %}}
 
@@ -437,9 +439,11 @@ docker run \
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (DaemonSet)" %}}
+{{% tab "Kubernetes configuration reference" %}}
 
-Use this configuration for a Collector deployed as a Kubernetes DaemonSet in a non-cloud environment. It includes the `k8s_attributes` processor for enriching telemetry with Kubernetes metadata and the `kubelet_stats` receiver for node, pod, container, and volume metrics. On a managed Kubernetes distribution, apply the changes described in [Managed Kubernetes distributions](#managed-kubernetes-distributions) after the configuration.
+This tab is a configuration reference for users who maintain their own Kubernetes manifests. For an executable installation that includes the required pod specification, mounts, environment variables, RBAC resources, and port exposure, use the **Kubernetes (Helm—recommended)** tab.
+
+The configuration runs the Collector as a DaemonSet in a non-cloud environment. It includes the `k8s_attributes` processor for enriching telemetry with Kubernetes metadata and the `kubelet_stats` receiver for node, pod, container, and volume metrics. On a managed Kubernetes distribution, apply the changes described in [Managed Kubernetes distributions](#managed-kubernetes-distributions) after the configuration.
 
 Set the following environment variables in the Collector pod spec, using the Kubernetes downward API where noted:
 
@@ -774,18 +778,18 @@ processors:
 These modes do not allow mounting `/hostfs` or using host ports. Use the GKE or AKS `resource_detection` processor, then make these additional changes:
 
 - Remove the `host_metrics` receiver from the `receivers` block and from the `metrics` pipeline. Node, pod, container, and volume metrics still come from the `kubelet_stats` receiver.
-- Disable host ports on the Collector and expose it through a node-local Service instead. Point your applications at that Service rather than at the host IP shown in [Configure your application](#4-configure-your-application).
+- Disable host ports on the Collector and expose it through a node-local Service instead. The GKE Autopilot and AKS Automatic Helm values files apply these changes. Point applications at that Service rather than at the host IP shown in [Configure your application](#4-configure-your-application).
 
 For the complete configuration files for each environment, see the [`opentelemetry-examples` repository][501].
 
 [101]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor#role-based-access-control
-[501]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
+[501]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Helm chart)" %}}
+{{% tab "Kubernetes (Helm—recommended)" %}}
 
-You can deploy the Collector as a DaemonSet in Kubernetes using the [official OpenTelemetry Collector Helm chart][102] v0.147.1 or later. The values files below set up the required mounts, environment variables, and RBAC resources.
+Use the [official OpenTelemetry Collector Helm chart][102] to deploy the Collector as a DaemonSet in Kubernetes. The example values files are compatible with chart v0.147.1 or later, pin the Collector to v0.154.0, and set up the required mounts, environment variables, RBAC resources, and port exposure.
 
 1. Create a Kubernetes secret with your Datadog API key:
 
@@ -822,14 +826,14 @@ You can deploy the Collector as a DaemonSet in Kubernetes using the [official Op
    helm install otelcol open-telemetry/opentelemetry-collector --values values.yaml
    ```
 
-[102]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector
-[103]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset.yaml
-[104]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-eks.yaml
-[105]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-eks-auto.yaml
-[106]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-gke.yaml
-[107]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-gke-autopilot.yaml
-[108]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-aks.yaml
-[109]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-aks-automatic.yaml
+[102]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/opentelemetry-collector-0.147.1/charts/opentelemetry-collector
+[103]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset.yaml
+[104]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-eks.yaml
+[105]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-eks-auto.yaml
+[106]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-gke.yaml
+[107]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-gke-autopilot.yaml
+[108]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-aks.yaml
+[109]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-aks-automatic.yaml
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -838,7 +842,7 @@ You can deploy the Collector as a DaemonSet in Kubernetes using the [official Op
 
 ### 3. Run the Collector
 
-Start the Collector. If you are using Docker or Kubernetes, the run command is included in the [Create the collector configuration](#2-create-the-collector-configuration) section.
+Start the Collector. The Docker and Kubernetes Helm commands are included in the [Create the Collector configuration](#2-create-the-collector-configuration) section.
 
 For Host installations, run:
 
@@ -869,7 +873,7 @@ Both containers must be on the same network. If you use Docker Compose, this is 
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
-In your application deployment manifest, configure the endpoint using the host IP:
+For Kubernetes environments where the Helm values enable host ports, configure the endpoint using the host IP:
 ```yaml
 env:
   - name: HOST_IP
@@ -881,6 +885,8 @@ env:
   - name: OTEL_EXPORTER_OTLP_PROTOCOL
     value: "http/protobuf"
 ```
+
+GKE Autopilot and AKS Automatic do not allow host ports. Their example Helm values enable a node-local Service instead. Find the Service name with `kubectl get services`, and configure the endpoint using its Kubernetes DNS name (for example, `http://otelcol-opentelemetry-collector:4318`).
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -974,9 +980,11 @@ Datadog enforces the following limits when ingesting OTLP data. Data that exceed
 [2]: /account_management/api-app-keys/
 [3]: /getting_started/site/
 [4]: /getting_started/tagging/unified_service_tagging/
-[5]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
+[5]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
 [6]: /opentelemetry/guide/otlp_delta_temporality/
 [7]: /opentelemetry/compatibility/
 [8]: /opentelemetry/setup/otlp_ingest/#intake-limits
 [9]: https://app.datadoghq.com/fleet
+[10]: https://opentelemetry.io/docs/collector/deploy/agent/
+[11]: https://opentelemetry.io/docs/collector/deploy/gateway/
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest

@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This page provides guides for installing and configuring a standalone OpenTelemetry Collector to send telemetry data to Datadog.
+This page provides guides for installing and configuring a standalone OpenTelemetry Collector to send telemetry data to Datadog. The recommended configurations use the agent deployment pattern, with one Collector on each host or Kubernetes node.
 
 This method is best for users who prefer to use OTel Collector distributions from the OpenTelemetry open source community or require advanced processing capabilities not available in other setups. For most use cases the [Datadog Distribution of OTel Collector (DDOT)][1] is the recommended approach.
 
@@ -45,8 +45,8 @@ After your Collector is running, use these guides to configure specific receiver
     Configure the OTLP receiver to accept traces, metrics, and logs from your OpenTelemetry-instrumented applications over gRPC or HTTP.
     {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/config/collector_batch_memory" >}}
-    <h3>Tune Batch and Memory Settings</h3>
-    Optimize your Collector's performance and resource consumption by configuring the batch processor and memory limiter.
+    <h3>Configure Memory Limits</h3>
+    Protect the Collector from out-of-memory failures by configuring the memory limiter in each pipeline.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
