@@ -38291,6 +38291,19 @@ components:
           example: "One or several indexes are missing or invalid. Results hold data from the other indexes."
           type: string
       type: object
+    ExecutionLimit:
+      description: "The maximum number of times to execute a workflow for an incident."
+      properties:
+        count:
+          description: "The maximum number of workflow executions."
+          example: 1
+          format: int32
+          maximum: 9999
+          minimum: 1
+          type: integer
+      required:
+        - count
+      type: object
     ExecutionPolicyActionPattern:
       description: The set of actions this policy applies to.
       properties:
@@ -48474,6 +48487,15 @@ components:
       type: string
       x-enum-varnames:
         - INCIDENT_ATTACHMENTS
+    IncidentCondition:
+      description: "Conditions that determine which incidents trigger the workflow."
+      properties:
+        tagValues:
+          description: "Incident tags and values used to filter matching incidents."
+          items:
+            $ref: "#/components/schemas/IncidentTagValue"
+          type: array
+      type: object
     IncidentConfigurationDataAttributesRequest:
       description: Attributes for creating an incident configuration.
       properties:
@@ -48826,6 +48848,25 @@ components:
           $ref: "#/components/schemas/IncidentCreateData"
       required:
         - data
+      type: object
+    IncidentCreatedTrigger:
+      description: "Trigger a workflow when an incident is declared."
+      properties:
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentCreatedTriggerWrapper:
+      description: "Schema for an incident declared trigger."
+      properties:
+        incidentCreatedTrigger:
+          $ref: "#/components/schemas/IncidentCreatedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentCreatedTrigger
       type: object
     IncidentFieldAttributes:
       description: Dynamic fields for which selections can be made, with field names as keys.
@@ -49506,6 +49547,27 @@ components:
       required:
         - data
       type: object
+    IncidentImpactCreatedTrigger:
+      description: "Trigger a workflow when an impact is created for an incident."
+      properties:
+        executionLimit:
+          $ref: "#/components/schemas/ExecutionLimit"
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentImpactCreatedTriggerWrapper:
+      description: "Schema for an incident impact created trigger."
+      properties:
+        incidentImpactCreatedTrigger:
+          $ref: "#/components/schemas/IncidentImpactCreatedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentImpactCreatedTrigger
+      type: object
     IncidentImpactFieldChoice:
       description: A choice option for a dropdown or multiselect impact field.
       properties:
@@ -49804,6 +49866,27 @@ components:
       type: string
       x-enum-varnames:
         - INCIDENT_IMPACTS
+    IncidentImpactUpdatedTrigger:
+      description: "Trigger a workflow when an impact is updated for an incident."
+      properties:
+        executionLimit:
+          $ref: "#/components/schemas/ExecutionLimit"
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentImpactUpdatedTriggerWrapper:
+      description: "Schema for an incident impact updated trigger."
+      properties:
+        incidentImpactUpdatedTrigger:
+          $ref: "#/components/schemas/IncidentImpactUpdatedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentImpactUpdatedTrigger
+      type: object
     IncidentImpactsResponse:
       description: Response with a list of incident impacts.
       properties:
@@ -51025,6 +51108,27 @@ components:
       type: string
       x-enum-varnames:
         - INCIDENT_POSTMORTEMS
+    IncidentPostmortemUpdatedTrigger:
+      description: "Trigger a workflow when a postmortem is updated for an incident."
+      properties:
+        executionLimit:
+          $ref: "#/components/schemas/ExecutionLimit"
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentPostmortemUpdatedTriggerWrapper:
+      description: "Schema for an incident postmortem updated trigger."
+      properties:
+        incidentPostmortemUpdatedTrigger:
+          $ref: "#/components/schemas/IncidentPostmortemUpdatedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentPostmortemUpdatedTrigger
+      type: object
     IncidentRelatedObject:
       description: Object related to an incident.
       enum:
@@ -51055,6 +51159,27 @@ components:
       type: string
       x-enum-varnames:
         - INCIDENTS
+    IncidentResponderCreatedTrigger:
+      description: "Trigger a workflow when a responder is created for an incident."
+      properties:
+        executionLimit:
+          $ref: "#/components/schemas/ExecutionLimit"
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentResponderCreatedTriggerWrapper:
+      description: "Schema for an incident responder created trigger."
+      properties:
+        incidentResponderCreatedTrigger:
+          $ref: "#/components/schemas/IncidentResponderCreatedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentResponderCreatedTrigger
+      type: object
     IncidentResponderDataAttributesResponse:
       description: Attributes of an incident responder in a response.
       properties:
@@ -51808,6 +51933,55 @@ components:
       required:
         - data
       type: object
+    IncidentSavedTrigger:
+      description: "Trigger a workflow when an incident is declared or updated."
+      properties:
+        executionLimit:
+          $ref: "#/components/schemas/ExecutionLimit"
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        serialExecution:
+          $ref: "#/components/schemas/SerialExecution"
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      type: object
+    IncidentSavedTriggerWrapper:
+      description: "Schema for an incident declared or updated trigger."
+      properties:
+        incidentSavedTrigger:
+          $ref: "#/components/schemas/IncidentSavedTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentSavedTrigger
+      type: object
+    IncidentScheduleTrigger:
+      description: "Trigger a workflow on a schedule for an incident."
+      properties:
+        incidentType:
+          description: "The type of incident that triggers the workflow."
+          type: string
+        rrule:
+          description: "The recurrence rule for the schedule, expressed as an iCalendar `RRULE` string."
+          example: "DTSTART:20241220T151700Z\nRRULE:FREQ=MONTHLY"
+          minLength: 1
+          type: string
+        tagCondition:
+          $ref: "#/components/schemas/IncidentCondition"
+      required:
+        - rrule
+      type: object
+    IncidentScheduleTriggerWrapper:
+      description: "Schema for an incident schedule trigger."
+      properties:
+        incidentScheduleTrigger:
+          $ref: "#/components/schemas/IncidentScheduleTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - incidentScheduleTrigger
+      type: object
     IncidentSearchResponse:
       description: Response with incidents and facets.
       properties:
@@ -52101,6 +52275,24 @@ components:
         - SEV_3
         - SEV_4
         - SEV_5
+    IncidentTagValue:
+      description: "An incident tag and its accepted values."
+      properties:
+        tag:
+          description: "The incident tag to match."
+          example: ""
+          type: string
+        values:
+          description: "The accepted values for the incident tag."
+          example:
+            - ""
+          items:
+            type: string
+          type: array
+      required:
+        - tag
+        - values
+      type: object
     IncidentTimelineCellCreateAttributes:
       description: The timeline cell's attributes for a create request.
       oneOf:
@@ -52520,13 +52712,16 @@ components:
       x-enum-varnames:
         - INCIDENT_TODOS
     IncidentTrigger:
-      description: "Trigger a workflow from an Incident. For automatic triggering a handle must be configured and the workflow must be published."
+      description: "Trigger a workflow from an incident. For automatic triggering a handle must be configured and the workflow must be published."
       properties:
         rateLimit:
           $ref: "#/components/schemas/TriggerRateLimit"
+        version:
+          description: "Version of the incident manual trigger."
+          type: string
       type: object
     IncidentTriggerWrapper:
-      description: "Schema for an Incident-based trigger."
+      description: "Schema for an incident-based trigger."
       properties:
         incidentTrigger:
           $ref: "#/components/schemas/IncidentTrigger"
@@ -105690,6 +105885,16 @@ components:
         - REPLACEMENT_STRING
         - PARTIAL_REPLACEMENT_FROM_BEGINNING
         - PARTIAL_REPLACEMENT_FROM_END
+    SerialExecution:
+      description: "Whether to execute the workflow serially for an incident."
+      properties:
+        enabled:
+          description: "Whether serial execution is enabled."
+          example: false
+          type: boolean
+      required:
+        - enabled
+      type: object
     ServiceAccessToken:
       description: Datadog access token.
       properties:
@@ -108773,12 +108978,38 @@ components:
         - channel_name
         - redirect_url
       type: object
+    SlackReactionConfig:
+      description: "Configuration for a Slack emoji reaction trigger."
+      properties:
+        reactionEmoji:
+          description: "The Slack emoji reaction name."
+          example: L
+          minLength: 1
+          type: string
+        teamId:
+          description: "The Slack workspace ID."
+          example: L
+          minLength: 1
+          type: string
+      required:
+        - teamId
+        - reactionEmoji
+      type: object
+    SlackTrigger:
+      description: "Trigger a workflow from Slack. The workflow must be published."
+      properties:
+        reactionTriggers:
+          description: "Slack emoji reactions that trigger the workflow."
+          items:
+            $ref: "#/components/schemas/SlackReactionConfig"
+          type: array
+          uniqueItems: true
+      type: object
     SlackTriggerWrapper:
       description: "Schema for a Slack-based trigger."
       properties:
         slackTrigger:
-          description: "Trigger a workflow from Slack. The workflow must be published."
-          type: object
+          $ref: "#/components/schemas/SlackTrigger"
         startStepNames:
           $ref: "#/components/schemas/StartStepNames"
       required:
@@ -120711,6 +120942,13 @@ components:
         - $ref: "#/components/schemas/DashboardTriggerWrapper"
         - $ref: "#/components/schemas/FormTriggerWrapper"
         - $ref: "#/components/schemas/GithubWebhookTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentCreatedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentImpactCreatedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentImpactUpdatedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentPostmortemUpdatedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentResponderCreatedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentSavedTriggerWrapper"
+        - $ref: "#/components/schemas/IncidentScheduleTriggerWrapper"
         - $ref: "#/components/schemas/IncidentTriggerWrapper"
         - $ref: "#/components/schemas/MonitorTriggerWrapper"
         - $ref: "#/components/schemas/NotebookTriggerWrapper"
