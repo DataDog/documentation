@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-security/"
   tag: "Blog"
   text: "Securing the AI era: Outpace AI-powered attacks with unified security and observability"
+- link: "https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/"
+  tag: "Blog"
+  text: "How CISA’s BOD 26-04 changes vulnerability prioritization"
 ---
 
 {{< callout url=https://www.datadoghq.com/product-preview/runtime-prioritization-engine/

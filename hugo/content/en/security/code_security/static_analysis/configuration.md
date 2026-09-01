@@ -26,6 +26,7 @@ When AI-native SAST is enabled, its default rulesets run for the supported langu
 | Language | Ruleset |
 | --- | --- |
 | C# | `csharp-ai_sast` |
+| C++ | `cpp-ai_sast` |
 | Dart | `dart-ai_sast` |
 | Elixir | `elixir-ai_sast` |
 | Go | `go-ai_sast` |
