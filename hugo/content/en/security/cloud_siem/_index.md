@@ -69,9 +69,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/detection-as-code-cloud-siem/"
   tag: "Blog"
   text: "Build, test, and scale detections as code with Datadog Cloud SIEM"
-- link: "https://www.datadoghq.com/blog/work-management/"
-  tag: "Blog"
-  text: "Centralize human and agentic work with Datadog Work Management"
 
 ---
 
