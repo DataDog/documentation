@@ -1,7 +1,6 @@
 ---
 title: Delete Data
 description: Delete logs data from Datadog with proper permissions, time-based queries, and audit trail logging for compliance.
-private: true
 ---
 
 This page explains how to delete sensitive data that should not have been ingested into Datadog.
