@@ -3116,10 +3116,10 @@ menu:
       parent: actions_connections
       identifier: actions_http
       weight: 101
-    - name: AWS Integration
-      url: actions/connections/aws_integration/
+    - name: Integration Connections
+      url: actions/connections/integration/
       parent: actions_connections
-      identifier: actions_aws_integration
+      identifier: actions_integration
       weight: 102
     - name: Google Workspace
       url: actions/connections/google_workspace/
