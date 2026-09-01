@@ -31,7 +31,7 @@ Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}
 
 Invoices are listed per customer with issue and due dates, amount, and payment status, and roll up into overdue counts and totals on the main Customer Contracts page:
 
-{{< img src="partners/multi_tenant_billing/customer_contracts_invoices.png" alt="Customer Contracts invoices tab listing invoice numbers, dates, amounts, and status for a customer" style="width:100%;" >}}
+{{< img src="partners/multi_tenant_billing/customer_contracts_invoices.png" alt="Customer Contracts invoices tab listing invoice numbers, dates, amounts, and status for a customer." style="width:100%;" >}}
 
 ## Related docs
 
