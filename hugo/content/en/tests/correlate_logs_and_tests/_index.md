@@ -40,8 +40,8 @@ Use the following environment variables to enable and configure Agentless log su
 
 Agentless log submission is supported for the following tracer versions and logging libraries:
 
-- `dd-trace-js >= 4.48.0` or `dd-trace-js >= 5.24.0` with `winston`.
-- `dd-trace-js >= 5.124.0` or `dd-trace-js >= 6.13.0` with `pino` or `bunyan`.
+- `dd-trace-js v4.48.0 or later` on the v4 release line, or `dd-trace-js v5.24.0 or later` on the v5 release line, with `winston`.
+- `dd-trace-js v5.124.0 or later` on the v5 release line, or `dd-trace-js v6.13.0 or later` on the v6 release line, with `pino` or `bunyan`.
 
 Use the following environment variables to enable and configure Agentless log submission:
 
