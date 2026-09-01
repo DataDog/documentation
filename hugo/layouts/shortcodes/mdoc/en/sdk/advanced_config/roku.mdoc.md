@@ -92,7 +92,7 @@ In addition to the default RUM attributes captured by the RUM Roku SDK automatic
 
 ### Identifying your users
 
-See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=roku) for instructions on adding user information to your RUM sessions.
+See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=roku) for instructions on adding user information to your RUM sessions.
 
 ### Track custom global attributes
 

@@ -1,6 +1,6 @@
 1. Navigate to [**Digital Experience** > **Add an Application**](https://app.datadoghq.com/rum/application/create).
 2. Select `.NET MAUI` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM .NET MAUI Data Collected](/real_user_monitoring/application_monitoring/maui/data_collected).
+3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM .NET MAUI Data Collected](/real_user_monitoring/setup/data_collected/?platform=maui).
 
 {% alert level="info" %}
 If you've purchased Error Tracking as a standalone product (without RUM), navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**](https://app.datadoghq.com/error-tracking/settings/setup/client) instead.

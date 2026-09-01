@@ -93,7 +93,7 @@ To connect RUM sessions and APM traces you can configure `allowedTracingUrls` in
 </datadogRum>
 ```
 
-[1]: https://docs.datadoghq.com/tracing/other_telemetry/rum
+[1]: https://docs.datadoghq.com/real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/
 
 ## Troubleshooting
 

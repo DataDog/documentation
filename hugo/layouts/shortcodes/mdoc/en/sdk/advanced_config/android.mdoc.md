@@ -273,7 +273,7 @@ In addition to the [default RUM attributes][3] captured by the RUM Android SDK a
 
 ### Track user sessions
 
-See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=android) for instructions on adding user information to your RUM sessions.
+See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=android) for instructions on adding user information to your RUM sessions.
 
 ### Track attributes
 

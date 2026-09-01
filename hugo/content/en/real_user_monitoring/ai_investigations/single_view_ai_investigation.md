@@ -75,9 +75,9 @@ After an investigation completes, you can act on findings without leaving the pa
 
 [1]: /notebooks/
 [2]: /real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/
-[3]: /real_user_monitoring/application_monitoring/browser/data_collected/#long-task-timing-attributes
+[3]: /real_user_monitoring/setup/data_collected/?platform=browser#long-task-timing-attributes
 [4]: /real_user_monitoring/error_tracking/
 [5]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/
 [6]: /real_user_monitoring/explorer/search/
-[7]: /real_user_monitoring/correlate_with_other_telemetry/apm/
+[7]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/
 [8]: /real_user_monitoring/correlate_with_other_telemetry/profiling/

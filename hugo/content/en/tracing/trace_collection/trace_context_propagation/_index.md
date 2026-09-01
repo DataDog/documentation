@@ -812,7 +812,7 @@ Support for baggage as span tags was introduced in the following releases:
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: #none-format
 [6]: #language-support
-[7]: /real_user_monitoring/correlate_with_other_telemetry/apm
+[7]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/
 [8]: /synthetics/platform/apm
 [9]: /opentelemetry/interoperability/environment_variable_support
 [10]: https://www.w3.org/TR/baggage/

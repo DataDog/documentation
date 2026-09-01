@@ -930,8 +930,8 @@ val inputStream = context.getRawResAsRumResource(id)
 [5]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
 [6]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [7]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[8]: /real_user_monitoring/application_monitoring/android/web_view_tracking/
-[9]: /real_user_monitoring/application_monitoring/android/data_collected/
+[8]: /real_user_monitoring/setup/enrich_rum_data/track_navigation_across_web_views/?platform=android
+[9]: /real_user_monitoring/setup/data_collected/?platform=android
 [10]: /getting_started/tagging/using_tags/
 [11]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
 [12]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-views
