@@ -101,6 +101,7 @@ AI-native SAST uses a two-phase approach:
 | Elixir     | Available   |
 | Swift      | Available   |
 | Dart       | Available   |
+| C++        | Available   |
 
 ### Detected vulnerability types
 
