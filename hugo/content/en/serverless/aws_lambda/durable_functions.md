@@ -19,7 +19,7 @@ Datadog provides full visibility into the metrics, logs, and traces for AWS Lamb
     - Datadog Node.js Lambda layer: v142+
     - Datadog Python Lambda layer: v127+
 
-2. If you use Datadog Lambda Extension v99, set the following environment variable on your Lambda function. For v100+, the default value is `5`, so you don't need to set it explicitly.
+2. If you use Datadog Lambda Extension v99, set the following environment variable on your Lambda function. For v100+, the default value is already `5`, so you don't need to set it explicitly.
 
     ```text
     DD_LAMBDA_DURABLE_FUNCTION_LOG_BUFFER_SIZE=5
