@@ -55,22 +55,28 @@ Each topic shows its interaction volume and share of total traffic. Interactions
 1. In Datadog, navigate to **AI Observability** > **Agent Observability** > [**Patterns**][4].
 1. Click **+ New Pattern**.
 1. Enter a **Name**.
-1. Click **Select a model**. The Model configuration window opens, where you can add details that Agent Observability uses to generate topic names, summaries, topic hierarchy, and to attribute each interaction to a topic:
-   - **LLM Provider**: Supported providers are OpenAI, Anthropic, Amazon Bedrock, Azure OpenAI, and Vertex AI.
-   - **Account**
-   - **Model**
-1. Click **Confirm** to save your changes and close the window.
-1. Under **Runs on**:
-   1. Use the **Application** multi-selector to choose one or more LLM applications to include spans for. Selecting applications automatically updates the underlying span filter query, and editing the query updates the selected applications. For finer-grained scoping, click the filter icon next to the selector to open the **Advanced** popover, which exposes:
-      - **Which spans do you want to cluster?:** The raw span filter query for scoping by environment, span type, or other tags.
-      - **Time window:** The lookback period for interactions to analyze.
-   1. Set the **Sampling Rate**: The percentage of matching interactions to include. Patterns processes up to 10,000 records per run; if your filter matches more than that, Agent Observability randomly samples records until it reaches that number.
-1. Under **What should we detect Patterns on?**, enter a template that defines what gets sent to the model for analysis. Use `{{variable}}` syntax to reference any span field; for example, `{{meta.input.value}}` to analyze patterns by user input, or `{{meta.span.kind}}` to analyze by span kind. Click {{< ui >}}Template Examples{{< /ui >}} to see common configurations. As you type, the right panel previews matching spans and shows what percentage of interactions have values for the variables you've referenced.
-1. Under **How often should we run Patterns?**, choose how the Pattern runs. Scheduled times use your Datadog timezone preference. Scheduled runs use the same pipeline as a manual run, so results appear in the same place, and the Patterns page always shows your most recent run.
-   - **On demand** (default): Run the Pattern manually.
-   - **Daily**, **Weekdays**, or **Weekly**: Run automatically at a time (and, for weekly, a day) you choose.
+1. Use the **Application** multi-selector to choose one or more LLM applications to include spans for. Selecting applications automatically updates the underlying span filter query, and editing the query updates the selected applications.
+1. Under **Setup**:
+  1. Select what to **Analyze** with Patterns, individual **Spans** or **Traces**.
+  1. (Optional) Write a short **Clustering Instruction** to provide free-form guidance to how Patterns should group interactions and generate topics, such as user intent, agent task or product used. For example, to cluster based on the user intent, you can write "Cluster based on the user intent". Changing this field after a first successful run **will delete the topics found and persisted** in previous Patterns runs. Leave this blank to group interactions by each interaction's main goal.
+  1. Select the variables in your interaction you want Patterns to **Cluster on**. Use `{{variable}}` syntax to reference any span field; for example, `{{meta.input.value}}` to analyze patterns by user input, or `{{meta.span.kind}}` to analyze by span kind.
+  1. Add precise **Filters** to better select the interactions you want to cluster with Patterns.
+  1. Set the **Time window** to define the lookback period for interactions to analyze.
+  1. **Sampling** of the matched interactions is accessible by clicking the **Change** button. It is capped at 10 000 spans and 5 000 traces. If your filter matches more than that, Agent Observability randomly samples interactions until it reaches that number. 
+  1. Click **Select a model**. The Model configuration window opens, where you can add details that Agent Observability uses to generate topic names, summaries, topic hierarchy, and to attribute each interaction to a topic:
+    - **LLM Provider**: Supported providers are OpenAI, Anthropic, Amazon Bedrock, Azure OpenAI, and Vertex AI.
+    - **Account**
+    - **Model**: Prefer using Recommended models tagged, for performances and costs requirements.
+    Click **Confirm** to save your changes and close the window.
+1. (Optional) Under **Datasets**:
+  1. Turn on the radio button to compare your production traffic with your offline evaluation datasets.
+  1. Use the **Datasets** selector to select dataset(s) you use to evaluate your AI Agent offline.
+  1. (Optional) Enable the **Automatic curation** radio button to automatically fill coverage gaps Patterns detects. When enabled, Datadog creates a managed project (`Patterns-coverage`) and a per-pattern dataset (`{pattern-name}-pattern-curated`) to receive suggested interactions after each run. The toggle is **on** by default for new Patterns. 
+1. Under **Schedule**, choose how often Pattern runs. Scheduled times use your Datadog timezone preference. Scheduled runs use the same pipeline as a manual run, so results appear in the same place, and the Patterns page always shows your most recent run.
+   - **Daily**, **Weekdays**, or **Weekly (Default)**: Run automatically at a time (and, for weekly, a day) you choose.
+   - **On demand**: Run the Pattern manually.
    - **Custom**: Run automatically every 1 to 7 days.
-1. (Optional) Under **Dataset coverage**, select one or more offline evaluation datasets to measure production traffic coverage against. To automatically fill coverage gaps, enable the **Automatic dataset curation** toggle. When enabled, Datadog creates a managed project (`Patterns-coverage`) and a per-pattern dataset (`{pattern-name}-pattern-curated`) to receive suggested interactions after each run. The toggle is **on** by default for new Patterns.
+1. Under **Notifications** Enter mails and/or external messaging integrations you enabled in Datadog (see [**Integrations**][5] to enable external integrations in Datadog) to be notified when Patterns results are available.
 1. Click **Create and Run Pattern**, or **Create Pattern** to create it without running it.
 
 ## Explore your Patterns
@@ -107,13 +113,22 @@ Expand parent topics to see their sub-topics and examine specific areas of your 
 
 ### Drill into a topic
 
-Click any topic name to open the detail view. The detail view shows a summary of what the topic represents, the total interaction count, and an interactions table with the child topic label, input text, and timestamp for each interaction. Search the table by keyword to find specific examples.
+Click any topic name to open its detail view. Use the breadcrumbs or click a node in the {{< ui >}}Topic Map{{< /ui >}} to navigate the topic hierarchy. The map highlights the selected branch and shows each topic's interaction count and, when available, traffic change since the previous run.
 
+{{< img src="llm_observability/patterns_topic_details.png" alt="The topic detail view showing a pattern summary and an interactive topic map with interaction counts and traffic changes." style="width:100%;" >}}
 
-{{< img src="llm_observability/patterns_topic_details.png" alt="The topic detail view showing a summary of the topic, the total interaction count, and a table of interactions with child topic label, input text, and timestamp." style="width:100%;" >}}
+The detail view includes:
+
+- {{< ui >}}Pattern Summary{{< /ui >}}: Highlights traffic trends, online evaluation health, operational outliers, dataset coverage gaps, and recommended next steps.
+- {{< ui >}}Scorecard{{< /ui >}}: Summarizes traffic volume and share, cost, error rate, median latency, and dataset coverage.
+- {{< ui >}}Dataset Coverage Detail{{< /ui >}}: Shows coverage status and attribution by dataset. Review recommended cases to close coverage gaps, or open the managed dataset when automatic dataset curation is enabled.
+- {{< ui >}}Evaluations{{< /ui >}}: Summarizes each online evaluation with its key result and a chart over time. Open matching spans to investigate specific results.
+- {{< ui >}}Interactions{{< /ui >}}: Lists the inputs and outputs assigned to the topic, along with their sub-topic, timestamp, recommendation status, and evaluation results. Filter with a full-text or facet query, configure evaluation columns, or click a row to open its trace details.
+
+{{< img src="llm_observability/patterns_topic_details_scorecard.png" alt="The topic detail view showing the scorecard, dataset coverage details, and interactions table." style="width:100%;" >}}
 
 ### Export and act on interactions
-From the interactions table inside a topic's detail view, you can act on the interactions in that cluster:
+Select one or more rows in the interactions table to act on those interactions:
 
 - **Download as CSV:** Export the interactions as a CSV file.
 - **Add to Dataset:** Send the interactions to a [Dataset][2] to build evaluation test cases from real production traffic.
@@ -121,7 +136,7 @@ From the interactions table inside a topic's detail view, you can act on the int
 
 ## Trigger a new run
 
-To analyze your production traffic, click {{< ui >}}Run analysis{{< /ui >}} in the Patterns header. The pipeline runs in the background and takes 5 to 10 minutes. You can close the page and return later — the header shows the last run date and lookback period when the run completes.
+To analyze your production traffic, click {{< ui >}}Run analysis{{< /ui >}} in the Patterns header. The pipeline runs in the background and displays it's completed, running and pending steps. A run takes around 5 to 10 minutes. Click on **Notify me** to be notified by mail once the pipeline finishes. You can close the page and return later — the header shows the last run date and lookback period when the run completes.
 
 If a run fails, a modal explains the cause and what action to take. The page continues to display results from the most recent successful run while the failed run is shown in the header.
 
@@ -157,3 +172,4 @@ Re-run your Pattern periodically and use the {{< ui >}}Compare to{{< /ui >}} dro
 [2]: /llm_observability/improve/datasets/
 [3]: /llm_observability/investigate/annotation_queues/
 [4]: https://app.datadoghq.com/llm/patterns
+[5]: /integrations/#cat-notifications

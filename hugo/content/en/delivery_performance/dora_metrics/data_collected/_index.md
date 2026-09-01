@@ -1,6 +1,6 @@
 ---
 title: DORA Metrics Data Collected
-description: "Learn about DORA Metrics events, fields, tags, and change lead time stages for deployment frequency, change lead time, and failure analysis."
+description: "Learn about DORA Metrics events, fields, tags, and change lead time stages for deployment frequency, change lead time, and change failure analysis."
 aliases:
 - /dora_metrics/data_collected/
 further_reading:
@@ -27,7 +27,6 @@ DORA Metrics generates events that have associated fields and tags.
 |Deployment | A single code deployment uniquely identified by env, service, and version tags.<br><br>Deployments can be [marked as failed][17] and are used to compute deployment frequency, change failure rate, and failed deployment recovery time.
 |Pull Request | A pull request included in a deployment. Contains metadata such as author, reviewers, labels, and time spent drafting, reviewing, and merging. Commits are nested within their associated pull request.<br><br>Pull requests are used to analyze code review workflows and PR-level cycle time.
 |Commit | An event generated for each individual commit included in a deployment. Contains metadata and is automatically linked to the corresponding deployment. Commits are nested within their associated pull request.<br><br>Commits are used to compute change lead time.
-|Incident | An incident declared in production.<br><br>Tracking incidents provides a side-by-side view of how failed deployments translate into real-world incidents, including their severity and frequency.
 
 **Note**: DORA Metrics events have a 2-year retention period.
 
@@ -42,17 +41,14 @@ All events contain the following tags if any are available:
 - `source`
 - `repository_id`
 
-**Note**: The `severity` tag is available for failure events when it is provided by the failure's data source.
-
 For more information about using tags, see [Getting Started with Tags][6].
 
 ### Custom tags
 
-In addition to the tags above, deployment and failure events can be enriched with custom tags to filter DORA Metrics. There are three potential sources for these tags:
+Deployment events can be enriched with custom tags to filter DORA Metrics. There are two potential sources for these tags:
 
-- Catalog: If a deployment or failure event is associated with services in Catalog, it is automatically enriched with the `language` tag and the [custom tags defined in the Service Definitions][13].
-- Incident Management: Failure events created from [Datadog Incident Management][14] are enriched with custom tags for any user-defined [Single Select or Multi Select property fields][15].
-- DORA Metrics API: Up to 100 user-provided custom tags can be added to both deployment and failure events in the [API][7].
+- Catalog: If a deployment event is associated with services in Catalog, it is automatically enriched with the `language` tag and the [custom tags defined in the Service Definitions][13].
+- DORA Metrics API: Up to 100 user-provided custom tags can be added to deployment events in the [API][7].
 
 For more information about using custom tags in DORA Metrics, see [DORA Metrics Overview][16].
 
@@ -71,8 +67,8 @@ For more information about using custom tags in DORA Metrics, see [DORA Metrics 
 | `Number of Commits`        | Count of all commits included in a deployment. |
 | `Deployment Type` | Type of deployment (`standard`, `rollback`, or `rollforward`). |
 | `Change Failure` | Boolean indicating whether a deployment is marked as a change failure. |
-| `Recovery Time` | Duration in seconds between a failed deployment's `finished_at` and its remediation's `finished_at`. Only available for deployments marked as failures. |
-| `Remediation Type` | The type of remediation applied (`rollback` or `rollforward`). Only available for deployments marked as failures. |
+| `Recovery Time` | Duration in seconds between a failed deployment's `finished_at` and its remediation's `finished_at`. Only available for deployments marked as change failures. |
+| `Remediation Type` | The type of remediation applied (`rollback` or `rollforward`). Only available for deployments marked as change failures. |
 
 ### Pull request fields
 
@@ -118,15 +114,6 @@ For more information about using custom tags in DORA Metrics, see [DORA Metrics 
 | `Has Failed Tests` | Boolean indicating whether any test execution failed because of a non-flaky test in the commit. Requires Test Optimization. |
 | `Has New Flaky Tests` | Boolean indicating whether any new flaky tests were detected in the commit's test sessions. Requires Test Optimization. |
 
-
-
-### Incident fields
-
-| Field  | Description                |
-|------------|----------------------------|
-| `Time to Restore`       | The time in between a failure's `started_at` and `finished_at` timestamps. |
-
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -143,7 +130,5 @@ For more information about using custom tags in DORA Metrics, see [DORA Metrics 
 [11]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights%20&cols=&messageDisplay=expanded-lg&options=&refresh_mode=sliding&sort=DESC&from_ts=1714391730343&to_ts=1714392630343&live=true
 [12]: /delivery_performance/dora_metrics/setup/#limitations
 [13]: https://www.datadoghq.com/blog/service-catalog-setup/
-[14]: https://app.datadoghq.com/incidents
-[15]: /incident_response/incident_management/investigate/describe/
 [16]: /delivery_performance/dora_metrics/
 [17]: /delivery_performance/dora_metrics/change_failure_detection/
