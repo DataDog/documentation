@@ -1921,7 +1921,7 @@
     "request_schema_description": "Request to create targeting rules (allocations) for a feature flag in an environment."
   },
   "UpdateAllocationsForFeatureFlagInEnvironment": {
-    "description": "Updates targeting rules (allocations) for a specific feature flag in a specific environment.\nThis operation replaces the existing allocation set with the request payload.",
+    "description": "Updates targeting rules (allocations) for a specific feature flag in a specific environment.\nThis operation replaces the existing allocation set with the request payload.\nCreating, updating, or deleting a standard experiment allocation—an allocation with\n`type: FEATURE_GATE` and a non-null `experiment_id`—also requires the\n`product_analytics_experiments_write` permission. This additional permission is not\nrequired for `CANARY` allocations, exposure schedules, or guardrail metrics unless\nthe same operation also mutates a standard experiment allocation.",
     "summary": "Update targeting rules for a flag",
     "request_description": "",
     "request_schema_description": "Request to overwrite targeting rules (allocations) for a feature flag in an environment."
