@@ -116,9 +116,7 @@ The following table lists the Cloud SIEM features available in each product.
 | [Open Cybersecurity Schema Framework (OCSF)][14] | {{< X >}} | {{< X >}} | |
 | [Threat intelligence][15] | {{< X >}} | {{< X >}} | |
 
-If a feature you want to use is not available in your product, contact your Datadog account team.
-
-Need additional assistance? Contact [Datadog support][3].
+For help identifying your product, or to use a feature your product does not include, contact your Datadog account team or [Datadog support][3].
 
 [1]: https://app.datadoghq.com/billing/usage
 [2]: https://app.datadoghq.com/security/configuration/siem/setup
