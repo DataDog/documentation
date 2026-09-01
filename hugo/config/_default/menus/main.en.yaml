@@ -10555,6 +10555,11 @@ menu:
       url: account_management/plan_and_usage/partner_experience/customer_pricing/
       parent: account_management_partner_experience
       weight: 140301
+    - name: Customer Contracts
+      identifier: account_management_customer_contracts
+      url: account_management/plan_and_usage/partner_experience/customer_contracts/
+      parent: account_management_partner_experience
+      weight: 140302
     - name: Billing
       identifier: account_management_billing
       url: account_management/billing/

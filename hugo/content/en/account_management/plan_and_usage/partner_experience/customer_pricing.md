@@ -5,6 +5,9 @@ further_reading:
 - link: "/account_management/plan_and_usage/bill_overview/partner_purchased_cost_visibility/"
   tag: "Documentation"
   text: "Cost Visibility for Customers Who Purchase Through a Partner"
+- link: "/account_management/plan_and_usage/partner_experience/customer_contracts/"
+  tag: "Documentation"
+  text: "Customer Contracts"
 - link: "/account_management/plan_and_usage/partner_experience/"
   tag: "Documentation"
   text: "Plan and Usage Experience for Partners"
@@ -43,6 +46,8 @@ After you publish, cost visibility is enabled for that customer within 24 hours.
 
 To change a customer's rates after publishing, return to the {{< ui >}}Customer Pricing{{< /ui >}} page, edit the values, and republish. Updates can take up to 24 hours to become visible to the customer.
 
+To see which customers have cost visibility enabled, which are not configured yet, and which need an update after a contract change, use the {{< ui >}}Cost Visibility{{< /ui >}} column on the [Customer Contracts][3] page.
+
 ## Limitations
 
 To appear in the customer dropdown, a customer must have an eligible resell contract. Customer Pricing does not support the following contract types and organizations:
@@ -60,3 +65,4 @@ For the full list of limitations, including feature availability and cost accura
 
 [1]: /account_management/plan_and_usage/bill_overview/partner_purchased_cost_visibility/
 [2]: https://app.datadoghq.com/billing/customer-pricing
+[3]: /account_management/plan_and_usage/partner_experience/customer_contracts/
