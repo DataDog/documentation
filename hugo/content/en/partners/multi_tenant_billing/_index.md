@@ -14,7 +14,7 @@ As a Datadog Solution Provider, you can use a **Partner Admin Organization** (Ad
 
 A customer organization is connected to an Admin Org automatically when its Datadog contract includes the partnership and is active. After connecting, a customer's usage and cost data is visible from the Admin Org, across all Datadog sites (for example, AP1, EU1, US1, US3, US5), except GovCloud sites, which requires its own Admin Org for regulatory purposes.
 
-{{< img src="partners/multi_tenant_billing/admin_org_hierarchy.png" alt="An Admin Org connected to multiple customer organizations" style="width:100%;" >}}
+{{< img src="partners/multi_tenant_billing/admin_org_hierarchy.png" alt="An Admin Org connected to multiple customer organizations." style="width:100%;" >}}
 
 See [Onboarding a New Customer][15] for how these pieces fit into the path from a registered deal to a connected customer organization.
 
