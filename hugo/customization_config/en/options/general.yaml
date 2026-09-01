@@ -543,9 +543,6 @@ options:
 - id: third_party
   label: Third party
 
-- id: signal_correlation
-  label: Signal correlation
-
 - id: sequence
   label: Sequence
 
