@@ -119,7 +119,7 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 
 {{< img src="incident_response/on-call/guides/configure-mobile-device-for-on-call/ios_sync_card_may_2025.png" alt="Override your iOS device's Do Not Disturb mode for SMS and voice calls" style="width:100%;" >}}
 
-1. In the Datadog mobile app, navigate to {{< ui >}}Account{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Notifications{{< /ui >}}.
+1. In the Datadog mobile app, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Notification{{< /ui >}} > {{< ui >}}On Call{{< /ui >}}.
 
 2. Toggle on {{< ui >}}Enable Automatic Contact Card Sync{{< /ui >}}. This creates a contact named "Datadog On-Call", which updates regularly with Datadog's latest phone numbers.
 
