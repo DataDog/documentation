@@ -36,16 +36,16 @@ The Runtime Prioritization Engine is designed to be explainable. For each findin
 | **Reachability** | Is the vulnerable component actually running? | Affected image observed running on a production workload. Vulnerable package observed executing at runtime. |
 | **Exposure** | Can attackers reach it? | Resource publicly accessible from static network analysis. Runtime evidence of exposure to active attacks. |
 | **Exploitability** | Are attackers likely to exploit it? | Public exploit code exists. Finding actively exploited in the wild (listed in [CISA KEV][1]). High exploit probability ([EPSS][2]). |
-| **Business criticality** | Would a compromise have high impact? | Resource supports a critical business function ([Crown Jewel](#crown-jewels)). Runs with elevated privileges and processes sensitive data. |
+| **Business criticality** | Would a compromise have high impact? | Resource supports a critical business function ([critical asset](#critical-assets)). Runs with elevated privileges and processes sensitive data. |
 | **Actionability** | Can the right team fix it? | Service owner identified. Fix or mitigation available. |
 
 The Runtime Prioritization Engine prioritizes a finding when these signals indicate real, exploitable risk in your environment. Findings that do not meet the prioritization criteria stay visible, but move out of the active triage queue.
 
-## Crown Jewels
+## Critical assets
 
-[Crown Jewels][8] are the resources that support your most critical business functions (services, hosts, databases, containers, etc.). Datadog automatically infers them from observability data such as APM trace flow, service dependencies (fan-in), SLOs, traffic, incidents, and more.
+[Critical assets][8] are the resources that support your most critical business functions (services, hosts, databases, containers, etc.). Datadog automatically infers them from observability data such as APM trace flow, service dependencies (fan-in), SLOs, traffic, incidents, and more.
 
-Crown Jewels update continuously as your environment changes. You can also add your own Crown Jewels manually in Datadog Cloud Security.
+Critical assets update continuously as your environment changes. You can also add your own critical assets manually in Datadog Cloud Security.
 
 ## Ownership
 
@@ -90,7 +90,7 @@ Signals persist for the lifetime of an image version: after a package is observe
 [5]: https://app.datadoghq.com/security/csm
 [6]: /security/security_inbox/
 [7]: /security/cloud_security_management/review_remediate/ownership_agent/
-[8]: /security/cloud_security_management/crown_jewels/
+[8]: /security/cloud_security_management/critical_assets/
 [9]: /security/cloud_security_management/setup/agent/docker/#runtime-package-prioritization-preview
 [10]: /security/cloud_security_management/setup/agent/linux/#runtime-package-prioritization-preview
 [11]: https://app.datadoghq.com/security/csm/vm
