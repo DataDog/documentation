@@ -9306,11 +9306,16 @@ menu:
       identifier: rum
       parent: digital_experience_heading
       weight: 30000
+    - name: RUM Terms and Concepts
+      url: real_user_monitoring/rum_terms_and_concepts/
+      parent: rum
+      identifier: rum_terms_and_concepts
+      weight: 1
     - name: Setup RUM
       url: real_user_monitoring/setup/
       parent: rum
       identifier: rum_setup
-      weight: 1
+      weight: 2
     - name: Create a RUM App
       url: real_user_monitoring/setup/create_application/
       parent: rum_setup
@@ -9375,12 +9380,12 @@ menu:
       url: real_user_monitoring/setup/data_collected/
       parent: rum
       identifier: rum_setup_data_collected
-      weight: 2
+      weight: 3
     - name: Enrich RUM Data
       url: real_user_monitoring/enrich_rum_data/
       parent: rum
       identifier: rum_setup_enrich_rum_data
-      weight: 3
+      weight: 4
     - name: Add Custom Context
       url: real_user_monitoring/enrich_rum_data/add_custom_context/
       parent: rum_setup_enrich_rum_data
@@ -9430,7 +9435,7 @@ menu:
       url: real_user_monitoring/measure_health_with_metrics/
       parent: rum
       identifier: rum_setup_measure_health_with_metrics
-      weight: 4
+      weight: 5
     - name: Out-of-the-Box Metrics
       url: real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/
       parent: rum_setup_measure_health_with_metrics
@@ -9441,31 +9446,31 @@ menu:
       parent: rum_setup_measure_health_with_metrics
       identifier: rum_setup_measure_health_with_metrics_create_custom_metrics
       weight: 2
-    - name: Data Lifecycle and Cost Management
-      url: real_user_monitoring/data_lifecycle_and_cost_management/
+    - name: Retain and Recover Valuable Sessions
+      url: real_user_monitoring/retain_and_recover_valuable_sessions/
       parent: rum
-      identifier: rum_data_lifecycle_and_cost_management
-      weight: 5
+      identifier: rum_retain_and_recover_valuable_sessions
+      weight: 6
     - name: Configure Retention Filters
-      url: real_user_monitoring/data_lifecycle_and_cost_management/configure_retention_filters/
-      parent: rum_data_lifecycle_and_cost_management
-      identifier: rum_data_lifecycle_and_cost_management_configure_retention_filters
+      url: real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
+      parent: rum_retain_and_recover_valuable_sessions
+      identifier: rum_retain_and_recover_valuable_sessions_configure_retention_filters
       weight: 1
     - name: Control Volumes with Quotas
-      url: real_user_monitoring/data_lifecycle_and_cost_management/control_volumes_with_quotas/
-      parent: rum_data_lifecycle_and_cost_management
-      identifier: rum_data_lifecycle_and_cost_management_control_volumes_with_quotas
+      url: real_user_monitoring/retain_and_recover_valuable_sessions/control_volumes_with_quotas/
+      parent: rum_retain_and_recover_valuable_sessions
+      identifier: rum_retain_and_recover_valuable_sessions_control_volumes_with_quotas
       weight: 2
     - name: Recover Sessions from Managed Archives
-      url: real_user_monitoring/data_lifecycle_and_cost_management/recover_sessions_from_managed_archives/
-      parent: rum_data_lifecycle_and_cost_management
-      identifier: rum_data_lifecycle_and_cost_management_recover_sessions_from_managed_archives
+      url: real_user_monitoring/retain_and_recover_valuable_sessions/recover_sessions_from_managed_archives/
+      parent: rum_retain_and_recover_valuable_sessions
+      identifier: rum_retain_and_recover_valuable_sessions_recover_sessions_from_managed_archives
       weight: 3
     - name: Investigate Problems
       url: real_user_monitoring/investigate_problems/
       parent: rum
       identifier: rum_investigate_problems
-      weight: 6
+      weight: 7
     - name: Explore Retained Data
       url: real_user_monitoring/investigate_problems/explore_retained_data/
       parent: rum_investigate_problems
@@ -9575,12 +9580,12 @@ menu:
       url: real_user_monitoring/track_critical_operations/
       parent: rum
       identifier: rum_track_critical_operations
-      weight: 7
+      weight: 8
     - name: Application Monitoring
       url: real_user_monitoring/application_monitoring/
       parent: rum
       identifier: application_monitoring
-      weight: 10
+      weight: 11
     - name: Browser
       url: real_user_monitoring/application_monitoring/browser/
       parent: application_monitoring
@@ -9870,7 +9875,7 @@ menu:
       url: real_user_monitoring/application_monitoring/cpp
       parent: application_monitoring
       identifier: rum_cpp
-      weight: 205
+      weight: 206
     - name: Setup
       url: real_user_monitoring/application_monitoring/cpp/setup
       parent: rum_cpp
@@ -9905,7 +9910,7 @@ menu:
       url: real_user_monitoring/application_monitoring/roku
       parent: application_monitoring
       identifier: rum_mobile_roku
-      weight: 206
+      weight: 207
     - name: Setup
       url: real_user_monitoring/application_monitoring/roku/setup
       parent: rum_mobile_roku
@@ -9930,7 +9935,7 @@ menu:
       url: real_user_monitoring/application_monitoring/unity
       parent: application_monitoring
       identifier: rum_mobile_unity
-      weight: 207
+      weight: 208
     - name: Setup
       url: real_user_monitoring/application_monitoring/unity/setup
       parent: rum_mobile_unity
@@ -9955,7 +9960,7 @@ menu:
       url: real_user_monitoring/application_monitoring/maui
       parent: application_monitoring
       identifier: rum_mobile_maui
-      weight: 208
+      weight: 209
     - name: Setup
       url: real_user_monitoring/application_monitoring/maui/setup
       parent: rum_mobile_maui
@@ -9985,7 +9990,7 @@ menu:
       identifier: rum_administer_and_extend_rum
       url: real_user_monitoring/administer_and_extend_rum/
       parent: rum
-      weight: 8
+      weight: 9
     - name: Create Dashboards
       url: real_user_monitoring/administer_and_extend_rum/dashboards/
       parent: rum_administer_and_extend_rum
@@ -10045,22 +10050,37 @@ menu:
       identifier: rum_reference
       url: real_user_monitoring/reference/
       parent: rum
-      weight: 9
+      weight: 10
+    - name: External Resources
+      url: real_user_monitoring/reference/external_resources/
+      parent: rum_reference
+      identifier: rum_reference_external_resources
+      weight: 1
     - name: Integrated Libraries
       url: client_sdks/integrated_libraries/
       parent: rum_reference
       identifier: rum_reference_integrated_libraries
-      weight: 1
+      weight: 2
     - name: SDK Performance Impact
       url: real_user_monitoring/reference/sdk_performance_impact/
       parent: rum_reference
       identifier: rum_reference_sdk_performance_impact
-      weight: 2
+      weight: 3
+    - name: Troubleshooting
+      url: client_sdks/troubleshooting/
+      parent: rum_reference
+      identifier: rum_reference_troubleshooting
+      weight: 4
+    - name: Data Security
+      identifier: real_user_monitoring_data_security
+      url: data_security/real_user_monitoring/
+      parent: rum_reference
+      weight: 5
     - name: Exploring RUM Data
       url: real_user_monitoring/explorer/
       parent: rum
       identifier: rum_explorer
-      weight: 11
+      weight: 12
     - name: Search RUM Events
       url: real_user_monitoring/explorer/search/
       parent: rum_explorer
@@ -10105,7 +10125,7 @@ menu:
       url: real_user_monitoring/feature_flag_tracking
       parent: rum
       identifier: rum_feature_flag_tracking
-      weight: 12
+      weight: 13
     - name: Setup
       url: real_user_monitoring/feature_flag_tracking/setup
       parent: rum_feature_flag_tracking
@@ -10120,7 +10140,7 @@ menu:
       url: real_user_monitoring/error_tracking/
       parent: rum
       identifier: rum_error_tracking
-      weight: 13
+      weight: 14
     - name: Explorer
       url: real_user_monitoring/error_tracking/explorer/
       parent: rum_error_tracking
@@ -10165,7 +10185,7 @@ menu:
       url: real_user_monitoring/ai_investigations/
       parent: rum
       identifier: rum_ai_investigations
-      weight: 14
+      weight: 15
     - name: Single-View AI Investigation
       url: real_user_monitoring/ai_investigations/single_view_ai_investigation/
       parent: rum_ai_investigations
@@ -10185,7 +10205,7 @@ menu:
       url: real_user_monitoring/rum_without_limits/
       parent: rum
       identifier: rum_without_limits
-      weight: 15
+      weight: 16
     - name: Metrics
       url: real_user_monitoring/rum_without_limits/metrics
       parent: rum_without_limits
@@ -10205,31 +10225,26 @@ menu:
       url: real_user_monitoring/operations_monitoring/
       parent: rum
       identifier: rum_operations_monitoring
-      weight: 16
+      weight: 17
     - name: Managed Archive
       url: real_user_monitoring/managed_archive/
       parent: rum
       identifier: rum_managed_archive
-      weight: 17
+      weight: 18
     - name: Export Pipelines
       url: real_user_monitoring/rum_export/
       parent: rum
       identifier: rum_export
-      weight: 18
+      weight: 19
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
       parent: rum
       identifier: rum_ownership_of_views
-      weight: 19
+      weight: 20
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 20
-    - name: Data Security
-      identifier: real_user_monitoring_data_security
-      url: data_security/real_user_monitoring/
-      parent: rum
       weight: 21
     - name: Product Analytics
       url: product_analytics/

@@ -181,7 +181,7 @@ internal actual fun rumPlatformSetup(rumConfigurationBuilder: RumConfiguration.B
 }
 ```
 
-See [Automatically track views](/real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#automatically-track-views) to enable automatic tracking of all your views.
+See [Automatically track views](/real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration/#automatically-track-views) to enable automatic tracking of all your views.
 {% /if %}
 
 <!-- C / C++ -->
