@@ -1,5 +1,5 @@
 ---
-title: Additional plugins
+title: Additional Plugins
 description: "Integrate Datadog build plugins with your JavaScript bundler to automate source map uploads, action name deobfuscation, source code context, and other RUM tasks at build time."
 content_filters:
   - trait_id: platform

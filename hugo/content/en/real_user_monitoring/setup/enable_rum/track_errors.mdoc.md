@@ -1,5 +1,5 @@
 ---
-title: Track errors and crashes
+title: Track Errors and Crashes
 content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options

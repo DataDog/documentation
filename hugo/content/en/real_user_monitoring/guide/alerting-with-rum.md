@@ -1,8 +1,8 @@
 ---
-title: Alerting With RUM Data
+title: Alerting with RUM Data
 description: Guide for creating alerts on RUM events.
 further_reading:
-- link: '/real_user_monitoring/platform/dashboards/'
+- link: '/real_user_monitoring/administer_and_extend_rum/dashboards/'
   tag: 'Documentation'
   text: 'RUM Dashboards'
 - link: '/monitors/create/types/real_user_monitoring/'

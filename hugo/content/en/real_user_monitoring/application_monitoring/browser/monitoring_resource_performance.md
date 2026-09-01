@@ -13,7 +13,7 @@ further_reading:
   - link: "/real_user_monitoring/explorer/visualize/"
     tag: "Documentation"
     text: "Apply visualizations on your events"
-  - link: "/real_user_monitoring/platform/dashboards/"
+  - link: "/real_user_monitoring/administer_and_extend_rum/dashboards/"
     tag: "Documentation"
     text: "RUM Dashboards"
 ---
@@ -148,7 +148,7 @@ To collect the resource status code, add the `Access-Control-Allow-Origin` HTTP 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[2]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/
+[2]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming/responseStatus#browser_compatibility
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [5]: https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/Resource_timing#cross-origin_timing_information

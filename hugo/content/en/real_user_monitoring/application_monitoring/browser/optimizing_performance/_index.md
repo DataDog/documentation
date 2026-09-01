@@ -114,6 +114,6 @@ For deeper root cause analysis, use browser profiling alongside RUM to identify 
 [9]: https://web.dev/articles/fcp
 [10]: https://web.dev/articles/cls/
 [11]: https://web.dev/articles/inp/
-[12]: /real_user_monitoring/correlate_with_other_telemetry/profiling
+[12]: /real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/profiling
 [13]: /real_user_monitoring/guide/browser-sdk-upgrade/#collect-long-animation-frames-as-long-tasks
 [14]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#diagnose-core-web-vitals-with-subparts

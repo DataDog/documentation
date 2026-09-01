@@ -37,7 +37,7 @@ further_reading:
   - link: '/session_replay/troubleshooting'
     tag: Documentation
     text: Troubleshoot Session Replay
-  - link: '/real_user_monitoring/setup/enrich_rum_data/track_navigation_across_web_views/?platform=android'
+  - link: '/real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=android'
     tag: Documentation
     text: Web View Tracking
 ---

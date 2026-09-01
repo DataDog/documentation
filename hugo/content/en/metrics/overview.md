@@ -138,7 +138,7 @@ Use the search bar in this section to view the latest data and configuration opt
 [13]: /api/latest/metrics/#submit-metrics
 [14]: /logs/log_configuration/logs_to_metrics/
 [15]: /tracing/trace_pipeline/generate_metrics/
-[16]: /real_user_monitoring/platform/generate_metrics/
+[16]: /real_user_monitoring/measure_health_with_metrics/create_custom_metrics/
 [17]: /infrastructure/process/increase_process_retention/#generate-a-process-based-metric
 [18]: /events/guides/usage/#custom-metrics
 [19]: /metrics/metrics-without-limits/

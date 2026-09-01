@@ -1,5 +1,5 @@
 ---
-title: Enable the DD RUM module
+title: Enable the DD RUM Module
 content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options
@@ -226,7 +226,7 @@ After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring
 Your application appears as pending on the Applications page until Datadog starts receiving data.
 {% /if %}
 {% if equals($platform, "android") %}
-Visualize the [data collected](/real_user_monitoring/android/data_collected/) in [dashboards](/real_user_monitoring/platform/dashboards/) or create a search query in the [RUM Explorer](https://app.datadoghq.com/rum/list).
+Visualize the [data collected](/real_user_monitoring/android/data_collected/) in [dashboards](/real_user_monitoring/administer_and_extend_rum/dashboards/) or create a search query in the [RUM Explorer](https://app.datadoghq.com/rum/list).
 
 Your application appears as pending on the Applications page until Datadog starts receiving data.
 {% /if %}

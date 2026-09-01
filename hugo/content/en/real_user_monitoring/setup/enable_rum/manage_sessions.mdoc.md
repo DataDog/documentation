@@ -1,5 +1,5 @@
 ---
-title: Track user IDs
+title: Track User IDs
 content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options
