@@ -5,12 +5,12 @@ description: "Monitor usage metrics across all connected customer organizations 
 
 ## Overview
 
-Centralized Usage Metrics lets the Admin Org oversee usage and estimated usage metrics from every connected customer org. Metrics roll up to the Admin Org tagged by customer, so partners can filter and attribute usage across their entire book of business from a single set of dashboards, monitors, and alerts.
+Centralized Usage Metrics lets the Partner Admin Organization (Admin Org) oversee usage and estimated usage metrics from every connected customer org. Metrics roll up to the Admin Org tagged by customer, so partners can filter and attribute usage across their entire book of business from a single set of dashboards, monitors, and alerts.
 
 Datadog produces two kinds of usage metrics:
 
-- **Estimated usage metrics**: in the `datadog.estimated_usage.*` namespace, update within minutes and provide a near real-time view of usage. Estimated usage metrics can differ from billable usage by roughly 10-20% on average, with larger variance for low-usage organizations. See [Estimated Usage Metrics][1] for the full metrics reference.
-- **Usage metrics**: in the `datadog.usage.*` namespace, come from the same metering and billing pipeline that produces the bill, so they track Plan & Usage closely. Usage metrics are less immediate than estimated usage metrics, but accurate enough for billing conversations.
+- **Estimated usage metrics** in the `datadog.estimated_usage.*` namespace. These metrics update within minutes and provide a near real-time view of usage. Estimated usage metrics can differ from billable usage by roughly 10-20% on average, with larger variance for low-usage organizations. See [Estimated Usage Metrics][1] for the full metrics reference.
+- **Usage metrics** in the `datadog.usage.*` namespace. These metrics come from the same metering and billing pipeline that produces the bill, so they track Plan & Usage closely. Usage metrics are less immediate than estimated usage metrics, but accurate enough for billing conversations.
 
 Use estimated usage metrics to catch usage spikes early, and usage metrics to report numbers that reconcile with the bill.
 
@@ -18,15 +18,15 @@ Use estimated usage metrics to catch usage spikes early, and usage metrics to re
 
 Rolled-up metrics carry two tags:
 
-- `account_name`: the parent org name (the Admin Org).
-- `child_org_name`: the child org name (the customer organization), relative to the parent.
+- `account_name`: The parent org name (the Admin Org).
+- `child_org_name`: The child org name (the customer organization), relative to the parent.
 
 ## Query usage metrics
 
 When building a dashboard widget or monitor:
 
 - For estimated usage metrics, select {{< ui >}}Metrics{{< /ui >}} as the source and use a `datadog.estimated_usage.*` metric.
-- For usage metrics, select {{< ui >}}Usage{{< /ui >}} as the source and choose a usage type, for example Infra Hosts.
+- For usage metrics, select {{< ui >}}Usage{{< /ui >}} as the source and choose a usage type, for example, Infra Hosts.
 
 | Product | Estimated usage metric | Usage metric |
 |---|---|---|
@@ -45,7 +45,7 @@ sum:datadog.estimated_usage.hosts{*} by {child_org_name}
 sum:datadog.usage.infra.hosts{*} by {child_org_name}
 ```
 
-{{< img src="partners/multi_tenant_billing/usage_metrics_rollup.png" alt="Dashboard querying usage metrics rolled up from customer orgs, filtered by child_org_name" style="width:100%;" >}}
+{{< img src="partners/multi_tenant_billing/usage_metrics_rollup.png" alt="Dashboard querying usage metrics rolled up from customer orgs, filtered by child_org_name." style="width:100%;" >}}
 
 To match Plan & Usage totals, use a 1-hour rollup for host-style products and graph in UTC, since Plan & Usage reports in UTC.
 
