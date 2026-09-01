@@ -111,11 +111,7 @@ Use this form to submit your request to join the Supply Chain Security Preview.
 
 Supply Chain Security prevents malicious open source packages from entering your development environments at the point of installation, before they reach your repositories or CI/CD pipelines.
 
-Unlike SCA, which scans dependencies already in your codebase, the Datadog Supply Chain Firewall (SCFW) intercepts package manager commands (`npm`, `pip`, `poetry`) in real time and blocks malicious or recently published packages before they are installed.
-
-Supply Chain Security evaluates every package install against Datadog's malicious package feed (powered by [GuardDog][21]), known vulnerability advisories, and configurable recency thresholds. If a package matches one of these checks, SCFW immediately blocks the installation and displays a clear, actionable message on developer laptops and [CI runners][20].
-
-In addition to protecting individual developer machines or CI pipelines, SCFW provides event observability to search, filter, and audit ALLOW, WARN, and BLOCK events across developer machines and CI systems in a unified event feed.
+Unlike SCA, which scans dependencies already in your codebase, the Datadog Supply Chain Firewall (SCFW) intercepts package manager commands (`npm`, `pip`, `poetry`) in real time and blocks malicious or recently published packages before they are installed. See [Supply Chain Firewall][22] to get started.
 
 ## Code Security MCP Server (Preview)
 The [Code Security MCP Server][19] is a local Model Context Protocol (MCP) server that brings SAST, secrets detection, SCA, IaC scanning, and SBOM generation directly into AI coding assistants such as Cursor, Claude Desktop, and VS Code. Read the [MCP Server documentation][17] to get started.
@@ -142,5 +138,4 @@ The [Code Security MCP Server][19] is a local Model Context Protocol (MCP) serve
 [17]: /security/code_security/iac_security/setup/?tab=github
 [18]: /security/cloud_security_management/
 [19]: /security/code_security/dev_tool_int/mcp_server/
-[20]: /security/code_security/dev_tool_int/scfw_github_action/
-[21]: https://github.com/DataDog/guarddog
+[22]: /security/code_security/software_composition_analysis/supply_chain_firewall/
