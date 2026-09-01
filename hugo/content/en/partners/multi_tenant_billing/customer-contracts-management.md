@@ -3,7 +3,7 @@ title: Customer Contracts
 description: "Manage the partner's book of business - customers, contracts, and invoices - from an Admin Org."
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-info">
 Customer Contracts is in Preview.
 </div>
 
