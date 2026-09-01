@@ -10,7 +10,7 @@ Centralized Usage Metrics lets the Partner Admin Organization (Admin Org) overse
 Datadog produces two kinds of usage metrics:
 
 - **Estimated usage metrics** in the `datadog.estimated_usage.*` namespace. These metrics update within minutes and provide a near real-time view of usage. Estimated usage metrics can differ from billable usage by roughly 10-20% on average, with larger variance for low-usage organizations. See [Estimated Usage Metrics][1] for the full metrics reference.
-- **Usage metrics**: in the `datadog.usage.*` namespace, come from the same metering and billing pipeline that produces the bill, so they track Plan & Usage closely. Usage metrics are less immediate than estimated usage metrics, but accurate enough for billing conversations.
+- **Usage metrics** in the `datadog.usage.*` namespace. These metrics come from the same metering and billing pipeline that produces the bill, so they track Plan & Usage closely. Usage metrics are less immediate than estimated usage metrics, but accurate enough for billing conversations.
 
 Use estimated usage metrics to catch usage spikes early, and usage metrics to report numbers that reconcile with the bill.
 
