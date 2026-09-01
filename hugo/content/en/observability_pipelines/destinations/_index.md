@@ -19,7 +19,7 @@ Use the Observability Pipelines Worker to send your processed logs and metrics t
 
 **Notes**:
 - You can add a total of 20 destinations for a pipeline.
-- If you add multiple destinations of the same type to a pipeline, you must use [Secrets Management][101]. For example, if you add two HTTP Client destinations for two different HTTP clients to your pipeline, you must use secret identifiers for the HTTP Client URIs. You cannot use the default `DD_OP_HTTP_SERVER_ADDRESS` to store the two different HTTP client URIs.
+- If you add multiple destinations of the same type to a pipeline, you must use [Secrets Management][4]. For example, if you add two HTTP Client destinations for two different HTTP clients to your pipeline, you must use secret identifiers for the HTTP Client URIs. You cannot use the default `DD_OP_HTTP_SERVER_ADDRESS` to store the two different HTTP client URIs.
 
 ## Destinations
 
@@ -180,3 +180,4 @@ If the destination receives 3 events within 2 seconds, it flushes a batch with 2
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html#specifiers
+[4]: /observability_pipelines/configuration/secrets_management/
