@@ -1143,7 +1143,7 @@ After this has been set up, write an [authentication-specific vault policy][3004
 
 ##### Kubernetes auth method instructions
 
-To authenticate using the Agent pod's Kubernetes ServiceAccount token (the method used by the Helm and Operator configuration examples below), enable the `kubernetes` auth method in Vault:
+To authenticate using the Agent pod's Kubernetes ServiceAccount token (the method used by the Helm and Operator configuration examples), enable the `kubernetes` auth method in Vault:
 
 ```sh
 vault auth enable kubernetes
