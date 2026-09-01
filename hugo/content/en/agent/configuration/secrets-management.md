@@ -554,8 +554,6 @@ spec:
                 password: "ENC[/DatadogAgent/Production/ParameterKey]"
 ```
 
-<br>
-
 ##### Cluster check: with cluster check runners enabled
 
 ```sh
