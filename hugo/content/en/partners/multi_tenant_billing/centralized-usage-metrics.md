@@ -26,7 +26,7 @@ Rolled-up metrics carry two tags:
 When building a dashboard widget or monitor:
 
 - For estimated usage metrics, select {{< ui >}}Metrics{{< /ui >}} as the source and use a `datadog.estimated_usage.*` metric.
-- For usage metrics, select {{< ui >}}Usage{{< /ui >}} as the source and choose a usage type, for example Infra Hosts.
+- For usage metrics, select {{< ui >}}Usage{{< /ui >}} as the source and choose a usage type, for example, Infra Hosts.
 
 | Product | Estimated usage metric | Usage metric |
 |---|---|---|
