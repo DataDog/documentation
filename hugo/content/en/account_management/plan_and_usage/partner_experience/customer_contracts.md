@@ -22,12 +22,27 @@ The [Customer Contracts][1] page gives Datadog partners a single view of their e
 To use Customer Contracts, you need:
 
 - A Datadog admin organization. If you don't have one, contact your Datadog partner team.
-- The Billing Read (`billing_read`) permission in your admin organization. Users with this permission can view all of the information on the page.
+- The Billing Read (`billing_read`) permission in your admin organization. Users with this permission can view all of the information on the page. For information on managing permissions, see [Role Based Access Control][4].
 
 ## Access Customer Contracts
 
 1. Log in to your Datadog admin organization.
 2. Navigate to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}}, or go directly to [Customer Contracts][1].
+
+## Customer table
+
+The customer table lists every customer with an eligible contract. Select a customer to open their contract detail panel.
+
+| Column | Description |
+|---|---|
+| {{< ui >}}Customer{{< /ui >}} | Name of the end customer |
+| {{< ui >}}CMRR{{< /ui >}} | Contract monthly recurring revenue |
+| {{< ui >}}UMRR{{< /ui >}} | Usage monthly recurring revenue, based on the customer's actual usage |
+| {{< ui >}}Overdue Balance{{< /ui >}} | Total amount of the customer's invoices that are past their due date |
+| {{< ui >}}Cost Visibility{{< /ui >}} | Whether the customer can see their Datadog costs. See [Check cost visibility status](#check-cost-visibility-status) |
+| {{< ui >}}Contract Status{{< /ui >}} | Whether the contract is active, approaching its renewal date, or expired |
+
+Use the search box to find a specific customer, or filter the table by {{< ui >}}Cost Visibility{{< /ui >}} or {{< ui >}}Contract Status{{< /ui >}}. The table is paginated, displaying 10 rows per page by default.
 
 ## Track renewals
 
@@ -39,11 +54,13 @@ The customer table shows the contract status for each customer, so you can see w
 
 Select a customer to open their contract detail panel. The {{< ui >}}Current Contract{{< /ui >}} tab shows:
 
-- **Spend overview**: last month's contracted MRR (CMRR), last month's usage MRR (UMRR), and contract utilization.
-- **Contract info**: influence status, contract start date, and contract end date.
-- **Drawdown depletion**: for drawdown contracts, the total commitment, spend to date, remaining funds, projected total, projected overshoot, and projected depletion date compared to the contract end date.
+- {{< ui >}}Spend Overview{{< /ui >}}: last month's CMRR, last month's UMRR, and contract utilization.
+- {{< ui >}}Contract Info{{< /ui >}}: influence status, contract start date, and contract end date.
+- {{< ui >}}Drawdown Depletion{{< /ui >}}: for drawdown contracts, the total commitment, spend to date, remaining funds, projected total, projected overshoot, and projected depletion date compared to the contract end date.
 
 {{< img src="account_management/plan_and_usage/customer-contracts-detail.png" alt="Contract detail panel for a customer showing the spend overview, drawdown depletion progress bar, and contract info sidebar" >}}
+
+For convenience, you can set a customer's rates directly from the {{< ui >}}Custom Pricing Configuration{{< /ui >}} tab of this panel instead of going to the [Customer Pricing][2] page.
 
 ## Monitor invoices
 
@@ -55,9 +72,9 @@ The {{< ui >}}Invoices{{< /ui >}} tab of the contract detail panel lists every i
 
 The {{< ui >}}Cost Visibility{{< /ui >}} column shows where each customer stands:
 
-- **Enabled**: the customer can see their Datadog costs in their own organization.
-- **Not configured**: you haven't published rates for this customer yet.
-- **Update needed**: the customer's contract changed, so their published rates need an update.
+- {{< ui >}}Enabled{{< /ui >}}: the customer can see their Datadog costs in their own organization.
+- {{< ui >}}Not configured{{< /ui >}}: you haven't published rates for this customer yet.
+- {{< ui >}}Update needed{{< /ui >}}: the customer's contract changed, so their published rates need an update.
 
 To publish or update rates, see [Customer Pricing][2]. To explain the feature to your customer, share [Cost Visibility for Customers Who Purchase Through a Partner][3].
 
@@ -76,3 +93,4 @@ The {{< ui >}}Contacts{{< /ui >}} section of the contract detail panel lists the
 [1]: https://app.datadoghq.com/billing/customer-contracts
 [2]: /account_management/plan_and_usage/partner_experience/customer_pricing/
 [3]: /account_management/plan_and_usage/bill_overview/partner_purchased_cost_visibility/
+[4]: /account_management/rbac/
