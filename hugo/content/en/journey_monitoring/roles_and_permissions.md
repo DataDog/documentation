@@ -17,34 +17,30 @@ further_reading:
 
 A journey connects assets from Product Analytics, RUM and Synthetic Monitoring. Most actions require both a Journey Monitoring permission and the permission for the underlying asset the action touches.
 
-<!-- AUTHORING NOTE: Confirm the final permission names before publishing. The target GA model
-introduces dedicated Journey Monitoring read/write permissions. Until those release, Synthetic
-Monitoring write gates journey creation and Synthetic Monitoring read gates viewing. Verify with
-the product team which permissions are live at publish time, and align this page with
-/account_management/rbac/permissions/. -->
-
 ## Create and edit journeys
 
 | Action | Required access |
 |--------|-----------------|
-| Create or edit a journey | Journey Monitoring write |
-| Create a journey's Synthetic test suite | Journey Monitoring write and Synthetic Monitoring write |
-| Add or edit the conversion rate monitor | Journey Monitoring write and monitor write |
-| Add or edit the journey SLO | Journey Monitoring write and SLO write |
-| Edit strongly-linked RUM operations | Journey Monitoring write and RUM write |
+| Create or edit a journey | [Journey Monitoring write][perms] |
+| Create a journey's Synthetic test suite | [Journey Monitoring write][perms] and Synthetic Monitoring write |
+| Add or edit the conversion rate monitor | [Journey Monitoring write][perms] and monitor write |
+| Add or edit the journey SLO | [Journey Monitoring write][perms] and SLO write |
+| Edit strongly-linked RUM operations | [Journey Monitoring write][perms] and RUM write |
 
-Asset creation is best-effort: creating a journey succeeds with Journey Monitoring write access alone. Datadog creates a linked asset, such as the test suite, only when you also hold that asset's permission. Otherwise, Datadog skips it and you can add it later. A journey without a test suite is a valid state.
+Asset creation is best-effort: creating a journey succeeds with [Journey Monitoring write][perms] access alone. Datadog creates a linked asset, such as the test suite, only when you also hold that asset's permission. Otherwise, Datadog skips it and you can add it later. A journey without a test suite is a valid state.
 
 ## View journeys and linked assets
 
 | Action | Required access |
 |--------|-----------------|
-| View a journey and its details | Journey Monitoring read and RUM read (on the app) |
+| View a journey and its details | [Journey Monitoring read][perms] and RUM read (on the app) |
 | View a test suite, its tests, and uptime SLO | Synthetic Monitoring read and a read restriction policy on the suite |
-| View strongly-linked RUM operations | Journey Monitoring read and RUM read |
+| View strongly-linked RUM operations | [Journey Monitoring read][perms] and RUM read |
 | View an operation's SLO | SLO read |
 | View journey session replays | RUM read, subject to RUM data access controls |
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[perms]: /account_management/rbac/permissions/#digital-experience-monitoring
