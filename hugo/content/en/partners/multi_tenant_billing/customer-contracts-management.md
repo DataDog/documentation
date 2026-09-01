@@ -25,7 +25,7 @@ Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}
 - For MSP contracts, which customers belong to each contract.
 - Discount and margin visibility per contract.
 - Whether [Customer Pricing][1] is enabled for each customer, not yet configured, or needs an update after a contract change.
-- Key contacts per customer: the Datadog CSM, the Datadog AE, the partner account team, and the billing contact receiving invoices.
+- Key contacts per customer: The Datadog CSM, the Datadog AE, the partner account team, and the billing contact receiving invoices.
 
 {{< img src="partners/multi_tenant_billing/customer_contracts_detail.png" alt="Customer Contracts detail panel showing spend overview, drawdown depletion, contract info, and contacts for a customer." style="width:100%;" >}}
 
