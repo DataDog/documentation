@@ -19,7 +19,7 @@ Use the Observability Pipelines Worker to send your processed logs and metrics t
 
 **Notes**:
 - You can add a total of 20 destinations for a pipeline.
-- If you add multiple destinations of the same type to a pipeline, you must use [Secrets Management][4]. For example, if you add two HTTP Client destinations for two different HTTP clients to your pipeline, you must use secret identifiers for the HTTP Client URIs. You cannot use the default `DD_OP_HTTP_SERVER_ADDRESS` to store the two different HTTP client URIs.
+- If you add multiple destinations of the same type to a pipeline, you must use [Secrets Management][4]. For example, if you add two HTTP Client destinations for two different HTTP clients to your pipeline, you must use secret identifiers for the HTTP client URIs. You cannot use the default `DD_OP_HTTP_SERVER_ADDRESS` to store the two different HTTP client URIs.
 
 ## Destinations
 
