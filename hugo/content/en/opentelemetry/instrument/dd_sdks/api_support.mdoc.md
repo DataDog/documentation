@@ -502,13 +502,20 @@ Metrics are normally exported on a schedule. `ForceFlush` and `Shutdown` are Ope
 Before a short-lived process exits, call `forceFlush` to wait for metrics recorded so far. After recording is complete, call `shutdown` once to perform a final export and stop metrics export. Don't record more metrics after shutdown.
 
 {% if equals($prog_lang, "node_js") %}
-Pass `timeoutMillis` to bound the operation. If the timeout expires, the Promise rejects, but queued export or shutdown work can continue. `OTEL_EXPORTER_OTLP_METRICS_TIMEOUT` is separate and bounds each OTLP HTTP request. Both values are in milliseconds.
+The completion callback receives an error if the operation fails. `OTEL_EXPORTER_OTLP_METRICS_TIMEOUT` bounds each OTLP HTTP request in milliseconds.
 
 ```javascript
 const meterProvider = metrics.getMeterProvider();
 
-await meterProvider.forceFlush({ timeoutMillis: 10_000 });
-await meterProvider.shutdown({ timeoutMillis: 10_000 });
+meterProvider.forceFlush((error) => {
+  if (error) {
+    console.error('Failed to flush metrics', error);
+    return;
+  }
+  meterProvider.shutdown((error) => {
+    if (error) console.error('Failed to shut down metrics', error);
+  });
+});
 ```
 
 For TypeScript, cast the provider to the Datadog implementation type:
