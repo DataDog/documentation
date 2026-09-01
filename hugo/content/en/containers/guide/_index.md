@@ -29,6 +29,7 @@ disable_toc: true
     {{< nextlink href="/containers/guide/ad_identifiers" >}}Container identifiers: Apply an Autodiscovery configuration file template to a specific container{{< /nextlink >}}
     {{< nextlink href="/containers/guide/template_variables" >}}Autodiscovery template variables: Dynamically populate configuration settings{{< /nextlink >}}
     {{< nextlink href="/containers/guide/auto_conf" >}}Autodiscovery auto-configuration: Default base configuration for common integrations{{< /nextlink >}}
+    {{< nextlink href="/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd" >}}Configure Autodiscovery with DatadogInstrumentation CRD{{< /nextlink >}}
     {{< nextlink href="/containers/guide/autodiscovery-examples" >}}Detailed Autodiscovery template examples{{< /nextlink >}}
 {{< /whatsnext >}}
 

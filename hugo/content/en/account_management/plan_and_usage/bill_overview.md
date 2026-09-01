@@ -111,6 +111,10 @@ Click {{< ui >}}View Details{{< /ui >}} on a Trends card or click any row in the
 
 ### Download billable hosts as CSV
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-warning">Downloading billable hosts as a CSV is not yet available for this site.</div>
+{{< /site-region >}}
+
 Download a CSV of the individual hosts that make up your billable Infra Hosts total for a given month. Use it to reconcile the total shown on the Bill Overview page, find the hosts driving the largest share of your count, attribute usage to teams by tag, or compare months to spot unexpected changes.
 
 To export the list:

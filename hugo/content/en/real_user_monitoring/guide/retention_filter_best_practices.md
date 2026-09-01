@@ -99,7 +99,9 @@ A fallback filter at the bottom of your list captures a small percentage of sess
 
 ### Excluding sessions
 
-See [Excluding sessions using retention filters][3].
+To keep a single filter from matching a subset of events, add the exclusion inside that filter's query. See [Excluding sessions using retention filters][3].
+
+To exclude events across all of your custom retention filters at once, without repeating the same exclusion in every query, use [exclusion filters][4] instead.
 
 ## Suggested retention filters and use cases
 Below we describe the set of default filters, suggested filters, and their typical use cases.
@@ -117,7 +119,7 @@ Below we describe the set of default filters, suggested filters, and their typic
 | Session with user attributes | `@type:session user.tier:paid` | Use user information from a session to create a filter. For example, you can retain sessions for all your paid tier users. | 100% |
 | Sessions with a specific user | `@type:session user.id:XXXXX` | This filter can target sessions from specific users, such as a production test account or an executive who regularly tests the application. | 100% |
 | Sessions with a specific action | `@type:action @action.name:XXXXX` | You can retain all sessions with a specific action that the SDK automatically tracks out-of-the-box or a custom action that you instrumented in your code. | 100% |
-| Sessions with a specific duration | `@session.view_count > 3 OR @session.duration  > 15000000000` | If you notice many short sessions, like a user viewing a page for 10 seconds without further action or errors, they are typically not useful. You can use a duration retention filter to reduce these sessions. **Note**: Enter the duration value as a number in nanoseconds - do not include any units (for example, use `15000000000` for 15 seconds). | Variable |
+| Sessions with a specific duration | `@session.view.count :> 3 OR @session.time_spent :> 15000000000` | If you notice many short sessions, like a user viewing a page for 10 seconds without further action or errors, they are typically not useful. You can use a duration retention filter to reduce these sessions. **Note**: Enter the duration value as a number in nanoseconds - do not include any units (for example, use `15000000000` for 15 seconds). | Variable |
 | Sessions with a network error 4XX and 5XX | `@type:resource @resource.status_code:>=400` | Frontend applications often encounter issues with downstream services returning 4XX or 5XX status codes. Using this filter, you can capture all sessions with resource calls that result in error codes. | 100% |
 
 
@@ -126,5 +128,6 @@ Below we describe the set of default filters, suggested filters, and their typic
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/
-[2]: /real_user_monitoring/rum_without_limits/retention_filters/#logic
-[3]: /real_user_monitoring/rum_without_limits/retention_filters#excluding-sessions-using-retention-filters
+[2]: /real_user_monitoring/rum_without_limits/retention_filters/#how-it-works
+[3]: /real_user_monitoring/rum_without_limits/retention_filters#excluding-events-with-a-filter-query
+[4]: /real_user_monitoring/rum_without_limits/retention_filters#exclusion-filters

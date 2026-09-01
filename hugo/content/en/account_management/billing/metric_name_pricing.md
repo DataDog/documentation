@@ -13,6 +13,9 @@ further_reading:
 - link: "/metrics/guide/custom_metrics_governance/"
   tag: "Guide"
   text: "Best practices for custom metrics governance"
+- link: "https://www.datadoghq.com/blog/infinite-cardinality-metrics/"
+  tag: "Blog"
+  text: "Infinite Cardinality Metrics: Custom metrics built for modern systems"
 algolia:
   tags: ['custom metrics billing', 'metric name pricing']
 ---
@@ -39,7 +42,7 @@ These SKUs are mutually incompatible with the Timeseries (cardinality) pricing S
 
 ## Pricing structure
 
-Both metric names and indexed datapoints are priced with marginal, volume-based discounting across 15 tiers. Higher-volume tiers have lower per-unit rates. As your usage increases, the portion that crosses into each higher tier is billed at that tier's rate. Previously billed usage is never repriced.
+Both metric names and indexed datapoints are priced with marginal, volume-based discounting across 5 tiers. Higher-volume tiers have lower per-unit rates. As your usage increases, the portion that crosses into each higher tier is billed at that tier's rate. Previously billed usage is never repriced.
 
 {{< img src="account_management/billing/metric_name_pricing/marginal-pricing-tiers.png" alt="Diagram illustrating how marginal pricing works, simplified to five volume tiers. Each tier has a per-unit rate, visualized as a bar height; higher-volume tiers (right side) have progressively shorter bars, indicating lower per-unit rates than lower-volume tiers (left side)." style="width:100%;" >}}
 
@@ -114,7 +117,7 @@ A Distribution metric that submits 100 datapoints with default aggregations is b
 
 You can commit to a usage volume independently for metric names and for datapoints. Each commitment is priced at the marginal pricing tier the committed volume falls into. The full committed volume is billed at that tier's rate, and marginal discounting does not apply within the committed range. Usage above the committed amount follows the standard marginal schedule, starting at the tier boundary immediately above the committed volume.
 
-For example, if you commit to 15,000 metric names that fall within Tier 6, all 15,000 are billed at the Tier 6 rate. If your actual usage reaches 75,000 metric names, the additional 60,000 follow the marginal schedule from Tier 6 through Tier 8.
+For example, if you commit to 15,000 metric names that fall within Tier 3, all 15,000 are billed at the Tier 3 rate. If your actual usage reaches 150,000 metric names, the additional 135,000 follow the marginal schedule from Tier 3 through Tier 4.
 
 ## Usage Attribution
 
