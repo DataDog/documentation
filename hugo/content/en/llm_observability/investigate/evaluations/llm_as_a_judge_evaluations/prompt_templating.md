@@ -2,15 +2,16 @@
 title: Prompt Templating
 aliases:
 - /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/prompt_templating/
+- /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/prompt_templating/
 description: Reference for the templating used in custom LLM-as-a-judge evaluation prompts—variables, array operators, span and trace filters, session paths, and resolution rules.
 further_reading:
-- link: "/llm_observability/configure/evaluations/llm_as_a_judge_evaluations"
+- link: "/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations"
   tag: "Documentation"
   text: "Custom LLM-as-a-Judge Evaluations"
-- link: "/llm_observability/configure/evaluations/llm_as_a_judge_evaluations/session_level_evaluations"
+- link: "/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/session_level_evaluations"
   tag: "Documentation"
   text: "Session-Level Evaluations"
-- link: "/llm_observability/configure/evaluations/llm_as_a_judge_evaluations/trace_level_evaluations"
+- link: "/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/trace_level_evaluations"
   tag: "Documentation"
   text: "Trace-Level Evaluations"
 ---
@@ -182,5 +183,5 @@ For example, given a span where `meta.input.messages` is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/instrument/sdk/#tracking-user-sessions
-[2]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/session_level_evaluations
-[3]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/trace_level_evaluations
+[2]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/session_level_evaluations
+[3]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/trace_level_evaluations

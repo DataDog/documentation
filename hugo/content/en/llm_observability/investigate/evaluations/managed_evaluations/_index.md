@@ -15,6 +15,7 @@ aliases:
     - /llm_observability/evaluations/ootb_evaluations
     - /llm_observability/configure/evaluations/ootb_evaluations
     - /llm_observability/evaluations/managed_evaluations/
+    - /llm_observability/configure/evaluations/managed_evaluations/
 ---
 
 ## Overview
@@ -48,6 +49,6 @@ After you click {{< ui >}}Save and Publish{{< /ui >}}, the evaluation goes live.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/llm/evaluations
-[2]: /llm_observability/configure/evaluations/compatibility
-[3]: /llm_observability/configure/evaluations/managed_evaluations/quality_evaluations#language-mismatch
-[4]: /llm_observability/configure/evaluations/managed_evaluations/security_and_safety_evaluations#sensitive-data-scanning
+[2]: /llm_observability/investigate/evaluations/compatibility
+[3]: /llm_observability/investigate/evaluations/language_mismatch
+[4]: /llm_observability/investigate/evaluations/managed_evaluations/security_and_safety_evaluations

@@ -12,6 +12,7 @@ aliases:
     - /llm_observability/evaluations/sensitive_data_scanner
     - /llm_observability/configure/evaluations/sensitive_data_scanner
     - /llm_observability/evaluations/managed_evaluations/security_and_safety_evaluations/
+    - /llm_observability/configure/evaluations/managed_evaluations/security_and_safety_evaluations/
 ---
 
 This check ensures that sensitive information is handled appropriately and securely, reducing the risk of data breaches or unauthorized access.

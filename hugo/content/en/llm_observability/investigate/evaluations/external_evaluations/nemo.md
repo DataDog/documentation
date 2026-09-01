@@ -4,8 +4,9 @@ description: Learn how to submit NVIDIA NeMo Evaluator model evaluation scores t
 aliases:
  - /llm_observability/submit_nemo_evaluations/
  - /llm_observability/evaluations/submit_nemo_evaluations/
+ - /llm_observability/configure/evaluations/external_evaluations/nemo/
 further_reading:
-- link: "/llm_observability/configure/evaluations/external_evaluations"
+- link: "/llm_observability/investigate/evaluations/external_evaluations"
   tag: "Documentation"
   text: "Submit Evaluations"
 ---

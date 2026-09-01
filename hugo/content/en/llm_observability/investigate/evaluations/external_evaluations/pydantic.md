@@ -2,9 +2,10 @@
 title: Pydantic Evaluations
 aliases:
 - /llm_observability/evaluations/pydantic_evaluations/
+- /llm_observability/configure/evaluations/external_evaluations/pydantic/
 description: Use Pydantic evaluations with Agent Observability Experiments.
 further_reading:
-- link: "/llm_observability/configure/evaluations/external_evaluations"
+- link: "/llm_observability/investigate/evaluations/external_evaluations"
   tag: "Documentation"
   text: "Submit Evaluations"
 ---

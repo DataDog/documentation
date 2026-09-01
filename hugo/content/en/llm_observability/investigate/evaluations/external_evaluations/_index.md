@@ -7,8 +7,9 @@ aliases:
     - /llm_observability/evaluations/submit_evaluations
     - /llm_observability/configure/evaluations/submit_evaluations
     - /llm_observability/evaluations/external_evaluations/
+    - /llm_observability/configure/evaluations/external_evaluations/
 further_reading:
-    - link: '/llm_observability/guide/evaluation_developer_guide'
+    - link: '/llm_observability/investigate/evaluations/evaluation_developer_guide'
       tag: 'Documentation'
       text: 'Learn about building custom evaluators'
     - link: '/llm_observability/setup/sdk'
@@ -17,10 +18,10 @@ further_reading:
     - link: '/llm_observability/setup/api'
       tag: 'Documentation'
       text: 'Learn about the Evaluations API'
-    - link: '/llm_observability/configure/evaluations/external_evaluations/nemo'
+    - link: '/llm_observability/investigate/evaluations/external_evaluations/nemo'
       tag: 'Documentation'
       text: 'Learn about submitting evaluations from NVIDIA NeMo'
-    - link: '/llm_observability/configure/evaluations/end_user_feedback'
+    - link: '/llm_observability/investigate/evaluations/end_user_feedback'
       tag: 'Documentation'
       text: 'Learn about submitting end-user feedback'
 ---
@@ -42,13 +43,13 @@ Evaluation labels must be unique for a given LLM application (<code>ml_app</code
 
 </div>
 
-<div class="alert alert-info">For feedback submitted by your users such as thumbs-up or thumbs-down ratings, accepted changes, free-text comments, and other signals, see <a href="/llm_observability/configure/evaluations/end_user_feedback/">End-User Feedback</a>.</div>
+<div class="alert alert-info">For feedback submitted by your users such as thumbs-up or thumbs-down ratings, accepted changes, free-text comments, and other signals, see <a href="/llm_observability/investigate/evaluations/end_user_feedback/">End-User Feedback</a>.</div>
 
 ## Submitting external evaluations with the SDK
 
 The Agent Observability SDK provides the methods `LLMObs.submit_evaluation()` and `LLMObs.export_span()` to help your traced LLM application submit external evaluations to Agent Observability. See the [Python][3] or [Node.js][4] SDK documentation for more details.
 
-<div class="alert alert-info">For building reusable, class-based evaluators with rich result metadata, see the <a href="/llm_observability/guide/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
+<div class="alert alert-info">For building reusable, class-based evaluators with rich result metadata, see the <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
 
 ### Example
 
@@ -122,9 +123,9 @@ To submit evaluations for <a href="/llm_observability/instrument/otel_instrument
 ## Supported evaluation frameworks
 
 {{< whatsnext desc="Submit evaluations from these tools:" >}}
-    {{< nextlink href="/llm_observability/configure/evaluations/external_evaluations/deepeval" >}}DeepEval Evaluations{{< /nextlink >}}
-    {{< nextlink href="/llm_observability/configure/evaluations/external_evaluations/pydantic" >}}Pydantic Evaluations{{< /nextlink >}}
-    {{< nextlink href="/llm_observability/configure/evaluations/external_evaluations/nemo" >}}NeMo Evaluations{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/investigate/evaluations/external_evaluations/deepeval" >}}DeepEval Evaluations{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/investigate/evaluations/external_evaluations/pydantic" >}}Pydantic Evaluations{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/investigate/evaluations/external_evaluations/nemo" >}}NeMo Evaluations{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading
@@ -135,4 +136,4 @@ To submit evaluations for <a href="/llm_observability/instrument/otel_instrument
 [2]: /llm_observability/setup/api/?tab=model#evaluations-api
 [3]: /llm_observability/setup/sdk/python/#evaluations
 [4]: /llm_observability/setup/sdk/nodejs/#evaluations
-[5]: /llm_observability/guide/evaluation_developer_guide
+[5]: /llm_observability/investigate/evaluations/evaluation_developer_guide

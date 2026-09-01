@@ -2,9 +2,10 @@
 title: Connect your LLM provider account
 aliases:
 - /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account/
+- /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/connect_to_account/
 description: How to connect to your LLM provider account to support judge LLM based evaluations
 further_reading:
-- link: "/llm_observability/configure/evaluations/llm_as_a_judge_evaluations"
+- link: "/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations"
   tag: "Documentation"
   text: "Learn about custom LLM-as-a-judge evaluations"
 ---
@@ -137,4 +138,3 @@ If your LLM provider restricts IP addresses, you can obtain the required IP rang
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 [2]: /api/latest/ip-ranges/
-

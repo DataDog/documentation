@@ -5669,16 +5669,56 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_patterns
       weight: 404
+    - name: Evaluations
+      url: llm_observability/investigate/evaluations/
+      parent: llm_obs_monitoring
+      identifier: llm_obs_evaluations
+      weight: 405
+    - name: Custom LLM-as-a-Judge
+      url: llm_observability/investigate/evaluations/llm_as_a_judge_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations
+      weight: 40501
+    - name: Language Mismatch
+      url: llm_observability/investigate/evaluations/language_mismatch
+      parent: llm_obs_evaluations
+      identifier: llm_obs_language_mismatch
+      weight: 40502
+    - name: Sensitive Data Scanner
+      url: llm_observability/investigate/evaluations/managed_evaluations/security_and_safety_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_sensitive_data_scanner
+      weight: 40503
+    - name: End-User Feedback
+      url: llm_observability/investigate/evaluations/end_user_feedback
+      parent: llm_obs_evaluations
+      identifier: llm_obs_end_user_feedback
+      weight: 40504
+    - name: External Evaluations
+      url: llm_observability/investigate/evaluations/external_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_external_evaluations
+      weight: 40505
+    - name: Evaluation Developer Guide
+      url: llm_observability/investigate/evaluations/evaluation_developer_guide
+      parent: llm_obs_evaluations
+      identifier: llm_obs_evaluation_developer_guide
+      weight: 40506
+    - name: Compatibility
+      url: llm_observability/investigate/evaluations/compatibility
+      parent: llm_obs_evaluations
+      identifier: llm_obs_evaluation_compatibility
+      weight: 40507
     - name: Annotation Queues
       url: llm_observability/investigate/annotation_queues
       parent: llm_obs_monitoring
       identifier: llm_obs_annotation_queues
-      weight: 405
+      weight: 406
     - name: Export API
       url: llm_observability/investigate/export_api
       parent: llm_obs_monitoring
       identifier: llm_obs_evaluations_export_api
-      weight: 406
+      weight: 407
     - name: Improve
       url: llm_observability/improve/
       parent: llm_obs
@@ -5729,51 +5769,16 @@ menu:
       parent: llm_obs
       identifier: llm_obs_configure
       weight: 6
-    - name: Evaluations
-      url: llm_observability/configure/evaluations/
-      parent: llm_obs_configure
-      identifier: llm_obs_evaluations
-      weight: 601
-    - name: Custom LLM-as-a-Judge
-      url: llm_observability/configure/evaluations/llm_as_a_judge_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations
-      weight: 60101
-    - name: Language Mismatch
-      url: llm_observability/configure/evaluations/language_mismatch
-      parent: llm_obs_evaluations
-      identifier: llm_obs_language_mismatch
-      weight: 60102
-    - name: Sensitive Data Scanner
-      url: llm_observability/configure/evaluations/managed_evaluations/security_and_safety_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_sensitive_data_scanner
-      weight: 60103
-    - name: End-User Feedback
-      url: llm_observability/configure/evaluations/end_user_feedback
-      parent: llm_obs_evaluations
-      identifier: llm_obs_end_user_feedback
-      weight: 60104
-    - name: Compatibility
-      url: llm_observability/configure/evaluations/compatibility
-      parent: llm_obs_evaluations
-      identifier: llm_obs_evaluation_compatibility
-      weight: 60106
-    - name: External Evaluations
-      url: llm_observability/configure/evaluations/external_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_external_evaluations
-      weight: 60107
     - name: Prompt Management
       url: llm_observability/configure/prompt_management
       parent: llm_obs_configure
       identifier: llm_obs_prompt_management
-      weight: 602
+      weight: 601
     - name: Automation Rules
       url: llm_observability/configure/automation_rules
       parent: llm_obs_configure
       identifier: llm_obs_monitoring_automation_rules
-      weight: 603
+      weight: 602
     - name: Data Privacy, Security, and RBAC
       url: llm_observability/data_privacy_security_and_rbac
       parent: llm_obs

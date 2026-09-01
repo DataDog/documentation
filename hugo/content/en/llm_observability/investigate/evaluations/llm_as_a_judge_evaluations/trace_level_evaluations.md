@@ -2,12 +2,13 @@
 title: Trace-Level Evaluations
 aliases:
 - /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations/
+- /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/trace_level_evaluations/
 description: Run a custom LLM-as-a-judge across an entire trace, with examples of when to use trace scope over span scope.
 further_reading:
-- link: "/llm_observability/configure/evaluations/llm_as_a_judge_evaluations"
+- link: "/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations"
   tag: "Documentation"
   text: "Custom LLM-as-a-Judge Evaluations"
-- link: "/llm_observability/configure/evaluations/llm_as_a_judge_evaluations/prompt_templating"
+- link: "/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/prompt_templating"
   tag: "Documentation"
   text: "Prompt Templating"
 - link: "/llm_observability/quickstart/terms/"
@@ -221,10 +222,10 @@ Configuring evaluations requires the `Agent Observability Write` [permission][4]
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/llm/evaluations
-[2]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations
-[3]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/prompt_templating
+[2]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations
+[3]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/prompt_templating
 [4]: /account_management/rbac/permissions/#llm-observability
-[5]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/#define-the-evaluation-output
+[5]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/#define-the-evaluation-output
 [6]: /events/explorer/facets/
 [7]: /monitors/
 [8]: /llm_observability/investigate/annotation_queues
