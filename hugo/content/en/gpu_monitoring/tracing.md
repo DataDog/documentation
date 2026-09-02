@@ -20,7 +20,7 @@ Continuous tracing with GPU Monitoring is in Early Access Preview.
 
 Continuous tracing with GPU Monitoring enables lightweight GPU activity tracing for selected Kubernetes workloads. Troubleshooting large, distributed workloads can be cumbersome and time-consuming. With this tracing capability in GPU Monitoring, you can quickly identify and dive into bottlenecks with detailed execution traces which directly tie CUDA, NCCL operations back to your actual model and Pytorch operations.
 
-[INSERT IMAGE HERE] 
+{{< img src="gpu_monitoring/gpu-tracing.png" alt="Flame graph view of a torch.step trace, showing CPU spans aligned with GPU stream activity, including NCCL allgather operations and CUDA kernel launches." style="width:100%;" >}}
 
 ## Setup
 ### Prerequisites
@@ -89,10 +89,6 @@ Run the workload, then query [APM Trace Explorer][2] with:
 ```
 pod_name:<NEW_GPU_POD> kube_namespace:<GPU_WORKLOAD_NAMESPACE>
 ```
-
-Open a trace to see the flame graph, which correlates CPU spans with GPU stream activity, such as CUDA kernels and NCCL collective operations:
-
-{{< img src="gpu_monitoring/gpu-tracing.png" alt="Flame graph view of a torch.step trace, showing CPU spans aligned with GPU stream activity, including NCCL allgather operations and CUDA kernel launches." style="width:100%;" >}}
 
 ## Further Reading
 
