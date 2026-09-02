@@ -22,8 +22,8 @@ Before you begin, make sure you:
 - Have Datadog API and application keys for authentication.<br>**Note**: The API key must be [enabled for Remote Configuration][1].
 - If you are going to use Terraform:
   - Have the latest version of Terraform installed on your machine.
-  - Reviewed the [Datadog's Terraform Provider][2] and [Observability Pipelines resource][3].
-- If you are going to use the API, reviewed the [Observability Pipelines API][4] endpoint specifications and additional configuration parameters.
+  - Reviewed the [Datadog Terraform provider][2] and [Observability Pipelines resource][3].
+- If you are going to use the API, review the [Observability Pipelines API][4] endpoint specifications and additional configuration parameters.
 
 ## Manage pipelines with the API
 
@@ -221,7 +221,9 @@ terraform apply
 - `terraform apply` applies the changes, which creates or updates your pipeline accordingly.
 
 After you deploy the configuration, [install the Worker][10] to send data through the pipeline. A pipeline doesn't process data until at least one Worker is running for it.
+
 **Note**: You cannot delete an active pipeline. Stop all Workers for the pipeline before you remove its resource block. See [Delete a pipeline][11] for more information.
+
 
 ## Further reading
 
