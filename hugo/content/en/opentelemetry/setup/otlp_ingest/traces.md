@@ -170,9 +170,10 @@ Configure the [recommended OpenTelemetry Collector setup][10] to export traces t
 
 ### Error: 403 Forbidden
 
-If you receive a `403 Forbidden` error when sending traces to the Datadog OTLP traces intake endpoint, the endpoint URL may be incorrect for your organization.
+If you receive a `403 Forbidden` error when sending traces to the Datadog OTLP traces intake endpoint, it indicates one potential issue:
 
-**Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_trace_endpoint" code="true" >}} endpoint.
+- The endpoint URL is incorrect for your organization.  
+   **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_trace_endpoint" code="true" >}} endpoint.
 
 ### Error: 413 Request Entity Too Large
 
