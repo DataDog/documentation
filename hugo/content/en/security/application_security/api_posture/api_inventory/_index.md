@@ -7,6 +7,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"
   tag: "Blog"
   text: "Mitigate the primary API security risks"
+- link: "https://www.datadoghq.com/blog/improve-api-authentication-detection-with-datadog/"
+  tag: "Blog"
+  text: "Improve API authentication detection with Datadog"
 ---
 
 {{< site-region region="gov" >}}

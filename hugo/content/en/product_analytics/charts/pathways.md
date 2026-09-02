@@ -1,5 +1,5 @@
 ---
-title: Pathways Diagrams
+title: Pathways
 aliases:
 - /real_user_monitoring/product_analytics/sankey
 - /product_analytics/sankey

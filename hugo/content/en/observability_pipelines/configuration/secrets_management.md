@@ -28,7 +28,7 @@ The Observability Pipelines Worker helps you securely manage your secrets by int
 
 ## Configure the Worker to retrieve secrets
 
-{{% collapse-content title="AWS Secrets Manager" level="h4" expanded=false id="aws-secrets-manager" %}}
+{{% collapse-content title="AWS Secrets Manager" level="h3" expanded=false id="aws-secrets-manager" %}}
 
 #### Set up an AWS instance profile
 
@@ -41,7 +41,7 @@ Datadog recommends using the [instance profile method][1] of retrieving secrets 
 After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets using AWS Secrets Manager:
 
 ```yaml
-backend_type: aws.secrets
+backend_type: aws
 backend_config:
   aws_session:
     aws_region: <region_name>
@@ -58,7 +58,7 @@ Before you [install the Worker][1], add the bootstrap configuration to the [`dat
 bootstrap:
   config:
     secret:
-      backend_type: aws.secrets
+      backend_type: aws
       backend_config:
         aws_session:
           aws_region: <region_name>
@@ -86,7 +86,7 @@ In most cases, you need to specify `aws_region` to correspond to the region host
 When handling single strings, the backend configuration setting `force_string: true` coerces the secret as a string value.
 
 {{% /collapse-content %}}
-{{% collapse-content title="AWS Systems Manager" level="h4" expanded=false id="aws-systems-manager" %}}
+{{% collapse-content title="AWS Systems Manager" level="h3" expanded=false id="aws-systems-manager" %}}
 
 #### Set up an AWS instance profile
 
@@ -130,7 +130,7 @@ bootstrap:
 {{< /tabs >}}
 
 {{% /collapse-content %}}
-{{% collapse-content title="Azure Key Vault" level="h4" expanded=false id="azure-key-vault" %}}
+{{% collapse-content title="Azure Key Vault" level="h3" expanded=false id="azure-key-vault" %}}
 
 #### Set up Azure authentication
 
@@ -147,7 +147,7 @@ To access your Key Vault, create a Managed Identity and assign it to your VM. Th
 After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets using Azure Key Vault:
 
 ```yaml
-backend_type: azure.keyvault
+backend_type: azure
 backend_config:
   keyvaulturl: <key_vault_url>
 ```
@@ -163,7 +163,7 @@ Before you [install the Worker][1], add the bootstrap configuration to the [`dat
 bootstrap:
   config:
     secret:
-      backend_type: azure.keyvault
+      backend_type: azure
       backend_config:
         keyvaulturl: <key_vault_url>
 ```
@@ -175,7 +175,7 @@ bootstrap:
 {{< /tabs >}}
 
 {{% /collapse-content %}}
-{{% collapse-content title="HashiCorp Vault" level="h4" expanded=false id="hashicorp-vault" %}}
+{{% collapse-content title="HashiCorp Vault" level="h3" expanded=false id="hashicorp-vault" %}}
 
 #### Set up HashiCorp Vault
 
@@ -257,7 +257,7 @@ bootstrap:
 {{< /tabs >}}
 
 {{% /collapse-content %}}
-{{% collapse-content title="JSON File" level="h4" expanded=false id="json-file" %}}
+{{% collapse-content title="JSON File" level="h3" expanded=false id="json-file" %}}
 
 #### File permissions required
 
@@ -308,7 +308,7 @@ bootstrap:
 {{< /tabs >}}
 
 {{% /collapse-content %}}
-{{% collapse-content title="YAML File" level="h4" expanded=false id="yaml-file" %}}
+{{% collapse-content title="YAML File" level="h3" expanded=false id="yaml-file" %}}
 
 #### File permissions required
 

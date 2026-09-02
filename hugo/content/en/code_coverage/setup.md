@@ -446,7 +446,7 @@ test:
 The command recursively searches the specified directories for supported coverage report files, so specifying the current directory (`.`) is usually sufficient.
 See the [`datadog-ci` documentation][14] for more details on the `datadog-ci coverage upload` command.
 
-Shortly after the code coverage report upload is finished, Datadog adds a PR comment with code coverage percentage values.
+Shortly after the code coverage report upload is finished, Datadog adds a PR comment with code coverage percentage values. To add a per-file breakdown of total and patch coverage to the comment, see [PR Comments][21].
 You can also view your coverage data aggregated by pull request in the [Code Coverage page][15] in Datadog, with the ability to examine individual files and lines of code.
 
 {{< img src="/code_coverage/pr_details.png" text="Code Coverage PR details page in Datadog" style="width:100%" >}}
@@ -555,3 +555,4 @@ For a description of how reports are merged and how each line status is counted,
 [18]: /code_coverage/setup/#integrate-with-source-code-provider
 [19]: https://app.datadoghq.com/organization-settings/data-access-controls
 [20]: /code_coverage/coverage_calculation
+[21]: /code_coverage/configuration#pr-comments

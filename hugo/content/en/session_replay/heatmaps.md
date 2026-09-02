@@ -172,12 +172,35 @@ To remove the currently saved screenshot and revert to an auto-picked one from a
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-unpin-screenshot-1.png" alt="Click unpin to remove the currently pinned screenshot." style="width:100%;">}}
 
+### Analyzing heatmaps beyond replay retention
+
+In Product Analytics, click data outlives the Session Replay used as a background. See [Data retention](#data-retention). To view a heatmap for a period older than your replay retention:
+
+1. Set the date range to a period within the last 30 days, so a heatmap renders with a background from a recent replay.
+1. Click {{< ui >}}Save{{< /ui >}} on the current screenshot to pin it.
+1. Set the date range back to the period you want to analyze.
+
+Your older click data appears on the pinned screenshot. You can also use {{< ui >}}Take new screenshot{{< /ui >}} to capture a specific state from your live application.
+
+**Note**: The background reflects your application as it looked recently, not as it looked during the period you are analyzing. If your page layout changed in between, clicks can appear over the wrong elements.
+
 ## Data retention
 
-The time periods you can view in a heatmap depend on where you access it:
+A heatmap combines two pieces of data (the **overlay** - clicks and scrolls, and the **background screenshot**), and Datadog retains each for a different period:
 
-- **RUM**: Session Replay heatmaps use RUM click data (RUM action events), which has a 30-day retention period.
-- **Product Analytics**: Heatmaps use Product Analytics click data, which has a 15-month retention period.
+| Data | Source | Retention |
+| ---- | ------ | --------- |
+| **Overlay** (clicks and scrolls) in RUM | RUM action events | 30 days |
+| **Overlay** (clicks and scrolls) in Product Analytics | Product Analytics click data | 15 months |
+| **Background screenshot** in both | Session Replay | 30 days by default |
+
+A heatmap needs both to render. If you select a time frame where click data still exists but no replay remains to use as a background, the heatmap shows "No Replay Data" even though you can still query those actions in the Analytics Explorer.
+
+In Product Analytics, if you expect to analyze a view over a period longer than 30 days, save a screenshot for it while replays are still available. Saving a screenshot extends the retention of the replay behind it to 15 months, so the heatmap keeps rendering for as long as Datadog retains your Product Analytics click data. See [Analyzing heatmaps beyond replay retention](#analyzing-heatmaps-beyond-replay-retention).
+
+In RUM, action events expire after 30 days, so heatmaps are not available beyond that window.
+
+For the retention periods that apply to other data types, see [Data retention periods][7]. To extend retention on individual replays, see [Extend data retention][8].
 
 ## Next steps
 
@@ -203,7 +226,11 @@ The tooltip on the icon says element is not visible. This means that the element
 
 ### After attempting to create a heatmap, I see a "No Replay Data" state appear.
 
-The "No Replay Data" state means that Datadog could not find any Session Replays to use as a heatmap background that matches the current search filters. If you just started to record sessions with the [Browser SDK][2], it may also take a few minutes for the Session Replay to be available for viewing.
+The "No Replay Data" state means that Datadog could not find any Session Replay to use as a heatmap background. Common causes:
+
+- Your selected time frame is older than your Session Replay retention, which is 30 days by default. Click data can still exist, but no replay remains to use as a background. See [Analyzing heatmaps beyond replay retention](#analyzing-heatmaps-beyond-replay-retention).
+- No replay matches your current search filters.
+- You recently started recording with the [Browser SDK][2], and the replay is not yet available. This can take a few minutes.
 
 ### After attempting to create a heatmap, I see a "Not enough data to generate a heatmap" state appear.
 
@@ -225,3 +252,5 @@ User information is not collected by default. Heatmaps use the user information 
 [4]: /product_analytics/charts/analytics_explorer/
 [5]: /session_replay/privacy_options?platform=browser#privacy-options
 [6]: https://chromewebstore.google.com/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[7]: /data_security/data_retention_periods/
+[8]: /session_replay/#extend-data-retention
