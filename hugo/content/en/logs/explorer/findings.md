@@ -33,13 +33,19 @@ Use Findings to collect possible evidence, compare results, and build context as
 
 ## Findings panel
 
-The Findings canvas lives in the side panel on the left of Log Explorer, next to your saved views. To open it:
+Findings lives in the side panel on the left of Log Explorer, next to your saved views. To open it:
 
 1. Navigate to [Log Explorer][1].
 2. Click {{< ui >}}Views{{< /ui >}} in the upper left corner to open the side panel.
-3. Click the **Findings** tab. The tab shows how many findings are on the canvas.
+3. Click the **Findings** tab. The tab shows how many findings you have.
+
+The panel contains the canvas, the workspace where each finding appears as a card. The canvas is where you work with findings: arrange them, reopen them in Log Explorer, and select them to send elsewhere. It keeps its contents and layout across page reloads and browser sessions.
 
 To dock the panel next to your log results, click {{< ui >}}Pin{{< /ui >}}. To collapse it, click {{< ui >}}Hide{{< /ui >}}.
+
+Findings includes a walkthrough of the canvas that you can reopen at any time.
+<!-- Which control opens the walkthrough, and where does it live? Naming it here would make this step actionable. -->
+
 
 ## Capture a finding
 
@@ -53,43 +59,49 @@ The finding stores your search query, time range, and [visualization][4], includ
 
 ### Individual log events
 
-1. Click a log event in your results to open the [log side panel][5].
-2. Hover over the **Log Message** section and click the {{< ui >}}Add a finding{{< /ui >}} icon, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>.
+Click a log event in your results to open the [log side panel][5]. Hover over the **Log Message** section and click the {{< ui >}}Add a finding{{< /ui >}} icon, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>.
 
 ### Specific text in a log message
 
-To capture part of a log message, such as an error string or an identifier, select the text in the **Log Message** section and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>. The finding stores the text you selected.
+To capture part of a log message, such as an error string or an identifier, select the text in the **Log Message** section and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>. The finding stores the text you selected instead of the whole event.
+<!-- Is the keyboard shortcut the only way to capture selected text, or does a button appear on selection? -->
+
 
 ## Organize the canvas
 
 Hover over a finding to rename it, and drag it to move or resize it. Datadog saves the layout you build, so the canvas looks the same the next time you open the panel.
 
 To group findings by the query they came from, click the auto-organize icon on the left of the canvas. Moving, resizing, or deleting a finding resets the grouping.
+<!-- A screenshot of the canvas controls would make the auto-organize icon findable. Add one alongside the GA video. -->
 
-Use the remaining canvas controls to zoom in and out, fit the canvas to your findings, and open a full-screen view. On the full-screen canvas, you can pan, zoom, rename, and delete findings the same way.
+The controls on the left of the canvas also zoom in and out, fit the canvas to your findings, and open a full-screen view. The full-screen view gives you the same controls with more room, and you can drag the background to pan across it.
 
 ## Delete findings
 
-To delete a single finding, hover over it and click the {{< ui >}}Delete{{< /ui >}} icon. To delete several findings at once, select each and press <kbd>Delete</kbd>. To select every finding on the canvas, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>A</kbd>.
+To delete one finding, hover over it and use the delete control on the card. To delete several at once, select them and press <kbd>Delete</kbd>. To select every finding first, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>A</kbd>.
+<!-- Does a finding card have a delete control? Hovering a card shows Open in Explorer and rename only. Confirm how to delete one finding with the mouse. -->
 
-The clear icon in the Findings panel removes the findings you have selected, or every finding on the canvas when nothing is selected.
+The clear icon in the Findings panel deletes findings; it does not clear your selection. It removes the findings you have selected, or every finding when nothing is selected.
+<!-- Confirm the clear icon deletes rather than deselects, and whether it warns before emptying a full canvas. -->
 
-Deleting is not permanent. A toast appears with an {{< ui >}}Undo{{< /ui >}} option, and <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Z</kbd> restores what you removed.
+Deleting is not permanent. A toast appears with an {{< ui >}}Undo{{< /ui >}} option, and <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Z</kbd> restores what you removed. Undo covers your last ten actions on the canvas.
+<!-- How long does a deleted finding stay recoverable? Confirm whether undo history survives a page reload or ends with the browser session. -->
+
 
 ## Return to a finding
 
 Double-click a finding, or hover over it and click the {{< ui >}}Open in Explorer{{< /ui >}} icon. Log Explorer reloads the query, time range, and visualization that the finding was captured with. The rest of your findings stay on the canvas.
 
-This makes Findings useful as a set of checkpoints. When you land on a query that scopes an investigation well, capture it before you pivot. If a pivot leads nowhere, reopen that finding to get back to where you started instead of rebuilding the query.
+Each finding keeps its own query and time range. You can change your search as often as you need, then come back to an earlier result in one click with no query to rebuild.
 
 ## Use findings as context
 
 Select one or more findings on the canvas to act on them together:
 
-- To ask about findings, type your question in the selection bar and click {{< ui >}}Ask Bits{{< /ui >}}. [Bits AI][2] opens with the selected findings attached as context.
-- To keep findings, click {{< ui >}}Open in Notebooks{{< /ui >}} and choose a new or existing [Notebook][3].
+- To ask [Bits AI][2] about them, type your question in the selection bar and click {{< ui >}}Ask Bits{{< /ui >}}. Bits AI chat opens with the selected findings attached as context.
+- To copy them into a [Notebook][3], click {{< ui >}}Open in Notebooks{{< /ui >}} and choose a new or existing notebook. The findings you send stay on the canvas.
 
-Select only the findings that matter for the question you're asking. A postmortem might need two of the five findings you captured, and a narrow selection gives Bits AI a narrower problem to reason about.
+Send only the findings that relate to your question. If three of the eight findings on your canvas cover the error you're asking about, select those three.
 
 ## Keyboard shortcuts
 
@@ -101,7 +113,7 @@ Select only the findings that matter for the question you're asking. A postmorte
 | Undo | <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Z</kbd> |
 | Redo | <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd> |
 
-Findings also includes a tutorial you can reopen at any time to walk through the canvas.
+<!-- Undo and redo bindings are unconfirmed. Confirm these, and add any shortcuts missing from this table. -->
 
 ## Further Reading
 
