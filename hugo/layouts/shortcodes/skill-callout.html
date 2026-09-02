@@ -26,7 +26,7 @@ surrounding heading and prose.
 {{- if not $command -}}
     {{- errorf "skill-callout: needs the install command as inner content (called from %s)" .Page.File.Path -}}
 {{- end -}}
-<div class="skill-callout">
+<div class="plaintext-section skill-callout">
     {{- with .Get "title" }}
     <p class="skill-callout__title">{{ . }}</p>
     {{- end }}
