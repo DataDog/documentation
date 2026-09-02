@@ -11,7 +11,7 @@ further_reading:
   text: "Learn how long Agent Observability retains your data"
 ---
 
-[Agent Observability][1] is metered and billed on the number of LLM spans ingested. An LLM span represents a single request to an LLM provider, such as OpenAI or Anthropic. One agent workflow can make several LLM requests, and each request produces its own LLM span. Datadog bills only on LLM spans, not on the surrounding workflow, tool, and retrieval spans in the same trace.
+[Agent Observability][1] is metered and billed on the number of LLM spans ingested, at the rates below.
 
 | Billing Parameter            | Price                                       | Included                                                                                                  | Billing                                                                                                                                                        |
 |------------------------------|---------------------------------------------|-----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -19,7 +19,7 @@ further_reading:
 | LLM spans, first 100,000     | $240 per month                              | All indexed LLM spans, [Experiments][3], and 1 GB of [Sensitive Data Scanner][10] usage per 10,000 LLM spans | Datadog counts the LLM spans ingested into the Agent Observability service during the calendar month. Exceeding 40,000 LLM spans moves the organization onto the paid plan. [More Agent Observability pricing information.][2] |
 | Additional LLM spans         | $5 per 10,000 LLM spans per month           | Same as above                                                                                             | Billed on LLM spans beyond the first 100,000 in the calendar month, in blocks of 10,000 spans.                                                                  |
 
-The rates above are on-demand rates. Committed monthly and annual plans offer lower rates, and enterprise pricing is custom. Contact [Sales][11] or your [Customer Success][12] Manager to discuss a commitment or volume discounts for your account.
+The rates above are on-demand rates. Committed monthly and annual plans offer lower rates, and enterprise pricing is custom.
 
 ## Billing scenarios
 
@@ -63,7 +63,7 @@ All Agent Observability features are included in the base price. Datadog charges
 
 You can connect your own [LLM provider account][15] for [Evaluations][13] and [Patterns][14].
 
-[Sensitive Data Scanner](#is-sensitive-data-scanner-included) is included within a usage allotment that scales with your LLM span usage.
+[Sensitive Data Scanner](#is-sensitive-data-scanner-included) is included within a usage allotment.
 
 ## How can I estimate my LLM span usage?
 
@@ -77,7 +77,7 @@ Each request your application makes to an LLM provider corresponds to one LLM sp
 | Vercel            | Requests by provider and model in the Vercel dashboard, or the `vercel.requests` metric                               |
 | Anthropic         | Request totals are not reported; use your own application metrics as a proxy                                          |
 
-Keep three things in mind when using provider request counts:
+Keep the following in mind when using provider request counts:
 
 - They are closer to an upper bound than an exact figure, because not every request is instrumented as an LLM span.
 - If you [sample][4] your traces, your billable spans are a fraction of your total requests.
@@ -91,7 +91,7 @@ In Datadog, go to [{{< ui >}}Plan & Usage{{< /ui >}}][7] and open the {{< ui >}}
 
 ## Does extending my data retention period affect billing?
 
-Yes. Longer retention is a paid add-on, because it increases how much data Datadog stores for you. Add-ons extend span retention to 30, 60, or 90 days, along with a correspondingly longer period for experiment traces. Add-ons are not available on the free tier. For the periods each add-on provides, see [Data Retention][8]. To add one, contact your Datadog account representative or [Datadog support][9].
+Yes. Longer retention is a paid add-on, because it increases how much data Datadog stores for you. Add-ons extend span retention to 30, 60, or 90 days, along with a correspondingly longer period for experiment traces. Add-ons are not available on the free tier. For the periods each add-on provides and how to request one, see [Data Retention][8].
 
 ## Is Agent Observability a standalone product?
 
@@ -100,8 +100,6 @@ Yes. Agent Observability does not require you to purchase any other Datadog prod
 ## Is Sensitive Data Scanner included?
 
 Yes. As with the other capabilities [included in the base price](#what-is-included-in-the-base-price), you do not purchase Sensitive Data Scanner separately. Agent Observability uses [Sensitive Data Scanner][10] Library Rules to identify and redact sensitive information in your LLM application traffic, including personal information, financial data, and health records.
-
-Sensitive Data Scanner differs from the others in having a usage allotment rather than being unmetered.
 
 Your Sensitive Data Scanner allotment scales with your LLM span usage: every 10,000 LLM spans includes 1 GB of Sensitive Data Scanner usage.
 

@@ -14,6 +14,9 @@ further_reading:
   - link: "/llm_observability/investigate/annotation_queues/"
     tag: "Documentation"
     text: "Review traces with annotation queues"
+  - link: "/data_security/data_retention_periods/"
+    tag: "Documentation"
+    text: "See default data retention periods across Datadog products"
 ---
 
 Retention periods in Agent Observability depend on the type of data and on your plan. Traces from your instrumented applications follow the span retention period in your plan, while experiment definitions, datasets, and prompts have their own periods.
@@ -23,7 +26,7 @@ Retention periods in Agent Observability depend on the type of data and on your 
 | Data                                         | Retention period                                                                          |
 | -------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | Traces and spans                             | 15 days; 30, 60, or 90 days with a retention add-on                                       |
-| Experiment traces                            | 15 days on on-demand plans; 90 days on committed plans; 6, 9, or 12 months with a retention add-on |
+| Experiment traces                            | On-demand plans: 15 days. Committed plans: 90 days. With a retention add-on: 6, 9, or 12 months    |
 | Experiment definitions and aggregate results | 90 days from creation                                                                     |
 | Annotated traces, spans, and sessions        | 90 days from the time of annotation, or your span retention period if that is longer      |
 | Annotation labels                            | 90 days, matching the object they annotate                                                |
@@ -37,11 +40,11 @@ Traces and spans from your instrumented applications are retained for **15 days*
 
 A retention add-on extends this to **30, 60, or 90 days**. See [Changing your retention period](#changing-your-retention-period).
 
-Retention applies to the raw spans you query in the Traces explorer. Metrics derived from those spans are retained separately, for longer. See [Metrics](#metrics).
+Retention applies to the raw spans you query in the Trace Explorer. Metrics derived from those spans are retained separately, for longer. See [Metrics](#metrics).
 
 ## Experiment traces
 
-Traces produced by [experiment][3] runs are retained longer than production traces on committed plans.
+On committed plans, the traces produced by [experiment][3] runs are retained longer than production traces.
 
 | Plan                                | Experiment trace retention |
 | ----------------------------------- | -------------------------- |
@@ -73,11 +76,11 @@ Annotating an object extends its retention. When you apply an annotation label o
 
 If your organization's span retention period is longer than 90 days, annotated objects are retained for that longer period instead.
 
-Annotation labels are retained for the same 90 days as the object they annotate, and are no longer viewable after it expires.
+Annotation labels are retained for the same 90 days as the object they annotate, and are no longer viewable after that object expires.
 
 Extending retention by annotating an object does not incur an additional charge.
 
-Free-form notes are not attached to a trace, span, or session, so no object's retention applies to them.
+A free-form note is not attached to a trace, span, or session, so adding one does not extend any object's retention.
 
 ## Dataset records
 
@@ -105,7 +108,7 @@ For the full list of available metrics, see [Agent Observability metrics][8].
 [4]: /llm_observability/improve/datasets/
 [5]: /llm_observability/improve/datasets/#dataset-versioning
 [6]: /metrics/
-[7]: /developers/guide/data-collection-resolution-retention/
+[7]: /data_security/data_retention_periods/
 [8]: /llm_observability/investigate/metrics/
 [9]: /llm_observability/configure/prompt_management/
 [10]: /account_management/billing/llm_observability/
