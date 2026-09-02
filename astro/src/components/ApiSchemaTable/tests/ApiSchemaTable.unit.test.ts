@@ -51,6 +51,68 @@ async function renderTable(props: { fields: SchemaField[]; showExpandAll?: boole
   return container.renderToString(ApiSchemaTable, { props });
 }
 
+describe('ApiSchemaTable type column', () => {
+  const unionField = (type: 'oneOf' | 'anyOf'): SchemaField[] => [
+    {
+      name: 'basicAuth',
+      type,
+      required: false,
+      deprecated: false,
+      readOnly: false,
+      description: 'Object to handle basic authentication.',
+      unionOptions: [
+        {
+          label: '<type=web>',
+          fields: [
+            {
+              name: 'password',
+              type: 'string',
+              required: true,
+              deprecated: false,
+              readOnly: false,
+              description: 'Password to use.',
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
+  it('renders a bare oneOf tag bracketed, as Hugo does', async () => {
+    const html = await renderTable({ fields: unionField('oneOf') });
+    expect(html).toContain('&lt;oneOf&gt;');
+    // the unbracketed tag must not reach the type cell
+    expect(html).not.toMatch(/schema-table__type[^>]*>\s*oneOf\s*</);
+  });
+
+  it('renders a bare anyOf tag bracketed', async () => {
+    const html = await renderTable({ fields: unionField('anyOf') });
+    expect(html).toContain('&lt;anyOf&gt;');
+  });
+
+  it('leaves an already-bracketed array item type alone', async () => {
+    const fields: SchemaField[] = [
+      {
+        name: 'processors',
+        type: '[<oneOf>]',
+        required: false,
+        deprecated: false,
+        readOnly: false,
+        description: 'Ordered list of processors.',
+      },
+    ];
+    const html = await renderTable({ fields });
+    expect(html).toContain('[&lt;oneOf&gt;]');
+    expect(html).not.toContain('[&lt;&lt;oneOf&gt;&gt;]');
+  });
+
+  it('leaves ordinary types untouched', async () => {
+    const html = await renderTable({ fields: flatFields });
+    expect(html).toMatch(/schema-table__type[^>]*>\s*string\s*</);
+    expect(html).toMatch(/schema-table__type[^>]*>\s*\[string\]\s*</);
+  });
+});
+
 describe('ApiSchemaTable expand-all toolbar', () => {
   it('omits the toolbar when no field has children or unionOptions', async () => {
     const html = await renderTable({ fields: flatFields });
