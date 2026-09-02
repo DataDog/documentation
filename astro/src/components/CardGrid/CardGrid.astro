@@ -10,12 +10,8 @@ const cl = classListFactory(styles);
 
 const { id, card_width, tooltipCardIds, tooltipLabelsByCardId } = Astro.props;
 
-// `--card-min-width` stays an inline style rather than a token: it is a
-// per-instance value the author sets, not a theme value.
-const gridStyle = `--card-min-width: ${card_width}px`;
+const gridStyle = `--card-grid-card-min-width: ${card_width}px`;
 
-// Hydrate only when a card actually needs a tooltip. Most grids have none, and
-// this keeps the tooltip code out of their client bundle entirely.
 const needsTooltips = tooltipCardIds.length > 0;
 ---
 

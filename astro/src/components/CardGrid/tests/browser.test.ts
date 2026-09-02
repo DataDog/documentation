@@ -134,6 +134,27 @@ test.describe("CardGrid component", () => {
     }
   });
 
+  test("applies card_width as the grid's minimum column width", async ({
+    page,
+  }) => {
+    // Section 7 sets card_width=225; every other grid uses the 150 default.
+    // Asserting the RENDERED width, not the inline style string, is what makes
+    // the --card-grid-card-min-width plumbing load-bearing: if the CSS read a
+    // different property name, the declaration would silently fall back to
+    // 150px and only a measured column would notice.
+    const wide = page.locator(".card-grid").nth(6);
+    const narrow = page.locator(".card-grid").nth(0);
+
+    const wideCard = await wide.locator(".image-card").first().boundingBox();
+    const narrowCard = await narrow.locator(".image-card").first().boundingBox();
+    if (!wideCard || !narrowCard) {
+      throw new Error("Expected a layout box for the first card of both grids.");
+    }
+
+    expect(wideCard.width).toBeGreaterThan(narrowCard.width);
+    expect(wideCard.width).toBeGreaterThanOrEqual(225);
+  });
+
   test("lets a card override the grid's image width", async ({ page }) => {
     // Section 6: grid sets 100; only the FIRST card sets 200. Asserting both
     // halves keeps this honest — a bug that ignored image_width entirely and
