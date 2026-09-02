@@ -10,37 +10,33 @@ further_reading:
 
 ## Overview
 
-For production deployments, configure the [memory limiter processor][3] to manage the OpenTelemetry Collector's memory use. Enable it in every pipeline and make it the first processor so that it can apply backpressure before other processors allocate memory.
+For production deployments, configure the [memory limiter processor][3] to limit the memory the OpenTelemetry Collector uses.
 
 The recommended OTLP HTTP exporter configuration handles batching in the exporter's sending queue. Do not add the batch processor to that configuration.
 
+For more information, see the OpenTelemetry project documentation for the [memory limiter processor][3].
+
 ## Setup
 
-The following example assumes that the Collector can use up to approximately 1 GiB of memory. Adjust `limit_mib` and `spike_limit_mib` for the memory available to your Collector. Set `limit_mib` below the process or container memory limit so the Collector has headroom before the operating system terminates it.
-
-Add the processor to your configuration:
+Add the processor to your Collector configuration:
 
 ```yaml
 processors:
   memory_limiter:
     check_interval: 1s
-    limit_mib: 800
-    spike_limit_mib: 200
+    limit_mib: 1000
 ```
 
-Then add `memory_limiter` as the first entry in the `processors` list for every pipeline in your environment's complete configuration. Retain the other processors already configured for that pipeline. Pipelines without a `processors` list, including `traces/sample` and `metrics/span_metrics` in the recommended setup, also need `processors: [memory_limiter]`.
+Add `memory_limiter` to the `processors` list for each pipeline in your configuration.
 
-For Kubernetes, also set a container memory limit above `limit_mib`. Update the `resources` block in the example Helm `values.yaml` file:
+For Kubernetes, set container resource limits in your Helm `values.yaml` file:
 
 ```yaml
 resources:
-  requests:
-    memory: 512Mi
   limits:
+    cpu: 512m
     memory: 1Gi
 ```
-
-Retain any other resource requests or limits required for your deployment.
 
 ## Data collected
 

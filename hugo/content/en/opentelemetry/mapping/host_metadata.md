@@ -9,6 +9,10 @@ further_reading:
   text: "OpenTelemetry Support in Datadog"
 ---
 
+<div class="alert alert-info">
+This feature is in Preview. If you have any feedback, contact <a href="/help/">Datadog support</a>.
+</div>
+
 ## Overview
 
 The recommended OpenTelemetry Collector configuration collects host metadata with the host metrics receiver and resource detection processor, then reports the Collector through the Datadog Extension. You can view these hosts in the [Infrastructure List][6]. For most deployments, such as running the Collector as an agent on each host, host information is populated automatically and you do not need to follow the manual configuration on this page.
