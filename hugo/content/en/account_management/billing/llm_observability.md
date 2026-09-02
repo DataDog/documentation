@@ -93,8 +93,6 @@ In Datadog, go to [{{< ui >}}Plan & Usage{{< /ui >}}][7] and open the {{< ui >}}
 
 Yes. Longer retention is a paid add-on, because it increases how much data Datadog stores for you. Add-ons extend span retention to 30, 60, or 90 days, along with a correspondingly longer period for experiment traces. Add-ons are not available on the free tier. For the periods each add-on provides, see [Data Retention][8]. To add one, contact your Datadog account representative or [Datadog support][9].
 
-Annotating a trace, span, or session also extends its retention to 90 days, and that extension is not billed.
-
 ## Is Agent Observability a standalone product?
 
 Yes. Agent Observability does not require you to purchase any other Datadog product.
