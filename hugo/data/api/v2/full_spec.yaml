@@ -66661,6 +66661,9 @@ components:
     MaintenanceDataAttributes:
       description: The attributes of a maintenance.
       properties:
+        canceled_description:
+          description: The description shown when the maintenance is canceled.
+          type: string
         completed_date:
           description: Timestamp of when the maintenance was completed.
           format: date-time
