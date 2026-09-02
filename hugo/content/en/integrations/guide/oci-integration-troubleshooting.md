@@ -78,6 +78,32 @@ Complete the following checks for each monitored region:
 3. If you use custom subnets, verify that they meet the [permissions][7] (detailed in the note after step 5).
 4. For each Datadog-created metric service connector hub, confirm that its function target is the `dd-metrics-forwarder` function in `dd-function-app`. Datadog-created metric connector hubs use the format `dd-metrics-connectorhub-<suffix>`. If a connector hub targets a different forwarding function application, delete it and allow it to be automatically reprovisioned.
 
+## OCI stack destroy issues
+
+If the destroy job fails or is unable to be run, clone the [OCI integration repository][11] and enter the repository directory. Then, use the [OCI integration cleanup script][10] to remove the remaining resources. Set the required variables, then review a dry run:
+
+```shell
+export OCI_PROFILE="<YOUR_OCI_PROFILE>"
+export COMPARTMENT_OCID="<YOUR_COMPARTMENT_OCID>"
+export TENANCY_OCID="<YOUR_TENANCY_OCID>"
+
+python3 oci-integration-cleanup/integration_cleanup.py \
+  --profile "$OCI_PROFILE" \
+  --compartment-ocid "$COMPARTMENT_OCID" \
+  --dry-run true
+```
+
+The dry run outputs the resources planned for deletion. If the output looks correct, execute the cleanup:
+
+```shell
+python3 oci-integration-cleanup/integration_cleanup.py \
+  --profile "$OCI_PROFILE" \
+  --compartment-ocid "$COMPARTMENT_OCID" \
+  --confirm-tenancy-id "$TENANCY_OCID" \
+  --region-workers <number of regions to be processed in parallel>
+  --dry-run false
+```
+
 ## Outdated integration version
 
 This occurs when your Datadog integration ORM stack or Terraform module is out of date. To remediate this, update your deployment to the latest version and reapply it. For instructions covering both QuickStart (ORM stack) and Terraform, see [Update the integration][8].
@@ -93,3 +119,5 @@ Still need help? Contact [Datadog support][3].
 [7]: https://docs.datadoghq.com/integrations/oracle-cloud-infrastructure/#deploy-the-quickstart-orm-stack
 [8]: /integrations/oracle-cloud-infrastructure/#update-the-integration
 [9]: https://app.datadoghq.com/organization-settings/application-keys
+[10]: https://github.com/DataDog/oracle-cloud-integration/tree/master/oci-integration-cleanup#readme
+[11]: https://github.com/DataDog/oracle-cloud-integration
