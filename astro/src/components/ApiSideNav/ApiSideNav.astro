@@ -5,7 +5,7 @@ import { classListFactory } from "@lib/cssUtils/classListFactory";
 import SearchBar, {
   type SearchBarLabels,
 } from "@components/SearchBar/SearchBar";
-import { DEFAULT_LOCALE, localizedHref, type Locale } from "@lib/i18n/locale";
+import { localizedHref, resolveLocale } from "@lib/i18n/locale";
 import { i18n } from "@lib/i18n/i18n";
 import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
 import type { OverviewPage } from "@lib/api/overviewPages";
@@ -17,7 +17,6 @@ interface Props {
   overviewPages?: OverviewPage[];
   isOverviewSection?: boolean;
   activeOverviewPageSlug?: string;
-  lang?: Locale;
 }
 
 const {
@@ -27,8 +26,8 @@ const {
   overviewPages = [],
   isOverviewSection = false,
   activeOverviewPageSlug,
-  lang = DEFAULT_LOCALE,
 } = Astro.props;
+const lang = resolveLocale(Astro.currentLocale);
 const cl = classListFactory(styles);
 
 const overviewLabel = i18n("overview", lang);

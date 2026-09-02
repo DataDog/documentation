@@ -26,6 +26,20 @@ export function isLocale(value: unknown): value is Locale {
 }
 
 /**
+ * Narrow `Astro.currentLocale` to our `Locale` union.
+ *
+ * Astro derives `currentLocale` from the URL using the `i18n` block in
+ * `astro.config.mjs`, so components never have to compute or receive the page
+ * language. It is typed `string | undefined` and is `undefined` only when the
+ * render context has no i18n manifest — which never happens in a real build or
+ * SSR request, but does happen in `AstroContainer` unit tests, where the
+ * container builds a bare manifest. Those fall back to English.
+ */
+export function resolveLocale(value: string | undefined): Locale {
+  return isLocale(value) ? value : DEFAULT_LOCALE;
+}
+
+/**
  * Parse the `[...lang]` rest param. Returns the validated locale, or
  * `undefined` if the segment is not a recognized non-default locale. The
  * caller is expected to 404 on `undefined` (since the English page lives at

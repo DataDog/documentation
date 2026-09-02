@@ -16,7 +16,6 @@ import CdocsFilterBar from '@components/CdocsFilterBar/CdocsFilterBar';
 import CopyPageButtonIsland from '@components/CopyPageButton/CopyPageButtonIsland.astro';
 import { resolveCdocRender } from '@lib/cdocs/resolveCdocRender';
 import { COOKIE_NAME } from '@lib/cdocs/cookiePrefs';
-import { DEFAULT_LOCALE } from '@lib/i18n/locale';
 
 // `[...slug]` yields the full path with no leading/trailing slash, which is
 // exactly an `en` entry id (path under content/en, without the extension).
@@ -92,7 +91,7 @@ const plaintextHref = `${Astro.url.pathname.replace(/\/$/, '')}.md${Astro.url.se
       </div>
     </main>
     <nav class="cdoc-rightnav">
-      <CopyPageButtonIsland lang={DEFAULT_LOCALE} />
+      <CopyPageButtonIsland />
       {/* TODO: temporary testing link to the plaintext (.md) version. Only
           filterable docs currently have a working `.md` twin. */}
       {isFilterable && (

@@ -7,6 +7,7 @@ import styles from "./ApiCodeExample.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { generateElementId } from "@lib/componentUtils/generateElementId";
 import { i18n } from "@lib/i18n/i18n";
+import { resolveLocale } from "@lib/i18n/locale";
 
 const cl = classListFactory(styles);
 
@@ -29,6 +30,7 @@ interface Props {
 }
 
 const { examples } = Astro.props;
+const lang = resolveLocale(Astro.currentLocale);
 
 const groupId = generateElementId("api-code-example");
 const labels = examples.map((ex) => ex.label);
@@ -38,7 +40,7 @@ const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
 {
   examples.length > 0 && (
     <div class={cl("api-code-example")}>
-      <h3 class={cl("api-code-example__heading")}>{i18n("code_example")}</h3>
+      <h3 class={cl("api-code-example__heading")}>{i18n("code_example", lang)}</h3>
 
       <Tabs id={groupId} variant="pills" labels={labels} panelIds={panelIds}>
         {examples.map((ex, tabIdx) => (

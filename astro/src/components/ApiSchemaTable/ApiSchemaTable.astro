@@ -6,6 +6,7 @@ import styles from "./ApiSchemaTable.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { generateElementId } from "@lib/componentUtils/generateElementId";
 import { i18n } from "@lib/i18n/i18n";
+import { resolveLocale } from "@lib/i18n/locale";
 
 const cl = classListFactory(styles);
 
@@ -16,6 +17,7 @@ interface Props {
 }
 
 const { fields, title, showExpandAll = true } = Astro.props;
+const lang = resolveLocale(Astro.currentLocale);
 
 const tableId = generateElementId("schema-table");
 const expandAllId = `${tableId}-expand-all`;
@@ -63,10 +65,10 @@ const showToolbar = showExpandAll && anyExpandable;
   }
   <div class={cl("schema-table__table")}>
     <div class={cl("schema-table__columns")}>
-      <div class={cl("schema-table__columns-name")}>{i18n("name")}</div>{" "}
-      <div class={cl("schema-table__columns-type")}>{i18n("type")}</div>{" "}
+      <div class={cl("schema-table__columns-name")}>{i18n("name", lang)}</div>{" "}
+      <div class={cl("schema-table__columns-type")}>{i18n("type", lang)}</div>{" "}
       <div class={cl("schema-table__columns-description")}>
-        {i18n("description")}
+        {i18n("description", lang)}
       </div>
     </div>
     {fields.map((field) => <SchemaFieldRow field={field} depth={0} />)}

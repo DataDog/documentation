@@ -20,7 +20,12 @@ import {
   getNativeLabel,
   type LangCode,
 } from "@lib/i18n/languageNames";
-import { LOCALES, localizedHref, stripLocalePrefix } from "@lib/i18n/locale";
+import {
+  LOCALES,
+  localizedHref,
+  resolveLocale,
+  stripLocalePrefix,
+} from "@lib/i18n/locale";
 
 const cl = classListFactory(styles);
 
@@ -31,16 +36,14 @@ const year = new Date().getFullYear();
 // Language selector — Astro's i18n routing handles the actual locale switch,
 // so each link is a real localized URL. The footer renders all supported
 // locales; the toolbar instance reuses the same Preact component.
-const { lang: footerLang, rest: footerLocaleless } = stripLocalePrefix(
-  Astro.url.pathname,
-);
-const currentLang: LangCode = footerLang;
+const { rest: footerLocaleless } = stripLocalePrefix(Astro.url.pathname);
+const currentLang: LangCode = resolveLocale(Astro.currentLocale);
 const translate = getTranslations(currentLang);
 const currentLangOption = {
   code: currentLang,
   primary: getNativeLabel(currentLang),
   secondary: translate(currentLang),
-  href: localizedHref(footerLang, footerLocaleless),
+  href: localizedHref(currentLang, footerLocaleless),
 };
 const alternates = LOCALES.filter((c) => c !== currentLang).map((code) => ({
   code,

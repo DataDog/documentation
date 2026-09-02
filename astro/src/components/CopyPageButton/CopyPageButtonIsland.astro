@@ -1,14 +1,14 @@
 ---
 import { CopyPageButton, type CopyPageButtonVariant } from './CopyPageButton';
 import { i18n } from '@lib/i18n/i18n';
-import type { Locale } from '@lib/i18n/locale';
+import { resolveLocale } from '@lib/i18n/locale';
 
 interface Props {
-  lang: Locale;
   variant?: CopyPageButtonVariant;
 }
 
-const { lang, variant = 'default' } = Astro.props;
+const { variant = 'default' } = Astro.props;
+const lang = resolveLocale(Astro.currentLocale);
 
 // `copied` is the authoritative Hugo key for the post-copy state. "Copy page"
 // has no Hugo key yet — pass the literal English as the lookup key so it
