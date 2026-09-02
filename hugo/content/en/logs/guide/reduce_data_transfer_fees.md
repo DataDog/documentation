@@ -30,6 +30,8 @@ Send data over a private network to avoid the public internet and reduce your da
     {{< nextlink href="/agent/guide/private-link/?tab=crossregionprivatelinkendpoints&site=ap2" >}}AP2 - AWS PrivateLink{{< /nextlink >}}
     {{< nextlink href="/agent/guide/azure-private-link/" >}}US3 - Azure Private Link{{< /nextlink >}}
     {{< nextlink href="/agent/guide/gcp-private-service-connect/" >}}US5 - Google Cloud Private Service Connect{{< /nextlink >}}
+    {{< nextlink href="/agent/guide/gcp-private-service-connect/?site=eu" >}}EU1 - Google Cloud Private Service Connect{{< /nextlink >}}
+    {{< nextlink href="/agent/guide/private-link/?tab=crossregionprivatelinkendpoints&site=uk1" >}}UK1 - AWS PrivateLink{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Additional tools 
