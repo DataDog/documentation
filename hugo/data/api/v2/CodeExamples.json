@@ -801,11 +801,6 @@
       "group": "feature_flags",
       "suffix": "",
       "description": "Create a feature flag returns \"Created\" response"
-    },
-    {
-      "group": "feature_flags",
-      "suffix": "_2426084719",
-      "description": "Create a feature flag with notification rule targets returns \"Created\" response"
     }
   ],
   "CreateAllocationsForFeatureFlagInEnvironment": [
@@ -834,6 +829,11 @@
       "group": "feature_flags",
       "suffix": "_3789036209",
       "description": "Update targeting rules for a flag in an environment returns \"OK\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_2978423597",
+      "description": "Update targeting rules for a flag in an environment with a scheduled start returns \"OK\" response"
     }
   ],
   "CreateForm": [
