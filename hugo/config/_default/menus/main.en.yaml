@@ -5784,16 +5784,21 @@ menu:
       parent: llm_obs
       identifier: llm_obs_data_security_and_rbac
       weight: 7
+    - name: Data Retention
+      url: llm_observability/data_retention
+      parent: llm_obs
+      identifier: llm_obs_data_retention
+      weight: 8
     - name: Lapdog
       url: llm_observability/lapdog
       parent: llm_obs
       identifier: llm_obs_lapdog
-      weight: 8
+      weight: 9
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 9
+      weight: 10
     - name: GPU Monitoring
       url: gpu_monitoring/
       pre: gpu-monitoring-wui

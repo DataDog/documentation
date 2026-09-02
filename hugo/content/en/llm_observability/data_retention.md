@@ -1,0 +1,94 @@
+---
+title: Data Retention
+description: Learn how long Agent Observability retains traces, experiments, annotations, datasets, prompts, and metrics.
+further_reading:
+  - link: "/llm_observability/data_privacy_security_and_rbac/"
+    tag: "Documentation"
+    text: "Control access to sensitive Agent Observability data"
+  - link: "/llm_observability/improve/datasets/"
+    tag: "Documentation"
+    text: "Work with datasets and dataset versions"
+  - link: "/llm_observability/investigate/annotation_queues/"
+    tag: "Documentation"
+    text: "Review traces with annotation queues"
+---
+
+Retention periods in Agent Observability depend on the type of data. Traces from your instrumented applications follow the trace retention period in your plan, while experiments, annotations, datasets, and prompts have their own periods.
+
+## Retention by data type
+
+| Data                                       | Retention period                                                    |
+| ------------------------------------------ | ------------------------------------------------------------------- |
+| Traces and spans                           | 15 days by default; 30, 60, or 90 days with a longer-retention plan |
+| Experiment traces                          | 90 days by default; up to 365 days with a longer-retention plan     |
+| Annotated traces, spans, and sessions      | 90 days from the time of annotation, or your trace retention period if that is longer |
+| Annotation labels                          | As long as the object they annotate                                 |
+| Dataset records (current version)          | 3 years, extended each time the record is used                      |
+| Dataset records (previous versions)        | 90 days, extended each time the version is used                     |
+| Prompts in the prompt registry             | 3 years, extended each time the prompt is pulled                    |
+| `ml_obs.*` metrics                         | 15 months                                                           |
+
+## Traces and spans
+
+Traces and spans from your instrumented applications are retained for **15 days** by default. This applies to everything stored on the span, including per-span operational data such as cost, token counts, latency, and errors, as well as evaluation scores attached to spans.
+
+Longer retention is available as part of your contract, in tiers of **30, 60, or 90 days**. Because retention affects how much data Datadog stores for you, extending it changes what you are billed for and is arranged with your account team rather than enabled from the Datadog UI. To extend your retention period, contact your Datadog account representative or [Datadog support][1].
+
+Your trace retention period also sets the floor for related data. Extending it extends experiment retention and annotation retention along with it, as described in the following sections.
+
+Retention applies to the raw spans you query in the Traces explorer. Metrics derived from those spans are retained separately, for longer. See [Metrics](#metrics).
+
+## Experiment traces
+
+Traces produced by [experiment][3] runs are retained longer than production traces, because experiments are used to compare results across a development cycle. Experiment retention scales with your trace retention period:
+
+| Trace retention | Experiment trace retention |
+| --------------- | -------------------------- |
+| 15 days         | 90 days                    |
+| 30 days         | 180 days                   |
+| 60 days         | 270 days                   |
+| 90 days         | 365 days                   |
+
+Evaluation scores and metrics recorded on experiment rows follow the same period as the experiment traces they are attached to.
+
+On plans without pre-purchased capacity, experiment traces are retained for the same period as your production traces (15 days) rather than the extended 90 days.
+
+## Annotated objects
+
+Annotating an object extends its retention. When you apply an annotation label or note to a trace, span, or session — whether directly or through an [annotation queue][2] — Datadog retains the annotated object for **90 days** from the time of annotation, even if your trace retention period is shorter. Annotating a span retains its whole parent trace, and annotating a trace that belongs to a session retains the whole session.
+
+If your organization's trace retention period is longer than 90 days, annotated objects are retained for that longer period instead.
+
+Annotation labels are retained for as long as the object they annotate. After the annotated trace, span, or session expires, its labels are no longer viewable.
+
+Free-form notes that are not attached to a trace, span, or session are not tied to any object's retention.
+
+## Dataset records
+
+[Dataset][4] records are retained for **3 years**. Records in previous versions of a dataset are retained for **90 days**. Both periods are extended each time the record or version is used — for example, when an experiment reads it. After a full retention period with no use, a record becomes eligible for permanent deletion.
+
+For details on how versions are created, see [Dataset versioning][5].
+
+## Prompts
+
+Prompts in the [prompt registry][9] are retained for **3 years**. This period is extended each time the prompt is pulled by your application, so a prompt in active use stays available. A prompt that is not pulled for 3 years becomes eligible for permanent deletion.
+
+## Metrics
+
+The `ml_obs.*` metrics generated from your spans are standard [Datadog metrics][6] and follow [standard Datadog metric retention][7]: 15 months at full granularity. They are retained on this schedule regardless of your trace retention period, so you can build long-term dashboards and monitors on span counts, token usage, cost, latency, and error rates even after the underlying spans expire.
+
+For the full list of available metrics, see [Agent Observability metrics][8].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /help/
+[2]: /llm_observability/investigate/annotation_queues/
+[3]: /llm_observability/improve/experiments/
+[4]: /llm_observability/improve/datasets/
+[5]: /llm_observability/improve/datasets/#dataset-versioning
+[6]: /metrics/
+[7]: /developers/guide/data-collection-resolution-retention/
+[8]: /llm_observability/investigate/metrics/
+[9]: /llm_observability/configure/prompt_management/
