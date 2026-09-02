@@ -9,6 +9,8 @@
  * matches Hugo's cascade, and so every entry has exactly one prerendered
  * redirect page under `src/pages/`.
  */
+import { DEFAULT_LOCALE, LOCALES } from "@lib/i18n/locale";
+
 export interface LegacyRedirect {
   /** Path, without the locale/branch prefix, that must keep working. */
   from: string;
@@ -24,3 +26,18 @@ export const LEGACY_REDIRECTS: LegacyRedirect[] = [
   { from: "/api/latest/cloud-workload-security", to: "/api/latest/csm-threats/" },
   { from: "/api/latest/service-scorecards", to: "/api/latest/scorecards/" },
 ];
+
+/**
+ * `getStaticPaths` entries for a legacy redirect page living under
+ * `src/pages/[...lang]/`, so `/{lang}/api/…` redirects the same way the
+ * unprefixed path does — Hugo's cascade applies to every language, not just
+ * English. English is the empty `[...lang]` segment, matching the rest of the
+ * route tree.
+ */
+export function legacyRedirectPaths(): Array<{
+  params: { lang: string | undefined };
+}> {
+  return LOCALES.map((lang) => ({
+    params: { lang: lang === DEFAULT_LOCALE ? undefined : lang },
+  }));
+}

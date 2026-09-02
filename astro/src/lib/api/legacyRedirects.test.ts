@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { LEGACY_REDIRECTS } from "./legacyRedirects";
+import { LEGACY_REDIRECTS, legacyRedirectPaths } from "./legacyRedirects";
+import { DEFAULT_LOCALE, LOCALES } from "@lib/i18n/locale";
 
 // Pinned from hugo/content/en/api/_index.md's cascade. If that file changes,
 // update this table (and its redirect pages under src/pages/) to match.
@@ -30,5 +31,21 @@ describe("LEGACY_REDIRECTS", () => {
   it("has no duplicate `from` entries", () => {
     const froms = LEGACY_REDIRECTS.map((r) => r.from);
     expect(new Set(froms).size).toBe(froms.length);
+  });
+});
+
+describe("legacyRedirectPaths", () => {
+  it("emits one variant per built locale", () => {
+    expect(legacyRedirectPaths()).toHaveLength(LOCALES.length);
+  });
+
+  it("uses the empty `[...lang]` segment for English and a prefix for the rest", () => {
+    const langs = legacyRedirectPaths().map((entry) => entry.params.lang);
+
+    expect(langs).toContain(undefined);
+    expect(langs).not.toContain(DEFAULT_LOCALE);
+    for (const locale of LOCALES.filter((l) => l !== DEFAULT_LOCALE)) {
+      expect(langs).toContain(locale);
+    }
   });
 });

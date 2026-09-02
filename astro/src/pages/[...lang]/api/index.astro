@@ -1,0 +1,18 @@
+---
+import type { GetStaticPaths } from "astro";
+import { legacyRedirectPaths } from "@lib/api/legacyRedirects";
+import { localizedHref, parseLangParam } from "@lib/i18n/locale";
+
+export const prerender = true;
+
+export const getStaticPaths: GetStaticPaths = legacyRedirectPaths;
+
+const lang = parseLangParam(Astro.params.lang);
+if (!lang) {
+  return new Response(null, { status: 404 });
+}
+
+// `localizedHref` applies the preview branch prefix itself, so it stands in for
+// the bare `prefixed()` call this page used while it was English-only.
+return Astro.redirect(localizedHref(lang, "/api/latest/"));
+---
