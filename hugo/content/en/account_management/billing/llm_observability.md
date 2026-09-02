@@ -61,9 +61,9 @@ An LLM span represents a single request to an LLM provider. A trace containing s
 
 Datadog charges only for the LLM spans you ingest. [Annotation queues][15] and [datasets][16] are included at no extra charge, and [experiments][3] are metered on LLM spans in the same way as production traces.
 
-[Evaluations][13] and [patterns][14] use an LLM to do their work. Datadog does not charge extra for them when you run them with your own LLM provider key (bring your own key, or BYOK). Your LLM provider bills you directly for that model usage, separately from your Datadog bill. To connect a provider, see [Connect your LLM provider account][17].
+[Evaluations][13] and [patterns][14] use an LLM to do their work, and Datadog does not charge extra for either of them. By default they run on a model Datadog provides, which is a free preview with limited capacity.
 
-Evaluations can also run on a model Datadog provides, without a provider key of your own. This option is a free preview with limited capacity, so bringing your own key is the route for running evaluations at production volume.
+You can optionally run them with your own LLM provider key (bring your own key, or BYOK) instead, which is the route for running at production volume. Your LLM provider bills you directly for that model usage, separately from your Datadog bill. To connect a provider, see [Connect your LLM provider account][17].
 
 [Sensitive Data Scanner](#is-sensitive-data-scanner-included) is included within a usage allotment that scales with your LLM span usage.
 
