@@ -13,7 +13,7 @@ Use Calculated Fields Extractions to extract values from your logs in the Log Ex
 
 ## Overview
 
-Calculated Fields Extractions lets you apply Grok parsing rules at query time in the Log Explorer, enabling you to extract values from raw log messages or attributes without modifying pipelines or re-ingesting data. You can generate extraction rules automatically with AI-powered parsing, or manually define your own Grok patterns to match your specific needs.
+Calculated Fields Extractions lets you apply Grok parsing rules at query time in the Log Explorer. This lets you extract values from raw log messages or attributes without modifying pipelines or re-ingesting data. You can generate extraction rules automatically with AI-powered parsing, or manually define your own Grok patterns to match your specific needs. You can also write an extraction pattern as a [regular expression (regex)](#regex) with named capture groups.
 
 To create an extraction calculated field, see [Create a calculated field][1].
 
@@ -95,8 +95,100 @@ country=%{word:country} duration=%{integer:duration} path=%{notSpace:request_pat
 - `#request_path = /index.html`
 - `#status = 200 OK`
 
+## Regex
+
+Datadog evaluates the regex pattern when you run a query. This means no data is reindexed, and you can add, edit, or remove a pattern at any time.
+
+Extractions run before formulas, so a calculated field formula can reference a field that an extraction produces. The reverse is not possible: you cannot extract from a calculated field.
+
+Extracted values are always strings. Unlike a Grok rule such as `%{integer:status}`, regex extraction does not convert types. To use an extracted value as a number, reference it in an arithmetic formula.
+
+### Supported syntax
+
+| Feature | Example | Description |
+|---|---|---|
+| Literal text | `error` | The literal characters |
+| Any character | `.` | Any character except a newline |
+| Character classes | `[a-z0-9]`, `[^abc]` | Any one character in the set, or any one character not in the set |
+| Shorthand classes | `\d`, `\w`, `\s`, `\D`, `\W`, `\S` | A digit, word character, or whitespace character, and their negations |
+| Unicode property classes | `\p{L}+` | Characters by Unicode property, such as any letter |
+| Alternation | `error\|timeout` | Either alternative |
+| Groups | `(error\|timeout)`, `(?:error\|timeout)` | Groups part of a pattern. `(?:…)` groups without capturing |
+| Named capture groups | `(?<status>\d+)` | Captures the match under a name. Required for extraction |
+| Quantifiers | `a*`, `a+`, `a?`, `a{2,4}` | Repetition: zero or more, one or more, optional, or a bounded range. Matches as much as possible |
+| Lazy quantifiers | `.*?end` | The same repetition, but matching as little as possible |
+| Anchors | `^ERROR`, `timeout$` | By default, the start or the end of the whole value |
+| Word boundaries | `\berror\b` | A position between a word and a non-word character, so `error` matches but `errors` does not |
+| Character escapes | `\n`, `\r`, `\t` | Newline, carriage return, tab |
+| Metacharacter escapes | `\.`, `\*`, `\(` | The character itself, rather than its special meaning |
+
+Only the constructs listed here are supported. A pattern that uses any other construct might still run, but its behavior is not guaranteed.
+
+A value can contain multiple lines, such as a stack trace. To match a newline with `.`, add `(?s)` to the start of the pattern. To match `^` and `$` at the start and end of each line, add `(?m)` to the start of the pattern.
+
+Write patterns with a single backslash, as shown. In [formula regex functions][2], a pattern is a quoted string argument and each backslash must be doubled.
+
+### Capture group rules
+
+A pattern must follow these rules:
+
+- It must contain at least one capture group.
+- Every capture group must be named.
+  - Use `(?<name>…)`, not `(…)`.
+  - Use `(?:…)` to group without creating a field.
+- Each name must be unique. The name becomes the name of the extracted field.
+- Each name must start with a letter, and contain only letters and digits (`[A-Za-z][A-Za-z0-9]*`). Names like `client_ip`, `http.status`, or `client-ip` are not valid capture group names.
+
+### Example
+
+**Log line**:
+
+```plaintext
+10.0.0.14 GET /api/v1/orders 503
+```
+
+**Regex pattern**:
+
+```plaintext
+(?<ip>\S+) (?<method>\S+) /api/(?:v\d+)/(?<resource>\S+) (?<status>\d+)
+```
+
+This pattern follows the capture group rules:
+
+- Four groups have a name: `ip`, `method`, `resource`, and `status`.
+- Each name is unique.
+- Each name uses only letters and digits.
+- The group `(?:v\d+)` has no name. It groups the version segment, but does not create a field.
+
+**Resulting calculated fields**:
+
+- `#ip = 10.0.0.14`
+- `#method = GET`
+- `#resource = orders`
+- `#status = 503`
+
+You can filter, group, and sort by the extracted fields. Logs where the pattern does not match have no value for them.
+
+### Invalid patterns
+
+Each pattern below breaks one capture group rule.
+
+| Pattern | Problem |
+|---|---|
+| `(?:\S+) (?:\S+) (?:\S+) (?:\S+)` | No named group. A pattern needs at least one. |
+| `(?<ip>\S+) (?<ip>\S+)` | The name `ip` is used twice. Each name must be unique. |
+| `(?<client_ip>\S+)` | The name has an underscore. A name can have only letters and digits. |
+| `(?<1status>\d+)` | The name starts with a digit. A name must start with a letter. |
+
+### Pattern performance
+
+Datadog matches a pattern fastest when it can tell where a match must start. A pattern that begins with `^` or with literal text gives it that starting point. A pattern that begins with `.*` does not, so it is tried at every position in the value.
+
+On a short value the difference is negligible. On a large value, such as a stack trace, an unanchored pattern can slow the query. It can also fail the query with an error rather than returning no match. Anchor the pattern with `^` where the value has a predictable start, and avoid wrapping a literal in `.*` on both sides.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/calculated_fields/#create-a-calculated-field
+[2]: /logs/explorer/calculated_fields/formulas/#regex
