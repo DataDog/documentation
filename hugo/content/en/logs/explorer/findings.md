@@ -47,7 +47,7 @@ Add a finding from anywhere in Log Explorer that shows results. Datadog names ea
 
 ### A query and its visualization
 
-In the toolbar above your results, click the {{< ui >}}Add a finding{{< /ui >}} icon, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>.
+In the toolbar above your results, click the {{< ui >}}Add a finding{{< /ui >}} icon, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>. You can also click {{< ui >}}Add current page as finding{{< /ui >}} in the Findings panel.
 
 The finding stores your search query, time range, and [visualization][4], including any group-by and aggregation you configured. Capture the same query as a list and as a timeseries to keep both views side by side.
 
@@ -68,7 +68,13 @@ To group findings by the query they came from, click the auto-organize icon on t
 
 Use the remaining canvas controls to zoom in and out, fit the canvas to your findings, and open a full-screen view. On the full-screen canvas, you can pan, zoom, rename, and delete findings the same way.
 
-**Note**: Undo and redo cover your last ten actions on the canvas, including deletions.
+## Delete findings
+
+To delete a single finding, hover over it and click the {{< ui >}}Delete{{< /ui >}} icon. To delete several at once, select them and press <kbd>Delete</kbd>. Press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>A</kbd> first to select everything on the canvas.
+
+The clear icon in the Findings panel removes the findings you have selected, or every finding on the canvas when nothing is selected.
+
+Deleting is not permanent right away. A toast appears with an {{< ui >}}Undo{{< /ui >}} option, and <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Z</kbd> restores what you removed.
 
 ## Return to a finding
 
@@ -90,6 +96,8 @@ Select only the findings that matter for the question you're asking. A postmorte
 | Action | Shortcut |
 | ------ | -------- |
 | Add a finding | <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd> |
+| Select all findings | <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>A</kbd> |
+| Delete selected findings | <kbd>Delete</kbd> |
 | Undo | <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Z</kbd> |
 | Redo | <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd> |
 
