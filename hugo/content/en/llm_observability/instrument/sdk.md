@@ -1959,8 +1959,8 @@ Supported keys:
 - `template` (str): Template string with placeholders (for example, `"Translate {{text}} to {{lang}}"`).
 - `chat_template` (List[Message]): Multi-message template form. Provide a list of `{ "role": "<role>", "content": "<template string with placeholders>" }` objects.
 - `tags` (Dict[str, str]): Tags to attach to the prompt run.
-- `rag_context_variables` (List[str]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination).
-- `rag_query_variables` (List[str]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination).
+- `rag_context_variables` (List[str]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination).
+- `rag_query_variables` (List[str]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination).
 
 {{% /collapse-content %}}
 
@@ -2021,8 +2021,8 @@ Supported properties:
 - `variables` (Record<string, string>): Variables used to populate the template placeholders.
 - `template` (string | List[Message]): Template string with placeholders (for example, `"Translate {{text}} to {{lang}}"`). Alternatively, a list of `{ "role": "<role>", "content": "<template string with placeholders>" }` objects.
 - `tags` (Record<string, string>): Tags to attach to the prompt run.
-- `contextVariables` (string[]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination).
-- `queryVariables` (string[]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/configure/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination).
+- `contextVariables` (string[]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination).
+- `queryVariables` (string[]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination).
 
 {{% /collapse-content %}}
 
@@ -2338,7 +2338,7 @@ llmobs.annotationContext({
 
 The Agent Observability SDK provides methods to export and submit your evaluations to Datadog.
 
-<div class="alert alert-info">For building reusable, class-based evaluators (<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>) with rich result metadata, see the <a href="/llm_observability/guide/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
+<div class="alert alert-info">For building reusable, class-based evaluators (<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>) with rich result metadata, see the <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
 
 Evaluations must be joined to a single span. You can identify the target span using either of these two methods:
 - _Tag-based joining_ - Join an evaluation using a unique key-value tag pair that is set on a single span. The evaluation will fail to join if the tag key-value pair matches multiple spans or no spans.
