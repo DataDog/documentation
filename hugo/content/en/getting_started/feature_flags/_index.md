@@ -115,7 +115,7 @@ const provider = new DatadogProvider({
     service: '<SERVICE_NAME>',
     version: '1.0.0',
     // Bound each configuration request to 1,500 milliseconds.
-    flagConfigurationFetch: withTimeout(globalThis.fetch, 1_500)
+    fetch: withTimeout(globalThis.fetch, 1_500)
 });
 
 // Set the provider
