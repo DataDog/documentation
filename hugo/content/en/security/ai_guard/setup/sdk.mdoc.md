@@ -1,5 +1,10 @@
 ---
 title: SDK
+disable_toc: false
+content_filters:
+  - trait_id: prog_lang
+    option_group_id: ai_guard_sdk_language_options
+    label: "Language"
 further_reading:
 - link: /security/ai_guard/
   tag: Documentation
@@ -7,58 +12,84 @@ further_reading:
 - link: /security/ai_guard/setup/http_api/
   tag: Documentation
   text: HTTP API
+- link: /security/ai_guard/setup/automatic_integrations/
+  tag: Documentation
+  text: Automatic integrations
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
-{{< /site-region >}}
+{% site-region region="gov,gov2" %}
+{% alert level="danger" %}
+AI Guard isn't available in the {% region-param key="dd_site_name" /%} site.
+{% /alert %}
+{% /site-region %}
 
 Use an SDK to call the AI Guard REST API and monitor AI Guard activity in real time in Datadog.
 
-{{< partial name="security-platform/aiguard-sdk-setup.html" target="manual" >}}
+Select your language at the top of this page to see the matching installation and usage instructions.
+
+## Set up the Datadog Agent
+
+SDKs use the [Datadog Agent][1] to send AI Guard data to Datadog. The Agent must be running and accessible to your application.
+
+If you don't use the Datadog Agent, the AI Guard evaluator API still works, but you can't see AI Guard traces in Datadog.
+
+## Required environment variables
+
+Set the following environment variables in your application:
+
+| Variable | Value |
+| -------- | ----- |
+| `DD_AI_GUARD_ENABLED` | `true` |
+| `DD_API_KEY` | `<YOUR_API_KEY>` |
+| `DD_APP_KEY` | `<YOUR_APPLICATION_KEY>` |
+| `DD_ENV` | `<YOUR_ENVIRONMENT>` |
+| `DD_SERVICE` | `<YOUR_SERVICE>` |
 
 ## Install the SDK
 
-To use AI Guard and see AI Guard activity in Datadog, install the appropriate SDK for your language. The SDK requires the Datadog Agent to send data to Datadog.
+To use AI Guard and see AI Guard activity in Datadog, install the SDK for your language. The SDK requires the Datadog Agent to send data to Datadog.
 
-{{< tabs >}}
-{{% tab "Python" %}}
+<!-- Python -->
+{% if equals($prog_lang, "python") %}
 Install dd-trace-py v3.19.0 or later:
 
 ```shell
 pip install ddtrace>=3.19.0
 ```
-{{% /tab %}}
-{{% tab "JavaScript" %}}
+{% /if %}
+
+<!-- Node.js -->
+{% if equals($prog_lang, "node_js") %}
 Install dd-trace-js v5.69.0 or later:
 
 ```shell
 npm install dd-trace@^5.69.0
 ```
+{% /if %}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+<!-- Java -->
+{% if equals($prog_lang, "java") %}
 Install dd-trace-java v1.54.0 or later. Follow the [Java installation instructions][2] to add the SDK to your application.
+{% /if %}
 
-[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
-{{% /tab %}}
-{{% tab "Ruby" %}}
+<!-- Ruby -->
+{% if equals($prog_lang, "ruby") %}
 Install dd-trace-rb v2.25.0 or later:
 
 ```shell
 gem install ddtrace -v '>= 2.25.0'
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 ## Use the SDK
 
-{{< tabs >}}
-{{% tab "Python" %}}
-The Python SDK ([dd-trace-py v3.18.0][1] or later) provides a streamlined interface for invoking the REST API directly from Python code. The following examples demonstrate its usage:
+<!-- Python -->
+{% if equals($prog_lang, "python") %}
+The Python SDK ([dd-trace-py v3.18.0][3] or later) provides a simplified interface for invoking the REST API directly from Python code. The following examples demonstrate its usage:
 
-<div class="alert alert-info">
+{% alert level="info" %}
 Starting with dd-trace-py v3.18.0, the Python SDK uses the standardized common message format.
-</div>
+{% /alert %}
 
 ```py
 from ddtrace.appsec.ai_guard import new_ai_guard_client, Function, Message, Options, ToolCall
@@ -66,7 +97,7 @@ from ddtrace.appsec.ai_guard import new_ai_guard_client, Function, Message, Opti
 client = new_ai_guard_client()
 ```
 
-### Example: Evaluate a user prompt {#python-example-evaluate-user-prompt}
+### Example: Evaluate a user prompt
 
 ```py
 # Check if processing the user prompt is considered safe
@@ -89,7 +120,7 @@ The method returns an `Evaluation` object containing:
 - `tags`: list of attack category tags detected (for example, `["indirect-prompt-injection", "destructive-tool-call"]`).
 - `sds`: list of Sensitive Data Scanner findings.
 
-### Example: Evaluate a user prompt with content parts {#python-example-evaluate-user-prompt-content-parts}
+### Example: Evaluate a user prompt with content parts
 
 For multi-modal inputs, you can pass an array of content parts instead of a string. This is useful when including images or other media:
 
@@ -114,7 +145,7 @@ result = client.evaluate(
 )
 ```
 
-### Example: Evaluate a tool call {#python-example-evaluate-tool-call}
+### Example: Evaluate a tool call
 
 Like evaluating user prompts, the method can also be used to evaluate tool calls:
 
@@ -133,15 +164,15 @@ result = client.evaluate(
     ]
 )
 ```
+{% /if %}
 
-[1]: https://github.com/DataDog/dd-trace-py/releases/tag/v3.18.0
-{{% /tab %}}
-{{% tab "Javascript" %}}
-The JavaScript SDK ([dd-trace-js v5.69.0][1] or later) offers a simplified interface for interacting with the REST API directly from JavaScript applications.
+<!-- Node.js -->
+{% if equals($prog_lang, "node_js") %}
+The JavaScript SDK ([dd-trace-js v5.69.0][4] or later) offers a simplified interface for interacting with the REST API directly from JavaScript applications.
 
-The SDK is described in a dedicated [TypeScript][2] definition file. For convenience, the following sections provide practical usage examples:
+The SDK is described in a dedicated [TypeScript][5] definition file. For convenience, the following sections provide practical usage examples:
 
-### Example: Evaluate a user prompt {#javascript-example-evaluate-user-prompt}
+### Example: Evaluate a user prompt
 
 ```javascript
 import tracer from 'dd-trace';
@@ -164,7 +195,7 @@ The method returns a promise that resolves to an Evaluation object containing:
 - `tags`: array of attack category tags detected (for example, `["indirect-prompt-injection", "destructive-tool-call"]`).
 - `sds`: array of Sensitive Data Scanner findings.
 
-### Example: Evaluate a tool call {#javascript-example-evaluate-tool-call}
+### Example: Evaluate a tool call
 
 Similar to evaluating user prompts, this method can also be used to evaluate tool calls:
 
@@ -187,16 +218,15 @@ const result = await tracer.aiguard.evaluate([
   ]
 )
 ```
+{% /if %}
 
-[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.69.0
-[2]: https://github.com/DataDog/dd-trace-js/blob/master/index.d.ts
-{{% /tab %}}
-{{% tab "Java" %}}
-The Java SDK ([dd-trace-java v1.54.0][1] or later) provides a streamlined interface for directly interacting with the REST API from Java applications.
+<!-- Java -->
+{% if equals($prog_lang, "java") %}
+The Java SDK ([dd-trace-java v1.54.0][6] or later) provides a simplified interface for directly interacting with the REST API from Java applications.
 
 The following sections provide practical usage examples:
 
-### Example: Evaluate a user prompt {#java-example-evaluate-user-prompt}
+### Example: Evaluate a user prompt
 
 ```java
 import datadog.trace.api.aiguard.AIGuard;
@@ -220,7 +250,7 @@ The method returns an `Evaluation` object containing:
 - `tags`: list of attack category tags detected (for example, `["indirect-prompt-injection", "destructive-tool-call"]`).
 - `sds`: list of Sensitive Data Scanner findings.
 
-### Example: Evaluate a tool call result {#java-example-evaluate-tool-call-result}
+### Example: Evaluate a tool call result
 
 To evaluate a tool call result, use the `Message.tool()` factory method:
 
@@ -237,7 +267,7 @@ final AIGuard.Evaluation evaluation = AIGuard.evaluate(
 );
 ```
 
-### Example: Evaluate a user prompt with content parts {#java-example-evaluate-user-prompt-content-parts}
+### Example: Evaluate a user prompt with content parts
 
 For multi-modal inputs, you can pass a list of content parts instead of a string. This is useful when including images or other media:
 
@@ -256,7 +286,7 @@ final AIGuard.Evaluation evaluation = AIGuard.evaluate(
 );
 ```
 
-### Example: Evaluate a tool call {#java-example-evaluate-tool-call}
+### Example: Evaluate a tool call
 
 Like evaluating user prompts, the method can also be used to evaluate tool calls:
 
@@ -275,15 +305,15 @@ final AIGuard.Evaluation evaluation = AIGuard.evaluate(
     )
 );
 ```
+{% /if %}
 
-[1]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.54.0
-{{% /tab %}}
-{{% tab "Ruby" %}}
-The Ruby SDK ([dd-trace-rb v2.25.0][1] or later) offers a simplified interface for interacting with the REST API directly from Ruby applications.
+<!-- Ruby -->
+{% if equals($prog_lang, "ruby") %}
+The Ruby SDK ([dd-trace-rb v2.25.0][7] or later) offers a simplified interface for interacting with the REST API directly from Ruby applications.
 
 The following sections provide practical usage examples:
 
-### Example: Evaluate a user prompt {#ruby-example-evaluate-user-prompt}
+### Example: Evaluate a user prompt
 
 ```ruby
 result = Datadog::AIGuard.evaluate(
@@ -295,16 +325,16 @@ result = Datadog::AIGuard.evaluate(
 
 The evaluate method receives the following parameters:
 - `messages` (required): list of messages (prompts or tool calls) for AI Guard to evaluate.
-- `allow_raise` (optional): Boolean flag; if set to `false`, the method will not not raise an `AIGuardAbortError` when the assessment is `DENY` or `ABORT`.
+- `allow_raise` (optional): Boolean flag; if set to `false`, the method does not raise an `AIGuardAbortError` when the assessment is `DENY` or `ABORT`.
 
 This SDK method raises an `AIGuardAbortError` when the assessment is `DENY` or `ABORT` and if the service is configured with blocking enabled.
 
 The method returns an Evaluation object containing:
 - `action`: `ALLOW`, `DENY`, or `ABORT`.
 - `reason`: natural language summary of the decision.
-- `tags`: list of tags linked to the evaluation (for example, ```["indirect-prompt-injection", "instruction-override", "destructive-tool-call"]```)
+- `tags`: list of tags linked to the evaluation (for example, `["indirect-prompt-injection", "instruction-override", "destructive-tool-call"]`)
 
-### Example: Evaluate a tool call {#ruby-example-evaluate-tool-call}
+### Example: Evaluate a tool call
 
 Like evaluating user prompts, the method can also be used to evaluate tool calls:
 
@@ -314,7 +344,7 @@ result = Datadog::AIGuard.evaluate(
 )
 ```
 
-### Example: Evaluate a user prompt with content parts {#ruby-example-evaluate-user-prompt-content-parts}
+### Example: Evaluate a user prompt with content parts
 
 For multi-modal inputs, you can pass an array of content parts instead of a string. This is useful when including images or other media:
 
@@ -326,11 +356,12 @@ Datadog::AIGuard.evaluate(
   end
 )
 ```
+{% /if %}
 
-[1]: https://github.com/DataDog/dd-trace-rb/releases/tag/v2.25.0
-{{% /tab %}}
-{{< /tabs >}}
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+[1]: /agent/?tab=Host-based
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[3]: https://github.com/DataDog/dd-trace-py/releases/tag/v3.18.0
+[4]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.69.0
+[5]: https://github.com/DataDog/dd-trace-js/blob/master/index.d.ts
+[6]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.54.0
+[7]: https://github.com/DataDog/dd-trace-rb/releases/tag/v2.25.0
