@@ -24862,6 +24862,8 @@ components:
           description: The description of the feature flag.
           example: "This is an example feature flag for demonstration"
           type: string
+        distribution_channel:
+          $ref: "#/components/schemas/FeatureFlagDistributionChannel"
         json_schema:
           description: JSON schema for validation when value_type is JSON.
           example: '{"type": "object", "properties": {"enabled": {"type": "boolean"}}}'
@@ -24875,6 +24877,19 @@ components:
           description: The name of the feature flag.
           example: "Feature Flag ABC123"
           type: string
+        require_approval:
+          description: Indicates whether this feature flag requires approval for changes.
+          example: false
+          type: boolean
+        staleness_status:
+          $ref: "#/components/schemas/CreateFeatureFlagStalenessStatus"
+        tags:
+          description: Tags associated with the feature flag.
+          example: []
+          items:
+            description: A tag associated with the feature flag.
+            type: string
+          type: array
         value_type:
           $ref: "#/components/schemas/ValueType"
         variants:
@@ -24885,7 +24900,6 @@ components:
       required:
         - key
         - name
-        - description
         - value_type
         - variants
       type: object
@@ -24916,6 +24930,16 @@ components:
       required:
         - data
       type: object
+    CreateFeatureFlagStalenessStatus:
+      description: The staleness status for the feature flag at creation.
+      enum:
+        - ACTIVE
+        - PERMANENT
+      example: "ACTIVE"
+      type: string
+      x-enum-varnames:
+        - ACTIVE
+        - PERMANENT
     CreateFormData:
       description: The data for creating a form.
       properties:
@@ -39513,6 +39537,18 @@ components:
         - value_type
         - variants
       type: object
+    FeatureFlagDistributionChannel:
+      description: The distribution channel for the feature flag.
+      enum:
+        - ALL
+        - CLIENT
+        - SERVER
+      example: "ALL"
+      type: string
+      x-enum-varnames:
+        - ALL
+        - CLIENT
+        - SERVER
     FeatureFlagEnvironment:
       description: Environment-specific settings for a feature flag.
       properties:
@@ -150597,14 +150633,21 @@ paths:
                     attributes:
                       default_variant_key: variant-a
                       description: A sample feature flag
-                      enabled: true
+                      distribution_channel: ALL
                       key: feature-flag-abc123
                       name: Feature Flag ABC 123
+                      require_approval: false
+                      staleness_status: ACTIVE
+                      tags:
+                        - team:feature-flags-app
+                      value_type: BOOLEAN
                       variants:
-                        - description: Variant A
-                          key: variant-a
-                        - description: Variant B
-                          key: variant-b
+                        - key: variant-a
+                          name: Variant A
+                          value: "true"
+                        - key: variant-b
+                          name: Variant B
+                          value: "false"
                     type: feature-flags
             schema:
               $ref: "#/components/schemas/CreateFeatureFlagRequest"
