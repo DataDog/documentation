@@ -15,6 +15,7 @@ import {
   PROXY_PORT,
 } from "./src/lib/site/siteUrl.ts";
 import { pathPrefix } from "./src/lib/site/pathPrefix.ts";
+import { resolveSiteEnv } from "./src/lib/site/siteEnv.ts";
 import { resolveWebsitesModulesPath } from "./src/lib/site/websitesModulesPath.ts";
 import { pagesJson } from "./src/integrations/pagesJson.ts";
 import { llmsTxt } from "./src/integrations/llmsTxt.ts";
@@ -48,7 +49,7 @@ process.env.PUBLIC_IA_SUBDOMAIN = process.env.IA_SUBDOMAIN ?? "";
 // The Hugo docs site may be on a different origin than the Astro site in local
 // dev (Hugo: 1313, Astro: 4321). In CI and proxied dev they share an origin.
 function deriveHugoDocsUrl() {
-  const env = process.env.CI_ENVIRONMENT_NAME;
+  const env = resolveSiteEnv();
   if (env === "preview") {
     return `https://docs-staging.datadoghq.com/${branchRef()}`;
   }

@@ -1,26 +1,18 @@
 import { describe, it, expect } from "vitest";
 // @ts-ignore — plain CommonJS module, no types
 import hugoConfigDocs from "@hugo-site/assets/scripts/config/config-docs.js";
-import { resolveTelemetryEnv, getTelemetryConfig } from "./telemetry";
-
-describe("resolveTelemetryEnv", () => {
-  it("passes live through", () => {
-    expect(resolveTelemetryEnv("live")).toBe("live");
-  });
-
-  it("passes preview through", () => {
-    expect(resolveTelemetryEnv("preview")).toBe("preview");
-  });
-
-  it("maps anything else to development", () => {
-    expect(resolveTelemetryEnv("development")).toBe("development");
-    expect(resolveTelemetryEnv("staging")).toBe("development");
-    expect(resolveTelemetryEnv("")).toBe("development");
-    expect(resolveTelemetryEnv(undefined)).toBe("development");
-  });
-});
+import { SITE_ENVS } from "@lib/site/siteEnv";
+import { getTelemetryConfig } from "./telemetry";
 
 describe("getTelemetryConfig", () => {
+  it("has an entry for every site environment", () => {
+    // The table is indexed by whatever `resolveSiteEnv` returns, so a missing
+    // key would surface as undefined credentials rather than an error.
+    for (const env of SITE_ENVS) {
+      expect(getTelemetryConfig(env).clientToken).toBeTruthy();
+    }
+  });
+
   it("gives development no application ID, so RUM cannot init there", () => {
     const config = getTelemetryConfig("development");
     expect(config.applicationId).toBeUndefined();

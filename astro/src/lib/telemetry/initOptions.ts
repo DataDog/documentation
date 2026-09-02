@@ -7,7 +7,8 @@
  */
 import type { RumInitConfiguration } from "@datadog/browser-rum";
 import type { LogsInitConfiguration } from "@datadog/browser-logs";
-import type { TelemetryCredentials, TelemetryEnv } from "@config/telemetry";
+import type { TelemetryCredentials } from "@config/telemetry";
+import type { SiteEnv } from "@lib/site/siteEnv";
 
 /**
  * Shared by RUM, Browser Logs, and the sourcemap upload manifest. Existing
@@ -31,7 +32,7 @@ export type RumCredentials = TelemetryCredentials & { applicationId: string };
 
 interface RumInitInput {
   credentials: RumCredentials;
-  env: TelemetryEnv;
+  env: SiteEnv;
   /** `CI_COMMIT_SHORT_SHA`, or empty when CI did not provide it. */
   version: string;
   /** `IA_SUBDOMAIN`, or empty for the public telemetry intake. */
@@ -42,7 +43,7 @@ interface RumInitInput {
 
 interface LogsInitInput {
   credentials: TelemetryCredentials;
-  env: TelemetryEnv;
+  env: SiteEnv;
   version: string;
   internalAnalyticsSubdomain: string;
 }

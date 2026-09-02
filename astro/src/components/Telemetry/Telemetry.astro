@@ -16,7 +16,8 @@
 <script>
   import { datadogRum } from "@datadog/browser-rum";
   import { datadogLogs } from "@datadog/browser-logs";
-  import { getTelemetryConfig, resolveTelemetryEnv } from "@config/telemetry";
+  import { getTelemetryConfig } from "@config/telemetry";
+  import { resolveSiteEnv } from "@lib/site/siteEnv";
   import {
     buildGlobalContext,
     buildLogsInitOptions,
@@ -32,7 +33,9 @@
     IA_SUBDOMAIN,
   } from "@lib/telemetry/buildConstants";
 
-  const env = resolveTelemetryEnv(CI_ENV);
+  // `resolveSiteEnv` and not `siteEnv()`: this runs in the browser, where
+  // `process.env` does not exist. `CI_ENV` is the build-time constant.
+  const env = resolveSiteEnv(CI_ENV);
   const credentials = getTelemetryConfig(env);
   const version = CI_COMMIT_SHORT_SHA;
   const internalAnalyticsSubdomain = IA_SUBDOMAIN;

@@ -12,8 +12,7 @@
  *
  * TODO: this file becomes the sole owner once `config-docs.js` is deleted.
  */
-
-export type TelemetryEnv = "development" | "preview" | "live";
+import type { SiteEnv } from "@lib/site/siteEnv";
 
 export interface TelemetryCredentials {
   /**
@@ -25,7 +24,7 @@ export interface TelemetryCredentials {
   loggingHandler: "http" | "console";
 }
 
-const TELEMETRY_CREDENTIALS: Record<TelemetryEnv, TelemetryCredentials> = {
+const TELEMETRY_CREDENTIALS: Record<SiteEnv, TelemetryCredentials> = {
   live: {
     applicationId: "3493b4e7-ab12-4852-8836-ba96af7bc745",
     clientToken: "pub16bb5ef3e9bf55f156338987e27246c7",
@@ -44,16 +43,6 @@ const TELEMETRY_CREDENTIALS: Record<TelemetryEnv, TelemetryCredentials> = {
   },
 };
 
-/**
- * Maps a CI environment name onto a telemetry environment: `live` and `preview`
- * pass through, anything else — including `undefined` — is development.
- */
-export function resolveTelemetryEnv(raw: string | undefined): TelemetryEnv {
-  if (raw === "live") return "live";
-  if (raw === "preview") return "preview";
-  return "development";
-}
-
-export function getTelemetryConfig(env: TelemetryEnv): TelemetryCredentials {
+export function getTelemetryConfig(env: SiteEnv): TelemetryCredentials {
   return TELEMETRY_CREDENTIALS[env];
 }

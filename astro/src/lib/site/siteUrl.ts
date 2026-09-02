@@ -7,6 +7,7 @@
  * from their request context, and the `pagesJson`/`llmsTxt` integrations from
  * `config.site` — so there is no second derivation to keep in agreement.
  */
+import { resolveSiteEnv } from "./siteEnv";
 
 /** The dev server is reached through a proxy fronting Hugo and Astro on one origin. */
 export const IS_PROXIED = process.env.PROXIED === "1";
@@ -38,7 +39,7 @@ export function deriveSiteUrl(): string {
   if (override) {
     return override.replace(/\/+$/, "");
   }
-  const env = process.env.CI_ENVIRONMENT_NAME;
+  const env = resolveSiteEnv();
   if (env === "preview") {
     const ref = branchRef();
     if (!ref) {

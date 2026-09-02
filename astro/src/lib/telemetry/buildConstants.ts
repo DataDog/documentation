@@ -17,7 +17,7 @@
  * CI variables present in the running server's environment.
  */
 
-/** Raw `CI_ENVIRONMENT_NAME`; empty locally. Map it through `resolveTelemetryEnv`. */
+/** Raw `CI_ENVIRONMENT_NAME`; empty locally. Map it through `resolveSiteEnv`. */
 export const CI_ENV = import.meta.env.PUBLIC_CI_ENV ?? "";
 
 /**

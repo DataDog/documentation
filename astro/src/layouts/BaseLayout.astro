@@ -7,7 +7,7 @@ import { stripLocalePrefix, type Locale } from '@lib/i18n/locale';
 import { getBannerParams, type BannerParams } from '@lib/componentUtils/bannerData';
 import { DevBadge } from '@components/DevBadge/DevBadge';
 import Telemetry from '@components/Telemetry/Telemetry.astro';
-import { resolveTelemetryEnv } from '@config/telemetry';
+import { resolveSiteEnv } from '@lib/site/siteEnv';
 import {
   TWITTER_HANDLE,
   THEME_COLOR,
@@ -72,7 +72,7 @@ const ogUrl = canonical;
 // `data-env` on <html>, for debugging and env-conditional styling. Telemetry
 // itself does not read it (it resolves the environment at build time), but the
 // planned shared Ask AI package expects the attribute to be present.
-const telemetryEnv = resolveTelemetryEnv(process.env.CI_ENVIRONMENT_NAME);
+const env = resolveSiteEnv();
 
 // Resolve any relative hreflang hrefs against the site origin.
 const hreflangResolved = hreflang?.map((h) => ({
@@ -81,7 +81,7 @@ const hreflangResolved = hreflang?.map((h) => ({
 }));
 ---
 
-<html lang={lang} data-env={telemetryEnv}>
+<html lang={lang} data-env={env}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
