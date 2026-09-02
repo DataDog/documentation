@@ -184,6 +184,10 @@ You can route logs from Observability Pipelines to Snowflake using the Datadog A
 1. [Set up a pipeline][5] to use Datadog Archives as the log destination. Use the configuration detailed in [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
 1. Set up Snowpipe in Snowflake. See [Automating Snowpipe for Amazon S3][6] for instructions.
 
+## Health metrics
+
+See [Component metrics][19] and [Destination buffer metrics][20] for more information on metrics emitted by all destinations.
+
 ## How the destination works
 
 ### AWS Authentication
@@ -224,3 +228,5 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [15]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [17]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [18]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
+[19]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[20]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics

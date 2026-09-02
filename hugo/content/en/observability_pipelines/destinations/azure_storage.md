@@ -113,7 +113,7 @@ Enter a prefix that you want to apply to all key objects.
 
 ## Health metrics
 
-For [component metrics][10] and [destination buffer metrics][11] emitted by all destinations, see the [Pipelines Usage Metrics][12] documentation. To filter or group by Azure Storage destination metrics, use the tag `component_type:datadog_archives_azure_blob`.
+See [Component metrics][10] and [Destination buffer metrics][11] for more information on metrics emitted by all destinations. To filter or group by Azure Storage destination metrics, use the tag `component_type:datadog_archives_azure_blob`.
 
 ## How the destination works
 
@@ -135,8 +135,7 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [8]: /api/latest/observability-pipelines/
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
-[12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[11]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics
 [13]: https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal
 [14]: https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts
 [15]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-immutability-policies-manage
