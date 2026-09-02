@@ -26,6 +26,7 @@ Retention periods in Agent Observability depend on the type of data and on your 
 | Experiment traces                            | 15 days on on-demand plans; 90 days on committed plans; 6, 9, or 12 months with a retention add-on |
 | Experiment definitions and aggregate results | 90 days from creation                                                                     |
 | Annotated traces, spans, and sessions        | 90 days from the time of annotation, or your span retention period if that is longer      |
+| Annotation labels                            | 90 days, matching the object they annotate                                                |
 | Dataset records                              | 3 years, regardless of your span retention period                                         |
 | Prompts in the prompt registry               | 3 years, extended each time the prompt is pulled                                          |
 | `ml_obs.*` metrics                           | 15 months                                                                                 |
@@ -70,7 +71,9 @@ Annotating an object extends its retention. When you apply an annotation label o
 
 If your organization's span retention period is longer than 90 days, annotated objects are retained for that longer period instead.
 
-Annotation labels are viewable for as long as the object they annotate is retained.
+Annotation labels are retained for the same 90 days as the object they annotate, and are no longer viewable after it expires.
+
+Extending retention by annotating an object does not incur an additional charge.
 
 Free-form notes are not attached to a trace, span, or session, so no object's retention applies to them.
 

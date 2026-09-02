@@ -325,11 +325,11 @@ You can manage annotation queues programmatically. The following endpoints are a
 
 | Data              | Retention period                                    |
 | ----------------- | ----------------------------------------------------|
-| Traces in queues  | Not retained beyond your organization's trace retention period, unless annotated |
-| Annotated traces  | 90 days from the time of annotation, or your trace retention period if that is longer |
-| Annotation labels | As long as the trace they annotate                  |
+| Traces in queues  | Not retained beyond your organization's span retention period, unless annotated |
+| Annotated traces  | 90 days from the time of annotation, or your span retention period if that is longer |
+| Annotation labels | 90 days, matching the trace they annotate            |
 
-Annotating a trace extends its retention: a trace that would otherwise expire under a shorter trace retention period is retained for 90 days from the time you annotate it. For details, see [Data Retention][16].
+Annotating a trace extends its retention at no additional charge: a trace that would otherwise expire under a shorter span retention period is retained for 90 days from the time you annotate it. For details, see [Data Retention][16].
 
 
 ## Example workflows
