@@ -424,10 +424,6 @@ After the SDK is correctly configured and tracking consent is granted, you shoul
 
 **Note:** Revert the diagnostic threshold change before building for Release. For more information on diagnostic logging, see [Advanced Configuration][6].
 
-### View your data in Datadog
-
-After running your app, navigate to the [RUM Explorer][7] to see sessions from your application. You should see session data within a few minutes.
-
 [1]: /real_user_monitoring/
 [2]: https://github.com/DataDog/dd-sdk-cpp/releases
 [3]: /real_user_monitoring/application_monitoring/cpp/advanced_build_configuration

@@ -195,6 +195,10 @@ Each batch follows the intake specification. They are sent as soon as the networ
  
 This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
+## Next steps
+
+See [Enable the DD RUM module][7].
+
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/mobile/kotlin-multiplatform/
 [3]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/features/rum
@@ -207,3 +211,4 @@ This means that even if users open your application while offline, no data is lo
 [10]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#custom-views
 [11]: /real_user_monitoring/error_tracking/kotlin_multiplatform/
 [12]: /real_user_monitoring/explorer/
+[13]: /real_user_monitoring/setup/enable_rum/?platform=kotlin_multiplatform

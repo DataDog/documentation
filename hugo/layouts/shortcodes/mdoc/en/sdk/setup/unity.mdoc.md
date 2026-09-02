@@ -181,6 +181,10 @@ Each batch follows the intake specification. They are sent as soon as the networ
 
 This means that even if users open your application while offline, no data is lost. To help ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
+## Next steps
+
+See [Enable the DD RUM module][11].
+
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/mobile/unity/
 [3]: /help/
@@ -191,3 +195,4 @@ This means that even if users open your application while offline, no data is lo
 [8]: https://docs.unity3d.com/2022.3/Documentation/Manual/webgl-templates.html
 [9]: https://github.com/DataDog/dd-sdk-unity/tree/develop/samples/Datadog%20Sample/Assets/WebGLTemplates
 [10]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum
+[11]: /real_user_monitoring/setup/enable_rum/?platform=unity

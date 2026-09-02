@@ -102,6 +102,10 @@ Each batch follows the intake specification. They are sent as soon as the networ
  
 This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
+## Next steps
+
+See [Enable the DD RUM module][8].
+
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/mobile/roku/
 [3]: https://github.com/rokucommunity/ropm
@@ -109,3 +113,4 @@ This means that even if users open your application while offline, no data is lo
 [5]: /getting_started/tagging/using_tags/#rum--session-replay
 [6]: /real_user_monitoring/application_monitoring/roku/advanced_configuration/#enrich-user-sessions
 [7]: /real_user_monitoring/application_monitoring/roku/data_collected
+[8]: /real_user_monitoring/setup/enable_rum/?platform=roku

@@ -174,9 +174,14 @@ Each batch follows the intake specification. They are sent as soon as the networ
 
 This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
+## Next steps
+
+See [Enable the DD RUM module][7].
+
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/mobile/maui/
 [3]: https://www.nuget.org/packages/Datadog.Maui
 [4]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/
 [5]: /real_user_monitoring/error_tracking/mobile/maui/
 [6]: /real_user_monitoring/explorer/
+[7]: /real_user_monitoring/setup/enable_rum/?platform=maui

@@ -561,6 +561,10 @@ This means that even if users open your application while offline, no data is lo
 
 See [Supported versions][16] for a list of operating system versions and platforms that are compatible with the iOS SDK.
 
+## Next steps
+
+See [Enable the DD RUM module][17].
+
 [1]: /real_user_monitoring/
 [2]: /real_user_monitoring/application_monitoring/ios/supported_versions/
 [3]: /error_tracking/
@@ -577,3 +581,4 @@ See [Supported versions][16] for a list of operating system versions and platfor
 [14]: https://app.datadoghq.com/rum/application/
 [15]: /real_user_monitoring/ios/data_collected/
 [16]: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
+[17]: /real_user_monitoring/setup/enable_rum/?platform=ios

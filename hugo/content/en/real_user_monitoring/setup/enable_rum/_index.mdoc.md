@@ -15,7 +15,7 @@ After you [install the Datadog SDK][1], some SDKs need an extra step to enable t
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}
-RUM is enabled automatically when you initialize the SDK. No further action is needed.
+RUM is enabled automatically when you initialize this SDK. No further action is needed.
 {% /if %}
 
 <!-- Android -->
@@ -54,7 +54,9 @@ See [`ViewTrackingStrategy`](/real_user_monitoring/application_monitoring/androi
 
 <!-- iOS -->
 {% if equals($platform, "ios") %}
-#### Enable RUM
+
+
+## Enable RUM
 
 Configure and start RUM. Do this once, as early as possible, specifically in your `AppDelegate`:
 
@@ -95,7 +97,7 @@ configuration.swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate al
 {% /tab %}
 {% /tabs %}
 
-#### Enable `URLSessionInstrumentation`
+## Enable `URLSessionInstrumentation`
 
 To monitor requests sent from the `URLSession` instance as resources, enable `URLSessionInstrumentation` for your delegate type and pass the delegate instance to the `URLSession`:
 
@@ -132,16 +134,33 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 {% /tabs %}
 
 **Note**: `URLSessionInstrumentation` requires access to a `URLSession` delegate class. For third-party libraries that don't expose a session delegate, use the [Custom Resources API](/real_user_monitoring/application_monitoring/ios/advanced_configuration#custom-resources) to manually track those network calls.
+
+## Check the Xcode console
+
+Enable verbose SDK logging to confirm data is being sent. Add the following in the `DEBUG` build configuration only:
+
+```swift
+Datadog.verbosityLevel = .debug
+```
+
+After running your app, look for output similar to the following in the Xcode debugger console:
+
+```
+[DATADOG SDK] 🐶 → 17:23:09.849 [DEBUG] ⏳ (rum) Uploading batch...
+[DATADOG SDK] 🐶 → 17:23:10.972 [DEBUG]    → (rum) accepted, won't be retransmitted: success
+```
+
+**Note**: Remove `Datadog.verbosityLevel` before building for Release.
 {% /if %}
 
 <!-- Flutter -->
 {% if equals($platform, "flutter") %}
-RUM is enabled automatically when you initialize the SDK. No further action is needed.
+RUM is enabled automatically when you initialize this SDK. No further action is needed.
 {% /if %}
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
-RUM is enabled automatically when you initialize the SDK. No further action is needed.
+RUM is enabled automatically when you initialize this SDK. No further action is needed.
 {% /if %}
 
 <!-- Kotlin Multiplatform -->
@@ -187,7 +206,7 @@ See [Automatically track views](/real_user_monitoring/application_monitoring/adv
 
 <!-- C / C++ -->
 {% if equals($platform, "cpp") %}
-RUM is enabled automatically when you initialize the SDK. No further action is needed.
+RUM is enabled automatically when you initialize this SDK. No further action is needed.
 {% /if %}
 
 <!-- .NET MAUI -->
@@ -211,84 +230,18 @@ DdRum.Enable(new DdRumConfiguration { ApplicationId = "<APPLICATION_ID>" });
 
 <!-- Roku -->
 {% if equals($platform, "roku") %}
-RUM is enabled automatically when you initialize the SDK. No further action is needed.
+RUM is enabled automatically when you initialize this SDK. No further action is needed.
 {% /if %}
 
 <!-- Unity -->
 {% if equals($platform, "unity") %}
-RUM is enabled automatically when you initialize the SDK. No further action is needed.
+RUM is enabled automatically when you initialize this SDK. No further action is needed.
 {% /if %}
 
-## Start monitoring
+## View your data in Datadog
 
-{% if equals($platform, "browser") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
+After running your app, navigate to the [RUM Explorer][101] to see sessions from your application.
 
-Your application appears as pending on the Applications page until Datadog starts receiving data.
-{% /if %}
-{% if equals($platform, "android") %}
-Visualize the [data collected](/real_user_monitoring/android/data_collected/) in [dashboards](/real_user_monitoring/platform/dashboards/) or create a search query in the [RUM Explorer](https://app.datadoghq.com/rum/list).
+Your application appears as pending on the Applications page until Datadog starts receiving data (session data should appear within a few minutes).
 
-Your application appears as pending on the Applications page until Datadog starts receiving data.
-{% /if %}
-{% if equals($platform, "ios") %}
-After completing setup, verify that the iOS SDK is correctly sending data to Datadog.
-
-#### Check the Xcode console
-
-Enable verbose SDK logging to confirm data is being sent. Add the following in the `DEBUG` build configuration only:
-
-```swift
-Datadog.verbosityLevel = .debug
-```
-
-After running your app, look for output similar to the following in the Xcode debugger console:
-
-```
-[DATADOG SDK] 🐶 → 17:23:09.849 [DEBUG] ⏳ (rum) Uploading batch...
-[DATADOG SDK] 🐶 → 17:23:10.972 [DEBUG]    → (rum) accepted, won't be retransmitted: success
-```
-
-**Note**: Remove `Datadog.verbosityLevel` before building for Release.
-
-#### View your data in Datadog
-
-After running your app, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application. You should see session data within a few minutes.
-
-To view crash reports and iOS errors, navigate to [Error Tracking](/error_tracking/). For more details on crash analysis with symbolicated stack traces, see [iOS Crash Reporting and Error Tracking](/error_tracking/frontend/mobile/ios).
-{% /if %}
-{% if equals($platform, "kotlin_multiplatform") %}
-After running your app, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
-
-Your application appears as pending on the Applications page until Datadog starts receiving data.
-{% /if %}
-{% if equals($platform, "maui") %}
-After running your app, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
-
-Your application appears as pending on the Applications page until Datadog starts receiving data.
-{% /if %}
-{% if equals($platform, "flutter") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
-
-Your application appears as pending on the Applications page until Datadog starts receiving data.
-{% /if %}
-{% if equals($platform, "react_native") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
-
-Your application appears as pending on the Applications page until Datadog starts receiving data.
-{% /if %}
-{% if equals($platform, "cpp") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
-
-Your application appears as pending on the Applications page until Datadog starts receiving data.
-{% /if %}
-{% if equals($platform, "roku") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
-
-Your application appears as pending on the Applications page until Datadog starts receiving data.
-{% /if %}
-{% if equals($platform, "unity") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
-
-Your application appears as pending on the Applications page until Datadog starts receiving data.
-{% /if %}
+[101]: /real_user_monitoring/investigate_problems/explore_retained_data/

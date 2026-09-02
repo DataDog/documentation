@@ -293,6 +293,10 @@ This means that even if users open your application while offline, no data is lo
 
 **Note**: The data on the disk is automatically deleted if it gets too old to ensure the Flutter SDK does not use too much disk space.
 
+## Next steps
+
+See [Enable the DD RUM module][14].
+
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/mobile/flutter/
 [3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
@@ -306,3 +310,4 @@ This means that even if users open your application while offline, no data is lo
 [11]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
 [12]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionDetector-class.html
 [13]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionAnnotation-class.html
+[14]: /real_user_monitoring/setup/enable_rum/?platform=flutter

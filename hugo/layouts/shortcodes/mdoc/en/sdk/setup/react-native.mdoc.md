@@ -550,5 +550,10 @@ After the plugin is installed and configured, it automatically tracks interactio
 
 If you're deploying updates with [CodePush][1], see the [CodePush setup documentation][2] for additional configuration steps.
 
+## Next steps
+
+See [Enable the DD RUM module][3].
+
 [1]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/
 [2]: /real_user_monitoring/application_monitoring/react_native/setup/codepush
+[3]: /real_user_monitoring/setup/enable_rum/?platform=react_native
