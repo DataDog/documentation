@@ -59,11 +59,11 @@ An LLM span represents a single request to an LLM provider. A trace containing s
 
 ## What is included in the base price?
 
-All Agent Observability features are included in the base price. Datadog charges only for the LLM spans you ingest, and does not charge extra for any capability.
+Datadog charges only for the LLM spans you ingest. [Annotation queues][15] and [datasets][16] are included at no extra charge, and [experiments][3] are metered on LLM spans in the same way as production traces.
 
-The one exception is [Sensitive Data Scanner](#is-sensitive-data-scanner-included), which is included within a usage allotment that scales with your LLM span usage.
+[Evaluations][13] and [patterns][14] use an LLM to do their work. Datadog does not charge extra for them when you run them with your own LLM provider key (bring your own key, or BYOK). Your LLM provider bills you directly for that model usage, separately from your Datadog bill. To connect a provider, see [Connect your LLM provider account][17].
 
-[Evaluations][13] and [patterns][14] use an LLM to do their work. You can optionally run them with your own LLM provider key (bring your own key, or BYOK) instead of the model Datadog provides. Your LLM provider bills you directly for the model usage in that case, separately from your Datadog bill. To connect a provider, see [Connect your LLM provider account][15].
+[Sensitive Data Scanner](#is-sensitive-data-scanner-included) is included within a usage allotment that scales with your LLM span usage.
 
 ## How can I estimate my LLM span usage?
 
@@ -137,4 +137,6 @@ Contact [Sales][11] or your [Customer Success][12] Manager to discuss pricing or
 [12]: mailto:success@datadoghq.com
 [13]: /llm_observability/investigate/evaluations/
 [14]: /llm_observability/investigate/patterns/
-[15]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/connect_to_account/
+[15]: /llm_observability/investigate/annotation_queues/
+[16]: /llm_observability/improve/datasets/
+[17]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/connect_to_account/
