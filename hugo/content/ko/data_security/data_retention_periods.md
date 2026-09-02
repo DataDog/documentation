@@ -49,7 +49,7 @@ attributes:
 - data_type: '- **케이스**: 계정 유지 기간 동안 보관
 
     '
-  product: Case Management
+  product: Work Management
 - data_type: '- **배포**: 30일
 
     '
@@ -154,9 +154,7 @@ attributes:
   product: Agent Observability
 - data_type: '- **로그**: 고객 플랜에 따라 결정
 
-    - **Sensitive Data Scanner 예시 로그**: <span class="d-none site-region-container"
-    data-region="us,us3,us5,eu,ap1,ap2,uk1">3일</span><span class="d-none site-region-container"
-    data-region="gov,gov2">7일</span>
+    - **Sensitive Data Scanner 예시 로그**: 7일
 
     '
   product: Log Management
