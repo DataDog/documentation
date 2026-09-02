@@ -1,8 +1,13 @@
 import { describe, it, expect } from "vitest";
 import Markdoc from "@markdoc/markdoc";
+import type { Config } from "@markdoc/markdoc";
 import schema from "../../../../markdoc.schema.mjs";
 
-const config = { tags: schema.tags, nodes: schema.nodes };
+// The schema comes from an untyped `.mjs`, and its tags carry Astro render
+// values that Markdoc's `Config` types as plain strings (see the note in
+// transform.unit.test.ts). Cast once here so the validate() calls below stay
+// typed.
+const config = { tags: schema.tags, nodes: schema.nodes } as unknown as Config;
 
 function validateMdoc(source: string) {
   return Markdoc.validate(Markdoc.parse(source), config);
