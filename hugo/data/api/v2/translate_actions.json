@@ -1905,7 +1905,7 @@
     "summary": "Get a feature flag"
   },
   "UpdateFeatureFlag": {
-    "description": "Updates an existing feature flag's metadata such as\n name and description. Does not modify targeting rules or allocations.",
+    "description": "Updates an existing feature flag's metadata such as\n name and description. Does not modify targeting rules or allocations.\n\nTo change the owning team, update `tags` and include a tag of the form\n`team:<team-handle>` in the array. `tags` is a full replacement of the\nexisting tag set (including any `team:` tag), so include every tag you\nwant to keep, not just the ones you're adding.",
     "summary": "Update a feature flag",
     "request_description": "",
     "request_schema_description": "Request to update a feature flag."
