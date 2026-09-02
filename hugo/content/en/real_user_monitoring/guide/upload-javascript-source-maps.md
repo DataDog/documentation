@@ -118,6 +118,9 @@ If the sum of the file size for <code>javascript.364758.min.js</code> and <code>
 
 The best way to upload source maps is to add an extra step in your CI pipeline and run the dedicated command from the [Datadog CLI][1]. It scans the `dist` directory and subdirectories to automatically upload source maps with relevant minified files.
 
+{{< tabs >}}
+{{% tab "Service and version" %}}
+
 {{< site-region region="us" >}}
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
 2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DD_API_KEY`.
@@ -164,6 +167,59 @@ Only source maps with the `.js.map` extension work to correctly unminify stack t
 
 <div class="alert alert-info">If you are serving the same JavaScript source files from different subdomains, upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full URL. For example, specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>.</div>
 
+{{% /tab %}}
+{{% tab "Debug ID" %}}
+
+Debug IDs associate a JavaScript bundle with its source map without relying on the bundle URL, service, or release version.
+
+1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
+2. [Create a dedicated Datadog API key][6] and export it as an environment variable named `DD_API_KEY`.
+3. For sites other than US1, configure the CLI by exporting `DD_SITE` with your [Datadog site][7].
+4. Add debug IDs to your build output using either a Datadog Build Plugin or `datadog-ci`:
+
+   - To inject debug IDs during the build, configure the [Datadog Build Plugin][8]:
+
+     ```javascript
+     rum: {
+       sourceCodeContext: {
+         debugId: true,
+       },
+     }
+     ```
+
+   - To inject debug IDs after the build, run:
+
+     ```bash
+     datadog-ci sourcemaps inject /path/to/dist
+     ```
+
+5. Upload the source maps and corresponding JavaScript bundles:
+
+   ```bash
+   datadog-ci sourcemaps upload /path/to/dist --debug-id
+   ```
+
+If a Datadog Build Plugin already injected debug IDs, you do not need to run `datadog-ci sourcemaps inject`. Do not pass `--service`, `--release-version`, or `--minified-path-prefix` with `--debug-id`.
+
+The `inject` command modifies JavaScript bundles and source maps in place. Run it after the build and before generating byte-dependent artifacts such as SRI hashes, compressed assets, signatures, or checksum manifests. Deploy the same modified artifacts that you upload.
+
+To find the local source map for a specific debug ID, run:
+
+```bash
+datadog-ci sourcemaps find /path/to/dist --debug-id 12345678-1234-1234-1234-123456789abc
+```
+
+To find source maps that do not contain a debug ID, run:
+
+```bash
+datadog-ci sourcemaps find /path/to/dist --missing-debug-id
+```
+
+The `find` command only inspects local `*.js.map` files. It does not confirm whether Datadog received an artifact.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 See all uploaded symbols and manage your source maps on the [{{< ui >}}Explore RUM Debug Symbols{{< /ui >}}][5] page.
 
 ### Link stack frames to your source code
@@ -193,3 +249,6 @@ On the other hand, an unminified stack trace provides you with all the context y
 [3]: https://docs.datadoghq.com/logs/log_collection/javascript/#initialization-parameters
 [4]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps#link-errors-with-your-source-code
 [5]: https://app.datadoghq.com/source-code/setup/rum
+[6]: https://app.datadoghq.com/organization-settings/api-keys
+[7]: /getting_started/site/
+[8]: /real_user_monitoring/application_monitoring/browser/build_plugins/
