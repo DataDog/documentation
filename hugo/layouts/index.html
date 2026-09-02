@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang='{{ if eq .Site.Language.Lang "en" }}en-US{{ else }}{{ .Site.Language.Lang }}{{ end }}' data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" data-env="{{.Site.Params.environment}}" data-commit-ref="{{ .Site.Params.branch }}" style="opacity:0" class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner announcement{{ end }}">
+
+<head>
+        {{ partialCached "header-scripts.html" . }}
+
+        <meta name='zd-site-verification' content='scvnk4hxijj6or52029kqx' />
+
+        <meta charset="utf-8">
+        {{ partial "prefetch.html" . }}
+        {{ partial "preload.html" . }}
+        <title>{{ if isset .Params "integration_title" }}{{ .Params.integration_title }}{{ else }}{{ .Title }}{{ end }}
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {{ if .Params.external_redirect }} {{ partial "meta-http-equiv.html" . }} {{ end }}
+        {{- partial "canonical.html" . -}}
+        {{- partial "noindex.html" . -}}
+        {{- partial "hreflang.html" . -}}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="icon" type="image/png" href="https://docs.datadoghq.com/favicon.ico">
+
+        {{ partialCached "css.html" . }}
+
+        {{- if ne $.Params.disable_opengraph_meta_tags true -}}
+        {{- partial "meta.html" . -}}
+        {{- end -}}
+</head>
+
+{{ $dot := . }}
+
+<!-- get lang specific data file -->
+{{ $.Scratch.Set "data" "" }}
+{{ if ne $dot.Page.Lang "en"}}
+    {{ if (fileExists (print "data/partials/home." $dot.Page.Lang ".yaml")) }}
+      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "home." $dot.Page.Lang)) }}
+    {{ else }}
+      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.home }}
+    {{ end }}
+{{ else }}
+    {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.home }}
+{{ end }}
+{{ $datafile := ($.Scratch.Get "data") }}
+
+
+
+{{- $bodyClass := $.Scratch.Get "bodyClass" -}}
+{{- $customClass := $.Params.customclass -}}
+<body class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ $customClass }} {{ if .Site.Params.announcement_banner }}announcement{{ end }}">
+
+
+    {{ partial "header/header.html" . }}
+
+    {{ partial "home-header.html" . }}
+
+    <div class="home-content">
+        {{/* Decorative pastel gradient blobs that form the ambient background of the home page. */}}
+        <div class="home-content__blobs" aria-hidden="true">
+            <div class="home-content__blob home-content__blob--1"></div>
+            <div class="home-content__blob home-content__blob--2"></div>
+            <div class="home-content__blob home-content__blob--3"></div>
+            <div class="home-content__blob home-content__blob--4"></div>
+            <div class="home-content__blob home-content__blob--5"></div>
+        </div>
+
+        <main class="container pb-2">
+
+            <section class="row guides justify-content-center">
+                    {{ range $i, $guide := $datafile.guides }}
+                        <div class=" guide-col d-flex flex-column">
+                                <div class="inner-content">
+                                <div class="guide-no">{{ add $i 1}}.</div>
+                            <h5 class="text-black text-uppercase pt-0 mt-0">{{ $guide.title}} </h5>
+
+                                <p class="small">{{ $guide.desc }}</p>
+                                <div class="mt-auto">
+                                        <a class="smaller font-semibold text-primary" href="{{ $guide.link | absLangURL }}">{{ $guide.link_text }} ></a>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        {{ if ne $i 2 }}
+                        <div class="px-0 mx-0 right-arrow-container d-none d-md-flex">
+                            <svg class="right-arrow" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                <path d="M0,0 L100,50 L0,100" />
+                            </svg>
+                        </div>
+
+                        <svg class="d-block d-md-none down-arrow" xmlns="http://www.w3.org/2000/svg" version="1.1"  viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <path d="M0 0 L50 100 L100 0" />
+                        </svg>
+
+                        {{ end }}
+                    {{ end }}
+            </section>
+
+        </main>
+
+        {{ partial "home/products-browse.html" . }}
+    </div>
+
+    {{ partial "footer/footer.html" . }}
+
+    {{ partial "footer-scripts.html" . }}
+
+    {{ partial "footer-js-dd-docs-methods" . }}
+
+    {{ partial "preview_banner/preview_banner" . }}
+
+    {{ partial "conversational-search.html" . }}
+
+</body>
+</html>
