@@ -21,8 +21,8 @@ Retention periods in Agent Observability depend on the type of data. Traces from
 | ------------------------------------------ | ------------------------------------------------------------------- |
 | Traces and spans                           | 15 days by default; 30, 60, or 90 days with a longer-retention plan |
 | Experiment traces                          | 15 days without pre-purchased capacity; 90 to 365 days with it      |
+| Experiment definitions and aggregate results | 90 days from creation, on all plans                               |
 | Annotated traces, spans, and sessions      | 90 days from the time of annotation, or your trace retention period if that is longer |
-| Annotation labels                          | As long as the object they annotate                                 |
 | Dataset records (current version)          | 3 years from creation                                               |
 | Dataset records (previous versions)        | 90 days, extended each time the version is used                     |
 | Prompts in the prompt registry             | 3 years, extended each time the prompt is pulled                    |
@@ -51,9 +51,11 @@ Traces produced by [experiment][3] runs are retained longer than production trac
 
 Without pre-purchased capacity — including organizations that have no Agent Observability entitlement — experiment traces are retained for the same **15 days** as production traces.
 
-Evaluation scores and metrics recorded on experiment rows follow the same period as the experiment traces they are attached to.
-
 If your organization has a custom contract, your retention periods may not follow the pairings in this table. Contact your Datadog account representative to confirm your periods.
+
+### Experiment definitions
+
+The experiment itself — its name, configuration, and aggregate results — is retained for **90 days** from the time it is created. Unlike experiment traces, this period is the same on every plan and does not extend with a longer trace retention tier. Export any experiment results you need to keep beyond 90 days.
 
 ## Annotated objects
 
@@ -61,9 +63,9 @@ Annotating an object extends its retention. When you apply an annotation label o
 
 If your organization's trace retention period is longer than 90 days, annotated objects are retained for that longer period instead.
 
-Annotation labels are retained for as long as the object they annotate. After the annotated trace, span, or session expires, its labels are no longer viewable.
+Annotation labels are viewable for as long as the object they annotate is retained.
 
-Free-form notes that are not attached to a trace, span, or session are not tied to any object's retention.
+Free-form notes are not attached to a trace, span, or session, so no object's retention applies to them.
 
 ## Dataset records
 
