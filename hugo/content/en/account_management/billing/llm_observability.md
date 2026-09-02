@@ -57,13 +57,18 @@ Sending 250,000 LLM spans in a month.
 
 An LLM span represents a single request to an LLM provider. A trace containing seven LLM requests therefore contains seven billable LLM spans, regardless of how many workflow, tool, or retrieval spans surround them.
 
-## Are experiments billed separately?
+## What is included in the base price?
 
-No. [Experiments][3] are part of Agent Observability and are billed the same way as production monitoring, on the number of LLM spans ingested.
+Every Agent Observability capability is included in the base price and billed only on the LLM spans ingested. There is no separate charge, quota, or add-on for:
 
-## Are indexed spans billed separately?
-
-No. Indexed LLM spans are included in the base price.
+- Indexed LLM spans
+- [Evaluations][13], including managed evaluations and custom LLM-as-a-judge evaluations, with no limit on how many you run
+- [Experiments][3], which are metered on LLM spans in the same way as production monitoring
+- [Patterns][14]
+- [Annotation queues][15]
+- [Datasets][16]
+- [Prompt management][17] and the [playground][18]
+- [Sensitive Data Scanner](#is-sensitive-data-scanner-included), within the allotment described below
 
 ## How can I estimate my LLM span usage?
 
@@ -99,7 +104,9 @@ Yes. Agent Observability does not require you to purchase any other Datadog prod
 
 ## Is Sensitive Data Scanner included?
 
-Agent Observability uses [Sensitive Data Scanner][10] Library Rules to identify and redact sensitive information in your LLM application traffic, including personal information, financial data, and health records. You do not purchase Sensitive Data Scanner separately to use this capability.
+Yes. As with the other capabilities [included in the base price](#what-is-included-in-the-base-price), you do not purchase Sensitive Data Scanner separately. Agent Observability uses [Sensitive Data Scanner][10] Library Rules to identify and redact sensitive information in your LLM application traffic, including personal information, financial data, and health records.
+
+Sensitive Data Scanner differs from the others in having a usage allotment rather than being unmetered.
 
 Your Sensitive Data Scanner allotment scales with your LLM span usage: every 10,000 LLM spans includes 1 GB of Sensitive Data Scanner usage.
 
@@ -133,3 +140,9 @@ Contact [Sales][11] or your [Customer Success][12] Manager to discuss pricing or
 [10]: /security/sensitive_data_scanner/
 [11]: mailto:sales@datadoghq.com
 [12]: mailto:success@datadoghq.com
+[13]: /llm_observability/investigate/evaluations/
+[14]: /llm_observability/investigate/patterns/
+[15]: /llm_observability/investigate/annotation_queues/
+[16]: /llm_observability/improve/datasets/
+[17]: /llm_observability/configure/prompt_management/
+[18]: /llm_observability/improve/playground
