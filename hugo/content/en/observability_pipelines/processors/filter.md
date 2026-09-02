@@ -15,9 +15,6 @@ products:
 - name: Metrics
   icon: metrics
   url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
-- name: Traces
-  icon: apm
-  url: /observability_pipelines/configuration/?tab=traces#pipeline-types
 ---
 
 {{< product-availability >}}
@@ -36,7 +33,7 @@ To set up the filter processor:
   - Events that match the query are sent to the next component.
   - Events that don't match the query are dropped.
 
-### Filter out custom metrics in metrics pipelines
+### Filter out custom metrics in a metrics pipeline
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
 Filtering out unused metrics is in Preview. Contact your account manager to request access.
