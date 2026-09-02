@@ -244,6 +244,15 @@ To use Flaky Tests Management features, you must use Datadog's native instrument
 
 ## Troubleshooting
 
+### Disabled flaky tests are not automatically moved to Fixed
+
+Datadog does not automatically move {{< ui >}}Disabled{{< /ui >}} tests to the {{< ui >}}Fixed{{< /ui >}} state, even after they stop flaking for 30 days. A disabled test is skipped in CI, so Datadog receives no test run data for it and cannot verify whether it is still flaky.
+
+To fix a disabled test, do one of the following:
+
+- Trigger the [attempt-to-fix remediation flow](#confirm-fixes-for-flaky-tests). It retries the test even while it is disabled, and moves it to {{< ui >}}Fixed{{< /ui >}} once the fix is confirmed and merged.
+- Manually change the test's state to {{< ui >}}Active{{< /ui >}} or {{< ui >}}Quarantined{{< /ui >}} using the [state drop-down](#change-a-flaky-tests-state). Datadog then automatically moves the test to {{< ui >}}Fixed{{< /ui >}} the next time the automation runs, unless the test flakes again.
+
 ### Slack notifications are not delivered
 
 If Slack notifications are not being delivered, check that your notification rule uses the `@slack-ACCOUNT-CHANNEL` format.
