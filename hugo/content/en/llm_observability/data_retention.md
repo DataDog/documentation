@@ -20,7 +20,7 @@ Retention periods in Agent Observability depend on the type of data. Traces from
 | Data                                       | Retention period                                                    |
 | ------------------------------------------ | ------------------------------------------------------------------- |
 | Traces and spans                           | 15 days by default; 30, 60, or 90 days with a longer-retention plan |
-| Experiment traces                          | 90 days by default; up to 365 days with a longer-retention plan     |
+| Experiment traces                          | 15 days without pre-purchased capacity; 90 to 365 days with it      |
 | Annotated traces, spans, and sessions      | 90 days from the time of annotation, or your trace retention period if that is longer |
 | Annotation labels                          | As long as the object they annotate                                 |
 | Dataset records (current version)          | 3 years from creation                                               |
@@ -34,13 +34,13 @@ Traces and spans from your instrumented applications are retained for **15 days*
 
 Longer retention is available as part of your contract, in tiers of **30, 60, or 90 days**. Because retention affects how much data Datadog stores for you, extending it changes what you are billed for and is arranged with your account team rather than enabled from the Datadog UI. To extend your retention period, contact your Datadog account representative or [Datadog support][1].
 
-Your trace retention period also sets the floor for related data. Extending it extends experiment retention and annotation retention along with it, as described in the following sections.
+Your trace retention period also affects related data. On standard plans, a longer trace retention tier comes with a longer experiment retention period, and trace retention sets the floor for how long annotated objects are kept. See the following sections.
 
 Retention applies to the raw spans you query in the Traces explorer. Metrics derived from those spans are retained separately, for longer. See [Metrics](#metrics).
 
 ## Experiment traces
 
-Traces produced by [experiment][3] runs are retained longer than production traces, because experiments are used to compare results across a development cycle. Experiment retention scales with your trace retention period:
+Traces produced by [experiment][3] runs are retained longer than production traces on plans with pre-purchased capacity, because experiments are used to compare results across a development cycle. On these plans, each trace retention tier comes with a longer experiment retention period:
 
 | Trace retention | Experiment trace retention |
 | --------------- | -------------------------- |
@@ -49,9 +49,11 @@ Traces produced by [experiment][3] runs are retained longer than production trac
 | 60 days         | 270 days                   |
 | 90 days         | 365 days                   |
 
+Without pre-purchased capacity — including organizations that have no Agent Observability entitlement — experiment traces are retained for the same **15 days** as production traces.
+
 Evaluation scores and metrics recorded on experiment rows follow the same period as the experiment traces they are attached to.
 
-On plans without pre-purchased capacity, experiment traces are retained for the same period as your production traces (15 days) rather than the extended 90 days.
+If your organization has a custom contract, your retention periods may not follow the pairings in this table. Contact your Datadog account representative to confirm your periods.
 
 ## Annotated objects
 
