@@ -26,7 +26,7 @@ Multimodal support enables you to:
 
 {{< img src="llm_observability/instrumentation/image_example.png" alt="An LLM span in the Agent Observability trace view. The input USER message shows the prompt 'What is in this image?' with an inline photo of a black puppy, and the output ASSISTANT message describes it as a black Labrador Retriever puppy on a wooden surface." style="width:100%;" >}}
 
-Media is attached per message using the typed fields `image_parts` and `audio_parts`. Automatic instrumentation populates these fields for supported integrations. For everything else, annotate them yourself.
+Media is attached per message using the typed fields `image_parts` and `audio_parts`. [Automatic instrumentation](#automatic-instrumentation) populates these fields for supported integrations, so media from those libraries appears in traces without any code change. For anything else, [manual instrumentation](#manual-instrumentation) covers how to attach media to a span.
 
 ## Requirements
 
