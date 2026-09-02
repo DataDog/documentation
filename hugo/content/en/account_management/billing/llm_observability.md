@@ -63,6 +63,8 @@ All Agent Observability features are included in the base price. Datadog charges
 
 The one exception is [Sensitive Data Scanner](#is-sensitive-data-scanner-included), which is included within a usage allotment that scales with your LLM span usage.
 
+[Evaluations][13] and [patterns][14] use an LLM to do their work. You can optionally run them with your own LLM provider key (bring your own key, or BYOK) instead of the model Datadog provides. Your LLM provider bills you directly for the model usage in that case, separately from your Datadog bill. To connect a provider, see [Connect your LLM provider account][15].
+
 ## How can I estimate my LLM span usage?
 
 Each request your application makes to an LLM provider corresponds to one LLM span, so provider-side request counts are a good starting point. Most providers report request counts in their own console, and Datadog integrations expose the same counts as metrics:
@@ -133,3 +135,6 @@ Contact [Sales][11] or your [Customer Success][12] Manager to discuss pricing or
 [10]: /security/sensitive_data_scanner/
 [11]: mailto:sales@datadoghq.com
 [12]: mailto:success@datadoghq.com
+[13]: /llm_observability/investigate/evaluations/
+[14]: /llm_observability/investigate/patterns/
+[15]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/connect_to_account/
