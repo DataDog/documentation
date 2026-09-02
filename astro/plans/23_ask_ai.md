@@ -77,13 +77,17 @@ These are expected, not bugs:
 - The Hugo homepage hero button has no Astro equivalent; Astro has no homepage.
 - The kill switch governs Hugo only until [24_feature_flags.md](24_feature_flags.md)
   lands.
-- Telemetry appears in two different RUM applications, since Astro reports to
-  `docs-astro`.
 
 ### D. Telemetry
 
-After exercising the widget on each site, confirm events arrive in that site's RUM
-application and in Logs, tagged `docs_ai: true`:
+Both sites report to the same RUM application ([22_add_rum.md](22_add_rum.md)), so
+Astro's events are identified by `@context.stack:astro` and Hugo's by
+`-@context.stack:astro`. Scope every query that way — otherwise an event emitted by
+Hugo looks like proof that Astro's copy of the package works, which is exactly the
+confusion this checklist exists to avoid.
+
+After exercising the widget on each site, confirm events arrive in RUM and in Logs
+under the right `stack`, tagged `docs_ai: true`:
 
 - Impression, first open with the correct trigger source (`floating_button`,
   `home_hero`, or `search_suggestion` — check each entry point produces the right

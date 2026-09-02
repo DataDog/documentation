@@ -23,15 +23,22 @@ This plan is downstream of [23_ask_ai.md](23_ask_ai.md), which deliberately does
 defaults to enabled when no resolver is supplied. Astro passes nothing until this
 plan lands. Implementing this plan means supplying that resolver from the Astro host.
 
-### Known external dependency
+### Resolved: no external dependency
 
-`DatadogProvider` is configured with an `applicationId`, and Datadog feature flags
-are scoped per application and environment. If [22_add_rum.md](22_add_rum.md) gives
-Astro a new RUM application, `docs-ai-enabled` likely won't resolve against it and
-will fall back to its `true` default — a silently inert kill switch. Before
-implementing, confirm with the flag's owner whether the flag should be extended to
-the new application, or whether the provider should keep using Hugo's application ID
-even when RUM does not.
+An earlier draft of this plan flagged a likely blocker. `DatadogProvider` is
+configured with an `applicationId`, and Datadog feature flags are scoped per
+application and environment — so if Astro had reported to a new RUM application,
+`docs-ai-enabled` would probably not have resolved against it and would have fallen
+back to its `true` default: a silently inert kill switch, requiring a decision from
+the flag's owner before this plan could be implemented.
+
+[22_add_rum.md](22_add_rum.md) now has Astro **share Hugo's RUM application**,
+distinguishing the two sites by a `stack: 'astro'` global context property instead.
+Removing this blocker was one of the reasons for that decision. Astro's provider
+therefore uses the same `applicationId` as Hugo's, and `docs-ai-enabled` resolves
+identically on both sites with no flag-configuration change and no owner sign-off.
+
+What remains is only the wiring described below.
 
 ### Note: the kill switch is asymmetric until this plan ships
 
@@ -39,6 +46,12 @@ While Hugo and Astro run side by side, `docs-ai-enabled` governs Hugo only. Hugo
 passes a resolver backed by its existing `helpers/feature-flags.js`, so its kill
 switch behaves exactly as it does today. Astro passes no resolver, so the Ask AI
 package falls back to its `true` default there.
+
+Note the cause: the flag *would* resolve correctly on Astro now that it shares
+Hugo's RUM application. Nothing external is missing — the asymmetry is purely that
+Astro has no resolver wired up yet. That makes it cheap to fix if the kill switch
+is ever needed before this plan ships, which is a better position than the earlier
+design left us in.
 
 The practical consequence: flipping the flag off disables Ask AI across Hugo but
 leaves it live on Astro's `/api` pages. This was accepted deliberately — Ask AI is
@@ -94,11 +107,17 @@ instead, that ordering is wrong.
 
 ### C. The flag actually controls Astro (the critical test)
 
-The whole risk is that `docs-ai-enabled` is scoped to Hugo's RUM application and
-silently does not resolve for Astro's.
+Sharing Hugo's RUM application means the flag should resolve on Astro with no
+configuration change. That makes this test cheaper than it would have been — but not
+optional, because a flag that resolves is not the same as a flag that is wired to
+anything.
 
-1. In Datadog, set `docs-ai-enabled` to **false**, targeted at the Astro application
-   and preview environment.
+**Warning: this test affects Hugo too.** One application and one flag now means one
+kill switch governing both sites. Flipping `docs-ai-enabled` off to test Astro will
+also disable Ask AI on Hugo for whoever is targeted. Scope the change to the preview
+environment, and do not run this against live.
+
+1. In Datadog, set `docs-ai-enabled` to **false** for the preview environment.
 2. Hard-reload the Astro preview page.
 3. The widget must **disappear**: the floating button is gone, the panel is not in
    the DOM, and the searchbar's "Ask AI about …" row is absent.
@@ -106,9 +125,15 @@ silently does not resolve for Astro's.
    console errors, no orphaned nodes left in `document.body`.
 5. Set the flag back to **true**, reload, and confirm the widget returns.
 
-If step 3 shows no change, the flag is not reaching Astro. That is the exact defect
-this verification exists to catch, and it is invisible from the Datadog UI alone —
-the flag will look correctly configured.
+If step 3 shows no change, the flag is not reaching Astro's widget — the resolver is
+not wired to the package, or the package is ignoring it. Invisible from the Datadog
+UI alone, which will show the flag as correctly configured and, now that the
+application is shared, correctly resolving.
+
+6. **Confirm the blast radius while the flag is off.** Load a Hugo preview page in
+   the same state and confirm its widget is *also* gone. This is expected, and
+   confirming it is how you learn the switch is genuinely global rather than
+   accidentally half-connected.
 
 ### D. Optimistic mount
 
@@ -124,18 +149,30 @@ not take Ask AI down.
 
 ### E. Exposure logging
 
-If exposure logging is enabled, confirm exposure events appear for the Astro
-application, and — importantly — that a single page load produces **one** exposure
-per flag evaluation rather than duplicates. Duplicates would indicate more than one
-provider was initialized, which is the specific problem that choosing host-injected
-flags (option C) was meant to avoid.
+Confirm exposure events appear, scoped with `@context.stack:astro` since Hugo's
+exposures land in the same application — an unscoped query will show Hugo's and look
+like success.
 
-### F. Hugo is untouched
+Then confirm a single Astro page load produces **one** exposure per flag evaluation
+rather than duplicates. Duplicates would indicate more than one provider was
+initialized, which is the specific problem that choosing host-injected flags
+(option C) was meant to avoid.
 
-This plan does not modify Hugo. Confirm on a Hugo page in the same deploy:
+### F. Hugo still behaves as before
 
-- Toggling the flag still controls the Hugo widget and searchbar row as before.
-- Hugo still initializes exactly one provider.
+This plan does not modify Hugo's code, but it now shares an application and a flag
+with it, so "untouched" needs checking rather than assuming:
+
+- Hugo still initializes exactly one provider, and its exposures are unchanged in
+  shape.
+- Astro's provider initialization does not interfere with Hugo's within a session
+  that visits both sites — load a Hugo page, navigate to `/api`, and confirm both
+  resolve the flag and neither logs a provider error or an "already initialized"
+  warning. Two OpenFeature registries in two separately-bundled apps on one origin
+  is the untested configuration here.
+- Flag changes affect both sites together. Already covered in C, and restated here
+  because it is a behavior change from the pre-Astro world worth communicating to
+  whoever might flip this switch.
 
 ### G. Then decide whether to keep it
 

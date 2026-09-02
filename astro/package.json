@@ -30,6 +30,8 @@
     "@astrojs/node": "^11.0.3",
     "@astrojs/preact": "^6.0.2",
     "@astrojs/sitemap": "^3.7.3",
+    "@datadog/browser-logs": "^7.11.0",
+    "@datadog/browser-rum": "^7.11.0",
     "astro": "^7.1.5",
     "cdocs-data": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v2.0.0.tgz",
     "marked": "^18.0.7",
@@ -41,6 +43,7 @@
   },
   "devDependencies": {
     "@astrojs/ts-plugin": "^1.10.10",
+    "@datadog/datadog-ci": "^5.23.0",
     "@playwright/test": "^1.62.0",
     "@testing-library/preact": "^3.2.4",
     "@testing-library/user-event": "^14.6.1",

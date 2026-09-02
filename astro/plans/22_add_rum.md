@@ -20,26 +20,48 @@ Aim for parity with Hugo's configuration, adapted where Astro's toolchain differ
 
 ## Claude's plan
 
-### Prerequisite: a new RUM application (user action, blocking)
+### No prerequisite: Astro shares Hugo's RUM application
 
-Astro reports into its **own** RUM application, not Hugo's. Before implementation,
-create it in the Datadog app:
+Astro reports into the **same** RUM application as Hugo, reusing the
+`ddApplicationId` and `ddClientToken` already committed in
+[`config-docs.js`](../../hugo/assets/scripts/config/config-docs.js). Astro traffic is
+distinguished by the `stack: 'astro'` global context property, not by a separate
+application. There is nothing to create and no user action blocking implementation.
 
-1. **Digital Experience → Real User Monitoring → Applications** (`/rum/list`), in the
-   same org that owns the existing `docs` application.
-2. **New Application**, type **Browser**, named `docs-astro`.
-3. Copy the generated **Application ID** (UUID) and **Client Token** (`pub…`). Skip
-   the install snippet — the SDK is wired up by this plan.
-4. Session Replay and sampling are configured in code here, not in that dialog.
+This reverses an earlier decision to create a separate `docs-astro` application. The
+reasoning:
 
-Both values are public browser credentials; Hugo's equivalents are already committed
-in [`config-docs.js`](../../hugo/assets/scripts/config/config-docs.js), so committing
-Astro's to this public repo is consistent with existing practice.
+1. **The two sites share an origin, so they share sessions.** `deriveSiteUrl()`
+   returns `https://docs.datadoghq.com` on live (`siteUrl.ts:52-54`) — the same
+   origin Hugo serves. A visitor reading a Hugo page and then clicking into `/api/`
+   is one visit on one domain. RUM's session cookie is scoped to the domain, not the
+   application, so two applications would split that single journey across them:
+   the funnel is unqueryable in one place and a Session Replay of a cross-site visit
+   is cut in two at the `/api` boundary. That cost is permanent, not
+   migration-scoped.
+2. **Datadog feature flags are scoped per application.** A new application is the
+   entire reason [24_feature_flags.md](24_feature_flags.md) carried a warning that
+   `docs-ai-enabled` might resolve to its `true` default on Astro — an inert kill
+   switch. Sharing the application removes that failure mode and the need for a
+   decision from the flag's owner.
+3. **It matches the existing pattern.** Hugo already puts `preview` and `live`
+   traffic in one application, separated by the `env` field. Separating Hugo from
+   Astro by a `stack` tag within one application is the same mechanism the current
+   setup already depends on.
+4. **History stays continuous through the cutover.** Existing dashboards keep
+   working, and before/after comparisons remain possible in one application rather
+   than spanning two.
 
-One application covers both `preview` and `live`, exactly as Hugo's does — the
-environments are separated by the `env` field, not by application. Implementation is
-blocked until the two values exist; everything else can be written against
-placeholders.
+**What this gives up** is sandboxing. A misconfigured Astro init — a runaway custom
+action, a wrong sampling rate, a Session Replay privacy mistake — pollutes the
+production application's data rather than a throwaway one. This is the real cost of
+the decision, and it is blunted rather than eliminated by the fact that Hugo's
+preview traffic already lands in that same production application today.
+
+The second cost: the application selector no longer isolates Astro. Every
+Astro-scoped query becomes `@context.stack:astro`, and because this plan cannot edit
+Hugo to emit `stack: 'hugo'`, Hugo-scoped queries become `-@context.stack:astro`.
+Unambiguous, but a filter to remember rather than a dropdown to pick.
 
 ### Confirmed decisions
 
@@ -47,13 +69,14 @@ placeholders.
 | --- | --- |
 | SDK loading | **npm import, deferred.** Import `@datadog/browser-rum` and `@datadog/browser-logs`, assign `window.DD_RUM` / `window.DD_LOGS`, then `init()`. Not Hugo's blocking head script. |
 | Subresource Integrity | **Not reproduced.** Hugo's SRI protects a hand-concatenated CDN asset; Astro's bundle is emitted and hashed by Vite. |
-| RUM application | **New, separate application** (`docs-astro`), shared across preview and live. |
+| RUM application | **Hugo's existing application, shared.** Reuse the committed application ID and client token; separate the two sites by tag, not by application. See above. |
 | `service` tag | **`docs`**, matching Hugo, so queries and dashboards survive the Hugo cutover. |
-| Distinguishing tag | Global context property **`stack: 'astro'`**. |
+| Distinguishing tag | Global context property **`stack: 'astro'`**. Load-bearing, not cosmetic — it is the only thing separating Astro traffic from Hugo's. |
 | Branch tag | **Included**, on both RUM and Logs, from `CI_COMMIT_REF_NAME`. Astro deliberately goes beyond Hugo here — see below. |
 | Env gating | **Mirror Hugo.** RUM initializes in `preview` and `live` only. Logs initializes in every environment, with the handler set to `console` in development. |
 | `_dd_device_id` cookie | **Included**, live only, same logic as Hugo. Both sites share the domain, so they share the cookie. |
 | Sampling | **Match Hugo:** `sessionSampleRate: 100`, `sessionReplaySampleRate: 50`. |
+| Build-time constants | **Astro's `PUBLIC_` env prefix**, not `vite.define`. Defines are replaced at build time only, so they break under `astro dev` — see section 1. |
 | `IA_SUBDOMAIN` | Read from env with an empty default, plus a `TODO` in the code — CI may not expose the variable to the Astro job. |
 | `CI_COMMIT_SHORT_SHA` | Same: read from env, empty default, `TODO` in the code. |
 | `fetchDatadogUserStatus()` | **Duplicated here, not shared.** Ten lines of generic site functionality; Hugo's copy dies with Hugo. |
@@ -70,38 +93,95 @@ RUM and Logs init options, and the device-ID cookie logic all take explicit
 arguments and get unit tested. The entry point is the thin, untestable shell that
 reads build-time constants and touches `window`.
 
+### Steps summary
+
+The eight sections below, in one line each. Steps 1–7 are RUM and Logs themselves;
+step 8 is independent — it makes the errors RUM captures readable, and could land
+separately.
+
+| Step | What it does | Why it is separate |
+| --- | --- | --- |
+| 1. Build-time constants | Carries four CI values — environment, branch, deploy SHA, analytics subdomain — from the build into the browser bundle. | Nothing else can reach `process.env` from client code, so every later step depends on this one. |
+| 2. Credentials table | Holds the RUM application ID and client token per environment. | A copy of Hugo's table, which stays upstream until the cutover; isolating it keeps the drift risk in one file. |
+| 3. Init options builders | Turns credentials plus constants into the two SDK option objects, and the context properties applied after init. | Pure functions, so Hugo parity is assertable in unit tests. RUM never starts in development, so this is the only part of the init path a test can reach. |
+| 4. Device ID | Reads or mints the `_dd_device_id` cookie that ties page views to a Datadog app user. | Live only, and shared with Hugo through the domain — so it must read before it writes. |
+| 5. Datadog user status | Answers whether the visitor is signed into the Datadog app. | Generic site functionality, not telemetry-specific; the planned Ask AI package consumes it too. |
+| 6. Entry point | The one component that imports the SDKs, applies the environment gate, and calls `init()`. | The only piece that touches `window`, and therefore the only piece unit tests cannot cover. |
+| 7. `data-env` on `<html>` | Publishes the environment name in the markup. | Not used by telemetry — it's Hugo convention, useful for debugging, and expected by the planned Ask AI package. |
+| 8. Sourcemaps | Emits `.map` files and a manifest describing how to upload them. | Without it, every captured error is a stack trace through minified bundles. The upload itself belongs to `documentation-ci` and does not exist yet. |
+
+Three things a reviewer should look at rather than skim:
+
+- **The environment gate** (steps 1, 2, 6). RUM starts on preview and live only, Logs
+  everywhere. Two independent mechanisms enforce it — the environment check and the
+  absence of a development application ID — because the consequence of getting it
+  wrong is production data, not a local annoyance.
+- **`stack: 'astro'`** (step 3). One tag is the only thing separating Astro's data
+  from Hugo's, because the two share a RUM application.
+- **Three values that must agree across two repos** (steps 3 and 8): `service`,
+  `version`, and the public asset URL prefix. A mismatch produces a *successful*
+  sourcemap upload that never matches an error — no failing build, no error log.
+
 ### 1. Build-time constants (`astro.config.mjs`, `src/env.d.ts`)
 
 Hugo injects `CI_COMMIT_SHORT_SHA` and `IA_SUBDOMAIN` into its client bundle through
-`js.Build` defines. Vite's `define` is the direct equivalent:
+`js.Build` defines. Astro's equivalent is **not** `vite.define`. Republish the
+variables under Astro's `PUBLIC_` env prefix in `astro.config.mjs`:
 
 ```js
-vite: {
-  define: {
-    __CI_ENVIRONMENT_NAME__: JSON.stringify(process.env.CI_ENVIRONMENT_NAME ?? 'development'),
-    __CI_COMMIT_REF_NAME__: JSON.stringify(branchRef() ?? ''),
-    __CI_COMMIT_SHORT_SHA__: JSON.stringify(process.env.CI_COMMIT_SHORT_SHA ?? ''),
-    __IA_SUBDOMAIN__: JSON.stringify(process.env.IA_SUBDOMAIN ?? ''),
-  },
-}
+process.env.PUBLIC_CI_ENV = process.env.CI_ENVIRONMENT_NAME ?? '';
+process.env.PUBLIC_CI_COMMIT_REF_NAME = branchRef() ?? '';
+process.env.PUBLIC_CI_COMMIT_SHORT_SHA = process.env.CI_COMMIT_SHORT_SHA ?? '';
+process.env.PUBLIC_IA_SUBDOMAIN = process.env.IA_SUBDOMAIN ?? '';
 ```
 
-These are needed because `process.env` is unavailable in a client bundle, and the
-values are known at build time. Declare them in `src/env.d.ts` so TypeScript sees
-them as `string` rather than errors.
+and read them through one module, `src/lib/telemetry/buildConstants.ts`:
 
-`__CI_COMMIT_REF_NAME__` reuses the existing
+```ts
+export const CI_COMMIT_SHORT_SHA = import.meta.env.PUBLIC_CI_COMMIT_SHORT_SHA ?? '';
+```
+
+Declare the keys on `ImportMetaEnv` in `src/env.d.ts` so TypeScript sees them as
+`string`. Assigning to `process.env` in the config file works because Vite resolves
+the env *after* evaluating it, so nothing needs `PUBLIC_` set in CI.
+
+**Why not `vite.define`.** Its replacement runs at build time only. A define
+referenced from client-side code is replaced correctly by `astro build`, but under
+`astro dev` it survives into the browser as an undefined identifier and throws on
+the first line that touches it. In this component that is the very first statement,
+so telemetry silently does nothing for the whole of local development — while both
+SDK globals still exist, because the npm packages assign `window.DD_RUM` /
+`window.DD_LOGS` on import. A test that only checks for the globals passes. This was
+found by an actual page error during implementation, not by reasoning, which is the
+argument for the browser test asserting *zero* page errors alongside a working
+`getInitConfiguration()`.
+
+Moving the reference into a `.ts` module does not help — the replacement is
+build-only regardless of the module's extension. `import.meta.env.PUBLIC_*` is
+statically replaced in both dev and build, which is why it is the mechanism here.
+
+Reading `process.env` in component frontmatter is the other option, and is rejected:
+it would work for prerendered routes but would require the CI variables to be
+present in the *running server's* environment for on-demand ones, which this repo
+cannot promise.
+
+Keep all four behind `buildConstants.ts` rather than reading `import.meta.env`
+directly at each use site, so the config-side assignments have exactly one
+counterpart to stay in agreement with.
+
+`PUBLIC_CI_COMMIT_REF_NAME` reuses the existing
 [`branchRef()`](../src/lib/site/siteUrl.ts) helper rather than reading the env var
 directly, so the branch string is normalized identically to the one in the deploy
 path prefix and the canonical URLs. Availability is not in question: preview builds
 already **throw** when `CI_COMMIT_REF_NAME` is unset (`siteUrl.ts:44-49`).
 
-Only **`__IA_SUBDOMAIN__`** carries a `TODO`. `CI_COMMIT_REF_NAME` and
-`CI_COMMIT_SHORT_SHA` are GitLab predefined variables, present in every job;
-`IA_SUBDOMAIN` is a custom variable, and whether it is exposed to the Astro job is
-owned by `DataDog/documentation-ci`, which this repo cannot edit. An empty value
-degrades gracefully — default telemetry intake — so this is safe to ship unresolved,
-but it should be searchable.
+Two constants carry a `TODO`, both in `buildConstants.ts`. `CI_COMMIT_SHORT_SHA` is
+a GitLab predefined variable, present in every job, but it is load-bearing twice
+over — no `version` tag *and* broken sourcemap matching — so it is worth confirming
+rather than assuming. `IA_SUBDOMAIN` is a custom variable, and whether it is exposed
+to the Astro job is owned by `DataDog/documentation-ci`, which this repo cannot
+edit. An empty value degrades gracefully to the default telemetry intake, so this is
+safe to ship unresolved, but it should be searchable.
 
 ### 2. Credentials table (`src/config/telemetry.ts`)
 
@@ -124,8 +204,15 @@ export function getTelemetryConfig(env: TelemetryEnv): TelemetryCredentials;
 [`getConfig.js`](../../hugo/assets/scripts/helpers/getConfig.js): `live` and
 `preview` pass through, anything else becomes `development`.
 
-Development reuses Hugo's development client token and has no application ID, which
-matches Hugo — development RUM cannot init even if the env gate were removed.
+All three environments reuse Hugo's committed values verbatim: preview and live
+share Hugo's application ID and client token, and development reuses Hugo's
+development client token with no application ID — so development RUM cannot init
+even if the env gate were removed.
+
+Since every value is copied from `config-docs.js`, the table should say so in a
+comment and point at the file. A future reader finding two identical credential
+tables in two languages needs to know that is deliberate, and which one is
+upstream.
 
 ### 3. Init options builders (`src/lib/telemetry/initOptions.ts`)
 
@@ -383,10 +470,11 @@ new views on its own, so soft navigations are still recorded.
 | File | Change |
 | --- | --- |
 | `astro/package.json` | Add `@datadog/browser-rum`, `@datadog/browser-logs`; add `@datadog/datadog-ci` as a devDependency |
-| `astro/astro.config.mjs` | Add the four Vite defines with TODOs, `build.sourcemap: 'hidden'`, and the manifest integration |
-| `astro/src/env.d.ts` | Declare the four global constants |
+| `astro/astro.config.mjs` | Republish the four CI variables under `PUBLIC_`, add `build.sourcemap: 'hidden'` and the manifest integration |
+| `astro/src/env.d.ts` | Declare the four `ImportMetaEnv` keys and the two SDK `Window` globals |
 | `astro/src/config/telemetry.ts` | New — credentials table and env resolution |
 | `astro/src/lib/telemetry/initOptions.ts` | New — pure option builders |
+| `astro/src/lib/telemetry/buildConstants.ts` | New — the four `PUBLIC_` build-time constants |
 | `astro/src/lib/telemetry/deviceId.ts` | New — cookie read/write/generate |
 | `astro/src/lib/telemetry/datadogUserStatus.ts` | New — memoized `/locate` fetch |
 | `astro/src/components/Telemetry/Telemetry.astro` | New — the deferred init script |
@@ -445,12 +533,12 @@ is gone.
 
 | Location | TODO | Kind |
 | --- | --- | --- |
-| `astro.config.mjs`, `__IA_SUBDOMAIN__` define | Whether CI exposes the variable to the Astro job is owned by `documentation-ci`. Empty means public intake. | Blocked |
-| `astro.config.mjs`, `__CI_COMMIT_SHORT_SHA__` define | Confirm the variable reaches the Astro job. Empty means no `version` tag *and* broken sourcemap matching. | Blocked |
+| `src/lib/telemetry/buildConstants.ts`, `IA_SUBDOMAIN` | Whether CI exposes the variable to the Astro job is owned by `documentation-ci`. Empty means public intake. | Blocked |
+| `src/lib/telemetry/buildConstants.ts`, `CI_COMMIT_SHORT_SHA` | Confirm the variable reaches the Astro job. Empty means no `version` tag *and* broken sourcemap matching. | Blocked |
 | `src/integrations/sourcemapManifest.ts` | The full `datadog-ci` invocation that `documentation-ci` still needs — see section 8. | Blocked |
-| `src/config/telemetry.ts`, preview and live entries | If implementation starts before the `docs-astro` application exists, the application ID is a placeholder and RUM silently sends nothing usable. Name the prerequisite. | Blocked |
 | `src/lib/telemetry/initOptions.ts`, `enableExperimentalFeatures` | `'feature_flags'` is copied from Hugo but inert on Astro until [24_feature_flags.md](24_feature_flags.md) lands. Say so, or the next reader assumes flags work. | Blocked |
-| `src/lib/telemetry/initOptions.ts`, `buildGlobalContext` | `stack: 'astro'` exists only to separate the two sites during the migration. Remove it at the Hugo cutover, or it lives on forever as a facet with one value. | Dies with Hugo |
+| `src/config/telemetry.ts` | The credentials are copied from Hugo's `config-docs.js`, which is upstream. Astro becomes the owner at the cutover, when that file is deleted. | Dies with Hugo |
+| `src/lib/telemetry/initOptions.ts`, `buildGlobalContext` | `stack: 'astro'` is the only thing separating Astro traffic from Hugo's in a shared application, so **do not remove it** until Hugo is gone — at which point every session is Astro and the property becomes a facet with one value. | Dies with Hugo |
 | `src/lib/telemetry/deviceId.ts` | A deliberate duplicate of Hugo's cookie logic, which Hugo's own comment calls a temporary solution. Astro becomes sole owner at cutover. | Dies with Hugo |
 | `src/lib/telemetry/datadogUserStatus.ts` | Deliberate duplicate of Hugo's `fetchDatadogUserStatus()`. Cross-reference the twin so a change to one is not made blind to the other. | Dies with Hugo |
 | `src/components/Telemetry/Telemetry.astro`, the global assignments | `window.DD_RUM` / `window.DD_LOGS` are assigned *only* because plan 23's package reads globals rather than importing. Non-obvious next to two real imports, and droppable once the package is folded into Astro. | Dies with Hugo |
@@ -463,11 +551,14 @@ and env-conditional styling, so a plain comment explaining why it exists is enou
 
 Neither of these lives in this repo, so they need somewhere else to be tracked:
 
-- **Dashboards, monitors, and saved views scoped to Hugo's RUM application will not
-  see Astro traffic.** Keeping `service: 'docs'` covers anything queried by service,
-  but anything filtered by application ID silently under-reports the moment Astro
-  ships. Worth an audit before the `/api` cutover, when Astro stops being a rounding
-  error.
+- **Existing dashboards, monitors, and SLOs will silently start including Astro
+  traffic.** This is the flip side of sharing the application: nothing
+  under-reports, but every "all docs traffic" panel changes meaning without
+  announcement, and any monitor with a tuned threshold — error rate, LCP, session
+  count — sees a new population mixed in. Mostly desirable, since `/api` is docs
+  traffic either way. But it should be announced to whoever owns those monitors
+  before the first live deploy, not discovered when one pages. Anything that needs
+  to stay Hugo-only can add `-@context.stack:astro`.
 - **The `IA_SUBDOMAIN` and Astro-CI-job questions** belong to whoever owns
   `documentation-ci`. The TODOs above mark the code, but the answer has to come from
   a conversation there.
@@ -482,8 +573,15 @@ Neither of these lives in this repo, so they need somewhere else to be tracked:
   but it is worth confirming in the first preview deploy. Without it there is no
   `version` tag, so regressions cannot be attributed to a deploy.
 - **Branch tag verification.** The first preview deploy should be checked in the RUM
-  Explorer (`@context.branch:*` scoped to the new application) to confirm the tag
-  lands — precisely the check that would have caught Hugo's defect.
+  Explorer (`@context.branch:*` scoped with `@context.stack:astro`) to confirm the
+  tag lands — precisely the check that would have caught Hugo's defect.
+- **A misconfiguration now pollutes production data.** The accepted cost of sharing
+  Hugo's application. The mitigations are that this plan changes no sampling rate or
+  privacy setting from Hugo's, and that `stack: 'astro'` makes any bad Astro data
+  identifiable and excludable after the fact. The unmitigated case is a Session
+  Replay privacy regression, which cannot be un-recorded — so
+  `defaultPrivacyLevel: 'mask-user-input'` is the one option to double-check by hand
+  rather than trust to a unit test.
 - **Deferred init loses early errors.** Accepted: JS errors thrown before the module
   executes are not captured, and Session Replay starts a moment into the page.
   Page-load performance data is unaffected, since RUM backfills from the browser's
@@ -519,8 +617,12 @@ Automated tests cover the pure logic and the fact that the globals get assigned.
 They cannot prove that data reaches Datadog, because RUM never initializes in
 development. These steps do.
 
-Throughout: `{branch}` is your branch name as it appears in the preview URL, and
-`{app}` is the new `docs-astro` RUM application.
+Throughout, `{branch}` is your branch name as it appears in the preview URL. Because
+Astro shares Hugo's RUM application, **every Datadog query below must be scoped with
+`@context.stack:astro`** — there is no application selector to isolate Astro, and an
+unscoped query returns Hugo's traffic too, which will look like success whether or
+not Astro is reporting anything. Verifying a shared application means every positive
+result needs that filter to mean anything.
 
 ### A. Local, before deploying
 
@@ -572,40 +674,71 @@ Deploy the branch and open a preview page (`docs-staging.datadoghq.com/{branch}/
 
 Allow a minute or two; RUM batches events, and some are flushed on page unload.
 
-1. **Digital Experience → Real User Monitoring → Explorer.** Switch the application
-   selector to `{app}`. Confirm sessions exist at all — this is the positive control
-   before testing any narrower query.
+1. **Digital Experience → Real User Monitoring → Explorer.** Select the `docs`
+   application, then query:
+   ```
+   @context.stack:astro
+   ```
+   Confirm sessions exist at all — the positive control before any narrower query.
+   If this returns nothing while the browser checks in B all passed, the events are
+   arriving without their global context, which points at `buildGlobalContext` being
+   applied after the first events were already sent.
 
 2. **Branch tag.** Query:
    ```
-   @application.name:{app} @context.branch:{branch}
+   @context.stack:astro @context.branch:{branch}
    ```
-   Expect your sessions. Then broaden to `@context.branch:*` and use **Group by →
-   `@context.branch`** to see one row per branch — this is the per-PR filtering you
-   wanted, and the grouping view is how you will use it day to day.
+   Expect your sessions. Then broaden to `@context.stack:astro @context.branch:*` and
+   use **Group by → `@context.branch`** to see one row per branch — this is the
+   per-PR filtering you wanted, and the grouping view is how you will use it day to
+   day.
+
+   Confirm the count here is *lower* than the same query without
+   `@context.stack:astro`, which proves the filter is actually discriminating rather
+   than being ignored because of a mistyped attribute path.
 
 3. **Raw event inspection.** Open any view event and switch to the **JSON** tab.
    Confirm `context.branch`, `context.stack: "astro"`, `service: "docs"`, and
    `version`. Reading the raw JSON avoids being fooled by a mistyped facet name.
 
 4. **Facets exist.** In the left sidebar, search facets for "branch" and "stack".
-   Both should now appear for `{app}`. A facet only materializes after the attribute
-   has been seen in real data, so their presence is itself evidence.
+   Both should now appear. A facet only materializes after the attribute has been
+   seen in real data, so their presence is itself evidence.
 
-5. **Session Replay.** Filter to `@session.has_replay:true`. Roughly half of sessions
-   should qualify. Open one and confirm it plays.
+5. **Session Replay.** Filter `@context.stack:astro @session.has_replay:true`.
+   Roughly half of Astro sessions should qualify. Open one and confirm it plays, and
+   while it is open confirm that form inputs are masked — the `mask-user-input`
+   check from the risks section, which is worth doing by eye once because it cannot
+   be undone retroactively.
 
 6. **Logs.** **Logs → Explorer**:
    ```
-   service:docs env:preview @branch:{branch}
+   service:docs env:preview @stack:astro @branch:{branch}
    ```
    Expect entries. Note that Browser Logs puts global context at the top level
-   (`@branch`), whereas RUM nests it under `@context.branch` — the two query shapes
-   differ, which is easy to trip over.
+   (`@stack`, `@branch`), whereas RUM nests it under `@context.*` — the two query
+   shapes differ, which is easy to trip over.
 
-7. **Hugo is unaffected.** Query the *Hugo* RUM application for the same time window
-   and confirm its session volume looks normal and that no `stack:astro` events
-   appear there. This proves the two applications are cleanly separated.
+7. **Hugo still looks normal.** This replaces the old "the applications are cleanly
+   separated" check, which no longer applies. Instead, confirm sharing has not
+   disrupted Hugo:
+   - `-@context.stack:astro` over the same window returns Hugo sessions at a normal
+     volume, with no gap or spike starting at your deploy.
+   - No Hugo session has picked up `@context.stack:astro`, and no Astro session is
+     missing it. Overlap in either direction would mean global context is leaking
+     across the two SDKs' shared session state.
+
+8. **Cross-site session continuity** — the benefit that motivated sharing the
+   application, and therefore worth confirming rather than assuming. In one browser
+   session, load a Hugo preview page, then navigate to an Astro `/api` preview page.
+   In the Explorer, find that session and confirm it contains views from **both**
+   sites — Hugo URLs and `/api` URLs under one session ID, with `@context.stack`
+   varying between views within it. If instead you see two separate sessions, the
+   session cookie is not being shared as expected and the main argument for a shared
+   application does not hold in practice. Note this test only works where the two
+   sites share an origin, so it is meaningful on live and on any preview where the
+   Astro app is served under `docs-staging.datadoghq.com` rather than its own
+   distribution.
 
 ### D. After merging to live
 
@@ -615,11 +748,17 @@ Allow a minute or two; RUM batches events, and some are flushed on page unload.
    and confirm the cookie value is unchanged. Then do the reverse — clear it, load a
    Hugo page first, then an Astro page — and confirm Astro reuses Hugo's value rather
    than overwriting it. This is the whole point of duplicating the logic.
-3. **In Datadog:** `@application.name:{app} env:live @usr.device_id:*` returns
-   sessions.
-4. **No branch tag on live.** `@application.name:{app} env:live @context.branch:*`
+3. **In Datadog:** `@context.stack:astro env:live @usr.device_id:*` returns sessions.
+4. **No branch tag on live.** `@context.stack:astro env:live @context.branch:*`
    should return **nothing** — `CI_COMMIT_REF_NAME` is a preview-only concern, and a
    branch tag on live traffic would mean the define leaked.
+5. **Session volume sanity.** Compare total `docs` application session volume for
+   the day before and the day after the deploy. Astro `/api` traffic is now inside
+   that number, so expect an increase rather than a flat line — and if the increase
+   is much larger than `/api`'s share of pageviews, check for duplicate
+   initialization before it accrues a billing surprise. This check only exists
+   because the application is shared; with a separate application the number would
+   have been isolated.
 
 ### E. Sourcemaps
 
@@ -668,7 +807,9 @@ breaks:
 
 | Symptom | Likely cause |
 | --- | --- |
-| No sessions at all in `{app}` | Wrong application ID or client token; or the env gate did not open (check `dataset.env`) |
+| No `@context.stack:astro` sessions at all | The env gate did not open (check `dataset.env`), or the credentials were not copied correctly from `config-docs.js` |
+| Sessions appear but `@context.stack:astro` matches nothing | `buildGlobalContext` was not applied, or was applied after the first events flushed — the events are Astro's but indistinguishable from Hugo's, which is the shared-application failure mode |
+| A query returns results but they look like Hugo's | The `@context.stack:astro` filter was omitted or mistyped; compare counts with and without it |
 | Sessions exist, no `branch` | The Vite define resolved empty — check `branchRef()` at build time, not runtime |
 | `version` empty | `CI_COMMIT_SHORT_SHA` not exposed to the Astro CI job |
 | Events in the browser's network tab but nothing in Datadog | Wrong intake — check whether `IA_SUBDOMAIN` was set unexpectedly |
