@@ -90,6 +90,10 @@ Run the workload, then query [APM Trace Explorer][2] with:
 pod_name:<NEW_GPU_POD> kube_namespace:<GPU_WORKLOAD_NAMESPACE>
 ```
 
+Open a trace to see the flame graph, which correlates CPU spans with GPU stream activity, such as CUDA kernels and NCCL collective operations:
+
+{{< img src="gpu_monitoring/gpu-tracing.png" alt="Flame graph view of a torch.step trace, showing CPU spans aligned with GPU stream activity, including NCCL allgather operations and CUDA kernel launches." style="width:100%;" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
