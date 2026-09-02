@@ -54,6 +54,7 @@ For the full schema and all available options, see the [Deployment Gates API ref
 The Monitor rule evaluates the state of a set of monitors over a configurable period of time. Select monitors with either a search query or an explicit list of monitors. These selection methods are mutually exclusive. The rule can fail if at any time during the evaluation period:
 
 - No monitor groups match the configured selection.
+- An explicit monitor ID does not exist or is unavailable to your organization.
 - More than 300 monitors match the configured selection.
 - Any matching monitor group is in `ALERT` or `NO_DATA` state.
 
@@ -89,7 +90,7 @@ Each `id` is a decimal monitor ID. Group values are exact group names. Do not se
 
 **Notes**:
 - `group` query filters and `monitor_ids[].groups` evaluate only matching groups.
-- A missing, deleted, inaccessible, or otherwise unmatched explicit monitor ID follows the same no-matching-groups behavior as a query that returns no groups.
+- An explicit monitor ID that does not exist or is unavailable to your organization causes the rule to fail. If the monitor exists but is excluded because it is muted or its selected groups have no data, the rule applies the no-matching-groups behavior.
 - Muted monitors are automatically excluded from both selection modes.
 
 [1]: /monitors/manage/search/
