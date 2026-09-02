@@ -54,7 +54,7 @@ Datadog adds the runtime signals it observes to vulnerability findings. Use thes
 
 ### Package is running
 
-When [Runtime Package Prioritization][4] is enabled, Datadog adds package-level runtime signals to container image vulnerability findings for packages installed by an operating system package manager (`apt`, `yum`, or `apk`). Search, filter, and group by these tags:
+When [Runtime Package Prioritization][4] is enabled, Datadog adds package-level runtime context to container image vulnerability findings for packages installed by an operating system package manager (`apt`, `yum`, or `apk`). Search, filter, and group by these tags:
 
 | Runtime context | Tag |
 |---|---|
@@ -62,7 +62,7 @@ When [Runtime Package Prioritization][4] is enabled, Datadog adds package-level 
 | Accessed by root process | `@package.is_running_as_root:true` |
 | SUID binary present | `@package.has_suid:true` |
 
-Datadog adds a tag when it observes a signal. An absent tag means Datadog did not observe the signal; it does not mean the package is unused. Use the tags to prioritize what to fix first, not to rule findings out.
+Datadog adds a tag when it observes runtime context. An absent tag means Datadog did not observe the context; it does not mean the package is unused. Use the tags to prioritize what to fix first, not to rule findings out.
 
 For example, high and critical vulnerabilities that are running and have a fix available:
 
@@ -70,7 +70,7 @@ For example, high and critical vulnerabilities that are running and have a fix a
 @risk.is_package_running:true @severity:(high OR critical) @remediation.is_available:true
 ```
 
-Signals persist for the lifetime of an image version: after a package is observed running, findings for that image keep the signal. Because container images are immutable, the signal reflects what has run in that image. When the image is no longer deployed, its findings age out and close.
+Runtime context persists for the lifetime of an image version: after a package is observed running, findings for that image keep it. Because container images are immutable, it reflects what has run in that image. When the image is no longer deployed, its findings age out and close.
 
 ### Image is running
 
@@ -101,9 +101,8 @@ Datadog detects running images with either the Datadog Agent or Agentless Scanni
 
 ## Get started
 
-1. Deploy the Datadog Agent, version **7.79.0** or later, with Cloud Security enabled. On Kubernetes, use **7.81.0** or later for the most complete signal coverage. See [Setting Up Cloud Security][3].
-2. Enable Runtime Package Prioritization on the Agent to surface the *Package is running* signal on vulnerability findings. See the instructions to do so for [Kubernetes][4], [Docker][9], or [Linux][10] deployments.
-3. Open the [{{< ui >}}Cloud Security Summary{{< /ui >}}][5] in Datadog. Prioritized findings are surfaced at the top of each funnel and in the [{{< ui >}}Security Inbox{{< /ui >}}][6].
+1. Enable Runtime Package Prioritization on the Agent to surface the *Package is running* signal on vulnerability findings. See the instructions to do so for [Kubernetes][4], [Docker][9], or [Linux][10] deployments. See [Setting Up Cloud Security][3].
+2. Open the [{{< ui >}}Cloud Security Summary{{< /ui >}}][5] in Datadog. Prioritized findings are surfaced at the top of each funnel and in the [{{< ui >}}Security Inbox{{< /ui >}}][6].
 
 ## Further reading
 
