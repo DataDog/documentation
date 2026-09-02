@@ -36,7 +36,7 @@ The configurations on this page use the [agent deployment pattern][10]: one Coll
 
 This setup supports bare metal, VMs, Docker, and Kubernetes. Supported managed Kubernetes distributions include Amazon EKS (including Auto Mode), Google GKE (Standard and Autopilot), and Azure AKS (including Automatic).
 
-This setup does not support serverless or task-based container runtimes such as ECS Fargate, EKS Fargate, or AWS Lambda. For supported Datadog features, see the [feature compatibility table][7] under **OTel SDK + OpenTelemetry Collector**.
+This setup does not support serverless or task-based container runtimes such as ECS Fargate, EKS Fargate, or AWS Lambda. For supported Datadog features, see the [feature compatibility table][7] under **OTel SDK + OpenTelemetry Collector Contrib**.
 
 - [OpenTelemetry Collector Contrib][1] v0.154.0 or later
 - A [Datadog API key][2]

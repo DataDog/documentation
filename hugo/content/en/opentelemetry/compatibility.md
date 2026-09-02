@@ -19,14 +19,14 @@ Datadog supports several configurations for using OpenTelemetry. The primary dif
 |------------------------------------------------------|-------------------------|-------------|-----------------------------------------------|
 | [**Datadog SDK + DDOT (Recommended)**][29]           | Datadog API or OTel API | Datadog SDK | Datadog Distribution of OTel Collector (DDOT) |
 | [**OTel SDK + DDOT**][29]                            | OTel API                | OTel SDK    | Datadog Distribution of OTel Collector (DDOT) |
-| [**OTel SDK + OpenTelemetry Collector**][7]          | OTel API                | OTel SDK    | OpenTelemetry Collector Contrib               |
+| [**OTel SDK + OpenTelemetry Collector Contrib**][7]  | OTel API                | OTel SDK    | OpenTelemetry Collector Contrib               |
 | [**Direct OTLP Ingest**][28]                         | OTel API                | OTel SDK    | N/A (Direct to Datadog endpoint)              |
 
 ## Feature compatibility
 
 The following table shows feature compatibility across different setups:
 
-| Feature | Datadog SDK + DDOT (Recommended) | OTel SDK + DDOT | OTel SDK + OpenTelemetry Collector | Direct OTLP Ingest |
+| Feature | Datadog SDK + DDOT (Recommended) | OTel SDK + DDOT | OTel SDK + OpenTelemetry Collector Contrib | Direct OTLP Ingest |
 |---|---|---|---|---|
 | [Cloud SIEM][18] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Correlated Traces, Metrics, Logs][19] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
@@ -49,7 +49,7 @@ The following table shows feature compatibility across different setups:
 | [Real User Monitoring][22] (RUM) | {{< X >}} | | | |
 | [Source code integration][24] | {{< X >}} | | | |
 
-The **OTel SDK + OpenTelemetry Collector** column reflects the recommended OTLP HTTP exporter and `span_metrics` connector configuration. The Datadog Exporter and Datadog Connector remain supported, and existing configurations do not need to migrate.
+The **OTel SDK + OpenTelemetry Collector Contrib** column reflects the recommended OTLP HTTP exporter and `span_metrics` connector configuration. The Datadog Exporter and Datadog Connector remain supported, and existing configurations do not need to migrate.
 
 ## API support
 

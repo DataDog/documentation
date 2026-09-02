@@ -270,9 +270,19 @@ spec:
 
 {{% /collapse-content %}}
 
-## Out-of-the-box Datadog Exporter configuration
+## Datadog Exporter examples
 
-You can find working examples of out-of-the-box configuration for Datadog Exporter in the [`exporter/datadogexporter/examples` folder][31] in the OpenTelemetry Collector Contrib project. See the full configuration example file, [`ootb-ec2.yaml`][30]. **Note**: This example is for applications running directly on an EC2 host. For containerized applications, see the [deployment documentation][33].
+The OpenTelemetry Collector Contrib repository provides runnable Datadog Exporter examples for common configuration tasks. The following links are pinned to version v0.154.0 so that the examples do not change unexpectedly:
+
+- [Complete Collector configuration][8]
+- [Host metrics][34]
+- [Docker metrics][35]
+- [Kafka metrics][36]
+- [Log collection][37]
+- [Batch and memory limits][38]
+- [EC2 out-of-the-box configuration][30]
+
+If you use a different Collector version, consult the examples included with that release. For containerized applications, see the [deployment documentation][33].
 
 Configure each of the following components to suit your needs:
 
@@ -296,7 +306,7 @@ Inspect and troubleshoot your OpenTelemetry Collector configurations in Fleet Au
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/processor/batchprocessor/README.md
 [6]: /api/latest/logs/
 [7]: /api/latest/metrics/#submit-metrics
-[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
+[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.154.0/exporter/datadogexporter/examples/collector.yaml
 [9]: https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainer
 [10]: /getting_started/tagging/unified_service_tagging/
 [11]: https://opentelemetry.io/docs/instrumentation/
@@ -305,13 +315,17 @@ Inspect and troubleshoot your OpenTelemetry Collector configurations in Fleet Au
 [14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/pkg/stanza/docs/operators
 [15]: https://opentelemetry.io/docs/reference/specification/logs/data-model/
 [16]: https://opentelemetry.io/docs/collector/deployment/#agent
-[17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml
+[17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.154.0/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml
 [25]: https://opentelemetry.io/docs/specs/semconv/resource/#service
 [26]: /logs/log_configuration/pipelines/?tab=service#service-attribute
 [27]: /logs/log_configuration/processors/service_remapper/
 [28]: /opentelemetry/schema_semantics/hostname/
 [29]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector
-[30]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/ootb-ec2.yaml
-[31]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/
+[30]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.154.0/exporter/datadogexporter/examples/ootb-ec2.yaml
 [32]: /opentelemetry/compatibility/
 [33]: /opentelemetry/collector_exporter/deployment
+[34]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.154.0/exporter/datadogexporter/examples/host-metrics.yaml
+[35]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.154.0/exporter/datadogexporter/examples/docker-stats.yaml
+[36]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.154.0/exporter/datadogexporter/examples/kafka.yaml
+[37]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.154.0/exporter/datadogexporter/examples/logs.yaml
+[38]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.154.0/exporter/datadogexporter/examples/batch-memory.yaml
