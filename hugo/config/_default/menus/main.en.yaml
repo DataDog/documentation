@@ -6529,36 +6529,41 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_traffic_splitting
       weight: 309
+    - name: Experiments
+      url: feature_flags/concepts/experiments
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_experiments
+      weight: 310
     - name: Distribution Channels
       url: feature_flags/concepts/distribution_channels
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_distribution_channels
-      weight: 310
+      weight: 311
     - name: Configuration Sources
       url: feature_flags/concepts/configuration_sources
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_configuration_sources
-      weight: 311
+      weight: 312
     - name: Monthly Flag Configuration Requests
       url: feature_flags/concepts/monthly_flag_configuration_requests
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_mfcr
-      weight: 312
+      weight: 313
     - name: Flag History
       url: feature_flags/concepts/flag_history
       parent: feature_flags_concepts
       identifier: feature_flags_history
-      weight: 313
+      weight: 314
     - name: Feature Flag Graphs
       url: feature_flags/concepts/flag_graphs
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
-      weight: 314
+      weight: 315
     - name: Stale Flags
       url: feature_flags/concepts/stale_flags
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
-      weight: 315
+      weight: 316
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
