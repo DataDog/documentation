@@ -173,11 +173,11 @@ Only source maps with the `.js.map` extension work to correctly unminify stack t
 Debug IDs associate a JavaScript bundle with its source map without relying on the bundle URL, service, or release version.
 
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
-2. [Create a dedicated Datadog API key](https://app.datadoghq.com/organization-settings/api-keys) and export it as an environment variable named `DD_API_KEY`.
-3. For sites other than US1, configure the CLI by exporting `DD_SITE` with your [Datadog site](/getting_started/site/).
+2. [Create a dedicated Datadog API key][6] and export it as an environment variable named `DD_API_KEY`.
+3. For sites other than US1, configure the CLI by exporting `DD_SITE` with your [Datadog site][7].
 4. Add debug IDs to your build output using either a Datadog Build Plugin or `datadog-ci`:
 
-   - To inject debug IDs during the build, configure the [Datadog Build Plugin](/real_user_monitoring/application_monitoring/browser/build_plugins/):
+   - To inject debug IDs during the build, configure the [Datadog Build Plugin][8]:
 
      ```javascript
      rum: {
@@ -216,6 +216,10 @@ datadog-ci sourcemaps find /path/to/dist --missing-debug-id
 ```
 
 The `find` command only inspects local `*.js.map` files. It does not confirm whether Datadog received an artifact.
+
+[6]: https://app.datadoghq.com/organization-settings/api-keys
+[7]: /getting_started/site/
+[8]: /real_user_monitoring/application_monitoring/browser/build_plugins/
 
 {{% /tab %}}
 {{< /tabs >}}
