@@ -18,11 +18,6 @@ further_reading:
   text: "Securing the AI era: Outpace AI-powered attacks with unified security and observability"
 ---
 
-{{< callout url=https://www.datadoghq.com/product-preview/runtime-prioritization-engine/
- btn_hidden="false" header="Join the Preview!">}}
-Runtime Prioritization Engine is in Preview for Cloud Security Vulnerabilities. Use this form to request access.
-{{< /callout >}}
-
 Security scanners surface thousands of findings per environment. Most teams default to ranking by CVSS severity, but static scores flag many findings that are never exploited in practice as critical. Real risk depends on live context: is the vulnerable code running, is an exploit available, and does the affected resource touch sensitive data or a business-critical workflow?
 
 The Datadog Runtime Prioritization Engine combines runtime behavior, exploitability, exposure, and business context from Observability and Security data to identify the 5% of findings that pose real, exploitable risk, so you can focus only on what matters.
@@ -61,7 +56,7 @@ Datadog adds the runtime signals it observes to vulnerability findings. Use thes
 
 When [Runtime Package Prioritization][4] is enabled, Datadog adds package-level runtime signals to container image vulnerability findings for packages installed by an operating system package manager (`apt`, `yum`, or `apk`). Search, filter, and group by these tags:
 
-| Signal | Tag |
+| Runtime context | Tag |
 |---|---|
 | Package is running | `@risk.is_package_running:true` |
 | Accessed by root process | `@package.is_running_as_root:true` |
@@ -79,13 +74,13 @@ Signals persist for the lifetime of an image version: after a package is observe
 
 ### Image is running
 
-Datadog adds the container image running signal to every container image vulnerability finding, with no additional Agent configuration. Search, filter, and group by this tag:
+Datadog adds the container image running context to every container image vulnerability finding, with no additional Agent configuration. Search, filter, and group by this tag:
 
-| Signal | Tag |
+| Runtime context | Tag |
 |---|---|
 | Image detected running in the last 12 hours | `@risk.is_image_running:true` |
 
-The tag is always `true` or `false` on container image findings, and absent on host, host image, and serverless findings. To prioritize running images across all asset types, exclude container image findings with no running signal:
+The tag is always `true` or `false` on container image findings, and absent on host, host image, and serverless findings. To prioritize running images across all asset types, exclude the container image findings that were not detected running:
 
 ```
 -@risk.is_image_running:false
@@ -93,13 +88,16 @@ The tag is always `true` or `false` on container image findings, and absent on h
 
 For a window other than 12 hours, query `@risk_details.is_image_running.evidence.detected_at`, the time of the last detection.
 
-Requirements depend on how the image is scanned:
+#### How the running context is determined
+
+Datadog detects running images with either the Datadog Agent or Agentless Scanning, but the two differ in where the context comes from and how often it refreshes:
 
 | | Agent | Agentless |
 |---|---|---|
 | **Requires** | [Cloud Security vulnerability scanning][14] and [container monitoring][12] enabled on the Agent. | [Agentless Scanning][13] on the cloud account. |
-
-For Agent-scanned images, the side panel of a finding in the [Vulnerability Explorer][11] lists the containers that recently ran that image.
+| **Source of the context** | [Container monitoring][12] data: the containers Datadog observes running on the hosts the Agent monitors. | The Agentless Scanning, which records the images running on a resource at the time the scan runs. |
+| **Update frequency** | Hourly, when Datadog re-evaluates the image's findings. | Once per Agentless scan of the resource, approximately every 11 hours. |
+| **Container-level detail** | The side panel of a finding in the [Vulnerability Explorer][11] lists the containers that recently ran the image. | Not available. |
 
 ## Get started
 
