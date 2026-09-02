@@ -18,18 +18,20 @@ Continuous tracing with GPU Monitoring is in Early Access Preview.
 
 ## Overview
 
-Continuous tracing with GPU Monitoring enables lightweight GPU activity tracing for selected Kubernetes workloads. Troubleshooting large, distributed workloads can be cumbersome and time-consuming. With this tracing capability in GPU Monitoring, you can quickly identify and dive into bottlenecks with detailed execution traces which directly tie CUDA, NCCL operations back to your actual model and Pytorch operations.
+Continuous tracing with GPU Monitoring enables lightweight GPU activity tracing for selected Kubernetes workloads. Troubleshooting large, distributed workloads can be cumbersome and time-consuming. With this tracing capability in GPU Monitoring, you can identify and dive into bottlenecks with detailed execution traces which directly tie CUDA, NCCL operations back to your actual model and Pytorch operations.
 
 {{< img src="gpu_monitoring/gpu-tracing.png" alt="Flame graph view of a torch.step trace, showing CPU spans aligned with GPU stream activity, including NCCL allgather operations and CUDA kernel launches." style="width:100%;" >}}
 
 ## Setup
+
 ### Prerequisites
 
-To begin continuously tracing your workloads, you must first meet the following critieria: 
+To begin continuously tracing your workloads, you must first meet the following criteria:
 - You are running the Datadog Cluster Agent version 7.80+ with GPU Monitoring enabled[1]
 - Minimum required CUDA and CUPTI version: 13
 
-1. Configure GPU Tracing
+### 1. Configure GPU tracing
+
 Merge the following configuration into the existing `DatadogAgent` resource:
 
 ```yaml
@@ -55,7 +57,8 @@ spec:
 
 Apply the configuration and wait for the `DatadogAgent` rollout to complete.
 
-2. Label the GPU workload
+### 2. Label the GPU workload
+
 Add the label to the controller's pod template. The workload must be outside the Agent namespace. For Jobs, use `spec.template.metadata.labels`. For KubeRay, label the head and worker pod template:
 
 ```yaml
@@ -68,7 +71,7 @@ spec:
 
 Apply the resource and wait for the rollout to complete.
 
-3. Verify setup
+### 3. Verify setup
 
 ```shell
 # Confirm setup containers completed
@@ -82,7 +85,7 @@ kubectl exec <NEW_GPU_POD> -n <GPU_WORKLOAD_NAMESPACE> -- sh -c \
 
 **No setup containers?** Confirm the label is on the pod template, the pod is new, and the workload is outside the Agent namespace. Then check the Cluster Agent logs.
 
-4. Explore traces
+### 4. Explore traces
 
 Run the workload, then query [APM Trace Explorer][2] with:
 
