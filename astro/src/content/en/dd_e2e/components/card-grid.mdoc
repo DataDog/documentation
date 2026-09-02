@@ -8,24 +8,32 @@ type: static
 
 {% card-grid %}
 {% image-card href="/continuous_integration/pipelines/awscodepipeline/" src="integrations_logos/aws-codepipeline_small.svg" alt="aws codepipeline" /%}
+{% image-card href="/continuous_integration/pipelines/jenkins/" src="integrations_logos/jenkins.png" alt="jenkins" /%}
+{% image-card href="/continuous_integration/pipelines/gitlab/" src="integrations_logos/gitlab.png" alt="gitlab" /%}
 {% /card-grid %}
 
 ## Card with title and subtitle
 
 {% card-grid %}
-{% image-card href="/integrations/datadog/" src="dd_logo_n_70x75.png" alt="Datadog" title="Datadog" subtitle="The monitoring platform" /%}
+{% image-card href="/integrations/kubernetes/" src="integrations_logos/kubernetes.png" alt="Kubernetes" title="Kubernetes" subtitle="Container orchestration" /%}
+{% image-card href="/integrations/postgres/" src="integrations_logos/postgresql.png" alt="PostgreSQL" title="PostgreSQL" subtitle="Relational database" /%}
+{% image-card href="/integrations/redisdb/" src="integrations_logos/redis.png" alt="Redis" title="Redis" subtitle="In-memory data store" /%}
 {% /card-grid %}
 
 ## Title-only card (no src)
 
 {% card-grid %}
 {% image-card href="/getting_started/" title="Getting Started" /%}
+{% image-card href="/getting_started/agent/" title="Agent" subtitle="Install and configure" /%}
+{% image-card href="/getting_started/dashboards/" title="Dashboards" /%}
 {% /card-grid %}
 
 ## Card with tooltip
 
 {% card-grid %}
 {% image-card href="/integrations/aws/" src="integrations_logos/amazon_web_services.png" alt="AWS" tooltip="Amazon Web Services integration" /%}
+{% image-card href="/integrations/google_cloud_platform/" src="integrations_logos/google_cloud_platform.png" alt="GCP" tooltip="Google Cloud Platform integration" /%}
+{% image-card href="/integrations/azure/" src="integrations_logos/azure.png" alt="Azure" tooltip="Microsoft Azure integration" /%}
 {% /card-grid %}
 
 ## Cards inheriting image_width from card-grid
@@ -33,18 +41,23 @@ type: static
 {% card-grid image_width=100 %}
 {% image-card href="/integrations/gcp/" src="integrations_logos/google_cloud_platform.png" alt="GCP" /%}
 {% image-card href="/integrations/azure/" src="integrations_logos/azure.png" alt="Azure" /%}
+{% image-card href="/integrations/kubernetes/" src="integrations_logos/kubernetes.png" alt="Kubernetes" /%}
 {% /card-grid %}
 
 ## Card overriding image_width
 
 {% card-grid image_width=100 %}
 {% image-card href="/integrations/datadog/" src="dd_logo_n_70x75.png" alt="Datadog" image_width=200 /%}
+{% image-card href="/integrations/docker/" src="integrations_logos/docker.png" alt="Docker" /%}
+{% image-card href="/integrations/nginx/" src="integrations_logos/nginx.png" alt="NGINX" /%}
 {% /card-grid %}
 
 ## Custom card_width
 
 {% card-grid card_width=225 %}
 {% image-card href="/integrations/aws/" src="integrations_logos/amazon_web_services.png" alt="AWS" /%}
+{% image-card href="/integrations/mysql/" src="integrations_logos/mysql.png" alt="MySQL" /%}
+{% image-card href="/integrations/github/" src="integrations_logos/github.png" alt="GitHub" /%}
 {% /card-grid %}
 
 ## Tooltip inside a positioned ancestor
@@ -53,6 +66,8 @@ type: static
 {% tab label="Inside a tab" %}
 {% card-grid %}
 {% image-card href="/integrations/aws/" src="integrations_logos/amazon_web_services.png" alt="AWS" tooltip="Tooltip inside a tab" /%}
+{% image-card href="/integrations/google_cloud_platform/" src="integrations_logos/google_cloud_platform.png" alt="GCP" tooltip="Tooltip on the second card" /%}
+{% image-card href="/integrations/azure/" src="integrations_logos/azure.png" alt="Azure" tooltip="Tooltip on the third card" /%}
 {% /card-grid %}
 {% /tab %}
 {% /tabs %}

@@ -123,21 +123,27 @@ test.describe("CardGrid component", () => {
   test("applies the inherited image width to every card in the grid", async ({
     page,
   }) => {
-    // Section 5: {% card-grid image_width=100 %} with two cards, neither
+    // Section 5: {% card-grid image_width=100 %} with three cards, none
     // setting its own width. (Unquoted numeric literal — Markdoc's Number
     // schema type does not coerce a quoted string.)
     const images = page.locator(".card-grid").nth(4).locator(".image-card__image");
 
-    await expect(images).toHaveCount(2);
-    await expect(images.nth(0)).toHaveAttribute("width", "100");
-    await expect(images.nth(1)).toHaveAttribute("width", "100");
+    await expect(images).toHaveCount(3);
+    for (const image of await images.all()) {
+      await expect(image).toHaveAttribute("width", "100");
+    }
   });
 
   test("lets a card override the grid's image width", async ({ page }) => {
-    // Section 6: grid sets 100, the single card sets 200.
-    const image = page.locator(".card-grid").nth(5).locator(".image-card__image");
+    // Section 6: grid sets 100; only the FIRST card sets 200. Asserting both
+    // halves keeps this honest — a bug that ignored image_width entirely and
+    // fell back to the 150 default would fail, and so would one that leaked
+    // the override onto its siblings.
+    const images = page.locator(".card-grid").nth(5).locator(".image-card__image");
 
-    await expect(image).toHaveAttribute("width", "200");
+    await expect(images.nth(0)).toHaveAttribute("width", "200");
+    await expect(images.nth(1)).toHaveAttribute("width", "100");
+    await expect(images.nth(2)).toHaveAttribute("width", "100");
   });
 });
 
