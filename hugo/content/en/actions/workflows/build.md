@@ -51,7 +51,7 @@ To create a workflow:
 1. Click the up arrow ({{< ui >}}↑{{< /ui >}}) to submit the prompt.
 1. Answer any follow-up questions, then confirm the workflow when prompted. Bits creates the workflow and opens it in the workflow editor.
 
-You can also create a workflow from anywhere in Datadog with Bits Chat. Open Bits Chat by clicking {{< ui >}}Ask Bits{{< /ui >}} in the top-right navigation bar or pressing <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>, then ask Bits to create a workflow.
+You can also create a workflow from anywhere in Datadog with Bits Chat. Open Bits Chat by clicking {{< ui >}}Ask Bits{{< /ui >}} in the top-right navigation bar or pressing <kbd>Cmd</kbd> or <kbd>Ctrl</kbd> + <kbd>I</kbd>, then ask Bits to create a workflow.
 
 To update an existing workflow:
 1. Open the workflow and click the AI icon <i class="icon-bits-ai"></i> in the left toolbar. Bits Chat opens with the workflow attached as context.
