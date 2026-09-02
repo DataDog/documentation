@@ -59,7 +59,7 @@ A multi-step diagnostic procedure, or the specific way your team queries a third
 
 Bits Investigation invokes a skill automatically when its name and description match the situation, the same way Bits Code discovers custom skills in your repository. Use a skill when you'd otherwise repeat the same instructions across monitors, or when a procedure needs to stay consistent across Bits Investigation, Bits Chat, and other Bits products.
 
-## Connect the systems where the answer already lives
+## Connect external tools and documentation
 
 - **Confluence.** [Connect your Confluence account][3] and link relevant pages in monitor messages. Bits extracts telemetry links and troubleshooting steps from the page. Enable account crawling to let [Bits Chat][4] search your Confluence space directly, not just linked pages.
 - **Source code.** Connect [GitHub][5] and [tag your APM telemetry with Git information][6] so Bits can tie a regression to the commit or deploy that caused it. This also lets Bits Code pick up the investigation and propose a fix.
@@ -75,7 +75,7 @@ Confirm what's correct, not just what's wrong; positive feedback still becomes a
 
 Both become **memories**, which Bits selectively reuses in similar future investigations. Review or delete them from the {{< ui >}}Memories{{< /ui >}} column on the [Monitor Management][8] page, and check periodically that older corrections still hold (services get renamed, causes get fixed).
 
-## Confirm Bits actually picked it up
+## Test your changes with Bits Chat
 
 Use [Bits Chat][4] to check your changes by asking about what you wrote, instead of waiting on a full investigation. You can also ask Bits Chat directly for suggestions on how to improve `bits.md`, a runbook, or a skill.
 
