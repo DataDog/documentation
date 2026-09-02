@@ -95,8 +95,8 @@ Datadog detects running images with either the Datadog Agent or Agentless Scanni
 | | Agent | Agentless |
 |---|---|---|
 | **Requires** | [Cloud Security vulnerability scanning][14] and [container monitoring][12] enabled on the Agent. | [Agentless Scanning][13] on the cloud account. |
-| **Source of the context** | [Container monitoring][12] data: the containers Datadog observes running on the hosts the Agent monitors. | The Agentless Scanning, which records the images running on a resource at the time the scan runs. |
-| **Update frequency** | Hourly, when Datadog re-evaluates the image's findings. | Once per Agentless scan of the resource, approximately every 11 hours. |
+| **Source of the context** | [Container monitoring][12] data: the containers Datadog observes running on the hosts the Agent monitors. | Agentless Scanning, which records the images running on a resource at the time the scan runs. |
+| **Update frequency** | Hourly, when Datadog re-evaluates the image's findings. | Once per Agentless scan of the resource, every 12 hours. |
 | **Container-level detail** | The side panel of a finding in the [Vulnerability Explorer][11] lists the containers that recently ran the image. | Not available. |
 
 ## Get started
