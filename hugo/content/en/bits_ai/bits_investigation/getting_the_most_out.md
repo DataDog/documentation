@@ -26,7 +26,7 @@ You can teach it through four places: [`bits.md`][1], your monitors and runbooks
 - **Good**: "The billing team's alerts tag the service as `billing-svc`, but APM and logs use `billing_service`. Treat them as the same service."
 - **Not useful**: "Checkout is our payments service." True, but gives Bits nothing to act on.
 
-What to include:
+The entries that matter most:
 - **Cross-system name mapping.** The same service, environment, or team often has different names in monitors, APM, logs, and any connected ticketing system. Write the mapping down once.
 - **Known noise.** Patterns that look like incidents but are routine, such as a weekly reindex job or a load test, and when they'd actually count as a real problem.
 - **Standing scope rules.** How to handle an alert that doesn't specify environment or region. Without a rule, Bits has to guess.
@@ -35,7 +35,7 @@ See [Knowledge sources][1] for a full sample file.
 
 ## Start with the monitors that matter most
 
-Tuning a monitor takes work: a runbook link, correct tags, a `bits.md` entry for its quirks. Start with monitors where an investigation actually saves time. On the [Supported Monitors][8] page:
+A good runbook link, correct tags, and a `bits.md` entry for a monitor's quirks all take time to set up. Start with monitors where an investigation actually saves time. On the [Supported Monitors][8] page:
 
 - Filter by [`priority:p1`][9] (or `p2`) for monitors most likely to represent a real incident.
 - Filter by [`notification:*`][10] for monitors that already page a person or channel.
@@ -48,7 +48,7 @@ Bits reads the monitor message at investigation time, so the monitor itself is a
 
 - Link the dashboard, log query, or notebook you'd check first. Plain URLs work, no formatting needed.
 - Use a notebook for anything longer than a link or two. Notebooks mix markdown with live Datadog queries.
-- State the blast radius: which downstream services or dependencies are typically affected.
+- Note which downstream services or dependencies are typically affected.
 - Scope or group the monitor query by `service`. This is what lets Bits pivot into APM, logs, RUM, and [Catalog][2] for the right service. Without it, Bits falls back on weaker signals like the monitor name.
 
 Review monitor messages periodically. A stale runbook link is worse than no link, since it points Bits at the wrong dashboard or a decommissioned service.
