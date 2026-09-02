@@ -1,18 +1,18 @@
 ---
-title: Hostname and Tagging with the Datadog Exporter
+title: Hostname and Tagging
 aliases:
 - /opentelemetry/collector_exporter/hostname_tagging
 further_reading:
-- link: "/opentelemetry/setup/collector_exporter/datadog_exporter/"
+- link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
-  text: "Configure the Datadog Exporter and Connector"
+  text: "Setting Up the OpenTelemetry Collector"
 ---
 
 {{< img src="opentelemetry/collector_exporter/hostname_tagging.png" alt="Hostname information collected from OpenTelemetry" style="width:100%;" >}}
 
 ## Overview
 
-For existing configurations that use the Datadog Exporter, add the [resource detection processor][2] and the [Kubernetes attributes processor][3] to the relevant Collector pipelines. These processors add host and container information as [resource semantic conventions][1]. The Datadog Exporter uses these resource attributes to determine the hostname, host tags, and container tags. These tags enable automatic correlation among telemetry signals and tag-based navigation for filtering and grouping telemetry data within Datadog.
+To extract the correct hostname and host tags, Datadog Exporter uses the [resource detection processor][2] and the [Kubernetes attributes processor][3]. These processors allow for extracting information from hosts and containers in the form of [resource semantic conventions][1], which is then used to build the hostname, host tags, and container tags. These tags enable automatic correlation among telemetry signals and tag-based navigation for filtering and grouping telemetry data within Datadog.
 
 For more information, see the OpenTelemetry project documentation for the [resource detection][2] and [Kubernetes attributes][3] processors.
 
