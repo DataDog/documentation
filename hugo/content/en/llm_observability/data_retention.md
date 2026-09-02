@@ -35,7 +35,7 @@ Retention periods in Agent Observability depend on the type of data and on your 
 
 Traces and spans from your instrumented applications are retained for **15 days** on all plans by default. This applies to everything stored on the span, including per-span operational data such as cost, token counts, latency, and errors, as well as evaluation scores attached to spans.
 
-A retention add-on extends this to **30, 60, or 90 days**. To request a longer retention period, contact your Datadog account representative or [Datadog support][1]. For how retention affects billing, see [Agent Observability Billing][10].
+A retention add-on extends this to **30, 60, or 90 days**. See [Changing your retention period](#changing-your-retention-period).
 
 Retention applies to the raw spans you query in the Traces explorer. Metrics derived from those spans are retained separately, for longer. See [Metrics](#metrics).
 
@@ -58,6 +58,8 @@ If your organization has a custom contract, your retention periods may not match
 The experiment itself — its name, configuration, and aggregate results — is retained for **90 days** from the time it is created. Unlike experiment traces, this period is the same on every plan and does not extend with a retention add-on. Export any experiment results you need to keep beyond 90 days.
 
 ## Changing your retention period
+
+Retention add-ons are arranged through your account team rather than enabled from the Datadog UI. To request a longer retention period, contact your Datadog account representative or [Datadog support][1]. For how add-ons are priced, see [Agent Observability Billing][10].
 
 When you add or extend a retention add-on, the longer period applies **retroactively to every span that has not already expired**. Spans that expired under your previous period are not recoverable.
 
