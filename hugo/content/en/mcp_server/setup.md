@@ -13,6 +13,12 @@ further_reading:
 - link: "mcp_server/tools"
   tag: "Documentation"
   text: "Datadog MCP Server Tools"
+- link: "https://www.datadoghq.com/blog/kubernetes-mcp-tools/"
+  tag: "Blog"
+  text: "Investigate Kubernetes resources with Datadog MCP tools"
+- link: "https://www.datadoghq.com/blog/datadog-ai-agent-integrations/"
+  tag: "Blog"
+  text: "Bring live Datadog telemetry into your AI agents with native integrations"
 ---
 
 Learn how to set up and configure the Datadog MCP Server, which lets you retrieve telemetry insights and manage platform features directly from AI-powered clients. Select your client:
@@ -684,6 +690,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `kubernetes`: Tools for searching and describing [Kubernetes][51] resources and retrieving manifests across all clusters
 - `llmobs`: Tools for searching and analyzing [Agent Observability][36] spans and experiments
 - `networks`: Tools for [Cloud Network Monitoring][37] analysis and [Network Device Monitoring][38]
+- `notebooks`: Extended tools for [notebooks][54], beyond the notebook tools included in the `core` toolset
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
 - `product-analytics`: Tools for interacting with [Product Analytics][41] queries
 - `profiling`: Tools for discovering, exploring, and analyzing [Continuous Profiler][58] data
@@ -907,7 +914,7 @@ Local authentication is recommended for Cline and when remote authentication is 
 [33]: /database_monitoring/
 [34]: /tracing/
 [35]: /feature_flags/
-[36]: /llm_observability/mcp_server/
+[36]: /llm_observability/build_with_ai/mcp_server/
 [37]: /network_monitoring/cloud_network_monitoring/
 [38]: /network_monitoring/devices/
 [39]: /security/threats/security_signals/

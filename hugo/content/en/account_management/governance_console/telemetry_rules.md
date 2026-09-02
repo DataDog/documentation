@@ -4,7 +4,7 @@ is_beta: true
 private: true
 description: Use telemetry rules to govern tags, indexing, and other characteristics of your metrics, logs, and spans.
 further_reading:
-- link: '/api/latest/tag-policies/'
+- link: '/api/latest/tag-rules/'
   tag: 'Documentation'
   text: 'Tag Visibility and Enforcement Rules API'
 - link: '/account_management/governance_console/'
