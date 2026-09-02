@@ -1765,6 +1765,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_3116312807",
+      "description": "Validate an observability pipeline with Splunk TCP source max_connection_duration_secs returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_99164570",
       "description": "Validate an observability pipeline with amazon S3 source compression returns \"OK\" response"
     },
