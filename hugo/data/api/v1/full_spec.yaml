@@ -38469,7 +38469,10 @@ paths:
       x-menu-order: 5
   /api/v1/query:
     get:
-      description: Query timeseries points.
+      description: |-
+        Query timeseries points. Datadog recommends using the v2
+        `/api/v2/query/timeseries` endpoint over this endpoint for
+        querying timeseries data.
       operationId: QueryMetrics
       parameters:
         - description: Start of the queried time period, seconds since the Unix epoch.

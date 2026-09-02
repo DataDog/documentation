@@ -105,6 +105,11 @@ After you select the Amazon S3 destination in the pipeline UI:
 1. Enter a maximum batching size and select the unit ({{< ui >}}MB{{< /ui >}} or {{< ui >}}GB{{< /ui >}}) in the dropdown menu. If not configured, the default is `100` MB.
 1. Enter a batching timeout in seconds. If not configured, the default is `900` seconds.
 
+#### Server-side encryption
+
+1. Select an encryption type for your S3 bucket in the {{< ui >}}Server-Side Encryption{{< /ui >}} dropdown menu: {{< ui >}}AWS KMS{{< /ui >}} or {{< ui >}}AES256{{< /ui >}}.
+1. If you selected {{< ui >}}AWS KMS{{< /ui >}}, enter the AWS KMS key ID.
+
 #### AWS authentication
 
 Select an AWS authentication option. If you are only using the [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) for authentication, do not select {{< ui >}}Assume role{{< /ui >}}. Select {{< ui >}}Assume role{{< /ui >}} only if the user or role you created earlier needs to assume a different role to access the AWS resource. The assumed role's permissions must be explicitly defined.<br>If you select {{< ui >}}Assume role{{< /ui >}}:

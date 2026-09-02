@@ -64,8 +64,9 @@ The Token Auth connection uses a bearer token to authenticate the HTTP request.
 1. Enter a {{< ui >}}Connection Name{{< /ui >}}.
 1. Enter the {{< ui >}}Base URL{{< /ui >}} for authentication.
 1. From the {{< ui >}}Authentication Type{{< /ui >}} dropdown, select {{< ui >}}Token Auth{{< /ui >}}.
-1. Enter a {{< ui >}}Token Name{{< /ui >}} and {{< ui >}}Token Value{{< /ui >}}. You can enter multiple tokens. To reference your token in a header, parameter, or the request body, use the syntax `{{ secretTokenName }}`.
-1. Optionally, add additional {{< ui >}}Request Headers{{< /ui >}}, {{< ui >}}URL parameters{{< /ui >}} and a {{< ui >}}Body{{< /ui >}} to your request.
+1. Enter a {{< ui >}}Token Name{{< /ui >}} and {{< ui >}}Token Value{{< /ui >}}. You can enter multiple tokens.
+1. Configure how HTTP requests that use the connection include the token. The connection does not add the token to requests automatically. In {{< ui >}}Request Headers{{< /ui >}}, {{< ui >}}URL parameters{{< /ui >}}, or the {{< ui >}}Body{{< /ui >}}, reference the token with the syntax `{{ secretTokenName }}`, replacing `secretTokenName` with the {{< ui >}}Token Name{{< /ui >}} from the previous step. For example, if the token name is `apiToken`, add an `Authorization` header with the value `Bearer {{ apiToken }}`.
+1. Optionally, add other {{< ui >}}Request Headers{{< /ui >}}, {{< ui >}}URL parameters{{< /ui >}}, or a {{< ui >}}Body{{< /ui >}} to your request.
 1. Click {{< ui >}}Create{{< /ui >}}.
 
 ### Create an HTTP basic authentication connection
@@ -191,4 +192,4 @@ To configure a private HTTP request:
 [3]: https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc#the-default-scope
 [4]: https://chat.datadoghq.com/
 [5]: /actions/private_actions
-[6]: /actions/private_actions/private_action_credentials/?tab=httpsaction#credential-files
+[6]: /actions/connections/private_action_credentials/?tab=httpsaction#credential-files

@@ -1119,34 +1119,6 @@
       "description": "Update a personal access token returns \"OK\" response"
     }
   ],
-  "CreateLLMObsPromptVersion": [
-    {
-      "group": "llm_observability",
-      "suffix": "",
-      "description": "Create a new Agent Observability prompt version returns \"OK\" response"
-    }
-  ],
-  "CreateLLMObsPrompt": [
-    {
-      "group": "llm_observability",
-      "suffix": "",
-      "description": "Create an Agent Observability prompt returns \"OK\" response"
-    }
-  ],
-  "UpdateLLMObsPrompt": [
-    {
-      "group": "llm_observability",
-      "suffix": "",
-      "description": "Update an Agent Observability prompt returns \"OK\" response"
-    }
-  ],
-  "UpdateLLMObsPromptVersion": [
-    {
-      "group": "llm_observability",
-      "suffix": "",
-      "description": "Update an Agent Observability prompt version returns \"OK\" response"
-    }
-  ],
   "AggregateLogs": [
     {
       "group": "logs",
@@ -1770,6 +1742,11 @@
       "group": "observability_pipelines",
       "suffix": "_3565101276",
       "description": "Validate an observability pipeline with OCSF mapper library mapping returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_1874470273",
+      "description": "Validate an observability pipeline with Splunk HEC destination endpoint_target returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",
@@ -2907,6 +2884,13 @@
       "group": "teams",
       "suffix": "",
       "description": "Update team notification rule returns \"OK\" response"
+    }
+  ],
+  "AddSTIXThreatIntel": [
+    {
+      "group": "threat_intelligence",
+      "suffix": "",
+      "description": "Ingest STIX threat intelligence returns \"OK\" response"
     }
   ],
   "CreateUser": [

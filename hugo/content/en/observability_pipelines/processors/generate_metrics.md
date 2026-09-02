@@ -1,5 +1,6 @@
 ---
 title: Generate Metrics Processor
+description: Learn how to use the Generate Metrics processor to create count, gauge, or distribution metrics from logs that match a query.
 disable_toc: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/span-based-metrics/"
