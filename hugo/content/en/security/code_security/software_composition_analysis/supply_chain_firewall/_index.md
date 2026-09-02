@@ -49,7 +49,7 @@ To inspect package manager commands in CI instead of locally, see the [Supply Ch
 
 ### Configure your environment
 
-Set up shell aliases so that supported package manager commands are automatically routed through SCFW without having to prepend `scfw run`. `scfw configure` also enables log forwarding to Datadog; see [Supply Chain Firewall integration][4] for details.
+Set up shell aliases so that supported package manager commands are automatically routed through SCFW without having to prepend `scfw run`. Configuration also enables log forwarding to Datadog; see [Supply Chain Firewall integration][4] for details.
 
 Run `scfw configure` with no arguments for an interactive walkthrough of available options:
 
