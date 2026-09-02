@@ -122217,6 +122217,19 @@ components:
           description: The name of the feature flag.
           example: "Updated Feature Flag XYZ789"
           type: string
+        tags:
+          description: |-
+            Tags associated with the feature flag. This field replaces the full set of
+            existing tags; omit it to leave tags unchanged, or pass an empty array to
+            clear all tags. The owning team is set by including a tag of the form
+            `team:<team-handle>` in this array.
+          example: ["team:feature-flagging"]
+          items:
+            description: A tag associated with the feature flag.
+            maxLength: 200
+            type: string
+          maxItems: 100
+          type: array
       type: object
     UpdateFeatureFlagData:
       description: Data for updating a feature flag.
@@ -150956,6 +150969,11 @@ paths:
       description: |-
         Updates an existing feature flag's metadata such as
          name and description. Does not modify targeting rules or allocations.
+
+        To change the owning team, update `tags` and include a tag of the form
+        `team:<team-handle>` in the array. `tags` is a full replacement of the
+        existing tag set (including any `team:` tag), so include every tag you
+        want to keep, not just the ones you're adding.
       operationId: UpdateFeatureFlag
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -150970,6 +150988,7 @@ paths:
                       description: Updated description for the feature flag
                       enabled: true
                       name: Updated Feature Flag XYZ789
+                      tags: ["team:feature-flagging"]
                     type: feature-flags
             schema:
               $ref: "#/components/schemas/UpdateFeatureFlagRequest"
