@@ -43,20 +43,19 @@ You can create workflows or edit existing workflows from the [Workflow Automatio
 
 ## Create or edit a workflow with AI {#create-a-workflow-with-ai}
 
-If you're not sure where to start, you can automatically generate a workflow, or iterate on an existing workflow with AI.
+Use AI assistance in [Bits Chat][15] to create a workflow from a prompt or update an existing workflow. Include the trigger, integrations, actions, and conditions you want. Bits Chat can ask follow-up questions before creating or updating the workflow.
 
-To generate a workflow:
-1. From the [Workflow Automation][1] page, click {{< ui >}}New Workflow{{< /ui >}}.
-1. Click {{< ui >}}Create a workflow with AI{{< /ui >}}.
-1. Enter a detailed prompt for your workflow. Specify the integrations and actions you'd like to use.
-1. Click the up arrow ({{< ui >}}↑{{< /ui >}}) to create your workflow.
+To create a workflow:
+1. From the [Workflow Automation][1] page, click {{< ui >}}New workflow{{< /ui >}}.
+1. Under {{< ui >}}Build a workflow with AI{{< /ui >}}, enter a detailed prompt or select a suggested prompt.
+1. Click the up arrow ({{< ui >}}↑{{< /ui >}}) to submit the prompt.
+1. Answer any follow-up questions, then confirm the workflow when prompted. Bits creates the workflow and opens it in the workflow editor.
 
-To iterate on an existing workflow:
-1. From an existing workflow, click {{< ui >}}Edit with AI{{< /ui >}}.
-1. Enter a detailed prompt for the behavior you'd like to add to your workflow. Include the integrations and actions you'd like to use.
-1. Click the up arrow ({{< ui >}}↑{{< /ui >}}) to add the functionality to your workflow.
-
-<div class="alert alert-info">The Workflow Automation AI does not answer questions about the product. If you have questions or feedback, consider joining the <strong>#workflows</strong> channel on the <a href="https://chat.datadoghq.com/">Datadog Community Slack</a></div>
+To update an existing workflow:
+1. Open the workflow and click {{< ui >}}Edit with AI{{< /ui >}} in the left toolbar. Bits Chat opens with the workflow attached as context.
+1. Enter a detailed prompt describing the changes you want.
+1. Click the up arrow ({{< ui >}}↑{{< /ui >}}) to submit the prompt.
+1. Answer any follow-up questions, then confirm the changes when prompted. Bits updates the workflow in the editor.
 
 ## Create a custom workflow
 
@@ -210,3 +209,4 @@ To perform tasks using the API, see the [Workflow Automation API documentation][
 [12]: /actions/workflows/variables/
 [13]: /api/latest/workflow-automation/
 [14]: /actions/workflows/variables/#context-variables
+[15]: /bits_ai/bits_chat/
