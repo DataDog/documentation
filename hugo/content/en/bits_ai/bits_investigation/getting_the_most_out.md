@@ -80,7 +80,7 @@ Both kinds of feedback become **memories**, which Bits selectively applies to si
 
 ## Confirm Bits actually picked it up
 
-Don't assume an update to `bits.md`, a runbook, or an integration took effect. Check it. [Bits Chat][4] gives you a direct answer without waiting on a full investigation:
+Use [Bits Chat][4] to verify changes by asking it questions about what you wrote, rather than waiting on a full investigation to find out. You can also ask it directly for suggestions on how to fine-tune `bits.md`, a runbook, or a skill further:
 
 | Goal | Example prompt |
 |------|-----------------|
