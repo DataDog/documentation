@@ -34,7 +34,7 @@ Use the state drop-down to change how a flaky test is handled in your CI pipelin
 | ----------- | ----------- |
 | {{< ui >}}Active{{< /ui >}} | The test is known to be flaky and is running in CI. |
 | {{< ui >}}Quarantined{{< /ui >}} | Keep the test running in the background, but failures don't affect CI status or break pipelines. This is useful for isolating flaky tests without blocking merges. Datadog tags test run events with `@test.test_management.is_quarantined:true` when quarantined. |
-| {{< ui >}}Disabled{{< /ui >}} | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. Datadog tags test run events with `@test.test_management.is_disabled:true` when disabled. |
+| {{< ui >}}Disabled{{< /ui >}} | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. Datadog tags test run events with `@test.test_management.is_disabled:true` when disabled. Disabled tests are excluded from the automatic move to {{< ui >}}Fixed{{< /ui >}}. |
 | {{< ui >}}Fixed{{< /ui >}} | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm the fix and automatically apply this state after it is merged into the default branch. |
 
 <div class="alert alert-info">State actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
@@ -88,6 +88,7 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
          <td>{{< ui >}}Fixed{{< /ui >}}</td>
          <td>
            <p>If a flaky test no longer flakes for 30 days, it is automatically moved to the Fixed state. This automation is default behavior and can't be customized.</p>
+           <p>Tests in the {{< ui >}}Disabled{{< /ui >}} state are excluded from this automation and are never automatically moved to {{< ui >}}Fixed{{< /ui >}}. Because disabled tests are skipped in CI, Datadog has no signal about whether they are still flaky. To make a disabled test eligible again, change its state to {{< ui >}}Active{{< /ui >}} or {{< ui >}}Quarantined{{< /ui >}}.</p>
            <p>Before Datadog automatically moves a flaky test to {{< ui >}}Fixed{{< /ui >}}, it checks whether the test may be broken rather than fixed. A broken test is a flaky test whose recent executions all failed, resulting in a 100% failure rate over the last 7 days. Datadog does not automatically mark these tests as fixed, which helps prevent quarantined tests that still fail from breaking CI again.</p>
            <p>Use the {{< ui >}}Broken test{{< /ui >}} facet in the Flaky Tests Management explorer to identify these tests. Filter on <code>broken_test:true</code> to show tests with a 100% failure rate over the last 7 days.</p>
          </td>
