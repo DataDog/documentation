@@ -8,9 +8,9 @@ import {
 } from "./deviceId";
 
 describe("generateRumDeviceId", () => {
-  it("produces a base-36 string matching Hugo's cookie pattern", () => {
-    // Hugo reads the cookie back with /_dd_device_id=(\w+)/, so anything
-    // outside [A-Za-z0-9_] would be silently truncated on read.
+  it("produces a base-36 string", () => {
+    // Readers match the cookie with /_dd_device_id=(\w+)/, so anything outside
+    // [A-Za-z0-9_] would be truncated on read.
     for (let attempt = 0; attempt < 50; attempt++) {
       expect(generateRumDeviceId()).toMatch(/^[0-9a-z]+$/);
     }
@@ -39,7 +39,7 @@ describe("readRumDeviceId", () => {
 });
 
 describe("cookieDomain", () => {
-  it("keeps the last two hostname labels, as Hugo does", () => {
+  it("keeps the last two hostname labels", () => {
     expect(cookieDomain("docs.datadoghq.com")).toBe("datadoghq.com");
     expect(cookieDomain("docs-staging.datadoghq.com")).toBe("datadoghq.com");
     expect(cookieDomain("datadoghq.com")).toBe("datadoghq.com");
@@ -48,7 +48,7 @@ describe("cookieDomain", () => {
 });
 
 describe("buildDeviceIdCookie", () => {
-  it("writes the attributes Hugo writes", () => {
+  it("writes the full attribute set", () => {
     const cookie = buildDeviceIdCookie("abc123", "docs.datadoghq.com");
     expect(cookie).toBe(
       "_dd_device_id=abc123; Domain=.datadoghq.com; Max-Age=31536000; Path=/; SameSite=None; Secure; Partitioned",
@@ -83,10 +83,10 @@ describe("ensureRumDeviceId", () => {
     expect(cookieJar).toContain(`_dd_device_id=${id}`);
   });
 
-  it("reuses the existing ID, so it is idempotent alongside Hugo's copy", () => {
-    // Both sites share the domain and therefore the cookie. Astro must not
-    // overwrite an ID Hugo already set, or a user crossing between the two
-    // sites would look like two devices.
+  it("reuses the existing ID, so it is idempotent across the domain", () => {
+    // The cookie is shared with every other site on datadoghq.com. Overwriting
+    // an ID one of them set would make a user crossing between them look like
+    // two devices.
     cookieJar = "_dd_device_id=existing1";
     const id = ensureRumDeviceId(documentStub, "docs.datadoghq.com");
     expect(id).toBe("existing1");

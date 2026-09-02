@@ -15,10 +15,9 @@ interface ImportMetaEnv {
 }
 
 /**
- * The Datadog SDK globals, assigned by `Telemetry.astro`. Hugo's CDN SDK
- * bundles create these, and the planned shared Ask AI package reads them rather
- * than importing the SDKs itself, so Astro assigns them too. Optional because
- * they do not exist until that deferred script runs.
+ * The Datadog SDK globals, assigned by `Telemetry.astro` because the planned
+ * shared Ask AI package reads them rather than importing the SDKs itself.
+ * Optional because they do not exist until that deferred script runs.
  */
 interface Window {
   DD_RUM?: typeof import('@datadog/browser-rum').datadogRum;

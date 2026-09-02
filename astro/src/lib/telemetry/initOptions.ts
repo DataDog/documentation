@@ -1,33 +1,28 @@
 /**
  * Pure builders for the Datadog SDK option objects.
  *
- * The point of splitting these out of `Telemetry.astro` is that the
- * configuration itself becomes assertable without loading an SDK or a browser:
- * RUM never initializes in development, so the option objects are the only part
- * of the init path a unit test can reach. Every field mirrors Hugo's
- * `assets/scripts/components/dd-browser-logs-rum.js`.
+ * Split out of `Telemetry.astro` so the configuration is assertable without
+ * loading an SDK or a browser. RUM never initializes in development, so these
+ * option objects are the only part of the init path a unit test can reach.
  */
 import type { RumInitConfiguration } from "@datadog/browser-rum";
 import type { LogsInitConfiguration } from "@datadog/browser-logs";
 import type { TelemetryCredentials, TelemetryEnv } from "@config/telemetry";
 
 /**
- * Shared by RUM, Browser Logs, and the sourcemap upload manifest. Matches
- * Hugo's `service: 'docs'` so dashboards, monitors, and saved queries keep
- * working across the Hugo cutover — and so uploaded sourcemaps match the
- * errors RUM reports.
+ * Shared by RUM, Browser Logs, and the sourcemap upload manifest. Existing
+ * dashboards, monitors, and saved queries key on this value, and uploaded
+ * sourcemaps only match errors when it agrees.
  */
 export const TELEMETRY_SERVICE = "docs";
 
 /**
  * The value of the `stack` global context property.
  *
- * TODO: do **not** remove this until Hugo is gone. Astro and Hugo report into
- * one RUM application, so this property is the only thing separating the two
- * sites' data: Astro is `@context.stack:astro` and Hugo is
- * `-@context.stack:astro` (this plan cannot edit Hugo to emit `stack: 'hugo'`).
- * After the cutover every session is Astro and the property becomes a facet
- * with a single value, at which point it can go.
+ * TODO: keep this until the Hugo site is gone. Both sites report into one RUM
+ * application, so this property is the only thing separating their data: Astro
+ * is `@context.stack:astro`, Hugo is `-@context.stack:astro`. Removable once
+ * every session is Astro.
  */
 export const ASTRO_STACK = "astro";
 
@@ -66,9 +61,8 @@ export function buildRumInitOptions({
     service: TELEMETRY_SERVICE,
     ...optional("version", version),
     trackUserInteractions: true,
-    // TODO: `feature_flags` is copied from Hugo for parity but is inert on
-    // Astro — nothing here evaluates a flag. It starts doing something when
-    // OpenFeature feature flags are wired up and a flag resolver is supplied.
+    // TODO: `feature_flags` is inert until OpenFeature feature flags are wired
+    // up and a flag resolver is supplied — nothing here evaluates a flag yet.
     enableExperimentalFeatures: ["zero_lcp_telemetry", "feature_flags"],
     sessionSampleRate: 100,
     sessionReplaySampleRate: 50,
@@ -78,9 +72,8 @@ export function buildRumInitOptions({
     allowedTracingUrls: [origin],
     ...optional("internalAnalyticsSubdomain", internalAnalyticsSubdomain),
     // `satisfies` rather than a return-type annotation: it checks the object
-    // against the SDK's own type — so a field Datadog renames stops compiling
-    // here — while keeping the literal types precise enough for the tests to
-    // assert on.
+    // against the SDK's own type — so a renamed field stops compiling — while
+    // keeping the literal types precise enough for the tests to assert on.
   } satisfies RumInitConfiguration;
 }
 

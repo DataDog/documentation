@@ -38,10 +38,7 @@ function logsOptions(overrides: Record<string, unknown> = {}) {
 }
 
 describe("buildRumInitOptions", () => {
-  it("matches Hugo's RUM init field for field", () => {
-    // Mirrors hugo/assets/scripts/components/dd-browser-logs-rum.js:28-43.
-    // Any divergence here means the two sites' data is not comparable, and
-    // since they now share one RUM application, not even separable by app.
+  it("builds the full RUM init object", () => {
     expect(rumOptions()).toEqual({
       applicationId: "app-id",
       clientToken: "client-token",
@@ -60,7 +57,7 @@ describe("buildRumInitOptions", () => {
     });
   });
 
-  it("uses the docs service, so queries survive the Hugo cutover", () => {
+  it("uses the docs service, which existing queries key on", () => {
     expect(rumOptions().service).toBe(TELEMETRY_SERVICE);
     expect(TELEMETRY_SERVICE).toBe("docs");
   });
@@ -89,9 +86,8 @@ describe("buildRumInitOptions", () => {
 });
 
 describe("buildLogsInitOptions", () => {
-  it("matches Hugo's Logs init field for field", () => {
-    // Mirrors dd-browser-logs-rum.js:59-66. Note there is no applicationId:
-    // Browser Logs is keyed by client token alone.
+  it("builds the full Logs init object", () => {
+    // No applicationId: Browser Logs is keyed by client token alone.
     expect(logsOptions()).toEqual({
       clientToken: "client-token",
       forwardErrorsToLogs: true,
@@ -124,7 +120,7 @@ describe("buildLogsInitOptions", () => {
 });
 
 describe("buildGlobalContext", () => {
-  it("always sets stack, the only thing separating Astro from Hugo", () => {
+  it("always sets stack, which partitions the shared RUM application", () => {
     expect(buildGlobalContext({ branch: "" }).stack).toBe(ASTRO_STACK);
     expect(ASTRO_STACK).toBe("astro");
   });

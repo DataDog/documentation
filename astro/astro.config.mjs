@@ -31,17 +31,16 @@ const hugoDevPort = 1313;
 // Astro's `PUBLIC_` env prefix, which is the only mechanism that statically
 // replaces a build-time value in *both* `astro dev` and `astro build`.
 // `vite.define` does not: its replacement runs at build only, so a define
-// referenced from client code survives into the browser as an undefined
-// identifier during local development and throws on every page load.
+// referenced from client code reaches the browser as an undefined identifier
+// during local development and throws on every page load.
 //
 // Assigning to `process.env` here works because Vite resolves the env after
 // evaluating this config file. Read through
 // `src/lib/telemetry/buildConstants.ts`, which documents each value.
 process.env.PUBLIC_CI_ENV = process.env.CI_ENVIRONMENT_NAME ?? "";
 // `branchRef()` rather than the raw variable, so the branch tag is normalized
-// identically to the deploy path prefix and canonical URLs. Availability is not
-// in question: preview builds already throw when CI_COMMIT_REF_NAME is unset
-// (siteUrl.ts:44-49).
+// identically to the deploy path prefix and canonical URLs. Preview builds
+// already throw when CI_COMMIT_REF_NAME is unset (siteUrl.ts:44-49).
 process.env.PUBLIC_CI_COMMIT_REF_NAME = branchRef() ?? "";
 process.env.PUBLIC_CI_COMMIT_SHORT_SHA = process.env.CI_COMMIT_SHORT_SHA ?? "";
 process.env.PUBLIC_IA_SUBDOMAIN = process.env.IA_SUBDOMAIN ?? "";

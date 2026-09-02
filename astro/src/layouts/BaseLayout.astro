@@ -69,10 +69,9 @@ const image = imageProp ?? DEFAULT_OG_IMAGE;
 const siteOrigin = Astro.site?.toString().replace(/\/$/, '') ?? '';
 const canonical = canonicalProp ?? `${siteOrigin}${Astro.url.pathname}`;
 const ogUrl = canonical;
-// Mirrors Hugo's `data-env` on <html>. Telemetry itself does not read this —
-// it gets the environment from a Vite define — but it keeps Hugo's convention,
-// is useful for debugging and env-conditional styling, and the planned shared
-// Ask AI package expects the same attribute on both hosts.
+// `data-env` on <html>, for debugging and env-conditional styling. Telemetry
+// itself does not read it (it resolves the environment at build time), but the
+// planned shared Ask AI package expects the attribute to be present.
 const telemetryEnv = resolveTelemetryEnv(process.env.CI_ENVIRONMENT_NAME);
 
 // Resolve any relative hreflang hrefs against the site origin.

@@ -34,9 +34,8 @@ describe("getTelemetryConfig", () => {
   });
 
   it("shares one application ID and client token between preview and live", () => {
-    // Hugo does the same: both environments report into one RUM application,
-    // separated by the `env` tag. Astro joins that application rather than
-    // creating its own.
+    // Both environments report into one RUM application, separated by the
+    // `env` tag.
     const preview = getTelemetryConfig("preview");
     const live = getTelemetryConfig("live");
     expect(preview.applicationId).toBeTruthy();
@@ -45,12 +44,11 @@ describe("getTelemetryConfig", () => {
   });
 });
 
-describe("parity with Hugo's config-docs.js", () => {
-  // This table is a copy, and the only way it goes wrong is drift: Hugo rotates
-  // a client token or moves to a different application and Astro keeps
-  // reporting to the old one, which fails silently. Reading the upstream file
-  // directly turns that into a test failure. Hugo owns these values until the
-  // cutover deletes config-docs.js, at which point this test goes with it.
+describe("parity with upstream config-docs.js", () => {
+  // The credentials table is a copy, so drift is the failure mode: upstream
+  // rotates a client token and this site keeps reporting to the old one, with
+  // no error. Reading the upstream file directly turns that into a test
+  // failure. Delete this test when config-docs.js goes away.
   const upstream = hugoConfigDocs as Record<
     string,
     { ddClientToken: string; ddApplicationId?: string; loggingHandler: string }

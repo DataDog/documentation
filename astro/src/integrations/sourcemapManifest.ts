@@ -29,16 +29,13 @@ interface ManifestInput {
 /**
  * Builds the declarative sourcemap-upload manifest.
  *
- * `--minified-path-prefix` has to exactly match the public URL prefix of the
- * emitted assets, which this repo computes and CI does not. Hardcoding that URL
- * in `documentation-ci` would duplicate the derivation across repos, where it
- * drifts silently the first time `assetsPrefix` or the deploy origin changes —
- * and the failure is invisible, because the upload still *succeeds*. It just
- * never matches an error.
+ * `--minified-path-prefix` must exactly match the public URL prefix of the
+ * emitted assets, which this repo computes and CI does not. A mismatch is
+ * invisible: the upload still succeeds, it just never matches an error.
  *
  * Resolving `pathPrefix` against `site` rather than concatenating them handles
- * all three shapes correctly: a root-relative prefix replaces `site`'s own path
- * (so the branch segment is not doubled — `siteUrl.ts` warns that `site` and
+ * all three shapes: a root-relative prefix replaces `site`'s own path (so the
+ * branch segment is not doubled — `siteUrl.ts` warns that `site` and
  * `pathPrefix()` must never be composed), an absolute prefix wins outright, and
  * an empty prefix yields the bare origin.
  */
@@ -72,21 +69,15 @@ export function buildSourcemapManifest({
  * output.
  *
  * TODO: nothing consumes this manifest yet. `documentation-ci` needs a
- * post-deploy job for the Astro app, mirroring `sourcemaps_preview` /
- * `sourcemaps_live` in its ci-templates, running:
+ * post-deploy job for the Astro app, running:
  *   ./node_modules/.bin/datadog-ci sourcemaps upload <uploadDir> \
  *     --service <service> \
  *     --minified-path-prefix <minifiedPathPrefix> \
  *     --release-version <releaseVersion>
- * with DATADOG_API_KEY from `get_secret 'dd-api-key'` and
- * allow_failure: true. Until then, RUM error stack traces for Astro stay
- * minified.
- *
- * Note the Astro job must **not** copy the `find … mv` rename step from Hugo's
- * jobs. That works around Hugo Pipes losing the fingerprint hash from `.map`
- * filenames; Vite emits `foo.[hash].js.map` alongside `foo.[hash].js`
- * correctly. Note also that `@datadog/datadog-ci` here is v5 while Hugo pins
- * ^2.36.0 — the CLI flags used above are unchanged between the two.
+ * with DATADOG_API_KEY from `get_secret 'dd-api-key'` and allow_failure: true.
+ * Until then, RUM error stack traces for Astro stay minified. The job needs no
+ * post-processing of `.map` filenames — Vite emits `foo.[hash].js.map`
+ * alongside `foo.[hash].js` already.
  *
  * Imports must stay alias-free (relative + npm only): this code runs in Node
  * during build orchestration, outside Vite's module graph, so `@lib` aliases do

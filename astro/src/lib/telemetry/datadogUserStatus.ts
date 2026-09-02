@@ -2,17 +2,14 @@
  * Whether the visitor is signed into the Datadog app, used to tag telemetry so
  * customer traffic can be told apart from anonymous traffic.
  *
- * A duplicate of Hugo's `fetchDatadogUserStatus()` in
- * `assets/scripts/helpers/feature-flags.js:11-20`. It lives here rather than in
- * the Ask AI package because it is generic site functionality, not
- * widget-specific: the planned shared Ask AI package receives it through an
- * injected `getIsDatadogUser?: () => Promise<boolean>` callback and omits the
+ * Site-level rather than widget-level, so it lives here: the planned shared Ask
+ * AI package receives it through an injected
+ * `getIsDatadogUser?: () => Promise<boolean>` callback, and omits the
  * `is_datadog_user` tag when no callback is supplied.
  *
- * TODO: deliberate duplicate of Hugo's copy — cross-referenced so a change to
- * one is not made blind to the other. Hugo's dies with Hugo. Note it sits in
- * Hugo's *feature-flags* helper for historical reasons; it has nothing to do
- * with flags.
+ * TODO: `hugo/assets/scripts/helpers/feature-flags.js` holds an equivalent copy
+ * (despite the filename, this has nothing to do with feature flags). Keep the
+ * two in sync until that copy is deleted.
  */
 
 export const DATADOG_LOCATE_URL = "https://www.datadoghq.com/locate";

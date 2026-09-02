@@ -1,19 +1,17 @@
 /**
  * The `_dd_device_id` cookie, which attributes docs page views to a Datadog app
- * user. A faithful port of Hugo's three helpers in
- * `assets/scripts/components/dd-browser-logs-rum.js:8-24`.
+ * user. Set on live only.
  *
- * Set on live only, matching Hugo. Both sites share the `datadoghq.com` domain
- * and therefore share this cookie, so `ensureRumDeviceId` reads before it
- * generates — running alongside Hugo's copy must not mint a second ID for the
- * same device.
+ * The cookie is scoped to `datadoghq.com` and shared across the domain, so
+ * `ensureRumDeviceId` reads before it generates: another site on the domain may
+ * already have minted an ID for this device.
  *
- * TODO: a deliberate duplicate of Hugo's logic, whose own comment calls it "a
- * temporary solution". Astro becomes the sole owner at the Hugo cutover; until
- * then a change here probably belongs in both places.
+ * TODO: `hugo/assets/scripts/components/dd-browser-logs-rum.js` holds an
+ * equivalent copy of this logic; a change here probably belongs there too,
+ * until that copy is deleted.
  */
 
-/** One year, matching Hugo. */
+/** One year. */
 const MAX_AGE_SECONDS = 60 * 60 * 24 * 365;
 
 const COOKIE_NAME = "_dd_device_id";
@@ -32,12 +30,8 @@ export function generateRumDeviceId(): string {
 }
 
 /**
- * The existing device ID, or `null` when the cookie is absent.
- *
- * The one deliberate improvement over Hugo's version, whose `getRumDeviceId()`
- * generates a fresh ID on a cache miss and so cannot distinguish "existing
- * device" from "new device". Same behavior overall — the caller decides — but
- * the two cases are no longer conflated in one return value.
+ * The existing device ID, or `null` when the cookie is absent. Minting is left
+ * to the caller so "existing device" and "new device" stay distinguishable.
  */
 export function readRumDeviceId(cookie: string): string | null {
   const matches = new RegExp(`${COOKIE_NAME}=(\\w+)`).exec(cookie);
@@ -46,7 +40,7 @@ export function readRumDeviceId(cookie: string): string | null {
 
 /**
  * The cookie domain: the last two labels of the hostname, so `datadoghq.com`
- * covers `docs.` and `docs-staging.` alike. Matches Hugo's derivation.
+ * covers `docs.` and `docs-staging.` alike.
  */
 export function cookieDomain(hostname: string): string {
   return hostname.split(".").slice(-2).join(".");

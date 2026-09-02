@@ -88,7 +88,7 @@ test.describe("Telemetry", () => {
     ).toBeUndefined();
 
     // No session cookie either. `_dd_s` is domain-scoped, so a stray session
-    // here would also be visible to Hugo on a shared origin.
+    // here would be visible to every other site on the domain.
     const cookies = await page.context().cookies();
     expect(cookies.map((cookie) => cookie.name)).not.toContain("_dd_s");
   });

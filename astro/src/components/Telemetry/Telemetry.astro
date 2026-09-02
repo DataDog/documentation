@@ -2,18 +2,15 @@
 // Datadog RUM and Browser Logs initialization. Rendered once by BaseLayout, so
 // every route gets it.
 //
-// A component whose only job is to carry a script, like HeaderScroll.astro —
-// but a *bundled* script rather than `is:inline`, since it needs npm imports.
-// Astro emits it as a deferred module, which is the deliberate difference from
-// Hugo: Hugo loads the SDKs from a blocking head script, so it captures errors
-// thrown before this module would have executed and starts Session Replay a
-// moment sooner. In exchange, telemetry never blocks first paint here.
-// Page-load performance data is unaffected either way, since RUM backfills from
-// the browser's Performance Timeline.
+// A bundled `<script>` rather than `is:inline`, since it needs npm imports.
+// Astro emits it as a deferred module, so telemetry never blocks first paint —
+// at the cost of missing errors thrown before it executes. Page-load
+// performance data is unaffected, since RUM backfills from the browser's
+// Performance Timeline.
 //
-// Under view transitions (BaseLayout renders <ClientRouter /> for cdocs),
-// bundled scripts do not re-execute on soft navigation, so the init-once shape
-// below needs no guard. RUM tracks pushState navigations as new views itself.
+// Bundled scripts do not re-execute on view-transition soft navigation, so the
+// init-once shape below needs no guard. RUM tracks pushState navigations as new
+// views itself.
 ---
 
 <script>
@@ -41,25 +38,20 @@
   const internalAnalyticsSubdomain = IA_SUBDOMAIN;
 
   // `stack: 'astro'` always, and `branch` on preview builds. Applied to both
-  // SDKs so RUM and Logs are filterable the same way — though note the two nest
-  // it differently in queries: `@context.stack` in RUM, `@stack` in Logs.
+  // SDKs so RUM and Logs are filterable the same way — though the two nest it
+  // differently in queries: `@context.stack` in RUM, `@stack` in Logs.
   const globalContext = buildGlobalContext({ branch: CI_COMMIT_REF_NAME });
 
-  // Hugo's CDN SDK bundles create these globals, and the planned shared Ask AI
-  // package reads them rather than importing the SDKs itself — that is the
-  // contract between the two. The npm packages happen to assign them on import as well,
-  // so these two lines are belt-and-braces; stated explicitly because the
-  // contract should not rest on another package's import side effect.
-  //
-  // TODO: droppable once the Ask AI package is folded into Astro at the Hugo
-  // cutover — non-obvious next to two real imports, which is why this is
-  // spelled out.
+  // The planned shared Ask AI package reads these globals rather than importing
+  // the SDKs itself. The npm packages also assign them on import, so these two
+  // lines are belt-and-braces — stated explicitly so the contract does not rest
+  // on another package's import side effect.
   window.DD_RUM = datadogRum;
   window.DD_LOGS = datadogLogs;
 
-  // Mirrors Hugo: RUM initializes on preview and live only. The applicationId
-  // check is a second, independent gate — development credentials carry no
-  // application ID, so RUM cannot start there even if the env check changed.
+  // RUM initializes on preview and live only. The applicationId check is a
+  // second, independent gate — development credentials carry no application ID,
+  // so RUM cannot start there even if the env check changed.
   if ((env === "preview" || env === "live") && credentials.applicationId) {
     datadogRum.init(
       buildRumInitOptions({
@@ -80,8 +72,8 @@
       datadogRum.setGlobalContextProperty(property, value);
     }
 
-    // Live only, matching Hugo. Both sites share the datadoghq.com domain and
-    // therefore this cookie, so the helper reads before it generates.
+    // Live only. The cookie is scoped to datadoghq.com and shared with the rest
+    // of the domain, so the helper reads before it generates.
     if (env === "live") {
       datadogRum.setUserProperty(
         "device_id",
