@@ -17,7 +17,9 @@ further_reading:
 
 Use the Observability Pipelines Worker to send your processed logs and metrics to different destinations. Most Observability Pipelines destinations send events in batches to the downstream integration. See [Event batching](#event-batching) for more information. Some Observability Pipelines destinations also have fields that support template syntax, so you can set these fields based on specific fields. See [Template syntax](#template-syntax) for more information.
 
-Select a destination in the left navigation menu to see more information about it.
+**Notes**:
+- You can add a total of 20 destinations for a pipeline.
+- If you add multiple destinations of the same type to a pipeline, you must use [Secrets Management][4]. For example, if you add two HTTP Client destinations for two different HTTP clients, you must use secret identifiers for the HTTP client URIs. You cannot use the default `DESTINATION_HTTP_CLIENT_URI` to store the two different HTTP client URIs.
 
 ## Destinations
 
@@ -176,3 +178,4 @@ If the destination receives 3 events within 2 seconds, it flushes a batch with 2
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html#specifiers
+[4]: /observability_pipelines/configuration/secrets_management/
