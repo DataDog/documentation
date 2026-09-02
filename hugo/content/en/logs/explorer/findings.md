@@ -39,19 +39,19 @@ The Findings canvas lives in the side panel on the left of Log Explorer, next to
 2. Click {{< ui >}}Views{{< /ui >}} in the upper left corner to open the side panel.
 3. Click the **Findings** tab. The tab shows how many findings are on the canvas.
 
-Click {{< ui >}}Pin{{< /ui >}} to dock the panel next to your log results, or {{< ui >}}Hide{{< /ui >}} to collapse it.
+To dock the panel next to your log results, click {{< ui >}}Pin{{< /ui >}}. To collapse it, click {{< ui >}}Hide{{< /ui >}}.
 
 ## Capture a finding
 
 Add a finding from anywhere in Log Explorer that shows results. Datadog names each finding after what you captured, and records the query and time range it came from.
 
-### A query and its visualization
+### Queries and visualizations
 
 In the toolbar above your results, click the {{< ui >}}Add a finding{{< /ui >}} icon, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>. You can also click {{< ui >}}Add current page as finding{{< /ui >}} in the Findings panel.
 
 The finding stores your search query, time range, and [visualization][4], including any group-by and aggregation you configured. Capture the same query as a list and as a timeseries to keep both views side by side.
 
-### An individual log event
+### Individual log events
 
 1. Click a log event in your results to open the [log side panel][5].
 2. Hover over the **Log Message** section and click the {{< ui >}}Add a finding{{< /ui >}} icon, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>.
@@ -70,11 +70,11 @@ Use the remaining canvas controls to zoom in and out, fit the canvas to your fin
 
 ## Delete findings
 
-To delete a single finding, hover over it and click the {{< ui >}}Delete{{< /ui >}} icon. To delete several at once, select them and press <kbd>Delete</kbd>. Press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>A</kbd> first to select everything on the canvas.
+To delete a single finding, hover over it and click the {{< ui >}}Delete{{< /ui >}} icon. To delete several findings at once, select each and press <kbd>Delete</kbd>. To select every finding on the canvas, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>A</kbd>.
 
 The clear icon in the Findings panel removes the findings you have selected, or every finding on the canvas when nothing is selected.
 
-Deleting is not permanent right away. A toast appears with an {{< ui >}}Undo{{< /ui >}} option, and <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Z</kbd> restores what you removed.
+Deleting is not permanent. A toast appears with an {{< ui >}}Undo{{< /ui >}} option, and <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Z</kbd> restores what you removed.
 
 ## Return to a finding
 
@@ -86,8 +86,8 @@ This makes Findings useful as a set of checkpoints. When you land on a query tha
 
 Select one or more findings on the canvas to act on them together:
 
-- To ask about them, type your question in the selection bar and click {{< ui >}}Ask Bits{{< /ui >}}. [Bits AI][2] opens with the selected findings attached as context.
-- To keep them, click {{< ui >}}Open in Notebooks{{< /ui >}} and choose a new or existing [Notebook][3].
+- To ask about findings, type your question in the selection bar and click {{< ui >}}Ask Bits{{< /ui >}}. [Bits AI][2] opens with the selected findings attached as context.
+- To keep findings, click {{< ui >}}Open in Notebooks{{< /ui >}} and choose a new or existing [Notebook][3].
 
 Select only the findings that matter for the question you're asking. A postmortem might need two of the five findings you captured, and a narrow selection gives Bits AI a narrower problem to reason about.
 
