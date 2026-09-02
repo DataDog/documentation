@@ -106,6 +106,14 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
   * In the event that a pipeline is not associated with a git repository, or git metadata is unavailable, the username of the person triggering the pipeline execution is used as the billable committer.
 * For Pipeline Visibility, every pipeline, pipeline stage, and pipeline job counts as a **pipeline span**. For Testing Visibility, every individual test run counts as a **test span**.
 
+## Agent Observability
+
+* Datadog charges based on the number of **LLM spans** ingested by the Agent Observability service. An LLM span represents a single request to an LLM provider, such as OpenAI or Anthropic.
+* One agent workflow can make several LLM requests, and each request produces its own LLM span. Datadog bills only on LLM spans, not on the surrounding workflow, tool, and retrieval spans in the same trace.
+* [Experiments][13] are billed the same way, on the number of LLM spans ingested.
+* Indexed LLM spans are included in the base price.
+* For more detail, see [Agent Observability Billing][14].
+
 ## Troubleshooting
 
 For technical questions, contact [Datadog support][7].
@@ -124,3 +132,5 @@ Contact [Sales][8] or your [Customer Success][9] Manager to discuss hourly prici
 [10]: /real_user_monitoring/rum_without_limits/
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products
 [12]: /account_management/billing/metric_name_pricing/
+[13]: /llm_observability/improve/experiments/
+[14]: /account_management/billing/llm_observability/
