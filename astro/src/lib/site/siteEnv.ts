@@ -18,10 +18,10 @@ export type SiteEnv = (typeof SITE_ENVS)[number];
  * `development`.
  *
  * Defaults to reading `CI_ENVIRONMENT_NAME`, which is correct server-side.
- * Client code must pass `raw` explicitly, from a `PUBLIC_` build constant (see
- * `src/lib/telemetry/buildConstants.ts`): `process.env` does not exist in a
- * browser bundle, so the default there resolves to `development` regardless of
- * how the site was built.
+ * Client code must pass `raw` explicitly, from `import.meta.env.PUBLIC_CI_ENV`
+ * (assigned in `astro.config.mjs`): `process.env` does not exist in a browser
+ * bundle, so the default there resolves to `development` regardless of how the
+ * site was built.
  */
 export function resolveSiteEnv(
   raw: string | undefined = ciEnvironmentName(),

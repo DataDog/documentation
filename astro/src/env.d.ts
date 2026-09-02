@@ -4,8 +4,9 @@ declare const __CI_ENV__: string;
 
 /**
  * Telemetry's build-time constants, republished under Astro's `PUBLIC_` prefix
- * by `astro.config.mjs` and read through `@lib/telemetry/buildConstants`. Empty
- * string when CI did not provide the underlying variable.
+ * by `astro.config.mjs`, which assigns every one of them unconditionally and
+ * documents what each carries. Empty string when CI did not provide the
+ * underlying variable — never undefined, so consumers need no fallback.
  */
 interface ImportMetaEnv {
   readonly PUBLIC_CI_ENV: string;

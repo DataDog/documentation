@@ -24,26 +24,26 @@
     buildRumInitOptions,
   } from "@lib/telemetry/initOptions";
   import { ensureRumDeviceId } from "@lib/telemetry/deviceId";
-  // Imported rather than referenced inline: Vite's `define` replacement does
-  // not reach this `<script>` block in dev. See buildConstants.ts.
-  import {
-    CI_COMMIT_REF_NAME,
-    CI_COMMIT_SHORT_SHA,
-    CI_ENV,
-    IA_SUBDOMAIN,
-  } from "@lib/telemetry/buildConstants";
 
-  // `resolveSiteEnv` and not `siteEnv()`: this runs in the browser, where
-  // `process.env` does not exist. `CI_ENV` is the build-time constant.
-  const env = resolveSiteEnv(CI_ENV);
+  // Read through `import.meta.env.PUBLIC_*`, not `vite.define`: a define is
+  // replaced at build time only, so it reaches the browser as an undefined
+  // identifier under `astro dev` and throws on every page load. The `PUBLIC_`
+  // prefix is statically replaced in both dev and build. `astro.config.mjs`
+  // republishes the CI variables under that prefix and documents each one.
+  //
+  // `resolveSiteEnv` and not a bare `process.env` read: this runs in the
+  // browser, where `process` does not exist.
+  const env = resolveSiteEnv(import.meta.env.PUBLIC_CI_ENV);
   const credentials = getTelemetryConfig(env);
-  const version = CI_COMMIT_SHORT_SHA;
-  const internalAnalyticsSubdomain = IA_SUBDOMAIN;
+  const version = import.meta.env.PUBLIC_CI_COMMIT_SHORT_SHA;
+  const internalAnalyticsSubdomain = import.meta.env.PUBLIC_IA_SUBDOMAIN;
 
   // `stack: 'astro'` always, and `branch` on preview builds. Applied to both
   // SDKs so RUM and Logs are filterable the same way — though the two nest it
   // differently in queries: `@context.stack` in RUM, `@stack` in Logs.
-  const globalContext = buildGlobalContext({ branch: CI_COMMIT_REF_NAME });
+  const globalContext = buildGlobalContext({
+    branch: import.meta.env.PUBLIC_CI_COMMIT_REF_NAME,
+  });
 
   // The planned shared Ask AI package reads these globals rather than importing
   // the SDKs itself. The npm packages also assign them on import, so these two

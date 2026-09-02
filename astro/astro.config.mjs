@@ -36,14 +36,28 @@ const hugoDevPort = 1313;
 // during local development and throws on every page load.
 //
 // Assigning to `process.env` here works because Vite resolves the env after
-// evaluating this config file. Read through
-// `src/lib/telemetry/buildConstants.ts`, which documents each value.
+// evaluating this config file. Consumers read `import.meta.env.PUBLIC_*`
+// directly; the names are declared in `src/env.d.ts`, and each is assigned
+// unconditionally below so a consumer never has to guard for undefined.
+//
+// Raw `CI_ENVIRONMENT_NAME`, empty locally. Map it through `resolveSiteEnv`.
 process.env.PUBLIC_CI_ENV = process.env.CI_ENVIRONMENT_NAME ?? "";
 // `branchRef()` rather than the raw variable, so the branch tag is normalized
 // identically to the deploy path prefix and canonical URLs. Preview builds
 // already throw when CI_COMMIT_REF_NAME is unset (siteUrl.ts:44-49).
 process.env.PUBLIC_CI_COMMIT_REF_NAME = branchRef() ?? "";
+// The deploy's short SHA, used as RUM's `version`.
+//
+// TODO: confirm `CI_COMMIT_SHORT_SHA` reaches the Astro CI job (owned by
+// DataDog/documentation-ci). Empty means RUM events carry no `version` tag
+// *and* uploaded sourcemaps match nothing — see
+// `src/integrations/sourcemapManifest.ts`.
 process.env.PUBLIC_CI_COMMIT_SHORT_SHA = process.env.CI_COMMIT_SHORT_SHA ?? "";
+// Routes telemetry to the internal intake instead of the public one.
+//
+// TODO: whether CI exposes `IA_SUBDOMAIN` to the Astro job is owned by
+// DataDog/documentation-ci — it is a custom variable, unlike the two above.
+// Empty degrades gracefully to the public intake.
 process.env.PUBLIC_IA_SUBDOMAIN = process.env.IA_SUBDOMAIN ?? "";
 
 // The Hugo docs site may be on a different origin than the Astro site in local
