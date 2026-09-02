@@ -10720,6 +10720,11 @@ menu:
       url: account_management/billing/ai_credit_limits/
       parent: account_management_billing
       weight: 1522
+    - name: Agent Observability
+      identifier: account_management_billing_llm_observability
+      url: account_management/billing/llm_observability/
+      parent: account_management_billing
+      weight: 1523
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
