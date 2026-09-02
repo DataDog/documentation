@@ -91,7 +91,7 @@
         "scope": "markdown",
         "prefix": ";;callout",
         "body": [
-            "{{< callout url="#" btn_hidden=\"false\" header=\"Join the Preview!\">}}",
+            "{{< callout url=\"#\" btn_hidden=\"false\" header=\"Join the Preview!\">}}",
             "<Product name> is in Preview. Use this form to submit your request today.",
             "{{< /callout >}}"
         ],
