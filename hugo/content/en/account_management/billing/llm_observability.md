@@ -45,7 +45,7 @@ Each request your application makes to an LLM provider corresponds to one LLM sp
 | ------------------------------- | --------------------------------------------------------------------------------------------- |
 | OpenAI                          | Total requests in the OpenAI admin UI, or sum the `*.num_model_requests` metrics               |
 | AWS Bedrock                     | Invocations by model in CloudWatch, or the `aws.bedrock.invocations` metric                     |
-| Google Enterprise Agent Platform | Usage metrics in the platform console, or the `gcp.aiplatform.online_prediction_requests_per_base_model` metric |
+| Google Vertex AI                | Usage metrics in the Google Cloud console, or the `gcp.aiplatform.online_prediction_requests_per_base_model` metric |
 | Vercel                          | Requests by provider and model in the Vercel dashboard, or the `vercel.requests` metric         |
 | Anthropic                       | Request totals are not reported; use your own application metrics as a proxy                    |
 
