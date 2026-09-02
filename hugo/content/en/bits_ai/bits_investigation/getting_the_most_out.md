@@ -19,7 +19,7 @@ Bits Investigation reasons through incomplete signals rather than following a fi
 
 You can teach it through four places: [`bits.md`][1], your monitors and runbooks, [Skills][11], and feedback on completed investigations.
 
-## Write bits.md as rules, not background
+## Write bits.md as rules, not generic descriptions
 
 [`bits.md`][1] is read on every investigation. Write specific rules, not general descriptions of your systems.
 
