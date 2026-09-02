@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
-// @ts-ignore — Preact renderer is registered for SSR of the tooltip island.
 import preactRenderer from "@astrojs/preact/server.js";
 import CardGrid from "../CardGrid.astro";
 

@@ -2,9 +2,7 @@
  * AST twin of the `{% card-grid %}` component (`CardGrid.astro`).
  *
  * A grid collapses to a flat unordered list of links — one item per card, no
- * nesting and no images. This matches what the Hugo plaintext build
- * (`html-to-mdoc`'s cardGrid processor) emits today, so the Hugo-to-Astro
- * cutover produces no diff in the already-published `.md` twins.
+ * nesting and no images.
  *
  * Only `href`, `title`, and `subtitle` survive; a grid carries no semantics
  * once its images are stripped.

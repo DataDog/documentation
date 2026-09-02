@@ -8,8 +8,16 @@ type Props = ImageCardProps;
 
 const cl = classListFactory(styles);
 
-const { id, href, src, alt = "", title, subtitle, tooltip, image_width } =
-  Astro.props;
+const {
+  id,
+  href,
+  src,
+  alt = "",
+  title,
+  subtitle,
+  tooltip,
+  image_width,
+} = Astro.props;
 
 const imageWidth = image_width ?? DEFAULT_IMAGE_WIDTH;
 const image = src ? buildImageUrl(src) : null;
@@ -49,7 +57,11 @@ const ariaLabel = !title && tooltip ? tooltip : undefined;
         </picture>
       )
     }
-    {title && <TitleElement class={cl("image-card__title")}>{title}</TitleElement>}
+    {
+      title && (
+        <TitleElement class={cl("image-card__title")}>{title}</TitleElement>
+      )
+    }
     {subtitle && <small class={cl("image-card__subtitle")}>{subtitle}</small>}
   </div>
 </a>
