@@ -80,29 +80,34 @@ Complete the following checks for each monitored region:
 
 ## OCI stack destroy issues
 
-If the destroy job fails or is unable to be run, clone the [OCI integration repository][11] and enter the repository directory. Then, use the [OCI integration cleanup script][10] to remove the remaining resources. Set the required variables, then review a dry run:
+If the destroy job fails or is unable to be run:
 
-```shell
-export OCI_PROFILE="<YOUR_OCI_PROFILE>"
-export COMPARTMENT_OCID="<YOUR_COMPARTMENT_OCID>"
-export TENANCY_OCID="<YOUR_TENANCY_OCID>"
+1. Clone the [OCI integration repository][11] and enter the repository directory.
+2. Use the [OCI integration cleanup script][10] to remove the remaining resources.
+3. Set the required variables.
+4. Review a dry run:
 
-python3 oci-integration-cleanup/integration_cleanup.py \
-  --profile "$OCI_PROFILE" \
-  --compartment-ocid "$COMPARTMENT_OCID" \
-  --dry-run true
-```
+    ```shell
+    export OCI_PROFILE="<YOUR_OCI_PROFILE>"
+    export COMPARTMENT_OCID="<YOUR_COMPARTMENT_OCID>"
+    export TENANCY_OCID="<YOUR_TENANCY_OCID>"
 
-The dry run outputs the resources planned for deletion. If the output looks correct, execute the cleanup:
+    python3 oci-integration-cleanup/integration_cleanup.py \
+      --profile "$OCI_PROFILE" \
+      --compartment-ocid "$COMPARTMENT_OCID" \
+      --dry-run true
+    ```
 
-```shell
-python3 oci-integration-cleanup/integration_cleanup.py \
-  --profile "$OCI_PROFILE" \
-  --compartment-ocid "$COMPARTMENT_OCID" \
-  --confirm-tenancy-id "$TENANCY_OCID" \
-  --region-workers <number of regions to be processed in parallel>
-  --dry-run false
-```
+5. Review the resources planned for deletion in the dry run output. If the output looks correct, execute the cleanup:
+
+    ```shell
+    python3 oci-integration-cleanup/integration_cleanup.py \
+      --profile "$OCI_PROFILE" \
+      --compartment-ocid "$COMPARTMENT_OCID" \
+      --confirm-tenancy-id "$TENANCY_OCID" \
+      --region-workers <number of regions to be processed in parallel> \
+      --dry-run false
+    ```
 
 ## Outdated integration version
 
