@@ -1,7 +1,6 @@
 ---
 title: Supply Chain Firewall
 description: Block malicious and recently published open source packages at install time with Datadog's Supply Chain Firewall.
-is_beta: true
 disable_toc: false
 further_reading:
 - link: "https://securitylabs.datadoghq.com/articles/introducing-supply-chain-firewall/"
