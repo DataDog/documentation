@@ -10,7 +10,7 @@ further_reading:
   text: HTTP API
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
 Use an SDK to call the AI Guard REST API and monitor AI Guard activity in real time in Datadog.
