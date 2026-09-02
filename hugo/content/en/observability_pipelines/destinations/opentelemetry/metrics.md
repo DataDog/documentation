@@ -76,9 +76,9 @@ Datadog recommends setting your OTLP receiver to allow out-of-order samples to p
 {{% /tab %}}
 {{< /tabs >}}
 
-## Metrics
+## Health metrics
 
-For [component metrics][6] and [destination buffer metrics][7] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation. To filter or group by OpenTelemetry destination metrics, use the tag `component_type:opentelemetry`.
+See [Component metrics][6] and [Destination buffer metrics][7] for more information on metrics emitted by all destinations. To filter or group by OpenTelemetry destination metrics, use the tag `component_type:opentelemetry`.
 
 ## How the destination works
 
@@ -96,6 +96,6 @@ A batch of events is flushed when one of these conditions occurs. See [event bat
 [4]: /api/latest/observability-pipelines/
 [5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[7]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics
 [8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
 [9]: /observability_pipelines/processors/filter/
