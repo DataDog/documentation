@@ -23,7 +23,7 @@ Retention periods in Agent Observability depend on the type of data. Traces from
 | Experiment traces                          | 90 days by default; up to 365 days with a longer-retention plan     |
 | Annotated traces, spans, and sessions      | 90 days from the time of annotation, or your trace retention period if that is longer |
 | Annotation labels                          | As long as the object they annotate                                 |
-| Dataset records (current version)          | 3 years, extended each time the record is used                      |
+| Dataset records (current version)          | 3 years from creation                                               |
 | Dataset records (previous versions)        | 90 days, extended each time the version is used                     |
 | Prompts in the prompt registry             | 3 years, extended each time the prompt is pulled                    |
 | `ml_obs.*` metrics                         | 15 months                                                           |
@@ -65,7 +65,9 @@ Free-form notes that are not attached to a trace, span, or session are not tied 
 
 ## Dataset records
 
-[Dataset][4] records are retained for **3 years**. Records in previous versions of a dataset are retained for **90 days**. Both periods are extended each time the record or version is used — for example, when an experiment reads it. After a full retention period with no use, a record becomes eligible for permanent deletion.
+Records in the current version of a [dataset][4] are retained for **3 years** from the time they are created.
+
+Records in previous versions of a dataset are retained for **90 days**. This period is extended each time a previous version is used — for example, when an experiment reads that version. After 90 consecutive days without use, a previous version becomes eligible for permanent deletion.
 
 For details on how versions are created, see [Dataset versioning][5].
 
