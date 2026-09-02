@@ -354,7 +354,6 @@ This endpoint provides:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [2]: https://app.datadoghq.com/infrastructure
 [3]: https://app.datadoghq.com/infrastructure/catalog
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.129.0

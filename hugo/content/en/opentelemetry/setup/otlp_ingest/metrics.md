@@ -278,7 +278,6 @@ If you notice missing datapoints or lower than expected metric values, it may be
 [1]: /opentelemetry/collector_exporter/
 [2]: /opentelemetry/otlp_ingest_in_the_agent/
 [3]: https://opentelemetry.io/docs/reference/specification/glossary/#automatic-instrumentation
-[4]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter
 [5]: /opentelemetry/guide/otlp_delta_temporality/
 [6]: /metrics/otlp/?tab=summary#mapping
 [7]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/spec-compliance-matrix.md#environment-variables

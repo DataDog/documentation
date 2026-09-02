@@ -58,5 +58,4 @@ Memory usage after GC.
 ```
 
 
-[1]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor
 [3]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/memorylimiterprocessor

@@ -132,7 +132,6 @@ The same approach works with [Pino][301] using the `@opentelemetry/instrumentati
 
 [300]: https://github.com/winstonjs/winston
 [301]: https://github.com/pinojs/pino
-[302]: /opentelemetry/setup/collector_exporter/install/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -167,7 +166,7 @@ The OpenTelemetry Collector and the Datadog Agent can both receive OTLP logs.
    handler = LoggingHandler(logger_provider=log_provider)
    logging.getLogger().addHandler(handler)
    ```
-2. **Configure the Collector to receive and export OTLP logs**: In the Collector's `config.yaml`, enable the `otlp` receiver and add it to the `logs` pipeline. Use the OTLP HTTP exporter configuration from [Set Up the OpenTelemetry Collector][302]:
+2. **Configure the Collector to receive and export OTLP logs**: In the Collector's `config.yaml`, enable the `otlp` receiver and add it to the `logs` pipeline. Use the OTLP HTTP exporter configuration from [Set Up the OpenTelemetry Collector][7]:
    ```yaml
    receivers:
      otlp:
@@ -356,3 +355,4 @@ Click {{< ui >}}View Trace in APM{{< /ui >}} to pivot directly to the full APM t
 [4]: https://app.datadoghq.com/logs
 [5]: /logs/log_configuration/processors
 [6]: https://opentelemetry.io/docs/specs/otel/compatibility/logging_trace_context/
+[7]: /opentelemetry/setup/collector_exporter/install/
