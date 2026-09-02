@@ -112,8 +112,8 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 * One agent workflow can make several LLM requests, and each request produces its own LLM span. Datadog bills only on LLM spans, not on the surrounding workflow, tool, and retrieval spans in the same trace.
 * [Experiments][13] are billed the same way, on the number of LLM spans ingested.
 * Indexed LLM spans are included in the base price.
-* On on-demand plans, the first 40,000 LLM spans each month are free. Above that, Datadog charges $240 per month for the first 100,000 LLM spans, then $5 per additional 10,000 LLM spans. Committed and enterprise pricing is lower and negotiated.
-* For rate tables and worked examples, see [Agent Observability Billing][14].
+* On-demand plans include an allotment of LLM spans each month at no cost, and are billed in blocks of LLM spans beyond it. Committed and enterprise pricing is negotiated separately.
+* For rates, worked examples, and usage estimation, see [Agent Observability Billing][14].
 
 ## Troubleshooting
 
