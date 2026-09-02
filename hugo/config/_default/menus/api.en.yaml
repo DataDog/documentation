@@ -17914,6 +17914,23 @@ menu:
           - SubmitProductAnalyticsEvent
         unstable: []
         order: 1
+    - name: Product Catalog
+      url: /api/latest/product-catalog/
+      identifier: product-catalog
+      generated: true
+    - name: List SKUs
+      url: /api/latest/product-catalog/list-skus/
+      identifier: product-catalog-list-skus
+      parent: product-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListProductCatalogSKUs
+        unstable:
+          - v2
+        order: 1
     - name: RUM
       url: /api/latest/rum/
       identifier: rum
