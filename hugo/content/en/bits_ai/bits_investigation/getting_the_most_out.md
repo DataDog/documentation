@@ -57,15 +57,14 @@ Review monitor messages periodically. A stale runbook link is worse than no link
 
 A multi-step diagnostic procedure, or the specific way your team queries a third-party tool, doesn't fit cleanly in one monitor's runbook or a `bits.md` line. Capture it as a [Skill][11] instead, created at [{{< ui >}}Actions{{< /ui >}} > {{< ui >}}Skills{{< /ui >}}][11].
 
-Bits Investigation invokes a skill automatically when its name and description match the situation, the same way Bits Code discovers custom skills in your repository. Use a skill when you'd otherwise repeat the same instructions across monitors, or when a procedure needs to stay consistent across Bits Investigation, Bits Chat, and other Bits products.
+Bits Investigation invokes a skill automatically when its name and description match the situation. Use a skill when you'd otherwise repeat the same instructions across monitors, or when a procedure needs to stay consistent across Bits Investigation, Bits Chat, and other Bits products.
 
 ## Connect external tools and documentation
 
 - **Confluence.** [Connect your Confluence account][3] and link relevant pages in monitor messages. Bits extracts telemetry links and troubleshooting steps from the page. Enable account crawling to let [Bits Chat][4] search your Confluence space directly, not just linked pages.
 - **Source code.** Connect [GitHub][5] and [tag your APM telemetry with Git information][6] so Bits can tie a regression to the commit or deploy that caused it. This also lets Bits Code pick up the investigation and propose a fix.
+- **Notifications.** Connect Slack or MS Teams to get Bits' findings posted into your existing ops channels. You can also @Datadog for follow up questions without having to open the web.
 - **Other observability tools.** Connect Grafana, Dynatrace, Splunk, Sentry, or ServiceNow if telemetry lives there. See [Integrate with third-party observability and SCM platforms][7].
-
-Write documentation for Bits the way you'd write it for a new hire: name the actual service and system, and spell out remediation steps instead of assuming context.
 
 ## Give feedback on investigations
 
