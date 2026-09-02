@@ -69,7 +69,7 @@ If you need to see all variables at once as you scroll, click **Expand template 
 
 ## Add a template variable
 To add a template variable in a dashboard:
-1. Click {{< ui >}}Add Variable{{< /ui >}} (or {{< ui >}}+{{< /ui >}} if there are existing template variables)
+1. Click {{< ui >}}Add Variable{{< /ui >}} (or {{< ui >}}\+{{< /ui >}} if there are existing template variables)
 2. Select from a list of recommended template variables or search for the specific tag you have in mind.
 4. Select the widgets to apply this template variable to.
 6. Click {{< ui >}}Save{{< /ui >}}.
