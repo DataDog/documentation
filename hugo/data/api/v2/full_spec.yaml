@@ -78279,6 +78279,13 @@ components:
           description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
           example: splunk-tcp-source
           type: string
+        max_connection_duration_secs:
+          description: Maximum duration, in seconds, that a connection can remain open before it is closed. When unset, connections can remain open indefinitely.
+          example: 3600
+          format: int64
+          maximum: 9007199254740991
+          minimum: 1
+          type: integer
         tls:
           $ref: "#/components/schemas/ObservabilityPipelineMtlsServerTls"
         type:
