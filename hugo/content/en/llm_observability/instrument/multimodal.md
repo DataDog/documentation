@@ -1,6 +1,6 @@
 ---
 title: Multimodal Support
-description: Attach audio and images to LLM spans in Agent Observability and render them inline in the trace view, automatically or through manual annotation.
+description: Attach audio and images to LLM spans in Agent Observability and render them inline in the trace view, automatically or through manual instrumentation.
 further_reading:
     - link: '/llm_observability/instrument/sdk/'
       tag: 'Documentation'
@@ -30,10 +30,10 @@ Media is attached per message using the typed fields `image_parts` and `audio_pa
 
 ## Requirements
 
-| Capability | Python (`ddtrace`) | Node.js (`dd-trace`) |
-| ---------- | ------------------ | -------------------- |
-| Audio on messages | >= 4.12.0 | >= 6.7.0, or >= 5.118.0 on the v5 line |
-| Images on messages | >= 4.13.0 | >= 6.10.0, or >= 5.121.0 on the v5 line |
+| Capability | Python | Node.js |
+| ---------- | ------ | ------- |
+| Audio on messages | >= 4.12.0 | >= 6.7.0, or >= 5.118.0 |
+| Images on messages | >= 4.13.0 | >= 6.10.0, or >= 5.121.0 |
 
 The [Agent Observability HTTP API][1] and [OpenTelemetry instrumentation][2] have no version requirement.
 
@@ -65,7 +65,7 @@ Audio in streamed chat completions (`stream=True`) is not captured.
 | OpenAI chat completions | Input `input_audio` content and output audio, including the model's audio transcript | >= 6.7.0, or >= 5.118.0 |
 | OpenAI Agents | Input and output audio, through the OpenAI chat completions format | >= 6.7.0, or >= 5.118.0 |
 
-Audio in streamed chat completions is not captured. The Node.js SDK does not capture images automatically, and does not instrument the OpenAI Realtime API. To attach images, or to trace a Realtime API conversation, use [manual instrumentation](#manual-instrumentation).
+Audio in streamed chat completions is not captured.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -83,7 +83,7 @@ Each media part takes the following fields:
 | `mime_type` | string | Yes | The media type of the attachment, such as `image/png` or `audio/wav`. |
 | `content` | string | Yes | The base64-encoded media. |
 
-Datadog moves inline media out of the span payload into attachment storage during ingestion, and the trace view fetches it on demand. The `attachment_key` field described in the [HTTP API reference][4] holds the resulting reference and is populated by Datadog. Set `content`.
+Datadog moves inline media out of the span payload during ingestion and the trace view fetches it on demand, so a large attachment does not weigh down the span itself.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -142,7 +142,7 @@ def voice_turn(user_audio_bytes):
     return resp
 ```
 
-A media part that is missing `mime_type`, or that sets neither `content` nor `attachment_key`, raises a `TypeError`.
+A media part that is missing `mime_type` or `content` raises a `TypeError`.
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -191,7 +191,7 @@ function voiceTurn (userAudioBytes) {
 voiceTurn = llmobs.wrap({ kind: 'llm', modelName: 'gpt-audio', modelProvider: 'openai' }, voiceTurn)
 ```
 
-A media part that is missing `mimeType`, or that sets neither `content` nor `attachmentKey`, is dropped. The rest of the message is still recorded.
+A media part that is missing `mimeType` or `content` is dropped. The rest of the message is still recorded.
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -211,29 +211,29 @@ Submit `audio_parts` and `image_parts` on the message objects you send to the [S
 }
 ```
 
-See [Message][2], [AudioPart][3], and [ImagePart][4] in the HTTP API reference.
+For the full message schema, see [Message][2] in the [Agent Observability HTTP API reference][3].
 
 [1]: /llm_observability/instrument/api/#spans-api
 [2]: /llm_observability/instrument/api/#message
-[3]: /llm_observability/instrument/api/#audiopart
-[4]: /llm_observability/instrument/api/#imagepart
+[3]: /llm_observability/instrument/api/
 {{% /tab %}}
 {{% tab "OpenTelemetry" %}}
 
-If you use [OpenTelemetry instrumentation][1], no code change is required. Datadog extracts media from message parts that follow the OpenTelemetry GenAI semantic conventions:
+If you use [OpenTelemetry instrumentation][1], no code change is required. Datadog extracts media from message parts that follow the [OpenTelemetry GenAI semantic conventions for message parts][2]:
 
 - A `blob` part with a `mime_type` and inline bytes becomes an image or audio part. When the part omits `modality`, Datadog infers it from the MIME type.
 - A `uri` part carrying a base64 image data URI, such as `data:image/png;base64,...`, becomes an image part.
 
-Audio reaches the trace view through `blob` parts only. An audio data URI on a `uri` part is recorded as text.
+Audio reaches the trace view through `blob` parts only. An audio data URI on a `uri` part is recorded as text. The conventions also specify `blob` as the part type for base64 data, so prefer `blob` for both audio and images.
 
 [1]: /llm_observability/instrument/otel_instrumentation/
+[2]: https://github.com/open-telemetry/semantic-conventions-genai/blob/main/model/gen-ai/gen-ai-input-messages.json
 {{% /tab %}}
 {{< /tabs >}}
 
 ## View media in the trace view
 
-Open a trace in [Trace Explorer][5] and select an LLM span. Media attached to the span's messages renders inside the message it belongs to.
+Open a trace in [Trace Explorer][4] and select an LLM span. Media attached to the span's messages renders inside the message it belongs to.
 
 Images appear as thumbnails. Select a thumbnail to open the image at full size. Up to 12 images render per message.
 
@@ -245,18 +245,17 @@ Audio appears as a player, with the message text shown alongside it. For a voice
 
 Images render when the MIME type is one of `image/png`, `image/jpeg`, `image/webp`, or `image/gif`, and the declared MIME type matches the encoded bytes. SVG images do not render. The trace view makes no outbound requests, so an image referenced by a remote URL is shown as text rather than fetched.
 
-Audio plays through the browser's native audio player, so use a container the browser can decode, such as `audio/wav`, `audio/mpeg`, `audio/ogg`, or `audio/webm`. Raw formats such as `pcm16`, `g711_ulaw`, and `g711_alaw` do not play. Convert raw audio to WAV before attaching it. The Python OpenAI Realtime API integration does this conversion for you.
+Audio plays through the browser's native audio player. Supported containers include `audio/wav`, `audio/mpeg`, `audio/ogg`, and `audio/webm`. Raw formats such as `pcm16`, `g711_ulaw`, and `g711_alaw` do not play. Convert raw audio to WAV before attaching it. The Python OpenAI Realtime API integration does this conversion for you.
 
 ## Limits and behavior
 
-- **Span event size.** A span event is capped at 5 MB. When a span exceeds the cap, its input and output are replaced with a placeholder and `dropped_io` is added to the span's `collection_errors` attribute. The span itself is kept. In Python, configure the cap with `DD_LLMOBS_EVENT_SIZE_BYTES`.
+- **Span event size.** A span event is capped at 5 MB. When a span exceeds the cap, its input and output are replaced with a placeholder and `dropped_io` is added to the span's `collection_errors` attribute. The span itself is kept.
 - **Per-part size.** Automatic instrumentation in Python caps a single inline media part at 4 MiB. Above the cap, the integration records a text marker such as `[audio]` or `[image omitted: too large]` and preserves the surrounding message text and model response.
-- **Sensitive Data Scanner.** Media content is not scanned by [Sensitive Data Scanner][6]. Message text, tool arguments, and tool results are scanned as usual.
+- **Sensitive Data Scanner.** Media content is not scanned by [Sensitive Data Scanner][5]. Message text, tool arguments, and tool results are scanned as usual.
 
 ## Best practices
 
-- **Use the typed media fields.** Attach media with `image_parts` and `audio_parts` rather than embedding base64 strings in a message's `content`. Only typed fields render in the trace view, and content that reaches `content` as raw base64 is scanned by Sensitive Data Scanner.
-- **Keep individual media parts small.** Several media parts that each fit under the per-part cap can still add up to more than the 5 MB span event limit, which drops the span's entire input and output. Downsample or trim media before attaching it.
+- **Use the typed media fields.** Attach media with `image_parts` and `audio_parts` rather than embedding base64 strings in a message's `content`. Only typed fields render in the trace view.
 - **Attach the transcript with the audio.** Set the message `content` to the turn transcript so that the span is readable, searchable, and usable by evaluations even before the audio is played.
 
 ## Further Reading
@@ -266,6 +265,5 @@ Audio plays through the browser's native audio player, so use a container the br
 [1]: /llm_observability/instrument/api/
 [2]: /llm_observability/instrument/otel_instrumentation/
 [3]: /llm_observability/instrument/auto_instrumentation/
-[4]: /llm_observability/instrument/api/#audiopart
-[5]: https://app.datadoghq.com/llm/traces
-[6]: /security/sensitive_data_scanner/
+[4]: https://app.datadoghq.com/llm/traces
+[5]: /security/sensitive_data_scanner/
