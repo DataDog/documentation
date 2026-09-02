@@ -117,7 +117,27 @@ test.describe("CardGrid component", () => {
   }) => {
     const grid = page.locator(".card-grid").nth(PLAIN_GRID_INDEX);
 
+    // Two assertions, because they claim different things. No bubble is the
+    // visible outcome; no `astro-island` is the actual guarantee — the grid
+    // omits the island from its HTML entirely (CardGrid.astro short-circuits
+    // on `needsTooltips`), so the browser never opens a hydration boundary or
+    // fetches the island's JS. An island that mounted and rendered nothing
+    // would satisfy the first assertion while quietly costing that work on
+    // every tooltip-free grid, which is the regression this pins.
     await expect(grid.locator(".card-grid__tooltip")).toHaveCount(0);
+    await expect(grid.locator("astro-island")).toHaveCount(0);
+  });
+
+  test("hydrates a tooltip island only in the grids that need one", async ({
+    page,
+  }) => {
+    // The counterpart to the assertion above: proves the island is omitted
+    // because no card asked for a tooltip, not because it never renders at
+    // all. Sections 4 and 8 are the two tooltip grids on the fixture page.
+    await expect(page.locator(".card-grid astro-island")).toHaveCount(2);
+    await expect(
+      page.locator(".card-grid").nth(TOOLTIP_GRID_INDEX).locator("astro-island"),
+    ).toHaveCount(1);
   });
 
   test("applies the inherited image width to every card in the grid", async ({

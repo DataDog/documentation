@@ -10,8 +10,17 @@ const cl = classListFactory(styles);
 
 const { id, card_width, tooltipCardIds, tooltipLabelsByCardId } = Astro.props;
 
+// A per-instance custom property, not a design token: the author sets it per
+// grid through card_width, so it never belongs in styles/tokens. Same pattern as
+// MobileNav's `--depth` (MobileNavSection.astro:47, read in
+// MobileNav.module.css:148). The component prefix keeps it from being mistaken
+// for a shared token, or shadowed on every grid by a real token added later
+// under the shorter name.
 const gridStyle = `--card-grid-card-min-width: ${card_width}px`;
 
+// Hydrate only when a card actually needs a tooltip. Most grids have none, and
+// this keeps the tooltip code out of their client bundle entirely — the island
+// is absent from the HTML, not just empty.
 const needsTooltips = tooltipCardIds.length > 0;
 ---
 
