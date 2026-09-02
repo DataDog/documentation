@@ -2,6 +2,9 @@
 title: Data Retention
 description: Learn how long Agent Observability retains traces, experiments, annotations, datasets, prompts, and metrics.
 further_reading:
+  - link: "/account_management/billing/llm_observability/"
+    tag: "Documentation"
+    text: "Learn how Agent Observability is billed"
   - link: "/llm_observability/data_privacy_security_and_rbac/"
     tag: "Documentation"
     text: "Control access to sensitive Agent Observability data"

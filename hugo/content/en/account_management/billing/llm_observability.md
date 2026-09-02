@@ -88,7 +88,7 @@ This allotment applies to every plan. Usage beyond your allotment is billed as S
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/
-[2]: https://www.datadoghq.com/pricing/
+[2]: https://www.datadoghq.com/pricing/?product=agent-observability#products
 [3]: /llm_observability/improve/experiments/
 [4]: /llm_observability/instrument/sdk/
 [5]: /llm_observability/instrument/agentic/python
