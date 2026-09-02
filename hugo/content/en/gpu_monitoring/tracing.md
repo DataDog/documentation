@@ -82,7 +82,7 @@ kubectl exec <NEW_GPU_POD> -n <GPU_WORKLOAD_NAMESPACE> -- sh -c \
 
 **No setup containers?** Confirm the label is on the pod template, the pod is new, and the workload is outside the Agent namespace. Then check the Cluster Agent logs.
 
-## Explore traces
+4. Explore traces
 
 Run the workload, then query [APM Trace Explorer][2] with:
 
