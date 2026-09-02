@@ -61,7 +61,7 @@ An LLM span represents a single request to an LLM provider. A trace containing s
 
 All Agent Observability features are included in the base price. Datadog charges only for the LLM spans you ingest.
 
-[Evaluations][13] and [patterns][14] use an LLM to do their work, and Datadog does not charge extra for it. Either connect your own LLM provider account, or use the limited free preview of a Datadog-provided model. To connect a provider, see [Connect your LLM provider account][15].
+You can connect your own [LLM provider account][15] for [Evaluations][13] and [Patterns][14].
 
 [Sensitive Data Scanner](#is-sensitive-data-scanner-included) is included within a usage allotment that scales with your LLM span usage.
 
