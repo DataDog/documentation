@@ -47,6 +47,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/understanding-opentelemetry"
   tag: "Learning Center"
   text: "Understanding OpenTelemetry"
+- link: "https://www.datadoghq.com/blog/control-trace-volume-with-opentelemetry-tail-based-sampling/"
+  tag: "Blog"
+  text: "Control trace volume with OpenTelemetry tail-based sampling"
 algolia:
   tags: ['opentelemetry', 'open telemetry', 'otel']
 cascade:

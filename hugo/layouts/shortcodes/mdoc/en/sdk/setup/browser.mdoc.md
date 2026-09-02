@@ -66,7 +66,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
     d=o.createElement(u);d.async=1;d.src=n,d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu/v7/datadog-rum.js','DD_RUM')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v7/datadog-rum.js','DD_RUM')
 </script>
 ```
 
@@ -172,7 +172,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/eu/v7/datadog-rum.js"
+    src="https://www.datadoghq-browser-agent.com/eu1/v7/datadog-rum.js"
     type="text/javascript"
     crossorigin>
 </script>
@@ -395,7 +395,7 @@ Your application appears as pending on the Applications page until Datadog start
 [5]: https://app.datadoghq.com/rum/list
 [6]: https://www.npmjs.com/package/@datadog/browser-rum
 [7]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
-[8]: /real_user_monitoring/application_monitoring/browser
+[8]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#user-tracking-consent
 [9]: /integrations/content_security_policy_logs/
 [10]: /agentic_onboarding/setup/
 [11]: /real_user_monitoring/application_monitoring/browser/data_collected/
