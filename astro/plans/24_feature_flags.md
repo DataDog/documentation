@@ -45,6 +45,19 @@ leaves it live on Astro's `/api` pages. This was accepted deliberately — Ask A
 rolled out to 100% of users, and the flag is a rarely-used kill switch. If it ever
 needs to be pulled during that window, Astro requires a separate action.
 
+Because that asymmetry is invisible from either site — nothing errors, nothing
+warns, and the Datadog UI shows the flag as configured — plan 23 should leave a
+`TODO` at the Astro mount site where the resolver would be passed. Otherwise the
+only record of it is this document, and the person reaching for the kill switch
+during an incident is not reading plans:
+
+```ts
+// TODO: no flag resolver is passed here, so `docs-ai-enabled` does not govern
+// Astro — the package falls back to its `true` default. Flipping the flag off
+// disables Ask AI on Hugo only. Supply a resolver once plans/24_feature_flags.md
+// lands, or if the kill switch is ever needed on Astro before then.
+```
+
 ## Claude's plan
 
 ## Manual verification

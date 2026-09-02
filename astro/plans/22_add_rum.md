@@ -57,6 +57,7 @@ placeholders.
 | `IA_SUBDOMAIN` | Read from env with an empty default, plus a `TODO` in the code — CI may not expose the variable to the Astro job. |
 | `CI_COMMIT_SHORT_SHA` | Same: read from env, empty default, `TODO` in the code. |
 | `fetchDatadogUserStatus()` | **Duplicated here, not shared.** Ten lines of generic site functionality; Hugo's copy dies with Hugo. |
+| Sourcemaps | **Emitted as `hidden`, uploaded from CI.** Astro emits the `.map` files and a declarative upload manifest; the `datadog-ci` invocation itself belongs to `documentation-ci`. See section 8. |
 
 ### Core idea
 
@@ -229,6 +230,147 @@ from a Vite define — but it matches Hugo's convention, is useful for debugging
 env-conditional styling, and plan 23's package expects the same attribute on both
 hosts.
 
+### 8. Sourcemaps, so RUM errors are readable
+
+Without this, every JS error RUM captures on Astro arrives as a stack trace through
+minified, hash-named bundles — `_astro/Telemetry.C4k9x2.js:1:8471` — which is
+effectively unusable. Hugo already solves this, and the solution spans two repos.
+
+**What Hugo does.** Its `js.Build` calls emit external sourcemaps in prod
+(`hugo/layouts/partials/header-scripts.html`: `$sourcemap := cond $isProd "external" "inline"`),
+and `documentation-ci` uploads them in a `post-deploy` job:
+
+```sh
+# ci-templates/preview.yml:259 (production.yml:124 is the same with a live prefix)
+datadog-ci sourcemaps upload ./public/static \
+  --service docs \
+  --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/static/" \
+  --release-version "${CI_COMMIT_SHORT_SHA}"
+```
+
+Both jobs are `allow_failure: true`, so a broken upload degrades error readability
+without failing the pipeline. Worth keeping for the Astro equivalent.
+
+**Astro today emits no sourcemaps at all.** `astro.config.mjs` sets no
+`vite.build.sourcemap`, and Vite's default for a production build is `false`. So
+this is a gap, not a regression.
+
+#### The in-repo half
+
+1. **Emit them.** Add to `astro.config.mjs`:
+
+   ```js
+   vite: {
+     build: {
+       // `hidden` emits the .map files but omits the //# sourceMappingURL=
+       // comment, so the maps are uploaded to Datadog without being advertised
+       // to every visitor's devtools. datadog-ci matches maps to minified files
+       // by path, not by that comment.
+       sourcemap: 'hidden',
+     },
+   }
+   ```
+
+   This applies to the server build too, putting unused maps in `dist/server/`.
+   Harmless — only `dist/client` is uploaded — but it does cost build time and
+   disk.
+
+   No guard changes are needed: client maps land in `dist/client/_astro/`, which
+   both [`staticApiGuard`](../src/integrations/staticApiGuard.ts) and
+   [`verifyDist.mjs`](../scripts/verifyDist.mjs) already allow via `_astro/`.
+
+2. **Add the CLI as a devDependency.** `@datadog/datadog-ci`, so the CI job can run
+   `./node_modules/.bin/datadog-ci` after `yarn install --immutable`, exactly as
+   Hugo's job does. Hugo pins `^2.36.0`; use the current major and note the
+   divergence.
+
+3. **Emit an upload manifest.** The `--minified-path-prefix` must exactly match the
+   public URL prefix of the emitted assets, which this repo computes and CI does
+   not: it is the site origin plus [`pathPrefix()`](../src/lib/site/pathPrefix.ts)
+   plus `_astro/`. Hardcoding that URL in `documentation-ci` duplicates the
+   derivation across repos, where it will silently drift the first time
+   `assetsPrefix` or the deploy origin changes — and the failure is invisible,
+   because upload still *succeeds*, it just never matches anything.
+
+   So add a small integration writing `dist/sourcemap-upload.json` at
+   `build:done`:
+
+   ```json
+   {
+     "uploadDir": "dist/client",
+     "service": "docs",
+     "releaseVersion": "<CI_COMMIT_SHORT_SHA>",
+     "minifiedPathPrefix": "https://<origin><pathPrefix>/"
+   }
+   ```
+
+   `dist/` rather than `dist/client/` deliberately — a sibling of the existing
+   `dist/stats.html`, so it is never deployed and never reaches the output guards.
+   The CI job reads these four values instead of reconstructing them. This stays
+   inside the no-deploy-code rule: it names no bucket, distribution, or
+   credential, and describes only the shape of the build output.
+
+   Note the prefix points at `dist/client`, not `dist/client/_astro`, so the
+   relative path datadog-ci derives (`_astro/foo.js`) composes with a prefix that
+   ends at the site root — one fewer place for `_astro` to be spelled.
+
+   The integration carries a `TODO` naming the missing CI step, following the same
+   convention as the `IA_SUBDOMAIN` and `CI_COMMIT_SHORT_SHA` TODOs — the manifest
+   is dead weight until something consumes it, and the only way that gets noticed
+   is a grep for `TODO`:
+
+   ```ts
+   // TODO: nothing consumes this manifest yet. `documentation-ci` needs a
+   // post-deploy job for the Astro app, mirroring `sourcemaps_preview` /
+   // `sourcemaps_live` in its ci-templates, running:
+   //   ./node_modules/.bin/datadog-ci sourcemaps upload <uploadDir> \
+   //     --service <service> \
+   //     --minified-path-prefix <minifiedPathPrefix> \
+   //     --release-version <releaseVersion>
+   // with DATADOG_API_KEY from `get_secret 'dd-api-key'` and
+   // allow_failure: true. Until then, RUM error stack traces for Astro stay
+   // minified. See plans/22_add_rum.md section 8.
+   ```
+
+   Write the whole invocation out rather than a bare "wire this up": the person
+   who picks it up is likely working in the other repo without this context, and
+   the command is the deliverable.
+
+4. **Three values must agree** with the RUM init from section 3, or matching fails
+   silently:
+
+   | Manifest | RUM init |
+   | --- | --- |
+   | `service: "docs"` | `service: 'docs'` |
+   | `releaseVersion` | `version` |
+   | `minifiedPathPrefix` | the URL the browser actually loaded |
+
+   This promotes the `CI_COMMIT_SHORT_SHA` `TODO` from cosmetic to load-bearing:
+   an empty `version` was previously just a missing deploy tag, but it also breaks
+   sourcemap matching outright. Assert the coupling in a unit test — the manifest
+   builder and `buildRumInitOptions` should be shown to produce the same `service`
+   and version string from the same inputs.
+
+5. **Do not copy Hugo's rename hack.** Hugo's job runs a `find … mv` over
+   `./public` to re-insert the fingerprint hash into `.map` filenames, because
+   Hugo Pipes loses it. Vite emits `foo.[hash].js` alongside `foo.[hash].js.map`
+   correctly, so the Astro job needs nothing equivalent.
+
+#### The CI half (blocked, and not blocking)
+
+The `datadog-ci` invocation belongs in `documentation-ci` as a `post-deploy` job
+mirroring `sourcemaps_preview` / `sourcemaps_live`, reading the manifest above.
+
+That work cannot start here, and not only because of the no-deploy-code rule:
+**`documentation-ci` has no Astro build or deploy job on `main` at all** — `astro`
+appears there only in comments in `dynamic-build-preview.yml` and
+`spike-dynamic-build.yml`. Whoever wires up the Astro deploy job owns adding the
+sourcemap step next to it.
+
+Everything in the in-repo half is worth doing before that lands. It is inert
+without the upload job, costs only build time, and means the CI-side change is a
+handful of `script:` lines reading a manifest rather than a URL-derivation puzzle.
+
 ### Interaction with view transitions
 
 `BaseLayout` conditionally renders `<ClientRouter />` (currently for cdocs). Under
@@ -240,15 +382,16 @@ new views on its own, so soft navigations are still recorded.
 
 | File | Change |
 | --- | --- |
-| `astro/package.json` | Add `@datadog/browser-rum`, `@datadog/browser-logs` |
-| `astro/astro.config.mjs` | Add the three Vite defines, with TODOs |
-| `astro/src/env.d.ts` | Declare the three global constants |
+| `astro/package.json` | Add `@datadog/browser-rum`, `@datadog/browser-logs`; add `@datadog/datadog-ci` as a devDependency |
+| `astro/astro.config.mjs` | Add the four Vite defines with TODOs, `build.sourcemap: 'hidden'`, and the manifest integration |
+| `astro/src/env.d.ts` | Declare the four global constants |
 | `astro/src/config/telemetry.ts` | New — credentials table and env resolution |
 | `astro/src/lib/telemetry/initOptions.ts` | New — pure option builders |
 | `astro/src/lib/telemetry/deviceId.ts` | New — cookie read/write/generate |
 | `astro/src/lib/telemetry/datadogUserStatus.ts` | New — memoized `/locate` fetch |
 | `astro/src/components/Telemetry/Telemetry.astro` | New — the deferred init script |
 | `astro/src/layouts/BaseLayout.astro` | Render `<Telemetry />`, add `data-env` |
+| `astro/src/integrations/sourcemapManifest.ts` | New — writes `dist/sourcemap-upload.json`, carries the `datadog-ci` TODO |
 
 ### Testing (red → green)
 
@@ -268,6 +411,12 @@ Unit (`vitest`), written first and verified failing:
   attributes; derives the domain from the hostname.
 - `datadogUserStatus.unit.test.ts` — memoizes across calls (one `fetch`), returns
   `true` only for a truthy `user_status`, resolves `false` on network failure.
+- `sourcemapManifest.unit.test.ts` — the manifest's `minifiedPathPrefix` composes
+  the origin with `pathPrefix()` and ends in a single trailing slash for preview,
+  live, and local builds; and its `service` and `releaseVersion` equal the
+  `service` and `version` that `buildRumInitOptions` produces from the same
+  inputs. That equality is the test that matters — it is the coupling that fails
+  silently in production.
 
 Browser (`playwright`), covering only what unit tests cannot:
 
@@ -278,6 +427,50 @@ Browser (`playwright`), covering only what unit tests cannot:
 
 RUM `init()` itself is not asserted end to end, since dev never initializes it. The
 option objects are covered by unit tests instead.
+
+### TODOs to leave in the code
+
+Everything this plan knowingly defers gets a `TODO` at the place it will need to be
+changed, so `grep -rn TODO` is a complete ledger of the deferred work rather than a
+partial one. Follow the established convention in this repo — `// TODO: <what> once
+<condition>`, with a pointer to the authority — as in
+[`ApiSideNav.astro:36`](../src/components/ApiSideNav/ApiSideNav.astro) and
+[`filters.ts:58`](../src/lib/cdocs/filters.ts).
+
+Two kinds appear below, and they should read differently: **blocked-on-someone-else**
+TODOs name who owns the answer, and **dies-with-Hugo** TODOs name the cutover as
+their trigger. The second kind is the easier to lose, because nothing fails when it
+is missed — the code just quietly keeps a workaround alive after the reason for it
+is gone.
+
+| Location | TODO | Kind |
+| --- | --- | --- |
+| `astro.config.mjs`, `__IA_SUBDOMAIN__` define | Whether CI exposes the variable to the Astro job is owned by `documentation-ci`. Empty means public intake. | Blocked |
+| `astro.config.mjs`, `__CI_COMMIT_SHORT_SHA__` define | Confirm the variable reaches the Astro job. Empty means no `version` tag *and* broken sourcemap matching. | Blocked |
+| `src/integrations/sourcemapManifest.ts` | The full `datadog-ci` invocation that `documentation-ci` still needs — see section 8. | Blocked |
+| `src/config/telemetry.ts`, preview and live entries | If implementation starts before the `docs-astro` application exists, the application ID is a placeholder and RUM silently sends nothing usable. Name the prerequisite. | Blocked |
+| `src/lib/telemetry/initOptions.ts`, `enableExperimentalFeatures` | `'feature_flags'` is copied from Hugo but inert on Astro until [24_feature_flags.md](24_feature_flags.md) lands. Say so, or the next reader assumes flags work. | Blocked |
+| `src/lib/telemetry/initOptions.ts`, `buildGlobalContext` | `stack: 'astro'` exists only to separate the two sites during the migration. Remove it at the Hugo cutover, or it lives on forever as a facet with one value. | Dies with Hugo |
+| `src/lib/telemetry/deviceId.ts` | A deliberate duplicate of Hugo's cookie logic, which Hugo's own comment calls a temporary solution. Astro becomes sole owner at cutover. | Dies with Hugo |
+| `src/lib/telemetry/datadogUserStatus.ts` | Deliberate duplicate of Hugo's `fetchDatadogUserStatus()`. Cross-reference the twin so a change to one is not made blind to the other. | Dies with Hugo |
+| `src/components/Telemetry/Telemetry.astro`, the global assignments | `window.DD_RUM` / `window.DD_LOGS` are assigned *only* because plan 23's package reads globals rather than importing. Non-obvious next to two real imports, and droppable once the package is folded into Astro. | Dies with Hugo |
+
+`data-env` on `<html>` is the one deferred item I would **not** make a TODO. It is
+also Hugo-parity scaffolding, but it stays useful after the cutover for debugging
+and env-conditional styling, so a plain comment explaining why it exists is enough.
+
+### Follow-ups that cannot be TODOs here
+
+Neither of these lives in this repo, so they need somewhere else to be tracked:
+
+- **Dashboards, monitors, and saved views scoped to Hugo's RUM application will not
+  see Astro traffic.** Keeping `service: 'docs'` covers anything queried by service,
+  but anything filtered by application ID silently under-reports the moment Astro
+  ships. Worth an audit before the `/api` cutover, when Astro stops being a rounding
+  error.
+- **The `IA_SUBDOMAIN` and Astro-CI-job questions** belong to whoever owns
+  `documentation-ci`. The TODOs above mark the code, but the answer has to come from
+  a conversation there.
 
 ### Risks and open questions
 
@@ -301,6 +494,24 @@ option objects are covered by unit tests instead.
 - **Billing.** Astro `/api` traffic becomes billed RUM sessions, half of them with
   Session Replay. Matching Hugo's rates was the deliberate choice; worth a second
   look if `/api` volume is higher than expected.
+- **The deploy origin for `minifiedPathPrefix` is not knowable from this repo.**
+  Hugo's assets are served from `docs-staging.datadoghq.com/${branch}/static/`, but
+  the Astro app deploys to its own bucket and distribution, and the comment on
+  `build.assetsPrefix` in `astro.config.mjs` describes the platform as serving at
+  its distribution root — which does not obviously agree with
+  `assetsPrefix: pathPrefix()`. The manifest should derive the prefix from the same
+  helpers the build already uses, and the **first upload must be checked against a
+  real deployed asset URL** rather than trusted. This is the single most likely
+  thing to be wrong on the first attempt.
+- **Sourcemap matching fails silently.** A wrong prefix, service, or version
+  produces a *successful* upload that never matches an error. There is no failing
+  build and no error log — only stack traces that stay minified. Hence the explicit
+  verification step, and hence `allow_failure: true` being safe.
+- **Sourcemaps are uploaded but not published.** `hidden` means devtools will not
+  auto-fetch maps for local debugging of a deployed page, unlike Hugo, which serves
+  its maps openly. Deliberate: the maps go to Datadog, where the stack traces are
+  actually read. If someone wants devtools parity, that is a one-word change to
+  `true`.
 
 ## Manual verification
 
@@ -410,7 +621,50 @@ Allow a minute or two; RUM batches events, and some are flushed on page unload.
    should return **nothing** — `CI_COMMIT_REF_NAME` is a preview-only concern, and a
    branch tag on live traffic would mean the define leaked.
 
-### E. If something is missing
+### E. Sourcemaps
+
+The in-repo half is verifiable now; the upload is not, until the CI job exists.
+
+**Locally, after a preview-shaped build** (`yarn build:preview`):
+
+| Check | Expected |
+| --- | --- |
+| `dist/client/_astro/` | Contains `*.js` **and** matching `*.js.map` files |
+| A built `.js` file | Contains **no** `//# sourceMappingURL=` comment (`hidden`) |
+| `dist/sourcemap-upload.json` | Exists, with all four keys populated |
+| `dist/client/` | Does **not** contain `sourcemap-upload.json` |
+| `yarn verify:dist` | Still passes — the `.map` files must not trip the guard |
+
+Then confirm the manifest is actually correct, which is the part that silently
+breaks:
+
+1. Read `minifiedPathPrefix` from the manifest.
+2. Pick any `.js` filename from `dist/client/_astro/`.
+3. Concatenate: `${minifiedPathPrefix}_astro/${filename}`.
+4. On a real preview deploy, open that URL. It must return the JS file — not a 404
+   and not an HTML error page. If it 404s, the prefix is wrong and every uploaded
+   map will be orphaned.
+5. Confirm `releaseVersion` in the manifest matches what the browser reports:
+   `window.DD_RUM.getInitConfiguration().version`.
+
+**Once the CI job lands:**
+
+1. In the job log, `datadog-ci sourcemaps upload` reports a nonzero count of
+   sourcemaps found and uploaded, and lists no skipped or unmatched files.
+2. In Datadog, check the sourcemap list for `service:docs` and confirm entries for
+   the new `releaseVersion`.
+3. **The real test — deobfuscate an actual error.** Throw one deliberately from the
+   console on a deployed Astro page (`window.DD_RUM.addError(new Error('sourcemap test'))`
+   does not exercise the stack the same way; better to trigger a genuine throw from
+   bundled code, or temporarily add one). Then find it in Error Tracking and confirm
+   the stack frame shows an original filename and a plausible line number, not
+   `_astro/*.[hash].js:1:NNNN`.
+4. Confirm Hugo's uploads still work, since both services are `docs` and the two now
+   share a namespace distinguished only by `releaseVersion`. Different commits mean
+   different versions, so they should not collide — but verify a Hugo error still
+   deobfuscates after an Astro upload has run.
+
+### F. If something is missing
 
 | Symptom | Likely cause |
 | --- | --- |
@@ -419,3 +673,6 @@ Allow a minute or two; RUM batches events, and some are flushed on page unload.
 | `version` empty | `CI_COMMIT_SHORT_SHA` not exposed to the Astro CI job |
 | Events in the browser's network tab but nothing in Datadog | Wrong intake — check whether `IA_SUBDOMAIN` was set unexpectedly |
 | Duplicate sessions | The `<Telemetry />` component was included more than once, or a soft navigation re-ran init |
+| Errors arrive, stacks stay minified | No upload job yet (grep `TODO` for `datadog-ci`); or `minifiedPathPrefix` does not match the deployed asset URL; or `version` is empty so nothing matches `releaseVersion` |
+| Upload job succeeds, still minified | Silent mismatch — verify the prefix by fetching `${minifiedPathPrefix}_astro/<file>` directly (verification E, step 4) |
+| No `.map` files in `dist/client/_astro/` | `vite.build.sourcemap` not set, or set to `false` for the client build |
