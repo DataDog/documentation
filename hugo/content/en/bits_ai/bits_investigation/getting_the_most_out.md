@@ -67,7 +67,7 @@ Bits Investigation invokes a skill automatically when its name and description m
 
 Write documentation for Bits the way you'd write it for a new hire: name the actual service and system, and spell out remediation steps instead of assuming context.
 
-## Correct it, and let the correction stick
+## Give feedback on investigations
 
 At the end of an investigation, tell Bits whether the conclusion was right.
 
