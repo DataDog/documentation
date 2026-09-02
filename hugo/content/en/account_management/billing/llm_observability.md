@@ -59,16 +59,9 @@ An LLM span represents a single request to an LLM provider. A trace containing s
 
 ## What is included in the base price?
 
-Every Agent Observability capability is included in the base price and billed only on the LLM spans ingested. There is no separate charge, quota, or add-on for:
+All Agent Observability features are included in the base price. Datadog charges only for the LLM spans you ingest, and does not charge extra for any capability.
 
-- Indexed LLM spans
-- [Evaluations][13], including managed evaluations and custom LLM-as-a-judge evaluations, with no limit on how many you run
-- [Experiments][3], which are metered on LLM spans in the same way as production monitoring
-- [Patterns][14]
-- [Annotation queues][15]
-- [Datasets][16]
-- [Prompt management][17] and the [playground][18]
-- [Sensitive Data Scanner](#is-sensitive-data-scanner-included), within the allotment described below
+The one exception is [Sensitive Data Scanner](#is-sensitive-data-scanner-included), which is included within a usage allotment that scales with your LLM span usage.
 
 ## How can I estimate my LLM span usage?
 
@@ -140,9 +133,3 @@ Contact [Sales][11] or your [Customer Success][12] Manager to discuss pricing or
 [10]: /security/sensitive_data_scanner/
 [11]: mailto:sales@datadoghq.com
 [12]: mailto:success@datadoghq.com
-[13]: /llm_observability/investigate/evaluations/
-[14]: /llm_observability/investigate/patterns/
-[15]: /llm_observability/investigate/annotation_queues/
-[16]: /llm_observability/improve/datasets/
-[17]: /llm_observability/configure/prompt_management/
-[18]: /llm_observability/improve/playground
