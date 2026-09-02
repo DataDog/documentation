@@ -1,5 +1,5 @@
 ---
-title: Set Up Continuous Tracing with GPU Monitoring
+title: Continuous Tracing with GPU Monitoring
 is_beta: true
 private: true
 description: Enable GPU activity tracing for selected Kubernetes workloads.
@@ -7,26 +7,29 @@ further_reading:
 - link: "/gpu_monitoring/setup"
   tag: "Documentation"
   text: "Set up GPU Monitoring"
-- link: "/tracing/trace_collection/single-step-apm/kubernetes/"
-  tag: "Documentation"
-  text: "Single Step APM Instrumentation for Kubernetes"
-- link: "/tracing/trace_explorer/"
-  tag: "Documentation"
-  text: "APM Trace Explorer"
+- link: "/gpu_monitoring"
+  tag: "What is GPU Monitoring?"
+  text: "Learn more about what GPU Monitoring offers"
 ---
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Continuous tracing with GPU Monitoring is in Preview. To request access, contact your Datadog representative.
+Continuous tracing with GPU Monitoring is in Early Access Preview. 
 {{< /beta-callout >}}
 
-Continuous tracing with GPU Monitoring enables GPU activity tracing for selected Kubernetes workloads.
+## Overview
 
-**Version**: `0.20.0`
+Continuous tracing with GPU Monitoring enables lightweight GPU activity tracing for selected Kubernetes workloads. Troubleshooting large, distributed workloads can be cumbersome and time-consuming. With this tracing capability in GPU Monitoring, you can quickly identify and dive into bottlenecks with detailed execution traces which directly tie CUDA, NCCL operations back to your actual model and Pytorch operations.
 
-**Requires**: Cluster Agent `7.80+` with [GPU Monitoring enabled][1], and CUDA `13+` (CUPTI `13+`) on the GPU workload image.
+[INSERT IMAGE HERE] 
 
-## Configure GPU tracing
+## Setup
+### Prerequisites
 
+To begin continuously tracing your workloads, you must first meet the following critieria: 
+- You are running the Datadog Cluster Agent version 7.80+ with GPU Monitoring enabled[1]
+- Minimum required CUDA and CUPTI version: 13
+
+1. Configure GPU Tracing
 Merge the following configuration into the existing `DatadogAgent` resource:
 
 ```yaml
@@ -52,8 +55,7 @@ spec:
 
 Apply the configuration and wait for the `DatadogAgent` rollout to complete.
 
-## Label the GPU workload
-
+2. Label the GPU workload
 Add the label to the controller's pod template. The workload must be outside the Agent namespace. For Jobs, use `spec.template.metadata.labels`. For KubeRay, label the head and worker pod template:
 
 ```yaml
@@ -66,7 +68,7 @@ spec:
 
 Apply the resource and wait for the rollout to complete.
 
-## Verify setup
+3. Verify setup
 
 ```shell
 # Confirm setup containers completed
