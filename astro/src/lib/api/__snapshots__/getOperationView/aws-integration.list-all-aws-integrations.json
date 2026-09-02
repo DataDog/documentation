@@ -42,7 +42,7 @@
           "schema": [
             {
               "name": "data",
-              "type": "[AWSAccountResponseData]",
+              "type": "[object]",
               "required": true,
               "deprecated": false,
               "readOnly": false,
@@ -219,7 +219,7 @@
                               "children": [
                                 {
                                   "name": "tag_filters",
-                                  "type": "[AWSLogSourceTagFilter]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -337,7 +337,7 @@
                         },
                         {
                           "name": "tag_filters",
-                          "type": "[AWSNamespaceTagFilter]",
+                          "type": "[object]",
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
@@ -676,7 +676,7 @@
           "schema": [
             {
               "name": "accounts",
-              "type": "[AWSAccount]",
+              "type": "[object]",
               "required": false,
               "deprecated": false,
               "readOnly": false,
