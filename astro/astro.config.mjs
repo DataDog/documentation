@@ -24,6 +24,8 @@ import { sourcemapManifest } from "./src/integrations/sourcemapManifest.ts";
 
 const websitesModules = resolveWebsitesModulesPath(import.meta.url);
 const hugoSite = fileURLToPath(new URL("../hugo", import.meta.url));
+// Top-level directory shared by the Hugo and Astro sites (i18n bundles, etc.).
+const sharedDir = fileURLToPath(new URL("../shared", import.meta.url));
 const astroSite = fileURLToPath(new URL(".", import.meta.url));
 
 const hugoDevPort = 1313;
@@ -164,7 +166,7 @@ export default defineConfig({
     },
     server: {
       fs: {
-        allow: [astroSite, hugoSite, websitesModules],
+        allow: [astroSite, hugoSite, sharedDir, websitesModules],
       },
       ...(IS_PROXIED && {
         origin: `http://localhost:${PROXY_PORT}`,
@@ -181,6 +183,7 @@ export default defineConfig({
     resolve: {
       alias: {
         "@hugo-site": hugoSite,
+        "@shared": sharedDir,
         "@websites-modules": websitesModules,
         "@layouts": fileURLToPath(new URL("./src/layouts", import.meta.url)),
         "@components": fileURLToPath(
