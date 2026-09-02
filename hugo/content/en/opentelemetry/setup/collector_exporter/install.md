@@ -3,6 +3,7 @@ title: Set Up the OpenTelemetry Collector
 aliases:
 - /opentelemetry/setup/collector_exporter/oss_setup/
 - /opentelemetry/setup/collector_exporter/community_collector/
+- /opentelemetry/setup/collector_exporter/pure_otlp_collector/
 - /opentelemetry/collector_exporter/
 description: 'Send OpenTelemetry data to Datadog using the OpenTelemetry Collector and OTLP'
 further_reading:

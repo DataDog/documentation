@@ -22,6 +22,8 @@ The [recommended Collector setup][102] includes this internal metrics pipeline. 
 
 If you maintain your own Collector configuration, use one of the following approaches. After configuring the pipeline, see the [Configuration reference](#configuration-reference) for all available options.
 
+These examples use the canonical component identifiers available in OpenTelemetry Collector Contrib v0.154.0; for an older Collector or another distribution, use the component identifiers supported by that distribution.
+
 {{< tabs >}}
 {{% tab "Prometheus" %}}
 

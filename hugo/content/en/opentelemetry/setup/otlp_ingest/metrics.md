@@ -221,6 +221,8 @@ For example:
 
 ## OpenTelemetry Collector
 
+These examples use the canonical component identifiers available in OpenTelemetry Collector Contrib v0.154.0; for an older Collector or another distribution, use the component identifiers supported by that distribution.
+
 If your OpenTelemetry Collector distribution does not include all the components used by Datadog's recommended Collector setup, configure its OTLP HTTP exporter directly:
 
 ```yaml
