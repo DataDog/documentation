@@ -225,4 +225,4 @@ This ensures that the span operation names are consistent across the Datadog OTL
 [7]: /tracing/metrics/
 [8]: /opentelemetry/setup/otlp_ingest/serverless/
 [9]: /opentelemetry/setup/otlp_ingest/managed_platforms/
-[10]: /opentelemetry/setup/collector_exporter/install/
+[10]: /opentelemetry/setup/collector_exporter/

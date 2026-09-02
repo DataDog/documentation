@@ -202,4 +202,4 @@ Suppose you are submitting a legacy OTLP Summary metric, `request.response_time.
 [3]: /opentelemetry/guide/otlp_delta_temporality/
 [4]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
 [5]: /metrics/distributions/
-[6]: /opentelemetry/setup/collector_exporter/install/#dd-otel-metric-config-header
+[6]: /opentelemetry/setup/collector_exporter/#dd-otel-metric-config-header

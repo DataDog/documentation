@@ -164,4 +164,4 @@ X-Ray spans are sampled before they are sent to Datadog, which means trace metri
 [8]: /internal_developer_portal/catalog/#service-types
 [9]: /tracing/glossary/#services
 [10]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[11]: /opentelemetry/setup/collector_exporter/install/#span-metrics-connector
+[11]: /opentelemetry/setup/collector_exporter/#span-metrics-connector

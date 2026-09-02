@@ -175,7 +175,7 @@ Value: 1153183744
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/hostmetricsreceiver/README.md
 [2]: /opentelemetry/guide/metrics_mapping/#host-metrics
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
-[5]: /opentelemetry/setup/collector_exporter/install/
+[5]: /opentelemetry/setup/collector_exporter/
 [6]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&groupby=availability-zone
 [7]: https://app.datadoghq.com/infrastructure
 [8]: /opentelemetry/reference/otel_metrics/#out-of-the-box-dashboards

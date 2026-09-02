@@ -28,7 +28,7 @@ If you decide to reduce the ingestion volume for certain services, the **request
 
 **Note**: If your applications and services are instrumented with OpenTelemetry libraries and you set up sampling at the SDK level and/or at the collector level, APM metrics are based on the **sampled** set of data by default. See [Ingestion Sampling with OpenTelemetry][4] for more information.
 
-<div class="alert alert-info">To calculate APM metrics from unsampled OpenTelemetry data, configure the <a href="/opentelemetry/setup/collector_exporter/install/#span-metrics-connector"><code>span_metrics</code> connector</a> before the sampling processor.</div>
+<div class="alert alert-info">To calculate APM metrics from unsampled OpenTelemetry data, configure the <a href="/opentelemetry/setup/collector_exporter/#span-metrics-connector"><code>span_metrics</code> connector</a> before the sampling processor.</div>
 
 Trace data is very repetitive, which means trace samples to investigate any issues are still available with ingestion sampling. For high throughput services, there's usually no need for you to collect every single request - an important enough problem should always show symptoms in multiple traces. Ingestion controls helps you to have the visibility that you need to troubleshoot problems while remaining within budget.
 

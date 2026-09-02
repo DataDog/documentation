@@ -361,5 +361,5 @@ This endpoint provides:
 [6]: https://opentelemetry.io/docs/collector/custom-collector/
 [7]: https://app.datadoghq.com/fleet
 [8]: /opentelemetry/setup/ddot_collector/
-[9]: /opentelemetry/setup/collector_exporter/install/
+[9]: /opentelemetry/setup/collector_exporter/
 [10]: /opentelemetry/integrations/collector_health_metrics/

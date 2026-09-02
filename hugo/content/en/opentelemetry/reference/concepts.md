@@ -37,5 +37,5 @@ This page describes essential terms and concepts for OpenTelemetry and Datadog. 
 [4]: /opentelemetry/reference/trace_context_propagation/
 [5]: /opentelemetry/schema_semantics/semantic_mapping/
 [6]: https://opentelemetry.io/docs/concepts/glossary/
-[7]: /opentelemetry/setup/collector_exporter/install/#otlp-http-exporter
-[8]: /opentelemetry/setup/collector_exporter/install/#span-metrics-connector
+[7]: /opentelemetry/setup/collector_exporter/#otlp-http-exporter
+[8]: /opentelemetry/setup/collector_exporter/#span-metrics-connector

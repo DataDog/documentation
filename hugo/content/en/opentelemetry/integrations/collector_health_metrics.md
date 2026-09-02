@@ -113,7 +113,7 @@ If you have a Datadog Agent running on the same host as an OpenTelemetry Collect
 </div>
 
 [101]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/prometheusreceiver
-[102]: /opentelemetry/setup/collector_exporter/install/
+[102]: /opentelemetry/setup/collector_exporter/
 [103]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor
 [104]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor
 [105]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor

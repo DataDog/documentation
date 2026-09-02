@@ -34,7 +34,7 @@ For full working example files, see the [`opentelemetry-examples` repository][5]
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /opentelemetry/setup/collector_exporter/install/#span-metrics-connector
+[1]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
 [2]: /tracing/metrics/metrics_namespace/
-[3]: /opentelemetry/setup/collector_exporter/install/#2-create-the-collector-configuration
+[3]: /opentelemetry/setup/collector_exporter/#2-create-the-collector-configuration
 [5]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector

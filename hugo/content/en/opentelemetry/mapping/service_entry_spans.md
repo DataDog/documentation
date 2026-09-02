@@ -23,7 +23,7 @@ This setup requires OpenTelemetry Collector Contrib v0.154.0 or later.
 
 Use the [recommended OpenTelemetry Collector configuration][6]. Its `span_metrics` dimensions enable Datadog to identify service-entry spans and operation names without additional configuration.
 
-[6]: /opentelemetry/setup/collector_exporter/install/#span-metrics-connector
+[6]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
 {{% /tab %}}
 {{% tab "Datadog Exporter and Connector" %}}
 
