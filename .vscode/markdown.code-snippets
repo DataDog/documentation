@@ -98,6 +98,20 @@
         "description": "A callout with all parameters"
     },
 
+    "Skill callout": {
+        "scope": "markdown",
+        "prefix": ";;skill-callout",
+        "body": [
+            "{{< skill-callout",
+            "    title=\"${1:Set up APM with an agent}\"",
+            "    text=\"${2:Install the `dd-apm` skill in your AI coding agent for guided APM setup.}\"",
+            "    action_name=\"${3:copy_dd_apm_skill_install_cmd}\" >}}",
+            "${4:npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y}",
+            "{{< /skill-callout >}}"
+        ],
+        "description": "Agent skill install command callout"
+    },
+
     "Integration count": {
         "scope": "markdown",
         "prefix": ";;integration",
