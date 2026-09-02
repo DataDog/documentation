@@ -147,6 +147,8 @@ RUM operations provide technical coverage for key moments in the journey. Their 
 
 The journey details report uses time correlation to suggest existing RUM operations that may be part of the journey. Link an operation only if users encounter it while completing the journey.
 
+{{< img src="journey_monitoring/journey-monitoring-correlated-operations.png" alt="The Journey Monitoring details report showing time-based correlated RUM operations with executions, success rate, latency, and SLO creation options." style="width:100%;" >}}
+
 Linking an operation:
 
 - Links the operation to the journey and identifies it as part of the journey's critical path.
@@ -194,6 +196,8 @@ Add covering tests when the suite is empty or when Datadog identifies additional
 
 - To add existing tests, select **Manage journey coverage**, then select the tests to add.
 - To create coverage, create a [browser test][7] or [mobile application test][8], then add it to the journey's suite. For more information, see [Test Suites][9].
+
+{{< img src="journey_monitoring/journey-monitoring-covering-tests.png" alt="The Manage Tests in Suite panel showing Synthetic browser tests that cover a journey." style="width:100%;" >}}
 
 **Preview**: When no Synthetic test covers a journey, [Bits Testing][15] can generate a covering browser test. [Sign up for the Bits Testing preview][16].
 
