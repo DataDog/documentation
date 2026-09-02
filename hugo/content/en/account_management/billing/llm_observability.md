@@ -63,6 +63,8 @@ Datadog charges only for the LLM spans you ingest. [Annotation queues][15] and [
 
 [Evaluations][13] and [patterns][14] use an LLM to do their work. Datadog does not charge extra for them when you run them with your own LLM provider key (bring your own key, or BYOK). Your LLM provider bills you directly for that model usage, separately from your Datadog bill. To connect a provider, see [Connect your LLM provider account][17].
 
+Evaluations can also run on a model Datadog provides, without a provider key of your own. This option is a free preview with limited capacity, so bringing your own key is the route for running evaluations at production volume.
+
 [Sensitive Data Scanner](#is-sensitive-data-scanner-included) is included within a usage allotment that scales with your LLM span usage.
 
 ## How can I estimate my LLM span usage?
