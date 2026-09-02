@@ -433,7 +433,7 @@ export function schemaToFields(
       ];
     }
 
-    const itemTypeName = resolveItemTypeName(items);
+    const itemTypeName = resolveItemTypeName(items, spec);
     const children = arrayItemsHaveChildren(items, spec)
       ? schemaToFields(spec, items, new Set(visited), level + 1)
       : [];
@@ -446,7 +446,7 @@ export function schemaToFields(
         deprecated: schema.deprecated === true,
         readOnly: schema.readOnly === true,
         description: schema.description ?? "",
-        ...(children.length > 0 ? { children } : {}),
+        ...arrayChildFields(children),
       },
     ];
   }
@@ -586,6 +586,29 @@ function variantDescription(spec: any, variant: any): string {
 }
 
 /**
+ * Collapse an array's children when they are a single anonymous union.
+ *
+ * `schemaToFields` represents a `oneOf`/`anyOf` as one synthetic nameless
+ * field carrying `unionOptions`. As an array's only child that renders an
+ * extra blank row between the array and its options, which Hugo does not
+ * have: Hugo hangs the option rows directly off the array. Lifting the
+ * options onto the array field reproduces that shape.
+ *
+ * @param children  Fields produced from the array's `items`.
+ * @returns The partial `SchemaField` to spread — either `unionOptions` or
+ *          `children`, or nothing when there is neither.
+ */
+function arrayChildFields(
+  children: SchemaField[],
+): Pick<SchemaField, "children" | "unionOptions"> {
+  const only = children.length === 1 ? children[0] : undefined;
+  if (only && only.name === "" && only.unionOptions) {
+    return { unionOptions: only.unionOptions };
+  }
+  return children.length > 0 ? { children } : {};
+}
+
+/**
  * Convert a single named property into a `SchemaField`, recursing into
  * nested objects, arrays, and unions as needed.
  */
@@ -688,7 +711,7 @@ function propertyToField(
   // ── array ────────────────────────────────────────────────────────
   if (resolved.type === "array") {
     const items = resolved.items;
-    const itemTypeName = items ? resolveItemTypeName(items) : "any";
+    const itemTypeName = items ? resolveItemTypeName(items, spec) : "any";
     const children =
       items && arrayItemsHaveChildren(items, spec)
         ? schemaToFields(spec, items, new Set(nextVisited), level + 1)
@@ -701,7 +724,7 @@ function propertyToField(
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
       description: resolved.description ?? "",
-      ...(children.length > 0 ? { children } : {}),
+      ...arrayChildFields(children),
     };
   }
 
@@ -727,18 +750,33 @@ function propertyToField(
 
 /**
  * Determine the display type name for array items.
+ *
+ * Reports the items' JSON type — `object`, `string`, `<oneOf>` — never the
+ * name of the referenced schema. Hugo reads a dereferenced spec, so its type
+ * column shows `[object]` for an array of `SyntheticsConfigVariable` and
+ * `[<oneOf>]` for an array of `LogsProcessor`; the schema name never appears.
+ * A `$ref` therefore has to be resolved before the type can be reported.
  */
-function resolveItemTypeName(items: any): string {
+function resolveItemTypeName(items: any, spec: any): string {
+  let resolved = items;
+
   if (items.$ref) {
-    return refName(items.$ref);
+    resolved = resolveRef(spec, items.$ref) ?? items;
   }
-  if (items.oneOf || items.anyOf) {
-    return "oneOf";
+  if (resolved.allOf) {
+    resolved = mergeAllOf(resolved.allOf, spec);
   }
-  if (items.type === "object" || items.properties) {
+
+  if (resolved.oneOf) {
+    return "<oneOf>";
+  }
+  if (resolved.anyOf) {
+    return "<anyOf>";
+  }
+  if (resolved.type === "object" || resolved.properties) {
     return "object";
   }
-  return items.type ?? "any";
+  return resolved.type ?? "any";
 }
 
 /**

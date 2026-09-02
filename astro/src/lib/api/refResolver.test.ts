@@ -287,6 +287,138 @@ describe('schemaToFields', () => {
     expect(option?.description).toBe('The definition of `AWSIntegration` object.');
   });
 
+  it('reports an array of $ref-to-union as <oneOf>, not the schema name', () => {
+    // Mirrors LogsProcessor: a named schema that is a bare oneOf. Hugo reads a
+    // dereferenced spec and renders `[<oneOf>]`; reporting "LogsProcessor"
+    // would hide the union.
+    const spec = {
+      components: {
+        schemas: {
+          LogsProcessor: {
+            description: 'A processor.',
+            oneOf: [
+              {
+                type: 'object',
+                properties: { type: { type: 'string', enum: ['grok-parser'] } },
+              },
+              {
+                type: 'object',
+                properties: { type: { type: 'string', enum: ['date-remapper'] } },
+              },
+            ],
+          },
+        },
+      },
+    };
+    const schema = {
+      type: 'object',
+      properties: {
+        processors: {
+          type: 'array',
+          description: 'Ordered list of processors.',
+          items: { $ref: '#/components/schemas/LogsProcessor' },
+        },
+      },
+    };
+
+    const [processors] = schemaToFields(spec, schema);
+    expect(processors.type).toBe('[<oneOf>]');
+    // The options hang directly off the array — no blank intermediate row.
+    expect(processors.children).toBeUndefined();
+    expect(processors.unionOptions?.map((o) => o.label)).toEqual([
+      '<type=grok-parser>',
+      '<type=date-remapper>',
+    ]);
+    // The array keeps its own description, matching Hugo.
+    expect(processors.description).toBe('Ordered list of processors.');
+  });
+
+  it('reports an array of inline union as <oneOf>', () => {
+    const schema = {
+      type: 'object',
+      properties: {
+        items: {
+          type: 'array',
+          items: { oneOf: [{ type: 'string' }, { type: 'number' }] },
+        },
+      },
+    };
+
+    const [field] = schemaToFields({}, schema);
+    expect(field.type).toBe('[<oneOf>]');
+    expect(field.unionOptions).toHaveLength(2);
+  });
+
+  it('reports an array of anyOf as <anyOf>', () => {
+    const schema = {
+      type: 'object',
+      properties: {
+        items: {
+          type: 'array',
+          items: { anyOf: [{ type: 'string' }, { type: 'number' }] },
+        },
+      },
+    };
+
+    expect(schemaToFields({}, schema)[0].type).toBe('[<anyOf>]');
+  });
+
+  it('reports an array of $ref-to-object as [object], not the schema name', () => {
+    // Hugo shows the items' JSON type, never the referenced schema name:
+    // `configVariables` renders as `[object]`, not `[SyntheticsConfigVariable]`.
+    const spec = {
+      components: {
+        schemas: {
+          LogsPipeline: {
+            type: 'object',
+            properties: { name: { type: 'string' } },
+          },
+        },
+      },
+    };
+    const schema = {
+      type: 'object',
+      properties: {
+        pipelines: {
+          type: 'array',
+          items: { $ref: '#/components/schemas/LogsPipeline' },
+        },
+      },
+    };
+
+    const [field] = schemaToFields(spec, schema);
+    expect(field.type).toBe('[object]');
+    expect(field.children?.map((c) => c.name)).toEqual(['name']);
+    expect(field.unionOptions).toBeUndefined();
+  });
+
+  it('resolves $ref-to-allOf array items to [object]', () => {
+    const spec = {
+      components: {
+        schemas: {
+          Base: { type: 'object', properties: { id: { type: 'string' } } },
+          Extended: {
+            allOf: [
+              { $ref: '#/components/schemas/Base' },
+              { type: 'object', properties: { extra: { type: 'string' } } },
+            ],
+          },
+        },
+      },
+    };
+    const schema = {
+      type: 'object',
+      properties: {
+        things: {
+          type: 'array',
+          items: { $ref: '#/components/schemas/Extended' },
+        },
+      },
+    };
+
+    expect(schemaToFields(spec, schema)[0].type).toBe('[object]');
+  });
+
   it('handles allOf by merging schemas', () => {
     const spec = {};
     const schema = {
