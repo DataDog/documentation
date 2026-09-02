@@ -983,8 +983,8 @@ Links a feature flag to an experiment.
 
 ### `start_experiment`
 *Toolset: **experiments***\
-*Permissions Required: `Product Analytics Experiments Write`*\
-Starts an experiment. Requires a linked flag with an active allocation, a subject type, and a primary metric.
+*Permissions Required: `Product Analytics Experiments Read` and `Product Analytics Experiments Write`*\
+Starts a standard experiment from its saved configuration using Datadog feature flags or warehouse-native assignment. The tool checks readiness before starting. If setup is incomplete, it returns every detected blocker with an action to resolve it and does not change the experiment. For warehouse-native experiments, configure variants and run dates before using this tool because it accepts only the experiment ID.
 
 - Start experiment `abc123`.
 
@@ -1117,7 +1117,7 @@ Checks if a feature flag is implemented in code.
 ### `sync_datadog_feature_flag_allocations`
 *Toolset: **feature-flags***\
 *Permissions Required: `Feature Flag Write`*\
-Syncs feature flag allocations for a specific environment.
+Syncs feature flag allocations for a specific environment. This replaces all existing allocations for the flag in that environment. Confirm the change before applying.
 
 - Sync the allocations for flag `new-checkout-flow` in production.
 
@@ -1192,7 +1192,7 @@ Copies an existing form, including its latest definition, into a new form with a
 
 ## Kubernetes
 
-Tools for searching and describing [Kubernetes][55] resources and retrieving manifests across all clusters.
+Tools for searching and describing [Kubernetes][55] resources, retrieving manifests, and analyzing Deployment rollouts across all clusters.
 
 ### `search_datadog_k8s_resources`
 *Toolset: **kubernetes***\
@@ -1203,6 +1203,17 @@ Searches for [Kubernetes][55] resources across all clusters. Use this tool inste
 - Find deployments with in-progress rollouts in the `general2` cluster.
 - List all nodes in my cluster sorted by CPU usage.
 - Group deployments by `service` and `env` to see how my services are distributed across environments.
+
+### `analyse_datadog_k8s_rollout`
+*Toolset: **kubernetes***\
+*Permissions Required: `Hosts Read` and `Timeseries` and `Logs Read Data` and `APM Read`*\
+Assembles a [Kubernetes][55] Deployment rollout in one call: rollout status and progress, timing (ETA while the rollout is in progress, duration after it finishes), the new, previous, and old ReplicaSet split by revision, and before/after impact series (RED, resource utilization, and log counts). Identify the Deployment by its UID from a previous search or by providing resource identifiers (cluster, namespace, and resource name). Use this tool for rollout questions instead of combining `search_datadog_k8s_resources` and `describe_datadog_k8s_resource`.
+
+- Analyze the rollout of deployment `checkout-api` in cluster `prod`, namespace `default`.
+- What's the ETA for the in-progress rollout of deployment `api-server` in cluster `staging`?
+- Did the last rollout of deployment `payments` affect error rates, traffic, or resource utilization?
+
+**Note**: The tool only reports on Deployments whose `kube_rollout_status` is `inprogress`, `recentlycompleted`, or `recentlyfailed`. For other Deployments, it returns the Deployment's fields with a warning that there is no recent rollout to analyze.
 
 ### `describe_datadog_k8s_resource`
 *Toolset: **kubernetes***\
@@ -2254,53 +2265,146 @@ Renders tabular data as an interactive visualization (sunburst, treemap, or top 
 
 ## Workflows
 
-Tools for [Workflow Automation][39], including listing, inspecting, executing, and configuring workflows for agent use.
+Tools for [Workflow Automation][39], including creating and managing workflows, triggering and inspecting executions, debugging individual steps, and finding actions.
 
 ### `list_datadog_workflows`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Lists and searches [Workflow Automation][39] workflows. Supports filtering by name, tags, owner, handle, and trigger type (such as `monitor`, `schedule`, `api`, or `incident`). Results can be sorted by fields like `name` or `updatedAt`.
+Lists and searches [Workflow Automation][39] workflows by name, creator, handle, tag, or trigger type. Results include metadata by default and can optionally include complete workflow specifications.
 
-- Show me all published workflows tagged with `team:platform`.
+- Show me published workflows tagged with `team:platform`.
 - List workflows that have an agent trigger configured.
-- Find all workflows related to incident response owned by Alice Smith.
+- Find workflows created by Alice Smith.
 
 ### `get_datadog_workflow`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Retrieves detailed information about a specific workflow, including its triggers, steps, connections, and input schema.
+Retrieves a workflow by ID, including its metadata and complete specification. Returns a saved draft when one exists, otherwise the base specification.
 
 - Get the full details for workflow `00000000-0000-0000-0000-000000000000`.
-- Show me the input parameters and steps for the deployment rollback workflow.
+- Show me the input parameters and steps for workflow `00000000-0000-0000-0000-000000000000`.
 - What triggers are configured for this workflow?
+
+### `search_datadog_workflow_actions`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
+Searches the Workflow Automation action catalog with a free-text query and ranks matching actions by relevance. Each result includes an action ID; use `get_datadog_workflow_action` to retrieve its contract before adding it to a workflow specification.
+
+- Find workflow actions for sending and reacting to Slack messages.
+- Search for an action that lists Amazon S3 buckets.
+- Find control-flow actions for conditions and branches.
+
+### `get_datadog_workflow_action`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
+Retrieves the definition of a Workflow Automation action by action ID. The definition includes resolved input and output schemas and action-specific instructions for building a workflow step.
+
+- Get the definition of the `com.datadoghq.http.request` action.
+- List the required inputs for this workflow action.
+- What outputs does this action return?
+
+### `get_datadog_workflow_spec_schema`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
+Retrieves the JSON schema for a complete Workflow Automation specification, including the structure required for triggers, steps, and connections. Use this tool before constructing a specification to create, validate, or update a workflow.
+
+- Get the JSON schema needed to create a workflow.
+- What fields does a schedule trigger need in the specification?
+
+### `validate_datadog_workflow`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
+Checks a complete workflow specification without creating or modifying a workflow. Returns an `isValid` result and any validation errors. Validation does not verify external credentials, permissions, or third-party runtime behavior.
+
+- Validate this workflow specification before creation.
+- Explain why this updated workflow specification fails validation.
+
+### `create_datadog_workflow`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Write`*\
+Creates an unpublished [Workflow Automation][39] workflow from a complete specification.
+
+- Create a workflow that posts a Slack message when triggered by an agent.
+- Build a workflow with a schedule trigger that runs every day at 9 AM.
+- Leave this incident escalation workflow unpublished for review.
+
+### `update_datadog_workflow`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Write`*\
+Updates a [Workflow Automation][39] workflow by ID. Provided specifications and tag lists replace the existing values, while omitted fields remain unchanged. Specification updates are saved as drafts.
+
+- Get the deployment rollback workflow, add an agent trigger to its complete specification, then publish the saved draft.
+- Get the incident escalation workflow and add a notification step while preserving the rest of its specification.
+- Get this workflow's existing tags, then replace them with the complete list including `team:platform`.
+
+### `publish_datadog_workflow`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Write`*\
+Publishes a workflow by ID. If a saved draft exists, it replaces the base specification and is removed. Otherwise, the existing unpublished base specification is published.
+
+- Publish the saved draft of the deployment rollback workflow.
+- Publish the newly created incident escalation workflow.
+
+### `unpublish_datadog_workflow`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Write`*\
+Unpublishes a workflow by ID to stop new automatic executions while preserving its base specification and any saved draft. This does not cancel executions already in progress; use `cancel_datadog_workflow_instance` for those.
+
+- Unpublish the deployment workflow while changes are reviewed.
+- Stop new scheduled runs of the incident escalation workflow without canceling its running instance.
+
+### `delete_datadog_workflow`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Write`*\
+Permanently deletes a workflow by ID. This tool requires explicit user confirmation and `confirm: true` before deleting the workflow.
+
+- Delete the superseded incident escalation workflow.
+- Permanently delete workflow `00000000-0000-0000-0000-000000000000`.
 
 ### `execute_datadog_workflow`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Run`*\
-Executes a published workflow that has an agent trigger, with optional input parameters matching the workflow's input schema.
+Starts a new execution of a workflow that has an agent trigger. Runs the saved draft when one exists, otherwise the base specification.
 
-- Run the incident escalation workflow for service `checkout-api` with severity `high`.
+- Run the incident escalation workflow with `service` set to `checkout-api` and `severity` set to `high`.
 - Execute the deployment rollback workflow for the payments service.
-- Trigger the On-Call notification workflow with the context from this investigation.
+- Trigger the On-Call notification workflow with the invocation context `Investigating a checkout-api deployment failure`.
 
-**Note**: The workflow must be published and have an agent trigger configured. Use `update_datadog_workflow_with_agent_trigger` to add one if needed.
+### `list_datadog_workflow_instances`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
+Lists a workflow's execution history, with filters for execution status. Use `get_datadog_workflow_instance` for details.
+
+- List the most recent executions of this workflow.
+- List all failed instances of the deployment workflow.
+- Find the latest successful execution and its instance ID.
 
 ### `get_datadog_workflow_instance`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Retrieves the status and details of a workflow execution instance, including step results and outputs.
+Retrieves a lightweight summary of a workflow execution instance, with an option to include the detailed execution record. Use `get_datadog_workflow_step_data` to inspect one step.
 
 - What's the status of the workflow execution I triggered?
 - Did the incident escalation workflow complete successfully?
-- Show me the detailed outputs from workflow instance `00000000-0000-0000-0000-000000000000`.
+- Show the detailed record for workflow instance `00000000-0000-0000-0000-000000000000`.
 
-### `update_datadog_workflow_with_agent_trigger`
+### `get_datadog_workflow_step_data`
 *Toolset: **workflows***\
-*Permissions Required: `Workflows Write`*\
-Adds an agent trigger to a workflow and publishes it, enabling the workflow to be executed by AI agents.
+*Permissions Required: `Workflows Read`*\
+Retrieves execution data for one workflow step, with optional execution context.
 
-- Add an agent trigger to the deployment rollback workflow so I can run it from here.
-- Configure the incident response workflow to be triggerable by an agent.
+- Debug the Slack channel used by the `send-slack-message` step in this workflow execution.
+- Inspect zero-based iteration `3` (the fourth iteration) of the `retry-until-complete` while-loop step.
+- Inspect the `notify-on-call` step inside zero-based iteration `3` of its enclosing loop.
+- Include the execution context for the failed deployment step.
+
+### `cancel_datadog_workflow_instance`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Run`*\
+Cancels a running workflow execution instance. Invoke this tool only when the user intends to stop the run. A canceled execution cannot be resumed, but `execute_datadog_workflow` can start a new run.
+
+- Cancel the latest workflow run because its input is incorrect.
+- Stop workflow instance `00000000-0000-0000-0000-000000000000`.
 
 [1]: /mcp_server/setup#toolsets
 [15]: /api/latest/events/

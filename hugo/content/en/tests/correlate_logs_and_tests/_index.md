@@ -36,11 +36,12 @@ Use the following environment variables to enable and configure Agentless log su
 | `DD_AGENTLESS_LOG_SUBMISSION_QUEUE_SIZE` (optional) | Sets the maximum size of pending logs queue | `1024`        |
 | `DD_AGENTLESS_LOG_SUBMISSION_URL` (optional)        | Sets custom URL for submitting logs         | -             |
 
-### Javascript/Typescript
+### JavaScript/TypeScript
 
-Agentless log submission is supported for the following languages and frameworks:
+Agentless log submission is supported for the following tracer versions and logging libraries:
 
--   `dd-trace-js >= 5.24.0` and `dd-trace-js >= 4.48.0` and `winston`.
+- `dd-trace-js v4.48.0 or later` on the v4 release line, or `dd-trace-js v5.24.0 or later` on the v5 release line, with `winston`.
+- `dd-trace-js v5.124.0 or later` on the v5 release line, or `dd-trace-js v6.13.0 or later` on the v6 release line, with `pino` or `bunyan`.
 
 Use the following environment variables to enable and configure Agentless log submission:
 

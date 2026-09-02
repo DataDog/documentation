@@ -33,7 +33,7 @@ The new service-entry span identification logic can be enabled by setting the `t
 
 The new service-entry span identification logic can be enabled by adding `"enable_otlp_compute_top_level_by_span_kind"` to [apm_config.features][1] in the Datadog Agent config.
 
-[1]: https://github.com/DataDog/datadog-agent/blob/7.53.0/pkg/config/config_template.yaml#L1585-L1591
+[1]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
 {{% /tab %}}
 {{< /tabs >}}
 
