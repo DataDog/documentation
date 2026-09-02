@@ -551,6 +551,10 @@
     "name": "Test Optimization",
     "description": "Search and manage flaky tests through Test Optimization. See the [Test Optimization page](https://docs.datadoghq.com/tests/) for more information."
   },
+  "threat-intelligence": {
+    "name": "Threat Intelligence",
+    "description": "Ingest and manage threat intelligence data for security enrichment and investigation."
+  },
   "twilio-integration-accounts": {
     "name": "Twilio Integration Accounts",
     "description": "Manage your Datadog Twilio integration accounts directly through the Datadog API.\nCreate, update, and delete accounts, configure authentication and settings, and\nenable or disable dataflows such as message logs, event logs, alerts, call\nsummaries, and Cloud Cost Management metrics. See the\n[Twilio integration page](https://docs.datadoghq.com/integrations/twilio/) for\nmore information."

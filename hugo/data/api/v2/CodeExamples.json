@@ -1745,6 +1745,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_1874470273",
+      "description": "Validate an observability pipeline with Splunk HEC destination endpoint_target returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_1267410221",
       "description": "Validate an observability pipeline with Splunk HEC destination token_strategy returns \"OK\" response"
     },
@@ -2879,6 +2884,13 @@
       "group": "teams",
       "suffix": "",
       "description": "Update team notification rule returns \"OK\" response"
+    }
+  ],
+  "AddSTIXThreatIntel": [
+    {
+      "group": "threat_intelligence",
+      "suffix": "",
+      "description": "Ingest STIX threat intelligence returns \"OK\" response"
     }
   ],
   "CreateUser": [

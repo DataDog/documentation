@@ -2,64 +2,70 @@
 title: Utiliser l'API
 type: api
 ---
+{{< h2-with-copy-btn >}}Utiliser l'API{{< /h2-with-copy-btn >}}
 
-{{< h2 >}}Utiliser l'API{{< /h2 >}}
+Utilisez l'API HTTP de Datadog pour accéder à la plateforme Datadog par programmation. Vous pouvez utiliser l'API pour envoyer des données à Datadog, créer des visualisations de données et gérer votre compte.
 
-Utilisez l'API HTTP de Datadog pour accéder automatiquement à la plateforme Datadog. Vous pouvez utiliser l'API pour envoyer des données à Datadog, créer des représentations visuelles de données et gérer votre compte.
+{{< h2 >}}Envoyer des données à Datadog :{{< /h2 >}}
 
-{{< h2 >}}Envoyer des données à Datadog{{< /h2 >}}
+Utilisez l'API pour commencer à envoyer des données d'intégrations à Datadog. Avec une configuration supplémentaire de l'Agent, vous pouvez également utiliser l'API pour envoyer des données de test Synthetic, des Logs et des Traces à Datadog.
 
-Utilisez l'API pour commencer à envoyer les données des intégrations à Datadog. Les options de configuration supplémentaire de l'Agent vous offrent également la possibilité d'utiliser l'API pour envoyer des données de test Synthetic, des logs et des traces à Datadog.
+**Endpoints des intégrations**
 
-**Endpoints d'intégration**
+Endpoints d'intégrations disponibles :
 
-Endpoints d'intégration disponibles :
+- [AWS Integration][1]
+- [AWS Logs Integration][2]
+- [Azure Integration][3]
+- [Cloudflare Integration][37]
+- [Fastly Integration][38]
+- [Google Cloud Integration][4]
+- [Jira Integration][39]
+- [Microsoft Teams Integration][40]
+- [Okta Integration][41]
+- [Opsgenie Integration][42]
+- [PagerDuty Integration][6]
+- [Slack Integration][5]
+- [Webhooks Integration][7]
 
-- [Intégration AWS][1]
-- [Intégration de logs AWS][2]
-- [Intégration Azure][3]
-- [Intégration Google Cloud][4]
-- [Intégration Slack][5]
-- [Intégration PagerDuty][6]
-- [Intégration Webhooks][7]
+**Endpoints de la plateforme**
 
-**Endpoints de plateforme**
+Utilisez ces endpoints pour envoyer et récupérer des données dans Datadog : 
 
-Utilisez ces endpoints pour envoyer et récupérer des données dans Datadog :
+- Les endpoints [metrics][8] vous permettent de publier des données de [metrics][9] afin qu'elles puissent être représentées graphiquement sur les tableaux de bord Datadog et d'interroger des métriques pour n'importe quelle période.
+- Les endpoints [events][10] vous permettent de publier et de récupérer des événements vers et depuis l'[Datadog event explorer][11].
+- Utilisez les endpoints [Synthetic Monitoring][12] pour créer, démarrer, arrêter et consulter les résultats des [tests Synthetic][13].
+- Utilisez l'[API Tracing Agent][14] pour envoyer des traces à votre Datadog Agent, qui les transmet ensuite à Datadog.
+- Utilisez l'[API Agent Observability Export][36] pour accéder à vos données d'Agent Observability afin d'exécuter des évaluations externes et d'exporter des spans pour un stockage hors ligne.
 
-- Les endpoints de [métriques][8] vous permettent d'envoyer des données de [métriques][9] afin de les représenter graphiquement sur les dashboards de Datadog et de les interroger sur l'intervalle de votre choix.
-- Les endpoints d'[événements][10] vous permettent d'envoyer et de récupérer des événements dans l'[Events Explorer Datadog][11].
-- Utilisez les endpoints de [surveillance Synthetic][12] pour créer, lancer et interrompre des [tests Synthetic][13], ou visualiser leurs résultats.
-- Utilisez l'[API de tracing de l'Agent][14] pour envoyer des traces à l'Agent Datadog afin de les transmettre par la suite à Datadog.
-
-{{< h2 >}}Visualiser vos données{{< /h2 >}}
+{{< h2 >}}Visualisez vos données :{{< /h2 >}}
 
 Lorsque vous envoyez des données à Datadog, vous pouvez utiliser l'API pour créer automatiquement des représentations visuelles de ces données :
 
-- Créez des [dashboards][15] et consultez les [listes de dashboards][16].
-- Gérez [les tags de host][17].
-- Créez des [graphiques intégrables][18].
-- Prenez un [snapshot de graphique][19].
-- [Dépendances de service][20] : consultez la liste de vos services APM et de leurs dépendances.
-- Créez des [monitors][21].
-- [Checks de service][22] : envoyez des statuts de check afin de les utiliser avec des monitors.
-- Créez et gérez des [logs][23], des [index de logs][24] et des [pipelines de logs][25].
-- Récupérez des informations sur des [hosts][17] pour votre organisation.
-- Créez et gérez des [Service Level Objectives][26].
-- Générez des signaux [Security Monitoring][27].
+- Créez des [Dashboards][15] et affichez des [Dashboard Lists][16]
+- Gérez les [host tags][17]
+- Créez des [Embeddable Graphs][18]
+- Prenez un [graph snapshot][19]
+- [Service Dependencies][20] - consultez une liste de vos services APM et leurs dépendances
+- Créez des [Monitors][21]
+- [Service Checks][22] - publiez des statuts de vérification à utiliser avec les monitors
+- Créez et gérez des [Logs], des [Logs Indexes] et des [Logs Pipelines][25]
+- Obtenez des informations sur les [Host] de votre organisation
+- Créez et gérez des [Service Level Objectives][26]
+- Générez des signaux de [Security Monitoring][27]
 
-{{< h2 >}}Gérer votre compte{{< /h2 >}}
+{{< h2 >}}Gérez votre compte :{{< /h2 >}}
 
-Vous pouvez également utiliser l'API Datadog pour gérer automatiquement votre compte :
+Vous pouvez également utiliser la Datadog API pour gérer automatiquement votre compte :
 
-- Gérez des [utilisateurs][28].
-- Gérez des [rôles][29].
-- Gérez votre [organisation][30].
-- Vérifiez les clés d'API et d'application avec l'endpoint d'[authentification][31].
-- Autorisez l'accès à des logs spécifiques avec les [requêtes de restriction de logs][32].
-- Gérez vos clés existantes avec la fonctionnalité [Gestion des clés][33].
-- Récupérez des informations sur l'utilisation horaire, journalière et mensuelle de nombreuses facettes de Datadog grâce aux endpoints dédiés à la [mesure de l'utilisation][34].
-- Consultez la liste des préfixes d'adresse IP appartenant à Datadog avec les [plages d'IP][35].
+- Gérez les [Users][28]
+- Gérez les [Roles][29]
+- Gérez votre [Organization][30]
+- Vérifiez les clés d'API et d'application avec l'endpoint [Authentication][31]
+- Accordez un accès spécifique aux [Logs] avec [Logs Restriction Queries][32]
+- Gérez les clés existantes avec [Key Management][33]
+- Obtenez l’utilisation horaire, quotidienne et mensuelle sur plusieurs facettes de Datadog avec les endpoints [Usage Metering][34]
+- Consultez la liste des préfixes IP appartenant à Datadog avec [IP Ranges][35]
 
 
 [1]: /fr/api/v1/aws-integration/
@@ -97,3 +103,10 @@ Vous pouvez également utiliser l'API Datadog pour gérer automatiquement votre 
 [33]: /fr/api/v1/key-management/
 [34]: /fr/api/v1/usage-metering/
 [35]: /fr/api/v1/ip-ranges/
+[36]: /fr/llm_observability/evaluations/export_api
+[37]: /fr/api/latest/cloudflare-integration/
+[38]: /fr/api/latest/fastly-integration/
+[39]: /fr/api/latest/jira-integration/
+[40]: /fr/api/latest/microsoft-teams-integration/
+[41]: /fr/api/latest/okta-integration/
+[42]: /fr/api/latest/opsgenie-integration/
