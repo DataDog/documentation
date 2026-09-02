@@ -33,7 +33,7 @@ The entries that matter most:
 
 See [Knowledge sources][1] for a full sample file.
 
-## Start with the monitors that matter most
+## Start with your most critical monitors
 
 A good runbook link, correct tags, and a `bits.md` entry for a monitor's quirks all take time to set up. Start with monitors where an investigation actually saves time. On the [Supported Monitors][8] page:
 
