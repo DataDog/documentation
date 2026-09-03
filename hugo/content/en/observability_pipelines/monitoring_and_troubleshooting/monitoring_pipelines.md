@@ -1,5 +1,6 @@
 ---
 title: Monitoring Pipelines
+description: Learn how to track the status of pipelines, Workers, and components with health graphs and out-of-the-box monitors.
 disable_toc: false
 aliases:
   - /observability_pipelines/monitoring/
@@ -29,6 +30,8 @@ A pipeline consists of components that collect, process, and route your observab
     - A defined quota has been reached.
 - Create your own dashboards, notebooks, and monitors with the available [Observability Pipelines metrics][5].
 
+{{< img src="observability_pipelines/monitoring_and_troubleshooting/pipelines_list.png" alt="The Pipelines list page showing status, events/s, and bytes/s for each pipeline." style="width:100%;" >}}
+
 ## View the status of your pipelines
 
 1. Navigate to [Observability Pipelines][1] to see how many events or bytes your pipelines are receiving and sending out. The {{< ui >}}events/s{{< /ui >}} and {{< ui >}}bytes/s{{< /ui >}} metrics shown on this page are based on an average over 15 minutes.
@@ -48,6 +51,9 @@ To view graphs of resource usage and data sent through Observability Pipelines W
 1. Navigate to [Observability Pipelines][1].
 1. Select a pipeline.
 1. Click the {{< ui >}}Workers{{< /ui >}} tab to see the Workers' memory and CPU utilization, traffic stats, and any errors.
+    {{< img src="observability_pipelines/monitoring_and_troubleshooting/workers_tab.png" alt="The Workers tab showing memory utilization, CPU utilization, events/s, bytes/s, and errors for each Worker." style="width:100%;" >}}
+1. Click the {{< ui >}}Latest Deployment & Setup{{< /ui >}} tab to see the deployment status of your Workers.
+    {{< img src="observability_pipelines/monitoring_and_troubleshooting/worker_deployment_status.png" alt="The Latest Deployment and Setup tab showing a deployed status for each Worker." style="width:100%;" >}}
 
 ## View the status of your pipeline components
 
@@ -57,6 +63,8 @@ To view metrics for a source, process, or destination:
 1. Select a pipeline.
 1. Click the cog next to the source's, processor's, or destination's name, then select {{< ui >}}View details{{< /ui >}}. Datadog displays health graphs for the component you selected.
 1. If you want to export a graph to an [incident][2], [dashboard][3], or [notebook][4], click the export icon on the graph. The exported graph shows that the metric is grouped by the specific pipeline and component tags.
+
+{{< img src="observability_pipelines/monitoring_and_troubleshooting/pipeline_health_graphs.png" alt="Health graphs showing events in and out, bytes in and out, errors, data dropped, utilization, and buffer events for a pipeline." style="width:35%;" >}}
 
 ## Out-of-the-box monitors
 

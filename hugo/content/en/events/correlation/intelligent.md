@@ -10,16 +10,26 @@ further_reading:
 
 ## Overview
 
-Intelligent Correlation uses a Machine Learning modeling approach. It automatically correlates Datadog Monitor events on your behalf, using underlying telemetry gathered within Datadog, and other heuristics.
+Intelligent Correlation automatically aggregates Monitor alerts into cases based on related infrastructure dependencies, underlying telemetry, and other heuristics. Intelligent Correlation relies on relationships identified within your infrastructure based on the underlying telemetry. It considers only alerts from monitors that notify a paging integration or are tagged high priority. If there isn't enough telemetry to establish these relationships, or if your monitors don't meet these criteria, you might not see any correlated cases.
+
 ## Enable Intelligent Correlation
 
+Enabling the Intelligent Correlator applies to your entire Datadog organization. After it's enabled, it evaluates incoming monitor alerts, automatically grouping related ones into cases. You can return to the same page at any time to adjust the tag filters or disable the Correlator.
+
 To get started:
-1. Navigate to the [{{< ui >}}Correlation Settings{{< /ui >}}][1] page, and click [{{< ui >}}Preview Cases{{< /ui >}}][2]. 
-1. From there you can preview the intelligent correlations that are created from your organization.
 
+1. On the [{{< ui >}}Settings{{< /ui >}}][1] page, under {{< ui >}}Projects{{< /ui >}}, click {{< ui >}}Intelligent Correlation{{< /ui >}}.
+1. On the {{< ui >}}Intelligent Correlator{{< /ui >}} card, click [{{< ui >}}Edit{{< /ui >}}][2].
 
-{{< img src="events/correlation/intelligent/intelligent_config_updated.png" alt="Configure intelligent correlation" style="width:100%;" >}}
+   {{< img src="events/correlation/intelligent/intelligent_correlator_card.png" alt="Intelligent Correlation settings page showing the Intelligent Correlator card, currently off, with an Edit button" style="width:100%;" >}}
 
+1. Under {{< ui >}}Define Intelligent Correlator{{< /ui >}}, optionally narrow the events the correlator evaluates:
+   - {{< ui >}}Consider events with any of these tags{{< /ui >}}: Only events matching one of these tags are correlated. To consider all monitor alerts, leave this field empty.
+   - {{< ui >}}Exclude events with any of these tags{{< /ui >}}: Events matching one of these tags are not correlated. This may be useful for filtering out noisy or non-production alerts.
+
+   {{< img src="events/correlation/intelligent/intelligent_correlator_define.png" alt="Define Intelligent Correlator form with fields to include and exclude events by tag, and a Save and Enable button" style="width:100%;" >}}
+
+1. Click {{< ui >}}Save & Enable{{< /ui >}}.
 
 ## Receiving your first case
 

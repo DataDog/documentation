@@ -220,6 +220,20 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 
 <!-- TODO: add a custom query recipe for getting the max sql text length -->
 
+### Tables are missing from collected schemas
+
+If the Agent logs a warning starting with:
+```
+No tables were found across any of the N databases.
+```
+MySQL exposes a table in `INFORMATION_SCHEMA` only to users that hold a privilege on that table, so the `datadog` user sees no tables at all without one. Resolve the warning by granting the `REFERENCES` privilege, which makes your table metadata visible without giving the Agent any ability to read your data:
+
+```sql
+GRANT REFERENCES ON *.* TO datadog@'%';
+```
+
+If only some tables are missing, check that the grant covers them. A grant scoped to individual columns exposes only the granted columns, and a grant scoped to one database or table covers only that database or table. See [Collecting schemas][10] for the available scopes.
+
 ### Schema or Database missing on MySQL Query Metrics & Samples
 
 The `schema` tag (also known as "database") is present on MySQL Query Metrics and Samples only when a Default Database is set on the connection that made the query. The Default Database is configured by the application by specifying the "schema" in the database connection parameters, or by executing the [USE Statement][9] on an already existing connection.
@@ -267,3 +281,4 @@ MariaDB does not produce the same JSON format as MySQL for explain plans. Certai
 [7]: /database_monitoring/data_collected/#which-queries-are-tracked
 [8]: https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_digest_length
 [9]: https://dev.mysql.com/doc/refman/8.0/en/use.html
+[10]: /database_monitoring/setup_mysql/selfhosted/?tab=mysql57#collecting-schemas

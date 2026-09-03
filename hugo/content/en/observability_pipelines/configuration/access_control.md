@@ -1,5 +1,6 @@
 ---
 title: Access Control
+description: Learn how to use role-based and granular access control to restrict who can view, edit, deploy, or delete Observability Pipelines configurations and Live Capture.
 disable_toc: false
 aliases:
     - /observability_pipelines/access_control/

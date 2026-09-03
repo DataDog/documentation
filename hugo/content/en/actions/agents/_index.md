@@ -8,24 +8,23 @@ further_reading:
 - link: "/actions/workflows/"
   tag: "Documentation"
   text: "Workflow Automation"
-- link: "https://www.datadoghq.com/knowledge-center/aiops/ai-agents/"
-  tag: "Knowledge Center"
-  text: "What are AI agents and how do they work?"
 - link: "/account_management/billing/ai_credits/"
   tag: "Documentation"
   text: "AI Credits"
 - link: "/incident_response/case_management/ai/custom_agents/"
   tag: "Documentation"
-  text: "Case Management Integration with Bits Agent Builder"
+  text: "Work Management Integration with Bits Agent Builder"
+- link: "https://www.datadoghq.com/knowledge-center/aiops/ai-agents/"
+  tag: "Knowledge Center"
+  text: "What are AI agents and how do they work?"
+- link: "https://www.datadoghq.com/blog/bits-agent-builder/"
+  tag: "Blog"
+  text: "Introducing Bits Agent Builder: Build agentic workflows for alert response and remediation"
 ---
-
-{{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Case Management integration is in Preview" >}}
-Automatically assign custom agents to work on your Cases.
-{{< /callout >}}
 
 ## Overview
 
-Bits Agent Builder lets you create custom AI agents that use Datadog's tools and integrations to automate operational tasks. Agents can search logs, query metrics, create cases, send messages, or perform any action from the [Action Catalog][7].
+Bits Agent Builder lets you create custom AI agents that use Datadog's tools and integrations to automate operational tasks. Agents can search logs, query metrics, create work items, send messages, or perform any action from the [Action Catalog][7].
 
 Use agents to handle work that's too complex for static automation but too repetitive for humans. For example, triaging errors, responding to incidents, analyzing trends, and escalating issues.
 
@@ -115,6 +114,10 @@ The **Run Agent** step also supports the following optional fields:
 
 The agent executes with its configured tools and instructions, then returns its output to the workflow. You can combine rule-based automation with AI reasoning in a single workflow.
 
+### Automatically Assign Agents to Work Items
+
+[Work Management][17] is Datadog's built-in ticketing tool for tracking human and agentic work. You can create custom agents to help triage and resolve your work, and automatically assign these agents to work items.
+
 ## Troubleshooting
 
 **Agent not using a tool**: Verify the tool has been added to the agent's configuration. Agents can use only tools that are explicitly added.
@@ -142,3 +145,4 @@ The agent executes with its configured tools and instructions, then returns its 
 [14]: /actions/workflows/trigger/#monitor-triggers
 [15]: /actions/workflows/trigger/#incident-triggers
 [16]: /actions/workflows/trigger/#security-triggers
+[17]: /incident_response/work_management/ai/custom_agents/

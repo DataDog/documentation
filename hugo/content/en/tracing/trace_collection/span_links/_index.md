@@ -11,6 +11,9 @@ further_reading:
     - link: '/tracing/trace_collection/custom_instrumentation/'
       tag: 'Documentation'
       text: 'Custom Instrumentation with Datadog Libraries'
+    - link: "https://www.datadoghq.com/blog/monitor-azure-functions-hosting-plans/"
+      tag: "Blog"
+      text: "Monitor Azure Functions across every hosting plan with Datadog"
 ---
 
 {{< img src="tracing/span_links/span_links_tab_2.png" alt="Span Links tab" style="width:90%;">}}

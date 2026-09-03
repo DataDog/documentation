@@ -56,7 +56,7 @@ Data sources marked _(Preview)_ are in Preview and might not be available in you
 | [Incidents](#incidents) | Incidents from Incident Management. | Incident Management |
 | [Infrastructure Resources](#infrastructure-resources-preview) _(Preview)_ | Infrastructure resources, such as hosts and containers. | Infrastructure Monitoring |
 | [Issues](#issues) | Error Tracking issues across APM, Logs, RUM, and other sources. | Error Tracking |
-| [LLM Observability](#options) | Traces and spans from LLM Observability. | LLM Observability |
+| [Agent Observability](#options) | Traces and spans from Agent Observability. | Agent Observability |
 | [Logs](#logs) | Individual log events. You can also group logs by patterns or transactions. | Log Management |
 | [Notebook](#notebook-ddsql-editor-reference-tables-and-developer-portal) | Data from a notebook cell. | Notebooks |
 | [On-Call](#on-call) | On-Call events and pages. | Datadog On-Call |

@@ -40,6 +40,24 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 
 ## Releases
 
+### v0.1.33 — 2026-08-18
+
+*Bundled in chart: `0.5.2`.*
+*Validated with Observability Pipelines Worker: `2.20.x`.*
+
+#### Changed
+- Adds document clustering to group similar logs together and reduce storage footprint by 10% to 20%. To disable document clustering, set `QW_DISABLE_DOCS_CLUSTERING=true`.
+- Adds support for flat attribute group-by queries.
+- Adds operational metrics for system resource usage, decommissioning, S3 PUT failures, WAL usage, metastore capacity, and split-search outcomes.
+
+#### Helm chart changes
+- **Breaking**: Removes the `medium` pod size. `indexer.podSize` and `searcher.podSize` accept `large`, `xlarge`, `2xlarge`, `4xlarge`, `6xlarge`, and `8xlarge`.
+- Adjusts pod-size CPU and memory requests and limits to account for node reservations and add-ons. This rescales caches, ingest queues, and concurrent split searches accordingly.
+- Enables document clustering by default with `config.docs_clustering`.
+- Sets indexer and standalone-compactor decommission timeouts to 90% of each workload's `terminationGracePeriodSeconds`.
+- Adds a default metastore `PodDisruptionBudget` and global DNS `ndots: 1` setting.
+- Lowers the indexer HPA CPU target to 70% and removes the scale-up stabilization window so indexers scale out under load.
+
 ### v0.1.32 — 2026-07-21
 
 *Bundled in chart: `0.4.6`.*

@@ -1,5 +1,5 @@
 ---
-title: Send OpenTelemetry logs with Observability Pipelines
+title: Send OpenTelemetry Logs with Observability Pipelines
 description: A quick guide to send OpenTelemetry logs through Observability Pipelines to BYOC Logs in less than 5 minutes
 further_reading:
 - link: "/byoc-logs/quickstart/"
