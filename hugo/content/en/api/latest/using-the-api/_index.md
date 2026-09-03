@@ -28,6 +28,7 @@ Available integrations endpoints:
 - [PagerDuty Integration][6]
 - [Slack Integration][5]
 - [Webhooks Integration][7]
+- [Oracle Cloud Integration][43]
 
 **Platform endpoints**
 
@@ -111,3 +112,4 @@ You can also use the Datadog API to manage your account programmatically:
 [40]: /api/latest/microsoft-teams-integration/
 [41]: /api/latest/okta-integration/
 [42]: /api/latest/opsgenie-integration/
+[43]: /api/latest/oci-integration/
