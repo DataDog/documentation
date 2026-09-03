@@ -18,7 +18,11 @@ For more information, see the OpenTelemetry project documentation for the [memor
 
 ## Setup
 
-Add the processor to your Collector configuration:
+Add `memory_limiter` to the `processors` list for each pipeline in your configuration. Place it first in the list so that it applies backpressure before other processors allocate memory.
+
+### Hosts
+
+On a host, set a fixed limit. Total process memory runs about 50 MiB above `limit_mib`, so leave that much headroom below the memory available to the Collector.
 
 ```yaml
 processors:
@@ -27,9 +31,19 @@ processors:
     limit_mib: 1000
 ```
 
-Add `memory_limiter` to the `processors` list for each pipeline in your configuration. Place it first in the list so that it applies backpressure before other processors allocate memory.
+### Containers and Kubernetes
 
-For Kubernetes, set container resource limits in your Helm `values.yaml` file:
+Where the environment sets the memory limit, use percentages instead. The Collector then tracks the limit it is given, and the two values cannot drift apart.
+
+```yaml
+processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_percentage: 80
+    spike_limit_percentage: 20
+```
+
+Set container resource limits in your Helm `values.yaml` file:
 
 ```yaml
 resources:
@@ -37,6 +51,8 @@ resources:
     cpu: 512m
     memory: 1Gi
 ```
+
+Set `GOMEMLIMIT` to 80% of the hard limit so the Go runtime collects garbage before the limiter engages.
 
 ## Example logging output
 

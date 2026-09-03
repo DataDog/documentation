@@ -117,13 +117,15 @@ To populate these resource attributes on **traces**:
    ```yaml
    processors:
       resource_detection:
-         detectors: ["env", "container", "k8s"]
+         detectors: ["env", "docker"]
    service:
       pipelines:
          traces:
             processors: [resource_detection]
 
    ```
+
+   The `docker` detector queries the Docker daemon, so mount the Docker socket into the Collector. On Kubernetes, use the [`k8s_attributes` processor][5] instead.
 
 - You can add a container resource detector in your application code.  
    For example, using Go:

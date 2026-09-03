@@ -34,7 +34,7 @@ Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector Cont
 - **Resource detection processor**: Detects host and cloud resource attributes, which Datadog uses for hostname resolution and tagging.
 - **Datadog extension**: Reports Collector metadata for host enrichment. It does not export telemetry data.
 
-This is the recommended setup for a Collector you manage yourself. If you want Datadog to manage the Collector for you, use the [Datadog Distribution of OTel Collector (DDOT)][12] instead.
+This is the recommended setup for a Collector you manage yourself. If you want a Collector distribution that Datadog maintains and supports, use the [Datadog Distribution of OTel Collector (DDOT)][12] instead.
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running any OpenTelemetry Collector with OTLP HTTP exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
 

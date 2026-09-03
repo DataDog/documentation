@@ -57,13 +57,9 @@ receivers:
       network:
       processes:
 
-service:
-  pipelines:
-    metrics:
-      receivers: [host_metrics]
-      processors: [resource_detection]
-      exporters: [otlp_http]
 ```
+
+Add `host_metrics` to the `receivers` list of the metrics pipeline in your configuration. Keep the processors already in that pipeline: the Datadog OTLP metrics intake accepts delta metrics only, and the host metrics receiver produces cumulative sums, so the pipeline needs `cumulativetodelta`. The [recommended Collector setup][5] includes it.
 
 {{% /tab %}}
 
