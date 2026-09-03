@@ -10,6 +10,9 @@ further_reading:
 - link: "/incident_response/work_management/customization"
   tag: "Documentation"
   text: "Work Management Customization"
+- link: "https://www.datadoghq.com/blog/work-management/"
+  tag: "Blog"
+  text: "Centralize human and agentic work with Datadog Work Management"
 
 ---
 
