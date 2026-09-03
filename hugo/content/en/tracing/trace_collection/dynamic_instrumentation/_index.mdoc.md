@@ -14,12 +14,16 @@ aliases:
   - /tracing/dynamic_instrumentation/enabling
   - /dynamic_instrumentation/enabling/java/
   - /tracing/dynamic_instrumentation/enabling/java
+  - /tracing/trace_collection/dynamic_instrumentation/enabling/java/
   - /dynamic_instrumentation/enabling/python/
   - /tracing/dynamic_instrumentation/enabling/python
+  - /tracing/trace_collection/dynamic_instrumentation/enabling/python/
   - /dynamic_instrumentation/enabling/dotnet/
   - /tracing/dynamic_instrumentation/enabling/dotnet
+  - /tracing/trace_collection/dynamic_instrumentation/enabling/dotnet/
   - /dynamic_instrumentation/enabling/php/
   - /tracing/dynamic_instrumentation/enabling/php
+  - /tracing/trace_collection/dynamic_instrumentation/enabling/php/
 further_reading:
   - link: "/dynamic_instrumentation/expression-language/"
     tag: "Documentation"
@@ -47,17 +51,59 @@ Dynamic Instrumentation lets you add metrics, spans, and span tags to running pr
 
 If you are interested in trying out the latest user experience improvements for Dynamic Instrumentation, consider opting into the [autocomplete and search Preview][17].
 
-## Getting started
+**Note**: Dynamic Instrumentation is not compatible with Azure App Services or serverless environments.
 
-### Prerequisites
+## Requirements
 
-Dynamic Instrumentation supports Java, Python, .NET, and PHP. It requires the following:
+<!-- Java -->
+{% if equals($prog_lang, "java") %}
 
-- [Datadog Agent][1] 7.49.0 or higher is installed alongside your service.
-- [Remote Configuration][2] is enabled in that Agent.
-- A supported Datadog SDK is installed and up to date. See the [Enable Dynamic Instrumentation](#enable-dynamic-instrumentation) section for version requirements.
-- [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
-- Recommended: [Source Code Integration][7] is set up for your service.
+- **[Datadog Java SDK][18]** (JDK 8 or higher)
+  - Minimum for [in-app enablement](#enable-in-app): 1.48.0
+  - Minimum for [manual enablement](#enable-with-environment-variables): 1.34.0
+  - Does not support Kotlin coroutines
+- **[Datadog Agent][1]**, version 7.49.0 or higher
+
+{% /if %}
+<!-- end Java -->
+
+<!-- Python -->
+{% if equals($prog_lang, "python") %}
+
+- **[Datadog Python SDK (`ddtrace`)][19]**
+  - Minimum for [in-app enablement](#enable-in-app): 3.10.0
+  - Minimum for [manual enablement](#enable-with-environment-variables): 2.2.0
+- **[Datadog Agent][1]**, version 7.49.0 or higher
+
+{% /if %}
+<!-- end Python -->
+
+<!-- .NET -->
+{% if equals($prog_lang, "dot_net") %}
+
+- Datadog .NET SDK ([.NET Framework][22] or [.NET Core][20])
+  - Minimum for [in-app enablement](#enable-in-app): 3.29.0
+  - Minimum for [manual enablement](#enable-with-environment-variables): 2.54.0
+- **[Datadog Agent][1]**, version 7.49.0 or higher
+
+{% /if %}
+<!-- end .NET -->
+
+<!-- PHP -->
+{% if equals($prog_lang, "php") %}
+
+- **[Datadog PHP SDK (`dd-trace-php`)][21]**, minimum version 1.5.0
+  - File and line instrumentations are not supported
+- **[Datadog Agent][1]**, version 7.49.0 or higher
+
+{% /if %}
+<!-- end PHP -->
+
+### Datadog configuration
+
+- **[Unified Service Tagging][6]** configured with `service`, `env`, and `version` tags on your deployment
+- **[Remote Configuration][2]** enabled in the Agent
+- (Recommended) **[Source Code Integration][7]**
 
 ### Permissions
 
@@ -70,122 +116,100 @@ The following permissions are required to use Dynamic Instrumentation:
 
 For more information about roles and how to assign roles to users, see [Role Based Access Control][8].
 
-### Enable Dynamic Instrumentation
+## Enable {% #enable-dynamic-instrumentation %}
 
 {% alert %}
 Dynamic Instrumentation and [Live Debugger](/tracing/live_debugger/) share the same enablement state per service and environment: enabling or disabling one also enables or disables the other. The two products have separate permissions and Settings pages.
 {% /alert %}
 
-#### (Recommended) In-app enablement {% #in-app-enablement %}
+{% if includes($prog_lang, ["java", "python", "dot_net"]) %}
 
-Manage Dynamic Instrumentation for each service and environment from the [Dynamic Instrumentation Settings page][16]. In-app enablement is supported on the following minimum SDK versions:
+You can enable Dynamic Instrumentation in-app or with environment variables.
 
-- [Java][18] ≥ 1.48.0
-- [Python][19] ≥ 3.10.0
-- [.NET][20] ≥ 3.29.0
+### Enable in-app (recommended) {% #enable-in-app %}
 
-If your SDK meets the minimum version and all prerequisites are met, Datadog automatically attempts to enable the service the first time you create an instrumentation for it.
+Enable Dynamic Instrumentation in-app in one of two ways:
 
-#### Manual enablement
+- On the [Dynamic Instrumentation Settings page][16], enable the service and environment.
+- Create an instrumentation. Dynamic Instrumentation is enabled automatically on the selected service and environment.
 
-Manual enablement is required for PHP and for older SDK versions of Java, Python, and .NET. You can also choose manual enablement on supported SDK versions if you prefer to manage enablement through environment variables (for example, to enable Dynamic Instrumentation in bulk across many services).
+### Enable with environment variables {% #enable-with-environment-variables %}
 
-Select your runtime from the dropdown above for manual enablement instructions.
+Set the following environment variables if your SDK is below the [in-app minimum](#requirements), or if you want to manage enablement outside the Datadog UI.
+
+{% /if %}
 
 <!-- Java -->
 {% if equals($prog_lang, "java") %}
 
-##### Prerequisites
-
-Java applications also require:
-
-- JDK version 8 or higher.
-- Tracing library [`dd-java-agent.jar`][21] version 1.34.0 or higher. See the [installation instructions][22] for setup details.
-
-##### Installation
-
-1. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
-
+1. If you don't already have APM enabled, set `DD_APM_ENABLED=true` in your Agent configuration and listen on port `8126/TCP`.
 2. Download `dd-java-agent.jar`:
 
-{% tabs %}
+    {% tabs %}
 
-{% tab label="Wget" %}
+    {% tab label="Wget" %}
 
-```shell
-wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
-```
+    ```shell
+    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+    ```
 
-{% /tab %}
+    {% /tab %}
 
-{% tab label="cURL" %}
+    {% tab label="cURL" %}
 
-```shell
-curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
-```
+    ```shell
+    curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+    ```
 
-{% /tab %}
+    {% /tab %}
 
-{% tab label="Dockerfile" %}
+    {% tab label="Dockerfile" %}
 
-```dockerfile
-ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
-```
+    ```dockerfile
+    ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+    ```
 
-{% /tab %}
+    {% /tab %}
 
-{% /tabs %}
+    {% /tabs %}
 
-3. Run your service with Dynamic Instrumentation enabled by setting the `-Ddd.dynamic.instrumentation.enabled` flag or `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
+3. Start your service with Dynamic Instrumentation enabled. The `-javaagent` argument must come before `-jar`:
 
-{% tabs %}
+    {% tabs %}
 
-{% tab label="Command arguments" %}
+    {% tab label="Command arguments" %}
 
-Example service startup command:
+    ```shell
+    java \
+        -javaagent:dd-java-agent.jar \
+        -Ddd.service=<YOUR_SERVICE> \
+        -Ddd.env=<YOUR_ENVIRONMENT> \
+        -Ddd.version=<YOUR_VERSION> \
+        -Ddd.dynamic.instrumentation.enabled=true \
+        -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+    ```
 
-```shell
-java \
-    -javaagent:dd-java-agent.jar \
-    -Ddd.service=<YOUR_SERVICE> \
-    -Ddd.env=<YOUR_ENVIRONMENT> \
-    -Ddd.version=<YOUR_VERSION> \
-    -Ddd.dynamic.instrumentation.enabled=true \
-    -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
-```
+    {% /tab %}
 
-{% /tab %}
+    {% tab label="Environment variables" %}
 
-{% tab label="Environment variables" %}
+    ```shell
+    export DD_SERVICE=<YOUR_SERVICE>
+    export DD_ENV=<YOUR_ENV>
+    export DD_VERSION=<YOUR_VERSION>
+    export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+    java \
+        -javaagent:dd-java-agent.jar \
+        -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+    ```
 
-```shell
-export DD_SERVICE=<YOUR_SERVICE>
-export DD_ENV=<YOUR_ENV>
-export DD_VERSION=<YOUR_VERSION>
-export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
-java \
-    -javaagent:dd-java-agent.jar \
-    -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
-```
+    {% /tab %}
 
-{% /tab %}
+    {% /tabs %}
 
-{% /tabs %}
+    **Note**: On JDK 18 and earlier, classes compiled with the `-parameters` flag (default in Spring 6+, Spring Boot 3+, and Scala) may fail to instrument with the error `Method Parameters detected`.
 
-   **Note**: The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][23]:
-
-   ```shell
-   # Good:
-   java -javaagent:dd-java-agent.jar ... -jar my-service.jar -more-flags
-   # Bad:
-   java -jar my-service.jar -javaagent:dd-java-agent.jar ...
-   ```
-
-4. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [Dynamic Instrumentation page][12].
-
-##### Limitations
-
-- On JDK 18 and below, classes compiled with the `-parameters` flag may fail to instrument with the error message "Method Parameters detected". Spring 6+, Spring Boot 3+, and Scala use this flag by default.
+4. After you start your service with Dynamic Instrumentation enabled, you can start using it on the [Dynamic Instrumentation page][12].
 
 {% /if %}
 <!-- end Java -->
@@ -193,55 +217,44 @@ java \
 <!-- Python -->
 {% if equals($prog_lang, "python") %}
 
-##### Prerequisites
+1. If you don't already have APM enabled, set `DD_APM_ENABLED=true` in your Agent configuration and listen on port `8126/TCP`.
+2. Install `ddtrace`:
 
-Python applications also require:
+    ```shell
+    pip install ddtrace
+    ```
 
-- Tracing library [`ddtrace`][24] version 2.2.0 or higher. See the [installation instructions][25] for setup details.
+3. Enable Dynamic Instrumentation with environment variables or in code:
 
-##### Installation
+    {% tabs %}
 
-1. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
+    {% tab label="Environment variables" %}
 
-2. Install `ddtrace`, which provides both tracing and Dynamic Instrumentation:
+    ```shell
+    export DD_SERVICE=<YOUR_SERVICE>
+    export DD_ENV=<YOUR_ENV>
+    export DD_VERSION=<YOUR_VERSION>
+    export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+    ddtrace-run python -m myapp.py
+    ```
 
-   ```shell
-   pip install ddtrace
-   ```
+    {% /tab %}
 
-3. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
+    {% tab label="In code" %}
 
-{% tabs %}
+    ```python
+    import os
 
-{% tab label="Environment variables" %}
+    os.environ["DD_DYNAMIC_INSTRUMENTATION_ENABLED"] = "true"
 
-Invoke your service:
+    import ddtrace.auto  # this must be imported as soon as possible
+    ```
 
-```shell
-export DD_SERVICE=<YOUR_SERVICE>
-export DD_ENV=<YOUR_ENV>
-export DD_VERSION=<YOUR_VERSION>
-export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
-ddtrace-run python -m myapp.py
-```
+    {% /tab %}
 
-{% /tab %}
+    {% /tabs %}
 
-{% tab label="In code" %}
-
-```python
-import os
-
-os.environ["DD_DYNAMIC_INSTRUMENTATION_ENABLED"] = "true"
-
-import ddtrace.auto  # IMPORTANT: this must be imported as soon as possible.
-```
-
-{% /tab %}
-
-{% /tabs %}
-
-4. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [Dynamic Instrumentation page][12].
+4. After you start your service with Dynamic Instrumentation enabled, you can start using it on the [Dynamic Instrumentation page][12].
 
 {% /if %}
 <!-- end Python -->
@@ -249,17 +262,17 @@ import ddtrace.auto  # IMPORTANT: this must be imported as soon as possible.
 <!-- .NET -->
 {% if equals($prog_lang, "dot_net") %}
 
-##### Prerequisites
+1. If you don't already have APM enabled, set `DD_APM_ENABLED=true` in your Agent configuration and listen on port `8126/TCP`.
+2. Start your service with the following environment variables set:
 
-.NET applications also require:
+    ```shell
+    DD_SERVICE=<YOUR_SERVICE>
+    DD_ENV=<YOUR_ENV>
+    DD_VERSION=<YOUR_VERSION>
+    DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+    ```
 
-- .NET SDK version 2.54.0 or higher. See the installation instructions for [.NET Framework][26] or [.NET Core][27].
-
-##### Installation
-
-1. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
-2. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
-3. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [Dynamic Instrumentation page][12].
+3. After you start your service with Dynamic Instrumentation enabled, you can start using it on the [Dynamic Instrumentation page][12].
 
 {% /if %}
 <!-- end .NET -->
@@ -267,56 +280,34 @@ import ddtrace.auto  # IMPORTANT: this must be imported as soon as possible.
 <!-- PHP -->
 {% if equals($prog_lang, "php") %}
 
-##### Prerequisites
+1. If you don't already have APM enabled, set `DD_APM_ENABLED=true` in your Agent configuration and listen on port `8126/TCP`.
+2. Start your service with the following environment variables set:
 
-PHP applications also require:
+    ```shell
+    DD_SERVICE=<YOUR_SERVICE>
+    DD_ENV=<YOUR_ENV>
+    DD_VERSION=<YOUR_VERSION>
+    DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+    ```
 
-- Tracing library [`dd-trace-php`][28] version 1.5.0 or higher. See the [installation instructions][29] for setup details.
-
-##### Installation
-
-1. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
-2. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
-3. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [Dynamic Instrumentation page][12].
-
-##### Limitations
-
-###### Supported features
-
-- Metrics, Spans, and Span Tags
-- [PII redaction][30] based on variable/property names and classes
-- [Source code integration][31]
-
-###### Unsupported features
-
-- Instrumentation attached to a specific file/line
+3. After you start your service with Dynamic Instrumentation enabled, you can start using it on the [Dynamic Instrumentation page][12].
 
 {% /if %}
 <!-- end PHP -->
 
-{% if includes($prog_lang, ["java", "python", "dot_net", "php"]) %}
-
-##### Configuration
+## Configure
 
 Configure Dynamic Instrumentation using the following environment variables:
 
 | Environment variable | Type | Description |
 | -------------------- | ---- | ----------- |
-| `DD_DYNAMIC_INSTRUMENTATION_ENABLED` | Boolean | Set to `true` to enable Dynamic Instrumentation. For Java, this is an alternate for the `-Ddd.dynamic.instrumentation.enabled` argument. |
+| `DD_DYNAMIC_INSTRUMENTATION_ENABLED` | Boolean | Set to `true` to enable Dynamic Instrumentation. |
 | `DD_SERVICE` | String | The [service][6] name, for example, `web-backend`. |
 | `DD_ENV` | String | The [environment][6] name, for example, `production`. |
 | `DD_VERSION` | String | The [version][6] of your service. |
 | `DD_TAGS` | String | Tags to apply to produced data. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`. |
 
-{% /if %}
-
-### Limitations
-
-- Dynamic Instrumentation is not compatible with Azure App Services or serverless environments.
-- Not all instrumentation types are supported in every language. Select your language from the dropdown above for supported features and limitations.
-- The Java SDK does not support Kotlin coroutines.
-
-## Explore Dynamic Instrumentation
+## Explore {% #explore-dynamic-instrumentation %}
 
 Dynamic Instrumentation can help you understand what your application is doing at runtime. By adding an instrumentation at a specific code location, you can capture additional telemetry from your application without the need to change code or redeploy it.
 
@@ -403,14 +394,5 @@ You can use a *dynamic span tag* as an alternative to [using Custom Instrumentat
 [18]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [19]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python/
 [20]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
-[21]: https://github.com/DataDog/dd-trace-java
-[22]: /tracing/trace_collection/dd_libraries/java/
-[23]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[24]: https://github.com/DataDog/dd-trace-py
-[25]: /tracing/trace_collection/dd_libraries/python/
-[26]: /tracing/trace_collection/dd_libraries/dotnet-framework/
-[27]: /tracing/trace_collection/dd_libraries/dotnet-core/
-[28]: https://github.com/DataDog/dd-trace-php
-[29]: /tracing/trace_collection/dd_libraries/php/
-[30]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
-[31]: /integrations/guide/source-code-integration/?tab=php
+[21]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php/
+[22]: /tracing/trace_collection/dd_libraries/dotnet-framework/
