@@ -21,9 +21,18 @@ further_reading:
 - link: "https://docs.datadoghq.com/agent/configuration/"
   tag: "Documentation"
   text: "Agent Configuration"
+- link: "https://docs.datadoghq.com/serverless/aws_lambda/"
+  tag: "Documentation"
+  text: "Serverless Monitoring for AWS Lambda"
+- link: "https://docs.datadoghq.com/serverless/aws_lambda/configuration/"
+  tag: "Documentation"
+  text: "Configure Serverless Monitoring for AWS Lambda"
 - link: "https://docs.datadoghq.com/serverless/aws_lambda/instrumentation/"
   tag: "Documentation"
   text: "Instrumenting AWS Lambda"
+- link: "https://docs.datadoghq.com/serverless/aws_lambda/troubleshooting/"
+  tag: "Documentation"
+  text: "Troubleshoot AWS Lambda Monitoring"
 ---
 
 ## Overview
@@ -124,7 +133,7 @@ Instrumentation is based on an **instrumentation rule**: an AWS account paired w
 1. You select the resources to cover, or opt in to all eligible resources.
 1. Datadog resolves your selection into a set of covered resources and records it.
 1. Datadog instruments each covered resource: on EC2, by installing the Agent through AWS Systems Manager; on Lambda, by adding the Datadog layers and environment variables to the function.
-1. Datadog keeps the covered resources instrumented, reinstalling instrumentation that goes missing and retrying anything that failed.
+1. Datadog keeps the covered resources instrumented, reinstalling instrumentation that goes missing and retrying anything that failed. Resources created later aren't added until you update the rule.
 
 You approve one CloudFormation stack, one time, during initial setup. After that, instrumentation runs automatically from Datadog, with no new CloudFormation template to launch each time.
 
@@ -174,12 +183,14 @@ Your existing layers, environment variables, and handler are preserved. Datadog 
 
 Datadog does not change your function code, memory size, timeout, VPC configuration, or any other setting.
 
+Datadog preserves environment variables you set yourself, so you can tune what the extension collects with the standard Datadog environment variables. For the full list, see [Configure Serverless Monitoring for AWS Lambda][14]. For what instrumentation collects and the Lambda monitoring features it enables, see [Serverless Monitoring for AWS Lambda][13].
+
 ## Verify the installation
 
 After instrumentation completes:
 
 - **EC2**: The newly installed Agents appear in the [Infrastructure List][3] and on the host map. Fleet Automation lists the same Agents in the Fleet View.
-- **Lambda**: The instrumented functions appear on the [Serverless][11] page, and their traces appear in [APM][12].
+- **Lambda**: The instrumented functions appear on the [Serverless][11] page, and their traces appear in [APM][12]. If a function is instrumented but its telemetry doesn't arrive, see [Troubleshoot AWS Lambda Monitoring][15].
 
 <!-- TODO(DOCS-14545): add expected time-to-data once confirmed. -->
 
@@ -216,7 +227,7 @@ If instrumentation can't complete because of missing permissions, Datadog shows 
 
 Datadog skips any function that carries Datadog layers, a Datadog handler, or Datadog environment variables that Datadog did not apply. This prevents layer and configuration conflicts. To manage the function from the AWS integration instead, remove your existing Datadog instrumentation from it, then wait for the next reconciliation.
 
-Functions managed by [remote instrumentation][9] are also skipped, and reported separately from functions you instrumented yourself. A function can be managed by only one Datadog instrumentation product.
+Functions managed by [remote instrumentation][9] are also skipped, and Datadog tells you which of the two applies. A function can be managed by only one Datadog instrumentation product.
 
 ### A Lambda function exceeds the layer limit
 
@@ -246,3 +257,6 @@ Datadog marks a function ineligible when it doesn't meet the [Lambda prerequisit
 [10]: https://docs.datadoghq.com/integrations/amazon_web_services/#resource-collection
 [11]: https://app.datadoghq.com/functions
 [12]: https://app.datadoghq.com/apm/traces
+[13]: https://docs.datadoghq.com/serverless/aws_lambda/
+[14]: https://docs.datadoghq.com/serverless/aws_lambda/configuration/
+[15]: https://docs.datadoghq.com/serverless/aws_lambda/troubleshooting/

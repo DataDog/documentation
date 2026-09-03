@@ -33,7 +33,7 @@ The CloudFormation template you launch creates the following resources one time,
 | IAM role | auto-named | Lets EventBridge send events to the `datadog-agent-resource-update-intake-destination` API destination |
 | IAM role | `datadog-eventbridge-cross-region-role` | Lets other regions forward events to your primary region |
 
-The stack also attaches the IAM permissions for the workloads you selected to your AWS integration role. A Lambda-only selection receives no EC2 permissions, and no IAM permissions boundary.
+The stack also attaches the IAM permissions for the workloads you selected to your AWS integration role. A Lambda-only selection receives no EC2 permissions.
 
 ### Created as needed, for EC2 instances
 
@@ -67,14 +67,14 @@ Datadog does not reboot or restart your instances. The only service Datadog touc
 
 ### On AWS Lambda
 
-Lambda instrumentation runs entirely from Datadog. Datadog does not deploy a function into your account and does not run `datadog-ci` there.
+Lambda instrumentation runs entirely from Datadog. Datadog does not deploy anything into your account to instrument your functions.
 
 1. Datadog reads the function's current configuration and tags, and checks that it meets the [Lambda prerequisites][3].
-2. Datadog checks whether the function is already instrumented. A function carrying Datadog layers, a Datadog handler, or Datadog environment variables that Datadog did not apply is skipped, as is a function managed by [remote instrumentation][4]. The two cases are reported separately.
+2. Datadog checks whether the function is already instrumented. A function carrying Datadog layers, a Datadog handler, or Datadog environment variables that Datadog did not apply is skipped, as is a function managed by [remote instrumentation][4]. Datadog reports which of the two applies.
 3. Datadog resolves the Datadog layer versions for the function's runtime, architecture, region, and AWS partition. Layer versions come from a pinned set that advances with Datadog's layer releases, so an installation is reproducible rather than tracking whatever is newest at that moment.
-4. Datadog computes the complete desired configuration and records a checkpoint of exactly what it changes, before changing anything.
-5. Datadog reconciles the intake authentication mapping for the function's execution role. See [How Lambda telemetry is authenticated](#how-lambda-telemetry-is-authenticated).
-6. Datadog calls `lambda:UpdateFunctionConfiguration` once, submitting the complete layer list and environment map. The checkpoint is marked applied only after AWS reports success.
+4. Datadog computes the complete desired configuration and records exactly what it is about to change, before changing anything.
+5. Datadog authorizes the function's execution role to send telemetry to your Datadog organization. See [How Lambda telemetry is authenticated](#how-lambda-telemetry-is-authenticated).
+6. Datadog calls `lambda:UpdateFunctionConfiguration` once, submitting the complete layer list and environment map. Datadog marks the change as applied only after AWS reports success.
 
 A Lambda update is a replace-style operation: the submitted layer list and environment map become the new configuration. Datadog therefore computes the full desired state rather than appending to it, preserving your existing layers and environment variables. The update carries the function's revision ID, so a change made in your account between Datadog's read and write causes the update to fail rather than overwrite it.
 
@@ -126,7 +126,7 @@ The API key is stored in your own Secrets Manager, encrypted at rest. Only the s
 
 Lambda instrumentation stores no Datadog credential in your account. The Datadog extension authenticates with the function's AWS execution identity through workload identity federation, using the `DD_ORG_UUID` and `DD_SITE` values Datadog sets on the function. No Datadog API key, secret ARN, or KMS-encrypted key is written into the function's configuration.
 
-For that authentication to succeed, Datadog maintains a mapping between the execution role's STS session pattern and your organization's managed rotation key. Datadog reconciles this mapping before submitting a function update. Mapping creation is idempotent, and Datadog accepts only an exact existing mapping rather than an overlapping one.
+For that authentication to succeed, Datadog authorizes the function's execution role to send telemetry to your Datadog organization. Datadog sets up this authorization before it updates a function, and matches the execution role exactly rather than by a broader pattern.
 
 Because a single execution role is often shared across functions, Datadog creates these mappings but does not remove them on uninstall. Removing a mapping for a shared role could break another function that still depends on it.
 
@@ -140,7 +140,7 @@ Because a single execution role is often shared across functions, Datadog create
 - Datadog never removes instrumentation it did not install.
 - Datadog tracks which resources it instrumented, so it cleans up only its own work.
 - On EC2, when some regions cannot be listed, Datadog skips cleanup for that pass rather than risk uninstalling in bulk.
-- On Lambda, Datadog restores a function from the checkpoint it recorded, so an uninstall reverses exactly the change Datadog made.
+- On Lambda, Datadog restores a function from the configuration it recorded before instrumenting it, so an uninstall reverses exactly the change Datadog made.
 - A failure is scoped to the individual resource. One throttled or invalid resource does not cause Datadog to reprocess resources that already succeeded.
 
 ## How Datadog maintains instrumentation
@@ -152,7 +152,7 @@ Datadog continuously maintains the state you define on the covered resources:
 - A full reconciliation runs hourly per AWS account. Reconciliation restores instrumentation if it goes missing, retries anything that failed, and cleans up resources that no longer exist.
 - Change events forwarded from your account let Datadog react to covered resources within minutes, instead of waiting for the hourly pass. For EC2, these come from the CloudFormation stack's EventBridge rule. For Lambda, the `datadog-agent-resource-update-rule-lambda` rule forwards function create, configuration update, tag, and untag events.
 - On EC2, already-installed instances are re-verified about once per day rather than every hour, to avoid unnecessary activity.
-- On Lambda, the hourly scan checks each covered function against the layer versions Datadog deploys, and does per-function work only for functions that need a change. A fleet already on current layer versions produces no per-function activity, which keeps Datadog well clear of Lambda control-plane throttling.
+- On Lambda, the hourly scan checks each covered function against the layer versions Datadog deploys, and does per-function work only for functions that need a change. A fleet already on current layer versions produces no per-function activity, so Datadog makes no unnecessary calls to the Lambda API in your account.
 
 ### How Lambda functions pick up new layer versions
 
@@ -160,11 +160,11 @@ Datadog resolves layer versions from a pinned set on every reconciliation, rathe
 
 A Lambda configuration update that is still in progress is left alone and retried shortly afterward, so Datadog does not race a change already being applied.
 
-<!-- TODO(DOCS-14545): confirm whether Lambda rules resolve dynamically on each reconciliation (new matching functions picked up automatically) or freeze their matched set at save time the way this page describes for EC2. The backend supports both; the EC2 text below reflects the EC2 flow. -->
+### Rule coverage is fixed at save time
 
-### Rule coverage on EC2 is fixed at save time
+A rule covers the set of resources it resolved to when you saved it, and Datadog does not instrument anything outside that set. This applies to both workloads: EC2 instances launched later, and Lambda functions created later, are not picked up automatically. To cover them, update the rule, which re-resolves your query against your current fleet.
 
-An EC2 rule covers the list of instances it resolved to when you saved it, and Datadog does not instrument anything outside that list. Instances launched later are not picked up automatically. To cover them, update the rule, which re-resolves your query against your current fleet.
+Change events are what keeps the covered set correct, not what expands it. A forwarded event causes Datadog to re-examine a resource the rule already covers.
 
 ### What happens when you edit a rule
 
@@ -187,7 +187,7 @@ When someone removes instrumentation from a covered resource by hand, the next r
 To uninstall, remove resources from a rule, edit the rule's query, or delete the rule.
 
 - **EC2**: Uninstalling removes the Datadog Agent, the `/etc/datadog-agent` and `/opt/datadog-agent` directories on Linux (or performs an MSI uninstall on Windows), and any IAM role or instance profile Datadog created for that instance.
-- **Lambda**: Uninstalling removes the Datadog layers Datadog added and restores the environment variables and handler recorded in the checkpoint. Datadog validates the checkpoint against the function's current configuration first, so it does not remove a layer or variable it did not add. The intake authentication mapping for the execution role is left in place, because the role may be shared with other functions.
+- **Lambda**: Uninstalling removes the Datadog layers Datadog added and restores the environment variables and handler the function had beforehand. Datadog checks that record against the function's current configuration first, so it does not remove a layer or variable it did not add. The telemetry authorization for the execution role is left in place, because the role may be shared with other functions.
 
 ## Further reading
 
