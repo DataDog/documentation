@@ -353,8 +353,8 @@ To match your branding, you have the option to map your status page URL to a cus
 - You can revert to the default Datadog domain at any time.
 - DNS changes must be made by someone with access to your domain registrar.
 
-## Manage Status Page with Terraform
-You can use Terraform to create or manage your Status Pages. For details on the resources available, see Datadog's [Terraform registry][4].  
+## Manage status pages with Terraform
+You can use Terraform to create or manage your status pages. For details on the resources available, see Datadog's [Terraform registry][4].  
 
 
 ## Further reading
