@@ -110,10 +110,7 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 
 * Datadog charges based on the number of **LLM spans** ingested by the Agent Observability service. An LLM span represents a single request to an LLM provider, such as OpenAI or Anthropic.
 * One agent workflow can make several LLM requests, and each request produces its own LLM span. Datadog bills only on LLM spans, not on the surrounding workflow, tool, and retrieval spans in the same trace.
-* [Experiments][13] are billed the same way, on the number of LLM spans ingested.
-* Indexed LLM spans are included in the base price.
-* On-demand plans include an allotment of LLM spans each month at no cost, and are billed in blocks of LLM spans beyond it. Committed and enterprise pricing is negotiated separately. For rates, see the [Agent Observability pricing page][15].
-* For usage estimation and other billing questions, see [Agent Observability Billing][14].
+* For rates, see the [Agent Observability pricing page][14]. For usage estimation and other billing questions, see [Agent Observability Billing][13].
 
 ## Troubleshooting
 
@@ -133,6 +130,5 @@ Contact [Sales][8] or your [Customer Success][9] Manager to discuss hourly prici
 [10]: /real_user_monitoring/rum_without_limits/
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products
 [12]: /account_management/billing/metric_name_pricing/
-[13]: /llm_observability/improve/experiments/
-[14]: /account_management/billing/llm_observability/
-[15]: https://www.datadoghq.com/pricing/?product=llm-observability#products
+[13]: /account_management/billing/llm_observability/
+[14]: https://www.datadoghq.com/pricing/?product=llm-observability#products
