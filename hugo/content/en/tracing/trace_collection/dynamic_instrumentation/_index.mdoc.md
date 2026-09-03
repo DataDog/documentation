@@ -350,7 +350,7 @@ A dynamic metric emits a metric when it executes. To create a dynamic metric:
 1. Complete the [generic instrumentation setup](#creating-an-instrumentation) (choose service, environment, and location).
 1. Specify a name for the metric, which is prefixed with `dynamic.instrumentation.metric.probe.`.
 1. Select a metric type (count, gauge, or histogram).
-1. Choose the value of the metric using the [Dynamic Instrumentation expression language][15]. You can use any numeric value you'd like from the execution context, such as a method parameter, local variable, a class field, or an expression that yields a numeric value. For count metrics this is optional, and if you omit it, every invocation increments the count by one.
+1. Choose the value of the metric using the [Dynamic Instrumentation expression language][15]. You can use any numeric value from the execution context, such as a method parameter, local variable, a class field, or an expression that yields a numeric value. For count metrics this is optional, and if you omit it, every invocation increments the count by one.
 
 Metric instrumentations are automatically enabled on all service instances that match the configured environment and version. Metric instrumentations are not rate limited and execute every time the method{% if includes($prog_lang, ["java", "python", "dot_net"]) %} or line{% /if %} is invoked.
 
