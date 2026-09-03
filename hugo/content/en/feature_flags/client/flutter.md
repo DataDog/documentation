@@ -316,6 +316,7 @@ DatadogFlagsConfiguration(
 For lower-level transport control, compose an assignment-only HTTP client:
 
 {{< code-block lang="dart" >}}
+import 'package:datadog_flags/datadog_flags.dart';
 import 'package:http/http.dart' as http;
 
 final assignmentClient = withAssignmentRequestRetry(

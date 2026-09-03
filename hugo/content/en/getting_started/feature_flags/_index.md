@@ -86,7 +86,7 @@ You can set up Feature Flags automatically with the <a href="/feature_flags/feat
 
 Choose the SDK that matches where the flag is evaluated and initialize the Datadog Feature Flags provider.
 
-<div class="alert alert-warning">Client SDKs do not add a flag assignment request timeout or retry by default, so the underlying platform transport remains authoritative. Configure a bounded timeout of at most 1,500 milliseconds for predictable initialization, and opt in to retries only when appropriate. The browser example below applies a 1,500-millisecond timeout with no retries. The supported SDK guides describe their timeout options and composable transport APIs.</div>
+<div class="alert alert-warning">Client SDKs do not add a flag assignment request timeout or retry by default, so the underlying platform transport remains authoritative. Configure a timeout of at most 1,500 milliseconds when initialization must finish within a known period. Add retries to tolerate transient network errors, timeouts, HTTP 408, or HTTP 5xx responses. See the <a href="/feature_flags/client/">client SDK guides</a> for platform-specific timeout, retry, and transport APIs.</div>
 
 {{< tabs >}}
 {{% tab "JavaScript browser" %}}
