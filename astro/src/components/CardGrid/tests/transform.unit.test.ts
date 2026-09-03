@@ -16,12 +16,6 @@ const markdocConfig = config as unknown as Config;
 
 /**
  * Narrow a transform-output node to a Tag.
- *
- * `Markdoc.transform` is typed as returning `RenderableTreeNode`, which is
- * `Tag | Scalar` — and Scalar covers null, primitives and arrays, none of
- * which have `children` or `attributes`. `Tag.isTag` is a real type guard, so
- * routing every access through it gives the assertions below actual types
- * instead of `any`.
  */
 function asTag(node: RenderableTreeNode | undefined): Tag {
   if (!Markdoc.Tag.isTag(node)) {
@@ -39,7 +33,9 @@ function asTag(node: RenderableTreeNode | undefined): Tag {
  * a tag is identified by its render path rather than by a tag name.
  */
 function transformGrid(source: string): Tag {
-  const rendered = asTag(Markdoc.transform(Markdoc.parse(source), markdocConfig));
+  const rendered = asTag(
+    Markdoc.transform(Markdoc.parse(source), markdocConfig),
+  );
   const grid = rendered.children.find((child) => {
     if (!Markdoc.Tag.isTag(child)) return false;
     // Astro's `component()` render value is `{ type: "local", path }`, so the
@@ -150,7 +146,9 @@ describe("card-grid transform", () => {
     );
     const [alphaId] = grid.attributes.tooltipCardIds;
 
-    expect(grid.attributes.tooltipLabelsByCardId).toEqual({ [alphaId]: "Alpha" });
+    expect(grid.attributes.tooltipLabelsByCardId).toEqual({
+      [alphaId]: "Alpha",
+    });
   });
 
   it("leaves tooltipCardIds empty when no card has a tooltip", () => {

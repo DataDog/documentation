@@ -21,6 +21,22 @@ describe("renderMdocWithTwins", () => {
     expect(out).toContain("- [B](/b/)");
   });
 
+  it("drops a card's image, alt, tooltip, and width from the link list", () => {
+    const source = [
+      "{% card-grid %}",
+      '{% image-card href="/a/" title="Alpha" src="logos/a.svg"',
+      'alt="A logo" tooltip="Alpha tooltip" image_width=200 /%}',
+      "{% /card-grid %}",
+    ].join(" ");
+    const out = renderMdocWithTwins(source);
+
+    expect(out).toContain("- [Alpha](/a/)");
+    expect(out).not.toContain("logos/a.svg");
+    expect(out).not.toContain("A logo");
+    expect(out).not.toContain("Alpha tooltip");
+    expect(out).not.toContain("image_width");
+  });
+
   it("renders card-grid cards that Markdoc grouped into a paragraph", () => {
     // Two self-closing tags on one line become inline siblings inside a
     // paragraph rather than direct children of the grid. Reading only direct

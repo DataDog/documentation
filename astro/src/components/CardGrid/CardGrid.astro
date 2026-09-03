@@ -13,8 +13,7 @@ const { id, card_width, tooltipCardIds, tooltipLabelsByCardId } = Astro.props;
 const gridStyle = `--card-grid-card-min-width: ${card_width}px`;
 
 // Hydrate only when a card actually needs a tooltip. Most grids have none, and
-// this keeps the tooltip code out of their client bundle entirely — the island
-// is absent from the HTML, not just empty.
+// this keeps the tooltip code out of their client bundle.
 const needsTooltips = tooltipCardIds.length > 0;
 ---
 

@@ -73,19 +73,4 @@ describe("cardGridNode", () => {
 
     expect(md).toContain("Alpha \\[beta\\]");
   });
-
-  it("drops images, alt text, widths, and tooltips", () => {
-    const md = renderCards([
-      {
-        href: "/a/",
-        title: "Alpha",
-        src: "logos/a.svg",
-        alt: "A logo",
-        tooltip: "Alpha tooltip",
-        image_width: 200,
-      },
-    ]);
-
-    expect(md).toBe("- [Alpha](/a/)\n");
-  });
 });

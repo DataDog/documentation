@@ -198,9 +198,9 @@ export default defineMarkdocConfig({
     "card-grid": {
       render: component("./src/components/CardGrid/CardGrid.astro"),
       ...schema.tags["card-grid"],
-      // Does the coordination Hugo does with `.Parent.Get`: merges the grid's
-      // `image_width` down into each card, assigns per-card ids, and collects
-      // which cards need a tooltip so the grid can decide whether to hydrate.
+      // Merges the grid's `image_width` down into each card, assigns per-card
+      // ids, and collects which cards need a tooltip so the grid can decide
+      // whether to hydrate.
       //
       // Same two constraints as the `tabs` transform above: do not eager-render
       // the slot (it drops Astro's hydration-script prefix), and re-emit each

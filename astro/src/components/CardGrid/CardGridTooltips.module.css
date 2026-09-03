@@ -13,6 +13,9 @@
   background: var(--color-tooltip-bg);
   color: var(--color-tooltip-text);
   font-size: var(--font-size-sm);
+  /* A step up from the inherited 400: small white text on black reads thin,
+     and the extra weight buys legibility at this size. */
+  font-weight: var(--font-weight-medium);
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;

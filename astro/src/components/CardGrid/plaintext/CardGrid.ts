@@ -15,11 +15,6 @@ export interface PlaintextCard {
   href: string;
   title?: string;
   subtitle?: string;
-  // Accepted and ignored, so callers can pass a card through unchanged.
-  src?: string;
-  alt?: string;
-  tooltip?: string;
-  image_width?: number;
 }
 
 /**
