@@ -14,9 +14,7 @@ title: Datadog Archives 목적지
 
 Datadog Archives 목적지를 사용하여 Datadog 리하이드레이션 가능 형식으로 [아카이브][1]를 위해 Amazon S3로 로그를 보냅니다. 그런 다음 [Archive Search][16]를 사용하여 이러한 로그를 쿼리할 수 있습니다. 전체 플랫폼 액세스를 위해 결과를 다시 인덱싱해야 할 때 Archive Search의 {{< ui >}}Search & Rehydration{{< /ui >}} 모드를 사용하세요.
 
-**참고**: 
-- Datadog Archives 목적지는 gzip을 사용하여 로그를 압축합니다.
-- JSON 또는 Parquet 형식으로 Amazon S3에 로그를 전송하려면 [Amazon S3][12] 목적지를 사용하세요.
+**참고**: [Amazon S3][12] 목적지를 사용하여 로그를 JSON 또는 Parquet 형식으로 Amazon S3에 전송하십시오.
 
 [Datadog Archives 목적지를 사용하여 로그를 Snowflake로 라우팅](#route-logs-to-snowflake-using-the-datadog-archives-destination)할 수도 있습니다.
 
@@ -122,6 +120,16 @@ Datadog Log Archives가 이미 구성되어 있다면 [파이프라인 목적지
     - Amazon S3 목적지 설정에 따라 로그 아카이브를 구성하는 방법은 이 페이지의 [예시 목적지 및 로그 아카이브 설정](#example-destination-and-log-archive-setup) 섹션을 참조하세요.
 
 ### 선택적 설정 {#optional-settings}
+
+#### 압축 {#compression}
+
+1. {{< ui >}}Compression - Algorithm{{< /ui >}} 드롭다운 메뉴에서 보관된 로그에 사용할 압축 알고리즘({{< ui >}}gzip{{< /ui >}} 또는 {{< ui >}}zstd{{< /ui >}})을 선택하십시오.
+    - **참고**: 압축 알고리즘을 지정하지 않으면 압축 수준이 `6`인 gzip이 사용됩니다.
+1. {{< ui >}}Compression - Level {{< /ui >}} 필드에 압축 수준을 입력하십시오. Datadog은 gzip의 경우 `6`, zstd의 경우 `3`을 권장합니다.
+
+#### 서버 측 암호화 {#server-side-encryption}
+
+{{< ui >}}Server-Side Encryption{{< /ui >}} 드롭다운 메뉴에서 S3 버킷의 암호화 유형({{< ui >}}AWS KMS{{< /ui >}} 또는 {{< ui >}}AES256{{< /ui >}})을 선택하십시오. {{< ui >}}AWS KMS{{< /ui >}}을 선택한 경우 AWS KMS 키 ID를 입력하십시오.
 
 #### AWS 인증 {#aws-authentication}
 
