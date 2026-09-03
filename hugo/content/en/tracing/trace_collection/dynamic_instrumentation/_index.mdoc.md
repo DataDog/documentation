@@ -60,7 +60,7 @@ If you are interested in trying out the latest user experience improvements for 
 
 - **[Datadog Java SDK][18]** (JDK 8 or higher)
   - Minimum for [in-app enablement](#enable-in-app): 1.48.0
-  - Minimum for [manual enablement](#enable-with-environment-variables): 1.34.0
+  - Minimum for [manual enablement](#enable-manually): 1.34.0
   - Does not support Kotlin coroutines
 - **[Datadog Agent][1]**, version 7.49.0 or higher
 
@@ -72,7 +72,7 @@ If you are interested in trying out the latest user experience improvements for 
 
 - **[Datadog Python SDK (`ddtrace`)][19]**
   - Minimum for [in-app enablement](#enable-in-app): 3.10.0
-  - Minimum for [manual enablement](#enable-with-environment-variables): 2.2.0
+  - Minimum for [manual enablement](#enable-manually): 2.2.0
 - **[Datadog Agent][1]**, version 7.49.0 or higher
 
 {% /if %}
@@ -83,7 +83,7 @@ If you are interested in trying out the latest user experience improvements for 
 
 - **Datadog .NET SDK** ([.NET Framework][22] or [.NET Core][20])
   - Minimum for [in-app enablement](#enable-in-app): 3.29.0
-  - Minimum for [manual enablement](#enable-with-environment-variables): 2.54.0
+  - Minimum for [manual enablement](#enable-manually): 2.54.0
 - **[Datadog Agent][1]**, version 7.49.0 or higher
 
 {% /if %}
@@ -124,7 +124,7 @@ Dynamic Instrumentation and [Live Debugger](/tracing/live_debugger/) share the s
 
 {% if includes($prog_lang, ["java", "python", "dot_net"]) %}
 
-You can enable Dynamic Instrumentation in-app or with environment variables.
+You can enable Dynamic Instrumentation in-app or manually.
 
 ### Enable in-app (recommended) {% #enable-in-app %}
 
@@ -133,9 +133,9 @@ Enable Dynamic Instrumentation in-app in one of two ways:
 - On the [Dynamic Instrumentation Settings page][16], enable the service and environment.
 - Create an instrumentation. Dynamic Instrumentation is enabled automatically on the selected service and environment.
 
-### Enable with environment variables {% #enable-with-environment-variables %}
+### Enable manually {% #enable-manually %}
 
-Set the following environment variables if your SDK is below the [in-app minimum](#requirements), or if you want to manage enablement outside the Datadog UI.
+Follow these steps if your SDK is below the [in-app minimum](#requirements), or if you want to manage enablement outside the Datadog UI.
 
 {% /if %}
 
