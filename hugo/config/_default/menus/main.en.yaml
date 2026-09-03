@@ -10675,56 +10675,51 @@ menu:
       url: account_management/billing/incident_response/
       parent: account_management_billing
       weight: 1513
-    - name: Agent Observability
-      identifier: account_management_billing_llm_observability
-      url: account_management/billing/llm_observability/
-      parent: account_management_billing
-      weight: 1514
     - name: AWS Integration
       identifier: account_management_billing_aws
       url: account_management/billing/aws/
       parent: account_management_billing
-      weight: 1515
+      weight: 1514
     - name: Azure Integration
       identifier: account_management_billing_azure
       url: account_management/billing/azure/
       parent: account_management_billing
-      weight: 1516
+      weight: 1515
     - name: Google Cloud Integration
       identifier: account_management_billing_google_cloud
       url: account_management/billing/google_cloud/
       parent: account_management_billing
-      weight: 1517
+      weight: 1516
     - name: OCI Integration
       identifier: account_management_billing_oci
       url: account_management/billing/oci/
       parent: account_management_billing
-      weight: 1518
+      weight: 1517
     - name: Alibaba Integration
       identifier: account_management_billing_alibaba
       url: account_management/billing/alibaba/
       parent: account_management_billing
-      weight: 1519
+      weight: 1518
     - name: vSphere Integration
       identifier: account_management_billing_vsphere
       url: account_management/billing/vsphere/
       parent: account_management_billing
-      weight: 1520
+      weight: 1519
     - name: Workflow Automation
       identifier: account_management_billing_workflow_automation
       url: account_management/billing/workflow_automation/
       parent: account_management_billing
-      weight: 1521
+      weight: 1520
     - name: AI Credits
       identifier: account_management_billing_ai_credits
       url: account_management/billing/ai_credits/
       parent: account_management_billing
-      weight: 1522
+      weight: 1521
     - name: AI Credit Limits
       identifier: account_management_billing_ai_credit_limits
       url: account_management/billing/ai_credit_limits/
       parent: account_management_billing
-      weight: 1523
+      weight: 1522
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/

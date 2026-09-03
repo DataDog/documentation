@@ -2,9 +2,9 @@
 title: Data Retention
 description: Learn how long Agent Observability retains traces, experiments, annotations, datasets, prompts, and metrics.
 further_reading:
-  - link: "/account_management/billing/llm_observability/"
-    tag: "Documentation"
-    text: "Learn how Agent Observability is billed"
+  - link: "https://www.datadoghq.com/pricing/?product=llm-observability#products"
+    tag: "Pricing"
+    text: "Agent Observability pricing"
   - link: "/llm_observability/data_privacy_security_and_rbac/"
     tag: "Documentation"
     text: "Control access to sensitive Agent Observability data"
@@ -62,7 +62,7 @@ The experiment itself — its name, configuration, and aggregate results — is 
 
 ## Changing your retention period
 
-Retention add-ons are arranged through your account team rather than enabled from the Datadog UI. To request a longer retention period, contact your Datadog account representative or [Datadog support][1]. For how add-ons are priced, see [Agent Observability Billing][10].
+Retention add-ons are arranged through your account team rather than enabled from the Datadog UI. To request a longer retention period, contact your Datadog account representative or [Datadog support][1]. For rates, see the [Agent Observability pricing page][10].
 
 When you add or extend a retention add-on, the longer period applies **retroactively to every span that has not already expired**. Spans that expired under your previous period are not recoverable.
 
@@ -111,4 +111,4 @@ For the full list of available metrics, see [Agent Observability metrics][8].
 [7]: /data_security/data_retention_periods/
 [8]: /llm_observability/investigate/metrics/
 [9]: /llm_observability/configure/prompt_management/
-[10]: /account_management/billing/llm_observability/
+[10]: https://www.datadoghq.com/pricing/?product=llm-observability#products
