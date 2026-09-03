@@ -224261,7 +224261,7 @@ paths:
   /api/v2/usage/quotas/{quota_namespace}:
     get:
       description: |-
-        Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+        Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `billing_edit` permission.
       operationId: ListQuotas
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -224334,9 +224334,7 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - user_access_manage
             - billing_edit
-            - org_management
       summary: List usage quotas
       tags:
         - Usage Metering
@@ -224347,17 +224345,15 @@ paths:
         limitParam: page[limit]
         resultsPath: data
       "x-permission":
-        operator: AND
+        operator: OR
         permissions:
-          - user_access_manage
           - billing_edit
-          - org_management
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
-        Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated; otherwise, a new quota is created. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+        Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated; otherwise, a new quota is created. Requires the `billing_edit` permission.
       operationId: CreateQuotas
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -224445,26 +224441,22 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - user_access_manage
             - billing_edit
-            - org_management
       summary: Create or update usage quotas
       tags:
         - Usage Metering
       x-menu-order: 15
       "x-permission":
-        operator: AND
+        operator: OR
         permissions:
-          - user_access_manage
           - billing_edit
-          - org_management
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/usage/quotas/{quota_namespace}/{id}:
     delete:
       description: |-
-        Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+        Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: DeleteQuota
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -224502,25 +224494,21 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - user_access_manage
             - billing_edit
-            - org_management
       summary: Delete a usage quota
       tags:
         - Usage Metering
       x-menu-order: 17
       "x-permission":
-        operator: AND
+        operator: OR
         permissions:
-          - user_access_manage
           - billing_edit
-          - org_management
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: |-
-        Updates the supplied fields on a usage quota and leaves omitted fields unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+        Updates the supplied fields on a usage quota and leaves omitted fields unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: UpdateQuota
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -224596,19 +224584,15 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - user_access_manage
             - billing_edit
-            - org_management
       summary: Update a usage quota
       tags:
         - Usage Metering
       x-menu-order: 16
       "x-permission":
-        operator: AND
+        operator: OR
         permissions:
-          - user_access_manage
           - billing_edit
-          - org_management
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
