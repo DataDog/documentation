@@ -9,7 +9,7 @@ further_reading:
 - link: "/security/application_security/how-appsec-works/#built-in-protection"
   tag: "Documentation"
   text: "How Application Security Monitoring Works"
-- link: "/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration"
+- link: "/dynamic_instrumentation/#requirements"
   tag: "Documentation"
   text: "Dynamic Instrumentation"
 - link: "/security/workload_protection/"
@@ -139,7 +139,7 @@ Consult the documentation below for instructions specific to the product you're 
 |-------------------------|----------------------------------------------------------------------------------------------------------------|
 | Fleet Automation        | [Setup Fleet Automation][31]                                                                                   |
 | APM                     | [Configuration at runtime](/tracing/guide/remote_config/)                                                      |
-| Dynamic Instrumentation | [Getting started with Dynamic Instrumentation](/dynamic_instrumentation/#getting-started)                      |
+| Dynamic Instrumentation | [Getting started with Dynamic Instrumentation](/dynamic_instrumentation/#enable-dynamic-instrumentation)       |
 | Workload Protection     | [Workload Protection][3]                                                                                       |
 | Observability Pipelines | Ensure that you've [enabled Remote Configuration on the API key][32] you're using for Observability Pipelines. |
 | Sensitive Data Scanner  | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount)                       |
@@ -173,7 +173,7 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [8]: https://app.datadoghq.com/organization-settings/remote-config
 [9]: /security/default_rules/#cat-workload-security
 [10]: /tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
-[11]: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
+[11]: /dynamic_instrumentation/#requirements
 [12]: /security/application_security/how-appsec-works/#built-in-protection
 [13]: /account_management/audit_trail
 [14]: /monitors/
@@ -182,7 +182,7 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [17]: /agent/configuration/network
 [18]: /agent/configuration/proxy/
 [19]: /internal_developer_portal/catalog/
-[20]: /dynamic_instrumentation/?tab=configurationyaml#prerequisites
+[20]: /dynamic_instrumentation/#requirements
 [21]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [22]: /tracing/trace_collection/runtime_config/
 [23]: /remote_configuration#opting-out-of-remote-configuration
