@@ -3369,6 +3369,10 @@
     "description": "Retrieve all interactions (traces and sessions) and their annotations for a given annotation queue.",
     "summary": "Get annotated queue interactions"
   },
+  "GetLLMObsAnnotatedInteraction": {
+    "description": "Retrieve an interaction, its annotations, and a page of related events from an annotation queue.",
+    "summary": "Get an annotated queue interaction"
+  },
   "UpsertLLMObsAnnotations": {
     "description": "Create or update annotations on interactions in a queue. Each annotation is matched\nby `interaction_id` and the requesting user's identity.\nResults and errors in the response are linked to request items by `interaction_id`.\nErrors for individual items are returned in the `errors` field without blocking the rest of the batch.\nRequests where every item is denied by queue access rules return `403`.",
     "summary": "Create or update annotations",
@@ -4752,6 +4756,10 @@
   "ListConnections": {
     "description": "List all data connections for an entity",
     "summary": "List connections"
+  },
+  "ListProductCatalogSKUs": {
+    "description": "Get every generally available Datadog SKU, with the pricing and allotment metadata that\napplies to it, for the Datadog site serving the request. A SKU is generally available\nwhen it is billed through a metered commitment or through automatic billing; SKUs in any\nother phase are not returned.\n\nPrices, allotments, and pricing tiers are returned as they were in effect on\n`as_of_date`, which defaults to the date of the request. Prices are public list prices:\nthey do not reflect discounts, commitments, or negotiated rates on an account.\n\nEach SKU is a separate resource in `data`, identified by its SKU code, and sorted by\nthat code in ascending order. The whole catalog is returned in a single response, so\nthis endpoint is not paginated.",
+    "summary": "List SKUs"
   },
   "GetPrunedTraceByID": {
     "description": "Retrieve a pruned, hierarchical view of an APM trace by its trace ID.\nThe trace is summarized as a tree of spans rooted at the trace root and reduced in size\nto keep rendering large traces in the UI practical.\nThis endpoint is rate limited to `60` requests per minute per organization.",

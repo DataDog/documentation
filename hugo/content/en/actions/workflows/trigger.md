@@ -65,7 +65,7 @@ To run the workflow:
 1. Add a monitor trigger to your workflow:
    - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Monitor{{< /ui >}}.
    - If your workflow already has one or more triggers and you're adding the monitor as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Monitor{{< /ui >}}.
-1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}+{{< /ui >}}) under the trigger.
+1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}\+{{< /ui >}}) under the trigger.
 1. Click the trigger and take note of the {{< ui >}}Mention handle{{< /ui >}}.
 1. Monitor triggers are set to trigger automatically by default. If you don't want the workflow to trigger automatically, toggle the {{< ui >}}Automatic triggering{{< /ui >}} option.
 1. Save your workflow.
@@ -119,7 +119,7 @@ To trigger a workflow from a notification rule, you must first add a security tr
 1. Add a security trigger to your workflow:
    - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Security{{< /ui >}}.
    - If your workflow already has one or more triggers and you're adding the security trigger as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Security{{< /ui >}}.
-1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}+{{< /ui >}}) under the trigger.
+1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}\+{{< /ui >}}) under the trigger.
 1. Click the trigger and take note of the {{< ui >}}Mention handle{{< /ui >}}.
 1. Security triggers are set to trigger automatically by default. If you don't want the workflow to trigger automatically, toggle the {{< ui >}}Automatic triggering{{< /ui >}} option.
 1. Save your workflow.
@@ -155,7 +155,7 @@ To run a workflow from a software catalog entity, you must first add a software 
 1. Add a software catalog trigger to your workflow:
    - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Catalog{{< /ui >}}.
    - If your workflow already has one or more triggers and you're adding the software catalog as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Catalog{{< /ui >}}.
-2. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}+{{< /ui >}}) under the trigger.
+2. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}\+{{< /ui >}}) under the trigger.
 3. Save your workflow.
 4. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
@@ -182,7 +182,7 @@ You can trigger a workflow from GitHub using the following steps.
 1. In GitHub, set the {{< ui >}}Content type{{< /ui >}} of your webhook to `application/json`.
 1. In GitHub, create a secret that is at least 16 characters long, then copy this secret to the {{< ui >}}Secret{{< /ui >}} field of your workflow trigger.
 1. In GitHub, choose which events you would like to trigger your webhook, then click {{< ui >}}Add webhook{{< /ui >}}.
-1. _Optionally_, in your workflow, click the {{< ui >}}+{{< /ui >}} to add a {{< ui >}}Rate Limit{{< /ui >}}.
+1. _Optionally_, in your workflow, click the {{< ui >}}\+{{< /ui >}} to add a {{< ui >}}Rate Limit{{< /ui >}}.
 1. Click {{< ui >}}Save{{< /ui >}} on your workflow.
 1. Click {{< ui >}}Publish{{< /ui >}} to publish the workflow. A workflow must be published before you can trigger it from GitHub. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
@@ -199,7 +199,7 @@ You can trigger a workflow from Slack manually with the `/datadog workflow` comm
 1. Add a Slack trigger to your workflow:
    - If your workflow doesn't have any triggers, click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Slack{{< /ui >}}.
    - If your workflow already has one or more triggers and you're adding the Slack trigger as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Slack{{< /ui >}}.
-1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}+{{< /ui >}}) under the trigger.
+1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}\+{{< /ui >}}) under the trigger.
 1. Click {{< ui >}}Save{{< /ui >}} on your workflow.
 1. Click {{< ui >}}Publish{{< /ui >}} to publish the workflow. A workflow must be published before you can trigger it from Slack. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 1. In a Slack channel with the Datadog App, run `/datadog workflow` to select and run a workflow. You can also use the `/dd` alias to run /datadog commands.
