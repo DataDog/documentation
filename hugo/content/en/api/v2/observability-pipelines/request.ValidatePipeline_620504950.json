@@ -1,0 +1,60 @@
+{
+  "data": {
+    "attributes": {
+      "config": {
+        "destinations": [
+          {
+            "id": "clickhouse-destination",
+            "inputs": [
+              "my-processor-group"
+            ],
+            "type": "clickhouse",
+            "table": "application_logs",
+            "database": "my_database",
+            "format": "arrow_stream",
+            "batch_encoding": {
+              "codec": "arrow_stream",
+              "allow_nullable_fields": false
+            },
+            "compression": "gzip",
+            "auth": {
+              "strategy": "basic",
+              "username_key": "CLICKHOUSE_USERNAME",
+              "password_key": "CLICKHOUSE_PASSWORD"
+            },
+            "batch": {
+              "max_events": 1000,
+              "timeout_secs": 1
+            }
+          }
+        ],
+        "processor_groups": [
+          {
+            "enabled": true,
+            "id": "my-processor-group",
+            "include": "service:my-service",
+            "inputs": [
+              "datadog-agent-source"
+            ],
+            "processors": [
+              {
+                "enabled": true,
+                "id": "filter-processor",
+                "include": "status:error",
+                "type": "filter"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "id": "datadog-agent-source",
+            "type": "datadog_agent"
+          }
+        ]
+      },
+      "name": "Pipeline with ClickHouse Destination Arrow Stream"
+    },
+    "type": "pipelines"
+  }
+}
