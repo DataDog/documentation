@@ -46,15 +46,36 @@ From the [correlation configuration page][2]
    Customize work item title
    : to create a template to replace the automatically generated work item title. You can reference tag template variables using handlebars syntax, for     example "{{tag.service}}", to include a comma-separated list of tag values.
    
-1. Under {{< ui >}}Advanced correlation logic{{< /ui >}}, you can specify the minimum number of correlated events it takes to create a work item and update the timeframe.
+1. Under {{< ui >}}Correlator Logic{{< /ui >}}, configure when to create a work item and how long to correlate alerts and deduplicate events:
 
-    {{< ui >}}Timeframes{{< /ui >}}
+    {{< img src="events/correlation/pattern/correlator_logic_advanced_settings.png" alt="Correlator Logic tab in Advanced Settings showing the minimum alert count, correlation duration, auto-closure, event deduplication, and extended deduplication options" style="width:100%;" >}}
 
-    Correlate alerts to a work item for
-    : The max duration that net new alerts will be added to a work item 
+    Minimum alert count
+    : The minimum number of correlated alerts required to create a work item. If the minimum is one, the first correlated alert creates the work item.
 
-    Deduplicate events for those alerts for
-    : The max duration to reflect status transitions for current alerts which have been correlated, but continue to flap or have not resolved. Events are deduped to the corresponding alert in the existing work item before opening a new work item
+    Correlation window
+    : The maximum duration during which new alerts can be added to the same work item. This window begins when the first alert is correlated.
+
+    Create a new work item after auto-closure
+    : When enabled, a matching alert creates a new work item after the previous work item closes automatically.
+
+    Deduplication window
+    : The duration during which additional events from an alert already in the work item are associated with that alert. This window begins when the first alert is correlated.
+
+    Extend dedupe window until all alerts resolve
+    : When enabled, unresolved alerts already in the work item can continue to receive events after the deduplication window expires, for up to 30 days. This setting does not extend the correlation window for adding new alerts.
+
+    For example, consider a pattern with a minimum alert count of one, a 48-hour correlation window, and a 48-hour deduplication window:
+    - Alert A is correlated at 9:00 AM on Monday. It creates a work item, and both windows begin.
+    - Alert B is correlated at 10:00 AM on Monday and is added to the same work item. Additional events from Alert A or Alert B during the deduplication window are associated with their existing alerts.
+    - Both configured windows expire at 9:00 AM on Wednesday.
+    - Alert C is correlated at 10:00 AM on Wednesday. It cannot join the existing work item. If **Create a new work item after auto-closure** is enabled, Alert C creates a new work item.
+
+    If **Extend dedupe window until all alerts resolve** is enabled, events from unresolved Alert A or Alert B can continue to update the existing correlation after 9:00 AM on Wednesday, for up to 30 days. Alert C still cannot join the existing work item because it is a new alert.
+
+    A work item can contain up to 500 alerts, and each alert can retain up to 100 events. After an alert reaches 100 events, the correlator does not process subsequent events for that alert, including recovery events. As a result, the work item might not close automatically.
+
+    The work item can display more than 100 matching events because its event list retrieves matching events independently. The displayed event count might differ from the number of events retained and processed by the correlator.
 
 
 ## Preview pattern output
