@@ -317,14 +317,16 @@ Flags.enable(config)
 {{< /code-block >}}
 
 `assignmentRequestTimeout(timeoutMs)`
-: Timeout in milliseconds for each flag assignment request, including the complete response-body download. The SDK does not add a timeout by default. Set a positive value to enable the timeout; `0` leaves it disabled.
+: Timeout in milliseconds for each flag assignment request, including the complete response-body download. The SDK does not add a timeout by default. Set a positive value to enable the timeout; `0` leaves it disabled. Negative values are coerced to `0`.
 
 `assignmentRequestRetryCount(retryCount)`
-: Number of retries after the initial flag assignment request. The default is `0`, so the SDK makes only the initial request unless you opt in to retries. Accepted values are from `0` to `10`. Retries cover network errors, timeouts, HTTP 408, and HTTP 5xx responses; canceled calls and HTTP 429 responses are not retried.
+: Number of retries after the initial flag assignment request. The default is `0`, so the SDK makes only the initial request unless you opt in to retries. Values outside the range from `0` to `10` are coerced to the nearest bound. Retries cover selected transient network errors, timeouts, HTTP 408, and HTTP 5xx responses. Canceled calls, HTTP 429, generic I/O errors, permanent protocol errors, and TLS failures are not retried. Retries use randomized exponential backoff capped at 30 seconds. For HTTP 503, a valid `Retry-After` value up to 30 seconds is a minimum delay before the backoff. A response that requests a longer delay is not retried.
+
+With retries enabled, network time can reach `(retryCount + 1) * timeoutMs`, plus retry delays. When the timeout is `0`, the HTTP transport supplies the time bound and may allow an unlimited duration.
 
 <div class="alert alert-info">Assignment request timeout and retry settings apply only to requests that fetch flag assignments. They do not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
 
-For lower-level transport control, supply an assignment-only OkHttp call factory:
+For lower-level transport control, supply an assignment-only OkHttp call factory. Add OkHttp as a direct application dependency when you use this option:
 
 {{< code-block lang="kotlin" >}}
 import okhttp3.OkHttpClient

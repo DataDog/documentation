@@ -457,7 +457,7 @@ Flags.enable(with: config)
 : Timeout in seconds for each flag assignment request, including the complete response-body download. The SDK does not add a timeout by default. Set a positive value to enable the timeout; `0` leaves it disabled.
 
 `assignmentRequestRetryCount`
-: Number of retries after the initial flag assignment request. The default is `0`, so the SDK makes only the initial request unless you opt in to retries. Accepted values are from `0` to `10`. Retries cover network errors, timeouts, HTTP 408, and HTTP 5xx responses; HTTP 429 responses are not retried.
+: Number of retries after the initial flag assignment request. The default is `0`, so the SDK makes only the initial request unless you opt in to retries. Accepted values are from `0` to `10`. Retries cover selected transient network errors, timeouts, HTTP 408, and HTTP 5xx responses. Cancellation, HTTP 429, unknown URL errors, permanent URL errors, and TLS failures are not retried. Retries use randomized exponential backoff capped at 30 seconds. For HTTP 503, a valid `Retry-After` value up to 30 seconds is a minimum delay before the backoff. A response that requests a longer delay is not retried.
 
 <div class="alert alert-info">Assignment request timeout and retry settings apply only to requests that fetch flag assignments. They do not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
 
@@ -474,7 +474,18 @@ config.assignmentRequestFetch = assignmentFetch
 Flags.enable(with: config)
 {{< /code-block >}}
 
-The SDK still constructs the URL, body, authentication, and custom headers. A supplied `assignmentRequestFetch` is used verbatim and replaces the scalar timeout and retry settings. In the example, placing `withTimeout` inside `withRetry` gives every attempt its own 1.5-second timeout. A `withTimeout` value of `0` causes an immediate timeout. The custom transport applies only to assignment requests.
+The SDK still constructs the URL, body, authentication, and custom headers. A supplied `assignmentRequestFetch` replaces the scalar timeout and retry settings. The SDK accepts at most one completion from the supplied fetch for each request and validates the HTTP response status. The custom transport applies only to assignment requests.
+
+In the example, `withTimeout` is inside `withRetry`. Therefore, each attempt has its own 1.5-second timeout. Reverse the wrappers to use one 1.5-second timeout for the initial request and all retries:
+
+{{< code-block lang="swift" >}}
+let assignmentFetch = Flags.AssignmentRequestFetch
+    .urlSession()
+    .withRetry(2)
+    .withTimeout(1.5)
+{{< /code-block >}}
+
+A `withTimeout` value of `0` disables the timer.
 
 `trackExposures`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. If you only need local evaluation without telemetry, you can disable this option.

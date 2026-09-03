@@ -247,7 +247,9 @@ const provider = new DatadogProvider({
 : Sets the timeout in milliseconds for each request attempt, including the complete response-body download. Set the timeout to `0` to disable the timer. Accepted values are non-negative integers up to `2_147_483_647`.
 
 `withRetry(fetch, retryCount)`
-: Sets the number of retries after the initial request. Set the retry count to `0` to disable retries. Accepted values are integers from `0` to `10`. Retries cover network errors, timeouts, HTTP 408, and HTTP 5xx responses; caller cancellation and HTTP 429 responses are not retried.
+: Sets the number of retries after the initial request. Set the retry count to `0` to disable retries. Accepted values are integers from `0` to `10`. Retries cover Fetch `TypeError` failures, timeout errors, HTTP 408, and HTTP 5xx responses. Caller cancellation and HTTP 429 responses are not retried. Retries use randomized exponential backoff capped at 30 seconds. For HTTP 503, a valid `Retry-After` value up to 30 seconds is a minimum delay before the backoff. A response that requests a longer delay is not retried. Browsers report network, CORS, and CSP failures as `TypeError`, so the wrapper cannot separate these causes.
+
+In the example, `withTimeout` is inside `withRetry`. Therefore, each attempt has its own 1,500-millisecond timeout.
 
 <div class="alert alert-info">The `fetch` option applies only to flag configuration requests. It does not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
 

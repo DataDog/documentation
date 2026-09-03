@@ -86,7 +86,7 @@ You can set up Feature Flags automatically with the <a href="/feature_flags/feat
 
 Choose the SDK that matches where the flag is evaluated and initialize the Datadog Feature Flags provider.
 
-<div class="alert alert-warning">Client SDKs do not add a flag assignment request timeout or retry by default, so the underlying platform transport remains authoritative. Configure a timeout of at most 1,500 milliseconds when initialization must finish within a known period. Add retries to tolerate transient network errors, timeouts, HTTP 408, or HTTP 5xx responses. See the <a href="/feature_flags/client/">client SDK guides</a> for platform-specific timeout, retry, and transport APIs.</div>
+<div class="alert alert-warning">Client SDKs do not add a flag assignment request timeout or retry by default, so the underlying platform transport remains authoritative. Configure a timeout of at most 1,500 milliseconds when initialization must finish within a known period. Retries cover transient network errors, timeouts, HTTP 408, and HTTP 5xx responses. They use randomized exponential backoff capped at 30 seconds. For HTTP 503, a valid <code>Retry-After</code> value up to 30 seconds is a minimum delay before the backoff. A response that requests a longer delay is not retried. Mobile SDKs do not retry cancellation, HTTP 429, generic I/O errors, permanent protocol errors, or TLS failures. Browser Fetch reports several failures as <code>TypeError</code> and cannot separate these causes. See the <a href="/feature_flags/client/">client SDK guides</a> for platform-specific timeout, retry, and transport APIs.</div>
 
 {{< tabs >}}
 {{% tab "JavaScript browser" %}}
