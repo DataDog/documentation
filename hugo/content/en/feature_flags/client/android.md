@@ -328,6 +328,12 @@ With retries enabled, network time can reach `(retryCount + 1) * timeoutMs`, plu
 
 For lower-level transport control, supply an assignment-only OkHttp call factory. Add OkHttp as a direct application dependency when you use this option:
 
+{{< code-block lang="groovy" filename="build.gradle" >}}
+dependencies {
+    implementation "com.squareup.okhttp3:okhttp:4.12.0"
+}
+{{< /code-block >}}
+
 {{< code-block lang="kotlin" >}}
 import okhttp3.OkHttpClient
 
@@ -342,7 +348,7 @@ val config = FlagsConfiguration.Builder()
     .build()
 {{< /code-block >}}
 
-The SDK still constructs the URL, method, body, and authentication headers. The scalar timeout and retry policies compose on top of calls created by the supplied factory. Exposure and evaluation uploads continue to use the SDK transport, and the application retains ownership of the supplied factory and its resources.
+The SDK still constructs the URL, method, body, and authentication headers. The scalar timeout and retry policies compose on top of calls created by the supplied factory. When the assignment timeout is positive, the factory must return calls that provide and honor a configurable `Call.timeout()`. A call that returns `Timeout.NONE` fails before execution. Exposure and evaluation uploads continue to use the SDK transport. The application retains ownership of the supplied factory and its resources.
 
 `trackExposures()`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. If you only need local evaluation without telemetry, you can disable it with: `trackExposures(false)`.
