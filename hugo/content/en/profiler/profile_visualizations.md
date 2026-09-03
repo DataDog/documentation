@@ -26,6 +26,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/profiling-visualizations/'
       tag: 'Blog'
       text: 'Accessible profiling visualizations'
+    - link: "https://www.datadoghq.com/blog/monitor-azure-functions-hosting-plans/"
+      tag: "Blog"
+      text: "Monitor Azure Functions across every hosting plan with Datadog"
 
 ---
 

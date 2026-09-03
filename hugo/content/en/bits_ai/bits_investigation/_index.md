@@ -16,6 +16,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/engineering/bits-ai-eval-platform/"
     tag: "Blog"
     text: "How we built a real-world evaluation platform for autonomous SRE agents at scale"
+  - link: "https://www.datadoghq.com/blog/build-datadog-workflows-ai-agents/"
+    tag: "Blog"
+    text: "Build and run Datadog workflows from Bits Chat or AI agents"
 cascade:
     site_support_id: bits_investigation
 ---

@@ -2,9 +2,6 @@
 title: Cloud Cost Monitor
 description: 'Monitor cost changes, thresholds, forecasts, and anomalies in your cloud costs.'
 further_reading:
-    - link: https://www.datadoghq.com/blog/cloud-cost-management-oci
-      tag: Blog
-      text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
     - link: 'https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview'
       tag: 'Documentation'
       text: 'Cloud Cost Management'
@@ -17,12 +14,18 @@ further_reading:
     - link: '/monitors/status/'
       tag: 'Documentation'
       text: 'Consult your monitor status'
+    - link: https://www.datadoghq.com/blog/cloud-cost-management-oci
+      tag: Blog
+      text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
     - link: 'https://www.datadoghq.com/blog/ccm-cost-monitors/'
       tag: 'Blog'
       text: 'React quickly to cost overruns with Cost Monitors for Datadog Cloud Cost Management'
     - link: 'https://www.datadoghq.com/blog/google-cloud-cost-management/'
       tag: 'Blog'
       text: 'Empower engineers to take ownership of Google Cloud costs with Datadog'
+    - link: "https://www.datadoghq.com/blog/how-datadog-saves-money-by-optimizing-ai-usage/"
+      tag: "Blog"
+      text: "How Datadog saves over $1 million each month by optimizing AI usage"
 ---
 
 ## Overview

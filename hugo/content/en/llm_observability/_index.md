@@ -55,6 +55,15 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq"
   tag: "Blog"
   text: "How we cut our NLQ agent debugging time from hours to minutes with LLM Observability"
+- link: "https://www.datadoghq.com/blog/golden-paths-for-ai-agents/"
+  tag: "Blog"
+  text: "How to adapt Golden Paths for autonomous AI agents"
+- link: "https://www.datadoghq.com/blog/from-traces-to-experiments-a-loop-for-improving-ai-agents/"
+  tag: "Blog"
+  text: "From traces to experiments: A loop for improving AI agents"
+- link: "https://www.datadoghq.com/blog/monitor-prompt-caching-optimize-token-usage/"
+  tag: "Blog"
+  text: "Monitor prompt caching to optimize your token usage"
 
 ---
 

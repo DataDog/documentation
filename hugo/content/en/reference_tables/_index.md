@@ -6,9 +6,6 @@ aliases:
   - /logs/guide/reference-tables/
   - /integrations/guide/reference-tables
 further_reading:
-- link: "/reference_tables/guide/create-update-delete-reference-table-with-api/"
-  tag: "Guide"
-  text: "Creating, updating, and deleting a Reference Table with the API"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Use the lookup processor to enrich logs from a Reference Table"
@@ -27,6 +24,9 @@ further_reading:
 - link: "/metrics/reference_table_joins_with_metrics/"
   tag: "Documentation"
   text: "Learn about Reference Table joins with metrics"
+- link: "/reference_tables/guide/create-update-delete-reference-table-with-api/"
+  tag: "Guide"
+  text: "Creating, updating, and deleting a Reference Table with the API"
 - link: "https://www.datadoghq.com/blog/observability-pipelines-reference-tables-log-enrichment/"
   tag: "Blog"
   text: "Add dynamically updating context to logs with Reference Tables and Observability Pipelines"
@@ -45,6 +45,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
   tag: "Blog"
   text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/tines-observability-pipelines-security-automation/"
+  tag: "Blog"
+  text: "Respond to security threats faster with Tines and Observability Pipelines"
 ---
 
 ## Overview

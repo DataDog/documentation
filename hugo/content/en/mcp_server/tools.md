@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-mcp-apps/"
   tag: "Blog"
   text: "Datadog MCP Apps: Interactive experiences in AI workflows"
+- link: "https://www.datadoghq.com/blog/build-datadog-workflows-ai-agents/"
+  tag: "Blog"
+  text: "Build and run Datadog workflows from Bits Chat or AI agents"
 ---
 
 The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolsets][1], which allow you to use only the tools you need, saving valuable context window space.
