@@ -20,6 +20,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/sast-triage-agentic-evaluation-bits-memories/"
       tag: "Blog"
       text: "Reduce SAST false positives with agentic evaluation and Bits Memories"
+    - link: "https://www.datadoghq.com/blog/ai-native-sast-detect-llm-vulnerabilities/"
+      tag: "Blog"
+      text: "Detect vulnerabilities in LLM applications with Datadog’s AI-native SAST"
 ---
 
 Static Code Analysis (SAST) uses AI to help automate detection, validation, and remediation across the vulnerability management lifecycle.
@@ -98,6 +101,7 @@ AI-native SAST uses a two-phase approach:
 | Elixir     | Available   |
 | Swift      | Available   |
 | Dart       | Available   |
+| C++        | Available   |
 
 ### Detected vulnerability types
 
