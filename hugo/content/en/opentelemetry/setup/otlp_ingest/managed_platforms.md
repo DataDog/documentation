@@ -71,7 +71,7 @@ All endpoints follow the pattern `https://{subdomain}.integrations.otlp.{{< regi
 | Netlify | `netlify` | — |
 | OpenTofu | `opentofu` | — |
 | Retool | `retool` | [Retool performance monitoring][16] |
-| RWX | `rwx` | — |
+| RWX | `rwx` | [RWX OpenTelemetry][17] |
 | Salesforce | `sfdc` | — |
 | Shopify | `shopify` | — |
 | Solace | `solace` | — |
@@ -79,7 +79,7 @@ All endpoints follow the pattern `https://{subdomain}.integrations.otlp.{{< regi
 | Supabase | `supabase` | — |
 | Svix | `svix` | — |
 | Trigger.dev | `triggerdev` | — |
-| Vercel | `vercel` | [Vercel Marketplace][17] |
+| Vercel | `vercel` | [Vercel Marketplace][18] |
 
 To enable OTLP export from a managed platform not listed above, contact your Customer Success Manager.
 
@@ -119,4 +119,5 @@ Sampling controls available in the Collector (tail-based sampling, probabilistic
 [14]: https://modal.com/docs/guide/otel-integration
 [15]: https://docs.mulesoft.com/monitoring/telemetry-exporter
 [16]: https://docs.retool.com/apps/guides/observability/performance-monitoring
-[17]: https://vercel.com/marketplace/datadog
+[17]: https://www.rwx.com/docs/observability/datadog
+[18]: https://vercel.com/marketplace/datadog

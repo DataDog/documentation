@@ -20,7 +20,7 @@ To test your client's cipher suite compatibility, connect to [tls-config-test.da
 
 {{< site-region region="us,eu,us3,us5,ap1,ap2,uk1" >}}
 
-Effective September 1, 2026, Datadog will accept only the following cipher suites:
+As of September 1, 2026, Datadog accepts only the following cipher suites:
 
 | Code         | IANA Name                                         |
 |--------------|---------------------------------------------------|
@@ -59,7 +59,7 @@ Datadog has disabled support for the following cipher suites, which are consider
 
 ### Effective September 1, 2026
 
-Beginning **September 1, 2026**, Datadog will disable support for the following cipher suites:
+As of **September 1, 2026**, Datadog does not support the following cipher suites:
 
 | Code         | IANA Name                                  | OpenSSL Name             |
 |--------------|--------------------------------------------|--------------------------|
