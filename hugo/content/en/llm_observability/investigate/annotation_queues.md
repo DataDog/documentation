@@ -405,4 +405,4 @@ Build benchmark datasets with human-verified labels for regression testing and c
 [13]: /api/latest/agent-observability/#get-annotation-queue-label-schema
 [14]: /api/latest/agent-observability/#update-annotation-queue-label-schema
 [15]: /account_management/#email-subscriptions
-[16]: /llm_observability/data_privacy_security_and_rbac/
+[16]: /llm_observability/data_privacy_security_and_retention/

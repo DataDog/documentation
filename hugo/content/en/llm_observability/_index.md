@@ -7,7 +7,7 @@ further_reading:
 - link: "https://www.datadoghq.com/pricing/?product=llm-observability#products"
   tag: "Pricing"
   text: "Agent Observability pricing"
-- link: "/llm_observability/data_privacy_security_and_rbac/"
+- link: "/llm_observability/data_privacy_security_and_retention/"
   tag: "Documentation"
   text: "Learn how long Agent Observability retains your data"
 - link: "https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications"

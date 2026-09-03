@@ -1,6 +1,7 @@
 ---
 title: Data Privacy, Security, and Retention
 aliases:
+- /llm_observability/data_privacy_security_and_rbac/
 - /llm_observability/data_security_and_rbac/
 description: Control access to sensitive Agent Observability data with data access controls and RBAC, redact data with span processors, and learn how long Agent Observability retains each type of data.
 further_reading:
