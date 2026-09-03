@@ -474,7 +474,7 @@ config.assignmentRequestFetch = assignmentFetch
 Flags.enable(with: config)
 {{< /code-block >}}
 
-The SDK still constructs the URL, body, authentication, and custom headers. A supplied `assignmentRequestFetch` is used verbatim and replaces the scalar timeout and retry settings. In the example, placing `withTimeout` inside `withRetry` gives every attempt its own 1.5-second timeout. The custom transport applies only to assignment requests.
+The SDK still constructs the URL, body, authentication, and custom headers. A supplied `assignmentRequestFetch` is used verbatim and replaces the scalar timeout and retry settings. In the example, placing `withTimeout` inside `withRetry` gives every attempt its own 1.5-second timeout. A `withTimeout` value of `0` causes an immediate timeout. The custom transport applies only to assignment requests.
 
 `trackExposures`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. If you only need local evaluation without telemetry, you can disable this option.

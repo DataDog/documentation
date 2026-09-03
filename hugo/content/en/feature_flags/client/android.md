@@ -320,7 +320,7 @@ Flags.enable(config)
 : Timeout in milliseconds for each flag assignment request, including the complete response-body download. The SDK does not add a timeout by default. Set a positive value to enable the timeout; `0` leaves it disabled.
 
 `assignmentRequestRetryCount(retryCount)`
-: Number of retries after the initial flag assignment request. The default is `0`, so the SDK makes only the initial request unless you opt in to retries. Accepted values are from `0` to `10`. Retries cover network errors, timeouts, HTTP 408, and HTTP 5xx responses; HTTP 429 responses are not retried.
+: Number of retries after the initial flag assignment request. The default is `0`, so the SDK makes only the initial request unless you opt in to retries. Accepted values are from `0` to `10`. Retries cover network errors, timeouts, HTTP 408, and HTTP 5xx responses; canceled calls and HTTP 429 responses are not retried.
 
 <div class="alert alert-info">Assignment request timeout and retry settings apply only to requests that fetch flag assignments. They do not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
 
