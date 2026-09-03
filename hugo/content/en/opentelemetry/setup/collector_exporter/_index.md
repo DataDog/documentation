@@ -429,12 +429,18 @@ service:
                 endpoint: http://localhost:4318
 ```
 
-Run the Collector with the host filesystem mounted:
+Create a Docker network for the Collector and your application containers to share, or use an existing one:
+
+```shell
+docker network create otel
+```
+
+Run the Collector with the host filesystem mounted, attached to that network:
 
 ```shell
 docker run \
     --name otelcol \
-    --network <YOUR_DOCKER_NETWORK> \
+    --network otel \
     -p 4317:4317 \
     -p 4318:4318 \
     -e DD_API_KEY \
@@ -878,7 +884,7 @@ Set the following environment variables in your application container:
 OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcol:4318
 OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
 ```
-This uses the `--name otelcol` value from the `docker run` command. Both containers must be on the same Docker network. If you use Docker Compose, this is handled automatically.
+This uses the `--name otelcol` value from the `docker run` command. Run your application container on the same network (`--network otel`). If you use Docker Compose, both containers share a network automatically and you can use the Collector's service name.
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
