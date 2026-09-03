@@ -19,8 +19,6 @@ For more information, see the OpenTelemetry project documentation for [the Docke
 
 ## Setup
 
-These examples use component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports.
-
 {{< tabs >}}
 {{% tab "Host" %}}
 
@@ -111,24 +109,33 @@ To correlate traces with container metrics, both telemetry types must share comm
 
 ### Traces
 
-`container.id` must come from the application. The Collector receives spans over the network, so it cannot determine which container produced each span.
+To populate these resource attributes on **traces**:
 
-- Add a container resource detector in your application code. For example, using Go:
+- You can use a `resourcedetectionprocessor` in your Collector config:
+   ```yaml
+   processors:
+      resourcedetection:
+         detectors: ["env", "container", "k8s"]
+   service:
+      pipelines:
+         traces:
+            processors: [resourcedetection]
+
+   ```
+
+- You can add a container resource detector in your application code.  
+   For example, using Go:
    ```go
-   // resource.WithContainer() adds the container.id attribute to the trace's resource
+   // resource.WithContainer() adds container.id attribute to the trace's resource
    res, err := resource.New(
        ctx,
-       resource.WithContainer(),
+       resource.WithContainer(),                    
        resource.WithFromEnv(),
-       semconv.ServiceNameKey.String("calendar"),
+       semconv.ServiceNameKey.String("calendar"),   
    )
    ```
 
    See the complete example in [opentelemetry-examples][8].
-
-- On Kubernetes, add the [`k8s_attributes` processor][5] to the traces pipeline instead. It looks up the sending pod by IP address, so it can add container and pod attributes in the Collector.
-
-The resource detection processor cannot supply `container.id`. Its `docker` detector reports the host and the Collector's own container, not the container that sent each span.
    
 ### Metrics  
    

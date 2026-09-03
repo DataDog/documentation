@@ -10,49 +10,17 @@ further_reading:
 
 ## Overview
 
+The recommended Collector configuration uses the exporter's sending queue for batching and does not include the batch processor.
+
 For production deployments, configure the [memory limiter processor][3] to limit the memory the OpenTelemetry Collector uses.
-
-The recommended configuration uses the exporter's sending queue for batching and does not include the batch processor.
-
-For more information, see the OpenTelemetry project documentation for the [memory limiter processor][3].
 
 ## Setup
 
 Add `memory_limiter` to the `processors` list for each pipeline in your configuration. Place it first in the list so that it applies backpressure before other processors allocate memory.
 
-### Hosts
+Size its limits for the memory available to your Collector, and keep the limit below the process or container memory limit. Total process memory runs above the configured limit, so leave headroom.
 
-On a host, set a fixed limit. Total process memory runs about 50 MiB above `limit_mib`, so leave that much headroom below the memory available to the Collector.
-
-```yaml
-processors:
-  memory_limiter:
-    check_interval: 1s
-    limit_mib: 1000
-```
-
-### Containers and Kubernetes
-
-Where the environment sets the memory limit, use percentages instead. The Collector then tracks the limit it is given, and the two values cannot drift apart.
-
-```yaml
-processors:
-  memory_limiter:
-    check_interval: 1s
-    limit_percentage: 80
-    spike_limit_percentage: 20
-```
-
-Set container resource limits in your Helm `values.yaml` file:
-
-```yaml
-resources:
-  limits:
-    cpu: 512m
-    memory: 1Gi
-```
-
-Also set the `GOMEMLIMIT` environment variable on the container, at approximately 80% of the container memory limit (`800MiB` for the 1 GiB limit above). This makes the Go runtime collect garbage more aggressively as the process approaches the limit, which helps keep it below the container's hard limit.
+For the available options and sizing guidance, see the OpenTelemetry project documentation for the [memory limiter processor][3].
 
 ## Example logging output
 

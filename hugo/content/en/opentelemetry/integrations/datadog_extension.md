@@ -346,18 +346,6 @@ This endpoint provides:
 3. **Check Collector logs**: Look for extension initialization and data submission logs.
 4. **Confirm extension is enabled**: Verify the extension is listed in the service configuration.
 
-### Warnings about disabled payloads
-
-At startup, the extension logs warnings similar to the following:
-
-```
-series payloads are disabled: all series will be dropped
-service_checks payloads are disabled: all service_checks will be dropped
-sketches payloads are disabled: all sketches will be dropped
-```
-
-These warnings are expected. The extension sends only Collector metadata, so it disables the metric, service check, and sketch payload types it does not use. Your telemetry is unaffected.
-
 ### HTTP server issues
 
 1. **Port conflicts**: Ensure port 9875 is available or configure a different port.
