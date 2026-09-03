@@ -80,6 +80,12 @@ Datadog Log Archives를 설정하려면 Datadog의 [Azure 통합][3]이 설치�
 - 로그의 특정 필드를 기반으로 로그를 다른 객체 키로 라우팅하려면 [템플릿 구문][6]을 참조하세요.
 	- **참고**: Datadog은 접두사를 디렉터리 이름으로 시작하고 선행 슬래시(`/`) 없이 시작할 것을 권장합니다. 예를 들어, `app-logs/` 또는 `service-logs/`.
 
+#### 압축 {#compression}
+
+1.  {{< ui >}}Compression - Algorithm{{< /ui >}} 드롭다운 메뉴에서 아카이브된 로그에 대한 압축 알고리즘을 선택하십시오({{< ui >}}gzip{{< /ui >}} 또는 {{< ui >}}zstd{{< /ui >}}).
+    - **참고**: 압축 알고리즘을 지정하지 않으면 압축 수준 `6`의 gzip이 사용됩니다.
+1.  {{< ui >}}Compression - Level {{< /ui >}} 필드에 압축 수준을 입력해야 합니다. Datadog은 gzip의 경우 `6`, zstd의 경우 `3`을 권장합니다.
+
 #### 버퍼링 {#buffering}
 
 {{% observability_pipelines/destination_buffer %}}
