@@ -945,6 +945,15 @@ Adds, updates, or deletes a comment on a Datadog Error Tracking Issue.
 - Update the comment we just added to say "Fixed in version 2.3.1".
 - Delete the comment we just added from that issue.
 
+### `manage_datadog_error_tracking_issue_links`
+*Toolset: **error-tracking***\
+*Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
+Creates, links, or unlinks a Jira ticket, Linear ticket, or Datadog case for an Error Tracking Issue.
+
+- File a Jira ticket for Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000`.
+- Link Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to Case `CTS-203`.
+- Unlink the Linear ticket from Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
+
 ## Experiments
 
 Tools for managing and analyzing [Experiments][62], including creating and concluding experiments, running diagnostics, and investigating metric movements.
