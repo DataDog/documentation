@@ -27,7 +27,7 @@ further_reading:
 
 ## Overview
 
-Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector Contrib distribution. This setup uses an OTLP-based telemetry pipeline with the following key components:
+Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector. The configurations on this page are tested with the OpenTelemetry Collector Contrib distribution v0.154.0 and use an OTLP-based telemetry pipeline with the following key components:
 
 - **OTLP HTTP exporter**: Sends telemetry to Datadog's OTLP intake endpoints.
 - **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Service Catalog and Service Page.
@@ -36,11 +36,11 @@ Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector Cont
 
 This is the recommended setup for a Collector you manage yourself. If you want a Collector distribution that Datadog maintains and supports, use the [Datadog Distribution of OTel Collector (DDOT)][12] instead.
 
-{{< img src="/opentelemetry/setup/oss-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running any OpenTelemetry Collector with OTLP HTTP exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/oss-collector.png" alt="An OpenTelemetry SDK sends OTLP data to an OpenTelemetry Collector, which exports it to Datadog over OTLP HTTP." style="width:100%;" >}}
 
 The configurations on this page use the [agent deployment pattern][10]: one Collector runs on each host or Kubernetes node and receives telemetry from workloads on that host or node. For a gateway deployment, see the OpenTelemetry [gateway deployment pattern][11]. Stateful processing such as tail-based sampling in a multi-Collector environment requires a gateway architecture that routes all spans for a trace to the same Collector.
 
-<div class="alert alert-info">Already using the Datadog Exporter and Datadog Connector? These components remain supported, and existing configurations do not need to migrate. See <a href="/opentelemetry/setup/collector_exporter/datadog_exporter/">Configure the Datadog Exporter and Connector</a>.</div>
+<div class="alert alert-info">Already using the Datadog Exporter and Datadog Connector? See <a href="/opentelemetry/setup/collector_exporter/datadog_exporter/">Configure the Datadog Exporter and Connector</a>.</div>
 
 ## Prerequisites
 
@@ -852,8 +852,6 @@ For the complete configuration files for each environment, see the [`opentelemet
 
 {{% /tab %}}
 {{< /tabs >}}
-
-<div class="alert alert-warning"><strong>Before using this setup in production</strong>, add the <a href="/opentelemetry/config/collector_batch_memory/">memory limiter</a> to every pipeline. The configurations on this page, including the example Helm values files, omit it because its limits must be sized for the memory available to your Collector.</div>
 
 ### 3. Run the Collector
 

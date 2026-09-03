@@ -29,12 +29,6 @@ These examples use component identifiers from OpenTelemetry Collector Contrib v0
 Add the following lines to your Collector configuration:
 
 ```yaml
-processors:
-  resource_detection:
-    detectors: [system]
-    system:
-      hostname_sources: [os]
-
 receivers:
   host_metrics:
     collection_interval: 10s

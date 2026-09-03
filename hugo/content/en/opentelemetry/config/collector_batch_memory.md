@@ -12,7 +12,7 @@ further_reading:
 
 For production deployments, configure the [memory limiter processor][3] to limit the memory the OpenTelemetry Collector uses.
 
-The recommended OTLP HTTP exporter configuration handles batching in the exporter's sending queue. Do not add the batch processor to that configuration.
+The recommended configuration uses the exporter's sending queue for batching and does not include the batch processor.
 
 For more information, see the OpenTelemetry project documentation for the [memory limiter processor][3].
 
@@ -52,7 +52,7 @@ resources:
     memory: 1Gi
 ```
 
-Also set the `GOMEMLIMIT` environment variable on the container, at 80% of the container memory limit (`800MiB` for the 1 GiB limit above). This makes the Go runtime collect garbage more aggressively as the process approaches the limit, which helps keep it below the container's hard limit.
+Also set the `GOMEMLIMIT` environment variable on the container, at approximately 80% of the container memory limit (`800MiB` for the 1 GiB limit above). This makes the Go runtime collect garbage more aggressively as the process approaches the limit, which helps keep it below the container's hard limit.
 
 ## Example logging output
 

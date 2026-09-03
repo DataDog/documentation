@@ -192,6 +192,17 @@ CopyBatchSpanProcessor batchSpanProcessor =
 ```
 Adjust the `setMaxExportBatchSize` value according to your needs. A smaller value results in more frequent exports with smaller payloads, reducing the likelihood of exceeding the 15 MiB limit.
 
+### Warning: "traces export: failed … 202 Accepted" in Go
+
+
+If you are using the OpenTelemetry Go SDK and see a warning message similar to `traces export: failed … 202 Accepted`, it is due to a known issue in the OpenTelemetry Go OTLP HTTP exporter.
+
+The OpenTelemetry Go OTLP HTTP exporter treats any HTTP status code other than 200 as an error, even if the export succeeds ([Issue 3706][5]). In contrast, other OpenTelemetry SDKs consider any status code in the range [200, 300) as a success. The Datadog OTLP traces intake endpoint returns a `202 Accepted` status code for successful exports.
+
+The OpenTelemetry community is still discussing whether other `2xx` status codes should be treated as successes ([Issue 3203][6]).
+
+**Solution**: If you are using the Datadog OTLP traces intake endpoint with the OpenTelemetry Go SDK, you can safely ignore this warning message. Your traces are being successfully exported despite the warning.
+
 ### Issue: Unexpected span operation names
 
 When using the Datadog OTLP trace intake endpoint, you may notice that the span operation names are different from those generated when using the Datadog Agent or OpenTelemetry Collector.
@@ -223,6 +234,8 @@ This ensures that the span operation names are consistent across the Datadog OTL
 [1]: /opentelemetry/collector_exporter/
 [2]: /opentelemetry/otlp_ingest_in_the_agent/
 [3]: https://opentelemetry.io/docs/specs/otel/glossary/#automatic-instrumentation
+[5]: https://github.com/open-telemetry/opentelemetry-go/issues/3706
+[6]: https://github.com/open-telemetry/opentelemetry-specification/issues/3203
 [7]: /tracing/metrics/
 [8]: /opentelemetry/setup/otlp_ingest/serverless/
 [9]: /opentelemetry/setup/otlp_ingest/managed_platforms/

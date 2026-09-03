@@ -226,6 +226,12 @@ If your OpenTelemetry Collector distribution does not include all the components
 These examples use component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports.
 
 ```yaml
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+
 processors:
   cumulativetodelta: {}
 

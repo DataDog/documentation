@@ -134,7 +134,7 @@ For a complete list of configuration options for the Datadog Exporter, see the [
 
 #### Batch processor configuration
 
-The batch processor is required for non-development environments. It applies to the Datadog Exporter configuration on this page; the recommended OTLP HTTP setup batches in the exporter's sending queue instead. The exact configuration depends on your specific workload and signal types.
+The batch processor is required for non-development environments. The exact configuration depends on your specific workload and signal types.
 
 Configure the batch processor based on Datadog's intake limits:
 
