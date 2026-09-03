@@ -127,7 +127,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 **Best for**: New or existing OTel users who want to manage their own OpenTelemetry Collector.
 
-- OTLP-based telemetry pipeline without the Datadog Exporter or Datadog Connector
+- Standard OpenTelemetry pipeline that exports to Datadog over OTLP
 - Flexible configuration options like tail-based sampling and data transformations
 
 {{< whatsnext desc=" " >}}

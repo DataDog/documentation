@@ -14,7 +14,7 @@ Datadog uses [service-entry spans][1] throughout the platform for features such 
 
 ## Setup
 
-Enable the config option based on your ingestion path:
+Requirements and configuration depend on your ingestion path:
 
 {{< tabs >}}
 {{% tab "OTLP HTTP and span_metrics" %}}

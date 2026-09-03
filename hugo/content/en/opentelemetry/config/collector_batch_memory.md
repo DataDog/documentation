@@ -38,10 +38,6 @@ resources:
     memory: 1Gi
 ```
 
-## Data collected
-
-None.
-
 ## Example logging output
 
 ```

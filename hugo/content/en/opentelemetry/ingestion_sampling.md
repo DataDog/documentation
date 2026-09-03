@@ -29,7 +29,7 @@ This document demonstrates two primary methods for sending traces to Datadog wit
 
 With this method, the OpenTelemetry Collector receives traces from OpenTelemetry SDKs and exports them to Datadog over OTLP HTTP. The `span_metrics` connector computes [APM trace metrics][4] before the Collector applies sampling:
 
-{{< img src="/opentelemetry/setup/oss-collector.png" alt="OpenTelemetry SDKs send data to the OpenTelemetry Collector, which forwards data to Datadog over OTLP." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/oss-collector.png" alt="An OpenTelemetry SDK sends OTLP data to an OpenTelemetry Collector, which exports it to Datadog over OTLP HTTP." style="width:100%;" >}}
 
 Choose this method if you require advanced OpenTelemetry Collector processing capabilities, such as tail-based sampling. To configure the Collector, follow [Set Up the OpenTelemetry Collector][1].
 

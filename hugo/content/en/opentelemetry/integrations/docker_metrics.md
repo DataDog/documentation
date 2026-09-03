@@ -19,7 +19,7 @@ For more information, see the OpenTelemetry project documentation for [the Docke
 
 ## Setup
 
-These examples use the canonical component identifiers available in OpenTelemetry Collector Contrib v0.154.0; for an older Collector or another distribution, use the component identifiers supported by that distribution.
+These examples use component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports.
 
 {{< tabs >}}
 {{% tab "Host" %}}

@@ -35,7 +35,7 @@ Tracing application metrics are collected after you [enable trace collection and
 
 These metrics capture request counts, error counts, and latency measures. They are calculated based on 100% of the application's traffic, regardless of any [trace ingestion sampling][2] configuration. Ensure that you have full visibility into your application's traffic by using these metrics to spot potential errors on a service or a resource, and by creating dashboards, monitors, and SLOs.
 
-**Note**: If applications are instrumented with OpenTelemetry libraries and sampling is configured at the SDK level, APM metrics are calculated from the sampled data. To calculate APM metrics from all traffic when sampling in the OpenTelemetry Collector, configure the [`span_metrics` connector][11] before the sampling processor.
+**Note**: If your applications are instrumented with OpenTelemetry libraries and sampling is configured at the SDK level, APM metrics are calculated from the sampled data. To calculate APM metrics from all traffic when you sample in the OpenTelemetry Collector, place the [`span_metrics` connector][11] before any sampling processor, such as `tail_sampling`. The Datadog Connector achieves the same result in existing configurations. For more information, see [Ingestion Sampling with OpenTelemetry][12].
 
 Trace metrics are generated for service entry spans and certain operations depending on integration language. For example, the Django integration produces trace metrics from spans that represent various operations (1 root span for the Django request, 1 for each middleware, and 1 for the view).
 
@@ -165,3 +165,4 @@ X-Ray spans are sampled before they are sent to Datadog, which means trace metri
 [9]: /tracing/glossary/#services
 [10]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
 [11]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
+[12]: /opentelemetry/ingestion_sampling/

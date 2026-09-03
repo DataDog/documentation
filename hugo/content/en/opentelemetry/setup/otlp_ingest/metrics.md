@@ -221,7 +221,7 @@ For example:
 
 ## OpenTelemetry Collector
 
-These examples use the canonical component identifiers available in OpenTelemetry Collector Contrib v0.154.0; for an older Collector or another distribution, use the component identifiers supported by that distribution.
+These examples use component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports.
 
 If your OpenTelemetry Collector distribution does not include all the components used by Datadog's recommended Collector setup, configure its OTLP HTTP exporter directly:
 
@@ -230,7 +230,7 @@ processors:
   cumulativetodelta: {}
 
 exporters:
-  otlp_http/datadog:
+  otlp_http:
     metrics_endpoint: {{< region-param key="otlp_metrics_endpoint" >}}
     headers:
       dd-api-key: ${env:DD_API_KEY}
@@ -241,7 +241,7 @@ service:
     metrics:
       receivers: [otlp]
       processors: [cumulativetodelta]
-      exporters: [otlp_http/datadog]
+      exporters: [otlp_http]
 ```
 
 This example converts cumulative metrics to the delta temporality required by the intake endpoint. Add any receivers and processors required by your Collector distribution.

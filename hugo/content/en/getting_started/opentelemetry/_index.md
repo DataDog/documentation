@@ -35,7 +35,7 @@ further_reading:
 
 This guide demonstrates how to configure [a sample OpenTelemetry application][12] to send observability data to Datadog using the OpenTelemetry SDK, OpenTelemetry Collector, and [Datadog Exporter][14]. This guide also shows you how to explore this data in the Datadog UI.
 
-<div class="alert alert-info">This tutorial uses the Datadog Exporter and Datadog Connector. For the recommended setup for new Collector configurations, see <a href="/opentelemetry/setup/collector_exporter/">Set Up the OpenTelemetry Collector</a>.</div>
+<div class="alert alert-info">This guide uses the Datadog Exporter and Datadog Connector, which remain supported. For new Collector configurations, Datadog recommends the OTLP pipeline in <a href="/opentelemetry/setup/collector_exporter/">Set Up the OpenTelemetry Collector</a>.</div>
 
 Follow this guide to:
 

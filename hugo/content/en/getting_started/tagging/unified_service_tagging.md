@@ -503,7 +503,7 @@ tracer_provider = TracerProvider(resource=resource)
 
 {{% tab "Collector" %}}
 
-To set resource attributes from the OpenTelemetry Collector, use the [transform processor][100] in the Collector configuration file. The transform processor modifies attributes before the Collector exports telemetry:
+To set resource attributes from the OpenTelemetry Collector, use the [transform processor][100] in your Collector configuration file. The transform processor modifies attributes before the Collector exports telemetry:
 
 ```yaml
 processors:

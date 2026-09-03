@@ -26,6 +26,8 @@ Datadog supports several configurations for using OpenTelemetry. The primary dif
 
 The following table shows feature compatibility across different setups:
 
+The **OTel SDK + OpenTelemetry Collector Contrib** column reflects the recommended OTLP HTTP exporter and `span_metrics` connector configuration. The Datadog Exporter and Datadog Connector remain supported, and existing configurations do not need to migrate.
+
 | Feature | Datadog SDK + DDOT (Recommended) | OTel SDK + DDOT | OTel SDK + OpenTelemetry Collector Contrib | Direct OTLP Ingest |
 |---|---|---|---|---|
 | [Cloud SIEM][18] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
@@ -36,7 +38,7 @@ The following table shows feature compatibility across different setups:
 | [Span Links][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." >}}) |
 | [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} |  |  |
-| [Infrastructure Host List][30] | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| [Infrastructure List][30] | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | [Cloud Network Monitoring][21] (CNM) | {{< X >}} | {{< X >}} | | |
 | [Kubernetes Monitoring][20] | {{< X >}} | {{< X >}} | {{< X >}} | |
 | [Live Container Monitoring][46] | {{< X >}} | {{< X >}} | | |
@@ -49,7 +51,6 @@ The following table shows feature compatibility across different setups:
 | [Real User Monitoring][22] (RUM) | {{< X >}} | | | |
 | [Source code integration][24] | {{< X >}} | | | |
 
-The **OTel SDK + OpenTelemetry Collector Contrib** column reflects the recommended OTLP HTTP exporter and `span_metrics` connector configuration. The Datadog Exporter and Datadog Connector remain supported, and existing configurations do not need to migrate.
 
 ## API support
 
