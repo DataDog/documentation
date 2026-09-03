@@ -70,7 +70,7 @@ For all workloads, confirm the following:
 ### AWS Lambda functions
 
 - **Resource collection**: [Resource collection][10] must be enabled on the AWS integration. Datadog uses it to list your functions and preview which ones a rule matches.
-- **AWS partition**: The commercial `aws` partition only. Functions in AWS GovCloud or the AWS China partitions are not supported, because Lambda instrumentation authenticates through cloud-based authentication, which those partitions don't support.
+- **AWS partition**: The commercial `aws` partition only. Functions in AWS GovCloud or the AWS China partitions are not supported, because Lambda instrumentation authenticates through [Workload Identity Federation][16], which those partitions don't support.
 - **Package type**: Zip functions only. Container image functions are not supported, because Datadog instrumentation is distributed as Lambda layers, which container image functions can't use.
 - **Architecture**: `x86_64` or `arm64`. A function must report a single architecture.
 - **Layer count**: AWS limits a function to five layers. Datadog adds up to two, so a function that already carries four or more layers is not eligible.
