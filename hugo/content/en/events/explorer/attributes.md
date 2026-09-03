@@ -28,6 +28,12 @@ This list describes automatically ingested reserved attributes with events.
 | `service` | The name of the application or service generating the events. |
 | `message` | By default, Datadog ingests the value of the `message` attribute as the body of the event entry. |   
 
+### Events with multiple service tags
+
+The reserved `service` attribute has a single value. If an event contains multiple `service:<value>` tags, Datadog uses one of them to populate the reserved attribute. Do not rely on which value is selected, because tag processing order can vary.
+
+Send only one `service` tag per event. Use a different tag key for additional dimensions, such as `application:<value>`. Additional `service` tags remain in the raw tag list and can be found with a query such as `tags:("service:<value>")`. A `service:<value>` query matches only the value assigned to the reserved attribute.
+
 To search a tag that has the same key as a reserved attribute, use the `tags` search syntax. 
 Example: `tags:("status:<status>")`
 
