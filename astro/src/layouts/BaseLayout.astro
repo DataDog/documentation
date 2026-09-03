@@ -6,6 +6,8 @@ import Footer from '@components/Footer/Footer.astro';
 import { resolveLocale, type Locale } from '@lib/i18n/locale';
 import { getBannerParams, type BannerParams } from '@lib/componentUtils/bannerData';
 import { DevBadge } from '@components/DevBadge/DevBadge';
+import Telemetry from '@components/Telemetry/Telemetry.astro';
+import { resolveSiteEnv } from '@lib/site/siteEnv';
 import {
   TWITTER_HANDLE,
   THEME_COLOR,
@@ -64,6 +66,11 @@ const image = imageProp ?? DEFAULT_OG_IMAGE;
 const siteOrigin = Astro.site?.toString().replace(/\/$/, '') ?? '';
 const canonical = canonicalProp ?? `${siteOrigin}${Astro.url.pathname}`;
 const ogUrl = canonical;
+// `data-env` on <html>, for debugging and env-conditional styling. Telemetry
+// itself does not read it (it resolves the environment at build time), but the
+// planned shared Ask AI package expects the attribute to be present.
+const env = resolveSiteEnv();
+
 // Resolve any relative hreflang hrefs against the site origin.
 const hreflangResolved = hreflang?.map((h) => ({
   hreflang: h.hreflang,
@@ -71,7 +78,7 @@ const hreflangResolved = hreflang?.map((h) => ({
 }));
 ---
 
-<html lang={lang}>
+<html lang={lang} data-env={env}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -132,6 +139,9 @@ const hreflangResolved = hreflang?.map((h) => ({
         document.documentElement.setAttribute('data-active-region', region);
       })();
     </script>
+    {/* Datadog RUM + Browser Logs. Its bundled script is deferred, so placing
+        it here costs nothing against first paint. */}
+    <Telemetry />
   </head>
   <body class:list={[{ announcement: hasBanner }]}>
     <AnnouncementBanner override={announcementBanner} />

@@ -2,11 +2,11 @@
  * i18n helper. Mirrors Hugo's `i18n(key)` call: resolves a lang_key into its
  * "other" string from the per-locale bundle.
  *
- * Two sources are merged: the glossary at `shared/i18n/*.json` (the legacy,
- * authoritative bundle, also mounted by the Hugo site) and
- * `websites-modules/i18n/*.yaml` (the newer shared bundle). The glossary wins
- * on key conflicts so we don't silently drift from the Hugo site's
- * translations.
+ * Two sources are merged: `shared/i18n/*.json` at the repo root, which Hugo
+ * also reads (the legacy, authoritative bundle) and
+ * `websites-modules/i18n/*.yaml` (the newer shared bundle). The `shared`
+ * bundle wins on key conflicts so we don't silently drift from the Hugo
+ * site's translations.
  *
  * Locale files are loaded eagerly via `import.meta.glob` so missing files are
  * a no-op at runtime — callers fall back to English entry-by-entry, then to

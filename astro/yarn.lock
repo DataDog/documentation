@@ -696,6 +696,72 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@datadog/browser-core@npm:7.11.0":
+  version: 7.11.0
+  resolution: "@datadog/browser-core@npm:7.11.0"
+  dependencies:
+    "@datadog/js-core": "npm:0.0.12"
+  checksum: 10/12bd233c642cc023c9f095cfb17be1ef24f4510f5ec9bfc67df7e1710271705b768cb12295f17b4d5cef9d83fb1f7da300fae774c3059a56e02c872cfa85447f
+  languageName: node
+  linkType: hard
+
+"@datadog/browser-logs@npm:^7.11.0":
+  version: 7.11.0
+  resolution: "@datadog/browser-logs@npm:7.11.0"
+  dependencies:
+    "@datadog/browser-core": "npm:7.11.0"
+    "@datadog/js-core": "npm:0.0.12"
+  peerDependencies:
+    "@datadog/browser-rum": 7.11.0
+  peerDependenciesMeta:
+    "@datadog/browser-rum":
+      optional: true
+  checksum: 10/6860d66f981c56c2790daf2cc7305b83d283fc8dabe135abf7ba8368a42073eaf26559b9f2867bb3e92a3cb0da9762cce177f65b8e0bb0ea57012dd55274b964
+  languageName: node
+  linkType: hard
+
+"@datadog/browser-rum-core@npm:7.11.0":
+  version: 7.11.0
+  resolution: "@datadog/browser-rum-core@npm:7.11.0"
+  dependencies:
+    "@datadog/browser-core": "npm:7.11.0"
+    "@datadog/js-core": "npm:0.0.12"
+  checksum: 10/82cfbef8e11b91eed6ab314a8e5a422b5fb09e47e37bf6dcd7a1c959f89acf5de92677049ef03e94b44c809d2fe317734b92d32ebf9ca7018dc90687288a16bc
+  languageName: node
+  linkType: hard
+
+"@datadog/browser-rum@npm:^7.11.0":
+  version: 7.11.0
+  resolution: "@datadog/browser-rum@npm:7.11.0"
+  dependencies:
+    "@datadog/browser-core": "npm:7.11.0"
+    "@datadog/browser-rum-core": "npm:7.11.0"
+    "@datadog/js-core": "npm:0.0.12"
+  peerDependencies:
+    "@datadog/browser-logs": 7.11.0
+  peerDependenciesMeta:
+    "@datadog/browser-logs":
+      optional: true
+  checksum: 10/fa44118588819ef050f02360b88a811e1c2f82fba57ffeb239aa64ef939d5ab41f3ce8a6aab0cb8ccffb2183c73629d23d93d499fe9f1698ae1a006bac536b95
+  languageName: node
+  linkType: hard
+
+"@datadog/datadog-ci@npm:^5.23.0":
+  version: 5.23.0
+  resolution: "@datadog/datadog-ci@npm:5.23.0"
+  bin:
+    datadog-ci: dist/bundle.js
+  checksum: 10/491fe474bcc5103e8a3aebc7559e46935a9083b9f75348cba8e50868b9caff51c6f789b887880b67436108f6078ff621b964c809cc9d3dc13d61b3674b395529
+  languageName: node
+  linkType: hard
+
+"@datadog/js-core@npm:0.0.12":
+  version: 0.0.12
+  resolution: "@datadog/js-core@npm:0.0.12"
+  checksum: 10/0993447bb43783c4417564b26cb4c5868156c0c092113d2f2a134ae4ba5b017310a1185e87d10c5fde00f3aa7463f4676adda6710bc888f83191337c9cb9dd9c
+  languageName: node
+  linkType: hard
+
 "@emmetio/abbreviation@npm:^2.3.3":
   version: 2.3.3
   resolution: "@emmetio/abbreviation@npm:2.3.3"
@@ -2925,6 +2991,9 @@ __metadata:
     "@astrojs/preact": "npm:^6.0.2"
     "@astrojs/sitemap": "npm:^3.7.3"
     "@astrojs/ts-plugin": "npm:^1.10.10"
+    "@datadog/browser-logs": "npm:^7.11.0"
+    "@datadog/browser-rum": "npm:^7.11.0"
+    "@datadog/datadog-ci": "npm:^5.23.0"
     "@playwright/test": "npm:^1.62.0"
     "@testing-library/preact": "npm:^3.2.4"
     "@testing-library/user-event": "npm:^14.6.1"

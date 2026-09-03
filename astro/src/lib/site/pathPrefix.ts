@@ -11,6 +11,7 @@
  * is a no-op — `prefixed(path) === path`.
  */
 import { branchRef } from "./siteUrl";
+import { resolveSiteEnv } from "./siteEnv";
 
 /**
  * The deploy path prefix, computed once at module load. `DOCS_PATH_PREFIX` is an
@@ -23,7 +24,7 @@ export function pathPrefix(): string {
   if (override !== undefined) {
     return normalize(override);
   }
-  if (process.env.CI_ENVIRONMENT_NAME !== "preview") {
+  if (resolveSiteEnv() !== "preview") {
     return "";
   }
   const ref = branchRef();
