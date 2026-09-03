@@ -19,18 +19,53 @@ further_reading:
 
 The Source Maps build plugin automatically uploads JavaScript source maps to Datadog during your build, enabling deobfuscated stack traces in [Error Tracking][1] and [RUM][2]. This replaces the need to manually run `datadog-ci sourcemaps upload` or configure CI/CD pipelines for source map uploads.
 
-The plugin hooks into the build process, discovers all `.js` files with corresponding `.map` source map files from the build output, and uploads them to Datadog with git metadata.
+The plugin hooks into the build process, discovers all `.js` files with corresponding `.map` source map files from the build output, and uploads them to Datadog with git metadata. Source maps can be associated with events by debug ID or by service and version.
 
 ## Prerequisites
 
 - A Datadog API key, set with `auth.apiKey` or the `DATADOG_API_KEY` environment variable.
 - Source maps enabled in your bundler configuration. The plugin uploads source maps but does not generate them. See [Upload JavaScript Source Maps][3] for bundler-specific source map generation setup.
-- The RUM SDK initialized with `service` and `version` parameters that match the plugin's `service` and `releaseVersion` configuration.
+- For debug ID uploads, enable debug ID injection in the build plugin.
+- For service and version uploads, initialize the RUM SDK with `service` and `version` parameters that match the plugin configuration.
 - The Datadog build plugin installed and registered with your bundler. See [Build Plugins][4] for installation instructions.
 
 ## Configuration
 
-Configure the `errorTracking.sourcemaps` object in your build plugin options:
+The following environment variables override configuration values:
+
+- `DATADOG_SITE` or `DD_SITE`: Overrides `auth.site` for the intake URL.
+- `DATADOG_SOURCEMAP_INTAKE_URL`: Overrides the full intake URL directly.
+
+### Debug ID
+
+Configure `rum.sourceCodeContext.debugId` and `rum.sourceCodeContext.upload` to inject debug IDs and upload source maps during the build:
+
+```javascript
+const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
+
+module.exports = {
+  plugins: [
+    datadogWebpackPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      rum: {
+        sourceCodeContext: {
+          debugId: true,
+          upload: true,
+        },
+      },
+    }),
+  ],
+};
+```
+
+Debug ID uploads do not require a service, release version, or minified path prefix. Set `upload` to `false` or omit it to inject debug IDs without uploading source maps from the build plugin.
+
+### Service and version
+
+Configure the `errorTracking.sourcemaps` object to upload source maps using service and version matching:
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
@@ -41,11 +76,7 @@ Configure the `errorTracking.sourcemaps` object in your build plugin options:
 | `errorTracking.sourcemaps.dryRun` | Boolean | No | `false` | If `true`, the plugin runs through the upload process without sending data to Datadog. Use this to verify your configuration. |
 | `errorTracking.sourcemaps.maxConcurrency` | Number | No | `20` | Maximum number of concurrent source map uploads. |
 
-The following environment variables override configuration values:
-- `DATADOG_SITE` or `DD_SITE`: Overrides `auth.site` for the intake URL.
-- `DATADOG_SOURCEMAP_INTAKE_URL`: Overrides the full intake URL directly.
-
-## Example
+#### Example
 
 ```javascript
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
@@ -71,7 +102,7 @@ module.exports = {
 
 <div class="alert alert-info">This example uses webpack. The configuration object is identical across all supported bundlers — only the import and plugin function name differ. See <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> for installation instructions for your bundler.</div>
 
-To also display inline source code in Error Tracking stack traces, pair source map uploads with the [Source Code Context][5] plugin. Source maps provide the file mapping; source code context provides the service and version association.
+To also display inline source code in Error Tracking stack traces, pair service and version source map uploads with the [Source Code Context][5] plugin.
 
 ## Further reading
 

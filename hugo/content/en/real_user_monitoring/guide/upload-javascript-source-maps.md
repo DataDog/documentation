@@ -178,7 +178,7 @@ Choose one of the following upload methods.
 
 Datadog Build Plugins can inject debug IDs and upload source maps directly during the build. You do not need to install or run `datadog-ci` separately.
 
-Configure both source map uploads and debug ID injection in your build plugin:
+Enable debug ID injection and source map uploads in your build plugin:
 
 ```javascript
 datadogWebpackPlugin({
@@ -186,20 +186,16 @@ datadogWebpackPlugin({
     apiKey: process.env.DATADOG_API_KEY,
     site: 'datadoghq.com',
   },
-  errorTracking: {
-    sourcemaps: {
-      service: 'my-application',
-      releaseVersion: '1.0.0',
-      minifiedPathPrefix: 'https://example.com/static/',
-    },
-  },
   rum: {
     sourceCodeContext: {
       debugId: true,
+      upload: true,
     },
   },
 });
 ```
+
+The plugin uploads each source map with the debug ID injected into its corresponding JavaScript bundle. You do not need to configure a service, release version, or minified path prefix.
 
 This example uses webpack. See [Datadog Build Plugins][8] for installation and configuration instructions for other supported bundlers.
 
