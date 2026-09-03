@@ -108,8 +108,8 @@ After you run an experiment with a DeepEval evaluation, you can view the DeepEva
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/improve/experiments
-[2]: /llm_observability/improve/experiments/setup#create-an-experiment
+[2]: /llm_observability/guide/experiments#create-an-experiment
 [3]: https://deepeval.com/docs/metrics-introduction
-[4]: /llm_observability/improve/experiments/setup#create-a-dataset
+[4]: /llm_observability/guide/experiments#create-a-dataset
 [5]: /llm_observability/improve/datasets
 [6]: https://github.com/DataDog/llm-observability/blob/main/experiments/eval-integrations/1-deepeval-demo.py

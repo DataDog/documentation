@@ -5674,31 +5674,6 @@ menu:
       parent: llm_obs_improve
       identifier: llm_obs_experiments
       weight: 503
-    - name: Setup and Usage
-      url: llm_observability/improve/experiments/setup
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_setup
-      weight: 50301
-    - name: Analyzing Results
-      url: llm_observability/improve/experiments/analyzing_results
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_analyzing_results
-      weight: 50302
-    - name: Advanced Experiment Runs
-      url: llm_observability/improve/experiments/advanced_runs
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_advanced_runs
-      weight: 50303
-    - name: Prompt Optimization
-      url: llm_observability/improve/experiments/prompt_optimization
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_prompt_optimization
-      weight: 50304
-    - name: Experiments API
-      url: llm_observability/improve/experiments/api
-      parent: llm_obs_experiments
-      identifier: llm_obs_experiments_api
-      weight: 50305
     - name: Configure
       url: llm_observability/configure/
       parent: llm_obs

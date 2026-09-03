@@ -1,6 +1,7 @@
 ---
 title: Experiments API
 aliases:
+- /llm_observability/improve/experiments/api/
 - /llm_observability/experiments/api/
 description: Reference the Agent Observability Experiments HTTP API.
 ---
@@ -558,6 +559,6 @@ Empty body on success.
 
 {{% /collapse-content %}}
 
-[1]: /llm_observability/improve/experiments/setup
+[1]: /llm_observability/guide/experiments
 [2]: https://github.com/DataDog/llm-observability/tree/main/experiments
 [3]: https://www.postman.com/

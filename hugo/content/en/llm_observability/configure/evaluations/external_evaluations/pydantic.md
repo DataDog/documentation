@@ -140,8 +140,8 @@ After you run an experiment with a Pydantic evaluation, you can view the Pydanti
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/improve/experiments
-[2]: /llm_observability/improve/experiments/setup#create-an-experiment
+[2]: /llm_observability/guide/experiments#create-an-experiment
 [3]: https://ai.pydantic.dev/evals/
-[4]: /llm_observability/improve/experiments/setup#create-a-dataset
+[4]: /llm_observability/guide/experiments#create-a-dataset
 [5]: /llm_observability/improve/datasets
 [6]: https://github.com/DataDog/llm-observability/blob/main/experiments/eval-integrations/2-pydantic-demo.py
