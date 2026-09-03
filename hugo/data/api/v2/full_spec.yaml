@@ -73764,6 +73764,11 @@ components:
           items:
             $ref: "#/components/schemas/ObservabilityPipelineConfigDestinationItem"
           type: array
+        end_to_end_acknowledgements:
+          description: |-
+            Enables end-to-end event delivery confirmation. Without a disk buffer, sources acknowledge events after delivery to all final destinations; when a disk buffer provides the acknowledgment boundary, they acknowledge after durable persistence.
+            Defaults to `false` when omitted. Requires Observability Pipelines Worker 2.14 or later. All configured sources must support this behavior.
+          type: boolean
         pipeline_type:
           $ref: "#/components/schemas/ObservabilityPipelineConfigPipelineType"
         processor_groups:
