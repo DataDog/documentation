@@ -332,7 +332,7 @@ All instrumentation types require the same initial setup:
 1. Go to the [Dynamic Instrumentation page][12].
 1. Click {% ui %}Create Instrumentation{% /ui %} in the top right, or click the three-dot menu on a service and select {% ui %}Add an instrumentation for this service{% /ui %}.
 1. If they are not prefilled, choose service, runtime, environment, and version (optional).
-1. {% if includes($prog_lang, ["java", "python", "dot_net"]) %}Specify where to set the instrumentation in the source code by selecting either a class and method, or a specific line of code in a file.{% /if %}{% if equals($prog_lang, "php") %}Specify where to set the instrumentation in the source code by selecting a class and method.{% /if %} When autocomplete and search are available, use them to find files, methods, or symbols.
+1. {% if includes($prog_lang, ["java", "python", "dot_net"]) %}Specify where to set the instrumentation in the source code by selecting either a class and method, or a specific line of code in a file. When autocomplete and search are available, use them to find files, methods, or symbols.{% /if %}{% if equals($prog_lang, "php") %}Specify where to set the instrumentation in the source code by selecting a class and method. When autocomplete and search are available, use them to find methods or symbols.{% /if %} 
 
 For the best experience, set up [Source Code Integration][7] to view code directly in Datadog and select instrumentation locations as you would with breakpoints in an IDE.
 
