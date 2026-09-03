@@ -62,7 +62,9 @@ The experiment itself — its name, configuration, and aggregate results — is 
 
 ## Changing your retention period
 
-Retention add-ons are arranged through your account team rather than enabled from the Datadog UI. To request a longer retention period, contact your Datadog account representative or [Datadog support][1]. For rates, see the [Agent Observability pricing page][10].
+Retention length affects what you are billed, because a longer period means Datadog stores more of your data. For rates, see the [Agent Observability pricing page][10].
+
+Retention add-ons are arranged through your account team rather than enabled from the Datadog UI. To request a longer retention period, contact your Datadog account representative or [Datadog support][1].
 
 When you add or extend a retention add-on, the longer period applies **retroactively to every span that has not already expired**. Spans that expired under your previous period are not recoverable.
 
