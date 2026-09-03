@@ -19,9 +19,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/a-practical-guide-to-react-error-monitoring/"
   tag: "Blog"
   text: "A practical guide to React error monitoring"
-- link: "https://www.datadoghq.com/blog/bitbucket-cloud-source-code-integration/"
-  tag: "Blog"
-  text: "Troubleshoot and secure your code faster with Datadog’s Bitbucket Cloud Source Code integration"
 ---
 
 ## Overview

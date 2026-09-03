@@ -5,12 +5,12 @@ aliases:
 - /monitors/incident_management/
 - /service_management/incident_management/
 further_reading:
+  - link: "https://app.datadoghq.com/release-notes?category=Incident%20Management"
+    tag: "Release Notes"
+    text: "Check out the latest Incident Management releases! (App login required)."
   - link: "dashboards/querying/#incident-management-analytics"
     tag: "Documentation"
     text: "Incident Management Analytics"
-  - link: "https://learn.datadoghq.com/courses/getting-started-incident-management"
-    tag: "Learning Center"
-    text: "Getting Started with Incident Management"
   - link: 'https://dtdg.co/fe'
     tag: 'Foundation Enablement'
     text: 'Join an interactive session to improve your Incident Management'
@@ -35,12 +35,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
     tag: "Blog"
     text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
-  - link: "https://www.datadoghq.com/blog/build-datadog-workflows-ai-agents/"
-    tag: "Blog"
-    text: "Build and run Datadog workflows from Bits Chat or AI agents"
-  - link: "https://app.datadoghq.com/release-notes?category=Incident%20Management"
-    tag: "Release Notes"
-    text: "Check out the latest Incident Management releases! (App login required)."
+  - link: "https://learn.datadoghq.com/courses/getting-started-incident-management"
+    tag: "Learning Center"
+    text: "Getting Started with Incident Management"
 
 ---
 

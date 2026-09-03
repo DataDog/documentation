@@ -5,6 +5,12 @@ aliases:
 - /cloud_cost_management/monitors
 - /cloud_cost_management/reporting/monitors
 further_reading:
+- link: "https://www.datadoghq.com/blog/ccm-cost-monitors/"
+  tag: "Blog"
+  text: "React quickly to cost overruns with Cost Monitors for Datadog Cloud Cost Management"
+- link: "https://www.datadoghq.com/blog/google-cloud-cost-management/"
+  tag: "Blog"
+  text: "Empower engineers to take ownership of Google Cloud costs with Datadog"
 - link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
@@ -17,15 +23,6 @@ further_reading:
 - link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
-- link: "https://www.datadoghq.com/blog/ccm-cost-monitors/"
-  tag: "Blog"
-  text: "React quickly to cost overruns with Cost Monitors for Datadog Cloud Cost Management"
-- link: "https://www.datadoghq.com/blog/google-cloud-cost-management/"
-  tag: "Blog"
-  text: "Empower engineers to take ownership of Google Cloud costs with Datadog"
-- link: "https://www.datadoghq.com/blog/federal-agencies-ai-spend-cloud-cost-management/"
-  tag: "Blog"
-  text: "Beyond the $1 AI era: How federal agencies can build the evidence for FY27 renewals"
 ---
 
 {{< include-markdown "monitors/types/cloud_cost" >}}

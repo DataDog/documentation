@@ -19,9 +19,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-ai-agent-integrations/"
   tag: "Blog"
   text: "Bring live Datadog telemetry into your AI agents with native integrations"
-- link: "https://www.datadoghq.com/blog/build-datadog-workflows-ai-agents/"
-  tag: "Blog"
-  text: "Build and run Datadog workflows from Bits Chat or AI agents"
 ---
 
 Learn how to set up and configure the Datadog MCP Server, which lets you retrieve telemetry insights and manage platform features directly from AI-powered clients. Select your client:

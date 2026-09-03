@@ -11,9 +11,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/database-monitoring-explain-analyze"
   tag: "Blog"
   text: "Debug PostgreSQL query latency faster with EXPLAIN ANALYZE in Datadog Database Monitoring"
-- link: "https://www.datadoghq.com/blog/how-bits-database-optimization-proves-a-query-rewrite-is-faster/"
-  tag: "Blog"
-  text: "How Bits Database Optimization proves a query rewrite is faster"
 ---
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.

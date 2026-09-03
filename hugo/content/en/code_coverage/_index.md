@@ -32,9 +32,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/move-fast-dont-break-things"
     tag: "Blog"
     text: "Move fast, don't break things: Consistent testing standards at scale"
-  - link: "https://www.datadoghq.com/blog/bitbucket-cloud-source-code-integration/"
-    tag: "Blog"
-    text: "Troubleshoot and secure your code faster with Datadog’s Bitbucket Cloud Source Code integration"
 algolia:
   tags: ["code coverage"]
 ---
