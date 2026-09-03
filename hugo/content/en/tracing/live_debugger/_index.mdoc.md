@@ -62,8 +62,6 @@ Live Debugger provides:
 
 ## Requirements
 
-### Language and host
-
 <!-- Java -->
 {% if equals($prog_lang, "java") %}
 
