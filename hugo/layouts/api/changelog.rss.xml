@@ -1,0 +1,26 @@
+{{- $versions := .Site.Data.api.changelog.versions | default (slice) -}}
+{{- $versions = sort $versions "date" "desc" -}}
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ .Title }} on {{ .Site.Title }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>Recent changes to the Datadog API, grouped by version</description>
+    <generator>Hugo</generator>
+    <language>{{ .Site.LanguageCode }}</language>
+    <atom:link href="{{ .Permalink }}index.xml" rel="self" type="application/rss+xml" />
+    {{- range $versions }}
+      {{- $version := . }}
+      {{- $pubDate := time.AsTime .date }}
+      {{- range .entries }}
+    <item>
+      <title>{{ $version.date }} &middot; {{ .tag }} &middot; {{ .method | upper }} {{ .path }}</title>
+      <link>{{ $.Permalink }}#{{ $version.date }}</link>
+      <pubDate>{{ $pubDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</pubDate>
+      <guid isPermaLink="false">{{ $.Permalink }}#{{ $version.date }}-{{ .tag }}-{{ .method }}-{{ .path }}</guid>
+      <description>{{ .description | plainify }}</description>
+    </item>
+      {{- end }}
+    {{- end }}
+  </channel>
+</rss>
