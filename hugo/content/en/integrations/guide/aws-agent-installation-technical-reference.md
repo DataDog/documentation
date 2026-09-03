@@ -12,6 +12,9 @@ further_reading:
 - link: "https://docs.datadoghq.com/agent/fleet_automation/"
   tag: "Documentation"
   text: "Fleet Automation"
+- link: "https://docs.datadoghq.com/account_management/workload_identity_federation/"
+  tag: "Documentation"
+  text: "Workload Identity Federation"
 ---
 
 This page explains how Datadog instruments and maintains your AWS workloads through the AWS integration. For setup instructions and the permissions Datadog requires, see [Install Datadog instrumentation through the AWS Integration][1].
@@ -124,7 +127,9 @@ The API key is stored in your own Secrets Manager, encrypted at rest. Only the s
 
 ### How Lambda telemetry is authenticated
 
-Lambda instrumentation stores no Datadog credential in your account. The Datadog extension authenticates with the function's AWS execution identity through workload identity federation, using the `DD_ORG_UUID` and `DD_SITE` values Datadog sets on the function. No Datadog API key, secret ARN, or KMS-encrypted key is written into the function's configuration.
+Lambda instrumentation stores no Datadog credential in your account. The Datadog extension authenticates with the function's AWS execution identity through [Workload Identity Federation][5], using the `DD_ORG_UUID` and `DD_SITE` values Datadog sets on the function. No Datadog API key, secret ARN, or KMS-encrypted key is written into the function's configuration.
+
+<!-- TODO(DOCS-14545): Workload Identity Federation for intake is documented as Enterprise-only at /account_management/workload_identity_federation/. Lambda instrumentation depends on it being available to the orgs this feature targets, so confirm that gating is lifted before publishing this page. -->
 
 For that authentication to succeed, Datadog authorizes the function's execution role to send telemetry to your Datadog organization. Datadog sets up this authorization before it updates a function, and matches the execution role exactly rather than by a broader pattern.
 
@@ -197,3 +202,4 @@ To uninstall, remove resources from a rule, edit the rule's query, or delete the
 [2]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#prerequisites
 [3]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#aws-lambda-functions
 [4]: https://docs.datadoghq.com/serverless/aws_lambda/remote_instrumentation/
+[5]: https://docs.datadoghq.com/account_management/workload_identity_federation/

@@ -33,6 +33,9 @@ further_reading:
 - link: "https://docs.datadoghq.com/serverless/aws_lambda/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshoot AWS Lambda Monitoring"
+- link: "https://docs.datadoghq.com/account_management/workload_identity_federation/"
+  tag: "Documentation"
+  text: "Workload Identity Federation"
 ---
 
 ## Overview
@@ -179,7 +182,7 @@ Datadog applies one `UpdateFunctionConfiguration` call per function. That call:
 
 Your existing layers, environment variables, and handler are preserved. Datadog records exactly what it changed, so uninstalling restores your original configuration.
 
-**No Datadog API key is written into your function.** The extension authenticates with the function's own execution role through workload identity federation, so there is no Datadog credential stored in your account for Lambda instrumentation.
+**No Datadog API key is written into your function.** The extension authenticates with the function's own execution role through [Workload Identity Federation][16], so there is no Datadog credential stored in your account for Lambda instrumentation. Datadog sets up that authorization for you; there is nothing to configure.
 
 Datadog does not change your function code, memory size, timeout, VPC configuration, or any other setting.
 
@@ -260,3 +263,4 @@ Datadog marks a function ineligible when it doesn't meet the [Lambda prerequisit
 [13]: https://docs.datadoghq.com/serverless/aws_lambda/
 [14]: https://docs.datadoghq.com/serverless/aws_lambda/configuration/
 [15]: https://docs.datadoghq.com/serverless/aws_lambda/troubleshooting/
+[16]: https://docs.datadoghq.com/account_management/workload_identity_federation/
