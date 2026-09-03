@@ -20,11 +20,6 @@ Cloud Security generates findings across vulnerabilities, misconfigurations, and
 <div class="alert alert-danger">Runtime Prioritization Engine is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-{{< callout url=https://www.datadoghq.com/product-preview/runtime-prioritization-engine/
- btn_hidden="false" header="Join the Preview!">}}
-Runtime Prioritization Engine is in Preview for Cloud Security Vulnerabilities. Use this form to request access.
-{{< /callout >}}
-
 The [Runtime Prioritization Engine][1] combines runtime observability and security data to identify the ~5% of findings truly exposing your business-critical resources. It evaluates each finding across five dimensions: reachability, exposure, exploitability, business criticality, and actionability.
 
 ## Severity Scoring

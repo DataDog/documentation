@@ -88,7 +88,7 @@ Use these tables to decide which solution to start with:
 | Cloud provider                | AWS, Azure, GCP                                                                                                                                              | AWS, Azure, GCP, on-prem, etc. |
 | Operating system              | Linux, Windows                                                                                                                                               | Linux, Windows                 |
 | Serverless                    | AWS Lambda, Amazon ECS Fargate, Azure Container Apps, Azure Container Instances, GCP Cloud Run (container deployment only)                                   | Not applicable                 |
-| Container registries          | Amazon ECR (running + at-rest), Google Artifact Registry (running workloads only; in [Preview][8]), Azure Container Registry (running container images only) | Not applicable                 |
+| Container registries          | Amazon ECR (running + at-rest), Google Artifact Registry (running workloads only), Azure Container Registry (running container images only)                  | Not applicable                 |
 
 For more information on compatibility, see [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
 
@@ -118,7 +118,7 @@ To enable this code-to-cloud mapping, add OCI image annotations to your containe
 To set up source linking, see [Link Dockerfile to vulnerabilities][22] in the CI/CD container image scanning guide.
 
 ## Automation and Jira integration
-Make Cloud Security Vulnerabilities part of your daily workflow by setting up [{{< ui >}}security notification rules{{< /ui >}}][17] and [automation pipelines (in Preview)][20]:
+Make Cloud Security Vulnerabilities part of your daily workflow by setting up [{{< ui >}}security notification rules{{< /ui >}}][17] and [automation pipelines][20]:
 - Get alerted upon detection of an exploitable vulnerability for your scope
 - Automatically create Jira tickets
 - Configure SLAs to remediate vulnerabilities
@@ -145,18 +145,16 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 [5]: /security/code_security/software_composition_analysis/
 [6]: https://www.datadoghq.com/product/infrastructure-monitoring/
 [7]: https://app.datadoghq.com/container-images
-[8]: https://www.datadoghq.com/product-preview/google-artifact-registry-at-rest-scanning/
 [9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 [10]: /security/code_security/iast/
 [11]: /security/cloud_security_management/setup/agentless_scanning/
 [12]: /security/cloud_security_management/setup/agent
 [13]: /security/cloud_security_management/vulnerabilities/hosts_containers_compatibility
 [14]: /security/cloud_security_management/troubleshooting/vulnerabilities/
-[16]: https://www.datadoghq.com/product-preview/ecr-vulnerability-scanning/
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: https://app.datadoghq.com/dash/integration/csm_vulnerabilities?fromUser=true&refresh_mode=sliding&from_ts=1733323465252&to_ts=1733928265252&live=true
 [19]: https://app.datadoghq.com/security/catalog/libraries
-[20]: https://www.datadoghq.com/product-preview/security-automation-pipelines/
+[20]: /security/automation_pipelines/
 [21]: /security/cloud_security_management/setup/ci_cd
 [22]: /security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
 [23]: https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score

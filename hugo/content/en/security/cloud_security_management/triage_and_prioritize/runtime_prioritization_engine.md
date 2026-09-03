@@ -114,13 +114,13 @@ Datadog detects running images with either the Datadog Agent or Agentless Scanni
 [1]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 [2]: https://www.first.org/epss/
 [3]: /security/cloud_security_management/setup/
-[4]: /security/cloud_security_management/setup/agent/kubernetes/#runtime-package-prioritization-preview
+[4]: /security/cloud_security_management/setup/agent/kubernetes/#runtime-package-prioritization
 [5]: https://app.datadoghq.com/security/csm
 [6]: /security/security_inbox/
 [7]: /security/cloud_security_management/review_remediate/ownership_agent/
 [8]: /security/cloud_security_management/crown_jewels/
-[9]: /security/cloud_security_management/setup/agent/docker/#runtime-package-prioritization-preview
-[10]: /security/cloud_security_management/setup/agent/linux/#runtime-package-prioritization-preview
+[9]: /security/cloud_security_management/setup/agent/docker/#runtime-package-prioritization
+[10]: /security/cloud_security_management/setup/agent/linux/#runtime-package-prioritization
 [11]: https://app.datadoghq.com/security/csm/vm
 [12]: /containers/
 [13]: /security/cloud_security_management/setup/agentless_scanning/
