@@ -87,4 +87,5 @@ Learn how to enable App and API Protection on all the following supported platfo
 
 {{< appsec-integrations >}}
   {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="./azure/app-service" >}}
+  {{< appsec-integration name="Azure API Management" avatar="azure-apimanagement" link="./azure/api-management" >}}
 {{< /appsec-integrations >}}
