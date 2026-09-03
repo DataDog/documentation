@@ -124,7 +124,7 @@ Dynamic Instrumentation and [Live Debugger](/tracing/live_debugger/) share the s
 
 {% if includes($prog_lang, ["java", "python", "dot_net"]) %}
 
-You can enable Dynamic Instrumentation in-app or with environment variables.
+You can enable Dynamic Instrumentation in-app or manually with environment variables.
 
 ### Enable in-app (recommended) {% #enable-in-app %}
 
