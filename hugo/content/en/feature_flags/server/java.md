@@ -344,7 +344,13 @@ Use [Server SDK Configuration Sources][9] as the canonical reference for source 
 - [Use Agent Remote Configuration][13] to retain Agent-managed delivery
 - [Migrate an existing Remote Configuration setup][11] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
 
-For no-Agent serverless environments, use [`serverless-init`][17] to send experiment exposure events from Java 1.65.0. In Java 1.66.0 and later, the SDK prefers a compatible local relay for exposure and aggregate flag evaluation events. It uses authenticated direct EVP fallback when no compatible relay is available. This direct path uses the application `DD_API_KEY` and `DD_SITE` settings. The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Server-Side Flag Evaluation Metrics][8] guide. For more information on available graphing, see [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/).
+For no-Agent serverless environments, use [`serverless-init`][17] to send Feature Flags telemetry:
+
+- Java 1.65.0 sends experiment exposure events.
+- Java 1.66.0 and later prefer a compatible local relay for exposure and aggregated flag evaluation events, and use authenticated direct EVP fallback when no compatible relay is available. The direct path uses the application `DD_API_KEY` and `DD_SITE` settings.
+- The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Server-Side Flag Evaluation Metrics][8] guide.
+
+For more information on available graphing, see [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/).
 
 ### Custom initialization timeout
 

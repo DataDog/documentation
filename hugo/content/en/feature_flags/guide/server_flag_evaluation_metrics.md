@@ -29,7 +29,9 @@ Flag evaluation metrics let you measure how often each variant of a feature flag
 Before setting up flag evaluation metrics, confirm the following:
 
 - [Server-side feature flags][1] are already configured.
-- Datadog Agent 7.32.0 or later is running.
+- For Agent-backed deployments, Datadog Agent 7.32.0 or later is running and can receive OTLP metrics.
+- For no-Agent serverless deployments, your platform has a supported serverless telemetry path configured.
+- For Java, Node.js, and Python serverless environments, see [Send feature flag telemetry with serverless-init][7].
 - For Agent-backed configurations that use the legacy activation path, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set on your application.
 - Your server-side tracer meets the minimum version for flag evaluation metrics support:
 
@@ -43,11 +45,11 @@ Before setting up flag evaluation metrics, confirm the following:
 | Python   | 4.7.0                  |
 | Ruby     | 2.32.0                 |
 
-Agentless configuration delivery and this metric use independent paths. An agentless SDK can emit the metric when you configure the required OTLP path.
+Agentless configuration delivery and this metric use independent paths. An agentless SDK can emit the metric when you configure the required OTLP path through a supported Agent-backed or serverless telemetry setup.
 
-## Step 1: Enable the Agent OTLP receiver
+## Step 1: configure an OTLP receiver
 
-Flag evaluation metrics are emitted over OpenTelemetry (OTLP). The Datadog Agent includes an OTLP receiver that is off by default. For setup instructions, see [OTLP Ingestion by the Datadog Agent][2].
+Flag evaluation metrics are emitted over OpenTelemetry (OTLP). For Agent-backed deployments, enable the Datadog Agent OTLP receiver, which is off by default. For setup instructions, see [OTLP Ingestion by the Datadog Agent][2]. For no-Agent serverless deployments, use the OTLP or custom metrics path supported by your Serverless Monitoring setup.
 
 You only need to enable the protocol your application uses (gRPC on port 4317, or HTTP on port 4318).
 
@@ -131,7 +133,7 @@ Install the gems with `bundle install`. These gems provide the OpenTelemetry met
 
 ### Endpoint configuration
 
-`DD_TRACE_AGENT_URL` and the standard `serverless-init` listener on port 8126 do not configure the OTLP metric endpoint. Configure the OTLP endpoint separately, as described in the following section.
+`DD_TRACE_AGENT_URL` and the standard `serverless-init` listener on port 8126 do not configure the OTLP metric endpoint. Configure the OTLP endpoint separately, as described in the following section. For no-Agent serverless deployments, follow the Serverless Monitoring setup for your platform before configuring this metric.
 
 By default, most tracers send OTLP metrics to the Agent at `DD_AGENT_HOST` on port `4318` (HTTP). If your application already sets `DD_AGENT_HOST` to reach the Agent, no endpoint configuration is required.
 
@@ -227,3 +229,4 @@ The `feature_flag.evaluations` metric is a counter with the following tags:
 [4]: https://app.datadoghq.com/metric/summary
 [5]: /dashboards/
 [6]: /feature_flags/server/java/#installation
+[7]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry-with-serverless-init
