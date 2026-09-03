@@ -139,7 +139,7 @@ Consult the documentation below for instructions specific to the product you're 
 |-------------------------|----------------------------------------------------------------------------------------------------------------|
 | Fleet Automation        | [Setup Fleet Automation][31]                                                                                   |
 | APM                     | [Configuration at runtime](/tracing/guide/remote_config/)                                                      |
-| Dynamic Instrumentation | [Dynamic Instrumentation](/tracing/trace_collection/dynamic_instrumentation)       |
+| Dynamic Instrumentation | [Dynamic Instrumentation][11] |
 | Workload Protection     | [Workload Protection][3]                                                                                       |
 | Observability Pipelines | Ensure that you've [enabled Remote Configuration on the API key][32] you're using for Observability Pipelines. |
 | Sensitive Data Scanner  | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount)                       |
@@ -173,6 +173,7 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [8]: https://app.datadoghq.com/organization-settings/remote-config
 [9]: /security/default_rules/#cat-workload-security
 [10]: /tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
+[11]: /tracing/trace_collection/dynamic_instrumentation
 [12]: /security/application_security/how-appsec-works/#built-in-protection
 [13]: /account_management/audit_trail
 [14]: /monitors/
