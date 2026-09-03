@@ -386,8 +386,8 @@ You can use a *dynamic span tag* as an alternative to [using Custom Instrumentat
 [7]: /integrations/guide/source-code-integration/
 [8]: /account_management/rbac/permissions#apm
 [12]: https://app.datadoghq.com/dynamic-instrumentation
-[13]: /tracing/trace_collection/custom_instrumentation/java/#adding-spans
-[14]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
+[13]: /tracing/trace_collection/custom_instrumentation/server-side/
+[14]: /tracing/trace_collection/custom_instrumentation/server-side/
 [15]: /dynamic_instrumentation/expression-language
 [16]: https://app.datadoghq.com/dynamic-instrumentation/settings
 [17]: /dynamic_instrumentation/symdb/
