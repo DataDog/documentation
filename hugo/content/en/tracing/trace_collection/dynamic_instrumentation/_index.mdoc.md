@@ -116,7 +116,7 @@ The following permissions are required to use Dynamic Instrumentation:
 
 For more information about roles and how to assign roles to users, see [Role Based Access Control][8].
 
-## Enable {% #enable-dynamic-instrumentation %}
+## Enable Dynamic Instrumentation {% #enable-dynamic-instrumentation %}
 
 {% alert %}
 Dynamic Instrumentation and [Live Debugger](/tracing/live_debugger/) share the same enablement state per service and environment: enabling or disabling one also enables or disables the other. The two products have separate permissions and Settings pages.
@@ -295,7 +295,7 @@ Set the following environment variables if your SDK is below the [in-app minimum
 {% /if %}
 <!-- end PHP -->
 
-## Configure
+## Configure Dynamic Instrumentation
 
 Configure Dynamic Instrumentation using the following environment variables:
 
@@ -307,7 +307,7 @@ Configure Dynamic Instrumentation using the following environment variables:
 | `DD_VERSION` | String | The [version][6] of your service. |
 | `DD_TAGS` | String | Tags to apply to produced data. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`. |
 
-## Explore {% #explore-dynamic-instrumentation %}
+## Explore Dynamic Instrumentation {% #explore-dynamic-instrumentation %}
 
 Dynamic Instrumentation can help you understand what your application is doing at runtime. By adding an instrumentation at a specific code location, you can capture additional telemetry from your application without the need to change code or redeploy it.
 
