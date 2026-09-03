@@ -39,7 +39,7 @@ GPU Fleet Explorer gives you visibility from your AI workloads down to the under
 
 Use the filter dropdowns at the top of the page to filter by a specific {{< ui >}}Provider{{< /ui >}}, {{< ui >}}Device Type{{< /ui >}}, {{< ui >}}Cluster{{< /ui >}}, {{< ui >}}Region{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, {{< ui >}}Data Center{{< /ui >}}, {{< ui >}}Environment{{< /ui >}}, or {{< ui >}}Team{{< /ui >}}.
 
-You can also {{< ui >}}Search{{< /ui >}} or {{< ui >}}Group{{< /ui >}} by other tags using the search and group-by fields. For example, you can group by {{< ui >}}Service{{< /ui >}} to view a row in the table for each unique service. Click the {{< ui >}}>{{< /ui >}} button next to any entry to see the devices for that service.
+You can also {{< ui >}}Search{{< /ui >}} or {{< ui >}}Group{{< /ui >}} by other tags using the search and group-by fields. For example, you can group by {{< ui >}}Service{{< /ui >}} to view a row in the table for each unique service. Click the {{< ui >}}\>{{< /ui >}} button next to any entry to see the devices for that service.
 
 {{< img src="gpu_monitoring/host_row_expansion-2.png" alt="GPU Fleet table showing services with their device types, with the row expand button highlighted" style="width:90%;" >}}
 
@@ -68,7 +68,7 @@ The summary graph provides out-of-the-box (OOTB) visualizations for key telemetr
 
 Expand this section below to see a table of the available options and what they represent.
 
-{{% collapse-content title="See full list of Provisioning summary graph options" level="h4" expanded=false id="provisioning-summary-graph-table" %}}
+{{% collapse-content title="See full list of Provisioning summary graph options" level="h5" expanded=false id="provisioning-summary-graph-table" %}}
 | Option              | Definition                                                |
 | -------------------- | ---------------------------------------------------------- |
 | Provisioned Devices  | Breakdown of provisioned devices and active devices.       |
@@ -93,7 +93,7 @@ The summary graph provides out-of-the-box (OOTB) visualizations for key telemetr
 
 Expand the section below to see a table of the available options and what they represent.
 
-{{% collapse-content title="See full list of Performance summary graph options" level="h4" expanded=false id="performance-summary-graph-table" %}}
+{{% collapse-content title="See full list of Performance summary graph options" level="h5" expanded=false id="performance-summary-graph-table" %}}
 | Option              | Definition                                                                                                                                                                                                              |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | CPU Util            | Percentage of time the CPU spent running user space processes.                                                                                                                                                        |
@@ -120,7 +120,7 @@ This table breaks down your GPU-powered infrastructure by any tag of your choosi
 
 You can click on the gear icon to customize which metrics are displayed within the table. Expand the section below to see a full list of the available metrics. 
 
-{{% collapse-content title="See the full list of available metrics" level="h4" expanded=false id="metric-full-list" %}}
+{{% collapse-content title="See the full list of available metrics" level="h3" expanded=false id="metric-full-list" %}}
 | Metric                   | Definition                                                                                                                                                                                                              | Metric Name                                        | Provisioning Tab | Performance Tab |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ---------------- | --------------- |
 | Idle Cost                | (Only nonzero for time frames longer than 2 days) The cost of GPU resources that are reserved and allocated, but not used.                                                                                              | `gpu_monitoring.estimated_idle_cost`               | ✓                 | ✓               |
