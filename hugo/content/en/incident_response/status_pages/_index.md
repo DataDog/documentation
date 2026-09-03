@@ -226,7 +226,7 @@ You can post updates if plans change or reschedule the maintenance window as nee
 
 ### Cancel a maintenance window
 
-To cancel a scheduled maintenance window before it starts, open the maintenance notice, click the kebab icon, and select **Cancel Maintenance**. Confirm the cancellation in the dialog that appears.
+To cancel a scheduled maintenance window before it starts, open the maintenance notice, click the three-dot icon, and select **Cancel Maintenance**. Confirm the cancellation in the dialog that appears.
 
 {{< img src="incident_response/status_pages/cancel-maintenance.png" alt="Cancel Maintenance confirmation dialog for a scheduled maintenance window" style="width:60%;" >}}
 
