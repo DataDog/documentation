@@ -81,7 +81,7 @@ Use these metrics to estimate your month-to-date billable usage:
 * **What it represents:** Count of metric names with more than 100 indexed points, month-to-date.
 * **Billing question answered:** How many metric names are billable so far this month?
 
-{{< img src="/metrics/guide/metric_name_pricing_experience/mnp_eum_billable_metrics_example_08042026.png" alt="Example showing the number of billable metric names month-to-date" >}}
+{{< img src="/metrics/guide/metric_name_pricing_experience/mnp_eum_billable_metrics_example_09012026.png" alt="Example showing the number of billable metric names month-to-date" >}}
 
 #### `datadog.estimated_usage.billable.points`
 

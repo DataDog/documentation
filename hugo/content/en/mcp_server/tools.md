@@ -1192,7 +1192,7 @@ Copies an existing form, including its latest definition, into a new form with a
 
 ## Kubernetes
 
-Tools for searching and describing [Kubernetes][55] resources and retrieving manifests across all clusters.
+Tools for searching and describing [Kubernetes][55] resources, retrieving manifests, and analyzing Deployment rollouts across all clusters.
 
 ### `search_datadog_k8s_resources`
 *Toolset: **kubernetes***\
@@ -1203,6 +1203,17 @@ Searches for [Kubernetes][55] resources across all clusters. Use this tool inste
 - Find deployments with in-progress rollouts in the `general2` cluster.
 - List all nodes in my cluster sorted by CPU usage.
 - Group deployments by `service` and `env` to see how my services are distributed across environments.
+
+### `analyse_datadog_k8s_rollout`
+*Toolset: **kubernetes***\
+*Permissions Required: `Hosts Read` and `Timeseries` and `Logs Read Data` and `APM Read`*\
+Assembles a [Kubernetes][55] Deployment rollout in one call: rollout status and progress, timing (ETA while the rollout is in progress, duration after it finishes), the new, previous, and old ReplicaSet split by revision, and before/after impact series (RED, resource utilization, and log counts). Identify the Deployment by its UID from a previous search or by providing resource identifiers (cluster, namespace, and resource name). Use this tool for rollout questions instead of combining `search_datadog_k8s_resources` and `describe_datadog_k8s_resource`.
+
+- Analyze the rollout of deployment `checkout-api` in cluster `prod`, namespace `default`.
+- What's the ETA for the in-progress rollout of deployment `api-server` in cluster `staging`?
+- Did the last rollout of deployment `payments` affect error rates, traffic, or resource utilization?
+
+**Note**: The tool only reports on Deployments whose `kube_rollout_status` is `inprogress`, `recentlycompleted`, or `recentlyfailed`. For other Deployments, it returns the Deployment's fields with a warning that there is no recent rollout to analyze.
 
 ### `describe_datadog_k8s_resource`
 *Toolset: **kubernetes***\

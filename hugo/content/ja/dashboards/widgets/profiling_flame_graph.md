@@ -1,64 +1,61 @@
 ---
 aliases:
 - /ja/video-categories/flamegraph/
-description: 消費量の多いコード行の内訳をグラフ化 (CPU、メモリ、...)
+description: プロファイルされたコードパス全体のリソース消費を可視化します。
 further_reading:
 - link: /profiler/profile_visualizations/
   tag: ドキュメント
-  text: プロファイルの視覚化について
-- link: /ja/dashboards/graphing_json/
+  text: プロファイルの可視化について学ぶ
+- link: /dashboards/graphing_json/
   tag: ドキュメント
   text: JSON を使用したダッシュボードの構築
 title: プロファイリングフレームグラフウィジェット
 widget_type: flame_graph
 ---
+## 概要 {#overview}
 
-## 概要
+{{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph_2.png" alt="プロファイリングフレームグラフ" >}}
 
-{{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph.png" alt="プロファイリングフレームグラフ" >}}
+[プロファイリングフレームグラフ][1]は、Continuous Profiler によって収集されたスタックトレースを可視化します。各フレームは、メソッドや行などのコードの単位を表します。フレームの幅は選択したプロファイルメトリクスの割合を表し、次の行のフレームは上のフレームによって呼び出されたコードを表します。ウィジェットを使用して、プロファイルされたアプリケーション全体のリソース集約的なコードパスを特定します。
 
-[プロファイリングフレームグラフの視覚化][1]は、CPU やメモリなどの消費が多いコード行の内訳を表します。このウィジェットを追加して、プロファイルされたアプリケーションのスタックトレースを視覚化し、頻繁なリソース要求を正確に特定します。
+## セットアップ {#setup}
+ 
+ {{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph_config_2.png" alt="プロファイリングフレームグラフウィジェット設定の [Graph your data] セクション" style="width:100%;" >}}
 
-## セットアップ
+### データをグラフ化する {#graph-your-data}
 
-{{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph_config.png" alt="プロファイリングフレームグラフウィジェット構成のデータをグラフ化するセクション" style="width:100%;" >}}
+1. 検索フィールドで、タグを使用してプロファイリングデータのスコープを指定します。例として、`host`、`container_name`、`service`、`env`、`version` などがあります。
+2. {{< ui >}}Show{{< /ui >}} メニューで、プロファイルタイプを選択します。[利用可能なプロファイルタイプ][2]は言語によって異なります。
+3. {{< ui >}}by{{< /ui >}} メニューで、メソッドや行などのフレームの粒度を選択します。
+4. {{< ui >}}color by{{< /ui >}} および {{< ui >}}sort{{< /ui >}} メニューを使用して、フレームの網掛け方法と順序を選択します。
+5. スコープセクションを使用して、フレームグラフを絞り込みます。
+   - {{< ui >}}Scope to methods{{< /ui >}}: 含めるメソッドを選択します。このセクションの名前は、{{< ui >}}by{{< /ui >}} メニューで選択された粒度に応じて変わります。
+   - {{< ui >}}Scope to endpoints{{< /ui >}}: 特定のエンドポイントにフィルタリングします。`per Minute by Endpoint` を選択して合計リソース消費量を表示するか、`per Endpoint Call` を選択してリクエストごとのリソース消費量を表示します。
 
-### 構成
+### 時間設定を行う {#set-time-preferences}
 
-1. タグでプロファイリングデータの範囲を指定します。例: `host`、`container_name`、`service`、`env`、`version`。
-2. リソースを選択するには、**Show** の横にあるドロップダウンメニューをクリックします。オプションには `CPU Time`、`Allocated Memory`、`Thrown Exceptions` などがあります。
-3. **by** と **for** の横にあるドロップダウンメニューをクリックして、フレームの粒度とコードの出所をそれぞれ選択します。
-4. グラフにタイトルを付けるか、提案されたタイトルを使用するにはボックスを空白のままにします。
-5. **Save** をクリックします。
+{{< ui >}}Global dashboard time{{< /ui >}} を選択してダッシュボードの時間枠を使用するか、{{< ui >}}Custom time{{< /ui >}} を選択してウィジェットの時間枠を設定します。
 
-### オプション
+**注**: ウィジェットで固定の {{< ui >}}Custom time{{< /ui >}} 範囲を使用している場合、Notebooks はフレームグラフのデータを 1 年間保持します。ウィジェットを作成する際、範囲は [8 日間のプロファイリングデータ保持期間][5]内である必要があります。
 
-#### 高度なオプションとフィルタリング
+### タイトルと説明を追加する {#add-a-title-and-description}
 
-3 つのドットの省略記号をクリックして高度なオプションを開き、カラーリングや解像度を指定します。
+グラフにタイトルを付けるか、ボックスを空のままにして推奨タイトルを使用します。オプションで説明を追加することもできます。{{< ui >}}Save{{< /ui >}} をクリックします。
 
-フレームグラフをカスタマイズします。*Filter flame graph* フィールドにグラフアクションやフィルターを追加します。
+## ウィジェットを操作する {#interact-with-the-widget}
 
-#### エンドポイントへのスコープ
+フレームにカーソルを合わせると、そのプロファイル値が表示されます。フレームを選択すると、そのコードパスにフォーカスされます。プロファイルを詳細に調査するには、フレームグラフの右上隅にあるフルページで開くアイコンをクリックします。
 
-特定のエンドポイントでフィルタリングし、総消費量 (`per Minute by Endpoint`) またはリクエストごと (`per Endpoint Call`) を指定します。
+## API {#api}
 
-#### 関数へのスコープ
+このウィジェットは **[Dashboards API][3]** で使用できます。[ウィジェットの JSON スキーマ定義][4]を参照してください。
 
-`Method`、`Package`、`Thread name`、`Trace Operation` などの他の条件でフィルタリングします。
-
-#### グローバルタイム
-
-ウィジェットにカスタムタイムフレームがあるか、ダッシュボードのグローバルタイムフレームがあるかを選択します。
-
-## API
-
-このウィジェットは **[Dashboards API][2]** で使用できます。[ウィジェットの JSON スキーマ定義][3]を参照してください。
-
-## その他の参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/profiler/profile_visualizations/#flame-graph
-[2]: /ja/api/latest/dashboards/
-[3]: /ja/dashboards/graphing_json/widget_json/
+[2]: /ja/profiler/profile_types/
+[3]: /ja/api/latest/dashboards/
+[4]: /ja/dashboards/graphing_json/widget_json/
+[5]: /ja/data_security/data_retention_periods/
