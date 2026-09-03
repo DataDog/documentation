@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Multimodal support renders media attached to LLM spans directly in the trace view, alongside the rest of the span's data. Voice agents and agents that reason over images handle this content as part of normal operation, and multimodal support makes it visible in traces.
+You can attach media (images and audio) to LLM spans and render it directly in the trace view, alongside the rest of the span's data. This lets you troubleshoot **voice agents** and **agents that reason over images** with their full context.
 
 Multimodal support enables you to:
 
@@ -219,15 +219,23 @@ For the full message schema, see [Message][2] in the [Agent Observability HTTP A
 {{% /tab %}}
 {{% tab "OpenTelemetry" %}}
 
-If you use [OpenTelemetry instrumentation][1], no code change is required. Datadog extracts media from message parts that follow the [OpenTelemetry GenAI semantic conventions for message parts][2]:
+If you use [OpenTelemetry instrumentation][1], no code change is required. Datadog extracts media from messages at ingestion, and how much it can extract depends on the semantic convention your instrumentation emits:
 
-- A `blob` part with a `mime_type` and inline bytes becomes an image or audio part. When the part omits `modality`, Datadog infers it from the MIME type.
-- A `uri` part carrying a base64 image data URI, such as `data:image/png;base64,...`, becomes an image part.
+| Convention | Images | Audio |
+|------------|--------|-------|
+| [OpenTelemetry 1.37+][2] | Inline `blob` parts, and `uri` parts carrying a base64 data URI | Inline `blob` parts |
+| [OpenInference][3] | Ordered image content carrying a base64 data URI | Not extracted |
+| [Langfuse][4] | `image_url` blocks carrying a base64 data URI | Not extracted |
+| [OpenLLMetry][5] | Not extracted | Not extracted |
 
-Audio reaches the trace view through `blob` parts only. An audio data URI on a `uri` part is recorded as text. The conventions also specify `blob` as the part type for base64 data, so prefer `blob` for both audio and images.
+Only media carried inline as base64 bytes is rendered. A remote URL is recorded as a text reference and is never fetched. The [OpenTelemetry GenAI conventions][6] specify `blob` as the part type for inline base64 data, so prefer `blob` for both audio and images.
 
 [1]: /llm_observability/instrument/otel_instrumentation/
-[2]: https://github.com/open-telemetry/semantic-conventions-genai/blob/main/model/gen-ai/gen-ai-input-messages.json
+[2]: /llm_observability/instrument/otel_instrumentation/#media-in-messages
+[3]: /llm_observability/instrument/otel_instrumentation/#media-in-openinference-messages
+[4]: /llm_observability/instrument/otel_instrumentation/#media-in-langfuse-messages
+[5]: /llm_observability/instrument/otel_instrumentation/#media-in-openllmetry-messages
+[6]: https://github.com/open-telemetry/semantic-conventions-genai/blob/main/model/gen-ai/gen-ai-input-messages.json
 {{% /tab %}}
 {{< /tabs >}}
 
