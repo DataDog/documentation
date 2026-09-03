@@ -77,6 +77,8 @@ Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (d
 
 Use the following environment variables to configure tracing for the Docker Agent.
 
+For all available options and their defaults, see the `apm_config` section of the [example Agent configuration file][8].
+
 `DD_API_KEY`                      
 : required - _string_
 <br/>Your [Datadog API key][1].
@@ -395,3 +397,4 @@ Refer to the [language-specific APM instrumentation docs][3] for tracer settings
 [5]: /tracing/guide/ignoring_apm_resources/
 [6]: /tracing/troubleshooting/agent_rate_limits
 [7]: /getting_started/site/
+[8]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
