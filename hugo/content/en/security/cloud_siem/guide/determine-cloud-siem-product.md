@@ -1,6 +1,6 @@
 ---
 title: Determine the Cloud SIEM product your organization is using
-description: Cloud SIEM is available in Standalone, Add-on with Flex Logs, and Legacy products. Follow this guide to determine which product your organization is using.
+description: Cloud SIEM is available in Standalone, Add-on with Flex Logs, and Legacy products. Follow this guide to determine which product your organization is using and compare the features available in each.
 ---
 
 ## Overview
@@ -9,9 +9,18 @@ Cloud SIEM is available as the following products:
 - Add-on with Flex Logs
 - Legacy
 
+Standalone is the default product for new Cloud SIEM organizations. In Standalone:
+- Usage is measured in gigabytes of analyzed logs, rather than in millions of analyzed events.
+- Ingestion of logs indexed in the Cloud SIEM index is included in the analyzed log cost, rather than billed separately.
+- Data is retained for 365 days (12 months), rather than for 15 months.
+
+Organizations that adopted Standalone before gigabyte-based usage was introduced have a 15-month retention period. Both are referred to as Standalone in the documentation, because they provide the same features.
+
 There are two ways to see which Cloud SIEM product your organization is using:
 - [Check the Plan & Usage page](#plan-usage)
 - [Check the Cloud SIEM settings page](#settings)
+
+To compare what each product includes, see [Features by Cloud SIEM product](#features).
 
 ## Check the Plan & Usage page{#plan-usage}
 
@@ -87,8 +96,40 @@ In Datadog, go to the [Cloud SIEM settings][2] page. The page shows either a {{<
   </tbody>
 </table>
 
-Need additional assistance? Contact [Datadog support][3].
+## Features by Cloud SIEM product{#features}
+
+The following table lists the Cloud SIEM features available in each product.
+
+| Feature | Standalone | Add-on with Flex Logs | Legacy |
+|---------|:----------:|:---------------------:|:------:|
+| [Content Packs][4] | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Editing default detection rules][5] | {{< X >}} | {{< X >}} | {{< X >}} |
+| [MITRE ATT&CK Map][6] | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Security Filters][7] | | {{< X >}} | {{< X >}} |
+| [Log index filters][8] | {{< X >}} | | |
+| [MITRE ATT&CK Map compact view][6] | {{< X >}} | {{< X >}} | |
+| [Scheduled rules][9] | {{< X >}} | {{< X >}} | |
+| [Sequence detections][10] | {{< X >}} | {{< X >}} | |
+| [Historical jobs][11] | {{< X >}} | {{< X >}} | |
+| [Risk Insights][12] | {{< X >}} | {{< X >}} | |
+| [Critical Assets][13] | {{< X >}} | {{< X >}} | |
+| [Open Cybersecurity Schema Framework (OCSF)][14] | {{< X >}} | {{< X >}} | |
+| [Threat intelligence][15] | {{< X >}} | {{< X >}} | |
+
+For help identifying your product, or to use a feature your product does not include, contact your Datadog account team or [Datadog support][3].
 
 [1]: https://app.datadoghq.com/billing/usage
 [2]: https://app.datadoghq.com/security/configuration/siem/setup
 [3]: /help/
+[4]: /security/cloud_siem/ingest_and_enrich/content_packs/
+[5]: /security/detection_rules/
+[6]: /security/cloud_siem/detect_and_monitor/mitre_attack_map/
+[7]: /security/cloud_siem/guide/customize-which-logs-cloud-siem-analyzes/#how-security-filters-work
+[8]: /security/cloud_siem/guide/customize-which-logs-cloud-siem-analyzes/#cloud-siem-standalone-filter-the-cloud-siem-index
+[9]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/
+[10]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/sequence/
+[11]: /security/cloud_siem/detect_and_monitor/historical_jobs/
+[12]: /security/cloud_siem/triage_and_investigate/entities_and_risk_scoring/
+[13]: /security/cloud_siem/detect_and_monitor/critical_assets/
+[14]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/
+[15]: /security/cloud_siem/ingest_and_enrich/threat_intelligence/
