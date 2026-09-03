@@ -309,7 +309,7 @@ Configure Dynamic Instrumentation using the following environment variables:
 
 {% if equals($prog_lang, "java") %}
 
-**Note**: You can also set `-Ddd.dynamic.instrumentation.enabled=true` instead of this environment variable.
+**Note**: You can also set `-Ddd.dynamic.instrumentation.enabled=true` instead of `DD_DYNAMIC_INSTRUMENTATION_ENABLED`.
 
 {% /if %}
 
