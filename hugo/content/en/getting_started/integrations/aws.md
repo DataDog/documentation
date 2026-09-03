@@ -42,7 +42,7 @@ This guide walks you through integrating an Amazon Web Services (AWS) account wi
 
 Before you begin, ensure that you have an [AWS][7] account. The CloudFormation template creates an IAM role and associated policy, allowing Datadog's AWS account to make API calls to your AWS account to collect and push data. Your AWS user must have the following IAM permissions to run the template:
 
-{{% collapse-content title="Required IAM permissions" level="h4" expanded=false id="iam-permissions" %}}
+{{% collapse-content title="Required IAM permissions" level="h3" expanded=false id="iam-permissions" %}}
 - cloudformation:CreateStack
 - cloudformation:CreateUploadBucket
 - cloudformation:DeleteStack

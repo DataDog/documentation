@@ -43,7 +43,7 @@ When you take an average of sessions on mobile and roll it up every 30 minutes, 
 
 {{< img src="/dashboards/guide/rollup-cardinality-visualizations/pct_total_mobile_sessions.png" alt="Line chart displaying percentage of total sessions on mobile rolled up every 5 minutes (purple line) compared to 30 minutes (pink line). The purple line is spiky. The pink line is smooth and overlaps with the blue line." style="width:100%;" >}}
 
-{{% collapse-content title="Configuration" level="h4" expanded=false %}}
+{{% collapse-content title="Configuration" level="h3" expanded=false %}}
 {{< img src="/dashboards/guide/rollup-cardinality-visualizations/pct_total_mobile_sessions_config.png" alt="Configuration showing the query settings for percentage of total mobile sessions with rollup function applied" style="width:100%;" >}}
 {{% /collapse-content %}}
 
@@ -51,7 +51,7 @@ However, when you group by users, the two graphs don't overlap: the 30-minute gr
 
 {{< img src="/dashboards/guide/rollup-cardinality-visualizations/pct_unique_users_mobile.png" alt="Line graph displaying percentage of unique users on mobile rolled up every 5 minutes (purple line) compared to 30 minutes (pink line). The smooth pink line is higher than the spiky purple line." style="width:100%;" >}}
 
-{{% collapse-content title="Configuration" level="h4" expanded=false %}}
+{{% collapse-content title="Configuration" level="h3" expanded=false %}}
 {{< img src="/dashboards/guide/rollup-cardinality-visualizations/pct_unique_users_mobile_config.png" alt="Configuration showing the query settings for percentage of unique users on mobile with 5min and 30 min rollup function applied" style="width:100%;" >}}
 {{% /collapse-content %}}
 
@@ -59,7 +59,7 @@ The following graph looks at 5-minute versus 30-minute rollups for mobile distin
 
 {{< img src="/dashboards/guide/rollup-cardinality-visualizations/count_total_mobile_users.png" alt="Line graph showing four lines: total distinct users (5-minute rollup), total distinct users (30-minute rollup), mobile distinct users (5-minute rollup), mobile distinct users (30-minute rollup)." style="width:100%;" >}}
 
-{{% collapse-content title="Configuration" level="h4" expanded=false %}}
+{{% collapse-content title="Configuration" level="h3" expanded=false %}}
 {{< img src="/dashboards/guide/rollup-cardinality-visualizations/count_total_mobile_users_config.png" alt="Configuration for scaled rollup comparison" style="width:100%;" >}}
 {{% /collapse-content %}}
 

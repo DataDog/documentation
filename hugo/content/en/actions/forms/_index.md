@@ -1,7 +1,6 @@
 ---
 title: Forms
 description: Build forms to collect input, analyze responses, and trigger automations.
-disable_toc: false
 further_reading:
   - link: https://www.datadoghq.com/blog/datadog-forms
     tag: Blog
@@ -19,7 +18,7 @@ Datadog Forms allow you to collect input, analyze responses, and trigger automat
 Some ways you can use forms:
 - Scaffold services from predefined templates.
 - Survey engineering feedback in an internal developer portal (IDP).
-- Create service requests and [cases][1] for security, platform, or IT teams directly from employee form responses.
+- Create service requests and [work items][1] for security, platform, or IT teams directly from employee form responses.
 
 ## Create a form
 
@@ -48,7 +47,7 @@ You can also ask Bits Chat to create a form from anywhere in Datadog, not only f
 {{% /tab %}}
 
 {{% tab "Blueprint" %}}
-Blueprints are starter forms for common use cases, pre-loaded with sample questions. Some blueprints include a pre-configured automation. Available blueprints include Developer Experience Survey, IDP Feedback, Case Management Service Request, Report an Incident, Bug Report, On-Call Escalation, Post-Incident Review, and more.
+Blueprints are starter forms for common use cases, pre-loaded with sample questions. Some blueprints include a pre-configured automation. Available blueprints include Developer Experience Survey, IDP Feedback, Work Management Service Request, Report an Incident, Bug Report, On-Call Escalation, Post-Incident Review, and more.
 
 1. Select {{< ui >}}Create from blueprint{{< /ui >}} and browse the available templates.
 1. Select a blueprint and click {{< ui >}}Continue{{< /ui >}}.
@@ -78,6 +77,16 @@ To preview or share your form:
 1. Click {{< ui >}}Preview{{< /ui >}} to view the form as it appears to respondents.
 1. Click {{< ui >}}Share{{< /ui >}} to copy the form link or configure sharing options.
 
+## Customize start and end pages
+
+Forms can include a start page shown before the first question, and an end page shown after a respondent submits the form. Customize the title and message on both pages. By default, forms don't include a start page, and the end page shows a generic completion message.
+
+To add or customize a start or end page:
+1. From the [Forms][2] page, click a form to open it in the editor.
+1. In the {{< ui >}}Pages{{< /ui >}} panel, click {{< ui >}}Start Page{{< /ui >}} or {{< ui >}}End Page{{< /ui >}}. If no start page exists, click the plus **+** icon to add one.
+1. Edit the title and message.
+1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to apply your changes.
+
 ## Form settings
 
 From the [Forms][2] page, click a form to open it in the editor. In the editor header, click the gear <i class="icon-cog-2"></i> icon to access the following settings:
@@ -101,22 +110,24 @@ To configure sharing for a form:
 
 The following sharing options are available:
 
-{{% collapse-content title="Share within Datadog" level="h4" expanded=false %}}
-Share the form with users in your Datadog organization.
+{{% collapse-content title="Share within Datadog" level="h3" expanded=false %}}
+Share the form with users or teams in your Datadog organization.
+
+Add individual users or teams as recipients. Enable {{< ui >}}Notify added teammates{{< /ui >}} to send a notification, and optionally add a custom message. Teams are notified in their configured Slack channel or by email; individual users are notified by email.
 
 Under {{< ui >}}Add to Dashboard{{< /ui >}}, use the dropdown to add the form to an existing dashboard or create a dashboard.
 
 Enable the {{< ui >}}Add to IDP Self-Service Actions{{< /ui >}} toggle to surface the form in the [Self-Service Actions][5] catalog. This is a central place where platform and infrastructure teams publish tools for the rest of the organization to discover and use.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Share with external users" level="h4" expanded=false %}}
+{{% collapse-content title="Share with external users" level="h3" expanded=false %}}
 Share the form with users outside your Datadog organization. You can configure an access expiration date for each sharing option and create multiple sharing configurations with different settings and expiration dates.
 
 The following options are available:
 
 - **Specific individuals**: Add recipients by individual email address. For example, `alice@example.com` and `bob@example.com`.
 - **Company domain**: Share with anyone in a specific email domain. For example, `*@yourcompany.com`.
-- **Shareable link**: Generate a link that anyone can use to access the form without a Datadog account.
+- **Anyone with a link**: Generate a link that anyone can use to access the form after verifying their email address.
 {{% /collapse-content %}}
 
 To pause or remove external sharing, click {{< ui >}}Share{{< /ui >}}, then click {{< ui >}}Edit{{< /ui >}} and select {{< ui >}}Pause Sharing{{< /ui >}} or {{< ui >}}Delete Sharing{{< /ui >}}.
@@ -165,7 +176,7 @@ By default, only the creator of a form can access it. To change the permissions 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /incident_response/case_management/
+[1]: /incident_response/work_management/
 [2]: https://app.datadoghq.com/forms
 [3]: /actions/forms/components/
 [4]: /actions/forms/responses/

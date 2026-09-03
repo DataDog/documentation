@@ -68,7 +68,7 @@ To edit or delete a mobile application, hover over a mobile application in the {
 
 ## Manage application versions
 
-Clicking on a mobile application in the {{< ui >}}Mobile Applications List{{< /ui >}} displays existing versions of the application. Hover over a version and click the {{< ui >}}+{{< /ui >}} icon to [create a mobile app test][6] with the selected mobile application's version.
+Clicking on a mobile application in the {{< ui >}}Mobile Applications List{{< /ui >}} displays existing versions of the application. Hover over a version and click the {{< ui >}}\+{{< /ui >}} icon to [create a mobile app test][6] with the selected mobile application's version.
 
 To edit or delete a version of a mobile application, hover over a version in the mobile application and click on the respective icon.
 
@@ -76,7 +76,7 @@ To edit or delete a version of a mobile application, hover over a version in the
 
 To add a version of an existing mobile application:
 
-1. Hover over the {{< ui >}}+{{< /ui >}} icon in a mobile application in the {{< ui >}}Mobile Applications List{{< /ui >}} and click {{< ui >}}Add new version{{< /ui >}}. 
+1. Hover over the {{< ui >}}\+{{< /ui >}} icon in a mobile application in the {{< ui >}}Mobile Applications List{{< /ui >}} and click {{< ui >}}Add new version{{< /ui >}}. 
 2. Upload an [`.apk`][4] or `.ipa` file.
 3. Enter a version name. 
 4. Optionally, select {{< ui >}}Mark this version as latest{{< /ui >}}.
