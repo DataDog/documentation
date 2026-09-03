@@ -1,13 +1,13 @@
 .image-card {
   display: flex;
-  border: var(--border-width) solid var(--color-border-card);
+  border: var(--border-width) solid var(--color-border);
   border-radius: var(--border-radius);
   text-decoration: none;
   color: var(--color-text);
 }
 
 .image-card:hover {
-  box-shadow: var(--shadow-card-hover);
+  box-shadow: var(--shadow-sm-hover);
 }
 
 .image-card__body {
@@ -19,11 +19,11 @@
   gap: var(--space-xs);
   padding: var(--space-sm) var(--space-xs);
   width: 100%;
-  min-height: var(--card-grid-card-min-height);
+  min-height: 100px;
 }
 
 .image-card--has-title .image-card__body {
-  min-height: var(--card-grid-card-min-height-titled);
+  min-height: 140px;
 }
 
 .image-card__image {
