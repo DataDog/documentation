@@ -384,7 +384,7 @@ To create a dynamic span tag:
 1. Optionally define a condition using the Dynamic Instrumentation expression language. The tag is added only when the expression evaluates to true.
 1. Optionally add additional tags, each with their own name, expression, and optional condition.
 
-You can use a *dynamic span tag* as an alternative to [using Custom Instrumentation to add tags in code][14].
+You can use a *dynamic span tag* as an alternative to [using Custom Instrumentation to add tags in code][13].
 
 [1]: /agent/
 [2]: /tracing/guide/remote_config
@@ -393,7 +393,6 @@ You can use a *dynamic span tag* as an alternative to [using Custom Instrumentat
 [8]: /account_management/rbac/permissions#apm
 [12]: https://app.datadoghq.com/dynamic-instrumentation
 [13]: /tracing/trace_collection/custom_instrumentation/server-side/
-[14]: /tracing/trace_collection/custom_instrumentation/server-side/
 [15]: /dynamic_instrumentation/expression-language
 [16]: https://app.datadoghq.com/dynamic-instrumentation/settings
 [17]: /dynamic_instrumentation/symdb/
