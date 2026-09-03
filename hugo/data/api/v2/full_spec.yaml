@@ -67933,6 +67933,26 @@ components:
             $ref: "#/components/schemas/MetricAssetResponseIncluded"
           type: array
       type: object
+    MetricAvailableAggrFunctions:
+      description: A single aggregation function used to query a metric.
+      enum:
+        - avg
+        - min
+        - max
+        - sum
+        - count
+        - stddev
+        - pxx
+      example: avg
+      type: string
+      x-enum-varnames:
+        - AVG
+        - MIN
+        - MAX
+        - SUM
+        - COUNT
+        - STDDEV
+        - PXX
     MetricBulkConfigureTagsType:
       default: metric_bulk_configure_tags
       description: The metric bulk configure tags resource.
@@ -68111,14 +68131,26 @@ components:
     MetricCustomAggregations:
       description: |-
         Deprecated. You no longer need to configure specific time and space aggregations for Metrics Without Limits.
-      example:
-        - space: sum
-          time: sum
-        - space: sum
-          time: count
-      items:
-        $ref: "#/components/schemas/MetricCustomAggregation"
-      type: array
+      oneOf:
+        - example:
+            - space: sum
+              time: sum
+            - space: sum
+              time: count
+          items:
+            $ref: "#/components/schemas/MetricCustomAggregation"
+          type: array
+        - example:
+            - avg
+            - min
+            - max
+            - sum
+            - count
+            - stddev
+            - pxx
+          items:
+            $ref: "#/components/schemas/MetricAvailableAggrFunctions"
+          type: array
     MetricCustomSpaceAggregation:
       description: A space aggregation for use in query.
       enum:
