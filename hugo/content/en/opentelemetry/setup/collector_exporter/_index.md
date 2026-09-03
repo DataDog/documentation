@@ -34,7 +34,7 @@ Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector Cont
 - **Resource detection processor**: Detects host and cloud resource attributes, which Datadog uses for hostname resolution and tagging.
 - **Datadog extension**: Reports Collector metadata for host enrichment. It does not export telemetry data.
 
-This setup is best for users who prefer OpenTelemetry Collector distributions from the OpenTelemetry open source community, or who require advanced processing capabilities not available in other setups. For most use cases, the [Datadog Distribution of OTel Collector (DDOT)][12] is the recommended approach.
+This is the recommended setup for a Collector you manage yourself. If you want Datadog to manage the Collector for you, use the [Datadog Distribution of OTel Collector (DDOT)][12] instead.
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running any OpenTelemetry Collector with OTLP HTTP exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
 
@@ -60,7 +60,7 @@ Download the latest release of the OpenTelemetry Collector Contrib distribution 
 
 ### 2. Create the Collector configuration
 
-Create a configuration file named `collector.yaml`. The configuration varies depending on your environment. Select the tab that matches your setup. For Kubernetes, use the Helm installation; the DaemonSet configuration tab is a reference for users who maintain their own Kubernetes manifests.
+Create a configuration file named `collector.yaml`. The configuration varies depending on your environment. Select the tab that matches your setup. On Kubernetes, use the **Kubernetes** tab, which installs the Collector with Helm. The **Kubernetes manifest reference** tab is for users who maintain their own manifests.
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -433,6 +433,8 @@ Run the Collector with the host filesystem mounted:
 
 ```shell
 docker run \
+    --name otelcol \
+    --network <YOUR_DOCKER_NETWORK> \
     -p 4317:4317 \
     -p 4318:4318 \
     -e DD_API_KEY \
@@ -446,7 +448,57 @@ docker run \
 
 {{% /tab %}}
 
-{{% tab "Kubernetes configuration reference" %}}
+{{% tab "Kubernetes" %}}
+
+Use the [official OpenTelemetry Collector Helm chart][102] to deploy the Collector as a DaemonSet in Kubernetes. The example values files are tested with chart v0.147.1, pin the Collector to v0.154.0, and set up the required mounts, environment variables, RBAC resources, and port exposure.
+
+1. Create a Kubernetes secret with your Datadog API key:
+
+   ```shell
+   kubectl create secret generic datadog-secrets --from-literal=api-key='<YOUR_API_KEY>'
+   ```
+
+1. Add the OpenTelemetry Helm repository:
+
+   ```shell
+   helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
+   ```
+
+1. Download the example values file for your environment and save it as `values.yaml`. If your Datadog site is not `datadoghq.com`, update the `DD_SITE` value in `values.yaml` before installing.
+
+   | Environment | Values file |
+   |---|---|
+   | Kubernetes (non-cloud) | [`daemonset.yaml`][103] |
+   | Amazon EKS | [`daemonset-eks.yaml`][104] |
+   | Amazon EKS Auto Mode | [`daemonset-eks-auto.yaml`][105] |
+   | Google GKE | [`daemonset-gke.yaml`][106] |
+   | Google GKE Autopilot | [`daemonset-gke-autopilot.yaml`][107] |
+   | Azure AKS | [`daemonset-aks.yaml`][108] |
+   | Azure AKS Automatic | [`daemonset-aks-automatic.yaml`][109] |
+
+   On Amazon EKS, the values files cannot configure the required AWS-side settings. Apply the following outside of Helm:
+
+   - **Amazon EKS**: The `ec2` and `eks` detectors need access to the IMDS endpoint from inside a container. Set the IMDS token hop limit to 2 in your node launch template or in your account settings.
+   - **Amazon EKS Auto Mode**: The `eks` detector requires a Pod Identity association that assigns the Collector an IAM role with the `EC2:DescribeInstances` permission.
+
+1. Install the Collector:
+
+   ```shell
+   helm install otelcol open-telemetry/opentelemetry-collector --version 0.147.1 --values values.yaml
+   ```
+
+[102]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/opentelemetry-collector-0.147.1/charts/opentelemetry-collector
+[103]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset.yaml
+[104]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-eks.yaml
+[105]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-eks-auto.yaml
+[106]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-gke.yaml
+[107]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-gke-autopilot.yaml
+[108]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-aks.yaml
+[109]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-aks-automatic.yaml
+
+{{% /tab %}}
+
+{{% tab "Kubernetes manifest reference" %}}
 
 This tab is a configuration reference for users who maintain their own Kubernetes manifests. For an executable installation that includes the required pod specification, mounts, environment variables, RBAC resources, and port exposure, use the **Kubernetes (Helm—recommended)** tab.
 
@@ -793,56 +845,6 @@ For the complete configuration files for each environment, see the [`opentelemet
 [501]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
 
 {{% /tab %}}
-
-{{% tab "Kubernetes (Helm—recommended)" %}}
-
-Use the [official OpenTelemetry Collector Helm chart][102] to deploy the Collector as a DaemonSet in Kubernetes. The example values files are tested with chart v0.147.1, pin the Collector to v0.154.0, and set up the required mounts, environment variables, RBAC resources, and port exposure.
-
-1. Create a Kubernetes secret with your Datadog API key:
-
-   ```shell
-   kubectl create secret generic datadog-secrets --from-literal=api-key='<YOUR_API_KEY>'
-   ```
-
-1. Add the OpenTelemetry Helm repository:
-
-   ```shell
-   helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
-   ```
-
-1. Download the example values file for your environment and save it as `values.yaml`. If your Datadog site is not `datadoghq.com`, update the `DD_SITE` value in `values.yaml` before installing.
-
-   | Environment | Values file |
-   |---|---|
-   | Kubernetes (non-cloud) | [`daemonset.yaml`][103] |
-   | Amazon EKS | [`daemonset-eks.yaml`][104] |
-   | Amazon EKS Auto Mode | [`daemonset-eks-auto.yaml`][105] |
-   | Google GKE | [`daemonset-gke.yaml`][106] |
-   | Google GKE Autopilot | [`daemonset-gke-autopilot.yaml`][107] |
-   | Azure AKS | [`daemonset-aks.yaml`][108] |
-   | Azure AKS Automatic | [`daemonset-aks-automatic.yaml`][109] |
-
-   On Amazon EKS, the values files cannot configure the required AWS-side settings. Apply the following outside of Helm:
-
-   - **Amazon EKS**: The `ec2` and `eks` detectors need access to the IMDS endpoint from inside a container. Set the IMDS token hop limit to 2 in your node launch template or in your account settings.
-   - **Amazon EKS Auto Mode**: The `eks` detector requires a Pod Identity association that assigns the Collector an IAM role with the `EC2:DescribeInstances` permission.
-
-1. Install the Collector:
-
-   ```shell
-   helm install otelcol open-telemetry/opentelemetry-collector --version 0.147.1 --values values.yaml
-   ```
-
-[102]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/opentelemetry-collector-0.147.1/charts/opentelemetry-collector
-[103]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset.yaml
-[104]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-eks.yaml
-[105]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-eks-auto.yaml
-[106]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-gke.yaml
-[107]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-gke-autopilot.yaml
-[108]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-aks.yaml
-[109]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-aks-automatic.yaml
-
-{{% /tab %}}
 {{< /tabs >}}
 
 <div class="alert alert-warning"><strong>Before using this setup in production</strong>, add the <a href="/opentelemetry/config/collector_batch_memory/">memory limiter</a> to every pipeline. The starter configurations above omit it because its limits must be sized for the memory available to your Collector.</div>
@@ -873,10 +875,10 @@ export OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"
 {{% tab "Docker" %}}
 Set the following environment variables in your application container:
 ```
-OTEL_EXPORTER_OTLP_ENDPOINT=http://<collector-hostname>:4318
+OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcol:4318
 OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
 ```
-Both containers must be on the same network. If you use Docker Compose, this is handled automatically.
+This uses the `--name otelcol` value from the `docker run` command. Both containers must be on the same Docker network. If you use Docker Compose, this is handled automatically.
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}

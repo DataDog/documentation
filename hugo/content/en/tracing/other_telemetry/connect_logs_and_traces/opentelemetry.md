@@ -173,7 +173,17 @@ The OpenTelemetry Collector and the Datadog Agent can both receive OTLP logs.
        protocols:
          grpc:
          http:
-   
+
+   processors:
+     resource_detection:
+       detectors: [env, system]
+
+   exporters:
+     otlp_http:
+       endpoint: https://otlp.${env:DD_SITE}
+       headers:
+         dd-api-key: ${env:DD_API_KEY}
+
    service:
      pipelines:
        logs:

@@ -134,7 +134,7 @@ For a complete list of configuration options for the Datadog Exporter, see the [
 
 #### Batch processor configuration
 
-The batch processor is required for non-development environments. The exact configuration depends on your specific workload and signal types.
+The batch processor is required for non-development environments. It applies to the Datadog Exporter configuration on this page; the recommended OTLP HTTP setup batches in the exporter's sending queue instead. The exact configuration depends on your specific workload and signal types.
 
 Configure the batch processor based on Datadog's intake limits:
 
@@ -228,7 +228,7 @@ spec:
           command:
             - "/otelcol-contrib"
             - "--config=/conf/otel-agent-config.yaml"
-          image: otel/opentelemetry-collector-contrib:0.71.0
+          image: otel/opentelemetry-collector-contrib:0.154.0
           env:
             - name: POD_IP
               valueFrom:
@@ -287,9 +287,9 @@ If you use a different Collector version, consult the examples included with tha
 Configure each of the following components to suit your needs:
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/collector_exporter/otlp_receiver/" >}}OTLP Receiver{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/collector_exporter/hostname_tagging/" >}}Hostname and Tags{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/collector_exporter/collector_batch_memory/" >}}Collector Memory Limits{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/config/otlp_receiver/" >}}OTLP Receiver{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/config/hostname_tagging/" >}}Hostname and Tagging{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/config/collector_batch_memory/" >}}Collector Memory Limits{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Validate your collector configurations in Fleet Automation
@@ -321,7 +321,7 @@ Inspect and troubleshoot your OpenTelemetry Collector configurations in Fleet Au
 [27]: /logs/log_configuration/processors/service_remapper/
 [29]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector
 [30]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.154.0/exporter/datadogexporter/examples/ootb-ec2.yaml
-[33]: /opentelemetry/collector_exporter/deployment
+[33]: /opentelemetry/setup/collector_exporter/deploy/
 [34]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.154.0/exporter/datadogexporter/examples/host-metrics.yaml
 [35]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.154.0/exporter/datadogexporter/examples/docker-stats.yaml
 [36]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.154.0/exporter/datadogexporter/examples/kafka.yaml

@@ -27,7 +27,7 @@ processors:
     limit_mib: 1000
 ```
 
-Add `memory_limiter` to the `processors` list for each pipeline in your configuration.
+Add `memory_limiter` to the `processors` list for each pipeline in your configuration. Place it first in the list so that it applies backpressure before other processors allocate memory.
 
 For Kubernetes, set container resource limits in your Helm `values.yaml` file:
 

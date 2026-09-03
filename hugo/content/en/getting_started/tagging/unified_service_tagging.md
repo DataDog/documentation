@@ -131,7 +131,7 @@ You can also use the OpenTelemetry Resource Attributes environment variables to 
   -  ...
      env:
          - name: OTEL_RESOURCE_ATTRIBUTES
-           value: "service.name=<SERVICE>,service.version=<VERSION>,deployment.environment=<ENV>"
+           value: "service.name=<SERVICE>,service.version=<VERSION>,deployment.environment.name=<ENV>"
          - name: OTEL_SERVICE_NAME
            value: "<SERVICE>"
 ```
