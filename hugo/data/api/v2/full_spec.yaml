@@ -988,6 +988,14 @@ components:
       required: true
       schema:
         type: string
+    LLMObsAnnotationQueueInteractionIDPathParameter:
+      description: The ID of the interaction in the annotation queue.
+      example: "interaction-456"
+      in: path
+      name: interaction_id
+      required: true
+      schema:
+        type: string
     LLMObsDatasetIDPathParameter:
       description: The ID of the Agent Observability dataset.
       example: "9f64e5c7-dc5a-45c8-a17c-1b85f0bec97d"
@@ -56780,11 +56788,89 @@ components:
         - can_annotate
         - annotations
       type: object
+    LLMObsAnnotatedInteractionDataAttributesResponse:
+      description: Attributes containing an annotated interaction and its related events.
+      properties:
+        annotated_interaction:
+          $ref: "#/components/schemas/LLMObsAnnotatedInteractionItem"
+        events:
+          $ref: "#/components/schemas/LLMObsAnnotatedInteractionEvents"
+        interaction_type:
+          $ref: "#/components/schemas/LLMObsAnyInteractionType"
+        next_cursor:
+          description: Cursor to retrieve the next page of events. Absent when there are no more events.
+          example: "eyJzdGFydCI6MTAwfQ=="
+          type: string
+      required:
+        - annotated_interaction
+        - interaction_type
+        - events
+      type: object
+    LLMObsAnnotatedInteractionDataResponse:
+      description: Data object for a single annotated interaction.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsAnnotatedInteractionDataAttributesResponse"
+        id:
+          description: Unique identifier of the interaction.
+          example: "interaction-456"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsAnnotatedInteractionsType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    LLMObsAnnotatedInteractionEvent:
+      description: An event associated with an annotated interaction.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsAnnotatedInteractionEventAttributes"
+        id:
+          description: Unique identifier of the event.
+          example: "span-7a1b2c3d"
+          type: string
+        type:
+          description: Type of the event.
+          example: span
+          type: string
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    LLMObsAnnotatedInteractionEventAttributes:
+      additionalProperties: {}
+      description: Attributes of an event associated with an annotated interaction.
+      example:
+        duration: 1500000000
+        ml_app: my-llm-app
+        name: agent_workflow
+        span_id: span-7a1b2c3d
+        span_kind: agent
+        start_ns: 1705314600000000000
+        status: ok
+        trace_id: trace-abc-123
+      type: object
+    LLMObsAnnotatedInteractionEvents:
+      description: Page of events associated with the annotated interaction.
+      items:
+        $ref: "#/components/schemas/LLMObsAnnotatedInteractionEvent"
+      type: array
     LLMObsAnnotatedInteractionItem:
       description: An interaction with its associated annotations.
       oneOf:
         - $ref: "#/components/schemas/LLMObsTraceAnnotatedInteractionItem"
         - $ref: "#/components/schemas/LLMObsDisplayBlockAnnotatedInteractionItem"
+    LLMObsAnnotatedInteractionResponse:
+      description: Response containing a single annotated interaction and its related events.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsAnnotatedInteractionDataResponse"
+      required:
+        - data
+      type: object
     LLMObsAnnotatedInteractionsByTraceDataAttributesResponse:
       description: Attributes of the cross-queue annotated interactions response.
       properties:
@@ -168516,6 +168602,104 @@ paths:
       tags:
         - Agent Observability
       x-menu-order: 23
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/llm-obs/v1/annotation-queues/{queue_id}/annotated-interactions/{interaction_id}:
+    get:
+      description: Retrieve an interaction, its annotations, and a page of related events from an annotation queue.
+      operationId: GetLLMObsAnnotatedInteraction
+      parameters:
+        - $ref: "#/components/parameters/LLMObsAnnotationQueueIDPathParameter"
+        - $ref: "#/components/parameters/LLMObsAnnotationQueueInteractionIDPathParameter"
+        - description: Maximum number of events to return. Defaults to 10.
+          in: query
+          name: limit
+          schema:
+            default: 10
+            format: int32
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: Cursor from the previous response to retrieve the next page of events.
+          in: query
+          name: cursor
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        annotated_interaction:
+                          annotations: []
+                          can_annotate: true
+                          content_id: trace-abc-123
+                          created_at: "2024-01-15T10:30:00Z"
+                          id: interaction-456
+                          modified_at: "2024-01-15T10:30:00Z"
+                          type: trace
+                        events:
+                          - attributes:
+                              duration: 1500000000
+                              ml_app: my-llm-app
+                              name: agent_workflow
+                              span_id: span-7a1b2c3d
+                              span_kind: agent
+                              start_ns: 1705314600000000000
+                              status: ok
+                              trace_id: trace-abc-123
+                            id: span-7a1b2c3d
+                            type: span
+                        interaction_type: session
+                        next_cursor: eyJzdGFydCI6MTAwfQ==
+                      id: interaction-456
+                      type: annotated_interactions
+              schema:
+                $ref: "#/components/schemas/LLMObsAnnotatedInteractionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get an annotated queue interaction
+      tags:
+        - Agent Observability
+      x-menu-order: 73
+      x-pagination:
+        cursorParam: cursor
+        cursorPath: data.attributes.next_cursor
+        limitParam: limit
+        resultsPath: data.attributes.events
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).

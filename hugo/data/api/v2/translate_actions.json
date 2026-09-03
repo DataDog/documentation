@@ -3369,6 +3369,10 @@
     "description": "Retrieve all interactions (traces and sessions) and their annotations for a given annotation queue.",
     "summary": "Get annotated queue interactions"
   },
+  "GetLLMObsAnnotatedInteraction": {
+    "description": "Retrieve an interaction, its annotations, and a page of related events from an annotation queue.",
+    "summary": "Get an annotated queue interaction"
+  },
   "UpsertLLMObsAnnotations": {
     "description": "Create or update annotations on interactions in a queue. Each annotation is matched\nby `interaction_id` and the requesting user's identity.\nResults and errors in the response are linked to request items by `interaction_id`.\nErrors for individual items are returned in the `errors` field without blocking the rest of the batch.\nRequests where every item is denied by queue access rules return `403`.",
     "summary": "Create or update annotations",
