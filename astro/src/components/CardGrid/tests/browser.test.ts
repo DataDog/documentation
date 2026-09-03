@@ -25,6 +25,36 @@ async function waitForTooltipHydration(
   ).toBeAttached();
 }
 
+/**
+ * Wait for every image inside a grid to finish decoding.
+ *
+ * The cards use `loading="lazy"` (ImageCard.astro), so whether an image has
+ * pixels by screenshot time depends on where the grid sits in the page — and
+ * therefore on how much content precedes it. Without this, editing the fixture
+ * page above a grid silently re-races these snapshots, and a baseline can be
+ * captured with some logos still blank.
+ *
+ * `scrollIntoViewIfNeeded` triggers the lazy load; `complete` plus a non-zero
+ * `naturalWidth` is what distinguishes a decoded image from one that is still
+ * fetching or has failed.
+ */
+async function waitForGridImages(grid: import("@playwright/test").Locator) {
+  await grid.scrollIntoViewIfNeeded();
+  const images = grid.locator(".image-card__image");
+  const count = await images.count();
+  for (let index = 0; index < count; index++) {
+    await expect
+      .poll(() =>
+        images
+          .nth(index)
+          .evaluate(
+            (img: HTMLImageElement) => img.complete && img.naturalWidth > 0,
+          ),
+      )
+      .toBe(true);
+  }
+}
+
 test.describe("CardGrid component", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/dd_e2e/components/card-grid");
@@ -103,6 +133,7 @@ test.describe("CardGrid component", () => {
     const tooltip = grid.locator(".card-grid__tooltip");
 
     await waitForTooltipHydration(grid);
+    await waitForGridImages(grid);
     await grid.locator(".image-card").first().hover();
     await expect(tooltip).toHaveClass(/card-grid__tooltip--visible/);
 
@@ -169,14 +200,12 @@ test.describe("CardGrid component", () => {
     }
   });
 
-  test("applies card_width as the grid's minimum column width", async ({
-    page,
-  }) => {
+  test("applies card_width as the card's width", async ({ page }) => {
     // Section 7 sets card_width=225; every other grid uses the 150 default.
     // Asserting the RENDERED width, not the inline style string, is what makes
     // the --card-grid-card-min-width plumbing load-bearing: if the CSS read a
     // different property name, the declaration would silently fall back to
-    // 150px and only a measured column would notice.
+    // 150px and only a measured card would notice.
     const wide = page.locator(".card-grid").nth(6);
     const narrow = page.locator(".card-grid").nth(0);
 
@@ -217,15 +246,15 @@ test.describe("CardGrid visual snapshots", () => {
   });
 
   test("basic image card", async ({ page }) => {
-    await expect(page.locator(".card-grid").nth(0)).toHaveScreenshot(
-      "card-grid-basic.png",
-    );
+    const grid = page.locator(".card-grid").nth(0);
+    await waitForGridImages(grid);
+    await expect(grid).toHaveScreenshot("card-grid-basic.png");
   });
 
   test("titled and subtitled card", async ({ page }) => {
-    await expect(page.locator(".card-grid").nth(1)).toHaveScreenshot(
-      "card-grid-titled.png",
-    );
+    const grid = page.locator(".card-grid").nth(1);
+    await waitForGridImages(grid);
+    await expect(grid).toHaveScreenshot("card-grid-titled.png");
   });
 
   test("tooltip open", async ({ page }) => {
@@ -273,43 +302,31 @@ test.describe("CardGrid visual snapshots", () => {
   test("keeps a short bottom row's cards the same width as a full row", async ({
     page,
   }) => {
-    // Section 9 wraps to more than one row. `auto-fill` sizes a fixed set of
-    // column tracks from the container, so cards flow into those tracks and a
-    // short last row leaves the leftovers empty. Switching to `auto-fit` would
-    // collapse them and stretch the remaining cards to fill the width, so this
-    // measures a wrapped row against a full one to keep the two apart.
-    await page.setViewportSize({ width: 1280, height: 900 });
+    // Section 9 has 7 cards, so its last row is short at every common width
+    // (5+2 at 1440, 4+3 at 1024, 3+3+1 at 800). `auto-fill` sizes a fixed set
+    // of column tracks from the container, so cards flow into those tracks and
+    // a short last row leaves the leftovers empty. `auto-fit` would instead
+    // collapse them and stretch the remaining cards, so measuring every card
+    // against the first keeps the two apart.
     const grid = page.locator(".card-grid").nth(8);
-    const cards = grid.locator(".image-card");
-
     const boxes = [];
-    for (const card of await cards.all()) {
+    for (const card of await grid.locator(".image-card").all()) {
       const box = await card.boundingBox();
       if (!box) throw new Error("Expected a layout box for every card.");
       boxes.push(box);
     }
 
-    const rowTops = [...new Set(boxes.map((box) => Math.round(box.y)))];
-    expect(rowTops.length).toBeGreaterThan(1);
+    const rowTops = new Set(boxes.map((box) => Math.round(box.y)));
+    expect(rowTops.size).toBeGreaterThan(1);
 
-    // Hiding trailing cards leaves the last row short without changing the
-    // container, which is what isolates track sizing from item count.
-    await grid.evaluate((el) => {
-      const all = el.querySelectorAll(".image-card");
-      all[all.length - 1].setAttribute("hidden", "");
-    });
+    // The last row really is short: fewer cards than the widest row.
+    const cardsPerRow = [...rowTops].map(
+      (top) => boxes.filter((box) => Math.round(box.y) === top).length,
+    );
+    const lastRowCount = cardsPerRow[cardsPerRow.length - 1];
+    expect(lastRowCount).toBeLessThan(Math.max(...cardsPerRow));
 
-    const visibleCards = grid.locator(".image-card:not([hidden])");
-    const shortRowBoxes = [];
-    for (const card of await visibleCards.all()) {
-      const box = await card.boundingBox();
-      if (!box)
-        throw new Error("Expected a layout box for every visible card.");
-      shortRowBoxes.push(box);
-    }
-
-    const widths = new Set(shortRowBoxes.map((box) => Math.round(box.width)));
+    const widths = new Set(boxes.map((box) => Math.round(box.width)));
     expect(widths.size).toBe(1);
-    expect([...widths][0]).toBe(Math.round(boxes[0].width));
   });
 });

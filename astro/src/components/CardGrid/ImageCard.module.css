@@ -1,5 +1,13 @@
 .image-card {
   display: flex;
+  /* Fixed rather than a minimum, so a card keeps its width instead of
+     stretching to fill a short row. The fallback matches the schema's
+     card_width default: without it a missing inline style would drop the
+     whole declaration. The custom property is set on the grid
+     (CardGrid.astro) and inherits down to each card. */
+  flex: 0 0 var(--card-grid-card-min-width, 150px);
+  max-width: 100%;
+  overflow: hidden;
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--border-radius);
   text-decoration: none;
@@ -22,13 +30,23 @@
   min-height: 100px;
 }
 
+/* A definite height, not a minimum: a flex line is as tall as its tallest
+   card, so one card that grows to fit a tall logo would take the whole row
+   with it. */
 .image-card--has-title .image-card__body {
-  min-height: 140px;
+  height: 140px;
 }
 
 .image-card__image {
   max-width: 100%;
+  /* Caps a square or portrait logo so it cannot crowd out the title. The
+     `width` attribute plus the intrinsic aspect ratio give the image a
+     definite height, so flex has nothing to shrink and `max-height: 100%`
+     resolves against the padding box rather than the space actually left
+     over. `object-fit` keeps the letterboxed image undistorted. */
+  max-height: 100px;
   height: auto;
+  object-fit: contain;
 }
 
 .image-card__title {

@@ -1,12 +1,10 @@
 .card-grid {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    /* Fallback matches the schema's card_width default. Without it, a missing
-       inline style would invalidate the whole declaration and collapse the
-       grid to a single column. */
-    minmax(var(--card-grid-card-min-width, 150px), 1fr)
-  );
+  display: flex;
+  flex-wrap: wrap;
+  /* Flex, not grid, so each wrapped line justifies on its own: a short last
+     row centers instead of sitting against the left edge. CSS grid centers
+     its whole track set at once and cannot align one row differently. */
+  justify-content: center;
   gap: var(--space-md);
   margin-block: var(--space-md);
 }
