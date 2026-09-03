@@ -7,6 +7,9 @@ further_reading:
 - link: "https://www.datadoghq.com/pricing/?product=llm-observability#products"
   tag: "Pricing"
   text: "Agent Observability pricing"
+- link: "/llm_observability/data_retention/"
+  tag: "Documentation"
+  text: "Learn how long Agent Observability retains your data"
 - link: "https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications"
   tag: "Learning Center"
   text: "Tracing LLM Applications"
@@ -130,8 +133,6 @@ For more information, see the [Auto Instrumentation documentation][8].
 
 Agent Observability is metered and billed on the number of LLM spans ingested. An LLM span represents a single request to an LLM provider, so one agent workflow can produce several LLM spans. For rates, see the [Agent Observability pricing page][11].
 
-For how long Agent Observability retains your data, see [Data Retention][12].
-
 ## Ready to start?
 
 See the [Setup documentation][5] for instructions on instrumenting your LLM application or follow the [Trace an LLM Application guide][6] to generate a trace using the [Agent Observability SDK for Python][3].
@@ -151,4 +152,3 @@ See the [Setup documentation][5] for instructions on instrumenting your LLM appl
 [9]: /llm_observability/investigate/evaluations/managed_evaluations
 [10]: /llm_observability/investigate/patterns
 [11]: https://www.datadoghq.com/pricing/?product=llm-observability#products
-[12]: /llm_observability/data_retention/
