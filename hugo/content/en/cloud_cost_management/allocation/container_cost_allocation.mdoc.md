@@ -191,7 +191,7 @@ All other costs are given the same value and tags as the source metric `gcp.cost
 
 ### Local storage
 
-For Kubernetes local storage allocation, a Kubernetes node is joined with Google Cloud storage costs associated with its ephemeral-storage capacity. Persistent disks that are not associated with node ephemeral-storage capacity remain unchanged.
+For Kubernetes local storage allocation, a Kubernetes node is joined with Google Cloud storage costs associated with its ephemeral-storage capacity.
 
 Next, Datadog examines all pods running on that node for the day. For each pod, Datadog reserves the larger of its ephemeral-storage request and its daily peak usage. The average usage determines the usage cost, the remainder of the reservation is workload idle, and capacity not reserved by any pod is cluster idle. The allocated cost is enriched with the pod's tags.
 
