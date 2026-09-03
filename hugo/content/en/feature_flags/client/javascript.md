@@ -65,7 +65,7 @@ const provider = new DatadogProvider({
   clientToken: '<CLIENT_TOKEN>',
   site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
-  fetch: withTimeout(globalThis.fetch, 1_500),
+  flagConfigurationFetch: withTimeout(globalThis.fetch, 1_500),
 });
 ```
 
@@ -180,7 +180,7 @@ const provider = new DatadogProvider({
   clientToken: '<CLIENT_TOKEN>',
   site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
-  fetch: withTimeout(globalThis.fetch, 1_500),
+  flagConfigurationFetch: withTimeout(globalThis.fetch, 1_500),
 });
 
 // Set the evaluation context
@@ -228,7 +228,7 @@ The web provider also supports these optional settings:
 | `flaggingProxy` | unset | Fetch flags through a proxy instead of `site`. |
 | `customHeaders` | unset | Add headers to flag-fetch requests. |
 | `overwriteRequestHeaders` | `false` | Replace default request headers with `customHeaders`. |
-| `fetch` | `globalThis.fetch` | Provide a Fetch-compatible implementation for flag configuration requests. |
+| `flagConfigurationFetch` | `globalThis.fetch` | Provide a Fetch-compatible implementation for flag configuration requests. |
 
 ### Bound flag configuration requests
 
@@ -239,7 +239,7 @@ import { DatadogProvider, withRetry, withTimeout } from '@datadog/openfeature-br
 
 const provider = new DatadogProvider({
   // Other provider options...
-  fetch: withRetry(withTimeout(globalThis.fetch, 1_500), 2),
+  flagConfigurationFetch: withRetry(withTimeout(globalThis.fetch, 1_500), 2),
 });
 {{< /code-block >}}
 
@@ -251,7 +251,7 @@ const provider = new DatadogProvider({
 
 In the example, `withTimeout` is inside `withRetry`. Therefore, each attempt has its own 1,500-millisecond timeout.
 
-<div class="alert alert-info">The `fetch` option applies only to flag configuration requests. It does not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
+<div class="alert alert-info">The `flagConfigurationFetch` option applies only to flag configuration requests. It does not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
 
 ## Override flags in your browser
 
