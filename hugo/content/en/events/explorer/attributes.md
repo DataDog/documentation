@@ -30,12 +30,14 @@ This list describes automatically ingested reserved attributes with events.
 
 ### Events with multiple service tags
 
-The reserved `service` attribute has a single value. If an event contains multiple `service:<value>` tags, the event processing version determines which tag populates the reserved attribute:
+The reserved `service` attribute accepts one value. If an event has multiple `service` tags:
 
-- V1 uses the first `service` tag it encounters. Because V1 does not sort tags before processing them, the selected value is not deterministic.
-- V2 sorts tags alphabetically and uses the first `service` tag. For example, if an event has `service:bcd` and `service:ace`, V2 assigns `service:ace` to the reserved attribute.
+- V1 selects the first `service` tag it processes. Because tags are not sorted, the result is not deterministic.
+- V2 sorts the tags alphabetically and selects the first `service` tag.
 
-Send only one `service` tag per event. Use a different tag key for additional dimensions, such as `application:<value>`. Additional `service` tags remain in the raw tag list and can be found with a query such as `tags:("service:<value>")`. A `service:<value>` query matches only the value assigned to the reserved attribute.
+For example, consider an event with `env:prod`, `service:payments`, `team:store`, and `service:checkout`. V1 can assign either service value. V2 assigns `checkout`, because `service:checkout` comes before `service:payments` alphabetically.
+
+Send only one `service` tag per event and use another tag key for additional dimensions. A `service:<value>` query matches the reserved attribute; use `tags:("service:<value>")` to find any value in the raw tag list.
 
 To search a tag that has the same key as a reserved attribute, use the `tags` search syntax. 
 Example: `tags:("status:<status>")`
