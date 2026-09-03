@@ -203,7 +203,7 @@ test.describe("CardGrid component", () => {
   test("applies card_width as the card's width", async ({ page }) => {
     // Section 7 sets card_width=225; every other grid uses the 150 default.
     // Asserting the RENDERED width, not the inline style string, is what makes
-    // the --card-grid-card-min-width plumbing load-bearing: if the CSS read a
+    // the --card-grid-card-width plumbing load-bearing: if the CSS read a
     // different property name, the declaration would silently fall back to
     // 150px and only a measured card would notice.
     const wide = page.locator(".card-grid").nth(6);
@@ -303,13 +303,12 @@ test.describe("CardGrid visual snapshots", () => {
     page,
   }) => {
     // Section 9 has 7 cards, so its last row is short at every common width
-    // (5+2 at 1440, 4+3 at 1024, 3+3+1 at 800). `auto-fill` sizes a fixed set
-    // of column tracks from the container, so cards flow into those tracks and
-    // a short last row leaves the leftovers empty. `auto-fit` would instead
-    // collapse them and stretch the remaining cards, so measuring every card
-    // against the first keeps the two apart.
+    // (5+2 at 1440, 4+3 at 1024, 3+3+1 at 800). Cards are `flex: 0 0 <width>`,
+    // so a short row keeps their width; dropping to `flex: 1` or moving back
+    // to a `1fr` grid track would stretch them to fill the leftover space,
+    // which is what measuring every card against the others catches.
     const grid = page.locator(".card-grid").nth(8);
-    const boxes = [];
+    const boxes: { x: number; y: number; width: number; height: number }[] = [];
     for (const card of await grid.locator(".image-card").all()) {
       const box = await card.boundingBox();
       if (!box) throw new Error("Expected a layout box for every card.");

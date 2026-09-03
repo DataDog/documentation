@@ -5,7 +5,7 @@
      card_width default: without it a missing inline style would drop the
      whole declaration. The custom property is set on the grid
      (CardGrid.astro) and inherits down to each card. */
-  flex: 0 0 var(--card-grid-card-min-width, 150px);
+  flex: 0 0 var(--card-grid-card-width, 150px);
   max-width: 100%;
   overflow: hidden;
   border: var(--border-width) solid var(--color-border);

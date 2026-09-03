@@ -32,10 +32,10 @@ describe("CardGrid component", () => {
     expect(html).toContain('id="card-grid-abc123"');
   });
 
-  it("exposes card_width as the --card-grid-card-min-width custom property in px", async () => {
+  it("exposes card_width as the --card-grid-card-width custom property in px", async () => {
     const html = await renderGrid({ card_width: 225 });
 
-    expect(html).toContain("--card-grid-card-min-width: 225px");
+    expect(html).toContain("--card-grid-card-width: 225px");
   });
 
   it("renders its cards", async () => {
