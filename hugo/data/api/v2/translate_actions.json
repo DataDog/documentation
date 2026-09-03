@@ -5308,28 +5308,28 @@
     "summary": "Get a RUM operation by name"
   },
   "ListRUMOperations": {
-    "description": "Search RUM operations for your organization. Supports filtering by query, creator, team, feature, and application.",
+    "description": "Search RUM operations for your organization. Supports filtering by query, creator, team,\njourney, and application.",
     "summary": "Search RUM operations"
   },
   "ListRUMOperationStrongLinks": {
-    "description": "List strong links between RUM operations and features. A strong link confirms that a feature\nbelongs to an operation. Provide `operation_id`, `feature_id`, or both to filter results;\nat least one is required.",
-    "summary": "List RUM operation strong links"
+    "description": "List links between RUM operations and journeys. A link confirms that a journey\nbelongs to an operation. Provide `operation_id`, `feature_id` (journey ID), or both to filter results;\nat least one is required.",
+    "summary": "List RUM operation links"
   },
   "CreateRUMOperationStrongLink": {
-    "description": "Create a strong link between a RUM operation and a feature, confirming that the feature\nbelongs to the operation. The operation can be identified by `operation_id` or `operation_name`;\nif `operation_name` does not match an existing operation, a stub operation is created.",
-    "summary": "Create a RUM operation strong link",
+    "description": "Create a link between a RUM operation and a journey, confirming that the journey\nbelongs to the operation. The operation can be identified by `operation_id` or `operation_name`;\nif `operation_name` does not match an existing operation, a stub operation is created.",
+    "summary": "Create a RUM operation link",
     "request_description": "",
-    "request_schema_description": "The request body for creating a RUM operation strong link."
+    "request_schema_description": "The request body for creating a RUM operation link."
   },
   "DeleteRUMOperationStrongLink": {
-    "description": "Delete the strong link between a RUM operation and a feature.",
-    "summary": "Delete a RUM operation strong link"
+    "description": "Delete the link between a RUM operation and a journey.",
+    "summary": "Delete a RUM operation link"
   },
   "UpdateRUMOperationStrongLink": {
-    "description": "Update the status of a strong link between a RUM operation and a feature.",
-    "summary": "Update a RUM operation strong link",
+    "description": "Update the status of a link between a RUM operation and a journey.",
+    "summary": "Update a RUM operation link",
     "request_description": "",
-    "request_schema_description": "The request body for updating a RUM operation strong link."
+    "request_schema_description": "The request body for updating a RUM operation link."
   },
   "DeleteRUMOperation": {
     "description": "Delete a RUM operation.",

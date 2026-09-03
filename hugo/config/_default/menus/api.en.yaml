@@ -18238,9 +18238,9 @@ menu:
         unstable:
           - v2
         order: 5
-    - name: Update a RUM operation strong link
-      url: /api/latest/rum-operations/update-a-rum-operation-strong-link/
-      identifier: rum-operations-update-a-rum-operation-strong-link
+    - name: Update a RUM operation link
+      url: /api/latest/rum-operations/update-a-rum-operation-link/
+      identifier: rum-operations-update-a-rum-operation-link
       parent: rum-operations
       generated: true
       params:
@@ -18251,9 +18251,9 @@ menu:
         unstable:
           - v2
         order: 10
-    - name: Delete a RUM operation strong link
-      url: /api/latest/rum-operations/delete-a-rum-operation-strong-link/
-      identifier: rum-operations-delete-a-rum-operation-strong-link
+    - name: Delete a RUM operation link
+      url: /api/latest/rum-operations/delete-a-rum-operation-link/
+      identifier: rum-operations-delete-a-rum-operation-link
       parent: rum-operations
       generated: true
       params:
@@ -18264,9 +18264,9 @@ menu:
         unstable:
           - v2
         order: 9
-    - name: Create a RUM operation strong link
-      url: /api/latest/rum-operations/create-a-rum-operation-strong-link/
-      identifier: rum-operations-create-a-rum-operation-strong-link
+    - name: Create a RUM operation link
+      url: /api/latest/rum-operations/create-a-rum-operation-link/
+      identifier: rum-operations-create-a-rum-operation-link
       parent: rum-operations
       generated: true
       params:
@@ -18277,9 +18277,9 @@ menu:
         unstable:
           - v2
         order: 8
-    - name: List RUM operation strong links
-      url: /api/latest/rum-operations/list-rum-operation-strong-links/
-      identifier: rum-operations-list-rum-operation-strong-links
+    - name: List RUM operation links
+      url: /api/latest/rum-operations/list-rum-operation-links/
+      identifier: rum-operations-list-rum-operation-links
       parent: rum-operations
       generated: true
       params:
