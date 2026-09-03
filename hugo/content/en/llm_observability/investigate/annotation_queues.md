@@ -329,7 +329,7 @@ You can manage annotation queues programmatically. The following endpoints are a
 | Annotated traces  | 90 days from the time of annotation, or your span retention period if that is longer |
 | Annotation labels | 90 days, matching the trace they annotate            |
 
-Annotating a trace extends its retention at no additional charge: a trace that would otherwise expire under a shorter span retention period is retained for 90 days from the time you annotate it. For details, see [Data Retention][16].
+Annotating a trace extends its retention at no additional charge: a trace that would otherwise expire under a shorter span retention period is retained for 90 days from the time you annotate it. For details, see [Data Privacy, Security, and Retention][16].
 
 
 ## Example workflows
@@ -405,4 +405,4 @@ Build benchmark datasets with human-verified labels for regression testing and c
 [13]: /api/latest/agent-observability/#get-annotation-queue-label-schema
 [14]: /api/latest/agent-observability/#update-annotation-queue-label-schema
 [15]: /account_management/#email-subscriptions
-[16]: /llm_observability/data_retention/
+[16]: /llm_observability/data_privacy_security_and_rbac/

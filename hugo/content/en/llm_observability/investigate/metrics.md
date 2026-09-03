@@ -25,8 +25,8 @@ The <code>ml_obs.*</code> entries on this page are <a href="/metrics/">Datadog M
 <br><br>
 They are distinct from two other things in Agent Observability:
 <ul>
-<li><strong>Per-span operational data</strong> (cost, tokens, latency, errors on each individual trace or span): the raw values these metrics roll up from. Stored with spans, follow <a href="/llm_observability/data_retention/#traces-and-spans">Agent Observability trace retention</a>, and are queried from the Traces explorer rather than as metrics.</li>
-<li><strong><a href="/llm_observability/investigate/evaluations/">Evaluation scores</a></strong> (also called "evals"): quality and safety judgments (for example, hallucination, faithfulness, custom LLM-as-a-judge) attached to individual spans or experiment rows. These are not derived from operational telemetry, and follow <a href="/llm_observability/data_retention/">Agent Observability trace and experiment retention</a> rather than Datadog metric retention.</li>
+<li><strong>Per-span operational data</strong> (cost, tokens, latency, errors on each individual trace or span): the raw values these metrics roll up from. Stored with spans, follow <a href="/llm_observability/data_privacy_security_and_rbac/#traces-and-spans">Agent Observability trace retention</a>, and are queried from the Traces explorer rather than as metrics.</li>
+<li><strong><a href="/llm_observability/investigate/evaluations/">Evaluation scores</a></strong> (also called "evals"): quality and safety judgments (for example, hallucination, faithfulness, custom LLM-as-a-judge) attached to individual spans or experiment rows. These are not derived from operational telemetry, and follow <a href="/llm_observability/data_privacy_security_and_rbac/">Agent Observability trace and experiment retention</a> rather than Datadog metric retention.</li>
 </ul>
 </div>
 
