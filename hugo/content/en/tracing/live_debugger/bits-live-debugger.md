@@ -13,9 +13,6 @@ further_reading:
 - link: "/dynamic_instrumentation/sensitive-data-scrubbing/"
   tag: "Documentation"
   text: "Sensitive Data Scrubbing"
-- link: "https://www.datadoghq.com/blog/live-debugger/"
-  tag: "Blog"
-  text: "Debug live production code without redeploying with Datadog Live Debugger"
 ---
 
 {{< beta-callout url="https://www.datadoghq.com/product-preview/debug-with-bits/" >}}

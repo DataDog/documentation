@@ -32,9 +32,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/live-debugging/"
   tag:  "Blog"
   text: "Fix production bugs efficiently with Datadog Live Debugging"
-- link: "https://www.datadoghq.com/blog/bitbucket-cloud-source-code-integration/"
-  tag: "Blog"
-  text: "Troubleshoot and secure your code faster with Datadog’s Bitbucket Cloud Source Code integration"
 ---
 
 ## Overview

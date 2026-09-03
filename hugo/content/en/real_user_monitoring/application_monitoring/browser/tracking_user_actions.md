@@ -19,9 +19,6 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
       tag: 'Blog'
       text: 'Introducing Datadog Real User Monitoring'
-    - link: "https://www.datadoghq.com/blog/rum-build-time-privacy-allowlist/"
-      tag: "Blog"
-      text: "Reduce sensitive data exposure with build-time allowlists"
 algolia:
   tags: ['user actions']
 ---
