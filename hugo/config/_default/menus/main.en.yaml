@@ -10705,6 +10705,21 @@ menu:
       identifier: disaster_recovery
       parent: administration_heading
       weight: 15000
+    - name: Create a DDR Org
+      identifier: disaster_recovery_create_ddr_org
+      url: disaster_recovery/create_ddr_org/
+      parent: disaster_recovery
+      weight: 1
+    - name: Set Up Access, Integrations, Syncing, and Agents
+      identifier: disaster_recovery_setup
+      url: disaster_recovery/setup/
+      parent: disaster_recovery
+      weight: 2
+    - name: Run Failover Tests
+      identifier: disaster_recovery_failover_tests
+      url: disaster_recovery/failover_tests/
+      parent: disaster_recovery
+      weight: 3
     - name: Data Security
       url: data_security/
       pre: security-lock
