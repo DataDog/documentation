@@ -1,0 +1,34 @@
+{
+  "data": {
+    "type": "execution_policy",
+    "attributes": {
+      "name": "Cassette Execution Policy exampleexecutionpolicy",
+      "effect": "allow",
+      "action_pattern": {
+        "integration": "INTEGRATION_SCRIPT",
+        "action_fqns": [
+          "com.datadoghq.script.*"
+        ]
+      },
+      "scope": {
+        "scripts": {
+          "rules": [
+            {
+              "target_script_names": [
+                "restart_service.sh"
+              ]
+            }
+          ]
+        }
+      },
+      "targets": [
+        {
+          "name": "Production hosts",
+          "agent_tags": [
+            "env:prod"
+          ]
+        }
+      ]
+    }
+  }
+}
