@@ -1,23 +1,20 @@
 ---
 import styles from "./Alert.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
-import { i18n } from "@lib/i18n/i18n";
-import { DEFAULT_LOCALE, isLocale } from "@lib/i18n/locale";
+import { useTranslations } from "@lib/i18n/i18n";
 
 interface Props {
   level?: "info" | "danger" | "warning" | "tip";
 }
 
 const { level = "info" } = Astro.props;
-const lang = isLocale(Astro.currentLocale)
-  ? Astro.currentLocale
-  : DEFAULT_LOCALE;
+const translate = useTranslations(Astro.currentLocale);
 
 const labels: Record<NonNullable<Props["level"]>, string> = {
-  info: i18n("alert_note", lang),
-  danger: i18n("alert_caution", lang),
-  warning: i18n("alert_warning", lang),
-  tip: i18n("alert_tip", lang),
+  info: translate("alert_note"),
+  danger: translate("alert_caution"),
+  warning: translate("alert_warning"),
+  tip: translate("alert_tip"),
 };
 
 const label = labels[level];

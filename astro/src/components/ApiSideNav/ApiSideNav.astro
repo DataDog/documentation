@@ -6,7 +6,7 @@ import SearchBar, {
   type SearchBarLabels,
 } from "@components/SearchBar/SearchBar";
 import { localizedHref, resolveLocale } from "@lib/i18n/locale";
-import { i18n } from "@lib/i18n/i18n";
+import { useTranslations } from "@lib/i18n/i18n";
 import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
 import type { OverviewPage } from "@lib/api/overviewPages";
 
@@ -27,10 +27,12 @@ const {
   isOverviewSection = false,
   activeOverviewPageSlug,
 } = Astro.props;
+// `lang` is still needed for the hrefs below; `translate` covers the labels.
 const lang = resolveLocale(Astro.currentLocale);
+const translate = useTranslations(lang);
 const cl = classListFactory(styles);
 
-const overviewLabel = i18n("overview", lang);
+const overviewLabel = translate("overview");
 const overviewHref = localizedHref(lang, "/api/latest/");
 
 // TODO: replace hardcoded English with i18n() once authoritative translation
@@ -45,7 +47,7 @@ const searchLabels: SearchBarLabels = {
 
 <nav class={cl("api-side-nav")}>
   <a href={localizedHref(lang, "/")} class={cl("api-side-nav__title")}>
-    {i18n("datadog_docs", lang)}&nbsp;&nbsp;<span class={cl("api-side-nav__title-api")}
+    {translate("datadog_docs")}&nbsp;&nbsp;<span class={cl("api-side-nav__title-api")}
       >API</span
     >
   </a>

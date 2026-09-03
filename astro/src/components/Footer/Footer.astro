@@ -14,9 +14,9 @@ import FreeTrialModal from "./FreeTrialModal.tsx";
 import SocialIcon from "./SocialIcon.astro";
 import SvgIcon from "../SvgIcon/SvgIcon.astro";
 import { getFooterData } from "@lib/componentUtils/footerMenus.ts";
-import { i18n } from "@lib/i18n/i18n";
+import { useTranslations } from "@lib/i18n/i18n";
 import {
-  getTranslations,
+  getLanguageNames,
   getNativeLabel,
   type LangCode,
 } from "@lib/i18n/languageNames";
@@ -29,8 +29,6 @@ import {
 
 const cl = classListFactory(styles);
 
-const footer = getFooterData();
-
 const year = new Date().getFullYear();
 
 // Language selector — Astro's i18n routing handles the actual locale switch,
@@ -38,17 +36,22 @@ const year = new Date().getFullYear();
 // locales; the toolbar instance reuses the same Preact component.
 const { rest: footerLocaleless } = stripLocalePrefix(Astro.url.pathname);
 const currentLang: LangCode = resolveLocale(Astro.currentLocale);
-const translate = getTranslations(currentLang);
+const translate = useTranslations(currentLang);
+const footer = getFooterData(currentLang);
+
+// Localized *language names* for the selector — distinct from `translate`,
+// which resolves i18n keys.
+const languageName = getLanguageNames(currentLang);
 const currentLangOption = {
   code: currentLang,
   primary: getNativeLabel(currentLang),
-  secondary: translate(currentLang),
+  secondary: languageName(currentLang),
   href: localizedHref(currentLang, footerLocaleless),
 };
 const alternates = LOCALES.filter((c) => c !== currentLang).map((code) => ({
   code,
   primary: getNativeLabel(code),
-  secondary: translate(code),
+  secondary: languageName(code),
   href: localizedHref(code, footerLocaleless),
 }));
 
@@ -70,7 +73,7 @@ const caretIconHtml = inlineSvg("arrow.svg", "#ffffff", "16px");
 
 // Free-trial modal config — swap iframeSrc when we move off app.datadoghq.com/signup.
 const freeTrialHref = "https://app.datadoghq.com/signup";
-const freeTrialLabel = i18n("free_trial");
+const freeTrialLabel = translate("free_trial");
 
 ---
 
@@ -91,7 +94,7 @@ const freeTrialLabel = i18n("free_trial");
           <span>{freeTrialLabel}</span>
         </a>
 
-        <p class={cl("footer__download-app")}>{i18n("download_mobile_app")}</p>
+        <p class={cl("footer__download-app")}>{translate("download_mobile_app")}</p>
 
         <div class={cl("footer__download-badges")}>
           <a

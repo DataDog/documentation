@@ -5,6 +5,9 @@ import preactRenderer from "@astrojs/preact/server.js";
 import Header from "../Header.astro";
 import { getHeaderData } from "@lib/componentUtils/menuData";
 import { i18n } from "@lib/i18n/i18n";
+// The container has no i18n manifest, so `Astro.currentLocale` is undefined and
+// Header renders as English. Expectations are built for the same locale.
+import { DEFAULT_LOCALE } from "@lib/i18n/locale";
 
 async function createContainer() {
   const container = await AstroContainer.create();
@@ -20,7 +23,7 @@ describe("Header", () => {
     const container = await createContainer();
     const html = await container.renderToString(Header);
 
-    const header = getHeaderData();
+    const header = getHeaderData(DEFAULT_LOCALE);
     const expectedLeft = [
       header.product?.label,
       header.solutions?.label,
@@ -64,7 +67,7 @@ describe("Header", () => {
     const container = await createContainer();
     const html = await container.renderToString(Header);
 
-    expect(html).toContain(i18n("get_started_free"));
+    expect(html).toContain(i18n("get_started_free", DEFAULT_LOCALE));
   });
 
   it("renders desktop product categories as interactive islands", async () => {
@@ -76,7 +79,7 @@ describe("Header", () => {
     // markup should still include the product-dropdown marker and the product
     // menu link.
     expect(html).toContain("product-dropdown");
-    const header = getHeaderData();
+    const header = getHeaderData(DEFAULT_LOCALE);
     expect(header.product).not.toBeNull();
     expect(html).toContain(header.product!.label);
     // And the desktop product mega-categories should render at build time.
@@ -89,7 +92,7 @@ describe("Header", () => {
     const container = await createContainer();
     const html = await container.renderToString(Header);
 
-    const header = getHeaderData();
+    const header = getHeaderData(DEFAULT_LOCALE);
     const rightLabels = [
       header.about?.label,
       header.blog?.label,

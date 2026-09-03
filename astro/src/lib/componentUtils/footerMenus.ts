@@ -1,7 +1,8 @@
 /**
  * Builds the footer view model from the websites-modules menus YAML at build
  * time. Consumers (Footer.astro) get fully resolved, split-into-columns data
- * via `getFooterData()` — no inline assembly in the component template.
+ * via `getFooterData(lang)` — no inline assembly in the component template.
+ * The locale is passed in because this module has no render context of its own.
  *
  * URL resolution mirrors footer_link.html: absolute URLs pass through;
  * relative URLs are prefixed with the datadoghq.com host (plus an optional
@@ -11,7 +12,8 @@ import { parse as parseYaml } from "yaml";
 import { z } from "zod";
 import menusRaw from "@websites-modules/config/_default/menus/menus.en.yaml?raw";
 import { CORP_ORIGIN } from "@config/origins";
-import { i18n } from "@lib/i18n/i18n";
+import { useTranslations } from "@lib/i18n/i18n";
+import type { Locale } from "@lib/i18n/locale";
 import { getFooterProductLinks } from "@lib/componentUtils/menuData";
 
 // ---------------------------------------------------------------------------
@@ -122,17 +124,18 @@ function sortedLinks(items: RawItem[]): FooterLink[] {
 // Public API
 // ---------------------------------------------------------------------------
 
-export function getFooterData(): FooterData {
+export function getFooterData(lang: Locale): FooterData {
+  const translate = useTranslations(lang);
   const social: FooterSocialLink[] = [...menus.footer_social]
     .sort(byWeight)
     .map((it: RawSocial) => ({ ...toFooterLink(it), pre: it.pre, label: it.name }));
 
   return {
     accordionSections: [
-      toSection("product", i18n("product"), getFooterProductLinks(), false),
-      toSection("resources", i18n("resources"), sortedLinks(menus.footer_resources), true),
-      toSection("about", i18n("about"), sortedLinks(menus.footer_about), true),
-      toSection("blog", i18n("blog"), sortedLinks(menus.footer_blog), true),
+      toSection("product", translate("product"), getFooterProductLinks(lang), false),
+      toSection("resources", translate("resources"), sortedLinks(menus.footer_resources), true),
+      toSection("about", translate("about"), sortedLinks(menus.footer_about), true),
+      toSection("blog", translate("blog"), sortedLinks(menus.footer_blog), true),
     ],
     sub: sortedLinks(menus.footer_sub),
     social,

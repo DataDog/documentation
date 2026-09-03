@@ -8,8 +8,7 @@ import { renderMarkdownInline } from "@lib/api/markdownRenderer";
 import styles from "./ApiResponse.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { generateElementId } from "@lib/componentUtils/generateElementId";
-import { i18n } from "@lib/i18n/i18n";
-import { resolveLocale } from "@lib/i18n/locale";
+import { useTranslations } from "@lib/i18n/i18n";
 
 const cl = classListFactory(styles);
 
@@ -30,7 +29,7 @@ interface Props {
 }
 
 const { responses } = Astro.props;
-const lang = resolveLocale(Astro.currentLocale);
+const translate = useTranslations(Astro.currentLocale);
 
 const outerGroupId = generateElementId("api-response");
 const outerLabels = responses.map((r) => r.statusCode);
@@ -44,7 +43,7 @@ const innerPanelIds = responses.map((_, i) => [
 {
   responses.length > 0 && (
     <div class={cl("api-response")}>
-      <h3 class={cl("api-response__heading")}>{i18n("response", lang)}</h3>
+      <h3 class={cl("api-response__heading")}>{translate("response")}</h3>
 
       <Tabs
         id={outerGroupId}
@@ -72,7 +71,7 @@ const innerPanelIds = responses.map((_, i) => [
                   <Tabs
                     id={`${outerGroupId}-inner-${i}`}
                     variant="pills"
-                    labels={[i18n("model", lang), i18n("example", lang)]}
+                    labels={[translate("model"), translate("example")]}
                     panelIds={innerPanelIds[i]}
                   >
                     <TabPanel id={innerPanelIds[i][0]} isActive>

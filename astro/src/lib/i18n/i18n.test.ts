@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { i18n } from "./i18n";
+import { i18n, useTranslations } from "./i18n";
 
 describe("i18n", () => {
   // Guards the shared/i18n glob: if the path breaks, the bundle silently
@@ -19,5 +19,28 @@ describe("i18n", () => {
 
   it("returns an empty string for an undefined key", () => {
     expect(i18n(undefined, "ja")).toBe("");
+  });
+});
+
+describe("useTranslations", () => {
+  it("binds the locale so callers don't repeat it per key", () => {
+    const translate = useTranslations("ja");
+
+    expect(translate("overview")).toBe("概要");
+    expect(translate("code_example")).toBe("コード例");
+  });
+
+  // `Astro.currentLocale` is typed `string | undefined` and is undefined in
+  // container tests, so the factory has to absorb both without throwing.
+  it("falls back to English for an undefined locale", () => {
+    expect(useTranslations(undefined)("overview")).toBe("Overview");
+  });
+
+  it("falls back to English for a string that isn't a built locale", () => {
+    expect(useTranslations("zz")("overview")).toBe("Overview");
+  });
+
+  it("returns an empty string for an undefined key", () => {
+    expect(useTranslations("ja")(undefined)).toBe("");
   });
 });
