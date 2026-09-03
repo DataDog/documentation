@@ -1,34 +1,36 @@
 ---
-description: Solucionar problemas frecuentes con el Controlador de admisión y la inyección
-  de bibliotecas del Datadog Cluster Agent
+description: Solucione problemas comunes con el Admission Controller del Cluster Datadog
+  Agent y la inyección de bibliotecas.
 further_reading:
 - link: https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/
   tag: Blog
-  text: Rastreo de Kubernetes para instrumentar automáticamente
+  text: Instrumentación automática de trazado en Kubernetes
 - link: /containers/cluster_agent/admission_controller/
   tag: Documentación
-  text: Controlador de admisión del Cluster Agent
+  text: Cluster Agent Admission Controller
 - link: /tracing/trace_collection/library_injection_local/?tab=kubernetes
   tag: Documentación
-  text: Inyección de biblioteca de Kubernetes
-title: Solucionar problemas del Controlador de admisión
+  text: Inyección de bibliotecas en Kubernetes
+- link: https://www.datadoghq.com/architecture/instrument-your-app-using-the-datadog-operator-and-admission-controller/
+  tag: Centro de arquitectura
+  text: Instrumente su aplicación utilizando el Datadog Operator y el Admission Controller
+title: Solución de problemas del Admission Controller
 ---
+## Descripción general {#overview}
 
-## Información general
+Esta página proporciona solución de problemas para el Admission Controller del Datadog Cluster Agent.
 
-Esta página proporciona información para la resolución de problemas del [Controlador de admisión][1] del Datadog Cluster Agent.
+## Problemas comunes {#common-problems}
 
-## Problemas comunes
+### Actualizar pods preexistentes {#update-pre-existing-pods}
+El Admission Controller responde a la creación de nuevos pods dentro de su clúster de Kubernetes: en la creación del pod, el Cluster Agent recibe una solicitud de Kubernetes y responde con los detalles de qué cambios (si los hay) realizar en el pod.
 
-### Actualizar los pods preexistentes
-El Controlador de admisión responde a la creación de nuevos pods dentro de tu clúster de Kubernetes: en la creación de pods, el Cluster Agent recibe una solicitud de Kubernetes y responde con los detalles de qué cambios (si los hay) hacer en el pod.
+Por lo tanto, **Admission Controller no muta los pods existentes dentro de su clúster**. Si habilitó recientemente Admission Controller o realizó otros cambios ambientales, elimine su pod existente y deje que Kubernetes lo vuelva a crear. Esto asegura que Admission Controller actualice su pod. 
 
-Por lo tanto, **el Controlador de admisión no muta los pods existentes dentro de tu clúster**. Si has activado recientemente el Controlador de admisión o has realizado otros cambios en el entorno, elimina tu pod existente y deja que Kubernetes lo vuelva a crear. Esto asegura que el Controlador de admisión actualice tu pod.
+### Etiquetas y anotaciones {#labels-and-annotations}
+El Cluster Agent responde a las etiquetas y anotaciones en el pod creado—**no** al workload (Deployment, DaemonSet, CronJob, etc.) que creó ese pod. Asegúrese de que su plantilla de pod haga referencia a esto en consecuencia. 
 
-### Labels (etiquetas) y anotaciones
-El Cluster Agent responde a las labels y anotaciones del pod creado; **no** responde a la carga de trabajo (Despliegue, DaemonSet, CronJob, etc.) que creó ese pod. Asegúrate de que tu plantilla de pod hace referencia a esto.
-
-Por ejemplo, la siguiente plantilla establece la [label para la configuración de APM][2] y la [anotación para la inyección de biblioteca][3]:
+Por ejemplo, la siguiente plantilla establece la [etiqueta para la configuración de APM][2] y la [anotación para la inyección de bibliotecas][3]:
 
 ```yaml
 apiVersion: apps/v1
@@ -48,20 +50,21 @@ spec:
       #(...)
 ```
 
-### No se crean los pods de aplicación
+### Los pods de la aplicación no se crean {#application-pods-are-not-created}
 
-El modo de inyección del Controlador de admisión (`socket`, `hostip`, `service`) lo establece la configuración de tu Cluster Agent. Por ejemplo, si tienes habilitado el modo `socket` en tu Agent, el Controlador de admisión también utiliza el modo `socket`.
+El modo de inyección de Admission Controller (`socket`, `hostip`, `service`) se establece mediante la configuración de su Cluster Agent. Por ejemplo, si tiene habilitado el modo `socket` en su Agent, Admission Controller también utiliza el modo `socket`.
 
-Si utilizas GKE Autopilot u OpenShift, deberás utilizar un modo de inyección específico.
+Si está utilizando GKE Autopilot u OpenShift, debe utilizar un modo de inyección específico.
 
-#### GKE Autopilot
+#### GKE Autopilot {#gke-autopilot}
 
-GKE Autopilot restringe el uso de cualquier `volumes` con una `hostPath`. Por lo tanto, si el Controlador de admisión utiliza el modo `socket`, el GKE Warden bloquea la programación de los pods.
+GKE Autopilot restringe el uso de cualquier `volumes` con un `hostPath`. Por lo tanto, si Admission Controller utiliza el modo `socket`, el GKE Warden bloquea la programación de los pods.
 
-Al activar el modo de GKE Autopilot en la tabla de Helm, se desactiva el modo `socket` para evitar que esto ocurra. Para habilitar APM, habilita el puerto y utiliza en su lugar el método `hostip` o `service`. El Controlador de admisión utilizará por defecto `hostip` para coincidir.
+Habilitar el modo GKE Autopilot en el Helm chart deshabilita el modo `socket` para evitar que esto ocurra. Para habilitar APM, habilite el puerto y utilice el método `hostip` o `service` en su lugar. El Admission Controller utilizará `hostip` de forma predeterminada para coincidir.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
+
 ```yaml
 datadog:
   apm:
@@ -75,16 +78,17 @@ providers:
 {{% /tab %}}
 {{< /tabs >}}
 
-Consulta la página [Distribuciones de Kubernetes][17] para obtener más detalles de configuración sobre el Autopilot.
+Consulte las [Distribuciones de Kubernetes][17] para obtener más detalles de configuración sobre Autopilot.
 
-#### OpenShift
+#### OpenShift {#openshift}
 
-OpenShift dispone de `SecurityContextConstraints` (SCC) que son necesarios para desplegar pods con permisos adicionales, como un `volume` con un `hostPath`. Los componentes Datadog se despliegan con SCC para permitir la actividad específica de los pods Datadog, pero Datadog no crea SCC para otros pods. El Controlador de admisión podría añadir la configuración basada en sockets a tus pods de aplicación, lo que impediría que se desplieguen.
+OpenShift tiene `SecurityContextConstraints` (SCCs) que son necesarios para implementar pods con permisos adicionales, como un `volume` con un `hostPath`. Los componentes de Datadog se implementan con SCCs para permitir la actividad específica de los pods de Datadog, pero Datadog no crea SCCs para otros pods. Admission Controller podría agregar la configuración basada en socket a sus pods de aplicación, lo que provocaría que no se implementen.
 
-Si utilizas OpenShift, utiliza el modo `hostip`. La siguiente configuración habilita el modo `hostip` desactivando las opciones de socket:
+Si está utilizando OpenShift, utilice el modo `hostip`. La siguiente configuración habilita el modo `hostip` al deshabilitar las opciones de socket:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
+
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -104,39 +108,40 @@ spec:
       unixDomainSocketConfig:
         enabled: false
 ```
-Como alternativa, puedes definir `features.admissionController.agentCommunicationMode` como `hostip` o `service` directamente.
+Alternativamente, puede configurar `features.admissionController.agentCommunicationMode` como `hostip` o `service` directamente.
 
 {{% /tab %}}
 {{% tab "Helm" %}}
+
 ```yaml
 datadog:
   apm:
     portEnabled: true
     socketEnabled: false
 ```
-Como alternativa, puedes definir `clusterAgent.admissionController.configMode` como `hostip` o `service` directamente.
+Alternativamente, puede configurar `clusterAgent.admissionController.configMode` como `hostip` o `service` directamente.
 {{% /tab %}}
 {{< /tabs >}}
 
-Para obtener más detalles de configuración de OpenShift, consulta [Distribuciones de Kubernetes][18].
+Consulte [Distribuciones de Kubernetes][18] para obtener más detalles de configuración sobre OpenShift.
 
-## Ver el estado del Controlador de admisión
+## Visualizar el estado de Admission Controller {#view-admission-controller-status}
 
-La salida de estado del Cluster Agent proporciona información para verificar que ha creado el `datadog-webhook` para la `MutatingWebhookConfiguration` y tiene un certificado válido.
+La salida del estado del Cluster Agent proporciona información para verificar que ha creado el `datadog-webhook` para el `MutatingWebhookConfiguration` y tiene un certificado válido.
 
-Ejecuta el siguiente comando:
+Ejecute el siguiente comando:
 
 ```bash
 % kubectl exec -it <Cluster Agent Pod> -- agent status
 ```
 
-Tu salida se parece a la siguiente:
+Su salida se parece a la siguiente:
 
 ```
 ...
 Admission Controller
 ====================
-
+  
     Webhooks info
     -------------
       MutatingWebhookConfigurations name: datadog-webhook
@@ -159,7 +164,7 @@ Admission Controller
         Object selector: &LabelSelector{MatchLabels:map[string]string{admission.datadoghq.com/enabled: true,},MatchExpressions:[]LabelSelectorRequirement{},}
         Rule 1: Operations: [CREATE] - APIGroups: [] - APIVersions: [v1] - Resources: [pods]
         Service: default/datadog-admission-controller - Port: 443 - Path: /injecttags
-
+  
     Secret info
     -----------
     Secret name: webhook-certificate
@@ -170,11 +175,11 @@ Admission Controller
 ...
 ```
 
-Esta salida es relativa al Cluster Agent desplegado en el espacio de nombres `default`. `Service` y `Secret` deben coincidir con el espacio de nombres utilizado.
+Esta salida es relativa al Cluster Agent implementado en el espacio de nombres `default`. El `Service` y el `Secret` deben coincidir con el espacio de nombres utilizado.
 
-## Ver logs del Controlador de admisión
+## Visualizar los registros de Admission Controller {#view-admission-controller-logs}
 
-Los logs de depuración ayudan a validar que has configurado el Controlador de admisión correctamente. [Habilita la depuración de logs][3] con la siguiente configuración:
+Los registros de depuración ayudan a validar que ha configurado Admission Controller correctamente. [Habilite los registros de depuración][3] con la siguiente configuración:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -203,9 +208,9 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validar `datadog-webhook`
+### Validar `datadog-webhook` {#validate-datadog-webhook}
 
-**Ejemplo de logs**:
+**Ejemplo de registros**:
 
 ```
 <TIMESTAMP> | CLUSTER | INFO | (pkg/clusteragent/admission/controllers/secret/controller.go:73 in Run) | Starting secrets controller for default/webhook-certificate
@@ -219,11 +224,11 @@ datadog:
 <TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/controllers/webhook/controller_base.go:176 in processNextWorkItem) | Webhook datadog-webhook reconciled successfully
 ```
 
-Si no ves que el webhook `datadog-webhook` se ha conciliado correctamente, asegúrate de que has habilitado correctamente el Controlador de admisión según las [instrucciones de configuración][1]. 
+Si no ve que el webhook `datadog-webhook` se haya reconciliado correctamente, asegúrese de haber habilitado el Controlador de Admisión de acuerdo con las [instrucciones de configuración][1]. 
 
-### Validar inyección
+### Validar inyección {#validate-injection}
 
-**Ejemplo de logs**:
+**Ejemplo de registros**:
 
 ```
 <TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/controllers/secret/controller.go:140 in enqueue) | Adding object with key default/webhook-certificate to the queue
@@ -236,20 +241,21 @@ Si no ves que el webhook `datadog-webhook` se ha conciliado correctamente, aseg�
 <TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/mutate/auto_instrumentation.go:336 in injectLibInitContainer) | Injecting init container named "datadog-lib-python-init" with image "gcr.io/datadoghq/dd-lib-python-init:v1.18.0" into pod with generate name example-pod-123456789-
 ```
 
-Si observas errores con la inyección de un pod determinado, ponte en contacto con el soporte de Datadog indicando tu configuración de Datadog y tu configuración de pod.
+Si ve errores con la inyección para un pod determinado, comuníquese con el soporte de Datadog con su configuración de Datadog y la configuración de su pod.
 
-Si no ves los intentos de inyección para *ningún* pod, verifica la configuración de `mutateUnlabelled` y asegúrate de que las labels (etiquetas) de tus pods coinciden con los valores esperados. Si coinciden, es probable que el problema esté en la red entre el plano de control, el webhook y el servicio. Consulta [Redes](#networking) para obtener más información.
+Si no ve los intentos de inyección para *ningún* pod, verifique su configuración de `mutateUnlabelled` y asegúrese de que las etiquetas de su pod coincidan con los valores esperados. Si estos coinciden, es probable que su problema esté relacionado con la red entre el plano de control, el webhook y el servicio. Consulte [Redes](#networking) para obtener más información.
 
-## Redes
+## Redes {#networking}
 
-### Políticas de red
+### Políticas de red {#network-policies}
 
-[Políticas de red][5] de Kubernetes te ayuda a controlar diferentes flujos de tráfico de entrada (inbound) y salida (outbound) a tus pods.
+Las [Políticas de red][5] de Kubernetes le ayudan a controlar diferentes flujos de tráfico de entrada (ingress) y de salida (egress) hacia sus pods.
 
-Si utilizas políticas de red, Datadog recomienda crear las políticas correspondientes para el Cluster Agent para asegurar la conectividad con el pod a través de este puerto. Puedes hacerlo con la siguiente configuración:
+Si está utilizando políticas de red, Datadog recomienda crear políticas correspondientes para el Cluster Agent para asegurar la conectividad al pod a través de este puerto. Puede hacer esto con la siguiente configuración:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
+
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -264,6 +270,7 @@ spec:
 ```
 {{% /tab %}}
 {{% tab "Helm" %}}
+
 ```yaml
 datadog:
   #(...)
@@ -274,47 +281,48 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-Establece `flavor` en `kubernetes` para crear un recurso de `NetworkPolicy`. 
+Establezca `flavor` en `kubernetes` para crear un recurso `NetworkPolicy`. 
 
-Alternativamente, para los entornos basados en Cilium, establece `flavor` en `cilium` para crear un recurso de `CiliumNetworkPolicy`.
+Alternativamente, para entornos basados en Cilium, establezca `flavor` en `cilium` para crear un recurso `CiliumNetworkPolicy`.
 
-### Solucionar problemas de red para distribuciones de Kubernetes
+### Solución de problemas de red para distribuciones de Kubernetes {#network-troubleshooting-for-kubernetes-distributions}
 
-Cuando se crea un pod, el clúster de Kubernetes envía una solicitud desde el plano de control a `datadog-webhook`, a través del servicio, y finalmente al pod del Cluster Agent. Esta solicitud requiere conectividad de entrada desde el plano de control al nodo en el que se encuentra el Cluster Agent, a través de su puerto del Controlador de admisión (`8000`). Una vez resuelta esta solicitud, el Cluster Agent muta tu pod para configurar la conexión de red para el rastreador de Datadog. El servicio del Controlador de admisión recibe tráfico en el puerto 443 y lo reenvía al pod del Cluster Agent en el puerto 8000.
+Cuando se crea un pod, el clúster de Kubernetes envía una solicitud desde el plano de control, hacia `datadog-webhook`, a través del servicio, y finalmente al pod del Cluster Agent. Esta solicitud requiere conectividad de entrada desde el plano de control al nodo en el que se encuentra el Cluster Agent, a través de su puerto del Admission Controller (`8000`). Después de que esta solicitud se resuelve, el Cluster Agent muta su pod para configurar la conexión de red para el SDK de Datadog.
+El servicio del Admission Controller recibe tráfico en el puerto 443 y lo reenvía al pod del Cluster Agent en el puerto 8000.
 
-Según tu distribución de Kubernetes, esto puede tener algunos requisitos adicionales para tus reglas de seguridad y configuración del Controlador de admisión.
+Dependiendo de su distribución de Kubernetes, esto puede tener algunos requisitos adicionales para sus reglas de seguridad y configuraciones del Admission Controller.
 
-#### Amazon Elastic Kubernetes Service (EKS)
+#### Amazon Elastic Kubernetes Service (EKS) {#amazon-elastic-kubernetes-service-eks}
 
-En un clúster de EKS, puedes desplegar el pod del Cluster Agent en cualquiera de tus nodos basados en Linux de forma predeterminada. Estos nodos y sus instancias de EC2 necesitan un [grupo de seguridad][6] con la siguiente [regla de entrada][7]:
+En un clúster de EKS, puede implementar el pod del Cluster Agent en cualquiera de sus nodos basados en Linux de forma predeterminada. Estos nodos y sus instancias EC2 necesitan un [grupo de seguridad][6] con la siguiente [regla de entrada][7]:
 - **Protocolo**: TCP
 - **Rango de puertos**: `8000`, o un rango que cubra `8000`
-- **Fuente**: El ID del grupo de seguridad del clúster _o_ de uno de los grupos de seguridad adicionales del clúster. Encontrarás estos ID en la consola de EKS, en la pestaña _Redes_ de tu clúster de EKS.
+- **Fuente**: El ID de _ya sea_ el grupo de seguridad del clúster, o uno de los grupos de seguridad adicionales de su clúster. Puede encontrar estos IDs en la consola de EKS, bajo la pestaña _Redes_ para su clúster de EKS.
 
-Esta regla de grupo de seguridad permite que el plano de control acceda al nodo y al flujo descendente del Cluster Agent a través del puerto `8000`.
+Esta regla de grupo de seguridad permite que el plano de control acceda al nodo y al Cluster Agent descendente a través del puerto `8000`.
 
-Si tienes varios [grupos de nodos gestionados][8], cada uno con grupos de seguridad distintos, añade esta regla de entrada a cada grupo de seguridad.
+Si tiene varios [managed node groups][8], cada uno con grupos de seguridad distintos, agregue esta regla de entrada a cada grupo de seguridad.
 
-##### Registro del plano de control
+##### Registro del plano de control {#control-plane-logging}
 
-Para validar tu configuración de redes, activa el [registro del plano de control de EKS][9] para el servidor de API. Puedes ver estos logs en la [consola de CloudWatch][10].
+Para validar su configuración de red, habilite el [registro de planos de control de EKS][9] para el servidor de API. Puede visualizar estos registros en [la consola de CloudWatch][10].
 
-A continuación, elimina uno de tus pods para volver a lanzar una solicitud a través del Controlador de admisión. Cuando la solicitud falla, puedes ver logs que se parecen a los siguiente:
+Luego, elimine uno de sus pods para volver a activar una solicitud a través del Admission Controller. Cuando la solicitud falla, puede visualizar registros similares a los siguientes:
 
 ```
 W0908 <TIMESTAMP> 10 dispatcher.go:202] Failed calling webhook, failing open datadog.webhook.auto.instrumentation: failed calling webhook "datadog.webhook.auto.instrumentation": failed to call webhook: Post "https://datadog-cluster-agent-admission-controller.default.svc:443/injectlib?timeout=10s": context deadline exceeded
 E0908 <TIMESTAMP> 10 dispatcher.go:206] failed calling webhook "datadog.webhook.auto.instrumentation": failed to call webhook: Post "https://datadog-cluster-agent-admission-controller.default.svc:443/injectlib?timeout=10s": context deadline exceeded
 ```
 
-Estos fallos son relativos a un Cluster Agent desplegado en el espacio de nombres `default`; el nombre de DNS se ajusta en relación al espacio de nombres utilizado.
+Estas fallas son relativas a un Cluster Agent implementado en el espacio de nombres `default`; el nombre DNS se ajusta según el espacio de nombres utilizado.
 
-También puedes ver fallos para los otros webhooks del Controlador de admisión, como `datadog.webhook.tags` y `datadodg.webhook.config`.
+También puede ver fallas para los otros webhooks de Admission Controller, como `datadog.webhook.tags` y `datadodg.webhook.config`. 
 
-**Nota:** EKS suele generar dos flujos de log dentro del grupo de log de CloudWatch para el clúster. Asegúrate de comprobar ambos para estos tipos de logs.
+**Nota:** EKS a menudo genera dos flujos de registro dentro del grupo de registros de CloudWatch para el clúster. Asegúrese de revisar ambos para este tipo de registros.
 
-#### Azure Kubernetes Service (AKS)
+#### Azure Kubernetes Service (AKS) {#azure-kubernetes-service-aks}
 
-Para utilizar [webhooks del Controlador de admisión en AKS][11], utiliza la siguiente configuración:
+Para usar los [webhooks de Admission Controller en AKS][11], utilice la siguiente configuración:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -346,31 +354,32 @@ providers:
     enabled: true
 ```
 
-La opción `providers.aks.enabled` define la variable de entorno `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS="true"`.
+La opción `providers.aks.enabled` establece la variable de entorno `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS="true"`.
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Google Kubernetes Engine (GKE)
+#### Google Kubernetes Engine (GKE) {#google-kubernetes-engine-gke}
 
-Si utilizas un [clúster privado de GKE][12], deberás ajustar las reglas de tu cortafuegos para permitir el acceso entrante desde el plano de control al puerto `8000`.
+Si está utilizando un [GKE private clúster][12], debe ajustar sus reglas de firewall para permitir el acceso de entrada desde el plano de control al puerto `8000`.
 
-[Añade una regla de cortafuegos][13] para permitir la entrada a través de TCP en el puerto `8000`.
+[Agregue una regla de firewall][13] para permitir la entrada a través de TCP en el puerto `8000`.
 
-También puedes editar una regla existente. Por defecto, la red para tu clúster tiene una regla de cortafuegos llamada `gke-<CLUSTER_NAME>-master`. Asegúrate de que los _filtros de fuente_ de esta regla incluyan [el bloque CIDR del plano de control de tu clúster][14]. Edita esta regla para permitir el acceso a través del protocolo `tcp` en el puerto `8000`.
+También puede editar una regla existente. De forma predeterminada, la red de su clúster tiene una regla de firewall llamada `gke-<CLUSTER_NAME>-master`. Asegúrese de que los _filtros de fuente_ de esta regla incluyan [el bloque CIDR del plano de control de su clúster][14]. Edite esta regla para permitir el acceso a través del protocolo `tcp` en el puerto `8000`.
 
-Para más información, consulta [Añadir reglas de cortafuegos para casos de uso específicos][15] en la documentación de GKE.
+Para obtener más información, consulte [Agregar reglas de firewall para casos de uso específicos][15] en la documentación de GKE.
 
-#### Rancher
+#### Rancher {#rancher}
 
-Si utilizas Rancher con un clúster de EKS o un clúster privado de GKE, se requiere una configuración adicional. Para más información, consulta [Rancher Webhook - Problemas comunes][16] en la documentación de Rancher.
+Si está utilizando Rancher con un clúster de EKS o un clúster de GKE privado, se requiere configuración adicional. Para obtener más información, consulte [Rancher Webhook - Problemas comunes][16] en la documentación de Rancher.
 
-**Nota**: Dado que el webhook del Controlador de admisión de Datadog funciona de forma similar al webhook de Rancher, Datadog necesita acceso al puerto `8000` en lugar del puerto `9443` de Rancher.
+**Nota&nbsp;**: Dado que el webhook de Admission Controller de Datadog funciona de manera similar al webhook de Rancher, Datadog necesita acceso al puerto `8000` en lugar del `9443` de Rancher.
 
-##### Rancher y EKS
-Para utilizar Rancher en un clúster de EKS, despliega el pod de Cluster Agent con la siguiente configuración:
+##### Rancher y EKS {#rancher-and-eks}
+Para usar Rancher en un clúster de EKS, implemente el pod del Cluster Agent con la siguiente configuración:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
+
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -384,6 +393,7 @@ spec:
 ```
 {{% /tab %}}
 {{% tab "Helm" %}}
+
 ```yaml
 datadog:
   #(...)
@@ -394,12 +404,12 @@ clusterAgent:
 {{% /tab %}}
 {{< /tabs >}}
 
-También debes añadir una regla de entrada de grupo de seguridad, como se describe en la sección [Amazon EKS](#amazon-elastic-kubernetes-service-eks) de esta página.
+También debe agregar una regla de entrada de grupo de seguridad, como se describe en la sección [Amazon EKS](#amazon-elastic-kubernetes-service-eks) en esta página.
 
-##### Rancher y GKE
-Para utilizar Rancher en un clúster GKE privado, edita las reglas de tu cortafuegos para permitir el acceso entrante a través de TCP en el puerto `8000`. Consulta la sección [GKE](#google-kubernetes-engine-gke) en esta página.
+##### Rancher y GKE {#rancher-and-gke}
+Para usar Rancher en un clúster de GKE privado, edite sus reglas de firewall para permitir el acceso de entrada a través de TCP en el puerto `8000`. Consulte la sección [GKE](#google-kubernetes-engine-gke) en esta página.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,5 +1,6 @@
 ---
 title: Observability Pipelines
+description: Learn how Observability Pipelines lets you collect, process, and route logs and metrics within your own infrastructure to destinations such as Datadog, Amazon S3, Splunk, and Microsoft Sentinel.
 disable_toc: false
 further_reading:
 - link: "/observability_pipelines/configuration/explore_templates/"
@@ -73,7 +74,6 @@ further_reading:
   text: Manage metric volume and tags in your environment with Observability Pipelines
 
 ---
-
 ## Overview
 
 {{< img src="observability_pipelines/op_marketecture_06042025.png" alt="A graphic showing data being aggregated from a variety of sources, processed and enriched by the observability pipelines worker in your own environment, and then being routed to the security, analytics, and storage destinations of your choice" style="width:100%;" >}}

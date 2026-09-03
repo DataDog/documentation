@@ -206,28 +206,34 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 : Returns the current date. <br>**Example**: `TODAY()` <br>**Available in**: Sheet
 
 `NOW()`
-: Returns the current date and time. <br>**Example**: `NOW()` <br>**Available in**: Sheet
+: Returns the current date and time. <br>**Example**: `NOW()` <br>**Available in**: Table, Sheet
 
 `TIME(hour, minute, second)`
 : Converts a provided hour, minute, and second into a time. <br>**Example**: `TIME(11, 40, 59)` <br>**Available in**: Sheet
 
 `YEAR(date)`
-: Extracts the year component from a date value. <br>**Example**: `YEAR(DATE(2025, 12, 31))` <br>**Available in**: Sheet
+: Extracts the year component from a date value. <br>**Example**: `YEAR(DATE(2025, 12, 31))` <br>**Available in**: Table, Sheet
 
 `MONTH(date)`
-: Extracts the month component from a date value. <br>**Example**: `MONTH("2023-07-15")` <br>**Available in**: Sheet
+: Extracts the month component from a date value. <br>**Example**: `MONTH("2023-07-15")` <br>**Available in**: Table, Sheet
 
 `DAY(date)`
-: Extracts the day component from a date value. <br>**Example**: `DAY(DATE(2023, 12, 25))` <br>**Available in**: Sheet
+: Extracts the day component from a date value. <br>**Example**: `DAY(DATE(2023, 12, 25))` <br>**Available in**: Table, Sheet
 
-`HOUR(time)`
-: Extracts the hour component from a time value. <br>**Example**: `HOUR("14:30:45")` <br>**Available in**: Sheet
+`HOUR(datetime)`
+: Extracts the hour component (0–23) from a datetime value. <br>**Example**: `HOUR("14:30:45")` <br>**Available in**: Table, Sheet
 
-`MINUTE(time)`
-: Extracts the minute component from a time value. <br>**Example**: `MINUTE("14:30:45")` <br>**Available in**: Sheet
+`MINUTE(datetime)`
+: Extracts the minute component (0–59) from a datetime value. <br>**Example**: `MINUTE("14:30:45")` <br>**Available in**: Table, Sheet
 
-`SECOND(time)`
-: Extracts the second component from a time value. <br>**Example**: `SECOND("14:30:45")` <br>**Available in**: Sheet
+`SECOND(datetime)`
+: Extracts the second component (0–59) from a datetime value. <br>**Example**: `SECOND("14:30:45")` <br>**Available in**: Table, Sheet
+
+`DATEVALUE(date_string)`
+: Converts a date string to a date value. <br>**Example**: `DATEVALUE("07/23/2024")` <br>**Available in**: Table, Sheet
+
+`EPOCHTODATE(timestamp, [unit])`
+: Converts a Unix epoch timestamp to a date. `unit` defaults to `1` (seconds); use `2` for milliseconds or `3` for microseconds. <br>**Example**: `EPOCHTODATE(#"Timestamp", 2)` <br>**Available in**: Table, Sheet
 
 `EDATE(start_date, months)`
 : Returns the date that is the indicated number of months before or after a start date. <br>**Example**: `EDATE("2023-01-15", 6)` <br>**Available in**: Sheet
@@ -236,10 +242,10 @@ Use functions and operators in Sheets to analyze and transform your data. Functi
 : Returns the last day of a month that is a specified number of months before or after a given date. <br>**Example**: `EOMONTH(DATE(2023, 12, 12), 0)` <br>**Available in**: Sheet
 
 `WEEKDAY(date, [type])`
-: Returns the day of the week as a number. Type 1 (default) = Sun–Sat (1–7), type 2 = Mon–Sun (1–7), type 3 = Mon–Sun (0–6). <br>**Example**: `WEEKDAY(DATE(2023, 12, 12))` <br>**Available in**: Sheet
+: Returns the day of the week as a number. Type 1 (default) = Sun–Sat (1–7), type 2 = Mon–Sun (1–7), type 3 = Mon–Sun (0–6). <br>**Example**: `WEEKDAY(DATE(2023, 12, 12))` <br>**Available in**: Table, Sheet
 
 `WEEKNUM(date, [type])`
-: Returns the week number of a specific date within the year. <br>**Example**: `WEEKNUM("2023-01-15")` <br>**Available in**: Sheet
+: Returns the week number of a specific date within the year. <br>**Example**: `WEEKNUM("2023-01-15")` <br>**Available in**: Table, Sheet
 
 ### Lookup and reference
 

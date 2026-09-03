@@ -5,6 +5,9 @@ type: multi-code-lang
 code_lang: ios
 code_lang_weight: 20
 further_reading:
+ - link: "https://www.datadoghq.com/blog/monitor-watchos-visionos-datadog-rum/"
+   tag: "Blog"
+   text: "Monitor watchOS and visionOS apps with Datadog RUM"
  - link: "https://github.com/DataDog/dd-sdk-ios"
    tag: "Source Code"
    text: "Source code for dd-sdk-ios"
@@ -692,7 +695,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 
 ## Advanced Error Tracking features
 
-{{% collapse-content title="Set tracking consent (GDPR compliance)" level="h4" expanded=false id="set-tracking-consent" %}}
+{{% collapse-content title="Set tracking consent (GDPR compliance)" level="h3" expanded=false id="set-tracking-consent" %}}
 
 To be compliant with the GDPR regulation, the iOS SDK requires the tracking consent value at initialization.
 
@@ -711,7 +714,7 @@ For example, if the current tracking consent is `.pending`:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Sample session rates" level="h4" expanded=false id="sample-session-rates" %}}
+{{% collapse-content title="Sample session rates" level="h3" expanded=false id="sample-session-rates" %}}
 
 To control the data your application sends to Datadog, you can specify a sampling rate for sessions while [initializing the iOS SDK][14]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
@@ -736,7 +739,7 @@ configuration.sessionSampleRate = 50;
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Send data when device is offline" level="h4" expanded=false id="sending-data-device-offline" %}}
+{{% collapse-content title="Send data when device is offline" level="h3" expanded=false id="sending-data-device-offline" %}}
 
 The iOS SDK ensures data remains available when an end user's device is offline. In cases of low-network areas, or when the device battery is too low, the device first stores all events in batches. It sends them as soon as the network is available and the battery is high enough to ensure the iOS SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if a data upload fails, the device keeps the batch until it can complete a successful upload.
 
@@ -746,7 +749,7 @@ This means that even if users open your application while offline, no data is lo
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Add watchdog terminations reporting" level="h4" expanded=false id="add-watchdog-terminations-reporting" %}}
+{{% collapse-content title="Add watchdog terminations reporting" level="h3" expanded=false id="add-watchdog-terminations-reporting" %}}
 
 In the Apple ecosystem, the operating system employs a watchdog mechanism to monitor the health of applications, and terminates them if they become unresponsive or consume excessive resources like CPU and memory. These watchdog terminations are fatal and not recoverable (more details in the official [Apple documentation][13]).
 

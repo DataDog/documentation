@@ -100,37 +100,49 @@ Add a notification channel to your Team to route alerts to communication channel
 
 ## Team filter
 
-The team filter tailors your experience across Datadog by showing you content associated with your teams. The {{< ui >}}My Teams{{< /ui >}} list includes teams you are a member of and teams you selected as a favorite.
+The team filter scopes your view to the teams you select. It appears on list pages across Datadog, and on dashboards and notebooks as a [template variable][40] on the `team` tag key.
 
-{{< img src="/account_management/teams/team-filter.png" alt="Monitor list page with red box around the team filter. Two out of three My Teams selected.">}}
+The filter groups values into three sections:
 
-When you enable the team filter, you see only the resources associated with your teams or with the services owned by your teams. The team filter state is global and persistent, so Datadog applies your team context as you navigate across different products.
+- **Your teams**: the Datadog Teams you belong to, shown as a hierarchy at the top of the filter.
+- **All Teams**: every Datadog Team in your organization, including teams you do not belong to.
+- **Team tags**: `team` tag values on your data that have no matching Datadog Team. These appear in their own section.
 
-The team filter works by adding team-based search terms to the search query. When you enable the team filter, you can see the team-based search terms it adds in the search bar.
+{{< img src="/account_management/teams/team-filter.png" alt="Team filter with a search box, a parent team expanded to show two selected subteams, and an All Teams section below." style="width:35%;" >}}
 
-### Favorite teams
+The team filter works by adding team-based search terms to the search query. After you make a selection, you can see the team-based search terms it adds in the search bar. To stop filtering by team, clear your selection.
 
-You may be interested in a particular team's resources without being a member of that team. Adding a team to your favorite teams allows you to get filtered views on that team's resources without joining the team.
+Each section of the filter lists up to 50 items, sorted alphabetically. To reach a value beyond that limit, search for it.
 
-Your favorite teams appear alongside teams you belong to at the top of the team directory page and in the team filter.
+### Pin your selection
 
-#### Add or remove favorite teams
+Pin the team filter to carry your selection to the other pages you open. The pin sits at the top of the team filter and carries the selection to other pages the same way the time range pin does.
 
-You can add or remove a team from your favorites from the team directory page or from the team filter.
+- Changing your selection while the filter is pinned changes what carries across pages.
+- When the filter is unpinned, each page opens with no team selected.
 
-From the [team directory page][1]:
-1. Click the team you wish to add as a favorite. The [team detail page][3] appears.
-1. Click {{< ui >}}Add Favorite{{< /ui >}} or {{< ui >}}Remove Favorite{{< /ui >}} in the upper right.
+Pinned selections are stored in your browser, on the device where you set them. They are not stored on your Datadog account, so opening Datadog in a different browser or on a different machine starts with no team selected.
 
-Alternatively, also from the team directory page:
-1. Hover over the team you wish to add or remove. Inline icons appear to the right of the team name.
-1. Click the star ({{< ui >}}Add to Favorites{{< /ui >}} or {{< ui >}}Remove from Favorites{{< /ui >}}) icon.
+Opening a link that carries team selections applies those selections to that view without replacing your own stored selection. To return the filter to your stored selection, click {{< ui >}}Reapply{{< /ui >}}.
 
-From the team filter:
-1. If the filter is collapsed, click {{< ui >}}My Teams{{< /ui >}} to expand it.
-1. Click {{< ui >}}Add Favorites{{< /ui >}}. A search box and list of teams appear.
-1. To narrow the list of teams, start typing a team name in the search box.
-1. Click the star next to the desired team to add or remove it from your favorites.
+### Select a team with or without its subteams
+
+Clicking a team selects that team and every team beneath it in the [team hierarchy][39].
+
+To select a team without cascading to the whole branch, Shift+click the team. Two additional options appear:
+
+- **The team on its own**: Selects the team and excludes its subteams. Use this to see the data attributed to one team node without the aggregate of everything below it.
+- **The subteams without the team**: Selects everything beneath the team and excludes the team itself. Teams added to that branch later are included automatically.
+
+After you Shift+click, the team appears in its own branch with a {{< ui >}}(self){{< /ui >}} label. Select {{< ui >}}(self){{< /ui >}} to include the team itself, and clear it to include only the subteams.
+
+{{< img src="account_management/teams/team-filter-subteam-selection.png" alt="Team filter with a parent team expanded after a Shift+click, showing a cleared self row above two selected subteams." style="width:35%;" >}}
+
+### Search for a team
+
+Search matches your term as a substring anywhere in the value, and matching is case-insensitive. Both the team handle and the display name are searched, so searching for either `Payments` or `payments-platform` matches a team named `Payments` with the handle `payments-platform`.
+
+To match a value exactly, wrap the term in double quotes. With the teams `payments`, `payments-platform`, and `payments-fraud`, searching for `payments` returns all three, and searching for `"payments"` returns only `payments`.
 
 ### Supported products
 
@@ -140,7 +152,7 @@ The following table describes the products in which you can use the team filter:
 |--------------------------------|------------------------------------------------------------------------------------|
 | [APM Error Tracking][15]       | Service owned by teams (determined by ownership inside the [Catalog][12]) |
 | [Apps][21]                     | Team handle                                                                        |
-| [Case Management projects][22] | Team handle                                                                        |
+| [Work Management projects][22] | Team handle                                                                        |
 | [Connections][23]              | Team handle                                                                        |
 | [Connection Groups][24]        | Team handle                                                                        |
 | [Cross Org Connections][25]    | Team handle                                                                        |
@@ -199,7 +211,7 @@ To customize your team, see [Team Management][3].
 [19]: https://app.datadoghq.com/synthetics
 [20]: https://app.datadoghq.com/notebook/list/
 [21]: https://app.datadoghq.com/app-builder/apps/list
-[22]: https://app.datadoghq.com/cases
+[22]: https://app.datadoghq.com/work
 [23]: https://app.datadoghq.com/actions/connections
 [24]: https://app.datadoghq.com/actions/connections?sort=-updated_at&tab=groups
 [25]: https://app.datadoghq.com/organization-settings/cross-org-visibility
@@ -217,3 +229,4 @@ To customize your team, see [Team Management][3].
 [37]: https://app.datadoghq.com/sheets
 [38]: https://app.datadoghq.com/workflow
 [39]: /account_management/teams/manage/#team-hierarchies
+[40]: /dashboards/template_variables/#team-filter

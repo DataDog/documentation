@@ -24,7 +24,7 @@ The [**Bill Overview** page][1] gives administrators a single view of Datadog co
 
 The following filters apply to the {{< ui >}}Bill Overview{{< /ui >}} page:
 
-- {{< ui >}}Product Category{{< /ui >}}: Filter all views by broader product family, such as  Infrastructure, APM, Logs, Security, or AI/ML.
+- {{< ui >}}Product Category{{< /ui >}}: Filter all views by broader product family, such as Infrastructure, APM, Logs, Security, or AI/ML.
 - {{< ui >}}Billing Dimension{{< /ui >}}: Filter to a specific billing or metering dimension (for example, Infra Hosts, Indexed Logs, or Synthetic Browser Tests).
 - {{< ui >}}Sub-Org{{< /ui >}}: Filter to a specific child organization.
 - {{< ui >}}Group by Sub-Org{{< /ui >}}: Toggle to group costs by sub-organization.
@@ -110,6 +110,10 @@ Click {{< ui >}}View Details{{< /ui >}} on a Trends card or click any row in the
 - {{< ui >}}Download Billable Hosts as CSV{{< /ui >}}: For Infra Hosts, download the individual hosts that make up your billable total as a CSV.
 
 ### Download billable hosts as CSV
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-warning">Downloading billable hosts as a CSV is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Download a CSV of the individual hosts that make up your billable Infra Hosts total for a given month. Use it to reconcile the total shown on the Bill Overview page, find the hosts driving the largest share of your count, attribute usage to teams by tag, or compare months to spot unexpected changes.
 
