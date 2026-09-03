@@ -30,7 +30,10 @@ This list describes automatically ingested reserved attributes with events.
 
 ### Events with multiple service tags
 
-The reserved `service` attribute has a single value. If an event contains multiple `service:<value>` tags, Datadog uses one of them to populate the reserved attribute. Do not rely on which value is selected, because tag processing order can vary.
+The reserved `service` attribute has a single value. If an event contains multiple `service:<value>` tags, the event processing version determines which tag populates the reserved attribute:
+
+- V1 uses the first `service` tag it encounters. Because V1 does not sort tags before processing them, the selected value is not deterministic.
+- V2 sorts tags alphabetically and uses the first `service` tag. For example, if an event has `service:bcd` and `service:ace`, V2 assigns `service:ace` to the reserved attribute.
 
 Send only one `service` tag per event. Use a different tag key for additional dimensions, such as `application:<value>`. Additional `service` tags remain in the raw tag list and can be found with a query such as `tags:("service:<value>")`. A `service:<value>` query matches only the value assigned to the reserved attribute.
 
