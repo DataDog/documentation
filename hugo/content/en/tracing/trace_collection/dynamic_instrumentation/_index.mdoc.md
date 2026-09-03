@@ -81,7 +81,7 @@ If you are interested in trying out the latest user experience improvements for 
 <!-- .NET -->
 {% if equals($prog_lang, "dot_net") %}
 
-- Datadog .NET SDK ([.NET Framework][22] or [.NET Core][20])
+- **Datadog .NET SDK** ([.NET Framework][22] or [.NET Core][20])
   - Minimum for [in-app enablement](#enable-in-app): 3.29.0
   - Minimum for [manual enablement](#enable-with-environment-variables): 2.54.0
 - **[Datadog Agent][1]**, version 7.49.0 or higher
