@@ -5,34 +5,29 @@ disable_toc: false
 aliases:
     - /security/code_security/static_analysis/malicious_pr_protection/
 further_reading:
-    - link: 'logs/processing/pipelines'
-      tag: 'Documentation'
-      text: 'Log processing pipelines'
-    - link: 'https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives'
-      tag: 'Blog'
-      text: 'Using LLMs to filter out false positives from static code analysis'
-    - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
-      tag: "Blog"
-      text: "Introducing Bits Code for Code Security"
     - link: "https://www.datadoghq.com/blog/open-source-ai-sast/"
       tag: "Blog"
       text: "Introducing our open source AI-native SAST"
+    - link: 'https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives'
+      tag: 'Blog'
+      text: 'Using LLMs to filter out false positives from static code analysis'
     - link: "https://www.datadoghq.com/blog/sast-triage-agentic-evaluation-bits-memories/"
       tag: "Blog"
       text: "Reduce SAST false positives with agentic evaluation and Bits Memories"
+    - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
+      tag: "Blog"
+      text: "Introducing Bits Code for Code Security"
 ---
 
 Static Code Analysis (SAST) uses AI to automate detection, validation, and remediation across the vulnerability management life cycle.
 
-<!-- QUESTION FOR PM: The "Approach" column below is new. Confirm or correct. -->
-
-| Life cycle phase | Feature                                                                                                                  | Trigger point                            | Approach                        | Impact                                                                        |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------ |
-| Detection       | [Malicious PR protection](#malicious-pr-protection) detects potentially malicious changes or suspicious diffs.                                        | At PR time                                | LLM                        | Flags PRs introducing novel risky code.                                       |
-| Detection               | [AI-native SAST](#ai-native-sast) uses LLM-based taint analysis to detect security vulnerabilities with higher accuracy.                          | At scan time (Datadog-hosted scans only)  | Two-phase LLM (detect, then verify) | Identifies contextually complex vulnerabilities missed by rule-based analysis. |
-| Validation     | [False positive filtering](#false-positive-filtering) deprioritizes low-likelihood findings.                                                            | After scan                                | LLM                        | Reduces noise, allows focus on actual issue.                                   |
-| Validation | [Agentic false positive filtering](#agentic-false-positive-filtering) deprioritizes low-likelihood findings for a subset of injection-related rules using cross-file context. | After scan                        | Agentic                          | Reduces false positives that depend on cross-file behavior, for supported rule categorie. |
-| Remediation                  | [Remediation](#remediation) uses Bits Code to generate suggested fixes manually or automatically.        | After scan                                | LLM                        | Reduces developer effort, accelerates fix cycle.                              |
+| Life cycle phase | Feature                                                                                                                  | Trigger point                            | Impact                                                                        |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------ |
+| Detection       | [Malicious PR protection](#malicious-pr-protection) detects potentially malicious changes or suspicious diffs.                                        | At PR time                                | Flags PRs introducing novel risky code.                                       |
+| Detection               | [AI-native SAST](#ai-native-sast) uses LLM-based taint analysis to detect security vulnerabilities with higher accuracy.                          | At scan time (Datadog-hosted scans only)  | Identifies contextually complex vulnerabilities missed by rule-based analysis. |
+| Validation     | [False positive filtering](#false-positive-filtering) deprioritizes low-likelihood findings.                                                            | After scan                                | Reduces noise, allows focus on actual issue.                                   |
+| Validation | [Agentic false positive filtering](#agentic-false-positive-filtering) deprioritizes low-likelihood findings for a subset of injection-related rules using cross-file context. | After scan                        | Reduces false positives that depend on cross-file behavior, for supported rule categorie. |
+| Remediation                  | [Remediation](#remediation) uses Bits Code to generate suggested fixes manually or automatically.        | After scan                                | Reduces developer effort, accelerates fix cycle.                              |
 
 ## Detection
 
@@ -63,43 +58,38 @@ For any given vulnerability, you can assign signals for investigation, create a 
   
 ### AI-native SAST
 
+{{< callout btn_hidden="true" >}}
+AI-Native SAST is in preview and is available only for Datadog-hosted scans.
+{{< /callout >}}
+
 AI-native SAST uses LLMs to detect security vulnerabilities by reasoning about how data flows through your code. Unlike rule-based static analysis, AI-native SAST can contextually identify vulnerabilities using a two-phase approach:
 
 1. **Detection**: An LLM scans each file and reasons about whether user-controlled data can reach a dangerous operation without being sanitized.
 2. **Verification**: A second LLM independently re-evaluates each candidate finding through taint analysis, confirming or dismissing each finding to reduce false positives.
 
-<!-- QUESTION FOR PM: Does AI-native SAST replace rule-based scanning for the vulnerability types it covers, or does it run alongside rule-based SAST as an additional layer?-->
+To enable AI-native SAST, in your source code management integration settings, toggle {{< ui >}}Enable AI SAST{{< /ui >}}. You can enable it for all repositories or specific repositories.
 
-AI-native SAST is available only for Datadog-hosted scans, and support varies by language. 
+If enabled, AI-native SAST runs in parallel with rule-based static analysis, and its findings take precedence for vulnerability types both methods cover.
 
-<!--
-QUESTION FOR PM: Confirm which language are preview vs. GA. Adjust table and preview notice above accordingly.
-  - DOCS-13045 (Java, Go, Python) suggests GA as of Q1 2026.
-  - DOCS-13059 (JavaScript, TypeScript, Ruby, C#) closed in July 2026 without shipping documentation.
-  - Kotlin, PHP, Rust, Elixir, Swift, and Dart aren't covered by either ticket.
--->
+AI-native SAST is supported for these languages:
 
-| Language   | Status      |
-| ---------- | ----------- |
-| Java       | GA   |
-| Python     | GA   |
-| Go         | GA   |
-| C#         | Preview   |
-| JavaScript | Preview   |
-| TypeScript | Preview   |
-| Kotlin     | Preview   |
-| PHP        | Preview   |
-| Ruby       | Preview   |
-| Rust       | Preview   |
-| Elixir     | Preview   |
-| Swift      | Preview   |
-| Dart       | Preview   |
-| C++        | Preview   |
+- C#
+- C++
+- Dart
+- Elixir
+- Go
+- Java
+- JavaScript
+- Kotlin
+- PHP
+- Python
+- Ruby
+- Rust
+- Swift
+- TypeScript
 
-{{% collapse-content title="Supported CWEs" level="h4" expanded=true id="ai-native-sast-cwes" %}}
+{{% collapse-content title="Supported CWEs" level="h4" expanded=false id="ai-native-sast-cwes" %}}
 AI-native SAST detects these vulnerability types:
-
-<!-- QUESTION FOR PM: Confirm this list still matches AI-native SAST's current rule coverage. -->
 
 - [CWE-89: SQL Injection](https://cwe.mitre.org/data/definitions/89.html)
 - [CWE-78: Command Injection](https://cwe.mitre.org/data/definitions/78.html)
@@ -135,10 +125,6 @@ AI-native SAST detects these vulnerability types:
 
 AI-native SAST uses language-specific rulesets (for example, `python-ai_sast`) in the Code Security `sast` configuration. For the full list of ruleset names and how to select or exclude them for Datadog-hosted scans, see [Static Code Analysis (SAST) Configuration][15].
 
-<!--
-QUESTION FOR PM: This section documents ruleset selection (which languages/rules run), but Static Code Analysis (SAST) Configuration states explicitly that this setting "does not enable Datadog-hosted scanning or grant access to AI-native SAST." The actual opt-in/access mechanism -- how a customer gets AI-native SAST turned on in the first place -- still isn't documented anywhere, on this page or on the Set up Static Code Analysis (SAST) page. Need explicit steps (or a link) for how a customer requests/enables AI-native SAST access and Datadog-hosted scans, separate from ruleset configuration.
--->
-
 ## Validation
 
 False positive filtering happens after a scan completes. Two layers of filtering are available: baseline false positive filtering, and agentic filtering that gathers cross-file context for a subset of rules.
@@ -155,7 +141,7 @@ Agentic false positive filtering is an enhanced version of baseline false positi
 
 Agentic false positive filtering applies only for injection-related SAST rules, such as SQL injection and command injection. 
 
-<!-- QUESTION FOR PM: Confirm current rule-category support list and timeline. Convert to a table if the list is expected to keep growing. -->
+AI-native SAST validates only [CWE-89: SQL Injection](https://cwe.mitre.org/data/definitions/89.html).
 
 ### Custom context
 
