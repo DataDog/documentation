@@ -79,7 +79,7 @@ export function i18n(key: string | undefined, lang: Locale): string {
  * pass the locale a single time instead of threading it through every `i18n()`
  * call. Named after the same helper in Astro's i18n docs.
  *
- * Not to be confused with `getTranslations` in `./languageNames` — that one
+ * Not to be confused with `getLanguageNames` in `./languageNames` — that one
  * only maps language *display names* for the language selector.
  *
  * Takes `Astro.currentLocale`'s raw `string | undefined` directly — the locale
