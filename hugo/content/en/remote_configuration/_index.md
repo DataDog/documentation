@@ -9,7 +9,7 @@ further_reading:
 - link: "/security/application_security/how-appsec-works/#built-in-protection"
   tag: "Documentation"
   text: "How Application Security Monitoring Works"
-- link: "/dynamic_instrumentation/#requirements"
+- link: "/dynamic_instrumentation/"
   tag: "Documentation"
   text: "Dynamic Instrumentation"
 - link: "/security/workload_protection/"
