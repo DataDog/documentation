@@ -1,4 +1,128 @@
-# Card grid component
+# Card-grid component prompt
+
+> **Note**: Claude's plan below refers to this prompt as "the tempdoc".
+
+Migrate the card-grid component from Hugo to Astro. See the Hugo Example section below for a full run-down.
+
+I've built a mock document at `src/content/en/dd_e2e/components/card-grid.mdoc`. We'll test against this document.
+
+## Design
+
+The component should retain all of the properties of the hugo card grid. There is one difference - Hugo calls for the writer to include a unit for width (example `px`). The Astro component should accept a number and always use pixels.
+
+The component should consist of a parent `card-grid` component with a child `image-card` component. Use a hybrid approach to offload functions to controller Preact.
+
+The only JS needed should be for the hover tooltip, which isn't included in all image cards. Keep tooltip logic separate, similar to the `img` lightbox, and don't hydrate tooltips unless required to keep them out of the client bundle.
+
+## Plaintext build (Written by Claude after a separate investigation)
+
+The existing Hugo-to-plaintext converter (`html-to-mdoc`) already implements this component's plaintext twin. Reference: `corp-node-packages/packages/html-to-mdoc/src/elementProcessing/processors/card/cardGrid.ts` and `.../utils/cardGridLink.ts`. The Astro plaintext twin should reproduce this logic exactly, not reinvent it.
+
+**Output shape**: a `card-grid` (with its `image-card` children) collapses to a single flat Markdoc `list` (unordered), one `item` per card, each item containing one `link` node. No nested structure, no image markup — the grid becomes a plain link list. Example, from `mcp_server`'s tooltip grid (Example 3 above):
+
+```md
+- [cursor](https://docs.datadoghq.com/mcp_server/setup.md?tab=cursor)
+- [claudecode](https://docs.datadoghq.com/mcp_server/setup.md?tab=claudecode)
+- [geminicli](https://docs.datadoghq.com/mcp_server/setup.md?tab=geminicli)
+```
+
+**Per-card fields kept**: only `href` and display text (plus subtitle) survive into plaintext. `src`, `alt`, `image_width`, and `tooltip` are dropped entirely — none of them affect the plaintext output. This means the Astro plaintext twin only needs `href`, `title`, and `subtitle` as inputs; it can ignore image and tooltip props completely.
+
+**Href resolution** (`cardGridLink.ts:15-17`, `buildCardGridHref`): relative hrefs (e.g. `/mcp_server/setup/`) are resolved against the base site URL, then normalized to end in `.md` (query strings and fragments survive that normalization unchanged).
+
+**Display text priority** (`cardGridLink.ts:93-115`, `buildCardGridDisplayText`) — in order:
+1. The card's title (`<h5>` or `<p class="card-grid-card-title">`), if present.
+2. Else, the href's `tab` query param, if present (`cardGridLink.ts:35-37`) — this is the "same page, different tab" case: cards that all link to the same path but different `?tab=` values would otherwise collapse to identical text, so the tab value substitutes for a title.
+3. Else, the final non-empty path segment of the href (e.g. `/database_monitoring/setup_postgres/rds/` → `rds`).
+
+If a subtitle (`<small>`) is present, it's appended as `" - <subtitle>"` regardless of which branch produced the base text.
+
+**Escaping**: link text escapes `[` and `]` (`escapeLinkText`); link URLs escape `(` and `)` as `%28`/`%29` (`escapeLinkUrl`) — needed because Markdoc's `[text](url)` link syntax breaks on unescaped brackets/parens.
+
+**Needed logic for the Astro port**: the plaintext twin (`Img`'s `plaintext/` folder is the precedent — see `src/components/Img/plaintext/Img.ts`) should implement the same three-tier display-text fallback (title → tab param → final path segment) and the same subtitle-append and escaping rules, operating on the component's resolved props rather than raw HTML. Since Astro's `card-grid` takes a numeric `card_width` (unitless, per the Design section above) rather than Hugo's string-with-unit, the plaintext twin doesn't need to touch `card_width`/`image_width` at all — those only affect grid layout, not plaintext output.
+
+## Hugo example
+
+### Templates
+
+- Container: hugo/layouts/shortcodes/card-grid.html:1-5
+- Card (child): hugo/layouts/shortcodes/image-card.html:1-21
+
+```go
+{{ $min_width := .Get "card_width" | default "150px" }}
+{{ $inner := .Inner }}
+<div class="card-grid" style="--card-min-width: {{ $min_width }};">
+  {{ $inner }}
+</div>
+```
+
+image-card (used inside card-grid) supports params: `href`, `src`, `alt`, `title`, `subtitle`, `image_width` (falls back to the parent's `image_width`), tooltip.
+
+### Example 1 — image-only cards (with image_width)
+
+Disk: `hugo/content/en/client_sdks/_index.md:22-33`
+URL: `https://docs.datadoghq.com/client_sdks/`
+
+```go
+{{< card-grid image_width="200" >}}
+  {{< image-card href="/client_sdks/setup/?platform=browser" src="integrations_logos/javascript_large.svg" alt="browser" >}}
+  {{< image-card href="/client_sdks/setup/?platform=android" src="integrations_logos/android_large.svg" alt="android" >}}
+  ...
+{{< /card-grid >}}
+```
+
+Rendered HTML (one card, unprettified):
+```html
+<div class=card-grid style=--card-min-width:150px><a class=card-grid-card href="https://docs.datadoghq.com/client_sdks/setup/?platform=browser"><div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center"><picture class=img-fluid><source srcset="https://docs.dd-static.net/images/integrations_logos/javascript_large.svg?fit=max&auto=format&w=807 1x, https://docs.dd-static.net/images/integrations_logos/javascript_large.svg?fit=max&auto=format&w=807&dpr=2 2x" media="(min-width: 1200px)">...<img width=200 height class=img-fluid srcset="https://docs.dd-static.net/images/integrations_logos/javascript_large.svg?fit=max&auto=format&w=807" loading=lazy alt=browser></picture></div></a>...</div>
+```
+
+(Full image markup uses the img.html partial, generating a <picture> with responsive srcset breakpoints.)
+
+### Example 2 — title/subtitle cards, no images (with card_width)
+
+Disk: `hugo/content/en/serverless/google_cloud_run/_index.md:32-37`
+URL: `https://docs.datadoghq.com/serverless/google_cloud_run/`
+
+```go
+{{< card-grid card_width="350px" >}}
+  {{< image-card href="/serverless/google_cloud_run/containers" title="Containers" >}}
+  {{< image-card href="/serverless/google_cloud_run/jobs" title="Jobs" subtitle="(Preview)" >}}
+  {{< image-card href="/serverless/google_cloud_run/functions" title="Functions" >}}
+  {{< image-card href="/serverless/google_cloud_run/functions_1st_gen" title="Functions" subtitle="(1st generation)" >}}
+{{< /card-grid >}}
+```
+
+Rendered HTML:
+```html
+<div class=card-grid style=--card-min-width:350px><a class="card-grid-card has-title" href=https://docs.datadoghq.com/serverless/google_cloud_run/containers><div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center"><h5 class=m-0>Containers</h5></div></a><a class="card-grid-card has-title" href=https://docs.datadoghq.com/serverless/google_cloud_run/jobs><div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center"><h5 class=m-0>Jobs</h5><small>(Preview)</small></div></a>...</div>
+```
+
+Note: when `title` is set without an image, it renders as `<h5>`; when both `src` and `title` are set, `title` renders as `<p class="card-grid-card-title">` instead (`image-card.html:15`).
+
+### Example 3 — image cards with hover tooltips
+
+Disk: `hugo/content/en/mcp_server/_index.md:46-62`
+URL: `https://docs.datadoghq.com/mcp_server/`
+
+```go
+{{< card-grid card_width="100px" >}}
+  {{< image-card href="/mcp_server/setup/?tab=cursor" src="integrations_logos/cursor_avatar.svg" alt="Cursor" tooltip="Cursor" >}}
+  {{< image-card href="/mcp_server/setup/?tab=claudecode" src="integrations_logos/claude-code_avatar.svg" alt="Claude Code" tooltip="Claude Code" >}}
+  {{< image-card href="/mcp_server/setup/?tab=geminicli" src="integrations_logos/google-gemini_avatar.svg" alt="Gemini CLI" tooltip="Gemini CLI" >}}
+  ...
+{{< /card-grid >}}
+```
+
+Rendered HTML (one card, unprettified):
+```html
+<div class=card-grid style=--card-min-width:100px><a class=card-grid-card href="https://docs.datadoghq.com/mcp_server/setup/?tab=cursor" title=Cursor data-bs-toggle=tooltip data-bs-placement=top><div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center"><picture class=img-fluid><source srcset="https://docs.dd-static.net/images/integrations_logos/cursor_avatar.svg?fit=max&auto=format&w=807 1x, ..." media="(min-width: 1200px)">...<img width=150 height class=img-fluid srcset="..." loading=lazy alt=Cursor></picture></div></a>...</div>
+```
+
+Note: `tooltip` only adds `title="{{ . }}" data-bs-toggle="tooltip" data-bs-placement="top"` to the card's anchor (`image-card.html:9`) — Bootstrap's JS then upgrades the native `title` attribute into a styled hover tooltip on `mouseenter`/`focus`. There's no dedicated tooltip markup in the shortcode itself; all of the rendering and positioning is handled by Bootstrap's tooltip plugin at runtime. This is the one param that requires JS in the Astro port, since a plain `title` attribute alone would only get the browser's native (unstyled) tooltip.
+
+Other examples found (71 files total use card-grid): hugo/content/en/database_monitoring/_index.md (multiple grids, one per DB flavor — image + title combos), hugo/content/en/feature_flags/server/_index.md, hugo/content/en/security/code_security/software_composition_analysis/_index.md, hugo/content/en/tracing/trace_collection/dd_libraries/_index.md, hugo/content/en/source_code/service-mapping/_index.md, hugo/content/en/dd_e2e/card_grid.md.
+
+## Claude / Superpowers plan
 
 Migrate the `card-grid` component (and its `image-card` child) from Hugo to Astro.
 
@@ -11,8 +135,6 @@ There are three existing implementations to draw on, and they disagree in useful
 - **html-to-mdoc** (`corp-node-packages/packages/html-to-mdoc/src/elementProcessing/processors/card/cardGrid.ts`) — the current plaintext build. Source of truth for what a card grid should look like as plain text.
 
 We test against the mock document at `src/content/en/dd_e2e/components/card-grid.mdoc`, which is a copy of the cdocs fixture and exercises all seven parameter combinations.
-
-## Claude's plan
 
 ### Confirmed decisions
 
