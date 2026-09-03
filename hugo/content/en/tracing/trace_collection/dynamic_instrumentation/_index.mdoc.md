@@ -326,7 +326,7 @@ All instrumentation types require the same initial setup:
 1. Go to the [Dynamic Instrumentation page][12].
 1. Click {% ui %}Create Instrumentation{% /ui %} in the top right, or click the three-dot menu on a service and select {% ui %}Add an instrumentation for this service{% /ui %}.
 1. If they are not prefilled, choose service, runtime, environment, and version (optional).
-1. Specify where to set the instrumentation in the source code by selecting either a class and method, or a specific line of code in a file. When autocomplete and search are available, use them to find files, methods, or symbols.
+1. {% if includes($prog_lang, ["java", "python", "dot_net"]) %}Specify where to set the instrumentation in the source code by selecting either a class and method, or a specific line of code in a file.{% /if %}{% if equals($prog_lang, "php") %}Specify where to set the instrumentation in the source code by selecting a class and method.{% /if %} When autocomplete and search are available, use them to find files, methods, or symbols.
 
 For the best experience, set up [Source Code Integration][7] to view code directly in Datadog and select instrumentation locations as you would with breakpoints in an IDE.
 
@@ -346,11 +346,11 @@ A dynamic metric emits a metric when it executes. To create a dynamic metric:
 1. Select a metric type (count, gauge, or histogram).
 1. Choose the value of the metric using the [Dynamic Instrumentation expression language][15]. You can use any numeric value you'd like from the execution context, such as a method parameter, local variable, a class field, or an expression that yields a numeric value. For count metrics this is optional, and if you omit it, every invocation increments the count by one.
 
-Metric instrumentations are automatically enabled on all service instances that match the configured environment and version. Metric instrumentations are not rate limited and execute every time the method or line is invoked.
+Metric instrumentations are automatically enabled on all service instances that match the configured environment and version. Metric instrumentations are not rate limited and execute every time the method{% if includes($prog_lang, ["java", "python", "dot_net"]) %} or line{% /if %} is invoked.
 
 Dynamic Instrumentation supports the following metric types:
 
-- {% ui %}Count{% /ui %}: Counts how many times a given method or line is executed. Can be combined with [metric expressions][15] to use the value of a variable to increment the count.
+- {% ui %}Count{% /ui %}: Counts how many times a given method{% if includes($prog_lang, ["java", "python", "dot_net"]) %} or line{% /if %} is executed. Can be combined with [metric expressions][15] to use the value of a variable to increment the count.
 - {% ui %}Gauge{% /ui %}: Generates a gauge based on the last value of a variable. This metric requires a [metric expression][15].
 - {% ui %}Histogram{% /ui %}: Generates a statistical distribution of a variable. This metric requires a [metric expression][15].
 
