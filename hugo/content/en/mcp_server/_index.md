@@ -98,7 +98,7 @@ Write operations require the corresponding permission, such as `monitors_write`,
 
 The MCP Server comes with the following fair-use limits:
 - 50 requests/10 seconds tool call burst limits
-- 50,000 monthly tool calls. 
+- 100,000 monthly tool calls. 
 
 These limits are **subject to change** and can be adjusted if your use case requires more. Please contact [Datadog support][37] for requests or questions. 
 
