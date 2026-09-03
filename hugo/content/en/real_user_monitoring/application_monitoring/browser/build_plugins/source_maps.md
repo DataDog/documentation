@@ -36,9 +36,11 @@ The following environment variables override configuration values:
 - `DATADOG_SITE` or `DD_SITE`: Overrides `auth.site` for the intake URL.
 - `DATADOG_SOURCEMAP_INTAKE_URL`: Overrides the full intake URL directly.
 
+Choose either debug ID uploads or service and version uploads. Do not configure both upload methods in the same build.
+
 ### Debug ID
 
-Configure `rum.sourceCodeContext.debugId` and `rum.sourceCodeContext.upload` to inject debug IDs and upload source maps during the build:
+Configure `rum.sourceCodeContext.debugId` to inject debug IDs and `errorTracking.sourcemaps.debugId` to upload source maps during the build:
 
 ```javascript
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
@@ -50,10 +52,14 @@ module.exports = {
         apiKey: process.env.DATADOG_API_KEY,
         site: 'datadoghq.com', // Optional: defaults to datadoghq.com
       },
+      errorTracking: {
+        sourcemaps: {
+          debugId: true,
+        },
+      },
       rum: {
         sourceCodeContext: {
           debugId: true,
-          upload: true,
         },
       },
     }),
@@ -61,7 +67,7 @@ module.exports = {
 };
 ```
 
-Debug ID uploads do not require a service, release version, or minified path prefix. Set `upload` to `false` or omit it to inject debug IDs without uploading source maps from the build plugin.
+Debug ID uploads do not require a service, release version, or minified path prefix. Omit `errorTracking.sourcemaps` to inject debug IDs without uploading source maps from the build plugin.
 
 ### Service and version
 

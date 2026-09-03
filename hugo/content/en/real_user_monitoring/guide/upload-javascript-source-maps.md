@@ -186,10 +186,14 @@ datadogWebpackPlugin({
     apiKey: process.env.DATADOG_API_KEY,
     site: 'datadoghq.com',
   },
+  errorTracking: {
+    sourcemaps: {
+      debugId: true,
+    },
+  },
   rum: {
     sourceCodeContext: {
       debugId: true,
-      upload: true,
     },
   },
 });

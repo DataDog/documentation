@@ -34,10 +34,11 @@ At build time, the plugin injects a snippet that writes metadata to `window.DD_S
 
 Configure the `rum.sourceCodeContext` object in your build plugin options:
 
+Choose either debug ID matching or service and version matching. The two configurations are mutually exclusive.
+
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
 | `rum.sourceCodeContext.debugId` | Boolean | No | `false` | Inject a deterministic debug ID into each JavaScript bundle. |
-| `rum.sourceCodeContext.upload` | Boolean | No | `false` | Upload source maps by debug ID during the build. Requires `debugId: true` and a Datadog API key. |
 | `rum.sourceCodeContext.service` | String | Yes, unless `debugId` is enabled | None | Service name. Must match the RUM SDK `service` initialization parameter. |
 | `rum.sourceCodeContext.version` | String | No | None | Release version. If omitted, source code context is not associated with a specific version. If set, must match the RUM SDK `version` initialization parameter. |
 
@@ -54,10 +55,14 @@ module.exports = {
       auth: {
         apiKey: process.env.DATADOG_API_KEY,
       },
+      errorTracking: {
+        sourcemaps: {
+          debugId: true,
+        },
+      },
       rum: {
         sourceCodeContext: {
           debugId: true,
-          upload: true,
         },
       },
     }),
