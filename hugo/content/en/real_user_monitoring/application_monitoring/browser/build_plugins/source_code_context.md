@@ -32,19 +32,16 @@ At build time, the plugin injects a snippet that writes metadata to `window.DD_S
 
 ## Configuration
 
-Configure the `rum.sourceCodeContext` object in your build plugin options:
+Configure `rum.sourceCodeContext` using one of the following methods. The two configurations are mutually exclusive.
 
-Choose either debug ID matching or service and version matching. The two configurations are mutually exclusive.
+{{< tabs >}}
+{{% tab "Debug ID (Recommended)" %}}
 
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `rum.sourceCodeContext.debugId` | Boolean | No | `false` | Inject a deterministic debug ID into each JavaScript bundle. |
-| `rum.sourceCodeContext.service` | String | Yes, unless `debugId` is enabled | None | Service name. Must match the RUM SDK `service` initialization parameter. |
-| `rum.sourceCodeContext.version` | String | No | None | Release version. If omitted, source code context is not associated with a specific version. If set, must match the RUM SDK `version` initialization parameter. |
+Debug IDs associate each JavaScript bundle with its source map without relying on the bundle URL, service, or version. Use this method for new configurations.
 
-## Example
+Set `debugId` to `true` in `rum.sourceCodeContext` to inject a debug ID into each JavaScript bundle.
 
-The following example injects debug IDs and uploads source maps directly from the build plugin:
+The following example also configures `errorTracking.sourcemaps.debugId` so that the build plugin uploads the source maps:
 
 ```javascript
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
@@ -69,6 +66,40 @@ module.exports = {
   ],
 };
 ```
+
+If you upload source maps with another tool, such as `datadog-ci`, omit `auth` and `errorTracking.sourcemaps` from this configuration.
+
+{{% /tab %}}
+{{% tab "Service and version" %}}
+
+Service and version matching associates stack frames with source maps using metadata from the RUM SDK and the uploaded source maps.
+
+Configure the following options in `rum.sourceCodeContext`:
+
+- `service` (String, required): The service name. It must match the RUM SDK `service` initialization parameter.
+- `version` (String, optional): The release version. If set, it must match the RUM SDK `version` initialization parameter. If omitted, source code context is not associated with a specific version.
+
+```javascript
+const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
+
+module.exports = {
+  plugins: [
+    datadogWebpackPlugin({
+      rum: {
+        sourceCodeContext: {
+          service: 'my-application',
+          version: '1.0.0',
+        },
+      },
+    }),
+  ],
+};
+```
+
+The `service` and `version` values must match the metadata used when uploading the source maps.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 <div class="alert alert-info">This example uses webpack. The configuration object is identical across all supported bundlers. See <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> for installation instructions for your bundler.</div>
 
