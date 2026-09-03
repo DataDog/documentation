@@ -6,8 +6,9 @@
  * otherwise 404.
  *
  * Kept as one exported table so `legacyRedirects.test.ts` can assert it still
- * matches Hugo's cascade, and so every entry has exactly one prerendered
- * redirect page under `src/pages/`.
+ * matches Hugo's cascade, and so a single prerendered route
+ * (`src/pages/[...lang]/api/[...legacyPath].astro`) can generate every entry in
+ * every locale. Adding a redirect means adding a row here — no new page file.
  */
 import { DEFAULT_LOCALE, LOCALES } from "@lib/i18n/locale";
 
@@ -27,17 +28,43 @@ export const LEGACY_REDIRECTS: LegacyRedirect[] = [
   { from: "/api/latest/service-scorecards", to: "/api/latest/scorecards/" },
 ];
 
+export interface LegacyRedirectStaticPath {
+  params: {
+    /** Empty `[...lang]` segment for English, the code for every other locale. */
+    lang: string | undefined;
+    /** Everything after `/api`, or `undefined` for the bare `/api/` root. */
+    legacyPath: string | undefined;
+  };
+  props: { to: string };
+}
+
 /**
- * `getStaticPaths` entries for a legacy redirect page living under
- * `src/pages/[...lang]/`, so `/{lang}/api/…` redirects the same way the
- * unprefixed path does — Hugo's cascade applies to every language, not just
- * English. English is the empty `[...lang]` segment, matching the rest of the
- * route tree.
+ * `getStaticPaths` entries for the one redirect route,
+ * `src/pages/[...lang]/api/[...legacyPath].astro` — the cross product of every
+ * redirect with every built locale, since Hugo's cascade applies to all
+ * languages, not just English.
+ *
+ * The destination rides along as a prop so the page never has to reverse the
+ * param back into a table lookup.
  */
-export function legacyRedirectPaths(): Array<{
-  params: { lang: string | undefined };
-}> {
-  return LOCALES.map((lang) => ({
-    params: { lang: lang === DEFAULT_LOCALE ? undefined : lang },
-  }));
+export function legacyRedirectStaticPaths(): LegacyRedirectStaticPath[] {
+  return LOCALES.flatMap((lang) =>
+    LEGACY_REDIRECTS.map(({ from, to }) => ({
+      params: {
+        lang: lang === DEFAULT_LOCALE ? undefined : lang,
+        legacyPath: toLegacyPathParam(from),
+      },
+      props: { to },
+    })),
+  );
+}
+
+/**
+ * `/api/screenboards/` → `screenboards`, `/api/latest/downtimes/s` →
+ * `latest/downtimes/s`, and the bare `/api/` root → `undefined` (an empty rest
+ * param, which renders the route as `/api/` itself).
+ */
+function toLegacyPathParam(from: string): string | undefined {
+  const rest = from.replace(/^\/api\b/, "").replace(/^\/+|\/+$/g, "");
+  return rest === "" ? undefined : rest;
 }
