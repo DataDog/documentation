@@ -219,23 +219,18 @@ For the full message schema, see [Message][2] in the [Agent Observability HTTP A
 {{% /tab %}}
 {{% tab "OpenTelemetry" %}}
 
-If you use [OpenTelemetry instrumentation][1], no code change is required. Datadog extracts media from messages at ingestion, and how much it can extract depends on the semantic convention your instrumentation emits:
+If you use [OpenTelemetry instrumentation][1], no code change is required. Datadog extracts media at ingestion from message parts that follow the [OpenTelemetry GenAI semantic conventions for message parts][2]:
 
-| Convention | Images | Audio |
-|------------|--------|-------|
-| [OpenTelemetry 1.37+][2] | Inline `blob` parts, and `uri` parts carrying a base64 data URI | Inline `blob` parts |
-| [OpenInference][3] | Ordered image content carrying a base64 data URI | Not extracted |
-| [Langfuse][4] | `image_url` blocks carrying a base64 data URI | Not extracted |
-| [OpenLLMetry][5] | Not extracted | Not extracted |
+- A `blob` part with a `mime_type` and inline bytes becomes an image or audio part. When the part omits `modality`, Datadog infers it from the MIME type.
+- A `uri` part carrying a base64 image data URI, such as `data:image/png;base64,...`, becomes an image part.
 
-Only media carried inline as base64 bytes is rendered. A remote URL is recorded as a text reference and is never fetched. The [OpenTelemetry GenAI conventions][6] specify `blob` as the part type for inline base64 data, so prefer `blob` for both audio and images.
+Only media carried inline as base64 bytes is rendered. A remote URL is recorded as a text reference and is never fetched. Audio reaches the trace view through `blob` parts only, and the conventions specify `blob` as the part type for inline base64 data, so prefer `blob` for both audio and images.
+
+For the full mapping, see [Media in messages][3].
 
 [1]: /llm_observability/instrument/otel_instrumentation/
-[2]: /llm_observability/instrument/otel_instrumentation/#media-in-messages
-[3]: /llm_observability/instrument/otel_instrumentation/#media-in-openinference-messages
-[4]: /llm_observability/instrument/otel_instrumentation/#media-in-langfuse-messages
-[5]: /llm_observability/instrument/otel_instrumentation/#media-in-openllmetry-messages
-[6]: https://github.com/open-telemetry/semantic-conventions-genai/blob/main/model/gen-ai/gen-ai-input-messages.json
+[2]: https://github.com/open-telemetry/semantic-conventions-genai/blob/main/model/gen-ai/gen-ai-input-messages.json
+[3]: /llm_observability/instrument/otel_instrumentation/#media-in-messages
 {{% /tab %}}
 {{< /tabs >}}
 

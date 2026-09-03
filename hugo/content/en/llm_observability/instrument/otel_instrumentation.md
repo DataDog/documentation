@@ -31,14 +31,7 @@ You can use OpenTelemetry spans inside [Agent Observability Experiments](/llm_ob
 
 ### Multimodal support
 
-Audio and images on OpenTelemetry messages are rendered in the trace view. Coverage depends on the semantic convention your instrumentation emits:
-
-| Convention | Images | Audio |
-|------------|--------|-------|
-| [OpenTelemetry 1.37+](#media-in-messages) | Inline `blob` parts, and `uri` parts carrying a base64 data URI | Inline `blob` parts |
-| [OpenInference](#media-in-openinference-messages) | Ordered image content carrying a base64 data URI | Not extracted |
-| [Langfuse](#media-in-langfuse-messages) | `image_url` blocks carrying a base64 data URI | Not extracted |
-| [OpenLLMetry](#media-in-openllmetry-messages) | Not extracted | Not extracted |
+Audio and images on OpenTelemetry messages are rendered in the trace view. Datadog extracts media from message parts that follow the OpenTelemetry GenAI semantic conventions, as described in [Media in messages](#media-in-messages).
 
 Only media carried inline as base64 bytes is rendered. A remote URL is recorded as a text reference and is never fetched. For the fields, formats, and size limits that apply once media reaches a span, see [Multimodal Support](/llm_observability/instrument/multimodal/).
 
@@ -647,10 +640,6 @@ Messages are converted to OTel-compatible format and processed normally:
 | `gen_ai.prompt.*` | `meta.input.messages` (llm) / `meta.input.value` (others) |
 | `gen_ai.completion.*` | `meta.output.messages` (llm) / `meta.output.value` (others) |
 
-##### Media in OpenLLMetry messages
-
-OpenLLMetry prompt and completion attributes carry text content only, so no audio or images are extracted from them. To render media on a span, emit it as [OpenTelemetry 1.37+ message parts](#media-in-messages) alongside the OpenLLMetry attributes. OTel standard attributes take priority, so both can be present on the same span.
-
 #### Tool calls
 
 Tool calls are nested within completion attributes.
@@ -779,15 +768,6 @@ The following indexed message attributes are supported:
 
 Image content maps to an image URI while preserving its position among other message content.
 
-##### Media in OpenInference messages
-
-Ordered image content (`message.contents.<content-index>.message_content.image.image.url`) maps to an image URI. Because OpenInference carries images as a URL, what happens next depends on the URL:
-
-- A base64 data URI, such as `data:image/png;base64,...`, is extracted to `image_parts` and rendered in the trace view.
-- A remote URL is recorded as the text reference `[image: <url>]`. The URL is not fetched.
-
-Audio is not extracted. The OpenInference specification defines `message_content.type: "audio"` along with the span-level attributes `audio.url`, `audio.mime_type`, and `audio.transcript`, but these are not mapped to Agent Observability fields. To render audio on a span, emit it as an [OpenTelemetry 1.37+ `blob` part](#media-in-messages) alongside the OpenInference attributes. OTel standard attributes take priority, so both can be present on the same span.
-
 #### Embedding spans
 
 | OpenInference Source | Agent Observability Field |
@@ -862,15 +842,6 @@ Each message is converted to the parts-based message shape:
 - A `content` array of blocks converts `image_url` blocks to `uri` parts and `text` blocks to `text` parts; any other block is kept as serialized text.
 - A `tool_calls` array on a message becomes `tool_call` parts.
 - A message with `role: tool` and a `tool_call_id` becomes a `tool_result` part.
-
-##### Media in Langfuse messages
-
-An `image_url` content block maps to an image URI. Because Langfuse carries images as a URL, what happens next depends on the URL:
-
-- A base64 data URI, such as `data:image/png;base64,...`, is extracted to `image_parts` and rendered in the trace view.
-- A remote URL is recorded as the text reference `[image: <url>]`. The URL is not fetched.
-
-Audio is not extracted from Langfuse content blocks. To render audio on a span, emit it as an [OpenTelemetry 1.37+ `blob` part](#media-in-messages) alongside the Langfuse attributes. OTel standard attributes take priority, so both can be present on the same span.
 
 ##### Tool spans
 
