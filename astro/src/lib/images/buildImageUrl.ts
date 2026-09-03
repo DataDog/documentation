@@ -1,6 +1,6 @@
 import { IMAGES_URL } from "@config/images";
 
-export interface BuiltImageUrls {
+export interface ImageUrlAttrs {
   imageUrl: string;
   srcset: string;
   popupHref: string;
@@ -11,7 +11,7 @@ export interface BuiltImageUrls {
  *
  * Shared by `Img.astro` and `ImageCard.astro`.
  */
-export function buildImageUrl(src: string): BuiltImageUrls {
+export function buildImageUrl(src: string): ImageUrlAttrs {
   const imageUrl = `${IMAGES_URL}/images/${src}`;
   return {
     imageUrl,

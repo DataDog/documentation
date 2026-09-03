@@ -20,13 +20,13 @@ import { generateElementId } from "./src/lib/componentUtils/generateElementId.ts
  * read raw attributes off each child (`card-grid` needs that for its
  * `image_width` inheritance).
  */
-function* childrenUnwrappingParagraphs(node) {
+function* unwrapChildParagraphs(node) {
   for (const child of node.children) {
     if (child.type === "paragraph") {
-      yield* childrenUnwrappingParagraphs(child);
+      yield* unwrapChildParagraphs(child);
     } else if (child.type === "inline") {
       // Paragraphs hold their content in an `inline` wrapper node.
-      yield* childrenUnwrappingParagraphs(child);
+      yield* unwrapChildParagraphs(child);
     } else {
       yield child;
     }
@@ -217,7 +217,7 @@ export default defineMarkdocConfig({
         const tooltipCardIds = [];
         const tooltipLabelsByCardId = {};
 
-        for (const child of childrenUnwrappingParagraphs(node)) {
+        for (const child of unwrapChildParagraphs(node)) {
           if (child.type !== "tag" || child.tag !== "image-card") continue;
 
           const cardId = `${gridId}-card-${cards.length}`;

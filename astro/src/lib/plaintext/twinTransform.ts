@@ -47,12 +47,10 @@ const attr = (node: MarkdocNode, name: string): unknown =>
  * nodes they contain. Markdoc only makes a tag a direct child when it sits
  * alone on its line; inline siblings end up nested inside a paragraph.
  */
-function* childrenUnwrappingParagraphs(
-  node: MarkdocNode,
-): Generator<MarkdocNode> {
+function* unwrapChildParagraphs(node: MarkdocNode): Generator<MarkdocNode> {
   for (const child of node.children) {
     if (child.type === "paragraph" || child.type === "inline") {
-      yield* childrenUnwrappingParagraphs(child);
+      yield* unwrapChildParagraphs(child);
     } else {
       yield child;
     }
@@ -91,7 +89,7 @@ const twinAdaptersByTag: Record<string, TwinAdapter> = {
     // paragraph, so cards are not always direct children. This mirrors the
     // same unwrapping in markdoc.config.mjs; without it those cards would be
     // dropped from the plaintext twin while still rendering in HTML.
-    for (const child of childrenUnwrappingParagraphs(node)) {
+    for (const child of unwrapChildParagraphs(node)) {
       if (child.type !== "tag" || child.tag !== "image-card") continue;
       cards.push({
         href: String(attr(child, "href") ?? ""),
