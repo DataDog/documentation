@@ -17,8 +17,12 @@ const PLAIN_GRID_INDEX = 0;
  * Waiting for `data-hydrated` (the convention used across this repo — see
  * Tabs, CodeBlock, and SearchBar's browser tests) closes that window.
  */
-async function waitForTooltipHydration(grid: import("@playwright/test").Locator) {
-  await expect(grid.locator('.card-grid__tooltip[data-hydrated="true"]')).toBeAttached();
+async function waitForTooltipHydration(
+  grid: import("@playwright/test").Locator,
+) {
+  await expect(
+    grid.locator('.card-grid__tooltip[data-hydrated="true"]'),
+  ).toBeAttached();
 }
 
 test.describe("CardGrid component", () => {
@@ -27,18 +31,21 @@ test.describe("CardGrid component", () => {
   });
 
   test("renders every grid on the page", async ({ page }) => {
-    await expect(page.locator(".card-grid")).toHaveCount(8);
+    await expect(page.locator(".card-grid")).toHaveCount(9);
   });
 
   test("positions the tooltip over its card inside a positioned ancestor", async ({
     page,
   }) => {
-    // The last grid sits inside a tab pane, and `.tabs`/`.tabs__pane` are both
+    // This grid sits inside a tab panel, and `.tabs`/`.tabs__panel` are both
     // `position: relative` (Tabs.module.css). An absolutely positioned bubble
     // using page coordinates would resolve against that ancestor instead of
     // the page and land far from its card, so this pins the bubble to the card
     // rather than merely asserting that it opened.
-    const grid = page.locator(".card-grid").last();
+    //
+    // Scoped to the tab pane rather than picked by position, so appending
+    // sections to the test page cannot silently retarget it.
+    const grid = page.locator(".tabs__panel .card-grid");
     const tooltip = grid.locator(".card-grid__tooltip");
 
     await waitForTooltipHydration(grid);
@@ -50,7 +57,9 @@ test.describe("CardGrid component", () => {
     const cardBox = await card.boundingBox();
     const tooltipBox = await tooltip.boundingBox();
     if (!cardBox || !tooltipBox) {
-      throw new Error("Expected both the card and the open tooltip to have a layout box.");
+      throw new Error(
+        "Expected both the card and the open tooltip to have a layout box.",
+      );
     }
 
     // Sits just above the card, horizontally centered on it.
@@ -136,7 +145,10 @@ test.describe("CardGrid component", () => {
     // all. Sections 4 and 8 are the two tooltip grids on the fixture page.
     await expect(page.locator(".card-grid astro-island")).toHaveCount(2);
     await expect(
-      page.locator(".card-grid").nth(TOOLTIP_GRID_INDEX).locator("astro-island"),
+      page
+        .locator(".card-grid")
+        .nth(TOOLTIP_GRID_INDEX)
+        .locator("astro-island"),
     ).toHaveCount(1);
   });
 
@@ -146,7 +158,10 @@ test.describe("CardGrid component", () => {
     // Section 5: {% card-grid image_width=100 %} with three cards, none
     // setting its own width. (Unquoted numeric literal — Markdoc's Number
     // schema type does not coerce a quoted string.)
-    const images = page.locator(".card-grid").nth(4).locator(".image-card__image");
+    const images = page
+      .locator(".card-grid")
+      .nth(4)
+      .locator(".image-card__image");
 
     await expect(images).toHaveCount(3);
     for (const image of await images.all()) {
@@ -166,9 +181,14 @@ test.describe("CardGrid component", () => {
     const narrow = page.locator(".card-grid").nth(0);
 
     const wideCard = await wide.locator(".image-card").first().boundingBox();
-    const narrowCard = await narrow.locator(".image-card").first().boundingBox();
+    const narrowCard = await narrow
+      .locator(".image-card")
+      .first()
+      .boundingBox();
     if (!wideCard || !narrowCard) {
-      throw new Error("Expected a layout box for the first card of both grids.");
+      throw new Error(
+        "Expected a layout box for the first card of both grids.",
+      );
     }
 
     expect(wideCard.width).toBeGreaterThan(narrowCard.width);
@@ -180,7 +200,10 @@ test.describe("CardGrid component", () => {
     // halves keeps this honest — a bug that ignored image_width entirely and
     // fell back to the 150 default would fail, and so would one that leaked
     // the override onto its siblings.
-    const images = page.locator(".card-grid").nth(5).locator(".image-card__image");
+    const images = page
+      .locator(".card-grid")
+      .nth(5)
+      .locator(".image-card__image");
 
     await expect(images.nth(0)).toHaveAttribute("width", "200");
     await expect(images.nth(1)).toHaveAttribute("width", "100");
@@ -228,15 +251,65 @@ test.describe("CardGrid visual snapshots", () => {
     const gridBox = await grid.boundingBox();
     const tooltipBox = await tooltip.boundingBox();
     if (!gridBox || !tooltipBox) {
-      throw new Error("Expected both the grid and the open tooltip to have a layout box.");
+      throw new Error(
+        "Expected both the grid and the open tooltip to have a layout box.",
+      );
     }
     const top = Math.min(gridBox.y, tooltipBox.y);
     const left = Math.min(gridBox.x, tooltipBox.x);
-    const right = Math.max(gridBox.x + gridBox.width, tooltipBox.x + tooltipBox.width);
-    const bottom = Math.max(gridBox.y + gridBox.height, tooltipBox.y + tooltipBox.height);
+    const right = Math.max(
+      gridBox.x + gridBox.width,
+      tooltipBox.x + tooltipBox.width,
+    );
+    const bottom = Math.max(
+      gridBox.y + gridBox.height,
+      tooltipBox.y + tooltipBox.height,
+    );
 
     await expect(page).toHaveScreenshot("card-grid-tooltip-open.png", {
       clip: { x: left, y: top, width: right - left, height: bottom - top },
     });
+  });
+  test("keeps a short bottom row's cards the same width as a full row", async ({
+    page,
+  }) => {
+    // Section 9 wraps to more than one row. `auto-fill` sizes a fixed set of
+    // column tracks from the container, so cards flow into those tracks and a
+    // short last row leaves the leftovers empty. Switching to `auto-fit` would
+    // collapse them and stretch the remaining cards to fill the width, so this
+    // measures a wrapped row against a full one to keep the two apart.
+    await page.setViewportSize({ width: 1280, height: 900 });
+    const grid = page.locator(".card-grid").nth(8);
+    const cards = grid.locator(".image-card");
+
+    const boxes = [];
+    for (const card of await cards.all()) {
+      const box = await card.boundingBox();
+      if (!box) throw new Error("Expected a layout box for every card.");
+      boxes.push(box);
+    }
+
+    const rowTops = [...new Set(boxes.map((box) => Math.round(box.y)))];
+    expect(rowTops.length).toBeGreaterThan(1);
+
+    // Hiding trailing cards leaves the last row short without changing the
+    // container, which is what isolates track sizing from item count.
+    await grid.evaluate((el) => {
+      const all = el.querySelectorAll(".image-card");
+      all[all.length - 1].setAttribute("hidden", "");
+    });
+
+    const visibleCards = grid.locator(".image-card:not([hidden])");
+    const shortRowBoxes = [];
+    for (const card of await visibleCards.all()) {
+      const box = await card.boundingBox();
+      if (!box)
+        throw new Error("Expected a layout box for every visible card.");
+      shortRowBoxes.push(box);
+    }
+
+    const widths = new Set(shortRowBoxes.map((box) => Math.round(box.width)));
+    expect(widths.size).toBe(1);
+    expect([...widths][0]).toBe(Math.round(boxes[0].width));
   });
 });
