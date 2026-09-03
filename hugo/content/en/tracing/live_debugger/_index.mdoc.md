@@ -159,6 +159,55 @@ For more information about roles and how to assign roles to users, see [Role Bas
 
 ## Setup
 
+<!-- Go: Agent configuration (prerequisite) -->
+{% if equals($prog_lang, "go") %}
+
+To use Live Debugger, configure the Datadog Agent and then enable Live Debugger on your application.
+
+### Configure the Datadog Agent {% #configure-the-datadog-agent %}
+
+Use one of the following methods to configure the Agent for Live Debugger:
+
+{% tabs %}
+
+{% tab label="YAML" %}
+
+Update `system-probe.yaml` (located alongside `datadog.yaml`) with the following. For more information, see [Agent configuration files][37].
+
+```yaml
+dynamic_instrumentation:
+  enabled: true
+```
+
+{% /tab %}
+
+{% tab label="Environment variable" %}
+
+Add the following to your Datadog Agent manifest:
+
+```text
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+
+{% /tab %}
+
+{% tab label="Helm" %}
+
+Add the following to your Helm chart:
+
+```yaml
+datadog:
+  dynamicInstrumentationGo:
+    enabled: true
+```
+
+{% /tab %}
+
+{% /tabs %}
+
+{% /if %}
+<!-- end Go: Agent configuration -->
+
 ### Enable Live Debugger
 
 {% if includes($prog_lang, ["java", "python", "dot_net", "node_js", "go"]) %}
@@ -167,27 +216,10 @@ You can enable Live Debugger in-app or with environment variables.
 
 #### Enable in-app (recommended) {% #enable-in-app %}
 
-<!-- Enable in-app > Java, Python, .NET, Node.js -->
-{% if includes($prog_lang, ["java", "python", "dot_net", "node_js"]) %}
-
 Enable Live Debugger in-app in one of two ways:
 
 - On the [Live Debugger Settings page][26], enable the service and environment.
 - Start a Debug Session. Live Debugger is enabled automatically on the selected service and environment.
-
-{% /if %}
-<!-- end Enable in-app > Java, Python, .NET, Node.js -->
-
-<!-- Enable in-app > Go -->
-{% if equals($prog_lang, "go") %}
-
-After you configure the Datadog Agent as described in [Enable with environment variables](#enable-with-environment-variables), enable Live Debugger in-app in one of two ways:
-
-- On the [Live Debugger Settings page][26], enable the service and environment.
-- Start a Debug Session. Live Debugger is enabled automatically on the selected service and environment.
-
-{% /if %}
-<!-- end Enable in-app > Go -->
 
 #### Enable with environment variables {% #enable-with-environment-variables %}
 
@@ -234,8 +266,8 @@ ddtrace-run python -m myapp.py
 {% /if %}
 <!-- end Python -->
 
-<!-- .NET, Node.js -->
-{% if includes($prog_lang, ["dot_net", "node_js"]) %}
+<!-- .NET, Node.js, Go -->
+{% if includes($prog_lang, ["dot_net", "node_js", "go"]) %}
 
 Start your service with the following environment variables set:
 
@@ -247,63 +279,7 @@ DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 ```
 
 {% /if %}
-<!-- end .NET, Node.js -->
-
-<!-- Go -->
-{% if equals($prog_lang, "go") %}
-
-Go services require enabling Live Debugger in both the Datadog Agent and the application.
-
-**1. Configure the Datadog Agent** using one of the following methods, depending on how you deploy the Agent.
-
-{% tabs %}
-
-{% tab label="YAML" %}
-
-Update `system-probe.yaml` (located alongside `datadog.yaml`) with the following. For more information, see [Agent configuration files][37].
-
-```yaml
-dynamic_instrumentation:
-  enabled: true
-```
-
-{% /tab %}
-
-{% tab label="Environment variable" %}
-
-Add the following to your Datadog Agent manifest:
-
-```text
-DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
-```
-
-{% /tab %}
-
-{% tab label="Helm" %}
-
-Add the following to your Helm chart:
-
-```yaml
-datadog:
-  dynamicInstrumentationGo:
-    enabled: true
-```
-
-{% /tab %}
-
-{% /tabs %}
-
-**2. Start your service** with the following environment variables set:
-
-```shell
-DD_SERVICE=<YOUR_SERVICE>
-DD_ENV=<YOUR_ENV>
-DD_VERSION=<YOUR_VERSION>
-DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
-```
-
-{% /if %}
-<!-- end Go -->
+<!-- end .NET, Node.js, Go -->
 
 {% /if %}
 
