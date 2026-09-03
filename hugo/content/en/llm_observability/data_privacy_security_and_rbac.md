@@ -18,6 +18,8 @@ Agent Observability allows you to restrict access to potentially sensitive data 
 
 Access controls in Agent Observability are built on Datadog's [Data Access Control][1] feature, which enables you to regulate access to data deemed sensitive. You can use the `ml_app` tag to identify and restrict access to specific LLM applications within your organization.
 
+The same mechanism restricts individual Experiments projects, including their datasets and dataset records. See [Restrict Access to Experiments Projects][4].
+
 ## Redacting data with span processors
 
 You can redact or modify sensitive data at the application level before it is sent to Datadog. Use span processors in the Agent Observability SDK to conditionally modify input and output data on spans, or prevent spans from being emitted entirely.
@@ -42,4 +44,4 @@ By proactively scanning for sensitive data, Agent Observability ensures that con
 [1]: /account_management/rbac/data_access
 [2]: /llm_observability/instrument/sdk/#span-processing
 [3]: /security/sensitive_data_scanner/
-
+[4]: /llm_observability/improve/experiments/access_control/
