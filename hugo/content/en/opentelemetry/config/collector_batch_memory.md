@@ -52,7 +52,7 @@ resources:
     memory: 1Gi
 ```
 
-Set `GOMEMLIMIT` to 80% of the hard limit so the Go runtime collects garbage before the limiter engages.
+Also set the `GOMEMLIMIT` environment variable on the container, at 80% of the container memory limit (`800MiB` for the 1 GiB limit above). This makes the Go runtime collect garbage more aggressively as the process approaches the limit, which helps keep it below the container's hard limit.
 
 ## Example logging output
 

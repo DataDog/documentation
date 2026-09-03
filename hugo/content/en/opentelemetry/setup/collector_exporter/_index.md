@@ -506,7 +506,7 @@ Use the [official OpenTelemetry Collector Helm chart][102] to deploy the Collect
 
 {{% tab "Kubernetes manifest reference" %}}
 
-This tab is a configuration reference for users who maintain their own Kubernetes manifests. For an executable installation that includes the required pod specification, mounts, environment variables, RBAC resources, and port exposure, use the **Kubernetes (Helm—recommended)** tab.
+This tab is a configuration reference for users who maintain their own Kubernetes manifests. For an executable installation that includes the required pod specification, mounts, environment variables, RBAC resources, and port exposure, use the **Kubernetes** tab.
 
 The configuration runs the Collector as a DaemonSet in a non-cloud environment. It includes the `k8s_attributes` processor for enriching telemetry with Kubernetes metadata and the `kubelet_stats` receiver for node, pod, container, and volume metrics. On a managed Kubernetes distribution, apply the changes described in [Managed Kubernetes distributions](#managed-kubernetes-distributions) after the configuration.
 

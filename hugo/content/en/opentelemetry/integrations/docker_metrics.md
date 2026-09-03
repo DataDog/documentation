@@ -111,35 +111,24 @@ To correlate traces with container metrics, both telemetry types must share comm
 
 ### Traces
 
-To populate these resource attributes on **traces**:
+`container.id` must come from the application. The Collector receives spans over the network, so it cannot determine which container produced each span.
 
-- You can use the resource detection processor in your Collector configuration:
-   ```yaml
-   processors:
-      resource_detection:
-         detectors: ["env", "docker"]
-   service:
-      pipelines:
-         traces:
-            processors: [resource_detection]
-
-   ```
-
-   The `docker` detector queries the Docker daemon, so mount the Docker socket into the Collector. On Kubernetes, use the [`k8s_attributes` processor][5] instead.
-
-- You can add a container resource detector in your application code.  
-   For example, using Go:
+- Add a container resource detector in your application code. For example, using Go:
    ```go
-   // resource.WithContainer() adds container.id attribute to the trace's resource
+   // resource.WithContainer() adds the container.id attribute to the trace's resource
    res, err := resource.New(
        ctx,
-       resource.WithContainer(),                    
+       resource.WithContainer(),
        resource.WithFromEnv(),
-       semconv.ServiceNameKey.String("calendar"),   
+       semconv.ServiceNameKey.String("calendar"),
    )
    ```
 
    See the complete example in [opentelemetry-examples][8].
+
+- On Kubernetes, add the [`k8s_attributes` processor][5] to the traces pipeline instead. It looks up the sending pod by IP address, so it can add container and pod attributes in the Collector.
+
+The resource detection processor cannot supply `container.id`. Its `docker` detector reports the host and the Collector's own container, not the container that sent each span.
    
 ### Metrics  
    
