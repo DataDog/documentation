@@ -183,6 +183,10 @@
     "name": "Data Observability",
     "description": "Manage and run data observability monitors."
   },
+  "databricks-integration-accounts": {
+    "name": "Databricks Integration Accounts",
+    "description": "Manage your Datadog Databricks integration accounts directly through the Datadog API.\nCreate, update, and delete accounts, configure authentication and settings, and\nenable or disable dataflows such as Data Jobs Monitoring, serverless jobs,\ncluster logs, GPU metrics, cloud cost metrics, data observability, and model serving\nmetrics. See the\n[Databricks integration page](https://docs.datadoghq.com/integrations/databricks/) for\nmore information."
+  },
   "datasets": {
     "name": "Datasets",
     "description": "Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate\naccess to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can\nview certain types of telemetry (for example, logs, traces, metrics, and RUM data)."

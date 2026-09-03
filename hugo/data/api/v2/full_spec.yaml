@@ -31360,6 +31360,522 @@ components:
       required:
         - databaseMonitoringTrigger
       type: object
+    DatabricksCloudCostMetricsIntegrationDataflowRequest:
+      description: The Databricks cloud cost metrics dataflow.
+      properties:
+        enabled:
+          description: Whether the Databricks dataflow is enabled.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/DatabricksCloudCostMetricsIntegrationDataflowSettingsRequest"
+      type: object
+    DatabricksCloudCostMetricsIntegrationDataflowResponse:
+      description: The Databricks cloud cost metrics dataflow.
+      properties:
+        enabled:
+          description: Whether the Databricks dataflow is enabled.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/DatabricksCloudCostMetricsIntegrationDataflowSettingsResponse"
+      type: object
+    DatabricksCloudCostMetricsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the Databricks cloud cost metrics dataflow. Only the fields provided are changed.
+      properties:
+        ccm_collect_all_workspaces:
+          description: Whether cost data is collected for every workspace in the Databricks account rather than this workspace only.
+          example: true
+          type: boolean
+      type: object
+    DatabricksCloudCostMetricsIntegrationDataflowSettingsResponse:
+      description: Settings of the Databricks cloud cost metrics dataflow.
+      properties:
+        ccm_collect_all_workspaces:
+          description: Whether cost data is collected for every workspace in the Databricks account rather than this workspace only.
+          example: true
+          type: boolean
+      type: object
+    DatabricksDataJobMonitoringIntegrationDataflowRequest:
+      description: The Databricks Data Jobs Monitoring dataflow.
+      properties:
+        enabled:
+          description: Whether the Databricks dataflow is enabled.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/DatabricksDataJobMonitoringIntegrationDataflowSettingsRequest"
+      type: object
+    DatabricksDataJobMonitoringIntegrationDataflowResponse:
+      description: The Databricks Data Jobs Monitoring dataflow.
+      properties:
+        enabled:
+          description: Whether the Databricks dataflow is enabled.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/DatabricksDataJobMonitoringIntegrationDataflowSettingsResponse"
+      type: object
+    DatabricksDataJobMonitoringIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the Databricks Data Jobs Monitoring dataflow. Only the fields provided are changed.
+      properties:
+        dd_api_key_id:
+          description: >-
+            ID of the Datadog API key the global init script uses to submit data. Setting or changing it requires `dd_api_key_secret` in the same request.
+          example: fe383f4e-09fc-46bf-8e10-4efdd453a646
+          type: string
+        dd_api_key_secret:
+          description: Secret value of the Datadog API key identified by `dd_api_key_id`.
+          example: your-datadog-api-key
+          type: string
+          writeOnly: true
+        djm_global_init_script_enabled:
+          description: Whether Datadog manages the global init script that installs the Agent on your Databricks clusters.
+          example: true
+          type: boolean
+        script_gpum_enabled:
+          description: >-
+            Whether GPU metrics are collected from your Databricks clusters. The Agent installed by the global init script performs the collection, so this requires the dataflow to be enabled with `djm_global_init_script_enabled` set to `true`.
+          example: true
+          type: boolean
+        script_logs_enabled:
+          description: >-
+            Whether logs are collected from your Databricks clusters. The Agent installed by the global init script performs the collection, so this requires the dataflow to be enabled with `djm_global_init_script_enabled` set to `true`.
+          example: true
+          type: boolean
+      type: object
+    DatabricksDataJobMonitoringIntegrationDataflowSettingsResponse:
+      description: Settings of the Databricks Data Jobs Monitoring dataflow.
+      properties:
+        dd_api_key_id:
+          description: ID of the Datadog API key the global init script uses to submit data.
+          example: fe383f4e-09fc-46bf-8e10-4efdd453a646
+          type: string
+        djm_global_init_script_enabled:
+          description: Whether Datadog manages the global init script that installs the Agent on your Databricks clusters.
+          example: true
+          type: boolean
+        script_gpum_enabled:
+          description: >-
+            Whether GPU metrics are collected from your Databricks clusters. The Agent installed by the global init script performs the collection, so this requires the dataflow to be enabled with `djm_global_init_script_enabled` set to `true`.
+          example: true
+          type: boolean
+        script_logs_enabled:
+          description: >-
+            Whether logs are collected from your Databricks clusters. The Agent installed by the global init script performs the collection, so this requires the dataflow to be enabled with `djm_global_init_script_enabled` set to `true`.
+          example: true
+          type: boolean
+      type: object
+    DatabricksDataObservabilityIntegrationDataflowRequest:
+      description: The Databricks data observability dataflow.
+      properties:
+        enabled:
+          description: Whether the Databricks dataflow is enabled.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/DatabricksDataObservabilityIntegrationDataflowSettingsRequest"
+      type: object
+    DatabricksDataObservabilityIntegrationDataflowResponse:
+      description: The Databricks data observability dataflow.
+      properties:
+        enabled:
+          description: Whether the Databricks dataflow is enabled.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/DatabricksDataObservabilityIntegrationDataflowSettingsResponse"
+      type: object
+    DatabricksDataObservabilityIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the Databricks data observability dataflow. Only the fields provided are changed.
+      properties:
+        do_crawlers_cron:
+          description: Cron expression setting how often the data observability crawlers run.
+          example: "0 * * * *"
+          type: string
+        sync_system_catalog:
+          description: Whether the Databricks `system` catalog is synchronized alongside your data catalogs.
+          example: true
+          type: boolean
+      type: object
+    DatabricksDataObservabilityIntegrationDataflowSettingsResponse:
+      description: Settings of the Databricks data observability dataflow.
+      properties:
+        do_crawlers_cron:
+          description: Cron expression setting how often the data observability crawlers run.
+          example: "0 * * * *"
+          type: string
+        sync_system_catalog:
+          description: Whether the Databricks `system` catalog is synchronized alongside your data catalogs.
+          example: true
+          type: boolean
+      type: object
+    DatabricksIntegrationAccountAuthenticationRequest:
+      description: >-
+        Authentication for creating the Databricks integration account. Exactly one method is set. Choosing `private-action-runner` leaves the `databricks-model-serving-metrics` dataflow unable to collect data.
+      oneOf:
+        - $ref: "#/components/schemas/DatabricksIntegrationAccountOAuthAuthRequest"
+        - $ref: "#/components/schemas/IntegrationAccountPrivateActionRunnerAuthRequest"
+    DatabricksIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the Databricks integration account.
+      oneOf:
+        - $ref: "#/components/schemas/DatabricksIntegrationAccountOAuthAuthResponse"
+        - $ref: "#/components/schemas/IntegrationAccountPrivateActionRunnerAuthResponse"
+        - $ref: "#/components/schemas/DatabricksIntegrationAccountPatAuthResponse"
+    DatabricksIntegrationAccountAuthenticationUpdate:
+      description: >-
+        Authentication for updating the Databricks integration account. Exactly one method is set. Choosing `private-action-runner` leaves the `databricks-model-serving-metrics` dataflow unable to collect data. `pat` is accepted only on accounts that already use it, so it cannot move an account onto personal access token authentication.
+      oneOf:
+        - $ref: "#/components/schemas/DatabricksIntegrationAccountOAuthAuthUpdate"
+        - $ref: "#/components/schemas/IntegrationAccountPrivateActionRunnerAuthRequest"
+        - $ref: "#/components/schemas/DatabricksIntegrationAccountPatAuthUpdate"
+    DatabricksIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a Databricks integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/DatabricksIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Databricks integration account.
+          example: My Databricks Workspace
+          type: string
+        settings:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    DatabricksIntegrationAccountCreateData:
+      description: Data envelope for creating a Databricks integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    DatabricksIntegrationAccountCreateRequest:
+      description: Request payload to create a Databricks integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    DatabricksIntegrationAccountOAuthAuthRequest:
+      additionalProperties: false
+      description: Databricks OAuth machine-to-machine authentication using a service principal.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountOAuthAuthType"
+        azure_tenant_id:
+          description: Microsoft Entra ID tenant of the service principal, for Azure Databricks workspaces.
+          example: 4d3bac44-0230-4732-9e70-cc00736f0a97
+          type: string
+        client_id:
+          description: Client ID of the Databricks service principal.
+          example: 5c10654a-b3a3-4840-b37f-f477590c70a0
+          type: string
+        client_secret:
+          description: Secret of the Databricks service principal.
+          example: your-client-secret
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - client_id
+        - client_secret
+      type: object
+    DatabricksIntegrationAccountOAuthAuthResponse:
+      description: The Databricks OAuth authentication method and service principal configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountOAuthAuthType"
+        azure_tenant_id:
+          description: Microsoft Entra ID tenant of the service principal, for Azure Databricks workspaces.
+          example: 4d3bac44-0230-4732-9e70-cc00736f0a97
+          type: string
+        client_id:
+          description: Client ID of the Databricks service principal.
+          example: 5c10654a-b3a3-4840-b37f-f477590c70a0
+          type: string
+      required:
+        - auth_type
+        - client_id
+      type: object
+    DatabricksIntegrationAccountOAuthAuthType:
+      default: databricks-oauth
+      description: The authentication method type.
+      enum:
+        - databricks-oauth
+      example: databricks-oauth
+      type: string
+      x-enum-varnames:
+        - DATABRICKS_OAUTH
+    DatabricksIntegrationAccountOAuthAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Databricks OAuth machine-to-machine authentication using a service principal. Omit `client_secret` to keep the stored one; `client_id` must be provided on every submission. Omitting `azure_tenant_id` clears it.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountOAuthAuthType"
+        azure_tenant_id:
+          description: Microsoft Entra ID tenant of the service principal, for Azure Databricks workspaces.
+          example: 4d3bac44-0230-4732-9e70-cc00736f0a97
+          type: string
+        client_id:
+          description: Client ID of the Databricks service principal.
+          example: 5c10654a-b3a3-4840-b37f-f477590c70a0
+          type: string
+        client_secret:
+          description: Secret of the Databricks service principal.
+          example: your-client-secret
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - client_id
+      type: object
+    DatabricksIntegrationAccountPatAuthResponse:
+      deprecated: true
+      description: >-
+        The Databricks personal access token authentication method configured on the account. Deprecated: migrate these accounts to `databricks-oauth` or `private-action-runner`.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountPatAuthType"
+      required:
+        - auth_type
+      type: object
+    DatabricksIntegrationAccountPatAuthType:
+      default: pat
+      description: The authentication method type.
+      enum:
+        - pat
+      example: pat
+      type: string
+      x-enum-varnames:
+        - PAT
+    DatabricksIntegrationAccountPatAuthUpdate:
+      additionalProperties: false
+      deprecated: true
+      description: >-
+        Databricks personal access token authentication. Deprecated: accepted only on accounts that already use it, and never on creation. Use `databricks-oauth` or `private-action-runner` instead. Omit `token` to keep the stored one.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountPatAuthType"
+        token:
+          description: Secret Databricks personal access token.
+          example: your-personal-access-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    DatabricksIntegrationAccountResponse:
+      description: Response payload for a single Databricks integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    DatabricksIntegrationAccountResponseAttributes:
+      description: Attributes of a Databricks integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/DatabricksIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the Databricks integration account.
+          example: My Databricks Workspace
+          type: string
+        settings:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    DatabricksIntegrationAccountResponseData:
+      description: Data envelope of a Databricks integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the Databricks integration account.
+          example: a9a69c2e-4f8d-4e42-9c1a-2a7a2d3b7c6f
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    DatabricksIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the Databricks integration account.
+      properties:
+        system_tables_sql_warehouse_id:
+          description: ID of the SQL warehouse used to query the Databricks system tables.
+          example: aba7c023d4172910
+          type: string
+        workspace_url:
+          description: URL of the Databricks workspace.
+          example: "https://dbc-1234abcd.cloud.databricks.com"
+          type: string
+      required:
+        - workspace_url
+      type: object
+    DatabricksIntegrationAccountSettingsResponse:
+      description: Settings configured on the Databricks integration account.
+      properties:
+        system_tables_sql_warehouse_id:
+          description: ID of the SQL warehouse used to query the Databricks system tables.
+          example: aba7c023d4172910
+          type: string
+        workspace_url:
+          description: URL of the Databricks workspace.
+          example: "https://dbc-1234abcd.cloud.databricks.com"
+          type: string
+      required:
+        - workspace_url
+      type: object
+    DatabricksIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: Settings for updating the Databricks integration account. Only the fields provided are changed.
+      properties:
+        system_tables_sql_warehouse_id:
+          description: ID of the SQL warehouse used to query the Databricks system tables.
+          example: aba7c023d4172910
+          type: string
+        workspace_url:
+          description: URL of the Databricks workspace.
+          example: "https://dbc-1234abcd.cloud.databricks.com"
+          type: string
+      type: object
+    DatabricksIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a Databricks integration account. Every field is optional; only the fields provided are changed. When `dataflows` is provided, only the dataflow ids included in the request are modified; dataflows omitted from the map keep their current configuration, as do the settings of an included dataflow that provides only `enabled`.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/DatabricksIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Databricks integration account.
+          example: My Databricks Workspace
+          type: string
+        settings:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountSettingsUpdate"
+      type: object
+    DatabricksIntegrationAccountUpdateData:
+      description: Data envelope for updating a Databricks integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the Databricks integration account to update.
+          example: a9a69c2e-4f8d-4e42-9c1a-2a7a2d3b7c6f
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DatabricksIntegrationAccountUpdateRequest:
+      description: Request payload to update a Databricks integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    DatabricksIntegrationAccountsResponse:
+      description: Response payload for a list of Databricks integration accounts.
+      properties:
+        data:
+          description: List of Databricks integration accounts.
+          items:
+            $ref: "#/components/schemas/DatabricksIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    DatabricksIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: >-
+        Dataflows to configure on the Databricks integration account, keyed by dataflow id. Some dataflows and settings have prerequisites, noted on each. Those prerequisites are not checked when the request is made, so anything left enabled without them is stored but collects no data.
+      properties:
+        databricks-cloud-cost-metrics:
+          $ref: "#/components/schemas/DatabricksCloudCostMetricsIntegrationDataflowRequest"
+        databricks-data-job-monitoring:
+          $ref: "#/components/schemas/DatabricksDataJobMonitoringIntegrationDataflowRequest"
+        databricks-data-observability:
+          $ref: "#/components/schemas/DatabricksDataObservabilityIntegrationDataflowRequest"
+        databricks-model-serving-metrics:
+          $ref: "#/components/schemas/DatabricksModelServingMetricsIntegrationDataflowRequest"
+        databricks-serverless-jobs:
+          $ref: "#/components/schemas/DatabricksServerlessJobsIntegrationDataflowRequest"
+      type: object
+    DatabricksIntegrationDataflowsResponse:
+      description: Dataflows configured on the Databricks integration account, keyed by dataflow id.
+      properties:
+        databricks-cloud-cost-metrics:
+          $ref: "#/components/schemas/DatabricksCloudCostMetricsIntegrationDataflowResponse"
+        databricks-data-job-monitoring:
+          $ref: "#/components/schemas/DatabricksDataJobMonitoringIntegrationDataflowResponse"
+        databricks-data-observability:
+          $ref: "#/components/schemas/DatabricksDataObservabilityIntegrationDataflowResponse"
+        databricks-model-serving-metrics:
+          $ref: "#/components/schemas/DatabricksModelServingMetricsIntegrationDataflowResponse"
+        databricks-serverless-jobs:
+          $ref: "#/components/schemas/DatabricksServerlessJobsIntegrationDataflowResponse"
+      type: object
+    DatabricksModelServingMetricsIntegrationDataflowRequest:
+      description: >-
+        The Databricks model serving metrics dataflow. Not supported on accounts that authenticate with `private-action-runner`; on those accounts this dataflow collects no data even when enabled.
+      properties:
+        enabled:
+          description: Whether the Databricks dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    DatabricksModelServingMetricsIntegrationDataflowResponse:
+      description: >-
+        The Databricks model serving metrics dataflow. Not supported on accounts that authenticate with `private-action-runner`; on those accounts this dataflow collects no data even when enabled.
+      properties:
+        enabled:
+          description: Whether the Databricks dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    DatabricksServerlessJobsIntegrationDataflowRequest:
+      description: The Databricks serverless jobs dataflow.
+      properties:
+        enabled:
+          description: Whether the Databricks dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
+    DatabricksServerlessJobsIntegrationDataflowResponse:
+      description: The Databricks serverless jobs dataflow.
+      properties:
+        enabled:
+          description: Whether the Databricks dataflow is enabled.
+          example: true
+          type: boolean
+      type: object
     DatadogAPIKey:
       description: The definition of the `DatadogAPIKey` object.
       properties:
@@ -53988,6 +54504,61 @@ components:
           type: string
       readOnly: true
       type: object
+    IntegrationAccountPrivateActionRunnerAuthRequest:
+      additionalProperties: false
+      description: >-
+        Private Action Runner authentication. The runner holds the credentials, so this method carries no secrets; `connection_id` and `user_uuid` must be provided on every submission.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/IntegrationAccountPrivateActionRunnerAuthType"
+        connection_id:
+          description: Unique identifier of the Private Action Runner connection holding the credentials.
+          example: 08356fb7-3ae3-4ea2-913e-b4cb1b7e7ec2
+          type: string
+        secret_path:
+          description: Path of the credential inside the secret backend configured on the runner.
+          example: /vault/databricks/prod
+          type: string
+        user_uuid:
+          description: Unique identifier of the user the Private Action Runner connection belongs to.
+          example: ac470ea4-aa08-11f0-994d-da9212322ca2
+          type: string
+      required:
+        - auth_type
+        - connection_id
+        - user_uuid
+      type: object
+    IntegrationAccountPrivateActionRunnerAuthResponse:
+      description: The Private Action Runner authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/IntegrationAccountPrivateActionRunnerAuthType"
+        connection_id:
+          description: Unique identifier of the Private Action Runner connection holding the credentials.
+          example: 08356fb7-3ae3-4ea2-913e-b4cb1b7e7ec2
+          type: string
+        secret_path:
+          description: Path of the credential inside the secret backend configured on the runner.
+          example: /vault/databricks/prod
+          type: string
+        user_uuid:
+          description: Unique identifier of the user the Private Action Runner connection belongs to.
+          example: ac470ea4-aa08-11f0-994d-da9212322ca2
+          type: string
+      required:
+        - auth_type
+        - connection_id
+        - user_uuid
+      type: object
+    IntegrationAccountPrivateActionRunnerAuthType:
+      default: private-action-runner
+      description: The authentication method type.
+      enum:
+        - private-action-runner
+      example: private-action-runner
+      type: string
+      x-enum-varnames:
+        - PRIVATE_ACTION_RUNNER
     IntegrationAccountType:
       default: integration-account
       description: The type of the integration account resource. Always `integration-account`.
@@ -161554,6 +162125,313 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/databricks/accounts:
+    get:
+      description: List Databricks integration accounts.
+      operationId: ListDatabricksIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: databricks-oauth
+                            client_id: 5c10654a-b3a3-4840-b37f-f477590c70a0
+                          dataflows:
+                            databricks-cloud-cost-metrics:
+                              enabled: true
+                              settings:
+                                ccm_collect_all_workspaces: true
+                            databricks-data-job-monitoring:
+                              enabled: true
+                              settings:
+                                dd_api_key_id: fe383f4e-09fc-46bf-8e10-4efdd453a646
+                                djm_global_init_script_enabled: true
+                                script_gpum_enabled: false
+                                script_logs_enabled: true
+                            databricks-data-observability:
+                              enabled: true
+                              settings:
+                                do_crawlers_cron: "0 * * * *"
+                                sync_system_catalog: true
+                            databricks-model-serving-metrics:
+                              enabled: false
+                            databricks-serverless-jobs:
+                              enabled: true
+                          name: My Databricks Workspace
+                          settings:
+                            system_tables_sql_warehouse_id: aba7c023d4172910
+                            workspace_url: "https://dbc-1234abcd.cloud.databricks.com"
+                        id: a9a69c2e-4f8d-4e42-9c1a-2a7a2d3b7c6f
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/DatabricksIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Databricks integration accounts
+      tags:
+        - Databricks Integration Accounts
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a Databricks integration account.
+      operationId: CreateDatabricksIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DatabricksIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: databricks-oauth
+                          client_id: 5c10654a-b3a3-4840-b37f-f477590c70a0
+                        dataflows:
+                          databricks-cloud-cost-metrics:
+                            enabled: true
+                            settings:
+                              ccm_collect_all_workspaces: true
+                          databricks-data-job-monitoring:
+                            enabled: true
+                            settings:
+                              dd_api_key_id: fe383f4e-09fc-46bf-8e10-4efdd453a646
+                              djm_global_init_script_enabled: true
+                              script_gpum_enabled: false
+                              script_logs_enabled: true
+                          databricks-data-observability:
+                            enabled: true
+                            settings:
+                              do_crawlers_cron: "0 * * * *"
+                              sync_system_catalog: true
+                          databricks-model-serving-metrics:
+                            enabled: false
+                          databricks-serverless-jobs:
+                            enabled: true
+                        name: My Databricks Workspace
+                        settings:
+                          system_tables_sql_warehouse_id: aba7c023d4172910
+                          workspace_url: "https://dbc-1234abcd.cloud.databricks.com"
+                      id: a9a69c2e-4f8d-4e42-9c1a-2a7a2d3b7c6f
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/DatabricksIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a Databricks integration account
+      tags:
+        - Databricks Integration Accounts
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/databricks/accounts/{account_id}:
+    delete:
+      description: Delete a Databricks integration account.
+      operationId: DeleteDatabricksIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a Databricks integration account
+      tags:
+        - Databricks Integration Accounts
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a Databricks integration account.
+      operationId: GetDatabricksIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: databricks-oauth
+                          client_id: 5c10654a-b3a3-4840-b37f-f477590c70a0
+                        dataflows:
+                          databricks-cloud-cost-metrics:
+                            enabled: true
+                            settings:
+                              ccm_collect_all_workspaces: true
+                          databricks-data-job-monitoring:
+                            enabled: true
+                            settings:
+                              dd_api_key_id: fe383f4e-09fc-46bf-8e10-4efdd453a646
+                              djm_global_init_script_enabled: true
+                              script_gpum_enabled: false
+                              script_logs_enabled: true
+                          databricks-data-observability:
+                            enabled: true
+                            settings:
+                              do_crawlers_cron: "0 * * * *"
+                              sync_system_catalog: true
+                          databricks-model-serving-metrics:
+                            enabled: false
+                          databricks-serverless-jobs:
+                            enabled: true
+                        name: My Databricks Workspace
+                        settings:
+                          system_tables_sql_warehouse_id: aba7c023d4172910
+                          workspace_url: "https://dbc-1234abcd.cloud.databricks.com"
+                      id: a9a69c2e-4f8d-4e42-9c1a-2a7a2d3b7c6f
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/DatabricksIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a Databricks integration account
+      tags:
+        - Databricks Integration Accounts
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a Databricks integration account. Only the fields provided are changed.
+      operationId: UpdateDatabricksIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DatabricksIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: databricks-oauth
+                          client_id: 5c10654a-b3a3-4840-b37f-f477590c70a0
+                        dataflows:
+                          databricks-cloud-cost-metrics:
+                            enabled: true
+                            settings:
+                              ccm_collect_all_workspaces: true
+                          databricks-data-job-monitoring:
+                            enabled: true
+                            settings:
+                              dd_api_key_id: fe383f4e-09fc-46bf-8e10-4efdd453a646
+                              djm_global_init_script_enabled: true
+                              script_gpum_enabled: false
+                              script_logs_enabled: true
+                          databricks-data-observability:
+                            enabled: true
+                            settings:
+                              do_crawlers_cron: "0 * * * *"
+                              sync_system_catalog: true
+                          databricks-model-serving-metrics:
+                            enabled: false
+                          databricks-serverless-jobs:
+                            enabled: true
+                        name: My Databricks Workspace
+                        settings:
+                          system_tables_sql_warehouse_id: aba7c023d4172910
+                          workspace_url: "https://dbc-1234abcd.cloud.databricks.com"
+                      id: a9a69c2e-4f8d-4e42-9c1a-2a7a2d3b7c6f
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/DatabricksIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a Databricks integration account
+      tags:
+        - Databricks Integration Accounts
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/elastic-cloud/accounts:
     get:
       description: List Elastic Cloud integration accounts.
@@ -226947,6 +227825,18 @@ tags:
     name: Data Deletion
   - description: Manage and run data observability monitors.
     name: Data Observability
+  - description: |-
+      Manage your Datadog Databricks integration accounts directly through the Datadog API.
+      Create, update, and delete accounts, configure authentication and settings, and
+      enable or disable dataflows such as Data Jobs Monitoring, serverless jobs,
+      cluster logs, GPU metrics, cloud cost metrics, data observability, and model serving
+      metrics. See the
+      [Databricks integration page](https://docs.datadoghq.com/integrations/databricks/) for
+      more information.
+    externalDocs:
+      description: Databricks integration.
+      url: https://docs.datadoghq.com/integrations/databricks/
+    name: Databricks Integration Accounts
   - description: |-
       Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate
       access to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can

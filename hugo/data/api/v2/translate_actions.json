@@ -2638,6 +2638,30 @@
     "request_description": "Timestamp override patch payload.",
     "request_schema_description": "Request payload for patching a timestamp override."
   },
+  "ListDatabricksIntegrationAccounts": {
+    "description": "List Databricks integration accounts.",
+    "summary": "List Databricks integration accounts"
+  },
+  "CreateDatabricksIntegrationAccount": {
+    "description": "Create a Databricks integration account.",
+    "summary": "Create a Databricks integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Databricks integration account."
+  },
+  "DeleteDatabricksIntegrationAccount": {
+    "description": "Delete a Databricks integration account.",
+    "summary": "Delete a Databricks integration account"
+  },
+  "GetDatabricksIntegrationAccount": {
+    "description": "Get a Databricks integration account.",
+    "summary": "Get a Databricks integration account"
+  },
+  "UpdateDatabricksIntegrationAccount": {
+    "description": "Update a Databricks integration account. Only the fields provided are changed.",
+    "summary": "Update a Databricks integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Databricks integration account."
+  },
   "ListElasticCloudIntegrationAccounts": {
     "description": "List Elastic Cloud integration accounts.",
     "summary": "List Elastic Cloud integration accounts"

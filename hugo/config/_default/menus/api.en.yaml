@@ -12629,6 +12629,75 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Databricks Integration Accounts
+      url: /api/latest/databricks-integration-accounts/
+      identifier: databricks-integration-accounts
+      generated: true
+    - name: Update a Databricks integration account
+      url: /api/latest/databricks-integration-accounts/update-a-databricks-integration-account/
+      identifier: databricks-integration-accounts-update-a-databricks-integration-account
+      parent: databricks-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDatabricksIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Databricks integration account
+      url: /api/latest/databricks-integration-accounts/get-a-databricks-integration-account/
+      identifier: databricks-integration-accounts-get-a-databricks-integration-account
+      parent: databricks-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDatabricksIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Databricks integration account
+      url: /api/latest/databricks-integration-accounts/delete-a-databricks-integration-account/
+      identifier: databricks-integration-accounts-delete-a-databricks-integration-account
+      parent: databricks-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDatabricksIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Databricks integration account
+      url: /api/latest/databricks-integration-accounts/create-a-databricks-integration-account/
+      identifier: databricks-integration-accounts-create-a-databricks-integration-account
+      parent: databricks-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDatabricksIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Databricks integration accounts
+      url: /api/latest/databricks-integration-accounts/list-databricks-integration-accounts/
+      identifier: databricks-integration-accounts-list-databricks-integration-accounts
+      parent: databricks-integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDatabricksIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Datasets
       url: /api/latest/datasets/
       identifier: datasets
