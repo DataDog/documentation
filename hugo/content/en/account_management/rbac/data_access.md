@@ -78,6 +78,7 @@ The following are available as a Preview upon request:
 - Hosts
 - Processes
 - Containers
+- Security findings (Cloud Security findings only)
 
 ## Advanced configuration
 

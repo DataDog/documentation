@@ -78,7 +78,7 @@ If you're not sure about your workflow configuration, you can return to the pane
 1. Click {{< ui >}}Add Step{{< /ui >}} to start adding steps to your workflow.
 1. Search for an action using the search bar or browse through the integrations and their related actions to find the action you're looking for. Click an action to add it as a step on your workflow canvas.
 1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables][14].
-1. After you've configured the step, click either the AI icon <i class="icon-bits-ai"></i> or the plus icon ({{< ui >}}+{{< /ui >}}) to add another step, or save the workflow if you're done.
+1. After you've configured the step, click either the AI icon <i class="icon-bits-ai"></i> or the plus icon ({{< ui >}}\+{{< /ui >}}) to add another step, or save the workflow if you're done.
 1. When you're ready to publish your workflow, click {{< ui >}}Publish{{< /ui >}}. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
 You can edit a step in the workflow at any time by clicking on it. Click and drag steps on your workflow to rearrange them.
@@ -134,12 +134,12 @@ You can configure your workflow to send you a notification on success or failure
 To add a notification:
 1. In the workflow configuration panel, scroll down to the {{< ui >}}Notifications{{< /ui >}} section.
 1. To add a notification if the workflow succeeds:
-   1. Click the plus ({{< ui >}}+{{< /ui >}}) icon next to {{< ui >}}Notify on success{{< /ui >}}.
+   1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon next to {{< ui >}}Notify on success{{< /ui >}}.
    1. Select the integration that you want to use for notifications.
    1. Complete the required fields for the specified integration.
    1. Click {{< ui >}}Save{{< /ui >}} to save your workflow.
 1. To add a notification if the workflow fails:
-   1. Click the plus ({{< ui >}}+{{< /ui >}}) icon next to {{< ui >}}Notify on failure{{< /ui >}}.
+   1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon next to {{< ui >}}Notify on failure{{< /ui >}}.
    1. Select the integration that you want to use for notifications.
    1. Complete the required fields for the specified integration.
    1. Click {{< ui >}}Save{{< /ui >}} to save your workflow.

@@ -14,6 +14,9 @@ further_reading:
     - link: '/internal_developer_portal/catalog/'
       tag: 'Documentation'
       text: 'Catalog'
+    - link: "https://learn.datadoghq.com/courses/monitor-a-kafka-pipeline-with-dsm"
+      tag: "Learning Center"
+      text: "Monitor a Kafka Pipeline with Data Streams Monitoring"
     - link: 'https://www.datadoghq.com/blog/data-streams-monitoring/'
       tag: 'Blog'
       text: 'Track and improve the performance of streaming data pipelines with Datadog Data Streams Monitoring'
@@ -29,9 +32,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/data-observability/"
       tag: "Blog"
       text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
-    - link: "https://learn.datadoghq.com/courses/monitor-a-kafka-pipeline-with-dsm"
-      tag: "Learning Center"
-      text: "Monitor a Kafka Pipeline with Data Streams Monitoring"
+    - link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
+      tag: "Blog"
+      text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
 cascade:
     algolia:
         rank: 70
