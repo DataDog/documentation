@@ -64,7 +64,7 @@ The following application languages and libraries are supported for vulnerabilit
 
 ## Container image registries
 
-Registry scanning support depends on whether Datadog can enumerate images directly in the registry and scan them at rest, or whether it needs an authenticated pull to scan an image it has already found running in a workload or cached on a scanned node.
+Registry scanning support depends on how Datadog accesses the registry. Some registries let Datadog enumerate and scan images directly at rest. Others require an authenticated pull to scan an image already running in a workload or cached on a scanned node.
 
 | Registry                                                                        | Scan type            | Notes                                                                                                                                                    |
 |----------------------------------------------------------------------------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
