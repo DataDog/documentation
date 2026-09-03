@@ -42,6 +42,7 @@ The following table presents the list of collected features and the minimal Agen
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
 | AWS Persistent Volume Allocation | 7.46.0 | 1.11.0 |
 | Data Transfer Cost Allocation    | 7.58.0 | 7.58.0 |
+| Local Storage Cost Allocation | 7.27.0 | 1.11.0 |
 
 1. Configure the AWS Cloud Cost Management integration on the [Cloud Cost Setup page][2].
 1. For Kubernetes support, install the [Datadog Agent][3] in a Kubernetes environment and ensure that you enable the [Orchestrator Explorer][4] in your Agent configuration.
@@ -66,6 +67,7 @@ The following table presents the list of collected features and the minimal Agen
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
+| Local Storage Cost Allocation | 7.27.0 | 1.11.0 |
 
 1. Configure the Azure Cost Management integration on the [Cloud Cost Setup page][2].
 1. Install the [Datadog Agent][3] in a Kubernetes environment and ensure that you enable the [Orchestrator Explorer][4] in your Agent configuration.
@@ -123,6 +125,12 @@ Next, Datadog looks at all of the pods running on that node for the day. The cos
 
 All other costs are given the same value and tags as the source metric `aws.cost.amortized`.
 
+### Local storage
+
+For Kubernetes local storage allocation, Datadog identifies EC2 instance types whose bundled compute price includes instance store. EBS-only instances retain the existing CPU and memory allocation.
+
+For eligible instances, the bundled compute cost is divided among CPU, memory, and local storage using a default relative ratio of 3:2:1. Datadog examines all pods running on the node that day. For each pod, Datadog reserves the larger of its ephemeral-storage request and its daily peak usage. The average usage determines the usage cost, the remainder of the reservation is workload idle, and capacity not reserved by any pod is cluster idle. The allocated cost is enriched with the pod's tags.
+
 ### Persistent volume storage
 
 For Kubernetes Persistent Volume storage allocation, Persistent Volumes (PV), Persistent Volume Claims (PVC), nodes, and pods are joined with their associated EBS volume costs. All associated PV, PVC, node, and pod tags are added to the EBS volume cost line items.
@@ -169,6 +177,12 @@ Next, Datadog looks at all of the pods running on that node for the day. The cos
 **Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][13] and [pods][14].
 
 All other costs are given the same value and tags as the source metric `azure.cost.amortized`.
+
+### Local storage
+
+For Kubernetes local storage allocation, Datadog identifies Azure VM sizes whose bundled compute price includes a local temporary disk. VM sizes without a dedicated temporary disk retain the existing CPU and memory allocation.
+
+For eligible VMs, the bundled compute cost is divided among CPU, memory, and local storage using a default relative ratio of 3:2:1. Datadog examines all pods running on the node that day. For each pod, Datadog reserves the larger of its ephemeral-storage request and its daily peak usage. The average usage determines the usage cost, the remainder of the reservation is workload idle, and capacity not reserved by any pod is cluster idle. The allocated cost is enriched with the pod's tags.
 
 {% /if %}
 
@@ -229,6 +243,18 @@ Costs are allocated into the following spend types:
 | Workload idle | Cost of resources (such as memory, CPU, and GPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
 | Cluster idle | Cost of resources (such as memory, CPU, and GPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
 
+### Local storage
+
+For EC2 instances with instance store, the bundled compute cost uses a default CPU-to-memory-to-local-storage ratio of 3:2:1. Local storage costs are allocated into the following spend types:
+
+| Spend type | Description |
+| --- | --- |
+| Usage | Cost of local storage used by workloads, based on average ephemeral-storage usage that day. |
+| Workload idle | Cost of local storage reserved by workloads but not used. This is the difference between the larger of a pod's ephemeral-storage request or daily peak usage and its average usage. |
+| Cluster idle | Cost of instance-store capacity not reserved by any workload in the cluster. |
+
+Local storage is tied to the life cycle of an EC2 instance. It does not include EBS persistent volumes.
+
 ### Persistent volume
 
 The cost of an EBS volume has three components: IOPS, throughput, and storage. Each is allocated according to a pod's usage when the volume is mounted.
@@ -266,6 +292,18 @@ Costs are allocated into the following spend types:
 | Usage | Cost of resources (such as memory, CPU, and GPU) used by workloads, based on the average usage on that day. |
 | Workload idle | Cost of resources (such as memory, CPU, and GPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
 | Cluster idle | Cost of resources (such as memory, CPU, and GPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
+
+### Local storage
+
+For Azure VMs with a dedicated temporary disk, the bundled compute cost uses a default CPU-to-memory-to-local-storage ratio of 3:2:1. Local storage costs are allocated into the following spend types:
+
+| Spend type | Description |
+| --- | --- |
+| Usage | Cost of local storage used by workloads, based on average ephemeral-storage usage that day. |
+| Workload idle | Cost of local storage reserved by workloads but not used. This is the difference between the larger of a pod's ephemeral-storage request or daily peak usage and its average usage. |
+| Cluster idle | Cost of temporary-disk capacity not reserved by any workload in the cluster. |
+
+Local storage is tied to the life cycle of an Azure VM. It does not include Azure Managed Disk persistent volumes.
 
 {% /if %}
 
@@ -372,7 +410,7 @@ Depending on the cloud provider, certain resources may or may not be available f
 | ECS costs | {% x/ %} | N/A | N/A |
 | Data transfer costs | {% x/ %} | Limited* | Limited* |
 | GPU | {% x/ %} | {% x/ %} | {% x/ %}  |
-| {% tooltip contents="Directly-attached storage resources for a node." %} Local storage {% /tooltip %} |  | Limited* | {% x/ %} |
+| {% tooltip contents="Directly-attached storage resources for a node." %} Local storage {% /tooltip %} | {% x/ %} | {% x/ %} | {% x/ %} |
 
 `Limited*` resources have been identified as part of your Kubernetes spend, but are not fully allocated to specific workloads or pods. These resources are host-level costs, not pod or namespace-level costs, and are identified with `allocated_spend_type:<resource>_not_supported`.
 
@@ -385,8 +423,8 @@ When the prerequisites are met, the following cost metrics automatically appear.
 
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
-| `aws.cost.amortized.shared.resources.allocated` | EC2 costs allocated by the CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated EBS costs. <br> *Based on `aws.cost.amortized`* |
-| `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated EBS costs. <br> *Based on `aws.cost.net.amortized`, if available* |
+| `aws.cost.amortized.shared.resources.allocated` | EC2 costs allocated by the CPU, memory, and local storage used by a pod or ECS task. CPU and memory use a 60:40 split, GPU hosts use a 95:3:2 split for GPU, CPU, and memory, and eligible instance-store hosts use a 3:2:1 split for CPU, memory, and local storage. Also includes allocated EBS costs. <br> *Based on `aws.cost.amortized`* |
+| `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by the CPU, memory, and local storage used by a pod or ECS task. CPU and memory use a 60:40 split, GPU hosts use a 95:3:2 split for GPU, CPU, and memory, and eligible instance-store hosts use a 3:2:1 split for CPU, memory, and local storage. Also includes allocated EBS costs. <br> *Based on `aws.cost.net.amortized`, if available* |
 
 {% /if %}
 <!-- Azure -->
@@ -394,7 +432,7 @@ When the prerequisites are met, the following cost metrics automatically appear.
 
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
-| `azure.cost.amortized.shared.resources.allocated` | Azure VM costs allocated by the CPU & memory used by a pod or container task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated Azure costs. <br> *Based on `azure.cost.amortized`* |
+| `azure.cost.amortized.shared.resources.allocated` | Azure VM costs allocated by the CPU, memory, and local storage used by a pod or container task. CPU and memory use a 60:40 split, GPU hosts use a 95:3:2 split for GPU, CPU, and memory, and eligible temporary-disk VMs use a 3:2:1 split for CPU, memory, and local storage. Also includes other allocated Azure costs. <br> *Based on `azure.cost.amortized`* |
 
 {% /if %}
 <!-- Google -->
@@ -429,6 +467,7 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 | `kube_deployment` | The name of the Kubernetes Deployment. |
 | `kube_stateful_set` | The name of the Kubernetes StatefulSet. |
 | `pod_name` | The name of any individual pod. |
+| `allocated_resource:local_storage` | Identifies instance-store costs allocated to Kubernetes workloads. |
 
 Conflicts are resolved by favoring higher-specificity tags such as pod tags over lower-specificity tags such as host tags. For example, a Kubernetes pod tagged `service:datadog-agent` running on a node tagged `service:aws-node` results in a final tag `service:datadog-agent`.
 
@@ -494,7 +533,7 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 | `kube_stateful_set` | The name of the Kubernetes StatefulSet. |
 | `pod_name` | The name of any individual pod. |
 | `allocated_resource:data_transfer` | The tracking and allocation of costs associated with data transfer activities used by Azure services or workloads. |
-| `allocated_resource:local_storage`         | The tracking and allocation of costs at a host level associated with local storage resources used by Azure services or workloads.                             |
+| `allocated_resource:local_storage` | Identifies temporary-disk costs allocated to Azure Kubernetes workloads. |
 
 {% /if %}
 <!-- Google -->
