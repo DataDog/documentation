@@ -81790,14 +81790,6 @@ components:
       properties:
         action:
           $ref: "#/components/schemas/OwnershipFeedbackAction"
-        actor_handle:
-          description: The handle of the actor submitting the feedback.
-          example: user@example.com
-          type: string
-        actor_type:
-          description: The type of actor submitting the feedback, for example `user` or `service`.
-          example: user
-          type: string
         corrected_owner_handle:
           description: The corrected owner handle. Required when `action` is `correct`.
           example: team-b
@@ -81819,8 +81811,6 @@ components:
           type: string
       required:
         - action
-        - actor_handle
-        - actor_type
         - inference_checksum
       type: object
     OwnershipFeedbackRequestData:
@@ -145411,8 +145401,6 @@ paths:
                   data:
                     attributes:
                       action: confirm
-                      actor_handle: user@example.com
-                      actor_type: user
                       inference_checksum: abc123
                     type: ownership_feedback
             schema:
