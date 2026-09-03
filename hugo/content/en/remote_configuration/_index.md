@@ -139,7 +139,7 @@ Consult the documentation below for instructions specific to the product you're 
 |-------------------------|----------------------------------------------------------------------------------------------------------------|
 | Fleet Automation        | [Setup Fleet Automation][31]                                                                                   |
 | APM                     | [Configuration at runtime](/tracing/guide/remote_config/)                                                      |
-| Dynamic Instrumentation | [Getting started with Dynamic Instrumentation](/dynamic_instrumentation/#enable-dynamic-instrumentation)       |
+| Dynamic Instrumentation | [Dynamic Instrumentation](/tracing/trace_collection/dynamic_instrumentation)       |
 | Workload Protection     | [Workload Protection][3]                                                                                       |
 | Observability Pipelines | Ensure that you've [enabled Remote Configuration on the API key][32] you're using for Observability Pipelines. |
 | Sensitive Data Scanner  | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount)                       |
