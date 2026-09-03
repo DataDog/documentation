@@ -147605,10 +147605,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Internal Server Error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - timeseries_query
       summary: Execute a tabular DDSQL query
       tags:
         - DDSQL
       x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - timeseries_query
   /api/v2/ddsql/query/tabular/fetch:
     post:
       description: |-
@@ -147714,10 +147723,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Internal Server Error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - timeseries_query
       summary: Fetch the result of a DDSQL query
       tags:
         - DDSQL
       x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - timeseries_query
   /api/v2/deletion/data/{product}:
     post:
       description: Creates a data deletion request by providing a query and a timeframe targeting the proper data.
