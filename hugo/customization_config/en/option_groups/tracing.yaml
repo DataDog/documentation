@@ -18,3 +18,10 @@ custom_instrumentation_api_options:
     default: true
   - id: dd_api
     label: Datadog
+
+dynamic_instrumentation_language_options:
+  - id: java
+    default: true
+  - id: python
+  - id: dot_net
+  - id: php
