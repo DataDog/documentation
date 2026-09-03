@@ -853,7 +853,7 @@ For the complete configuration files for each environment, see the [`opentelemet
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>Before using this setup in production</strong>, add the <a href="/opentelemetry/config/collector_batch_memory/">memory limiter</a> to every pipeline. The starter configurations above omit it because its limits must be sized for the memory available to your Collector.</div>
+<div class="alert alert-warning"><strong>Before using this setup in production</strong>, add the <a href="/opentelemetry/config/collector_batch_memory/">memory limiter</a> to every pipeline. The configurations on this page, including the example Helm values files, omit it because its limits must be sized for the memory available to your Collector.</div>
 
 ### 3. Run the Collector
 
@@ -913,7 +913,7 @@ After your application sends telemetry to the Collector, verify that data appear
 
 1. In Datadog, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}} and confirm that your `service.name` appears.
 2. Open {{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}} and search for your service.
-3. Go to {{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Infrastructure List{{< /ui >}} and confirm that the host running the Collector appears.
+3. Go to {{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Infrastructure List{{< /ui >}} and confirm that the host running the Collector appears. On GKE Autopilot and AKS Automatic, the example values files omit the `host_metrics` receiver, so hosts do not appear.
 4. If you send logs through OTLP, go to {{< ui >}}Logs Explorer{{< /ui >}} and search for your service name.
 5. In [Fleet Automation][9], confirm that the Collector and its configuration appear.
 
@@ -962,6 +962,10 @@ Example with instrumentation metrics enabled:
 ```
 
 <div class="alert alert-info">The recommended OpenTelemetry Collector configuration uses the <code>span_metrics</code> connector to generate the RED metrics that power APM views. The <code>trace_metrics.instrumentation_metrics_calc</code> and <code>raw_instrumentation_metrics_drop</code> fields support an alternative configuration for setups that derive APM trace metrics from HTTP instrumentation metrics instead. Do not enable <code>instrumentation_metrics_calc</code> alongside the <code>span_metrics</code> connector, as this computes trace metrics from both sources.</div>
+
+### Trace forward connector
+
+The `forward/traces_sample` connector splits trace processing into two pipelines. The first pipeline sends every span to the `span_metrics` connector, and the second exports spans to Datadog. Add sampling processors to the second pipeline so that trace metrics are computed from all traces, not only the sampled ones.
 
 ### Datadog extension
 

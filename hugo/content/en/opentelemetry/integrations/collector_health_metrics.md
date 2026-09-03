@@ -14,11 +14,9 @@ further_reading:
 
 The OpenTelemetry Collector exposes internal telemetry as metrics. You can collect these metrics and send them to Datadog to monitor Collector health and pipeline throughput.
 
-The [recommended Collector setup][102] includes this internal metrics pipeline. If you use that configuration, you do not need to add one of the alternative configurations on this page.
+The [recommended Collector setup][102] already includes an internal metrics pipeline. If you use that configuration, you do not need anything on this page.
 
 ## Setup
-
-### Alternative configurations
 
 If you maintain your own Collector configuration, use one of the following approaches. After configuring the pipeline, see the [Configuration reference](#configuration-reference) for all available options.
 

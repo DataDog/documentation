@@ -19,7 +19,7 @@ To send APM stats such as hits, errors, and duration, set up the [`span_metrics`
 
 ## Setup
 
-Select your environment in the [recommended Collector setup][3] and use its complete `span_metrics` connector block, including the dimensions required for Datadog APM features.
+Select your environment in the [recommended Collector setup][1] and use its complete `span_metrics` connector block. Retain all of its dimensions, which Datadog uses to derive host tags, peer services, operation names, and resource names.
 
 ## Data collected
 
@@ -36,5 +36,4 @@ For full working example files, see the [`opentelemetry-examples` repository][5]
 
 [1]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
 [2]: /tracing/metrics/metrics_namespace/
-[3]: /opentelemetry/setup/collector_exporter/#2-create-the-collector-configuration
 [5]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector

@@ -81,9 +81,9 @@ logExporter, err := otlploghttp.New(
 
 ## OpenTelemetry Collector
 
-These examples use component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports.
+If your OpenTelemetry Collector distribution does not include all the components used by Datadog's recommended Collector setup, configure the OTLP HTTP exporter in your own distribution:
 
-If your OpenTelemetry Collector distribution does not include all the components used by Datadog's recommended Collector setup, configure its OTLP HTTP exporter directly:
+These examples use component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports.
 
 ```yaml
 exporters:

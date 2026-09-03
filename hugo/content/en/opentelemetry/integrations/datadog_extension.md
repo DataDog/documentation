@@ -259,6 +259,8 @@ The DaemonSet forwards to `monitoring/otelcol-gateway-l2`, the Layer-2 gateway f
 
 ### Complete configuration example with the Datadog Exporter
 
+The following example uses the Datadog Exporter. The extension itself does not require it; for the recommended pipeline, use the OTLP HTTP exporter configuration from [Set Up the OpenTelemetry Collector][9].
+
 ```yaml
 extensions:
   datadog:
@@ -343,6 +345,18 @@ This endpoint provides:
 2. **Verify API key**: Confirm the API key is valid and has appropriate permissions.
 3. **Check Collector logs**: Look for extension initialization and data submission logs.
 4. **Confirm extension is enabled**: Verify the extension is listed in the service configuration.
+
+### Warnings about disabled payloads
+
+At startup, the extension logs warnings similar to the following:
+
+```
+series payloads are disabled: all series will be dropped
+service_checks payloads are disabled: all service_checks will be dropped
+sketches payloads are disabled: all sketches will be dropped
+```
+
+These warnings are expected. The extension sends only Collector metadata, so it disables the metric, service check, and sketch payload types it does not use. Your telemetry is unaffected.
 
 ### HTTP server issues
 
