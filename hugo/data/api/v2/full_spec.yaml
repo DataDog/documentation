@@ -87984,8 +87984,17 @@ components:
           $ref: '#/components/schemas/ProductCatalogSKUOnDemandOption'
         number_of_units_included_in_price:
           description: |-
-            The number of billable usage units included in the price. `0` for SKUs that are not
-            priced per unit of usage, such as those whose `pricing_type` is `percent`.
+            The number of billable usage units that one unit of price covers. Divide measured
+            usage by this value before multiplying by the price. For example, a SKU priced at `18.00` with
+            `number_of_units_included_in_price` of `1` costs `18.00` per host, while a SKU priced
+            at `12.00` with `number_of_units_included_in_price` of `10000` costs `12.00` per
+            10,000 requests. It is a scaling factor on the price, not a free allotment; included
+            quantities are in `allotments`. The same factor applies to the price of a tier in
+            `on_demand_tiered` whose `pricing_unit_type` is `unit`. It does not apply to a tier
+            whose `pricing_unit_type` is `block`: that tier's `price` is charged for the whole
+            block bounded by `min_usage_quantity` and `max_usage_quantity`, however much of the
+            block is used. `0` for SKUs that are not priced per unit of usage, such as those
+            whose `pricing_type` is `percent`.
           example: 1
           format: int64
           type: integer
@@ -88004,7 +88013,7 @@ components:
           $ref: '#/components/schemas/ProductCatalogSKUPricingType'
         sku_name:
           description: The human-readable name of the SKU.
-          example: Infra Pro
+          example: Infra Host (Pro)
           type: string
       required:
         - billing_dimension
@@ -188784,7 +188793,10 @@ paths:
         this endpoint is not paginated.
       operationId: ListProductCatalogSKUs
       parameters:
-        - description: The version of the product catalog contract to return. `v1` is the latest.
+        - description: |-
+            The version of the product catalog response contract to return. `v1` is the latest.
+            This is independent of the `/api/v2` path segment, which is the version of the
+            Datadog API itself.
           example: v1
           in: query
           name: version
@@ -188794,7 +188806,8 @@ paths:
         - description: |-
             The date the returned prices, allotments, and pricing tiers are effective as of, in
             `YYYY-MM-DD` format. Defaults to the date of the request, and must not be later
-            than it.
+            than it. Set it to a date in a past billing period to reconcile that period against
+            the prices that were in effect then, rather than today.
           example: "2026-07-01"
           in: query
           name: as_of_date
@@ -188853,15 +188866,11 @@ paths:
                           on_demand_list_price: "18.00"
                           on_demand_tiered:
                           pricing_type: usage
-                          sku_name: Infra Pro
+                          sku_name: Infra Host (Pro)
                         id: HOSTS-PRO
                         type: Sku
                       - attributes:
-                          allotments:
-                            - child_sku_code: SDS
-                              hourly_quantity: 1
-                              monthly_quantity: 1
-                              parent_sku_code: LLM-OBSERVABILITY-MIN-SPEND
+                          allotments: []
                           billing_dimension: llm_observability_min_spend
                           billing_units: requests
                           currency: USD
@@ -188888,18 +188897,43 @@ paths:
         "400":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    errors:
+                      - detail: as_of_date must not be later than the date of the request
+                        source:
+                          parameter: as_of_date
+                        status: "400"
+                        title: Bad Request
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Bad Request - version is missing or invalid, or as_of_date is malformed or in the future
         "403":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    errors:
+                      - detail: this endpoint requires the billing_read or usage_read permission
+                        status: "403"
+                        title: Forbidden
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Forbidden - the caller has neither the billing_read nor the usage_read permission
         "404":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    errors:
+                      - detail: the requested product catalog version is not supported
+                        source:
+                          parameter: version
+                        status: "404"
+                        title: Not Found
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Not Found - the requested catalog version is not supported
