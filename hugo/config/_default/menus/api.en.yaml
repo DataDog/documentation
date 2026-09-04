@@ -11249,6 +11249,71 @@ menu:
           - ListTagPipelinesRulesets
         unstable: []
         order: 16
+    - name: Update a unit cost
+      url: /api/latest/cloud-cost-management/update-a-unit-cost/
+      identifier: cloud-cost-management-update-a-unit-cost
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateUnitCost
+        unstable:
+          - v2
+        order: 75
+    - name: Get a unit cost
+      url: /api/latest/cloud-cost-management/get-a-unit-cost/
+      identifier: cloud-cost-management-get-a-unit-cost
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUnitCost
+        unstable:
+          - v2
+        order: 74
+    - name: Delete a unit cost
+      url: /api/latest/cloud-cost-management/delete-a-unit-cost/
+      identifier: cloud-cost-management-delete-a-unit-cost
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUnitCost
+        unstable:
+          - v2
+        order: 76
+    - name: Create a unit cost
+      url: /api/latest/cloud-cost-management/create-a-unit-cost/
+      identifier: cloud-cost-management-create-a-unit-cost
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateUnitCost
+        unstable:
+          - v2
+        order: 73
+    - name: List unit costs
+      url: /api/latest/cloud-cost-management/list-unit-costs/
+      identifier: cloud-cost-management-list-unit-costs
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListUnitCosts
+        unstable:
+          - v2
+        order: 72
     - name: List Cloud Cost Management tags
       url: /api/latest/cloud-cost-management/list-cloud-cost-management-tags/
       identifier: cloud-cost-management-list-cloud-cost-management-tags
