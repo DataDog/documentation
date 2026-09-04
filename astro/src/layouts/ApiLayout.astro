@@ -10,7 +10,7 @@ import type { BreadcrumbItem } from "@components/Breadcrumbs/Breadcrumbs.astro";
 import RegionSelectorIsland from "@components/RegionSelector/RegionSelectorIsland.astro";
 import LanguageSelectorIsland from "@components/LanguageSelector/LanguageSelectorIsland.astro";
 import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIsland.astro";
-import { stripLocalePrefix } from "@lib/i18n/locale";
+import { resolveLocale, stripLocalePrefix } from "@lib/i18n/locale";
 import { buildHreflangAlternates } from "@lib/seo";
 import type { ApiCategory, ApiCategoryStub } from "@lib/api/schemas/views";
 
@@ -31,9 +31,8 @@ const {
   currentOperationSlug,
   breadcrumbs,
 } = Astro.props;
-const { lang: currentLang, rest: unprefixedPath } = stripLocalePrefix(
-  Astro.url.pathname,
-);
+const currentLang = resolveLocale(Astro.currentLocale);
+const { rest: unprefixedPath } = stripLocalePrefix(Astro.url.pathname);
 const hreflang = buildHreflangAlternates(unprefixedPath);
 
 const overviewPages = await getOverviewPages();
@@ -46,7 +45,6 @@ const { isOverviewSection, activeOverviewPageSlug } = resolveOverviewState(
 <BaseLayout
   title={title}
   description={description}
-  lang={currentLang}
   hreflang={hreflang}
 >
   <div class="api-shell">
@@ -63,7 +61,7 @@ const { isOverviewSection, activeOverviewPageSlug } = resolveOverviewState(
         <div class="api-toolbar__left">
           {breadcrumbs && (
             <Breadcrumbs crumbs={breadcrumbs}>
-              <CopyPageButtonIsland slot="trailing" lang={currentLang} variant="icon" />
+              <CopyPageButtonIsland slot="trailing" variant="icon" />
             </Breadcrumbs>
           )}
         </div>

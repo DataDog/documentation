@@ -5,7 +5,7 @@ import ApiLayout from '@layouts/ApiLayout.astro';
 import ApiPageHeader from '@components/ApiPageHeader/ApiPageHeader.astro';
 import { getCategoryStubsView } from '@lib/api/viewsBuilder';
 import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
-import { i18n } from '@lib/i18n/i18n';
+import { useTranslations } from '@lib/i18n/i18n';
 import { API_CONTENT_DIR, isApiContent } from '@lib/api/overviewPages';
 import type { GetStaticPaths } from 'astro';
 
@@ -51,15 +51,17 @@ const { Content } = await render(entry);
 
 const pageTitle = isRootPage ? 'Datadog API Reference' : `${entry.data.title} - Datadog API`;
 
+const translate = useTranslations(lang);
+
 const breadcrumbs =
   isRootPage
     ? [
-        { label: i18n('docs', lang), href: localizedHref(lang, '/') },
-        { label: i18n('api', lang) },
+        { label: translate('docs'), href: localizedHref(lang, '/') },
+        { label: translate('api') },
       ]
     : [
-        { label: i18n('docs', lang), href: localizedHref(lang, '/') },
-        { label: i18n('api', lang), href: localizedHref(lang, '/api/latest/') },
+        { label: translate('docs'), href: localizedHref(lang, '/') },
+        { label: translate('api'), href: localizedHref(lang, '/api/latest/') },
         { label: entry.data.title },
       ];
 ---
@@ -70,6 +72,6 @@ const breadcrumbs =
   categories={categories}
   breadcrumbs={breadcrumbs}
 >
-  <ApiPageHeader title={entry.data.title} lang={lang} />
+  <ApiPageHeader title={entry.data.title} />
   <Content />
 </ApiLayout>

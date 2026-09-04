@@ -8,7 +8,7 @@ import { getCategoryStubsView, getCategoryViewBySlug } from '@lib/api/viewsBuild
 import { renderMarkdown } from '@lib/api/markdownRenderer';
 import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
 import { mdToMetaDescription } from '@lib/seo';
-import { i18n } from '@lib/i18n/i18n';
+import { useTranslations } from '@lib/i18n/i18n';
 import type { GetStaticPaths, GetStaticPathsResult } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -43,6 +43,7 @@ if (!current) {
 }
 
 const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
+const translate = useTranslations(lang);
 ---
 
 <ApiLayout
@@ -51,12 +52,12 @@ const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
   categories={categories}
   activeCategory={current}
   breadcrumbs={[
-    { label: i18n('docs', lang), href: localizedHref(lang, '/') },
-    { label: i18n('api', lang), href: localizedHref(lang, '/api/latest/') },
+    { label: translate('docs'), href: localizedHref(lang, '/') },
+    { label: translate('api'), href: localizedHref(lang, '/api/latest/') },
     { label: current.name },
   ]}
 >
-  <ApiPageHeader title={current.name} lang={lang} />
+  <ApiPageHeader title={current.name} />
   {current.deprecated && <Alert level="warning">This endpoint is deprecated.</Alert>}
   {current.description && (
     <div set:html={renderMarkdown(current.description)} />

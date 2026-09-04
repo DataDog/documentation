@@ -12,7 +12,7 @@ import { getDefaultRegions } from "@lib/api/regionResolver";
 import { renderMarkdownInline } from "@lib/api/markdownRenderer";
 import styles from "./ApiEndpoint.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
-import { i18n } from "@lib/i18n/i18n";
+import { useTranslations } from "@lib/i18n/i18n";
 
 const allRegions = getDefaultRegions();
 const cl = classListFactory(styles);
@@ -50,6 +50,7 @@ interface Props {
 }
 
 const { data: dataJson } = Astro.props;
+const translate = useTranslations(Astro.currentLocale);
 
 let ep: EndpointData | null = null;
 try {
@@ -122,7 +123,7 @@ const hasParams =
       </div>
 
       {/* Description — rendered as slot content from the parent page */}
-      {ep.description && <h3>{i18n("overview")}</h3>}
+      {ep.description && <h3>{translate("overview")}</h3>}
       <slot />
 
       {/* Permissions */}
@@ -146,7 +147,7 @@ const hasParams =
       {/* Arguments */}
       {hasParams && (
         <div class={cl("api-endpoint__section")}>
-          <h3>{i18n("arguments")}</h3>
+          <h3>{translate("arguments")}</h3>
           {ep.pathParams && ep.pathParams.length > 0 && (
             <ApiSchemaTable fields={ep.pathParams} />
           )}

@@ -14,7 +14,7 @@
  * never warns or fails on gaps.
  */
 import { parse as parseYaml } from "yaml";
-import { DEFAULT_LOCALE, type Locale } from "./locale";
+import { DEFAULT_LOCALE, type Locale, resolveLocale } from "./locale";
 
 type I18nEntry = { one?: string; other?: string };
 type I18nTable = Record<string, I18nEntry>;
@@ -64,12 +64,33 @@ function lookup(lang: Locale, key: string): string | undefined {
   return entry.other ?? entry.one;
 }
 
-export function i18n(
-  key: string | undefined,
-  lang: Locale = DEFAULT_LOCALE,
-): string {
+/** A locale already bound to a translator. See `useTranslations`. */
+export type Translate = (key: string | undefined) => string;
+
+export function i18n(key: string | undefined, lang: Locale): string {
   if (!key) {
     return "";
   }
   return lookup(lang, key) ?? lookup(DEFAULT_LOCALE, key) ?? key;
+}
+
+/**
+ * Binds a locale once and returns a `translate(key)` function, so components
+ * pass the locale a single time instead of threading it through every `i18n()`
+ * call. Named after the same helper in Astro's i18n docs.
+ *
+ * Not to be confused with `getLanguageNames` in `./languageNames` — that one
+ * only maps language *display names* for the language selector.
+ *
+ * Takes `Astro.currentLocale`'s raw `string | undefined` directly — the locale
+ * can't be derived in here, because `currentLocale` lives on the per-request
+ * render context and is only handed to component scope. Anything narrower than
+ * a component (this module included) has no way to reach it.
+ *
+ * Prefer this over calling `i18n(key, lang)` directly — a bound `translate`
+ * has no locale argument to forget at the call site.
+ */
+export function useTranslations(currentLocale: string | undefined): Translate {
+  const lang = resolveLocale(currentLocale);
+  return (key) => i18n(key, lang);
 }

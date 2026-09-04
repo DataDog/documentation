@@ -3,7 +3,7 @@ import '../styles/global.css';
 import AnnouncementBanner from '@components/AnnouncementBanner/AnnouncementBanner.astro';
 import Header from '@components/Header/Header.astro';
 import Footer from '@components/Footer/Footer.astro';
-import { stripLocalePrefix, type Locale } from '@lib/i18n/locale';
+import { resolveLocale, type Locale } from '@lib/i18n/locale';
 import { getBannerParams, type BannerParams } from '@lib/componentUtils/bannerData';
 import { DevBadge } from '@components/DevBadge/DevBadge';
 import Telemetry from '@components/Telemetry/Telemetry.astro';
@@ -29,8 +29,6 @@ interface Props {
   image?: string;
   /** OpenGraph type; defaults to "article" to match Hugo. */
   ogType?: 'website' | 'article';
-  /** Locale for `<html lang>` and per-locale defaults. Auto-detected from URL when omitted. */
-  lang?: Locale;
   /** Per-locale URLs for `<link rel="alternate" hreflang>`. */
   hreflang?: Array<{ hreflang: string; href: string }>;
   /** Per-page banner override, mirroring Hugo's page-level `announcement_banner`. */
@@ -49,7 +47,6 @@ const {
   canonical: canonicalProp,
   image: imageProp,
   ogType = 'article',
-  lang: langProp,
   hreflang,
   announcementBanner,
   enableViewTransitions = false,
@@ -61,7 +58,7 @@ const {
 const bannerParams = announcementBanner ?? getBannerParams();
 const hasBanner = Object.keys(bannerParams).length > 0;
 
-const lang: Locale = langProp ?? stripLocalePrefix(Astro.url.pathname).lang;
+const lang: Locale = resolveLocale(Astro.currentLocale);
 const localeDefaults = getLocaleDefaults(lang);
 const description = descriptionProp ?? localeDefaults.metaDescription;
 const siteName = localeDefaults.siteName;
