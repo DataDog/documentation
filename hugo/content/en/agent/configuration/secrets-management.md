@@ -342,7 +342,7 @@ spec:
 
 ```
 
-**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `secretBackend.type` and `secretBackend.config` fields. For example: `DD_SECRET_BACKEND_TYPE="aws.secrets"` and `DD_SECRET_BACKEND_CONFIG='{"aws_session":{"aws_region":"<AWS_REGION>"}}'`.
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `spec.global.secretBackend.type` and `spec.global.secretBackend.config` fields. For example: `DD_SECRET_BACKEND_TYPE="aws.secrets"` and `DD_SECRET_BACKEND_CONFIG='{"aws_session":{"aws_region":"<AWS_REGION>"}}'`.
 
 {{% /tab %}}
 {{< /tabs >}}
