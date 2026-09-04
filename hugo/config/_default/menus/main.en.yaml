@@ -1610,6 +1610,11 @@ menu:
       identifier: bits_data_analysis
       parent: bits_ai
       weight: 8
+    - name: Skills Library
+      url: bits_ai/skills_library
+      identifier: bits_ai_skills_library
+      parent: bits_ai
+      weight: 9
     - name: Dashboards
       url: dashboards/
       pre: dashboard
