@@ -28,7 +28,7 @@ This page describes how to add Datadog Feature Flags to a Java application. Star
 
 The Datadog provider implements the [OpenFeature](https://openfeature.dev/) standard. It uses `dd-java-agent` for configuration delivery. Agentless delivery removes the external Datadog Agent requirement, but `dd-java-agent` must still load in the JVM.
 
-<div class="alert alert-warning">Starting in version 1.65.0, agentless mode changes only flag configuration. Java still requires a supported Datadog Agent or serverless telemetry path to export evaluation metrics or exposure events. Without such a path, only configuration delivery and local flag evaluation work.</div>
+Agentless delivery changes only the flag configuration source. Java 1.65.0 sends experiment exposure events through a supported local Event Platform Proxy (EVP) relay. Starting in version 1.66.0, the SDK also sends aggregated EVP flag evaluation events. In 1.66.0 and later, the SDK prefers a compatible local relay and sends both event types directly when no compatible relay is available.
 
 ## Compatibility requirements
 
@@ -344,7 +344,13 @@ Use [Server SDK Configuration Sources][9] as the canonical reference for source 
 - [Use Agent Remote Configuration][13] to retain Agent-managed delivery
 - [Migrate an existing Remote Configuration setup][11] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
 
-Agentless mode changes only flag configuration. It does not configure or enable `feature_flag.evaluations`, exposure logging, or experimentation use cases. These features require a supported Datadog Agent or serverless telemetry path. For more information on available graphing, see [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/).
+For no-Agent serverless environments, use [`serverless-init`][17] to send Feature Flags telemetry:
+
+- Java 1.65.0 sends experiment exposure events.
+- Java 1.66.0 and later prefer a compatible local relay for exposure and aggregated flag evaluation events, and use authenticated direct EVP fallback when no compatible relay is available. The direct path uses the application `DD_API_KEY` and `DD_SITE` settings.
+- The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Server-Side Flag Evaluation Metrics][8] guide.
+
+For more information on available graphing, see [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/).
 
 ### Custom initialization timeout
 
@@ -659,3 +665,4 @@ When the selected configuration path supports exposures, exposures appear only f
 [14]: /getting_started/site/
 [15]: /serverless/google_cloud_run/functions/java/?tab=maven
 [16]: /serverless/google_cloud_run/containers/in_container/java/
+[17]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry-with-serverless-init
