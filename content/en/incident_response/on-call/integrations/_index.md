@@ -20,28 +20,36 @@ Datadog On-Call supports multiple triggering sources beyond native Datadog monit
 To use an integration marked **(Preview)**, or to request one that isn't listed, request access through the product preview form.
 {{< /callout >}}
 
-{{< card-grid card_width="150px" >}}
-  {{< image-card href="/incident_response/on-call/pages/#through-slack" src="integrations_logos/slack.png" alt="Slack" >}}
-  {{< image-card href="/incident_response/on-call/pages/#through-microsoft-teams" src="integrations_logos/microsoft_teams.png" alt="Microsoft Teams" >}}
-  {{< image-card href="/integrations/prometheus/?tab=v2preferred#prometheus-alertmanager" src="integrations_logos/prometheus.png" alt="Prometheus Alertmanager" >}}
-  {{< image-card href="/integrations/pingdom/#page-a-datadog-on-call-team" src="integrations_logos/pingdom.png" alt="Pingdom" >}}
-  {{< image-card href="/integrations/sentry/#page-a-datadog-on-call-team" src="integrations_logos/sentry.png" alt="Sentry" >}}
-  {{< image-card href="/integrations/amazon-sns/#page-a-datadog-on-call-team-from-sns" src="integrations_logos/amazon_sns.png" alt="Amazon SNS" >}}
-  {{< image-card href="/integrations/azure-monitor-alerts/#page-a-datadog-on-call-team" src="integrations_logos/azure.png" alt="Azure Monitor" >}}
-  {{< image-card href="/integrations/zabbix/#trigger-on-call-pages" src="integrations_logos/zabbix.png" alt="Zabbix" >}}
-  {{< image-card href="/integrations/nagios/?tab=host#trigger-on-call-pages" src="integrations_logos/nagios.png" alt="Nagios" >}}
-  {{< image-card href="/integrations/catchpoint/#trigger-on-call-pages" src="integrations_logos/catchpoint.png" alt="Catchpoint" >}}
-  {{< image-card href="/integrations/sumo-logic/#trigger-on-call-pages" src="integrations_logos/sumo_logic.png" alt="Sumo Logic" >}}
-  {{< image-card href="/integrations/new-relic/#trigger-on-call-pages" src="integrations_logos/new_relic.png" alt="New Relic" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/bugsnag.png" alt="BugSnag" subtitle="(Preview)" >}}
+<style>
+.oncall-integrations-grid .card-grid-card .card-body {
+  justify-content: flex-end;
+}
+</style>
+
+<div class="oncall-integrations-grid">
+{{< card-grid card_width="150px" image_width="50" >}}
+  {{< image-card href="/incident_response/on-call/pages/#through-slack" src="integrations_logos/slack_avatar.svg" alt="Slack" title="Slack" >}}
+  {{< image-card href="/incident_response/on-call/pages/#through-microsoft-teams" src="integrations_logos/microsoft-teams_avatar.svg" alt="Microsoft Teams" title="Microsoft Teams" >}}
+  {{< image-card href="/integrations/prometheus/?tab=v2preferred#prometheus-alertmanager" src="integrations_logos/prometheus_avatar.svg" alt="Prometheus Alertmanager" title="Prometheus Alertmanager" >}}
+  {{< image-card href="/integrations/pingdom-v3/#page-a-datadog-on-call-team" src="integrations_logos/pingdom-v3_avatar.svg" alt="Pingdom" title="Pingdom" >}}
+  {{< image-card href="/integrations/sentry/#page-a-datadog-on-call-team" src="integrations_logos/sentry_avatar.svg" alt="Sentry" title="Sentry" >}}
+  {{< image-card href="/integrations/amazon-sns/#page-a-datadog-on-call-team-from-sns" src="integrations_logos/amazon-sns_avatar.svg" alt="Amazon SNS" title="Amazon SNS" >}}
+  {{< image-card href="/integrations/azure-monitor-alerts/#page-a-datadog-on-call-team" src="integrations_logos/azure-monitor-alerts_avatar.svg" alt="Azure Monitor" title="Azure Monitor" >}}
+  {{< image-card href="/integrations/zabbix/#trigger-on-call-pages" src="integrations_logos/zabbix_avatar.svg" alt="Zabbix" title="Zabbix" >}}
+  {{< image-card href="/integrations/nagios/?tab=host#trigger-on-call-pages" src="integrations_logos/nagios_avatar.svg" alt="Nagios" title="Nagios" >}}
+  {{< image-card href="/integrations/catchpoint/#trigger-on-call-pages" src="integrations_logos/catchpoint_avatar.svg" alt="Catchpoint" title="Catchpoint" >}}
+  {{< image-card href="/integrations/sumo-logic/#trigger-on-call-pages" src="integrations_logos/sumo-logic_avatar.svg" alt="Sumo Logic" title="Sumo Logic" >}}
+  {{< image-card href="/integrations/new-relic/#trigger-on-call-pages" src="integrations_logos/new-relic_avatar.svg" alt="New Relic" title="New Relic" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/bugsnag_avatar.svg" alt="Bugsnag" title="Bugsnag" subtitle="(Preview)" >}}
   {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Coralogix" subtitle="(Preview)" >}}
   {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Cronitor" subtitle="(Preview)" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/uptime.png" alt="uptime.com" subtitle="(Preview)" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/uptime_avatar.svg" alt="uptime.com" title="uptime.com" subtitle="(Preview)" >}}
   {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Dynatrace" subtitle="(Preview)" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/servicenow.png" alt="ServiceNow" subtitle="(Preview)" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/jira.png" alt="Jira" subtitle="(Preview)" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/servicenow_avatar.svg" alt="ServiceNow" title="ServiceNow" subtitle="(Preview)" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/jira_avatar.svg" alt="Jira" title="Jira" subtitle="(Preview)" >}}
   {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="LogicMonitor" subtitle="(Preview)" >}}
 {{< /card-grid >}}
+</div>
 
 ## Other tools
 
