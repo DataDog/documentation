@@ -8,6 +8,27 @@ cascade:
     rank: 70
 description: Database Monitoring について学び、始めましょう
 further_reading:
+- link: /database_monitoring/data_collected/
+  tag: ドキュメント
+  text: 収集データ
+- link: /database_monitoring/troubleshooting/
+  tag: ドキュメント
+  text: トラブルシューティング
+- link: https://learn.datadoghq.com/courses/database-monitoring
+  tag: ラーニングセンター
+  text: Datadog DBM を使用した Postgres データベースの監視
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: 対話型セッションに参加して Database Monitoring を強化しましょう
+- link: https://www.datadoghq.com/blog/map-postgresql-explain-plan-nodes-to-sql-with-datadog/
+  tag: ブログ
+  text: 実行計画の相関分析により、PostgreSQLの低速クエリをより迅速に診断します
+- link: https://www.datadoghq.com/blog/dbm-supabase/
+  tag: ブログ
+  text: Datadog Database Monitoringを使用して、Supabaseのクエリパフォーマンスを監視し、最適化します
+- link: https://www.datadoghq.com/blog/detect-inefficient-index-scans-with-dbm/
+  tag: ブログ
+  text: すべてのインデックススキャンが同じわけではありません：クエリのレイテンシを99%以上削減した方法
 - link: https://www.datadoghq.com/blog/analyzing-roundtrip-query-latency
   tag: ブログ
   text: 往復クエリレイテンシーの分析
@@ -26,18 +47,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-database-research/
   tag: ブログ
   text: マイクロサービスアーキテクチャがデータベース技術の利用に与えた影響
-- link: /database_monitoring/data_collected/
-  tag: ドキュメント
-  text: 収集データ
-- link: /database_monitoring/troubleshooting/
-  tag: ドキュメント
-  text: トラブルシューティング
-- link: https://dtdg.co/fe
-  tag: Foundation Enablement
-  text: 対話型セッションに参加して Database Monitoring を強化しましょう
-- link: https://learn.datadoghq.com/courses/database-monitoring
-  tag: ラーニングセンター
-  text: Datadog DBM を使用した Postgres データベースの監視
 title: Database Monitoring
 ---
 {{< learning-center-callout header="エンゲージメントウェビナーセッションに参加する" hide_image="true" btn_title="サインアップ" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Database">}}
@@ -53,7 +62,7 @@ Datadog Database Monitoringは、セルフホスト型およびマネージド�
 ### Postgres {#postgres}
 
 {{< card-grid >}}
-  {{< image-card href="/database_monitoring/setup_postgres/selfhosted" src="integrations_logos/postgres.png" alt="Selfhosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_postgres/selfhosted" src="integrations_logos/postgres.png" alt="セルフホスト型" title="セルフホスト" >}}
   {{< image-card href="/database_monitoring/setup_postgres/rds" src="integrations_logos/amazon_rds.png" alt="RDS" >}}
   {{< image-card href="/database_monitoring/setup_postgres/aurora" src="integrations_logos/aurora.png" alt="Aurora" >}}
   {{< image-card href="/database_monitoring/setup_postgres/gcsql" src="integrations_logos/google_cloudsql.png" alt="Google Cloud SQL" >}}
@@ -67,7 +76,7 @@ Datadog Database Monitoringは、セルフホスト型およびマネージド�
 ### MySQL {#mysql}
 
 {{< card-grid card_width="130px">}}
-  {{< image-card href="/database_monitoring/setup_mysql/selfhosted" src="integrations_logos/mysql.png" alt="Selfhosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_mysql/selfhosted" src="integrations_logos/mysql.png" alt="セルフホスト型" title="セルフホスト" >}}
   {{< image-card href="/database_monitoring/setup_mysql/rds" src="integrations_logos/amazon_rds.png" alt="RDS" >}}
   {{< image-card href="/database_monitoring/setup_mysql/aurora" src="integrations_logos/aurora.png" alt="Aurora" >}}
   {{< image-card href="/database_monitoring/setup_mysql/gcsql" src="integrations_logos/google_cloudsql.png" alt="Google Cloud SQL" >}}
@@ -78,18 +87,18 @@ Datadog Database Monitoringは、セルフホスト型およびマネージド�
 ### Oracle {#oracle}
 
 {{< card-grid card_width="130px">}}
-  {{< image-card href="/database_monitoring/setup_oracle/selfhosted" src="integrations_logos/oracle.png" alt="Selfhosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_oracle/selfhosted" src="integrations_logos/oracle.png" alt="セルフホスト型" title="セルフホスト" >}}
   {{< image-card href="/database_monitoring/setup_oracle/rds" src="integrations_logos/amazon_rds.png" alt="RDS" title="RDS" >}}
   {{< image-card href="/database_monitoring/setup_oracle/rac" src="integrations_logos/oracle.png" alt="RAC" title="RAC" >}}
-  {{< image-card href="/database_monitoring/setup_oracle/exadata" src="integrations_logos/oracle.png" alt="Exadata" title="Exadata" >}}
-  {{< image-card href="/database_monitoring/setup_oracle/autonomous_database" src="integrations_logos/oracle.png" alt="Selfhosted" title="Autonomous Database" >}}
+  {{< image-card href="/database_monitoring/setup_oracle/exadata" src="integrations_logos/oracle.png" alt="エクサデータ" title="エクサデータ" >}}
+  {{< image-card href="/database_monitoring/setup_oracle/autonomous_database" src="integrations_logos/oracle.png" alt="セルフホスト型" title="自律型データベース" >}}
 {{< /card-grid >}}
 <p></p>
 
 ### SQL Server {#sql-server}
 
 {{< card-grid >}}
-  {{< image-card href="/database_monitoring/setup_sql_server/selfhosted" src="integrations_logos/sqlserver.png" alt="Selfhosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_sql_server/selfhosted" src="integrations_logos/sqlserver.png" alt="セルフホスト型" title="セルフホスト" >}}
   {{< image-card href="/database_monitoring/setup_sql_server/rds" src="integrations_logos/amazon_rds.png" alt="RDS" >}}
   {{< image-card href="/database_monitoring/setup_sql_server/azure" src="integrations_logos/azure.png" alt="Aurora" >}}
   {{< image-card href="/database_monitoring/setup_sql_server/gcsql" src="integrations_logos/google_cloudsql.png" alt="Google Cloud SQL" >}}
@@ -99,7 +108,7 @@ Datadog Database Monitoringは、セルフホスト型およびマネージド�
 ### MongoDB {#mongodb}
 
 {{< card-grid >}}
-  {{< image-card href="/database_monitoring/setup_mongodb/selfhosted" src="integrations_logos/mongo.png" alt="Self-hosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_mongodb/selfhosted" src="integrations_logos/mongo.png" alt="セルフホスト" title="セルフホスト" >}}
   {{< image-card href="/database_monitoring/setup_mongodb/mongodbatlas" src="integrations_logos/mongodb_atlas.png" alt="MongoDB Atlas" title="MongoDB Atlas" >}}
 {{< /card-grid >}}
 <p></p>
@@ -114,7 +123,7 @@ Datadog Database Monitoringは、セルフホスト型およびマネージド�
 ### ClickHouse {#clickhouse}
 
 {{< card-grid >}}
-  {{< image-card href="/database_monitoring/setup_clickhouse/selfhosted" src="integrations_logos/clickhouse.png" alt="Self-hosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_clickhouse/selfhosted" src="integrations_logos/clickhouse.png" alt="セルフホスト" title="セルフホスト" >}}
   {{< image-card href="/database_monitoring/setup_clickhouse/cloud" src="integrations_logos/clickhouse.png" alt="ClickHouse Cloud" title="ClickHouse Cloud" >}}
 {{< /card-grid >}}
 <p></p>
@@ -179,7 +188,7 @@ Datadog の [Database Monitoring][1] に移動します。
 ## 参考資料 {#further-reading}
 
 {{< learning-center-callout header="学習センターで Datadog Database Monitoring を使用して Postgres データベースを監視してみてください" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
-  Datadog 学習センターには、このトピックについて学ぶための実践的なハンズオンコースが多数用意されています。無料で登録して、非効率を特定し、Postgres データベースを最適化してください。
+  Datadog 学習センターには、このトピックについて学ぶための実践演習コースが多数用意されています。無料で登録して、非効率を特定し、Postgres データベースを最適化してください。
 {{< /learning-center-callout >}}
 
 {{< partial name="whats-next/whats-next.html" >}}

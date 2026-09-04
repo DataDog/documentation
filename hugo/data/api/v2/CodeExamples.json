@@ -1765,6 +1765,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_3116312807",
+      "description": "Validate an observability pipeline with Splunk TCP source max_connection_duration_secs returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_99164570",
       "description": "Validate an observability pipeline with amazon S3 source compression returns \"OK\" response"
     },
@@ -2194,11 +2199,6 @@
       "group": "security_monitoring",
       "suffix": "_461183901",
       "description": "Create a detection rule with type 'impossible_travel' returns \"OK\" response"
-    },
-    {
-      "group": "security_monitoring",
-      "suffix": "_914562040",
-      "description": "Create a detection rule with type 'signal_correlation' returns \"OK\" response"
     },
     {
       "group": "security_monitoring",
@@ -2884,6 +2884,13 @@
       "group": "teams",
       "suffix": "",
       "description": "Update team notification rule returns \"OK\" response"
+    }
+  ],
+  "AddSTIXThreatIntel": [
+    {
+      "group": "threat_intelligence",
+      "suffix": "",
+      "description": "Ingest STIX threat intelligence returns \"OK\" response"
     }
   ],
   "CreateUser": [

@@ -8,80 +8,96 @@ code_lang_weight: 20
 further_reading:
 - link: /continuous_integration/tests/containers/
   tag: Documentación
-  text: Reenvío de variables de entorno para tests en contenedores
+  text: Reenvío de variables de entorno para pruebas en Containers
 - link: /continuous_integration/tests
   tag: Documentación
-  text: Exploración de los resultados de tests y del rendimiento
+  text: Explorar resultados de pruebas y rendimiento
 - link: /tests/test_impact_analysis/javascript
   tag: Documentación
-  text: Acelera tus jobs (generic) de test con el análisis del efecto de los tests
+  text: Acelere sus trabajos de prueba con Test Impact Analysis
 - link: /tests/troubleshooting/
   tag: Documentación
-  text: Solucionar problemas de Test Optimization (optimización de tests)
-title: Tests de JavaScript y TypeScript
+  text: Solución de problemas de Test Optimization
+title: Pruebas de JavaScript y TypeScript
 type: multi-code-lang
 ---
+## Compatibilidad {#compatibility}
 
-## Compatibilidad
+{{< tabs >}}
+{{% tab "dd-trace v6" %}}
 
-Frameworks para tests compatibles:
-
-| Framework para tests | Versión | Notas |
+| Test Framework | Versión | Notas |
 |---|---|---|
-| Jest | >= 24.8.0 | Solo `jsdom` (en el paquete `jest-environment-jsdom` ) y `node` (en el paquete `jest-environment-node` ) se admiten como entornos de test. Los entornos personalizados como `@jest-runner/electron/environment` en `jest-electron-runner` no son compatibles.<br><br>Solo [`jest-circus`][1] se admite como [`testRunner`][2].<br><br>[`test.concurrent`](#jests-testconcurrent) no es compatible. |
+| Jest | >= 28.0.0 | Solo `jsdom` (en el paquete `jest-environment-jsdom`) y `node` (en el paquete `jest-environment-node`) son compatibles como entornos de prueba. Los entornos personalizados como `@jest-runner/electron/environment` en `jest-electron-runner` no son compatibles.<br><br>Solo [`jest-circus`](https://github.com/facebook/jest/tree/main/packages/jest-circus) es compatible como [`testRunner`](https://jestjs.io/docs/configuration#testrunner-string).<br><br>[`test.concurrent`](https://jestjs.io/docs/api#testconcurrentname-fn-timeout) es compatible a partir de `dd-trace>=6.1.0`. |
+| Mocha | >= 8.0.0 |
+| Cucumber | >= 7.0.0 |
+| Cypress | >= 12.0.0 |
+| Playwright | >= 1.38.0 |
+| Vitest | >= 1.6.0 | [`test.concurrent`](https://vitest.dev/api/#test-concurrent) es compatible a partir de `dd-trace>=6.1.0`. |
+
+`dd-trace` v6 requiere Node.js 22 o posterior.
+
+{{% /tab %}}
+{{% tab "dd-trace v5" %}}
+
+| Test Framework | Versión | Notas |
+|---|---|---|
+| Jest | >= 24.8.0 | Solo `jsdom` (en el paquete `jest-environment-jsdom`) y `node` (en el paquete `jest-environment-node`) son compatibles como entornos de prueba. Los entornos personalizados como `@jest-runner/electron/environment` en `jest-electron-runner` no son compatibles.<br><br>Solo [`jest-circus`](https://github.com/facebook/jest/tree/main/packages/jest-circus) es compatible como [`testRunner`](https://jestjs.io/docs/configuration#testrunner-string).<br><br>[`test.concurrent`](https://jestjs.io/docs/api#testconcurrentname-fn-timeout) es compatible a partir de `dd-trace>=5.112.0`. |
 | Mocha | >= 5.2.0 |
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 6.7.0 |
 | Playwright | >= 1.18.0 |
-| Vitest | >= 1.16.0 | Compatible a partir de `dd-trace>=4.42.0` y `dd-trace>=5.18.0`. Solo es compatible a partir de Node.js>=18.19 o de Node.js>=20.6 |
+| Vitest | >= 1.6.0 |  es compatible a partir de `dd-trace>=5.18.0`. [`test.concurrent`](https://vitest.dev/api/#test-concurrent) es compatible a partir de `dd-trace>=5.112.0`. |
 
-La instrumentación funciona en tiempo de ejecución, por lo que cualquier transpilador como TypeScript, Webpack o Babel es compatible desde el primer momento.
+{{% /tab %}}
+{{< /tabs >}}
 
-## Configuración del método de notificación
+La instrumentación funciona en tiempo de ejecución, por lo que cualquier transpilador como TypeScript, Webpack o Babel es compatible de forma inmediata.
 
-Para informar de los resultados de tests a Datadog, debes configurar la biblioteca de JavaScript de Datadog:
+## Configuración del método de reporte {#configuring-reporting-method}
+
+Para reportar los resultados de las pruebas a Datadog, necesita configurar la biblioteca de JavaScript de Datadog:
 
 {{< tabs >}}
-{{% tab "Proveedor de CI compatible con instrumentación automática" %}}
+{{% tab "Proveedor de CI con soporte para instrumentación automática" %}}
 {{% ci-autoinstrumentation %}}
 
 <div class="alert alert-danger">
-  <strong>Nota</strong>: La instrumentación automática no es compatible con los tests de Cypress. Para instrumentar tests de Cypress, sigue los steps (UI) / pasos (generic) de instrumentación manual descritos a continuación.
+  <strong>Nota</strong>: La instrumentación automática no es compatible con las pruebas de Cypress. Para instrumentar las pruebas de Cypress, siga los pasos de instrumentación manual descritos a continuación.
 </div>
 
 {{% /tab %}}
 
-{{% tab "Otro proveedor de integración continua en la nube" %}}
-<div class="alert alert-info">La modalidad agentless está disponible en las versiones de JavaScript de Datadog >= 2.5.0</div>
+{{% tab "Otro proveedor de CI en la nube" %}}
 {{% ci-agentless %}}
 
 {{% /tab %}}
-{{% tab "Proveedor de integración continua on-premises" %}}
+{{% tab "Proveedor de CI local" %}}
 {{% ci-agent %}}
 {{% /tab %}}
 {{< /tabs >}}
 
-## Instalación del rastreador de JavaScript
+## Instalación del rastreador de JavaScript {#installing-the-javascript-tracer}
 
-Para instalar el [JavaScript Tracer][3], ejecuta:
+Para instalar el [JavaScript Tracer][3], ejecute:
 
 ```bash
 yarn add --dev dd-trace
 ```
 
-Para obtener más información, consulta la [Documentación sobre la instalación de JavaScript Tracer][4].
+Para obtener más información, consulte la [JavaScript Tracer installation documentation][4].
 
-## Instrumenta tus tests
+## Instrumente sus pruebas {#instrument-your-tests}
 
 {{< tabs >}}
 {{% tab "Jest/Mocha" %}}
-Configura la variable de entorno `NODE_OPTIONS` en `-r dd-trace/ci/init`. Ejecuta tus tests como lo harías normalmente, opcionalmente especificando un nombre para tu sesión de tests con `DD_TEST_SESSION_NAME`:
+Establezca la variable de entorno `NODE_OPTIONS` en `-r dd-trace/ci/init`. Ejecute sus pruebas como lo haría normalmente, especificando opcionalmente un nombre para su sesión de prueba con `DD_TEST_SESSION_NAME`:
 
 ```bash
 NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=unit-tests yarn test
 ```
 
-**Nota**: Si configuras un valor para `NODE_OPTIONS`, asegúrate de que no sobrescriba `-r dd-trace/ci/init`. Esto se puede hacer mediante la cláusula `${NODE_OPTIONS:-}`:
+**Nota**: Si establece un valor para `NODE_OPTIONS`, asegúrese de que no sobrescriba `-r dd-trace/ci/init`. Esto se puede hacer utilizando la cláusula `${NODE_OPTIONS:-}`:
 
 {{< code-block lang="json" filename="package.json" >}}
 {
@@ -91,9 +107,9 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=unit-tests yarn test
 }
 {{< /code-block >}}
 
-### Añadir tags (etiquetas) personalizadas a los tests
+### Agregar etiquetas personalizadas a las pruebas {#adding-custom-tags-to-tests}
 
-Puedes añadir tags (etiquetas) personalizadas a tus tests mediante el span (tramo) activo actual:
+Puede agregar etiquetas personalizadas a sus pruebas utilizando el tramo activo actual:
 
 ```javascript
   it('sum function can sum', () => {
@@ -104,12 +120,12 @@ Puedes añadir tags (etiquetas) personalizadas a tus tests mediante el span (tra
   })
 ```
 
-Para crear filtros o campos `group by` para estas tags (etiquetas), primero debes crear facetas. Para obtener más información sobre el agregado de tags (etiquetas), consulta la sección [Añadir tags (etiquetas)][1] de la documentación sobre la instrumentación personalizada de Node.js.
+Para crear filtros o `group by` campos para estas etiquetas, primero debe crear facetas. Para obtener más información sobre cómo agregar etiquetas, consulte la sección [Agregar etiquetas][1] de la documentación de instrumentación personalizada de Node.js.
 
 
-### Añadir medidas personalizadas a tests
+### Agregar medidas personalizadas a las pruebas {#adding-custom-measures-to-tests}
 
-Al igual que las tags (etiquetas), puedes añadir medidas personalizadas a tus tests mediante el span activo actual:
+Al igual que con las etiquetas, puede agregar medidas personalizadas a sus pruebas utilizando el tramo activo actual:
 
 ```javascript
   it('sum function can sum', () => {
@@ -120,10 +136,10 @@ Al igual que las tags (etiquetas), puedes añadir medidas personalizadas a tus t
   })
 ```
 
-Para obtener más información acerca de las medidas personalizadas, consulta la [Guía para añadir medidas personalizadas][2].
+Para obtener más información sobre medidas personalizadas, consulte la [Guía para agregar medidas personalizadas][2].
 
-### Módulos de ECMAScript de Mocha (ESM)
-[Mocha >=9.0.0][3] utiliza un primer enfoque de ESM para cargar archivos de tests. Configura `NODE_OPTIONS` en `-r dd-trace/ci/init --import dd-trace/register.js` para obtener una visibilidad completa de tus tests. Consulta [Compatibilidad de`dd-trace-js` y ESM][4] para obtener más información.
+### Módulos ECMAScript (ESM) de Mocha {#mocha-ecmascript-modules-esm}
+[Mocha >=9.0.0][3] utiliza un enfoque basado principalmente en ESM para cargar archivos de prueba. Establezca `NODE_OPTIONS` en `-r dd-trace/ci/init --import dd-trace/register.js` para obtener visibilidad completa de sus pruebas. Consulte [`dd-trace-js` soporte para ESM][4] para obtener más información.
 
 
 [1]: /es/tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
@@ -133,13 +149,13 @@ Para obtener más información acerca de las medidas personalizadas, consulta la
 {{% /tab %}}
 
 {{% tab "Playwright" %}}
-Configura la variable de entorno `NODE_OPTIONS` en `-r dd-trace/ci/init`. Ejecuta tus tests como lo harías normalmente, opcionalmente especificando un nombre para tu sesión de tests con `DD_TEST_SESSION_NAME`:
+Establezca la variable de entorno `NODE_OPTIONS` en `-r dd-trace/ci/init`. Ejecute sus pruebas como lo haría normalmente, especificando opcionalmente un nombre para su sesión de prueba con `DD_TEST_SESSION_NAME`:
 
 ```bash
 NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=e2e-tests yarn test:e2e
 ```
 
-**Nota**: Si configuras un valor para `NODE_OPTIONS`, asegúrate de que no sobrescriba `-r dd-trace/ci/init`. Esto se puede hacer mediante la cláusula `${NODE_OPTIONS:-}`:
+**Nota**: Si establece un valor para `NODE_OPTIONS`, asegúrese de que no sobrescriba `-r dd-trace/ci/init`. Esto se puede hacer utilizando la cláusula `${NODE_OPTIONS:-}`:
 
 {{< code-block lang="json" filename="package.json" >}}
 {
@@ -149,85 +165,77 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=e2e-tests yarn test:e2e
 }
 {{< /code-block >}}
 
-### Añadir tags (etiquetas) personalizadas a tests
+### Agregar etiquetas personalizadas a las pruebas {#adding-custom-tags-to-tests-1}
 
-Puedes añadir tags (etiquetas) personalizadas a tus tests mediante la [API de anotaciones personalizadas desde Playwright][1]:
+Puede agregar etiquetas personalizadas a sus pruebas utilizando el tramo activo actual:
 
 ```javascript
 test('user profile', async ({ page }) => {
-  test.info().annotations.push({
-    type: 'DD_TAGS[test.memory.usage]', // DD_TAGS is mandatory and case sensitive
-    description: 'low',
-  });
-  test.info().annotations.push({
-    type: 'DD_TAGS[test.task.id]',
-    description: '41123',
-  });
+  const testSpan = require('dd-trace').scope().active()
+  testSpan.setTag('team_owner', 'my_team')
   // ...
-});
+})
 
 test('landing page', async ({ page }) => {
-  test.info().annotations.push({
-    type: 'DD_TAGS[test.cpu.usage]',
-    description: 'high',
-  });
+  const testSpan = require('dd-trace').scope().active()
+  testSpan.setTag('test.cpu.usage', 'high')
   // ...
-});
+})
 ```
 
-El formato de las anotaciones es el siguiente, donde `$TAG_NAME` y `$TAG_VALUE` son *cadenas* que representan el nombre y el valor de la tag (etiqueta), respectivamente:
+Para crear filtros o `group by` campos para estas etiquetas, primero debe crear facetas. Para obtener más información sobre cómo agregar etiquetas, consulte la sección [Agregar etiquetas][1] de la documentación de instrumentación personalizada de Node.js.
 
-```json
-{
-  "type": "DD_TAGS[$TAG_NAME]",
-  "description": "$TAG_VALUE"
-}
-```
+### Agregar medidas personalizadas a las pruebas {#adding-custom-measures-to-tests-1}
 
-### Añadir medidas personalizadas a tests
-
-Las medidas personalizadas también utilizan anotaciones personalizadas:
+También puede agregar medidas personalizadas a sus pruebas utilizando el tramo activo actual:
 
 ```javascript
 test('user profile', async ({ page }) => {
-  test.info().annotations.push({
-    type: 'DD_TAGS[test.memory.allocations]', // DD_TAGS is mandatory and case sensitive
-    description: 16, // this is a number
-  });
-});
+  const testSpan = require('dd-trace').scope().active()
+  testSpan.setTag('memory_allocations', 16)
+  // ...
+})
 ```
 
-El formato de las anotaciones es el siguiente, donde `$TAG_NAME` es una *cadena* que representa el nombre de la tag (etiqueta) y `$TAG_VALUE` es un *número* que representa el valor de la tag (etiqueta):
+Para obtener más información sobre medidas personalizadas, consulte la [Guía para agregar medidas personalizadas][2].
 
-```json
-{
-  "type": "DD_TAGS[$TAG_NAME]",
-  "description": $TAG_VALUE
-}
-```
-**Nota**:  Los valores `description` en las anotaciones se [escriben como cadenas][2]. Los números también funcionan, pero puede ser necesario desactivar el error de escritura con `// @ts-expect-error`.
+### Integración de Playwright - RUM {#playwright-rum-integration}
 
-<div class="alert alert-danger">
-  <strong>Importante</strong>: El prefijo <code>DD_TAGS</code> es obligatorio y distingue mayúsculas de minúsculas.
-</div>
+Si la aplicación del navegador que se está probando está instrumentada mediante [Browser Monitoring][3], los resultados de las pruebas de Playwright y sus sesiones de navegador RUM y reproducciones de sesión generadas se vinculan automáticamente. Para obtener más información, consulte la [guía de instrumentación de sus pruebas de navegador con RUM][4].
 
-### Integración de Playwright y RUM
+### Cargar capturas de pantalla de fallas de prueba {#upload-test-failure-screenshots}
 
-Si la aplicación de navegador que se está comprobando se instrumenta mediante [Monitorización del navegador][3], los resultados del test de Playwright y sus sesiones de navegador y repeticiones de sesión generadas con RUM se vinculan automáticamente. Para obtener más información, consulta la [Guía de instrumentación de tests del navegador con RUM][4].
+Cuando está habilitado, Test Optimization carga las capturas de pantalla que Playwright captura cuando una prueba falla. Vea las capturas de pantalla en la pestaña {{< ui >}}Media{{< /ui >}} del panel lateral de detalles de prueba de Test Optimization. Úselas para inspeccionar el estado del navegador en el momento de la falla.
 
-[1]: https://playwright.dev/docs/test-annotations#custom-annotations
-[2]: https://playwright.dev/docs/api/class-testinfo#test-info-annotations
+{{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="Una captura de pantalla de falla de Playwright mostrada en la pestaña Media del panel lateral de detalles de prueba de Test Optimization." style="width:100%;" >}}
+
+Utilice [`dd-trace` v5.116.0 o posterior][5] en la línea de lanzamiento v5, o [`dd-trace` v6.5.0 o posterior][6] en la línea de lanzamiento v6.
+
+Para habilitar la carga de capturas de pantalla, establezca la variable de entorno `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` en `1`. En su configuración de Playwright, establezca [`screenshot`][7] bajo `use` en uno de los siguientes valores:
+
+- `'on'`: Capturar captura de pantalla después de cada prueba.
+- `'only-on-failure'`: Capturar captura de pantalla después de cada falla de prueba.
+- `'on-first-failure'`: Capturar captura de pantalla después de la primera falla de cada prueba.
+
+**Nota**: Si utiliza `'on'`, Test Optimization solo carga capturas de pantalla de las pruebas fallidas.
+
+[1]: /es/tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /es/tests/guides/add_custom_measures/?tab=javascripttypescript
 [3]: /es/real_user_monitoring/application_monitoring/browser/setup/
 [4]: /es/continuous_integration/guides/rum_integration/
+[5]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.116.0
+[6]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.5.0
+[7]: https://playwright.dev/docs/api/class-testoptions#test-options-screenshot
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
-Configura la variable de entorno `NODE_OPTIONS` en `-r dd-trace/ci/init`. Ejecuta tus tests como lo harías normalmente, opcionalmente especificando un nombre para tu sesión de test con `DD_TEST_SESSION_NAME`:
+Establezca la variable de entorno `NODE_OPTIONS` en `-r dd-trace/ci/init`. Ejecute sus pruebas como lo haría normalmente, especificando opcionalmente un nombre para su sesión de prueba con `DD_TEST_SESSION_NAME`:
+
 ```bash
 NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=integration-tests yarn test:integration
 ```
 
-**Nota**: Si estableces un valor para `NODE_OPTIONS`, asegúrate de que no sobrescriba la cláusula `-r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}`:
+**Nota**: Si establece un valor para `NODE_OPTIONS`, asegúrese de que no sobrescriba `-r dd-trace/ci/init`. Esto se puede hacer utilizando la cláusula `${NODE_OPTIONS:-}`:
 
 {{< code-block lang="json" filename="package.json" >}}
 {
@@ -237,25 +245,25 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=integration-tests yarn t
 }
 {{< /code-block >}}
 
-### Añadir tags (etiquetas) personalizadas a los tests
+### Agregar etiquetas personalizadas a las pruebas {#adding-custom-tags-to-tests-2}
 
-Puedes añadir etiquetas personalizadas a tus tests con el tramo activo en ese momento:
+Puede agregar etiquetas personalizadas a su prueba obteniendo el tramo activo actual:
 
 ```javascript
   When('the function is called', function () {
     const stepSpan = require('dd-trace').scope().active()
     testSpan.setTag('team_owner', 'my_team')
-    // test continúa normalment
+    // test continues normally
     // ...
   })
 ```
 
-Para crear filtros o campos `group by` para estas etiquetas, primero debes crear facetas. Para obtener más información sobre la adición de etiquetas, consulta la sección [Adición de etiquetas][1] de la documentación de instrumentación personalizada de Node.js.
+Para crear filtros o `group by` campos para estas etiquetas, primero debe crear facetas. Para obtener más información sobre cómo agregar etiquetas, consulte la sección [Agregar etiquetas][1] de la documentación de instrumentación personalizada de Node.js.
 
 
-### Añadir medidas personalizadas a los tests
+### Agregar medidas personalizadas a las pruebas {#adding-custom-measures-to-tests-2}
 
-También puedes añadir medidas personalizadas a tu test con el tramo que esté activo en ese momento:
+También puede agregar medidas personalizadas a su prueba obteniendo el tramo activo actual:
 
 ```javascript
   When('the function is called', function () {
@@ -266,7 +274,7 @@ También puedes añadir medidas personalizadas a tu test con el tramo que esté 
   })
 ```
 
-Para obtener más información sobre las medidas personalizadas, consulta la [guía para Añadir medidas personalizadas][2].
+Para obtener más información sobre medidas personalizadas, consulte la [Guía para agregar medidas personalizadas][2].
 
 [1]: /es/tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [2]: /es/tests/guides/add_custom_measures/?tab=javascripttypescript
@@ -274,11 +282,11 @@ Para obtener más información sobre las medidas personalizadas, consulta la [gu
 
 {{% tab "Cypress" %}}
 
-### Cypress versión 10 o posterior
+### Cypress versión 10 o posterior {#cypress-version-10-or-later}
 
-Utiliza la documentación de la API de Cypress para [aprender a utilizar los complementos][1] para `cypress>=10`.
+Utilice la documentación de la API de Cypress para [aprender a usar complementos][1] para `cypress>=10`.
 
-En tu archivo `cypress.config.js`, establece lo siguiente:
+En su archivo `cypress.config.js`, configure lo siguiente:
 
 {{< code-block lang="javascript" filename="cypress.config.js" >}}
 const { defineConfig } = require('cypress')
@@ -291,19 +299,19 @@ module.exports = defineConfig({
 })
 {{< /code-block >}}
 
-Añade la siguiente línea al **nivel superior** de tu `supportFile`:
+Agregue la siguiente línea al **nivel superior** de su `supportFile`:
 
 {{< code-block lang="javascript" filename="cypress/support/e2e.js" >}}
-// Tu código puede ir antes de esta línea
+// Your code can be before this line
 // require('./commands')
 require('dd-trace/ci/cypress/support')
-// También compatible:
+// Also supported:
 // import 'dd-trace/ci/cypress/support'
-// Tu código también puede ir después de esta línea
+// Your code can also be after this line
 // Cypress.Commands.add('login', (email, pw) => {})
 {{< /code-block >}}
 
-Si utilizas otros complementos de Cypress, tu archivo `cypress.config.js` debe contener lo siguiente:
+Si está utilizando otros complementos de Cypress, su archivo `cypress.config.js` debe contener lo siguiente:
 
 {{< code-block lang="javascript" filename="cypress.config.js" >}}
 const { defineConfig } = require('cypress')
@@ -311,15 +319,15 @@ const { defineConfig } = require('cypress')
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      // tu código anterior está antes de esta línea
+      // your previous code is before this line
       return require('dd-trace/ci/cypress/plugin')(on, config)
     }
   }
 })
 {{< /code-block >}}
 
-#### Evento `after:run` de Cypress
-Datadog requiere el evento [`after:run`][2] de Cypress para funcionar, y Cypress no permite múltiples manejadores para ese evento. Si ya has definido manejadores para `after:run`, añade el manejador de Datadog manualmente al importar `'dd-trace/ci/cypress/after-run'`:
+#### Evento `after:run` de Cypress {#cypress-afterrun-event}
+Datadog requiere el evento de Cypress [`after:run`][2] para funcionar, y Cypress no permite múltiples controladores para ese evento. Si ya definió controladores para `after:run`, agregue el controlador de Datadog manualmente importando `'dd-trace/ci/cypress/after-run'`:
 
 {{< code-block lang="javascript" filename="cypress.config.js" >}}
 const { defineConfig } = require('cypress')
@@ -328,10 +336,10 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       require('dd-trace/ci/cypress/plugin')(on, config)
-      // otros complementos
+      // other plugins
       on('after:run', (details) => {
-        // otros manejadores 'after:run'
-        // importante que se devuelva esta función
+        // other 'after:run' handlers
+        // important that this function call is returned
         return require('dd-trace/ci/cypress/after-run')(details)
       })
     }
@@ -339,8 +347,8 @@ module.exports = defineConfig({
 })
 {{< /code-block >}}
 
-#### Evento `after:spec` de Cypress
-Datadog requiere el evento [`after:spec`][3] de Cypress para funcionar, y Cypress no permite múltiples manejadores para ese evento. Si ya has definido manejadores para `after:spec`, añade el manejador de Datadog manualmente al importar `'dd-trace/ci/cypress/after-spec'`:
+#### Evento `after:spec` de Cypress {#cypress-afterspec-event}
+Datadog requiere el evento de Cypress [`after:spec`][3] para funcionar, y Cypress no permite múltiples controladores para ese evento. Si ya definió controladores para `after:spec`, agregue el controlador de Datadog manualmente importando `'dd-trace/ci/cypress/after-spec'`:
 
 {{< code-block lang="javascript" filename="cypress.config.js" >}}
 const { defineConfig } = require('cypress')
@@ -349,11 +357,11 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       require('dd-trace/ci/cypress/plugin')(on, config)
-      // otros complementos
+      // other plugins
       on('after:spec', (...args) => {
-        // otros manejadores 'after:spec'
-        // Importante que se devuelva esta función
-        // Importante que todos los argumentos se pasen
+        // other 'after:spec' handlers
+        // Important that this function call is returned
+        // Important that all the arguments are passed
         return require('dd-trace/ci/cypress/after-spec')(...args)
       })
     }
@@ -361,76 +369,16 @@ module.exports = defineConfig({
 })
 {{< /code-block >}}
 
-### Cypress antes de la versión 10
-
-Estas son las instrucciones si estás utilizando una versión anterior a `cypress@10`. Consulta la [documentación de Cypress][4] para obtener más información sobre la migración a una versión más reciente.
-
-1. Establece [`pluginsFile`][5] en `"dd-trace/ci/cypress/plugin"`, por ejemplo, a través de [`cypress.json`][6]:
-{{< code-block lang="json" filename="cypress.json" >}}
-{
-  "pluginsFile": "dd-trace/ci/cypress/plugin"
-}
-{{< /code-block >}}
-
-Si ya has definido un `pluginsFile`, inicializa la instrumentación con:
-{{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
-module.exports = (on, config) => {
-  // tu código anterior está antes de esta línea
-  return require('dd-trace (traza)/ci/cypress/plugin')(on, config)
-}
-{{< /code-block >}}
-
-2. Añade la siguiente línea al **nivel superior** de tu [`supportFile`][7]:
-{{< code-block lang="javascript" filename="cypress/support/index.js" >}}
-// Tu código puede estar antes de esta línea
-// require('./commands')
-require('dd-trace/ci/cypress/support')
-// Tu código también puede estar después de esta línea
-// Cypress.Commands.add('login', (email, pw) => {})
-{{< /code-block >}}
-
-#### Evento `after:run` de Cypress
-Datadog requiere el evento [`after:run`][2] de Cypress para funcionar, y Cypress no permite múltiples manejadores para ese evento. Si ya has definido manejadores para `after:run`, añade el manejador de Datadog manualmente al importar `'dd-trace/ci/cypress/after-run'`:
-
-{{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
-module.exports = (on, config) => {
-  // tu código anterior va antes de esta línea
-  require('dd-trace/ci/cypress/plugin')(on, config)
-  on('after:run', (details) => {
-    // otros manejadores 'after:run'
-    // importante que se devuelva esta llamada a la función
-    return require('dd-trace/ci/cypress/after-run')(details)
-  })
-}
-{{< /code-block >}}
-
-#### Evento `after:spec` de Cypress
-Datadog requiere el evento [`after:spec`][3] de Cypress para funcionar, y Cypress no permite múltiples manejadores para ese evento. Si ya has definido manejadores para `after:spec`, añade el manejador de Datadog manualmente al importar `'dd-trace/ci/cypress/after-spec'`:
-
-{{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
-module.exports = (on, config) => {
-  // tu código anterior va antes de esta línea
-  require('dd-trace/ci/cypress/plugin')(on, config)
-  on('after:spec', (...args) => {
-    // otros manejadores 'after:spec'
-    // Importante que se devuelva esta llamada a la función
-    // Importante que todos los argumentos se pasen
-    return require('dd-trace/ci/cypress/after-run')(...args)
-  })
-}
-{{< /code-block >}}
-
-
-Ejecuta tus tests como lo harías normalmente, especificando opcionalmente un nombre para tu sesión de test con `DD_TEST_SESSION_NAME`:
+Ejecute sus pruebas como lo haría normalmente, especificando opcionalmente un nombre para su sesión de prueba con `DD_TEST_SESSION_NAME`:
 
 {{< code-block lang="shell" >}}
 DD_TEST_SESSION_NAME=ui-tests yarn test:ui
 {{< /code-block >}}
 
 
-### Añadir etiquetas (tags) personalizadas a los tests
+### Agregar etiquetas personalizadas a las pruebas {#adding-custom-tags-to-tests-3}
 
-Para añadir información adicional a tus tests, como el propietario del equipo, utiliza `cy.task('dd:addTags', { yourTags: 'here' })` en tu testo hooks.
+Para agregar información adicional a sus pruebas, como el equipo propietario, use `cy.task('dd:addTags', { yourTags: 'here' })` en sus pruebas o hooks.
 
 Por ejemplo:
 
@@ -449,11 +397,11 @@ it('renders a hello world', () => {
 })
 ```
 
-Para crear filtros o campos `group by` para estas etiquetas, primero debes crear facetas. Para más información sobre cómo añadir etiquetas, consulta la sección [Añadir etiquetas][8] de la documentación de instrumentación personalizada de Node.js.
+Para crear filtros o `group by` campos para estas etiquetas, primero debe crear facetas. Para obtener más información sobre cómo agregar etiquetas, consulte la sección [Adding Tags][4] de la documentación de instrumentación personalizada de Node.js.
 
-### Añadir medidas personalizadas a los tests
+### Agregar medidas personalizadas a las pruebas {#adding-custom-measures-to-tests-3}
 
-Para añadir información adicional a tus tests, como asignaciones de memoria, utiliza `cy.task('dd:addTags', { yourNumericalTags: 1 })` en tu test o hooks.
+Para agregar medidas personalizadas a sus pruebas, como asignaciones de memoria, use `cy.task('dd:addTags', { yourNumericalTags: 1 })` en sus pruebas o hooks.
 
 Por ejemplo:
 
@@ -467,40 +415,50 @@ it('renders a hello world', () => {
 })
 ```
 
-Para obtener más información sobre las medidas personalizadas, consulta la [guía para Añadir medidas personalizadas][9].
+Para obtener más información sobre las medidas personalizadas, consulte la [Guía para agregar medidas personalizadas][5].
 
-### Cypress: integración de RUM
+### Integración de Cypress - RUM {#cypress-rum-integration}
 
-Si la aplicación de navegador que se está probando se instrumenta con la [Monitorización de navegador][10], los resultados de los tests de Cypress y sus sesiones de navegador RUM generadas y las repeticiones de sesión se vinculan automáticamente. Para obtener más información, consulta la [guía para Instrumentar tus tests de navegador con RUM][11].
+Si la aplicación de navegador que se está probando está instrumentada mediante [Browser Monitoring][6], los resultados de la prueba de Cypress y sus sesiones de navegador RUM y reproducciones de sesión se vinculan automáticamente. Para obtener más información, consulte la [Guía de instrumentación de pruebas de navegador con RUM][7].
 
+### Cargar capturas de pantalla de fallas de prueba {#upload-test-failure-screenshots-1}
+
+Cuando está habilitado, Test Optimization carga las capturas de pantalla que Cypress toma cuando falla una prueba. Aparecen en la pestaña {{< ui >}}Media{{< /ui >}} del panel lateral de detalles de Test Optimization. Úselas para inspeccionar el estado del navegador en el momento de la falla.
+
+{{< img src="continuous_integration/tests/setup/cypress-failure-screenshot-media-tab.png" alt="Una captura de pantalla de falla de Cypress que se muestra en la pestaña Multimedia del panel lateral de detalles de Test Optimization." style="width:100%;" >}}
+
+Utilice [`dd-trace` v5.112.0 o posterior][8] en la línea de lanzamiento v5, o [`dd-trace` v6.1.0 o posterior][9] en la línea de lanzamiento v6.
+
+Para habilitar la carga de capturas de pantalla, establezca la variable de entorno `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` en `1`. En su configuración de Cypress, asegúrese de que [`screenshotOnRunFailure`][10] esté establecido en `true` (el valor predeterminado).
 
 [1]: https://docs.cypress.io/guides/tooling/plugins-guide#Using-a-plugin
 [2]: https://docs.cypress.io/api/plugins/after-run-api
 [3]: https://docs.cypress.io/api/plugins/after-spec-api
-[4]: https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-100
-[5]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
-[6]: https://docs.cypress.io/guides/references/configuration#cypress-json
-[7]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
-[8]: /es/tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[9]: /es/tests/guides/add_custom_measures/?tab=javascripttypescript
-[10]: /es/real_user_monitoring/application_monitoring/browser/setup/
-[11]: /es/continuous_integration/guides/rum_integration/
+[4]: /es/tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[5]: /es/tests/guides/add_custom_measures/?tab=javascripttypescript
+[6]: /es/real_user_monitoring/application_monitoring/browser/setup/
+[7]: /es/continuous_integration/guides/rum_integration/
+[8]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.112.0
+[9]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.1.0
+[10]: https://docs.cypress.io/app/references/configuration#Screenshots
 {{% /tab %}}
 
 {{% tab "Vitest" %}}
 <div class="alert alert-danger">
-  <strong>Nota</strong>: <a href="https://github.com/vitest-dev/vitest?tab=readme-ov-file#features">Vitest es ESM primero</a>, por lo que tu configuración es diferente de otros frameworks de tests.
+  <strong>Nota</strong>: <a href="https://github.com/vitest-dev/vitest?tab=readme-ov-file#features">Vitest es principalmente ESM</a>, por lo que su configuración es diferente a la de otros marcos de prueba.
 </div>
 
-`vitest` y `dd-trace` requieren Node.js>=18.19 o Node.js>=20.6 para funcionar.
+Utilice una versión de Node.js compatible con su versión principal de `dd-trace` para la instrumentación de Vitest:
+- `dd-trace` v5 requiere Node.js 18.19+ o Node.js 20.6+.
+- `dd-trace` v6 requiere Node.js 22 o posterior.
 
-Configura la variable de entorno `NODE_OPTIONS` en `--import dd-trace/register.js -r dd-trace/ci/init`. Ejecuta tus tests como lo harías normalmente, opcionalmente especificando un nombre para tu sesión de test con `DD_TEST_SESSION_NAME`:
+Establezca la variable de entorno `NODE_OPTIONS` en `--import dd-trace/register.js -r dd-trace/ci/init`. Ejecute sus pruebas como lo haría normalmente, especificando opcionalmente un nombre para su sesión de prueba con `DD_TEST_SESSION_NAME`:
 
 ```bash
 NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_TEST_SESSION_NAME=smoke-tests yarn test:smoke
 ```
 
-**Nota**: Si estableces un valor para `NODE_OPTIONS`, asegúrate de que no sobrescriba la cláusula `--import dd-trace/register.js -r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}`:
+**Nota**: Si establece un valor para `NODE_OPTIONS`, asegúrese de que no sobrescriba `--import dd-trace/register.js -r dd-trace/ci/init`. Esto se puede hacer utilizando la cláusula `${NODE_OPTIONS:-}`:
 
 {{< code-block lang="json" filename="package.json" >}}
 {
@@ -510,25 +468,58 @@ NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_TEST_SESSION
 }
 {{< /code-block >}}
 
-### Añadir etiquetas o medidas personalizadas a los tests
+### Agregar etiquetas o medidas personalizadas a las pruebas {#adding-custom-tags-or-measures-to-tests}
 
-No compatible.
+Puede agregar etiquetas personalizadas a sus pruebas utilizando el tramo activo actual:
 
+```javascript
+import tracer from 'dd-trace'
+import { expect, test } from 'vitest'
+
+test('sum function can sum', () => {
+  const testSpan = tracer.scope().active()
+  testSpan.setTag('team_owner', 'my_team')
+
+  expect(1 + 2).toBe(3)
+})
+```
+
+Para crear filtros o `group by` campos para estas etiquetas, primero debe crear facetas. Para obtener más información sobre cómo agregar etiquetas, consulte la sección [Agregar etiquetas][1] de la documentación de instrumentación personalizada de Node.js.
+
+También puede agregar medidas personalizadas a sus pruebas utilizando el tramo activo actual:
+
+```javascript
+import tracer from 'dd-trace'
+import { expect, test } from 'vitest'
+
+test('sum function can sum', () => {
+  const testSpan = tracer.scope().active()
+  testSpan.setTag('memory_allocations', 16)
+
+  expect(1 + 2).toBe(3)
+})
+```
+
+Para obtener más información sobre medidas personalizadas, consulte la [Guía para agregar medidas personalizadas][2].
+
+[1]: /es/tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /es/tests/guides/add_custom_measures/?tab=javascripttypescript
 {{% /tab %}}
 
 {{< /tabs >}}
 
-### Cómo solucionar los errores "No se encuentra el módulo 'dd-trace/ci/init'".
+### Cómo solucionar errores de \"Cannot find module 'dd-trace/ci/init'\" {#how-to-fix-cannot-find-module-dd-traceciinit-errors}
 
-Al utilizar `dd-trace`, es posible que aparezca el siguiente mensaje de error:
+Al usar `dd-trace`, es posible que encuentre el siguiente mensaje de error:
 
 ```text
  Error: Cannot find module 'dd-trace/ci/init'
 ```
 
-Esto puede deberse a un uso incorrecto de `NODE_OPTIONS`.
+Esto podría deberse a un uso incorrecto de `NODE_OPTIONS`.
 
-Por ejemplo, si tu acción de GitHub tiene este aspecto:
+Por ejemplo, si su acción de GitHub se ve así:
+
 ```yml
 jobs:
   my-job:
@@ -548,9 +539,10 @@ jobs:
         run: npm test
 ```
 
-**Nota:** Esto no funciona porque `NODE_OPTIONS` es interpretado por cada proceso de nodo, incluido `npm install`. Si intentas importar `dd-trace/ci/init` antes de que esté instalado, este paso falla.
+**Nota:** Esto no funciona porque `NODE_OPTIONS` son interpretados por cada proceso de nodo, incluido `npm install`. Si intenta importar `dd-trace/ci/init` antes de que esté instalado, este paso fallará.
 
-Tu acción de GitHub debería tener este aspecto:
+Su acción de GitHub debería verse así en su lugar:
+
 ```yml
 jobs:
   my-job:
@@ -569,78 +561,78 @@ jobs:
           NODE_OPTIONS: -r dd-trace/ci/init
 ```
 
-Sigue estas prácticas recomendadas:
+Siga estas mejores prácticas:
 
-* Asegúrate de que la variable de entorno `NODE_OPTIONS` solo está configurada en el proceso que ejecuta los tests.
-* En concreto, evita definir `NODE_OPTIONS` en la configuración de variables globales de entorno en la definición de tu proceso o trabajo.
+* Asegúrese de que la variable de entorno `NODE_OPTIONS` solo esté configurada para el proceso que ejecuta las pruebas.
+* Específicamente, evite definir `NODE_OPTIONS` en la configuración de variables de entorno globales en su canalización o definición de trabajo.
 
 
-#### Con Yarn 2 o posterior
+#### Uso de Yarn 2 o posterior {#using-yarn-2-or-later}
 
-Si utilizas `yarn>=2` y un archivo `.pnp.cjs`, también puedes obtener el mismo error:
+Si está usando `yarn>=2` y un archivo `.pnp.cjs`, es posible que también obtenga el mismo error:
 
 ```text
  Error: Cannot find module 'dd-trace/ci/init'
 ```
 
-Puedes solucionarlo configurando `NODE_OPTIONS` de la siguiente manera:
+Puede solucionarlo configurando `NODE_OPTIONS` de la siguiente manera:
 
 ```bash
 NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 ```
 
-## Informar sobre la cobertura del código
+## Reporting Code Coverage {#reporting-code-coverage}
 
-Cuando los tests se instrumentan con [Istambul][5], el rastreador de Datadog (v3.20.0 o posterior) informa de ello en la etiqueta `test.code_coverage.lines_pct` para tus sesiones de test.
+Cuando las pruebas se instrumentan con [Istanbul][5], el Datadog Tracer (v3.20.0 o posterior) lo informa bajo la etiqueta `test.code_coverage.lines_pct` para sus sesiones de prueba.
 
-Puedes ver la evolución de la cobertura de los tests en la pestaña **Coverage** (Cobertura) de una sesión de tests.
+Puede ver la evolución de la cobertura de pruebas en la pestaña **Coverage** de una sesión de prueba.
 
-Para más información, consulta [Cobertura del código][6].
+Para obtener más información, consulte [Code Coverage][6].
 
-## Ajustes de configuración
+## Configuración de ajustes {#configuration-settings}
 
-A continuación, se muestra una lista de los ajustes más importantes de configuración que se pueden utilizar con el rastreador.
+La siguiente es una lista de los ajustes de configuración más importantes que se pueden usar con el SDK.
 
 `test_session.name`
-: Se utiliza para identificar un grupo de tests, como `integration-tests`, `unit-tests` o `smoke-tests`.<br/>
+: Úselo para identificar un grupo de pruebas, como `integration-tests`, `unit-tests` o `smoke-tests`.<br/>
 **Variable de entorno**: `DD_TEST_SESSION_NAME`<br/>
-**Predeterminado**: (nombre del job (generic) de integración continua + comando de test)<br/>
+**Predeterminado**: Para `dd-trace` v6, la invocación del framework, como `jest`, `mocha`, `playwright test` o `cucumber-js`. Para `dd-trace` v5, una combinación del nombre del trabajo de CI y el comando de prueba.<br/>
 **Ejemplo**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 `service`
-: nombre del servicio o biblioteca en proceso de test.<br/>
-**Variable de entorno **: `DD_SERVICE`<br/>
-**Por defecto**: (nombre del framework de test)<br/>
+: Nombre del servicio o biblioteca bajo prueba.<br/>
+**Variable de entorno**: `DD_SERVICE`<br/>
+**Predeterminado**: (nombre del framework de prueba)<br/>
 **Ejemplo**: `my-ui`
 
 `env`
-: nombre del entorno donde se están ejecutando los tests.<br/>
-**Variable de entorno **: `DD_ENV`<br/>
-**Por defecto**: `none`<br/>
+: Nombre del entorno donde se ejecutan las pruebas.<br/>
+**Variable de entorno**: `DD_ENV`<br/>
+**Predeterminado**: `none`<br/>
 **Ejemplos**: `local`, `ci`
 
 `url`
-: URL del Datadog Agent para la recopilación de trazas con el formato `http://hostname:port`.<br/>
+: URL del Datadog Agent para la recopilación de trazas en el formato `http://hostname:port`.<br/>
 **Variable de entorno**: `DD_TRACE_AGENT_URL`<br/>
-**Por defecto**: `http://localhost:8126`
+**Predeterminado**: `http://localhost:8126`
 
-Para más información sobre etiquetas `service` y `env` reservadas, consulta [Etiquetado de servicios unificado][7]. También se pueden utilizar todas las demás opciones de [configuración del rastreador de Datadog][8].
+Para obtener más información sobre las etiquetas reservadas `service` y `env`, consulte [Unified Service Tagging][7]. También se pueden usar todas las demás opciones de [Datadog Tracer configuration][8].
 
-## Recopilación de metadatos Git
+## Recopilación de metadatos de Git {#collecting-git-metadata}
 
 {{% ci-git-metadata %}}
 
-## API para tests manuales
+## API de prueba manual {#manual-testing-api}
 
 <div class="alert alert-danger">
-  <strong>Nota</strong>: La API de tests manuales está disponible a partir de las versiones <code>5.23.0</code> y <code>4.47.0</code> de <code>dd-trace</code>.
+  <strong>Nota</strong>: La API de prueba manual está disponible a partir de las <code>dd-trace</code> versiones <code>5.23.0</code> y <code>4.47.0</code>.
 </div>
 
-Si utilizas Jest, Mocha, Cypress, Playwright, Cucumber o Vitest, **no utilices la API de tests manuales**, ya que Test Optimization (optimización de tests) los instrumenta automáticamente y envía los resultados de los tests a Datadog. La API de test manual es **incompatible** con los frameworks de tests ya admitidos.
+Si usa Jest, Mocha, Cypress, Playwright, Cucumber o Vitest, **no use la API de prueba manual**, ya que Test Optimization los instrumenta automáticamente y envía los resultados de las pruebas a Datadog. La API de prueba manual es **incompatible** con los marcos de pruebas ya compatibles.
 
-Utiliza la API de tests manuales solo si utilizas un framework de test no compatible o tienes un mecanismo de test diferente.
+Utilice la API de prueba manual solo si usa un marco de pruebas no compatible o si tiene un mecanismo de pruebas diferente.
 
-La API de tests manuales aprovecha el módulo `node:diagnostics_channel` de Node.js y se basa en canales en los que se puede publicar:
+La API de prueba manual aprovecha el módulo `node:diagnostics_channel` de Node.js y se basa en canales en los que puede publicar:
 
 ```javascript
 const { channel } = require('node:diagnostics_channel')
@@ -664,15 +656,15 @@ describe('can run tests', () => {
 })
 ```
 
-### Canal de inicio del test
+### Canal de inicio de prueba {#test-start-channel}
 
-Toma este canal por su ID `dd-trace:ci:manual:test:start` para publicar que se está iniciando un test. Un buen lugar para hacer esto es un hook `beforeEach` o similar.
+Obtenga este canal mediante su ID `dd-trace:ci:manual:test:start` para publicar que una prueba está comenzando. Un buen lugar para hacer esto es un hook `beforeEach` o similar.
 
 ```typescript
 const { channel } = require('node:diagnostics_channel')
 const testStartCh = channel('dd-trace:ci:manual:test:start')
 
-// ... el código para tu framework de test va aquí
+// ... code for your testing framework goes here
   beforeEach(() => {
     const testDefinition = {
       testName: 'a-string-that-identifies-this-test',
@@ -680,20 +672,20 @@ const testStartCh = channel('dd-trace:ci:manual:test:start')
     }
     testStartCh.publish(testDefinition)
   })
-// el código para tu framework de test continúa aquí ...
+// code for your testing framework continues here ...
 ```
 
-La carga útil que se va a publicar tiene los atributos `testName` y `testSuite`, ambos cadenas, que identifican el test que está a punto de comenzar.
+La carga útil que se publicará tiene los atributos `testName` y `testSuite`, ambos cadenas de texto, que identifican la prueba que está a punto de comenzar.
 
-### Canal de finalización del test
+### Canal de finalización de prueba {#test-finish-channel}
 
-Toma este canal por su ID `dd-trace:ci:manual:test:finish` para publicar que se está finalizando un test. Un buen lugar para hacer esto es un hook `afterEach` o similar.
+Obtenga este canal mediante su ID `dd-trace:ci:manual:test:finish` para publicar que una prueba está terminando. Un buen lugar para hacer esto es un hook `afterEach` o similar.
 
 ```typescript
 const { channel } = require('node:diagnostics_channel')
 const testFinishCh = channel('dd-trace:ci:manual:test:finish')
 
-// ... el código para tu framework de test va aquí
+// ... code for your testing framework goes here
   afterEach(() => {
     const testStatusPayload = {
       status: 'fail',
@@ -701,41 +693,41 @@ const testFinishCh = channel('dd-trace:ci:manual:test:finish')
     }
     testStartCh.publish(testStatusPayload)
   })
-// el código para tu framework de test continúa aquí ...
+// code for your testing framework continues here ...
 ```
 
-La carga útil que se va a publicar tiene los atributos `status` y `error`:
+La carga útil que se publicará tiene los atributos `status` y `error`:
 
-* `status` es una cadena que toma uno de tres valores:
-  * `'pass'` cuando se supera un test.
-  * `'fail'` cuando falla un test.
-  * `'skip'` cuando se ha omitido un test.
+* `status` es una cadena de texto que toma uno de tres valores:
+  * `'pass'` cuando una prueba pasa.
+  * `'fail'` cuando una prueba falla.
+  * `'skip'` cuando una prueba ha sido omitida.
 
-* `error` es un objeto `Error` que contiene la razón por la que ha fallado un test.
+* `error` es un objeto `Error` que contiene la razón por la cual una prueba falló.
 
-### Añadir etiquetas de canal
+### Agregar canal de etiquetas {#add-tags-channel}
 
-Toma este canal por su ID `dd-trace:ci:manual:test:addTags` para publicar que un test necesita etiquetas personalizadas. Esto puede hacerse dentro de la función de test:
+Obtenga este canal por su ID `dd-trace:ci:manual:test:addTags` para publicar que una prueba necesita etiquetas personalizadas. Esto se puede hacer dentro de la prueba:
 
 ```typescript
 const { channel } = require('node:diagnostics_channel')
 const testAddTagsCh = channel('dd-trace:ci:manual:test:addTags')
 
-// ... el código para tu framework de test va aquí
+// ... code for your testing framework goes here
   test('can sum', () => {
     testAddTagsCh.publish({ 'test.owner': 'my-team', 'number.assertions': 3 })
     const result = sum(2, 1)
     assert.equal(result, 3)
   })
-// el código para tu framework de test continúa aquí ...
+// code for your testing framework continues here ...
 ```
 
-La carga útil que se publica es un diccionario `<string, string|number>` de etiquetas o medidas que se añaden al test.
+La carga útil que se publicará es un diccionario `<string, string|number>` de etiquetas o medidas que se agregan a la prueba.
 
 
-### Ejecutar los tests
+### Ejecute las pruebas {#run-the-tests}
 
-Cuando los canales de inicio y fin del test estén en tu código, ejecuta tu framework de test como lo haces normalmente, incluyendo las siguientes variables de entorno:
+Cuando los canales de inicio y fin de la prueba estén en su código, ejecute su marco de pruebas como lo hace normalmente, incluyendo las siguientes variables de entorno:
 
 ```shell
 NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=custom-tests yarn run-my-test-framework
@@ -743,41 +735,63 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=custom-tests yarn run-my
 
 
 
-## Limitaciones conocidas
+## Limitaciones conocidas {#known-limitations}
 
-### Tests de navegador
-Los tests de navegador ejecutados con `mocha`, `jest`, `cucumber`, `cypress`, `playwright` y `vitest` son instrumentados por `dd-trace-js`, pero la visibilidad de la sesión del navegador en sí no se proporciona por defecto (por ejemplo, llamadas de red, acciones del usuario, cargas de páginas, etc.).
+### Pruebas de navegador {#browser-tests}
+Las pruebas de navegador ejecutadas con `mocha`, `jest`, `cucumber`, `cypress`, `playwright` y `vitest` son instrumentadas por `dd-trace-js`, pero la visibilidad dentro de la sesión del navegador en sí no se proporciona de forma predeterminada (por ejemplo, llamadas de red, acciones del usuario, cargas de página y más).
 
-Si deseas tener visibilidad del proceso del navegador, considera el uso de [RUM y repetición de sesión][9]. Cuando se utiliza Cypress o Playwright, los resultados de test y sus sesiones de navegador de RUM generadas y las repeticiones de sesión se vinculan automáticamente. Para obtener más información, consulta la [Guía para Instrumentar tus tests del navegador con RUM][10].
+Si desea visibilidad dentro del proceso del navegador, considere usar [RUM & Session Replay][9]. Al usar Cypress o Playwright, los resultados de las pruebas y sus sesiones de navegador RUM y Session Replay generadas se vinculan automáticamente. Para obtener más información, consulte la [guía de instrumentación de sus pruebas de navegador con RUM][10].
 
-### Modo interactivo de Cypress
+### Modo interactivo de Cypress {#cypress-interactive-mode}
 
-El modo interactivo de Cypress (al que puedes entrar ejecutando `cypress open`) no es compatible con Test Optimization (optimización de tests) porque algunos eventos de cypress, como [`before:run`][11], no se disparan. Si deseas probarlo de todas formas, pasa `experimentalInteractiveRunEvents: true` al [archivo de configuración de cypress][12].
+El modo interactivo de Cypress (al cual puede acceder ejecutando `cypress open`) no es compatible con Test Optimization porque algunos eventos de Cypress, como [`before:run`][11], no se activan. Si desea intentarlo de todos modos, pase `experimentalInteractiveRunEvents: true` al [archivo de configuración de Cypress][12].
 
-### `--workerThreads` de Jest
-La opción [workerThreads][13] de Jest no es compatible.
+### Los reintentos requieren aislamiento de pruebas de Cypress {#retries-require-cypress-test-isolation}
 
-### `test.concurrent` de Jest
-[test.concurrent][14] de Jest no es compatible.
+El [aislamiento de pruebas][13] de Cypress debe estar habilitado (la configuración predeterminada) para que
+para que funcionen las funciones de Test Optimization basadas en reintentos. Cuando `testIsolation` se establece en
+`false` en su configuración de Cypress, `dd-trace` deshabilita todos los reintentos de pruebas
+—[Detección temprana de inestabilidad][22], [Reintentos automáticos de prueba][23] y
+[intento de corrección][24]—debido a que estas funciones vuelven a ejecutar cada prueba en su lugar, lo cual requiere aislamiento.
 
-### `--forceExit` de Jest
-La opción [--forceExit][15] de Jest puede provocar la pérdida de datos. Datadog intenta enviar datos inmediatamente después de que finalicen tus tests, pero el cierre abrupto del proceso puede hacer que fallen algunas solicitudes. Utiliza `--forceExit` con precaución.
+Cuando el aislamiento está deshabilitado, el rastreador registra la advertencia `Test isolation is
+disabled, retries will not be enabled`, y ninguna ejecución de prueba se etiqueta con
+`@test.test_management.is_attempt_to_fix`. Debido a que el rastreador lee el valor global de
+`testIsolation`, las anulaciones de `describe` por conjunto de pruebas no vuelven a habilitar los reintentos.
 
-### `--exit` de Mocha
-La opción [--exit][16] de Mocha puede provocar la pérdida de datos. Datadog intenta enviar los datos inmediatamente después de que finalicen tus tests, pero el cierre abrupto del proceso puede hacer que fallen algunas solicitudes. Utiliza `--exit` con precaución.
+### Jest's `--forceExit` {#jests-forceexit}
+La opción [--forceExit][15] de Jest puede causar pérdida de datos. Datadog intenta enviar datos inmediatamente después de que finalizan sus pruebas, pero cerrar el proceso abruptamente puede causar que algunas solicitudes fallen. Use `--forceExit` con precaución.
 
-### Modo navegador de Vitest
-El [modo navegador][17] de Vitest no es compatible.
+### Mocha's `--exit` {#mochas-exit}
+La opción [--exit][16] de Mocha puede causar pérdida de datos. Datadog intenta enviar datos inmediatamente después de que finalizan sus pruebas, pero cerrar el proceso abruptamente puede causar que algunas solicitudes fallen. Use `--exit` con precaución.
 
-## Prácticas recomendadas
+### Vitest's browser mode {#vitests-browser-mode}
+Vitest's [browser mode][17] no es compatible.
 
-Siga estas prácticas para aprovechar al máximo el framework testing y la optimización de test (optimización de tests).
+### Sobrecarga de duración de la prueba de Vitest {#vitests-test-duration-overhead}
 
-### Tests parametrizados
+De forma predeterminada, la opción [`isolate`][21] de Vitest es `true`, por lo que cada archivo de prueba se ejecuta en su propia bifurcación o hilo. Vitest prioriza ESM y depende de [import-in-the-middle][20] para la instrumentación, lo que conlleva un costo de configuración cada vez que se inicia una suite. Con el aislamiento, ese costo de configuración se repite para cada archivo. El efecto es mayor cuando tiene muchas suites pequeñas y rápidas, porque el tiempo de configuración puede dominar el tiempo total de ejecución.
 
-Siempre que sea posible, aprovecha las herramientas que ofrecen los frameworks de test para realizar tests parametrizados. Por ejemplo, para `jest`:
+Para reducir la sobrecarga, establezca `isolate: false` en su archivo de configuración de Vitest, o pase `--no-isolate` al comando de prueba.
 
-Evita esto:
+Para mantener el aislamiento de Vitest habilitado con una menor sobrecarga de inicio de trabajadores, establezca `DD_EXPERIMENTAL_TEST_OPT_VITEST_NO_WORKER_INIT=true`. Esta opción está disponible en `dd-trace` v5 (desde `5.111.0`) y v6 (desde `6.0.0`). Se aplica a ejecuciones de grupos de trabajadores aislados de Vitest con Vitest `3.2.6` y versiones posteriores, y recurre a la instrumentación de trabajador normal para configuraciones no compatibles.
+
+Debido a que este modo no inicializa `dd-trace` en los trabajadores de Vitest, las siguientes funciones no son compatibles:
+
+- Etiquetas de prueba personalizadas
+- Rangos personalizados
+- Correlación de registros desde el código de prueba
+- Repetición de pruebas fallidas
+
+## Mejores prácticas {#best-practices}
+
+Siga estas prácticas para aprovechar al máximo el marco de pruebas y Test Optimization.
+
+### Pruebas parametrizadas {#parameterized-tests}
+
+Siempre que sea posible, aproveche las herramientas que los marcos de pruebas proporcionan para las pruebas parametrizadas. Por ejemplo, para `jest`:
+
+Evite esto:
 {{< code-block lang="javascript" >}}
 [[1,2,3], [3,4,7]].forEach((a,b,expected) => {
   test('sums correctly', () => {
@@ -786,7 +800,7 @@ Evita esto:
 })
 {{< /code-block >}}
 
-Y usa [`test.each`][18] en su lugar:
+Y utilice [`test.each`][18] en su lugar:
 
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
@@ -794,7 +808,7 @@ test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
 })
 {{< /code-block >}}
 
-Para `mocha`, utiliza [`mocha-each`][19]:
+Para `mocha`, use [`mocha-each`][19]:
 
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
@@ -807,11 +821,11 @@ forEach([
 });
 {{< /code-block >}}
 
-Cuando se utiliza este enfoque, tanto el framework de testing como test Optimization (optimización de tests) pueden distinguir sus tests.
+Cuando utiliza este enfoque, tanto el marco de pruebas como Test Optimization pueden distinguir sus pruebas.
 
-### Nombre de la sesión de test `DD_TEST_SESSION_NAME`
+### Nombre de la sesión de prueba `DD_TEST_SESSION_NAME` {#test-session-name-dd-test-session-name}
 
-Utiliza `DD_TEST_SESSION_NAME` para definir el nombre de la sesión de test y del grupo de tests relacionado. Algunos ejemplos de valores para esta etiqueta serían:
+Use `DD_TEST_SESSION_NAME` para definir el nombre de la sesión de prueba y el grupo de pruebas relacionado. Ejemplos de valores para esta etiqueta serían:
 
 - `unit-tests`
 - `integration-tests`
@@ -820,28 +834,17 @@ Utiliza `DD_TEST_SESSION_NAME` para definir el nombre de la sesión de test y de
 - `ui-tests`
 - `backend-tests`
 
-Si no se especifica `DD_TEST_SESSION_NAME`, el valor predeterminado utilizado es una combinación de:
+Si no se especifica `DD_TEST_SESSION_NAME`, el valor predeterminado es:
 
-- Nombre del job (generic) de CI
-- Comando utilizado para ejecutar los tests (como `yarn test`)
+- Para `dd-trace` v6, la invocación del marco, como `jest`, `mocha`, `playwright test` o `cucumber-js`
+- Para `dd-trace` v5, una combinación del nombre del trabajo de CI y el comando utilizado para ejecutar las pruebas (por ejemplo, `my-ci-job yarn test`)
 
-El nombre de la sesión de tests debe ser único dentro de un repositorio para ayudarte a distinguir diferentes grupos de tests.
+El nombre de la sesión de prueba debe ser único dentro de un repositorio para ayudarle a distinguir diferentes grupos de pruebas.
 
-#### Cuándo utilizar `DD_TEST_SESSION_NAME`
-
-Hay un conjunto de parámetros que Datadog comprueba para establecer la correspondencia entre las sesiones de test. El comando de test utilizado para ejecutar los tests es uno de ellos. Si el comando de test contiene una cadena que cambia en cada ejecución, como una carpeta temporal, Datadog considera que las sesiones no están relacionadas entre sí. Por ejemplo:
-
-- `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
-- `pnpm vitest --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
-
-Datadog recomienda utilizar `DD_TEST_SESSION_NAME` si tus comandos de test varían entre diferentes ejecuciones.
-
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/facebook/jest/tree/main/packages/jest-circus
-[2]: https://jestjs.io/docs/configuration#testrunner-string
 [3]: /es/tracing/trace_collection/dd_libraries/nodejs
 [4]: https://github.com/DataDog/dd-trace-js#version-release-lines-and-maintenance
 [5]: https://istanbul.js.org/
@@ -852,10 +855,14 @@ Datadog recomienda utilizar `DD_TEST_SESSION_NAME` si tus comandos de test varí
 [10]: /es/continuous_integration/guides/rum_integration/
 [11]: https://docs.cypress.io/api/plugins/before-run-api
 [12]: https://docs.cypress.io/guides/references/configuration#Configuration-File
-[13]: https://jestjs.io/docs/configuration#workerthreads
-[14]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
+[13]: https://docs.cypress.io/app/core-concepts/test-isolation
 [15]: https://jestjs.io/docs/cli#--forceexit
 [16]: https://mochajs.org/running/cli/#--exit
 [17]: https://vitest.dev/guide/browser/
 [18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [19]: https://www.npmjs.com/package/mocha-each
+[20]: https://github.com/nodejs/import-in-the-middle
+[21]: https://vitest.dev/config/isolate
+[22]: /es/tests/flaky_tests/early_flake_detection/
+[23]: /es/tests/flaky_tests/auto_test_retries/
+[24]: /es/tests/flaky_management/#confirm-fixes-for-flaky-tests
