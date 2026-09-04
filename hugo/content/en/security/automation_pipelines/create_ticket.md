@@ -23,17 +23,17 @@ further_reading:
     text: "Ticketing Integrations"
   - link: "/incident_response/work_management"
     tag: "Documentation"
-    text: "Case Management"
+    text: "Work Management"
 ---
 
 {{< product-availability >}}
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-Configure ticket creation rules to automatically create tickets in Jira, Linear, or Case Management when new findings are discovered. This approach tracks security issues in your existing engineering workflows without manual triage, helping teams respond quickly to new threats at scale. For more information about ticketing integrations with security findings, see [Ticketing Integrations][3].
+Configure ticket creation rules to automatically create tickets in Jira, Linear, or Work Management when new findings are discovered. This approach tracks security issues in your existing engineering workflows without manual triage, helping teams respond quickly to new threats at scale. For more information about ticketing integrations with security findings, see [Ticketing Integrations][3].
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-Configure ticket creation rules to automatically create tickets in Jira or Case Management when new findings are discovered. This approach tracks security issues in your existing engineering workflows without manual triage, helping teams respond quickly to new threats at scale. For more information about ticketing integrations with security findings, see [Ticketing Integrations][3].
+Configure ticket creation rules to automatically create tickets in Jira or Work Management when new findings are discovered. This approach tracks security issues in your existing engineering workflows without manual triage, helping teams respond quickly to new threats at scale. For more information about ticketing integrations with security findings, see [Ticketing Integrations][3].
 {{< /site-region >}}
 
 ## Create a ticket creation rule
@@ -65,7 +65,7 @@ Configure ticket creation rules to automatically create tickets in Jira or Case 
   - **Ticket Type**: Select the type of Jira issue to create, for example, **Task**.
   - **Assignee** (optional): Specify a user to assign automatically created tickets to.
   - To add more fields to the Jira ticket Datadog creates, use **Add Optional Field**.
-  - Expand **Data Sync Settings** to review or update the linked Case Management project and bidirectional sync configuration.
+  - Expand **Data Sync Settings** to review or update the linked Work Management project and bidirectional sync configuration.
   {{% /tab %}}
   {{% tab "Linear" %}}
   - **Linear Account**: Select the Linear account to use.
@@ -73,10 +73,10 @@ Configure ticket creation rules to automatically create tickets in Jira or Case 
   - **Project** (optional): Select the Linear project to associate with automatically created issues.
   - **Labels** (optional): Select labels to apply to automatically created issues.
   - **Assignee** (optional): Specify a user to assign automatically created issues to.
-  - Expand **Data Sync Settings** to review or update the linked Case Management project and bidirectional sync configuration.
+  - Expand **Data Sync Settings** to review or update the linked Work Management project and bidirectional sync configuration.
   {{% /tab %}}
-  {{% tab "Case Management" %}}
-  - **Case Management Project**: Select an existing Case Management project, or create one.
+  {{% tab "Work Management" %}}
+  - **Work Management Project**: Select an existing Work Management project, or create one.
   - **Assignee** (optional): Specify a user to assign automatically created cases to.
   {{% /tab %}}
   {{< /tabs >}}
@@ -89,10 +89,10 @@ Configure ticket creation rules to automatically create tickets in Jira or Case 
   - **Ticket Type**: Select the type of Jira issue to create, for example, **Task**.
   - **Assignee** (optional): Specify a user to assign automatically created tickets to.
   - To add more fields to the Jira ticket Datadog creates, use **Add Optional Field**.
-  - Expand **Data Sync Settings** to review or update the linked Case Management project and bidirectional sync configuration.
+  - Expand **Data Sync Settings** to review or update the linked Work Management project and bidirectional sync configuration.
   {{% /tab %}}
-  {{% tab "Case Management" %}}
-  - **Case Management Project**: Select an existing Case Management project, or create one.
+  {{% tab "Work Management" %}}
+  - **Work Management Project**: Select an existing Work Management project, or create one.
   - **Assignee** (optional): Specify a user to assign automatically created cases to.
   {{% /tab %}}
   {{< /tabs >}}
@@ -105,7 +105,7 @@ Configure ticket creation rules to automatically create tickets in Jira or Case 
 
 ## Identify automatically created tickets
 
-{{< img src="security/automation_pipelines/ticket_creation_lightning_indicator.png" alt="Case Management ticket popup showing a case created by an Automation Rule, indicated with a lightning bolt icon, and a link to view all findings with tickets that were created from the same rule" style="width:60%;" >}}
+{{< img src="security/automation_pipelines/ticket_creation_lightning_indicator.png" alt="Work Management ticket popup showing a case created by an Automation Rule, indicated with a lightning bolt icon, and a link to view all findings with tickets that were created from the same rule" style="width:60%;" >}}
 
 Tickets created by a rule are marked with a lightning bolt indicator in the findings side panel and explorer views. Hovering over the indicator shows the automation rule responsible for the ticket and provides a link to the rule.
 
