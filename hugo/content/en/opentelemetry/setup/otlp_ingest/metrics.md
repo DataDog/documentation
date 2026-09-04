@@ -30,19 +30,19 @@ further_reading:
 
 ## Overview
 
-Datadog's OpenTelemetry Protocol (OTLP) metrics intake API endpoint allows you to send metrics directly to Datadog. With this feature, you don't need to run the [Datadog Agent][2] or [OpenTelemetry Collector + Datadog Exporter][1].
+Datadog's OpenTelemetry Protocol (OTLP) metrics intake API endpoint allows applications, managed platforms, and OpenTelemetry Collectors to send metrics to Datadog over OTLP HTTP.
 
-You might prefer this option if you're looking for a straightforward setup and want to send metrics directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
+Use the direct configuration on this page when you need to send metrics without the [Datadog Agent][2] or an OpenTelemetry Collector. For production Collector deployments, use [Set Up the OpenTelemetry Collector][1].
 
 This endpoint is particularly useful in the following scenarios:
 
-- **OpenTelemetry distributions without Datadog Exporter support**: Some OpenTelemetry distributions, such as the [AWS Distro for OpenTelemetry (ADOT)][8], have removed vendor-specific exporters in favor of a unified OTLP exporter. The OTLP metrics endpoint enables these distributions to send metrics directly to Datadog seamlessly.
+- **OpenTelemetry distributions that use OTLP exporters**: Some OpenTelemetry distributions, such as the [AWS Distro for OpenTelemetry (ADOT)][8], use a unified OTLP exporter. The OTLP metrics endpoint enables these distributions to send metrics to Datadog.
 
-- **Technical constraints using the Datadog Exporter or Agent**: Ideal for scenarios where installing additional software is impractical or restrictive, such as third-party managed services (for example, Vercel), applications on customer devices, or environments requiring streamlined, Agentless observability pipelines. The OTLP metrics endpoint enables direct OTLP metric ingestion in these scenarios.
+- **Technical constraints using an Agent or Collector**: Direct ingestion supports third-party managed services, applications on customer devices, and other environments where running additional software is impractical.
 
 <div class="alert alert-info">If you are sending metrics from a managed platform (Cloudflare, Vercel, Heroku, and others), see <a href="/opentelemetry/setup/otlp_ingest/managed_platforms/">Managed platforms</a> for the correct endpoint configuration.</div>
 
-<div class="alert alert-danger">Host metadata sent to this endpoint will not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
+<div class="alert alert-danger">Metrics sent directly to this endpoint without an OpenTelemetry Collector do not populate the <a href="/infrastructure/list/">Infrastructure List</a>.</div>
 
 ## Configuration
 
@@ -221,28 +221,38 @@ For example:
 
 ## OpenTelemetry Collector
 
-If you are using an OpenTelemetry Collector distribution that doesn't support the Datadog Exporter, you can configure the [`otlphttpexporter`][4] to export metrics to the Datadog OTLP metrics intake endpoint.
+If your OpenTelemetry Collector distribution does not include all the components used by Datadog's recommended Collector setup, configure the OTLP HTTP exporter in your own distribution:
 
-For example, your `config.yaml` file would look like this:
+These examples use component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports.
 
 ```yaml
-...
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  cumulativetodelta: {}
+
 exporters:
-  otlphttp:
+  otlp_http:
     metrics_endpoint: {{< region-param key="otlp_metrics_endpoint" >}}
     headers:
       dd-api-key: ${env:DD_API_KEY}
       dd-otel-metric-config: '{"resource_attributes_as_tags": true}'
-...
 
 service:
   pipelines:
     metrics:
       receivers: [otlp]
-      processors: [batch, cumulativetodelta]
-      exporters: [otlphttp]
+      processors: [cumulativetodelta]
+      exporters: [otlp_http]
 ```
-<div class="alert alert-info">The <code>cumulativetodelta</code> processor in the pipeline converts cumulative metrics to delta metrics. Delta metrics are required for the OTLP metrics intake endpoint. For more information, see <a href="/opentelemetry/guide/otlp_delta_temporality/">Configure delta temporality in OpenTelemetry</a>.</div>
+
+This example converts cumulative metrics to the delta temporality required by the intake endpoint. Add any receivers and processors required by your Collector distribution.
+
+For a production deployment using OpenTelemetry Collector Contrib, use the [recommended OpenTelemetry Collector setup][1]. It also configures sending-queue batching, resource detection, metric tagging, and host metadata enrichment.
 
 ## Troubleshooting
 
@@ -274,7 +284,6 @@ If you notice missing datapoints or lower than expected metric values, it may be
 [1]: /opentelemetry/collector_exporter/
 [2]: /opentelemetry/otlp_ingest_in_the_agent/
 [3]: https://opentelemetry.io/docs/reference/specification/glossary/#automatic-instrumentation
-[4]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter
 [5]: /opentelemetry/guide/otlp_delta_temporality/
 [6]: /metrics/otlp/?tab=summary#mapping
 [7]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/spec-compliance-matrix.md#environment-variables

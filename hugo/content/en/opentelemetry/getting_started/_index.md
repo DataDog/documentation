@@ -24,14 +24,18 @@ further_reading:
 
 OpenTelemetry is an open source framework that provides standardized tools for collecting observability data from your applications. Datadog fully supports OpenTelemetry, allowing you to send your metrics, traces, and logs for powerful analysis and monitoring.
 
-These guides provide two hands-on ways to learn how to send OpenTelemetry data to Datadog. Choose the tutorial that best fits your learning goal.
+For a new OpenTelemetry Collector configuration, start with the recommended OTLP HTTP exporter and `span_metrics` connector setup. The additional tutorials use the Datadog Exporter and Datadog Connector to demonstrate OpenTelemetry concepts and sample applications.
 
 ## Getting started tutorials
 
 {{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}
+    <h3>Set up the OpenTelemetry Collector</h3>
+    Configure the OpenTelemetry Collector Contrib distribution to send telemetry to Datadog with the recommended OTLP HTTP exporter and <code>span_metrics</code> connector setup.
+    {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/getting_started/datadog_example" >}}
-    <h3>Explore OTel with a Datadog Example</h3>
-    Follow a step-by-step guide using a simple, Datadog-provided Java application. This is the quickest way to see how the OTLP receiver and Datadog Exporter work together.
+    <h3>Explore a Datadog Exporter example</h3>
+    Follow a step-by-step tutorial using a Datadog-provided Java application and the Datadog Exporter.
     {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/getting_started/otel_demo_to_datadog" >}}
     <h3>Set up the Official OpenTelemetry Demo</h3>

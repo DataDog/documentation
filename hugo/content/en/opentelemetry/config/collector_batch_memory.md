@@ -1,5 +1,5 @@
 ---
-title: Batch and Memory Settings
+title: Collector Memory Limits
 aliases:
 - /opentelemetry/collector_exporter/collector_batch_memory
 further_reading:
@@ -10,63 +10,17 @@ further_reading:
 
 ## Overview
 
-To edit your OpenTelemetry Collector batch and memory settings, configure the [batch processor][1] in your Datadog Exporter.
+The recommended Collector configuration uses the exporter's sending queue for batching and does not include the batch processor.
 
-For more information, see the OpenTelemetry project documentation for the [batch processor][1].
+For production deployments, configure the [memory limiter processor][3] to limit the memory the OpenTelemetry Collector uses.
 
 ## Setup
 
-{{< tabs >}}
-{{% tab "Host" %}}
-Add the following lines to your Collector configuration:
+Add `memory_limiter` to the `processors` list for each pipeline in your configuration. Place it first in the list so that it applies backpressure before other processors allocate memory.
 
-```yaml
-processors:
-  batch:
-    # Datadog APM Intake limit is 3.2MB.    
-    send_batch_max_size: 1000
-    send_batch_size: 100
-    timeout: 10s
-  memory_limiter:
-    check_interval: 1s
-    limit_mib: 1000
-```
+Size its limits for the memory available to your Collector, and keep the limit below the process or container memory limit. Total process memory runs above the configured limit, so leave headroom.
 
-{{% /tab %}}
-
-{{% tab "Kubernetes" %}}
-
-Add the following lines to `values.yaml`:
-
-```yaml
-resources:
-  limits:
-    cpu: 512m
-    memory: 1Gi
-```
-
-Add the following in the Collector configuration:
-
-```yaml
-processors:
-  batch:
-    # Datadog APM Intake limit is 3.2MB.    
-    send_batch_max_size: 1000
-    send_batch_size: 100
-    timeout: 10s
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-
-## Data collected
-
-None.
-
-## Full example configuration
-
-For a full working example configuration with the Datadog exporter, see [`batch-memory.yaml`][2].
+For the available options and sizing guidance, see the OpenTelemetry project documentation for the [memory limiter processor][3].
 
 ## Example logging output
 
@@ -80,5 +34,4 @@ Memory usage after GC.
 ```
 
 
-[1]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/batch-memory.yaml
+[3]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/memorylimiterprocessor
