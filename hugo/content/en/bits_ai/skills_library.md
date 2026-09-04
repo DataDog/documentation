@@ -117,7 +117,7 @@ For connection instructions, see the [Datadog MCP Server][3] documentation.
 
 ## Availability
 
-The Skills Library is supported Bits Chat, Bits Agent Builder, Slack, and external agents that connect through the Datadog MCP Server.
+The Skills Library is available in Bits Chat, Bits Agent Builder, Slack, and external agents that connect through the Datadog MCP Server.
 
 ## Further reading
 
