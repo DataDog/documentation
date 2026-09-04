@@ -43,20 +43,21 @@ You can create workflows or edit existing workflows from the [Workflow Automatio
 
 ## Create or edit a workflow with AI {#create-a-workflow-with-ai}
 
-If you're not sure where to start, you can automatically generate a workflow, or iterate on an existing workflow with AI.
+Use AI assistance in [Bits Chat][15] to create a workflow from a prompt or update an existing workflow. Bits Chat can ask follow-up questions before creating or updating the workflow.
 
-To generate a workflow:
-1. From the [Workflow Automation][1] page, click {{< ui >}}New Workflow{{< /ui >}}.
-1. Click {{< ui >}}Create a workflow with AI{{< /ui >}}.
-1. Enter a detailed prompt for your workflow. Specify the integrations and actions you'd like to use.
-1. Click the up arrow ({{< ui >}}↑{{< /ui >}}) to create your workflow.
+To create a workflow:
+1. From the [Workflow Automation][1] page, click {{< ui >}}New workflow{{< /ui >}}.
+1. Under {{< ui >}}Build a workflow with AI{{< /ui >}}, enter a detailed prompt or select a suggested prompt.
+1. Click the up arrow ({{< ui >}}↑{{< /ui >}}) to submit the prompt.
+1. Answer any follow-up questions, then confirm the workflow when prompted. Bits creates the workflow and opens it in the workflow editor.
 
-To iterate on an existing workflow:
-1. From an existing workflow, click {{< ui >}}Edit with AI{{< /ui >}}.
-1. Enter a detailed prompt for the behavior you'd like to add to your workflow. Include the integrations and actions you'd like to use.
-1. Click the up arrow ({{< ui >}}↑{{< /ui >}}) to add the functionality to your workflow.
+You can also create a workflow from anywhere in Datadog with Bits Chat. Open Bits Chat by clicking {{< ui >}}Ask Bits{{< /ui >}} in the top-right navigation bar or pressing <kbd>Cmd</kbd> or <kbd>Ctrl</kbd> + <kbd>I</kbd>, then ask Bits to create a workflow.
 
-<div class="alert alert-info">The Workflow Automation AI does not answer questions about the product. If you have questions or feedback, consider joining the <strong>#workflows</strong> channel on the <a href="https://chat.datadoghq.com/">Datadog Community Slack</a></div>
+To update an existing workflow:
+1. Open the workflow and click the AI icon <i class="icon-bits-ai"></i> in the left toolbar. Bits Chat opens with the workflow attached as context.
+1. Enter a detailed prompt describing the changes you want.
+1. Click the up arrow ({{< ui >}}↑{{< /ui >}}) to submit the prompt.
+1. Answer any follow-up questions, then confirm the changes when prompted. Bits updates the workflow in the editor.
 
 ## Create a custom workflow
 
@@ -78,7 +79,7 @@ If you're not sure about your workflow configuration, you can return to the pane
 1. Click {{< ui >}}Add Step{{< /ui >}} to start adding steps to your workflow.
 1. Search for an action using the search bar or browse through the integrations and their related actions to find the action you're looking for. Click an action to add it as a step on your workflow canvas.
 1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables][14].
-1. After you've configured the step, click either the AI icon <i class="icon-bits-ai"></i> or the plus icon ({{< ui >}}+{{< /ui >}}) to add another step, or save the workflow if you're done.
+1. After you've configured the step, click either the AI icon <i class="icon-bits-ai"></i> or the plus icon ({{< ui >}}\+{{< /ui >}}) to add another step, or save the workflow if you're done.
 1. When you're ready to publish your workflow, click {{< ui >}}Publish{{< /ui >}}. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
 You can edit a step in the workflow at any time by clicking on it. Click and drag steps on your workflow to rearrange them.
@@ -134,12 +135,12 @@ You can configure your workflow to send you a notification on success or failure
 To add a notification:
 1. In the workflow configuration panel, scroll down to the {{< ui >}}Notifications{{< /ui >}} section.
 1. To add a notification if the workflow succeeds:
-   1. Click the plus ({{< ui >}}+{{< /ui >}}) icon next to {{< ui >}}Notify on success{{< /ui >}}.
+   1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon next to {{< ui >}}Notify on success{{< /ui >}}.
    1. Select the integration that you want to use for notifications.
    1. Complete the required fields for the specified integration.
    1. Click {{< ui >}}Save{{< /ui >}} to save your workflow.
 1. To add a notification if the workflow fails:
-   1. Click the plus ({{< ui >}}+{{< /ui >}}) icon next to {{< ui >}}Notify on failure{{< /ui >}}.
+   1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon next to {{< ui >}}Notify on failure{{< /ui >}}.
    1. Select the integration that you want to use for notifications.
    1. Complete the required fields for the specified integration.
    1. Click {{< ui >}}Save{{< /ui >}} to save your workflow.
@@ -210,3 +211,4 @@ To perform tasks using the API, see the [Workflow Automation API documentation][
 [12]: /actions/workflows/variables/
 [13]: /api/latest/workflow-automation/
 [14]: /actions/workflows/variables/#context-variables
+[15]: /bits_ai/bits_chat/

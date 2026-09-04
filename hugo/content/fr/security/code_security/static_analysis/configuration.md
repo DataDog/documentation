@@ -27,6 +27,7 @@ Lorsque le SAST natif pour l'IA est activé, ses ensembles de règles par défau
 | Langage | Ensemble de règles |
 | --- | --- |
 | C# | `csharp-ai_sast` |
+| C++ | `cpp-ai_sast` |
 | Dart | `dart-ai_sast` |
 | Elixir | `elixir-ai_sast` |
 | Go | `go-ai_sast` |

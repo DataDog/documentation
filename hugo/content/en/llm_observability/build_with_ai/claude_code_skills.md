@@ -4,13 +4,13 @@ aliases:
 - /llm_observability/guide/claude_code_skills/
 description: Use Datadog's Claude Code skills to classify sessions, diagnose failures, compare experiments, generate Python experiment code, and bootstrap evaluators against your live production data.
 further_reading:
-    - link: '/llm_observability/configure/evaluations/'
+    - link: '/llm_observability/investigate/evaluations/'
       tag: 'Documentation'
       text: 'Agent Observability Evaluations'
     - link: '/llm_observability/improve/experiments/'
       tag: 'Documentation'
       text: 'LLM Experiments'
-    - link: '/llm_observability/guide/evaluation_developer_guide'
+    - link: '/llm_observability/investigate/evaluations/evaluation_developer_guide'
       tag: 'Guide'
       text: 'Evaluation Developer Guide: Build custom evaluators'
     - link: "https://www.datadoghq.com/blog/bits-evals/"
@@ -302,7 +302,7 @@ If you are new to evaluating an LLM application, the recommended flow is:
 [1]: https://claude.ai/code
 [2]: /llm_observability/setup/
 [3]: /llm_observability/improve/experiments/
-[4]: /llm_observability/guide/evaluation_developer_guide
+[4]: /llm_observability/investigate/evaluations/evaluation_developer_guide
 [5]: https://datadoghq.atlassian.net/wiki/spaces/BITSAI/pages/5226692942/pup+CLI
 [6]: https://github.com/datadog-labs/agent-skills
 [7]: https://github.com/DataDog/llm-observability/tree/main/experiments/notebooks

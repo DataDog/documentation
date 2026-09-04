@@ -86,6 +86,7 @@ The following table presents the list of collected features and the minimal Agen
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
+| Local Storage Cost Allocation | 7.27.0 | 1.11.0 |
 
 1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][2].
 1. Install the [Datadog Agent][3] in a Kubernetes environment and ensure that you enable the [Orchestrator Explorer][4] in your Agent configuration.
@@ -188,6 +189,12 @@ Next, Datadog looks at all of the pods running on that node for the day. The cos
 
 All other costs are given the same value and tags as the source metric `gcp.cost.amortized`.
 
+### Local storage
+
+For Kubernetes local storage allocation, a Kubernetes node is joined with Google Cloud storage costs associated with its ephemeral-storage capacity.
+
+Next, Datadog examines all pods running on that node for the day. For each pod, Datadog reserves the larger of its ephemeral-storage request and its daily peak usage. The average usage determines the usage cost, the remainder of the reservation is workload idle, and capacity not reserved by any pod is cluster idle. The allocated cost is enriched with the pod's tags.
+
 ### Agentless Kubernetes costs
 
 To view the costs of GKE clusters without enabling Datadog Infrastructure Monitoring, use [GKE cost allocation][18]. Enable GKE cost allocation on unmonitored GKE clusters to access this feature set. This approach comes with the following limitations.
@@ -278,6 +285,19 @@ Costs are allocated into the following spend types:
 | Cluster idle | Cost of resources (such as memory, CPU, and GPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
 | Not monitored | Cost of resources where the spend type is unknown. To resolve this, install the Datadog Agent on these clusters or nodes. |
 
+### Local storage
+
+Local storage costs are allocated into the following spend types:
+
+| Spend type | Description |
+| --- | --- |
+| Usage | Cost of local storage used by workloads, based on average ephemeral-storage usage that day. |
+| Workload idle | Cost of local storage reserved by workloads but not used. This is the difference between the larger of a pod's ephemeral-storage request or daily peak usage and its average usage. |
+| Cluster idle | Cost of node-local storage capacity not reserved by any workload in the cluster. |
+| Local storage not supported | Cost identified as local storage that cannot be associated with a node's ephemeral-storage capacity. This cost is not allocated to a workload. |
+
+Local storage is tied to the life cycle of a node. It does not include persistent volumes, which retain data independently of pods and nodes.
+
 {% /if %}
 
 ### Aggregated minor pod usage
@@ -352,7 +372,7 @@ Depending on the cloud provider, certain resources may or may not be available f
 | ECS costs | {% x/ %} | N/A | N/A |
 | Data transfer costs | {% x/ %} | Limited* | Limited* |
 | GPU | {% x/ %} | {% x/ %} | {% x/ %}  |
-| {% tooltip contents="Directly-attached storage resources for a node." %} Local storage {% /tooltip %} |  | Limited* | Limited* |
+| {% tooltip contents="Directly-attached storage resources for a node." %} Local storage {% /tooltip %} |  | Limited* | {% x/ %} |
 
 `Limited*` resources have been identified as part of your Kubernetes spend, but are not fully allocated to specific workloads or pods. These resources are host-level costs, not pod or namespace-level costs, and are identified with `allocated_spend_type:<resource>_not_supported`.
 
@@ -382,7 +402,7 @@ When the prerequisites are met, the following cost metrics automatically appear.
 
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
-| `gcp.cost.amortized.shared.resources.allocated` | Google Compute Engine costs allocated by the CPU & memory used by a pod, using 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. This allocation method is used when the bill does not already provide a specific split between CPU and memory usage. <br> *Based on `gcp.cost.amortized`* |
+| `gcp.cost.amortized.shared.resources.allocated` | Google Compute Engine costs allocated by the CPU, memory, and local storage used by a pod. When the bill does not provide a specific CPU and memory split, costs use a 60:40 split. GPU hosts use a 95:3:2 split for GPU, CPU, and memory. <br> *Based on `gcp.cost.amortized`* |
 
 {% /if %}
 
@@ -489,9 +509,10 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 | `kube_stateful_set` | The name of the Kubernetes StatefulSet. |
 | `pod_name` | The name of any individual pod. |
 | `allocated_spend_type:not_monitored` | The tracking and allocation of [Agentless Kubernetes costs](#agentless-kubernetes-costs) associated with resources used by Google Cloud services or workloads, and the Datadog Agent is not monitoring those resources. |
+| `allocated_spend_type:local_storage_not_supported` | Identifies local storage costs that cannot be associated with a node's ephemeral-storage capacity. |
 | `allocated_resource:data_transfer` | The tracking and allocation of costs associated with data transfer activities used by Google Cloud services or workloads. |
 | `allocated_resource:gpu` | The tracking and allocation of costs at a host level associated with GPU resources used by Google Cloud services or workloads. |
-| `allocated_resource:local_storage` | The tracking and allocation of costs at a host level associated with local storage resources used by Google Cloud services or workloads. |
+| `allocated_resource:local_storage` | Identifies local storage costs allocated to Google Cloud Kubernetes workloads. |
 
 {% /if %}
 

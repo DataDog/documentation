@@ -11,7 +11,7 @@ further_reading:
     - link: '/llm_observability/setup'
       tag: 'Documentation'
       text: 'Learn how to set up Agent Observability'
-    - link: '/llm_observability/configure/evaluations'
+    - link: '/llm_observability/investigate/evaluations'
       tag: 'Guide'
       text: 'Evaluation options for Agent Observability'
 ---
@@ -171,11 +171,11 @@ In addition, Datadog's [Sensitive Data Scanner][5] is natively integrated with A
 [3]: /llm_observability/setup/auto_instrumentation/
 [4]: /llm_observability/setup/?tab=decorators#instrument-your-llm-application
 [5]: /security/sensitive_data_scanner/
-[6]: /llm_observability/configure/evaluations/submit_evaluations
+[6]: /llm_observability/investigate/evaluations/external_evaluations
 [7]: https://github.com/DataDog/llm-observability/blob/main/1-llm-span.ipynb
 [8]: https://github.com/DataDog/llm-observability/blob/main/2-workflow-span.ipynb
 [9]: https://github.com/DataDog/llm-observability/blob/main/3-agent-span.ipynb
 [10]: https://github.com/DataDog/llm-observability/blob/main/4-custom-evaluations.ipynb
-[11]: /llm_observability/configure/evaluations/
-[12]: /llm_observability/configure/evaluations/managed_evaluations
-[13]: /llm_observability/configure/evaluations/external_evaluations/nemo
+[11]: /llm_observability/investigate/evaluations/
+[12]: /llm_observability/investigate/evaluations/managed_evaluations
+[13]: /llm_observability/investigate/evaluations/external_evaluations/nemo

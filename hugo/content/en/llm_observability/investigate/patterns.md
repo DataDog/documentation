@@ -168,7 +168,7 @@ Re-run your Pattern periodically and use the {{< ui >}}Compare to{{< /ui >}} dro
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/connect_to_account/
+[1]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/connect_to_account/
 [2]: /llm_observability/improve/datasets/
 [3]: /llm_observability/investigate/annotation_queues/
 [4]: https://app.datadoghq.com/llm/patterns
