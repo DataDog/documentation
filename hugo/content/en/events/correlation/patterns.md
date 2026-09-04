@@ -69,11 +69,15 @@ From the [correlation configuration page][2]
     - Alert A is correlated at 9:00 AM on Monday. It creates a work item, and both windows begin.
     - Alert B is correlated at 10:00 AM on Monday and is added to the same work item. Additional events from Alert A or Alert B during the deduplication window are associated with their existing alerts.
     - Both configured windows expire at 9:00 AM on Wednesday.
-    - Alert C is correlated at 10:00 AM on Wednesday. It cannot join the existing work item. If **Create a new work item after auto-closure** is enabled, Alert C creates a new work item.
+    - Alert C is correlated at 10:00 AM on Wednesday. Because the correlation window has ended, it cannot join the existing work item and creates a new work item, regardless of the **Create a new work item after auto-closure** setting.
 
     If **Extend dedupe window until all alerts resolve** is enabled, events from unresolved Alert A or Alert B can continue to update the existing correlation after 9:00 AM on Wednesday, for up to 30 days. Alert C still cannot join the existing work item because it is a new alert.
 
-    A work item can contain up to 500 alerts, and each alert can retain up to 100 events. After an alert reaches 100 events, the correlator does not process subsequent events for that alert, including recovery events. As a result, the work item might not close automatically.
+    A work item closes automatically only when all of its alerts resolve. If deduplication ends while alerts are still unresolved, correlation stops and the work item stays open unless it is closed manually.
+
+    A work item can contain up to 500 alerts, and each alert can retain up to 100 events. After an alert reaches 100 events, the correlator drops all subsequent events for that alert, including its recovery event. The alert cannot resolve, so the work item stays open unless it is closed manually.
+
+    When a work item stops processing before its alerts resolve, it displays an {{< ui >}}Ended incomplete{{< /ui >}} badge. Hover over the badge to see why processing stopped.
 
     The work item can display more than 100 matching events because its event list retrieves matching events independently. The displayed event count might differ from the number of events retained and processed by the correlator.
 
