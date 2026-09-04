@@ -11,6 +11,9 @@ further_reading:
 - link: "/real_user_monitoring/application_monitoring/react_native/"
   tag: "Documentation"
   text: "React Native Monitoring"
+- link: "/feature_flags/guide/proxy_sdk_traffic/"
+  tag: "Guide"
+  text: "Proxy Feature Flag SDK Traffic"
 ---
 
 ## Overview
