@@ -2,15 +2,15 @@
 title: Skills Library
 description: Create reusable skills that provide Bits AI and external AI agents with organization-specific domain knowledge and instructions.
 further_reading:
-- link: "/bits_ai/bits_chat/"
-  tag: "Documentation"
-  text: "Bits Chat"
-- link: "/actions/agents/"
-  tag: "Documentation"
-  text: "Bits Agent Builder"
-- link: "/mcp_server/"
-  tag: "Documentation"
-  text: "Datadog MCP Server"
+    - link: '/bits_ai/bits_chat/'
+      tag: 'Documentation'
+      text: 'Bits Chat'
+    - link: '/actions/agents/'
+      tag: 'Documentation'
+      text: 'Bits Agent Builder'
+    - link: '/mcp_server/'
+      tag: 'Documentation'
+      text: 'Datadog MCP Server'
 ---
 
 ## Overview
@@ -31,8 +31,8 @@ Create a skill in the Skills Library or by asking Bits Chat.
 2. Create a skill or import an existing `SKILLS.md` file.
 3. Add the domain knowledge and instructions that the agent should follow.
 4. Select the skill's visibility:
-   - **Private**: Keep the skill private.
-   - **Public**: Share the skill with the Datadog organization.
+    - **Private**: Keep the skill private.
+    - **Public**: Share the skill with the Datadog organization.
 5. Save the skill.
 
 Use focused instructions and give the skill a descriptive name. A clear name makes the skill easier to discover and invoke with a slash command.
@@ -117,7 +117,7 @@ For connection instructions, see the [Datadog MCP Server][3] documentation.
 
 ## Availability
 
-The Skills Library supports Bits Chat, Bits Agent Builder, Slack, and external agents that connect through the Datadog MCP Server. Bits Investigation does not support skills.
+The Skills Library is supported Bits Chat, Bits Agent Builder, Slack, and external agents that connect through the Datadog MCP Server.
 
 ## Further reading
 
