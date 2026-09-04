@@ -1,5 +1,5 @@
 ---
-title: Enable the DD RUM module
+title: Enable the DD RUM Module
 private: true
 content_filters:
   - trait_id: platform

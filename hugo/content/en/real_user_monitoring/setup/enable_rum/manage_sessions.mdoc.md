@@ -1,5 +1,5 @@
 ---
-title: Manage sessions
+title: Manage Sessions
 private: true
 content_filters:
   - trait_id: platform

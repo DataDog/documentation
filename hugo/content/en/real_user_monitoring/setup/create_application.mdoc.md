@@ -1,5 +1,5 @@
 ---
-title: Create a RUM app
+title: Create a RUM Application
 private: true
 content_filters:
   - trait_id: platform

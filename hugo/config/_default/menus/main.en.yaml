@@ -9311,7 +9311,7 @@ menu:
       parent: rum
       identifier: rum_setup
       weight: 1
-    - name: Create a RUM app
+    - name: Create a RUM Application
       url: real_user_monitoring/setup/create_application/
       parent: rum_setup
       identifier: rum_setup_create_application
@@ -9321,47 +9321,47 @@ menu:
       parent: rum_setup
       identifier: rum_setup_install
       weight: 2
-    - name: Enable the DD RUM module
+    - name: Enable the DD RUM Module
       url: real_user_monitoring/setup/enable_rum/
       parent: rum_setup
       identifier: rum_setup_enable
       weight: 3
-    - name: Manage sessions
+    - name: Manage Sessions
       url: real_user_monitoring/setup/enable_rum/manage_sessions/
       parent: rum_setup_enable
       identifier: rum_setup_enable_manage_sessions
       weight: 301
-    - name: Track errors and crashes
+    - name: Track Errors and Crashes
       url: real_user_monitoring/setup/enable_rum/track_errors/
       parent: rum_setup_enable
       identifier: rum_setup_enable_track_errors
       weight: 302
-    - name: Track network requests
+    - name: Track Network Requests
       url: real_user_monitoring/setup/enable_rum/track_network_requests/
       parent: rum_setup_enable
       identifier: rum_setup_enable_track_network_requests
       weight: 303
-    - name: Track application startups
+    - name: Track Application Startups
       url: real_user_monitoring/setup/enable_rum/track_application_startups/
       parent: rum_setup_enable
       identifier: rum_setup_enable_track_application_startups
       weight: 304
-    - name: Track UI latency
+    - name: Track UI Latency
       url: real_user_monitoring/setup/enable_rum/track_ui_latency/
       parent: rum_setup_enable
       identifier: rum_setup_enable_track_ui_latency
       weight: 305
-    - name: Track navigation
+    - name: Track Navigation
       url: real_user_monitoring/setup/enable_rum/track_navigation/
       parent: rum_setup_enable
       identifier: rum_setup_enable_track_navigation
       weight: 306
-    - name: Track user interactions
+    - name: Track User Interactions
       url: real_user_monitoring/setup/enable_rum/track_user_interactions/
       parent: rum_setup_enable
       identifier: rum_setup_enable_track_user_interactions
       weight: 307
-    - name: Track frustration signals
+    - name: Track Frustration Signals
       url: real_user_monitoring/setup/enable_rum/track_frustration_signals/
       parent: rum_setup_enable
       identifier: rum_setup_enable_track_frustration_signals
@@ -9371,7 +9371,7 @@ menu:
       parent: rum_setup
       identifier: rum_setup_session_replays
       weight: 4
-    - name: Additional plugins
+    - name: Additional Plugins
       url: real_user_monitoring/setup/additional_plugins/
       parent: rum_setup
       identifier: rum_setup_additional_plugins
