@@ -10,6 +10,11 @@
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import { inline, link, list, listItem } from "@lib/plaintext/helpers";
+import { siteBase } from "@lib/site/siteUrl";
+import {
+  isExternalHref,
+  rewriteInternalDocLink,
+} from "@lib/plaintext/rewriteDocLink";
 
 export interface PlaintextCard {
   href: string;
@@ -54,9 +59,42 @@ function displayText({ title, subtitle, href }: PlaintextCard): string {
   return subtitle ? `${baseText} - ${subtitle}` : baseText;
 }
 
-export function cardGridNode(cards: PlaintextCard[]): MarkdocNode {
+/**
+ * The card's href, pointed at the linked page's plaintext twin and made
+ * absolute when a `site` is supplied.
+ *
+ * Cards build their links rather than authoring them as markdown, so the cdocs
+ * AST walker never sees them; the `.md` rewrite has to be applied per href here.
+ *
+ * Plaintext is consumed away from the page it came from, where a root-relative
+ * href has no origin to resolve against. Resolving against `siteBase` rather
+ * than `site.origin` keeps the branch segment that preview builds carry.
+ *
+ * Not `absoluteUrl`: that helper rejects a path already carrying the deploy
+ * prefix, which is the right guard for canonical page URLs it builds itself but
+ * wrong for authored hrefs, which may legitimately point anywhere.
+ *
+ * The leading slash is stripped before resolving: `new URL("/a/", base)` is
+ * root-relative and would drop the branch segment from the base's path.
+ */
+function resolveHref(href: string, site?: string | URL): string {
+  const twin = rewriteInternalDocLink(href);
+  if (!site || isExternalHref(twin)) {
+    return twin;
+  }
+  return new URL(twin.replace(/^\//, ""), siteBase(site)).href;
+}
+
+export function cardGridNode(
+  cards: PlaintextCard[],
+  site?: string | URL,
+): MarkdocNode {
   const items = cards.map((card) =>
-    listItem([inline([link(card.href, escapeLinkText(displayText(card)))])]),
+    listItem([
+      inline([
+        link(resolveHref(card.href, site), escapeLinkText(displayText(card))),
+      ]),
+    ]),
   );
   return list("unordered", items);
 }

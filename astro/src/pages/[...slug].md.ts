@@ -21,7 +21,7 @@ import { renderMdocWithTwins } from '@lib/plaintext/twinTransform';
 
 const resolvePartial = makeBundledPartialResolver();
 
-export const GET: APIRoute = async ({ params, url, cookies }) => {
+export const GET: APIRoute = async ({ params, url, cookies, site }) => {
   // `[...slug]` yields the path without the `.md` extension, which is exactly an
   // `en` entry id.
   const slug = params.slug ?? '';
@@ -61,7 +61,7 @@ export const GET: APIRoute = async ({ params, url, cookies }) => {
   } else {
     // Non-cdoc: render component plaintext twins and prepend the title as an H1
     // to mirror the HTML page.
-    text = `# ${title}\n\n${renderMdocWithTwins(body)}`;
+    text = `# ${title}\n\n${renderMdocWithTwins(body, { site })}`;
   }
 
   return new Response(text, {

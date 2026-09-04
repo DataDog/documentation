@@ -17,8 +17,8 @@ describe("renderMdocWithTwins", () => {
     ].join("\n");
     const out = renderMdocWithTwins(source);
 
-    expect(out).toContain("- [A](/a/)");
-    expect(out).toContain("- [B](/b/)");
+    expect(out).toContain("- [A](/a.md)");
+    expect(out).toContain("- [B](/b.md)");
   });
 
   it("drops a card's image, alt, tooltip, and width from the link list", () => {
@@ -30,7 +30,7 @@ describe("renderMdocWithTwins", () => {
     ].join(" ");
     const out = renderMdocWithTwins(source);
 
-    expect(out).toContain("- [Alpha](/a/)");
+    expect(out).toContain("- [Alpha](/a.md)");
     expect(out).not.toContain("logos/a.svg");
     expect(out).not.toContain("A logo");
     expect(out).not.toContain("Alpha tooltip");
@@ -48,8 +48,8 @@ describe("renderMdocWithTwins", () => {
     ].join("\n");
     const out = renderMdocWithTwins(source);
 
-    expect(out).toContain("- [A](/a/)");
-    expect(out).toContain("- [B](/b/)");
+    expect(out).toContain("- [A](/a.md)");
+    expect(out).toContain("- [B](/b.md)");
   });
 
   it("renders collapse-content as a heading, not tag markup", () => {
@@ -169,5 +169,32 @@ describe("renderMdocWithTwins", () => {
     expect(out).toContain("### Outer");
     expect(out).toContain('{% alert level="info" %}');
     expect(out).toContain("Nested note.");
+  });
+
+  it("resolves card-grid hrefs against site when one is given", () => {
+    const source = [
+      "{% card-grid %}",
+      '{% image-card href="/a/" title="A" /%}',
+      "{% /card-grid %}",
+    ].join("\n");
+    const out = renderMdocWithTwins(source, {
+      site: "https://docs.datadoghq.com",
+    });
+
+    expect(out).toContain("- [A](https://docs.datadoghq.com/a.md)");
+  });
+
+  it("still points card-grid hrefs at the .md twin when no site is given", () => {
+    // The two rewrites are independent: the twin is where the content lives
+    // either way, so only the origin is missing without a `site`.
+    const source = [
+      "{% card-grid %}",
+      '{% image-card href="/a/" title="A" /%}',
+      "{% /card-grid %}",
+    ].join("\n");
+    const out = renderMdocWithTwins(source);
+
+    expect(out).toContain("- [A](/a.md)");
+    expect(out).not.toContain("docs.datadoghq.com");
   });
 });
