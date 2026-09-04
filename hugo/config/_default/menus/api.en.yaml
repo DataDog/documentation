@@ -12362,6 +12362,178 @@ menu:
           - ExecuteDdsqlTabularQuery
         unstable: []
         order: 1
+    - name: DEM
+      url: /api/latest/dem/
+      identifier: dem
+      generated: true
+    - name: Create a test suite for a DEM journey
+      url: /api/latest/dem/create-a-test-suite-for-a-dem-journey/
+      identifier: dem-create-a-test-suite-for-a-dem-journey
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTestSuiteForJourney
+        unstable: []
+        order: 6
+    - name: Create a DEM journey variant
+      url: /api/latest/dem/create-a-dem-journey-variant/
+      identifier: dem-create-a-dem-journey-variant
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateJourneyVariant
+        unstable: []
+        order: 13
+    - name: Get recommended tests for a DEM journey
+      url: /api/latest/dem/get-recommended-tests-for-a-dem-journey/
+      identifier: dem-get-recommended-tests-for-a-dem-journey
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetJourneyRecommendedTests
+        unstable: []
+        order: 14
+    - name: Update a DEM journey
+      url: /api/latest/dem/update-a-dem-journey/
+      identifier: dem-update-a-dem-journey
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateJourney
+        unstable: []
+        order: 3
+    - name: Get a DEM journey
+      url: /api/latest/dem/get-a-dem-journey/
+      identifier: dem-get-a-dem-journey
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetJourney
+        unstable: []
+        order: 2
+    - name: Delete a DEM journey
+      url: /api/latest/dem/delete-a-dem-journey/
+      identifier: dem-delete-a-dem-journey
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteJourney
+        unstable: []
+        order: 4
+    - name: Update a DEM journey variant
+      url: /api/latest/dem/update-a-dem-journey-variant/
+      identifier: dem-update-a-dem-journey-variant
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateJourneyVariant
+        unstable: []
+        order: 12
+    - name: Delete a DEM journey variant
+      url: /api/latest/dem/delete-a-dem-journey-variant/
+      identifier: dem-delete-a-dem-journey-variant
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteJourneyVariant
+        unstable: []
+        order: 11
+    - name: Batch get DEM journeys by test suite IDs
+      url: /api/latest/dem/batch-get-dem-journeys-by-test-suite-ids/
+      identifier: dem-batch-get-dem-journeys-by-test-suite-ids
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BatchGetJourneysByTestSuiteIDs
+        unstable: []
+        order: 7
+    - name: Search DEM journeys
+      url: /api/latest/dem/search-dem-journeys/
+      identifier: dem-search-dem-journeys
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchJourneys
+        unstable: []
+        order: 1
+    - name: Ignore an inferred DEM journey
+      url: /api/latest/dem/ignore-an-inferred-dem-journey/
+      identifier: dem-ignore-an-inferred-dem-journey
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - IgnoreInferredJourney
+        unstable: []
+        order: 9
+    - name: Search inferred DEM journeys
+      url: /api/latest/dem/search-inferred-dem-journeys/
+      identifier: dem-search-inferred-dem-journeys
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchInferredJourneys
+        unstable: []
+        order: 8
+    - name: Delete an ignored inferred DEM journey
+      url: /api/latest/dem/delete-an-ignored-inferred-dem-journey/
+      identifier: dem-delete-an-ignored-inferred-dem-journey
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIgnoredInferredJourney
+        unstable: []
+        order: 10
+    - name: Create a DEM journey
+      url: /api/latest/dem/create-a-dem-journey/
+      identifier: dem-create-a-dem-journey
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateJourney
+        unstable: []
+        order: 5
     - name: DORA Metrics
       url: /api/latest/dora-metrics/
       identifier: dora-metrics
