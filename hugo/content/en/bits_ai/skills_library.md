@@ -23,6 +23,10 @@ Skills work with [Bits Chat][1], [Bits Agent Builder][2], the Datadog app for Sl
 
 ## Create a skill
 
+Create a skill in the Skills Library or by asking Bits Chat.
+
+### Create a skill in the Skills Library
+
 1. Open the [**Skills Library**][4] in Datadog.
 2. Create a skill or import an existing `SKILLS.md` file.
 3. Add the domain knowledge and instructions that the agent should follow.
@@ -32,6 +36,26 @@ Skills work with [Bits Chat][1], [Bits Agent Builder][2], the Datadog app for Sl
 5. Save the skill.
 
 Use focused instructions and give the skill a descriptive name. A clear name makes the skill easier to discover and invoke with a slash command.
+
+### Create a skill with Bits Chat
+
+Ask Bits Chat to create a skill:
+
+```text
+Create a new Skills Library skill
+```
+
+To create a skill from the context in an existing Bits Chat conversation, enter:
+
+```text
+Turn this conversation into a skill
+```
+
+You can also create a skill from an existing Slack thread. In the thread, enter:
+
+```text
+@Datadog turn this conversation into a skill
+```
 
 ## Use a skill in Bits Chat
 
