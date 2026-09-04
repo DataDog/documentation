@@ -32,14 +32,14 @@ At build time, the plugin injects a snippet that writes metadata to `window.DD_S
 
 ## Configuration
 
-Configure `rum.sourceCodeContext` using one of the following methods. The two configurations are mutually exclusive.
+Choose one of the following source code context methods. The two configurations are mutually exclusive.
 
 {{< tabs >}}
 {{% tab "Debug ID (Recommended)" %}}
 
 Debug IDs associate each JavaScript bundle with its source map without relying on the bundle URL, service, or version. Use this method for new configurations.
 
-Set `debugId` to `true` in `rum.sourceCodeContext` to inject a debug ID into each JavaScript bundle.
+Set `debugId` to `true` in `sourcemaps` to inject a debug ID into each JavaScript bundle.
 
 ```javascript
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
@@ -47,10 +47,8 @@ const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
 module.exports = {
   plugins: [
     datadogWebpackPlugin({
-      rum: {
-        sourceCodeContext: {
-          debugId: true,
-        },
+      sourcemaps: {
+        debugId: true,
       },
     }),
   ],

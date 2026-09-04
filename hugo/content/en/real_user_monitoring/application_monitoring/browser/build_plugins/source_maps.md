@@ -43,16 +43,17 @@ Choose either debug ID uploads or service and version uploads. Do not configure 
 
 Debug IDs associate each JavaScript bundle with its source map without relying on the bundle URL, service, or version. Use this method for new configurations.
 
-Configure the following options in `errorTracking.sourcemaps`:
+Configure the following options in `sourcemaps`:
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `debugId` | Boolean | Yes | None | Set to `true` to upload source maps using debug IDs. |
+| `debugId` | Boolean | Yes | None | Set to `true` to inject a debug ID into each JavaScript bundle. |
+| `upload` | Boolean | Yes, to upload | `false` | Set to `true` to upload source maps during the build. If omitted, the plugin only injects debug IDs. |
 | `bailOnError` | Boolean | No | `false` | If `true`, the build fails when a source map upload error occurs. |
 | `dryRun` | Boolean | No | `false` | If `true`, the plugin runs through the upload process without sending data to Datadog. Use this to verify your configuration. |
 | `maxConcurrency` | Number | No | `20` | Maximum number of concurrent source map uploads. |
 
-Also configure `rum.sourceCodeContext.debugId` to inject debug IDs during the build:
+Set `debugId` and `upload` to `true` to inject debug IDs and upload source maps during the build:
 
 ```javascript
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
@@ -64,22 +65,14 @@ module.exports = {
         apiKey: process.env.DATADOG_API_KEY,
         site: 'datadoghq.com', // Optional: defaults to datadoghq.com
       },
-      errorTracking: {
-        sourcemaps: {
-          debugId: true,
-        },
-      },
-      rum: {
-        sourceCodeContext: {
-          debugId: true,
-        },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
       },
     }),
   ],
 };
 ```
-
-Debug ID uploads do not require a service, release version, or minified path prefix.
 
 {{% /tab %}}
 {{% tab "Service and version" %}}
