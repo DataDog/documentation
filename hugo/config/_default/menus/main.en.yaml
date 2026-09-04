@@ -5764,6 +5764,11 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
       weight: 50305
+    - name: Restrict Access to Projects
+      url: llm_observability/improve/experiments/access_control
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_access_control
+      weight: 50306
     - name: Configure
       url: llm_observability/configure/
       parent: llm_obs
