@@ -1616,12 +1616,13 @@ datadog:
 **Note**: The native `secretBackend` fields require Datadog Operator v1.29.0+.
 
 ```yaml
-global:
-  secretBackend:
-    type: "k8s.secrets"
-    config:
-      token_path: /custom/path/to/token
-      ca_path: /custom/path/to/ca.crt
+spec:
+  global:
+    secretBackend:
+      type: "k8s.secrets"
+      config:
+        token_path: /custom/path/to/token
+        ca_path: /custom/path/to/ca.crt
 ```
 
 **Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `spec.global.secretBackend.type` and `spec.global.secretBackend.config` fields.
