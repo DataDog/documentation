@@ -23,12 +23,18 @@ further_reading:
     text: "Ticketing Integrations"
   - link: "/incident_response/work_management"
     tag: "Documentation"
-    text: "Case Management"
+    text: "Work Management"
 ---
 
 {{< product-availability >}}
 
-Configure ticket creation rules to automatically create tickets in Jira or Case Management when new findings are discovered. This approach tracks security issues in your existing engineering workflows without manual triage, helping teams respond quickly to new threats at scale. For more information about ticketing integrations with security findings, see [Ticketing Integrations][3].
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+Configure ticket creation rules to automatically create tickets in Jira, Linear, or Work Management when new findings are discovered. This approach tracks security issues in your existing engineering workflows without manual triage, helping teams respond quickly to new threats at scale. For more information about ticketing integrations with security findings, see [Ticketing Integrations][3].
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+Configure ticket creation rules to automatically create tickets in Jira or Work Management when new findings are discovered. This approach tracks security issues in your existing engineering workflows without manual triage, helping teams respond quickly to new threats at scale. For more information about ticketing integrations with security findings, see [Ticketing Integrations][3].
+{{< /site-region >}}
 
 ## Create a ticket creation rule
 
@@ -51,16 +57,46 @@ Configure ticket creation rules to automatically create tickets in Jira or Case 
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
 1. To add severity criteria to the rule, click **Add Severity**.
 1. Select the ticketing system and configure the ticket destination:
-   - **Jira**
-     - **Jira Account**: Select the Atlassian instance to use.
-     - **Space**: Select the Jira project. Verify that this space is added to the [Jira Webhook][5].
-     - **Ticket Type**: Select the type of Jira issue to create, for example, **Task**.
-     - **Assignee** (optional): Specify a user to assign automatically created tickets to.
-     - To add more fields to the Jira ticket Datadog creates, use **Add Optional Field**.
-     - Expand **Data Sync Settings** to review or update the linked Case Management project and bidirectional sync configuration.
-   - **Case Management**
-     - **Case Management Project**: Select an existing Case Management project, or create one.
-     - **Assignee** (optional): Specify a user to assign automatically created cases to.
+  {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+  {{< tabs >}}
+  {{% tab "Jira" %}}
+  - **Jira Account**: Select the Atlassian instance to use.
+  - **Space**: Select the Jira project. Verify that this space is added to the [Jira Webhook][5].
+  - **Ticket Type**: Select the type of Jira issue to create, for example, **Task**.
+  - **Assignee** (optional): Specify a user to assign automatically created tickets to.
+  - To add more fields to the Jira ticket Datadog creates, use **Add Optional Field**.
+  - Expand **Data Sync Settings** to review or update the linked Work Management project and bidirectional sync configuration.
+  {{% /tab %}}
+  {{% tab "Linear" %}}
+  - **Linear Account**: Select the Linear account to use.
+  - **Team**: Select the Linear team where you want to create issues.
+  - **Project** (optional): Select the Linear project to associate with automatically created issues.
+  - **Labels** (optional): Select labels to apply to automatically created issues.
+  - **Assignee** (optional): Specify a user to assign automatically created issues to.
+  - Expand **Data Sync Settings** to review or update the linked Work Management project and bidirectional sync configuration.
+  {{% /tab %}}
+  {{% tab "Work Management" %}}
+  - **Work Management Project**: Select an existing Work Management project, or create one.
+  - **Assignee** (optional): Specify a user to assign automatically created cases to.
+  {{% /tab %}}
+  {{< /tabs >}}
+  {{< /site-region >}}
+  {{< site-region region="gov,gov2" >}}
+  {{< tabs >}}
+  {{% tab "Jira" %}}
+  - **Jira Account**: Select the Atlassian instance to use.
+  - **Space**: Select the Jira project. Verify that this space is added to the [Jira Webhook][5].
+  - **Ticket Type**: Select the type of Jira issue to create, for example, **Task**.
+  - **Assignee** (optional): Specify a user to assign automatically created tickets to.
+  - To add more fields to the Jira ticket Datadog creates, use **Add Optional Field**.
+  - Expand **Data Sync Settings** to review or update the linked Work Management project and bidirectional sync configuration.
+  {{% /tab %}}
+  {{% tab "Work Management" %}}
+  - **Work Management Project**: Select an existing Work Management project, or create one.
+  - **Assignee** (optional): Specify a user to assign automatically created cases to.
+  {{% /tab %}}
+  {{< /tabs >}}
+  {{< /site-region >}}
 1. Under **Rate limit**, enter the [maximum number of tickets](#daily-ticket-limit) this rule can create per UTC day.
 1. To test the rule before saving, click **Test Rule**, select a matching finding, and click **Run Test**. After the test completes, you can view the created ticket or detach the test ticket from the finding.
 1. Click **Save**. The rule applies to new findings only. It can take up to a few minutes after a finding is detected to create the corresponding ticket.
@@ -69,7 +105,7 @@ Configure ticket creation rules to automatically create tickets in Jira or Case 
 
 ## Identify automatically created tickets
 
-{{< img src="security/automation_pipelines/ticket_creation_lightning_indicator.png" alt="Case Management ticket popup showing a case created by an Automation Rule, indicated with a lightning bolt icon, and a link to view all findings with tickets that were created from the same rule" style="width:60%;" >}}
+{{< img src="security/automation_pipelines/ticket_creation_lightning_indicator.png" alt="Work Management ticket popup showing a case created by an Automation Rule, indicated with a lightning bolt icon, and a link to view all findings with tickets that were created from the same rule" style="width:60%;" >}}
 
 Tickets created by a rule are marked with a lightning bolt indicator in the findings side panel and explorer views. Hovering over the indicator shows the automation rule responsible for the ticket and provides a link to the rule.
 
