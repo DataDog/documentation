@@ -8,7 +8,7 @@ further_reading:
 - link: "/actions/agents/"
   tag: "Documentation"
   text: "Bits Agent Builder"
-- link: "/bits_ai/mcp_server/"
+- link: "/mcp_server/"
   tag: "Documentation"
   text: "Datadog MCP Server"
 ---
@@ -125,5 +125,5 @@ The Skills Library supports Bits Chat, Bits Agent Builder, Slack, and external a
 
 [1]: /bits_ai/bits_chat/
 [2]: /actions/agents/
-[3]: /bits_ai/mcp_server/
+[3]: /mcp_server/
 [4]: https://app.datadoghq.com/actions/skills
