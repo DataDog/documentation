@@ -1263,6 +1263,7 @@ datadog:
       vault_session:
         vault_auth_type: kubernetes
         vault_kubernetes_role: "<VAULT_ROLE>"
+        vault_kubernetes_mount_path: "auth/kubernetes/login"
   confd:
   # This is an example
     <INTEGRATION_NAME>.yaml: |-
@@ -1283,6 +1284,7 @@ datadog:
       vault_session:
         vault_auth_type: kubernetes
         vault_kubernetes_role: "<VAULT_ROLE>"
+        vault_kubernetes_mount_path: "auth/kubernetes/login"
 clusterAgent:
   confd:
     # This is an example
@@ -1303,6 +1305,7 @@ datadog:
       vault_session:
         vault_auth_type: kubernetes
         vault_kubernetes_role: "<VAULT_ROLE>"
+        vault_kubernetes_mount_path: "auth/kubernetes/login"
 clusterAgent:
   confd:
   # This is an example
@@ -1340,6 +1343,7 @@ spec:
         vault_session:
           vault_auth_type: kubernetes
           vault_kubernetes_role: "<VAULT_ROLE>"
+          vault_kubernetes_mount_path: "auth/kubernetes/login"
   override:
     nodeAgent:
       extraConfd:
@@ -1370,6 +1374,7 @@ spec:
         vault_session:
           vault_auth_type: kubernetes
           vault_kubernetes_role: "<VAULT_ROLE>"
+          vault_kubernetes_mount_path: "auth/kubernetes/login"
   override:
     clusterAgent:
       extraConfd:
@@ -1399,6 +1404,7 @@ spec:
         vault_session:
           vault_auth_type: kubernetes
           vault_kubernetes_role: "<VAULT_ROLE>"
+          vault_kubernetes_mount_path: "auth/kubernetes/login"
   features:
     clusterChecks:
       useClusterChecksRunners: true
@@ -1414,7 +1420,7 @@ spec:
                 password: "ENC[/Datadog/Production;apikey]"
 ```
 
-**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `secretBackend.type` and `secretBackend.config` fields. For example: `DD_SECRET_BACKEND_TYPE="hashicorp.vault"` and `DD_SECRET_BACKEND_CONFIG='{"vault_address":"https://myvaultaddress.net","vault_session":{"vault_auth_type":"kubernetes","vault_kubernetes_role":"<VAULT_ROLE>"}}'`.
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `spec.global.secretBackend.type` and `spec.global.secretBackend.config` fields. For example: `DD_SECRET_BACKEND_TYPE="hashicorp.vault"` and `DD_SECRET_BACKEND_CONFIG='{"vault_address":"https://myvaultaddress.net","vault_session":{"vault_auth_type":"kubernetes","vault_kubernetes_role":"<VAULT_ROLE>","vault_kubernetes_mount_path":"auth/kubernetes/login"}}'`.
 
 {{% /tab %}}
 {{< /tabs >}}
