@@ -132,7 +132,20 @@ After instrumentation:
    }
    ```
 
-   Give every behavioral expectation and handoff condition a unique `id` containing only letters, numbers, hyphens, or underscores. The ID is local to this upload and lets each recommended check cite its evidence. Use `source_kind` only from `prompt`, `instruction`, `policy`, `test`, `tool_definition`, or `implementation`. Use `observable_signals` only from `agent_input`, `agent_output`, `trace_context`, `tool_call`, `tool_result`, or `tool_order`.
+   Keep the encoded `context` object at or below 64 KiB and use these collection limits:
+
+   - Up to 20 capabilities and 30 tools.
+   - Between 1 and 30 behavioral expectations.
+   - Up to 20 handoff conditions.
+   - Between 1 and 60 source references.
+
+   Use between 1 and 10 unique source-reference IDs for each capability, tool, behavioral expectation, and handoff condition. Each behavioral expectation and handoff condition must cite at least one `prompt`, `instruction`, `policy`, or `test` source and include between 1 and 6 unique observable signals.
+
+   Keep `agent_summary` between 1 and 1,000 characters. Keep names and handoff destinations between 1 and 120 characters. Keep descriptions, purposes, behaviors, applicability statements, failures, handoff conditions, and source paths between 1 and 500 characters. Keep source-reference descriptions between 1 and 300 characters.
+
+   Give every source reference, behavioral expectation, and handoff condition an ID between 1 and 64 characters that contains only letters, numbers, hyphens, or underscores. Source-reference IDs must be unique within `source_references`. Behavioral-expectation and handoff-condition IDs must be unique across both collections. The IDs are local to this upload and let each recommended check cite its evidence.
+
+   Use `source_kind` only from `prompt`, `instruction`, `policy`, `test`, `tool_definition`, or `implementation`. Use `observable_signals` only from `agent_input`, `agent_output`, `trace_context`, `tool_call`, `tool_result`, or `tool_order`. If you include `line_end`, also include a positive `line_start`, and make `line_end` greater than or equal to `line_start`.
 
 4. Send the JSON once to the upload URL from the onboarding prompt. Use `POST`, set `Content-Type: application/json`, and pass the upload token only in the `Authorization: Bearer <upload-token>` header.
 
@@ -140,7 +153,7 @@ Follow these security requirements:
 
 - Treat the upload token as a one-time secret. Do not write it to source files, configuration, shell history, output, or logs.
 - Upload only the structured summary. Do not upload raw source code, full prompts, secrets, credentials, environment variables, customer data, trace contents, or arbitrary metadata.
-- Use repository-relative source paths and the smallest useful line ranges. Source references identify the evidence; they must not copy its contents.
+- Use normalized repository-relative POSIX source paths and the smallest useful line ranges. Do not use absolute paths, backslashes, colons, non-normalized separators, or `.` or `..` path segments. Source references identify the evidence; they must not copy its contents.
 - If the upload fails, continue instrumentation and tell the user that Datadog did not receive the optional context. Do not retry with broader data.
 
 ## Instrument prompts and offer Prompt Management
