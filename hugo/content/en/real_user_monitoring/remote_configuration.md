@@ -72,102 +72,128 @@ Remote configuration does not override any SDK settings by default. To manage a 
 
 **Sampling rates**
 
-- `rum.sessionReplaySampleRate`
-- `rum.traceSampleRate`
-- `rum.traceContextInjection`
-- `profiling.sampleRate`
+| UI label | Parameter name |
+|----------|----------------|
+| Session Replay sample rate | `rum.sessionReplaySampleRate` |
+| Trace sample rate | `rum.traceSampleRate` |
+| Trace context injection | `rum.traceContextInjection` |
+| Profiling sample rate | `profiling.sampleRate` |
 
 **Privacy**
 
-- `rum.defaultPrivacyLevel`
-- `rum.enablePrivacyForActionName`
+| UI label | Parameter name |
+|----------|----------------|
+| Default privacy level | `rum.defaultPrivacyLevel` |
+| Privacy for action names | `rum.enablePrivacyForActionName` |
 
 **Event tracking**
 
-- `rum.trackAnonymousUser`
-- `rum.trackUserInteractions`
-- `rum.trackResources`
-- `rum.trackLongTasks`
-- `rum.trackSessionAcrossSubdomains`
-- `logs.forwardErrorsToLogs`
-- `logs.forwardConsoleLogs`
-- `logs.forwardReports`
+| UI label | Parameter name |
+|----------|----------------|
+| Track anonymous users | `rum.trackAnonymousUser` |
+| Track user interactions | `rum.trackUserInteractions` |
+| Track resources | `rum.trackResources` |
+| Track long tasks | `rum.trackLongTasks` |
+| Track sessions across subdomains | `rum.trackSessionAcrossSubdomains` |
+| Forward errors to logs | `logs.forwardErrorsToLogs` |
+| Forward console logs | `logs.forwardConsoleLogs` |
+| Forward reports | `logs.forwardReports` |
 
 **App attributes**
 
-- `rum.actionNameAttribute`
+| UI label | Parameter name |
+|----------|----------------|
+| Action name attribute | `rum.actionNameAttribute` |
+| Allowed tracing URLs | `rum.allowedTracingUrls` |
+| Allowed tracking origins | `rum.allowedTrackingOrigins` |
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
 **Sampling rates**
 
-- `sessionReplay.sampleRate`
-- `profiling.continuousSampleRate`
-- `profiling.applicationLaunchSampleRate`
-- `trace.sampleRate`
+| UI label | Parameter name |
+|----------|----------------|
+| Session Replay sample rate | `sessionReplay.sampleRate` |
+| Continuous profiling sample rate | `profiling.continuousSampleRate` |
+| App launch profiling sample rate | `profiling.applicationLaunchSampleRate` |
+| Trace sample rate | `trace.sampleRate` |
 
 **Privacy**
 
-- `sessionReplay.textAndInputPrivacy`
-- `sessionReplay.imagePrivacy`
-- `sessionReplay.touchPrivacy`
+| UI label | Parameter name |
+|----------|----------------|
+| Text and input privacy | `sessionReplay.textAndInputPrivacy` |
+| Image privacy | `sessionReplay.imagePrivacy` |
+| Touch privacy | `sessionReplay.touchPrivacy` |
 
 **Event tracking**
 
-- `rum.trackAnonymousUser`
-- `rum.trackUserInteractions`
-- `rum.trackResources`
-- `rum.trackBackgroundEvents`
-- `rum.trackFrustrations`
-- `rum.longTask.enabled`
-- `rum.longTask.threshold`
-- `rum.vitalsUpdateFrequency`
-- `rum.trackSlowFrames`
-- `rum.appHang.enabled`
-- `rum.appHang.threshold`
-- `rum.trackWatchdogTerminations`
-- `rum.trackMemoryWarnings`
+| UI label | Parameter name |
+|----------|----------------|
+| Track anonymous users | `rum.trackAnonymousUser` |
+| Track user interactions | `rum.trackUserInteractions` |
+| Track resources | `rum.trackResources` |
+| Track background events | `rum.trackBackgroundEvents` |
+| Track frustration signals | `rum.trackFrustrations` |
+| Track long tasks | `rum.longTask.enabled` |
+| Long task threshold | `rum.longTask.threshold` |
+| Vitals update frequency | `rum.vitalsUpdateFrequency` |
+| Track slow frames | `rum.trackSlowFrames` |
+| Track app hangs | `rum.appHang.enabled` |
+| App hang threshold | `rum.appHang.threshold` |
+| Track watchdog terminations | `rum.trackWatchdogTerminations` |
+| Track memory warnings | `rum.trackMemoryWarnings` |
 
 **App attributes**
 
-- `trace.traceContextInjection`
-- `trace.tracedHosts`
+| UI label | Parameter name |
+|----------|----------------|
+| Trace context injection | `trace.traceContextInjection` |
+| Allowed tracing URLs | `trace.tracedHosts` |
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
 **Sampling rates**
 
-- `rum.profilingSampleRate`
-- `sessionReplay.sampleRate`
-- `profiling.continuousSampleRate`
-- `profiling.applicationLaunchSampleRate`
-- `trace.sampleRate`
+| UI label | Parameter name |
+|----------|----------------|
+| Profiling sample rate | `rum.profilingSampleRate` |
+| Session Replay sample rate | `sessionReplay.sampleRate` |
+| Continuous profiling sample rate | `profiling.continuousSampleRate` |
+| App launch profiling sample rate | `profiling.applicationLaunchSampleRate` |
+| Trace sample rate | `trace.sampleRate` |
 
 **Privacy**
 
-- `sessionReplay.textAndInputPrivacy`
-- `sessionReplay.imagePrivacy`
-- `sessionReplay.touchPrivacy`
+| UI label | Parameter name |
+|----------|----------------|
+| Text and input privacy | `sessionReplay.textAndInputPrivacy` |
+| Image privacy | `sessionReplay.imagePrivacy` |
+| Touch privacy | `sessionReplay.touchPrivacy` |
 
 **Event tracking**
 
-- `rum.trackAnonymousUser`
-- `rum.trackUserInteractions`
-- `rum.trackBackgroundEvents`
-- `rum.trackFrustrations`
-- `rum.longTask.enabled`
-- `rum.longTask.threshold`
-- `rum.vitalsUpdateFrequency`
-- `rum.trackSlowFrames`
-- `rum.crashReportsEnabled`
-- `rum.trackNonFatalAnrs`
+| UI label | Parameter name |
+|----------|----------------|
+| Track anonymous users | `rum.trackAnonymousUser` |
+| Track user interactions | `rum.trackUserInteractions` |
+| Track background events | `rum.trackBackgroundEvents` |
+| Track frustration signals | `rum.trackFrustrations` |
+| Track long tasks | `rum.longTask.enabled` |
+| Long task threshold | `rum.longTask.threshold` |
+| Vitals update frequency | `rum.vitalsUpdateFrequency` |
+| Track slow frames | `rum.trackSlowFrames` |
+| Crash reporting | `rum.crashReportsEnabled` |
+| Track non-fatal ANRs | `rum.trackNonFatalAnrs` |
 
 **App attributes**
 
-- `trace.traceContextInjection`
-- `trace.tracedHosts`
+| UI label | Parameter name |
+|----------|----------------|
+| Trace context injection | `trace.traceContextInjection` |
+| Allowed tracing URLs | `trace.tracedHosts` |
 
 {{% /tab %}}
 {{< /tabs >}}
