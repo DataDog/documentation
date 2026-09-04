@@ -2122,6 +2122,15 @@ components:
       required: true
       schema:
         type: string
+    UnitCostID:
+      description: The UUID of the unit cost.
+      example: 64aecd58-e355-4f07-9c3a-56ff6bda6cd8
+      in: path
+      name: unit_cost_id
+      required: true
+      schema:
+        format: uuid
+        type: string
     UserAuthorizedClientId:
       description: The ID of the user authorized client.
       in: path
@@ -121898,6 +121907,236 @@ components:
           example: min
           type: string
       type: object
+    UnitCostCreateRequest:
+      description: A request to create a unit cost.
+      properties:
+        data:
+          $ref: '#/components/schemas/UnitCostCreateRequestData'
+      required:
+        - data
+      type: object
+    UnitCostCreateRequestData:
+      description: The data object of a unit cost create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UnitCostRequestAttributes'
+        type:
+          $ref: '#/components/schemas/UnitCostType'
+      required:
+        - type
+        - attributes
+      type: object
+    UnitCostDataAttributesResponse:
+      description: The attributes of a unit cost.
+      properties:
+        created_at:
+          description: The time the unit cost was created.
+          example: "2026-09-01T18:46:15.933716Z"
+          format: date-time
+          type: string
+        created_by:
+          description: The UUID of the user who created the unit cost.
+          example: 36ea1610-8866-4bd3-bb6d-9bb9fc87cad2
+          format: uuid
+          type: string
+        denominator_query:
+          $ref: '#/components/schemas/UnitCostQueryDefinition'
+        denominator_type:
+          description: |-
+            The data source of the denominator queries, or `multisource` when the denominator
+            queries span more than one data source.
+          example: metrics
+          type: string
+        description:
+          description: The description of the unit cost. Omitted when the unit cost has no description.
+          example: Amortized cloud spend divided by the number of active users.
+          nullable: true
+          type: string
+        name:
+          description: The name of the unit cost.
+          example: Cloud cost per active user
+          type: string
+        numerator_query:
+          $ref: '#/components/schemas/UnitCostQueryDefinition'
+        org_id:
+          description: The ID of the organization the unit cost belongs to.
+          example: 321813
+          format: int64
+          type: integer
+        unit_label:
+          description: The label describing the denominator unit.
+          example: user
+          type: string
+        updated_at:
+          description: The time the unit cost was last updated.
+          example: "2026-09-01T19:52:08.820536Z"
+          format: date-time
+          type: string
+        updated_by:
+          description: The UUID of the user who last updated the unit cost.
+          example: 13cc0adf-2595-479e-b448-5051c180dddb
+          format: uuid
+          type: string
+      required:
+        - org_id
+        - name
+        - numerator_query
+        - denominator_query
+        - denominator_type
+        - unit_label
+        - created_by
+        - updated_by
+        - created_at
+        - updated_at
+      type: object
+    UnitCostDataResponse:
+      description: The data object of a unit cost response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UnitCostDataAttributesResponse'
+        id:
+          description: The UUID of the unit cost.
+          example: 64aecd58-e355-4f07-9c3a-56ff6bda6cd8
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/UnitCostType'
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    UnitCostDataResponseArray:
+      description: The list of unit costs.
+      items:
+        $ref: '#/components/schemas/UnitCostDataResponse'
+      type: array
+    UnitCostFormula:
+      additionalProperties: {}
+      description: |-
+        A formula combining the named queries into a single result, passed through to the
+        query engine unchanged.
+      example:
+        formula: numerator
+      type: object
+    UnitCostFormulaArray:
+      description: The list of formulas applied to the queries for this side of the ratio.
+      example:
+        - formula: numerator
+      items:
+        $ref: '#/components/schemas/UnitCostFormula'
+      type: array
+    UnitCostQuery:
+      additionalProperties: {}
+      description: |-
+        A single query contributing to a unit cost numerator or denominator. The accepted fields
+        depend on the data source the query targets, for example `cloud_cost`, `metrics`, `dora`,
+        or `ci_pipelines`, and are passed through to the query engine unchanged.
+      example:
+        data_source: cloud_cost
+        name: numerator
+        query: "sum:aws.cost.net.amortized.shared.resources.allocated{*}.rollup(sum, daily)"
+      type: object
+    UnitCostQueryArray:
+      description: The list of queries evaluated for this side of the ratio.
+      example:
+        - data_source: cloud_cost
+          name: numerator
+          query: "sum:aws.cost.net.amortized.shared.resources.allocated{*}.rollup(sum, daily)"
+      items:
+        $ref: '#/components/schemas/UnitCostQuery'
+      type: array
+    UnitCostQueryDefinition:
+      additionalProperties: {}
+      description: A timeseries object containing `queries` and `formulas` arrays.
+      properties:
+        formulas:
+          $ref: '#/components/schemas/UnitCostFormulaArray'
+        queries:
+          $ref: '#/components/schemas/UnitCostQueryArray'
+      required:
+        - queries
+        - formulas
+      type: object
+    UnitCostRequestAttributes:
+      description: The attributes of a unit cost create or replace request.
+      properties:
+        denominator_query:
+          $ref: '#/components/schemas/UnitCostQueryDefinition'
+        description:
+          description: An optional description of the unit cost. At most 2000 characters.
+          example: Amortized cloud spend divided by the number of active users.
+          maxLength: 2000
+          nullable: true
+          type: string
+        name:
+          description: The name of the unit cost. At most 200 characters.
+          example: Cloud cost per active user
+          maxLength: 200
+          type: string
+        numerator_query:
+          $ref: '#/components/schemas/UnitCostQueryDefinition'
+        unit_label:
+          description: The label describing the denominator unit, for example `user`. At most 100 characters.
+          example: user
+          maxLength: 100
+          type: string
+      required:
+        - name
+        - numerator_query
+        - denominator_query
+        - unit_label
+      type: object
+    UnitCostResponse:
+      description: A response containing a single unit cost.
+      properties:
+        data:
+          $ref: '#/components/schemas/UnitCostDataResponse'
+      required:
+        - data
+      type: object
+    UnitCostType:
+      default: unit_cost
+      description: The JSON:API resource type for a unit cost.
+      enum:
+        - unit_cost
+      example: unit_cost
+      type: string
+      x-enum-varnames:
+        - UNIT_COST
+    UnitCostUpdateRequest:
+      description: A request to replace a unit cost.
+      properties:
+        data:
+          $ref: '#/components/schemas/UnitCostUpdateRequestData'
+      required:
+        - data
+      type: object
+    UnitCostUpdateRequestData:
+      description: The data object of a unit cost replace request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UnitCostRequestAttributes'
+        id:
+          description: The UUID of the unit cost being replaced. Must match the `unit_cost_id` path parameter.
+          example: 64aecd58-e355-4f07-9c3a-56ff6bda6cd8
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/UnitCostType'
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    UnitCostsResponse:
+      description: A response containing a list of unit costs.
+      properties:
+        data:
+          $ref: '#/components/schemas/UnitCostDataResponseArray'
+      required:
+        - data
+      type: object
     UnpublishAppResponse:
       description: The response object after an app is successfully unpublished.
       properties:
@@ -144647,6 +144886,421 @@ paths:
         operator: OR
         permissions:
           - cloud_cost_management_read
+  /api/v2/cost/unit_costs:
+    get:
+      description: List the ROI metrics (unit costs) for the authenticated organization.
+      operationId: ListUnitCosts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-09-01T18:46:15.933716Z"
+                          created_by: 36ea1610-8866-4bd3-bb6d-9bb9fc87cad2
+                          denominator_query:
+                            formulas:
+                              - formula: denominator
+                            queries:
+                              - data_source: metrics
+                                name: denominator
+                                query: "avg:system.cpu.user{*}"
+                            response_format: timeseries
+                          denominator_type: metrics
+                          name: Cloud cost per active user
+                          numerator_query:
+                            formulas:
+                              - formula: numerator
+                            queries:
+                              - data_source: cloud_cost
+                                name: numerator
+                                query: "sum:aws.cost.net.amortized.shared.resources.allocated{*}.rollup(sum, daily)"
+                            response_format: timeseries
+                          org_id: 321813
+                          unit_label: user
+                          updated_at: "2026-09-01T19:52:08.820536Z"
+                          updated_by: 13cc0adf-2595-479e-b448-5051c180dddb
+                        id: 64aecd58-e355-4f07-9c3a-56ff6bda6cd8
+                        type: unit_cost
+                      - attributes:
+                          created_at: "2026-09-02T00:59:12.708413Z"
+                          created_by: 36ea1610-8866-4bd3-bb6d-9bb9fc87cad2
+                          denominator_query:
+                            formulas:
+                              - formula: denominator
+                            queries:
+                              - compute:
+                                  aggregation: count
+                                data_source: ci_pipelines
+                                group_by: []
+                                indexes:
+                                  - "*"
+                                name: denominator
+                                search:
+                                  query: "ci_level:pipeline @ci.status:success"
+                                storage: hot
+                            response_format: timeseries
+                          denominator_type: ci_pipelines
+                          name: Cloud cost per successful pipeline
+                          numerator_query:
+                            formulas:
+                              - formula: numerator
+                            queries:
+                              - data_source: cloud_cost
+                                name: numerator
+                                query: "sum:custom.cost.amortized{*}.rollup(sum, daily)"
+                            response_format: timeseries
+                          org_id: 321813
+                          unit_label: pipeline
+                          updated_at: "2026-09-02T01:00:05.709773Z"
+                          updated_by: 36ea1610-8866-4bd3-bb6d-9bb9fc87cad2
+                        id: ab11677e-396e-4dce-8018-bbeb398315ae
+                        type: unit_cost
+              schema:
+                $ref: '#/components/schemas/UnitCostsResponse'
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List unit costs
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 72
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create an ROI metric (unit cost) using the given numerator and denominator queries.
+      operationId: CreateUnitCost
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      denominator_query:
+                        formulas:
+                          - formula: denominator
+                        queries:
+                          - data_source: metrics
+                            name: denominator
+                            query: "avg:system.cpu.user{*}"
+                        response_format: timeseries
+                      name: Cloud cost per active user
+                      numerator_query:
+                        formulas:
+                          - formula: numerator
+                        queries:
+                          - data_source: cloud_cost
+                            name: numerator
+                            query: "sum:aws.cost.net.amortized.shared.resources.allocated{*}.rollup(sum, daily)"
+                        response_format: timeseries
+                      unit_label: user
+                    type: unit_cost
+            schema:
+              $ref: '#/components/schemas/UnitCostCreateRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-09-01T18:46:15.933716Z"
+                        created_by: 36ea1610-8866-4bd3-bb6d-9bb9fc87cad2
+                        denominator_query:
+                          formulas:
+                            - formula: denominator
+                          queries:
+                            - data_source: metrics
+                              name: denominator
+                              query: "avg:system.cpu.user{*}"
+                          response_format: timeseries
+                        denominator_type: metrics
+                        name: Cloud cost per active user
+                        numerator_query:
+                          formulas:
+                            - formula: numerator
+                          queries:
+                            - data_source: cloud_cost
+                              name: numerator
+                              query: "sum:aws.cost.net.amortized.shared.resources.allocated{*}.rollup(sum, daily)"
+                          response_format: timeseries
+                        org_id: 321813
+                        unit_label: user
+                        updated_at: "2026-09-01T18:46:15.933716Z"
+                        updated_by: 36ea1610-8866-4bd3-bb6d-9bb9fc87cad2
+                      id: 64aecd58-e355-4f07-9c3a-56ff6bda6cd8
+                      type: unit_cost
+              schema:
+                $ref: '#/components/schemas/UnitCostResponse'
+          description: Created
+          headers:
+            Location:
+              description: The path of the newly created unit cost.
+              schema:
+                type: string
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a unit cost
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 73
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/cost/unit_costs/{unit_cost_id}:
+    delete:
+      description: Delete an ROI metric (unit cost).
+      operationId: DeleteUnitCost
+      parameters:
+        - $ref: "#/components/parameters/UnitCostID"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a unit cost
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 76
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Retrieve an ROI metric (unit cost) by UUID.
+      operationId: GetUnitCost
+      parameters:
+        - $ref: "#/components/parameters/UnitCostID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-09-01T18:46:15.933716Z"
+                        created_by: 36ea1610-8866-4bd3-bb6d-9bb9fc87cad2
+                        denominator_query:
+                          formulas:
+                            - formula: denominator
+                          queries:
+                            - data_source: metrics
+                              name: denominator
+                              query: "avg:system.cpu.user{*}"
+                          response_format: timeseries
+                        denominator_type: metrics
+                        name: Cloud cost per active user
+                        numerator_query:
+                          formulas:
+                            - formula: numerator
+                          queries:
+                            - data_source: cloud_cost
+                              name: numerator
+                              query: "sum:aws.cost.net.amortized.shared.resources.allocated{*}.rollup(sum, daily)"
+                          response_format: timeseries
+                        org_id: 321813
+                        unit_label: user
+                        updated_at: "2026-09-01T19:52:08.820536Z"
+                        updated_by: 13cc0adf-2595-479e-b448-5051c180dddb
+                      id: 64aecd58-e355-4f07-9c3a-56ff6bda6cd8
+                      type: unit_cost
+              schema:
+                $ref: '#/components/schemas/UnitCostResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a unit cost
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 74
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    put:
+      description: Replace an ROI metric (unit cost) with a new set of attributes.
+      operationId: UpdateUnitCost
+      parameters:
+        - $ref: "#/components/parameters/UnitCostID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      denominator_query:
+                        formulas:
+                          - formula: denominator
+                        queries:
+                          - data_source: metrics
+                            name: denominator
+                            query: "avg:system.cpu.user{*}"
+                        response_format: timeseries
+                      name: Cloud cost per active user
+                      numerator_query:
+                        formulas:
+                          - formula: numerator
+                        queries:
+                          - data_source: cloud_cost
+                            name: numerator
+                            query: "sum:aws.cost.net.amortized.shared.resources.allocated{*}.rollup(sum, daily)"
+                        response_format: timeseries
+                      unit_label: user
+                    id: 64aecd58-e355-4f07-9c3a-56ff6bda6cd8
+                    type: unit_cost
+            schema:
+              $ref: '#/components/schemas/UnitCostUpdateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-09-01T18:46:15.933716Z"
+                        created_by: 36ea1610-8866-4bd3-bb6d-9bb9fc87cad2
+                        denominator_query:
+                          formulas:
+                            - formula: denominator
+                          queries:
+                            - data_source: metrics
+                              name: denominator
+                              query: "avg:system.cpu.user{*}"
+                          response_format: timeseries
+                        denominator_type: metrics
+                        name: Cloud cost per active user
+                        numerator_query:
+                          formulas:
+                            - formula: numerator
+                          queries:
+                            - data_source: cloud_cost
+                              name: numerator
+                              query: "sum:aws.cost.net.amortized.shared.resources.allocated{*}.rollup(sum, daily)"
+                          response_format: timeseries
+                        org_id: 321813
+                        unit_label: user
+                        updated_at: "2026-09-01T19:52:08.820536Z"
+                        updated_by: 13cc0adf-2595-479e-b448-5051c180dddb
+                      id: 64aecd58-e355-4f07-9c3a-56ff6bda6cd8
+                      type: unit_cost
+              schema:
+                $ref: '#/components/schemas/UnitCostResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a unit cost
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 75
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cost_by_tag/active_billing_dimensions:
     get:
       description: |-
