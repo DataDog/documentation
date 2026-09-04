@@ -153,12 +153,13 @@ Ask Bits questions about your system or active incident. Bits has context on Dat
 {{< img src="bits_ai/getting_started/bits_ai_mobile_app_2026.png" alt="View of the Mobile App Home dashboard with Bits AI" style="width:40%;" >}}
 
 ### Slack
-1. [Connect your Datadog account to your Slack workspace][1].
-1. In Slack, use the `/dd connect` command to display a list of accounts to connect to.
-1. In the dropdown, choose the name of your Datadog account.
-1. Authorize additional permissions needed by Bits AI.
+Ask Bits questions, declare incidents, trigger investigations, or make code changes. Bits Chat replies in the message thread so your team can keep the question, context, and answer in one place.
 
-After setup is completed, you can send queries to `@Datadog` in natural language: `@Datadog Are there any issues with example-service's dependencies?`
+1. Select your Slack workspace in [Bits Chat Settings][12].
+2. Click **Connect Slack account** to grant Datadog permission to recognize you across both products.
+3. (Optional) Click **Grant permissions** to your workspace so that Bits chat can read relevant slack conversations.
+
+After setup is complete, you can send queries to `@Datadog` in natural language to channels in your workspace with the Datadog App. 
 
 {{< img src="bits_ai/getting_started/example-slack-query.png" alt="Output of an example service-dependency query in Slack" style="width:60%;">}}
 
@@ -176,3 +177,4 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 [9]: /cloud_cost_management/cloud_cost_skill/
 [10]: https://app.datadoghq.com/ask/usage
 [11]: https://app.datadoghq.com/ask
+[12]: https://app.datadoghq.com/ask/settings
