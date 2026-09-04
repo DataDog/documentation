@@ -19348,6 +19348,10 @@ components:
     CloudWorkloadSecurityAgentRuleAction:
       description: "The action the rule can perform if triggered"
       properties:
+        disabled:
+          description: "Whether the action is disabled"
+          example: false
+          type: boolean
         filter:
           description: "SECL expression used to target the container to apply the action on"
           type: string
@@ -19437,6 +19441,10 @@ components:
         agentConstraint:
           description: "The version of the Agent"
           type: string
+        agent_version:
+          description: "The version constraint of the Datadog Agent the rule applies to"
+          example: ">=7.62"
+          type: string
         blocking:
           description: "The blocking policies that the rule belongs to"
           items:
@@ -19476,6 +19484,11 @@ components:
           description: "Whether the Agent rule is enabled"
           example: true
           type: boolean
+        every:
+          description: "The rate limiting duration of the Agent rule, in nanoseconds"
+          example: 60000000000
+          format: int64
+          type: integer
         expression:
           description: "The SECL expression of the Agent rule"
           example: 'exec.file.name == "sh"'
@@ -19486,6 +19499,10 @@ components:
             description: "A platform filter that the Agent rule is supported on."
             type: string
           type: array
+        group_id:
+          description: "The group of rules the Agent rule belongs to"
+          example: "group_id"
+          type: string
         monitoring:
           description: "The monitoring policies that the rule belongs to"
           items:
