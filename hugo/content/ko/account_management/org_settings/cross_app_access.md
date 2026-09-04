@@ -21,10 +21,6 @@ further_reading:
   text: SAML 싱글 사인온 구성
 title: Cross-App Access
 ---
-{{< callout url="#" btn_hidden="true" header="false">}}
-  Cross-App Access는 미리 보기 상태입니다. Okta는 미리 보기를 제어하고 사용자의 테넌트에서 이를 활성화하며, 이 설정에 필요한 Okta 기능은 아직 일반적으로 제공되지 않습니다. 모든 Datadog 조직은 오늘 Datadog 측에서 Cross-App Access를 활성화할 수 있습니다.
-{{< /callout >}}
-
 ## 개요 {#overview}
 
 Cross-App Access(XAA)를 사용하면 AI Agent가 조직에서 이미 Okta를 통해 승인한 사용자를 대신하여 Datadog API를 호출할 수 있습니다. 이 기능을 사용하지 않으면 모든 사용자가 브라우저 동의 화면을 통해 개별적으로 Agent를 승인해야 합니다. 이 기능을 사용하면 Okta 관리자가 중앙에서 한 번만 액세스 권한을 부여하므로 사용자는 사용자별 동의 단계를 건너뛸 수 있습니다.
@@ -49,7 +45,7 @@ Okta는 에이전트에 ID-JAG(Identity Assertion JWT Authorization Grant)라는
 - 조직에서 Datadog에 대한 SAML 싱글 사인온에 Okta를 사용해야 합니다. Cross-App Access는 기존 SAML 연결을 통해 사용자를 확인하므로 SAML 연결 없이는 작동하지 않습니다. [SAML 싱글 사인온 구성](/account_management/saml/)을 참조하세요.
 - Claude를 사용하는 각 사용자는 Datadog 조직에 존재해야 하며 Okta의 Claude 애플리케이션과 Datadog 애플리케이션 모두에 할당되어 있어야 합니다.
 - Datadog에서 `org_management` 권한을 가지고 있어야 합니다. UI 대신 API를 통해 Cross-App Access를 구성하려면 [개인 액세스 토큰](/account_management/personal-access-tokens/)(PAT)도 필요하며, 예시에서는 `DD_TOKEN`으로 사용됩니다.
-- Okta 테넌트에서 {{< ui >}}AI Agent Identity Assertion{{< /ui >}} 및 {{< ui >}}Agent to Agent Connections{{< /ui >}} Early Access 기능이 활성화되어 있고 Okta Super Administrator 권한이 있어야 합니다.
+- Okta 테넌트에 {{< ui >}}AI Agent Identity Assertion{{< /ui >}} 및 {{< ui >}}Agent to Agent Connections{{< /ui >}} 기능이 활성화되어 있고, Okta Super Administrator 권한이 있습니다.
 
 ## Datadog에서 Cross-App Access 구성 {#configure-cross-app-access-in-datadog}
 
@@ -197,7 +193,7 @@ Datadog에서 허용되지 않는 범위는 토큰이 무엇을 요청하든 절
 
 ## Claude에서 Datadog을 커넥터로 추가 {#add-datadog-as-a-connector-in-claude}
 
-1. Claude에서 프롬프트 하단의 {{< ui >}}+{{< /ui >}} 아이콘을 클릭한 후 {{< ui >}}Add Connector{{< /ui >}}를 클릭합니다.
+1. Claude에서 프롬프트 하단의 {{< ui >}}\+{{< /ui >}} 아이콘을 클릭한 후 {{< ui >}}Add Connector{{< /ui >}}를 클릭합니다.
 2. 디렉터리에서 **Datadog**을 찾아 커넥터를 활성화합니다.
 3. 메시지가 표시되면 로그인 절차를 완료합니다.
 
