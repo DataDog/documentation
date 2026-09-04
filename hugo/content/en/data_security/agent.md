@@ -243,6 +243,16 @@ agent diagnose show-metadata agent-telemetry
 | workloadmeta.pull_errors                    | Number of WorkloadMeta pull errors                                                                                     |
 | appsec_injector.watched_changes             | Number of changes detected by the AppSec injector for watched resources                                                |
 | appsec_injector.sidecar_mutations           | Number of AppSec injector sidecar admission outcomes (pod mutation and deletion)                                       |
+| **CSI Driver**                              |                                                                                                                        |
+| datadog_csi_driver.node_publish_volume_attempts   | Number of volume publish (mount) requests received by the CSI node server, tagged by status and volume type      |
+| datadog_csi_driver.node_unpublish_volume_attempts | Number of volume unpublish (unmount) requests received by the CSI node server, tagged by status                  |
+| datadog_csi_driver.library_resolutions            | Number of attempts to resolve an APM library for a volume, tagged by library and result                          |
+| datadog_csi_driver.library_download_duration_seconds_count | Number of library downloads from a registry (count of the download duration histogram), tagged by library and registry |
+| datadog_csi_driver.library_download_duration_seconds_sum   | Total time spent downloading libraries from a registry, in seconds (sum of the download duration histogram), tagged by library and registry |
+| datadog_csi_driver.library_cleanup                | Number of cleanup attempts for unused cached libraries, tagged by library, status, and strategy                  |
+| datadog_csi_driver.libraries_cached               | Number of library versions currently stored on disk, per library                                                |
+| datadog_csi_driver.libraries_cached_bytes         | Cumulative on-disk size of cached libraries, in bytes, per library                                              |
+| datadog_csi_driver.library_volume_links           | Number of volumes currently linked to a library, per library                                                    |
 | agent_performance.containers_restarts       | Number of container restarts for the Cluster Agent and Cluster Checks Runner pods                                      |
 | agent_performance.containers_terminated     | Number of container terminations for the Cluster Agent and Cluster Checks Runner pods, tagged by reason                |
 | agent_performance.memory_usage              | Total container runtime memory usage, in bytes, for the Cluster Agent and Cluster Checks Runner pods                   |
