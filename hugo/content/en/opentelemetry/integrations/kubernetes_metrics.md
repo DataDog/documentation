@@ -1,5 +1,6 @@
 ---
 title: Kubernetes Metrics
+description: Collect Kubernetes infrastructure metrics and populate Kubernetes Explorer with OpenTelemetry Collectors.
 further_reading:
 - link: "/opentelemetry/setup/"
   tag: "Documentation"
@@ -14,27 +15,34 @@ further_reading:
 
 ## Overview
 
-Collect Kubernetes metrics using the OpenTelemetry Collector to gain comprehensive insights into your cluster's health and performance. This integration uses a combination of OpenTelemetry receivers to gather data, which populates the [Kubernetes - Overview][1] dashboard.
+Collect Kubernetes infrastructure metrics with OpenTelemetry to populate the [Kubernetes - Overview][1] dashboard. The reference configurations also collect resource data for [Kubernetes Explorer][10]. This setup does not install the Datadog Agent or instrument your applications.
 
 {{< img src="/opentelemetry/collector_exporter/kubernetes_metrics.png" alt="The 'Kubernetes - Overview' dashboard, showing metrics for containers, including status and resource usage of your cluster and its containers." style="width:100%;" >}}
 
-This integration requires the [`kube-state-metrics`][8] service and uses a two-collector architecture to gather data.
+The setup uses three components:
 
-The `kube-state-metrics` service is a required component that generates detailed metrics about the state of Kubernetes objects like deployments, nodes, and pods. This architecture uses two separate OpenTelemetry Collectors:
-- A Cluster Collector, deployed as a Kubernetes Deployment, gathers cluster-wide metrics (for example, the total number of deployments).
-- A Node Collector, deployed as a Kubernetes DaemonSet, runs on each node to collect node-specific metrics (for example, CPU and memory usage per node).
+- **[`kube-state-metrics`][8]** generates metrics about Kubernetes objects, such as deployments, nodes, and pods.
+- **A cluster Collector**, running as a single-replica Deployment, collects cluster-wide metrics and resource data for Explorer.
+- **A node Collector**, running as a DaemonSet, collects metrics from each node, such as CPU and memory usage.
 
-This approach ensures that cluster-level metrics are collected only once, preventing data duplication, while node-level metrics are gathered from every node in the cluster.
+The cluster Collector scrapes `kube-state-metrics` with its Prometheus receiver. You do not need to install a Prometheus server.
+
+If you only need Kubernetes Explorer's resource views, follow the [OpenTelemetry setup for Kubernetes Explorer][15] instead.
 
 ## Setup
 
-To collect Kubernetes metrics with OpenTelemetry, you need to deploy `kube-state-metrics` and configure both OpenTelemetry Collectors in your cluster. The reference configurations in this guide also set up the **[Kubernetes Explorer][10]**.
+These steps deploy new Collectors in the `default` namespace. If you already collect Kubernetes metrics, review your existing configuration before deploying additional Collectors to avoid duplicate collection.
 
 ### Prerequisites
 
-* **Helm**: The setup uses Helm to deploy resources. To install Helm, see the [official Helm documentation][2].
-* **Helm chart**: OpenTelemetry Collector [Helm chart][9] v0.156.2 or later.
-* **Collector Image**: This guide uses the `otel/opentelemetry-collector-contrib:0.154.0` image or newer.
+- [Helm][2] and `kubectl`, with permission to deploy workloads and create RBAC resources in the cluster.
+- A [Datadog API key][6] and your [Datadog site][5].
+
+Use OpenTelemetry Collector [Helm chart][9] v0.156.2 or later. The commands below use the `otel/opentelemetry-collector-contrib:0.154.0` image.
+
+The `k8sobjects` receiver used for Explorer can increase Kubernetes API server load. Datadog recommends Kubernetes 1.33 or later and testing on smaller clusters before expanding collection. See [Kubernetes Explorer limitations][12].
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-warning">Kubernetes Explorer with OpenTelemetry is not available for {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
 ### Installation
 
@@ -45,19 +53,27 @@ Add the `prometheus-community` Helm repository and install `kube-state-metrics`:
 ```sh
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
-helm install kube-state-metrics prometheus-community/kube-state-metrics
+helm install kube-state-metrics prometheus-community/kube-state-metrics \
+  --namespace default
 ```
 
-#### 2. Create a Datadog API key secret
+The reference configuration scrapes `kube-state-metrics.default.svc:8080`. If you use a different service name or namespace, update the Prometheus receiver target in `cluster-collector.yaml`.
 
-Create a Kubernetes secret to store your Datadog API key:
+#### 2. Create a Datadog secret
+
+Set your API key and site, then create a secret in the Collectors' namespace:
 
 ```sh
 export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
-kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
+export DD_SITE="{{< region-param key="dd_site" >}}"
+
+kubectl create secret generic datadog-secret \
+  --namespace default \
+  --from-literal="api-key=$DD_API_KEY" \
+  --from-literal="dd-site=$DD_SITE"
 ```
 
-#### 3. Install the OpenTelemetry Collectors
+#### 3. Configure and install the Collectors
 
 1. Add the OpenTelemetry Helm chart repository:
 
@@ -66,37 +82,57 @@ kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
    helm repo update
    ```
 
-2. Download the reference configuration files:
-   - [cluster-collector.yaml][3]
-   - [daemonset-collector.yaml][4]
-
-3. Deploy both Collectors. The Cluster Collector (Deployment) collects cluster-level objects and metrics; the Node Collector (DaemonSet) collects node-level metrics:
+2. Download [cluster-collector.yaml][3] and [daemonset-collector.yaml][4] into the same directory. These Helm values files are maintained in the `opentelemetry-examples` repository:
 
    ```sh
-   # Install the Node Collector (DaemonSet)
+   CONFIG_URL="https://raw.githubusercontent.com/DataDog/opentelemetry-examples/main/guides/kubernetes/configuration"
+   curl -fsSLo cluster-collector.yaml "$CONFIG_URL/cluster-collector.yaml"
+   curl -fsSLo daemonset-collector.yaml "$CONFIG_URL/daemonset-collector.yaml"
+   ```
+
+3. Configure cluster name detection in both files:
+   - For automatic detection, review the `resourcedetection` processor's configuration and permissions for [EKS][14], [AKS][16], or [GKE][17].
+   - If automatic detection is unavailable, uncomment the `resource/add-cluster-name` processor and replace `<YOUR_CLUSTER_NAME>` with the same cluster name in both files. Add `resource/add-cluster-name` after `resourcedetection` in each pipeline's `processors` list that uses `resourcedetection`. Keep the other processors in place.
+
+4. Run the following commands from the directory containing the values files:
+
+   ```sh
+   # Install the node Collector (DaemonSet)
    helm install otel-daemon-collector open-telemetry/opentelemetry-collector \
+     --namespace default \
      -f daemonset-collector.yaml \
      --set image.repository=otel/opentelemetry-collector-contrib \
      --set image.tag=0.154.0
 
-   # Install the Cluster Collector (Deployment)
+   # Install the cluster Collector (Deployment)
    helm install otel-cluster-collector open-telemetry/opentelemetry-collector \
+     --namespace default \
      -f cluster-collector.yaml \
      --set image.repository=otel/opentelemetry-collector-contrib \
      --set image.tag=0.154.0
    ```
 
-## Correlating traces with infrastructure metrics
+### Verify the setup
 
-To correlate your APM traces with Kubernetes infrastructure metrics, Datadog uses [unified service tagging][7]. This requires setting three standard resource attributes on telemetry from both your application and your infrastructure. Datadog automatically maps these OpenTelemetry attributes to the standard Datadog tags (`env`, `service`, and `version`) used for correlation.
+1. Check that the Collector and `kube-state-metrics` pods are running and ready:
 
-The required OpenTelemetry attributes are:
+   ```sh
+   kubectl get pods --namespace default \
+     -l 'app.kubernetes.io/instance in (otel-daemon-collector,otel-cluster-collector,kube-state-metrics)'
+   ```
 
-- `service.name`
-- `service.version`
-- `deployment.environment.name` (formerly `deployment.environment`)
+2. Open the [Kubernetes - Overview][1] dashboard and select your cluster. Check for node resource usage and Kubernetes object metrics.
+3. Open [Kubernetes Explorer][13] and filter by your cluster name. Check that resources such as pods and deployments appear.
 
-This ensures that telemetry from your application is consistently tagged, allowing Datadog to link traces, metrics, and logs to the same service.
+If data is missing, check the Collector logs for export errors. Verify that the secret contains an API key for the selected Datadog site.
+
+## Correlate traces with infrastructure metrics (optional) {#correlating-traces-with-infrastructure-metrics}
+
+For applications that already send traces, use [unified service tagging][7] to correlate application telemetry with infrastructure metrics. Set the same resource attributes on both:
+
+- `service.name` maps to the Datadog `service` tag.
+- `service.version` maps to the Datadog `version` tag.
+- `deployment.environment.name` maps to the Datadog `env` tag.
 
 ### Application configuration
 
@@ -109,12 +145,8 @@ spec:
       env:
         - name: OTEL_SERVICE_NAME
           value: "<SERVICE_NAME>"
-        - name: OTEL_SERVICE_VERSION
-          value: "<SERVICE_VERSION>"
-        - name: OTEL_ENVIRONMENT
-          value: "<ENVIRONMENT>"
         - name: OTEL_RESOURCE_ATTRIBUTES
-          value: "service.name=$(OTEL_SERVICE_NAME),service.version=$(OTEL_SERVICE_VERSION),deployment.environment.name=$(OTEL_ENVIRONMENT)"
+          value: "service.version=<SERVICE_VERSION>,deployment.environment.name=<ENVIRONMENT>"
 ```
 
 ### Infrastructure configuration
@@ -175,8 +207,16 @@ The [count connector][11] generates object-count metrics by counting the number 
 [2]: https://helm.sh/docs/intro/install/
 [3]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/cluster-collector.yaml
 [4]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/daemonset-collector.yaml
+[5]: /getting_started/site/
+[6]: /account_management/api-app-keys/#api-keys
 [7]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#opentelemetry
 [8]: https://github.com/kubernetes/kube-state-metrics
 [9]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/opentelemetry-collector-0.156.2/charts/opentelemetry-collector
 [10]: /containers/monitoring/kubernetes_explorer/
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/countconnector
+[12]: /containers/monitoring/kubernetes_explorer/?tab=opentelemetrycollector#limitations
+[13]: https://app.datadoghq.com/orchestration/overview
+[14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#amazon-eks
+[15]: /containers/monitoring/kubernetes_explorer/?tab=opentelemetrycollector#enable-kubernetes-explorer
+[16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#azure-aks
+[17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#gcp-metadata
