@@ -185,6 +185,7 @@ agent diagnose show-metadata agent-telemetry
 | transactions.success_bytes                  | Successful transaction payload size in bytes                                                                          |
 | transactions.requeued                       | Transaction requeue count                                                                                              |
 | transactions.retries                        | Transaction retry count                                                                                                |
+| transactions.http_errors                    | Count of transaction HTTP errors per HTTP code                                                                         |
 | **Database**                                |                                                                                                                        |
 | oracle.activity_samples_count               | Number of rows fetched in measuring query activity (Number of activity samples collected)                              |
 | oracle.activity_latency                     | Time to retrieve query activity in milliseconds                                                                        |
