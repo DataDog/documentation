@@ -920,8 +920,8 @@ Then, run the [configuration command based on your environment](#install-your-pr
 #### Upgrade a Windows private location
 
 1. Back up your configuration file (`C:\ProgramData\Datadog Synthetics Private Location\config.json`) before upgrading or changing it.
-2. Download and run the latest [worker installer][34] (`datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi`), then follow the prompts.
-3. If the installer prompts you to modify or update your configuration, select your existing file. Leaving the field blank or generating a new configuration replaces your current one.
+2. Download the latest [MSI installer][34], run it, and follow the prompts. If prompted to modify or update your configuration, always use your backed-up file.
+3. If you use the installer's **Modify** option, select your existing configuration file. Leaving the field blank or generating a new configuration replaces your current one.
 4. Confirm that the private location worker service is running and references the correct configuration file.
 
 ### Test your internal endpoint
