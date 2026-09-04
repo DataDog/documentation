@@ -40,16 +40,16 @@ Default rules appear alongside your own rules on the [Findings Automation][2] pa
 1. Under **Rule name**, enter a descriptive name for the rule; for example, "Cloud Infrastructure Anomaly Warnings".
 1. Add your rule criteria into the following fields:
     - **Any of these types**: The types of findings that the rule should check for. Available types include:
+      - Runtime Code Vulnerability
+      - Static Code Vulnerability
+      - Library Vulnerability
+      - Secrets (Code)
+      - Infrastructure as Code
+      - Container Image Vulnerability
+      - Host Vulnerability
       - Misconfiguration
       - Attack Path
       - Identity Risk
-      - Host Vulnerability
-      - Container Image Vulnerability
-      - Library Vulnerability
-      - Static Code Vulnerability
-      - Runtime Code Vulnerability
-      - Infrastructure as Code
-      - Secret
       - API Security
       - Workload Activity
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
