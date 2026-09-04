@@ -22313,6 +22313,23 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Timeseries Anomaly Investigations
+      url: /api/latest/timeseries-anomaly-investigations/
+      identifier: timeseries-anomaly-investigations
+      generated: true
+    - name: Investigate a timeseries anomaly
+      url: /api/latest/timeseries-anomaly-investigations/investigate-a-timeseries-anomaly/
+      identifier: timeseries-anomaly-investigations-investigate-a-timeseries-anomaly
+      parent: timeseries-anomaly-investigations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTimeseriesAnomalyInvestigation
+        unstable:
+          - v2
+        order: 1
     - name: Twilio Integration Accounts
       url: /api/latest/twilio-integration-accounts/
       identifier: twilio-integration-accounts

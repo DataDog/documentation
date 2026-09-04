@@ -7326,6 +7326,12 @@
     "request_description": "",
     "request_schema_description": "The request for a flaky tests search."
   },
+  "CreateTimeseriesAnomalyInvestigation": {
+    "description": "Investigates a metrics timeseries request for its most significant anomaly and returns deterministic findings.\nMetrics queries with or without grouping are supported. This API version accepts exactly one request and returns at most one anomaly.",
+    "summary": "Investigate a timeseries anomaly",
+    "request_description": "Metrics timeseries request to investigate.",
+    "request_schema_description": "Request to investigate a metrics timeseries for anomalies."
+  },
   "GetTraceByID": {
     "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nThis endpoint is rate limited to `60` requests per minute per organization.",
     "summary": "Get a trace by ID"
