@@ -1664,11 +1664,12 @@ datadog:
 **Note**: The native `secretBackend` fields require Datadog Operator v1.29.0+.
 
 ```yaml
-global:
-  secretBackend:
-    type: "k8s.secrets"
-    config:
-      api_server: https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}
+spec:
+  global:
+    secretBackend:
+      type: "k8s.secrets"
+      config:
+        api_server: https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}
 ```
 
 **Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `spec.global.secretBackend.type` and `spec.global.secretBackend.config` fields.
