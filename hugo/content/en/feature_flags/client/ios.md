@@ -99,7 +99,9 @@ After initializing Datadog, enable `Flags` to attach it to the current Datadog i
 {{< code-block lang="swift" >}}
 import DatadogFlags
 
-Flags.enable()
+var flagsConfiguration = Flags.Configuration()
+flagsConfiguration.assignmentRequestTimeout = 1.5
+Flags.enable(with: flagsConfiguration)
 {{< /code-block >}}
 
 You can also pass a configuration object; see [Advanced configuration](#advanced-configuration).
@@ -328,7 +330,9 @@ Datadog.initialize(
     trackingConsent: .granted
 )
 
-Flags.enable()
+var flagsConfiguration = Flags.Configuration()
+flagsConfiguration.assignmentRequestTimeout = 1.5
+Flags.enable(with: flagsConfiguration)
 
 let context = MutableContext(targetingKey: "user-123")
 let provider = DatadogProvider()
@@ -444,8 +448,52 @@ The `Flags.enable()` API accepts optional configuration with options listed belo
 
 {{< code-block lang="swift" >}}
 var config = Flags.Configuration()
+config.assignmentRequestTimeout = 1.5
+config.assignmentRequestRetryCount = 2
 Flags.enable(with: config)
 {{< /code-block >}}
+
+`assignmentRequestTimeout`
+: Timeout in seconds for each flag assignment request, including the complete response-body download. The SDK does not add a timeout by default. Set a positive, finite value to enable the timeout. A value of `0`, a negative value, or a non-finite value disables it. Values greater than `2_147_483.647` seconds are reduced to this maximum.
+
+`assignmentRequestRetryCount`
+: Number of retries after the initial flag assignment request. The default is `0`, so the SDK makes only the initial request unless you opt in to retries. Values outside the range from `0` to `10` are reduced to the nearest bound. Retries cover selected transient network errors, timeouts, HTTP 408, and HTTP 5xx responses. Cancellation, HTTP 429, unknown URL errors, permanent URL errors, and TLS failures are not retried. Retries use randomized exponential backoff capped at 30 seconds. The SDK reads `Retry-After` only for HTTP 503. A valid value up to 30 seconds is a minimum delay before the backoff. A response that requests a longer delay is not retried.
+
+The scalar timeout applies to each attempt. Total duration includes all attempts and all retry delays.
+
+<div class="alert alert-info">Assignment request timeout and retry settings apply only to requests that fetch flag assignments. They do not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
+
+For lower-level transport control, compose an assignment-only fetch implementation:
+
+{{< code-block lang="swift" >}}
+let assignmentFetch = Flags.AssignmentRequestFetch
+    .urlSession()
+    .withTimeout(1.5)
+    .withRetry(2)
+
+var config = Flags.Configuration()
+config.assignmentRequestFetch = assignmentFetch
+Flags.enable(with: config)
+{{< /code-block >}}
+
+The SDK still constructs the URL, body, authentication, and custom headers. A supplied `assignmentRequestFetch` replaces the scalar timeout and retry settings. The SDK accepts at most one completion from the supplied fetch for each request and validates the HTTP response status. The custom transport applies only to assignment requests. The caller retains ownership of a supplied `URLSession` and other custom transport resources. The SDK does not invalidate or close them.
+
+`withTimeout(timeout)`
+: Adds a timeout that includes the complete response-body download. A positive, finite value enables the timeout. A nonpositive or non-finite value leaves the transport unchanged. Values greater than `2_147_483.647` seconds are reduced to this maximum.
+
+`withRetry(retryCount)`
+: Adds SDK-managed retries after the initial attempt. Values outside the range from `0` to `10` are reduced to the nearest bound. The retry policy matches `assignmentRequestRetryCount`. The SDK reads `Retry-After` only for HTTP 503.
+
+In the example, `withTimeout` is inside `withRetry`. Therefore, each attempt has its own 1.5-second timeout. Reverse the wrappers to use one 1.5-second timeout for the initial request and all retries:
+
+{{< code-block lang="swift" >}}
+let assignmentFetch = Flags.AssignmentRequestFetch
+    .urlSession()
+    .withRetry(2)
+    .withTimeout(1.5)
+{{< /code-block >}}
+
+With this reversed order, one timeout covers all attempts and retry delays. With the original order, total duration includes each attempt timeout and all retry delays.
 
 `trackExposures`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. If you only need local evaluation without telemetry, you can disable this option.
