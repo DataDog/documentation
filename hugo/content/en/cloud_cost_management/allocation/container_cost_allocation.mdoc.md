@@ -67,10 +67,12 @@ The following table presents the list of collected features and the minimal Agen
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
 | Azure Persistent Volume Allocation | 7.46.0 | 1.11.0 |
+| Data Transfer Cost Allocation | 7.58.0 | 7.58.0 |
 
 1. Configure the Azure Cost Management integration on the [Cloud Cost Setup page][2].
 1. Install the [Datadog Agent][3] in a Kubernetes environment and ensure that you enable the [Orchestrator Explorer][4] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][10].
+1. To enable data transfer cost allocation, set up [Cloud Network Monitoring][9]. **Note**: Additional charges apply.
 
 **Note**: GPU Container Cost Allocation only supports pod requests in the format `nvidia.com/gpu`.
 
@@ -89,10 +91,12 @@ The following table presents the list of collected features and the minimal Agen
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
 | Local Storage Cost Allocation | 7.27.0 | 1.11.0 |
 | Google Cloud Persistent Volume Allocation | 7.46.0 | 1.11.0 |
+| Data Transfer Cost Allocation | 7.58.0 | 7.58.0 |
 
 1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][2].
 1. Install the [Datadog Agent][3] in a Kubernetes environment and ensure that you enable the [Orchestrator Explorer][4] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][10].
+1. To enable data transfer cost allocation, set up [Cloud Network Monitoring][9]. **Note**: Additional charges apply.
 
 **Note**: GPU Container Cost Allocation only supports pod requests in the format `nvidia.com/gpu`.
 
@@ -178,6 +182,16 @@ For Kubernetes persistent volume storage allocation, Persistent Volumes (PV), Pe
 
 Next, Datadog examines all pods that claimed the volume that day. The cost of the volume is allocated to each pod based on the resources it used and the length of time it ran. These resources include provisioned storage capacity, IOPS, and throughput. The allocated cost is enriched with all of the pod's tags.
 
+### Data transfer
+
+For Kubernetes data transfer allocation, a Kubernetes node is joined with eligible data transfer charges for Azure VMs and VM scale sets. The node's cluster name and node tags are added to the data transfer cost.
+
+Next, Datadog examines the daily [workload resources][16] running on that node. The cost is allocated to the workload level according to network traffic volume and enriched with the workload's tags. Eligible charges include availability zone, virtual network peering, cross-region, global, and internet data transfer. Charges for networking products such as NAT gateways, load balancers, VPN gateways, and Private Link are not allocated.
+
+[Cloud Network Monitoring][9] must be enabled on all Azure hosts for accurate data transfer cost allocation. Costs that cannot be matched to monitored traffic are tagged with `allocated_spend_type:not_monitored`.
+
+Datadog supports data transfer cost allocation using [standard workload resources][16] only. For [custom workload resources][17], data transfer costs can be allocated to the cluster level, but not the node or namespace level.
+
 {% /if %}
 
 <!-- Google -->
@@ -208,6 +222,16 @@ Next, Datadog examines all pods running on that node for the day. For each pod, 
 For Kubernetes persistent volume storage allocation, Persistent Volumes (PV), Persistent Volume Claims (PVC), nodes, and pods are joined with their associated Google Cloud persistent disk costs. All associated PV, PVC, node, and pod tags are added to the disk cost line items.
 
 Next, Datadog examines all pods that claimed the volume that day. The cost of the volume is allocated to each pod based on the resources it used and the length of time it ran. These resources include provisioned storage capacity, IOPS, and throughput. The allocated cost is enriched with all of the pod's tags.
+
+### Data transfer
+
+For Kubernetes data transfer allocation, a Kubernetes node is joined with eligible data transfer charges for Google Compute Engine instances. The node's cluster name and node tags are added to the data transfer cost.
+
+Next, Datadog examines the daily [workload resources][16] running on that node. The cost is allocated to the workload level according to network traffic volume and enriched with the workload's tags. Eligible charges include inter-zone, inter-region, and internet data transfer. Charges for networking products such as Cloud NAT, load balancers, Cloud VPN, Cloud Interconnect, and storage transfer are not allocated.
+
+[Cloud Network Monitoring][9] must be enabled on all Google Cloud hosts for accurate data transfer cost allocation. Costs that cannot be matched to monitored traffic are tagged with `allocated_spend_type:not_monitored`.
+
+Datadog supports data transfer cost allocation using [standard workload resources][16] only. For [custom workload resources][17], data transfer costs can be allocated to the cluster level, but not the node or namespace level.
 
 ### Agentless Kubernetes costs
 
@@ -289,6 +313,13 @@ The cost of an Azure Managed Disk can include storage, provisioned IOPS, and pro
 | Workload idle | Cost of provisioned storage, IOPS, or throughput reserved for a workload but not used. This is the difference between the provisioned capacity allocated to the workload and its usage. |
 | Cluster idle | Cost of provisioned storage, IOPS, or throughput not allocated to any pod that day. |
 
+### Data transfer
+
+| Spend type | Description    |
+| -----------| -----------    |
+| Usage | Cost of data transfer monitored by Cloud Network Monitoring and allocated to workloads. |
+| Not monitored | Cost of eligible data transfer that could not be matched to Cloud Network Monitoring traffic. This cost is not allocated to a workload. |
+
 {% /if %}
 
 <!-- Google -->
@@ -329,6 +360,13 @@ The cost of a Google Cloud persistent disk can include storage, provisioned IOPS
 | Usage | Cost of provisioned storage, IOPS, or throughput used by workloads. Storage usage is based on the maximum storage used that day. IOPS and throughput usage are based on the average operations and bytes transferred that day. |
 | Workload idle | Cost of provisioned storage, IOPS, or throughput reserved for a workload but not used. This is the difference between the provisioned capacity allocated to the workload and its usage. |
 | Cluster idle | Cost of provisioned storage, IOPS, or throughput not allocated to any pod that day. |
+
+### Data transfer
+
+| Spend type | Description    |
+| -----------| -----------    |
+| Usage | Cost of data transfer monitored by Cloud Network Monitoring and allocated to workloads. |
+| Not monitored | Cost of eligible data transfer that could not be matched to Cloud Network Monitoring traffic. This cost is not allocated to a workload. |
 
 {% /if %}
 
@@ -402,7 +440,7 @@ Depending on the cloud provider, certain resources may or may not be available f
 | {% tooltip contents="Storage resources within a cluster, provisioned by administrators or dynamically, that persist data independently of pod life cycles." %} Persistent volumes {% /tooltip %} | {% x/ %} | {% x/ %} | {% x/ %} |
 | {% tooltip contents="Cost of associated fees charged by the cloud provider for managing the cluster, such as fees for managed Kubernetes services or other container orchestration options." %} Managed service fees {% /tooltip %} | {% x/ %} | {% x/ %} | {% x/ %} |
 | ECS costs | {% x/ %} | N/A | N/A |
-| Data transfer costs | {% x/ %} | Limited* | Limited* |
+| Data transfer costs | {% x/ %} | {% x/ %} | {% x/ %} |
 | GPU | {% x/ %} | {% x/ %} | {% x/ %}  |
 | {% tooltip contents="Directly-attached storage resources for a node." %} Local storage {% /tooltip %} |  | Limited* | {% x/ %} |
 
@@ -426,7 +464,7 @@ When the prerequisites are met, the following cost metrics automatically appear.
 
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
-| `azure.cost.amortized.shared.resources.allocated` | Azure VM costs allocated by the CPU & memory used by a pod or container task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated Azure Managed Disk costs. <br> *Based on `azure.cost.amortized`* |
+| `azure.cost.amortized.shared.resources.allocated` | Azure VM costs allocated by the CPU & memory used by a pod or container task, using a 60:40 split for CPU & memory respectively and a 95:3:2 split for GPU, CPU, & memory respectively if a GPU is used by a pod. Also includes allocated Azure Managed Disk and data transfer costs. <br> *Based on `azure.cost.amortized`* |
 
 {% /if %}
 <!-- Google -->
@@ -434,7 +472,7 @@ When the prerequisites are met, the following cost metrics automatically appear.
 
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
-| `gcp.cost.amortized.shared.resources.allocated` | Google Compute Engine costs allocated by the CPU, memory, and local storage used by a pod. When the bill does not provide a specific CPU and memory split, costs use a 60:40 split. GPU hosts use a 95:3:2 split for GPU, CPU, and memory. Also includes allocated Google Cloud persistent disk costs. <br> *Based on `gcp.cost.amortized`* |
+| `gcp.cost.amortized.shared.resources.allocated` | Google Compute Engine costs allocated by the CPU, memory, and local storage used by a pod. When the bill does not provide a specific CPU and memory split, costs use a 60:40 split. GPU hosts use a 95:3:2 split for GPU, CPU, and memory. Also includes allocated Google Cloud persistent disk and data transfer costs. <br> *Based on `gcp.cost.amortized`* |
 
 {% /if %}
 
@@ -526,6 +564,7 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 | `kube_stateful_set` | The name of the Kubernetes StatefulSet. |
 | `pod_name` | The name of any individual pod. |
 | `allocated_resource:data_transfer` | The tracking and allocation of costs associated with data transfer activities used by Azure services or workloads. |
+| `allocated_spend_type:not_monitored` | Identifies eligible data transfer costs that could not be matched to Cloud Network Monitoring traffic. |
 | `allocated_resource:local_storage`         | The tracking and allocation of costs at a host level associated with local storage resources used by Azure services or workloads.                             |
 
 #### Persistent volume
@@ -540,6 +579,19 @@ In addition to Kubernetes pod and node tags, the following out-of-the-box tags a
 | `azure_disk_storage_account_type` | The Azure storage account type for the managed disk. |
 | `allocated_resource:persistent_volume` | Identifies costs allocated from an Azure Managed Disk to a Persistent Volume. |
 
+#### Data transfer
+
+The following out-of-the-box tags are applied to data transfer costs allocated to Kubernetes workloads:
+
+| Out-of-the-box tag | Description |
+| --- | --- |
+| `source_availability_zone` | The availability zone where data transfer originated. |
+| `source_availability_zone_id` | The availability zone ID where data transfer originated. |
+| `source_region` | The region where data transfer originated. |
+| `destination_availability_zone` | The availability zone where data transfer was sent. |
+| `destination_availability_zone_id` | The availability zone ID where data transfer was sent. |
+| `destination_region` | The region where data transfer was sent. |
+
 {% /if %}
 <!-- Google -->
 {% if equals($platform, "google") %}
@@ -552,7 +604,7 @@ In addition to Kubernetes pod and node tags, the following out-of-the-box tags a
 | `kube_deployment` | The name of the Kubernetes Deployment. |
 | `kube_stateful_set` | The name of the Kubernetes StatefulSet. |
 | `pod_name` | The name of any individual pod. |
-| `allocated_spend_type:not_monitored` | The tracking and allocation of [Agentless Kubernetes costs](#agentless-kubernetes-costs) associated with resources used by Google Cloud services or workloads, and the Datadog Agent is not monitoring those resources. |
+| `allocated_spend_type:not_monitored` | Identifies [Agentless Kubernetes costs](#agentless-kubernetes-costs) or eligible data transfer costs that the Datadog Agent and Cloud Network Monitoring are not monitoring. |
 | `allocated_spend_type:local_storage_not_supported` | Identifies local storage costs that cannot be associated with a node's ephemeral-storage capacity. |
 | `allocated_resource:data_transfer` | The tracking and allocation of costs associated with data transfer activities used by Google Cloud services or workloads. |
 | `allocated_resource:gpu` | The tracking and allocation of costs at a host level associated with GPU resources used by Google Cloud services or workloads. |
@@ -569,6 +621,19 @@ In addition to Kubernetes pod and node tags, the following out-of-the-box tags a
 | `volume_mode` | The Volume Mode of the Persistent Volume. |
 | `gcp_disk_type` | The Google Cloud disk type for the persistent disk. |
 | `allocated_resource:persistent_volume` | Identifies costs allocated from a Google Cloud persistent disk to a Persistent Volume. |
+
+#### Data transfer
+
+The following out-of-the-box tags are applied to data transfer costs allocated to Kubernetes workloads:
+
+| Out-of-the-box tag | Description |
+| --- | --- |
+| `source_availability_zone` | The availability zone where data transfer originated. |
+| `source_availability_zone_id` | The availability zone ID where data transfer originated. |
+| `source_region` | The region where data transfer originated. |
+| `destination_availability_zone` | The availability zone where data transfer was sent. |
+| `destination_availability_zone_id` | The availability zone ID where data transfer was sent. |
+| `destination_region` | The region where data transfer was sent. |
 
 {% /if %}
 
