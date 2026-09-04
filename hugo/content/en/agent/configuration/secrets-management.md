@@ -517,7 +517,7 @@ spec:
               - <SHORT_IMAGE>
             instances:
               - [...]
-                 password: "ENC[/DatadogAgent/Production/ParameterKey]"
+                password: "ENC[/DatadogAgent/Production/ParameterKey]"
 
 ```
 
