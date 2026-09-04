@@ -23,6 +23,10 @@ Use [Fleet Automation][3] to roll out and manage Datadog Agent configuration at 
 Remote configuration of Agents in containerized workloads is in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
+{{< callout url="https://www.datadoghq.com/product-preview/modify-tags-fleet-automation/" header="Join the Preview!" >}}
+Managing Datadog Agent tags with Fleet Automation is in Preview. If you're interested in this feature, complete the form to request access.
+{{< /callout >}}
+
 ## Configure multiple Agents
 
 1. In Fleet Automation, open the [Configuration][1] tab and click {{< ui >}}Configure Agents{{< /ui >}}.
