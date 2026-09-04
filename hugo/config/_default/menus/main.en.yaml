@@ -8097,16 +8097,21 @@ menu:
       url: /security/code_security/software_composition_analysis/configuration/
       parent: software_composition_analysis
       weight: 3
+    - name: Supply Chain Firewall (SCFW)
+      identifier: sca_supply_chain_firewall
+      url: /security/code_security/software_composition_analysis/supply_chain_firewall/
+      parent: software_composition_analysis
+      weight: 4
     - name: Library Inventory
       identifier: sca_library_inventory
       url: /security/code_security/software_composition_analysis/library_inventory/
       parent: software_composition_analysis
-      weight: 4
+      weight: 5
     - name: CVE Explorer
       identifier: sca_cve_explorer
       url: /security/code_security/software_composition_analysis/cve_explorer/
       parent: software_composition_analysis
-      weight: 5
+      weight: 6
     - name: Secret Scanning
       identifier: sec_secret_scanning
       url: /security/code_security/secret_scanning/
