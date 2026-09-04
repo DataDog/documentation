@@ -91,7 +91,7 @@ You can also create the policy with the [Datasets API][5]. The `ml_obs` product 
 
 Access is granted by editing the policy's principals. Removing a team or role takes effect on their next request. Deleting the policy removes the restriction entirely, and the project becomes visible again to everyone in the organization with Agent Observability read access.
 
-Users with the `user_access_manage` permission are not subject to restrictions, so verify a restriction with an account that does not hold that permission.
+Access follows grant membership, not permission level. The `user_access_manage` permission lets you author and edit a policy; it does not exempt you from one. An admin who is not in a granted team or role sees the project as not found, exactly as any other user would.
 
 ## Limitations
 
