@@ -1,6 +1,8 @@
 ---
 aliases:
 - /ko/containers/monitoring/autoscaling
+cascade:
+  site_support_id: containers_autoscaling
 description: Datadog 메트릭과 지능형 스케일링 권장 사항을 사용하여 Kubernetes 워크로드 자동 확장
 further_reading:
 - link: /infrastructure/containers/kubernetes_resource_utilization
@@ -24,14 +26,11 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/
   tag: 블로그
   text: Datadog Kubernetes Autoscaling으로 워크로드 규모를 적정화하고 비용 절감
+- link: https://www.datadoghq.com/architecture/kubernetes-workload-autoscaling-with-datadog/
+  tag: 아키텍처 센터
+  text: Datadog을 이용한 Kubernetes 워크로드 자동 확장
 title: Kubernetes Autoscaling
 ---
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-info">
-  이 기능은 Datadog for Government({{< region-param key="dd_datacenter" >}}) 사이트에서는 사용할 수 없습니다.
-</div>
-{{< /site-region >}}
-
 Datadog Kubernetes Autoscaling은 Kubernetes 리소스를 지속적으로 모니터링하여 즉각적인 스케일링 권장 사항과 Kubernetes 워크로드의 다차원 자동 확장 기능을 제공합니다. Datadog 웹 인터페이스 또는 `DatadogPodAutoscaler` 사용자 지정 리소스를 사용하여 자동 확장을 배포할 수 있습니다.
 
 ## 작동 방식 {#how-it-works}
@@ -61,7 +60,7 @@ Datadog은 기존 Datadog Agent에서 수집되는 실시간 및 과거 사용�
    | 앱 내 워크로드 스케일링 권장 사항 | 7.50+ |
    | 실시간 워크로드 스케일링 | 7.66.1+ |
    | Argo Rollout 권장 사항 및 자동 확장 | 7.71+ |
-   | 클러스터 자동 확장([미리보기 신청][10]) | 7.72+ |
+   | 클러스터 자동 확장([미리 보기 신청][10]) | 7.72+ |
    | 인플레이스 수직 포드 크기 조정(옵트인) | 7.78+ |
    | 클러스터 프로필 활성화, 워크로드 레이블 | 7.78+ |
    | 클러스터 프로필 활성화, 네임스페이스 레이블 | 7.79+ |
@@ -78,7 +77,7 @@ Datadog은 기존 Datadog Agent에서 수집되는 실시간 및 과거 사용�
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-1. Datadog Operator v1.16.0 이상을 사용하고 있는지 확인하세요. Datadog Operator를 업그레이드하려면:
+1. Datadog Operator v1.16.0 이상을 사용하고 있는지 확인합니다. Datadog Operator를 업그레이드하려면 다음을 실행하세요.
 
 ```shell
 helm upgrade datadog-operator datadog/datadog-operator
@@ -127,7 +126,7 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-1. Agent 및 Cluster Agent v7.66.1 이상을 사용하고 있는지 확인하세요. `datadog-values.yaml` 구성 파일에 다음 내용을 추가합니다.
+1. Agent 및 Cluster Agent v7.66.1 이상을 사용하고 있는지 확인합니다. `datadog-values.yaml` 구성 파일에 다음 내용을 추가합니다.
 
 ```yaml
 datadog:
@@ -180,8 +179,8 @@ Cloud Cost Management 데이터는 Kubernetes Autoscaling 기능을 향상시키
 [4]: /ko/cloud_cost_management/google_cloud
 {{% /tab %}}
 
-{{% tab "기본" %}}
-Cloud Cost Management가 **활성화되어 있지 않은 경우**, Datadog Kubernetes Autoscaling은 다음 공식과 고정 값을 사용하여 유휴 비용 및 절감 효과 추정치를 표시합니다.
+{{% tab "기본값" %}}
+Cloud Cost Management가 활성화되어 있지 **않은** 경우, Datadog Kubernetes Autoscaling은 다음 공식과 고정 값을 사용하여 유휴 비용 및 절감 효과 추정치를 표시합니다.
 
 **클러스터 유휴 비용**:
 
@@ -237,24 +236,24 @@ _고정 비용 값은 시간이 지남에 따라 조정될 수 있습니다._
 가장 빠르게 시작하는 방법은 Datadog UI의 [Setup 페이지][11]를 사용하는 것입니다. 설정 마법사는 다섯 단계인 클러스터 선택, Agent 및 권한 요구 사항 확인, 설치 방법 선택, 확장 템플릿 선택, 배포를 안내합니다. 마법사에서 사용할 수 있는 템플릿:
 
 - **비용 최적화**: 높은 CPU 사용률 목표, 공격적인 축소, 가장 낮은 최소 복제본 수. 비용에 민감한 상태 비저장형 워크로드에 적합합니다.
-- **균형 최적화**: 중간 수준의 사용률 목표, 균형 잡힌 확장 및 축소, 대부분의 상태 비저장형 워크로드에 적합합니다.
-- **성능 최적화**: 보수적인 사용률 목표, 느린 축소, 더 높은 최소 복제본 수. 상태 저장형 또는 중요한 서비스에 가장 적합합니다.
+- **균형 최적화**: 중간 수준의 사용률 목표, 빠른 확장, 균형 잡힌 축소. 대부분의 상태 비저장형 워크로드에 적합합니다.
+- **성능 최적화**: 보수적인 사용률 목표, 빠른 확장, 느린 축소, 더 높은 최소 복제본 수. 상태 저장형 또는 중요한 서비스에 가장 적합합니다.
 - **사용자 지정**: 위 템플릿 중 하나를 기반으로 시작한 후 CPU 목표, 복제본 수 및 안정화 기간을 직접 조정합니다.
 
 설정 마법사는 단일 워크로드에서 Autoscaling을 시험해 보거나, 권장 사항을 직접 검토하거나, 소규모 워크로드 집합을 온보딩하는 데 적합합니다. (`Workload Scaling Write` 및 `Autoscaling Manage` 권한 필요)
 
 #### 경로 B: GitOps {#path-b-gitops}
 
-`DatadogPodAutoscaler` 사용자 지정 리소스를 정의하여 워크로드를 대상으로 지정한 후, `kubectl apply`, Helm, ArgoCD, Terraform 또는 기타 GitOps 도구 등 현재 사용 중인 Kubernetes 매니페스트 배포 도구를 통해 적용합니다. 매니페스트 작성 방식은 배포 메커니즘과 관계없이 동일합니다. 비용 최적화, 균형 잡힌 확장, 수직 확장 전용 리사이징, 사용자 지정 쿼리 기반 수평 확장을 위한 즉시 수정 가능한 예제를 보려면 아래의 [예제 구성](#example-datadogpodautoscaler-configurations)을 참조하세요.
+`DatadogPodAutoscaler` 사용자 지정 리소스를 정의하여 워크로드를 대상으로 지정한 후, `kubectl apply`, Helm, ArgoCD, Terraform 또는 기타 GitOps 도구 등 현재 사용 중인 Kubernetes 매니페스트 배포 도구를 통해 적용합니다. 매니페스트 작성 방식은 배포 메커니즘과 관계없이 동일합니다. 비용 최적화, 균형 잡힌 확장, 수직 확장 전용 크기 조정, 사용자 지정 쿼리 기반 수평 확장을 위한 즉시 수정 가능한 예시를 보려면 아래의 [구성 예시](#example-datadogpodautoscaler-configurations)를 참조하세요.
 
 도구별 가이드는 다음을 참조하세요.
 
 - [ArgoCD로 DatadogPodAutoscaler 관리][12]
 - [Terraform으로 DatadogPodAutoscaler 관리][13]
 
-### DatadogPodAutoscaler 예제 구성 {#example-datadogpodautoscaler-configurations}
+### DatadogPodAutoscaler 구성 예시 {#example-datadogpodautoscaler-configurations}
 
-다음 예시는 다양한 확장 전략에 대한 일반적인 `DatadogPodAutoscaler` 구성을 보여줍니다. 이를 시작점으로 사용하고 워크로드 요구 사항에 맞게 값을 조정하세요. UI에서 템플릿을 선택하려면 위의 [경로 A](#path-a-datadog-ui-setup-wizard)를 따르세요.
+다음 예시에서는 다양한 확장 전략에 대한 일반적인 `DatadogPodAutoscaler` 구성을 보여줍니다. 이를 시작점으로 사용하고 워크로드 요구 사항에 맞게 값을 조정하세요. UI에서 템플릿을 선택하려면 위의 [경로 A](#path-a-datadog-ui-setup-wizard)를 따르세요.
 
 {{< tabs >}}
 {{% tab "비용 최적화" %}}
@@ -287,7 +286,7 @@ spec:
                 - periodSeconds: 120
                   type: Percent
                   value: 50
-            stabilizationWindowSeconds: 300
+            stabilizationWindowSeconds: 190
         update:
             strategy: Auto
     constraints:
@@ -307,7 +306,7 @@ spec:
 {{% /tab %}}
 {{% tab "균형 최적화" %}}
 
-비용 절감과 가용성 사이에서 균형을 원할 때 이 템플릿을 사용하세요. 대부분의 상태 비저장형 워크로드에 적합한 기본 선택입니다. 이 템플릿의 핵심 설정은 중간 수준의 CPU 사용률 목표(70%)와 보수적인 축소 정책(20분마다 20% 축소), 최소 복제본 수 2개를 조합한 것입니다. 컨트롤러는 용량을 빠르게 추가하지만 제거는 천천히 합니다.
+비용 절감과 가용성 사이에서 균형을 원할 때 이 템플릿을 사용하세요. 대부분의 상태 비저장형 워크로드에 적합한 기본 선택입니다. 이 템플릿의 핵심 설정은 중간 수준의 CPU 사용률 목표(70%)와 보수적인 축소 정책, 최소 복제본 수 2개를 조합한 것입니다. 컨트롤러는 용량을 빠르게 추가하지만 제거는 천천히 합니다.
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -335,7 +334,7 @@ spec:
                 - periodSeconds: 120
                   type: Percent
                   value: 50
-            stabilizationWindowSeconds: 600
+            stabilizationWindowSeconds: 130
         update:
             strategy: Auto
     constraints:
@@ -357,15 +356,15 @@ spec:
 
 워크로드를 수평 확장할 수 없거나 복제본 수를 변경하지 않고 순수한 적정 규모 조정만 수행하려는 경우 이 템플릿을 사용하세요. 대표적인 예는 단일 인스턴스 서비스, 상태 저장형 워크로드, 리더 선출 구성 요소입니다. 이 템플릿의 핵심 설정은 `scaleDown.strategy: Disabled` 및 `scaleUp.strategy: Disabled`이며, 이로 인해 CPU 및 메모리 권장 사항을 적용하는 `update.strategy: Auto`만 남게 됩니다.
 
-기본적으로 컨트롤러는 롤아웃(포드 축출 후 재생성)을 트리거하여 수직 권장 사항을 적용합니다. Cluster Agent **7.78 이상**에서는 **인플레이스 포드 크기 조정**도 지원합니다. 이 기능은 포드를 재시작하지 않고 CPU 및 메모리 요청과 제한을 업데이트합니다. 인플레이스 크기 조정은 옵트인 방식입니다. Cluster Agent에서 `autoscaling.workload.in_place_vertical_scaling.enabled: true`을 설정하거나 환경 변수 `DD_AUTOSCALING_WORKLOAD_IN_PLACE_VERTICAL_SCALING_ENABLED=true`를 설정해야 합니다.
+기본적으로 컨트롤러는 롤아웃(포드 축출 후 재생성)을 트리거하여 수직 권장 사항을 적용합니다. Cluster Agent **7.78 이상**에서는 **인플레이스 포드 크기 조정**도 지원합니다. 이 기능은 포드를 재시작하지 않고 CPU 및 메모리 요청과 제한을 업데이트합니다. 인플레이스 크기 조정은 옵트인 방식입니다. Cluster Agent에서 `autoscaling.workload.in_place_vertical_scaling.enabled: true`를 설정하거나 환경 변수 `DD_AUTOSCALING_WORKLOAD_IN_PLACE_VERTICAL_SCALING_ENABLED=true`를 설정해야 합니다.
 
 또한 클러스터는 `pods/resize` 하위 리소스를 제공해야 합니다. 이 기능은 Kubernetes 1.33 이상에서 기본값이며, 여기서 `InPlacePodVerticalScaling` 기능 게이트는 베타 상태입니다. Kubernetes 1.27~1.32에서는 기능 게이트를 `kube-apiserver` 및 모든 `kubelet`에서 활성화해야 합니다.
 
 두 가지 전제 조건이 모두 충족되면 다음과 같이 동작합니다.
 
-- **기본값**: `applyPolicy.update.strategy: Auto`(기본값)이 설정된 워크로드는 인플레이스 방식으로 크기를 조정합니다.
+- **기본값**: `applyPolicy.update.strategy: Auto`(기본값)가 설정된 워크로드는 인플레이스 방식으로 크기를 조정합니다.
 - **폴백**: kubelet이 크기 조정을 `Infeasible`로 보고하면 컨트롤러는 롤아웃 방식으로 대체 수행합니다.
-- **옵트아웃**: 클러스터 설정과 관계없이 특정 워크로드가 항상 롤아웃 기반 수직 확장을 사용하도록 하려면 해당 워크로드의 `DatadogPodAutoscaler`에 `applyPolicy.update.strategy: TriggerRollout`를 설정하세요.
+- **옵트아웃**: 클러스터 설정과 관계없이 특정 워크로드가 항상 롤아웃 기반 수직 확장을 사용하도록 하려면 해당 워크로드의 `DatadogPodAutoscaler`에 `applyPolicy.update.strategy: TriggerRollout`을 설정하세요.
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -395,7 +394,7 @@ spec:
 {{% /tab %}}
 {{% tab "사용자 지정 쿼리 기반 수평 확장" %}}
 
-CPU 및 메모리가 적절한 확장 신호가 아닐 때 이 템플릿을 사용하세요. 예로는 대기열 적체 깊이에 따라 확장해야 하는 큐 워커, 요청 지연 시간에 따라 확장해야 하는 API 서비스가 포함됩니다. 이 템플릿의 핵심 설정은 `objectives` 블록입니다. 이 블록은 사용률 비율 대신 Datadog 메트릭 쿼리와 `AbsoluteValue` 목표값을 참조합니다. 예제 쿼리를 워크로드에 맞는 쿼리로 교체하세요.
+CPU 및 메모리가 적절한 확장 신호가 아닐 때 이 템플릿을 사용하세요. 예로는 백로그 깊이에 따라 확장해야 하는 대기열 워커, 요청 지연 시간에 따라 확장해야 하는 API 서비스가 포함됩니다. 이 템플릿의 핵심 설정은 `objectives` 블록입니다. 이 블록은 사용률 비율 대신 Datadog 메트릭 쿼리와 `AbsoluteValue` 목표값을 참조합니다. 예시 쿼리를 워크로드에 맞는 쿼리로 교체하세요.
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -422,7 +421,7 @@ spec:
                 - periodSeconds: 120
                   type: Percent
                   value: 50
-            stabilizationWindowSeconds: 600
+            stabilizationWindowSeconds: 130
         # Vertical updates disabled — horizontal only
         update:
             strategy: Disabled
@@ -471,15 +470,15 @@ spec:
 
 클러스터 프로필과 워크로드 수준 레이블 기능은 Datadog Cluster Agent 7.78.0 이상이 필요합니다. 네임스페이스 수준 활성화(네임스페이스에 레이블을 지정하여 해당 네임스페이스 내의 모든 지원 워크로드를 프로필에 포함)는 Datadog Cluster Agent 7.79.0 이상이 필요합니다. 이보다 이전 버전의 Cluster Agent는 프로필 레이블을 무시합니다.
 
-#### 기본 제공 프로필 {#built-in-profiles}
+#### 내장 프로필 {#built-in-profiles}
 
-Cluster Agent에는 세 가지 기본 제공 프로필이 포함되어 있으며, 시작 시 자동으로 다시 생성됩니다. 따라서 사용자가 CRD YAML을 별도로 관리할 필요가 없습니다. 프로필 이름은 예약되어 있습니다.
+Cluster Agent에는 세 가지 내장 프로필이 포함되어 있으며, 시작 시 자동으로 다시 생성됩니다. 따라서 사용자가 CRD YAML을 별도로 관리할 필요가 없습니다. 프로필 이름은 예약되어 있습니다.
 
 | 프로필 | CPU 목표 | 최소 복제본 수 | 동작 특성 |
 |---|---|---|---|
-| `datadog-optimize-cost` | 85% | 1 | 비용에 민감한 상태 비저장형 워크로드. 빠른 확장 및 축소(5분 안정화 기간, 2분마다 50% 단계 조정). |
-| `datadog-optimize-balance` | 70% | 2 | 대부분의 상태 비저장형 워크로드에 대한 기본 설정. 균형 잡힌 10분 안정화 기간, 보수적인 축소 정책(20분마다 20% 단계 조정). |
-| `datadog-optimize-performance` | 60% | 3 | 상태 저장형 워크로드 또는 지연 시간에 민감한 워크로드. 매우 보수적인 축소 정책(15분 안정화 기간, 30분마다 10% 단계 조정). |
+| `datadog-optimize-cost` | 85% | 1 | 높은 CPU 사용률 목표, 공격적인 축소, 가장 낮은 최소 복제본 수. 비용에 민감한 상태 비저장형 워크로드에 적합합니다. |
+| `datadog-optimize-balance` | 70% | 2 | 중간 수준의 사용률 목표, 빠른 확장, 균형 잡힌 축소. 대부분의 상태 비저장형 워크로드에 적합합니다. |
+| `datadog-optimize-performance` | 60% | 3 | 보수적인 사용률 목표, 빠른 확장, 느린 축소, 더 높은 최소 복제본 수. 상태 저장형 또는 중요한 서비스에 가장 적합합니다. |
 
 단일 워크로드에서 프로필을 활성화하려면 워크로드의 `metadata.labels`에 레이블을 추가하세요.
 
@@ -508,7 +507,7 @@ metadata:
 
 #### 사용자 지정 프로필 {#custom-profiles}
 
-기본 제공 프로필 중 어느 것도 원하는 확장 정책과 일치하지 않는 경우 `DatadogPodAutoscalerClusterProfile`을 작성하세요. 프로필은 클러스터 범위 리소스이므로 `--namespace` 플래그 없이 적용하거나 구성 저장소의 클러스터 수준 계층에 배치해야 합니다.
+내장 프로필 중 어느 것도 원하는 확장 정책과 일치하지 않는 경우 `DatadogPodAutoscalerClusterProfile`을 작성하세요. 프로필은 클러스터 범위 리소스이므로 `--namespace` 플래그 없이 적용하거나 구성 리포지토리의 클러스터 수준 계층에 배치해야 합니다.
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -520,7 +519,7 @@ spec:
     applyPolicy:
       mode: Apply
       scaleUp:
-        stabilizationWindowSeconds: 300
+        stabilizationWindowSeconds: 190
         rules:
           - type: Percent
             value: 50
@@ -550,14 +549,14 @@ metadata:
     autoscaling.datadoghq.com/profile: cost-optimized-strict-floor
 ```
 
-템플릿 본문은 `DatadogPodAutoscaler` 사양에서 사용할 수 있는 필드를 모두 지원하지만 `targetRef`는 제외됩니다(각 워크로드에 대해 Cluster Agent가 자동으로 채워 넣음). `spec.template` 아래에 사용할 수 있는 전체 필드 목록은 앞서 소개한 [예제 구성](#example-datadogpodautoscaler-configurations)을 참조하세요.
+템플릿 본문은 `DatadogPodAutoscaler` 사양에서 사용할 수 있는 필드를 모두 지원하지만 `targetRef`는 제외됩니다(각 워크로드에 대해 Cluster Agent가 자동으로 채워 넣음). `spec.template` 아래에 사용할 수 있는 전체 필드 목록은 앞서 소개한 [구성 예시](#example-datadogpodautoscaler-configurations)를 참조하세요.
 
 #### 활성화 우선순위 {#activation-precedence}
 
 Cluster Agent 7.79.0 이상에서는 네임스페이스 수준 활성화, `excluded` 옵트아웃 및 이들 간의 우선순위 규칙이 추가되었습니다. Cluster Agent 7.78.0에서는 워크로드 수준 레이블만 읽기 때문에 네임스페이스 또는 `excluded` 값과 관련된 아래 규칙은 적용되지 않습니다.
 
 - **워크로드 레이블이 네임스페이스 레이블보다 우선합니다.** 네임스페이스가 `autoscaling.datadoghq.com/profile=ns-profile`로 레이블 지정되고 해당 내부 워크로드가 `autoscaling.datadoghq.com/profile=workload-profile`로 레이블 지정된 경우, 해당 워크로드는 `workload-profile`을 사용합니다.
-- **`excluded`을 사용하여 제외할 수 있습니다.** 네임스페이스에 레이블이 지정되어 있을 때 특정 워크로드를 제외하려면 해당 워크로드에 `autoscaling.datadoghq.com/profile: excluded`를 설정하세요. 이는 자동 확장이 적용된 네임스페이스 내에 존재하는 상태 저장형 워크로드 또는 중요한 워크로드에 유용합니다.
+- **`excluded`를 사용하여 제외할 수 있습니다.** 네임스페이스에 레이블이 지정되어 있을 때 특정 워크로드를 제외하려면 해당 워크로드에 `autoscaling.datadoghq.com/profile: excluded`를 설정하세요. 다른 상황에서는 옵트인되는 네임스페이스 내의 상태 저장형 또는 중요한 워크로드에 유용합니다.
 
   ```yaml
   apiVersion: apps/v1
@@ -586,7 +585,7 @@ Autoscaling을 활성화하지 않고 Datadog의 권장 사항만 사용하려�
 
 - **스케일링 템플릿 변경** 워크로드의 `DatadogPodAutoscaler` 사양(CPU 목표, 복제본 범위, 확장 및 축소 규칙)을 직접 편집하거나 [Workload Scaling 목록 보기][8]에서 다른 템플릿을 선택할 수 있습니다. 변경 사항은 다음 조정 시 적용됩니다.
 - **리소스를 삭제하지 않고 Autoscaling 일시 중지.** `applyPolicy.mode: Preview`를 설정하면 `.status`에서 권장 사항은 계속 표시되지만 컨트롤러가 이를 적용하지 않게 됩니다. 이는 평가 단계에서 HPA 또는 VPA와 함께 사용할 때 유용합니다.
-- **배포 상태 모니터링.** Workload Scaling 목록 보기에서는 각 워크로드에 대한 권장 사항의 현재 상태, 마지막으로 적용된 작업 및 조정 오류를 확인할 수 있습니다.
+- **배포 상태 모니터링.** Workload Scaling 목록 보기에서는 각 워크로드에 대한 권장 사항의 현재 상태, 마지막으로 적용된 액션 및 조정 오류를 확인할 수 있습니다.
 - **깔끔하게 Autoscaling 제거.** Autoscaling을 중지하려면 `DatadogPodAutoscaler` 리소스를 삭제하세요. 기존 포드 리소스는 마지막으로 적용된 값을 유지하며, 다음 롤아웃 시 워크로드는 상위 컨트롤러(Deployment, StatefulSet 등)에 정의된 설정으로 되돌아갑니다.
 
 ## 참조 {#reference}

@@ -6277,6 +6277,58 @@ menu:
           - GetUsageSummaryAvailableFields
         unstable: []
         order: 13
+    - name: Update a usage quota
+      url: /api/latest/usage-metering/update-a-usage-quota/
+      identifier: usage-metering-update-a-usage-quota
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateQuota
+        unstable:
+          - v2
+        order: 16
+    - name: Delete a usage quota
+      url: /api/latest/usage-metering/delete-a-usage-quota/
+      identifier: usage-metering-delete-a-usage-quota
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteQuota
+        unstable:
+          - v2
+        order: 17
+    - name: Create or update usage quotas
+      url: /api/latest/usage-metering/create-or-update-usage-quotas/
+      identifier: usage-metering-create-or-update-usage-quotas
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateQuotas
+        unstable:
+          - v2
+        order: 15
+    - name: List usage quotas
+      url: /api/latest/usage-metering/list-usage-quotas/
+      identifier: usage-metering-list-usage-quotas
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListQuotas
+        unstable:
+          - v2
+        order: 14
     - name: Get projected cost across your account
       url: /api/latest/usage-metering/get-projected-cost-across-your-account/
       identifier: usage-metering-get-projected-cost-across-your-account
@@ -8428,6 +8480,19 @@ menu:
         unstable:
           - v2
         order: 28
+    - name: Get an annotated queue interaction
+      url: /api/latest/agent-observability/get-an-annotated-queue-interaction/
+      identifier: agent-observability-get-an-annotated-queue-interaction
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsAnnotatedInteraction
+        unstable:
+          - v2
+        order: 73
     - name: Get annotated queue interactions
       url: /api/latest/agent-observability/get-annotated-queue-interactions/
       identifier: agent-observability-get-annotated-queue-interactions
@@ -17862,6 +17927,23 @@ menu:
           - SubmitProductAnalyticsEvent
         unstable: []
         order: 1
+    - name: Product Catalog
+      url: /api/latest/product-catalog/
+      identifier: product-catalog
+      generated: true
+    - name: List SKUs
+      url: /api/latest/product-catalog/list-skus/
+      identifier: product-catalog-list-skus
+      parent: product-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListProductCatalogSKUs
+        unstable:
+          - v2
+        order: 1
     - name: RUM
       url: /api/latest/rum/
       identifier: rum
@@ -21629,85 +21711,85 @@ menu:
           - UpsertSyncConfig
         unstable: []
         order: 1
-    - name: Tag Policies
-      url: /api/latest/tag-policies/
-      identifier: tag-policies
+    - name: Tag Rules
+      url: /api/latest/tag-rules/
+      identifier: tag-rules
       generated: true
-    - name: Get a tag policy compliance score
-      url: /api/latest/tag-policies/get-a-tag-policy-compliance-score/
-      identifier: tag-policies-get-a-tag-policy-compliance-score
-      parent: tag-policies
+    - name: Get a tag rule compliance score
+      url: /api/latest/tag-rules/get-a-tag-rule-compliance-score/
+      identifier: tag-rules-get-a-tag-rule-compliance-score
+      parent: tag-rules
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - GetTagPolicyScore
+          - GetTagRuleScore
         unstable:
           - v2
         order: 6
-    - name: Update a tag policy
-      url: /api/latest/tag-policies/update-a-tag-policy/
-      identifier: tag-policies-update-a-tag-policy
-      parent: tag-policies
+    - name: Update a tag rule
+      url: /api/latest/tag-rules/update-a-tag-rule/
+      identifier: tag-rules-update-a-tag-rule
+      parent: tag-rules
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - UpdateTagPolicy
+          - UpdateTagRule
         unstable:
           - v2
         order: 4
-    - name: Get a tag policy
-      url: /api/latest/tag-policies/get-a-tag-policy/
-      identifier: tag-policies-get-a-tag-policy
-      parent: tag-policies
+    - name: Get a tag rule
+      url: /api/latest/tag-rules/get-a-tag-rule/
+      identifier: tag-rules-get-a-tag-rule
+      parent: tag-rules
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - GetTagPolicy
+          - GetTagRule
         unstable:
           - v2
         order: 3
-    - name: Delete a tag policy
-      url: /api/latest/tag-policies/delete-a-tag-policy/
-      identifier: tag-policies-delete-a-tag-policy
-      parent: tag-policies
+    - name: Delete a tag rule
+      url: /api/latest/tag-rules/delete-a-tag-rule/
+      identifier: tag-rules-delete-a-tag-rule
+      parent: tag-rules
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - DeleteTagPolicy
+          - DeleteTagRule
         unstable:
           - v2
         order: 5
-    - name: Create a tag policy
-      url: /api/latest/tag-policies/create-a-tag-policy/
-      identifier: tag-policies-create-a-tag-policy
-      parent: tag-policies
+    - name: Create a tag rule
+      url: /api/latest/tag-rules/create-a-tag-rule/
+      identifier: tag-rules-create-a-tag-rule
+      parent: tag-rules
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - CreateTagPolicy
+          - CreateTagRule
         unstable:
           - v2
         order: 2
-    - name: List tag policies
-      url: /api/latest/tag-policies/list-tag-policies/
-      identifier: tag-policies-list-tag-policies
-      parent: tag-policies
+    - name: List tag rules
+      url: /api/latest/tag-rules/list-tag-rules/
+      identifier: tag-rules-list-tag-rules
+      parent: tag-rules
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - ListTagPolicies
+          - ListTagRules
         unstable:
           - v2
         order: 1
@@ -22214,6 +22296,23 @@ menu:
           - UpdateFlakyTestsManagementPolicies
         unstable: []
         order: 7
+    - name: Threat Intelligence
+      url: /api/latest/threat-intelligence/
+      identifier: threat-intelligence
+      generated: true
+    - name: Ingest STIX threat intelligence
+      url: /api/latest/threat-intelligence/ingest-stix-threat-intelligence/
+      identifier: threat-intelligence-ingest-stix-threat-intelligence
+      parent: threat-intelligence
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddSTIXThreatIntel
+        unstable:
+          - v2
+        order: 1
     - name: Twilio Integration Accounts
       url: /api/latest/twilio-integration-accounts/
       identifier: twilio-integration-accounts

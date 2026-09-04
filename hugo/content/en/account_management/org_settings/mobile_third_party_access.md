@@ -49,17 +49,26 @@ Revoking a user's OAuth access to an application removes all access to that appl
 
 ### Application Scope Management
 
-Enable Application Scope Management to modify the allowed scopes for an application. Adding or removing a scope affects access to this application for all users in your organization. Disabling a scope revokes any existing authorizations for applications that have the scope granted.
+Enable Application Scope Management to modify the allowed scopes for an application.
 
-Only MCP applications support Application Scope Management.
+Adding or removing a scope affects access to the application for all users in your organization. Disabling a scope revokes existing authorizations that include that scope. Affected users must re-authorize the application to regain access with the remaining allowed scopes. Enabling a scope does not add it to existing authorizations. Users must re-authorize the application to grant the newly allowed scope.
+
+Use {{< ui >}}Automatically allow new scopes{{< /ui >}} to choose how Datadog handles scopes that the application starts requesting after you save the configuration:
+
+- When selected, Datadog allows newly requested scopes automatically. Scopes that you explicitly disable remain blocked.
+- When cleared, Datadog blocks newly requested scopes until an administrator allows them.
+
+For the Datadog Mobile App, required scopes are always allowed and cannot be disabled.
 
 1. On the {{< ui >}}Mobile and Third-Party Access{{< /ui >}} page, click an application to open its detail view.
 
 2. Select the {{< ui >}}Scopes{{< /ui >}} tab and use the {{< ui >}}Allowed{{< /ui >}} checkbox for each scope to control whether to grant the application that scope.
 
-3. Click {{< ui >}}Enable{{< /ui >}} to save the scope configuration.
+3. Select or clear {{< ui >}}Automatically allow new scopes{{< /ui >}} to choose whether Datadog automatically allows new scopes that the application requests after you save.
 
-{{< img src="account_management/mobile_third_party_access/scope-restrictions-enable.png" alt="Application Scope Management view with Enable and Restore to Full Access buttons" style="width:100%;">}}
+4. Click {{< ui >}}Enable{{< /ui >}} or {{< ui >}}Save{{< /ui >}} to save the scope configuration.
+
+{{< img src="account_management/mobile_third_party_access/scope-restrictions-enable-2.png" alt="Application Scope Management view showing Automatically allow new scopes and allowed scope controls" style="width:100%;">}}
 
 ## Further Reading
 
