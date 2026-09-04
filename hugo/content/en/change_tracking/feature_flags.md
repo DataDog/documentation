@@ -11,6 +11,9 @@ further_reading:
   - link: "/integrations/launchdarkly/#feature-flag-tracking-integration/"
     tag: "Documentation"
     text: "LaunchDarkly"
+  - link: "/dashboards/change_overlays/"
+    tag: "Documentation"
+    text: "Change Overlays"
 ---
 
 ## Overview
@@ -125,6 +128,46 @@ Example request:
 }
 ```
 
+## Query feature flag change events
+
+Feature flag changes are indexed as Change Tracking events, so you can query them from the [Events Explorer][9], the [Events API][3], or the Change Tracking timeline search bar.
+
+### Events Explorer
+
+In the [Events Explorer][9], filter to feature flag changes with the following query:
+
+```
+category:change @changed_resource.type:feature_flag
+```
+
+To narrow results to a specific service, add `@impacted_resources.name:<SERVICE_NAME>`. For example:
+
+```
+category:change @changed_resource.type:feature_flag @impacted_resources.name:payments_api
+```
+
+### Events API
+
+Use the [Search Events API][3] with the same filter query to retrieve feature flag change events programmatically:
+
+```
+category:change @changed_resource.type:feature_flag @impacted_resources.name:payments_api
+```
+
+### Change Tracking timeline
+
+Feature flag changes also appear alongside other change types in the Change Tracking timeline on the [monitor status page][10], [service page][11], and [dashboards][12]. Use the timeline's search bar to filter to a specific service.
+
+## View feature flag changes as overlays
+
+Feature flag changes are a type of Change Tracking event, so they appear automatically anywhere Change Tracking overlays are supported:
+
+- **Dashboards**: Click {{< ui >}}Show Overlays{{< /ui >}} on a dashboard with timeseries widgets to plot flag changes alongside your metrics and correlate them with performance issues. See [Change Overlays][13].
+- **Monitor status pages**: Flag changes tied to a monitor's service, including RUM and APM monitors, appear in the change timeline at the top of the [monitor status page][10], so you can correlate an alert with a recent flag change.
+- **Service pages**: Flag changes appear in the {{< ui >}}Recent Changes{{< /ui >}} section of the {{< ui >}}Service Summary{{< /ui >}} on the [service page][11], alongside deployments and other change types.
+
+For flag changes to appear on these pages, tag the change event's `impacted_resources` with the affected service, as described in [Track feature flags](#track-feature-flags). For the monitor status page, the monitor's query, group, or `service` tag must also match that service.
+
 ## Automatically detect affected services
 
 In addition to tracking feature flag configuration changes through the LaunchDarkly integration or the Events API, Datadog can automatically detect which services evaluate a flag by using APM traces or metrics. This provides real-time visibility into flag usage across your system, especially when the same flag is evaluated by multiple services.
@@ -214,3 +257,8 @@ To toggle feature flags on or off from inside Datadog:
 [6]: https://app.datadoghq.com/actions/connections
 [7]: https://app.datadoghq.com/software
 [8]: /feature_flags/
+[9]: /events/explorer/
+[10]: /monitors/status/
+[11]: /tracing/services/service_page/
+[12]: /dashboards/
+[13]: /dashboards/change_overlays/
