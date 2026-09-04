@@ -23,7 +23,7 @@ Skills work with [Bits Chat][1], [Bits Agent Builder][2], the Datadog app for Sl
 
 ## Create a skill
 
-Create a skill in the Skills Library or by asking Bits Chat.
+Create a skill directly in the Skills Library, or ask Bits Chat to create one for you.
 
 ### Create a skill in the Skills Library
 
