@@ -96,6 +96,12 @@ If the Worker is not starting, Worker logs are not sent to Datadog and are not v
     ```
     An example of `<pod-name>` is `opw-observability-pipelines-worker-0`.
 
+### Multi-attach error when using persistence on Kubernetes
+
+If you enabled [disk buffering][24] for destinations and see a Worker pod stuck in `Pending` with a volume multi-attach error after Kubernetes reschedules it to a new node, this is expected. The error occurs because the persistent volume from the previous node hasn't finished detaching. The pod recovers on its own, usually within a few minutes, and this doesn't cause data loss.
+
+Datadog recommends keeping the Worker StatefulSet's default `podManagementPolicy: Parallel` setting even when you see this error. Switching to `OrderedReady` reduces how often the error appears. But it blocks the StatefulSet from scaling up while terminating replicas finish their graceful shutdown, which slows your pipeline's response to a burst of events.
+
 ### Certificate verify failed
 
 If you see an error with `certificate verify failed` and `self-signed certificate in certificate chain`, see [TLS certificates][16]. Observability Pipelines does not accept self-signed certificates because they are not secure.
@@ -213,3 +219,4 @@ If your log timestamps are in string format and your Databricks table has a time
 [21]: /observability_pipelines/configuration/install_the_worker/#add-domains-to-firewall-allowlist
 [22]: /observability_pipelines/destinations/databricks#convert-string-timestamps-to-timestamp-format
 [23]: /observability_pipelines/processors/generate_metrics/#convert-string-timestamp-to-timestamp-format
+[24]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/#destination-buffers
