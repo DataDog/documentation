@@ -1,0 +1,205 @@
+---
+title: RUM Remote Configuration
+description: Configure RUM SDK settings remotely for Browser, iOS, and Android applications.
+further_reading:
+- link: '/real_user_monitoring/'
+  tag: Documentation
+  text: Real User Monitoring
+---
+
+## Overview
+
+As your application evolves, you may need to adjust the data that the RUM SDK collects and its collection frequency. RUM remote configuration lets you update supported Browser, iOS, and Android SDK settings from Datadog without deploying a new version of your application.
+
+<!-- SCREENSHOT TO BE UPDATED-->
+
+{{< img src="/real_user_monitoring/remote_configuration/remote-configuration-example.png" alt="View of remote configuration for a web application." >}}
+
+## Prerequisites
+
+Remote configuration requires the following RUM SDK versions:
+
+<!-- EXACT SDK VERSION TO BE UPDATED -->
+- Browser SDK version 7.6.0+
+- iOS SDK version 3.14.0+
+- Android SDK version 3.12.0+
+
+## How it works
+
+Each RUM application has a remote configuration ID that the SDK uses to retrieve its remote settings.
+
+When the SDK initializes, it applies cached remote settings. If no cached settings are available, it uses the settings defined in your application. The SDK checks for updates in the background and stores changes for the next initialization. If the check fails, the SDK retains its existing cache or continues to use its local settings. The check does not delay SDK initialization or interrupt RUM event collection.
+
+<div class="alert alert-danger">Published remote settings override the corresponding settings in your application. Settings that you do not enable remotely continue to use their local values. Enable only the settings that you want to manage from Datadog.</div>
+
+A remote configuration applies to all users and sessions initialized with its ID. You cannot target individual users or sessions. If you change the ID, the SDK treats it as a new configuration and does not use settings cached under the previous ID.
+
+<div class="alert alert-warning">The SDK retrieves remote configuration settings from a public CDN endpoint. Do not include secrets or personal information in configuration values.</div>
+
+## Permissions
+
+Remote configuration uses the same permissions as RUM applications. To enable, edit, or publish a configuration, you need the `RUM Apps Write` permission. For more information, see [Real User Monitoring permissions][1].
+
+## Setup
+
+To configure remote settings for an application:
+
+1. Install a supported RUM SDK in a new application, or update the SDK in an existing application.
+2. Navigate to {{< ui >}}RUM{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}, select an application, and click {{< ui >}}SDK Configuration{{< /ui >}}.
+3. Enable remote configuration to generate a remote configuration ID.
+   **Note**: Datadog saves the configuration as a draft, so its values do not override your existing SDK settings before you publish it.
+4. Add the remote configuration ID to your SDK initialization.
+5. Update the settings as described in the [Change SDK settings with remote configuration](#change-sdk-settings-with-remote-configuration) section.
+6. Publish the configuration to apply its enabled settings.
+
+<div class="alert alert-info">If your network, proxy, or Content Security Policy uses an allowlist, add <code>*.browser-intake-&lt;DC_REGION&gt;-datadoghq.com</code> for your application. This entry covers both RUM data intake and the SDK's remote configuration requests, which use the <code>sdk-configuration.</code> subdomain.</div>
+
+## Change SDK settings with remote configuration
+
+Remote configuration does not override any SDK settings by default. To manage a setting remotely, explicitly enable its override in Datadog, then configure its value. Settings without an enabled override continue to use the values configured in the SDK.
+
+1. Enable the override for a setting that you want to manage remotely. Choose from the [settings available for your platform](#configurable-settings).
+
+   <div class="alert alert-danger">Certain settings require corresponding module imports in the iOS and Android SDKs. If your application does not import these modules, remote configuration does not work for Session Replay, distributed tracing, or profiling.</div>
+
+2. Configure the setting by selecting a state, changing its sampling rate, or adding data.
+3. Save your changes.
+
+## Configurable settings
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+**Sampling rates**
+
+| UI label | Parameter name |
+|----------|----------------|
+| Session Replay sample rate | `rum.sessionReplaySampleRate` |
+| Trace sample rate | `rum.traceSampleRate` |
+| Trace context injection | `rum.traceContextInjection` |
+| Profiling sample rate | `profiling.sampleRate` |
+
+**Privacy**
+
+| UI label | Parameter name |
+|----------|----------------|
+| Default privacy level | `rum.defaultPrivacyLevel` |
+| Privacy for action names | `rum.enablePrivacyForActionName` |
+
+**Event tracking**
+
+| UI label | Parameter name |
+|----------|----------------|
+| Track anonymous users | `rum.trackAnonymousUser` |
+| Track user interactions | `rum.trackUserInteractions` |
+| Track resources | `rum.trackResources` |
+| Track long tasks | `rum.trackLongTasks` |
+| Track sessions across subdomains | `rum.trackSessionAcrossSubdomains` |
+| Forward errors to logs | `logs.forwardErrorsToLogs` |
+| Forward console logs | `logs.forwardConsoleLogs` |
+| Forward reports | `logs.forwardReports` |
+
+**App attributes**
+
+| UI label | Parameter name |
+|----------|----------------|
+| Action name attribute | `rum.actionNameAttribute` |
+| Allowed tracing URLs | `rum.allowedTracingUrls` |
+| Allowed tracking origins | `rum.allowedTrackingOrigins` |
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+**Sampling rates**
+
+| UI label | Parameter name |
+|----------|----------------|
+| Session Replay sample rate | `sessionReplay.sampleRate` |
+| Continuous profiling sample rate | `profiling.continuousSampleRate` |
+| App launch profiling sample rate | `profiling.applicationLaunchSampleRate` |
+| Trace sample rate | `trace.sampleRate` |
+
+**Privacy**
+
+| UI label | Parameter name |
+|----------|----------------|
+| Text and input privacy | `sessionReplay.textAndInputPrivacy` |
+| Image privacy | `sessionReplay.imagePrivacy` |
+| Touch privacy | `sessionReplay.touchPrivacy` |
+
+**Event tracking**
+
+| UI label | Parameter name |
+|----------|----------------|
+| Track anonymous users | `rum.trackAnonymousUser` |
+| Track user interactions | `rum.trackUserInteractions` |
+| Track resources | `rum.trackResources` |
+| Track background events | `rum.trackBackgroundEvents` |
+| Track frustration signals | `rum.trackFrustrations` |
+| Track long tasks | `rum.longTask.enabled` |
+| Long task threshold | `rum.longTask.threshold` |
+| Vitals update frequency | `rum.vitalsUpdateFrequency` |
+| Track slow frames | `rum.trackSlowFrames` |
+| Track app hangs | `rum.appHang.enabled` |
+| App hang threshold | `rum.appHang.threshold` |
+| Track watchdog terminations | `rum.trackWatchdogTerminations` |
+| Track memory warnings | `rum.trackMemoryWarnings` |
+
+**App attributes**
+
+| UI label | Parameter name |
+|----------|----------------|
+| Trace context injection | `trace.traceContextInjection` |
+| Allowed tracing URLs | `trace.tracedHosts` |
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+**Sampling rates**
+
+| UI label | Parameter name |
+|----------|----------------|
+| Profiling sample rate | `rum.profilingSampleRate` |
+| Session Replay sample rate | `sessionReplay.sampleRate` |
+| Continuous profiling sample rate | `profiling.continuousSampleRate` |
+| App launch profiling sample rate | `profiling.applicationLaunchSampleRate` |
+| Trace sample rate | `trace.sampleRate` |
+
+**Privacy**
+
+| UI label | Parameter name |
+|----------|----------------|
+| Text and input privacy | `sessionReplay.textAndInputPrivacy` |
+| Image privacy | `sessionReplay.imagePrivacy` |
+| Touch privacy | `sessionReplay.touchPrivacy` |
+
+**Event tracking**
+
+| UI label | Parameter name |
+|----------|----------------|
+| Track anonymous users | `rum.trackAnonymousUser` |
+| Track user interactions | `rum.trackUserInteractions` |
+| Track background events | `rum.trackBackgroundEvents` |
+| Track frustration signals | `rum.trackFrustrations` |
+| Track long tasks | `rum.longTask.enabled` |
+| Long task threshold | `rum.longTask.threshold` |
+| Vitals update frequency | `rum.vitalsUpdateFrequency` |
+| Track slow frames | `rum.trackSlowFrames` |
+| Crash reporting | `rum.crashReportsEnabled` |
+| Track non-fatal ANRs | `rum.trackNonFatalAnrs` |
+
+**App attributes**
+
+| UI label | Parameter name |
+|----------|----------------|
+| Trace context injection | `trace.traceContextInjection` |
+| Allowed tracing URLs | `trace.tracedHosts` |
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /account_management/rbac/permissions/#real-user-monitoring
