@@ -250,9 +250,9 @@ agent diagnose show-metadata agent-telemetry
 | datadog_csi_driver.library_download_duration_seconds_count | Number of library downloads from a registry (count of the download duration histogram), tagged by library and registry |
 | datadog_csi_driver.library_download_duration_seconds_sum   | Total time spent downloading libraries from a registry, in seconds (sum of the download duration histogram), tagged by library and registry |
 | datadog_csi_driver.library_cleanup                | Number of cleanup attempts for unused cached libraries, tagged by library, status, and strategy                  |
-| datadog_csi_driver.libraries_cached               | Number of library versions currently stored on disk, per library                                                |
+| datadog_csi_driver.libraries_cached               | Number of library versions stored on disk, per library                                                          |
 | datadog_csi_driver.libraries_cached_bytes         | Cumulative on-disk size of cached libraries, in bytes, per library                                              |
-| datadog_csi_driver.library_volume_links           | Number of volumes currently linked to a library, per library                                                    |
+| datadog_csi_driver.library_volume_links           | Number of volumes linked to a library, per library                                                              |
 | agent_performance.containers_restarts       | Number of container restarts for the Cluster Agent and Cluster Checks Runner pods                                      |
 | agent_performance.containers_terminated     | Number of container terminations for the Cluster Agent and Cluster Checks Runner pods, tagged by reason                |
 | agent_performance.memory_usage              | Total container runtime memory usage, in bytes, for the Cluster Agent and Cluster Checks Runner pods                   |
