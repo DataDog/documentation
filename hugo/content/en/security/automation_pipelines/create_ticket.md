@@ -28,7 +28,13 @@ further_reading:
 
 {{< product-availability >}}
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Configure ticket creation rules to automatically create tickets in Jira, Linear, or Case Management when new findings are discovered. This approach tracks security issues in your existing engineering workflows without manual triage, helping teams respond quickly to new threats at scale. For more information about ticketing integrations with security findings, see [Ticketing Integrations][3].
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+Configure ticket creation rules to automatically create tickets in Jira or Case Management when new findings are discovered. This approach tracks security issues in your existing engineering workflows without manual triage, helping teams respond quickly to new threats at scale. For more information about ticketing integrations with security findings, see [Ticketing Integrations][3].
+{{< /site-region >}}
 
 ## Create a ticket creation rule
 
@@ -51,6 +57,7 @@ Configure ticket creation rules to automatically create tickets in Jira, Linear,
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
 1. To add severity criteria to the rule, click **Add Severity**.
 1. Select the ticketing system and configure the ticket destination:
+  {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
   {{< tabs >}}
   {{% tab "Jira" %}}
   - **Jira Account**: Select the Atlassian instance to use.
@@ -61,17 +68,35 @@ Configure ticket creation rules to automatically create tickets in Jira, Linear,
   - Expand **Data Sync Settings** to review or update the linked Case Management project and bidirectional sync configuration.
   {{% /tab %}}
   {{% tab "Linear" %}}
-  - **Linear Account** (required): Select the Linear account to use.
-  - **Team** (required): Select the Linear team where you want to create issues.
+  - **Linear Account**: Select the Linear account to use.
+  - **Team**: Select the Linear team where you want to create issues.
   - **Project** (optional): Select the Linear project to associate with automatically created issues.
   - **Labels** (optional): Select labels to apply to automatically created issues.
   - **Assignee** (optional): Specify a user to assign automatically created issues to.
+  - Expand **Data Sync Settings** to review or update the linked Case Management project and bidirectional sync configuration.
   {{% /tab %}}
   {{% tab "Case Management" %}}
   - **Case Management Project**: Select an existing Case Management project, or create one.
   - **Assignee** (optional): Specify a user to assign automatically created cases to.
   {{% /tab %}}
   {{< /tabs >}}
+  {{< /site-region >}}
+  {{< site-region region="gov,gov2" >}}
+  {{< tabs >}}
+  {{% tab "Jira" %}}
+  - **Jira Account**: Select the Atlassian instance to use.
+  - **Space**: Select the Jira project. Verify that this space is added to the [Jira Webhook][5].
+  - **Ticket Type**: Select the type of Jira issue to create, for example, **Task**.
+  - **Assignee** (optional): Specify a user to assign automatically created tickets to.
+  - To add more fields to the Jira ticket Datadog creates, use **Add Optional Field**.
+  - Expand **Data Sync Settings** to review or update the linked Case Management project and bidirectional sync configuration.
+  {{% /tab %}}
+  {{% tab "Case Management" %}}
+  - **Case Management Project**: Select an existing Case Management project, or create one.
+  - **Assignee** (optional): Specify a user to assign automatically created cases to.
+  {{% /tab %}}
+  {{< /tabs >}}
+  {{< /site-region >}}
 1. Under **Rate limit**, enter the [maximum number of tickets](#daily-ticket-limit) this rule can create per UTC day.
 1. To test the rule before saving, click **Test Rule**, select a matching finding, and click **Run Test**. After the test completes, you can view the created ticket or detach the test ticket from the finding.
 1. Click **Save**. The rule applies to new findings only. It can take up to a few minutes after a finding is detected to create the corresponding ticket.
