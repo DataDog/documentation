@@ -255,6 +255,8 @@ An image on a message. Provide either `content` or `attachment_key`.
 | query_variable_keys | [string] | Variable keys that contain the user query. Used for hallucination detection. |
 | context_variable_keys | [string] | Variable keys that contain ground-truth or context content. Used for hallucination detection. |
 | tags | Dict[key (string), string] | Tags to attach to the prompt run. |
+| prompt_uuid | string | No, unless linking to Prompt Management. The prompt's UUID from [Prompt Management][6]. Required for the span to link back to its Prompt Management registry entry. |
+| prompt_version_uuid | string | The specific prompt version's UUID from [Prompt Management][6]. |
 
 {{% /tab %}}
 {{% tab "Example" %}}
@@ -278,6 +280,8 @@ An image on a message. Provide either `content` or `attachment_key`.
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: If your prompt comes from the [Prompt Management][6] registry (for example, fetched through the Prompt Management REST API in a language without a native Agent Observability SDK), include the `prompt_uuid` (and `prompt_version_uuid`, if available) returned by the API alongside `id` and `version`. Without `prompt_uuid`, the span's prompt metadata is tracked but does not link back to the registry entry in the Prompts view.
 
 #### Meta
 | Field       | Type              | Description  |
@@ -704,3 +708,4 @@ For feedback events, provide exactly one of `span_id`, `trace_id`, `session_id`,
 [3]: /getting_started/tagging/
 [4]: /llm_observability/investigate/evaluations/end_user_feedback
 [5]: /llm_observability/instrument/sdk/?tab=python#enriching-spans
+[6]: /llm_observability/configure/prompt_management
