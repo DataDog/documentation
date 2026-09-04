@@ -917,6 +917,13 @@ Then, run the [configuration command based on your environment](#install-your-pr
 
 **Note**: If you're using `docker run` to launch your Private Location image and you've previously installed the Private Location image using the `latest` tag, make sure to add `--pull=always` to the `docker run` command to make sure the newest version is pulled rather than relying on the cached version of the image that may exist locally with the same `latest` tag.
 
+#### Upgrade a Windows private location
+
+1. Back up your configuration file (`C:\ProgramData\Datadog Synthetics Private Location\config.json`) before upgrading or changing it.
+2. Download the latest [MSI installer][34], run it, and follow the prompts. If prompted to modify or update your configuration, always use your backed-up file.
+3. If you use the installer's **Modify** option, select your existing configuration file. Leaving the field blank or generating a new configuration replaces your current one.
+4. Confirm that the private location worker service is running and references the correct configuration file.
+
 ### Test your internal endpoint
 
 Once at least one private location worker starts reporting to Datadog, the private location status displays green.
@@ -1021,4 +1028,5 @@ Restricting a Private Location may limit other users from adding it to a test or
 [31]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
 [32]: /synthetics/platform/private_locations/configuration
 [33]: /synthetics/guide/kerberos-authentication/
+[34]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 
