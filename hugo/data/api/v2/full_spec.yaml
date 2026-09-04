@@ -33171,6 +33171,827 @@ components:
       type: string
       x-enum-varnames:
         - DELETE_TESTS
+    DemBatchGetJourneysAttributes:
+      description: Attributes for a batch get journeys request.
+      properties:
+        test_suite_ids:
+          $ref: '#/components/schemas/DemTestSuiteIDs'
+      required:
+        - test_suite_ids
+      type: object
+    DemBatchGetJourneysData:
+      description: Data object for a batch get journeys request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DemBatchGetJourneysAttributes'
+        type:
+          $ref: '#/components/schemas/DemBatchGetJourneysRequestType'
+      required:
+        - type
+        - attributes
+      type: object
+    DemBatchGetJourneysRequest:
+      description: Request body for retrieving DEM journeys by test suite IDs.
+      properties:
+        data:
+          $ref: "#/components/schemas/DemBatchGetJourneysData"
+          example:
+            attributes:
+              test_suite_ids:
+                - "suite-abc123"
+                - "suite-def456"
+            type: "batch_get_journeys_by_test_suite_ids_request"
+      required:
+        - data
+      type: object
+    DemBatchGetJourneysRequestType:
+      description: The resource type for a request to retrieve DEM journeys by test suite IDs.
+      enum:
+        - batch_get_journeys_by_test_suite_ids_request
+      example: batch_get_journeys_by_test_suite_ids_request
+      type: string
+      x-enum-varnames:
+        - BATCH_GET_JOURNEYS_BY_TEST_SUITE_IDS_REQUEST
+    DemCreateJourneyTestSuiteAttributes:
+      description: Attributes for creating a test suite for a DEM journey.
+      properties:
+        include_tests_from_journey_coverage:
+          description: Whether to populate the test suite based on journey coverage data.
+          example: true
+          nullable: true
+          type: boolean
+        test_suite_name:
+          description: An optional custom name for the auto-created test suite.
+          example: "My Custom Suite"
+          nullable: true
+          type: string
+      type: object
+    DemCreateJourneyTestSuiteData:
+      description: Data object for a create test suite request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DemCreateJourneyTestSuiteAttributes'
+        type:
+          $ref: '#/components/schemas/DemCreateJourneyTestSuiteRequestType'
+      required:
+        - type
+      type: object
+    DemCreateJourneyTestSuiteRequest:
+      description: Request body for creating a test suite for a DEM journey.
+      properties:
+        data:
+          $ref: "#/components/schemas/DemCreateJourneyTestSuiteData"
+          example:
+            attributes:
+              test_suite_name: "My Custom Suite"
+            type: "create_test_suite_for_journey_request"
+      required:
+        - data
+      type: object
+    DemCreateJourneyTestSuiteRequestType:
+      description: The resource type for a request to create a DEM journey test suite.
+      enum:
+        - create_test_suite_for_journey_request
+      example: create_test_suite_for_journey_request
+      type: string
+      x-enum-varnames:
+        - CREATE_TEST_SUITE_FOR_JOURNEY_REQUEST
+    DemInferredJourneyCandidateAttributes:
+      description: Attributes of an inferred journey candidate.
+      properties:
+        created_at:
+          description: Timestamp when the inferred journey was first observed.
+          example: "2024-01-15T10:30:00Z"
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          description: An optional description of the inferred journey.
+          example:
+          nullable: true
+          type: string
+        journey_rum:
+          $ref: '#/components/schemas/DemJourneyRum'
+        name:
+          description: The name of the inferred journey.
+          example: "Checkout Flow"
+          type: string
+        org_id:
+          description: The organization ID that owns this inferred journey.
+          example: 12345
+          format: int64
+          readOnly: true
+          type: integer
+        rank:
+          description: Ranking score of the inferred journey candidate.
+          example: 1
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+        tags:
+          $ref: '#/components/schemas/DemTags'
+        test_suite:
+          $ref: "#/components/schemas/DemTestSuiteNested"
+          nullable: true
+          readOnly: true
+        variants:
+          $ref: '#/components/schemas/DemVariants'
+      required:
+        - name
+        - tags
+        - org_id
+        - journey_rum
+        - variants
+        - created_at
+      type: object
+    DemInferredJourneyCandidateData:
+      description: Data object for an inferred journey candidate.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DemInferredJourneyCandidateAttributes'
+        id:
+          description: The unique identifier of the inferred journey.
+          example: "inferred-journey-abc123"
+          type: string
+        type:
+          $ref: '#/components/schemas/DemJourneyType'
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DemInferredJourneyIgnoredAttributes:
+      description: Attributes of an ignored inferred journey.
+      properties:
+        created_at:
+          description: Timestamp when the inferred journey was first observed.
+          example: "2024-01-15T10:30:00Z"
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          description: An optional description of the inferred journey.
+          example:
+          nullable: true
+          type: string
+        ignored_at:
+          description: Timestamp when the inferred journey was ignored.
+          example: "2024-01-15T10:30:00Z"
+          format: date-time
+          readOnly: true
+          type: string
+        journey_rum:
+          $ref: '#/components/schemas/DemJourneyRum'
+        name:
+          description: The name of the inferred journey.
+          example: "Checkout Flow"
+          type: string
+        org_id:
+          description: The organization ID that owns this inferred journey.
+          example: 12345
+          format: int64
+          readOnly: true
+          type: integer
+        tags:
+          $ref: '#/components/schemas/DemTags'
+        test_suite:
+          $ref: "#/components/schemas/DemTestSuiteNested"
+          nullable: true
+          readOnly: true
+        variants:
+          $ref: '#/components/schemas/DemVariants'
+      required:
+        - name
+        - tags
+        - org_id
+        - journey_rum
+        - variants
+        - ignored_at
+        - created_at
+      type: object
+    DemInferredJourneyIgnoredData:
+      description: Data object for an ignored inferred journey.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DemInferredJourneyIgnoredAttributes'
+        id:
+          description: The unique identifier of the ignored inferred journey.
+          example: "inferred-journey-abc123"
+          type: string
+        type:
+          $ref: '#/components/schemas/DemJourneyType'
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DemInferredJourneyStatus:
+      default: candidate
+      description: The status of an inferred DEM journey.
+      enum:
+        - candidate
+        - ignored
+      example: candidate
+      type: string
+      x-enum-varnames:
+        - CANDIDATE
+        - IGNORED
+    DemJourneyCreateAttributes:
+      description: Attributes for creating or updating a DEM journey.
+      properties:
+        description:
+          description: An optional human-readable description of the journey.
+          example: "Tracks the user checkout flow from cart to confirmation."
+          type: string
+        journey_rum:
+          $ref: '#/components/schemas/DemJourneyRum'
+        name:
+          description: The name of the DEM journey.
+          example: "Checkout Flow"
+          type: string
+        tags:
+          $ref: '#/components/schemas/DemTags'
+        variants:
+          $ref: '#/components/schemas/DemVariants'
+      required:
+        - name
+        - tags
+        - journey_rum
+      type: object
+    DemJourneyCreateData:
+      description: Data object for a DEM journey create or update request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DemJourneyCreateAttributes'
+        type:
+          $ref: '#/components/schemas/DemJourneyType'
+      required:
+        - type
+        - attributes
+      type: object
+    DemJourneyCreateRequest:
+      description: Request body for creating or updating a DEM journey.
+      properties:
+        data:
+          $ref: "#/components/schemas/DemJourneyCreateData"
+          example:
+            attributes:
+              journey_rum:
+                rum_steps:
+                  - nodes:
+                      - query: "action.name:'checkout'"
+                    type: start
+                  - nodes:
+                      - query: "action.name:'confirmation'"
+                    type: stop
+              name: "Checkout Flow"
+              tags:
+                - "team:synthetics"
+            type: journeys
+      required:
+        - data
+      type: object
+    DemJourneyResponse:
+      description: Response body for a single DEM journey.
+      properties:
+        data:
+          $ref: '#/components/schemas/DemJourneyResponseData'
+      required:
+        - data
+      type: object
+    DemJourneyResponseAttributes:
+      description: Attributes returned in a DEM journey response.
+      properties:
+        created_at:
+          description: The timestamp when the journey was created.
+          example: "2024-01-15T10:30:00Z"
+          format: date-time
+          readOnly: true
+          type: string
+        created_by:
+          $ref: "#/components/schemas/DemUser"
+          nullable: true
+          readOnly: true
+        description:
+          description: An optional human-readable description of the journey.
+          example: "Tracks the user checkout flow from cart to confirmation."
+          nullable: true
+          type: string
+        journey_rum:
+          $ref: '#/components/schemas/DemJourneyRum'
+        name:
+          description: The name of the DEM journey.
+          example: "Checkout Flow"
+          type: string
+        org_id:
+          description: The organization ID that owns this journey.
+          example: 12345
+          format: int64
+          readOnly: true
+          type: integer
+        tags:
+          $ref: '#/components/schemas/DemTags'
+        test_suite:
+          $ref: "#/components/schemas/DemTestSuiteNested"
+          nullable: true
+          readOnly: true
+        updated_at:
+          description: The timestamp when the journey was last updated.
+          example: "2024-01-16T08:00:00Z"
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        updated_by:
+          $ref: "#/components/schemas/DemUser"
+          nullable: true
+          readOnly: true
+        variants:
+          $ref: '#/components/schemas/DemVariants'
+      required:
+        - name
+        - description
+        - tags
+        - org_id
+        - journey_rum
+        - test_suite
+        - variants
+        - created_by
+        - created_at
+        - updated_by
+        - updated_at
+      type: object
+    DemJourneyResponseData:
+      description: Data object in a DEM journey response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DemJourneyResponseAttributes'
+        id:
+          description: The unique identifier of the DEM journey.
+          example: "journey-abc123"
+          type: string
+        type:
+          $ref: '#/components/schemas/DemJourneyType'
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DemJourneyRum:
+      description: The RUM definition for a DEM journey.
+      properties:
+        filter:
+          description: An optional RUM query filter applied to the entire journey.
+          example: "env:prod"
+          type: string
+        rum_steps:
+          $ref: "#/components/schemas/DemRumSteps"
+          example:
+            - nodes:
+                - query: "action.name:'checkout'"
+              type: start
+            - nodes:
+                - query: "action.name:'confirmation'"
+              type: stop
+        variants:
+          $ref: '#/components/schemas/DemVariants'
+      required:
+        - rum_steps
+      type: object
+    DemJourneyTestSuiteResponse:
+      description: Response body for a DEM journey test suite.
+      properties:
+        data:
+          $ref: '#/components/schemas/DemJourneyTestSuiteResponseData'
+      required:
+        - data
+      type: object
+    DemJourneyTestSuiteResponseAttributes:
+      description: Attributes of a DEM journey test suite response.
+      properties:
+        created_at:
+          description: The timestamp when the test suite was created.
+          example: "2024-01-15T10:30:00Z"
+          format: date-time
+          readOnly: true
+          type: string
+        dropped_test_ids:
+          description: Test IDs omitted because the caller lacks read access.
+          items:
+            type: string
+          type: array
+        name:
+          description: The name of the test suite.
+          example: "Checkout Flow Suite"
+          type: string
+      required:
+        - name
+        - created_at
+      type: object
+    DemJourneyTestSuiteResponseData:
+      description: Data object in a DEM test suite response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DemJourneyTestSuiteResponseAttributes'
+        id:
+          description: The public ID of the test suite.
+          example: "suite-abc123"
+          type: string
+        type:
+          $ref: '#/components/schemas/DemJourneyTestSuiteType'
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DemJourneyTestSuiteType:
+      description: The type identifier for DEM journey test suites.
+      enum:
+        - journey_test_suite
+      example: journey_test_suite
+      type: string
+      x-enum-varnames:
+        - JOURNEY_TEST_SUITE
+    DemJourneyType:
+      description: The type identifier for DEM journeys.
+      enum:
+        - journeys
+      example: journeys
+      type: string
+      x-enum-varnames:
+        - JOURNEYS
+    DemJourneysListData:
+      description: List of DEM journey data objects.
+      items:
+        $ref: '#/components/schemas/DemJourneyResponseData'
+      type: array
+    DemJourneysListResponse:
+      description: Response body for a list of DEM journeys.
+      properties:
+        data:
+          $ref: "#/components/schemas/DemJourneysListData"
+          example:
+            - attributes:
+                created_at: "2024-01-15T10:30:00Z"
+                created_by:
+                  email: "jane.doe@example.com"
+                  handle: "jane.doe"
+                  name: "Jane Doe"
+                  uuid: "00000000-0000-0000-0000-000000000001"
+                description: "Tracks checkout flow."
+                journey_rum:
+                  rum_steps:
+                    - nodes:
+                        - query: "action.name:'checkout'"
+                      type: start
+                    - nodes:
+                        - query: "action.name:'confirmation'"
+                      type: stop
+                name: "Checkout Flow"
+                org_id: 12345
+                tags:
+                  - "team:synthetics"
+                test_suite:
+                updated_at:
+                updated_by:
+                variants: []
+              id: "journey-abc123"
+              type: journeys
+      required:
+        - data
+      type: object
+    DemRecommendedTestAttributes:
+      description: Attributes of an AI-recommended synthetic test for a DEM journey.
+      properties:
+        config:
+          $ref: '#/components/schemas/DemRecommendedTestConfig'
+        created_at:
+          description: The time when the recommendation was generated.
+          example: "2026-08-31T16:00:00Z"
+          format: date-time
+          type: string
+        name:
+          description: The display name of the recommended test.
+          example: "Checkout journey"
+          type: string
+        result_id:
+          description: The identifier of the validating sample run, when available.
+          example: "result-abc123"
+          type: string
+        session_id:
+          description: The RUM session identifier for the validating sample run, when available.
+          example: "session-abc123"
+          type: string
+        source:
+          description: The pipeline that produced the recommendation.
+          example: gbt
+          type: string
+        type:
+          description: The type of synthetic test.
+          example: browser
+          type: string
+        variant_id:
+          description: The variant associated with the recommendation, when applicable.
+          example: "variant-001"
+          type: string
+      required:
+        - type
+        - name
+        - source
+        - config
+        - created_at
+      type: object
+    DemRecommendedTestConfig:
+      additionalProperties: {}
+      description: The browser test configuration that can be used to create the recommended test.
+      example:
+        name: "Checkout journey"
+        type: browser
+      type: object
+    DemRecommendedTestData:
+      description: Data object for a recommended synthetic test.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DemRecommendedTestAttributes'
+        id:
+          description: The identifier of the journey associated with the recommendation.
+          example: "journey-abc123"
+          type: string
+        type:
+          $ref: '#/components/schemas/DemRecommendedTestType'
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DemRecommendedTestType:
+      description: The type identifier for a recommended synthetic test.
+      enum:
+        - recommended_tests
+      example: recommended_tests
+      type: string
+      x-enum-varnames:
+        - RECOMMENDED_TESTS
+    DemRecommendedTests:
+      description: Recommended synthetic tests for a DEM journey.
+      items:
+        $ref: '#/components/schemas/DemRecommendedTestData'
+      type: array
+    DemRecommendedTestsResponse:
+      description: Response containing recommended synthetic tests for a DEM journey.
+      properties:
+        data:
+          $ref: '#/components/schemas/DemRecommendedTests'
+      required:
+        - data
+      type: object
+    DemRumNode:
+      description: A RUM node within a journey step.
+      properties:
+        app_id:
+          description: The application ID associated with this node.
+          example: "app-xyz789"
+          type: string
+        id:
+          description: The ID of the RUM node element.
+          example: "element-id-123"
+          type: string
+        query:
+          description: The RUM query for matching this node.
+          example: "action.name:'checkout'"
+          type: string
+      required:
+        - query
+      type: object
+    DemRumNodes:
+      description: List of RUM nodes within a journey step.
+      example:
+        - query: "action.name:'checkout'"
+      items:
+        $ref: '#/components/schemas/DemRumNode'
+      type: array
+    DemRumStep:
+      description: A single step in a RUM journey definition.
+      properties:
+        nodes:
+          $ref: "#/components/schemas/DemRumNodes"
+          example:
+            - query: "action.name:'checkout'"
+        type:
+          $ref: '#/components/schemas/DemRumStepType'
+      required:
+        - type
+        - nodes
+      type: object
+    DemRumStepType:
+      description: The type of a RUM journey step.
+      enum:
+        - start
+        - stop
+        - step
+      example: start
+      type: string
+      x-enum-varnames:
+        - START
+        - STOP
+        - STEP
+    DemRumSteps:
+      description: List of RUM journey steps.
+      example:
+        - nodes:
+            - query: "action.name:'checkout'"
+          type: start
+        - nodes:
+            - query: "action.name:'confirmation'"
+          type: stop
+      items:
+        $ref: '#/components/schemas/DemRumStep'
+      type: array
+    DemSearchInferredJourneysResponse:
+      description: >-
+        Response body for searching inferred journeys. Contains either candidate or ignored items depending on the `status` query parameter.
+      properties:
+        data:
+          description: List of inferred journey items matching the search criteria.
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/DemInferredJourneyCandidateData'
+              - $ref: '#/components/schemas/DemInferredJourneyIgnoredData'
+            description: A single inferred journey item, either a candidate or an ignored journey.
+          type: array
+      required:
+        - data
+      type: object
+    DemTags:
+      description: List of tags associated with a DEM resource.
+      example:
+        - "team:synthetics"
+        - "env:prod"
+      items:
+        description: A tag in the format `key:value`.
+        type: string
+      type: array
+    DemTestSuiteIDs:
+      description: List of test suite IDs.
+      example:
+        - "suite-abc123"
+        - "suite-def456"
+      items:
+        description: A test suite ID.
+        type: string
+      type: array
+    DemTestSuiteNested:
+      description: A test suite associated with a DEM resource.
+      properties:
+        id:
+          description: The ID of the test suite.
+          example: "suite-abc123"
+          type: string
+        name:
+          description: The name of the test suite.
+          example: "My Journey Suite"
+          type: string
+      required:
+        - id
+        - name
+      type: object
+    DemUser:
+      description: A Datadog user associated with a DEM operation.
+      properties:
+        email:
+          description: The email address of the user.
+          example: "jane.doe@example.com"
+          type: string
+        handle:
+          description: The handle of the user.
+          example: "jane.doe"
+          type: string
+        name:
+          description: The display name of the user.
+          example: "Jane Doe"
+          type: string
+        uuid:
+          description: The UUID of the user.
+          example: "00000000-0000-0000-0000-000000000001"
+          type: string
+      required:
+        - uuid
+        - name
+        - email
+        - handle
+      type: object
+    DemVariant:
+      description: A variant (sub-funnel) of a DEM journey with its own steps.
+      properties:
+        filter:
+          description: An optional RUM query filter to scope this variant.
+          example: "device.type:mobile"
+          type: string
+        id:
+          description: The unique identifier of the variant.
+          example: "variant-001"
+          readOnly: true
+          type: string
+        name:
+          description: The name of the variant.
+          example: "Mobile checkout"
+          type: string
+        rum_steps:
+          $ref: "#/components/schemas/DemRumSteps"
+          example:
+            - nodes:
+                - query: "action.name:'checkout'"
+              type: start
+            - nodes:
+                - query: "action.name:'confirmation'"
+              type: stop
+      required:
+        - name
+        - rum_steps
+      type: object
+    DemVariantAttributes:
+      description: Attributes of a DEM journey variant.
+      properties:
+        filter:
+          description: An optional RUM query filter to scope this variant.
+          example: "device.type:mobile"
+          type: string
+        name:
+          description: The name of the variant.
+          example: "Mobile checkout"
+          type: string
+        rum_steps:
+          $ref: '#/components/schemas/DemRumSteps'
+      required:
+        - name
+        - rum_steps
+      type: object
+    DemVariantRequest:
+      description: Request to create or update a DEM journey variant.
+      properties:
+        data:
+          $ref: '#/components/schemas/DemVariantRequestData'
+      required:
+        - data
+      type: object
+    DemVariantRequestData:
+      description: Data object for a DEM journey variant request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DemVariantAttributes'
+        type:
+          $ref: '#/components/schemas/DemVariantType'
+      required:
+        - type
+        - attributes
+      type: object
+    DemVariantResponse:
+      description: Response containing a DEM journey variant.
+      properties:
+        data:
+          $ref: '#/components/schemas/DemVariantResponseData'
+      required:
+        - data
+      type: object
+    DemVariantResponseData:
+      description: Data object returned for a DEM journey variant.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DemVariantAttributes'
+        id:
+          description: The unique identifier of the variant.
+          example: "variant-001"
+          type: string
+        type:
+          $ref: '#/components/schemas/DemVariantType'
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DemVariantType:
+      description: The type identifier for DEM journey variants.
+      enum:
+        - variants
+      example: variants
+      type: string
+      x-enum-varnames:
+        - VARIANTS
+    DemVariants:
+      description: List of variants associated with a DEM journey.
+      example:
+        - name: "Mobile checkout"
+          rum_steps:
+            - nodes:
+                - query: "action.name:'checkout'"
+              type: start
+            - nodes:
+                - query: "action.name:'confirmation'"
+              type: stop
+      items:
+        $ref: '#/components/schemas/DemVariant'
+      type: array
     DependencyLocation:
       description: Static library vulnerability location.
       properties:
@@ -148072,6 +148893,930 @@ paths:
         operator: OR
         permissions:
           - logs_delete_data
+  /api/v2/dem/journeys:
+    post:
+      description: Create a DEM journey.
+      operationId: CreateJourney
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: Tracks the user checkout flow from cart to confirmation.
+                      journey_rum:
+                        rum_steps:
+                          - nodes:
+                              - query: action.name:'checkout'
+                            type: start
+                          - nodes:
+                              - query: action.name:'confirmation'
+                            type: stop
+                      name: Checkout Flow
+                      tags:
+                        - team:synthetics
+                    type: journeys
+            schema:
+              $ref: '#/components/schemas/DemJourneyCreateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-15T10:30:00Z"
+                        created_by:
+                          email: jane.doe@example.com
+                          handle: jane.doe
+                          name: Jane Doe
+                          uuid: 00000000-0000-0000-0000-000000000001
+                        description: Tracks checkout flow.
+                        journey_rum:
+                          rum_steps:
+                            - nodes:
+                                - query: action.name:'checkout'
+                              type: start
+                            - nodes:
+                                - query: action.name:'confirmation'
+                              type: stop
+                        name: Checkout Flow
+                        org_id: 12345
+                        tags:
+                          - team:synthetics
+                        test_suite:
+                        updated_at:
+                        updated_by:
+                        variants: []
+                      id: journey-abc123
+                      type: journeys
+              schema:
+                $ref: '#/components/schemas/DemJourneyResponse'
+          description: OK
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a DEM journey
+      tags:
+        - DEM
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+  /api/v2/dem/journeys/inferred/ignored/{journey_id}:
+    delete:
+      description: Remove an ignored inferred DEM journey, making it eligible to appear as a candidate again.
+      operationId: DeleteIgnoredInferredJourney
+      parameters:
+        - description: The unique identifier of the ignored inferred journey to delete.
+          example: inferred-abc123
+          in: path
+          name: journey_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an ignored inferred DEM journey
+      tags:
+        - DEM
+      x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+  /api/v2/dem/journeys/inferred/search:
+    get:
+      description: >-
+        Search for inferred DEM journeys by status. Returns candidates (status=candidate, the default) or ignored journeys (status=ignored). Supports optional fuzzy name filtering and app ID filtering.
+      operationId: SearchInferredJourneys
+      parameters:
+        - description: >-
+            Filter by inferred journey status. Use `candidate` (default) to retrieve journeys suggested for promotion, or `ignored` to retrieve journeys that have been dismissed.
+          in: query
+          name: status
+          required: false
+          schema:
+            $ref: '#/components/schemas/DemInferredJourneyStatus'
+        - description: Fuzzy search query to filter inferred journeys by name.
+          in: query
+          name: q
+          required: false
+          schema:
+            type: string
+        - description: Filter inferred journeys by application ID.
+          in: query
+          name: app_id
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                candidates:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-15T10:30:00Z"
+                          description:
+                          journey_rum:
+                            rum_steps:
+                              - nodes:
+                                  - query: action.name:'checkout'
+                                type: start
+                              - nodes:
+                                  - query: action.name:'confirmation'
+                                type: stop
+                          name: Checkout Flow
+                          org_id: 12345
+                          rank: 1
+                          tags:
+                            - team:synthetics
+                          test_suite:
+                          variants: []
+                        id: inferred-abc123
+                        type: journeys
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-01T00:00:00+00:00"
+                          description:
+                          journey_rum:
+                            rum_steps:
+                              - nodes:
+                                  - query: action.name:'checkout'
+                                type: start
+                              - nodes:
+                                  - query: action.name:'confirmation'
+                                type: stop
+                          name: Checkout Flow
+                          org_id: 123
+                          rank: 1
+                          tags:
+                            - team:synthetics
+                          variants: []
+                        id: inferred-abc123
+                        type: journeys
+                ignored:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-15T10:30:00Z"
+                          description:
+                          ignored_at: "2024-01-16T08:00:00Z"
+                          journey_rum:
+                            rum_steps:
+                              - nodes:
+                                  - query: action.name:'login'
+                                type: start
+                              - nodes:
+                                  - query: action.name:'dashboard'
+                                type: stop
+                          name: Login Flow
+                          org_id: 12345
+                          tags:
+                            - team:synthetics
+                          test_suite:
+                          variants: []
+                        id: inferred-def456
+                        type: journeys
+              schema:
+                $ref: '#/components/schemas/DemSearchInferredJourneysResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Search inferred DEM journeys
+      tags:
+        - DEM
+      x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_read
+  /api/v2/dem/journeys/inferred/{journey_id}/ignore:
+    post:
+      description: Mark an inferred DEM journey as ignored so it no longer appears in the candidate list.
+      operationId: IgnoreInferredJourney
+      parameters:
+        - description: The unique identifier of the inferred journey to ignore.
+          example: inferred-abc123
+          in: path
+          name: journey_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Ignore an inferred DEM journey
+      tags:
+        - DEM
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+  /api/v2/dem/journeys/search:
+    get:
+      description: Search for DEM journeys with optional filtering by query, creator, team, and app.
+      operationId: SearchJourneys
+      parameters:
+        - description: A search query string to filter journeys by name.
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: The offset for pagination.
+          in: query
+          name: page[offset]
+          required: false
+          schema:
+            format: int64
+            type: integer
+        - description: The maximum number of results to return.
+          in: query
+          name: page[limit]
+          required: false
+          schema:
+            format: int64
+            type: integer
+        - description: Filter journeys by creator handle.
+          in: query
+          name: creator
+          required: false
+          schema:
+            type: string
+        - description: Filter journeys by team tag.
+          in: query
+          name: team
+          required: false
+          schema:
+            type: string
+        - description: Filter journeys by application ID.
+          in: query
+          name: app_id
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-15T10:30:00Z"
+                          created_by:
+                            email: jane.doe@example.com
+                            handle: jane.doe
+                            name: Jane Doe
+                            uuid: 00000000-0000-0000-0000-000000000001
+                          description: Tracks checkout flow.
+                          journey_rum:
+                            rum_steps:
+                              - nodes:
+                                  - query: action.name:'checkout'
+                                type: start
+                              - nodes:
+                                  - query: action.name:'confirmation'
+                                type: stop
+                          name: Checkout Flow
+                          org_id: 12345
+                          tags:
+                            - team:synthetics
+                          test_suite:
+                          updated_at:
+                          updated_by:
+                          variants: []
+                        id: journey-abc123
+                        type: journeys
+              schema:
+                $ref: '#/components/schemas/DemJourneysListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Search DEM journeys
+      tags:
+        - DEM
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_read
+  /api/v2/dem/journeys/suites/batch:
+    post:
+      description: Return DEM journeys associated with multiple given test suite IDs.
+      operationId: BatchGetJourneysByTestSuiteIDs
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      test_suite_ids:
+                        - suite-abc123
+                        - suite-def456
+                    type: batch_get_journeys_by_test_suite_ids_request
+            schema:
+              $ref: '#/components/schemas/DemBatchGetJourneysRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-15T10:30:00Z"
+                          created_by:
+                            email: jane.doe@example.com
+                            handle: jane.doe
+                            name: Jane Doe
+                            uuid: 00000000-0000-0000-0000-000000000001
+                          description: Tracks checkout flow.
+                          journey_rum:
+                            rum_steps:
+                              - nodes:
+                                  - query: action.name:'checkout'
+                                type: start
+                              - nodes:
+                                  - query: action.name:'confirmation'
+                                type: stop
+                          name: Checkout Flow
+                          org_id: 12345
+                          tags:
+                            - team:synthetics
+                          test_suite:
+                          updated_at:
+                          updated_by:
+                          variants: []
+                        id: journey-abc123
+                        type: journeys
+              schema:
+                $ref: '#/components/schemas/DemJourneysListResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Batch get DEM journeys by test suite IDs
+      tags:
+        - DEM
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_read
+  /api/v2/dem/journeys/variants/{variant_id}:
+    delete:
+      description: Delete a variant from a DEM journey.
+      operationId: DeleteJourneyVariant
+      parameters:
+        - description: The unique identifier of the variant to delete.
+          example: "variant-001"
+          in: path
+          name: variant_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a DEM journey variant
+      tags:
+        - DEM
+      x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+    put:
+      description: Update an existing variant of a DEM journey.
+      operationId: UpdateJourneyVariant
+      parameters:
+        - description: The unique identifier of the variant to update.
+          example: "variant-001"
+          in: path
+          name: variant_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      filter: device.type:mobile
+                      name: Mobile checkout
+                      rum_steps:
+                        - nodes:
+                            - query: action.name:'checkout'
+                          type: start
+                        - nodes:
+                            - query: action.name:'confirmation'
+                          type: stop
+                    type: variants
+            schema:
+              $ref: '#/components/schemas/DemVariantRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        filter: device.type:mobile
+                        name: Mobile checkout
+                        rum_steps:
+                          - nodes:
+                              - query: action.name:'checkout'
+                            type: start
+                          - nodes:
+                              - query: action.name:'confirmation'
+                            type: stop
+                      id: variant-001
+                      type: variants
+              schema:
+                $ref: '#/components/schemas/DemVariantResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a DEM journey variant
+      tags:
+        - DEM
+      x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+  /api/v2/dem/journeys/{journey_id}:
+    delete:
+      description: Delete a DEM journey by its ID.
+      operationId: DeleteJourney
+      parameters:
+        - description: The unique identifier of the DEM journey to delete.
+          example: journey-abc123
+          in: path
+          name: journey_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a DEM journey
+      tags:
+        - DEM
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+    get:
+      description: Retrieve a single DEM journey by its ID.
+      operationId: GetJourney
+      parameters:
+        - description: The unique identifier of the DEM journey.
+          example: journey-abc123
+          in: path
+          name: journey_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-15T10:30:00Z"
+                        created_by:
+                          email: jane.doe@example.com
+                          handle: jane.doe
+                          name: Jane Doe
+                          uuid: 00000000-0000-0000-0000-000000000001
+                        description: Tracks checkout flow.
+                        journey_rum:
+                          rum_steps:
+                            - nodes:
+                                - query: action.name:'checkout'
+                              type: start
+                            - nodes:
+                                - query: action.name:'confirmation'
+                              type: stop
+                        name: Checkout Flow
+                        org_id: 12345
+                        tags:
+                          - team:synthetics
+                        test_suite:
+                        updated_at:
+                        updated_by:
+                        variants: []
+                      id: journey-abc123
+                      type: journeys
+              schema:
+                $ref: '#/components/schemas/DemJourneyResponse'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a DEM journey
+      tags:
+        - DEM
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_read
+    put:
+      description: Update an existing DEM journey by its ID.
+      operationId: UpdateJourney
+      parameters:
+        - description: The unique identifier of the DEM journey to update.
+          example: journey-abc123
+          in: path
+          name: journey_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: Tracks the user checkout flow from cart to confirmation.
+                      journey_rum:
+                        rum_steps:
+                          - nodes:
+                              - query: action.name:'checkout'
+                            type: start
+                          - nodes:
+                              - query: action.name:'confirmation'
+                            type: stop
+                      name: Checkout Flow
+                      tags:
+                        - team:synthetics
+                    type: journeys
+            schema:
+              $ref: '#/components/schemas/DemJourneyCreateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-15T10:30:00Z"
+                        created_by:
+                          email: jane.doe@example.com
+                          handle: jane.doe
+                          name: Jane Doe
+                          uuid: 00000000-0000-0000-0000-000000000001
+                        description: Tracks checkout flow.
+                        journey_rum:
+                          rum_steps:
+                            - nodes:
+                                - query: action.name:'checkout'
+                              type: start
+                            - nodes:
+                                - query: action.name:'confirmation'
+                              type: stop
+                        name: Checkout Flow
+                        org_id: 12345
+                        tags:
+                          - team:synthetics
+                        test_suite:
+                        updated_at: "2024-01-16T08:00:00Z"
+                        updated_by:
+                          email: jane.doe@example.com
+                          handle: jane.doe
+                          name: Jane Doe
+                          uuid: 00000000-0000-0000-0000-000000000001
+                        variants: []
+                      id: journey-abc123
+                      type: journeys
+              schema:
+                $ref: '#/components/schemas/DemJourneyResponse'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a DEM journey
+      tags:
+        - DEM
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+  /api/v2/dem/journeys/{journey_id}/recommended-tests:
+    get:
+      description: >-
+        Retrieve AI-recommended synthetic tests for a DEM journey. Returns an empty list when no recommendation is available.
+      operationId: GetJourneyRecommendedTests
+      parameters:
+        - description: The unique identifier of the journey.
+          example: "journey-abc123"
+          in: path
+          name: journey_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          config:
+                            name: Checkout journey
+                            type: browser
+                          created_at: "2026-08-31T16:00:00Z"
+                          name: Checkout journey
+                          result_id: result-abc123
+                          session_id: session-abc123
+                          source: gbt
+                          type: browser
+                          variant_id: variant-001
+                        id: journey-abc123
+                        type: recommended_tests
+              schema:
+                $ref: '#/components/schemas/DemRecommendedTestsResponse'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get recommended tests for a DEM journey
+      tags:
+        - DEM
+      x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_read
+  /api/v2/dem/journeys/{journey_id}/variants:
+    post:
+      description: Create a variant for a DEM journey.
+      operationId: CreateJourneyVariant
+      parameters:
+        - description: The unique identifier of the journey that owns the variant.
+          example: "journey-abc123"
+          in: path
+          name: journey_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      filter: device.type:mobile
+                      name: Mobile checkout
+                      rum_steps:
+                        - nodes:
+                            - query: action.name:'checkout'
+                          type: start
+                        - nodes:
+                            - query: action.name:'confirmation'
+                          type: stop
+                    type: variants
+            schema:
+              $ref: '#/components/schemas/DemVariantRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        filter: device.type:mobile
+                        name: Mobile checkout
+                        rum_steps:
+                          - nodes:
+                              - query: action.name:'checkout'
+                            type: start
+                          - nodes:
+                              - query: action.name:'confirmation'
+                            type: stop
+                      id: variant-001
+                      type: variants
+              schema:
+                $ref: '#/components/schemas/DemVariantResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a DEM journey variant
+      tags:
+        - DEM
+      x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
+  /api/v2/dem/journeys/{public_journey_id}/suite:
+    post:
+      description: Trigger test suite creation for a given DEM journey.
+      operationId: CreateTestSuiteForJourney
+      parameters:
+        - description: The public identifier of the DEM journey for which to create a test suite.
+          example: journey-abc123
+          in: path
+          name: public_journey_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      include_tests_from_journey_coverage: true
+                      test_suite_name: Checkout Flow Suite
+                    type: create_test_suite_for_journey_request
+            schema:
+              $ref: '#/components/schemas/DemCreateJourneyTestSuiteRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-15T10:30:00Z"
+                        name: Checkout Flow Suite
+                      id: suite-abc123
+                      type: journey_test_suite
+              schema:
+                $ref: '#/components/schemas/DemJourneyTestSuiteResponse'
+          description: Created
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a test suite for a DEM journey
+      tags:
+        - DEM
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - synthetics_write
   /api/v2/deployment_gates:
     get:
       description: |-
@@ -227117,6 +228862,8 @@ tags:
       a `query_id`, and clients poll the fetch endpoint until the response transitions to
       `completed` with a column-major result set.
     name: DDSQL
+  - description: Manage Digital Experience Monitoring journeys.
+    name: DEM
   - description: |-
       Search, send, or delete events for DORA Metrics to measure and improve your software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more information.
 
