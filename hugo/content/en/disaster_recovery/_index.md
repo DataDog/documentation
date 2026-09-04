@@ -9,7 +9,7 @@ further_reading:
   text: "Datadog Disaster Recovery mitigates cloud provider outages"
 ---
 
-Datadog Disaster Recovery (DDR) keeps your observability running when a cloud provider region or the Datadog services within it are disrupted. With DDR, you configure a secondary Datadog organization in a different region ahead of time and replicate your resources to it, so that when you fail over, the secondary site already has the dashboards, monitors, and users your team needs.
+Datadog Disaster Recovery (DDR) keeps your observability running when a cloud provider region or the Datadog services within it are disrupted. With DDR, you configure a secondary Datadog organization in a different region ahead of time and replicate your resources to it. When you fail over, the secondary site already has the dashboards, monitors, and users your team needs.
 
 DDR uses an active-passive model: your secondary site stays in sync but passive until you decide to fail over to it. Failover is never automatic; you choose when to cut over.
 
