@@ -21,7 +21,12 @@
     {{- range $group, $_ := $.Site.Data.governance_controls -}}
         {{- $groups = $groups | append $group -}}
     {{- end -}}
-    {{- errorf "governance_controls: no controls found for usage_concern %q in data/governance_controls.json. Available groups: %v" $usage_concern $groups -}}
+    {{- $message := printf "governance_controls: no controls found for usage_concern %q in data/governance_controls.json. Available groups: %v" $usage_concern $groups -}}
+    {{- if eq hugo.Environment "development" -}}
+        {{- warnf "%s" $message -}}
+    {{- else -}}
+        {{- errorf "%s" $message -}}
+    {{- end -}}
 {{- end -}}
 
 {{/* Markup mirrors what a markdown definition list compiles to, so the
