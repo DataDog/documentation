@@ -103,7 +103,7 @@ External AI agents that connect to the Datadog MCP Server can discover and load 
 
 The Datadog MCP Server provides the following tools:
 
-- `list_datadog_skills()`: Lists the skills available to the agent. Agents can also discover available skills through MCP Resources.
+- `list_datadog_skills()`: Lists the skills available to the agent.
 - `load_datadog_skill()`: Loads a selected skill into the agent's context.
 
 A typical external-agent workflow is:
