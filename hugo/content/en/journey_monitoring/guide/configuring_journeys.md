@@ -124,16 +124,16 @@ For example:
 
 - **Sign-in journey**
   - Start: The user opens the sign-in page.
-  - Avoid: The user clicks **Sign in**.
-  - Use: The application redirects the user to the home screen.
+  - End: The application redirects the user to the home screen.
+  - Avoid ending in: The user clicks **Sign in**.
 - **Checkout journey**
   - Start: The user opens the checkout page.
-  - Avoid: The user clicks **Pay**.
-  - Use: The application displays a payment confirmation modal.
+  - End: The application displays a payment confirmation modal.
+  - Avoid ending in: The user clicks **Pay**.
 - **Form submission journey**
   - Start: The user opens the form.
-  - Avoid: The user clicks **Submit**.
-  - Use: The application displays a submission confirmation message.
+  - End: The application displays a submission confirmation message.
+  - Avoid ending in: The user clicks **Submit**.
 
 ### Add names, tags, and ownership
 
