@@ -51,19 +51,21 @@ For the full schema and all available options, see the [Deployment Gates API ref
 
 {{< tabs >}}
 {{% tab "Monitor" %}}
-The Monitor rule evaluates the state of a set of monitors over a configurable period of time. It fails if at any time during the evaluation period:
+The Monitor rule evaluates the state of a set of monitors over a configurable period of time. Select monitors with either a search query or an explicit list of monitors. These selection methods are mutually exclusive. The rule can fail if at any time during the evaluation period:
 
-- No monitors match the query.
-- More than 50 monitors match the query.
-- Any matching monitor is in `ALERT` or `NO_DATA` state.
+- No monitor groups match the configured selection.
+- An explicit monitor ID does not exist or is unavailable to your organization.
+- More than 300 monitors match the configured selection.
+- Any matching monitor group is in `ALERT` or `NO_DATA` state.
 
 ##### Configuration settings
 
-- {{< ui >}}Search Query{{< /ui >}}: The query used to find the monitors to evaluate, based on the [Search Monitor syntax][1]. Filter on monitor tags:
+- {{< ui >}}Monitors matching query{{< /ui >}}: Enter a query based on the [Search Monitor syntax][1]. Filter on monitor tags:
   - Monitor static tags: `service:transaction-backend`
   - Tags within the monitor's query: `scope:"service:transaction-backend"`
   - Tags within a [monitor grouping][2]: `group:"service:transaction-backend"`
-- {{< ui >}}Duration{{< /ui >}}: The period of time (in seconds) for which the matching monitors are evaluated. Default is 0 (monitors are evaluated instantly). Maximum is 7200 seconds (2 hours).
+- {{< ui >}}Specific monitors{{< /ui >}}: Select individual monitors and, optionally, the exact groups to evaluate for each monitor. When no groups are selected, all groups for that monitor are evaluated.
+- {{< ui >}}Duration{{< /ui >}}: The period of time (in seconds) for which the selected monitors are evaluated. Default is 0 (monitors are evaluated instantly). Maximum is 7200 seconds (2 hours).
 
 ##### Example queries
 
@@ -72,9 +74,24 @@ The Monitor rule evaluates the state of a set of monitors over a configurable pe
 - `tag:"use_deployment_gates" team:payment`
 - `tag:"use_deployment_gates" AND (NOT group:("team:frontend"))`
 
+##### Specific monitors API example
+
+```json
+"options": {
+  "monitor_ids": [
+    {"id": "12345678", "groups": []},
+    {"id": "87654321", "groups": ["service:api", "env:prod"]}
+  ],
+  "duration": 300
+}
+```
+
+Each `id` is a decimal monitor ID. Group values are exact group names. Do not send `query` with `monitor_ids`.
+
 **Notes**:
-- `group` filters evaluate only matching groups.
-- Muted monitors are automatically excluded from the evaluation (the query always includes `muted:false`).
+- `group` query filters and `monitor_ids[].groups` evaluate only matching groups.
+- An explicit monitor ID that does not exist or is unavailable to your organization causes the rule to fail. If the monitor exists but is excluded because it is muted or its selected groups have no data, the rule applies the no-matching-groups behavior.
+- Muted monitors are automatically excluded from both selection modes.
 
 [1]: /monitors/manage/search/
 [2]: /monitors/manage/#triggered-monitors
