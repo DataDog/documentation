@@ -19,7 +19,7 @@ To add an HTTP Request:
 {{< tabs >}}
 {{% tab "Workflow Automation" %}}
 - In a new workflow, click {{< ui >}}Add step{{< /ui >}} and search for `Make request`. Select the {{< ui >}}Make request{{< /ui >}} action to add it to your workflow.
-- In an existing workflow, click {{< ui >}}+{{< /ui >}} and search for `Make request`. Select the {{< ui >}}Make request{{< /ui >}} action to add it to your workflow.
+- In an existing workflow, click {{< ui >}}\+{{< /ui >}} and search for `Make request`. Select the {{< ui >}}Make request{{< /ui >}} action to add it to your workflow.
 
 Specify the request method and any necessary [authentication][1]. Read the sections below for further information about the available configuration options. Optionally, the request can wait on conditions that you specify in the {{< ui >}}Conditional wait{{< /ui >}} section, and retry at a given interval if the condition is not satisfied.
 
@@ -42,14 +42,14 @@ If you need to authenticate your request, use the action's {{< ui >}}Connection{
 
 ### Create an AWS connection
 
-1. In the {{< ui >}}Connection{{< /ui >}} section, click the plus icon ({{< ui >}}+{{< /ui >}}).
+1. In the {{< ui >}}Connection{{< /ui >}} section, click the plus icon ({{< ui >}}\+{{< /ui >}}).
 1. Select {{< ui >}}AWS{{< /ui >}}.
 1. Enter a {{< ui >}}Connection Name{{< /ui >}}, {{< ui >}}Account ID{{< /ui >}}, and {{< ui >}}AWS Role Name{{< /ui >}}.
 1. Click {{< ui >}}Create{{< /ui >}}.
 
 ### Create an Azure connection
 
-1. In the {{< ui >}}Connection{{< /ui >}} section, click the plus icon ({{< ui >}}+{{< /ui >}}).
+1. In the {{< ui >}}Connection{{< /ui >}} section, click the plus icon ({{< ui >}}\+{{< /ui >}}).
 1. Select {{< ui >}}Azure{{< /ui >}}.
 1. Enter a {{< ui >}}Connection Name{{< /ui >}}, {{< ui >}}Tenant ID{{< /ui >}}, {{< ui >}}Client ID{{< /ui >}}, and {{< ui >}}Client Secret{{< /ui >}}.
 1. Optionally, enter the {{< ui >}}Custom Scope{{< /ui >}} to be requested from Microsoft when acquiring an OAuth 2.0 access token. A resource's scope is constructed using the identifier URI for the resource and `.default`, separated by a forward slash (`/`). For example, `{identifierURI}/.default`. For more information, see [the Microsoft documentation on .default scope][3].
@@ -59,7 +59,7 @@ If you need to authenticate your request, use the action's {{< ui >}}Connection{
 
 The Token Auth connection uses a bearer token to authenticate the HTTP request.
 
-1. In the {{< ui >}}Connection{{< /ui >}} section, click the plus icon ({{< ui >}}+{{< /ui >}}).
+1. In the {{< ui >}}Connection{{< /ui >}} section, click the plus icon ({{< ui >}}\+{{< /ui >}}).
 1. Select {{< ui >}}HTTP{{< /ui >}}.
 1. Enter a {{< ui >}}Connection Name{{< /ui >}}.
 1. Enter the {{< ui >}}Base URL{{< /ui >}} for authentication.
@@ -73,7 +73,7 @@ The Token Auth connection uses a bearer token to authenticate the HTTP request.
 
 The Basic Auth connection uses an authorization header with a username and password to authenticate the HTTP request.
 
-1. In the {{< ui >}}Connection{{< /ui >}} section, click the plus icon ({{< ui >}}+{{< /ui >}}).
+1. In the {{< ui >}}Connection{{< /ui >}} section, click the plus icon ({{< ui >}}\+{{< /ui >}}).
 1. Select {{< ui >}}HTTP{{< /ui >}}.
 1. Enter a {{< ui >}}Connection Name{{< /ui >}}.
 1. Enter the {{< ui >}}Base URL{{< /ui >}} for authentication.
@@ -85,7 +85,7 @@ The Basic Auth connection uses an authorization header with a username and passw
 
 The HTTP 2 step connection allows you to make a preliminary request to retrieve an access token with which to authenticate the HTTP request. This is useful for authenticating JSON Web Token (JWT) and OAuth applications.
 
-1. In the {{< ui >}}Connection{{< /ui >}} section, click the plus icon ({{< ui >}}+{{< /ui >}}).
+1. In the {{< ui >}}Connection{{< /ui >}} section, click the plus icon ({{< ui >}}\+{{< /ui >}}).
 1. Select {{< ui >}}HTTP{{< /ui >}}.
 1. Enter a {{< ui >}}Connection Name{{< /ui >}}.
 1. Enter the {{< ui >}}Base URL{{< /ui >}} for authentication.
@@ -133,7 +133,7 @@ The Mutual TLS (mTLS) Auth connection allows you to use a private key and TLS ce
 
 <div class="alert alert-info">The client certificate (<code>.crt</code>, <code>.pem</code>) and private key (<code>.key</code>, <code>.pem</code>) must use the PEM format.</div>
 
-1. In the {{< ui >}}Connection{{< /ui >}} section, click the plus icon ({{< ui >}}+{{< /ui >}}).
+1. In the {{< ui >}}Connection{{< /ui >}} section, click the plus icon ({{< ui >}}\+{{< /ui >}}).
 1. Select {{< ui >}}HTTP{{< /ui >}}.
 1. Enter a {{< ui >}}Connection Name{{< /ui >}}.
 1. Enter the {{< ui >}}Base URL{{< /ui >}} for authentication.
@@ -167,7 +167,7 @@ You can use a private HTTP action to interact with services hosted on your priva
 
 To configure a private HTTP request:
 1. Add an HTTP action to your app.
-1. In the {{< ui >}}Connection{{< /ui >}} section, click the plus icon ({{< ui >}}+{{< /ui >}}).
+1. In the {{< ui >}}Connection{{< /ui >}} section, click the plus icon ({{< ui >}}\+{{< /ui >}}).
 1. Select {{< ui >}}HTTP{{< /ui >}}.
 1. Enter a {{< ui >}}Connection Name{{< /ui >}}.
 1. Enter the {{< ui >}}Base URL{{< /ui >}} for the host in your private network.

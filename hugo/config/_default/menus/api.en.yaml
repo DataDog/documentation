@@ -8480,6 +8480,19 @@ menu:
         unstable:
           - v2
         order: 28
+    - name: Get an annotated queue interaction
+      url: /api/latest/agent-observability/get-an-annotated-queue-interaction/
+      identifier: agent-observability-get-an-annotated-queue-interaction
+      parent: agent-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsAnnotatedInteraction
+        unstable:
+          - v2
+        order: 73
     - name: Get annotated queue interactions
       url: /api/latest/agent-observability/get-annotated-queue-interactions/
       identifier: agent-observability-get-annotated-queue-interactions
@@ -17913,6 +17926,23 @@ menu:
         operationids:
           - SubmitProductAnalyticsEvent
         unstable: []
+        order: 1
+    - name: Product Catalog
+      url: /api/latest/product-catalog/
+      identifier: product-catalog
+      generated: true
+    - name: List SKUs
+      url: /api/latest/product-catalog/list-skus/
+      identifier: product-catalog-list-skus
+      parent: product-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListProductCatalogSKUs
+        unstable:
+          - v2
         order: 1
     - name: RUM
       url: /api/latest/rum/
