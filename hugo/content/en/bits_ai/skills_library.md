@@ -53,9 +53,9 @@ You can include additional context in the same message or continue the conversat
 
 ## Use a skill in Bits Agent Builder
 
-In the agent instructions, add each skill that the agent needs. Choose only skills that apply to the agent's intended tasks so that the instructions remain focused.
+In the agent configuration, select each skill that the agent needs. The agent automatically loads selected skills.
 
-During a test conversation, invoke a skill explicitly with its slash command:
+To invoke a skill explicitly during a conversation, enter its slash command:
 
 ```text
 /my-skill
