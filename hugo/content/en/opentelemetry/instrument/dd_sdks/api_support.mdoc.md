@@ -138,7 +138,7 @@ This approach works with the existing OpenTelemetry SDK. When you enable this fe
 - **Datadog SDK**: dd-trace-dotnet version 3.30.0 or later.
 {% /if %}
 {% if equals($prog_lang, "node_js") %}
-- **Datadog SDK**: `dd-trace-js` version 5.81.0 or later.
+- **Datadog SDK**: `dd-trace-js` version 7.0.0 or later for metrics life cycle methods. Basic OTel Metrics API support requires version 5.81.0 or later.
 - **OpenTelemetry API**: `@opentelemetry/api` version 1.0.0 to 1.10.0. (The Datadog SDK provides the implementation for this API).
 {% /if %}
 {% if equals($prog_lang, "python") %}
@@ -163,7 +163,7 @@ The OpenTelemetry Metrics SDK for Ruby is currently in [alpha implementation](ht
 - **Rust**: MSRV 1.84 or later.
 {% /if %}
 {% if equals($prog_lang, "java") %}
-- **Datadog SDK**: `dd-trace-java` version 1.61.0 or later.
+- **Datadog SDK**: `dd-trace-java` version 1.66.0 or later for metrics life cycle methods. Basic OTel Metrics API support requires version 1.61.0 or later.
 {% /if %}
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
 {% if includes($prog_lang, ["dot_net", "node_js", "python", "ruby", "go", "java"]) %}
@@ -491,6 +491,71 @@ LongCounter counter = meter.counterBuilder("http.requests_total").build();
 // Record measurements
 counter.add(1, Attributes.builder().put("method", "GET").put("status_code", "200").build());
 ```
+{% /if %}
+
+{% if includes($prog_lang, ["node_js", "python", "java"]) %}
+
+### Flush metrics in short-lived processes
+
+Metrics are normally exported on a schedule. `ForceFlush` and `Shutdown` are OpenTelemetry Metrics SDK life cycle operations, not Metrics API methods. Python exposes these operations through the OpenTelemetry SDK. The Datadog SDKs for Node.js and Java provide equivalent extensions.
+
+Before a short-lived process exits, call `forceFlush` to wait for metrics recorded so far. After recording is complete, call `shutdown` once to perform a final export and stop metrics export. Don't record more metrics after shutdown.
+
+{% if equals($prog_lang, "node_js") %}
+The completion callback receives an error if the operation fails. `OTEL_EXPORTER_OTLP_METRICS_TIMEOUT` bounds each OTLP HTTP request in milliseconds.
+
+```javascript
+const meterProvider = metrics.getMeterProvider();
+
+meterProvider.forceFlush((error) => {
+  if (error) {
+    console.error('Failed to flush metrics', error);
+    return;
+  }
+  meterProvider.shutdown((error) => {
+    if (error) console.error('Failed to shut down metrics', error);
+  });
+});
+```
+
+For TypeScript, cast the provider to the Datadog implementation type:
+
+```typescript
+import type { opentelemetry as DatadogOpenTelemetry } from 'dd-trace';
+
+const meterProvider = metrics.getMeterProvider() as DatadogOpenTelemetry.MeterProvider;
+```
+{% /if %}
+
+{% if equals($prog_lang, "python") %}
+```python
+meter_provider = metrics.get_meter_provider()
+
+if not meter_provider.force_flush(timeout_millis=10_000):
+    raise RuntimeError("metric export failed or timed out")
+
+meter_provider.shutdown(timeout_millis=10_000)
+```
+
+`force_flush` returns `True` on success. Either operation can fail with an exception if a metric reader fails or its deadline expires. `shutdown` succeeds without a return value.
+{% /if %}
+
+{% if equals($prog_lang, "java") %}
+```java
+import datadog.trace.api.metrics.OpenTelemetryMetrics;
+import java.util.concurrent.TimeUnit;
+
+boolean exported = OpenTelemetryMetrics.forceFlush().get(10, TimeUnit.SECONDS);
+boolean finalExport = OpenTelemetryMetrics.shutdown().get(10, TimeUnit.SECONDS);
+
+if (!exported || !finalExport) {
+  throw new IllegalStateException("Metric export failed or is unavailable");
+}
+```
+
+These methods are Datadog extensions and don't use or shut down an OpenTelemetry `SdkMeterProvider`. `shutdown()` performs a final export and stops the Datadog metrics export pipeline. A `false` result indicates that the operation failed or metrics export is unavailable. `get` can throw `TimeoutException`; its timeout bounds the caller's wait without cancelling the operation.
+{% /if %}
+
 {% /if %}
 
 ### Create a histogram
