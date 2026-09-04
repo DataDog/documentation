@@ -38,9 +38,21 @@ The following environment variables override configuration values:
 
 Choose either debug ID uploads or service and version uploads. Do not configure both upload methods in the same build.
 
-### Debug ID
+{{< tabs >}}
+{{% tab "Debug ID (Recommended)" %}}
 
-Configure `rum.sourceCodeContext.debugId` to inject debug IDs and `errorTracking.sourcemaps.debugId` to upload source maps during the build:
+Debug IDs associate each JavaScript bundle with its source map without relying on the bundle URL, service, or version. Use this method for new configurations.
+
+Configure the following options in `errorTracking.sourcemaps`:
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `debugId` | Boolean | Yes | None | Set to `true` to upload source maps using debug IDs. |
+| `bailOnError` | Boolean | No | `false` | If `true`, the build fails when a source map upload error occurs. |
+| `dryRun` | Boolean | No | `false` | If `true`, the plugin runs through the upload process without sending data to Datadog. Use this to verify your configuration. |
+| `maxConcurrency` | Number | No | `20` | Maximum number of concurrent source map uploads. |
+
+Also configure `rum.sourceCodeContext.debugId` to inject debug IDs during the build:
 
 ```javascript
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
@@ -67,22 +79,21 @@ module.exports = {
 };
 ```
 
-Debug ID uploads do not require a service, release version, or minified path prefix. Omit `errorTracking.sourcemaps` to inject debug IDs without uploading source maps from the build plugin.
+Debug ID uploads do not require a service, release version, or minified path prefix.
 
-### Service and version
+{{% /tab %}}
+{{% tab "Service and version" %}}
 
 Configure the `errorTracking.sourcemaps` object to upload source maps using service and version matching:
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `errorTracking.sourcemaps.service` | String | Yes | None | Service name. Must match the RUM SDK `service` initialization parameter. |
-| `errorTracking.sourcemaps.releaseVersion` | String | Yes | None | Release version. Must match the RUM SDK `version` initialization parameter. |
-| `errorTracking.sourcemaps.minifiedPathPrefix` | String | Yes | None | URL or root-relative path prefix for your minified JavaScript files are served. For example, `https://example.com/static/` or `/static/`. |
-| `errorTracking.sourcemaps.bailOnError` | Boolean | No | `false` | If `true`, the build fails when a source map upload error occurs. |
-| `errorTracking.sourcemaps.dryRun` | Boolean | No | `false` | If `true`, the plugin runs through the upload process without sending data to Datadog. Use this to verify your configuration. |
-| `errorTracking.sourcemaps.maxConcurrency` | Number | No | `20` | Maximum number of concurrent source map uploads. |
-
-#### Example
+| `service` | String | Yes | None | Service name. Must match the RUM SDK `service` initialization parameter. |
+| `releaseVersion` | String | Yes, unless `metadata.version` is set | None | Release version. Must match the RUM SDK `version` initialization parameter. |
+| `minifiedPathPrefix` | String | Yes | None | URL or root-relative path prefix where your minified JavaScript files are served. For example, `https://example.com/static/` or `/static/`. |
+| `bailOnError` | Boolean | No | `false` | If `true`, the build fails when a source map upload error occurs. |
+| `dryRun` | Boolean | No | `false` | If `true`, the plugin runs through the upload process without sending data to Datadog. Use this to verify your configuration. |
+| `maxConcurrency` | Number | No | `20` | Maximum number of concurrent source map uploads. |
 
 ```javascript
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
@@ -106,9 +117,12 @@ module.exports = {
 };
 ```
 
-<div class="alert alert-info">This example uses webpack. The configuration object is identical across all supported bundlers — only the import and plugin function name differ. See <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> for installation instructions for your bundler.</div>
-
 To also display inline source code in Error Tracking stack traces, pair service and version source map uploads with the [Source Code Context][5] plugin.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+<div class="alert alert-info">These examples use webpack. The configuration object is identical across all supported bundlers — only the import and plugin function name differ. See <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> for installation instructions for your bundler.</div>
 
 ## Further reading
 

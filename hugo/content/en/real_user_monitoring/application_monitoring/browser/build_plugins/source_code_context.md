@@ -41,22 +41,12 @@ Debug IDs associate each JavaScript bundle with its source map without relying o
 
 Set `debugId` to `true` in `rum.sourceCodeContext` to inject a debug ID into each JavaScript bundle.
 
-The following example also configures `errorTracking.sourcemaps.debugId` so that the build plugin uploads the source maps:
-
 ```javascript
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
 
 module.exports = {
   plugins: [
     datadogWebpackPlugin({
-      auth: {
-        apiKey: process.env.DATADOG_API_KEY,
-      },
-      errorTracking: {
-        sourcemaps: {
-          debugId: true,
-        },
-      },
       rum: {
         sourceCodeContext: {
           debugId: true,
@@ -66,8 +56,6 @@ module.exports = {
   ],
 };
 ```
-
-If you upload source maps with another tool, such as `datadog-ci`, omit `auth` and `errorTracking.sourcemaps` from this configuration.
 
 {{% /tab %}}
 {{% tab "Service and version" %}}
