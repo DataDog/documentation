@@ -73,6 +73,17 @@ These repositories are dependencies of or closely related to this project. They 
 - `hugo/Makefile` + `hugo/Makefile.config` - Build orchestration
 - Environment-specific parameters in `hugo/config/{env}/params.yaml`
 
+## PR Review Output Format
+When reviewing a PR or doc text, always give concrete suggested wording (a copy-pasteable replacement), not an abstract description of the problem. Keep rewrites as short or shorter than the original — prefer the simplest phrasing that is still accurate.
+Always cite line numbers from the actual source file (read the file), never from `git diff`/`gh pr diff` hunk output.
+At the top of every review, state the exact PR number and title being reviewed so there is no ambiguity when multiple PRs are discussed.
+
+## Docs conventions
+- Hugo menu `weight` values must be whole numbers — renumber neighbors rather than using fractional weights like 8.5.
+- Content that must appear in more than one product section goes in a reusable partial; keep the page itself in its primary product section (e.g. RUM pages stay under RUM, not OpenTelemetry).
+- Use 'EU1' only for the CDN/agent URL paths that literally contain `eu1`; site references are 'EU'.
+- When auditing for a string 'elsewhere in the docs', exclude files modified by the current PR and generated files unless I say otherwise.
+
 ## Critical Rules
 
 - **NEVER push directly to `master`.** Always create a PR and go through the review process. Direct pushes bypass branch protection and code review.
