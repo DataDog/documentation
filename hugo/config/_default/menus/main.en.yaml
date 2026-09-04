@@ -10071,7 +10071,7 @@ menu:
       parent: rum
       identifier: rum_ownership_of_views
       weight: 14
-    - name: Remote Configuration
+    - name: RUM Remote Configuration
       url: real_user_monitoring/remote_configuration/
       parent: rum
       identifier: rum_remote_configuration
