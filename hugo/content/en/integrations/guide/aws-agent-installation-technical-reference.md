@@ -21,6 +21,8 @@ This page explains how Datadog instruments and maintains your AWS workloads thro
 
 This page covers Amazon EC2 instances and AWS Lambda functions. Amazon EKS is not supported.
 
+Datadog also offers [remote instrumentation][4] for Lambda functions, which deploys an instrumenter function into your own account rather than making the changes from Datadog. For a comparison of the two, see [Choose between this guide and remote instrumentation][6].
+
 ## AWS resources that Datadog creates
 
 ### Created once, by the CloudFormation stack
@@ -201,3 +203,4 @@ To uninstall, remove resources from a rule, edit the rule's query, or delete the
 [3]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#aws-lambda-functions
 [4]: https://docs.datadoghq.com/serverless/aws_lambda/remote_instrumentation/
 [5]: https://docs.datadoghq.com/account_management/workload_identity_federation/
+[6]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#choose-between-this-guide-and-remote-instrumentation
