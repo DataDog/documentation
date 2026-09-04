@@ -24,7 +24,7 @@ Journey configuration has three steps:
 2. Add RUM operations that represent critical technical steps.
 3. Add Synthetic tests that cover the journey.
 
-After completing these steps, validate the journey's KPIs, operations, SLOs, tests, and variants.
+After completing these steps, validate the journey's key performance indicators (KPIs), operations, service level objectives (SLOs), tests, and variants.
 
 ## When to use Journey Monitoring
 
@@ -82,7 +82,7 @@ Create a journey manually or start with a suggested journey. For instructions, s
 
 Choose a creation method based on whether you have a specific user flow in mind:
 
-- Start with a [suggested journey][6] if you are unsure which journeys to create. Suggested journeys provide high-level key performance indicators (KPIs), including starts, conversions, and conversion rate.
+- Start with a [suggested journey][6] if you are unsure which journeys to create. Suggested journeys provide high-level KPIs, including starts, conversions, and conversion rate.
 - Review new suggested journeys as you release features and update the application experience. Datadog generates suggestions based on user activity in the application.
 - Create a journey manually when you have a specific user flow that you want to monitor.
 
@@ -94,7 +94,7 @@ A journey is defined by its start and end events. Select action events, view eve
 
 Multiple start events can represent several entry points into the same user flow. Multiple end events can represent several valid conclusions.
 
-Each additional event broadens the journey definition. A large number of start or end events can make the journey's scope unclear and its key performance indicators (KPIs) less precise.
+Each additional event broadens the journey definition. A large number of start or end events can make the journey's scope unclear and its KPIs less precise.
 
 #### Attribute filters
 
@@ -118,7 +118,7 @@ Each variant requires a unique name and at least one intermediate event. For inf
 
 A start event should clearly begin the journey and represent an intentional user action.
 
-<div class="alert alert-warning">Choose an end event that confirms that the journey is complete. When a later event provides that confirmation, do not use the action that initiates the final step.</div>
+<div class="alert alert-danger">Choose an end event that confirms that the journey is complete. Clicking "Pay" or "Submit" doesn't mean the action worked. If a later event confirms success, use that event instead, so failed attempts aren't counted as completed journeys.</div>
 
 For example:
 
@@ -152,7 +152,7 @@ The journey details report uses time correlation to suggest existing RUM operati
 Linking an operation:
 
 - Links the operation to the journey and identifies it as part of the journey's critical path.
-- Automatically creates an availability service level objective (SLO) for the operation if it does not already have an SLO.
+- Automatically creates an availability SLO for the operation if it does not already have an SLO.
 
 ### Create operations
 
@@ -169,8 +169,8 @@ Each linked operation requires at least one SLO for Datadog to evaluate its cont
 When you create an operation from the journey details report, Datadog links it to the journey and creates an availability SLO. If you create an operation with the RUM SDK APIs or RUM Operations API, use the [RUM Operations API][12] to link it to the journey.
 
 
-<div class="alert alert-info">
-<p><strong>Recommendation</strong>: Start with the operation that has the greatest effect on journey conversion. Add more operations as needed.</p>
+<div class="alert alert-tip">
+Start with the operation that has the greatest effect on journey conversion. Add more operations as needed.
 <ul>
 <li>For a user sign-in journey, monitor the final sign-in action to verify that valid credentials result in successful authentication.</li>
 <li>For an ecommerce checkout journey, monitor the payment action because a failed payment prevents the user from completing the journey.</li>

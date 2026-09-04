@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-A journey connects assets from Product Analytics, RUM and Synthetic Monitoring. Most actions require both a Journey Monitoring permission and the permission for the underlying asset the action touches.
+A journey connects assets from Product Analytics, RUM, and Synthetic Monitoring. Most actions require both a Journey Monitoring permission and the permission for the underlying asset the action touches.
 
 ## Create and edit journeys
 
@@ -33,7 +33,7 @@ Asset creation is best-effort: creating a journey succeeds with [Journey Monitor
 
 | Action | Required access |
 |--------|-----------------|
-| View a journey and its details | [Journey Monitoring read][perms] and RUM read (on the app) |
+| View a journey and its details | [Journey Monitoring read][perms] and RUM read on the journey's RUM application |
 | View a test suite, its tests, and uptime SLO | Synthetic Monitoring read and a read restriction policy on the suite |
 | View strongly-linked RUM operations | [Journey Monitoring read][perms] and RUM read |
 | View an operation's SLO | SLO read |
