@@ -1354,7 +1354,7 @@ spec:
               - <SHORT_IMAGE>
             instances:
               - [...]
-                 password: "ENC[/Datadog/Production;apikey]"
+                password: "ENC[/Datadog/Production;apikey]"
 ```
 
 ##### Cluster check: without cluster check runners enabled
