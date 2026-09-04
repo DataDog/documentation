@@ -222,6 +222,9 @@ Only source maps with the `.js.map` extension work to correctly unminify stack t
 
 <div class="alert alert-info">If you are serving the same JavaScript source files from different subdomains, upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full URL. For example, specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>.</div>
 
+[2]: /real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
+[3]: /logs/log_collection/javascript/#initialization-parameters
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -268,7 +271,5 @@ On the other hand, an unminified stack trace provides you with all the context y
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps
-[2]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
-[3]: https://docs.datadoghq.com/logs/log_collection/javascript/#initialization-parameters
 [4]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps#link-errors-with-your-source-code
 [5]: https://app.datadoghq.com/source-code/setup/rum
