@@ -32,7 +32,7 @@ Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector. The
 - **OTLP HTTP exporter**: Sends telemetry to Datadog's OTLP intake endpoints.
 - **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Service Catalog and Service Page.
 - **Resource detection processor**: Detects host and cloud resource attributes, which Datadog uses for hostname resolution and tagging.
-- **Datadog extension**: Reports Collector metadata for host enrichment. It does not export telemetry data.
+- **Datadog extension**: Reports the Collector's configuration to Datadog for Fleet Automation. It does not export telemetry data.
 
 This is the recommended setup for a Collector you manage yourself. If you want a Collector distribution that Datadog maintains and supports, use the [Datadog Distribution of OTel Collector (DDOT)][12] instead.
 
@@ -58,9 +58,9 @@ This setup does not support serverless or task-based container runtimes such as 
 
 Download the latest release of the OpenTelemetry Collector Contrib distribution from the [releases page][100].
 
-### 2. Create the Collector configuration
+### 2. Configure and deploy the Collector
 
-Create a configuration file named `collector.yaml`. The configuration varies depending on your environment. Select the tab that matches your setup. On Kubernetes, use the **Kubernetes** tab, which installs the Collector with Helm. The **Kubernetes manifest reference** tab is for users who maintain their own manifests.
+Configure and deploy the Collector for your environment. For Host and Docker, create a configuration file named `collector.yaml`. On Kubernetes, use the **Kubernetes** tab, which installs the Collector with Helm. The **Kubernetes manifest reference** tab is for users who maintain their own manifests.
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -197,7 +197,7 @@ exporters:
         max_size: 4194304 # Split large batches at 4MiB (4 * 1024 * 1024)
 
 extensions:
-  # Report Collector metadata to Datadog for host enrichment
+  # Report Collector configuration to Datadog for Fleet Automation
   datadog:
     api:
       site: ${env:DD_SITE}
@@ -246,6 +246,13 @@ For cloud-specific environments, add the appropriate resource detection detector
 See the [full configuration files][500] for an optional config to gather additional metadata about the system.
 
 [500]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
+
+Run the Collector:
+
+```shell
+DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=<YOUR_API_KEY> \
+  otelcol-contrib --config collector.yaml
+```
 
 {{% /tab %}}
 
@@ -388,7 +395,7 @@ exporters:
         max_size: 4194304 # Split large batches at 4MiB (4 * 1024 * 1024)
 
 extensions:
-  # Report Collector metadata to Datadog for host enrichment
+  # Report Collector configuration to Datadog for Fleet Automation
   datadog:
     api:
       site: ${env:DD_SITE}
@@ -710,7 +717,7 @@ extensions:
   # Required for Kubernetes liveness/readiness probes
   health_check:
     endpoint: ${env:MY_POD_IP}:13133
-  # Report Collector metadata to Datadog for host enrichment
+  # Report Collector configuration to Datadog for Fleet Automation
   datadog:
     api:
       site: ${env:DD_SITE}
@@ -843,7 +850,7 @@ processors:
 These modes do not allow mounting `/hostfs` or using host ports. Use the GKE or AKS `resource_detection` processor, then make these additional changes:
 
 - Remove the `host_metrics` receiver from the `receivers` block and from the `metrics` pipeline. Node, pod, container, and volume metrics still come from the `kubelet_stats` receiver.
-- Disable host ports on the Collector and expose it through a node-local Service instead. The GKE Autopilot and AKS Automatic Helm values files apply these changes. Point applications at that Service rather than at the host IP shown in [Configure your application](#4-configure-your-application).
+- Disable host ports on the Collector and expose it through a node-local Service instead. The GKE Autopilot and AKS Automatic Helm values files apply these changes. Point applications at that Service rather than at the host IP shown in [Configure your application](#3-configure-your-application).
 
 For the complete configuration files for each environment, see the [`opentelemetry-examples` repository][501].
 
@@ -853,18 +860,7 @@ For the complete configuration files for each environment, see the [`opentelemet
 {{% /tab %}}
 {{< /tabs >}}
 
-### 3. Run the Collector
-
-Start the Collector. The Docker and Kubernetes Helm commands are included in the [Create the Collector configuration](#2-create-the-collector-configuration) section.
-
-For Host installations, run:
-
-```shell
-DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=<YOUR_API_KEY> \
-  otelcol-contrib --config collector.yaml
-```
-
-### 4. Configure your application
+### 3. Configure your application
 
 Configure your OpenTelemetry-instrumented application to send data to the Collector. Set the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to point to the Collector:
 
@@ -921,7 +917,7 @@ After your application sends telemetry to the Collector, verify that data appear
 
 The `span_metrics` connector generates RED metrics from trace data. These metrics power APM features including the Service Catalog, Service Page, and Resource Page. The connector is configured with dimensions that enable Datadog to compute host tags, peer services, and operation names from your traces.
 
-Each environment-specific configuration in [Create the Collector configuration](#2-create-the-collector-configuration) includes the complete `span_metrics` connector block. Retain all of its dimensions when adapting the configuration so Datadog can derive the required host tags, peer services, operation names, and resource names.
+Each environment-specific configuration in [Configure and deploy the Collector](#2-configure-and-deploy-the-collector) includes the complete `span_metrics` connector block. Retain all of its dimensions when adapting the configuration so Datadog can derive the required host tags, peer services, operation names, and resource names.
 
 The [full configuration files][5] also show how to replace groups of container tag dimensions with glob patterns, such as `- glob: container.**`.
 
@@ -967,7 +963,7 @@ The `forward/traces_sample` connector splits trace processing into two pipelines
 
 ### Datadog extension
 
-The `datadog` extension sends Collector metadata to Datadog for host enrichment. It does not export telemetry data. All telemetry flows through the OTLP HTTP exporter. This extension is part of the [OpenTelemetry Collector Contrib][1] project and handles API key validation and deployment type reporting.
+The `datadog` extension reports the Collector's configuration to Datadog for Fleet Automation. It does not export telemetry data. All telemetry flows through the OTLP HTTP exporter. This extension is part of the [OpenTelemetry Collector Contrib][1] project and handles API key validation and deployment type reporting.
 
 ### Cumulative-to-delta processor
 
