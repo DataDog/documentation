@@ -98,7 +98,7 @@ If the Worker is not starting, Worker logs are not sent to Datadog and are not v
 
 ### Multi-attach error when using persistence on Kubernetes
 
-If you enabled [disk buffering][24] for destinations and see a Worker pod stuck in `Pending` with a volume multi-attach error after Kubernetes reschedules it to a new node, this is expected. The error occurs because the persistent volume from the previous node hasn't finished detaching. The pod recovers on its own, usually within a few minutes, and this doesn't cause data loss.
+If you enabled [disk buffering][24] for destinations and see a Worker pod stuck in `Pending` with a volume multi-attach error after Kubernetes reschedules it to a new node, this is expected. The error occurs because the persistent volume from the previous node hasn't finished detaching. The pod recovers on its own.
 
 Datadog recommends keeping the Worker StatefulSet's default `podManagementPolicy: Parallel` setting even when you see this error. Switching to `OrderedReady` reduces how often the error appears but it blocks the StatefulSet from scaling up while terminating replicas finish their graceful shutdown. This slows your pipeline's response to a burst of events.
 

@@ -767,7 +767,7 @@ The Worker runs as a Kubernetes StatefulSet. When you enable persistent volumes 
 
 Setting `podManagementPolicy` to `OrderedReady` reduces how often a Worker pod shows a volume multi-attach error. But it also blocks the StatefulSet from scaling up while terminating replicas finish their graceful shutdown, which slows your pipeline's response to a burst of events.
 
-With the `Parallel` setting, a rescheduled Worker pod can show a transient volume multi-attach error if Kubernetes assigns it to a new node before its persistent volume detaches from the previous node. The pod recovers on its own, and this doesn't cause data loss.
+With the `Parallel` setting, a rescheduled Worker pod can show a transient volume multi-attach error if Kubernetes assigns it to a new node before its persistent volume detaches from the previous node. The pod recovers on its own.
 
 See [Multi-attach error when using persistence on Kubernetes][27] for more information.
 
