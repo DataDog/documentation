@@ -1,6 +1,6 @@
 ---
 title: Set Up APM Trace Enrichment for Feature Flags
-description: Automatically attach feature flag evaluation data to APM traces so you can inspect and filter traces by flag variant.
+description: Automatically attach feature flag evaluation data to APM traces so you can inspect traces by flag variant and use APM metrics in canary rollouts.
 further_reading:
 - link: "/feature_flags/server/"
   tag: "Documentation"
@@ -8,6 +8,9 @@ further_reading:
 - link: "/feature_flags/guide/server_flag_evaluation_metrics/"
   tag: "Guide"
   text: "Set Up Server-Side Flag Evaluation Metrics"
+- link: "/feature_flags/use_cases/progressive_rollouts/"
+  tag: "Documentation"
+  text: "Progressive Rollouts and Canaries"
 - link: "/tracing/trace_explorer/"
   tag: "Documentation"
   text: "Trace Explorer"
@@ -18,6 +21,7 @@ further_reading:
 APM trace enrichment automatically attaches feature flag evaluation data to your APM traces. When a feature flag is evaluated during a traced request, the SDK records which flags were evaluated and which variants were returned. This data is written to the root span and processed server-side so you can:
 
 - **Filter traces by flag variant** in [Trace Explorer][1] using `@feature_flags.<flag_key>:<variant>` facets.
+- **Use span duration, error rate, and numeric span attributes as guardrail metrics** for canary rollouts.
 - **Debug flag-related issues** by seeing which flags were active when an error occurred.
 
 <div class="alert alert-warning">APM trace enrichment is experimental and may change in a future release.</div>
@@ -186,6 +190,23 @@ Feature flag attributes on traces are available across Datadog:
 - **Notebooks**: Build an investigation notebook comparing performance across feature flag variants.
 - **Visualizations**: Use the Top List view in Trace Explorer to verify that rollout traffic distribution matches your targeting rules.
 
+## Use with canary rollouts
+
+APM trace enrichment is required to use APM metrics as guardrails for [canary rollouts][4]. Enrichment associates each retained trace with the feature flag allocation, variant, and subject used by the canary. Without this metadata, the canary cannot compare APM data between the control and treatment groups.
+
+Canary rollouts support the following APM guardrail metrics:
+
+- Mean span duration
+- Error rate
+- P90 span duration
+- Mean of a numeric span attribute
+
+Canary analysis uses retained traces that match the APM metric query. A low retained-trace volume can delay a decision until enough sampled subjects and events are available. To increase the random retained sample, configure temporary trace retention for the canary.
+
+{{< img src="feature_flags/apm_canaries/apm-canary-metric-monitored-with-retention.png" alt="Canary configuration with a P90 span duration guardrail, abort action, temporary APM trace retention, and a control variant." style="width:90%;" >}}
+
+For setup instructions, see [Progressive Rollouts and Canaries][4].
+
 ## Limits
 
 The SDK enforces the following per-span limits to bound payload size:
@@ -206,3 +227,4 @@ Evaluations beyond these limits are dropped for that span.
 [1]: /tracing/trace_explorer/
 [2]: /feature_flags/server/
 [3]: /tracing/
+[4]: /feature_flags/use_cases/progressive_rollouts/
