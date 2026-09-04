@@ -1,0 +1,28 @@
+.card-grid__tooltip {
+  /* Fixed, not absolute: the coordinates below come straight from
+     getBoundingClientRect, which is viewport-relative. `absolute` would
+     resolve them against the nearest positioned ancestor instead, and grids
+     often sit inside one (`.tabs` and `.stepper__step` are both
+     `position: relative`), which threw the bubble thousands of pixels off. */
+  position: fixed;
+  z-index: 1;
+  transform: translate(-50%, -100%);
+  margin-top: calc(-1 * var(--space-xs));
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--border-radius);
+  background: var(--color-tooltip-bg);
+  color: var(--color-tooltip-text);
+  font-size: var(--font-size-sm);
+  /* A step up from the inherited 400: small white text on black reads thin,
+     and the extra weight buys legibility at this size. */
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.card-grid__tooltip--visible {
+  opacity: 1;
+  visibility: visible;
+}

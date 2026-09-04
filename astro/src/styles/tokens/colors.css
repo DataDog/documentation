@@ -79,5 +79,10 @@
   --color-placeholder-bg: #e9d8f4;
   --color-placeholder-outline: #632ca6;
   --color-placeholder-text: var(--color-placeholder-outline);
+
+  /* Colors — Tooltip. Named as a general primitive rather than
+     --card-grid-tooltip-*, since other components will want tooltips. */
+  --color-tooltip-bg: #000;
+  --color-tooltip-text: #fff;
 }
 

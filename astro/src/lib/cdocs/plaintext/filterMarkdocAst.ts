@@ -21,7 +21,7 @@
  */
 import Markdoc from '@markdoc/markdoc';
 import type { Node, Config } from '@markdoc/markdoc';
-import { rewriteInternalDocLink } from './rewriteDocLink';
+import { rewriteInternalDocLink } from '@lib/plaintext/rewriteDocLink';
 
 const { parse } = Markdoc;
 

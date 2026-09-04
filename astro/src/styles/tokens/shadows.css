@@ -4,4 +4,5 @@
   --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.25);
   --shadow-md-hover: 0 4px 15px rgba(0, 0, 0, 0.45);
   --shadow-brand: 0 -4px 12px rgba(99, 44, 166, 0.08);
+  --shadow-sm-hover: 0 2px 4px 2px rgba(0, 0, 0, 0.4);
 }
