@@ -743,7 +743,7 @@ To upgrade the Worker, update the Worker image version in your CloudFormation st
     ```
     --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
     ```
-- If you enable [disk buffering][16] for destinations, you must enable Kubernetes [persistent volumes][17] in the Observability Pipelines Helm chart. See [Persistence and pod scheduling](#persistence-and-pod-scheduling) for more information.
+- If you enable [disk buffering][16] for destinations, you must enable Kubernetes [persistent volumes][17] in the Observability Pipelines Helm chart. See also [Persistence and pod scheduling](#persistence-and-pod-scheduling) for more information.
 - If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
 See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration.
@@ -767,7 +767,7 @@ The Worker runs as a Kubernetes StatefulSet. When you enable persistent volumes 
 
 Setting `podManagementPolicy` to `OrderedReady` reduces how often a Worker pod shows a volume multi-attach error. But it also blocks the StatefulSet from scaling up while terminating replicas finish their graceful shutdown, which slows your pipeline's response to a burst of events.
 
-With `Parallel`, a rescheduled Worker pod can show a transient volume multi-attach error if Kubernetes assigns it to a new node before its persistent volume detaches from the previous node. The pod recovers on its own, and this doesn't cause data loss.
+With the `Parallel` setting, a rescheduled Worker pod can show a transient volume multi-attach error if Kubernetes assigns it to a new node before its persistent volume detaches from the previous node. The pod recovers on its own, and this doesn't cause data loss.
 
 See [Multi-attach error when using persistence on Kubernetes][27] for more information.
 
