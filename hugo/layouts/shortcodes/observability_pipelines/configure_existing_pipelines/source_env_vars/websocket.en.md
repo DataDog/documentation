@@ -1,0 +1,14 @@
+- WebSocket URI:
+   - The Observability Pipelines Worker connects to this endpoint and ingests the messages it receives as logs. For example, `wss://example.com/stream`.
+   - The default environment variable is `DD_OP_SOURCE_WEBSOCKET_URI`.
+- WebSocket TLS passphrase (when a client certificate key is encrypted):
+   - The default environment variable is `DD_OP_SOURCE_WEBSOCKET_KEY_PASS`.
+- If you are using basic authentication:
+   - The username and password for the WebSocket endpoint.
+   - The default environment variables are `DD_OP_SOURCE_WEBSOCKET_USERNAME` and `DD_OP_SOURCE_WEBSOCKET_PASSWORD`.
+- If you are using bearer authentication:
+   - The bearer token for the WebSocket endpoint.
+   - The default environment variable is `DD_OP_SOURCE_WEBSOCKET_BEARER_TOKEN`.
+- If you are using custom authentication:
+   - The value of the `Authorization` header to send with the connection request.
+   - The default environment variable is `DD_OP_SOURCE_WEBSOCKET_HEADERS_AUTHORIZATION`.

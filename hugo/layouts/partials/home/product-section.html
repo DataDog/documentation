@@ -1,0 +1,49 @@
+{{- $product := .product -}}
+{{- $ctx := .ctx -}}
+{{- $span := $product.span | default 4 -}}
+
+{{- /* Total link count, shown next to the section title as e.g. "(18)" */ -}}
+{{- $count := 0 -}}
+{{- range $product.columns -}}
+    {{- range .subheaders -}}
+        {{- $count = add $count (len .links) -}}
+    {{- end -}}
+{{- end -}}
+
+{{- /* Column count drives the grid via the --cols custom property */ -}}
+{{- $colCount := len $product.columns -}}
+
+<div class="product-section product-section--span-{{ $span }} is-open">
+    <div class="product-section__header">
+        {{- with $product.icon }}
+        <span class="product-section__icon" aria-hidden="true">
+            {{ partial "icon" (dict "name" . "size" "28px") }}
+        </span>
+        {{- end }}
+        <h3 class="product-section__title">{{ $product.title }}</h3>
+        <span class="product-section__count">({{ $count }})</span>
+        <button type="button" class="product-section__caret-button"
+                aria-expanded="true"
+                aria-label="Collapse {{ $product.title }}">
+            <span class="product-section__caret" aria-hidden="true">
+                {{ partial "icon" (dict "name" "angle-right-wui" "size" "16px") }}
+            </span>
+        </button>
+    </div>
+
+    <div class="product-section__collapsible">
+        <div class="product-section__collapsible-inner">
+            <div class="product-section__card">
+                <div class="product-section__subheaders" style="--cols: {{ $colCount }};">
+                    {{- range $product.columns }}
+                    <div class="product-section__column">
+                        {{- range .subheaders }}
+                        {{ partial "home/product-subheader" (dict "subheader" . "section_title" $product.title) }}
+                        {{- end }}
+                    </div>
+                    {{- end }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
