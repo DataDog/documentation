@@ -13,7 +13,7 @@ further_reading:
   text: "Plan and Usage Experience for Partners"
 ---
 
-The [Customer Contracts][1] page gives Datadog partners a single view of their end customer contract portfolio, including recurring revenue, renewal dates, invoices, and cost visibility status. Summary tiles at the top of the page show how many contracts are up for renewal, how many customers need a cost visibility action, and the number and total amount of overdue invoices.
+The [Customer Contracts][1] page gives Datadog partners a single view of their end customer contract portfolio, including recurring revenue, renewal dates, invoices, and cost visibility status. Summary tiles at the top of the page show how many contracts are up for renewal, how many customers need rates entered before they can use cost visibility features, and the number and total amount of overdue invoices.
 
 {{< img src="account_management/plan_and_usage/customer-contracts-overview.png" alt="Customer Contracts page in a Datadog admin organization showing summary tiles for renewals, cost visibility, and overdue invoices above a table of customers" >}}
 
@@ -42,7 +42,7 @@ The customer table lists every customer with an eligible contract. Select a cust
 | {{< ui >}}Cost Visibility{{< /ui >}} | Whether the customer can see their Datadog costs. See [Check cost visibility status](#check-cost-visibility-status) |
 | {{< ui >}}Contract Status{{< /ui >}} | Whether the contract is active, approaching its renewal date, or expired |
 
-Use the search box to find a specific customer, or filter the table by {{< ui >}}Cost Visibility{{< /ui >}} or {{< ui >}}Contract Status{{< /ui >}}. The table is paginated, displaying 10 rows per page by default.
+Use the search box to find a specific customer, or filter the table by {{< ui >}}Cost Visibility{{< /ui >}} or {{< ui >}}Contract Status{{< /ui >}}.
 
 ## Track renewals
 
@@ -75,6 +75,8 @@ The {{< ui >}}Cost Visibility{{< /ui >}} column shows where each customer stands
 - {{< ui >}}Enabled{{< /ui >}}: the customer can see their Datadog costs in their own organization.
 - {{< ui >}}Not configured{{< /ui >}}: you haven't published rates for this customer yet.
 - {{< ui >}}Update needed{{< /ui >}}: the customer's contract changed, so their published rates need an update.
+
+The {{< ui >}}Cost Visibility Action Needed{{< /ui >}} tile at the top of the page counts the customers in the {{< ui >}}Not configured{{< /ui >}} and {{< ui >}}Update needed{{< /ui >}} states.
 
 To publish or update rates, see [Customer Pricing][2]. To explain the feature to your customer, share [Cost Visibility for Customers Who Purchase Through a Partner][3].
 
