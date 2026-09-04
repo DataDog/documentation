@@ -83,64 +83,54 @@
                   },
                   {
                     "name": "initial_cells",
-                    "type": "[IncidentTimelineCellCreateAttributes]",
+                    "type": "[<oneOf>]",
                     "required": false,
                     "deprecated": false,
                     "readOnly": false,
                     "description": "An array of initial timeline cells to be placed at the beginning of the incident timeline.",
-                    "children": [
+                    "unionOptions": [
                       {
-                        "name": "",
-                        "type": "oneOf",
-                        "required": false,
-                        "deprecated": false,
-                        "readOnly": false,
-                        "description": "The timeline cell's attributes for a create request.",
-                        "unionOptions": [
+                        "label": "<cell_type=markdown>",
+                        "description": "Timeline cell data for Markdown timeline cells for a create request.",
+                        "fields": [
                           {
-                            "label": "Option 1",
-                            "description": "Timeline cell data for Markdown timeline cells for a create request.",
-                            "fields": [
-                              {
-                                "name": "cell_type",
-                                "type": "string",
-                                "required": true,
-                                "deprecated": false,
-                                "readOnly": false,
-                                "description": "Type of the Markdown timeline cell.",
-                                "enumValues": [
-                                  "markdown"
-                                ],
-                                "defaultValue": "markdown"
-                              },
+                            "name": "cell_type",
+                            "type": "string",
+                            "required": true,
+                            "deprecated": false,
+                            "readOnly": false,
+                            "description": "Type of the Markdown timeline cell.",
+                            "enumValues": [
+                              "markdown"
+                            ],
+                            "defaultValue": "markdown"
+                          },
+                          {
+                            "name": "content",
+                            "type": "object",
+                            "required": true,
+                            "deprecated": false,
+                            "readOnly": false,
+                            "description": "The Markdown timeline cell contents.",
+                            "children": [
                               {
                                 "name": "content",
-                                "type": "object",
-                                "required": true,
-                                "deprecated": false,
-                                "readOnly": false,
-                                "description": "The Markdown timeline cell contents.",
-                                "children": [
-                                  {
-                                    "name": "content",
-                                    "type": "string",
-                                    "required": false,
-                                    "deprecated": false,
-                                    "readOnly": false,
-                                    "description": "The Markdown content of the cell."
-                                  }
-                                ]
-                              },
-                              {
-                                "name": "important",
-                                "type": "boolean",
+                                "type": "string",
                                 "required": false,
                                 "deprecated": false,
                                 "readOnly": false,
-                                "description": "A flag indicating whether the timeline cell is important and should be highlighted.",
-                                "defaultValue": "false"
+                                "description": "The Markdown content of the cell."
                               }
                             ]
+                          },
+                          {
+                            "name": "important",
+                            "type": "boolean",
+                            "required": false,
+                            "deprecated": false,
+                            "readOnly": false,
+                            "description": "A flag indicating whether the timeline cell is important and should be highlighted.",
+                            "defaultValue": "false"
                           }
                         ]
                       }
@@ -156,7 +146,7 @@
                   },
                   {
                     "name": "notification_handles",
-                    "type": "[IncidentNotificationHandle]",
+                    "type": "[object]",
                     "required": false,
                     "deprecated": false,
                     "readOnly": false,
@@ -457,7 +447,7 @@
                     },
                     {
                       "name": "notification_handles",
-                      "type": "[IncidentNotificationHandle]",
+                      "type": "[object]",
                       "required": false,
                       "deprecated": false,
                       "readOnly": false,
@@ -598,7 +588,7 @@
                       "children": [
                         {
                           "name": "data",
-                          "type": "[RelationshipToIncidentAttachmentData]",
+                          "type": "[object]",
                           "required": true,
                           "deprecated": false,
                           "readOnly": false,
@@ -758,7 +748,7 @@
                       "children": [
                         {
                           "name": "data",
-                          "type": "[RelationshipToIncidentImpactData]",
+                          "type": "[object]",
                           "required": true,
                           "deprecated": false,
                           "readOnly": false,
@@ -797,7 +787,7 @@
                       "children": [
                         {
                           "name": "data",
-                          "type": "[RelationshipToIncidentIntegrationMetadataData]",
+                          "type": "[object]",
                           "required": true,
                           "deprecated": false,
                           "readOnly": false,
@@ -877,7 +867,7 @@
                       "children": [
                         {
                           "name": "data",
-                          "type": "[RelationshipToIncidentResponderData]",
+                          "type": "[object]",
                           "required": true,
                           "deprecated": false,
                           "readOnly": false,
@@ -916,7 +906,7 @@
                       "children": [
                         {
                           "name": "data",
-                          "type": "[RelationshipToIncidentUserDefinedFieldData]",
+                          "type": "[object]",
                           "required": true,
                           "deprecated": false,
                           "readOnly": false,
@@ -963,267 +953,257 @@
             },
             {
               "name": "included",
-              "type": "[IncidentResponseIncludedItem]",
+              "type": "[<oneOf>]",
               "required": false,
               "deprecated": false,
               "readOnly": true,
               "description": "Included related resources that the user requested.",
-              "children": [
+              "unionOptions": [
                 {
-                  "name": "",
-                  "type": "oneOf",
-                  "required": false,
-                  "deprecated": false,
-                  "readOnly": false,
-                  "description": "An object related to an incident that is included in the response.",
-                  "unionOptions": [
+                  "label": "<type=users>",
+                  "description": "User object returned by the API.",
+                  "fields": [
                     {
-                      "label": "Option 1",
-                      "description": "User object returned by the API.",
-                      "fields": [
+                      "name": "attributes",
+                      "type": "object",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Attributes of user object returned by the API.",
+                      "children": [
                         {
-                          "name": "attributes",
-                          "type": "object",
-                          "required": false,
-                          "deprecated": false,
-                          "readOnly": false,
-                          "description": "Attributes of user object returned by the API.",
-                          "children": [
-                            {
-                              "name": "email",
-                              "type": "string",
-                              "required": false,
-                              "deprecated": false,
-                              "readOnly": false,
-                              "description": "Email of the user."
-                            },
-                            {
-                              "name": "handle",
-                              "type": "string",
-                              "required": false,
-                              "deprecated": false,
-                              "readOnly": false,
-                              "description": "Handle of the user."
-                            },
-                            {
-                              "name": "icon",
-                              "type": "string",
-                              "required": false,
-                              "deprecated": false,
-                              "readOnly": false,
-                              "description": "URL of the user's icon."
-                            },
-                            {
-                              "name": "name",
-                              "type": "string",
-                              "required": false,
-                              "deprecated": false,
-                              "readOnly": false,
-                              "description": "Name of the user."
-                            },
-                            {
-                              "name": "uuid",
-                              "type": "string",
-                              "required": false,
-                              "deprecated": false,
-                              "readOnly": false,
-                              "description": "UUID of the user."
-                            }
-                          ]
-                        },
-                        {
-                          "name": "id",
+                          "name": "email",
                           "type": "string",
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
-                          "description": "ID of the user."
+                          "description": "Email of the user."
                         },
                         {
-                          "name": "type",
+                          "name": "handle",
                           "type": "string",
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
-                          "description": "Users resource type.",
-                          "enumValues": [
-                            "users"
-                          ],
-                          "defaultValue": "users"
+                          "description": "Handle of the user."
+                        },
+                        {
+                          "name": "icon",
+                          "type": "string",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "URL of the user's icon."
+                        },
+                        {
+                          "name": "name",
+                          "type": "string",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Name of the user."
+                        },
+                        {
+                          "name": "uuid",
+                          "type": "string",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "UUID of the user."
                         }
                       ]
                     },
                     {
-                      "label": "Option 2",
-                      "description": "Attachment data from a response.",
-                      "fields": [
+                      "name": "id",
+                      "type": "string",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "ID of the user."
+                    },
+                    {
+                      "name": "type",
+                      "type": "string",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Users resource type.",
+                      "enumValues": [
+                        "users"
+                      ],
+                      "defaultValue": "users"
+                    }
+                  ]
+                },
+                {
+                  "label": "<type=incident_attachments>",
+                  "description": "Attachment data from a response.",
+                  "fields": [
+                    {
+                      "name": "attributes",
+                      "type": "object",
+                      "required": true,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "The attachment's attributes.",
+                      "children": [
                         {
-                          "name": "attributes",
+                          "name": "attachment",
                           "type": "object",
-                          "required": true,
+                          "required": false,
                           "deprecated": false,
                           "readOnly": false,
-                          "description": "The attachment's attributes.",
+                          "description": "The attachment object.",
                           "children": [
                             {
-                              "name": "attachment",
-                              "type": "object",
-                              "required": false,
-                              "deprecated": false,
-                              "readOnly": false,
-                              "description": "The attachment object.",
-                              "children": [
-                                {
-                                  "name": "documentUrl",
-                                  "type": "string",
-                                  "required": false,
-                                  "deprecated": false,
-                                  "readOnly": false,
-                                  "description": "The URL of the attachment."
-                                },
-                                {
-                                  "name": "title",
-                                  "type": "string",
-                                  "required": false,
-                                  "deprecated": false,
-                                  "readOnly": false,
-                                  "description": "The title of the attachment."
-                                }
-                              ]
-                            },
-                            {
-                              "name": "attachment_type",
+                              "name": "documentUrl",
                               "type": "string",
                               "required": false,
                               "deprecated": false,
                               "readOnly": false,
-                              "description": "The type of the attachment.",
-                              "enumValues": [
-                                "postmortem",
-                                "link"
-                              ]
+                              "description": "The URL of the attachment."
                             },
                             {
-                              "name": "modified",
-                              "type": "string (date-time)",
+                              "name": "title",
+                              "type": "string",
                               "required": false,
                               "deprecated": false,
                               "readOnly": false,
-                              "description": "Timestamp when the attachment was last modified."
+                              "description": "The title of the attachment."
                             }
                           ]
                         },
                         {
-                          "name": "id",
+                          "name": "attachment_type",
                           "type": "string",
-                          "required": true,
+                          "required": false,
                           "deprecated": false,
                           "readOnly": false,
-                          "description": "The unique identifier of the attachment."
-                        },
-                        {
-                          "name": "relationships",
-                          "type": "object",
-                          "required": true,
-                          "deprecated": false,
-                          "readOnly": false,
-                          "description": "The attachment's resource relationships.",
-                          "children": [
-                            {
-                              "name": "incident",
-                              "type": "object",
-                              "required": false,
-                              "deprecated": false,
-                              "readOnly": false,
-                              "description": "Relationship to incident.",
-                              "children": [
-                                {
-                                  "name": "data",
-                                  "type": "object",
-                                  "required": true,
-                                  "deprecated": false,
-                                  "readOnly": false,
-                                  "description": "Relationship to incident object.",
-                                  "children": [
-                                    {
-                                      "name": "id",
-                                      "type": "string",
-                                      "required": true,
-                                      "deprecated": false,
-                                      "readOnly": false,
-                                      "description": "A unique identifier that represents the incident."
-                                    },
-                                    {
-                                      "name": "type",
-                                      "type": "string",
-                                      "required": true,
-                                      "deprecated": false,
-                                      "readOnly": false,
-                                      "description": "Incident resource type.",
-                                      "enumValues": [
-                                        "incidents"
-                                      ],
-                                      "defaultValue": "incidents"
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "name": "last_modified_by_user",
-                              "type": "object",
-                              "required": false,
-                              "deprecated": false,
-                              "readOnly": false,
-                              "description": "Relationship to user.",
-                              "children": [
-                                {
-                                  "name": "data",
-                                  "type": "object",
-                                  "required": true,
-                                  "deprecated": false,
-                                  "readOnly": false,
-                                  "description": "Relationship to user object.",
-                                  "children": [
-                                    {
-                                      "name": "id",
-                                      "type": "string",
-                                      "required": true,
-                                      "deprecated": false,
-                                      "readOnly": false,
-                                      "description": "A unique identifier that represents the user."
-                                    },
-                                    {
-                                      "name": "type",
-                                      "type": "string",
-                                      "required": true,
-                                      "deprecated": false,
-                                      "readOnly": false,
-                                      "description": "Users resource type.",
-                                      "enumValues": [
-                                        "users"
-                                      ],
-                                      "defaultValue": "users"
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "name": "type",
-                          "type": "string",
-                          "required": true,
-                          "deprecated": false,
-                          "readOnly": false,
-                          "description": "The incident attachment resource type.",
+                          "description": "The type of the attachment.",
                           "enumValues": [
-                            "incident_attachments"
-                          ],
-                          "defaultValue": "incident_attachments"
+                            "postmortem",
+                            "link"
+                          ]
+                        },
+                        {
+                          "name": "modified",
+                          "type": "string (date-time)",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Timestamp when the attachment was last modified."
                         }
                       ]
+                    },
+                    {
+                      "name": "id",
+                      "type": "string",
+                      "required": true,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "The unique identifier of the attachment."
+                    },
+                    {
+                      "name": "relationships",
+                      "type": "object",
+                      "required": true,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "The attachment's resource relationships.",
+                      "children": [
+                        {
+                          "name": "incident",
+                          "type": "object",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Relationship to incident.",
+                          "children": [
+                            {
+                              "name": "data",
+                              "type": "object",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "Relationship to incident object.",
+                              "children": [
+                                {
+                                  "name": "id",
+                                  "type": "string",
+                                  "required": true,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "A unique identifier that represents the incident."
+                                },
+                                {
+                                  "name": "type",
+                                  "type": "string",
+                                  "required": true,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "Incident resource type.",
+                                  "enumValues": [
+                                    "incidents"
+                                  ],
+                                  "defaultValue": "incidents"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "last_modified_by_user",
+                          "type": "object",
+                          "required": false,
+                          "deprecated": false,
+                          "readOnly": false,
+                          "description": "Relationship to user.",
+                          "children": [
+                            {
+                              "name": "data",
+                              "type": "object",
+                              "required": true,
+                              "deprecated": false,
+                              "readOnly": false,
+                              "description": "Relationship to user object.",
+                              "children": [
+                                {
+                                  "name": "id",
+                                  "type": "string",
+                                  "required": true,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "A unique identifier that represents the user."
+                                },
+                                {
+                                  "name": "type",
+                                  "type": "string",
+                                  "required": true,
+                                  "deprecated": false,
+                                  "readOnly": false,
+                                  "description": "Users resource type.",
+                                  "enumValues": [
+                                    "users"
+                                  ],
+                                  "defaultValue": "users"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "type",
+                      "type": "string",
+                      "required": true,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "The incident attachment resource type.",
+                      "enumValues": [
+                        "incident_attachments"
+                      ],
+                      "defaultValue": "incident_attachments"
                     }
                   ]
                 }
