@@ -21,8 +21,9 @@ When a project is restricted, users outside the granted principals:
 
 - Do not see the project, or its experiments and datasets, in any list view or search result.
 - Receive a *not found* response when they open a direct link to the project or to anything inside it.
-- Cannot read the spans and evaluation metrics produced by the project's experiment runs.
 - Cannot read the project's dataset records, including inputs and expected outputs.
+- Cannot read the evaluation metrics produced by the project's experiment runs.
+- Cannot read the spans produced by those runs, unless the spans carry an `ml_app` value of their own. Experiments run through the SDK do produce such spans; see [Limitations](#limitations).
 - Cannot create, modify, or delete anything inside the project, even with an ID they obtained earlier.
 
 Restrictions are enforced consistently in the Datadog UI and in the API, including requests authenticated with an application key: an application key carries the identity of the user who owns it, and that user's access is what applies.
@@ -94,7 +95,7 @@ Users with the `user_access_manage` permission are not subject to restrictions, 
 
 ## Limitations
 
-- **Spans from an experiment run by the SDK carry your application's `ml_app`, not the project.** The SDK sends an `ml_app` value with every span it produces, taken from the value you configured or from your service name, and Datadog does not replace it. A policy on the project does not match those spans. The project, its experiments, its datasets, and its dataset records are hidden either way. To restrict the span contents as well, add a second filter for your application's own `ml_app` value to the same policy.
+- **Spans from an experiment run by the SDK carry your application's `ml_app`, not the project.** The SDK sends an `ml_app` value with every span it produces, taken from the value you configured or from your service name, and Datadog does not replace it. A policy on the project does not match those spans, so for an experiment run this way the restriction covers its evaluation metrics but not the inputs and outputs recorded on its spans. The project, its experiments, its datasets, and its dataset records are hidden either way. To restrict the span contents as well, add a second filter for your application's own `ml_app` value to the same policy.
 - **Spans and evaluation metrics ingested before this feature became available are not restricted.** The project ID is attached as a tag at ingestion time and past events are not re-tagged, so a policy on a project does not hide the event data of experiment runs that predate it. List views, metadata, and dataset records are unaffected by this and are hidden regardless of age.
 - **Annotation queues and managed prompts are not supported** by Data Access Control. See [Data Access Control][1] for the full list of supported telemetry.
 - **A project with no restriction policy is visible to everyone** with Agent Observability read access. Data Access Control is permissive by default unless your organization has enabled Strict Mode for the telemetry type. A policy whose value matches no project silently restricts nothing, so confirm every new restriction with a user outside the granted principals.
