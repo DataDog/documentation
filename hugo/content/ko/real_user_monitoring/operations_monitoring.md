@@ -15,10 +15,6 @@ title: 운영 모니터링
 ---
 ## 개요 {#overview}
 
-{{< callout header="미리 보기" btn_hidden="true" >}}
-운영 모니터링하기는 현재 미리 보기 버전으로 제공되고 있습니다.
-{{< /callout >}}
-
 {{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-overview-1.png" alt="RUM > Performance Monitoring 하위의 Operations 탭" style="width:100%;" >}}
 
 Datadog Real User Monitoring(RUM)에서 [여정][9]은 결제, 로그인, 검색과 같이 애플리케이션의 주요 사용자가 경험하는 영역을 나타냅니다. 각 여정에는 사용자 경험을 원활하게 만드는 중요한 기술적 단계인 작업이 포함됩니다.
