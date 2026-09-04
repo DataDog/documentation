@@ -96,7 +96,7 @@ Recommendations:
 - Use Kubernetes 1.33 or later, which includes [streaming list improvements][5] that reduce API server impact.
 - Start with smaller clusters. Limit the number of objects per resource type to fewer than 5,000 as a starting point, and scale up gradually while monitoring cluster health.
 
-The following steps walk through the required components for Kubernetes Explorer. For a complete reference example that also collects Kubernetes infrastructure metrics, see [Kubernetes Metrics][6].
+The following steps enable Explorer's resource views without collecting the metrics used by related dashboards. To collect those metrics and populate Explorer, follow [Kubernetes Metrics with OpenTelemetry][6] instead.
 
 #### 1. Create a Datadog API key secret
 
@@ -289,7 +289,7 @@ For a complete reference example, see the [DaemonSet collector configuration][11
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.154.0
 [4]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/opentelemetry-collector-0.156.2/charts/opentelemetry-collector
 [5]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
-[6]: /opentelemetry/integrations/kubernetes_metrics/#setup
+[6]: /containers/kubernetes/opentelemetry/#setup
 [7]: /getting_started/site/
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor
 [9]: https://app.datadoghq.com/orchestration/overview

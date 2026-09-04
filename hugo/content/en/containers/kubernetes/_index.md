@@ -1,6 +1,6 @@
 ---
 title: Kubernetes
-description: Install and configure the Datadog Agent on Kubernetes 
+description: Monitor Kubernetes with the Datadog Agent or OpenTelemetry.
 aliases:
     - /guides/basic_agent_usage/kubernetes
     - /agent/basic_agent_usage/kubernetes
@@ -40,6 +40,8 @@ further_reading:
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Kubernetes">}}
   This foundation enablement session will focus on how Datadog can monitor Kubernetes. Learn how to configure Datadog for Kubernetes and how to get started. Explore the various views and tools Datadog offers to visualize and analyze your cluster and application metrics, traces, and logs.
 {{< /learning-center-callout >}}
+
+To collect Kubernetes infrastructure metrics with OpenTelemetry instead of the Datadog Agent, see [Kubernetes Metrics with OpenTelemetry][10].
 
 ## Agent installation
 
@@ -97,3 +99,4 @@ For Agent commands, see the [Agent Commands guides][9]. For information on the D
 [7]: /containers/kubernetes/installation
 [8]: https://docs.datadoghq.com/containers/guide/kubernetes_daemonset/
 [9]: /agent/configuration/agent-commands/
+[10]: /containers/kubernetes/opentelemetry/
