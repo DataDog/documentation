@@ -89,7 +89,7 @@ For more information about creating and testing agents, see [Bits Agent Builder]
 
 ## Use a skill in Slack
 
-After you connect the Datadog app to Slack, mention `@Datadog` and add the skill's slash command:
+After you connect the Datadog app for Slack, mention `@Datadog` and add the skill's slash command:
 
 ```text
 @Datadog /my-skill
