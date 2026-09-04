@@ -27,6 +27,8 @@ The setup uses three components:
 
 The cluster Collector scrapes `kube-state-metrics` with its Prometheus receiver. You do not need to install a Prometheus server.
 
+If you only need Kubernetes Explorer's resource views, follow the [OpenTelemetry setup for Kubernetes Explorer][15] instead.
+
 ## Setup
 
 These steps deploy new Collectors in the `default` namespace. If you already collect Kubernetes metrics, review your existing configuration before deploying additional Collectors to avoid duplicate collection.
@@ -36,7 +38,7 @@ These steps deploy new Collectors in the `default` namespace. If you already col
 - [Helm][2] and `kubectl`, with permission to deploy workloads and create RBAC resources in the cluster.
 - A [Datadog API key][6] and your [Datadog site][5].
 
-The commands use OpenTelemetry Collector [Helm chart v0.156.2][9] and the `otel/opentelemetry-collector-contrib:0.154.0` image.
+Use OpenTelemetry Collector [Helm chart][9] v0.156.2 or later. The commands below use the `otel/opentelemetry-collector-contrib:0.154.0` image.
 
 The `k8sobjects` receiver used for Explorer can increase Kubernetes API server load. Datadog recommends Kubernetes 1.33 or later and testing on smaller clusters before expanding collection. See [Kubernetes Explorer limitations][12].
 
@@ -80,16 +82,16 @@ kubectl create secret generic datadog-secret \
    helm repo update
    ```
 
-2. Download [cluster-collector.yaml][3] and [daemonset-collector.yaml][4] into the same directory. These files are Helm values files from a fixed revision of the examples repository:
+2. Download [cluster-collector.yaml][3] and [daemonset-collector.yaml][4] into the same directory. These Helm values files are maintained in the `opentelemetry-examples` repository:
 
    ```sh
-   CONFIG_URL="https://raw.githubusercontent.com/DataDog/opentelemetry-examples/388dcf0f27d35a79c3c7264c88064305a1c34e47/guides/kubernetes/configuration"
+   CONFIG_URL="https://raw.githubusercontent.com/DataDog/opentelemetry-examples/main/guides/kubernetes/configuration"
    curl -fsSLo cluster-collector.yaml "$CONFIG_URL/cluster-collector.yaml"
    curl -fsSLo daemonset-collector.yaml "$CONFIG_URL/daemonset-collector.yaml"
    ```
 
 3. Configure cluster name detection in both files:
-   - For automatic detection on EKS, AKS, or GKE, review the `resourcedetection` processor's [provider-specific configuration and permissions][14].
+   - For automatic detection, review the `resourcedetection` processor's configuration and permissions for [EKS][14], [AKS][16], or [GKE][17].
    - If automatic detection is unavailable, uncomment the `resource/add-cluster-name` processor and replace `<YOUR_CLUSTER_NAME>` with the same cluster name in both files. Add `resource/add-cluster-name` after `resourcedetection` in each pipeline's `processors` list that uses `resourcedetection`. Keep the other processors in place.
 
 4. Run the following commands from the directory containing the values files:
@@ -98,7 +100,6 @@ kubectl create secret generic datadog-secret \
    # Install the node Collector (DaemonSet)
    helm install otel-daemon-collector open-telemetry/opentelemetry-collector \
      --namespace default \
-     --version 0.156.2 \
      -f daemonset-collector.yaml \
      --set image.repository=otel/opentelemetry-collector-contrib \
      --set image.tag=0.154.0
@@ -106,7 +107,6 @@ kubectl create secret generic datadog-secret \
    # Install the cluster Collector (Deployment)
    helm install otel-cluster-collector open-telemetry/opentelemetry-collector \
      --namespace default \
-     --version 0.156.2 \
      -f cluster-collector.yaml \
      --set image.repository=otel/opentelemetry-collector-contrib \
      --set image.tag=0.154.0
@@ -205,8 +205,8 @@ The [count connector][11] generates object-count metrics by counting the number 
 
 [1]: https://app.datadoghq.com/dash/integration/86/kubernetes---overview
 [2]: https://helm.sh/docs/intro/install/
-[3]: https://github.com/DataDog/opentelemetry-examples/blob/388dcf0f27d35a79c3c7264c88064305a1c34e47/guides/kubernetes/configuration/cluster-collector.yaml
-[4]: https://github.com/DataDog/opentelemetry-examples/blob/388dcf0f27d35a79c3c7264c88064305a1c34e47/guides/kubernetes/configuration/daemonset-collector.yaml
+[3]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/cluster-collector.yaml
+[4]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/daemonset-collector.yaml
 [5]: /getting_started/site/
 [6]: /account_management/api-app-keys/#api-keys
 [7]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#opentelemetry
@@ -216,4 +216,7 @@ The [count connector][11] generates object-count metrics by counting the number 
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/countconnector
 [12]: /containers/monitoring/kubernetes_explorer/?tab=opentelemetrycollector#limitations
 [13]: https://app.datadoghq.com/orchestration/overview
-[14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/v0.154.0/processor/resourcedetectionprocessor#cluster-name
+[14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#amazon-eks
+[15]: /containers/monitoring/kubernetes_explorer/?tab=opentelemetrycollector#enable-kubernetes-explorer
+[16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#azure-aks
+[17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#gcp-metadata
