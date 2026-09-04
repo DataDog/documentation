@@ -752,16 +752,11 @@ menu:
       identifier: otel-setup-ddot-migrate
       parent: otel-setup-ddot
       weight: 4013
-    - name: Other Setup Options
-      url: /opentelemetry/setup/
-      identifier: otel-setup-other
-      parent: otel_collect
-      weight: 402
     - name: OpenTelemetry Collector
       url: /opentelemetry/setup/collector_exporter/
       identifier: otel-setup-collector-exporter
-      parent: otel-setup-other
-      weight: 4021
+      parent: otel_collect
+      weight: 402
     - name: Deploy
       url: /opentelemetry/setup/collector_exporter/deploy
       identifier: otel-setup-collector-exporter-deploy
@@ -790,13 +785,13 @@ menu:
     - name: OTLP Ingest in the Agent
       url: /opentelemetry/setup/otlp_ingest_in_the_agent
       identifier: otel-setup-otlp-ingest
-      parent: otel-setup-other
-      weight: 4022
+      parent: otel_collect
+      weight: 403
     - name: Direct OTLP Ingest
       url: /opentelemetry/setup/otlp_ingest
       identifier: otel-setup-intake-endpoint
-      parent: otel-setup-other
-      weight: 4023
+      parent: otel_collect
+      weight: 404
     - name: Logs Endpoint
       url: /opentelemetry/setup/otlp_ingest/logs
       parent: otel-setup-intake-endpoint
@@ -2275,11 +2270,6 @@ menu:
       parent: internal_developer_portal
       identifier: external_provider_status
       weight: 7
-    - name: Plugins
-      url: internal_developer_portal/plugins
-      parent: internal_developer_portal
-      identifier: idp_plugins
-      weight: 8
     - name: Integrations
       url: internal_developer_portal/integrations
       parent: internal_developer_portal
@@ -2719,16 +2709,21 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_property_fields
       weight: 202
+    - name: Transition Forms
+      url: incident_response/incident_management/setup_and_configuration/transition_forms
+      parent: incidents_settings
+      identifier: incidents_settings_transition_forms
+      weight: 203
     - name: Responder Types
       url: incident_response/incident_management/setup_and_configuration/responder_types
       parent: incidents_settings
       identifier: incidents_settings_responder_types
-      weight: 203
+      weight: 204
     - name: Automations
       url: incident_response/incident_management/setup_and_configuration/automations
       parent: incidents_settings
       identifier: incidents_settings_automations
-      weight: 204
+      weight: 205
     - name: Notification Rules
       url: incident_response/incident_management/setup_and_configuration/notification_rules
       parent: incidents_settings
@@ -3121,41 +3116,66 @@ menu:
       parent: actions_connections
       identifier: actions_http
       weight: 101
-    - name: AWS Integration
-      url: actions/connections/aws_integration/
+    - name: Integration Connections
+      url: actions/connections/integration/
       parent: actions_connections
-      identifier: actions_aws_integration
+      identifier: actions_integration
       weight: 102
     - name: Google Workspace
       url: actions/connections/google_workspace/
       parent: actions_connections
       identifier: actions_google_workspace
       weight: 103
+    - name: Private Action Credentials
+      url: actions/connections/private_action_credentials/
+      parent: actions_connections
+      identifier: private_actions_creds
+      weight: 104
     - name: Private Actions
       url: actions/private_actions/
       parent: action_catalog
       identifier: private_actions
       weight: 2
-    - name: Use Private Actions
-      url: actions/private_actions/use_private_actions/
+    - name: Getting Started
+      url: actions/private_actions/getting_started/
       parent: private_actions
-      identifier: use_private_actions
+      identifier: private_actions_getting_started
       weight: 201
+    - name: Set Up in the Datadog Agent
+      url: actions/private_actions/set_up_agent_based/
+      parent: private_actions
+      identifier: private_actions_set_up_agent_based
+      weight: 202
+    - name: Set Up a Standalone Runner
+      url: actions/private_actions/set_up_standalone/
+      parent: private_actions
+      identifier: private_actions_set_up_standalone
+      weight: 203
+    - name: Enrollment and Ownership
+      url: actions/private_actions/enroll_runner/
+      parent: private_actions
+      identifier: private_actions_enroll_runner
+      weight: 204
+    - name: Authorize Private Actions
+      url: actions/private_actions/authorize_private_actions/
+      parent: private_actions
+      identifier: private_actions_authorize_private_actions
+      weight: 205
+    - name: Execution Policies
+      url: actions/private_actions/execution_policies/
+      parent: private_actions
+      identifier: private_actions_execution_policies
+      weight: 206
     - name: Run a Script
       url: actions/private_actions/run_script/
       parent: private_actions
-      identifier: run_script
-      weight: 202
-    - name: Update the Private Action Runner
-      url: actions/private_actions/update_private_action_runner/
+      identifier: private_actions_run_script
+      weight: 207
+    - name: Reference
+      url: actions/private_actions/reference/
       parent: private_actions
-      identifier: update_private_action_runner
-      weight: 203
-    - name: Private Action Credentials
-      url: actions/private_actions/private_action_credentials/
-      parent: private_actions
-      identifier: private_actions_creds
-      weight: 204
+      identifier: private_actions_reference
+      weight: 208
     - name: Cloudcraft
       url: datadog_cloudcraft/
       pre: cloudcraft
@@ -3317,6 +3337,11 @@ menu:
       parent: containers
       identifier: containers_autoscaling
       weight: 2
+    - name: Manifest Reference
+      url: containers/autoscaling/manifest
+      parent: containers_autoscaling
+      identifier: containers_autoscaling_manifest
+      weight: 200
     - name: Cluster
       url: containers/autoscaling/cluster
       parent: containers_autoscaling
@@ -4783,6 +4808,11 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_error_grouping
       weight: 1303
+    - name: Stack Traces
+      url: tracing/error_tracking/stack_traces
+      parent: tracing_error_tracking
+      identifier: tracing_error_tracking_stack_traces
+      weight: 1304
     - name: Monitors
       url: tracing/error_tracking/monitors
       parent: tracing_error_tracking
@@ -5639,16 +5669,56 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_patterns
       weight: 404
+    - name: Evaluations
+      url: llm_observability/investigate/evaluations/
+      parent: llm_obs_monitoring
+      identifier: llm_obs_evaluations
+      weight: 405
+    - name: Custom LLM-as-a-Judge
+      url: llm_observability/investigate/evaluations/llm_as_a_judge_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations
+      weight: 40501
+    - name: Language Mismatch
+      url: llm_observability/investigate/evaluations/language_mismatch
+      parent: llm_obs_evaluations
+      identifier: llm_obs_language_mismatch
+      weight: 40502
+    - name: Sensitive Data Scanner
+      url: llm_observability/investigate/evaluations/managed_evaluations/security_and_safety_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_sensitive_data_scanner
+      weight: 40503
+    - name: End-User Feedback
+      url: llm_observability/investigate/evaluations/end_user_feedback
+      parent: llm_obs_evaluations
+      identifier: llm_obs_end_user_feedback
+      weight: 40504
+    - name: External Evaluations
+      url: llm_observability/investigate/evaluations/external_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_external_evaluations
+      weight: 40505
+    - name: Evaluation Developer Guide
+      url: llm_observability/investigate/evaluations/evaluation_developer_guide
+      parent: llm_obs_evaluations
+      identifier: llm_obs_evaluation_developer_guide
+      weight: 40506
+    - name: Compatibility
+      url: llm_observability/investigate/evaluations/compatibility
+      parent: llm_obs_evaluations
+      identifier: llm_obs_evaluation_compatibility
+      weight: 40507
     - name: Annotation Queues
       url: llm_observability/investigate/annotation_queues
       parent: llm_obs_monitoring
       identifier: llm_obs_annotation_queues
-      weight: 405
+      weight: 406
     - name: Export API
       url: llm_observability/investigate/export_api
       parent: llm_obs_monitoring
       identifier: llm_obs_evaluations_export_api
-      weight: 406
+      weight: 407
     - name: Improve
       url: llm_observability/improve/
       parent: llm_obs
@@ -5699,51 +5769,16 @@ menu:
       parent: llm_obs
       identifier: llm_obs_configure
       weight: 6
-    - name: Evaluations
-      url: llm_observability/configure/evaluations/
-      parent: llm_obs_configure
-      identifier: llm_obs_evaluations
-      weight: 601
-    - name: Custom LLM-as-a-Judge
-      url: llm_observability/configure/evaluations/llm_as_a_judge_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_custom_llm_as_a_judge_evaluations
-      weight: 60101
-    - name: Language Mismatch
-      url: llm_observability/configure/evaluations/language_mismatch
-      parent: llm_obs_evaluations
-      identifier: llm_obs_language_mismatch
-      weight: 60102
-    - name: Sensitive Data Scanner
-      url: llm_observability/configure/evaluations/managed_evaluations/security_and_safety_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_sensitive_data_scanner
-      weight: 60103
-    - name: End-User Feedback
-      url: llm_observability/configure/evaluations/end_user_feedback
-      parent: llm_obs_evaluations
-      identifier: llm_obs_end_user_feedback
-      weight: 60104
-    - name: Compatibility
-      url: llm_observability/configure/evaluations/compatibility
-      parent: llm_obs_evaluations
-      identifier: llm_obs_evaluation_compatibility
-      weight: 60106
-    - name: External Evaluations
-      url: llm_observability/configure/evaluations/external_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_external_evaluations
-      weight: 60107
     - name: Prompt Management
       url: llm_observability/configure/prompt_management
       parent: llm_obs_configure
       identifier: llm_obs_prompt_management
-      weight: 602
+      weight: 601
     - name: Automation Rules
       url: llm_observability/configure/automation_rules
       parent: llm_obs_configure
       identifier: llm_obs_monitoring_automation_rules
-      weight: 603
+      weight: 602
     - name: Data Privacy, Security, and RBAC
       url: llm_observability/data_privacy_security_and_rbac
       parent: llm_obs
@@ -6474,51 +6509,61 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_targeting_attributes
       weight: 305
+    - name: Evaluation Tester
+      url: feature_flags/concepts/evaluation_tester
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_evaluation_tester
+      weight: 306
     - name: Scheduled Rollouts
       url: feature_flags/concepts/scheduled_rollouts
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_scheduled_rollouts
-      weight: 306
+      weight: 307
     - name: Saved Filters
       url: feature_flags/concepts/saved_filters
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_saved_filters
-      weight: 307
+      weight: 308
     - name: Traffic Splitting and Randomization
       url: feature_flags/concepts/traffic_splitting
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_traffic_splitting
-      weight: 308
+      weight: 309
+    - name: Experiments
+      url: feature_flags/concepts/experiments
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_experiments
+      weight: 310
     - name: Distribution Channels
       url: feature_flags/concepts/distribution_channels
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_distribution_channels
-      weight: 309
+      weight: 311
     - name: Configuration Sources
       url: feature_flags/concepts/configuration_sources
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_configuration_sources
-      weight: 310
+      weight: 312
     - name: Monthly Flag Configuration Requests
       url: feature_flags/concepts/monthly_flag_configuration_requests
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_mfcr
-      weight: 311
+      weight: 313
     - name: Flag History
       url: feature_flags/concepts/flag_history
       parent: feature_flags_concepts
       identifier: feature_flags_history
-      weight: 312
+      weight: 314
     - name: Feature Flag Graphs
       url: feature_flags/concepts/flag_graphs
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
-      weight: 313
+      weight: 315
     - name: Stale Flags
       url: feature_flags/concepts/stale_flags
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
-      weight: 314
+      weight: 316
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
@@ -7659,36 +7704,41 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_sizing
       weight: 600
+    - name: Autoscaling
+      url: /byoc-logs/operate/autoscaling
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_autoscaling
+      weight: 601
     - name: Monitoring
       url: /byoc-logs/operate/monitoring
       parent: cloudprem_operate
       identifier: cloudprem_operate_monitoring
-      weight: 601
+      weight: 602
     - name: Search Logs
       url: /byoc-logs/operate/search_logs
       parent: cloudprem_operate
       identifier: cloudprem_operate_search
-      weight: 602
+      weight: 603
     - name: Production Best Practices
       url: /byoc-logs/operate/best_practices
       parent: cloudprem_operate
       identifier: cloudprem_operate_best_practices
-      weight: 603
+      weight: 604
     - name: Disk Buffer Durability
       url: /byoc-logs/operate/disk_buffer_durability
       parent: cloudprem_operate
       identifier: cloudprem_operate_disk_buffer_durability
-      weight: 604
+      weight: 605
     - name: Releases and Updates
       url: /byoc-logs/operate/updates
       parent: cloudprem_operate
       identifier: cloudprem_operate_updates
-      weight: 605
+      weight: 606
     - name: Troubleshooting
       url: /byoc-logs/operate/troubleshooting
       parent: cloudprem_operate
       identifier: cloudprem_operate_troubleshooting
-      weight: 606
+      weight: 607
     - name: Guides
       url: /byoc-logs/guides/
       parent: cloudprem
@@ -8072,7 +8122,7 @@ menu:
       url: /security/code_security/secret_scanning/generic_ci_providers/
       parent: sec_secret_scanning
       weight: 2
-    - name: Rule Configuration
+    - name: Configuration
       identifier: sec_secret_scanning_configuration
       url: /security/code_security/secret_scanning/configuration/
       parent: sec_secret_scanning
@@ -10047,26 +10097,31 @@ menu:
       parent: pa_charts
       identifier: pa_chart_basics
       weight: 101
-    - name: Pathways Diagram
-      url: product_analytics/charts/pathways
-      parent: pa_charts
-      identifier: pa_pathways
-      weight: 102
-    - name: Funnel Analysis
+    - name: Funnel
       url: product_analytics/charts/funnel_analysis
       parent: pa_charts
       identifier: pa_funnel_analysis
+      weight: 102
+    - name: Journey Paths
+      url: product_analytics/charts/journey_paths
+      parent: pa_charts
+      identifier: pa_journey_paths
       weight: 103
-    - name: Retention Analysis
+    - name: Pathways
+      url: product_analytics/charts/pathways
+      parent: pa_charts
+      identifier: pa_pathways
+      weight: 104
+    - name: Retention
       url: product_analytics/charts/retention_analysis
       parent: pa_charts
       identifier: pa_user_retention
-      weight: 104
-    - name: Analytics Explorer
+      weight: 105
+    - name: Analytics
       url: product_analytics/charts/analytics_explorer
       parent: pa_charts
       identifier: pa_analytics_explorer
-      weight: 105
+      weight: 106
     - name: Dashboards
       url: product_analytics/dashboards
       parent: product_analytics
@@ -10430,11 +10485,16 @@ menu:
       identifier: account_management_samle_troubleshooting
       parent: account_management_saml
       weight: 411
+    - name: Delete Data
+      identifier: account_management_delete_data
+      url: account_management/delete_data/
+      parent: account_management
+      weight: 5
     - name: SCIM
       url: account_management/scim/
       parent: account_management
       identifier: account_management_scim
-      weight: 5
+      weight: 6
     - name: Okta
       identifier: account_management_scim_okta
       url: account_management/scim/okta
@@ -10449,22 +10509,22 @@ menu:
       identifier: account_management_api_app_keys
       url: account_management/api-app-keys/
       parent: account_management
-      weight: 6
+      weight: 7
     - name: Personal Access Tokens
       identifier: account_management_personal_access_tokens
       url: account_management/personal-access-tokens/
       parent: account_management
-      weight: 7
+      weight: 8
     - name: Service Access Tokens
       identifier: account_management_service_access_tokens
       url: account_management/service-access-tokens/
       parent: account_management
-      weight: 8
+      weight: 9
     - name: Teams
       identifier: account_management_teams
       url: account_management/teams/
       parent: account_management
-      weight: 9
+      weight: 10
     - name: Team Management
       identifier: account_management_teams_management
       url: account_management/teams/manage/
@@ -10479,7 +10539,7 @@ menu:
       identifier: account_management_governance_console
       url: account_management/governance_console/
       parent: account_management
-      weight: 10
+      weight: 11
     - name: Controls
       identifier: account_management_governance_console_controls
       url: account_management/governance_console/controls
@@ -10489,12 +10549,12 @@ menu:
       identifier: account_management_mfa
       url: account_management/multi-factor_authentication/
       parent: account_management
-      weight: 11
+      weight: 12
     - name: Audit Trail
       url: account_management/audit_trail/
       parent: account_management
       identifier: account_management_audit_trail
-      weight: 12
+      weight: 13
     - name: Events
       url: account_management/audit_trail/events/
       parent: account_management_audit_trail
@@ -10514,12 +10574,12 @@ menu:
       url: account_management/safety_center/
       parent: account_management
       identifier: safety_center
-      weight: 13
+      weight: 14
     - name: Plan & Usage
       url: account_management/plan_and_usage/
       parent: account_management
       identifier: account_management_plan_and_usage
-      weight: 14
+      weight: 15
     - name: Bill Overview
       identifier: account_management_bill_overview
       url: account_management/plan_and_usage/bill_overview/
@@ -10544,7 +10604,7 @@ menu:
       identifier: account_management_billing
       url: account_management/billing/
       parent: account_management
-      weight: 15
+      weight: 16
     - name: Pricing
       url: account_management/billing/pricing
       parent: account_management_billing
@@ -10659,7 +10719,7 @@ menu:
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
       parent: account_management
-      weight: 16
+      weight: 17
     - name: Organization Groups
       identifier: account_management_organization_groups
       url: account_management/organization_groups/
@@ -10669,12 +10729,12 @@ menu:
       identifier: account_management_guides
       url: account_management/guide/
       parent: account_management
-      weight: 17
+      weight: 18
     - name: Workload Identity Federation
       identifier: account_management_workload_identity_federation
       url: account_management/workload_identity_federation/
       parent: account_management
-      weight: 18
+      weight: 19
     - name: Disaster Recovery
       url: disaster_recovery/
       pre: disaster-recovery-wui
