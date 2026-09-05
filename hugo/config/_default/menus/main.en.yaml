@@ -485,6 +485,11 @@ menu:
       url: agent/logs/log_transport
       parent: agent_logs
       weight: 504
+    - name: File Fingerprinting
+      identifier: agent_logs_file_fingerprinting
+      url: agent/logs/file_fingerprinting
+      parent: agent_logs
+      weight: 505
     - name: Multi-Line Detection
       identifier: multi_line_detection
       url: agent/logs/auto_multiline_detection
