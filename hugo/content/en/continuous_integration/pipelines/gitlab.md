@@ -268,7 +268,6 @@ trigger-job:
 In the child pipeline's `.gitlab-ci.yml` (or a file it includes), use the forwarded variable to set the pipeline name:
 
 ```yaml
-# In path/to/child-pipeline.yml, or a file it includes
 workflow:
   name: '$CHILD_PIPELINE_NAME'
 ```
