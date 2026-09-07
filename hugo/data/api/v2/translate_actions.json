@@ -6561,7 +6561,7 @@
   },
   "GetSPARecommendationsWithShard": {
     "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and shard identifier, and SPA returns structured recommendations for driver and executor resources.",
-    "summary": "Get SPA Recommendations with a shard parameter"
+    "summary": "Get SPA recommendations using a shard parameter"
   },
   "AggregateSpans": {
     "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.\nThis endpoint is rate limited to `300` requests per hour.",

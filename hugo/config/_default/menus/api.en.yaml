@@ -20581,9 +20581,9 @@ menu:
       url: /api/latest/spa/
       identifier: spa
       generated: true
-    - name: Get SPA Recommendations with a shard parameter
-      url: /api/latest/spa/get-spa-recommendations-with-a-shard-parameter/
-      identifier: spa-get-spa-recommendations-with-a-shard-parameter
+    - name: Get SPA recommendations using a shard parameter
+      url: /api/latest/spa/get-spa-recommendations-using-a-shard-parameter/
+      identifier: spa-get-spa-recommendations-using-a-shard-parameter
       parent: spa
       generated: true
       params:

@@ -213176,7 +213176,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
         - AuthZ: []
-      summary: Get SPA Recommendations with a shard parameter
+      summary: Get SPA recommendations using a shard parameter
       tags:
         - Spa
       x-menu-order: 1
