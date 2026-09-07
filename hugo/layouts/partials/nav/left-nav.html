@@ -29,8 +29,11 @@
         <ul class="list-unstyled">
             {{ range .Children }}
                 {{/*  LEVEL 1  */}}
+                {{/* Levels 3-4 are only rendered for the top-level section containing the current page, to avoid
+                     shipping every product's full sub-nav on every page (see DOCS nav HTML size investigation). */}}
+                {{ $isCurrentTopSection := $currentPage.HasMenuCurrent "main" . }}
                 <li class="nav-top-level {{ if (not (or (in $excludeAsync .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}
-                {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
+                {{ if $isCurrentTopSection }}active{{ end }}">
                     {{ $url_without_anchor = (index (split .URL "#") 0) }}
                     <a href="{{ .URL | relLangURL }}" class="d-flex align-items-center" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}" data-skip="{{ .Params.skip | not | not }}">
                         {{ if .Pre }}
@@ -52,7 +55,7 @@
                                     {{ end }}
                                     <span>{{ .Name }}</span>
                                 </a>
-                            {{ if .HasChildren }}
+                            {{ if (and .HasChildren $isCurrentTopSection) }}
                                 <ul class="list-unstyled sub-menu {{ if (or (eq .Name "Guides") (eq .Name "Widget Types") (eq .Name "Monitor Types")) }} d-none {{ end }}">
                                 {{/*  LEVEL 3  */}}
                                 {{ range .Children }}

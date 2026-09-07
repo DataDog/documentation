@@ -178,7 +178,7 @@ function hasParentLi(el) {
     }
 }
 
-function getPathElement(event = null) {
+export function getPathElement(event = null) {
     let path = window.location.pathname;
     const activeMenus = document.querySelectorAll(
         '.side .sidenav-nav-js-load .active, header .sidenav-nav-js-load .active'

@@ -10,6 +10,7 @@ import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName 
 import configDocs from '../config/config-docs';
 import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
 import { loadInstantSearch } from './instantsearch';
+import { getPathElement } from '../datadog-docs'; // eslint-disable-line import/no-cycle
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -177,6 +178,20 @@ function loadPage(newUrl) {
 
                 // update mainContent-wrapper classes
                 mainContentWrapper.className = `${newmainContentWrapper.classList}`;
+
+                // The left nav is server-rendered scoped to the current page's top-level section
+                // (see hugo/layouts/partials/nav/left-nav.html), so its content must be synced on
+                // every navigation -- otherwise navigating into a different section would leave the
+                // old section's nav items in place instead of the new section's. Swapping innerHTML
+                // (rather than replacing the container node) preserves the click listener bound to
+                // it in datadog-docs.js.
+                const currentLeftNav = document.querySelector('.sidenav-nav-js-load');
+                const newLeftNav = newDocument.querySelector('.sidenav-nav-js-load');
+
+                if (currentLeftNav && newLeftNav) {
+                    currentLeftNav.innerHTML = newLeftNav.innerHTML;
+                    getPathElement();
+                }
             } else {
                 window.location.href = newUrl;
             }
