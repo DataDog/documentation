@@ -43,10 +43,9 @@ Datadog relies on different tags to match debug symbols with stack traces. These
 | React Native | `service`, `version`, `bundle_name`, `platform`; if multiple source maps match on these fields, the one with the highest `build_number` is selected |
 | Flutter | `service`, `version`, `variant`, `architecture` |
 
-The [RUM Debug Symbols page][1] displays the values of these tags. If you find a mismatch, upload the debug symbols again with a corrected set of tags. For WebAssembly, see [Upload WebAssembly Symbols][3].
+The [RUM Debug Symbols page][1] displays the values of these tags. If you find a mismatch, upload the debug symbols again with a corrected set of tags.
 
 
 
 [1]: https://app.datadoghq.com/source-code/setup/rum
 [2]: /real_user_monitoring/error_tracking/mobile/android/?tab=us#upload-your-mapping-file
-[3]: /real_user_monitoring/guide/upload-webassembly-symbols/
