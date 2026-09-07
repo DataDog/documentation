@@ -234,5 +234,5 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 [17]: /real_user_monitoring/guide/upload-javascript-source-maps
 [18]: /getting_started/tagging/unified_service_tagging/
 [19]: /getting_started/tagging/
-[20]: /real_user_monitoring/guide/upload-webassembly-symbols/#instrument-your-browser-application
+[20]: /error_tracking/frontend/collecting_browser_errors/#enable-webassembly-symbolication
 [21]: /real_user_monitoring/guide/upload-webassembly-symbols/#upload-your-symbols

@@ -28,62 +28,9 @@ A single error can contain both JavaScript and WASM frames. Upload [JavaScript s
 
 You need:
 
-- A browser application configured for [RUM][2], [Browser Logs][3], or both.
-- Matching versions of `@datadog/browser-plugin-wasm` and the Browser RUM or Logs SDK package where you register it.
+- A browser application configured to collect WASM module metadata with [RUM][2], [Browser Logs][3], or both.
 - A `.wasm` symbol file with embedded DWARF debug sections and a `build_id` custom section.
 - `@datadog/datadog-ci` version 5.23.0 or later.
-
-## Instrument your browser application
-
-Install the WASM plugin alongside the Browser SDK packages that your application uses. Keep all Browser SDK packages on the same version:
-
-```shell
-npm install --save-exact \
-  @datadog/browser-rum@<VERSION> \
-  @datadog/browser-logs@<VERSION> \
-  @datadog/browser-plugin-wasm@<VERSION>
-```
-
-Register a plugin instance when you initialize RUM, Browser Logs, or both:
-
-```javascript
-import { datadogLogs } from '@datadog/browser-logs';
-import { makeWasmPlugin } from '@datadog/browser-plugin-wasm';
-import { datadogRum } from '@datadog/browser-rum';
-
-datadogRum.init({
-  applicationId: '<APPLICATION_ID>',
-  clientToken: '<CLIENT_TOKEN>',
-  site: '<DATADOG_SITE>',
-  service: '<SERVICE>',
-  env: '<ENV>',
-  version: '<VERSION>',
-  plugins: [makeWasmPlugin()],
-});
-
-datadogLogs.init({
-  clientToken: '<CLIENT_TOKEN>',
-  site: '<DATADOG_SITE>',
-  service: '<SERVICE>',
-  env: '<ENV>',
-  version: '<VERSION>',
-  forwardErrorsToLogs: true,
-  plugins: [makeWasmPlugin()],
-});
-```
-
-Initialize the Browser SDK before loading any WASM modules. The plugin observes modules created with the browser's `WebAssembly` APIs and adds their URLs and build IDs to WASM error events. Modules loaded before the plugin is initialized cannot be associated with their build IDs.
-
-The plugin enriches errors that have a WASM frame in their stack trace. When you report a handled error manually, pass the `Error` object to RUM or as the third argument to the Logs logger:
-
-```javascript
-try {
-  callWasmFunction();
-} catch (error) {
-  datadogRum.addError(error);
-  datadogLogs.logger.error('WASM operation failed', {}, error);
-}
-```
 
 ## Generate debug symbols
 
@@ -137,8 +84,6 @@ By default, Datadog keeps the first symbol file uploaded for a build ID. Use `--
 
 Datadog uses the module URL metadata to associate each WASM stack frame with a module, then matches the module to its uploaded symbols by `build_id`. Unlike JavaScript source maps, `service` and `version` are not part of the WASM symbol lookup.
 
-The Browser SDK plugin records metadata for WASM modules loaded after initialization. This lets Datadog select the correct build ID when a page loads multiple modules. For a module instantiated directly from bytes, the plugin records a synthetic module URL so its build ID remains available for symbolication.
-
 You can view uploaded files on the [RUM Debug Symbols page][4].
 
 ## Further reading
@@ -146,6 +91,6 @@ You can view uploaded files on the [RUM Debug Symbols page][4].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/guide/upload-javascript-source-maps/
-[2]: /real_user_monitoring/application_monitoring/browser/setup/
-[3]: /logs/log_collection/javascript/
+[2]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/#enable-webassembly-symbolication
+[3]: /logs/log_collection/javascript/#webassembly-errors
 [4]: https://app.datadoghq.com/source-code/setup/rum

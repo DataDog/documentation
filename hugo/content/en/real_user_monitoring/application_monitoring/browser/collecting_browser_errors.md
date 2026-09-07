@@ -58,6 +58,32 @@ Source errors include code-level information about the error. More information a
 |-----------------|--------|-------------------------------------------------------------------|
 | `error.type`    | string | The error type (or error code in some cases).                     |
 
+## Enable WebAssembly symbolication
+
+To symbolicate WebAssembly (WASM) stack frames, install the Browser SDK WASM plugin. Use the same version for the plugin and the RUM Browser SDK:
+
+```shell
+npm install --save-exact \
+  @datadog/browser-rum@<VERSION> \
+  @datadog/browser-plugin-wasm@<VERSION>
+```
+
+Register the plugin when you initialize RUM:
+
+```javascript
+import { makeWasmPlugin } from '@datadog/browser-plugin-wasm';
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+  // ...
+  plugins: [makeWasmPlugin()],
+});
+```
+
+Initialize RUM before loading any WASM modules. The plugin observes modules created with the browser's `WebAssembly` APIs and adds their URLs and build IDs to errors that contain WASM stack frames. This lets Datadog select the correct build ID when an application loads multiple modules. For a module instantiated directly from bytes, the plugin records a synthetic module URL.
+
+Unhandled errors are collected automatically. To report a handled WASM error, pass the `Error` object to [`addError()`](#collect-errors-manually). Then, [upload the module's WebAssembly symbols][20].
+
 ## Collect errors manually
 
 Monitor handled exceptions, handled promise rejections, and other errors not tracked automatically by the Browser SDK with the `addError()` API:
@@ -276,3 +302,4 @@ Get visibility into cross-origin scripts by following these two steps:
 [17]: /error_tracking/manage_data_collection
 [18]: /error_tracking/issue_states#excluding-an-issue
 [19]: /real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#discard-a-frontend-error
+[20]: /real_user_monitoring/guide/upload-webassembly-symbols/
