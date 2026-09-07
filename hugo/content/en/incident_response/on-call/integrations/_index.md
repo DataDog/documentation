@@ -32,26 +32,34 @@ To use an integration marked **Preview**, or to request one that isn't listed, r
 {{< card-grid card_width="150px" image_width="50" >}}
   {{< image-card href="/integrations/amazon-sns/#page-a-datadog-on-call-team-from-sns" src="integrations_logos/amazon-sns_avatar.svg" alt="Amazon SNS" title="Amazon SNS" >}}
   {{< image-card href="/integrations/azure-monitor-alerts/#page-a-datadog-on-call-team" src="integrations_logos/azure-monitor-alerts_avatar.svg" alt="Azure Monitor" title="Azure Monitor" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/bigpanda.png" alt="BigPanda" title="BigPanda" subtitle="Preview" >}}
   {{< image-card href="/integrations/bugsnag/#page-a-datadog-on-call-team" src="integrations_logos/bugsnag_avatar.svg" alt="Bugsnag" title="Bugsnag" >}}
   {{< image-card href="/integrations/catchpoint/#trigger-on-call-pages" src="integrations_logos/catchpoint_avatar.svg" alt="Catchpoint" title="Catchpoint" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/checkly_avatar.svg" alt="Checkly" title="Checkly" subtitle="Preview" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/chronosphere_avatar.svg" alt="Chronosphere" title="Chronosphere" subtitle="Preview" >}}
   {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/coralogix_avatar.svg" alt="Coralogix" title="Coralogix" subtitle="Preview" >}}
   {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/cronitor_avatar.svg" alt="Cronitor" title="Cronitor" subtitle="Preview" >}}
   {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/dynatrace_avatar.svg" alt="Dynatrace" title="Dynatrace" subtitle="Preview" >}}
   {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/grafana_avatar.svg" alt="Grafana" title="Grafana" subtitle="Preview" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/jenkins.png" alt="Jenkins" title="Jenkins" subtitle="Preview" >}}
   {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/jira_avatar.svg" alt="Jira" title="Jira" subtitle="Preview" >}}
   {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/logicmonitor_avatar.svg" alt="LogicMonitor" title="LogicMonitor" subtitle="Preview" >}}
   {{< image-card href="/incident_response/on-call/pages/#through-microsoft-teams" src="integrations_logos/microsoft-teams_avatar.svg" alt="Microsoft Teams" title="Microsoft Teams" >}}
   {{< image-card href="/integrations/nagios/?tab=host#trigger-on-call-pages" src="integrations_logos/nagios_avatar.svg" alt="Nagios" title="Nagios" >}}
   {{< image-card href="/integrations/new-relic/#trigger-on-call-pages" src="integrations_logos/new-relic_avatar.svg" alt="New Relic" title="New Relic" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/nodeping_avatar.svg" alt="NodePing" title="NodePing" subtitle="Preview" >}}
   {{< image-card href="/integrations/pingdom-v3/#page-a-datadog-on-call-team" src="integrations_logos/pingdom-v3_avatar.svg" alt="Pingdom" title="Pingdom" >}}
   {{< image-card href="/integrations/prometheus/?tab=v2preferred#prometheus-alertmanager" src="integrations_logos/prometheus_avatar.svg" alt="Prometheus Alertmanager" title="Prometheus Alertmanager" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/prtg_avatar.svg" alt="PRTG (Paessler)" title="PRTG (Paessler)" subtitle="Preview" >}}
   {{< image-card href="/integrations/sentry/#page-a-datadog-on-call-team" src="integrations_logos/sentry_avatar.svg" alt="Sentry" title="Sentry" >}}
   {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/servicenow_avatar.svg" alt="ServiceNow" title="ServiceNow" subtitle="Preview" >}}
   {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/site24x7_avatar.svg" alt="Site24x7" title="Site24x7" subtitle="Preview" >}}
   {{< image-card href="/incident_response/on-call/pages/#through-slack" src="integrations_logos/slack_avatar.svg" alt="Slack" title="Slack" >}}
   {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/splunk_avatar.svg" alt="Splunk" title="Splunk" subtitle="Preview" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/statuscake_avatar.svg" alt="StatusCake" title="StatusCake" subtitle="Preview" >}}
   {{< image-card href="/integrations/sumo-logic/#trigger-on-call-pages" src="integrations_logos/sumo-logic_avatar.svg" alt="Sumo Logic" title="Sumo Logic" >}}
   {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/uptime_avatar.svg" alt="uptime.com" title="uptime.com" subtitle="Preview" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/uptimerobot_avatar.svg" alt="UptimeRobot" title="UptimeRobot" subtitle="Preview" >}}
   {{< image-card href="/integrations/zabbix/#trigger-on-call-pages" src="integrations_logos/zabbix_avatar.svg" alt="Zabbix" title="Zabbix" >}}
 {{< /card-grid >}}
 </div>
