@@ -102908,6 +102908,9 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocations'
         baselineUserLocationsDuration:
           $ref: '#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocationsDuration'
+        detectIpTransition:
+          description: Whether to detect transitions between IP addresses.
+          type: boolean
       type: object
     SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocations:
       description: "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access."
@@ -102988,6 +102991,22 @@ components:
         - SIX_HOURS
         - TWELVE_HOURS
         - ONE_DAY
+    SecurityMonitoringRuleMetadata:
+      description: Metadata associated with the rule.
+      properties:
+        entities:
+          description: Entities associated with the rule, or null when metadata is not requested.
+          items: {}
+          nullable: true
+          type: array
+        sources:
+          description: Sources associated with the rule, or null when metadata is not requested.
+          items:
+            description: A source.
+            type: string
+          nullable: true
+          type: array
+      type: object
     SecurityMonitoringRuleNewValueOptions:
       description: Options on new value detection method.
       properties:
@@ -102995,6 +103014,11 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsForgetAfter'
         instantaneousBaseline:
           $ref: '#/components/schemas/SecurityMonitoringRuleInstantaneousBaseline'
+        instantaneousBaselineTimeoutMinutes:
+          description: Timeout in minutes for constructing the instantaneous baseline.
+          format: int32
+          maximum: 2147483647
+          type: integer
         learningDuration:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsLearningDuration'
         learningMethod:
@@ -103059,8 +103083,17 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
         newValueOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptions'
+        relatedSignalsFields:
+          description: Fields used to identify related signals.
+          items:
+            description: A field name.
+            type: string
+          type: array
         sequenceDetectionOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleSequenceDetectionOptions'
+        signalTitleTemplate:
+          description: A template for the signal title.
+          type: string
         thirdPartyRuleOptions:
           $ref: '#/components/schemas/SecurityMonitoringRuleThirdPartyOptions'
       type: object
@@ -103132,7 +103165,7 @@ components:
           type: string
       type: object
     SecurityMonitoringRuleResponse:
-      description: Create a new rule.
+      description: A security monitoring rule.
       oneOf:
         - $ref: '#/components/schemas/SecurityMonitoringStandardRuleResponse'
         - $ref: '#/components/schemas/SecurityMonitoringSignalRuleResponse'
@@ -103388,6 +103421,16 @@ components:
           format: int32
           maximum: 2147483647
           type: integer
+      type: object
+    SecurityMonitoringRuleUser:
+      description: The user who created or last updated the rule.
+      properties:
+        handle:
+          description: The user handle. Empty for a default rule with no user.
+          type: string
+        name:
+          description: The user name. Empty for a default rule with no user.
+          type: string
       type: object
     SecurityMonitoringRuleValidatePayload:
       description: Validate a rule.
@@ -103848,6 +103891,9 @@ components:
     SecurityMonitoringSignalRuleResponse:
       description: Rule.
       properties:
+        blocking:
+          description: Whether the rule blocks attackers.
+          type: boolean
         cases:
           description: Cases for generating signals.
           items:
@@ -103861,12 +103907,23 @@ components:
           description: User ID of the user who created the rule.
           format: int64
           type: integer
+        creator:
+          $ref: '#/components/schemas/SecurityMonitoringRuleUser'
         customMessage:
           description: Custom/Overridden message for generated signals (used in case of Default rule update).
           type: string
         customName:
           description: Custom/Overridden name of the rule (used in case of Default rule update).
           type: string
+        defaultRuleId:
+          description: The ID of the corresponding default rule.
+          type: string
+        defaultTags:
+          description: Default tags for default rules, included in tags.
+          items:
+            description: A default tag.
+            type: string
+          type: array
         deprecationDate:
           description: When the rule will be deprecated, timestamp in milliseconds.
           format: int64
@@ -103882,18 +103939,29 @@ components:
         id:
           description: The ID of the rule.
           type: string
+        isBeta:
+          description: Whether the rule is in beta.
+          type: boolean
         isDefault:
           description: Whether the rule is included by default.
           type: boolean
         isDeleted:
           description: Whether the rule has been deleted.
           type: boolean
+        isDeprecated:
+          description: Whether the rule is deprecated.
+          type: boolean
         isEnabled:
           description: Whether the rule is enabled.
+          type: boolean
+        isPartner:
+          description: Whether the rule is provided by a partner.
           type: boolean
         message:
           description: Message for generated signals.
           type: string
+        metadata:
+          $ref: '#/components/schemas/SecurityMonitoringRuleMetadata'
         name:
           description: The name of the rule.
           type: string
@@ -103916,6 +103984,12 @@ components:
           description: User ID of the user who updated the rule.
           format: int64
           type: integer
+        updatedAt:
+          description: The date the rule was last updated, in milliseconds.
+          format: int64
+          type: integer
+        updater:
+          $ref: '#/components/schemas/SecurityMonitoringRuleUser'
         version:
           description: The version of the rule.
           format: int64
@@ -103953,6 +104027,10 @@ components:
             description: Field.
             type: string
           type: array
+        hasOptionalGroupByFields:
+          description: Whether events with missing group-by fields are processed with a replacement value.
+          example: false
+          type: boolean
         metrics:
           description: Group of target fields to aggregate over.
           items:
@@ -104665,6 +104743,9 @@ components:
     SecurityMonitoringStandardRuleResponse:
       description: Rule.
       properties:
+        blocking:
+          description: Whether the rule blocks attackers.
+          type: boolean
         calculatedFields:
           description: Calculated fields. Only allowed for scheduled rules - in other words, when schedulingOptions is also defined.
           items:
@@ -104685,11 +104766,16 @@ components:
           description: User ID of the user who created the rule.
           format: int64
           type: integer
+        creator:
+          $ref: '#/components/schemas/SecurityMonitoringRuleUser'
         customMessage:
           description: Custom/Overridden message for generated signals (used in case of Default rule update).
           type: string
         customName:
           description: Custom/Overridden name of the rule (used in case of Default rule update).
+          type: string
+        defaultRuleId:
+          description: The ID of the corresponding default rule.
           type: string
         defaultTags:
           description: Default Tags for default rules (included in tags)
@@ -104697,6 +104783,12 @@ components:
             - security:attacks
           items:
             description: Default Tag.
+            type: string
+          type: array
+        dependencies:
+          description: IDs of rules that this rule depends on.
+          items:
+            description: A rule ID.
             type: string
           type: array
         deprecationDate:
@@ -104708,6 +104800,9 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
+        findingType:
+          description: The type of findings generated by the rule.
+          type: string
         groupSignalsBy:
           description: Additional grouping to perform on top of the existing groups in the query section. Must be a subset of the existing groups.
           example:
@@ -104722,18 +104817,29 @@ components:
         id:
           description: The ID of the rule.
           type: string
+        isBeta:
+          description: Whether the rule is in beta.
+          type: boolean
         isDefault:
           description: Whether the rule is included by default.
           type: boolean
         isDeleted:
           description: Whether the rule has been deleted.
           type: boolean
+        isDeprecated:
+          description: Whether the rule is deprecated.
+          type: boolean
         isEnabled:
           description: Whether the rule is enabled.
+          type: boolean
+        isPartner:
+          description: Whether the rule is provided by a partner.
           type: boolean
         message:
           description: Message for generated signals.
           type: string
+        metadata:
+          $ref: '#/components/schemas/SecurityMonitoringRuleMetadata'
         name:
           description: The name of the rule.
           type: string
@@ -104773,6 +104879,8 @@ components:
           description: The date the rule was last updated, in milliseconds.
           format: int64
           type: integer
+        updater:
+          $ref: '#/components/schemas/SecurityMonitoringRuleUser'
         version:
           description: The version of the rule.
           format: int64
@@ -207594,10 +207702,73 @@ paths:
                 default:
                   value:
                     data:
-                      - id: abc-123
+                      - blocking: false
+                        creator:
+                          handle: security@example.com
+                          name: Security Team
+                        id: abc-123
+                        isBeta: false
+                        isDeprecated: false
                         isEnabled: true
+                        isPartner: false
+                        metadata:
+                          entities:
+                          sources:
                         name: My security monitoring rule.
+                        options:
+                          detectionMethod: threshold
+                          relatedSignalsFields: ["service"]
+                          signalTitleTemplate: Security signal
                         type: log_detection
+                        updater:
+                          handle: security@example.com
+                          name: Security Team
+                    meta: {}
+                impossible_travel:
+                  value:
+                    data:
+                      - id: jkl-012
+                        options:
+                          detectionMethod: impossible_travel
+                          impossibleTravelOptions:
+                            detectIpTransition: true
+                        type: log_detection
+                    meta: {}
+                new_value:
+                  value:
+                    data:
+                      - id: ghi-789
+                        options:
+                          detectionMethod: new_value
+                          newValueOptions:
+                            instantaneousBaselineTimeoutMinutes: 0
+                        type: log_detection
+                    meta: {}
+                signal_correlation:
+                  value:
+                    data:
+                      - blocking: false
+                        creator:
+                          handle: ""
+                          name: ""
+                        defaultRuleId: def-000-abc
+                        defaultTags: ["security:attack"]
+                        id: def-456
+                        isBeta: false
+                        isDeprecated: false
+                        isPartner: false
+                        metadata:
+                          entities:
+                          sources:
+                        queries:
+                          - aggregation: event_count
+                            defaultRuleId: def-000-123
+                            hasOptionalGroupByFields: false
+                        type: signal_correlation
+                        updatedAt: 1750000000000
+                        updater:
+                          handle: ""
+                          name: ""
                     meta: {}
               schema:
                 $ref: '#/components/schemas/SecurityMonitoringListRulesResponse'
