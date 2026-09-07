@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128">
+    <defs>
+        <radialGradient id="a" cx="64" cy="63.74" r="64.02" fx="64" fy="63.74" gradientUnits="userSpaceOnUse">
+            <stop offset=".18" stop-color="#5ea0ef"/>
+            <stop offset=".56" stop-color="#5c9fee"/>
+            <stop offset=".69" stop-color="#559ced"/>
+            <stop offset=".78" stop-color="#4a97e9"/>
+            <stop offset=".86" stop-color="#3990e4"/>
+            <stop offset=".93" stop-color="#2387de"/>
+            <stop offset=".99" stop-color="#087bd6"/>
+            <stop offset="1" stop-color="#0078d4"/>
+        </radialGradient>
+        <radialGradient id="c" cx="-110.96" cy="102.21" r="7.53" fx="-110.96" fy="102.21" gradientTransform="matrix(2.57 0 0 -2.57 348.61 312.36)" gradientUnits="userSpaceOnUse">
+            <stop offset=".19" stop-color="#8c8e90"/>
+            <stop offset=".35" stop-color="#848688"/>
+            <stop offset=".6" stop-color="#6e7071"/>
+            <stop offset=".91" stop-color="#4a4b4c"/>
+            <stop offset="1" stop-color="#3e3f3f"/>
+        </radialGradient>
+    </defs>
+    <path fill="url(#a)" d="M64 .23C28.65.23 0 28.78 0 64s28.65 63.77 64 63.77S128 99.22 128 64 99.35.23 64 .23m.01 119.26C33.24 119.49 8.29 94.65 8.29 64S33.24 8.51 64.01 8.51 119.73 33.35 119.73 64s-24.95 55.49-55.72 55.49"/>
+    <path fill="#9cebff" d="M16.71 67.31a46.96 46.96 0 0 0 13.7 30.12l15.06-15.06a26.55 26.55 0 0 1-7.53-15.06z"/>
+    <path fill="#32bedd" d="M95.1 28.39a47.04 47.04 0 0 0-27.78-11.52v21.01c4.7.54 9.15 2.36 12.88 5.27l14.91-14.76Z"/>
+    <path fill="#32bedd" d="m32.91 28.39 15.06 15.06c3.72-2.91 8.18-4.73 12.88-5.27V16.87a47 47 0 0 0-27.93 11.52Z"/>
+    <path fill="#50e6ff" d="M43.06 47.81 28 32.75a46.36 46.36 0 0 0-11.29 27.93h21.01a27.13 27.13 0 0 1 5.35-12.88Z"/>
+    <path fill="url(#c)" d="M64.01 73.03c4.99 0 9.04-4.05 9.04-9.04s-4.05-9.04-9.04-9.04-9.04 4.05-9.04 9.04 4.05 9.04 9.04 9.04"/>
+    <path fill="#f04049" d="M102.7 48.94c-.33-.81-.97-1.45-1.77-1.8s-1.7-.38-2.52-.08l-27.55 11.1c1.35 1.58 2.19 3.6 2.19 5.84 0 .13-.03.26-.04.39l27.81-11c.42-.16.81-.4 1.14-.71s.59-.69.76-1.1c.18-.42.27-.86.26-1.32 0-.45-.1-.9-.28-1.31Z"/>
+    <path fill="#32bedd" d="M99.77 33.05 84.94 47.81c.9 1.17 1.68 2.42 2.37 3.71l11.09-4.47c.82-.3 1.72-.27 2.52.08s1.43 1 1.77 1.8c.18.41.28.86.28 1.31s-.09.9-.26 1.32c-.18.42-.44.79-.76 1.1-.33.31-.71.55-1.14.71l-11.1 4.39c.24.96.44 1.93.57 2.92h21.01a46.36 46.36 0 0 0-11.52-27.63"/>
+</svg>
