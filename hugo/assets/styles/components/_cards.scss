@@ -44,6 +44,7 @@
 }
 
 .card-grid-card {
+  position: relative;
   flex: 0 0 var(--card-min-width, 150px);
   width: var(--card-min-width, 150px);
   overflow: hidden;
@@ -64,8 +65,21 @@
     margin-top: 6px;
   }
 
-  small {
-    color: $ddpurple;
+  .card-grid-card-ribbon {
+    position: absolute;
+    top: 12px;
+    right: -32px;
+    width: 110px;
+    transform: rotate(45deg);
+    background: $ddpurple;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 2px 0;
+    pointer-events: none;
   }
 
   img {
