@@ -29977,6 +29977,40 @@ components:
         type: string
       nullable: true
       type: array
+    DORADeploymentAveragedMetrics:
+      description: Averaged DORA and delivery metrics computed across the commits and pull requests included in the deployment.
+      properties:
+        change_lead_time:
+          description: The averaged change lead time, in seconds.
+          example: 166821
+          format: int64
+          type: integer
+        merge_time:
+          description: The averaged merge time, in seconds.
+          example: 5852
+          format: int64
+          type: integer
+        review_time:
+          description: The averaged review time, in seconds.
+          example: 140
+          format: int64
+          type: integer
+        time_to_deploy:
+          description: The averaged time to deploy, in seconds.
+          example: 164481
+          format: int64
+          type: integer
+        time_to_pr_ready:
+          description: The averaged time until the pull request was ready for review, in seconds.
+          example: 27
+          format: int64
+          type: integer
+      type: object
+    DORADeploymentEventItem:
+      additionalProperties: {}
+      description: A free-form JSON object with the details of a commit or pull request included in the deployment.
+      example: {}
+      type: object
     DORADeploymentFetchResponse:
       description: Response for fetching a single deployment event.
       properties:
@@ -30014,8 +30048,42 @@ components:
     DORADeploymentObjectAttributes:
       description: The attributes of the deployment event.
       properties:
+        ai:
+          additionalProperties: {}
+          description: AI-assisted development metrics aggregated across the commits and pull requests included in the deployment.
+          type: object
+        averaged_metrics:
+          $ref: '#/components/schemas/DORADeploymentAveragedMetrics'
+        change_failure:
+          description: Whether the deployment is flagged as a change failure.
+          example: false
+          type: boolean
+        commits:
+          description: The list of commits included in the deployment.
+          items:
+            $ref: '#/components/schemas/DORADeploymentEventItem'
+          type: array
+        created_at:
+          description: The time when the deployment event was recorded.
+          example: "2023-08-31T14:26:24Z"
+          format: date-time
+          type: string
+        custom:
+          additionalProperties: {}
+          description: A map of custom metadata associated with the deployment.
+          example: {"service": ["courier-cloud"]}
+          type: object
         custom_tags:
           $ref: '#/components/schemas/DORACustomTags'
+        deployment_type:
+          description: The type of the deployment.
+          example: standard
+          type: string
+        duration:
+          description: The duration of the deployment.
+          example: 0
+          format: int64
+          type: integer
         env:
           description: Environment name to where the service was deployed.
           example: production
@@ -30027,9 +30095,35 @@ components:
           type: string
         git:
           $ref: '#/components/schemas/DORAGitInfoResponse'
+        number_of_commits:
+          description: The number of commits associated with the deployment.
+          example: 5
+          format: int64
+          type: integer
+        number_of_pull_requests:
+          description: The number of pull requests associated with the deployment.
+          example: 1
+          format: int64
+          type: integer
+        pull_requests:
+          description: The list of pull requests included in the deployment.
+          items:
+            $ref: '#/components/schemas/DORADeploymentEventItem'
+          type: array
+        recovery_time_sec:
+          description: The recovery time, in seconds, for a deployment flagged as a change failure.
+          example: 28230
+          format: int64
+          type: integer
+        remediation:
+          $ref: '#/components/schemas/DORADeploymentRemediation'
         service:
           description: Service name.
           example: shopist
+          type: string
+        source:
+          description: The source of the deployment event.
+          example: apm_deployments
           type: string
         started_at:
           description: The time when the deployment started.
@@ -30222,6 +30316,18 @@ components:
       type: string
       x-enum-varnames:
         - DORA_DEPLOYMENT_PATCH_REQUEST
+    DORADeploymentRemediation:
+      description: Remediation details for a deployment that was flagged as a change failure.
+      properties:
+        id:
+          description: The ID of the remediation deployment.
+          example: eG42zNIkVjM
+          type: string
+        type:
+          description: The type of remediation, such as a rollback.
+          example: rollback
+          type: string
+      type: object
     DORADeploymentRequest:
       description: Request to create a DORA deployment event.
       properties:
