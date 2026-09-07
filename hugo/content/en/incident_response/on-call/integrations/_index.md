@@ -17,7 +17,7 @@ further_reading:
 Datadog On-Call supports multiple triggering sources beyond native Datadog monitors. Use third-party tools to send Pages directly to your On-Call teams. Alerts from any part of your stack then reach the right responders through your configured escalation policies.
 
 {{< callout url="https://www.datadoghq.com/product-preview/on-call-integrations/" >}}
-To use an integration marked **(Preview)**, or to request one that isn't listed, request access through the product preview form.
+To use an integration marked **Preview**, or to request one that isn't listed, request access through the product preview form.
 {{< /callout >}}
 
 <style>
@@ -40,14 +40,14 @@ To use an integration marked **(Preview)**, or to request one that isn't listed,
   {{< image-card href="/integrations/catchpoint/#trigger-on-call-pages" src="integrations_logos/catchpoint_avatar.svg" alt="Catchpoint" title="Catchpoint" >}}
   {{< image-card href="/integrations/sumo-logic/#trigger-on-call-pages" src="integrations_logos/sumo-logic_avatar.svg" alt="Sumo Logic" title="Sumo Logic" >}}
   {{< image-card href="/integrations/new-relic/#trigger-on-call-pages" src="integrations_logos/new-relic_avatar.svg" alt="New Relic" title="New Relic" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/bugsnag_avatar.svg" alt="Bugsnag" title="Bugsnag" subtitle="(Preview)" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Coralogix" subtitle="(Preview)" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Cronitor" subtitle="(Preview)" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/uptime_avatar.svg" alt="uptime.com" title="uptime.com" subtitle="(Preview)" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="Dynatrace" subtitle="(Preview)" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/servicenow_avatar.svg" alt="ServiceNow" title="ServiceNow" subtitle="(Preview)" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/jira_avatar.svg" alt="Jira" title="Jira" subtitle="(Preview)" >}}
-  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" title="LogicMonitor" subtitle="(Preview)" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/bugsnag_avatar.svg" alt="Bugsnag" title="Bugsnag" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/coralogix_avatar.svg" alt="Coralogix" title="Coralogix" subtitle="Preview" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/cronitor_avatar.svg" alt="Cronitor" title="Cronitor" subtitle="Preview" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/uptime_avatar.svg" alt="uptime.com" title="uptime.com" subtitle="Preview" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/dynatrace_avatar.svg" alt="Dynatrace" title="Dynatrace" subtitle="Preview" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/servicenow_avatar.svg" alt="ServiceNow" title="ServiceNow" subtitle="Preview" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/jira_avatar.svg" alt="Jira" title="Jira" subtitle="Preview" >}}
+  {{< image-card href="https://www.datadoghq.com/product-preview/on-call-integrations/" src="integrations_logos/logicmonitor_avatar.svg" alt="LogicMonitor" title="LogicMonitor" subtitle="Preview" >}}
 {{< /card-grid >}}
 </div>
 
