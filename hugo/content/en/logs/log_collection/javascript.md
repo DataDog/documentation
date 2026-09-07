@@ -22,6 +22,7 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 
 - **Independent of the RUM SDK**: The Browser Logs SDK can be used without the RUM SDK.
 - **Worker environments**: The Browser Logs SDK works in Worker and Service Worker environments using the same setup methods. However, logs sent from Worker environments do not automatically include session information.
+- **WebAssembly errors**: To symbolicate WASM frames in browser logs, configure the Browser SDK WASM plugin and upload the module's debug symbols. See [Upload WebAssembly Symbols][14].
 
 ## Setup
 
@@ -1365,3 +1366,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [12]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event
+[14]: /real_user_monitoring/guide/upload-webassembly-symbols/
