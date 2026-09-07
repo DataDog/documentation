@@ -88,7 +88,7 @@ Use these tables to decide which solution to start with:
 | Cloud provider                | AWS, Azure, GCP                                                                                                                                              | AWS, Azure, GCP, on-prem, etc. |
 | Operating system              | Linux, Windows                                                                                                                                               | Linux, Windows                 |
 | Serverless                    | AWS Lambda, Amazon ECS Fargate, Azure Container Apps, Azure Container Instances, GCP Cloud Run (container deployment only)                                   | Not applicable                 |
-| Container registries          | Amazon ECR (running + at-rest), Google Artifact Registry (running workloads only), Azure Container Registry (running container images only)                  | Not applicable                 |
+| Container registries          | Amazon ECR and Google Artifact Registry (running + at-rest); Azure Container Registry, Docker Hub, GitHub Container Registry, Microsoft Container Registry, and Kubernetes registry (authenticated pull only). See [Container image registries][24] for details | Not applicable                 |
 
 For more information on compatibility, see [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
 
@@ -158,6 +158,7 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 [21]: /security/cloud_security_management/setup/ci_cd
 [22]: /security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
 [23]: https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score
+[24]: /security/cloud_security_management/setup/agentless_scanning/compatibility/#container-image-registries
 
 ## Further reading
 

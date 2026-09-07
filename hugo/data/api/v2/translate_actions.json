@@ -1654,6 +1654,74 @@
     "description": "Cancels a data deletion request by providing its ID.",
     "summary": "Cancels a data deletion request"
   },
+  "CreateJourney": {
+    "description": "Create a DEM journey.",
+    "summary": "Create a DEM journey",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a DEM journey."
+  },
+  "DeleteIgnoredInferredJourney": {
+    "description": "Remove an ignored inferred DEM journey, making it eligible to appear as a candidate again.",
+    "summary": "Delete an ignored inferred DEM journey"
+  },
+  "SearchInferredJourneys": {
+    "description": "Search for inferred DEM journeys by status. Returns candidates (status=candidate, the default) or ignored journeys (status=ignored). Supports optional fuzzy name filtering and app ID filtering.",
+    "summary": "Search inferred DEM journeys"
+  },
+  "IgnoreInferredJourney": {
+    "description": "Mark an inferred DEM journey as ignored so it no longer appears in the candidate list.",
+    "summary": "Ignore an inferred DEM journey"
+  },
+  "SearchJourneys": {
+    "description": "Search for DEM journeys with optional filtering by query, creator, team, and app.",
+    "summary": "Search DEM journeys"
+  },
+  "BatchGetJourneysByTestSuiteIDs": {
+    "description": "Return DEM journeys associated with multiple given test suite IDs.",
+    "summary": "Batch get DEM journeys by test suite IDs",
+    "request_description": "",
+    "request_schema_description": "Request body for retrieving DEM journeys by test suite IDs."
+  },
+  "DeleteJourneyVariant": {
+    "description": "Delete a variant from a DEM journey.",
+    "summary": "Delete a DEM journey variant"
+  },
+  "UpdateJourneyVariant": {
+    "description": "Update an existing variant of a DEM journey.",
+    "summary": "Update a DEM journey variant",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a DEM journey variant."
+  },
+  "DeleteJourney": {
+    "description": "Delete a DEM journey by its ID.",
+    "summary": "Delete a DEM journey"
+  },
+  "GetJourney": {
+    "description": "Retrieve a single DEM journey by its ID.",
+    "summary": "Get a DEM journey"
+  },
+  "UpdateJourney": {
+    "description": "Update an existing DEM journey by its ID.",
+    "summary": "Update a DEM journey",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a DEM journey."
+  },
+  "GetJourneyRecommendedTests": {
+    "description": "Retrieve AI-recommended synthetic tests for a DEM journey. Returns an empty list when no recommendation is available.",
+    "summary": "Get recommended tests for a DEM journey"
+  },
+  "CreateJourneyVariant": {
+    "description": "Create a variant for a DEM journey.",
+    "summary": "Create a DEM journey variant",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a DEM journey variant."
+  },
+  "CreateTestSuiteForJourney": {
+    "description": "Trigger test suite creation for a given DEM journey.",
+    "summary": "Create a test suite for a DEM journey",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a test suite for a DEM journey."
+  },
   "ListDeploymentGates": {
     "description": "Returns a paginated list of all deployment gates for the organization.\nUse `page[cursor]` and `page[size]` query parameters to paginate through results.",
     "summary": "Get all deployment gates"
