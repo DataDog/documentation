@@ -27,20 +27,25 @@ Datadog Agent를 이용하면 다음과 같은 시크릿 관리 솔루션과 통
 - [File Text](#id-for-json-yaml-text)
 - [File JSON](#id-for-json-yaml-text)
 - [File YAML](#id-for-json-yaml-text)
+- [Windows 레지스트리 키](#id-for-windows-regkey)
 
 Agent는 API 키나 비밀번호와 같은 민감한 값을 구성 파일 내에 일반 텍스트로 하드코딩하지 않고, 런타임에 동적으로 검색할 수 있습니다. 구성에서 시크릿을 참조하려면 `ENC[<secret_id>]` 표기법을 사용하세요. 시크릿은 메모리에 로드되지만 디스크에 기록되거나 Datadog 백엔드로 전송되지는 않습니다.
 
 **참고**: `secret_backend_command`와 같은 `secret_*` 설정에서는 `ENC[]` 구문을 사용할 수 없습니다.
 
-## 시크릿 가져오기 옵션 {#options-for-retrieving-secrets}
+## 시크릿 검색 옵션 {#options-for-retrieving-secrets}
 
-### 옵션 1: Agent의 기본 시크릿 조회 기능 사용{#option-1-using-native-agent-support-for-fetching-secrets}
+### 옵션 1: Agent의 기본 시크릿 가져오기 기능 사용 {#option-1-using-native-agent-support-for-fetching-secrets}
 
-**참고**: Agent 버전 `7.76`부터는 FIPS 지원 Agent에서도 기본 시크릿 관리 기능을 사용할 수 있습니다.
+참고:
+- **Agent 7.70+**: 기본 시크릿 관리 지원이 도입되었습니다.
+- **Agent 7.76+**: FIPS 지원 Agent에서 기본 시크릿 관리 기능을 사용할 수 있습니다.
+- **Agent 7.77+**: [Cluster Agent](/containers/cluster_agent/)를 사용하려면 컨테이너화된 환경에서 Agent 7.77 이상이 필요합니다. 이전 버전에서는 대신 [옵션 2](#option-2-using-the-built-in-script-for-kubernetes-and-docker) 또는 [옵션 3](#option-3-creating-a-custom-executable)을 사용하세요.
+- **Agent 7.80+**: [다중 백엔드](#multiple-backends)를 지원합니다.
 
-Agent 버전 `7.70`부터 Datadog Agent는 여러 시크릿 관리 솔루션을 기본적으로 지원합니다. `datadog.yaml`에는 두 개의 새로운 설정인 `secret_backend_type` 및 `secret_backend_config`가 추가되었습니다.
+#### 단일 백엔드 {#single-backend}
 
-`secret_backend_type` 은 사용할 시크릿 관리 솔루션을 지정하는 데 사용되며, `secret_backend_config`에는 해당 솔루션에 필요한 추가 구성이 포함됩니다.
+`datadog.yaml`에서 `secret_backend_type` 및 `secret_backend_config`를 사용하여 단일 시크릿 백엔드를 구성하세요.
 
 ```yaml
 # datadog.yaml
@@ -50,21 +55,19 @@ secret_backend_config:
   <KEY_1>: <VALUE_1>
 ```
 
-**참고**: Datadog을 컨테이너화된 환경에서 실행하는 경우 [Cluster Agent](/containers/cluster_agent/)가 기본 시크릿 가져오기를 지원하려면 Agent 7.77 이상이 필요합니다. 이전 버전에서는 대신 [옵션 2](#option-2-using-the-built-in-script-for-kubernetes-and-docker) 또는 [옵션 3](#option-3-creating-a-custom-executable)을 사용하세요.
-
 더 구체적인 설정 지침은 사용한 백엔드 유형에 따라 다릅니다. 자세한 정보는 아래에서 해당하는 섹션을 참조하세요.
 
 
-{{% collapse-content title="AWS Secrets" level="h4" expanded=false id="id-for-secrets" %}}
+{{% collapse-content title="AWS Secrets" level="h5" expanded=false id="id-for-secrets" %}}
 지원되는 AWS 서비스는 다음과 같습니다.
 
 |secret_backend_type 값                                | AWS 서비스                             |
 |---------------------------------------------|-----------------------------------------|
 |`aws.secrets` |[AWS Secrets Manager][1000]                 |
 
-##### 인스턴스 프로파일 설정 {#set-up-an-instance-profile}
+##### 인스턴스 프로필 설정 {#set-up-an-instance-profile}
 
-Datadog에서는 시크릿을 가져오는 데 [인스턴스 프로필 방법][1006]을 사용하도록 권장합니다. AWS에서 사용자 대신 모든 환경 변수와 세션 프로필을 처리하기 때문입니다. 이렇게 하는 방법에 대한 자세한 지침은 공식 [AWS Secrets Manager 설명서][1000]에서 확인할 수 있습니다.
+Datadog에서는 시크릿을 검색하는 데 [인스턴스 프로필 방법][1006]을 사용하도록 권장합니다. AWS에서 사용자 대신 모든 환경 변수와 세션 프로필을 처리하기 때문입니다. 이렇게 하는 방법에 대한 자세한 지침은 공식 [AWS Secrets Manager 설명서][1000]에서 확인할 수 있습니다.
 
 ##### 구성 예시 {#configuration-example}
 
@@ -81,7 +84,7 @@ secret_backend_config:
     aws_region: {regionName}
 ```
 
-환경 변수를 사용할 때, 구성을 다음과 같이 JSON으로 변환합니다.
+환경 변수를 사용할 때 구성을 다음과 같이 JSON으로 변환합니다.
 
 ```sh
 DD_SECRET_BACKEND_TYPE="aws.secrets"
@@ -91,14 +94,14 @@ DD_SECRET_BACKEND_CONFIG='{"aws_session":{"aws_region":"<AWS_REGION>"}}'
 AWS Secrets 사용을 위해 Agent를 구성한 후에는 `ENC[secretId;secretKey]` 구문을 사용하여 구성 파일 내에서 시크릿을 참조할 수 있습니다.
 
 ENC 표기법은 다음과 같이 구성됩니다.
-* `secretId`: 시크릿의 "친숙한 이름"(예: `/DatadogAgent/Production`) 또는 ARN(예: `arn:aws:secretsmanager:us-east-1:123456789012:secret:/DatadogAgent/Production-FOga1K`).
+* `secretId`: 시크릿의 '친숙한 이름'(예: `/DatadogAgent/Production`) 또는 ARN(예: `arn:aws:secretsmanager:us-east-1:123456789012:secret:/DatadogAgent/Production-FOga1K`).
   - **참고**: AWS 자격 증명 또는 `sts:AssumeRole` 자격 증명이 정의된 다른 계정의 시크릿에 액세스하는 경우 전체 ARN 형식을 사용해야 합니다.
 * `secretKey`: 사용하려는 AWS 시크릿의 JSON 키.
 
 
 AWS Secrets Manager는 하나의 시크릿 안에 여러 키-값 쌍을 저장할 수 있습니다. Secrets Manager를 사용한 백엔드 구성은 시크릿에 정의된 모든 키에 액세스할 수 있습니다.
 
-예를 들어 시크릿 ID `My-Secrets`에 다음 세 개의 값이 포함되어 있다고 가정합니다.
+예를 들어, 시크릿 ID `My-Secrets`에 다음 3개의 값이 포함되어 있다고 가정합니다.
 
 ```json
 {
@@ -119,6 +122,31 @@ secret_backend_config:
     aws_region: us-east-1
 ```
 
+##### 모든 `aws_session` 옵션 {#all-aws-session-options}
+
+다음 `aws_session` 필드는 Agent가 AWS에 인증하는 방법을 구성합니다. 모든 필드는 선택 사항입니다. 아무것도 설정하지 않으면 Agent는 [기본 자격 증명 체인][1007](인스턴스 프로필, 환경 변수, 공유 구성 파일 등)을 사용합니다.
+
+| 필드 | 설명 |
+|---|---|
+| `aws_region` | AWS 리전(예: `us-east-1`). |
+| `aws_access_key_id` | 정적 AWS 액세스 키 ID. `aws_secret_access_key`와 함께 사용하세요. |
+| `aws_secret_access_key` | 정적 AWS 시크릿 액세스 키. `aws_access_key_id`와 함께 사용하세요. |
+| `aws_profile` | 공유 AWS 구성 파일(`~/.aws/config`)의 명명된 프로필. |
+| `aws_role_arn` | `sts:AssumeRole`로 맡을 IAM 역할 ARN. |
+| `aws_external_id` | 교차 계정 역할을 맡을 때 전달할 외부 ID. |
+
+##### `force_string` 옵션 {#force-string-option}
+
+`secret_backend_config`의 최상위 수준에서 `force_string: true`를 설정하여 시크릿을 JSON으로 구문 분석하는 대신 원시 시크릿 문자열을 반환하세요. 이는 시크릿이 JSON 객체가 아닌 일반 텍스트로 저장된 경우에 유용합니다.
+
+```yaml
+secret_backend_type: aws.secrets
+secret_backend_config:
+  force_string: true
+  aws_session:
+    aws_region: us-east-1
+```
+
 {{% /tab %}}
 
 {{% tab "Helm" %}}
@@ -129,6 +157,11 @@ secret_backend_config:
 
 ```sh
 datadog:
+  secretBackend:
+    type: "aws.secrets"
+    config:
+      aws_session:
+        aws_region: "<AWS_REGION>"
   confd:
   # This is an example
     <INTEGRATION_NAME>.yaml: |-
@@ -137,11 +170,6 @@ datadog:
       instances:
         - [...]
           password: "ENC[secretId;secretKey]"
-  env:
-   - name: DD_SECRET_BACKEND_TYPE
-     value: "aws.secrets"
-   - name: DD_SECRET_BACKEND_CONFIG
-     value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
 agents:
   rbac:
     # IAM role ARN required to grant the Agent permissions to access the AWS secret
@@ -158,11 +186,11 @@ agents:
 
 ```sh
 datadog:
-  env:
-   - name: DD_SECRET_BACKEND_TYPE
-     value: "aws.secrets"
-   - name: DD_SECRET_BACKEND_CONFIG
-     value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
+  secretBackend:
+    type: "aws.secrets"
+    config:
+      aws_session:
+        aws_region: "<AWS_REGION>"
 agents:
   rbac:
     # IAM role ARN required to grant the Agent permissions to access the AWS secret
@@ -182,11 +210,11 @@ clusterAgent:
 
 ```sh
 datadog:
-  env:
-   - name: DD_SECRET_BACKEND_TYPE
-     value: "aws.secrets"
-   - name: DD_SECRET_BACKEND_CONFIG
-     value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
+  secretBackend:
+    type: "aws.secrets"
+    config:
+      aws_session:
+        aws_region: "<AWS_REGION>"
 clusterAgent:
   confd:
   # This is an example
@@ -197,19 +225,12 @@ clusterAgent:
           password: "ENC[secretId;secretKey]"
 clusterChecksRunner:
   enabled: true
-  env:
-   - name: DD_SECRET_BACKEND_TYPE
-     value: "aws.secrets"
-   - name: DD_SECRET_BACKEND_CONFIG
-     value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
   rbac:
     # IAM role ARN required to grant the Agent permissions to access the AWS secret
     serviceAccountAnnotations:
       eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
 
 ```
-
-**또는**, Helm 차트 v3.171.0 이상 및 Agent v7.70 이상에서는 환경 변수 대신 기본 제공 `secretBackend.type` 및 `secretBackend.config` 필드를 사용할 수 있습니다. 예: `datadog.secretBackend.type: "aws.secrets"` 및 `datadog.secretBackend.config.aws_session.aws_region: "<AWS_REGION>"`.
 
 {{% /tab %}}
 
@@ -227,13 +248,14 @@ metadata:
   name: datadog
 spec:
   [...]
+  global:
+    env:
+      - name: DD_SECRET_BACKEND_TYPE
+        value: "aws.secrets"
+      - name: DD_SECRET_BACKEND_CONFIG
+        value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
   override:
     nodeAgent:
-      env:
-       - name: DD_SECRET_BACKEND_TYPE
-         value: "aws.secrets"
-       - name: DD_SECRET_BACKEND_CONFIG
-         value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
       # IAM role ARN is required to grant the Agent permissions to access the AWS secret
       serviceAccountAnnotations:
         eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
@@ -263,13 +285,14 @@ metadata:
   name: datadog
 spec:
   [...]
+  global:
+    env:
+      - name: DD_SECRET_BACKEND_TYPE
+        value: "aws.secrets"
+      - name: DD_SECRET_BACKEND_CONFIG
+        value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
   override:
     nodeAgent:
-      env:
-       - name: DD_SECRET_BACKEND_TYPE
-         value: "aws.secrets"
-       - name: DD_SECRET_BACKEND_CONFIG
-         value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
       # IAM role ARN required to grant the Agent permissions to access the AWS secret
       serviceAccountAnnotations:
         eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
@@ -295,18 +318,18 @@ metadata:
   name: datadog
 spec:
   [...]
-spec:
+  global:
+    env:
+      - name: DD_SECRET_BACKEND_TYPE
+        value: "aws.secrets"
+      - name: DD_SECRET_BACKEND_CONFIG
+        value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
   features:
     clusterChecks:
       useClusterChecksRunners: true
   override:
     [...]
     clusterChecksRunner:
-      env:
-       - name: DD_SECRET_BACKEND_TYPE
-         value: "aws.secrets"
-       - name: DD_SECRET_BACKEND_CONFIG
-         value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
       # IAM role ARN required to grant the Agent permissions to access the AWS secret
       serviceAccountAnnotations:
         eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
@@ -322,7 +345,7 @@ spec:
 
 ```
 
-**또는**, Datadog Operator v1.25.0 이상 및 Agent v7.70 이상에서는 환경 변수 대신 기본 제공 `secretBackend.type` 및 `secretBackend.config` 필드를 사용할 수 있습니다. 예: `spec.global.secretBackend.type: "aws.secrets"` 및 `spec.global.secretBackend.config`( `aws_session.aws_region: "<AWS_REGION>"` 사용)
+**또는** Datadog Operator v1.25.0 이상 및 Agent v7.70 이상에서는 환경 변수 대신 기본 제공 `secretBackend.type` 및 `secretBackend.config` 필드를 사용할 수 있습니다. 예: `spec.global.secretBackend.type: "aws.secrets"` 및 `spec.global.secretBackend.config`(`aws_session.aws_region: "<AWS_REGION>"` 사용)
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -330,20 +353,20 @@ spec:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="AWS SSM" level="h4" expanded=false id="id-for-ssm" %}}
+{{% collapse-content title="AWS SSM" level="h5" expanded=false id="id-for-ssm" %}}
 지원되는 AWS 서비스는 다음과 같습니다.
 
 |secret_backend_type 값                                | AWS 서비스                             |
 |---------------------------------------------|-----------------------------------------|
 |`aws.ssm` |[AWS Systems Manager Parameter Store][1001] |
 
-##### 인스턴스 프로파일 설정 {#set-up-an-instance-profile-1}
+##### 인스턴스 프로필 설정 {#set-up-an-instance-profile-1}
 
-Datadog에서는 시크릿을 가져오는 데 [인스턴스 프로필 방법][1006]을 사용하도록 권장합니다. AWS에서 사용자 대신 모든 환경 변수와 세션 프로필을 처리하기 때문입니다. 이렇게 하는 방법에 대한 자세한 지침은 공식 [AWS Secrets Manager 설명서][1001]에서 확인할 수 있습니다.
+Datadog에서는 시크릿을 검색하는 데 [인스턴스 프로필 방법][1006]을 사용하도록 권장합니다. AWS에서 사용자 대신 모든 환경 변수와 세션 프로필을 처리하기 때문입니다. 이렇게 하는 방법에 대한 자세한 지침은 공식 [AWS Secrets Manager 설명서][1001]에서 확인할 수 있습니다.
 
 ##### 구성 예시 {#configuration-example-1}
 
-AWS System Manager Parameter Store는 계층 구조 모델을 지원합니다. 예를 들어 다음과 같은 AWS System Manager Parameter Store 경로를 가정하겠습니다.
+AWS System Manager Parameter Store는 계층 구조 모델을 지원합니다. 예를 들어, 다음과 같은 AWS System Manager Parameter Store 경로를 가정하겠습니다.
 
 ```sh
 /DatadogAgent/Production/ApiKey = <your_api_key>
@@ -365,15 +388,28 @@ property1: "ENC[/DatadogAgent/Production/ParameterKey1]"
 property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 ```
 
+##### 모든 `aws_session` 옵션 {#all-aws-session-options-1}
+
+다음 `aws_session` 필드는 Agent가 AWS에 인증하는 방법을 구성합니다. 모든 필드는 선택 사항입니다. 아무것도 설정하지 않으면 Agent는 [기본 자격 증명 체인][1007](인스턴스 프로필, 환경 변수, 공유 구성 파일 등)을 사용합니다.
+
+| 필드 | 설명 |
+|---|---|
+| `aws_region` | AWS 리전(예: `us-east-1`). |
+| `aws_access_key_id` | 정적 AWS 액세스 키 ID. `aws_secret_access_key`와 함께 사용하세요. |
+| `aws_secret_access_key` | 정적 AWS 시크릿 액세스 키. `aws_access_key_id`와 함께 사용하세요. |
+| `aws_profile` | 공유 AWS 구성 파일(`~/.aws/config`)의 명명된 프로필. |
+| `aws_role_arn` | `sts:AssumeRole`로 맡을 IAM 역할 ARN. |
+| `aws_external_id` | 교차 계정 역할을 맡을 때 전달할 외부 ID. |
+
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Azure Keyvault Backend" level="h4" expanded=false id="id-for-azure" %}}
+{{% collapse-content title="Azure Keyvault Backend" level="h5" expanded=false id="id-for-azure" %}}
 
 
 지원되는 Azure 서비스는 다음과 같습니다.
 
-| secret_backend_type 값e                            | Azure 서비스          |
+| secret_backend_type 값                            | Azure 서비스          |
 | ----------------------------------------|------------------------|
 | `azure.keyvault` | [Azure Keyvault][2000] |
 
@@ -383,9 +419,12 @@ Datadog에서는 Azure로 인증하는 데 관리형 ID를 사용하도록 권�
 
 ##### 관리형 ID {#managed-identity}
 
-Key Vault에 액세스하려면 관리형 ID를 만들어 이를 가상 머신에 할당합니다. 그런 다음, Key Vault에서 적절한 역할 할당을 구성해 해당 ID가 시크릿에 액세스하도록 허용합니다.
+Key Vault에 액세스하려면 관리형 ID를 생성해 이를 가상 머신에 할당합니다. 그런 다음 Key Vault에서 적절한 역할 할당을 구성해 해당 ID가 시크릿에 액세스하도록 허용합니다.
 
 ##### 구성 예시 {#configuration-example-2}
+
+{{< tabs >}}
+{{% tab "Agent YAML 파일" %}}
 
 Azure Key Vault 시크릿의 백엔드 구성은 다음 스키마를 따른 YAML로 구조화됩니다.
 
@@ -394,6 +433,15 @@ Azure Key Vault 시크릿의 백엔드 구성은 다음 스키마를 따른 YAML
 secret_backend_type: azure.keyvault
 secret_backend_config:
   keyvaulturl: {keyVaultURL}
+  azure_session:
+    azure_client_id: {clientID}  # User-assigned managed identity client ID; omit this field for system-assigned
+```
+
+환경 변수를 사용할 때 구성을 다음과 같이 JSON으로 변환합니다.
+
+```sh
+DD_SECRET_BACKEND_TYPE="azure.keyvault"
+DD_SECRET_BACKEND_CONFIG='{"keyvaulturl": "<keyVaultURL>", "azure_session": {"azure_client_id": "<CLIENT_ID>"}}'
 ```
 
 해당 백엔드 시크릿은 Datadog Agent 구성 파일에서 `ENC[ ]`로 참조됩니다. 다음은 일반 텍스트 시크릿을 검색해야 하는 경우의 예시입니다.
@@ -404,11 +452,194 @@ secret_backend_config:
 api_key: "ENC[secretKeyNameInKeyVault]"
 ```
 
+##### 모든 `azure_session` 옵션 {#all-azure-session-options}
+
+다음 `azure_session` 필드는 Agent가 Azure에 인증하는 방법을 제어합니다. 모든 필드는 선택 사항입니다. 아무것도 설정하지 않으면 Agent는 [기본 Azure 자격 증명][2001](환경 변수, 워크로드 ID, 시스템 할당 관리형 ID, Azure CLI 등)으로 폴백됩니다.
+
+| 필드 | 설명 |
+|---|---|
+| `azure_client_id` | 사용자 할당 관리형 ID 또는 서비스 주체의 클라이언트 ID. |
+| `azure_tenant_id` | 서비스 주체 인증을 위한 테넌트 ID. `azure_client_id` 및 클라이언트 시크릿 또는 인증서와 함께 필요합니다. |
+| `azure_client_secret` | 서비스 주체 인증을 위한 클라이언트 시크릿. |
+| `azure_client_certificate_path` | 서비스 주체 인증서 인증을 위한 PEM 또는 PKCS12 인증서 파일의 경로. |
+| `azure_client_certificate_password` | 인증서 파일의 비밀번호(비밀번호로 보호된 경우). |
+| `azure_client_send_certificate_chain` | 인증서 인증을 사용할 때 전체 인증서 체인을 보내려면 `true`로 설정하세요. |
+
+제공된 필드에 따라 인증이 선택됩니다.
+- **시크릿을 사용하는 서비스 주체**: `azure_tenant_id` + `azure_client_id` + `azure_client_secret`
+- **인증서를 사용하는 서비스 주체**: `azure_tenant_id` + `azure_client_id` + `azure_client_certificate_path`
+- **사용자 할당 관리형 ID**: `azure_client_id`만
+- **기본 Azure 자격 증명**(권장): 모든 `azure_session` 필드 생략
+
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+다음 구성을 사용하여 Datadog Agent가 Azure Key Vault를 사용해 Helm의 시크릿을 확인하도록 구성하세요.
+
+##### 통합 검사 {#integration-check-2}
+
+```sh
+datadog:
+  secretBackend:
+    type: "azure.keyvault"
+    config:
+      keyvaulturl: "<keyVaultURL>"
+      azure_session:
+        azure_client_id: "<CLIENT_ID>"
+  confd:
+  # This is an example
+    <INTEGRATION_NAME>.yaml: |-
+      ad_identifiers:
+        - <SHORT_IMAGE>
+      instances:
+        - [...]
+          password: "ENC[secretKeyNameInKeyVault]"
+```
+
+##### 클러스터 검사: cluster check runner 비활성화 {#cluster-check-without-cluster-check-runners-enabled-2}
+
+```sh
+datadog:
+  secretBackend:
+    type: "azure.keyvault"
+    config:
+      keyvaulturl: "<keyVaultURL>"
+      azure_session:
+        azure_client_id: "<CLIENT_ID>"
+clusterAgent:
+  confd:
+    # This is an example
+    <INTEGRATION_NAME>.yaml: |-
+      cluster_check: true
+      instances:
+        - [...]
+          password: "ENC[secretKeyNameInKeyVault]"
+```
+
+##### 클러스터 검사: cluster check runner 활성화 {#cluster-check-with-cluster-check-runners-enabled-2}
+
+```sh
+datadog:
+  secretBackend:
+    type: "azure.keyvault"
+    config:
+      keyvaulturl: "<keyVaultURL>"
+      azure_session:
+        azure_client_id: "<CLIENT_ID>"
+clusterAgent:
+  confd:
+  # This is an example
+    <INTEGRATION_NAME>.yaml: |-
+      cluster_check: true
+      instances:
+        - [...]
+          password: "ENC[secretKeyNameInKeyVault]"
+clusterChecksRunner:
+  enabled: true
+```
+
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+
+다음 구성을 사용하여 Datadog Agent가 Azure Key Vault를 사용해 Datadog Operator로 시크릿을 확인하도록 구성하세요.
+
+##### 통합 검사 {#integration-check-3}
+
+```sh
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  [...]
+  global:
+    env:
+      - name: DD_SECRET_BACKEND_TYPE
+        value: "azure.keyvault"
+      - name: DD_SECRET_BACKEND_CONFIG
+        value: '{"keyvaulturl": "<keyVaultURL>", "azure_session": {"azure_client_id": "<CLIENT_ID>"}}'
+  override:
+    nodeAgent:
+      extraConfd:
+        configDataMap:
+        # This is an example
+          <INTEGRATION_NAME>.yaml: |-
+            ad_identifiers:
+              - <SHORT_IMAGE>
+            instances:
+              - [...]
+                 password: "ENC[secretKeyNameInKeyVault]"
+```
+
+##### 클러스터 검사: cluster check runner 비활성화 {#cluster-check-without-cluster-check-runners-enabled-3}
+
+```sh
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  [...]
+  global:
+    env:
+      - name: DD_SECRET_BACKEND_TYPE
+        value: "azure.keyvault"
+      - name: DD_SECRET_BACKEND_CONFIG
+        value: '{"keyvaulturl": "<keyVaultURL>", "azure_session": {"azure_client_id": "<CLIENT_ID>"}}'
+  override:
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+        # This is an example
+          <INTEGRATION_NAME>.yaml: |-
+            cluster_check: true
+            instances:
+              - [...]
+                password: "ENC[secretKeyNameInKeyVault]"
+```
+
+##### 클러스터 검사: cluster check runner 활성화 {#cluster-check-with-cluster-check-runners-enabled-3}
+
+```sh
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  [...]
+  global:
+    env:
+      - name: DD_SECRET_BACKEND_TYPE
+        value: "azure.keyvault"
+      - name: DD_SECRET_BACKEND_CONFIG
+        value: '{"keyvaulturl": "<keyVaultURL>", "azure_session": {"azure_client_id": "<CLIENT_ID>"}}'
+  features:
+    clusterChecks:
+      useClusterChecksRunners: true
+  override:
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+        # This is an example
+          <INTEGRATION_NAME>.yaml: |-
+            cluster_check: true
+            instances:
+              - [...]
+                password: "ENC[secretKeyNameInKeyVault]"
+```
+
+**또는** Datadog Operator v1.25.0 이상 및 Agent v7.70 이상에서는 환경 변수 대신 기본 제공 `secretBackend.type` 및 `secretBackend.config` 필드를 사용할 수 있습니다. 예: `spec.global.secretBackend.type: "azure.keyvault"` 및 `spec.global.secretBackend.config`(`keyvaulturl` 및 `azure_session.azure_client_id` 키 사용)
+
+{{% /tab %}}
+{{< /tabs >}}
+
 {{% /collapse-content %}}
 
-{{% collapse-content title="GCP Secret Manager" level="h4" expanded=false id="id-for-gcp" %}}
+{{% collapse-content title="GCP Secret Manager" level="h5" expanded=false id="id-for-gcp" %}}
 
-**Agent 버전 7.74 이상에서 이용 가능**
+*Agent 버전 7.74 이상에서 이용 가능*
 
 지원되는 GCP 서비스는 다음과 같습니다.
 
@@ -418,15 +649,18 @@ api_key: "ENC[secretKeyNameInKeyVault]"
 
 ##### GCP 인증 및 액세스 정책 {#gcp-authentication-and-access-policy}
 
-GCP Secret Manager 구현은 Google로 인증에 [Application Default Credentials(ADC)][5001]를 사용합니다.
+GCP Secret Manager 구현은 Google을 통한 인증에 [Application Default Credentials(ADC)][5001]를 사용합니다.
 
-GCP Secret Manager와 상호 작용하려면 Datadog Agent가 사용하는 서비스 계정(예를 들어 VM의 서비스 계정, 워크로드 ID 또는 로컬로 활성화한 자격 증명)에 `secretmanager.versions.access` 권한이 있어야 합니다.
+GCP Secret Manager와 상호 작용하려면 Datadog Agent가 사용하는 서비스 계정(예: VM의 서비스 계정, 워크로드 ID 또는 로컬로 활성화한 자격 증명)에 `secretmanager.versions.access` 권한이 있어야 합니다.
 
 이 권한은 미리 정의된 역할 {{< ui >}}Secret Manager Secret Accessor{{< /ui >}}(`roles/secretmanager.secretAccessor`) 또는 동일한 [액세스 권한][5002]을 가진 사용자 지정 역할을 통해 부여할 수 있습니다.
 
 GCE 또는 GKE 런타임에 ADC가 인스턴스 또는 포드의 연결된 서비스 계정을 통해 자동으로 구성됩니다. 연결된 서비스 계정에 GCP Secret Manager에 액세스하는 데 적절한 역할이 있어야 합니다. 또한 GCE 또는 GKE 런타임에는 `cloud-platform` [OAuth 액세스 범위][5003]가 필요합니다.
 
 ##### GCP 구성 예시 {#gcp-configuration-example}
+
+{{< tabs >}}
+{{% tab "Agent YAML 파일" %}}
 
 다음 구성을 사용하여 Datadog Agent가 GCP Secret Manager를 사용해 시크릿을 확인하도록 구성하세요.
 
@@ -436,6 +670,13 @@ secret_backend_type: gcp.secretmanager
 secret_backend_config:
   gcp_session:
     project_id: <PROJECT_ID>
+```
+
+환경 변수를 사용할 때 구성을 다음과 같이 JSON으로 변환합니다.
+
+```sh
+DD_SECRET_BACKEND_TYPE="gcp.secretmanager"
+DD_SECRET_BACKEND_CONFIG='{"gcp_session":{"project_id":"<PROJECT_ID>"}}'
 ```
 
 GCP Secret Manager 사용을 위해 Agent를 구성한 후에는 `ENC[secret-name]` 또는 `ENC[secret-name;key;version;]`를 사용하여 구성에서 시크릿을 참조합니다.
@@ -450,7 +691,7 @@ ENC 표기법은 다음과 같이 구성됩니다.
     - `secret-key;;latest` - 명시적 `latest` 버전
     - `secret-key;;1` - 특정 버전 번호
 
-예를 들어 두 개의 버전이 있는 `datadog-api-key` 및 `datadog-app-key`라는 GCP 시크릿이 있다고 가정합니다.
+예를 들어, 두 개의 버전이 있는 `datadog-api-key` 및 `datadog-app-key`라는 GCP 시크릿이 있다고 가정합니다.
 
 ```yaml
 # datadog.yaml
@@ -485,6 +726,167 @@ secret_backend_config:
     project_id: <PROJECT_ID>
 ```
 
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+다음 구성을 사용하여 Datadog Agent가 GCP Secret Manager를 사용해 Helm의 시크릿을 확인하도록 구성하세요.
+
+##### 통합 검사 {#integration-check-4}
+
+```sh
+datadog:
+  secretBackend:
+    type: "gcp.secretmanager"
+    config:
+      gcp_session:
+        project_id: "<PROJECT_ID>"
+  confd:
+  # This is an example
+    <INTEGRATION_NAME>.yaml: |-
+      ad_identifiers:
+        - <SHORT_IMAGE>
+      instances:
+        - [...]
+          password: "ENC[secret-name]"
+```
+
+##### 클러스터 검사: cluster check runner 비활성화 {#cluster-check-without-cluster-check-runners-enabled-4}
+
+```sh
+datadog:
+  secretBackend:
+    type: "gcp.secretmanager"
+    config:
+      gcp_session:
+        project_id: "<PROJECT_ID>"
+clusterAgent:
+  confd:
+    # This is an example
+    <INTEGRATION_NAME>.yaml: |-
+      cluster_check: true
+      instances:
+        - [...]
+          password: "ENC[secret-name]"
+```
+
+##### 클러스터 검사: cluster check runner 활성화 {#cluster-check-with-cluster-check-runners-enabled-4}
+
+```sh
+datadog:
+  secretBackend:
+    type: "gcp.secretmanager"
+    config:
+      gcp_session:
+        project_id: "<PROJECT_ID>"
+clusterAgent:
+  confd:
+  # This is an example
+    <INTEGRATION_NAME>.yaml: |-
+      cluster_check: true
+      instances:
+        - [...]
+          password: "ENC[secret-name]"
+clusterChecksRunner:
+  enabled: true
+```
+
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+
+다음 구성을 사용하여 Datadog Agent가 GCP Secret Manager를 사용해 Datadog Operator로 시크릿을 확인하도록 구성하세요.
+
+##### 통합 검사 {#integration-check-5}
+
+```sh
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  [...]
+  global:
+    env:
+      - name: DD_SECRET_BACKEND_TYPE
+        value: "gcp.secretmanager"
+      - name: DD_SECRET_BACKEND_CONFIG
+        value: '{"gcp_session":{"project_id":"<PROJECT_ID>"}}'
+  override:
+    nodeAgent:
+      extraConfd:
+        configDataMap:
+        # This is an example
+          <INTEGRATION_NAME>.yaml: |-
+            ad_identifiers:
+              - <SHORT_IMAGE>
+            instances:
+              - [...]
+                 password: "ENC[secret-name]"
+```
+
+##### 클러스터 검사: cluster check runner 비활성화 {#cluster-check-without-cluster-check-runners-enabled-5}
+
+```sh
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  [...]
+  global:
+    env:
+      - name: DD_SECRET_BACKEND_TYPE
+        value: "gcp.secretmanager"
+      - name: DD_SECRET_BACKEND_CONFIG
+        value: '{"gcp_session":{"project_id":"<PROJECT_ID>"}}'
+  override:
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+        # This is an example
+          <INTEGRATION_NAME>.yaml: |-
+            cluster_check: true
+            instances:
+              - [...]
+                password: "ENC[secret-name]"
+```
+
+##### 클러스터 검사: cluster check runner 활성화 {#cluster-check-with-cluster-check-runners-enabled-5}
+
+```sh
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  [...]
+  global:
+    env:
+      - name: DD_SECRET_BACKEND_TYPE
+        value: "gcp.secretmanager"
+      - name: DD_SECRET_BACKEND_CONFIG
+        value: '{"gcp_session":{"project_id":"<PROJECT_ID>"}}'
+  features:
+    clusterChecks:
+      useClusterChecksRunners: true
+  override:
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+        # This is an example
+          <INTEGRATION_NAME>.yaml: |-
+            cluster_check: true
+            instances:
+              - [...]
+                password: "ENC[secret-name]"
+```
+
+**또는** Datadog Operator v1.25.0 이상 및 Agent v7.70 이상에서는 환경 변수 대신 기본 제공 `secretBackend.type` 및 `secretBackend.config` 필드를 사용할 수 있습니다. 예: `spec.global.secretBackend.type: "gcp.secretmanager"` 및 `spec.global.secretBackend.config`(`gcp_session.project_id: "<PROJECT_ID>"` 사용)
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ##### 시크릿 버전 관리 {#secret-versioning}
 
 GCP Secret Manager는 시크릿 버전을 지원합니다. Agent 구현도 `;` 구분 기호를 사용한 시크릿 버전 관리를 지원합니다. 버전을 지정하지 않으면 `latest` 버전이 사용됩니다.
@@ -500,7 +902,7 @@ Datadog Agent는 `;` 구분 기호를 사용하여 JSON 형식 시크릿의 특�
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="HashiCorp Vault 백엔드" level="h4" expanded=false id="id-for-hashicorp" %}}
+{{% collapse-content title="HashiCorp Vault 백엔드" level="h5" expanded=false id="id-for-hashicorp" %}}
 
 지원되는 HashiCorp 서비스는 다음과 같습니다.
 
@@ -509,8 +911,8 @@ Datadog Agent는 `;` 구분 기호를 사용하여 JSON 형식 시크릿의 특�
 | `hashicorp.vault` | [HashiCorp Vault(Secrets Engine 버전 1 및 2)][3000] |
 
 ##### HashiCorp Vault를 설정하는 방법 {#how-to-set-up-hashicorp-vault}
-1. HashiCorp Vault를 실행합니다. 자세한 정보는 [공식 HashiCorp Vault 설명서][3001]를 참조하세요.
-2. Vault에서 시크릿을 가져올 수 있도록 권한을 부여하는 정책을 작성합니다. `*.hcl` 파일을 생성하고, Secrets Engine Version 1을 사용하는 경우 다음 권한을 포함합니다.
+1. HashiCorp Vault를 실행합니다. 자세한 내용은 [공식 HashiCorp Vault 설명서][3001]를 참조하세요.
+2. 볼트에서 시크릿을 가져올 수 있도록 권한을 부여하는 정책을 작성합니다. `*.hcl` 파일을 생성하고, Secrets Engine Version 1을 사용하는 경우 다음 권한을 포함합니다.
 
 ```
 path "<your mount path>/<additional subpath>" {
@@ -534,13 +936,13 @@ path "sys/mounts" {
 ```
 3. `vault policy write <policy_name> <path_to_*.hcl_file>`를 실행합니다.
 
-4. Vault 인증 방식을 선택합니다. AWS 인스턴스 프로파일 방식을 사용하는 경우 `vault auth enable aws`를 실행합니다.
+4. 볼트 인증 방식을 선택합니다. AWS 인스턴스 프로필 방식을 사용하는 경우 `vault auth enable aws`를 실행합니다.
 
-##### AWS 인스턴스 프로파일 지침 {#aws-instance-profile-instructions}
+##### AWS 인스턴스 프로필 지침 {#aws-instance-profile-instructions}
 
-Datadog은 HashiCorp Vault가 AWS에 연결된 시스템에서 실행되는 경우 [인스턴스 프로파일 방식][3003]을 사용하여 인증할 것을 권장합니다.
+Datadog은 HashiCorp Vault가 AWS에 연결된 시스템에서 실행되는 경우 [인스턴스 프로필 방식][3003]을 사용하여 인증할 것을 권장합니다.
 
-설정이 완료되면 [인증 방식별 Vault 정책][3004]을 작성합니다.
+설정이 완료되면 [인증 방식별 볼트 정책][3004]을 작성합니다.
 
 ##### 구성 예시 {#configuration-example-3}
 
@@ -550,7 +952,7 @@ Datadog은 HashiCorp Vault가 AWS에 연결된 시스템에서 실행되는 경�
 /DatadogAgent/Production/apikey: (SecureString) "<your_api_key>"
 ```
 
-다음 예시는 HashiCorp Vault에서 API 키 값을 가져오며, 인증에 AWS를 활용합니다.
+다음 예시에서는 HashiCorp Vault에서 API 키 값을 가져오며, 인증에 AWS를 활용합니다.
 
 ```yaml
 # datadog.yaml
@@ -562,14 +964,70 @@ secret_backend_config:
   vault_session:
     vault_auth_type: aws
     vault_aws_role: Name-of-IAM-role-attached-to-machine
-    aws_region: us-east-1 // this field is optional, and will default to us-east-1 if not set
+    aws_region: us-east-1  # optional, defaults to us-east-1 if not set
 ```
+
+##### 모든 `vault_session` 옵션 {#all-vault-session-options}
+
+다음 `vault_session` 필드는 Agent가 Vault에 인증하는 방법을 제어합니다.
+
+| 필드 | 설명 |
+|---|---|
+| `vault_auth_type` | 인증 메서드. 지원되는 값: `aws`, `kubernetes`. 설정하지 않으면 제공된 자격 증명에 따라 AppRole, userpass 또는 LDAP가 사용됩니다. |
+| `vault_role_id` | AppRole 역할 ID. `vault_secret_id`와 함께 사용하세요. |
+| `vault_secret_id` | AppRole 시크릿 ID. `vault_role_id`와 함께 사용하세요. |
+| `vault_username` | userpass 인증을 위한 사용자 이름. `vault_password`와 함께 사용하세요. |
+| `vault_password` | userpass 인증을 위한 비밀번호. `vault_username`과 함께 사용하세요. |
+| `vault_ldap_username` | LDAP 인증을 위한 사용자 이름. `vault_ldap_password`와 함께 사용하세요. |
+| `vault_ldap_password` | LDAP 인증을 위한 비밀번호. `vault_ldap_username`과 함께 사용하세요. |
+| `vault_aws_role` | AWS IAM 인증을 위한 Vault 역할 이름. `vault_auth_type: aws`일 때 필수입니다. |
+| `vault_aws_iam_server_id` | 재전송 공격을 방지하는 데 사용되는 `X-Vault-AWS-IAM-Server-ID` 헤더의 값. |
+| `aws_region` | IAM 인증 요청을 위한 AWS 리전. 기본값은 `us-east-1`입니다. |
+| `vault_kubernetes_role` | Kubernetes 인증을 위한 Vault 역할 이름. `vault_auth_type: kubernetes`일 때 필수입니다. |
+| `vault_kubernetes_jwt` | 문자열 형태의 Kubernetes 서비스 계정 JWT 토큰. |
+| `vault_kubernetes_jwt_path` | Kubernetes JWT 토큰 파일의 경로. 기본값은 `/var/run/secrets/kubernetes.io/serviceaccount/token`입니다. |
+| `vault_kubernetes_mount_path` | Kubernetes 인증 방법을 위한 Vault 마운트 경로. |
+| `implicit_auth` | 인증을 건너뛰고 Vault 클라이언트 환경에 이미 설정된 토큰(예: `VAULT_TOKEN`)을 사용하려면 `true`로 설정하세요. |
+
+##### Vault `secret_backend_config`를 위한 기타 {#other-secret-backend-config-options-for-vault} 옵션
+
+다음 최상위 수준 `secret_backend_config` 필드도 적용됩니다.
+
+| 필드 | 설명 |
+|---|---|
+| `vault_address` | Vault 서버 주소(예: `http://myvaultaddress.net`). `VAULT_ADDR` 환경 변수로도 설정할 수 있습니다. |
+| `vault_token` | 정적 Vault 토큰. 인증 방법에 의존하지 않을 때 사용하세요. |
+| `vault_namespace` | Vault Enterprise 환경을 위한 Vault 네임스페이스. |
+
+##### TLS 구성(`vault_tls_config`){#tls-configuration-vault-tls-config}
+
+상호 TLS 또는 사용자 지정 CA를 활성화하려면 `vault_tls_config` 블록을 추가하세요.
+
+```yaml
+secret_backend_type: hashicorp.vault
+secret_backend_config:
+  vault_address: https://myvaultaddress.net
+  vault_tls_config:
+    ca_cert: /path/to/ca.pem
+    client_cert: /path/to/client.pem
+    client_key: /path/to/client-key.pem
+    insecure: false
+```
+
+| 필드 | 설명 |
+|---|---|
+| `ca_cert` | PEM 인코딩된 CA 인증서 파일의 경로. |
+| `ca_path` | PEM 인코딩된 CA 인증서 파일이 포함된 디렉토리의 경로. |
+| `client_cert` | mTLS용 PEM 인코딩된 클라이언트 인증서 파일의 경로. |
+| `client_key` | 클라이언트 인증서용 프라이빗 키 파일의 경로. |
+| `tls_server` | TLS SNI 확인을 위한 예상 서버 이름. |
+| `insecure` | TLS 인증서 확인을 비활성화하려면 `true`로 설정하세요. 프로덕션 환경에서는 사용하지 마세요. |
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Kubernetes Secrets" level="h4" expanded=false id="id-for-kubernetes" %}}
+{{% collapse-content title="Kubernetes Secrets" level="h5" expanded=false id="id-for-kubernetes" %}}
 
-**Agent 버전 7.75 이상에서 이용 가능**
+*Agent 버전 7.75 이상에서 이용 가능*
 
 지원되는 Kubernetes 서비스는 다음과 같습니다.
 
@@ -586,7 +1044,7 @@ Kubernetes 시크릿 백엔드를 사용하려면 다음이 필요합니다.
 
 ##### RBAC 설정 {#rbac-setup}
 
-시크릿이 포함된 각 네임스페이스에 대해 올바른 네임스페이스 이름을 사용하여 다음 예제와 같이 `Role` 및 `RoleBinding`을 생성합니다.
+시크릿이 포함된 각 네임스페이스에 대해 올바른 네임스페이스 이름을 사용하여 다음 예시와 같이 `Role` 및 `RoleBinding`을 생성합니다.
 
 ```yaml
 # Role: grants permission to read secrets
@@ -813,9 +1271,9 @@ override:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Docker Secrets" level="h4" expanded=false id="id-for-docker" %}}
+{{% collapse-content title="Docker Secrets" level="h5" expanded=false id="id-for-docker" %}}
 
-**Agent 버전 7.75 이상에서 이용 가능**
+*Agent 버전 7.75 이상에서 이용 가능*
 
 지원되는 Docker 서비스는 다음과 같습니다.
 
@@ -897,12 +1355,12 @@ secrets:
     file: ./secrets/api_key.txt
 ```
 
-시크릿 파일 `./secrets/api_key.txt`은 컨테이너 내 `/run/secrets/dd_api_key`에 마운팅됩니다.
+시크릿 파일 `./secrets/api_key.txt`는 컨테이너 내 `/run/secrets/dd_api_key`에 마운팅됩니다.
 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="JSON, YAML 또는 TEXT 파일 시크릿 백엔드" level="h4" expanded=false id="id-for-json-yaml-text" %}}
+{{% collapse-content title="JSON, YAML 또는 TEXT 파일 시크릿 백엔드" level="h5" expanded=false id="id-for-json-yaml-text" %}}
 
 | secret_backend_type 값                                 | 파일 서비스                             |
 |---------------------------------------------|-----------------------------------------|
@@ -923,7 +1381,7 @@ secrets:
 
 JSON 파일을 사용해 시크릿을 로컬로 저장할 수 있습니다.
 
-예를 들어 `/path/to/secret.json`에 있는 JSON 파일에 다음 내용이 포함되어 있다고 가정합니다.
+예를 들어, `/path/to/secret.json`에 있는 JSON 파일에 다음 내용이 포함되어 있다고 가정합니다.
 
 ```json
 {
@@ -952,7 +1410,7 @@ secret_backend_config:
 
 YAML 파일을 사용해 시크릿을 로컬로 저장할 수 있습니다.
 
-예를 들어 `/path/to/secret.yaml`에 있는 YAML 파일에 다음 내용이 포함되어 있다고 가정합니다.
+예를 들어, `/path/to/secret.yaml`에 있는 YAML 파일에 다음 내용이 포함되어 있다고 가정합니다.
 
 ```yaml
 datadog_api_key: your api key
@@ -971,7 +1429,7 @@ secret_backend_config:
 
 {{% tab "TEXT 파일 백엔드" %}}
 
-**Agent 버전 7.75 이상에서 이용 가능**
+*Agent 버전 7.75 이상에서 이용 가능*
 
 **참고**: 각 시크릿은 개별 텍스트 파일에 별도로 저장해야 합니다.
 
@@ -979,7 +1437,7 @@ secret_backend_config:
 
 개별 텍스트 파일을 사용해 시크릿을 로컬로 저장할 수 있습니다.
 
-예를 들어 `/path/to/secrets/`에 다음 파일들이 있다고 가정합니다.
+예를 들어, `/path/to/secrets/`에 다음 파일들이 있다고 가정합니다.
 
 `/path/to/secrets/dd_api_key` 파일 내용:
 
@@ -1007,9 +1465,9 @@ secret_backend_config:
 
 ##### 경로 보안: {#path-security}
 
-- `ENC[]`의 상대 경로는 `secrets_path`를 기준으로 해석됩니다(예: `ENC[dd_api_key]`와 `secret_path: /path/to/secrets`을 사용하면 `/path/to/secrets/dd_api_key`로 해석됨).
-- `ENC[]`의 절대 경로는 `secrets_path` 내부에 있어야 합니다(예: `ENC[/path/to/secrets/dd_api_key]`와 `secret_path: /path/to/secrets`은 정상적으로 동작).
-- 경로 탐색 시도(예: `ENC[../etc/passwd]`)가 차단되고 "경로가 허용된 디렉터리를 벗어남" 오류와 함께 실패합니다.
+- `ENC[]`의 상대 경로는 `secrets_path`를 기준으로 해석됩니다(예: `ENC[dd_api_key]`와 `secret_path: /path/to/secrets`를 사용하면 `/path/to/secrets/dd_api_key`로 해석됨).
+- `ENC[]`의 절대 경로는 `secrets_path` 내부에 있어야 합니다(예: `ENC[/path/to/secrets/dd_api_key]`와 `secret_path: /path/to/secrets`는 정상적으로 동작).
+- 경로 탐색 시도(예: `ENC[../etc/passwd]`)가 차단되고 '경로가 허용된 디렉토리를 벗어남' 오류와 함께 실패합니다.
 
 **참고:** 일부 도구는 시크릿을 파일로 내보낼 때 자동으로 줄바꿈 문자를 추가합니다. 처리 방법은 [후행 줄 바꿈 제거](#remove-trailing-line-breaks)를 참조하세요.
 
@@ -1018,10 +1476,156 @@ secret_backend_config:
 
 {{% /collapse-content %}}
 
+{{% collapse-content title="Windows 레지스트리 키" level="h4" expanded=false id="id-for-windows-regkey" %}}
 
-### 옵션 2: Kubernetes 및 Docker용 기본 제공 스크립트 사용 {#option-2-using-the-built-in-script-for-kubernetes-and-docker}
+**Agent 버전 7.82 이상에서 이용 가능**
 
-컨테이너화된 환경의 경우 Datadog Agent 컨테이너 이미지는 v7.32.0부터 기본 제공 스크립트 `/readsecret_multiple_providers.sh`를 포함합니다. 이 스크립트는 다음 위치의 시크릿을 읽을 수 있습니다.
+지원되는 Windows 서비스는 다음과 같습니다.
+
+| secret_backend_type 값 | 서비스 |
+|---------------------------|---------|
+| `windows.regkey` | Windows 레지스트리 |
+
+##### 전제 조건 {#prerequisites-2}
+
+이 백엔드는 Windows에서만 지원됩니다. 레지스트리 키는 Datadog Agent가 실행되는 계정(기본값: `ddagentuser`)에서 읽을 수 있어야 합니다. `HKLM` 아래의 키는 기본적으로 모든 로컬 사용자가 읽을 수 있습니다. Datadog은 `ddagentuser` 및 `SYSTEM`만 키를 읽을 수 있도록 ACL을 제한할 것을 권장합니다.
+
+##### 구성 예시 {#configuration-example-9}
+
+다음 구성을 사용하여 Datadog Agent가 Windows 레지스트리 키 백엔드를 사용하도록 구성하세요.
+
+```yaml
+# datadog.yaml
+secret_backend_type: windows.regkey
+
+api_key: 'ENC[SOFTWARE\Datadog\secrets:api_key]'
+```
+
+`ENC[<registry-path>:<value-name>]` 형식을 사용하여 시크릿을 참조하세요. 여기에서 `registry-path`는 루트 키 아래의 하위 경로이고, `value-name`은 읽을 레지스트리 값입니다.
+
+기본적으로 루트 키는 `HKLM`입니다. 다른 하이브를 사용하려면 `root_key`를 설정하세요. 다음 값만 허용됩니다(다른 값을 입력하면 오류가 반환됨).
+
+`HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`(`HKEY_LOCAL_MACHINE`과 같은 긴 형식도 지원됨)
+
+```yaml
+secret_backend_type: windows.regkey
+secret_backend_config:
+  root_key: HKCU
+```
+
+##### 레지스트리 키 설정 {#set-up-the-registry-key}
+
+이 예시 PowerShell 셸 스크립트에서는 레지스트리를 설정하는 방법을 보여줍니다(설치 후 관리자 권한으로 실행).
+
+```powershell
+# Create the key and set the secret value
+New-Item -Path "HKLM:\SOFTWARE\Datadog\secrets" -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Datadog\secrets" -Name "api_key" -Value "<YOUR_API_KEY>"
+
+# Restrict read access to ddagentuser and SYSTEM (recommended)
+$acl = Get-Acl "HKLM:\SOFTWARE\Datadog\secrets"
+$acl.SetAccessRuleProtection($true, $false)
+$acl.SetAccessRule((New-Object System.Security.AccessControl.RegistryAccessRule -ArgumentList "SYSTEM", "ReadKey", "Allow"))
+$acl.SetAccessRule((New-Object System.Security.AccessControl.RegistryAccessRule -ArgumentList "ddagentuser", "ReadKey", "Allow"))
+$acl.SetAccessRule((New-Object System.Security.AccessControl.RegistryAccessRule -ArgumentList "Administrators", "FullControl", "Allow"))
+Set-Acl "HKLM:\SOFTWARE\Datadog\secrets" $acl
+```
+
+{{% /collapse-content %}}
+
+#### 다중 백엔드 {#multiple-backends}
+
+*Agent 버전 7.80 이상에서 이용 가능*
+
+단일 `secret_backend_type` 대신 `multi_secret_backends` 아래에 여러 개의 명명된 백엔드를 선언할 수 있습니다. 각 백엔드에는 고유한 `type` 및 `config`가 있으며, 시크릿은 `ENC[]` 핸들에서 `backendName;` 접두사를 사용하여 특정 백엔드로 라우팅됩니다.
+
+다음 중 하나 이상을 설정하면 우선순위가 가장 높은 설정이 적용되고 나머지는 경고와 함께 무시됩니다.
+
+1. `secret_backend_command`
+2. `secret_backend_type`
+3. `multi_secret_backends`
+
+##### 구성 {#configuration}
+
+```yaml
+# datadog.yaml
+
+multi_secret_backends:
+  <backend_name>:
+    type: <backend_type>
+    config:
+      <KEY_1>: <VALUE_1>
+```
+
+각 `<backend_name>`은 사용자가 선택하는 임의의 식별자입니다. `;`은 `ENC[]` 핸들에서 사용되는 구분 기호이므로 세미콜론을 포함할 수 없습니다. `type` 및 `config` 필드는 해당 백엔드에 대한 `secret_backend_type` 및 `secret_backend_config`와 동일한 스키마를 따릅니다.
+
+##### `ENC[]` 표기법 {#enc-notation}
+
+`multi_secret_backends`가 활성화되면 `ENC[]` 핸들 앞에 백엔드 이름과 세미콜론을 추가하세요.
+
+```
+ENC[<backend_name>;<secret_key>]
+```
+
+**첫 번째** 세미콜론만 백엔드 구분 기호로 처리됩니다. 자체에 세미콜론을 포함하는 시크릿 키(예: Kubernetes 스타일 `namespace/secret-name;key`)도 계속 작동합니다.
+
+##### 예시 {#example}
+
+다음 구성에서는 두 개의 파일 백엔드에서 동시에 시크릿을 읽습니다.
+
+```yaml
+# datadog.yaml
+multi_secret_backends:
+  yaml_secrets:
+    type: file.yaml
+    config:
+      file_path: /etc/datadog-agent/secrets.yaml
+  aws_secrets:
+    type: aws.secrets
+    config:
+      aws_session:
+        aws_region: us-east-1
+```
+
+앞에 백엔드 이름을 추가하여 시크릿을 참조하세요.
+
+```yaml
+# datadog.yaml
+api_key: ENC[yaml_secrets;api_key]
+app_key: ENC[aws_secrets;My-Secrets;appKey]
+```
+
+##### `secret_backend_type`에서 마이그레이션 {#migrating-from-secret-backend-type}
+
+단일 `secret_backend_type`에서 `multi_secret_backends`로 전환하려면 다음 단계를 따르세요.
+
+1. `secret_backend_type` 및 `secret_backend_config`를 `multi_secret_backends` 아래의 명명된 항목으로 이동합니다.
+2. 최상위 수준에서 `secret_backend_type` 및 `secret_backend_config`를 제거합니다.
+3. 모든 `ENC[secretKey]` 핸들을 `ENC[backendName;secretKey]`로 업데이트합니다.
+
+```yaml
+# Before
+secret_backend_type: file.yaml
+secret_backend_config:
+  file_path: /etc/datadog-agent/secrets.yaml
+
+api_key: ENC[api_key]
+
+# After
+multi_secret_backends:
+  my_yaml:
+    type: file.yaml
+    config:
+      file_path: /etc/datadog-agent/secrets.yaml
+
+api_key: ENC[my_yaml;api_key]
+```
+
+### 옵션 2: Kubernetes 및 Docker용 내장 스크립트 사용 {#option-2-using-the-built-in-script-for-kubernetes-and-docker}
+
+* Agent 버전 7.32 이상에서 이용 가능*
+
+컨테이너화된 환경의 경우, Datadog Agent의 컨테이너 이미지에 내장 스크립트 `/readsecret_multiple_providers.sh`가 포함됩니다. 이 스크립트는 다음에서 시크릿을 읽는 작업을 지원합니다.
 
 * 파일: `ENC[file@/path/to/file]` 사용
 * Kubernetes Secrets: `ENC[k8s_secret@namespace/secret-name/key]` 사용
@@ -1093,9 +1697,9 @@ password: ENC[file@/etc/secret-volume/password]
 
 **참고**:
 - 시크릿은 마운팅되는 포드와 동일한 네임스페이스에 존재해야 합니다.
-- 이 스크립트는 민감한 `/var/run/secrets/kubernetes.io/serviceaccount/token`를 포함한 모든 하위 폴더에 접근할 수 있습니다. 따라서 Datadog에서는 `/var/run/secrets` 대신 전용 폴더를 사용할 것을 권장합니다.
+- 이 스크립트는 민감한 `/var/run/secrets/kubernetes.io/serviceaccount/token`을 포함한 모든 하위 폴더에 접근할 수 있습니다. 따라서 Datadog에서는 `/var/run/secrets` 대신 전용 폴더를 사용할 것을 권장합니다.
 
-[Docker swarm 시크릿][3]은 `/run/secrets` 폴더에 마운팅됩니다. 예를 들어 Docker 시크릿 `db_prod_passsword`은 Agent 컨테이너 내 `/run/secrets/db_prod_password`에 위치합니다. 구성에서는 `ENC[file@/run/secrets/db_prod_password]`로 참조할 수 있습니다.
+[Docker swarm 시크릿][3]은 `/run/secrets` 폴더에 마운팅됩니다. 예를 들어, Docker 시크릿 `db_prod_passsword`는 Agent 컨테이너 내 `/run/secrets/db_prod_password`에 위치합니다. 구성에서는 `ENC[file@/run/secrets/db_prod_password]`로 참조할 수 있습니다.
 
 #### 예시: 네임스페이스 간 Kubernetes 시크릿 읽기 {#example-reading-a-kubernetes-secret-across-namespaces}
 
@@ -1181,7 +1785,7 @@ Agent는 시크릿을 검색하기 위해 사용자가 제공하는 외부 실�
 
 Agent는 표준 입력을 통해 확인할 시크릿 핸들 목록이 포함된 JSON 페이로드를 이 실행 파일에 보냅니다. 그러면 실행 파일이 각 시크릿을 가져와 표준 출력을 통해 JSON 형식으로 반환합니다.
 
-다음 예시는 Agent가 STDIN에서 실행 파일에 무엇을 보내는지 보여줍니다.
+다음 예시에서는 Agent가 STDIN에서 실행 파일에 무엇을 보내는지 보여줍니다.
 
 ```
 {
@@ -1298,7 +1902,7 @@ Linux에서는 실행 파일이 다음과 같은 요건을 충족해야 합니�
 Windows에서는 실행 파일이 다음과 같은 요건을 충족해야 합니다.
 
 * `ddagentuser`(Agent 실행 사용자)에 대해 **읽기** 또는 **실행** 권한이 있어야 합니다.
-* **관리자** 그룹, 기본 제공 **로컬 시스템** 계정 또는 Agent 사용자 컨텍스트(`ddagentuser`가 기본값)를 제외한 다른 사용자나 그룹에는 어떠한 권한도 부여되어서는 안 됩니다.
+* **관리자** 그룹, 내장 **로컬 시스템** 계정 또는 Agent 사용자 컨텍스트(`ddagentuser`가 기본값)를 제외한 다른 사용자나 그룹에는 어떠한 권한도 부여되어서는 안 됩니다.
 * Agent가 실행할 수 있는 유효한 Win32 애플리케이션이어야 합니다(예: PowerShell 스크립트나 Python 스크립트는 사용할 수 없음).
 
 {{% /tab %}}
@@ -1308,7 +1912,9 @@ Windows에서는 실행 파일이 다음과 같은 요건을 충족해야 합니
 
 ##  런타임에 시크릿 새로 고침 {#refreshing-secrets-at-runtime}
 
-Agent v7.67부터는 Agent를 재시작하지 않고 확인된 시크릿을 새로 고치도록 구성할 수 있습니다.
+*Agent 버전 7.67 이상에서 이용 가능*
+
+Agent를 재시작하지 않고 확인된 시크릿을 새로 고치도록 구성할 수 있습니다.
 
 새로 고침 간격을 설정합니다.
 
@@ -1316,16 +1922,16 @@ Agent v7.67부터는 Agent를 재시작하지 않고 확인된 시크릿을 새�
 secret_refresh_interval: 3600  # refresh every hour
 ```
 
-또는, 수동으로 새로 고침을 트리거합니다.
+또는 수동으로 새로 고침을 트리거합니다.
 
 ```shell
 datadog-agent secret refresh
 ```
 
-###  API/APP 키 새로 고침 {#apiapp-key-refresh}
+### API/APP 키 새로 고침 {#apiapp-key-refresh}
 시크릿으로 풀링한 API/APP 키는 런타임 새로 고침을 지원합니다.
 
-이를 활성화하려면 `datadog.yaml`에서 `secret_refresh_interval`(초 단위)를 설정합니다.
+이를 활성화하려면 `datadog.yaml`에서 `secret_refresh_interval`(초 단위)을 설정합니다.
 
 ```yaml
 api_key: ENC[<secret_handle>]
@@ -1333,7 +1939,7 @@ api_key: ENC[<secret_handle>]
 secret_refresh_interval: 3600  # refresh every hour
 ```
 
-기본적으로 Agent는 최초 새로 고침을 `secret_refresh_interval` 윈도우 이내에서 무작위로 설정해
+기본적으로 Agent는 최초 새로 고침을 `secret_refresh_interval` 기간 이내에서 무작위로 설정해
 Agent 플릿이 동시에 새로 고쳐지지 않게 합니다. 키는 시작 시에 확인되고, 첫 간격 이내에 한 번 새로 고쳐지며,
 이후에는 매 간격마다 새로 고쳐집니다.
 
@@ -1347,7 +1953,9 @@ secret_refresh_scatter: false
 ```
 
 ###  Autodiscovery 검사 시크릿 새로 고침 {#autodiscovery-check-secrets-refresh}
-Agent v7.76부터는 템플릿이 `ENC[]` 구문을 사용하는 경우 예약된 [Autodiscovery][1] 검사가 런타임에 시크릿을 새로 고칠 수 있습니다.
+*Agent 버전 7.76 이상에서 이용 가능*
+
+템플릿이 `ENC[]` 구문을 사용하는 경우 예약된 [Autodiscovery][1] 검사가 런타임에 시크릿을 새로 고칠 수 있습니다.
 
 ```yaml
 labels:
@@ -1374,9 +1982,11 @@ annotations:
 
 ###  API 키 실패/무효화 시 자동 시크릿 새로 고침 {#automatic-secrets-refresh-on-api-key-failure-invalidation}
 
-Agent 버전 v7.74부터는 Agent가 잘못된 API 키를 감지하면 시크릿을 자동으로 새로 고칠 수 있습니다. 이것은 Agent가 Datadog으로부터 403 Forbidden 응답을 수신하거나, 정기 상태 검사에서 잘못되었거나 만료된 API 키가 감지될 때 발생합니다.
+*Agent 버전 7.74 이상에서 이용 가능*
 
-이 기능을 활성화하려면 `datadog.yaml` 파일에서 `secret_refresh_on_api_key_failure_interval`를 분 단위 간격으로 설정하세요. 비활성화하려면 `0`(기본값)로 설정합니다.
+Agent가 잘못된 API 키를 감지하면 시크릿을 자동으로 새로 고칠 수 있습니다. 이는 Agent가 Datadog으로부터 403 Forbidden 응답을 수신하거나, 정기 상태 검사에서 잘못되었거나 만료된 API 키가 감지될 때 발생합니다.
+
+이 기능을 활성화하려면 `datadog.yaml` 파일에서 `secret_refresh_on_api_key_failure_interval`을 분 단위 간격으로 설정하세요. 비활성화하려면 `0`(기본값)으로 설정합니다.
 
 이 간격은 두 번의 새로 고침 사이의 최소 시간으로, 잘못된 API 키가 감지되었을 때 시크릿 관리 솔루션에 요청이 과도하게 전송되는 것을 방지합니다.
 
@@ -1403,7 +2013,7 @@ agent_ipc:
 
 ### 감지된 시크릿 나열 {#listing-detected-secrets}
 
-Agent CLI의 `secret` 명령을 사용하면 설정과 관련된 모든 오류가 표시됩니다. 예를 들어 실행 파일의 권한이 잘못된 경우가 있습니다. 또한 찾은 모든 핸들과 핸들의 위치를 나열합니다.
+Agent CLI의 `secret` 명령을 사용하면 설정과 관련된 모든 오류가 표시됩니다. 예를 들어, 실행 파일의 권한이 잘못된 경우가 있습니다. 또한 찾은 모든 핸들과 핸들의 위치를 나열합니다.
 
 Linux에서는 이 명령이 실행 파일의 파일 모드, 소유자 및 그룹을 출력합니다. Windows에서는 ACL 권한을 나열합니다.
 
@@ -1582,7 +2192,7 @@ Agent와 동일한 조건에서 실행 파일을 테스트하려면 개발 환�
     ```
 
 이제 `ddagentuser` 계정으로 로그인하여 실행 파일을 테스트할 수 있습니다. Datadog에는 [Powershell 스크립트][10]가 있어 실행 파일을
-다른 사용자 자격으로 테스트하는 데 도움이 됩니다. 이는 사용자 컨텍스트를 전환하고, Agent가 실행 파일을 실행하는 방식을 흉내 냅니다.
+다른 사용자 자격으로 테스트하는 데 도움이 됩니다. 이는 사용자 컨텍스트를 전환하고, Agent가 실행 파일을 실행하는 방식을 흉내냅니다.
 
 사용 방법 예시:
 
@@ -1606,7 +2216,7 @@ exit code:
 
 ### Agent가 시작을 거부하는 경우 {#agent-refusing-to-start}
 
-Agent는 시작 시 가장 먼저 `datadog.yaml`을 로드하고 그 안에 있는 모든 시크릿을 복호화합니다. 이것을 로깅을 설정하기 전에 수행합니다. 따라서 Windows와 같은 플랫폼에서는 `datadog.yaml` 로드 중 발생한 오류가 로그에 기록되지 않고 `stderr`에만 표시됩니다. 이런 상황은 시크릿에 대해 Agent에 제공한 실행 파일이 오류를 반환할 때 발생할 수 있습니다.
+Agent는 시작 시 가장 먼저 `datadog.yaml`을 로드하고 그 안에 있는 모든 시크릿을 복호화합니다. 이를 로깅을 설정하기 전에 수행합니다. 따라서 Windows와 같은 플랫폼에서는 `datadog.yaml` 로드 중 발생한 오류가 로그에 기록되지 않고 `stderr`에만 표시됩니다. 이런 상황은 시크릿에 대해 Agent에 제공한 실행 파일이 오류를 반환할 때 발생할 수 있습니다.
 
 `datadog.yaml`에 시크릿이 있고 Agent가 시작되지 않는 경우 다음을 시도하세요.
 
@@ -1660,9 +2270,11 @@ instances:
 [1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 [1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+[1007]: https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html
 
 <!-- Azure KeyVault Links -->
 [2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
+[2001]: https://learn.microsoft.com/en-us/azure/developer/go/azure-sdk-authentication
 
 <!-- HashiCorp Vault Links -->
 [3000]: https://learn.hashicorp.com/tutorials/vault/static-secrets

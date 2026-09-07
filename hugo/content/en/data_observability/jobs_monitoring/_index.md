@@ -10,12 +10,15 @@ further_reading:
   - link: '/data_streams'
     tag: 'Documentation'
     text: 'Data Streams Monitoring'
-  - link: "https://www.datadoghq.com/blog/data-observability/"
-    tag: "Blog"
-    text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
   - link: '/data_observability/cicd/'
     tag: 'Documentation'
     text: 'CI/CD'
+  - link: "https://www.datadoghq.com/blog/data-observability/"
+    tag: "Blog"
+    text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
+  - link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
+    tag: "Blog"
+    text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
 ---
 
 {{< img src="data_jobs/overview_052026.png" alt="Datadog Data Observability: Jobs Monitoring overview page" style="width:100%;" >}}

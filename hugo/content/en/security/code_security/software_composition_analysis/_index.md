@@ -89,6 +89,28 @@ To assist in prioritizing remediation, Datadog modifies the base CVSS score into
 | Exploit availability              | Availability of public exploits for the vulnerability.               | Decreased if no exploit is available.                  |
 | Exploitation probability (EPSS)   | Likelihood of real-world exploitation based on EPSS data.            | Decreased when the probability of exploitation is low. |
 
+#### View vulnerability details
+
+Click on a vulnerability in Vulnerabilities Explorer to open its side panel.
+
+##### Repositories
+
+The {{< ui >}}Repositories{{< /ui >}} section lists the files and repositories where Static SCA detected the library vulnerability. For each finding, it displays associated services and teams, the finding status, and triage actions. Expand a row to view its severity breakdown and, when available, reachable locations.
+
+##### Impacted services
+
+The {{< ui >}}Impacted services{{< /ui >}} section lists the services where Runtime SCA detected the library vulnerability. For each service, it displays environments, dependency details, reachability, associated teams, finding status, and when Datadog last detected it.
+
+##### Impacted infrastructure
+
+When Runtime SCA detects impacted services, the {{< ui >}}Impacted Infrastructure{{< /ui >}} section lists the hosts where the affected library version runs. It also shows associated services, environments, and last deployment time.
+
+To investigate the affected infrastructure:
+
+1. Review the affected hosts, services, environments, and last deployment time.
+1. Select {{< ui >}}View Host{{< /ui >}} to investigate a host.
+1. Select {{< ui >}}View Vulnerabilities in Cloud Security{{< /ui >}} to review the host's open vulnerabilities.
+
 ### View findings by repository
 
 The [Repositories Explorer][12] provides a repository-centric view of all scan results across Static Code Analysis (SAST), Software Composition Analysis (SCA), Secrets Scanning, and Infrastructure as Code (IaC). Click on a repository to analyze {{< ui >}}Library Vulnerabilities{{< /ui >}} and {{< ui >}}Library Catalog{{< /ui >}} results from SCA scoped to your chosen branch and commit.

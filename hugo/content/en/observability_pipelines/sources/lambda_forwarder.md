@@ -1,5 +1,6 @@
 ---
 title: Send Datadog Lambda Forwarder Logs to Observability Pipelines
+description: Learn how to send AWS vended logs to Observability Pipelines using the Datadog Lambda Forwarder.
 disable_toc: false
 ---
 
@@ -11,6 +12,8 @@ This document walks through how to send AWS vended logs with the Datadog Lambda 
 - [Deploy the Datadog Forwarder](#deploy-the-datadog-lambda-forwarder).
 
 See [Datadog Forwarder][1] to learn more about it.
+
+**Note**: The Datadog Forwarder sends logs tagged with `ddsource` and `ddtags`, not `source` and `tags`. When you define processor queries or filters for these logs, use `ddsource` and `ddtags`.
 
 ## Set up a pipeline
 

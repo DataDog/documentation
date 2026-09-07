@@ -237,6 +237,14 @@ From a status page, select the dropdown next to **Publish Notice**, select **Pub
 
 {{< img src="incident_response/status_pages/publish_status_page_backfill_maintenance.png" alt="Example publish backfilled notice modal for maintenance windows" style="width:60%;" >}}
 
+### Edit a maintenance update
+
+After publishing a maintenance update, you can edit its message to correct typos or clarify the description. To edit a past update, open the maintenance notice on the status page, hover over the update you want to modify in the timeline, and click the edit icon that appears. Make your changes in the **Edit Update** modal.
+
+{{< img src="incident_response/status_pages/edit_maintenance_update.png" alt="Edit Update modal showing a Message field for a past maintenance update" style="width:60%;" >}}
+
+Only the **Message** field can be edited. Click **Save Changes** to apply the edits.
+
 ## Use notice templates
 
 Templates let you save pre-configured language for degradation notices and maintenance windows that you publish repeatedly, such as a recurring maintenance activity or a known type of service disruption. When you publish a notice, select a template to pre-fill the notice title, per-status messages, and affected components instead of typing them each time.
@@ -353,6 +361,10 @@ To match your branding, you have the option to map your status page URL to a cus
 - You can revert to the default Datadog domain at any time.
 - DNS changes must be made by someone with access to your domain registrar.
 
+## Manage status pages with Terraform
+You can use Terraform to create or manage your status pages. For details on the resources available, see Datadog's [Terraform registry][4].  
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -360,3 +372,4 @@ To match your branding, you have the option to map your status page URL to a cus
 [1]: /account_management/rbac/
 [2]: https://app.datadoghq.com/status-pages
 [3]: /account_management/org_settings/smtp_configuration
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/status_page

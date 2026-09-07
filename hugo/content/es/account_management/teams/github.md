@@ -52,7 +52,7 @@ Asegúrate de que tu organización Datadog está [conectada][3] a una organizaci
 
 Una vez que un administrador habilite el aprovisionamiento de equipos desde GitHub, aparecerá una notificación en la página de información del equipo. La notificación pide a los usuarios que **inicien sesión en GitHub** para que conecten sus cuentas de Datadog a GitHub a través de OAuth.
 
-{{< img src="account_management/teams/github/connect-to-github.png" alt="'Cuadro 'Not Connected to GitHub' (No conectado a GitHub) con el botón para 'iniciar sesión en GitHub'" style="width:60%;">}}
+{{< img src="account_management/teams/github/connect-to-github-v2.png" alt="'Cuadro 'Not Connected to GitHub' (No conectado a GitHub) con el botón para 'iniciar sesión en GitHub'" style="width:60%;">}}
 
 Cada usuario debe vincular manualmente su cuenta de GitHub a Datadog para establecer la conexión entre Datadog y GitHub. Este comportamiento es requerido por las políticas OAuth y de privacidad del usuario de GitHub.
 

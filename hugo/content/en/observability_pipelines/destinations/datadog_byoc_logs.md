@@ -1,5 +1,6 @@
 ---
 title: Datadog BYOC Logs Destination
+description: Learn how to send logs to Datadog BYOC (Bring Your Own Cloud) Logs using the Observability Pipelines Worker.
 disable_toc: false
 aliases:
 - /observability_pipelines/destinations/cloudprem/

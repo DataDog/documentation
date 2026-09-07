@@ -13,7 +13,7 @@ aliases:
  - /security/cloud_siem/log_detection_rules/
  - /security/cloud_siem/detection_rules/
 further_reading:
-- link: "/security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule/"
+- link: "/security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/"
   tag: "Documentation"
   text: "Create a custom detection rule"
 - link: "/cloud_siem/default_rules/"
@@ -90,7 +90,7 @@ Use unit testing to test your rules against sample logs and make sure the detect
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule/
+[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/
 [2]: https://app.datadoghq.com/security/siem/rules
 [3]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/threshold/
 [4]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/new_value/

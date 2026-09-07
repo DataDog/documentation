@@ -185,6 +185,7 @@ agent diagnose show-metadata agent-telemetry
 | transactions.success_bytes                  | Successful transaction payload size in bytes                                                                          |
 | transactions.requeued                       | Transaction requeue count                                                                                              |
 | transactions.retries                        | Transaction retry count                                                                                                |
+| transactions.http_errors                    | Count of transaction HTTP errors per HTTP code                                                                         |
 | **Database**                                |                                                                                                                        |
 | oracle.activity_samples_count               | Number of rows fetched in measuring query activity (Number of activity samples collected)                              |
 | oracle.activity_latency                     | Time to retrieve query activity in milliseconds                                                                        |
@@ -235,6 +236,8 @@ agent diagnose show-metadata agent-telemetry
 | cluster_checks.configs_dangling             | Number of dangling cluster check configurations                                                                        |
 | cluster_checks.configs_info                 | Names of dispatched cluster checks                                                                             |
 | cluster_checks.unscheduled_check            | Number of unscheduled cluster checks                                                                                   |
+| instrumentation_controller.resources        | Number of `DatadogInstrumentation` resources tracked by the controller                                                 |
+| instrumentation_controller.reconciliations  | Number of `DatadogInstrumentation` section reconciliation attempts, tagged by section and status                       |
 | language_detection_patcher.patches          | Number of language detection patcher patches                                                                           |
 | tagger.stored_entities                      | Number of entities stored in the Tagger                                                                                |
 | workloadmeta.stored_entities                | Number of entities stored in WorkloadMeta                                                                              |

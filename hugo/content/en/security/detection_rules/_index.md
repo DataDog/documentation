@@ -209,7 +209,7 @@ The rule deprecation process is as follows:
 [11]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/
 [12]: /security/application_security/policies/custom_rules/
 [13]: /security/cloud_security_management/misconfigurations/custom_rules
-[14]: /security/workload_protection/workload_security_rules?tab=host#create-custom-rules
+[14]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules/#create-a-custom-detection-rule
 [15]: https://app.datadoghq.com/security/configuration/
 [16]: https://app.datadoghq.com/security/siem/rules
 [17]: https://app.datadoghq.com/security/workload-protection/detection-rules

@@ -11,9 +11,9 @@ further_reading:
 - link: "/incident_response/incident_management/post_incident/follow-ups"
   tag: "Documentation"
   text: "Manage incident follow-up tasks"
-- link: "/incident_response/case_management/"
+- link: "/incident_response/work_management/"
   tag: "Documentation"
-  text: "Track follow-ups with Case Management"
+  text: "Track follow-ups with Work Management"
 ---
 
 ## Overview
@@ -48,7 +48,7 @@ During an incident investigation, your team may identify issues that need attent
 
 Common examples include infrastructure improvements, technical debt, process gaps, and root cause fixes that require more time than the immediate mitigation.
 
-Follow-ups can be created at any point during or after an incident from the incident's **Remediation** tab or from Slack. After resolution, you can export follow-ups to [Jira][3] (unidirectional sync) or [Case Management][4] (bidirectional sync with Jira and ServiceNow) to integrate them into your team's existing workflows.
+Follow-ups can be created at any point during or after an incident from the incident's **Remediation** tab or from Slack. After resolution, you can export follow-ups to [Jira][3] (unidirectional sync) or [Work Management][4] (bidirectional sync with Jira and ServiceNow) to integrate them into your team's existing workflows.
 
 For detailed information on creating, managing, and exporting follow-ups, see [Incident Follow-ups][5].
 
@@ -65,6 +65,6 @@ For more information on integrating status pages with your incident workflow, se
 [1]: https://app.datadoghq.com/incidents/settings
 [2]: /incident_response/incident_management/post_incident/postmortems
 [3]: /integrations/jira/
-[4]: /incident_response/case_management/
+[4]: /incident_response/work_management/
 [5]: /incident_response/incident_management/post_incident/follow-ups
 [6]: /incident_response/status_pages/

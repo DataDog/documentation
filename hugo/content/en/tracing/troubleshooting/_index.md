@@ -51,7 +51,7 @@ For more information, see [Additional support](#additional-support).
 
 This section addresses issues related to trace data retention and filtering across Datadog.
 
-{{% collapse-content title="There are more spans in the Trace Explorer than on the Monitors page" level="h4" %}}
+{{% collapse-content title="There are more spans in the Trace Explorer than on the Monitors page" level="h3" %}}
 
 If you haven't set up [custom retention filters][19], this is expected behavior. Here's why:
 
@@ -74,7 +74,7 @@ Custom retention filters allow you to decide which spans are indexed and [retain
 
 This section covers troubleshooting discrepancies and inconsistencies with trace metrics.
 
-{{% collapse-content title="Trace metrics and custom span-based metrics have different values" level="h4" %}}
+{{% collapse-content title="Trace metrics and custom span-based metrics have different values" level="h3" %}}
 
 Trace metrics and custom span-based metrics can have different values because they are calculated based on different datasets:
 
@@ -91,7 +91,7 @@ To ensure that your trace metrics and custom span-based metrics have the same va
 
 This section covers strategies to troubleshoot service-related issues.
 
-{{% collapse-content title="One service is showing up as multiple services in Datadog" level="h4" %}}
+{{% collapse-content title="One service is showing up as multiple services in Datadog" level="h3" %}}
 
 This can happen when the service name is not consistent across all spans.
 
@@ -168,7 +168,7 @@ Ruby does not support `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING`. See [A
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="There is an unexpected increase in ingested/indexed spans on the Plan and Usage page" level="h4" %}}
+{{% collapse-content title="There is an unexpected increase in ingested/indexed spans on the Plan and Usage page" level="h3" %}}
 
 Spikes in data ingestion and indexing can be caused by various factors. To investigate the cause of an increase, use the [APM Traces Estimated Usage metrics][31]:
 
@@ -181,7 +181,7 @@ The [APM Traces Usage dashboard][28] contains several widget groups displaying h
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Missing error message and stack trace" level="h4" %}}
+{{% collapse-content title="Missing error message and stack trace" level="h3" %}}
 
 In some traces with an error status, the {{< ui >}}Errors{{< /ui >}} tab shows `Missing error message and stack trace` rather than exception details. 
 
@@ -201,7 +201,7 @@ If you encounter any of the following issues, you may be exceeding [Datadog's vo
 - You are missing some of your resources that you expected to see in the Datadog platform.
 - You are seeing traces from your service but are not able to find this service on the [Catalog page][32].
 
-{{% collapse-content title="Data volume guidelines" level="h4" %}}
+{{% collapse-content title="Data volume guidelines" level="h3" %}}
 
 Your instrumented application can submit spans with timestamps up to 18 hours in the past and two hours in the future from the current time.
 
@@ -230,7 +230,7 @@ Additionally, the number of [span tags][8] present on any span cannot exceed 102
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="The number of services exceeds what is specified in the data volume guidelines" level="h4" %}}
+{{% collapse-content title="The number of services exceeds what is specified in the data volume guidelines" level="h3" %}}
 
 If the number of services exceeds what is specified in the [data volume guidelines](#data-volume-guidelines), try following these best practices for service naming conventions.
 
@@ -266,7 +266,7 @@ For example, instead of the service `web-store`, you might decide to name differ
 
 This section provides guidance on diagnosing and resolving connection and communication issues between your applications and the Datadog Agent
 
-{{% collapse-content title="Your instrumented application isn't communicating with the Datadog Agent" level="h4" %}}
+{{% collapse-content title="Your instrumented application isn't communicating with the Datadog Agent" level="h3" %}}
 
 Read about how to find and fix these problems in [Connection Errors][4].
 
@@ -276,13 +276,13 @@ Read about how to find and fix these problems in [Connection Errors][4].
 
 This section contains information on troubleshooting performance issues related to resource utilization.
 
-{{% collapse-content title="Out of memory errors" level="h4" %}}
+{{% collapse-content title="Out of memory errors" level="h3" %}}
 
 Read about detecting trace collection CPU usage and about calculating adequate resource limits for the Agent in [Agent Resource Usage][10].
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Rate limit or max event error messages" level="h4" %}}
+{{% collapse-content title="Rate limit or max event error messages" level="h3" %}}
 
 Within Datadog Agent logs, if you see error messages about rate limits or max events per second, you can change these limits by following [these instructions][9]. If you have questions, before you change the limits, consult with the Datadog [support team][1].
 
@@ -292,7 +292,7 @@ Within Datadog Agent logs, if you see error messages about rate limits or max ev
 
 This section covers approaches for addressing security concerns in APM, including protecting sensitive data and managing traffic.
 
-{{% collapse-content title="Modifying, discarding, or obfuscating spans" level="h4" %}}
+{{% collapse-content title="Modifying, discarding, or obfuscating spans" level="h3" %}}
 
 There are several configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the tracing client. For details on the options available, see [Security and Agent Customization][11]. While this offers representative examples, if you require assistance applying these options to your environment, reach out to [Datadog Support][1].
 
@@ -302,7 +302,7 @@ There are several configuration options available to scrub sensitive data or dis
 
 This section explains how to use debug and startup logs to identify and resolve issues with your Datadog SDK.
 
-{{% collapse-content title="Debug logs" level="h4" %}}
+{{% collapse-content title="Debug logs" level="h3" %}}
 
 To capture full details on the Datadog SDK, enable debug mode on your SDK by using the `DD_TRACE_DEBUG` environment variable.
 
@@ -310,13 +310,13 @@ These logs can surface instrumentation errors or integration-specific errors. Fo
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Startup logs" level="h4" %}}
+{{% collapse-content title="Startup logs" level="h3" %}}
 
 During startup, Datadog SDKs emit logs that reflect the configurations applied in a JSON object, as well as any errors encountered, including if the Agent can be reached in languages where this is possible. Some languages require these startup logs to be enabled with the environment variable `DD_TRACE_STARTUP_LOGS=true`. For more information, see the [Startup logs][3].
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="SDK configurations" level="h4" %}}
+{{% collapse-content title="SDK configurations" level="h3" %}}
 
 Configuration values are automatically reported by the SDKs and can be viewed in the UI. This can be used to troubleshoot instrumentation issues caused by misconfiguration. For details, see the [SDK configurations page][33].
 
@@ -326,7 +326,7 @@ Configuration values are automatically reported by the SDKs and can be viewed in
 
 If you still need additional support, open a ticket with Datadog Support.
 
-{{% collapse-content title="Open a Datadog Support ticket" level="h4" %}}
+{{% collapse-content title="Open a Datadog Support ticket" level="h3" %}}
 
 When you open a [support ticket][1], the Datadog support team may ask for the following types of information:
 

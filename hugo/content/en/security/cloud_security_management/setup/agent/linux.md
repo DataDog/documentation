@@ -51,7 +51,7 @@ sbom:
       enabled: true
 {{< /code-block >}}
 
-**Note**: `enrichment.usage.enabled: true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package prioritization runs independently of [Workload Protection][7] and does not affect its usage. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for more details.
+**Note**: `enrichment.usage.enabled: true` requires Datadog Agent **7.79.0 or later**. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for requirements.
 
 {{< code-block lang="bash" filename="/etc/datadog-agent/security-agent.yaml" disable_copy="false" collapsible="true" >}}
 compliance_config:
@@ -100,11 +100,10 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 *Package is running* feeds the **Reachability** dimension of the [Runtime Prioritization Engine][8]. To query these signals directly, see [Filter findings by runtime signals][9].
 
 **Requirements**:
-- Datadog Agent **7.79.0 or later**
-- Linux only (eBPF dependency)
-- Applies to operating system packages in container image vulnerability findings
+- Datadog Agent **7.79.0 or later**.
+- Linux only (eBPF dependency). See [Workload Protection setup][10] for supported distributions and kernel versions.
 
-**Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][7] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
+Runtime signals apply to packages installed by an operating system package manager (`apt`, `yum`, or `apk`) in container image vulnerability findings.
 
 Add the `enrichment` block to the `sbom` section of your `datadog.yaml` file:
 
@@ -120,6 +119,8 @@ sbom:
 {{< /code-block >}}
 
 Restart the Agent after applying the changes.
+
+To verify the setup, filter vulnerability findings by [runtime signals][9].
 
 **Notes**:
 
@@ -146,3 +147,4 @@ sudo chgrp dd-agent /etc/datadog-agent/security-agent.yaml
 [7]: /security/workload_protection/
 [8]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
 [9]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals
+[10]: /security/workload_protection/setup/

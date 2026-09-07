@@ -13,6 +13,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-security-investigation-ai/"
     tag: "Blog"
     text: "How to investigate cloud credential compromise with Bits Security Analyst"
+  - link: "https://www.datadoghq.com/blog/bits-threat-hunting/"
+    tag: "Blog"
+    text: "Automate threat hunting with Datadog Cloud SIEM"
 
 products:
 - name: Cloud SIEM

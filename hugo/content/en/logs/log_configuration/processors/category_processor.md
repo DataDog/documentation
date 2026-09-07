@@ -30,7 +30,7 @@ Use the Category Processor to categorize your log events based on their content.
 
 ## Before and after state of logs
 
-{{% collapse-content title="Example: Categorizing logs with the Category Processor" level="h4" %}}
+{{% collapse-content title="Example: Categorizing logs with the Category Processor" level="h3" %}}
 
 **Before:**
 

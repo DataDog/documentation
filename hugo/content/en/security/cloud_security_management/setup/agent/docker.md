@@ -70,11 +70,10 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 *Package is running* feeds the **Reachability** dimension of the [Runtime Prioritization Engine][5]. To query these signals directly, see [Filter findings by runtime signals][6].
 
 **Requirements**:
-- Datadog Agent **7.79.0 or later**
-- Linux only (eBPF dependency)
-- Applies to operating system packages in container image vulnerability findings
+- Datadog Agent **7.79.0 or later**.
+- Linux only (eBPF dependency). See [Workload Protection setup][7] for supported distributions and kernel versions.
 
-**Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][4] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
+Runtime signals apply to packages installed by an operating system package manager (`apt`, `yum`, or `apk`) in container image vulnerability findings.
 
 Add `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` to your Docker run command:
 
@@ -88,7 +87,7 @@ docker run -d --name dd-agent \
   registry.datadoghq.com/agent:7
 {{< /code-block >}}
 
-**Note**: `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package prioritization runs independently of [Workload Protection][4] and does not affect its usage.
+To verify the setup, filter vulnerability findings by [runtime signals][6].
 
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats
@@ -96,3 +95,4 @@ docker run -d --name dd-agent \
 [4]: /security/workload_protection/
 [5]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
 [6]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals
+[7]: /security/workload_protection/setup/

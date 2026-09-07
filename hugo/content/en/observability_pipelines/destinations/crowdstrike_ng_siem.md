@@ -1,5 +1,6 @@
 ---
 title: CrowdStrike Next-Gen SIEM Destination
+description: Learn how to send logs to CrowdStrike Next-Gen SIEM using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

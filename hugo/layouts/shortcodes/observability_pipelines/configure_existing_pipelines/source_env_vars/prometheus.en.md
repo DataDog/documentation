@@ -1,0 +1,8 @@
+- Prometheus address:
+    - The Observability Pipelines Worker listens on this socket address, such as `0.0.0.0:9091`, for metrics pushed by your Prometheus clients.
+    - The default environment variable is `DD_OP_SOURCE_PROMETHEUS_ADDRESS`.
+- If you are using plain authentication:
+	- Prometheus endpoint authentication username:
+		- The default environment variable is `DD_OP_SOURCE_PROMETHEUS_USERNAME`.
+	- Prometheus endpoint authentication password:
+		- The default environment variable is `DD_OP_SOURCE_PROMETHEUS_PASSWORD`.

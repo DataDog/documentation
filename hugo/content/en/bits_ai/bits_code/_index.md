@@ -52,12 +52,13 @@ Click a session to view its details and continue working with Bits Code. To remo
 
 ## Supported source code providers
 Bits Code supports the following source code providers:
-- **GitHub**: GitHub.com and [GitHub Enterprise Cloud][30]
-- **GitLab**: GitLab.com
+- **GitHub**: GitHub.com, [GitHub Enterprise Cloud][30], [GitHub Enterprise Cloud with data residency][31], and [GitHub Enterprise Server][38].
+- **GitLab**: GitLab.com and GitLab Self-Managed.
+- **Azure DevOps Cloud**: [dev.azure.com and *.visualstudio.com][39].
 
 The following plans are not supported:
-- **Self-hosted plans**, such as GitHub Enterprise Server and GitLab Self-Managed.
-- **Cloud-hosted plans on dedicated domains**, such as [GitHub Enterprise Cloud with data residency][31] and [GitLab Dedicated][32]. Bits Code supports only providers on the standard GitHub.com and GitLab.com domains.
+- **Azure DevOps Server**: On-premises instances are not supported by Bits Code or Datadog [Source Code Integration][37].
+- **Bitbucket**: Neither Bitbucket.org, Bitbucket Data Center, nor Bitbucket Data Server (On-Prem) are supported by Bits Code. Datadog [Source Code Integration][37] does not support On-Prem Bitbucket deployments.
 
 ## Supported Datadog products
 
@@ -155,3 +156,6 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 [31]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud#about-data-residency
 [32]: https://docs.gitlab.com/subscriptions/gitlab_dedicated/
 [33]: /bits_ai/bits_code/setup/#configure-custom-instructions
+[37]: /source_code/source-code-management#source-code-management-providers
+[38]: https://docs.github.com/en/enterprise-server@3.17/admin/overview/about-github-enterprise-server
+[39]: https://learn.microsoft.com/en-us/azure/devops/?view=azure-devops

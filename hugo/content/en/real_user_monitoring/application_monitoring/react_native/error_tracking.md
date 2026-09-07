@@ -7,15 +7,18 @@ aliases:
 - /real_user_monitoring/error_tracking/mobile/reactnative/
 - /real_user_monitoring/mobile_and_tv_monitoring/react_native/error_tracking
 further_reading:
-- link: https://github.com/DataDog/dd-sdk-reactnative
-  tag: "Source Code"
-  text: dd-sdk-reactnative Source code
 - link: real_user_monitoring/error_tracking/
   tag: Documentation
   text: Learn about Error Tracking
 - link: https://www.datadoghq.com/blog/rum-now-offers-react-native-crash-reporting-and-error-tracking/
   tag: Blog
   text: Datadog now offers React Native Crash Reporting and Error Tracking
+- link: "https://www.datadoghq.com/blog/a-practical-guide-to-react-error-monitoring/"
+  tag: "Blog"
+  text: "A practical guide to React error monitoring"
+- link: https://github.com/DataDog/dd-sdk-reactnative
+  tag: "Source Code"
+  text: dd-sdk-reactnative Source code
 
 ---
 

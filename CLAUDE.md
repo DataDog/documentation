@@ -6,7 +6,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the Datadog Documentation repository, built using Hugo (static site generator) and published to docs.datadoghq.com. The codebase consists of markdown content, Hugo themes, Node.js build scripts, and Python automation tools.
 
+The repository is a monorepo that supports more than one site. All Hugo site files live in the `hugo/` directory, not at the repository root. Paths in this document are relative to the repository root unless noted otherwise. For background, see `REPO_REORG.md`.
+
 ## Development Commands
+
+**Run all build and development commands from the `hugo/` directory.** There is no `package.json` or `Makefile` at the repository root.
 
 ### Build and Development
 - `yarn start` or `make start` - Full build including external dependencies and run development server
@@ -34,11 +38,11 @@ This is the Datadog Documentation repository, built using Hugo (static site gene
 ## Architecture
 
 ### Content Structure
-- `content/en/` - English documentation (primary language)
-- `content/{fr,es,ja,ko}/` - Translated content (managed externally)
-- `layouts/` - Hugo templates and shortcodes
-- `static/` - Static assets, images, fonts
-- `assets/` - SCSS stylesheets and JavaScript
+- `hugo/content/en/` - English documentation (primary language)
+- `hugo/content/{fr,es,ja,ko}/` - Translated content (managed externally)
+- `hugo/layouts/` - Hugo templates and shortcodes
+- `hugo/static/` - Static assets, images, fonts
+- `hugo/assets/` - SCSS stylesheets and JavaScript
 
 ### Build System
 - **Hugo**: Static site generator with custom themes
@@ -51,7 +55,7 @@ The build system automatically fetches:
 - API client examples from multiple language repositories
 - Integration metadata and documentation
 - Vector integration data via CUE files
-- Some documentation is sourced from GitHub using the `pull_config.yaml` file at `local/bin/py/build/configurations/pull_config.yaml`.
+- Some documentation is sourced from GitHub using the `pull_config.yaml` file at `hugo/local/bin/py/build/configurations/pull_config.yaml`.
 - Some documentation is sourced from a go module called `websites-sources`
 
 ### Related Repositories
@@ -64,10 +68,10 @@ These repositories are dependencies of or closely related to this project. They 
 - **`DataDog/websites-sources`** (https://github.com/DataDog/websites-sources) — Provides integration data consumed during the build via S3. The `make websites_sources_data` target downloads this data. The S3 path is controlled by the `FF_S3_PATH` env var (default: `staging`).
 
 ### Configuration
-- `config/` - Hugo configuration for different environments (development, preview, live)
-- `package.json` - Node.js dependencies and scripts
-- `Makefile` + `Makefile.config` - Build orchestration
-- Environment-specific parameters in `config/{env}/params.yaml`
+- `hugo/config/` - Hugo configuration for different environments (development, preview, live)
+- `hugo/package.json` - Node.js dependencies and scripts
+- `hugo/Makefile` + `hugo/Makefile.config` - Build orchestration
+- Environment-specific parameters in `hugo/config/{env}/params.yaml`
 
 ## Critical Rules
 
@@ -171,7 +175,7 @@ Avoid temporal words: currently, now, will, won't
 ## Hugo-Specific Details
 
 ### Shortcodes
-Extensive library in `layouts/shortcodes/` for:
+Extensive library in `hugo/layouts/shortcodes/` for:
 - Code examples across multiple languages
 - Integration-specific content
 - API documentation
@@ -195,7 +199,7 @@ Extensive library in `layouts/shortcodes/` for:
 - API examples automatically sync from datadog-api-client-* repositories
 - Integration data pulled from the `websites-sources` go module.
    - The exception is Dogweb integrations, which are pulled from a GitHub repository.
-- Some documentation is sourced from GitHub using the `pull_config.yaml` file at `local/bin/py/build/configurations/pull_config.yaml`.
+- Some documentation is sourced from GitHub using the `pull_config.yaml` file at `hugo/local/bin/py/build/configurations/pull_config.yaml`.
 - Build scripts fetched from external repository during setup
 
 ### Build Environments

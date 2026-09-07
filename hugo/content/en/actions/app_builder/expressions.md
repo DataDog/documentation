@@ -43,7 +43,7 @@ You can view the available properties and values for a component in the followin
 - {{< ui >}}Inspect Data{{< /ui >}}: Provides properties and values for a specific component or query in your app.
 - The {{< ui >}}Admin Console{{< /ui >}}: The {{< ui >}}Data{{< /ui >}} tab of the {{< ui >}}Admin Console{{< /ui >}} provides properties and values for all components and queries in your app.
 
-{{% collapse-content title="App State" level="h4" %}}
+{{% collapse-content title="App State" level="h3" %}}
 To access {{< ui >}}App State{{< /ui >}}:
 1. Click {{< ui >}}App Properties{{< /ui >}} in the left side-panel.
 1. Scroll down to the {{< ui >}}App State{{< /ui >}} section.
@@ -51,7 +51,7 @@ To access {{< ui >}}App State{{< /ui >}}:
 {{< img src="actions/app_builder/app-state-2.png" alt="The App State section in App Properties" style="width:50%;" >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Inspect Data" level="h4" %}}
+{{% collapse-content title="Inspect Data" level="h3" %}}
 To access {{< ui >}}Inspect Data{{< /ui >}}:
 1. Click on the query or component you want to inspect.
 1. Scroll down to the {{< ui >}}Inspect Data{{< /ui >}} section.
@@ -59,7 +59,7 @@ To access {{< ui >}}Inspect Data{{< /ui >}}:
 {{< img src="actions/app_builder/inspect-data-2.png" alt="The App State section in App Properties" style="width:80%;" >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Admin Console" level="h4" %}}
+{{% collapse-content title="Admin Console" level="h3" %}}
 To access the {{< ui >}}Admin Console{{< /ui >}}:
 1. Click on the cog ({{< ui >}}Settings{{< /ui >}}) icon and select {{< ui >}}Admin Console{{< /ui >}}.
 1. Click {{< ui >}}Data{{< /ui >}}.

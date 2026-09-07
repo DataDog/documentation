@@ -20,6 +20,8 @@ By enabling Session Replay, you can automatically mask sensitive elements from b
 By enabling Mobile Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Mobile SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 {% /if %}
 
+**Note**: Session Replay masking is permanent and cannot be reversed later. This differs from [Sensitive Data Scanner masking][5], which obfuscates matching values on ingestion but allows users with the `Data Scanner Unmask` permission to view the original value.
+
 <!-- Browser -->
 {% if equals($platform, "browser") %}
 ## Configuration
@@ -1612,3 +1614,4 @@ The following chart shows how we apply different image masking strategies:
 [2]: https://github.com/DataDog/dd-sdk-reactnative
 [3]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
 [4]: /help
+[5]: /security/sensitive_data_scanner/setup/telemetry_data/?tab=logs#mask-action

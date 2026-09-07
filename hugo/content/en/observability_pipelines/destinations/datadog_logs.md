@@ -1,5 +1,6 @@
 ---
 title: Datadog Logs Destination
+description: Learn how to send logs to Datadog Log Management using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs
