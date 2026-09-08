@@ -1416,6 +1416,30 @@
     "description": "List Cloud Cost Management tags for a given metric.",
     "summary": "List Cloud Cost Management tags"
   },
+  "ListUnitCosts": {
+    "description": "List the ROI metrics (unit costs) for the authenticated organization.",
+    "summary": "List unit costs"
+  },
+  "CreateUnitCost": {
+    "description": "Create an ROI metric (unit cost) using the given numerator and denominator queries.",
+    "summary": "Create a unit cost",
+    "request_description": "",
+    "request_schema_description": "A request to create a unit cost."
+  },
+  "DeleteUnitCost": {
+    "description": "Delete an ROI metric (unit cost).",
+    "summary": "Delete a unit cost"
+  },
+  "GetUnitCost": {
+    "description": "Retrieve an ROI metric (unit cost) by UUID.",
+    "summary": "Get a unit cost"
+  },
+  "UpdateUnitCost": {
+    "description": "Replace an ROI metric (unit cost) with a new set of attributes.",
+    "summary": "Update a unit cost",
+    "request_description": "",
+    "request_schema_description": "A request to replace a unit cost."
+  },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
     "summary": "Get active billing dimensions for cost attribution"
