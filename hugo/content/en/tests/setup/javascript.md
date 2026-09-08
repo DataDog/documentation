@@ -657,7 +657,7 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
 
 ## Browser testing media upload
 
-Test Optimization can upload test failure screenshots from Cypress, Playwright, and WebdriverIO, and failed test videos from Cypress and Playwright. View uploaded media in the {{< ui >}}Media{{< /ui >}} tab of the Test Optimization test details side panel.
+Test Optimization can upload test failure screenshots from Cypress, Playwright, and WebdriverIO, and failed test videos from Cypress and Playwright.
 
 {{< tabs >}}
 {{% tab "Cypress" %}}
@@ -673,6 +673,12 @@ Use [`dd-trace` v5.112.0 or later][1] on the v5 release line, or [`dd-trace` v6.
 To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Cypress configuration, make sure [`screenshotOnRunFailure`][3] is set to `true` (the default).
 
 ### Upload failed test videos
+
+When enabled, Test Optimization uploads the video that Cypress records for a spec file when the test suite fails. View uploaded videos in the {{< ui >}}Videos{{< /ui >}} tab of the Test Optimization test suite details page. Select a video to open it in the video player.
+
+{{< img src="continuous_integration/tests/setup/cypress-failure-video-videos-tab.png" alt="A Cypress failed test video displayed in the Videos tab of the Test Optimization test suite details page." style="width:100%;" >}}
+
+{{< img src="continuous_integration/tests/setup/cypress-failure-video-player.png" alt="The video player displaying a Cypress failed test video." style="width:100%;" >}}
 
 To upload videos from failed tests, set the `DD_TEST_FAILURE_VIDEOS_ENABLED` environment variable to `1`. In your Cypress configuration, set [`video`][4] or `e2e.video` to `true`.
 
@@ -716,8 +722,12 @@ To upload videos from failed tests, set the `DD_TEST_FAILURE_VIDEOS_ENABLED` env
 
 When enabled, Test Optimization captures and uploads a screenshot when a WebdriverIO test fails. Use it to inspect browser state at the time of failure.
 
+Use [`dd-trace` v5.125.0 or later][1] on the v5 release line, or [`dd-trace` v6.14.0 or later][2] on the v6 release line.
+
 To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. No additional WebdriverIO configuration is required.
 
+[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.125.0
+[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.14.0
 {{% /tab %}}
 {{< /tabs >}}
 
