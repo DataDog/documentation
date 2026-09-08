@@ -91416,6 +91416,8 @@ components:
         filter:
           description: Filter expression applied to the recommendations.
           type: string
+        scope:
+          $ref: '#/components/schemas/RecommendationsFilterRequestScope'
         sort:
           description: Ordered list of sort clauses applied to the result set.
           items:
@@ -91425,6 +91427,17 @@ components:
           description: Active view name (for example, `active`, `dismissed`, `open`, `in-progress`, or `completed`).
           type: string
       type: object
+    RecommendationsFilterRequestScope:
+      description: Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations or `*` for both.
+      enum:
+        - ccm
+        - experiment
+        - "*"
+      type: string
+      x-enum-varnames:
+        - CCM
+        - EXPERIMENT
+        - ALL
     RecommendationsFilterRequestSortItems:
       description: A single sort clause applied to the cost recommendations result set.
       properties:
