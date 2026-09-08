@@ -377,7 +377,7 @@ To form a single point of configuration for all telemetry emitted directly from 
    When you [create a RUM application][2], confirm the `env` and `service` names.
 
 
-[1]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/
+[1]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/
 [2]: /real_user_monitoring/application_monitoring/browser/setup/
    {{% /tab %}}
 
@@ -535,7 +535,7 @@ processors:
 [7]: /agent/docker/?tab=standard#optional-collection-agents
 [8]: /getting_started/tracing/
 [9]: /getting_started/logs/
-[10]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/
+[10]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/
 [11]: /getting_started/synthetics/
 [12]: /integrations/statsd/
 [13]: https://www.chef.io/

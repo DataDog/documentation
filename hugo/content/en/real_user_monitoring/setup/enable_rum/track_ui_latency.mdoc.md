@@ -1,5 +1,5 @@
 ---
-title: Track UI latency
+title: Track UI Latency
 content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options

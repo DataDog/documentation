@@ -190,4 +190,4 @@ This means that even if users open your application while offline, no data is lo
 [7]: https://docs.unity3d.com/Manual/gradle-templates.html
 [8]: https://docs.unity3d.com/2022.3/Documentation/Manual/webgl-templates.html
 [9]: https://github.com/DataDog/dd-sdk-unity/tree/develop/samples/Datadog%20Sample/Assets/WebGLTemplates
-[10]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser
+[10]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser

@@ -1,5 +1,5 @@
 ---
-title: RUM without Limits
+title: RUM Without Limits
 description: Keep only the RUM data you need while maintaining full visibility of performance metrics for your applications.
 further_reading:
   - link: '/real_user_monitoring/rum_without_limits/retention_filters'

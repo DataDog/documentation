@@ -98,4 +98,4 @@ Click on **View Test Suite** to visit the journey's test suite and edit it direc
 [8]: /internal_developer_portal/catalog/
 [9]: /error_tracking/
 [10]: /journey_monitoring/uptime/
-[11]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser
+[11]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser

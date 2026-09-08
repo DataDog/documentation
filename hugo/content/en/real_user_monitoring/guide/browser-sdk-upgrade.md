@@ -573,10 +573,10 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [23]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [24]: /help/
 [26]: /real_user_monitoring/application_monitoring/browser/
-[25]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser#opentelemetry-support
+[25]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser#opentelemetry-support
 [27]: /real_user_monitoring/guide/proxy-rum-data
 [28]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
-[29]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser#:~:text=configure%20the%20traceContextInjection
+[29]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser#:~:text=configure%20the%20traceContextInjection
 [30]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import
 [31]: https://webpack.js.org/guides/code-splitting/#dynamic-imports
 [32]: https://esbuild.github.io/api/#splitting

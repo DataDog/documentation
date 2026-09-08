@@ -261,6 +261,6 @@ To avoid this, use the `ignoreUrlPatterns` parameter when calling `enableHttpTra
 [7]: https://pub.dev/packages/grpc
 [8]: https://pub.dev/packages/webview_flutter
 [9]: https://pub.dev/packages/flutter_inappwebview
-[10]: /real_user_monitoring/setup/enrich_rum_data/track_navigation_across_web_views?platform=flutter
+[10]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views?platform=flutter
 [11]: https://pub.dev/packages/datadog_dio
 [12]: https://pub.dev/packages/dio

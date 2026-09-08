@@ -14,7 +14,7 @@ further_reading:
 - link: '/real_user_monitoring/error_tracking/browser/'
   tag: 'Documentation'
   text: 'Setup Error tracking'
-- link: '/real_user_monitoring/correlate_with_other_telemetry/'
+- link: '/real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/'
   tag: 'Documentation'
   text: 'Correlate RUM Events with Other Telemetry'
 ---
@@ -65,7 +65,7 @@ See [Advanced Configuration][5].
 
 [1]: /real_user_monitoring/guide/sampling-browser-plans/
 [2]: /real_user_monitoring/setup/data_collected/?platform=browser
-[3]: /real_user_monitoring/platform/dashboards/
+[3]: /real_user_monitoring/administer_and_extend_rum/dashboards/
 [4]: https://app.datadoghq.com/rum/explorer
 [5]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
 

@@ -1,5 +1,5 @@
 ---
-title: Enrich Your Session Replays With Shadow DOM Components
+title: Enrich Your Session Replays with Shadow DOM Components
 
 description: Guide about Shadow DOM compatibility with Session Replay.
 further_reading:

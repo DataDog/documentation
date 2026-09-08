@@ -710,7 +710,7 @@ let session = URLSession(
 )
 ```
 
-This tracks all requests sent with the instrumented `session`. Requests matching the `example.com` domain are marked as "first party" and tracing information is sent to your backend to [connect the RUM resource with its Trace](https://docs.datadoghq.com/real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser).
+This tracks all requests sent with the instrumented `session`. Requests matching the `example.com` domain are marked as "first party" and tracing information is sent to your backend to [connect the RUM resource with its Trace](https://docs.datadoghq.com/real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser).
 {% /tab %}
 {% tab label="Objective-C" %}
 

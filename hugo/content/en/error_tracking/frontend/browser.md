@@ -217,7 +217,7 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 [5]: https://www.npmjs.com/package/@datadog/browser-rum
 [6]: https://app.datadoghq.com/error-tracking/settings/setup/client
 [7]: /real_user_monitoring/setup/data_collected/?platform=browser
-[8]: /real_user_monitoring/platform/dashboards/errors/
+[8]: /real_user_monitoring/administer_and_extend_rum/dashboards/errors/
 [9]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
 [10]: /session_replay/privacy_options?platform=browser#mask-action-names
 [11]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command

@@ -83,6 +83,6 @@ Metrics can be managed through [APIs][3] or Datadog's dedicated [Terraform modul
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/performance-monitoring
-[2]: /real_user_monitoring/platform/generate_metrics/
+[2]: /real_user_monitoring/measure_health_with_metrics/create_custom_metrics/
 [3]: /api/latest/rum-metrics/
 [4]: https://registry.terraform.io/providers/DataDog/datadog/3.60.0/docs/resources/rum_metric

@@ -386,7 +386,7 @@ spanWithLinks.end()
 [3]: https://opentelemetry.io/docs/concepts/signals/traces/#span-events
 [4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor
 [5]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
-[6]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser#opentelemetry-support
+[6]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser#opentelemetry-support
 [9]: /account_management/api-app-keys/#client-tokens
 [10]: /account_management/api-app-keys/#api-keys
 [11]: /account_management/api-app-keys/#client-tokens

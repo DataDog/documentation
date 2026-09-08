@@ -79,6 +79,6 @@ After an investigation completes, you can act on findings without leaving the pa
 
 [1]: /real_user_monitoring/ai_investigations/single_view_ai_investigation/
 [2]: /real_user_monitoring/application_monitoring/browser/optimizing_performance/
-[3]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/
-[4]: /real_user_monitoring/correlate_with_other_telemetry/profiling/
+[3]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/
+[4]: /real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/profiling/
 [5]: /notebooks/
