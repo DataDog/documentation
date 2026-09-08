@@ -6,7 +6,7 @@ aliases:
   - /real_user_monitoring/installation
   - /real_user_monitoring/faq/
 further_reading:
-- link: "/real_user_monitoring/application_monitoring/browser/data_collected/"
+- link: "/real_user_monitoring/setup/data_collected/?platform=browser"
   tag: "Documentation"
   text: "RUM Browser Data Collected"
 - link: "https://learn.datadoghq.com/courses/intro-to-rum"
@@ -287,13 +287,13 @@ You must have edit access to restore general access to a restricted application.
 [2]: /real_user_monitoring/platform/dashboards/
 [3]: /real_user_monitoring/explorer/visualize/
 [4]: /monitors/types/real_user_monitoring/
-[5]: /real_user_monitoring/correlate_with_other_telemetry/apm/
+[5]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/
 [6]: /real_user_monitoring/error_tracking/
 [7]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#core-web-vitals
 [8]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=ios#mobile-vitals
 [9]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#mobile-vitals
-[10]: /real_user_monitoring/application_monitoring/ios/web_view_tracking/
-[11]: /real_user_monitoring/application_monitoring/android/web_view_tracking/
+[10]: /real_user_monitoring/setup/enrich_rum_data/track_navigation_across_web_views/?platform=ios
+[11]: /real_user_monitoring/setup/enrich_rum_data/track_navigation_across_web_views/?platform=android
 [12]: /session_replay/browser/
 [13]: /session_replay/privacy_options?platform=browser
 [14]: /session_replay/dev_tools

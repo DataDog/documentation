@@ -61,4 +61,4 @@ The {{< ui >}}Attributes{{< /ui >}} tab displays all attributes related to the s
 [3]: /logs/explorer/
 [4]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
 [5]: /real_user_monitoring/error_tracking/
-[6]: /real_user_monitoring/application_monitoring/browser/data_collected/#default-attributes
+[6]: /real_user_monitoring/setup/data_collected/?platform=browser#default-attributes

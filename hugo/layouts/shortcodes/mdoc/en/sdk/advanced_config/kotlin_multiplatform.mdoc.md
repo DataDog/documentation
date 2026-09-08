@@ -152,7 +152,7 @@ In addition to the [default RUM attributes][3] captured by the RUM Kotlin Multip
 
 ### Track user sessions
 
-See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=kotlin_multiplatform) for instructions on adding user information to your RUM sessions.
+See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=kotlin_multiplatform) for instructions on adding user information to your RUM sessions.
 
 ### Track attributes
 
@@ -421,11 +421,11 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/kotlin_multiplatform
-[3]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/data_collected
+[3]: /real_user_monitoring/setup/data_collected/?platform=kotlin_multiplatform
 [4]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration/#automatically-track-views
 [5]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration/#initialization-parameters
 [6]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/#initialize-rum-ktor-plugin-to-track-network-events-made-with-ktor
-[7]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/data_collected
+[7]: /real_user_monitoring/setup/data_collected/?platform=kotlin_multiplatform
 [8]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
 [9]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/#sending-data-when-device-is-offline
 [10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting

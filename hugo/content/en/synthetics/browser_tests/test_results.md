@@ -265,7 +265,7 @@ Alerts from your Synthetic test monitors appear on the timeline in the [{{< ui >
 [12]: /continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
 [13]: /synthetics/guide/synthetic-test-monitors/
 [14]: /synthetics/guide/uptime-percentage-widget/
-[15]: /real_user_monitoring/application_monitoring/browser/data_collected/#long-task-timing-metrics
+[15]: /real_user_monitoring/setup/data_collected/?platform=browser#long-task-timing-metrics
 [16]: /synthetics/guide/explore-rum-through-synthetics/
 [17]: /tracing/services/resource_page/
 [18]: https://app.datadoghq.com/event/explorer

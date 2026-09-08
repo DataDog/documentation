@@ -30,7 +30,7 @@ To get started with RUM for Apple platforms, create an application and configure
   {{< nextlink href="/real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=ios">}}<u>Track UI Latency</u>: Monitor view timings and mobile vitals to understand your app's performance from a user's perspective.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/ios/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/ios/frustration_signals">}}<u>Frustration Signals</u>: Identify the highest points of user friction in your Apple platform application.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/ios/web_view_tracking/?tab=ios">}}<u>Web View Tracking</u>: Monitor web views and eliminate blind spots in your mobile applications.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/setup/enrich_rum_data/track_navigation_across_web_views/?platform=ios">}}<u>Web View Tracking</u>: Monitor web views and eliminate blind spots in your mobile applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/ios/integrated_libraries">}}
   <u>Integrated Libraries</u>: Import integrated libraries you can use for your Apple platform applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/ios/troubleshooting">}}

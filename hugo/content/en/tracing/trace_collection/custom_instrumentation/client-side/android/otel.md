@@ -804,7 +804,7 @@ remoteDataSource.getData(query)
 [10]: https://opentelemetry.io/docs/concepts/signals/traces/#span-events
 [11]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor
 [12]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
-[13]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#opentelemetry-support
+[13]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser#opentelemetry-support
 [14]: /account_management/api-app-keys/#client-tokens
 [15]: /account_management/api-app-keys/#api-keys
 [16]: /real_user_monitoring/application_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance

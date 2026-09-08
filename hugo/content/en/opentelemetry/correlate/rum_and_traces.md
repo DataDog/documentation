@@ -5,4 +5,4 @@ aliases:
 description: Learn how to integrate Real User Monitoring with APM.
 ---
 
-{{< include-markdown "/real_user_monitoring/correlate_with_other_telemetry/apm/" >}}
+{{< include-markdown "/real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/" >}}

@@ -1,6 +1,5 @@
 ---
 title: Enable the DD RUM module
-private: true
 content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options

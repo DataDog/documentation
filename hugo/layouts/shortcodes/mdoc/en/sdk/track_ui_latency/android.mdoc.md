@@ -88,7 +88,7 @@ public void onHeroImageLoaded() {
 
 ## Understanding performance timings
 
-All view timings are measured relative to the view's start. The exact moment a view starts depends on the type of instrumentation used for tracking views. For more details, see [Views instrumentation versus app life cycle](/real_user_monitoring/application_monitoring/android/data_collected/#views_instrumentation_versus_app_lifecycle).
+All view timings are measured relative to the view's start. The exact moment a view starts depends on the type of instrumentation used for tracking views. For more details, see [Views instrumentation versus app life cycle](/real_user_monitoring/setup/data_collected/?platform=android#views_instrumentation_versus_app_lifecycle).
 
 ## Troubleshooting
 

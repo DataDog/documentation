@@ -18,7 +18,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
   text: "Real User Monitoring"
-- link: "/real_user_monitoring/application_monitoring/browser/data_collected/"
+- link: "/real_user_monitoring/setup/data_collected/?platform=browser"
   tag: "Documentation"
   text: "RUM browser data collected"
 - link: "/real_user_monitoring/explorer/"
@@ -699,7 +699,7 @@ window.DD_RUM &&
 
 ## User session
 
-See [Manage sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=browser) for instructions on adding user information to your RUM sessions, and on accessing, updating, or clearing user session properties.
+See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=browser) for instructions on adding user information to your RUM sessions, and on accessing, updating, or clearing user session properties.
 
 ## Account
 
@@ -1615,7 +1615,7 @@ The `service` and `version` tags representing each micro frontend can also be fo
 - `rum.measure.operation`
 - `rum.measure.operation.duration`
 
-[1]: /real_user_monitoring/application_monitoring/browser/data_collected/
+[1]: /real_user_monitoring/setup/data_collected/?platform=browser
 [2]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
 [4]: /real_user_monitoring/application_monitoring/browser/setup/

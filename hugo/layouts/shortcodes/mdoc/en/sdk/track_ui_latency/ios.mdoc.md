@@ -84,7 +84,7 @@ To [create a measure](/real_user_monitoring/explorer/search/#setup-facets-and-me
 
 ## Understanding performance timings
 
-All view timings are measured relative to the view's start. The exact moment a view starts depends on the type of instrumentation used for tracking views. For more details, see [Views instrumentation versus app life cycle](/real_user_monitoring/application_monitoring/ios/data_collected/#views-instrumentation-versus-app-lifecycle).
+All view timings are measured relative to the view's start. The exact moment a view starts depends on the type of instrumentation used for tracking views. For more details, see [Views instrumentation versus app life cycle](/real_user_monitoring/setup/data_collected/?platform=ios#views-instrumentation-versus-app-lifecycle).
 
 ## Troubleshooting
 

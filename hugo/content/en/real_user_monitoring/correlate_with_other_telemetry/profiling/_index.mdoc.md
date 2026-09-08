@@ -415,9 +415,9 @@ iOS profiling data is attached to operations events in a RUM session. You can ac
 [13]: /real_user_monitoring/guide/proxy-rum-data
 [14]: /integrations/content_security_policy_logs
 [15]: /real_user_monitoring/#supported-endpoints-for-sdk-domains
-[16]: /real_user_monitoring/application_monitoring/android/data_collected#error-attributes
+[16]: /real_user_monitoring/setup/data_collected/?platform=android#error-attributes
 [17]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#sample-session-rates-2
-[18]: /real_user_monitoring/application_monitoring/ios/data_collected#error-attributes
+[18]: /real_user_monitoring/setup/data_collected/?platform=ios#error-attributes
 [19]: /real_user_monitoring/operations_monitoring/?tab=browser
 [20]: https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works 
 [21]: /real_user_monitoring/application_monitoring/ios/setup?tab=swift-package-manager--spm

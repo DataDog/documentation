@@ -32,4 +32,4 @@ algolia:
   tags: ['rum traces']
 ---
 
-{{< include-markdown "real_user_monitoring/correlate_with_other_telemetry/apm" >}}
+{{< include-markdown "real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces" >}}

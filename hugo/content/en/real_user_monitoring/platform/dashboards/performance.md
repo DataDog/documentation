@@ -68,9 +68,9 @@ For more information about the data displayed, see [Real User Monitoring Data Se
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/application_monitoring/browser/data_collected/
+[1]: /real_user_monitoring/setup/data_collected/?platform=browser
 [2]: /real_user_monitoring/ios/data_collected/
 [3]: /real_user_monitoring/android/data_collected/
 [4]: /real_user_monitoring/reactnative/data_collected/
-[5]: /real_user_monitoring/application_monitoring/flutter/data_collected/
+[5]: /real_user_monitoring/setup/data_collected/?platform=flutter
 [6]: /data_security/real_user_monitoring/

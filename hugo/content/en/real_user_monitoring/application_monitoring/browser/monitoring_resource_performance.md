@@ -148,13 +148,13 @@ To collect the resource status code, add the `Access-Control-Allow-Origin` HTTP 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[2]: /real_user_monitoring/correlate_with_other_telemetry/apm
+[2]: /real_user_monitoring/setup/enrich_rum_data/track_frontend_to_backend_traces/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming/responseStatus#browser_compatibility
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [5]: https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/Resource_timing#cross-origin_timing_information
 [6]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin
 [7]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
-[8]: /real_user_monitoring/application_monitoring/browser/data_collected/#graphql-attributes
+[8]: /real_user_monitoring/setup/data_collected/?platform=browser#graphql-attributes
 [9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#modify-the-content-of-a-rum-event
 [10]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackresourceheaders
 [11]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=browser

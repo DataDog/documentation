@@ -277,7 +277,7 @@ The following tabs show the information contained in the `beforeSend` event and 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#modify-the-content-of-a-rum-event
-[2]: /real_user_monitoring/application_monitoring/browser/data_collected/
+[2]: /real_user_monitoring/setup/data_collected/?platform=browser
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Event
 [5]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
