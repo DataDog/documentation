@@ -36,7 +36,8 @@ To set customer pricing, you need:
 5. Click {{< ui >}}Edit{{< /ui >}} and enter the customer's prices for each contracted product. You can edit prices in bulk, individually, or a combination of both.
    {{< img src="account_management/plan_and_usage/customer-pricing-edit-bulk.png" alt="Bulk price editing controls for a customer's contracted products." >}}
    {{< img src="account_management/plan_and_usage/customer-pricing-edit-individual.png" alt="Individual draft price fields for each contracted product." >}}
-6. Set a default pricing rule for products that are not on the customer's contract. By default, on-demand rates for non-contracted products are set to the Datadog list price. You can instead apply a percentage markup to the sales price, and optionally cap the marked-up rates at the Datadog list price.
+6. Set a default pricing rule for products that are not on the customer's contract. 
+    - By default, on-demand rates for non-contracted products are set to the Datadog list price. You can instead apply a percentage markup to the sales price, and optionally cap the marked-up rates at the Datadog list price.
    {{< img src="account_management/plan_and_usage/customer-pricing-default-rule.png" alt="Default pricing rule configuration for non-contracted products." >}}
 7. Click {{< ui >}}Save{{< /ui >}} to save a draft. Drafts are visible only within your Datadog admin organization. 
 8. Review your entries, then click {{< ui >}}Publish{{< /ui >}}.
