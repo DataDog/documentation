@@ -60,20 +60,24 @@ Configure ticket creation rules to automatically create tickets in Jira or Work 
   {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
   {{< tabs >}}
   {{% tab "Jira" %}}
-  - **Jira Account**: Select the Atlassian instance to use.
-  - **Space**: Select the Jira project. Verify that this space is added to the [Jira Webhook][5].
+  - **Jira Account**: Select the Atlassian instance to use. Verify that this account has the [Jira Webhook][5] configured.
+  - **Space**: Select the Jira project.
   - **Ticket Type**: Select the type of Jira issue to create, for example, **Task**.
   - **Assignee** (optional): Specify a user to assign automatically created tickets to.
   - To add more fields to the Jira ticket Datadog creates, use **Add Optional Field**.
   - Expand **Data Sync Settings** to review or update the linked Work Management project and bidirectional sync configuration.
+
+  [5]: /integrations/jira/#configure-a-jira-webhook
   {{% /tab %}}
   {{% tab "Linear" %}}
-  - **Linear Account**: Select the Linear account to use.
+  - **Linear Account**: Select the Linear account to use. Verify that this account has the [Linear Webhook][6] configured.
   - **Team**: Select the Linear team where you want to create issues.
   - **Project** (optional): Select the Linear project to associate with automatically created issues.
   - **Labels** (optional): Select labels to apply to automatically created issues.
   - **Assignee** (optional): Specify a user to assign automatically created issues to.
   - Expand **Data Sync Settings** to review or update the linked Work Management project and bidirectional sync configuration.
+
+  [6]: /integrations/linear/#configure-a-linear-webhook
   {{% /tab %}}
   {{% tab "Work Management" %}}
   - **Work Management Project**: Select an existing Work Management project, or create one.
@@ -84,12 +88,14 @@ Configure ticket creation rules to automatically create tickets in Jira or Work 
   {{< site-region region="gov,gov2" >}}
   {{< tabs >}}
   {{% tab "Jira" %}}
-  - **Jira Account**: Select the Atlassian instance to use.
-  - **Space**: Select the Jira project. Verify that this space is added to the [Jira Webhook][5].
+  - **Jira Account**: Select the Atlassian instance to use. Verify that this account has the [Jira Webhook][5] configured.
+  - **Space**: Select the Jira project.
   - **Ticket Type**: Select the type of Jira issue to create, for example, **Task**.
   - **Assignee** (optional): Specify a user to assign automatically created tickets to.
   - To add more fields to the Jira ticket Datadog creates, use **Add Optional Field**.
   - Expand **Data Sync Settings** to review or update the linked Work Management project and bidirectional sync configuration.
+
+  [5]: /integrations/jira/#configure-a-jira-webhook
   {{% /tab %}}
   {{% tab "Work Management" %}}
   - **Work Management Project**: Select an existing Work Management project, or create one.
@@ -135,4 +141,3 @@ When you disable or delete a ticket creation rule, tickets that were previously 
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=create_ticket
 [3]: /security/ticketing_integrations/
-[5]: /integrations/jira/#configure-a-jira-webhook
