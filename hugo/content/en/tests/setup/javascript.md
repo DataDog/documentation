@@ -694,7 +694,7 @@ To upload videos from failed tests, set the `DD_TEST_FAILURE_VIDEOS_ENABLED` env
 
 When enabled, Test Optimization uploads screenshots that Playwright captures when a test fails. Use them to inspect browser state at the time of failure.
 
-{{< img src="continuous_integration/tests/setup/browser-failure-screenshot-media-tab.png" alt="A Playwright failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
+{{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="A Playwright failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
 Use [`dd-trace` v5.116.0 or later][1] on the v5 release line, or [`dd-trace` v6.5.0 or later][2] on the v6 release line.
 
@@ -728,7 +728,7 @@ To upload videos from failed tests, set the `DD_TEST_FAILURE_VIDEOS_ENABLED` env
 
 When enabled, Test Optimization captures and uploads a screenshot when a WebdriverIO test fails. Use it to inspect browser state at the time of failure.
 
-{{< img src="continuous_integration/tests/setup/browser-failure-screenshot-media-tab.png" alt="A browser test failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
+{{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="A browser test failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
 Use [`dd-trace` v5.125.0 or later][1] on the v5 release line, or [`dd-trace` v6.14.0 or later][2] on the v6 release line.
 

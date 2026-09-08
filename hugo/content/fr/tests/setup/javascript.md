@@ -207,7 +207,7 @@ Si l'application de navigateur testée est instrumentée à l'aide de [Browser M
 
 Lorsqu'elle est activée, Test Optimization télécharge les captures d'écran que Playwright capture lorsqu'un test échoue. Affichez les captures d'écran dans l'onglet {{< ui >}}Media{{< /ui >}} du panneau latéral des détails de test de Test Optimization. Utilisez-les pour inspecter l'état du navigateur au moment de l'échec.
 
-{{< img src="continuous_integration/tests/setup/browser-failure-screenshot-media-tab.png" alt="Une capture d'écran d'échec Playwright affichée dans l'onglet Média du panneau latéral des détails de test de Test Optimization." style="width:100%;" >}}
+{{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="Une capture d'écran d'échec Playwright affichée dans l'onglet Média du panneau latéral des détails de test de Test Optimization." style="width:100%;" >}}
 
 Utilisez [`dd-trace` v5.116.0 ou version ultérieure][5] sur la ligne de version v5, ou [`dd-trace` v6.5.0 ou version ultérieure][6] sur la ligne de version v6.
 

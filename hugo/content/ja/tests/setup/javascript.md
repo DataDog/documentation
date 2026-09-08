@@ -207,7 +207,7 @@ test('user profile', async ({ page }) => {
 
 有効にすると、Test Optimization はテストの失敗時に Playwright がキャプチャしたスクリーンショットをアップロードします。Test Optimization のテスト詳細サイドパネルの {{< ui >}}Media{{< /ui >}} タブでスクリーンショットを確認できます。これらを使用して、失敗時のブラウザの状態を調査します。
 
-{{< img src="continuous_integration/tests/setup/browser-failure-screenshot-media-tab.png" alt="Test Optimization のテスト詳細サイドパネルの [Media] タブに表示された Playwright 失敗時のスクリーンショット。" style="width:100%;" >}}
+{{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="Test Optimization のテスト詳細サイドパネルの [Media] タブに表示された Playwright 失敗時のスクリーンショット。" style="width:100%;" >}}
 
 v5 リリースラインでは [`dd-trace` v5.116.0 以降][5] を、v6 リリースラインでは [`dd-trace` v6.5.0 以降][6] を使用してください。
 
