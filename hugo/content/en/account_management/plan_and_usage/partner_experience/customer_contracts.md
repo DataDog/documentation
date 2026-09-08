@@ -21,7 +21,7 @@ The [Customer Contracts][1] page gives Datadog partners a single view of their e
 
 {{< img src="account_management/plan_and_usage/customer-contracts-overview.png" alt="Customer Contracts page in a Datadog admin organization showing summary tiles for renewals, cost visibility, and overdue invoices above a table of customers" >}}
 
-**Note**: Contract data on this page is cached for up to 30 minutes, and organization hierarchy data is cached for up to 5 minutes. Recent changes can take that long to appear.
+**Note**: Data on this page refreshes every 30 minutes.
 
 ## Prerequisites
 
