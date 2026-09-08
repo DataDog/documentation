@@ -107,7 +107,7 @@ Annotation labels are retained for the same period as the objects they annotate.
 
 Extending retention by annotating an object does not incur an additional charge.
 
-A free-form note is not attached to a trace, span, or session, so adding one does not extend any object's retention.
+Adding a note that is not attached to a trace, span, or session does not extend any object's retention.
 
 ### Dataset records
 
