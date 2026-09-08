@@ -1910,7 +1910,7 @@ agents:
 
 {{% tab "Operator" %}}
 
-**Note**: The native `secretBackend` fields require Datadog Operator v1.29.0+.
+**Note**: The native `secretBackend` fields require Datadog Operator v1.25.0+.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
