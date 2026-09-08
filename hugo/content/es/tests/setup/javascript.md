@@ -207,7 +207,7 @@ Si la aplicación del navegador que se está probando está instrumentada median
 
 Cuando está habilitado, Test Optimization carga las capturas de pantalla que Playwright captura cuando una prueba falla. Vea las capturas de pantalla en la pestaña {{< ui >}}Media{{< /ui >}} del panel lateral de detalles de prueba de Test Optimization. Úselas para inspeccionar el estado del navegador en el momento de la falla.
 
-{{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="Una captura de pantalla de falla de Playwright mostrada en la pestaña Media del panel lateral de detalles de prueba de Test Optimization." style="width:100%;" >}}
+{{< img src="continuous_integration/tests/setup/browser-failure-screenshot-media-tab.png" alt="Una captura de pantalla de falla de Playwright mostrada en la pestaña Media del panel lateral de detalles de prueba de Test Optimization." style="width:100%;" >}}
 
 Utilice [`dd-trace` v5.116.0 o posterior][5] en la línea de lanzamiento v5, o [`dd-trace` v6.5.0 o posterior][6] en la línea de lanzamiento v6.
 
