@@ -1,8 +1,3 @@
----
-build:
-  render: never
-  list: never
----
 {{% collapse-content title="Core Attributes" level="h3" id="core-attributes" %}}
 
 These attributes are present on all security findings and describe the fundamental nature and status of the finding.
@@ -112,6 +107,11 @@ These attributes are present on all security findings and describe the fundament
       <td><strong>Path:</strong> <code>@status</code><br>Workflow status of the finding. Valid values: <code>open</code>, <code>muted</code>, <code>auto_closed</code>, <code>resolved</code>, <code>in-progress</code>.</td>
     </tr>
     <tr>
+      <td><code>time_to_acknowledge</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@time_to_acknowledge</code><br>Time in seconds between when the finding was first detected and when it was acknowledged through assignment or ticket creation.</td>
+    </tr>
+    <tr>
       <td><code>time_to_resolution</code></td>
       <td>integer</td>
       <td><strong>Path:</strong> <code>@time_to_resolution</code><br>Time in seconds between when the finding was first detected and when it was resolved.</td>
@@ -140,7 +140,7 @@ Additional resources. For example, an AWS EC2 instance can have security groups 
     <tr>
       <td><code>category</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@additional_resources.category</code><br>Category of the additional resource. Valid values: <code>cloud_resource</code>, <code>k8s</code>, <code>host</code>, <code>service</code>, <code>git</code>, <code>iac_resource</code>.</td>
+      <td><strong>Path:</strong> <code>@additional_resources.category</code><br>Category of the additional resource. Valid values: <code>cloud_resource</code>, <code>k8s</code>, <code>host</code>, <code>service</code>, <code>git</code>, <code>iac_resource</code>, <code>serverless_function</code>.</td>
     </tr>
     <tr>
       <td><code>configuration</code></td>
@@ -572,6 +572,11 @@ Container image where the finding was detected, including registry, repository, 
       <td><code>image_layer_digests</code></td>
       <td>array (string)</td>
       <td><strong>Path:</strong> <code>@container_image.image_layer_digests</code><br>Digests of the image layers, in the order they were applied. Each digest is the SHA256 of the compressed layer blob.</td>
+    </tr>
+    <tr>
+      <td><code>is_running_as_serverless_function</code></td>
+      <td>boolean</td>
+      <td><strong>Path:</strong> <code>@container_image.is_running_as_serverless_function</code><br><code>true</code> if the container image is running as a serverless function, <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -1012,6 +1017,11 @@ Package manager information. A package manager automates the installation, upgra
       <td><code>normalized_name</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@package.normalized_name</code><br>Normalized name according to the ecosystem of the package or library where the vulnerability was identified.</td>
+    </tr>
+    <tr>
+      <td><code>purl</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@package.purl</code><br>Contains the PURL (Package URL), a standardized format that identifies the package's type, namespace, name, and version.</td>
     </tr>
     <tr>
       <td><code>root_parents</code></td>
@@ -1481,6 +1491,11 @@ Information about the finding's remediation.
   </thead>
   <tbody>
     <tr>
+      <td><code>base_image</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@remediation.base_image</code><br>Public base image upgrade that may remediate the inherited vulnerability.</td>
+    </tr>
+    <tr>
       <td><code>code_update</code></td>
       <td>object</td>
       <td><strong>Path:</strong> <code>@remediation.code_update</code><br>Code changes to apply to remediate the finding.</td>
@@ -1534,6 +1549,63 @@ Information about the finding's remediation.
       <td><code>root_package</code></td>
       <td>object</td>
       <td><strong>Path:</strong> <code>@remediation.root_package</code><br>Remediation root package information.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Base Image
+
+Public base image upgrade that may remediate the inherited vulnerability.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>latest_major</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@remediation.base_image.latest_major</code><br>Latest major version of the public base image that may remediate the inherited vulnerability.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Latest Major
+
+Latest major version of the public base image that may remediate the inherited vulnerability.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>image_url</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.base_image.latest_major.image_url</code><br>URL of the container image that may remediate the vulnerability.</td>
+    </tr>
+    <tr>
+      <td><code>name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.base_image.latest_major.name</code><br>Name of the container image that may remediate the vulnerability.</td>
+    </tr>
+    <tr>
+      <td><code>repo_digest</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.base_image.latest_major.repo_digest</code><br>Manifest digest (sha256:...) of the container image that may remediate the vulnerability.</td>
+    </tr>
+    <tr>
+      <td><code>tag</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.base_image.latest_major.tag</code><br>Tag of the container image that may remediate the vulnerability.</td>
     </tr>
   </tbody>
 </table>
@@ -1645,16 +1717,16 @@ Newer container image version that may remediate the vulnerability.
   </thead>
   <tbody>
     <tr>
-      <td><code>closest_no_vulnerabilities</code></td>
+      <td><code>latest_major</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities</code><br>Closest container image version with no vulnerabilities.</td>
+      <td><strong>Path:</strong> <code>@remediation.container_image.latest_major</code><br>Latest major version of the container image that may remediate the vulnerability.</td>
     </tr>
   </tbody>
 </table>
 
-### Closest No Vulnerabilities
+### Latest Major
 
-Closest container image version with no vulnerabilities.
+Latest major version of the container image that may remediate the vulnerability.
 
 <table>
   <thead>
@@ -1668,22 +1740,22 @@ Closest container image version with no vulnerabilities.
     <tr>
       <td><code>image_url</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.image_url</code><br>URL of the container image that may remediate the vulnerability.</td>
-    </tr>
-    <tr>
-      <td><code>layer_digests</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.layer_digests</code><br>Layer digests of the currently vulnerable container image that needs to be upgraded.</td>
+      <td><strong>Path:</strong> <code>@remediation.container_image.latest_major.image_url</code><br>URL of the container image that may remediate the vulnerability.</td>
     </tr>
     <tr>
       <td><code>name</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.name</code><br>Name of the container image that may remediate the vulnerability.</td>
+      <td><strong>Path:</strong> <code>@remediation.container_image.latest_major.name</code><br>Name of the container image that may remediate the vulnerability.</td>
+    </tr>
+    <tr>
+      <td><code>repo_digest</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.container_image.latest_major.repo_digest</code><br>Manifest digest (sha256:...) of the container image that may remediate the vulnerability.</td>
     </tr>
     <tr>
       <td><code>tag</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.tag</code><br>Tag of the container image that may remediate the vulnerability.</td>
+      <td><strong>Path:</strong> <code>@remediation.container_image.latest_major.tag</code><br>Tag of the container image that may remediate the vulnerability.</td>
     </tr>
   </tbody>
 </table>
@@ -1844,7 +1916,7 @@ Current package version that the finding was detected on, before any remediation
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.base.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.base.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -1978,7 +2050,7 @@ Closest package version that only contains vulnerabilities for which no fix is a
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2112,7 +2184,7 @@ Closest package version with no critical vulnerabilities (based on base score).
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2246,7 +2318,7 @@ Closest package version with no vulnerabilities.
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2380,7 +2452,7 @@ The latest remediation package version with no critical vulnerabilities (based o
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2514,7 +2586,7 @@ Latest package version with no vulnerabilities.
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2694,7 +2766,7 @@ Current package version that the finding was detected on, before any remediation
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.base.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.base.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2828,7 +2900,7 @@ Closest package version that only contains vulnerabilities for which no fix is a
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2962,7 +3034,7 @@ Closest package version with no critical vulnerabilities (based on base score).
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -3096,7 +3168,7 @@ Closest package version with no vulnerabilities.
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -3230,7 +3302,7 @@ The latest remediation package version with no critical vulnerabilities (based o
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -3364,7 +3436,7 @@ Latest package version with no vulnerabilities.
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -3990,6 +4062,11 @@ Evidence used to identify the resource as being critical.
       <td><code>related_resource_name</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@risk_details.is_crown_jewel.evidence.related_resource_name</code><br>Name of a long-lived critical asset, such as a critical service, that justifies why the affected resource is considered critical.</td>
+    </tr>
+    <tr>
+      <td><code>related_resource_type</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_crown_jewel.evidence.related_resource_type</code><br>Type of the long-lived critical asset that justifies why the affected resource is considered critical.</td>
     </tr>
     <tr>
       <td><code>sensitive_data</code></td>
@@ -4666,6 +4743,11 @@ Information specific to secret findings, such as the secret's validation status.
   </thead>
   <tbody>
     <tr>
+      <td><code>is_git_history_only</code></td>
+      <td>boolean</td>
+      <td><strong>Path:</strong> <code>@secret.is_git_history_only</code><br><code>true</code> if the secret was found only in past commits and is not present at the branch <code>HEAD</code>, <code>false</code> if it is present in the current code.</td>
+    </tr>
+    <tr>
       <td><code>validation_status</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@secret.validation_status</code><br>Result of attempting to validate if the secret is active.</td>
@@ -4880,6 +4962,11 @@ Information specific to vulnerabilities.
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td><code>cisa_bod2604_remediation_timeline</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@vulnerability.cisa_bod2604_remediation_timeline</code><br>Maximum time to remediate this vulnerability under CISA BOD 26-04 (calendar days). One of <code>three_days_and_forensic_triage</code>, <code>three_days</code>, <code>fourteen_days</code>, <code>sixty_days</code>, <code>fix_on_system_upgrade</code>. Recomputed as CISA/exposure inputs change.</td>
+    </tr>
     <tr>
       <td><code>confidence</code></td>
       <td>string</td>
