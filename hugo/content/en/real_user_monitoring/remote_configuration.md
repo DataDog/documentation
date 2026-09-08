@@ -21,8 +21,8 @@ Remote configuration requires the following RUM SDK versions:
 
 <!-- EXACT SDK VERSION TO BE UPDATED -->
 - Browser SDK version 7.6.0+
-- iOS SDK version 3.14.0+
-- Android SDK version 3.12.0+
+- iOS SDK version 3.17.0+
+- Android SDK version 3.14.0+
 
 ## How it works
 
