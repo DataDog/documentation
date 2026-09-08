@@ -12,7 +12,7 @@ further_reading:
 
 If you purchase Datadog through a partner, you can get greater visibility into your Datadog costs through the [Bill Overview][1] page in your Datadog organization. Bill Overview provides a single view of your estimated month-to-date and historical costs, a daily cost breakdown, and the ability to group costs by product and sub-organization, so you can understand your Datadog spending at any point during the billing period.
 
-{{< img src="account_management/plan_and_usage/bill-overview-main-light.png" alt="Bill Overview page showing the cost summary header and Daily Cost Breakdown stacked bar chart" >}}
+{{< img src="account_management/plan_and_usage/bill-overview-main-light.png" alt="Bill Overview page showing the cost summary header and Daily Cost Breakdown stacked bar chart." >}}
 
 ## Key features
 
