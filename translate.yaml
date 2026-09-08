@@ -64,3 +64,5 @@ phrase:
       dst: "hugo/content/{lang}/workflows/actions_catalog/_index.md"
     - src: "hugo/content/en/workflows/actions_catalog/generic_actions.md"
       dst: "hugo/content/{lang}/workflows/actions_catalog/generic_actions.md"
+
+
