@@ -149,7 +149,7 @@ AI-native SAST validates only [CWE-89: SQL Injection](https://cwe.mitre.org/data
 
 Custom context applies at the organization and rule level, and only to security category SAST rules in Datadog's default rulesets, not to custom rules. Review or add custom context in the side panel for SAST rules.
 
-<!-- QUESTION FOR PM: Does custom context feed into baseline false positive filtering, agentic false positive filtering, or both? Rework this content accordingly. -->
+<!-- QUESTION: Does custom context feed into baseline false positive filtering, agentic false positive filtering, or both? Rework this content accordingly. -->
 
 ## Remediation
 
@@ -162,7 +162,7 @@ Custom context applies at the organization and rule level, and only to security 
 
 For single fix remediations, you can review and validate changes before merging by viewing session details, including:
 
-<!-- QUESTION FOR PM: Do vulnerabilities fixed via automation generate session details, or does this apply only to single fixes?-->
+<!-- QUESTION: Do vulnerabilities fixed via automation generate session details, or does this apply only to single fixes?-->
 
 - The original security finding and proposed code change.
 - An explanation of how and why Bits Code generated the fix.
