@@ -394,8 +394,6 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 -Ddd.service=my-app -Ddd.llmobs.enabled=true -Ddd.llmobs.ml.app=<YOUR_ML_APP_NAME> \
 -Ddd.llmobs.sample.rate=0.5 -jar path/to/your/app.jar
 {{< /code-block >}}
-
-The Java SDK derives the sampling decision from the trace ID, so services configured with the same sample rate reach the same decision for a given trace. Set the same rate across all services in a distributed trace to keep each trace whole.
 {{% /tab %}}
 {{< /tabs >}}
 
