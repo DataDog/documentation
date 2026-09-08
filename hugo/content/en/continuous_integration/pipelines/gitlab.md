@@ -252,7 +252,7 @@ If a key:value pair contains any commas, surround it with quotes. For example, t
 
 ### Set a pipeline name
 
-By default, Datadog uses your GitLab project's path as the pipeline name. This is particularly unhelpful for downstream (child) pipelines triggered with the [`trigger`][33] keyword, since every downstream pipeline from the same project appears under the same name.
+By default, Datadog uses your GitLab project's path as the pipeline name. As a result, every downstream (child) pipeline triggered with the [`trigger`][33] keyword from the same project appears under the same name in Datadog.
 
 To give a pipeline a more meaningful name, use GitLab's [`workflow:name`][34] keyword in your `.gitlab-ci.yml`. For example, to name a downstream pipeline after the job that triggered it:
 
