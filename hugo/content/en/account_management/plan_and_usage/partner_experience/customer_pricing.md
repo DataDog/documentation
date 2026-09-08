@@ -29,7 +29,7 @@ To set customer pricing, you need:
 
 1. Log in to your Datadog admin organization.
 2. Navigate to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Pricing{{< /ui >}}.
-   {{< img src="account_management/plan_and_usage/customer-pricing-nav.png" alt="Customer Pricing tab in the Plan & Usage section" >}}
+   {{< img src="account_management/plan_and_usage/customer-pricing-nav.png" alt="Customer Pricing tab in the Plan & Usage section." >}}
 3. Select a customer from the dropdown. Customers with an eligible resell contract are listed.
    {{< img src="account_management/plan_and_usage/customer-pricing-select-customer.png" alt="Customer selection dropdown listing reseller customers" >}}
 4. Review the customer's contracted products and corresponding sales prices in the table.
