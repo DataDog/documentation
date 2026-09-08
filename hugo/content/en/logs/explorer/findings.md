@@ -17,10 +17,6 @@ further_reading:
       text: 'Build and share investigations with Notebooks'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/findings" btn_hidden="false" header="Join the Preview!" >}}
-Findings for Log Explorer is in Preview. Use this form to submit your request.
-{{< /callout >}}
-
 ## Overview
 
 Findings helps you capture, organize, and reuse important context during log investigations in [Log Explorer][1].
