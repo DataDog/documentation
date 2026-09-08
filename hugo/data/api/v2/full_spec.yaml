@@ -58576,6 +58576,9 @@ components:
           type: string
       type: object
     LLMObsContentBlock:
+      anyOf:
+        - $ref: '#/components/schemas/LLMObsFrontendContentBlock'
+        - $ref: '#/components/schemas/LLMObsLegacyContentBlock'
       description: |-
         A single content block rendered inside a `display_block` interaction.
         `type` discriminates which other fields are meaningful:
@@ -58586,6 +58589,7 @@ components:
         - `image`: `url` is required.
         - `widget`: `tileDef` is required (any well-formed JSON; the frontend owns the renderable schema).
         - `llmobs_trace`: `traceId` is required; `interactionType`, when set, must be `trace` or `experiment_trace`.
+        - `frontend`: `code` is required and must be a non-empty string; `label` is optional.
 
         `height`, when set, must be positive.
       properties:
@@ -58593,11 +58597,13 @@ components:
           description: Alternative text for an `image` block.
           example: "Example image"
           type: string
+        code:
+          $ref: '#/components/schemas/LLMObsFrontendContentBlockCode'
         content:
           description: |-
             Block payload. A string for `markdown`, `header`, and `text`; an
             arbitrary JSON value (object, array, or scalar) for `json`. Omitted
-            for `image`, `widget`, and `llmobs_trace`.
+            for `image`, `widget`, `llmobs_trace`, and `frontend`.
           example: "## Triage Instructions"
         height:
           description: Optional rendered height. Must be positive when set.
@@ -58607,7 +58613,7 @@ components:
         interactionType:
           $ref: '#/components/schemas/LLMObsContentBlockLLMObsTraceInteractionType'
         label:
-          description: Optional label rendered alongside the block.
+          description: Optional label rendered alongside a `frontend` block.
           example: "Triage Instructions"
           type: string
         level:
@@ -58695,6 +58701,7 @@ components:
         - image
         - widget
         - llmobs_trace
+        - frontend
       example: markdown
       type: string
       x-enum-varnames:
@@ -58705,6 +58712,7 @@ components:
         - IMAGE
         - WIDGET
         - LLMOBS_TRACE
+        - FRONTEND
     LLMObsContentBlocks:
       description: |-
         List of content blocks that make up a `display_block` interaction.
@@ -61529,6 +61537,29 @@ components:
       required:
         - data
       type: object
+    LLMObsFrontendContentBlock:
+      description: Validation requirements for a `frontend` display block.
+      properties:
+        code:
+          $ref: '#/components/schemas/LLMObsFrontendContentBlockCode'
+        type:
+          $ref: '#/components/schemas/LLMObsFrontendContentBlockType'
+      required:
+        - code
+      type: object
+    LLMObsFrontendContentBlockCode:
+      description: HTML code rendered by a `frontend` block. Required for `frontend` blocks.
+      example: '<div class="status-card">Ready for review</div>'
+      minLength: 1
+      type: string
+    LLMObsFrontendContentBlockType:
+      description: Type discriminator for a `frontend` display block.
+      enum:
+        - frontend
+      example: frontend
+      type: string
+      x-enum-varnames:
+        - FRONTEND
     LLMObsInferenceCode:
       description: A generated code snippet for running an inference request programmatically.
       properties:
@@ -62134,6 +62165,32 @@ components:
         - CATEGORICAL
         - BOOLEAN
         - TEXT
+    LLMObsLegacyContentBlock:
+      description: Validation requirements for an existing non-frontend display block.
+      properties:
+        type:
+          $ref: '#/components/schemas/LLMObsLegacyContentBlockType'
+      type: object
+    LLMObsLegacyContentBlockType:
+      description: Type discriminator for an existing non-frontend display block.
+      enum:
+        - markdown
+        - header
+        - text
+        - json
+        - image
+        - widget
+        - llmobs_trace
+      example: markdown
+      type: string
+      x-enum-varnames:
+        - MARKDOWN
+        - HEADER
+        - TEXT
+        - JSON
+        - IMAGE
+        - WIDGET
+        - LLMOBS_TRACE
     LLMObsMetricAssessment:
       description: Assessment result for an Agent Observability experiment metric.
       enum:
@@ -172019,6 +172076,9 @@ paths:
                                 experiment_id: abc-123
                               label: "Experiments"
                               type: json
+                            - code: '<div class="status-card">Ready for review</div>'
+                              label: "Review status"
+                              type: frontend
                           type: display_block
                     type: interactions
             schema:
