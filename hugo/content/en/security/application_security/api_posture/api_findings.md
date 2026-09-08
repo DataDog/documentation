@@ -40,7 +40,7 @@ Click a finding to view its details and perform a workflow such as Validate > In
 
 Datadog API Posture uses [Bits Code][3] to generate code fixes for vulnerabilities.
 
-1. In Datadog, navigate to [**Security** > **App & API Protection** > **Findings**][1].
+1. In Datadog, navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}App & API Protection{{< /ui >}} > {{< ui >}}Findings{{< /ui >}}][1].
 2. Select a finding to open a side panel with details about the finding and the affected endpoint.
 3. In the **Next Steps** > **Remediation** section, click **Fix with Bits**.
 

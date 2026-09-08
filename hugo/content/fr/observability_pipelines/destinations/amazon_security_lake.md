@@ -30,9 +30,9 @@ Configurez la destination Amazon Security Lake lorsque vous [configurez un pipel
 
 Après avoir sélectionné la destination Amazon Security Lake dans l'interface utilisateur du pipeline :
 
-1. Saisissez le nom de votre compartiment S3.
+1. Saisissez le nom de votre bucket S3.
 1. Saisissez la région AWS.
-1. Saisissez le nom de la source personnalisée.
+1. Saisissez le nom de source personnalisé.
 
 #### Paramètres facultatifs {#optional-settings}
 
@@ -44,7 +44,7 @@ Après avoir sélectionné la destination Amazon Security Lake dans l'interface 
 
 ##### Activer TLS {#enable-tls}
 
-<div class="alert alert-danger">Pour la gestion des secrets : saisissez uniquement l'identifiant de la phrase secrète de la clé TLS. Ne <b>saisissez</b> pas la valeur réelle.</div>
+<div class="alert alert-danger">Pour la gestion des secrets : saisissez uniquement l'identifiant du mot de passe de la clé TLS. Ne <b>saisissez pas</b> la valeur réelle.</div>
 
 {{% observability_pipelines/tls_settings %}}
 
@@ -61,7 +61,7 @@ Après avoir sélectionné la destination Amazon Security Lake dans l'interface 
 {{< tabs >}}
 {{% tab "Gestion des secrets" %}}
 
-- Identifiant de la phrase secrète TLS d'Amazon Security Lake (lorsque TLS est activé) :
+- Identifiant de phrase secrète TLS Amazon Security Lake (lorsque TLS est activé) :
 	- L'identifiant par défaut est `DESTINATION_AWS_SECURITY_LAKE_KEY_PASS`.
 
 {{% /tab %}}
@@ -73,21 +73,21 @@ Après avoir sélectionné la destination Amazon Security Lake dans l'interface 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Fonctionnement de la destination {#how-the-destination-works}
+## Comment fonctionne la destination {#how-the-destination-works}
 
 ### Authentification AWS {#aws-authentication-1}
 
 {{% observability_pipelines/aws_authentication/instructions %}}
 
-#### Autorisations {#permissions}
+#### Permissions {#permissions}
 
 {{% observability_pipelines/aws_authentication/amazon_security_lake/permissions %}}
 
-### Mise en lots des événements {#event-batching}
+### Regroupement d'événements {#event-batching}
 
-Un lot d’événements est vidé lorsque l'un de ces paramètres est atteint. Consultez [Mise en lots des événements des destinations][2] pour plus d'informations.
+Un lot d'événements est vidé lorsque l'un de ces paramètres est atteint. Consultez [Regroupement d'événements par destination][2] pour plus d'informations.
 
-| Nombre maximal d'événements | Taille maximale (Mo) | Délai d'expiration (secondes)   |
+| Nombre maximal d'événements | Taille maximale (Mo) | Délai d'attente (secondes)   |
 |----------------|-------------------|---------------------|
 | Aucun           | 256               | 300                 |
 

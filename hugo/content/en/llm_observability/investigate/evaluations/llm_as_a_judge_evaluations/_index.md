@@ -101,7 +101,7 @@ Span Input: {{span_input}}
    You may also use the panel on the right ({{< ui >}}Filtered Spans{{< /ui >}} in span scope, {{< ui >}}Filtered Traces{{< /ui >}} in trace scope, {{< ui >}}Filtered Sessions{{< /ui >}} in session scope) to add span data as a variable:
    1. Choose an account and an application so that spans, traces, or sessions show up on the right.
    2. Select one of the spans on the right to view its JSON.
-   3. Select {{< ui >}}+{{< /ui >}} to add the JSON to your user prompt.
+   3. Select {{< ui >}}\+{{< /ui >}} to add the JSON to your user prompt.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_2-5.png" alt="The menu contents of the JSON view in the custom evaluation configuration right pane, displaying the option to Add variable to message." style="width:40%;" >}}
 

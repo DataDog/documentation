@@ -111,7 +111,7 @@ Before you add a workflow to a monitor, [add a monitor trigger to the workflow][
 After you add the monitor trigger, [add an existing workflow to your monitor][10] or create a new workflow. To create a new workflow from the monitors page:
 
 1. Click {{< ui >}}Add Workflow{{< /ui >}}.
-1. Click the {{< ui >}}+{{< /ui >}} icon and select a Blueprint, or select {{< ui >}}Start From Scratch{{< /ui >}}.
+1. Click the {{< ui >}}\+{{< /ui >}} icon and select a Blueprint, or select {{< ui >}}Start From Scratch{{< /ui >}}.
    {{< img src="/monitors/notifications/create-workflow.png" alt="Click the + button to add a new workflow" style="width:90%;">}}
 
 For more information on building a workflow, see [Build workflows][11].
