@@ -64,7 +64,7 @@ Retention periods in Agent Observability depend on the type of data and on your 
 
 Traces and spans from your instrumented applications are retained for **15 days** on all plans by default. This applies to everything stored on the span, including per-span operational data such as cost, token counts, latency, and errors, as well as evaluation scores attached to spans.
 
-A retention add-on extends this to **30, 60, or 90 days**. See [Changing your retention period](#changing-your-retention-period).
+A retention add-on extends this to **30, 60, or 90 days**. Add-ons are not available on the free tier. See [Changing your retention period](#changing-your-retention-period).
 
 Retention applies to the raw spans you query in the Trace Explorer. Metrics derived from those spans are retained separately, for longer. See [Metrics](#metrics).
 
@@ -74,6 +74,7 @@ On committed plans, the traces produced by [experiment][3] runs are retained lon
 
 | Plan                                | Experiment trace retention |
 | ----------------------------------- | -------------------------- |
+| Free tier                           | 15 days                    |
 | On-demand                           | 15 days                    |
 | Committed (monthly or annual)       | 90 days                    |
 | 30-day retention add-on             | 6 months                   |
