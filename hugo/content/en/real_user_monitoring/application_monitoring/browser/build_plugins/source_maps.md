@@ -36,7 +36,7 @@ The following environment variables override configuration values:
 - `DATADOG_SITE` or `DD_SITE`: Overrides `auth.site` for the intake URL.
 - `DATADOG_SOURCEMAP_INTAKE_URL`: Overrides the full intake URL directly.
 
-Choose either debug ID uploads or service and version uploads. Do not configure both upload methods in the same build.
+Choose one source map upload matching method: debug ID or service and version. These upload methods are mutually exclusive. RUM [source code context][5] can still include service and version metadata when you use debug ID uploads because that metadata identifies and filters events independently of source map matching.
 
 {{< tabs >}}
 {{% tab "Debug ID (Recommended)" %}}

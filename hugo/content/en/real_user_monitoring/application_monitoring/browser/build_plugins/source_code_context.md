@@ -32,7 +32,9 @@ At build time, the plugin injects a snippet that writes metadata to `window.DD_S
 
 ## Configuration
 
-Choose one of the following source code context methods. The two configurations are mutually exclusive.
+Use a debug ID for new configurations. You can also provide `service` and `version` alongside a debug ID to identify and filter events from a specific application or micro-frontend. This metadata is independent of the debug ID used to associate stack frames with source maps.
+
+The service and version configuration below documents the legacy matching method without debug IDs.
 
 {{< tabs >}}
 {{% tab "Debug ID (Recommended)" %}}
