@@ -15,6 +15,8 @@ import {
 // inherits the input-bar text color via `currentColor`).
 import searchIconSvg from "../../assets/images/svg-icons/searchbar_search.svg?raw";
 import SearchResultsPopup, { type Selection } from "./SearchResultsPopup";
+import { createAskAiConfig } from "@lib/askAi/askAiConfig";
+import { logAskAiSearchSuggestionClick } from "@lib/askAi/searchSuggestionLog";
 import { useDebouncedSearch, type SearchFn } from "./hooks/useDebouncedSearch";
 import { usePopupPosition } from "./hooks/usePopupPosition";
 import { useGlobalSearchShortcuts } from "./hooks/useGlobalSearchShortcuts";
@@ -130,6 +132,23 @@ export default function SearchBar({
     }
   };
 
+  /**
+   * Imported here rather than at the top of the module so the package stays out
+   * of this island's bundle. `mountAskAi` is idempotent, so the common case —
+   * `AskAi.astro`'s script having already run — returns the mounted widget; the
+   * config is passed either way, since a searchbar that mounts first would
+   * otherwise define the widget's capabilities for the whole page.
+   */
+  const askAi = async () => {
+    if (!trimmedQuery) return;
+    logAskAiSearchSuggestionClick(trimmedQuery);
+    setOpen(false);
+    const { mountAskAi } = await import("@dd/ask-ai");
+    mountAskAi(createAskAiConfig()).ask(trimmedQuery, {
+      source: "search_suggestion",
+    });
+  };
+
   const onInputKeyDown = (e: KeyboardEvent) => {
     if (e.key === "ArrowDown") {
       e.preventDefault();
@@ -147,8 +166,11 @@ export default function SearchBar({
       });
     } else if (e.key === "Enter") {
       e.preventDefault();
-      followSelectionOrSearch();
-      // Enter on the Ask AI placeholder is a no-op for now (Placeholder).
+      if (selection.kind === "ai") {
+        void askAi();
+      } else {
+        followSelectionOrSearch();
+      }
     }
   };
 
@@ -207,6 +229,8 @@ export default function SearchBar({
             aiSelected={selection.kind === "ai"}
             noResultsLabel={labels["No results."]}
             totalHits={totalHits}
+            query={trimmedQuery}
+            onAskAi={() => void askAi()}
           />,
           document.body,
         )}

@@ -1,0 +1,24 @@
+---
+// The Ask AI widget: the floating button and the conversational panel, both
+// owned by `@dd/ask-ai` and shared with Hugo. Rendered once by BaseLayout, so
+// every route gets it.
+//
+// A bundled `<script>` rather than `is:inline`, since it needs the npm import —
+// the same shape as `Telemetry.astro`. Astro emits it as a deferred module, so
+// the widget mounts after first paint.
+//
+// Bundled scripts do not re-execute on view-transition soft navigation, so the
+// mount-once shape below needs no guard. `mountAskAi` is idempotent anyway,
+// because the searchbar's Ask AI row calls it too.
+---
+
+<script>
+  import { mountAskAi } from "@dd/ask-ai";
+  import { createAskAiConfig } from "@lib/askAi/askAiConfig";
+
+  // TODO: no flag resolver is passed here, so `docs-ai-enabled` does not govern
+  // Astro — the package falls back to its `true` default. Flipping the flag off
+  // disables Ask AI on Hugo only. Supply a resolver once Astro has a feature-flag
+  // client, or if the kill switch is ever needed on Astro before then.
+  mountAskAi(createAskAiConfig());
+</script>

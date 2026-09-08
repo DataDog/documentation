@@ -1,9 +1,19 @@
 // @vitest-environment happy-dom
-import { describe, it, expect, afterEach, vi } from "vitest";
+import { describe, it, expect, afterEach, beforeEach, vi } from "vitest";
 import { render, cleanup } from "@testing-library/preact";
 import userEvent from "@testing-library/user-event";
 import { h } from "preact";
 import SearchBar, { type SearchBarLabels } from "../SearchBar";
+import SearchResultsPopup from "../SearchResultsPopup";
+import { mountAskAi } from "@dd/ask-ai";
+import { createAskAiConfig } from "@lib/askAi/askAiConfig";
+
+// The package is mocked rather than loaded: what matters here is that the
+// searchbar calls `ask` with the shared config, not what the widget then does.
+const { askSpy } = vi.hoisted(() => ({ askSpy: vi.fn() }));
+vi.mock("@dd/ask-ai", () => ({
+  mountAskAi: vi.fn(() => ({ ask: askSpy, teardown: vi.fn() })),
+}));
 
 const labels: SearchBarLabels = {
   Search: "Search",
@@ -223,6 +233,121 @@ describe("SearchBar — Enter routes to Hugo's search page when no hit is select
     }
 
     expect(hrefs).toContain(`${HUGO_ORIGIN}/search/?s=monitor`);
+  });
+});
+
+describe("SearchBar — the Ask AI row", () => {
+  beforeEach(() => {
+    askSpy.mockClear();
+    vi.mocked(mountAskAi).mockClear();
+  });
+
+  // The click and Enter handlers `await import("@dd/ask-ai")`, so the call
+  // lands a microtask after the event.
+  const flushLazyImport = () => new Promise((r) => setTimeout(r, 0));
+
+  it("labels the row with the query the user typed", async () => {
+    const user = userEvent.setup();
+    mount();
+    await typeAndWait(user, "dashboard");
+
+    const row = document.querySelector(".search-bar__ai-suggestion");
+    expect(row?.textContent).toContain("Ask AI about");
+    expect(
+      document.querySelector(".search-bar__ai-suggestion-query")?.textContent,
+    ).toBe('"dashboard"');
+  });
+
+  it("labels the row generically when there is no query", () => {
+    // Rendered directly: the popup only opens on a non-empty query, so this
+    // branch is unreachable through the search bar itself.
+    render(
+      h(SearchResultsPopup as any, {
+        popupRef: { current: null },
+        rect: null,
+        variant: "default",
+        grouped: null,
+        selectedHit: null,
+        aiSelected: false,
+        noResultsLabel: "No results.",
+        totalHits: 0,
+        query: "",
+        onAskAi: () => {},
+      }),
+    );
+
+    expect(
+      document.querySelector(".search-bar__ai-suggestion")?.textContent,
+    ).toContain("Ask AI anything");
+    expect(
+      document.querySelector(".search-bar__ai-suggestion-query"),
+    ).toBeFalsy();
+  });
+
+  it("clicking the row opens Ask AI with the query", async () => {
+    const user = userEvent.setup();
+    mount();
+    await typeAndWait(user, "dashboard");
+
+    await user.click(
+      document.querySelector<HTMLElement>(".search-bar__ai-suggestion")!,
+    );
+    await flushLazyImport();
+
+    expect(askSpy).toHaveBeenCalledWith("dashboard", {
+      source: "search_suggestion",
+    });
+  });
+
+  it("mounts with the shared config, so its capabilities are not dropped", async () => {
+    const user = userEvent.setup();
+    mount();
+    await typeAndWait(user, "dashboard");
+
+    await user.click(
+      document.querySelector<HTMLElement>(".search-bar__ai-suggestion")!,
+    );
+    await flushLazyImport();
+
+    // A config-less mount would win the idempotency race on any page load
+    // where the searchbar hydrates before the mount script runs, and the
+    // symptom — telemetry missing `is_datadog_user` on some loads and not
+    // others — is invisible without this assertion.
+    expect(vi.mocked(mountAskAi)).toHaveBeenCalledWith(createAskAiConfig());
+  });
+
+  it("Enter on the selected row opens Ask AI instead of navigating", async () => {
+    const user = userEvent.setup();
+    mount();
+    await typeAndWait(user, "monitor");
+
+    const hrefs: string[] = [];
+    const original = Object.getOwnPropertyDescriptor(window, "location");
+    Object.defineProperty(window, "location", {
+      configurable: true,
+      value: new Proxy({} as any, {
+        set(_t, prop, value) {
+          if (prop === "href") hrefs.push(value);
+          return true;
+        },
+      }),
+    });
+
+    try {
+      const input =
+        document.querySelector<HTMLInputElement>(".search-bar__input")!;
+      await user.click(input);
+      await user.keyboard("{ArrowDown}"); // Ask AI row selected
+      await user.keyboard("{Enter}");
+      await flushLazyImport();
+    } finally {
+      if (original) Object.defineProperty(window, "location", original);
+    }
+
+    expect(askSpy).toHaveBeenCalledWith("monitor", {
+      source: "search_suggestion",
+    });
+    expect(hrefs).toEqual([]);
   });
 });
 

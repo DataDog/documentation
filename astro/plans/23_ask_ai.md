@@ -421,7 +421,7 @@ map-less and Astro's final map would resolve widget frames into `dist/ask-ai.js`
 rather than into `src/*.ts`. `true` emits both the `.map` and the comment; Astro's
 `hidden` setting then strips the comment from *its* output, so the package's linked
 map never reaches production. `sourcesContent: true` so the chain needs no filesystem
-lookup at Astro build time, when the package is reached through a `portal:` symlink.
+lookup at Astro build time, when the package is reached through a symlink.
 
 Verify rather than trust this: it is a bundler-chaining behavior across two toolchains,
 and the failure is silent and only observable in a real error report. The check belongs
@@ -447,9 +447,28 @@ build, no widget.
 
 So:
 
-- `astro/package.json` — a `"@dd/ask-ai": "portal:../shared/packages/ask-ai"`
-  dependency. `portal:` rather than `file:` so Yarn 4 symlinks rather than copies, and
-  an edit to the package is visible without a reinstall.
+- `astro/package.json` — a `"@dd/ask-ai": "link:../shared/packages/ask-ai"`
+  dependency. Symlinked rather than copied, so an edit to the package is visible
+  without a reinstall.
+
+  **`link:` rather than `portal:`**, which this plan originally specified. Both
+  symlink, so both give the property above; they differ in whether the linked
+  package's own dependencies are resolved into the host's tree. `portal:` resolves
+  them, and that fails outright: Astro pins `marked@^18.0.7`, the package pins
+  `^17.0.1` to match Hugo, and Yarn's link step refuses to nest a conflicting copy
+  (`YN0071`). `link:` does not resolve them, and nothing is lost by that —
+  `dist/ask-ai.js` is a complete bundle with zero external imports, so neither host
+  ever resolves `marked`, `marked-highlight`, or `highlight.js` at all. The
+  alternatives both had the same shape of cost: bumping the package to `marked@^18`
+  moves the identical conflict onto Hugo at
+  [25_migrate_hugo_to_ask_ai_package.md](25_migrate_hugo_to_ask_ai_package.md), and a
+  Yarn `resolutions` entry silently reassigns Astro's own markdown code to a marked it
+  did not pin. `link:` decouples the two version lines instead of picking a winner,
+  which is what a bundled artifact should do.
+
+  The one thing `link:` gives up is that a `postinstall` on the linked package would
+  not run. Nothing depends on that — the paragraph below rejects `postinstall` as the
+  build mechanism on independent grounds.
 - `astro/package.json` — one `"build:ask-ai": "yarn --cwd ../shared/packages/ask-ai
   build"` script, then `yarn build:ask-ai && …` prepended to each of `dev`,
   `dev:proxied`, `build`, `build:en`, `build:preview`, `build:live`, and `typecheck`.
@@ -480,7 +499,8 @@ to the job.
 A `postinstall` on the package is a tempting alternative — it *is* in the supported set,
 and `portal:` dependencies get theirs run. It is not sufficient on its own: it fires at
 install time, so it never picks up a source edit made afterward. It is reasonable as a
-belt-and-braces addition for fresh clones, not as the mechanism.
+belt-and-braces addition for fresh clones, not as the mechanism. (Moot under `link:`,
+which does not run the linked package's lifecycle scripts at all.)
 
 **Editing package source requires a dev-server restart, and that is accepted.** Putting
 the build on `dev` gets you a correct `dist/` at server start, but no further: esbuild's
@@ -577,13 +597,18 @@ say that.
 | File | Change |
 | --- | --- |
 | `shared/packages/ask-ai/**` | New — the whole package. **Commit 1, cherry-pickable.** |
-| `astro/package.json` | Add the `portal:` dependency and a `build:ask-ai` script; prepend it to `dev`, `dev:proxied`, `build`, `build:en`, `build:preview`, `build:live`, `typecheck` |
+| `astro/package.json` | Add the `link:` dependency and a `build:ask-ai` script; prepend it to `dev`, `dev:proxied`, `build`, `build:en`, `build:preview`, `build:live`, `typecheck` |
 | `astro/src/components/AskAi/AskAi.astro` | New — the mount script, with [24_feature_flags.md](24_feature_flags.md)'s flag `TODO` |
 | `astro/src/lib/askAi/askAiConfig.ts` | New — `createAskAiConfig()`, the one config both call sites pass |
 | `astro/src/lib/askAi/envParity.test.ts` | New — asserts `ASK_AI_ENVS` and `SITE_ENVS` still agree |
+| `astro/src/lib/askAi/searchSuggestionLog.ts` | New — the searchbar row's own event, host-side as it is on Hugo |
+| `astro/src/components/AskAi/tests/browser.test.ts` | New — the two browser tests below |
 | `astro/src/layouts/BaseLayout.astro` | Render `<AskAi />` |
 | `astro/src/components/SearchBar/SearchResultsPopup.tsx` | Replace the placeholder row with the real one |
 | `astro/src/components/SearchBar/SearchBar.tsx` | Lazily import the package, mount with the shared config, wire click and Enter; drop the no-op comment |
+| `astro/src/components/SearchBar/SearchBar.module.css` | The row's styles, replacing the placeholder's |
+| `astro/src/assets/images/svg-icons/spark-ai.svg` | New — the row's icon, inlined so it takes `currentColor` |
+| `astro/src/components/MobileNav/tests/visual.browser.test.ts-snapshots/` | Rebaselined: the floating button is fixed, so it paints over the open mobile-nav overlay, exactly as it does on Hugo |
 | `hugo/**` | **Not this plan** — see [25_migrate_hugo_to_ask_ai_package.md](25_migrate_hugo_to_ask_ai_package.md) |
 
 ### Testing (red → green)
@@ -665,8 +690,8 @@ Following [22_add_rum.md](22_add_rum.md)'s convention —
 - **A third Node project.** Two lockfiles become three; `yarn install` in one host no
   longer describes everything that must be installed. Accepted for isolation, and
   bounded by the package's planned deletion.
-- **`portal:` across directories** is the piece most likely to misbehave in CI rather
-  than locally — a `portal:` outside the project root depends on the install being
+- **`link:` across directories** is the piece most likely to misbehave in CI rather
+  than locally — a link target outside the project root depends on the install being
   run from a checkout that contains `shared/`, which it always is here, but shallow or
   filtered checkouts would break it. Worth confirming on the first preview build.
 - **One package, two bundlers.** The entire risk this plan's verification section

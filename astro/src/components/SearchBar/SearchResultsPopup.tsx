@@ -3,6 +3,10 @@ import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { CATEGORY_ORDER, type NormalizedHit } from "@lib/search/normalize";
 import SearchHit from "./SearchHit";
 import type { PopupRect } from "./hooks/usePopupPosition";
+// The same spark Hugo puts on its Ask AI row (and the one the widget's own
+// floating button carries), inlined as SVG so it takes the row's `currentColor`
+// instead of Hugo's filter-based recolor of an <img>.
+import sparkAiIconSvg from "../../assets/images/svg-icons/spark-ai.svg?raw";
 
 const cl = classListFactory(styles);
 
@@ -25,6 +29,10 @@ interface Props {
   aiSelected: boolean;
   noResultsLabel: string;
   totalHits: number;
+  /** The trimmed query, shown in the Ask AI row's label. */
+  query: string;
+  /** Opens Ask AI with the current query. */
+  onAskAi: () => void;
 }
 
 export default function SearchResultsPopup({
@@ -36,6 +44,8 @@ export default function SearchResultsPopup({
   aiSelected,
   noResultsLabel,
   totalHits,
+  query,
+  onAskAi,
 }: Props) {
   const isMobile = variant === "mobile";
   // The default (side-nav) popup is a fixed 50vw set in CSS. The mobile popup
@@ -58,16 +68,7 @@ export default function SearchResultsPopup({
       role="listbox"
       style={style}
     >
-      <div
-        class={cl(
-          "search-bar__ai-suggestion",
-          "placeholder",
-          aiSelected && "search-bar__ai-suggestion--selected",
-        )}
-        data-placeholder-name={'"Ask AI" Button Goes Here'}
-      >
-        <span>{'"Ask AI" Button Goes Here'}</span>
-      </div>
+      <AskAiRow query={query} selected={aiSelected} onAsk={onAskAi} />
 
       {totalHits === 0 ? (
         <div class={cl("search-bar__no-hits")}>{noResultsLabel}</div>
@@ -92,5 +93,48 @@ export default function SearchResultsPopup({
         })
       )}
     </div>
+  );
+}
+
+interface AskAiRowProps {
+  query: string;
+  selected: boolean;
+  onAsk: () => void;
+}
+
+/**
+ * The searchbar's entry point into Ask AI. Its label tracks the query, matching
+ * `setAskAISuggestionContent` in Hugo's `searchbarHits.js`.
+ *
+ * TODO: hardcoded English, as in Hugo. Localize once `shared/i18n` carries the
+ * keys — they cannot be added from this side of the repo.
+ */
+function AskAiRow({ query, selected, onAsk }: AskAiRowProps) {
+  return (
+    <button
+      type="button"
+      class={cl(
+        "search-bar__ai-suggestion",
+        selected && "search-bar__ai-suggestion--selected",
+      )}
+      onClick={onAsk}
+    >
+      <span
+        class={cl("search-bar__ai-suggestion-icon")}
+        dangerouslySetInnerHTML={{ __html: sparkAiIconSvg }}
+      />
+      <span class={cl("search-bar__ai-suggestion-label")}>
+        {query ? (
+          <>
+            {"Ask AI about "}
+            <span class={cl("search-bar__ai-suggestion-query")}>
+              {`"${query}"`}
+            </span>
+          </>
+        ) : (
+          "Ask AI anything"
+        )}
+      </span>
+    </button>
   );
 }

@@ -1,0 +1,39 @@
+{
+  "name": "@dd/ask-ai",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "The Ask AI widget, shared by the Hugo and Astro documentation sites.",
+  "packageManager": "yarn@4.10.3",
+  "engines": {
+    "node": ">= 20.11.0"
+  },
+  "main": "./dist/ask-ai.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/ask-ai.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node esbuild.config.mjs && tsc",
+    "typecheck": "tsc && tsc -p tsconfig.test.json",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "highlight.js": "^11.11.1",
+    "marked": "^17.0.1",
+    "marked-highlight": "^2.2.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.10",
+    "happy-dom": "^20.11.1",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
+  }
+}

@@ -160,23 +160,57 @@
   font-size: var(--font-size-sm);
 }
 
+/* A full-width row rather than a card: matches Hugo's Ask AI suggestion, which
+   sits above the results and stays visible even when there are none. */
 .search-bar__ai-suggestion {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  width: calc(100% - 2 * var(--space-sm));
   margin: 0 var(--space-sm) var(--space-sm);
-  padding: var(--space-sm) var(--space-md);
-  background: var(--color-placeholder-bg);
-  outline: var(--border-width-thick) solid var(--color-placeholder-outline);
-  outline-offset: calc(-1 * var(--border-width-thick));
-  color: var(--color-placeholder-text);
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  text-align: center;
-  user-select: none;
+  padding: var(--space-2xs) var(--space-sm);
+  background: var(--color-gray-lightest);
+  border: var(--border-width) solid var(--color-surface-border);
+  border-radius: var(--border-radius);
+  color: var(--color-brand);
   font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
 }
 
+/* Keyboard selection and hover read the same, since arrow keys and the pointer
+   are two routes to the same row. */
+.search-bar__ai-suggestion:hover,
 .search-bar__ai-suggestion--selected {
-  filter: brightness(0.95);
+  background: var(--color-brand-hover-bg);
+  border-color: var(--color-brand-border);
+}
+
+.search-bar__ai-suggestion-icon {
+  display: flex;
+  flex-shrink: 0;
+  width: 0.8125rem;
+  height: 0.8125rem;
+}
+
+/* Truncates rather than wrapping: the label carries the query, which can be
+   arbitrarily long, and a growing row would push the results down as the user
+   types. */
+.search-bar__ai-suggestion-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.search-bar__ai-suggestion-query {
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-regular);
 }
 
 .search-bar__no-hits {

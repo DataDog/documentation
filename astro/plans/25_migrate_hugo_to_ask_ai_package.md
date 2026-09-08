@@ -90,7 +90,11 @@ schema.
 
 `hugo/package.json`:
 
-- `"@dd/ask-ai": "portal:../shared/packages/ask-ai"`, same reference style Astro uses.
+- `"@dd/ask-ai": "link:../shared/packages/ask-ai"`, same reference style Astro uses.
+  `link:` rather than `portal:` for the reason [23_ask_ai.md](23_ask_ai.md) records:
+  `dist/ask-ai.js` bundles its three dependencies, so resolving them into the host's
+  tree buys nothing and only creates version conflicts. Hugo's `marked@^17.0.1` happens
+  to agree with the package's today, but that is not a property worth depending on.
 - `"build:ask-ai": "yarn --cwd ../shared/packages/ask-ai build"` — one named script, as
   in [23_ask_ai.md](23_ask_ai.md), so the command lives in a single place.
 - `yarn build:ask-ai && …` prepended to **all three** of `build`, `build:preview`, and
