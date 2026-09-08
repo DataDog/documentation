@@ -4,9 +4,6 @@ aliases:
 - /ko/tracing/trace_queries/one_percent_flat_sampling/
 description: 보존 필터를 사용하여 트레이스 보존을 제어하는 방법을 알아보세요.
 further_reading:
-- link: https://www.datadoghq.com/blog/rum-apm-retention-filters
-  tag: 블로그
-  text: 보존 필터로 프런트엔드 및 백엔드 데이터 통합 및 상호 연결
 - link: /tracing/trace_pipeline/ingestion_mechanisms
   tag: 설명서
   text: 수집 메커니즘
@@ -19,6 +16,12 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/apm-rate-limit-retention
   tag: 학습 센터
   text: APM 속도 제한 및 보존
+- link: https://www.datadoghq.com/blog/rum-apm-retention-filters
+  tag: 블로그
+  text: 보존 필터로 프론트엔드 및 백엔드 데이터 통합 및 상호 연결
+- link: https://www.datadoghq.com/blog/trace-aws-lambda-durable-functions/
+  tag: 블로그
+  text: Datadog으로 AWS Lambda 내구성 함수를 추적하십시오
 - link: https://www.datadoghq.com/architecture/mastering-distributed-tracing-data-volume-challenges-and-datadogs-approach-to-efficient-sampling/
   tag: 아키텍처 센터
   text: '분산 트레이스 마스터하기: 데이터 볼륨 문제와 효율적인 샘플링을 위한 Datadog의 접근 방식'
