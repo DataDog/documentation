@@ -27,7 +27,7 @@ Create a skill directly in the Skills Library, or ask Bits Chat to create one fo
 
 ### Create a skill in the Skills Library
 
-1. Open the [**Skills Library**][4] in Datadog.
+1. Open the [{{< ui >}}Skills Library{{< /ui >}}][4] in Datadog.
 2. Create a skill or import an existing `SKILLS.md` file.
 3. Add the domain knowledge and instructions that the agent should follow.
 4. Select the skill's visibility:
