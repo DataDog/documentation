@@ -26,6 +26,7 @@ AI 네이티브 SAST가 활성화되면 리포지토리에서 감지된 지원 �
 | 언어 | 규칙 세트 |
 | --- | --- |
 | C# | `csharp-ai_sast` |
+| C++ | `cpp-ai_sast` |
 | Dart | `dart-ai_sast` |
 | Elixir | `elixir-ai_sast` |
 | Go | `go-ai_sast` |
