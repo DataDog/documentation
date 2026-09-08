@@ -21,7 +21,7 @@ further_reading:
 
 Findings helps you capture, organize, and reuse important context during log investigations in [Log Explorer][1].
 
-With Findings, you can save log events, visualizations, and queries with the **Add Finding** button or the keyboard shortcut <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd> while investigating. Go back to prior findings by double-clicking them or using Open in Explorer. Branch into new questions without losing track of earlier observations or investigative paths. 
+With Findings, you can save log events, visualizations, and queries with the **Add Finding** button or the keyboard shortcut <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd> while investigating. **Double-click** on findings to go back to them in Log Explorer, or by using the **Open in Explorer** button on the finding. Track your investigation paths in the findings panel by arranging the findings. Branch into new questions without losing track of earlier observations.
 
 Use Findings to checkpoint a useful base query to come back to, collect possible evidence, compare results, and build context as your investigation evolves. Select findings to use as context to [Ask Bits][2] questions, or send them to a [Notebook][3] to share with others.
 
