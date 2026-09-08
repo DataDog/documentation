@@ -89,9 +89,13 @@ The following fields are supported in the prompt tracking JSON:
 | `id` | string | No | Unique identifier for the prompt. Defaults to `{ml_app}_unnamed-prompt` if omitted |
 | `name` | string | No | Prompt name. Used as a fallback for `id` if `id` is omitted |
 | `version` | string | No | User-supplied version tag |
+| `prompt_uuid` | string | No, unless linking to Prompt Management | The prompt's UUID from [Prompt Management][8]. Required for the span to link back to its Prompt Management registry entry |
+| `prompt_version_uuid` | string | No | The specific prompt version's UUID from [Prompt Management][8] |
 | `variables` | object | No | Template variable substitutions |
 | `rag_context_variables` | array of strings | No | Names of variables in `variables` that contain RAG context (ground truth). Used by RAG evaluators |
 | `rag_query_variables` | array of strings | No | Names of variables in `variables` that contain the user query. Used by RAG evaluators |
+
+**Note**: If your prompt comes from the [Prompt Management][8] registry (for example, fetched through the Prompt Management REST API in a language without a native Agent Observability SDK), include the `prompt_uuid` (and `prompt_version_uuid`, if available) returned by the API alongside `id` and `version`. Without `prompt_uuid`, the span's prompt metadata is tracked but does not link back to the registry entry in the Prompts view.
 
 <div class="alert alert-info">If you are using prompt templates, Agent Observability can automatically attach version information based on prompt content.</div>
 
