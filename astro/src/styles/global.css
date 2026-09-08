@@ -252,17 +252,12 @@ tbody code {
 /* Region-scoped content — every element with `data-region="<key>"` renders
    at build time (good for SEO) but is hidden unless `<html data-active-region>`
    matches its key. The value on `<html>` is set by a pre-body inline script
-   before first paint so there's no flash of the wrong region. */
+   before first paint so there's no flash of the wrong region.
+
+   The matching `display: revert` rules are generated per region from
+   `shared/regions.yaml` in BaseLayout.astro, so a new data center needs no
+   edit here. Only the hidden-by-default rule is static. */
 [data-region] { display: none; }
-html[data-active-region='us'] [data-region='us'],
-html[data-active-region='us3'] [data-region='us3'],
-html[data-active-region='us5'] [data-region='us5'],
-html[data-active-region='eu'] [data-region='eu'],
-html[data-active-region='ap1'] [data-region='ap1'],
-html[data-active-region='ap2'] [data-region='ap2'],
-html[data-active-region='gov'] [data-region='gov'] {
-  display: revert;
-}
 
 
 @view-transition {
