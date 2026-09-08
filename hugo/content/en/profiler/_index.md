@@ -52,6 +52,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
       tag: "Blog"
       text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
+    - link: "https://www.datadoghq.com/blog/bitbucket-cloud-source-code-integration/"
+      tag: "Blog"
+      text: "Troubleshoot and secure your code faster with Datadog’s Bitbucket Cloud Source Code integration"
 cascade:
     algolia:
         rank: 70

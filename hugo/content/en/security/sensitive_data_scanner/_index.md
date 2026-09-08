@@ -48,6 +48,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/datadog-cloud-security-compliance"
       tag: "Blog"
       text: "Scale compliance across global frameworks with Datadog Cloud Security"
+    - link: "https://www.datadoghq.com/blog/from-traces-to-experiments-a-loop-for-improving-ai-agents/"
+      tag: "Blog"
+      text: "From traces to experiments: A loop for improving AI agents"
 ---
 
 ## Overview

@@ -4,9 +4,6 @@ description: "Automatically track user interactions and custom actions in web ap
 aliases:
   - /real_user_monitoring/browser/tracking_user_actions/
 further_reading:
-    - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
-      tag: 'Blog'
-      text: 'Introducing Datadog Real User Monitoring'
     - link: '/real_user_monitoring/explorer/'
       tag: 'Documentation'
       text: 'Explore your views within Datadog'
@@ -19,6 +16,12 @@ further_reading:
     - link: "https://learn.datadoghq.com/courses/custom-data-rum-javascript"
       tag: "Learning Center"
       text: "Collect custom data with RUM for JavaScript web applications"
+    - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
+      tag: 'Blog'
+      text: 'Introducing Datadog Real User Monitoring'
+    - link: "https://www.datadoghq.com/blog/rum-build-time-privacy-allowlist/"
+      tag: "Blog"
+      text: "Reduce sensitive data exposure with build-time allowlists"
 algolia:
   tags: ['user actions']
 ---
