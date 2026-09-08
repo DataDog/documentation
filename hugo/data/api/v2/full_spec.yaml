@@ -144676,7 +144676,11 @@ paths:
           - cloud_cost_management_write
   /api/v2/cost/oci_config:
     get:
-      description: List the OCI configs.
+      deprecated: true
+      description: |-
+        **Note**: This endpoint is deprecated. View OCI accounts in Cloud Cost Settings in the Datadog web application instead.
+
+        List the OCI configs.
       operationId: ListCostOCIConfigs
       responses:
         "200":
@@ -144718,6 +144722,7 @@ paths:
         operator: OR
         permissions:
           - cloud_cost_management_read
+      x-sunset: "2027-01-01"
   /api/v2/cost/recommendations:
     post:
       description: List cost recommendations matching a filter, with pagination and sorting.
