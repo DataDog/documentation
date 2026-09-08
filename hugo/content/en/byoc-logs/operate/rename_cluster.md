@@ -14,7 +14,7 @@ further_reading:
 
 The `config.cluster_id` Helm value identifies a BYOC Logs cluster in Datadog. Changing this value restarts the cluster nodes. Choose a rename procedure based on the deployment's availability requirements.
 
-Renaming a cluster changes the cluster ID segment in each BYOC Logs index name from `byoc--<OLD_CLUSTER_ID>--<INDEX_NAME>` to `byoc--<NEW_CLUSTER_ID>--<INDEX_NAME>`. It also changes the `cluster_id` tag on metrics, logs, and traces emitted by the cluster. Update Log Explorer views, monitors, dashboards, and telemetry queries that reference the old index names or tag value.
+Renaming a cluster changes the cluster ID segment in each BYOC Logs index name from `byoc--<old_cluster_id>--<index_name>` to `byoc--<new_cluster_id>--<index_name>`. It also changes the `cluster_id` tag on metrics, logs, and traces emitted by the cluster. Update Log Explorer views, monitors, dashboards, and telemetry queries that reference the old index names or tag value.
 
 ## Rename with downtime
 

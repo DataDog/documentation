@@ -20,7 +20,7 @@ aliases:
 BYOC (Bring Your Own Cloud) Logs index names follow this format:
 
 ```text
-byoc--<CLUSTER_ID>--<INDEX_NAME>
+byoc--<cluster_id>--<index_name>
 ```
 
 To search your BYOC Logs indexes:
