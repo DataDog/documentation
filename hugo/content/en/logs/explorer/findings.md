@@ -66,7 +66,7 @@ The finding for both of these will store\ the text you selected and you can retu
 
 ## Return to a finding
 
-Double-click a finding to return to it in Log Explorer. Or hover over the finding and click the {{< ui >}}Open in Explorer{{< /ui >}} button. Log Explorer reloads the query, time range, and visualization that the finding was captured with. 
+**Double-click** a finding to return to it in Log Explorer. Or hover over the finding and click the {{< ui >}}Open in Explorer{{< /ui >}} button. Log Explorer reloads the query, time range, and visualization that the finding was captured with. 
 
 Each finding keeps its own query and time range. In the log explorer, you can change your search as often as you need, then come back to an earlier finding with a double-click without needing to rebuild the query.
 
