@@ -1,5 +1,5 @@
 ---
-title: Data Privacy, Security, and Retention
+title: Data Governance
 aliases:
 - /llm_observability/data_privacy_security_and_rbac/
 - /llm_observability/data_security_and_rbac/
