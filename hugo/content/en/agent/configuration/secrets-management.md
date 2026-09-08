@@ -416,6 +416,7 @@ datadog:
     config:
       aws_session:
         aws_region: "<AWS_REGION>"
+    enableGlobalPermissions: true
   confd:
   # This is an example
     <INTEGRATION_NAME>.yaml: |-
@@ -434,13 +435,14 @@ agents:
 <div class="alert alert-info"> You must include the <code>serviceAccountAnnotations</code> to grant the Agent permissions to access the AWS SSM parameter. </div>
 
 ##### Cluster check: without cluster check runners enabled
-```sh
+```yaml
 datadog:
   secretBackend:
     type: "aws.ssm"
     config:
       aws_session:
         aws_region: "<AWS_REGION>"
+    enableGlobalPermissions: true
 agents:
   rbac:
     # IAM role ARN required to grant the Agent permissions to access the AWS SSM parameter
@@ -457,13 +459,14 @@ clusterAgent:
 ```
 
 ##### Cluster check: with cluster check runners enabled
-```sh
+```yaml
 datadog:
   secretBackend:
     type: "aws.ssm"
     config:
       aws_session:
         aws_region: "<AWS_REGION>"
+    enableGlobalPermissions: true
 clusterAgent:
   confd:
   # This is an example
@@ -491,7 +494,7 @@ Configure the Datadog Agent to use AWS SSM to resolve secrets with the Datadog O
 
 ##### Integration check
 
-```sh
+```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
@@ -525,7 +528,7 @@ spec:
 
 ##### Cluster check: without cluster check runners enabled
 
-```sh
+```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
@@ -556,7 +559,7 @@ spec:
 
 ##### Cluster check: with cluster check runners enabled
 
-```sh
+```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
@@ -1254,7 +1257,7 @@ Configure the Datadog Agent to use HashiCorp Vault to resolve secrets in Helm us
 
 ##### Integration check
 
-```sh
+```yaml
 datadog:
   secretBackend:
     type: "hashicorp.vault"
@@ -1264,6 +1267,7 @@ datadog:
         vault_auth_type: kubernetes
         vault_kubernetes_role: "<VAULT_ROLE>"
         vault_kubernetes_mount_path: "auth/kubernetes/login"
+    enableGlobalPermissions: true
   confd:
   # This is an example
     <INTEGRATION_NAME>.yaml: |-
@@ -1275,7 +1279,7 @@ datadog:
 ```
 
 ##### Cluster check: without cluster check runners enabled
-```sh
+```yaml
 datadog:
   secretBackend:
     type: "hashicorp.vault"
@@ -1285,6 +1289,7 @@ datadog:
         vault_auth_type: kubernetes
         vault_kubernetes_role: "<VAULT_ROLE>"
         vault_kubernetes_mount_path: "auth/kubernetes/login"
+    enableGlobalPermissions: true
 clusterAgent:
   confd:
     # This is an example
@@ -1296,7 +1301,7 @@ clusterAgent:
 ```
 
 ##### Cluster check: with cluster check runners enabled
-```sh
+```yaml
 datadog:
   secretBackend:
     type: "hashicorp.vault"
@@ -1306,6 +1311,7 @@ datadog:
         vault_auth_type: kubernetes
         vault_kubernetes_role: "<VAULT_ROLE>"
         vault_kubernetes_mount_path: "auth/kubernetes/login"
+    enableGlobalPermissions: true
 clusterAgent:
   confd:
   # This is an example
@@ -1328,7 +1334,7 @@ Configure the Datadog Agent to use HashiCorp Vault to resolve secrets with the D
 
 ##### Integration check
 
-```sh
+```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
@@ -1359,7 +1365,7 @@ spec:
 
 ##### Cluster check: without cluster check runners enabled
 
-```sh
+```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
@@ -1389,7 +1395,7 @@ spec:
 
 ##### Cluster check: with cluster check runners enabled
 
-```sh
+```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
@@ -1605,6 +1611,7 @@ datadog:
     config:
       token_path: /custom/path/to/token
       ca_path: /custom/path/to/ca.crt
+    enableGlobalPermissions: true
 ```
 
 **Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `datadog.secretBackend.type` and `datadog.secretBackend.config` fields.
@@ -1653,6 +1660,7 @@ datadog:
     type: "k8s.secrets"
     config:
       api_server: https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}
+    enableGlobalPermissions: true
 ```
 
 **Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `datadog.secretBackend.type` and `datadog.secretBackend.config` fields.
@@ -1893,6 +1901,7 @@ datadog:
     type: "file.json"
     config:
       file_path: /etc/secret-volume/secret.json
+    enableGlobalPermissions: true
 agents:
   volumes:
     - name: secret-volume
