@@ -32,7 +32,7 @@ The `ctx` object provides access to all workflow context variables, similar to t
 ## Add a Python function action
 
 In the workflow canvas: 
-1. Click {{< ui >}}+{{< /ui >}} to add a workflow step. 
+1. Click {{< ui >}}\+{{< /ui >}} to add a workflow step. 
 1. Search for `Python`. 
 1. Select the Python action to add it to your workflow.
 
