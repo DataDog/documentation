@@ -26,6 +26,8 @@ You can route either or both of these request types through a proxy on your own 
 - Data residency or compliance requirements
 - Ad-blocker avoidance for browser applications
 
+<div class="alert alert-info">The code samples on this page use the US1 site (<code>datadoghq.com</code>) as an example. Replace the Datadog domains with the corresponding values for your <a href="/getting_started/site/">Datadog site</a>.</div>
+
 ## Configure the proxy
 
 {{< tabs >}}
@@ -66,12 +68,12 @@ val flagsConfig = FlagsConfiguration.Builder()
 Flags.enable(flagsConfig)
 {{< /code-block >}}
 
-Your proxy must forward each request to the corresponding Datadog intake endpoint for your [Datadog site][1]:
+Your proxy must forward each request to the corresponding Datadog intake endpoint for your [Datadog site][1] (the following table uses the US1 site as an example):
 
 | Proxy path | Forward to |
 |---|---|
-| `/api/v2/exposures` | `{{< region-param key="dd_api" code="true" >}}/api/v2/exposures` |
-| `/api/v2/flagevaluation` | `{{< region-param key="dd_api" code="true" >}}/api/v2/flagevaluation` |
+| `/api/v2/exposures` | `https://api.datadoghq.com/api/v2/exposures` |
+| `/api/v2/flagevaluation` | `https://api.datadoghq.com/api/v2/flagevaluation` |
 
 [1]: /getting_started/site/
 
@@ -120,12 +122,12 @@ let flagsConfig = Flags.Configuration(
 Flags.enable(with: flagsConfig)
 {{< /code-block >}}
 
-Your proxy must forward each request to the corresponding Datadog intake endpoint for your [Datadog site][1]:
+Your proxy must forward each request to the corresponding Datadog intake endpoint for your [Datadog site][1] (the following table uses the US1 site as an example):
 
 | Proxy path | Forward to |
 |---|---|
-| `/api/v2/exposures` | `{{< region-param key="dd_api" code="true" >}}/api/v2/exposures` |
-| `/api/v2/flagevaluation` | `{{< region-param key="dd_api" code="true" >}}/api/v2/flagevaluation` |
+| `/api/v2/exposures` | `https://api.datadoghq.com/api/v2/exposures` |
+| `/api/v2/flagevaluation` | `https://api.datadoghq.com/api/v2/flagevaluation` |
 
 [1]: /getting_started/site/
 
@@ -162,7 +164,7 @@ await DdFlags.enable({
 });
 {{< /code-block >}}
 
-Your proxy must forward exposure requests to `{{< region-param key="dd_api" code="true" >}}/api/v2/exposures`.
+Your proxy must forward exposure requests to the corresponding Datadog intake endpoint for your [Datadog site][1]; for example, for the US1 site use `https://api.datadoghq.com/api/v2/exposures`.
 
 **Note**: The React Native SDK does not expose a `customEvaluationEndpoint` option. Evaluation events are sent through the underlying native Android or iOS SDK and cannot be routed through a custom proxy endpoint.
 
@@ -183,7 +185,7 @@ import { DatadogBrowserFlagging } from '@datadog/browser-flagging';
 
 DatadogBrowserFlagging.init({
     clientToken: '<CLIENT_TOKEN>',
-    site: '{{< region-param key="dd_site" code="true" >}}',
+    site: 'datadoghq.com',
     flaggingProxy: 'https://proxy.example.com/precompute-assignments',
 });
 {{< /code-block >}}
@@ -195,7 +197,7 @@ To add custom headers to the flag configuration request (for example, for authen
 {{< code-block lang="javascript" filename="index.js" >}}
 DatadogBrowserFlagging.init({
     clientToken: '<CLIENT_TOKEN>',
-    site: '{{< region-param key="dd_site" code="true" >}}',
+    site: 'datadoghq.com',
     flaggingProxy: 'https://proxy.example.com/precompute-assignments',
     customHeaders: { 'X-Proxy-Token': '<YOUR_PROXY_TOKEN>' },
 });
@@ -208,7 +210,7 @@ Browser flag event data (exposures and evaluations) is sent through the standard
 {{< code-block lang="javascript" filename="index.js" >}}
 DatadogBrowserFlagging.init({
     clientToken: '<CLIENT_TOKEN>',
-    site: '{{< region-param key="dd_site" code="true" >}}',
+    site: 'datadoghq.com',
     flaggingProxy: 'https://proxy.example.com/precompute-assignments',
     proxy: 'https://proxy.example.com/intake',
 });
@@ -239,5 +241,3 @@ The `proxy` option also accepts a function that receives the decoded `path` and 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /getting_started/site/
