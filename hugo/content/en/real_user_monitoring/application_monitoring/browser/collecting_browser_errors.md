@@ -80,7 +80,7 @@ datadogRum.init({
 });
 ```
 
-Initialize RUM before loading any WASM modules. The plugin observes modules created with the browser's `WebAssembly` APIs and adds their URLs and build IDs to errors that contain WASM stack frames. This lets Datadog select the correct build ID when an application loads multiple modules. For a module instantiated directly from bytes, the plugin records a synthetic module URL.
+Initialize RUM before loading any WASM modules. The plugin observes modules created with the browser's `WebAssembly` APIs and adds their URLs and build IDs to errors that contain WASM stack frames. This lets Datadog select the correct build ID when an application loads multiple modules.
 
 Unhandled errors are collected automatically. To report a handled WASM error, pass the `Error` object to [`addError()`](#collect-errors-manually). Then, [upload the module's WebAssembly symbols][20].
 
