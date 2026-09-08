@@ -9,7 +9,7 @@ import {
 } from '@config/regions';
 
 describe('config/regions', () => {
-  it('reads allowedRegions from the Hugo params.yaml snapshot', () => {
+  it('reads the region list from shared/regions.yaml', () => {
     const regions = getAllowedRegions();
     const keys = regions.map((r) => r.key);
     expect(keys).toEqual(['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'uk1', 'gov', 'gov2']);

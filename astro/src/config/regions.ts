@@ -1,28 +1,52 @@
 /**
- * Region configuration sourced from the Hugo site's snapshots.
+ * Region configuration, sourced from `shared/regions.yaml`.
  *
- * - `allowedRegions` comes from Hugo's `config/_default/params.yaml` and drives
- *   the list of Datadog sites we surface in the dropdown and in per-region
- *   endpoint URLs.
- * - `dd_datacenter`, `dd_site`, `dd_full_site`, etc. come from Hugo's
- *   `assets/scripts/config/regions.config.js` and drive per-region labels and
- *   app-host lookups used at runtime (e.g. for referrer detection).
+ * That file is the single source of truth for Datadog data centers. One block
+ * per region carries its identity (key, label, weight, domain, exact_domains)
+ * and every per-region substitution value. Adding a data center means adding
+ * one block there — no other file in `astro/src` should need editing.
  *
- * Keeping both sources mocked under `mocked-dependencies/hugo_site/` means the
- * Astro site uses the same region keys (`us`, `eu`, `ap1`, …) as Hugo so the
- * `site` cookie and `?site=` query param transfer seamlessly between sites.
+ * Hugo still reads its own copies (`config/_default/params.yaml` and
+ * `assets/scripts/config/regions.config.js`) until the Hugo phase mounts this
+ * file as data. The two copies are equivalent; `regions.equivalence.test.ts`
+ * checks that.
+ *
+ * All values are strings, including ports. Hugo interpolates them into prose,
+ * so the schema preserves the source type rather than coercing.
  *
  * ⚠️ This module is build-time-only. It pulls in the `yaml` parser and the
- * full `regions.config.js` data object (~680 lines). Do not import it from
- * client-bundled code (Preact components, anything in the hydration graph).
- * Client code should receive the slim `ClientRegion[]` shape via props —
- * `.astro` islands read the data here in frontmatter and pass it through.
+ * full region table. Do not import it from client-bundled code (Preact
+ * components, anything in the hydration graph). Client code should receive the
+ * slim `ClientRegion[]` shape via props — `.astro` islands read the data here
+ * in frontmatter and pass it through.
  */
 
 import { parse as parseYaml } from 'yaml';
-// @ts-ignore — plain ES module import
-import regionsConfig from '@hugo-site/assets/scripts/config/regions.config.js';
-import PARAMS_YAML_RAW from '@hugo-site/config/_default/params.yaml?raw';
+import { z } from 'zod';
+import REGIONS_YAML_RAW from '@shared/regions.yaml?raw';
+
+/**
+ * Every value is a string. `.catchall(z.string())` means a new substitution
+ * key added to the YAML flows through with no schema edit, while a
+ * wrong-typed value (a bare number that lost a leading zero, say) fails the
+ * build.
+ */
+const RegionValuesSchema = z.record(z.string(), z.string());
+
+const RegionSchema = z.object({
+  key: z.string().min(1),
+  label: z.string().min(1),
+  weight: z.number(),
+  domain: z.string().min(1),
+  exact_domains: z.array(z.string()).default([]),
+  values: RegionValuesSchema,
+});
+
+const RegionsFileSchema = z.object({
+  regions: z.array(RegionSchema).min(1),
+});
+
+type RawRegion = z.infer<typeof RegionSchema>;
 
 export interface AllowedRegion {
   /** Region key used in the `site` cookie / `?site=` query param. E.g. `us`, `eu`, `ap1`. */
@@ -37,65 +61,92 @@ export interface AllowedRegion {
   exactDomains: string[];
 }
 
-interface RawAllowedRegion {
-  name: string;
-  value: string;
-  weight: number;
-  domain: string;
-  exact_domains?: string[];
+const file = RegionsFileSchema.parse(parseYaml(REGIONS_YAML_RAW));
+
+/**
+ * Every region must define every substitution key. A gap would render an
+ * empty hostname on a live page, so it fails the build instead. The union of
+ * all keys is the expected set — that way the check needs no hardcoded list
+ * and a genuinely new key just has to be added for all regions at once.
+ */
+function assertCompleteValues(regions: RawRegion[]): void {
+  const allKeys = new Set<string>();
+  for (const r of regions) {
+    for (const k of Object.keys(r.values)) allKeys.add(k);
+  }
+  const gaps: string[] = [];
+  for (const r of regions) {
+    for (const k of allKeys) {
+      if (!(k in r.values)) gaps.push(`${r.key}.${k}`);
+    }
+  }
+  if (gaps.length > 0) {
+    throw new Error(
+      `shared/regions.yaml: missing region values: ${gaps.join(', ')}. ` +
+        `Every region must define every key.`,
+    );
+  }
 }
 
-interface RegionsConfigShape {
-  allowedRegions: string[];
-  dd_datacenter: Record<string, string>;
-  dd_site: Record<string, string>;
-  dd_full_site: Record<string, string>;
-  [key: string]: unknown;
+function assertUniqueKeys(regions: RawRegion[]): void {
+  const seen = new Set<string>();
+  for (const r of regions) {
+    if (seen.has(r.key)) {
+      throw new Error(`shared/regions.yaml: duplicate region key "${r.key}".`);
+    }
+    seen.add(r.key);
+  }
 }
 
-const rc = regionsConfig as RegionsConfigShape;
+assertUniqueKeys(file.regions);
+assertCompleteValues(file.regions);
 
-let _allowedRegions: AllowedRegion[] | null = null;
+/** Regions sorted by `weight`, ascending. Sorted once at module load. */
+const REGIONS: RawRegion[] = [...file.regions].sort((a, b) => a.weight - b.weight);
 
-/** List of supported Datadog regions, sorted by Hugo's `weight` field. */
+const BY_KEY = new Map(REGIONS.map((r) => [r.key, r]));
+
+const ALLOWED_REGIONS: AllowedRegion[] = REGIONS.map((r) => ({
+  key: r.key,
+  label: r.label,
+  domain: r.domain,
+  weight: r.weight,
+  exactDomains: r.exact_domains,
+}));
+
+/** List of supported Datadog regions, sorted by `weight`. */
 export function getAllowedRegions(): AllowedRegion[] {
-  if (_allowedRegions) return _allowedRegions;
+  return ALLOWED_REGIONS;
+}
 
-  const parsed = parseYaml(PARAMS_YAML_RAW) as { allowedRegions?: RawAllowedRegion[] };
-  const list = parsed.allowedRegions ?? [];
-
-  _allowedRegions = list
-    .map((r) => ({
-      key: r.value,
-      label: r.name,
-      domain: r.domain,
-      weight: r.weight,
-      exactDomains: r.exact_domains ?? [],
-    }))
-    .sort((a, b) => a.weight - b.weight);
-
-  return _allowedRegions;
+/**
+ * Any per-region substitution value by key, e.g.
+ * `regionValue('eu', 'api_endpoint')`. Returns undefined for an unknown
+ * region or an unknown value key.
+ */
+export function regionValue(regionKey: string, valueKey: string): string | undefined {
+  return BY_KEY.get(regionKey)?.values[valueKey];
 }
 
 /** Datacenter label for a region key, e.g. `us` → `US1`. */
 export function datacenterLabel(key: string): string {
-  return rc.dd_datacenter?.[key] ?? key.toUpperCase();
+  return regionValue(key, 'dd_datacenter') ?? key.toUpperCase();
 }
 
 /** API-site base domain for a region key, e.g. `us` → `datadoghq.com`. */
 export function siteDomain(key: string): string | undefined {
-  return rc.dd_site?.[key];
+  return regionValue(key, 'dd_site');
 }
 
 /** App host for a region key, e.g. `us` → `app.datadoghq.com`. Used for referrer detection. */
 export function appHost(key: string): string | undefined {
-  return rc.dd_full_site?.[key];
+  return regionValue(key, 'dd_full_site');
 }
 
 /** Valid set of region keys, for input validation on cookies / query params. */
 export function isAllowedRegionKey(key: string | null | undefined): boolean {
   if (!key) return false;
-  return getAllowedRegions().some((r) => r.key === key);
+  return BY_KEY.has(key);
 }
 
 /** Fallback region when nothing else resolves. Matches Hugo's default. */
