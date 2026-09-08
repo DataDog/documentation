@@ -22,7 +22,7 @@ The [Customer Pricing][2] page lets partners set customer-specific rates that en
 
 To set customer pricing, you need:
 
-- A Datadog admin organization, part of the [Multi-Tenant Usage Metering and Billing][3] program. If you don't have one yet, see that page to learn more and request one.
+- A Datadog admin organization, which you can request through the [Multi-Tenant Usage Metering and Billing][3] program. 
 - The Billing Edit (`billing_edit`) permission. Users with only Billing Read (`billing_read`) can view saved or published customer rates, but cannot edit them.
 
 ## Set up customer pricing
