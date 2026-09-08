@@ -38,7 +38,7 @@ CMD ["ddtrace-run", "python", "app.py"]
 
 2. **serverless-init をインストールします**。
 
-   {{% serverless-init-install mode="in-container" cmd="\"ddtrace-run", "python", "path/to/your/python/app.py".py\"" %}}
+   {{% serverless-init-install mode="in-container" cmd="\"ddtrace-run\", \"python\", \"path/to/your/python/app.py\"" %}}
 
 3. **ログを設定します**。
 
