@@ -2,6 +2,10 @@
 React Native setup instructions.
 -->
 
+This page describes how to instrument your React Native applications with the Datadog React Native SDK.
+
+The React Native SDK supports [Real User Monitoring (RUM)](/real_user_monitoring/) and [Error Tracking](/error_tracking/frontend/mobile/reactnative/).
+
 {% stepper %}
 
 {% step title="Install the SDK" %}
@@ -44,23 +48,6 @@ buildscript {
 The minimum supported Android SDK version is API level 23. Make sure to set `minSdkVersion` to 23 (or higher) in your Android configuration.
 
 The Datadog React Native SDK requires you to have `compileSdkVersion = 31` or higher in the Android application setup, which implies that you should use Build Tools version 31 or higher, Android Gradle Plugin version 7, and Gradle version 7 or higher. To modify the versions, change the values in the `buildscript.ext` block of your application's top-level `build.gradle` file. Datadog recommends using a React Native version that's actively supported.
-
-{% /step %}
-
-{% step title="Specify application details in the UI" %}
-
-1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][7].
-2. Choose `react-native` as the application type.
-3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings.
-
-{% alert level="info" %}
-If you've purchased Error Tracking as a standalone product (without RUM), navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][8] instead.
-{% /alert %}
-
-For data security, you must use a client token. If you used only [Datadog API keys][9] to configure the `@datadog/mobile-react-native` library, they would be exposed client-side in the React Native application's code.
-
-For more information about setting up a client token, see the [Client Token documentation][10].
 
 {% /step %}
 
@@ -561,12 +548,12 @@ After the plugin is installed and configured, it automatically tracks interactio
 
 ### CodePush integration (optional)
 
-If you're deploying updates with [CodePush][11], see the [CodePush setup documentation][12] for additional configuration steps.
+If you're deploying updates with [CodePush][1], see the [CodePush setup documentation][2] for additional configuration steps.
 
-[7]: https://app.datadoghq.com/rum/application/create
-[8]: https://app.datadoghq.com/error-tracking/settings/setup/client/
-[9]: /account_management/api-app-keys/#api-keys
-[10]: /account_management/api-app-keys/#client-tokens
-[11]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/
-[12]: /real_user_monitoring/application_monitoring/react_native/setup/codepush
+## Next steps
 
+See [Enable the DD RUM module][3].
+
+[1]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/
+[2]: /real_user_monitoring/application_monitoring/react_native/setup/codepush
+[3]: /real_user_monitoring/setup/enable_rum/?platform=react_native
