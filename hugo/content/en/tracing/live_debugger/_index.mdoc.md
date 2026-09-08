@@ -58,17 +58,17 @@ Live Debugger provides:
 - **Dynamic logpoint placement** anywhere in your codebase, including in third-party libraries.
 - **Auto-expiring logpoints** that deactivate automatically after a configurable duration.
 - **Conditional data capture** based on user-defined expressions, so information is collected only when specific conditions are met.
-- **Built-in [sensitive data scrubbing][1]** to help prevent exposure of personal data, secrets, and credentials.
+- **Built-in sensitive data scrubbing** to help prevent exposure of personal data, secrets, and credentials.
 
 ## Requirements
 
 <!-- Java -->
 {% if equals($prog_lang, "java") %}
 
-- **[Datadog Java SDK][30]**, version 1.64.0 or higher strongly recommended (JDK 8 or higher); versions below 1.64.0 may result in unexpected errors and a degraded experience
+- [Datadog Java SDK][30], version 1.64.0 or higher strongly recommended (JDK 8 or higher); versions below 1.64.0 may result in unexpected errors and a degraded experience
   - Minimum for [in-app enablement](#enable-in-app): 1.48.0
   - Minimum for [manual enablement](#enable-with-environment-variables): 1.42.0
-- **[Datadog Agent][2]**, version 7.49.0 or higher
+- [Datadog Agent][2], version 7.49.0 or higher
 
 {% /if %}
 <!-- end Java -->
@@ -76,10 +76,10 @@ Live Debugger provides:
 <!-- Python -->
 {% if equals($prog_lang, "python") %}
 
-- **[Datadog Python SDK (`ddtrace`)][31]**, version 4.11.0 or higher strongly recommended; versions below 4.11.0 may result in unexpected errors and a degraded experience
+- [Datadog Python SDK (`ddtrace`)][31], version 4.11.0 or higher strongly recommended; versions below 4.11.0 may result in unexpected errors and a degraded experience
   - Minimum for [in-app enablement](#enable-in-app): 3.10.0
   - Minimum for [manual enablement](#enable-with-environment-variables): 2.9.0
-- **[Datadog Agent][2]**, version 7.49.0 or higher
+- [Datadog Agent][2], version 7.49.0 or higher
 
 {% /if %}
 <!-- end Python -->
@@ -87,10 +87,10 @@ Live Debugger provides:
 <!-- .NET -->
 {% if equals($prog_lang, "dot_net") %}
 
-- **[Datadog .NET SDK][32]**, version 3.46.0 or higher strongly recommended; versions below 3.46.0 may result in unexpected errors and a degraded experience
+- [Datadog .NET SDK][32], version 3.46.0 or higher strongly recommended; versions below 3.46.0 may result in unexpected errors and a degraded experience
   - Minimum for [in-app enablement](#enable-in-app): 3.29.0
   - Minimum for [manual enablement](#enable-with-environment-variables): 3.9.0
-- **[Datadog Agent][2]**, version 7.49.0 or higher
+- [Datadog Agent][2], version 7.49.0 or higher
 
 {% /if %}
 <!-- end .NET -->
@@ -98,11 +98,11 @@ Live Debugger provides:
 <!-- Node.js -->
 {% if equals($prog_lang, "node_js") %}
 
-- **[Datadog Node.js SDK (`dd-trace-js`)][33]**, version 5.109.0 or higher strongly recommended; versions below 5.109.0 may result in unexpected errors and a degraded experience
+- [Datadog Node.js SDK (`dd-trace-js`)][33], version 5.109.0 or higher strongly recommended; versions below 5.109.0 may result in unexpected errors and a degraded experience
   - Minimum for [in-app enablement](#enable-in-app): 5.84.0
   - Minimum for [manual enablement](#enable-with-environment-variables): 5.39.0
   - Source maps published with the deployed application if source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack)
-- **[Datadog Agent][2]**, version 7.49.0 or higher
+- [Datadog Agent][2], version 7.49.0 or higher
 
 {% /if %}
 <!-- end Node.js -->
@@ -110,11 +110,11 @@ Live Debugger provides:
 <!-- Ruby -->
 {% if equals($prog_lang, "ruby") %}
 
-- **[Datadog Ruby SDK (`ddtrace`)][34]**, minimum version 2.37.0; version 2.38.0 or higher strongly recommended; versions below 2.38.0 may result in unexpected errors and a degraded experience
+- [Datadog Ruby SDK (`ddtrace`)][34], minimum version 2.37.0; version 2.38.0 or higher strongly recommended; versions below 2.38.0 may result in unexpected errors and a degraded experience
 - **Ruby** 2.6 or higher (MRI/CRuby only; JRuby is not supported)
 - A Rack-based framework (Rails, Sinatra, or other Rack-compatible frameworks); background workers (such as Sidekiq or Resque) are not supported
 - `RAILS_ENV` or `RACK_ENV` set to `production`
-- **[Datadog Agent][2]**, version 7.49.0 or higher
+- [Datadog Agent][2], version 7.49.0 or higher
 
 {% /if %}
 <!-- end Ruby -->
@@ -122,8 +122,8 @@ Live Debugger provides:
 <!-- PHP -->
 {% if equals($prog_lang, "php") %}
 
-- **[Datadog PHP SDK (`dd-trace-php`)][35]**, minimum version 1.5.0; version 1.23.0 or higher strongly recommended; versions below 1.23.0 may result in unexpected errors and a degraded experience
-- **[Datadog Agent][2]**, version 7.49.0 or higher
+- [Datadog PHP SDK (`dd-trace-php`)][35], minimum version 1.5.0; version 1.23.0 or higher strongly recommended; versions below 1.23.0 may result in unexpected errors and a degraded experience
+- [Datadog Agent][2], version 7.49.0 or higher
 
 {% /if %}
 <!-- end PHP -->
@@ -131,9 +131,9 @@ Live Debugger provides:
 <!-- Go -->
 {% if equals($prog_lang, "go") %}
 
-- **[Datadog Go SDK][36]**, version 2.9.0 or higher strongly recommended (or 1.74.6 or higher on the v1 line); versions below 2.9.0 may result in unexpected errors and a degraded experience
+- [Datadog Go SDK][36], version 2.9.0 or higher strongly recommended (or 1.74.6 or higher on the v1 line); versions below 2.9.0 may result in unexpected errors and a degraded experience
   - Minimum for [in-app enablement](#enable-in-app): 2.6.0
-- **[Datadog Agent][2]**, version 7.73.0 or higher, running on the same host as your application
+- [Datadog Agent][2], version 7.73.0 or higher, running on the same host as your application
 - **Linux kernel** 5.17 or higher
 
 {% /if %}
@@ -141,9 +141,9 @@ Live Debugger provides:
 
 ### Datadog configuration
 
-- **[Unified Service Tagging][27]** configured with `service`, `env`, and `version` tags on your deployment
-- **[Remote Configuration][4]** enabled in the Agent
-- (Recommended) **[Source Code Integration][28]**
+- [Unified Service Tagging][27] configured with `service`, `env`, and `version` tags on your deployment
+- [Remote Configuration][4] enabled in the Agent
+- (Recommended) [Source Code Integration][28]
 
 ### Permissions
 
@@ -170,12 +170,14 @@ Use one of the following methods to configure the Agent for Live Debugger:
 
 {% tab label="YAML" %}
 
-Update `system-probe.yaml` (located alongside `datadog.yaml`) with the following. For more information, see [Agent configuration files][37].
+Update `system-probe.yaml` (located alongside `datadog.yaml`) with the following:
 
 ```yaml
 dynamic_instrumentation:
   enabled: true
 ```
+
+For more information, see [Agent configuration files][37].
 
 {% /tab %}
 
@@ -221,7 +223,7 @@ Enable Live Debugger in-app in one of two ways:
 
 #### Enable with environment variables {% #enable-with-environment-variables %}
 
-{% if includes($prog_lang, ["java", "python", "dot_net", "node_js"]) %}
+{% if includes($prog_lang, ["java", "python", "dot_net", "node_js", "go"]) %}
 
 Set the following environment variables if your SDK is below the [in-app minimum](#requirements), or if you want to manage enablement outside the Datadog UI.
 
@@ -409,8 +411,8 @@ Bits Live Debugger is in Preview. [Learn more about Bits Live Debugger and reque
 
 The following constraints apply to Live Debugger usage and configuration:
 
-- **Configuration scope:** Live Debugger and Dynamic Instrumentation are enabled or disabled together for the same service and environment.
-- **Rate limits:**
+- **Configuration scope**: Live Debugger and Dynamic Instrumentation are enabled or disabled together for the same service and environment.
+- **Rate limits**:
    - Logpoints with variable capture: Limited to 1 execution per second.
    - Logpoints without variable capture: Limited to 5000 executions per second, per service instance.
 
