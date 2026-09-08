@@ -13,10 +13,6 @@ further_reading:
   text: "Proxy Browser RUM Data"
 ---
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog Feature Flags are not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 The Datadog Feature Flag SDK makes two types of outbound network requests from your application:
