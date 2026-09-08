@@ -968,7 +968,7 @@ Tab components have the following properties.
 
 #### Tabs
 
-A list of tab views. Use the ({{< ui >}}+{{< /ui >}}) to add additional views.
+A list of tab views. Use the ({{< ui >}}\+{{< /ui >}}) to add additional views.
 
 
 #### Style

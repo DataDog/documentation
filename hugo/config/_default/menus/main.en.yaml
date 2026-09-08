@@ -1610,6 +1610,11 @@ menu:
       identifier: bits_data_analysis
       parent: bits_ai
       weight: 8
+    - name: Skills Library
+      url: bits_ai/skills_library
+      identifier: bits_ai_skills_library
+      parent: bits_ai
+      weight: 9
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -5644,6 +5649,11 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_prompt_tracking
       weight: 311
+    - name: Multimodal
+      url: llm_observability/instrument/multimodal
+      parent: llm_obs_instrumentation
+      identifier: llm_obs_multimodal
+      weight: 312
     - name: Investigate
       url: llm_observability/investigate/
       parent: llm_obs
@@ -9315,6 +9325,16 @@ menu:
       parent: journey_monitoring
       identifier: journey_monitoring_uptime
       weight: 3
+    - name: Roles and Permissions
+      url: journey_monitoring/roles_and_permissions/
+      parent: journey_monitoring
+      identifier: journey_monitoring_roles_and_permissions
+      weight: 4
+    - name: Guides
+      url: journey_monitoring/guide/
+      parent: journey_monitoring
+      identifier: journey_monitoring_guides
+      weight: 5
     - name: Real User Monitoring
       url: real_user_monitoring/
       pre: rum
