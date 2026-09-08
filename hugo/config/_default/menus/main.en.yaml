@@ -9306,6 +9306,11 @@ menu:
       identifier: rum
       parent: digital_experience_heading
       weight: 30000
+    - name: RUM Terms and Concepts
+      url: real_user_monitoring/rum_terms_and_concepts/
+      parent: rum
+      identifier: rum_terms_and_concepts
+      weight: 0
     - name: Setup RUM
       url: real_user_monitoring/setup/
       parent: rum
