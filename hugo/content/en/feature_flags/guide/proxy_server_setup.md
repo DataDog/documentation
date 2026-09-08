@@ -89,9 +89,9 @@ After deploying, set the SDK options as follows:
 
 ### Browser event relay
 
-The Browser SDK appends a `ddforward` query parameter containing the URL-encoded target path. Standard NGINX cannot decode this parameter in a `proxy_pass` directive. Use [OpenResty][2], which extends NGINX with Lua scripting, to handle browser events.
+The Browser SDK appends a `ddforward` query parameter containing the URL-encoded target path. Standard NGINX cannot decode this parameter in a `proxy_pass` directive. Use [OpenResty][1], which extends NGINX with Lua scripting, to handle browser events.
 
-Add this location block to the OpenResty server configuration alongside the standard NGINX blocks above. The Lua code requires the [`lua-resty-http`][3] library.
+Add this location block to the OpenResty server configuration alongside the standard NGINX blocks above. The Lua code requires the [`lua-resty-http`][2] library.
 
 {{< code-block lang="nginx" filename="nginx.conf" >}}
     # Browser SDK event relay (OpenResty + lua-resty-http required)
@@ -146,6 +146,9 @@ DatadogBrowserFlagging.init({
     proxy: 'https://proxy.example.com/intake',
 });
 {{< /code-block >}}
+
+[1]: https://openresty.org/
+[2]: https://github.com/ledgetech/lua-resty-http
 
 {{% /tab %}}
 
@@ -337,7 +340,3 @@ After deploying, set the SDK options as follows (replace `proxy.example.com` wit
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /getting_started/site/
-[2]: https://openresty.org/
-[3]: https://github.com/ledgetech/lua-resty-http
