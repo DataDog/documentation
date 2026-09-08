@@ -1144,6 +1144,16 @@ After this has been set up, write an [authentication-specific vault policy][3004
 
 ##### Kubernetes auth method instructions
 
+**Prerequisite**: Vault's `kubernetes` auth method validates the Agent's ServiceAccount token by calling the Kubernetes `TokenReview` API. The identity Vault uses for this call (its own ServiceAccount by default, or the identity set with `token_reviewer_jwt`) must have the `system:auth-delegator` ClusterRole bound to it:
+
+```sh
+kubectl create clusterrolebinding vault-tokenreview-binding \
+    --clusterrole=system:auth-delegator \
+    --serviceaccount=<VAULT_NAMESPACE>:<VAULT_SERVICE_ACCOUNT>
+```
+
+This is already configured if you installed Vault with the official [Vault Helm chart][3006].
+
 To authenticate using the Agent pod's Kubernetes ServiceAccount token (the method used by the Helm and Operator configuration examples), enable the `kubernetes` auth method in Vault:
 
 ```sh
@@ -1251,7 +1261,7 @@ secret_backend_config:
 
 {{% tab "Helm" %}}
 
-Configure the Datadog Agent to use HashiCorp Vault to resolve secrets in Helm using the following configuration. This uses Vault's `kubernetes` auth method, which relies on the Agent's automatically mounted ServiceAccount token. No extra Kubernetes RBAC or annotations are required.
+Configure the Datadog Agent to use HashiCorp Vault to resolve secrets in Helm using the following configuration. This uses Vault's `kubernetes` auth method, which relies on the Agent's automatically mounted ServiceAccount token, so no extra Kubernetes RBAC or annotations are required for the Agent. Vault itself needs RBAC permissions to validate that token; see the [Kubernetes auth method instructions](#kubernetes-auth-method-instructions) above.
 
 **Note**: In your Vault server, enable the `kubernetes` auth method and bind `vault_kubernetes_role` to the Agent's ServiceAccount name and namespace. See the [Kubernetes auth method instructions](#kubernetes-auth-method-instructions) above and the official [HashiCorp Vault Kubernetes auth method documentation][3005] for more information.
 
@@ -1328,7 +1338,7 @@ clusterChecksRunner:
 
 {{% tab "Operator" %}}
 
-Configure the Datadog Agent to use HashiCorp Vault to resolve secrets with the Datadog Operator using the following configuration. This uses Vault's `kubernetes` auth method, which relies on the Agent's automatically mounted ServiceAccount token. No extra Kubernetes RBAC or annotations are required.
+Configure the Datadog Agent to use HashiCorp Vault to resolve secrets with the Datadog Operator using the following configuration. This uses Vault's `kubernetes` auth method, which relies on the Agent's automatically mounted ServiceAccount token, so no extra Kubernetes RBAC or annotations are required for the Agent. Vault itself needs RBAC permissions to validate that token; see the [Kubernetes auth method instructions](#kubernetes-auth-method-instructions) above.
 
 **Note**: The native `secretBackend` fields require Datadog Operator v1.29.0+. In your Vault server, enable the `kubernetes` auth method and bind `vault_kubernetes_role` to the Agent's ServiceAccount name and namespace. See the [Kubernetes auth method instructions](#kubernetes-auth-method-instructions) above and the official [HashiCorp Vault Kubernetes auth method documentation][3005] for more information.
 
@@ -2739,6 +2749,7 @@ instances:
 [3003]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 [3004]: https://developer.hashicorp.com/vault/docs/auth/aws#iam-authentication-inferences
 [3005]: https://developer.hashicorp.com/vault/docs/auth/kubernetes
+[3006]: https://developer.hashicorp.com/vault/docs/platform/k8s/helm
 
 <!-- File Backend Links (JSON/YAML) -->
 [4001]: https://en.wikipedia.org/wiki/JSON
