@@ -47,15 +47,13 @@ By proactively scanning for sensitive data, Agent Observability ensures that con
 
 ## Data retention
 
-Retention periods in Agent Observability depend on the type of data and on your plan. Traces from your instrumented applications follow the span retention period in your plan, while experiment definitions, datasets, and prompts have their own periods.
+Retention periods in Agent Observability depend on the type of data and on your plan. Traces from your instrumented applications follow the span retention period in your plan, while experiments, datasets, and prompts have their own periods.
 
 | Data                                         | Retention period                                                                          |
 | -------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | Traces and spans                             | 15 days; 30, 60, or 90 days with a retention add-on                                       |
-| Experiment traces                            | On-demand plans: 15 days. Committed plans: 90 days. With a retention add-on: 6, 9, or 12 months    |
-| Experiment definitions and aggregate results | 90 days from creation                                                                     |
-| Annotated traces, spans, and sessions        | 90 days from the time of annotation, or your span retention period if that is longer      |
-| Annotation labels                            | The same period as the object they annotate                                               |
+| Experiments                                  | On-demand plans: 15 days. Committed plans: 90 days. With a retention add-on: 6, 9, or 12 months    |
+| Annotated interactions and labels            | 90 days from the time of annotation, or your span retention period if that is longer      |
 | Dataset records                              | Current version: 3 years. Previous versions: 90 days, reset when used                     |
 | Prompts in the prompt registry               | 3 years, extended each time the prompt is pulled                                          |
 | `ml_obs.*` metrics                           | 15 months                                                                                 |
@@ -68,24 +66,20 @@ A retention add-on extends this to **30, 60, or 90 days**. Add-ons are not avail
 
 Retention applies to the raw spans you query in the Trace Explorer. Metrics derived from those spans are retained separately, for longer. See [Metrics](#metrics).
 
-### Experiment traces
+### Experiments
 
-On committed plans, the traces produced by [experiment][3] runs are retained longer than production traces.
+On committed plans, [experiments][3] are retained longer than production traces.
 
-| Plan                                | Experiment trace retention |
-| ----------------------------------- | -------------------------- |
-| Free tier                           | 15 days                    |
-| On-demand                           | 15 days                    |
-| Committed (monthly or annual)       | 90 days                    |
-| 30-day retention add-on             | 6 months                   |
-| 60-day retention add-on             | 9 months                   |
-| 90-day retention add-on             | 12 months                  |
+| Plan                                | Experiment retention |
+| ----------------------------------- | -------------------- |
+| Free tier                           | 15 days              |
+| On-demand                           | 15 days              |
+| Committed (monthly or annual)       | 90 days              |
+| 30-day retention add-on             | 6 months             |
+| 60-day retention add-on             | 9 months             |
+| 90-day retention add-on             | 12 months            |
 
 If your organization has a custom contract, your retention periods may not match this table. Contact your Datadog account representative to confirm your periods.
-
-### Experiment definitions
-
-The experiment itself — its name, configuration, and aggregate results — is retained for **90 days** from the time it is created. Unlike experiment traces, this period is the same on every plan and does not extend with a retention add-on. Export any experiment results you need to keep beyond 90 days.
 
 ### Changing your retention period
 
@@ -99,15 +93,15 @@ For example, if you are on the default 15-day retention and add a 60-day add-on 
 
 When you move to a shorter retention period, spans older than the new period are no longer available.
 
-### Annotated objects
+### Annotated interactions
 
-Annotating an object extends its retention. When you apply an annotation label or note to a trace, span, or session — whether directly or through an [annotation queue][2] — Datadog retains the annotated object for **90 days** from the time of annotation, even if your span retention period is shorter. Annotating a span retains its whole parent trace, and annotating a trace that belongs to a session retains the whole session.
+Annotating an interaction extends its retention. When you apply an annotation label or note to a trace, span, or session — whether directly or through an [annotation queue][2] — Datadog retains the annotated interaction for **90 days** from the time of annotation, even if your span retention period is shorter. Annotating a span retains its whole parent trace, and annotating a trace that belongs to a session retains the whole session.
 
-Annotation labels are retained for the same period as the objects they annotate.
+Annotation labels are retained for the same period as the interactions they annotate.
 
-Extending retention by annotating an object does not incur an additional charge.
+Extending retention by annotating an interaction does not incur an additional charge.
 
-Adding a note that is not attached to a trace, span, or session does not extend any object's retention.
+Adding a note that is not attached to a trace, span, or session does not extend the retention of any of them.
 
 ### Dataset records
 
