@@ -1307,11 +1307,11 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `input_data`
 : optional - _JSON serializable type or list of dictionaries_
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"content": "...", "role": "...", "tool_calls": ..., "tool_results": ..., "audio_parts": ..., "image_parts": ...}`, where `"tool_calls"` are an optional list of tool call dictionaries with required keys: `"name"`, `"arguments"`, and optional keys: `"tool_id"`, `"type"`, and `"tool_results"` are an optional list of tool result dictionaries with required key: `"result"`, and optional keys: `"name"`, `"tool_id"`, `"type"` for function calling scenarios. `"audio_parts"` and `"image_parts"` are optional lists of media dictionaries for multimodal spans, each with a required `"mime_type"` and exactly one of `"content"` (base64-encoded media, carried inline) or `"attachment_key"`. **Note**: Embedding spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"content": "...", "role": "...", "tool_calls": ..., "tool_results": ..., "audio_parts": ..., "image_parts": ...}`, where `"tool_calls"` are an optional list of tool call dictionaries with required keys: `"name"`, `"arguments"`, and optional keys: `"tool_id"`, `"type"`, and `"tool_results"` are an optional list of tool result dictionaries with required key: `"result"`, and optional keys: `"name"`, `"tool_id"`, `"type"` for function calling scenarios. `"audio_parts"` and `"image_parts"` are optional lists of media dictionaries for multimodal spans, each with a required `"mime_type"` and `"content"` (base64-encoded media, carried inline). **Note**: Embedding spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "..."}`.
 
 `output_data`
 : optional - _JSON serializable type or list of dictionaries_
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"content": "...", "role": "...", "tool_calls": ..., "audio_parts": ..., "image_parts": ...}`, where `"tool_calls"` are an optional list of tool call dictionaries with required keys: `"name"`, `"arguments"`, and optional keys: `"tool_id"`, `"type"` for function calling scenarios. `"audio_parts"` and `"image_parts"` are optional lists of media dictionaries for multimodal spans, each with a required `"mime_type"` and exactly one of `"content"` (base64-encoded media, carried inline) or `"attachment_key"`. **Note**: Retrieval spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"content": "...", "role": "...", "tool_calls": ..., "audio_parts": ..., "image_parts": ...}`, where `"tool_calls"` are an optional list of tool call dictionaries with required keys: `"name"`, `"arguments"`, and optional keys: `"tool_id"`, `"type"` for function calling scenarios. `"audio_parts"` and `"image_parts"` are optional lists of media dictionaries for multimodal spans, each with a required `"mime_type"` and `"content"` (base64-encoded media, carried inline). **Note**: Retrieval spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
 
 `tool_definitions`
 : optional - _list of dictionaries_
@@ -1435,11 +1435,7 @@ def describe_image(image_bytes):
 
 {{< /code-block >}}
 
-Messages annotated with `audio_parts` or `image_parts` render as inline audio players and images in the trace view:
-
-{{< img src="llm_observability/instrumentation/audio_example.png" alt="An LLM span in the Agent Observability trace view. The input message from the USER shows an inline audio player with the transcript 'Hey, how are you?', and the output ASSISTANT message shows a 'Click to play audio' control with the transcript 'Hey! I'm doing great, thanks for asking. How about you?'." style="width:100%;" >}}
-
-{{< img src="llm_observability/instrumentation/image_example.png" alt="An LLM span in the Agent Observability trace view. The input USER message shows the prompt 'What is in this image?' with an inline photo of a black puppy, and the output ASSISTANT message describes it as a black Labrador Retriever puppy on a wooden surface." style="width:100%;" >}}
+Messages annotated with `audio_parts` or `image_parts` render as inline audio players and images in the trace view. For rendered examples, supported formats, size limits, and the integrations that populate these fields automatically, see [Multimodal Support](/llm_observability/instrument/multimodal/).
 
 {{% /tab %}}
 
@@ -1461,11 +1457,11 @@ The `annotationOptions` object can contain the following:
 
 `inputData`
 : optional - _JSON serializable type or list of objects_
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{role: "...", content: "...", audioParts: [...], imageParts: [...]}` (for LLM spans). `audioParts` and `imageParts` are optional lists of media objects for multimodal spans, each with a required `mimeType` and exactly one of `content` (base64-encoded media, carried inline) or `attachmentKey`. **Note**: Embedding spans are a special case and require a string or an object (or a list of objects) with this format: `{text: "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{role: "...", content: "...", audioParts: [...], imageParts: [...]}` (for LLM spans). `audioParts` and `imageParts` are optional lists of media objects for multimodal spans, each with a required `mimeType` and `content` (base64-encoded media, carried inline). **Note**: Embedding spans are a special case and require a string or an object (or a list of objects) with this format: `{text: "..."}`.
 
 `outputData`
 : optional - _JSON serializable type or list of objects_
-<br />Either a JSON serializable type (for non-LLM spans) or a list of objects with this format: `{role: "...", content: "...", audioParts: [...], imageParts: [...]}` (for LLM spans). `audioParts` and `imageParts` are optional lists of media objects for multimodal spans, each with a required `mimeType` and exactly one of `content` (base64-encoded media, carried inline) or `attachmentKey`. **Note**: Retrieval spans are a special case and require a string or an object (or a list of objects) with this format: `{text: "...", name: "...", score: number, id: "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of objects with this format: `{role: "...", content: "...", audioParts: [...], imageParts: [...]}` (for LLM spans). `audioParts` and `imageParts` are optional lists of media objects for multimodal spans, each with a required `mimeType` and `content` (base64-encoded media, carried inline). **Note**: Retrieval spans are a special case and require a string or an object (or a list of objects) with this format: `{text: "...", name: "...", score: number, id: "..."}`.
 
 `metadata`
 : optional - _object_
@@ -1576,13 +1572,9 @@ describeImage = llmobs.wrap({ kind: 'llm', modelName: 'gpt-4o', modelProvider: '
 
 {{< /code-block >}}
 
-Messages annotated with `audioParts` or `imageParts` render as inline audio players and images in the trace view:
+Messages annotated with `audioParts` or `imageParts` render as inline audio players and images in the trace view. For rendered examples, supported formats, size limits, and the integrations that populate these fields automatically, see [Multimodal Support](/llm_observability/instrument/multimodal/).
 
-{{< img src="llm_observability/instrumentation/audio_example.png" alt="An LLM span in the Agent Observability trace view. The input message from the USER shows an inline audio player with the transcript 'Hey, how are you?', and the output ASSISTANT message shows a 'Click to play audio' control with the transcript 'Hey! I'm doing great, thanks for asking. How about you?'." style="width:100%;" >}}
-
-{{< img src="llm_observability/instrumentation/image_example.png" alt="An LLM span in the Agent Observability trace view. The input USER message shows the prompt 'What is in this image?' with an inline photo of a black puppy, and the output ASSISTANT message describes it as a black Labrador Retriever puppy on a wooden surface." style="width:100%;" >}}
-
-For OpenAI audio chat completions, `audioParts` are also captured automatically by [Datadog's LLM integrations](/llm_observability/instrument/auto_instrumentation/)—no manual annotation required. Unlike `audioParts`, `imageParts` are not currently captured automatically and must be annotated manually; automatic capture is planned for a future release.
+For OpenAI audio chat completions, `audioParts` are also captured automatically by [Datadog's LLM integrations](/llm_observability/instrument/auto_instrumentation/), with no manual annotation required. The Node.js SDK does not capture `imageParts` automatically. Annotate them as shown above.
 
 {{% /tab %}}
 {{% tab "Java" %}}
