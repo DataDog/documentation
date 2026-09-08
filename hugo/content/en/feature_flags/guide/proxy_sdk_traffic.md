@@ -166,7 +166,7 @@ await DdFlags.enable({
 
 Your proxy must forward exposure requests to the corresponding Datadog intake endpoint for your [Datadog site][1]; for example, for the US1 site use `https://api.datadoghq.com/api/v2/exposures`.
 
-**Note**: The React Native SDK does not expose a `customEvaluationEndpoint` option. Evaluation events are sent through the underlying native Android or iOS SDK and cannot be routed through a custom proxy endpoint.
+<div class="alert alert-info">The React Native SDK does not expose a <code>customEvaluationEndpoint</code> option. Evaluation events are sent through the underlying native Android or iOS SDK and cannot be routed through a custom proxy endpoint.</div>
 
 [1]: /getting_started/site/
 
@@ -230,9 +230,10 @@ https://browser-intake-datadoghq.com/api/v2/exposures?ddsource=browser...
 
 The intake origin varies by [Datadog site][1]. For example, for `datadoghq.eu` it is `https://browser-intake-datadoghq.eu`. Forward the POST body unchanged and add an `X-Forwarded-For` header with the client IP for accurate geolocation. Remove any sensitive headers such as `cookie` before forwarding.
 
-The `proxy` option also accepts a function that receives the decoded `path` and `parameters` and returns the full proxy URL. See [Proxy Browser RUM Data](/real_user_monitoring/guide/proxy-rum-data/) for the full function signature.
+The `proxy` option also accepts a function that receives the decoded `path` and `parameters` and returns the full proxy URL. See [Proxy Browser RUM Data][2] for the full function signature.
 
 [1]: /getting_started/site/
+[2]: /real_user_monitoring/guide/proxy-rum-data/
 
 {{% /tab %}}
 

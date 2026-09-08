@@ -226,7 +226,7 @@ After deploying, configure a custom domain for your Worker (for example, `proxy.
 
 {{% tab "Next.js (Vercel)" %}}
 
-Next.js API routes work as a relay proxy when deployed on Vercel or any Node.js hosting platform.
+The Next.js API routes work as a relay proxy when deployed on Vercel or any Node.js hosting platform.
 
 Create three API routes: one for flag configuration, one for mobile events, and one for browser events.
 
