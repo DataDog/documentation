@@ -1,4 +1,6 @@
 ---
+description: Custom Processor에서 Vector Remap Language (VRL)를 사용하여 로그, 메트릭 또는 추적을 수정하고
+  보강하는 방법을 알아보십시오.
 disable_toc: false
 further_reading:
 - link: /observability_pipelines/guide/remap_reserved_attributes/
