@@ -21,10 +21,10 @@ If you don't see the BYOC Logs entry in the Logs menu, contact your Datadog acco
 
 ### Cluster ID
 
-Set `config.cluster_id` in the BYOC Logs Helm values to a meaningful, stable name that identifies the cluster in Datadog. The cluster ID forms the cluster name segment of each BYOC Logs index name:
+Set `config.cluster_id` in the BYOC Logs Helm values to a meaningful, stable identifier for the cluster. The cluster ID forms part of each BYOC Logs index name:
 
 ```
-byoc--<CLUSTER_NAME>--<INDEX_NAME>
+byoc--<CLUSTER_ID>--<INDEX_NAME>
 ```
 
 These index names appear under {{< ui >}}BYOC INDEXES{{< /ui >}} in Log Explorer and can be used in monitor and dashboard queries.
