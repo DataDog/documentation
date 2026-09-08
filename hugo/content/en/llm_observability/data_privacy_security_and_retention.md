@@ -101,8 +101,6 @@ Annotation labels are retained for the same period as the interactions they anno
 
 Extending retention by annotating an interaction does not incur an additional charge.
 
-Adding a note that is not attached to a trace, span, or session does not extend the retention of any of them.
-
 ### Dataset records
 
 Records in the current version of a [dataset][4] are retained for **3 years**, regardless of your span retention period.
