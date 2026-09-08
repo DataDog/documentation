@@ -519,7 +519,7 @@ datadogLogs.init({
 
 Initialize Browser Logs before loading any WASM modules. The plugin observes modules created with the browser's `WebAssembly` APIs and adds their URLs and build IDs to errors that contain WASM stack frames.
 
-Set `forwardErrorsToLogs` to `true` to forward unhandled WASM errors automatically. When logging a handled WASM error, pass its `Error` object as the logger's third argument, as shown in the examples above.
+Set `forwardErrorsToLogs` to `true` to forward unhandled WASM errors automatically. When logging a handled WASM error, pass its `Error` object as the third argument to `logger.error()`, as shown in [Error tracking](#error-tracking).
 
 Then, [upload WebAssembly symbols][14] to symbolicate the errors.
 

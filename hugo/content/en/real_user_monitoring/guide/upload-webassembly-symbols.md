@@ -26,7 +26,7 @@ A single error can contain both JavaScript and WASM frames. Upload [JavaScript s
 
 ## Prerequisites
 
-You need:
+Before uploading symbols, make sure you have:
 
 - A browser application configured to collect WASM module metadata with [RUM][2], [Browser Logs][3], or both.
 - A `.wasm` symbol file with embedded DWARF debug sections and a `build_id` custom section.
@@ -45,6 +45,8 @@ For example, with Emscripten:
 emcc -g -Wl,--build-id <SOURCES> -o <OUTPUT>.js
 ```
 
+This command produces `<OUTPUT>.js`, the JavaScript loader, and `<OUTPUT>.wasm`, the WebAssembly binary containing the embedded DWARF information and `build_id` custom section.
+
 You can inspect the generated module with `wasm-objdump`:
 
 ```shell
@@ -59,7 +61,7 @@ Keep the symbol file as a build artifact so you can upload it from your CI pipel
 Install the Datadog CLI and configure your Datadog API key and site:
 
 ```shell
-npm install --save-dev @datadog/datadog-ci@latest
+npm install --save-dev @datadog/datadog-ci
 export DATADOG_API_KEY=<DATADOG_API_KEY>
 export DATADOG_SITE={{< region-param key="dd_site" >}}
 ```

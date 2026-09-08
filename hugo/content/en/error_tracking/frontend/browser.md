@@ -164,7 +164,7 @@ window.DD_RUM.init({
 
 Deploy the changes to your application. After your deployment is live, Datadog collects events from your users' browsers.
 
-### Step 5 - Upload source maps and WASM symbols (optional but recommended)
+### Step 5 - Upload source maps and WebAssembly symbols (optional but recommended)
 
 Upload your JavaScript source maps to access unminified stack traces. See the [source map upload guide][17].
 
