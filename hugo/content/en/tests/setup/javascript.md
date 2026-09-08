@@ -708,6 +708,12 @@ To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` envi
 
 ### Upload failed test videos
 
+When enabled, Test Optimization uploads videos that Playwright records for failed tests. View uploaded videos in the {{< ui >}}Videos{{< /ui >}} tab of the Test Optimization test details page. Select a video to open it in the video player.
+
+{{< img src="continuous_integration/tests/setup/playwright-failure-video-videos-tab.png" alt="A Playwright failed test video displayed in the Videos tab of the Test Optimization test details page." style="width:100%;" >}}
+
+{{< img src="continuous_integration/tests/setup/playwright-failure-video-player.png" alt="The video player displaying a Playwright failed test video." style="width:100%;" >}}
+
 To upload videos from failed tests, set the `DD_TEST_FAILURE_VIDEOS_ENABLED` environment variable to `1`. In your Playwright configuration, set [`video`][4] under `use` to `'on'`, `'retain-on-failure'`, or `'on-first-retry'`.
 
 [1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.116.0
