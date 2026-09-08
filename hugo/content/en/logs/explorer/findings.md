@@ -25,83 +25,83 @@ Findings for Log Explorer is in Preview. Use this form to submit your request.
 
 Findings helps you capture, organize, and reuse important context during log investigations in [Log Explorer][1].
 
-With Findings, you can save log events, visualizations, and queries to a canvas with the **Add a finding** button or a keyboard shortcut while investigating. Each finding stores the context it was captured in. You can return to it or branch into new questions without losing track of earlier observations or investigative paths. Findings persist across page reloads and browser sessions until you delete them.
+With Findings, you can save log events, visualizations, and queries with the **Add Finding** button or the keyboard shortcut <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd> while investigating. Go back to prior findings by double-clicking them or using Open in Explorer. Branch into new questions without losing track of earlier observations or investigative paths. 
 
-Use Findings to collect possible evidence, compare results, and build context as your investigation evolves. Select findings to use as context for [Bits AI][2] questions, or send them to a [Notebook][3] to share with others.
+Use Findings to checkpoint a useful base query to come back to, collect possible evidence, compare results, and build context as your investigation evolves. Select findings to use as context to [Ask Bits][2] questions, or send them to a [Notebook][3] to share with others.
+
+Findings persist across page reloads and browser sessions until you delete them.
 
 {{< img src="logs/explorer/findings_demo.mp4" alt="Findings demo in Log Explorer" video=true style="width:100%;" >}}
 
 ## Findings panel
 
-Findings lives in the side panel on the left of Log Explorer, next to your saved views. To open it:
+Findings lives in the side panel on the left of Log Explorer. To open it:
 
 1. Navigate to [Log Explorer][1].
-2. Click {{< ui >}}Views{{< /ui >}} in the upper left corner to open the side panel.
-3. Click the **Findings** tab. The tab shows how many findings you have.
+2. Click the **Findings** tab on the top left.
 
-The panel contains the canvas, the workspace where each finding appears as a card. The canvas is where you work with findings: arrange them, reopen them in Log Explorer, and select them to send elsewhere. It keeps its contents and layout across page reloads and browser sessions.
-
-To dock the panel next to your log results, click {{< ui >}}Pin{{< /ui >}}. To collapse it, click {{< ui >}}Hide{{< /ui >}}.
-
-Findings includes a walkthrough of the canvas that you can reopen at any time.
-<!-- Which control opens the walkthrough, and where does it live? Naming it here would make this step actionable. -->
-
+This space is where you work with findings: arrange them, reopen them in Log Explorer, and select them to send elsewhere. It keeps findings and their layout across page reloads and browser sessions
 
 ## Capture a finding
 
-Add a finding from anywhere in Log Explorer that shows results. Datadog names each finding after what you captured, and records the query and time range it came from.
+Add a finding from anywhere in Log Explorer by pressing <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>. This will capture the query and page to return to and the absolute time range it came from. You can rename the default title to identify what you captured with the Edit button on the top right of the finding card.
+
+You can also add Notes to each finding at the bottom of the finding card.
 
 ### Queries and visualizations
 
-In the toolbar above your results, click the {{< ui >}}Add a finding{{< /ui >}} icon, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>. You can also click {{< ui >}}Add current page as finding{{< /ui >}} in the Findings panel.
+In the toolbar above your results, click the {{< ui >}}Add a finding{{< /ui >}} icon, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>. You can also click {{< ui >}}Add current page as a finding{{< /ui >}} in the Findings panel.
 
-The finding stores your search query, time range, and [visualization][4], including any group-by and aggregation you configured. Capture the same query as a list and as a timeseries to keep both views side by side.
+The finding stores your search query, time range, and [visualization][4], including any group-by and aggregation you configured. Capture the same query as a list, a timeseries, or other visualization.
 
 ### Individual log events
 
-Click a log event in your results to open the [log side panel][5]. Hover over the **Log Message** section and click the {{< ui >}}Add a finding{{< /ui >}} icon, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>.
+Click a log event in your results to open the [log side panel][5]. Hover over the **Log Message** section and click the {{< ui >}}Add Finding{{< /ui >}} button, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>. This will capture thee whole log event side panel to return to later
 
-### Specific text in a log message
+Capturing the log event will also capture the query you got the log side panel from. When you return to the log side panel finding, it will return you to the log side panel and the corresponding query in the background.
 
-To capture part of a log message, such as an error string or an identifier, select the text in the **Log Message** section and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>. The finding stores the text you selected instead of the whole event.
-<!-- Is the keyboard shortcut the only way to capture selected text, or does a button appear on selection? -->
+### Specific text in a log message or attributes
 
+To capture part of a log message, select the text in the **Log Message** section and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>, or use the context menu option to {{< ui >}}Add Finding{{< /ui >}} that pops up with the selected text. 
 
-## Organize the canvas
+To capture attribute values, select the text and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>.
 
-Hover over a finding to rename it, and drag it to move or resize it. Datadog saves the layout you build, so the canvas looks the same the next time you open the panel.
-
-To group findings by the query they came from, click the auto-organize icon on the left of the canvas. Moving, resizing, or deleting a finding resets the grouping.
-<!-- A screenshot of the canvas controls would make the auto-organize icon findable. Add one alongside the GA video. -->
-
-The controls on the left of the canvas also zoom in and out, fit the canvas to your findings, and open a full-screen view. The full-screen view gives you the same controls with more room, and you can drag the background to pan across it.
-
-## Delete findings
-
-To delete one finding, hover over it and use the delete control on the card. To delete several at once, select them and press <kbd>Delete</kbd>. To select every finding first, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>A</kbd>.
-<!-- Does a finding card have a delete control? Hovering a card shows Open in Explorer and rename only. Confirm how to delete one finding with the mouse. -->
-
-The clear icon in the Findings panel deletes findings; it does not clear your selection. It removes the findings you have selected, or every finding when nothing is selected.
-<!-- Confirm the clear icon deletes rather than deselects, and whether it warns before emptying a full canvas. -->
-
-Deleting is not permanent. A toast appears with an {{< ui >}}Undo{{< /ui >}} option, and <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Z</kbd> restores what you removed. Undo covers your last ten actions on the canvas.
-<!-- How long does a deleted finding stay recoverable? Confirm whether undo history survives a page reload or ends with the browser session. -->
-
+The finding for both of these will store\ the text you selected and you can return to the log log event side panel with it.
 
 ## Return to a finding
 
-Double-click a finding, or hover over it and click the {{< ui >}}Open in Explorer{{< /ui >}} icon. Log Explorer reloads the query, time range, and visualization that the finding was captured with. The rest of your findings stay on the canvas.
+Double-click a finding to return to it in Log Explorer. Or hover over the finding and click the {{< ui >}}Open in Explorer{{< /ui >}} button. Log Explorer reloads the query, time range, and visualization that the finding was captured with. 
 
-Each finding keeps its own query and time range. You can change your search as often as you need, then come back to an earlier result in one click with no query to rebuild.
+Each finding keeps its own query and time range. In the log explorer, you can change your search as often as you need, then come back to an earlier finding with a double-click without needing to rebuild the query.
 
-## Use findings as context
+## Use findings as context with Bits and add them to Notebooks
 
-Select one or more findings on the canvas to act on them together:
+Select one or more findings to act on them together:
 
-- To ask [Bits AI][2] about them, type your question in the selection bar and click {{< ui >}}Ask Bits{{< /ui >}}. Bits AI chat opens with the selected findings attached as context.
-- To copy them into a [Notebook][3], click {{< ui >}}Open in Notebooks{{< /ui >}} and choose a new or existing notebook. The findings you send stay on the canvas.
+- To ask [Bits AI][2] about them, type your question in the selection bar and click {{< ui >}}Ask Bits{{< /ui >}}, or just click {{< ui >}}Ask Bits{{< /ui >}} in the menu below in the Findings panel after selecting the findings. Bits AI chat opens with the selected findings attached as context.
+- To add findings to a [Notebook][3], click {{< ui >}}Open in Notebooks{{< /ui >}}. Choose a new or existing notebook. The findings you send remain in the Findings panel.
 
-Send only the findings that relate to your question. If three of the eight findings on your canvas cover the error you're asking about, select those three.
+Send only the findings that relate to your question. If three of the eight findings on your canvas cover the error you're asking about, select those three. Notes on findings will also be sent.
+
+## Organize the Findings
+
+Hover over a finding to rename it, and drag it to move or resize it. Datadog saves the layout you build, so the organization looks the same the next time you open the panel.
+
+To reset your organization, you can use the auto-organize option. This will group findings by the query they came from. Moving, resizing, or deleting a finding resets the grouping.
+<!-- A screenshot of the canvas controls would make the auto-organize icon findable. Add one alongside the GA video. -->
+
+The controls on the left of the canvas also zoom in and out, fit the canvas to your findings, and can open a full-screen view. The full-screen view gives you the same controls with more room.
+
+## Delete findings
+
+To delete one finding, hover over it and use the delete button on the card, or select the finding and press the <kbd>Delete</kbd> key. To delete several at once, select them and press <kbd>Delete</kbd>. To select every finding first, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>A</kbd>.
+<!-- Does a finding card have a delete control? Hovering a card shows Open in Explorer and rename only. Confirm how to delete one finding with the mouse. -->
+
+The clear all button in the Findings panel deletes all findings.
+<!-- Confirm the clear icon deletes rather than deselects, and whether it warns before emptying a full canvas. -->
+
+Deleting is not permanent immediately. A toast appears with an {{< ui >}}Undo{{< /ui >}} option, and <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Z</kbd> restores what you removed. 
+<!-- How long does a deleted finding stay recoverable? Confirm whether undo history survives a page reload or ends with the browser session. -->
 
 ## Keyboard shortcuts
 
@@ -112,7 +112,9 @@ Send only the findings that relate to your question. If three of the eight findi
 | Delete selected findings | <kbd>Delete</kbd> |
 | Undo | <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Z</kbd> |
 | Redo | <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd> |
-
+| Pan | <kbd>Space</kbd> + <kbd>drag</kbd> |
+| Auto-organize (by query) | <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>O</kbd> |
+ 
 <!-- Undo and redo bindings are unconfirmed. Confirm these, and add any shortcuts missing from this table. -->
 
 ## Further Reading
