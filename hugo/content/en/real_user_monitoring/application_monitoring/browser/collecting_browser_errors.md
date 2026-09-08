@@ -58,9 +58,9 @@ Source errors include code-level information about the error. More information a
 |-----------------|--------|-------------------------------------------------------------------|
 | `error.type`    | string | The error type (or error code in some cases).                     |
 
-## Enable WebAssembly symbolication
+## Configure WebAssembly error tracking
 
-To symbolicate WebAssembly (WASM) stack frames, install the Browser SDK WASM plugin. Use the same version for the plugin and the RUM Browser SDK:
+To track WebAssembly (WASM) errors, install the Browser SDK WASM plugin. Use the same version for the plugin and the RUM Browser SDK:
 
 ```shell
 npm install --save-exact \
@@ -82,7 +82,9 @@ datadogRum.init({
 
 Initialize RUM before loading any WASM modules. The plugin observes modules created with the browser's `WebAssembly` APIs and adds their URLs and build IDs to errors that contain WASM stack frames. This lets Datadog select the correct build ID when an application loads multiple modules.
 
-Unhandled errors are collected automatically. To report a handled WASM error, pass the `Error` object to [`addError()`](#collect-errors-manually). Then, [upload the module's WebAssembly symbols][20].
+Unhandled errors are collected automatically. To report a handled WASM error, pass the `Error` object to [`addError()`](#collect-errors-manually).
+
+Then, [upload WebAssembly symbols][20] to symbolicate the errors.
 
 ## Collect errors manually
 
