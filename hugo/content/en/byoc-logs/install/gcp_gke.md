@@ -276,6 +276,8 @@ serviceAccount:
 
 # BYOC Logs node configuration
 config:
+  # A meaningful, stable name that identifies the cluster in Datadog.
+  cluster_id: <CLUSTER_ID>
   # The root URI where index data is stored. This should be an gs path.
   # All indexes created in BYOC Logs are stored under this location.
   default_index_root_uri: gs://${BUCKET_NAME}/indexes
