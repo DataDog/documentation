@@ -21,7 +21,7 @@ This page explains how Datadog installs and maintains the Agent on Amazon EC2 in
 {{< tabs >}}
 {{% tab "EC2" %}}
 
-The CloudFormation template you launch creates the following resources one time, in a single stack:
+The CloudFormation template you launch creates the following AWS resources one time, in a single stack:
 
 | Resource | Name | Purpose |
 |---|---|---|
@@ -31,7 +31,7 @@ The CloudFormation template you launch creates the following resources one time,
 | IAM role | auto-named | Lets EventBridge send events to the `datadog-agent-resource-update-intake-destination` API destination |
 | IAM role | `datadog-eventbridge-cross-region-role` | Lets other regions forward events to your primary region |
 
-Datadog creates the following resources as needed, at install time:
+Datadog creates the following AWS resources as needed, at install time:
 
 | Resource | Name | Purpose |
 |---|---|---|
@@ -46,7 +46,7 @@ Datadog does not create S3 buckets, event buses, log groups, or SSM parameters, 
 {{% /tab %}}
 {{% tab "EKS" %}}
 
-The CloudFormation template you launch creates the following resources one time, in a single stack:
+The CloudFormation template you launch creates the following AWS resources one time, in a single stack:
 
 | Resource | Name | Purpose |
 |---|---|---|
@@ -58,7 +58,7 @@ The CloudFormation template you launch creates the following resources one time,
 | AWS Marketplace subscription function and IAM role | auto-named | Accepts the one-time, account-level agreement for the Datadog Operator EKS add-on |
 | IAM permissions boundary | `datadog-instrumenter-eks-ascp-boundary` under `/datadog/instrumenter-boundaries/` | Limits the permissions available to the per-cluster credential synchronization role |
 
-Datadog creates the following resources as needed, at install time:
+Datadog creates the following AWS resources as needed, at install time:
 
 | Resource | Name | Purpose |
 |---|---|---|
@@ -68,10 +68,17 @@ Datadog creates the following resources as needed, at install time:
 | Secrets Manager secret | `/datadog/eks-instrumenter/<ACCOUNT_ID>/<CLUSTER_NAME>/application-key` | Holds the cluster-specific Datadog application key |
 | IAM role and inline policy | `dd-eks-ascp-sync-<CLUSTER_NAME>-<HASH>` and `dd-eks-instrumenter-ascp-sync-policy` | Let the credential synchronization service account read only the two cluster-specific secrets |
 | EKS Pod Identity association | `datadog-agent/datadog-ascp-sync` | Associates the credential synchronization service account with its scoped IAM role |
+
+Datadog also creates one Datadog application key per cluster with only the **Remote Configuration Read** permission.
+
+The Datadog Operator creates the following Kubernetes resources inside the cluster:
+
+| Resource | Name | Purpose |
+|---|---|---|
 | Kubernetes Secret | `datadog-agent/datadog-managed-secret` | Makes the API and application keys available to the managed Agent resources |
 | `DatadogAgent` custom resource | `datadog-agent/datadog-agent` | Defines the Agent configuration that the Datadog Operator maintains |
 
-Datadog also creates one application key per cluster with only the **Remote Configuration Read** permission. Datadog does not call the Kubernetes API during installation; the Datadog Operator creates and removes the managed resources inside the cluster.
+Datadog does not call the Kubernetes API during installation; the Datadog Operator creates and removes the managed resources inside the cluster.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -159,7 +166,7 @@ Datadog uses the same cross-account IAM role as the AWS integration and receives
 
 ### Auditing Datadog's actions
 
-Every AWS action Datadog takes appears in AWS CloudTrail. Resources created for an installation are identifiable by their names and tags: secrets use the `/datadog/eks-instrumenter/` prefix, the credential synchronization role uses the `dd-eks-ascp-sync-` prefix, and the Datadog Operator add-on includes tags that identify the installation and cluster.
+Every AWS action Datadog takes appears in AWS CloudTrail. AWS resources created for an installation are identifiable by their names and tags: secrets use the `/datadog/eks-instrumenter/` prefix, the credential synchronization role uses the `dd-eks-ascp-sync-` prefix, and the Datadog Operator add-on includes tags that identify the installation and cluster.
 
 ### How the API and application keys are handled
 
@@ -257,7 +264,7 @@ Uninstalling removes the Datadog Agent, the `/etc/datadog-agent` and `/opt/datad
 
 To uninstall, remove clusters from a rule, edit the rule's query, or delete the rule. Datadog performs cleanup in this order:
 
-1. The Datadog Operator deletes the `DatadogAgent` resource it created and its dependent resources.
+1. The Datadog Operator deletes the `DatadogAgent` custom resource it created and its dependent Kubernetes resources.
 1. After the Operator reports that cleanup is complete, Datadog deletes the `datadog_operator` EKS add-on that it installed.
 1. Datadog removes the Pod Identity association and scoped IAM role that it created.
 1. The AWS Secrets Store CSI Driver Provider and EKS Pod Identity Agent add-ons remain installed so you can use them with other workloads.

@@ -123,7 +123,7 @@ Agent installation is based on an **installation rule**: an AWS account paired w
 
 1. You select the EKS clusters to cover, or opt in to all eligible clusters.
 1. Datadog resolves your selection into a list of covered clusters and records it.
-1. Datadog installs the Datadog Operator and Agent on each covered cluster, adding any missing EKS add-ons and IAM configuration automatically. It also creates or reuses cluster-specific Datadog API and application key secrets.
+1. Datadog installs the Datadog Operator and Agent on each covered cluster, adding any missing EKS add-ons and IAM configuration automatically. It also creates or reuses cluster-specific Datadog API and application key secrets in AWS Secrets Manager.
 1. Datadog keeps the covered clusters instrumented. Clusters created later aren't added until you update the rule.
 
 You approve one CloudFormation stack, one time, during initial setup. The stack configures the required AWS permissions and change notifications, and handles the one-time Datadog Operator AWS Marketplace agreement. After that, installations run automatically from Datadog, with no new CloudFormation template to launch for each installation.
@@ -229,7 +229,7 @@ Use the [AWS Install Agents page][8] to view installation status, add clusters t
 
 To stop coverage, update or delete the installation rule. If you manually remove the Agent from a covered cluster, Datadog reinstalls it on the next reconciliation. Datadog performs the following ordered cleanup for an EKS installation:
 
-1. The Datadog Operator deletes the `DatadogAgent` resource it created and its dependent resources.
+1. The Datadog Operator deletes the `DatadogAgent` custom resource it created and its dependent Kubernetes resources.
 1. After the Operator reports that cleanup is complete, Datadog deletes the `datadog_operator` EKS add-on that it installed.
 1. Datadog removes the Pod Identity association and scoped IAM role that it created.
 1. The AWS Secrets Store CSI Driver Provider and EKS Pod Identity Agent add-ons remain installed so you can use them with other workloads.
