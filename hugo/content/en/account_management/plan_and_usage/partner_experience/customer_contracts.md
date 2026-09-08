@@ -15,7 +15,13 @@ further_reading:
 
 The [Customer Contracts][1] page gives Datadog partners a single view of their end customer contract portfolio, including recurring revenue, renewal dates, invoices, and cost visibility status. Summary tiles at the top of the page show how many contracts are up for renewal, how many customers need rates entered before they can use cost visibility features, and the number and total amount of overdue invoices.
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Customer Contracts is not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 {{< img src="account_management/plan_and_usage/customer-contracts-overview.png" alt="Customer Contracts page in a Datadog admin organization showing summary tiles for renewals, cost visibility, and overdue invoices above a table of customers" >}}
+
+**Note**: Contract data on this page is cached for up to 30 minutes, and organization hierarchy data is cached for up to 5 minutes. Recent changes can take that long to appear.
 
 ## Prerequisites
 
