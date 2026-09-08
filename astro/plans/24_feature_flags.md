@@ -59,7 +59,8 @@ rolled out to 100% of users, and the flag is a rarely-used kill switch. If it ev
 needs to be pulled during that window, Astro requires a separate action.
 
 Because that asymmetry is invisible from either site — nothing errors, nothing
-warns, and the Datadog UI shows the flag as configured — plan 23 should leave a
+warns, and the Datadog UI shows the flag as configured —
+[23_ask_ai.md](23_ask_ai.md) should leave a
 `TODO` at the Astro mount site where the resolver would be passed. Otherwise the
 only record of it is this document, and the person reaching for the kill switch
 during an incident is not reading plans:
@@ -67,8 +68,8 @@ during an incident is not reading plans:
 ```ts
 // TODO: no flag resolver is passed here, so `docs-ai-enabled` does not govern
 // Astro — the package falls back to its `true` default. Flipping the flag off
-// disables Ask AI on Hugo only. Supply a resolver once plans/24_feature_flags.md
-// lands, or if the kill switch is ever needed on Astro before then.
+// disables Ask AI on Hugo only. Supply a resolver once Astro has a feature-flag
+// client, or if the kill switch is ever needed on Astro before then.
 ```
 
 ## Claude's plan
@@ -162,8 +163,8 @@ the call site. That is intentional: the caller should not be able to tell, becau
 mean "use the default".
 
 Do **not** read `document.documentElement.dataset.env` the way Hugo does. Astro has
-`data-env` on `<html>` (plan 22, section 7) and it would work, but the build-time
-constant is the authority everywhere else in Astro's client code and two sources for
+`data-env` on `<html>` ([22_add_rum.md](22_add_rum.md), section 7) and it would work,
+but the build-time constant is the authority everywhere else in Astro's client code and two sources for
 one value is how they drift.
 
 ### 3. Flag keys (`src/lib/flags/keys.ts`)
@@ -191,7 +192,8 @@ here, since the failure is invisible and the fix is a one-line reorder.
 
 Two things follow from that ordering:
 
-- **In development there is no session ID**, because plan 22's env gate means RUM never
+- **In development there is no session ID**, because
+  [22_add_rum.md](22_add_rum.md)'s env gate means RUM never
   initializes locally. The targeting key falls back to `crypto.randomUUID()`, so local
   flag evaluation is unbucketed. Same as Hugo, and acceptable, but it means percentage
   rollouts cannot be tested locally at all — only on preview.
@@ -224,8 +226,8 @@ the teardown-on-false; this plan only supplies the boolean.
 removes, and a stale one is worse than none — the next person reaching for the kill
 switch during an incident would read it and conclude Astro is not covered when it is.
 
-Astro's searchbar row (also from plan 23) is a second consumer: it should hide the
-"Ask AI about …" row when the flag is off, the way `searchbarHits.js` does. It reads
+Astro's searchbar row (also from [23_ask_ai.md](23_ask_ai.md)) is a second consumer: it
+should hide the "Ask AI about …" row when the flag is off, the way `searchbarHits.js` does. It reads
 the same memoized promise, so this adds no second provider — the thing the host-owned
 design exists to guarantee.
 
@@ -296,8 +298,9 @@ Datadog, which is verification section C.
   before `<Telemetry />`, or if RUM's init becomes async, every visitor gets a fresh
   UUID and bucketing breaks with no error. The unit test covers the fallback path but
   cannot cover the ordering; verification B is the only real check.
-- **Bundle weight, again.** Two more packages on top of plan 22's two SDKs and plan
-  23's widget. Deferred, so off the critical path, but the cumulative JS on a page that
+- **Bundle weight, again.** Two more packages on top of
+  [22_add_rum.md](22_add_rum.md)'s two SDKs and [23_ask_ai.md](23_ask_ai.md)'s widget.
+  Deferred, so off the critical path, but the cumulative JS on a page that
   used to ship almost none is now worth measuring once rather than assuming.
 - **Exposure logging on a kill switch is cost without benefit.** It exists for
   experiment analysis, and there is no experiment. It matches Hugo, which is the reason

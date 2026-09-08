@@ -24,8 +24,9 @@ before it can take down the live widget.
 **This plan edits Hugo, which `astro/CLAUDE.md` otherwise forbids.** The permitted
 exception list covers `hugo/Makefile` dev targets but not `assets/` or `layouts/`. The
 authorization is explicit and predates this plan — Hugo adopting the package was
-decided in the design conversation that produced plan 23 — but it should be restated in
-the PR description rather than assumed, because a reviewer checking the rule will
+decided in the design conversation that produced [23_ask_ai.md](23_ask_ai.md) — but it
+should be restated in the PR description rather than assumed, because a reviewer
+checking the rule will
 otherwise be right to object.
 
 ### Confirmed decisions
@@ -38,7 +39,7 @@ otherwise be right to object.
 | `window.askDocsAI` | **Kept**, assigned by Hugo's thin invocation module. `searchbarHits.js` and `instantsearch.js` both call it and are not being rewritten. |
 | Hero button | **Stays in Hugo**, along with `_home-ask-ai.scss` and `.home-ai-btn`. Host-owned entry-point UI. |
 | `DOCS_AI_ENABLED_FLAG_KEY` | **Moves into `feature-flags.js`.** It currently lives in the widget, which is why the searchbar imports from the widget. |
-| Package build | Hooked into `hugo/package.json`'s `prebuild` plus the `Makefile`'s `start` and `start-no-pre-build` targets. |
+| Package build | A `build:ask-ai` script in `hugo/package.json`, chained into `build`, `build:preview`, and `build:live`, plus the `Makefile`'s `start` and `start-no-pre-build` targets. Not `prebuild` alone — it is bypassed by the two scripts CI runs. |
 | Rollback | **Revert the PR.** No flag-gated dual path — see below. |
 
 ### Core idea
@@ -70,15 +71,16 @@ coexist would mean namespacing the package's classes and DOM — work that exist
 for the dual-run period and would then be deleted.
 
 So the mitigation is ordinary rather than clever: the package is already proven on
-Astro before this lands, the parity checklist in plan 23 section B is run on a Hugo
-preview before merge, and rollback is a revert of one PR that touches no data and no
+Astro before this lands, the parity checklist in [23_ask_ai.md](23_ask_ai.md) section B
+is run on a Hugo preview before merge, and rollback is a revert of one PR that touches
+no data and no
 schema.
 
 ### Steps summary
 
 | Step | What it does | Why it is separate |
 | --- | --- | --- |
-| 1. Depend and build | Hugo declares the package and builds it in `prebuild` and the dev targets. | Nothing else can be tested until the package is resolvable from Hugo's bundle. |
+| 1. Depend and build | Hugo declares the package and builds it in all three `build*` scripts and the dev targets. | Nothing else can be tested until the package is resolvable from Hugo's bundle. |
 | 2. Move the flag key | `DOCS_AI_ENABLED_FLAG_KEY` from the widget into `feature-flags.js`. | Breaks the searchbar's dependency on the widget module *before* the widget is deleted. Doing it after means a broken intermediate state. |
 | 3. Thin invocation module | ~30 lines replacing the widget: mount, inject the two callbacks, assign the global, wire the hero button. | The only new code in the plan. |
 | 4. Delete the old implementation | 7 JS modules, 4 SCSS partials, the `<template>` partial and its 4 inclusion sites. | The irreversible step. Last, so every step before it is verifiable on its own. |
@@ -89,28 +91,64 @@ schema.
 `hugo/package.json`:
 
 - `"@dd/ask-ai": "portal:../shared/packages/ask-ai"`, same reference style Astro uses.
-- `"prebuild": "yarn --cwd ../shared/packages/ask-ai build && rimraf public && npx hugo mod clean"` —
-  prepended to the existing `prebuild`, so `yarn build` and `yarn build:preview` both
-  build the package first. This is what makes it work in `documentation-ci` with no
-  change to that repo, since those jobs run `yarn build:hugo:*` through `yarn`.
+- `"build:ask-ai": "yarn --cwd ../shared/packages/ask-ai build"` — one named script, as
+  in [23_ask_ai.md](23_ask_ai.md), so the command lives in a single place.
+- `yarn build:ask-ai && …` prepended to **all three** of `build`, `build:preview`, and
+  `build:live`. Not `prebuild` alone. See below.
+
+**Three scripts, not one hook, and the reason matters.** `prebuild` covers only `build`,
+because that is the one script that chains it explicitly:
+
+```
+prebuild:      rimraf public && npx hugo mod clean
+build:         yarn run prebuild && yarn run build:hugo
+build:preview: yarn run build:hugo:preview
+build:live:    yarn run build:hugo:live
+```
+
+`build:preview` and `build:live` call `build:hugo:*` **directly** and never reach
+`prebuild`. Those are precisely the two scripts `documentation-ci` runs, so hooking the
+package build to `prebuild` would build it in exactly the case nobody ships and skip it
+in both cases that reach a user. The symptom is a missing widget in preview and live with
+a green build. This is the single most likely thing to get wrong in this plan.
+
+**Hugo's `prebuild` is not the same trap as Astro's.** [23_ask_ai.md](23_ask_ai.md)
+forbids a `prebuild` hook because Yarn 4 ignores arbitrary `pre`/`post` scripts. That
+finding is about the *implicit* hook. Hugo's `prebuild` is invoked explicitly by
+`yarn run prebuild`, which is just a script call and works fine — the name is a leftover
+from npm, not a lifecycle hook. Both facts are true at once, and reading either one alone
+gives the wrong answer here.
 
 `hugo/Makefile` — add the same build step to `start` and `start-no-pre-build`, so local
 dev picks up package edits. `hugo/Makefile` dev targets are on `astro/CLAUDE.md`'s
 permitted-exception list; content and build-script targets are not, and none are touched.
+Note that `prestart` is **not** an option for this: nothing invokes it explicitly, so
+Yarn 4 never fires it and it is already dead. Fixing that is Hugo's business and outside
+this plan's permitted scope — just do not mistake it for a working hook.
 
-**Verify `prebuild` actually runs in the CI job** rather than trusting it. Hugo's
-`build` script chains `prebuild` explicitly (`"build": "yarn run prebuild && yarn run build:hugo"`)
-but `build:preview` and `build:live` call `build:hugo:*` **directly**, bypassing
-`prebuild` entirely. So a `prebuild` hook is not sufficient for the preview and live
-jobs, and the package build must be added to those two scripts as well. This is the
-single most likely thing to be wrong in this plan, and its symptom is a missing widget
-in preview with a green build.
+As in [23_ask_ai.md](23_ask_ai.md), editing package source requires restarting the Hugo
+dev server; the package ships no watch build.
 
-Hugo's esbuild (`js.Build`) must be able to consume the package's ESM output. Plan 23
-chose esbuild for the package's own bundle specifically so this holds, but Hugo's
-invocation has its own target setting — confirm the emitted output is within it rather
-than assuming, since a syntax-level mismatch here fails the Hugo build rather than
-degrading at runtime.
+Hugo's esbuild (`js.Build`) consumes the package's ESM output with **no option
+changes**. Checked rather than assumed: no `js.Build` call in `hugo/layouts/` passes
+`format` at all — including the `main-dd-js.js` one at
+`hugo/layouts/partials/footer-scripts.html:16` — so Hugo emits esbuild's default IIFE
+while still resolving ESM imports, which is what esbuild does regardless of its output
+format. That is also why [23_ask_ai.md](23_ask_ai.md) can emit one ESM bundle and no
+IIFE: Hugo's own bundler produces the IIFE, so a second package output would be
+redundant here rather than required. Hugo's invocation does have its own target
+setting, though — confirm the emitted output is within it rather than assuming, since a
+syntax-level mismatch fails the Hugo build rather than degrading at runtime.
+
+**Sourcemaps chain through, and Hugo already emits them.** Both script partials pass
+`"sourceMap" $sourcemap`, which `header-scripts.html` sets to `cond $isProd "external"
+"inline"`, so nothing needs adding here. What matters is the upstream half:
+[23_ask_ai.md](23_ask_ai.md) has the package emit a *linked* sourcemap — the `.map`
+plus its `//# sourceMappingURL=` comment, with `sourcesContent` — precisely so a
+re-bundling esbuild can find and chain it. Hugo's `js.Build` is that same case as
+Astro's Vite. Without the comment, widget frames in Hugo's uploaded sourcemaps resolve
+into `dist/ask-ai.js` instead of the package's `src/`. Nothing fails; the traces are
+just useless, and only in production.
 
 ### 2. Move the flag key
 
@@ -149,7 +187,7 @@ const handle = mountAskAi({
 window.askDocsAI = (query, options) => handle.ask(query, options);
 
 // Homepage hero. Host-owned entry-point UI, so it stays here rather than in
-// the package — see plans/23_ask_ai.md.
+// the Ask AI component package.
 document.querySelector('.home-ai-btn')?.addEventListener('click', () => {
   const searchInput = document.querySelector('.ais-SearchBox-input');
   handle.ask(searchInput?.value ?? '', { source: 'home_hero' });
@@ -167,9 +205,18 @@ them:
   Hugo's searchbar and the widget continue to share one provider and one exposure
   stream.
 
+What it deliberately does **not** pass is `env`. The package reads `data-env` off
+`<html>`, which Hugo already sets, and types it against its own `AskAiEnv` union rather
+than Astro's `SiteEnv` — see [23_ask_ai.md](23_ask_ai.md). Hugo needs to do nothing for
+that to work, but do confirm the attribute is present *and* one of the three expected
+values on a Hugo page: anything else resolves to `development`, which silently points
+the widget at the wrong API credentials in production. Verification section A has the
+check.
+
 What it does **not** keep is the hero/floating-button `IntersectionObserver` and the
-`.hidden` toggling: plan 23 keeps those inside the package, since they are host-agnostic
-DOM queries against `.home-ai-btn`. Confirm on the homepage specifically — it is the
+`.hidden` toggling: [23_ask_ai.md](23_ask_ai.md) keeps those inside the package, since
+they are host-agnostic DOM queries against `.home-ai-btn`. Confirm on the homepage
+specifically — it is the
 one page where the package's behavior depends on host markup existing.
 
 ### 4. Delete the old implementation
@@ -211,7 +258,7 @@ Removing it breaks the API page build — a failure a long way from this diff.
 
 | File | Change |
 | --- | --- |
-| `hugo/package.json` | Add the package; add its build to `prebuild`, `build:preview`, `build:live`; drop `highlight.js` and `marked-highlight` |
+| `hugo/package.json` | Add the package; add a `build:ask-ai` script and chain it into `build`, `build:preview`, `build:live`; drop `highlight.js` and `marked-highlight` |
 | `hugo/Makefile` | Build the package in `start` and `start-no-pre-build` |
 | `hugo/assets/scripts/helpers/feature-flags.js` | Gains `DOCS_AI_ENABLED_FLAG_KEY` |
 | `hugo/assets/scripts/components/instantsearch/searchbarHits.js` | Import the key from `feature-flags` instead of the widget |
@@ -239,8 +286,9 @@ plan needs is evidence that Hugo's bundle still builds and that nothing else bro
   and the page reports zero console errors. Hugo has no equivalent today, and its
   absence is why a broken widget could ship unnoticed.
 
-No new unit tests. The logic all lives in the package now, where plan 23's tests cover
-it; adding Hugo-side unit tests would test the package a second time through a worse
+No new unit tests. The logic all lives in the package now, where
+[23_ask_ai.md](23_ask_ai.md)'s tests cover it; adding Hugo-side unit tests would test
+the package a second time through a worse
 harness.
 
 ### TODOs to leave in the code
@@ -252,8 +300,9 @@ harness.
 
 ### Risks and open questions
 
-- **`build:preview` and `build:live` bypass `prebuild`.** Called out in step 1 and
-  repeated here because it is the highest-probability failure in the plan, and its
+- **`build:preview` and `build:live` bypass `prebuild`**, which is why the package build
+  is chained into all three `build*` scripts rather than hooked once. Called out in step
+  1 and repeated here because it is the highest-probability failure in the plan, and its
   symptom is a green build with no widget. Verify by reading the emitted bundle in a
   preview deploy, not by reading the scripts.
 - **One PR, every Hugo page.** The widget is on all four `baseof` layouts. There is no
@@ -289,10 +338,11 @@ the widget.
 | --- | --- |
 | `make start-no-pre-build` in `hugo/` | Builds the package first, then serves; widget appears |
 | Edit package source, re-run | Change appears on the Hugo dev server |
-| `yarn build:preview` in `hugo/` | Package build runs; **check this specifically**, since this script bypasses `prebuild` |
+| `yarn build:preview` in `hugo/` | Package build runs; **check this specifically**, since this script bypasses `prebuild` and relies on its own chained `build:ask-ai` |
 | `yarn build:live` in `hugo/` | Same |
 | Fresh clone → `yarn install` → `yarn build` | Works with no committed `dist/` |
 | The emitted `main-dd-js.js` | Contains the package's code; contains no `conv-search-template` string |
+| `<html data-env>` on a built Hugo page | Present, and one of `development` / `preview` / `live`. The package reads it and falls back to `development`, so a missing or unrecognized value points the widget at the wrong API credentials without erroring |
 
 ### B. Nothing else broke
 
@@ -342,3 +392,6 @@ like proof that Hugo's cutover worked.
   likely to go quietly missing.
 - Exposure logs for `docs-ai-enabled` are unchanged in shape and volume — one provider,
   not two, which is what keeping Hugo's `feature-flags.js` was for.
+- A widget frame in a real error resolves into `shared/packages/ask-ai/src/`, not into
+  `dist/ask-ai.js`. That is the sourcemap chain in step 1 working, and production error
+  reports are the only place it is observable.

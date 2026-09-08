@@ -290,7 +290,7 @@ than a hidden module-level cache: `DATADOG_LOCATE_URL` and
 it.
 
 It lives here rather than in the Ask AI package because it is generic site
-functionality. Plan 23's package receives the value through an injected
+functionality. [23_ask_ai.md](23_ask_ai.md)'s package receives the value through an injected
 `getIsDatadogUser?: () => Promise<boolean>` callback and omits the
 `is_datadog_user` tag when the callback is absent.
 
@@ -305,7 +305,7 @@ The script:
 
 1. Imports both SDKs and assigns `window.DD_RUM = datadogRum` /
    `window.DD_LOGS = datadogLogs`, so the globals that Hugo's SDK bundles create
-   exist here too — this is the contract plan 23 depends on.
+   exist here too — this is the contract [23_ask_ai.md](23_ask_ai.md) depends on.
 2. Resolves env as `resolveSiteEnv(import.meta.env.PUBLIC_CI_ENV)` — the raw value
    passed explicitly, because the helper's `process.env` default is meaningless in a
    browser bundle — and looks up credentials.
@@ -348,8 +348,8 @@ where the helper's `process.env.CI_ENVIRONMENT_NAME` default is the right source
 
 Not strictly required by this plan — the client script reads the `PUBLIC_` constant
 instead — but it matches Hugo's convention, is useful for debugging and
-env-conditional styling, and plan 23's package expects the same attribute on both
-hosts.
+env-conditional styling, and [23_ask_ai.md](23_ask_ai.md)'s package expects the same
+attribute on both hosts.
 
 ### 8. Sourcemaps, so RUM errors are readable
 
@@ -452,7 +452,7 @@ this is a gap, not a regression.
    //     --release-version <releaseVersion>
    // with DATADOG_API_KEY from `get_secret 'dd-api-key'` and
    // allow_failure: true. Until then, RUM error stack traces for Astro stay
-   // minified. See plans/22_add_rum.md section 8.
+   // minified.
    ```
 
    Write the whole invocation out rather than a bare "wire this up": the person
@@ -552,7 +552,8 @@ only what unit tests cannot. The plan originally listed two; seven were needed, 
 additions are each there for a reason the plan did not anticipate:
 
 - `window.DD_RUM` and `window.DD_LOGS` are defined after page load, proving the
-  bundled script executes and assigns the globals — the contract plan 23 relies on.
+  bundled script executes and assigns the globals — the contract
+  [23_ask_ai.md](23_ask_ai.md) relies on.
 - In development, RUM does **not** start a session while Logs **is** initialized,
   proving the env gate. Asserted through the absence of the `_dd_s` session cookie as
   well as the missing session, since one can be true without the other.
@@ -561,11 +562,12 @@ additions are each there for a reason the plan did not anticipate:
   assigned both globals and then threw — so a test that only checks for the globals
   passes. This is the test that catches it.
 - **The globals expose the API surface, not just *an* object.** `addAction`,
-  `addError`, `logger.info` — plan 23's package calls these, and a truthy
-  `window.DD_RUM` proves nothing about them.
+  `addError`, `logger.info` — [23_ask_ai.md](23_ask_ai.md)'s package calls these, and a
+  truthy `window.DD_RUM` proves nothing about them.
 - Logs in development route to the console rather than the HTTP intake.
 - No `_dd_device_id` cookie outside live.
-- `data-env` is on `<html>`, since plan 23's package reads it on both hosts.
+- `data-env` is on `<html>`, since [23_ask_ai.md](23_ask_ai.md)'s package reads it on
+  both hosts.
 
 RUM `init()` itself is not asserted end to end, since dev never initializes it. The
 option objects are covered by unit tests instead.
@@ -595,7 +597,7 @@ is gone.
 | `src/lib/telemetry/initOptions.ts`, `buildGlobalContext` | `stack: 'astro'` is the only thing separating Astro traffic from Hugo's in a shared application, so **do not remove it** until Hugo is gone — at which point every session is Astro and the property becomes a facet with one value. | Dies with Hugo |
 | `src/lib/telemetry/deviceId.ts` | A deliberate duplicate of Hugo's cookie logic, which Hugo's own comment calls a temporary solution. Astro becomes sole owner at cutover. | Dies with Hugo |
 | `src/lib/telemetry/datadogUserStatus.ts` | Deliberate duplicate of Hugo's `fetchDatadogUserStatus()`. Cross-reference the twin so a change to one is not made blind to the other. | Dies with Hugo |
-| `src/components/Telemetry/Telemetry.astro`, the global assignments | `window.DD_RUM` / `window.DD_LOGS` are assigned *only* because plan 23's package reads globals rather than importing. Non-obvious next to two real imports, and droppable once the package is folded into Astro. | Dies with Hugo |
+| `src/components/Telemetry/Telemetry.astro`, the global assignments | `window.DD_RUM` / `window.DD_LOGS` are assigned *only* because [23_ask_ai.md](23_ask_ai.md)'s package reads globals rather than importing. Non-obvious next to two real imports, and droppable once the package is folded into Astro. | Dies with Hugo |
 
 `data-env` on `<html>` is the one deferred item I would **not** make a TODO. It is
 also Hugo-parity scaffolding, but it stays useful after the cutover for debugging
@@ -682,7 +684,8 @@ in sync, not one fewer. Deleted; the reads are inlined, and the ⚠️ `PUBLIC_`
 warning and the two CI-ownership TODOs moved to the assignment site, which is where the
 decision is enacted. Net −49 lines.
 
-The counterargument considered and rejected: that plan 23's package would become a
+The counterargument considered and rejected: that
+[23_ask_ai.md](23_ask_ai.md)'s package would become a
 second consumer. It reads `window.DD_RUM` / `window.DD_LOGS`, not these constants.
 
 **2. No `TelemetryEnv` type or `resolveTelemetryEnv` function.** The plan specified

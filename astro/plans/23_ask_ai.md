@@ -59,7 +59,7 @@ both plans.
 | Environment config | **Package owns the table.** It reads `data-env` off `<html>` and looks up its own `apiUrl` / `apiKey`, the way Hugo's `getConfig(env).docsAi` does today. |
 | Styles | **Shipped by the package**, injected at runtime from JS. Values hardcoded to match Hugo's current SCSS. |
 | Markup | **Owned by the package.** No `<template>` cloning, no host-rendered panel HTML, SVGs inlined. |
-| Entry-point UI | **Host-owned.** The package owns the floating button and the panel; the hosts own the homepage hero button and the searchbar row, and call `askDocsAI()`. |
+| Entry-point UI | **Host-owned.** The package owns the floating button and the panel; the hosts own the homepage hero button and the searchbar row, and call `ask()` on a handle. Hugo reaches it through `window.askDocsAI`; Astro's searchbar mounts its own — see step 9. |
 | i18n | **Hardcoded English**, with a `TODO`. Adding keys to Hugo's bundle is out of bounds. |
 | `highlight.js` | **`lib/core` + a registered subset.** 24 KB gzipped instead of 303 KB. The one deliberate divergence from Hugo. |
 | Tests | **The package's own**, inside the package. |
@@ -94,7 +94,7 @@ rather than skim:
 | Step | What it does | Why it is separate |
 | --- | --- | --- |
 | 1. Package skeleton | `package.json`, `tsconfig`, esbuild config, test setup, under `shared/packages/ask-ai`. | Everything else lands inside it. Also the whole of the cherry-pickable commit's risk: a third Node project in a repo that has two. |
-| 2. Public API | `mountAskAi(config)` returning a handle, plus the `askDocsAI(query, options)` entry-point function. | The contract both hosts write against. Fixing it first means steps 3–7 cannot accidentally widen it. |
+| 2. Public API | `mountAskAi(config)` returning a handle, plus the environment union both hosts key their config off. | The contract both hosts write against. Fixing it first means steps 3–7 cannot accidentally widen it. |
 | 3. Port the modules | The seven JS modules to TS, faithfully. | The bulk of the diff, and the part with the least judgment in it. |
 | 4. Own the markup | Build the panel in code instead of cloning `<template>`s; inline the eight SVGs. | Deletes the host's 154-line partial and the "template not in DOM" failure mode with it. |
 | 5. Styles | Compile the four SCSS partials into one stylesheet the package injects itself. | Self-contained already — no Hugo variables or mixins are referenced — so this is a move, not a rewrite. |
@@ -109,10 +109,10 @@ rather than skim:
 shared/packages/ask-ai/
   package.json          name "@dd/ask-ai", private, main "./dist/ask-ai.js"
   tsconfig.json         strict, target ES2020, DOM lib
-  esbuild.config.mjs    one ESM bundle + one IIFE?  → see step 8
+  esbuild.config.mjs    one ESM bundle, no IIFE      → see step 8
   vitest.config.ts      happy-dom environment
   src/
-    index.ts            mountAskAi, askDocsAI — the public surface
+    index.ts            mountAskAi, AskAiHandle, ASK_AI_ENVS — the public surface
     config.ts           per-env apiUrl / apiKey table
     panel.ts            the ConversationalSearch class (from index.js)
     markup.ts           DOM construction, replacing the Hugo <template>s
@@ -124,6 +124,7 @@ shared/packages/ask-ai/
     client.ts           the SSE streaming client
     logger.ts           the DD_RUM / DD_LOGS reader
     suggestedQuestions.ts
+    strings.ts          the ~30 hardcoded English strings, with the i18n TODO
     styles.css          compiled from Hugo's four SCSS partials
     types.ts            AskAiConfig, Source, ChatMessage, ViewMode…
 ```
@@ -141,12 +142,16 @@ package build runs from inside both toolchains, so it targets the lower bound. Y
 
 ### 2. The public API (`src/index.ts`)
 
-Two exports, and they are the entire contract:
+Three exports, and they are the entire contract:
 
 ```ts
+/** The package's own union. Deliberately not Astro's `SiteEnv` — see below. */
+export const ASK_AI_ENVS = ["development", "preview", "live"] as const;
+export type AskAiEnv = (typeof ASK_AI_ENVS)[number];
+
 export interface AskAiConfig {
   /** Overrides the `data-env` read off <html>. Hosts should not normally pass it. */
-  env?: SiteEnv;
+  env?: AskAiEnv;
   /** Absent → the package behaves as if the flag were true. */
   isEnabled?: () => Promise<boolean>;
   /** Absent → the `is_datadog_user` tag is omitted rather than sent as false. */
@@ -171,8 +176,28 @@ assign that global; each host does, from the handle it holds, so the package has
 side effect on `window` beyond the nodes it appends. Hugo's `searchbarHits.js` and
 `instantsearch.js` both call `window.askDocsAI`, so
 [25_migrate_hugo_to_ask_ai_package.md](25_migrate_hugo_to_ask_ai_package.md)
-keeps that global for them; Astro's searchbar calls the handle directly and
-needs no global.
+keeps that global for them. Astro needs no global: its searchbar calls `mountAskAi()`
+itself and uses what it gets back, which is why idempotency is part of this contract
+rather than a convenience — see step 9.
+
+**Why the package declares its own environment union.** `env` cannot be typed as
+Astro's `SiteEnv`, which is exported from `astro/src/lib/site/siteEnv.ts`: a package
+under `shared/` that also builds inside Hugo cannot import from Astro's source tree.
+So `ASK_AI_ENVS` is a local copy, declared next to the per-environment `apiUrl` /
+`apiKey` table in `config.ts` that it keys — the reason the closed set exists at all.
+
+It is named `AskAiEnv`, not `SiteEnv`, to keep it from reading as a re-export of
+Astro's type when it is a parallel declaration that happens to agree.
+
+That copy inherits exactly the drift problem `config.ts` already has against Hugo's
+`config-docs.js`, so it gets the same two-part treatment: a comment naming Astro's
+`siteEnv.ts` as the other half, and a parity test. The test lives on the *Astro* side —
+`astro/src/lib/askAi/envParity.test.ts` — because only Astro can import both, asserting
+`ASK_AI_ENVS` and `SITE_ENVS` are element-for-element equal. That is why the runtime
+array is exported and not just the type: a type-only export gives the test nothing to
+compare, and a `satisfies` check would pass on a union that had silently narrowed on one
+side. Widening the contract from two exports to three is deliberate, and this is the
+whole reason.
 
 Auto-submit stays as it is: a query of `AUTO_SUBMIT_MIN_LENGTH` (10) or more submits
 after a 100 ms delay, a shorter one only prefills. Only on a fresh conversation.
@@ -374,7 +399,34 @@ Development falls back to `preview` rather than erroring, matching what
 **The package's build.** esbuild, matching what Hugo's `js.Build` already uses, so a
 construct that bundles here bundles there. Emit ESM to `dist/ask-ai.js`, with
 `marked`, `marked-highlight`, and `highlight.js` bundled in and the CSS inlined as a
-string (esbuild's `text` loader). Sourcemaps external. `dist/` is git-ignored.
+string (esbuild's `text` loader). `dist/` is git-ignored.
+
+**One ESM bundle, no IIFE.** Step 1's layout left this open; closing it here. Both
+consumers resolve ESM imports natively — Vite, and Hugo's `js.Build`, which is esbuild
+and reads ESM regardless of the format it emits. Hugo emits IIFE (no `js.Build` call in
+`hugo/layouts/` passes `format`, so esbuild's default applies), which means the IIFE
+Hugo needs is one Hugo's own bundler already produces; shipping a second one from the
+package would be dead weight and a second output to keep in sync for no consumer. See
+[25_migrate_hugo_to_ask_ai_package.md](25_migrate_hugo_to_ask_ai_package.md). If a bare
+`<script src>` drop-in is ever wanted, adding an output format is a two-line change to
+the esbuild config, so nothing is foreclosed.
+
+**Sourcemaps: `sourcemap: true`, with `sourcesContent`, not `external`.** The
+distinction decides whether widget stack traces are readable in RUM.
+[22_add_rum.md](22_add_rum.md) has Astro emit `hidden` sourcemaps and upload them, and
+Vite chains upstream maps when it re-bundles a dependency — but only if it can find
+them, which means `dist/ask-ai.js` has to carry its `//# sourceMappingURL=` comment.
+esbuild's `external` omits that comment, so Vite would treat the bundle as
+map-less and Astro's final map would resolve widget frames into `dist/ask-ai.js`
+rather than into `src/*.ts`. `true` emits both the `.map` and the comment; Astro's
+`hidden` setting then strips the comment from *its* output, so the package's linked
+map never reaches production. `sourcesContent: true` so the chain needs no filesystem
+lookup at Astro build time, when the package is reached through a `portal:` symlink.
+
+Verify rather than trust this: it is a bundler-chaining behavior across two toolchains,
+and the failure is silent and only observable in a real error report. The check belongs
+in [22_add_rum.md](22_add_rum.md)'s verification section E — a widget frame in a
+deployed error should name a `shared/packages/ask-ai/src/` file.
 
 **Each host's consumption** is one dependency entry plus an explicit build step in
 every script that needs `dist/` to exist.
@@ -448,12 +500,41 @@ scheduled for deletion.
 **The mount site.** A `src/components/AskAi/AskAi.astro` carrying a bundled
 `<script>`, following `Telemetry.astro`'s shape — a component whose only job is to
 carry a script that imports from npm. Rendered once by `BaseLayout`, so every route
-gets it. It calls `mountAskAi()`, passes `getIsDatadogUser` from
-`@lib/telemetry/datadogUserStatus`, passes no `isEnabled`, and assigns the returned
-handle to a module-scoped variable the searchbar can reach.
+gets it. It calls `mountAskAi(createAskAiConfig())` and does nothing else.
 
 Bundled scripts do not re-execute on view-transition soft navigation, so the
 mount-once shape needs no guard — same reasoning as `Telemetry.astro`.
+
+**The config is shared; the handle is not.** A `src/lib/askAi/askAiConfig.ts` exports
+one `createAskAiConfig()`, returning `getIsDatadogUser` from
+`@lib/telemetry/datadogUserStatus` and no `isEnabled`. Both call sites — the mount
+script and the searchbar — import it and pass its result.
+
+That shape exists because the searchbar cannot be handed the handle. `AskAi.astro`'s
+bundled `<script>` and `SearchBar` are separate Astro entrypoints, and `SearchBar` is
+a `client:load` island rendered from `ApiSideNav.astro:55` and `MobileNav.astro:144`
+— both of which appear on the same page, so two live instances is the normal case —
+plus `pages/dd_e2e/components/search-bar.astro:108`. Those share no scope. A mutable
+module written by the script and read by the island would depend on Rollup hoisting it
+into a chunk shared across the script/island boundary *and* on write-before-read
+ordering, neither of which is guaranteed.
+
+Instead the searchbar calls `mountAskAi()` itself, which section 2 makes idempotent:
+the second caller gets the widget the first one mounted. Sharing the *config* is what
+makes that safe. Hydration order is not guaranteed, so a searchbar island can
+plausibly mount first — and if it passed no config, idempotency would hand
+`AskAi.astro`'s later call the already-mounted handle and silently discard its
+`getIsDatadogUser`. The symptom is `is_datadog_user` missing from telemetry on some
+page loads and not others, which is miserable to diagnose. A factory both sites call
+removes the race by making the two calls identical rather than by ordering them.
+
+**The searchbar imports the package lazily.** `await import("@dd/ask-ai")` inside the
+click and `Enter` handlers, not a top-level import. A top-level import would pull the
+package into a `client:load` island's bundle, which is net-zero only if Rollup shares
+that chunk with the hoisted script — unverifiable without a production build. The lazy
+form is correct under either outcome, and it costs one module-resolution tick on a path
+that then makes a network request to the AI backend anyway. By the time a user clicks,
+`AskAi.astro` has almost always mounted, so the common case is the idempotent return.
 
 **The searchbar row is already stubbed.** `SearchResultsPopup.tsx:61-70` renders a
 placeholder div with `data-placeholder-name='"Ask AI" Button Goes Here'`, the
@@ -465,7 +546,8 @@ replaces a placeholder rather than adding a feature:
 - Render the row's real label, updating as the user types — "Ask AI anything" when the
   query is empty, "Ask AI about *{query}*" otherwise, matching
   `setAskAISuggestionContent` in Hugo's `searchbarHits.js`.
-- Wire the click and the `Enter`-on-selected paths to the handle's `ask(query, { source: 'search_suggestion' })`.
+- Wire the click and the `Enter`-on-selected paths to `ask(query, { source:
+  'search_suggestion' })` on the lazily-imported handle.
 - Emit the same `search_suggestion_clicked` log Hugo's `logDocsAIEvent` emits, with
   `source: 'searchbar_dropdown'`, `query`, and `query_length`.
 
@@ -497,9 +579,11 @@ say that.
 | `shared/packages/ask-ai/**` | New — the whole package. **Commit 1, cherry-pickable.** |
 | `astro/package.json` | Add the `portal:` dependency and a `build:ask-ai` script; prepend it to `dev`, `dev:proxied`, `build`, `build:en`, `build:preview`, `build:live`, `typecheck` |
 | `astro/src/components/AskAi/AskAi.astro` | New — the mount script, with [24_feature_flags.md](24_feature_flags.md)'s flag `TODO` |
+| `astro/src/lib/askAi/askAiConfig.ts` | New — `createAskAiConfig()`, the one config both call sites pass |
+| `astro/src/lib/askAi/envParity.test.ts` | New — asserts `ASK_AI_ENVS` and `SITE_ENVS` still agree |
 | `astro/src/layouts/BaseLayout.astro` | Render `<AskAi />` |
 | `astro/src/components/SearchBar/SearchResultsPopup.tsx` | Replace the placeholder row with the real one |
-| `astro/src/components/SearchBar/SearchBar.tsx` | Wire click and Enter to the handle; drop the no-op comment |
+| `astro/src/components/SearchBar/SearchBar.tsx` | Lazily import the package, mount with the shared config, wire click and Enter; drop the no-op comment |
 | `hugo/**` | **Not this plan** — see [25_migrate_hugo_to_ask_ai_package.md](25_migrate_hugo_to_ask_ai_package.md) |
 
 ### Testing (red → green)
@@ -535,11 +619,20 @@ self-contained:
 
 In Astro (commit 2):
 
+- `envParity.test.ts` — `ASK_AI_ENVS` equals `SITE_ENVS`, element for element. The
+  cheapest possible test, guarding the one copy the package is forced to keep.
 - `SearchBar` unit tests — the row's label tracks the query; click and `Enter` call
-  the handle with `source: 'search_suggestion'`. Existing tests assert the
+  `ask` with `source: 'search_suggestion'`. Mock `@dd/ask-ai` so the assertion is on
+  the call, and assert that the config passed to `mountAskAi` is
+  `createAskAiConfig()`'s — a searchbar that mounts config-less is the failure mode
+  step 9 describes, and it is invisible otherwise. Existing tests assert the
   placeholder, so they change in the same commit.
 - One browser test — after load, the floating button exists, clicking it opens the
   panel, and the page reports **zero** console errors.
+- One more browser test, on a page carrying both searchbars: clicking the searchbar
+  row opens the panel, and the document holds exactly **one** panel. That is the
+  assertion covering idempotency across islands, which no unit test can reach because
+  the two islands only coexist in a real document.
   [22_add_rum.md](22_add_rum.md)'s experience is the argument for that last
   clause: a widget that mounts while throwing looks identical to one that works,
   in any test that only checks for the button.
@@ -556,6 +649,7 @@ Following [22_add_rum.md](22_add_rum.md)'s convention —
 | `shared/packages/ask-ai/src/styles.css` | Plain CSS with hardcoded values, deliberately, because the package also runs inside Hugo — not an oversight of `astro/CLAUDE.md`'s CSS-modules rule. | Dies with Hugo |
 | `shared/packages/ask-ai/src/highlight.ts` | The registered-subset divergence from Hugo's `highlightAuto` across all languages, and how to add a language. | Permanent |
 | `shared/packages/ask-ai/src/config.ts` | Copied from Hugo's `config-docs.js`; the package becomes sole owner at the cutover. Mirrors `astro/src/config/telemetry.ts`'s TODO. | Dies with Hugo |
+| `shared/packages/ask-ai/src/config.ts`, `ASK_AI_ENVS` | Names `astro/src/lib/site/siteEnv.ts` as the parallel declaration, and the parity test that holds them together. A package under `shared/` cannot import Astro's copy. | Permanent |
 | `shared/packages/ask-ai/src/panel.ts`, `applySidebarTopOffset` | Two banner class selectors, one per host. The Hugo one goes at the cutover. | Dies with Hugo |
 | `shared/packages/ask-ai/src/logger.ts` | Structural `Window` types rather than the SDKs' own, specifically to avoid taking the dependency. | Permanent |
 | `astro/package.json`, the `build:ask-ai` script | Assumes the Astro CI job invokes one of the `build:*` scripts rather than `astro build` directly. No such job exists in `documentation-ci` yet — confirm when it is written. | Blocked |
@@ -600,106 +694,6 @@ Following [22_add_rum.md](22_add_rum.md)'s convention —
   remove it, and it constrains this plan: every seam the package exposes has to be
   one Hugo can actually reach, or that plan turns into a package rewrite.
 
-### Concerns found on review
-
-Raised against the plan above after it was written. Concerns are being folded into the
-plan body one at a time; each is marked **Resolved** once the sections above have been
-corrected, with a note on what changed. Unresolved ones still describe a correction the
-implementation owes. Ordered by how much of the plan they invalidate.
-
-#### 1. `prebuild` does not run under Yarn 4 — **Resolved**
-
-Step 8 originally hung the entire package build off a `prebuild` script in each host,
-and made that the linchpin of the consumption story. **Yarn 4 does not run arbitrary
-`pre`/`post` scripts.** Verified rather than assumed: a minimal `package.json` with
-`packageManager: yarn@4.10.3` and both a `prebuild` and a `build` script, run as
-`corepack yarn build`, prints only the `build` output.
-
-Both hosts are on `yarn@4.10.3`, so this held for both. Two pieces of corroborating
-evidence already in the repo:
-
-- Hugo's surviving pre-scripts are `preinstall`, `postinstall`, `prepack`, and
-  `postpack` — exactly Yarn Berry's supported set. Its `prestart` and `prebuild` never
-  fire. That is a *second*, independent reason they do not run, on top of the
-  already-known fact that `build:preview` and `build:live` call `build:hugo:*`
-  directly and would bypass them anyway.
-- `astro/package.json`'s `pretest` is dead for the same reason.
-
-The failure mode is the dangerous one: `yarn build` exits 0, `dist/ask-ai.js` was never
-produced, and the import resolves to a stale artifact or to nothing. Green build, no
-widget — the exact outcome the Risks section already worries about, arriving through a
-mechanism the original plan did not anticipate.
-
-**What changed.** Step 8 now specifies a `build:ask-ai` script in `astro/package.json`
-prepended with `&&` to each of the seven scripts that need `dist/` — `dev`,
-`dev:proxied`, `build`, `build:en`, `build:preview`, `build:live`, and `typecheck` — and
-states explicitly that `prebuild` must not be used, with the evidence. `typecheck` is in
-that list because `astro check` must resolve the package's `dist/*.d.ts`, and `test` /
-`test-ai` chain it, so omitting it breaks a fresh clone's first test run. Committing
-`dist/` was reconsidered, since the no-commit decision had rested on the hook working,
-and rejected again on its own merits. Step 8 also now records that editing package source
-requires a dev-server restart: esbuild's output is outside Vite's watch graph, and the
-package deliberately gets no watch build. Its CI paragraph was rewritten: the
-claim is no longer "CI already runs `prebuild`" but "the package build is inside the
-`build:*` scripts, so it runs wherever they do," with the caveat that a CI job calling
-`astro build` directly would still bypass it. `postinstall` is recorded as a
-belt-and-braces option rather than the mechanism, because it fires at install time and
-never picks up a later source edit. The scope table, confirmed-decisions row, steps
-summary, files table, TODOs table, Risks bullet, and manual-verification table were all
-updated to match. [25_migrate_hugo_to_ask_ai_package.md](25_migrate_hugo_to_ask_ai_package.md)
-needs the same audit on the Hugo side — not done here.
-
-#### 2. Astro cannot share the handle the way step 9 describes
-
-Step 9 says the mount script "assigns the returned handle to a module-scoped variable
-the searchbar can reach." It cannot. `AskAi.astro`'s bundled `<script>` and `SearchBar`
-are separate module graphs, and `SearchBar` is a `client:load` island rendered from
-**two** places — `ApiSideNav.astro:55` and `MobileNav.astro:144` — so a page can carry
-two instances of it. There is no module scope shared across those three.
-
-Since `mountAskAi` is specified as idempotent (section 2), the clean fix is for the
-searchbar to import and call `mountAskAi()` itself and use the returned handle locally,
-dropping the cross-island handoff entirely. That also repairs section 2's claim that
-"Astro's searchbar calls the handle directly and needs no global," which as written is
-not achievable — the searchbar reaching a variable inside another bundle's scope is
-strictly harder than the global it was contrasted against.
-
-#### 3. `env?: SiteEnv` couples the package to Astro
-
-Section 2's public interface types `env` as `SiteEnv`, which is exported from
-`astro/src/lib/site/siteEnv.ts`. A package under `shared/` that must also build inside
-Hugo cannot import from Astro's source tree. It needs its own local union.
-
-That local union then inherits the same drift problem `config.ts` already has with
-`config-docs.js`, so it wants the same treatment: a comment naming Astro's copy as the
-other half, and ideally the parity test pattern
-[22_add_rum.md](22_add_rum.md) used for the telemetry credentials.
-
-#### 4. Two internal inconsistencies
-
-- The **Steps summary** row 2 promises "plus the `askDocsAI(query, options)`
-  entry-point function" as part of the package's public surface. Section 2 then
-  explicitly refuses it: "The package does **not** assign that global." Section 2 is
-  the correct one; the summary row is stale.
-- **`src/strings.ts`** appears in the TODOs table and is implied by the i18n section,
-  but is missing from the step 1 package layout.
-
-#### 5. Two loose ends
-
-- The step 1 layout annotates `esbuild.config.mjs` with "one ESM bundle + one IIFE?
-  → see step 8", and step 8 does not answer the question. Decide it there: Hugo's
-  `js.Build` consumes ESM, so the IIFE is probably unnecessary, but the plan should
-  say so rather than leave the fork open.
-- **Sourcemaps.** Step 8 says "Sourcemaps external", while
-  [22_add_rum.md](22_add_rum.md) uploads `hidden` sourcemaps for Astro's own build. The
-  package ships prebuilt JS that Vite then re-bundles, so widget stack traces in RUM
-  symbolize into the artifact rather than into `src/` unless the chain is deliberate.
-  Worth deciding before the first production error report, not after.
-
-One thing checked and found *not* to be a problem: the `*.unit.test.ts` filenames in the
-Testing section match the existing component-test convention in `astro/src/components/`,
-so they need no change. (`src/lib/` uses plain `*.test.ts`; both conventions are live.)
-
 ## Manual verification
 
 The goal of this plan is parity, so the verification is comparative: the same
@@ -721,6 +715,8 @@ different host bundlers — which is the entire risk of this plan.
 | `yarn build` in each host | Package build runs as part of the build script, no manual step |
 | `yarn typecheck` in `astro/` on a fresh clone | Resolves `@dd/ask-ai`'s types; does not fail on an unresolvable import |
 | Fresh clone → install → build | Works with no committed `dist/` |
+| An Astro `/api` page carrying both searchbars (desktop side nav and mobile nav) | Exactly **one** panel in the DOM; both rows open the same widget |
+| A deployed Astro error with a widget frame in it | The stack names a `shared/packages/ask-ai/src/` file, not `dist/ask-ai.js` — the sourcemap chain held |
 
 ### B. Side-by-side parity checklist
 
