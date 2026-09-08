@@ -2,7 +2,7 @@
 title: Investigate Problems
 description: "Explore retained RUM data to investigate performance issues, navigate user sessions, and troubleshoot application errors."
 further_reading:
-- link: "/real_user_monitoring/data_lifecycle_and_cost_management/"
+- link: "/real_user_monitoring/retain_and_recover_valuable_sessions/"
   tag: "Documentation"
   text: "Retain and recover valuable sessions"
 ---

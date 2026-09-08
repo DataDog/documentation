@@ -117,7 +117,7 @@ The table below outlines the available RUM recommendation types. Only applicatio
 | Frustration signal on page element | Users are clicking on a static element that produces no action on the page. |
 | Improve initial page load time by reducing bundle size | A large JavaScript bundle is impacting the initial load and paint of the page. |
 
-[1]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[1]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#core-web-vitals
 [2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [3]: /real_user_monitoring/application_monitoring/browser/setup/
 [4]: /session_replay/

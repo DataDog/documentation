@@ -8,7 +8,7 @@ further_reading:
 - link: '/real_user_monitoring/rum_without_limits/'
   tag: Documentation
   text: RUM without Limits
-- link: '/real_user_monitoring/data_lifecycle_and_cost_management/configure_retention_filters/'
+- link: '/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/'
   tag: Documentation
   text: Configure retention filters
 ---

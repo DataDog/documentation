@@ -1,6 +1,5 @@
 ---
 title: Setup RUM
-private: true
 description: "Set up Real User Monitoring: create an application, install the Datadog SDK, and enable the RUM module."
 further_reading:
 - link: "/real_user_monitoring/application_monitoring/browser/advanced_configuration/"
