@@ -17,7 +17,7 @@ the most important thing in this plan:
 | Commit | Contents | Depends on |
 | --- | --- | --- |
 | **1. The package** | `shared/packages/ask-ai/**` and nothing else. No host `package.json` edit, no mount site, no Hugo change. | Nothing. Cherry-picks onto `master` cleanly. |
-| **2. Astro adoption** | Astro's dependency entry, dev/prebuild wiring, the mount component, and the searchbar row. | Commit 1, plus [22_add_rum.md](22_add_rum.md) for telemetry. |
+| **2. Astro adoption** | Astro's dependency entry, dev/build script wiring, the mount component, and the searchbar row. | Commit 1, plus [22_add_rum.md](22_add_rum.md) for telemetry. |
 
 Commit 1 is inert on its own: a package nobody depends on. That is the point — it
 compiles, its tests run, and it changes no rendered page, so it can land on `master`
@@ -29,18 +29,21 @@ implementation from every Hugo page — so it gets its own plan, its own PR, and
 preview verification. Splitting it out means Astro's copy can be exercised on a preview
 deploy while Hugo still runs its own code, and only then does Hugo cut over.
 
-This plan still has to design *for* two hosts, because plan 25 must not require
-changing the package. Wherever a decision below is shaped by Hugo rather than by Astro
-— the styles being injected rather than imported, the markup being package-owned, the
-`window.askDocsAI` global staying a host concern — that is why, and it is called out
-where it happens.
+This plan still has to design *for* two hosts, because
+[25_migrate_hugo_to_ask_ai_package.md](25_migrate_hugo_to_ask_ai_package.md)
+must not require changing the package. Wherever a decision below is shaped by
+Hugo rather than by Astro — the styles being injected rather than imported, the
+markup being package-owned, the `window.askDocsAI` global staying a host concern
+— that is why, and it is called out where it happens.
 
 The consequence for the Manual verification section below: the rows that require Hugo
 to be consuming the package — every side-by-side row in **B**, the Hugo rows in **A**,
-and all of **E** — belong to plan 25 and cannot be run before it. What *is* runnable
-after commit 2 is the Astro column of B, all of D, and the Astro half of A. This is
-noted here rather than by editing that section, since it is the checklist for the
-package as a whole across both plans.
+and all of **E** — belong to
+[25_migrate_hugo_to_ask_ai_package.md](25_migrate_hugo_to_ask_ai_package.md)
+and cannot be run before it. What *is* runnable after commit 2 is the Astro
+column of B, all of D, and the Astro half of A. This is noted here rather than by
+editing that section, since it is the checklist for the package as a whole across
+both plans.
 
 ### Confirmed decisions
 
@@ -48,7 +51,7 @@ package as a whole across both plans.
 | --- | --- |
 | Hugo adoption | **Its own plan** — [25_migrate_hugo_to_ask_ai_package.md](25_migrate_hugo_to_ask_ai_package.md). Hugo keeps its current code until then. |
 | Package consumption | **Built artifact.** The package builds its own `dist/`; each host declares a workspace-local dependency on it. Chosen over both hosts compiling the TS source, for cleaner isolation. |
-| Committed `dist/` | **No.** Built by each host's `prebuild`, so a fresh clone → install → build works with nothing generated in git. |
+| Committed `dist/` | **No.** Built by each host's own dev and build scripts, so a fresh clone → install → build works with nothing generated in git. |
 | Third-party deps | **Declared and bundled by the package** — `marked`, `marked-highlight`, `highlight.js`. |
 | RUM / Logs | **Read from globals**, never imported. `window.DD_RUM` / `window.DD_LOGS`, no-op when absent. Importing would give a Hugo page two RUM instances. |
 | Feature flags | **Injected resolver**, not bundled. Defaults to enabled when absent. See [24_feature_flags.md](24_feature_flags.md). |
@@ -97,7 +100,7 @@ rather than skim:
 | 5. Styles | Compile the four SCSS partials into one stylesheet the package injects itself. | Self-contained already — no Hugo variables or mixins are referenced — so this is a move, not a rewrite. |
 | 6. Narrow `highlight.js` | `lib/core` plus ~20 registered languages. | 279 KB of gzipped payload, on every page. The only place the port knowingly changes behavior. |
 | 7. Injected capabilities | The flag resolver, `getIsDatadogUser`, and the telemetry globals. | The three seams between package and host. Each has a documented absent-case. |
-| 8. Build and consumption | `dist/` output, and how each host's `prebuild` produces it. | Spans two hosts' `package.json`s and Hugo's `Makefile`; the only part that touches files outside the package. |
+| 8. Build and consumption | `dist/` output, and how each host's scripts produce it. | Spans two hosts' `package.json`s and Hugo's `Makefile`; the only part that touches files outside the package. |
 | 9. Astro wiring | The mount component and the searchbar row. | Commit 2. The first real consumer, and the proof the API from step 2 is usable. |
 
 ### 1. Package skeleton (`shared/packages/ask-ai/`)
@@ -166,8 +169,10 @@ second widget.
 The `ask()` method replaces Hugo's `window.askDocsAI` global. The package does **not**
 assign that global; each host does, from the handle it holds, so the package has no
 side effect on `window` beyond the nodes it appends. Hugo's `searchbarHits.js` and
-`instantsearch.js` both call `window.askDocsAI`, so plan 25 keeps that global for
-them; Astro's searchbar calls the handle directly and needs no global.
+`instantsearch.js` both call `window.askDocsAI`, so
+[25_migrate_hugo_to_ask_ai_package.md](25_migrate_hugo_to_ask_ai_package.md)
+keeps that global for them; Astro's searchbar calls the handle directly and
+needs no global.
 
 Auto-submit stays as it is: a query of `AUTO_SUBMIT_MIN_LENGTH` (10) or more submits
 after a 100 ms delay, a shorter one only prefills. Only on a fresh conversation.
@@ -243,13 +248,15 @@ actions row. The package builds all four in code instead.
 What this deletes:
 
 - The partial itself, and its four inclusion sites (`_default`, `api`, `partners`,
-  `index`) — in plan 25.
+  `index`) — in [25_migrate_hugo_to_ask_ai_package.md](25_migrate_hugo_to_ask_ai_package.md).
 - `createElements()`'s early return and the
   `#conv-search-template not in DOM` console warning. It exists because Hugo's 404
   layout omits the partial. With the markup in the package there is no missing
   template and no warning to emit. The verification checklist's 404 row therefore
-  changes meaning at plan 25: the expectation becomes *no warning and no widget
-  problem*, not *the existing warning still logs*.
+  changes meaning at
+  [25_migrate_hugo_to_ask_ai_package.md](25_migrate_hugo_to_ask_ai_package.md):
+  the expectation becomes *no warning and no widget problem*, not *the existing
+  warning still logs*.
 - `getElementById('conv-search-actions-template')` in `actions.ts`, and with it the
   fallback icon paths it reads out of the template.
 
@@ -328,7 +335,8 @@ planned end of life.
 ### 7. Injected capabilities
 
 Three seams, each optional, each with a defined absent-case. The absent-cases are the
-point: they are what lets commit 1 be inert and commit 2 land before plan 24.
+point: they are what lets commit 1 be inert and commit 2 land before
+[24_feature_flags.md](24_feature_flags.md).
 
 | Seam | Mechanism | Absent |
 | --- | --- | --- |
@@ -346,14 +354,15 @@ visitor, whereas an absent key is queryable as "not measured".
 during a rare incident in exchange for never shifting layout on a normal page load.
 Port it as-is, including the impression log firing only when enabled.
 
-Astro passes no `isEnabled` until plan 24 lands, so the mount site carries the `TODO`
-that [24_feature_flags.md](24_feature_flags.md) specifies verbatim.
+Astro passes no `isEnabled` until [24_feature_flags.md](24_feature_flags.md)
+lands, so the mount site carries the `TODO` that plan specifies verbatim.
 
 **Config table** (`config.ts`) — the package reads `document.documentElement.dataset.env`
-and looks up `apiUrl` / `apiKey`, mirroring Hugo's `getConfig(env).docsAi`. Plan 22
-already puts `data-env` on `<html>` in `BaseLayout`, and Hugo has always had it. The
-values are copied from `hugo/assets/scripts/config/config-docs.js`: live points at
-`app.datadoghq.com`, preview and development both at `dd.datad0g.com`. The `apiKey` is
+and looks up `apiUrl` / `apiKey`, mirroring Hugo's `getConfig(env).docsAi`.
+[22_add_rum.md](22_add_rum.md) already puts `data-env` on `<html>` in
+`BaseLayout`, and Hugo has always had it. The values are copied from
+`hugo/assets/scripts/config/config-docs.js`: live points at `app.datadoghq.com`,
+preview and development both at `dd.datad0g.com`. The `apiKey` is
 a `ddpub_`-prefixed publishable key already committed in this public repo — note that
 in a comment, so a future reader does not read it as a leak.
 
@@ -367,25 +376,67 @@ construct that bundles here bundles there. Emit ESM to `dist/ask-ai.js`, with
 `marked`, `marked-highlight`, and `highlight.js` bundled in and the CSS inlined as a
 string (esbuild's `text` loader). Sourcemaps external. `dist/` is git-ignored.
 
-**Each host's consumption** is one dependency entry plus one `prebuild` hook:
+**Each host's consumption** is one dependency entry plus an explicit build step in
+every script that needs `dist/` to exist.
+
+**Do not use a `prebuild` hook.** Both hosts are on `yarn@4.10.3`, and Yarn Berry runs
+only its supported lifecycle set — `preinstall`, `postinstall`, `prepack`, `postpack`,
+`prepare`, `prepublish`. Arbitrary `pre`/`post` scripts are silently ignored, so a
+`prebuild` would never fire. Verified rather than assumed: a minimal `package.json`
+with `packageManager: yarn@4.10.3` and both a `prebuild` and a `build` script, run as
+`corepack yarn build`, prints only the `build` output. Two corroborating facts already
+in this repo — Hugo's surviving pre-scripts are exactly Yarn Berry's supported set
+(its `prestart` and `prebuild` are dead), and `astro/package.json`'s `pretest` is dead
+for the same reason.
+
+The failure mode this avoids is the dangerous one: `yarn build` exits 0, `dist/ask-ai.js`
+was never produced, and the import resolves to a stale artifact or to nothing. Green
+build, no widget.
+
+So:
 
 - `astro/package.json` — a `"@dd/ask-ai": "portal:../shared/packages/ask-ai"`
-  dependency, and `"prebuild": "yarn --cwd ../shared/packages/ask-ai build"`. `portal:`
-  rather than `file:` so Yarn 4 symlinks rather than copies, and an edit to the package
-  is visible without a reinstall.
-- `astro/package.json` `dev` — build the package first, so `yarn dev` shows package
-  changes. The user's expectation from the design conversation, and the reason
-  `prebuild` alone is not enough.
+  dependency. `portal:` rather than `file:` so Yarn 4 symlinks rather than copies, and
+  an edit to the package is visible without a reinstall.
+- `astro/package.json` — one `"build:ask-ai": "yarn --cwd ../shared/packages/ask-ai
+  build"` script, then `yarn build:ask-ai && …` prepended to each of `dev`,
+  `dev:proxied`, `build`, `build:en`, `build:preview`, `build:live`, and `typecheck`.
+  Seven call sites rather than one hook, which is the cost of the hook not existing;
+  naming the command once and referencing it keeps them from drifting. `preview` and
+  `preview:proxied` are deliberately excluded — they serve what `build` already produced.
+- **`typecheck` is in that list for a reason that is easy to miss.** `astro check` has to
+  resolve `@dd/ask-ai`'s types, which come from `dist/*.d.ts` under the built-artifact
+  decision, and `test` and `test-ai` both chain `yarn typecheck` first. Without it, a
+  fresh clone running `yarn test-ai` fails on an unresolvable import before it runs a
+  single test — a worse first-run experience than a missing widget, and one that looks
+  like a broken checkout rather than a missing build step.
 - Hugo's `Makefile` `start` / `start-no-pre-build` targets get the same build step —
-  **plan 25**, and one of the few Hugo-side edits `astro/CLAUDE.md` permits at all
+  see [25_migrate_hugo_to_ask_ai_package.md](25_migrate_hugo_to_ask_ai_package.md).
+  This is one of the few Hugo-side edits `astro/CLAUDE.md` permits at all
   (`hugo/Makefile`, dev/deploy targets only).
 
-Production CI is the real constraint here and the reason `prebuild` is the hook:
-`documentation-ci` runs `yarn install` and `yarn build:*`, not `make`. Hanging the
-package build off `prebuild` means it runs in CI with no change to that repo. Verify
-this claim against the actual Astro CI job before relying on it — plan 22 established
-that `documentation-ci` has no Astro build job on `main` at all, so "CI already runs
-`yarn build`" is an assumption about a job that does not yet exist.
+Production CI needs nothing added on its side, but for a different reason than the
+original design assumed: `documentation-ci` runs `yarn install` and `yarn build:*`, and
+because the package build is *inside* those scripts rather than hooked in front of them,
+it runs wherever they run. Confirm this against the actual Astro CI job before relying
+on it — [22_add_rum.md](22_add_rum.md) established that `documentation-ci` has no Astro
+build job on `main` at all, so any claim about what CI already runs is an assumption
+about a job that does not yet exist. If that job turns out to call `astro build`
+directly rather than through a `package.json` script, the package build has to be added
+to the job.
+
+A `postinstall` on the package is a tempting alternative — it *is* in the supported set,
+and `portal:` dependencies get theirs run. It is not sufficient on its own: it fires at
+install time, so it never picks up a source edit made afterward. It is reasonable as a
+belt-and-braces addition for fresh clones, not as the mechanism.
+
+**Editing package source requires a dev-server restart, and that is accepted.** Putting
+the build on `dev` gets you a correct `dist/` at server start, but no further: esbuild's
+output is not in Vite's watch graph the way source files are, so a change made mid-session
+does not hot-reload. The package deliberately gets no watch build. The port itself is the
+only phase with sustained package editing, and after it lands, package changes are rare
+enough that a restart is cheaper than a second long-running process every developer has
+to remember to start. Document the restart in the package's README rather than solving it.
 
 **A third Node project** is the real cost of this step. Two lockfiles become three,
 and `yarn install` in a host no longer fully describes what has to be installed. The
@@ -444,8 +495,8 @@ say that.
 | File | Change |
 | --- | --- |
 | `shared/packages/ask-ai/**` | New — the whole package. **Commit 1, cherry-pickable.** |
-| `astro/package.json` | Add the `portal:` dependency; add the package build to `dev` and `prebuild` |
-| `astro/src/components/AskAi/AskAi.astro` | New — the mount script, with plan 24's flag `TODO` |
+| `astro/package.json` | Add the `portal:` dependency and a `build:ask-ai` script; prepend it to `dev`, `dev:proxied`, `build`, `build:en`, `build:preview`, `build:live`, `typecheck` |
+| `astro/src/components/AskAi/AskAi.astro` | New — the mount script, with [24_feature_flags.md](24_feature_flags.md)'s flag `TODO` |
 | `astro/src/layouts/BaseLayout.astro` | Render `<AskAi />` |
 | `astro/src/components/SearchBar/SearchResultsPopup.tsx` | Replace the placeholder row with the real one |
 | `astro/src/components/SearchBar/SearchBar.tsx` | Wire click and Enter to the handle; drop the no-op comment |
@@ -488,14 +539,15 @@ In Astro (commit 2):
   the handle with `source: 'search_suggestion'`. Existing tests assert the
   placeholder, so they change in the same commit.
 - One browser test — after load, the floating button exists, clicking it opens the
-  panel, and the page reports **zero** console errors. Plan 22's experience is the
-  argument for that last clause: a widget that mounts while throwing looks identical
-  to one that works, in any test that only checks for the button.
+  panel, and the page reports **zero** console errors.
+  [22_add_rum.md](22_add_rum.md)'s experience is the argument for that last
+  clause: a widget that mounts while throwing looks identical to one that works,
+  in any test that only checks for the button.
 
 ### TODOs to leave in the code
 
-Following plan 22's convention — `// TODO: <what> once <condition>`, with a pointer to
-whoever owns the answer.
+Following [22_add_rum.md](22_add_rum.md)'s convention —
+`// TODO: <what> once <condition>`, with a pointer to whoever owns the answer.
 
 | Location | TODO | Kind |
 | --- | --- | --- |
@@ -506,13 +558,14 @@ whoever owns the answer.
 | `shared/packages/ask-ai/src/config.ts` | Copied from Hugo's `config-docs.js`; the package becomes sole owner at the cutover. Mirrors `astro/src/config/telemetry.ts`'s TODO. | Dies with Hugo |
 | `shared/packages/ask-ai/src/panel.ts`, `applySidebarTopOffset` | Two banner class selectors, one per host. The Hugo one goes at the cutover. | Dies with Hugo |
 | `shared/packages/ask-ai/src/logger.ts` | Structural `Window` types rather than the SDKs' own, specifically to avoid taking the dependency. | Permanent |
-| `astro/package.json`, the `prebuild` hook | Assumes the Astro CI job runs `yarn build`. No such job exists in `documentation-ci` yet — confirm when it is written. | Blocked |
+| `astro/package.json`, the `build:ask-ai` script | Assumes the Astro CI job invokes one of the `build:*` scripts rather than `astro build` directly. No such job exists in `documentation-ci` yet — confirm when it is written. | Blocked |
 
 ### Risks and open questions
 
-- **The Astro CI job does not exist**, so "the package build hangs off `prebuild`, which
-  CI already runs" is unverifiable today. If the eventual job invokes Astro some other
-  way, the package silently is not built and the widget silently is not there. The
+- **The Astro CI job does not exist**, so "the package build is inside the `build:*`
+  scripts, which CI already runs" is unverifiable today. If the eventual job invokes
+  Astro some other way — `astro build` directly, say — the package silently is not
+  built and the widget silently is not there. The
   cheapest guard is for the mount script to fail loudly on a missing package rather
   than optionally — a build error beats a missing widget.
 - **A third Node project.** Two lockfiles become three; `yarn install` in one host no
@@ -527,12 +580,14 @@ whoever owns the answer.
   `js.Build` is a *different* esbuild invocation with its own target and no CSS
   handling, which is why the styles are injected as a string rather than imported.
 - **Bundle weight on Astro.** Even narrowed, the package is new JS on pages that ship
-  very little — and it mounts on every page, not just where it is used. Plan 22 already
-  added ~100 KB of SDKs. Neither is on the critical path, but together they change the
-  site's JS profile materially.
+  very little — and it mounts on every page, not just where it is used.
+  [22_add_rum.md](22_add_rum.md) already added ~100 KB of SDKs.
+  Neither is on the critical path, but together they change the site's JS
+  profile materially.
 - **The optimistic mount is inherited, not chosen.** It is the right trade for a
-  default-on kill switch, but it means a flag-off page shows the button briefly. Plan
-  24's verification tests it on Slow 3G, which is where it looks worst.
+  default-on kill switch, but it means a flag-off page shows the button briefly.
+  [24_feature_flags.md](24_feature_flags.md)'s verification tests it on Slow 3G,
+  which is where it looks worst.
 - **`highlightAuto` regression is invisible.** Nothing errors when an unlabeled fence
   in an unregistered language renders unhighlighted; it just looks slightly worse. If
   Datadog's answers routinely include, say, Kotlin or Elixir fences, the subset is
@@ -540,9 +595,110 @@ whoever owns the answer.
 - **English-only on translated pages.** Called out above; the one parity gap that gets
   *worse* on Astro than it was on Hugo, because Astro's `/api` pages are translated
   and Hugo's widget only ever ran on English ones.
-- **Plan 25 deletes a live implementation.** Splitting it out reduces the risk but
-  does not remove it, and it constrains this plan: every seam the package exposes has
-  to be one Hugo can actually reach, or plan 25 turns into a package rewrite.
+- **[25_migrate_hugo_to_ask_ai_package.md](25_migrate_hugo_to_ask_ai_package.md)
+  deletes a live implementation.** Splitting it out reduces the risk but does not
+  remove it, and it constrains this plan: every seam the package exposes has to be
+  one Hugo can actually reach, or that plan turns into a package rewrite.
+
+### Concerns found on review
+
+Raised against the plan above after it was written. Concerns are being folded into the
+plan body one at a time; each is marked **Resolved** once the sections above have been
+corrected, with a note on what changed. Unresolved ones still describe a correction the
+implementation owes. Ordered by how much of the plan they invalidate.
+
+#### 1. `prebuild` does not run under Yarn 4 — **Resolved**
+
+Step 8 originally hung the entire package build off a `prebuild` script in each host,
+and made that the linchpin of the consumption story. **Yarn 4 does not run arbitrary
+`pre`/`post` scripts.** Verified rather than assumed: a minimal `package.json` with
+`packageManager: yarn@4.10.3` and both a `prebuild` and a `build` script, run as
+`corepack yarn build`, prints only the `build` output.
+
+Both hosts are on `yarn@4.10.3`, so this held for both. Two pieces of corroborating
+evidence already in the repo:
+
+- Hugo's surviving pre-scripts are `preinstall`, `postinstall`, `prepack`, and
+  `postpack` — exactly Yarn Berry's supported set. Its `prestart` and `prebuild` never
+  fire. That is a *second*, independent reason they do not run, on top of the
+  already-known fact that `build:preview` and `build:live` call `build:hugo:*`
+  directly and would bypass them anyway.
+- `astro/package.json`'s `pretest` is dead for the same reason.
+
+The failure mode is the dangerous one: `yarn build` exits 0, `dist/ask-ai.js` was never
+produced, and the import resolves to a stale artifact or to nothing. Green build, no
+widget — the exact outcome the Risks section already worries about, arriving through a
+mechanism the original plan did not anticipate.
+
+**What changed.** Step 8 now specifies a `build:ask-ai` script in `astro/package.json`
+prepended with `&&` to each of the seven scripts that need `dist/` — `dev`,
+`dev:proxied`, `build`, `build:en`, `build:preview`, `build:live`, and `typecheck` — and
+states explicitly that `prebuild` must not be used, with the evidence. `typecheck` is in
+that list because `astro check` must resolve the package's `dist/*.d.ts`, and `test` /
+`test-ai` chain it, so omitting it breaks a fresh clone's first test run. Committing
+`dist/` was reconsidered, since the no-commit decision had rested on the hook working,
+and rejected again on its own merits. Step 8 also now records that editing package source
+requires a dev-server restart: esbuild's output is outside Vite's watch graph, and the
+package deliberately gets no watch build. Its CI paragraph was rewritten: the
+claim is no longer "CI already runs `prebuild`" but "the package build is inside the
+`build:*` scripts, so it runs wherever they do," with the caveat that a CI job calling
+`astro build` directly would still bypass it. `postinstall` is recorded as a
+belt-and-braces option rather than the mechanism, because it fires at install time and
+never picks up a later source edit. The scope table, confirmed-decisions row, steps
+summary, files table, TODOs table, Risks bullet, and manual-verification table were all
+updated to match. [25_migrate_hugo_to_ask_ai_package.md](25_migrate_hugo_to_ask_ai_package.md)
+needs the same audit on the Hugo side — not done here.
+
+#### 2. Astro cannot share the handle the way step 9 describes
+
+Step 9 says the mount script "assigns the returned handle to a module-scoped variable
+the searchbar can reach." It cannot. `AskAi.astro`'s bundled `<script>` and `SearchBar`
+are separate module graphs, and `SearchBar` is a `client:load` island rendered from
+**two** places — `ApiSideNav.astro:55` and `MobileNav.astro:144` — so a page can carry
+two instances of it. There is no module scope shared across those three.
+
+Since `mountAskAi` is specified as idempotent (section 2), the clean fix is for the
+searchbar to import and call `mountAskAi()` itself and use the returned handle locally,
+dropping the cross-island handoff entirely. That also repairs section 2's claim that
+"Astro's searchbar calls the handle directly and needs no global," which as written is
+not achievable — the searchbar reaching a variable inside another bundle's scope is
+strictly harder than the global it was contrasted against.
+
+#### 3. `env?: SiteEnv` couples the package to Astro
+
+Section 2's public interface types `env` as `SiteEnv`, which is exported from
+`astro/src/lib/site/siteEnv.ts`. A package under `shared/` that must also build inside
+Hugo cannot import from Astro's source tree. It needs its own local union.
+
+That local union then inherits the same drift problem `config.ts` already has with
+`config-docs.js`, so it wants the same treatment: a comment naming Astro's copy as the
+other half, and ideally the parity test pattern
+[22_add_rum.md](22_add_rum.md) used for the telemetry credentials.
+
+#### 4. Two internal inconsistencies
+
+- The **Steps summary** row 2 promises "plus the `askDocsAI(query, options)`
+  entry-point function" as part of the package's public surface. Section 2 then
+  explicitly refuses it: "The package does **not** assign that global." Section 2 is
+  the correct one; the summary row is stale.
+- **`src/strings.ts`** appears in the TODOs table and is implied by the i18n section,
+  but is missing from the step 1 package layout.
+
+#### 5. Two loose ends
+
+- The step 1 layout annotates `esbuild.config.mjs` with "one ESM bundle + one IIFE?
+  → see step 8", and step 8 does not answer the question. Decide it there: Hugo's
+  `js.Build` consumes ESM, so the IIFE is probably unnecessary, but the plan should
+  say so rather than leave the fork open.
+- **Sourcemaps.** Step 8 says "Sourcemaps external", while
+  [22_add_rum.md](22_add_rum.md) uploads `hidden` sourcemaps for Astro's own build. The
+  package ships prebuilt JS that Vite then re-bundles, so widget stack traces in RUM
+  symbolize into the artifact rather than into `src/` unless the chain is deliberate.
+  Worth deciding before the first production error report, not after.
+
+One thing checked and found *not* to be a problem: the `*.unit.test.ts` filenames in the
+Testing section match the existing component-test convention in `astro/src/components/`,
+so they need no change. (`src/lib/` uses plain `*.test.ts`; both conventions are live.)
 
 ## Manual verification
 
@@ -561,8 +717,9 @@ different host bundlers — which is the entire risk of this plan.
 | --- | --- |
 | `yarn dev` in `astro/` | Builds the package first, then starts; widget appears |
 | `make start-no-pre-build` in `hugo/` | Same, on the Hugo side |
-| Editing package source, then re-running each dev command | Change appears on both sites |
-| `yarn build` in each host | Package build runs as part of `prebuild`, no manual step |
+| Editing package source, then **restarting** each dev server | Change appears on both sites. No hot reload — that is the documented behavior, not a bug |
+| `yarn build` in each host | Package build runs as part of the build script, no manual step |
+| `yarn typecheck` in `astro/` on a fresh clone | Resolves `@dd/ask-ai`'s types; does not fail on an unresolvable import |
 | Fresh clone → install → build | Works with no committed `dist/` |
 
 ### B. Side-by-side parity checklist
