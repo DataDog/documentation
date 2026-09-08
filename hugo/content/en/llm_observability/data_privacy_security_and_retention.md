@@ -26,7 +26,7 @@ further_reading:
 
 Agent Observability allows you to restrict access to potentially sensitive data associated with your ML applications to only certain teams and roles in your organization. This is particularly important when your LLM applications process sensitive information such as personal data, proprietary business information, or confidential user interactions.
 
-Access controls in Agent Observability are built on Datadog's [Data Access Control][10] feature, which enables you to regulate access to data deemed sensitive. You can use the `ml_app` tag to identify and restrict access to specific LLM applications within your organization.
+Access controls in Agent Observability are built on Datadog's [Data Access Control][11] feature, which enables you to regulate access to data deemed sensitive. You can use the `ml_app` tag to identify and restrict access to specific LLM applications within your organization.
 
 ## Redacting data with span processors
 
@@ -37,11 +37,11 @@ This is useful for:
 - Filtering out internal workflows or test data
 - Conditionally redacting data based on tags or other criteria
 
-For detailed implementation examples and usage patterns, see the [Span Processing section in the SDK Reference][11].
+For detailed implementation examples and usage patterns, see the [Span Processing section in the SDK Reference][12].
 
 ## Sensitive Data Scanner integration
 
-Agent Observability integrates with [Sensitive Data Scanner][12], which helps prevent data leakage by identifying and redacting any sensitive information (such as personal data, financial details, or proprietary information) that may be present in any step of your LLM application.
+Agent Observability integrates with [Sensitive Data Scanner][13], which helps prevent data leakage by identifying and redacting any sensitive information (such as personal data, financial details, or proprietary information) that may be present in any step of your LLM application.
 
 By proactively scanning for sensitive data, Agent Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
 
@@ -56,7 +56,7 @@ Retention periods in Agent Observability depend on the type of data and on your 
 | Experiment definitions and aggregate results | 90 days from creation                                                                     |
 | Annotated traces, spans, and sessions        | 90 days from the time of annotation, or your span retention period if that is longer      |
 | Annotation labels                            | The same period as the object they annotate                                               |
-| Dataset records                              | 3 years, regardless of your span retention period                                         |
+| Dataset records                              | Current version: 3 years. Previous versions: 90 days, reset when used                     |
 | Prompts in the prompt registry               | 3 years, extended each time the prompt is pulled                                          |
 | `ml_obs.*` metrics                           | 15 months                                                                                 |
 
@@ -89,7 +89,7 @@ The experiment itself — its name, configuration, and aggregate results — is 
 
 ### Changing your retention period
 
-Retention length affects what you are billed, because a longer period means Datadog stores more of your data. For rates, see the [Agent Observability pricing page][9].
+Retention length affects what you are billed, because a longer period means Datadog stores more of your data. For rates, see the [Agent Observability pricing page][10].
 
 Retention add-ons are arranged through your account team rather than enabled from the Datadog UI. To request a longer retention period, contact your Datadog account representative or [Datadog support][1].
 
@@ -111,17 +111,19 @@ A free-form note is not attached to a trace, span, or session, so adding one doe
 
 ### Dataset records
 
-Records in a [dataset][4] are retained for **3 years**, regardless of your span retention period.
+Records in the current version of a [dataset][4] are retained for **3 years**, regardless of your span retention period.
+
+Records in previous versions of a dataset are retained for **90 days**. This period resets each time a previous version is used — for example, when an experiment reads that version. After 90 consecutive days without use, a previous version becomes eligible for permanent deletion. For details, see [Dataset versioning][5].
 
 ### Prompts
 
-Prompts in the [prompt registry][8] are retained for **3 years**. This period is extended each time the prompt is pulled by your application, so a prompt in active use stays available. A prompt that is not pulled for 3 years becomes eligible for permanent deletion.
+Prompts in the [prompt registry][9] are retained for **3 years**. This period is extended each time the prompt is pulled by your application, so a prompt in active use stays available. A prompt that is not pulled for 3 years becomes eligible for permanent deletion.
 
 ### Metrics
 
-The `ml_obs.*` metrics generated from your spans are standard [Datadog metrics][5] and follow [standard Datadog metric retention][6]: 15 months at full granularity. They are retained on this schedule regardless of your span retention period, so you can build long-term dashboards and monitors on span counts, token usage, cost, latency, and error rates even after the underlying spans expire.
+The `ml_obs.*` metrics generated from your spans are standard [Datadog metrics][6] and follow [standard Datadog metric retention][7]: 15 months at full granularity. They are retained on this schedule regardless of your span retention period, so you can build long-term dashboards and monitors on span counts, token usage, cost, latency, and error rates even after the underlying spans expire.
 
-For the full list of available metrics, see [Agent Observability metrics][7].
+For the full list of available metrics, see [Agent Observability metrics][8].
 
 ## Further reading
 
@@ -131,11 +133,12 @@ For the full list of available metrics, see [Agent Observability metrics][7].
 [2]: /llm_observability/investigate/annotation_queues/
 [3]: /llm_observability/improve/experiments/
 [4]: /llm_observability/improve/datasets/
-[5]: /metrics/
-[6]: /data_security/data_retention_periods/
-[7]: /llm_observability/investigate/metrics/
-[8]: /llm_observability/configure/prompt_management/
-[9]: https://www.datadoghq.com/pricing/?product=llm-observability#products
-[10]: /account_management/rbac/data_access
-[11]: /llm_observability/instrument/sdk/#span-processing
-[12]: /security/sensitive_data_scanner/
+[5]: /llm_observability/improve/datasets/#dataset-versioning
+[6]: /metrics/
+[7]: /data_security/data_retention_periods/
+[8]: /llm_observability/investigate/metrics/
+[9]: /llm_observability/configure/prompt_management/
+[10]: https://www.datadoghq.com/pricing/?product=llm-observability#products
+[11]: /account_management/rbac/data_access
+[12]: /llm_observability/instrument/sdk/#span-processing
+[13]: /security/sensitive_data_scanner/
