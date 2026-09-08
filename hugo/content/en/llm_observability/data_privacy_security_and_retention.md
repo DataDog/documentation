@@ -55,7 +55,7 @@ Retention periods in Agent Observability depend on the type of data and on your 
 | Experiment traces                            | On-demand plans: 15 days. Committed plans: 90 days. With a retention add-on: 6, 9, or 12 months    |
 | Experiment definitions and aggregate results | 90 days from creation                                                                     |
 | Annotated traces, spans, and sessions        | 90 days from the time of annotation, or your span retention period if that is longer      |
-| Annotation labels                            | 90 days, matching the object they annotate                                                |
+| Annotation labels                            | The same period as the object they annotate                                               |
 | Dataset records                              | 3 years, regardless of your span retention period                                         |
 | Prompts in the prompt registry               | 3 years, extended each time the prompt is pulled                                          |
 | `ml_obs.*` metrics                           | 15 months                                                                                 |
@@ -102,9 +102,7 @@ When you move to a shorter retention period, spans older than the new period are
 
 Annotating an object extends its retention. When you apply an annotation label or note to a trace, span, or session — whether directly or through an [annotation queue][2] — Datadog retains the annotated object for **90 days** from the time of annotation, even if your span retention period is shorter. Annotating a span retains its whole parent trace, and annotating a trace that belongs to a session retains the whole session.
 
-If your organization's span retention period is longer than 90 days, annotated objects are retained for that longer period instead.
-
-Annotation labels are retained for the same 90 days as the object they annotate, and are no longer viewable after that object expires.
+Annotation labels are retained for the same period as the objects they annotate.
 
 Extending retention by annotating an object does not incur an additional charge.
 
