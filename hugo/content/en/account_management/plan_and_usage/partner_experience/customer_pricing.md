@@ -28,19 +28,19 @@ To set customer pricing, you need:
 ## Set up customer pricing
 
 1. Log in to your Datadog admin organization.
-2. Navigate to [{{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Pricing{{< /ui >}}][[2].
+1. Navigate to [{{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Pricing{{< /ui >}}][2].
    {{< img src="account_management/plan_and_usage/customer-pricing-nav.png" alt="Customer Pricing tab in the Plan & Usage section." >}}
-3. Select a customer from the dropdown. Only customers with an eligible resell contract are listed.
+1. Select a customer from the dropdown. Only customers with an eligible resell contract are listed.
    {{< img src="account_management/plan_and_usage/customer-pricing-select-customer.png" alt="Customer selection dropdown listing reseller customers." >}}
-4. Review the customer's contracted products and corresponding sales prices in the table.
-5. Click {{< ui >}}Edit{{< /ui >}} and enter the customer's prices for each contracted product. You can edit prices in bulk, individually, or a combination of both.
+1. Review the customer's contracted products and corresponding sales prices in the table.
+1. Click {{< ui >}}Edit{{< /ui >}} and enter the customer's prices for each contracted product. You can edit prices in bulk, individually, or a combination of both.
    {{< img src="account_management/plan_and_usage/customer-pricing-edit-bulk.png" alt="Bulk price editing controls for a customer's contracted products." >}}
    {{< img src="account_management/plan_and_usage/customer-pricing-edit-individual.png" alt="Individual draft price fields for each contracted product." >}}
-6. Set a default pricing rule for products that are not on the customer's contract. 
+1. Set a default pricing rule for products that are not on the customer's contract. 
     - By default, on-demand rates for non-contracted products are set to the Datadog list price. You can instead apply a percentage markup to the sales price, and optionally cap the marked-up rates at the Datadog list price.
    {{< img src="account_management/plan_and_usage/customer-pricing-default-rule.png" alt="Default pricing rule configuration for non-contracted products." >}}
-7. Click {{< ui >}}Save{{< /ui >}} to save a draft. Drafts are visible only within your Datadog admin organization. 
-8. Review your entries, then click {{< ui >}}Publish{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}} to save a draft. Drafts are visible only within your Datadog admin organization. 
+1. Review your entries, then click {{< ui >}}Publish{{< /ui >}}.
 
 After you publish, cost visibility is enabled for that customer within 24 hours. The customer can then see their estimated and historical costs in their Datadog organization, based on their usage and the rates you provide. Published prices are effective as of the most recent change to the customer's contract, whether that is a new contract or a terms modification to an existing one.
 
