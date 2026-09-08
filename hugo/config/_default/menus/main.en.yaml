@@ -9310,12 +9310,12 @@ menu:
       url: real_user_monitoring/rum_terms_and_concepts/
       parent: rum
       identifier: rum_terms_and_concepts
-      weight: 0
+      weight: 1
     - name: Setup RUM
       url: real_user_monitoring/setup/
       parent: rum
       identifier: rum_setup
-      weight: 1
+      weight: 2
     - name: Create a RUM App
       url: real_user_monitoring/setup/create_application/
       parent: rum_setup
