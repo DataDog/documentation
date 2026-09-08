@@ -166,7 +166,7 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
 
 {{< /tabs >}}
 
-**Note**: `enrichment.usage.enabled: true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package prioritization runs independently of [Workload Protection][8] and does not affect its usage. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for more details.
+**Note**: `enrichment.usage.enabled: true` requires Datadog Agent **7.79.0 or later**. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for requirements.
 
 **Note**: The `languages` analyzer requires Datadog Agent **7.70 or later**. When enabled, it detects vulnerabilities in application libraries managed by the package managers below, in addition to OS packages. When the `analyzers` field is omitted, Datadog only scans OS packages for container images.
 
@@ -206,10 +206,9 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 
 **Requirements**:
 - Datadog Agent **7.79.0 or later**. On Kubernetes, use **7.81.0 or later** for the most complete signal coverage.
-- Linux only (eBPF dependency).
-- Applies to operating system packages in container image vulnerability findings.
+- Linux only (eBPF dependency). See [Workload Protection setup][11] for supported distributions and kernel versions.
 
-**Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][8] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
+Runtime signals apply to packages installed by an operating system package manager (`apt`, `yum`, or `apk`) in container image vulnerability findings.
 
 {{< tabs >}}
 
@@ -276,6 +275,8 @@ Restart the Agent.
 
 {{< /tabs >}}
 
+To verify the setup, filter vulnerability findings by [runtime signals][10].
+
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats
 [3]: /security/cloud_security_management/vulnerabilities
@@ -286,3 +287,4 @@ Restart the Agent.
 [8]: /security/workload_protection/
 [9]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
 [10]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals
+[11]: /security/workload_protection/setup/

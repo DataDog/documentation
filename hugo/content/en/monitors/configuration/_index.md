@@ -220,10 +220,10 @@ The selected behavior is applied when a monitor's query does not return any data
 | {{< ui >}}Show NO DATA and notify{{< /ui >}} | Monitor status is set to `NO DATA` and a notification is sent out.        |
 | {{< ui >}}Show OK{{< /ui >}}                 | Monitor is resolved and status is set to `OK`.                            |
 
-The {{< ui >}}Evaluate as zero{{< /ui >}} and {{< ui >}}Show last known status{{< /ui >}} options are displayed based on the query type:
+Using default_zero() in a query locks the missing-data behavior to that query type's default and disables the other options:
 
-- {{< ui >}}Evaluate as zero{{< /ui >}}: This option is available for monitors using `Count` queries without the `default_zero()` function.
-- {{< ui >}}Show last known status{{< /ui >}}: This option is available for monitors using any other query type than `Count`, for example `Gauge`, `Rate`, and `Distribution`, as well as for `Count` queries with `default_zero()`.
+- For queries with `default_zero()`, missing data is always evaluated as zero, and the other missing-data behaviors are unavailable.
+- For queries without `default_zero()`, `Count` queries default to {{< ui >}}Evaluate as zero{{< /ui >}}, while other query types default to {{< ui >}}Show last known status{{< /ui >}}. All missing-data behaviors remain available.
 
 #### Auto resolve
 

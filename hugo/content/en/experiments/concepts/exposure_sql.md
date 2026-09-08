@@ -18,14 +18,14 @@ further_reading:
 
 ## Overview
 
-Datadog Experiments analyzes experiments run with [Datadog Feature Flags][1] or an independent randomization system. If you randomize subjects outside of Datadog Feature Flags, create **Exposure SQL Models** to tell Datadog who was exposed to your experiment and when, by reading exposure records from your warehouse.
+Datadog Experiments analyzes experiments run with [Datadog Feature Flags][1] or an independent randomization system. **Exposure SQL Models** tell Datadog who was exposed to your experiment and when, by reading exposure records from your warehouse. If you randomize subjects outside of Datadog Feature Flags, create an Exposure SQL Model for bring-your-own randomization. For a Datadog Feature Flag experiment whose decision metrics use warehouse data, an Exposure SQL Model can supply exposure records as an alternative to Datadog's default exported exposure logs.
 
 
 Similar to [Metric SQL Models][2], Exposure SQL Models are SQL queries that describe exposure data in your warehouse. Exposure SQL Models return the following columns:
 
 | Column | Required | Description |
 |--------|----------|-------------|
-| Subject Key | Yes | A unique identifier for the subject randomized into the experiment. This is typically a `user_id`. |
+| Subject Key | Yes | A unique identifier for the subject randomized into the experiment. The model must map the experiment's subject type and every subject type required by the analysis so Datadog can join exposures to metric data. |
 | Timestamp | Yes | The timestamp when the user was exposed to the experiment. |
 | Experiment ID | Yes | The experiment that the user was exposed to. One Exposure SQL Model can track many experiments; this column filters records to a specific experiment. |
 | Variant ID | Yes | The variant the user was assigned to (for example, `treatment` or `control`). |

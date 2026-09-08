@@ -39,7 +39,7 @@ The Remapper is typically used to remap an attribute from your logs to a Standar
 
 ## Before and after state of logs
 
-{{% collapse-content title="Example: Remapping an attribute in custom application logs" level="h4" %}}
+{{% collapse-content title="Example: Remapping an attribute in custom application logs" level="h3" %}}
 
 **Before:**
 

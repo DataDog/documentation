@@ -20,7 +20,7 @@ further_reading:
 
 The [Flaky Tests Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's state along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
 
-From this UI, you can act on flaky tests to mitigate their impact. Quarantine or disable problematic tests to keep known flakes from breaking builds, and create cases and Jira issues to track work toward fixes.
+From this UI, you can act on flaky tests to mitigate their impact. Quarantine or disable problematic tests to keep known flakes from breaking builds, and create work items and Jira issues to track work toward fixes.
 
 Each flaky test has a stable, unique identifier derived from a hash of the repository ID and the test's fully qualified name. In the Test Optimization Explorer, this is the `@test.fingerprint_fqn` facet. In the [Flaky Tests Management API][18], it is the test's `id`, and you can filter the Search flaky tests endpoint using the `fingerprint_fqn` key. Use this identifier to look up or update a specific test through the API.
 
@@ -34,7 +34,7 @@ Use the state drop-down to change how a flaky test is handled in your CI pipelin
 | ----------- | ----------- |
 | {{< ui >}}Active{{< /ui >}} | The test is known to be flaky and is running in CI. |
 | {{< ui >}}Quarantined{{< /ui >}} | Keep the test running in the background, but failures don't affect CI status or break pipelines. This is useful for isolating flaky tests without blocking merges. Datadog tags test run events with `@test.test_management.is_quarantined:true` when quarantined. |
-| {{< ui >}}Disabled{{< /ui >}} | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. Datadog tags test run events with `@test.test_management.is_disabled:true` when disabled. |
+| {{< ui >}}Disabled{{< /ui >}} | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. Datadog tags test run events with `@test.test_management.is_disabled:true` when disabled. Disabled tests are excluded from the automatic move to {{< ui >}}Fixed{{< /ui >}}. |
 | {{< ui >}}Fixed{{< /ui >}} | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm the fix and automatically apply this state after it is merged into the default branch. |
 
 <div class="alert alert-info">State actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
@@ -88,6 +88,7 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
          <td>{{< ui >}}Fixed{{< /ui >}}</td>
          <td>
            <p>If a flaky test no longer flakes for 30 days, it is automatically moved to the Fixed state. This automation is default behavior and can't be customized.</p>
+           <p>Tests in the {{< ui >}}Disabled{{< /ui >}} state are excluded from this automation and are never automatically moved to {{< ui >}}Fixed{{< /ui >}}. Because disabled tests are skipped in CI, Datadog has no signal about whether they are still flaky. To make a disabled test eligible again, change its state to {{< ui >}}Active{{< /ui >}} or {{< ui >}}Quarantined{{< /ui >}}.</p>
            <p>Before Datadog automatically moves a flaky test to {{< ui >}}Fixed{{< /ui >}}, it checks whether the test may be broken rather than fixed. A broken test is a flaky test whose recent executions all failed, resulting in a 100% failure rate over the last 7 days. Datadog does not automatically mark these tests as fixed, which helps prevent quarantined tests that still fail from breaking CI again.</p>
            <p>Use the {{< ui >}}Broken test{{< /ui >}} facet in the Flaky Tests Management explorer to identify these tests. Filter on <code>broken_test:true</code> to show tests with a 100% failure rate over the last 7 days.</p>
          </td>
@@ -115,9 +116,9 @@ For more information about a specific flaky test, use these options in the actio
 - {{< ui >}}View Last Failed Test Run{{< /ui >}}: Open the side panel with the details of the test's most recent failed run.
 - {{< ui >}}View related test executions{{< /ui >}}: Open the [Test Optimization Explorer][3] populated with all of the test's recent runs.
 
-## Create cases for flaky tests
+## Create work items for flaky tests
 
-For any flaky test, you can create a case and use [Case Management][4] to track any work toward remediation. Click the {{< ui >}}Create Case{{< /ui >}} button or use the actions menu at the end of the row.
+For any flaky test, you can create a work item and use [Work Management][4] to track any work toward remediation. Click the {{< ui >}}Create Work Item{{< /ui >}} button or use the actions menu at the end of the row.
 
 ## Confirm fixes for flaky tests
 
@@ -135,6 +136,8 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
       - Starts a 14-day [grace period](#grace-period-mechanism) to give time for the fix to propagate everywhere in the repository.
     - If any retry fails, keeps the test's current state (`Active`, `Quarantined`, or `Disabled`).
       - Tags the last test retry with `@test.test_management.attempt_to_fix_passed:false` in test run events.
+
+<div class="alert alert-danger">For Cypress, this remediation flow requires <a href="https://docs.cypress.io/app/core-concepts/test-isolation">test isolation</a> to be enabled. With <code>testIsolation: false</code>, attempt-to-fix retries do not run. See also <a href="/tests/setup/javascript/?tab=cypress#retries-require-cypress-test-isolation">Retries require Cypress test isolation</a>.</div>
 
 ### Track fixes that are in progress
 
@@ -241,6 +244,15 @@ To use Flaky Tests Management features, you must use Datadog's native instrument
 
 ## Troubleshooting
 
+### Disabled flaky tests are not automatically moved to Fixed
+
+Datadog does not automatically move {{< ui >}}Disabled{{< /ui >}} tests to the {{< ui >}}Fixed{{< /ui >}} state, even after they stop flaking for 30 days. A disabled test is skipped in CI, so Datadog receives no test run data for it and cannot verify whether it is still flaky.
+
+To fix a disabled test, do one of the following:
+
+- Trigger the [attempt-to-fix remediation flow](#confirm-fixes-for-flaky-tests). It retries the test even while it is disabled, and moves it to {{< ui >}}Fixed{{< /ui >}} once the fix is confirmed and merged.
+- Manually change the test's state to {{< ui >}}Active{{< /ui >}} or {{< ui >}}Quarantined{{< /ui >}} using the [state drop-down](#change-a-flaky-tests-state). Datadog then automatically moves the test to {{< ui >}}Fixed{{< /ui >}} the next time the automation runs, unless the test flakes again.
+
 ### Slack notifications are not delivered
 
 If Slack notifications are not being delivered, check that your notification rule uses the `@slack-ACCOUNT-CHANNEL` format.
@@ -265,7 +277,7 @@ After you include the test key (for example, `DD_ABC123`) in a commit, Datadog s
 [1]: https://app.datadoghq.com/ci/test/flaky
 [2]: https://app.datadoghq.com/source-code/repositories
 [3]: /tests/explorer
-[4]: /incident_response/case_management
+[4]: /incident_response/work_management
 [5]: /integrations/slack/?tab=datadogforslack
 [6]: /tests/setup/dotnet/
 [7]: /tests/setup/go/

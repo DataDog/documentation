@@ -37,7 +37,7 @@ These values appear automatically in most notification channels without any conf
 
 To include additional test result data beyond the defaults, use handlebar formatting in your monitor message.
 
-{{< collapse-content title="Pre-filled examples by test type" level="h4" >}}
+{{< collapse-content title="Pre-filled examples by test type" level="h3" >}}
 
 {{< tabs >}}
 {{% tab "API request response" %}}

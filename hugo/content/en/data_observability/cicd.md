@@ -76,9 +76,17 @@ Impact lineage generates a graph of the downstream assets that may be affected b
 
 #### Drift Detection
 
-Drift detection compares the current state of your data on the branch to a baseline and flags any deviations. For Datadog to understand which models ran as part of a CI pipeline, you must send OpenLineage events from your CI job. Datadog uses these events as triggers for drift detection checks. See the [OpenLineage setup documentation][6] for instructions on how to set up OpenLineage.
+Drift detection compares the current state of your data on the branch to a baseline and flags any deviations. Datadog uses the dbt runs from your CI pipeline as the triggers for drift detection checks. For **dbt Core**, you must send OpenLineage events from your CI job so Datadog receives these runs. See the [OpenLineage setup documentation][6]. For **dbt Cloud**, configure the CI job that runs on pull requests in the `CI Job URL` setting in the [dbt Cloud](#dbt-cloud) section.
 
-For **dbt Core**, drift detection also requires the pull request number to be attached to your OpenLineage events through the `sourceCodeLocation` facet. This requires `openlineage-dbt` version 1.46.0 or later and the `OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__DISABLED=false` environment variable. See [Set the environment variables][7].
+Datadog must also be able to read the tables your CI job builds to compare them. The role you created during Snowflake setup (`DATADOG_ROLE` by default) needs `USAGE` and `SELECT` on the database your CI job materializes models to. Datadog's Snowflake integration setup includes a `grantFutureAccess` procedure that grants this on all current and future tables and views in every schema of a database. Run it for the database your CI job writes to:
+
+```sql
+CALL grantFutureAccess('<CI_DATABASE>', '<ROLE_NAME>');
+```
+
+If your CI creates an ephemeral, per-pull-request database, call the procedure as part of that provisioning step so each new database is readable. See [Snowflake setup][8] for the procedure definition. Without this access, Datadog receives the CI run but cannot query the CI tables, and drift detection fails.
+
+For **dbt Core**, drift detection also requires the pull request number to be attached to your OpenLineage events through the `sourceCodeLocation` facet. This requires `openlineage-dbt` version 1.46.0 or later and the `OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__DISABLED=false` environment variable. See [Set the environment variables][7]. If your dbt Core CI job runs inside a container, it needs additional setup. See the [Running your dbt Core CI job in a container](#running-your-dbt-core-ci-job-in-a-container) section.
 
 ##### General settings
 
@@ -92,7 +100,7 @@ For **dbt Core**, drift detection also requires the pull request number to be at
 
 | Setting      | Description                                                                                                                                                                                                                   |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CI Job URL` | The locator for the dbt Cloud CI job that's triggered by pull requests, materializes dbt models for CI, and sends OpenLineage events to Datadog. These typically look like `https://cloud.getdbt.com/...`. |
+| `CI Job URL` | The locator for the dbt Cloud CI job that's triggered by pull requests and materializes dbt models for CI. Datadog receives this job's run events through the dbt Cloud integration. These typically look like `https://cloud.getdbt.com/...`. |
 
 ##### dbt Core
 
@@ -100,6 +108,34 @@ For **dbt Core**, drift detection also requires the pull request number to be at
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `CI Job Name`      | The name of the job that's triggered by pull requests, materializes dbt models for CI, and sends OpenLineage events to Datadog.                                                                                                                   |
 | `CI Job Namespace` | The OPENLINEAGE_NAMESPACE variable specified when sending OpenLineage events from the job specified above. See [Set the environment variables][7]. If you don't set this variable when sending OpenLineage events, you don't need to specify it here. |
+
+#### Running your dbt Core CI job in a container
+
+If your dbt Core CI job runs inside a container that the CI runner launches (for example, a GitHub Actions workflow that runs the job with `docker run`), the container does not inherit the git context from the CI runner. As a result, the repository URL, commit SHA, and pull request number are not detected automatically, and the `sourceCodeLocation` facet is sent without them. Datadog uses these values to match the run to the pull request you opened or updated, so without them no drift results appear on the pull request.
+
+The following example uses GitHub Actions; on other CI providers, the environment variable names differ, but the approach is the same. On the CI runner, read the values and pass them into the container explicitly:
+
+```shell
+# On the CI runner, before launching the container:
+PR_NUMBER=$(jq -r '.pull_request.number'  "$GITHUB_EVENT_PATH")
+HEAD_SHA=$(jq -r '.pull_request.head.sha' "$GITHUB_EVENT_PATH")   # the pull request's head commit, not the merge commit
+REPO_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
+
+docker run \
+  -e OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__DISABLED=false \
+  -e OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__REPO_URL="$REPO_URL" \
+  -e OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__PULL_REQUEST_NUMBER="$PR_NUMBER" \
+  -e OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__VERSION="$HEAD_SHA" \
+  <YOUR_IMAGE> <YOUR_DBT_OL_COMMAND>
+```
+
+The workflow must run when a pull request is opened or updated:
+
+```yaml
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+```
 
 ## Further reading
 
@@ -112,3 +148,4 @@ For **dbt Core**, drift detection also requires the pull request number to be at
 [5]: /data_observability/jobs_monitoring/dbt/?tab=dbtcore
 [6]: /data_observability/jobs_monitoring/openlineage/
 [7]: /data_observability/jobs_monitoring/dbt/?tab=dbtcore#set-the-environment-variables
+[8]: /data_observability/quality_monitoring/data_warehouses/snowflake/

@@ -59,7 +59,7 @@ Some features cannot be managed through the Datadog resource in Azure. These inc
 
 ## Setup
 
-{{% collapse-content title="Azure portal" level="h4" expanded=false id="azure-portal-setup" %}}
+{{% collapse-content title="Azure portal" level="h3" expanded=false id="azure-portal-setup" %}}
 There are two options when you create a Datadog resource in the Azure portal:
 
 1. Link to an existing Datadog organization. This is the more common action. Use this to configure your Datadog org to monitor an Azure subscription that hasn't been linked yet. This action does not affect your Datadog billing plan.
@@ -144,7 +144,7 @@ Provide the following values:
 [3]: https://learn.microsoft.com/partner-center/marketplace-offers/azure-consumption-commitment-enrollment
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Terraform" level="h4" expanded=false id="terraform-setup" %}}
+{{% collapse-content title="Terraform" level="h3" expanded=false id="terraform-setup" %}}
 1. Ensure that you have configured the [Terraform Azure provider][1].
 
 2. Use the templates below to create the `azurerm_datadog_monitor` resource and perform the `Monitoring Reader` role assignment with Terraform:

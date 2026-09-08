@@ -23,3 +23,9 @@
         {{- end -}}
     {{- end -}}
 {{- end -}}
+{{- with .Site.Data.security_rules_global_aliases -}}
+    {{- range . -}}
+        {{- $alias := strings.TrimSuffix "/" (strings.TrimPrefix "/" .) -}}
+        {{- printf "%s/ /security/default_rules/\n" $alias -}}
+    {{- end -}}
+{{- end -}}

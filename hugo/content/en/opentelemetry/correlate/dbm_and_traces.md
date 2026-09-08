@@ -46,7 +46,7 @@ To get started, instrument your application using the appropriate OpenTelemetry 
 
 These libraries automatically add the required `db.system` and `db.statement` attributes. The Datadog Agent or SDK then derives `span.type` automatically, so no manual attribute configuration is needed.
 
-{{% collapse-content title="Set attributes manually (advanced)" level="h4" %}}
+{{% collapse-content title="Set attributes manually (advanced)" level="h5" %}}
 If your environment involves a custom database client or spans not recognized by the library, you can enrich them using the OpenTelemetry Collector’s `attributes` processor.
 
 For example, you can add `span.type: sql` to any span that has the `db.system` attribute:

@@ -657,7 +657,7 @@ See the [RUM Debug Symbols][24] page to view all uploaded symbols.
 
 ## Advanced Error Tracking features
 
-{{% collapse-content title="Set tracking consent (GDPR compliance)" level="h4" expanded=false id="set-tracking-consent" %}}
+{{% collapse-content title="Set tracking consent (GDPR compliance)" level="h3" expanded=false id="set-tracking-consent" %}}
 
 To be compliant with the GDPR regulation, the SDK requires the tracking consent value upon initialization.
 
@@ -675,7 +675,7 @@ To **update the tracking consent** after the SDK is initialized, call `Datadog.s
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Sample session rates" level="h4" expanded=false id="sample-session-rates" %}}
+{{% collapse-content title="Sample session rates" level="h3" expanded=false id="sample-session-rates" %}}
 
 To control the data your application sends to Datadog, you can specify a sample rate for sessions when [initializing RUM][11]. The sample rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
@@ -689,7 +689,7 @@ Rum.enable(rumConfig)
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Initialize the interceptor to track network events" level="h4" expanded=false id="interceptor" %}}
+{{% collapse-content title="Initialize the interceptor to track network events" level="h3" expanded=false id="interceptor" %}}
 
 The network interceptor automatically tracks HTTP requests and responses, capturing network errors, timeouts, and performance issues that can help you correlate network problems with app crashes and user experience issues. To initialize an interceptor for tracking network events:
 
@@ -764,7 +764,7 @@ You can also add an `EventListener` for the `OkHttpClient` to [automatically tra
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Track background events" level="h4" expanded=false id="track-background-events" %}}
+{{% collapse-content title="Track background events" level="h3" expanded=false id="track-background-events" %}}
 
 You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
 
@@ -787,7 +787,7 @@ Add the following snippet during configuration:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Sending data when device is offline" level="h4" expanded=false id="sending-data-device-offline" %}}
+{{% collapse-content title="Sending data when device is offline" level="h3" expanded=false id="sending-data-device-offline" %}}
 
 The Android SDK ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. 
 
@@ -797,7 +797,7 @@ This means that even if users open your application while offline, no data is lo
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Plugin configuration options" level="h4" expanded=false id="plugin-config-options" %}}
+{{% collapse-content title="Plugin configuration options" level="h3" expanded=false id="plugin-config-options" %}}
 
 There are several plugin properties that can be configured through the plugin extension. In case you are using multiple variants, you can set a property value for a specific flavor in the variant.
 
@@ -835,7 +835,7 @@ This resolves the final value for the `versionName` property as `fooBar`.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Integrate with a CI/CD pipeline" level="h4" expanded=false id="plugin-config-options" %}}
+{{% collapse-content title="Integrate with a CI/CD pipeline" level="h3" expanded=false id="plugin-config-options" %}}
 
 By default, the upload mapping task is independent from other tasks in the build graph. Run the task manually when you need to upload mapping.
 

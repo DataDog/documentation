@@ -16,7 +16,7 @@ Tag enrichment is in Preview. To request access, fill out this form.
 
 ## Overview
 
-Use tag enrichment rules to add tags to your Logs and APM spans without code changes or redeployment. You can use values from service metadata you've already defined in Catalog, the value of another tag, or a fixed value.
+Use tag enrichment rules to add tags to your logs, APM spans, and trace metrics without code changes or redeployment. You can use values from service metadata you've already defined in Catalog, the value of another tag, or a fixed value.
 
 ## Prerequisites
 
@@ -45,7 +45,7 @@ Custom rules let you target a specific set of services and configure exactly how
    - Select the `team` tag, `system` tag, `custom` tag, or multiple.
    - For each tag, select whether the tag value comes from Entity Metadata, the value of a different tag, or a fixed value.
    - Choose whether the value is applied only when it doesn't already exist, or is appended to the current list of values for that tag.
-1. By default, tags are added to all telemetry.
+1. By default, tags are added only when the value is missing for a given telemetry item.
 1. Optionally, enter a descriptive name for the rule.
 1. Review and save your rule. After you save the rule, it can take up to an hour for enrichment to be fully applied to incoming telemetry.
 
@@ -61,11 +61,12 @@ Click {{< ui >}}Add Tags{{< /ui >}} to open the tag enrichment rule modal pre-po
 
 ## Tag enrichment behavior
 
-- **Impacted telemetry**: Tag enrichment applies to Logs and APM spans only.
+- **Impacted telemetry**: Tag enrichment applies only to logs, APM spans, and trace metrics. Because [Data Observability: Jobs Monitoring][3] sends job telemetry as APM spans, that telemetry is enriched as well, but Jobs Monitoring metrics are not. Tag enrichment is not supported for other telemetry types, including custom and infrastructure metrics, Database Monitoring, Profiling, Kubernetes, Universal Service Monitoring, and Events.
 - **Historical data**: Tag enrichment rules apply only to telemetry ingested while a rule is active. Past data is not updated retroactively. Deleting or modifying a rule stops it from applying to new telemetry, but does not update previously ingested data.
 - **Metadata updates**: Updating or adding Entity Metadata to services while enrichment rules are enabled, including the default rules, automatically updates those tags.
 - **Rule processing order**: Tag enrichment rules are applied in the order in which they were created. Rules at the top of the list take precedence over rules below them.
 - **Interaction with remapping rules**: Tag enrichment rules are applied after service remapping rules. If a service remapping rule modifies the `service` tag, enrichment uses the updated service name when looking up IDP metadata.
+- **Primary tags** Tag enrichment applies after primary tags resolution, so enriched tags cannot be used as primary tags.
 
 ## Further reading
 
@@ -73,3 +74,4 @@ Click {{< ui >}}Add Tags{{< /ui >}} to open the tag enrichment rule modal pre-po
 
 [1]: https://app.datadoghq.com/software/settings/tag-enrichment
 [2]: /account_management/rbac/
+[3]: /data_observability/jobs_monitoring/

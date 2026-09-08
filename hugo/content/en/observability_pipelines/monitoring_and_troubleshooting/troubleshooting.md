@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting
+description: Learn how to view Worker stats and logs, and use the tap and top commands to inspect events and diagnose Observability Pipelines setup issues.
 disable_toc: false
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Google Cloud Storage Destination
+description: Learn how to send logs to a Google Cloud Storage bucket, optionally for archiving and rehydration in Datadog.
 disable_toc: false
 products:
 - name: Logs
@@ -25,7 +26,37 @@ If you already have a Datadog Log Archive configured for Observability Pipelines
 
 You need to have Datadog's [Google Cloud Platform integration][3] installed to set up Datadog Log Archives.
 
-{{% observability_pipelines/configure_log_archive/google_cloud_storage/instructions %}}
+### Create a storage bucket
+
+1. Navigate to [Google Cloud Storage][16].
+1. On the Buckets page, click **Create** to create a bucket for your archives..
+1. Enter a name for the bucket and choose where to store your data.
+1. Select **Fine-grained** in the **Choose how to control access to objects** section.
+1. Do not add a retention policy because the most recent data needs to be rewritten in some rare cases (typically a timeout case).
+1. Click **Create**.
+
+### Create a service account to allow Workers to write to the bucket
+
+1. Create a Google Cloud Storage [service account][17].
+    - Grant the Service Account permissions to your bucket with `Storage Admin` and `Storage Object Admin` permissions.
+    - If you want to authenticate with a credentials file, download the service account key file and place it under `DD_OP_DATA_DIR/config`. You reference this file when you set up the [Google Cloud Storage destination](#set-up-the-destinations) later on.
+1. Follow these [instructions][18] to create a service account key. Choose `json` for the key type.
+
+### Connect the storage bucket to Datadog Log Archives
+
+1. Navigate to Datadog [Log Forwarding][19].
+1. Click **New archive**.
+1. Enter a descriptive archive name.
+1. Add a query that filters out all logs going through log pipelines so that none of those logs go into this archive. For example, add the query `observability_pipelines_read_only_archive`, assuming no logs going through the pipeline have that tag added.
+1. Select **Google Cloud Storage**.
+1. Select the service account your storage bucket is in.
+1. Select the project.
+1. Enter the name of the storage bucket you created earlier.
+1. Optionally, enter a path.
+1. Optionally, set permissions, add tags, and define the maximum scan size for rehydration. See [Advanced settings][20] for more information.
+1. Click **Save**.
+
+See the [Log Archives documentation][1] for additional information.
 
 ## Set up the destination for your pipeline {#set-up-the-destinations}
 
@@ -54,6 +85,12 @@ Enter a prefix that you want to apply to all key objects.
 
 1. Click {{< ui >}}Add Header{{< /ui >}} to add metadata.
 1. Enter values for the header name and value.
+
+#### Compression
+
+1. In the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu, select the compression algorithm for your archived logs ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}).
+    - **Note**: If a compression algorithm is not specified, gzip with a compression level of `6` is used.
+1. In the {{< ui >}}Compression - Level {{< /ui >}} field, you must enter a compression level. Datadog recommends `6` for gzip and `3` for zstd.
 
 #### Buffering
 
@@ -106,3 +143,8 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
 [15]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[16]: https://console.cloud.google.com/storage
+[17]: https://console.cloud.google.com/iam-admin/serviceaccounts
+[18]: https://cloud.google.com/iam/docs/keys-create-delete#creating
+[19]: https://app.datadoghq.com/logs/pipelines/log-forwarding
+[20]: /logs/log_configuration/archives/?tab=awss3#advanced-settings

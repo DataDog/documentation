@@ -95,7 +95,7 @@ COPY --from=builder /app/myapp /myapp
 CMD ["/myapp"]
 ```
 
-{{% collapse-content title="APM Tracing Enabled" level="h3" %}}
+{{% collapse-content title="APM Tracing Enabled" level="h4" %}}
 
 Update your task definition to include the Go application container with App and API Protection configuration:
 
@@ -126,7 +126,7 @@ Update your task definition to include the Go application container with App and
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="APM Tracing Disabled" level="h3" %}}
+{{% collapse-content title="APM Tracing Disabled" level="h4" %}}
 
 To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing variable to false.
 

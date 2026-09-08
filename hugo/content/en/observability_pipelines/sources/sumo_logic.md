@@ -1,5 +1,6 @@
 ---
 title: Sumo Logic Hosted Collector
+description: Learn how to collect logs sent to a Sumo Logic Hosted Collector using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

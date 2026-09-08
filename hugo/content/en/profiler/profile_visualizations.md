@@ -11,6 +11,12 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
+    - link: "https://learn.datadoghq.com/courses/continuous-profiler-course"
+      tag: "Learning Center"
+      text: "Diagnose Code Performance Issues with Continuous Profiler"
+    - link: "https://learn.datadoghq.com/courses/profiling-timeline"
+      tag: "Learning Center"
+      text: "Optimize Request Latency with Profiling Timeline"
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tag: 'Blog'
       text: 'Introducing always-on production profiling in Datadog'
@@ -20,12 +26,6 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/profiling-visualizations/'
       tag: 'Blog'
       text: 'Accessible profiling visualizations'
-    - link: "https://learn.datadoghq.com/courses/continuous-profiler-course"
-      tag: "Learning Center"
-      text: "Diagnose Code Performance Issues with Continuous Profiler"
-    - link: "https://learn.datadoghq.com/courses/profiling-timeline"
-      tag: "Learning Center"
-      text: "Optimize Request Latency with Profiling Timeline"
 
 ---
 
@@ -59,7 +59,7 @@ The width of a frame represents how much of the total CPU it consumed. On the ri
 
 By default, darker frames indicate higher CPU usage, while lighter frames signify lower usage; the most resource-intensive methods are grouped on the leftmost side of the flame graph.
 
-Flame graphs can be included in Dashboards and Notebooks with the [Profiling Flame Graph Widget][5].
+Flame graphs can be included in Dashboards and Notebooks with the [Profiling Flame Graph Widget][5]. Profiling data that was exported to a Notebook is retained for one year.
 
 ### Timeline view
 

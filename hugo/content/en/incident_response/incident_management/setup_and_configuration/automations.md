@@ -215,7 +215,7 @@ Use notification rules for straightforward notifications and automations for com
 
 Use the following examples to help you build your own incident automations.
 
-{{% collapse-content title="Add teams to the incident channel" level="h4" expanded=false %}}
+{{% collapse-content title="Add teams to the incident channel" level="h3" expanded=false %}}
 
 **Trigger**: When declared or updated<br>
 **Condition**: Severity is `SEV-1` or `SEV-2`<br>
@@ -227,7 +227,7 @@ Use the following examples to help you build your own incident automations.
 Access the [blueprint in Datadog][9].
 {{% /collapse-content %}}
 
-{{% collapse-content title="Periodic status reminders" level="h4" expanded=false %}}
+{{% collapse-content title="Periodic status reminders" level="h3" expanded=false %}}
 
 **Trigger**: On a schedule (every 30 minutes)<br>
 **Condition**: Severity is `SEV-1` or `SEV-2`, State is `Active` or `Stable`<br>

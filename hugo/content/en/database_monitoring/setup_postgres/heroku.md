@@ -190,7 +190,7 @@ instances:
 
 To manually locate the correct values for the placeholders in the YAML file, follow the [Manual Setup](#manual-setup). To programmatically replace them, follow the [Prerun Script](#prerun-script) instructions.
 
-{{% collapse-content title="Manual Setup" level="h5" %}}
+{{% collapse-content title="Manual Setup" level="h4" %}}
 #### Manual Setup
 
 Locate the`HEROKU_POSTGRESQL_<COLOR>_URL` connection string from above. If you need to locate the string again, run `heroku config`. The connection string follows the structure:
@@ -206,7 +206,7 @@ git push heroku main
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Prerun Script" level="h5" %}}
+{{% collapse-content title="Prerun Script" level="h4" %}}
 #### Prerun Script
 
 Using a [prerun script][5], you can programatically replace the placeholder `conf.yaml` values before starting the Datadog Agent. If you don't have a prerun script yet, create a shell script called `prerun.sh` in the `datadog/` directory in project root, and add the script below.

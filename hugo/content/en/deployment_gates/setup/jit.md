@@ -106,8 +106,8 @@ The analysis is automatically performed for all APM-instrumented services, and n
 **Options**:
 
 - `duration`: The period of time (in seconds) for which the analysis runs. For optimal analysis confidence, this value should be at least 900 seconds (15 minutes) after a deployment starts. Maximum is 7200 seconds (2 hours).
-- `included_resources` (optional): [APM resources][2] to include in the analysis. When specified, only the listed resources are analyzed.
-- `excluded_resources` (optional): [APM resources][2] to ignore (such as low-volume or low-priority endpoints).
+- `allowed_resources` (optional): [APM resources][2] to include in the analysis. When specified, only the listed resources are analyzed. Mutually exclusive with `excluded_resources`.
+- `excluded_resources` (optional): [APM resources][2] to ignore (such as low-volume or low-priority endpoints). Mutually exclusive with `allowed_resources`.
 
 Example inline rule:
 

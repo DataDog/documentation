@@ -28,7 +28,10 @@ With Risk Insights, you can:
 
 ## Prerequisites
 
-- For Risk Insights coverage, either GitHub, [Azure][6], [GCP][5], or [AWS][1] must be configured for Cloud SIEM.
+- To use Risk Insights, configure at least one of the following supported log sources to send logs to Cloud SIEM, with an active Open Cybersecurity Schema Framework (OCSF) pipeline:
+  - **Sources that provide identity and resource entities** (such as users, service identities, assumed roles, compute instances, and storage containers): AWS, Azure, GCP, GitHub, Microsoft 365, and Okta.
+  - **Sources that provide user entities identified by email address**: 1Password, Cisco Duo, Cloudflare, CrowdStrike, Google Workspace, JumpCloud, LastPass, Salesforce, Slack, and Zscaler Internet Access (ZIA).
+- Many supported sources use an [out-of-the-box OCSF pipeline][8] that requires no additional configuration. If a supported source is not producing entities, confirm that its out-of-the-box OCSF pipeline is active. Pipelines that predate OCSF support, and customized pipelines, may not include the required OCSF processing.
 - (Optional) To view associated Cloud Security insights in the entity panel, [Cloud Security must be configured][2].
 
 
@@ -68,7 +71,9 @@ You can configure Datadog to send you notifications as soon as it detects new th
    - In Datadog, go to {{< ui >}}Cloud SIEM{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}. Under {{< ui >}}Products{{< /ui >}}, in the {{< ui >}}Cloud SIEM{{< /ui >}} section, click [{{< ui >}}Risk Insights{{< /ui >}}][7]; then, under {{< ui >}}Notification rules{{< /ui >}}, click {{< ui >}}New notification rule{{< /ui >}}.
 1. Under {{< ui >}}Define entity attributes{{< /ui >}}, specify the attributes that should trigger notifications when Datadog detects them on an entity. Beside {{< ui >}}Entities matching{{< /ui >}}, start typing entity attributes and values. As you type, the preview table dynamically displays risk insights that match your criteria.
    <div class="alert alert-info">This step is optional, but if you don't enter any attributes, the notification defaults to sending alerts for all entities.</div>
-1. Under {{< ui >}}Set notification conditions{{< /ui >}}, specify the risk score threshold to trigger notifications for.
+1. Under {{< ui >}}Set notification conditions{{< /ui >}}, set the trigger condition based on entity severity or risk score value:
+   - {{< ui >}}Entity severity{{< /ui >}}: Triggers a notification when an entity reaches a certain severity level. Select an operator, then select a severity level. For the risk score that corresponds to each severity level, see [Entity severity thresholds](#entity-severity-thresholds).
+   - {{< ui >}}Risk score value{{< /ui >}}: Triggers a notification when the entity's risk score crosses a specified threshold. Specify the threshold for notifications.
 1. Under {{< ui >}}Configure notification{{< /ui >}}, enter a name for the notification, add a custom message body, and specify recipients to send it to.
    - Optionally, you can also turn on re-notifications, and specify the period of time that should pass before Datadog re-notifies the recipients that the risk insight still meets the criteria you specified.
 1. To verify your setup, click {{< ui >}}Test Notification{{< /ui >}} to send a test notification to the configured recipients.
@@ -109,10 +114,8 @@ The severity threshold of an entity is calculated by adding up the score impact 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
 [2]: https://docs.datadoghq.com/security/cloud_security_management/setup
 [3]: https://app.datadoghq.com/security
 [4]: https://app.datadoghq.com/security/siem/risk-insights
-[5]: /security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
-[6]: /security/cloud_siem/guide/azure-config-guide-for-cloud-siem/
 [7]: https://app.datadoghq.com/security/configuration/siem/risk-insights
+[8]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/#supported-out-of-the-box-ocsf-pipelines

@@ -29,7 +29,7 @@ The Bits Investigation chatbot has access to:
 | Find recent changes for a service              | `Were there any recent changes on <web-store>?`                   | Change Tracking                   |
 | Query APM request, error, and duration metrics | `What's the current error rate for <web-store>?`                  | APM                               |
 | Query and analyze profiling data               | `What performance bottlenecks do you see for <web-store>?`        | Continuous Profiler                               |
-| Ask about Datadog products                     | `Does Bits Investigation connect to Datadog Case Management?`     | Datadog Documentation             |
+| Ask about Datadog products                     | `Does Bits Investigation connect to Datadog Work Management?`     | Datadog Documentation             |
 | Create a Notebook                              | `Can you create a notebook with a summary of this investigation?` | Notebooks                         |
 
 [1]: bits_ai/bits_investigation/configure#confluence

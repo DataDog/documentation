@@ -16,6 +16,9 @@ further_reading:
     - link: '/extend/guide/data-collection-resolution/'
       tag: 'Documentation'
       text: 'Data collection and resolution'
+    - link: "https://learn.datadoghq.com/courses/profiling-timeline"
+      tag: "Learning Center"
+      text: "Optimize Request Latency with Profiling Timeline"
     - link: 'https://www.datadoghq.com/blog/source-code-preview/'
       tag: 'Blog'
       text: 'Focus on code that matters with source code previews in Continuous Profiler'
@@ -49,9 +52,6 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
       tag: "Blog"
       text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
-    - link: "https://learn.datadoghq.com/courses/profiling-timeline"
-      tag: "Learning Center"
-      text: "Optimize Request Latency with Profiling Timeline"
 cascade:
     algolia:
         rank: 70
@@ -97,7 +97,7 @@ The [Getting Started with Profiler][1] guide takes a sample service with a perfo
 
 After you configure your application to send profiles to Datadog, start getting insights into your code performance.
 
-By default, profiles are retained for eight days, and metrics generated from profile data are retained for one month.
+By default, flame graphs, call graphs, and thread timelines are retained for eight days, and profile metrics are retained for one month. Export a flame graph to a notebook to retain it for one year.
 
 {{< learning-center-callout header="Try Diagnose Code Performance Issues in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/continuous-profiler-course">}}
   The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to investigate and improve application code performance in production with Datadog Continuous Profiler.

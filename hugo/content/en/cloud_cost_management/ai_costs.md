@@ -29,6 +29,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-cost-management-ai-costs/"
   tag: "Blog"
   text: "Attribute AI costs across providers with Datadog Cloud Cost Management"
+- link: "https://www.datadoghq.com/blog/making-agentic-token-costs-visible-in-production/"
+  tag: "Blog"
+  text: "Making agentic token costs visible in production"
+- link: "https://www.datadoghq.com/blog/cloud-cost-skill-bits-chat/"
+  tag: "Blog"
+  text: "Answer any cost question faster with the Cloud Cost skill in Bits Chat"
 ---
 
 
@@ -43,6 +49,7 @@ To use AI Costs, you must have at least one of the following supported providers
 | AI provider | Setup method |
 |---|---|
 | Amazon Bedrock | [AWS integration][2] |
+| Amazon SageMaker | [AWS integration][2] |
 | Anthropic   | [SaaS integration][3] |
 | Azure Foundry Models   | [Azure integration][18] |
 | Google Gemini  | [Google Cloud integration][4] |

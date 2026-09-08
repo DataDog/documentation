@@ -55,6 +55,19 @@ Clicking on a failed step gives you the inputs, outputs, and execution context f
 The initial run history for a workflow provides a panel with the list of previous workflow executions and whether each execution succeeded or failed. Failures include a link to the failed workflow step. Click on a workflow execution in the list to inspect it. You can return to the initial execution history at any time by clicking anywhere on the workflow canvas.
 
 
+## Fix a failed step with AI
+
+In {{< ui >}}Run History{{< /ui >}}, select a failed step and open its {{< ui >}}Outputs{{< /ui >}} tab. Next to the error message, click {{< ui >}}Fix with AI{{< /ui >}} to get help resolving the failure.
+
+{{< img src="actions/workflows/test_and_debug/fix-with-ai.png" alt="Bits Chat diagnosing and proposing a fix for a failed workflow step." >}}
+
+The assistant opens in [Bits Chat][7], diagnoses the failure using the step's inputs, outputs, execution context, and error message, and can search external documentation for errors returned by third-party APIs. It explains the issue and proposes a fix, then asks you to confirm before applying any change. After you confirm, the assistant updates the step's configuration and reruns validation.
+
+Fixes with AI apply to problems in the workflow's configuration, such as incorrect inputs or an outdated action setup. For failures caused by external factors, such as invalid credentials, rate limits, or an outage in a connected service, the assistant explains the root cause and suggests next steps, such as checking your credentials or contacting the owner of the connected service.
+
+If the failed step triggers another workflow, Bits Chat can trace the failure into the triggered workflow to diagnose and propose a fix there as well.
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -62,4 +75,5 @@ The initial run history for a workflow provides a panel with the list of previou
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][10].
 
 [6]: /actions/workflows/expressions/
+[7]: /bits_ai/bits_chat/
 [10]: https://chat.datadoghq.com/

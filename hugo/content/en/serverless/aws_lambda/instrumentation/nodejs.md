@@ -13,6 +13,9 @@ further_reading:
     - link: 'serverless/custom_metrics/'
       tag: 'Documentation'
       text: 'Submitting Custom Metrics from Serverless Applications'
+    - link: "https://www.datadoghq.com/blog/trace-aws-lambda-durable-functions/"
+      tag: "Blog"
+      text: "Trace AWS Lambda durable functions with Datadog"
 aliases:
     - /serverless/datadog_lambda_library/nodejs/
     - /serverless/guide/nodejs/

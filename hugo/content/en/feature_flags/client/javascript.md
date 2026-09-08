@@ -11,6 +11,9 @@ further_reading:
 - link: "/real_user_monitoring/application_monitoring/browser/"
   tag: "Documentation"
   text: "Browser Monitoring"
+- link: "/feature_flags/browser_developer_extension/"
+  tag: "Documentation"
+  text: "Browser Developer Extension"
 ---
 
 ## Overview
@@ -224,6 +227,10 @@ The web provider also supports these optional settings:
 | `customHeaders` | unset | Add headers to flag-fetch requests. |
 | `overwriteRequestHeaders` | `false` | Replace default request headers with `customHeaders`. |
 
+## Override flags in your browser
+
+To browse your organization's flags and override them locally while you develop, compose the `DatadogDevtools` wrapper into your provider stack and use the **Feature Flags** tab in the [Datadog Browser SDK developer extension][3].
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` is exported directly from `@openfeature/web-sdk`, so no additional dependency is required.
@@ -274,3 +281,4 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 
 [1]: https://openfeature.dev/
 [2]: /account_management/api-app-keys/#client-tokens
+[3]: /feature_flags/browser_developer_extension/

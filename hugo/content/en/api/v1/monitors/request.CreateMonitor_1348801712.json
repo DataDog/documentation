@@ -1,0 +1,17 @@
+{
+  "name": "Example-Monitor",
+  "type": "llm-observability alert",
+  "query": "llm-observability(\"*\").rollup(\"count\").last(\"2h\") > 0",
+  "message": "LLM observability alert triggered",
+  "tags": [
+    "test:examplemonitor",
+    "env:ci"
+  ],
+  "options": {
+    "thresholds": {
+      "critical": 0
+    },
+    "include_tags": true,
+    "notify_audit": false
+  }
+}

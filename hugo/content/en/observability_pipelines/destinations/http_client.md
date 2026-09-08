@@ -1,5 +1,6 @@
 ---
 title: HTTP Client Destination
+description: Learn how to send logs to an HTTP client, such as a logging platform or SIEM, using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

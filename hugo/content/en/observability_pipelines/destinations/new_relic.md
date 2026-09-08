@@ -1,5 +1,6 @@
 ---
 title: New Relic Destination
+description: Learn how to send logs to New Relic using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

@@ -329,7 +329,7 @@ java -javaagent:/path/to/dd-java-agent.jar -XX:AOTCache=app.aot -jar App.jar
 
 You can view traces using the [Trace Explorer][9].
 
-{{% collapse-content title="Troubleshooting" level="h4" %}}
+{{% collapse-content title="Troubleshooting" level="h5" %}}
 ##### Not attaching the Datadog Java SDK during the training run
 
 If you see this warning in production, it means the Datadog Java SDK wasn't attached during training:
@@ -428,7 +428,7 @@ After completing the setup, the service should send traces to Datadog.
 
 You can view traces using the [Trace Explorer][9].
 
-{{% collapse-content title="Troubleshooting" level="h4" %}}
+{{% collapse-content title="Troubleshooting" level="h5" %}}
 ##### Features are not enabled or configured correctly for native images
 
 There are known issues with accessing system properties at runtime from a binary built with Graal Native Image.

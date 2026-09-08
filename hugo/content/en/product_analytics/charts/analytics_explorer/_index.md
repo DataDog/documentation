@@ -1,5 +1,5 @@
 ---
-title: Analytics Explorer
+title: Analytics
 description: ""
 aliases:
 - /product_analytics/analytics_explorer/

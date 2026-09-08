@@ -25,6 +25,8 @@ description: Gradually roll out feature flags on a schedule with optional guardr
 
 {{< img src="feature_flags/start-progressive-rollout.png" alt="Multistep progressive rollout display." style="width:100%;" >}}
 
+To start the rollout automatically at a future date and time instead of clicking **Start Rollout**, [schedule a start time](/feature_flags/concepts/scheduled_rollouts/) when you configure the rule.
+
 After the rollout starts:
 
 - Click **Pause Rollout** to stop progress temporarily.

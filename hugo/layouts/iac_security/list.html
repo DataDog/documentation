@@ -85,7 +85,7 @@
             *   }
             *   show ruleEl if condition met (aws OR azure) AND (terraform OR kubernetes) AND security AND warning
             *
-            *   Filter info structure: [cloud_provider, category, severity, platform]
+            *   Filter info structure: [cloud_provider, rule_type, severity, platform]
             *   Map each filter type to its specific index position
             */
 
@@ -372,11 +372,12 @@
         {{/*  NAV - Keep here. scratch pad for filters need to form first */}}
         <nav id="multifilter-search-nav" class="container px-0">
             {{ $filter_types := (slice "Providers" "Platforms" "Categories" "Severities") }}
+            {{ $filter_type_labels := dict "Categories" "Rule Types" }}
             <div class="filters__multifilter row">
                 {{ range $filter_types }}
                 {{ $filter_type := . | lower}}
                 <div class='filter-type flex-column col-12 col-md-6' data-id="{{$filter_type}}" >
-                    <p class="filter-type-name fw-semibold">{{ . }}</p>
+                    <p class="filter-type-name fw-semibold">{{ index $filter_type_labels . | default . }}</p>
                     <div class="filter-component position-relative">
                         {{/*  FILTER TOGGLER  */}}
                         <button

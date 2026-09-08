@@ -1,5 +1,8 @@
 ---
 title: Sources
+description: Learn about the sources available for the Observability Pipelines Worker.
+aliases:
+  - /observability_pipelines/sources/prometheus
 disable_toc: false
 further_reading:
 - link: "/observability_pipelines/configuration/set_up_pipelines/"
