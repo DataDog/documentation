@@ -54,7 +54,7 @@ To find your BYOC Logs index name:
 
 1. Navigate to the [Datadog Log Explorer][2].
 2. Look for the {{< ui >}}BYOC INDEXES{{< /ui >}} section in the left facet panel.
-3. Your BYOC Logs indexes are listed there, in the format `byoc--<CLUSTER_ID>--<INDEX_NAME>`.
+3. Your BYOC Logs indexes are listed there, in the format `byoc--<cluster_id>--<index_name>`.
 
 You can also find your index names in the [BYOC Logs console][3] by selecting a cluster and clicking {{< ui >}}View Indexes{{< /ui >}}.
 
@@ -106,7 +106,7 @@ When using AI-powered tools with `search_datadog_logs`, you can ask questions in
 
 ## Important notes
 
-- The `indexes` parameter must contain valid BYOC Logs index names (in the format `byoc--<CLUSTER_ID>--<INDEX_NAME>`).
+- The `indexes` parameter must contain valid BYOC Logs index names (in the format `byoc--<cluster_id>--<index_name>`).
 - When using natural language queries, explicitly mention your BYOC Logs index name in your prompt.
 - BYOC Logs data is queryable in real-time as soon as it is indexed.
 - Query syntax follows standard [Datadog log search syntax][4].
