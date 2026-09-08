@@ -14,6 +14,9 @@ further_reading:
   - link: "cloud_cost_management/datadog_costs/"
     tag: "Documentation"
     text: "Datadog Costs"
+  - link: "account_management/plan_and_usage/bill_overview/partner_purchased_cost_visibility/"
+    tag: "Documentation"
+    text: "Cost Visibility for Customers Who Purchase Through a Partner"
 ---
 
 View Datadog costs, usage trends, and projected end-of-month costs in a single page, with daily breakdowns, product-level detail, and multi-organization filtering.
