@@ -21,7 +21,7 @@ further_reading:
 
 Findings helps you capture, organize, and reuse important context during log investigations in [Log Explorer][1].
 
-With Findings, you can save log events, visualizations, and queries with the **Add Finding** button or the keyboard shortcut <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd> while investigating. **Double-click** on findings to go back to them in Log Explorer, or by using the **Open in Explorer** button on the finding. Track your investigation paths in the findings panel by arranging the findings. Branch into new questions without losing track of earlier observations.
+With Findings, you can save log events, visualizations, and queries with the **Add Finding** button or the keyboard shortcut **Cmd**/**Ctrl** + **S** while investigating. **Double-click** on findings to go back to them in Log Explorer, or by using the **Open in Explorer** button on the finding. Track your investigation paths in the findings panel by arranging the findings. Branch into new questions without losing track of earlier observations.
 
 Use Findings to checkpoint a useful base query to come back to, collect possible evidence, compare results, and build context as your investigation evolves. Select findings to use as context to [Ask Bits][2] questions, or send them to a [Notebook][3] to share with others.
 
@@ -40,27 +40,27 @@ This space is where you work with findings: arrange them, reopen them in Log Exp
 
 ## Capture a finding
 
-Add a finding from anywhere in Log Explorer by pressing <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>. This will capture the query and page to return to and the absolute time range it came from. You can rename the default title to identify what you captured with the Edit button on the top right of the finding card.
+Add a finding from anywhere in Log Explorer by pressing **Cmd**/**Ctrl** + **S**. This will capture the query and page to return to and the absolute time range it came from. You can rename the default title to identify what you captured with the Edit button on the top right of the finding card.
 
 You can also add Notes to each finding at the bottom of the finding card.
 
 ### Queries and visualizations
 
-In the toolbar above your results, click the {{< ui >}}Add a finding{{< /ui >}} icon, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>. You can also click {{< ui >}}Add current page as a finding{{< /ui >}} in the Findings panel.
+In the toolbar above your results, click the {{< ui >}}Add a finding{{< /ui >}} icon, or press **Cmd**/**Ctrl** + **S**. You can also click {{< ui >}}Add current page as a finding{{< /ui >}} in the Findings panel.
 
 The finding stores your search query, time range, and [visualization][4], including any group-by and aggregation you configured. Capture the same query as a list, a timeseries, or other visualization.
 
 ### Individual log events
 
-Click a log event in your results to open the [log side panel][5]. Hover over the **Log Message** section and click the {{< ui >}}Add Finding{{< /ui >}} button, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>. This will capture thee whole log event side panel to return to later
+Click a log event in your results to open the [log side panel][5]. Hover over the **Log Message** section and click the {{< ui >}}Add Finding{{< /ui >}} button, or press **Cmd**/**Ctrl** + **S**. This will capture thee whole log event side panel to return to later
 
 Capturing the log event will also capture the query you got the log side panel from. When you return to the log side panel finding, it will return you to the log side panel and the corresponding query in the background.
 
 ### Specific text in a log message or attributes
 
-To capture part of a log message, select the text in the **Log Message** section and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>, or use the context menu option to {{< ui >}}Add Finding{{< /ui >}} that pops up with the selected text. 
+To capture part of a log message, select the text in the **Log Message** section and press **Cmd**/**Ctrl** + **S**, or use the context menu option to {{< ui >}}Add Finding{{< /ui >}} that pops up with the selected text. 
 
-To capture attribute values, select the text and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd>.
+To capture attribute values, select the text and press **Cmd**/**Ctrl** + **S**.
 
 The finding for both of these will store\ the text you selected and you can return to the log log event side panel with it.
 
@@ -90,13 +90,13 @@ The controls on the left of the canvas also zoom in and out, fit the canvas to y
 
 ## Delete findings
 
-To delete one finding, hover over it and use the delete button on the card, or select the finding and press the <kbd>Delete</kbd> key. To delete several at once, select them and press <kbd>Delete</kbd>. To select every finding first, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>A</kbd>.
+To delete one finding, hover over it and use the delete button on the card, or select the finding and press the **Delete** key. To delete several at once, select them and press **Delete**. To select every finding first, press **Cmd**/**Ctrl** + **A**.
 <!-- Does a finding card have a delete control? Hovering a card shows Open in Explorer and rename only. Confirm how to delete one finding with the mouse. -->
 
 The clear all button in the Findings panel deletes all findings.
 <!-- Confirm the clear icon deletes rather than deselects, and whether it warns before emptying a full canvas. -->
 
-Deleting is not permanent immediately. A toast appears with an {{< ui >}}Undo{{< /ui >}} option, and <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Z</kbd> restores what you removed. 
+Deleting is not permanent immediately. A toast appears with an {{< ui >}}Undo{{< /ui >}} option, and **Cmd**/**Ctrl** + **Z** restores what you removed. 
 <!-- How long does a deleted finding stay recoverable? Confirm whether undo history survives a page reload or ends with the browser session. -->
 
 ## Keyboard shortcuts
