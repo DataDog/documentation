@@ -321,8 +321,8 @@ To access SLO status corrections in the UI:
 1. Create a new SLO or click on an existing one.
 2. Navigate to an SLO's details side panel view.
 3. Under the gear icon, select {{< ui >}}Correct status{{< /ui >}} to open the correction creation modal.
-4. Choose between {{< ui >}}One-Time{{< /ui >}} and {{< ui >}}Recurring{{< /ui >}} in the {{< ui >}}Select the Time Correction Window{{< /ui >}}, and specify the time period you wish to correct.
-5. Select a {{< ui >}}Correction Category{{< /ui >}}.
+4. Select a {{< ui >}}Correction Category{{< /ui >}}.
+5. Choose between {{< ui >}}One-Time{{< /ui >}} and {{< ui >}}Recurring{{< /ui >}} in the {{< ui >}}Select the Time Correction Window{{< /ui >}}, and specify the time period you wish to correct.
 6. Optionally add {{< ui >}}Notes{{< /ui >}}.
 7. Click {{< ui >}}Apply Correction{{< /ui >}}.
 
