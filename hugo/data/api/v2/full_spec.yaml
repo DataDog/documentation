@@ -7059,6 +7059,9 @@ components:
     AnalysisRequest:
       description: The request payload for running static analysis on source code.
       properties:
+        _authentication_token:
+          description: CSRF token for security, sent by browser-based clients. Ignored by the API when absent.
+          type: string
         data:
           $ref: '#/components/schemas/AnalysisRequestData'
       required:
@@ -7119,8 +7122,21 @@ components:
       x-enum-varnames:
         - ANALYSIS_REQUEST
     AnalysisRequestRule:
-      description: A static analysis rule to apply during code analysis.
+      additionalProperties: {}
+      description: |-
+        A static analysis rule to apply during code analysis. Clients forward complete rule
+        objects returned by the rulesets endpoints, so every member of that resource is
+        declared here; only `id`, `category`, `checksum`, `language`, `severity`,
+        `tree_sitter_query`, `entity_checked`, `regex`, `type` and `code` are read by this
+        operation and the rest are ignored. The schema stays open so that any member beyond
+        the forwarded rule resource is reported as a promotion candidate rather than
+        rejected; it can be closed once that telemetry confirms none remain.
       properties:
+        arguments:
+          description: The configurable arguments accepted by the rule. Forwarded from the rulesets endpoints; ignored by this operation.
+          items:
+            $ref: '#/components/schemas/AnalysisRequestRuleArgument'
+          type: array
         category:
           description: The category of the rule (for example, `BEST_PRACTICES`, `SECURITY`).
           example: BEST_PRACTICES
@@ -7133,6 +7149,27 @@ components:
           description: The base64-encoded rule implementation code.
           example: ZnVuY3Rpb24gdmlzaXQobm9kZSkge30=
           type: string
+        created_at:
+          description: The date and time when the rule was created. Server-assigned by the rulesets endpoints; ignored by this operation.
+          format: date-time
+          readOnly: true
+          type: string
+        created_by:
+          description: The identifier of the user or system that created the rule. Server-assigned by the rulesets endpoints; ignored by this operation.
+          readOnly: true
+          type: string
+        cve:
+          description: The CVE identifier associated with the rule. Forwarded from the rulesets endpoints; ignored by this operation.
+          type: string
+        cwe:
+          description: The CWE identifier associated with the rule. Forwarded from the rulesets endpoints; ignored by this operation.
+          type: string
+        description:
+          description: A detailed explanation of what the rule detects. Forwarded from the rulesets endpoints; ignored by this operation.
+          type: string
+        documentation_url:
+          description: A URL pointing to the rule documentation. Forwarded from the rulesets endpoints; ignored by this operation.
+          type: string
         entity_checked:
           description: The code entity type checked by the rule, applicable when rule type is `AST_CHECK`.
           nullable: true
@@ -7141,9 +7178,28 @@ components:
           description: The unique identifier of the rule.
           example: python-best-practices/no-exit
           type: string
+        is_published:
+          description: Whether the rule is published. Forwarded from the rulesets endpoints; ignored by this operation.
+          type: boolean
+        is_testing:
+          description: Whether the rule is in testing mode. Forwarded from the rulesets endpoints; ignored by this operation.
+          type: boolean
         language:
           description: The programming language this rule targets.
           example: python
+          type: string
+        last_updated_at:
+          description: The date and time when the rule was last modified. Server-assigned by the rulesets endpoints; ignored by this operation.
+          format: date-time
+          readOnly: true
+          type: string
+        last_updated_by:
+          description: The identifier of the user or system that last updated the rule. Server-assigned by the rulesets endpoints; ignored by this operation.
+          readOnly: true
+          type: string
+        name:
+          description: The name of the rule. Forwarded from the rulesets endpoints; ignored by this operation.
+          example: no-exit
           type: string
         regex:
           description: A base64-encoded regex pattern used by the rule, applicable when rule type is `REGEX`.
@@ -7153,6 +7209,17 @@ components:
           description: The severity of findings from this rule (for example, `ERROR`, `WARNING`).
           example: WARNING
           type: string
+        short_description:
+          description: A brief summary of what the rule detects. Forwarded from the rulesets endpoints; ignored by this operation.
+          type: string
+        should_use_ai_fix:
+          description: Whether an AI-generated fix should be offered. Forwarded from the rulesets endpoints; ignored by this operation.
+          type: boolean
+        tests:
+          description: The test cases associated with the rule. Forwarded from the rulesets endpoints; ignored by this operation.
+          items:
+            $ref: '#/components/schemas/AnalysisRequestRuleTest'
+          type: array
         tree_sitter_query:
           description: The base64-encoded tree-sitter query used by the rule.
           example: KGNhbGwgbmFtZTogKGF0dHJpYnV0ZSkpQHZhbA==
@@ -7170,6 +7237,32 @@ components:
         - tree_sitter_query
         - type
         - code
+      type: object
+    AnalysisRequestRuleArgument:
+      description: A configurable argument of a forwarded static analysis rule.
+      properties:
+        description:
+          description: An explanation of the argument's purpose and accepted values.
+          type: string
+        name:
+          description: The name of the rule argument.
+          type: string
+      type: object
+    AnalysisRequestRuleTest:
+      description: A test case of a forwarded static analysis rule.
+      properties:
+        annotation_count:
+          description: The expected number of findings the rule should produce against the test code.
+          format: int64
+          maximum: 65535
+          minimum: 0
+          type: integer
+        code:
+          description: The source code snippet used as input for the rule test.
+          type: string
+        filename:
+          description: The filename associated with the test code snippet.
+          type: string
       type: object
     AnalysisResponse:
       description: The response payload from running static analysis on source code.
@@ -11272,6 +11365,32 @@ components:
         - status
         - title
         - detail
+      type: object
+    AstNode:
+      description: A node in the abstract syntax tree of the parsed source code.
+      properties:
+        ast_type:
+          description: The tree-sitter node type of this AST node.
+          example: module
+          type: string
+        children:
+          description: The child nodes of this AST node, or null for a leaf node.
+          items:
+            $ref: '#/components/schemas/AstNode'
+          nullable: true
+          type: array
+        end:
+          $ref: '#/components/schemas/AnalysisPosition'
+        field_name:
+          description: The name of the field this node occupies within its parent node, when the parent addresses it by name.
+          type: string
+        start:
+          $ref: '#/components/schemas/AnalysisPosition'
+      required:
+        - ast_type
+        - start
+        - end
+        - children
       type: object
     AttachCaseRequest:
       description: Request for attaching security findings to a case.
@@ -29141,7 +29260,49 @@ components:
         - name
       type: object
     CustomRule:
-      description: A custom static analysis rule within a ruleset.
+      additionalProperties: false
+      description: |-
+        A custom static analysis rule within a ruleset, as supplied in a create or update
+        request. Nested rules are sent flat, without a `data`/`type`/`attributes` envelope.
+        `id` and `name` are client-supplied and must match each other. The remaining members
+        are server-assigned and read-only; they are declared so that a ruleset previously
+        read back can be supplied unchanged.
+      properties:
+        created_at:
+          description: Creation timestamp
+          example: "2026-01-09T13:00:57.473141Z"
+          format: date-time
+          readOnly: true
+          type: string
+        created_by:
+          description: Creator identifier
+          example: foobarbaz
+          readOnly: true
+          type: string
+        id:
+          description: Rule identifier, which is the same as the rule name.
+          example: my-rule
+          type: string
+        last_revision:
+          $ref: "#/components/schemas/CustomRuleRevisionInput"
+          description: Most recent revision
+          nullable: true
+        name:
+          description: Rule name
+          example: my-rule
+          type: string
+        revisions:
+          description: Revision history of the rule.
+          items:
+            $ref: '#/components/schemas/CustomRuleRevisionInput'
+          nullable: true
+          type: array
+      required:
+        - id
+        - name
+      type: object
+    CustomRuleAttributes:
+      description: Attributes of a custom static analysis rule, including its most recent revision and revision history.
       properties:
         created_at:
           description: Creation timestamp
@@ -29153,18 +29314,25 @@ components:
           example: foobarbaz
           type: string
         last_revision:
-          $ref: "#/components/schemas/CustomRuleRevision"
-          description: Most recent revision
+          $ref: "#/components/schemas/CustomRuleRevisionEmbedded"
+          description: Most recent revision of the rule, or null when the rule has no revisions.
           nullable: true
         name:
           description: Rule name
           example: my-rule
           type: string
+        revisions:
+          description: Revision history of the rule.
+          items:
+            $ref: '#/components/schemas/CustomRuleRevisionEmbedded'
+          nullable: true
+          type: array
       required:
         - name
         - created_at
         - created_by
         - last_revision
+        - revisions
       type: object
     CustomRuleDataType:
       description: Resource type
@@ -29176,6 +29344,9 @@ components:
     CustomRuleRequest:
       description: Request body for creating or updating a custom rule.
       properties:
+        _authentication_token:
+          description: CSRF token for security, sent by browser-based clients. Ignored by the API when absent.
+          type: string
         data:
           $ref: '#/components/schemas/CustomRuleRequestData'
       type: object
@@ -29209,7 +29380,7 @@ components:
       description: Data object returned in a custom rule response, including its ID, type, and attributes.
       properties:
         attributes:
-          $ref: '#/components/schemas/CustomRule'
+          $ref: '#/components/schemas/CustomRuleAttributes'
         id:
           description: Rule identifier
           example: my-rule
@@ -29244,6 +29415,7 @@ components:
           description: Rule arguments
           items:
             $ref: '#/components/schemas/Argument'
+          nullable: true
           type: array
         category:
           $ref: '#/components/schemas/CustomRuleRevisionAttributesCategory'
@@ -29315,17 +29487,25 @@ components:
           items:
             description: A tag attached to the rule.
             type: string
+          nullable: true
           type: array
         tests:
           description: Rule tests
           items:
             $ref: '#/components/schemas/CustomRuleRevisionTest'
+          nullable: true
           type: array
         tree_sitter_query:
           description: Tree-sitter query
           example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
           type: string
+        version_id:
+          description: Monotonically increasing version number of the revision.
+          example: 1
+          format: int64
+          type: integer
       required:
+        - version_id
         - creation_message
         - short_description
         - description
@@ -29337,14 +29517,11 @@ components:
         - created_by
         - severity
         - category
-        - cve
-        - cwe
         - arguments
         - tests
         - tags
         - is_published
         - should_use_ai_fix
-        - documentation_url
         - is_testing
       type: object
     CustomRuleRevisionAttributesCategory:
@@ -29374,6 +29551,236 @@ components:
       type: string
       x-enum-varnames:
         - CUSTOM_RULE_REVISION
+    CustomRuleRevisionEmbedded:
+      description: A revision of a custom static analysis rule as embedded in a rule or ruleset response.
+      properties:
+        arguments:
+          description: Rule arguments
+          items:
+            $ref: '#/components/schemas/Argument'
+          nullable: true
+          type: array
+        category:
+          $ref: '#/components/schemas/CustomRuleRevisionAttributesCategory'
+        checksum:
+          description: Code checksum
+          example: 8a66c4e4e631099ad71be3c1ea3ea8fc2d57193e56db2c296e2dd8a508b26b99
+          type: string
+        code:
+          description: Rule code
+          example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+        created_at:
+          description: Creation timestamp
+          example: "2026-01-09T13:00:57.473141Z"
+          format: date-time
+          type: string
+        created_by:
+          description: Creator identifier
+          example: foobarbaz
+          type: string
+        creation_message:
+          description: Revision creation message
+          example: Initial revision
+          type: string
+        cve:
+          description: Associated CVE. Omitted when the revision has no associated CVE.
+          example: CVE-2024-1234
+          type: string
+        cwe:
+          description: Associated CWE. Omitted when the revision has no associated CWE.
+          example: CWE-79
+          type: string
+        description:
+          description: Full description
+          example: bG9uZyBkZXNjcmlwdGlvbg==
+          type: string
+        documentation_url:
+          description: Documentation URL. Omitted when the revision has no documentation URL.
+          example: https://docs.example.com/rules/my-rule
+          type: string
+        id:
+          description: Revision identifier
+          example: revision-123
+          type: string
+        is_published:
+          description: Whether the revision is published
+          example: false
+          type: boolean
+        is_testing:
+          description: Whether this is a testing revision
+          example: false
+          type: boolean
+        language:
+          $ref: '#/components/schemas/Language'
+        severity:
+          $ref: '#/components/schemas/CustomRuleRevisionAttributesSeverity'
+        short_description:
+          description: Short description
+          example: c2hvcnQgZGVzY3JpcHRpb24=
+          type: string
+        should_use_ai_fix:
+          description: Whether to use AI for fixes
+          example: false
+          type: boolean
+        tags:
+          description: Rule tags
+          example:
+            - security
+            - custom
+          items:
+            description: A tag attached to the rule.
+            type: string
+          nullable: true
+          type: array
+        tests:
+          description: Rule tests
+          items:
+            $ref: '#/components/schemas/CustomRuleRevisionTest'
+          nullable: true
+          type: array
+        tree_sitter_query:
+          description: Tree-sitter query
+          example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+        version_id:
+          description: Monotonically increasing version number of the revision.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - id
+        - version_id
+        - creation_message
+        - short_description
+        - description
+        - code
+        - checksum
+        - language
+        - tree_sitter_query
+        - created_at
+        - created_by
+        - severity
+        - category
+        - arguments
+        - tests
+        - tags
+        - is_published
+        - should_use_ai_fix
+        - is_testing
+      type: object
+    CustomRuleRevisionInput:
+      additionalProperties: false
+      description: |-
+        A revision of a custom static analysis rule as embedded in a rule supplied by a create
+        or update request. Nested revisions are sent flat, without a `data`/`type`/`attributes`
+        envelope. `id`, `version_id`, `checksum`, `created_at` and `created_by` are server-assigned
+        and read-only; they are declared so that a ruleset previously read back can be supplied
+        unchanged.
+      properties:
+        arguments:
+          description: Rule arguments
+          items:
+            $ref: '#/components/schemas/Argument'
+          nullable: true
+          type: array
+        category:
+          $ref: '#/components/schemas/CustomRuleRevisionAttributesCategory'
+        checksum:
+          description: Code checksum
+          example: 8a66c4e4e631099ad71be3c1ea3ea8fc2d57193e56db2c296e2dd8a508b26b99
+          readOnly: true
+          type: string
+        code:
+          description: Rule code
+          example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+        created_at:
+          description: Creation timestamp
+          example: "2026-01-09T13:00:57.473141Z"
+          format: date-time
+          readOnly: true
+          type: string
+        created_by:
+          description: Creator identifier
+          example: foobarbaz
+          readOnly: true
+          type: string
+        creation_message:
+          description: Revision creation message
+          example: Initial revision
+          type: string
+        cve:
+          description: Associated CVE
+          example: CVE-2024-1234
+          nullable: true
+          type: string
+        cwe:
+          description: Associated CWE
+          example: CWE-79
+          nullable: true
+          type: string
+        description:
+          description: Base64-encoded full description
+          example: bG9uZyBkZXNjcmlwdGlvbg==
+          type: string
+        documentation_url:
+          description: Documentation URL
+          example: https://docs.example.com/rules/my-rule
+          nullable: true
+          type: string
+        id:
+          description: Revision identifier
+          example: revision-123
+          readOnly: true
+          type: string
+        is_published:
+          description: Whether the revision should be published
+          example: false
+          type: boolean
+        is_testing:
+          description: Whether this is a testing revision
+          example: false
+          type: boolean
+        language:
+          $ref: '#/components/schemas/Language'
+        severity:
+          $ref: '#/components/schemas/CustomRuleRevisionAttributesSeverity'
+        short_description:
+          description: Base64-encoded short description
+          example: c2hvcnQgZGVzY3JpcHRpb24=
+          type: string
+        should_use_ai_fix:
+          description: Whether to use AI for fixes
+          example: false
+          type: boolean
+        tags:
+          description: Rule tags
+          example:
+            - security
+            - custom
+          items:
+            description: A tag attached to the rule.
+            type: string
+          nullable: true
+          type: array
+        tests:
+          description: Rule tests
+          items:
+            $ref: '#/components/schemas/CustomRuleRevisionTest'
+          nullable: true
+          type: array
+        tree_sitter_query:
+          description: Tree-sitter query
+          example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+        version_id:
+          description: Monotonically increasing version number of the revision.
+          example: 1
+          format: int64
+          readOnly: true
+          type: integer
+      type: object
     CustomRuleRevisionInputAttributes:
       description: Input attributes for creating or updating a custom rule revision.
       properties:
@@ -29381,12 +29788,29 @@ components:
           description: Rule arguments
           items:
             $ref: '#/components/schemas/Argument'
+          nullable: true
           type: array
         category:
           $ref: '#/components/schemas/CustomRuleRevisionAttributesCategory'
+        checksum:
+          description: Code checksum. Derived by the API from `code`; ignored on write.
+          example: 8a66c4e4e631099ad71be3c1ea3ea8fc2d57193e56db2c296e2dd8a508b26b99
+          readOnly: true
+          type: string
         code:
           description: Rule code
           example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+        created_at:
+          description: Creation timestamp. Set by the API; ignored on write.
+          example: "2026-01-09T13:00:57.473141Z"
+          format: date-time
+          readOnly: true
+          type: string
+        created_by:
+          description: Creator identifier. Set by the API from the caller; ignored on write.
+          example: foobarbaz
+          readOnly: true
           type: string
         creation_message:
           description: Revision creation message
@@ -29439,16 +29863,24 @@ components:
           items:
             description: A tag attached to the rule.
             type: string
+          nullable: true
           type: array
         tests:
           description: Rule tests
           items:
             $ref: '#/components/schemas/CustomRuleRevisionTest'
+          nullable: true
           type: array
         tree_sitter_query:
           description: Tree-sitter query
           example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
           type: string
+        version_id:
+          description: Monotonically increasing version number of the revision. Assigned by the API; ignored on write.
+          example: 1
+          format: int64
+          readOnly: true
+          type: integer
       required:
         - creation_message
         - short_description
@@ -29458,19 +29890,19 @@ components:
         - tree_sitter_query
         - severity
         - category
-        - cve
-        - cwe
         - arguments
         - tests
         - tags
         - is_published
         - should_use_ai_fix
-        - documentation_url
         - is_testing
       type: object
     CustomRuleRevisionRequest:
       description: Request body for creating a new custom rule revision.
       properties:
+        _authentication_token:
+          description: CSRF token for security, sent by browser-based clients. Ignored by the API when absent.
+          type: string
         data:
           $ref: '#/components/schemas/CustomRuleRevisionRequestData'
       type: object
@@ -29500,6 +29932,8 @@ components:
           description: Expected violation count
           example: 1
           format: int64
+          maximum: 65535
+          minimum: 0
           type: integer
         code:
           description: Test code
@@ -29562,7 +29996,7 @@ components:
         rules:
           description: Rules in the ruleset
           items:
-            $ref: '#/components/schemas/CustomRule'
+            $ref: '#/components/schemas/CustomRulesetRuleEmbedded'
           nullable: true
           type: array
         short_description:
@@ -29602,24 +30036,37 @@ components:
           $ref: '#/components/schemas/CustomRulesetRequestData'
       type: object
     CustomRulesetRequestData:
-      description: Data object for a custom ruleset create or update request.
+      description: |-
+        Data object for a custom ruleset create or update request. The resource `id` is
+        required and must equal both `attributes.name` and, on update, the `ruleset_name`
+        path parameter; a request that omits it or supplies a different value is rejected
+        with a 412 response.
       properties:
         attributes:
           $ref: '#/components/schemas/CustomRulesetRequestDataAttributes'
         id:
-          description: Ruleset identifier
+          description: Ruleset identifier, which is the same as the ruleset name.
+          example: my-ruleset
           type: string
         type:
           $ref: '#/components/schemas/CustomRulesetDataType'
+      required:
+        - id
+        - type
+        - attributes
       type: object
     CustomRulesetRequestDataAttributes:
-      description: Attributes for creating or updating a custom ruleset.
+      description: |-
+        Attributes for creating or updating a custom ruleset. `name` is required and must
+        equal the resource `id`; the server rejects a mismatch with a 412 response.
       properties:
         description:
           description: Base64-encoded full description
+          example: bG9uZyBkZXNjcmlwdGlvbg==
           type: string
         name:
-          description: Ruleset name
+          description: Ruleset name, which must be the same as the resource identifier.
+          example: my-ruleset
           type: string
         rules:
           description: Rules in the ruleset
@@ -29629,7 +30076,10 @@ components:
           type: array
         short_description:
           description: Base64-encoded short description
+          example: c2hvcnQgZGVzY3JpcHRpb24=
           type: string
+      required:
+        - name
       type: object
     CustomRulesetResponse:
       description: Response containing a single custom ruleset.
@@ -29638,6 +30088,44 @@ components:
           $ref: '#/components/schemas/CustomRuleset'
       required:
         - data
+      type: object
+    CustomRulesetRuleEmbedded:
+      description: A custom static analysis rule as embedded in the rules list of a ruleset response.
+      properties:
+        created_at:
+          description: Creation timestamp
+          example: "2026-01-09T13:00:57.473141Z"
+          format: date-time
+          type: string
+        created_by:
+          description: Creator identifier
+          example: foobarbaz
+          type: string
+        id:
+          description: Rule identifier, which is the same as the rule name.
+          example: my-rule
+          type: string
+        last_revision:
+          $ref: "#/components/schemas/CustomRuleRevisionEmbedded"
+          description: Most recent revision of the rule, or null when the rule has no revisions.
+          nullable: true
+        name:
+          description: Rule name
+          example: my-rule
+          type: string
+        revisions:
+          description: Revision history of the rule.
+          items:
+            $ref: '#/components/schemas/CustomRuleRevisionEmbedded'
+          nullable: true
+          type: array
+      required:
+        - id
+        - name
+        - created_at
+        - created_by
+        - last_revision
+        - revisions
       type: object
     CustomerOrgDisableRequest:
       description: Request payload for disabling the authenticated customer organization.
@@ -45377,6 +45865,9 @@ components:
     GetAstRequest:
       description: The request payload for parsing source code into an abstract syntax tree.
       properties:
+        _authentication_token:
+          description: CSRF token for security, sent by browser-based clients. Ignored by the API when absent.
+          type: string
         data:
           $ref: '#/components/schemas/GetAstRequestData'
       required:
@@ -45439,23 +45930,25 @@ components:
         attributes:
           $ref: '#/components/schemas/GetAstResponseDataAttributes'
         id:
-          description: The identifier of the get-AST response resource.
+          description: The identifier of the get-AST response resource, echoed from the request.
+          example: ""
           type: string
         type:
           $ref: '#/components/schemas/GetAstResponseDataType'
       required:
+        - id
         - type
         - attributes
       type: object
     GetAstResponseDataAttributes:
       description: The attributes of the get-AST response, containing the parsed abstract syntax tree.
       properties:
-        ast:
-          additionalProperties: {}
-          description: The parsed abstract syntax tree as a JSON object.
-          type: object
+        result:
+          $ref: "#/components/schemas/AstNode"
+          description: The root node of the parsed abstract syntax tree, or null when the source code could not be parsed.
+          nullable: true
       required:
-        - ast
+        - result
       type: object
     GetAstResponseDataType:
       default: get_ast_response
@@ -45862,6 +46355,9 @@ components:
     GetMultipleRulesetsRequest:
       description: The request payload for retrieving rules for multiple rulesets in a single batch call.
       properties:
+        _authentication_token:
+          description: CSRF token for security, sent by browser-based clients. Ignored by the API when absent.
+          type: string
         data:
           $ref: '#/components/schemas/GetMultipleRulesetsRequestData'
       type: object
@@ -45908,6 +46404,8 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/GetMultipleRulesetsResponseData'
+      required:
+        - data
       type: object
     GetMultipleRulesetsResponseData:
       description: The primary data object in the get-multiple-rulesets response, containing the response attributes and resource type.
@@ -45915,12 +46413,15 @@ components:
         attributes:
           $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributes'
         id:
-          description: The unique identifier of the get-multiple-rulesets response resource.
+          description: The unique identifier of the get-multiple-rulesets response resource, echoed from the request.
+          example: ""
           type: string
         type:
           $ref: '#/components/schemas/GetMultipleRulesetsResponseDataType'
       required:
+        - id
         - type
+        - attributes
       type: object
     GetMultipleRulesetsResponseDataAttributes:
       description: The attributes of the get-multiple-rulesets response, containing the list of requested rulesets.
@@ -45930,17 +46431,23 @@ components:
           items:
             $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItems'
           type: array
+      required:
+        - rulesets
       type: object
     GetMultipleRulesetsResponseDataAttributesRulesetsItems:
       description: A ruleset returned in the response, containing its metadata and associated rules.
       properties:
-        data:
-          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsData'
         description:
           description: A detailed description of the ruleset's purpose and the types of issues it targets.
+          example: ""
+          type: string
+        id:
+          description: The unique identifier of the ruleset, which is the same as its name.
+          example: ""
           type: string
         name:
           description: The unique name of the ruleset.
+          example: ""
           type: string
         rules:
           description: The list of static analysis rules included in this ruleset.
@@ -45949,20 +46456,14 @@ components:
           type: array
         short_description:
           description: A brief summary of the ruleset, suitable for display in listings.
+          example: ""
           type: string
       required:
-        - data
-      type: object
-    GetMultipleRulesetsResponseDataAttributesRulesetsItemsData:
-      description: The resource identifier and type for a ruleset.
-      properties:
-        id:
-          description: The unique identifier of the ruleset resource.
-          type: string
-        type:
-          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsDataType'
-      required:
-        - type
+        - id
+        - name
+        - short_description
+        - description
+        - rules
       type: object
     GetMultipleRulesetsResponseDataAttributesRulesetsItemsDataType:
       default: rulesets
@@ -45983,19 +46484,24 @@ components:
           type: array
         category:
           description: The category classifying the type of issue this rule detects (e.g., security, style, performance).
+          example: ""
           type: string
         checksum:
           description: A checksum of the rule definition used to detect changes.
+          example: ""
           type: string
         code:
           description: The rule implementation code used by the static analysis engine.
+          example: ""
           type: string
         created_at:
           description: The date and time when the rule was created.
+          example: ""
           format: date-time
           type: string
         created_by:
           description: The identifier of the user or system that created the rule.
+          example: ""
           type: string
         cve:
           description: The CVE identifier associated with the vulnerability this rule detects, if applicable.
@@ -46003,10 +46509,9 @@ components:
         cwe:
           description: The CWE identifier associated with the weakness category this rule detects, if applicable.
           type: string
-        data:
-          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsData'
         description:
           description: A detailed explanation of what the rule detects and why it matters.
+          example: ""
           type: string
         documentation_url:
           description: A URL pointing to additional documentation for this rule.
@@ -46014,36 +46519,49 @@ components:
         entity_checked:
           description: The code entity type (e.g., function, class, variable) that this rule inspects.
           type: string
+        id:
+          description: The unique identifier of the rule, which is the same as its name.
+          example: ""
+          type: string
         is_published:
           description: Indicates whether the rule is publicly published and available to all users.
+          example: false
           type: boolean
         is_testing:
           description: Indicates whether the rule is in testing mode and not yet promoted to production.
+          example: false
           type: boolean
         language:
           description: The programming language this rule applies to.
+          example: ""
           type: string
         last_updated_at:
           description: The date and time when the rule was last modified.
+          example: ""
           format: date-time
           type: string
         last_updated_by:
           description: The identifier of the user or system that last updated the rule.
+          example: ""
           type: string
         name:
           description: The unique name identifying this rule within its ruleset.
+          example: ""
           type: string
         regex:
           description: A regular expression pattern used by the rule for pattern-based detection.
           type: string
         severity:
           description: The severity level of findings produced by this rule (e.g., ERROR, WARNING, NOTICE).
+          example: ""
           type: string
         short_description:
           description: A brief summary of what the rule detects, suitable for display in listings.
+          example: ""
           type: string
         should_use_ai_fix:
           description: Indicates whether an AI-generated fix suggestion should be offered for findings from this rule.
+          example: false
           type: boolean
         tests:
           description: The list of test cases used to validate the rule's behavior.
@@ -46055,9 +46573,28 @@ components:
           type: string
         type:
           description: The rule type indicating the detection mechanism used (e.g., tree_sitter, regex).
+          example: ""
           type: string
       required:
-        - data
+        - id
+        - name
+        - short_description
+        - description
+        - code
+        - language
+        - type
+        - checksum
+        - created_at
+        - created_by
+        - last_updated_at
+        - last_updated_by
+        - severity
+        - category
+        - arguments
+        - tests
+        - is_published
+        - should_use_ai_fix
+        - is_testing
       type: object
     GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsArgumentsItems:
       description: An argument parameter for a static analysis rule, with a name and description.
@@ -46069,26 +46606,6 @@ components:
           description: The name of the rule argument.
           type: string
       type: object
-    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsData:
-      description: The resource identifier and type for a static analysis rule.
-      properties:
-        id:
-          description: The unique identifier of the rule resource.
-          type: string
-        type:
-          $ref: '#/components/schemas/GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsDataType'
-      required:
-        - type
-      type: object
-    GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsDataType:
-      default: rules
-      description: Rules resource type.
-      enum:
-        - rules
-      example: rules
-      type: string
-      x-enum-varnames:
-        - RULES
     GetMultipleRulesetsResponseDataAttributesRulesetsItemsRulesItemsTestsItems:
       description: A test case associated with a static analysis rule, containing the source code and expected annotation count.
       properties:
@@ -58576,6 +59093,9 @@ components:
           type: string
       type: object
     LLMObsContentBlock:
+      anyOf:
+        - $ref: '#/components/schemas/LLMObsFrontendContentBlock'
+        - $ref: '#/components/schemas/LLMObsLegacyContentBlock'
       description: |-
         A single content block rendered inside a `display_block` interaction.
         `type` discriminates which other fields are meaningful:
@@ -58586,6 +59106,7 @@ components:
         - `image`: `url` is required.
         - `widget`: `tileDef` is required (any well-formed JSON; the frontend owns the renderable schema).
         - `llmobs_trace`: `traceId` is required; `interactionType`, when set, must be `trace` or `experiment_trace`.
+        - `frontend`: `code` is required and must be a non-empty string; `label` is optional.
 
         `height`, when set, must be positive.
       properties:
@@ -58593,11 +59114,13 @@ components:
           description: Alternative text for an `image` block.
           example: "Example image"
           type: string
+        code:
+          $ref: '#/components/schemas/LLMObsFrontendContentBlockCode'
         content:
           description: |-
             Block payload. A string for `markdown`, `header`, and `text`; an
             arbitrary JSON value (object, array, or scalar) for `json`. Omitted
-            for `image`, `widget`, and `llmobs_trace`.
+            for `image`, `widget`, `llmobs_trace`, and `frontend`.
           example: "## Triage Instructions"
         height:
           description: Optional rendered height. Must be positive when set.
@@ -58607,7 +59130,7 @@ components:
         interactionType:
           $ref: '#/components/schemas/LLMObsContentBlockLLMObsTraceInteractionType'
         label:
-          description: Optional label rendered alongside the block.
+          description: Optional label rendered alongside a `frontend` block.
           example: "Triage Instructions"
           type: string
         level:
@@ -58695,6 +59218,7 @@ components:
         - image
         - widget
         - llmobs_trace
+        - frontend
       example: markdown
       type: string
       x-enum-varnames:
@@ -58705,6 +59229,7 @@ components:
         - IMAGE
         - WIDGET
         - LLMOBS_TRACE
+        - FRONTEND
     LLMObsContentBlocks:
       description: |-
         List of content blocks that make up a `display_block` interaction.
@@ -61529,6 +62054,29 @@ components:
       required:
         - data
       type: object
+    LLMObsFrontendContentBlock:
+      description: Validation requirements for a `frontend` display block.
+      properties:
+        code:
+          $ref: '#/components/schemas/LLMObsFrontendContentBlockCode'
+        type:
+          $ref: '#/components/schemas/LLMObsFrontendContentBlockType'
+      required:
+        - code
+      type: object
+    LLMObsFrontendContentBlockCode:
+      description: HTML code rendered by a `frontend` block. Required for `frontend` blocks.
+      example: '<div class="status-card">Ready for review</div>'
+      minLength: 1
+      type: string
+    LLMObsFrontendContentBlockType:
+      description: Type discriminator for a `frontend` display block.
+      enum:
+        - frontend
+      example: frontend
+      type: string
+      x-enum-varnames:
+        - FRONTEND
     LLMObsInferenceCode:
       description: A generated code snippet for running an inference request programmatically.
       properties:
@@ -62134,6 +62682,32 @@ components:
         - CATEGORICAL
         - BOOLEAN
         - TEXT
+    LLMObsLegacyContentBlock:
+      description: Validation requirements for an existing non-frontend display block.
+      properties:
+        type:
+          $ref: '#/components/schemas/LLMObsLegacyContentBlockType'
+      type: object
+    LLMObsLegacyContentBlockType:
+      description: Type discriminator for an existing non-frontend display block.
+      enum:
+        - markdown
+        - header
+        - text
+        - json
+        - image
+        - widget
+        - llmobs_trace
+      example: markdown
+      type: string
+      x-enum-varnames:
+        - MARKDOWN
+        - HEADER
+        - TEXT
+        - JSON
+        - IMAGE
+        - WIDGET
+        - LLMOBS_TRACE
     LLMObsMetricAssessment:
       description: Assessment result for an Agent Observability experiment metric.
       enum:
@@ -91416,6 +91990,8 @@ components:
         filter:
           description: Filter expression applied to the recommendations.
           type: string
+        scope:
+          $ref: '#/components/schemas/RecommendationsFilterRequestScope'
         sort:
           description: Ordered list of sort clauses applied to the result set.
           items:
@@ -91425,6 +92001,17 @@ components:
           description: Active view name (for example, `active`, `dismissed`, `open`, `in-progress`, or `completed`).
           type: string
       type: object
+    RecommendationsFilterRequestScope:
+      description: Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations or `*` for both.
+      enum:
+        - ccm
+        - experiment
+        - "*"
+      type: string
+      x-enum-varnames:
+        - CCM
+        - EXPERIMENT
+        - ALL
     RecommendationsFilterRequestSortItems:
       description: A single sort clause applied to the cost recommendations result set.
       properties:
@@ -172019,6 +172606,9 @@ paths:
                                 experiment_id: abc-123
                               label: "Experiments"
                               type: json
+                            - code: '<div class="status-card">Ready for review</div>'
+                              label: "Review status"
+                              type: frontend
                           type: display_block
                     type: interactions
             schema:
@@ -218087,6 +218677,7 @@ paths:
                     attributes:
                       description: My custom ruleset.
                       name: my-custom-ruleset
+                    id: my-custom-ruleset
                     type: custom_ruleset
             schema:
               $ref: '#/components/schemas/CustomRulesetRequest'
@@ -218100,7 +218691,12 @@ paths:
                   value:
                     data:
                       attributes:
+                        created_at: "2024-01-01T00:00:00+00:00"
+                        created_by: example-handle
+                        description: Example ruleset description
                         name: my-custom-ruleset
+                        rules: []
+                        short_description: Short description
                       id: my-custom-ruleset
                       type: custom_ruleset
               schema:
@@ -218256,12 +218852,13 @@ paths:
                 value:
                   data:
                     attributes:
+                      name: my-ruleset
                       rules:
-                        - created_at: "2026-01-09T13:00:57.473141Z"
-                          created_by: foobarbaz
+                        - id: my-rule
                           last_revision:
-                            id: revision-123
+                            creation_message: Initial revision
                           name: my-rule
+                    id: my-ruleset
                     type: custom_ruleset
             schema:
               $ref: '#/components/schemas/CustomRulesetRequest'
@@ -218345,10 +218942,27 @@ paths:
                         created_at: "2024-01-01T00:00:00+00:00"
                         created_by: example-handle
                         last_revision:
-                          attributes: {}
+                          arguments: []
+                          category: SECURITY
+                          checksum: 8a66c4e4e631099ad71be3c1ea3ea8fc2d57193e56db2c296e2dd8a508b26b99
+                          code: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+                          created_at: "2024-01-01T00:00:00+00:00"
+                          created_by: example-handle
+                          creation_message: Initial revision
+                          description: Example ruleset description
                           id: revision-abc-123
-                          type: custom_rule_revision
+                          is_published: true
+                          is_testing: false
+                          language: PYTHON
+                          severity: ERROR
+                          short_description: Short description
+                          should_use_ai_fix: false
+                          tags: []
+                          tests: []
+                          tree_sitter_query: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+                          version_id: 1
                         name: my-rule
+                        revisions: []
                       id: my-rule
                       type: custom_rule
               schema:
@@ -218458,10 +219072,27 @@ paths:
                         created_at: "2024-01-01T00:00:00+00:00"
                         created_by: example-handle
                         last_revision:
-                          attributes: {}
+                          arguments: []
+                          category: SECURITY
+                          checksum: 8a66c4e4e631099ad71be3c1ea3ea8fc2d57193e56db2c296e2dd8a508b26b99
+                          code: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+                          created_at: "2024-01-01T00:00:00+00:00"
+                          created_by: example-handle
+                          creation_message: Initial revision
+                          description: Example ruleset description
                           id: revision-abc-123
-                          type: custom_rule_revision
+                          is_published: true
+                          is_testing: false
+                          language: PYTHON
+                          severity: ERROR
+                          short_description: Short description
+                          should_use_ai_fix: false
+                          tags: []
+                          tests: []
+                          tree_sitter_query: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+                          version_id: 1
                         name: my-rule
+                        revisions: []
                       id: my-rule
                       type: custom_rule
               schema:
@@ -218541,10 +219172,7 @@ paths:
                           created_at: "2024-01-01T00:00:00+00:00"
                           created_by: example-handle
                           creation_message: Initial revision
-                          cve:
-                          cwe:
                           description: Example ruleset description
-                          documentation_url:
                           is_published: false
                           is_testing: false
                           language: PYTHON
@@ -218554,6 +219182,7 @@ paths:
                           tags: []
                           tests: []
                           tree_sitter_query: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+                          version_id: 1
                         id: revision-123
                         type: custom_rule_revision
               schema:
@@ -218761,10 +219390,7 @@ paths:
                         created_at: "2024-01-01T00:00:00+00:00"
                         created_by: example-handle
                         creation_message: Initial revision
-                        cve:
-                        cwe:
                         description: Example ruleset description
-                        documentation_url:
                         is_published: false
                         is_testing: false
                         language: PYTHON
@@ -218774,6 +219400,7 @@ paths:
                         tags: []
                         tests: []
                         tree_sitter_query: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+                        version_id: 1
                       id: revision-123
                       type: custom_rule_revision
               schema:
@@ -219088,7 +219715,16 @@ paths:
                   value:
                     data:
                       attributes:
-                        ast: {}
+                        result:
+                          ast_type: module
+                          children: []
+                          end:
+                            col: 11
+                            line: 1
+                          start:
+                            col: 1
+                            line: 1
+                      id: abc-123
                       type: get_ast_response
               schema:
                 $ref: '#/components/schemas/GetAstResponse'
@@ -219243,6 +219879,11 @@ paths:
         - description: Filter status pages by exact domain prefix match. Returns at most one result.
           in: query
           name: filter[domain_prefix]
+          schema:
+            type: string
+        - description: Filter status pages by name with case-insensitive substring matching.
+          in: query
+          name: filter[name]
           schema:
             type: string
         - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user."
@@ -227513,7 +228154,7 @@ paths:
   /api/v2/usage/quotas/{quota_namespace}:
     get:
       description: |-
-        Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+        Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `billing_edit` permission.
       operationId: ListQuotas
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -227586,9 +228227,7 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - user_access_manage
             - billing_edit
-            - org_management
       summary: List usage quotas
       tags:
         - Usage Metering
@@ -227599,17 +228238,15 @@ paths:
         limitParam: page[limit]
         resultsPath: data
       "x-permission":
-        operator: AND
+        operator: OR
         permissions:
-          - user_access_manage
           - billing_edit
-          - org_management
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
-        Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated; otherwise, a new quota is created. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+        Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated; otherwise, a new quota is created. Requires the `billing_edit` permission.
       operationId: CreateQuotas
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -227697,26 +228334,22 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - user_access_manage
             - billing_edit
-            - org_management
       summary: Create or update usage quotas
       tags:
         - Usage Metering
       x-menu-order: 15
       "x-permission":
-        operator: AND
+        operator: OR
         permissions:
-          - user_access_manage
           - billing_edit
-          - org_management
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/usage/quotas/{quota_namespace}/{id}:
     delete:
       description: |-
-        Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+        Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: DeleteQuota
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -227754,25 +228387,21 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - user_access_manage
             - billing_edit
-            - org_management
       summary: Delete a usage quota
       tags:
         - Usage Metering
       x-menu-order: 17
       "x-permission":
-        operator: AND
+        operator: OR
         permissions:
-          - user_access_manage
           - billing_edit
-          - org_management
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: |-
-        Updates the supplied fields on a usage quota and leaves omitted fields unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.
+        Updates the supplied fields on a usage quota and leaves omitted fields unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: UpdateQuota
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -227848,19 +228477,15 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - user_access_manage
             - billing_edit
-            - org_management
       summary: Update a usage quota
       tags:
         - Usage Metering
       x-menu-order: 16
       "x-permission":
-        operator: AND
+        operator: OR
         permissions:
-          - user_access_manage
           - billing_edit
-          - org_management
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
