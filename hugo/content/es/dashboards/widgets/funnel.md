@@ -1,46 +1,47 @@
 ---
 aliases:
 - /es/graphing/widgets/funnel/
+description: Realice un seguimiento de las tasas de conversión e identifique cuellos
+  de botella en los flujos de trabajo de usuario con la visualización de análisis
+  de embudo.
 further_reading:
 - link: https://docs.datadoghq.com/product_analytics/journeys/funnel_analysis/
   tag: Documentación
-  text: Más información sobre el análisis de embudos
+  text: Más información sobre Funnel Analysis
 - link: https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/
   tag: Blog
-  text: Utilizar el análisis del embudo para comprender y optimizar los flujos de
-    usuarios clave
-title: Widget embudo
-widget_type: embudo
+  text: Utilice Funnel Analysis para comprender y optimizar los flujos clave de usuario
+title: Funnel Widget
+widget_type: funnel
 ---
+Funnel Analysis le ayuda a realizar un seguimiento de las tasas de conversión en flujos de trabajo clave para identificar y abordar cualquier cuello de botella en las rutas de recorrido de extremo a extremo de los usuarios. Funnel Widget visualiza las tasas de conversión en los flujos de trabajo de usuario y en las rutas de recorrido de extremo a extremo.
 
-El análisis del embudo te ayuda a realizar un seguimiento de las tasas de conversión en los flujos de trabajo clave para identificar y abordar los cuellos de botella en los recorridos de usuario de extremo a extremo. El widget embudo visualiza las tasas de conversión en los flujos de trabajo de los usuarios y en los recorridos integrales de los usuarios.
+{{< img src="dashboards/widgets/funnel/funnel.png" alt="Funnel Widget que visualiza las tasas de abandono de un usuario en un sitio de comercio electrónico" >}}
 
-{{< img src="dashboards/widgets/funnel/funnel.png" alt="Widget embudo que visualiza las tasas de abandono de un usuario en un sitio de comercio electrónico" >}}
+## Configuración {#setup}
 
-## Configuración
+{{< img src="dashboards/widgets/funnel/funnel_setup.png" alt="Pantalla de configuración de Funnel Widget" >}}
 
-{{< img src="dashboards/widgets/funnel/funnel_setup.png" alt="Pantalla de configuración del widget embudo" >}}
+### Configuración {#configuration}
 
-### Configuración
+1. Elija los datos para graficar:
+    * RUM: Consulte la [documentación de búsqueda de eventos RUM][1] para configurar una consulta RUM.
+2. Seleccione {{< ui >}}View{{< /ui >}} o {{< ui >}}Action{{< /ui >}} y elija una consulta del menú desplegable.
+3. Haga clic en el botón {{< ui >}}\+{{< /ui >}} y seleccione otra consulta del menú desplegable para visualizar el embudo. Consulte la [documentación de visualización de RUM][2] para obtener más información sobre cómo visualizar Funnel Analysis.
 
-1. Elige los datos para los que crear gráficas:
-    * RUM: consulta la [Search RUM Events documentation (búsqueda de documentación de eventos RUM)][1] para configurar una consulta RUM.
-2. Selecciona **View** (Ver) o **Action** (Acción) y elige una consulta en el menú desplegable.
-3. Haz clic en el botón **+** y selecciona otra consulta del menú desplegable para visualizar el embudo. Consulta la [RUM Visualize documentation (documentación de visualización de RUM)][2] para obtener más información sobre la visualización del análisis del embudo.
+### Opciones {#options}
 
-### Opciones
+#### Tiempo global {#global-time}
 
-#### Hora mundial
+En los tableros y cuadernos, elija si su widget tiene un marco de tiempo personalizado o utiliza el marco de tiempo global.
 
-En los screenboards y notebooks, elige si tu widget tiene un marco temporal personalizado o utiliza el marco temporal global.
+## API {#api}
 
-## API
-
-Este widget puede utilizarse con la [Dashboards API (API de dashboards)][3]. Ve la siguiente tabla para la [widget JSON schema definition (definición del esquema de widget JSON)][4]:
+Funnel Widget se puede utilizar con la [Dashboards API][3]. Consulte la siguiente tabla para ver la [definición del esquema JSON del widget][4]:
 
 {{< dashboards-widgets-api >}}
 
-## Leer más
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

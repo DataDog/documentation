@@ -8,6 +8,7 @@ title: Observability Pipelines 가이드
     {{< nextlink href="observability_pipelines/guide/strategies_for_reducing_log_volume" >}}로그 볼륨 축소 전략{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/guide/environment_variables" >}}소스, 프로세서 및 목적지의 환경 변수{{< /nextlink >}}
     {{< nextlink href="/byoc-logs/guides/send_otel_logs_observability_pipelines" >}}Observability Pipelines를 사용하여 OpenTelemetry 로그를 BYOC Logs로 전송{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/guide/manage_pipelines_with_terraform_and_api" >}}API 또는 Terraform을 사용하여 Observability Pipelines를 관리하십시오{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Worker 업그레이드 가이드" >}}

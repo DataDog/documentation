@@ -22,7 +22,9 @@ Administrators or users with the Usage Read permission can access the Usage Attr
 - Summarizes usage at the end of each month and visualizes usage over time broken out by tags.
 - Generates month-to-date and hourly CSV files.
 
-This feature does not support product usage that cannot be tagged during instrumentation. For example, Incident Management Users, CI Pipeline and Test Users, Parallel Testing Slots, and Audit Trail. 
+This feature does not support product usage that cannot be tagged during instrumentation. For example, Incident Management Users, Parallel Testing Slots, and Audit Trail.
+
+**Note**: To break down CI Pipeline and Test Optimization billing by team or other organizational tags, see [Billing enrichment][5] in the CI Visibility Billing documentation.
 
 ## Getting started
 
@@ -109,3 +111,4 @@ For direct billing customers, month-end cost attribution reports are generated a
 [2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage-attribution
 [3]: https://docs.datadoghq.com/getting_started/tagging/#define-tags
 [4]: https://docs.datadoghq.com/api/latest/usage-metering/#get-monthly-cost-attribution
+[5]: /account_management/billing/ci_visibility/#billing-enrichment
