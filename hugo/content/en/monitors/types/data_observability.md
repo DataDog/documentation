@@ -220,9 +220,9 @@ For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand {
 | Setting | Description |
 |---|---|
 | {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | The number of consecutive failed evaluations before the monitor alerts. Configure this setting to suppress isolated spikes. |
-| {{< ui >}}Minimum upper bound size{{< /ui >}} | Constrains how tightly the model tracks your data on the upper end. |
-| {{< ui >}}Minimum lower bound size{{< /ui >}} | Constrains how tightly the model tracks your data on the lower end. |
-| {{< ui >}}Sensitivity{{< /ui >}} | Controls the width of the expected bounds. Move the slider toward {{< ui >}}Fewer alerts{{< /ui >}} (left) for wider bounds, or toward {{< ui >}}More alerts{{< /ui >}} (right) for narrower bounds. Configured minimum bound sizes still apply. |
+| {{< ui >}}Minimum upper bound size{{< /ui >}} | Expand bounds to a minimum amount above the predicted value. |
+| {{< ui >}}Minimum lower bound size{{< /ui >}} | Expand bounds to a minimum amount below the predicted value. |
+| {{< ui >}}Sensitivity{{< /ui >}} | Controls bound width. Move the slider toward {{< ui >}}Fewer alerts{{< /ui >}} (left) for wider bounds, or toward {{< ui >}}More alerts{{< /ui >}} (right) for narrower bounds. Configured minimum bound sizes still apply. |
 
 ### Monitor schedule
 
