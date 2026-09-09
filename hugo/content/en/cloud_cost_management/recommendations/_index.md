@@ -444,6 +444,12 @@ multifiltersearch:
       recommendation_type: Delete Container Registry
       recommendation_description: A Container Registry that has never received successful pulls.
       recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: Azure
+      resource_type: Foundry Account
+      recommendation_type: Optimize Prompt Caching
+      recommendation_description: Identifies Azure Foundry accounts already using prompt caching below the target hit rate and recommends improving cache configuration to reduce input token costs.
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: Data Explorer Cluster

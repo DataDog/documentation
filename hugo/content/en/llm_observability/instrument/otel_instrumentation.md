@@ -19,7 +19,7 @@ Agent Observability supports ingesting OpenTelemetry traces that follow either t
 
 ### Evaluations
 
-To send [external evaluations directly to the API](/llm_observability/configure/evaluations/external_evaluations#submitting-external-evaluations-with-the-api) for OpenTelemetry spans, include the `source:otel` tag in the evaluation. When referencing spans, provide `span_id` and `trace_id` as decimal strings. OpenTelemetry uses hexadecimal IDs natively, so convert them to decimal before submitting evaluations. For example, use Python's `int(hex_span_id, 16)` to convert a hex span ID to its decimal equivalent.
+To send [external evaluations directly to the API](/llm_observability/investigate/evaluations/external_evaluations#submitting-external-evaluations-with-the-api) for OpenTelemetry spans, include the `source:otel` tag in the evaluation. When referencing spans, provide `span_id` and `trace_id` as decimal strings. OpenTelemetry uses hexadecimal IDs natively, so convert them to decimal before submitting evaluations. For example, use Python's `int(hex_span_id, 16)` to convert a hex span ID to its decimal equivalent.
 
 ### Prompt Tracking
 
@@ -28,6 +28,12 @@ For information on using Prompt Tracking with OpenTelemetry spans, see [Prompt T
 ### Experiments
 
 You can use OpenTelemetry spans inside [Agent Observability Experiments](/llm_observability/guide/experiments#using-opentelemetry-spans-inside-experiments). By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
+
+### Multimodal support
+
+Audio and images on OpenTelemetry messages are rendered in the trace view. Datadog extracts media from message parts that follow the OpenTelemetry GenAI semantic conventions, as described in [Media in messages](#media-in-messages).
+
+Only media carried inline as base64 bytes is rendered. A remote URL is recorded as a text reference and is never fetched. For the fields, formats, and size limits that apply once media reaches a span, see [Multimodal Support](/llm_observability/instrument/multimodal/).
 
 ### Span links
 
@@ -521,6 +527,23 @@ Input and output messages are extracted from the following sources, in priority 
 | `gen_ai.output.messages` | `meta.output.messages` (llm) / `meta.output.value` (others) | |
 | `gen_ai.system_instructions` | Prepended to input | Added as system role messages |
 
+##### Media in messages
+
+Message parts that carry media are extracted into the typed `audio_parts` and `image_parts` fields on the message:
+
+| Part type | Behavior |
+|-----------|----------|
+| `blob` with `mime_type` and inline bytes | Extracted to `image_parts` or `audio_parts`. When the part omits `modality`, it is inferred from the MIME type. |
+| `uri` carrying a base64 image data URI, such as `data:image/png;base64,...` | Extracted to `image_parts`. |
+| `uri` carrying a remote URL | Recorded as the text reference `[<modality>: <uri>]`. The URL is not fetched. |
+| `file` with a `file_id` | Recorded as the text reference `[<modality> file: <file_id>]`. |
+
+A positional marker such as `[image blob: image/png]` is also added to the message text so that media keeps its place among the other parts.
+
+Audio reaches `audio_parts` through `blob` parts only. An audio data URI on a `uri` part is recorded as text, and the conventions specify `blob` as the part type for inline base64 data, so prefer `blob` for both audio and images.
+
+For the formats the trace view renders and the size limits that apply, see [Multimodal Support](/llm_observability/instrument/multimodal/).
+
 ##### Embedding spans
 
 | OTel Source | Agent Observability Field |
@@ -865,30 +888,33 @@ Mapping warnings are detected at ingestion. They do not affect billing or span r
 
 A span can display warnings not listed in the following table if Datadog adds checks. These render with a generated title based on the check that triggered the warning.
 
-| Warning | Attribute | Fix |
-|---------|-----------|-----|
-| Malformed model identifier | On `gen_ai.request.model` | Emit `gen_ai.response.model` directly, so the model name doesn't need to be parsed out of `gen_ai.request.model`. |
-| Missing input and output | Expected `gen_ai.input.messages` | Set `gen_ai.input.messages` and `gen_ai.output.messages`. |
-| Malformed input | On `gen_ai.input.messages` | Emit `gen_ai.input.messages` as a valid JSON array of messages. |
-| Malformed output | On `gen_ai.output.messages` | Emit `gen_ai.output.messages` as a valid JSON array of messages. |
-| Malformed message | On `gen_ai.input.messages` | Emit each message with a `role` and `content` field. |
-| Empty message content | On `gen_ai.output.messages` | Emit a `content` string, or `parts` entries with a recognized `type`, for example `text`, `tool_call`, `tool_call_response`. |
-| Missing embedding input | Expected `gen_ai.input.messages` | Set `gen_ai.input.messages` to the embedded text. |
-| Malformed embedding input | On `gen_ai.input.messages` | Emit `gen_ai.input.messages` as a valid JSON array of messages. |
-| Unreadable token counts | On `gen_ai.usage.input_tokens` | Emit token counts as integers, not strings or objects. |
-| Invalid token counts | On `gen_ai.usage.input_tokens` | Emit non-negative integer token counts. |
-| Unreadable cost metrics | On `gen_ai.cost.estimated_total` | Emit cost metrics as integers or floats, not strings or objects. |
-| Invalid cost metrics | On `gen_ai.cost.estimated_total` | Emit non-negative cost values. |
-| Malformed invocation parameters | On invocation parameters | Emit invocation parameters as a valid JSON object, or set them individually as `gen_ai.request.*` attributes (such as `temperature`, `top_p`, and `max_tokens`). |
-| Malformed tool definitions | On `gen_ai.tool.definitions` | Emit `gen_ai.tool.definitions` as a valid JSON array of tool definitions. |
-| Malformed tool definition | On `gen_ai.tool.definitions` | Give each tool definition a `name`, and make its `parameters` a JSON object. |
-| Missing tool name | Expected `gen_ai.tool.name` | Set `gen_ai.tool.name` on tool spans. |
-| Missing tool call name | On `gen_ai.output.messages` | Give each tool call a `name`. |
-| Missing operation name | Expected `gen_ai.operation.name` | Set `gen_ai.operation.name` to one of `chat`, `text_completion`, `embeddings`, `execute_tool`, `invoke_agent`, or `retriever`. |
-| Malformed span events | On `events` | Emit valid JSON in span events, or set `gen_ai.input.messages` and `gen_ai.output.messages` directly. |
-| Unreadable document score | On `output.documents` | Emit each document score as a number. |
-| Malformed document metadata | On `output.documents` | Emit each document's metadata as a JSON object. |
-| Unrecognized instrumentation | Expected `gen_ai.operation.name` | Set `gen_ai.operation.name` and `gen_ai.system` so Datadog can identify the instrumentation. |
+**Search value** shows the value stored on the span. Use it with the `@collection_errors` attribute to find flagged spans, for example `@collection_errors:otel_warning_missing_model_name`.
+
+| Warning | Search value (`@collection_errors:`) | Attribute | Fix |
+|---------|--------------------------------------|-----------|-----|
+| Missing model name | `otel_warning_missing_model_name` | Expected `gen_ai.response.model` | Emit `gen_ai.response.model` directly, so the model name doesn't need to be parsed out of `gen_ai.request.model`. |
+| Missing model provider | `otel_warning_missing_model_provider` | Expected `gen_ai.provider.name` | Emit `gen_ai.provider.name` directly, so the provider doesn't need to be inferred from `gen_ai.system`. |
+| Malformed model identifier | `otel_warning_strands_model_malformed` | On `gen_ai.request.model` | Emit `gen_ai.response.model` directly, so the model name doesn't need to be parsed out of `gen_ai.request.model`. |
+| Malformed input | `otel_warning_input_malformed` | On `gen_ai.input.messages` | Emit `gen_ai.input.messages` as a valid JSON array of messages. |
+| Malformed output | `otel_warning_output_malformed` | On `gen_ai.output.messages` | Emit `gen_ai.output.messages` as a valid JSON array of messages. |
+| Malformed message | `otel_warning_message_malformed` | On `gen_ai.input.messages` | Emit each message with a `role` and `content` field. |
+| Empty message content | `otel_warning_invalid_parts` | On `gen_ai.output.messages` | Emit a `content` string, or `parts` entries with a recognized `type`, for example `text`, `tool_call`, `tool_call_response`. |
+| Missing embedding input | `otel_warning_embedding_input_missing` | Expected `gen_ai.input.messages` | Set `gen_ai.input.messages` to the embedded text. |
+| Malformed embedding input | `otel_warning_embedding_input_malformed` | On `gen_ai.input.messages` | Emit `gen_ai.input.messages` as a valid JSON array of messages. |
+| Unreadable token counts | `otel_warning_token_usage_unparseable` | On `gen_ai.usage.input_tokens` | Emit token counts as integers, not strings or objects. |
+| Invalid token counts | `otel_warning_token_usage_invalid` | On `gen_ai.usage.input_tokens` | Emit non-negative integer token counts. |
+| Unreadable cost metrics | `otel_warning_cost_metrics_unparseable` | On `gen_ai.cost.estimated_total` | Emit cost metrics as integers or floats, not strings or objects. |
+| Invalid cost metrics | `otel_warning_cost_metrics_invalid` | On `gen_ai.cost.estimated_total` | Emit non-negative cost values. |
+| Malformed invocation parameters | `otel_warning_params_malformed` | On invocation parameters | Emit invocation parameters as a valid JSON object, or set them individually as `gen_ai.request.*` attributes (such as `temperature`, `top_p`, and `max_tokens`). |
+| Malformed tool definitions | `otel_warning_tool_definitions_malformed` | On `gen_ai.tool.definitions` | Emit `gen_ai.tool.definitions` as a valid JSON array of tool definitions. |
+| Malformed tool definition | `otel_warning_tool_definition_entry_malformed` | On `gen_ai.tool.definitions` | Give each tool definition a `name`, and make its `parameters` a JSON object. |
+| Missing tool name | `otel_warning_tool_span_name_missing` | Expected `gen_ai.tool.name` | Set `gen_ai.tool.name` on tool spans. |
+| Missing tool call name | `otel_warning_tool_call_name_missing` | On `gen_ai.output.messages` | Give each tool call a `name`. |
+| Missing operation name | `otel_warning_operation_missing` | Expected `gen_ai.operation.name` | Set `gen_ai.operation.name` to one of `chat`, `text_completion`, `embeddings`, `execute_tool`, `invoke_agent`, or `retriever`. |
+| Malformed span events | `otel_warning_failed_to_parse_span_events` | On `events` | Emit valid JSON in span events, or set `gen_ai.input.messages` and `gen_ai.output.messages` directly. |
+| Unreadable document score | `otel_warning_failed_to_parse_document_score` | On `output.documents` | Emit each document score as a number. |
+| Malformed document metadata | `otel_warning_document_metadata_malformed` | On `output.documents` | Emit each document's metadata as a JSON object. |
+| Unrecognized instrumentation | `otel_warning_spec_version_unknown` | Expected `gen_ai.operation.name` | Set `gen_ai.operation.name` and `gen_ai.system` so Datadog can identify the instrumentation. |
 
 ### Find raw span attributes for a flagged span
 
@@ -941,7 +967,7 @@ with tracer.start_as_current_span("my-span") as span:
 [3]: https://app.datadoghq.com/llm/traces
 [4]: /help/
 [5]: https://pypi.org/project/strands-agents/
-[6]: /llm_observability/configure/evaluations/external_evaluations
+[6]: /llm_observability/investigate/evaluations/external_evaluations
 [7]: https://strandsagents.com/latest/
 [8]: /account_management/rbac/data_access/
 [9]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links

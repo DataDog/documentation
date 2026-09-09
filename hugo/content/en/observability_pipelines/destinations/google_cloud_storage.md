@@ -86,6 +86,12 @@ Enter a prefix that you want to apply to all key objects.
 1. Click {{< ui >}}Add Header{{< /ui >}} to add metadata.
 1. Enter values for the header name and value.
 
+#### Compression
+
+1. In the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu, select the compression algorithm for your archived logs ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}).
+    - **Note**: If a compression algorithm is not specified, gzip with a compression level of `6` is used.
+1. In the {{< ui >}}Compression - Level {{< /ui >}} field, you must enter a compression level. Datadog recommends `6` for gzip and `3` for zstd.
+
 #### Buffering
 
 {{% observability_pipelines/destination_buffer %}}

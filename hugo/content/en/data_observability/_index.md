@@ -8,6 +8,9 @@ further_reading:
  - link: "https://www.datadoghq.com/blog/datadog-google-cloud-ai-stack/"
    tag: "Blog"
    text: "Evaluate, optimize, and secure your Google Cloud AI stack with Datadog"
+ - link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
+   tag: "Blog"
+   text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
 ---
 
 ## Overview

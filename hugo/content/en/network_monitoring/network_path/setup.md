@@ -374,7 +374,7 @@ Agent `v7.73+` is required.
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-[3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -442,7 +442,7 @@ Agent `v7.73+` is required.
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-[3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_windows.yaml.example
 
 {{% /tab %}}
 {{% tab "Helm" %}}

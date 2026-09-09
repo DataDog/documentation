@@ -6,252 +6,268 @@ aliases:
 - /es/developers/faq/data-collection-resolution-retention/
 - /es/developers/guide/data-collection-resolution-retention
 attributes:
-- data_type: '- **Errors**: 15 days
+- data_type: '- **Errores**: 15 días
 
-    - **Indexed spans**: 15 or 30 days, determined by customer plan
+    - **Tramos indexados**: 15 o 30 días, determinado por el plan del cliente
 
-    - **Services/resources statistics**: 30 days
+    - **Estadísticas de servicios/recursos**: 30 días
 
-    - **Viewed traces**: Retained for the duration of the account
+    - **Trazas vistas**: Se conservan durante la duración de la cuenta
 
     '
   product: APM
-- data_type: '- **Security signals**: 15 months
+- data_type: '- **Señales de seguridad**: 15 meses
 
-    - **Spans**: 90 days
+    - **Tramos**: 90 días
 
     '
   product: App and API Protection
-- data_type: '- **Audit logs (Audit Trail enabled)**: 90 days
+- data_type: '- **Registros de auditoría (Audit Trail habilitado)**: 90 días
 
-    - **Audit logs (Audit Trail disabled)**: 7 days
+    - **Registros de auditoría (Audit Trail deshabilitado)**: 7 días
 
     '
   product: Audit Trail
-- data_type: '- **Messages**: 15 months
+- data_type: '- **Mensajes**: 15 meses
 
     '
-  product: Bits AI Assistant
-- data_type: '- **Source Code**: 7 days
+  product: Bits Chat
+- data_type: '- **Código fuente**: 7 días
 
     '
-  product: Bits AI Dev Agent
-- data_type: '- **Investigations**: Retained for the duration of the account
+  product: Bits Code
+- data_type: '- **Investigaciones**: Se conservan durante la duración de la cuenta
 
     '
-  product: Bits AI SRE
-- data_type: '- **Session, View, Action, and Error Events**: 30 days
+  product: Bits Investigation
+- data_type: '- **Eventos de sesión, visualización, acción y error**: 30 días
 
-    - **Resource, Long Task, and Vitals Events**: 15 Days
+    - **Eventos de recursos, tareas largas y métricas vitales**: 15 días
 
     '
   product: Browser RUM
-- data_type: '- **Cases**: Retained for the duration of the account
+- data_type: '- **Incidencias**: Se conservan durante la duración de la cuenta
 
     '
   product: Case Management
-- data_type: '- **Deployments**: 30 days
+- data_type: '- **Implementaciones**: 30 días
 
     '
   product: CD Visibility
-- data_type: '- **Pipelines, stages, jobs, setups, commands**: 15 months
+- data_type: '- **Canalizaciones, etapas, trabajos, configuraciones, comandos**: 15
+    meses
 
     '
   product: CI Pipeline Visibility
-- data_type: '- **Recommendations**: 90 days
+- data_type: '- **Métricas de costos**: 15 meses
+
+    - **Recomendaciones**: 90 días
 
     '
   product: Cloud Cost Management
-- data_type: '- **Findings and resolved vulnerabilities**: 15 months
+- data_type: '- **Hallazgos y vulnerabilidades resueltas**: 15 meses
 
     '
   product: Cloud Security
-- data_type: '- **Signals**: 15 months
+- data_type: '- **Señales**: 15 meses
 
-    - **Detections, notifications, suppressions**: Retained for the duration of the
-    account
+    - **Detecciones, notificaciones, supresiones**: Se conservan durante la duración
+    de la cuenta
 
     '
   product: Cloud SIEM
-- data_type: '- **Events**: 90 days
+- data_type: '- **Eventos**: 90 días
 
-    - **Security signals**: 15 months
+    - **Señales de seguridad**: 15 meses
 
     '
   product: Workload Protection
-- data_type: '- **Scans**: 15 months
+- data_type: '- **Escaneos**: 15 meses
 
     '
   product: Code Security SAST
-- data_type: '- **Detected vulnerabilities**: 15 months
+- data_type: '- **Vulnerabilidades detectadas**: 15 meses
 
     '
   product: Code Security IAST
-- data_type: '- **Container metadata**: 2 hours
+- data_type: '- **Metadatos de contenedores**: 2 horas
 
-    - **Live processes and containers**: 36 hours
+    - **Procesos y contenedores en vivo**: 36 horas
 
-    - **YAML definitions**: 7 days
+    - **Definiciones YAML**: 7 días
 
     '
   product: Container and Process Monitoring
-- data_type: '- **Individual profiles (not opened in the UI)**: 8 days
+- data_type: '- **Gráficos de llama, gráficos de llamadas y líneas de tiempo de hilos**:
+    8 días
 
-    - **Individual profiles (opened in the UI at least once)**: 1 year
+    - **Gráficos de llama exportados a Notebooks**: 1 año
 
-    - **Profile metrics**: 90 days
+    - **Perfiles individuales abiertos en la interfaz de usuario al menos una vez**:
+    1 año
+
+    - **Métricas de perfil**: 30 días
 
     '
   product: Continuous Profiler
-- data_type: '- **Batch results**: 2 months
+- data_type: '- **Resultados de lotes**: 2 meses
 
-    - **Test results**: 2 months
+    - **Resultados de pruebas**: 2 meses
 
     '
   product: Continuous Testing
-- data_type: '- **Job traces**: 90 days
+- data_type: '- **Trazas de trabajo**: 90 días
 
     '
   product: 'Data Observability: Jobs Monitoring'
-- data_type: '- **Query samples**: 15 days
+- data_type: '- **Muestras de consultas**: 15 días
 
-    - **Query metrics**: 15 months
+    - **Métricas de consultas**: 15 meses
 
     '
   product: Database Monitoring
-- data_type: '- **Dashboards, Notebooks, Monitors**: Retained for the duration of
-    the account
+- data_type: '- **Dashboards, Notebooks, Monitors**: Se conservan durante la duración
+    de la cuenta
 
     '
   product: Datadog App
-- data_type: '- **Deployments**: 2 years
+- data_type: '- **Implementaciones**: 2 años
 
     '
   product: DORA Metrics
-- data_type: '- **Error samples**: 30 days
+- data_type: '- **Muestras de errores**: 30 días
 
-    - **Issues**: 1 year after last activity
+    - **Problemas**: 1 año después de la última actividad
 
     '
   product: Error Tracking
-- data_type: '- **Events**: 15 months
+- data_type: '- **Eventos**: 15 meses
 
     '
   product: Event Management
-- data_type: '- **Incidents**: Retained for the duration of the account
+- data_type: '- **Incidentes**: Se conservan durante la duración de la cuenta
 
     '
   product: Incident Management
-- data_type: '- **Production Traces and spans**: 15 (default), 30, 60, or 90 days,
-    determined by customer plan
+- data_type: '- **Trazas y tramos de producción**: 15 (predeterminado), 30, 60 o 90
+    días, determinado por el plan del cliente
 
-    - **Experiments Traces and spans**: 15 (default), 90, 180, 270, 365 days, determined
-    by customer plan
+    - **Trazas y tramos de experimentos**: 15 (predeterminado), 90, 180, 270, 365
+    días, determinado por el plan del cliente
 
-    - **Datasets**: 3 years
+    - **Conjuntos de datos**: 3 años
 
     '
-  product: LLM Observability
-- data_type: '- **Logs**: Determined by customer plan
+  product: Agent Observability
+- data_type: '- **Registros**: Determinado por el plan del cliente
+
+    - **Registros de ejemplo de Sensitive Data Scanner**: <span class="d-none site-region-container"
+    data-region="us,us3,us5,eu,ap1,ap2,uk1">3 días</span><span class="d-none site-region-container"
+    data-region="gov,gov2">7 días</span>
 
     '
   product: Log Management
-- data_type: '- **Tags and values**: 15 months
+- data_type: '- **Etiquetas y valores**: 15 meses
 
     '
   product: Metrics
-- data_type: '- **Test results (not displayed in UI)**: 2 months
+- data_type: '- **Resultados de pruebas (no mostrados en la interfaz de usuario)**:
+    2 meses
 
-    - **Test results (displayed in UI)**: 15 months
+    - **Resultados de pruebas (mostrados en la interfaz de usuario)**: 15 meses
 
-    - **Mobile application binaries**: Retained for the duration of the account
+    - **Binarios de aplicaciones móviles**: Se conservan durante la duración de la
+    cuenta
 
     '
   product: Mobile App Testing
-- data_type: '- **Session, View, Action, and Error Events**: 30 days
+- data_type: '- **Eventos de sesión, visualización, acción y error**: 30 días
 
-    - **Resource, Long Task, and Vitals Events**: 15 Days
+    - **Eventos de recursos, tareas largas y métricas vitales**: 15 días
 
     '
   product: Mobile RUM
-- data_type: '- **NetFlow**: 15, 30, 60, or 90 days, determined by customer plan
+- data_type: '- **NetFlow**: 15, 30, 60 o 90 días, determinado por el plan del cliente
 
-    - **SNMP traps**: Determined by customer plan, default to 15 days
+    - **SNMP traps**: Determinado por el plan del cliente, 15 días por defecto
 
     '
   product: Network Device Monitoring
-- data_type: '- **Network traffic**: 14 days
+- data_type: '- **Tráfico de red**: 14 días
 
     '
   product: Cloud Network Monitoring
-- data_type: '- **Network Path Tests**: 30 days
+- data_type: '- **Pruebas de Network Path**: 30 días
 
     '
   product: Network Path
-- data_type: '- **Events**: 15 months
+- data_type: '- **Eventos**: 15 meses
 
-    - **User Profiles**: 15 months, or 30 days if <a href="/product_analytics/guide/rum_and_product_analytics/#how-do-i-set-up-product-analytics">Product
-    Analytics is not enabled</a>
+    - **Perfiles de usuario**: 15 meses, o 30 días si <a href=\"/product_analytics/guide/rum_and_product_analytics/#how-do-i-set-up-product-analytics\">Product
+    Analytics no está habilitado</a>
 
     '
   product: Product Analytics
-- data_type: '- **Gate evaluations**: 30 days
+- data_type: '- **Evaluaciones de puertas**: 30 días
 
     '
-  product: PR Gates
-- data_type: '- **Tables**: Retained for the duration of the account
+  product: Quality Gates
+- data_type: '- **Tablas**: Se conservan durante la duración de la cuenta
 
     '
   product: Reference Tables
-- data_type: '- **Service metadata**: Retained for the duration of the account
+- data_type: '- **Metadatos de servicio**: Se conservan durante la duración de la
+    cuenta
 
     '
   product: Service Catalog
-- data_type: '- **SLO results**: 15 months
+- data_type: '- **Resultados de SLO**: 15 meses
 
     '
   product: Service Level Objectives
-- data_type: '- **Replays (extension option in UI is unchecked)**: 30 days
+- data_type: '- **Reproducciones (la opción de extensión en la interfaz de usuario
+    no está marcada)**: 30 días
 
-    - **Replays (extension option in UI is checked)**: 15 months
+    - **Reproducciones (la opción de extensión en la interfaz de usuario está marcada)**:
+    15 meses
 
     '
   product: Session Replay
-- data_type: '- **Detected vulnerabilities**: 15 months
+- data_type: '- **Vulnerabilidades detectadas**: 15 meses
 
     '
   product: Software Composition Analysis (SCA)
-- data_type: '- **Source Code**: 7 days
+- data_type: '- **Código fuente**: 7 días
 
     '
   product: Source Code Integration
-- data_type: '- **Test results**: 15 months
+- data_type: '- **Resultados de pruebas**: 15 meses
 
     '
   product: Synthetics
-- data_type: '- **Tests**: 3 months
+- data_type: '- **Pruebas**: 3 meses
 
     '
   product: Test Visibility & Intelligent Test Runner
-- data_type: '- **Workflows**: 30 days
+- data_type: '- **Flujos de trabajo**: 30 días
 
     '
   product: Workflow Automation
 content: La siguiente tabla enumera los períodos de retención de datos predeterminados
-  por tipo de datos y producto. Opcionalmente, busque por palabra clave o texto descriptivo
-  para encontrar el tipo de datos o producto que le interesa. Para obtener información
-  sobre el intervalo de colección y la resolución mínima, consulte [Datadog Data Collection
-  and Resolution](/extend/guide/data-collection-resolution). ¿Aún necesita ayuda?
-  Contacte a [Datadog support](/help).
+  por tipo de datos y producto. Opcionalmente, busque por palabra clave o texto de
+  descripción para encontrar el tipo de datos o producto que le interesa. Para obtener
+  información sobre el intervalo de recopilación y la resolución mínima, consulte
+  [Datadog Data Collection and Resolution](/extend/guide/data-collection-resolution).
+  ¿Aún necesita ayuda? Comuníquese con el [soporte de Datadog](/help).
 disable_sidebar: true
 filter_all: All
 further_reading:
 - link: /data_security/
   tag: Documentación
-  text: Revise las principales categorías de datos enviados a Datadog
+  text: Revise las categorías principales de datos enviados a Datadog
 title: Períodos de retención de datos
 type: data_retention_periods
 ---
-### Lectura adicional {#further-reading}
+### Lecturas Adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}

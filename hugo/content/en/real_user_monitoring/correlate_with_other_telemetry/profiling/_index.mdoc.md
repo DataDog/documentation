@@ -192,10 +192,6 @@ The **Optimization page** surfaces profiling data in several contexts:
 <!-- Android -->
 {% if equals($platform, "android") %}
 
-{% callout header="Preview" btn_hidden=true %}
-Android Profiling is in Preview.
-{% /callout %}
-
 {% img src="real_user_monitoring/android/android-profiling-ttid.png" alt="Android profiling data in a time to initial display vital event." style="width:90%;" /%}
 
 Android profiling helps you identify and optimize slow methods during important moments in user sessions. Android profiling is built on top of the [ProfilingManager Android API][4] and samples the device's CPU to collect method call stacks from the application's process.
@@ -304,10 +300,6 @@ Android profiling data is attached to operations events in a RUM session. You ca
 
 <!-- iOS -->
 {% if equals($platform, "ios") %}
-
-{% callout header="Preview" btn_hidden=true %}
-iOS Profiling is in Preview.
-{% /callout %}
 
 {% img src="real_user_monitoring/ios/ios-profiling-ttid.png" alt="iOS profiling data in a time to initial display vital event." style="width:90%;" /%}
 

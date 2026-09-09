@@ -14,9 +14,7 @@ products:
 
 Use the Datadog Archives destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format. You can then query these logs with [Archive Search][16]. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access.
 
-**Notes**: 
-- The Datadog Archives destination compresses logs using gzip.
-- Use the [Amazon S3][12] destination if you want to send your logs to Amazon S3 in JSON or Parquet format.
+**Note**: Use the [Amazon S3][12] destination to send your logs to Amazon S3 in JSON or Parquet format.
 
 You can also [route logs to Snowflake using the Datadog Archives destination](#route-logs-to-snowflake-using-the-datadog-archives-destination).
 
@@ -122,6 +120,16 @@ After you select the Datadog Archives destination in the pipeline UI:
     - See the [Example destination and log archive setup](#example-destination-and-log-archive-setup) section of this page for how to configure your Log Archive based on your Amazon S3 destination setup.
 
 ### Optional settings
+
+#### Compression
+
+1. In the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu, select the compression algorithm for your archived logs ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}).
+    - **Note**: If a compression algorithm is not specified, gzip with a compression level of `6` is used.
+1. In the {{< ui >}}Compression - Level {{< /ui >}} field, you must enter a compression level. Datadog recommends `6` for gzip and `3` for zstd.
+
+#### Server-side encryption
+
+Select an encryption type for your S3 bucket in the {{< ui >}}Server-Side Encryption{{< /ui >}} dropdown menu ({{< ui >}}AWS KMS{{< /ui >}} or {{< ui >}}AES256{{< /ui >}}). If you selected {{< ui >}}AWS KMS{{< /ui >}}, enter the AWS KMS key ID.
 
 #### AWS authentication
 
