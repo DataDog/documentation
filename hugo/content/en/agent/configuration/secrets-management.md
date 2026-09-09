@@ -593,7 +593,7 @@ spec:
 
 ```
 
-**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `secretBackend.type` and `secretBackend.config` fields. For example: `DD_SECRET_BACKEND_TYPE="aws.ssm"` and `DD_SECRET_BACKEND_CONFIG='{"aws_session":{"aws_region":"<AWS_REGION>"}}'`.
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `spec.global.secretBackend.type` and `spec.global.secretBackend.config` fields. For example: `DD_SECRET_BACKEND_TYPE="aws.ssm"` and `DD_SECRET_BACKEND_CONFIG='{"aws_session":{"aws_region":"<AWS_REGION>"}}'`.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -1569,7 +1569,7 @@ datadog:
 
 Configure the Datadog Agent to use Kubernetes Secrets with the Datadog Operator:
 
-**Note**: The native `secretBackend` fields require Datadog Operator v1.29.0+.
+**Note**: The native `secretBackend` fields require Datadog Operator v1.25.0+.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -1630,7 +1630,7 @@ datadog:
 
 {{% tab "Operator" %}}
 
-**Note**: The native `secretBackend` fields require Datadog Operator v1.29.0+.
+**Note**: The native `secretBackend` fields require Datadog Operator v1.25.0+.
 
 ```yaml
 spec:
@@ -1956,7 +1956,7 @@ spec:
               readOnly: true
 ```
 
-**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `secretBackend.type` and `secretBackend.config` fields.
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `spec.global.secretBackend.type` and `spec.global.secretBackend.config` fields.
 
 {{% /tab %}}
 {{< /tabs >}}
