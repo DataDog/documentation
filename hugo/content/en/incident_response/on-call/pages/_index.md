@@ -114,6 +114,21 @@ The Page status changes to `Acknowledged`.
 
 {{< img src="incident_response/on-call/pages/on-call-page-side-panel.png" alt="An On-Call Page side panel showing the Page status, urgency, responder, and service, with Next Steps buttons to Acknowledge, Reassign, Resolve, or Declare Incident" style="width:70%;" >}}
 
+### Snooze a Page
+
+Snoozing pauses the escalation policy for a Page you've seen but aren't ready to act on, without claiming ownership the way acknowledging does. Select how long to pause the escalation for, and if no one acknowledges or resolves the Page before that window ends, the escalation policy resumes and notifies the on-call responder again.
+
+To snooze a Page:
+
+1. Click the Page to open its side panel.
+1. Under **Next Steps**, select the arrow next to **Snooze** and choose a preset duration, or select **At a specific time** to pick a custom date and time.
+
+   {{< img src="incident_response/on-call/pages/on-call-snooze-page.png" alt="An On-Call Page side panel with the Snooze dropdown open, showing preset options to re-notify the escalation level in 10 minutes, 30 minutes, 1 hour, 4 hours, 12 hours, or at a specific time" style="width:70%;" >}}
+
+1. Click **Snooze**.
+
+The Page status remains `Triggered` while snoozed. When the snooze period ends, the escalation policy resumes and notifies the current escalation level again.
+
 ### Reassign a Page
 
 Reassign a Page if it was routed to the wrong person or Team, or if you need to transfer ownership to someone better positioned to respond. When you reassign a Page, the Page history remains intact.
