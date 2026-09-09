@@ -35093,7 +35093,7 @@ components:
       type: object
     DeploymentRuleOptionsMonitor:
       additionalProperties: false
-      description: Monitor options for deployment rules.
+      description: Monitor query options for deployment rules.
       properties:
         duration:
           description: Seconds the monitor needs to stay in OK status for the rule to pass.
@@ -35111,7 +35111,7 @@ components:
           example: false
           type: boolean
         query:
-          description: Monitors that match this query are evaluated.
+          description: A query that selects the monitors to evaluate.
           example: "service:my-service env:prod"
           type: string
         warmup:
@@ -35123,6 +35123,66 @@ components:
           type: integer
       required:
         - query
+      type: object
+    DeploymentRuleOptionsMonitorId:
+      additionalProperties: false
+      description: A specific monitor and the groups to evaluate for it.
+      properties:
+        groups:
+          description: The exact monitor group names to evaluate. An empty array evaluates all groups.
+          example: []
+          items:
+            description: An exact monitor group name.
+            minLength: 1
+            type: string
+          type: array
+          uniqueItems: true
+        id:
+          description: The monitor's decimal ID.
+          example: "123456"
+          pattern: "^[1-9][0-9]*$"
+          type: string
+      required:
+        - id
+        - groups
+      type: object
+    DeploymentRuleOptionsMonitorIds:
+      additionalProperties: false
+      description: Specific monitor options for deployment rules.
+      properties:
+        duration:
+          description: Seconds the monitors need to stay in OK status for the rule to pass.
+          example: 3600
+          format: int64
+          type: integer
+        fail_on_no_data:
+          default: true
+          description: Whether the rule should fail if a selected monitor group is in a NO DATA state.
+          example: false
+          type: boolean
+        fail_on_no_groups_found:
+          default: false
+          description: Whether the rule should fail if no monitor groups are found for the selected monitors.
+          example: false
+          type: boolean
+        monitor_ids:
+          description: A non-empty list of specific monitors to evaluate.
+          example:
+            - groups: []
+              id: "123456"
+          items:
+            $ref: '#/components/schemas/DeploymentRuleOptionsMonitorId'
+          minItems: 1
+          type: array
+        warmup:
+          default: 0
+          description: Seconds to wait after a deployment starts before evaluating the monitors' statuses.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+        - monitor_ids
       type: object
     DeploymentRuleResponse:
       description: Response for a deployment rule.
@@ -35238,6 +35298,7 @@ components:
       oneOf:
         - $ref: '#/components/schemas/DeploymentRuleOptionsFaultyDeploymentDetection'
         - $ref: '#/components/schemas/DeploymentRuleOptionsMonitor'
+        - $ref: '#/components/schemas/DeploymentRuleOptionsMonitorIds'
     DetachCaseRequest:
       description: Request for detaching security findings from their case.
       properties:
