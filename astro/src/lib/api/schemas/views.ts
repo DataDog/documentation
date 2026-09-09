@@ -7,7 +7,6 @@ const ExampleSchema = z
   .object({
     name: z.string(),
     value: z.string(),
-    highlightedValue: z.string().optional(),
   })
   .strict();
 
