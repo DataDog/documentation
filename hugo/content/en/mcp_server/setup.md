@@ -335,7 +335,7 @@ Install the Datadog Plugin from the Grok Build Plugin Marketplace. The plugin pa
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. In Grok Build, type `/marketplace`, locate the Datadog plugin, and install it.
 
-1. You will be prompted to select a [Datadog site](/getting_started/site/) and complete the OAuth login flow.
+1. You are prompted to select a [Datadog site](/getting_started/site/) and complete the OAuth login flow.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
