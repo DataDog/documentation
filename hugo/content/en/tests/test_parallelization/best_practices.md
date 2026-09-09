@@ -132,7 +132,7 @@ For JavaScript, `ddtest` plans and distributes test files, not individual tests.
 
 Use `--command` when your project invokes the framework through another package manager, a wrapper, a profile, or a non-default configuration. The command must invoke the selected framework directly. Do not include a `--` separator. For Jest, Vitest, Mocha, and Cypress, omit test files because `ddtest` provides the files assigned to each worker. Cucumber.js paths and Playwright positional filters can restrict discovery, but `ddtest` replaces them during execution.
 
-`ddtest` prepends `-r dd-trace/ci/init` to `NODE_OPTIONS` for worker processes unless it is already present. Ensure `dd-trace` is resolvable from the project where `ddtest` runs, and complete the [Test Optimization setup for your framework][1].
+`ddtest` prepends `-r dd-trace/ci/init` to `NODE_OPTIONS` for worker processes unless it is already present. The `dd-trace` package must be resolvable from the project where `ddtest` runs. Complete the [Test Optimization setup for your framework][1].
 
 ### Jest
 
@@ -192,7 +192,7 @@ Do not include Playwright's `--shard` option. `ddtest` asks Playwright to list t
 bin/ddtest run --platform javascript --framework cucumber --command "pnpm exec cucumber-js --profile ci --tags=@smoke"
 {{< /code-block >}}
 
-During planning, `ddtest` performs a serial dry run and uses Cucumber Messages to discover only feature files that contain scenarios selected by the effective paths, profile, tags, and name filters. Cucumber loads support code, but does not execute step or hook bodies. During execution, `ddtest` replaces positional feature paths and rerun files in `--command` with the files assigned to each worker while preserving Cucumber options. Prefer tag or name filters over scenario line selectors because `ddtest` plans at feature-file granularity.
+During planning, `ddtest` performs a serial dry run and uses Cucumber Messages to discover feature files. It includes only files containing scenarios selected by the effective paths, profile, tags, and name filters. Cucumber loads support code, but does not execute step or hook bodies. During execution, `ddtest` replaces positional feature paths and rerun files in `--command` with the files assigned to each worker while preserving Cucumber options. Prefer tag or name filters over scenario line selectors because `ddtest` plans at feature-file granularity.
 
 ## Configure Minitest in non-Rails projects
 

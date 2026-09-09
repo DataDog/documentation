@@ -79,7 +79,12 @@ For Cucumber.js, Cypress, Mocha, Playwright, and Vitest, the command must invoke
 bin/ddtest run --platform javascript --framework playwright --command "pnpm exec playwright test --project chromium"
 {{< /code-block >}}
 
-If a custom JavaScript command is accepted but runs an unexpected selection, check for framework inputs that `ddtest` replaces intentionally: positional paths and rerun files for Cucumber.js, `--spec` for Cypress, configured `spec` inputs for Mocha, and `--shard` or interactive UI options for Playwright.
+If a custom JavaScript command runs an unexpected selection, check the framework inputs that `ddtest` replaces:
+
+- Cucumber.js positional paths and rerun files
+- Cypress `--spec`
+- Mocha configured `spec` inputs
+- Playwright `--shard` and interactive UI options
 
 ## Further reading
 
