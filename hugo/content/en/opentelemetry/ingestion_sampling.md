@@ -27,9 +27,11 @@ This document demonstrates two primary methods for sending traces to Datadog wit
 
 ### Using the OpenTelemetry Collector
 
-With this method, the OpenTelemetry Collector receives traces from OpenTelemetry SDKs and exports them to Datadog over OTLP HTTP. The `span_metrics` connector computes [APM trace metrics][4] before the Collector applies sampling:
+With this method, the OpenTelemetry Collector receives traces from OpenTelemetry SDKs and exports them to Datadog over OTLP HTTP:
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="An OpenTelemetry SDK sends OTLP data to an OpenTelemetry Collector, which exports it to Datadog over OTLP HTTP." style="width:100%;" >}}
+
+In the recommended Collector configuration, the `span_metrics` connector computes [APM trace metrics][4] before the Collector applies sampling.
 
 Choose this method if you require advanced OpenTelemetry Collector processing capabilities, such as tail-based sampling. To configure the Collector, follow [Set Up the OpenTelemetry Collector][1].
 
@@ -80,7 +82,7 @@ A limitation of tail-based sampling is that all spans for a given trace must be 
 
 The recommended Collector configuration uses the agent deployment pattern and does not provide trace-aware routing across multiple Collectors. For distributed tail-based sampling, use a [gateway deployment][19] and configure routing so that all spans for a trace reach the same gateway Collector.
 
-To calculate APM metrics from 100% of application traffic while using Collector-level tail-based sampling, configure the [`span_metrics` connector][1] before the sampling processor.
+To calculate APM metrics from 100% of application traffic while using Collector-level tail-based sampling, configure the [`span_metrics` connector][20] before the sampling processor.
 
 See the [ingestion volume control guide][8] for information about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
@@ -153,3 +155,4 @@ For more information, see [Unified Service Tagging][18].
 [17]: /opentelemetry/interoperability/otel_api_tracing_interoperability/#128-bit-trace-ids
 [18]: /getting_started/tagging/unified_service_tagging/#opentelemetry
 [19]: https://opentelemetry.io/docs/collector/deploy/gateway/
+[20]: /opentelemetry/setup/collector_exporter/#span-metrics-connector

@@ -60,12 +60,12 @@ Download the latest release of the OpenTelemetry Collector Contrib distribution 
 
 ### 2. Configure and deploy the Collector
 
-Configure and deploy the Collector for your environment. For Host and Docker, create a configuration file named `collector.yaml`. On Kubernetes, use the **Kubernetes** tab, which installs the Collector with Helm. The **Kubernetes manifest reference** tab is for users who maintain their own manifests.
+Select the tab for your environment.
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Use this configuration for an uncontainerized Collector running directly on a host (bare metal or VM).
+For an uncontainerized Collector running directly on a host (bare metal or VM), create a file named `collector.yaml` with this configuration.
 
 Set the `DD_API_KEY` and `DD_SITE` environment variables before starting the Collector.
 
@@ -258,7 +258,7 @@ DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=<YOUR_API_KEY> \
 
 {{% tab "Docker" %}}
 
-Use this configuration for a containerized Collector. The `host_metrics` receiver requires mounting the host filesystem at `/hostfs`.
+For a containerized Collector, create a file named `collector.yaml` with this configuration. The `host_metrics` receiver requires mounting the host filesystem at `/hostfs`.
 
 Set the following environment variables before starting the Collector:
 

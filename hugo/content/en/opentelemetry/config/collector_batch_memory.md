@@ -18,7 +18,7 @@ For production deployments, configure the [memory limiter processor][3] to limit
 
 Add `memory_limiter` to the `processors` list for each pipeline in your configuration. Place it first in the list so that it applies backpressure before other processors allocate memory.
 
-Size its limits for the memory available to your Collector, and keep the limit below the process or container memory limit. Total process memory runs above the configured limit, so leave headroom.
+Memory limits depend on the memory available to the Collector, so there is no single recommended YAML configuration. Size the limit for your deployment and keep it below the process or container memory limit. Total process memory can exceed the configured limit, so leave headroom.
 
 For the available options and sizing guidance, see the OpenTelemetry project documentation for the [memory limiter processor][3].
 
