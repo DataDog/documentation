@@ -61,7 +61,7 @@ The CLI can set up the following products:
     npx @datadog/ai-setup-cli --site datadoghq.com
     ```
 
-    Replace the value of `--site` with the [Datadog site][16] for your account: `datadoghq.com`, `us3.datadoghq.com`, `us5.datadoghq.com`, `datadoghq.eu`, `ap1.datadoghq.com`, or `ap2.datadoghq.com`.
+    Replace the value of `--site` with the [Datadog site][16] for your account: `datadoghq.com`, `us3.datadoghq.com`, `us5.datadoghq.com`, `datadoghq.eu`, `ap1.datadoghq.com`, `ap2.datadoghq.com`, or `uk1.datadoghq.com`.
 
     **Option 2: Direct setup.** If you already have a Datadog account and want to install a specific product, pass `--product` to skip product selection.
 
@@ -89,6 +89,24 @@ The CLI can set up the following products:
 1. Commit the changes to your repository. You can edit the Datadog environment variables (API keys, application IDs) for your specific environment.
 
 After the CLI completes, see [Next steps](#next-steps).
+
+### Headless mode
+
+Use `--headless` for automated runs, such as CI pipelines, coding agents, and scripts. Headless mode skips the interactive UI and requires both `--site` and `--product`:
+
+```shell
+DD_API_KEY=<API_KEY> DD_APP_KEY=<APP_KEY> \
+  npx @datadog/ai-setup-cli \
+  --headless \
+  --site datadoghq.com \
+  --product rum
+```
+
+Set the `DD_API_KEY` and `DD_APP_KEY` [environment variables][19] to authenticate without user interaction. Provide both variables together.
+
+Alternatively, omit the API and application keys to authenticate with browser OAuth. OAuth is the only part of a headless run that might require user interaction, and it requires a localhost callback. For remote or fully unattended environments, use the `DD_API_KEY` and `DD_APP_KEY` environment variables instead.
+
+By using `--headless`, you confirm that source-code upload and automatic command execution are authorized for the target project.
 
 ## MCP server
 
@@ -247,6 +265,7 @@ Confirm data is flowing in the Datadog UI for the product you set up:
 [16]: /getting_started/site/
 [17]: https://www.anthropic.com/claude-code
 [18]: https://cursor.com/
+[19]: /account_management/api-app-keys/
 
 ## Further reading
 
