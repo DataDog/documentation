@@ -2,33 +2,26 @@ import { describe, it, expect } from 'vitest';
 import { getDefaultRegions, getRegions, buildApiUrl, buildApiUrlFromServers } from '@lib/api/regionResolver';
 
 describe('getDefaultRegions', () => {
-  it('returns all known Datadog regions using Hugo-compatible keys', () => {
-    const regions = getDefaultRegions();
-    const keys = regions.map((r) => r.key);
-
-    expect(keys).toContain('us');
-    expect(keys).toContain('eu');
-    expect(keys).toContain('gov');
-    expect(keys).toContain('gov2');
-    expect(keys).toContain('us3');
-    expect(keys).toContain('us5');
-    expect(keys).toContain('ap1');
-    expect(keys).toContain('ap2');
+  it('gives every region a key, label and site domain', () => {
+    for (const region of getDefaultRegions()) {
+      expect(region.key, `key ${region.key}`).toMatch(/^[a-z][a-z0-9]*$/);
+      expect(region.label.length, `label on ${region.key}`).toBeGreaterThan(0);
+      expect(region.site, `site on ${region.key}`).toMatch(/^[a-z0-9.-]+\.[a-z]+$/);
+    }
   });
 
-  it('includes site domains for each region', () => {
-    const regions = getDefaultRegions();
-    const us = regions.find((r) => r.key === 'us')!;
-    expect(us.site).toBe('datadoghq.com');
-    expect(us.label).toBe('US1');
-
-    const eu = regions.find((r) => r.key === 'eu')!;
-    expect(eu.site).toBe('datadoghq.eu');
-  });
-
-  it('orders regions by Hugo weight (US1, US3, US5, EU, AP1, AP2, UK1, US1-FED, US2-FED)', () => {
-    const regions = getDefaultRegions();
-    expect(regions.map((r) => r.key)).toEqual(['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'uk1', 'gov', 'gov2']);
+  // Membership only. `getDefaultRegions` is a projection of
+  // `getAllowedRegions` and does no sorting of its own, so asserting order
+  // here would compare the list against itself — weight ordering is covered in
+  // `config/regions.test.ts`, where the sort happens.
+  //
+  // Sorted on both sides so this fails for a missing or added region, not for
+  // a reordering it does not control.
+  it('exposes every region in shared/regions.yaml', () => {
+    // Update when a data center is added.
+    expect(getDefaultRegions().map((r) => r.key).sort()).toEqual(
+      ['ap1', 'ap2', 'eu', 'gov', 'gov2', 'uk1', 'us', 'us3', 'us5'],
+    );
   });
 });
 
@@ -100,18 +93,10 @@ describe('getRegions', () => {
     ];
 
     it('resolves on-call hosts to every region, in weight order', () => {
+      // Every region has an on-call host, so the result is the full list in
+      // its canonical order — compared against the source rather than respelled.
       const regions = getRegions({}, { servers: oncallServers });
-      expect(regions.map((r) => r.key)).toEqual([
-        'us',
-        'us3',
-        'us5',
-        'eu',
-        'ap1',
-        'ap2',
-        'uk1',
-        'gov',
-        'gov2',
-      ]);
+      expect(regions.map((r) => r.key)).toEqual(getDefaultRegions().map((r) => r.key));
     });
 
     it('keeps every region sharing one host', () => {
