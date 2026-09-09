@@ -92,7 +92,9 @@ After the CLI completes, see [Next steps](#next-steps).
 
 ### Headless mode
 
-Use `--headless` for automated runs, such as CI pipelines, coding agents, and scripts. Headless mode skips the interactive UI and requires both `--site` and `--product`:
+Headless mode is designed for unattended setups. An AI coding agent, CI job, or script can run the CLI directly in your repository and complete Datadog instrumentation on its own. No person needs to be present to approve prompts or make interactive choices.
+
+Use `--headless` to skip the interactive UI. It requires both `--site` and `--product`:
 
 ```shell
 DD_API_KEY=<API_KEY> DD_APP_KEY=<APP_KEY> \
