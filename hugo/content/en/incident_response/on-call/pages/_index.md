@@ -112,7 +112,7 @@ To acknowledge a Page:
 
 The Page status changes to `Acknowledged`.
 
-{{< img src="incident_response/on-call/pages/on-call-page-side-panel.png" alt="An On-Call Page side panel showing the Page status, urgency, responder, and service, with Next Steps buttons to Acknowledge, Reassign, Resolve, or Declare Incident" style="width:70%;" >}}
+{{< img src="incident_response/on-call/pages/on-call-page-next-steps.png" alt="An On-Call Page side panel showing the Page status, urgency, responder, and service, with Next Steps buttons to Acknowledge, Reassign, Resolve, Escalate, Snooze, or Declare Incident" style="width:70%;" >}}
 
 ### Snooze a Page
 
