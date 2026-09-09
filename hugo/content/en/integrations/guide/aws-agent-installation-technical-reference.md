@@ -107,6 +107,8 @@ Datadog automatically excludes:
 - ECS container instances
 - Instances that already have a non-Datadog-installed Agent
 
+[2]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#prerequisites
+
 {{% /tab %}}
 {{% tab "EKS" %}}
 
@@ -125,6 +127,8 @@ Datadog does not call the Kubernetes API or require Kubernetes credentials. All 
 This installation method supports `ACTIVE` clusters where all workloads run on EC2-backed nodes and at least one node runs Linux. EKS Fargate workloads are not covered.
 
 Datadog does not replace or adopt an existing `datadog_operator` add-on.
+
+[2]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#prerequisites
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -278,4 +282,3 @@ To uninstall, remove clusters from a rule, edit the rule's query, or delete the 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/
-[2]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#prerequisites

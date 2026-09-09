@@ -43,6 +43,8 @@ Before you begin, confirm the following:
 - **SSM Agent**: The [AWS Systems Manager (SSM) Agent][2] must already be present on the target instances. Datadog installs the Agent through SSM and can't install the SSM Agent for you, so instances built from custom AMIs without the SSM Agent are not eligible. Datadog flags these instances so you can address them.
 - **Supported platforms**: Linux (x86_64 and arm64) and Windows (x86_64). macOS and Windows on arm64 are not supported.
 
+[2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html
+
 {{% /tab %}}
 {{% tab "EKS" %}}
 
@@ -95,6 +97,8 @@ Datadog uses the following permissions for the managed EKS installation path:
 
 Datadog creates the credential synchronization role with a permissions boundary. Its inline policy can read only the API and application key secrets for the selected cluster.
 
+[9]: /integrations/amazon_web_services/#aws-iam-permissions
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -116,6 +120,8 @@ For the full technical and security details, including the AWS resources Datadog
 
 {{< img src="integrations/amazon_web_services/aws-agent-installation-how-it-works.png" alt="Flowchart of the AWS Agent installation process, showing which steps happen in Datadog and which run inside your AWS account." style="width:70%;" >}}
 
+[6]: /integrations/guide/aws-agent-installation-technical-reference/
+
 {{% /tab %}}
 {{% tab "EKS" %}}
 
@@ -129,6 +135,8 @@ Agent installation is based on an **installation rule**: an AWS account paired w
 You approve one CloudFormation stack, one time, during initial setup. The stack configures the required AWS permissions and change notifications, and handles the one-time Datadog Operator AWS Marketplace agreement. After that, installations run automatically from Datadog, with no new CloudFormation template to launch for each installation.
 
 For the full technical and security details, including the resources Datadog creates, the installation mechanism, and the reconciliation model, see [How Agent installation through the AWS integration works][6].
+
+[6]: /integrations/guide/aws-agent-installation-technical-reference/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -157,6 +165,10 @@ To install from the AWS Install Agents page:
 
 <!-- TODO(DOCS-14545): add resource-selection / Manage Agents page screenshot (AWS Install Agents page) — setup-toggle screenshot added. -->
 
+[5]: /getting_started/integrations/aws/
+[7]: https://app.datadoghq.com/integrations/amazon-web-services
+[8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=aws
+
 {{% /tab %}}
 {{% tab "EKS" %}}
 
@@ -173,6 +185,10 @@ You don't need to apply Kubernetes manifests or run Helm commands for this workf
 
 <!-- TODO(TON-852): Add screenshots of the Kubernetes workload toggle and EKS resource selection after the launch UI is finalized. -->
 
+[5]: /getting_started/integrations/aws/
+[7]: https://app.datadoghq.com/integrations/amazon-web-services
+[8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=aws
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -187,6 +203,8 @@ After the installation completes:
 - Fleet Automation lists the same Agents in the Fleet View.
 
 <!-- TODO(DOCS-14545): add expected time-to-data once confirmed. -->
+
+[3]: https://app.datadoghq.com/infrastructure
 
 {{% /tab %}}
 {{% tab "EKS" %}}
@@ -203,6 +221,9 @@ If you have Kubernetes API access, confirm that the managed resource and Agent w
 kubectl get datadogagent datadog-agent -n datadog-agent
 kubectl get pods -n datadog-agent
 ```
+
+[10]: /agent/fleet_automation/fleet_view/
+[11]: https://app.datadoghq.com/orchestration/overview/pod
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -222,6 +243,9 @@ From this page, you can:
 
 To stop coverage, update the rule. If you manually remove the Agent from a covered instance, Datadog reinstalls it on the next reconciliation. Manage Agent configuration and version upgrades through [Fleet Automation][4].
 
+[4]: /agent/fleet_automation/
+[8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=aws
+
 {{% /tab %}}
 {{% tab "EKS" %}}
 
@@ -234,6 +258,8 @@ To stop coverage, update or delete the installation rule. If you manually remove
 1. Datadog removes the Pod Identity association and scoped IAM role that it created.
 1. The AWS Secrets Store CSI Driver Provider and EKS Pod Identity Agent add-ons remain installed so you can use them with other workloads.
 1. Datadog preserves the Datadog API and application keys and their cluster-specific secrets in AWS Secrets Manager for safe reuse if the cluster is added to a rule again.
+
+[8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=aws
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -251,6 +277,8 @@ Agent installation on EC2 relies on the AWS Systems Manager (SSM) Agent, which D
 
 If installation can't complete because of missing permissions, Datadog shows a notification linking to the CloudFormation resource that needs the new permission. Update your existing stack to grant the [required permissions](#required-aws-permissions). You don't need to create a new stack.
 
+[2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html
+
 {{% /tab %}}
 {{% tab "EKS" %}}
 
@@ -266,21 +294,12 @@ If installation reports an add-on error, open the cluster's **Add-ons** tab in t
 
 If installation can't complete because of missing permissions, Datadog shows a notification linking to the CloudFormation resource that needs the new permission. Update your existing stack to grant the [required permissions](#required-aws-permissions). You don't need to create a new stack.
 
+[12]: https://repost.aws/knowledge-center/eks-managed-add-on
+
 {{% /tab %}}
 {{< /tabs >}}
 
 [1]: /integrations/amazon_web_services/
-[2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html
-[3]: https://app.datadoghq.com/infrastructure
-[4]: /agent/fleet_automation/
-[5]: /getting_started/integrations/aws/
-[6]: /integrations/guide/aws-agent-installation-technical-reference/
-[7]: https://app.datadoghq.com/integrations/amazon-web-services
-[8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=aws
-[9]: /integrations/amazon_web_services/#aws-iam-permissions
-[10]: /agent/fleet_automation/fleet_view/
-[11]: https://app.datadoghq.com/orchestration/overview/pod
-[12]: https://repost.aws/knowledge-center/eks-managed-add-on
 
 ## Further reading
 
