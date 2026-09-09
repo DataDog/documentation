@@ -11,11 +11,7 @@ const baseURL =
     ? "http://localhost:4321"
     : "http://localhost:4322";
 
-const warmupRoutes = [
-  "/dd_e2e/",
-  "/dd_e2e/components/alert",
-  "/api/latest/",
-];
+const warmupRoutes = ["/dd_e2e/", "/dd_e2e/components/alert", "/api/latest/"];
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 

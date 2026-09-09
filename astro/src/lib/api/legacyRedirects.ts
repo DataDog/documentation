@@ -23,8 +23,14 @@ export const LEGACY_REDIRECTS: LegacyRedirect[] = [
   { from: "/api/", to: "/api/latest/" },
   { from: "/api/screenboards/", to: "/api/latest/dashboards/" },
   { from: "/api/latest/downtimes/s", to: "/api/latest/downtimes/" },
-  { from: "/api/latest/ci-visibility", to: "/api/latest/ci-visibility-pipelines/" },
-  { from: "/api/latest/cloud-workload-security", to: "/api/latest/csm-threats/" },
+  {
+    from: "/api/latest/ci-visibility",
+    to: "/api/latest/ci-visibility-pipelines/",
+  },
+  {
+    from: "/api/latest/cloud-workload-security",
+    to: "/api/latest/csm-threats/",
+  },
   { from: "/api/latest/service-scorecards", to: "/api/latest/scorecards/" },
 ];
 

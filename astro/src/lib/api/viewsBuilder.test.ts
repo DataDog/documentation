@@ -14,24 +14,24 @@
  * intentional change, run `yarn test -u`.
  */
 
-import { describe, it, expect } from 'vitest';
-import { z } from 'zod';
+import { describe, it, expect } from "vitest";
+import { z } from "zod";
 import {
   getCategoriesView,
   getCategoryStubsView,
   getCategoryViewBySlug,
   getOperationView,
-} from './viewsBuilder';
+} from "./viewsBuilder";
 import {
   ApiCategorySchema,
   ApiCategoryStubSchema,
   ApiOperationViewSchema,
-} from './schemas/views';
+} from "./schemas/views";
 import {
   CATEGORY_AUDIT_CASES,
   FIXTURE_ONLY_CATEGORY_AUDIT_CASES,
   ENDPOINT_AUDIT_CASES,
-} from '../../../tests/fixtures/api/auditCases';
+} from "../../../tests/fixtures/api/auditCases";
 
 // The frozen fixture also covers categories retired from the live spec
 // (e.g. screenboards); the integration test skips those, the unit layer keeps them.
@@ -40,26 +40,26 @@ const ALL_CATEGORY_AUDIT_CASES = [
   ...FIXTURE_ONLY_CATEGORY_AUDIT_CASES,
 ];
 
-describe('viewsBuilder snapshots', () => {
-  describe('getCategoriesView', () => {
-    it('returns the full category list for the default locale', async () => {
+describe("viewsBuilder snapshots", () => {
+  describe("getCategoriesView", () => {
+    it("returns the full category list for the default locale", async () => {
       const result = await getCategoriesView();
       z.array(ApiCategorySchema).parse(result);
       await expect(JSON.stringify(result, null, 2)).toMatchFileSnapshot(
-        './__snapshots__/getCategoriesView/en.json',
+        "./__snapshots__/getCategoriesView/en.json",
       );
     });
   });
 
-  describe('getCategoryStubsView', () => {
-    it('returns the same categories as getCategoriesView, minus operations', async () => {
+  describe("getCategoryStubsView", () => {
+    it("returns the same categories as getCategoriesView, minus operations", async () => {
       const stubs = await getCategoryStubsView();
       z.array(ApiCategoryStubSchema).parse(stubs);
 
       const full = await getCategoriesView();
       expect(stubs.length).toBe(full.length);
       for (let i = 0; i < stubs.length; i++) {
-        expect(stubs[i]).not.toHaveProperty('operations');
+        expect(stubs[i]).not.toHaveProperty("operations");
         expect(stubs[i].slug).toBe(full[i].slug);
         expect(stubs[i].name).toBe(full[i].name);
         expect(stubs[i].description).toBe(full[i].description);
@@ -68,7 +68,7 @@ describe('viewsBuilder snapshots', () => {
     });
   });
 
-  describe('getCategoryViewBySlug', () => {
+  describe("getCategoryViewBySlug", () => {
     for (const { slug, label } of ALL_CATEGORY_AUDIT_CASES) {
       it(`${slug} (${label})`, async () => {
         const result = await getCategoryViewBySlug(slug);
@@ -80,7 +80,7 @@ describe('viewsBuilder snapshots', () => {
     }
   });
 
-  describe('getOperationView', () => {
+  describe("getOperationView", () => {
     for (const { catSlug, opSlug, label } of ENDPOINT_AUDIT_CASES) {
       it(`${catSlug}/${opSlug} (${label})`, async () => {
         const result = await getOperationView(catSlug, opSlug);
@@ -92,4 +92,3 @@ describe('viewsBuilder snapshots', () => {
     }
   });
 });
-

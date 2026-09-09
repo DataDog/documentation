@@ -46,11 +46,7 @@ export function pagesJson(): AstroIntegration {
 
         const outputUrl = new URL(OUTPUT, clientDir);
         await mkdir(new URL(".", outputUrl), { recursive: true });
-        await writeFile(
-          outputUrl,
-          JSON.stringify(listing, null, 2),
-          "utf8",
-        );
+        await writeFile(outputUrl, JSON.stringify(listing, null, 2), "utf8");
         // `force` so a second build:done consumer removing it first, or a
         // partially cleaned dist, cannot fail the build at its very last step.
         await rm(sidecarUrl, { force: true });

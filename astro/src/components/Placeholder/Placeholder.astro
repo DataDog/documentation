@@ -1,5 +1,5 @@
 ---
-import styles from './Placeholder.module.css';
+import styles from "./Placeholder.module.css";
 
 interface Props {
   name: string;
@@ -7,7 +7,9 @@ interface Props {
 }
 
 const { name, class: className } = Astro.props;
-const rootClass = ['placeholder', styles.placeholder, className].filter(Boolean).join(' ');
+const rootClass = ["placeholder", styles.placeholder, className]
+  .filter(Boolean)
+  .join(" ");
 ---
 
 <div class={rootClass} data-placeholder-name={name}>

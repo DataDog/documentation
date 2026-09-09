@@ -23,14 +23,16 @@ export const CodeExampleEntrySchema = z
       )
       .optional()
       .describe(
-        "Optional per-region variants of this entry. When present, the UI renders one wrapper per region with `data-region=\"<key>\"` so the visible variant updates reactively with the site selector. `code` above is the fallback used when no region is active. Currently used for curl.",
+        'Optional per-region variants of this entry. When present, the UI renders one wrapper per region with `data-region="<key>"` so the visible variant updates reactively with the site selector. `code` above is the fallback used when no region is active. Currently used for curl.',
       ),
   })
   .strict();
 
 export const CodeExampleSetSchema = z
   .object({
-    language: z.string().describe("Language identifier (e.g. 'python', 'ruby')"),
+    language: z
+      .string()
+      .describe("Language identifier (e.g. 'python', 'ruby')"),
     label: z.string().describe("Display label (e.g. 'Python', 'Ruby')"),
     entries: z
       .array(CodeExampleEntrySchema)

@@ -61,8 +61,16 @@ describe("MobileNav.astro", () => {
     // prefix doesn't 404 on them (Finding 5). Assert on the source file each
     // src resolves to, not an exact hashed URL.
     const srcs = [...icons].map((img) => img.getAttribute("src"));
-    expect(srcs.map((src) => src?.includes("nav_home"))).toEqual([true, false, false]);
-    expect(srcs.map((src) => src?.includes("nav_docs"))).toEqual([false, true, false]);
+    expect(srcs.map((src) => src?.includes("nav_home"))).toEqual([
+      true,
+      false,
+      false,
+    ]);
+    expect(srcs.map((src) => src?.includes("nav_docs"))).toEqual([
+      false,
+      true,
+      false,
+    ]);
     expect(srcs.map((src) => src?.includes("nav_mobile_api"))).toEqual([
       false,
       false,
@@ -100,9 +108,9 @@ describe("MobileNav.astro", () => {
     expect(header?.querySelector(".mobile-nav__search")).not.toBeNull();
     // The scrolling menu list is a sibling after the header, not inside it.
     expect(header?.querySelector(".mobile-nav__list")).toBeNull();
-    expect(header?.nextElementSibling?.classList.contains("mobile-nav__list")).toBe(
-      true,
-    );
+    expect(
+      header?.nextElementSibling?.classList.contains("mobile-nav__list"),
+    ).toBe(true);
   });
 
   it("renders the functional SearchBar island inside the search slot", async () => {
@@ -145,7 +153,8 @@ describe("MobileNav.astro", () => {
     // the shared accordion classes).
     expect(doc.querySelector(".mobile-nav__list--api")).not.toBeNull();
     expect(
-      doc.querySelectorAll(".mobile-nav__list--api .mobile-nav__section").length,
+      doc.querySelectorAll(".mobile-nav__list--api .mobile-nav__section")
+        .length,
     ).toBeGreaterThan(0);
   });
 
@@ -184,9 +193,9 @@ describe("MobileNav.astro", () => {
       '.mobile-nav__list--api summary[aria-current="page"]',
     );
     expect(activeSummary?.tagName.toLowerCase()).toBe("summary");
-    expect(activeSummary?.closest(".mobile-nav__section")?.hasAttribute("open")).toBe(
-      true,
-    );
+    expect(
+      activeSummary?.closest(".mobile-nav__section")?.hasAttribute("open"),
+    ).toBe(true);
   });
 
   it("highlights the active page link (purple + aria-current) in the docs accordion", async () => {
@@ -197,7 +206,9 @@ describe("MobileNav.astro", () => {
     const doc = await renderMobileNav("/getting_started/");
     const active = doc.querySelector(".mobile-nav__link--active");
     expect(active).not.toBeNull();
-    expect(active?.getAttribute("href")).toBe(`${HUGO_ORIGIN}/getting_started/`);
+    expect(active?.getAttribute("href")).toBe(
+      `${HUGO_ORIGIN}/getting_started/`,
+    );
     expect(active?.getAttribute("aria-current")).toBe("page");
     // Exactly one link is active — not its ancestors or siblings.
     expect(doc.querySelectorAll(".mobile-nav__link--active").length).toBe(1);
@@ -293,9 +304,9 @@ describe("MobileNav.astro", () => {
       const sections = [
         ...doc.querySelectorAll(".mobile-nav__list--api .mobile-nav__section"),
       ];
-      expect(
-        sections[0]?.querySelector("summary")?.textContent,
-      ).toContain("Overview");
+      expect(sections[0]?.querySelector("summary")?.textContent).toContain(
+        "Overview",
+      );
 
       const overviewLinks = [
         ...(sections[0]?.querySelectorAll(".mobile-nav__link") ?? []),
@@ -331,8 +342,9 @@ describe("MobileNav.astro", () => {
       expect(overview?.hasAttribute("open")).toBe(true);
       // Only the section owning the page is open — no spec category opens too.
       expect(
-        doc.querySelectorAll(".mobile-nav__list--api .mobile-nav__section[open]")
-          .length,
+        doc.querySelectorAll(
+          ".mobile-nav__list--api .mobile-nav__section[open]",
+        ).length,
       ).toBe(1);
 
       const active = doc.querySelector(".mobile-nav__link--active");
@@ -355,7 +367,9 @@ describe("MobileNav.astro", () => {
 
     const doc = await renderMobileNav();
     const subsectionDetails = [...doc.querySelectorAll("details")].find((el) =>
-      el.querySelector("summary")?.textContent?.includes(subsectionWithChildren.label),
+      el
+        .querySelector("summary")
+        ?.textContent?.includes(subsectionWithChildren.label),
     );
     expect(subsectionDetails).toBeDefined();
   });

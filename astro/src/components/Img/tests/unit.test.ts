@@ -83,7 +83,10 @@ describe("Img component", () => {
   });
 
   it("renders a video instead of an image when video is true", async () => {
-    const html = await renderImg({ src: "ci/custom-tags-create-facet.mp4", video: true });
+    const html = await renderImg({
+      src: "ci/custom-tags-create-facet.mp4",
+      video: true,
+    });
 
     expect(html).toContain("<video");
     expect(html).toContain("img__video");
@@ -91,7 +94,10 @@ describe("Img component", () => {
   });
 
   it("renders the video with autoplay/loop/muted/controls behavior", async () => {
-    const html = await renderImg({ src: "ci/custom-tags-create-facet.mp4", video: true });
+    const html = await renderImg({
+      src: "ci/custom-tags-create-facet.mp4",
+      video: true,
+    });
 
     expect(html).toContain("muted");
     expect(html).toContain("playsinline");
@@ -101,7 +107,10 @@ describe("Img component", () => {
   });
 
   it("points the video source at the resolved src", async () => {
-    const html = await renderImg({ src: "ci/custom-tags-create-facet.mp4", video: true });
+    const html = await renderImg({
+      src: "ci/custom-tags-create-facet.mp4",
+      video: true,
+    });
 
     expect(html).toContain("<source src=");
     expect(html).toContain("custom-tags-create-facet.mp4");

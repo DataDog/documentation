@@ -19,14 +19,14 @@
  * this module (client-bundled) never imports the build-time `regionConfig`.
  */
 
-import type { ClientRegion } from '@config/regions';
+import type { ClientRegion } from "@config/regions";
 
-const COOKIE_NAME = 'site';
-const QUERY_PARAM = 'site';
+const COOKIE_NAME = "site";
+const QUERY_PARAM = "site";
 const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 365;
 
-export const REGION_CHANGE_EVENT = 'regionchange';
-export const DEFAULT_REGION_KEY = 'us';
+export const REGION_CHANGE_EVENT = "regionchange";
+export const DEFAULT_REGION_KEY = "us";
 
 let _regions: ClientRegion[] = [];
 let _allowedKeys: Set<string> = new Set();
@@ -44,9 +44,9 @@ export function initRegionState(regions: ClientRegion[]): void {
 
 /** Current region key, read from the `<html data-active-region>` attribute. */
 export function getActiveRegion(): string {
-  if (typeof document === 'undefined') return DEFAULT_REGION_KEY;
+  if (typeof document === "undefined") return DEFAULT_REGION_KEY;
   return (
-    document.documentElement.getAttribute('data-active-region') ||
+    document.documentElement.getAttribute("data-active-region") ||
     DEFAULT_REGION_KEY
   );
 }
@@ -57,17 +57,17 @@ export function getActiveRegion(): string {
  */
 export function setActiveRegion(key: string): void {
   if (!_allowedKeys.has(key)) return;
-  if (typeof document === 'undefined') return;
+  if (typeof document === "undefined") return;
 
   document.cookie = `${COOKIE_NAME}=${encodeURIComponent(key)}; path=/; max-age=${COOKIE_MAX_AGE_SECONDS}; SameSite=Lax`;
 
   const url = new URL(window.location.href);
   url.searchParams.set(QUERY_PARAM, key);
-  window.history.replaceState({}, '', url.toString());
+  window.history.replaceState({}, "", url.toString());
 
-  document.documentElement.setAttribute('data-active-region', key);
+  document.documentElement.setAttribute("data-active-region", key);
   document.dispatchEvent(
-    new CustomEvent(REGION_CHANGE_EVENT, { detail: { region: key } })
+    new CustomEvent(REGION_CHANGE_EVENT, { detail: { region: key } }),
   );
 }
 
@@ -77,7 +77,7 @@ export function setActiveRegion(key: string): void {
  * Mirrors the behavior of Hugo's `region-redirects.js`.
  */
 export function syncRegionFromReferrer(): boolean {
-  if (typeof document === 'undefined' || !document.referrer) return false;
+  if (typeof document === "undefined" || !document.referrer) return false;
 
   let referrerHost: string;
   try {
@@ -101,7 +101,7 @@ export function syncRegionFromReferrer(): boolean {
  * Returns the key only if it's a known region, otherwise undefined.
  */
 export function readRegionCookie(): string | undefined {
-  if (typeof document === 'undefined') return undefined;
+  if (typeof document === "undefined") return undefined;
   const match = document.cookie.match(/(?:^|; )site=([^;]*)/);
   if (!match) return undefined;
   try {

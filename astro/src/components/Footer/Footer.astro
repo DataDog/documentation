@@ -73,7 +73,6 @@ const caretIconHtml = inlineSvg("arrow.svg", "#ffffff", "16px");
 // Free-trial modal config — swap iframeSrc when we move off app.datadoghq.com/signup.
 const freeTrialHref = "https://app.datadoghq.com/signup";
 const freeTrialLabel = translate("free_trial");
-
 ---
 
 <footer class={cl("footer")}>
@@ -93,7 +92,9 @@ const freeTrialLabel = translate("free_trial");
           <span>{freeTrialLabel}</span>
         </a>
 
-        <p class={cl("footer__download-app")}>{translate("download_mobile_app")}</p>
+        <p class={cl("footer__download-app")}>
+          {translate("download_mobile_app")}
+        </p>
 
         <div class={cl("footer__download-badges")}>
           <a
@@ -158,7 +159,11 @@ const freeTrialLabel = translate("free_trial");
         {
           footer.sub.map((it, i) => (
             <span class={cl("footer__legal-item")}>
-              <a href={it.href} class={cl("footer__menu-link")} target={it.target}>
+              <a
+                href={it.href}
+                class={cl("footer__menu-link")}
+                target={it.target}
+              >
                 {it.label}
               </a>
               {i !== footer.sub.length - 1 && <span>&nbsp;|&nbsp;</span>}
@@ -189,8 +194,4 @@ const freeTrialLabel = translate("free_trial");
   </div>
 </footer>
 
-<FreeTrialModal
-  client:idle
-  title={freeTrialLabel}
-  iframeSrc={freeTrialHref}
-/>
+<FreeTrialModal client:idle title={freeTrialLabel} iframeSrc={freeTrialHref} />

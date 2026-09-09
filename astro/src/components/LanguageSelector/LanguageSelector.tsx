@@ -33,7 +33,10 @@ export function LanguageSelector({ options, currentCode }: Props): JSX.Element {
   };
 
   return (
-    <div class={cl("language-selector")} data-hydrated={hydrated ? "true" : undefined}>
+    <div
+      class={cl("language-selector")}
+      data-hydrated={hydrated ? "true" : undefined}
+    >
       <label class={cl("language-selector__label")} for="language-select">
         {/* TODO: replace with i18n() once the helper exposes the singular form
             of the `language` key in i18n/en.json (currently returns plural). */}

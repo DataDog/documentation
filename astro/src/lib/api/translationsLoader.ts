@@ -10,10 +10,7 @@
  * coverage is owned upstream — this site does not warn on gaps.
  */
 
-import type {
-  TagTranslation,
-  ActionTranslation,
-} from "./schemas/translation";
+import type { TagTranslation, ActionTranslation } from "./schemas/translation";
 import type { ApiVersion } from "./schemas/version";
 
 type TagOverlay = Record<string, TagTranslation>;

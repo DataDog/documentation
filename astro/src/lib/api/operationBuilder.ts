@@ -20,7 +20,12 @@ type OperationWithExtensions = OpenAPIV3.OperationObject & {
 };
 
 function isReference(o: unknown): o is OpenAPIV3.ReferenceObject {
-  return typeof o === "object" && o !== null && "$ref" in o && typeof (o as { $ref: unknown }).$ref === "string";
+  return (
+    typeof o === "object" &&
+    o !== null &&
+    "$ref" in o &&
+    typeof (o as { $ref: unknown }).$ref === "string"
+  );
 }
 
 /**

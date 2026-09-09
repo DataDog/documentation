@@ -46,7 +46,9 @@ async function serveMarkdown(file: string): Promise<string> {
     )) as Response;
     if (categoryRes.status === 200) return categoryRes.text();
 
-    const res = (await handWrittenGET(routeCtx({ lang, page: slug }))) as Response;
+    const res = (await handWrittenGET(
+      routeCtx({ lang, page: slug }),
+    )) as Response;
     if (res.status !== 200) throw new Error(`${file} returned ${res.status}`);
     return res.text();
   }
@@ -67,7 +69,9 @@ async function readIndex(): Promise<PageIndexEntry[]> {
 describe("GET /pages-index.json (metadata sidecar)", () => {
   it("returns application/json", async () => {
     const res = (await pageIndexGET(ctx(SITE))) as Response;
-    expect(res.headers.get("Content-Type")).toBe("application/json; charset=utf-8");
+    expect(res.headers.get("Content-Type")).toBe(
+      "application/json; charset=utf-8",
+    );
   });
 
   it("emits sorted entries with absolute .md keys and disk-relative files", async () => {
@@ -76,7 +80,9 @@ describe("GET /pages-index.json (metadata sidecar)", () => {
     for (const entry of index) {
       expect(entry.key.startsWith("https://docs.datadoghq.com/")).toBe(true);
       expect(entry.key.endsWith(".md")).toBe(true);
-      expect(entry.file).toBe(entry.key.replace("https://docs.datadoghq.com/", ""));
+      expect(entry.file).toBe(
+        entry.key.replace("https://docs.datadoghq.com/", ""),
+      );
       expect(entry.file.startsWith("/")).toBe(false);
     }
     const keys = index.map((entry) => entry.key);
@@ -98,7 +104,9 @@ describe("GET /pages-index.json (metadata sidecar)", () => {
   });
 
   it("throws when site is not configured", async () => {
-    await expect(async () => await pageIndexGET(ctx(undefined))).rejects.toThrow(/site/);
+    await expect(
+      async () => await pageIndexGET(ctx(undefined)),
+    ).rejects.toThrow(/site/);
   });
 });
 
@@ -107,7 +115,9 @@ describe("pages.json assembly (hash from emitted plaintext)", () => {
     const index = await readIndex();
     for (const entry of index) {
       const body = await serveMarkdown(entry.file);
-      expect(body.length, `${entry.file} served an empty body`).toBeGreaterThan(0);
+      expect(body.length, `${entry.file} served an empty body`).toBeGreaterThan(
+        0,
+      );
     }
   });
 

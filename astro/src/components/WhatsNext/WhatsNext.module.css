@@ -98,7 +98,7 @@
 }
 
 .whatsnext__arrow::before {
-  content: '\2192';
+  content: "\2192";
   display: block;
   font-size: var(--font-size-lg);
   line-height: 1;

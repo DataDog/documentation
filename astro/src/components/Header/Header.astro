@@ -5,7 +5,9 @@ import ProductMegaMenu from "./ProductMegaMenu.tsx";
 import { LogoDownloadPanel } from "./LogoDownloadPanel.tsx";
 import HeaderScroll from "./HeaderScroll.astro";
 import MobileNav from "@components/MobileNav/MobileNav.astro";
-import MobileNavToggle, { type MobileNavLabels } from "@components/MobileNav/MobileNavToggle.tsx";
+import MobileNavToggle, {
+  type MobileNavLabels,
+} from "@components/MobileNav/MobileNavToggle.tsx";
 import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
 import { getHeaderData, iconHtml } from "@lib/componentUtils/menuData.ts";
 import { generateElementId } from "@lib/componentUtils/generateElementId";
@@ -108,14 +110,20 @@ const logoPanelLabels = {
         </ul>
 
         {/* Logo */}
-        {/* The download panel is a sibling of — not a child of — the logo
+        {
+          /* The download panel is a sibling of — not a child of — the logo
             anchor: it renders its own "Download Media Assets" <a>, and nesting
             an <a> inside the logo's <a> is invalid HTML. The browser's parser
             reparents the nested anchor, which desyncs the SSR'd DOM from the
             hydrated one and throws a Preact hydration mismatch. The slot is the
-            positioning context for the absolutely-positioned panel. */}
+            positioning context for the absolutely-positioned panel. */
+        }
         <div class={cl("header__logo-slot")}>
-          <a href={prefixed("/")} id={logoTriggerId} class={cl("header__logo-column")}>
+          <a
+            href={prefixed("/")}
+            id={logoTriggerId}
+            class={cl("header__logo-column")}
+          >
             <img
               height="75"
               class={cl("header__logo-bits")}

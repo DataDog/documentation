@@ -44,12 +44,12 @@ Each component has a dedicated page showing its properties and visual permutatio
 
 ## Other commands
 
-| Command            | Description                          |
-|--------------------|--------------------------------------|
-| `yarn build`       | Production build to `dist/`          |
-| `yarn preview`     | Preview the production build locally |
-| `yarn test`        | Run unit tests (Vitest)              |
-| `yarn test:browser` | Run browser tests (Playwright)      |
+| Command             | Description                          |
+| ------------------- | ------------------------------------ |
+| `yarn build`        | Production build to `dist/`          |
+| `yarn preview`      | Preview the production build locally |
+| `yarn test`         | Run unit tests (Vitest)              |
+| `yarn test:browser` | Run browser tests (Playwright)       |
 
 ## Testing
 
@@ -71,13 +71,13 @@ yarn test:browser
 
 Useful flags (pass them after `--`):
 
-| Flag | Purpose |
-|------|---------|
-| `-- tabs.spec.ts` | Run a single spec file |
-| `-- --ui` | Interactive UI mode — time-travel, re-run individual tests, inspect DOM |
-| `-- --headed` | Watch tests run in a real Chromium window |
-| `-- --debug` | Step through with the Playwright Inspector |
-| `-- --update-snapshots` | Regenerate screenshot baselines after an intentional visual change |
+| Flag                    | Purpose                                                                 |
+| ----------------------- | ----------------------------------------------------------------------- |
+| `-- tabs.spec.ts`       | Run a single spec file                                                  |
+| `-- --ui`               | Interactive UI mode — time-travel, re-run individual tests, inspect DOM |
+| `-- --headed`           | Watch tests run in a real Chromium window                               |
+| `-- --debug`            | Step through with the Playwright Inspector                              |
+| `-- --update-snapshots` | Regenerate screenshot baselines after an intentional visual change      |
 
 After a failed run, open the HTML report for side-by-side diffs of expected vs. actual PNGs:
 
@@ -107,7 +107,7 @@ The API reference pages are generated at build time from the v1 and v2 OpenAPI s
 
 Every cdoc has a plaintext twin at the same path with a `.md` extension (for example `/dd_e2e/cdocs/custom_instrumentation.md?prog_lang=python`), returning `text/markdown`. Like the API docs' `.md` pages, this is what the **Copy page** button copies and what LLM/agent consumers can fetch. It is served by a second catch-all, the endpoint [src/pages/[...slug].md.ts](src/pages/%5B...slug%5D.md.ts) (a literal `.md` segment makes it win over the HTML catch-all; the same-named slug 404s if it isn't a cdoc).
 
-Unlike the API docs — which hand-build a Markdoc AST per component — a cdoc is *already* Markdoc, so we render it directly. The pipeline (all under [src/lib/cdocs/plaintext/](src/lib/cdocs/plaintext/)) is:
+Unlike the API docs — which hand-build a Markdoc AST per component — a cdoc is _already_ Markdoc, so we render it directly. The pipeline (all under [src/lib/cdocs/plaintext/](src/lib/cdocs/plaintext/)) is:
 
 1. **Resolve filters.** The endpoint calls the same `resolveCdocRender` as the HTML route, so the `.md` reflects the identical filter state (URL param > cookie > default).
 2. **Parse → filter → format** ([renderCdocPlaintext.ts](src/lib/cdocs/plaintext/renderCdocPlaintext.ts)). Parse the raw `.mdoc` body, then walk the AST ([filterMarkdocAst.ts](src/lib/cdocs/plaintext/filterMarkdocAst.ts)): evaluate each `{% if %}`/`{% else /%}` against the resolved variables and keep only the matching branch (the same server-side dropping the HTML page does, via `Function.resolve` with the built-in functions plus `includes` — see [plaintextConfig.ts](src/lib/cdocs/plaintext/plaintextConfig.ts)); inline `{% partial /%}` includes ([loadPartial.ts](src/lib/cdocs/plaintext/loadPartial.ts) reads them from `@partials`); rewrite internal doc links to their `.md` twin ([rewriteDocLink.ts](src/lib/cdocs/plaintext/rewriteDocLink.ts), so following a link in plaintext stays in plaintext — external, asset, and anchor links are left alone); strip explicit heading IDs (both the `{% #id %}` tag form Markdoc lifts into a heading's `id` attribute and the `{#id}` text form that survives as literal text — anchors for in-page links in HTML, clutter in plaintext); strip HTML comments (including multi-line ones, which Markdoc tokenizes across `softbreak`-separated text nodes); drop orphaned link reference definitions (`[id]: url` lines that survive as literal text once filtering removes their usages — genuinely-used references are inlined by markdown-it at parse time). Then `Markdoc.format()` serializes the pruned AST back to text.

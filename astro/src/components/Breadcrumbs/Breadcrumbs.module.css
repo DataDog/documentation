@@ -18,7 +18,7 @@
 }
 
 .breadcrumbs__item:not(:last-child)::after {
-  content: '>';
+  content: ">";
   margin: 0 var(--space-sm);
   color: var(--color-text-muted);
 }

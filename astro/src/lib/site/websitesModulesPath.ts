@@ -145,7 +145,9 @@ export function resolveWebsitesModulesPath(astroConfigUrl: string): string {
     }
   }
 
-  const hugoGoModPath = fileURLToPath(new URL("../hugo/go.mod", astroConfigUrl));
+  const hugoGoModPath = fileURLToPath(
+    new URL("../hugo/go.mod", astroConfigUrl),
+  );
   const candidates = candidateHugoModuleCacheDirs(hugoGoModPath);
   if (candidates.length === 0) {
     attempted.push("Hugo module cache: not found");

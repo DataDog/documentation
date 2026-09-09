@@ -47,45 +47,47 @@ const searchLabels: SearchBarLabels = {
 
 <nav class={cl("api-side-nav")}>
   <a href={localizedHref(lang, "/")} class={cl("api-side-nav__title")}>
-    {translate("datadog_docs")}&nbsp;&nbsp;<span class={cl("api-side-nav__title-api")}
-      >API</span
+    {translate("datadog_docs")}&nbsp;&nbsp;<span
+      class={cl("api-side-nav__title-api")}>API</span
     >
   </a>
   <div class={cl("api-side-nav__search")}>
     <SearchBar client:load labels={searchLabels} />
   </div>
   <ul class={cl("api-side-nav__list")}>
-    {overviewPages.length > 0 && (
-      <li>
-        <a
-          href={overviewHref}
-          class:list={[
-            cl("api-side-nav__category"),
-            isOverviewSection && cl("api-side-nav__category--active"),
-          ]}
-        >
-          {overviewLabel}
-        </a>
-        {isOverviewSection && (
-          <ul class={cl("api-side-nav__operations")}>
-            {overviewPages.map((page) => (
-              <li>
-                <a
-                  href={`${overviewHref}${page.slug}/`}
-                  class:list={[
-                    cl("api-side-nav__operation"),
-                    page.slug === activeOverviewPageSlug &&
-                      cl("api-side-nav__operation--active"),
-                  ]}
-                >
-                  {page.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
-      </li>
-    )}
+    {
+      overviewPages.length > 0 && (
+        <li>
+          <a
+            href={overviewHref}
+            class:list={[
+              cl("api-side-nav__category"),
+              isOverviewSection && cl("api-side-nav__category--active"),
+            ]}
+          >
+            {overviewLabel}
+          </a>
+          {isOverviewSection && (
+            <ul class={cl("api-side-nav__operations")}>
+              {overviewPages.map((page) => (
+                <li>
+                  <a
+                    href={`${overviewHref}${page.slug}/`}
+                    class:list={[
+                      cl("api-side-nav__operation"),
+                      page.slug === activeOverviewPageSlug &&
+                        cl("api-side-nav__operation--active"),
+                    ]}
+                  >
+                    {page.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      )
+    }
     {
       categories.map((cat) => {
         const isActive = cat.slug === activeCategory?.slug;

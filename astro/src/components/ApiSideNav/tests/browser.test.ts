@@ -1,17 +1,19 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test.describe('ApiSideNav — layout', () => {
-  test('sits flush under the header with no banner gap', async ({ page }) => {
+test.describe("ApiSideNav — layout", () => {
+  test("sits flush under the header with no banner gap", async ({ page }) => {
     // API pages carry no announcement banner, so the sticky side nav must sit
     // directly under the fixed header — no reserved banner height. Guards
     // against reintroducing a raw `--hugo-banner-height` offset (which would
     // leave a 30px gap on every API page when no banner is configured).
     await page.setViewportSize({ width: 1400, height: 900 });
-    await page.goto('/api/latest/authentication/');
-    await page.waitForLoadState('networkidle');
+    await page.goto("/api/latest/authentication/");
+    await page.waitForLoadState("networkidle");
 
-    const header = await page.locator('.header__wrapper .header__nav').boundingBox();
-    const sideNav = await page.locator('.api-side-nav').boundingBox();
+    const header = await page
+      .locator(".header__wrapper .header__nav")
+      .boundingBox();
+    const sideNav = await page.locator(".api-side-nav").boundingBox();
     expect(header).not.toBeNull();
     expect(sideNav).not.toBeNull();
 

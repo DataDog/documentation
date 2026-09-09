@@ -1,10 +1,7 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import ApiSideNav from "@components/ApiSideNav/ApiSideNav.astro";
-import {
-  getOverviewPages,
-  resolveOverviewState,
-} from "@lib/api/overviewPages";
+import { getOverviewPages, resolveOverviewState } from "@lib/api/overviewPages";
 import Breadcrumbs from "@components/Breadcrumbs/Breadcrumbs.astro";
 import type { BreadcrumbItem } from "@components/Breadcrumbs/Breadcrumbs.astro";
 import RegionSelectorIsland from "@components/RegionSelector/RegionSelectorIsland.astro";
@@ -42,11 +39,7 @@ const { isOverviewSection, activeOverviewPageSlug } = resolveOverviewState(
 );
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  hreflang={hreflang}
->
+<BaseLayout title={title} description={description} hreflang={hreflang}>
   <div class="api-shell">
     <ApiSideNav
       categories={categories}
@@ -59,11 +52,13 @@ const { isOverviewSection, activeOverviewPageSlug } = resolveOverviewState(
     <main class="api-main">
       <div class="api-toolbar">
         <div class="api-toolbar__left">
-          {breadcrumbs && (
-            <Breadcrumbs crumbs={breadcrumbs}>
-              <CopyPageButtonIsland slot="trailing" variant="icon" />
-            </Breadcrumbs>
-          )}
+          {
+            breadcrumbs && (
+              <Breadcrumbs crumbs={breadcrumbs}>
+                <CopyPageButtonIsland slot="trailing" variant="icon" />
+              </Breadcrumbs>
+            )
+          }
         </div>
         <div class="api-toolbar__selectors">
           <LanguageSelectorIsland
@@ -137,13 +132,16 @@ const { isOverviewSection, activeOverviewPageSlug } = resolveOverviewState(
 
   @media (min-width: 992px) {
     .api-toolbar {
-      top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height-desktop));
+      top: calc(
+        var(--hugo-active-banner-height) + var(--hugo-header-height-desktop)
+      );
       transition: top 0.2s ease-in-out;
     }
 
     :global([data-scrolled]) .api-toolbar {
       top: calc(
-        var(--hugo-active-banner-height) + var(--hugo-header-height-desktop-scrolled)
+        var(--hugo-active-banner-height) +
+          var(--hugo-header-height-desktop-scrolled)
       );
     }
   }

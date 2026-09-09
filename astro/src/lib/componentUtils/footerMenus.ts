@@ -100,7 +100,8 @@ export function splitHalves<T>(items: T[]): { first: T[]; second: T[] } {
 type RawItem = z.infer<typeof FooterMenuItemSchema>;
 type RawSocial = z.infer<typeof FooterSocialItemSchema>;
 
-const byWeight = <T extends { weight: number }>(a: T, b: T) => a.weight - b.weight;
+const byWeight = <T extends { weight: number }>(a: T, b: T) =>
+  a.weight - b.weight;
 
 function toFooterLink(it: RawItem): FooterLink {
   return { label: it.name, href: resolveFooterUrl(it.url), target: it.target };
@@ -113,7 +114,13 @@ function toSection(
   stackOnDesktop: boolean,
 ): FooterSection {
   const { first, second } = splitHalves(links);
-  return { id, title, firstColumn: first, secondColumn: second, stackOnDesktop };
+  return {
+    id,
+    title,
+    firstColumn: first,
+    secondColumn: second,
+    stackOnDesktop,
+  };
 }
 
 function sortedLinks(items: RawItem[]): FooterLink[] {
@@ -128,14 +135,38 @@ export function getFooterData(lang: Locale): FooterData {
   const translate = useTranslations(lang);
   const social: FooterSocialLink[] = [...menus.footer_social]
     .sort(byWeight)
-    .map((it: RawSocial) => ({ ...toFooterLink(it), pre: it.pre, label: it.name }));
+    .map((it: RawSocial) => ({
+      ...toFooterLink(it),
+      pre: it.pre,
+      label: it.name,
+    }));
 
   return {
     accordionSections: [
-      toSection("product", translate("product"), getFooterProductLinks(lang), false),
-      toSection("resources", translate("resources"), sortedLinks(menus.footer_resources), true),
-      toSection("about", translate("about"), sortedLinks(menus.footer_about), true),
-      toSection("blog", translate("blog"), sortedLinks(menus.footer_blog), true),
+      toSection(
+        "product",
+        translate("product"),
+        getFooterProductLinks(lang),
+        false,
+      ),
+      toSection(
+        "resources",
+        translate("resources"),
+        sortedLinks(menus.footer_resources),
+        true,
+      ),
+      toSection(
+        "about",
+        translate("about"),
+        sortedLinks(menus.footer_about),
+        true,
+      ),
+      toSection(
+        "blog",
+        translate("blog"),
+        sortedLinks(menus.footer_blog),
+        true,
+      ),
     ],
     sub: sortedLinks(menus.footer_sub),
     social,

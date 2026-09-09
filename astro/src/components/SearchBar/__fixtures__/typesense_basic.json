@@ -39,7 +39,10 @@
                 "subcategory": "Dashboards"
               },
               "highlights": [
-                { "field": "title", "snippet": "<mark>Dashboards</mark> overview" }
+                {
+                  "field": "title",
+                  "snippet": "<mark>Dashboards</mark> overview"
+                }
               ]
             }
           ]
@@ -59,7 +62,10 @@
                 "subcategory": "Dashboards"
               },
               "highlights": [
-                { "field": "title", "snippet": "Set up <mark>dashboards</mark>" }
+                {
+                  "field": "title",
+                  "snippet": "Set up <mark>dashboards</mark>"
+                }
               ]
             }
           ]
@@ -79,7 +85,10 @@
                 "subcategory": "Dashboards"
               },
               "highlights": [
-                { "field": "title", "snippet": "Build a custom <mark>dashboard</mark>" }
+                {
+                  "field": "title",
+                  "snippet": "Build a custom <mark>dashboard</mark>"
+                }
               ]
             }
           ]
@@ -100,7 +109,10 @@
             "subcategory": "Acme"
           },
           "highlights": [
-            { "field": "title", "snippet": "Acme <mark>Dashboards</mark> Integration" }
+            {
+              "field": "title",
+              "snippet": "Acme <mark>Dashboards</mark> Integration"
+            }
           ]
         }
       ]

@@ -1,11 +1,19 @@
-import { describe, it, expect } from 'vitest';
-import { experimental_AstroContainer as AstroContainer } from 'astro/container';
-import ApiMethodBadge from '../ApiMethodBadge.astro';
+import { describe, it, expect } from "vitest";
+import { experimental_AstroContainer as AstroContainer } from "astro/container";
+import ApiMethodBadge from "../ApiMethodBadge.astro";
 
-describe('ApiMethodBadge component', () => {
-  const methods = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options'] as const;
+describe("ApiMethodBadge component", () => {
+  const methods = [
+    "get",
+    "post",
+    "put",
+    "patch",
+    "delete",
+    "head",
+    "options",
+  ] as const;
 
-  it('renders each method with correct text and BEM modifier', async () => {
+  it("renders each method with correct text and BEM modifier", async () => {
     const container = await AstroContainer.create();
 
     for (const method of methods) {
@@ -18,13 +26,13 @@ describe('ApiMethodBadge component', () => {
     }
   });
 
-  it('normalizes uppercase input to lowercase BEM modifier', async () => {
+  it("normalizes uppercase input to lowercase BEM modifier", async () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(ApiMethodBadge, {
-      props: { method: 'POST' },
+      props: { method: "POST" },
     });
 
-    expect(html).toContain('api-method-badge--post');
-    expect(html).toContain('POST');
+    expect(html).toContain("api-method-badge--post");
+    expect(html).toContain("POST");
   });
 });

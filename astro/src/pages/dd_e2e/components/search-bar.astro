@@ -1,8 +1,10 @@
 ---
-if (__CI_ENV__ === 'live') return new Response(null, { status: 404 });
+if (__CI_ENV__ === "live") return new Response(null, { status: 404 });
 
 import BaseLayout from "@layouts/BaseLayout.astro";
-import SearchBar, { type SearchBarLabels } from "@components/SearchBar/SearchBar";
+import SearchBar, {
+  type SearchBarLabels,
+} from "@components/SearchBar/SearchBar";
 
 // TODO: replace hardcoded English with i18n() once authoritative translation
 // keys exist for these strings in the Hugo i18n bundle.

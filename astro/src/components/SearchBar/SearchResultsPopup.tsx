@@ -24,9 +24,7 @@ const ALL_CATEGORIES: Array<{ label: string; key: string }> = [
 ];
 
 export type Selection =
-  | { kind: "none" }
-  | { kind: "ai" }
-  | { kind: "hit"; index: number };
+  { kind: "none" } | { kind: "ai" } | { kind: "hit"; index: number };
 
 interface Props {
   popupRef: { current: HTMLDivElement | null };
@@ -69,10 +67,7 @@ export default function SearchResultsPopup({
   return (
     <div
       ref={popupRef}
-      class={cl(
-        "search-bar__popup",
-        isMobile && "search-bar__popup--mobile",
-      )}
+      class={cl("search-bar__popup", isMobile && "search-bar__popup--mobile")}
       role="listbox"
       style={style}
     >

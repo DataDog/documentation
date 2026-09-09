@@ -8,9 +8,9 @@
  * message in the UI.
  */
 
-import type { OpenAPIV3 } from 'openapi-types';
-import { getAllowedRegions } from '@config/regions';
-import type { Region } from './schemas/region';
+import type { OpenAPIV3 } from "openapi-types";
+import { getAllowedRegions } from "@config/regions";
+import type { Region } from "./schemas/region";
 
 let _defaultCache: Region[] | null = null;
 
@@ -69,13 +69,19 @@ export function buildApiUrlFromServers(
     return `https://api.${site}${path}`;
   }
   const server = servers[0];
-  const template: string = server?.url ?? 'https://{subdomain}.{site}';
-  const subdomain: string = server?.variables?.subdomain?.default ?? 'api';
-  const base = template.replace('{subdomain}', subdomain).replace('{site}', site);
+  const template: string = server?.url ?? "https://{subdomain}.{site}";
+  const subdomain: string = server?.variables?.subdomain?.default ?? "api";
+  const base = template
+    .replace("{subdomain}", subdomain)
+    .replace("{site}", site);
   return `${base}${path}`;
 }
 
 /** Convenience wrapper kept for callers that don't need full server resolution. */
-export function buildApiUrl(site: string, path: string, subdomain = 'api'): string {
+export function buildApiUrl(
+  site: string,
+  path: string,
+  subdomain = "api",
+): string {
   return `https://${subdomain}.${site}${path}`;
 }

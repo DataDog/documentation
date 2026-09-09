@@ -30,9 +30,7 @@ describe("stepperNodes", () => {
   });
 
   it("uses the configured heading level", () => {
-    const result = render(
-      stepperNodes([{ title: "Only" }], { level: "h2" }),
-    );
+    const result = render(stepperNodes([{ title: "Only" }], { level: "h2" }));
     expect(result).toContain("## Step 1: Only");
   });
 

@@ -5,9 +5,9 @@
  * that is passed to CodeBlock components as `highlightedCode`.
  */
 
-import { codeToHtml } from 'shiki';
-import datadogLight from '../../styles/shiki-light';
-import type { EndpointData } from './schemas/views';
+import { codeToHtml } from "shiki";
+import datadogLight from "../../styles/shiki-light";
+import type { EndpointData } from "./schemas/views";
 
 /**
  * Walk all code examples in a single endpoint and populate `highlightedCode`
@@ -23,7 +23,10 @@ export async function highlightEndpoint(endpoint: EndpointData): Promise<void> {
  * Highlight a single code string. Returns the highlighted HTML,
  * or undefined if highlighting fails.
  */
-async function highlight(code: string, lang: string): Promise<string | undefined> {
+async function highlight(
+  code: string,
+  lang: string,
+): Promise<string | undefined> {
   try {
     return await codeToHtml(code, {
       lang,
@@ -40,7 +43,7 @@ function collectHighlightJobs(ep: EndpointData, jobs: Promise<void>[]): void {
       jobs.push(
         highlight(entry.code, entry.syntax).then((html) => {
           if (html) entry.highlightedCode = html;
-        })
+        }),
       );
 
       if (entry.regionVariants) {
@@ -48,7 +51,7 @@ function collectHighlightJobs(ep: EndpointData, jobs: Promise<void>[]): void {
           jobs.push(
             highlight(variant.code, entry.syntax).then((html) => {
               if (html) variant.highlightedCode = html;
-            })
+            }),
           );
         }
       }
@@ -59,9 +62,9 @@ function collectHighlightJobs(ep: EndpointData, jobs: Promise<void>[]): void {
     if (resp.examples) {
       for (const ex of resp.examples) {
         jobs.push(
-          highlight(ex.value, 'json').then((html) => {
+          highlight(ex.value, "json").then((html) => {
             if (html) ex.highlightedValue = html;
-          })
+          }),
         );
       }
     }
@@ -70,9 +73,9 @@ function collectHighlightJobs(ep: EndpointData, jobs: Promise<void>[]): void {
   if (ep.requestBody) {
     for (const ex of ep.requestBody.examples) {
       jobs.push(
-        highlight(ex.value, 'json').then((html) => {
+        highlight(ex.value, "json").then((html) => {
           if (html) ex.highlightedValue = html;
-        })
+        }),
       );
     }
   }

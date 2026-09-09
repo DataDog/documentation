@@ -1,5 +1,5 @@
 /// <reference types="vitest/config" />
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from "vitest/config";
 
 // Root vitest config — lists both projects so `yarn test` runs everything.
 // Each project file uses its own getViteConfig() call, giving it an isolated
@@ -13,9 +13,6 @@ import { defineConfig } from 'vitest/config';
 //   vitest run --config vitest.integration.config.ts
 export default defineConfig({
   test: {
-    projects: [
-      './vitest.unit.config.ts',
-      './vitest.integration.config.ts',
-    ],
+    projects: ["./vitest.unit.config.ts", "./vitest.integration.config.ts"],
   },
 });

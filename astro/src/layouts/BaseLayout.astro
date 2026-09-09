@@ -1,25 +1,28 @@
 ---
-import '../styles/global.css';
-import AnnouncementBanner from '@components/AnnouncementBanner/AnnouncementBanner.astro';
-import Header from '@components/Header/Header.astro';
-import Footer from '@components/Footer/Footer.astro';
-import { resolveLocale, type Locale } from '@lib/i18n/locale';
-import { getBannerParams, type BannerParams } from '@lib/componentUtils/bannerData';
-import { DevBadge } from '@components/DevBadge/DevBadge';
-import Telemetry from '@components/Telemetry/Telemetry.astro';
-import AskAi from '@components/AskAi/AskAi.astro';
-import { resolveSiteEnv } from '@lib/site/siteEnv';
+import "../styles/global.css";
+import AnnouncementBanner from "@components/AnnouncementBanner/AnnouncementBanner.astro";
+import Header from "@components/Header/Header.astro";
+import Footer from "@components/Footer/Footer.astro";
+import { resolveLocale, type Locale } from "@lib/i18n/locale";
+import {
+  getBannerParams,
+  type BannerParams,
+} from "@lib/componentUtils/bannerData";
+import { DevBadge } from "@components/DevBadge/DevBadge";
+import Telemetry from "@components/Telemetry/Telemetry.astro";
+import AskAi from "@components/AskAi/AskAi.astro";
+import { resolveSiteEnv } from "@lib/site/siteEnv";
 import {
   TWITTER_HANDLE,
   THEME_COLOR,
   DEFAULT_OG_IMAGE,
   getLocaleDefaults,
-} from '@lib/seo';
-import { ClientRouter } from 'astro:transitions';
-import faviconUrl from '../assets/favicon.ico?url';
-import nationalWebLightWoff2 from '../assets/fonts/NationalWeb-Light.woff2?url';
-import nationalWebSemiboldWoff2 from '../assets/fonts/NationalWeb-Semibold.woff2?url';
-import robotoMonoRegularWoff from '../assets/fonts/RobotoMono-Regular.woff?url';
+} from "@lib/seo";
+import { ClientRouter } from "astro:transitions";
+import faviconUrl from "../assets/favicon.ico?url";
+import nationalWebLightWoff2 from "../assets/fonts/NationalWeb-Light.woff2?url";
+import nationalWebSemiboldWoff2 from "../assets/fonts/NationalWeb-Semibold.woff2?url";
+import robotoMonoRegularWoff from "../assets/fonts/RobotoMono-Regular.woff?url";
 
 interface Props {
   title: string;
@@ -29,7 +32,7 @@ interface Props {
   /** Absolute URL of the social-share image. */
   image?: string;
   /** OpenGraph type; defaults to "article" to match Hugo. */
-  ogType?: 'website' | 'article';
+  ogType?: "website" | "article";
   /** Per-locale URLs for `<link rel="alternate" hreflang>`. */
   hreflang?: Array<{ hreflang: string; href: string }>;
   /** Per-page banner override, mirroring Hugo's page-level `announcement_banner`. */
@@ -47,7 +50,7 @@ const {
   description: descriptionProp,
   canonical: canonicalProp,
   image: imageProp,
-  ogType = 'article',
+  ogType = "article",
   hreflang,
   announcementBanner,
   enableViewTransitions = false,
@@ -64,7 +67,7 @@ const localeDefaults = getLocaleDefaults(lang);
 const description = descriptionProp ?? localeDefaults.metaDescription;
 const siteName = localeDefaults.siteName;
 const image = imageProp ?? DEFAULT_OG_IMAGE;
-const siteOrigin = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const siteOrigin = Astro.site?.toString().replace(/\/$/, "") ?? "";
 const canonical = canonicalProp ?? `${siteOrigin}${Astro.url.pathname}`;
 const ogUrl = canonical;
 // `data-env` on <html>, for debugging and env-conditional styling. Telemetry
@@ -75,7 +78,7 @@ const env = resolveSiteEnv();
 // Resolve any relative hreflang hrefs against the site origin.
 const hreflangResolved = hreflang?.map((h) => ({
   hreflang: h.hreflang,
-  href: h.href.startsWith('http') ? h.href : `${siteOrigin}${h.href}`,
+  href: h.href.startsWith("http") ? h.href : `${siteOrigin}${h.href}`,
 }));
 ---
 
@@ -112,13 +115,33 @@ const hreflangResolved = hreflang?.map((h) => ({
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
 
-    {hreflangResolved?.map((h) => (
-      <link rel="alternate" hreflang={h.hreflang} href={h.href} />
-    ))}
+    {
+      hreflangResolved?.map((h) => (
+        <link rel="alternate" hreflang={h.hreflang} href={h.href} />
+      ))
+    }
 
-    <link rel="preload" href={nationalWebLightWoff2} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={nationalWebSemiboldWoff2} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={robotoMonoRegularWoff} as="font" type="font/woff" crossorigin />
+    <link
+      rel="preload"
+      href={nationalWebLightWoff2}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={nationalWebSemiboldWoff2}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={robotoMonoRegularWoff}
+      as="font"
+      type="font/woff"
+      crossorigin
+    />
     <script is:inline>
       (function () {
         // Resolve the active Datadog region before first paint so region-scoped
@@ -126,22 +149,26 @@ const hreflangResolved = hreflang?.map((h) => ({
         // there's no flash of the wrong region. Precedence matches Hugo:
         // ?site= query param → `site` cookie → default `us`. Referrer-based
         // sync runs later in the regionState module.
-        var allowed = ['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov'];
+        var allowed = ["us", "us3", "us5", "eu", "ap1", "ap2", "gov"];
         var params = new URLSearchParams(window.location.search);
-        var fromQuery = params.get('site');
+        var fromQuery = params.get("site");
         var cookieMatch = document.cookie.match(/(?:^|; )site=([^;]*)/);
-        var fromCookie = cookieMatch ? decodeURIComponent(cookieMatch[1]) : null;
-        var region = 'us';
+        var fromCookie = cookieMatch
+          ? decodeURIComponent(cookieMatch[1])
+          : null;
+        var region = "us";
         if (fromQuery && allowed.indexOf(fromQuery) !== -1) {
           region = fromQuery;
         } else if (fromCookie && allowed.indexOf(fromCookie) !== -1) {
           region = fromCookie;
         }
-        document.documentElement.setAttribute('data-active-region', region);
+        document.documentElement.setAttribute("data-active-region", region);
       })();
     </script>
-    {/* Datadog RUM + Browser Logs. Its bundled script is deferred, so placing
-        it here costs nothing against first paint. */}
+    {
+      /* Datadog RUM + Browser Logs. Its bundled script is deferred, so placing
+        it here costs nothing against first paint. */
+    }
     <Telemetry />
   </head>
   <body class:list={[{ announcement: hasBanner }]}>
@@ -151,18 +178,24 @@ const hreflangResolved = hreflang?.map((h) => ({
       <slot />
     </div>
     <Footer />
-    {/* Appends its own nodes to <body>, so it renders last and carries no
-        markup of its own. */}
+    {
+      /* Appends its own nodes to <body>, so it renders last and carries no
+        markup of its own. */
+    }
     <AskAi />
-    {import.meta.env.MODE === 'development' && <DevBadge client:idle />}
+    {import.meta.env.MODE === "development" && <DevBadge client:idle />}
     <style>
       .base-layout__body {
-        padding-top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height));
+        padding-top: calc(
+          var(--hugo-active-banner-height) + var(--hugo-header-height)
+        );
       }
 
       @media (min-width: 992px) {
         .base-layout__body {
-          padding-top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height-desktop));
+          padding-top: calc(
+            var(--hugo-active-banner-height) + var(--hugo-header-height-desktop)
+          );
         }
       }
     </style>

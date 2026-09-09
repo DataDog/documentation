@@ -44,9 +44,7 @@ test.describe("CollapseContent component", () => {
   });
 
   test("opens the section whose id matches the URL hash", async ({ page }) => {
-    await page.goto(
-      "/dd_e2e/components/collapse-content#deep-linkable",
-    );
+    await page.goto("/dd_e2e/components/collapse-content#deep-linkable");
     const section = page.locator("#deep-linkable");
     await expect(section).toHaveAttribute("open", "");
     await expect(section.locator(".collapse-content__body")).toBeVisible();

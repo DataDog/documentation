@@ -253,10 +253,7 @@ export function unionOptionLabels(spec: any, variants: any[]): string[] {
  * `$ref` and `allOf` are resolved before the array check, matching
  * Hugo's pre-flattened input.
  */
-export function topLevelSchemaToFields(
-  spec: any,
-  schema: any,
-): SchemaField[] {
+export function topLevelSchemaToFields(spec: any, schema: any): SchemaField[] {
   if (!schema) return [];
 
   const visited = new Set<string>();
@@ -296,11 +293,7 @@ export function topLevelSchemaToFields(
     return topLevelSchemaToFields(spec, resolvedItems);
   }
 
-  if (
-    resolvedItems.properties ||
-    resolvedItems.oneOf ||
-    resolvedItems.anyOf
-  ) {
+  if (resolvedItems.properties || resolvedItems.oneOf || resolvedItems.anyOf) {
     // Pass the already-resolved schema, not the original $ref wrapper:
     // we've added the resolved $refs to `visited` for cycle protection
     // on later descents, so re-resolving here would self-trigger.

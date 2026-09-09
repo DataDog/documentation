@@ -12,16 +12,16 @@
  * the partials inside the bundle, so resolution no longer depends on where the
  * code runs.
  */
-import type { PartialResolver } from './filterMarkdocAst';
+import type { PartialResolver } from "./filterMarkdocAst";
 
-const PARTIAL_PREFIX = '@partials/';
-const PARTIALS_ROOT_SEGMENT = 'partials/en/';
+const PARTIAL_PREFIX = "@partials/";
+const PARTIALS_ROOT_SEGMENT = "partials/en/";
 
 // Every partial's raw source, keyed by its glob path (e.g.
 // '../../../cdocs/partials/en/opentelemetry/traces/java.mdoc').
 const partialSourceByGlobKey = import.meta.glob(
-  '../../../partials/en/**/*.mdoc',
-  { query: '?raw', import: 'default', eager: true },
+  "../../../partials/en/**/*.mdoc",
+  { query: "?raw", import: "default", eager: true },
 ) as Record<string, string>;
 
 // Re-key by the path relative to `partials/en/`, which is exactly what a

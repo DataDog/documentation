@@ -1,20 +1,20 @@
 ---
-import { CopyPageButton, type CopyPageButtonVariant } from './CopyPageButton';
-import { useTranslations } from '@lib/i18n/i18n';
+import { CopyPageButton, type CopyPageButtonVariant } from "./CopyPageButton";
+import { useTranslations } from "@lib/i18n/i18n";
 
 interface Props {
   variant?: CopyPageButtonVariant;
 }
 
-const { variant = 'default' } = Astro.props;
+const { variant = "default" } = Astro.props;
 const translate = useTranslations(Astro.currentLocale);
 
 // `copied` is the authoritative Hugo key for the post-copy state. "Copy page"
 // has no Hugo key yet — pass the literal English as the lookup key so it
 // surfaces automatically once translators add it.
 const labels = {
-  'Copy page': translate('Copy page'),
-  'Copied': translate('copied'),
+  "Copy page": translate("Copy page"),
+  Copied: translate("copied"),
 };
 ---
 

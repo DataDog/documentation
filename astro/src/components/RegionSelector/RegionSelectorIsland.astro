@@ -1,7 +1,11 @@
 ---
-import { RegionSelector, type RegionSelectorLabels, type RegionSelectorHrefs } from './RegionSelector';
-import { buildClientRegions } from '@config/regions';
-import { HUGO_ORIGIN } from '@config/origins';
+import {
+  RegionSelector,
+  type RegionSelectorLabels,
+  type RegionSelectorHrefs,
+} from "./RegionSelector";
+import { buildClientRegions } from "@config/regions";
+import { HUGO_ORIGIN } from "@config/origins";
 
 // Resolve the region list at build time so the `yaml` parser and the full
 // `regions.config.js` data object never reach the client bundle. The slim

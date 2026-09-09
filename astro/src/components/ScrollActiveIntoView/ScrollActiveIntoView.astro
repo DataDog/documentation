@@ -29,7 +29,10 @@ const {
 } = Astro.props;
 ---
 
-<script is:inline define:vars={{ containerSelector, activeSelector, headerSelector, gap }}>
+<script
+  is:inline
+  define:vars={{ containerSelector, activeSelector, headerSelector, gap }}
+>
   {
     const container = document.querySelector(containerSelector);
     const active = container?.querySelector(activeSelector);

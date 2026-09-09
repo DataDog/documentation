@@ -19,10 +19,10 @@
  * `.astro` islands read the data here in frontmatter and pass it through.
  */
 
-import { parse as parseYaml } from 'yaml';
+import { parse as parseYaml } from "yaml";
 // @ts-ignore — plain ES module import
-import regionsConfig from '@hugo-site/assets/scripts/config/regions.config.js';
-import PARAMS_YAML_RAW from '@hugo-site/config/_default/params.yaml?raw';
+import regionsConfig from "@hugo-site/assets/scripts/config/regions.config.js";
+import PARAMS_YAML_RAW from "@hugo-site/config/_default/params.yaml?raw";
 
 export interface AllowedRegion {
   /** Region key used in the `site` cookie / `?site=` query param. E.g. `us`, `eu`, `ap1`. */
@@ -61,7 +61,9 @@ let _allowedRegions: AllowedRegion[] | null = null;
 export function getAllowedRegions(): AllowedRegion[] {
   if (_allowedRegions) return _allowedRegions;
 
-  const parsed = parseYaml(PARAMS_YAML_RAW) as { allowedRegions?: RawAllowedRegion[] };
+  const parsed = parseYaml(PARAMS_YAML_RAW) as {
+    allowedRegions?: RawAllowedRegion[];
+  };
   const list = parsed.allowedRegions ?? [];
 
   _allowedRegions = list
@@ -99,7 +101,7 @@ export function isAllowedRegionKey(key: string | null | undefined): boolean {
 }
 
 /** Fallback region when nothing else resolves. Matches Hugo's default. */
-export const DEFAULT_REGION_KEY = 'us';
+export const DEFAULT_REGION_KEY = "us";
 
 /**
  * Slim region shape for client code. Contains only what `RegionSelector` and
@@ -121,6 +123,6 @@ export function buildClientRegions(): ClientRegion[] {
     key: r.key,
     label: r.label,
     domain: r.domain,
-    appHost: appHost(r.key) ?? '',
+    appHost: appHost(r.key) ?? "",
   }));
 }

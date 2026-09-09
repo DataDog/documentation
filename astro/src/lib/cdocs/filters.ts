@@ -12,16 +12,16 @@
  * The resolved trait values (`valsByTraitId`) become Markdoc variables so the
  * built-in `if` tags drop non-matching content, and are persisted to the cookie.
  */
-import fs from 'node:fs';
-import os from 'node:os';
-import path from 'node:path';
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import {
   loadCustomizationConfig,
   buildFiltersManifest,
   resolveFilters,
   type CustomizationConfig,
-} from 'cdocs-data';
-import type { ResolvedFilter } from './types';
+} from "cdocs-data";
+import type { ResolvedFilter } from "./types";
 
 /**
  * A `content_filters` entry as it appears in a doc's frontmatter (cdocs-data's
@@ -36,7 +36,7 @@ export interface CdocContentFilter {
   hide_if?: Array<Record<string, string[]>>;
 }
 
-const DEFAULT_LANG = 'en';
+const DEFAULT_LANG = "en";
 
 // The customization config mirrors Hugo's top-level `customization_config/`
 // (with per-language subdirectories).
@@ -49,10 +49,10 @@ const DEFAULT_LANG = 'en';
 // `buildFiltersManifest` throws on the missing traits. Vite's glob resolves the
 // source YAML in both dev and prod and ships it inside the bundle, decoupling
 // config loading from where the code happens to run.
-const CONFIG_ROOT_SEGMENT = 'customization_config/';
+const CONFIG_ROOT_SEGMENT = "customization_config/";
 const configYamlByGlobKey = import.meta.glob(
-  '../../customization_config/**/*.{yaml,yml}',
-  { query: '?raw', import: 'default', eager: true },
+  "../../customization_config/**/*.{yaml,yml}",
+  { query: "?raw", import: "default", eager: true },
 ) as Record<string, string>;
 
 // TODO(cdocs-data): remove this materialize-to-temp-dir dance once cdocs-data
@@ -78,7 +78,7 @@ const configYamlByGlobKey = import.meta.glob(
 let materializedConfigDir: string | null = null;
 function materializeConfigDir(): string {
   if (materializedConfigDir) return materializedConfigDir;
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'cdocs-config-'));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "cdocs-config-"));
   for (const [globKey, contents] of Object.entries(configYamlByGlobKey)) {
     // e.g. '../../cdocs/customization_config/en/traits/general.yaml'
     //   -> 'en/traits/general.yaml'
@@ -129,7 +129,7 @@ export function resolvePageFilters(
   const customizationConfig = getCustomizationConfig(lang);
 
   const filtersManifest = buildFiltersManifest({
-    frontmatter: { title: '', content_filters: contentFilters },
+    frontmatter: { title: "", content_filters: contentFilters },
     customizationConfig,
   });
 

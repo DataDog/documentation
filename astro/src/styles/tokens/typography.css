@@ -1,6 +1,8 @@
 :root {
-  --font-family: 'NationalWeb', Helvetica, Arial, sans-serif;
-  --font-family-mono: 'RobotoMono-Regular', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  --font-family: "NationalWeb", Helvetica, Arial, sans-serif;
+  --font-family-mono:
+    "RobotoMono-Regular", "SFMono-Regular", Consolas, "Liberation Mono", Menlo,
+    monospace;
   --font-size-root: 18px;
   --font-size-xs: 0.778rem;
   --font-size-sm: 0.875rem;

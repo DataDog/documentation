@@ -92,7 +92,9 @@ describe("cardGridNode", () => {
       "https://docs.datadoghq.com",
     );
 
-    expect(md).toBe("- [AWS](https://docs.datadoghq.com/integrations/aws.md)\n");
+    expect(md).toBe(
+      "- [AWS](https://docs.datadoghq.com/integrations/aws.md)\n",
+    );
   });
 
   it("keeps the branch prefix that site carries in a preview build", () => {

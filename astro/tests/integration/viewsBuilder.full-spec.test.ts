@@ -10,17 +10,20 @@
  * Both unit and integration projects run via `yarn test`.
  */
 
-import { describe, it, expect } from 'vitest';
-import { z } from 'zod';
-import { getCategoriesView, getOperationView } from '@lib/api/viewsBuilder';
-import { ApiCategorySchema, ApiOperationViewSchema } from '@lib/api/schemas/views';
+import { describe, it, expect } from "vitest";
+import { z } from "zod";
+import { getCategoriesView, getOperationView } from "@lib/api/viewsBuilder";
+import {
+  ApiCategorySchema,
+  ApiOperationViewSchema,
+} from "@lib/api/schemas/views";
 import {
   CATEGORY_AUDIT_CASES,
   ENDPOINT_AUDIT_CASES,
-} from '../fixtures/api/auditCases';
+} from "../fixtures/api/auditCases";
 
-describe('viewsBuilder shape validation across full spec', () => {
-  it('every category in getCategoriesView matches ApiCategorySchema', async () => {
+describe("viewsBuilder shape validation across full spec", () => {
+  it("every category in getCategoriesView matches ApiCategorySchema", async () => {
     const all = await getCategoriesView();
     z.array(ApiCategorySchema).parse(all);
 
@@ -28,13 +31,20 @@ describe('viewsBuilder shape validation across full spec', () => {
 
     const slugs = new Set(all.map((c) => c.slug));
     for (const { slug } of CATEGORY_AUDIT_CASES) {
-      expect(slugs, `missing category "${slug}" in getCategoriesView()`).toContain(slug);
+      expect(
+        slugs,
+        `missing category "${slug}" in getCategoriesView()`,
+      ).toContain(slug);
     }
   });
 
-  it('every operation across every category returns a valid ApiOperationView', async () => {
+  it("every operation across every category returns a valid ApiOperationView", async () => {
     const cats = await getCategoriesView();
-    const failures: Array<{ catSlug: string; opSlug: string; issues: unknown }> = [];
+    const failures: Array<{
+      catSlug: string;
+      opSlug: string;
+      issues: unknown;
+    }> = [];
     let totalOps = 0;
 
     for (const cat of cats) {
@@ -42,12 +52,20 @@ describe('viewsBuilder shape validation across full spec', () => {
         totalOps++;
         const view = await getOperationView(cat.slug, op.slug);
         if (!view) {
-          failures.push({ catSlug: cat.slug, opSlug: op.slug, issues: 'getOperationView returned undefined' });
+          failures.push({
+            catSlug: cat.slug,
+            opSlug: op.slug,
+            issues: "getOperationView returned undefined",
+          });
           continue;
         }
         const result = ApiOperationViewSchema.safeParse(view);
         if (!result.success) {
-          failures.push({ catSlug: cat.slug, opSlug: op.slug, issues: result.error.issues });
+          failures.push({
+            catSlug: cat.slug,
+            opSlug: op.slug,
+            issues: result.error.issues,
+          });
         }
       }
     }
@@ -62,10 +80,13 @@ describe('viewsBuilder shape validation across full spec', () => {
     expect(totalOps).toBeGreaterThan(100);
   });
 
-  it('every audited endpoint resolves to a valid ApiOperationView', async () => {
+  it("every audited endpoint resolves to a valid ApiOperationView", async () => {
     for (const { catSlug, opSlug } of ENDPOINT_AUDIT_CASES) {
       const view = await getOperationView(catSlug, opSlug);
-      expect(view, `getOperationView("${catSlug}", "${opSlug}") returned undefined`).toBeDefined();
+      expect(
+        view,
+        `getOperationView("${catSlug}", "${opSlug}") returned undefined`,
+      ).toBeDefined();
       ApiOperationViewSchema.parse(view);
     }
   });

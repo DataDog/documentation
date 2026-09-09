@@ -28,7 +28,9 @@ function mountStepper(
 
   const root = document.createElement("div");
   root.id = id;
-  root.className = open ? "stepper stepper--open" : "stepper stepper--collapsed";
+  root.className = open
+    ? "stepper stepper--open"
+    : "stepper stepper--collapsed";
 
   const stepsEl = document.createElement("div");
   stepsEl.className = "stepper__steps";
@@ -196,7 +198,9 @@ describe("StepperController — finish and reset", () => {
     steps.forEach((step) =>
       expect(step.classList.contains("stepper__step--completed")).toBe(true),
     );
-    steps.forEach((step) => expect(step.classList.contains("stepper__step--active")).toBe(false));
+    steps.forEach((step) =>
+      expect(step.classList.contains("stepper__step--active")).toBe(false),
+    );
     expect(isHidden(finishedEl)).toBe(false);
     expect(isHidden(resetEl)).toBe(false);
     // Navs hidden once finished.
@@ -205,11 +209,9 @@ describe("StepperController — finish and reset", () => {
 
   it("start over returns to the first step and hides the finished region", async () => {
     const user = userEvent.setup();
-    const { steps, finishedEl, resetEl, resetBtn } = mountStepper(
-      "reset",
-      2,
-      { withFinished: true },
-    );
+    const { steps, finishedEl, resetEl, resetBtn } = mountStepper("reset", 2, {
+      withFinished: true,
+    });
 
     await user.click(steps[0].querySelector(".stepper__next-btn")!);
     await user.click(steps[1].querySelector(".stepper__finish-btn")!);

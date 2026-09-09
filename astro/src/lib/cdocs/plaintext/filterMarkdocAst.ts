@@ -19,9 +19,9 @@
  * text. Pure: the caller injects `resolvePartial`, so this is unit-testable
  * without disk access.
  */
-import Markdoc from '@markdoc/markdoc';
-import type { Node, Config } from '@markdoc/markdoc';
-import { rewriteInternalDocLink } from '@lib/plaintext/rewriteDocLink';
+import Markdoc from "@markdoc/markdoc";
+import type { Node, Config } from "@markdoc/markdoc";
+import { rewriteInternalDocLink } from "@lib/plaintext/rewriteDocLink";
 
 const { parse } = Markdoc;
 
@@ -44,7 +44,7 @@ function stripCommentsFromSiblings(nodes: Node[]): Node[] {
   let insideComment = false;
 
   for (const node of nodes) {
-    if (node.type !== 'text' || typeof node.attributes?.content !== 'string') {
+    if (node.type !== "text" || typeof node.attributes?.content !== "string") {
       // Non-text sibling: keep it, unless it falls within an open comment span.
       if (!insideComment) out.push(node);
       continue;
@@ -52,7 +52,7 @@ function stripCommentsFromSiblings(nodes: Node[]): Node[] {
 
     let content = node.attributes.content;
     if (insideComment) {
-      const end = content.indexOf('-->');
+      const end = content.indexOf("-->");
       // Still inside the comment: drop this whole text node.
       if (end === -1) continue;
       content = content.slice(end + 3);
@@ -61,8 +61,8 @@ function stripCommentsFromSiblings(nodes: Node[]): Node[] {
 
     // Drop any complete comments, then detect an unterminated `<!--` that opens
     // a comment continuing into later siblings.
-    content = content.replace(HTML_COMMENT, '');
-    const open = content.indexOf('<!--');
+    content = content.replace(HTML_COMMENT, "");
+    const open = content.indexOf("<!--");
     if (open !== -1) {
       content = content.slice(0, open);
       insideComment = true;
@@ -87,31 +87,35 @@ const TRAILING_HEADING_ID = /\s*\{#[^}]+\}\s*$/;
  * `{#id}` text form survives as a trailing token in the heading's text leaf.
  */
 function stripHeadingId(node: Node): void {
-  if (node.type !== 'heading') return;
+  if (node.type !== "heading") return;
 
-  const hadIdAttr = Boolean(node.attributes && 'id' in node.attributes);
+  const hadIdAttr = Boolean(node.attributes && "id" in node.attributes);
   if (hadIdAttr) {
     delete node.attributes.id;
-    node.annotations = (node.annotations ?? []).filter((a) => a.name !== 'id');
+    node.annotations = (node.annotations ?? []).filter((a) => a.name !== "id");
   }
 
   const textLeaves: Node[] = [];
   const collect = (n: Node) => {
-    if (n.type === 'text' && typeof n.attributes?.content === 'string') textLeaves.push(n);
+    if (n.type === "text" && typeof n.attributes?.content === "string")
+      textLeaves.push(n);
     (n.children ?? []).forEach(collect);
   };
   collect(node);
 
   // Strip the text-form ID (`{#id}`) wherever it trails.
   for (const leaf of textLeaves) {
-    leaf.attributes!.content = leaf.attributes!.content.replace(TRAILING_HEADING_ID, '');
+    leaf.attributes!.content = leaf.attributes!.content.replace(
+      TRAILING_HEADING_ID,
+      "",
+    );
   }
   // The tag-form ID leaves the preceding space on the last text leaf (e.g.
   // "Setup " from "## Setup {% #id %}"); trim it so the heading isn't left
   // with trailing whitespace.
   const last = textLeaves[textLeaves.length - 1];
   if (hadIdAttr && last) {
-    last.attributes!.content = last.attributes!.content.replace(/\s+$/, '');
+    last.attributes!.content = last.attributes!.content.replace(/\s+$/, "");
   }
 }
 
@@ -124,25 +128,30 @@ function stripHeadingId(node: Node): void {
 const REFERENCE_DEFINITION = /^\s{0,3}\[[^\]]+\]:\s+\S/;
 
 function isReferenceDefinitionText(content: string): boolean {
-  const lines = content.split('\n').map((line) => line.trim()).filter(Boolean);
-  return lines.length > 0 && lines.every((line) => REFERENCE_DEFINITION.test(line));
+  const lines = content
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+  return (
+    lines.length > 0 && lines.every((line) => REFERENCE_DEFINITION.test(line))
+  );
 }
 
 /** True when a paragraph's text content is nothing but reference definitions. */
 function isReferenceDefinitionParagraph(node: Node): boolean {
-  if (node.type !== 'paragraph') return false;
+  if (node.type !== "paragraph") return false;
 
   const textLeaves: Node[] = [];
   const collect = (n: Node) => {
-    if (n.type === 'text') textLeaves.push(n);
+    if (n.type === "text") textLeaves.push(n);
     else (n.children ?? []).forEach(collect);
   };
   collect(node);
 
   let sawDefinition = false;
   for (const leaf of textLeaves) {
-    const content = leaf.attributes?.content ?? '';
-    if (content.trim() === '') continue;
+    const content = leaf.attributes?.content ?? "";
+    if (content.trim() === "") continue;
     if (!isReferenceDefinitionText(content)) return false;
     sawDefinition = true;
   }
@@ -151,13 +160,13 @@ function isReferenceDefinitionParagraph(node: Node): boolean {
 
 /** True when a (processed) node subtree carries no visible text or leaf tags. */
 function isBlank(node: Node): boolean {
-  if (node.type === 'text') {
-    return (node.attributes?.content ?? '').trim() === '';
+  if (node.type === "text") {
+    return (node.attributes?.content ?? "").trim() === "";
   }
   // A leaf tag with no children (image, hr, ...) is meaningful content.
   const children = node.children ?? [];
   if (children.length === 0) {
-    return node.type === 'inline' || node.type === 'paragraph';
+    return node.type === "inline" || node.type === "paragraph";
   }
   return children.every(isBlank);
 }
@@ -179,18 +188,18 @@ function processNode(
   resolvePartial: PartialResolver | undefined,
   seenPartials: Set<string>,
 ): Node[] {
-  if (node.type === 'comment') {
+  if (node.type === "comment") {
     return [];
   }
-  if (node.type === 'tag' && node.tag === 'if') {
+  if (node.type === "tag" && node.tag === "if") {
     return processIf(node, config, resolvePartial, seenPartials);
   }
-  if (node.type === 'tag' && node.tag === 'partial') {
+  if (node.type === "tag" && node.tag === "partial") {
     return processPartial(node, config, resolvePartial, seenPartials);
   }
   // Point internal doc links at their `.md` twin (external/asset/anchor links
   // are left as-is by the rewriter). Children (the link text) still recurse.
-  if (node.type === 'link' && typeof node.attributes?.href === 'string') {
+  if (node.type === "link" && typeof node.attributes?.href === "string") {
     node.attributes.href = rewriteInternalDocLink(node.attributes.href);
   }
   // Drop explicit heading IDs — they anchor in-page links in HTML but are just
@@ -206,7 +215,7 @@ function processNode(
   // comments doesn't leave stray blank blocks) or nothing but now-orphaned
   // link reference definitions.
   if (
-    node.type === 'paragraph' &&
+    node.type === "paragraph" &&
     (isBlank(node) || isReferenceDefinitionParagraph(node))
   ) {
     return [];
@@ -221,7 +230,9 @@ function processIf(
   seenPartials: Set<string>,
 ): Node[] {
   const condition = node.attributes?.primary;
-  const truthy = Boolean(condition?.resolve ? condition.resolve(config) : condition);
+  const truthy = Boolean(
+    condition?.resolve ? condition.resolve(config) : condition,
+  );
 
   // Children are split by a sentinel `{% else /%}` tag into the truthy branch
   // (before) and the falsy branch (after). else-if is not handled (POC).
@@ -229,7 +240,7 @@ function processIf(
   const after: Node[] = [];
   let seenElse = false;
   for (const child of node.children ?? []) {
-    if (child.type === 'tag' && child.tag === 'else') {
+    if (child.type === "tag" && child.tag === "else") {
       seenElse = true;
       continue;
     }
@@ -247,7 +258,7 @@ function processPartial(
   seenPartials: Set<string>,
 ): Node[] {
   const file = node.attributes?.file;
-  if (typeof file !== 'string' || !resolvePartial) {
+  if (typeof file !== "string" || !resolvePartial) {
     return [];
   }
   // Cycle guard: a partial that (transitively) includes itself is dropped.
@@ -261,5 +272,10 @@ function processPartial(
   }
   const nextSeen = new Set(seenPartials).add(file);
   const partialAst = parse(source);
-  return processNodes(partialAst.children ?? [], config, resolvePartial, nextSeen);
+  return processNodes(
+    partialAst.children ?? [],
+    config,
+    resolvePartial,
+    nextSeen,
+  );
 }

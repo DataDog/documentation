@@ -212,17 +212,17 @@
    .footer__main-row's direct children. */
 @media (min-width: 992px) {
   .footer__column--trial {
-    width: 25%;            /* col-lg-3 */
+    width: 25%; /* col-lg-3 */
     flex: 0 0 25%;
     order: 0;
   }
   .footer__column--product {
-    width: 33.3333%;       /* col-lg-4 */
+    width: 33.3333%; /* col-lg-4 */
     flex: 0 0 33.3333%;
     order: 1;
   }
   .footer__column--resources {
-    width: 16.6667%;       /* col-lg-2 */
+    width: 16.6667%; /* col-lg-2 */
     flex: 0 0 16.6667%;
     order: 2;
   }

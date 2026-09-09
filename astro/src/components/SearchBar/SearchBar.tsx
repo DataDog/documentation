@@ -201,14 +201,20 @@ export default function SearchBar({
       >
         <button
           type="submit"
-          class={cl("search-bar__submit", variant === "mobile" && "search-bar__submit--mobile")}
+          class={cl(
+            "search-bar__submit",
+            variant === "mobile" && "search-bar__submit--mobile",
+          )}
           aria-label={labels["Search"]}
           dangerouslySetInnerHTML={{ __html: searchIconSvg }}
         />
         <input
           ref={inputRef}
           type="search"
-          class={cl("search-bar__input", variant === "mobile" && "search-bar__input--mobile")}
+          class={cl(
+            "search-bar__input",
+            variant === "mobile" && "search-bar__input--mobile",
+          )}
           placeholder={labels["Search documentation..."]}
           aria-label={labels["Search documentation"]}
           value={query}

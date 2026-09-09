@@ -46,15 +46,23 @@ function mergeBundle(
     const lang = match[1] as Locale;
     const parsed = parse(raw);
     const existing = tables[lang] ?? {};
-    tables[lang] = override ? { ...existing, ...parsed } : { ...parsed, ...existing };
+    tables[lang] = override
+      ? { ...existing, ...parsed }
+      : { ...parsed, ...existing };
   }
 }
 
 // TODO: websites-modules/i18n/es.yaml has duplicate top-level keys (cloud_security, ai) — remove uniqueKeys:false once fixed upstream.
-mergeBundle(yamlModules, (raw) => parseYaml(raw, { uniqueKeys: false }) as I18nTable, {
-  override: false,
+mergeBundle(
+  yamlModules,
+  (raw) => parseYaml(raw, { uniqueKeys: false }) as I18nTable,
+  {
+    override: false,
+  },
+);
+mergeBundle(sharedModules, (raw) => JSON.parse(raw) as I18nTable, {
+  override: true,
 });
-mergeBundle(sharedModules, (raw) => JSON.parse(raw) as I18nTable, { override: true });
 
 function lookup(lang: Locale, key: string): string | undefined {
   const entry = tables[lang]?.[key];

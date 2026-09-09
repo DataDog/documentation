@@ -1,19 +1,13 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test.describe('API Method Badge component — visual', () => {
+test.describe("API Method Badge component — visual", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/dd_e2e/components/api-method-badge');
+    await page.goto("/dd_e2e/components/api-method-badge");
   });
 
-  const methods: Array<'get' | 'post' | 'put' | 'patch' | 'delete' | 'head' | 'options'> = [
-    'get',
-    'post',
-    'put',
-    'patch',
-    'delete',
-    'head',
-    'options',
-  ];
+  const methods: Array<
+    "get" | "post" | "put" | "patch" | "delete" | "head" | "options"
+  > = ["get", "post", "put", "patch", "delete", "head", "options"];
 
   for (const method of methods) {
     test(`${method} badge matches screenshot`, async ({ page }) => {

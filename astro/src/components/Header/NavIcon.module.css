@@ -13,7 +13,7 @@
 }
 
 .nav-icon--missing::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 0.6em;
   height: 0.6em;

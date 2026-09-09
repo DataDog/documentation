@@ -1,17 +1,17 @@
-import { describe, it, expect, beforeAll } from 'vitest';
-import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+import { describe, it, expect, beforeAll } from "vitest";
+import { experimental_AstroContainer as AstroContainer } from "astro/container";
 // @ts-ignore — Preact renderer is registered for SSR of islands in headless tests.
-import preactRenderer from '@astrojs/preact/server.js';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { format as prettierFormat } from 'prettier';
+import preactRenderer from "@astrojs/preact/server.js";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { format as prettierFormat } from "prettier";
 
-import CategoryPage from '../../src/pages/[...lang]/api/latest/[category].astro';
-import OperationPage from '../../src/pages/[...lang]/api/latest/[category]/[operation].astro';
+import CategoryPage from "../../src/pages/[...lang]/api/latest/[category].astro";
+import OperationPage from "../../src/pages/[...lang]/api/latest/[category]/[operation].astro";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const SNAPSHOT_DIR = path.join(__dirname, 'api-html-snapshots');
-const BASE_URL = 'http://localhost:4321';
+const SNAPSHOT_DIR = path.join(__dirname, "api-html-snapshots");
+const BASE_URL = "http://localhost:4321";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PageComponent = any;
@@ -37,31 +37,115 @@ interface AuditPage {
  */
 const AUDIT_PAGES: AuditPage[] = [
   // One landing page + one representative operation per dynamic category.
-  { name: '05-authentication-landing', component: CategoryPage, params: { category: 'authentication' }, urlPath: '/api/latest/authentication/' },
-  { name: '05-authentication-validate-api-key', component: OperationPage, params: { category: 'authentication', operation: 'validate-api-key' }, urlPath: '/api/latest/authentication/validate-api-key/' },
+  {
+    name: "05-authentication-landing",
+    component: CategoryPage,
+    params: { category: "authentication" },
+    urlPath: "/api/latest/authentication/",
+  },
+  {
+    name: "05-authentication-validate-api-key",
+    component: OperationPage,
+    params: { category: "authentication", operation: "validate-api-key" },
+    urlPath: "/api/latest/authentication/validate-api-key/",
+  },
 
-  { name: '06-dashboards-landing', component: CategoryPage, params: { category: 'dashboards' }, urlPath: '/api/latest/dashboards/' },
-  { name: '06-dashboards-get-a-dashboard', component: OperationPage, params: { category: 'dashboards', operation: 'get-a-dashboard' }, urlPath: '/api/latest/dashboards/get-a-dashboard/' },
+  {
+    name: "06-dashboards-landing",
+    component: CategoryPage,
+    params: { category: "dashboards" },
+    urlPath: "/api/latest/dashboards/",
+  },
+  {
+    name: "06-dashboards-get-a-dashboard",
+    component: OperationPage,
+    params: { category: "dashboards", operation: "get-a-dashboard" },
+    urlPath: "/api/latest/dashboards/get-a-dashboard/",
+  },
 
-  { name: '07-incidents-landing', component: CategoryPage, params: { category: 'incidents' }, urlPath: '/api/latest/incidents/' },
-  { name: '07-incidents-create-an-incident', component: OperationPage, params: { category: 'incidents', operation: 'create-an-incident' }, urlPath: '/api/latest/incidents/create-an-incident/' },
+  {
+    name: "07-incidents-landing",
+    component: CategoryPage,
+    params: { category: "incidents" },
+    urlPath: "/api/latest/incidents/",
+  },
+  {
+    name: "07-incidents-create-an-incident",
+    component: OperationPage,
+    params: { category: "incidents", operation: "create-an-incident" },
+    urlPath: "/api/latest/incidents/create-an-incident/",
+  },
 
   // aws-integration: multi-version case — v1 and v2 share one page.
-  { name: '08-aws-integration-landing', component: CategoryPage, params: { category: 'aws-integration' }, urlPath: '/api/latest/aws-integration/' },
-  { name: '08-aws-integration-list', component: OperationPage, params: { category: 'aws-integration', operation: 'list-all-aws-integrations' }, urlPath: '/api/latest/aws-integration/list-all-aws-integrations/' },
+  {
+    name: "08-aws-integration-landing",
+    component: CategoryPage,
+    params: { category: "aws-integration" },
+    urlPath: "/api/latest/aws-integration/",
+  },
+  {
+    name: "08-aws-integration-list",
+    component: OperationPage,
+    params: {
+      category: "aws-integration",
+      operation: "list-all-aws-integrations",
+    },
+    urlPath: "/api/latest/aws-integration/list-all-aws-integrations/",
+  },
 
-  { name: '09-monitors-landing', component: CategoryPage, params: { category: 'monitors' }, urlPath: '/api/latest/monitors/' },
-  { name: '09-monitors-create-a-monitor', component: OperationPage, params: { category: 'monitors', operation: 'create-a-monitor' }, urlPath: '/api/latest/monitors/create-a-monitor/' },
+  {
+    name: "09-monitors-landing",
+    component: CategoryPage,
+    params: { category: "monitors" },
+    urlPath: "/api/latest/monitors/",
+  },
+  {
+    name: "09-monitors-create-a-monitor",
+    component: OperationPage,
+    params: { category: "monitors", operation: "create-a-monitor" },
+    urlPath: "/api/latest/monitors/create-a-monitor/",
+  },
 
   // dashboard-lists: category-level deprecation (with endpoints).
-  { name: '10-dashboard-lists-landing', component: CategoryPage, params: { category: 'dashboard-lists' }, urlPath: '/api/latest/dashboard-lists/' },
-  { name: '10-dashboard-lists-get-all-dashboard-lists', component: OperationPage, params: { category: 'dashboard-lists', operation: 'get-all-dashboard-lists' }, urlPath: '/api/latest/dashboard-lists/get-all-dashboard-lists/' },
+  {
+    name: "10-dashboard-lists-landing",
+    component: CategoryPage,
+    params: { category: "dashboard-lists" },
+    urlPath: "/api/latest/dashboard-lists/",
+  },
+  {
+    name: "10-dashboard-lists-get-all-dashboard-lists",
+    component: OperationPage,
+    params: {
+      category: "dashboard-lists",
+      operation: "get-all-dashboard-lists",
+    },
+    urlPath: "/api/latest/dashboard-lists/get-all-dashboard-lists/",
+  },
 
   // screenboards: empty deprecated category (no operations to sample).
-  { name: '11-screenboards-landing', component: CategoryPage, params: { category: 'screenboards' }, urlPath: '/api/latest/screenboards/' },
+  {
+    name: "11-screenboards-landing",
+    component: CategoryPage,
+    params: { category: "screenboards" },
+    urlPath: "/api/latest/screenboards/",
+  },
 
-  { name: '12-usage-metering-landing', component: CategoryPage, params: { category: 'usage-metering' }, urlPath: '/api/latest/usage-metering/' },
-  { name: '12-usage-metering-get-hourly-usage-for-lambda', component: OperationPage, params: { category: 'usage-metering', operation: 'get-hourly-usage-for-lambda' }, urlPath: '/api/latest/usage-metering/get-hourly-usage-for-lambda/' },
+  {
+    name: "12-usage-metering-landing",
+    component: CategoryPage,
+    params: { category: "usage-metering" },
+    urlPath: "/api/latest/usage-metering/",
+  },
+  {
+    name: "12-usage-metering-get-hourly-usage-for-lambda",
+    component: OperationPage,
+    params: {
+      category: "usage-metering",
+      operation: "get-hourly-usage-for-lambda",
+    },
+    urlPath: "/api/latest/usage-metering/get-hourly-usage-for-lambda/",
+  },
 ];
 
 /**
@@ -73,10 +157,10 @@ const AUDIT_PAGES: AuditPage[] = [
  */
 function extractMain(html: string): string {
   const start = html.search(/<main\b/);
-  const endTag = '</main>';
+  const endTag = "</main>";
   const end = html.lastIndexOf(endTag);
   if (start === -1 || end === -1 || end < start) {
-    throw new Error('Could not locate <main>...</main> in rendered page');
+    throw new Error("Could not locate <main>...</main> in rendered page");
   }
   return html.slice(start, end + endTag.length);
 }
@@ -95,18 +179,18 @@ function extractMain(html: string): string {
 async function normalize(html: string): Promise<string> {
   let out = html.replace(
     /\/_astro\/([A-Za-z0-9_-]+)\.[A-Za-z0-9_-]{8}\.(js|css|woff2?|svg|png|jpg|jpeg|webp|map)/g,
-    '/_astro/$1.HASH.$2',
+    "/_astro/$1.HASH.$2",
   );
 
   // Astro unconditionally injects absolute file paths as component-url attributes
   // on astro-island elements (for dev tooling / HMR). Strip them so snapshots
   // are stable across machines.
-  out = out.replace(/\s+component-url="[^"]*"/g, '');
+  out = out.replace(/\s+component-url="[^"]*"/g, "");
 
   // Each island also carries a counter over the module graph, so adding or
   // removing an import anywhere renumbers every island in every snapshot. The
   // uid above already identifies an island; this carries no page content.
-  out = out.replace(/\s+data-preact-island-id="[^"]*"/g, '');
+  out = out.replace(/\s+data-preact-island-id="[^"]*"/g, "");
 
   const tokenMap = new Map<string, string>();
   const canonicalize = (raw: string): string => {
@@ -134,35 +218,34 @@ async function normalize(html: string): Promise<string> {
   );
 
   return await prettierFormat(out, {
-    parser: 'html',
+    parser: "html",
     printWidth: 120,
   });
 }
 
-describe('API page HTML snapshots', () => {
+describe("API page HTML snapshots", () => {
   let container: Awaited<ReturnType<typeof AstroContainer.create>>;
 
   beforeAll(async () => {
     container = await AstroContainer.create();
-    container.addServerRenderer({ renderer: preactRenderer, name: '@astrojs/preact' });
+    container.addServerRenderer({
+      renderer: preactRenderer,
+      name: "@astrojs/preact",
+    });
   });
 
   for (const page of AUDIT_PAGES) {
     // Rendering complex pages and running Prettier can exceed the default 5s
     // timeout — especially for operation pages with large schema tables.
-    it(
-      `${page.name} (${page.urlPath}) matches snapshot`,
-      async () => {
-        const html = await container.renderToString(page.component, {
-          params: page.params,
-          request: new Request(`${BASE_URL}${page.urlPath}`),
-        });
-        const normalized = await normalize(extractMain(html));
-        await expect(normalized).toMatchFileSnapshot(
-          path.join(SNAPSHOT_DIR, `${page.name}.html`),
-        );
-      },
-      60_000,
-    );
+    it(`${page.name} (${page.urlPath}) matches snapshot`, async () => {
+      const html = await container.renderToString(page.component, {
+        params: page.params,
+        request: new Request(`${BASE_URL}${page.urlPath}`),
+      });
+      const normalized = await normalize(extractMain(html));
+      await expect(normalized).toMatchFileSnapshot(
+        path.join(SNAPSHOT_DIR, `${page.name}.html`),
+      );
+    }, 60_000);
   }
 });
