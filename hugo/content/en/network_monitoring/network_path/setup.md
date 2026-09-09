@@ -377,6 +377,74 @@ Agent `v7.73+` is required.
 [3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
 
 {{% /tab %}}
+{{% tab "macOS" %}}
+
+Agent `v7.75+` is required.
+
+1. Enable the `system-probe` traceroute module in `/opt/datadog-agent/etc/system-probe.yaml` by adding the following:
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+2. Enable `network_path` to monitor CNM connections by creating or editing the `/opt/datadog-agent/etc/datadog.yaml` file:
+
+   <div class="alert alert-info">If enabling Network Path on <a href="/infrastructure/end_user_device_monitoring/">End User Devices</a>, skip this step.</div>
+
+   ```yaml
+   network_path:
+     connections_monitoring:
+       enabled: true
+     # collector:
+       # workers: <NUMBER OF WORKERS> # default 4
+   ```
+
+   For full configuration details, reference the [example config][3], or use the following:
+
+   ```yaml
+   network_path:
+     connections_monitoring:
+       ## @param enabled - bool - required - default:false
+       ## Enable network path collection
+       #
+       enabled: true
+     collector:
+       ## @param workers - int - optional - default:4
+       ## Number of workers that can collect paths in parallel
+       ## Recommendation: leave at default
+       #
+       # workers: <NUMBER OF WORKERS> # default 4
+
+       #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
+       # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
+       # pathtest_interval: 10m
+
+       # @param pathtest_ttl - integer - optional - default: 35m
+       # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
+       # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
+       # The TTL is reset each time the connection is seen again.
+       # pathtest_ttl: 35m
+
+       ## @param filters - list - optional
+       ## Include or exclude specific domains or IP ranges from dynamic monitoring.
+       ## Filters are applied sequentially, with later filters taking precedence.
+       ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
+       #
+       # filters:
+       #   - match_domain: '*.example.com'
+       #     type: exclude
+       #   - match_ip: 10.0.0.0/8
+       #     type: exclude
+       #   - match_domain: 'api.datadoghq.com'
+       #     type: include
+   ```
+
+3. Restart the Agent after making these configuration changes to start seeing network paths.
+
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_darwin.yaml.example
+
+{{% /tab %}}
 {{% tab "Windows" %}}
 
 Agent `v7.73+` is required.
