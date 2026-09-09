@@ -18,7 +18,7 @@ description: Catalog proporciona una vista centralizada y dinámica de su ecosis
   seguridad y gestión de costos.
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-forms
-  tag: Blog
+  tag: blog
   text: Convierta los comentarios en acciones en toda su organización de ingeniería
     con Datadog Forms
 - link: /internal_developer_portal/use_cases
@@ -29,15 +29,13 @@ further_reading:
   text: Gestión de servicios con Catalog
 title: Catalog
 ---
-## Descripción general
- {#overview}
+## Descripción general {#overview}
 
 [Catalog][1] proporciona una vista centralizada y dinámica de su ecosistema de software y recursos de infraestructura, brindándole un único punto de entrada para comprender cada capa de su stack. Construido sobre telemetría en tiempo real y recopilación automatizada de metadatos, Catalog se integra con herramientas de observabilidad, seguridad y gestión de costos. Esto permite a los equipos de ingeniería, SRE, seguridad y plataforma mantener la visibilidad, optimizar las operaciones y promover la confiabilidad del servicio a escala.
 
 {{< img src="tracing/internal_developer_portal/catalog/tour.mp4" video=true alt="Navegación por el catálogo de IDP" style="width:100%;" >}}
 
-## Qué puede hacer en Catalog
- {#what-you-can-do-in-catalog}
+## Qué hacer en Catalog {#what-you-can-do-in-catalog}
 
 Catalog ofrece múltiples vistas para ayudarle a explorar y gestionar sus entidades. Para encontrar rápidamente lo que más necesita, fije las vistas a las que accede con frecuencia usando Saved Views.
 
@@ -52,8 +50,7 @@ Catalog ofrece múltiples vistas para ayudarle a explorar y gestionar sus entida
 
 Consulte la [documentación de casos de uso][4] para saber cómo los equipos utilizan el Catálogo de Datadog para centralizar el conocimiento, agilizar los procesos, mejorar la eficiencia operativa y más.
 
-## Qué aparece en Catalog
- {#what-appears-in-catalog}
+## Qué aparece en Catalog {#what-appears-in-catalog}
 
 Catalog includes an entity when:
 - Datadog [lo detecta a partir de la telemetría][5],
@@ -69,8 +66,7 @@ Puede visualizar los recursos de infraestructura cuando [habilita la recopilaci�
 - Los resúmenes de tramos y las estadísticas de servicios y recursos se conservan hasta por 30 días. Para un análisis más profundo de las métricas de traza de APM, utilice Metric Explorer. [Obtenga más información sobre la retención de datos para APM][2].
 
 {{< site-region region="gov,gov2" >}}
-### Tipos de servicio
- {#service-types}
+### Tipos de servicio {#service-types}
 
 Cada servicio monitoreado está asociado con un tipo. Datadog determina automáticamente el tipo según el atributo `span.type` adjunto a los datos de los tramos entrantes. El tipo especifica el nombre de la aplicación o marco con el que se está integrando el Datadog Agent.
 
@@ -88,8 +84,7 @@ Algunas integraciones se asignan a ciertos tipos. Por ejemplo, Postgres, MySQL y
 
 {{< /site-region >}}
 
-## Consultar datos de Catalog en Dashboards
- {#query-catalog-data-in-dashboards}
+## Consultar datos de Catalog en dashboards {#query-catalog-data-in-dashboards}
 
 Utilice la fuente de datos **Developer Portal** para llevar los datos de Catalog directamente a [Dashboards][10]. Puede consultar entidades a través de servicios, colas, aplicaciones frontend, API y sistemas, y agruparlas o filtrarlas por metadatos como propiedad, nivel, ciclo de vida y versión de definición. 
 
@@ -98,27 +93,17 @@ Para utilizar la fuente de datos, agregue un widget a su tablero, seleccione **D
 
 {{< img src="tracing/internal_developer_portal/catalog/catalog_datasource.png" alt="Consulta de datos de Catalog en Dashboards" style="width:100%;" >}}
 
-## Lecturas adicionales
- {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
-
 [2]: /es/data_security/data_retention_periods/
-
 [3]: /es/internal_developer_portal/catalog/entity_model/native_entities/
-
 [4]: /es/internal_developer_portal/use_cases
-
 [5]: /es/internal_developer_portal/catalog/set_up/discover_entities
-
 [6]: /es/internal_developer_portal/catalog/set_up/create_entities
-
 [7]: /es/internal_developer_portal/catalog/set_up/import_entities
-
 [8]: /es/internal_developer_portal/catalog/set_up/ownership
-
 [9]: /es/infrastructure/
-
 [10]: /es/dashboards/
