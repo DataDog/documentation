@@ -37,7 +37,10 @@ Upgrade to  **v7.82+**  of the Datadog Agent and Cluster Agent and install the `
 
 ## Setup
 
-The `DatadogInstrumentation` controller runs in the Cluster Agent and is disabled by default. Enable it with the Datadog Operator or Helm.
+To use `DatadogInstrumentation` (DDI), a controller in your Agent must be enabled to track and reconcile each CR.
+
+<div class="alert alert-info">Skip setup if you're using <code>v1.30+</code> of the Datadog Operator or <code>v3.241.0+</code> of the Datadog Helm Chart since the
+controller is enabled by default starting from these versions.</div>
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -124,12 +127,15 @@ helm upgrade --install datadog-crds datadog/datadog-crds
 
 You can target the following Kubernetes resources:
 
-- Deployment
-- DaemonSet
-- StatefulSet
-- CronJob
-- Job
-- Service (see the [Service targets](#service-targets) section)
+| Target | Group/version/resource | Minimum Agent version | Notes |
+|---|---|---|---|
+| Deployment | `apps/v1/deployments` | 7.82.0 | |
+| DaemonSet | `apps/v1/daemonsets` | 7.82.0 | |
+| StatefulSet | `apps/v1/statefulsets` | 7.82.0 | |
+| CronJob | `batch/v1/cronjobs` | 7.82.0 | |
+| Job | `batch/v1/jobs` | 7.82.0 | |
+| Service | `core/v1/services` | 7.82.0 | Supports checks only. See [Target services](#target-services). |
+| Rollout | `argoproj.io/v1alpha1/rollouts` | 7.83.0 | Requires [Argo Rollouts][7]. |
 
 This example configures a [Redis integration][4] for a `StatefulSet` named `redis`, mirroring this [annotation-based example][2].
 
@@ -187,7 +193,7 @@ Each entry in `checks` accepts the following fields:
 
 Each entry in `logs` accepts the same log collection options as Autodiscovery log annotations, such as `tags`, `type`, and `path`. Each entry requires a `containerName` matching a container in the pod.
 
-### Target Services
+### Target services
 
 Targeting a `Service` configures an [endpoint check][6] similar to an annotation on a Kubernetes service.
 
@@ -274,3 +280,4 @@ Auto-discovery IDs:
 [4]: /integrations/redisdb/
 [5]: /containers/guide/template_variables/
 [6]: /containers/cluster_agent/endpointschecks/
+[7]: https://argoproj.github.io/rollouts/

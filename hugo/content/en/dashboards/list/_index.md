@@ -43,7 +43,7 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 ## Teams
 
-Use the {{< ui >}}My Teams{{< /ui >}} toggle to switch between viewing all dashboards and only dashboards owned by your [teams][2].
+Use the [team filter][3] to show only the dashboards owned by the teams you select. To go back to viewing all dashboards, clear your selection.
 
 To edit the teams associated with one or more dashboards, take the following steps:
 1. Select the checkbox next to each dashboard you wish to modify.
@@ -152,3 +152,4 @@ Use `<`, `>`, `<=`, and `>=` with numeric fields.
 
 [1]: https://app.datadoghq.com/dashboard/lists
 [2]: /account_management/teams/
+[3]: /account_management/teams/#team-filter

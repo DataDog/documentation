@@ -86,6 +86,7 @@ For the best experience, download the Datadog <a href="https://docs.datadoghq.co
 | Monaco | +377 |
 | Montenegro | +382 |
 | Morocco | +212 |
+| Nepal | +977 |
 | Netherlands | +31 |
 | New Zealand | +64 |
 | Nigeria*, ** | +234 |

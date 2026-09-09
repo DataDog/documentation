@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/audit-trail-best-practices/"
   tag: "Blog"
   text: "Monitor critical Datadog assets and configurations with Audit Trail"
+- link: "/account_management/delete_data/"
+  tag: "Documentation"
+  text: "Delete data from Datadog"
 ---
 
 ## Overview
