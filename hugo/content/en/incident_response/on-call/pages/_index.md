@@ -127,6 +127,8 @@ To snooze a Page:
 
 1. Click **Snooze**.
 
+**Note**: Snoozing a Page is also available in the Datadog mobile app.
+
 The Page status remains `Triggered` while snoozed. When the snooze period ends, the escalation policy resumes and notifies the current escalation level again.
 
 ### Reassign a Page
