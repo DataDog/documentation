@@ -91,8 +91,7 @@ const regionKeysJson = JSON.stringify(allowedRegions.map((r) => r.key));
 // This has to be static CSS rather than a script that stamps matching
 // elements: a script in `<head>` runs before the body is parsed and would
 // find no elements, and one at the end of `<body>` would leave every region
-// element hidden until it ran — a visible flash on the content readers came
-// for. Both were measured before settling on this.
+// element hidden until it ran.
 const activeRegionSelectors = allowedRegions
   .map((r) => `html[data-active-region='${r.key}'] [data-region='${r.key}']`)
   .join(',\n');
