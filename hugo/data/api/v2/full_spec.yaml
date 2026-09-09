@@ -219881,6 +219881,11 @@ paths:
           name: filter[domain_prefix]
           schema:
             type: string
+        - description: Filter status pages by name with case-insensitive substring matching.
+          in: query
+          name: filter[name]
+          schema:
+            type: string
         - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user."
           in: query
           name: include
