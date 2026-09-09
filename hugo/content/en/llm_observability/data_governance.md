@@ -43,7 +43,7 @@ For detailed implementation examples and usage patterns, see the [Span Processin
 
 Agent Observability integrates with [Sensitive Data Scanner][13], which helps prevent data leakage by identifying and redacting any sensitive information (such as personal data, financial details, or proprietary information) that may be present in any step of your AI application.
 
-By proactively scanning for sensitive data, Agent Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
+By proactively scanning for sensitive data, Agent Observability helps ensure that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integrity of user interactions with your AI applications.
 
 ## Data retention
 
