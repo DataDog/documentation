@@ -307,6 +307,7 @@ The `Flags.enable()` API accepts optional configuration with the options listed 
 {{< code-block lang="kotlin" >}}
 val config = FlagsConfiguration.Builder()
     .initializationTimeout(2_000L)
+    // configure additional options here
     .build()
 
 Flags.enable(config)

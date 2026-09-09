@@ -233,9 +233,11 @@ The web provider also supports these optional settings:
 | `overwriteRequestHeaders` | `false` | Replace default request headers with `customHeaders`. |
 | `flagConfigurationFetch` | `globalThis.fetch` | Provide a Fetch-compatible implementation for flag configuration requests. |
 
-### Bound flag configuration requests
+### Set a timeout and retries for flag configuration requests
 
-The browser provider does not add a timeout or retries by default. In npm installations of `@datadog/openfeature-browser` 1.4.0 and later, use `withTimeout` and `withRetry` to bound each request attempt and retry transient failures. These helpers are not available in the CDN bundle.
+The browser provider does not add a timeout or retries by default. In npm installations of `@datadog/openfeature-browser` 1.4.0 and later, use `withTimeout` and `withRetry` to limit each request attempt and retry transient failures. These helpers are not available in the CDN bundle.
+
+<div class="alert alert-info">The `flagConfigurationFetch` option applies only to flag configuration requests. It does not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
 
 {{< code-block lang="javascript" >}}
 import { DatadogProvider, withRetry, withTimeout } from '@datadog/openfeature-browser';
@@ -253,8 +255,6 @@ const provider = new DatadogProvider({
 : Sets the number of retries after the initial request. Set the retry count to `0` to disable retries. Accepted values are integers from `0` to `10`. Retries cover Fetch `TypeError` failures, timeout errors, HTTP 408, and HTTP 5xx responses. Caller cancellation and HTTP 429 responses are not retried. Retries use randomized exponential backoff capped at 30 seconds. For HTTP 503, a valid `Retry-After` value up to 30 seconds is a minimum delay before the backoff. A response that requests a longer delay is not retried. Browsers report network, CORS, and CSP failures as `TypeError`, so the wrapper cannot separate these causes.
 
 In the example, `withTimeout` is inside `withRetry`. Therefore, each attempt has its own five-second timeout, and `1` allows one retry after the initial request.
-
-<div class="alert alert-info">The `flagConfigurationFetch` option applies only to flag configuration requests. It does not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
 
 ## Override flags in your browser
 

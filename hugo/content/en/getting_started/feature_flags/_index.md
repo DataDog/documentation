@@ -89,8 +89,6 @@ Choose the SDK that matches where the flag is evaluated and initialize the Datad
 {{< tabs >}}
 {{% tab "JavaScript browser" %}}
 
-<div class="alert alert-warning">The browser provider does not add a flag configuration request timeout or retries by default. npm installations of <code>@datadog/openfeature-browser</code> 1.4.0 and later can use <code>withTimeout</code> and <code>withRetry</code> to bound requests. See the <a href="/feature_flags/client/javascript/#bound-flag-configuration-requests">JavaScript guide</a> for behavior and limits.</div>
-
 Install `@datadog/openfeature-browser`, `@openfeature/web-sdk`, and `@openfeature/core` as dependencies in your project:
 
 {{< code-block lang="bash" >}}
@@ -114,7 +112,9 @@ const provider = new DatadogProvider({
     env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
     service: '<SERVICE_NAME>',
     version: '1.0.0',
-    // Bound each configuration request to five seconds.
+    // The provider does not add a request timeout by default.
+    // Limit each configuration request to five seconds (requires version 1.4.0+).
+    // See /feature_flags/client/javascript/#set-a-timeout-and-retries-for-flag-configuration-requests.
     flagConfigurationFetch: withTimeout(globalThis.fetch, 5_000)
 });
 
