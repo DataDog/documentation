@@ -104974,9 +104974,21 @@ components:
       additionalProperties: {}
       description: "The object containing all signal attributes and their\nassociated values."
       properties:
+        attributes:
+          additionalProperties: {}
+          description: A JSON object of attributes in the security signal, returned when listing or searching signals.
+          example:
+            workflow:
+              first_seen: "2020-06-23T14:46:01.000Z"
+              last_seen: "2020-06-23T14:46:49.000Z"
+              rule:
+                id: 0f5-e0c-805
+                name: "Brute Force Attack Grouped By User"
+                version: 12
+          type: object
         custom:
           additionalProperties: {}
-          description: A JSON object of attributes in the security signal.
+          description: A JSON object of attributes in the security signal, returned when retrieving a single signal.
           example:
             workflow:
               first_seen: "2020-06-23T14:46:01.000Z"
@@ -105809,8 +105821,21 @@ components:
     SecurityMonitoringSignalsListResponseMeta:
       description: Meta attributes.
       properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 132
+          format: int64
+          type: integer
         page:
           $ref: '#/components/schemas/SecurityMonitoringSignalsListResponseMetaPage'
+        request_id:
+          description: The unique identifier of the request.
+          example: example-request-id
+          type: string
+        status:
+          description: The status of the response.
+          example: done
+          type: string
       type: object
     SecurityMonitoringSignalsListResponseMetaPage:
       description: Paging attributes.
@@ -212791,6 +212816,12 @@ paths:
                   value:
                     data:
                       - attributes:
+                          attributes:
+                            workflow:
+                              rule:
+                                id: 0f5-e0c-805
+                                name: "Brute Force Attack Grouped By User"
+                                version: 12
                           tags:
                             - "source:cloudtrail"
                         id: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
@@ -212798,8 +212829,11 @@ paths:
                     links:
                       next: ""
                     meta:
+                      elapsed: 132
                       page:
                         after: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+                      request_id: example-request-id
+                      status: done
               schema:
                 $ref: '#/components/schemas/SecurityMonitoringSignalsListResponse'
           description: OK

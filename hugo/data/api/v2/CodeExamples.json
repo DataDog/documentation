@@ -2332,6 +2332,11 @@
   "SearchSecurityMonitoringSignals": [
     {
       "group": "security_monitoring",
+      "suffix": "",
+      "description": "Get a list of security signals returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_1309350146",
       "description": "Get a list of security signals returns \"OK\" response with pagination"
     }
