@@ -1,5 +1,9 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
+// Imported from `zod` rather than re-exported from `astro:content`, which
+// deprecated its `z` in Astro 7. Same zod instance either way — it is already a
+// direct dependency here.
+import { z } from 'zod';
 
 // A single filter entry from a cdoc's `content_filters` frontmatter. Mirrors
 // the shape cdocs-data validates (RawFilterConfig), trimmed to the fields the

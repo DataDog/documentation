@@ -66,6 +66,7 @@ export default function SearchBar({
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState<Selection>({ kind: "none" });
+  const [hydrated, setHydrated] = useState(false);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -102,6 +103,15 @@ export default function SearchBar({
   useEffect(() => {
     setSelection({ kind: "none" });
   }, [hits]);
+
+  // The input is controlled, so anything typed into the server-rendered markup
+  // before this island mounts is discarded on the first render. Advertising
+  // hydration lets callers outside the component wait for the input to actually
+  // hold what they put in it. Same `data-hydrated` convention the site's other
+  // islands use.
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   useGlobalSearchShortcuts({
     inputRef,
@@ -175,7 +185,11 @@ export default function SearchBar({
   };
 
   return (
-    <div ref={wrapperRef} class={cl("search-bar")}>
+    <div
+      ref={wrapperRef}
+      class={cl("search-bar")}
+      data-hydrated={hydrated ? "true" : undefined}
+    >
       <form
         ref={formRef}
         class={cl("search-bar__form")}

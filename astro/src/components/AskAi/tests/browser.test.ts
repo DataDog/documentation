@@ -238,11 +238,21 @@ test.describe("Ask AI", () => {
     // handle. This is the only place that idempotency is observable.
     await expect(page.locator(".search-bar")).toHaveCount(2);
 
-    const input = page.locator(".api-side-nav__search .search-bar__input");
+    // Waited on rather than assumed: the input is controlled, so a value filled
+    // before the island hydrates is thrown away when Preact renders its own
+    // empty `value`, leaving an empty query and no Ask AI row to click. That
+    // race is invisible in the failure, which reports only a missing row.
+    const searchBar = page.locator(
+      '.api-side-nav__search .search-bar[data-hydrated="true"]',
+    );
+    await expect(searchBar).toBeVisible();
+
+    const input = searchBar.locator(".search-bar__input");
     await input.click();
     // Under the widget's auto-submit threshold, so the query is prefilled and
     // never sent — this test makes no request to the AI backend.
     await input.fill("dashboard");
+    await expect(input).toHaveValue("dashboard");
 
     const row = page.locator(".search-bar__ai-suggestion");
     await expect(row).toContainText("Ask AI about");

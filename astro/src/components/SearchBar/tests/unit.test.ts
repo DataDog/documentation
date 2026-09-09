@@ -81,6 +81,20 @@ describe("SearchBar — empty state", () => {
   });
 });
 
+describe("SearchBar — hydration signal", () => {
+  // The input is controlled, so a value typed before hydration is discarded
+  // when Preact mounts and renders its own empty `value`. Anything driving this
+  // component from outside — a test, or a script focusing it — needs a way to
+  // know the island is live, so the root advertises it the way the rest of the
+  // site's islands do.
+  it("marks the root hydrated on mount", () => {
+    mount();
+    expect(
+      document.querySelector(".search-bar")!.getAttribute("data-hydrated"),
+    ).toBe("true");
+  });
+});
+
 describe("SearchBar — query renders results", () => {
   it("opens the popup with grouped categories when query returns hits", async () => {
     const user = userEvent.setup();
