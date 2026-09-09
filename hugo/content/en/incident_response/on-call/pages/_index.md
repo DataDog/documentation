@@ -116,7 +116,7 @@ The Page status changes to `Acknowledged`.
 
 ### Snooze a Page
 
-Snoozing pauses the escalation policy for a Page you've seen but aren't ready to act on, without claiming ownership the way acknowledging does. Select how long to pause the escalation for, and if no one acknowledges or resolves the Page before that window ends, the escalation policy resumes and notifies the on-call responder again.
+Snoozing pauses the escalation policy for a Page you've seen but aren't ready to act on, without claiming ownership the way acknowledging does. Only the responder currently notified for the Page can snooze it. Select how long to pause the escalation for, and if no one acknowledges or resolves the Page before that window ends, the escalation policy resumes and notifies the on-call responder again.
 
 To snooze a Page:
 
