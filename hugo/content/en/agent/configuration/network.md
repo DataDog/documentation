@@ -89,10 +89,8 @@ API test results for the Synthetics Worker > v0.1.6: `intake.synthetics.`{{< reg
 Browser test results for the Synthetics Worker > v0.2.0: `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key="dd_site" code="true" >}}
 
-[Remote Configuration][101]
+[Remote Configuration][34]
 : `config.`{{< region-param key="dd_site" code="true" >}}
-
-[101]: /remote_configuration
 
 {{% site-region region="us,eu,us3,us5,ap1,ap2,uk1" %}}
 
@@ -344,3 +342,4 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 [31]: /data_security/logs/#hipaa-enabled-customers
 [32]: /logs/log_collection/#logging-endpoints
 [33]: /network_monitoring/network_path/setup/#source-public-ip-resolution
+[34]: /remote_configuration
