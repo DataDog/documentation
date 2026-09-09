@@ -15,7 +15,7 @@ further_reading:
 
 ## Optimize the planning step
 
-Test Parallelization adds a planning step that discovers tests before execution. For example, RSpec projects use dry-run discovery, pytest projects use collection, and Jest projects use `--listTests`. Keep this step lightweight so the time saved by parallel execution is not offset by planning overhead.
+Test Parallelization adds a planning step that discovers tests before execution. For example, RSpec projects use dry-run discovery, pytest projects use collection, and JavaScript projects use framework-native file discovery. Keep this step lightweight so the time saved by parallel execution is not offset by planning overhead.
 
 ### Preinstall system dependencies with Docker
 
@@ -126,7 +126,15 @@ For test discovery, `ddtest` reads `testpaths` and `python_files` from `pytest.i
 
 During discovery, `DD_TEST_OPTIMIZATION_DISCOVERY_ENABLED` is set to `1`. Use this variable to skip expensive setup code during planning, similar to [skipping database setup during discovery](#skip-database-setup-during-discovery).
 
-## Configure Jest
+## Configure JavaScript frameworks
+
+For JavaScript, `ddtest` plans and distributes test files, not individual tests. It uses the local framework executable under `node_modules/.bin` when available and otherwise uses `npx`.
+
+Use `--command` when your project invokes the framework through another package manager, a wrapper, a profile, or a non-default configuration. The command must invoke the selected framework directly. Do not include a `--` separator. For Jest, Vitest, Mocha, and Cypress, omit test files because `ddtest` provides the files assigned to each worker. Cucumber.js paths and Playwright positional filters can restrict discovery, but `ddtest` replaces them during execution.
+
+`ddtest` prepends `-r dd-trace/ci/init` to `NODE_OPTIONS` for worker processes unless it is already present. Ensure `dd-trace` is resolvable from the project where `ddtest` runs, and complete the [Test Optimization setup for your framework][1].
+
+### Jest
 
 `ddtest` runs Jest through the local `node_modules/.bin/jest` executable when it exists, or through `npx jest` otherwise. Use `--command` when your project runs Jest through a package manager or wrapper:
 
@@ -134,11 +142,57 @@ During discovery, `DD_TEST_OPTIMIZATION_DISCOVERY_ENABLED` is set to `1`. Use th
 bin/ddtest run --platform javascript --framework jest --command "pnpm jest --runInBand"
 {{< /code-block >}}
 
-Do not include test files or a `--` separator in the command. `ddtest` appends the file list and Jest flags itself.
-
-`ddtest` prepends `-r dd-trace/ci/init` to `NODE_OPTIONS` for worker processes unless it is already present. Ensure `dd-trace` is resolvable from the project where `ddtest` runs.
-
 `ddtest` discovers and splits test files and suites, not individual Jest tests.
+
+### Vitest
+
+Vitest 1.6 or later is required. Use `--command` when your project uses a package manager or Vitest projects:
+
+{{< code-block lang="bash" >}}
+bin/ddtest run --platform javascript --framework vitest --command "pnpm exec vitest run --project unit*"
+{{< /code-block >}}
+
+The command must invoke Vitest directly. During planning, `ddtest` changes the `run` subcommand to `list --filesOnly --json` on Vitest 2.0 or later. On Vitest 1.6, `ddtest` uses Vitest's config-aware discovery API. During execution, it appends the selected test files.
+
+### Mocha
+
+Mocha 8 or later is required. Use a command that invokes Mocha directly when passing framework options:
+
+{{< code-block lang="bash" >}}
+bin/ddtest run --platform javascript --framework mocha --command "pnpm exec mocha --parallel"
+{{< /code-block >}}
+
+`ddtest` reads Mocha's effective configuration without loading test modules during discovery. During execution, it replaces configured `spec` inputs with the files assigned to each worker and preserves shared `--file` setup.
+
+### Cypress
+
+Cypress 12 or later is required. Use a command that invokes Cypress directly when selecting component testing, an alternate project root, or a custom configuration file:
+
+{{< code-block lang="bash" >}}
+bin/ddtest run --platform javascript --framework cypress --command "pnpm exec cypress run --project apps/web --component"
+{{< /code-block >}}
+
+`ddtest` asks Cypress to resolve its effective configuration during planning and replaces any command-level `--spec` value with the files assigned to each worker during execution. Cypress calls the project's `setupNodeEvents` function while resolving configuration, so side effects in that function also occur during planning. Cypress requires [manual Test Optimization instrumentation][1].
+
+### Playwright
+
+Playwright 1.18 or later is required. If you use `dd-trace` v6, Playwright 1.38 or later is required. Use a command that invokes `playwright test` directly when selecting a configuration, projects, or other Playwright options:
+
+{{< code-block lang="bash" >}}
+bin/ddtest run --platform javascript --framework playwright --command "pnpm exec playwright test --config apps/web/playwright.config.ts --project chromium"
+{{< /code-block >}}
+
+Do not include Playwright's `--shard` option. `ddtest` asks Playwright to list tests with its effective configuration, deduplicates files shared by multiple projects, and passes each worker only its assigned files. Configuration, project, grep, and positional filters are preserved during discovery. Playwright loads test modules and their top-level code while listing tests, but does not run test bodies. During execution, `ddtest` preserves configuration, project, grep, reporter, retry, and worker options, replaces positional filters, and removes interactive UI options because workers run non-interactively. Playwright remains responsible for running dependency and teardown projects associated with the selected projects.
+
+### Cucumber.js
+
+`ddtest` is tested with `@cucumber/cucumber` versions 7 through 13. Use a command that invokes `cucumber-js` directly when selecting profiles or passing Cucumber filters:
+
+{{< code-block lang="bash" >}}
+bin/ddtest run --platform javascript --framework cucumber --command "pnpm exec cucumber-js --profile ci --tags=@smoke"
+{{< /code-block >}}
+
+During planning, `ddtest` performs a serial dry run and uses Cucumber Messages to discover only feature files that contain scenarios selected by the effective paths, profile, tags, and name filters. Cucumber loads support code, but does not execute step or hook bodies. During execution, `ddtest` replaces positional feature paths and rerun files in `--command` with the files assigned to each worker while preserving Cucumber options. Prefer tag or name filters over scenario line selectors because `ddtest` plans at feature-file granularity.
 
 ## Configure Minitest in non-Rails projects
 
@@ -153,3 +207,5 @@ end
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tests/setup/javascript/

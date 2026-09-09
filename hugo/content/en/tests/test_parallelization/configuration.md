@@ -27,13 +27,13 @@ Most `ddtest` settings can be passed as a CLI flag or as an environment variable
 : Test framework.<br/>
 **CLI flag:** `--framework`<br/>
 **Default:** `rspec`<br/>
-**Supported values:** `rspec`, `minitest`, `pytest`, `jest`
+**Supported values:** `rspec`, `minitest`, `pytest`, `cucumber`, `cypress`, `jest`, `mocha`, `playwright`, `vitest`
 
 `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`
-: Overrides the default test command. `ddtest` appends selected test files and framework-specific flags to the command. Supported for Ruby, JavaScript, and Python. Python support requires ddtest 1.7.0 or later. For ddtest versions prior to 1.7.0 with pytest, the command cannot be changed. Pass extra flags with `PYTEST_ADDOPTS`. For more information, see [Custom test commands](#custom-test-commands).<br/>
+: Overrides the default test command. `ddtest` appends selected test files and framework-specific flags to the command. Supported for all frameworks. Python support requires ddtest 1.7.0 or later. For ddtest versions prior to 1.7.0 with pytest, the command cannot be changed. Pass extra flags with `PYTEST_ADDOPTS`. For more information, see [Custom test commands](#custom-test-commands).<br/>
 **CLI flag:** `--command`<br/>
 **Default:** Empty<br/>
-**Example:** `bundle exec rspec --profile`, `pnpm jest --runInBand`, `pytest`
+**Example:** `bundle exec rspec --profile`, `pnpm exec mocha --parallel`, `pytest`
 
 `DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM`
 : Minimum CI node or worker count `ddtest` considers when planning.<br/>
@@ -78,7 +78,7 @@ Most `ddtest` settings can be passed as a CLI flag or as an environment variable
 **Example:** `DB_NAME=testdb{{nodeIndex}}_{{workerIndex}};FIXTURE=fixture{{nodeIndex}}`
 
 `DD_TEST_OPTIMIZATION_RUNNER_TESTS_LOCATION`
-: Glob pattern used to discover test files. Defaults to `spec/**/*_spec.rb` for RSpec, `test/**/*_test.rb` for Minitest, pytest configuration (`testpaths` and `python_files`) or `**/{test_*,*_test}.py` for pytest, and Jest configuration or Jests's default test matching.<br/>
+: Glob pattern used to discover test files. Defaults to `spec/**/*_spec.rb` for RSpec, `test/**/*_test.rb` for Minitest, pytest configuration (`testpaths` and `python_files`) or `**/{test_*,*_test}.py` for pytest, and the effective configuration or default test matching for each JavaScript framework.<br/>
 **CLI flag:** `--tests-location`<br/>
 **Alias:** `KNAPSACK_PRO_TEST_FILE_PATTERN`<br/>
 **Default:** Framework default<br/>
@@ -148,19 +148,25 @@ If no split can meet the target, `ddtest` logs a warning. It selects the split w
 
 ## Custom test commands
 
-For Ruby frameworks and Jest, use `--command` to override the default test command:
+Use `--command` to override the default test command for any supported framework:
 
 {{< code-block lang="bash" >}}
 bin/ddtest run --platform ruby --framework rspec --command "bin/integration-tests"
 {{< /code-block >}}
 
-When using `--command`, do not include test files in the command. `ddtest` appends test files and framework-specific flags to the command.
+For Ruby, Python, Jest, Vitest, Mocha, and Cypress, do not include test files in the command. `ddtest` provides the files assigned to each worker. Cucumber.js paths and Playwright positional filters can restrict discovery, but `ddtest` replaces them with the files assigned to the worker during execution.
 
 Do not include the `--` separator in `--command`. If the command contains `--`, `ddtest` emits a warning and removes the separator and everything after it.
 
 For pytest, `ddtest` runs `python -m pytest <files>` by default. For versions 1.7.0 and later, set `--command` to override the base command. For example, `--command pytest` runs the `pytest` console script instead of `python -m pytest`. `ddtest` runs `<command> <files>` and does not add `-m pytest`. To pass extra pytest flags without changing the base command, use `PYTEST_ADDOPTS`. `ddtest` appends `--ddtrace` to `PYTEST_ADDOPTS` automatically so the `ddtrace` pytest plugin loads without changing your pytest config.
 
-For Jest, `ddtest` prepends `-r dd-trace/ci/init` to `NODE_OPTIONS` for worker processes unless it is already present, so the `dd-trace` package must be installed in the project where `ddtest` runs.
+For JavaScript, the custom command must invoke the selected framework directly. Package manager and executable wrappers are supported. For example:
+
+{{< code-block lang="bash" >}}
+bin/ddtest run --platform javascript --framework mocha --command "pnpm exec mocha --parallel"
+{{< /code-block >}}
+
+`ddtest` preserves supported framework options and replaces inputs that conflict with its assigned test files. See [Test Parallelization best practices](/tests/test_parallelization/best_practices/#configure-javascript-frameworks) for framework-specific examples and constraints.
 
 ## Pytest test discovery
 
@@ -172,19 +178,22 @@ For pytest, `ddtest` discovers test files using this priority:
 
 Pytest does not have an equivalent to RSpec's pattern flag, so `ddtest` resolves the pattern to explicit file paths before invoking the configured pytest command. The default is `python -m pytest`. For versions 1.7.0 and later, `--command` overrides it.
 
-## Jest test discovery and instrumentation
+## JavaScript test discovery and instrumentation
 
-For Jest, `ddtest` discovers test files with Jest's own `--listTests` command. It uses this priority:
+JavaScript support uses suite-level Test Impact Analysis. `ddtest` plans, skips, and distributes test files rather than individual tests. It uses each framework's native configuration during discovery:
 
-1. `--command` when set, with `--listTests` appended.
-2. The local executable `node_modules/.bin/jest` when present.
-3. `npx jest`.
+| Framework | Discovery behavior | Execution behavior |
+| --------- | ------------------ | ------------------ |
+| Cucumber.js | Performs a serial dry run and uses Cucumber Messages to identify feature files selected by paths, profiles, tags, and name filters. | Replaces positional paths and rerun files with the feature files assigned to the worker. |
+| Cypress | Resolves the effective Cypress project and configuration, including the testing type and spec pattern. | Replaces `--spec` with the spec files assigned to the worker. |
+| Jest | Runs Jest with `--listTests`. | Appends `--runTestsByPath` and the files assigned to the worker. |
+| Mocha | Loads Mocha's effective configuration and resolves its `spec` inputs. | Replaces configured `spec` inputs with the files assigned to the worker. |
+| Playwright | Runs `playwright test --list` with a `ddtest` reporter, preserves selection options and positional filters, and deduplicates files included in multiple projects. | Replaces positional filters with exact file filters for the files assigned to the worker and removes `--shard` and interactive UI options. |
+| Vitest | Uses native file listing for Vitest 2.0 or later and a config-aware fallback for Vitest 1.6. | Runs Vitest with the files assigned to the worker. |
 
-Jest uses its own configuration and default test matching for `--listTests`. When `--tests-location` is set, `ddtest` filters the file list returned by Jest after discovery. It does not pass `--tests-location` as Jest's `--testMatch`.
+By default, `ddtest` uses the framework executable under `node_modules/.bin` when it is available and otherwise runs the framework through `npx`. Use `--command` for package managers, wrappers, profiles, projects, and other framework options. `--tests-location` and `--tests-exclude-pattern` further limit the discovered files.
 
-Jest support uses suite-level Test Impact Analysis. `ddtest` works with test files and suites, not individual Jest tests, and executes selected files with `--runTestsByPath`.
-
-During execution, `ddtest` prepends `-r dd-trace/ci/init` to `NODE_OPTIONS` for worker processes unless `NODE_OPTIONS` already loads `dd-trace/ci/init`.
+During execution, `ddtest` prepends `-r dd-trace/ci/init` to `NODE_OPTIONS` unless it is already present. For Vitest, it also imports `dd-trace/register.js`. During discovery, `ddtest` removes these preloads so that listing tests does not produce test results.
 
 ## Worker environment variables
 
