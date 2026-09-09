@@ -5780,7 +5780,7 @@ menu:
       identifier: llm_obs_monitoring_automation_rules
       weight: 602
     - name: Data Governance
-      url: llm_observability/data_privacy_security_and_retention
+      url: llm_observability/data_governance
       parent: llm_obs
       identifier: llm_obs_data_security_and_rbac
       weight: 7
