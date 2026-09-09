@@ -13,11 +13,7 @@ Organization admins can set monthly caps on AI Credit usage at the organization 
 
 ## Permissions
 
-To view and set AI Credit limits, a user needs all of the following [permissions][6]:
-
-- `user_access_manage`
-- `billing_edit`
-- `org_management`
+To view and set AI Credit limits, a user needs the [`billing_edit` permission][6].
 
 ## Where to set limits
 
