@@ -70,6 +70,7 @@ Follow the instructions for the detected language:
 | Java | [Java Application Agentic Instrumentation](/llm_observability/instrument/agentic/java.md) |
 | OpenTelemetry | [OpenTelemetry Instrumentation](/llm_observability/instrument/otel_instrumentation.md) |
 
+{{< agent-only >}}
 ## Share agent context for check recommendations
 
 Complete this step only when the initial Datadog onboarding prompt includes an agent-context upload URL, upload token, and schema version.
@@ -156,6 +157,7 @@ Follow these security requirements:
 - Use normalized repository-relative POSIX source paths and the smallest useful line ranges. Do not use absolute paths, backslashes, colons, non-normalized separators, or `.` or `..` path segments. Source references identify the evidence; they must not copy its contents.
 - If the upload fails, continue instrumentation and tell the user that Datadog did not receive the optional context. Do not retry with broader data.
 
+{{< /agent-only >}}
 ## Instrument prompts and offer Prompt Management
 
 Prompt Tracking is part of the default Agent Observability instrumentation. Identify the prompt-construction boundary for each selected LLM call and preserve the prompt template separately from its dynamic variables.
