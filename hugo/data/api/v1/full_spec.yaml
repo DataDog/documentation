@@ -2722,6 +2722,122 @@ components:
             $ref: '#/components/schemas/EmbeddableGraph'
           type: array
       type: object
+    EmbeddedAppWidgetDefinition:
+      additionalProperties: false
+      anyOf:
+        - required:
+            - app_id
+        - required:
+            - template_id
+      description: The embedded app widget displays an App Builder app on a dashboard. Exactly one of `app_id` or `template_id` must be provided; they cannot be provided together.
+      properties:
+        app_id:
+          description: UUID of the App Builder app to embed.
+          example: "7e7745f9-4343-4927-b038-80934a355915"
+          type: string
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        description:
+          description: The description of the widget.
+          maxLength: 5000
+          type: string
+        inputs:
+          description: Inputs passed to the embedded app.
+          items:
+            $ref: '#/components/schemas/EmbeddedAppWidgetInput'
+          type: array
+        template_id:
+          description: ID of the built-in app template to embed.
+          example: ec2_manager
+          type: string
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/EmbeddedAppWidgetDefinitionType'
+      required:
+        - type
+      type: object
+    EmbeddedAppWidgetDefinitionType:
+      default: embedded_app
+      description: Type of the embedded app widget.
+      enum:
+        - embedded_app
+      example: embedded_app
+      type: string
+      x-enum-varnames:
+        - EMBEDDED_APP
+    EmbeddedAppWidgetInput:
+      additionalProperties: false
+      description: An input passed to the embedded app.
+      properties:
+        name:
+          description: Name of the app input.
+          example: environment
+          type: string
+        value:
+          $ref: '#/components/schemas/EmbeddedAppWidgetInputValue'
+      required:
+        - name
+        - value
+      type: object
+    EmbeddedAppWidgetInputValue:
+      description: Value of the app input. This can be a string, number, boolean, object, or a non-empty homogeneous array of those types.
+      example: production
+      oneOf:
+        - type: string
+        - format: double
+          type: number
+        - type: boolean
+        - $ref: '#/components/schemas/EmbeddedAppWidgetInputValueObject'
+        - $ref: '#/components/schemas/EmbeddedAppWidgetInputValueStringArray'
+        - $ref: '#/components/schemas/EmbeddedAppWidgetInputValueNumberArray'
+        - $ref: '#/components/schemas/EmbeddedAppWidgetInputValueBooleanArray'
+        - $ref: '#/components/schemas/EmbeddedAppWidgetInputValueObjectArray'
+    EmbeddedAppWidgetInputValueBooleanArray:
+      description: An array of boolean values passed to the embedded app.
+      items:
+        description: A boolean value passed to the embedded app.
+        type: boolean
+      type: array
+      x-generate-alias-as-model: true
+    EmbeddedAppWidgetInputValueNumberArray:
+      description: An array of numeric values passed to the embedded app.
+      items:
+        description: A numeric value passed to the embedded app.
+        format: double
+        type: number
+      type: array
+      x-generate-alias-as-model: true
+    EmbeddedAppWidgetInputValueObject:
+      additionalProperties: {}
+      description: An arbitrary object value passed to the embedded app.
+      type: object
+    EmbeddedAppWidgetInputValueObjectArray:
+      description: An array of object values passed to the embedded app.
+      items:
+        additionalProperties: {}
+        description: An object value passed to the embedded app.
+        type: object
+      type: array
+      x-generate-alias-as-model: true
+    EmbeddedAppWidgetInputValueStringArray:
+      description: An array of string values passed to the embedded app.
+      items:
+        description: A string value passed to the embedded app.
+        type: string
+      type: array
+      x-generate-alias-as-model: true
     EnableEmbeddableGraphResponseSchema:
       description: A JSON object containing the success message
       properties:
@@ -28375,6 +28491,7 @@ components:
         - $ref: '#/components/schemas/CheckStatusWidgetDefinition'
         - $ref: '#/components/schemas/CohortWidgetDefinition'
         - $ref: '#/components/schemas/DistributionWidgetDefinition'
+        - $ref: '#/components/schemas/EmbeddedAppWidgetDefinition'
         - $ref: '#/components/schemas/EventStreamWidgetDefinition'
         - $ref: '#/components/schemas/EventTimelineWidgetDefinition'
         - $ref: '#/components/schemas/FreeTextWidgetDefinition'
