@@ -68,7 +68,7 @@ const provider = new DatadogProvider({
   clientToken: '<CLIENT_TOKEN>',
   site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
-  flagConfigurationFetch: withTimeout(globalThis.fetch, 1_500),
+  flagConfigurationFetch: withTimeout(globalThis.fetch, 5_000),
 });
 ```
 
@@ -183,7 +183,7 @@ const provider = new DatadogProvider({
   clientToken: '<CLIENT_TOKEN>',
   site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
-  flagConfigurationFetch: withTimeout(globalThis.fetch, 1_500),
+  flagConfigurationFetch: withTimeout(globalThis.fetch, 5_000),
 });
 
 // Set the evaluation context
@@ -235,14 +235,14 @@ The web provider also supports these optional settings:
 
 ### Bound flag configuration requests
 
-The browser provider does not add a timeout or retries by default. Use `withTimeout` and `withRetry` to bound each request attempt and retry transient failures:
+The browser provider does not add a timeout or retries by default. In npm installations of `@datadog/openfeature-browser` 1.4.0 and later, use `withTimeout` and `withRetry` to bound each request attempt and retry transient failures. These helpers are not available in the CDN bundle.
 
 {{< code-block lang="javascript" >}}
 import { DatadogProvider, withRetry, withTimeout } from '@datadog/openfeature-browser';
 
 const provider = new DatadogProvider({
   // Other provider options...
-  flagConfigurationFetch: withRetry(withTimeout(globalThis.fetch, 1_500), 2),
+  flagConfigurationFetch: withRetry(withTimeout(globalThis.fetch, 5_000), 1),
 });
 {{< /code-block >}}
 
@@ -252,7 +252,7 @@ const provider = new DatadogProvider({
 `withRetry(fetch, retryCount)`
 : Sets the number of retries after the initial request. Set the retry count to `0` to disable retries. Accepted values are integers from `0` to `10`. Retries cover Fetch `TypeError` failures, timeout errors, HTTP 408, and HTTP 5xx responses. Caller cancellation and HTTP 429 responses are not retried. Retries use randomized exponential backoff capped at 30 seconds. For HTTP 503, a valid `Retry-After` value up to 30 seconds is a minimum delay before the backoff. A response that requests a longer delay is not retried. Browsers report network, CORS, and CSP failures as `TypeError`, so the wrapper cannot separate these causes.
 
-In the example, `withTimeout` is inside `withRetry`. Therefore, each attempt has its own 1,500-millisecond timeout.
+In the example, `withTimeout` is inside `withRetry`. Therefore, each attempt has its own five-second timeout, and `1` allows one retry after the initial request.
 
 <div class="alert alert-info">The `flagConfigurationFetch` option applies only to flag configuration requests. It does not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
 

@@ -43,10 +43,10 @@ val configuration = Configuration.Builder(
     .build()
 Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 
-// 3. Enable Feature Flags with a bounded assignment request timeout
+// 3. Enable Feature Flags with a bounded initialization timeout
 Flags.enable(
     FlagsConfiguration.Builder()
-        .assignmentRequestTimeout(1_500L)
+        .initializationTimeout(2_000L)
         .build()
 )
 
@@ -105,13 +105,7 @@ After initializing Datadog, enable `Flags` to attach it to the current Datadog A
 
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.Flags
-import com.datadog.android.flags.FlagsConfiguration
-
-val flagsConfiguration = FlagsConfiguration.Builder()
-    .assignmentRequestTimeout(1_500L)
-    .build()
-
-Flags.enable(flagsConfiguration)
+Flags.enable()
 {{< /code-block >}}
 
 You can also pass a configuration object; see [Advanced configuration](#advanced-configuration).
@@ -312,46 +306,18 @@ The `Flags.enable()` API accepts optional configuration with the options listed 
 
 {{< code-block lang="kotlin" >}}
 val config = FlagsConfiguration.Builder()
-    .assignmentRequestTimeout(1_500L)
-    .assignmentRequestRetryCount(2)
+    .initializationTimeout(2_000L)
     .build()
 
 Flags.enable(config)
 {{< /code-block >}}
 
-`assignmentRequestTimeout(timeoutMs)`
-: Timeout in milliseconds for each flag assignment request, including the complete response-body download. The SDK does not add a timeout by default. Set a positive value to enable the timeout; `0` leaves it disabled. Negative values are coerced to `0`. When the HTTP call already has a nonzero timeout, the shorter timeout applies.
+`initializationTimeout(timeoutMs)`
+: Maximum time, in milliseconds, to wait for the first evaluation context to become ready. The timeout covers loading cached data, fetching assignments, reading and decoding the response, storing assignments, and publishing the ready state. It does not change the HTTP client's timeout. The assignment operation continues after the timeout and can move the client to `Ready` when it completes.
 
-`assignmentRequestRetryCount(retryCount)`
-: Number of retries after the initial flag assignment request. The default is `0`, so the SDK makes only the initial request unless you opt in to retries. Values outside the range from `0` to `10` are coerced to the nearest bound. Retries cover selected transient network errors, timeouts, HTTP 408, and HTTP 5xx responses. Canceled calls, HTTP 429, generic I/O errors, permanent protocol errors, and TLS failures are not retried. Retries use randomized exponential backoff capped at 30 seconds. The SDK reads `Retry-After` only for HTTP 503. A valid value up to 30 seconds is a minimum delay before the backoff. A response that requests a longer delay is not retried.
+The timeout applies only to the first `setEvaluationContext` call. That call consumes the timeout even if the operation fails or never starts. Later calls have no initialization timer. The default is `5_000` milliseconds. Set it to zero or a negative value to disable the timeout. When the timeout expires, the client becomes `Stale` if matching cached assignments are available. Otherwise, it becomes `Error`.
 
-The SDK manages the configured retry count and creates a new HTTP call for each attempt. The timeout applies to each attempt. Total network duration can reach `(retryCount + 1) * timeoutMs`, plus retry delays. When the timeout is `0`, the HTTP transport supplies the time bound and may allow an unlimited duration.
-
-<div class="alert alert-info">Assignment request timeout and retry settings apply only to requests that fetch flag assignments. They do not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
-
-For lower-level transport control, supply an assignment-only OkHttp call factory. Add OkHttp as a direct application dependency when you use this option:
-
-{{< code-block lang="groovy" filename="build.gradle" >}}
-dependencies {
-    implementation "com.squareup.okhttp3:okhttp:4.12.0"
-}
-{{< /code-block >}}
-
-{{< code-block lang="kotlin" >}}
-import okhttp3.OkHttpClient
-
-val assignmentClient = OkHttpClient.Builder()
-    // Add assignment-specific proxy, TLS, or interceptors here.
-    .build()
-
-val config = FlagsConfiguration.Builder()
-    .assignmentRequestCallFactory(assignmentClient)
-    .assignmentRequestTimeout(1_500L)
-    .assignmentRequestRetryCount(2)
-    .build()
-{{< /code-block >}}
-
-The SDK still constructs the URL, method, body, and authentication headers. The scalar timeout and retry policies compose on top of calls created by the supplied factory. When the assignment timeout is positive, the factory must return calls that provide and honor a configurable `Call.timeout()`. A call that returns `Timeout.NONE` fails before execution. Exposure and evaluation uploads continue to use the SDK transport. The application retains ownership of the supplied factory and its resources.
+<div class="alert alert-info"><code>initializationTimeout</code> is available in <code>dd-sdk-android-flags</code> 3.14.0 and later.</div>
 
 `trackExposures()`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. If you only need local evaluation without telemetry, you can disable it with: `trackExposures(false)`.

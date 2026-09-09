@@ -86,10 +86,10 @@ You can set up Feature Flags automatically with the <a href="/feature_flags/feat
 
 Choose the SDK that matches where the flag is evaluated and initialize the Datadog Feature Flags provider.
 
-<div class="alert alert-warning">Client SDKs do not add a flag assignment request timeout or retry by default, so the underlying platform transport remains authoritative. Configure a timeout of at most 1,500 milliseconds when initialization must finish within a known period. Retries cover transient network errors, timeouts, HTTP 408, and HTTP 5xx responses. They use randomized exponential backoff capped at 30 seconds. For HTTP 503, a valid <code>Retry-After</code> value up to 30 seconds is a minimum delay before the backoff. A response that requests a longer delay is not retried. Mobile SDKs do not retry cancellation, HTTP 429, generic I/O errors, permanent protocol errors, or TLS failures. Browser Fetch reports several failures as <code>TypeError</code> and cannot separate these causes. See the <a href="/feature_flags/client/">client SDK guides</a> for platform-specific timeout, retry, and transport APIs.</div>
-
 {{< tabs >}}
 {{% tab "JavaScript browser" %}}
+
+<div class="alert alert-warning">The browser provider does not add a flag configuration request timeout or retries by default. npm installations of <code>@datadog/openfeature-browser</code> 1.4.0 and later can use <code>withTimeout</code> and <code>withRetry</code> to bound requests. See the <a href="/feature_flags/client/javascript/#bound-flag-configuration-requests">JavaScript guide</a> for behavior and limits.</div>
 
 Install `@datadog/openfeature-browser`, `@openfeature/web-sdk`, and `@openfeature/core` as dependencies in your project:
 
@@ -114,8 +114,8 @@ const provider = new DatadogProvider({
     env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
     service: '<SERVICE_NAME>',
     version: '1.0.0',
-    // Bound each configuration request to 1,500 milliseconds.
-    flagConfigurationFetch: withTimeout(globalThis.fetch, 1_500)
+    // Bound each configuration request to five seconds.
+    flagConfigurationFetch: withTimeout(globalThis.fetch, 5_000)
 });
 
 // Set the provider
