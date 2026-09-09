@@ -9093,16 +9093,21 @@ menu:
       parent: synthetics_platform
       identifier: synthetics_platform_apm
       weight: 705
+    - name: Connect RUM
+      url: synthetics/platform/rum/
+      parent: synthetics_platform
+      identifier: synthetics_platform_rum
+      weight: 706
     - name: Settings
       identifier: synthetics_settings
       url: synthetics/platform/settings
       parent: synthetics_platform
-      weight: 706
+      weight: 707
     - name: Scheduled Downtime
       identifier: synthetics_platform_downtime
       url: synthetics/platform/downtime
       parent: synthetics_platform
-      weight: 707
+      weight: 708
     - name: Exploring Synthetics Data
       url: synthetics/explore/
       parent: synthetics

@@ -21,9 +21,9 @@ further_reading:
 - link: "/synthetics/private_locations/"
   tag: "Documentation"
   text: "Create a Private Location"
-- link: "/synthetics/guide/explore-rum-through-synthetics/"
+- link: "/synthetics/platform/rum/"
   tag: "Documentation"
-  text: "Explore RUM & Session Replay in Synthetics"
+  text: "Connect RUM to Synthetic Monitoring"
 ---
 
 ## Overview
@@ -299,7 +299,7 @@ To allow Datadog to collect RUM data from your browser test runs, click {{< ui >
 
 Select a RUM application from the {{< ui >}}Default Application{{< /ui >}} dropdown menu that collects browser test data. When you are done specifying a default application, click {{< ui >}}Save RUM Data Applications{{< /ui >}}.
 
-For more information, see [Explore RUM & Session Replay][14].
+For more information, see [Connect RUM to Synthetic Monitoring][14].
 
 ### Synthetic mobile application test data collection
 
@@ -322,7 +322,7 @@ To allow Datadog to collect RUM data from your mobile application test runs, con
 [11]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [12]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [13]: /account_management/billing/usage_attribution
-[14]: /synthetics/guide/explore-rum-through-synthetics/
+[14]: /synthetics/platform/rum/
 [15]: /synthetics/apm/#prerequisites
 [16]: /synthetics/browser_tests/test_steps/#use-variables
 [17]: /synthetics/mobile_app_testing/
