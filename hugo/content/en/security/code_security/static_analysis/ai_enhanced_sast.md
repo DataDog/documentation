@@ -137,7 +137,7 @@ To narrow down your triage list in [Code Security SAST Vulnerabilities][6], enab
 
 ### Agentic false positive filtering
 
-Agentic false positive filtering is an enhanced version of baseline false positive filtering. Instead of assessing findings using only the code directly in front of it, Bits AI gathers cross-file context, reading related files, searching for symbols, and inspecting nearby directory structure.
+Agentic false positive filtering is an enhanced version of baseline false positive filtering. Instead of assessing only the code in front of it, Bits AI gathers cross-file context. It reads related files, searches for symbols, and inspects nearby directory structure.
 
 Agentic false positive filtering applies only for injection-related SAST rules, such as SQL injection and command injection. 
 
@@ -145,11 +145,9 @@ AI-native SAST validates only [CWE-89: SQL Injection](https://cwe.mitre.org/data
 
 ### Custom context
 
-*Custom context* lets you add rule-specific guidance that Bits AI uses when assessing findings. Use it to describe organization-specific frameworks, sanitizers, validation patterns, or codebase details.
+*Custom context* lets you add rule-specific guidance that Bits AI uses when assessing findings for all false positive filtering. Use custom context to describe organization-specific frameworks, sanitizers, validation patterns, or codebase details.
 
 Custom context applies at the organization and rule level, and only to security category SAST rules in Datadog's default rulesets, not to custom rules. Review or add custom context in the side panel for SAST rules.
-
-<!-- QUESTION: Does custom context feed into baseline false positive filtering, agentic false positive filtering, or both? Rework this content accordingly. -->
 
 ## Remediation
 
@@ -160,16 +158,14 @@ Custom context applies at the organization and rule level, and only to security 
     - {{< ui >}}Single fix{{< /ui >}}: Review a proposed diff, ask follow-up questions, edit the patch, and create a pull request to remediate a single vulnerability. If a fix has already been generated, select {{< ui >}}View fix and create PR{{< /ui >}} to view the existing remediation session.
     - {{< ui >}}Create automation{{< /ui >}}: Generate fixes automatically as they're found or on a schedule. Selecting this option opens a modal with the {{< ui >}}Remediate SAST vulnerabilities{{< /ui >}} action pre-filled. Complete the form, including specifying a trigger and output, then click {{< ui >}}Create Automation{{< /ui >}}. 
 
-For single fix remediations, you can review and validate changes before merging by viewing session details, including:
-
-<!-- QUESTION: Do vulnerabilities fixed via automation generate session details, or does this apply only to single fixes?-->
+You can review and validate changes before merging by viewing session details, including:
 
 - The original security finding and proposed code change.
 - An explanation of how and why Bits Code generated the fix.
 - CI results (if enabled) to validate the patch is safe to deploy.
 - Options to refine the fix or {{< ui >}}Create PR{{< /ui >}} to apply the changes to your source code repository.
 
-<div class="alert alert-tip">View session details by drilling in to vulnerabilities, or view all Bits Code sessions at {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Sessions{{< /ui >}}. View all Bits Code automations at {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Automations{{< /ui >}}.</div>
+<div class="alert alert-tip">View session details by examining vulnerabilities. View all Bits Code sessions at {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Sessions{{< /ui >}}. View all Bits Code automations at {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Automations{{< /ui >}}.</div>
 
 
 ## Further reading
