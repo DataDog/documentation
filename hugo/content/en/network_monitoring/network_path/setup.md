@@ -388,27 +388,12 @@ Agent `v7.79+` is required.
      enabled: true
    ```
 
-2. Enable `network_path` to monitor CNM connections by creating or editing the `/opt/datadog-agent/etc/datadog.yaml` file:
-
-   <div class="alert alert-info">If enabling Network Path on <a href="/infrastructure/end_user_device_monitoring/">End User Devices</a>, skip this step.</div>
-
-   ```yaml
-   network_path:
-     connections_monitoring:
-       enabled: true
-     # collector:
-       # workers: <NUMBER OF WORKERS> # default 4
-   ```
+2. Add additional configuration details in `/opt/datadog-agent/etc/datadog.yaml` file:
 
    For full configuration details, reference the [example config][3], or use the following:
 
    ```yaml
    network_path:
-     connections_monitoring:
-       ## @param enabled - bool - required - default:false
-       ## Enable network path collection
-       #
-       enabled: true
      collector:
        ## @param workers - int - optional - default:4
        ## Number of workers that can collect paths in parallel
