@@ -28,17 +28,23 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 
 {{< tabs >}}
 
-{{% tab "OAuth: Databricks Managed Service Principal" %}}
+{{% tab "Use a Service Principal for OAuth" %}}
 
 <div class="alert alert-danger">New workspace integrations must authenticate using OAuth. Workspaces already integrated with a Personal Access Token continue to function and can switch to OAuth at any time. After a workspace starts using OAuth, it cannot revert to a Personal Access Token.</div>
 
 #### Create and configure the service principal in Databricks
 
+1. If you want to use a **Microsoft Entra ID managed** service principal instead of a **Databricks managed** one, first register an application in Microsoft Entra ID ([Microsoft Entra documentation][22]):
+   1. Sign in to the [Microsoft Entra admin center][23] as at least a Cloud Application Administrator. If your organization has multiple tenants, switch to the correct one using **Directories + subscriptions**.
+   1. Go to **Entra ID > App registrations**, then click **New registration**.
+   1. Enter a name, select **Accounts in this organizational directory only (Single tenant)**, and click **Register**.
+   1. On the application's **Overview** page, note the **Application (client) ID** and **Directory (tenant) ID**.
+   1. Click **Certificates & secrets > Client secrets > New client secret**. Enter a description, set the expiry to the maximum allowed (730 days), and click **Add**. Copy the generated secret value. It is only displayed once.
 1. As a **Databricks workspace admin**, go to {{< ui >}}Settings{{< /ui >}} by clicking your profile in the upper-right corner of the workspace.
 1. On the {{< ui >}}Identity and access{{< /ui >}} tab, click {{< ui >}}Manage{{< /ui >}} next to {{< ui >}}Service principals{{< /ui >}}.
 1. Click {{< ui >}}Add service principal{{< /ui >}}, then click {{< ui >}}Add new{{< /ui >}}.
 
-   <div class="alert alert-warning">For Azure Databricks, select the "Databricks managed" management type. To use a Microsoft Entra ID managed service principal instead, see the <strong>OAuth: Microsoft Entra ID Managed Service Principal</strong> tab.</div>
+   <div class="alert alert-warning">For Azure Databricks, select the "Databricks managed" management type. If you registered a Microsoft Entra ID application above, select "Microsoft Entra ID managed" instead, and paste the <strong>Application (client) ID</strong> you noted.</div>
 1. Enter a name and enable the following workspace entitlements for the service principal:
    - {{< ui >}}Workspace access{{< /ui >}}
    - {{< ui >}}Databricks SQL access{{< /ui >}}
@@ -47,7 +53,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
    <div class="alert alert-info">If you cannot grant the <strong>Admin access</strong> entitlement, provision granular access instead, as described in the <a href="#permissions">Permissions</a> section under Advanced Configuration.</div>
 1. Click **Add**.
 
-1. Click on the name of your new service principal. Under the {{< ui >}}Secrets{{< /ui >}} tab, click {{< ui >}}Generate secret{{< /ui >}}.
+1. If you created a **Databricks managed** service principal, click on its name. Under the {{< ui >}}Secrets{{< /ui >}} tab, click {{< ui >}}Generate secret{{< /ui >}}.
    1. Set {{< ui >}}Lifetime (days){{< /ui >}} to the maximum value allowed (730).
 
    1. Click {{< ui >}}Generate{{< /ui >}}.
@@ -55,6 +61,8 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
    1. Take note of your client ID and client secret.
 
   {{< img src="data_jobs/databricks/client-id-secret.png" alt="In Databricks, a modal showing the client ID and secret associated with a new OAuth secret is displayed." style="width:70%;" >}}
+
+   If you created a **Microsoft Entra ID managed** service principal, use the client ID and secret you generated in Microsoft Entra ID.
 
 1. On the {{< ui >}}Permissions{{< /ui >}} tab, click {{< ui >}}Grant access{{< /ui >}}. Search for the new service principal, grant it the {{< ui >}}Manage{{< /ui >}} permission, and click {{< ui >}}Save{{< /ui >}}.
 
@@ -64,68 +72,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 1. On the {{< ui >}}Configure{{< /ui >}} tab, click {{< ui >}}Add Databricks Workspace{{< /ui >}}.
 1. Enter a workspace name, your Databricks workspace URL, and the client ID and secret you generated.
    {{< img src="data_jobs/databricks/connect-workspace-form-m2m.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, client ID, and client secret." style="width:100%;" >}}
-1. Provide the ID of a [Databricks SQL Warehouse][19] for Datadog to query. Datadog uses this warehouse to read the Unity Catalog [system tables][20]. These tables power Databricks cost visibility in Jobs Monitoring and [Cloud Cost Management][18], serverless job monitoring, SQL warehouse and query monitoring, and [Quality Monitoring][21].
-   1. In Databricks, go to {{< ui >}}SQL Warehouses{{< /ui >}} and select the warehouse for Datadog to use. It must be Pro or Serverless. Classic Warehouses are not supported. To reduce costs, use a dedicated 2XS warehouse, with Auto Stop configured for 5-10 minutes.
-   1. Copy the ID from the warehouse's overview page (it is also the last segment of the warehouse's URL) and enter it in the integration tile.
-   1. On the warehouse's {{< ui >}}Permissions{{< /ui >}} tab (top right), grant the service principal `CAN USE`.
-   1. Grant the service principal read access to the Unity Catalog [system tables][20]. In the {{< ui >}}SQL Editor{{< /ui >}}, run the following commands using the service principal's client ID (not its display name):
-
-      ```sql
-      GRANT USE CATALOG ON CATALOG system TO `<CLIENT-ID>`;
-      GRANT USE SCHEMA ON CATALOG system TO `<CLIENT-ID>`;
-      GRANT SELECT ON CATALOG system TO `<CLIENT-ID>`;
-      ```
-
-      <div class="alert alert-info">The user running these commands must have the <code>MANAGE</code> privilege on <code>CATALOG system</code>.</div>
-   1. Add the service principal to the `databricks_pii_access` account-level group. Serverless job monitoring and SQL warehouse and query monitoring require this membership, because Databricks masks SQL query text for principals outside the group. See [Query text access](#query-text-access) for the full requirements.
-1. In the **Select products to set up integration** section, ensure that Data Observability: Jobs Monitoring is {{< ui >}}Enabled{{< /ui >}}.
-1. In the {{< ui >}}Datadog Agent Setup{{< /ui >}} section, choose either
-    - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
-    - [Manually](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent): Follow the [instructions below](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) to install and manage the init script for installing the Agent globally or on specific Databricks clusters.
-
-[18]: https://docs.datadoghq.com/cloud_cost_management/
-[19]: https://docs.databricks.com/aws/en/compute/sql-warehouse/
-[20]: https://docs.databricks.com/aws/en/admin/system-tables/
-[21]: /data_observability/quality_monitoring/data_warehouses/databricks/
-
-{{% /tab %}}
-
-{{% tab "OAuth: Microsoft Entra ID Managed Service Principal" %}}
-
-<div class="alert alert-danger">New workspace integrations must authenticate using OAuth. Workspaces already integrated with a Personal Access Token continue to function and can switch to OAuth at any time. After a workspace starts using OAuth, it cannot revert to a Personal Access Token.</div>
-
-#### Create and configure the service principal in Microsoft Entra ID and Databricks
-
-1. Register a Microsoft Entra ID application for the service principal ([Microsoft Entra documentation][22]):
-   1. Sign in to the [Microsoft Entra admin center][23] as at least a Cloud Application Administrator. If your organization has multiple tenants, switch to the correct one using **Directories + subscriptions**.
-   1. Go to **Entra ID > App registrations**, then click **New registration**.
-   1. Enter a name, select **Accounts in this organizational directory only (Single tenant)**, and click **Register**.
-   1. On the application's **Overview** page, note the **Application (client) ID** and **Directory (tenant) ID**.
-1. Generate a client secret for the application ([Microsoft Entra documentation][22]):
-   1. On the application's page, click **Certificates & secrets**.
-   1. Click the **Client secrets** tab, then click **New client secret**.
-   1. Enter a description, set the expiry to the maximum allowed (730 days), and click **Add**.
-   1. Copy the generated secret value. It is only displayed once.
-1. Add the application to Databricks as a Microsoft Entra ID managed service principal ([Databricks documentation][24]):
-   1. As a **Databricks workspace admin**, go to {{< ui >}}Settings{{< /ui >}} by clicking your profile in the upper-right corner of the workspace.
-   1. On the {{< ui >}}Identity and access{{< /ui >}} tab, click {{< ui >}}Manage{{< /ui >}} next to {{< ui >}}Service principals{{< /ui >}}.
-   1. Click {{< ui >}}Add service principal{{< /ui >}}, then click {{< ui >}}Add new{{< /ui >}}.
-   1. Select **Microsoft Entra ID managed**, then paste the **Application (client) ID** noted above.
-   1. Enter a name and enable the following workspace entitlements for the service principal:
-      - {{< ui >}}Workspace access{{< /ui >}}
-      - {{< ui >}}Databricks SQL access{{< /ui >}}
-      - {{< ui >}}Admin access{{< /ui >}}: Grants the workspace administrator access that Datadog requires. This is equivalent to adding the service principal to the `admins` group.
-
-      <div class="alert alert-info">If you cannot grant the <strong>Admin access</strong> entitlement, provision granular access instead, as described in the <a href="#permissions">Permissions</a> section under Advanced Configuration.</div>
-   1. Click **Add**.
-1. On the {{< ui >}}Permissions{{< /ui >}} tab, click {{< ui >}}Grant access{{< /ui >}}. Search for the new service principal, grant it the {{< ui >}}Manage{{< /ui >}} permission, and click {{< ui >}}Save{{< /ui >}}.
-
-#### Add the Databricks workspace to Datadog
-
-1. In Datadog, open the Databricks integration tile.
-1. On the {{< ui >}}Configure{{< /ui >}} tab, click {{< ui >}}Add Databricks Workspace{{< /ui >}}.
-1. Enter a workspace name, your Databricks workspace URL, and the client ID and secret you generated in Microsoft Entra ID.
-1. Select the **Use Microsoft Entra ID managed service principal** checkbox and enter the **Directory (tenant) ID** you noted earlier.
+1. If you created a **Microsoft Entra ID managed** service principal, select the **Use Microsoft Entra ID managed service principal** checkbox and enter the **Directory (tenant) ID** you noted earlier.
 1. Provide the ID of a [Databricks SQL Warehouse][19] for Datadog to query. Datadog uses this warehouse to read the Unity Catalog [system tables][20]. These tables power Databricks cost visibility in Jobs Monitoring and [Cloud Cost Management][18], serverless job monitoring, SQL warehouse and query monitoring, and [Quality Monitoring][21].
    1. In Databricks, go to {{< ui >}}SQL Warehouses{{< /ui >}} and select the warehouse for Datadog to use. It must be Pro or Serverless. Classic Warehouses are not supported. To reduce costs, use a dedicated 2XS warehouse, with Auto Stop configured for 5-10 minutes.
    1. Copy the ID from the warehouse's overview page (it is also the last segment of the warehouse's URL) and enter it in the integration tile.
@@ -151,7 +98,6 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 [21]: /data_observability/quality_monitoring/data_warehouses/databricks/
 [22]: https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal
 [23]: https://entra.microsoft.com
-[24]: https://learn.microsoft.com/en-us/azure/databricks/admin/users-groups/manage-service-principals#add-service-principals-to-your-account
 
 {{% /tab %}}
 
