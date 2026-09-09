@@ -44,6 +44,8 @@ Azure API Management evaluates policies at global, workspace, product, API, and 
 
 The policy ships with the placeholder URL `https://<dd-apim-callout-host>:8080`. Before applying it, replace every occurrence of that entire URL with the `calloutBaseUrl` output of the deployment. That output is `http://<ACA-FQDN>` unless you set `enableHttps` to `true`, and it does not include a port, so replace the entire URL rather than the hostname alone. The deployment performs the same substitution for you when you set `deployPolicy` to `true`, and its `targetApiIds` parameter selects which APIs receive the policy.
 
+`azure-apim-full.xml` contains a `<base />` element in each of its four sections. APIM rejects those at global scope, so if you apply the file to all APIs, remove every `<base />` element first. Keep them when you apply the policy to a product, an API, or an operation, because they control inheritance from the enclosing scope. The deployment applies the same rule for you: it strips the elements for all-APIs deployments and keeps them when `targetApiIds` names specific APIs.
+
 The policy has this shape:
 
 ```xml
@@ -113,7 +115,13 @@ Every failure path allows traffic through:
 | The WAF times out, or the processor reports an error         | The service returns `200` with `{}`, and no block is applied.                                        |
 | Cached request state passed its time-to-live                 | The orphaned state is released, and traffic continues.                                               |
 
-When signals are missing, first check that the WAF is enabled and that the policy is attached to the API.
+Because every failure path allows traffic, a misconfiguration shows up as missing security data rather than as broken traffic. When signals are missing, check the following:
+
+1. The policy is attached to the API you are sending traffic to, at a scope that applies to it.
+2. The policy calls the right URL. Compare the `set-url` value against the `calloutBaseUrl` output of the deployment, including scheme and port.
+3. The gateway can reach the callout service on that URL. A callout that never arrives leaves no trace in the policy, because `ignore-error="true"` hides it.
+4. The callout service logs show incoming requests. If they do not, the gateway is not reaching it.
+5. The callout service can reach the Datadog Agent on port `8126`, and the Agent has `DD_APM_ENABLED` and `DD_APM_NON_LOCAL_TRAFFIC` set to `true`. Without those, the service evaluates traffic but nothing arrives in Datadog.
 
 Building the JSON body with `set-body` and parsing the response variable each take less than 0.1 ms, and conditional evaluation takes less than 0.01 ms. The dominant cost is network round-trip time to the callout service.
 

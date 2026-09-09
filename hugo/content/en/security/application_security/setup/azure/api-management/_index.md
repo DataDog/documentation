@@ -105,6 +105,10 @@ You have two options:
 - Set `deployPolicy` to `true` and let the deployment inject the policy. The `targetApiIds` parameter selects which APIs receive the policy and defaults to all APIs.
 - Apply the provided policy XML yourself in the APIM policy editor. Replace every occurrence of the placeholder URL `https://<dd-apim-callout-host>:8080` with the `calloutBaseUrl` output of the deployment, not the hostname alone. The output is `http://<ACA-FQDN>` unless you set `enableHttps` to `true`, and it does not include a port. Leaving the `https` scheme or `:8080` suffix in place causes the policy to miss the service and fail open.
 
+<div class="alert alert-warning">
+Setting <code>deployPolicy</code> to <code>true</code> <strong>replaces</strong> the policy at each selected scope. It does not merge with what is already there, so any existing rules at that scope are lost. Apply the policy yourself when the APIs you are protecting already have policy content, and merge the Datadog inbound and outbound fragments into your existing sections.
+</div>
+
 For the policy contents, attachment scopes, and how a block becomes a client response, see [Azure API Management policies for App and API Protection][2].
 
 ## Validate the deployment
