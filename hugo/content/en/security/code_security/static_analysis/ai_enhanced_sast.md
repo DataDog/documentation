@@ -26,7 +26,7 @@ Static Code Analysis (SAST) uses AI to automate detection, validation, and remed
 | Detection       | [Malicious PR protection](#malicious-pr-protection) detects potentially malicious changes or suspicious diffs.                                        | At PR time                                | Flags PRs introducing novel risky code.                                       |
 | Detection               | [AI-native SAST](#ai-native-sast) uses LLM-based taint analysis to detect security vulnerabilities with higher accuracy.                          | At scan time (Datadog-hosted scans only)  | Identifies contextually complex vulnerabilities missed by rule-based analysis. |
 | Validation     | [False positive filtering](#false-positive-filtering) deprioritizes low-likelihood findings.                                                            | After scan                                | Reduces noise, allows focus on actual issue.                                   |
-| Validation | [Agentic false positive filtering](#agentic-false-positive-filtering) deprioritizes low-likelihood findings for a subset of injection-related rules using cross-file context. | After scan                        | Reduces false positives that depend on cross-file behavior, for supported rule categorie. |
+| Validation | [Agentic false positive filtering](#agentic-false-positive-filtering) deprioritizes low-likelihood findings for a subset of injection-related rules using cross-file context. | After scan                        | Reduces false positives that depend on cross-file behavior, for supported rule categories. |
 | Remediation                  | [Remediation](#remediation) uses Bits Code to generate suggested fixes manually or automatically.        | After scan                                | Reduces developer effort, accelerates fix cycle.                              |
 
 ## Detection
@@ -140,8 +140,6 @@ To narrow down your triage list in [Code Security SAST Vulnerabilities][6], enab
 Agentic false positive filtering is an enhanced version of baseline false positive filtering. Instead of assessing only the code in front of it, Bits AI gathers cross-file context. It reads related files, searches for symbols, and inspects nearby directory structure.
 
 Agentic false positive filtering applies only for injection-related SAST rules, such as SQL injection and command injection. 
-
-AI-native SAST validates only [CWE-89: SQL Injection](https://cwe.mitre.org/data/definitions/89.html).
 
 ### Custom context
 
