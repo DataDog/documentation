@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import type { JSX } from "preact";
+import type { JSX, TargetedEvent } from "preact";
 import styles from "./LanguageSelector.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { Select } from "@components/Select/Select";
@@ -25,7 +25,7 @@ export function LanguageSelector({ options, currentCode }: Props): JSX.Element {
     setHydrated(true);
   }, []);
 
-  const handleChange = (e: JSX.TargetedEvent<HTMLSelectElement>) => {
+  const handleChange = (e: TargetedEvent<HTMLSelectElement>) => {
     const code = e.currentTarget.value;
     setSelected(code);
     const opt = options.find((o) => o.code === code);

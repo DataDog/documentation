@@ -2,7 +2,6 @@ import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import {
   getDocsNavTree,
   findActiveSectionIdentifier,
-  findActivePageIdentifier,
   type DocsNavNode,
 } from "./docsNavMenu";
 
