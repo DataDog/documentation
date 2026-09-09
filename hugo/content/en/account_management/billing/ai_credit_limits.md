@@ -66,4 +66,4 @@ Attribution determines whose limit applies to a given unit of AI usage, and who 
 [3]: /bits_ai/bits_code/
 [4]: /actions/agents/
 [5]: https://app.datadoghq.com/bits-ai/ai-credits-management
-[6]: /account_management/rbac/permissions/
+[6]: /account_management/rbac/permissions/#billing-and-usage
