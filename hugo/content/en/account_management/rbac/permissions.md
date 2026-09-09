@@ -11,9 +11,6 @@ further_reading:
     - link: '/api/v2/roles/#list-permissions'
       tag: 'Documentation'
       text: 'Manage your permissions with the Permission API'
-    - link: "https://www.datadoghq.com/blog/stop-runtime-threats-with-workload-protection-response-actions/"
-      tag: "Blog"
-      text: "Stop runtime threats with Workload Protection response actions"
 algolia:
     rank: 80
     category: Documentation

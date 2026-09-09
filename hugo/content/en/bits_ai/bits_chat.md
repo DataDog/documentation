@@ -23,9 +23,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-cost-skill-bits-chat/"
   tag: "Blog"
   text: "Answer any cost question faster with the Cloud Cost skill in Bits Chat"
-- link: "https://www.datadoghq.com/blog/build-datadog-workflows-ai-agents/"
-  tag: "Blog"
-  text: "Build and run Datadog workflows from Bits Chat or AI agents"
 aliases:
 - /bits_ai/getting_started/
 - /bits_ai/chat_with_bits_ai

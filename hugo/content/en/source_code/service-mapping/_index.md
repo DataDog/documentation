@@ -9,9 +9,6 @@ further_reading:
 - link: "/tracing/trace_collection/dd_libraries/"
   tag: "Documentation"
   text: "Learn about Datadog SDKs"
-- link: "https://www.datadoghq.com/blog/bitbucket-cloud-source-code-integration/"
-  tag: "Blog"
-  text: "Troubleshoot and secure your code faster with Datadog’s Bitbucket Cloud Source Code integration"
 ---
 
 ## Overview

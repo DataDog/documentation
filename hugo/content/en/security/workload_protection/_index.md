@@ -12,21 +12,18 @@ aliases:
   - /security/threats/agent
   - /security/workload_protection/agent
 further_reading:
-  - link: "https://learn.datadoghq.com/courses/workload-protection-detect-compromises"
-    tag: "Learning Center"
-    text: "Detect Host and Container Compromises with Workload Protection"
-  - link: "https://learn.datadoghq.com/courses/workload-protection-enable-manage"
-    tag: "Learning Center"
-    text: "Enable and Manage Workload Protection"
   - link: "https://www.datadoghq.com/blog/workload-protection-investigation/"
     tag: "Blog"
     text: "Turn fragmented runtime signals into coherent attack stories with Datadog Workload Protection"
   - link: "https://www.datadoghq.com/blog/workload-protection-findings"
     tag: "Blog"
     text: "Surface and remediate runtime posture issues with Workload Protection Findings"
-  - link: "https://www.datadoghq.com/blog/stop-runtime-threats-with-workload-protection-response-actions/"
-    tag: "Blog"
-    text: "Stop runtime threats with Workload Protection response actions"
+  - link: "https://learn.datadoghq.com/courses/workload-protection-detect-compromises"
+    tag: "Learning Center"
+    text: "Detect Host and Container Compromises with Workload Protection"
+  - link: "https://learn.datadoghq.com/courses/workload-protection-enable-manage"
+    tag: "Learning Center"
+    text: "Enable and Manage Workload Protection"
 cascade:
 - _target:
     path: /security/workload_protection/backend_linux
@@ -153,7 +150,3 @@ Use [Coverage][5] to get a unified, real-time view of Workload Protection postur
 [14]: /security/workload_protection/detect_and_monitor/agent_rules/policy_management
 [15]: /actions/workflows/
 [16]: /security/workload_protection/investigate_and_triage/security_signals/actions
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
