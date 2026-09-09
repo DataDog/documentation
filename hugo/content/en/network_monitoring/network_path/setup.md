@@ -388,7 +388,7 @@ Agent `v7.79+` is required.
      enabled: true
    ```
 
-2. Add additional configuration details in `/opt/datadog-agent/etc/datadog.yaml` file:
+2. Add additional configuration details in the `/opt/datadog-agent/etc/datadog.yaml` file:
 
    ```yaml
    network_path:
