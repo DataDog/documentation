@@ -14,9 +14,12 @@ further_reading:
 - link: /feature_flags/browser_developer_extension/
   tag: Documentation
   text: Extension de développement pour navigateur
+- link: /feature_flags/guide/proxy_sdk_traffic/
+  tag: Guide
+  text: Trafic du SDK Proxy Feature Flag
 title: Feature Flags JavaScript
 ---
-## Vue d'ensemble {#overview}
+## Présentation {#overview}
 
 Cette page décrit comment instrumenter votre application JavaScript de navigateur avec le SDK Datadog Feature Flags. Les Datadog Feature Flags offrent un moyen unifié de contrôler à distance la disponibilité des fonctionnalités dans votre application, d'expérimenter en toute sécurité et de proposer de nouvelles expériences en toute confiance.
 
