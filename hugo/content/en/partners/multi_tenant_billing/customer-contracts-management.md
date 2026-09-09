@@ -24,7 +24,7 @@ Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}
 - For drawdown contracts, the remaining balance, projected overshoot, and projected depletion date compared to the contract end date.
 - For MSP contracts, which customers belong to each contract.
 - Discount and margin visibility per contract.
-- Whether Customer Pricing is enabled for each customer, not yet configured, or needs an update after a contract change.
+- Whether [Customer Pricing][1] is enabled for each customer, not yet configured, or needs an update after a contract change.
 - Key contacts per customer: The Datadog CSM, the Datadog AE, the partner account team, and the billing contact receiving invoices.
 
 {{< img src="partners/multi_tenant_billing/customer_contracts_detail.png" alt="Customer Contracts detail panel showing spend overview, drawdown depletion, contract info, and contacts for a customer." style="width:100%;" >}}
@@ -37,4 +37,5 @@ Invoices are listed per customer with issue and due dates, amount, and payment s
 
 - [Requesting an Admin Org][2]
 
+[1]: /account_management/plan_and_usage/partner_experience/customer_pricing/
 [2]: /partners/multi_tenant_billing/#requesting-an-admin-org

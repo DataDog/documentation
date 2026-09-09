@@ -6,45 +6,54 @@ aliases:
 - /ja/real_user_monitoring/session_replay/developer_tools
 - /ja/real_user_monitoring/session_replay/browser/developer_tools
 - /ja/product_analytics/session_replay/browser/developer_tools
-description: セッションリプレイでユーザーの Web 閲覧またはモバイルアプリの体験をキャプチャし、視覚的に再生する方法について説明します。
+description: Session Replay でユーザーの Web 閲覧またはモバイルアプリの体験をキャプチャし、視覚的に再生する方法について説明します。
 further_reading:
-- link: https://www.datadoghq.com/blog/session-replay-datadog/
-  tag: ブログ
-  text: Datadog Session Replay を使用してユーザージャーニーをリアルタイムで表示
-- link: https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/
-  tag: ブログ
-  text: ファネル分析により、主要なユーザーフローを理解し、最適化する
-- link: https://www.datadoghq.com/blog/zendesk-session-replay-integration/
-  tag: ブログ
-  text: Zendesk と Datadog セッションリプレイでユーザーが直面する問題を視覚的に再生する
 - link: /real_user_monitoring/explorer
   tag: ドキュメント
-  text: RUM データを Explorer で確認
+  text: エクスプローラーで RUM データを視覚化する
 - link: /integrations/content_security_policy_logs
   tag: ドキュメント
   text: Datadog で CSP 違反の検出と集計を行う
 - link: https://learn.datadoghq.com/courses/intro-to-rum
   tag: ラーニングセンター
   text: Real User Monitoring (RUM) の紹介
-title: セッションリプレイ
+- link: https://www.datadoghq.com/blog/session-replay-custom-heatmap-backgrounds/
+  tag: ブログ
+  text: Session Replay でカスタムヒートマップをキャプチャして分析する
+- link: https://www.datadoghq.com/blog/ai-summaries-and-smart-chapters/
+  tag: ブログ
+  text: AI 要約とスマートチャプターで Session Replay をより迅速に把握する
+- link: https://www.datadoghq.com/blog/session-replay-datadog/
+  tag: ブログ
+  text: Datadog Session Replay を使用してユーザージャーニーをリアルタイムで表示する
+- link: https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/
+  tag: ブログ
+  text: ファネル分析により、主要なユーザーフローを理解し、最適化する
+- link: https://www.datadoghq.com/blog/zendesk-session-replay-integration/
+  tag: ブログ
+  text: Zendesk と Datadog Session Replay でユーザーが直面する問題を視覚的に再生する
+- link: https://www.datadoghq.com/blog/session-replay-investigate-collaborate/
+  tag: ブログ
+  text: Datadog Session Replay でユーザーセッションを検索、分析、コラボレーションする
+title: Session Replay
 ---
 ## 概要 {#overview}
 
-セッションリプレイは、ユーザーのウェブ閲覧またはモバイルアプリの体験をキャプチャし、視覚的に再生することで、ユーザー体験のモニタリングを拡張します。セッションリプレイは、[RUM][1] と [Product Analytics][2] の両方で利用可能で、エラーの特定と再現、ユーザージャーニーの理解に役立ち、アプリケーションの使用パターンや設計上の落とし穴に関する洞察が得られます。
+Session Replay は、ユーザーのウェブ閲覧またはモバイルアプリの体験をキャプチャし、視覚的に再生することで、ユーザー体験のモニタリングを拡張します。Session Replay は、[RUM][1] と [Product Analytics][2] の両方で利用可能で、エラーの特定と再現、ユーザージャーニーの理解に役立ち、アプリケーションの使用パターンや設計上の落とし穴に関するインサイトが得られます。
 
-## ブラウザセッションリプレイ {#browser-session-replay}
+## Browser Session Replay {#browser-session-replay}
 
-ブラウザセッションリプレイは、ユーザーのウェブ閲覧体験をキャプチャし、視覚的に再生することで、ユーザー体験のモニタリングを拡張します。セッションリプレイを RUM パフォーマンスデータと組み合わせることで、エラーの特定、再現、解決に役立ち、Web アプリケーションの使用パターンや設計上の落とし穴を把握することができます。
+Browser Session Replay は、ユーザーのウェブ閲覧体験をキャプチャし、視覚的に再生することで、ユーザー体験のモニタリングを拡張します。Session Replay を RUM パフォーマンスデータと組み合わせることで、エラーの特定、再現、解決に役立ち、Web アプリケーションの使用パターンや設計上の落とし穴を把握することができます。
 
-RUM ブラウザ SDK は[オープンソース][3]であり、オープンソースの [rrweb][4] プロジェクトを活用したものです。
+RUM ブラウザ SDK は [オープンソース][3] であり、オープンソースの [rrweb][4] プロジェクトを活用したものです。
 
-[ブラウザ向けセッションリプレイ][5]について詳しくはこちらをご覧ください。
+[ブラウザ向けセッションリプレイ][5] について詳しくはこちらをご覧ください。
 
-## モバイルセッションリプレイ {#mobile-session-replay}
+## Mobile Session Replay {#mobile-session-replay}
 
-モバイルセッションリプレイは、タップ、スワイプ、スクロールなどの各ユーザー操作を視覚的に再生することで、モバイルアプリケーションの可視性を拡大します。Android と iOS の両方のネイティブアプリで利用できます。アプリケーション上のユーザーインタラクションを視覚的に再生することで、クラッシュやエラーの再現が容易になり、UI を改善するためのユーザージャーニーの理解も容易になります。
+Mobile Session Replay は、タップ、スワイプ、スクロールなどの各ユーザー操作を視覚的に再生することで、モバイルアプリケーションの可視性を拡大します。Android と iOS の両方のネイティブアプリで利用できます。アプリケーション上のユーザーインタラクションを視覚的に再生することで、クラッシュやエラーの再現が容易になり、UI を改善するためのユーザージャーニーの理解も容易になります。
 
-[モバイル向けセッションリプレイ][6]について詳しくはこちらをご覧ください。
+[モバイル向け Session Replay][6] について詳しくはこちらをご覧ください。
 
 ## AI 駆動の要約とスマートチャプター {#ai-powered-summaries-and-smart-chapters}
 
@@ -70,24 +79,29 @@ AI による要約とスマートチャプターは、少なくとも 4 つの�
 
 コメントを使用すると、次のことが可能です。
 
-- リプレイタイムラインの特定のタイムスタンプにコメントを追加する。コメントマーカーはタイムラインと [**Comments**] (コメント) タブに表示されます。
+- リプレイタイムラインの特定のタイムスタンプにコメントを追加する。コメントマーカーはタイムラインと {{< ui >}}Comments{{< /ui >}} タブに表示されます。
 - コメントで @mention を使用してチームメイトやチームを指定する。タグ付けされたユーザーは、コメントされたタイムスタンプの時点で、リプレイを開くリンクを含むメール通知を受け取ります。
 - 任意のコメントへのリンクをコピーして外部と共有する。このリンクでは、注釈が付けられた瞬間のコメントスレッドが開いた状態のリプレイが開きます。
 - スレッド返信を使用してリプレイ内でコラボレーションし、必要に応じて自分のコメントを編集または削除する。
 
 {{< img src="real_user_monitoring/session_replay/session-replay-comments.png" alt="セッションリプレイプレーヤーのタイムラインにタイムスタンプ付きのコメントがあり、そのスレッド返信が [Comments] タブに表示されています。" style="width:100%;" >}}
 
-注意が必要なリプレイを見つけるには、デフォルトのプレイリストの [**All mentions to me**] (自分へのすべてのメンション) と [**Commented replays**] (コメントがあるリプレイ) を使用します。詳細については、[セッションリプレイプレイリスト][7]を参照してください。
+注意が必要なリプレイを見つけるには、{{< ui >}}All mentions to me{{< /ui >}} および {{< ui >}}Commented replays{{< /ui >}} のデフォルトのプレイリストを使用します。詳細については、[Session Replay プレイリスト][7] を参照してください。
 
 ## データ保持の延長 {#extend-data-retention}
 
-デフォルトでは、セッションリプレイデータは 30 日間保持されます。
+デフォルトでは、セッションリプレイデータは 30 日間保持されます。すべての Session Replay のデフォルト保持期間を 30 日より長く設定するには、アカウントチームにお問い合わせください。
 
-セッションリプレイデータの保持期間を 15 か月に延長するには、個々のセッションリプレイで [_Extended Retention_] (保持を延長) を有効にします。これらのセッションは非アクティブである必要があります (ユーザーは体験を完了している)。
+Session Replay データの保持期間を 15 か月に延長するには、個々の Session Replay で {{< ui >}}Extended Retention{{< /ui >}} を有効にします。これらのセッションは非アクティブでなければなりません (ユーザーは体験を完了している)。
 
-後でセッションリプレイにアクセスするには、Datadog は URL を保存するか、[プレイリスト][7]に追加することをお勧めします。
+Datadog では、後で Session Replay にアクセスするには URL を保存するか [プレイリスト][7] に追加することをお勧めします。
 
-[Extended Retention] はセッションリプレイにのみ適用され、関連イベントは含まれません。15 か月は、セッションが収集されたときではなく、[Extended Retention] が有効にされたときから始まります。
+Datadog では、Session Replay が製品内の他の場所で使用されると、保持期間が自動的に 15 か月に延長されます。
+
+- リプレイを [プレイリスト][7] に追加します。
+- リプレイをヒートマップのスクリーンショットとして保存します。[リプレイ保持を超えたヒートマップの分析][12] を参照してください。
+
+[Extended Retention] は Session Replay にのみ適用され、関連イベントは含まれません。15 か月は、セッションが収集されたときではなく、[Extended Retention] が有効にされたときから始まります。
 
 [Extended Retention] はいつでも無効にできます。セッションリプレイがまだデフォルトの 30 日間の保持期間内である場合、リプレイは最初の 30 日間のウィンドウの終了時に失効します。30 日を過ぎたセッションリプレイで [Extended Retention] を無効にすると、リプレイは直ちに失効します。
 
@@ -101,21 +115,21 @@ AI による要約とスマートチャプターは、少なくとも 4 つの�
 
 プレーヤーページに表示される [**watched**] (視聴) カウントをクリックすると、特定のセッションリプレイを誰が視聴したかを確認できます。この機能により、記録を共有したい相手がすでに視聴しているかどうかを確認することができます。
 
-{{< img src="real_user_monitoring/session_replay/session-replay-playback-history.png" alt="セッションの記録を誰が見たかを確認" style="width:100%;" >}}
+{{< img src="real_user_monitoring/session_replay/session-replay-playback-history.png" alt="セッションの記録を誰が見たかを確認する" style="width:100%;" >}}
 
-履歴には、プレーヤーページや [ノートブック][8]、サイドパネル内の埋め込みプレーヤーで行われた再生のみが含まれます。含まれる再生は、[監査証跡][9]イベントも生成します。サムネイルプレビューは履歴に含まれません。
+履歴には、プレーヤーページや [ノートブック][8]、サイドパネル内の埋め込みプレーヤーで行われた再生のみが含まれます。含まれる再生は、[監査証跡][9] イベントも生成します。サムネイルプレビューは履歴に含まれません。
 
-自分の再生履歴を見るには、プレイリストの [自分の視聴履歴][10] を確認します。
+自分の再生履歴を見るには、プレイリストの {{< ui >}}My Watch History{{< /ui >}}][10] をチェックしてください。
 
 ## プレイリスト {#playlists}
 
-セッションリプレイのプレイリストを作成して、気づいたパターンで整理することができます。[セッションリプレイプレイリスト][7]について詳しくはこちらをご覧ください。
+Session Replays のプレイリストを作成して、気づいたパターンで整理することができます。[Session Replays プレイリスト][7] について詳しくはこちらをご覧ください。
 
 ## 開発ツール {#dev-tools}
 
 開発ツールは、再生中に重要な情報を表示するセッションリプレイの組み込みのデバッグパネルです。これを使用して、問題を特定し、リクエストを追跡し、パフォーマンスのボトルネックを理解できます。問題を自分で再現する必要はありません。開発ツールは [RUM][1] セッションで利用可能です。
 
-[ブラウザ][11]および[モバイル][12]向けの開発ツールについて詳しくは、こちらをご覧ください。
+[Dev Tools][11] について詳しくはこちらをご覧ください。
 
 ## 参考資料 {#further-reading}
 
@@ -131,5 +145,5 @@ AI による要約とスマートチャプターは、少なくとも 4 つの�
 [8]: /ja/notebooks/
 [9]: /ja/account_management/audit_trail/
 [10]: /ja/rum/replay/playlists/my-watch-history
-[11]: /ja/session_replay/browser/dev_tools/
-[12]: /ja/session_replay/mobile/dev_tools/
+[11]: /ja/session_replay/dev_tools
+[12]: /ja/session_replay/heatmaps/#analyzing-heatmaps-beyond-replay-retention

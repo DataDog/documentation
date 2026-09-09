@@ -205,7 +205,15 @@ You can add a {{< ui >}}Group by{{< /ui >}} clause to split a single monitor int
 
 The default limit is 500 groups per monitor. To increase this limit, [contact Support][9].
 
+### Missing data
+
+In the {{< ui >}}If data is missing to evaluate{{< /ui >}} dropdown menu, select what the monitor reports when no data is available for an evaluation.
+
 ### Model configuration
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+The following model configuration settings are in Preview. Contact your Datadog representative to enable them for your organization.
+{{< /callout >}}
 
 For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand {{< ui >}}Model configuration{{< /ui >}} to refine how the model behaves:
 
@@ -214,8 +222,6 @@ For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand {
 | {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | The number of consecutive failed evaluations before the monitor alerts. Configure this setting to suppress isolated spikes. |
 | {{< ui >}}Minimum upper bound size{{< /ui >}} | Constrains how tightly the model tracks your data on the upper end. |
 | {{< ui >}}Minimum lower bound size{{< /ui >}} | Constrains how tightly the model tracks your data on the lower end. |
-
-In the {{< ui >}}If data is missing to evaluate{{< /ui >}} dropdown menu, select what the monitor reports when no data is available for an evaluation.
 
 ### Monitor schedule
 

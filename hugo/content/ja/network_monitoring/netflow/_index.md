@@ -5,6 +5,9 @@ further_reading:
 - link: /network_monitoring/devices/profiles
   tag: ドキュメント
   text: ネットワークデバイスモニタリングのプロファイルの使用
+- link: /network_monitoring/network_path/setup/#dynamic-tests-for-netflow-experimental
+  tag: ドキュメント
+  text: NetFlow の動的テストを設定する
 - link: https://www.datadoghq.com/blog/monitor-netflow-with-datadog/
   tag: ブログ
   text: Datadog で NetFlow トラフィックデータを監視する
@@ -25,19 +28,19 @@ NetFlow ビューには、デバイスとインターフェイスごとに集計
 
 追加の NetFlow ビューを確認するには、左側のナビゲーションを使用します。
 
-- **Traffic Volume**: デバイスとインターフェイスごとの全体的なフローのメトリクス。
-- **Device Health**: 監視対象デバイスのステータスと利用状況。
-- **Flows**: 個々のフローの詳細なレコード。
-- **Conversations**: 集計された送信元と宛先のペア。
-- **Autonomous Systems**: 自律システム番号 (ASN) でグループ化されたフローデータ。
-- **Geo IP**: 地理的起源/宛先でグループ化されたフローデータ。
-- **Source Ports / Destination Ports / Protocols / Flags**: パケットメタデータ別のトラフィックの内訳。
+- {{< ui >}}Traffic Volume{{< /ui >}}: デバイスとインターフェイスごとの全体的なフローのメトリクス。
+- {{< ui >}}Device Health{{< /ui >}}: 監視対象デバイスのステータスと利用状況。
+- {{< ui >}}Flows{{< /ui >}}: 個々のフローの詳細なレコード。
+- {{< ui >}}Conversations{{< /ui >}}: 集計された送信元と宛先のペア。
+- {{< ui >}}Autonomous Systems{{< /ui >}}: 自律システム番号 (ASN) でグループ化されたフローデータ。
+- {{< ui >}}Geo IP{{< /ui >}}: 地理的起源/宛先でグループ化されたフローデータ。
+- {{< ui >}}Source Ports / Destination Ports / Protocols / Flags{{< /ui >}}: パケットメタデータによるトラフィックの内訳。
 
 ## インストール {#installation}
 
-ネットワークデバイスモニタリングで NetFlow Monitoring を使用するには、[Agent][1] のバージョン 7.45 以降を使用していることを確認してください。
+Network Device Monitoring で NetFlow Monitoring を使用するには、[Agent][1] のバージョン 7.45 以降を使用していることを確認してください。
 
-**注:** NetFlow データの送信には、[ネットワークデバイスモニタリングからのメトリクス収集][2]の構成は必須ではありませんが、この追加データを使用してデバイス名、モデル、ベンダー、インバウンド/アウトバウンドインターフェイス名などの情報でフローレコードをリッチ化できるため、強く推奨されています。
+**注:** NetFlow データの送信には、[ネットワークデバイスモニタリングからのメトリクス収集][2] の構成は必須ではありませんが、この追加データを使用してデバイス名、モデル、ベンダー、インバウンド/アウトバウンドインターフェイス名などの情報でフローレコードをリッチ化できるため、強く推奨されています。
 
 ## 構成 {#configuration}
 
@@ -62,13 +65,13 @@ network_devices:
     reverse_dns_enrichment_enabled: false
 ```
 
-2. 変更内容を保存したら、[Agent を再起動][4]します。
+2. 変更内容を保存したら、[Agent を再起動][4] します。
 
-   **注**: [ファイアウォールルール][9]で、構成したポートの受信 UDP トラフィックが許可されていることを確認してください。
+   **注**: [ファイアウォールルール][9] で、構成したポートの受信 UDP トラフィックが許可されていることを確認してください。
 
 ## 集計 {#aggregation}
 
-Datadog Agent は、NetFlow から受信したデータを自動的に集約し、送信されるレコードの数を抑えながら、情報の大部分を維持します。デフォルトでは、`source`、`destination address`、`port`、`protocol` など同じ識別子を持つフローの記録が 5 分ごとに集約されます。また、Datadog Agent は短期間しか使用されないポート (エフェメラルポート) を検出して除去することが可能です。その結果、 `port:*` と表示されるフローが確認されることがあります。
+Datadog Agent は、NetFlow から受信したデータを自動的に集約し、送信されるレコードの数を抑えながら、情報の大部分を維持します。デフォルトでは、`source`、`destination address`、`port`、`protocol` など同じ識別子を持つフローの記録が 5 分ごとに集約されます。また、Datadog Agent は短期間しか使用されないポート (エフェメラルポート) を検出して削除することが可能です。その結果、`port:*` と表示されるフローが確認されることがあります。
 
 ## リッチ化 {#enrichment}
 
@@ -90,7 +93,7 @@ Datadog は、NetFlow のポートに対して IANA (Internet Assigned Numbers A
 
 また、特定のポートで実行されているカスタムサービスがある場合など、ポートやプロトコルを特定のアプリケーションにマッピングする独自のカスタム拡張を追加することも可能です。これにより、ネットワークエンジニアやそのチームが、人間が読みやすい名前で NetFlow データを解釈し、クエリを実行しやすくなります。
 
-NetFlow の **Configuration** タブで **+ Add Enrichment** をクリックし、カスタム拡張を含む CSV ファイルをアップロードします。
+NetFlow の {{< ui >}}Configuration{{< /ui >}} タブで {{< ui >}}+ Add Enrichment{{< /ui >}} をクリックし、カスタム拡張を含む CSV ファイルをアップロードします。
 
 {{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="NetFlow 構成タブの新しいエンリッチメントマッピングモーダル" width="100%" >}}
 
@@ -98,35 +101,41 @@ NetFlow の **Configuration** タブで **+ Add Enrichment** をクリックし�
 
 IP と CIDR をカスタムタグにマッピングするために、独自のカスタムエンリッチメントを追加することもできます (たとえば、特定の IP アドレスで実行されているサービスを分類するため)。これにより、ネットワークエンジニアやそのチームが、人間が読みやすい名前で NetFlow データを解釈し、クエリを実行しやすくなります。
 
-[**Enrichment** 設定ページ][10] で、**+ Add Enrichment** をクリックしてマッピングを手動で追加するか、CSV ファイルをアップロードしてマッピングを一括追加します。
+[{{< ui >}}Enrichment{{< /ui >}} 設定ページ][10] で {{< ui >}}+ Add Enrichment{{< /ui >}} をクリックしてマッピングを手動で追加するか、CSV ファイルをアップロードしてマッピングを一括追加します。
 
 ### リバース DNS プライベート IP の拡張 {#reverse-dns-private-ip-enrichment}
 
-リバース DNS プライベート IP の拡張を有効にして、送信元または宛先 IPアドレスに関連付けられたホスト名の DNS ルックアップを実行します。有効にすると、Agent はプライベートアドレス範囲内の送信元および宛先 IP に対してリバース DNS ルックアップを実施し、対応するホスト名で NetFlow レコードを拡張します。
+リバース DNS プライベート IP の拡張を有効にして、送信元または宛先 IP アドレスに関連付けられたホスト名の DNS ルックアップを実行します。有効にすると、Agent はプライベートアドレス範囲内の送信元および宛先 IP に対してリバース DNS ルックアップを実施し、対応するホスト名で NetFlow レコードを拡張します。
 
-[デフォルト][7]では、`datadog.yaml` ファイルにおいて、リバース DNS IP の拡張は無効になっています。有効にするには、このページの[構成](#configuration)セクションを参照してください。
+デフォルトでは、[`datadog.yaml` ファイル][7] のリバース DNS IP の拡張は無効になっています。有効にするには、このページの[構成](#configuration)セクションを参照してください。
 
-リバース DNS IP の拡張に関連するフローを見つけるには、**+ Filter** メニューで **DNS** を検索してください。
+リバース DNS IP の拡張に関連するフローを見つけるには、{{< ui >}}+ Filter{{< /ui >}} メニューで DNS を検索してください。
 
 {{< img src="network_device_monitoring/netflow/dns_ip_enrichmen_2.png" alt="フィルターメニューが拡張され、リバース DNS の宛先と送信元のファセットが表示されます。" width="100%" >}}
 
-**注**: リバース DNS エントリはキャッシュされ、DNS クエリを最小限に抑えて DNS サーバーへの負荷を軽減するためのレート制限の対象となります。デフォルトのキャッシングやレート制限の変更など、他の構成オプションについては、[完全なコンフィギュレーションファイル][8]を参照してください。
+**注**: リバース DNS エントリはキャッシュされ、DNS クエリを最小限に抑えて DNS サーバーへの負荷を軽減するためのレート制限の対象となります。デフォルトのキャッシングやレート制限の変更など、他の構成オプションについては、[Agent コンフィギュレーションファイルの例][7] の `reverse_dns_enrichment` セクションを参照してください。
 
 ## IP の詳細 {#ip-details}
 
-**Conversations** ビューで、宛先 IP のパブリック IP アドレスを確認できます。IP にカーソルを合わせると、IP に関する豊富なメタデータと、接続をさらに詳しく調べるための **View Related Network Connections** リンクが表示されます。
+**Conversations** ビューで、宛先 IP のパブリック IP アドレスを確認できます。IP にカーソルを合わせると、IP に関する豊富なメタデータと、接続をさらに詳しく調べるための {{< ui >}}View Related Network Connections{{< /ui >}} リンクが表示されます。
 
 {{< img src="network_device_monitoring/netflow/NetFlow_IP_pill.png" alt="IP アドレスにカーソルを合わせると、IP の詳細と関連するネットワーク接続が表示されます。" width="100%" >}}
 
 ## フローダイアグラム {#flow-diagram}
 
-**Flows** メニューをクリックし、リストのフローにカーソルを合わせると、関連ネットワーク接続の送信元 IP、入力インターフェイス名、デバイス名、および宛先 IP に関する追加情報を表示できます。
+{{< ui >}}Flows{{< /ui >}} メニューをクリックし、リストのフローにカーソルを合わせると、関連ネットワーク接続の送信元 IP、入力インターフェイス名、デバイス名、および宛先 IP に関する追加情報を表示できます。
 
 {{< img src="network_device_monitoring/netflow/flows.png" alt="NetFlow を送信するデバイスから集計されたフローにカーソルを合わせると、関連するネットワーク接続情報にアクセスできます。" width="100%" >}}
 
+## NetFlow の Network Path {#network-path-for-netflow}
+
+NetFlow の動的テストでは、NetFlow トラフィックを収集する Agent から NetFlow レコードで観測された宛先 IP への Network Path のテストを自動的に実行できます。NetFlow の動的テストを使用して、NetFlow の宛先にホップごとのルートとレイテンシーのコンテキストを追加します。
+
+NetFlow の動的テストは試験機能であり、Agent `v7.81+` が必要です。NetFlow の動的テストを設定するには、[Network Path の設定][11] を参照してください。
+
 ## NetFlow モニター {#netflow-monitor}
 
-任意のビューから **Create Monitor** アイコンをクリックして、[NetFlow モニター][6]を作成します。モニターを作成する際は、デバイスの観点から送信元 IP または宛先 IP に関して下記のフィールドを考慮する必要があります。これらのフィールドは、ネットワークトラフィックのパターンを理解し、パフォーマンスとセキュリティを最適化するのに役立ちます。
+任意のビューから {{< ui >}}Create Monitor{{< /ui >}} アイコンをクリックして、[NetFlow モニター][6] を作成します。モニターを作成する際は、デバイスの観点から送信元 IP または宛先 IP に関して下記のフィールドを考慮する必要があります。これらのフィールドは、ネットワークトラフィックのパターンを理解し、パフォーマンスとセキュリティを最適化する上で役立ちます。
 
 {{< img src="network_device_monitoring/netflow/create_monitor.png" alt="Create Monitor リンクが強調表示された NetFlow Monitoring の Flows ビュー。" width="100%" >}}
 
@@ -241,9 +250,9 @@ IP と CIDR をカスタムタグにマッピングするために、独自の�
 
 - 2 つのエンドポイント間で交換される全トラフィックを別々の方向のフローではなく 1 つの会話として表示する
 - 実際の発信者と対応者を特定し、送信元と宛先のウィジェットが正確な役割を反映するようにする
-- サーバーが上位の送信元として誤って表示されるノイズを除去する
+- サーバーが上位の送信元として誤って表示されるノイズを削除する
 
-結合された (双方向) ビューと結合されていない (単方向) ビューを切り替えるには、エンドポイントベースの任意の NetFlow ビューに移動し、日時選択ツールの下にある **Bidirectional** トグルを使用します。
+結合された (双方向) ビューと結合されていない (単方向) ビューを切り替えるには、エンドポイントベースの任意の NetFlow ビューに移動し、日時選択ツールの下にある {{< ui >}}Bidirectional{{< /ui >}} トグルを使用します。
 
 {{< img src="network_device_monitoring/netflow/conversation_stitching.png" alt="NetFlow ビューにおける会話の結合のトグル" width="100%" >}}
 
@@ -258,7 +267,7 @@ NetFlow のサンプリングレートは、デフォルトでバイトおよび
 
 NetFlow データはデフォルトで 30 日間保持され、15 日、30 日、60 日、90 日の保持オプションも提供されています。
 
-<div class="alert alert-warning">NetFlowデータをさらに長期間保持したい場合は、アカウント担当者にお問い合わせください。</div>
+<div class="alert alert-warning">NetFlow データをさらに長期間保持したい場合は、アカウント担当者にお問い合わせください。</div>
 
 ## フラッシュ間隔あたりのフロー量を制限する {#limit-flow-volume-per-flush-interval}
 
@@ -366,7 +375,7 @@ NetFlow パケットのドロップは、1 秒あたりの NetFlow パケット�
 [4]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [5]: https://app.datadoghq.com/devices/netflow
 [6]: /ja/monitors/types/netflow/
-[7]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4201
-[8]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4203-L4275
+[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
 [9]: /ja/network_monitoring/devices/troubleshooting#traps-or-flows-not-being-received-at-all
 [10]: https://app.datadoghq.com/devices/settings/enrichment/ip
+[11]: /ja/network_monitoring/network_path/setup/#dynamic-tests-for-netflow-experimental

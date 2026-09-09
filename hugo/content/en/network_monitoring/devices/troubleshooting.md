@@ -90,19 +90,19 @@ The output should look similar to the following:
    cd "c:\Program Files\Datadog\Datadog Agent\bin"
    ```
 
-   Run the SNMP walk command:
+   For SNMP v2, run:
 
    ```shell
-   agent snmp walk <IP Address>[:Port]
+   "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" snmp walk -v 2 -C <community-string> <IP-Address>:<port>
    ```
 
-   Example:
+   For SNMP v3, run:
 
    ```shell
-   agent.exe snmp walk 10.143.50.30 1.3.6
+   "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" snmp walk -v 3 -u <USER> -a <AUTH-PROTOCOL> -A <AUTH-KEY> -x <PRIV-PROTOCOL> -X <PRIV-KEY> <IP-Address>:<port>
    ```
 
-   **Note**: Run this command as administrator from the Agent installation directory to avoid the following error:
+   **Note**: Run the command as administrator from the Agent installation directory to avoid the following error:
 
    ```shell
    Error: unable to read artifact: open C:\ProgramData\Datadog\auth_token: Access is denied.
