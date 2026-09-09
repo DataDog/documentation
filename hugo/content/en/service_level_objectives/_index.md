@@ -137,6 +137,18 @@ To maintain your edit access to the SLO, the system requires you to include at l
 
 **Note**: Users can create SLOs on any monitor even if they do not have write permissions to the monitor. Similarly, users can create SLO alerts even if they do not have write permissions to the SLO. For more information on RBAC permissions for Monitors, see the [RBAC documentation][12] or the [guide on how to set up RBAC for Monitors][13].
 
+## Deleted SLOs
+
+<div class="alert alert-warning">Datadog test suite out-of-the-box (OOTB) SLOs cannot be restored.</div>
+
+Deleted SLOs are retained for 30 days before being permanently deleted. To restore a recently deleted SLO:
+
+1. On the [SLO manage page][2], click the gear icon in the top right corner and select {{< ui >}}Restore Deleted SLOs{{< /ui >}}.
+1. Select the SLO(s) you want to restore.
+1. Click the {{< ui >}}Restore{{< /ui >}} button.
+
+**Note**: Deleted SLO status corrections cannot be restored. This recovery process applies only to deleted SLOs.
+
 ## Searching SLOs
 
 The [Service Level Objectives manage page][2] lets you run an advanced search of all SLOs so you can find, view, edit, clone or delete SLOs from the search results.
