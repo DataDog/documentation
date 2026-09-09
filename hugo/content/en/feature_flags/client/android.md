@@ -13,6 +13,9 @@ further_reading:
 - link: "/real_user_monitoring/android/"
   tag: "Documentation"
   text: "Android and Android TV Monitoring"
+- link: "/feature_flags/guide/proxy_sdk_traffic/"
+  tag: "Guide"
+  text: "Proxy Feature Flag SDK Traffic"
 ---
 
 ## Overview

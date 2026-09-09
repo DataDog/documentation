@@ -14,6 +14,9 @@ further_reading:
 - link: "/feature_flags/browser_developer_extension/"
   tag: "Documentation"
   text: "Browser Developer Extension"
+- link: "/feature_flags/guide/proxy_sdk_traffic/"
+  tag: "Guide"
+  text: "Proxy Feature Flag SDK Traffic"
 ---
 
 ## Overview

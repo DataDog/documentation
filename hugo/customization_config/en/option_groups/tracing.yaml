@@ -18,3 +18,13 @@ custom_instrumentation_api_options:
     default: true
   - id: dd_api
     label: Datadog
+
+live_debugger_language_options:
+  - id: java
+    default: true
+  - id: python
+  - id: dot_net
+  - id: node_js
+  - id: ruby
+  - id: php
+  - id: go
