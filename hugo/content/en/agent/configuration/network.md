@@ -89,10 +89,16 @@ API test results for the Synthetics Worker > v0.1.6: `intake.synthetics.`{{< reg
 Browser test results for the Synthetics Worker > v0.2.0: `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{% site-region region="us,eu,us3,us5,ap1,ap2,uk1" %}}
+{{% site-region region="us,eu,us3,us5,ap1,ap2,uk1,gov,gov2" %}}
 
 [Remote Configuration][101]
 : `config.`{{< region-param key="dd_site" code="true" >}}
+
+[101]: /remote_configuration
+
+{{% /site-region %}}
+
+{{% site-region region="us,eu,us3,us5,ap1,ap2,uk1" %}}
 
 [Database Monitoring][102]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -102,7 +108,6 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 : `softinv-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `eudm-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[101]: /remote_configuration
 [102]: /database_monitoring/
 [103]: /infrastructure/end_user_device_monitoring/
 
