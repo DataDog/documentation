@@ -161,20 +161,32 @@
 }
 
 /* A full-width row rather than a card: matches Hugo's Ask AI suggestion, which
-   sits above the results and stays visible even when there are none. */
+   sits above the results and stays visible even when there are none.
+
+   Sized against Hugo's `.ask-docs-ai-link`: a 36px-tall row of 13px medium
+   text. `min-height` carries that 36px rather than padding, since the token
+   scale on this site's 18px root has no 6px step to match Hugo's padding with.
+
+   `font-family` is set explicitly because this is a `<button>`, which does not
+   inherit it — without this the row fell back to the UA font, whose fallback
+   face has no medium weight, so `font-weight: 500` rendered as regular and the
+   row looked lighter than Hugo's. */
 .search-bar__ai-suggestion {
   display: flex;
   align-items: center;
-  gap: var(--space-2xs);
+  gap: var(--space-xs);
   width: calc(100% - 2 * var(--space-sm));
+  min-height: var(--control-height-sm);
   margin: 0 var(--space-sm) var(--space-sm);
-  padding: var(--space-2xs) var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
   background: var(--color-gray-lightest);
   border: var(--border-width) solid var(--color-surface-border);
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-md);
   color: var(--color-brand);
-  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+  font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
+  line-height: var(--line-height);
   text-align: left;
   cursor: pointer;
   transition:
