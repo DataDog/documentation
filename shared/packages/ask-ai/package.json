@@ -23,7 +23,10 @@
     "build": "node esbuild.config.mjs && tsc",
     "typecheck": "tsc && tsc -p tsconfig.test.json",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "//format": "Uses this package's .prettierrc, not the repo-root prettier.config.js — Prettier picks the nearest config and uses it wholesale, so never run this from the repo root or pass the root config.",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "highlight.js": "^11.11.1",
@@ -33,6 +36,7 @@
   "devDependencies": {
     "esbuild": "^0.25.10",
     "happy-dom": "^20.11.1",
+    "prettier": "^3.9.6",
     "typescript": "^5.9.3",
     "vitest": "^3.2.4"
   }

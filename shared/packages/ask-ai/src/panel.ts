@@ -347,7 +347,9 @@ export class AskAiPanel {
     this.modeToggleButton = requireElement(sidebar, ".conv-search-mode-toggle");
     this.modeMenu = requireElement(sidebar, ".conv-search-mode-menu");
     this.modeOptions = [
-      ...sidebar.querySelectorAll<HTMLButtonElement>(".conv-search-mode-option"),
+      ...sidebar.querySelectorAll<HTMLButtonElement>(
+        ".conv-search-mode-option",
+      ),
     ];
     this.resizeHandles = [
       ...sidebar.querySelectorAll<HTMLDivElement>(".conv-search-resize-handle"),
@@ -541,7 +543,8 @@ export class AskAiPanel {
           if (current === undefined) return;
 
           const clamped = clampSize(mode, dimension, current);
-          if (clamped !== current) this.applyPanelSize(mode, dimension, clamped);
+          if (clamped !== current)
+            this.applyPanelSize(mode, dimension, clamped);
         });
       },
       { signal: this.listeners.signal },
@@ -692,10 +695,7 @@ export class AskAiPanel {
     this.messagesContainer.addEventListener(
       "mouseover",
       (event) => {
-        const wrap = closestFrom(
-          event.target,
-          ".conv-search-source-ref-wrap",
-        );
+        const wrap = closestFrom(event.target, ".conv-search-source-ref-wrap");
         if (!wrap || !this.messagesContainer.contains(wrap)) return;
         if (wrap.querySelector(".conv-search-source-tooltip.open")) return;
 
@@ -717,10 +717,7 @@ export class AskAiPanel {
     this.messagesContainer.addEventListener(
       "mouseout",
       (event) => {
-        const wrap = closestFrom(
-          event.target,
-          ".conv-search-source-ref-wrap",
-        );
+        const wrap = closestFrom(event.target, ".conv-search-source-ref-wrap");
         if (!wrap || !this.messagesContainer.contains(wrap)) return;
 
         const movedTo =
@@ -796,7 +793,9 @@ export class AskAiPanel {
 
     this.logInteraction({
       action: "source_card_click",
-      source_number: badge ? Number.parseInt(badge.textContent ?? "", 10) : null,
+      source_number: badge
+        ? Number.parseInt(badge.textContent ?? "", 10)
+        : null,
       source_url: link?.href || null,
       source_title: link?.textContent || null,
     });
@@ -1037,7 +1036,10 @@ export class AskAiPanel {
 
   // -- Message DOM -------------------------------------------------------------
 
-  private addMessage(role: "user" | "assistant", content?: string): MessageParts {
+  private addMessage(
+    role: "user" | "assistant",
+    content?: string,
+  ): MessageParts {
     this.messagesContainer.querySelector(".conv-search-empty-state")?.remove();
 
     const parts = buildMessage(role, content);
@@ -1168,7 +1170,8 @@ export class AskAiPanel {
         history: isFirstMessage ? [] : this.chatHistory.slice(0, -1),
         conversationId: this.conversationId,
         anchorUrl: window.location.href,
-        rewriteQuery: isFirstMessage && this.shouldRewriteQuery && !isSuggestion,
+        rewriteQuery:
+          isFirstMessage && this.shouldRewriteQuery && !isSuggestion,
         signal: this.requestController.signal,
         onThinking: (message) => {
           loadingIndicator.updateStatus(mapThinkingMessage(message));

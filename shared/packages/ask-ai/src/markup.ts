@@ -337,11 +337,7 @@ export function buildLoadingIndicator(initialStatus: string): {
   );
 
   const indicator = element("div", "conv-search-loading-indicator");
-  const statusElement = text(
-    "span",
-    initialStatus,
-    "conv-search-status-text",
-  );
+  const statusElement = text("span", initialStatus, "conv-search-status-text");
   indicator.append(
     element("span", "conv-search-loading-spinner"),
     statusElement,

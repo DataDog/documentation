@@ -56,9 +56,8 @@ describe("mountAskAi", () => {
     mount().ask("short");
 
     const sidebar = document.querySelector(".conv-search-sidebar");
-    const input = document.querySelector<HTMLTextAreaElement>(
-      ".conv-search-input",
-    );
+    const input =
+      document.querySelector<HTMLTextAreaElement>(".conv-search-input");
     expect(sidebar?.classList.contains("open")).toBe(true);
     expect(input?.value).toBe("short");
   });

@@ -93,7 +93,9 @@ describe("mounting", () => {
     mount();
 
     expect(document.querySelector(".conv-search-empty-state")).not.toBeNull();
-    expect(document.querySelectorAll(".conv-search-suggestion")).toHaveLength(3);
+    expect(document.querySelectorAll(".conv-search-suggestion")).toHaveLength(
+      3,
+    );
   });
 
   it("reports itself ready", () => {
@@ -105,27 +107,27 @@ describe("view mode", () => {
   it("defaults to fullscreen", () => {
     mount();
 
-    expect(query(".conv-search-sidebar").classList.contains("mode-fullscreen")).toBe(
-      true,
-    );
+    expect(
+      query(".conv-search-sidebar").classList.contains("mode-fullscreen"),
+    ).toBe(true);
   });
 
   it("restores a stored mode", () => {
     localStorage.setItem("docs-ai-view-mode", "sidebar");
     mount();
 
-    expect(query(".conv-search-sidebar").classList.contains("mode-sidebar")).toBe(
-      true,
-    );
+    expect(
+      query(".conv-search-sidebar").classList.contains("mode-sidebar"),
+    ).toBe(true);
   });
 
   it("falls back to the default when the stored value is not a mode", () => {
     localStorage.setItem("docs-ai-view-mode", "notamode");
     mount();
 
-    expect(query(".conv-search-sidebar").classList.contains("mode-fullscreen")).toBe(
-      true,
-    );
+    expect(
+      query(".conv-search-sidebar").classList.contains("mode-fullscreen"),
+    ).toBe(true);
   });
 
   it("persists and marks the mode chosen from the menu", () => {
@@ -134,27 +136,33 @@ describe("view mode", () => {
     query<HTMLButtonElement>('[data-mode="floating"]').click();
 
     expect(localStorage.getItem("docs-ai-view-mode")).toBe("floating");
-    expect(query(".conv-search-sidebar").classList.contains("mode-floating")).toBe(
-      true,
+    expect(
+      query(".conv-search-sidebar").classList.contains("mode-floating"),
+    ).toBe(true);
+    expect(query('[data-mode="floating"]').getAttribute("aria-checked")).toBe(
+      "true",
     );
-    expect(
-      query('[data-mode="floating"]').getAttribute("aria-checked"),
-    ).toBe("true");
-    expect(
-      query('[data-mode="fullscreen"]').getAttribute("aria-checked"),
-    ).toBe("false");
+    expect(query('[data-mode="fullscreen"]').getAttribute("aria-checked")).toBe(
+      "false",
+    );
   });
 
   it("pushes the body aside only while open in sidebar mode", () => {
     localStorage.setItem("docs-ai-view-mode", "sidebar");
     mount();
-    expect(document.body.classList.contains("docs-ai-sidebar-pushed")).toBe(false);
+    expect(document.body.classList.contains("docs-ai-sidebar-pushed")).toBe(
+      false,
+    );
 
     panel.open();
-    expect(document.body.classList.contains("docs-ai-sidebar-pushed")).toBe(true);
+    expect(document.body.classList.contains("docs-ai-sidebar-pushed")).toBe(
+      true,
+    );
 
     panel.close();
-    expect(document.body.classList.contains("docs-ai-sidebar-pushed")).toBe(false);
+    expect(document.body.classList.contains("docs-ai-sidebar-pushed")).toBe(
+      false,
+    );
   });
 });
 
@@ -164,7 +172,9 @@ describe("panel size", () => {
     mount();
 
     expect(
-      document.documentElement.style.getPropertyValue("--docs-ai-sidebar-width"),
+      document.documentElement.style.getPropertyValue(
+        "--docs-ai-sidebar-width",
+      ),
     ).toBe("520px");
   });
 
@@ -173,7 +183,9 @@ describe("panel size", () => {
     mount();
 
     expect(
-      document.documentElement.style.getPropertyValue("--docs-ai-sidebar-width"),
+      document.documentElement.style.getPropertyValue(
+        "--docs-ai-sidebar-width",
+      ),
     ).toBe("280px");
   });
 
@@ -182,7 +194,9 @@ describe("panel size", () => {
     mount();
 
     expect(
-      document.documentElement.style.getPropertyValue("--docs-ai-floating-height"),
+      document.documentElement.style.getPropertyValue(
+        "--docs-ai-floating-height",
+      ),
     ).toBe("570px");
   });
 });
@@ -193,7 +207,9 @@ describe("open and close", () => {
     panel.open();
 
     expect(query(".conv-search-sidebar").classList.contains("open")).toBe(true);
-    expect(query(".conv-search-float-btn").classList.contains("hidden")).toBe(true);
+    expect(query(".conv-search-float-btn").classList.contains("hidden")).toBe(
+      true,
+    );
   });
 
   it("closes on Escape", () => {
@@ -202,18 +218,24 @@ describe("open and close", () => {
 
     pressKey(document, { key: "Escape" });
 
-    expect(query(".conv-search-sidebar").classList.contains("open")).toBe(false);
+    expect(query(".conv-search-sidebar").classList.contains("open")).toBe(
+      false,
+    );
   });
 
   it("closes the mode menu on Escape before closing the panel", () => {
     mount();
     panel.open();
     query<HTMLButtonElement>(".conv-search-mode-toggle").click();
-    expect(query(".conv-search-mode-menu").classList.contains("open")).toBe(true);
+    expect(query(".conv-search-mode-menu").classList.contains("open")).toBe(
+      true,
+    );
 
     pressKey(document, { key: "Escape" });
 
-    expect(query(".conv-search-mode-menu").classList.contains("open")).toBe(false);
+    expect(query(".conv-search-mode-menu").classList.contains("open")).toBe(
+      false,
+    );
     expect(query(".conv-search-sidebar").classList.contains("open")).toBe(true);
   });
 
@@ -223,7 +245,9 @@ describe("open and close", () => {
 
     query<HTMLElement>(".conv-search-overlay").click();
 
-    expect(query(".conv-search-sidebar").classList.contains("open")).toBe(false);
+    expect(query(".conv-search-sidebar").classList.contains("open")).toBe(
+      false,
+    );
   });
 });
 
@@ -295,7 +319,9 @@ describe("sending a message", () => {
     await panel.sendMessage();
 
     expect(document.querySelector(".conv-search-empty-state")).toBeNull();
-    expect(document.querySelector(".conv-search-message-actions")).not.toBeNull();
+    expect(
+      document.querySelector(".conv-search-message-actions"),
+    ).not.toBeNull();
   });
 
   it("says so when the stream produces nothing", async () => {
@@ -356,7 +382,8 @@ describe("sending a message", () => {
     const firstBody = JSON.parse(fetchMock.mock.calls[0]?.[1].body as string);
     expect(firstBody.data.attributes.rewrite_query).toBe(true);
 
-    const laterCalls = (globalThis.fetch as ReturnType<typeof vi.fn>).mock.calls;
+    const laterCalls = (globalThis.fetch as ReturnType<typeof vi.fn>).mock
+      .calls;
     const secondBody = JSON.parse(laterCalls[0]?.[1].body as string);
     expect(secondBody.data.attributes.rewrite_query).toBeUndefined();
     expect(secondBody.data.attributes.history).toEqual([
@@ -378,7 +405,9 @@ describe("newChat", () => {
 
     expect(document.querySelectorAll(".conv-search-message")).toHaveLength(0);
     expect(document.querySelector(".conv-search-empty-state")).not.toBeNull();
-    expect(document.querySelectorAll(".conv-search-suggestion")).toHaveLength(3);
+    expect(document.querySelectorAll(".conv-search-suggestion")).toHaveLength(
+      3,
+    );
   });
 
   it("starts a new conversation id on the next message", async () => {
@@ -417,7 +446,9 @@ describe("ask", () => {
     panel.ask("short");
 
     expect(query(".conv-search-sidebar").classList.contains("open")).toBe(true);
-    expect(query<HTMLTextAreaElement>(".conv-search-input").value).toBe("short");
+    expect(query<HTMLTextAreaElement>(".conv-search-input").value).toBe(
+      "short",
+    );
     expect(send).not.toHaveBeenCalled();
   });
 

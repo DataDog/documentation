@@ -9,7 +9,10 @@ const COPIED_ICON_MS = 1200;
 /** How long an inline feedback message stays on screen. */
 const FEEDBACK_MS = 2000;
 
-const feedbackHideTimers = new WeakMap<HTMLElement, ReturnType<typeof setTimeout>>();
+const feedbackHideTimers = new WeakMap<
+  HTMLElement,
+  ReturnType<typeof setTimeout>
+>();
 
 /**
  * Adds the thumbs / copy row under a finished answer.
@@ -63,8 +66,7 @@ function recordFeedback(
   // not a second signal.
   if (button.classList.contains("active")) return;
 
-  const opposite =
-    feedback === "positive" ? "thumbs-down" : "thumbs-up";
+  const opposite = feedback === "positive" ? "thumbs-down" : "thumbs-up";
   button.parentElement
     ?.querySelector(`[data-action="${opposite}"]`)
     ?.classList.remove("active");

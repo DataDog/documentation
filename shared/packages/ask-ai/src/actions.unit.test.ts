@@ -54,7 +54,9 @@ describe("addMessageActions", () => {
     const message = messageElement();
     addMessageActions(message, "the answer", getLogContext);
 
-    expect(message.querySelector(".conv-search-message-actions")).not.toBeNull();
+    expect(
+      message.querySelector(".conv-search-message-actions"),
+    ).not.toBeNull();
   });
 
   it("marks the chosen thumb active and confirms the feedback", () => {
@@ -66,7 +68,9 @@ describe("addMessageActions", () => {
 
     actionButton(row, "thumbs-up").click();
 
-    expect(actionButton(row, "thumbs-up").classList.contains("active")).toBe(true);
+    expect(actionButton(row, "thumbs-up").classList.contains("active")).toBe(
+      true,
+    );
     expect(row.querySelector(".conv-search-feedback-inline")?.textContent).toBe(
       STRINGS.feedbackThanks,
     );
@@ -82,8 +86,12 @@ describe("addMessageActions", () => {
     actionButton(row, "thumbs-up").click();
     actionButton(row, "thumbs-down").click();
 
-    expect(actionButton(row, "thumbs-up").classList.contains("active")).toBe(false);
-    expect(actionButton(row, "thumbs-down").classList.contains("active")).toBe(true);
+    expect(actionButton(row, "thumbs-up").classList.contains("active")).toBe(
+      false,
+    );
+    expect(actionButton(row, "thumbs-down").classList.contains("active")).toBe(
+      true,
+    );
   });
 
   it("does not log a second time when the same thumb is clicked twice", () => {
@@ -169,12 +177,20 @@ describe("addMessageActions", () => {
     const copy = actionButton(row, "copy");
 
     copy.click();
-    expect(copy.querySelector<HTMLElement>(".copy-icon")?.style.display).toBe("none");
-    expect(copy.querySelector<HTMLElement>(".check-icon")?.style.display).toBe("block");
+    expect(copy.querySelector<HTMLElement>(".copy-icon")?.style.display).toBe(
+      "none",
+    );
+    expect(copy.querySelector<HTMLElement>(".check-icon")?.style.display).toBe(
+      "block",
+    );
 
     vi.advanceTimersByTime(1200);
-    expect(copy.querySelector<HTMLElement>(".copy-icon")?.style.display).toBe("block");
-    expect(copy.querySelector<HTMLElement>(".check-icon")?.style.display).toBe("none");
+    expect(copy.querySelector<HTMLElement>(".copy-icon")?.style.display).toBe(
+      "block",
+    );
+    expect(copy.querySelector<HTMLElement>(".check-icon")?.style.display).toBe(
+      "none",
+    );
   });
 
   it("reports a clipboard rejection instead of failing silently", async () => {
@@ -204,11 +220,14 @@ describe("injectCodeCopyButtons", () => {
 
   it("adds one button per code block", () => {
     const container = document.createElement("div");
-    container.innerHTML = "<pre><code>one</code></pre><pre><code>two</code></pre>";
+    container.innerHTML =
+      "<pre><code>one</code></pre><pre><code>two</code></pre>";
 
     injectCodeCopyButtons(container, getLogContext);
 
-    expect(container.querySelectorAll(".conv-search-code-copy")).toHaveLength(2);
+    expect(container.querySelectorAll(".conv-search-code-copy")).toHaveLength(
+      2,
+    );
   });
 
   it("does not add a second button to a block it has already handled", () => {
@@ -217,14 +236,18 @@ describe("injectCodeCopyButtons", () => {
     injectCodeCopyButtons(container, getLogContext);
     injectCodeCopyButtons(container, getLogContext);
 
-    expect(container.querySelectorAll(".conv-search-code-copy")).toHaveLength(1);
+    expect(container.querySelectorAll(".conv-search-code-copy")).toHaveLength(
+      1,
+    );
   });
 
   it("copies the code and logs it as a snippet", () => {
     const container = containerWithCode("datadog-agent status");
     injectCodeCopyButtons(container, getLogContext);
 
-    container.querySelector<HTMLButtonElement>(".conv-search-code-copy")!.click();
+    container
+      .querySelector<HTMLButtonElement>(".conv-search-code-copy")!
+      .click();
 
     expect(writeText).toHaveBeenCalledWith("datadog-agent status");
     expect(addAction).toHaveBeenCalledWith(
@@ -243,7 +266,9 @@ describe("injectCodeCopyButtons", () => {
     container.addEventListener("click", onContainerClick);
 
     injectCodeCopyButtons(container, getLogContext);
-    container.querySelector<HTMLButtonElement>(".conv-search-code-copy")!.click();
+    container
+      .querySelector<HTMLButtonElement>(".conv-search-code-copy")!
+      .click();
 
     expect(onContainerClick).not.toHaveBeenCalled();
   });

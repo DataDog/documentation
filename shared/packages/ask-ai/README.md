@@ -4,9 +4,9 @@ The Ask AI widget: the floating button, the conversational panel, and everything
 inside it. Shared by the Hugo documentation site and the Astro one, so that both
 run the same code rather than two copies of it.
 
-Nothing here is published. Both hosts reference the package by path, so the
-`@dd/` scope is a private placeholder and the name matters only for readability
-in their dependency lists.
+This package is never published to a package registry. Both hosts reference it
+by path, so the `@dd/` scope is a private placeholder and the name matters only
+for readability in their dependency lists.
 
 ## What the hosts own, and what this package owns
 
@@ -31,11 +31,11 @@ entry points each mount defensively without coordinating.
 Three capabilities are read from the environment rather than imported, and each
 has a defined absent-case:
 
-| Capability | Where it comes from | When it is absent |
-| --- | --- | --- |
-| RUM / Logs | `window.DD_RUM`, `window.DD_LOGS` | Telemetry silently does nothing, with no console noise |
-| Feature flag | `config.isEnabled` | Treated as enabled |
-| Datadog-user status | `config.getIsDatadogUser` | The `is_datadog_user` tag is omitted, not sent as `false` |
+| Capability          | Where it comes from               | When it is absent                                         |
+| ------------------- | --------------------------------- | --------------------------------------------------------- |
+| RUM / Logs          | `window.DD_RUM`, `window.DD_LOGS` | Telemetry silently does nothing, with no console noise    |
+| Feature flag        | `config.isEnabled`                | Treated as enabled                                        |
+| Datadog-user status | `config.getIsDatadogUser`         | The `is_datadog_user` tag is omitted, not sent as `false` |
 
 The environment (`development` / `preview` / `live`) is read from `data-env` on
 `<html>`, which both hosts already set, and keys the package's own `apiUrl` /
@@ -43,11 +43,11 @@ The environment (`development` / `preview` / `live`) is read from `data-env` on
 
 ## Commands
 
-| Command | What it does |
-| --- | --- |
-| `yarn build` | esbuild → `dist/ask-ai.js`, then `tsc` → `dist/*.d.ts` |
-| `yarn typecheck` | Type-checks the source and the tests |
-| `yarn test` | Unit tests, `happy-dom` |
+| Command          | What it does                                           |
+| ---------------- | ------------------------------------------------------ |
+| `yarn build`     | esbuild → `dist/ask-ai.js`, then `tsc` → `dist/*.d.ts` |
+| `yarn typecheck` | Type-checks the source and the tests                   |
+| `yarn test`      | Unit tests, `happy-dom`                                |
 
 `dist/` is not committed. Each host's own `dev` and `build` scripts run this
 package's build first, so a fresh clone → install → build works with nothing

@@ -169,9 +169,9 @@ describe("streamDocsAiChat", () => {
 
     const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
     expect(url).toBe(`${CREDENTIALS.apiUrl}/chat`);
-    expect(
-      (init.headers as Record<string, string>)["X-Docs-Ai-Api-Key"],
-    ).toBe(CREDENTIALS.apiKey);
+    expect((init.headers as Record<string, string>)["X-Docs-Ai-Api-Key"]).toBe(
+      CREDENTIALS.apiKey,
+    );
     expect(JSON.parse(init.body as string)).toEqual({
       data: {
         attributes: {

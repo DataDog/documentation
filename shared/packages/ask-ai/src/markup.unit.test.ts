@@ -9,7 +9,7 @@ import {
 } from "./markup";
 import { STRINGS } from "./strings";
 
-const XSS = '<script>alert(1)</script>';
+const XSS = "<script>alert(1)</script>";
 
 describe("buildWidgetElements", () => {
   it("returns the three roots the widget appends to the body", () => {
@@ -36,8 +36,12 @@ describe("buildWidgetElements", () => {
       expect(sidebar.querySelector(selector), selector).not.toBeNull();
     }
 
-    expect(sidebar.querySelectorAll(".conv-search-mode-option")).toHaveLength(3);
-    expect(sidebar.querySelectorAll(".conv-search-resize-handle")).toHaveLength(3);
+    expect(sidebar.querySelectorAll(".conv-search-mode-option")).toHaveLength(
+      3,
+    );
+    expect(sidebar.querySelectorAll(".conv-search-resize-handle")).toHaveLength(
+      3,
+    );
   });
 
   it("offers the three view modes, with fullscreen checked by default", () => {
@@ -99,9 +103,9 @@ describe("buildEmptyState", () => {
   it("renders the prompt and an empty suggestions container", () => {
     const emptyState = buildEmptyState();
 
-    expect(emptyState.querySelector(".conv-search-empty-title")?.textContent).toBe(
-      STRINGS.emptyTitle,
-    );
+    expect(
+      emptyState.querySelector(".conv-search-empty-title")?.textContent,
+    ).toBe(STRINGS.emptyTitle);
     expect(
       emptyState.querySelector(".conv-search-empty-subtitle")?.textContent,
     ).toBe(STRINGS.emptySubtitle);
@@ -193,7 +197,9 @@ describe("buildLoadingIndicator", () => {
     const { wrapper, statusElement } = buildLoadingIndicator("Searching…");
 
     expect(wrapper.classList.contains("conv-search-loading-state")).toBe(true);
-    expect(wrapper.querySelector(".conv-search-loading-spinner")).not.toBeNull();
+    expect(
+      wrapper.querySelector(".conv-search-loading-spinner"),
+    ).not.toBeNull();
     expect(statusElement.textContent).toBe("Searching…");
   });
 });

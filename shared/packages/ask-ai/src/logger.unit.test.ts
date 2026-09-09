@@ -2,7 +2,10 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { logAction, logError } from "./logger";
 import type { LogContext } from "./types";
 
-const NO_CONTEXT: LogContext = { conversationId: null, isDatadogUser: undefined };
+const NO_CONTEXT: LogContext = {
+  conversationId: null,
+  isDatadogUser: undefined,
+};
 
 function installFakeGlobals() {
   const addAction = vi.fn();
@@ -24,11 +27,15 @@ afterEach(() => {
 
 describe("with no telemetry globals present", () => {
   it("does not throw", () => {
-    expect(() => logAction("msg", { action: "new_chat" }, NO_CONTEXT)).not.toThrow();
+    expect(() =>
+      logAction("msg", { action: "new_chat" }, NO_CONTEXT),
+    ).not.toThrow();
   });
 
   it("logs nothing to the console for a normal action", () => {
-    const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
+    const consoleError = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
     const consoleWarn = vi.spyOn(console, "warn").mockImplementation(() => {});
 
     logAction("msg", { action: "new_chat" }, NO_CONTEXT);
@@ -39,9 +46,7 @@ describe("with no telemetry globals present", () => {
 
   it("does not throw when reporting an error", () => {
     vi.spyOn(console, "error").mockImplementation(() => {});
-    expect(() =>
-      logError("msg", new Error("boom"), NO_CONTEXT),
-    ).not.toThrow();
+    expect(() => logError("msg", new Error("boom"), NO_CONTEXT)).not.toThrow();
   });
 });
 
@@ -64,15 +69,22 @@ describe("logAction", () => {
   it("omits is_datadog_user when no callback supplied a value", () => {
     logAction("msg", { action: "new_chat" }, NO_CONTEXT);
 
-    const payload = fakes.addAction.mock.calls[0]?.[1] as Record<string, unknown>;
+    const payload = fakes.addAction.mock.calls[0]?.[1] as Record<
+      string,
+      unknown
+    >;
     expect(payload).not.toHaveProperty("is_datadog_user");
   });
 
   it("includes is_datadog_user when a value is known", () => {
-    logAction("msg", { action: "new_chat" }, {
-      conversationId: null,
-      isDatadogUser: false,
-    });
+    logAction(
+      "msg",
+      { action: "new_chat" },
+      {
+        conversationId: null,
+        isDatadogUser: false,
+      },
+    );
 
     expect(fakes.addAction).toHaveBeenCalledWith(
       "conversational_search_action",
@@ -81,10 +93,14 @@ describe("logAction", () => {
   });
 
   it("includes the conversation id when there is one", () => {
-    logAction("msg", { action: "new_chat" }, {
-      conversationId: "dd_docsai_abc",
-      isDatadogUser: true,
-    });
+    logAction(
+      "msg",
+      { action: "new_chat" },
+      {
+        conversationId: "dd_docsai_abc",
+        isDatadogUser: true,
+      },
+    );
 
     expect(fakes.addAction).toHaveBeenCalledWith(
       "conversational_search_action",
@@ -93,10 +109,14 @@ describe("logAction", () => {
   });
 
   it("sends the message and a nested payload to Logs", () => {
-    logAction("Conversational Search Impression", {
-      action: "impression",
-      page: "/api/latest/",
-    }, NO_CONTEXT);
+    logAction(
+      "Conversational Search Impression",
+      {
+        action: "impression",
+        page: "/api/latest/",
+      },
+      NO_CONTEXT,
+    );
 
     expect(fakes.info).toHaveBeenCalledWith(
       "Conversational Search Impression",

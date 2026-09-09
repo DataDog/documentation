@@ -1,9 +1,6 @@
 /** Where an `ask()` call came from. Reported as the `trigger` on first open. */
 export type TriggerSource =
-  | "floating_button"
-  | "home_hero"
-  | "search_suggestion"
-  | "entry_button";
+  "floating_button" | "home_hero" | "search_suggestion" | "entry_button";
 
 export type ViewMode = "fullscreen" | "floating" | "sidebar";
 
