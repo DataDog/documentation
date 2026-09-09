@@ -27,10 +27,10 @@ The right configuration depends on how you send telemetry to Datadog. Find your 
 | How you send telemetry | Recommendation |
 |---|---|
 | [OTLP ingestion by the Datadog Agent](#otlp-ingestion-by-the-datadog-agent) | Run an Agent on every host that generates telemetry. Omit hostname attributes, or set them to match the Agent hostname. |
-| [DDOT Collector exporting directly to Datadog](#ddot-collector-exporting-directly-to-datadog) | Include the `infraattributes` processor in every pipeline. On hosts, enable `allow_hostname_override`. On Fargate, supply platform resource attributes instead. |
-| [Collector exporting through a gateway](#collector-exporting-through-a-gateway) | Detect host information in the node-level Collector and preserve those resource attributes through the gateway. |
-| [OpenTelemetry Collector with the Datadog Exporter sending directly to Datadog](#opentelemetry-collector-with-the-datadog-exporter-sending-directly-to-datadog) | Run a Collector on each host and use the `resourcedetection` processor with the detectors for your environment. |
-| [Direct OTLP intake without an Agent or Collector](#direct-otlp-intake-without-an-agent-or-collector) | Set platform resource attributes instead of `host.name`. |
+| [DDOT Collector exporting directly to Datadog](#ddot-collector-exporting-directly-to-datadog) | The DDOT converter adds the `infraattributes` processor automatically. On hosts, enable `allow_hostname_override`. On Fargate, supply platform resource attributes instead. |
+| [Collector exporting through a gateway](#collector-exporting-through-a-gateway) | Detect host information in the node-level Collector with the appropriate Kubernetes or resource detection processor, and preserve those resource attributes through the gateway. |
+| [OpenTelemetry Collector with the Datadog Exporter sending directly to Datadog](#opentelemetry-collector-with-the-datadog-exporter-sending-directly-to-datadog) | Run a Collector on each host. Use `resourcedetection` for hosts and cloud Kubernetes, or `k8sattributes` for non-cloud Kubernetes. |
+| [Direct OTLP intake without a Datadog Agent](#direct-otlp-intake-without-a-datadog-agent) | Use SDK resource detectors or Collector processors to add host or platform resource attributes before export. |
 
 ### OTLP ingestion by the Datadog Agent
 
@@ -40,7 +40,7 @@ If incoming telemetry has no valid hostname attributes, Datadog uses the Agent h
 
 ### DDOT Collector exporting directly to Datadog
 
-The DDOT Collector's `infraattributes` processor adds infrastructure attributes and tags to OTLP telemetry. Include it in every signal pipeline. The processor requires resource attributes that identify the source container so it can look up and attach infrastructure tags. See [Infrastructure tags are missing from telemetry][10] for supported attributes and troubleshooting steps.
+The DDOT Collector's `infraattributes` processor adds infrastructure attributes and tags to OTLP telemetry. The DDOT converter adds the processor to every signal pipeline automatically. The processor requires resource attributes that identify the source container so it can look up and attach infrastructure tags. See [Infrastructure tags are missing from telemetry][10] for supported attributes and troubleshooting steps.
 
 The rest of the configuration depends on whether the DDOT Collector runs on a host.
 
@@ -71,19 +71,19 @@ This applies to gateway deployments of the OpenTelemetry Collector with the Data
 
 In a gateway deployment, the Collector that exports to Datadog does not run on the host that produced the telemetry. If host information is not attached before the data reaches the gateway, telemetry from many hosts can collapse onto the gateway's hostname, or each Collector pod can register as its own host.
 
-Detect host information in the node-level Collector, then configure the gateway to preserve those resource attributes instead of detecting them again. For the Datadog Exporter, use the **Kubernetes DaemonSet -> Gateway** configuration in [Datadog Exporter configuration](#datadog-exporter-configuration). If a gateway deployment reports the wrong host, see [Gateway collector not forwarding host metadata][19].
+Detect host information in the node-level Collector, then configure the gateway to preserve those resource attributes instead of detecting them again. In non-cloud Kubernetes environments, use the `k8sattributes` processor. In cloud Kubernetes environments, use the `resourcedetection` processor with the detector for your cloud provider. For the Datadog Exporter, use the **Kubernetes DaemonSet -> Gateway** configuration in [Datadog Exporter configuration](#datadog-exporter-configuration). If a gateway deployment reports the wrong host, see [Gateway collector not forwarding host metadata][19].
 
 ### OpenTelemetry Collector with the Datadog Exporter sending directly to Datadog
 
 This applies to the [OpenTelemetry Collector with the Datadog Exporter][20] running on each host or as a Kubernetes DaemonSet. If your Collector forwards to a gateway, see [Collector exporting through a gateway](#collector-exporting-through-a-gateway) instead.
 
-Run a Collector on every host and add the `resourcedetection` processor with the detectors for your environment, as described in [Datadog Exporter configuration](#datadog-exporter-configuration).
+Run a Collector on every host. For host-based environments, add the `resourcedetection` processor with the detectors for your environment. For non-cloud Kubernetes, use the `k8sattributes` processor. For cloud Kubernetes, use the `resourcedetection` processor with the detector for your cloud provider. See [Datadog Exporter configuration](#datadog-exporter-configuration) for configuration examples.
 
-### Direct OTLP intake without an Agent or Collector
+### Direct OTLP intake without a Datadog Agent
 
-This applies to [OTLP intake for serverless platforms][12], such as AWS Lambda, ECS Fargate, Azure Functions, and Cloud Run, and to [OTLP intake for managed platforms][13].
+This applies when an OpenTelemetry SDK sends telemetry directly to Datadog OTLP intake, or when an OpenTelemetry Collector sends telemetry with the `otlphttp` exporter. You can use direct OTLP intake from host-based environments as well as from [serverless platforms][12], such as AWS Lambda, ECS Fargate, Azure Functions, and Cloud Run, and [managed platforms][13].
 
-These ingestion paths do not use a host-based Agent or Collector. Set the cloud and platform resource attributes for your environment instead of relying on `host.name` for workload identification. Each platform requires a different set of attributes.
+Populate the resource attributes for your environment before exporting telemetry. If you export from an SDK, enable its built-in resource detectors when available, or set the attributes manually. If you export through a Collector, use the `resourcedetection` and `k8sattributes` processors as appropriate for the environment; the examples in [Datadog Exporter configuration](#datadog-exporter-configuration) also apply when you use the `otlphttp` exporter. For serverless and managed platforms, use platform resource attributes instead of relying on `host.name` for workload identification.
 
 <div class="alert alert-danger">Host metadata sent to the <a href="/opentelemetry/setup/otlp_ingest/">OTLP intake endpoints</a> does not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
 
