@@ -2,10 +2,10 @@
 title: Restrict Access to Experiments Projects
 description: Use Data Access Control to restrict an Agent Observability Experiments project to specific teams or roles.
 further_reading:
-- link: "/account_management/rbac/data_access"
+- link: "/account_management/rbac/data_access/"
   tag: "Documentation"
   text: "Data Access Control"
-- link: "/llm_observability/data_governance"
+- link: "/llm_observability/data_governance/"
   tag: "Documentation"
   text: "Data Governance"
 - link: "/account_management/rbac/permissions/#access-management"
@@ -17,7 +17,7 @@ further_reading:
 
 Experiments projects can contain sensitive material: the prompts and expected outputs stored in your datasets, the traces produced by an experiment run, and the evaluation results attached to them. Datadog's [Data Access Control][1] lets you restrict an individual project so that only the teams or roles you name can see it.
 
-When a project is restricted, users outside the teams and roles you granted access to:
+When a project is restricted, users outside the teams or roles you granted access to:
 
 - Do not see the project, or its experiments and datasets, in any list view or search result.
 - Receive a *not found* response when they open a direct link to the project or to anything inside it.
@@ -34,23 +34,19 @@ Restrictions apply in the Datadog UI and in the API. Application keys are subjec
 - You have the Datadog Admin role, or another role carrying the [`user_access_manage` permission][2].
 - The project you want to restrict already exists in Experiments.
 
-## Restrict a project
+## Restrict a project in the UI
 
 Access to Agent Observability data is keyed on the **`ml_app`** tag, and that one key covers two different things:
 
 - An **ML app** name restricts the traces that application sends to Agent Observability.
 - An **Experiments project ID** restricts that project: its experiments, datasets, dataset records, and the spans and evaluation metrics produced by its experiment runs.
 
-A project is matched by its ID, never by its name.
-
 1. Navigate to [Organization Settings > Data Access Controls][3].
 2. Create a new policy that restricts a subset of data.
 3. Name the policy something that identifies the project it protects, for example `Experiments - Fraud Detection`.
-4. Add a filter on the **Agent Observability** product with the key `ml_app`, then **select the project from the list of values**. The list contains two groups: your ML apps (the `ml_app` values your instrumented applications send), and your Experiments projects, offered by name. Selecting a project stores its ID, which is what the restriction matches on.
-5. Grant access to the teams or roles that should keep access to the project. A maximum of 50 teams and roles can be attached to one policy.
+4. Add a filter on the **Agent Observability** product with the key `ml_app`, then **select the project from the list of values**. The list contains two groups: your ML apps (the `ml_app` values your instrumented applications send), and your Experiments projects, offered by name.
+5. Grant access to the teams or roles that should keep access to the project. A maximum of 50 teams or roles can be attached to one policy.
 6. Save the policy.
-
-The policy takes effect as soon as it is saved. The project, its experiments, its datasets, and its dataset records are hidden immediately, whatever their age. Spans and evaluation metrics are matched by a tag applied when they are ingested, so experiment runs from before your organization had this feature available are not covered; see [Limitations](#limitations).
 
 <div class="alert alert-warning">Select the project from the list rather than typing its name. The value field also accepts free text, and a policy holding a project's <em>name</em> matches no Experiments data: the project stays visible to everyone while the policy looks like it is working. The same applies to a partially typed or misspelled name.</div>
 
@@ -60,6 +56,8 @@ Two things to expect while filling in the filter:
 - **The key may be locked to `ml_app`.** Data Access Control allows one tag key per telemetry type, so if your organization already has an Agent Observability policy, new ones reuse the same key.
 
 <div class="alert alert-info">Datadog is rolling out a redesigned access control page. Depending on your organization, step 2 is either <strong>New Restricted Dataset</strong> on the Data Access Controls page, or <strong>New Policy > Sensitive Data Partition</strong> on the Access Control page. Both configure the same restriction, and the link in step 1 takes you to whichever page your organization has. Selecting an Experiments project by name is only available on the redesigned page; on the older page, enter the project ID as the value until then.</div>
+
+The policy takes effect as soon as it is saved. The project, its experiments, its datasets, and its dataset records are hidden immediately, whatever their age. Spans and evaluation metrics are subject to the exceptions in [Limitations](#limitations).
 
 ### Find a project's ID
 
@@ -89,7 +87,7 @@ You can also create the policy with the [Datasets API][5]. The `ml_obs` product 
 
 ## Grant and revoke access
 
-Access is granted by editing the teams and roles on the policy. Removing a team or role takes effect immediately. Deleting the policy removes the restriction entirely, and the project becomes visible again to everyone in the organization with Agent Observability read access.
+Access is granted by editing the teams or roles on the policy. Removing a team or role takes effect immediately. Deleting the policy removes the restriction entirely, and the project becomes visible again to everyone in the organization with Agent Observability read access.
 
 Being an admin does not exempt you from a restriction. The `user_access_manage` permission lets you author and edit policies, but access to a restricted project follows team and role membership only: an admin who is not in a granted team or role sees the project as not found, exactly as any other user would.
 
@@ -98,7 +96,7 @@ Being an admin does not exempt you from a restriction. The `user_access_manage` 
 - **Spans from an experiment run by the SDK carry your application's `ml_app`, not the project.** The SDK sends an `ml_app` value with every span it produces, taken from the value you configured or from your service name, and Datadog does not replace it. A policy on the project does not match those spans, so for an experiment run this way the restriction covers its evaluation metrics but not the inputs and outputs recorded on its spans. The project, its experiments, its datasets, and its dataset records are hidden either way. To restrict the span contents as well, add a second filter for your application's own `ml_app` value to the same policy.
 - **Spans and evaluation metrics ingested before this feature became available are not restricted.** The project ID is attached as a tag at ingestion time and past events are not re-tagged, so a policy on a project does not hide the event data of experiment runs that predate it. List views, metadata, and dataset records are unaffected by this and are hidden regardless of age.
 - **Annotation queues and managed prompts are not supported** by Data Access Control. See [Data Access Control][1] for the full list of supported telemetry.
-- **A project with no restriction policy is visible to everyone** with Agent Observability read access. Data Access Control is permissive by default unless your organization has enabled [Strict Mode][6] for Agent Observability. A policy whose value matches no project silently restricts nothing, so confirm every new restriction with a user outside the granted teams and roles.
+- **A project with no restriction policy is visible to everyone** with Agent Observability read access. Data Access Control is permissive by default unless your organization has enabled [Strict Mode][6] for Agent Observability. A policy whose value matches no project silently restricts nothing, so confirm every new restriction with a user outside the granted teams or roles.
 
 ## Further reading
 
@@ -106,7 +104,7 @@ Being an admin does not exempt you from a restriction. The `user_access_manage` 
 
 [1]: /account_management/rbac/data_access/
 [2]: /account_management/rbac/permissions/#access-management
-[3]: https://app.datadoghq.com/organization-settings/data-access-controls
+[3]: https://app.datadoghq.com/organization-settings/data-access-controls/
 [4]: /llm_observability/improve/experiments/api/
 [5]: /api/latest/datasets/
 [6]: /account_management/rbac/data_access/#strict-mode
