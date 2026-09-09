@@ -31,6 +31,30 @@ async function stubDatadogUserLookup(page: Page): Promise<void> {
   });
 }
 
+/**
+ * Resource-timing facts about the page's own load, read after the widget has
+ * mounted. `ask-ai` matches case-sensitively, so it cannot collide with the
+ * mount script's URL, which carries the component's `AskAi.astro` name.
+ */
+async function readLoadTimings(page: Page) {
+  return page.evaluate(() => {
+    const navigation = performance.getEntriesByType(
+      "navigation",
+    )[0] as PerformanceNavigationTiming;
+    const askAiModule = performance
+      .getEntriesByType("resource")
+      .find((entry) => entry.name.includes("ask-ai"));
+
+    return {
+      domContentLoadedMs: navigation.domContentLoadedEventEnd,
+      askAiModuleStartMs: askAiModule?.startTime ?? null,
+      // Reported so a miss on the match above is legible in the failure output
+      // rather than looking like the module was never requested.
+      askAiModuleUrl: askAiModule?.name ?? null,
+    };
+  });
+}
+
 test.describe("Ask AI", () => {
   test("mounts a floating button that opens the panel, throwing nothing", async ({
     page,
@@ -62,6 +86,32 @@ test.describe("Ask AI", () => {
     await expect(page.locator(".conv-search-sidebar.open")).toBeVisible();
 
     expect(consoleErrors).toEqual([]);
+  });
+
+  test("fetches the package only after the page has finished loading", async ({
+    page,
+  }) => {
+    await stubDatadogUserLookup(page);
+
+    // Same throwaway load as above: Vite's dep optimizer reloads the first page
+    // to pull a new dependency, which would land the module's request in the
+    // wrong navigation's resource timeline.
+    await page.goto(PAGE);
+    await page.waitForLoadState("networkidle");
+
+    await page.goto(PAGE);
+    await expect(page.locator(".conv-search-float-btn")).toBeVisible();
+
+    const timings = await readLoadTimings(page);
+
+    // The mount script registers its idle callback while the deferred module
+    // scripts are still running, and `DOMContentLoaded` is dispatched before the
+    // browser yields to an idle period — so the request cannot start any earlier
+    // than this, whatever the machine's speed.
+    expect(timings.askAiModuleStartMs).not.toBeNull();
+    expect(timings.askAiModuleStartMs).toBeGreaterThan(
+      timings.domContentLoadedMs,
+    );
   });
 
   test("the searchbar's Ask AI row opens the one mounted panel", async ({
