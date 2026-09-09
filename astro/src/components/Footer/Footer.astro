@@ -32,8 +32,7 @@ const year = new Date().getFullYear();
 // so each link is a real localized URL. The footer renders all supported
 // locales; the toolbar instance reuses the same Preact component.
 const { rest: footerLocaleless } = stripLocalePrefix(Astro.url.pathname);
-// `Locale`, not `LangCode`: the language-name helpers accept any code present
-// in the YAML table, but the footer menus and the localized hrefs are keyed by
+// The footer menus and the localized hrefs are keyed by
 // the locales this site actually builds.
 const currentLang: Locale = resolveLocale(Astro.currentLocale);
 const translate = useTranslations(currentLang);

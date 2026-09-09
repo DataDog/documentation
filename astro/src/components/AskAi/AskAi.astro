@@ -1,11 +1,10 @@
 ---
 // The Ask AI widget: the floating button and the conversational panel, both
-// owned by `@dd/ask-ai` and shared with Hugo. Rendered once by BaseLayout, so
+// owned by the `@dd/ask-ai` package. Rendered once by BaseLayout, so
 // every route gets it.
 //
-// A bundled `<script>` rather than `is:inline`, since it needs the npm import —
-// the same shape as `Telemetry.astro`. Astro emits it as a deferred module, so
-// the widget mounts after first paint.
+// A bundled `<script>` rather than `is:inline`, since it needs the npm import. 
+// Astro emits it as a deferred module, so the widget mounts after first paint.
 //
 // Bundled scripts do not re-execute on view-transition soft navigation, so the
 // mount-once shape below needs no guard. `mountAskAi` is idempotent anyway,

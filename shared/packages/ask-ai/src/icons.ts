@@ -58,6 +58,13 @@ function icon(source: IconSource): (options: IconOptions) => string {
 
 // -- The eight from `static/images/svg-icons/` --------------------------------
 
+/**
+ * Duplicated on the Astro side as `astro/src/assets/images/svg-icons/spark-ai.svg`,
+ * because its searchbar row is host-owned UI and importing from here would pull
+ * this package into the searchbar island's static bundle. Change the path data
+ * in both places. Both copies collapse into one when Hugo is deprecated and
+ * this package stops needing to exist.
+ */
 export const sparkAiIcon = icon({
   viewBox: "0 0 192 192",
   body:

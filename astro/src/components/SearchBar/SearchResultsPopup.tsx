@@ -6,6 +6,14 @@ import type { PopupRect } from "./hooks/usePopupPosition";
 // The same spark Hugo puts on its Ask AI row (and the one the widget's own
 // floating button carries), inlined as SVG so it takes the row's `currentColor`
 // instead of Hugo's filter-based recolor of an <img>.
+//
+// This is a second copy of the path data in `@dd/ask-ai`'s `sparkAiIcon`, and
+// the two can drift. Importing that one instead would pull the package into
+// this island's static bundle — the thing the dynamic `import()` in `askAi()`
+// avoids — and it renders to an HTML string rather than the `?raw` markup this
+// row wants. TODO: once Hugo is deprecated, Ask AI no longer needs to be a
+// separate package, and the icon can move into this site's own asset set with
+// one copy.
 import sparkAiIconSvg from "../../assets/images/svg-icons/spark-ai.svg?raw";
 
 const cl = classListFactory(styles);
