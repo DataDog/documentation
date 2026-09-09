@@ -85,8 +85,8 @@ export function getRegions(
   const enumSet = new Set<string>(siteVar.enum);
 
   // Pass 1: bare site domains. Covers all but five operations.
-  const byDomain = all.filter((r) => enumSet.has(r.site));
-  if (byDomain.length > 0) return byDomain;
+  const matchedRegions = all.filter((r) => enumSet.has(r.site));
+  if (matchedRegions.length > 0) return matchedRegions;
 
   // Pass 2: fully-qualified per-region hosts. Guarded so it runs only when
   // pass 1 found nothing, matching Hugo's `if eq (len regions) 0`.
@@ -95,9 +95,9 @@ export function getRegions(
   // host-to-region map. A map would be lossy: `navy.oncall.datadoghq.com` is
   // listed by us, gov and gov2, so keying by host keeps only the last and
   // silently drops the other two.
-  const exact = getExactDomains();
+  const exactDomainsByKey = getExactDomains();
   return all.filter((r) =>
-    (exact.get(r.key) ?? []).some((d) => enumSet.has(d)),
+    (exactDomainsByKey.get(r.key) ?? []).some((d) => enumSet.has(d)),
   );
 }
 
