@@ -12,6 +12,7 @@ import { DevBadge } from "@components/DevBadge/DevBadge";
 import Telemetry from "@components/Telemetry/Telemetry.astro";
 import AskAi from "@components/AskAi/AskAi.astro";
 import { resolveSiteEnv } from "@lib/site/siteEnv";
+import { getAllowedRegions, DEFAULT_REGION_KEY } from "@config/regions";
 import {
   TWITTER_HANDLE,
   THEME_COLOR,
@@ -80,6 +81,24 @@ const hreflangResolved = hreflang?.map((h) => ({
   hreflang: h.hreflang,
   href: h.href.startsWith("http") ? h.href : `${siteOrigin}${h.href}`,
 }));
+
+// Region visibility is data-driven: the allow-list handed to the inline script
+// and the CSS at the end of this file both come from `shared/regions.yaml`.
+// Adding a data center there is the only edit needed.
+const allowedRegions = getAllowedRegions();
+const regionKeysJson = JSON.stringify(allowedRegions.map((r) => r.key));
+
+// One selector pair per region. CSS cannot compare `html[data-active-region]`
+// against an element's own `data-region` value, so the pairs are generated
+// instead of hand-written.
+//
+// This has to be static CSS rather than a script that stamps matching
+// elements: a script in `<head>` runs before the body is parsed and would
+// find no elements, and one at the end of `<body>` would leave every region
+// element hidden until it ran.
+const activeRegionSelectors = allowedRegions
+  .map((r) => `html[data-active-region='${r.key}'] [data-region='${r.key}']`)
+  .join(",\n");
 ---
 
 <html lang={lang} data-env={env}>
@@ -142,21 +161,24 @@ const hreflangResolved = hreflang?.map((h) => ({
       type="font/woff"
       crossorigin
     />
-    <script is:inline>
+    <script
+      is:inline
+      define:vars={{ regionKeysJson, defaultRegion: DEFAULT_REGION_KEY }}
+    >
       (function () {
         // Resolve the active Datadog region before first paint so region-scoped
         // content (elements with `data-region`) renders in its final state and
         // there's no flash of the wrong region. Precedence matches Hugo:
         // ?site= query param → `site` cookie → default `us`. Referrer-based
         // sync runs later in the regionState module.
-        var allowed = ["us", "us3", "us5", "eu", "ap1", "ap2", "gov"];
+        var allowed = JSON.parse(regionKeysJson);
         var params = new URLSearchParams(window.location.search);
         var fromQuery = params.get("site");
         var cookieMatch = document.cookie.match(/(?:^|; )site=([^;]*)/);
         var fromCookie = cookieMatch
           ? decodeURIComponent(cookieMatch[1])
           : null;
-        var region = "us";
+        var region = defaultRegion;
         if (fromQuery && allowed.indexOf(fromQuery) !== -1) {
           region = fromQuery;
         } else if (fromCookie && allowed.indexOf(fromCookie) !== -1) {
@@ -165,6 +187,11 @@ const hreflangResolved = hreflang?.map((h) => ({
         document.documentElement.setAttribute("data-active-region", region);
       })();
     </script>
+    {
+      /* Per-region visibility rules, generated from `shared/regions.yaml`.
+        The hidden-by-default rule lives in global.css. */
+    }
+    <style set:html={`${activeRegionSelectors} { display: revert; }`}></style>
     {
       /* Datadog RUM + Browser Logs. Its bundled script is deferred, so placing
         it here costs nothing against first paint. */

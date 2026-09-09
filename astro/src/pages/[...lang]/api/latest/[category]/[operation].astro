@@ -11,7 +11,6 @@ import {
   getOperationView,
 } from "@lib/api/viewsBuilder";
 import { renderMarkdown } from "@lib/api/markdownRenderer";
-import { highlightEndpoint } from "@lib/api/syntaxHighlighter";
 import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
 import { mdToMetaDescription } from "@lib/seo";
 import { useTranslations } from "@lib/i18n/i18n";
@@ -87,12 +86,6 @@ const operation = redirectTo
   : await getOperationView(catSlug, opSlug, lang);
 if (!redirectTo && !operation) {
   return new Response(null, { status: 404 });
-}
-
-if (operation) {
-  for (const variant of operation.variants) {
-    await highlightEndpoint(variant);
-  }
 }
 
 const tabsId = operation ? `api-endpoint-${operation.slug}` : "";
