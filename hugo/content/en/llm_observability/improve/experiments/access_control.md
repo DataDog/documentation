@@ -1,5 +1,5 @@
 ---
-title: Restrict Access to Experiments Projects
+title: Data Access Control on Projects
 description: Use Data Access Control to restrict an Agent Observability Experiments project to specific teams or roles.
 further_reading:
 - link: "/account_management/rbac/data_access/"
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Experiments projects can contain sensitive material: the prompts and expected outputs stored in your datasets, the traces produced by an experiment run, and the evaluation results attached to them. Datadog's [Data Access Control][1] lets you restrict an individual project so that only the teams or roles you name can see it.
+Projects can contain sensitive material: the prompts and expected outputs stored in your datasets, the traces produced by an experiment run, and the evaluation results attached to them. Datadog's [Data Access Control][1] lets you restrict an individual project so that only the teams or roles you name can see it.
 
 When a project is restricted, users outside the teams or roles you granted access to:
 
@@ -39,12 +39,12 @@ Restrictions apply in the Datadog UI and in the API. Application keys are subjec
 Access to Agent Observability data is keyed on the **`ml_app`** tag, and that one key covers two different things:
 
 - An **ML app** name restricts the traces that application sends to Agent Observability.
-- An **Experiments project ID** restricts that project: its experiments, datasets, dataset records, and the spans and evaluation metrics produced by its experiment runs.
+- A **Project ID** restricts that project: its experiments, datasets, dataset records, and the spans and evaluation metrics produced by its experiment runs.
 
 1. Navigate to [Organization Settings > Data Access Controls][3].
 2. Create a new policy that restricts a subset of data.
 3. Name the policy something that identifies the project it protects, for example `Experiments - Fraud Detection`.
-4. Add a filter on the **Agent Observability** product with the key `ml_app`, then **select the project from the list of values**. The list contains two groups: your ML apps (the `ml_app` values your instrumented applications send), and your Experiments projects, offered by name.
+4. Add a filter on the **Agent Observability** product with the key `ml_app`, then **select the project from the list of values**. The list contains two groups: your ML apps (the `ml_app` values your instrumented applications send), and your projects.
 5. Grant access to the teams or roles that should keep access to the project. A maximum of 50 teams or roles can be attached to one policy.
 6. Save the policy.
 
