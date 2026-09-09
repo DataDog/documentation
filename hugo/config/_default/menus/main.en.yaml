@@ -5326,7 +5326,7 @@ menu:
       identifier: data_streams_setup
       parent: data_streams
       weight: 1
-    - name: Kafka
+    - name: Kafka Console
       url: data_streams/kafka
       identifier: data_streams_kafka
       parent: data_streams
