@@ -21,9 +21,11 @@ further_reading:
 
 Findings helps you capture, organize, and reuse important context during log investigations in [Log Explorer][1].
 
-With Findings, you can save log events, visualizations, and queries with the **Add Finding** button or the keyboard shortcut **Cmd**/**Ctrl** + **S** while investigating. **Double-click** on findings to go back to them in Log Explorer, or by using the **Open in Explorer** button on the finding. Track your investigation paths in the findings panel by arranging the findings. Branch into new questions without losing track of earlier observations.
+With Findings, you can save log events, visualizations, and queries while investigating with the **Add Finding** button or the **Cmd**/**Ctrl** + **S** keyboard shortcut. **Double-click** on findings to go back to them in Log Explorer, or by using the **Open in Explorer** button on the finding.
 
-Use Findings to checkpoint a useful base query to come back to, collect possible evidence, compare results, and build context as your investigation evolves. Select findings to use as context to [Ask Bits][2] questions, or send them to a [Notebook][3] to share with others.
+Use Findings to checkpoint your investigation paths with useful queries and logs to come back to. You can use this as a way to backtrack to a useful query or aggregation you identified from before, or to refer back to information from those log results or the log event. Keep track of your investigation paths in the findings panel by arranging the findings to represent your paths. Branch into new questions without losing track of earlier observations by saving them as findings along the way. 
+
+Collect possible evidence, compare results, and build context as your investigation evolves. Add notes to findings to keep track of your observations. Select findings to use as context to [Ask Bits][2] questions, or send them to a [Notebook][3] to share with others.
 
 Findings persist across page reloads and browser sessions until you delete them.
 
@@ -36,7 +38,7 @@ Findings lives in the side panel on the left of Log Explorer. To open it:
 1. Navigate to [Log Explorer][1].
 2. Click the **Findings** tab on the top left.
 
-This space is where you work with findings: arrange them, reopen them in Log Explorer, and select them to send elsewhere. It keeps findings and their layout across page reloads and browser sessions
+This space is where you work with findings: arrange them, reopen them in Log Explorer, and select them to send elsewhere. The panel keeps the findings and their layout across page reloads and browser sessions.
 
 ## Capture a finding
 
@@ -83,10 +85,9 @@ Send only the findings that relate to your question. If three of the eight findi
 
 Hover over a finding to rename it, and drag it to move or resize it. Datadog saves the layout you build, so the organization looks the same the next time you open the panel.
 
-To reset your organization, you can use the auto-organize option. This will group findings by the query they came from. Moving, resizing, or deleting a finding resets the grouping.
+To reset your organization, you can use the auto-organize option. This will group findings by the query they came from. Moving, resizing, or deleting a finding resets the grouping indication in the background.
 <!-- A screenshot of the canvas controls would make the auto-organize icon findable. Add one alongside the GA video. -->
 
-The controls on the left of the canvas also zoom in and out, fit the canvas to your findings, and can open a full-screen view. The full-screen view gives you the same controls with more room.
 
 ## Delete findings
 
