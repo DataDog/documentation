@@ -35,9 +35,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
   tag: "Blog"
   text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
-- link: "https://www.datadoghq.com/blog/live-debugger/"
-  tag: "Blog"
-  text: "Debug live production code without redeploying with Datadog Live Debugger"
 ---
 
 ## Overview
