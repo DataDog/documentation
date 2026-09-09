@@ -1,0 +1,153 @@
+---
+title: Azure API Management policies for App and API Protection
+description: Understand how the Azure API Management policy calls the App and API Protection callout service, applies block decisions, and propagates trace context.
+further_reading:
+    - link: "/security/application_security/setup/azure/api-management"
+      tag: "Documentation"
+      text: "Enabling App and API Protection for Azure API Management"
+    - link: "/security/application_security/setup/azure/api-management/configuration"
+      tag: "Documentation"
+      text: "Configuring the Azure API Management callout"
+    - link: 'https://learn.microsoft.com/en-us/azure/api-management/send-request-policy'
+      tag: "Documentation"
+      text: "Azure API Management send-request policy"
+    - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/azure/apim-callout'
+      tag: "Source Code"
+      text: "App and API Protection Azure API Management callout source code"
+---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
+{{< callout url="#" btn_hidden="true" header="App and API Protection for Azure API Management is in Preview" >}}
+To try the preview of App and API Protection for Azure API Management, use the following setup instructions.
+{{< /callout >}}
+
+The App and API Protection for Azure API Management (APIM) integration uses the native APIM [`send-request`][1] policy to call the Datadog callout service and reads the decision from a policy variable.
+
+Three policy documents are provided in [`deploy/azure/policies`][2]:
+
+| File                       | Contents                                              |
+|----------------------------|-------------------------------------------------------|
+| `azure-apim-full.xml`      | The complete policy document, with both sections.     |
+| `azure-apim-inbound.xml`   | The inbound section only.                             |
+| `azure-apim-outbound.xml`  | The outbound section only.                            |
+
+Use the full document for a new policy. If you already have policy content, use the inbound and outbound fragments to merge the Datadog stages into the corresponding sections.
+
+## Applying the policy
+
+Azure API Management evaluates policies at global, workspace, product, API, and operation scope, and `<base />` controls both inheritance and ordering between those scopes. Attach the Datadog policy at the scope you want to protect: all APIs, a single product, one API, or one operation.
+
+The policy ships with the placeholder URL `https://<dd-apim-callout-host>:8080`. Before applying it, replace every occurrence of that entire URL with the `calloutBaseUrl` output of the deployment. That output is `http://<ACA-FQDN>` unless you set `enableHttps` to `true`, and it does not include a port, so replace the entire URL rather than the hostname alone. The deployment performs the same substitution for you when you set `deployPolicy` to `true`, and its `targetApiIds` parameter selects which APIs receive the policy.
+
+`azure-apim-full.xml` contains a `<base />` element in each of its four sections. APIM rejects those at global scope, so if you apply the file to all APIs, remove every `<base />` element first. Keep them when you apply the policy to a product, an API, or an operation, because they control inheritance from the enclosing scope. The deployment applies the same rule for you: it strips the elements for all-APIs deployments and keeps them when `targetApiIds` names specific APIs.
+
+The policy has this shape:
+
+```xml
+<policies>
+  <inbound>
+    <base />
+    <!-- Phase 1: serialize request headers, call the service, read the decision -->
+    <!-- Phase 2 (conditional): send the request body when the service asks for it -->
+    <!-- If blocked: return-response. Otherwise: inject x-datadog-* headers -->
+  </inbound>
+  <backend>
+    <base />
+  </backend>
+  <outbound>
+    <base />
+    <!-- Phase 3: serialize response headers, call the service, read the decision -->
+    <!-- Phase 4 (conditional): send the response body when the service asks for it -->
+    <!-- If blocked: return-response -->
+  </outbound>
+  <on-error>
+    <base />
+  </on-error>
+</policies>
+```
+
+## How the callout works
+
+Every callout is a `send-request` with `mode="new"`, `timeout="3"`, and `ignore-error="true"`. Each callout posts `application/json` to the callout service. The policy stores each response in `ddPhase1Response` through `ddPhase4Response` and the corresponding parsed JSON body in `ddPhase1` through `ddPhase4`.
+
+The exchange has four phases:
+
+1. **Request headers.** The policy serializes the request method, scheme, authority, path with query string, client IP address, and headers, then posts them. The service replies with a request ID, trace propagation headers, and, when body inspection applies, an accepted body size. The policy stores the request ID in the variable `ddRequestId`.
+2. **Request body.** Runs only when phase 1 returns an accepted body size. The policy base64-encodes the request body, truncating it to that size, and posts it together with the request ID.
+3. **Response headers.** The policy posts the response status code and headers together with the request ID.
+4. **Response body.** Runs only when phase 3 returned an accepted body size, and handles the body the same way as phase 2.
+
+The request ID ties all four phases to a single Datadog Web Application Firewall (WAF) evaluation context. The callout service holds that context in an in-memory cache whose time-to-live defaults to 30 seconds, set by `DD_APIM_CALLOUT_REQUEST_TIMEOUT`. The context is created in phase 1, kept between phases, and released after the final phase or after a block.
+
+## Blocking
+
+When the WAF decides to block, the callout service answers with a `block` object:
+
+```json
+{
+  "block": {
+    "status": 403,
+    "headers": { "Content-Type": ["application/json"] },
+    "content": "<base64-encoded body>"
+  }
+}
+```
+
+The policy detects `block` and calls `return-response` to send the status code, set `Content-Type` from `block.headers` (defaulting to `application/json` when absent), and write the body by base64-decoding `block.content`.
+
+Because `return-response` cancels the rest of the pipeline, a block during an inbound phase means your backend is never called.
+
+## Fail-open behavior
+
+Every failure path allows traffic through:
+
+| Scenario                                                     | Result                                                                                              |
+|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| The callout service is unreachable, or the call times out    | `ignore-error="true"` leaves the response variable unset. The policy skips the check, and traffic continues. |
+| The callout answers with a status other than `200`           | The policy treats the result as allow, and traffic continues.                                        |
+| The callout receives invalid JSON                            | It returns `400` with `{}`, and the policy treats the result as allow.                               |
+| The request ID is unknown in a later phase                   | The service answers `200` with `{}`, and no block is applied.                                        |
+| The WAF times out, or the processor reports an error         | The service returns `200` with `{}`, and no block is applied.                                        |
+| Cached request state passed its time-to-live                 | The orphaned state is released, and traffic continues.                                               |
+
+Because every failure path allows traffic, a misconfiguration shows up as missing security data rather than as broken traffic. When signals are missing, check the following:
+
+1. The policy is attached to the API you are sending traffic to, at a scope that applies to it.
+2. The policy calls the right URL. Compare the `set-url` value against the `calloutBaseUrl` output of the deployment, including scheme and port.
+3. The gateway can reach the callout service on that URL. A callout that never arrives leaves no trace in the policy, because `ignore-error="true"` hides it.
+4. The callout service logs show incoming requests. If they do not, the gateway is not reaching it.
+5. The callout service can reach the Datadog Agent on port `8126`, and the Agent has `DD_APM_ENABLED` and `DD_APM_NON_LOCAL_TRAFFIC` set to `true`. Without those, the service evaluates traffic but nothing arrives in Datadog.
+
+Building the JSON body with `set-body` and parsing the response variable each take less than 0.1 ms, and conditional evaluation takes less than 0.01 ms. The dominant cost is network round-trip time to the callout service.
+
+## Trace context propagation
+
+When the request is allowed, phase 1 returns propagation headers and the policy injects them into the request before forwarding it to the backend:
+
+- `x-datadog-trace-id`
+- `x-datadog-parent-id`
+- `x-datadog-sampling-priority`
+- `x-datadog-origin`
+- `x-datadog-tags`
+
+The presence of these headers on the backend request confirms that the inbound policy ran and allowed the request.
+
+## Identifying the integration in Datadog
+
+The callout service appears in APM as the `apim-callout` service, and its spans carry the tag `component:apim-callout`. To use a different service name, set `DD_SERVICE` on the callout container.
+
+When the WAF matches a request, the span also carries App and API Protection tags, including `appsec.event`, `appsec.blocked`, and `http.client_ip`.
+
+The client IP address comes from the value the policy sends in phase 1. That value sets `http.client_ip`, even when another proxy sits in front of APIM.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://learn.microsoft.com/en-us/azure/api-management/send-request-policy
+[2]: https://github.com/DataDog/dd-trace-go/tree/main/contrib/azure/apim-callout/deploy/azure/policies

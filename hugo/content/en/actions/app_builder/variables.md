@@ -31,7 +31,7 @@ To add a state variable with Bits AI:
 To add a state variable manually:
 
 1. In your app, click the {{< ui >}}Data{{< /ui >}} ({{< ui >}}{&nbsp;}{{< /ui >}}) icon to open the Data tab.
-1. Click the plus ({{< ui >}}+{{< /ui >}}), then select {{< ui >}}Variable{{< /ui >}}.
+1. Click the plus ({{< ui >}}\+{{< /ui >}}), then select {{< ui >}}Variable{{< /ui >}}.
 1. Optionally, click the variable name and rename it.
 1. Define the initial value for your state variable.
 
@@ -44,9 +44,9 @@ To create an app that uses a button to change a callout value component's style 
 ### Create the variables
 
 1. In your app, click the {{< ui >}}Data{{< /ui >}} ({{< ui >}}{&nbsp;}{{< /ui >}}) icon to open the Data tab.
-1. Click the plus ({{< ui >}}+{{< /ui >}}), then select {{< ui >}}Variable{{< /ui >}}.
+1. Click the plus ({{< ui >}}\+{{< /ui >}}), then select {{< ui >}}Variable{{< /ui >}}.
 1. Name the variable `callout_value` and set its {{< ui >}}Initial Value{{< /ui >}} to `Pass`.
-1. Click the plus ({{< ui >}}+{{< /ui >}}) to create another variable.
+1. Click the plus ({{< ui >}}\+{{< /ui >}}) to create another variable.
 1. Name this variable `callout_color` and set its {{< ui >}}Initial Value{{< /ui >}} to `green`.
 
 ### Create the components

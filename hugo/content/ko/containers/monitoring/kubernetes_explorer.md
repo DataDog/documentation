@@ -29,7 +29,7 @@ Kubernetes Explorer는 대부분의 Datadog Agent 설치에서 **기본적으로
 
 Datadog Operator를 사용하여 Datadog Agent를 설치하면 Kubernetes Explorer가 기본적으로 활성화됩니다.
 
-Kubernetes Explorer가 활성화되어 있는지 확인하려면 `datadog-agent.yaml`에서 `features.orchestratorExplorer.enabled` 매개변수가 `true`로 설정되어 있는지 확인합니다.
+Kubernetes Explorer가 활성화되어 있는지 확인하려면 `datadog-agent.yaml`에서 `features.orchestratorExplorer.enabled` 파라미터가 `true`로 설정되어 있는지 확인합니다.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -52,7 +52,7 @@ spec:
 
 [공식 Helm 차트][1]를 사용하여 Datadog Agent를 설치하면 Kubernetes Explorer가 기본적으로 활성화됩니다.
 
-Kubernetes Explorer가 활성화되어 있는지 확인하려면 `datadog-values.yaml` 파일에서 `orchestratorExplorer.enabled` 매개변수가 `true`로 설정되어 있는지 확인합니다.
+Kubernetes Explorer가 활성화되어 있는지 확인하려면 `datadog-values.yaml` 파일에서 `orchestratorExplorer.enabled` 파라미터가 `true`로 설정되어 있는지 확인합니다.
 
 ```yaml
 datadog:
@@ -78,6 +78,8 @@ datadog:
 {{% tab "OpenTelemetry Collector" %}}
 
 Datadog Agent 대신 네이티브 OpenTelemetry 파이프라인을 사용하여 Kubernetes Explorer를 채울 수 있습니다. 이 설정은 [`k8sobjects`][1] 수신기를 사용하여 Kubernetes 리소스 데이터를 수집하고 [Datadog Exporter][2]의 Orchestrator Explorer 기능을 통해 전달합니다.
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-warning">이 기능은 다음에서는 사용할 수 없습니다 {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
 #### 전제 조건 {#prerequisites}
 
@@ -162,17 +164,17 @@ config:
 
 ##### 프로세서 및 파이프라인 {#processors-and-pipeline}
 
-클러스터 UID와 이름을 감지하려면 [`resourcedetection`][8] 프로세서를 추가합니다.
+클러스터 UID와 이름을 탐지하려면 [`resourcedetection`][8] 프로세서를 추가합니다.
 
-- 클러스터 UID(`k8s.cluster.uid`)를 감지하려면 `k8s_api` 감지기가 필요합니다.
-- 클러스터 이름 감지는 클라우드 공급자에 따라 다릅니다. 지원되는 공급자(EKS, AKS, GCP) 및 필요한 권한은 [`resourcedetection` 프로세서 문서][8]를 확인합니다.
+- 클러스터 UID(`k8s.cluster.uid`)를 탐지하려면 `k8s_api` 탐지기가 필요합니다.
+- 클러스터 이름 탐지는 클라우드 공급자에 따라 다릅니다. 지원되는 공급자(EKS, AKS, GCP) 및 필요한 권한은 [`resourcedetection` 프로세서 문서][8]를 확인합니다.
 - 공급자가 지원되지 않는 경우 `resource/add-cluster-name` 프로세서를 사용하여 클러스터 이름을 수동으로 설정합니다. `<YOUR_CLUSTER_NAME>` 항목을 클러스터 이름으로 바꿉니다.
 
 그런 다음 `logs` 파이프라인에서 구성 요소를 연결합니다.
 
 다음 예시는 두 가지 접근 방식을 보여줍니다. EKS, AKS 또는 GCP에서 실행하는 경우 클라우드 공급자 예시를 사용합니다. 공급자가 지원되지 않는 경우 수동 대체를 사용합니다.
 
-**클라우드 공급자 감지(EKS 예시):**
+**클라우드 공급자 탐지(EKS 예시):**
 
 ```yaml
   processors:
@@ -192,7 +194,7 @@ config:
         exporters: [datadog]
 ```
 
-`eks` 항목을 공급자의 감지기(`aks`, `gcp`)로 바꿉니다. 공급자별 구성은 [`resourcedetection` 프로세서 문서][8]를 참조합니다.
+`eks` 항목을 공급자의 탐지기(`aks`, `gcp`)로 바꿉니다. 공급자별 구성은 [`resourcedetection` 프로세서 문서][8]를 참조합니다.
 
 **수동 대체:**
 
@@ -231,7 +233,7 @@ helm install deployment-collector open-telemetry/opentelemetry-collector \
 
 #### 4. 설치 확인 {#4-verify-the-installation}
 
-[Kubernetes Explorer][9]를 열고 OpenTelemetry 클러스터 이름으로 필터링합니다. 모든 핵심 Kubernetes 리소스 섹션과 **커스텀 리소스 > CRD**가 채워져야 합니다. **커스텀 리소스 > 리소스** 섹션은 이 설정에서 지원되지 않습니다.
+[Kubernetes Explorer][9]를 열고 OpenTelemetry 클러스터 이름으로 필터링합니다. 모든 핵심 Kubernetes 리소스 섹션과 **사용자 지정 리소스 > CRD**가 채워져야 합니다. **사용자 지정 리소스 > 리소스** 섹션은 이 설정에서 지원되지 않습니다.
 
 #### 5. Kubernetes Explorer와 로그, 메트릭 및 트레이스 연결(선택 사항) {#5-correlate-logs-metrics-and-traces-with-kubernetes-explorer-optional}
 
@@ -298,10 +300,12 @@ service:
 
 Datadog Agent 대신 `opentelemetry-kube-stack` Helm 차트를 사용하여 Kubernetes Explorer를 채울 수 있습니다.
 
-[`opentelemetry-kube-stack`][1] Helm 차트는 OpenTelemetry Operator를 설치하고 수집기를 `OpenTelemetryCollector` 커스텀 리소스(CR)로 관리합니다. Datadog은 두 개의 수집기를 구성하는 참조 [`values.yaml`][2]를 유지 관리합니다.
+[`opentelemetry-kube-stack`][1] Helm 차트는 OpenTelemetry Operator를 설치하고 수집기를 `OpenTelemetryCollector` 사용자 지정 리소스(CR)로 관리합니다. Datadog은 두 개의 수집기를 구성하는 참조 [`values.yaml`][2]를 유지 관리합니다.
 
 - **`cluster`** (Deployment): kube-state-metrics를 수집하고, Kubernetes 객체를 감시하며, `orchestrator_explorer`를 활성화하여 Kubernetes Explorer를 채웁니다.
 - **`daemon`** (DaemonSet): 호스트 및 kubelet 메트릭을 수집하고 애플리케이션 텔레메트리 데이터를 위한 OTLP 엔드포인트를 노출합니다.
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-warning">이 기능은 다음에서는 사용할 수 없습니다 {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
 #### 전제 조건 {#prerequisites-1}
 
@@ -326,7 +330,7 @@ Datadog Agent 대신 `opentelemetry-kube-stack` Helm 차트를 사용하여 Kube
 ./install
 ```
 
-설치 프로그램은 Datadog API 키, [Datadog 사이트][7], Kubernetes 플랫폼 및 배포 환경을 묻습니다. EKS, GKE 및 AKS의 경우 일치하는 리소스 감지 프리셋을 활성화합니다. 다른 플랫폼의 경우 클러스터 이름을 묻습니다. 그런 다음 `opentelemetry-operator-system` 네임스페이스와 `datadog-secret`을 생성하고, 필요한 경우 cert-manager를 설치하며, 차트를 설치하거나 업그레이드합니다.
+설치 프로그램은 Datadog API 키, [Datadog 사이트][7], Kubernetes 플랫폼 및 배포 환경을 묻습니다. EKS, GKE 및 AKS의 경우 일치하는 리소스 탐지 프리셋을 활성화합니다. 다른 플랫폼의 경우 클러스터 이름을 묻습니다. 그런 다음 `opentelemetry-operator-system` 네임스페이스와 `datadog-secret`을 생성하고, 필요한 경우 cert-manager를 설치하며, 차트를 설치하거나 업그레이드합니다.
 
 #### 값 파일을 사용하여 설치 {#install-with-values-files}
 
@@ -398,7 +402,7 @@ helm upgrade --install opentelemetry-kube-stack \
 
 #### 설치 확인 {#verify-the-installation}
 
-[Kubernetes Explorer][8]를 열고 클러스터 이름으로 필터링합니다. 모든 핵심 Kubernetes 리소스 섹션과 **커스텀 리소스 > CRD**가 채워져야 합니다. **커스텀 리소스 > 리소스** 섹션은 이 설정에서 지원되지 않습니다.
+[Kubernetes Explorer][8]를 열고 클러스터 이름으로 필터링합니다. 모든 핵심 Kubernetes 리소스 섹션과 **사용자 지정 리소스 > CRD**가 채워져야 합니다. **사용자 지정 리소스 > 리소스** 섹션은 이 설정에서 지원되지 않습니다.
 
 [1]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-kube-stack
 [2]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/values.yaml
@@ -412,9 +416,9 @@ helm upgrade --install opentelemetry-kube-stack \
 {{% /tab %}}
 {{< /tabs >}}
 
-### 리소스에 커스텀 태그 추가 {#add-custom-tags-to-resources}
+### 리소스에 사용자 지정 태그 추가 {#add-custom-tags-to-resources}
 
-필터링을 쉽게 하려면 `DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` 환경 변수를 통해 Kubernetes 리소스에 커스텀 태그를 추가할 수 있습니다. **이 태그는 Kubernetes Explorer에만 나타납니다.**
+필터링을 쉽게 하려면 `DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` 환경 변수를 통해 Kubernetes 리소스에 사용자 지정 태그를 추가할 수 있습니다. **이 태그는 Kubernetes Explorer에만 나타납니다.**
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -530,7 +534,7 @@ clusterAgent:
 
 사이드 패널의 {{< ui >}}YAML{{< /ui >}} 탭에는 전체 리소스 정의가 표시됩니다. **Agent 버전 7.44.0**부터는 7일간의 정의 기록도 포함됩니다. 시간 경과에 따른 변경 사항 및 서로 다른 버전 간에 무엇이 변경되었는지 비교할 수 있습니다. 표시된 시간은 변경 사항이 리소스에 적용된 대략적인 시간입니다.
 
-관련 없는 변경 사항이 너무 많이 표시되는 것을 방지하기 위해 다음 필드에만 영향을 주는 업데이트는 무시됩니다,
+관련 없는 변경 사항이 너무 많이 표시되는 것을 방지하기 위해 다음 필드에만 영향을 주는 업데이트는 무시됩니다.
 
 * metadata.resourceVersion
 * metadata.managedFields
@@ -587,7 +591,7 @@ Kubernetes Explorer 탭 내에서 리소스 사용률 메트릭을 선택하여 
 | **주석**: [리소스 메타데이터][9]에서 추출됩니다. 일반적으로 클러스터 관리를 지원하는 도구를 보조하는 데 사용됩니다. | `annotation#checksum/configmap:a1bc23d4` |
 | **메트릭**: 워크로드 리소스(포드, 디플로이먼트 등)에 추가됩니다. 사용률을 기준으로 리소스를 찾을 수 있습니다. 지원되는 메트릭을 확인하려면 [리소스 사용률 필터](#resource-utilization-filters)를 참조하세요. | `metric#cpu_usage_pct_limits_avg15:>80%` |
 | **문자열 일치**: 일부 특정 리소스 속성에서 지원됩니다. 아래를 참조하세요.<br>_참고: 문자열 일치는 키-값 형식을 사용하지 않으며, 일치시킬 속성을 지정할 수 없습니다._ | `"10.132.6.23"` (IP),<br>`"9cb4b43f-8dc1-4a0e"` (UID),<br>`web-api-3` (이름) |
-| **필드**: [리소스 메타데이터][10] 또는 커스텀 리소스의 인덱싱된 필드에서 추출됩니다. | `field#metadata.creationTimestamp:>=4wk`, `field#metadata.deletionTimestamp:<=1hr`, `field#status.currentReplicas:3`, `field#status.conditions.Active.status:True` |
+| **필드**: [리소스 메타데이터][10] 또는 사용자 지정 리소스의 인덱싱된 필드에서 추출됩니다. | `field#metadata.creationTimestamp:>=4wk`, `field#metadata.deletionTimestamp:<=1hr`, `field#status.currentReplicas:3`, `field#status.conditions.Active.status:True` |
 
 >  ***참고**: 동일한 키-값 쌍이 태그와 레이블(또는 주석)로 모두 존재할 수 있습니다. 이는 클러스터의 구성 방식에 따라 다릅니다.*
 
@@ -612,7 +616,7 @@ Kubernetes Explorer 탭 내에서 리소스 사용률 메트릭을 선택하여 
 
 #### 연산자 {#operators}
 
-여러 용어를 복잡한 쿼리로 결합하려면, 대소문자를 구분하는 다음 부울 연산자를 사용할 수 있습니다.
+여러 용어를 복잡한 쿼리로 결합하려면, 대소문자를 구분하는 다음 불리언 연산자를 사용할 수 있습니다.
 
 | 연산자 | 설명 | 예시 |
 |---|---|---|
@@ -639,8 +643,8 @@ app_name:(web-server OR database OR event-consumer)
 
 `*` 와일드카드를 용어의 일부로 사용하여 값과 키 모두에 대해 부분 일치로 필터링할 수 있습니다. 몇 가지 예:
 
-- `kube_job:stats-*`: `kube_deployment` 항목으로 시작하는 `stats-` 태그 값을 가진 모든 리소스를 찾습니다.
-- `pod_name:*canary`: `pod_name` 항목으로 끝나는 `canary` 값을 가진 모든 리소스를 찾습니다.
+- `kube_job:stats-*`: `stats-` 항목으로 시작하는 `kube_deployment` 태그 값을 가진 모든 리소스를 찾습니다.
+- `pod_name:*canary`: `canary` 항목으로 끝나는 `pod_name` 값을 가진 모든 리소스를 찾습니다.
 - `label#release:*`: 값에 상관없이 `release` 레이블이 있는 모든 리소스를 찾습니다.
 - `-label#*.datadoghq.com/*`: Datadog 범위 레이블이 없는 리소스를 찾습니다.
 - `kube_*:*stats*canary`: 값 중간에 `stats` 항목이 포함되고 `canary` 항목으로 끝나는 관련 리소스 태그(`kube_*`)가 있는 리소스를 찾습니다.
@@ -681,7 +685,7 @@ Datadog Agent 내에서 [구성][7]한 태그 외에도, Datadog은 검색 및 �
 관련 리소스는 서로 태그가 지정됩니다. 몇 가지 예:
 
 - 'XYZ' 배포의 일부인 포드에는 `kube_deployment:xyz` 태그가 지정됩니다.
-- 서비스 'A'를 가리키는 수신에는 `kube_service:a` 태그가 지정됩니다.
+- 서비스 'A'를 가리키는 인그레스에는 `kube_service:a` 태그가 지정됩니다.
 
 '상위' 리소스에서 생성된 리소스에는 `kube_ownerref_kind` 및 `kube_ownerref_name` 태그(예: 포드 및 작업)가 지정됩니다.
 
@@ -718,7 +722,7 @@ Datadog Agent 내에서 [구성][7]한 태그 외에도, Datadog은 검색 및 �
 | 리소스 | 추출된 태그 |
 |---|---|
 | **클러스터** | `api_server_version`<br>`kubelet_version` |
-| **커스텀 리소스 정의** 및 <br>**커스텀 리소스** | `kube_crd_kind`<br>`kube_crd_group`<br>`kube_crd_version`<br>`kube_crd_scope`<br>`kube_crd_resource` |
+| **사용자 지정 리소스 정의** 및 <br>**사용자 지정 리소스** | `kube_crd_kind`<br>`kube_crd_group`<br>`kube_crd_version`<br>`kube_crd_scope`<br>`kube_crd_resource` |
 | **네임스페이스** | `phase` |
 | **노드** | `kube_node_unschedulable`<br>`kube_node_kubelet_version`<br>`kube_node_kernel_version`<br>`kube_node_runtime_version`<br>`eks_fargate_node`<br>`node_schedulable`<br>`node_status` |
 | **Persistent Volume** | `kube_reclaim_policy`<br>`kube_storage_class_name`<br>`pv_type`<br>`pv_phase` |

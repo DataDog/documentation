@@ -1192,7 +1192,7 @@ Copies an existing form, including its latest definition, into a new form with a
 
 ## Kubernetes
 
-Tools for searching and describing [Kubernetes][55] resources and retrieving manifests across all clusters.
+Tools for searching and describing [Kubernetes][55] resources, retrieving manifests, and analyzing Deployment rollouts across all clusters.
 
 ### `search_datadog_k8s_resources`
 *Toolset: **kubernetes***\
@@ -1203,6 +1203,17 @@ Searches for [Kubernetes][55] resources across all clusters. Use this tool inste
 - Find deployments with in-progress rollouts in the `general2` cluster.
 - List all nodes in my cluster sorted by CPU usage.
 - Group deployments by `service` and `env` to see how my services are distributed across environments.
+
+### `analyse_datadog_k8s_rollout`
+*Toolset: **kubernetes***\
+*Permissions Required: `Hosts Read` and `Timeseries` and `Logs Read Data` and `APM Read`*\
+Assembles a [Kubernetes][55] Deployment rollout in one call: rollout status and progress, timing (ETA while the rollout is in progress, duration after it finishes), the new, previous, and old ReplicaSet split by revision, and before/after impact series (RED, resource utilization, and log counts). Identify the Deployment by its UID from a previous search or by providing resource identifiers (cluster, namespace, and resource name). Use this tool for rollout questions instead of combining `search_datadog_k8s_resources` and `describe_datadog_k8s_resource`.
+
+- Analyze the rollout of deployment `checkout-api` in cluster `prod`, namespace `default`.
+- What's the ETA for the in-progress rollout of deployment `api-server` in cluster `staging`?
+- Did the last rollout of deployment `payments` affect error rates, traffic, or resource utilization?
+
+**Note**: The tool only reports on Deployments whose `kube_rollout_status` is `inprogress`, `recentlycompleted`, or `recentlyfailed`. For other Deployments, it returns the Deployment's fields with a warning that there is no recent rollout to analyze.
 
 ### `describe_datadog_k8s_resource`
 *Toolset: **kubernetes***\
@@ -1551,7 +1562,7 @@ Runs a read-only shell command on a specified host. Supported commands include: 
 
 ## RUM
 
-Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, inspecting application configuration, managing retention filters, and managing custom RUM metrics.
+Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, monitoring and managing [operations][73], exploring metrics, inspecting application configuration, managing retention filters, and managing custom RUM metrics.
 
 ### `search_rum_applications`
 *Toolset: **rum***\
@@ -1576,6 +1587,54 @@ Returns aggregated insights for RUM Views: waterfall, long tasks, vital distribu
 
 - For the `/checkout` view in the "shop" application, show me the aggregated resource waterfall over the last hour.
 - Break down INP distribution by device type for the home page.
+
+### `search_rum_operations`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` or `Timeseries`*\
+Lists the [operations][73] in your organization, including both SDK-instrumented and UI-configured operations, and resolves an operation name to its `operation_id` and `application_id`. Operations observed only through the SDK have no ID.
+
+- List the RUM operations on the "checkout-web" application.
+- Find the operation ID for the "checkout-flow" operation.
+
+### `get_rum_operation_summary`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` or `Timeseries` or `SLOs Read` or `Monitors Read`*\
+Returns a health summary for a single operation: volume, success rate, failure breakdown by reason, latency percentiles, a per-bucket success and failure trend, and related SLOs and monitors.
+
+- Is the "checkout-flow" operation healthy over the last 24 hours?
+- Show me the p95 latency baseline and trend for the checkout operation.
+
+### `get_rum_operation_insights`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` or `Timeseries`*\
+Investigates why an operation is failing, slow, or abandoned. The `failures` mode returns top failing endpoints, custom context attributes on failed runs, and correlated crash errors. The `latency` mode compares slow and fast cohorts and returns top slow resources. The `abandonment` mode shows how often users give up instead of completing, which views and in-flight resources are involved, and where users navigate next.
+
+- Why is the "checkout-flow" operation slow over the last four hours?
+- Users are dropping out of checkout without any errors. Show me abandonment insights.
+
+### `create_rum_operation`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Write`*\
+Creates a UI-configured operation that tracks a user journey between a start event and a success, failure, or abandonment event, matched by search queries against RUM events. This tool does not create SDK-instrumented operations, which are defined in application code. Confirm the operation name, queries, and event types before applying.
+
+- Create an operation on "checkout-web" that starts on the `/checkout` view and succeeds on `/checkout/complete`.
+- Set up an operation for the signup flow that fails when a validation error occurs.
+
+### `update_rum_operation`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` and `RUM Apps Write`*\
+Updates a UI-configured operation in place. Only the fields you pass are changed, and the rest keep their current values. This tool cannot rename an operation, and does not affect SDK-instrumented operations. Confirm the change before applying.
+
+- Change the failure query on the "checkout" operation to match declined payments.
+- Add abandonment tracking to the signup operation.
+
+### `delete_rum_operation`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` and `RUM Apps Write`*\
+Permanently deletes a UI-configured operation by ID or name. The response lists any SLOs and monitors still tagged for the operation, which are not deleted with it. Confirm the deletion before applying. This tool does not affect SDK-instrumented operations.
+
+- Delete the "legacy-checkout" operation from "checkout-web".
+- Remove the operation with ID `abc-123-def`.
 
 ### `search_rum_metrics`
 *Toolset: **rum***\
@@ -2433,6 +2492,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [70]: /data_observability/
 [71]: /account_management/audit_trail/
 [72]: /actions/forms/
+[73]: /real_user_monitoring/operations_monitoring/
 
 ## Further reading
 
