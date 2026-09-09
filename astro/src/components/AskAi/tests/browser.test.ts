@@ -32,6 +32,41 @@ async function stubDatadogUserLookup(page: Page): Promise<void> {
 }
 
 /**
+ * Answers the one AI request this suite makes, so the source chips are rendered
+ * by the real code path rather than by markup fabricated in the test. The
+ * package parses sources out of the answer text, so the canned message carries
+ * a `[sources]` block; the wire format is SSE, one JSON event per `data:` line.
+ */
+async function stubDocsAiAnswer(page: Page): Promise<void> {
+  const fragments = [
+    "Use an API key and an application key.\n\n",
+    "[sources]\n",
+    "1 | Authentication | https://docs.datadoghq.com/api/latest/authentication/\n",
+    "2 | Sending metrics to Datadog | https://docs.datadoghq.com/metrics/\n",
+  ];
+  const body =
+    fragments
+      .map(
+        (content) =>
+          `data: ${JSON.stringify({ type: "markdown_fragment", content })}\n`,
+      )
+      .join("") + "data: [DONE]\n";
+
+  await page.route("**/docs-ai/chat", async (route) => {
+    const origin = route.request().headers()["origin"] ?? "";
+    await route.fulfill({
+      status: 200,
+      contentType: "text/event-stream",
+      headers: {
+        "access-control-allow-origin": origin,
+        "access-control-allow-headers": "content-type,x-docs-ai-api-key",
+      },
+      body,
+    });
+  });
+}
+
+/**
  * Resource-timing facts about the page's own load, read after the widget has
  * mounted. `ask-ai` matches case-sensitively, so it cannot collide with the
  * mount script's URL, which carries the component's `AskAi.astro` name.
@@ -112,6 +147,84 @@ test.describe("Ask AI", () => {
     expect(timings.askAiModuleStartMs).toBeGreaterThan(
       timings.domContentLoadedMs,
     );
+  });
+
+  test("keeps the disclaimer tooltip hidden until the info button is hovered", async ({
+    page,
+  }) => {
+    await stubDatadogUserLookup(page);
+    await page.goto(PAGE);
+
+    await page.locator(".conv-search-float-btn").click();
+    await expect(page.locator(".conv-search-sidebar.open")).toBeVisible();
+
+    const trigger = page.locator(".conv-search-info-btn");
+    const tooltip = page.locator(".conv-search-info-tooltip-content");
+
+    // Asserted present before hidden: `toBeHidden` also passes for an element
+    // that does not exist, which would make this whole test vacuous if the
+    // class were ever renamed.
+    await expect(tooltip).toHaveCount(1);
+
+    // The package supplies these rules itself. Hugo's site-wide tooltip
+    // stylesheet used to be what hid this, and Astro never loaded it, so the
+    // disclaimer sat permanently open in the panel header.
+    await expect(tooltip).toBeHidden();
+
+    // Hugo's `.tooltip-trigger` sets this with `!important`; the package now
+    // has to say so itself, or the affordance differs between the two sites.
+    await expect(trigger).toHaveCSS("cursor", "help");
+
+    await trigger.hover();
+    await expect(tooltip).toBeVisible();
+
+    // Escaping the panel would mean the widget's own `overflow: hidden` clips
+    // it, which is the whole reason it opens downward rather than upward.
+    const panelBox = await page.locator(".conv-search-sidebar").boundingBox();
+    const tooltipBox = await tooltip.boundingBox();
+    expect(panelBox).not.toBeNull();
+    expect(tooltipBox).not.toBeNull();
+    expect(tooltipBox!.x).toBeGreaterThanOrEqual(panelBox!.x);
+    expect(tooltipBox!.x + tooltipBox!.width).toBeLessThanOrEqual(
+      panelBox!.x + panelBox!.width,
+    );
+    expect(tooltipBox!.y + tooltipBox!.height).toBeLessThanOrEqual(
+      panelBox!.y + panelBox!.height,
+    );
+
+    await page.locator(".conv-search-title").hover();
+    await expect(tooltip).toBeHidden();
+  });
+
+  test("sizes the source chips the way Hugo does", async ({ page }) => {
+    await stubDatadogUserLookup(page);
+    await stubDocsAiAnswer(page);
+    await page.goto(PAGE);
+
+    await page.locator(".conv-search-float-btn").click();
+    await expect(page.locator(".conv-search-sidebar.open")).toBeVisible();
+
+    await page.locator(".conv-search-input").fill("How do I authenticate?");
+    await page.locator(".conv-search-send").click();
+
+    const cards = page.locator(".conv-search-source-card");
+    await expect(cards).toHaveCount(2);
+
+    // The package's rule is `height: 36px` with `padding: 7px 16px` and a 1px
+    // border — copied verbatim from Hugo, where the Bootstrap reboot's global
+    // `box-sizing: border-box` makes 36px the whole chip. Astro ships no such
+    // reset, so under content-box the chip renders 16px taller.
+    const box = await cards.first().boundingBox();
+    expect(box).not.toBeNull();
+    expect(Math.round(box!.height)).toBe(36);
+
+    // Pins the mechanism rather than just the symptom: the reset has to reach
+    // the widget's root and, through the descendant selector, the chip itself.
+    await expect(page.locator(".conv-search-sidebar")).toHaveCSS(
+      "box-sizing",
+      "border-box",
+    );
+    await expect(cards.first()).toHaveCSS("box-sizing", "border-box");
   });
 
   test("the searchbar's Ask AI row opens the one mounted panel", async ({

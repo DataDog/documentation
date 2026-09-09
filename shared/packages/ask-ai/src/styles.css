@@ -42,6 +42,31 @@
 }
 
 /*
+ * Every rule below was written against Hugo, whose Bootstrap reboot applies
+ * `box-sizing: border-box` to the whole document. Astro ships no such reset, so
+ * without this the rules that pair a fixed width or height with padding and a
+ * border come out oversized there: the source chips render 52px tall instead of
+ * 36px, and the view-mode menu 14px too wide.
+ *
+ * Scoped to the widget's own roots rather than `*`, since a package that styles
+ * one component has no business resetting its host's page.
+ */
+.conv-search-float-btn,
+.conv-search-float-btn *,
+.conv-search-float-btn *::before,
+.conv-search-float-btn *::after,
+.conv-search-overlay,
+.conv-search-overlay *,
+.conv-search-overlay *::before,
+.conv-search-overlay *::after,
+.conv-search-sidebar,
+.conv-search-sidebar *,
+.conv-search-sidebar *::before,
+.conv-search-sidebar *::after {
+  box-sizing: border-box;
+}
+
+/*
  * These four are read and written by the resize code, which sets them on the
  * document element, so they stay on `:root` rather than moving to the widget.
  */
@@ -345,6 +370,12 @@ body.docs-ai-sidebar-pushed .main-nav-wrapper .main-nav {
 .conv-search-info-tooltip {
   display: flex;
   align-items: center;
+  /* The tooltip below is absolute against this. `align-self` keeps the box the
+     height of the 16px button rather than letting it stretch to the header's
+     full height, so `top: 100%` lands just under the icon and not under the
+     header's bottom border. */
+  position: relative;
+  align-self: center;
 }
 .conv-search-info-tooltip .conv-search-info-btn {
   display: flex;
@@ -356,7 +387,10 @@ body.docs-ai-sidebar-pushed .main-nav-wrapper .main-nav {
   padding: 0;
   border: none;
   background: transparent;
-  cursor: pointer;
+  /* `help`, not `pointer`: the button opens nothing, and Hugo's
+     `.tooltip-trigger` set this with `!important`, so `help` is the cursor the
+     widget has always shown. */
+  cursor: help;
   transition: opacity 0.15s ease;
   text-decoration: none;
 }
@@ -377,22 +411,71 @@ body.docs-ai-sidebar-pushed .main-nav-wrapper .main-nav {
   transition: opacity 0.15s ease;
 }
 
-#tooltip-docs-ai-info {
-  z-index: 10001;
+/*
+ * The disclaimer bubble. Sizing, color and shadow are what the widget already
+ * looked like on Hugo, where these values overrode that site's purple gradient.
+ *
+ * Opening downward is the one deliberate difference. Hugo's script measured the
+ * viewport and preferred to open upward, flipping down only when it had to;
+ * upward here would be clipped, because `.conv-search-sidebar` is
+ * `overflow: hidden` and the header sits at its top edge. Fixing the direction
+ * is what makes the JS unnecessary, so the arrow is permanently the `.bottom`
+ * variant Hugo used for the flipped case: on top, pointing up at the icon.
+ */
+.conv-search-info-tooltip-content {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  z-index: 10;
+  display: none;
+  width: max-content;
   max-width: 340px;
+  padding: 8px 16px;
+  border-radius: 8px;
   background: white;
   color: #000;
   font-size: 16px;
+  font-weight: 400;
   line-height: 22px;
-  padding: 8px 16px;
-  border-radius: 8px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+  /* The arrow below reaches back up over the bottom of the 16px button, so
+     without this the bubble steals the hover that is holding it open and it
+     flickers. Nothing in here is interactive, so it needs no hit area of its
+     own. Hugo avoided the overlap by moving the bubble out to `document.body`
+     and holding it open with its own listeners and a hide delay. */
+  pointer-events: none;
 }
-#tooltip-docs-ai-info::after {
-  border-color: white transparent transparent transparent !important;
+
+/* `focus-within` covers both keyboard and touch: a tap focuses the button,
+   which is roughly what Hugo's `touchstart` handler achieved. */
+.conv-search-info-tooltip:hover .conv-search-info-tooltip-content,
+.conv-search-info-tooltip:focus-within .conv-search-info-tooltip-content {
+  display: block;
 }
-#tooltip-docs-ai-info.bottom::after {
-  border-color: transparent transparent white transparent !important;
+
+/* Anchored to the icon rather than centered under the bubble, since the bubble
+   extends rightward from the icon instead of being centered on it. */
+.conv-search-info-tooltip-content::after {
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 8px;
+  transform: translateX(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+}
+
+@media (max-width: 640px) {
+  .conv-search-info-tooltip-content {
+    /* The panel is full-width here, and the icon sits ~120px in, so the full
+       340px would run off a narrow phone. Hugo clamped to the viewport in JS. */
+    max-width: 220px;
+  }
+  /* Matches Hugo, which hid the arrow below 768px. */
+  .conv-search-info-tooltip-content::after {
+    display: none;
+  }
 }
 
 .conv-search-header-actions {

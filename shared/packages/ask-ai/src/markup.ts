@@ -120,21 +120,32 @@ function buildTitleGroup(): HTMLDivElement {
   return group;
 }
 
+/**
+ * Deliberately not Hugo's `.tooltip-container` / `.tooltip-trigger` /
+ * `.tooltip-content`. Those name a site-wide component whose script re-parents
+ * matching tooltips to `document.body` and toggles `.show` on hover, and whose
+ * stylesheet is what hid them. Borrowing the classes made this tooltip work on
+ * Hugo and left it permanently open on Astro, which loads neither file. The
+ * package styles it itself now, so the classes have to be the package's own or
+ * Hugo's script would still claim the node and two implementations would move
+ * it at once.
+ */
 function buildInfoTooltip(): HTMLSpanElement {
-  const container = element(
-    "span",
-    "tooltip-container conv-search-info-tooltip",
-  );
+  const container = element("span", "conv-search-info-tooltip");
 
   // Hugo names this button through its icon's `alt`. An inline SVG has no
   // `alt`, so the name moves to the button itself.
-  const trigger = element("button", "tooltip-trigger conv-search-info-btn", {
+  const trigger = element("button", "conv-search-info-btn", {
     "aria-label": STRINGS.info,
     "aria-describedby": INFO_TOOLTIP_ID,
   });
   appendIcon(trigger, infoIcon({ size: 16 }));
 
-  const tooltip = text("span", STRINGS.disclaimerTooltip, "tooltip-content");
+  const tooltip = text(
+    "span",
+    STRINGS.disclaimerTooltip,
+    "conv-search-info-tooltip-content",
+  );
   tooltip.id = INFO_TOOLTIP_ID;
   tooltip.setAttribute("role", "tooltip");
 

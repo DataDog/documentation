@@ -97,6 +97,35 @@ describe("buildWidgetElements", () => {
       STRINGS.disclaimerTooltip,
     );
   });
+
+  it("names the info tooltip's parts with this package's own classes", () => {
+    const { sidebar } = buildWidgetElements();
+
+    // The hide/show rules live in this package's stylesheet and key off these
+    // class names, so the tooltip is only ever hidden if they are present.
+    const container = sidebar.querySelector(".conv-search-info-tooltip");
+    expect(container).not.toBeNull();
+    expect(
+      container?.querySelector(".conv-search-info-tooltip-content")
+        ?.textContent,
+    ).toBe(STRINGS.disclaimerTooltip);
+  });
+
+  it("claims none of the host's global tooltip classes", () => {
+    const { sidebar } = buildWidgetElements();
+
+    // Hugo has a site-wide tooltip component on `.tooltip-container` whose
+    // script re-parents matching tooltips to `document.body` and toggles
+    // `.show`. Emitting its classes would hand it this tooltip and leave two
+    // implementations moving one node, so the widget must not use them.
+    for (const hostClass of [
+      ".tooltip-container",
+      ".tooltip-trigger",
+      ".tooltip-content",
+    ]) {
+      expect(sidebar.querySelector(hostClass), hostClass).toBeNull();
+    }
+  });
 });
 
 describe("buildEmptyState", () => {
