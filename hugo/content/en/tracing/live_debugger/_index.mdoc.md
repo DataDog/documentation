@@ -143,6 +143,7 @@ Live Debugger provides:
 
 - [Unified Service Tagging][27] configured with `service`, `env`, and `version` tags on your deployment
 - [Remote Configuration][4] enabled in the Agent
+- Agent log collection enabled with `logs_enabled: true`. If log collection is disabled, set `apm_config.debugger_logs_enabled_override: true` (`DD_APM_DEBUGGER_LOGS_ENABLED_OVERRIDE=true`) to forward Live Debugger logs.
 - (Recommended) [Source Code Integration][28]
 
 ### Permissions
