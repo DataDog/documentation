@@ -15,7 +15,6 @@
  */
 import { parse as parseYaml } from 'yaml';
 import { describe, expect, it } from 'vitest';
-// @ts-ignore — plain ES module import
 import regionsConfig from '@hugo-site/assets/scripts/config/regions.config.js';
 import PARAMS_YAML_RAW from '@hugo-site/config/_default/params.yaml?raw';
 import REGIONS_YAML_RAW from '@shared/regions.yaml?raw';

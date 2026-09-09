@@ -93,7 +93,7 @@ const regionKeysJson = JSON.stringify(allowedRegions.map((r) => r.key));
 // find no elements, and one at the end of `<body>` would leave every region
 // element hidden until it ran — a visible flash on the content readers came
 // for. Both were measured before settling on this.
-const regionVisibilityCss = allowedRegions
+const activeRegionSelectors = allowedRegions
   .map((r) => `html[data-active-region='${r.key}'] [data-region='${r.key}']`)
   .join(',\n');
 ---
@@ -161,7 +161,7 @@ const regionVisibilityCss = allowedRegions
     </script>
     {/* Per-region visibility rules, generated from `shared/regions.yaml`.
         The hidden-by-default rule lives in global.css. */}
-    <style set:html={`${regionVisibilityCss} { display: revert; }`}></style>
+    <style set:html={`${activeRegionSelectors} { display: revert; }`}></style>
     {/* Datadog RUM + Browser Logs. Its bundled script is deferred, so placing
         it here costs nothing against first paint. */}
     <Telemetry />
