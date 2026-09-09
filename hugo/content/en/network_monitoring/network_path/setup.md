@@ -390,8 +390,6 @@ Agent `v7.79+` is required.
 
 2. Add additional configuration details in `/opt/datadog-agent/etc/datadog.yaml` file:
 
-   For full configuration details, reference the [example config][3], or use the following:
-
    ```yaml
    network_path:
      collector:
