@@ -17,11 +17,22 @@ test.describe('RegionSelector component', () => {
     await expect(page.locator('html')).toHaveAttribute('data-active-region', 'us');
   });
 
+  // Pinned on purpose. The options are rendered from the `regions` prop that
+  // `RegionSelectorIsland.astro` fills with `buildClientRegions()`, so every
+  // in-browser source — the options, the island props, the inline region CSS —
+  // comes from the same allow-list the component read. Comparing against any of
+  // them would assert nothing. `@config/regions` cannot be imported here
+  // either: it loads `shared/regions.yaml` through a Vite `?raw` import, which
+  // the Playwright process has no bundler for.
+  //
+  // So this list is respelled, and it is the assertion that the whole chain
+  // reaches the browser in the right order.
   test('offers all allowed Datadog sites as options', async ({ page }) => {
     const select = page.locator('.region-selector .select__control');
     const values = await select.locator('option').evaluateAll((opts) =>
       opts.map((o) => (o as HTMLOptionElement).value)
     );
+    // Update this list when a data center is added to shared/regions.yaml.
     expect(values).toEqual(['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'uk1', 'gov', 'gov2']);
   });
 

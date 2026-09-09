@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import ApiEndpoint from '../ApiEndpoint.astro';
+import { getAllowedRegions } from '@config/regions';
 
 const endpointWithTwoRegions = {
   operationId: 'testOp',
@@ -39,7 +40,8 @@ describe('ApiEndpoint region rendering', () => {
       props: { data: JSON.stringify(endpointWithTwoRegions) },
     });
 
-    // US3, US5, AP1, AP2, and GOV are allowed but not in regionUrls
+    // Every allowed region except us and eu is missing from regionUrls. Spot-
+    // checked rather than enumerated, so a new region needs no edit here.
     expect(html).toContain('Not supported in the US3 region');
     expect(html).toContain('Not supported in the AP1 region');
     expect(html).toContain('Not supported in the US1-FED region');
@@ -51,9 +53,15 @@ describe('ApiEndpoint region rendering', () => {
       props: { data: JSON.stringify(endpointWithTwoRegions) },
     });
 
-    const regionKeys = ['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov'];
-    for (const key of regionKeys) {
-      expect(html).toContain(`data-region="${key}"`);
+    // Derived from the allow-list, not a copy of it. A hardcoded list here had
+    // gone stale — it omitted uk1 and gov2 — and `toContain` per key cannot
+    // notice a region that is missing from the list itself.
+    const allowed = getAllowedRegions();
+    expect(allowed.length).toBeGreaterThan(1);
+    for (const region of allowed) {
+      expect(html, `data-region for ${region.key}`).toContain(
+        `data-region="${region.key}"`,
+      );
     }
   });
 });
