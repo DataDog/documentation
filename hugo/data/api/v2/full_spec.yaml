@@ -4978,7 +4978,7 @@ components:
           example: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
           type: string
         criteria:
-          $ref: '#/components/schemas/AggregatedWaterfallPerformanceCriteria'
+          $ref: '#/components/schemas/AggregatedLongTasksResponseAttributesCriteria'
         from:
           description: Start of the analyzed time range as a Unix timestamp in seconds.
           example: 1762437564
@@ -5017,8 +5017,28 @@ components:
         - view_count
         - from
         - to
+        - criteria
         - sampled_view_ids
         - long_tasks_by_invoker_type
+      type: object
+    AggregatedLongTasksResponseAttributesCriteria:
+      description: Performance criteria used to filter view instances by a metric threshold, or null if no criteria were applied.
+      nullable: true
+      properties:
+        max:
+          description: Maximum threshold in seconds (inclusive).
+          example: 5.0
+          format: double
+          type: number
+        metric:
+          $ref: '#/components/schemas/AggregatedWaterfallPerformanceCriteriaMetric'
+        min:
+          description: Minimum threshold in seconds (inclusive).
+          example: 2.5
+          format: double
+          type: number
+      required:
+        - metric
       type: object
     AggregatedLongTasksResponseData:
       description: Data envelope for an aggregated long tasks response.
@@ -123255,7 +123275,6 @@ components:
           type: integer
       required:
         - invoker
-        - file
         - view_occurrences
         - stats_per_view
       type: object
@@ -199732,6 +199751,7 @@ paths:
                     data:
                       attributes:
                         application_id: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
+                        criteria:
                         from: 1762437564
                         long_tasks_by_invoker_type:
                           - impact_score: 0.4
