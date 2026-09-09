@@ -1349,7 +1349,7 @@
     "request_schema_description": "Google Cloud Usage Cost config patch request."
   },
   "ListCostOCIConfigs": {
-    "description": "List the OCI configs.",
+    "description": "**Note**: This endpoint is deprecated. View OCI accounts in Cloud Cost Settings in the Datadog web application instead.\n\nList the OCI configs.",
     "summary": "List Cloud Cost Management OCI configs"
   },
   "SearchCostRecommendations": {
@@ -1415,6 +1415,30 @@
   "ListCostTags": {
     "description": "List Cloud Cost Management tags for a given metric.",
     "summary": "List Cloud Cost Management tags"
+  },
+  "ListUnitCosts": {
+    "description": "List the ROI metrics (unit costs) for the authenticated organization.",
+    "summary": "List unit costs"
+  },
+  "CreateUnitCost": {
+    "description": "Create an ROI metric (unit cost) using the given numerator and denominator queries.",
+    "summary": "Create a unit cost",
+    "request_description": "",
+    "request_schema_description": "A request to create a unit cost."
+  },
+  "DeleteUnitCost": {
+    "description": "Delete an ROI metric (unit cost).",
+    "summary": "Delete a unit cost"
+  },
+  "GetUnitCost": {
+    "description": "Retrieve an ROI metric (unit cost) by UUID.",
+    "summary": "Get a unit cost"
+  },
+  "UpdateUnitCost": {
+    "description": "Replace an ROI metric (unit cost) with a new set of attributes.",
+    "summary": "Update a unit cost",
+    "request_description": "",
+    "request_schema_description": "A request to replace a unit cost."
   },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
@@ -1653,6 +1677,74 @@
   "CancelDataDeletionRequest": {
     "description": "Cancels a data deletion request by providing its ID.",
     "summary": "Cancels a data deletion request"
+  },
+  "CreateJourney": {
+    "description": "Create a DEM journey.",
+    "summary": "Create a DEM journey",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a DEM journey."
+  },
+  "DeleteIgnoredInferredJourney": {
+    "description": "Remove an ignored inferred DEM journey, making it eligible to appear as a candidate again.",
+    "summary": "Delete an ignored inferred DEM journey"
+  },
+  "SearchInferredJourneys": {
+    "description": "Search for inferred DEM journeys by status. Returns candidates (status=candidate, the default) or ignored journeys (status=ignored). Supports optional fuzzy name filtering and app ID filtering.",
+    "summary": "Search inferred DEM journeys"
+  },
+  "IgnoreInferredJourney": {
+    "description": "Mark an inferred DEM journey as ignored so it no longer appears in the candidate list.",
+    "summary": "Ignore an inferred DEM journey"
+  },
+  "SearchJourneys": {
+    "description": "Search for DEM journeys with optional filtering by query, creator, team, and app.",
+    "summary": "Search DEM journeys"
+  },
+  "BatchGetJourneysByTestSuiteIDs": {
+    "description": "Return DEM journeys associated with multiple given test suite IDs.",
+    "summary": "Batch get DEM journeys by test suite IDs",
+    "request_description": "",
+    "request_schema_description": "Request body for retrieving DEM journeys by test suite IDs."
+  },
+  "DeleteJourneyVariant": {
+    "description": "Delete a variant from a DEM journey.",
+    "summary": "Delete a DEM journey variant"
+  },
+  "UpdateJourneyVariant": {
+    "description": "Update an existing variant of a DEM journey.",
+    "summary": "Update a DEM journey variant",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a DEM journey variant."
+  },
+  "DeleteJourney": {
+    "description": "Delete a DEM journey by its ID.",
+    "summary": "Delete a DEM journey"
+  },
+  "GetJourney": {
+    "description": "Retrieve a single DEM journey by its ID.",
+    "summary": "Get a DEM journey"
+  },
+  "UpdateJourney": {
+    "description": "Update an existing DEM journey by its ID.",
+    "summary": "Update a DEM journey",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a DEM journey."
+  },
+  "GetJourneyRecommendedTests": {
+    "description": "Retrieve AI-recommended synthetic tests for a DEM journey. Returns an empty list when no recommendation is available.",
+    "summary": "Get recommended tests for a DEM journey"
+  },
+  "CreateJourneyVariant": {
+    "description": "Create a variant for a DEM journey.",
+    "summary": "Create a DEM journey variant",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a DEM journey variant."
+  },
+  "CreateTestSuiteForJourney": {
+    "description": "Trigger test suite creation for a given DEM journey.",
+    "summary": "Create a test suite for a DEM journey",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a test suite for a DEM journey."
   },
   "ListDeploymentGates": {
     "description": "Returns a paginated list of all deployment gates for the organization.\nUse `page[cursor]` and `page[size]` query parameters to paginate through results.",
@@ -7325,6 +7417,12 @@
     "summary": "Search flaky tests",
     "request_description": "",
     "request_schema_description": "The request for a flaky tests search."
+  },
+  "CreateTimeseriesAnomalyInvestigation": {
+    "description": "Investigates a metrics timeseries request for its most significant anomaly and returns deterministic findings.\nMetrics queries with or without grouping are supported. This API version accepts exactly one request and returns at most one anomaly.",
+    "summary": "Investigate a timeseries anomaly",
+    "request_description": "Metrics timeseries request to investigate. The request body must not exceed 2 MiB.",
+    "request_schema_description": "Request to investigate a metrics timeseries for anomalies."
   },
   "GetTraceByID": {
     "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nThis endpoint is rate limited to `60` requests per minute per organization.",
