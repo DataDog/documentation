@@ -24,9 +24,9 @@ further_reading:
 
 ## Data Access Control
 
-Agent Observability allows you to restrict access to potentially sensitive data associated with your ML applications to only certain teams and roles in your organization. This is particularly important when your LLM applications process sensitive information such as personal data, proprietary business information, or confidential user interactions.
+Agent Observability allows you to restrict access to potentially sensitive data associated with your AI applications to only certain teams and roles in your organization. This is particularly important when your AI applications process sensitive information such as personal data, proprietary business information, or confidential user interactions.
 
-Access controls in Agent Observability are built on Datadog's [Data Access Control][11] feature, which enables you to regulate access to data deemed sensitive. You can use the `ml_app` tag to identify and restrict access to specific LLM applications within your organization.
+Access controls in Agent Observability are built on Datadog's [Data Access Control][11] feature, which enables you to regulate access to data deemed sensitive. You can use the `ml_app` tag to identify and restrict access to specific AI applications within your organization.
 
 ## Redacting data with span processors
 
@@ -52,7 +52,7 @@ Retention periods in Agent Observability depend on the type of data and on your 
 | Data                                         | Retention period                                                                          |
 | -------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | Traces and spans                             | 15 days; 30, 60, or 90 days with a retention add-on                                       |
-| Experiments                                  | On-demand plans: 15 days. Committed plans: 90 days. With a retention add-on: 6, 9, or 12 months    |
+| Experiments                                  | Free tier and on-demand plans: 15 days. Committed plans: 90 days. With a retention add-on: 6, 9, or 12 months |
 | Annotated interactions and labels            | 90 days from the time of annotation, or your span retention period if that is longer      |
 | Dataset records                              | Current version: 3 years. Previous versions: 90 days, reset when used                     |
 | Prompts in the prompt registry               | 3 years, extended each time the prompt is pulled                                          |
