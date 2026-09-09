@@ -379,7 +379,7 @@ Agent `v7.73+` is required.
 {{% /tab %}}
 {{% tab "macOS" %}}
 
-Agent `v7.75+` is required.
+Agent `v7.79+` is required.
 
 1. Enable the `system-probe` traceroute module in `/opt/datadog-agent/etc/system-probe.yaml` by adding the following:
 
