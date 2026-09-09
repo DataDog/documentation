@@ -558,10 +558,13 @@ export class AskAiPanel {
     let activeMode: ResizableMode | null = null;
 
     const onPointerMove = (event: PointerEvent): void => {
-      if (!activeMode) return;
+      // Copied to a const so the null check narrows inside the callback below;
+      // narrowing on the mutable `activeMode` does not survive the closure.
+      const draggingMode = activeMode;
+      if (!draggingMode) return;
 
       dimensions.forEach((dimension) => {
-        const config = sizeConfig(activeMode as ResizableMode, dimension);
+        const config = sizeConfig(draggingMode, dimension);
         if (!config) return;
 
         // The panel is anchored to the bottom-right, so a size is the distance
@@ -570,7 +573,7 @@ export class AskAiPanel {
           dimension === "width"
             ? window.innerWidth - config.viewportOffset - event.clientX
             : window.innerHeight - config.viewportOffset - event.clientY;
-        this.applyPanelSize(activeMode as ResizableMode, dimension, value);
+        this.applyPanelSize(draggingMode, dimension, value);
       });
     };
 

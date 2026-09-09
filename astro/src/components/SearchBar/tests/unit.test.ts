@@ -262,7 +262,7 @@ describe("SearchBar — the Ask AI row", () => {
     // Rendered directly: the popup only opens on a non-empty query, so this
     // branch is unreachable through the search bar itself.
     render(
-      h(SearchResultsPopup as any, {
+      h(SearchResultsPopup, {
         popupRef: { current: null },
         rect: null,
         variant: "default",
@@ -325,7 +325,7 @@ describe("SearchBar — the Ask AI row", () => {
     const original = Object.getOwnPropertyDescriptor(window, "location");
     Object.defineProperty(window, "location", {
       configurable: true,
-      value: new Proxy({} as any, {
+      value: new Proxy({} as Partial<Location>, {
         set(_t, prop, value) {
           if (prop === "href") hrefs.push(value);
           return true;

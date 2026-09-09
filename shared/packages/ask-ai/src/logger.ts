@@ -6,15 +6,17 @@ import type { AskAiActionPayload, LogContext } from "./types";
  * dependency this package avoids: a Hugo page that loaded both would end up
  * with two RUM instances.
  */
+type SdkContext = Record<string, unknown>;
+
 interface RumGlobal {
-  addAction(name: string, context?: object): void;
-  addError(error: unknown, context?: object): void;
+  addAction(name: string, context?: SdkContext): void;
+  addError(error: unknown, context?: SdkContext): void;
 }
 
 interface LogsGlobal {
   logger?: {
-    info(message: string, context?: object, status?: string): void;
-    error(message: string, context?: object, status?: string): void;
+    info(message: string, context?: SdkContext, status?: string): void;
+    error(message: string, context?: SdkContext, status?: string): void;
   };
 }
 

@@ -1,0 +1,12 @@
+# Prettier does not read .gitignore (it only auto-skips node_modules), so the
+# generated and vendored trees have to be listed again here.
+node_modules/
+dist/
+.astro/
+.yarn/
+test-results/
+playwright-report/
+
+# Playwright screenshot baselines. Nothing in them is formattable, but keeping
+# them out means `format:check` never walks a large binary tree.
+**/*-snapshots/
