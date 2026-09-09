@@ -14,6 +14,9 @@ further_reading:
 - link: cloud_cost_management/datadog_costs/
   tag: 설명서
   text: Datadog 비용
+- link: account_management/plan_and_usage/bill_overview/partner_purchased_cost_visibility/
+  tag: 설명서
+  text: 파트너를 통해 구매하는 고객을 위한 비용의 가시성
 title: 청구 개요
 ---
 Datadog 비용, 사용량 추세 및 월말 예상 비용을 일별 분석, 제품 수준 세부 정보 및 다중 조직 필터링과 함께 단일 페이지에서 조회하세요.

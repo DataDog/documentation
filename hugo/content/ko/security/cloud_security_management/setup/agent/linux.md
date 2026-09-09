@@ -43,14 +43,14 @@ sbom:
     enabled: true
     # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
     analyzers: ["os", "languages"]
-  # Enables runtime package prioritization (Preview, Agent 7.79+)
+  # Enables runtime package prioritization (Agent 7.79+)
   # See Runtime Package Prioritization section below.
   enrichment:
     usage:
       enabled: true
 {{< /code-block >}}
 
-**참고**: `enrichment.usage.enabled: true`는 Datadog Agent **7.79.0 이상**이 필요합니다. 요구 사항은 [ 런타임 패키지 우선순위 ](#runtime-package-prioritization-preview) 섹션을 참조하세요.
+**참고**: `enrichment.usage.enabled: true`는 Datadog Agent **7.79.0 이상**이 필요합니다. [런타임 패키지 우선순위](#runtime-package-prioritization) 섹션에서 요구 사항을 확인하십시오.
 
 {{< code-block lang="bash" filename="/etc/datadog-agent/security-agent.yaml" disable_copy="false" collapsible="true" >}}
 compliance_config:
@@ -84,7 +84,7 @@ compliance_config:
 | Elixir | Mix lock |
 | Julia | Julia |
 
-## 런타임 패키지 우선순위(미리 보기) {#runtime-package-prioritization-preview}
+## 런타임 패키지 우선순위 {#runtime-package-prioritization}
 
 런타임 패키지 우선순위 지정은 컨테이너 이미지 내에서 어떤 패키지가 런타임에 사용되는지 식별하여, 설치되었지만 실행되지 않는 패키지보다 실제로 실행되는 코드의 취약점을 우선적으로 처리할 수 있도록 합니다.
 
@@ -111,7 +111,7 @@ sbom:
   enabled: true
   container_image:
     enabled: true
-  # Enables runtime package prioritization (Preview, Agent 7.79+)
+  # Enables runtime package prioritization (Agent 7.79+)
   enrichment:
     usage:
       enabled: true
