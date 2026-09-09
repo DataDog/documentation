@@ -9,6 +9,8 @@ Any time an incident progresses through status changes, you can guide responders
 
 {{< img src="/incident_response/incident_management/setup_and_configuration/status_transition_form.png" alt="Status Change form prompting the user to fill out the required Teams and Postmortem Owner fields when moving an incident to Resolved" style="width:70%;" >}}
 
+Required fields on transition forms gate status transitions made via human input. Automated status changes, such as those triggered through API calls or workflow automations, are not impacted. Transition forms are intended to standardize human behavior; automated status changes can already be conditioned based on their own logic.
+
 ## Prerequisites
 
 To set up transition forms, you must have the `Incident Settings Write` permission. For more information, see [Datadog Role Permissions][1].
@@ -19,7 +21,7 @@ To set up transition forms, you must have the `Incident Settings Write` permissi
 1. Under **Incident Types**, expand an incident type to edit.
 1. Click the **Transition Forms** tab.
 1. Select the status you want to configure.
-1. Choose which fields appear on the form. You can add [property fields][3] and [responder types][4]. Any field can be marked as required or optional.
+1. Choose which fields appear on the form. You can add [property fields][3] and [responder types][4]. Any field can be marked as required or optional. 
 1. Click **Save**.
 
 [1]: /account_management/rbac/permissions/#case-and-incident-management
