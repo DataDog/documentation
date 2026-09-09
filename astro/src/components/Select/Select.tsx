@@ -1,4 +1,4 @@
-import type { ComponentChildren, JSX } from "preact";
+import type { ComponentChildren, JSX, TargetedEvent } from "preact";
 import styles from "./Select.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 
@@ -7,7 +7,7 @@ const cl = classListFactory(styles);
 export interface SelectProps {
   id?: string;
   value?: string;
-  onChange?: (e: JSX.TargetedEvent<HTMLSelectElement>) => void;
+  onChange?: (e: TargetedEvent<HTMLSelectElement>) => void;
   "aria-label"?: string;
   children: ComponentChildren;
 }

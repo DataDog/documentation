@@ -11,10 +11,7 @@ type NodeRef = { current: Node | null };
  * Uses refs internally so the document listener is attached exactly once,
  * regardless of how often the caller's `refs`/`onOutside` identities change.
  */
-export function useOutsideClick(
-  refs: NodeRef[],
-  onOutside: () => void,
-) {
+export function useOutsideClick(refs: NodeRef[], onOutside: () => void) {
   const refsRef = useRef(refs);
   refsRef.current = refs;
   const onOutsideRef = useRef(onOutside);

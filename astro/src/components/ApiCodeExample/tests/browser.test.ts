@@ -1,47 +1,49 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test.describe('ApiCodeExample component', () => {
+test.describe("ApiCodeExample component", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/dd_e2e/components/api-code-example');
+    await page.goto("/dd_e2e/components/api-code-example");
   });
 
-  test('renders the code example section', async ({ page }) => {
-    const codeExample = page.locator('.api-code-example');
+  test("renders the code example section", async ({ page }) => {
+    const codeExample = page.locator(".api-code-example");
     await expect(codeExample.first()).toBeVisible();
   });
 
-  test('shows language tabs', async ({ page }) => {
-    const codeExample = page.locator('.api-code-example').first();
-    const tabs = codeExample.locator('.tabs').first();
+  test("shows language tabs", async ({ page }) => {
+    const codeExample = page.locator(".api-code-example").first();
+    const tabs = codeExample.locator(".tabs").first();
     await expect(tabs).toBeVisible();
   });
 
-  test('first language tab is active by default', async ({ page }) => {
-    const codeExample = page.locator('.api-code-example').first();
+  test("first language tab is active by default", async ({ page }) => {
+    const codeExample = page.locator(".api-code-example").first();
     const firstTab = codeExample.locator('[role="tab"]').first();
-    await expect(firstTab).toHaveAttribute('aria-selected', 'true');
+    await expect(firstTab).toHaveAttribute("aria-selected", "true");
   });
 
-  test('clicking a language tab switches the panel', async ({ page }) => {
-    const codeExample = page.locator('.api-code-example').first();
-    await expect(codeExample.locator('[role="tablist"][data-hydrated="true"]').first()).toBeVisible();
+  test("clicking a language tab switches the panel", async ({ page }) => {
+    const codeExample = page.locator(".api-code-example").first();
+    await expect(
+      codeExample.locator('[role="tablist"][data-hydrated="true"]').first(),
+    ).toBeVisible();
     const tabButtons = codeExample.locator('[role="tab"]');
     const count = await tabButtons.count();
 
     if (count >= 2) {
       const secondTab = tabButtons.nth(1);
       await secondTab.click();
-      await expect(secondTab).toHaveAttribute('aria-selected', 'true');
+      await expect(secondTab).toHaveAttribute("aria-selected", "true");
 
       const firstTab = tabButtons.first();
-      await expect(firstTab).toHaveAttribute('aria-selected', 'false');
+      await expect(firstTab).toHaveAttribute("aria-selected", "false");
     }
   });
 
-  test('accordion items can be expanded and collapsed', async ({ page }) => {
-    const accordion = page.locator('.api-code-example__accordion').first();
+  test("accordion items can be expanded and collapsed", async ({ page }) => {
+    const accordion = page.locator(".api-code-example__accordion").first();
     if (await accordion.isVisible()) {
-      const toggle = accordion.locator('.api-code-example__accordion-header');
+      const toggle = accordion.locator(".api-code-example__accordion-header");
       await toggle.click();
 
       // Toggle state should change — verify the content area is visible/hidden

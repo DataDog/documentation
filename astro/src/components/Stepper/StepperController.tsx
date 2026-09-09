@@ -41,9 +41,8 @@ export function StepperController({ externalContext }: StepperControllerProps) {
     );
     if (!steps.length) return;
 
-    const finishedEl = stepperEl.querySelector<HTMLElement>(
-      ".stepper__finished",
-    );
+    const finishedEl =
+      stepperEl.querySelector<HTMLElement>(".stepper__finished");
     const resetEl = stepperEl.querySelector<HTMLElement>(".stepper__reset");
     const showAllBtn = stepperEl.querySelector<HTMLElement>(
       ".stepper__show-all-btn",
@@ -203,7 +202,10 @@ function saveProgress(key: string, state: StepperState): void {
     if (!localStorage.getItem(key)) {
       pruneOldEntries();
     }
-    localStorage.setItem(key, JSON.stringify({ ...state, timestamp: Date.now() }));
+    localStorage.setItem(
+      key,
+      JSON.stringify({ ...state, timestamp: Date.now() }),
+    );
   } catch {
     // Storage unavailable (private mode, quota): the stepper still works
     // without persistence.

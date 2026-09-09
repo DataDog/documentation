@@ -5,8 +5,8 @@
  * including auth headers, query parameters, and request body.
  */
 
-import type { OpenAPIV3 } from 'openapi-types';
-import type { CurlParam, GenerateCurlOptions } from './schemas/curl';
+import type { OpenAPIV3 } from "openapi-types";
+import type { CurlParam, GenerateCurlOptions } from "./schemas/curl";
 
 /* ------------------------------------------------------------------ */
 /*  Main export                                                        */

@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'preact/hooks';
-import styles from './Footer.module.css';
-import { classListFactory } from '@lib/cssUtils/classListFactory';
+import { useEffect, useRef, useState } from "preact/hooks";
+import styles from "./Footer.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
 
 const cl = classListFactory(styles);
 
@@ -42,54 +42,64 @@ export default function LanguageSelector({
   useEffect(() => {
     if (!open) return;
     function handleClickOutside(e: MouseEvent) {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(e.target as Node)
+      ) {
         setOpen(false);
       }
     }
     function handleEscape(e: KeyboardEvent) {
-      if (e.key === 'Escape') setOpen(false);
+      if (e.key === "Escape") setOpen(false);
     }
-    window.addEventListener('mousedown', handleClickOutside);
-    window.addEventListener('keydown', handleEscape);
+    window.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("keydown", handleEscape);
     return () => {
-      window.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('keydown', handleEscape);
+      window.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("keydown", handleEscape);
     };
   }, [open]);
 
   return (
-    <div ref={wrapperRef} class={cl('footer__lang-toggle')}>
+    <div ref={wrapperRef} class={cl("footer__lang-toggle")}>
       <button
         type="button"
-        class={cl('footer__lang-button')}
+        class={cl("footer__lang-button")}
         aria-expanded={open}
         aria-haspopup="listbox"
         onClick={() => setOpen((o) => !o)}
       >
         <span style="display:inline-flex;align-items:center;">
-          <span style="display:inline-flex;align-items:center;" dangerouslySetInnerHTML={{ __html: worldIconHtml }} />
+          <span
+            style="display:inline-flex;align-items:center;"
+            dangerouslySetInnerHTML={{ __html: worldIconHtml }}
+          />
           &nbsp;
-          <span class={cl('footer__lang-button-label')}>{currentLang.primary}</span>
+          <span class={cl("footer__lang-button-label")}>
+            {currentLang.primary}
+          </span>
         </span>
         <span
-          class={`${cl('footer__lang-caret')} ${open ? cl('footer__lang-caret--open') : ''}`}
+          class={`${cl("footer__lang-caret")} ${open ? cl("footer__lang-caret--open") : ""}`}
           dangerouslySetInnerHTML={{ __html: caretIconHtml }}
         />
       </button>
 
       <div
-        class={`${cl('footer__lang-popup')} ${open ? cl('footer__lang-popup--open') : ''}`}
+        class={`${cl("footer__lang-popup")} ${open ? cl("footer__lang-popup--open") : ""}`}
         role="listbox"
         hidden={!open}
       >
-        <a class={cl('footer__lang-item')} href={currentLang.href}>
-          <div class={cl('footer__lang-primary')}>{currentLang.primary}</div>
-          <div class={cl('footer__lang-secondary')}>{currentLang.secondary}</div>
+        <a class={cl("footer__lang-item")} href={currentLang.href}>
+          <div class={cl("footer__lang-primary")}>{currentLang.primary}</div>
+          <div class={cl("footer__lang-secondary")}>
+            {currentLang.secondary}
+          </div>
         </a>
         {alternates.map((opt) => (
-          <a class={cl('footer__lang-item')} href={opt.href}>
-            <div class={cl('footer__lang-primary')}>{opt.primary}</div>
-            <div class={cl('footer__lang-secondary')}>{opt.secondary}</div>
+          <a class={cl("footer__lang-item")} href={opt.href}>
+            <div class={cl("footer__lang-primary")}>{opt.primary}</div>
+            <div class={cl("footer__lang-secondary")}>{opt.secondary}</div>
           </a>
         ))}
       </div>

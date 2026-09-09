@@ -35,8 +35,7 @@ export function useGlobalSearchShortcuts({
         tag === "input" || tag === "textarea" || target?.isContentEditable;
 
       const isSlash = e.key === "/";
-      const isCmdK =
-        e.key.toLowerCase() === "k" && (e.metaKey || e.ctrlKey);
+      const isCmdK = e.key.toLowerCase() === "k" && (e.metaKey || e.ctrlKey);
 
       if ((isSlash || isCmdK) && !inEditable) {
         e.preventDefault();
@@ -48,8 +47,7 @@ export function useGlobalSearchShortcuts({
       if (e.key === "Escape") {
         const active = document.activeElement;
         const focusInsideBar =
-          active === inputRef.current ||
-          wrapperRef.current?.contains(active);
+          active === inputRef.current || wrapperRef.current?.contains(active);
         if (focusInsideBar) {
           setQuery("");
           setOpen(false);

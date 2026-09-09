@@ -385,7 +385,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : The data scrubbing callback for views. This can be used to modify view events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
 `vitalsUpdateFrequency`
-: The preferred frequency for collecting mobile vitals. Available values include: `.frequent` (every 100ms), `.average` (every 500ms), `.rare` (every 1s), and `.never` (which disables vitals monitoring).
+: The preferred frequency for collecting mobile vitals. Available values include: `.frequent` (every 100ms), `.average` (every 500ms), and `.rare` (every 1s). Set to `nil` to disable vitals monitoring.
 
 ### Automatically track views
 

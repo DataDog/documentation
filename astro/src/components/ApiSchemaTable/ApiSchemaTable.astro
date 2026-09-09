@@ -64,8 +64,12 @@ const showToolbar = showExpandAll && anyExpandable;
   }
   <div class={cl("schema-table__table")}>
     <div class={cl("schema-table__columns")}>
-      <div class={cl("schema-table__columns-name")}>{translate("name")}</div>{" "}
-      <div class={cl("schema-table__columns-type")}>{translate("type")}</div>{" "}
+      <div class={cl("schema-table__columns-name")}>{translate("name")}</div>{
+        " "
+      }
+      <div class={cl("schema-table__columns-type")}>{translate("type")}</div>{
+        " "
+      }
       <div class={cl("schema-table__columns-description")}>
         {translate("description")}
       </div>

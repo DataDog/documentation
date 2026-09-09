@@ -1,10 +1,10 @@
 ---
-if (__CI_ENV__ === 'live') return new Response(null, { status: 404 });
+if (__CI_ENV__ === "live") return new Response(null, { status: 404 });
 
-import BaseLayout from '@layouts/BaseLayout.astro';
-import Placeholder from '@components/Placeholder/Placeholder.astro';
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Placeholder from "@components/Placeholder/Placeholder.astro";
 
-const title = 'Placeholder';
+const title = "Placeholder";
 ---
 
 <BaseLayout title={title}>
@@ -13,16 +13,32 @@ const title = 'Placeholder';
     <div class="prose">
       <h1>Placeholder</h1>
 
-      <p>A light-purple box with a dark-purple outline and a centered label. Used to stand in for layout elements (header, footer, announcement banner) while their real implementations are under construction. Dark mode swaps the two purples.</p>
+      <p>
+        A light-purple box with a dark-purple outline and a centered label. Used
+        to stand in for layout elements (header, footer, announcement banner)
+        while their real implementations are under construction. Dark mode swaps
+        the two purples.
+      </p>
 
       <h2>Properties</h2>
       <table>
         <thead>
-          <tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr>
+          <tr
+            ><th>Property</th><th>Type</th><th>Default</th><th>Description</th
+            ></tr
+          >
         </thead>
         <tbody>
-          <tr><td><code>name</code></td><td><code>string</code></td><td>(required)</td><td>The label text rendered inside the placeholder</td></tr>
-          <tr><td><code>class</code></td><td><code>string</code></td><td>&mdash;</td><td>Optional extra class applied to the root element</td></tr>
+          <tr
+            ><td><code>name</code></td><td><code>string</code></td><td
+              >(required)</td
+            ><td>The label text rendered inside the placeholder</td></tr
+          >
+          <tr
+            ><td><code>class</code></td><td><code>string</code></td><td
+              >&mdash;</td
+            ><td>Optional extra class applied to the root element</td></tr
+          >
         </tbody>
       </table>
 
@@ -33,7 +49,13 @@ const title = 'Placeholder';
       <Placeholder name="ANNOUNCEMENT BANNER" class="placeholder-demo--short" />
       <Placeholder name="FOOTER" class="placeholder-demo--tall" />
 
-      <p>The announcement banner, header, and footer all have real implementations now under <code>src/components/AnnouncementBanner/</code>, <code>src/components/Header/</code>, and <code>src/components/Footer/</code>.</p>
+      <p>
+        The announcement banner, header, and footer all have real
+        implementations now under <code>src/components/AnnouncementBanner/</code
+        >, <code>src/components/Header/</code>, and <code
+          >src/components/Footer/</code
+        >.
+      </p>
     </div>
   </div>
 </BaseLayout>

@@ -1,26 +1,26 @@
-import { describe, it, expect } from 'vitest';
-import { experimental_AstroContainer as AstroContainer } from 'astro/container';
-import Alert from '../Alert.astro';
+import { describe, it, expect } from "vitest";
+import { experimental_AstroContainer as AstroContainer } from "astro/container";
+import Alert from "../Alert.astro";
 
-describe('Alert component', () => {
-  it('renders with default level (info)', async () => {
+describe("Alert component", () => {
+  it("renders with default level (info)", async () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(Alert, {
-      slots: { default: 'Test message' },
+      slots: { default: "Test message" },
     });
 
-    expect(html).toContain('Test message');
-    expect(html).toContain('NOTE');
-    expect(html).toContain('alert--info');
+    expect(html).toContain("Test message");
+    expect(html).toContain("NOTE");
+    expect(html).toContain("alert--info");
   });
 
-  it('renders each alert level with correct label and attributes', async () => {
-    const levels = ['info', 'danger', 'warning', 'tip'] as const;
+  it("renders each alert level with correct label and attributes", async () => {
+    const levels = ["info", "danger", "warning", "tip"] as const;
     const labels: Record<string, string> = {
-      info: 'NOTE',
-      danger: 'CAUTION',
-      warning: 'WARNING',
-      tip: 'TIP',
+      info: "NOTE",
+      danger: "CAUTION",
+      warning: "WARNING",
+      tip: "TIP",
     };
     const container = await AstroContainer.create();
 
@@ -36,13 +36,13 @@ describe('Alert component', () => {
     }
   });
 
-  it('renders slot content', async () => {
+  it("renders slot content", async () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(Alert, {
-      props: { level: 'warning' },
-      slots: { default: '<strong>Bold warning</strong>' },
+      props: { level: "warning" },
+      slots: { default: "<strong>Bold warning</strong>" },
     });
 
-    expect(html).toContain('<strong>Bold warning</strong>');
+    expect(html).toContain("<strong>Bold warning</strong>");
   });
 });

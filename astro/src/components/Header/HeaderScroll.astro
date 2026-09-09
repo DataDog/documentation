@@ -10,17 +10,19 @@
   (function () {
     var root = document.documentElement;
     var DESKTOP_MIN_WIDTH = parseInt(
-      getComputedStyle(document.documentElement)
-        .getPropertyValue('--hugo-breakpoint-desktop')
+      getComputedStyle(document.documentElement).getPropertyValue(
+        "--hugo-breakpoint-desktop",
+      ),
     );
     var SCROLLED_THRESHOLD = 30;
     var ticking = false;
 
     function update() {
-      var scrolled = window.innerWidth >= DESKTOP_MIN_WIDTH
-        && window.scrollY > SCROLLED_THRESHOLD;
+      var scrolled =
+        window.innerWidth >= DESKTOP_MIN_WIDTH &&
+        window.scrollY > SCROLLED_THRESHOLD;
       if (scrolled) {
-        root.dataset.scrolled = '';
+        root.dataset.scrolled = "";
       } else {
         delete root.dataset.scrolled;
       }
@@ -34,7 +36,7 @@
     }
 
     update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
   })();
 </script>

@@ -68,8 +68,8 @@ describe("TabsNav", () => {
     const buttons = root.querySelectorAll<HTMLButtonElement>(
       '[data-tab-index][role="tab"]',
     );
-    const panels = panelIds.map(
-      (id) => root.querySelector<HTMLElement>(`#${id}`)!,
+    const panels = panelIds.map((id) =>
+      root.querySelector<HTMLElement>(`#${id}`)!,
     );
 
     await user.click(buttons[1]);
@@ -91,8 +91,8 @@ describe("TabsNav", () => {
     const buttons = root.querySelectorAll<HTMLButtonElement>(
       '[data-tab-index][role="tab"]',
     );
-    const panels = panelIds.map(
-      (id) => root.querySelector<HTMLElement>(`#${id}`)!,
+    const panels = panelIds.map((id) =>
+      root.querySelector<HTMLElement>(`#${id}`)!,
     );
 
     await user.click(buttons[1]);
@@ -146,8 +146,8 @@ describe("TabsNav", () => {
       const buttons = root.querySelectorAll<HTMLButtonElement>(
         '[data-tab-index][role="tab"]',
       );
-      const panels = panelIds.map(
-        (id) => root.querySelector<HTMLElement>(`#${id}`)!,
+      const panels = panelIds.map((id) =>
+        root.querySelector<HTMLElement>(`#${id}`)!,
       );
 
       expect(buttons[1].classList.contains("tabs__button--active")).toBe(true);
@@ -162,8 +162,8 @@ describe("TabsNav", () => {
   it("responds to hashchange by switching tabs", async () => {
     const { root, panelIds } = mountNav("g7", ["A", "B"]);
 
-    const panels = panelIds.map(
-      (id) => root.querySelector<HTMLElement>(`#${id}`)!,
+    const panels = panelIds.map((id) =>
+      root.querySelector<HTMLElement>(`#${id}`)!,
     );
 
     window.history.replaceState(null, "", "/#g7-panel-1");

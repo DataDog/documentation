@@ -39,7 +39,9 @@ const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
 {
   examples.length > 0 && (
     <div class={cl("api-code-example")}>
-      <h3 class={cl("api-code-example__heading")}>{translate("code_example")}</h3>
+      <h3 class={cl("api-code-example__heading")}>
+        {translate("code_example")}
+      </h3>
 
       <Tabs id={groupId} variant="pills" labels={labels} panelIds={panelIds}>
         {examples.map((ex, tabIdx) => (

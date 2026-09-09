@@ -4,19 +4,19 @@ disable_sidebar: true
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Protect against Threats with Datadog Application & API Protection"
+  text: "Protect against Threats with Datadog App and API Protection"
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
   text: "Tracking user activity"
 - link: "/security/default_rules/?category=cat-application-security"
   tag: "Documentation"
-  text: "OOTB Application & API Protection Rules"
+  text: "OOTB App and API Protection Rules"
 - link: "/security/application_security/troubleshooting"
   tag: "Documentation"
-  text: "Troubleshooting Application & API Protection"
+  text: "Troubleshooting App and API Protection"
 - link: "/security/application_security/how-it-works/"
   tag: "Documentation"
-  text: "How Application & API Protection Works in Datadog"
+  text: "How App and API Protection Works in Datadog"
 ---
 
 {{< site-region region="gov" >}}

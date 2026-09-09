@@ -188,11 +188,11 @@ function toSlug(name: string): string {
  * is also narrowed to required because `getAllOperations` filters out any
  * operation that lacks one.
  */
-type ApiOperationObject = Omit<OpenAPIV3.OperationObject, 'operationId'> & {
+type ApiOperationObject = Omit<OpenAPIV3.OperationObject, "operationId"> & {
   operationId: string;
-  'x-permission'?: { permissions?: string[]; operator?: string };
-  'x-unstable'?: boolean | string;
-  'x-menu-order'?: number;
+  "x-permission"?: { permissions?: string[]; operator?: string };
+  "x-unstable"?: boolean | string;
+  "x-menu-order"?: number;
 };
 
 interface RawOperation {
@@ -248,7 +248,9 @@ function collectRawOperationsFromSpec(version: ApiVersion): RawOperation[] {
   const result: RawOperation[] = [];
   for (const [pathStr, pathItem] of Object.entries(paths)) {
     if (!pathItem) continue;
-    result.push(...collectRawOperationsFromPathItem(version, pathStr, pathItem));
+    result.push(
+      ...collectRawOperationsFromPathItem(version, pathStr, pathItem),
+    );
   }
   return result;
 }
@@ -375,7 +377,10 @@ function collectAllCategoryMetadata(lang: Locale): CategoryMetadata[] {
     }
   }
 
-  for (const meta of collectImplicitCategoryMetadataFromOperations(bySlug, lang)) {
+  for (const meta of collectImplicitCategoryMetadataFromOperations(
+    bySlug,
+    lang,
+  )) {
     bySlug.set(meta.slug, meta);
   }
 
@@ -471,7 +476,10 @@ function groupOperationStubsByCategorySlug(
  * newest-first. `menuOrder` takes the minimum across variants so a
  * lower-numbered v1 doesn't sink a v2-prominent operation in the nav.
  */
-function buildOperationStub(group: RawOperation[], lang: Locale): ApiOperationStub {
+function buildOperationStub(
+  group: RawOperation[],
+  lang: Locale,
+): ApiOperationStub {
   const latest = group[0];
   const overlay = getTranslationOverlay(latest.version, lang);
   const operationId: string = latest.operation.operationId;

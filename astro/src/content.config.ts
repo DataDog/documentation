@@ -1,5 +1,9 @@
-import { defineCollection, z } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+// Imported from `zod` rather than re-exported from `astro:content`, which
+// deprecated its `z` in Astro 7. Same zod instance either way — it is already a
+// direct dependency here.
+import { z } from "zod";
 
 // A single filter entry from a cdoc's `content_filters` frontmatter. Mirrors
 // the shape cdocs-data validates (RawFilterConfig), trimmed to the fields the
@@ -15,11 +19,11 @@ const contentFilterSchema = z.object({
 });
 
 const en = defineCollection({
-  loader: glob({ pattern: '**/*.mdoc', base: './src/content/en' }),
+  loader: glob({ pattern: "**/*.mdoc", base: "./src/content/en" }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
-    type: z.enum(['static', 'interactive']).optional(),
+    type: z.enum(["static", "interactive"]).optional(),
     // cdocs (filterable product docs) fields:
     content_filters: z.array(contentFilterSchema).optional(),
     // Preserved from Hugo but unused in the PoC (redirects handled later).
@@ -27,7 +31,9 @@ const en = defineCollection({
     // Pages only reachable through a filtered parent view.
     private: z.boolean().optional(),
     further_reading: z
-      .array(z.object({ link: z.string().optional(), text: z.string().optional() }))
+      .array(
+        z.object({ link: z.string().optional(), text: z.string().optional() }),
+      )
       .optional(),
   }),
 });

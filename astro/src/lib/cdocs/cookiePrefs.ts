@@ -11,7 +11,7 @@
  * oldest-set entries are dropped — mirroring `CdocsClientStorage`'s eviction.
  */
 
-export const COOKIE_NAME = 'cdocs_prefs';
+export const COOKIE_NAME = "cdocs_prefs";
 
 /** Cap on distinct traits kept in the cookie (matches the localStorage cap). */
 export const MAX_TRAITS = 15;
@@ -27,7 +27,7 @@ function parseStorage(raw: string | undefined): Storage {
   if (!raw) return {};
   try {
     const parsed = JSON.parse(raw);
-    return parsed && typeof parsed === 'object' ? parsed : {};
+    return parsed && typeof parsed === "object" ? parsed : {};
   } catch {
     return {};
   }
@@ -38,7 +38,7 @@ export function readPrefs(raw: string | undefined): Record<string, string> {
   const storage = parseStorage(raw);
   const values: Record<string, string> = {};
   for (const [traitId, entry] of Object.entries(storage)) {
-    if (entry && typeof entry.value === 'string') values[traitId] = entry.value;
+    if (entry && typeof entry.value === "string") values[traitId] = entry.value;
   }
   return values;
 }

@@ -45,35 +45,59 @@ const cl = classListFactory(styles);
   <h2 class={cl("api-endpoint-summary__heading")} id={anchorId}>
     <a class={cl("api-endpoint-summary__link")} href={href}>
       {summary}
-      <span class={cl("api-endpoint-summary__arrow")} aria-hidden="true">&rarr;</span>
+      <span class={cl("api-endpoint-summary__arrow")} aria-hidden="true"
+        >&rarr;</span
+      >
     </a>
-    {deprecated && (
-      <span class={cl("api-endpoint-summary__badge", "api-endpoint-summary__badge--deprecated")}>
-        deprecated
-      </span>
-    )}
-    {unstable && (
-      <span class={cl("api-endpoint-summary__badge", "api-endpoint-summary__badge--preview")}>
-        preview
-      </span>
-    )}
+    {
+      deprecated && (
+        <span
+          class={cl(
+            "api-endpoint-summary__badge",
+            "api-endpoint-summary__badge--deprecated",
+          )}
+        >
+          deprecated
+        </span>
+      )
+    }
+    {
+      unstable && (
+        <span
+          class={cl(
+            "api-endpoint-summary__badge",
+            "api-endpoint-summary__badge--preview",
+          )}
+        >
+          preview
+        </span>
+      )
+    }
   </h2>
   <div class={cl("api-endpoint-summary__url-line")}>
     <ApiMethodBadge method={method} />
-    {allRegions.map((region) => {
-      const url = regionUrls?.[region.key];
-      return url ? (
-        <code class={cl("api-endpoint-summary__path")} data-region={region.key}>
-          {url}
-        </code>
-      ) : (
-        <code
-          class={cl("api-endpoint-summary__path", "api-endpoint-summary__path--unsupported")}
-          data-region={region.key}
-        >
-          Not supported in the {region.label} region
-        </code>
-      );
-    })}
+    {
+      allRegions.map((region) => {
+        const url = regionUrls?.[region.key];
+        return url ? (
+          <code
+            class={cl("api-endpoint-summary__path")}
+            data-region={region.key}
+          >
+            {url}
+          </code>
+        ) : (
+          <code
+            class={cl(
+              "api-endpoint-summary__path",
+              "api-endpoint-summary__path--unsupported",
+            )}
+            data-region={region.key}
+          >
+            Not supported in the {region.label} region
+          </code>
+        );
+      })
+    }
   </div>
 </div>

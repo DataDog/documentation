@@ -5,7 +5,7 @@
  * into HTML that can be safely injected via `set:html` / `dangerouslySetInnerHTML`.
  */
 
-import { marked } from 'marked';
+import { marked } from "marked";
 
 // Disable async mode and configure for clean output
 marked.use({ async: false, gfm: true });
@@ -15,7 +15,7 @@ marked.use({ async: false, gfm: true });
  * Use for longer descriptions that can contain paragraphs, lists, or code blocks.
  */
 export function renderMarkdown(md: string): string {
-  if (!md) return '';
+  if (!md) return "";
   return marked.parse(md) as string;
 }
 
@@ -25,6 +25,6 @@ export function renderMarkdown(md: string): string {
  * where block-level wrappers would be invalid.
  */
 export function renderMarkdownInline(md: string): string {
-  if (!md) return '';
+  if (!md) return "";
   return marked.parseInline(md) as string;
 }

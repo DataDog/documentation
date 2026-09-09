@@ -15,6 +15,8 @@ import {
 // inherits the input-bar text color via `currentColor`).
 import searchIconSvg from "../../assets/images/svg-icons/searchbar_search.svg?raw";
 import SearchResultsPopup, { type Selection } from "./SearchResultsPopup";
+import { createAskAiConfig } from "@lib/askAi/askAiConfig";
+import { logAskAiSearchSuggestionClick } from "@lib/askAi/searchSuggestionLog";
 import { useDebouncedSearch, type SearchFn } from "./hooks/useDebouncedSearch";
 import { usePopupPosition } from "./hooks/usePopupPosition";
 import { useGlobalSearchShortcuts } from "./hooks/useGlobalSearchShortcuts";
@@ -64,6 +66,7 @@ export default function SearchBar({
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState<Selection>({ kind: "none" });
+  const [hydrated, setHydrated] = useState(false);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -101,6 +104,15 @@ export default function SearchBar({
     setSelection({ kind: "none" });
   }, [hits]);
 
+  // The input is controlled, so anything typed into the server-rendered markup
+  // before this island mounts is discarded on the first render. Advertising
+  // hydration lets callers outside the component wait for the input to actually
+  // hold what they put in it. Same `data-hydrated` convention the site's other
+  // islands use.
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
   useGlobalSearchShortcuts({
     inputRef,
     wrapperRef,
@@ -130,6 +142,23 @@ export default function SearchBar({
     }
   };
 
+  /**
+   * Imported here rather than at the top of the module so the package stays out
+   * of this island's bundle. `mountAskAi` is idempotent, so the common case —
+   * `AskAi.astro`'s script having already run — returns the mounted widget; the
+   * config is passed either way, since a searchbar that mounts first would
+   * otherwise define the widget's capabilities for the whole page.
+   */
+  const askAi = async () => {
+    if (!trimmedQuery) return;
+    logAskAiSearchSuggestionClick(trimmedQuery);
+    setOpen(false);
+    const { mountAskAi } = await import("@dd/ask-ai");
+    mountAskAi(createAskAiConfig()).ask(trimmedQuery, {
+      source: "search_suggestion",
+    });
+  };
+
   const onInputKeyDown = (e: KeyboardEvent) => {
     if (e.key === "ArrowDown") {
       e.preventDefault();
@@ -147,13 +176,20 @@ export default function SearchBar({
       });
     } else if (e.key === "Enter") {
       e.preventDefault();
-      followSelectionOrSearch();
-      // Enter on the Ask AI placeholder is a no-op for now (Placeholder).
+      if (selection.kind === "ai") {
+        void askAi();
+      } else {
+        followSelectionOrSearch();
+      }
     }
   };
 
   return (
-    <div ref={wrapperRef} class={cl("search-bar")}>
+    <div
+      ref={wrapperRef}
+      class={cl("search-bar")}
+      data-hydrated={hydrated ? "true" : undefined}
+    >
       <form
         ref={formRef}
         class={cl("search-bar__form")}
@@ -165,14 +201,20 @@ export default function SearchBar({
       >
         <button
           type="submit"
-          class={cl("search-bar__submit", variant === "mobile" && "search-bar__submit--mobile")}
+          class={cl(
+            "search-bar__submit",
+            variant === "mobile" && "search-bar__submit--mobile",
+          )}
           aria-label={labels["Search"]}
           dangerouslySetInnerHTML={{ __html: searchIconSvg }}
         />
         <input
           ref={inputRef}
           type="search"
-          class={cl("search-bar__input", variant === "mobile" && "search-bar__input--mobile")}
+          class={cl(
+            "search-bar__input",
+            variant === "mobile" && "search-bar__input--mobile",
+          )}
           placeholder={labels["Search documentation..."]}
           aria-label={labels["Search documentation"]}
           value={query}
@@ -207,6 +249,8 @@ export default function SearchBar({
             aiSelected={selection.kind === "ai"}
             noResultsLabel={labels["No results."]}
             totalHits={totalHits}
+            query={trimmedQuery}
+            onAskAi={() => void askAi()}
           />,
           document.body,
         )}

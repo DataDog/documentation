@@ -100,13 +100,17 @@ function buildTree(entries: MenuEntry[], lang: Locale): DocsNavNode[] {
 
   const toNode = (entry: MenuEntry, index: number): DocsNavNode => {
     const children = entry.identifier
-      ? (childrenByParent.get(entry.identifier) ?? []).sort(byWeight).map(toNode)
+      ? (childrenByParent.get(entry.identifier) ?? [])
+          .sort(byWeight)
+          .map(toNode)
       : [];
     return {
       identifier: entry.identifier ?? `${entry.name}-${index}`,
       label: entry.name,
       // Childless, link-less items mirror Hugo's fallback to the docs home.
-      href: resolveUrl(entry.url, lang) ?? (children.length ? null : `${localePrefix(lang)}/`),
+      href:
+        resolveUrl(entry.url, lang) ??
+        (children.length ? null : `${localePrefix(lang)}/`),
       children,
     };
   };
@@ -124,7 +128,8 @@ function buildTree(entries: MenuEntry[], lang: Locale): DocsNavNode[] {
  * falling back to English when that locale's menu file is absent.
  */
 export function getDocsNavTree(lang: Locale = DEFAULT_LOCALE): DocsNavNode[] {
-  const entries = entriesByLocale.get(lang) ?? entriesByLocale.get(DEFAULT_LOCALE);
+  const entries =
+    entriesByLocale.get(lang) ?? entriesByLocale.get(DEFAULT_LOCALE);
   if (!entries) {
     return [];
   }
@@ -198,7 +203,10 @@ export function findActivePageIdentifier(
     node: DocsNavNode,
   ): { identifier: string; length: number } | null {
     let best = node.href
-      ? { identifier: node.identifier, length: matchLength(node.href, pathname) }
+      ? {
+          identifier: node.identifier,
+          length: matchLength(node.href, pathname),
+        }
       : null;
     if (best && best.length === 0) best = null;
     for (const child of node.children) {

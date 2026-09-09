@@ -24,10 +24,7 @@ import {
   findActivePageIdentifier,
 } from "@lib/componentUtils/docsNavMenu";
 import { getCategoriesView } from "@lib/api/viewsBuilder";
-import {
-  getOverviewPages,
-  resolveOverviewState,
-} from "@lib/api/overviewPages";
+import { getOverviewPages, resolveOverviewState } from "@lib/api/overviewPages";
 import { CORP_ORIGIN, HUGO_ORIGIN } from "@config/origins";
 import {
   localizedHref,
@@ -47,7 +44,9 @@ function navIconUrl(name: string): string {
     path.endsWith(`/${name}.png`),
   );
   if (!match) {
-    throw new Error(`No nav icon found for "${name}" under src/assets/images/nav-icons`);
+    throw new Error(
+      `No nav icon found for "${name}" under src/assets/images/nav-icons`,
+    );
   }
   return match[1];
 }
@@ -103,9 +102,24 @@ const activePageId = isApiContext
 // translations exist in the Hugo i18n bundle.
 const translate = useTranslations(pageLang);
 const quicknav = [
-  { label: translate("home"), href: CORP_ORIGIN, icon: "nav_home", alt: "home" },
-  { label: translate("docs") || "Docs", href: `${HUGO_ORIGIN}${localePrefix(pageLang)}/`, icon: "nav_docs", alt: "docs" },
-  { label: translate("api"), href: localizedHref(pageLang, "/api/latest/"), icon: "nav_mobile_api", alt: "api" },
+  {
+    label: translate("home"),
+    href: CORP_ORIGIN,
+    icon: "nav_home",
+    alt: "home",
+  },
+  {
+    label: translate("docs") || "Docs",
+    href: `${HUGO_ORIGIN}${localePrefix(pageLang)}/`,
+    icon: "nav_docs",
+    alt: "docs",
+  },
+  {
+    label: translate("api"),
+    href: localizedHref(pageLang, "/api/latest/"),
+    icon: "nav_mobile_api",
+    alt: "api",
+  },
 ];
 // TODO: replace hardcoded English with i18n() once authoritative translation
 // keys exist for these strings in the Hugo i18n bundle.

@@ -163,7 +163,7 @@ By default if you have push notifications enabled and are assigned as a commande
 
 Create [workflow automations][3] that send mobile push notifications.
 
-1. On the workflow canvas, click the {{< ui >}}+{{< /ui >}} icon.
+1. On the workflow canvas, click the {{< ui >}}\+{{< /ui >}} icon.
 2. Search for {{< ui >}}Send mobile push notification{{< /ui >}}.
 3. Under {{< ui >}}To{{< /ui >}} select your notification recipient. The recipient must have enabled notifications in the Datadog mobile app for this option to appear.
 4. Enter the message {{< ui >}}Body{{< /ui >}}.

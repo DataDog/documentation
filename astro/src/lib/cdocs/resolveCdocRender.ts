@@ -10,9 +10,9 @@
  * route supplies `searchParams`/`cookieRaw`/`now` and handles the actual entry
  * lookup, cookie write, and rendering.
  */
-import { resolvePageFilters, type CdocContentFilter } from './filters';
-import { readPrefs, writePrefs } from './cookiePrefs';
-import type { ResolvedFilter } from './types';
+import { resolvePageFilters, type CdocContentFilter } from "./filters";
+import { readPrefs, writePrefs } from "./cookiePrefs";
+import type { ResolvedFilter } from "./types";
 
 export interface ResolveCdocRenderInput {
   /** The doc's `content_filters` frontmatter. */

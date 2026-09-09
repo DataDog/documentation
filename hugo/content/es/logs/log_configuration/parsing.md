@@ -10,64 +10,67 @@ algolia:
 aliases:
 - /es/logs/parsing/
 - /es/logs/processing/parsing
-description: Analiza tus registros utilizando el Procesador Grok
+description: Analice sus registros usando el procesador Grok
 further_reading:
-- link: https://learn.datadoghq.com/courses/log-pipelines
-  tag: Centro de Aprendizaje
-  text: Aprende a construir y modificar canalizaciones de registros
 - link: /logs/log_configuration/processors
   tag: Documentación
-  text: Aprende a procesar tus registros
-- link: https://www.youtube.com/watch?v=AwW70AUmaaQ&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=3
-  tag: Video
-  text: 'Consejos y Trucos de Datadog: Usa el análisis Grok para extraer campos de
-    los registros'
-- link: /logs/faq/how-to-investigate-a-log-parsing-issue/
-  tag: PREGUNTAS FRECUENTES
-  text: ¿Cómo investigar un problema de análisis de registros?
-- link: /logs/guide/log-parsing-best-practice/
-  tag: PREGUNTAS FRECUENTES
-  text: Análisis de Registros - Mejores Prácticas
+  text: Aprenda a procesar sus registros
 - link: /logs/logging_without_limits/
   tag: Documentación
-  text: Controla el volumen de registros indexados por Datadog
+  text: Controle el volumen de registros indexados por Datadog
+- link: /logs/faq/how-to-investigate-a-log-parsing-issue/
+  tag: PREGUNTAS FRECUENTES
+  text: ¿Cómo investigar un problema de parseo de registros?
+- link: /logs/guide/log-parsing-best-practice/
+  tag: PREGUNTAS FRECUENTES
+  text: 'Parseo de registros: mejores prácticas'
+- link: https://learn.datadoghq.com/courses/log-pipelines
+  tag: Centro de aprendizaje
+  text: Aprenda a crear y modificar canalizaciones de registros
 - link: https://learn.datadoghq.com/courses/debugging-log-pipelines
-  tag: Centro de Aprendizaje
+  tag: Centro de aprendizaje
   text: Depuración de canalizaciones de registros
-title: Análisis
+- link: https://www.datadoghq.com/blog/detect-http2-abuse-apache-web-server-logs/
+  tag: Blog
+  text: Cómo detectar abusos de HTTP/2 en los registros del servidor web Apache
+- link: https://www.youtube.com/watch?v=AwW70AUmaaQ&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=3
+  tag: Video
+  text: 'Consejos y trucos de Datadog: utilice el parseo de Grok para extraer campos
+    de los registros'
+title: Parseo
 ---
-{{< learning-center-callout header="Prueba el análisis Grok en el Centro de Aprendizaje" btn_title="Inscríbete Ahora" btn_url="https://learn.datadoghq.com/courses/log-pipelines">}}
-  Aprende a construir y modificar canalizaciones de registros, gestionarlas con el Escáner de Canalizaciones y estandarizar los nombres de atributos en los registros procesados para mantener la consistencia.
+{{< learning-center-callout header="Pruebe el parseo de Grok en el Centro de aprendizaje" btn_title="Inscríbase ahora" btn_url="https://learn.datadoghq.com/courses/log-pipelines">}}
+  Aprenda a crear y modificar canalizaciones de registros, adminístrelas con el Pipeline Scanner y estandarice los nombres de los atributos estándar en los registros procesados para lograr coherencia.
 {{< /learning-center-callout >}}
 
 ## Resumen {#overview}
 
-Datadog analiza automáticamente los registros en formato JSON. Para otros formatos, Datadog te permite enriquecer tus registros con la ayuda del Analizador Grok.
-La sintaxis Grok proporciona una forma más fácil de analizar registros que las expresiones regulares puras. El Analizador Grok te permite extraer atributos de mensajes de texto semiestructurados.
+Datadog analiza automáticamente los registros con formato JSON. Para otros formatos, Datadog le permite enriquecer sus registros con la ayuda de Grok Parser.
+La sintaxis de Grok proporciona una forma más sencilla de analizar registros que las expresiones regulares puras. El Grok Parser le permite extraer atributos de mensajes de texto semiestructurados.
 
-Grok viene con patrones reutilizables para analizar enteros, direcciones IP, nombres de host, etc. Estos valores deben enviarse al analizador grok como cadenas.
+Grok viene con patrones reutilizables para analizar números enteros, direcciones IP, nombres de servidor, etc. Estos valores deben enviarse al Grok Parser como cadenas.
 
-Puedes escribir reglas de análisis con la sintaxis `%{MATCHER:EXTRACT:FILTER}`:
+Puede escribir reglas de parseo con la sintaxis `%{MATCHER:EXTRACT:FILTER}`:
 
-* **Matcher**: Una regla (posiblemente una referencia a otra regla de token) que describe qué esperar (número, palabra, noEspacio, etc.).
+* **Coincidencia**: Una regla (posiblemente una referencia a otra regla de token) que describe qué esperar (número, palabra, noEspacio, etc.).
 
-* **Extract** (opcional): Un identificador que representa el destino de captura para el fragmento de texto coincidente con el *Matcher*.
+* **Extracción** (opcional): Un identificador que representa el destino de captura para el fragmento de texto que coincide con la *Coincidencia*.
 
-* **Filter** (opcional): Un post-procesador de la coincidencia para transformarla.
+* **Filtro** (opcional): Un posprocesador de la coincidencia para transformarla.
 
-Ejemplo de un registro no estructurado clásico:
+Ejemplo para un registro clásico no estructurado:
 
 ```text
 john connected on 11/08/2017
 ```
 
-Con la siguiente regla de análisis:
+Con la siguiente regla de parseo:
 
 ```text
 MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 ```
 
-Después de procesar, se genera el siguiente registro estructurado:
+Después del procesamiento, se genera el siguiente registro estructurado:
 
 ```json
 {
@@ -78,31 +81,31 @@ Después de procesar, se genera el siguiente registro estructurado:
 
 **Nota**:
 
-* Si tienes múltiples reglas de análisis en un solo analizador Grok:
-  * Solo una puede coincidir con cualquier registro dado. La primera que coincida, de arriba hacia abajo, es la que realiza el análisis.
-  * Cada regla puede hacer referencia a reglas de análisis definidas por encima de sí misma en la lista.
-* Debes tener nombres de regla únicos dentro del mismo analizador Grok.
-* El nombre de la regla debe contener solo: caracteres alfanuméricos, `_`, y `.`. Debe comenzar con un carácter alfanumérico.
+* Si tiene varias reglas de parseo en un solo Grok Parser:
+  * Solo una puede coincidir con cualquier registro dado. La primera que coincida, de arriba hacia abajo, es la que realiza el parseo.
+  * Cada regla puede hacer referencia a reglas de parseo definidas por encima de sí misma en la lista.
+* Debe tener nombres de regla únicos dentro del mismo Grok Parser.
+* El nombre de la regla debe contener solo: caracteres alfanuméricos, `_` y `.`. Debe comenzar con un carácter alfanumérico.
 * Las propiedades con valores nulos o vacíos no se muestran.
-* Debes definir tu regla de análisis para que coincida con toda la entrada del registro, ya que cada regla se aplica desde el principio hasta el final del registro.
-* Ciertos registros pueden producir grandes espacios en blanco. Utiliza `\n` y `\s+` para contabilizar saltos de línea y espacios en blanco.
+* Debe definir su regla de parseo para que coincida con toda la entrada de registro, ya que cada regla se aplica desde el principio hasta el final del registro.
+* Ciertos registros pueden producir grandes espacios en blanco. Use `\n` y `\s+` para tener en cuenta los saltos de línea y los espacios en blanco.
 
-### Matcher y filtro {#matcher-and-filter}
+### Coincidencia y filtro {#matcher-and-filter}
 
-<div class="alert alert-danger">Las características de parseo Grok disponibles en <em>tiempo de consulta</em> (en el <a href="/logs/explorer/calculated_fields/">Explorador</a>) admiten un subconjunto limitado de matchers (<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong> y <strong>word</strong>) y filtros (<strong>number</strong> y <strong>integer</strong>).<br><br>
-El siguiente conjunto completo de matchers y filtros es específico para <em>tiempo de ingestión</em> <a href="/logs/log_configuration/processors/grok_parser/">funcionalidad del Analizador Grok</a>.</div>
+<div class="alert alert-danger">Las funciones de parseo Grok disponibles en <em>tiempo de consulta</em> (en el <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) admiten un subconjunto limitado de coincidencias (<strong>datos</strong>, <strong>entero</strong>, <strong>sinEspacio</strong>, <strong>número</strong> y <strong>palabra</strong>) y filtros (<strong>número</strong> y <strong>entero</strong>).<br><br>
+El siguiente conjunto completo de coincidencias y filtros es específico para la funcionalidad del <em>Grok Parser</em> en <a href="/logs/log_configuration/processors/grok_parser/">tiempo de ingesta</a>.</div>
 
-Aquí hay una lista de todos los matchers y filtros implementados nativamente por Datadog:
+Esta es una lista de todas las coincidencias y filtros implementados de forma nativa por Datadog:
 
 {{< tabs >}}
-{{% tab "Matchers" %}}
+{{% tab "Coincidencias" %}}
 
-**Matchers de tiempo de consulta y tiempo de ingestión:**
+**Coincidencias en tiempo de consulta y tiempo de ingesta:**
 
-Los siguientes matchers están disponibles tanto para el parseo en tiempo de consulta (explorador) como para el parseo en tiempo de ingestión (Analizador Grok):
+Las siguientes coincidencias están disponibles tanto para el parseo en tiempo de consulta (Log Explorer) como para el parseo en tiempo de ingesta (Grok Parser):
 
 `word`
-: Coincide con una _palabra_, que comienza con un límite de palabra; contiene caracteres de a-z, A-Z, 0-9, incluyendo el `_` (carácter de subrayado); y termina con un límite de palabra. Equivalente a `\b\w+\b` en regex.
+: Coincide con una _palabra_, que comienza con un límite de palabra; contiene caracteres de a-z, A-Z, 0-9, incluido el carácter `_` (guion bajo); y termina con un límite de palabra. Equivalente a `\b\w+\b` en regex.
 
 `notSpace`
 : Coincide con cualquier cadena hasta el siguiente espacio.
@@ -114,20 +117,20 @@ Los siguientes matchers están disponibles tanto para el parseo en tiempo de con
 : Coincide con un número entero y lo analiza como un número entero.
 
 `data`
-: Coincide con cualquier cadena, incluidos espacios y saltos de línea. Equivalente a `.*` en regex. Utilice cuando ninguno de los patrones anteriores sea apropiado.
+: Coincide con cualquier cadena, incluyendo espacios y saltos de línea. Equivalente a `.*` en regex. Úselo cuando ninguno de los patrones anteriores sea apropiado.
 
-**Coincidencias solo de tiempo de ingestión:**
+**Coincidencias solo durante la ingesta:**
 
-Los siguientes coincidencias solo están disponibles para el parseo de tiempo de ingestión con el procesador Grok Parser y no se pueden usar en el explorador:
+Las siguientes coincidencias solo están disponibles para el parseo durante la ingesta con el procesador Grok Parser y no se pueden usar en el Log Explorer:
 
 `date("pattern"[, "timezoneId"[, "localeId"]])`
-: Coincide con una fecha con el patrón especificado y la analiza para producir un timestamp Unix. [Vea los ejemplos de Matcher de fecha](#parsing-dates).
+: Coincide con una fecha con el patrón especificado y la analiza para producir una marca de tiempo Unix. [Consulte los ejemplos del Matcher de fecha](#parsing-dates).
 
 `regex("pattern")`
-: Coincide con una expresión regular. [Verifique los ejemplos de Matcher de regex](#regex).
+: Coincide con una expresión regular. [Verifique los ejemplos del comparador de expresiones regulares](#regex).
 
 `boolean("truePattern", "falsePattern")`
-: Coincide y analiza un Booleano, definiendo opcionalmente los patrones de verdadero y falso (por defecto son `true` y `false`, ignorando mayúsculas y minúsculas).
+: Coincide y analiza un valor booleano, definiendo opcionalmente los patrones verdadero y falso (los valores predeterminados son `true` y `false`, ignorando mayúsculas y minúsculas).
 
 `numberStr`
 : Coincide con un número decimal de punto flotante y lo analiza como una cadena.
@@ -163,19 +166,19 @@ Los siguientes coincidencias solo están disponibles para el parseo de tiempo de
 : Coincide con una dirección MAC.
 
 `ipv4`
-: Coincide con un IPV4.
+: Coincide con una dirección IPv4.
 
 `ipv6`
-: Coincide con un IPV6.
+: Coincide con una dirección IPv6.
 
 `ip`
 : Coincide con una IP (v4 o v6).
 
 `hostname`
-: Coincide con un nombre de host.
+: Coincide con un nombre de servidor.
 
 `ipOrHost`
-: Coincide con un nombre de host o IP.
+: Coincide con un nombre de servidor o una IP.
 
 `port`
 : Coincide con un número de puerto.
@@ -183,9 +186,9 @@ Los siguientes coincidencias solo están disponibles para el parseo de tiempo de
 {{% /tab %}}
 {{% tab "Filtros" %}}
 
-**Filtros de tiempo de consulta y de tiempo de ingestión:**
+**Filtros de tiempo de consulta y tiempo de ingesta:**
 
-Los siguientes filtros están disponibles tanto para el parseo de tiempo de consulta (Explorador de Registros) como para el parseo de tiempo de ingestión (Procesador Grok):
+Los siguientes filtros están disponibles tanto para el parseo en tiempo de consulta (Log Explorer) como para el parseo en tiempo de ingesta (Grok Parser):
 
 `number`
 : Analiza una coincidencia como un número de doble precisión.
@@ -193,27 +196,27 @@ Los siguientes filtros están disponibles tanto para el parseo de tiempo de cons
 `integer`
 : Analiza una coincidencia como un número entero.
 
-**Filtros solo de tiempo de ingestión:**
+**Filtros solo para tiempo de ingesta:**
 
-Los siguientes filtros solo están disponibles para el parseo de tiempo de ingestión con el procesador Grok y no se pueden usar en el Explorador de Registros:
+Los siguientes filtros solo están disponibles para el parseo en tiempo de ingesta con el procesador Grok Parser y no se pueden usar en el Log Explorer:
 
 `boolean`
-: Analiza las cadenas 'true' y 'false' como booleanos ignorando mayúsculas y minúsculas.
+: Analiza cadenas 'true' y 'false' como booleanos ignorando mayúsculas y minúsculas.
 
 `nullIf("value")`
 : Devuelve nulo si la coincidencia es igual al valor proporcionado.
 
 `json`
-: Analiza JSON correctamente formateado.
+: Analiza JSON con formato correcto.
 
 `rubyhash`
-: Analiza un hash de Ruby correctamente formateado como `{name => "John", "job" => {"company" => "Big Company", "title" => "CTO"}}`
+: Analiza un hash de Ruby con formato correcto como `{name => "John", "job" => {"company" => "Big Company", "title" => "CTO"}}`
 
 `useragent([decodeuricomponent:true/false])`
-: Analiza un agente de usuario y devuelve un objeto JSON que contiene el dispositivo, el sistema operativo y el navegador representado por el Agente. [Consulta el procesador de Agente de Usuario][1].
+: Analiza un user-agent y devuelve un objeto JSON que contiene el dispositivo, el sistema operativo y el navegador representados por el Agent. [Consulte el procesador de User Agent][1].
 
 `querystring`
-: Extrae todos los pares clave-valor en una cadena de consulta de URL que coincida (por ejemplo, `?productId=superproduct&promotionCode=superpromo`).
+: Extrae todos los pares clave-valor en una cadena de consulta de URL coincidente (por ejemplo, `?productId=superproduct&promotionCode=superpromo`).
 
 `decodeuricomponent`
 : Decodifica componentes de URI. Por ejemplo, transforma `%2Fservice%2Ftest` en `/service/test`.
@@ -225,19 +228,19 @@ Los siguientes filtros solo están disponibles para el parseo de tiempo de inges
 : Devuelve la cadena en mayúsculas.
 
 `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])`
-: Extrae el patrón de clave-valor y devuelve un objeto JSON. Consulta los [ejemplos de filtro de clave-valor](#key-value-or-logfmt).
+: Extrae el patrón de clave-valor y devuelve un objeto JSON. Consulte los [ejemplos de filtro de clave-valor](#key-value-or-logfmt).
 
 `xml`
-: Analiza XML correctamente formateado. Consulta los [ejemplos de filtro XML](#parsing-xml).
+: Analiza XML correctamente formateado. Consulte los [ejemplos de filtro XML](#parsing-xml).
 
 `csv(headers[, separator[, quotingcharacter]])`
-: Analiza líneas de CSV o TSV correctamente formateadas. Consulta los [ejemplos de filtro CSV](#parsing-csv).
+: Analiza líneas de CSV o TSV correctamente formateadas. Consulte los [ejemplos de filtro CSV](#parsing-csv).
 
 `scale(factor)`
 : Multiplica el valor numérico esperado por el factor proporcionado.
 
 `array([[openCloseStr, ] separator][, subRuleOrFilter)`
-: Parsea una secuencia de cadenas de tokens y la devuelve como un arreglo. Consulta el ejemplo de [lista a array](#list-to-array).
+: Realiza el parseo de una secuencia de tokens de cadena y la devuelve como una matriz. Consulte el ejemplo de [lista a arreglo](#list-to-array).
 
 `url`
 : Analiza una URL y devuelve todos los miembros tokenizados (dominio, parámetros de consulta, puerto, etc.) en un objeto JSON. [Más información sobre cómo analizar URLs][2].
@@ -247,35 +250,35 @@ Los siguientes filtros solo están disponibles para el parseo de tiempo de inges
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configuraciones avanzadas {#advanced-settings}
+## Configuración avanzada {#advanced-settings}
 
-Utiliza la sección de **Configuraciones Avanzadas** al final de tu procesador Grok para analizar un atributo específico en lugar del atributo `message` por defecto, o para definir reglas auxiliares que reutilicen patrones comunes en múltiples reglas de parseo.
+Utilice la sección {{< ui >}}Advanced Settings{{< /ui >}} en la parte inferior de su procesador Grok para analizar un atributo específico en lugar del atributo `message` predeterminado, o para definir reglas auxiliares que reutilicen patrones comunes en múltiples reglas de análisis.
 
 ### Parseo de un atributo de texto específico {#parsing-a-specific-text-attribute}
 
-Utiliza el campo de **Extraer de** para aplicar tu procesador Grok en un atributo de texto dado en lugar del atributo `message` por defecto.
+Utilice el campo {{< ui >}}Extract from{{< /ui >}} para aplicar su procesador Grok a un atributo de texto determinado en lugar del atributo `message` predeterminado.
 
-Por ejemplo, considera un registro que contiene un atributo `command.line` que debe ser parseado como un par clave-valor. Extrae de `command.line` para analizar su contenido y crear atributos estructurados a partir de los datos del comando.
+Por ejemplo, considere un registro que contiene un atributo `command.line` que debe analizarse como clave-valor. Extraiga de `command.line` para realizar el parseo de su contenido y crear atributos estructurados a partir de los datos del comando.
 
-{{< img src="/logs/processing/parsing/grok_advanced_settings_extract.png" alt="Configuraciones Avanzadas con ejemplo de Extraer del atributo command.line" style="width:80%;">}}
+{{< img src="/logs/processing/parsing/grok_advanced_settings_extract.png" alt="Configuración avanzada con el ejemplo del atributo Extract from command.line" style="width:80%;">}}
 
 ### Uso de reglas auxiliares para reutilizar patrones comunes {#using-helper-rules-to-reuse-common-patterns}
 
-Utiliza el campo de **Reglas Auxiliares** para definir tokens para tus reglas de parseo. Las reglas auxiliares te permiten reutilizar patrones comunes de Grok en tus reglas de análisis. Esto es útil cuando tienes varias reglas en el mismo procesador Grok que utilizan los mismos tokens.
+Utilice el campo {{< ui >}}Helper Rules{{< /ui >}} para definir tokens para sus reglas de parseo. Las reglas auxiliares le permiten reutilizar patrones Grok comunes en sus reglas de parseo. Esto es útil cuando tiene varias reglas en el mismo analizador Grok que utilizan los mismos tokens.
 
-Ejemplo de un registro no estructurado clásico:
+Ejemplo para un registro clásico no estructurado:
 
 ```text
 john id:12345 connected on 11/08/2017 on server XYZ in production
 ```
 
-Utiliza la siguiente regla de parseo:
+Utilice la siguiente regla de parseo:
 
 ```text
 MyParsingRule %{user} %{connection} %{server}
 ```
 
-Con los siguientes auxiliares:
+Con los siguientes ayudantes:
 
 ```text
 user %{word:user.name} id:%{integer:user.id}
@@ -292,22 +295,22 @@ Algunos ejemplos que demuestran cómo usar analizadores:
 * [Patrones alternos](#alternating-pattern)
 * [Atributo opcional](#optional-attribute)
 * [JSON anidado](#nested-json)
-* [Expresiones regulares](#regex)
-* [Lista y arrays](#list-to-array)
+* [Regex](#regex)
+* [Listas y arreglos](#list-to-array)
 * [ Formato Glog](#glog-format)
 * [XML](#parsing-xml)
 * [CSV](#parsing-csv)
 
 ### Clave-valor o logfmt {#key-value-or-logfmt}
 
-Este es el filtro central de clave-valor: `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])` donde:
+Este es el filtro principal de clave-valor: `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])` donde:
 
-* `separatorStr`: define el separador entre clave y valores. Por defecto es `=`.
-* `characterAllowList`: define caracteres de valor adicionales no escapados además del valor por defecto `\\w.\\-_@`. Se usa solo para valores no entrecomillados (por ejemplo, `key=@valueStr`).
-* `quotingStr`: define comillas, reemplazando la detección de comillas por defecto: `<>`, `""`, `''`.
-* `delimiter`: define el separador entre los diferentes pares de clave-valor (por ejemplo, `|` es el delimitador en `key1=value1|key2=value2`). Por defecto es ` ` (espacio normal), `,` y `;`.
+* `separatorStr`: define el separador entre claves y valores. El valor predeterminado es `=`.
+* `characterAllowList`: define caracteres de valor adicionales sin escape además del `\\w.\\-_@` predeterminado. Se utiliza solo para valores sin comillas (por ejemplo, `key=@valueStr`).
+* `quotingStr`: define comillas, reemplazando la detección de comillas predeterminada: `<>`, `""`, `''`.
+* `delimiter`: define el separador entre los diferentes pares de clave-valor (por ejemplo, `|` es el delimitador en `key1=value1|key2=value2`). El valor predeterminado es ` ` (espacio normal), `,` y `;`.
 
-Usa filtros como **keyvalue** para mapear más fácilmente cadenas a atributos para formatos de clave-valor o logfmt:
+Utilice filtros como `keyvalue` para asignar cadenas a atributos de forma más sencilla para formatos keyvalue o logfmt:
 
 **Registro:**
 
@@ -321,8 +324,8 @@ user=john connect_date=11/08/2017 id=123 action=click
 rule %{data::keyvalue}
 ```
 
-No es necesario especificar el nombre de tus parámetros ya que ya están contenidos en el registro.
-Si agregas un atributo **extract**`my_attribute` en tu patrón de regla, verás:
+No necesita especificar el nombre de sus parámetros, ya que estos ya están contenidos en el registro.
+Si agrega un atributo **extract** `my_attribute` en su patrón de regla, verá:
 
 ```json
 {
@@ -334,7 +337,7 @@ Si agregas un atributo **extract**`my_attribute` en tu patrón de regla, verás:
 }
 ```
 
-Si `=` no es el separador predeterminado entre tu clave y valores, agrega un parámetro en tu regla de parseo con un separador.
+Si `=` no es el separador predeterminado entre su clave y sus valores, agregue un parámetro en su regla de parseo con un separador.
 
 **Registro:**
 
@@ -348,7 +351,7 @@ user: john connect_date: 11/08/2017 id: 123 action: click
 rule %{data::keyvalue(": ")}
 ```
 
-Si los registros contienen caracteres especiales en un valor de atributo, como `/` en una URL, agrégalo a la lista de permitidos en la regla de parseo:
+Si los registros contienen caracteres especiales en el valor de un atributo, como `/` en una URL por ejemplo, agréguelo a la lista de permitidos en la regla de parseo:
 
 **Registro:**
 
@@ -364,20 +367,20 @@ rule %{data::keyvalue("=","/:")}
 
 Otros ejemplos:
 
-| **Cadena cruda**               | **Regla de parseo**                                      | **Resultado**                            |
+| **Cadena sin procesar**               | **Regla de parseo**                                      | **Resultado**                            |
 |:-----------------------------|:------------------------------------------------------|:--------------------------------------|
-| clave=valorStr                 | `%{data::keyvalue}`                                   | {"clave": "valorStr"}                   |
-| clave=\<valorStr>              | `%{data::keyvalue}`                                   | {"clave": "valorStr"}                   |
-| "clave"="valorStr"             | `%{data::keyvalue}`                                   | {"clave": "valorStr"}                   |
-| clave:valorStr                 | `%{data::keyvalue(":")}`                              | {"clave": "valorStr"}                   |
-| clave:"/valorStr"              | `%{data::keyvalue(":", "/")}`                         | {"clave": "/valorStr"}                  |
-| /clave:/valorStr               | `%{data::keyvalue(":", "/")}`                         | {"/clave": "/valorStr"}                 |
-| clave:={valorStr}              | `%{data::keyvalue(":=", "", "{}")}`                   | {"clave": "valorStr"}                   |
-| clave1=valor1\|clave2=valor2     | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"clave1": "valor1", "clave2": "valor2"}  |
-| clave1="valor1"\|clave2="valor2" | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"clave1": "valor1", "clave2": "valor2"}  |
+| key=valueStr                 | `%{data::keyvalue}`                                   | {\"key\": \"valueStr\"}                   |
+| key=\\<valueStr>              | `%{data::keyvalue}`                                   | {\"key\": \"valueStr\"}                   |
+| \"key\"=\"valueStr\"             | `%{data::keyvalue}`                                   | {\"key\": \"valueStr\"}                   |
+| key:valueStr                 | `%{data::keyvalue(":")}`                              | {\"key\": \"valueStr\"}                   |
+| key:\"/valueStr\"              | `%{data::keyvalue(":", "/")}`                         | {\"key\": \"/valueStr\"}                  |
+| /key:/valueStr               | `%{data::keyvalue(":", "/")}`                         | {\"/key\": \"/valueStr\"}                 |
+| key:={valueStr}              | `%{data::keyvalue(":=", "", "{}")}`                   | {\"key\": \"valueStr\"}                   |
+| key1=value1\\|key2=value2     | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {\"key1\": \"value1\", \"key2\": \"value2\"}  |
+| key1=\"value1\"\\|key2=\"value2\" | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {\"key1\": \"value1\", \"key2\": \"value2\"}  |
 
-**Ejemplo de cadena con múltiples comillas**: Cuando se definen múltiples cadenas entre comillas, el comportamiento predeterminado se reemplaza por un carácter de comillas definido.
-La clave-valor siempre coincide con las entradas sin ningún carácter de comillas, independientemente de lo que se especifique en `quotingStr`. Cuando se utilizan caracteres de comillas, se ignora el `characterAllowList` ya que todo lo que está entre los caracteres de comillas se extrae.
+**Ejemplo de Multiple QuotingString**: Cuando se definen múltiples cadenas de comillas, el comportamiento predeterminado se reemplaza por un carácter de comillas definido.
+El par clave-valor siempre coincide con las entradas sin ningún carácter de comillas, independientemente de lo que se especifique en `quotingStr`. Cuando se utilizan caracteres de comillas, se ignora `characterAllowList` ya que se extrae todo lo que se encuentra entre los caracteres de comillas.
 
 **Registro:**
 
@@ -399,43 +402,43 @@ La clave-valor siempre coincide con las entradas sin ningún carácter de comill
 
 **Nota**:
 
-* Los valores vacíos (`key=`) o los valores `null` (`key=null`) no se muestran en el JSON de salida.
-* Si defines un filtro de *keyvalue* en un `data` objeto, y este filtro no coincide, entonces se devuelve un JSON vacío `{}` (por ejemplo, entrada: `key:=valueStr`, regla de parseo: `rule_test %{data::keyvalue("=")}`, salida: `{}`).
+* Los valores vacíos (`key=`) o `null` (`key=null`) no se muestran en el JSON de salida.
+* Si define un filtro *keyvalue* en un objeto `data`, y este filtro no coincide, entonces se devuelve un JSON `{}` vacío (por ejemplo, entrada: `key:=valueStr`, regla de parseo: `rule_test %{data::keyvalue("=")}`, salida: `{}`).
 * Definir `""` como `quotingStr` mantiene la configuración predeterminada para las comillas.
 
 ### Parseo de fechas {#parsing-dates}
 
-El comparador de fechas transforma tu marca de tiempo en el formato EPOCH (unidad de medida **milisegundo**).
+El comparador de fechas transforma su marca de tiempo al formato EPOCH (unidad de medida **milisegundo**).
 
-| **Cadena cruda**                       | **Regla de parseo**                                          | **Resultado**              |
+| **Cadena sin procesar**                       | **Regla de parseo**                                          | **Resultado**              |
 |:-------------------------------------|:----------------------------------------------------------|:------------------------|
-| 14:20:15                             | `%{date("HH:mm:ss"):date}`                                | {"date": 51615000}      |
-| 02:20:15 PM                          | `%{date("hh:mm:ss a"):date}`                              | {"date": 51615000}      |
-| 11/10/2014                           | `%{date("dd/MM/yyyy"):date}`                              | {"date": 1412978400000} |
-| Jue Jun 16 08:29:03 2016             | `%{date("EEE MMM dd HH:mm:ss yyyy"):date}`                | {"date": 1466065743000} |
-| Mar Nov 1 08:29:03 2016              | `%{date("EEE MMM d HH:mm:ss yyyy"):date}`                 | {"date": 1466065743000} |
-| 06/Mar/2013:01:36:30 +0900           | `%{date("dd/MMM/yyyy:HH:mm:ss Z"):date}`                  | {"date": 1362501390000} |
-| 2016-11-29T16:21:36.431+0000         | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZ"):date}`              | {"date": 1480436496431} |
-| 2016-11-29T16:21:36.431+00:00        | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"):date}`             | {"date": 1480436496431} |
-| 06/Feb/2009:12:14:14.655             | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}`                | {"date": 1233922454655} |
-| 2007-08-31 19:22:22.427 ADT          | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188598942427} |
-| Jue Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` | {"date": 1466058543000} |
-| Jue Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","UTC+5"):date}`        | {"date": 1466047743000} |
-| Jue Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","+3"):date}`           | {"date": 1466054943000} |
+| 14:20:15                             | `%{date("HH:mm:ss"):date}`                                | {\"date\": 51615000}      |
+| 02:20:15 PM                          | `%{date("hh:mm:ss a"):date}`                              | {\"date\": 51615000}      |
+| 11/10/2014                           | `%{date("dd/MM/yyyy"):date}`                              | {\"date\": 1412978400000} |
+| Thu Jun 16 08:29:03 2016             | `%{date("EEE MMM dd HH:mm:ss yyyy"):date}`                | {\"date\": 1466065743000} |
+| Tue Nov 1 08:29:03 2016              | `%{date("EEE MMM d HH:mm:ss yyyy"):date}`                 | {\"date\": 1466065743000} |
+| 06/Mar/2013:01:36:30 +0900           | `%{date("dd/MMM/yyyy:HH:mm:ss Z"):date}`                  | {\"date\": 1362501390000} |
+| 2016-11-29T16:21:36.431+0000         | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZ"):date}`              | {\"date\": 1480436496431} |
+| 2016-11-29T16:21:36.431+00:00        | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"):date}`             | {\"date\": 1480436496431} |
+| 06/Feb/2009:12:14:14.655             | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}`                | {\"date\": 1233922454655} |
+| 2007-08-31 19:22:22.427 ADT          | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {\"date\": 1188598942427} |
+| Jue Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` | {\"date\": 1466058543000} |
+| Jue Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","UTC+5"):date}`        | {\"date\": 1466047743000} |
+| Jue Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","+3"):date}`           | {\"date\": 1466054943000} |
 
-<sup>1</sup> Utiliza el `timezone` parámetro si realizas tus propias localizaciones y tus marcas de tiempo _no_ están en UTC.
-El formato soportado para zonas horarias es:
+<sup>1</sup>Utilice el parámetro `timezone` si realiza sus propias localizaciones y sus marcas de tiempo _no_ están en UTC.
+El formato admitido para las zonas horarias es:
 
 * `GMT`, `UTC`, `UT` o `Z`
-* `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`. El rango máximo soportado es de +18:00 a -18:00 inclusive.
-* Zonas horarias que comienzan con `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` o `UT-`. El rango máximo soportado es de +18:00 a -18:00 inclusive.
-* IDs de zona horaria extraídos de la base de datos TZ. Para más información, consulte [nombres de la base de datos TZ][2].
+* `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`. El rango máximo admitido es de +18:00 a -18:00 inclusive.
+* Zonas horarias que comienzan con `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` o `UT-`. El rango máximo admitido es de +18:00 a -18:00 inclusive.
+* IDs de zona horaria extraídos de la base de datos TZ. Para obtener más información, consulte [TZ database names][2].
 
-**Nota**: El parseo de una fecha **no** establece su valor como la fecha oficial del registro. Para esto, utiliza el [Remapeador de Fecha de Registro][3] en un procesador posterior.
+**Nota**: El parseo de una fecha **no** establece su valor como la fecha oficial del registro. Para esto, utilice el [Log Date Remapper][3] en un procesador posterior.
 
-### Patrón alternante {#alternating-pattern}
+### Patrón alterno {#alternating-pattern}
 
-Si tiene registros con dos formatos posibles que difieren en solo un atributo, establezca una única regla utilizando alternancia con `(<REGEX_1>|<REGEX_2>)`. Esta regla es equivalente a un operador booleano OR.
+Si tiene registros con dos formatos posibles que difieren solo en un atributo, establezca una única regla usando alternancia con `(<REGEX_1>|<REGEX_2>)`. Esta regla es equivalente a un OR booleano.
 
 **Registro**:
 
@@ -445,7 +448,7 @@ john connected on 11/08/2017
 ```
 
 **Regla**:
-Tenga en cuenta que "id" es un entero y no una cadena.
+Tenga en cuenta que "id" es un número entero y no una cadena.
 
 ```text
 MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("MM/dd/yyyy"):connect_date}
@@ -518,7 +521,7 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 ### JSON anidado {#nested-json}
 
-Utilice el filtro `json` para analizar un objeto JSON anidado después de un prefijo de texto sin procesar:
+Use el filtro `json` para analizar un objeto JSON anidado después de un prefijo de texto sin formato:
 
 **Registro**:
 
@@ -541,7 +544,12 @@ parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{numb
   "app": "program",
   "logger": {
     "thread_id": 123
-  }
+  },
+  "server": "server.1",
+  "method": "GET",
+  "status_code": 200,
+  "url": "https://app.datadoghq.com/logs/pipelines",
+  "duration": 123456
 }
 ```
 
@@ -570,9 +578,9 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 }
 ```
 
-### Lista a array {#list-to-array}
+### Lista a matriz {#list-to-array}
 
-Utilice el filtro `array([[openCloseStr, ] separator][, subRuleOrFilter)` para extraer una lista en un array en un solo atributo. El `subRuleOrFilter` es opcional y acepta estos [filtros][4].
+Use el filtro `array([[openCloseStr, ] separator][, subRuleOrFilter)` para extraer una lista en una matriz en un solo atributo. El `subRuleOrFilter` es opcional y acepta estos [filtros][4].
 
 **Registro**:
 
@@ -617,9 +625,9 @@ myParsingRule Users %{data:users:array("{}","-")} have been added to the databas
 myParsingRule Users %{data:users:array("{}","-", uppercase)} have been added to the database
 ```
 
-### Formato Glog {#glog-format}
+### Glog format {#glog-format}
 
-Los componentes de Kubernetes a veces registran en el formato `glog`; este ejemplo es del elemento Kube Scheduler en la Biblioteca de canalización.
+Los componentes de Kubernetes a veces generan registros en el formato `glog`; este ejemplo proviene del elemento Kube Scheduler en la Biblioteca de canalizaciones.
 
 Línea de registro de ejemplo:
 
@@ -648,9 +656,9 @@ Y JSON extraído:
 }
 ```
 
-### Parseo XML {#parsing-xml}
+### Parseo de XML {#parsing-xml}
 
-El analizador XML transforma mensajes en formato XML a JSON.
+El analizador XML transforma los mensajes con formato XML en JSON.
 
 **Registro:**
 
@@ -687,24 +695,24 @@ rule %{data::xml}
 **Notas**:
 
 * Si el XML contiene etiquetas que tienen tanto un atributo como un valor de cadena entre las dos etiquetas, se genera un atributo `value`. Por ejemplo: `<title lang="en">Harry Potter</title>` se convierte en `{"title": {"lang": "en", "value": "Harry Potter" } }`
-* Las etiquetas repetidas se convierten automáticamente en arrays. Por ejemplo: `<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>` se convierte en `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }`
+* Las etiquetas repetidas se convierten automáticamente en matrices. Por ejemplo: `<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>` se convierte en `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }`
 
-### Parseo CSV {#parsing-csv}
+### Parseo de CSV {#parsing-csv}
 
-Utilice el filtro **CSV** para mapear más fácilmente cadenas a atributos cuando están separadas por un carácter dado (`,` por defecto).
+Utilice el filtro `csv` para asignar cadenas a atributos con mayor facilidad cuando estén separados por un carácter determinado (`,` de forma predeterminada).
 
 El filtro CSV se define como `csv(headers[, separator[, quotingcharacter]])` donde:
 
-* `headers`: Define los nombres de las claves separados por `,`. Los nombres de las claves deben comenzar con un carácter alfabético y pueden contener cualquier carácter alfanumérico además de `_`.
-* `separator`: Define los separadores utilizados para separar los diferentes valores. Solo se acepta un carácter. Predeterminado: `,`. **Nota**: Utilice `tab` para el `separator` para representar el carácter de tabulación para TSVs.
-* `quotingcharacter`: Define el carácter de comillas. Solo se acepta un carácter. Predeterminado: `"`
+* `headers`: Define el nombre de las claves separado por `,`. Los nombres de las claves deben comenzar con un carácter alfabético y pueden contener cualquier carácter alfanumérico además de `_`.
+* `separator`: Define los separadores utilizados para separar los diferentes valores. Solo se acepta un carácter. Predeterminado: `,`. **Nota**: Utilice `tab` para el `separator` para representar el carácter de tabulación para TSV.
+* `quotingcharacter`: Define el carácter de comilla. Solo se acepta un carácter. Predeterminado: `"`
 
 **Nota**:
 
 * Los valores que contienen un carácter separador deben estar entre comillas.
-* Los valores entre comillas que contienen un carácter de comillas deben ser escapados con caracteres de comillas. Por ejemplo, `""` dentro de un valor entre comillas representa `"`.
-* Si el registro no contiene el mismo número de valores que el número de claves en el encabezado, el analizador CSV emparejará los primeros.
-* Los enteros y dobles se convierten automáticamente si es posible.
+* Los valores entre comillas que contengan un carácter de comilla deben escaparse con caracteres de comilla. Por ejemplo, `""` dentro de un valor entre comillas representa `"`.
+* Si el registro no contiene el mismo número de valores que el número de claves en el encabezado, el analizador CSV coincidirá con los primeros.
+* Los números enteros y dobles se convierten automáticamente si es posible.
 
 **Registro**:
 
@@ -734,20 +742,20 @@ myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
 
 Otros ejemplos:
 
-| **Cadena cruda**               | **Regla de parseo**                                                         | **Resultado**                                      |
+| **Cadena sin procesar**               | **Regla de parseo**                                                         | **Resultado**                                      |
 |:-----------------------------|:-------------------------------------------------------------------------|:------------------------------------------------|
-| `John,Doe`                   | `%{data::csv("firstname,name")}`                                         | {"firstname": "John", "name":"Doe"}             |
-| `"John ""Da Man""",Doe`      | `%{data::csv("firstname,name")}`                                         | {"firstname": "John \"Da Man\"", "name":"Doe"}  |
-| `'John ''Da Man''',Doe`      | `%{data::csv("firstname,name",",","'")}`                                 | {"firstname": "John 'Da Man'", "name":"Doe"}    |
-| <code>John&#124;Doe</code>   | <code>%{data::csv(&quot;firstname,name&quot;,&quot;&#124;&quot;)}</code> | {"firstname": "John", "name":"Doe"}             |
-| `value1,value2,value3`       | `%{data::csv("key1,key2")}`                                              | {"key1": "value1", "key2":"value2"}             |
-| `value1,value2`              | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key2":"value2"}             |
-| `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
-| <code>Value1&nbsp;&nbsp;&nbsp;&nbsp;Value2&nbsp;&nbsp;&nbsp;&nbsp;Value3</code> (TSV)      | `%{data::csv("key1,key2,key3","tab")}` | {"key1": "value1", "key2": "value2", "key3":"value3"} |
+| `John,Doe`                   | `%{data::csv("firstname,name")}`                                         | {\"firstname\": \"John\", \"name\":\"Doe\"}             |
+| `"John ""Da Man""",Doe`      | `%{data::csv("firstname,name")}`                                         | {\"firstname\": \"John \\\"Da Man\\\"\", \"name\":\"Doe\"}  |
+| `'John ''Da Man''',Doe`      | `%{data::csv("firstname,name",",","'")}`                                 | {\"firstname\": \"John 'Da Man'\", \"name\":\"Doe\"}    |
+| <code>John&#124;Doe</code>   | <code>%{data::csv(&quot;firstname,name&quot;,&quot;&#124;&quot;)}</code> | {\"firstname\": \"John\", \"name\":\"Doe\"}             |
+| `value1,value2,value3`       | `%{data::csv("key1,key2")}`                                              | {\"key1\": \"value1\", \"key2\":\"value2\"}             |
+| `value1,value2`              | `%{data::csv("key1,key2,key3")}`                                         | {\"key1\": \"value1\", \"key2\":\"value2\"}             |
+| `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {\"key1\": \"value1\", \"key3\":\"value3\"}             |
+| <code>Value1&nbsp;&nbsp;&nbsp;&nbsp;Value2&nbsp;&nbsp;&nbsp;&nbsp;Value3</code> (TSV)      | `%{data::csv("key1,key2,key3","tab")}` | {\"key1\": \"value1\", \"key2\": \"value2\", \"key3\":\"value3\"} |
 
 ### Utilice el comparador de datos para descartar texto innecesario {#use-data-matcher-to-discard-unneeded-text}
 
-Si tiene un registro donde, después de haber parseado lo necesario, y sabiendo que el texto posterior es seguro para descartar, puede usar el comparador de datos para ello. Para el siguiente ejemplo de registro, puede usar el `data` comparador para descartar el `%` al final.
+Si tiene un registro donde, después de haber hecho el parseo necesario y saber que el texto después de ese punto es seguro descartarlo, puede utilizar el comparador de datos para hacerlo. Para el siguiente ejemplo de registro, puede utilizar el comparador `data` para descartar el `%` al final.
 
 **Registro**:
 
@@ -772,9 +780,9 @@ MyParsingRule Usage\:\s+%{number:usage}%{data:ignore}
 
 ### Caracteres de control ASCII {#ascii-control-characters}
 
-Si sus registros contienen caracteres de control ASCII, se serializan al ser ingeridos. Estos pueden ser manejados escapando explícitamente el valor serializado dentro de su analizador grok.
+Si sus registros contienen caracteres de control ASCII, estos se serializan al momento de la ingesta. Estos pueden manejarse escapando explícitamente el valor serializado dentro de su analizador grok.
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

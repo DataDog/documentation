@@ -1,7 +1,7 @@
 /**
  * Injected into every `toHaveScreenshot` capture (via `stylePath` in
- * playwright.config.ts). Hides dev-only chrome that isn't part of the site
- * under test.
+ * playwright.config.ts). Hides chrome that overlaps captures without being part
+ * of the component under test.
  *
  * Browser tests run against the dev server (USE_DEV_SERVER=true), where
  * `MODE === 'development'` renders the DevBadge. The badge is `position: fixed`
@@ -10,5 +10,19 @@
  * captured badge-free, so hide it here.
  */
 .dev-badge {
+  display: none !important;
+}
+
+/**
+ * `@dd/ask-ai`'s floating button. It is `position: fixed` in the bottom-right at
+ * z-index 9998, so it leaks into any capture that reaches that corner, and
+ * `AskAi.astro` mounts it from a deferred bundled script — a time the capture
+ * does not control. Hiding it also keeps unrelated baselines from depending on
+ * the shared package's styling.
+ *
+ * Its own coverage is in `src/components/AskAi/tests/browser.test.ts`, which
+ * waits for the button explicitly rather than incidentally.
+ */
+.conv-search-float-btn {
   display: none !important;
 }

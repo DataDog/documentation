@@ -1,0 +1,15 @@
+// Type-checks the unit tests, which the build config deliberately excludes:
+// `tsconfig.json` emits declarations, and a `.d.ts` for a test file is waste.
+// `yarn typecheck` runs both, so nothing goes unchecked.
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": false,
+    "declarationMap": false,
+    "emitDeclarationOnly": false,
+    "noEmit": true,
+    "types": ["vitest/globals"]
+  },
+  "include": ["src"],
+  "exclude": []
+}

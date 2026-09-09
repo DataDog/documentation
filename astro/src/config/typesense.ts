@@ -32,4 +32,3 @@ export function getTypesenseConfig(): TypesenseEnv {
   if (import.meta.env.PROD) return live;
   return preview;
 }
-

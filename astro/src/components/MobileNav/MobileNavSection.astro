@@ -24,7 +24,8 @@ interface Props {
 const { node, level, open = false, activePageId } = Astro.props;
 const cl = classListFactory(styles);
 const hasChildren = node.children.length > 0;
-const isActivePage = activePageId !== undefined && node.identifier === activePageId;
+const isActivePage =
+  activePageId !== undefined && node.identifier === activePageId;
 
 // Second-stage href resolution: `docsNavMenu.getDocsNavTree` already localizes
 // and root-relativizes each URL; here we choose the origin. API docs (/api/...)

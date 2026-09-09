@@ -40,7 +40,7 @@
    for the rotated shape's visual centroid sitting below its bounding-box
    center. */
 .select::after {
-  content: '';
+  content: "";
   position: absolute;
   right: var(--space-sm);
   top: 50%;

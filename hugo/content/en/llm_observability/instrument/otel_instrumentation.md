@@ -19,7 +19,7 @@ Agent Observability supports ingesting OpenTelemetry traces that follow either t
 
 ### Evaluations
 
-To send [external evaluations directly to the API](/llm_observability/configure/evaluations/external_evaluations#submitting-external-evaluations-with-the-api) for OpenTelemetry spans, include the `source:otel` tag in the evaluation. When referencing spans, provide `span_id` and `trace_id` as decimal strings. OpenTelemetry uses hexadecimal IDs natively, so convert them to decimal before submitting evaluations. For example, use Python's `int(hex_span_id, 16)` to convert a hex span ID to its decimal equivalent.
+To send [external evaluations directly to the API](/llm_observability/investigate/evaluations/external_evaluations#submitting-external-evaluations-with-the-api) for OpenTelemetry spans, include the `source:otel` tag in the evaluation. When referencing spans, provide `span_id` and `trace_id` as decimal strings. OpenTelemetry uses hexadecimal IDs natively, so convert them to decimal before submitting evaluations. For example, use Python's `int(hex_span_id, 16)` to convert a hex span ID to its decimal equivalent.
 
 ### Prompt Tracking
 
@@ -28,6 +28,12 @@ For information on using Prompt Tracking with OpenTelemetry spans, see [Prompt T
 ### Experiments
 
 You can use OpenTelemetry spans inside [Agent Observability Experiments](/llm_observability/improve/experiments/setup#using-opentelemetry-spans-inside-experiments). By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
+
+### Multimodal support
+
+Audio and images on OpenTelemetry messages are rendered in the trace view. Datadog extracts media from message parts that follow the OpenTelemetry GenAI semantic conventions, as described in [Media in messages](#media-in-messages).
+
+Only media carried inline as base64 bytes is rendered. A remote URL is recorded as a text reference and is never fetched. For the fields, formats, and size limits that apply once media reaches a span, see [Multimodal Support](/llm_observability/instrument/multimodal/).
 
 ### Span links
 
@@ -521,6 +527,23 @@ Input and output messages are extracted from the following sources, in priority 
 | `gen_ai.output.messages` | `meta.output.messages` (llm) / `meta.output.value` (others) | |
 | `gen_ai.system_instructions` | Prepended to input | Added as system role messages |
 
+##### Media in messages
+
+Message parts that carry media are extracted into the typed `audio_parts` and `image_parts` fields on the message:
+
+| Part type | Behavior |
+|-----------|----------|
+| `blob` with `mime_type` and inline bytes | Extracted to `image_parts` or `audio_parts`. When the part omits `modality`, it is inferred from the MIME type. |
+| `uri` carrying a base64 image data URI, such as `data:image/png;base64,...` | Extracted to `image_parts`. |
+| `uri` carrying a remote URL | Recorded as the text reference `[<modality>: <uri>]`. The URL is not fetched. |
+| `file` with a `file_id` | Recorded as the text reference `[<modality> file: <file_id>]`. |
+
+A positional marker such as `[image blob: image/png]` is also added to the message text so that media keeps its place among the other parts.
+
+Audio reaches `audio_parts` through `blob` parts only. An audio data URI on a `uri` part is recorded as text, and the conventions specify `blob` as the part type for inline base64 data, so prefer `blob` for both audio and images.
+
+For the formats the trace view renders and the size limits that apply, see [Multimodal Support](/llm_observability/instrument/multimodal/).
+
 ##### Embedding spans
 
 | OTel Source | Agent Observability Field |
@@ -944,7 +967,7 @@ with tracer.start_as_current_span("my-span") as span:
 [3]: https://app.datadoghq.com/llm/traces
 [4]: /help/
 [5]: https://pypi.org/project/strands-agents/
-[6]: /llm_observability/configure/evaluations/external_evaluations
+[6]: /llm_observability/investigate/evaluations/external_evaluations
 [7]: https://strandsagents.com/latest/
 [8]: /account_management/rbac/data_access/
 [9]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links

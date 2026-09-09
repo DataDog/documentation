@@ -7,13 +7,13 @@
  * behavior Hugo uses to color world.svg etc. at render time.
  */
 const iconModules = import.meta.glob<string>(
-  ['../../assets/images/svg-icons/*.svg', '../../assets/images/icons/*.svg'],
-  { query: '?raw', import: 'default', eager: true }
+  ["../../assets/images/svg-icons/*.svg", "../../assets/images/icons/*.svg"],
+  { query: "?raw", import: "default", eager: true },
 );
 
 const iconsByFilename: Record<string, string> = {};
 for (const [path, raw] of Object.entries(iconModules)) {
-  const filename = path.split('/').pop();
+  const filename = path.split("/").pop();
   if (filename) iconsByFilename[filename] = raw;
 }
 
@@ -25,22 +25,33 @@ interface Props {
   class?: string;
 }
 
-const { src, size = '100%', color = '#000000', opacity = '1.0', class: className } = Astro.props;
+const {
+  src,
+  size = "100%",
+  color = "#000000",
+  opacity = "1.0",
+  class: className,
+} = Astro.props;
 const rawOriginal: string | undefined = iconsByFilename[src];
 
 const raw = rawOriginal
   ? rawOriginal
-      .replaceAll('default-size', size)
-      .replaceAll('default-fill', color)
-      .replaceAll('default-opacity', opacity)
+      .replaceAll("default-size", size)
+      .replaceAll("default-fill", color)
+      .replaceAll("default-opacity", opacity)
   : undefined;
 ---
 
-{raw ? (
-  <span class={`svg-icon ${className ?? ''}`} set:html={raw} />
-) : (
-  <span class={`svg-icon svg-icon--missing ${className ?? ''}`} aria-hidden="true" />
-)}
+{
+  raw ? (
+    <span class={`svg-icon ${className ?? ""}`} set:html={raw} />
+  ) : (
+    <span
+      class={`svg-icon svg-icon--missing ${className ?? ""}`}
+      aria-hidden="true"
+    />
+  )
+}
 
 <style is:global>
   .svg-icon {

@@ -104,4 +104,4 @@ Rollbacks use the following NCM permissions:
 
 [1]: /actions/private_actions/
 [2]: /network_monitoring/devices/config_management/#viewing-configurations
-[3]: /actions/private_actions/use_private_actions/?tab=linux#change-the-allowlist-of-a-runner
+[3]: /actions/private_actions/set_up_agent_based/?tab=linux#change-the-allowlist

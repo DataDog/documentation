@@ -59,7 +59,9 @@
   background: var(--color-border-strong);
 }
 
-.api-code-example__accordion[open] > .api-code-example__accordion-header .api-code-example__accordion-icon {
+.api-code-example__accordion[open]
+  > .api-code-example__accordion-header
+  .api-code-example__accordion-icon {
   transform: rotate(90deg);
 }
 

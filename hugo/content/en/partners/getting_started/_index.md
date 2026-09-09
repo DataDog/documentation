@@ -14,6 +14,7 @@ This section covers best practices and helps you get started monitoring your cli
 - [Data Intake][2]: Explains how data can be fed into Datadog and which prerequisites need to be met in your environments.
 - [Delivering Value][3]: Walks through recommended steps after you have data flowing into Datadog.
 - [Billing and Usage Reporting][4]: Covers monitoring individual client and aggregate usage of the Datadog platform in single and multi-organization account setups.
+- [Multi-Tenant Usage Metering and Billing][12]: Covers the Admin Org, used to centrally manage usage, costs, and billing for end customers.
 
 ## Partner Sales Enablement guide
 
@@ -46,12 +47,13 @@ Explore other important resources to stay up to date with Datadog:
     {{< nextlink href="https://github.com/DataDog/integrations-core/" >}}Integrations core: Agent Integrations that Datadog officially develops and supports.{{< /nextlink >}}
     {{< nextlink href="https://github.com/DataDog/integrations-extras/" >}}Integrations extras: Community-maintained Datadog Integrations.{{< /nextlink >}}
     {{< nextlink href="https://github.com/DataDog/Miscellany" >}}Miscellany: Miscellaneous scripts and tools from Datadog.{{< /nextlink >}}
+    {{< nextlink href="https://github.com/DataDog/dpn" >}}DPN: Sample applications for partners.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Datadog blog and social media" >}}
     {{< nextlink href="https://www.datadoghq.com/blog/" >}}Datadog blog{{< /nextlink >}}
     {{< nextlink href="https://www.linkedin.com/company/datadog/" >}}LinkedIn{{< /nextlink >}}
-    {{< nextlink href="https://twitter.com/datadoghq" >}}Twitter{{< /nextlink >}}
+    {{< nextlink href="https://x.com/datadoghq" >}}X{{< /nextlink >}}
     {{< nextlink href="https://www.facebook.com/datadoghq/" >}}Facebook{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -61,6 +63,9 @@ Explore other important resources to stay up to date with Datadog:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Dash Conferences playlists" >}}
+    {{< nextlink href="https://www.youtube.com/playlist?list=PLdh-RwQzDsaPzYWUp9NA8IfbC47zxM57M" >}}Dash 2026{{< /nextlink >}}
+    {{< nextlink href="https://www.youtube.com/playlist?list=PLdh-RwQzDsaO91zHnerkZ5EZJ-qcqK4ib" >}}Dash 2025{{< /nextlink >}}
+    {{< nextlink href="https://www.youtube.com/playlist?list=PLdh-RwQzDsaNd5cmcY3ey4QoeyDk6aMKz" >}}Dash 2024{{< /nextlink >}}
     {{< nextlink href="https://www.youtube.com/playlist?list=PLdh-RwQzDsaPhn1p7Sz6nc_6-9YInd__u" >}}Dash 2023{{< /nextlink >}}
     {{< nextlink href="https://www.youtube.com/playlist?list=PLdh-RwQzDsaOlLse2WlvFXYRJ8iirG2QO" >}}Dash 2022{{< /nextlink >}}
     {{< nextlink href="https://www.youtube.com/playlist?list=PLdh-RwQzDsaO-_rgnDSBn221gWacNCkDr" >}}Dash 2021{{< /nextlink >}}
@@ -79,4 +84,5 @@ Explore other important resources to stay up to date with Datadog:
 [8]: https://datadogon.datadoghq.com/
 [9]: https://status.datadoghq.com
 [10]: https://status.datadoghq.eu
+[12]: /partners/multi_tenant_billing/
 [11]: https://datadogintegrations.statuspage.io

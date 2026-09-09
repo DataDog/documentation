@@ -1,0 +1,48 @@
+---
+// The Ask AI widget: the floating button and the conversational panel, both
+// owned by the `@dd/ask-ai` package. Rendered once by BaseLayout, so
+// every route gets it.
+//
+// A bundled `<script>` rather than `is:inline`, since it needs the npm import.
+// Astro emits it as a deferred module, so the widget mounts after first paint.
+//
+// Bundled scripts do not re-execute on view-transition soft navigation, so the
+// mount-once shape below needs no guard. `mountAskAi` is idempotent anyway,
+// because the searchbar's Ask AI row calls it too.
+---
+
+<script>
+  import { createAskAiConfig } from "@lib/askAi/askAiConfig";
+
+  /**
+   * Dynamic, so that the idle callback defers all three of the fetch, the parse
+   * and the mount. A static import would leave the first two in the page's load
+   * — the module graph is evaluated before this script's own body runs — and
+   * defer only the panel construction, which is the smallest of the three.
+   */
+  const mountWidget = async () => {
+    const { mountAskAi } = await import("@dd/ask-ai");
+
+    // TODO: no flag resolver is passed here, so `docs-ai-enabled` does not govern
+    // Astro — the package falls back to its `true` default. Flipping the flag off
+    // disables Ask AI on Hugo only. Supply a resolver once Astro has a feature-flag
+    // client, or if the kill switch is ever needed on Astro before then.
+    mountAskAi(createAskAiConfig());
+  };
+
+  // Mounting at idle keeps the package off the critical path, where it would
+  // otherwise contend with island hydration: this page's `client:load` islands
+  // hydrate from inline scripts, which run before the browser yields to any
+  // idle period. The widget is a floating button, so arriving late costs
+  // nothing — it is `position: fixed` and cannot shift the page.
+  //
+  // The impression event still reports once per document load, so this does not
+  // change what telemetry sees. Timer fallback for Safari, which shipped
+  // `requestIdleCallback` only in 17.4; `timeout` so a page that never idles
+  // still mounts.
+  if ("requestIdleCallback" in window) {
+    requestIdleCallback(() => void mountWidget(), { timeout: 3000 });
+  } else {
+    setTimeout(() => void mountWidget(), 200);
+  }
+</script>

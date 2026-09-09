@@ -60,7 +60,9 @@ test.describe("Img component — lightbox", () => {
       );
       return (
         islands.length > 0 &&
-        Array.from(islands).every((island) => island.getAttribute("ssr") === null)
+        Array.from(islands).every(
+          (island) => island.getAttribute("ssr") === null,
+        )
       );
     });
   });
@@ -80,7 +82,9 @@ test.describe("Img component — lightbox", () => {
 
     // The lightbox requests a viewport-sized/DPR-aware variant client-side
     // rather than reusing the trigger's static full-resolution href.
-    expect(lightboxSrc?.startsWith(triggerHref?.split("?")[0] ?? "")).toBe(true);
+    expect(lightboxSrc?.startsWith(triggerHref?.split("?")[0] ?? "")).toBe(
+      true,
+    );
     expect(lightboxSrc).toMatch(/w=\d+/);
     expect(lightboxSrc).toMatch(/h=\d+/);
     expect(lightboxSrc).toMatch(/dpr=\d+/);
