@@ -309,7 +309,7 @@ The `llmobs` toolset includes the following tools:
 ### Trace and span tools
 
 `search_llmobs_spans`
-: Search for spans matching filters or a raw query.
+: Search for spans matching filters or a raw query. The raw query can include one feedback predicate of the form `@feedback.<label>.<field>:<value>`, combined with the rest of the query using `AND`, to return only the spans that received matching user feedback. The supported fields are `action`, `assessment`, `id`, `eval_metric_type`, `eval_scope`, `feedback_join_key`, `llm_output`, `reasoning`, `status`, and `value`. Every field matches on equality, `value` also accepts numeric comparison operators, and `*` matches any whole value to find the spans that have a given label at all. A query accepts only one feedback predicate, and negated or parenthesized feedback predicates, wildcards inside a value, and `OR` or `NOT` combinations with a feedback predicate are rejected. To discover which labels your users submitted, call `list_llmobs_feedback_labels` first, then search with a query such as `@ml_app:my-chatbot AND @feedback.helpfulness.value:<3`.
 
 `get_llmobs_trace`
 : Get the full structure of a trace as a span hierarchy tree, including span counts by kind, error indicators, and total duration.
@@ -356,6 +356,9 @@ The `llmobs` toolset includes the following tools:
 
 `list_llmobs_evals_by_ml_app`
 : List all LLM-judge evaluators configured for a specific ML application.
+
+`list_llmobs_feedback_labels`
+: List the feedback labels that users submitted for an ML application, rather than the evaluators configured for it. Returns the value types observed for each label, how many feedback events it received, and pass and fail counts when the label defines assessment criteria. Requires an ML application and a time range.
 
 `get_llmobs_evaluator`
 : Retrieve an LLM-judge evaluator configuration by name, including its target (ml_app, sampling, filter), LLM provider, and judge prompt template.
