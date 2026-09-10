@@ -141,6 +141,11 @@ menu:
       url: getting_started/integrations/terraform/
       weight: 1205
       parent: getting_started_integrations
+    - name: Stripe
+      identifier: getting_started_with_stripe
+      url: getting_started/integrations/stripe/
+      weight: 1206
+      parent: getting_started_integrations
     - name: Internal Developer Portal
       identifier: getting_started_internal_developer_portal
       url: getting_started/internal_developer_portal/
