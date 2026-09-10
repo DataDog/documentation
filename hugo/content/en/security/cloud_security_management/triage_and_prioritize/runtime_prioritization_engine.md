@@ -47,7 +47,7 @@ By default, Datadog uses this prioritization context to automatically compute ea
 
 For more information, see [How CISA's BOD 26-04 changes vulnerability prioritization][16].
 
-{{< img src="security/cloud_security_management/bod_26_04_remediation_timeline.png" alt="Cloud Security Vulnerabilities Explorer filtered by CISA BOD 26-04 remediation timeline, with automatically computed due dates displayed on vulnerability findings" width="100%">}}
+{{< img src="security/cloud_security_management/bod_26_04_remediation_timeline.png" alt="The Cloud Security Vulnerabilities Explorer shows CISA BOD 26-04 remediation timelines and due dates on vulnerability findings." width="100%">}}
 
 ## Crown Jewels
 
