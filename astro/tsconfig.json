@@ -1,11 +1,34 @@
 {
   "extends": "astro/tsconfigs/strict",
+  // `astro/tsconfigs/base.json` includes `${configDir}/**/*` and excludes only
+  // `dist`, so this list has to repeat `dist` — an `exclude` here replaces the
+  // inherited one rather than adding to it.
+  //
+  // `api-code-examples/` is the reason this key exists. It holds 2,232 staged
+  // TypeScript SDK examples which are standalone programs, not part of this
+  // project: they import `@datadog/datadog-api-client`, which is not a
+  // dependency here. They are read as raw text by `codeExampleLoader.ts`'s
+  // glob and never compiled. Without this, `yarn typecheck` reports 2,232
+  // errors after the first `yarn fetch:examples`.
+  // `tests/fixtures/api/examples` is the frozen 48-file subset of the above and
+  // is excluded for the same reason.
+  "exclude": [
+    "${configDir}/dist",
+    "${configDir}/api-code-examples",
+    "${configDir}/tests/fixtures/api/examples"
+  ],
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
+    // Scripts under scripts/ run directly on Node 24's type-stripping, which
+    // erases types but cannot transform syntax that emits code (enum,
+    // namespace, constructor parameter properties). This turns that runtime
+    // constraint into a typecheck failure.
+    "erasableSyntaxOnly": true,
     "plugins": [{ "name": "@astrojs/ts-plugin" }],
     "paths": {
       "@hugo-site/*": ["../hugo/*"],
+      "@api-examples/*": ["./api-code-examples/*"],
       "@shared/*": ["../shared/*"],
       "@websites-modules/*": ["../../../../../../dd/websites-modules/*"],
       "@layouts/*": ["./src/layouts/*"],

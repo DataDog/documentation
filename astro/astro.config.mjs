@@ -27,6 +27,10 @@ const hugoSite = fileURLToPath(new URL("../hugo", import.meta.url));
 // Top-level directory shared by the Hugo and Astro sites (i18n bundles, etc.).
 const sharedDir = fileURLToPath(new URL("../shared", import.meta.url));
 const astroSite = fileURLToPath(new URL(".", import.meta.url));
+// Staged SDK code examples. Inside astroSite, so `server.fs.allow` covers it.
+const apiExamples = fileURLToPath(
+  new URL("./api-code-examples", import.meta.url),
+);
 
 const hugoDevPort = 1313;
 
@@ -183,6 +187,13 @@ export default defineConfig({
     resolve: {
       alias: {
         "@hugo-site": hugoSite,
+        // SDK code examples, staged by `yarn fetch:examples`. Gitignored, so
+        // this target can legitimately be absent — the only consumer is the
+        // glob in `src/lib/api/codeExampleLoader.ts`, which then matches
+        // nothing rather than failing to resolve. Aliased rather than
+        // hardcoded so `vitest.unit.config.ts` can repoint it at the frozen
+        // fixture with a one-line override.
+        "@api-examples": apiExamples,
         "@shared": sharedDir,
         "@websites-modules": websitesModules,
         "@layouts": fileURLToPath(new URL("./src/layouts", import.meta.url)),

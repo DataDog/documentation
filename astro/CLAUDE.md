@@ -76,6 +76,16 @@ Nothing under `astro/` may contain:
 `dist/client` and knows nothing about where that output is uploaded. Build-output
 verification belongs here; anything that talks to a cloud provider does not.
 
+**One carve-out: `scripts/lib/websitesSourcesData.ts`.** It holds the public,
+unauthenticated URL of the `websites-sources` data tarball, streams it, and reads a
+single member (`./data/sdk_versions.json`) to get the pinned SDK versions that
+`yarn fetch:examples` clones at. This is a read of a public artifact — no credentials,
+no AWS SDK, no `aws` CLI, no write path, no deploy target — and the same bucket and
+path already sit in this public repo at
+`hugo/local/bin/py/build/get_websites_sources_data.py:16-17`. Keep it confined to that
+one file: nothing else under `astro/` imports `tar` or knows the URL. Everything above
+still applies unchanged.
+
 ## Commands
 
 - `yarn dev` — Start dev server on port 4321
@@ -115,6 +125,8 @@ Test fixtures live under [tests/fixtures/](./tests/fixtures/), **not** in `mocke
 These fixtures are **frozen and hand-maintained** — there is no regeneration step. They were originally seeded from the live spec, then trimmed (only the audited tags/paths are kept, and explosive recursive `oneOf`s like `WidgetDefinition` are capped to a few representative variants). If a change needs spec data not present in the fixture, edit the fixture YAML directly to add it, then update snapshots with `yarn test -u`. Treat the fixture as the source of truth, not a derived artifact.
 
 The unit Vitest config redirects live spec imports to these fixtures via a plugin in [vitest.unit.config.ts](./vitest.unit.config.ts); the integration config deliberately does not, so it validates against the real upstream data.
+
+[tests/fixtures/api/examples/](./tests/fixtures/api/examples/) is redirected differently — by overriding the `@api-examples` alias rather than by that plugin, because the consumer is an `import.meta.glob` in [codeExampleLoader.ts](./src/lib/api/codeExampleLoader.ts) and a glob resolves its alias before any `resolveId` hook sees a file path. These 48 files are **test inputs only**: `yarn dev` and `yarn build` read the real staged tree in `api-code-examples/`, never the fixture. Each file carries a one-line provenance banner as its first line so a surprising snapshot diff names its own source.
 
 ## Components
 

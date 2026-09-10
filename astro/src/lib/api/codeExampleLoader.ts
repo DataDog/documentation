@@ -3,10 +3,16 @@
  *
  * Reads code example metadata from CodeExamples.json and loads the
  * corresponding source files from each operation's resource folder under
- * content/en/api/<version>/<category>/. When an operationId is missing
- * from CodeExamples.json the loader synthesizes a single default entry
+ * <version>/<category>/. When an operationId is missing from
+ * CodeExamples.json the loader synthesizes a single default entry
  * (no suffix), matching the Hugo template's fallback branch in
  * layouts/partials/api/code-example.html.
+ *
+ * The two inputs have different provenance, which is why only one of them
+ * moved off Hugo. The example sources are build artifacts, now staged into
+ * `astro/api-code-examples/` by `yarn fetch:examples`. CodeExamples.json is
+ * committed spec-repo automation output, present on a fresh clone with no
+ * network, so it is still imported from `hugo/data/`.
  */
 
 import { z } from "zod";
@@ -15,11 +21,18 @@ import API_V2_CODE_EXAMPLES from "@hugo-site/data/api/v2/CodeExamples.json";
 import type { CodeExampleEntry, CodeExampleSet } from "./schemas/codeExamples";
 
 const sdkExampleFiles: Record<string, string> = import.meta.glob(
-  "@hugo-site/content/en/api/v*/*/*.{go,java,py,pybeta,rb,rbbeta,rs,ts}",
+  "@api-examples/v*/*/*.{go,java,py,pybeta,rb,rbbeta,rs,ts}",
   { eager: true, query: "?raw", import: "default" },
 );
 
-const FILE_KEY_RE = /\/content\/en\/api\/(v1|v2)\/([^/]+)\/([^/]+)$/;
+/**
+ * Deliberately anchored on the last three path segments rather than on the
+ * staging directory's name. `vitest.unit.config.ts` repoints the
+ * `@api-examples` alias at the frozen fixture, and both roots end in the same
+ * `<version>/<category>/<file>` shape. Naming either one here would silently
+ * yield zero examples under the other.
+ */
+const FILE_KEY_RE = /\/(v1|v2)\/([^/]+)\/([^/]+)$/;
 
 const filesByLocation = new Map<string, string>();
 for (const [key, code] of Object.entries(sdkExampleFiles)) {

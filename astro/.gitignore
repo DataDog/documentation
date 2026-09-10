@@ -5,6 +5,10 @@ dist/
 test-results/
 playwright-report/
 
+# SDK code examples, staged by `yarn fetch:examples` from the six
+# datadog-api-client-* repos. Build input, never committed.
+api-code-examples/
+
 # yarn v2 or greater
 # https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
 .yarn/*

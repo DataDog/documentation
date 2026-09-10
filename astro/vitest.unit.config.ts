@@ -56,6 +56,19 @@ const frozenApiSpecPlugin: Plugin = {
 
 export default getViteConfig({
   plugins: [frozenApiSpecPlugin],
+  // Closes a hole that predates the staged-examples work: the `import.meta.glob`
+  // in `codeExampleLoader.ts` was never redirected, so unit tests read live SDK
+  // output — on a fresh clone the seven getOperationView snapshots failed as
+  // opaque diffs rather than as "you have not staged the examples".
+  //
+  // One alias override rather than another `resolveId` interception, which is
+  // why the loader's glob is aliased at all. Contrast the four absolute paths
+  // and their double-slash variants above.
+  resolve: {
+    alias: {
+      "@api-examples": path.resolve(fixture, "examples"),
+    },
+  },
   test: {
     name: "fixture",
     include: [
@@ -66,6 +79,7 @@ export default getViteConfig({
       "src/config/**/*.test.ts",
       "src/layouts/**/*.test.ts",
       "src/integrations/**/*.test.ts",
+      "scripts/**/*.test.ts",
     ],
   },
 });
