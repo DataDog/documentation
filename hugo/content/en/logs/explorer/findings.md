@@ -46,7 +46,7 @@ Add a finding from anywhere in Log Explorer by pressing **Cmd**/**Ctrl** + **S**
 
 In the toolbar above your results, click the {{< ui >}}Add Finding{{< /ui >}} button, or press **Cmd**/**Ctrl** + **S**. You can also click {{< ui >}}Add current page as a finding{{< /ui >}} in the Findings panel.
 
-{{< img src="logs/explorer/findings/add_finding_toolbar.png" alt="The Add Finding button in the results toolbar, with a tooltip showing the keyboard shortcut" style="width:100%;" >}}
+{{< img src="logs/explorer/findings/add_finding_toolbar.png" alt="The Add Finding button in the results toolbar, with a tooltip showing the keyboard shortcut" style="width:80%;" >}}
 
 The **Add Finding** button appears in the same place for every visualization.
 
@@ -56,7 +56,7 @@ The finding stores your search query, time range, and [visualization][4], includ
 
 Click a log event in your results to open the [log side panel][5]. Hover over the **Log Message** section and click the {{< ui >}}Add a finding{{< /ui >}} icon, or press **Cmd**/**Ctrl** + **S**. This captures the whole log event side panel to return to later.
 
-{{< img src="logs/explorer/findings/add_finding_log_event.png" alt="The add a finding icon in the Log Message section of the log side panel" style="width:100%;" >}}
+{{< img src="logs/explorer/findings/add_finding_log_event.png" alt="The add a finding icon in the Log Message section of the log side panel" style="width:80%;" >}}
 
 Capturing the log event also captures the query that produced the log side panel. Returning to the finding reopens the log side panel with the corresponding query in the background.
 
