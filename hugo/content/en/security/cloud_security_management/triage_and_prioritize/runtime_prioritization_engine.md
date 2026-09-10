@@ -45,6 +45,8 @@ The Runtime Prioritization Engine supports the risk-based vulnerability prioriti
 
 By default, Datadog uses this prioritization context to automatically compute each vulnerability's remediation timeline according to the directive. The corresponding due date appears on the vulnerability finding.
 
+For more information about how Datadog addresses the directive, see [How CISA's BOD 26-04 changes vulnerability prioritization][16].
+
 {{< img src="security/cloud_security_management/bod_26_04_remediation_timeline.png" alt="Cloud Security Vulnerabilities Explorer filtered by CISA BOD 26-04 remediation timeline, with automatically computed due dates displayed on vulnerability findings" width="100%">}}
 
 ## Crown Jewels
@@ -133,4 +135,5 @@ Datadog detects running images with either the Datadog Agent or Agentless Scanni
 [12]: /containers/
 [13]: /security/cloud_security_management/setup/agentless_scanning/
 [14]: /security/cloud_security_management/vulnerabilities/
-[15]: https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/
+[15]: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk
+[16]: https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/
