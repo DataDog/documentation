@@ -638,17 +638,6 @@ The following is a list of the most important configuration settings that can be
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
-`agentless` (Required for Agentless mode)
-: Enables Agentless mode to send test results directly to Datadog.<br/>
-**Environment variable**: `DD_CIVISIBILITY_AGENTLESS_ENABLED`<br/>
-**Default**: `false`<br/>
-**Example**: `true`
-
-`api_key` (Required for Agentless mode)
-: The Datadog API key used to upload test results.<br/>
-**Environment variable**: `DD_API_KEY`<br/>
-**Default**: `(empty)`
-
 `site` (Required for Agentless mode)
 : The [Datadog site][25] to upload test results to.<br/>
 **Environment variable**: `DD_SITE`<br/>
@@ -659,9 +648,20 @@ The following is a list of the most important configuration settings that can be
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-`test_session.name`
+### Environment variables
+
+The following settings are available only as environment variables:
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
+: Enables Agentless mode to send test results directly to Datadog.<br/>
+**Default**: `false`
+
+`DD_API_KEY` (Required for Agentless mode)
+: The Datadog API key used to upload test results.<br/>
+**Default**: `(empty)`
+
+`DD_TEST_SESSION_NAME` (Optional)
 : Identifies a group of tests, such as `integration-tests`, `unit-tests`, or `smoke-tests`.<br/>
-**Environment variable**: `DD_TEST_SESSION_NAME`<br/>
 **Default**: For `dd-trace` v6, the framework invocation, such as `jest`, `mocha`, `playwright test`, or `cucumber-js`. For `dd-trace` v5, a combination of CI job name and test command.<br/>
 **Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
