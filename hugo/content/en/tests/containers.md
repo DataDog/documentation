@@ -11,9 +11,25 @@ further_reading:
 
 ## Overview
 
-If you run your tests inside a container that you launch yourself within the build (for example, using [`docker run`][1] or [`docker-compose`][2]), forward the following environment variables to the container depending on your CI provider. This enables the Datadog SDK to autodetect the build information.
+Use this guide when a CI job launches the test process in a separate container with a command such as [`docker run`][1] or [`docker-compose`][2]. Forward the environment variables for your CI provider to the test container so the Datadog SDK can detect the build information.
 
-Additionally, you need to pass in the environment variables required to configure the SDK as described in the [per-language test instrumentation instructions][3] (such as `DD_SERVICE`, `DD_ENV`, and a valid `DD_TRACE_AGENT_URL` that is accessible from within the container).
+A CI provider's built-in Docker-based executor is the job's primary execution environment. This guide does not apply unless a command in that job launches the tests in another container. It also does not apply when containers provide only supporting services, such as a database.
+
+Forward every variable required by the [per-language test instrumentation instructions][3]. This includes:
+
+- SDK configuration, such as `DD_SERVICE`, `DD_ENV`, and a valid `DD_TRACE_AGENT_URL` that the container can access
+- Runtime injection variables, such as `RUBYOPT`, `NODE_OPTIONS`, or Java tool options
+
+Variables set in the CI job or exported by an auto-instrumentation step are not automatically available inside a container launched by that job.
+
+## Choose an instrumentation method
+
+Auto-instrumentation injects tracer code into the checked-out project. Whether that code reaches the test container depends on how the test image is created.
+
+- **Image built in the current CI job:** The job builds the exact image used for tests with `docker build`, `docker compose build <SERVICE>`, `docker compose run --build`, or an equivalent command. A separate build step earlier in the same job still counts as a current-job build. Place the auto-instrumentation step before the image build. Confirm that the build copies the modified dependency files or workspace and installs dependencies after auto-instrumentation runs.
+- **Prebuilt image:** The job only pulls or references an image tag or digest and never builds that exact image from the checked-out repository. A Dockerfile in the repository does not count unless the job uses it to build the test image. Use manual instrumentation so the tracer library is installed in the test container. Do not add the tracer dependency manually while retaining an auto-instrumentation step that cannot affect the image.
+
+Do not select manual instrumentation only because tests run in Docker. When the current job builds the test image from the instrumented workspace, use auto-instrumentation before the build.
 
 ## Manage environment variables
 
@@ -210,7 +226,7 @@ For a comprehensive list of environment variables set by Codefresh for every bui
 | `GITHUB_HEAD_REF`          | The head ref or source branch of the pull request (only set for `pull_request` or `pull_request_target` events). For example: `feature-branch-1`. |
 | `GITHUB_REF`               | The fully-formed ref of the branch or tag that triggered the workflow. For example: `refs/heads/feature-branch-1`. |
 | `GITHUB_JOB`               | The job ID of the current job. For example: `greeting_job`.                                           |
-| `JOB_CHECK_RUN_ID`         | The check run ID of the current job. Must be set manually: `JOB_CHECK_RUN_ID: ${{ job.check_run_id }}`. |
+| `JOB_CHECK_RUN_ID`         | The check run ID of the current job. The Datadog Test Optimization GitHub Action exports this variable for subsequent steps. For manual instrumentation, set `JOB_CHECK_RUN_ID: ${{ job.check_run_id }}`. |
 
 
 For a comprehensive list of environment variables set by GitHub Actions for every build, see the [official GitHub documentation][101].

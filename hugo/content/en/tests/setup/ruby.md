@@ -70,10 +70,13 @@ To report test results to Datadog, you need to configure the `datadog-ci` gem:
 ## Manual instrumentation
 
 <div class="alert alert-info">
-This section is <strong>only required</strong> if your CI provider does not support auto-instrumentation. If you selected <strong>CI Provider with Auto-Instrumentation Support</strong> in the <a href="#configuring-reporting-method">Configuring reporting method</a> section above, skip this section and proceed to <a href="#configuration-settings">Configuration settings</a>.
+This section is required if your CI provider does not support auto-instrumentation or if your tests run in a prebuilt container image. Otherwise, if you selected <strong>CI Provider with Auto-Instrumentation Support</strong> in the <a href="#configuring-reporting-method">Configuring reporting method</a> section above, skip this section and proceed to <a href="#configuration-settings">Configuration settings</a>.
 </div>
 
-If your CI provider does not support auto-instrumentation (for example, if you selected {{< ui >}}Cloud CI provider (Agentless){{< /ui >}} or {{< ui >}}On-Premises CI Provider (Datadog Agent){{< /ui >}}), follow these steps to install the library and instrument your tests manually.
+Follow these steps to install the library and instrument your tests manually in either of these cases:
+
+- Your CI provider does not support auto-instrumentation. This includes {{< ui >}}Cloud CI provider (Agentless){{< /ui >}} and {{< ui >}}On-Premises CI Provider (Datadog Agent){{< /ui >}}.
+- Your tests run in a prebuilt container image. For more information, see [Tests in Containers][11].
 
 1. Add the [Ruby test optimization gem][10] to your Gemfile:
 
@@ -318,3 +321,4 @@ Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary betwe
 [8]: https://datadoghq.dev/datadog-ci-rb/Datadog/CI.html
 [9]: https://github.com/vcr/vcr
 [10]: https://github.com/DataDog/datadog-ci-rb
+[11]: /tests/containers/#choose-an-instrumentation-method
