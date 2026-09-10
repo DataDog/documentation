@@ -122357,7 +122357,12 @@ components:
           format: uuid
           type: string
         fields:
-          description: Custom fields of the Jira issue to create. For the list of available fields, see [Jira documentation](https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-issues/#api-rest-api-2-issue-createmeta-projectidorkey-issuetypes-issuetypeid-get).
+          description: |-
+            Target-specific fields of the ticket to create.
+
+            For `target: jira`, the custom fields of the Jira issue. For the list of available fields, see [Jira documentation](https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-issues/#api-rest-api-2-issue-createmeta-projectidorkey-issuetypes-issuetypeid-get).
+
+            For `target: linear`, the optional keys `linear_project_id` (string, the identifier of the Linear project the issue is created in) and `linear_label_ids` (array of strings, the identifiers of the Linear labels applied to the issue).
           example:
             labels:
               - security
@@ -122394,7 +122399,12 @@ components:
           example: "Daily ticket creation limit exceeded"
           type: string
         fields:
-          description: Custom fields of the Jira issue to create. For the list of available fields, see [Jira documentation](https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-issues/#api-rest-api-2-issue-createmeta-projectidorkey-issuetypes-issuetypeid-get).
+          description: |-
+            Target-specific fields of the ticket to create.
+
+            For `target: jira`, the custom fields of the Jira issue. For the list of available fields, see [Jira documentation](https://developer.atlassian.com/cloud/jira/platform/rest/v2/api-group-issues/#api-rest-api-2-issue-createmeta-projectidorkey-issuetypes-issuetypeid-get).
+
+            For `target: linear`, the optional keys `linear_project_id` (string, the identifier of the Linear project the issue is created in) and `linear_label_ids` (array of strings, the identifiers of the Linear labels applied to the issue).
           example:
             labels:
               - security
@@ -122592,11 +122602,13 @@ components:
       enum:
         - jira
         - case_management
+        - linear
       example: jira
       type: string
       x-enum-varnames:
         - JIRA
         - CASE_MANAGEMENT
+        - LINEAR
     TimeAggregation:
       description: |-
         Time aggregation period (in seconds) is used to aggregate the results of the notification rule evaluation.
