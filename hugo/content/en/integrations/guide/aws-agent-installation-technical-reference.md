@@ -58,7 +58,7 @@ Datadog creates no AWS resources for Lambda instrumentation. The only change is 
 
 ## How instrumentation works
 
-After you save an instrumentation rule, Datadog resolves the query you defined into the set of covered resources, then runs the following sequence against each one. For prerequisites, including supported platforms and runtimes, see [Prerequisites][2] in the setup guide.
+After you save an instrumentation rule, Datadog evaluates the query you defined against your account to determine the covered resources, then runs the following sequence against each one. For prerequisites, including supported platforms and runtimes, see [Prerequisites][2] in the setup guide.
 
 ### On Amazon EC2
 
@@ -155,7 +155,7 @@ Because a single execution role is often shared across functions, Datadog create
 Datadog continuously maintains the state you define on the covered resources:
 
 - A full reconciliation runs hourly per AWS account. Reconciliation restores instrumentation if it goes missing, retries anything that failed, and cleans up resources that no longer exist.
-- Change events forwarded from your account let Datadog react to covered resources within minutes, instead of waiting for the hourly pass. For EC2, these come from the CloudFormation stack's EventBridge rule. For Lambda, the `datadog-agent-resource-update-rule-lambda` rule forwards function create, configuration update, tag, and untag events.
+- Change events forwarded from your account let Datadog react within minutes, instead of waiting for the hourly pass, both to a covered resource that changed and to a newly created resource that a query-based rule matches. For EC2, these come from the CloudFormation stack's EventBridge rule. For Lambda, the `datadog-agent-resource-update-rule-lambda` rule forwards function create, configuration update, tag, and untag events.
 - On EC2, already-installed instances are re-verified about once per day rather than every hour, to avoid unnecessary activity.
 - On Lambda, the hourly scan checks each covered function against the layer versions Datadog deploys, and does per-function work only for functions that need a change. A fleet already on current layer versions produces no per-function activity, so Datadog makes no unnecessary calls to the Lambda API in your account.
 
@@ -165,15 +165,16 @@ Datadog resolves layer versions from a pinned set on every reconciliation, rathe
 
 A Lambda configuration update that is still in progress is left alone and retried shortly afterward, so Datadog does not race a change already being applied.
 
-### Rule coverage is fixed at save time
+### How a rule determines coverage
 
-A rule covers the set of resources it resolved to when you saved it, and Datadog does not instrument anything outside that set. This applies to both workloads: EC2 instances launched later, and Lambda functions created later, are not picked up automatically. To cover them, update the rule, which re-resolves your query against your current fleet.
+A rule takes one of two forms, and the form decides whether resources created later are covered:
 
-Change events are what keeps the covered set correct, not what expands it. A forwarded event causes Datadog to re-examine a resource the rule already covers.
+- **A query on resource attributes.** Datadog re-evaluates the query on every reconciliation and against forwarded change events. An EC2 instance launched later, or a Lambda function created later, is instrumented as soon as Datadog sees it match the query. `RunInstances` and `CreateFunction` events are forwarded for this reason, so a new resource is picked up within minutes rather than at the next hourly pass.
+- **A set of resources.** Selecting specific resources, or adding all eligible resources without writing a query, pins the rule to exactly the resources it matched. Resources created later are not covered. To cover more resources, update the rule.
 
 ### What happens when you edit a rule
 
-Datadog re-resolves your query and compares it against the previous set. Resources no longer covered have instrumentation removed. Newly covered resources are instrumented. Deleting a rule removes instrumentation from everything the rule covered.
+Datadog re-evaluates the rule and compares the covered resources against the previous set. Resources no longer covered have instrumentation removed. Newly covered resources are instrumented. Deleting a rule removes instrumentation from everything the rule covered.
 
 ### Terminated, stopped, or deleted resources
 

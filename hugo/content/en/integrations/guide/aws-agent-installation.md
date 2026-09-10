@@ -69,8 +69,8 @@ Both add the same Datadog Lambda extension and tracing layers, and both restore 
 | Workloads | Amazon EC2 instances and AWS Lambda functions | AWS Lambda functions |
 | What runs in your account | No Datadog compute. Datadog calls the AWS APIs with the IAM role created by the CloudFormation stack | The instrumenter Lambda function |
 | Scope of setup | One CloudFormation stack per AWS account | One CloudFormation stack per account and region |
-| Selecting functions | You choose the functions a rule covers, and review the matched set before saving | You write targeting rules on function names and tags, with logical operators |
-| Functions created later | Not instrumented. The covered set is fixed when you save the rule | Instrumented automatically when they match your targeting rules |
+| Selecting functions | You write a query on function attributes, select specific functions, or add all eligible functions. Datadog shows the matched set before you save | You write targeting rules on function names and tags, with logical operators |
+| Functions created later | Instrumented automatically when they match a query you wrote. A rule built by selecting functions, or by adding all of them, covers only the functions it matched | Instrumented automatically when they match your targeting rules |
 | Layer versions | Datadog selects and updates them | You set them, and they stay fixed until you change them |
 | How instrumented functions authenticate | [Workload Identity Federation][16], with no Datadog API key on the function | A Datadog API key with Remote Configuration enabled |
 | Datadog permissions | Hosts Read and Agent Install | Serverless AWS Instrumentation Read and Write |
@@ -80,7 +80,7 @@ Both products deploy a CloudFormation stack in your account. The stack for remot
 
 Use instrumentation through the AWS integration to instrument both EC2 instances and Lambda functions from one place. It also suits you if you want no additional compute running in your account.
 
-Use remote instrumentation when functions created later must be instrumented as they appear. It also suits you if you want to control the layer versions applied to your functions.
+Use remote instrumentation when you want to target functions with rules on names and tags, or when you want to control the layer versions applied to your functions.
 
 ## Prerequisites
 
@@ -158,12 +158,14 @@ Lambda instrumentation needs no Secrets Manager, Systems Manager, or IAM write p
 
 ## How it works
 
-Instrumentation is based on an **instrumentation rule**: an AWS account paired with a query that describes which resources to cover. Datadog resolves the query into the set of covered resources, instruments each one inside your own account, and keeps them instrumented:
+Instrumentation is based on an **instrumentation rule**: an AWS account paired with a query that describes which resources to cover. Datadog evaluates the query against your account, instruments each covered resource inside your own account, and keeps them instrumented:
 
-1. You select the resources to cover, or opt in to all eligible resources.
-1. Datadog resolves your selection into a set of covered resources and records it.
+1. You write a query describing the resources to cover, select specific resources, or add all eligible resources.
+1. Datadog evaluates the rule against your account and records which resources it covers.
 1. Datadog instruments each covered resource: on EC2, by installing the Agent through AWS Systems Manager; on Lambda, by adding the Datadog layers and environment variables to the function.
-1. Datadog keeps the covered resources instrumented, reinstalling instrumentation that goes missing and retrying anything that failed. Resources created later aren't added until you update the rule.
+1. Datadog keeps the covered resources instrumented, reinstalling instrumentation that goes missing and retrying anything that failed.
+
+How you define the rule decides whether resources created later are covered. A rule built from a query on resource attributes is re-evaluated over time, so a resource created later that matches the query is instrumented as it appears. A rule built by selecting specific resources, or by adding all of them without a query, covers exactly the resources it matched; to cover anything else, update the rule.
 
 You approve one CloudFormation stack, one time, during initial setup. After that, instrumentation runs automatically from Datadog, with no new CloudFormation template to launch each time.
 
@@ -191,7 +193,7 @@ The instrumentation toggle appears during setup, with a workload selector listin
 To install from the AWS Install Agents page:
 
 1. Select the workload you want to instrument: **EC2 Instances** or **Lambda Functions**.
-1. Opt in to all eligible resources, or select specific resources from the resource list. For Lambda, you can narrow the list by region, runtime, and memory size.
+1. Write a query describing the resources to cover, select specific resources from the list, or add all eligible resources. For Lambda, you can narrow the list by region, runtime, and memory size.
 1. Review the preview of matching resources. Resources Datadog can't instrument appear as ineligible, with the reason.
 1. Review the generated CloudFormation stack, then continue to AWS and create it. Datadog prompts you for this only once.
 1. Return to Datadog. Instrumentation proceeds automatically, and Datadog reports progress as resources are instrumented.
