@@ -39,7 +39,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
    1. Go to **Entra ID > App registrations**, then click **New registration**.
    1. Enter a name, select **Accounts in this organizational directory only (Single tenant)**, and click **Register**.
    1. On the application's **Overview** page, note the **Application (client) ID** and **Directory (tenant) ID**.
-   1. Click **Certificates & secrets > Client secrets > New client secret**. Enter a description, set the expiry to the maximum allowed (730 days), and click **Add**. Copy the generated secret value. It is only displayed once.
+   1. Click **Certificates & secrets > Client secrets > New client secret**. Enter a description, set the expiry to the maximum allowed (730 days), and click **Add**. Copy the generated secret value. It is displayed only once.
 1. As a **Databricks workspace admin**, go to {{< ui >}}Settings{{< /ui >}} by clicking your profile in the upper-right corner of the workspace.
 1. On the {{< ui >}}Identity and access{{< /ui >}} tab, click {{< ui >}}Manage{{< /ui >}} next to {{< ui >}}Service principals{{< /ui >}}.
 1. Click {{< ui >}}Add service principal{{< /ui >}}, then click {{< ui >}}Add new{{< /ui >}}.
