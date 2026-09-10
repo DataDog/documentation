@@ -39,6 +39,14 @@ The Runtime Prioritization Engine is designed to be explainable. For each findin
 
 The Runtime Prioritization Engine prioritizes a finding when these signals indicate real, exploitable risk in your environment. Findings that do not meet the prioritization criteria stay visible, but move out of the active triage queue.
 
+## Support CISA BOD 26-04 prioritization
+
+The Runtime Prioritization Engine supports the risk-based vulnerability prioritization required by [CISA Binding Operational Directive (BOD) 26-04][15]. It combines signals for public exposure, CISA Known Exploited Vulnerabilities (KEV) status, exploitability, runtime reachability, business impact, remediation availability, and ownership.
+
+By default, Datadog uses this prioritization context to automatically compute each vulnerability's remediation timeline according to the directive. The corresponding due date appears on the vulnerability finding.
+
+{{< img src="security/cloud_security_management/bod_26_04_remediation_timeline.png" alt="Cloud Security Vulnerabilities Explorer filtered by CISA BOD 26-04 remediation timeline, with automatically computed due dates displayed on vulnerability findings" width="100%">}}
+
 ## Crown Jewels
 
 [Crown Jewels][8] are the resources that support your most critical business functions (services, hosts, databases, containers, etc.). Datadog automatically infers them from observability data such as APM trace flow, service dependencies (fan-in), SLOs, traffic, incidents, and more.
@@ -125,3 +133,4 @@ Datadog detects running images with either the Datadog Agent or Agentless Scanni
 [12]: /containers/
 [13]: /security/cloud_security_management/setup/agentless_scanning/
 [14]: /security/cloud_security_management/vulnerabilities/
+[15]: https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/
