@@ -43,7 +43,7 @@ The Runtime Prioritization Engine prioritizes a finding when these signals indic
 
 The Runtime Prioritization Engine computes remediation timelines that follow the risk-based approach in [CISA Binding Operational Directive (BOD) 26-04][15]. It combines signals for reachability, exposure, exploitability (including [CISA KEV][1] status), business criticality, and actionability.
 
-By default, Datadog uses this prioritization context to automatically compute each vulnerability's remediation timeline according to the directive. The corresponding due date appears on the vulnerability finding.
+Datadog computes each vulnerability's remediation timeline according to the directive. The due date appears on the vulnerability finding.
 
 For more information, see [How CISA's BOD 26-04 changes vulnerability prioritization][16].
 
