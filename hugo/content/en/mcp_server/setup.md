@@ -743,6 +743,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 | [Codex CLI][6] | OpenAI | |
 | [Copilot CLI][64] | Microsoft | Datadog [Copilot plugin][16] recommended. |
 | [Gemini CLI][50] | Google | |
+| [Grok Build][71] | SpaceXAI | Datadog [Grok Build plugin][72] recommended. |
 | [Warp][28] | Warp | |
 | [VS Code][7] | Microsoft | Datadog [Copilot plugin][16] recommended. |
 | [JetBrains IDEs][18] | JetBrains | [Datadog plugin][18] recommended. |
@@ -971,3 +972,5 @@ Local authentication is recommended for Cline and when remote authentication is 
 [68]: /account_management/org_settings/ip_allowlist/
 [69]: /data_observability/
 [70]: /account_management/audit_trail/
+[71]: https://x.ai/build 
+[72]: https://github.com/xai-org/plugin-marketplace 
