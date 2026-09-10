@@ -72,11 +72,13 @@ For convenience, you can set a customer's rates directly from the {{< ui >}}Cust
 
 The {{< ui >}}Invoices{{< /ui >}} tab of the contract detail panel lists every invoice for that customer with its issue date, due date, amount, and payment status. Open the PDF for any invoice from this tab. The overdue balance for each customer also appears in the main customer table, and the summary tiles at the top of the page show the count and total amount of overdue invoices across your portfolio.
 
+**Note**: Payment status reflects whether you have paid your Datadog invoice for that customer's usage. It does not track whether the end customer has paid you.
+
 {{< img src="account_management/plan_and_usage/customer-contracts-invoices.png" alt="Invoices tab of the contract detail panel listing invoices with issue date, due date, amount, payment status, and a link to view the PDF" >}}
 
 ## Check cost visibility status
 
-The {{< ui >}}Cost Visibility{{< /ui >}} column shows where each customer stands:
+Your end customers can see their own estimated month-to-date and historical Datadog costs in their Datadog organization, calculated from the rates you publish for them. The {{< ui >}}Cost Visibility{{< /ui >}} column shows where each customer stands:
 
 - {{< ui >}}Enabled{{< /ui >}}: the customer can see their Datadog costs in their own organization.
 - {{< ui >}}Not configured{{< /ui >}}: you haven't published rates for this customer yet.
