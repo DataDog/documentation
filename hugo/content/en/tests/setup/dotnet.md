@@ -153,25 +153,14 @@ The following list shows the default values for key configuration settings:
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
-: Enables Agentless mode to send test results directly to Datadog.<br/>
-**Default**: `false`
-
-`DD_API_KEY` (Required for Agentless mode)
-: The Datadog API key used to upload test results.<br/>
-**Default**: `(empty)`
-
-`DD_SITE` (Required for Agentless mode)
-: The [Datadog site][20] to upload test results to.<br/>
-**Default**: `datadoghq.com`
-
-`--agent-url` (Only when using the Datadog Agent)
-: The Datadog Agent URL for trace collection in the form `http://hostname:port`. This setting is only needed when test results are reported through the Datadog Agent.<br/>
+`--agent-url`
+: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-`DD_TEST_SESSION_NAME` (Optional)
-: Identifies a group of tests, such as `integration-tests`, `unit-tests`, or `smoke-tests`.<br/>
+`test_session.name` (only available as an environment variable)
+: Identifies a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
+**Environment variable**: `DD_TEST_SESSION_NAME`<br/>
 **Default**: (CI job name + test command)<br/>
 **Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
@@ -427,4 +416,3 @@ Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary betwe
 [17]: https://github.com/microsoft/codecoverage/blob/main/samples/Calculator/scenarios/scenario07/README.md
 [18]: /tracing/trace_collection/compatibility/dotnet-framework/
 [19]: /tracing/trace_collection/compatibility/dotnet-core/
-[20]: /getting_started/site/
