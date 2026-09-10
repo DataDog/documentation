@@ -332,6 +332,8 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 Install the Datadog Plugin from the Grok Build Plugin Marketplace. The plugin packages the Datadog MCP Server with auto-updates when new plugin versions ship. For more details, see the [plugin marketplace repository][1]. If you previously installed the Datadog MCP Server manually, remove it from your Grok Build configuration to avoid conflicts.
 
+[1]: https://github.com/xai-org/plugin-marketplace
+
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. In Grok Build, type `/marketplace`, locate the Datadog plugin, and install it.
 
@@ -339,9 +341,7 @@ Install the Datadog Plugin from the Grok Build Plugin Marketplace. The plugin pa
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
-[1]: https://github.com/xai-org/plugin-marketplace
 [2]: /getting_started/site/
-
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
