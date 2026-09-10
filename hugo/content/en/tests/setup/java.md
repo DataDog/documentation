@@ -122,8 +122,8 @@ Set the following environment variables to configure the SDK and its reporting m
 `DD_API_KEY` (Required for Agentless mode)
 : The Datadog API key used to upload test results.
 
-`DD_SITE` (Required for Agentless mode)
-: The [Datadog site](/getting_started/site/) to upload test results to.<br/>
+`DD_SITE` (Optional for Agentless mode)
+: The [Datadog site][4] to upload test results to. Set this variable when using a site other than US1.<br/>
 **Default**: `datadoghq.com`
 
 `DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
@@ -552,6 +552,7 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 [1]: #using-manual-testing-api
 [2]: https://app.datadoghq.com/ci/setup/test?language=java
 [3]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
+[4]: /getting_started/site/
 [6]: /tests/guides/add_custom_measures/?tab=java
 [7]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [8]: /tests/#parameterized-test-configurations

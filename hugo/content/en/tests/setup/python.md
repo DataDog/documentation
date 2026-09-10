@@ -402,8 +402,8 @@ The following list contains key configuration settings and environment variables
 : The Datadog API key used to upload test results.<br/>
 **Default**: `(empty)`
 
-`DD_SITE` (Required for Agentless mode)
-: The [Datadog site][4] to upload test results to.<br/>
+`DD_SITE` (Optional for Agentless mode)
+: The [Datadog site][4] to upload test results to. Set this variable when using a site other than US1.<br/>
 **Default**: `datadoghq.com`
 
 `DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)

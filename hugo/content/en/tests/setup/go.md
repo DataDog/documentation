@@ -118,8 +118,8 @@ Set the following environment variables to configure the library:
 `DD_API_KEY` (Required for Agentless mode)
 : The Datadog API key used to upload test results.
 
-`DD_SITE` (Required for Agentless mode)
-: The [Datadog site](/getting_started/site/) to upload test results to.<br/>
+`DD_SITE` (Optional for Agentless mode)
+: The [Datadog site][2] to upload test results to. Set this variable when using a site other than US1.<br/>
 **Default**: `datadoghq.com`
 
 `DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
@@ -167,6 +167,7 @@ $ go test -toolexec 'orchestrion toolexec' -race .
 ```
 
 [1]: https://github.com/datadog/orchestrion
+[2]: /getting_started/site/
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}

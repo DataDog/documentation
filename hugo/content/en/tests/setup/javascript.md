@@ -638,8 +638,8 @@ The following is a list of the most important configuration settings that can be
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
-`site` (Required for Agentless mode)
-: The [Datadog site][25] to upload test results to.<br/>
+`site` (Optional for Agentless mode)
+: The [Datadog site][25] to upload test results to. Set this value when using a site other than US1.<br/>
 **Environment variable**: `DD_SITE`<br/>
 **Default**: `datadoghq.com`
 

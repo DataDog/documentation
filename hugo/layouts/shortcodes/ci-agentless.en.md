@@ -8,9 +8,9 @@ If you are using a cloud CI provider without access to the underlying worker nod
 : The [Datadog API key][101] used to upload the test results.<br/>
 **Default**: `(empty)`
 
-Additionally, configure the [Datadog site][102] to which you want to send data.
+If you use a Datadog site other than US1, configure the site to which you want to send data.
 
-`DD_SITE` (Required)
+`DD_SITE` (Optional)
 : The [Datadog site][102] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 

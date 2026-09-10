@@ -117,8 +117,8 @@ The following environment variables configure the test optimization library and 
 : The Datadog API key used to upload test results.
 **Default**: `(empty)`
 
-`DD_SITE` (Required for Agentless mode)
-: The [Datadog site][11] to upload test results to.
+`DD_SITE` (Optional for Agentless mode)
+: The [Datadog site][11] to upload test results to. Set this variable when using a site other than US1.
 **Default**: `datadoghq.com`
 
 `DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
