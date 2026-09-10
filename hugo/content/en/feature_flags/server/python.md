@@ -350,7 +350,7 @@ Verify the following:
 [8]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
 [9]: /feature_flags/concepts/configuration_sources/#use-agent-remote-configuration
 [10]: /feature_flags/concepts/configuration_sources/#configure-agentless-delivery
-[11]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry-with-serverless-init
+[11]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
 
 ## Further reading
 

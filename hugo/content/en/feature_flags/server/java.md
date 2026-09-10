@@ -24,19 +24,19 @@ further_reading:
 
 ## Overview
 
-This page describes how to add Datadog Feature Flags to a Java application. Starting in version 1.65.0, `dd-openfeature` loads flag configuration directly from the Datadog-managed CDN by default. This agentless source simplifies onboarding for long-running servers and supports serverless runtimes that cannot connect to a Datadog Agent.
+This page describes how to add Datadog Feature Flags to a Java application. In version 1.66.0 and later, `dd-openfeature` loads flag configuration directly from the Datadog-managed CDN by default. This agentless source supports long-running servers and serverless runtimes that cannot connect to a Datadog Agent.
 
 The Datadog provider implements the [OpenFeature](https://openfeature.dev/) standard. It uses `dd-java-agent` for configuration delivery. Agentless delivery removes the external Datadog Agent requirement, but `dd-java-agent` must still load in the JVM.
 
-Agentless delivery changes only the flag configuration source. Java 1.65.0 sends experiment exposure events through a supported local Event Platform Proxy (EVP) relay. Starting in version 1.66.0, the SDK also sends aggregated EVP flag evaluation events. In 1.66.0 and later, the SDK prefers a compatible local relay and sends both event types directly when no compatible relay is available.
+Agentless Java evaluates flags locally and sends experiment exposure events and aggregated Event Platform Proxy (EVP) flag evaluation events. It prefers a compatible local telemetry relay. It sends both event types directly when no compatible relay is available.
 
 ## Compatibility requirements
 
 For the default agentless setup, you need:
 
 - **Java 11 or higher**
-- **Datadog Java agent** (`dd-java-agent`, loaded with `-javaagent`): Version **1.65.0** or later
-- **Datadog OpenFeature provider** (`com.datadoghq:dd-openfeature`, added as a build dependency): Version **1.65.0** or later
+- **Datadog Java agent** (`dd-java-agent`, loaded with `-javaagent`): Version **1.66.0** or later
+- **Datadog OpenFeature provider** (`com.datadoghq:dd-openfeature`, added as a build dependency): Version **1.66.0** or later
 - **OpenFeature SDK**: Version **1.20.1** or later
 - A Datadog [**API key**][7]
 - Your Datadog [**site**][14]
@@ -65,7 +65,7 @@ dependencies {
     implementation 'dev.openfeature:sdk:1.20.1'
 
     // Datadog OpenFeature Provider
-    implementation 'com.datadoghq:dd-openfeature:1.65.0'
+    implementation 'com.datadoghq:dd-openfeature:1.66.0'
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -79,7 +79,7 @@ dependencies {
     implementation("dev.openfeature:sdk:1.20.1")
 
     // Datadog OpenFeature Provider
-    implementation("com.datadoghq:dd-openfeature:1.65.0")
+    implementation("com.datadoghq:dd-openfeature:1.66.0")
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -100,7 +100,7 @@ Add the following dependencies to your `pom.xml`:
     <dependency>
         <groupId>com.datadoghq</groupId>
         <artifactId>dd-openfeature</artifactId>
-        <version>1.65.0</version>
+        <version>1.66.0</version>
     </dependency>
 </dependencies>
 {{< /code-block >}}
@@ -344,11 +344,9 @@ Use [Server SDK Configuration Sources][9] as the canonical reference for source 
 - [Use Agent Remote Configuration][13] to retain Agent-managed delivery
 - [Migrate an existing Remote Configuration setup][11] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
 
-For no-Agent serverless environments, use [`serverless-init`][17] to send Feature Flags telemetry:
+In agentless mode, Java prefers a compatible local telemetry relay for experiment exposure and aggregated flag evaluation events. It sends both event types directly when no compatible relay is available. The direct path uses the application `DD_API_KEY` and `DD_SITE` settings. For no-Agent serverless environments, you can use [`serverless-init`][17] as the local telemetry relay.
 
-- Java 1.65.0 sends experiment exposure events.
-- Java 1.66.0 and later prefer a compatible local relay for exposure and aggregated flag evaluation events, and use authenticated direct EVP fallback when no compatible relay is available. The direct path uses the application `DD_API_KEY` and `DD_SITE` settings.
-- The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Server-Side Flag Evaluation Metrics][8] guide.
+The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Server-Side Flag Evaluation Metrics][8] guide.
 
 For more information on available graphing, see [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/).
 
@@ -545,7 +543,7 @@ Before checking infrastructure, confirm the flag itself is set up correctly:
 
 #### Agentless
 
-1. Confirm that `dd-openfeature` and `dd-java-agent` are version 1.65.0 or later. Use the same version for both components.
+1. Confirm that `dd-openfeature` and `dd-java-agent` are version 1.66.0 or later. Use the same version for both components.
 2. Confirm that the JVM loads `dd-java-agent` with `-javaagent`, either in the Java command or through `JAVA_TOOL_OPTIONS`.
 3. Confirm that `DD_FEATURE_FLAGS_ENABLED` is unset or set to `true`.
 4. Confirm that `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` is set, or that the source and legacy provider settings are not set.
@@ -556,7 +554,7 @@ Before checking infrastructure, confirm the flag itself is set up correctly:
 
 #### Agent Remote Configuration
 
-1. Confirm that `dd-openfeature` and `dd-java-agent` are version 1.65.0 or later. Use the same version for both components.
+1. Confirm that `dd-openfeature` and `dd-java-agent` are version 1.66.0 or later. Use the same version for both components.
 2. Confirm that `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` is set. During the migration window, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` also selects Remote Configuration when no source is set.
 3. Confirm that `DD_FEATURE_FLAGS_ENABLED` is unset or set to `true`.
 4. Confirm that Agent 7.55 or later is running and reachable. See [APM Connection Errors][2].
@@ -665,4 +663,4 @@ When the selected configuration path supports exposures, exposures appear only f
 [14]: /getting_started/site/
 [15]: /serverless/google_cloud_run/functions/java/?tab=maven
 [16]: /serverless/google_cloud_run/containers/in_container/java/
-[17]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry-with-serverless-init
+[17]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry

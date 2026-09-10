@@ -31,7 +31,7 @@ Before setting up flag evaluation metrics, confirm the following:
 - [Server-side feature flags][1] are already configured.
 - For Agent-backed deployments, Datadog Agent 7.32.0 or later is running and can receive OTLP metrics.
 - For no-Agent serverless deployments, your platform has a supported serverless telemetry path configured.
-- For Java, Node.js, and Python serverless environments, see [Send feature flag telemetry with serverless-init][7].
+- For Java, Node.js, and Python serverless environments, see [Send feature flag telemetry][7].
 - For Agent-backed configurations that use the legacy activation path, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set on your application.
 - Your server-side tracer meets the minimum version for flag evaluation metrics support:
 
@@ -229,4 +229,4 @@ The `feature_flag.evaluations` metric is a counter with the following tags:
 [4]: https://app.datadoghq.com/metric/summary
 [5]: /dashboards/
 [6]: /feature_flags/server/java/#installation
-[7]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry-with-serverless-init
+[7]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry

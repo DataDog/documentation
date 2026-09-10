@@ -27,15 +27,15 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management. Starting in `dd-trace` 5.116.0 and 6.5.0, it loads flag configuration directly from the Datadog-managed CDN by default.
+This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management. In `dd-trace` 6.12.0 and later, it loads flag configuration directly from the Datadog-managed CDN by default.
 
-Agentless delivery changes only the flag configuration source. Node.js sends experiment exposure events through a supported local Event Platform Proxy (EVP) relay. In `dd-trace` 5.116.0 and 6.5.0, Node.js does not emit EVP flag evaluation events.
+Agentless Node.js evaluates flags locally and sends experiment exposure events. It prefers a compatible local Event Platform Proxy (EVP) relay. It sends exposure events directly when no compatible relay is available. It does not send EVP flag evaluation events.
 
 ## Getting started
 
 For the default agentless setup, you need:
 
-- **Datadog Node.js SDK** `dd-trace` version **5.116.0 or later on the v5 release line**, or **6.5.0 or later on the v6 release line**
+- **Datadog Node.js SDK** `dd-trace` version **6.12.0 or later**
 - A Datadog [API key][3]
 - Your Datadog site
 - **@openfeature/server-sdk** version ~1.20.0
@@ -45,10 +45,8 @@ For the default agentless setup, you need:
 Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install `dd-trace` and initialize the Datadog OpenFeature provider. See [Tracing Node.js Applications][1] for detailed APM installation instructions.
 
 ```shell
-npm install dd-trace @openfeature/server-sdk
+npm install dd-trace@^6.12.0 @openfeature/server-sdk
 ```
-
-If your application stays on the v5 release line, use `dd-trace@^5.116.0`. On the v6 release line, use `dd-trace@^6.5.0`.
 
 ### Configure agentless delivery
 
@@ -307,7 +305,9 @@ Use [Server SDK Configuration Sources][6] as the canonical reference for source 
 - [Use Agent Remote Configuration][10] to retain Agent-managed delivery
 - [Migrate an existing Remote Configuration setup][8] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
 
-For no-Agent serverless environments, use [`serverless-init`][11] to send experiment exposure events. The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Server-Side Flag Evaluation Metrics][4] guide. For more information on available graphing, see [Feature Flag Graphs][5].
+In agentless mode, Node.js uses a compatible local telemetry relay when available. It sends experiment exposure events directly when no compatible relay is available. For no-Agent serverless environments, you can use [`serverless-init`][11] as the local telemetry relay.
+
+The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Server-Side Flag Evaluation Metrics][4] guide. It requires a supported Agent or serverless telemetry receiver. For more information on available graphing, see [Feature Flag Graphs][5].
 
 ## Testing
 
@@ -383,4 +383,4 @@ The snippet above uses Vitest for its first-class ESM support. The same pattern 
 [8]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
 [9]: /feature_flags/concepts/configuration_sources/#configure-agentless-delivery
 [10]: /feature_flags/concepts/configuration_sources/#use-agent-remote-configuration
-[11]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry-with-serverless-init
+[11]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry

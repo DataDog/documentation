@@ -37,18 +37,17 @@ Agentless [configuration delivery][8] is the default in server SDK versions that
 
 The default source does not activate Feature Flags traffic for every tracer installation. Agentless polling begins only when application code initializes or accesses the Datadog OpenFeature provider. Explicitly selecting `remote_config` activates the Feature Flags Remote Configuration subscription. Requests through either source contribute to server Feature Flags billing.
 
-| SDK | Minimum agentless version |
+| SDK | Recommended agentless version |
 |---|---|
-| Java `dd-openfeature` and `dd-java-agent` | 1.65.0 |
-| Node.js `dd-trace` v5 | 5.116.0 |
-| Node.js `dd-trace` v6 | 6.5.0 |
+| Java `dd-openfeature` and `dd-java-agent` | 1.66.0 |
+| Node.js `dd-trace` | 6.12.0 |
 | Python `ddtrace` | 4.14.0 |
 
 Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. It does not require a Datadog Agent for flag configuration.
 
-Agentless delivery changes only the flag configuration source. Java, Node.js, and Python can use `serverless-init` as a local telemetry relay in no-Agent environments.
+Agentless delivery changes only the flag configuration source. Java and Node.js support direct exposure delivery. Java, Node.js, and Python can also use a compatible local telemetry relay.
 
-Agentless delivery is available for the SDKs and versions listed. Other server SDKs use Agent Remote Configuration.
+The listed versions provide the current capabilities described on each language page. Other server SDKs use Agent Remote Configuration.
 
 ## Choose a language
 
@@ -139,7 +138,7 @@ DD_VERSION=<YOUR_APP_VERSION>
 
 For telemetry, metrics, and graphing options, see:
 
-- <a href="/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry-with-serverless-init">Send feature flag telemetry with serverless-init</a> for exposure and Event Platform Proxy (EVP) flag evaluation event egress
+- <a href="/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry">Send feature flag telemetry</a> for exposure and Event Platform Proxy (EVP) flag evaluation event delivery
 - <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> for the separate <code>feature_flag.evaluations</code> OTLP metric
 - <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for graphing options
 - <a href="/feature_flags/guide/apm_trace_enrichment/">Set Up APM Trace Enrichment for Feature Flags</a> for attaching evaluation data to APM traces

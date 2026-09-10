@@ -41,13 +41,12 @@ The SDK resolves the source once during initialization. Restart the application 
 
 ## Use agentless delivery
 
-To get started with agentless delivery, use one of these minimum versions:
+Use these versions or later with agentless delivery:
 
-| SDK | Minimum version |
+| SDK | Recommended version |
 |---|---|
-| Java `dd-openfeature` and `dd-java-agent` | 1.65.0 |
-| Node.js `dd-trace` v5 | 5.116.0 |
-| Node.js `dd-trace` v6 | 6.5.0 |
+| Java `dd-openfeature` and `dd-java-agent` | 1.66.0 |
+| Node.js `dd-trace` | 6.12.0 |
 | Python `ddtrace` | 4.14.0 |
 
 Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. It does not require a Datadog Agent for flag configuration.
@@ -64,7 +63,7 @@ Then initialize or access the Datadog OpenFeature provider in application code. 
 
 No configuration-source or provider-enable setting is required. Polling begins only when application code initializes or accesses the provider; installing or initializing the tracer alone does not create Feature Flags CDN traffic.
 
-Agentless delivery changes only the flag configuration source. To send telemetry from the Java, Node.js, and Python SDKs in serverless environments, see [Send feature flag telemetry with serverless-init][6].
+Agentless delivery changes only the flag configuration source. For the Feature Flags event delivery paths, see [Send feature flag telemetry][6].
 
 ### Configure agentless delivery
 
@@ -129,7 +128,7 @@ Set the source to `remote_config` to use Agent-managed delivery:
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 {{< /code-block >}}
 
-For Java, Remote Configuration requires compatible `dd-openfeature` and `dd-java-agent` versions. Use version 1.65.0 or later for both components.
+For Java, Remote Configuration requires compatible `dd-openfeature` and `dd-java-agent` versions. Use the same version for both components.
 
 Configure the API key on the Agent, not in the application process. If Remote Configuration has been disabled on the Agent, re-enable it. See [Remote Configuration][1] for Agent setup and network requirements.
 
@@ -172,4 +171,4 @@ Server Feature Flags billing is based on configuration requests made through Rem
 [3]: /feature_flags/server/
 [4]: /feature_flags/server/java/
 [5]: /feature_flags/server/python/
-[6]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry-with-serverless-init
+[6]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
