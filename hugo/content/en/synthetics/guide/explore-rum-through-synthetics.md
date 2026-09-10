@@ -43,7 +43,7 @@ For more information, see [Synthetic Monitoring Settings][6].
 
 Navigate to your [list of browser tests][7] and click on a sample test run. 
 
-{{< img src="synthetics/guide/rum_in_synthetics/synthetic_test_generated_rum_data_1.png" alt="Test Step Details Side Panel" style="width:100%;" >}}
+{{< img src="synthetics/guide/rum_in_synthetics/synthetic_test_generated_rum_data_1.png" alt="Browser test step details side panel with a note that the synthetic test generated RUM data." style="width:100%;" >}}
 
 The step details side panel appears with `This Synthetic test generated data in Real User Monitoring` and includes the session ID.
 
