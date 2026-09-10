@@ -158,7 +158,7 @@ To configure a repository environment:
    1. (Optional) Under {{< ui >}}Pre-installed Languages{{< /ui >}}, click {{< ui >}}Select Versions{{< /ui >}} to specify the language versions the sandbox should use.
    1. (Optional) Define environment variables and secrets. Environment variables are available during both environment setup and Bits Code execution. Secrets are available as environment variables only during environment setup. A value defined here replaces the [organization value](#configure-organization-environment-variables-and-secrets) with the same name.
    1. (Optional) Add a shell script with setup commands to execute (for example: `pip install -r requirements.txt`).
-1. Run the setup command to ensure it runs successfully. This requires write access to the selected repository.
+1. Run the setup command to verify that it completes successfully. You need write access to the selected repository.
 1. Save the configuration.
 
 Bits Code runs the setup command at startup and can use any tools installed in your environment. The setup command runs with network access enabled to download dependencies. After setup is complete, your [internet access](#configure-internet-access) policy controls outbound network access during agent execution. Because setup commands execute against code in your repository, enable them only if you trust the repository's code.
@@ -167,11 +167,11 @@ Bits Code runs the setup command at startup and can use any tools installed in y
 
 #### Configure organization environment variables and secrets
 
-Define environment variables and secrets once for your organization instead of repeating them in each repository. Every repository environment inherits them: organization environment variables are available during both environment setup and Bits Code execution, and organization secrets are available as environment variables only during environment setup. A repository environment with no setup command still inherits organization environment variables, but not organization secrets.
+Define environment variables and secrets once for your organization instead of repeating them in each repository. Every repository environment inherits them. Organization environment variables are available during environment setup and Bits Code execution. Organization secrets are available as environment variables only during environment setup. A repository environment with no setup command still inherits organization environment variables, but not organization secrets.
 
 To configure them, go to {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Repositories{{< /ui >}}][5], and find the {{< ui >}}Environments{{< /ui >}} section. Names must be valid shell environment variable identifiers. A repository environment can also opt out of an inherited environment variable or secret, which makes that name unavailable in the repository. Remove the opt-out to inherit the value again.
 
-Managing organization environment variables and secrets requires one of the following permissions: [`Bits Code Write`][1], `Integrations Manage`, `User Access Manage`, or `Org Management`. None of these permissions require source code access to the repositories that inherit the values, so a user who has one of them can influence environment setup and agent execution across all of your repositories. Grant these permissions only to users who need them.
+Managing organization environment variables and secrets requires one of the following permissions: [`Bits Code Write`][1], `Integrations Manage`, `User Access Manage`, or `Org Management`. None of these permissions require source code access to repositories that inherit the values. Users with any of these permissions can influence environment setup and agent execution across all repositories in your organization. Grant these permissions only to users who need them.
 
 ## Troubleshooting
 
