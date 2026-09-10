@@ -1,7 +1,7 @@
 ---
 title: Log Findings
 description: 'Capture, organize, and reuse important context during log investigations in Log Explorer.'
-private: true
+private: false
 further_reading:
     - link: 'logs/explorer/'
       tag: 'Documentation'
@@ -23,9 +23,7 @@ Findings helps you capture, organize, and reuse important context during log inv
 
 With Findings, you can save log events, visualizations, and queries while investigating, using the **Add Finding** button or the **Cmd**/**Ctrl** + **S** keyboard shortcut. To go back to a finding in Log Explorer, **double-click** it, or click **Open in Explorer** on the finding.
 
-Use Findings to checkpoint your investigation paths with useful queries and logs to come back to. Backtrack to a query or aggregation you identified earlier, or refer back to information from those log results or the log event. Arrange the findings in the panel to represent your paths. Branch into new questions without losing track of earlier observations by saving them as findings along the way.
-
-Collect possible evidence, compare results, and build context as your investigation evolves. Add notes to findings to keep track of your observations. Select findings to use as context for [Bits AI][2] questions, or send them to a [Notebook][3] to share with others.
+Use findings as checkpoints in an investigation. Save a query or aggregation worth returning to, then branch into new questions and backtrack when a path leads nowhere. Arrange findings in the panel to map how your paths relate, and add notes to record what you observed. Select findings to use as context for [Bits AI][2] questions, or send them to a [Notebook][3] to share with others.
 
 Findings persist across page reloads and browser sessions until you delete them.
 
@@ -95,20 +93,19 @@ To delete findings, select one or more and press **Delete**, or hover over a sin
 The clear all button in the Findings panel deletes all findings.
 <!-- Does the clear all button warn before emptying a full panel? -->
 
-Deleting is not immediately permanent. A toast appears with an {{< ui >}}Undo{{< /ui >}} option, and **Cmd**/**Ctrl** + **Z** restores what you removed.
-<!-- How long does a deleted finding stay recoverable? Confirm whether undo history survives a page reload or ends with the browser session. -->
+To restore a finding right after deleting it, click {{< ui >}}Undo{{< /ui >}} in the toast that appears, or press **Cmd**/**Ctrl** + **Z**.
 
 ## Keyboard shortcuts
 
 | Action | Shortcut |
 | ------ | -------- |
-| Add a finding | <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>S</kbd> |
-| Select all findings | <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>A</kbd> |
-| Delete selected findings | <kbd>Delete</kbd> |
-| Undo | <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Z</kbd> |
-| Redo | <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd> |
-| Pan | <kbd>Space</kbd> + <kbd>drag</kbd> |
-| Auto-organize (by query) | <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>O</kbd> |
+| Add a finding | **Cmd**/**Ctrl** + **S** |
+| Select all findings | **Cmd**/**Ctrl** + **A** |
+| Delete selected findings | **Delete** |
+| Undo | **Cmd**/**Ctrl** + **Z** |
+| Redo | **Cmd**/**Ctrl** + **Shift** + **Z** |
+| Pan | **Space** + **drag** |
+| Auto-organize (by query) | **Cmd**/**Ctrl** + **O** |
 
 <!-- Confirm the Undo and Redo bindings, which have not been verified against the build. -->
 
