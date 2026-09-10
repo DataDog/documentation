@@ -144,7 +144,7 @@ If you are concerned about unauthorized data access through monitors, Datadog re
 
 * **Supported telemetry**:
   * Traces, using any tag
-  * Experiments and Datasets, using the `ml_app` tag. Restrictions on Experiments and Datasets are based on their project. Set the `ml_app` tag to match the project ID, and the project and its content (experiments, spans, evaluation metrics, datasets, and dataset records) will be hidden from list views, search, and direct links. For instructions, see [Restrict Access to Experiments Projects][14].
+  * Experiments and Datasets, restricted by project. Both use the `ml_app` tag key, with a project ID as the value. A restricted project and its content—its experiments, datasets, dataset records, spans, and evaluation metrics—are hidden from list views, search, and direct links. For instructions, see [Data Access Control in Agent Observability][14].
 * Annotation queues and managed prompts are not supported.
 * **OpenTelemetry**: When using [OpenTelemetry instrumentation][13], some data sent to Agent Observability may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on Agent Observability, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
 
@@ -273,4 +273,4 @@ When querying data through Datadog APIs with restrictions enabled, users without
 [11]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
 [12]: /dashboards/sharing/shared_dashboards/
 [13]: /llm_observability/instrument/otel_instrumentation/
-[14]: /llm_observability/improve/experiments/access_control/
+[14]: /llm_observability/improve/access_control/
