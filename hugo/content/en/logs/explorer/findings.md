@@ -21,11 +21,11 @@ further_reading:
 
 Findings helps you capture, organize, and reuse important context during log investigations in [Log Explorer][1].
 
-With Findings, you can save log events, visualizations, and queries while investigating with the **Add Finding** button or the **Cmd**/**Ctrl** + **S** keyboard shortcut. **Double-click** on findings to go back to them in Log Explorer, or by using the **Open in Explorer** button on the finding.
+With Findings, you can save log events, visualizations, and queries while investigating, using the **Add Finding** button or the **Cmd**/**Ctrl** + **S** keyboard shortcut. To go back to a finding in Log Explorer, **double-click** it, or click **Open in Explorer** on the finding.
 
-Use Findings to checkpoint your investigation paths with useful queries and logs to come back to. You can use this as a way to backtrack to a useful query or aggregation you identified from before, or to refer back to information from those log results or the log event. Keep track of your investigation paths in the findings panel by arranging the findings to represent your paths. Branch into new questions without losing track of earlier observations by saving them as findings along the way. 
+Use Findings to checkpoint your investigation paths with useful queries and logs to come back to. Backtrack to a query or aggregation you identified earlier, or refer back to information from those log results or the log event. Arrange the findings in the panel to represent your paths. Branch into new questions without losing track of earlier observations by saving them as findings along the way.
 
-Collect possible evidence, compare results, and build context as your investigation evolves. Add notes to findings to keep track of your observations. Select findings to use as context to [Ask Bits][2] questions, or send them to a [Notebook][3] to share with others.
+Collect possible evidence, compare results, and build context as your investigation evolves. Add notes to findings to keep track of your observations. Select findings to use as context for [Bits AI][2] questions, or send them to a [Notebook][3] to share with others.
 
 Findings persist across page reloads and browser sessions until you delete them.
 
@@ -42,9 +42,9 @@ This space is where you work with findings: arrange them, reopen them in Log Exp
 
 ## Capture a finding
 
-Add a finding from anywhere in Log Explorer by pressing **Cmd**/**Ctrl** + **S**. This will capture the query and page to return to and the absolute time range it came from. You can rename the default title to identify what you captured with the Edit button on the top right of the finding card.
+Add a finding from anywhere in Log Explorer by pressing **Cmd**/**Ctrl** + **S**. This captures the query, the page to return to, and the absolute time range it came from. To rename the default title, click {{< ui >}}Edit{{< /ui >}} in the upper right corner of the finding card.
 
-You can also add Notes to each finding at the bottom of the finding card.
+You can also add notes to each finding at the bottom of the finding card.
 
 ### Queries and visualizations
 
@@ -54,50 +54,48 @@ The finding stores your search query, time range, and [visualization][4], includ
 
 ### Individual log events
 
-Click a log event in your results to open the [log side panel][5]. Hover over the **Log Message** section and click the {{< ui >}}Add Finding{{< /ui >}} button, or press **Cmd**/**Ctrl** + **S**. This will capture thee whole log event side panel to return to later
+Click a log event in your results to open the [log side panel][5]. Hover over the **Log Message** section and click the {{< ui >}}Add Finding{{< /ui >}} button, or press **Cmd**/**Ctrl** + **S**. This captures the whole log event side panel to return to later.
 
-Capturing the log event will also capture the query you got the log side panel from. When you return to the log side panel finding, it will return you to the log side panel and the corresponding query in the background.
+Capturing the log event also captures the query that produced the log side panel. Returning to the finding reopens the log side panel, with the corresponding query in the background.
 
 ### Specific text in a log message or attributes
 
-To capture part of a log message, select the text in the **Log Message** section and press **Cmd**/**Ctrl** + **S**, or use the context menu option to {{< ui >}}Add Finding{{< /ui >}} that pops up with the selected text. 
+To capture part of a log message, select the text in the **Log Message** section and press **Cmd**/**Ctrl** + **S**. You can also select {{< ui >}}Add Finding{{< /ui >}} from the context menu that appears with the selected text.
 
 To capture attribute values, select the text and press **Cmd**/**Ctrl** + **S**.
 
-The finding for both of these will store\ the text you selected and you can return to the log log event side panel with it.
+In both cases, the finding stores the text you selected, and you can use it to return to the log event side panel.
 
 ## Return to a finding
 
-**Double-click** a finding to return to it in Log Explorer. Or hover over the finding and click the {{< ui >}}Open in Explorer{{< /ui >}} button. Log Explorer reloads the query, time range, and visualization that the finding was captured with. 
+**Double-click** a finding to return to it in Log Explorer, or hover over the finding and click {{< ui >}}Open in Explorer{{< /ui >}}. Log Explorer reloads the query, time range, and visualization that the finding was captured with.
 
-Each finding keeps its own query and time range. In the log explorer, you can change your search as often as you need, then come back to an earlier finding with a double-click without needing to rebuild the query.
+Each finding keeps its own query and time range. In Log Explorer, you can change your search as often as you need. Double-click an earlier finding to come back to it, with no query to rebuild.
 
-## Use findings as context with Bits and add them to Notebooks
+## Send findings to Bits AI and Notebooks
 
 Select one or more findings to act on them together:
 
-- To ask [Bits AI][2] about them, type your question in the selection bar and click {{< ui >}}Ask Bits{{< /ui >}}, or just click {{< ui >}}Ask Bits{{< /ui >}} in the menu below in the Findings panel after selecting the findings. Bits AI chat opens with the selected findings attached as context.
+- To ask [Bits AI][2] about them, type your question in the selection bar and click {{< ui >}}Ask Bits{{< /ui >}}. You can also click {{< ui >}}Ask Bits{{< /ui >}} in the menu at the bottom of the Findings panel. Bits AI chat opens with the selected findings attached as context.
 - To add findings to a [Notebook][3], click {{< ui >}}Open in Notebooks{{< /ui >}}. Choose a new or existing notebook. The findings you send remain in the Findings panel.
 
-Send only the findings that relate to your question. If three of the eight findings on your canvas cover the error you're asking about, select those three. Notes on findings will also be sent.
+Send only the findings that relate to your question. If three of the eight findings in your panel cover the error you're asking about, select those three. Notes on those findings are sent as well.
 
-## Organize the Findings
+## Organize your findings
 
 Hover over a finding to rename it, and drag it to move or resize it. Datadog saves the layout you build, so the organization looks the same the next time you open the panel.
 
-To reset your organization, you can use the auto-organize option. This will group findings by the query they came from. Moving, resizing, or deleting a finding resets the grouping indication in the background.
-<!-- A screenshot of the canvas controls would make the auto-organize icon findable. Add one alongside the GA video. -->
-
+To regroup findings by the query they came from, use the auto-organize option. Moving, resizing, or deleting a finding afterward clears that grouping.
+<!-- A screenshot of the panel controls would make the auto-organize option findable. Add one alongside the GA video. -->
 
 ## Delete findings
 
-To delete one finding, hover over it and use the delete button on the card, or select the finding and press the **Delete** key. To delete several at once, select them and press **Delete**. To select every finding first, press **Cmd**/**Ctrl** + **A**.
-<!-- Does a finding card have a delete control? Hovering a card shows Open in Explorer and rename only. Confirm how to delete one finding with the mouse. -->
+To delete findings, select one or more and press **Delete**, or hover over a single finding and click the delete button on its card. To select every finding, press **Cmd**/**Ctrl** + **A**.
 
 The clear all button in the Findings panel deletes all findings.
-<!-- Confirm the clear icon deletes rather than deselects, and whether it warns before emptying a full canvas. -->
+<!-- Does the clear all button warn before emptying a full panel? -->
 
-Deleting is not permanent immediately. A toast appears with an {{< ui >}}Undo{{< /ui >}} option, and **Cmd**/**Ctrl** + **Z** restores what you removed. 
+Deleting is not immediately permanent. A toast appears with an {{< ui >}}Undo{{< /ui >}} option, and **Cmd**/**Ctrl** + **Z** restores what you removed.
 <!-- How long does a deleted finding stay recoverable? Confirm whether undo history survives a page reload or ends with the browser session. -->
 
 ## Keyboard shortcuts
@@ -111,8 +109,8 @@ Deleting is not permanent immediately. A toast appears with an {{< ui >}}Undo{{<
 | Redo | <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd> |
 | Pan | <kbd>Space</kbd> + <kbd>drag</kbd> |
 | Auto-organize (by query) | <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>O</kbd> |
- 
-<!-- Undo and redo bindings are unconfirmed. Confirm these, and add any shortcuts missing from this table. -->
+
+<!-- Confirm the Undo and Redo bindings, which have not been verified against the build. -->
 
 ## Further Reading
 
