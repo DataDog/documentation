@@ -167,14 +167,18 @@ A Lambda configuration update that is still in progress is left alone and retrie
 
 ### How a rule determines coverage
 
-A rule takes one of two forms, and the form decides whether resources created later are covered:
+Every rule carries a **Keep instrumenting new resources** setting, on by default, which decides whether resources created later are covered:
 
-- **A query on resource attributes.** Datadog re-evaluates the query on every reconciliation and against forwarded change events. An EC2 instance launched later, or a Lambda function created later, is instrumented as soon as Datadog sees it match the query. `RunInstances` and `CreateFunction` events are forwarded for this reason, so a new resource is picked up within minutes rather than at the next hourly pass.
-- **A set of resources.** Selecting specific resources, or adding all eligible resources without writing a query, pins the rule to exactly the resources it matched. Resources created later are not covered. To cover more resources, update the rule.
+- **On, the rule stays dynamic.** Datadog re-evaluates the rule's query on every reconciliation and against forwarded change events. An EC2 instance launched later, or a Lambda function created later, is instrumented as soon as Datadog sees it match. `RunInstances` and `CreateFunction` events are forwarded for this reason, so a new resource is picked up within minutes rather than at the next hourly pass.
+- **Off, the rule is pinned.** On the first reconciliation after you save, Datadog records the resources the rule matches and pins the rule to exactly those. It matches that recorded set from then on, and ignores its query, so resources created later are not covered. To cover more resources, update the rule.
+
+A rule you built by selecting specific resources holds a query naming those resources, so the setting makes no practical difference to it: nothing else matches either way.
 
 ### What happens when you edit a rule
 
 Datadog re-evaluates the rule and compares the covered resources against the previous set. Resources no longer covered have instrumentation removed. Newly covered resources are instrumented. Deleting a rule removes instrumentation from everything the rule covered.
+
+Saving a pinned rule records its matched set again, against the edited query. A pinned rule therefore tracks the edit you made, rather than continuing to target what it matched under the previous query.
 
 ### Terminated, stopped, or deleted resources
 
