@@ -9336,41 +9336,46 @@ menu:
       parent: rum_setup_enable
       identifier: rum_setup_enable_manage_sessions
       weight: 301
+    - name: Manage Data Collection
+      url: real_user_monitoring/enrich_rum_data/manage_data_collection/
+      parent: rum_setup_enable
+      identifier: rum_setup_enable_manage_data_collection
+      weight: 302
     - name: Track Errors and Crashes
       url: real_user_monitoring/setup/enable_rum/track_errors/
       parent: rum_setup_enable
       identifier: rum_setup_enable_track_errors
-      weight: 302
+      weight: 303
     - name: Track Network Requests
       url: real_user_monitoring/setup/enable_rum/track_network_requests/
       parent: rum_setup_enable
       identifier: rum_setup_enable_track_network_requests
-      weight: 303
+      weight: 304
     - name: Track Application Startups
       url: real_user_monitoring/setup/enable_rum/track_application_startups/
       parent: rum_setup_enable
       identifier: rum_setup_enable_track_application_startups
-      weight: 304
+      weight: 305
     - name: Track UI Latency
       url: real_user_monitoring/setup/enable_rum/track_ui_latency/
       parent: rum_setup_enable
       identifier: rum_setup_enable_track_ui_latency
-      weight: 305
+      weight: 306
     - name: Track Navigation
       url: real_user_monitoring/setup/enable_rum/track_navigation/
       parent: rum_setup_enable
       identifier: rum_setup_enable_track_navigation
-      weight: 306
+      weight: 307
     - name: Track User Interactions
       url: real_user_monitoring/setup/enable_rum/track_user_interactions/
       parent: rum_setup_enable
       identifier: rum_setup_enable_track_user_interactions
-      weight: 307
+      weight: 308
     - name: Track Frustration Signals
       url: real_user_monitoring/setup/enable_rum/track_frustration_signals/
       parent: rum_setup_enable
       identifier: rum_setup_enable_track_frustration_signals
-      weight: 308
+      weight: 309
     - name: Collect Session Replays
       url: session_replay/
       parent: rum_setup
