@@ -112,6 +112,20 @@ Set the following environment variables to configure the library:
 `DD_ENV` (Required)
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
+: Enables Agentless mode to send test results directly to Datadog.
+
+`DD_API_KEY` (Required for Agentless mode)
+: The Datadog API key used to upload test results.
+
+`DD_SITE` (Required for Agentless mode)
+: The [Datadog site](/getting_started/site/) to upload test results to.<br/>
+**Default**: `datadoghq.com`
+
+`DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
+: The Datadog Agent URL for trace collection in the form `http://hostname:port`. This variable is only needed when test results are reported through the Datadog Agent.<br/>
+**Default**: `http://localhost:8126`
+
 Prefix your go test command with `orchestrion`:
 
 ```bash

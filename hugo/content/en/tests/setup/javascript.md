@@ -644,8 +644,20 @@ The following is a list of the most important configuration settings that can be
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
-`url`
-: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
+: Enables Agentless mode to send test results directly to Datadog.<br/>
+**Default**: `false`
+
+`DD_API_KEY` (Required for Agentless mode)
+: The Datadog API key used to upload test results.<br/>
+**Default**: `(empty)`
+
+`DD_SITE` (Required for Agentless mode)
+: The [Datadog site][25] to upload test results to.<br/>
+**Default**: `datadoghq.com`
+
+`url` (Only when using the Datadog Agent)
+: The Datadog Agent URL for trace collection in the form `http://hostname:port`. This setting is only needed when test results are reported through the Datadog Agent.<br/>
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
@@ -979,3 +991,4 @@ The test session name should be unique within a repository to help you distingui
 [22]: /tests/flaky_tests/early_flake_detection/
 [23]: /tests/flaky_tests/auto_test_retries/
 [24]: /tests/flaky_management/#confirm-fixes-for-flaky-tests
+[25]: /getting_started/site/

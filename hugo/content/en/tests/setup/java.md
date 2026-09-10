@@ -108,10 +108,7 @@ You can run the `java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` command to check
 
 ### Running your tests
 
-{{< tabs >}}
-{{% tab "Maven" %}}
-
-Set the following environment variables to configure the SDK:
+Set the following environment variables to configure the SDK and its reporting method:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
@@ -119,8 +116,30 @@ Set the following environment variables to configure the SDK:
 `DD_ENV`
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
+: Enables Agentless mode to send test results directly to Datadog.
+
+`DD_API_KEY` (Required for Agentless mode)
+: The Datadog API key used to upload test results.
+
+`DD_SITE` (Required for Agentless mode)
+: The [Datadog site](/getting_started/site/) to upload test results to.<br/>
+**Default**: `datadoghq.com`
+
+`DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
+: The Datadog Agent URL for trace collection in the form `http://hostname:port`. This variable is only needed when test results are reported through the Datadog Agent.<br/>
+**Default**: `http://localhost:8126`
+
 `DD_SERVICE`
 : Name of the service or library being tested.
+
+`DD_TEST_SESSION_NAME`
+: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
+
+Set the following environment variables for your build tool:
+
+{{< tabs >}}
+{{% tab "Maven" %}}
 
 `DD_TRACER_FOLDER` (Required)
 : Path to the folder where the downloaded Java Tracer is located.
@@ -128,24 +147,10 @@ Set the following environment variables to configure the SDK:
 `MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
 : Injects the SDK into the Maven build process.
 
-`DD_TEST_SESSION_NAME`
-: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
-
 Run your tests as you normally do (for example: `mvn test` or `mvn verify`).
 
 {{% /tab %}}
 {{% tab "Gradle" %}}
-
-Set the following environment variables to configure the SDK:
-
-`DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the Test Optimization product.
-
-`DD_ENV`
-: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
-
-`DD_SERVICE`
-: Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
 : Path to the folder where the downloaded Java Tracer is located.
@@ -158,20 +163,6 @@ Run your tests as you normally do (for example: `./gradlew clean test`).
 {{% /tab %}}
 {{% tab "SBT" %}}
 
-Set the following environment variables to configure the SDK:
-
-`DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the Test Optimization product.
-
-`DD_TEST_SESSION_NAME`
-: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
-
-`DD_ENV`
-: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
-
-`DD_SERVICE`
-: Name of the service or library being tested.
-
 `DD_TRACER_FOLDER` (Required)
 : Path to the folder where the downloaded Java Tracer is located.
 
@@ -182,20 +173,6 @@ Run your tests as you normally do (for example: `sbt test`).
 
 {{% /tab %}}
 {{% tab "Other" %}}
-
-Set the following environment variables to configure the SDK:
-
-`DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the Test Optimization product.
-
-`DD_TEST_SESSION_NAME`
-: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
-
-`DD_ENV`
-: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
-
-`DD_SERVICE`
-: Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
 : Path to the folder where the downloaded Java Tracer is located.

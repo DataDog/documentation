@@ -97,7 +97,7 @@ bundle exec ddcirb exec rspec
 
 ## Configuration settings
 
-The following is a list of the most important configuration settings that can be used with the test optimization library:
+The following environment variables configure the test optimization library and its reporting method:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
@@ -108,6 +108,23 @@ The following is a list of the most important configuration settings that can be
 **Default**: `none`
 **Example**: `ci`
 
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
+: Enables Agentless mode to send data directly to Datadog without a Datadog Agent. Requires `DD_API_KEY` to be set.
+**Default**: `false`
+**Example**: `true`
+
+`DD_API_KEY` (Required for Agentless mode)
+: The Datadog API key used to upload test results.
+**Default**: `(empty)`
+
+`DD_SITE` (Required for Agentless mode)
+: The [Datadog site][11] to upload test results to.
+**Default**: `datadoghq.com`
+
+`DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
+: The Datadog Agent URL for trace collection in the form `http://hostname:port`. This variable is only needed when test results are reported through the Datadog Agent.<br/>
+**Default**: `http://localhost:8126`
+
 `DD_SERVICE` (Optional)
 : Name of the service or library under test.
 **Default**: `$PROGRAM_NAME`<br/>
@@ -116,17 +133,6 @@ The following is a list of the most important configuration settings that can be
 `DD_TEST_SESSION_NAME` (Optional)
 : Use this to identify a group of tests (see ["Test session name"](#test-session-name-dd_test_session_name))
 **Example**: `integration-tests`
-
-The following environment variables can be used to configure tests reporting:
-
-`DD_TRACE_AGENT_URL`
-: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
-**Default**: `http://localhost:8126`
-
-`DD_CIVISIBILITY_AGENTLESS_ENABLED`
-: Enables agentless mode to send data directly to Datadog without a Datadog agent. Requires `DD_API_KEY` to be set.
-**Default**: `false`
-**Example**: `true`
 
 All other [Datadog Tracer configuration][5] options can also be used.
 
@@ -318,3 +324,4 @@ Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary betwe
 [8]: https://datadoghq.dev/datadog-ci-rb/Datadog/CI.html
 [9]: https://github.com/vcr/vcr
 [10]: https://github.com/DataDog/datadog-ci-rb
+[11]: /getting_started/site/

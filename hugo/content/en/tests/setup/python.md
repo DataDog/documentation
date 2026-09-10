@@ -380,7 +380,7 @@ For additional configurations, see [Configuration Settings][2].
 
 ## Configuration settings
 
-The following is a list of the most important configuration settings that can be used with the SDK, either in code or using environment variables:
+The following list contains key configuration settings and environment variables for the SDK and its reporting method:
 
 `DD_TEST_SESSION_NAME`
 : Identifies a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
@@ -400,13 +400,23 @@ The following is a list of the most important configuration settings that can be
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
-For more information about `service` and `env` reserved tags, see [Unified Service Tagging][2].
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
+: Enables Agentless mode to send test results directly to Datadog.<br/>
+**Default**: `false`
 
-The following environment variable can be used to configure the location of the Datadog Agent:
+`DD_API_KEY` (Required for Agentless mode)
+: The Datadog API key used to upload test results.<br/>
+**Default**: `(empty)`
 
-`DD_TRACE_AGENT_URL`
-: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
+`DD_SITE` (Required for Agentless mode)
+: The [Datadog site][4] to upload test results to.<br/>
+**Default**: `datadoghq.com`
+
+`DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
+: The Datadog Agent URL for trace collection in the form `http://hostname:port`. This variable is only needed when test results are reported through the Datadog Agent.<br/>
 **Default**: `http://localhost:8126`
+
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][2].
 
 All other [Datadog Tracer configuration][3] options can also be used.
 
@@ -491,3 +501,4 @@ Datadog recommends you use up to one process at a time to prevent affecting test
 [1]: /tracing/trace_collection/dd_libraries/python/
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /tracing/trace_collection/library_config/python/?tab=containers#configuration
+[4]: /getting_started/site/
