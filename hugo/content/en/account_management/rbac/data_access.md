@@ -61,7 +61,7 @@ You may create a maximum of 100 Restricted Datasets under the Enterprise plan, a
 
 ### Supported telemetry types {#supported-telemetry}
 
-- Agent Observability traces
+- Agent Observability traces, Experiments, and Datasets
 - APM traces
 - Cloud costs
 - Error Tracking issues
