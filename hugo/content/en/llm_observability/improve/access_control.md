@@ -58,10 +58,6 @@ Restrictions apply in the Datadog UI and in the API. Application keys are subjec
 
 The restriction takes effect as soon as it is saved. The project and its experiments, datasets, and dataset records are hidden immediately, regardless of when they were created. Spans and evaluation metrics are subject to the exceptions in [Limitations](#limitations).
 
-## Find a project's ID
-
-The Data Access Controls page and the Datasets API take a project ID as the `ml_app` value, not a project name. Take the project ID from the URL of the project in Experiments, or from the `id` field returned by the [Experiments API][4] when listing projects.
-
 ## Restrict a project through the API
 
 You can also create a restriction with the Data Access Control [Datasets API][5]. The `ml_obs` product filter takes the project ID as its `ml_app` value:
@@ -83,6 +79,10 @@ You can also create a restriction with the Data Access Control [Datasets API][5]
   }
 }
 ```
+
+## Find a project's ID
+
+The Data Access Controls page and the Datasets API take a project ID as the `ml_app` value, not a project name. Take the project ID from the URL of the project in Experiments, or from the `id` field returned by the [Experiments API][4] when listing projects.
 
 ## Grant and revoke access
 
