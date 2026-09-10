@@ -11,12 +11,10 @@ further_reading:
 site_support_id: fleet-automation-standard-features
 ---
 
-Use [Fleet Automation][3] to roll out and manage Datadog Agent configuration at scale. Apply configuration changes through guided workflows in the UI or with custom YAML files. You can configure:
+Use [Fleet Automation][3] to roll out and manage Datadog Agent configuration at scale. Apply configuration changes in the UI through guided workflows or with custom YAML files. You can also apply configuration updates [through the Fleet Automation API](#configure-agents-with-the-api). You can configure:
 
 * [Agents running on hosts](#configure-host-based-agents)
 * (In Preview) [Agents running in Kubernetes clusters managed by the Datadog Operator](#configure-the-agent-on-kubernetes)
-
-You can also apply configuration updates [through the Fleet Automation API](#configure-agents-with-the-api).
 
 ## Configure host-based Agents
 
