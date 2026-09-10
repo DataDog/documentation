@@ -4389,6 +4389,10 @@
     "description": "Resolves an On-Call Page.",
     "summary": "Resolve On-Call Page"
   },
+  "ListOnCallSchedules": {
+    "description": "Retrieve a list of On-Call schedules.",
+    "summary": "List On-Call schedules"
+  },
   "CreateOnCallSchedule": {
     "description": "Create a new On-Call schedule",
     "summary": "Create On-Call schedule",
