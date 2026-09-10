@@ -75517,6 +75517,7 @@ components:
         - $ref: '#/components/schemas/ObservabilityPipelineDatabricksZerobusDestination'
         - $ref: '#/components/schemas/ObservabilityPipelineDatadogMetricsDestination'
         - $ref: '#/components/schemas/ObservabilityPipelineOpentelemetryMetricsDestination'
+        - $ref: '#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteDestination'
         - $ref: '#/components/schemas/ObservabilityPipelineSplunkHecMetricsDestination'
     ObservabilityPipelineConfigPipelineType:
       default: logs
@@ -75616,6 +75617,7 @@ components:
         - $ref: '#/components/schemas/ObservabilityPipelineSyslogNgSource'
         - $ref: '#/components/schemas/ObservabilityPipelineWebsocketSource'
         - $ref: '#/components/schemas/ObservabilityPipelineOpentelemetrySource'
+        - $ref: '#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSource'
     ObservabilityPipelineCrowdStrikeNextGenSiemDestination:
       description: |-
         The `crowdstrike_next_gen_siem` destination forwards logs to CrowdStrike Next Gen SIEM.
@@ -78506,6 +78508,170 @@ components:
       type: string
       x-enum-varnames:
         - PARSE_XML
+    ObservabilityPipelinePrometheusRemoteWriteDestination:
+      description: |-
+        The `prometheus_remote_write` destination forwards metrics to an endpoint that supports the Prometheus Remote Write protocol.
+
+        **Supported pipeline types:** metrics
+      properties:
+        auth_strategy:
+          $ref: '#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteDestinationAuthStrategy'
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
+        default_namespace:
+          description: The default namespace to add as a prefix to metric names that do not already have one.
+          example: datadog
+          type: string
+        endpoint_url_key:
+          description: |-
+            Name of the environment variable or secret that holds the Prometheus Remote Write endpoint URL.
+            Defaults to `DESTINATION_PROMETHEUS_REMOTE_WRITE_ENDPOINT_URL` (prefixed with `DD_OP_` at runtime).
+          example: PROMETHEUS_REMOTE_WRITE_ENDPOINT_URL
+          type: string
+        id:
+          description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
+          example: prometheus-remote-write-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input` for this component.
+          example: ["metrics-filter-processor"]
+          items:
+            description: The ID of a component whose output is used as input for this destination.
+            type: string
+          type: array
+        password_key:
+          description: Name of the environment variable or secret that holds the password (used when `auth_strategy` is `basic`).
+          example: PROMETHEUS_REMOTE_WRITE_PASSWORD
+          type: string
+        tenant_id:
+          description: The tenant ID to include with outgoing requests. Used by multi-tenant Prometheus Remote Write receivers.
+          example: my-tenant
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineClientTls'
+        token_key:
+          description: Name of the environment variable or secret that holds the bearer token (used when `auth_strategy` is `bearer`).
+          example: PROMETHEUS_REMOTE_WRITE_TOKEN
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteDestinationType'
+        username_key:
+          description: Name of the environment variable or secret that holds the username (used when `auth_strategy` is `basic`).
+          example: PROMETHEUS_REMOTE_WRITE_USERNAME
+          type: string
+      required:
+        - id
+        - type
+        - inputs
+      type: object
+      x-pipeline-types: [metrics]
+    ObservabilityPipelinePrometheusRemoteWriteDestinationAuthStrategy:
+      description: The authentication strategy to use for outgoing Prometheus Remote Write requests.
+      enum:
+        - none
+        - basic
+        - bearer
+      example: basic
+      type: string
+      x-enum-varnames:
+        - NONE
+        - BASIC
+        - BEARER
+    ObservabilityPipelinePrometheusRemoteWriteDestinationType:
+      default: prometheus_remote_write
+      description: The destination type. The value should always be `prometheus_remote_write`.
+      enum:
+        - prometheus_remote_write
+      example: prometheus_remote_write
+      type: string
+      x-enum-varnames:
+        - PROMETHEUS_REMOTE_WRITE
+    ObservabilityPipelinePrometheusRemoteWriteSource:
+      description: |-
+        The `prometheus_remote_write` source ingests metrics pushed over the Prometheus Remote Write protocol.
+
+        **Supported pipeline types:** metrics
+      properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen address for the Prometheus Remote Write endpoint.
+          example: PROMETHEUS_REMOTE_WRITE_ADDRESS
+          type: string
+        auth_strategy:
+          $ref: '#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSourceAuthStrategy'
+        id:
+          description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
+          example: prometheus-remote-write-source
+          type: string
+        password_key:
+          description: Name of the environment variable or secret that holds the password (used when `auth_strategy` is `plain`).
+          example: PROMETHEUS_REMOTE_WRITE_PASSWORD
+          type: string
+        path:
+          default: "/api/v1/write"
+          description: The HTTP path on which the source listens for incoming Prometheus Remote Write requests.
+          example: "/api/v1/write"
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineMtlsServerTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSourceType'
+        username_key:
+          description: Name of the environment variable or secret that holds the username (used when `auth_strategy` is `plain`).
+          example: PROMETHEUS_REMOTE_WRITE_USERNAME
+          type: string
+        valid_tokens:
+          description: |-
+            A list of tokens that are accepted for authenticating incoming requests. When set,
+            the source rejects any request whose token does not match an enabled entry in this list.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSourceValidToken'
+          maxItems: 1000
+          minItems: 1
+          type: array
+      required:
+        - id
+        - type
+        - auth_strategy
+      type: object
+      x-pipeline-types: [metrics]
+    ObservabilityPipelinePrometheusRemoteWriteSourceAuthStrategy:
+      description: HTTP authentication method.
+      enum:
+        - none
+        - plain
+      example: plain
+      type: string
+      x-enum-varnames:
+        - NONE
+        - PLAIN
+    ObservabilityPipelinePrometheusRemoteWriteSourceType:
+      default: prometheus_remote_write
+      description: The source type. The value should always be `prometheus_remote_write`.
+      enum: [prometheus_remote_write]
+      example: prometheus_remote_write
+      type: string
+      x-enum-varnames:
+        - PROMETHEUS_REMOTE_WRITE
+    ObservabilityPipelinePrometheusRemoteWriteSourceValidToken:
+      description: An accepted token used to authenticate incoming Prometheus Remote Write requests.
+      properties:
+        enabled:
+          default: true
+          description: |-
+            Indicates whether this token is currently accepted. Disabled tokens are rejected without
+            being removed from the configuration.
+          example: true
+          type: boolean
+        path_to_token:
+          $ref: '#/components/schemas/ObservabilityPipelineHttpServerSourceValidTokenPathToToken'
+        token_key:
+          description: Name of the environment variable or secret that holds the expected token value.
+          example: PROMETHEUS_REMOTE_WRITE_TOKEN
+          pattern: "^[A-Za-z0-9_]+$"
+          type: string
+      required:
+        - token_key
+      type: object
     ObservabilityPipelineQuotaProcessor:
       description: |-
         The `quota` processor measures logging traffic for logs that match a specified filter. When the configured daily quota is met, the processor can drop or alert.
