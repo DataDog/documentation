@@ -6,7 +6,7 @@ import { CollapseToggle, type CollapseToggleLabels } from "./CollapseToggle";
 import styles from "./CodeBlock.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { generateElementId } from "@lib/componentUtils/generateElementId";
-import { i18n } from "@lib/i18n/i18n";
+import { useTranslations } from "@lib/i18n/i18n";
 
 const cl = classListFactory(styles);
 
@@ -27,6 +27,7 @@ const {
   collapsible = false,
   disable_copy = false,
 } = Astro.props;
+const translate = useTranslations(Astro.currentLocale);
 
 let highlightedCode = "";
 if (content) {
@@ -50,7 +51,7 @@ const containerClass = wrap
 // keys exist for these strings in the Hugo i18n bundle.
 const copyLabels: CopyButtonLabels = {
   "Copy code": "Copy code",
-  Copy: i18n("copy"),
+  Copy: translate("copy"),
   "Copied!": "Copied!",
 };
 

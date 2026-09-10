@@ -1,24 +1,29 @@
 ---
-import '../styles/global.css';
-import AnnouncementBanner from '@components/AnnouncementBanner/AnnouncementBanner.astro';
-import Header from '@components/Header/Header.astro';
-import Footer from '@components/Footer/Footer.astro';
-import { stripLocalePrefix, type Locale } from '@lib/i18n/locale';
-import { getBannerParams, type BannerParams } from '@lib/componentUtils/bannerData';
-import { DevBadge } from '@components/DevBadge/DevBadge';
-import Telemetry from '@components/Telemetry/Telemetry.astro';
-import { resolveSiteEnv } from '@lib/site/siteEnv';
+import "../styles/global.css";
+import AnnouncementBanner from "@components/AnnouncementBanner/AnnouncementBanner.astro";
+import Header from "@components/Header/Header.astro";
+import Footer from "@components/Footer/Footer.astro";
+import { resolveLocale, type Locale } from "@lib/i18n/locale";
+import {
+  getBannerParams,
+  type BannerParams,
+} from "@lib/componentUtils/bannerData";
+import { DevBadge } from "@components/DevBadge/DevBadge";
+import Telemetry from "@components/Telemetry/Telemetry.astro";
+import AskAi from "@components/AskAi/AskAi.astro";
+import { resolveSiteEnv } from "@lib/site/siteEnv";
+import { getAllowedRegions, DEFAULT_REGION_KEY } from "@config/regions";
 import {
   TWITTER_HANDLE,
   THEME_COLOR,
   DEFAULT_OG_IMAGE,
   getLocaleDefaults,
-} from '@lib/seo';
-import { ClientRouter } from 'astro:transitions';
-import faviconUrl from '../assets/favicon.ico?url';
-import nationalWebLightWoff2 from '../assets/fonts/NationalWeb-Light.woff2?url';
-import nationalWebSemiboldWoff2 from '../assets/fonts/NationalWeb-Semibold.woff2?url';
-import robotoMonoRegularWoff from '../assets/fonts/RobotoMono-Regular.woff?url';
+} from "@lib/seo";
+import { ClientRouter } from "astro:transitions";
+import faviconUrl from "../assets/favicon.ico?url";
+import nationalWebLightWoff2 from "../assets/fonts/NationalWeb-Light.woff2?url";
+import nationalWebSemiboldWoff2 from "../assets/fonts/NationalWeb-Semibold.woff2?url";
+import robotoMonoRegularWoff from "../assets/fonts/RobotoMono-Regular.woff?url";
 
 interface Props {
   title: string;
@@ -28,9 +33,7 @@ interface Props {
   /** Absolute URL of the social-share image. */
   image?: string;
   /** OpenGraph type; defaults to "article" to match Hugo. */
-  ogType?: 'website' | 'article';
-  /** Locale for `<html lang>` and per-locale defaults. Auto-detected from URL when omitted. */
-  lang?: Locale;
+  ogType?: "website" | "article";
   /** Per-locale URLs for `<link rel="alternate" hreflang>`. */
   hreflang?: Array<{ hreflang: string; href: string }>;
   /** Per-page banner override, mirroring Hugo's page-level `announcement_banner`. */
@@ -48,8 +51,7 @@ const {
   description: descriptionProp,
   canonical: canonicalProp,
   image: imageProp,
-  ogType = 'article',
-  lang: langProp,
+  ogType = "article",
   hreflang,
   announcementBanner,
   enableViewTransitions = false,
@@ -61,12 +63,12 @@ const {
 const bannerParams = announcementBanner ?? getBannerParams();
 const hasBanner = Object.keys(bannerParams).length > 0;
 
-const lang: Locale = langProp ?? stripLocalePrefix(Astro.url.pathname).lang;
+const lang: Locale = resolveLocale(Astro.currentLocale);
 const localeDefaults = getLocaleDefaults(lang);
 const description = descriptionProp ?? localeDefaults.metaDescription;
 const siteName = localeDefaults.siteName;
 const image = imageProp ?? DEFAULT_OG_IMAGE;
-const siteOrigin = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const siteOrigin = Astro.site?.toString().replace(/\/$/, "") ?? "";
 const canonical = canonicalProp ?? `${siteOrigin}${Astro.url.pathname}`;
 const ogUrl = canonical;
 // `data-env` on <html>, for debugging and env-conditional styling. Telemetry
@@ -77,8 +79,26 @@ const env = resolveSiteEnv();
 // Resolve any relative hreflang hrefs against the site origin.
 const hreflangResolved = hreflang?.map((h) => ({
   hreflang: h.hreflang,
-  href: h.href.startsWith('http') ? h.href : `${siteOrigin}${h.href}`,
+  href: h.href.startsWith("http") ? h.href : `${siteOrigin}${h.href}`,
 }));
+
+// Region visibility is data-driven: the allow-list handed to the inline script
+// and the CSS at the end of this file both come from `shared/regions.yaml`.
+// Adding a data center there is the only edit needed.
+const allowedRegions = getAllowedRegions();
+const regionKeysJson = JSON.stringify(allowedRegions.map((r) => r.key));
+
+// One selector pair per region. CSS cannot compare `html[data-active-region]`
+// against an element's own `data-region` value, so the pairs are generated
+// instead of hand-written.
+//
+// This has to be static CSS rather than a script that stamps matching
+// elements: a script in `<head>` runs before the body is parsed and would
+// find no elements, and one at the end of `<body>` would leave every region
+// element hidden until it ran.
+const activeRegionSelectors = allowedRegions
+  .map((r) => `html[data-active-region='${r.key}'] [data-region='${r.key}']`)
+  .join(",\n");
 ---
 
 <html lang={lang} data-env={env}>
@@ -114,36 +134,68 @@ const hreflangResolved = hreflang?.map((h) => ({
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
 
-    {hreflangResolved?.map((h) => (
-      <link rel="alternate" hreflang={h.hreflang} href={h.href} />
-    ))}
+    {
+      hreflangResolved?.map((h) => (
+        <link rel="alternate" hreflang={h.hreflang} href={h.href} />
+      ))
+    }
 
-    <link rel="preload" href={nationalWebLightWoff2} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={nationalWebSemiboldWoff2} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={robotoMonoRegularWoff} as="font" type="font/woff" crossorigin />
-    <script is:inline>
+    <link
+      rel="preload"
+      href={nationalWebLightWoff2}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={nationalWebSemiboldWoff2}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={robotoMonoRegularWoff}
+      as="font"
+      type="font/woff"
+      crossorigin
+    />
+    <script
+      is:inline
+      define:vars={{ regionKeysJson, defaultRegion: DEFAULT_REGION_KEY }}
+    >
       (function () {
         // Resolve the active Datadog region before first paint so region-scoped
         // content (elements with `data-region`) renders in its final state and
         // there's no flash of the wrong region. Precedence matches Hugo:
         // ?site= query param → `site` cookie → default `us`. Referrer-based
         // sync runs later in the regionState module.
-        var allowed = ['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov'];
+        var allowed = JSON.parse(regionKeysJson);
         var params = new URLSearchParams(window.location.search);
-        var fromQuery = params.get('site');
+        var fromQuery = params.get("site");
         var cookieMatch = document.cookie.match(/(?:^|; )site=([^;]*)/);
-        var fromCookie = cookieMatch ? decodeURIComponent(cookieMatch[1]) : null;
-        var region = 'us';
+        var fromCookie = cookieMatch
+          ? decodeURIComponent(cookieMatch[1])
+          : null;
+        var region = defaultRegion;
         if (fromQuery && allowed.indexOf(fromQuery) !== -1) {
           region = fromQuery;
         } else if (fromCookie && allowed.indexOf(fromCookie) !== -1) {
           region = fromCookie;
         }
-        document.documentElement.setAttribute('data-active-region', region);
+        document.documentElement.setAttribute("data-active-region", region);
       })();
     </script>
-    {/* Datadog RUM + Browser Logs. Its bundled script is deferred, so placing
-        it here costs nothing against first paint. */}
+    {
+      /* Per-region visibility rules, generated from `shared/regions.yaml`.
+        The hidden-by-default rule lives in global.css. */
+    }
+    <style set:html={`${activeRegionSelectors} { display: revert; }`}></style>
+    {
+      /* Datadog RUM + Browser Logs. Its bundled script is deferred, so placing
+        it here costs nothing against first paint. */
+    }
     <Telemetry />
   </head>
   <body class:list={[{ announcement: hasBanner }]}>
@@ -153,15 +205,24 @@ const hreflangResolved = hreflang?.map((h) => ({
       <slot />
     </div>
     <Footer />
-    {import.meta.env.MODE === 'development' && <DevBadge client:idle />}
+    {
+      /* Appends its own nodes to <body>, so it renders last and carries no
+        markup of its own. */
+    }
+    <AskAi />
+    {import.meta.env.MODE === "development" && <DevBadge client:idle />}
     <style>
       .base-layout__body {
-        padding-top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height));
+        padding-top: calc(
+          var(--hugo-active-banner-height) + var(--hugo-header-height)
+        );
       }
 
       @media (min-width: 992px) {
         .base-layout__body {
-          padding-top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height-desktop));
+          padding-top: calc(
+            var(--hugo-active-banner-height) + var(--hugo-header-height-desktop)
+          );
         }
       }
     </style>

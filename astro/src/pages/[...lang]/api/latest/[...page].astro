@@ -1,22 +1,22 @@
 ---
 export const prerender = true;
-import { getCollection, getEntry, render } from 'astro:content';
-import ApiLayout from '@layouts/ApiLayout.astro';
-import ApiPageHeader from '@components/ApiPageHeader/ApiPageHeader.astro';
-import { getCategoryStubsView } from '@lib/api/viewsBuilder';
-import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
-import { i18n } from '@lib/i18n/i18n';
-import { API_CONTENT_DIR, isApiContent } from '@lib/api/overviewPages';
-import type { GetStaticPaths } from 'astro';
+import { getCollection, getEntry, render } from "astro:content";
+import ApiLayout from "@layouts/ApiLayout.astro";
+import ApiPageHeader from "@components/ApiPageHeader/ApiPageHeader.astro";
+import { getCategoryStubsView } from "@lib/api/viewsBuilder";
+import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
+import { useTranslations } from "@lib/i18n/i18n";
+import { API_CONTENT_DIR, isApiContent } from "@lib/api/overviewPages";
+import type { GetStaticPaths } from "astro";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const entries = await getCollection('en', (entry) => isApiContent(entry.id));
+  const entries = await getCollection("en", (entry) => isApiContent(entry.id));
   const paths: ReturnType<GetStaticPaths> = [];
   for (const lang of LOCALES) {
     for (const entry of entries) {
       paths.push({
         params: {
-          lang: lang === 'en' ? undefined : lang,
+          lang: lang === "en" ? undefined : lang,
           // Astro's glob loader strips a trailing `/index`, so the root entry is
           // `api/latest` itself and serves the API root, where `page` is empty.
           page:
@@ -39,7 +39,7 @@ const pageSlug = Astro.params.page;
 const isRootPage = !pageSlug;
 
 const entry = await getEntry(
-  'en',
+  "en",
   isRootPage ? API_CONTENT_DIR : `${API_CONTENT_DIR}/${pageSlug}`,
 );
 if (!entry) {
@@ -49,19 +49,22 @@ if (!entry) {
 const categories = await getCategoryStubsView(lang);
 const { Content } = await render(entry);
 
-const pageTitle = isRootPage ? 'Datadog API Reference' : `${entry.data.title} - Datadog API`;
+const pageTitle = isRootPage
+  ? "Datadog API Reference"
+  : `${entry.data.title} - Datadog API`;
 
-const breadcrumbs =
-  isRootPage
-    ? [
-        { label: i18n('docs', lang), href: localizedHref(lang, '/') },
-        { label: i18n('api', lang) },
-      ]
-    : [
-        { label: i18n('docs', lang), href: localizedHref(lang, '/') },
-        { label: i18n('api', lang), href: localizedHref(lang, '/api/latest/') },
-        { label: entry.data.title },
-      ];
+const translate = useTranslations(lang);
+
+const breadcrumbs = isRootPage
+  ? [
+      { label: translate("docs"), href: localizedHref(lang, "/") },
+      { label: translate("api") },
+    ]
+  : [
+      { label: translate("docs"), href: localizedHref(lang, "/") },
+      { label: translate("api"), href: localizedHref(lang, "/api/latest/") },
+      { label: entry.data.title },
+    ];
 ---
 
 <ApiLayout
@@ -70,6 +73,6 @@ const breadcrumbs =
   categories={categories}
   breadcrumbs={breadcrumbs}
 >
-  <ApiPageHeader title={entry.data.title} lang={lang} />
+  <ApiPageHeader title={entry.data.title} />
   <Content />
 </ApiLayout>

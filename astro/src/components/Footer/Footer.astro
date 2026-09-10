@@ -14,38 +14,43 @@ import FreeTrialModal from "./FreeTrialModal.tsx";
 import SocialIcon from "./SocialIcon.astro";
 import SvgIcon from "../SvgIcon/SvgIcon.astro";
 import { getFooterData } from "@lib/componentUtils/footerMenus.ts";
-import { i18n } from "@lib/i18n/i18n";
+import { useTranslations } from "@lib/i18n/i18n";
+import { getLanguageNames, getNativeLabel } from "@lib/i18n/languageNames";
 import {
-  getTranslations,
-  getNativeLabel,
-  type LangCode,
-} from "@lib/i18n/languageNames";
-import { LOCALES, localizedHref, stripLocalePrefix } from "@lib/i18n/locale";
+  LOCALES,
+  localizedHref,
+  resolveLocale,
+  stripLocalePrefix,
+  type Locale,
+} from "@lib/i18n/locale";
 
 const cl = classListFactory(styles);
-
-const footer = getFooterData();
 
 const year = new Date().getFullYear();
 
 // Language selector — Astro's i18n routing handles the actual locale switch,
 // so each link is a real localized URL. The footer renders all supported
 // locales; the toolbar instance reuses the same Preact component.
-const { lang: footerLang, rest: footerLocaleless } = stripLocalePrefix(
-  Astro.url.pathname,
-);
-const currentLang: LangCode = footerLang;
-const translate = getTranslations(currentLang);
+const { rest: footerLocaleless } = stripLocalePrefix(Astro.url.pathname);
+// The footer menus and the localized hrefs are keyed by
+// the locales this site actually builds.
+const currentLang: Locale = resolveLocale(Astro.currentLocale);
+const translate = useTranslations(currentLang);
+const footer = getFooterData(currentLang);
+
+// Localized *language names* for the selector — distinct from `translate`,
+// which resolves i18n keys.
+const languageName = getLanguageNames(currentLang);
 const currentLangOption = {
   code: currentLang,
   primary: getNativeLabel(currentLang),
-  secondary: translate(currentLang),
-  href: localizedHref(footerLang, footerLocaleless),
+  secondary: languageName(currentLang),
+  href: localizedHref(currentLang, footerLocaleless),
 };
 const alternates = LOCALES.filter((c) => c !== currentLang).map((code) => ({
   code,
   primary: getNativeLabel(code),
-  secondary: translate(code),
+  secondary: languageName(code),
   href: localizedHref(code, footerLocaleless),
 }));
 
@@ -67,8 +72,7 @@ const caretIconHtml = inlineSvg("arrow.svg", "#ffffff", "16px");
 
 // Free-trial modal config — swap iframeSrc when we move off app.datadoghq.com/signup.
 const freeTrialHref = "https://app.datadoghq.com/signup";
-const freeTrialLabel = i18n("free_trial");
-
+const freeTrialLabel = translate("free_trial");
 ---
 
 <footer class={cl("footer")}>
@@ -88,7 +92,9 @@ const freeTrialLabel = i18n("free_trial");
           <span>{freeTrialLabel}</span>
         </a>
 
-        <p class={cl("footer__download-app")}>{i18n("download_mobile_app")}</p>
+        <p class={cl("footer__download-app")}>
+          {translate("download_mobile_app")}
+        </p>
 
         <div class={cl("footer__download-badges")}>
           <a
@@ -153,7 +159,11 @@ const freeTrialLabel = i18n("free_trial");
         {
           footer.sub.map((it, i) => (
             <span class={cl("footer__legal-item")}>
-              <a href={it.href} class={cl("footer__menu-link")} target={it.target}>
+              <a
+                href={it.href}
+                class={cl("footer__menu-link")}
+                target={it.target}
+              >
                 {it.label}
               </a>
               {i !== footer.sub.length - 1 && <span>&nbsp;|&nbsp;</span>}
@@ -184,8 +194,4 @@ const freeTrialLabel = i18n("free_trial");
   </div>
 </footer>
 
-<FreeTrialModal
-  client:idle
-  title={freeTrialLabel}
-  iframeSrc={freeTrialHref}
-/>
+<FreeTrialModal client:idle title={freeTrialLabel} iframeSrc={freeTrialHref} />

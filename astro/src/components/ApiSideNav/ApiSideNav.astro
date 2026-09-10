@@ -5,7 +5,8 @@ import { classListFactory } from "@lib/cssUtils/classListFactory";
 import SearchBar, {
   type SearchBarLabels,
 } from "@components/SearchBar/SearchBar";
-import { DEFAULT_LOCALE, localizedHref, type Locale } from "@lib/i18n/locale";
+import { localizedHref, resolveLocale } from "@lib/i18n/locale";
+import { useTranslations } from "@lib/i18n/i18n";
 import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
 import type { OverviewPage } from "@lib/api/overviewPages";
 
@@ -16,7 +17,6 @@ interface Props {
   overviewPages?: OverviewPage[];
   isOverviewSection?: boolean;
   activeOverviewPageSlug?: string;
-  lang?: Locale;
 }
 
 const {
@@ -26,11 +26,13 @@ const {
   overviewPages = [],
   isOverviewSection = false,
   activeOverviewPageSlug,
-  lang = DEFAULT_LOCALE,
 } = Astro.props;
+// `lang` is still needed for the hrefs below; `translate` covers the labels.
+const lang = resolveLocale(Astro.currentLocale);
+const translate = useTranslations(lang);
 const cl = classListFactory(styles);
 
-const overviewLabel = "Overview";
+const overviewLabel = translate("overview");
 const overviewHref = localizedHref(lang, "/api/latest/");
 
 // TODO: replace hardcoded English with i18n() once authoritative translation
@@ -45,45 +47,47 @@ const searchLabels: SearchBarLabels = {
 
 <nav class={cl("api-side-nav")}>
   <a href={localizedHref(lang, "/")} class={cl("api-side-nav__title")}>
-    Datadog Docs&nbsp;&nbsp;<span class={cl("api-side-nav__title-api")}
-      >API</span
+    {translate("datadog_docs")}&nbsp;&nbsp;<span
+      class={cl("api-side-nav__title-api")}>API</span
     >
   </a>
   <div class={cl("api-side-nav__search")}>
     <SearchBar client:load labels={searchLabels} />
   </div>
   <ul class={cl("api-side-nav__list")}>
-    {overviewPages.length > 0 && (
-      <li>
-        <a
-          href={overviewHref}
-          class:list={[
-            cl("api-side-nav__category"),
-            isOverviewSection && cl("api-side-nav__category--active"),
-          ]}
-        >
-          {overviewLabel}
-        </a>
-        {isOverviewSection && (
-          <ul class={cl("api-side-nav__operations")}>
-            {overviewPages.map((page) => (
-              <li>
-                <a
-                  href={`${overviewHref}${page.slug}/`}
-                  class:list={[
-                    cl("api-side-nav__operation"),
-                    page.slug === activeOverviewPageSlug &&
-                      cl("api-side-nav__operation--active"),
-                  ]}
-                >
-                  {page.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
-      </li>
-    )}
+    {
+      overviewPages.length > 0 && (
+        <li>
+          <a
+            href={overviewHref}
+            class:list={[
+              cl("api-side-nav__category"),
+              isOverviewSection && cl("api-side-nav__category--active"),
+            ]}
+          >
+            {overviewLabel}
+          </a>
+          {isOverviewSection && (
+            <ul class={cl("api-side-nav__operations")}>
+              {overviewPages.map((page) => (
+                <li>
+                  <a
+                    href={`${overviewHref}${page.slug}/`}
+                    class:list={[
+                      cl("api-side-nav__operation"),
+                      page.slug === activeOverviewPageSlug &&
+                        cl("api-side-nav__operation--active"),
+                    ]}
+                  >
+                    {page.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      )
+    }
     {
       categories.map((cat) => {
         const isActive = cat.slug === activeCategory?.slug;

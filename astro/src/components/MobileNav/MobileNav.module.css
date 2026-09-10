@@ -208,7 +208,8 @@
 }
 .mobile-nav__section[open]
   > .mobile-nav__section-toggle
-  .mobile-nav__caret polyline {
+  .mobile-nav__caret
+  polyline {
   stroke: var(--hugo-nav-brand-primary);
 }
 
@@ -225,8 +226,8 @@
 
 .mobile-nav__link {
   display: block;
-  padding: var(--space-sm) var(--hugo-mobile-nav-link-padding-end) var(--space-sm)
-    var(--indent);
+  padding: var(--space-sm) var(--hugo-mobile-nav-link-padding-end)
+    var(--space-sm) var(--indent);
   color: var(--hugo-nav-text);
   text-decoration: none;
   font-size: var(--font-size-base);
@@ -301,7 +302,7 @@
 
 .mobile-nav__hamburger--open::before,
 .mobile-nav__hamburger--open::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;

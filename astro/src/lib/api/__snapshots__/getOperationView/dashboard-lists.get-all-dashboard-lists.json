@@ -35,7 +35,7 @@
           "schema": [
             {
               "name": "dashboard_lists",
-              "type": "[DashboardList]",
+              "type": "[object]",
               "required": false,
               "deprecated": false,
               "readOnly": false,

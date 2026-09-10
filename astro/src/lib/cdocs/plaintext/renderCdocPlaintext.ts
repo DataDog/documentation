@@ -11,9 +11,9 @@
  * Pure when `resolvePartial` is injected, so it is unit-testable without disk
  * access; the `.md` route supplies a disk-backed resolver.
  */
-import Markdoc from '@markdoc/markdoc';
-import { buildPlaintextConfig } from './plaintextConfig';
-import { processNodes, type PartialResolver } from './filterMarkdocAst';
+import Markdoc from "@markdoc/markdoc";
+import { buildPlaintextConfig } from "./plaintextConfig";
+import { processNodes, type PartialResolver } from "./filterMarkdocAst";
 
 const { parse, format, Ast } = Markdoc;
 
@@ -40,13 +40,13 @@ export function renderCdocPlaintext(input: RenderCdocPlaintextInput): string {
     new Set(),
   );
 
-  const document = new Ast.Node('document', {}, filtered);
+  const document = new Ast.Node("document", {}, filtered);
   // `orderedListMode: 'increment'` numbers ordered lists sequentially. Authors
   // typically write every item as `1.` (letting the HTML renderer auto-number);
   // without this, `format()` would emit a flat run of `1.`s in the plaintext.
-  const formatted = format(document, { orderedListMode: 'increment' }).trim();
+  const formatted = format(document, { orderedListMode: "increment" }).trim();
 
   const withTitle = title ? `# ${title}\n\n${formatted}` : formatted;
   // Collapse blank runs left where comment-only blocks were dropped.
-  return withTitle.replace(/\n{3,}/g, '\n\n').trim() + '\n';
+  return withTitle.replace(/\n{3,}/g, "\n\n").trim() + "\n";
 }

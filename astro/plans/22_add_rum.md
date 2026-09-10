@@ -135,15 +135,12 @@ process.env.PUBLIC_CI_COMMIT_SHORT_SHA = process.env.CI_COMMIT_SHORT_SHA ?? '';
 process.env.PUBLIC_IA_SUBDOMAIN = process.env.IA_SUBDOMAIN ?? '';
 ```
 
-and read them through one module, `src/lib/telemetry/buildConstants.ts`:
-
-```ts
-export const CI_COMMIT_SHORT_SHA = import.meta.env.PUBLIC_CI_COMMIT_SHORT_SHA ?? '';
-```
+and read them at the use site as `import.meta.env.PUBLIC_CI_COMMIT_SHORT_SHA`.
 
 Declare the keys on `ImportMetaEnv` in `src/env.d.ts` so TypeScript sees them as
-`string`. Assigning to `process.env` in the config file works because Vite resolves
-the env *after* evaluating it, so nothing needs `PUBLIC_` set in CI.
+non-optional `string` — every one is assigned unconditionally above, so no consumer
+needs a `?? ''` fallback. Assigning to `process.env` in the config file works because
+Vite resolves the env *after* evaluating it, so nothing needs `PUBLIC_` set in CI.
 
 **Why not `vite.define`.** Its replacement runs at build time only. A define
 referenced from client-side code is replaced correctly by `astro build`, but under
@@ -165,9 +162,12 @@ it would work for prerendered routes but would require the CI variables to be
 present in the *running server's* environment for on-demand ones, which this repo
 cannot promise.
 
-Keep all four behind `buildConstants.ts` rather than reading `import.meta.env`
-directly at each use site, so the config-side assignments have exactly one
-counterpart to stay in agreement with.
+An earlier draft of this plan wrapped all four in a `src/lib/telemetry/buildConstants.ts`
+module, so the config-side assignments would have exactly one counterpart to stay in
+agreement with. That module was written and then removed during implementation — see
+[Divergences](#divergences-from-this-plan-as-implemented). `astro.config.mjs` is the
+documentation home for the four constants instead, since that is where the decision is
+actually enacted.
 
 `PUBLIC_CI_COMMIT_REF_NAME` reuses the existing
 [`branchRef()`](../src/lib/site/siteUrl.ts) helper rather than reading the env var
@@ -175,7 +175,8 @@ directly, so the branch string is normalized identically to the one in the deplo
 path prefix and the canonical URLs. Availability is not in question: preview builds
 already **throw** when `CI_COMMIT_REF_NAME` is unset (`siteUrl.ts:44-49`).
 
-Two constants carry a `TODO`, both in `buildConstants.ts`. `CI_COMMIT_SHORT_SHA` is
+Two constants carry a `TODO`, both at their assignment in `astro.config.mjs`.
+`CI_COMMIT_SHORT_SHA` is
 a GitLab predefined variable, present in every job, but it is load-bearing twice
 over — no `version` tag *and* broken sourcemap matching — so it is worth confirming
 rather than assuming. `IA_SUBDOMAIN` is a custom variable, and whether it is exposed
@@ -188,21 +189,26 @@ safe to ship unresolved, but it should be searchable.
 Mirrors `config-docs.js`, narrowed to the telemetry keys:
 
 ```ts
-export type TelemetryEnv = 'development' | 'preview' | 'live';
-
-interface TelemetryCredentials {
+export interface TelemetryCredentials {
   applicationId?: string;   // absent in development — RUM does not init there
   clientToken: string;
   loggingHandler: 'http' | 'console';
 }
 
-export function resolveTelemetryEnv(raw: string | undefined): TelemetryEnv;
-export function getTelemetryConfig(env: TelemetryEnv): TelemetryCredentials;
+export function getTelemetryConfig(env: SiteEnv): TelemetryCredentials;
 ```
 
-`resolveTelemetryEnv` mirrors
-[`getConfig.js`](../../hugo/assets/scripts/helpers/getConfig.js): `live` and
-`preview` pass through, anything else becomes `development`.
+The environment resolver is **not** telemetry-specific and does not live here. Astro
+already has [`resolveSiteEnv`](../src/lib/site/siteEnv.ts), which mirrors
+[`getConfig.js`](../../hugo/assets/scripts/helpers/getConfig.js) — `live` and
+`preview` pass through, anything else becomes `development` — and exports the `SiteEnv`
+type this table is keyed by. Reuse it rather than adding a parallel `TelemetryEnv`.
+
+One caveat that shapes section 6: `resolveSiteEnv()` defaults to reading
+`process.env.CI_ENVIRONMENT_NAME`, which is correct server-side and silently wrong in
+a browser bundle, where `process` does not exist and the default therefore resolves to
+`development` however the site was built. Client-side callers must pass the raw value
+explicitly.
 
 All three environments reuse Hugo's committed values verbatim: preview and live
 share Hugo's application ID and client token, and development reuses Hugo's
@@ -220,9 +226,21 @@ Two pure functions returning the SDK option objects, so the configuration itself
 assertable in tests without loading an SDK:
 
 ```ts
-buildRumInitOptions({ credentials, env, version, internalAnalyticsSubdomain })
+buildRumInitOptions({ credentials, env, version, internalAnalyticsSubdomain, origin })
 buildLogsInitOptions({ credentials, env, version, internalAnalyticsSubdomain })
 ```
+
+`origin` is passed in rather than read from `window` inside the builder, which is what
+keeps the RUM builder a pure function and therefore testable — the same reason
+`buildDeviceIdCookie` takes a hostname in section 4. Its `credentials` parameter is
+narrowed to `TelemetryCredentials & { applicationId: string }`, so the environment gate
+in section 6 has to prove the ID exists before it can call this at all.
+
+The module also exports `TELEMETRY_SERVICE` and `ASTRO_STACK` as constants. That is
+load-bearing for section 8: the sourcemap manifest imports `TELEMETRY_SERVICE` rather
+than repeating the string, so the `service` values *cannot* drift. The unit test
+asserting they agree stays, but it now guards a shared constant rather than two
+literals.
 
 A third builder covers the properties that are set *after* `init()` rather than
 passed to it, so they are assertable too:
@@ -250,9 +268,15 @@ write back with `Domain=.datadoghq.com`, one-year `Max-Age`,
 Reads before generating, so it is idempotent and safe to run alongside Hugo's copy
 on the shared domain. Live only.
 
-The TypeScript improvement over Hugo's version: `getRumDeviceId()` returns
+The TypeScript improvement over Hugo's version: `readRumDeviceId(cookie)` returns
 `string | null` for "no cookie present" instead of conflating that with a freshly
 generated ID, and the caller decides. Same behavior, clearer types.
+
+Split into four pure functions plus one impure orchestrator, so everything except the
+last line is unit-testable without a document: `generateRumDeviceId()`,
+`readRumDeviceId(cookie)`, `cookieDomain(hostname)`, `buildDeviceIdCookie(...)`, and
+`ensureRumDeviceId(document, hostname)` — the only one that touches
+`document.cookie`.
 
 ### 5. Datadog user status (`src/lib/telemetry/datadogUserStatus.ts`)
 
@@ -260,8 +284,13 @@ Duplicate of Hugo's `fetchDatadogUserStatus()`: a memoized `fetch` of
 `https://www.datadoghq.com/locate` with `credentials: 'include'`, resolving to a
 boolean and swallowing errors as `false`.
 
+Two exports beyond the function itself, both so the memoization is testable rather
+than a hidden module-level cache: `DATADOG_LOCATE_URL` and
+`resetDatadogUserStatusCache()`. The reset is a test seam and nothing in `src/` calls
+it.
+
 It lives here rather than in the Ask AI package because it is generic site
-functionality. Plan 23's package receives the value through an injected
+functionality. [23_ask_ai.md](23_ask_ai.md)'s package receives the value through an injected
 `getIsDatadogUser?: () => Promise<boolean>` callback and omits the
 `is_datadog_user` tag when the callback is absent.
 
@@ -276,8 +305,10 @@ The script:
 
 1. Imports both SDKs and assigns `window.DD_RUM = datadogRum` /
    `window.DD_LOGS = datadogLogs`, so the globals that Hugo's SDK bundles create
-   exist here too — this is the contract plan 23 depends on.
-2. Resolves env from `__CI_ENVIRONMENT_NAME__` and looks up credentials.
+   exist here too — this is the contract [23_ask_ai.md](23_ask_ai.md) depends on.
+2. Resolves env as `resolveSiteEnv(import.meta.env.PUBLIC_CI_ENV)` — the raw value
+   passed explicitly, because the helper's `process.env` default is meaningless in a
+   browser bundle — and looks up credentials.
 3. Initializes RUM when env is `preview` or `live` and an application ID exists.
    Then `startSessionReplayRecording()`, applies `buildGlobalContext(...)` — which
    sets `stack` and, on preview, `branch` — and on live, the device-ID cookie.
@@ -311,11 +342,14 @@ uses.
 
 ### 7. `data-env` on `<html>` (`BaseLayout.astro`)
 
-Add `data-env={resolveTelemetryEnv(process.env.CI_ENVIRONMENT_NAME)}` to the `<html>`
-element, mirroring Hugo. Not strictly required by this plan — the script gets env
-from a Vite define — but it matches Hugo's convention, is useful for debugging and
-env-conditional styling, and plan 23's package expects the same attribute on both
-hosts.
+Add `data-env={resolveSiteEnv()}` to the `<html>` element, mirroring Hugo. The bare
+call is correct here and only here: `BaseLayout`'s frontmatter runs on the server,
+where the helper's `process.env.CI_ENVIRONMENT_NAME` default is the right source.
+
+Not strictly required by this plan — the client script reads the `PUBLIC_` constant
+instead — but it matches Hugo's convention, is useful for debugging and
+env-conditional styling, and [23_ask_ai.md](23_ask_ai.md)'s package expects the same
+attribute on both hosts.
 
 ### 8. Sourcemaps, so RUM errors are readable
 
@@ -368,8 +402,10 @@ this is a gap, not a regression.
 
 2. **Add the CLI as a devDependency.** `@datadog/datadog-ci`, so the CI job can run
    `./node_modules/.bin/datadog-ci` after `yarn install --immutable`, exactly as
-   Hugo's job does. Hugo pins `^2.36.0`; use the current major and note the
-   divergence.
+   Hugo's job does. Hugo pins `^2.36.0`; Astro takes `^5.23.0`, the current major.
+   Three majors apart, so do not assume Hugo's exact invocation transfers unchanged —
+   check `sourcemaps upload`'s flags against the installed version when the CI job is
+   written.
 
 3. **Emit an upload manifest.** The `--minified-path-prefix` must exactly match the
    public URL prefix of the emitted assets, which this repo computes and CI does
@@ -416,7 +452,7 @@ this is a gap, not a regression.
    //     --release-version <releaseVersion>
    // with DATADOG_API_KEY from `get_secret 'dd-api-key'` and
    // allow_failure: true. Until then, RUM error stack traces for Astro stay
-   // minified. See plans/22_add_rum.md section 8.
+   // minified.
    ```
 
    Write the whole invocation out rather than a bare "wire this up": the person
@@ -472,9 +508,9 @@ new views on its own, so soft navigations are still recorded.
 | `astro/package.json` | Add `@datadog/browser-rum`, `@datadog/browser-logs`; add `@datadog/datadog-ci` as a devDependency |
 | `astro/astro.config.mjs` | Republish the four CI variables under `PUBLIC_`, add `build.sourcemap: 'hidden'` and the manifest integration |
 | `astro/src/env.d.ts` | Declare the four `ImportMetaEnv` keys and the two SDK `Window` globals |
-| `astro/src/config/telemetry.ts` | New — credentials table and env resolution |
-| `astro/src/lib/telemetry/initOptions.ts` | New — pure option builders |
-| `astro/src/lib/telemetry/buildConstants.ts` | New — the four `PUBLIC_` build-time constants |
+| `astro/src/config/telemetry.ts` | New — credentials table only; env resolution is `resolveSiteEnv` |
+| `astro/src/lib/site/siteEnv.ts` | Existing — document that client callers must pass `raw` |
+| `astro/src/lib/telemetry/initOptions.ts` | New — pure option builders, plus `TELEMETRY_SERVICE` / `ASTRO_STACK` |
 | `astro/src/lib/telemetry/deviceId.ts` | New — cookie read/write/generate |
 | `astro/src/lib/telemetry/datadogUserStatus.ts` | New — memoized `/locate` fetch |
 | `astro/src/components/Telemetry/Telemetry.astro` | New — the deferred init script |
@@ -483,35 +519,55 @@ new views on its own, so soft navigations are still recorded.
 
 ### Testing (red → green)
 
-Unit (`vitest`), written first and verified failing:
+Unit (`vitest`), written first and verified failing. Colocated with the code and named
+`*.test.ts`, following the repo convention:
 
-- `telemetry.unit.test.ts` — `resolveTelemetryEnv` maps `live`/`preview`/anything
-  else correctly; development config has no application ID and uses the `console`
-  handler; preview and live use `http`.
-- `initOptions.unit.test.ts` — RUM options match Hugo's field for field, including
+- `src/config/telemetry.test.ts` — every `SiteEnv` has an entry; development config has
+  no application ID and uses the `console` handler; preview and live share one
+  application ID and client token and use `http`. Plus one test that does not fit the
+  "pure function" description and is the most valuable in the file: it imports
+  `config-docs.js` through the `@hugo-site` alias and asserts the copied credentials
+  still match upstream, so drift fails a test instead of silently splitting the two
+  sites' data. Delete it with `config-docs.js`.
+- `src/lib/telemetry/initOptions.test.ts` — RUM options match Hugo's field for field, including
   sampling rates and experimental features; an empty `version` or
   `internalAnalyticsSubdomain` is omitted rather than passed as `''`.
   `buildGlobalContext` always sets `stack: 'astro'`, includes `branch` when the ref
   is non-empty, and omits the key entirely when it is empty (rather than emitting
   `branch: ''`, which would create a junk facet value in RUM).
-- `deviceId.unit.test.ts` — generates when no cookie exists; returns the existing
+- `src/lib/telemetry/deviceId.test.ts` — generates when no cookie exists; returns the existing
   value when one does; writes the expected `Domain`, `Max-Age`, and `SameSite`
   attributes; derives the domain from the hostname.
-- `datadogUserStatus.unit.test.ts` — memoizes across calls (one `fetch`), returns
+- `src/lib/telemetry/datadogUserStatus.test.ts` — memoizes across calls (one `fetch`), returns
   `true` only for a truthy `user_status`, resolves `false` on network failure.
-- `sourcemapManifest.unit.test.ts` — the manifest's `minifiedPathPrefix` composes
+- `src/integrations/sourcemapManifest.test.ts` — the manifest's `minifiedPathPrefix` composes
   the origin with `pathPrefix()` and ends in a single trailing slash for preview,
   live, and local builds; and its `service` and `releaseVersion` equal the
   `service` and `version` that `buildRumInitOptions` produces from the same
   inputs. That equality is the test that matters — it is the coupling that fails
   silently in production.
 
-Browser (`playwright`), covering only what unit tests cannot:
+Browser (`playwright`), in `src/components/Telemetry/tests/browser.test.ts`, covering
+only what unit tests cannot. The plan originally listed two; seven were needed, and the
+additions are each there for a reason the plan did not anticipate:
 
 - `window.DD_RUM` and `window.DD_LOGS` are defined after page load, proving the
-  bundled script executes and assigns the globals — the contract plan 23 relies on.
-- In development, RUM is **not** initialized (no session started) while Logs **is**,
-  proving the env gate.
+  bundled script executes and assigns the globals — the contract
+  [23_ask_ai.md](23_ask_ai.md) relies on.
+- In development, RUM does **not** start a session while Logs **is** initialized,
+  proving the env gate. Asserted through the absence of the `_dd_s` session cookie as
+  well as the missing session, since one can be true without the other.
+- **The build-time constants resolve, and nothing throws on load.** The
+  `vite.define` failure this plan documents in section 1 produced a script that
+  assigned both globals and then threw — so a test that only checks for the globals
+  passes. This is the test that catches it.
+- **The globals expose the API surface, not just *an* object.** `addAction`,
+  `addError`, `logger.info` — [23_ask_ai.md](23_ask_ai.md)'s package calls these, and a
+  truthy `window.DD_RUM` proves nothing about them.
+- Logs in development route to the console rather than the HTTP intake.
+- No `_dd_device_id` cookie outside live.
+- `data-env` is on `<html>`, since [23_ask_ai.md](23_ask_ai.md)'s package reads it on
+  both hosts.
 
 RUM `init()` itself is not asserted end to end, since dev never initializes it. The
 option objects are covered by unit tests instead.
@@ -533,15 +589,15 @@ is gone.
 
 | Location | TODO | Kind |
 | --- | --- | --- |
-| `src/lib/telemetry/buildConstants.ts`, `IA_SUBDOMAIN` | Whether CI exposes the variable to the Astro job is owned by `documentation-ci`. Empty means public intake. | Blocked |
-| `src/lib/telemetry/buildConstants.ts`, `CI_COMMIT_SHORT_SHA` | Confirm the variable reaches the Astro job. Empty means no `version` tag *and* broken sourcemap matching. | Blocked |
+| `astro.config.mjs`, the `PUBLIC_IA_SUBDOMAIN` assignment | Whether CI exposes the variable to the Astro job is owned by `documentation-ci`. Empty means public intake. | Blocked |
+| `astro.config.mjs`, the `PUBLIC_CI_COMMIT_SHORT_SHA` assignment | Confirm the variable reaches the Astro job. Empty means no `version` tag *and* broken sourcemap matching. | Blocked |
 | `src/integrations/sourcemapManifest.ts` | The full `datadog-ci` invocation that `documentation-ci` still needs — see section 8. | Blocked |
 | `src/lib/telemetry/initOptions.ts`, `enableExperimentalFeatures` | `'feature_flags'` is copied from Hugo but inert on Astro until [24_feature_flags.md](24_feature_flags.md) lands. Say so, or the next reader assumes flags work. | Blocked |
 | `src/config/telemetry.ts` | The credentials are copied from Hugo's `config-docs.js`, which is upstream. Astro becomes the owner at the cutover, when that file is deleted. | Dies with Hugo |
 | `src/lib/telemetry/initOptions.ts`, `buildGlobalContext` | `stack: 'astro'` is the only thing separating Astro traffic from Hugo's in a shared application, so **do not remove it** until Hugo is gone — at which point every session is Astro and the property becomes a facet with one value. | Dies with Hugo |
 | `src/lib/telemetry/deviceId.ts` | A deliberate duplicate of Hugo's cookie logic, which Hugo's own comment calls a temporary solution. Astro becomes sole owner at cutover. | Dies with Hugo |
 | `src/lib/telemetry/datadogUserStatus.ts` | Deliberate duplicate of Hugo's `fetchDatadogUserStatus()`. Cross-reference the twin so a change to one is not made blind to the other. | Dies with Hugo |
-| `src/components/Telemetry/Telemetry.astro`, the global assignments | `window.DD_RUM` / `window.DD_LOGS` are assigned *only* because plan 23's package reads globals rather than importing. Non-obvious next to two real imports, and droppable once the package is folded into Astro. | Dies with Hugo |
+| `src/components/Telemetry/Telemetry.astro`, the global assignments | `window.DD_RUM` / `window.DD_LOGS` are assigned *only* because [23_ask_ai.md](23_ask_ai.md)'s package reads globals rather than importing. Non-obvious next to two real imports, and droppable once the package is folded into Astro. | Dies with Hugo |
 
 `data-env` on `<html>` is the one deferred item I would **not** make a TODO. It is
 also Hugo-parity scaffolding, but it stays useful after the cutover for debugging
@@ -610,6 +666,44 @@ Neither of these lives in this repo, so they need somewhere else to be tracked:
   its maps openly. Deliberate: the maps go to Datadog, where the stack traces are
   actually read. If someone wants devtools parity, that is a one-word change to
   `true`.
+
+### Divergences from this plan, as implemented
+
+This plan was written before the work and is now a record of it, so the sections above
+have been corrected to match the code. Four decisions were reversed or narrowed during
+implementation, and the reasoning is worth keeping rather than overwriting:
+
+**1. `buildConstants.ts` was written, then deleted.** The plan argued for one module
+in front of the four `PUBLIC_` constants, so the config-side assignments would have a
+single counterpart. In practice it had exactly one consumer (`Telemetry.astro`), and
+its `?? ""` guards were unreachable twice over — `env.d.ts` types the keys as
+non-optional `string`, and `astro.config.mjs` assigns each unconditionally. So it was
+a third listing of four names already declared in `env.d.ts` and assigned in
+`astro.config.mjs`, and the "one counterpart" it provided was one *more* place to keep
+in sync, not one fewer. Deleted; the reads are inlined, and the ⚠️ `PUBLIC_`-vs-`define`
+warning and the two CI-ownership TODOs moved to the assignment site, which is where the
+decision is enacted. Net −49 lines.
+
+The counterargument considered and rejected: that
+[23_ask_ai.md](23_ask_ai.md)'s package would become a
+second consumer. It reads `window.DD_RUM` / `window.DD_LOGS`, not these constants.
+
+**2. No `TelemetryEnv` type or `resolveTelemetryEnv` function.** The plan specified
+both inside `src/config/telemetry.ts`. Astro already had `resolveSiteEnv` and `SiteEnv`
+in `src/lib/site/siteEnv.ts` doing exactly the `getConfig.js` mapping, so telemetry
+reuses them and the credentials table is keyed by `SiteEnv`. Environment resolution is
+not a telemetry concern and should not have been scoped as one.
+
+**3. The option builders take more than the plan's signatures.** `buildRumInitOptions`
+also takes `origin`, so `allowedTracingUrls` is injected rather than read from `window`
+inside a function the plan called pure. `TELEMETRY_SERVICE` and `ASTRO_STACK` became
+exported constants, which upgraded the section 8 "three values must agree" problem from
+a test-enforced coupling to a compile-time one for `service`.
+
+**4. Two browser tests became six.** Enumerated in the Testing section. The important
+one is *zero page errors on load*: the `vite.define` bug this plan documents produced a
+script that assigned both globals and then threw, so the two tests originally planned
+would both have passed against a completely broken telemetry layer.
 
 ## Manual verification
 
@@ -810,7 +904,7 @@ breaks:
 | No `@context.stack:astro` sessions at all | The env gate did not open (check `dataset.env`), or the credentials were not copied correctly from `config-docs.js` |
 | Sessions appear but `@context.stack:astro` matches nothing | `buildGlobalContext` was not applied, or was applied after the first events flushed — the events are Astro's but indistinguishable from Hugo's, which is the shared-application failure mode |
 | A query returns results but they look like Hugo's | The `@context.stack:astro` filter was omitted or mistyped; compare counts with and without it |
-| Sessions exist, no `branch` | The Vite define resolved empty — check `branchRef()` at build time, not runtime |
+| Sessions exist, no `branch` | `PUBLIC_CI_COMMIT_REF_NAME` resolved empty — check `branchRef()` at build time, not runtime |
 | `version` empty | `CI_COMMIT_SHORT_SHA` not exposed to the Astro CI job |
 | Events in the browser's network tab but nothing in Datadog | Wrong intake — check whether `IA_SUBDOMAIN` was set unexpectedly |
 | Duplicate sessions | The `<Telemetry />` component was included more than once, or a soft navigation re-ran init |

@@ -1,61 +1,68 @@
-@import './tokens/index.css';
+@import "./tokens/index.css";
 
 /* Font faces */
 @font-face {
-  font-family: 'NationalWeb';
-  src: url('../assets/fonts/NationalWeb-Light.woff2') format('woff2'),
-       url('../assets/fonts/NationalWeb-Light.woff') format('woff');
+  font-family: "NationalWeb";
+  src:
+    url("../assets/fonts/NationalWeb-Light.woff2") format("woff2"),
+    url("../assets/fonts/NationalWeb-Light.woff") format("woff");
   font-weight: 200;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'NationalWeb';
-  src: url('../assets/fonts/NationalWeb-Book.woff2') format('woff2'),
-       url('../assets/fonts/NationalWeb-Book.woff') format('woff');
+  font-family: "NationalWeb";
+  src:
+    url("../assets/fonts/NationalWeb-Book.woff2") format("woff2"),
+    url("../assets/fonts/NationalWeb-Book.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'NationalWeb';
-  src: url('../assets/fonts/NationalWeb-Medium.woff2') format('woff2'),
-       url('../assets/fonts/NationalWeb-Medium.woff') format('woff');
+  font-family: "NationalWeb";
+  src:
+    url("../assets/fonts/NationalWeb-Medium.woff2") format("woff2"),
+    url("../assets/fonts/NationalWeb-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'NationalWeb';
-  src: url('../assets/fonts/NationalWeb-Semibold.woff2') format('woff2'),
-       url('../assets/fonts/NationalWeb-Semibold.woff') format('woff');
+  font-family: "NationalWeb";
+  src:
+    url("../assets/fonts/NationalWeb-Semibold.woff2") format("woff2"),
+    url("../assets/fonts/NationalWeb-Semibold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'NationalWeb';
-  src: url('../assets/fonts/NationalWeb-Bold.woff2') format('woff2'),
-       url('../assets/fonts/NationalWeb-Bold.woff') format('woff');
+  font-family: "NationalWeb";
+  src:
+    url("../assets/fonts/NationalWeb-Bold.woff2") format("woff2"),
+    url("../assets/fonts/NationalWeb-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'RobotoMono-Regular';
-  src: url('../assets/fonts/RobotoMono-Regular.woff') format('woff');
+  font-family: "RobotoMono-Regular";
+  src: url("../assets/fonts/RobotoMono-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 /* Disallow old-style numbers everywhere */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   font-variant-numeric: lining-nums;
 }
 
@@ -76,12 +83,17 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: 'lnum' 1, 'frac' 0, 'liga' 1, 'clig' 1;
+  font-feature-settings:
+    "lnum" 1,
+    "frac" 0,
+    "liga" 1,
+    "clig" 1;
   font-variant-numeric: lining-nums;
   word-wrap: break-word;
 }
 
-strong, b {
+strong,
+b {
   font-weight: 600;
 }
 
@@ -112,7 +124,12 @@ pre code {
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 600;
 }
 
@@ -163,7 +180,7 @@ h6 {
 }
 
 .prose ul li::before {
-  content: '\2013';
+  content: "\2013";
   position: absolute;
   left: -1.111rem;
 }
@@ -252,18 +269,14 @@ tbody code {
 /* Region-scoped content — every element with `data-region="<key>"` renders
    at build time (good for SEO) but is hidden unless `<html data-active-region>`
    matches its key. The value on `<html>` is set by a pre-body inline script
-   before first paint so there's no flash of the wrong region. */
-[data-region] { display: none; }
-html[data-active-region='us'] [data-region='us'],
-html[data-active-region='us3'] [data-region='us3'],
-html[data-active-region='us5'] [data-region='us5'],
-html[data-active-region='eu'] [data-region='eu'],
-html[data-active-region='ap1'] [data-region='ap1'],
-html[data-active-region='ap2'] [data-region='ap2'],
-html[data-active-region='gov'] [data-region='gov'] {
-  display: revert;
-}
+   before first paint so there's no flash of the wrong region.
 
+   The matching `display: revert` rules are generated per region from
+   `shared/regions.yaml` in BaseLayout.astro, so a new data center needs no
+   edit here. Only the hidden-by-default rule is static. */
+[data-region] {
+  display: none;
+}
 
 @view-transition {
   navigation: auto;

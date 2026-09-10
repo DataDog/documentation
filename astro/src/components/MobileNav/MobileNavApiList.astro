@@ -15,7 +15,7 @@ import type { ApiCategory } from "@lib/api/schemas/views";
 import type { OverviewPage } from "@lib/api/overviewPages";
 import styles from "./MobileNav.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
-import { localizedHref, type Locale } from "@lib/i18n/locale";
+import { localizedHref, resolveLocale } from "@lib/i18n/locale";
 import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
 import SvgIcon from "@components/SvgIcon/SvgIcon.astro";
 
@@ -26,7 +26,6 @@ interface Props {
   overviewPages?: OverviewPage[];
   isOverviewSection?: boolean;
   activeOverviewPageSlug?: string;
-  lang: Locale;
 }
 
 const {
@@ -36,8 +35,8 @@ const {
   overviewPages = [],
   isOverviewSection = false,
   activeOverviewPageSlug,
-  lang,
 } = Astro.props;
+const lang = resolveLocale(Astro.currentLocale);
 const cl = classListFactory(styles);
 
 const overviewHref = localizedHref(lang, "/api/latest/");
@@ -141,9 +140,11 @@ const isApiRootPage = isOverviewSection && !activeOverviewPageSlug;
   }
 </ul>
 
-{/* Scroll the current page (operation link or active category summary, both
+{
+  /* Scroll the current page (operation link or active category summary, both
     marked aria-current) near the top of the panel, just below the sticky
-    header, so it's visible the moment the overlay opens. */}
+    header, so it's visible the moment the overlay opens. */
+}
 <ScrollActiveIntoView
   containerSelector="#mobile-nav"
   headerSelector=".mobile-nav__header"

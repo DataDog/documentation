@@ -107,10 +107,6 @@ function missingRequiredFiles(dir: string): string[] {
   );
 }
 
-function hasRequiredFiles(dir: string): boolean {
-  return missingRequiredFiles(dir).length === 0;
-}
-
 /**
  * Resolves `@websites-modules`. Prefers a candidate with every required file,
  * but a directory that exists and has *most* of them is still far more useful
@@ -149,7 +145,9 @@ export function resolveWebsitesModulesPath(astroConfigUrl: string): string {
     }
   }
 
-  const hugoGoModPath = fileURLToPath(new URL("../hugo/go.mod", astroConfigUrl));
+  const hugoGoModPath = fileURLToPath(
+    new URL("../hugo/go.mod", astroConfigUrl),
+  );
   const candidates = candidateHugoModuleCacheDirs(hugoGoModPath);
   if (candidates.length === 0) {
     attempted.push("Hugo module cache: not found");

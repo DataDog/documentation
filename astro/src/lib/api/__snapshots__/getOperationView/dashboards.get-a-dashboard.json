@@ -141,7 +141,7 @@
             },
             {
               "name": "tabs",
-              "type": "[DashboardTab]",
+              "type": "[object]",
               "required": false,
               "deprecated": false,
               "readOnly": false,
@@ -183,7 +183,7 @@
             },
             {
               "name": "template_variable_presets",
-              "type": "[DashboardTemplateVariablePreset]",
+              "type": "[object]",
               "required": false,
               "deprecated": false,
               "readOnly": false,
@@ -199,7 +199,7 @@
                 },
                 {
                   "name": "template_variables",
-                  "type": "[DashboardTemplateVariablePresetValue]",
+                  "type": "[object]",
                   "required": false,
                   "deprecated": false,
                   "readOnly": false,
@@ -235,7 +235,7 @@
             },
             {
               "name": "template_variables",
-              "type": "[DashboardTemplateVariable]",
+              "type": "[object]",
               "required": false,
               "deprecated": false,
               "readOnly": false,
@@ -309,7 +309,7 @@
             },
             {
               "name": "widgets",
-              "type": "[Widget]",
+              "type": "[object]",
               "required": true,
               "deprecated": false,
               "readOnly": false,
@@ -324,7 +324,7 @@
                   "description": "[Definition of the widget](https://docs.datadoghq.com/dashboards/widgets/).",
                   "unionOptions": [
                     {
-                      "label": "Option 1",
+                      "label": "<type=alert_value>",
                       "description": "Alert values are query values showing the current value of the metric in any monitor defined on your system.",
                       "fields": [
                         {
@@ -416,12 +416,12 @@
                       ]
                     },
                     {
-                      "label": "Option 2",
+                      "label": "<type=timeseries>",
                       "description": "The timeseries visualization allows you to display the evolution of one or more metrics, log events, or Indexed Spans over time.",
                       "fields": [
                         {
                           "name": "custom_links",
-                          "type": "[WidgetCustomLink]",
+                          "type": "[object]",
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
@@ -471,7 +471,7 @@
                         },
                         {
                           "name": "events",
-                          "type": "[WidgetEvent]",
+                          "type": "[object]",
                           "required": false,
                           "deprecated": true,
                           "readOnly": false,
@@ -497,7 +497,7 @@
                         },
                         {
                           "name": "legend_columns",
-                          "type": "[TimeseriesWidgetLegendColumn]",
+                          "type": "[string]",
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
@@ -526,7 +526,7 @@
                         },
                         {
                           "name": "markers",
-                          "type": "[WidgetMarker]",
+                          "type": "[object]",
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
@@ -568,7 +568,7 @@
                         },
                         {
                           "name": "requests",
-                          "type": "[TimeseriesWidgetRequest]",
+                          "type": "[object]",
                           "required": true,
                           "deprecated": false,
                           "readOnly": false,
@@ -618,7 +618,7 @@
                                 },
                                 {
                                   "name": "group_by",
-                                  "type": "[LogQueryDefinitionGroupBy]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -690,7 +690,7 @@
                                 },
                                 {
                                   "name": "multi_compute",
-                                  "type": "[LogsQueryCompute]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -786,7 +786,7 @@
                                 },
                                 {
                                   "name": "group_by",
-                                  "type": "[LogQueryDefinitionGroupBy]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -858,7 +858,7 @@
                                 },
                                 {
                                   "name": "multi_compute",
-                                  "type": "[LogsQueryCompute]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -968,7 +968,7 @@
                                 },
                                 {
                                   "name": "group_by",
-                                  "type": "[LogQueryDefinitionGroupBy]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -1040,7 +1040,7 @@
                                 },
                                 {
                                   "name": "multi_compute",
-                                  "type": "[LogsQueryCompute]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -1094,7 +1094,7 @@
                             },
                             {
                               "name": "formulas",
-                              "type": "[WidgetFormula]",
+                              "type": "[object]",
                               "required": false,
                               "deprecated": false,
                               "readOnly": false,
@@ -1158,7 +1158,7 @@
                                 },
                                 {
                                   "name": "conditional_formats",
-                                  "type": "[WidgetConditionalFormat]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -1322,7 +1322,7 @@
                                       "description": "Number format unit.",
                                       "unionOptions": [
                                         {
-                                          "label": "Option 1",
+                                          "label": "<type=canonical_unit>",
                                           "description": "Canonical unit.",
                                           "fields": [
                                             {
@@ -1355,7 +1355,7 @@
                                           ]
                                         },
                                         {
-                                          "label": "Option 2",
+                                          "label": "<type=custom_unit_label>",
                                           "description": "Custom unit.",
                                           "fields": [
                                             {
@@ -1484,7 +1484,7 @@
                                 },
                                 {
                                   "name": "group_by",
-                                  "type": "[LogQueryDefinitionGroupBy]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -1556,7 +1556,7 @@
                                 },
                                 {
                                   "name": "multi_compute",
-                                  "type": "[LogsQueryCompute]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -1610,7 +1610,7 @@
                             },
                             {
                               "name": "metadata",
-                              "type": "[TimeseriesWidgetExpressionAlias]",
+                              "type": "[object]",
                               "required": false,
                               "deprecated": false,
                               "readOnly": false,
@@ -1678,7 +1678,7 @@
                                 },
                                 {
                                   "name": "group_by",
-                                  "type": "[LogQueryDefinitionGroupBy]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -1750,7 +1750,7 @@
                                 },
                                 {
                                   "name": "multi_compute",
-                                  "type": "[LogsQueryCompute]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -1896,7 +1896,7 @@
                                 },
                                 {
                                   "name": "group_by",
-                                  "type": "[LogQueryDefinitionGroupBy]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -1968,7 +1968,7 @@
                                 },
                                 {
                                   "name": "multi_compute",
-                                  "type": "[LogsQueryCompute]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -2030,233 +2030,193 @@
                             },
                             {
                               "name": "queries",
-                              "type": "[FormulaAndFunctionQueryDefinition]",
+                              "type": "[<oneOf>]",
                               "required": false,
                               "deprecated": false,
                               "readOnly": false,
                               "description": "List of queries that can be returned directly or used in formulas.",
-                              "children": [
+                              "unionOptions": [
                                 {
-                                  "name": "",
-                                  "type": "oneOf",
-                                  "required": false,
-                                  "deprecated": false,
-                                  "readOnly": false,
-                                  "description": "A formula and function query.",
-                                  "unionOptions": [
+                                  "label": "<data_source=metrics>",
+                                  "description": "A formula and functions metrics query.",
+                                  "fields": [
                                     {
-                                      "label": "Option 1",
-                                      "description": "A formula and functions metrics query.",
-                                      "fields": [
+                                      "name": "aggregator",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "The aggregation methods available for metrics queries.",
+                                      "enumValues": [
+                                        "avg",
+                                        "min",
+                                        "max",
+                                        "sum",
+                                        "last",
+                                        "area",
+                                        "l2norm",
+                                        "percentile"
+                                      ]
+                                    },
+                                    {
+                                      "name": "cross_org_uuids",
+                                      "type": "[string]",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "The source organization UUID for cross organization queries. Feature in Private Beta."
+                                    },
+                                    {
+                                      "name": "data_source",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Data source for metrics queries.",
+                                      "enumValues": [
+                                        "metrics"
+                                      ]
+                                    },
+                                    {
+                                      "name": "name",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Name of the query for use in formulas."
+                                    },
+                                    {
+                                      "name": "query",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Metrics query definition."
+                                    },
+                                    {
+                                      "name": "semantic_mode",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Semantic mode for metrics queries. This determines how metrics from different sources are combined or displayed.",
+                                      "enumValues": [
+                                        "combined",
+                                        "native"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "Object 2",
+                                  "description": "A formula and functions events query.",
+                                  "fields": [
+                                    {
+                                      "name": "compute",
+                                      "type": "object",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Compute options.",
+                                      "children": [
                                         {
-                                          "name": "aggregator",
+                                          "name": "aggregation",
                                           "type": "string",
-                                          "required": false,
+                                          "required": true,
                                           "deprecated": false,
                                           "readOnly": false,
-                                          "description": "The aggregation methods available for metrics queries.",
+                                          "description": "Aggregation methods for event platform queries.",
                                           "enumValues": [
-                                            "avg",
+                                            "count",
+                                            "cardinality",
+                                            "median",
+                                            "pc75",
+                                            "pc90",
+                                            "pc95",
+                                            "pc98",
+                                            "pc99",
+                                            "sum",
                                             "min",
                                             "max",
-                                            "sum",
-                                            "last",
-                                            "area",
-                                            "l2norm",
-                                            "percentile"
+                                            "avg"
                                           ]
                                         },
                                         {
-                                          "name": "cross_org_uuids",
-                                          "type": "[string]",
+                                          "name": "interval",
+                                          "type": "integer (int64)",
                                           "required": false,
                                           "deprecated": false,
                                           "readOnly": false,
-                                          "description": "The source organization UUID for cross organization queries. Feature in Private Beta."
+                                          "description": "A time interval in milliseconds."
                                         },
                                         {
-                                          "name": "data_source",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Data source for metrics queries.",
-                                          "enumValues": [
-                                            "metrics"
-                                          ]
-                                        },
-                                        {
-                                          "name": "name",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Name of the query for use in formulas."
-                                        },
-                                        {
-                                          "name": "query",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Metrics query definition."
-                                        },
-                                        {
-                                          "name": "semantic_mode",
+                                          "name": "metric",
                                           "type": "string",
                                           "required": false,
                                           "deprecated": false,
                                           "readOnly": false,
-                                          "description": "Semantic mode for metrics queries. This determines how metrics from different sources are combined or displayed.",
-                                          "enumValues": [
-                                            "combined",
-                                            "native"
-                                          ]
+                                          "description": "Measurable attribute to compute."
                                         }
                                       ]
                                     },
                                     {
-                                      "label": "Option 2",
-                                      "description": "A formula and functions events query.",
-                                      "fields": [
+                                      "name": "cross_org_uuids",
+                                      "type": "[string]",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "The source organization UUID for cross organization queries. Feature in Private Beta."
+                                    },
+                                    {
+                                      "name": "data_source",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Data source for event platform-based queries.",
+                                      "enumValues": [
+                                        "logs",
+                                        "spans",
+                                        "network",
+                                        "rum",
+                                        "security_signals",
+                                        "profiles",
+                                        "audit",
+                                        "events",
+                                        "ci_tests",
+                                        "ci_pipelines",
+                                        "incident_analytics",
+                                        "product_analytics",
+                                        "on_call_events"
+                                      ]
+                                    },
+                                    {
+                                      "name": "group_by",
+                                      "type": "oneOf",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Group by configuration for a formula and functions events query. Accepts either a list of facet objects or a flat object that specifies a list of facet fields.",
+                                      "unionOptions": [
                                         {
-                                          "name": "compute",
-                                          "type": "object",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Compute options.",
-                                          "children": [
+                                          "label": "Object 1",
+                                          "description": "List of objects used to group by.",
+                                          "fields": [
                                             {
-                                              "name": "aggregation",
-                                              "type": "string",
-                                              "required": true,
-                                              "deprecated": false,
-                                              "readOnly": false,
-                                              "description": "Aggregation methods for event platform queries.",
-                                              "enumValues": [
-                                                "count",
-                                                "cardinality",
-                                                "median",
-                                                "pc75",
-                                                "pc90",
-                                                "pc95",
-                                                "pc98",
-                                                "pc99",
-                                                "sum",
-                                                "min",
-                                                "max",
-                                                "avg"
-                                              ]
-                                            },
-                                            {
-                                              "name": "interval",
-                                              "type": "integer (int64)",
+                                              "name": "",
+                                              "type": "[object]",
                                               "required": false,
                                               "deprecated": false,
                                               "readOnly": false,
-                                              "description": "A time interval in milliseconds."
-                                            },
-                                            {
-                                              "name": "metric",
-                                              "type": "string",
-                                              "required": false,
-                                              "deprecated": false,
-                                              "readOnly": false,
-                                              "description": "Measurable attribute to compute."
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "name": "cross_org_uuids",
-                                          "type": "[string]",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "The source organization UUID for cross organization queries. Feature in Private Beta."
-                                        },
-                                        {
-                                          "name": "data_source",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Data source for event platform-based queries.",
-                                          "enumValues": [
-                                            "logs",
-                                            "spans",
-                                            "network",
-                                            "rum",
-                                            "security_signals",
-                                            "profiles",
-                                            "audit",
-                                            "events",
-                                            "ci_tests",
-                                            "ci_pipelines",
-                                            "incident_analytics",
-                                            "product_analytics",
-                                            "on_call_events"
-                                          ]
-                                        },
-                                        {
-                                          "name": "group_by",
-                                          "type": "oneOf",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Group by configuration for a formula and functions events query. Accepts either a list of facet objects or a flat object that specifies a list of facet fields.",
-                                          "unionOptions": [
-                                            {
-                                              "label": "Option 1",
                                               "description": "List of objects used to group by.",
-                                              "fields": [
+                                              "children": [
                                                 {
-                                                  "name": "",
-                                                  "type": "[FormulaAndFunctionEventQueryGroupBy]",
-                                                  "required": false,
-                                                  "deprecated": false,
-                                                  "readOnly": false,
-                                                  "description": "List of objects used to group by.",
-                                                  "children": [
-                                                    {
-                                                      "name": "facet",
-                                                      "type": "string",
-                                                      "required": true,
-                                                      "deprecated": false,
-                                                      "readOnly": false,
-                                                      "description": "Event facet."
-                                                    },
-                                                    {
-                                                      "name": "limit",
-                                                      "type": "integer (int64)",
-                                                      "required": false,
-                                                      "deprecated": false,
-                                                      "readOnly": false,
-                                                      "description": "Number of groups to return."
-                                                    },
-                                                    {
-                                                      "name": "sort",
-                                                      "type": "object",
-                                                      "required": false,
-                                                      "deprecated": false,
-                                                      "readOnly": false,
-                                                      "description": "Options for sorting group by results."
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "label": "Option 2",
-                                              "description": "Flat group by configuration using multiple event facet fields.",
-                                              "fields": [
-                                                {
-                                                  "name": "fields",
-                                                  "type": "[string]",
+                                                  "name": "facet",
+                                                  "type": "string",
                                                   "required": true,
                                                   "deprecated": false,
                                                   "readOnly": false,
-                                                  "description": "List of event facets to group by."
+                                                  "description": "Event facet."
                                                 },
                                                 {
                                                   "name": "limit",
@@ -2272,700 +2232,730 @@
                                                   "required": false,
                                                   "deprecated": false,
                                                   "readOnly": false,
-                                                  "description": "Options for sorting group by results.",
-                                                  "children": [
-                                                    {
-                                                      "name": "aggregation",
-                                                      "type": "string",
-                                                      "required": true,
-                                                      "deprecated": false,
-                                                      "readOnly": false,
-                                                      "description": "Aggregation methods for event platform queries.",
-                                                      "enumValues": [
-                                                        "count",
-                                                        "cardinality",
-                                                        "median",
-                                                        "pc75",
-                                                        "pc90",
-                                                        "pc95",
-                                                        "pc98",
-                                                        "pc99",
-                                                        "sum",
-                                                        "min",
-                                                        "max",
-                                                        "avg"
-                                                      ]
-                                                    },
-                                                    {
-                                                      "name": "metric",
-                                                      "type": "string",
-                                                      "required": false,
-                                                      "deprecated": false,
-                                                      "readOnly": false,
-                                                      "description": "Metric used for sorting group by results."
-                                                    },
-                                                    {
-                                                      "name": "order",
-                                                      "type": "string",
-                                                      "required": false,
-                                                      "deprecated": false,
-                                                      "readOnly": false,
-                                                      "description": "Direction of sort.",
-                                                      "enumValues": [
-                                                        "asc",
-                                                        "desc"
-                                                      ],
-                                                      "defaultValue": "desc"
-                                                    }
-                                                  ]
+                                                  "description": "Options for sorting group by results."
                                                 }
                                               ]
                                             }
                                           ]
                                         },
                                         {
-                                          "name": "indexes",
-                                          "type": "[string]",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once."
-                                        },
-                                        {
-                                          "name": "name",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Name of the query for use in formulas."
-                                        },
-                                        {
-                                          "name": "search",
-                                          "type": "object",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Search options.",
-                                          "children": [
+                                          "label": "Object 2",
+                                          "description": "Flat group by configuration using multiple event facet fields.",
+                                          "fields": [
                                             {
-                                              "name": "query",
-                                              "type": "string",
+                                              "name": "fields",
+                                              "type": "[string]",
                                               "required": true,
                                               "deprecated": false,
                                               "readOnly": false,
-                                              "description": "Events search string."
+                                              "description": "List of event facets to group by."
+                                            },
+                                            {
+                                              "name": "limit",
+                                              "type": "integer (int64)",
+                                              "required": false,
+                                              "deprecated": false,
+                                              "readOnly": false,
+                                              "description": "Number of groups to return."
+                                            },
+                                            {
+                                              "name": "sort",
+                                              "type": "object",
+                                              "required": false,
+                                              "deprecated": false,
+                                              "readOnly": false,
+                                              "description": "Options for sorting group by results.",
+                                              "children": [
+                                                {
+                                                  "name": "aggregation",
+                                                  "type": "string",
+                                                  "required": true,
+                                                  "deprecated": false,
+                                                  "readOnly": false,
+                                                  "description": "Aggregation methods for event platform queries.",
+                                                  "enumValues": [
+                                                    "count",
+                                                    "cardinality",
+                                                    "median",
+                                                    "pc75",
+                                                    "pc90",
+                                                    "pc95",
+                                                    "pc98",
+                                                    "pc99",
+                                                    "sum",
+                                                    "min",
+                                                    "max",
+                                                    "avg"
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "metric",
+                                                  "type": "string",
+                                                  "required": false,
+                                                  "deprecated": false,
+                                                  "readOnly": false,
+                                                  "description": "Metric used for sorting group by results."
+                                                },
+                                                {
+                                                  "name": "order",
+                                                  "type": "string",
+                                                  "required": false,
+                                                  "deprecated": false,
+                                                  "readOnly": false,
+                                                  "description": "Direction of sort.",
+                                                  "enumValues": [
+                                                    "asc",
+                                                    "desc"
+                                                  ],
+                                                  "defaultValue": "desc"
+                                                }
+                                              ]
                                             }
                                           ]
-                                        },
-                                        {
-                                          "name": "storage",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Option for storage location. Feature in Private Beta."
                                         }
                                       ]
                                     },
                                     {
-                                      "label": "Option 3",
-                                      "description": "Process query using formulas and functions.",
-                                      "fields": [
-                                        {
-                                          "name": "aggregator",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "The aggregation methods available for metrics queries.",
-                                          "enumValues": [
-                                            "avg",
-                                            "min",
-                                            "max",
-                                            "sum",
-                                            "last",
-                                            "area",
-                                            "l2norm",
-                                            "percentile"
-                                          ]
-                                        },
-                                        {
-                                          "name": "cross_org_uuids",
-                                          "type": "[string]",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "The source organization UUID for cross organization queries. Feature in Private Beta."
-                                        },
-                                        {
-                                          "name": "data_source",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Data sources that rely on the process backend.",
-                                          "enumValues": [
-                                            "process",
-                                            "container"
-                                          ]
-                                        },
-                                        {
-                                          "name": "is_normalized_cpu",
-                                          "type": "boolean",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Whether to normalize the CPU percentages."
-                                        },
-                                        {
-                                          "name": "limit",
-                                          "type": "integer (int64)",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Number of hits to return."
-                                        },
-                                        {
-                                          "name": "metric",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Process metric name."
-                                        },
-                                        {
-                                          "name": "name",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Name of query for use in formulas."
-                                        },
-                                        {
-                                          "name": "sort",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Direction of sort.",
-                                          "enumValues": [
-                                            "asc",
-                                            "desc"
-                                          ],
-                                          "defaultValue": "desc"
-                                        },
-                                        {
-                                          "name": "tag_filters",
-                                          "type": "[string]",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "An array of tags to filter by."
-                                        },
-                                        {
-                                          "name": "text_filter",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Text to use as filter."
-                                        }
-                                      ]
+                                      "name": "indexes",
+                                      "type": "[string]",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once."
                                     },
                                     {
-                                      "label": "Option 4",
-                                      "description": "A formula and functions APM dependency stats query.",
-                                      "fields": [
-                                        {
-                                          "name": "cross_org_uuids",
-                                          "type": "[string]",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "The source organization UUID for cross organization queries. Feature in Private Beta."
-                                        },
-                                        {
-                                          "name": "data_source",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Data source for APM dependency stats queries.",
-                                          "enumValues": [
-                                            "apm_dependency_stats"
-                                          ]
-                                        },
-                                        {
-                                          "name": "env",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "APM environment."
-                                        },
-                                        {
-                                          "name": "is_upstream",
-                                          "type": "boolean",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Determines whether stats for upstream or downstream dependencies should be queried."
-                                        },
-                                        {
-                                          "name": "name",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Name of query to use in formulas."
-                                        },
-                                        {
-                                          "name": "operation_name",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Name of operation on service."
-                                        },
-                                        {
-                                          "name": "primary_tag_name",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "The name of the second primary tag used within APM; required when `primary_tag_value` is specified. See https://docs.datadoghq.com/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog."
-                                        },
-                                        {
-                                          "name": "primary_tag_value",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Filter APM data by the second primary tag. `primary_tag_name` must also be specified."
-                                        },
-                                        {
-                                          "name": "resource_name",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "APM resource."
-                                        },
-                                        {
-                                          "name": "service",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "APM service."
-                                        },
-                                        {
-                                          "name": "stat",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "APM statistic.",
-                                          "enumValues": [
-                                            "avg_duration",
-                                            "avg_root_duration",
-                                            "avg_spans_per_trace",
-                                            "error_rate",
-                                            "pct_exec_time",
-                                            "pct_of_traces",
-                                            "total_traces_count"
-                                          ]
-                                        }
-                                      ]
+                                      "name": "name",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Name of the query for use in formulas."
                                     },
                                     {
-                                      "label": "Option 5",
-                                      "description": "APM resource stats query using formulas and functions.",
-                                      "fields": [
-                                        {
-                                          "name": "cross_org_uuids",
-                                          "type": "[string]",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "The source organization UUID for cross organization queries. Feature in Private Beta."
-                                        },
-                                        {
-                                          "name": "data_source",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Data source for APM resource stats queries.",
-                                          "enumValues": [
-                                            "apm_resource_stats"
-                                          ]
-                                        },
-                                        {
-                                          "name": "env",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "APM environment."
-                                        },
-                                        {
-                                          "name": "group_by",
-                                          "type": "[string]",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Array of fields to group results by."
-                                        },
-                                        {
-                                          "name": "name",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Name of this query to use in formulas."
-                                        },
-                                        {
-                                          "name": "operation_name",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Name of operation on service."
-                                        },
-                                        {
-                                          "name": "primary_tag_name",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Name of the second primary tag used within APM. Required when `primary_tag_value` is specified. See https://docs.datadoghq.com/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog"
-                                        },
-                                        {
-                                          "name": "primary_tag_value",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Value of the second primary tag by which to filter APM data. `primary_tag_name` must also be specified."
-                                        },
-                                        {
-                                          "name": "resource_name",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "APM resource name."
-                                        },
-                                        {
-                                          "name": "service",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "APM service name."
-                                        },
-                                        {
-                                          "name": "stat",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "APM resource stat name.",
-                                          "enumValues": [
-                                            "errors",
-                                            "error_rate",
-                                            "hits",
-                                            "latency_avg",
-                                            "latency_distribution",
-                                            "latency_max",
-                                            "latency_p50",
-                                            "latency_p75",
-                                            "latency_p90",
-                                            "latency_p95",
-                                            "latency_p99"
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "label": "Option 6",
-                                      "description": "A formula and functions APM metrics query.",
-                                      "fields": [
-                                        {
-                                          "name": "data_source",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Data source for APM metrics queries.",
-                                          "enumValues": [
-                                            "apm_metrics"
-                                          ]
-                                        },
-                                        {
-                                          "name": "group_by",
-                                          "type": "[string]",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Optional fields to group the query results by."
-                                        },
-                                        {
-                                          "name": "name",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Name of this query to use in formulas."
-                                        },
-                                        {
-                                          "name": "operation_mode",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Optional operation mode to aggregate across operation names."
-                                        },
-                                        {
-                                          "name": "operation_name",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Name of operation on service. If not provided, the primary operation name is used."
-                                        },
-                                        {
-                                          "name": "peer_tags",
-                                          "type": "[string]",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Tags to query for a specific downstream entity (peer.service, peer.db_instance, peer.s3, peer.s3.bucket, etc.)."
-                                        },
-                                        {
-                                          "name": "query_filter",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Additional filters for the query using metrics query syntax (e.g., env, primary_tag)."
-                                        },
-                                        {
-                                          "name": "resource_hash",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "The hash of a specific resource to filter by."
-                                        },
-                                        {
-                                          "name": "resource_name",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "The full name of a specific resource to filter by."
-                                        },
-                                        {
-                                          "name": "service",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "APM service name."
-                                        },
-                                        {
-                                          "name": "span_kind",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Describes the relationship between the span, its parents, and its children in a trace.",
-                                          "enumValues": [
-                                            "consumer",
-                                            "server",
-                                            "client",
-                                            "producer",
-                                            "internal"
-                                          ]
-                                        },
-                                        {
-                                          "name": "stat",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "APM metric stat name.",
-                                          "enumValues": [
-                                            "errors",
-                                            "error_rate",
-                                            "errors_per_second",
-                                            "latency_avg",
-                                            "latency_max",
-                                            "latency_p50",
-                                            "latency_p75",
-                                            "latency_p90",
-                                            "latency_p95",
-                                            "latency_p99",
-                                            "latency_p999",
-                                            "latency_distribution",
-                                            "hits",
-                                            "hits_per_second",
-                                            "total_time",
-                                            "apdex"
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "label": "Option 7",
-                                      "description": "A formula and functions metrics query.",
-                                      "fields": [
-                                        {
-                                          "name": "additional_query_filters",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Additional filters applied to the SLO query."
-                                        },
-                                        {
-                                          "name": "cross_org_uuids",
-                                          "type": "[string]",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "The source organization UUID for cross organization queries. Feature in Private Beta."
-                                        },
-                                        {
-                                          "name": "data_source",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Data source for SLO measures queries.",
-                                          "enumValues": [
-                                            "slo"
-                                          ]
-                                        },
-                                        {
-                                          "name": "group_mode",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Group mode to query measures.",
-                                          "enumValues": [
-                                            "overall",
-                                            "components"
-                                          ]
-                                        },
-                                        {
-                                          "name": "measure",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "SLO measures queries.",
-                                          "enumValues": [
-                                            "good_events",
-                                            "bad_events",
-                                            "good_minutes",
-                                            "bad_minutes",
-                                            "slo_status",
-                                            "error_budget_remaining",
-                                            "burn_rate",
-                                            "error_budget_burndown"
-                                          ]
-                                        },
-                                        {
-                                          "name": "name",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Name of the query for use in formulas."
-                                        },
-                                        {
-                                          "name": "slo_id",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "ID of an SLO to query measures."
-                                        },
-                                        {
-                                          "name": "slo_query_type",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Name of the query for use in formulas.",
-                                          "enumValues": [
-                                            "metric",
-                                            "monitor",
-                                            "time_slice"
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "label": "Option 8",
-                                      "description": "A formula and functions Cloud Cost query.",
-                                      "fields": [
-                                        {
-                                          "name": "aggregator",
-                                          "type": "string",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Aggregator used for the request.",
-                                          "enumValues": [
-                                            "avg",
-                                            "last",
-                                            "max",
-                                            "min",
-                                            "sum",
-                                            "percentile"
-                                          ]
-                                        },
-                                        {
-                                          "name": "cross_org_uuids",
-                                          "type": "[string]",
-                                          "required": false,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "The source organization UUID for cross organization queries. Feature in Private Beta."
-                                        },
-                                        {
-                                          "name": "data_source",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Data source for Cloud Cost queries.",
-                                          "enumValues": [
-                                            "cloud_cost"
-                                          ]
-                                        },
-                                        {
-                                          "name": "name",
-                                          "type": "string",
-                                          "required": true,
-                                          "deprecated": false,
-                                          "readOnly": false,
-                                          "description": "Name of the query for use in formulas."
-                                        },
+                                      "name": "search",
+                                      "type": "object",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Search options.",
+                                      "children": [
                                         {
                                           "name": "query",
                                           "type": "string",
                                           "required": true,
                                           "deprecated": false,
                                           "readOnly": false,
-                                          "description": "Query for Cloud Cost data."
+                                          "description": "Events search string."
                                         }
                                       ]
+                                    },
+                                    {
+                                      "name": "storage",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Option for storage location. Feature in Private Beta."
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "Object 3",
+                                  "description": "Process query using formulas and functions.",
+                                  "fields": [
+                                    {
+                                      "name": "aggregator",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "The aggregation methods available for metrics queries.",
+                                      "enumValues": [
+                                        "avg",
+                                        "min",
+                                        "max",
+                                        "sum",
+                                        "last",
+                                        "area",
+                                        "l2norm",
+                                        "percentile"
+                                      ]
+                                    },
+                                    {
+                                      "name": "cross_org_uuids",
+                                      "type": "[string]",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "The source organization UUID for cross organization queries. Feature in Private Beta."
+                                    },
+                                    {
+                                      "name": "data_source",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Data sources that rely on the process backend.",
+                                      "enumValues": [
+                                        "process",
+                                        "container"
+                                      ]
+                                    },
+                                    {
+                                      "name": "is_normalized_cpu",
+                                      "type": "boolean",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Whether to normalize the CPU percentages."
+                                    },
+                                    {
+                                      "name": "limit",
+                                      "type": "integer (int64)",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Number of hits to return."
+                                    },
+                                    {
+                                      "name": "metric",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Process metric name."
+                                    },
+                                    {
+                                      "name": "name",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Name of query for use in formulas."
+                                    },
+                                    {
+                                      "name": "sort",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Direction of sort.",
+                                      "enumValues": [
+                                        "asc",
+                                        "desc"
+                                      ],
+                                      "defaultValue": "desc"
+                                    },
+                                    {
+                                      "name": "tag_filters",
+                                      "type": "[string]",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "An array of tags to filter by."
+                                    },
+                                    {
+                                      "name": "text_filter",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Text to use as filter."
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "<data_source=apm_dependency_stats>",
+                                  "description": "A formula and functions APM dependency stats query.",
+                                  "fields": [
+                                    {
+                                      "name": "cross_org_uuids",
+                                      "type": "[string]",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "The source organization UUID for cross organization queries. Feature in Private Beta."
+                                    },
+                                    {
+                                      "name": "data_source",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Data source for APM dependency stats queries.",
+                                      "enumValues": [
+                                        "apm_dependency_stats"
+                                      ]
+                                    },
+                                    {
+                                      "name": "env",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "APM environment."
+                                    },
+                                    {
+                                      "name": "is_upstream",
+                                      "type": "boolean",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Determines whether stats for upstream or downstream dependencies should be queried."
+                                    },
+                                    {
+                                      "name": "name",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Name of query to use in formulas."
+                                    },
+                                    {
+                                      "name": "operation_name",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Name of operation on service."
+                                    },
+                                    {
+                                      "name": "primary_tag_name",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "The name of the second primary tag used within APM; required when `primary_tag_value` is specified. See https://docs.datadoghq.com/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog."
+                                    },
+                                    {
+                                      "name": "primary_tag_value",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Filter APM data by the second primary tag. `primary_tag_name` must also be specified."
+                                    },
+                                    {
+                                      "name": "resource_name",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "APM resource."
+                                    },
+                                    {
+                                      "name": "service",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "APM service."
+                                    },
+                                    {
+                                      "name": "stat",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "APM statistic.",
+                                      "enumValues": [
+                                        "avg_duration",
+                                        "avg_root_duration",
+                                        "avg_spans_per_trace",
+                                        "error_rate",
+                                        "pct_exec_time",
+                                        "pct_of_traces",
+                                        "total_traces_count"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "<data_source=apm_resource_stats>",
+                                  "description": "APM resource stats query using formulas and functions.",
+                                  "fields": [
+                                    {
+                                      "name": "cross_org_uuids",
+                                      "type": "[string]",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "The source organization UUID for cross organization queries. Feature in Private Beta."
+                                    },
+                                    {
+                                      "name": "data_source",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Data source for APM resource stats queries.",
+                                      "enumValues": [
+                                        "apm_resource_stats"
+                                      ]
+                                    },
+                                    {
+                                      "name": "env",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "APM environment."
+                                    },
+                                    {
+                                      "name": "group_by",
+                                      "type": "[string]",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Array of fields to group results by."
+                                    },
+                                    {
+                                      "name": "name",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Name of this query to use in formulas."
+                                    },
+                                    {
+                                      "name": "operation_name",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Name of operation on service."
+                                    },
+                                    {
+                                      "name": "primary_tag_name",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Name of the second primary tag used within APM. Required when `primary_tag_value` is specified. See https://docs.datadoghq.com/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog"
+                                    },
+                                    {
+                                      "name": "primary_tag_value",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Value of the second primary tag by which to filter APM data. `primary_tag_name` must also be specified."
+                                    },
+                                    {
+                                      "name": "resource_name",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "APM resource name."
+                                    },
+                                    {
+                                      "name": "service",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "APM service name."
+                                    },
+                                    {
+                                      "name": "stat",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "APM resource stat name.",
+                                      "enumValues": [
+                                        "errors",
+                                        "error_rate",
+                                        "hits",
+                                        "latency_avg",
+                                        "latency_distribution",
+                                        "latency_max",
+                                        "latency_p50",
+                                        "latency_p75",
+                                        "latency_p90",
+                                        "latency_p95",
+                                        "latency_p99"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "<data_source=apm_metrics>",
+                                  "description": "A formula and functions APM metrics query.",
+                                  "fields": [
+                                    {
+                                      "name": "data_source",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Data source for APM metrics queries.",
+                                      "enumValues": [
+                                        "apm_metrics"
+                                      ]
+                                    },
+                                    {
+                                      "name": "group_by",
+                                      "type": "[string]",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Optional fields to group the query results by."
+                                    },
+                                    {
+                                      "name": "name",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Name of this query to use in formulas."
+                                    },
+                                    {
+                                      "name": "operation_mode",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Optional operation mode to aggregate across operation names."
+                                    },
+                                    {
+                                      "name": "operation_name",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Name of operation on service. If not provided, the primary operation name is used."
+                                    },
+                                    {
+                                      "name": "peer_tags",
+                                      "type": "[string]",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Tags to query for a specific downstream entity (peer.service, peer.db_instance, peer.s3, peer.s3.bucket, etc.)."
+                                    },
+                                    {
+                                      "name": "query_filter",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Additional filters for the query using metrics query syntax (e.g., env, primary_tag)."
+                                    },
+                                    {
+                                      "name": "resource_hash",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "The hash of a specific resource to filter by."
+                                    },
+                                    {
+                                      "name": "resource_name",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "The full name of a specific resource to filter by."
+                                    },
+                                    {
+                                      "name": "service",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "APM service name."
+                                    },
+                                    {
+                                      "name": "span_kind",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Describes the relationship between the span, its parents, and its children in a trace.",
+                                      "enumValues": [
+                                        "consumer",
+                                        "server",
+                                        "client",
+                                        "producer",
+                                        "internal"
+                                      ]
+                                    },
+                                    {
+                                      "name": "stat",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "APM metric stat name.",
+                                      "enumValues": [
+                                        "errors",
+                                        "error_rate",
+                                        "errors_per_second",
+                                        "latency_avg",
+                                        "latency_max",
+                                        "latency_p50",
+                                        "latency_p75",
+                                        "latency_p90",
+                                        "latency_p95",
+                                        "latency_p99",
+                                        "latency_p999",
+                                        "latency_distribution",
+                                        "hits",
+                                        "hits_per_second",
+                                        "total_time",
+                                        "apdex"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "<data_source=slo>",
+                                  "description": "A formula and functions metrics query.",
+                                  "fields": [
+                                    {
+                                      "name": "additional_query_filters",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Additional filters applied to the SLO query."
+                                    },
+                                    {
+                                      "name": "cross_org_uuids",
+                                      "type": "[string]",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "The source organization UUID for cross organization queries. Feature in Private Beta."
+                                    },
+                                    {
+                                      "name": "data_source",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Data source for SLO measures queries.",
+                                      "enumValues": [
+                                        "slo"
+                                      ]
+                                    },
+                                    {
+                                      "name": "group_mode",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Group mode to query measures.",
+                                      "enumValues": [
+                                        "overall",
+                                        "components"
+                                      ]
+                                    },
+                                    {
+                                      "name": "measure",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "SLO measures queries.",
+                                      "enumValues": [
+                                        "good_events",
+                                        "bad_events",
+                                        "good_minutes",
+                                        "bad_minutes",
+                                        "slo_status",
+                                        "error_budget_remaining",
+                                        "burn_rate",
+                                        "error_budget_burndown"
+                                      ]
+                                    },
+                                    {
+                                      "name": "name",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Name of the query for use in formulas."
+                                    },
+                                    {
+                                      "name": "slo_id",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "ID of an SLO to query measures."
+                                    },
+                                    {
+                                      "name": "slo_query_type",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Name of the query for use in formulas.",
+                                      "enumValues": [
+                                        "metric",
+                                        "monitor",
+                                        "time_slice"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "label": "<data_source=cloud_cost>",
+                                  "description": "A formula and functions Cloud Cost query.",
+                                  "fields": [
+                                    {
+                                      "name": "aggregator",
+                                      "type": "string",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Aggregator used for the request.",
+                                      "enumValues": [
+                                        "avg",
+                                        "last",
+                                        "max",
+                                        "min",
+                                        "sum",
+                                        "percentile"
+                                      ]
+                                    },
+                                    {
+                                      "name": "cross_org_uuids",
+                                      "type": "[string]",
+                                      "required": false,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "The source organization UUID for cross organization queries. Feature in Private Beta."
+                                    },
+                                    {
+                                      "name": "data_source",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Data source for Cloud Cost queries.",
+                                      "enumValues": [
+                                        "cloud_cost"
+                                      ]
+                                    },
+                                    {
+                                      "name": "name",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Name of the query for use in formulas."
+                                    },
+                                    {
+                                      "name": "query",
+                                      "type": "string",
+                                      "required": true,
+                                      "deprecated": false,
+                                      "readOnly": false,
+                                      "description": "Query for Cloud Cost data."
                                     }
                                   ]
                                 }
@@ -3028,7 +3018,7 @@
                                 },
                                 {
                                   "name": "group_by",
-                                  "type": "[LogQueryDefinitionGroupBy]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -3100,7 +3090,7 @@
                                 },
                                 {
                                   "name": "multi_compute",
-                                  "type": "[LogsQueryCompute]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -3196,7 +3186,7 @@
                                 },
                                 {
                                   "name": "group_by",
-                                  "type": "[LogQueryDefinitionGroupBy]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -3268,7 +3258,7 @@
                                 },
                                 {
                                   "name": "multi_compute",
-                                  "type": "[LogsQueryCompute]",
+                                  "type": "[object]",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -3456,7 +3446,7 @@
                           "description": "Time setting for the widget.",
                           "unionOptions": [
                             {
-                              "label": "Option 1",
+                              "label": "Object 1",
                               "description": "Wrapper for live span",
                               "fields": [
                                 {
@@ -3497,7 +3487,7 @@
                               ]
                             },
                             {
-                              "label": "Option 2",
+                              "label": "<type=live>",
                               "description": "Used for arbitrary live span times, such as 17 minutes or 6 hours.",
                               "fields": [
                                 {
@@ -3546,7 +3536,7 @@
                               ]
                             },
                             {
-                              "label": "Option 3",
+                              "label": "<type=fixed>",
                               "description": "Used for fixed span times, such as 'March 1 to March 7'.",
                               "fields": [
                                 {
@@ -3685,7 +3675,7 @@
                       ]
                     },
                     {
-                      "label": "Option 3",
+                      "label": "<type=group>",
                       "description": "The group widget allows you to keep similar graphs together on your dashboard. Each group has a custom header, can hold one to many graphs, and is collapsible.",
                       "fields": [
                         {
@@ -3759,7 +3749,7 @@
                         },
                         {
                           "name": "widgets",
-                          "type": "[Widget]",
+                          "type": "[object]",
                           "required": true,
                           "deprecated": false,
                           "readOnly": false,

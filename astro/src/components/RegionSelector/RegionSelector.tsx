@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "preact/hooks";
-import type { JSX } from "preact";
+import type { JSX, TargetedEvent } from "preact";
 import styles from "./RegionSelector.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { Select } from "@components/Select/Select";
@@ -56,7 +56,7 @@ export function RegionSelector({
     return unsubscribe;
   }, []);
 
-  const handleChange = (e: JSX.TargetedEvent<HTMLSelectElement>) => {
+  const handleChange = (e: TargetedEvent<HTMLSelectElement>) => {
     setActiveRegion(e.currentTarget.value);
   };
 

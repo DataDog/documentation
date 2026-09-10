@@ -21,8 +21,11 @@ export function isLangCode(value: unknown): value is LangCode {
 /**
  * For a given current language, return a function that maps target-language
  * codes to their localized name. Falls back to English, then to the code itself.
+ *
+ * Named for what it returns — language *names*, not general translations. For
+ * translating arbitrary i18n keys, use `useTranslations` in `./i18n`.
  */
-export function getTranslations(currentLang: LangCode) {
+export function getLanguageNames(currentLang: LangCode) {
   const dict = table[currentLang] ?? table.en;
   return (targetLang: string): string => dict[targetLang] ?? targetLang;
 }

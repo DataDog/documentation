@@ -1,12 +1,20 @@
 ---
-if (__CI_ENV__ === 'live') return new Response(null, { status: 404 });
+if (__CI_ENV__ === "live") return new Response(null, { status: 404 });
 
-import BaseLayout from '@layouts/BaseLayout.astro';
-import ApiMethodBadge from '@components/ApiMethodBadge/ApiMethodBadge.astro';
+import BaseLayout from "@layouts/BaseLayout.astro";
+import ApiMethodBadge from "@components/ApiMethodBadge/ApiMethodBadge.astro";
 
-const title = 'ApiMethodBadge';
+const title = "ApiMethodBadge";
 
-const methods = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options'] as const;
+const methods = [
+  "get",
+  "post",
+  "put",
+  "patch",
+  "delete",
+  "head",
+  "options",
+] as const;
 ---
 
 <BaseLayout title={title}>
@@ -15,17 +23,28 @@ const methods = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options'] as 
     <div class="prose">
       <h1>ApiMethodBadge</h1>
 
-      <p>A small label showing the HTTP method of an API endpoint. The badge color is determined by the method.</p>
+      <p>
+        A small label showing the HTTP method of an API endpoint. The badge
+        color is determined by the method.
+      </p>
 
       <h2>Properties</h2>
       <table>
         <thead>
-          <tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr>
+          <tr
+            ><th>Property</th><th>Type</th><th>Default</th><th>Description</th
+            ></tr
+          >
         </thead>
         <tbody>
           <tr>
             <td><code>method</code></td>
-            <td><code>'get' | 'post' | 'put' | 'patch' | 'delete' | 'head' | 'options'</code></td>
+            <td
+              ><code
+                >'get' | 'post' | 'put' | 'patch' | 'delete' | 'head' |
+                'options'</code
+              ></td
+            >
             <td>&mdash;</td>
             <td>HTTP method displayed on the badge</td>
           </tr>
@@ -33,12 +52,14 @@ const methods = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options'] as 
       </table>
 
       <h2>Examples</h2>
-      {methods.map((method) => (
-        <section>
-          <h3>{method.toUpperCase()}</h3>
-          <ApiMethodBadge method={method} />
-        </section>
-      ))}
+      {
+        methods.map((method) => (
+          <section>
+            <h3>{method.toUpperCase()}</h3>
+            <ApiMethodBadge method={method} />
+          </section>
+        ))
+      }
     </div>
   </div>
 </BaseLayout>

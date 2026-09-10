@@ -21,17 +21,17 @@ interface ImportMetaEnv {
  * Optional because they do not exist until that deferred script runs.
  */
 interface Window {
-  DD_RUM?: typeof import('@datadog/browser-rum').datadogRum;
-  DD_LOGS?: typeof import('@datadog/browser-logs').datadogLogs;
+  DD_RUM?: typeof import("@datadog/browser-rum").datadogRum;
+  DD_LOGS?: typeof import("@datadog/browser-logs").datadogLogs;
 }
 
-declare module '*.astro' {
-  import type { AstroComponentFactory } from 'astro/runtime/server';
+declare module "*.astro" {
+  import type { AstroComponentFactory } from "astro/runtime/server";
   const Component: AstroComponentFactory;
   export default Component;
 }
 
-declare module '*?raw' {
+declare module "*?raw" {
   const content: string;
   export default content;
 }

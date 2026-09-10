@@ -11,27 +11,27 @@
 // carries it.
 export const prerender = false;
 
-import type { APIRoute } from 'astro';
-import { getEntry } from 'astro:content';
-import { resolveCdocRender } from '@lib/cdocs/resolveCdocRender';
-import { COOKIE_NAME } from '@lib/cdocs/cookiePrefs';
-import { renderCdocPlaintext } from '@lib/cdocs/plaintext/renderCdocPlaintext';
-import { makeBundledPartialResolver } from '@lib/cdocs/plaintext/loadPartial';
-import { renderMdocWithTwins } from '@lib/plaintext/twinTransform';
+import type { APIRoute } from "astro";
+import { getEntry } from "astro:content";
+import { resolveCdocRender } from "@lib/cdocs/resolveCdocRender";
+import { COOKIE_NAME } from "@lib/cdocs/cookiePrefs";
+import { renderCdocPlaintext } from "@lib/cdocs/plaintext/renderCdocPlaintext";
+import { makeBundledPartialResolver } from "@lib/cdocs/plaintext/loadPartial";
+import { renderMdocWithTwins } from "@lib/plaintext/twinTransform";
 
 const resolvePartial = makeBundledPartialResolver();
 
-export const GET: APIRoute = async ({ params, url, cookies }) => {
+export const GET: APIRoute = async ({ params, url, cookies, site }) => {
   // `[...slug]` yields the path without the `.md` extension, which is exactly an
   // `en` entry id.
-  const slug = params.slug ?? '';
+  const slug = params.slug ?? "";
 
   // dd_e2e/* are test pages; hidden in the live build like the HTML route.
-  if (slug.startsWith('dd_e2e/') && __CI_ENV__ === 'live') {
+  if (slug.startsWith("dd_e2e/") && __CI_ENV__ === "live") {
     return new Response(null, { status: 404 });
   }
 
-  const entry = await getEntry('en', slug);
+  const entry = await getEntry("en", slug);
   if (!entry) {
     return new Response(null, { status: 404 });
   }
@@ -39,7 +39,7 @@ export const GET: APIRoute = async ({ params, url, cookies }) => {
   // The glob content loader exposes the raw `.mdoc` body (frontmatter stripped),
   // so no disk read — or path-traversal guard — is needed: `getEntry` already
   // scoped the lookup to the collection, and this works in the bundled server.
-  const body = entry.body ?? '';
+  const body = entry.body ?? "";
   const { title, content_filters: contentFilters } = entry.data;
 
   let text: string;
@@ -61,10 +61,10 @@ export const GET: APIRoute = async ({ params, url, cookies }) => {
   } else {
     // Non-cdoc: render component plaintext twins and prepend the title as an H1
     // to mirror the HTML page.
-    text = `# ${title}\n\n${renderMdocWithTwins(body)}`;
+    text = `# ${title}\n\n${renderMdocWithTwins(body, { site })}`;
   }
 
   return new Response(text, {
-    headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
+    headers: { "Content-Type": "text/markdown; charset=utf-8" },
   });
 };

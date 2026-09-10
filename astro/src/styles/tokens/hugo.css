@@ -9,15 +9,15 @@
      and is opted back in by `body.announcement` (set in BaseLayout). Without
      this, a suppressed banner leaves a 30px gap at the top of every page. */
   --hugo-active-banner-height: 0px;
-  --hugo-header-height: 60px;                  /* <992px */
-  --hugo-header-height-desktop: 130px;         /* ≥992px, resting */
+  --hugo-header-height: 60px; /* <992px */
+  --hugo-header-height-desktop: 130px; /* ≥992px, resting */
   --hugo-header-height-desktop-scrolled: 65px; /* ≥992px, after .main-nav-scrolled */
-  --hugo-breakpoint-desktop: 992px;            /* header height changes here */
-  --hugo-breakpoint-tablet: 768px;             /* footer padding changes here */
-  --hugo-footer-padding-y: 1rem;               /* <768px (pt-3 pb-3) */
-  --hugo-footer-padding-y-tablet: 9rem;        /* ≥768px (pt-md-36 pb-md-36) */
-  --hugo-footer-padding-top-desktop: 3rem;     /* ≥992px (pt-lg-5) */
-  --hugo-footer-padding-bottom-desktop: 4rem;  /* ≥992px (pb-lg-16) */
+  --hugo-breakpoint-desktop: 992px; /* header height changes here */
+  --hugo-breakpoint-tablet: 768px; /* footer padding changes here */
+  --hugo-footer-padding-y: 1rem; /* <768px (pt-3 pb-3) */
+  --hugo-footer-padding-y-tablet: 9rem; /* ≥768px (pt-md-36 pb-md-36) */
+  --hugo-footer-padding-top-desktop: 3rem; /* ≥992px (pt-lg-5) */
+  --hugo-footer-padding-bottom-desktop: 4rem; /* ≥992px (pb-lg-16) */
   --hugo-header-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.07);
   --hugo-header-z: 200;
   --hugo-banner-z: 1080;
@@ -65,18 +65,18 @@
 
   /* Hugo mobile-nav overlay */
   --hugo-mobile-nav-bg-opacity: 0.5;
-  --hugo-mobile-nav-bg-color: #000000;          /* backdrop scrim, faded in via opacity */
+  --hugo-mobile-nav-bg-color: #000000; /* backdrop scrim, faded in via opacity */
   --hugo-mobile-nav-width-md: 400px;
-  --hugo-mobile-nav-offscreen-x: -500px;        /* panel's resting right offset (off-screen) */
+  --hugo-mobile-nav-offscreen-x: -500px; /* panel's resting right offset (off-screen) */
   --hugo-mobile-nav-quicknav-icon-size: 21px;
-  --hugo-mobile-nav-indent-base: 22px;          /* accordion indent at depth 0 */
-  --hugo-mobile-nav-indent-step: 16px;          /* added per nesting level */
-  --hugo-mobile-nav-caret-offset: 22px;         /* caret inset from the section's right edge */
+  --hugo-mobile-nav-indent-base: 22px; /* accordion indent at depth 0 */
+  --hugo-mobile-nav-indent-step: 16px; /* added per nesting level */
+  --hugo-mobile-nav-caret-offset: 22px; /* caret inset from the section's right edge */
   --hugo-mobile-nav-link-padding-end: 14px;
   --hugo-mobile-nav-hamburger-padding-x: 10px;
   --hugo-mobile-nav-hamburger-bar-width: 22px;
   --hugo-mobile-nav-hamburger-bar-radius: 1px;
-  --hugo-mobile-nav-hamburger-bar-gap: 4px;     /* gap between the three closed bars */
+  --hugo-mobile-nav-hamburger-bar-gap: 4px; /* gap between the three closed bars */
   --hugo-mobile-nav-hamburger-bar-offset-x: -8.5px; /* centers the rotated open-state bars */
   --hugo-mobile-nav-search-submit-padding-start: 22px;
 
@@ -145,5 +145,3 @@
 body.announcement {
   --hugo-active-banner-height: var(--hugo-banner-height);
 }
-
-

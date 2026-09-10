@@ -15,8 +15,18 @@ const raw = iconHtml(name) || undefined;
 const style = size ? `width:${size};height:${size}` : undefined;
 ---
 
-{raw ? (
-  <span class={`${cl('nav-icon')} ${className ?? ''}`} style={style} set:html={raw} />
-) : (
-  <span class={`${cl('nav-icon', 'nav-icon--missing')} ${className ?? ''}`} style={style} aria-hidden="true" />
-)}
+{
+  raw ? (
+    <span
+      class={`${cl("nav-icon")} ${className ?? ""}`}
+      style={style}
+      set:html={raw}
+    />
+  ) : (
+    <span
+      class={`${cl("nav-icon", "nav-icon--missing")} ${className ?? ""}`}
+      style={style}
+      aria-hidden="true"
+    />
+  )
+}

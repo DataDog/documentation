@@ -63,7 +63,12 @@ describe("collectPages", () => {
 describe("buildPageIndex", () => {
   it("keys entries by absolute URL and derives the disk-relative file", async () => {
     const index = await buildPageIndex(
-      [stubSource([stubPage("/api/latest/a.md"), stubPage("/api/latest/b.md")])],
+      [
+        stubSource([
+          stubPage("/api/latest/a.md"),
+          stubPage("/api/latest/b.md"),
+        ]),
+      ],
       SITE,
     );
     expect(index.map((entry) => entry.key)).toEqual([
@@ -109,7 +114,12 @@ describe("buildPageIndex", () => {
 
   it("sorts entries by key regardless of source order", async () => {
     const index = await buildPageIndex(
-      [stubSource([stubPage("/api/latest/z.md"), stubPage("/api/latest/a.md")])],
+      [
+        stubSource([
+          stubPage("/api/latest/z.md"),
+          stubPage("/api/latest/a.md"),
+        ]),
+      ],
       SITE,
     );
     expect(index.map((entry) => entry.key)).toEqual([

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
 // The mobile nav only renders below the 992px breakpoint.
 test.use({ viewport: { width: 390, height: 844 } });
@@ -10,23 +10,23 @@ test.use({ viewport: { width: 390, height: 844 } });
 // the active category (ScrollActiveIntoView's `gap`), so the tail of the
 // preceding Overview section shows under the sticky header — expected, not a
 // layout bug.
-const API_CATEGORY_URL = '/api/latest/action-connection/';
+const API_CATEGORY_URL = "/api/latest/action-connection/";
 
-test.describe('Mobile nav — visual', () => {
-  test('API category tree overlay open', async ({ page }) => {
+test.describe("Mobile nav — visual", () => {
+  test("API category tree overlay open", async ({ page }) => {
     await page.goto(API_CATEGORY_URL);
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState("networkidle");
 
     // Wait for the toggle island to hydrate so the click can't race its handler.
     await page.locator('.mobile-nav__hamburger[data-hydrated="true"]').click();
-    const panel = page.locator('#mobile-nav.mobile-nav__panel--open');
+    const panel = page.locator("#mobile-nav.mobile-nav__panel--open");
     await expect(panel).toBeVisible();
 
     // The API list (not the docs accordion) is what we're capturing.
-    await expect(page.locator('.mobile-nav__list--api')).toBeVisible();
+    await expect(page.locator(".mobile-nav__list--api")).toBeVisible();
 
-    await expect(panel).toHaveScreenshot('mobile-nav-api-overlay-open.png', {
-      animations: 'disabled',
+    await expect(panel).toHaveScreenshot("mobile-nav-api-overlay-open.png", {
+      animations: "disabled",
     });
   });
 });

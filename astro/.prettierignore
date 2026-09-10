@@ -1,0 +1,31 @@
+# Prettier does not read .gitignore (it only auto-skips node_modules), so the
+# generated and vendored trees have to be listed again here.
+node_modules/
+dist/
+.astro/
+.yarn/
+test-results/
+playwright-report/
+
+# Playwright screenshot baselines. Nothing in them is formattable, but keeping
+# them out means `format:check` never walks a large binary tree.
+**/*-snapshots/
+
+# Hand-authored prose. Prettier's markdown rules are cosmetic here (it rewrites
+# `*emphasis*` to `_emphasis_` and renormalizes lists and tables), and applying
+# them churns documents people edit by hand for no readability gain.
+plans/
+docs/
+CLAUDE.md
+
+# Frozen test inputs, seeded from the live Hugo API spec and trimmed by hand.
+# Keeping Prettier off them means a fixture still diffs cleanly against the
+# upstream spec it came from.
+tests/fixtures/
+
+# Vitest file snapshots, written by `toMatchFileSnapshot`. These are generated
+# artifacts compared byte-for-byte against `JSON.stringify(value, null, 2)`, so
+# any reformatting (Prettier collapses short arrays onto one line) fails the
+# assertion it is supposed to satisfy. Regenerate with `yarn test -u`, never
+# with Prettier.
+**/__snapshots__/

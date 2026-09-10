@@ -9,17 +9,14 @@
  * layouts/partials/api/code-example.html.
  */
 
-import { z } from 'zod';
-import API_V1_CODE_EXAMPLES from '@hugo-site/data/api/v1/CodeExamples.json';
-import API_V2_CODE_EXAMPLES from '@hugo-site/data/api/v2/CodeExamples.json';
-import type {
-  CodeExampleEntry,
-  CodeExampleSet,
-} from './schemas/codeExamples';
+import { z } from "zod";
+import API_V1_CODE_EXAMPLES from "@hugo-site/data/api/v1/CodeExamples.json";
+import API_V2_CODE_EXAMPLES from "@hugo-site/data/api/v2/CodeExamples.json";
+import type { CodeExampleEntry, CodeExampleSet } from "./schemas/codeExamples";
 
 const sdkExampleFiles: Record<string, string> = import.meta.glob(
-  '@hugo-site/content/en/api/v*/*/*.{go,java,py,pybeta,rb,rbbeta,rs,ts}',
-  { eager: true, query: '?raw', import: 'default' },
+  "@hugo-site/content/en/api/v*/*/*.{go,java,py,pybeta,rb,rbbeta,rs,ts}",
+  { eager: true, query: "?raw", import: "default" },
 );
 
 const FILE_KEY_RE = /\/content\/en\/api\/(v1|v2)\/([^/]+)\/([^/]+)$/;
@@ -54,7 +51,7 @@ type CodeExampleMeta = z.infer<typeof CodeExampleMetaSchema>;
 /*  Constants                                                          */
 /* ------------------------------------------------------------------ */
 
-const CODE_EXAMPLES: Record<'v1' | 'v2', Record<string, CodeExampleMeta[]>> = {
+const CODE_EXAMPLES: Record<"v1" | "v2", Record<string, CodeExampleMeta[]>> = {
   v1: CodeExamplesJsonSchema.parse(API_V1_CODE_EXAMPLES),
   v2: CodeExamplesJsonSchema.parse(API_V2_CODE_EXAMPLES),
 };
@@ -70,12 +67,17 @@ const LANGUAGES: ReadonlyArray<{
   exts: readonly string[];
   syntax: string;
 }> = [
-  { id: 'python',     label: 'Python',     exts: ['.pybeta', '.py'], syntax: 'python' },
-  { id: 'ruby',       label: 'Ruby',       exts: ['.rbbeta', '.rb'], syntax: 'ruby' },
-  { id: 'go',         label: 'Go',         exts: ['.go'],            syntax: 'go' },
-  { id: 'java',       label: 'Java',       exts: ['.java'],          syntax: 'java' },
-  { id: 'typescript', label: 'TypeScript', exts: ['.ts'],            syntax: 'typescript' },
-  { id: 'rust',       label: 'Rust',       exts: ['.rs'],            syntax: 'rust' },
+  { id: "python", label: "Python", exts: [".pybeta", ".py"], syntax: "python" },
+  { id: "ruby", label: "Ruby", exts: [".rbbeta", ".rb"], syntax: "ruby" },
+  { id: "go", label: "Go", exts: [".go"], syntax: "go" },
+  { id: "java", label: "Java", exts: [".java"], syntax: "java" },
+  {
+    id: "typescript",
+    label: "TypeScript",
+    exts: [".ts"],
+    syntax: "typescript",
+  },
+  { id: "rust", label: "Rust", exts: [".rs"], syntax: "rust" },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -96,11 +98,11 @@ const LANGUAGES: ReadonlyArray<{
  */
 export function getCodeExamplesForOperation(
   operationId: string,
-  version: 'v1' | 'v2',
+  version: "v1" | "v2",
   categorySlug: string,
 ): CodeExampleSet[] {
   const exampleMetas = CODE_EXAMPLES[version][operationId] ?? [
-    { group: '', suffix: '', description: '' },
+    { group: "", suffix: "", description: "" },
   ];
 
   const results: CodeExampleSet[] = [];
@@ -109,7 +111,13 @@ export function getCodeExamplesForOperation(
     const entries: CodeExampleEntry[] = [];
 
     for (const meta of exampleMetas) {
-      const code = findExampleCode(operationId, meta.suffix, version, categorySlug, lang.exts);
+      const code = findExampleCode(
+        operationId,
+        meta.suffix,
+        version,
+        categorySlug,
+        lang.exts,
+      );
       if (code !== null) {
         entries.push({
           description: meta.description,
@@ -135,7 +143,11 @@ export function getCodeExamplesForOperation(
 /*  Internal helpers                                                   */
 /* ------------------------------------------------------------------ */
 
-function buildExampleFilename(operationId: string, suffix: string, ext: string): string {
+function buildExampleFilename(
+  operationId: string,
+  suffix: string,
+  ext: string,
+): string {
   if (suffix) {
     return `${operationId}_${suffix}${ext}`;
   }
@@ -145,7 +157,7 @@ function buildExampleFilename(operationId: string, suffix: string, ext: string):
 function findExampleCode(
   operationId: string,
   suffix: string,
-  version: 'v1' | 'v2',
+  version: "v1" | "v2",
   categorySlug: string,
   exts: readonly string[],
 ): string | null {

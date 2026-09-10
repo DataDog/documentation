@@ -8,8 +8,8 @@
  * `and`, `or`, `not`) come from `Markdoc.functions`; `includes` mirrors the one
  * declared in `markdoc.config.mjs`.
  */
-import Markdoc from '@markdoc/markdoc';
-import type { Config } from '@markdoc/markdoc';
+import Markdoc from "@markdoc/markdoc";
+import type { Config } from "@markdoc/markdoc";
 
 // @markdoc/markdoc ships a CJS build whose named exports don't round-trip
 // cleanly under Node's ESM loader; pull from the default export (as the API
@@ -25,7 +25,9 @@ const includes = {
   },
 };
 
-export function buildPlaintextConfig(variables: Record<string, string>): Config {
+export function buildPlaintextConfig(
+  variables: Record<string, string>,
+): Config {
   return {
     variables,
     functions: { ...functions, includes },

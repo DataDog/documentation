@@ -1,7 +1,7 @@
 ---
 import ImgController from "./ImgController";
 import ImgVideo from "./ImgVideo";
-import { IMAGES_URL } from "@config/images";
+import { buildImageUrl } from "@lib/images/buildImageUrl";
 import type { ImgTagProps } from "./imgTypes";
 
 type Props = ImgTagProps;
@@ -18,10 +18,7 @@ const {
   popup = true,
 } = Astro.props;
 
-const imageUrl = `${IMAGES_URL}/images/${src}`;
-
-const srcset = `${imageUrl}?auto=format&fit=max&w=850 1x, ${imageUrl}?auto=format&fit=max&w=850&dpr=2 2x`;
-const popupHref = `${imageUrl}?fit=max&auto=format`;
+const { imageUrl, srcset, popupHref } = buildImageUrl(src);
 
 const imgControllerProps = {
   alt,

@@ -7,6 +7,32 @@ import {
 import schema from "./markdoc.schema.mjs";
 import { generateElementId } from "./src/lib/componentUtils/generateElementId.ts";
 
+/**
+ * Yield a tag's children, replacing any paragraph with the nodes inside it.
+ *
+ * Markdoc only makes a tag a direct child when it sits alone on its line.
+ * Two self-closing tags on one line are inline siblings, so Markdoc wraps
+ * them in a paragraph. A transform reading `node.children` directly would
+ * not see them and would silently render nothing, so container tags that
+ * only accept tag children walk through paragraphs instead.
+ *
+ * This works on AST nodes, before `transformChildren`, so callers can still
+ * read raw attributes off each child (`card-grid` needs that for its
+ * `image_width` inheritance).
+ */
+function* unwrapChildParagraphs(node) {
+  for (const child of node.children) {
+    if (child.type === "paragraph") {
+      yield* unwrapChildParagraphs(child);
+    } else if (child.type === "inline") {
+      // Paragraphs hold their content in an `inline` wrapper node.
+      yield* unwrapChildParagraphs(child);
+    } else {
+      yield child;
+    }
+  }
+}
+
 export default defineMarkdocConfig({
   // Custom Markdoc functions for cdocs conditionals. Markdoc's built-in
   // functions (equals, and, or, not) and the built-in `if`/`else`/`partial`
@@ -168,6 +194,66 @@ export default defineMarkdocConfig({
     "stepper-finished": {
       render: component("./src/components/Stepper/StepperFinished.astro"),
       ...schema.tags["stepper-finished"],
+    },
+    "card-grid": {
+      render: component("./src/components/CardGrid/CardGrid.astro"),
+      ...schema.tags["card-grid"],
+      // Merges the grid's `image_width` down into each card, assigns per-card
+      // ids, and collects which cards need a tooltip so the grid can decide
+      // whether to hydrate.
+      //
+      // Same two constraints as the `tabs` transform above: do not eager-render
+      // the slot (it drops Astro's hydration-script prefix), and re-emit each
+      // card through its registered `render` so it keeps its CSS-module classes.
+      transform(node, config) {
+        const gridRender = config.tags["card-grid"].render;
+        const cardRender = config.tags["image-card"].render;
+
+        const attributes = node.transformAttributes(config);
+        const gridId = generateElementId("card-grid");
+        const parentImageWidth = attributes.image_width;
+
+        const cards = [];
+        const tooltipCardIds = [];
+        const tooltipLabelsByCardId = {};
+
+        for (const child of unwrapChildParagraphs(node)) {
+          if (child.type !== "tag" || child.tag !== "image-card") continue;
+
+          const cardId = `${gridId}-card-${cards.length}`;
+          const cardAttributes = child.transformAttributes(config);
+          const tooltip = cardAttributes.tooltip;
+
+          if (tooltip) {
+            tooltipCardIds.push(cardId);
+            tooltipLabelsByCardId[cardId] = tooltip;
+          }
+
+          cards.push(
+            new Markdoc.Tag(cardRender, {
+              ...cardAttributes,
+              id: cardId,
+              // Child wins, then the parent fills in. When neither is set this
+              // stays undefined and ImageCard.astro applies the 150 default.
+              // This works only because neither schema declares a default.
+              image_width: child.attributes.image_width ?? parentImageWidth,
+            }),
+          );
+        }
+
+        return new Markdoc.Tag(
+          gridRender,
+          { ...attributes, id: gridId, tooltipCardIds, tooltipLabelsByCardId },
+          cards,
+        );
+      },
+    },
+    "image-card": {
+      // Rendered via the `card-grid` transform; the schema declares attributes
+      // only. It still needs a `render` entry because `@astrojs/markdoc` only
+      // resolves component imports for tags that appear in the .mdoc AST.
+      render: component("./src/components/CardGrid/ImageCard.astro"),
+      ...schema.tags["image-card"],
     },
     "region-selector": {
       render: component(

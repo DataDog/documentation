@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'preact/hooks';
-import type { ComponentChildren } from 'preact';
-import styles from './Header.module.css';
-import { classListFactory } from '@lib/cssUtils/classListFactory';
+import { useEffect, useRef, useState } from "preact/hooks";
+import type { ComponentChildren } from "preact";
+import styles from "./Header.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
 
 const cl = classListFactory(styles);
 
@@ -27,7 +27,13 @@ interface Props {
  * Hugo's Bootstrap-driven dropdowns use the same "hover to open, slight close
  * delay" behavior; we reproduce it without Bootstrap or Alpine.
  */
-export default function NavDropdown({ labels, href, identifier, isSolutions, children }: Props) {
+export default function NavDropdown({
+  labels,
+  href,
+  identifier,
+  isSolutions,
+  children,
+}: Props) {
   const [open, setOpen] = useState(false);
   const timeoutRef = useRef<number | null>(null);
 
@@ -46,30 +52,28 @@ export default function NavDropdown({ labels, href, identifier, isSolutions, chi
   useEffect(() => () => cancelClose(), []);
 
   const menuClass = [
-    cl('header__dropdown-menu'),
-    open ? cl('header__dropdown-menu--open') : '',
-    isSolutions ? cl('header__solutions-menu') : '',
-    'dropdown-menu',
-    isSolutions ? 'solutions-menu' : '',
+    cl("header__dropdown-menu"),
+    open ? cl("header__dropdown-menu--open") : "",
+    isSolutions ? cl("header__solutions-menu") : "",
+    "dropdown-menu",
+    isSolutions ? "solutions-menu" : "",
   ]
     .filter(Boolean)
-    .join(' ');
+    .join(" ");
 
   return (
     <li
-      class={`${cl('header__menu-item')} ${open ? cl('header__menu-item--open') : ''} dropdown ${identifier}-dropdown`}
+      class={`${cl("header__menu-item")} ${open ? cl("header__menu-item--open") : ""} dropdown ${identifier}-dropdown`}
       onMouseEnter={() => {
         cancelClose();
         setOpen(true);
       }}
       onMouseLeave={scheduleClose}
     >
-      <a class={`${cl('header__menu-link')} dropdown`} href={href}>
-        <span class={cl('header__menu-text')}>{labels.trigger}</span>
+      <a class={`${cl("header__menu-link")} dropdown`} href={href}>
+        <span class={cl("header__menu-text")}>{labels.trigger}</span>
       </a>
-      <div class={`${menuClass} ${identifier}-dropdown-menu`}>
-        {children}
-      </div>
+      <div class={`${menuClass} ${identifier}-dropdown-menu`}>{children}</div>
     </li>
   );
 }

@@ -8,6 +8,50 @@ describe("renderMdocWithTwins", () => {
     expect(out).toContain("A paragraph.");
   });
 
+  it("renders a card grid as a flat link list", () => {
+    const source = [
+      "{% card-grid %}",
+      '{% image-card href="/a/" title="A" /%}',
+      '{% image-card href="/b/" title="B" /%}',
+      "{% /card-grid %}",
+    ].join("\n");
+    const out = renderMdocWithTwins(source);
+
+    expect(out).toContain("- [A](/a.md)");
+    expect(out).toContain("- [B](/b.md)");
+  });
+
+  it("drops a card's image, alt, tooltip, and width from the link list", () => {
+    const source = [
+      "{% card-grid %}",
+      '{% image-card href="/a/" title="Alpha" src="logos/a.svg"',
+      'alt="A logo" tooltip="Alpha tooltip" image_width=200 /%}',
+      "{% /card-grid %}",
+    ].join(" ");
+    const out = renderMdocWithTwins(source);
+
+    expect(out).toContain("- [Alpha](/a.md)");
+    expect(out).not.toContain("logos/a.svg");
+    expect(out).not.toContain("A logo");
+    expect(out).not.toContain("Alpha tooltip");
+    expect(out).not.toContain("image_width");
+  });
+
+  it("renders card-grid cards that Markdoc grouped into a paragraph", () => {
+    // Two self-closing tags on one line become inline siblings inside a
+    // paragraph rather than direct children of the grid. Reading only direct
+    // children would emit an empty list and silently lose both cards.
+    const source = [
+      "{% card-grid %}",
+      '{% image-card href="/a/" title="A" /%} {% image-card href="/b/" title="B" /%}',
+      "{% /card-grid %}",
+    ].join("\n");
+    const out = renderMdocWithTwins(source);
+
+    expect(out).toContain("- [A](/a.md)");
+    expect(out).toContain("- [B](/b.md)");
+  });
+
   it("renders collapse-content as a heading, not tag markup", () => {
     const source = [
       '{% collapse-content title="Section" %}',
@@ -125,5 +169,32 @@ describe("renderMdocWithTwins", () => {
     expect(out).toContain("### Outer");
     expect(out).toContain('{% alert level="info" %}');
     expect(out).toContain("Nested note.");
+  });
+
+  it("resolves card-grid hrefs against site when one is given", () => {
+    const source = [
+      "{% card-grid %}",
+      '{% image-card href="/a/" title="A" /%}',
+      "{% /card-grid %}",
+    ].join("\n");
+    const out = renderMdocWithTwins(source, {
+      site: "https://docs.datadoghq.com",
+    });
+
+    expect(out).toContain("- [A](https://docs.datadoghq.com/a.md)");
+  });
+
+  it("still points card-grid hrefs at the .md twin when no site is given", () => {
+    // The two rewrites are independent: the twin is where the content lives
+    // either way, so only the origin is missing without a `site`.
+    const source = [
+      "{% card-grid %}",
+      '{% image-card href="/a/" title="A" /%}',
+      "{% /card-grid %}",
+    ].join("\n");
+    const out = renderMdocWithTwins(source);
+
+    expect(out).toContain("- [A](/a.md)");
+    expect(out).not.toContain("docs.datadoghq.com");
   });
 });

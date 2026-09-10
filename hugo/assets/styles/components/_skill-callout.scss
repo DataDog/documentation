@@ -1,0 +1,73 @@
+// Bordered card promoting an agent skill install command.
+// Markup lives in layouts/shortcodes/skill-callout.html.
+//
+// The command inside the card is an ordinary highlighted shell block, so it
+// inherits the site's code block styling and hover copy button from
+// pages/_global.scss. Only the card around it is styled here.
+//
+// Class names are full BEM so they survive the eventual port to the Astro
+// site, which pairs each component with a BEM-named CSS module.
+
+.skill-callout {
+    margin: 0 0 30px;
+    padding: 20px 22px 22px;
+    border: 1px solid #e4e2ee;
+    border-radius: 8px;
+    background: #fff;
+    // Same purple-tinted shadow the tooltip uses, so the card lifts off the
+    // page without introducing a new shadow value.
+    box-shadow: 0 4px 15px rgba($ddpurple, 0.1), 0 2px 5px rgba($ddpurple, 0.08);
+
+    // Body copy in the card matches the site's paragraph scale (18px/27px in
+    // pages/_global.scss) so the card reads as part of the page rather than as
+    // a shrunken aside. The heading is set apart by weight, not size.
+    &__text {
+        margin: 0 0 16px;
+        max-width: 60ch;
+        color: #5c5c72;
+        font-size: 18px;
+        line-height: 27px;
+
+        p {
+            margin: 0;
+            font-size: inherit;
+            line-height: inherit;
+            color: inherit;
+        }
+
+        // Inline code reads as a tinted pill so a skill name such as `dd-apm`
+        // stands out from the surrounding prose. Sizing follows the site's
+        // inline code; only the tint differs.
+        code {
+            padding: 0 5px;
+            border-radius: 4px;
+            background: #f1eafb;
+            color: #5a2a94;
+            font-size: 14px;
+        }
+    }
+}
+
+// `.main p` in pages/_global.scss sets the paragraph scale and outranks a flat
+// BEM class, so the heading needs the element qualifier to set its own size.
+p.skill-callout__title {
+    margin: 0 0 6px;
+    color: #1b1b2e;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 27px;
+}
+
+// `.main pre` in pages/_global.scss adds a 24px bottom margin meant to separate
+// consecutive code blocks. The card's own padding provides that spacing here,
+// so the margin would read as dead space. Needs the element qualifier to match
+// that rule's specificity.
+.skill-callout__command pre {
+    margin: 0;
+}
+
+@media (max-width: 575px) {
+    .skill-callout {
+        padding: 16px 16px 18px;
+    }
+}

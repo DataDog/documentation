@@ -50,7 +50,9 @@ describe("buildLlmsIndex", () => {
 
   it("carries each source's root pages and sections verbatim", async () => {
     const [api] = await buildLlmsIndex([apiSource]);
-    expect(api.rootPages).toEqual([stubPage("/api/latest.md", "API Reference")]);
+    expect(api.rootPages).toEqual([
+      stubPage("/api/latest.md", "API Reference"),
+    ]);
     expect(api.sections).toHaveLength(1);
     expect(api.sections[0].llmsTxtPath).toBe("/api/latest/metrics/llms.txt");
   });

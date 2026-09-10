@@ -30,6 +30,16 @@ const enumValues = field.enumValues ?? [];
 const enumVisible = enumValues.slice(0, ENUM_INLINE_LIMIT);
 const enumRest = enumValues.slice(ENUM_INLINE_LIMIT);
 
+// `oneOf`/`anyOf` are carried as bare semantic tags on the field so other
+// consumers can branch on them; the type column shows them bracketed, as
+// Hugo's `typeColumn` does. Array items are already bracketed upstream
+// (`[<oneOf>]`), so only the bare tags need wrapping here. The plaintext
+// twin applies the same mapping in its own `getFieldType`.
+const displayType =
+  field.type === "oneOf" || field.type === "anyOf"
+    ? `<${field.type}>`
+    : field.type;
+
 // Render each oneOf/anyOf option as its own collapsible row (matching Hugo),
 // rather than a flat always-visible banner. Each option becomes a synthetic
 // object field whose children are the option's fields, so it reuses the same
@@ -83,7 +93,7 @@ const optionFields: SchemaField[] =
     </span>
   </div>
   <div class={cl("schema-table__cell-type")}>
-    <span class={cl("schema-table__type")}>{field.type}</span>
+    <span class={cl("schema-table__type")}>{displayType}</span>
   </div>
   <div class={cl("schema-table__cell-description")}>
     {

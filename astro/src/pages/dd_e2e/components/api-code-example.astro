@@ -1,32 +1,32 @@
 ---
-if (__CI_ENV__ === 'live') return new Response(null, { status: 404 });
+if (__CI_ENV__ === "live") return new Response(null, { status: 404 });
 
-import BaseLayout from '@layouts/BaseLayout.astro';
-import ApiCodeExample from '@components/ApiCodeExample/ApiCodeExample.astro';
-import type { CodeExampleSet } from '@components/ApiCodeExample/ApiCodeExample.astro';
+import BaseLayout from "@layouts/BaseLayout.astro";
+import ApiCodeExample from "@components/ApiCodeExample/ApiCodeExample.astro";
+import type { CodeExampleSet } from "@components/ApiCodeExample/ApiCodeExample.astro";
 
-const title = 'ApiCodeExample';
+const title = "ApiCodeExample";
 
 const singleExample: CodeExampleSet[] = [
   {
-    language: 'curl',
-    label: 'Curl',
+    language: "curl",
+    label: "Curl",
     entries: [
       {
-        description: 'Get a dashboard',
-        code: 'curl -X GET https://api.datadoghq.com/api/v1/dashboard/abc-123',
-        syntax: 'bash',
+        description: "Get a dashboard",
+        code: "curl -X GET https://api.datadoghq.com/api/v1/dashboard/abc-123",
+        syntax: "bash",
       },
     ],
   },
   {
-    language: 'python',
-    label: 'Python',
+    language: "python",
+    label: "Python",
     entries: [
       {
-        description: 'Get a dashboard',
-        code: 'response = api_instance.get_dashboard(dashboard_id=abc_123)',
-        syntax: 'python',
+        description: "Get a dashboard",
+        code: "response = api_instance.get_dashboard(dashboard_id=abc_123)",
+        syntax: "python",
       },
     ],
   },
@@ -34,18 +34,18 @@ const singleExample: CodeExampleSet[] = [
 
 const multiExample: CodeExampleSet[] = [
   {
-    language: 'curl',
-    label: 'Curl',
+    language: "curl",
+    label: "Curl",
     entries: [
       {
-        description: 'Create a dashboard',
-        code: 'curl -X POST https://api.datadoghq.com/api/v1/dashboard',
-        syntax: 'bash',
+        description: "Create a dashboard",
+        code: "curl -X POST https://api.datadoghq.com/api/v1/dashboard",
+        syntax: "bash",
       },
       {
-        description: 'Create a dashboard with widgets',
-        code: 'curl -X POST https://api.datadoghq.com/api/v1/dashboard -d body.json',
-        syntax: 'bash',
+        description: "Create a dashboard with widgets",
+        code: "curl -X POST https://api.datadoghq.com/api/v1/dashboard -d body.json",
+        syntax: "bash",
       },
     ],
   },
@@ -58,15 +58,26 @@ const multiExample: CodeExampleSet[] = [
     <div class="prose">
       <h1>ApiCodeExample</h1>
 
-      <p>Language-tabbed code example display. Shows code in multiple languages with an accordion for multiple examples per language.</p>
+      <p>
+        Language-tabbed code example display. Shows code in multiple languages
+        with an accordion for multiple examples per language.
+      </p>
 
       <h2>Properties</h2>
       <table>
         <thead>
-          <tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr>
+          <tr
+            ><th>Property</th><th>Type</th><th>Default</th><th>Description</th
+            ></tr
+          >
         </thead>
         <tbody>
-          <tr><td><code>examples</code></td><td><code>CodeExampleSet[]</code></td><td>&mdash;</td><td>Array of code example sets, one per language</td></tr>
+          <tr
+            ><td><code>examples</code></td><td><code>CodeExampleSet[]</code></td
+            ><td>&mdash;</td><td
+              >Array of code example sets, one per language</td
+            ></tr
+          >
         </tbody>
       </table>
 

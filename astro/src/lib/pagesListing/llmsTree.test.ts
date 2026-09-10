@@ -1,10 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { buildLlmsTree, DEFAULT_HARD_CHAR_LIMIT } from "./llmsTree";
-import type {
-  LlmsIndexSource,
-  PlaintextPage,
-  PlaintextSection,
-} from "./types";
+import type { LlmsIndexSource, PlaintextPage, PlaintextSection } from "./types";
 
 const SITE = "https://docs.datadoghq.com";
 const PREVIEW_SITE = "https://docs-staging.datadoghq.com/my-branch";
@@ -16,11 +12,21 @@ function stubPage(
 ): PlaintextPage {
   return {
     urlPath,
-    metadata: { title, description: "", breadcrumbs: ["Docs"], isPrivate: false, ...extra },
+    metadata: {
+      title,
+      description: "",
+      breadcrumbs: ["Docs"],
+      isPrivate: false,
+      ...extra,
+    },
   };
 }
 
-function stubSection(title: string, slug: string, pages: PlaintextPage[]): PlaintextSection {
+function stubSection(
+  title: string,
+  slug: string,
+  pages: PlaintextPage[],
+): PlaintextSection {
   return { title, llmsTxtPath: `/api/latest/${slug}/llms.txt`, pages };
 }
 
@@ -36,10 +42,16 @@ function stubSource(
 const stubApiSource = () =>
   stubSource(
     "API Reference",
-    [stubPage("/api/latest.md", "API Reference", { description: "Reference docs." })],
+    [
+      stubPage("/api/latest.md", "API Reference", {
+        description: "Reference docs.",
+      }),
+    ],
     [
       stubSection("Metrics", "metrics", [
-        stubPage("/api/latest/metrics.md", "Metrics", { description: "Metric endpoints." }),
+        stubPage("/api/latest/metrics.md", "Metrics", {
+          description: "Metric endpoints.",
+        }),
         stubPage("/api/latest/metrics/get-a-metric.md", "Get a metric"),
       ]),
       stubSection("Logs", "logs", [
@@ -54,15 +66,21 @@ describe("buildLlmsTree", () => {
     const { index } = buildLlmsTree([stubApiSource()], SITE);
     expect(index).toContain("## API Reference\n");
     // Root page linked directly to its .md
-    expect(index).toContain(`- [API Reference](${SITE}/api/latest.md): Reference docs.`);
+    expect(index).toContain(
+      `- [API Reference](${SITE}/api/latest.md): Reference docs.`,
+    );
     // Sections linked to their detail llms.txt, with overview description
-    expect(index).toContain(`- [Metrics](${SITE}/api/latest/metrics/llms.txt): Metric endpoints.`);
+    expect(index).toContain(
+      `- [Metrics](${SITE}/api/latest/metrics/llms.txt): Metric endpoints.`,
+    );
     expect(index).toContain(`- [Logs](${SITE}/api/latest/logs/llms.txt)`);
   });
 
   it("sorts section links alphabetically", () => {
     const { index } = buildLlmsTree([stubApiSource()], SITE);
-    expect(index.indexOf("/logs/llms.txt")).toBeLessThan(index.indexOf("/metrics/llms.txt"));
+    expect(index.indexOf("/logs/llms.txt")).toBeLessThan(
+      index.indexOf("/metrics/llms.txt"),
+    );
   });
 
   it("emits one detail file per section listing its pages", () => {
@@ -71,11 +89,16 @@ describe("buildLlmsTree", () => {
     expect(metrics).toBeDefined();
     expect(metrics!.startsWith("# Metrics\n")).toBe(true);
     expect(metrics).toContain(`- [Metrics](${SITE}/api/latest/metrics.md)`);
-    expect(metrics).toContain(`- [Get a metric](${SITE}/api/latest/metrics/get-a-metric.md)`);
+    expect(metrics).toContain(
+      `- [Get a metric](${SITE}/api/latest/metrics/get-a-metric.md)`,
+    );
   });
 
   it("keeps the site's base path in links but not in detail-file keys", () => {
-    const { index, detailFiles } = buildLlmsTree([stubApiSource()], PREVIEW_SITE);
+    const { index, detailFiles } = buildLlmsTree(
+      [stubApiSource()],
+      PREVIEW_SITE,
+    );
     expect(index).toContain(`${PREVIEW_SITE}/api/latest.md`);
     expect(index).toContain(`${PREVIEW_SITE}/api/latest/metrics/llms.txt`);
     // Keys stay site-relative: they become the output file paths on disk.
@@ -100,7 +123,9 @@ describe("buildLlmsTree", () => {
         ]),
         stubSection("Metrics", "metrics", [
           stubPage("/api/latest/metrics.md", "Metrics"),
-          stubPage("/api/latest/metrics/hidden.md", "Hidden op", { isPrivate: true }),
+          stubPage("/api/latest/metrics/hidden.md", "Hidden op", {
+            isPrivate: true,
+          }),
         ]),
       ],
     );
@@ -119,7 +144,9 @@ describe("buildLlmsTree", () => {
       "API Reference",
       [
         stubPage("/api/latest.md", "API Reference"),
-        stubPage("/api/latest/internal.md", "Internal notes", { isPrivate: true }),
+        stubPage("/api/latest/internal.md", "Internal notes", {
+          isPrivate: true,
+        }),
       ],
       [],
     );
@@ -129,16 +156,25 @@ describe("buildLlmsTree", () => {
 
   it("splits an oversized section into numbered part files", () => {
     const manyPages = Array.from({ length: 20 }, (_, i) =>
-      stubPage(`/api/latest/big/op-${i}.md`, `Operation number ${i} with a longish title`),
+      stubPage(
+        `/api/latest/big/op-${i}.md`,
+        `Operation number ${i} with a longish title`,
+      ),
     );
-    const source = stubSource("API Reference", [], [stubSection("Big", "big", manyPages)]);
+    const source = stubSource(
+      "API Reference",
+      [],
+      [stubSection("Big", "big", manyPages)],
+    );
 
     // Tiny limit forces splitting.
     const { detailFiles } = buildLlmsTree([source], SITE, 400);
 
     const indexFile = detailFiles.get("/api/latest/big/llms.txt");
     expect(indexFile).toBeDefined();
-    expect(indexFile).toContain("- [Part 1](" + SITE + "/api/latest/big/part_1/llms.txt)");
+    expect(indexFile).toContain(
+      "- [Part 1](" + SITE + "/api/latest/big/part_1/llms.txt)",
+    );
     expect(detailFiles.has("/api/latest/big/part_1/llms.txt")).toBe(true);
     expect(detailFiles.has("/api/latest/big/part_2/llms.txt")).toBe(true);
 
@@ -153,7 +189,9 @@ describe("buildLlmsTree", () => {
     for (const contents of detailFiles.values()) {
       expect(contents.length).toBeLessThanOrEqual(DEFAULT_HARD_CHAR_LIMIT);
     }
-    expect([...detailFiles.keys()].some((path) => path.includes("/part_"))).toBe(false);
+    expect(
+      [...detailFiles.keys()].some((path) => path.includes("/part_")),
+    ).toBe(false);
   });
 
   it("throws when site is empty", () => {

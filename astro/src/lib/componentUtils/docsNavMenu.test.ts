@@ -2,7 +2,6 @@ import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import {
   getDocsNavTree,
   findActiveSectionIdentifier,
-  findActivePageIdentifier,
   type DocsNavNode,
 } from "./docsNavMenu";
 
@@ -143,7 +142,8 @@ describe("getDocsNavTree hrefs stay prefix-free under a preview branch", () => {
     process.env.CI_COMMIT_REF_NAME = "devin.ford/my-cool-thing";
 
     const tree = getDocsNavTree();
-    const hugoOrigin = "https://docs-staging.datadoghq.com/devin.ford/my-cool-thing";
+    const hugoOrigin =
+      "https://docs-staging.datadoghq.com/devin.ford/my-cool-thing";
 
     function assertPrefixedOnce(node: DocsNavNode) {
       if (node.href) {

@@ -15,131 +15,128 @@
  *   Preproc   (#633820) → meta.preprocessor
  *   Default   (#000000) → everything else
  */
-import type { ThemeRegistrationRaw } from 'shiki';
+import type { ThemeRegistrationRaw } from "shiki";
 
 const theme: ThemeRegistrationRaw = {
-  name: 'datadog-chroma',
-  type: 'light',
+  name: "datadog-chroma",
+  type: "light",
   colors: {
-    'editor.background': '#ffffff',
-    'editor.foreground': '#000000',
+    "editor.background": "#ffffff",
+    "editor.foreground": "#000000",
   },
   settings: [
     // — Default: most identifiers, names, operators are black
     {
       scope: [
-        'variable',
-        'entity.name.function',
-        'meta.function-call',
-        'keyword.operator',
-        'punctuation',
-        'entity.name.tag',
-        'meta.object-literal.key',
+        "variable",
+        "entity.name.function",
+        "meta.function-call",
+        "keyword.operator",
+        "punctuation",
+        "entity.name.tag",
+        "meta.object-literal.key",
       ],
-      settings: { foreground: '#000000' },
+      settings: { foreground: "#000000" },
     },
 
     // — Keywords & storage (Chroma .k / .kd / .kn / .kr)
     {
       scope: [
-        'keyword',
-        'keyword.control',
-        'keyword.other',
-        'storage.type',
-        'storage.modifier',
+        "keyword",
+        "keyword.control",
+        "keyword.other",
+        "storage.type",
+        "storage.modifier",
       ],
-      settings: { foreground: '#a90d91' },
+      settings: { foreground: "#a90d91" },
     },
 
     // — Built-in functions & types (Chroma .nb)
     {
       scope: [
-        'support.function',
-        'support.function.builtin',
-        'support.type',
-        'support.class',
-        'support.constant',
+        "support.function",
+        "support.function.builtin",
+        "support.type",
+        "support.class",
+        "support.constant",
       ],
-      settings: { foreground: '#a90d91' },
+      settings: { foreground: "#a90d91" },
     },
 
     // — self / this (Chroma .bp — NameBuiltinPseudo)
     {
-      scope: ['variable.language'],
-      settings: { foreground: '#5b269a' },
+      scope: ["variable.language"],
+      settings: { foreground: "#5b269a" },
     },
 
     // — Strings, regex, string escapes (Chroma .s / .s1 / .s2 / .sr / .se)
     {
       scope: [
-        'string',
-        'string.regexp',
-        'punctuation.definition.string',
-        'constant.character.escape',
+        "string",
+        "string.regexp",
+        "punctuation.definition.string",
+        "constant.character.escape",
       ],
-      settings: { foreground: '#c41a16' },
+      settings: { foreground: "#c41a16" },
     },
 
     // — Numbers (Chroma .m / .mi / .mf)
     {
-      scope: ['constant.numeric'],
-      settings: { foreground: '#1c01ce' },
+      scope: ["constant.numeric"],
+      settings: { foreground: "#1c01ce" },
     },
 
     // — Language constants: true / false / null / nil (Chroma .kc — KeywordConstant)
     {
-      scope: ['constant.language'],
-      settings: { foreground: '#a90d91' },
+      scope: ["constant.language"],
+      settings: { foreground: "#a90d91" },
     },
 
     // — Character literals (Chroma .sc)
     {
-      scope: ['constant.character'],
-      settings: { foreground: '#2300ce' },
+      scope: ["constant.character"],
+      settings: { foreground: "#2300ce" },
     },
 
     // — Comments (Chroma .c / .c1 / .cm)
     {
-      scope: ['comment', 'punctuation.definition.comment'],
-      settings: { foreground: '#177500' },
+      scope: ["comment", "punctuation.definition.comment"],
+      settings: { foreground: "#177500" },
     },
 
     // — Preprocessor comments (Chroma .cp / .cpf)
     {
       scope: [
-        'meta.preprocessor',
-        'keyword.control.directive',
-        'keyword.control.import',
-        'punctuation.definition.preprocessor',
+        "meta.preprocessor",
+        "keyword.control.directive",
+        "keyword.control.import",
+        "punctuation.definition.preprocessor",
       ],
-      settings: { foreground: '#633820' },
+      settings: { foreground: "#633820" },
     },
 
     // — Class / type names (Chroma .nc)
     {
-      scope: ['entity.name.type', 'entity.name.class'],
-      settings: { foreground: '#3f6e75' },
+      scope: ["entity.name.type", "entity.name.class"],
+      settings: { foreground: "#3f6e75" },
     },
 
     // — Attributes & CSS property names (Chroma .na)
     // CSS property names map to support.type.property-name in Shiki, which would
     // otherwise cascade to the purple support.type rule above.
     {
-      scope: [
-        'entity.other.attribute-name',
-        'support.type.property-name',
-      ],
-      settings: { foreground: '#836c28' },
+      scope: ["entity.other.attribute-name", "support.type.property-name"],
+      settings: { foreground: "#836c28" },
     },
 
     // — Diff markup
     {
-      scope: ['markup.deleted'],
-      settings: { foreground: '#c41a16' },
+      scope: ["markup.deleted"],
+      settings: { foreground: "#c41a16" },
     },
     {
-      scope: ['markup.inserted'],
-      settings: { foreground: '#177500' },
+      scope: ["markup.inserted"],
+      settings: { foreground: "#177500" },
     },
   ],
 };

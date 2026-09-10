@@ -4,7 +4,9 @@
   position: sticky;
   top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height));
   align-self: flex-start;
-  max-height: calc(100vh - var(--hugo-active-banner-height) - var(--hugo-header-height));
+  max-height: calc(
+    100vh - var(--hugo-active-banner-height) - var(--hugo-header-height)
+  );
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -20,20 +22,34 @@
 
 @media (min-width: 992px) {
   .api-side-nav {
-    top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height-desktop));
-    max-height: calc(100vh - var(--hugo-active-banner-height) - var(--hugo-header-height-desktop));
-    transition: top 0.2s ease-in-out, max-height 0.2s ease-in-out;
+    top: calc(
+      var(--hugo-active-banner-height) + var(--hugo-header-height-desktop)
+    );
+    max-height: calc(
+      100vh - var(--hugo-active-banner-height) -
+        var(--hugo-header-height-desktop)
+    );
+    transition:
+      top 0.2s ease-in-out,
+      max-height 0.2s ease-in-out;
   }
 
   :global([data-scrolled]) .api-side-nav {
-    top: calc(var(--hugo-active-banner-height) + var(--hugo-header-height-desktop-scrolled));
-    max-height: calc(100vh - var(--hugo-active-banner-height) - var(--hugo-header-height-desktop-scrolled));
+    top: calc(
+      var(--hugo-active-banner-height) +
+        var(--hugo-header-height-desktop-scrolled)
+    );
+    max-height: calc(
+      100vh - var(--hugo-active-banner-height) -
+        var(--hugo-header-height-desktop-scrolled)
+    );
   }
 }
 
 .api-side-nav__title {
   display: block;
-  padding: calc(var(--space-sm) + var(--space-xs)) 0 var(--space-sm) var(--space-md);
+  padding: calc(var(--space-sm) + var(--space-xs)) 0 var(--space-sm)
+    var(--space-md);
   color: var(--color-brand);
   font-size: var(--font-size-h3);
   font-weight: var(--font-weight-light);
@@ -63,8 +79,16 @@
   scrollbar-width: none;
   /* Soften the bottom edge so list items fade out instead of hard-clipping
      against the side nav's bottom padding / the footer below. */
-  mask-image: linear-gradient(to bottom, black calc(100% - var(--space-md)), transparent);
-  -webkit-mask-image: linear-gradient(to bottom, black calc(100% - var(--space-md)), transparent);
+  mask-image: linear-gradient(
+    to bottom,
+    black calc(100% - var(--space-md)),
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black calc(100% - var(--space-md)),
+    transparent
+  );
 }
 
 .api-side-nav__list::-webkit-scrollbar {
@@ -74,7 +98,7 @@
 /* Spacer that lives in the fade zone so the last real item stays opaque
    when the list is scrolled to the bottom. */
 .api-side-nav__list::after {
-  content: '';
+  content: "";
   display: block;
   height: var(--space-md);
   flex-shrink: 0;

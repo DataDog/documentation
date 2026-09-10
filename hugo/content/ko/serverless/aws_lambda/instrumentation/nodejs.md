@@ -17,6 +17,9 @@ further_reading:
 - link: serverless/custom_metrics/
   tag: 설명서
   text: 서버리스 애플리케이션에서 Custom Metrics 제출
+- link: https://www.datadoghq.com/blog/trace-aws-lambda-durable-functions/
+  tag: 블로그
+  text: Datadog을 사용하여 AWS Lambda 내구성 함수를 추적합니다.
 title: Node.js 서버리스 애플리케이션 계측
 ---
 <div class="alert alert-info">Datadog Lambda Extension의 버전 67+는 콜드 스타트 시간을 크게 줄이도록 최적화되었습니다. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">자세히 읽기</a>.</div>
@@ -25,13 +28,13 @@ title: Node.js 서버리스 애플리케이션 계측
 
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
-Node.js AWS Lambda 애플리케이션을 Datadog 내에서 직접 계측할 수 있습니다. [Serverless > AWS Lambda][2] 페이지로 이동하여 [**함수 계측**][3]을 선택합니다.
+Node.js AWS Lambda 애플리케이션을 Datadog 내에서 직접 계측할 수 있습니다. [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}AWS Lambda{{< /ui >}}][2] 페이지로 이동하여 [{{< ui >}}Settings{{< /ui >}}][3]을(를) 선택합니다. {{< ui >}}Remote Instrumentation{{< /ui >}} 섹션에서 {{< ui >}}AWS Lambda{{< /ui >}} 탭을 선택합니다.
 
 자세한 내용은 [AWS Lambda에 대한 원격 계측][1]을 참조하세요.
 
 [1]: /ko/serverless/aws_lambda/remote_instrumentation
-[2]: https://app.datadoghq.com/functions?cloud=aws
-[3]: https://app.datadoghq.com/serverless/aws/lambda/setup
+[2]: https://app.datadoghq.com/serverless/aws/lambda
+[3]: https://app.datadoghq.com/serverless/settings?serverless__section=aws-lambda
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
@@ -43,7 +46,7 @@ Datadog CLI는 기존 Lambda 함수의 구성을 수정하여 새로운 배포 �
     npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-lambda
     ```
 
-2. Datadog Serverless Monitoring이 처음이라면, 첫 설치를 안내하기 위해 대화형 모드에서 Datadog CLI를 실행하여 빠르게 시작할 수 있으며, 나머지 단계는 무시할 수 있습니다. 생산 애플리케이션에 Datadog을 영구적으로 설치하려면 이 단계를 건너뛰고 나머지 단계를 따라 CI/CD 파이프라인에서 Datadog CLI 명령을 실행하세요 _배포 후_.
+2. Datadog 서버리스 모니터링을 처음 사용하는 경우, Datadog CLI를 대화형 모드로 실행하여 첫 설치를 안내받으면 빨리 시작할 수 있고, 나머지 단계는 무시하면 됩니다. 생산 애플리케이션에 Datadog을 영구적으로 설치하려면 이 단계를 건너뛰고 나머지 단계를 따라 CI/CD 파이프라인에서 Datadog CLI 명령을 실행하세요 _배포 후_.
 
     ```sh
     datadog-ci lambda instrument -i
@@ -63,7 +66,7 @@ Datadog CLI는 기존 Lambda 함수의 구성을 수정하여 새로운 배포 �
 
 5. Datadog API 키를 구성합니다.
 
-    Datadog은 보안 및 손쉬운 회전을 위해 Datadog API 키를 AWS Secrets Manager에 저장할 것을 권장합니다. 키는 일반 텍스트 문자열로 저장되어야 합니다(JSON 블롭이 아님). Lambda 함수에 필요한 `secretsmanager:GetSecretValue` IAM 권한이 있는지 확인하세요.
+    Datadog에서는 보안 및 간편한 교체를 위해 Datadog API 키를 AWS Secrets Manager에 저장할 것을 권장합니다. 키는 일반 텍스트 문자열로 저장되어야 합니다(JSON 블롭이 아님). Lambda 함수에 필요한 `secretsmanager:GetSecretValue` IAM 권한이 있는지 확인하세요.
 
     ```sh
     export DATADOG_API_KEY_SECRET_ARN="<DATADOG_API_KEY_SECRET_ARN>"
@@ -407,6 +410,10 @@ SST v3를 사용하여 Datadog을 구성하려면 다음 단계를 따르세요.
 ## AWS Lambda 및 VPC {#aws-lambda-and-vpc}
 
 {{% svl-lambda-vpc %}}
+
+## 내구성 함수 {#durable-function}
+
+{{% svl-lambda-durable-function %}}
 
 ## 다음 단계는 무엇입니까? {#whats-next}
 

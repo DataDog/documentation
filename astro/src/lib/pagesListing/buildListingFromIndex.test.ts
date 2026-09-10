@@ -26,15 +26,24 @@ const index: PageIndexEntry[] = [
 
 describe("buildListingFromIndex", () => {
   it("hashes each entry's file contents via the injected reader", async () => {
-    const bodies: Record<string, string> = { "a.md": "body A", "b.md": "body B" };
-    const listing = await buildListingFromIndex(index, async (file) => bodies[file]);
+    const bodies: Record<string, string> = {
+      "a.md": "body A",
+      "b.md": "body B",
+    };
+    const listing = await buildListingFromIndex(
+      index,
+      async (file) => bodies[file],
+    );
 
     expect(listing["https://x/a.md"].mdocHash).toBe(md5Hex("body A"));
     expect(listing["https://x/b.md"].mdocHash).toBe(md5Hex("body B"));
   });
 
   it("emits { metadata, mdocHash, source: 'astro' } per entry", async () => {
-    const listing = await buildListingFromIndex(index.slice(0, 1), async () => "x");
+    const listing = await buildListingFromIndex(
+      index.slice(0, 1),
+      async () => "x",
+    );
     expect(listing["https://x/a.md"]).toEqual({
       metadata,
       mdocHash: md5Hex("x"),

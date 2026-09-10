@@ -9,6 +9,9 @@ import {
   resolveFooterUrl,
   splitHalves,
 } from "@lib/componentUtils/footerMenus";
+// The container has no i18n manifest, so `Astro.currentLocale` is undefined and
+// Footer renders as English. Expectations are built for the same locale.
+import { DEFAULT_LOCALE } from "@lib/i18n/locale";
 
 function decodeEntities(s: string): string {
   return s
@@ -40,7 +43,7 @@ describe("Footer", () => {
     const container = await createContainer();
     const html = decodeEntities(await container.renderToString(Footer));
 
-    const footer = getFooterData();
+    const footer = getFooterData(DEFAULT_LOCALE);
     const accordionLinks = footer.accordionSections
       .filter((s) => s.id !== "product")
       .flatMap((s) => [...s.firstColumn, ...s.secondColumn]);
@@ -55,7 +58,7 @@ describe("Footer", () => {
     const container = await createContainer();
     const html = await container.renderToString(Footer);
 
-    const footer = getFooterData();
+    const footer = getFooterData(DEFAULT_LOCALE);
     for (const s of footer.social) {
       expect(html).toContain(`aria-label="${s.label} link"`);
       expect(html).toContain(s.href);

@@ -24,6 +24,13 @@ This site will eventually have tens of thousands of pages, with most of them ren
 - If you recommend a different approach than what was asked for, query the user before proceeding.
 - Test red to green: Write tests first, and verify that they are failing before implementing the code that will make them pass.
 
+## Formatting
+
+- After editing code, run `yarn format` from `astro/` — but scope it to the files you touched (`npx prettier --write <paths>`) unless the user has asked for a project-wide sweep. Most of the tree is not yet Prettier-clean, so a bare `yarn format` rewrites hundreds of unrelated files.
+- Run it from `astro/`, never from the repo root. Prettier resolves the *nearest* config to each file and uses it wholesale (there is no cascade or `extends`), so files here get `astro/.prettierrc` — 2-space, plus `prettier-plugin-astro`. The repo-root `prettier.config.js` is Hugo's (4-space, single quotes, 120 cols) and must not be applied to this project.
+- Use `yarn format:check` to see what would change without writing.
+- `astro/.prettierignore` exists because Prettier does not read `.gitignore`. Add generated or vendored trees there rather than letting Prettier walk them.
+
 ## Testing
 
 - When possible, test files should be localized with the code they're testing.
@@ -74,6 +81,8 @@ verification belongs here; anything that talks to a cloud provider does not.
 - `yarn dev` — Start dev server on port 4321
 - `yarn build` — Production build to `dist/`
 - `yarn preview` — Preview the production build locally
+- `yarn format` — Prettier-format this project in place (project-wide; see Formatting)
+- `yarn format:check` — Report unformatted files without writing
 
 ## Stack
 

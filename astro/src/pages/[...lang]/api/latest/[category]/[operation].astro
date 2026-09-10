@@ -11,10 +11,9 @@ import {
   getOperationView,
 } from "@lib/api/viewsBuilder";
 import { renderMarkdown } from "@lib/api/markdownRenderer";
-import { highlightEndpoint } from "@lib/api/syntaxHighlighter";
 import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
 import { mdToMetaDescription } from "@lib/seo";
-import { i18n } from "@lib/i18n/i18n";
+import { useTranslations } from "@lib/i18n/i18n";
 import type { GetStaticPaths, GetStaticPathsResult } from "astro";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -75,6 +74,7 @@ if (
 
 const { redirectTo } = Astro.props as PageProps;
 
+const translate = useTranslations(lang);
 const categories = await getCategoryStubsView(lang);
 const category = await getCategoryViewBySlug(catSlug, lang);
 if (!category) {
@@ -86,12 +86,6 @@ const operation = redirectTo
   : await getOperationView(catSlug, opSlug, lang);
 if (!redirectTo && !operation) {
   return new Response(null, { status: 404 });
-}
-
-if (operation) {
-  for (const variant of operation.variants) {
-    await highlightEndpoint(variant);
-  }
 }
 
 const tabsId = operation ? `api-endpoint-${operation.slug}` : "";
@@ -138,15 +132,15 @@ const tabDisabled = operation
         activeCategory={category}
         currentOperationSlug={opSlug}
         breadcrumbs={[
-          { label: i18n("docs", lang), href: localizedHref(lang, "/") },
+          { label: translate("docs"), href: localizedHref(lang, "/") },
           {
-            label: i18n("api", lang),
+            label: translate("api"),
             href: localizedHref(lang, "/api/latest/"),
           },
           { label: operation.summary },
         ]}
       >
-        <ApiPageHeader title={operation.summary} lang={lang} />
+        <ApiPageHeader title={operation.summary} />
         <Tabs
           id={tabsId}
           labels={tabLabels}

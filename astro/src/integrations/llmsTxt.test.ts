@@ -48,12 +48,13 @@ async function runBuild(site: string | undefined): Promise<void> {
     string,
     (arg: unknown) => void | Promise<void>
   >;
-  await hooks["astro:config:done"]({ config: { build: { client: clientDir }, site } });
+  await hooks["astro:config:done"]({
+    config: { build: { client: clientDir }, site },
+  });
   await hooks["astro:build:done"]({ logger: { info: () => {} } });
 }
 
-const readOutput = (file: string) =>
-  readFile(new URL(file, clientDir), "utf8");
+const readOutput = (file: string) => readFile(new URL(file, clientDir), "utf8");
 
 beforeEach(async () => {
   tmpRoot = await mkdtemp(join(tmpdir(), "llms-txt-"));
@@ -74,9 +75,7 @@ describe("llmsTxt integration", () => {
     const index = await readOutput("api/llms.txt");
     expect(index.startsWith("# Datadog documentation\n")).toBe(true);
     expect(index).toContain("## API Reference");
-    expect(index).toContain(
-      `- [Metrics](${SITE}/api/latest/metrics/llms.txt)`,
-    );
+    expect(index).toContain(`- [Metrics](${SITE}/api/latest/metrics/llms.txt)`);
   });
 
   it("writes each section detail file into its nested directory", async () => {
@@ -107,7 +106,9 @@ describe("llmsTxt integration", () => {
     const metrics = await readOutput("api/latest/metrics/llms.txt");
     // ...while the links inside it carry the branch prefix.
     expect(metrics).toContain(`${PREVIEW_SITE}/api/latest/metrics.md`);
-    await expect(readOutput("my-branch/api/latest/metrics/llms.txt")).rejects.toThrow();
+    await expect(
+      readOutput("my-branch/api/latest/metrics/llms.txt"),
+    ).rejects.toThrow();
   });
 
   it("fails the build when site is not configured", async () => {

@@ -11,13 +11,13 @@ further_reading:
   text: 호스트 취약점 설정
 - link: /infrastructure/containers/container_images
   tag: 설명서
-  text: 컨테이너 이미지 조회
+  text: Container Images 조회
 - link: /security/cloud_security_management/troubleshooting/vulnerabilities
   tag: 설명서
   text: Cloud Security Vulnerabilities 문제 해결
 - link: https://www.datadoghq.com/blog/datadog-container-image-view/
   tag: 블로그
-  text: Datadog Container Monitoring의 컨테이너 이미지로 문제 해결 워크플로 향상
+  text: Datadog Container Monitoring의 Container Images로 문제 해결 워크플로 향상
 - link: /security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
   tag: 설명서
   text: 프로덕션에서 감지된 취약점에 Dockerfile 연결
@@ -25,7 +25,7 @@ title: Cloud Security Vulnerabilities
 ---
 ## 개요 {#overview}
 
-Cloud Security Vulnerabilities는 CI/CD 파이프라인부터 실제 운영 환경까지 컨테이너 이미지, 호스트, 호스트 이미지 및 서버리스 함수를 지속적으로 스캔하여 취약점을 탐지함으로써 보안 태세를 강화하고 규정 준수를 달성할 수 있도록 지원합니다. 런타임 관측 가능성을 활용하여 일상적인 워크플로에서 악용 가능한 취약점의 우선순위를 지정하고 해결할 수 있으며, 다른 Datadog 제품에 대한 종속성 없이 하나의 화면에서 모든 작업을 수행할 수 있습니다.
+Cloud Security Vulnerabilities는 CI/CD 파이프라인부터 실제 운영 환경까지 컨테이너 이미지, 호스트, 호스트 이미지 및 서버리스 함수를 지속적으로 스캔하여 취약점을 탐지함으로써 보안 태세를 강화하고 규정 준수를 달성할 수 있도록 지원합니다. 런타임 관측 가능성을 활용하여 일상적인 워크플로에서 악용 가능한 취약점의 우선순위를 지정하고 해결할 수 있으며, 다른 Datadog 제품에 대한 종속성 없이 조회 한 번에 모든 작업을 수행할 수 있습니다.
 
 Cloud Security Vulnerabilities를 사용하면 한 곳에서 클라우드 보안 관리 전략을 수행할 수 있습니다.
 
@@ -38,7 +38,7 @@ Cloud Security Vulnerabilities를 사용하면 한 곳에서 클라우드 보안
 ## 주요 기능 {#key-capabilities}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">선택한 사이트에서는 Agentless Scanning을 사용할 수 없습니다({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">선택한 사이트({{< region-param key="dd_site_name" >}})에서는 청구 가능한 호스트를 CSV로 다운로드할 수 없습니다.</div>
 {{< /site-region >}}
 
 Agentless 또는 통합 Datadog Agent를 사용한 배포
@@ -60,49 +60,53 @@ Agentless 또는 통합 Datadog Agent를 사용한 배포
 : Jira 티켓 생성을 자동화하고 SLA를 구현합니다. Datadog의 공개 API를 사용하여 취약점, 커버리지 및 SBOM을 내보낼 수 있습니다.
 
 보고서 탐색
-: 대시보드에서 취약점 데이터를 확인하고 모니터링합니다.
+: 대시보드에서 취약점 데이터를 조회하고 모니터링합니다.
 
 ## 배포 방법 {#deployment-methods}
 
 다음 방법을 사용하여 몇 분 안에 Cloud Security Vulnerabilities를 시작하고 인프라를 보호할 수 있습니다.
 - [Agentless Scanning][11]
-- [통합 Datadog Agent][12]
+- [Unified Datadog Agent][12]
 - [CI/CD Container Image Scanning][21]
 
 여러 배포 방법을 함께 사용할 수도 있습니다. 이미 통합 Datadog Agent가 배포된 환경에서는 이를 사용하고, 다른 환경에서는 Agentless를 사용하며, 운영 환경에 배포되기 전에 취약점을 탐지하기 위해 CI/CD 스캔을 사용할 수 있습니다.
 
-기능을 활성화하면 Datadog은 리소스를 지속적으로 스캔하기 시작하며, 1시간 이내에 [Cloud Security Vulnerabilities Findings 페이지][1]에서 우선순위가 지정된 취약점을 보고하기 시작합니다.
+기능을 활성화하면 Datadog은 리소스를 지속적으로 스캔하기 시작하며, 1시간 이내에 [{{< ui >}}Cloud Security Vulnerabilities Findings{{< /ui >}} 페이지][1]에서 우선순위가 지정된 취약점을 보고하기 시작합니다.
 
 다음 표를 참고하여 시작할 솔루션을 선택하세요.
-| 기능                                   | Agentless                                     | 통합 Datadog Agent          |
+| 기능                                   | Agentless                                     | Unified Datadog Agent          |
 |-------------------------------------------|-----------------------------------------------|--------------------------------|
 | 인프라 전체 배포 시간 | 수분                                       | 수시간~수주                 |
 | 취약점 우선순위 지정              | 예                                           | 예(런타임 컨텍스트 포함)      |
 | 취약점 스캔 주기          | 12시간                                      | 실시간                      |
 
-| 취약점 탐지 범위 | Agentless                                                                         | 통합 Datadog Agent          |
-|-------------------------------|-----------------------------------------------------------------------------------|--------------------------------|
-| 호스트 및 호스트 이미지           | OS 패키지 및 앱 패키지(이미지에 매핑)                                     | OS 패키지                    |
-| 컨테이너 이미지               | OS 패키지 및 앱 패키지(이미지에 매핑)                                     | OS 패키지                    |
-| 클라우드 공급자                | AWS, Azure, GCP                                                                   | AWS, Azure, GCP, 온프레미스 등 |
-| 운영 체제              | Linux, Windows                                                                    | Linux, Windows                 |
-| Serverless                    | AWS Lambda, Amazon ECS Fargate, Azure Container Apps, Azure Container Instances, GCP Cloud Run(컨테이너 배포만) | 해당 없음                 |
-| 컨테이너 레지스트리          | Amazon ECR(실행 중 + 저장 중), Google Artifact Registry(실행 중인 워크로드만), Azure Container Registry(실행 중인 컨테이너 이미지만) | 해당 없음                 |
+| 취약점 탐지 범위 | Agentless                                                                                                                                                    | Unified Datadog Agent          |
+|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| 호스트 및 호스트 이미지           | OS 패키지 및 앱 패키지(이미지에 매핑)                                                                                                                | OS 패키지                    |
+| 컨테이너 이미지               | OS 패키지 및 앱 패키지(이미지에 매핑)                                                                                                                | OS 패키지                    |
+| 클라우드 공급자                | AWS, Azure, GCP                                                                                                                                              | AWS, Azure, GCP, on-prem 등 |
+| 운영 체제              | Linux, Windows                                                                                                                                               | Linux, Windows                 |
+| Serverless                    | AWS Lambda, Amazon ECS Fargate, Azure Container Apps, Azure Container Instances, GCP Cloud Run(컨테이너 배포만)                                   | 해당 없음                 |
+| 컨테이너 레지스트리          | Amazon ECR 및 Google Artifact Registry(실행 중+저장 중); Azure Container Registry, Docker Hub, GitHub Container Registry, Microsoft Container Registry 및 Kubernetes 레지스트리(인증된 풀만). 자세한 내용은 [컨테이너 이미지 레지스트리][24]를 참조하세요. | 해당 없음                 |
 
-호환성에 대한 자세한 내용은 [Cloud Security Vulnerabilities 호스트 및 컨테이너 호환성][13]을 참조하세요. 도움이 필요하면 [문제 해결 가이드][14]를 참조하거나 support@datadoghq.com으로 문의하세요.
+호환성에 대한 자세한 내용은 [Cloud Security Vulnerabilities 호스트 및 Containers 호환성][13]을 참조하세요. 도움이 필요하면 [문제 해결 가이드][14]를 참조하거나 support@datadoghq.com으로 문의하세요.
 
 ## 악용 가능한 취약점을 지속적으로 탐지, 우선순위 지정 및 해결 {#continuously-detect-prioritize-and-remediate-exploitable-vulnerabilities}
-[Cloud Security Vulnerabilities Findings 페이지][1]에서는 필터링 및 그룹화 기능을 사용하여 컨테이너 이미지, 호스트 이미지, 실행 중인 호스트 및 서버리스 함수에서 탐지된 취약점을 조사할 수 있습니다.
+[{{< ui >}}Cloud Security Vulnerabilities Findings{{< /ui >}} 페이지][1]에서는 필터링 및 그룹화 기능을 사용하여 컨테이너 이미지, 호스트 이미지, 실행 중인 호스트 및 Serverless 함수에서 탐지된 취약점을 조사할 수 있습니다.
 
 Datadog Severity Score를 사용하여 먼저 악용 가능한 취약점에 집중할 수 있습니다. 이 점수는 기본 CVSS 점수에 민감한 데이터, 환경 민감도, 공격 노출, 익스플로잇 가용성 및 위협 인텔리전스 소스 등 다양한 위험 요소를 결합하여 계산됩니다.
 
-해결 방법이 제공되는 취약점의 경우 Findings 페이지에서 Dev 및 Ops 팀이 문제를 보다 빠르고 효과적으로 해결할 수 있도록 가이드 기반 해결 단계를 제공합니다. 또한 취약점에 대해 분류, 음소거, 댓글 추가 및 담당자 할당을 수행하여 취약점의 수명 주기를 관리할 수 있습니다.
+해결 방법이 제공되는 취약점의 경우 {{< ui >}}Findings{{< /ui >}} 페이지에서 Dev 및 Ops 팀이 문제를 보다 빠르고 효과적으로 해결할 수 있도록 가이드 기반 해결 단계를 제공합니다. 또한 취약점에 대해 분류, 음소거, 댓글 추가 및 담당자 할당을 수행하여 취약점의 수명 주기를 관리할 수 있습니다.
+
+<div class="alert alert-info">Vulnerabilities Findings 페이지에서 탐색기 설정을 재사용하려면 전체 페이지 URL을 즐겨찾기에 추가하세요. 검색 쿼리 및 패싯 선택 항목은 URL에 보존됩니다.</div>
 
 {{< img src="security/vulnerabilities/csm-vm-explorer-actionability-2.png" alt="취약점과 사용자가 이를 해결하기 위해 수행할 수 있는 액션을 보여주는 Cloud Security Vulnerabilities Findings 페이지" width="100%">}}
 
-[컨테이너 이미지][7]에서는 이미지에서 발견된 취약점을 특정 레이어까지 추적할 수 있으므로 보안 위험을 더욱 빠르게 식별하고 해결할 수 있습니다.
+[{{< ui >}}Container Images{{< /ui >}}][7]에서는 이미지에서 발견된 취약점을 특정 레이어까지 추적할 수 있으므로 보안 위험을 더욱 빠르게 식별하고 해결할 수 있습니다.
 
 {{< img src="infrastructure/containerimages/image_layer_vulnerabilities.png" alt="이미지의 각 레이어와 연결된 취약점 목록" width="100%">}}
+
+공용 베이스 이미지로 빌드된 비플랫(non-flattened), 단일 스테이지 컨테이너 이미지의 경우 Datadog은 베이스 이미지를 자동으로 식별하고, 베이스 이미지에서 상속된 취약점과 이미지에 추가된 패키지로 인한 취약점을 구분합니다. 속성을 사용할 수 있는 경우 Datadog은 베이스 이미지 이름과 다이제스트를 표시하여, 애플리케이션 코드를 변경하는 대신 베이스 이미지를 업데이트해야 하는 경우를 나타냅니다. [Datadog에서 컨테이너 이미지 조회하기][23].
 
 ## 운영 환경의 취약점을 소스 코드까지 추적 {#trace-production-vulnerabilities-to-source-code}
 
@@ -113,7 +117,7 @@ Datadog Severity Score를 사용하여 먼저 악용 가능한 취약점에 집�
 소스 연결을 설정하는 방법은 CI/CD 컨테이너 이미지 스캔 가이드의 [Dockerfile을 취약점에 연결][22]을 참조하세요.
 
 ## 자동화 및 Jira 통합 {#automation-and-jira-integration}
-[보안 알림 규칙][17]과 [자동화 파이프라인(미리 보기)][20]을 설정하여 Cloud Security Vulnerabilities를 일상적인 워크플로에 통합합니다.
+[{{< ui >}}security notification rules{{< /ui >}}][17]와 [자동화 파이프라인(미리 보기)][20]을 설정하여 Cloud Security Vulnerabilities를 일상적인 워크플로의 일부로 만드세요.
 - 범위 내에서 악용 가능한 취약점이 탐지되면 알림을 수신
 - Jira 티켓을 자동으로 생성
 - 취약점을 해결하기 위한 SLA를 구성
@@ -121,13 +125,13 @@ Datadog Severity Score를 사용하여 먼저 악용 가능한 취약점에 집�
 {{< img src="security/vulnerabilities/csm-notifications.png" alt="알림 규칙 설정 화면" width="100%">}}
 
 ## 추적 및 보고 {#tracking-and-reporting}
-기본 제공되는 [Cloud Security Vulnerabilities 대시보드][18]를 사용하여 진행 상황을 추적하고 이해관계자에게 보고합니다. 필요에 따라 복제하고 수정하여 환경에 맞게 사용할 수 있습니다.
+기본 제공되는 [{{< ui >}}Cloud Security Vulnerabilities{{< /ui >}} 대시보드][18]를 사용하여 이해관계자에게 진행 상황을 추적하고 보고합니다. 필요에 따라 복제하고 수정하여 환경에 맞게 사용할 수 있습니다.
 
 {{< img src="security/vulnerabilities/csm-vm-reporting.png" alt="Cloud Security Vulnerabilities 대시보드" width="100%">}}
 
 ## 인프라 패키지 탐색 {#explore-infrastructure-packages}
 
-[인프라 패키지 카탈로그][19]는 인프라에 배포된 모든 호스트, 호스트 이미지 및 컨테이너 이미지의 패키지에 대한 실시간 인벤토리를 제공합니다. 또한 취약점 및 런타임 컨텍스트가 포함된 SBOM을 조사할 수 있는 인터페이스를 제공합니다.
+[{{< ui >}}Infrastructure Packages Catalog{{< /ui >}}][19]은 인프라에 배포된 모든 호스트, 호스트 이미지 및 컨테이너 이미지의 패키지에 대한 실시간 인벤토리를 제공합니다. 또한 취약점 및 런타임 컨텍스트가 포함된 SBOM을 조사할 수 있는 인터페이스를 제공합니다.
 
 영향을 받는 패키지 버전을 검색하고 이를 사용하는 모든 리소스를 식별하여 새롭게 등장한 심각한 취약점의 영향을 빠르게 평가할 수 있습니다.
 
@@ -153,6 +157,8 @@ Datadog Severity Score를 사용하여 먼저 악용 가능한 취약점에 집�
 [20]: https://www.datadoghq.com/product-preview/security-automation-pipelines/
 [21]: /ko/security/cloud_security_management/setup/ci_cd
 [22]: /ko/security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
+[23]: https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score
+[24]: /ko/security/cloud_security_management/setup/agentless_scanning/compatibility/#container-image-registries
 
 ## 추가 자료 {#further-reading}
 

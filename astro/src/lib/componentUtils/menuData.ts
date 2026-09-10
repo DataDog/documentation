@@ -4,13 +4,18 @@
  * Consumers (Header.astro, Footer.astro) get fully translated, URL-resolved,
  * structured data via `getHeaderData()` / `getFooterProductLinks()` — no
  * `find`/`filter` over raw menu arrays in component templates.
+ *
+ * Both entry points take the page's locale, since this module has no render
+ * context to read `Astro.currentLocale` from. They bind it once and thread the
+ * resulting `translate` through the builders below.
  */
 import { parse as parseYaml } from "yaml";
 import { z } from "zod";
 import menusRaw from "@websites-modules/data/menu_data/menus.yaml?raw";
 import categoriesRaw from "@websites-modules/data/menu_data/product_categories.yaml?raw";
 import productsRaw from "@websites-modules/data/menu_data/products.yaml?raw";
-import { i18n } from "@lib/i18n/i18n";
+import { useTranslations, type Translate } from "@lib/i18n/i18n";
+import type { Locale } from "@lib/i18n/locale";
 
 // ---------------------------------------------------------------------------
 // Raw schemas (internal)
@@ -176,22 +181,29 @@ function findItem(list: MenuItem[], identifier: string): MenuItem | undefined {
   return list.find((m) => m.identifier === identifier);
 }
 
-function asLink(item: MenuItem | MenuChild | undefined): SimpleLink | null {
+function asLink(
+  item: MenuItem | MenuChild | undefined,
+  translate: Translate,
+): SimpleLink | null {
   if (!item) {
     return null;
   }
-  return { label: i18n(item.lang_key), href: resolveUrl(item.url) };
+  return { label: translate(item.lang_key), href: resolveUrl(item.url) };
 }
 
-function childLinks(item: MenuItem | undefined): SimpleLink[] {
+function childLinks(
+  item: MenuItem | undefined,
+  translate: Translate,
+): SimpleLink[] {
   return (item?.children ?? []).map((c) => ({
-    label: i18n(c.lang_key),
+    label: translate(c.lang_key),
     href: resolveUrl(c.url),
   }));
 }
 
 function resolveProductList(
   ids: string[],
+  translate: Translate,
 ): { identifier: string; label: string; url: string }[] {
   const out: { identifier: string; label: string; url: string }[] = [];
   for (const id of ids) {
@@ -199,7 +211,7 @@ function resolveProductList(
     if (p) {
       out.push({
         identifier: p.identifier,
-        label: i18n(p.lang_key),
+        label: translate(p.lang_key),
         url: resolveUrl(p.url),
       });
     }
@@ -207,7 +219,7 @@ function resolveProductList(
   return out;
 }
 
-function buildMegaCategories(): MegaCategory[] {
+function buildMegaCategories(translate: Translate): MegaCategory[] {
   return productCategories
     .filter((c) => !c.mobile)
     .map((cat) => {
@@ -215,21 +227,21 @@ function buildMegaCategories(): MegaCategory[] {
         (sub) => {
           const sections: MegaSection[] = sub.sections
             ? sub.sections.map((section) => ({
-                label: i18n(section.lang_key),
-                products: resolveProductList(section.products),
+                label: translate(section.lang_key),
+                products: resolveProductList(section.products, translate),
               }))
             : sub.products
               ? [
                   {
-                    label: i18n(sub.lang_key),
-                    products: resolveProductList(sub.products),
+                    label: translate(sub.lang_key),
+                    products: resolveProductList(sub.products, translate),
                   },
                 ]
               : [];
 
           return {
             identifier: sub.identifier,
-            label: i18n(sub.lang_key),
+            label: translate(sub.lang_key),
             related: sub.identifier.includes("related"),
             sections,
           };
@@ -238,8 +250,8 @@ function buildMegaCategories(): MegaCategory[] {
 
       return {
         identifier: cat.identifier,
-        label: i18n(cat.lang_key),
-        descriptionLabel: i18n(cat.description_key ?? ""),
+        label: translate(cat.lang_key),
+        descriptionLabel: translate(cat.description_key ?? ""),
         gradient: cat.gradient ?? ["#000000", "#333333"],
         iconHtml: iconHtml(cat.icon),
         subcategories,
@@ -247,11 +259,14 @@ function buildMegaCategories(): MegaCategory[] {
     });
 }
 
-function buildSolutionsColumns(item: MenuItem | undefined): SolutionsColumn[] {
+function buildSolutionsColumns(
+  item: MenuItem | undefined,
+  translate: Translate,
+): SolutionsColumn[] {
   return (item?.children ?? []).map((col) => ({
-    label: i18n(col.lang_key),
+    label: translate(col.lang_key),
     items: (col.children ?? []).map((child) => ({
-      label: i18n(child.lang_key),
+      label: translate(child.lang_key),
       url: resolveUrl(child.url),
     })),
   }));
@@ -261,7 +276,8 @@ function buildSolutionsColumns(item: MenuItem | undefined): SolutionsColumn[] {
 // Public API
 // ---------------------------------------------------------------------------
 
-export function getHeaderData(): HeaderData {
+export function getHeaderData(lang: Locale): HeaderData {
+  const translate = useTranslations(lang);
   const left = menus.main_left;
   const right = menus.main_right;
 
@@ -275,17 +291,17 @@ export function getHeaderData(): HeaderData {
   return {
     product: productItem
       ? {
-          label: i18n(productItem.lang_key),
+          label: translate(productItem.lang_key),
           href: resolveUrl(productItem.url),
-          megaCategories: buildMegaCategories(),
+          megaCategories: buildMegaCategories(translate),
           carrotSvg: iconHtml("right-carrot-normal-2"),
         }
       : null,
     solutions: solutionsItem
       ? {
-          label: i18n(solutionsItem.lang_key),
+          label: translate(solutionsItem.lang_key),
           href: resolveUrl(solutionsItem.url),
-          columns: buildSolutionsColumns(solutionsItem),
+          columns: buildSolutionsColumns(solutionsItem, translate),
         }
       : null,
     leftLinks: left
@@ -298,18 +314,26 @@ export function getHeaderData(): HeaderData {
       )
       .map((m) => ({
         identifier: m.identifier,
-        label: i18n(m.lang_key),
+        label: translate(m.lang_key),
         href: resolveUrl(m.url),
       })),
     about: aboutItem
-      ? { ...asLink(aboutItem)!, children: childLinks(aboutItem) }
+      ? {
+          ...asLink(aboutItem, translate)!,
+          children: childLinks(aboutItem, translate),
+        }
       : null,
     blog: blogItem
-      ? { ...asLink(blogItem)!, children: childLinks(blogItem) }
+      ? {
+          ...asLink(blogItem, translate)!,
+          children: childLinks(blogItem, translate),
+        }
       : null,
     login:
-      loginItem && !isDisabledForDocs(loginItem) ? asLink(loginItem) : null,
-    getStarted: asLink(getStartedItem),
+      loginItem && !isDisabledForDocs(loginItem)
+        ? asLink(loginItem, translate)
+        : null,
+    getStarted: asLink(getStartedItem, translate),
   };
 }
 
@@ -318,7 +342,8 @@ export function getHeaderData(): HeaderData {
  * The footer's product column consumes this — Hugo's `$datadir.menu_data.products`
  * equivalent, ordered by first appearance in the category tree.
  */
-export function getFooterProductLinks(): SimpleLink[] {
+export function getFooterProductLinks(lang: Locale): SimpleLink[] {
+  const translate = useTranslations(lang);
   const seen = new Set<string>();
   const out: SimpleLink[] = [];
   for (const cat of productCategories) {
@@ -332,7 +357,7 @@ export function getFooterProductLinks(): SimpleLink[] {
         seen.add(id);
         const p = productById.get(id);
         if (p) {
-          out.push({ label: i18n(p.lang_key), href: resolveUrl(p.url) });
+          out.push({ label: translate(p.lang_key), href: resolveUrl(p.url) });
         }
       }
     }

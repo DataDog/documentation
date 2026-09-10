@@ -3,26 +3,29 @@ aliases:
 - /es/logs/faq/how-to-increase-the-number-of-log-files-tailed-by-the-agent
 further_reading:
 - link: /logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers/
-  tag: FAQ
-  text: ¿Cómo enviar logs a Datadog a través de cargadores de log externos?
+  tag: PREGUNTAS FRECUENTES
+  text: ¿Cómo enviar registros a Datadog a través de transportadores de registros
+    externos?
 - link: /logs/log_configuration/parsing
   tag: Documentación
-  text: Obtén más información sobre el parseo
+  text: Obtenga más información sobre el parseo
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
-  tag: FAQ
-  text: ¿Cómo investigar un problema de parseo de logs?
-title: Aumentar el número de archivos de log supervisados por el Agent
+  tag: PREGUNTAS FRECUENTES
+  text: ¿Cómo investigar un problema de parseo de registros?
+title: Aumentar el número de archivos de registro que son objeto de seguimiento de
+  las últimas líneas por el Agent
 ---
-
-Por defecto, el Agent puede almacenar hasta 200 archivos de log en Windows y MacOS, y 500 archivos de log en otros sistemas operativos. Este límite se coloca para evitar problemas de rendimiento cuando se establecen comodines en directorios enormes.
-
-Para aumentar este límite, ajusta el valor de `open_files_limit` en el archivo de configuración del Agent (`/etc/datadog-agent/datadog.yaml`) en la sección `logs_config`:
+El parámetro `logs_config.open_files_limit` en el archivo de configuración del Agent (`/etc/datadog-agent/datadog.yaml`) determina la cantidad máxima de archivos de registro en seguimiento de las últimas líneas que el Agent puede manejar simultáneamente. Este límite se establece para evitar problemas de rendimiento cuando se utilizan comodines en directorios enormes. Puede aumentar el límite ajustando este parámetro.
 
 ```yaml
 logs_config:
   open_files_limit: 500
 ```
 
-Para los entornos en contenedores, puedes establecer la variable de entorno `DD_logs_CONFIG_OPEN_FILES_LIMIT`.
+Para entornos en contenedores, puede configurar la variable de entorno `DD_LOGS_CONFIG_OPEN_FILES_LIMIT`.
 
-**Nota**: Aumentar el límite de archivos de logs supervisados podría incrementar el consumo de recursos del Agent.
+El valor predeterminado varía según la versión del Agent y el sistema operativo. Para verificar el valor predeterminado de su versión del Agent, consulte los [archivos de configuración de ejemplo del Agent][1] en el repositorio del Datadog Agent. Abra el archivo correspondiente a su sistema operativo. Asegúrese de seleccionar la etiqueta correspondiente a su versión del Agent para ver los valores predeterminados correctos.
+
+**Nota**: Aumentar el límite de archivos de registro en seguimiento de las últimas líneas podría incrementar el consumo de recursos del Agent.
+
+[1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/config/example

@@ -780,6 +780,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@dd/ask-ai@link:../shared/packages/ask-ai::locator=dd-docs-astro%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@dd/ask-ai@link:../shared/packages/ask-ai::locator=dd-docs-astro%40workspace%3A."
+  languageName: node
+  linkType: soft
+
 "@emmetio/abbreviation@npm:^2.3.3":
   version: 2.3.3
   resolution: "@emmetio/abbreviation@npm:2.3.3"
@@ -3296,6 +3302,7 @@ __metadata:
     "@datadog/browser-logs": "npm:^7.11.0"
     "@datadog/browser-rum": "npm:^7.11.0"
     "@datadog/datadog-ci": "npm:^5.23.0"
+    "@dd/ask-ai": "link:../shared/packages/ask-ai"
     "@playwright/test": "npm:^1.62.0"
     "@testing-library/preact": "npm:^3.2.4"
     "@testing-library/user-event": "npm:^14.6.1"

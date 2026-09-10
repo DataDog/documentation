@@ -1,87 +1,155 @@
-import { describe, it, expect } from 'vitest';
-import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+import { describe, it, expect } from "vitest";
+import { experimental_AstroContainer as AstroContainer } from "astro/container";
 // @ts-ignore — Preact renderer is registered for SSR of the nested ApiSchemaTableNav island.
-import preactRenderer from '@astrojs/preact/server.js';
-import ApiSchemaTable from '../ApiSchemaTable.astro';
-import type { SchemaField } from '@lib/api/schemas/schemaField';
+import preactRenderer from "@astrojs/preact/server.js";
+import ApiSchemaTable from "../ApiSchemaTable.astro";
+import type { SchemaField } from "@lib/api/schemas/schemaField";
 
 const flatFields: SchemaField[] = [
   {
-    name: 'id',
-    type: 'string',
+    name: "id",
+    type: "string",
     required: true,
     deprecated: false,
     readOnly: false,
-    description: 'Unique identifier',
+    description: "Unique identifier",
   },
   {
-    name: 'tags',
-    type: '[string]',
+    name: "tags",
+    type: "[string]",
     required: false,
     deprecated: false,
     readOnly: false,
-    description: 'List of tags',
+    description: "List of tags",
   },
 ];
 
 const nestedFields: SchemaField[] = [
   {
-    name: 'parent',
-    type: 'object',
+    name: "parent",
+    type: "object",
     required: false,
     deprecated: false,
     readOnly: false,
-    description: 'A parent object',
+    description: "A parent object",
     children: [
       {
-        name: 'child',
-        type: 'string',
+        name: "child",
+        type: "string",
         required: false,
         deprecated: false,
         readOnly: false,
-        description: 'A child field',
+        description: "A child field",
       },
     ],
   },
 ];
 
-async function renderTable(props: { fields: SchemaField[]; showExpandAll?: boolean }) {
+async function renderTable(props: {
+  fields: SchemaField[];
+  showExpandAll?: boolean;
+}) {
   const container = await AstroContainer.create();
-  container.addServerRenderer({ renderer: preactRenderer, name: '@astrojs/preact' });
+  container.addServerRenderer({
+    renderer: preactRenderer,
+    name: "@astrojs/preact",
+  });
   return container.renderToString(ApiSchemaTable, { props });
 }
 
-describe('ApiSchemaTable expand-all toolbar', () => {
-  it('omits the toolbar when no field has children or unionOptions', async () => {
-    const html = await renderTable({ fields: flatFields });
-    expect(html).not.toContain('schema-table__toolbar');
+describe("ApiSchemaTable type column", () => {
+  const unionField = (type: "oneOf" | "anyOf"): SchemaField[] => [
+    {
+      name: "basicAuth",
+      type,
+      required: false,
+      deprecated: false,
+      readOnly: false,
+      description: "Object to handle basic authentication.",
+      unionOptions: [
+        {
+          label: "<type=web>",
+          fields: [
+            {
+              name: "password",
+              type: "string",
+              required: true,
+              deprecated: false,
+              readOnly: false,
+              description: "Password to use.",
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
+  it("renders a bare oneOf tag bracketed, as Hugo does", async () => {
+    const html = await renderTable({ fields: unionField("oneOf") });
+    expect(html).toContain("&lt;oneOf&gt;");
+    // the unbracketed tag must not reach the type cell
+    expect(html).not.toMatch(/schema-table__type[^>]*>\s*oneOf\s*</);
   });
 
-  it('shows the toolbar when at least one field has children', async () => {
-    const html = await renderTable({ fields: nestedFields });
-    expect(html).toContain('schema-table__toolbar');
+  it("renders a bare anyOf tag bracketed", async () => {
+    const html = await renderTable({ fields: unionField("anyOf") });
+    expect(html).toContain("&lt;anyOf&gt;");
   });
 
-  it('shows the toolbar when a field has unionOptions', async () => {
+  it("leaves an already-bracketed array item type alone", async () => {
     const fields: SchemaField[] = [
       {
-        name: 'variant',
-        type: 'oneOf',
+        name: "processors",
+        type: "[<oneOf>]",
         required: false,
         deprecated: false,
         readOnly: false,
-        description: '',
+        description: "Ordered list of processors.",
+      },
+    ];
+    const html = await renderTable({ fields });
+    expect(html).toContain("[&lt;oneOf&gt;]");
+    expect(html).not.toContain("[&lt;&lt;oneOf&gt;&gt;]");
+  });
+
+  it("leaves ordinary types untouched", async () => {
+    const html = await renderTable({ fields: flatFields });
+    expect(html).toMatch(/schema-table__type[^>]*>\s*string\s*</);
+    expect(html).toMatch(/schema-table__type[^>]*>\s*\[string\]\s*</);
+  });
+});
+
+describe("ApiSchemaTable expand-all toolbar", () => {
+  it("omits the toolbar when no field has children or unionOptions", async () => {
+    const html = await renderTable({ fields: flatFields });
+    expect(html).not.toContain("schema-table__toolbar");
+  });
+
+  it("shows the toolbar when at least one field has children", async () => {
+    const html = await renderTable({ fields: nestedFields });
+    expect(html).toContain("schema-table__toolbar");
+  });
+
+  it("shows the toolbar when a field has unionOptions", async () => {
+    const fields: SchemaField[] = [
+      {
+        name: "variant",
+        type: "oneOf",
+        required: false,
+        deprecated: false,
+        readOnly: false,
+        description: "",
         unionOptions: [
           {
-            label: 'Option A',
+            label: "Option A",
             fields: [
               {
-                name: 'value',
-                type: 'string',
+                name: "value",
+                type: "string",
                 required: false,
                 deprecated: false,
                 readOnly: false,
-                description: '',
+                description: "",
               },
             ],
           },
@@ -89,128 +157,131 @@ describe('ApiSchemaTable expand-all toolbar', () => {
       },
     ];
     const html = await renderTable({ fields });
-    expect(html).toContain('schema-table__toolbar');
+    expect(html).toContain("schema-table__toolbar");
   });
 
-  it('omits the toolbar when showExpandAll is false', async () => {
-    const html = await renderTable({ fields: nestedFields, showExpandAll: false });
-    expect(html).not.toContain('schema-table__toolbar');
-  });
-});
-
-describe('ApiSchemaTable — flat fields', () => {
-  it('emits one row per top-level field with its name, type, and description', async () => {
-    const html = await renderTable({ fields: flatFields });
-    expect(html).toContain('schema-table__row');
-    expect(html).toContain('>id<');
-    expect(html).toContain('>tags<');
-    expect(html).toContain('Unique identifier');
-    expect(html).toContain('List of tags');
-  });
-
-  it('flags required fields with the [required] marker', async () => {
-    const html = await renderTable({ fields: flatFields });
-    expect(html).toContain('schema-table__required');
-    expect(html).toContain('[required]');
-  });
-
-  it('emits no toggle button when a field has no children', async () => {
-    const html = await renderTable({ fields: flatFields });
-    expect(html).not.toContain('schema-table__toggle');
-  });
-
-  it('emits no children container when a field has no children', async () => {
-    const html = await renderTable({ fields: flatFields });
-    expect(html).not.toContain('schema-table__children');
+  it("omits the toolbar when showExpandAll is false", async () => {
+    const html = await renderTable({
+      fields: nestedFields,
+      showExpandAll: false,
+    });
+    expect(html).not.toContain("schema-table__toolbar");
   });
 });
 
-describe('ApiSchemaTable — nested fields', () => {
-  it('emits a toggle button for fields with children', async () => {
+describe("ApiSchemaTable — flat fields", () => {
+  it("emits one row per top-level field with its name, type, and description", async () => {
+    const html = await renderTable({ fields: flatFields });
+    expect(html).toContain("schema-table__row");
+    expect(html).toContain(">id<");
+    expect(html).toContain(">tags<");
+    expect(html).toContain("Unique identifier");
+    expect(html).toContain("List of tags");
+  });
+
+  it("flags required fields with the [required] marker", async () => {
+    const html = await renderTable({ fields: flatFields });
+    expect(html).toContain("schema-table__required");
+    expect(html).toContain("[required]");
+  });
+
+  it("emits no toggle button when a field has no children", async () => {
+    const html = await renderTable({ fields: flatFields });
+    expect(html).not.toContain("schema-table__toggle");
+  });
+
+  it("emits no children container when a field has no children", async () => {
+    const html = await renderTable({ fields: flatFields });
+    expect(html).not.toContain("schema-table__children");
+  });
+});
+
+describe("ApiSchemaTable — nested fields", () => {
+  it("emits a toggle button for fields with children", async () => {
     const html = await renderTable({ fields: nestedFields });
-    expect(html).toContain('schema-table__toggle');
+    expect(html).toContain("schema-table__toggle");
     expect(html).toContain('aria-label="Toggle parent"');
   });
 
-  it('emits a hidden children container with nested rows always rendered server-side', async () => {
+  it("emits a hidden children container with nested rows always rendered server-side", async () => {
     const html = await renderTable({ fields: nestedFields });
     expect(html).toMatch(/class="[^"]*schema-table__children[^"]*" hidden/);
-    expect(html).toContain('A child field');
+    expect(html).toContain("A child field");
     expect(html).toContain('data-depth="1"');
   });
 
-  it('starts every toggle in the collapsed state', async () => {
+  it("starts every toggle in the collapsed state", async () => {
     const html = await renderTable({ fields: nestedFields });
     expect(html).toContain('aria-expanded="false"');
-    expect(html).not.toContain('schema-table__toggle--expanded');
+    expect(html).not.toContain("schema-table__toggle--expanded");
   });
 });
 
-describe('ApiSchemaTable — modifiers and content', () => {
-  it('applies readonly and deprecated row modifiers', async () => {
+describe("ApiSchemaTable — modifiers and content", () => {
+  it("applies readonly and deprecated row modifiers", async () => {
     const fields: SchemaField[] = [
       {
-        name: 'a',
-        type: 'string',
+        name: "a",
+        type: "string",
         required: false,
         deprecated: false,
         readOnly: true,
-        description: '',
+        description: "",
       },
       {
-        name: 'b',
-        type: 'string',
+        name: "b",
+        type: "string",
         required: false,
         deprecated: true,
         readOnly: false,
-        description: '',
+        description: "",
       },
     ];
     const html = await renderTable({ fields });
-    expect(html).toContain('schema-table__row--readonly');
-    expect(html).toContain('schema-table__row--deprecated');
-    expect(html).toContain('DEPRECATED');
+    expect(html).toContain("schema-table__row--readonly");
+    expect(html).toContain("schema-table__row--deprecated");
+    expect(html).toContain("DEPRECATED");
   });
 
-  it('renders enum values inline up to the inline limit and details for the rest', async () => {
+  it("renders enum values inline up to the inline limit and details for the rest", async () => {
     const eleven = Array.from({ length: 11 }, (_, i) => `v${i}`);
     const html = await renderTable({
       fields: [
         {
-          name: 'sort',
-          type: 'string',
+          name: "sort",
+          type: "string",
           required: false,
           deprecated: false,
           readOnly: false,
-          description: '',
+          description: "",
           enumValues: eleven,
         },
       ],
     });
-    expect(html).toContain('schema-table__enum-details');
-    expect(html).toContain('Show 1 more');
+    expect(html).toContain("schema-table__enum-details");
+    expect(html).toContain("Show 1 more");
   });
 
-  it('renders each union option as its own collapsible row, not a flat banner', async () => {
+  it("renders each union option as its own collapsible row, not a flat banner", async () => {
     const fields: SchemaField[] = [
       {
-        name: 'variant',
-        type: 'oneOf',
+        name: "variant",
+        type: "oneOf",
         required: false,
         deprecated: false,
         readOnly: false,
-        description: '',
+        description: "",
         unionOptions: [
           {
-            label: 'Option A',
+            label: "Option A",
             fields: [
               {
-                name: 'value',
-                type: 'string',
+                name: "value",
+                type: "string",
                 required: false,
                 deprecated: false,
                 readOnly: false,
-                description: 'A value',
+                description: "A value",
               },
             ],
           },
@@ -220,32 +291,32 @@ describe('ApiSchemaTable — modifiers and content', () => {
     const html = await renderTable({ fields });
 
     // The old flat banner construction is gone.
-    expect(html).not.toContain('schema-table__union-label');
+    expect(html).not.toContain("schema-table__union-label");
 
     // Each option is a real row with its label as the name and a toggle,
     // so it can be expanded/collapsed independently (matching Hugo).
-    expect(html).toContain('Option A');
+    expect(html).toContain("Option A");
     expect(html).toContain('aria-label="Toggle Option A"');
 
     // The option's fields live in a hidden nested children container.
     expect(html).toMatch(/class="[^"]*schema-table__children[^"]*" hidden/);
-    expect(html).toContain('A value');
+    expect(html).toContain("A value");
   });
 
-  it('escapes HTML in field names and types', async () => {
+  it("escapes HTML in field names and types", async () => {
     const html = await renderTable({
       fields: [
         {
-          name: '<not-a-tag>',
-          type: '<int>',
+          name: "<not-a-tag>",
+          type: "<int>",
           required: false,
           deprecated: false,
           readOnly: false,
-          description: 'Plain text',
+          description: "Plain text",
         },
       ],
     });
-    expect(html).toContain('&lt;not-a-tag&gt;');
-    expect(html).toContain('&lt;int&gt;');
+    expect(html).toContain("&lt;not-a-tag&gt;");
+    expect(html).toContain("&lt;int&gt;");
   });
 });

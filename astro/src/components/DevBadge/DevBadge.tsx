@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'preact/hooks';
-import styles from './DevBadge.module.css';
-import { classListFactory } from '@lib/cssUtils/classListFactory';
+import { useState, useEffect, useRef } from "preact/hooks";
+import styles from "./DevBadge.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
 
 const cl = classListFactory(styles);
 
@@ -9,7 +9,7 @@ const EDGE_MARGIN = 16;
 // Pull pointer coordinates from either a mouse or a touch event so dragging
 // works with both input types.
 function getPointer(event: MouseEvent | TouchEvent): { x: number; y: number } {
-  if ('touches' in event) {
+  if ("touches" in event) {
     const touch = event.touches[0] ?? event.changedTouches[0];
     return { x: touch.clientX, y: touch.clientY };
   }
@@ -51,15 +51,15 @@ export function DevBadge() {
 
     const handleEnd = () => setDragging(false);
 
-    window.addEventListener('mousemove', handleMove);
-    window.addEventListener('mouseup', handleEnd);
-    window.addEventListener('touchmove', handleMove);
-    window.addEventListener('touchend', handleEnd);
+    window.addEventListener("mousemove", handleMove);
+    window.addEventListener("mouseup", handleEnd);
+    window.addEventListener("touchmove", handleMove);
+    window.addEventListener("touchend", handleEnd);
     return () => {
-      window.removeEventListener('mousemove', handleMove);
-      window.removeEventListener('mouseup', handleEnd);
-      window.removeEventListener('touchmove', handleMove);
-      window.removeEventListener('touchend', handleEnd);
+      window.removeEventListener("mousemove", handleMove);
+      window.removeEventListener("mouseup", handleEnd);
+      window.removeEventListener("touchmove", handleMove);
+      window.removeEventListener("touchend", handleEnd);
     };
   }, [dragging]);
 
@@ -67,12 +67,13 @@ export function DevBadge() {
   useEffect(() => {
     const handleResize = () =>
       setPosition((current) => clampToViewport(current.x, current.y));
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const handleDragStart = (event: MouseEvent | TouchEvent) => {
-    if ((event.target as HTMLElement).closest(`.${styles['dev-badge__close']}`)) return;
+    if ((event.target as HTMLElement).closest(`.${styles["dev-badge__close"]}`))
+      return;
     const pointer = getPointer(event);
     dragOffset.current = {
       x: pointer.x - position.x,
@@ -88,14 +89,14 @@ export function DevBadge() {
   return (
     <div
       ref={badgeRef}
-      class={cl('dev-badge', dragging ? 'dev-badge--dragging' : '')}
+      class={cl("dev-badge", dragging ? "dev-badge--dragging" : "")}
       style={{ left: `${position.x}px`, top: `${position.y}px` }}
       onMouseDown={handleDragStart}
       onTouchStart={handleDragStart}
     >
-      <span class={cl('dev-badge__label')}>ASTRO</span>
+      <span class={cl("dev-badge__label")}>ASTRO</span>
       <button
-        class={cl('dev-badge__close')}
+        class={cl("dev-badge__close")}
         onClick={handleDismiss}
         aria-label="Dismiss dev badge"
       >
