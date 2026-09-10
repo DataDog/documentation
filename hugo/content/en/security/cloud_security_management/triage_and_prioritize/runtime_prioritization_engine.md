@@ -41,7 +41,7 @@ The Runtime Prioritization Engine prioritizes a finding when these signals indic
 
 ## Support CISA BOD 26-04 prioritization
 
-The Runtime Prioritization Engine supports the risk-based vulnerability prioritization required by [CISA Binding Operational Directive (BOD) 26-04][15]. It combines signals for public exposure, CISA Known Exploited Vulnerabilities (KEV) status, exploitability, runtime reachability, business impact, remediation availability, and ownership.
+The Runtime Prioritization Engine computes remediation timelines that follow the risk-based approach in [CISA Binding Operational Directive (BOD) 26-04][15]. It combines signals for reachability, exposure, exploitability (including [CISA KEV][1] status), business criticality, and actionability.
 
 By default, Datadog uses this prioritization context to automatically compute each vulnerability's remediation timeline according to the directive. The corresponding due date appears on the vulnerability finding.
 
