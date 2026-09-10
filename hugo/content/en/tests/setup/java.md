@@ -133,7 +133,7 @@ Set the following environment variables to configure the SDK and its reporting m
 `DD_SERVICE`
 : Name of the service or library being tested.
 
-`DD_TEST_SESSION_NAME`
+`DD_TEST_SESSION_NAME` (Optional)
 : Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
 
 Set the following environment variables for your build tool:

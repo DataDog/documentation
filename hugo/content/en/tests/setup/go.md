@@ -126,6 +126,11 @@ Set the following environment variables to configure the library:
 : The Datadog Agent URL for trace collection in the form `http://hostname:port`. This variable is only needed when test results are reported through the Datadog Agent.<br/>
 **Default**: `http://localhost:8126`
 
+`DD_TEST_SESSION_NAME` (Optional)
+: Identifies a group of tests, such as `integration-tests`, `unit-tests`, or `smoke-tests`.<br/>
+**Default**: (CI job name + test command)<br/>
+**Example**: `unit-tests`
+
 Prefix your go test command with `orchestrion`:
 
 ```bash

@@ -170,9 +170,8 @@ The following list shows the default values for key configuration settings:
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-`test_session.name` (only available as an environment variable)
-: Identifies a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
-**Environment variable**: `DD_TEST_SESSION_NAME`<br/>
+`DD_TEST_SESSION_NAME` (Optional)
+: Identifies a group of tests, such as `integration-tests`, `unit-tests`, or `smoke-tests`.<br/>
 **Default**: (CI job name + test command)<br/>
 **Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 

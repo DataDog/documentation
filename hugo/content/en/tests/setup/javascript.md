@@ -626,12 +626,6 @@ For more information, see [Code Coverage][6].
 
 The following is a list of the most important configuration settings that can be used with the SDK.
 
-`test_session.name`
-: Use it to identify a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
-**Environment variable**: `DD_TEST_SESSION_NAME`<br/>
-**Default**: For `dd-trace` v6, the framework invocation, such as `jest`, `mocha`, `playwright test`, or `cucumber-js`. For `dd-trace` v5, a combination of CI job name and test command.<br/>
-**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
-
 `service`
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
@@ -660,6 +654,12 @@ The following is a list of the most important configuration settings that can be
 : The Datadog Agent URL for trace collection in the form `http://hostname:port`. This setting is only needed when test results are reported through the Datadog Agent.<br/>
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
+
+`DD_TEST_SESSION_NAME` (Optional)
+: Identifies a group of tests, such as `integration-tests`, `unit-tests`, or `smoke-tests`.<br/>
+**Configuration setting**: `test_session.name`<br/>
+**Default**: For `dd-trace` v6, the framework invocation, such as `jest`, `mocha`, `playwright test`, or `cucumber-js`. For `dd-trace` v5, a combination of CI job name and test command.<br/>
+**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 For more information about `service` and `env` reserved tags, see [Unified Service Tagging][7]. All other [Datadog Tracer configuration][8] options can also be used.
 
