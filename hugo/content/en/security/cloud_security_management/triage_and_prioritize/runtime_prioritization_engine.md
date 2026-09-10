@@ -39,7 +39,7 @@ The Runtime Prioritization Engine is designed to be explainable. For each findin
 
 The Runtime Prioritization Engine prioritizes a finding when these signals indicate real, exploitable risk in your environment. Findings that do not meet the prioritization criteria stay visible, but move out of the active triage queue.
 
-## Support CISA BOD 26-04 prioritization
+## CISA BOD 26-04 remediation timelines
 
 The Runtime Prioritization Engine computes remediation timelines that follow the risk-based approach in [CISA Binding Operational Directive (BOD) 26-04][15]. It combines signals for reachability, exposure, exploitability (including [CISA KEV][1] status), business criticality, and actionability.
 
