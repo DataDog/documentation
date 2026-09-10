@@ -21,9 +21,9 @@ further_reading:
 
 Findings helps you capture, organize, and reuse important context during log investigations in [Log Explorer][1].
 
-With Findings, you can save log events, visualizations, and queries while investigating, using the **Add Finding** button or the **Cmd**/**Ctrl** + **S** keyboard shortcut. To go back to a finding in Log Explorer, **double-click** it, or click **Open in Explorer** on the finding.
+Use findings as checkpoints in an investigation. Save a query or aggregation worth returning to, then branch into new questions and backtrack if a path doesn't provide helpful results. Arrange findings in the panel to map how your paths relate, and add notes to record what you observed. Select findings to use as context for [Bits AI][2] questions, or send them to a [Notebook][3] to share with others.
 
-Use findings as checkpoints in an investigation. Save a query or aggregation worth returning to, then branch into new questions and backtrack when a path leads nowhere. Arrange findings in the panel to map how your paths relate, and add notes to record what you observed. Select findings to use as context for [Bits AI][2] questions, or send them to a [Notebook][3] to share with others.
+To save log events, visualizations, and queries as findings while investigating, use the **Add Finding** button or the **Cmd**/**Ctrl** + **S** keyboard shortcut. To go back to a finding in Log Explorer, **double-click** it, or click **Open in Explorer** on the finding.
 
 Findings persist across page reloads and browser sessions until you delete them.
 
@@ -31,20 +31,18 @@ Findings persist across page reloads and browser sessions until you delete them.
 
 ## Findings panel
 
-Findings lives in the side panel on the left of Log Explorer. To open it:
+Findings appears in the side panel on the left of Log Explorer. To open it:
 
 1. Navigate to [Log Explorer][1].
 2. Click the **Findings** tab on the top left.
 
 {{< img src="logs/explorer/findings/panel_location.png" alt="The Findings tab beside My View in the Log Explorer header" style="width:50%;" >}}
 
-This space is where you work with findings: arrange them, reopen them in Log Explorer, and select them to send elsewhere. The panel keeps the findings and their layout across page reloads and browser sessions.
+The Findings panel is where you work with findings: arrange them, reopen them in Log Explorer, and select them to send elsewhere. The panel keeps the findings and their layout across page reloads and browser sessions.
 
 ## Capture a finding
 
-Add a finding from anywhere in Log Explorer by pressing **Cmd**/**Ctrl** + **S**. This captures the query, the page to return to, and the absolute time range it came from. To rename the default title, click {{< ui >}}Edit{{< /ui >}} in the upper right corner of the finding card.
-
-You can also add notes to each finding at the bottom of the finding card.
+Add a finding from anywhere in Log Explorer by pressing **Cmd**/**Ctrl** + **S**. This captures the query, the page to return to, and the absolute time range it came from. To rename the default title, click {{< ui >}}Edit{{< /ui >}} in the upper right corner of the finding card in the Findings panel. You can also add notes to each finding at the bottom of the finding card.
 
 ### Queries and visualizations
 
@@ -62,7 +60,7 @@ Click a log event in your results to open the [log side panel][5]. Hover over th
 
 {{< img src="logs/explorer/findings/add_finding_log_event.png" alt="The add a finding icon in the Log Message section of the log side panel" style="width:100%;" >}}
 
-Capturing the log event also captures the query that produced the log side panel. Returning to the finding reopens the log side panel, with the corresponding query in the background.
+Capturing the log event also captures the query that produced the log side panel. Returning to the finding reopens the log side panel with the corresponding query in the background.
 
 ### Specific text in a log message or attributes
 
@@ -70,7 +68,7 @@ To capture part of a log message, select the text in the **Log Message** section
 
 To capture attribute values, select the text and press **Cmd**/**Ctrl** + **S**.
 
-In both cases, the finding stores the text you selected, and you can use it to return to the log event side panel.
+In both cases, the finding stores the text you selected. You can use the text to return to the log event side panel.
 
 ## Return to a finding
 
@@ -85,7 +83,7 @@ Select one or more findings to act on them together:
 - To ask [Bits AI][2] about them, type your question in the selection bar and click {{< ui >}}Ask Bits{{< /ui >}}. You can also click {{< ui >}}Ask Bits{{< /ui >}} in the menu at the bottom of the Findings panel. Bits AI chat opens with the selected findings attached as context.
 - To add findings to a [Notebook][3], click {{< ui >}}Open in Notebooks{{< /ui >}}. Choose a new or existing notebook. The findings you send remain in the Findings panel.
 
-Send only the findings that relate to your question. If three of the eight findings in your panel cover the error you're asking about, select those three. Notes on those findings are sent as well.
+Send only the findings that relate to your question. For example, if three of the eight findings in your panel cover the error you're asking about, select those three. Log Explorer also sends notes on those findings.
 
 ## Organize your findings
 
@@ -96,7 +94,7 @@ To regroup findings by the query they came from, use the auto-organize option. M
 
 ## Delete findings
 
-To delete findings, select one or more and press **Delete**, or hover over a single finding and click the delete icon on its card. To select every finding, press **Cmd**/**Ctrl** + **A**.
+To delete findings, select one or more finding and press **Delete**, or hover over a single finding and click the delete icon on its card. To select every finding, press **Cmd**/**Ctrl** + **A**.
 
 The clear all button in the Findings panel deletes all findings.
 <!-- Does the clear all button warn before emptying a full panel? -->
