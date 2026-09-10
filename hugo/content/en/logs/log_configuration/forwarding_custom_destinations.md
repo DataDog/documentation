@@ -100,7 +100,7 @@ Due to security protocols for the {{< region-param key="dd_datacenter" >}} site,
 {{% tab "Microsoft Sentinel" %}}
 
 7. Enter a name for the destination.
-8. Authentication for the Microsoft Sentinel Forwarder requires configuring an App Registration through the Datadog Azure Integration.
+8. Authentication for the Microsoft Sentinel Forwarder requires configuring an App Registration through the Datadog Azure Integration. If a pre-existing App Registration is configured, the same can be used to connect to Microsoft Sentinel instead of creating a new one.
 9. In the {{< ui >}}Configure Destination{{< /ui >}} section, enter the following details:
   | Setting                   | Description                                                                                                          | Example                                                   |
 |---------------------------|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
