@@ -9,7 +9,7 @@ Any time an incident progresses through status changes, you can guide responders
 
 {{< img src="/incident_response/incident_management/setup_and_configuration/status_transition_form.png" alt="Status Change form prompting the user to fill out the required Teams and Postmortem Owner fields when moving an incident to Resolved" style="width:70%;" >}}
 
-Required fields on transition forms gate status transitions made with human input. Automated status changes, such as those triggered through API calls or workflow automations, are not impacted. Transition forms are intended to standardize human behavior; automated status changes can already be conditioned based on their own logic.
+<div class="alert alert-info">Required fields on transition forms apply only to status changes made by a human. Automated status changes, such as those triggered through the API or <a href="/incident_response/incident_management/setup_and_configuration/automations">incident automations</a>, are not blocked.</div>
 
 ## Prerequisites
 
