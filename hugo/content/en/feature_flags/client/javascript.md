@@ -56,7 +56,7 @@ Create a `DatadogProvider` instance with your Datadog credentials. For live Brow
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
 ```javascript
-import { DatadogProvider } from '@datadog/openfeature-browser';
+import { DatadogProvider, withTimeout } from '@datadog/openfeature-browser';
 import { OpenFeature } from '@openfeature/web-sdk';
 
 const provider = new DatadogProvider({
@@ -68,6 +68,7 @@ const provider = new DatadogProvider({
   clientToken: '<CLIENT_TOKEN>',
   site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
+  flagConfigurationFetch: withTimeout(globalThis.fetch, 5_000),
 });
 ```
 
@@ -173,7 +174,7 @@ console.log(details.errorCode);   // Error code, if evaluation failed
 Here's a complete example showing how to set up and use Datadog Feature Flags in a JavaScript application:
 
 ```javascript
-import { DatadogProvider } from '@datadog/openfeature-browser';
+import { DatadogProvider, withTimeout } from '@datadog/openfeature-browser';
 import { OpenFeature } from '@openfeature/web-sdk';
 
 // Initialize the Datadog provider
@@ -182,6 +183,7 @@ const provider = new DatadogProvider({
   clientToken: '<CLIENT_TOKEN>',
   site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
+  flagConfigurationFetch: withTimeout(globalThis.fetch, 5_000),
 });
 
 // Set the evaluation context
@@ -229,6 +231,30 @@ The web provider also supports these optional settings:
 | `flaggingProxy` | unset | Fetch flags through a proxy instead of `site`. |
 | `customHeaders` | unset | Add headers to flag-fetch requests. |
 | `overwriteRequestHeaders` | `false` | Replace default request headers with `customHeaders`. |
+| `flagConfigurationFetch` | `globalThis.fetch` | Provide a Fetch-compatible implementation for flag configuration requests. |
+
+### Set a timeout and retries for flag configuration requests
+
+The browser provider does not add a timeout or retries by default. In npm installations of `@datadog/openfeature-browser` 1.4.0 and later, use `withTimeout` and `withRetry` to limit each request attempt and retry transient failures. These helpers are not available in the CDN bundle.
+
+<div class="alert alert-info">The `flagConfigurationFetch` option applies only to flag configuration requests. It does not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
+
+{{< code-block lang="javascript" >}}
+import { DatadogProvider, withRetry, withTimeout } from '@datadog/openfeature-browser';
+
+const provider = new DatadogProvider({
+  // Other provider options...
+  flagConfigurationFetch: withRetry(withTimeout(globalThis.fetch, 5_000), 1),
+});
+{{< /code-block >}}
+
+`withTimeout(fetch, timeoutMs)`
+: Sets the timeout in milliseconds for each request attempt, including the complete response-body download. Set the timeout to `0` to disable the timer. Accepted values are non-negative integers up to `2_147_483_647`.
+
+`withRetry(fetch, retryCount)`
+: Sets the number of retries after the initial request. Set the retry count to `0` to disable retries. Accepted values are integers from `0` to `10`. Retries cover Fetch `TypeError` failures, timeout errors, HTTP 408, and HTTP 5xx responses. Caller cancellation and HTTP 429 responses are not retried. Retries use randomized exponential backoff capped at 30 seconds. For HTTP 503, a valid `Retry-After` value up to 30 seconds is a minimum delay before the backoff. A response that requests a longer delay is not retried. Browsers report network, CORS, and CSP failures as `TypeError`, so the wrapper cannot separate these causes.
+
+In the example, `withTimeout` is inside `withRetry`. Therefore, each attempt has its own five-second timeout, and `1` allows one retry after the initial request.
 
 ## Override flags in your browser
 
