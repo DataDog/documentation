@@ -128,7 +128,7 @@ Managed prompts cannot reference other managed prompts in their templates. To co
 
 ### Insert runtime messages with a message placeholder
 
-Use a message placeholder when a managed chat prompt must include per-request conversation history or another runtime message list. Add the placeholder as a complete item in the existing chat-template array:
+Use a message placeholder when a managed chat prompt must include per-request conversation history or another runtime text-message list. In the initial release, every inserted message must have string `role` and `content` fields. Add the placeholder as a complete item in the existing chat-template array:
 
 ```json
 [
@@ -215,9 +215,9 @@ const messages = prompt.format(variables)
 {{% /tab %}}
 {{< /tabs >}}
 
-An empty list inserts no messages. A missing value, a non-list value, or an item without string `role` and `content` fields causes formatting to fail before the model call. Repeated placeholders reuse the same supplied list, and multiple placeholder names are supported.
+An empty list inserts no messages. A missing value, a non-list value, an item without string `role` and `content` fields, or structured content causes formatting to fail before the model call. Repeated placeholders reuse the same supplied list, and multiple placeholder names are supported.
 
-Inserted messages are copied without interpolation. Additional JSON-compatible fields, such as a provider-specific tool-call identifier, are retained without interpretation; the model provider remains responsible for validating them.
+Inserted text messages are copied without interpolation. Additional JSON-compatible fields are retained without interpretation; the model provider remains responsible for validating them. Multimodal content and tool-only messages are not supported in the initial release. The generic `type: "placeholder"` directive leaves room to broaden accepted message values later without changing stored prompt templates; this does not guarantee future support for any provider-specific shape.
 
 The tracked prompt contains the authored placeholder declaration, not the expanded runtime messages. Message-placeholder values are excluded from `prompt.variables`. Expanded messages are captured only as normal span input and therefore follow the existing Agent Observability input-capture and privacy settings. When automatic prompt association is unavailable, annotate the containing prompt explicitly:
 
@@ -411,11 +411,13 @@ Use the Prompt Management API to create, retrieve, update, and delete prompts an
 
 ### Test message placeholders in the Playground
 
-For each distinct placeholder name, the Playground displays one message-list input. Repeated placeholders share that input. Enter a JSON array of messages to see the final flat message list before running the prompt; enter `[]` to omit that placeholder. Invalid input shows an error and prevents the model call.
+For each distinct placeholder name, the Playground displays one temporary test-value input. Repeated placeholders share that input. Enter a JSON array of text messages to see the final flat message list before running the prompt; enter `[]` to insert no messages. Invalid input shows an error and prevents the model call.
+
+Playground test values are not saved with the prompt or recorded as prompt variables. If you run the prompt, the rendered messages become model input and follow your existing Agent Observability input-capture and privacy settings.
 
 ### Use message placeholders in experiments
 
-In a prompt experiment, map a dataset input key to a message placeholder with the same name. For example, the `history` field below fills a placeholder named `history`:
+In a prompt experiment, each placeholder resolves automatically from the identically named key in the dataset record's input section. For example, a placeholder named `history` resolves from `input.history`; create records whose `input_data` contains:
 
 ```json
 {
@@ -428,7 +430,7 @@ In a prompt experiment, map a dataset input key to a message placeholder with th
 }
 ```
 
-The experiment preview shows the expanded flat messages before launch. An empty list inserts nothing. A malformed message list fails only that dataset row and does not call the model for that row.
+No separate mapping is required. The experiment preview shows the expanded flat messages before launch. An empty `input.history` list inserts nothing. A missing or malformed `input.history` fails only that dataset row and does not call the model for that row.
 
 ## Advanced usage
 
