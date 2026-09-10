@@ -44,18 +44,17 @@ You could join your payment logs with a reference table (lookup table) containin
 Supported data sources for joins include (but are not limited to):
 
 - Logs
-- Metrics
 - RUM
-- Cloud Cost Recommendations
-- Netflow
+- Cloud Cost
+- Recommendations
+- NetFlow
 - APM Spans
-- APM Traces
 - Profiles
 - Synthetics CI Batches
-- Synthetics Run
-- Static Analysis
+- Synthetics Runs
+- Static Code Analysis
 - CI Tests
-- Compliance Findings
+- Security Findings
 - Product Analytics
 - Reference Tables
 
@@ -90,9 +89,10 @@ On a metric graph, click the context menu (three vertical dots) to find the {{< 
 ## Unit override
 
 Unit overrides are a key display option that allows you to customize how data values are presented on widgets, adding meaningful context to your data. For more use cases and information, see the [Customize your visualizations with unit overrides][3].
-- {{< ui >}}Unit override{{< /ui >}}: choose to display units in the family of 'memory', and have Datadog take care of displaying the appropriate scale depending on data (such as megabytes or gigabytes).
-- {{< ui >}}Unit and scale override{{< /ui >}}: fix units to a single scale (display data in megabytes regardless of value).
-- {{< ui >}}Define custom units{{< /ui >}}: define completely custom units (like 'tests' instead of a generic count).
+
+In the {{< ui >}}Unit Override{{< /ui >}} section of the widget editor:
+- **Unit**: choose a unit family (such as 'memory') and Datadog displays the appropriate scale depending on the data (such as megabytes or gigabytes), or define a custom unit (like 'tests' instead of a generic count).
+- **Scale To**: for unit families that support scaling, fix the unit to a single scale (for example, megabytes regardless of value) instead of scaling automatically.
 
 This is not an alternative for assigning units to your data.
 {{< whatsnext desc="Set units at the organization level: ">}}
@@ -145,10 +145,9 @@ View the graph in [full screen mode](#full-screen).
 
 Click on the export icon of any dashboard graph to open an options menu:
 
-| Option         | Description                               |
-|----------------|-------------------------------------------|
-| Copy           | Create a copy of the dashboard graph.     |
-| Share snapshot | Create and send a snapshot of your graph. |
+| Option | Description                           |
+|--------|----------------------------------------|
+| Copy   | Create a copy of the dashboard graph. |
 
 #### Use within Datadog
 
