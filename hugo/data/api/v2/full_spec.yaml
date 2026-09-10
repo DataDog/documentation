@@ -99833,6 +99833,29 @@ components:
       type: string
       x-enum-varnames:
         - SCHEDULES
+    ScheduleListItem:
+      description: Represents a summary of a schedule, linking its core attributes and team relationships.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScheduleDataAttributes'
+        id:
+          description: The schedule's unique identifier.
+          example: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d"
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ScheduleListItemRelationships'
+        type:
+          $ref: '#/components/schemas/ScheduleDataType'
+      required:
+        - id
+        - type
+      type: object
+    ScheduleListItemRelationships:
+      description: Groups the relationships for a schedule summary, referencing its teams.
+      properties:
+        teams:
+          $ref: '#/components/schemas/DataRelationshipsTeams'
+      type: object
     ScheduleMember:
       description: Represents a single member entry in a schedule, referencing a specific user.
       properties:
@@ -100380,6 +100403,89 @@ components:
       type: string
       x-enum-varnames:
         - USERS
+    Schedules:
+      description: A list of schedules with pagination metadata and any related included resources (such as teams).
+      example:
+        data:
+          - attributes:
+              name: Primary On-Call
+              tags: []
+              time_zone: America/New_York
+            id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+            relationships:
+              teams:
+                data:
+                  - id: 00000000-da3a-0000-0000-000000000000
+                    type: teams
+            type: schedules
+        meta:
+          page:
+            first_number: 0
+            last_number: 0
+            next_number:
+            number: 0
+            prev_number:
+            size: 10
+            total: 1
+            type: number_size
+      properties:
+        data:
+          description: A list of schedules.
+          items:
+            $ref: '#/components/schemas/ScheduleListItem'
+          type: array
+        included:
+          description: Any additional resources related to the schedules, such as teams.
+          items:
+            $ref: '#/components/schemas/TeamReference'
+          type: array
+        meta:
+          $ref: '#/components/schemas/SchedulesResponseMeta'
+      type: object
+    SchedulesResponseMeta:
+      description: Metadata that is included in the response when listing schedules.
+      properties:
+        page:
+          $ref: '#/components/schemas/SchedulesResponseMetaPage'
+      type: object
+    SchedulesResponseMetaPage:
+      description: Metadata related to paging information that is included in the response when listing schedules.
+      properties:
+        first_number:
+          description: First page number.
+          format: int64
+          type: integer
+        last_number:
+          description: Last page number.
+          format: int64
+          type: integer
+        next_number:
+          description: Next page number.
+          format: int64
+          nullable: true
+          type: integer
+        number:
+          description: Page number.
+          format: int64
+          type: integer
+        prev_number:
+          description: Previous page number.
+          format: int64
+          nullable: true
+          type: integer
+        size:
+          description: Page size.
+          format: int64
+          type: integer
+        total:
+          description: Total number of results.
+          format: int64
+          type: integer
+        type:
+          description: Pagination type.
+          example: "number_size"
+          type: string
+      type: object
     ScorecardListResponseAttributes:
       description: Scorecard attributes.
       properties:
@@ -186048,6 +186154,80 @@ paths:
         - On-Call Paging
       x-menu-order: 4
   /api/v2/on-call/schedules:
+    get:
+      description: Retrieve a list of On-Call schedules.
+      operationId: ListOnCallSchedules
+      parameters:
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/PageNumber"
+        - description: "Search query to filter schedules. Supports free-text search on schedule name (case-insensitive, `*` wildcards), and structured filters such as `team.id:<uuid>` and `user.id:<uuid>` (multiple values can be combined with `OR`, e.g. `user.id:(<uuid> OR <uuid>)`)."
+          in: query
+          name: "filter[query]"
+          required: false
+          schema:
+            type: string
+        - description: "Comma-separated list of included relationships to be returned. Allowed value: `teams`."
+          in: query
+          name: include
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            "application/json":
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          name: Primary On-Call
+                          tags: []
+                          time_zone: America/New_York
+                        id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                        relationships:
+                          teams:
+                            data:
+                              - id: 00000000-da3a-0000-0000-000000000000
+                                type: teams
+                        type: schedules
+                    meta:
+                      page:
+                        first_number: 0
+                        last_number: 0
+                        next_number:
+                        number: 0
+                        prev_number:
+                        size: 10
+                        total: 1
+                        type: number_size
+              schema:
+                $ref: '#/components/schemas/Schedules'
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: List On-Call schedules
+      tags:
+        - On-Call
+      x-menu-order: 23
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
+      "x-permission":
+        operator: AND
+        permissions:
+          - on_call_read
     post:
       description: Create a new On-Call schedule
       operationId: CreateOnCallSchedule
