@@ -25,8 +25,6 @@ Use findings as checkpoints in an investigation. Save a query or aggregation wor
 
 To save log events, visualizations, and queries as findings while investigating, use the **Add Finding** button or the **Cmd**/**Ctrl** + **S** keyboard shortcut. To go back to a finding in Log Explorer, **double-click** it, or click **Open in Explorer** on the finding.
 
-Findings persist across page reloads and browser sessions until you delete them.
-
 {{< img src="logs/explorer/findings_demo-2.mp4" alt="Findings demo in Log Explorer" video=true style="width:100%;" >}}
 
 ## Findings panel
@@ -38,11 +36,11 @@ Findings appears in the side panel on the left of Log Explorer. To open it:
 
 {{< img src="logs/explorer/findings/panel_location.png" alt="The Findings tab beside My View in the Log Explorer header" style="width:50%;" >}}
 
-The Findings panel is where you work with findings: arrange them, reopen them in Log Explorer, and select them to send elsewhere. The panel keeps the findings and their layout across page reloads and browser sessions.
+The Findings panel is where you work with findings: arrange them, reopen them in Log Explorer, and select them to send elsewhere. The panel keeps the findings and their layout across page reloads and browser sessions until you delete them.
 
 ## Capture a finding
 
-Add a finding from anywhere in Log Explorer by pressing **Cmd**/**Ctrl** + **S**. This captures the query, the page to return to, and the absolute time range it came from. To rename the default title, click {{< ui >}}Edit{{< /ui >}} in the upper right corner of the finding card in the Findings panel. You can also add notes to each finding at the bottom of the finding card.
+Add a finding from anywhere in Log Explorer by pressing **Cmd**/**Ctrl** + **S**. This captures the query, the page to return to, and the absolute time range you were viewing. To rename the default title, click {{< ui >}}Edit{{< /ui >}} in the upper right corner of the finding card in the Findings panel. You can also add notes to each finding at the bottom of the finding card.
 
 ### Queries and visualizations
 
@@ -50,7 +48,7 @@ In the toolbar above your results, click the {{< ui >}}Add Finding{{< /ui >}} bu
 
 {{< img src="logs/explorer/findings/add_finding_toolbar.png" alt="The Add Finding button in the results toolbar, with a tooltip showing the keyboard shortcut" style="width:100%;" >}}
 
-The button sits in the same place for every visualization, not only the list view.
+The **Add Finding** button appears in the same place for every visualization.
 
 The finding stores your search query, time range, and [visualization][4], including any group-by and aggregation you configured. Capture the same query as a list, a timeseries, or other visualization.
 
@@ -74,7 +72,7 @@ In both cases, the finding stores the text you selected. You can use the text to
 
 **Double-click** a finding to return to it in Log Explorer, or hover over the finding and click {{< ui >}}Open in Explorer{{< /ui >}}. Log Explorer reloads the query, time range, and visualization that the finding was captured with.
 
-Each finding keeps its own query and time range. In Log Explorer, you can change your search as often as you need. Double-click an earlier finding to come back to it, with no query to rebuild.
+Each finding keeps its own query and time range. Change your search as often as you need, then return to any earlier finding without rebuilding its query.
 
 ## Send findings to Bits AI and Notebooks
 
@@ -87,19 +85,19 @@ Send only the findings that relate to your question. For example, if three of th
 
 ## Organize your findings
 
-Hover over a finding to rename it, and drag it to move or resize it. Datadog saves the layout you build, so the organization looks the same the next time you open the panel.
+Drag a finding to move or resize it. Datadog saves the layout you build, so the organization looks the same the next time you open the panel.
 
-To regroup findings by the query they came from, use the auto-organize option. Moving, resizing, or deleting a finding afterward clears that grouping.
+Auto-organize groups the findings that share a query into labeled columns, one column per query. Use the auto-organize control in the panel, or press **Cmd**/**Ctrl** + **O**. Moving, resizing, or deleting a finding afterward clears the grouping.
 <!-- A screenshot of the panel controls would make the auto-organize option findable. Add one alongside the GA video. -->
 
 ## Delete findings
 
-To delete findings, select one or more finding and press **Delete**, or hover over a single finding and click the delete icon on its card. To select every finding, press **Cmd**/**Ctrl** + **A**.
+To delete one finding, hover over it and click the delete icon on its card. To delete several, select them and press the **Delete** key. To select every finding, press **Cmd**/**Ctrl** + **A**.
 
 The clear all button in the Findings panel deletes all findings.
 <!-- Does the clear all button warn before emptying a full panel? -->
 
-To restore a finding right after deleting it, click {{< ui >}}Undo{{< /ui >}} in the toast that appears, or press **Cmd**/**Ctrl** + **Z**.
+To restore a finding right after deleting it, click {{< ui >}}Undo{{< /ui >}} in the message that appears, or press **Cmd**/**Ctrl** + **Z**.
 
 ## Keyboard shortcuts
 
