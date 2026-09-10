@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import markdoc from "@astrojs/markdoc";
 import preact from "@astrojs/preact";
 import node from "@astrojs/node";
+import awsLambdaAdapter from "astro-adapter-aws-lambda";
 import sitemap from "@astrojs/sitemap";
 import { visualizer } from "rollup-plugin-visualizer";
 import { fileURLToPath } from "node:url";
@@ -62,6 +63,27 @@ process.env.PUBLIC_CI_COMMIT_SHORT_SHA = process.env.CI_COMMIT_SHORT_SHA ?? "";
 // Empty degrades gracefully to the public intake.
 process.env.PUBLIC_IA_SUBDOMAIN = process.env.IA_SUBDOMAIN ?? "";
 
+// CI builds (`yarn build:preview` / `yarn build:live`) set CI_ENVIRONMENT_NAME;
+// local builds and `astro dev` leave it unset (resolveSiteEnv maps anything
+// else to "development"). In CI the app builds with the websites-platform
+// Lambda adapter, which generates the dist/_routes.json the CloudFront router
+// consumes and the canonical handler bundle shape the platform's deploy
+// tooling expects. Locally `@astrojs/node` stays active so `astro preview`
+// keeps serving the production build from a plain Node server — the platform
+// adapter has no preview mode.
+const isCiBuild = resolveSiteEnv() !== "development";
+const adapter = isCiBuild
+  ? awsLambdaAdapter({
+      siteName: "docs",
+      // The /api app is fully static today: staticApiGuard enforces prerender =
+      // true on every /api route. Static mode skips Lambda bundling entirely
+      // and emits default:"static" in _routes.json, matching the manifest the
+      // deploy pipeline writes today. Flip `static` to false (and set
+      // platformMode) when the first SSR route lands — see the divergences doc.
+      static: true,
+    })
+  : node({ mode: "standalone" });
+
 // The Hugo docs site may be on a different origin than the Astro site in local
 // dev (Hugo: 1313, Astro: 4321). In CI and proxied dev they share an origin.
 function deriveHugoDocsUrl() {
@@ -83,12 +105,12 @@ export default defineConfig({
   // URL params + cookie), so those routes render on the server and cannot be
   // prerendered. Static routes (API docs, etc.) opt back into build-time
   // rendering with `export const prerender = true`; for the API docs the SSR
-  // capability is dormant and the output is fully static. The @astrojs/node
-  // adapter lets `astro build` + `astro preview` mirror a production server
-  // locally; the CVEs that once affected the Astro-5-era adapter are resolved
-  // in the current Astro 7 / adapter 11 line.
+  // capability is dormant and the output is fully static. The adapter itself
+  // is selected per build environment — see the `adapter` definition above:
+  // platform Lambda adapter in CI, @astrojs/node standalone locally so
+  // `astro build` + `astro preview` mirror a production server locally.
   output: "server",
-  adapter: node({ mode: "standalone" }),
+  adapter,
   integrations: [
     markdoc(),
     preact(),
