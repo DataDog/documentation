@@ -27,7 +27,7 @@ Use findings as checkpoints in an investigation. Save a query or aggregation wor
 
 Findings persist across page reloads and browser sessions until you delete them.
 
-{{< img src="logs/explorer/findings_demo.mp4" alt="Findings demo in Log Explorer" video=true style="width:100%;" >}}
+{{< img src="logs/explorer/findings_demo-2.mp4" alt="Findings demo in Log Explorer" video=true style="width:100%;" >}}
 
 ## Findings panel
 
