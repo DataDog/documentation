@@ -34,4 +34,3 @@ The [Runtime Prioritization Engine][1] combines runtime observability and securi
 [2]: /security/cloud_security_management/triage_and_prioritize/severity_scoring/
 [3]: https://www.first.org/cvss/v4-0/
 [4]: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk
-[5]: https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/
