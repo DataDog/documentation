@@ -358,7 +358,7 @@ The `llmobs` toolset includes the following tools:
 : List all LLM-judge evaluators configured for a specific ML application.
 
 `list_llmobs_feedback_labels`
-: List all the feedback labels that end users submitted for a specific ML application.
+: List all feedback labels submitted by end users for a specific ML application.
 
 `get_llmobs_evaluator`
 : Retrieve an LLM-judge evaluator configuration by name, including its target (ml_app, sampling, filter), LLM provider, and judge prompt template.
