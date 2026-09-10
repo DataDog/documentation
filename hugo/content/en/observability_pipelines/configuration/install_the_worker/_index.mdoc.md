@@ -743,7 +743,7 @@ To upgrade the Worker, update the Worker image version in your CloudFormation st
     ```
     --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
     ```
-- If you enable [disk buffering][16] for destinations, you must enable Kubernetes [persistent volumes][17] in the Observability Pipelines Helm chart.
+- If you enable [disk buffering][16] for destinations, you must enable Kubernetes [persistent volumes][17] in the Observability Pipelines Helm chart. See also [Persistence and pod scheduling](#persistence-and-pod-scheduling) for more information.
 - If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
 See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration.
@@ -760,6 +760,16 @@ When you install the Observability Pipelines Worker on Kubernetes, the Helm char
   This allows direct Pod-to-Pod communication and stable network identities for peer discovery or direct Pod addressing.
 - A ClusterIP service that provides a single virtual IP and DNS name for the Worker.
   This enables load balancing across Worker Pods for internal cluster traffic.
+
+### Persistence and pod scheduling
+
+The Worker runs as a Kubernetes StatefulSet. When you enable persistent volumes for [disk buffering][16], Datadog recommends keeping the Helm chart's default `podManagementPolicy: Parallel` setting.
+
+Setting `podManagementPolicy` to `OrderedReady` reduces how often a Worker pod shows a volume multi-attach error. But it also blocks the StatefulSet from scaling up while terminating replicas finish their graceful shutdown, which slows your pipeline's response to a burst of events.
+
+With the `Parallel` setting, a rescheduled Worker pod can show a transient volume multi-attach error if Kubernetes assigns it to a new node before its persistent volume detaches from the previous node. The pod recovers on its own.
+
+See [Multi-attach error when using persistence on Kubernetes][27] for more information.
 
 ### LoadBalancer service
 
@@ -1097,3 +1107,4 @@ Make sure your Worker logs are [indexed][9] in Log Management for optimal functi
 [24]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
 [25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
 [26]: /observability_pipelines/configuration/network_traffic/
+[27]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/#multi-attach-error-when-using-persistence-on-kubernetes
