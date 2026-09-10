@@ -33,7 +33,7 @@ The following table shows additional example journeys and their associated journ
 | Streaming      | Search   | Users can find results for their search <br> Users can load the description of a title <br> Users can start watching the trailer |
 | CRM            | Quote    | Users can start a new quote <br> Users can add line items to the quote <br> Users can send a quote to recipients                 |
 
-You can create operations with the RUM SDK APIs, directly in Datadog, through the Datadog MCP, or programmatically with the Datadog API.
+You can create operations with the RUM SDK APIs, directly in Datadog, through the Datadog MCP (Model Context Protocol) Server, or programmatically with the Datadog API.
 
 ## Prerequisites
 
@@ -424,5 +424,5 @@ Similarly to metrics, those events come with specific attributes you can use in 
 [10]: /api/latest/rum-operations/
 [11]: /real_user_monitoring/rum_without_limits/
 [12]: /real_user_monitoring/rum_without_limits/retention_filters/
-[13]: https://docs.datadoghq.com/mcp_server/tools/#:~:text=worker%2D07.-,RUM,-Tools%20for%20Real
+[13]: /mcp_server/tools/#rum
 
