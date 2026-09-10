@@ -51,7 +51,7 @@ On the test run's overview page, the {{< ui >}}RUM{{< /ui >}} widget shows the n
 
 {{< img src="synthetics/guide/rum_in_synthetics/view_session_in_rum.png" alt="The View session in RUM button in the RUM widget on the test run overview page." style="width:80%;" >}}
 
-To see this test step's errors, resources, and performance data in the [RUM Explorer][3], click {{< ui >}}View session in RUM{{< /ui >}}. Alternatively, click the {{< ui >}}Replay Session{{< /ui >}} button or {{< ui >}}View all sessions in RUM{{< /ui >}} to explore available session replays captured in your browser test.
+To see this test step's errors, resources, and performance data in the [RUM Explorer][3], click {{< ui >}}View session in RUM{{< /ui >}}. Alternatively, click the {{< ui >}}Replay Session{{< /ui >}} button to explore available session replays captured in your browser test.
 
 ## RUM Explorer to Synthetic Monitoring
 
