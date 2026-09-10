@@ -20,7 +20,7 @@ Cloud Security generates findings across vulnerabilities, misconfigurations, and
 <div class="alert alert-danger">Runtime Prioritization Engine is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-The [Runtime Prioritization Engine][1] combines runtime observability and security data to identify the ~5% of findings truly exposing your business-critical resources. It evaluates each finding across five dimensions: reachability, exposure, exploitability, business criticality, and actionability. This prioritization context supports [CISA Binding Operational Directive (BOD) 26-04][4], with remediation due dates computed according to the directive by default. For more information, see [How CISA's BOD 26-04 changes vulnerability prioritization][5].
+The [Runtime Prioritization Engine][1] combines runtime observability and security data to identify the ~5% of findings truly exposing your business-critical resources. It evaluates each finding across five dimensions: reachability, exposure, exploitability, business criticality, and actionability. It also computes [CISA BOD 26-04][4] remediation due dates for vulnerability findings.
 
 ## Severity Scoring
 
