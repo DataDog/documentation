@@ -161,7 +161,7 @@ export function resolveWebsitesModulesPath(astroConfigUrl: string): string {
   }
 
   const sibling = fileURLToPath(
-    new URL("../../../../../../dd/websites-modules", astroConfigUrl),
+    new URL("../../websites-modules", astroConfigUrl),
   );
   attempted.push(`sibling checkout: ${sibling}`);
   if (existsSync(sibling)) {

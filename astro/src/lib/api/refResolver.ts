@@ -304,6 +304,81 @@ export function topLevelSchemaToFields(spec: any, schema: any): SchemaField[] {
 }
 
 /**
+ * Build the option rows for a `oneOf`/`anyOf`.
+ *
+ * Each option carries its *own* branch type. Hugo keys the union's child rows
+ * by label and renders each one as an ordinary row, so a numeric branch shows
+ * `double` and a string branch shows `string` — not a blanket `object`. A
+ * scalar branch therefore needs no nested row at all: `schemaToFields` returns
+ * a single anonymous leaf for it, which would render as an unnamed child under
+ * the option, so that leaf is folded into the option itself.
+ *
+ * @param spec      The full parsed OpenAPI spec object.
+ * @param variants  The raw `oneOf`/`anyOf` branch schemas (may be `$ref`s).
+ * @param visited   `$ref`s already seen on this path.
+ * @param level     Row-nesting level of the union field itself.
+ */
+function buildUnionOptions(
+  spec: any,
+  variants: any[],
+  visited: Set<string>,
+  level: number,
+): NonNullable<SchemaField["unionOptions"]> {
+  const labels = unionOptionLabels(spec, variants);
+
+  return variants.map((variant: any, idx: number) => {
+    const fields = schemaToFields(spec, variant, new Set(visited), level + 2);
+
+    // A scalar branch yields one anonymous leaf and nothing else; its type
+    // belongs on the option row rather than on a nested unnamed row.
+    const leaf =
+      fields.length === 1 &&
+      fields[0].name === "" &&
+      !fields[0].children &&
+      !fields[0].unionOptions
+        ? fields[0]
+        : undefined;
+
+    return {
+      label: labels[idx],
+      type: leaf ? leaf.type : unionOptionType(spec, variant),
+      description: variantDescription(spec, variant),
+      ...(leaf?.enumValues ? { enumValues: leaf.enumValues } : {}),
+      ...(leaf?.defaultValue !== undefined
+        ? { defaultValue: leaf.defaultValue }
+        : {}),
+      fields: leaf ? [] : fields,
+    };
+  });
+}
+
+/**
+ * Display type for a union branch that has nested rows of its own.
+ *
+ * Mirrors the type a property row would get for the same schema, so an
+ * object branch reads `object`, an array branch `[object]`, and a branch that
+ * is itself a union `<oneOf>`.
+ */
+function unionOptionType(spec: any, variant: any): string {
+  let resolved = variant;
+  if (variant?.$ref) {
+    resolved = resolveRef(spec, variant.$ref) ?? variant;
+  }
+  if (resolved.allOf) {
+    resolved = mergeAllOf(resolved.allOf, spec);
+  }
+
+  if (resolved.oneOf) return "<oneOf>";
+  if (resolved.anyOf) return "<anyOf>";
+  if (resolved.type === "array") {
+    return `[${resolved.items ? resolveItemTypeName(resolved.items, spec) : "any"}]`;
+  }
+  if (resolved.type === "object" || resolved.properties) return "object";
+
+  return displayType(resolved);
+}
+
+/**
  * Convert an OpenAPI schema object into a `SchemaField[]` tree suitable for
  * rendering in UI components.
  *
@@ -362,14 +437,7 @@ export function schemaToFields(
   const unionKey = schema.oneOf ? "oneOf" : schema.anyOf ? "anyOf" : null;
   if (unionKey) {
     const variants: any[] = schema[unionKey];
-    const labels = unionOptionLabels(spec, variants);
-    const unionOptions = variants.map((variant: any, idx: number) => {
-      return {
-        label: labels[idx],
-        description: variantDescription(spec, variant),
-        fields: schemaToFields(spec, variant, new Set(visited), level + 2),
-      };
-    });
+    const unionOptions = buildUnionOptions(spec, variants, visited, level);
 
     // Return a single synthetic field that carries the union options
     return [
@@ -464,6 +532,54 @@ export function schemaToFields(
   return [field];
 }
 
+/**
+ * Drop read-only fields from a field tree, at every depth.
+ *
+ * A client cannot send a read-only field, so it does not belong in a request
+ * body. Hugo emits the rows and hides them with
+ * `.table-request .isReadOnly { display: none }`, scoped so response tables
+ * still show them — which is where read-only fields belong, since `id` and
+ * `created_at` are exactly what a response returns.
+ *
+ * Filtering the tree rather than hiding rows in CSS also covers the plaintext
+ * `.md` output and the serialized view, neither of which a stylesheet reaches.
+ *
+ * Removing a read-only object removes its subtree, matching Hugo, where
+ * hiding a row hides the nested rows it contains.
+ *
+ * @param fields  Field tree to filter.
+ * @returns A new tree with read-only fields omitted.
+ */
+export function stripReadOnlyFields(fields: SchemaField[]): SchemaField[] {
+  const kept: SchemaField[] = [];
+
+  for (const field of fields) {
+    if (field.readOnly) continue;
+
+    const next: SchemaField = { ...field };
+
+    if (field.children) {
+      const children = stripReadOnlyFields(field.children);
+      if (children.length > 0) {
+        next.children = children;
+      } else {
+        delete next.children;
+      }
+    }
+
+    if (field.unionOptions) {
+      next.unionOptions = field.unionOptions.map((option) => ({
+        ...option,
+        fields: stripReadOnlyFields(option.fields),
+      }));
+    }
+
+    kept.push(next);
+  }
+
+  return kept;
+}
+
 /* ------------------------------------------------------------------ */
 /*  Parameter → SchemaField[] conversion                               */
 /* ------------------------------------------------------------------ */
@@ -513,7 +629,7 @@ export function paramsToFields(spec: any, params: any[]): SchemaField[] {
 
     const field: SchemaField = {
       name,
-      type: displayType(paramSchema),
+      type: parameterType(paramSchema),
       required,
       deprecated,
       readOnly: paramSchema.readOnly === true,
@@ -539,16 +655,45 @@ export function paramsToFields(spec: any, params: any[]): SchemaField[] {
  * Build a display type string for a schema. Handles format annotations
  * (e.g. "string (date-time)") and enums.
  */
+/**
+ * Display type for a path, query, or header parameter row.
+ *
+ * Parameters are rendered by a different Hugo template than request and
+ * response bodies — `layouts/partials/api/arguments.html` — and it reports
+ * `.schema.type` directly. `format` is ignored there, so `list_id` shows
+ * `integer` rather than `int64`. This is deliberately not `displayType`,
+ * which applies the body rules.
+ *
+ * Hugo substitutes `enum` in the query-parameter table only; the path and
+ * header tables print the bare type. No parameter in either spec currently
+ * carries an `enum`, so the substitution is applied uniformly here rather
+ * than reproducing an asymmetry that never renders.
+ */
+function parameterType(schema: any): string {
+  if (schema.enum) {
+    return "enum";
+  }
+  return schema.type ?? "object";
+}
+
 function displayType(schema: any): string {
   const base: string = schema.type ?? "object";
 
+  // An enumerated field reports `enum` rather than its underlying type,
+  // matching Hugo's `typeColumn`. The permitted values travel separately in
+  // `enumValues` and render in the description column.
   if (schema.enum) {
-    // Show the underlying type; callers also set `enumValues`
-    return schema.format ? `${base} (${schema.format})` : base;
+    return "enum";
   }
 
+  // A `format` supersedes the base type, as in Hugo's `format || type`.
+  // OpenAPI defines `format` as a refinement of `type`, and every format in
+  // these specs implies exactly one base type (`int64` → integer,
+  // `date-time` → string), so reporting the format alone loses nothing while
+  // saying strictly more. The invariant that makes this safe is asserted in
+  // `tests/integration/refResolver.full-spec.test.ts`.
   if (schema.format) {
-    return `${base} (${schema.format})`;
+    return schema.format;
   }
 
   return base;
@@ -652,14 +797,7 @@ function propertyToField(
   const unionKey = resolved.oneOf ? "oneOf" : resolved.anyOf ? "anyOf" : null;
   if (unionKey) {
     const variants: any[] = resolved[unionKey];
-    const labels = unionOptionLabels(spec, variants);
-    const unionOptions = variants.map((variant: any, idx: number) => {
-      return {
-        label: labels[idx],
-        description: variantDescription(spec, variant),
-        fields: schemaToFields(spec, variant, new Set(nextVisited), level + 2),
-      };
-    });
+    const unionOptions = buildUnionOptions(spec, variants, nextVisited, level);
 
     return {
       name,
