@@ -5,176 +5,198 @@ aliases:
 - /es/account_management/billing/apm_tracing_profiling/
 title: Facturación de APM
 ---
+APM está disponible a través de tres niveles: APM, APM Pro y APM Enterprise. APM le brinda una visibilidad profunda de sus aplicaciones, con capacidades de trazado distribuido, correlación fluida entre trazas, registros y otra telemetría, y paneles de rendimiento listos para usar para su servicio. Con Continuous Profiler en APM Enterprise, puede identificar los métodos más lentos y de mayor consumo de recursos, de forma agregada a nivel de servicio y punto de conexión, así como para cada traza distribuida. Con Data Streams Monitoring (DSM) en APM Pro y APM Enterprise, puede monitorear fácilmente el rendimiento integral de sus canalizaciones de transmisión de datos y aplicaciones impulsadas por eventos que utilizan Kafka, SQS y RabbitMQ.
 
-APM está disponible en tres niveles: APM, APM Pro y APM Enterprise. APM te ofrece una amplia visibilidad de tus aplicaciones, con funciones de rastreo distribuido, correlación fluida entre trazas, logs y otros datos telemétricos, y dashboards de rendimiento inmediato para tu servicio. Con Continuous Profiler en APM Enterprise, puedes identificar los métodos más lentos y con mayor consumo de recursos, además de los niveles de servicio y de endpoint, así como cada traza distribuida. Con Data Streams Monitoring (DSM) en APM Pro y APM Enterprise, puedes realizar fácilmente un seguimiento del rendimiento de extremo a extremo de tus pipelines de flujos de datos y aplicaciones activadas por eventos que utilizan Kafka y RabbitMQ.
 
-
-| Parámetro de facturación  | Precio                                      | Tramos (spans) consumidos e indexados                                                                 | Facturación                                                                                                                                                                                                                                                                                                                          |
+| Parámetro de facturación  | Precio                                      | Tramos ingeridos e indexados                                                                 | Facturación                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Host de APM][5]      | 31 $ por [host de APM][5] subyacente al mes | 1 millón de tramos indexados y 150 GB de tramos ingeridos incluidos al mes con cada host de APM.   | Datadog registra el número de [hosts APM][5] que monitorizas simultáneamente en el servicio APM de Datadog una vez por hora. En un plan de marca de agua elevada (HWMP), estas mediciones horarias se ordenan de mayor a menor al final del mes, y Datadog cobra en función de la novena medición más alta. El mes de febrero es una excepción y Datadog cobra en función de la octava medición más alta. [Obtener más información sobre los precios de APM][5]. |
-| APM Pro (host de APM con Data Streams Monitoring) | 35 $ por [host de APM][5] subyacente, incluye Data Streams Monitoring. | Igual que el host de APM | Datadog registra la cantidad de hosts de APM únicos en el servicio Datadog APM y los hosts de DSM únicos que estás monitorizando simultáneamente una vez por hora. Las mediciones y la facturación por hora para APM Pro se realizan de la misma manera que para los hosts de APM.  |
-| APM Enterprise (host de APM con Data Streams Monitoring y (Continuous Profiler)][6] | 40 $ por cada [host de APM] subyacente[5], incluye Data Streams Monitoring y [Continuous Profiler][6] con cuatro contenedores perfilados por host por mes. | Igual que el host de APM | Datadog registra la cantidad de hosts de APM únicos en el servicio APM, hosts de DSM únicos y hosts de Continuous Profiler únicos que estás monitorizando simultáneamente una vez por hora. Las mediciones y la facturación por hora para APM Enterprise se realizan de la misma manera que para los hosts de APM. |
-| [Fargate][4]       | APM: 2 $ por tarea simultánea por mes <br> APM Pro: 2,30 $ por tarea simultánea por mes <br> APM Enterprise: 2,60 $ por tarea simultánea por mes              | 65 000 tramos indexados y 10 GB de tramos ingeridos incluidos en el precio.              | Datadog registra cada cinco minutos el número de instancias de tareas que estás monitorizando en el servicio Datadog APM. Datadog suma estas mediciones a fin de mes y calcula el precio cobrado en función del número promedio de horas que tus aplicaciones se estuvieron ejecutando y monitorizando. [Más información sobre los precios de Fargate][4].              |
-| [Tramos indexados][5] | 1,70 $ por millón de tramos indexados al mes | Esta tarifa se cobra cuando el número de tramos indexados supera la cuota incluida en cada host de APM | Un tramo (span) indexado es una solicitud individual a un servicio individual de tu pila. Datadog cobra en función del número total de tramos indexados, con filtros de retención o tramos analizados heredados, al servicio APM de Datadog APM al final del mes. [Obtener más información sobre los precios de APM][5].                                                                                          |
-| [Tramos ingeridos][5] | 0,1 $ por GB de tramos ingeridos al mes | Esta tarifa se cobra cuando el número de tramos ingeridos supera la cuota incluida en cada host de APM | Un tramo consumido es una solicitud individual a un servicio individual de tu pila. Datadog cobra en función del número total de gigabytes de tramos consumidos en Datadog al final de mes. [Obtener más información sobre los precios de APM][5].                                                                                          |
+| [APM host][5]      | $31 per underlying [APM host][5] per month | 1 millón de tramos indexados y 150 GB de tramos ingeridos incluidos por mes con cada [APM host].   | Datadog registra la cantidad de [APM hosts][5] que monitorea simultáneamente en el servicio de Datadog APM una vez por hora. En un plan de marca de agua alta (HWMP), estas mediciones por hora se ordenan de mayor a menor al final del mes, y Datadog realiza el cobro basándose en la novena medición más alta. El mes de febrero es una excepción y Datadog realiza el cobro basándose en la octava medición más alta. [Más información sobre precios de APM.][5] |
+| APM Pro (APM host with Data Streams Monitoring) | $35 per underlying [APM host][5]. Incluye Data Streams Monitoring. | Igual que [APM host] | Datadog registra la cantidad de [APM hosts] únicos en el servicio de Datadog APM y los [DSM hosts] únicos que monitorea simultáneamente una vez por hora. Las mediciones por hora y la facturación de APM Pro se realizan de la misma manera que para [APM hosts].  |
+| APM Enterprise (APM host with Data Streams Monitoring y [Continuous Profiler])[6] | $40 per underlying [APM host][5]. Incluye Data Streams Monitoring y [Continuous Profiler][6] con cuatro contenedores perfilados por [APM host] al mes. | Igual que [APM host] | Datadog registra la cantidad de [APM hosts] únicos en el servicio de APM, [DSM hosts] únicos y [Continuous Profiler hosts] únicos que monitorea simultáneamente una vez por hora. Las mediciones por hora y la facturación de APM Enterprise se realizan de la misma manera que para [APM hosts]. |
+| [Fargate][4]       | $6 per concurrent task per month              | 195,000 tramos indexados y 30 GB de tramos ingeridos incluidos en el precio.              | Datadog registra la cantidad de instancias de tareas que está monitoreando en el servicio Datadog APM en intervalos de cinco minutos. Datadog agrega las mediciones basadas en intervalos al final del mes y le cobra según la cantidad promedio de horas que se ejecutaron y monitorearon sus aplicaciones. [Más información sobre precios de Fargate.][16]              |
+| [Tramo indexado][5] | $1.70 per million Indexed Spans per month | Se factura cuando el uso excede los tramos indexados incluidos con cada [APM host] | Un tramo indexado es una solicitud individual contra un servicio individual en su stack. Datadog cobra según la cantidad total de tramos indexados con filtros de retención o tramos analizados heredados en el servicio Datadog APM al final del mes. [Más información sobre precios de APM.][5]                                                                                          |
+| [Tramo ingerido][5] | $0.10 por GB de tramos ingeridos al mes | Se factura cuando el uso excede los tramos ingeridos incluidos con cada [APM host] | Un tramo ingerido es una solicitud individual contra un servicio individual en su stack. Datadog cobra según la cantidad total de gigabytes de tramos ingeridos a Datadog al final del mes. [Más información sobre precios de APM.][5]                                                                                          |
 
 **Notas**:  
-   - Si utilizas un servicio basado en contenedores, que no es Fargate, se te facturará por el host subyacente que implementa el Datadog Agent.
-   - Un contenedor perfilado es un contenedor que ejecuta el servicio Continuous Profiler. Esto no incluye los contenedores que no están siendo perfilados. Por ejemplo, un servicio de contenedor DNS que NO está siendo perfilado y se ejecuta simultáneamente con tu contenedor de aplicación que SÍ está perfilado no cuenta para la asignación de cuatro contenedores perfilados.
-   - [Universal Service Monitoring][15] está incluido en todos los niveles de APM (APM, APM Pro, APM Enterprise) sin coste adicional.
+   - Si utiliza un entorno basado en contenedores que no sea Fargate, se le facturará por el [APM host] subyacente que implementa el Datadog Agent.
+   - Un contenedor perfilado es un contenedor que ejecuta el servicio Continuous Profiler. Esto no incluye los contenedores que no se están perfilando. Por ejemplo, un contenedor de servicio DNS que NO está perfilado, ejecutándose simultáneamente con su contenedor de aplicación que SÍ está perfilado, no se cuenta para la asignación de cuatro contenedores de perfilador.
+   - [Universal Service Monitoring][15] está incluido en todos los niveles de APM (APM, APM Pro, APM Enterprise) sin costo adicional.
 
-Para obtener más información, consulta la [página de Precios][7].
+Para obtener más información, consulte la [página de precios][7].
 
-## Monitorización de bases de datos
+## Database Monitoring {#database-monitoring}
 
 | Parámetro de facturación  | Consultas normalizadas                | Facturación                                          |
 |--------------------|-----------------------------------|--------------------------------------------------|
-| Host de bases de datos      | Cada host de base de datos incluye 200 consultas normalizadas al mes. | Datadog registra el número de hosts de base de datos que monitorizas simultáneamente con la función de monitorización de base de datos una vez por hora. En un plan de marca de agua elevada (HWMP), estas mediciones horarias se ordenan de mayor a menor al final del mes, y Datadog cobra en función de la novena medición más alta. El mes de febrero es una excepción y Datadog cobra en función de la octava medición más alta. |
-| Consultas normalizadas | Estas consultas se cobran cuando el umbral configurado supera la cuota de consultas normalizadas incluidas con cada host de base de datos. | Una _consulta normalizada_ representa un conjunto de consultas con una estructura similar, diferenciadas únicamente por los parámetros de consulta. El precio que cobra Datadog se calcula en función del número total de consultas normalizadas configuradas que se estén rastreando en un momento dado. |
+| Servidor de base de datos      | Se incluyen 200 consultas normalizadas por mes con cada servidor de base de datos. | Datadog registra la cantidad de servidores de base de datos que monitorea simultáneamente con Database Monitoring una vez por hora. En un plan de marca de agua alta (HWMP), estas mediciones por hora se ordenan de mayor a menor al final del mes, y Datadog realiza el cobro basándose en la novena medición más alta. El mes de febrero es una excepción y Datadog realiza el cobro basándose en la octava medición más alta. |
+| Consultas normalizadas | Se factura cuando el umbral configurado excede las consultas normalizadas que se incluyen con cada servidor de base de datos. | Una _consulta normalizada_ representa un agregado de consultas con estructura similar, que solo difieren en los parámetros de consulta. Datadog cobra según la cantidad total de consultas normalizadas configuradas que se rastrean en cualquier momento dado. |
 
-Para obtener más información, consulta la [página de Precios][7].
+Para obtener más información, consulte la [página de precios][7].
 
-## Situaciones de implementación
+## Escenarios de implementación {#deployment-scenarios}
 
-**Los siguientes casos de muestreo reflejan las tarifas de facturación anual con una retención predeterminada de tramos indexados de 15 días. Contacta con [ventas][8] o con tu gestor de [satisfacción al cliente][9] para informarte sobre los descuentos por volumen disponibles para tu cuenta.**
+**Los casos de muestra ilustran las tasas de facturación anual con la retención predeterminada de 15 días de Indexed Span. Comuníquese con [Ventas][8] o con su gerente de [Éxito del cliente][9] para analizar los descuentos por volumen para su cuenta.**
 
-### Host de APM, tramos indexados y tramos ingeridos adicionales
+### [APM hosts], tramos indexados y tramos ingeridos adicionales {#apm-hosts-indexed-spans-and-extra-ingested-spans}
 
-Uso de cinco hosts APM y envío de 30 millones de tramos indexados, con 900 GB de tramos totales consumidos.
-
-| Unidad facturable  | Cantidad   | Precio                                                                                           | Fórmula       | Subtotal              |
-|----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
-| APM Hosts      | 5          | 31 $ por host                                                                                    | 5 * 31 $       | 155 $                  |
-| Indexed Spans | 30 millones | 5 millones incluidos con 5 hosts de APM. 1,70 $ por millón por 25 millones de tramos indexados adicionales | 25 * 1,70 $    | 42,50 $                |
-| Tramos (spans) incorporados | 900 GB          | 750 GB incluidos con 5 hosts de APM. 0,10 $ por GB por 150 GB adicionales de tramos ingeridos.                                                                                 | 150 * 0,10 $      | 15 $                  |
-| Total          |            |                                                                                                 | 155 $ + 42,50 $ + 15 $ | **212,50 $ al mes** |
-
-### Host de APM Pro, tramos indexados y tramos ingeridos adicionales
-
-Uso de cinco hosts APM Pro y envío de 30 millones de tramos indexados, con 900 GB de tramos totales consumidos.
+Uso de 5 [APM hosts] y envío de 30 millones de tramos indexados, con 900 GB de tramos ingeridos en total.
 
 | Unidad facturable  | Cantidad   | Precio                                                                                           | Fórmula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
-| Hosts de APM Pro      | 5          | 35 $ por host                                                                                    | 5 * 35 $        | 175 $                  |
-| Indexed Spans | 30 millones | 5 millones incluidos con 5 hosts de APM. 1,70 $ por millón por 25 millones de tramos indexados adicionales | 25 * 1,70 $    | 42,50 $                |
-| Tramos (spans) incorporados | 900 GB          | 750 GB incluidos con 5 hosts de APM. 0,10 $ por GB por 150 GB adicionales de tramos ingeridos.                                                                                 | 150 * 0,10 $      | 15 $                  |
-| Total          |            |                                                                                                 | 175 $ + 42,50 $ + 15 $ | **232,50 $ al mes** |
+| [APM hosts]      | 5          | $31 per host                                                                                    | 5 * $31       | $155                  |
+| Tramos indexados | 30 millones | 5 millones incluidos con 5 [APM hosts]. $1.70 por millón para 25 millones adicionales de tramos indexados | 25 * $1.70    | $42.50                |
+| Tramos ingeridos | 900 GB          | 750 GB incluidos con 5 [APM hosts]. $.10 por GB para 150 GB adicionales de tramos ingeridos.                                                                                 | 150 * $.10      | $15                  |
+| Total          |            |                                                                                                 | $155 + $42.50 + $15 | **$212.50 por mes** |
 
-### Hosts APM Enterprise con seis contenedores perfilados por cada host
+### [APM Pro hosts], tramos indexados y tramos ingeridos adicionales {#apm-pro-hosts-indexed-spans-and-extra-ingested-spans}
 
-Uso de cinco hosts APM Enterprise con seis aplicaciones ejecutándose en contenedores separados por cada host.
+Uso de cinco servidores de APM Pro y envío de 30 millones de spans indexados, con 900 GB de spans ingeridos en total.
 
 | Unidad facturable  | Cantidad   | Precio                                                                                           | Fórmula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
-| Hosts de APM Enterprise       | 5          | 40 $ por host                                                                                    | 5 * 40 $       | 200 $                  |
-| Contenedores perfilados  | 6 por host | 2 $ por contenedor adicional por host. En este caso, hay 6 - 4 = 2 contenedores adicionales por cada host        | 2 * 2 $ * 5 hosts         | 20 $                   |
-| Total          |            |                                                                                                 | 200 $ + 20 $      | **220 $ al mes**    |
+| Servidores de APM Pro      | 5          | $35 por host                                                                                    | 5 * $35       | $175                  |
+| Tramos indexados | 30 millones | 5 millones incluidos con 5 [APM hosts]. $1.70 por millón para 25 millones adicionales de tramos indexados | 25 * $1.70    | $42.50                |
+| Tramos ingeridos | 900 GB          | 750 GB incluidos con 5 [APM hosts]. $.10 por GB para 150 GB adicionales de tramos ingeridos.                                                                                 | 150 * $.10      | $15                  |
+| Total          |            |                                                                                                 | $175 + $42.50 + $15 | **$232.50 por mes** |
 
-### Host de APM, Fargate y tramos indexados
+### Servidores de APM Enterprise con seis contenedores perfilados por servidor {#apm-enterprise-hosts-with-six-profiled-containers-per-host}
 
-Uso de cinco hosts APM, envío de 20 millones de tramos indexados e implementación de APM en un promedio de 20 tareas Fargate a lo largo del mes.
+Uso de cinco servidores de APM Enterprise con seis aplicaciones ejecutándose en contenedores separados por cada servidor.
+
+| Unidad facturable  | Cantidad   | Precio                                                                                           | Fórmula       | Subtotal              |
+|----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
+| Servidores de APM Enterprise       | 5          | $40 por host                                                                                    | 5 * $40       | $200                  |
+| Contenedores perfilados  | 6 por host | $2 por contenedor adicional por host. En este caso hay 6 - 4 = 2 contenedores adicionales por cada servidor        | 2  * $2 * 5 servidores         | $20                   |
+| Total          |            |                                                                                                 | $200 + $20      | **$220 por mes**    |
+
+### Servidores de APM, Fargate y spans indexados {#apm-hosts-fargate-and-indexed-spans}
+
+Uso de cinco servidores de APM, envío de 20 millones de spans indexados y despliegue de APM en un promedio de 20 tareas de Fargate durante el mes.
 
 | Unidad facturable  | Cantidad   | Precio                                                                                           | Fórmula             | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------------|-----------------------|
-| APM Hosts      | 5          | 31 $ por host                                                                                    | 5 * 31 $             | 155 $                  |
-| Fargate Tasks  | 20         | 2 $ por tarea                                                                                     | 20 * 2 $             | 40 $                   |
-| Indexed Spans | 20 millones | 5 millones incluidos con 5 hosts de APM. 1,3 millones incluidos con 20 tareas de Fargate. 1,70 $ por millón por 13,7 millones de tramos indexados adicionales | 13,7 * 1,70 $          | 23,29 $                |
-| Total          |            |                                                                                                 | 155 $ + 40 $ + 23,29 $ | **218,29 $ al mes** |
+| Servidores de APM      | 5          | $31 por servidor                                                                                    | 5 * $31             | $155                  |
+| Tareas de Fargate  | 20         | $6 por tarea                                                                                     | 20 * $6             | $120                   |
+| Spans indexados | 20 millones | 5 millones incluidos con 5 hosts de APM. 1.3 millones incluidos con 20 tareas de Fargate. $1.70 por millón por 13.7 millones de Spans indexados adicionales | 13.7 * $1.70          | $23.29                |
+| Total          |            |                                                                                                 | $155 + $120 + $23.29 | **$298.29 por mes** |
 
-### Hosts de APM Enterprise, servicios, contenedores y tramos indexados
+### Servidores de APM Enterprise, servicios, contenedores y spans indexados {#apm-enterprise-hosts-services-containers-and-indexed-spans}
 
-APM Enterprise para el servicio 1 que se ejecuta en el contenedor 1 y el servicio servicio 2 que se ejecuta en el contenedor 2. Ambos contenedores se ejecutan en un host y envían 20 millones de tramos indexados en App Analytics. 
+APM Enterprise para el servicio 1 ejecutándose en el contenedor 1, servicio 2 ejecutándose en el contenedor 2. Ambos contenedores se ejecutan en un servidor y envían 20 millones de spans indexados en App Analytics. 
 
 | Unidad facturable  | Cantidad   | Precio                                                                                          | Fórmula      | Subtotal             |
 |----------------|------------|------------------------------------------------------------------------------------------------|--------------|----------------------|
-| Hosts de APM Enterprise      | 1          | 40 $ por host                                                                                   | 1 * 40 $      | 40 $                  |
-| Contenedores perfilados  | 2 | 0 $, ya que los contenedores perfilados están incluidos en la cuota de 4 por host de APM.
-| Indexed Spans | 20 millones | 1 millón incluido con 1 host de APM. 1,70 $ por millón por 19 millones de tramos indexados adicionales | 19 * 1,70 $   | 32,30 $               |
-| Total          |            |                                                                                                | 40 $ + 32,30 $ | **72,30 $ al mes** |
+| Servidores de APM Enterprise      | 1          | $40 por servidor                                                                                   | 1 * $40      | $40                  |
+| Contenedores perfilados  | 2 | $0 ya que los contenedores perfilados están dentro de la asignación de 4 por servidor de APM.
+| Spans indexados | 20 millones | 1 millón incluido con 1 servidor de APM. $1.70 por millón por 19 millones de Spans indexados adicionales | 19 * $1.70   | $32.30               |
+| Total          |            |                                                                                                | $40 + $32.30 | **$72.30 por mes** |
 
-### Hosts de APM con escalado dinámico, contenedores, Fargate y sin tramos indexados
+### Servidores de APM con escalado dinámico, contenedores, Fargate y sin spans indexados {#apm-hosts-with-dynamic-scaling-containers-fargate-and-no-indexed-spans}
 
-La aplicación 1 se ejecuta utilizando entre 20 y 40 contenedores implementados en entre 4 y 8 instancias host; la aplicación 2 se ejecuta utilizando entre 10 y 30 tareas de Fargate Además, se supone que el percentil 99 de uso de instancias EC2 es 7, y el promedio de tareas de Fargate durante el mes es 28.
+App 1 ejecutándose en 20-40 contenedores que están implementados en 4-8 instancias de servidor, app 2 ejecutándose en 10-30 tareas de Fargate. Suponiendo que el uso del percentil 99 de las instancias de EC2 es 7, y el promedio de tareas de Fargate durante el mes es 28.
 
 | Unidad facturable | Cantidad | Precio        | Fórmula    | Subtotal           |
 |---------------|----------|--------------|------------|--------------------|
-| APM Hosts     | 7        | 31 $ por host | 7 * 31 $    | 217 $               |
-| Fargate Tasks | 28       | 2 $ por tarea  | 28 * 2 $    | 56 $                |
-| Total         |          |              | 217 $ + 56 $ | **273 $ al mes** |
+| Servidores de APM     | 7        | $31 por host | 7 * $31    | $217               |
+| Tareas de Fargate | 28       | $6 por tarea  | 28 * $6    | $168                |
+| Total         |          |              | $217 + $168 | **$385 por mes** |
 
-**Nota**: El número de contenedores no se tiene en cuenta si el Agent se despliega en instancias EC2.
+**Nota**: El recuento de contenedores no importa si el Agent implementado está en las instancias EC2.
 
-### Hosts de APM Enterprise con nodos Kubernetes y tramos indexados
+### Servidores de APM Enterprise con nodos de Kubernetes y spans indexados {#apm-enterprise-hosts-with-kubernetes-nodes-and-indexed-spans}
 
-APM Enterprise para aplicaciones con un Datadog Agent que se ejecutan en 20 nodos trabajadores en Kubernetes, envío de 20 millones de tramos indexados. Cada uno de estos 10 nodos trabajadores tiene ocho pods, con un contenedor por pod. Cada uno de los otros 10 nodos tiene dos pods, con un contenedor por pod. 
+APM Enterprise para aplicaciones con un Datadog Agent ejecutándose en 20 nodos trabajadores en Kubernetes que envían 20 millones de spans indexados. 10 de estos nodos trabajadores tienen ocho pods cada uno con un contenedor por pod, los otros 10 tienen dos pods cada uno con un contenedor por pod. 
 
 | Unidad facturable     | Cantidad   | Precio                                                                       | Fórmula   | Subtotal           |
 |-------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
-| Hosts de APM Enterprise (nodos) | 20         | 40 $ por host                                                                | 20 * 40 $ | 800 $               |
-| Contenedores perfilados  | 100 tras la agregación | 2 $ por contenedor adicional. En este caso, con 20 hosts estarían incluidos hasta 80 contenedores pero hay 20 contenedores extra en dos hosts: 100-80 = 20 contenedores adicionales        | 2 $ *20 hosts        | 40 $                    |
-| Indexed Spans    | 20 millones | 20 millones incluidos con 20 hosts de APM (nodos). Sin tramos indexados adicionales | 0 * 1,70 $ | 0                  |
-| Total             |            |                                                                             | 800 $ + 40 $ | **840 $ al mes** |
+| Servidores de APM Enterprise (nodos) | 20         | $40 por host                                                                | 20 * $40 | $800               |
+| Contenedores perfilados  | 100 en total | $2 por contenedor adicional. En este caso, 20 servidores permitirían hasta 80 contenedores, pero hay 100 contenedores sumados en dos servidores: 100-80 = 20 contenedores adicionales        | $2 * 20 servidores        | $40                    |
+| Spans indexados    | 20 millones | 20 millones incluidos con 20 servidores (nodos) de APM. Sin spans indexados adicionales | 0 * $1.70 | 0                  |
+| Total             |            |                                                                             | $800 + $40 | **$840 por mes** |
 
-En el caso de Kubernetes, APM y Continuous Profiler se factura por nodo, y no por pod.
+Para Kubernetes, APM y Continuous Profiler se cobran por nodos, no por pods.
 
-### Funciones lambda y tramos indexados
+### Funciones Lambda y spans indexados {#lambda-functions-and-indexed-spans}
 
-Una aplicación serverless basada en AWS-Lambda que se invoca 10 millones de veces en un mes mientras envía 10 millones de tramos indexados.
+Una aplicación sin servidor basada en AWS-Lambda que se invoca 10 millones de veces al mes mientras envía 10 millones de spans indexados.
 
 | Unidad facturable                  | Cantidad   | Precio                                                                       | Fórmula   | Subtotal           |
 |--------------------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
-| Invocaciones de la función lambda    | 10 millones | [5 $ al mes][10]                                                           | 10 * 5 $  | 50 $               |
-| Indexed Spans                  | 10 millones | 150 000 tramos indexados incluidos con cada millón de invocaciones lambda. 1,70 $ por cada millón de tramos indexados adicionales | 8,5 * 1,70 $ | 14,45 $               |
-| Total                          |            |                                                                             | 50 $ + 14,45 $ | **64,45 $ al mes** |
+| Invocaciones de funciones Lambda    | 10 millones | [$5 por mes][10]                                                           | 10 * $5  | $50               |
+| Spans indexados                  | 10 millones | 150,000 Spans indexados incluidos con cada 1 millón de invocaciones de Lambda. $1.70 por millón de Spans indexados adicionales | 8.5 * $1.70 | $14.45               |
+| Total                          |            |                                                                             | $50 + $14.45 | **$64.45 por mes** |
 
-## Preguntas frecuentes
+## APM Edge Devices {#apm-edge-devices}
 
-**1. ¿Cómo se define un host de APM a efectos de facturación?**
+APM Edge Devices es una opción de facturación para monitorear dispositivos Edge y dispositivos IoT con APM, como sistemas de punto de venta (POS), dispositivos médicos, vehículos autónomos y sistemas industriales. APM Edge Devices es el mismo producto de APM que la facturación de APM estándar, con un modelo de facturación diseñado para flotas del dispositivo Edge y del dispositivo IoT. Para conocer los precios, comuníquese con [Sales][8] o con su [Customer Success Manager][9].
 
-Un [host][4] es una instancia de sistema operativo físico o virtual. Datadog registra una vez por hora el número de hosts que estás monitorizando de forma simultánea en el servicio Infrastructure de Datadog. A efectos de facturación de APM, cada hora se hace el cálculo del número de hosts en los que está [instalado el APM][12] y que envían trazas. A final de mes, se te factura en función del percentil 99 de uso de [hosts de APM][5].
+APM Edge Devices requiere la versión 7.75.0 o posterior del Datadog Agent estándar. El [Datadog IoT Agent][17] no es compatible con APM.
 
-**2. ¿Cómo se calcula el importe de la factura al implementar un Agent por contenedor?**
+Para identificar un dispositivo como un dispositivo APM Edge, configure el Datadog Agent para que se ejecute en modo APM Edge con uno de los siguientes métodos:
 
-Se recomienda configurar _un Agent por host subyacente_ para la implementación de contenedores. Si decides ejecutar un Agent por contenedor, entonces cada contenedor se tratará como un único host. El precio se determinará mediante el siguiente cálculo: (precio por host de APM) * (número de contenedores).
+- Establezca la variable de entorno `DD_APM_MODE` en `edge`:
 
-**3. ¿Cómo se define una tarea de Fargate de la APM a efectos de facturación?**
+  ```shell
+  DD_APM_MODE=edge
+  ```
 
-Una tarea de Fargate es una recopilación de contenedores programados para ejecutarse en AWS Fargate como motor informático serverless. Datadog registra a intervalos de cinco minutos el número de tareas que estás monitorizando de manera simultánea en Datadog. Para la facturación de APM, Datadog cobra en función del número medio de tareas de Fargate que envían trazas a Datadog por hora en un mes determinado de tu cuenta.
+- Agregue lo siguiente al archivo de configuración `datadog.yaml` del Agent:
 
-**4. ¿Cómo se calcula la factura si se cambia el tamaño del entorno?**
+  ```yaml
+  apm_config:
+    mode: edge
+  ```
 
-El importe que se cobra por el APM se calcula utilizando el percentil 99 superior de los Agents activos que envían trazas cada hora de cada mes. Al final del mes, Datadog no tiene en cuenta el valor del 1 % más alto, lo que ofrece una protección frente a la facturación de picos inesperados.
+**Nota**: APM Edge Devices no es compatible con OpenTelemetry. Comuníquese con [Sales][8] o con su [Customer Success Manager][9] si sus dispositivos Edge o dispositivos IoT requieren instrumentación de OpenTelemetry.
 
-**5. ¿Se cobran los contenedores pause en Kubernetes?
+## PREGUNTAS FRECUENTES {#faq}
 
-Kubernetes crea contenedores pause para adquirir la dirección IP del pod correspondiente y configurar el espacio de nombres de red del resto de contenedores que se unan a ese pod. Datadog no incluye ningún contenedor pause en tu cuota y no te cobra por ellos (es necesario el Agent 5.8 o posterior). En el caso de Kubernetes, la APM se factura por nodo, y no por pod.
+**1. ¿Qué se clasifica como un servidor de APM para la facturación?**
 
-**6. ¿El número de hosts que se factura tiene en cuenta mis servicios?**
+Un [servidor][4] es una instancia de sistema operativo física o virtual. Datadog registra la cantidad de servidores que está monitoreando simultáneamente en el servicio Datadog Infrastructure una vez por hora. Para la facturación de APM, la cantidad de servidores con [APM instalado][12] y que envían trazas se calcula cada hora. Al final del mes, se le factura según su uso en el percentil 99 para [servidores APM][5].
 
-APM se factura en base a los [hosts][5] implementados con agentes que envían trazas y no servicios. Además, según la asignación mensual por host, APM se factura en base al volumen de tramos consumidos y al recuento de tramos indexados. Para calcular cuántos tramos consumidos e indexados envía cada uno de tus servicios, consulta la documentación sobre [consumo][2] y [retención][13].
+**2. ¿Cómo se calcula la facturación al implementar un Agent por contenedor?**
 
-**7. ¿Qué ocurre con los filtros existentes de App Analytics?**
+Se recomienda que configure _un Agent por servidor subyacente_ para la implementación de contenedores. Si elige en su lugar ejecutar un Agent por contenedor, entonces cada contenedor se trata como un solo servidor. El precio es entonces (Precio por servidor APM) * (Número de contenedores).
 
-A partir del 20 de octubre de 2020, todos los filtros de App Analytics existentes se convertirán automáticamente en filtros de retención. Puedes optar por mantener los filtros sin cambios o modificarlos según tus necesidades. Los filtros afectados por esta transición aparecen marcados con una *i* para indicar que proceden de App Analytics en la página de [filtros de retención][3].
+**3. ¿Qué se clasifica como una tarea de APM Fargate para la facturación?**
 
-**8. ¿Cómo se calcula el volumen de tramos ingeridos o indexados?**
+Una tarea de Fargate es una colección de contenedores que están programados para ejecutarse en AWS Fargate como un motor de cómputo sin servidor. Datadog registra la cantidad de tareas que está monitoreando simultáneamente en Datadog a intervalos de cinco minutos. Para la facturación de APM, Datadog factura según el número promedio de tareas de Fargate que envían trazas a Datadog por hora durante todo el mes de su cuenta.
 
-Datadog proporciona las métricas `datadog.estimated_usage.apm.ingested_bytes` y `datadog.estimated_usage.apm.ingested_spans` para monitorizar el volumen de tramos ingeridos e indexados. Para obtener más información, consulta la documentación [Métricas de uso][14].
+**4. ¿Qué sucede con su factura al escalar su entorno?**
 
-**9. El Continuous Profiler, ¿está disponible como producto independiente?**
+Su factura de APM se calcula utilizando el percentil 99 superior de agentes activos que envían trazas cada hora de cada mes. Al final del mes, Datadog descarta el valor del 1% superior, lo que brinda protección contra la facturación por picos inesperados.
 
-Sí. Si te interesa contratar el Continuous Profiler sin APM, informa a Datadog. Contacta con [Ventas][8] o con tu [gestor de satisfacción al cliente][9].
+**5. ¿Se le cobra por los contenedores de pausa en Kubernetes?**
 
-**10. ¿Está disponible Data Streams Monitoring como producto independiente?**
+Kubernetes crea contenedores de pausa para adquirir la dirección IP del pod respectivo y configurar el espacio de nombres de red para todos los demás contenedores que se unen a ese pod. Datadog excluye todos los contenedores de pausa de su cuota y no cobra por ellos (requiere Agent 5.8+). Para Kubernetes, el precio de APM se basa en nodos, no en pods.
 
-Sí. Si te interesa contratar Data Streams Monitoring sin APM, informa a Datadog. Contacta con [Ventas][8] o con tu [gestor de satisfacción al cliente][9].
+**6. ¿Cómo se relaciona la facturación de servidores con sus servicios?**
+
+APM se factura sobre la base de [servidores][5] implementados con Agents que envían trazas y no de servicios. Además, por encima de la asignación mensual por servidor, APM se factura sobre la base del volumen de spans ingeridos y el recuento de spans indexados. Para estimar cuántos spans ingeridos e indexados envía cada uno de sus servicios, consulte la documentación sobre [ingestion][2] y [retention][13].
+
+**7. ¿Qué sucede con sus filtros de App Analytics existentes?**
+
+A partir del 20 de octubre de 2020, todos los filtros de App Analytics existentes se transfieren automáticamente a Retention Filters. Puede dejar que los filtros permanezcan sin cambios o modificarlos según sea necesario. Los filtros transferidos están marcados con una *i* que representa Legacy App Analytics Filters dentro de la página [retention filters][3].
+
+**8. ¿Cómo estima su volumen de spans ingeridos o indexados?**
+
+Datadog proporciona las métricas `datadog.estimated_usage.apm.ingested_bytes` y `datadog.estimated_usage.apm.ingested_spans` para monitorear el volumen de spans ingeridos e indexados. Hay más información disponible en la documentación de [Usage Metrics][14].
+
+**9. ¿Continuous Profiler está disponible como un producto independiente?**
+
+Sí Hágale saber a Datadog si le interesa comprar Continuous Profiler sin APM. Comuníquese con [Sales][8] o con su [Customer Success Manager][9].
+
+**10. ¿Data Streams Monitoring está disponible como un producto independiente?**
+
+Sí Hágale saber a Datadog si le interesa comprar Data Streams Monitoring sin APM. Comuníquese con [Sales][8] o con su [Customer Success Manager][9].
 
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< whatsnext >}}
-    {{< nextlink href="account_management/billing/usage_monitor_apm/" >}}Consultar y configurar alertas sobre el uso de APM{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/usage_control_apm/" >}}Calcular y controlar el uso de APM{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/usage_monitor_apm/" >}}Visualizar y alertar sobre el uso de APM{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/usage_control_apm/" >}}Estimar y controlar el uso de APM{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
@@ -193,3 +215,5 @@ Sí. Si te interesa contratar Data Streams Monitoring sin APM, informa a Datadog
 [13]: /es/tracing/trace_pipeline/trace_retention/
 [14]: /es/tracing/trace_pipeline/metrics
 [15]: /es/universal_service_monitoring/
+[16]: https://www.datadoghq.com/pricing/?product=serverless-monitoring&tab=aws-fargate#products
+[17]: /es/agent/iot/

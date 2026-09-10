@@ -78,7 +78,9 @@ If the directory connector is not available to you, you can add Datadog as a [cu
 
 {{% tab "Claude Code" %}}
 
-Install the Datadog plugin from the [official Anthropic Plugin Marketplace](https://code.claude.com/docs/en/discover-plugins#official-anthropic-marketplace). The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see the [plugin repository](https://github.com/datadog-labs/claude-code-plugin). If you previously installed the Datadog MCP Server manually, remove it from your Claude Code configuration to avoid conflicts.
+Install the Datadog plugin from the [official Anthropic Plugin Marketplace](https://code.claude.com/docs/en/discover-plugins#official-anthropic-marketplace). The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see the [plugin repository](https://github.com/datadog-labs/claude-code-plugin).
+
+**Note**: If you previously installed the Datadog MCP Server manually, remove it from your Claude Code configuration to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. Install the Datadog plugin:
@@ -166,7 +168,9 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 {{% tab "Copilot CLI" %}}
 
-Install the Datadog plugin from the [`awesome-copilot`](https://awesome-copilot.github.com/) plugin marketplace. The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see Datadog's [copilot-plugin](https://github.com/datadog-labs/copilot-plugin) repository. If you previously installed the Datadog MCP Server manually, remove it from your Copilot configuration before installing the plugin to avoid conflicts.
+Install the Datadog plugin from the [`awesome-copilot`](https://awesome-copilot.github.com/) plugin marketplace. The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see Datadog's [copilot-plugin](https://github.com/datadog-labs/copilot-plugin) repository.
+
+**Note**: If you previously installed the Datadog MCP Server manually, remove it from your Copilot configuration before installing the plugin to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. Install the Datadog plugin:
@@ -215,7 +219,9 @@ If the plugin is not available to you, point Copilot at the MCP Server endpoint 
 
 {{% tab "Cursor" %}}
 
-Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin includes the Datadog MCP Server and other resources. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts.
+Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin includes the Datadog MCP Server and other resources.
+
+**Note**: If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. You can install the plugin from the Cursor Marketplace or from within Cursor:
@@ -326,6 +332,30 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{< /site-region >}}
 
 [3]: /getting_started/site/
+{{% /tab %}}
+
+{{% tab "Grok Build" %}}
+
+Install the Datadog Plugin from the Grok Build Plugin Marketplace. The plugin packages the Datadog MCP Server with auto-updates when new plugin versions ship. For more details, see the [plugin marketplace repository][1].
+
+**Note**: If you previously installed the Datadog MCP Server manually, remove it from your Grok Build configuration to avoid conflicts.
+
+[1]: https://github.com/xai-org/plugin-marketplace
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+1. In Grok Build, type `/marketplace` to open the Marketplace catalog. Under xAI Official, find and install the Datadog plugin.
+
+1. Open the **MCP Servers** tab or type `/mcps`. Under **Plugin: datadog**, find **datadog-grok** and press `i` to authenticate. Select your [Datadog site][2] and complete the OAuth login flow.
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[2]: /getting_started/site/
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 {{% /tab %}}
 
 {{% tab "JetBrains IDEs" %}}
@@ -695,7 +725,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `product-analytics`: Tools for interacting with [Product Analytics][41] queries
 - `profiling`: Tools for discovering, exploring, and analyzing [Continuous Profiler][58] data
 - `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage
-- `rum`: Tools for [Real User Monitoring][57], including resolving applications, summarizing performance, surfacing aggregated insights, exploring metrics, managing retention filters, and managing custom RUM metrics
+- `rum`: Tools for [Real User Monitoring][57], including resolving applications, summarizing performance, surfacing aggregated insights, monitoring and managing operations, exploring metrics, managing retention filters, and managing custom RUM metrics
 - `security`: Tools for code security scanning and searching [security signals][39] and [security findings][40]
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][30] and [Test Optimization][31])
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][29]
@@ -721,6 +751,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 | [Codex CLI][6] | OpenAI | |
 | [Copilot CLI][64] | Microsoft | Datadog [Copilot plugin][16] recommended. |
 | [Gemini CLI][50] | Google | |
+| [Grok Build][71] | SpaceXAI | Datadog [Grok Build plugin][72] recommended. |
 | [Warp][28] | Warp | |
 | [VS Code][7] | Microsoft | Datadog [Copilot plugin][16] recommended. |
 | [JetBrains IDEs][18] | JetBrains | [Datadog plugin][18] recommended. |
@@ -949,3 +980,5 @@ Local authentication is recommended for Cline and when remote authentication is 
 [68]: /account_management/org_settings/ip_allowlist/
 [69]: /data_observability/
 [70]: /account_management/audit_trail/
+[71]: https://x.ai/build 
+[72]: https://github.com/xai-org/plugin-marketplace 

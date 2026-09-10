@@ -55,7 +55,7 @@ docker run -d --name dd-agent \
 
 {{< /code-block >}}
 
-## Runtime Package Prioritization (Preview)
+## Runtime Package Prioritization
 
 Runtime package prioritization identifies which packages in a container image are used at runtime, so you can prioritize vulnerabilities in code that runs over vulnerabilities in packages that are installed but never executed.
 
