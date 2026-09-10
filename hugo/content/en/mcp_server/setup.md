@@ -337,7 +337,7 @@ Install the Datadog Plugin from the Grok Build Plugin Marketplace. The plugin pa
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. In Grok Build, type `/marketplace` to open the Marketplace catalog. Under xAI Official, find and install the Datadog plugin.
 
-1. Open the **MCP Servers** tab or type `/mcps`. Find **datadog-grok** under **Plugin: datadog** and press `i` to authenticate. Select your [Datadog site][2] and complete the OAuth login flow.
+1. Open the **MCP Servers** tab or type `/mcps`. Under **Plugin: datadog**, find **datadog-grok** and press `i` to authenticate. Select your [Datadog site][2] and complete the OAuth login flow.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
