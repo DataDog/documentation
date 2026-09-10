@@ -332,16 +332,16 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 Install the Datadog Plugin from the Grok Build Plugin Marketplace. The plugin packages the Datadog MCP Server with auto-updates when new plugin versions ship. For more details, see the [plugin marketplace repository][1]. If you previously installed the Datadog MCP Server manually, remove it from your Grok Build configuration to avoid conflicts.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-1. In Grok Build, type `/marketplace`, locate the Datadog plugin, and install it.
+[1]: https://github.com/xai-org/plugin-marketplace
 
-1. You are prompted to select a [Datadog site][2] and complete the OAuth login flow.
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+1. In Grok Build, type `/marketplace` to open the Marketplace catalog. Under xAI Official, find and install the Datadog plugin.
+
+1. Open the **MCP Servers** tab or type `/mcps`. Under **Plugin: datadog**, find **datadog-grok** and press `i` to authenticate. Select your [Datadog site][2] and complete the OAuth login flow.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
-[1]: https://github.com/xai-org/plugin-marketplace
 [2]: /getting_started/site/
-
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
@@ -743,6 +743,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 | [Codex CLI][6] | OpenAI | |
 | [Copilot CLI][64] | Microsoft | Datadog [Copilot plugin][16] recommended. |
 | [Gemini CLI][50] | Google | |
+| [Grok Build][71] | SpaceXAI | Datadog [Grok Build plugin][72] recommended. |
 | [Warp][28] | Warp | |
 | [VS Code][7] | Microsoft | Datadog [Copilot plugin][16] recommended. |
 | [JetBrains IDEs][18] | JetBrains | [Datadog plugin][18] recommended. |
@@ -971,3 +972,5 @@ Local authentication is recommended for Cline and when remote authentication is 
 [68]: /account_management/org_settings/ip_allowlist/
 [69]: /data_observability/
 [70]: /account_management/audit_trail/
+[71]: https://x.ai/build 
+[72]: https://github.com/xai-org/plugin-marketplace 
