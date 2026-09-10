@@ -328,6 +328,28 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 [3]: /getting_started/site/
 {{% /tab %}}
 
+{{% tab "Grok Build" %}}
+
+Install the Datadog Plugin from the Grok Build Plugin Marketplace. The plugin packages the Datadog MCP Server with auto-updates when new plugin versions ship. For more details, see the [plugin marketplace repository][1]. If you previously installed the Datadog MCP Server manually, remove it from your Grok Build configuration to avoid conflicts.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+1. In Grok Build, type `/marketplace`, locate the Datadog plugin, and install it.
+
+1. You are prompted to select a [Datadog site][2] and complete the OAuth login flow.
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[1]: https://github.com/xai-org/plugin-marketplace
+[2]: /getting_started/site/
+
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+{{% /tab %}}
+
 {{% tab "JetBrains IDEs" %}}
 
 JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. GitHub offers the [Copilot][4] plugin. Alternatively, many developers use an agent CLI, such as Claude Code, Codex, or Gemini CLI, alongside their IDE.
