@@ -22,8 +22,4 @@ datadogRum.startView({
 })
 ```
 
-If you use React, Angular, Vue, or another frontend framework, Datadog recommends calling `startView()` from the framework's router so that views line up with route changes.
-
-For version-specific behavior, CDN setup examples, and framework router integration details (including a React Router example), see [Advanced Configuration][1].
-
-[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#manually-track-pageviews
+If you use React, Angular, Vue, or another frontend framework, Datadog recommends calling `startView()` from the framework's router so that views line up with route changes. See [React router instrumentation](#react-router-instrumentation) for a React Router example.
