@@ -224,6 +224,16 @@ You can post updates if plans change or reschedule the maintenance window as nee
 
 **Note**: Each status page supports a maximum of 100 scheduled or in-progress maintenance windows at a time.
 
+### Cancel a maintenance window
+
+To cancel a scheduled maintenance window before it starts, open the maintenance notice, click the three-dot icon, and select **Cancel Maintenance**. Confirm the cancellation in the dialog that appears.
+
+{{< img src="incident_response/status_pages/cancel-maintenance.png" alt="Cancel Maintenance confirmation dialog for a scheduled maintenance window" style="width:60%;" >}}
+
+Canceling a maintenance window removes it from **Upcoming Maintenance** on the status page. This action cannot be undone.
+
+**Note**: An in-progress maintenance window can't be canceled.
+
 ### Backfill a maintenance window
 
 Backfilled maintenance windows allow you to retroactively document planned downtime that was not previously announced. Each update can be assigned its original timestamp, so the maintenance timeline appears accurately in your uptime history.
@@ -236,6 +246,14 @@ From a status page, select the dropdown next to **Publish Notice**, select **Pub
 | **Updates** | Exactly two timestamped updates representing the start and end of the maintenance window. Each update requires a started at timestamp, status (In Progress or Completed), description, and affected components. |
 
 {{< img src="incident_response/status_pages/publish_status_page_backfill_maintenance.png" alt="Example publish backfilled notice modal for maintenance windows" style="width:60%;" >}}
+
+### Edit a maintenance update
+
+After publishing a maintenance update, you can edit its message to correct typos or clarify the description. To edit a past update, open the maintenance notice on the status page, hover over the update you want to modify in the timeline, and click the edit icon that appears. Make your changes in the **Edit Update** modal.
+
+{{< img src="incident_response/status_pages/edit_maintenance_update.png" alt="Edit Update modal showing a Message field for a past maintenance update" style="width:60%;" >}}
+
+Only the **Message** field can be edited. Click **Save Changes** to apply the edits.
 
 ## Use notice templates
 
@@ -353,6 +371,10 @@ To match your branding, you have the option to map your status page URL to a cus
 - You can revert to the default Datadog domain at any time.
 - DNS changes must be made by someone with access to your domain registrar.
 
+## Manage status pages with Terraform
+You can use Terraform to create or manage your status pages. For details on the resources available, see Datadog's [Terraform registry][4].  
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -360,3 +382,4 @@ To match your branding, you have the option to map your status page URL to a cus
 [1]: /account_management/rbac/
 [2]: https://app.datadoghq.com/status-pages
 [3]: /account_management/org_settings/smtp_configuration
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/status_page
