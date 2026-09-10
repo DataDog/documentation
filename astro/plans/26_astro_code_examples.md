@@ -309,6 +309,9 @@ api-code-examples/               # gitignored staging target; the build's only i
   v1/<category>/<Operation>.<ext>
   v2/<category>/<Operation>.<ext>
 tests/fixtures/api/examples/     # 48 frozen files, ~40 KB, banner-prefixed
+tests/integration/
+  exampleBaseline.scaffold.test.ts   # throwaway (Step 0b), deleted in Step 6
+  example-baseline.json              # throwaway, deliberately not gitignored
 ```
 
 The driver should read as the Makefile target does, because that was the point of Q1:
@@ -328,6 +331,35 @@ premise.
 - `astro/CLAUDE.md`: record the two carve-outs — the public-S3 read (Q6) and the
   fixture-as-mock exception (Q8a). Both are deviations from rules that file states
   plainly, so an unexplained deviation reads as a mistake to the next person.
+
+### Step 0b — capture the throwaway baseline
+
+Scaffolding, not a deliverable. It answers one question — *did repointing the loader
+change what any page renders?* — and it is deleted in Step 6.
+
+**Why it is needed, given Step 6 already diffs the two trees.** A tree diff verifies
+Step 2 and nothing else. Step 3 rewrites both the glob pattern and `FILE_KEY_RE`
+(`:22`), and those parse *path shape*: `/content/en/api/v1/monitors/X.go` becomes
+`/api-code-examples/v1/monitors/X.go`. Get that regex wrong and every staged file can be
+byte-perfect, the tree diff still clean, and the loader silently return zero examples for
+every operation. Nothing else here catches that at scale — the seven `getOperationView`
+snapshots cover 7 operations out of ~2,200, and from Step 4 onward they read a frozen
+fixture and no longer touch the staged tree at all.
+
+**Capture it before any code changes**, while the loader still reads Hugo's tree.
+
+- `tests/integration/exampleBaseline.scaffold.test.ts`, run under
+  `vitest.integration.config.ts` — which deliberately omits the fixture redirect, so it
+  sees what the loader really resolves. A test rather than a bare script because
+  `import.meta.glob` needs Vite.
+- Walk every category and operation (`getCategoriesView`, as
+  `tests/integration/viewsBuilder.full-spec.test.ts` already does), call
+  `getCodeExamplesForOperation`, and write `operationId → language → sha256(code)` to
+  `tests/integration/example-baseline.json`. Hashes, not code: a few hundred KB for the
+  whole API, against 924 KB for a *single* HTML snapshot.
+- **Do not gitignore either file.** The scaffold sitting visibly untracked in
+  `git status` is the reminder to delete it, and it keeps Step 6's clean-tree check
+  honest.
 
 ### Step 1 — `scripts/lib/websitesSourcesData.ts`
 
@@ -411,19 +443,53 @@ on every `yarn dev` until a real fetch happens, which is the intended behavior: 
 is never fixture data sitting in the staged directory pretending to be real. Non-TTY
 behavior is open item 1.
 
-### Step 6 — verify
+### Step 6 — verify, then discard the scaffold
 
 - `yarn typecheck` — also confirms Step 0's `erasableSyntaxOnly` holds for the new
   scripts.
 - `yarn test:headless-ai src/lib/api` while iterating; full `yarn test-ai` before done.
 - Delete `api-code-examples/`, run `yarn fetch:examples`, confirm 13,544 files / ~55 MB
-  and that `git status` stays clean.
-- Compare a rendered operation page against Hugo's `/api` for the same operation, for
-  each of the six languages. The five legacy-only operations named in Q9 —
-  `MuteMonitor`, `UnmuteMonitor`, `CreateSlackIntegration`, `DeleteSlackIntegration`,
-  `GetSlackIntegration` — are the sharpest test, since they are exactly the pages that
-  regress if Step 2's legacy staging is wrong. They fail *quietly*, by rendering fewer
-  language tabs, so check them explicitly rather than trusting a green build.
+  and that `git status` shows nothing but the Step 0b scaffold.
+
+**Pin both sides first.** Each diff below is only meaningful if the staged tree and
+Hugo's on-disk tree came from the same SDK refs. Hugo's came from
+`hugo/_vendor/data/sdk_versions.json` (go `v2.65.0`, java `datadog-api-client-2.60.0`,
+python `2.60.0`, ruby `v2.59.1`, typescript `v1.63.0`). The live tarball tracks latest
+releases, so by implementation time it will have moved and an unpinned run folds genuine
+upstream churn into the diff. Give the fetch script a `--pins <path>` flag that reads a
+local `sdk_versions.json` instead of the network. **Keep that flag after the scaffold
+goes** — it makes the fetch deterministic and offline-capable, which is worth having on
+its own.
+
+**Then the two diffs.**
+
+1. **Tree diff** — `api-code-examples/` against Hugo's `content/en/api/v*`,
+   byte-for-byte across all 13,544 files. Verifies Step 2. Expect empty.
+2. **Baseline diff** — re-run the Step 0b scaffold and compare against
+   `example-baseline.json`. Verifies Step 3 across every operation rather than the seven
+   snapshotted ones. Expect empty.
+
+**One expected false positive, in diff 1 only.** An incrementally built Hugo tree can
+hold files from older SDK tags, because Hugo copies with `cp -Rn` and never removes; the
+fresh staged tree will not have them. So paths present in Hugo but absent after are
+suspect-but-possibly-stale, while paths present *after* but absent in Hugo are
+unambiguously a bug. Running `make clean` on the Hugo side before diffing removes the
+ambiguity — `git clean -Xf ./content` clears exactly the generated extensions and leaves
+the 148 tracked legacy files alone.
+
+**Look at the legacy pages by hand anyway.** Diff 2 does cover them — the baseline is
+captured against a Hugo tree that has all 148 files, so a failed legacy staging shows up
+as `MuteMonitor` losing its Python and Ruby entries. But these are the pages that
+regress *quietly*, by rendering fewer language tabs, so spend the minute. Q9's five
+renderable legacy-only operations — `MuteMonitor`, `UnmuteMonitor`,
+`CreateSlackIntegration`, `DeleteSlackIntegration`, `GetSlackIntegration` — should each
+show one. (`GetUsageTrace` is the sixth in Q9's set but has no page; it left
+`data/api/v1/full_spec.yaml`.)
+
+**Discard the scaffold.** Delete `exampleBaseline.scaffold.test.ts` and
+`example-baseline.json`. A clean `git status` is the last check, and it means something
+here precisely because nothing was gitignored to make it pass.
+
 - Recommend the production build to the user as the final step rather than running it.
 
 ### What this does not do
