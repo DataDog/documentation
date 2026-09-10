@@ -45,7 +45,7 @@ The Runtime Prioritization Engine computes remediation timelines that follow the
 
 By default, Datadog uses this prioritization context to automatically compute each vulnerability's remediation timeline according to the directive. The corresponding due date appears on the vulnerability finding.
 
-For more information about how Datadog addresses the directive, see [How CISA's BOD 26-04 changes vulnerability prioritization][16].
+For more information, see [How CISA's BOD 26-04 changes vulnerability prioritization][16].
 
 {{< img src="security/cloud_security_management/bod_26_04_remediation_timeline.png" alt="Cloud Security Vulnerabilities Explorer filtered by CISA BOD 26-04 remediation timeline, with automatically computed due dates displayed on vulnerability findings" width="100%">}}
 
