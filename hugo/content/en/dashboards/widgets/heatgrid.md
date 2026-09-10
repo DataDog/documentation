@@ -17,14 +17,16 @@ The heatgrid widget displays timeseries data grouped by tag, with each group sho
 ### Configuration
 
 1. Configure your query, grouping by the tag you want to compare across rows. Each group in the query's results appears as its own row in the grid.
+   {{< img src="dashboards/widgets/heatgrid/heatgrid_colors.png" alt="Heatgrid configuration panel showing sort, row label width, legend, and color options." style="width:90%;">}}
 1. {{< ui >}}Sort rows by{{< /ui >}}: Order rows by **average value**, **max value**, **min value**, **sum of values**, or **label**, in ascending or descending order.
 1. {{< ui >}}Colors{{< /ui >}}: Configure how query values map to row colors.
-   {{< img src="dashboards/widgets/heatgrid/heatgrid_colors.png" alt="Heatgrid color configuration panel showing a custom continuous gradient with three color stops." style="width:90%;">}}
-   - {{< ui >}}Scheme{{< /ui >}}: Select a preset color scheme, or choose **Custom** to define your own colors.
+   - {{< ui >}}Scheme{{< /ui >}}: Select a preset color scheme, or edit an individual stop's color or position in **Format stops** to customize it.
    - {{< ui >}}Apply as{{< /ui >}}: Choose **Continuous Gradient** to map values along a smooth color scale, or **Discrete Conditions** to map value ranges to specific colors.
    - For a custom gradient, add stops along the scale and set a color and position (0-100%) for each.
-   - For custom discrete conditions, define a color and a value range (lower and upper bound) for each condition. The first condition has no lower bound and the last has no upper bound, so together the conditions cover the full range of values.
+   - For custom discrete conditions, define a color and a value range (lower and upper bound) for each condition. The first condition has no lower bound and the last has no upper bound, so together the conditions cover the full range of values. **Note**: The lower bound of the first bucket is the min value across the data and the upper bound of the last bucket is the max value.
    - Each gradient or set of discrete conditions supports 2-6 stops or conditions.
+1. {{< ui >}}Row label width{{< /ui >}}: Choose a specific width for the row label column, using preset sizes. By default, Datadog selects the size closest to the width of the labels in view.
+1. {{< ui >}}Show legend label{{< /ui >}}: Toggle to show or hide the legend label.
 
 ### Options
 
@@ -36,11 +38,11 @@ Configure units as they display in the grid and tooltips.
 
 [Context links][1] are enabled by default; you can toggle them on or off. Context links connect dashboard widgets with other pages (in Datadog or third-party).
 
-## API
+<!-- ## API
 
 This widget can be used with the **[Dashboards API][2]**. See the following table for the [widget JSON schema definition][3]:
 
-{{< dashboards-widgets-api >}}
+{{< dashboards-widgets-api >}} -->
 
 ## Further Reading
 
