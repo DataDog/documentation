@@ -1590,6 +1590,11 @@ menu:
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_automations
       weight: 302
+    - name: Code Channels in Slack
+      url: bits_ai/bits_code/slack_code_channels
+      parent: bits_ai_dev_agent
+      identifier: bits_ai_dev_agent_slack_code_channels
+      weight: 303
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst

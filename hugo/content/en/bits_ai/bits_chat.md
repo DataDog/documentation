@@ -163,6 +163,10 @@ After setup is complete, you can send queries to `@Datadog` in natural language 
 
 {{< img src="bits_ai/getting_started/example-slack-query.png" alt="Output of an example service-dependency query in Slack" style="width:60%;">}}
 
+#### Code channels with Bits Code
+
+If you ask Bits Chat to make a code change, it creates a dedicated [code channel][13] for the task. In the code channel, [Bits Code][14] works on the change alongside you and your team. See [Code Channels in Slack with Bits Code][13] for more information.
+
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -178,3 +182,5 @@ After setup is complete, you can send queries to `@Datadog` in natural language 
 [10]: https://app.datadoghq.com/ask/usage
 [11]: https://app.datadoghq.com/ask
 [12]: https://app.datadoghq.com/ask/settings
+[13]: /bits_ai/bits_code/slack_code_channels/
+[14]: /bits_ai/bits_code/
