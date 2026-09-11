@@ -113,7 +113,7 @@ To create an identity mapping:
 
 #### Using Terraform
 
-Use the [`datadog_aws_wif_persona_mapping` resource][7] to manage an identity mapping with Terraform. Set `account_identifier` to a user or service account email or handle. When Terraform manages the service account, use the `id` exported by `datadog_service_account`, which contains its handle.
+Use the [`datadog_aws_wif_persona_mapping` resource][7] to manage an identity mapping with Terraform. Set `account_identifier` to a user or service account email or handle. When Terraform manages the service account, use the `id` exported by `datadog_service_account`, which is the service account handle.
 
 ```hcl
 resource "datadog_service_account" "terraform" {
@@ -135,7 +135,7 @@ Terraform sends `arn_pattern` to Datadog unchanged. Specify an exact assumed-rol
 #### Using the API
 
 ##### Map an AWS ARN to a Datadog user account
-For `account_identifier`, use the email shown in the user's Datadog profile.
+For `account_identifier`, use the email or handle shown in the user's Datadog profile. Do not use the user's UUID.
 
 **Example**: An API call that maps an AWS ARN to a Datadog user account, `john.doe@myorg.com`.
 
@@ -157,7 +157,28 @@ curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/
 ```
 
 ##### Map an AWS ARN to a Datadog service account
-For `account_identifier`, use the email address or handle shown in the service account's details. Do not use the service account UUID from the URL.
+For `account_identifier`, use either:
+- The service account's **handle**. A service account handle is the same UUID shown as `service_account_id` in its URL and exported as `datadog_service_account.id` by Terraform.
+- The service account's **email address** shown in its details.
+
+**Example**: An API call that maps an AWS ARN to a Datadog service account using the handle, `3fa85f64-5717-4562-b3fc-2c963f66afa6`.
+
+```bash
+# Example: map an AWS ARN to a Datadog Service Account using its handle
+curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/persona_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "aws_cloud_auth_config",
+    "attributes": {
+      "account_identifier": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "arn_pattern": "arn:aws:sts::123456789012:assumed-role/terraform-runner"
+    }
+  }
+}'
+```
 
 **Example**: An API call that maps an AWS ARN to a Datadog service account using the email address, `terraform-service-account@myorg.com`.
 
@@ -198,7 +219,7 @@ curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/
   "data": {
     "type": "aws_cloud_auth_config",
     "attributes": {
-      "account_identifier": "terraform-service-account@myorg.com",
+      "account_identifier": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       "arn_pattern": "arn:aws:sts::123456789012:assumed-role/DatadogTerraformerRole/*"
     }
   }
