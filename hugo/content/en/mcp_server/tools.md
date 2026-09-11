@@ -504,6 +504,22 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 - How much could I save per day, and how many open recommendations do I have?
 - Which of our Kubernetes cluster optimizations does the team already have underway?
 
+## Cloud Resources
+
+Tools for looking up a cloud resource in the [Resource Catalog][74] by its provider-native identifier, across AWS, Azure, Google Cloud, and OCI.
+
+<div class="alert alert-info">The <code>cloud-resources</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+### `get_cloud_resource_details`
+*Toolset: **cloud-resources***\
+*Permissions Required: `Hosts Read` or `DDSQL Editor Read`*\
+Gets the configuration and metadata that Datadog records for a single cloud resource, identified by its provider-native identifier: an AWS ARN, an Azure resource ID, a Google Cloud resource name, or an OCID. Returns the resource's account, region, tags (including the owning team and service), and provider configuration. Use this tool when you have an identifier and need the details behind it, rather than searching for resources by attribute. If the resource is not in the [Resource Catalog][74], the tool reports that it was not found, which can mean the resource was deleted, was never ingested, or is not a supported type.
+
+- Which team owns `arn:aws:rds:us-east-1:123456789012:db:payments-primary`?
+- What account and region is this resource in: `arn:aws:ec2:us-east-1:123456789012:instance/i-0abc123def4567890`?
+- Show me the configuration of this Azure resource: `/subscriptions/0000/resourceGroups/prod/providers/Microsoft.Compute/virtualMachines/web-01`.
+- What tags are set on this resource, and is it owned by a team?
+
 ## Code Execution
 
 A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
@@ -2493,6 +2509,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [71]: /account_management/audit_trail/
 [72]: /actions/forms/
 [73]: /real_user_monitoring/operations_monitoring/
+[74]: /infrastructure/resource_catalog/
 
 ## Further reading
 
