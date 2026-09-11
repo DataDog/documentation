@@ -169263,7 +169263,6 @@ paths:
       tags:
         - OCI Integration
       x-menu-order: 2
-      x-unstable: "**Note**: This endpoint may be subject to changes."
     post:
       description: >-
         Create a new tenancy config to establish monitoring and data collection from your OCI environment. Requires OCI authentication credentials and tenancy details. Warning: Datadog recommends interacting with this endpoint only through the Datadog web UI to ensure all necessary OCI resources have been created and configured properly.
@@ -169341,7 +169340,6 @@ paths:
       tags:
         - OCI Integration
       x-menu-order: 3
-      x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/integration/oci/tenancies/{tenancy_ocid}:
     delete:
       description: >-
