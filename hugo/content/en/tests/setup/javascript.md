@@ -644,7 +644,7 @@ The following is a list of the most important configuration settings that can be
 **Default**: `datadoghq.com`
 
 `url` (Only when using the Datadog Agent)
-: The Datadog Agent URL for trace collection in the form `http://hostname:port`. This setting is only needed when test results are reported through the Datadog Agent.<br/>
+: The Datadog Agent URL for trace collection in the form `http://hostname:port`. This setting is needed only when test results are reported through the Datadog Agent.<br/>
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 

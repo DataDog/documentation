@@ -407,12 +407,11 @@ The following list contains key configuration settings and environment variables
 **Default**: `datadoghq.com`
 
 `DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
-: The Datadog Agent URL for trace collection in the form `http://hostname:port`. This variable is only needed when test results are reported through the Datadog Agent.<br/>
+: The Datadog Agent URL for trace collection in the form `http://hostname:port`. This variable is needed only when test results are reported through the Datadog Agent.<br/>
 **Default**: `http://localhost:8126`
 
 `DD_TEST_SESSION_NAME` (Optional)
 : Identifies a group of tests, such as `integration-tests`, `unit-tests`, or `smoke-tests`.<br/>
-**Environment variable**: `DD_TEST_SESSION_NAME`<br/>
 **Default**: (CI job name + test command)<br/>
 **Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 

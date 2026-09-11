@@ -109,7 +109,7 @@ The following environment variables configure the test optimization library and 
 **Example**: `ci`
 
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
-: Enables Agentless mode to send data directly to Datadog without a Datadog Agent. Requires `DD_API_KEY` to be set.
+: Enables Agentless mode to send test results directly to Datadog.
 **Default**: `false`
 **Example**: `true`
 
@@ -122,7 +122,7 @@ The following environment variables configure the test optimization library and 
 **Default**: `datadoghq.com`
 
 `DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
-: The Datadog Agent URL for trace collection in the form `http://hostname:port`. This variable is only needed when test results are reported through the Datadog Agent.<br/>
+: The Datadog Agent URL for trace collection in the form `http://hostname:port`. This variable is needed only when test results are reported through the Datadog Agent.<br/>
 **Default**: `http://localhost:8126`
 
 `DD_SERVICE` (Optional)

@@ -117,24 +117,28 @@ Set the following environment variables to configure the SDK and its reporting m
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
-: Enables Agentless mode to send test results directly to Datadog.
+: Enables Agentless mode to send test results directly to Datadog.<br/>
+**Default**: `false`
 
 `DD_API_KEY` (Required for Agentless mode)
-: The Datadog API key used to upload test results.
+: The Datadog API key used to upload test results.<br/>
+**Default**: `(empty)`
 
 `DD_SITE` (Optional for Agentless mode)
 : The [Datadog site][4] to upload test results to. Set this variable when using a site other than US1.<br/>
 **Default**: `datadoghq.com`
 
 `DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
-: The Datadog Agent URL for trace collection in the form `http://hostname:port`. This variable is only needed when test results are reported through the Datadog Agent.<br/>
+: The Datadog Agent URL for trace collection in the form `http://hostname:port`. This variable is needed only when test results are reported through the Datadog Agent.<br/>
 **Default**: `http://localhost:8126`
 
 `DD_SERVICE`
 : Name of the service or library being tested.
 
 `DD_TEST_SESSION_NAME` (Optional)
-: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
+: Identifies a group of tests, such as `unit-tests` or `integration-tests`.<br/>
+**Default**: (CI job name + test command)<br/>
+**Example**: `unit-tests`
 
 Set the following environment variables for your build tool:
 
