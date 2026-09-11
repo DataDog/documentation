@@ -125,7 +125,7 @@ Click **Forgot Your Password?** to open the **Reset Your Password** page, then e
 
 ### Do not know your username
 
-Click **Forgot Your Password?** to open the **Reset Your Password** page, then click **Forgot your username?**, then click **Use Your Email Address**. This link takes you out of the GovCloud support portal and opens Salesforce Identity. That page is also titled **Reset Your Password**, but its **Enter your email address** field takes your work email address, not your `.ddgov.support` username.
+Click **Forgot Your Password?** > **Forgot your username?** > **Use Your Email Address**. This link takes you out of the GovCloud support portal and opens Salesforce Identity. That page is also titled **Reset Your Password**, but its **Enter your email address** field takes your work email address, not your `.ddgov.support` username.
 
 ### Registration error
 
