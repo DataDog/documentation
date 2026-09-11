@@ -86,7 +86,7 @@ The Data Access Controls page and the Datasets API take a project ID as the `ml_
 
 ## Grant and revoke access
 
-Access is granted by editing the teams or roles on the Restricted Dataset. Removing a team or role takes effect immediately. Deleting the Restricted Dataset removes the restriction entirely, and the project becomes visible again to everyone in the organization with Agent Observability read access.
+Grant access by editing the teams or roles on the Restricted Dataset. Removing a team or role takes effect immediately. Deleting the Restricted Dataset removes the restriction entirely, and the project becomes visible again to everyone in the organization with Agent Observability read access.
 
 Being an admin does not exempt you from a restriction. The `user_access_manage` permission lets you author and edit Restricted Datasets, but access to a restricted project follows team and role membership only. An admin who is not in a granted team or role sees the project as not found, exactly as any other user would.
 
