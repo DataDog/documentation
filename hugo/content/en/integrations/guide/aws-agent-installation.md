@@ -64,13 +64,13 @@ Datadog uses each of these permissions for a specific task:
 Agent installation is based on an **installation rule**: an AWS account paired with a query that describes which EC2 instances to cover. Datadog re-checks the rule over time and installs the Agent on each matching instance, inside your own account:
 
 1. You select the EC2 instances to cover, or opt in to all eligible instances.
-1. Datadog resolves your selection into the set of covered instances.
+1. Datadog identifies the instances your selection covers.
 1. Datadog installs the Agent on each covered instance through AWS Systems Manager, adding any missing IAM configuration automatically.
 1. Datadog re-checks the rule over time. Instances that match it later, whether newly launched or newly tagged, are instrumented automatically.
 
 You approve one CloudFormation stack, one time, during initial setup. After that, installations run automatically from Datadog, with no new CloudFormation template to launch for each installation.
 
-For the full technical and security details, including the AWS resources Datadog creates, the installation mechanism, and the reconciliation model, see [How Agent installation through the AWS integration works][6].
+For the full technical and security details, including the AWS resources Datadog creates, the installation mechanism, and how Datadog keeps instances covered, see [How Agent installation through the AWS integration works][6].
 
 {{< img src="integrations/amazon_web_services/aws-agent-installation-how-it-works.png" alt="Flowchart of the AWS Agent installation process, showing which steps happen in Datadog and which run inside your AWS account." style="width:70%;" >}}
 
@@ -128,7 +128,7 @@ From this page, you can:
 - Install the Agent on new instances in your AWS environment.
 - Uninstall Agents from instances you no longer want to monitor.
 
-To stop coverage, update the rule so that the instances no longer match it. If you manually remove the Agent from a covered instance, Datadog reinstalls it on the next reconciliation. Manage Agent configuration and version upgrades through [Fleet Automation][4].
+To stop coverage, update the rule so that the instances no longer match it. If you manually remove the Agent from a covered instance, Datadog reinstalls it. Manage Agent configuration and version upgrades through [Fleet Automation][4].
 
 ## Troubleshooting
 
