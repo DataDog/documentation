@@ -1,6 +1,6 @@
 ---
 title: Slack Actions
-description: "Use Slack actions to manage incidents, on-call, monitors, dashboards, workflows, and accounts directly from a Slack workspace with the Datadog app installed."
+description: "Use Slack actions to manage incidents, on-call, monitors, dashboards, workflows, forms, and accounts directly from a Slack workspace with the Datadog app installed."
 further_reading:
 - link: "/integrations/slack/?tab=datadogforslack"
   tag: "Documentation"
@@ -64,6 +64,21 @@ Use the following commands for Workflows. For more information on using Slack in
 | `/dd workflow` | Run an automation workflow.|
 
 
+## Forms
+
+{{% site-region region="gov,gov2" %}}
+<div class="alert alert-warning">
+The <strong>Share a Form</strong> Slack action is not supported in the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
+
+Use the following commands for Forms. For more information, see [Forms][8].
+
+| Command | Description|
+| ------------------ | ---------- |
+| `/dd`, then select **Share a Form** | Search for a Datadog form and share it to this channel, where recipients can fill it out in Slack or open it in Datadog. |
+
+
 ## Accounts
 Use the following commands for [account management][7].
 
@@ -79,3 +94,4 @@ Use the following commands for [account management][7].
 [5]: /dashboards/
 [6]: /actions/workflows/trigger/#slack-triggers
 [7]: /account_management/
+[8]: /actions/forms/
