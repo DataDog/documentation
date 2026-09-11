@@ -16,10 +16,6 @@ title: Seguimiento de operaciones
 ---
 ## Descripción general {#overview}
 
-{{< callout header="Vista previa" btn_hidden="true" >}}
-El seguimiento de operaciones está en Vista previa.
-{{< /callout >}}
-
 {{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-overview-1.png" alt="Pestaña de operaciones en RUM > Performance Monitoring" style="width:100%;" >}}
 
 En Datadog Real User Monitoring (RUM), un [recorrido][9] representa un área importante de su aplicación orientada al usuario, como el pago, el inicio de sesión o la búsqueda. Cada recorrido incluye operaciones, que son los pasos técnicos críticos que hacen que la experiencia funcione.
@@ -63,7 +59,7 @@ Utilice las API del SDK para definir sus operaciones.
 Toda operación debe iniciarse llamando a `startOperation` (algunos SDK pueden usar el nombre heredado de esta API - `startFeatureOperation`).
 
 {{< tabs >}}
-{{% tab "Browser" %}}
+{{% tab "Navegador" %}}
 
 ```javascript
 DD_RUM.init({
@@ -151,7 +147,7 @@ m.global.datadogRumAgent@.startOperation(
 Toda operación iniciada debe tener una detención. Use `succeedOperation` para detener una operación con un resultado exitoso (algunos SDK pueden usar el nombre heredado de esta API - `succeedFeatureOperation`).
 
 {{< tabs >}}
-{{% tab "Browser" %}}
+{{% tab "Navegador" %}}
 
 ```javascript
 succeedFeatureOperation: (
@@ -234,7 +230,7 @@ m.global.datadogRumAgent@.succeedOperation(
 Toda operación iniciada debe tener una detención. Use `failOperation` para detener una operación con un resultado de error (algunos SDK pueden usar el nombre heredado de esta API - `failFeatureOperation`).
 
 {{< tabs >}}
-{{% tab "Browser" %}}
+{{% tab "Navegador" %}}
 
 ```javascript
 DD_RUM.init({

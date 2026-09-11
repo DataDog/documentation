@@ -35,6 +35,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-cost-skill-bits-chat/"
   tag: "Blog"
   text: "Answer any cost question faster with the Cloud Cost skill in Bits Chat"
+- link: "https://www.datadoghq.com/blog/how-datadog-saves-money-by-optimizing-ai-usage/"
+  tag: "Blog"
+  text: "How Datadog saves over $1 million each month by optimizing AI usage"
+- link: "https://www.datadoghq.com/blog/federal-agencies-ai-spend-cloud-cost-management/"
+  tag: "Blog"
+  text: "Beyond the $1 AI era: How federal agencies can build the evidence for FY27 renewals"
 ---
 
 
