@@ -43,13 +43,23 @@ As you define the search query, the top graph updates.
     * For some attributes and tags, Datadog evaluates the aggregate values (for example, Avg, Median, Min, or Sum).
     * {{< ui >}}Monitor over a facet{{< /ui >}}: If a facet is selected, the monitor alerts over the unique value count of the facet.
       
-4. Group events by multiple dimensions (optional): 
+3. Group events by multiple dimensions (optional): 
 
    All events matching the query are aggregated into groups based on the value of up to four event facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimensions:
    * **1 facet**: 1000 top values
    * **2 facets**: 30 top values per facet (at most 900 groups)
    * **3 facets**: 10 top values per facet (at most 1000 groups)
    * **4 facets**: 5 top values per facet (at most 625 groups)
+
+   If there are multiple queries or formulas defined in an Event Monitor, you can select the number of top or bottom values for each dimension.
+
+   The total limit, irrespective of the number of facets, is 1000 top values. If you increase this above 1000, Datadog adjusts the top values for the other dimensions to ensure the number of the resulting combinations is less than 1000. The default top values for every group-by is 10, with the exception of the fourth, which defaults to 5 top values.
+
+   As an example, an Event Monitor with four groupings on the search query could have:
+   * **First facet**: 10 top values
+   * **Second facet**: 10 top values
+   * **Third facet**: 5 top values
+   * **Fourth facet**: 2 top values
 
 ### Set alert conditions
 
