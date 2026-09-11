@@ -30,13 +30,11 @@
         <ul class="list-unstyled">
             {{ range .Children }}
                 {{/*  LEVEL 1  */}}
-                {{/* Levels 3-4 are only rendered for the top-level section containing the current page, to avoid
-                     shipping every product's full sub-nav on every page (see DOCS nav HTML size investigation).
-                     This site's main menu is defined entirely in config as plain url: strings, not via page
-                     front matter, so entries have no .Page and .IsMenuCurrent/.HasMenuCurrent (which rely on
-                     .Page identity) never match -- comparing URLs directly is what actually works here. Keep
-                     this in sync with nav/current-top-section.html, which computes the same thing for use as
-                     this partial's cache key. */}}
+                {{/* Levels 3-4 render only for the current page's top-level section, to avoid shipping every
+                     section's full sub-nav on every page. This menu is config-defined (plain url: strings, no
+                     page front matter), so entries have no .Page and .IsMenuCurrent/.HasMenuCurrent never match
+                     -- comparing URLs directly is what works. Keep in sync with nav/current-top-section.html,
+                     which computes the same matches for this partial's cache key. */}}
                 {{ $menuURL := trim (.URL | relLangURL) "/" }}
                 {{ $isCurrentTopSection := and (ne $menuURL "") (or (eq $curURL $menuURL) (strings.HasPrefix $curURL (printf "%s/" $menuURL))) }}
                 <li class="nav-top-level {{ if (not (or (in $excludeAsync .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}
