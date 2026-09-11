@@ -13,6 +13,9 @@ further_reading:
 - link: "/real_user_monitoring/guide/upload-javascript-source-maps"
   tag: "Documentation"
   text: "Upload JavaScript source maps"
+- link: "/real_user_monitoring/guide/upload-webassembly-symbols"
+  tag: "Documentation"
+  text: "Upload WebAssembly symbols"
 - link: "/error_tracking/explorer"
   tag: "Documentation"
   text: "Learn about the Error Tracking Explorer"
@@ -161,9 +164,11 @@ window.DD_RUM.init({
 
 Deploy the changes to your application. After your deployment is live, Datadog collects events from your users' browsers.
 
-### Step 5 - Upload source maps (optional but recommended)
+### Step 5 - Upload source maps and WebAssembly symbols (optional but recommended)
 
 Upload your JavaScript source maps to access unminified stack traces. See the [source map upload guide][17].
+
+If your browser application uses WebAssembly, [configure the Browser SDK WASM plugin][20] and [upload the module's debug symbols][21].
 
 ### Step 6 - Visualize your data
 
@@ -229,3 +234,5 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 [17]: /real_user_monitoring/guide/upload-javascript-source-maps
 [18]: /getting_started/tagging/unified_service_tagging/
 [19]: /getting_started/tagging/
+[20]: /error_tracking/frontend/collecting_browser_errors/#configure-webassembly-error-tracking
+[21]: /real_user_monitoring/guide/upload-webassembly-symbols/#upload-your-symbols
