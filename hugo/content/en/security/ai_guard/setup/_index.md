@@ -85,7 +85,7 @@ AI Guard provides settings to control how evaluations are enforced, how sensitiv
 
 On the {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Services{{< /ui >}}][6] page, you can configure policies that determine what actions AI Guard should take when it detects unsafe content. For each policy, you determine:
 - [{{< ui >}}Enforcement mode{{< /ui >}}](#blocking-policy): Monitor only, or block unsafe requests
-- [{{< ui >}}Sensitive data detection{{< /ui >}}](#sensitive-data-scanning): Whether AI Guard should flag sensitive data when it detects it
+- [{{< ui >}}Sensitive data scanning{{< /ui >}}](#sensitive-data-scanning): Whether AI Guard should scan for and redact sensitive data
 - [{{< ui >}}Evaluation context{{< /ui >}}](#evaluation-context): Additional information about the service that AI Guard uses during evaluation to reduce false positives
 
 Beside {{< ui >}}Default policy{{< /ui >}}, click {{< ui >}}Edit{{< /ui >}} to set AI Guard's default behavior. To override the default behavior, click {{< ui >}}Add Service Policy{{< /ui >}}, select the service and environment you want your override to apply to, then configure the more specialized policy.
@@ -102,9 +102,9 @@ You can configure blocking at different levels of granularity, with more specifi
 
 #### Sensitive data scanning {#sensitive-data-scanning}
 
-AI Guard can detect personally identifiable information (PII) such as email addresses, phone numbers, and SSNs, as well as secrets such as API keys and tokens, in LLM conversations. When you create or edit a policy for a service, you can choose to enable or disable sensitive data detection.
+AI Guard can detect personally identifiable information (PII) such as email addresses, phone numbers, and SSNs, as well as secrets such as API keys and tokens, in LLM conversations. When you create or edit a policy for a service, you can choose to enable or disable sensitive data scanning.
 
-When enabled, AI Guard scans the last message in each evaluation call, including user prompts, assistant responses, tool call arguments, and tool call results. Findings appear on APM traces for visibility. Sensitive data scanning is detection-only; findings do not independently trigger blocking.
+When enabled, AI Guard scans the last message in each evaluation call, including user prompts, assistant responses, tool call arguments, and tool call results. Findings appear on APM traces for visibility. If a scanning rule has a redaction action, AI Guard also returns the replacement for each sensitive value that the rule mutates. See [Sensitive Data Redaction][20] to configure and apply these replacements.
 
 By default, AI Guard scans for a standard set of secrets, such as AWS keys and Datadog API keys. To customize which [scanning rules][14] AI Guard uses, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Sensitive Data Scanner{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} > [{{< ui >}}AI Guard{{< /ui >}}][15], where you can enable or disable individual rules, and create scanning groups with custom rules, scoped specifically to AI Guard evaluations.
 
@@ -207,3 +207,4 @@ DD_ENV=<YOUR_ENVIRONMENT>
 [14]: /security/sensitive_data_scanner/scanning_rules/
 [15]: https://app.datadoghq.com/sensitive-data-scanner/configuration/ai-guard
 [19]: https://app.datadoghq.com/security/ai-guard/playground
+[20]: /security/ai_guard/setup/sensitive_data_redaction/
