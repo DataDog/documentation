@@ -666,7 +666,7 @@ The following settings are available only as environment variables:
 
 `DD_TEST_SESSION_NAME` (Optional)
 : Identifies a group of tests, such as `unit-tests`, `integration-tests`, or `smoke-tests`.<br/>
-**Default**: The Lage package name when available. Otherwise, the CI job name and framework command, or the framework command if the CI job name is unavailable.<br/>
+**Default**: When tests run with [Lage][26], the Lage package name. Otherwise, the CI job name and framework command, or the framework command if the CI job name is unavailable.<br/>
 **Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 For more information about `service` and `env` reserved tags, see [Unified Service Tagging][7]. All other [Datadog Tracer configuration][8] options can also be used.
@@ -968,7 +968,10 @@ Use `DD_TEST_SESSION_NAME` to define the name of the test session and the relate
 - `ui-tests`
 - `backend-tests`
 
-If `DD_TEST_SESSION_NAME` is not specified, the default is the Lage package name when available. Otherwise, the default is the CI job name and framework command. If the CI job name is unavailable, the framework command is used.
+If `DD_TEST_SESSION_NAME` is not specified:
+
+- When tests run with [Lage][26], the default is the Lage package name (for example, `my-package`).
+- Otherwise, the default is the CI job name and framework command (for example, `unit-tests-jest`). If the CI job name is unavailable, the framework command is used (for example, `jest`).
 
 The test session name should be unique within a repository to help you distinguish different groups of tests.
 
@@ -997,3 +1000,4 @@ The test session name should be unique within a repository to help you distingui
 [23]: /tests/flaky_tests/auto_test_retries/
 [24]: /tests/flaky_management/#confirm-fixes-for-flaky-tests
 [25]: /getting_started/site/
+[26]: https://microsoft.github.io/lage/docs/introduction
