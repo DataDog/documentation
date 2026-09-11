@@ -84,7 +84,13 @@ If [commit author email validation][104] is enabled, add `no-reply@dtdg.co` to t
 {{< /tabs >}}
 
 2. (Optional) If you're planning to use [Slack code channels][13]:
-      - Set up the [Bits Chat Slack integration][14] and grant the additional Slack workspace permissions required for code channels. 
+      - Set up the [Bits Chat Slack integration][14] and grant the [Slack scopes][15] required for code channels:
+         - `channels:history`
+         - `groups:history`
+         - `chat:write`
+         - `channels:manage`
+         - `app_mentions:read`
+         - (Optional) `chat:write.customize`
       - In Bits Code settings, enable code channels for your organization.
 
 3. (Optional) See the additional configuration options, below.
@@ -190,6 +196,7 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [12]: /bits_ai/bits_code/#custom-agent-skills-and-instructions
 [13]: /bits_ai/bits_code/slack_code_channels/
 [14]: /bits_ai/bits_chat/#slack
+[15]: https://docs.slack.dev/reference/scopes/
 
 ## Further reading
 
