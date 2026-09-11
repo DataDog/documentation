@@ -90,7 +90,7 @@ Auto-organize groups the findings that share a query into labeled columns, one c
 
 ## Delete findings
 
-To delete one finding, hover over it and click the delete icon on its card. To delete several, select them and press the **Delete** key. To select every finding, press **Cmd**/**Ctrl** + **A**.
+To delete one finding, hover over it and use the delete button on the top right of the card, or select the finding and press the **Delete** key. To delete several at once, select them and press **Delete**. To select every finding, press **Cmd**/**Ctrl** + **A**.
 
 The clear all button in the Findings panel deletes all findings.
 <!-- Does the clear all button warn before emptying a full panel? -->
