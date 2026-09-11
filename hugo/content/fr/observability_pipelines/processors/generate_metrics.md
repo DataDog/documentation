@@ -1,4 +1,7 @@
 ---
+description: Apprenez à utiliser le processeur Generate Metrics pour créer des métriques
+  de type compteur, jauge ou distribution à partir de journaux correspondant à une
+  requête.
 disable_toc: false
 products:
 - icon: logs

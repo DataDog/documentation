@@ -4674,6 +4674,84 @@ menu:
         unstable:
           - v2
         order: 134
+    - name: Update an inbox rule
+      url: /api/latest/security-monitoring/update-an-inbox-rule/
+      identifier: security-monitoring-update-an-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityFindingsAutomationInboxRule
+        unstable:
+          - v2
+        order: 168
+    - name: Get an inbox rule
+      url: /api/latest/security-monitoring/get-an-inbox-rule/
+      identifier: security-monitoring-get-an-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityFindingsAutomationInboxRule
+        unstable:
+          - v2
+        order: 167
+    - name: Delete an inbox rule
+      url: /api/latest/security-monitoring/delete-an-inbox-rule/
+      identifier: security-monitoring-delete-an-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityFindingsAutomationInboxRule
+        unstable:
+          - v2
+        order: 169
+    - name: Reorder inbox rules
+      url: /api/latest/security-monitoring/reorder-inbox-rules/
+      identifier: security-monitoring-reorder-inbox-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ReorderSecurityFindingsAutomationInboxRules
+        unstable:
+          - v2
+        order: 166
+    - name: Create an inbox rule
+      url: /api/latest/security-monitoring/create-an-inbox-rule/
+      identifier: security-monitoring-create-an-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityFindingsAutomationInboxRule
+        unstable:
+          - v2
+        order: 165
+    - name: Get all inbox rules
+      url: /api/latest/security-monitoring/get-all-inbox-rules/
+      identifier: security-monitoring-get-all-inbox-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityFindingsAutomationInboxRules
+        unstable:
+          - v2
+        order: 164
     - name: Update a due date rule
       url: /api/latest/security-monitoring/update-a-due-date-rule/
       identifier: security-monitoring-update-a-due-date-rule
@@ -4752,6 +4830,58 @@ menu:
         unstable:
           - v2
         order: 140
+    - name: Enable a default inbox rule
+      url: /api/latest/security-monitoring/enable-a-default-inbox-rule/
+      identifier: security-monitoring-enable-a-default-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - EnableSecurityFindingsAutomationDefaultInboxRule
+        unstable:
+          - v2
+        order: 172
+    - name: Disable a default inbox rule
+      url: /api/latest/security-monitoring/disable-a-default-inbox-rule/
+      identifier: security-monitoring-disable-a-default-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DisableSecurityFindingsAutomationDefaultInboxRule
+        unstable:
+          - v2
+        order: 173
+    - name: Get a default inbox rule
+      url: /api/latest/security-monitoring/get-a-default-inbox-rule/
+      identifier: security-monitoring-get-a-default-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityFindingsAutomationDefaultInboxRule
+        unstable:
+          - v2
+        order: 171
+    - name: Get all default inbox rules
+      url: /api/latest/security-monitoring/get-all-default-inbox-rules/
+      identifier: security-monitoring-get-all-default-inbox-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityFindingsAutomationDefaultInboxRules
+        unstable:
+          - v2
+        order: 170
     - name: Assign or unassign security findings
       url: /api/latest/security-monitoring/assign-or-unassign-security-findings/
       identifier: security-monitoring-assign-or-unassign-security-findings
@@ -12183,6 +12313,30 @@ menu:
       url: /api/latest/code-coverage/
       identifier: code-coverage
       generated: true
+    - name: Get code coverage summary for a pull request
+      url: /api/latest/code-coverage/get-code-coverage-summary-for-a-pull-request/
+      identifier: code-coverage-get-code-coverage-summary-for-a-pull-request
+      parent: code-coverage
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCodeCoveragePRSummary
+        unstable: []
+        order: 3
+    - name: Get per-file code coverage data
+      url: /api/latest/code-coverage/get-per-file-code-coverage-data/
+      identifier: code-coverage-get-per-file-code-coverage-data
+      parent: code-coverage
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCodeCoverageFiles
+        unstable: []
+        order: 4
     - name: Get code coverage summary for a commit
       url: /api/latest/code-coverage/get-code-coverage-summary-for-a-commit/
       identifier: code-coverage-get-code-coverage-summary-for-a-commit
@@ -12193,8 +12347,7 @@ menu:
           - v2
         operationids:
           - GetCodeCoverageCommitSummary
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Get code coverage summary for a branch
       url: /api/latest/code-coverage/get-code-coverage-summary-for-a-branch/
@@ -12206,8 +12359,7 @@ menu:
           - v2
         operationids:
           - GetCodeCoverageBranchSummary
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Compliance
       url: /api/latest/compliance/
@@ -17285,6 +17437,18 @@ menu:
           - CreateOnCallSchedule
         unstable: []
         order: 1
+    - name: List On-Call schedules
+      url: /api/latest/on-call/list-on-call-schedules/
+      identifier: on-call-list-on-call-schedules
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOnCallSchedules
+        unstable: []
+        order: 23
     - name: Update On-Call escalation policy
       url: /api/latest/on-call/update-on-call-escalation-policy/
       identifier: on-call-update-on-call-escalation-policy
