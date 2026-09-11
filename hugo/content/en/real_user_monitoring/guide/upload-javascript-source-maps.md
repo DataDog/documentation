@@ -129,7 +129,7 @@ Choose one of the following upload methods.
 
 Datadog Build Plugins can inject debug IDs and upload source maps directly during the build. You do not need to install or run `datadog-ci` separately.
 
-Debug ID support requires Datadog Build Plugins version `3.3.0` or later.
+Debug ID support requires [Datadog Build Plugins version 3.3.0](https://github.com/DataDog/build-plugins/releases/tag/v3.3.0) or later.
 
 Enable debug ID injection and source map uploads in your build plugin:
 
@@ -151,6 +151,8 @@ The plugin uploads each source map with the debug ID injected into its correspon
 This example uses webpack. See [Datadog Build Plugins][8] for installation and configuration instructions for other supported bundlers.
 
 #### `datadog-ci`
+
+Debug ID support requires [`@datadog/datadog-ci` version 5.24.0](https://github.com/DataDog/datadog-ci/releases/tag/v5.24.0) or later.
 
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
 2. [Create a dedicated Datadog API key][6] and export it as an environment variable named `DD_API_KEY`.

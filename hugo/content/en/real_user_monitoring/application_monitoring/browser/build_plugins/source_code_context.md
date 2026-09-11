@@ -41,7 +41,7 @@ The service and version configuration below documents the legacy matching method
 
 Debug IDs associate each JavaScript bundle with its source map without relying on the bundle URL, service, or version. Use this method for new configurations.
 
-Debug ID support requires Datadog Build Plugins version `3.3.0` or later.
+Debug ID support requires [Datadog Build Plugins version 3.3.0](https://github.com/DataDog/build-plugins/releases/tag/v3.3.0) or later.
 
 Set `debugId` to `true` in `sourcemaps` to inject a debug ID into each JavaScript bundle.
 
