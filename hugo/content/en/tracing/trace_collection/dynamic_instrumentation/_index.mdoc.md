@@ -49,7 +49,7 @@ further_reading:
 
 Dynamic Instrumentation lets you add metrics, spans, and span tags to running production systems without restarts or code changes, including in third-party libraries.
 
-If you are interested in trying out the latest user experience improvements for Dynamic Instrumentation, consider opting into the [autocomplete and search Preview][17].
+To use autocomplete and search, opt in to the [preview][17].
 
 **Note**: Dynamic Instrumentation is not compatible with Azure App Services or serverless environments.
 
@@ -62,7 +62,6 @@ If you are interested in trying out the latest user experience improvements for 
   - Minimum for [in-app enablement](#enable-in-app): 1.48.0
   - Minimum for [manual enablement](#enable-manually): 1.34.0
   - Does not support Kotlin coroutines
-- **[Datadog Agent][1]**, version 7.49.0 or higher
 
 {% /if %}
 <!-- end Java -->
@@ -73,7 +72,6 @@ If you are interested in trying out the latest user experience improvements for 
 - **[Datadog Python SDK (`ddtrace`)][19]**
   - Minimum for [in-app enablement](#enable-in-app): 3.10.0
   - Minimum for [manual enablement](#enable-manually): 2.2.0
-- **[Datadog Agent][1]**, version 7.49.0 or higher
 
 {% /if %}
 <!-- end Python -->
@@ -84,7 +82,6 @@ If you are interested in trying out the latest user experience improvements for 
 - **Datadog .NET SDK** ([.NET Framework][22] or [.NET Core][20])
   - Minimum for [in-app enablement](#enable-in-app): 3.29.0
   - Minimum for [manual enablement](#enable-manually): 2.54.0
-- **[Datadog Agent][1]**, version 7.49.0 or higher
 
 {% /if %}
 <!-- end .NET -->
@@ -94,16 +91,16 @@ If you are interested in trying out the latest user experience improvements for 
 
 - **[Datadog PHP SDK (`dd-trace-php`)][21]**, minimum version 1.5.0
   - File and line instrumentations are not supported
-- **[Datadog Agent][1]**, version 7.49.0 or higher
 
 {% /if %}
 <!-- end PHP -->
 
 ### Datadog configuration
 
-- **[Unified Service Tagging][6]** configured with `service`, `env`, and `version` tags on your deployment
-- **[Remote Configuration][2]** enabled in the Agent
-- (Recommended) **[Source Code Integration][7]**
+- Install the [Datadog Agent][1], version 7.49.0 or higher.
+- Configure [Unified Service Tagging][6] with `service`, `env`, and `version` tags.
+- Enable [Remote Configuration][2] in the Agent.
+- (Recommended) Set up [Source Code Integration][7].
 
 ### Permissions
 
@@ -142,7 +139,7 @@ Follow these steps if your SDK is below the [in-app minimum](#requirements), or 
 <!-- Java -->
 {% if equals($prog_lang, "java") %}
 
-1. If you don't already have APM enabled, set `DD_APM_ENABLED=true` in your Agent configuration and listen on port `8126/TCP`.
+1. If you don't already have APM enabled, set `DD_APM_ENABLED=true` and configure the Agent to listen on port `8126/TCP`.
 2. Download `dd-java-agent.jar`:
 
     {% tabs %}
@@ -209,7 +206,7 @@ Follow these steps if your SDK is below the [in-app minimum](#requirements), or 
 
     **Note**: On JDK 18 and earlier, classes compiled with the `-parameters` flag (default in Spring 6+, Spring Boot 3+, and Scala) may fail to instrument with the error `Method Parameters detected`.
 
-4. After you start your service with Dynamic Instrumentation enabled, you can start using it on the [Dynamic Instrumentation page][12].
+4. After you start your service, open the [Dynamic Instrumentation page][12].
 
 {% /if %}
 <!-- end Java -->
@@ -217,7 +214,7 @@ Follow these steps if your SDK is below the [in-app minimum](#requirements), or 
 <!-- Python -->
 {% if equals($prog_lang, "python") %}
 
-1. If you don't already have APM enabled, set `DD_APM_ENABLED=true` in your Agent configuration and listen on port `8126/TCP`.
+1. If you don't already have APM enabled, set `DD_APM_ENABLED=true` and configure the Agent to listen on port `8126/TCP`.
 2. Install `ddtrace`:
 
     ```shell
@@ -254,7 +251,7 @@ Follow these steps if your SDK is below the [in-app minimum](#requirements), or 
 
     {% /tabs %}
 
-4. After you start your service with Dynamic Instrumentation enabled, you can start using it on the [Dynamic Instrumentation page][12].
+4. After you start your service, open the [Dynamic Instrumentation page][12].
 
 {% /if %}
 <!-- end Python -->
@@ -262,7 +259,7 @@ Follow these steps if your SDK is below the [in-app minimum](#requirements), or 
 <!-- .NET -->
 {% if equals($prog_lang, "dot_net") %}
 
-1. If you don't already have APM enabled, set `DD_APM_ENABLED=true` in your Agent configuration and listen on port `8126/TCP`.
+1. If you don't already have APM enabled, set `DD_APM_ENABLED=true` and configure the Agent to listen on port `8126/TCP`.
 2. Start your service with the following environment variables set:
 
     ```shell
@@ -272,7 +269,7 @@ Follow these steps if your SDK is below the [in-app minimum](#requirements), or 
     DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
     ```
 
-3. After you start your service with Dynamic Instrumentation enabled, you can start using it on the [Dynamic Instrumentation page][12].
+3. After you start your service, open the [Dynamic Instrumentation page][12].
 
 {% /if %}
 <!-- end .NET -->
@@ -280,7 +277,7 @@ Follow these steps if your SDK is below the [in-app minimum](#requirements), or 
 <!-- PHP -->
 {% if equals($prog_lang, "php") %}
 
-1. If you don't already have APM enabled, set `DD_APM_ENABLED=true` in your Agent configuration and listen on port `8126/TCP`.
+1. If you don't already have APM enabled, set `DD_APM_ENABLED=true` and configure the Agent to listen on port `8126/TCP`.
 2. Start your service with the following environment variables set:
 
     ```shell
@@ -290,7 +287,7 @@ Follow these steps if your SDK is below the [in-app minimum](#requirements), or 
     DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
     ```
 
-3. After you start your service with Dynamic Instrumentation enabled, you can start using it on the [Dynamic Instrumentation page][12].
+3. After you start your service, open the [Dynamic Instrumentation page][12].
 
 {% /if %}
 <!-- end PHP -->
@@ -325,13 +322,15 @@ Dynamic spans, span tags, and metrics are a UI-based alternative to adding custo
 
 Datadog captures and processes spans, tags, and metrics generated by Dynamic Instrumentation like other telemetry from the running application. Unlike manual custom instrumentation, Dynamic Instrumentation does not require code changes, deployments, or service restarts. To stop collecting data, disable the instrumentation in Datadog.
 
+To redact sensitive data from instrumentations, see [Sensitive data scrubbing](/dynamic_instrumentation/sensitive-data-scrubbing/).
+
 ### Creating an instrumentation
 
 All instrumentation types require the same initial setup:
 
 1. Go to the [Dynamic Instrumentation page][12].
 1. Click {% ui %}Create Instrumentation{% /ui %} in the top right, or click the three-dot menu on a service and select {% ui %}Add an instrumentation for this service{% /ui %}.
-1. If they are not prefilled, choose service, runtime, environment, and version (optional).
+1. If the fields are not prefilled, choose service, runtime, environment, and version (optional).
 1. {% if includes($prog_lang, ["java", "python", "dot_net"]) %}Specify where to set the instrumentation in the source code by selecting either a class and method, or a specific line of code in a file. When autocomplete and search are available, use them to find files, methods, or symbols.{% /if %}{% if equals($prog_lang, "php") %}Specify where to set the instrumentation in the source code by selecting a class and method. When autocomplete and search are available, use them to find methods or symbols.{% /if %} 
 
 For the best experience, set up [Source Code Integration][7] to view code directly in Datadog and select instrumentation locations as you would with breakpoints in an IDE.
@@ -350,7 +349,7 @@ A dynamic metric emits a metric when it executes. To create a dynamic metric:
 1. Complete the [generic instrumentation setup](#creating-an-instrumentation) (choose service, environment, and location).
 1. Specify a name for the metric, which is prefixed with `dynamic.instrumentation.metric.probe.`.
 1. Select a metric type (count, gauge, or histogram).
-1. Choose the value of the metric using the [Dynamic Instrumentation expression language][15]. You can use any numeric value from the execution context, such as a method parameter, local variable, a class field, or an expression that yields a numeric value. For count metrics this is optional, and if you omit it, every invocation increments the count by one.
+1. Choose the value of the metric using the [Dynamic Instrumentation expression language][15]. You can use any numeric value from the execution context, such as a method parameter, local variable, a class field, or an expression that yields a numeric value. For count metrics, this is optional, and if you omit it, every invocation increments the count by one.
 
 Metric instrumentations are automatically enabled on all service instances that match the configured environment and version. Metric instrumentations are not rate limited and execute every time the method{% if includes($prog_lang, ["java", "python", "dot_net"]) %} or line{% /if %} is invoked.
 
