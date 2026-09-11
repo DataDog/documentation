@@ -93,7 +93,7 @@ Run the workload, then query [APM Trace Explorer][2] with:
 pod_name:<NEW_GPU_POD> kube_namespace:<GPU_WORKLOAD_NAMESPACE>
 ```
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
