@@ -108,6 +108,10 @@ Datadog continuously maintains the state you define on the covered instances:
 
 Whenever Datadog re-resolves a rule, either because you edited it or as part of ongoing evaluation, it compares the result against the previous set. Instances no longer covered have the Agent uninstalled. Newly covered instances have the Agent installed. Deleting a rule uninstalls the Agent from everything the rule covered.
 
+<div class="alert alert-warning">
+Uninstalls are triggered by the rule no longer matching, not only by an edit in Datadog. Retagging or reconfiguring an instance in AWS so that it falls outside the query removes the Agent on the next evaluation. Take this into account when you write a rule against tags that other teams change.
+</div>
+
 ### Terminated or stopped instances
 
 Datadog detects terminated instances on the next hourly pass and cleans up the IAM resources it created for them. Datadog leaves stopped instances alone until they return.

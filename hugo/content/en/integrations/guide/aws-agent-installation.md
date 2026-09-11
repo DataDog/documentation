@@ -82,6 +82,10 @@ Because Datadog re-checks the rule over time, the query you write determines how
 
 **To cover a fixed set**, match a tag you control, such as `datadog:true`. Apply that tag only to the instances you want instrumented. Coverage then changes only when you change the tags, which keeps the decision in your own infrastructure-as-code.
 
+<div class="alert alert-warning">
+Coverage works in both directions. When an instance stops matching the rule, Datadog uninstalls the Agent from it. A tag change made in AWS can therefore remove monitoring from an instance without anyone editing the rule in Datadog.
+</div>
+
 ## Install the Agent
 
 You can start Agent installation from two entry points, depending on how much control you want over which instances are instrumented:
