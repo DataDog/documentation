@@ -129,6 +129,8 @@ Choose one of the following upload methods.
 
 Datadog Build Plugins can inject debug IDs and upload source maps directly during the build. You do not need to install or run `datadog-ci` separately.
 
+Debug ID support requires Datadog Build Plugins version `3.3.0` or later.
+
 Enable debug ID injection and source map uploads in your build plugin:
 
 ```javascript
