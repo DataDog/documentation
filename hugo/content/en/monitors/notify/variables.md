@@ -766,3 +766,4 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [18]: /monitors/types/ci/?tab=pipelines
 [19]: /monitors/types/database_monitoring/
 [20]: /synthetics/notifications/template_variables/
+[21]: /getting_started/tagging/
