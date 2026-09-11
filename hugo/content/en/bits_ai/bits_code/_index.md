@@ -90,7 +90,7 @@ You can manually prompt Bits Code to implement changes for a certain finding, or
 
 ### General coding tasks
 
-Use the freeform prompt field at [{{< ui >}}Sessions{{< /ui >}}][7] to work with Bits Code on general coding tasks. Bits Code can use [Docker and Docker Compose][40] to build and test your code within a session.
+Use the freeform prompt field at [{{< ui >}}Sessions{{< /ui >}}][7] to work with Bits Code on general coding tasks.
 
 ### Automations
 
@@ -159,4 +159,3 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 [37]: /source_code/source-code-management#source-code-management-providers
 [38]: https://docs.github.com/en/enterprise-server@3.17/admin/overview/about-github-enterprise-server
 [39]: https://learn.microsoft.com/en-us/azure/devops/?view=azure-devops
-[40]: /bits_ai/bits_code/setup/#use-docker-and-docker-compose
