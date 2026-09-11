@@ -1,6 +1,5 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { ASTRO_ROOT } from "./locations.ts";
 
 const execFileAsync = promisify(execFile);
 
@@ -14,9 +13,9 @@ export function runGit(
 /**
  * The documentation repo's own branch — not a branch of any SDK repo.
  */
-export async function readDocsBranch(): Promise<string> {
+export async function readDocsBranch(astroRoot: string): Promise<string> {
   const { stdout } = await runGit(["rev-parse", "--abbrev-ref", "HEAD"], {
-    cwd: ASTRO_ROOT,
+    cwd: astroRoot,
   });
   return stdout.trim();
 }

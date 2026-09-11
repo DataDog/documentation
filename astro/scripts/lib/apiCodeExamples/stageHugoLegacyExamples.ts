@@ -12,16 +12,18 @@
 
 import path from "node:path";
 import { runGit } from "./git.ts";
-import { HUGO_ROOT } from "./locations.ts";
 import {
   LEGACY_INDEX_PREFIX,
   stripHugoApiContentPrefix,
 } from "./pathResolution.ts";
-import { copyIntoStagedTree } from "./stagedTree.ts";
+import { copyWithoutOverwriting } from "./fileOperations.ts";
 
 /** Returns the number of legacy files staged. */
-export async function stageHugoLegacyExamples(): Promise<number> {
-  const indexPaths = await listCommittedLegacyExamples();
+export async function stageHugoLegacyExamples(
+  hugoRoot: string,
+  stagedDir: string,
+): Promise<number> {
+  const indexPaths = await listCommittedLegacyExamples(hugoRoot);
   let stagedCount = 0;
 
   for (const indexPath of indexPaths) {
@@ -29,13 +31,16 @@ export async function stageHugoLegacyExamples(): Promise<number> {
     if (stagedPath === null) {
       continue;
     }
-    await copyIntoStagedTree(path.join(HUGO_ROOT, indexPath), stagedPath);
+    await copyWithoutOverwriting(
+      path.join(hugoRoot, indexPath),
+      path.join(stagedDir, stagedPath),
+    );
     stagedCount += 1;
   }
 
   if (stagedCount === 0) {
     throw new Error(
-      `Found no committed legacy .py/.rb examples in ${HUGO_ROOT}. ` +
+      `Found no committed legacy .py/.rb examples in ${hugoRoot}. ` +
         `Expected ~148; hugo/.gitignore may have started ignoring them.`,
     );
   }
@@ -43,7 +48,9 @@ export async function stageHugoLegacyExamples(): Promise<number> {
   return stagedCount;
 }
 
-async function listCommittedLegacyExamples(): Promise<string[]> {
+async function listCommittedLegacyExamples(
+  hugoRoot: string,
+): Promise<string[]> {
   let stdout: string;
   try {
     ({ stdout } = await runGit(
@@ -53,11 +60,11 @@ async function listCommittedLegacyExamples(): Promise<string[]> {
         `${LEGACY_INDEX_PREFIX}v*/*/*.py`,
         `${LEGACY_INDEX_PREFIX}v*/*/*.rb`,
       ],
-      { cwd: HUGO_ROOT, maxBuffer: 8 * 1024 * 1024 },
+      { cwd: hugoRoot, maxBuffer: 8 * 1024 * 1024 },
     ));
   } catch (error) {
     throw new Error(
-      `Could not list Hugo's committed legacy examples in ${HUGO_ROOT}. ` +
+      `Could not list Hugo's committed legacy examples in ${hugoRoot}. ` +
         `Astro reads them out of Hugo's git index: ${(error as Error).message}`,
     );
   }

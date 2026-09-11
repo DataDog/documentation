@@ -5,7 +5,6 @@
 
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { STAGED_DIR } from "./locations.ts";
 
 /**
  * A dotfile inside the staged tree, so `rm -rf api-code-examples/` is a
@@ -20,18 +19,23 @@ export interface StageStamp {
   legacyFileCount: number;
 }
 
-export async function writeStamp(stamp: StageStamp): Promise<void> {
+export async function writeStamp(
+  stagedDir: string,
+  stamp: StageStamp,
+): Promise<void> {
   await writeFile(
-    path.join(STAGED_DIR, STAMP_FILENAME),
+    path.join(stagedDir, STAMP_FILENAME),
     JSON.stringify(stamp, null, 2) + "\n",
   );
 }
 
 /** The stamp of a tree that is whole, or null. Never throws. */
-export async function readStampIfAny(): Promise<StageStamp | null> {
+export async function readStampIfAny(
+  stagedDir: string,
+): Promise<StageStamp | null> {
   try {
     return JSON.parse(
-      await readFile(path.join(STAGED_DIR, STAMP_FILENAME), "utf8"),
+      await readFile(path.join(stagedDir, STAMP_FILENAME), "utf8"),
     ) as StageStamp;
   } catch {
     return null;
@@ -49,9 +53,10 @@ export async function readStampIfAny(): Promise<StageStamp | null> {
  * release is picked up.
  */
 export async function stagedTreeIsCurrent(
+  stagedDir: string,
   docsBranch: string,
 ): Promise<boolean> {
-  const stamp = await readStampIfAny();
+  const stamp = await readStampIfAny(stagedDir);
   return (
     stamp !== null &&
     stamp.docsBranch === docsBranch &&

@@ -1,28 +1,26 @@
 /**
- * Writes into `api-code-examples/`: the directory reset both stagers depend on,
- * and the copy they share.
+ * The filesystem operations the two stagers share.
  */
 
 import { constants as fsConstants } from "node:fs";
 import { copyFile, mkdir, readdir, rm } from "node:fs/promises";
 import path from "node:path";
-import { STAGED_DIR } from "./locations.ts";
 
 /**
- * Clearing before a real fetch is what keeps the staged tree holding exactly
- * what the current refs produce, rather than accumulating files from older tags.
+ * Clearing before a real fetch is what keeps `api-code-examples/` holding
+ * exactly what the current refs produce, rather than accumulating files from
+ * older tags.
  */
-export async function resetStagedTree(): Promise<void> {
-  await rm(STAGED_DIR, { recursive: true, force: true });
-  await mkdir(STAGED_DIR, { recursive: true });
+export async function resetOutputDirectory(outputDir: string): Promise<void> {
+  await rm(outputDir, { recursive: true, force: true });
+  await mkdir(outputDir, { recursive: true });
 }
 
 /** `cp -n`: the first writer wins, a second one is not an error. */
-export async function copyIntoStagedTree(
+export async function copyWithoutOverwriting(
   from: string,
-  stagedRelativePath: string,
+  to: string,
 ): Promise<void> {
-  const to = path.join(STAGED_DIR, stagedRelativePath);
   await mkdir(path.dirname(to), { recursive: true });
   try {
     await copyFile(from, to, fsConstants.COPYFILE_EXCL);

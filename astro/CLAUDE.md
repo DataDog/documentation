@@ -76,15 +76,10 @@ Nothing under `astro/` may contain:
 `dist/client` and knows nothing about where that output is uploaded. Build-output
 verification belongs here; anything that talks to a cloud provider does not.
 
-**One carve-out: `scripts/lib/websitesSourcesData.ts`.** It holds the public,
-unauthenticated URL of the `websites-sources` data tarball, streams it, and reads a
-single member (`./data/sdk_versions.json`) to get the pinned SDK versions that
-`yarn fetch:examples` clones at. This is a read of a public artifact — no credentials,
-no AWS SDK, no `aws` CLI, no write path, no deploy target — and the same bucket and
-path already sit in this public repo at
-`hugo/local/bin/py/build/get_websites_sources_data.py:16-17`. Keep it confined to that
-one file: nothing else under `astro/` imports `tar` or knows the URL. Everything above
-still applies unchanged.
+One exception: `scripts/lib/websitesSourcesData.ts` reads the `websites-sources`
+data tarball to get the SDK versions `yarn fetch:examples` clones at. Keep that
+read confined to this one file — nothing else under `astro/` should import `tar`
+or know the tarball's URL. Everything above still applies.
 
 ## Commands
 

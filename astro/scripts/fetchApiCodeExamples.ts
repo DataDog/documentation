@@ -24,7 +24,9 @@
  *                   `describeBestEffortFallback`.
  */
 
+import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { resetOutputDirectory } from "./lib/apiCodeExamples/fileOperations.ts";
 import { readDocsBranch } from "./lib/apiCodeExamples/git.ts";
 import {
   logError,
@@ -37,13 +39,21 @@ import {
 } from "./lib/apiCodeExamples/sdkRefs.ts";
 import { stageHugoLegacyExamples } from "./lib/apiCodeExamples/stageHugoLegacyExamples.ts";
 import { stageSdkExamples } from "./lib/apiCodeExamples/stageSdkExamples.ts";
-import { resetStagedTree } from "./lib/apiCodeExamples/stagedTree.ts";
 import {
   describeBestEffortFallback,
   readStampIfAny,
   stagedTreeIsCurrent,
   writeStamp,
 } from "./lib/apiCodeExamples/stamp.ts";
+
+const ASTRO_ROOT = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "..",
+);
+const HUGO_ROOT = path.resolve(ASTRO_ROOT, "..", "hugo");
+
+/** Where the fetch stages everything the code example loader reads. */
+const STAGED_DIR = path.join(ASTRO_ROOT, "api-code-examples");
 
 interface FetchOptions {
   pinsPath: string | null;
@@ -52,9 +62,9 @@ interface FetchOptions {
 }
 
 async function main(options: FetchOptions): Promise<void> {
-  const docsBranch = await readDocsBranch();
+  const docsBranch = await readDocsBranch(ASTRO_ROOT);
 
-  if (!options.force && (await stagedTreeIsCurrent(docsBranch))) {
+  if (!options.force && (await stagedTreeIsCurrent(STAGED_DIR, docsBranch))) {
     logProgress(
       `api-code-examples/ is already staged for ${docsBranch}. ` +
         `Run \`yarn fetch:examples --force\` to re-fetch.`,
@@ -65,14 +75,19 @@ async function main(options: FetchOptions): Promise<void> {
   const pins = await readSdkPins(options.pinsPath);
   const refs = await resolveAllSdkRefs(pins, docsBranch);
 
-  await resetStagedTree();
-  const exampleFileCount = await stageSdkExamples(refs);
-  const legacyFileCount = await stageHugoLegacyExamples();
+  await resetOutputDirectory(STAGED_DIR);
+  const exampleFileCount = await stageSdkExamples(refs, STAGED_DIR);
+  const legacyFileCount = await stageHugoLegacyExamples(HUGO_ROOT, STAGED_DIR);
   logProgress(
     `staged ${legacyFileCount} committed legacy .py/.rb files from hugo/`,
   );
 
-  await writeStamp({ docsBranch, refs, exampleFileCount, legacyFileCount });
+  await writeStamp(STAGED_DIR, {
+    docsBranch,
+    refs,
+    exampleFileCount,
+    legacyFileCount,
+  });
   logProgress(
     `${exampleFileCount + legacyFileCount} files in api-code-examples/.`,
   );
@@ -135,6 +150,6 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     if (!options.bestEffort) {
       process.exit(1);
     }
-    logWarning(describeBestEffortFallback(await readStampIfAny()));
+    logWarning(describeBestEffortFallback(await readStampIfAny(STAGED_DIR)));
   });
 }

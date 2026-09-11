@@ -13,7 +13,10 @@ import { SDK_REPOS, type SdkRepo } from "../websitesSourcesData.ts";
 import { runGit, sdkRepositoryUrl } from "./git.ts";
 import { logProgress } from "./logging.ts";
 import { stagedRelativePathFor } from "./pathResolution.ts";
-import { copyIntoStagedTree, listFilesRecursive } from "./stagedTree.ts";
+import {
+  copyWithoutOverwriting,
+  listFilesRecursive,
+} from "./fileOperations.ts";
 
 interface RepoResult {
   repo: SdkRepo;
@@ -24,11 +27,14 @@ interface RepoResult {
 /** Returns the number of files staged across all six repos. */
 export async function stageSdkExamples(
   refs: Record<SdkRepo, string>,
+  stagedDir: string,
 ): Promise<number> {
   const workDir = await mkdtemp(path.join(tmpdir(), "dd-api-examples-"));
   try {
     const results = await Promise.all(
-      SDK_REPOS.map((repo) => stageSdkRepo(repo, refs[repo], workDir)),
+      SDK_REPOS.map((repo) =>
+        stageSdkRepo({ repo, ref: refs[repo], workDir, stagedDir }),
+      ),
     );
     let stagedTotal = 0;
     for (const result of results) {
@@ -43,11 +49,17 @@ export async function stageSdkExamples(
   }
 }
 
-async function stageSdkRepo(
-  repo: SdkRepo,
-  ref: string,
-  workDir: string,
-): Promise<RepoResult> {
+async function stageSdkRepo({
+  repo,
+  ref,
+  workDir,
+  stagedDir,
+}: {
+  repo: SdkRepo;
+  ref: string;
+  workDir: string;
+  stagedDir: string;
+}): Promise<RepoResult> {
   const cloneDir = path.join(workDir, repo);
 
   await runGit([
@@ -73,7 +85,10 @@ async function stageSdkRepo(
       skippedCount += 1;
       continue;
     }
-    await copyIntoStagedTree(path.join(examplesDir, relativePath), stagedPath);
+    await copyWithoutOverwriting(
+      path.join(examplesDir, relativePath),
+      path.join(stagedDir, stagedPath),
+    );
     stagedCount += 1;
   }
 
