@@ -629,7 +629,7 @@ The following is a list of the most important configuration settings that can be
 `service`
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: (test framework name)<br/>
+**Default**: For `dd-trace` v6, the Nx project name when available. Otherwise, the nearest `package.json` package name, or `node` if unavailable.<br/>
 **Example**: `my-ui`
 
 `env`

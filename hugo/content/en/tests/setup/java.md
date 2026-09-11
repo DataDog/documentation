@@ -133,7 +133,8 @@ Set the following environment variables to configure the SDK and its reporting m
 **Default**: `http://localhost:8126`
 
 `DD_SERVICE`
-: Name of the service or library being tested.
+: Name of the service or library under test.<br/>
+**Default**: `unnamed-java-app`
 
 `DD_TEST_SESSION_NAME` (Optional)
 : Identifies a group of tests, such as `unit-tests` or `integration-tests`.<br/>

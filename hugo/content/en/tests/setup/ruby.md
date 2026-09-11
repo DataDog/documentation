@@ -127,7 +127,7 @@ The following environment variables configure the test optimization library and 
 
 `DD_SERVICE` (Optional)
 : Name of the service or library under test.
-**Default**: `$PROGRAM_NAME`<br/>
+**Default**: The repository name. If unavailable, the test framework name.<br/>
 **Example**: `my-ruby-app`
 
 `DD_TEST_SESSION_NAME` (Optional)

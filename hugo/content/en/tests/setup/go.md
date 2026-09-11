@@ -109,6 +109,10 @@ Set the following environment variables to configure the library:
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
 
+`DD_SERVICE` (Optional)
+: Name of the service or library under test.<br/>
+**Default**: The repository name. If unavailable, the executable name.
+
 `DD_ENV` (Required)
 : Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 

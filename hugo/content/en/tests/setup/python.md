@@ -385,7 +385,7 @@ The following list contains key configuration settings and environment variables
 `DD_SERVICE`
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: `pytest`<br/>
+**Default**: The repository name. If unavailable, `test` for the current pytest plugin, `pytest` for the legacy pytest plugin, or `unittest` for unittest.<br/>
 **Example**: `my-python-app`
 
 `DD_ENV`
