@@ -33,10 +33,9 @@ To set up your account in Snowflake:
 1. Define the following variables:
 
    ```sql
-   SET role_name = 'DATADOG_ROLE';
-   SET user_name = 'DATADOG_USER';
+   SET role_name      = 'DATADOG_ROLE';
+   SET user_name      = 'DATADOG_USER';
    SET warehouse_name = 'DATADOG_WH';
-   SET database_name  = '<YOUR_DATABASE>';
    ```
 
 2. Create a role, warehouse, and key-pair-authenticated user.
@@ -46,7 +45,6 @@ To set up your account in Snowflake:
 
    -- Create monitoring role
    CREATE ROLE IF NOT EXISTS IDENTIFIER($role_name);
-   GRANT ROLE IDENTIFIER($role_name) TO ROLE SYSADMIN;
 
    -- Create an X-SMALL warehouse (auto-suspend after 30s)
    CREATE WAREHOUSE IF NOT EXISTS IDENTIFIER($warehouse_name)
@@ -56,15 +54,27 @@ To set up your account in Snowflake:
    AUTO_RESUME          = TRUE
    INITIALLY_SUSPENDED  = TRUE;
 
+   -- Raise the statement timeout so large crawls and queries aren't cut off,
+   -- and cap concurrency so this warehouse can't be monopolized.
+   ALTER WAREHOUSE IDENTIFIER($warehouse_name) SET
+   MAX_CONCURRENCY_LEVEL               = 8
+   STATEMENT_TIMEOUT_IN_SECONDS        = 3600
+   STATEMENT_QUEUED_TIMEOUT_IN_SECONDS = 1200
+   AUTO_SUSPEND                        = 30
+   AUTO_RESUME                         = TRUE;
+
    -- Create Datadog user—key-pair only (no password)
    -- Replace <PUBLIC_KEY> with your RSA public key (PEM, no headers/newlines)
    CREATE USER IF NOT EXISTS IDENTIFIER($user_name)
-   LOGIN_NAME        = $user_name
-   DEFAULT_ROLE      = $role_name
-   DEFAULT_WAREHOUSE = $warehouse_name
-   RSA_PUBLIC_KEY    = '<PUBLIC_KEY>';
+   LOGIN_NAME     = $user_name
+   RSA_PUBLIC_KEY = '<PUBLIC_KEY>';
 
    GRANT ROLE IDENTIFIER($role_name) TO USER IDENTIFIER($user_name);
+
+   ALTER USER IDENTIFIER($user_name) SET
+   DEFAULT_ROLE            = $role_name
+   DEFAULT_WAREHOUSE       = $warehouse_name
+   DEFAULT_SECONDARY_ROLES = ();
    ```
 
 3. Grant monitoring privileges to the role.
@@ -76,66 +86,128 @@ To set up your account in Snowflake:
    -- Account‐level monitoring (tasks, pipes, query history)
    GRANT MONITOR EXECUTION ON ACCOUNT TO ROLE IDENTIFIER($role_name);
 
-   -- Imported privileges on Snowflake's ACCOUNT_USAGE
-   GRANT IMPORTED PRIVILEGES ON DATABASE SNOWFLAKE TO ROLE IDENTIFIER($role_name);
-
-   -- Imported privileges on any external data shares
-   -- GRANT IMPORTED PRIVILEGES ON DATABASE IDENTIFIER($database_name) TO ROLE IDENTIFIER($role_name);
-
-   -- Grant the following ACCOUNT_USAGE views to the new role. Do this if you wish to collect Snowflake account usage logs and metrics.
+   -- Snowflake account-usage views for metadata, usage, and governance
+   -- metrics. These do not grant access to the contents of your data.
    GRANT DATABASE ROLE SNOWFLAKE.OBJECT_VIEWER TO ROLE IDENTIFIER($role_name);
    GRANT DATABASE ROLE SNOWFLAKE.USAGE_VIEWER TO ROLE IDENTIFIER($role_name);
    GRANT DATABASE ROLE SNOWFLAKE.GOVERNANCE_VIEWER TO ROLE IDENTIFIER($role_name);
-   GRANT DATABASE ROLE SNOWFLAKE.SECURITY_VIEWER TO ROLE IDENTIFIER($role_name);
-
-   -- Grant ORGANIZATION_USAGE_VIEWER to the new role. Do this if you wish to collect Snowflake organization usage metrics.
-   GRANT DATABASE ROLE SNOWFLAKE.ORGANIZATION_USAGE_VIEWER TO ROLE IDENTIFIER($role_name);
-
-   -- Grant ORGANIZATION_BILLING_VIEWER to the new role. Do this if you wish to collect Snowflake cost data.
-   GRANT DATABASE ROLE SNOWFLAKE.ORGANIZATION_BILLING_VIEWER TO ROLE IDENTIFIER($role_name);
    ```
 
    <div class="alert alert-info">To avoid missing new tables, use schema-level future grants. Snowflake gives schema-level grants precedence over database-level ones. If Datadog only has database-level grants but other roles have schema-level grants on the same schemas, new tables may not appear in Datadog. See <a href="https://docs.snowflake.com/en/sql-reference/sql/grant-privilege#considerations">Snowflake's documentation</a> for details.</div>
 
-4. Grant read-only access to your data.
+4. Grant read-only access to your data. `grant_database_access` grants schema-level access rather than database-level access for the reason described above, and accepts a JSON array so you can grant access to more than one database in a single call.
 
    ```sql
-   USE DATABASE IDENTIFIER($database_name);
-
-   CREATE OR REPLACE PROCEDURE grant_database_access(databaseName string, roleName string)
-   returns string not null
-   language javascript
-   as
+   CREATE OR REPLACE PROCEDURE grant_database_access(
+       databaseNamesJson STRING,
+       roleName STRING
+   )
+   RETURNS STRING
+   LANGUAGE JAVASCRIPT
+   EXECUTE AS CALLER
+   AS
    $$
-   var schemaResultSet = snowflake.execute({ sqlText: 'SELECT SCHEMA_NAME FROM ' + '"' + DATABASENAME + '"' + ".INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME != 'INFORMATION_SCHEMA';"});
-
-   var numberOfSchemasGranted = 0;
-   while (schemaResultSet.next()) {
-       numberOfSchemasGranted += 1;
-       var schemaAndRoleSuffix = ' in schema "' + DATABASENAME + '"."' + 
-       schemaResultSet.getColumnValue('SCHEMA_NAME') + '" to role ' + ROLENAME + ';'
-
-       snowflake.execute({ sqlText: 'grant USAGE on schema "' + DATABASENAME + '"."' +  
-       schemaResultSet.getColumnValue('SCHEMA_NAME') + '" to role ' + ROLENAME + ';'});
-       snowflake.execute({ sqlText: 'grant SELECT on all tables' + schemaAndRoleSuffix});
-       snowflake.execute({ sqlText: 'grant SELECT on all views' + schemaAndRoleSuffix});
-       snowflake.execute({ sqlText: 'grant SELECT on all event tables' + schemaAndRoleSuffix});
-       snowflake.execute({ sqlText: 'grant SELECT on all external tables' + schemaAndRoleSuffix});
-       snowflake.execute({ sqlText: 'grant SELECT on all dynamic tables' + schemaAndRoleSuffix});
-       snowflake.execute({ sqlText: 'grant SELECT on future tables' + schemaAndRoleSuffix});
-       snowflake.execute({ sqlText: 'grant SELECT on future views' + schemaAndRoleSuffix});
-       snowflake.execute({ sqlText: 'grant SELECT on future event tables' + schemaAndRoleSuffix});
-       snowflake.execute({ sqlText: 'grant SELECT on future external tables' + schemaAndRoleSuffix});
-       snowflake.execute({ sqlText: 'grant SELECT on future dynamic tables' + schemaAndRoleSuffix});
+   function quoteIdentifier(name) {
+       return '"' + name.replace(/"/g, '""') + '"';
    }
 
-   return 'Granted access to ' + numberOfSchemasGranted + ' schemas';
+   var databaseNames;
+   try {
+       databaseNames = JSON.parse(DATABASENAMESJSON);
+   } catch (error) {
+       throw new Error("database_names_json must be a JSON array: " + error.message);
+   }
+
+   if (!Array.isArray(databaseNames) || databaseNames.length === 0) {
+       throw new Error("database_names_json must contain at least one database");
+   }
+
+   // the role is always uppercased, so its name here matches regardless of
+   // how it was typed when calling this procedure.
+   var role = quoteIdentifier(String(ROLENAME).toUpperCase());
+
+   // Grants on TABLE do not apply to dynamic tables, so they are listed
+   // separately and additionally receive MONITOR, which dynamic tables need
+   // to expose scheduling/lineage metadata.
+   var selectKinds = [
+       "TABLES",
+       "VIEWS",
+       "MATERIALIZED VIEWS",
+       "EXTERNAL TABLES",
+       "EVENT TABLES",
+       "ICEBERG TABLES"
+   ];
+
+   var databaseCount = 0;
+   var schemaCount = 0;
+
+   for (var databaseIndex = 0;
+        databaseIndex < databaseNames.length;
+        databaseIndex++) {
+       var database = quoteIdentifier(databaseNames[databaseIndex]);
+
+       snowflake.execute({sqlText: "GRANT USAGE ON DATABASE " + database + " TO ROLE " + role});
+
+       var schemaResultSet = snowflake.execute({
+           sqlText:
+               "SELECT SCHEMA_NAME " +
+               "FROM " + database + ".INFORMATION_SCHEMA.SCHEMATA " +
+               "WHERE SCHEMA_NAME <> 'INFORMATION_SCHEMA'"
+       });
+
+       while (schemaResultSet.next()) {
+           var schema = quoteIdentifier(schemaResultSet.getColumnValue(1));
+           var qualifiedSchema = database + "." + schema;
+
+           snowflake.execute({sqlText: "GRANT USAGE ON SCHEMA " + qualifiedSchema + " TO ROLE " + role});
+
+           for (var kindIndex = 0; kindIndex < selectKinds.length; kindIndex++) {
+               var kind = selectKinds[kindIndex];
+               snowflake.execute({sqlText: "GRANT SELECT ON ALL " + kind +
+                       " IN SCHEMA " + qualifiedSchema + " TO ROLE " + role});
+               snowflake.execute({sqlText: "GRANT SELECT ON FUTURE " + kind +
+                       " IN SCHEMA " + qualifiedSchema + " TO ROLE " + role});
+           }
+
+           snowflake.execute({sqlText: "GRANT SELECT, MONITOR ON ALL DYNAMIC TABLES" +
+                   " IN SCHEMA " + qualifiedSchema + " TO ROLE " + role});
+           snowflake.execute({sqlText: "GRANT SELECT, MONITOR ON FUTURE DYNAMIC TABLES" +
+                   " IN SCHEMA " + qualifiedSchema + " TO ROLE " + role});
+
+           schemaCount++;
+       }
+
+       // Covers schemas created after onboarding. The schema-level future
+       // grants above remain necessary because they take precedence
+       // wherever both exist.
+       snowflake.execute({sqlText: "GRANT USAGE ON FUTURE SCHEMAS IN DATABASE " + database +
+               " TO ROLE " + role});
+
+       for (var futureKindIndex = 0;
+            futureKindIndex < selectKinds.length;
+            futureKindIndex++) {
+           snowflake.execute({sqlText: "GRANT SELECT ON FUTURE " + selectKinds[futureKindIndex] +
+                   " IN DATABASE " + database + " TO ROLE " + role});
+       }
+
+       snowflake.execute({sqlText: "GRANT SELECT, MONITOR ON FUTURE DYNAMIC TABLES IN DATABASE " +
+               database + " TO ROLE " + role});
+
+       databaseCount++;
+   }
+
+   return (
+       "Granted Datadog access to " + databaseCount +
+       " database(s) and " + schemaCount +
+       " existing schema(s)"
+   );
    $$
    ;
 
-   GRANT USAGE ON DATABASE IDENTIFIER($database_name) TO ROLE IDENTIFIER($role_name);
-   CALL grant_database_access('<DATABASE_NAME>', '<ROLE_NAME>');
+   CALL grant_database_access('["<YOUR_DATABASE>"]', '<ROLE_NAME>');
    ```
+
+   Run the `CALL` statement again (with an updated database list) any time you want to grant access to a new database, or [as part of your CI setup](/data_observability/cicd/#drift-detection) so ephemeral databases stay readable.
 
 5. (Optional) If your organization uses [Snowflake event tables][2], you can grant the Datadog role access to them.
 
