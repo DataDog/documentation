@@ -85,7 +85,7 @@ Send only the findings that relate to your question. For example, if three of th
 
 Drag a finding to move or resize it. Datadog saves the layout you build, so the organization looks the same the next time you open the panel.
 
-Auto-organize groups the findings that share a query into labeled columns, one column per query. Use the auto-organize control in the panel, or press **Cmd**/**Ctrl** + **O**. Moving, resizing, or deleting a finding afterward clears the grouping.
+To reset your organization, you can use the auto-organize option. This will group findings by the query they came from. So if you made different visualizations from the same query or saved specific log lines from that query, those findings will be grouped together with auto-organize. Moving, resizing, or deleting a finding removes the visual grouping indication in the background.
 <!-- A screenshot of the panel controls would make the auto-organize option findable. Add one alongside the GA video. -->
 
 ## Delete findings
