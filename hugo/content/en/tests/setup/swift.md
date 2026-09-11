@@ -178,26 +178,25 @@ Set all these variables in your test target:
 **Default**: `false`<br/>
 **Recommended**: `$(DD_TEST_RUNNER)`
 
-`DD_API_KEY`
-: The [Datadog API key][2] used to upload the test results.<br/>
+`DD_API_KEY` (Required)
+: The Datadog API key used to authenticate test result uploads.<br/>
 **Default**: `(empty)`
 
-`DD_TEST_SESSION_NAME`
-: Identifies a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
-**Environment variable**: `DD_TEST_SESSION_NAME`<br/>
-**Default**: (CI job name + test command)<br/>
+`DD_TEST_SESSION_NAME` (Optional)
+: Identifies a group of tests, such as `unit-tests`, `integration-tests`, or `smoke-tests`.<br/>
+**Default**: The CI job name and test command, or the test command if the CI job name is unavailable.<br/>
 **Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
-`DD_SERVICE`
+`DD_SERVICE` (Optional)
 : Name of the service or library under test.<br/>
 **Default**: The repository name<br/>
 **Example**: `my-ios-app`
 
-`DD_ENV`
-: Name of the environment where tests are being run. Set this value to `$(DD_ENV)` so you can use an environment variable at runtime for setting it.<br/>
-**Default**: `none`<br/>
+`DD_ENV` (Optional)
+: Name of the environment where tests are being run.<br/>
+**Default**: `ci` when a CI provider is detected; otherwise, `none`.<br/>
 **Recommended**: `$(DD_ENV)`<br/>
-**Examples**: `ci`, `local`
+**Examples**: `local`, `ci`
 
 `SRCROOT`
 : The path to the project location. If using Xcode, use `$(SRCROOT)` for the value, because it is automatically set by it.<br/>
@@ -209,8 +208,8 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
 
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
-`DD_SITE` (Required)
-: The [Datadog site][3] to upload results to.<br/>
+`DD_SITE` (Optional)
+: The [Datadog site][3] to upload test results to. Set this configuration when using a site other than US1.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
@@ -667,10 +666,7 @@ Use `DD_TEST_SESSION_NAME` to define the name of the test session and the relate
 - `ui-tests`
 - `backend-tests`
 
-If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
-
-- CI job name
-- Command used to run the tests (such as `swift test`)
+If `DD_TEST_SESSION_NAME` is not specified, the default is the CI job name and test command. If the CI job name is unavailable, the test command is used.
 
 The test session name needs to be unique within a repository to help you distinguish different groups of tests.
 

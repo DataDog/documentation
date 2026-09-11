@@ -106,11 +106,43 @@ In addition to this, Orchestrion only supports projects using [Go modules][go-mo
 
 Set the following environment variables to configure the library:
 
-`DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the Test Optimization product.
+When using environment variables, set them before starting the test process. For parallel test runners, set them on the parent process so every worker inherits them.
 
-`DD_ENV` (Required)
-: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` selects Agentless transport. `DD_API_KEY` provides authentication but does not enable Agentless mode.
+
+`DD_CIVISIBILITY_ENABLED=true` (Required)
+: Enables Test Optimization.<br/>
+**Default**: `false`
+
+`DD_SERVICE` (Optional)
+: Name of the service or library under test.<br/>
+**Default**: The repository name
+
+`DD_ENV` (Optional)
+: Name of the environment where tests are being run.<br/>
+**Default**: `(empty)`<br/>
+**Examples**: `local`, `ci`
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
+: Enables Agentless mode to send test results directly to Datadog.<br/>
+**Default**: `false`
+
+`DD_API_KEY` (Required for Agentless mode)
+: The Datadog API key used to authenticate test result uploads.<br/>
+**Default**: `(empty)`
+
+`DD_SITE` (Optional for Agentless mode)
+: The [Datadog site][2] to upload test results to. Set this configuration when using a site other than US1.<br/>
+**Default**: `datadoghq.com`
+
+`DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
+: The Datadog Agent URL for trace collection, in the form `http://hostname:port`. This configuration is used only when test results are reported through the Datadog Agent.<br/>
+**Default**: `http://localhost:8126`
+
+`DD_TEST_SESSION_NAME` (Optional)
+: Identifies a group of tests, such as `unit-tests`, `integration-tests`, or `smoke-tests`.<br/>
+**Default**: The CI job name and test command, or the test command if the CI job name is unavailable.<br/>
+**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 Prefix your go test command with `orchestrion`:
 
@@ -148,6 +180,7 @@ $ go test -toolexec 'orchestrion toolexec' -race .
 ```
 
 [1]: https://github.com/datadog/orchestrion
+[2]: /getting_started/site/
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}

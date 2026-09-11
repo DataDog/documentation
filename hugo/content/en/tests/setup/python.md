@@ -380,33 +380,46 @@ For additional configurations, see [Configuration Settings][2].
 
 ## Configuration settings
 
-The following is a list of the most important configuration settings that can be used with the SDK, either in code or using environment variables:
+The following list contains key configuration settings and environment variables for the SDK and its reporting method:
 
-`DD_TEST_SESSION_NAME`
-: Identifies a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
-**Environment variable**: `DD_TEST_SESSION_NAME`<br/>
-**Default**: (CI job name + test command)<br/>
-**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
+When using environment variables, set them before starting the test process. For parallel test runners, set them on the parent process so every worker inherits them.
 
-`DD_SERVICE`
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` selects Agentless transport. `DD_API_KEY` provides authentication but does not enable Agentless mode.
+
+`DD_SERVICE` (Optional)
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: `pytest`<br/>
+**Default**: The repository name<br/>
 **Example**: `my-python-app`
 
-`DD_ENV`
+`DD_ENV` (Optional)
 : Name of the environment where tests are being run.<br/>
 **Environment variable**: `DD_ENV`<br/>
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
-For more information about `service` and `env` reserved tags, see [Unified Service Tagging][2].
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
+: Enables Agentless mode to send test results directly to Datadog.<br/>
+**Default**: `false`
 
-The following environment variable can be used to configure the location of the Datadog Agent:
+`DD_API_KEY` (Required for Agentless mode)
+: The Datadog API key used to authenticate test result uploads.<br/>
+**Default**: `(empty)`
 
-`DD_TRACE_AGENT_URL`
-: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
+`DD_SITE` (Optional for Agentless mode)
+: The [Datadog site][4] to upload test results to. Set this configuration when using a site other than US1.<br/>
+**Default**: `datadoghq.com`
+
+`DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
+: The Datadog Agent URL for trace collection, in the form `http://hostname:port`. This configuration is used only when test results are reported through the Datadog Agent.<br/>
 **Default**: `http://localhost:8126`
+
+`DD_TEST_SESSION_NAME` (Optional)
+: Identifies a group of tests, such as `unit-tests`, `integration-tests`, or `smoke-tests`.<br/>
+**Default**: The CI job name and test command, or the test command if the CI job name is unavailable.<br/>
+**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
+
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][2].
 
 All other [Datadog Tracer configuration][3] options can also be used.
 
@@ -427,10 +440,7 @@ Use `DD_TEST_SESSION_NAME` to define the name of the test session and the relate
 - `ui-tests`
 - `backend-tests`
 
-If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
-
-- CI job name
-- Command used to run the tests (such as `pytest --ddtrace`)
+If `DD_TEST_SESSION_NAME` is not specified, the default is the CI job name and test command. If the CI job name is unavailable, the test command is used.
 
 The test session name needs to be unique within a repository to help you distinguish different groups of tests.
 
@@ -491,3 +501,4 @@ Datadog recommends you use up to one process at a time to prevent affecting test
 [1]: /tracing/trace_collection/dd_libraries/python/
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /tracing/trace_collection/library_config/python/?tab=containers#configuration
+[4]: /getting_started/site/

@@ -108,19 +108,12 @@ You can run the `java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` command to check
 
 ### Running your tests
 
+When using environment variables, set them before starting the test process. For parallel test runners, set them on the parent process so every worker inherits them.
+
+First, set the following required environment variables for your build tool:
+
 {{< tabs >}}
 {{% tab "Maven" %}}
-
-Set the following environment variables to configure the SDK:
-
-`DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the Test Optimization product.
-
-`DD_ENV`
-: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
-
-`DD_SERVICE`
-: Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
 : Path to the folder where the downloaded Java Tracer is located.
@@ -128,24 +121,8 @@ Set the following environment variables to configure the SDK:
 `MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
 : Injects the SDK into the Maven build process.
 
-`DD_TEST_SESSION_NAME`
-: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
-
-Run your tests as you normally do (for example: `mvn test` or `mvn verify`).
-
 {{% /tab %}}
 {{% tab "Gradle" %}}
-
-Set the following environment variables to configure the SDK:
-
-`DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the Test Optimization product.
-
-`DD_ENV`
-: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
-
-`DD_SERVICE`
-: Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
 : Path to the folder where the downloaded Java Tracer is located.
@@ -153,24 +130,8 @@ Set the following environment variables to configure the SDK:
 `GRADLE_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
 : Injects the SDK into the Gradle launcher process.
 
-Run your tests as you normally do (for example: `./gradlew clean test`).
-
 {{% /tab %}}
 {{% tab "SBT" %}}
-
-Set the following environment variables to configure the SDK:
-
-`DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the Test Optimization product.
-
-`DD_TEST_SESSION_NAME`
-: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
-
-`DD_ENV`
-: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
-
-`DD_SERVICE`
-: Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
 : Path to the folder where the downloaded Java Tracer is located.
@@ -178,24 +139,8 @@ Set the following environment variables to configure the SDK:
 `SBT_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
 : Injects the SDK into the JVMs that execute your tests.
 
-Run your tests as you normally do (for example: `sbt test`).
-
 {{% /tab %}}
 {{% tab "Other" %}}
-
-Set the following environment variables to configure the SDK:
-
-`DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the Test Optimization product.
-
-`DD_TEST_SESSION_NAME`
-: Identifies a group of tests (for example: `unit-tests` or `integration-tests`).
-
-`DD_ENV`
-: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
-
-`DD_SERVICE`
-: Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
 : Path to the folder where the downloaded Java Tracer is located.
@@ -203,10 +148,48 @@ Set the following environment variables to configure the SDK:
 `JAVA_TOOL_OPTIONS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
 : Injects the SDK into the JVMs that execute your tests.
 
-Run your tests as you normally do.
-
 {{% /tab %}}
 {{< /tabs >}}
+
+Then, set the following common environment variables to configure the SDK and its reporting method:
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` selects Agentless transport. `DD_API_KEY` provides authentication but does not enable Agentless mode.
+
+`DD_CIVISIBILITY_ENABLED=true` (Required)
+: Enables Test Optimization.<br/>
+**Default**: `false`
+
+`DD_ENV` (Optional)
+: Name of the environment where tests are being run.<br/>
+**Default**: `(empty)`<br/>
+**Examples**: `local`, `ci`
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
+: Enables Agentless mode to send test results directly to Datadog.<br/>
+**Default**: `false`
+
+`DD_API_KEY` (Required for Agentless mode)
+: The Datadog API key used to authenticate test result uploads.<br/>
+**Default**: `(empty)`
+
+`DD_SITE` (Optional for Agentless mode)
+: The [Datadog site][4] to upload test results to. Set this configuration when using a site other than US1.<br/>
+**Default**: `datadoghq.com`
+
+`DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
+: The Datadog Agent URL for trace collection, in the form `http://hostname:port`. This configuration is used only when test results are reported through the Datadog Agent.<br/>
+**Default**: `http://localhost:8126`
+
+`DD_SERVICE` (Optional)
+: Name of the service or library under test.<br/>
+**Default**: `unnamed-java-app`
+
+`DD_TEST_SESSION_NAME` (Optional)
+: Identifies a group of tests, such as `unit-tests`, `integration-tests`, or `smoke-tests`.<br/>
+**Default**: The CI job name and test command, or the test command if the CI job name is unavailable.<br/>
+**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
+
+Run your tests as you normally do (for example: `mvn test`, `mvn verify`, `./gradlew clean test`, or `sbt test`).
 
 ## Configuration
 
@@ -501,10 +484,7 @@ Use `DD_TEST_SESSION_NAME` to define the name of the test session and the relate
 - `ui-tests`
 - `backend-tests`
 
-If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
-
-- CI job name
-- Command used to run the tests (such as `mvn test`)
+If `DD_TEST_SESSION_NAME` is not specified, the default is the CI job name and test command. If the CI job name is unavailable, the test command is used.
 
 The test session name needs to be unique within a repository to help you distinguish different groups of tests.
 
@@ -575,6 +555,7 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 [1]: #using-manual-testing-api
 [2]: https://app.datadoghq.com/ci/setup/test?language=java
 [3]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
+[4]: /getting_started/site/
 [6]: /tests/guides/add_custom_measures/?tab=java
 [7]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [8]: /tests/#parameterized-test-configurations

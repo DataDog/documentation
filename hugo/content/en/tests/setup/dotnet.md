@@ -74,7 +74,7 @@ Install or update the `dd-trace` command using one of the following ways:
 
 <div class="alert alert-warning">For BenchmarkDotNet follow <a href="#instrumenting-benchmarkdotnet-tests">these instructions</a>.</div>
 
-To instrument your test suite, prefix your test command with `dd-trace ci run`, providing the name of the service or library under test as the `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env` parameter. For example:
+To instrument your test suite, prefix your test command with `dd-trace ci run`. You can use `--dd-service` to set the service or library under test and `--dd-env` to set the environment where tests are run. For example:
 
 {{< tabs >}}
 
@@ -141,27 +141,27 @@ dd-trace ci run --help
 
 The following list shows the default values for key configuration settings:
 
-`--dd-service`
+`--dd-service` (Optional)
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
 **Default**: The repository name<br/>
 **Example**: `my-dotnet-app`
 
-`--dd-env`
+`--dd-env` (Optional)
 : Name of the environment where tests are being run.<br/>
 **Environment variable**: `DD_ENV`<br/>
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
-`--agent-url`
-: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
+`--agent-url` (Only when using the Datadog Agent)
+: The Datadog Agent URL for trace collection, in the form `http://hostname:port`. This configuration is used only when test results are reported through the Datadog Agent.<br/>
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
 `test_session.name` (only available as an environment variable)
-: Identifies a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
+: Identifies a group of tests, such as `unit-tests`, `integration-tests`, or `smoke-tests`.<br/>
 **Environment variable**: `DD_TEST_SESSION_NAME`<br/>
-**Default**: (CI job name + test command)<br/>
+**Default**: The CI job name and test command, or the test command if the CI job name is unavailable.<br/>
 **Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 For more information about `service` and `env` reserved tags, see [Unified Service Tagging][6]. All other [Datadog Tracer configuration][7] options can also be used.
@@ -377,10 +377,7 @@ Use `DD_TEST_SESSION_NAME` to define the name of the test session and the relate
 - `ui-tests`
 - `backend-tests`
 
-If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
-
-- CI job name
-- Command used to run the tests (such as `yarn test`)
+If `DD_TEST_SESSION_NAME` is not specified, the default is the CI job name and test command. If the CI job name is unavailable, the test command is used.
 
 The test session name needs to be unique within a repository to help you distinguish different groups of tests.
 
