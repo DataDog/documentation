@@ -148,6 +148,12 @@ The default allowlist includes the following domains. This list will evolve over
 | Rust | `index.crates.io`, `static.crates.io` |
 | Ubuntu | `archive.ubuntu.com`, `ports.ubuntu.com`, `security.ubuntu.com` |
 
+### Use Docker and Docker Compose
+
+Bits Code sessions support Docker and Docker Compose commands. You can build images and run containers as part of repository setup, testing, and validation.
+
+Access to container registries during a session is controlled by your organization's [internet access](#configure-internet-access) policy.
+
 ### Configure repository environment
 
 Configure a custom environment for Bits Code to install dependencies, formatters, linters, and build tools that are needed for your codebase. Each repository runs in its own isolated sandbox, and the environment defines the settings for that sandbox. 
