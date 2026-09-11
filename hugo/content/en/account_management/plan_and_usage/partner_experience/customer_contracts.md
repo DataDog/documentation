@@ -37,7 +37,7 @@ To use Customer Contracts, you need:
 
 ## Customer table
 
-The customer table lists every customer with an eligible contract. Select a customer to open their contract detail panel.
+The customer table lists every customer under your admin organization. Select a customer to open their contract detail panel.
 
 | Column | Description |
 |---|---|
