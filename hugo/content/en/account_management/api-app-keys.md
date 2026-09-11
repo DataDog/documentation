@@ -60,7 +60,7 @@ In order to use application keys with these APIs, you must enable Actions API ac
 
 {{< img src="account_management/click-enable-actions-api-access.png" alt="Click Enable for Actions API Access" style="width:80%;" >}}
 
-**Note**: The {{< ui >}}Last used{{< /ui >}} section only shows if [Audit Trail is enabled][22] in the account and you have [`Audit Trail Read`][23] permission.
+**Note**: The {{< ui >}}Last used{{< /ui >}} timestamp is visible to all customers. [Audit Trail][22] extends how far back this information is available.
 
 ## Client tokens
 
