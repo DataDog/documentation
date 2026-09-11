@@ -28,7 +28,7 @@ title: 호스트 목록
 
 왼쪽 필터 패널을 사용하여 호스트 목록을 좁힐 수 있습니다.
 
-- **내 팀**: 활성화하면 내가 속한 팀과 연결된 호스트만 표시합니다.
+- **Teams**: [team filter][19]를 사용하여 선택한 Teams 와 관련된 호스트만 표시하십시오.
 - **빠른 필터**: 패널 상단의 확인란을 사용하여 클라우드 공급자(AWS, Azure, Google Cloud, Oracle 또는 Alibaba Cloud), 텔레메트리 소스(Datadog Agent 또는 OpenTelemetry), 운영 체제(Windows, Linux 또는 Darwin) 또는 하드웨어(GPU)별로 필터링합니다.
 - **메트릭 필터**: 메트릭을 선택하고 값 범위를 지정하여 해당 메트릭 값으로 호스트를 필터링합니다.
 - **검색 패싯**: 클라우드 공급자, Env, 리전, 리소스 유형, 인스턴스 유형, OS, OS 버전, Agent 또는 Docker 버전과 같은 모든 호스트 속성이나 태그를 기준으로 필터링합니다.
@@ -149,3 +149,4 @@ for host in infra['rows']:
 [16]: /ko/getting_started/search/
 [17]: https://app.datadoghq.com/reports/v2/overview?metrics=avg%3Aaws.ec2.cpuutilization%2Cavg%3Aazure.vm.percentage_cpu%2Cavg%3Agcp.gce.instance.cpu.utilization%2Cavg%3Asystem.cpu.idle%2Cavg%3Asystem.cpu.iowait%2Cavg%3Asystem.load.norm.15%2Cavg%3Avsphere.cpu.usage%2Cavg%3Avsphere.cpu.usage.avg%2Cavg%3Aalibabacloud.ecs.cpu_utilization.average&with_apps=true&with_sources=true&with_aliases=true&with_meta=true&with_mute_status=true&with_tags=true
 [18]: /ko/ddsql_editor/#save-and-share-queries
+[19]: /ko/account_management/teams/#team-filter

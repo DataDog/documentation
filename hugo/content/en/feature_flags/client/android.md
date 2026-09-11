@@ -43,8 +43,12 @@ val configuration = Configuration.Builder(
     .build()
 Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 
-// 3. Enable Feature Flags
-Flags.enable()
+// 3. Enable Feature Flags with a bounded initialization timeout
+Flags.enable(
+    FlagsConfiguration.Builder()
+        .initializationTimeout(2_000L)
+        .build()
+)
 
 // 4. Create and set up the OpenFeature provider
 val provider = FlagsClient.Builder().build().asOpenFeatureProvider()
@@ -101,7 +105,6 @@ After initializing Datadog, enable `Flags` to attach it to the current Datadog A
 
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.Flags
-
 Flags.enable()
 {{< /code-block >}}
 
@@ -303,11 +306,19 @@ The `Flags.enable()` API accepts optional configuration with the options listed 
 
 {{< code-block lang="kotlin" >}}
 val config = FlagsConfiguration.Builder()
-    // configure options here
+    .initializationTimeout(2_000L)
+    // configure additional options here
     .build()
 
 Flags.enable(config)
 {{< /code-block >}}
+
+`initializationTimeout(timeoutMs)`
+: Maximum time, in milliseconds, to wait for the first evaluation context to become ready. The timeout covers loading cached data, fetching assignments, reading and decoding the response, storing assignments, and publishing the ready state. It does not change the HTTP client's timeout. The assignment operation continues after the timeout and can move the client to `Ready` when it completes.
+
+The timeout applies only to the first `setEvaluationContext` call. That call consumes the timeout even if the operation fails or never starts. Later calls have no initialization timer. The default is `5_000` milliseconds. Set it to zero or a negative value to disable the timeout. When the timeout expires, the client becomes `Stale` if matching cached assignments are available. Otherwise, it becomes `Error`.
+
+<div class="alert alert-info"><code>initializationTimeout</code> is available in <code>dd-sdk-android-flags</code> 3.14.0 and later.</div>
 
 `trackExposures()`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. If you only need local evaluation without telemetry, you can disable it with: `trackExposures(false)`.
