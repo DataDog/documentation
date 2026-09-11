@@ -95,9 +95,6 @@ Remote configuration does not override any SDK settings by default. To manage a 
 | Track resources | `rum.trackResources` |
 | Track long tasks | `rum.trackLongTasks` |
 | Track sessions across subdomains | `rum.trackSessionAcrossSubdomains` |
-| Forward errors to logs | `logs.forwardErrorsToLogs` |
-| Forward console logs | `logs.forwardConsoleLogs` |
-| Forward reports | `logs.forwardReports` |
 
 **App attributes**
 
