@@ -78,10 +78,10 @@ Impact lineage generates a graph of the downstream assets that may be affected b
 
 Drift detection compares the current state of your data on the branch to a baseline and flags any deviations. Datadog uses the dbt runs from your CI pipeline as the triggers for drift detection checks. For **dbt Core**, you must send OpenLineage events from your CI job so Datadog receives these runs. See the [OpenLineage setup documentation][6]. For **dbt Cloud**, configure the CI job that runs on pull requests in the `CI Job URL` setting in the [dbt Cloud](#dbt-cloud) section.
 
-Datadog must also be able to read the tables your CI job builds to compare them. The role you created during Snowflake setup (`DATADOG_ROLE` by default) needs `USAGE` and `SELECT` on the database your CI job materializes models to. Datadog's Snowflake integration setup includes a `grantFutureAccess` procedure that grants this on all current and future tables and views in every schema of a database. Run it for the database your CI job writes to:
+Datadog must also be able to read the tables your CI job builds to compare them. The role you created during Snowflake setup (`DATADOG_ROLE` by default) needs `USAGE` and `SELECT` on the database your CI job materializes models to. Datadog's Snowflake integration setup includes a `grant_database_access` procedure that grants this on all current and future tables and views in every schema of a database. Run it for the database your CI job writes to:
 
 ```sql
-CALL grantFutureAccess('<CI_DATABASE>', '<ROLE_NAME>');
+CALL grant_database_access('<CI_DATABASE>', '<ROLE_NAME>');
 ```
 
 If your CI creates an ephemeral, per-pull-request database, call the procedure as part of that provisioning step so each new database is readable. See [Snowflake setup][8] for the procedure definition. Without this access, Datadog receives the CI run but cannot query the CI tables, and drift detection fails.

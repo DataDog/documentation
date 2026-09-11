@@ -102,7 +102,7 @@ To set up your account in Snowflake:
    ```sql
    USE DATABASE IDENTIFIER($database_name);
 
-   CREATE OR REPLACE PROCEDURE grantFutureAccess(databaseName string, roleName string)
+   CREATE OR REPLACE PROCEDURE grant_database_access(databaseName string, roleName string)
    returns string not null
    language javascript
    as
@@ -134,7 +134,7 @@ To set up your account in Snowflake:
    ;
 
    GRANT USAGE ON DATABASE IDENTIFIER($database_name) TO ROLE IDENTIFIER($role_name);
-   CALL grantFutureAccess('<DATABASE_NAME>', '<ROLE_NAME>');
+   CALL grant_database_access('<DATABASE_NAME>', '<ROLE_NAME>');
    ```
 
 5. (Optional) If your organization uses [Snowflake event tables][2], you can grant the Datadog role access to them.
