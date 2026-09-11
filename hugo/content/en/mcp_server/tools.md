@@ -1591,7 +1591,7 @@ Returns aggregated insights for RUM Views: waterfall, long tasks, vital distribu
 ### `get_rum_view_waterfall`
 *Toolset: **rum***\
 *Permissions Required: `RUM Apps Read`*\
-Reconstructs the chronological load timeline for a single RUM view occurrence on web or mobile. Returns every resource, long task, error, and user interaction during that view, ordered by start time. Use this to investigate one concrete page load or screen; for the aggregated, cross-session view, use `get_rum_insight`.
+Reconstructs the chronological load timeline for a single RUM view occurrence on web or mobile. Returns every resource, long task, error, and user interaction during that view, ordered by start time. Use this to investigate one concrete page load or screen. For the aggregated, cross-session view, use `get_rum_insight`.
 
 - Show the full waterfall for the RUM view with ID `AwAAc3dhcmV`.
 - Why did the checkout page load with view UUID `d64b1e7c-8f2a-4c3b-9e1d-5a6b7c8d9e0f` take 12 seconds?
