@@ -508,8 +508,6 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 
 Tools for looking up a cloud resource in the [Resource Catalog][74] by its cloud resource ID, across AWS, Azure, Google Cloud, and OCI.
 
-<div class="alert alert-info">The <code>cloud-resources</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
-
 ### `get_cloud_resource_details`
 *Toolset: **cloud-resources***\
 *Permissions Required: `Hosts Read` or `DDSQL Editor Read`*\
