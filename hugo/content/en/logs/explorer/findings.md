@@ -70,7 +70,7 @@ In both cases, the finding stores the text you selected. You can use the finding
 
 **Double-click** a finding to return to it in Log Explorer, or hover over the finding and click {{< ui >}}Open in Explorer{{< /ui >}}. Log Explorer reloads the query, time range, and visualization that the finding was captured with.
 
-Each finding keeps the query and absolute time range. In the log explorer, you can change your search as often as you need, then return to any earlier finding without needing to rebuild the query.
+Each finding keeps the query and absolute time range. In Log Explorer, you can change your search as often as you need. Return to any earlier finding without rebuilding the query.
 
 ## Send findings to Bits AI and Notebooks
 
@@ -86,14 +86,12 @@ Send only the findings that relate to your question. For example, if three of th
 Drag a finding to move or resize it. Datadog saves the layout you build, so the organization looks the same the next time you open the panel.
 
 To reset your organization, use the auto-organize option, which groups findings by the query they came from. If you made different visualizations from the same query or saved specific log lines from that query, those findings are grouped together. Moving, resizing, or deleting a finding removes the visual grouping indication in the background.
-<!-- A screenshot of the panel controls would make the auto-organize option findable. Add one alongside the GA video. -->
 
 ## Delete findings
 
-To delete one finding, hover over it and use the delete button on the top right of the card, or select the finding and press the **Delete** key. To delete several at once, select them and press **Delete**. To select every finding, press **Cmd**/**Ctrl** + **A**.
+To delete one finding, hover over it and click the delete button in the upper right corner of the card. You can also select the finding and press the **Delete** key. To delete several at once, select them and press **Delete**. To select every finding, press **Cmd**/**Ctrl** + **A**.
 
 The clear all button in the Findings panel deletes all findings.
-<!-- Does the clear all button warn before emptying a full panel? -->
 
 To restore a finding after deleting it, click {{< ui >}}Undo{{< /ui >}} in the message that appears, or press **Cmd**/**Ctrl** + **Z**.
 
@@ -108,8 +106,6 @@ To restore a finding after deleting it, click {{< ui >}}Undo{{< /ui >}} in the m
 | Redo | **Cmd**/**Ctrl** + **Shift** + **Z** |
 | Pan | **Space** + **drag** |
 | Auto-organize (by query) | **Cmd**/**Ctrl** + **O** |
-
-<!-- Confirm the Undo and Redo bindings, which have not been verified against the build. -->
 
 ## Further reading
 
