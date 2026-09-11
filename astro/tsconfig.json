@@ -1,17 +1,11 @@
 {
   "extends": "astro/tsconfigs/strict",
-  // `astro/tsconfigs/base.json` includes `${configDir}/**/*` and excludes only
-  // `dist`, so this list has to repeat `dist` — an `exclude` here replaces the
-  // inherited one rather than adding to it.
+  // The staged TypeScript SDK examples are standalone programs, not part of
+  // this project — they import packages that aren't dependencies here, and are
+  // only ever read as raw text. Typechecking them fails.
   //
-  // `api-code-examples/` is the reason this key exists. It holds 2,232 staged
-  // TypeScript SDK examples which are standalone programs, not part of this
-  // project: they import `@datadog/datadog-api-client`, which is not a
-  // dependency here. They are read as raw text by `codeExampleLoader.ts`'s
-  // glob and never compiled. Without this, `yarn typecheck` reports 2,232
-  // errors after the first `yarn fetch:examples`.
-  // `tests/fixtures/api/examples` is the frozen 48-file subset of the above and
-  // is excluded for the same reason.
+  // `dist` is repeated because an `exclude` here replaces the inherited one
+  // rather than adding to it.
   "exclude": [
     "${configDir}/dist",
     "${configDir}/api-code-examples",
