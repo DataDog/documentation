@@ -44,7 +44,7 @@ Datadog does not create S3 buckets, event buses, log groups, or SSM parameters, 
 
 ## How Agent installation works
 
-After you save an installation rule, Datadog finds the instances that match it, and keeps checking for new matches over time. Datadog runs the following sequence against each covered instance. For prerequisites, including supported platforms, see [Prerequisites][2] in the setup guide.
+After you save an installation rule, Datadog finds the instances that match it and keeps checking for new matches over time. Datadog runs the following sequence against each covered instance. For prerequisites, including supported platforms, see [Prerequisites][2] in the setup guide.
 
 1. Datadog checks that each covered instance is running, on a supported platform, and reachable by AWS Systems Manager.
 2. When an instance has no IAM instance profile, Datadog creates one so Systems Manager can reach it. When an instance already has one, Datadog adds the SSM policy and the scoped secret-read policy to the existing role.
@@ -92,27 +92,27 @@ The API key is stored in your own Secrets Manager, encrypted at rest. Only the s
 
 ### Rule coverage is evaluated over time
 
-A rule covers whichever instances match it, and Datadog keeps checking the rule against your instances over time. An instance that starts matching later, because it was launched after you saved the rule or because its tags changed, is instrumented automatically. Datadog does not instrument anything the rule does not match.
+A rule covers instances that match it, and Datadog checks for new matches over time. If an instance starts matching later because it was launched after you saved the rule or because its tags changed, Datadog instruments it automatically. Datadog does not instrument instances that the rule does not match.
 
-To pin coverage to a fixed set of instances, select those instances individually. The rule then matches the instances you picked and nothing else, so later checks never add to it.
+To pin coverage to a fixed set of instances, select those instances individually. The rule then matches only the instances you selected, so later checks do not add new instances.
 
-When a fixed set is too large to pick by hand, match a tag you control, such as `datadog:true`. Apply that tag only to the instances you want instrumented. Coverage then changes only when you change the tags.
+When a fixed set is too large to select individually, match on a tag you control, such as `datadog:true`. Apply that tag only to the instances you want instrumented. Coverage then changes only when you change the tags.
 
 ### How Datadog keeps covered instances in sync
 
 Datadog continuously maintains the state you define on the covered instances:
 
-- Datadog checks your rules regularly, and instruments instances that have started matching.
+- Datadog checks your rules regularly and instruments instances that match.
 - Datadog reinstalls the Agent if it goes missing, retries failed installs, and cleans up instances that no longer exist.
 - New matches are usually instrumented within an hour, and often within minutes.
 - Instances that already have the Agent are checked less often.
 
 ### What happens when coverage changes
 
-When coverage changes, Datadog compares the current matches against the previous ones. Coverage changes when you edit the rule, and when your instances change. Instances no longer covered have the Agent uninstalled. Newly covered instances have the Agent installed. Deleting a rule uninstalls the Agent from everything the rule covered.
+When coverage changes, Datadog determines which instances were added to or removed from the rule's coverage. Coverage changes when you edit the rule or when your instances change. Datadog installs the Agent on newly covered instances and uninstalls it from instances that are no longer covered. Deleting a rule uninstalls the Agent from all instances the rule covered.
 
 <div class="alert alert-warning">
-Uninstalls are triggered by the rule no longer matching, not only by an edit in Datadog. Retagging or reconfiguring an instance in AWS so that it no longer matches removes the Agent from it. Take this into account when you write a rule against tags that other teams change.
+Datadog uninstalls the Agent when an instance no longer matches the rule, whether the change comes from an edit in Datadog or from retagging or reconfiguring the instance in AWS. Keep this behavior in mind when you write a rule based on tags that other teams can change.
 </div>
 
 ### Terminated or stopped instances

@@ -61,7 +61,7 @@ Datadog uses each of these permissions for a specific task:
 
 ## How it works
 
-Agent installation is based on an **installation rule**: an AWS account paired with a query that describes which EC2 instances to cover. Datadog re-checks the rule over time and installs the Agent on each matching instance, inside your own account:
+Agent installation is based on an **installation rule**: an AWS account paired with a query that describes which EC2 instances to cover. Datadog re-checks the rule over time and installs the Agent on each matching instance in your AWS account:
 
 1. You select the EC2 instances to cover, or opt in to all eligible instances.
 1. Datadog identifies the instances your selection covers.
@@ -78,11 +78,11 @@ For the full technical and security details, including the AWS resources Datadog
 
 Because Datadog re-checks the rule over time, the query you write determines how coverage behaves as your infrastructure changes.
 
-**To cover instances as they appear**, match tags and attributes already present in your infrastructure, such as `env:prod`. Any instance that matches is instrumented, including instances launched or retagged after you save the rule. Use this when you want new capacity monitored without revisiting Datadog.
+**To cover instances as they appear**, match tags and attributes already present in your infrastructure, such as `env:prod`. Any instance that matches is instrumented, including instances launched or retagged after you save the rule. Use this when you want new matching instances monitored automatically without updating the rule.
 
-**To cover a fixed set**, select the instances individually from the resource list. The rule matches only the instances you picked, so instances that appear later are not added.
+**To cover a fixed set**, select the instances individually from the resource list. The rule matches only the instances you selected, so instances that appear later are not added.
 
-**When a fixed set is too large to pick by hand**, match a tag you control, such as `datadog:true`. Apply that tag only to the instances you want instrumented. Coverage then changes only when you change the tags, which keeps the decision in your own infrastructure-as-code.
+**When a fixed set is too large to select individually**, match a tag you control, such as `datadog:true`. Apply that tag only to the instances you want instrumented. Coverage then changes only when you change the tags, so your infrastructure-as-code determines which instances are covered.
 
 <div class="alert alert-warning">
 Coverage works in both directions. When an instance stops matching the rule, Datadog uninstalls the Agent from it. A tag change made in AWS can therefore remove monitoring from an instance without anyone editing the rule in Datadog.
@@ -92,11 +92,11 @@ Coverage works in both directions. When an instance stops matching the rule, Dat
 
 **Match tags your team owns.** When a rule matches a tag that another team controls, that team can add or remove monitoring by retagging, without opening Datadog. Keeping the tag and the rule under the same ownership keeps that decision with the people who made it.
 
-**Avoid tags that change during normal operations.** Tags that move with an environment promotion, a deployment, or an autoscaling template rewrite instances in and out of coverage each time they change. Match on attributes that stay stable for the life of the instance.
+**Avoid tags that change during normal operations.** Tags that change with an environment promotion, a deployment, or an autoscaling template can move instances in and out of coverage. Match on attributes that stay stable for the life of the instance.
 
-**Treat the rule as the full picture for the account.** Each AWS account has one rule per resource type. Every edit re-scopes all coverage for that resource type at once, rather than adding to what you had. Review the matching instances before you save.
+**Treat the rule as the complete configuration for the account.** Each AWS account has one rule per resource type. Every edit re-scopes all coverage for that resource type rather than adding to the existing coverage. Review the matching instances before you save.
 
-**Carve out exceptions with exclusions.** When a broad rule covers instances you want to skip, exclude them from the same rule instead of switching to a hand-picked list. Exclusions keep the rule readable and preserve automatic coverage for everything else.
+**Carve out exceptions with exclusions.** When a broad rule covers instances you want to skip, exclude them from the same rule instead of switching to an individually selected list. Exclusions keep the rule readable and preserve automatic coverage for everything else.
 
 ## Install the Agent
 
