@@ -10,11 +10,14 @@ disable_toc: false
 further_reading:
 - link: /product_analytics/analytics_explorer/
   tag: Documentación
-  text: Explorador de Product Analytics
+  text: Explorador de Analytics
+- link: /product_analytics/charts/journey_paths/
+  tag: Documentación
+  text: Análisis de trayectorias
 - link: https://learn.datadoghq.com/courses/getting-started-product-analytics
   tag: Centro de aprendizaje
   text: Introducción a Product Analytics
-title: Análisis de embudo
+title: Embudo
 ---
 ## Descripción general {#overview}
 
@@ -122,10 +125,10 @@ Después de definir los eventos de paso y la medición de conversión, puede cam
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_visualization_video.mp4" alt="Cambiar la visualización de Steps a Timeseries usando un menú desplegable." video=true >}}
 
 
-### Timeseries{#timeseries}
-Ver el embudo como Timeseries puede ser útil para comprender las tendencias de conversión. Puede seleccionar el período de tiempo para graficar la conversión y puede visualizar las conversiones como un recuento absoluto o una tasa.
+### Timeseries {#timeseries}
+Ver el embudo como timeseries puede ser útil para comprender las tendencias de conversión. Puede seleccionar el período de tiempo para graficar la conversión y puede visualizar las conversiones como un recuento absoluto o una tasa.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_timeseries_view.png" alt="La visualización Timeseries, configurada para mostrar usuarios únicos convertidos diariamente durante la última semana." style="width:80%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/funnel_timeseries_view.png" alt="La visualización series temporales, configurada para mostrar usuarios únicos convertidos diariamente durante la última semana." style="width:80%;" >}}
 
 ### Query value{#query-value}
 
@@ -139,19 +142,15 @@ La visualización de lista principal identifica los valores principales de una f
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_top_list.png" alt="La visualización de lista principal, configurada para mostrar las cuatro fuentes de conversión principales por continente." style="width:80%;" >}}
 
-## Visualice impulsores de conversión y rutas de recorrido {#view-conversion-drivers-and-journey-paths}
+## Visualizar los impulsores de conversión {#view-conversion-drivers}
 
-Para obtener más contexto sobre las conversiones y los abandonos de los usuarios, haga clic en un paso del embudo para acceder al análisis de conversión y a las rutas de recorrido.
+Para obtener más contexto sobre las conversiones y los abandonos de los usuarios, haga clic en un paso del embudo para acceder al análisis de conversión.
 
 <div class="alert alert-info">El análisis de conversión está en Preview.</div>
 
-- **Análisis de conversión**: Visualice los impulsores de conversión, los recorridos de los usuarios, las reproducciones de usuario disponibles para conversiones y abandonos, y los detalles del usuario.
+Visualizar los impulsores de conversión, los recorridos de usuario, las reproducciones de usuario disponibles para conversiones y abandonos, y los detalles del usuario.
 
-  {{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_side_panel.png" alt="La vista del panel lateral después de hacer clic en un paso del embudo, que muestra los impulsores de conversión, las reproducciones disponibles y los usuarios convertidos." style="width:100%;" >}}
-
-- **Rutas de recorrido**: Visualice las rutas de usuario de conversión y abandono para la secuencia de pasos seleccionada, incluidas las rutas de ramificación a otros pasos fuera del embudo.
-
-  {{< img src="product_analytics/journeys/funnel_analysis/funnel_journey_paths.png" alt="Una ruta de recorrido que muestra las cinco rutas de abandono principales después del paso 1 en el embudo." style="width:100%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_side_panel.png" alt="La vista del panel lateral después de hacer clic en un paso del embudo, que muestra los impulsores de conversión, las reproducciones disponibles y los usuarios convertidos." style="width:100%;" >}}
 
 ## Compartir un embudo {#share-a-funnel}
 

@@ -1121,6 +1121,18 @@
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a commit."
   },
+  "GetCodeCoverageFiles": {
+    "description": "Retrieve per-file code coverage data for a specific commit, branch, or pull request.\nExactly one of `commit_sha`, `branch`, or `pr_number` must be provided.\nOptionally filter by `service`, `codeowner`, or `flag` (at most one).",
+    "summary": "Get per-file code coverage data",
+    "request_description": "",
+    "request_schema_description": "Request object for getting per-file code coverage data."
+  },
+  "GetCodeCoveragePRSummary": {
+    "description": "Retrieve aggregated code coverage statistics for a specific pull request in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
+    "summary": "Get code coverage summary for a pull request",
+    "request_description": "",
+    "request_schema_description": "Request object for getting code coverage summary for a pull request."
+  },
   "GetRuleBasedView": {
     "description": "**This endpoint is deprecated.** Use the [Security Monitoring - Search Security Findings](https://docs.datadoghq.com/api/latest/security-monitoring/search-security-findings/) endpoint instead.\n\nGet an aggregated view of compliance rules with their pass, fail, and muted finding counts.\nSupports filtering by compliance framework, framework version, and additional query filters.",
     "summary": "Get the rule-based view of compliance findings"
@@ -1349,7 +1361,7 @@
     "request_schema_description": "Google Cloud Usage Cost config patch request."
   },
   "ListCostOCIConfigs": {
-    "description": "List the OCI configs.",
+    "description": "**Note**: This endpoint is deprecated. View OCI accounts in Cloud Cost Settings in the Datadog web application instead.\n\nList the OCI configs.",
     "summary": "List Cloud Cost Management OCI configs"
   },
   "SearchCostRecommendations": {
@@ -1415,6 +1427,30 @@
   "ListCostTags": {
     "description": "List Cloud Cost Management tags for a given metric.",
     "summary": "List Cloud Cost Management tags"
+  },
+  "ListUnitCosts": {
+    "description": "List the ROI metrics (unit costs) for the authenticated organization.",
+    "summary": "List unit costs"
+  },
+  "CreateUnitCost": {
+    "description": "Create an ROI metric (unit cost) using the given numerator and denominator queries.",
+    "summary": "Create a unit cost",
+    "request_description": "",
+    "request_schema_description": "A request to create a unit cost."
+  },
+  "DeleteUnitCost": {
+    "description": "Delete an ROI metric (unit cost).",
+    "summary": "Delete a unit cost"
+  },
+  "GetUnitCost": {
+    "description": "Retrieve an ROI metric (unit cost) by UUID.",
+    "summary": "Get a unit cost"
+  },
+  "UpdateUnitCost": {
+    "description": "Replace an ROI metric (unit cost) with a new set of attributes.",
+    "summary": "Update a unit cost",
+    "request_description": "",
+    "request_schema_description": "A request to replace a unit cost."
   },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
@@ -1653,6 +1689,74 @@
   "CancelDataDeletionRequest": {
     "description": "Cancels a data deletion request by providing its ID.",
     "summary": "Cancels a data deletion request"
+  },
+  "CreateJourney": {
+    "description": "Create a DEM journey.",
+    "summary": "Create a DEM journey",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a DEM journey."
+  },
+  "DeleteIgnoredInferredJourney": {
+    "description": "Remove an ignored inferred DEM journey, making it eligible to appear as a candidate again.",
+    "summary": "Delete an ignored inferred DEM journey"
+  },
+  "SearchInferredJourneys": {
+    "description": "Search for inferred DEM journeys by status. Returns candidates (status=candidate, the default) or ignored journeys (status=ignored). Supports optional fuzzy name filtering and app ID filtering.",
+    "summary": "Search inferred DEM journeys"
+  },
+  "IgnoreInferredJourney": {
+    "description": "Mark an inferred DEM journey as ignored so it no longer appears in the candidate list.",
+    "summary": "Ignore an inferred DEM journey"
+  },
+  "SearchJourneys": {
+    "description": "Search for DEM journeys with optional filtering by query, creator, team, and app.",
+    "summary": "Search DEM journeys"
+  },
+  "BatchGetJourneysByTestSuiteIDs": {
+    "description": "Return DEM journeys associated with multiple given test suite IDs.",
+    "summary": "Batch get DEM journeys by test suite IDs",
+    "request_description": "",
+    "request_schema_description": "Request body for retrieving DEM journeys by test suite IDs."
+  },
+  "DeleteJourneyVariant": {
+    "description": "Delete a variant from a DEM journey.",
+    "summary": "Delete a DEM journey variant"
+  },
+  "UpdateJourneyVariant": {
+    "description": "Update an existing variant of a DEM journey.",
+    "summary": "Update a DEM journey variant",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a DEM journey variant."
+  },
+  "DeleteJourney": {
+    "description": "Delete a DEM journey by its ID.",
+    "summary": "Delete a DEM journey"
+  },
+  "GetJourney": {
+    "description": "Retrieve a single DEM journey by its ID.",
+    "summary": "Get a DEM journey"
+  },
+  "UpdateJourney": {
+    "description": "Update an existing DEM journey by its ID.",
+    "summary": "Update a DEM journey",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a DEM journey."
+  },
+  "GetJourneyRecommendedTests": {
+    "description": "Retrieve AI-recommended synthetic tests for a DEM journey. Returns an empty list when no recommendation is available.",
+    "summary": "Get recommended tests for a DEM journey"
+  },
+  "CreateJourneyVariant": {
+    "description": "Create a variant for a DEM journey.",
+    "summary": "Create a DEM journey variant",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a DEM journey variant."
+  },
+  "CreateTestSuiteForJourney": {
+    "description": "Trigger test suite creation for a given DEM journey.",
+    "summary": "Create a test suite for a DEM journey",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a test suite for a DEM journey."
   },
   "ListDeploymentGates": {
     "description": "Returns a paginated list of all deployment gates for the organization.\nUse `page[cursor]` and `page[size]` query parameters to paginate through results.",
@@ -3369,6 +3473,10 @@
     "description": "Retrieve all interactions (traces and sessions) and their annotations for a given annotation queue.",
     "summary": "Get annotated queue interactions"
   },
+  "GetLLMObsAnnotatedInteraction": {
+    "description": "Retrieve an interaction, its annotations, and a page of related events from an annotation queue.",
+    "summary": "Get an annotated queue interaction"
+  },
   "UpsertLLMObsAnnotations": {
     "description": "Create or update annotations on interactions in a queue. Each annotation is matched\nby `interaction_id` and the requesting user's identity.\nResults and errors in the response are linked to request items by `interaction_id`.\nErrors for individual items are returned in the `errors` field without blocking the rest of the batch.\nRequests where every item is denied by queue access rules return `403`.",
     "summary": "Create or update annotations",
@@ -4293,6 +4401,10 @@
     "description": "Resolves an On-Call Page.",
     "summary": "Resolve On-Call Page"
   },
+  "ListOnCallSchedules": {
+    "description": "Retrieve a list of On-Call schedules.",
+    "summary": "List On-Call schedules"
+  },
   "CreateOnCallSchedule": {
     "description": "Create a new On-Call schedule",
     "summary": "Create On-Call schedule",
@@ -4752,6 +4864,10 @@
   "ListConnections": {
     "description": "List all data connections for an entity",
     "summary": "List connections"
+  },
+  "ListProductCatalogSKUs": {
+    "description": "Get every generally available Datadog SKU, with the pricing and allotment metadata that\napplies to it, for the Datadog site serving the request. A SKU is generally available\nwhen it is billed through a metered commitment or through automatic billing; SKUs in any\nother phase are not returned.\n\nPrices, allotments, and pricing tiers are returned as they were in effect on\n`as_of_date`, which defaults to the date of the request. Prices are public list prices:\nthey do not reflect discounts, commitments, or negotiated rates on an account.\n\nEach SKU is a separate resource in `data`, identified by its SKU code, and sorted by\nthat code in ascending order. The whole catalog is returned in a single response, so\nthis endpoint is not paginated.",
+    "summary": "List SKUs"
   },
   "GetPrunedTraceByID": {
     "description": "Retrieve a pruned, hierarchical view of an APM trace by its trace ID.\nThe trace is summarized as a tree of spans rooted at the trace root and reduced in size\nto keep rendering large traces in the UI practical.\nThis endpoint is rate limited to `60` requests per minute per organization.",
@@ -5629,12 +5745,28 @@
     "request_description": "",
     "request_schema_description": "Request to assign or unassign security findings."
   },
+  "ListSecurityFindingsAutomationDefaultInboxRules": {
+    "description": "Get all default inbox rules for the current organization.\nDatadog manages default inbox rules. Their name, rule, and action are\nread-only, and each organization can change only whether they are enabled.",
+    "summary": "Get all default inbox rules"
+  },
+  "GetSecurityFindingsAutomationDefaultInboxRule": {
+    "description": "Get the details of a default inbox rule by ID.\nDatadog manages default inbox rules. Their name, rule, and action are\nread-only, and each organization can change only whether they are enabled.",
+    "summary": "Get a default inbox rule"
+  },
+  "DisableSecurityFindingsAutomationDefaultInboxRule": {
+    "description": "Disable a default inbox rule for the current organization.",
+    "summary": "Disable a default inbox rule"
+  },
+  "EnableSecurityFindingsAutomationDefaultInboxRule": {
+    "description": "Enable a default inbox rule for the current organization.",
+    "summary": "Enable a default inbox rule"
+  },
   "ListSecurityFindingsAutomationDueDateRules": {
     "description": "Get all due date rules for the current organization.",
     "summary": "Get all due date rules"
   },
   "CreateSecurityFindingsAutomationDueDateRule": {
-    "description": "Create a new due date rule for the current organization.",
+    "description": "Create a due date rule for the current organization.",
     "summary": "Create a due date rule",
     "request_description": "",
     "request_schema_description": "The body of a due date rule create request."
@@ -5646,7 +5778,7 @@
     "request_schema_description": "The body of the due date rule reorder request."
   },
   "DeleteSecurityFindingsAutomationDueDateRule": {
-    "description": "Delete an existing due date rule by ID.",
+    "description": "Delete a due date rule by ID.",
     "summary": "Delete a due date rule"
   },
   "GetSecurityFindingsAutomationDueDateRule": {
@@ -5654,17 +5786,47 @@
     "summary": "Get a due date rule"
   },
   "UpdateSecurityFindingsAutomationDueDateRule": {
-    "description": "Update an existing due date rule by ID.",
+    "description": "Update a due date rule by ID.",
     "summary": "Update a due date rule",
     "request_description": "",
     "request_schema_description": "The body of a due date rule update request."
+  },
+  "ListSecurityFindingsAutomationInboxRules": {
+    "description": "Get all inbox rules for the current organization.",
+    "summary": "Get all inbox rules"
+  },
+  "CreateSecurityFindingsAutomationInboxRule": {
+    "description": "Create an inbox rule for the current organization.",
+    "summary": "Create an inbox rule",
+    "request_description": "",
+    "request_schema_description": "The body of an inbox rule create request."
+  },
+  "ReorderSecurityFindingsAutomationInboxRules": {
+    "description": "Reorder the list of inbox rules for the current organization.",
+    "summary": "Reorder inbox rules",
+    "request_description": "",
+    "request_schema_description": "The body of an inbox rule reorder request."
+  },
+  "DeleteSecurityFindingsAutomationInboxRule": {
+    "description": "Delete an inbox rule by ID.",
+    "summary": "Delete an inbox rule"
+  },
+  "GetSecurityFindingsAutomationInboxRule": {
+    "description": "Get the details of an inbox rule by ID.",
+    "summary": "Get an inbox rule"
+  },
+  "UpdateSecurityFindingsAutomationInboxRule": {
+    "description": "Update an inbox rule by ID.",
+    "summary": "Update an inbox rule",
+    "request_description": "",
+    "request_schema_description": "The body of an inbox rule update request."
   },
   "ListSecurityFindingsAutomationMuteRules": {
     "description": "Get all mute rules for the current organization.",
     "summary": "Get all mute rules"
   },
   "CreateSecurityFindingsAutomationMuteRule": {
-    "description": "Create a new mute rule for the current organization.",
+    "description": "Create a mute rule for the current organization.",
     "summary": "Create a mute rule",
     "request_description": "",
     "request_schema_description": "The body of a mute rule create request."
@@ -5676,7 +5838,7 @@
     "request_schema_description": "The body of the mute rule reorder request."
   },
   "DeleteSecurityFindingsAutomationMuteRule": {
-    "description": "Delete an existing mute rule by ID.",
+    "description": "Delete a mute rule by ID.",
     "summary": "Delete a mute rule"
   },
   "GetSecurityFindingsAutomationMuteRule": {
@@ -5684,7 +5846,7 @@
     "summary": "Get a mute rule"
   },
   "UpdateSecurityFindingsAutomationMuteRule": {
-    "description": "Update an existing mute rule by ID.",
+    "description": "Update a mute rule by ID.",
     "summary": "Update a mute rule",
     "request_description": "",
     "request_schema_description": "The body of a mute rule update request."
@@ -5694,7 +5856,7 @@
     "summary": "Get all severity modifier rules"
   },
   "CreateSecurityFindingsAutomationSeverityModifierRule": {
-    "description": "Create a new severity modifier rule for the current organization.",
+    "description": "Create a severity modifier rule for the current organization.",
     "summary": "Create a severity modifier rule",
     "request_description": "",
     "request_schema_description": "The body of a severity modifier rule create request."
@@ -5706,7 +5868,7 @@
     "request_schema_description": "The body of a severity modifier rule reorder request."
   },
   "DeleteSecurityFindingsAutomationSeverityModifierRule": {
-    "description": "Delete an existing severity modifier rule by ID.",
+    "description": "Delete a severity modifier rule by ID.",
     "summary": "Delete a severity modifier rule"
   },
   "GetSecurityFindingsAutomationSeverityModifierRule": {
@@ -5714,7 +5876,7 @@
     "summary": "Get a severity modifier rule"
   },
   "UpdateSecurityFindingsAutomationSeverityModifierRule": {
-    "description": "Update an existing severity modifier rule by ID.",
+    "description": "Update a severity modifier rule by ID.",
     "summary": "Update a severity modifier rule",
     "request_description": "",
     "request_schema_description": "The body of a severity modifier rule update request."
@@ -5724,7 +5886,7 @@
     "summary": "Get all ticket creation rules"
   },
   "CreateSecurityFindingsAutomationTicketCreationRule": {
-    "description": "Create a new ticket creation rule for the current organization.",
+    "description": "Create a ticket creation rule for the current organization.",
     "summary": "Create a ticket creation rule",
     "request_description": "",
     "request_schema_description": "The body of a ticket creation rule create request."
@@ -5736,7 +5898,7 @@
     "request_schema_description": "The body of the ticket creation rule reorder request."
   },
   "DeleteSecurityFindingsAutomationTicketCreationRule": {
-    "description": "Delete an existing ticket creation rule by ID.",
+    "description": "Delete a ticket creation rule by ID.",
     "summary": "Delete a ticket creation rule"
   },
   "GetSecurityFindingsAutomationTicketCreationRule": {
@@ -5744,7 +5906,7 @@
     "summary": "Get a ticket creation rule"
   },
   "UpdateSecurityFindingsAutomationTicketCreationRule": {
-    "description": "Update an existing ticket creation rule by ID.",
+    "description": "Update a ticket creation rule by ID.",
     "summary": "Update a ticket creation rule",
     "request_description": "",
     "request_schema_description": "The body of a ticket creation rule update request."
@@ -7318,6 +7480,12 @@
     "request_description": "",
     "request_schema_description": "The request for a flaky tests search."
   },
+  "CreateTimeseriesAnomalyInvestigation": {
+    "description": "Investigates a metrics timeseries request for its most significant anomaly and returns deterministic findings.\nMetrics queries with or without grouping are supported. This API version accepts exactly one request and returns at most one anomaly.",
+    "summary": "Investigate a timeseries anomaly",
+    "request_description": "Metrics timeseries request to investigate. The request body must not exceed 2 MiB.",
+    "request_schema_description": "Request to investigate a metrics timeseries for anomalies."
+  },
   "GetTraceByID": {
     "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nThis endpoint is rate limited to `60` requests per minute per organization.",
     "summary": "Get a trace by ID"
@@ -7359,21 +7527,21 @@
     "summary": "Get projected cost across your account"
   },
   "ListQuotas": {
-    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.",
+    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `billing_edit` permission.",
     "summary": "List usage quotas"
   },
   "CreateQuotas": {
-    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated; otherwise, a new quota is created. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.",
+    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated; otherwise, a new quota is created. Requires the `billing_edit` permission.",
     "summary": "Create or update usage quotas",
     "request_description": "The usage quotas to create or update.",
     "request_schema_description": "A JSON:API bulk request containing an array of usage quota resources rather than a single resource."
   },
   "DeleteQuota": {
-    "description": "Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.",
+    "description": "Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
     "summary": "Delete a usage quota"
   },
   "UpdateQuota": {
-    "description": "Updates the supplied fields on a usage quota and leaves omitted fields unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `user_access_manage`, `billing_edit`, and `org_management` permissions.",
+    "description": "Updates the supplied fields on a usage quota and leaves omitted fields unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
     "summary": "Update a usage quota",
     "request_description": "The usage quota fields to update. Omitting an attribute leaves its current value unchanged.",
     "request_schema_description": "Request containing the usage quota resource to update."

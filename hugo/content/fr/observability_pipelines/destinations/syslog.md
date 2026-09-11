@@ -20,7 +20,7 @@ Utilisez les destinations syslog d'Observability Pipelines pour envoyer des logs
 
 <div class="alert alert-danger">Pour la gestion des secrets : saisissez uniquement l'identifiant de l'URL de l'endpoint syslog et, le cas échéant, la clé de passe. Ne <b>saisissez pas</b> les valeurs réelles.</div>
 
-Configurez la destination rsyslog ou syslog-ng lorsque vous [configurez un pipeline][2]. Vous pouvez configurer un pipeline dans l'[UI][1], en utilisant l'[API][3] ou avec [Terraform][4]. Les étapes de cette section sont configurées dans l'UI.
+Configurez la destination rsyslog ou syslog-ng lorsque vous [configurez un pipeline][2]. Vous pouvez configurer un pipeline dans l'[UI][1], en utilisant l'[API][3] ou avec [Terraform][4]. Les étapes de cette section sont configurées dans l'interface utilisateur.
 
 Après avoir sélectionné la destination rsyslog ou syslog-ng dans l'UI du pipeline, saisissez l'identifiant de votre URL d'endpoint. Si vous le laissez vide, la [valeur par défaut](#secret-defaults) est utilisée.
 
@@ -38,7 +38,7 @@ Consultez [Mise en correspondance des champs de log avec les champs syslog](#mat
 
 Saisissez le nombre de secondes à attendre avant d'envoyer des sondes TCP keepalive sur une connexion inactive.
 
-#### Mise en tampon {#buffering}
+#### Mise en mémoire tampon {#buffering}
 
 {{% observability_pipelines/destination_buffer %}}
 
@@ -52,12 +52,12 @@ Les destinations rsyslog et syslog-ng font correspondre ces champs de log aux ch
 | log[\"procid\"]   | PROCID       | L'identifiant de processus du Worker en cours d'exécution. |
 | log[\"appname\"]  | APP-NAME     | `observability_pipelines`  |
 | log[\"facility\"] | FACILITY     | `8 (log_user)`             |
-| log[\"msgid\"]    | MSGID        | `NIL`                      |
+| log["msgid"]    | MSGID        | `NIL`                      |
 | log[\"severity\"] | SEVERITY     | `info`                     |
 | log[\"host\"]     | HOSTNAME     | `NIL`                      |
 | log[\"timestamp\"]| TIMESTAMP    | Heure UTC actuelle.          |
 
-## Valeurs par défaut du secret {#secret-defaults}
+## Valeurs par défaut des secrets {#secret-defaults}
 
 {{% observability_pipelines/set_secrets_intro %}}
 

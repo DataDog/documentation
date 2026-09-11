@@ -51,7 +51,7 @@ Lorsque vous utilisez SAML et SCIM ensemble, Datadog recommande vivement de dés
 2. Cliquez sur {{< ui >}}Configure API integration{{< /ui >}}.
 3. Sélectionnez {{< ui >}}Enable API integration{{< /ui >}}.
 4. Remplissez la section {{< ui >}}Credentials{{< /ui >}} comme suit :
-    - {{< ui >}}Base URL{{< /ui >}} : `https://{{< region-param key="dd_full_site" >}}/api/v2/scim` **Remarque :** Utilisez le sous-domaine approprié pour votre site. Pour trouver votre URL, consultez les [sites Datadog][3].
+    - {{< ui >}}Base URL{{< /ui >}} : `{{< region-param key="dd_api" >}}/api/v2/scim` **Remarque :** Utilisez le host API de votre site, et non le host de l'application. Pour les endpoints SCIM de chaque site, consultez la [référence de l'API SCIM][3].
     - {{< ui >}}API Token{{< /ui >}} : Utilisez une clé d'application Datadog valide. Vous pouvez créer une clé d'application sur [votre page de paramètres d'organisation][4]. Pour maintenir un accès continu à vos données, utilisez une clé d'application de [compte de service][5].
 
 {{< img src="/account_management/scim/okta-admin-credentials.png" alt="Écran de configuration des identifiants d'administration Okta">}}
@@ -66,7 +66,7 @@ Lorsque vous utilisez SAML et SCIM ensemble, Datadog recommande vivement de dés
 
 ### Mappez l'attribut de rôle Datadog {#map-the-datadog-role-attribute}
 
-Pour provisionner le rôle Datadog d'un utilisateur (intégré ou personnalisé) via SCIM, ajoutez un mappage explicite pour l'attribut `roles`. Okta ne remappe pas cet attribut par défaut.
+Pour provisionner le rôle Datadog d'un utilisateur (intégré ou personnalisé) via SCIM, ajoutez un mappage explicite pour l'attribut `roles`. Okta ne mappe pas cet attribut par défaut.
 
 La prise en charge des rôles SCIM par Datadog suit la convention d'attribut à valeurs multiples SCIM définie dans [RFC 7643][8], en utilisant l'UUID du rôle comme `value` et le nom du rôle comme `display` :
 
@@ -92,7 +92,7 @@ Si une requête SCIM envoie plusieurs rôles, Datadog provisionne uniquement les
 
 ## Configurer le provisionnement automatique des équipes {#configure-automatic-team-provisioning}
 
-Avec [Managed Teams][6], vous contrôlez le provisionnement principal d'une équipe Datadog — son nom, son handle et son membership — via le fournisseur d'identité. Le processus de configuration diffère selon que l'équipe existe déjà ou non dans Datadog.
+Avec [Managed Teams][6], vous contrôlez le provisionnement principal d'une équipe Datadog — son nom, son identifiant et sa composition — via le fournisseur d'identité. Le processus de configuration diffère selon que l'équipe existe déjà ou non dans Datadog.
 
 **Remarque :** Les utilisateurs doivent exister dans Datadog avant que vous puissiez les ajouter à une équipe. Par conséquent, vous devez affecter les utilisateurs à l'application Datadog dans Okta pour vous assurer qu'ils sont créés dans Datadog via SCIM. Affectez l'application Datadog à votre groupe Okta pour vous assurer que tous les membres de l'équipe sont créés automatiquement dans Datadog.
 
@@ -113,7 +113,7 @@ Pour vérifier que l'opération a réussi, accédez à la [liste Teams][7] dans 
 
 Vous pouvez mapper une équipe Datadog existante à un groupe Okta. L'établissement d'un lien entre le groupe Okta et l'équipe Datadog entraîne la gestion de l'équipe Datadog par Okta à l'avenir.
 
-**Remarque :** Pour synchroniser une équipe Datadog existante avec un groupe Okta, le handle dérivé du nom du groupe Okta doit correspondre exactement au handle de l'équipe Datadog existante.
+**Remarque :** Pour synchroniser une équipe Datadog existante avec un groupe Okta, l'identifiant dérivé du nom du groupe Okta doit correspondre exactement à l'identifiant de l'équipe Datadog existante.
 
 1. Dans votre application Datadog dans Okta, accédez à l'onglet {{< ui >}}Push Groups{{< /ui >}}.
 1. Cliquez sur le bouton {{< ui >}}Push Groups{{< /ui >}}. L'interface des groupes poussés s'ouvre.
@@ -159,7 +159,7 @@ Cette procédure vous permet de gérer l'appartenance à une équipe dans Datado
 
 [1]: /fr/account_management/scim/
 [2]: /fr/account_management/scim/#using-a-service-account-with-scim
-[3]: /fr/getting_started/site
+[3]: /fr/api/latest/scim/
 [4]: https://app.datadoghq.com/organization-settings/application-keys
 [5]: /fr/account_management/org_settings/service_accounts
 [6]: /fr/account_management/teams/manage/#manage-teams-through-an-identity-provider
