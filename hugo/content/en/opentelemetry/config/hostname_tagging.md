@@ -1,22 +1,114 @@
 ---
 title: Hostname and Tagging
+description: Configure consistent host identification and tagging for OpenTelemetry telemetry sent to Datadog.
 aliases:
 - /opentelemetry/collector_exporter/hostname_tagging
 further_reading:
-- link: "/opentelemetry/collector_exporter/"
+- link: "/opentelemetry/setup/collector_exporter/"
   tag: "Documentation"
   text: "Setting Up the OpenTelemetry Collector"
+- link: "/opentelemetry/mapping/hostname/"
+  tag: "Documentation"
+  text: "Mapping OpenTelemetry Semantic Conventions to Hostnames"
 ---
 
 {{< img src="opentelemetry/collector_exporter/hostname_tagging.png" alt="Hostname information collected from OpenTelemetry" style="width:100%;" >}}
 
 ## Overview
 
-To extract the correct hostname and host tags, Datadog Exporter uses the [resource detection processor][2] and the [Kubernetes attributes processor][3]. These processors allow for extracting information from hosts and containers in the form of [resource semantic conventions][1], which is then used to build the hostname, host tags, and container tags. These tags enable automatic correlation among telemetry signals and tag-based navigation for filtering and grouping telemetry data within Datadog.
+Datadog uses OpenTelemetry resource attributes to associate metrics, traces, and logs with hosts. Consistent host identification enables correlation across telemetry signals and host tag inheritance.
 
-For more information, see the OpenTelemetry project documentation for the [resource detection][2] and [Kubernetes attributes][3] processors.
+For the hostname resolution order and the full list of supported resource attributes, see [Mapping OpenTelemetry Semantic Conventions to Hostnames][8].
 
-## Setup
+## Hostname recommendations
+
+The right configuration depends on how you send telemetry to Datadog. Find every setup that applies to your telemetry path, then follow the linked sections. For example, a gateway Collector can export through direct OTLP intake.
+
+| How you send telemetry | Recommendation |
+|---|---|
+| [OTLP ingestion by the Datadog Agent](#otlp-ingestion-by-the-datadog-agent) | Run an Agent on every host that generates telemetry. Omit hostname attributes, or set them to match the Agent hostname. |
+| [DDOT Collector exporting directly to Datadog](#ddot-collector-exporting-directly-to-datadog) | The DDOT converter adds the `infraattributes` processor automatically. On hosts, enable `allow_hostname_override`. On Fargate, supply platform resource attributes instead. |
+| [Direct OTLP intake from an SDK or Collector](#direct-otlp-intake-from-an-sdk-or-collector) | For new Collector configurations, use the `otlp_http` exporter. Add host or platform resource attributes before export. |
+| [Collector exporting through a gateway](#collector-exporting-through-a-gateway) | Detect host information in the node-level Collector with the appropriate Kubernetes or resource detection processor, and preserve those resource attributes through the gateway. |
+| [Existing configurations using the Datadog Exporter](#existing-configurations-using-the-datadog-exporter) | Run a Collector on each host. Use `resource_detection` for hosts and cloud Kubernetes, or `k8s_attributes` for non-cloud Kubernetes. |
+
+### OTLP ingestion by the Datadog Agent
+
+Deploy the Datadog Agent on every host that generates OTLP telemetry. Sending telemetry from one host to an Agent on another host is not supported. For setup instructions, see [OTLP Ingestion by the Datadog Agent][11].
+
+If incoming telemetry has no valid hostname attributes, Datadog uses the Agent hostname. If you set `host.name`, `host.id`, or another hostname attribute, make its value match the Agent hostname to avoid duplicate hosts. To override hostname resolution explicitly, set the `datadog.host.name` resource attribute to the Agent hostname.
+
+### DDOT Collector exporting directly to Datadog
+
+The DDOT Collector's `infraattributes` processor adds infrastructure attributes and tags to OTLP telemetry. By default, the DDOT converter automatically adds the processor to DDOT pipelines that send telemetry to Datadog. The processor requires resource attributes that identify the source container so it can look up and attach infrastructure tags. See [Infrastructure tags are missing from telemetry][10] for supported attributes and troubleshooting steps.
+
+The rest of the configuration depends on whether the DDOT Collector runs on a host.
+
+#### Host-based deployments
+
+This applies to the DDOT Collector as a [DaemonSet][9], and on [Linux][14] and [Windows][15] hosts.
+
+Because the DDOT Collector runs inside the Datadog Agent, hostname attributes on incoming telemetry can resolve to a different name than the Agent's, which makes a single node appear as two hosts. Enable `allow_hostname_override` to use the Agent hostname instead:
+
+```yaml
+processors:
+  infraattributes:
+    allow_hostname_override: true
+```
+
+#### Fargate sidecar deployments
+
+This applies to the DDOT Collector on [ECS Fargate][16] and [EKS Fargate][17], where the Datadog Agent runs as a sidecar container in the same task or pod as your application.
+
+Fargate does not support host-based deployments, so the host guidance above does not apply. Supply the platform resource attributes that `infraattributes` needs instead:
+
+- On ECS Fargate, add the ECS resource detector to your OpenTelemetry SDK to provide the `aws.ecs.task.arn` attribute.
+- On EKS Fargate, add the EKS resource detector to your SDK, or add the `resource_detection` processor with the `[env, eks]` detectors to your Collector configuration.
+
+### Direct OTLP intake from an SDK or Collector
+
+This applies when an OpenTelemetry SDK sends telemetry directly to Datadog OTLP intake, or when an OpenTelemetry Collector sends telemetry with the `otlp_http` exporter. You can use direct OTLP intake from host-based environments, [serverless platforms][12], such as AWS Lambda, ECS Fargate, Azure Functions, and Cloud Run, and [managed platforms][13].
+
+Populate the resource attributes for your environment before exporting telemetry. If you export from an SDK, enable its built-in resource detectors when available, or set the attributes manually. If you export through a Collector, use the `resource_detection` and `k8s_attributes` processors as appropriate for the environment. See [Collector configuration](#collector-configuration) for examples. For serverless and managed platforms, use platform resource attributes instead of relying on `host.name` for workload identification.
+
+<div class="alert alert-danger">Host metadata sent to the <a href="/opentelemetry/setup/otlp_ingest/">OTLP intake endpoints</a> does not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
+
+If you run the DDOT Collector as a sidecar on ECS Fargate or EKS Fargate rather than sending to an OTLP intake endpoint, see [Fargate sidecar deployments](#fargate-sidecar-deployments).
+
+### Collector exporting through a gateway
+
+This applies to OpenTelemetry Collector gateway deployments, including Collectors that use direct OTLP intake or the Datadog Exporter, and to the [DDOT Collector as a gateway on Kubernetes][18].
+
+In a gateway deployment, the Collector that exports to Datadog does not run on the host that produced the telemetry. If host information is not attached before the data reaches the gateway, telemetry from many hosts can collapse onto the gateway's hostname, or each Collector pod can register as its own host.
+
+Detect host information in the node-level Collector, then configure the gateway to preserve those resource attributes instead of detecting them again. In non-cloud Kubernetes environments, use the `k8s_attributes` processor. In cloud Kubernetes environments, use the `resource_detection` processor with the detector for your cloud provider. See the **Kubernetes DaemonSet -> Gateway** example in [Collector configuration](#collector-configuration). If a gateway deployment reports the wrong host, see [Gateway collector not forwarding host metadata][19].
+
+### Existing configurations using the Datadog Exporter
+
+This applies to existing [OpenTelemetry Collector configurations with the Datadog Exporter][20] running on each host or as a Kubernetes DaemonSet. The Datadog Exporter remains supported. For new Collector configurations, use [direct OTLP intake](#direct-otlp-intake-from-an-sdk-or-collector).
+
+Run a Collector on every host. For host-based environments, add the `resource_detection` processor with the detectors for your environment. For non-cloud Kubernetes, use the `k8s_attributes` processor. For cloud Kubernetes, use the `resource_detection` processor with the detector for your cloud provider. See [Collector configuration](#collector-configuration) for examples. If your Collector forwards to a gateway, also follow the [gateway recommendations](#collector-exporting-through-a-gateway).
+
+## Diagnose hostname issues
+
+Datadog emits the `datadog.apm.hostname_issue` gauge when an APM trace hostname is missing, resembles an ephemeral Kubernetes pod, or differs from the hostname reported by the Datadog Agent. This diagnostic metric helps identify hostname configuration problems; it does not affect billing.
+
+A trace has at most one `issue_type`. Use the table to identify the problem and select the appropriate action:
+
+| `issue_type` | What it indicates | Recommended action |
+|---|---|---|
+| `pod_like_gateway_mismatch` | The trace hostname differs from the Agent hostname and resembles a Kubernetes pod name. | Follow the [gateway recommendations](#collector-exporting-through-a-gateway). Detect the Kubernetes node in the node-level Collector and preserve those resource attributes through the gateway. |
+| `gateway_hostname_mismatch` | The trace hostname differs from the Agent hostname. | Follow the [gateway recommendations](#collector-exporting-through-a-gateway) and preserve hostname resource attributes through the gateway. |
+| `empty_hostname` | Datadog did not receive a usable hostname for the trace. | Follow the [recommendation for your ingestion path](#hostname-recommendations) and provide the required host or platform resource attributes. |
+| `pod_like_hostname` | The trace hostname resembles an ephemeral Kubernetes pod name. | Configure resource detection for your [ingestion path](#hostname-recommendations) so that telemetry identifies the node, host, or platform instead of the pod. |
+
+Available metric tags include `issue_type`, `host`, `env`, `service`, `version`, and `span_source`. Affected spans receive the same `issue_type` tag, which you can use to find example traces and inspect their resource attributes.
+
+The pod-like issue types use common Kubernetes pod naming patterns as a heuristic. After updating your configuration, inspect new traces to confirm that they no longer have the issue type.
+
+## Collector configuration
+
+Use the [resource detection processor][2] and the [Kubernetes attributes processor][3] to collect host and container resource attributes. Add the appropriate processors to the relevant metrics, traces, and logs pipelines. These examples apply whether the Collector sends telemetry through direct OTLP intake or the Datadog Exporter.
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -25,8 +117,8 @@ Add the following lines to your Collector configuration:
 
 ```yaml
 processors:
-  resourcedetection:
-    # bare metal
+  resource_detection:
+    # Bare metal
     detectors: [env, system]
     system:
       resource_attributes:
@@ -46,15 +138,17 @@ processors:
           enabled: true
         host.cpu.cache.l2.size:
           enabled: true
-    # GCP
-    detectors: [env, gcp, system]
-    # AWS
-    detectors: [env, ecs, ec2, system]
-    # Azure
-    detectors: [env, azure, system]
     timeout: 2s
     override: false
 ```
+
+For cloud environments, replace `detectors` with the appropriate list:
+
+- Amazon EC2: `[env, ec2, system]`
+- Amazon ECS on EC2: `[env, ecs, ec2, system]`
+- Amazon ECS Fargate: `[env, ecs]`
+- Google Cloud: `[env, gcp, system]`
+- Azure: `[env, azure, system]`
 
 {{% /tab %}}
 
@@ -73,7 +167,7 @@ Add the following in the Collector configuration:
 
 ```yaml
 processors:
-  k8sattributes:
+  k8s_attributes:
     passthrough: false
     auth_type: "serviceAccount"
     pod_association:
@@ -101,9 +195,6 @@ processors:
         - container.image.tag
         - container.id
         - k8s.container.name
-        - container.image.name
-        - container.image.tag
-        - container.id
       labels:
         - tag_name: kube_app_name
           key: app.kubernetes.io/name
@@ -123,12 +214,17 @@ processors:
         - tag_name: kube_app_managed_by
           key: app.kubernetes.io/managed-by
           from: pod
-  resourcedetection:
-    # remove the ones that you do not use
-    detectors: [env, eks, ec2, aks, azure, gke, gce, system]
+  resource_detection:
+    # Cloud Kubernetes only. This example is for Amazon EKS on EC2.
+    detectors: [env, eks, ec2, system]
     timeout: 2s
     override: false
 ```
+
+For non-cloud Kubernetes, omit the `resource_detection` block. For other cloud Kubernetes environments, replace `detectors` with the appropriate list:
+
+- Azure AKS: `[env, aks, azure, system]`
+- Google GKE: `[env, gcp, system]`
 
 [1]: https://opentelemetry.io/docs/kubernetes/collector/components/#kubernetes-attributes-processor
 {{% /tab %}}
@@ -142,27 +238,31 @@ presets:
     enabled: true
 ```
 
-Use the Helm `k8sattributes` preset in both Daemonset and Gateway, to set up the service account necessary for  `k8sattributesprocessor` to extract metadata from pods. Read [Important Components for Kubernetes][1] for additional information about the required service account. 
+Use the Helm `kubernetesAttributes` preset in both the DaemonSet and gateway to set up the service account that the Kubernetes attributes processor needs to extract metadata from pods. Read [Important Components for Kubernetes][1] for additional information about the required service account.
 
 DaemonSet:
 
 ```yaml
 processors:
-  k8sattributes:
+  k8s_attributes:
     passthrough: true
     auth_type: "serviceAccount"
-  resourcedetection:
-    detectors: [env, <eks/ec2>, <aks/azure>, <gke/gce>, system]
+  resource_detection:
+    # Cloud Kubernetes only. This example is for Amazon EKS on EC2.
+    detectors: [env, eks, ec2, system]
     timeout: 2s
     override: false
 ```
+
+For non-cloud Kubernetes, omit the `resource_detection` block. For Azure AKS, use `[env, aks, azure, system]`. For Google GKE, use `[env, gcp, system]`.
+
 Because the processor is in passthrough mode in the DaemonSet, it adds only the pod IP addresses. These addresses are then used by the Gateway processor to make Kubernetes API calls and extract metadata.
 
 Gateway:
 
 ```yaml
 processors:
-  k8sattributes:
+  k8s_attributes:
     passthrough: false
     auth_type: "serviceAccount"
     pod_association:
@@ -190,9 +290,6 @@ processors:
         - container.image.tag
         - container.id
         - k8s.container.name
-        - container.image.name
-        - container.image.tag
-        - container.id
       labels:
         - tag_name: kube_app_name
           key: app.kubernetes.io/name
@@ -231,7 +328,7 @@ Add the following in the Collector configuration:
 
 ```yaml
 processors:
-  k8sattributes:
+  k8s_attributes:
     passthrough: false
     auth_type: "serviceAccount"
     pod_association:
@@ -259,9 +356,6 @@ processors:
         - container.image.tag
         - container.id
         - k8s.container.name
-        - container.image.name
-        - container.image.tag
-        - container.id
       labels:
         - tag_name: kube_app_name
           key: app.kubernetes.io/name
@@ -281,10 +375,6 @@ processors:
         - tag_name: kube_app_managed_by
           key: app.kubernetes.io/managed-by
           from: pod
-  resourcedetection:
-    detectors: [env, <eks/ec2>, <aks/azure>, <gke/gce>, system]
-    timeout: 2s
-    override: false
 ```
 
 [1]: https://opentelemetry.io/docs/kubernetes/collector/components/#kubernetes-attributes-processor
@@ -292,71 +382,71 @@ processors:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Data collected
+### Data collected
 
 | OpenTelemetry attribute | Datadog Tag | Processor |
 |---|---|---|
-| `host.arch` |  | `resourcedetectionprocessor{system}` |
-| `host.name` |  | `resourcedetectionprocessor{system,gcp,ec2,azure}` |
-| `host.id` |  | `resourcedetectionprocessor{system,gcp,ec2,azure}` |
-| `host.cpu.vendor.id` |  | `resourcedetectionprocessor{system}` |
-| `host.cpu.family` |  | `resourcedetectionprocessor{system}` |
-| `host.cpu.model.id` |  | `resourcedetectionprocessor{system}` |
-| `host.cpu.model.name` |  | `resourcedetectionprocessor{system}` |
-| `host.cpu.stepping` |  | `resourcedetectionprocessor{system}` |
-| `host.cpu.cache.l2.size` |  | `resourcedetectionprocessor{system}` |
-| `os.description` |  | `resourcedetectionprocessor{system}` |
-| `os.type` |  | `resourcedetectionprocessor{system}` |
-| `cloud.provider` | `cloud_provider` | `resourcedetectionprocessor{gcp,ec2,ecs,eks,azure,aks}` |
-| `cloud.platform` |  | `"resourcedetectionprocessor{gcp,ec2,ecs,eks,azure,aks}"` |
-| `cloud.account.id` |  | `"resourcedetectionprocessor{gcp,ec2,ecs,azure}"` |
-| `cloud.region` | `region` | `resourcedetectionprocessor{gcp,ec2,ecs,azure}` |
-| `cloud.availability_zone` | `zone` | `resourcedetectionprocessor{gcp,ec2,ecs}` |
-| `host.type` |  | `"resourcedetectionprocessor{gcp,ec2}"` |
-| `gcp.gce.instance.hostname` |  | `resourcedetectionprocessor{gcp}` |
-| `gcp.gce.instance.name` |  | `resourcedetectionprocessor{gcp}` |
-| `k8s.cluster.name` | `kube_cluster_name` | `resourcedetectionprocessor{gcp,eks}` |
-| `host.image.id` |  | `resourcedetectionprocessor{ec2}` |
-| `aws.ecs.cluster.arn` | `ecs_cluster_name` | `k8sattributes` |
-| `aws.ecs.task.arn` | `task_arn` | `k8sattributes` |
-| `aws.ecs.task.family` | `task_family` | `k8sattributes` |
-| `aws.ecs.task.revision` | `task_version` | `k8sattributes` |
-| `aws.ecs.launchtype` |  | `k8sattributes` |
-| `aws.log.group.names` |  | `k8sattributes` |
-| `aws.log.group.arns` |  | `k8sattributes` |
-| `aws.log.stream.names` |  | `k8sattributes` |
-| `aws.log.stream.arns` |  | `k8sattributes` |
-| `azure.vm.name` |  | `k8sattributes` |
-| `azure.vm.size` |  | `k8sattributes` |
-| `azure.vm.scaleset.name` |  | `k8sattributes` |
-| `azure.resourcegroup.name` |  | `k8sattributes` |
-| `k8s.cluster.uid` |  | `k8sattributes` |
-| `k8s.namespace.name` | `kube_namespace` | `k8sattributes` |
-| `k8s.pod.name` | `pod_name` | `k8sattributes` |
-| `k8s.pod.uid` |  | `k8sattributes` |
-| `k8s.pod.start_time` |  | `k8sattributes` |
-| `k8s.deployment.name` | `kube_deployment` | `k8sattributes` |
-| `k8s.replicaset.name` | `kube_replica_set` | `k8sattributes` |
-| `k8s.replicaset.uid` |  | `k8sattributes` |
-| `k8s.daemonset.name` | `kube_daemon_set` | `k8sattributes` |
-| `k8s.daemonset.uid` |  | `k8sattributes` |
-| `k8s.statefulset.name` | `kube_stateful_set` | `k8sattributes` |
-| `k8s.statefulset.uid` |  | `k8sattributes` |
-| `k8s.container.name` | `kube_container_name` | `k8sattributes` |
-| `k8s.job.name` | `kube_job` | `k8sattributes` |
-| `k8s.job.uid` |  | `k8sattributes` |
-| `k8s.cronjob.name` | `kube_cronjob` | `k8sattributes` |
-| `k8s.node.name` |  | `k8sattributes` |
-| `container.id` | `container_id` | `k8sattributes` |
-| `container.image.name` | `image_name` | `k8sattributes` |
-| `container.image.tag` | `image_tag` | `k8sattributes` |
+| `host.arch` |  | `resource_detection` (`system`) |
+| `host.name` |  | `resource_detection` (`system` or cloud detector) |
+| `host.id` |  | `resource_detection` (`system` or cloud detector) |
+| `host.cpu.vendor.id` |  | `resource_detection` (`system`) |
+| `host.cpu.family` |  | `resource_detection` (`system`) |
+| `host.cpu.model.id` |  | `resource_detection` (`system`) |
+| `host.cpu.model.name` |  | `resource_detection` (`system`) |
+| `host.cpu.stepping` |  | `resource_detection` (`system`) |
+| `host.cpu.cache.l2.size` |  | `resource_detection` (`system`) |
+| `os.description` |  | `resource_detection` (`system`) |
+| `os.type` |  | `resource_detection` (`system`) |
+| `cloud.provider` | `cloud_provider` | `resource_detection` (cloud detector) |
+| `cloud.platform` |  | `resource_detection` (cloud detector) |
+| `cloud.account.id` |  | `resource_detection` (cloud detector) |
+| `cloud.region` | `region` | `resource_detection` (cloud detector) |
+| `cloud.availability_zone` | `zone` | `resource_detection` (cloud detector) |
+| `host.type` |  | `resource_detection` (cloud detector) |
+| `gcp.gce.instance.hostname` |  | `resource_detection` (`gcp`) |
+| `gcp.gce.instance.name` |  | `resource_detection` (`gcp`) |
+| `k8s.cluster.name` | `kube_cluster_name` | `resource_detection` (cloud Kubernetes detector) |
+| `host.image.id` |  | `resource_detection` (`ec2`) |
+| `aws.ecs.cluster.arn` | `ecs_cluster_name` | `resource_detection` (`ecs`) |
+| `aws.ecs.task.arn` | `task_arn` | `resource_detection` (`ecs`) |
+| `aws.ecs.task.family` | `task_family` | `resource_detection` (`ecs`) |
+| `aws.ecs.task.revision` | `task_version` | `resource_detection` (`ecs`) |
+| `aws.ecs.launchtype` |  | `resource_detection` (`ecs`) |
+| `aws.log.group.names` |  | `resource_detection` (`ecs`) |
+| `aws.log.group.arns` |  | `resource_detection` (`ecs`) |
+| `aws.log.stream.names` |  | `resource_detection` (`ecs`) |
+| `aws.log.stream.arns` |  | `resource_detection` (`ecs`) |
+| `azure.vm.name` |  | `resource_detection` (`azure`) |
+| `azure.vm.size` |  | `resource_detection` (`azure`) |
+| `azure.vm.scaleset.name` |  | `resource_detection` (`azure`) |
+| `azure.resourcegroup.name` |  | `resource_detection` (`azure`) |
+| `k8s.cluster.uid` |  | `k8s_attributes` |
+| `k8s.namespace.name` | `kube_namespace` | `k8s_attributes` |
+| `k8s.pod.name` | `pod_name` | `k8s_attributes` |
+| `k8s.pod.uid` |  | `k8s_attributes` |
+| `k8s.pod.start_time` |  | `k8s_attributes` |
+| `k8s.deployment.name` | `kube_deployment` | `k8s_attributes` |
+| `k8s.replicaset.name` | `kube_replica_set` | `k8s_attributes` |
+| `k8s.replicaset.uid` |  | `k8s_attributes` |
+| `k8s.daemonset.name` | `kube_daemon_set` | `k8s_attributes` |
+| `k8s.daemonset.uid` |  | `k8s_attributes` |
+| `k8s.statefulset.name` | `kube_stateful_set` | `k8s_attributes` |
+| `k8s.statefulset.uid` |  | `k8s_attributes` |
+| `k8s.container.name` | `kube_container_name` | `k8s_attributes` |
+| `k8s.job.name` | `kube_job` | `k8s_attributes` |
+| `k8s.job.uid` |  | `k8s_attributes` |
+| `k8s.cronjob.name` | `kube_cronjob` | `k8s_attributes` |
+| `k8s.node.name` |  | `k8s_attributes` |
+| `container.id` | `container_id` | `k8s_attributes` |
+| `container.image.name` | `image_name` | `k8s_attributes` |
+| `container.image.tag` | `image_tag` | `k8s_attributes` |
 
 
-## Full example configuration
+### Full example configuration
 
-For a full working example configuration with the Datadog exporter, see [`k8s-values.yaml`][4]. This example is for Amazon EKS.
+For a full working example for an existing configuration with the Datadog Exporter, see [`k8s-values.yaml`][4]. This example is for Amazon EKS.
 
-## Example logging output
+### Example logging output
 
 ```
 ResourceSpans #0
@@ -493,10 +583,22 @@ processors:
       from_attribute: <custom_tag_name>
 ```
 
-[1]: https://opentelemetry.io/docs/specs/semconv/resource/
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourcedetectionprocessor/README.md
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/k8sattributesprocessor/README.md
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/k8s-values.yaml
 [5]: https://opentelemetry.io/docs/languages/js/resources/
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
-[7]: https://docs.datadoghq.com/opentelemetry/schema_semantics/host_metadata/  
+[7]: /opentelemetry/mapping/host_metadata/
+[8]: /opentelemetry/mapping/hostname/
+[9]: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/
+[10]: /opentelemetry/troubleshooting/#infrastructure-tags-are-missing-from-telemetry
+[11]: /opentelemetry/setup/otlp_ingest_in_the_agent/
+[12]: /opentelemetry/setup/otlp_ingest/serverless/
+[13]: /opentelemetry/setup/otlp_ingest/managed_platforms/
+[14]: /opentelemetry/setup/ddot_collector/install/linux/
+[15]: /opentelemetry/setup/ddot_collector/install/windows/
+[16]: /opentelemetry/setup/ddot_collector/install/ecs_fargate/
+[17]: /opentelemetry/setup/ddot_collector/install/eks_fargate/
+[18]: /opentelemetry/setup/ddot_collector/install/kubernetes_gateway/
+[19]: /opentelemetry/troubleshooting/#gateway-collector-not-forwarding-host-metadata
+[20]: /opentelemetry/collector_exporter/otel_collector_datadog_exporter/
