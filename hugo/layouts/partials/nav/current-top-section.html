@@ -1,0 +1,26 @@
+{{- /*
+  Returns the pipe-delimited identifiers of every top-level main-menu entry (e.g. "apm",
+  "logs") whose URL matches the current page, or "" if none do.
+
+  left-nav.html independently checks each top-level entry against the current page to decide
+  whether to render that entry's Levels 3-4, so this full match set -- not just one identifier
+  -- is what left-nav.html's rendered HTML depends on. It's used as that partial's partialCached
+  key; keying by .Section, or by only the first match, is unsound because menu entries can nest
+  (e.g. "security/" and "security/cloud_siem/" are sibling top-level entries), which would let
+  two pages with different actual matches share the same key.
+
+  This menu is config-defined (plain url: strings, no page front matter), so entries have no
+  .Page and Hugo's .IsMenuCurrent/.HasMenuCurrent never match -- comparing URLs directly works.
+*/ -}}
+{{- $currentPage := . -}}
+{{- $curURL := trim $currentPage.RelPermalink "/" -}}
+{{- $result := "" -}}
+{{- range .Site.Menus.main -}}
+    {{- range .Children -}}
+        {{- $menuURL := trim (.URL | relLangURL) "/" -}}
+        {{- if and (ne $menuURL "") (or (eq $curURL $menuURL) (strings.HasPrefix $curURL (printf "%s/" $menuURL))) -}}
+            {{- $result = print $result "|" .Identifier -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- $result -}}
