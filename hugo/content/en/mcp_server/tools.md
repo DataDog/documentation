@@ -209,7 +209,7 @@ Search Datadog RUM events using advanced query syntax.
 
 ### `aggregate_rum_events`
 *Toolset: **core**, **rum***\
-*Permissions Required: `RUM Apps Read`*\
+*Permissions Required: `RUM Apps Read` or `Timeseries`*\
 Aggregates RUM events to compute counts, sums, averages, min, max, cardinality, and percentiles, with grouping support. Use this for statistical analysis and trend data, not for inspecting individual events.
 
 - Count JavaScript errors by page in the last 24 hours.
@@ -1587,6 +1587,14 @@ Returns aggregated insights for RUM Views: waterfall, long tasks, vital distribu
 
 - For the `/checkout` view in the "shop" application, show me the aggregated resource waterfall over the last hour.
 - Break down INP distribution by device type for the home page.
+
+### `get_rum_view_waterfall`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Reconstructs the chronological load timeline for a single RUM view occurrence on web or mobile. Returns every resource, long task, error, and user interaction during that view, ordered by start time. Use this to investigate one concrete page load or screen; for the aggregated, cross-session view, use `get_rum_insight`.
+
+- Show the full waterfall for the RUM view with ID `AwAAc3dhcmV`.
+- Why did this specific checkout page load take 12 seconds? Show every request and long task during the view.
 
 ### `search_rum_operations`
 *Toolset: **rum***\
