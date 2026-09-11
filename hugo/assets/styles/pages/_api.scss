@@ -38,6 +38,150 @@ $ddpurple: #632ca6;
     }
 }
 
+// Operation changelog — compact, read-only change history beside the endpoint
+// title. Dates are entry metadata, not selectable API versions.
+.api-operation-header {
+    gap: 1rem;
+    margin-bottom: 0.75rem !important;
+
+    .api-copy-btn {
+        flex-shrink: 0;
+        margin-top: 0;
+    }
+}
+
+.api-operation-header-actions {
+    gap: 1rem;
+    margin-left: auto;
+}
+
+.api-operation-changelog {
+    flex: 0 0 auto;
+}
+
+.api-operation-changelog-toggle {
+    height: 31px;
+    padding: 0 0.625rem;
+    border: 1px solid $gray-light;
+    border-radius: 4px;
+    background: $gray-lightest;
+    color: $brand-primary;
+    font-size: 0.8125rem;
+    font-weight: 600;
+
+    .chevron {
+        margin-left: 0.5rem;
+    }
+
+    &[aria-expanded="true"] {
+        border-color: $brand-info;
+        box-shadow: 0 0 0 3px rgba($brand-info, 0.2);
+    }
+}
+
+.api-operation-changelog-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    padding: 0 0.35rem;
+    margin-left: 0.5rem;
+    border-radius: 50rem;
+    background: rgba($ddpurple, 0.12);
+    color: $ddpurple;
+    font-size: 0.6875rem;
+    line-height: 1;
+}
+
+.api-operation-changelog-menu {
+    width: 360px;
+    max-width: calc(100vw - 2rem);
+    padding: 0;
+    overflow: hidden;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    text-align: left;
+}
+
+.api-operation-changelog-heading {
+    padding: 0.625rem 0.875rem;
+    border-bottom: 1px solid $gray-border;
+    color: $gray;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.api-operation-changelog-entry {
+    padding: 0.75rem 0.875rem;
+    border-bottom: 1px solid $gray-border;
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.api-operation-changelog-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.375rem;
+
+    code,
+    time {
+        color: $gray-darkish;
+        font-size: 0.75rem;
+    }
+}
+
+.api-operation-changelog-pill {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 50rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+
+    &--added {
+        background: rgba($brand-success, 0.12);
+        color: $brand-success;
+    }
+
+    &--modified {
+        background: rgba($ddpurple, 0.12);
+        color: $ddpurple;
+    }
+
+    &--deprecated {
+        background: rgba($brand-warning, 0.14);
+        color: darken($brand-warning, 15%);
+    }
+
+    &--removed {
+        background: rgba($brand-danger, 0.12);
+        color: $brand-danger;
+    }
+}
+
+.api-operation-changelog-title {
+    color: $gray-dark;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+
+    a {
+        color: $gray-dark;
+        font-weight: 600;
+
+        &:hover {
+            color: $brand-primary;
+        }
+    }
+}
+
 // Category page: shrink-proof in the flex row; spacing goes on the header wrapper, not the button.
 .api-intro-header .api-copy-btn {
     flex-shrink: 0;

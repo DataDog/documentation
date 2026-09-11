@@ -1,0 +1,7 @@
+entries:
+  - change_type: modified
+    date: '2026-09-11'
+    link: https://github.com/DataDog/documentation/pull/39860
+    operations:
+      - GetIPRanges
+    title: TEST Improve Get IP Ranges description

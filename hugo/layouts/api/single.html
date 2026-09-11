@@ -49,13 +49,40 @@
     {{ $versionCount := (len $versions) }}
     {{ $anchorStr := .Title }}
 
-    <div class="row align-items-start mb-1">
-      <div class="col-11 col-xl-9">
-          <h1 class="api-task-description mb-0" id="{{ $anchorStr | anchorize }}">
-              {{- $anchorStr -}}
-          </h1>
-      </div>
-      <div class="col-1 col-xl-3 d-flex justify-content-end align-items-center">
+    {{/* Changelog files are generated per tag under data/changelog. Match their
+         entries to each major API version through the operation ID exposed by
+         that version's spec. Dates describe changes only; they are not API
+         versions and do not affect the rendered schema. */}}
+    {{ $operationChanges := slice }}
+    {{ $tagChangelog := index .Site.Data.changelog $tagSlug | default dict }}
+    {{ $tagChangelogEntries := $tagChangelog.entries | default slice }}
+    {{ range $versionNum := $versions }}
+      {{ $adat := cond (eq $versionNum "v1") $d $d2 }}
+      {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
+      {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $operationids "version" $versionNum "generalRegions" $generalRegions) }}
+      {{ if $endpoint }}
+        {{ range $entry := $tagChangelogEntries }}
+          {{ if in ($entry.operations | default slice) $endpoint.action.operationId }}
+            {{ $operationChanges = $operationChanges | append (dict
+              "changeType" ($entry.change_type | default "changed")
+              "date" ($entry.date | default "")
+              "link" ($entry.link | default "")
+              "title" ($entry.title | default "API change")
+              "version" $versionNum) }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ $operationChanges = sort $operationChanges "date" "desc" }}
+
+    <div class="api-operation-header d-flex flex-wrap align-items-center justify-content-between mb-1">
+      <h1 class="api-task-description mb-0" id="{{ $anchorStr | anchorize }}">
+          {{- $anchorStr -}}
+      </h1>
+      <div class="api-operation-header-actions d-flex align-items-center">
+          {{ if gt (len $operationChanges) 0 }}
+            {{ partial "api/operation-changelog.html" (dict "changes" $operationChanges "operationSlug" $endpointSlug) }}
+          {{ end }}
           {{ partial "api/api-copy-btn.html" . }}
       </div>
     </div>

@@ -76676,14 +76676,11 @@ components:
         - credentials_file
       type: object
     ObservabilityPipelineGenerateMetricsProcessor:
-      deprecated: true
       description: |-
         The `generate_datadog_metrics` processor creates custom metrics from logs and sends them to Datadog.
         Metrics can be counters, gauges, or distributions and optionally grouped by log fields.
 
         **Supported pipeline types:** logs
-
-        **Deprecated:** This processor is deprecated. Use the `generate_metrics` processor instead.
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -76725,8 +76722,7 @@ components:
       description: |-
         The `generate_metrics` processor creates custom metrics from logs.
         Metrics can be counters, gauges, or distributions and optionally grouped by log fields.
-
-        There must be a destination whose `inputs` reference this processor with the `<processor-id>.metrics` suffix to route the generated metrics. All destination types normally supported for `metrics` pipelines are also supported as metrics destinations in `logs` pipelines.
+        The generated metrics must be routed to a metrics destination using the input `<processor-id>.metrics`.
 
         **Supported pipeline types:** logs
       properties:
@@ -77222,14 +77218,13 @@ components:
       x-pipeline-types: [logs, metrics]
     ObservabilityPipelineHttpClientDestinationAuthStrategy:
       description: HTTP authentication strategy.
-      enum: [none, basic, bearer, custom]
+      enum: [none, basic, bearer]
       example: basic
       type: string
       x-enum-varnames:
         - NONE
         - BASIC
         - BEARER
-        - CUSTOM
     ObservabilityPipelineHttpClientDestinationCompression:
       description: Compression configuration for HTTP requests.
       properties:
@@ -78601,8 +78596,6 @@ components:
         - `drop`: Drop the event.
         - `no_action`: Let the event pass through.
         - `overflow_routing`: Route to an overflow destination.
-
-        When `overflow_routing` is used, there must be a destination whose `inputs` reference this processor with the `<processor-id>.overflow_events` suffix to route the overflowing events. Only the following destination types support overflow inputs: `amazon_s3_generic`, `amazon_s3`, `google_cloud_storage`, and `azure_storage`.
       enum:
         - drop
         - no_action
