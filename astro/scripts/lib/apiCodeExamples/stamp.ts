@@ -5,6 +5,7 @@
 
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { z } from "zod";
 
 /**
  * A dotfile inside the staged tree, so `rm -rf api-code-examples/` is a
@@ -12,12 +13,16 @@ import path from "node:path";
  */
 const STAMP_FILENAME = ".stamp.json";
 
-export interface StageStamp {
-  docsBranch: string;
-  refs: Record<string, string>;
-  exampleFileCount: number;
-  legacyFileCount: number;
-}
+const StageStampSchema = z
+  .object({
+    docsBranch: z.string(),
+    refs: z.record(z.string(), z.string()),
+    exampleFileCount: z.number(),
+    legacyFileCount: z.number(),
+  })
+  .strict();
+
+export type StageStamp = z.infer<typeof StageStampSchema>;
 
 export async function writeStamp(
   stagedDir: string,
@@ -29,14 +34,31 @@ export async function writeStamp(
   );
 }
 
+/**
+ * The stamp of a tree that is whole, or null when it does not parse against
+ * the current shape. A stamp written by an earlier version of `StageStamp` is
+ * the ordinary case here: reporting it as no stamp at all costs one refetch,
+ * whereas trusting it would put `undefined` into a count and print it.
+ */
+export function parseStamp(rawJson: string): StageStamp | null {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(rawJson);
+  } catch {
+    return null;
+  }
+  const result = StageStampSchema.safeParse(parsed);
+  return result.success ? result.data : null;
+}
+
 /** The stamp of a tree that is whole, or null. Never throws. */
 export async function readStampIfAny(
   stagedDir: string,
 ): Promise<StageStamp | null> {
   try {
-    return JSON.parse(
+    return parseStamp(
       await readFile(path.join(stagedDir, STAMP_FILENAME), "utf8"),
-    ) as StageStamp;
+    );
   } catch {
     return null;
   }
