@@ -513,7 +513,7 @@ Tools for looking up a cloud resource in the [Resource Catalog][74] by its provi
 ### `get_cloud_resource_details`
 *Toolset: **cloud-resources***\
 *Permissions Required: `Hosts Read` or `DDSQL Editor Read`*\
-Gets the configuration and metadata that Datadog records for a single cloud resource, identified by its provider-native identifier: an AWS ARN, an Azure resource ID, a Google Cloud resource name, or an OCID. Returns the resource's account, region, tags (including the owning team and service), and provider configuration. Use this tool when you have an identifier and need the details behind it, rather than searching for resources by attribute. If the resource is not in the [Resource Catalog][74], the tool reports that it was not found, which can mean the resource was deleted, was never ingested, or is not a supported type.
+Gets the configuration and metadata that Datadog records for a single cloud resource. Identify the resource by its provider-native identifier: an AWS ARN, an Azure resource ID, a Google Cloud resource name, or an OCID. Returns the resource's account, region, tags (including the owning team and service), and provider configuration. Use this tool when you have an identifier and need the details behind it. To find resources by attribute, use a search tool instead. If the resource is not in the [Resource Catalog][74], the tool reports that it was not found. This can mean the resource was deleted, was never ingested, or is not a supported type.
 
 - Which team owns `arn:aws:rds:us-east-1:123456789012:db:payments-primary`?
 - What account and region is this resource in: `arn:aws:ec2:us-east-1:123456789012:instance/i-0abc123def4567890`?
