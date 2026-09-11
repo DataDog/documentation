@@ -46,9 +46,10 @@ Restrictions apply in the Datadog UI and in the API. Application keys are subjec
 3. Name it something that identifies the project it protects, for example `Experiments - Fraud Detection`.
 4. Add a filter on the **Agent Observability** product, then specify the project:
    - On the Access Control page, select the project from the list of values. The list has two groups: your projects, and the applications that send traces to Agent Observability. Select from the projects group.
+       
+       <div class="alert alert-warning"><ul><li>Typing the project name, even in part or with a typo, matches no Experiments data. The project stays visible to everyone, and the restriction looks like it is working.</li><li>Projects already covered by another Restricted Dataset do not appear in the list. A project can belong to only one Restricted Dataset at a time.</li></ul></div>
+   
    - On the Data Access Controls page, enter the project ID as the `ml_app` value. See [Find a project's ID](#find-a-projects-id).
-
-   <div class="alert alert-warning">On the Access Control page:<ul><li>Typing the project name, even in part or with a typo, matches no Experiments data. The project stays visible to everyone, and the restriction looks like it is working.</li><li>Projects already covered by another Restricted Dataset do not appear in the list. A project can belong to only one Restricted Dataset at a time.</li></ul></div>
 
 5. Grant access to the teams or roles that should keep access to the project. A maximum of 50 teams or roles can be attached to one Restricted Dataset.
 6. Save the Restricted Dataset.
