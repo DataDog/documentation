@@ -1,5 +1,5 @@
 ---
-title: Configure Integrations and Settings
+title: Integrations and Settings
 aliases:
 - /bits_ai/bits_ai_sre/configure/
 ---

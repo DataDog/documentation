@@ -30,9 +30,10 @@ Bits Investigation is an autonomous AI agent that investigates production issues
 
 {{< whatsnext desc="Learn about how you can use Bits Investigation:" >}}
    {{< nextlink href="bits_ai/bits_investigation/investigate_issues" >}}Investigate issues{{< /nextlink >}}
-   {{< nextlink href="bits_ai/bits_investigation/configure" >}}Bits Investigation integrations and settings{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_investigation/configure" >}}Integrations and settings{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_investigation/knowledge_sources" >}}Knowledge sources{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_investigation/chat_bits_investigation" >}}Chat with Bits Investigation{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_investigation/getting_the_most_out" >}}Getting the most out of Bits Investigations{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
