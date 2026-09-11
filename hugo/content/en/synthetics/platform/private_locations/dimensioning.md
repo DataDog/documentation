@@ -7,6 +7,9 @@ further_reading:
 - link: "/synthetics/private_locations/monitoring"
   tag: "Documentation"
   text: "Monitor your Private Locations"
+- link: "https://www.datadoghq.com/architecture/protect-sensitive-data-with-synthetics-private-location-runners/"
+  tag: "Architecture Center"
+  text: "Protect Sensitive Data with Synthetics Private Location Runners"
 ---
 
 <div class="alert alert-info">The dimensioning recommendations are for the containerized private location.</div>
