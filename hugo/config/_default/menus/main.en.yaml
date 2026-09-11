@@ -8676,7 +8676,7 @@ menu:
       identifier: workload_protection_setup_windows
       weight: 70
     - name: Advanced Configuration
-      url: security/workload_protection/setup/advanced_configuration
+      url: security/workload_protection/workload_protection_agent_config
       parent: workload_protection_setup
       identifier: workload_protection_setup_advanced_configuration
       weight: 80
