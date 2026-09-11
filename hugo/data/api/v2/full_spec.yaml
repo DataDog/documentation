@@ -136468,7 +136468,9 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Trigger a new Bits AI investigation based on a monitor alert.
+      description: |-
+        Trigger a new Bits AI investigation based on a monitor alert.
+        The `monitors_read` permission is also required when the trigger type is `monitor_alert_trigger`.
       operationId: TriggerInvestigation
       requestBody:
         content:
@@ -136517,15 +136519,17 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - bits_investigations_write
+            - monitors_read
       summary: Trigger a Bits AI investigation
       tags:
         - Bits AI
       x-codegen-request-body-name: body
       x-menu-order: 1
       "x-permission":
-        operator: OR
+        operator: AND
         permissions:
           - bits_investigations_write
+          - monitors_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
