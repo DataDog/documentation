@@ -1,0 +1,18 @@
+# Serverless (Azure Container Apps, Cloud Run, etc.) option groups
+
+# Question: How do you want to deploy the Datadog Agent alongside your app?
+aca_instrumentation_method_options:
+  - id: in_container
+    default: true
+  - id: sidecar
+
+# Question: Which application runtime are you instrumenting?
+aca_runtime_options:
+  - id: python
+    default: true
+  - id: node_js
+  - id: go
+  - id: java
+  - id: dot_net
+  - id: ruby
+  - id: php

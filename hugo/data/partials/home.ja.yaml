@@ -1,0 +1,306 @@
+heading: Datadog ドキュメントへようこそ！
+
+guides:
+    # There can be only 3 guides in this section
+  - title: Agent のインストール
+    desc: Datadog にデータを送信するホストからイベントとメトリクスを収集します。
+    link_text: Agent の利用を開始する
+    link: getting_started/agent/
+  - title: インテグレーションのセットアップ
+    desc: "1,000 種類以上の組み込みインテグレーションを使用して、メトリクス、トレース、ログを収集し、Datadog に送信します。"
+    link_text: インテグレーションの利用を開始する
+    link: getting_started/integrations/
+  - title: アプリで利用を開始する
+    desc: Datadog で収集されたデータを可視化し、ダッシュボード、アラート、モニターなどを作成します。
+    link_text: Datadog で利用を開始する
+    link: getting_started/application/
+
+nav_sections:
+    # For a better rendering, sections should include sub-sections with multiple of 4.
+  - nav_section:
+    - name: 'オブザーバビリティ'
+    - navtiles:
+      - title: インフラストラクチャー
+        link: infrastructure/
+        icon: host-map
+        desc: ホストやインフラストラクチャーコンポーネントの健全性とパフォーマンスを確認する
+      - title: メトリクス
+        link: metrics/
+        icon: metric
+        desc: メトリクスを調査、検索し、分布を作成する
+      - title: Container Monitoring
+        link: containers/
+        icon: container
+        desc: コンテナ化された環境の健全性、パフォーマンス、セキュリティを監視する
+      - title: サーバーレス
+        link: serverless/
+        icon: serverless
+        desc: サーバーレスアプリケーションのパフォーマンス問題を検出し、解決する
+      - title: Network Monitoring
+        link: network_monitoring/
+        icon: network
+        desc: タグ付けされたオブジェクトを使用して、ネットワークトラフィックに関するデータを収集し、グラフ化する
+      - title: Cloud Cost Management
+        link: cloud_cost_management/
+        icon: cloud-cost-management
+        desc: 統合されたオブザーバビリティおよびコストデータを使用して、クラウドの支出を管理する
+      - title: Cloudcraft
+        link: cloudcraft/
+        icon: cloudcraft
+        desc: クラウドインフラストラクチャーをリアルタイムで可視化し、図式化する
+      - title: ストレージ管理
+        link: infrastructure/storage_management/
+        icon: file-wui
+        desc: クラウドストレージの支出、使用状況、データの鮮度の最適化とトラブルシューティングを行う
+      - title: APM
+        link: tracing/
+        icon: apm
+        desc: すぐに使えるパフォーマンスダッシュボードと分散トレースを調査する
+      - title: Universal Service Monitoring
+        link: universal_service_monitoring/
+        icon: usm
+        desc: コードを変更することなく、サービスを検出し、マッピングして監視する
+      - title: Continuous Profiler
+        link: profiler/
+        icon: profiling-1
+        desc: パフォーマンスのスナップショットを比較し、ボトルネックを調査する
+      - title: Database Monitoring
+        link: database_monitoring/
+        icon: database-2
+        desc: 拡充されたダッシュボード、クエリメトリクス、クエリサンプルを調査する
+      - title: Data Streams Monitoring
+        link: data_streams/
+        icon: datastreams-monitoring
+        desc: データストリーミングパイプラインのパフォーマンスを追跡し、改善する
+      - title: Data Observability
+        link: data_observability/
+        icon: data-observability-wui
+        desc: データの品質、パフォーマンス、コストを監視し、異常を検出してダウンストリームの問題を未然に防止する
+      - title: Log Management
+        link: logs/
+        icon: log
+        desc: 取り込んだログを処理し、監視して、アーカイブする
+      - title: Sensitive Data Scanner
+        link: security/sensitive_data_scanner/
+        icon: sensitive-data-scanner
+        desc: PII、API キー、クレジットカード番号などの機密データをテレメトリ全体から検出し、秘匿化する
+      - title: Observability Pipelines
+        link: observability_pipelines/
+        icon: pipelines
+        desc: テレメトリパイプラインを管理および監視する
+      - title: Error Tracking
+        link: error_tracking/
+        icon: error-tracking
+        desc: Web、モバイル、バックエンド全体で重大なエラーを特定し、解決を迅速化する
+  - nav_section:
+    - name: 'AI'
+    - navtiles:
+      - title: Bits AI エージェント
+        link: bits_ai/
+        icon: bits-ai
+        desc: 開発、セキュリティ、運用のワークフローを自動化するエージェント型のチームメイト
+      - title: Watchdog
+        link: watchdog/
+        icon: watchdog
+        desc: アプリケーションやインフラストラクチャーの異常を検出し、表面化する
+      - title: Agent Observability
+        link: llm_observability/
+        icon: llm-observability
+        desc: LLM アプリケーションをトレース、監視、保護する
+      - title: MCP サーバー
+        link: mcp_server/
+        icon: bits-ai
+        desc: AI エージェントをオブザーバビリティデータに接続し、メトリクス、ログ、トレースなどをクエリする
+  - nav_section:
+    - name: 'デジタルエクスペリエンス'
+    - navtiles:
+      - title: Real User Monitoring
+        link: real_user_monitoring/
+        icon: rum
+        desc: アプリケーションのユーザーエクスペリエンスをキャプチャし、観察して分析する
+      - title: Product Analytics
+        link: product_analytics/
+        icon: product-analytics
+        desc: ユーザーの行動を把握し、データを基に製品に関する意思決定を行う
+      - title: Session Replay
+        link: session_replay/
+        icon: session-replay
+        desc: ユーザーエクスペリエンスをキャプチャして視覚的にリプレイする
+      - title: Synthetic Monitoring
+        link: synthetics/
+        icon: synthetics
+        desc: 稼働時間を確保し、地域的な問題にフラグを立て、アプリケーションのパフォーマンスをテストする
+      - title: Mobile App Testing
+        link: mobile_app_testing/
+        icon: mobile
+        desc: モバイルアプリケーションにおけるユーザージャーニーとビジネストランザクションを監視する
+      - title: 実験
+        link: experiments/
+        icon: experiment-wui
+        desc: A/B テストを計画して実施し、結果を分析して製品変更の影響を測定する
+  - nav_section:
+    - name: 'Software Delivery'
+    - navtiles:
+      - title: Internal Developer Portal
+        link: internal_developer_portal/
+        icon: internal-developer-portal-wui
+        desc: テレメトリ、メタデータ、ワークフローを統合してデリバリーを加速する
+      - title: CI Visibility
+        link: continuous_integration/
+        icon: ci
+        desc: CI パイプラインの健全性とパフォーマンスを監視する
+      - title: Test Optimization
+        link: tests/
+        icon: flaky-test-wui
+        desc: 不安定なテストを検出し、それらのテストを導入したコミットを特定する
+      - title: Continuous Testing
+        link: continuous_testing/
+        icon: continuous-testing
+        desc: CI/CD プロバイダーとコードレスの統合テストおよびエンドツーエンドテストを実施する
+      - title: IDE Plugins
+        link: ide_plugins/
+        icon: ide
+        desc: コーディング中に IDE から直接 Datadog サービスを操作する
+      - title: DORA Metrics
+        link: delivery_performance/dora_metrics/
+        icon: ci
+        desc: 組織のソフトウェアデリバリープロセスを測定し、改善する
+      - title: Feature Flags
+        link: feature_flags/
+        icon: signpost
+        desc: 機能を切り替え、A/B テストを実施して、コードをデプロイせずに段階的に機能をロールアウトする
+      - title: Code Coverage
+        link: code_coverage/
+        icon: code-3
+        desc: カバレッジデータの傾向を可視化し、カバレッジのしきい値に基づいて PR マージをブロックする
+  - nav_section:
+    - name: 'Security'
+    - navtiles:
+      - title: Cloud SIEM
+        link: security/cloud_siem/
+        icon: siem
+        desc: クラウドおよびオンプレミスシステム全体にわたるセキュリティ脅威を検出し、調査して対応する
+      - title: Code Security
+        link: security/code_security/
+        icon: security-code-security
+        desc: コード、依存関係、および Infrastructure as Code の脆弱性を検出して修正する
+      - title: Cloud Security
+        link: security/cloud_security_management/
+        icon: cloud-security-management
+        desc: クラウドインフラストラクチャー全体の構成を継続的に監査し、アイデンティティに関するリスクを評価して、脅威を検出する
+      - title: アプリおよび API 保護
+        link: security/application_security/
+        icon: app-sec
+        desc: 本番環境のアプリケーションと API を標的とする脅威をリアルタイムで検出し、ブロックする
+      - title: Workload Protection
+        link: security/workload_protection/
+        icon: security-workload-security
+        desc: ファイル、ネットワーク、およびプロセスのアクティビティを監視し、インフラストラクチャーがさらされているリアルタイムの脅威を検出する
+      - title: Sensitive Data Scanner
+        link: security/sensitive_data_scanner/
+        icon: sensitive-data-scanner
+        desc: PII、API キー、クレジットカード番号などの機密データをテレメトリ全体から検出し、秘匿化する
+  - nav_section:
+    - name: 'Service Management'
+    - navtiles:
+      - title: Incident Management
+        link: service_management/incident_management
+        icon: incidents
+        desc: 組織に混乱を招くインシデントを特定し、分析して軽減する
+      - title: オンコール
+        link: incident_response/on-call/
+        icon: on-call
+        desc: オンコールスケジュールとページングを使用して、アラートを適切なチームメンバーにルーティングおよびエスカレーションする
+      - title: ステータスページ
+        link: incident_response/status_pages/
+        icon: status-page-wui
+        desc: サービスの可用性とインシデントの最新情報をユーザーや関係者に伝える
+      - title: Service Level Objectives
+        link: service_level_objectives/
+        icon: slos
+        desc: 一貫性のある顧客体験を提供するために、パフォーマンス目標を定義して追跡する
+      - title: Case Management
+        link: incident_response/case_management/
+        icon: case-management
+        desc: 一元化されたオーナーシップとチームコラボレーションにより、問題をトリアージ、追跡、修正する
+      - title: Workflow Automation
+        link: service_management/workflows/
+        icon: workflows
+        desc: 技術スタック全体でプロセスを自動化およびオーケストレーションする
+      - title: App Builder
+        link: service_management/app_builder/
+        icon: app-builder
+        desc: 社内ツールの合理化を目的に、ローコードアプリケーションを作成する
+  - nav_section:
+    - name: 'プラットフォームの機能と Datadog の拡張'
+    - navtiles:
+      - title: モニターと Alerting
+        link: monitors/
+        icon: monitor
+        desc: モニターと通知を作成、編集、管理する
+      - title: Dashboards
+        link: dashboards/
+        icon: dashboard
+        desc: データを可視化して分析し、インサイトを生成する
+      - title: Notebooks
+        link: notebooks/
+        icon: notebook
+        desc: 調査、事後分析、ランブックのために、ライブグラフを含むリッチテキストドキュメントを作成する
+      - title: モバイルアプリ
+        link: mobile/
+        icon: mobile
+        desc: Datadog のアラートやインシデントなどをモバイルデバイスで表示する
+      - title: Fleet Automation
+        link: agent/fleet_automation/
+        icon: fleet-automation-wui
+        desc: Agent をリモートで大規模に構成、アップグレード、管理する
+      - title: アカウント管理
+        link: account_management/
+        icon: cog-2
+        desc: 組織ベースの設定、請求、データアクセス制御を管理する
+      - title: Event Management
+        link: events/
+        icon: events
+        desc: アプリケーションやインフラストラクチャーにおける重要な変更やアラートを追跡する
+      - title: OpenTelemetry
+        link: opentelemetry/
+        icon: open-telemetry
+        desc: OpenTelemetry のメトリクス、ログ、トレースを Datadog に取り込む
+      - title: Integrations
+        link: integrations/
+        icon: integrations
+        desc: アプリケーション、サービス、システムに関するデータを収集する
+      - title: API
+        link: api/latest/
+        icon: api
+        desc: Datadog API を試す
+      - title: データセキュリティ
+        link: data_security/
+        icon: security-lock
+        desc: Datadog によるデータ保護の仕組みを確認する
+      - title: クライアント SDK
+        link: client_sdks/
+        icon: building-block
+        desc: 使用中のプラットフォーム対応の Datadog SDK をインストールして構成する
+      - title: Datadog の拡張
+        link: extend/
+        icon: dev-code
+        desc: Datadog プラットフォームを拡張する
+      - title: パートナー
+        link: partners/
+        icon: colab
+        desc: ベストプラクティスについて学び、クライアントの環境の監視を開始しましょう。
+
+popular_searches:
+  - title: API ドキュメント
+    link: api/
+    weight: 10
+  - title: Agent のインストール
+    link: getting_started/agent/
+    weight: 20
+  - title: ログ収集
+    link: logs/log_collection/
+    weight: 30
+  - title: インテグレーションのセットアップ
+    link: integrations/
+    weight: 40

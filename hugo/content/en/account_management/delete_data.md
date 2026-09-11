@@ -1,0 +1,77 @@
+---
+title: Delete Data
+description: Delete logs data from Datadog with proper permissions, time-based queries, and audit trail logging for compliance.
+further_reading:
+    - link: '/account_management/rbac/'
+      tag: 'Documentation'
+      text: 'Learn about roles and permissions'
+    - link: '/account_management/audit_trail/'
+      tag: 'Documentation'
+      text: 'Monitor user activity with Audit Trail'
+---
+
+This page explains how to delete sensitive data that should not have been ingested into Datadog.
+
+## Delete non-Logs data
+
+To delete data from a product other than Logs, contact [Support][1] with your request.
+
+## Delete Logs data
+
+You can delete data from the Logs product using the UI.
+
+### Enable deletion feature
+
+Logs Data Deletion can only be enabled by Organization Admins. To enable Logs Data Deletion::
+1. Under Organization Settings, go to Preferences.
+2. Toggle on {{< ui >}}Logs Data Deletion{{< /ui >}} and save.
+
+To grant a user the ability to delete logs:
+1. Under Organizational Settings, go to [Roles][3].
+2. Create a role that has the {{< ui >}}Logs Delete Data{{< /ui >}} permission.
+
+### Start deletions
+
+<div class="alert alert-info">A deletion request can be canceled up to 10 days after submission.</div>
+
+<div class="alert alert-danger"><strong>For Logs</strong>: Data deletion is permanent after 10 days. Please review your deletion requests carefully.</div>
+
+To delete data, perform the following steps:
+
+1. Under Organization Settings, go to [Data Deletion][4].
+2. Select a product to delete from. 
+3. Select a time frame to search across.
+4. Query for events within the time frame to delete.
+5. After the search shows the results you wish to delete, click the {{< ui >}}Delete{{< /ui >}} button in the bottom right.
+6. Confirm the deletion by selecting the checkbox and entering the requested confirmation text. 
+7. Click {{< ui >}}Confirm{{< /ui >}}.
+
+The deletion begins instantly after you confirm the request; target data is inaccessible.
+
+From the [Deletion History][5] tab, you can see the status of deletions. You can also search deletions in [Audit Trail][6] using the search string `@asset.name:"Data Deletion"`.
+
+**Notes**:
+- Deletions start instantly after confirmation. In some cases, records arriving after the job has started might not be deleted because the deletion has already processed the time window that record occurred in.
+- When deleting a record, data derived from that record is not deleted (for example, Metrics generated from Logs).
+- A maximum of 5 concurrent deletions are supported.
+
+### Cancel deletions
+
+**Note**: When a deletion request is created, it is in a recoverable status for 10 days. During this period, deleted data is inaccessible in Datadog but recovered if the deletion request is canceled.
+
+To cancel a deletion, click {{< ui >}}Cancel{{< /ui >}} on an {{< ui >}}Upcoming{{< /ui >}} or {{< ui >}}Done (Recoverable){{< /ui >}} job.
+
+### Audit deletions
+
+Deletions are logged in [Deletion History][5] for 90 days. They are also logged in [Audit Trail][6] alongside the requesting user's details.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://www.datadoghq.com/support/
+[2]: /account_management/rbac/permissions/
+[3]: https://app.datadoghq.com/organization-settings/roles
+[4]: https://app.datadoghq.com/organization-settings/data-deletion
+[5]: https://app.datadoghq.com/organization-settings/data-deletion?data-deletion-tab=deletion-history
+[6]: https://app.datadoghq.com/audit-trail?query=@asset.name:"Data%20Deletion"

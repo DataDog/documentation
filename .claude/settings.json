@@ -36,5 +36,19 @@
       "mcp__atlassian__getAccessibleAtlassianResources",
       "mcp__atlassian__searchJiraIssuesUsingJql"
     ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/block-master-git.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
   }
 }

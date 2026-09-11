@@ -1,0 +1,75 @@
+menu:
+  partners:
+    - name: Getting Started
+      url: /partners/getting_started/
+      identifier: getting-started
+      weight: 1
+    - name: Laying the Groundwork
+      url: /partners/getting_started/laying-the-groundwork/
+      identifier: laying-the-groundwork
+      parent: getting-started
+      weight: 10
+    - name: Data Intake
+      url: /partners/getting_started/data-intake/
+      identifier: data-intake
+      parent: getting-started
+      weight: 20
+    - name: Delivering Value
+      url: /partners/getting_started/delivering-value
+      identifier: delivering-value
+      parent: getting-started
+      weight: 30
+    - name: Billing and Usage Reporting
+      url: /partners/getting_started/billing-and-usage-reporting/
+      identifier: billing-and-usage-reporting
+      parent: getting-started
+      weight: 40
+    - name: Sales Enablement
+      url: /partners/sales-enablement/
+      identifier: sales-enablement
+      weight: 2
+    - name: Cloud Cost Management
+      url: /partners/cloud_cost_management/
+      identifier: cloud-cost-management
+      weight: 3
+    - name: AWS
+      url: /partners/cloud_cost_management/aws/
+      identifier: cloud-cost-management-aws
+      parent: cloud-cost-management
+      weight: 50
+    - name: Multi-Tenant Usage Metering and Billing
+      url: /partners/multi_tenant_billing/
+      identifier: multi-tenant-billing
+      weight: 4
+    - name: Onboarding a New Customer
+      url: /partners/multi_tenant_billing/customer-onboarding/
+      identifier: multi-tenant-billing-customer-onboarding
+      parent: multi-tenant-billing
+      weight: 10
+    - name: Trial Org Provisioning
+      url: /partners/multi_tenant_billing/trial-org-provisioning/
+      identifier: multi-tenant-billing-trial-org-provisioning
+      parent: multi-tenant-billing
+      weight: 20
+    - name: Cost and Usage Visibility
+      url: /partners/multi_tenant_billing/cost-and-usage-visibility/
+      identifier: multi-tenant-billing-cost-and-usage-visibility
+      parent: multi-tenant-billing
+      weight: 30
+    - name: Centralized Usage Metrics
+      url: /partners/multi_tenant_billing/centralized-usage-metrics/
+      identifier: multi-tenant-billing-centralized-usage-metrics
+      parent: multi-tenant-billing
+      weight: 40
+    - name: Customer Contracts
+      url: /partners/multi_tenant_billing/customer-contracts-management/
+      identifier: multi-tenant-billing-customer-contracts-management
+      parent: multi-tenant-billing
+      weight: 50
+    - name: Troubleshooting
+      url: /partners/multi_tenant_billing/troubleshooting/
+      identifier: multi-tenant-billing-troubleshooting
+      parent: multi-tenant-billing
+      weight: 70
+
+
