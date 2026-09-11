@@ -116,7 +116,7 @@ If the sum of the file size for <code>javascript.364758.min.js</code> and <code>
 
 ## Upload your source maps
 
-The best way to upload source maps is to add an extra step in your CI pipeline and run the dedicated command from the [Datadog CLI][1]. It scans the `dist` directory and subdirectories to automatically upload source maps with relevant minified files.
+To upload your source maps, choose one of the following matching methods: Debug ID (recommended) or service and version. Debug IDs enable source map resolution across micro frontends.
 
 {{< tabs >}}
 {{% tab "Debug ID (Recommended)" %}}
@@ -179,6 +179,8 @@ The `inject` command modifies JavaScript bundles and source maps in place. Run i
 
 {{% /tab %}}
 {{% tab "Service and version" %}}
+
+To upload source maps using a service and version, add an extra step to your CI pipeline that runs the `datadog-ci sourcemaps upload` command. It scans the `dist` directory and subdirectories to automatically upload source maps with the relevant minified files.
 
 {{< site-region region="us" >}}
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
