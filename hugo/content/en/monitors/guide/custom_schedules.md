@@ -97,7 +97,7 @@ The timeline below illustrates the behavior of a monitor running on a custom sch
 
 ## Group retention
 
-Most monitors have a default [group-retention period][3] of 24 or 48 hours, after which a group that has stopped reporting is removed from the monitor and no longer evaluated. Monitors with custom schedules retain groups for significantly longer, and their retention scales with the evaluation frequency you configure:
+By default, [groups are retained][3] for 24 or 48 hours after a group stops reporting, then removed from the monitor. Monitors with custom schedules retain groups much longer, and their retention scales with the evaluation frequency you configure:
 | Evaluation Frequency | Group Retention |
 |-----------------------|------------------|
 | Daily                 | 30 days          |
