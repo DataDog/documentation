@@ -7,6 +7,12 @@ aliases:
     - /observability_pipelines/install_the_worker/set_up_the_worker_in_ecs_fargate/
     - /observability_pipelines/guide/set_up_the_worker_in_ecs_fargate/
 further_reading:
+- link: "https://www.datadoghq.com/architecture/observability-pipelines-kubernetes-deployment/"
+  tag: "Architecture Center"
+  text: "Observability Pipelines Kubernetes Deployment"
+- link: "https://www.datadoghq.com/architecture/op-vm-deployment/"
+  tag: "Architecture Center"
+  text: "Observability Pipelines VM Deployment"
 - link: "/observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/"
   tag: "Documentation"
   text: "Advanced Worker configurations"
