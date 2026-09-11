@@ -66,7 +66,7 @@ Select a customer to open their contract detail panel. The {{< ui >}}Current Con
 
 {{< img src="account_management/plan_and_usage/customer-contracts-detail.png" alt="Contract detail panel for a customer showing the spend overview, drawdown depletion progress bar, and contract info sidebar" >}}
 
-For convenience, you can set a customer's rates directly from the {{< ui >}}Custom Pricing Configuration{{< /ui >}} tab of this panel instead of going to the [Customer Pricing][2] page.
+You can set a customer's rates directly from the {{< ui >}}Custom Pricing Configuration{{< /ui >}} tab of this panel instead of going to the [Customer Pricing][2] page.
 
 ## Monitor invoices
 
