@@ -62,9 +62,9 @@ A wrong application ID silently drops events server-side. Double-check the value
 
 ## Events appear, but stack traces are not symbolicated
 
-For native iOS and Android crashes, dSYMs (iOS) and `mapping.txt` (Android) must be uploaded to Datadog. See [Get deobfuscated stack traces][6] for the full pipeline.
+For native iOS crashes, the `.dSYM` bundle must be uploaded to Datadog. See [Get symbolicated stack traces][6] for the full pipeline.
 
-For managed C# stack traces, Portable PDB files must be bundled in the published app. See [Bundle Portable PDB files for C# stack traces][7].
+Managed C# stack traces resolve to method names only; file names and line numbers are not available. See [Managed C# stack traces][7] for details.
 
 ## C# errors and native crashes appear twice
 
@@ -96,8 +96,8 @@ See [Symbol upload troubleshooting][11] for the full diagnostic list.
 [3]: /real_user_monitoring/application_monitoring/maui/setup/#initialize-the-datadog-sdk
 [4]: /real_user_monitoring/application_monitoring/maui/setup/#set-tracking-consent-gdpr-compliance
 [5]: https://app.datadoghq.com/rum/application/create
-[6]: /real_user_monitoring/application_monitoring/maui/error_tracking/#get-deobfuscated-stack-traces
-[7]: /real_user_monitoring/application_monitoring/maui/error_tracking/#bundle-portable-pdb-files-for-c-stack-traces
+[6]: /real_user_monitoring/application_monitoring/maui/error_tracking/#get-symbolicated-stack-traces
+[7]: /real_user_monitoring/application_monitoring/maui/error_tracking/#managed-c-stack-traces
 [8]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events
 [9]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#known-limitation-gesture-driven-navigation
 [10]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#add-view-attributes

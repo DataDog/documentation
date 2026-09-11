@@ -21,7 +21,7 @@ further_reading:
 
 Error Tracking processes errors collected from the .NET MAUI SDK.
 
-Enable .NET MAUI Crash Reporting and Error Tracking to get comprehensive crash reports, deobfuscated stack traces, and error trends across iOS and Android. Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
+Enable .NET MAUI Crash Reporting and Error Tracking to get comprehensive crash reports, symbolicated native iOS stack traces, and error trends across iOS and Android. Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ### C# error tracking
 
@@ -58,15 +58,15 @@ If you want to keep only one of the two, use [`ErrorEventMapper`][5] to drop whi
 
 If you have not set up the .NET MAUI SDK yet, follow the [in-app setup instructions][2] or see the [.NET MAUI setup documentation][3].
 
-## Get deobfuscated stack traces
+## Get symbolicated stack traces
 
-To resolve obfuscated method names and crash addresses, you need to make the right symbol artifacts available — some are uploaded to Datadog server-side, others are bundled into the app for on-device resolution.
+To resolve method names and crash addresses in native iOS crash reports, upload your app's `.dSYM` bundle to Datadog. Symbolication then happens server-side on each crash event.
 
-| Stack trace type | Symbol file | Where it lives | How it's resolved |
-|---|---|---|---|
-| Native iOS crashes (and AOT-compiled C# method names) | `.dSYM` bundle | Uploaded to Datadog | Server-side, on each crash event |
-| Obfuscated Android Java/Kotlin frames | `mapping.txt` (R8/ProGuard) | Uploaded to Datadog | Server-side, on each crash event |
-| Managed C# exceptions (file names + line numbers) | Portable PDB (`.pdb`) | Bundled in the published app | On-device by the .NET runtime when the exception is caught |
+| Stack trace type | Symbol file | How it's resolved |
+|---|---|---|
+| Native iOS crashes (and AOT-compiled C# method names) | `.dSYM` bundle | Uploaded to Datadog, resolved server-side on each crash event |
+
+The iOS `.dSYM` bundle is the only symbol file the SDK uploads. Android R8/ProGuard mapping files and Portable PDB files are not uploaded — see [Limitations](#limitations).
 
 ### Upload symbols with `datadog-ci`
 
@@ -96,34 +96,12 @@ For local testing, you can pass the key as an MSBuild property (`-p:DatadogApiKe
 
 Set `DatadogUploadSymbols=true` either as a `<PropertyGroup>` entry in your `.csproj` or on the `dotnet publish` command line. The MSBuild targets run automatically after publish and skip silently if `datadog-ci` is missing or the API key is unset.
 
-##### iOS
-
 ```bash
 dotnet publish -c Release -f net10.0-ios -r ios-arm64 \
   -p:DatadogUploadSymbols=true
 ```
 
 The `.dSYM` bundle generated next to the `.app` is uploaded. dSYMs are only produced for device builds (`-r ios-arm64`); simulator builds (`iossimulator-arm64`) skip the upload.
-
-##### Android
-
-By default, .NET MAUI Android Release builds do not run R8, so no `mapping.txt` is produced. Add the following to your `.csproj` to enable it:
-
-```xml
-<PropertyGroup Condition="'$(Configuration)' == 'Release'">
-  <AndroidLinkTool>r8</AndroidLinkTool>
-  <AndroidCreateProguardMappingFile>true</AndroidCreateProguardMappingFile>
-</PropertyGroup>
-```
-
-Then publish:
-
-```bash
-dotnet publish -c Release -f net10.0-android \
-  -p:DatadogUploadSymbols=true
-```
-
-The R8 `mapping.txt` is uploaded from `bin/Release/net10.0-android/`.
 
 ### Configuration
 
@@ -152,30 +130,21 @@ dotnet publish -c Release -f net10.0-ios -r ios-arm64 \
 
 After upload, symbols take up to 5 minutes to process. You can confirm they were received under [{{< ui >}}Error Tracking{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Symbol Files{{< /ui >}}][4].
 
-### Bundle Portable PDB files for C# stack traces
-
-Portable PDB files (`.pdb`) carry the source file and line number information used by the .NET runtime when it formats a managed exception's stack trace. They are **not uploaded to Datadog** — the runtime reads them on-device, and the formatted stack trace is captured by the SDK and sent as part of the error event.
-
-For this to work, the `.pdb` files for your assemblies must be present in the published app bundle.
-
-In a typical .NET MAUI Release publish this is already the case: `dotnet publish` includes Portable PDBs in the output alongside each assembly, and the MAUI packaging step copies them into the `.app` (iOS) or `.apk`/`.aab` (Android) container.
-
-If you have explicitly disabled debug symbols in your `.csproj` (for example, `<DebugType>none</DebugType>` or `<DebugSymbols>false</DebugSymbols>`), managed C# exceptions in your app's code show only method names — no file paths or line numbers. Restore symbols for Release configurations:
-
-```xml
-<PropertyGroup Condition="'$(Configuration)' == 'Release'">
-  <DebugType>portable</DebugType>
-  <DebugSymbols>true</DebugSymbols>
-</PropertyGroup>
-```
-
-This adds no measurable runtime overhead — the PDBs are only consulted when an exception is thrown.
-
 ## Limitations
+
+### Managed C# stack traces
+
+Managed C# exception stack traces resolve to method names only. File names and line numbers are not available yet.
+
+.NET MAUI Release builds AOT-compile C# ahead of shipping, so the runtime on the device cannot map a frame back to a source location: on iOS the minimal runtime cannot read Portable PDB files at all, and on Android AOT-compiled frames report `Unknown Source`. Resolving these frames requires combining your app's Portable PDB (`.pdb`) with the platform's native debug information server-side, which is not supported. Portable PDB files are not uploaded to Datadog, and bundling them into the app does not add file or line information to reported stack traces.
+
+### Android symbol upload
+
+Symbol upload is not supported for Android builds. R8/ProGuard `mapping.txt` files are not uploaded, so obfuscated Java/Kotlin frames in Android crash reports are not deobfuscated. Android crashes are still collected and reported — only the deobfuscation step is unavailable.
 
 ### File sizing
 
-Mapping files (Android) are limited to **500 MB** each. dSYM bundles (iOS) can go up to **2 GB** each.
+dSYM bundles (iOS) can go up to **2 GB** each.
 
 ### Collection
 
@@ -187,7 +156,7 @@ The SDK handles crash reporting with the following behaviors:
 
 ### Android NDK crash symbols
 
-When `NativeCrashReportEnabled = true`, native (C/C++) crashes captured by `dd-sdk-android-ndk` require unstripped `.so` files for symbolication. The R8 `mapping.txt` only covers Java/Kotlin obfuscation; it does not help with native frames.
+When `NativeCrashReportEnabled = true`, native (C/C++) crashes captured by `dd-sdk-android-ndk` require unstripped `.so` files for symbolication.
 
 In a MAUI app, the native `.so` files typically come from the .NET runtime (`libmonosgen-2.0.so`, `libmonodroid.so`) and from Datadog's own NDK library — Datadog resolves these server-side; no manual upload is needed for either. If you ship custom native C/C++ libraries, upload their symbols manually with `datadog-ci dsyms upload <path-to-so-directory>`.
 
@@ -206,7 +175,7 @@ To verify your Crash Reporting and Error Tracking configuration, trigger a crash
    ```
 
 3. After the crash, restart your application and wait for the SDK to upload the crash report.
-4. Confirm the event in [{{< ui >}}Error Tracking{{< /ui >}}][1] with deobfuscated frames.
+4. Confirm the event in [{{< ui >}}Error Tracking{{< /ui >}}][1]. For a native iOS crash from a device build, the frames are symbolicated.
 
 ## Troubleshooting
 
@@ -218,9 +187,6 @@ Export the key in your shell: `export DATADOG_API_KEY=<YOUR_DATADOG_API_KEY>`. V
 
 **`Skipping dSYM upload — file not found`**
 dSYMs are only generated for device builds (`-r ios-arm64`). Simulator builds do not produce dSYMs.
-
-**`Skipping mapping upload — mapping.txt not found`**
-Make sure R8 is enabled with `<AndroidLinkTool>r8</AndroidLinkTool>` and `<AndroidCreateProguardMappingFile>true</AndroidCreateProguardMappingFile>` in your `.csproj`.
 
 **No Datadog output visible during publish**
 The terminal logger hides informational messages. Add `-v n -tl:off` to your `dotnet publish` command.
