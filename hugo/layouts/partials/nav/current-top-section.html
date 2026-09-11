@@ -1,0 +1,27 @@
+{{- /*
+  Returns the Identifier of the top-level main-menu entry (Level 1, e.g. "APM", "Profiler")
+  that the current page belongs to, or "" if the page isn't part of the main menu tree.
+
+  left-nav.html only renders a top-level entry's Levels 3-4 when the current page belongs to
+  that entry, so this value is exactly what left-nav.html's rendered HTML depends on. It's
+  computed here, up front, so it can be used as the partialCached key for left-nav.html --
+  caching by .Section alone is unsound, since two pages can share a Hugo content section while
+  belonging to different (or no) top-level menu entries, or a page may not be in the menu at all.
+
+  This site's main menu is defined entirely in config (config/_default/menus/main.*.yaml) as
+  plain url: strings, not via page front matter, so entries have no .Page and Hugo's built-in
+  .IsMenuCurrent/.HasMenuCurrent (which rely on .Page identity) never match -- comparing URLs
+  directly is what actually works here.
+*/ -}}
+{{- $currentPage := . -}}
+{{- $curURL := trim $currentPage.RelPermalink "/" -}}
+{{- $identifier := "" -}}
+{{- range .Site.Menus.main -}}
+    {{- range .Children -}}
+        {{- $menuURL := trim (.URL | relLangURL) "/" -}}
+        {{- if and (eq $identifier "") (ne $menuURL "") (or (eq $curURL $menuURL) (strings.HasPrefix $curURL (printf "%s/" $menuURL))) -}}
+            {{- $identifier = .Identifier -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- $identifier -}}
