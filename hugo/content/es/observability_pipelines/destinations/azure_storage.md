@@ -12,42 +12,42 @@ title: Destino de Azure Storage
 
 ## Descripción general {#overview}
 
-Utilice el destino de Azure Storage para enviar registros a un contenedor de Azure Storage. Si desea enviar registros a Azure Storage para [archivado][1] y [rehidratación][2], debe [configurar Archivos de registro](#configure-log-archives). Si no desea rehidratar registros en Datadog, pase a [Configurar el destino para su canalización](#set-up-the-destination-for-your-pipeline).
+Utilice el destino de Azure Storage para enviar registros a un contenedor de Azure Storage. Si desea enviar registros a Azure Storage para [archiving][1] y [rehydration][2], debe [configurar Log Archives](#configure-log-archives). Si no desea rehidratar registros en Datadog, salte a [Configurar el destino para su pipeline](#set-up-the-destination-for-your-pipeline).
 
-## Configurar Archivos de registro {#configure-log-archives}
+## Configurar Log Archives {#configure-log-archives}
 
-Este paso solo es necesario si desea enviar registros a Azure Storage en un formato rehidratable por Datadog para [archivado][1] y [rehidratación][2], y aún no tiene un Datadog Log Archive configurado para Observability Pipelines. Si ya tiene un Datadog Log Archive configurado o no desea rehidratar registros en Datadog, pase a [Configurar el destino para su canalización](#set-up-the-destination-for-your-pipeline).
+Este paso solo es necesario si desea enviar registros a Azure Storage en un formato rehidratable por Datadog para [archiving][1] y [rehydration][2], y aún no tiene un Datadog Log Archive configurado para Observability Pipelines. Si ya tiene un Datadog Log Archive configurado o no desea rehidratar registros en Datadog, salte a [Configurar el destino para su pipeline](#set-up-the-destination-for-your-pipeline).
 
-Necesita tener instalada la [integración de Azure][3] de Datadog para configurar Datadog Log Archives.
+Necesita tener instalada la integración de [Azure][3] de Datadog para configurar Datadog Log Archives.
 
-#### Cree una cuenta de almacenamiento {#create-a-storage-account}
+#### Crear una cuenta de almacenamiento {#create-a-storage-account}
 
-Cree una [cuenta de almacenamiento de Azure][13] si aún no tiene una.
+Cree una [Azure storage account][13] si aún no tiene una.
 
-1. Navegue a [Cuentas de almacenamiento][14].
-1. Haga clic en **Create**.
+1. Navegue a [Storage accounts][14].
+1. Haga clic en **Crear**.
 1. Seleccione el nombre de la suscripción y el nombre del recurso que desea utilizar.
 1. Ingrese un nombre para su cuenta de almacenamiento.
 1. Seleccione una región en el menú desplegable.
-1. Seleccione el tipo de cuenta de rendimiento **Estándar** o **Premium**.
-1. Haga clic en **Next**.
+1. Seleccione el tipo de cuenta de rendimiento **Standard** o **Premium**.
+1. Haga clic en **Siguiente**.
 1. En la sección **Blob storage**, seleccione **Hot** o **Cool**.
-1. Haga clic en **Review + create**.
+1. Haga clic en **Revisar + crear**.
 
-#### Cree un contenedor de almacenamiento {#create-a-storage-bucket}
+#### Crear un contenedor de almacenamiento {#create-a-storage-bucket}
 
-1. En su cuenta de almacenamiento, haga clic en **Contenedores** en **Almacenamiento de datos** en el menú de navegación izquierdo.
+1. En su cuenta de almacenamiento, haga clic en **Containers** bajo **Data storage** en el menú de navegación izquierdo.
 1. Haga clic en **+ Container** en la parte superior para crear un contenedor.
 1. Ingrese un nombre para el nuevo contenedor. Este nombre se utiliza más adelante cuando configura el destino de Azure Storage de Observability Pipelines.
 
-**Nota**: No establezca [políticas de inmutabilidad][15] porque es posible que los datos más recientes deban sobrescribirse en casos excepcionales (normalmente cuando hay un tiempo de espera).
+**Nota**: No establezca [políticas de inmutabilidad][15] porque es posible que los datos más recientes deban sobrescribirse en casos excepcionales (normalmente cuando hay un tiempo de espera agotado).
 
 #### Conecte el contenedor de Azure a Datadog Log Archives {#connect-the-azure-container-to-datadog-log-archives}
 
-1. Navegue a [Log Forwarding][16] de Datadog.
+1. Vaya a [Log Forwarding][16] de Datadog.
 1. Haga clic en **New archive**.
-1. Ingrese un nombre descriptivo para el archive.
-1. Agregue una consulta que filtre todos los registros que pasan por las canalizaciones de registros para que ninguno de esos registros vaya a este archivo. Por ejemplo, agregue la consulta `observability_pipelines_read_only_archive`, asumiendo que ningún registro que pasa por la canalización tiene esa etiqueta agregada.
+1. Ingrese un nombre descriptivo para el archivo.
+1. Agregue una consulta que filtre todos los registros que pasan por las canalizaciones de registros para que ninguno de esos registros vaya a este archivo. Por ejemplo, agregue la consulta `observability_pipelines_read_only_archive`, asumiendo que ningún registro que pase por la canalización tiene esa etiqueta agregada.
 1. Seleccione **Azure Storage**.
 1. Seleccione el inquilino y el cliente de Azure en los que se encuentra su cuenta de almacenamiento.
 1. Ingrese el nombre de la cuenta de almacenamiento.
@@ -56,17 +56,17 @@ Cree una [cuenta de almacenamiento de Azure][13] si aún no tiene una.
 1. Opcionalmente, establezca permisos, agregue etiquetas y defina el tamaño máximo de escaneo para la rehidratación. Consulte [Configuración avanzada][17] para obtener más información.
 1. Haga clic en **Guardar**.
 
-Consulte la [documentación de Archivos de registro][1] para obtener información adicional.
+Consulte la [documentación de Log Archives][1] para obtener información adicional.
 
-## Configure el destino para su canalización {#set-up-the-destination-for-your-pipeline}
+## Configure el destino para su pipeline {#set-up-the-destination-for-your-pipeline}
 
-<div class="alert alert-danger">Para la gestión de secretos: Solo ingrese el identificador de la cadena de conexión de Azure. <b>No</b> ingrese el valor real.</div>
+<div class="alert alert-danger">Para la administración de secretos: solo ingrese el identificador para la cadena de conexión de Azure. <b>No</b> ingrese el valor real.</div>
 
-Configure el destino de Azure Storage cuando [configure una canalización][4]. Puede configurar una canalización en la [UI][7], usando la [API][8] o con [Terraform][9]. Los pasos en esta sección se configuran en la UI.
+Configure el destino de Azure Storage cuando [configure un pipeline][4]. Puede configurar una canalización en la [UI][7], utilizando la [API][8] o con [Terraform][9]. Los pasos en esta sección se configuran en la interfaz de usuario.
 
-Después de seleccionar el destino de Azure Storage en la UI de la canalización:
+Después de seleccionar el destino de Azure Storage en la UI del pipeline:
 
-1. Ingrese el identificador de su cadena de conexión de Azure. Si lo deja en blanco, se utiliza el [default](#secret-defaults).
+1. Ingrese el identificador para su cadena de conexión de Azure. Si lo deja en blanco, se utiliza el [predeterminado](#secret-defaults).
 1. Ingrese el nombre del contenedor de Azure que creó anteriormente.
 
 {{% observability_pipelines/secrets_env_var_note %}}
@@ -77,22 +77,28 @@ Después de seleccionar el destino de Azure Storage en la UI de la canalización
 
 Ingrese un prefijo que desee aplicar a todos los objetos clave.
 
-- Los prefijos son útiles para particionar objetos. Por ejemplo, puede usar un prefijo como clave de objeto para almacenar objetos en un directorio en particular. Si usa un prefijo para este propósito, debe terminar en `/` para actuar como una ruta de directorio; una `/` al final no se agrega automáticamente.
+- Los prefijos son útiles para particionar objetos. Por ejemplo, puede usar un prefijo como clave de objeto para almacenar objetos en un directorio particular. Si usa un prefijo para este propósito, debe terminar en `/` para actuar como una ruta de directorio; no se añade automáticamente un `/` al final.
 - Consulte la [sintaxis de plantilla][6] si desea enrutar registros a diferentes claves de objeto según campos específicos en sus registros.
 	- **Nota**: Datadog recomienda que comience sus prefijos con el nombre del directorio y sin una barra diagonal inicial (`/`). Por ejemplo, `app-logs/` o `service-logs/`.
 
-#### Buffering{#buffering}
+#### Compresión {#compression}
+
+1. En el menú desplegable {{< ui >}}Compression - Algorithm{{< /ui >}}, seleccione el algoritmo de compresión para sus registros archivados ({{< ui >}}gzip{{< /ui >}} o {{< ui >}}zstd{{< /ui >}}).
+    - **Nota**: Si no se especifica un algoritmo de compresión, se utiliza gzip con un nivel de compresión de `6`.
+1. En el campo {{< ui >}}Compression - Level {{< /ui >}}, debe ingresar un nivel de compresión. Datadog recomienda `6` para gzip y `3` para zstd.
+
+#### Almacenamiento en búfer {#buffering}
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Valores predeterminados de secretos {#secret-defaults}
+## Valores predeterminados de Secret {#secret-defaults}
 
 {{% observability_pipelines/set_secrets_intro %}}
 
 {{< tabs >}}
 {{% tab "Gestión de secretos" %}}
 
-- Identificador de cadena de conexión de Azure:
+- Identificador de la cadena de conexión de Azure:
 	- Hace referencia a la cadena de conexión que le da al Worker acceso a su contenedor de Azure Storage.
 	- El identificador predeterminado es `DESTINATION_DATADOG_ARCHIVES_AZURE_BLOB_CONNECTION_STRING`.
 
@@ -105,9 +111,9 @@ Ingrese un prefijo que desee aplicar a todos los objetos clave.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Métricas de salud{#health-metrics}
+## Métricas de salud {#health-metrics}
 
-Para [métricas de componente][10] y [métricas de búfer de destino][11] emitidas por todos los destinos, consulte la documentación de [métricas de uso de Pipelines][12]. Para filtrar o agrupar por métricas de destino de Azure Storage, utilice la etiqueta `component_type:datadog_archives_azure_blob`.
+Para [métricas de componentes][10] y [métricas de búfer de destino][11] emitidas por todos los destinos, consulte la documentación de [Métricas de uso de Pipelines][12]. Para filtrar o agrupar por métricas de destino de Azure Storage, use la etiqueta `component_type:datadog_archives_azure_blob`.
 
 ## Cómo funciona el destino {#how-the-destination-works}
 
@@ -115,9 +121,9 @@ Para [métricas de componente][10] y [métricas de búfer de destino][11] emitid
 
 Un lote de eventos se vacía cuando se cumple uno de estos parámetros. Consulte [Destinations event batching][5] para obtener más información.
 
-| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+| Máximo de eventos | Tamaño máximo (MB) | Tiempo de espera (segundos)   |
 |----------------|-------------------|---------------------|
-| None           | 100               | 900                 |
+| Ninguno           | 100               | 900                 |
 
 [1]: /es/logs/log_configuration/archives/
 [2]: /es/logs/log_configuration/rehydrating/

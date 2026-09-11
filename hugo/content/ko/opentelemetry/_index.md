@@ -53,9 +53,12 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/understanding-opentelemetry
   tag: 학습 센터
   text: OpenTelemetry의 이해
+- link: https://www.datadoghq.com/blog/control-trace-volume-with-opentelemetry-tail-based-sampling/
+  tag: 블로그
+  text: OpenTelemetry 테일링 기반 샘플링으로 트레이스 볼륨을 제어합니다
 title: Datadog의 OpenTelemetry
 ---
-{{< learning-center-callout hide_image="true" header="학습 센터에서 \"OTel with Datadog 개요\" 수강해 보기er" btn_title="지금 등록" btn_url="https://learn.datadoghq.com/courses/otel-with-datadog">}}
+{{< learning-center-callout hide_image="true" header="학습 센터에서 \"OTel with Datadog 개요\" 수강해 보기" btn_title="지금 등록" btn_url="https://learn.datadoghq.com/courses/otel-with-datadog">}}
   OpenTelemetry에서 Datadog으로 메트릭, 트레이스, 로그를 내보내도록 구성하고, 플랫폼에서 수집된 데이터를 둘러보는 방법을 알아보세요.
 {{< /learning-center-callout >}}
 
@@ -136,7 +139,7 @@ OpenTelemetry와 Datadog으로 애플리케이션을 계측하는 방법은 여�
 
 직접 OTLP 수집과 같은 기타 설정 옵션은 [데이터를 Datadog에 전송][7]을 참조하세요.
 
-## 추가 자료{#further-reading}
+## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

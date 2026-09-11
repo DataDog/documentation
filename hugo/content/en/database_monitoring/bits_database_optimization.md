@@ -11,6 +11,9 @@ further_reading:
 - link: "/database_monitoring/connect_dbm_and_apm/"
   tag: "Documentation"
   text: "Correlate Database Monitoring and Traces"
+- link: "https://www.datadoghq.com/blog/how-bits-database-optimization-proves-a-query-rewrite-is-faster/"
+  tag: "Blog"
+  text: "How Bits Database Optimization proves a query rewrite is faster"
 ---
 
 <div class="alert alert-info">Bits Database Optimization is only available for PostgreSQL. To request support for another database management system, contact your Datadog representative or <a href="/help/">Datadog Support</a>.</div>

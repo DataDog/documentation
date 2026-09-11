@@ -39,6 +39,16 @@ The Runtime Prioritization Engine is designed to be explainable. For each findin
 
 The Runtime Prioritization Engine prioritizes a finding when these signals indicate real, exploitable risk in your environment. Findings that do not meet the prioritization criteria stay visible, but move out of the active triage queue.
 
+## CISA BOD 26-04 remediation timelines
+
+The Runtime Prioritization Engine computes remediation timelines that follow the risk-based approach in [CISA Binding Operational Directive (BOD) 26-04][15]. It combines signals for reachability, exposure, exploitability (including [CISA KEV][1] status), business criticality, and actionability.
+
+Datadog computes each vulnerability's remediation timeline according to the directive. The due date appears on the vulnerability finding.
+
+For more information, see [How CISA's BOD 26-04 changes vulnerability prioritization][16].
+
+{{< img src="security/cloud_security_management/bod_26_04_remediation_timeline.png" alt="The Cloud Security Vulnerabilities Explorer shows CISA BOD 26-04 remediation timelines and due dates on vulnerability findings." width="100%">}}
+
 ## Crown Jewels
 
 [Crown Jewels][8] are the resources that support your most critical business functions (services, hosts, databases, containers, etc.). Datadog automatically infers them from observability data such as APM trace flow, service dependencies (fan-in), SLOs, traffic, incidents, and more.
@@ -114,14 +124,16 @@ Datadog detects running images with either the Datadog Agent or Agentless Scanni
 [1]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 [2]: https://www.first.org/epss/
 [3]: /security/cloud_security_management/setup/
-[4]: /security/cloud_security_management/setup/agent/kubernetes/#runtime-package-prioritization-preview
+[4]: /security/cloud_security_management/setup/agent/kubernetes/#runtime-package-prioritization
 [5]: https://app.datadoghq.com/security/csm
 [6]: /security/security_inbox/
 [7]: /security/cloud_security_management/review_remediate/ownership_agent/
 [8]: /security/cloud_security_management/crown_jewels/
-[9]: /security/cloud_security_management/setup/agent/docker/#runtime-package-prioritization-preview
-[10]: /security/cloud_security_management/setup/agent/linux/#runtime-package-prioritization-preview
+[9]: /security/cloud_security_management/setup/agent/docker/#runtime-package-prioritization
+[10]: /security/cloud_security_management/setup/agent/linux/#runtime-package-prioritization
 [11]: https://app.datadoghq.com/security/csm/vm
 [12]: /containers/
 [13]: /security/cloud_security_management/setup/agentless_scanning/
 [14]: /security/cloud_security_management/vulnerabilities/
+[15]: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk
+[16]: https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/
