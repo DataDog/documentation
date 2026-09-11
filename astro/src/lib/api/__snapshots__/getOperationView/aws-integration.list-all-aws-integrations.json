@@ -74,6 +74,7 @@
                       "unionOptions": [
                         {
                           "label": "Object 1",
+                          "type": "object",
                           "description": "AWS Authentication config to integrate your account using an access key pair.",
                           "fields": [
                             {
@@ -96,6 +97,7 @@
                         },
                         {
                           "label": "Object 2",
+                          "type": "object",
                           "description": "AWS Authentication config to integrate your account using an IAM role.",
                           "fields": [
                             {
@@ -128,7 +130,7 @@
                     },
                     {
                       "name": "aws_partition",
-                      "type": "string",
+                      "type": "enum",
                       "required": false,
                       "deprecated": false,
                       "readOnly": false,
@@ -149,6 +151,7 @@
                       "unionOptions": [
                         {
                           "label": "Object 1",
+                          "type": "object",
                           "description": "Include all regions. Defaults to `true`.",
                           "fields": [
                             {
@@ -163,6 +166,7 @@
                         },
                         {
                           "label": "Object 2",
+                          "type": "object",
                           "description": "Include only these regions.",
                           "fields": [
                             {
@@ -179,7 +183,7 @@
                     },
                     {
                       "name": "created_at",
-                      "type": "string (date-time)",
+                      "type": "date-time",
                       "required": false,
                       "deprecated": false,
                       "readOnly": true,
@@ -307,6 +311,7 @@
                           "unionOptions": [
                             {
                               "label": "Object 1",
+                              "type": "object",
                               "description": "Exclude only these namespaces from metrics collection.\nDefaults to `[\"AWS/SQS\", \"AWS/ElasticMapReduce\", \"AWS/Usage\"]`.\n`AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage` are excluded by default\nto reduce your AWS CloudWatch costs from `GetMetricData` API calls.",
                               "fields": [
                                 {
@@ -321,6 +326,7 @@
                             },
                             {
                               "label": "Object 2",
+                              "type": "object",
                               "description": "Include only these namespaces.",
                               "fields": [
                                 {
@@ -365,7 +371,7 @@
                     },
                     {
                       "name": "modified_at",
-                      "type": "string (date-time)",
+                      "type": "date-time",
                       "required": false,
                       "deprecated": false,
                       "readOnly": true,
@@ -415,6 +421,7 @@
                           "unionOptions": [
                             {
                               "label": "Object 1",
+                              "type": "object",
                               "description": "Include all services.",
                               "fields": [
                                 {
@@ -429,6 +436,7 @@
                             },
                             {
                               "label": "Object 2",
+                              "type": "object",
                               "description": "Include only these services. Defaults to `[]`.",
                               "fields": [
                                 {
@@ -457,7 +465,7 @@
                 },
                 {
                   "name": "type",
-                  "type": "string",
+                  "type": "enum",
                   "required": true,
                   "deprecated": false,
                   "readOnly": false,
