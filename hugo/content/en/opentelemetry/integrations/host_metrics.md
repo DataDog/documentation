@@ -21,20 +21,16 @@ For more information, including supported operating systems, see the OpenTelemet
 
 ## Setup
 
+These examples use component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports.
+
 {{< tabs >}}
 {{% tab "Host" %}}
 
 Add the following lines to your Collector configuration:
 
 ```yaml
-processors:
-  resourcedetection:
-    detectors: [system]
-    system:
-      hostname_sources: [os]
-
 receivers:
-  hostmetrics:
+  host_metrics:
     collection_interval: 10s
     scrapers:
       paging:
@@ -55,12 +51,6 @@ receivers:
       network:
       processes:
 
-service:
-  pipelines:
-    metrics:
-      receivers: [hostmetrics]
-      processors: [resourcedetection]
-      exporters: [datadog]
 ```
 
 {{% /tab %}}
@@ -71,7 +61,7 @@ Set up the host metrics receiver on each node from which metrics need to be coll
 
 ```yaml
 receivers:
-  hostmetrics:
+  host_metrics:
     collection_interval: 10s
     scrapers:
       paging:
@@ -104,9 +94,12 @@ receivers:
 
 {{< /tabs >}}
 
+Add `host_metrics` to the `receivers` list of the metrics pipeline in your configuration. Keep the processors already in that pipeline: the Datadog OTLP metrics intake accepts delta metrics only, and the host metrics receiver produces cumulative sums, so the pipeline needs `cumulativetodelta`. The [recommended Collector setup][5] includes it.
+
+
 ## Data collected
 
-Host Metrics are collected by the [host metrics receiver][4]. For information about setting up the receiver, see [OpenTelemetry Collector Datadog Exporter][5].
+Host metrics are collected by the [host metrics receiver][4]. For information about setting up the receiver, see [Set Up the OpenTelemetry Collector][5].
 
 The metrics, mapped to Datadog metrics, are used in the following views:
 - [Infrastructure Host Map][6]
@@ -122,10 +115,6 @@ The following table lists the OpenTelemetry host metrics collected for Datadog's
 
 For the full mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][2].
 
-
-## Full example configuration
-
-For a full working example configuration with the Datadog exporter, see [`host-metrics.yaml`][3].
 
 ## Example logging output
 
@@ -176,13 +165,10 @@ Value: 1153183744
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/hostmetricsreceiver/README.md
 [2]: /opentelemetry/guide/metrics_mapping/#host-metrics
-[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/host-metrics.yaml
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
-[5]: /opentelemetry/otel_collector_datadog_exporter/
+[5]: /opentelemetry/setup/collector_exporter/
 [6]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&groupby=availability-zone
 [7]: https://app.datadoghq.com/infrastructure
-[8]: /opentelemetry/collector_exporter/#out-of-the-box-dashboards
+[8]: /opentelemetry/reference/otel_metrics/#out-of-the-box-dashboards
 [9]: /tracing/trace_explorer/trace_view/?tab=hostinfo
 [10]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
-
-

@@ -36,7 +36,7 @@ receivers:
 
 {{% tab "Kubernetes" %}}
 
-The Kafka metrics receiver needs to be used in a collector in `deployment` mode with a single replica. This ensures that the same metric is not collected multiple times. The collector in deployment mode can then leverage the Datadog Exporter to export the metrics directly to Datadog, or leverage the OTLP exporter to forward the metrics to another collector instance. 
+Use the Kafka metrics receiver in a Collector running in `deployment` mode with a single replica. This prevents the same metric from being collected multiple times. The Collector can export metrics directly to Datadog over OTLP HTTP or forward them to another Collector instance.
 
 Add the following lines to `values.yaml`:
 ```yaml
@@ -93,7 +93,7 @@ receivers:
 
 {{% tab "Kubernetes" %}}
 
-The JMX receiver needs to be used in a collector in `deployment` mode with a single replica. This ensures that the same metric is not collected multiple times. The collector in deployment mode can then leverage the Datadog Exporter to export the metrics directly to Datadog, or leverage the OTLP exporter to forward the metrics to another collector instance. 
+Use the JMX receiver in a Collector running in `deployment` mode with a single replica. This prevents the same metric from being collected multiple times. The Collector can export metrics directly to Datadog over OTLP HTTP or forward them to another Collector instance.
 
 The JMX Receiver has the following requirements:
 - JRE is available on the host in which you are running the collector.
@@ -273,10 +273,6 @@ In order to ensure this attribute only gets added to your Kafka logs, use [inclu
 
 For the full mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][9].
 
-## Full example configuration
-
-For a full working example configuration with the Datadog exporter, see [`kafka.yaml`][5].
-
 ## Example logging output
 
 ```
@@ -312,7 +308,6 @@ Please see the following [example application][6] which demonstrates the configu
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/jmxreceiver
 [3]: https://github.com/open-telemetry/opentelemetry-java-contrib/blob/main/jmx-metrics 
 [4]: /opentelemetry/collector_exporter/log_collection
-[5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/kafka.yaml
 [6]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/kafka-metrics
 [7]: https://app.datadoghq.com/dash/integration/50/kafka-zookeeper-and-kafka-consumer-overview
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/attributesprocessor/README.md#includeexclude-filtering
