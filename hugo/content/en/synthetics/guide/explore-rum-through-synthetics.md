@@ -41,17 +41,11 @@ For more information, see [Synthetic Monitoring Settings][6].
 
 ## Synthetic Monitoring to RUM Explorer
 
-Navigate to your [list of browser tests][7] and open a test to view the Test Details page. Open a test run from the {{< ui >}}Activity{{< /ui >}} or {{< ui >}}Test Runs{{< /ui >}} tab to view the run details page. The {{< ui >}}RUM{{< /ui >}} widget on this page shows the number of sessions generated, along with the {{< ui >}}View session in RUM{{< /ui >}} button.
+Navigate to your [list of browser tests][7] and open a test to view the Test Details page. Open a test run from the {{< ui >}}Activity{{< /ui >}} or {{< ui >}}Test Runs{{< /ui >}} tab to view the _run_ details page. The {{< ui >}}RUM{{< /ui >}} widget on this page shows the number of sessions generated, along with the {{< ui >}}View session in RUM{{< /ui >}} button.
 
-{{< img src="synthetics/guide/rum_in_synthetics/view_session_in_rum.png" alt="The View session in RUM button in the RUM widget on the run details page." style="width:80%;" >}}
+{{< img src="synthetics/guide/rum_in_synthetics/view_session_in_rum.png" alt="The View session in RUM button in the RUM widget on the run details page." style="width:100%;" >}}
 
-On the run details page, select a step (for example, `Click on div Checkout`), then select the {{< ui >}}Traces{{< /ui >}} tab to view RUM data from the Synthetic browser test.
-
-{{< img src="synthetics/guide/rum_in_synthetics/synthetic_test_generated_rum_data.png" alt="Browser test step details side panel with a note that the synthetic test generated RUM data." style="width:100%;" >}}
-
-The step details side panel appears with `This Synthetic test generated data in Real User Monitoring` and includes the session ID.
-
-To see this test step's errors, resources, and performance data in the [RUM Explorer][3], click {{< ui >}}View session in RUM{{< /ui >}}. Alternatively, click the {{< ui >}}Replay Session{{< /ui >}} button to explore available session replays captured in your browser test.
+In the [RUM Explorer][3], you can see this test run's errors, resources, and performance data. Click {{< ui >}}Replay Session{{< /ui >}} to explore available session replays captured in your browser test.
 
 ## RUM Explorer to Synthetic Monitoring
 
