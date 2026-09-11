@@ -29,7 +29,7 @@ Install the SCFW CLI locally so package manager commands can be inspected before
 
 SCFW is distributed as a single Go binary with no runtime dependencies, and runs on macOS and common Linux distributions. Windows is not supported.
 
-You can install SCFW with Go or with a GitHub release. 
+You can install SCFW 4.0.0 and later with Go or with a GitHub release. 
 
 To inspect package manager commands in CI instead of locally, see the [Supply Chain Firewall GitHub Action][3].
 
