@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The Datadog Feature Flags Java, Node.js, and Python SDKs can receive flag configuration directly from the Datadog-managed CDN. This _agentless_ configuration source simplifies onboarding because it does not require a Datadog Agent for flag configuration. It also supports serverless applications that cannot connect to a Datadog Agent.
+The Datadog Feature Flags Go, Java, Node.js, and Python SDKs can receive flag configuration directly from the Datadog-managed CDN. This _agentless_ configuration source simplifies onboarding because it does not require a Datadog Agent for flag configuration. It also supports serverless applications that cannot connect to a Datadog Agent.
 
 After configuration is loaded, flag evaluation happens locally in the application. The SDK does not make a network request for each evaluation.
 
@@ -26,6 +26,7 @@ The following table shows the Feature Flags functionality available in each SDK 
 
 | SDK | Minimum version | Agentless configuration and local evaluation | Experiment exposure events | Event Platform Proxy (EVP) flag evaluation events | Event delivery |
 |---|---|---|---|---|---|
+| Go `dd-trace-go` | 2.11.0 | Supported | Supported | Supported | Prefer a compatible local telemetry relay; use direct fallback when unavailable |
 | Java `dd-openfeature` and `dd-java-agent` | 1.66.0 | Supported | Supported | Supported | Prefer a compatible local telemetry relay; use direct fallback when unavailable |
 | Node.js `dd-trace` | 6.12.0 | Supported | Supported | Not supported | Prefer a compatible local telemetry relay; use direct fallback when unavailable |
 | Python `ddtrace` | 4.14.0 | Supported | Supported | Supported | Compatible local telemetry relay |
@@ -49,7 +50,7 @@ Use agentless delivery when the serverless runtime can make outbound HTTPS reque
    DD_SITE={{< region-param key="dd_site" code="true" >}}
    DD_ENV=<YOUR_ENVIRONMENT>{{< /code-block >}}
 
-4. Initialize or access the Datadog OpenFeature provider as described in the [Java][6], [Node.js][3], or [Python][9] setup. This starts CDN polling. No Feature Flags enablement or source setting is required.
+4. Initialize or access the Datadog OpenFeature provider as described in the [Go][12], [Java][6], [Node.js][3], or [Python][9] setup. This starts CDN polling. No Feature Flags enablement or source setting is required.
 5. Store `DD_API_KEY` in the serverless platform's secret manager and expose it only to the application process.
 
 The SDK polls the Datadog-managed CDN every 30 seconds by default and uses ETags for unchanged configuration. It preserves the last accepted configuration during temporary errors. If no configuration has been accepted, OpenFeature evaluations return the caller-provided default value.
@@ -69,8 +70,8 @@ Direct fallback means the SDK sends authenticated EVP events to Datadog when it 
 Note the following behavior:
 
 - Experiment exposure events are emitted only for flags associated with an experiment.
-- Java and Python aggregate EVP flag evaluation events and send them by default.
-- To disable only the EVP flag evaluation event path, set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false`.
+- Go, Java, and Python aggregate EVP flag evaluation events and send them by default.
+- For Go, Java, and Python, set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only the EVP flag evaluation event path.
 
 The `feature_flag.evaluations` metric is a separate OpenTelemetry (OTLP) signal. The standard `serverless-init` connection on port 8126 does not configure the OTLP endpoint for this metric. For no-Agent serverless environments, configure the serverless telemetry path for your platform before you enable this metric. See [Set Up Server-Side Flag Evaluation Metrics][10].
 
@@ -89,7 +90,7 @@ The `feature_flag.evaluations` metric is a separate OpenTelemetry (OTLP) signal.
 1. Initialize the OpenFeature provider and confirm that it reaches a ready state.
 2. Evaluate a flag associated with an experiment, then confirm that the experiment receives an exposure event.
 3. When you use a local relay, check the application and `serverless-init` logs for connection errors to port 8126.
-4. For Java and Python, confirm that `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` is not set to `false` when you need EVP flag evaluation events.
+4. For Go, Java, and Python, confirm that `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` is not set to `false` when you need EVP flag evaluation events.
 5. If you use the `feature_flag.evaluations` metric, validate its separate OTLP path with [Set Up Server-Side Flag Evaluation Metrics][10].
 
 ## Agent-backed Remote Configuration
@@ -181,3 +182,4 @@ Before enabling Feature Flags in production:
 [9]: /feature_flags/server/python/
 [10]: /feature_flags/guide/server_flag_evaluation_metrics/
 [11]: /serverless/
+[12]: /feature_flags/server/go/
