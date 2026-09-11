@@ -28,7 +28,7 @@ Continuous tracing with GPU Monitoring enables lightweight GPU activity tracing 
 
 To begin continuously tracing your workloads, you must first meet the following criteria:
 - You are running the Datadog Cluster Agent version 7.80 or later with [GPU Monitoring enabled][1].
-- Minimum required CUDA and CUPTI version: 13
+- Minimum required CUDA and CUPTI version: 13.
 
 ### 1. Configure GPU tracing
 
